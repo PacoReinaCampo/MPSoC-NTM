@@ -98,15 +98,15 @@ module ntm_tensor_summation #(
 
   // SCALAR ADDER
   // CONTROL
-  reg start_scalar_adder;
-  wire ready_scalar_adder;
+  reg start_scalar_float_adder;
+  wire ready_scalar_float_adder;
 
-  reg operation_scalar_adder;
+  reg operation_scalar_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -142,11 +142,11 @@ module ntm_tensor_summation #(
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
 
-            data_a_in_scalar_adder <= DATA_IN;
-            data_b_in_scalar_adder <= data_out_scalar_adder;
+            data_a_in_scalar_float_adder <= DATA_IN;
+            data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
 
             // Control Internal
-            start_scalar_adder <= 1'b1;
+            start_scalar_float_adder <= 1'b1;
 
               // FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
@@ -155,7 +155,7 @@ module ntm_tensor_summation #(
           DATA_OUT_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 2
-          if(ready_scalar_adder == 1'b1) begin
+          if(ready_scalar_float_adder == 1'b1) begin
             if(index_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -172,14 +172,14 @@ module ntm_tensor_summation #(
             end
 
             // Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_float_adder;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_adder <= 1'b0;
+            start_scalar_float_adder <= 1'b0;
           end
         end
         default : begin
@@ -191,25 +191,25 @@ module ntm_tensor_summation #(
   end
 
   // SCALAR ADDER
-  ntm_scalar_adder #(
+  ntm_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_scalar_adder_i(
+  scalar_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_scalar_float_adder),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder)
+    .DATA_A_IN(data_a_in_scalar_float_adder),
+    .DATA_B_IN(data_b_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
   );
 
 endmodule

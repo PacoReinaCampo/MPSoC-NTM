@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_divider #(
+module ntm_tensor_differentiation #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -50,21 +50,26 @@ module ntm_scalar_divider #(
     input START,
     output reg READY,
 
+    input DATA_IN_MATRIX_ENABLE,
+    input DATA_IN_VECTOR_ENABLE,
+    input DATA_IN_SCALAR_ENABLE,
+
+    output reg DATA_OUT_MATRIX_ENABLE,
+    output reg DATA_OUT_VECTOR_ENABLE,
+    output reg DATA_OUT_SCALAR_ENABLE,
+
     // DATA
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] PERIOD_IN,
+    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
-
-  parameter [2:0] STARTER_STATE         = 0;
-  parameter [2:0] SET_DATA_B_STATE      = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
-  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE           = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -89,21 +94,101 @@ module ntm_scalar_divider #(
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-  // Finite State Machine
-  reg [2:0] divider_ctrl_fsm_int;
+  // SCALAR ADDER
+  // CONTROL
+  wire start_scalar_float_adder;
+  wire ready_scalar_float_adder;
 
-  // Internal Signals
-  reg [DATA_SIZE:0] u_int;
-  reg [DATA_SIZE:0] v_int;
+  wire operation_scalar_float_adder;
 
-  reg [DATA_SIZE:0] divider_int;
+  // DATA
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
+
+  // SCALAR MULTIPLIER
+  // CONTROL
+  wire start_scalar_float_multiplier;
+  wire ready_scalar_float_multiplier;
+  // DATA
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
+
+  // SCALAR DIVIDER
+  // CONTROL
+  wire start_scalar_float_divider;
+  wire ready_scalar_float_divider;
+
+  // DATA
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
+  // SCALAR ADDER
+  ntm_scalar_float_adder #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_float_adder(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
 
-  // CONTROL
+    // CONTROL
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
+
+    .OPERATION(operation_scalar_float_adder),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_float_adder),
+    .DATA_B_IN(data_b_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
+  );
+
+  // SCALAR MULTIPLIER
+  ntm_scalar_float_multiplier #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_float_multiplier(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_float_multiplier),
+    .READY(ready_scalar_float_multiplier),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_float_multiplier),
+    .DATA_B_IN(data_b_in_scalar_float_multiplier),
+    .DATA_OUT(data_out_scalar_float_multiplier)
+  );
+
+  // SCALAR DIVIDER
+  ntm_scalar_float_divider #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_float_divider(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_float_divider),
+    .READY(ready_scalar_float_divider),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_float_divider),
+    .DATA_B_IN(data_b_in_scalar_float_divider),
+    .DATA_OUT(data_out_scalar_float_divider)
+  );
 
 endmodule

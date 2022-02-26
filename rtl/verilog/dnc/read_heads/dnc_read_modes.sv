@@ -126,11 +126,11 @@ module dnc_read_modes #(
   assign PI_OUT = data_out_vector_softmax;
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax_function #(
+  ntm_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_softmax_function(
+  vector_softmax(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

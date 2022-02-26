@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_adder #(
+module ntm_tensor_float_divider #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -50,20 +50,27 @@ module ntm_matrix_adder #(
     input START,
     output reg READY,
 
-    input OPERATION,
-
     input DATA_A_IN_I_ENABLE,
     input DATA_A_IN_J_ENABLE,
+    input DATA_A_IN_K_ENABLE,
     input DATA_B_IN_I_ENABLE,
     input DATA_B_IN_J_ENABLE,
+    input DATA_B_IN_K_ENABLE,
+
     output reg DATA_OUT_I_ENABLE,
     output reg DATA_OUT_J_ENABLE,
+    output reg DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_I_IN,
-    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] SIZE_A_I_IN,
+    input [DATA_SIZE-1:0] SIZE_A_J_IN,
+    input [DATA_SIZE-1:0] SIZE_A_K_IN,
+    input [DATA_SIZE-1:0] SIZE_B_I_IN,
+    input [DATA_SIZE-1:0] SIZE_B_J_IN,
+    input [DATA_SIZE-1:0] SIZE_B_K_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
+
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
@@ -100,39 +107,36 @@ module ntm_matrix_adder #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] adder_ctrl_fsm_int;
+  reg [1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  reg data_a_in_i_adder_int;
-  reg data_a_in_j_adder_int;
-  reg data_b_in_i_adder_int;
-  reg data_b_in_j_adder_int;
+  reg data_a_in_i_divider_int;
+  reg data_a_in_j_divider_int;
+  reg data_b_in_i_divider_int;
+  reg data_b_in_j_divider_int;
 
-  // ADDER
+  // DIVIDER
   // CONTROL
-  reg start_vector_adder;
-  wire ready_vector_adder;
-
-  reg operation_vector_adder;
-
-  reg data_a_in_enable_vector_adder;
-  reg data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  reg start_vector_divider;
+  wire ready_vector_divider;
+  reg data_a_in_enable_vector_divider;
+  reg data_b_in_enable_vector_divider;
+  wire data_out_enable_vector_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_divider;
+  reg [DATA_SIZE-1:0] data_a_in_vector_divider;
+  reg [DATA_SIZE-1:0] data_b_in_vector_divider;
+  wire [DATA_SIZE-1:0] data_out_vector_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
+  // DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -147,13 +151,13 @@ module ntm_matrix_adder #(
       index_i_loop <= ZERO_DATA;
       index_j_loop <= ZERO_DATA;
 
-      data_a_in_i_adder_int <= 1'b0;
-      data_a_in_j_adder_int <= 1'b0;
-      data_b_in_i_adder_int <= 1'b0;
-      data_b_in_j_adder_int <= 1'b0;
+      data_a_in_i_divider_int <= 1'b0;
+      data_a_in_j_divider_int <= 1'b0;
+      data_b_in_i_divider_int <= 1'b0;
+      data_b_in_j_divider_int <= 1'b0;
     end
 	else begin
-      case(adder_ctrl_fsm_int)
+      case(divider_ctrl_fsm_int)
         STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
@@ -164,45 +168,43 @@ module ntm_matrix_adder #(
             index_j_loop <= ZERO_DATA;
 
             // FSM Control
-            adder_ctrl_fsm_int <= INPUT_I_STATE;
+            divider_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
         INPUT_I_STATE : begin  // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_divider <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b1;
-            data_a_in_i_adder_int <= 1'b1;
+            data_a_in_enable_vector_divider <= 1'b1;
+            data_a_in_i_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b0;
+            data_a_in_enable_vector_divider <= 1'b0;
           end
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_divider <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b1;
-            data_b_in_i_adder_int <= 1'b1;
+            data_b_in_enable_vector_divider <= 1'b1;
+            data_b_in_i_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b0;
+            data_b_in_enable_vector_divider <= 1'b0;
           end
-          if(data_a_in_i_adder_int == 1'b1 && data_b_in_i_adder_int == 1'b1) begin
+          if(data_a_in_i_divider_int == 1'b1 && data_b_in_i_divider_int == 1'b1) begin
             if(index_i_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_adder <= 1'b1;
-
-              operation_vector_adder <= OPERATION;
+              start_vector_divider <= 1'b1;
             end
             // Data Inputs
 
             // FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            divider_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_I_ENABLE <= 1'b0;
@@ -211,53 +213,51 @@ module ntm_matrix_adder #(
         INPUT_J_STATE : begin  // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_divider <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b1;
-            data_a_in_j_adder_int <= 1'b1;
+            data_a_in_enable_vector_divider <= 1'b1;
+            data_a_in_j_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b0;
+            data_a_in_enable_vector_divider <= 1'b0;
           end
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_divider <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b1;
-            data_b_in_j_adder_int <= 1'b1;
+            data_b_in_enable_vector_divider <= 1'b1;
+            data_b_in_j_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b0;
+            data_b_in_enable_vector_divider <= 1'b0;
           end
-          if((data_a_in_j_adder_int == 1'b1 && data_b_in_j_adder_int == 1'b1)) begin
+          if((data_a_in_j_divider_int == 1'b1 && data_b_in_j_divider_int == 1'b1)) begin
             if(index_j_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_adder <= 1'b1;
-
-              operation_vector_adder <= OPERATION;
+              start_vector_divider <= 1'b1;
             end
             // Data Inputs
-            size_in_vector_adder <= SIZE_J_IN;
+            size_in_vector_divider <= SIZE_J_IN;
 
             // FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            divider_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if((ready_vector_adder == 1'b1)) begin
+          if((ready_vector_divider == 1'b1)) begin
             if((index_i_loop == (SIZE_I_IN - ONE_CONTROL)) && (index_j_loop == (SIZE_J_IN - ONE_CONTROL))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              adder_ctrl_fsm_int <= STARTER_STATE;
+              divider_ctrl_fsm_int <= STARTER_STATE;
             end
             else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && (index_j_loop == (SIZE_J_IN - ONE_CONTROL))) begin
               // Control Internal
@@ -269,7 +269,7 @@ module ntm_matrix_adder #(
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              adder_ctrl_fsm_int <= INPUT_I_STATE;
+              divider_ctrl_fsm_int <= INPUT_I_STATE;
             end
             else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && (index_j_loop < (SIZE_J_IN - ONE_CONTROL))) begin
               // Control Internal
@@ -279,53 +279,51 @@ module ntm_matrix_adder #(
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              adder_ctrl_fsm_int <= INPUT_J_STATE;
+              divider_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_adder;
+            DATA_OUT <= data_out_vector_divider;
           end
           else begin
             // Control Internal
-            start_vector_adder <= 1'b0;
+            start_vector_divider <= 1'b0;
 
-            data_a_in_i_adder_int <= 1'b0;
-            data_a_in_j_adder_int <= 1'b0;
-            data_b_in_i_adder_int <= 1'b0;
-            data_b_in_j_adder_int <= 1'b0;
+            data_a_in_i_divider_int <= 1'b0;
+            data_a_in_j_divider_int <= 1'b0;
+            data_b_in_i_divider_int <= 1'b0;
+            data_b_in_j_divider_int <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          adder_ctrl_fsm_int <= STARTER_STATE;
+          divider_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
-  // ADDER
-  ntm_vector_adder #(
+  // DIVIDER
+  ntm_vector_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
-
-    .OPERATION(operation_vector_adder),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .START(start_vector_divider),
+    .READY(ready_vector_divider),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_divider),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_divider),
+    .DATA_OUT_ENABLE(data_out_enable_vector_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .SIZE_IN(size_in_vector_divider),
+    .DATA_A_IN(data_a_in_vector_divider),
+    .DATA_B_IN(data_b_in_vector_divider),
+    .DATA_OUT(data_out_vector_divider)
   );
 
 endmodule

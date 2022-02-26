@@ -100,18 +100,18 @@ module ntm_vector_summation #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // MULTIPLICATION
+  // SCALAR ADDER
   // CONTROL
-  reg start_scalar_summation;
-  wire ready_scalar_summation;
-  reg data_in_enable_scalar_summation;
-  wire data_out_enable_scalar_summation;
+  reg start_scalar_float_adder;
+  wire ready_scalar_float_adder;
+  reg data_in_enable_scalar_float_adder;
+  wire data_out_enable_scalar_float_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_scalar_summation;
-  reg [DATA_SIZE-1:0] length_in_scalar_summation;
-  reg [DATA_SIZE-1:0] data_in_scalar_summation;
-  wire [DATA_SIZE-1:0] data_out_scalar_summation;
+  wire [DATA_SIZE-1:0] size_in_scalar_float_adder;
+  reg [DATA_SIZE-1:0] length_in_scalar_float_adder;
+  reg [DATA_SIZE-1:0] data_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -148,21 +148,21 @@ module ntm_vector_summation #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_in_scalar_summation <= DATA_IN;
+            data_in_scalar_float_adder <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_summation <= 1'b1;
+              start_scalar_float_adder <= 1'b1;
             end
 
-            data_in_enable_scalar_summation <= 1'b1;
+            data_in_enable_scalar_float_adder <= 1'b1;
 
             // FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_summation <= 1'b0;
+            data_in_enable_scalar_float_adder <= 1'b0;
           end
 
           // Control Outputs
@@ -172,29 +172,29 @@ module ntm_vector_summation #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            length_in_scalar_summation <= LENGTH_IN;
-            data_in_scalar_summation <= DATA_IN;
+            length_in_scalar_float_adder <= LENGTH_IN;
+            data_in_scalar_float_adder <= DATA_IN;
 
             if(index_scalar_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_summation <= 1'b1;
+              start_scalar_float_adder <= 1'b1;
             end
 
-            data_in_enable_scalar_summation <= 1'b1;
+            data_in_enable_scalar_float_adder <= 1'b1;
 
             // FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_summation <= 1'b0;
+            data_in_enable_scalar_float_adder <= 1'b0;
           end
 
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin // STEP 3
-          if(ready_scalar_summation == 1'b1) begin
+          if(ready_scalar_float_adder == 1'b1) begin
             if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -226,11 +226,11 @@ module ntm_vector_summation #(
               summation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_summation;
+            DATA_OUT <= data_out_scalar_float_adder;
           end
           else begin
             // Control Internal
-            start_scalar_summation <= 1'b0;
+            start_scalar_float_adder <= 1'b0;
           end
         end
         default : begin
@@ -241,26 +241,26 @@ module ntm_vector_summation #(
     end
   end
 
-  // SUMMATION
-  ntm_scalar_summation #(
+  // SCALAR ADDER
+  ntm_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_summation(
+  scalar_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_summation),
-    .READY(ready_scalar_summation),
-    .DATA_IN_ENABLE(data_in_enable_scalar_summation),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_summation),
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
+    .DATA_IN_ENABLE(data_in_enable_scalar_float_adder),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_float_adder),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_summation),
-    .DATA_IN(data_in_scalar_summation),
-    .DATA_OUT(data_out_scalar_summation)
+    .LENGTH_IN(length_in_scalar_float_adder),
+    .DATA_IN(data_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
   );
 
 endmodule

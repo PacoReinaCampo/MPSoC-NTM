@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_divider #(
+module ntm_vector_divider #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -50,7 +50,12 @@ module ntm_scalar_divider #(
     input START,
     output reg READY,
 
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
+
     // DATA
+    input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -60,11 +65,9 @@ module ntm_scalar_divider #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE         = 0;
-  parameter [2:0] SET_DATA_B_STATE      = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
-  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE           = 4;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -90,13 +93,23 @@ module ntm_scalar_divider #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] divider_ctrl_fsm_int;
+  reg [1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE:0] u_int;
-  reg [DATA_SIZE:0] v_int;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
-  reg [DATA_SIZE:0] divider_int;
+  reg data_a_in_divider_int;
+  reg data_b_in_divider_int;
+
+  // DIVIDER
+  // CONTROL
+  reg start_scalar_divider;
+  wire ready_scalar_divider;
+
+  // DATA
+  reg [DATA_SIZE-1:0] data_a_in_scalar_divider;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -105,5 +118,121 @@ module ntm_scalar_divider #(
   // DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
 
   // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO_DATA;
+
+      // Control Outputs
+      READY <= 1'b0;
+
+      // Assignations
+      index_loop <= ZERO_DATA;
+
+      data_a_in_divider_int <= 1'b0;
+      data_b_in_divider_int <= 1'b0;
+    end
+	else begin
+      case(divider_ctrl_fsm_int)
+        STARTER_STATE : begin
+          // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // Assignations
+            index_loop <= ZERO_DATA;
+
+            // FSM Control
+            divider_ctrl_fsm_int <= INPUT_STATE;
+          end
+        end
+        INPUT_STATE : begin
+          // STEP 1
+          if(DATA_A_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_a_in_scalar_divider <= DATA_A_IN;
+
+            // Control Internal
+            data_a_in_divider_int <= 1'b1;
+          end
+          if(DATA_B_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_b_in_scalar_divider <= DATA_B_IN;
+
+            // Control Internal
+            data_b_in_divider_int <= 1'b1;
+          end
+          if(data_a_in_divider_int == 1'b1 && data_b_in_divider_int == 1'b1) begin
+            if(index_loop == ZERO_DATA) begin
+              // Control Internal
+              start_scalar_divider <= 1'b1;
+            end
+            // Data Inputs
+
+            // FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
+          end
+
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
+        end
+        ENDER_STATE : begin
+          // STEP 2
+          if(ready_scalar_divider == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+              // Control Outputs
+              READY <= 1'b1;
+
+              // FSM Control
+              divider_ctrl_fsm_int <= STARTER_STATE;
+            end
+            else begin
+              // Control Internal
+              index_loop <= (index_loop + ONE_CONTROL);
+
+              // FSM Control
+              divider_ctrl_fsm_int <= INPUT_STATE;
+            end
+            // Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_divider <= 1'b0;
+            data_a_in_divider_int <= 1'b0;
+            data_b_in_divider_int <= 1'b0;
+          end
+        end
+        default : begin
+          // FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
+
+  // DIVIDER
+  ntm_scalar_float_divider #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_divider(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_divider),
+    .READY(ready_scalar_divider),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_divider),
+    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_OUT(data_out_scalar_divider)
+  );
 
 endmodule

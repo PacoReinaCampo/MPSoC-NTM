@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_adder #(
+module ntm_tensor_float_adder #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )

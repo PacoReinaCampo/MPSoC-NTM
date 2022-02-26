@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_multiplier #(
+module ntm_vector_float_multiplier #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -50,7 +50,12 @@ module ntm_scalar_multiplier #(
     input START,
     output reg READY,
 
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
+
     // DATA
+    input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -60,11 +65,9 @@ module ntm_scalar_multiplier #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE         = 0;
-  parameter [2:0] SET_DATA_B_STATE      = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
-  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE           = 4;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -90,13 +93,23 @@ module ntm_scalar_multiplier #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] multiplier_ctrl_fsm_int;
+  reg [1:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE:0] u_int;
-  reg [DATA_SIZE:0] v_int;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
-  reg [DATA_SIZE:0] multiplier_int;
+  reg data_a_in_multiplier_int;
+  reg data_b_in_multiplier_int;
+
+  // MULTIPLIER
+  // CONTROL
+  reg start_scalar_multiplier;
+  wire ready_scalar_multiplier;
+
+  // DATA
+  reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -105,5 +118,120 @@ module ntm_scalar_multiplier #(
   // DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO_DATA;
+
+      // Control Outputs
+      READY <= 1'b0;
+
+      // Assignations
+      index_loop <= ZERO_DATA;
+
+      data_a_in_multiplier_int <= 1'b0;
+      data_b_in_multiplier_int <= 1'b0;
+    end
+    else begin
+      case(multiplier_ctrl_fsm_int)
+        STARTER_STATE : begin
+          // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // Assignations
+            index_loop <= ZERO_DATA;
+
+            // FSM Control
+            multiplier_ctrl_fsm_int <= INPUT_STATE;
+          end
+        end
+        INPUT_STATE : begin
+          // STEP 1
+          if(DATA_A_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_a_in_scalar_multiplier <= DATA_A_IN;
+
+            // Control Internal
+            data_a_in_multiplier_int <= 1'b1;
+          end
+          if(DATA_B_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_b_in_scalar_multiplier <= DATA_B_IN;
+
+            // Control Internal
+            data_b_in_multiplier_int <= 1'b1;
+          end
+          if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
+            if(index_loop == ZERO_DATA) begin
+              // Control Internal
+              start_scalar_multiplier <= 1'b1;
+            end
+            // Data Inputs
+
+            // FSM Control
+            multiplier_ctrl_fsm_int <= ENDER_STATE;
+          end
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
+        end
+        ENDER_STATE : begin
+          // STEP 2
+          if(ready_scalar_multiplier == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+              // Control Outputs
+              READY <= 1'b1;
+
+              // FSM Control
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
+            end
+            else begin
+              // Control Internal
+              index_loop <= (index_loop + ONE_CONTROL);
+
+              // FSM Control
+              multiplier_ctrl_fsm_int <= INPUT_STATE;
+            end
+            // Data Outputs
+            DATA_OUT <= data_out_scalar_multiplier;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_multiplier <= 1'b0;
+            data_a_in_multiplier_int <= 1'b0;
+            data_b_in_multiplier_int <= 1'b0;
+          end
+        end
+        default : begin
+          // FSM Control
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
+
+  // MULTIPLIER
+  ntm_scalar_float_multiplier #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_multiplier(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_multiplier),
+    .READY(ready_scalar_multiplier),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_multiplier),
+    .DATA_B_IN(data_b_in_scalar_multiplier),
+    .DATA_OUT(data_out_scalar_multiplier)
+  );
 
 endmodule

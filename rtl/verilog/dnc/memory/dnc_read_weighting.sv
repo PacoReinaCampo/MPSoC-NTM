@@ -133,35 +133,35 @@ module dnc_read_weighting #(
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_adder;
-  wire ready_vector_adder;
+  wire start_vector_float_adder;
+  wire ready_vector_float_adder;
 
-  wire operation_vector_adder;
+  wire operation_vector_float_adder;
 
-  wire data_a_in_enable_vector_adder;
-  wire data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  wire data_a_in_enable_vector_float_adder;
+  wire data_b_in_enable_vector_float_adder;
+  wire data_out_enable_vector_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_float_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
+  wire start_vector_float_multiplier;
+  wire ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire data_a_in_enable_vector_float_multiplier;
+  wire data_b_in_enable_vector_float_multiplier;
+  wire data_out_enable_vector_float_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -193,49 +193,49 @@ module dnc_read_weighting #(
         VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 1
 
           // Data Inputs
-          size_in_vector_multiplier   <= SIZE_N_IN;
-          data_a_in_vector_multiplier <= PI_IN;
-          data_b_in_vector_multiplier <= B_IN;
+          size_in_vector_float_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_float_multiplier <= PI_IN;
+          data_b_in_vector_float_multiplier <= B_IN;
         end
 
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Inputs
-          size_in_vector_adder   <= SIZE_N_IN;
-          data_a_in_vector_adder <= ZERO_DATA;
-          data_b_in_vector_adder <= data_out_vector_multiplier;
+          size_in_vector_float_adder   <= SIZE_N_IN;
+          data_a_in_vector_float_adder <= ZERO_DATA;
+          data_b_in_vector_float_adder <= data_out_vector_float_multiplier;
         end
 
         VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 3
 
           // Data Inputs
-          size_in_vector_multiplier   <= SIZE_N_IN;
-          data_a_in_vector_multiplier <= PI_IN;
-          data_b_in_vector_multiplier <= C_IN;
+          size_in_vector_float_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_float_multiplier <= PI_IN;
+          data_b_in_vector_float_multiplier <= C_IN;
         end
 
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Inputs
-          size_in_vector_adder   <= SIZE_N_IN;
-          data_a_in_vector_adder <= data_out_vector_adder;
-          data_b_in_vector_adder <= data_out_vector_multiplier;
+          size_in_vector_float_adder   <= SIZE_N_IN;
+          data_a_in_vector_float_adder <= data_out_vector_float_adder;
+          data_b_in_vector_float_adder <= data_out_vector_float_multiplier;
         end
 
         VECTOR_THIRD_MULTIPLIER_STATE : begin  // STEP 5
 
           // Data Inputs
-          size_in_vector_multiplier   <= SIZE_N_IN;
-          data_a_in_vector_multiplier <= PI_IN;
-          data_b_in_vector_multiplier <= F_IN;
+          size_in_vector_float_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_float_multiplier <= PI_IN;
+          data_b_in_vector_float_multiplier <= F_IN;
         end
 
         VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
 
           // Data Inputs
-          size_in_vector_adder   <= SIZE_N_IN;
-          data_a_in_vector_adder <= data_out_vector_adder;
-          data_b_in_vector_adder <= data_out_vector_multiplier;
+          size_in_vector_float_adder   <= SIZE_N_IN;
+          data_a_in_vector_float_adder <= data_out_vector_float_adder;
+          data_b_in_vector_float_adder <= data_out_vector_float_multiplier;
         end
         default : begin
           // FSM Control
@@ -246,55 +246,55 @@ module dnc_read_weighting #(
   end
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  ntm_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
+    .START(start_vector_float_adder),
+    .READY(ready_vector_float_adder),
 
-    .OPERATION(operation_vector_adder),
+    .OPERATION(operation_vector_float_adder),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .SIZE_IN(size_in_vector_float_adder),
+    .DATA_A_IN(data_a_in_vector_float_adder),
+    .DATA_B_IN(data_b_in_vector_float_adder),
+    .DATA_OUT(data_out_vector_float_adder)
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplier(
+  vector_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_float_multiplier),
+    .READY(ready_vector_float_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .SIZE_IN(size_in_vector_float_multiplier),
+    .DATA_A_IN(data_a_in_vector_float_multiplier),
+    .DATA_B_IN(data_b_in_vector_float_multiplier),
+    .DATA_OUT(data_out_vector_float_multiplier)
   );
 
 endmodule

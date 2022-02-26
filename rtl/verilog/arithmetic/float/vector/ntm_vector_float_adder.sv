@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_adder #(
+module ntm_vector_float_adder #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -52,7 +52,12 @@ module ntm_scalar_adder #(
 
     input OPERATION,
 
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
+
     // DATA
+    input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -62,8 +67,9 @@ module ntm_scalar_adder #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -84,20 +90,155 @@ module ntm_scalar_adder #(
 
   parameter EULER = 0;
 
+  
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg adder_ctrl_fsm_int;
+  reg [1:0] adder_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE:0] adder_int;
+  reg [CONTROL_SIZE-1:0] index_loop;
+
+  reg data_a_in_adder_int;
+  reg data_b_in_adder_int;
+
+  // ADDER
+  // CONTROL
+  reg start_scalar_adder;
+  wire ready_scalar_adder;
+  reg operation_scalar_adder;
+
+  // DATA
+  reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO_DATA;
+
+      // Control Outputs
+      READY <= 1'b0;
+
+      // Assignations
+      index_loop <= ZERO_DATA;
+
+      data_a_in_adder_int <= 1'b0;
+      data_b_in_adder_int <= 1'b0;
+    end
+    else begin
+      case(adder_ctrl_fsm_int)
+        STARTER_STATE : begin
+          // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // Assignations
+            index_loop <= ZERO_DATA;
+
+            // FSM Control
+            adder_ctrl_fsm_int <= INPUT_STATE;
+          end
+        end
+        INPUT_STATE : begin
+          // STEP 1
+          if(DATA_A_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_a_in_scalar_adder <= DATA_A_IN;
+
+            // Control Internal
+            data_a_in_adder_int <= 1'b1;
+          end
+          if(DATA_B_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+
+            data_b_in_scalar_adder <= DATA_B_IN;
+            // Control Internal
+            data_b_in_adder_int <= 1'b1;
+          end
+          if(data_a_in_adder_int == 1'b1 && data_b_in_adder_int == 1'b1) begin
+            if(index_loop == ZERO_DATA) begin
+              // Control Internal
+              start_scalar_adder <= 1'b1;
+            end
+            operation_scalar_adder <= OPERATION;
+            // Data Inputs
+
+            // FSM Control
+            adder_ctrl_fsm_int <= ENDER_STATE;
+          end
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
+        end
+        ENDER_STATE : begin
+          // STEP 2
+          if(ready_scalar_adder == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+              // Control Outputs
+              READY <= 1'b1;
+
+              // FSM Control
+              adder_ctrl_fsm_int <= STARTER_STATE;
+            end
+            else begin
+              // Control Internal
+              index_loop <= (index_loop + ONE_CONTROL);
+
+              // FSM Control
+              adder_ctrl_fsm_int <= INPUT_STATE;
+            end
+            // Data Outputs
+            DATA_OUT <= data_out_scalar_adder;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_adder <= 1'b0;
+            data_a_in_adder_int <= 1'b0;
+            data_b_in_adder_int <= 1'b0;
+          end
+        end
+        default : begin
+          // FSM Control
+          adder_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
+
+  // ADDER
+  ntm_scalar_float_adder #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_adder(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_adder),
+    .READY(ready_scalar_adder),
+
+    .OPERATION(operation_scalar_adder),
+
+    // DATA
+    .DATA_A_IN(data_a_in_scalar_adder),
+    .DATA_B_IN(data_b_in_scalar_adder),
+    .DATA_OUT(data_out_scalar_adder)
+  );
 
 endmodule

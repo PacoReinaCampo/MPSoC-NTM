@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_cosine_similarity #(
+module ntm_tensor_softmax #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -50,18 +50,18 @@ module ntm_vector_cosine_similarity #(
     input START,
     output reg READY,
 
-    input DATA_A_IN_VECTOR_ENABLE,
-    input DATA_A_IN_SCALAR_ENABLE,
-    input DATA_B_IN_VECTOR_ENABLE,
-    input DATA_B_IN_SCALAR_ENABLE,
+    input DATA_IN_MATRIX_ENABLE,
+    input DATA_IN_VECTOR_ENABLE,
+    input DATA_IN_SCALAR_ENABLE,
+    output reg DATA_OUT_MATRIX_ENABLE,
     output reg DATA_OUT_VECTOR_ENABLE,
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
@@ -69,10 +69,11 @@ module ntm_vector_cosine_similarity #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] INPUT_VECTOR_STATE = 1;
-  parameter [1:0] INPUT_SCALAR_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] INPUT_MATRIX_STATE = 1;
+  parameter [2:0] INPUT_VECTOR_STATE = 2;
+  parameter [2:0] INPUT_SCALAR_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -98,35 +99,33 @@ module ntm_vector_cosine_similarity #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] cosine_similarity_ctrl_fsm_int;
+  reg [2:0] softmax_ctrl_fsm_int;
 
   // Internal Signals
+  reg [CONTROL_SIZE-1:0] index_matrix_loop;
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  reg data_a_in_vector_cosine_similarity_int;
-  reg data_a_in_scalar_float_multiplier_int;
-  reg data_b_in_vector_cosine_similarity_int;
-  reg data_b_in_scalar_float_multiplier_int;
-
-  // SCALAR MULTIPLIER
+  // VECTOR SOFTMAX
   // CONTROL
-  reg start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
-  reg data_in_enable_scalar_float_multiplier;
-  wire data_out_enable_scalar_float_multiplier;
+  reg start_vector_softmax;
+  wire ready_vector_softmax;
+
+  reg data_in_vector_enable_vector_softmax;
+  reg data_in_scalar_enable_vector_softmax;
+  wire data_out_vector_enable_vector_softmax;
+  wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  reg [DATA_SIZE-1:0] length_in_scalar_float_multiplier;
-  reg [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_softmax;
+  reg [DATA_SIZE-1:0] length_in_vector_softmax;
+  reg [DATA_SIZE-1:0] data_in_vector_softmax;
+  wire [DATA_SIZE-1:0] data_out_vector_softmax;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
@@ -136,62 +135,74 @@ module ntm_vector_cosine_similarity #(
       READY <= 1'b0;
 
       // Assignations
+      index_matrix_loop <= ZERO_DATA;
       index_vector_loop <= ZERO_DATA;
       index_scalar_loop <= ZERO_DATA;
-
-      data_a_in_vector_cosine_similarity_int <= 1'b0;
-      data_a_in_scalar_float_multiplier_int <= 1'b0;
-      data_b_in_vector_cosine_similarity_int <= 1'b0;
-      data_b_in_scalar_float_multiplier_int <= 1'b0;
     end
     else begin
-      case(cosine_similarity_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
-
+      case(softmax_ctrl_fsm_int)
+        STARTER_STATE : begin
+          // STEP 0
           // Control Outputs
           READY <= 1'b0;
-
           if(START == 1'b1) begin
             // Assignations
+            index_matrix_loop <= ZERO_DATA;
             index_vector_loop <= ZERO_DATA;
             index_scalar_loop <= ZERO_DATA;
 
             // FSM Control
-            cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            softmax_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end
         end
-        INPUT_VECTOR_STATE : begin  // STEP 1
-          if(DATA_A_IN_VECTOR_ENABLE == 1'b1) begin
+        INPUT_MATRIX_STATE : begin  // STEP 1
+          if(DATA_IN_MATRIX_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_float_multiplier <= DATA_A_IN;
+            data_in_vector_softmax <= DATA_IN;
 
-            // Control Internal
-            data_a_in_vector_cosine_similarity_int <= 1'b1;
-          end
-          if(DATA_B_IN_VECTOR_ENABLE == 1'b1) begin
-            // Data Inputs
-            data_b_in_scalar_float_multiplier <= DATA_B_IN;
-
-            // Control Internal
-            data_b_in_vector_cosine_similarity_int <= 1'b1;
-          end
-          if(data_a_in_vector_cosine_similarity_int == 1'b1 && data_b_in_vector_cosine_similarity_int == 1'b1) begin
-            // Control Internal
-            if(index_vector_loop == ZERO_DATA) begin
-              start_scalar_float_multiplier <= 1'b1;
+            if(index_matrix_loop == ZERO_DATA) begin
+              // Control Internal
+              start_vector_softmax <= 1'b1;
             end
 
-            data_in_enable_scalar_float_multiplier <= 1'b1;
-
-            // Data Inputs
-            length_in_scalar_float_multiplier <= LENGTH_IN;
+            data_in_vector_enable_vector_softmax <= 1'b1;
+            data_in_scalar_enable_vector_softmax <= 1'b1;
 
             // FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
+            softmax_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_float_multiplier <= 1'b0;
+            data_in_vector_enable_vector_softmax <= 1'b0;
+            data_in_scalar_enable_vector_softmax <= 1'b0;
+          end
+
+          // Control Outputs
+          DATA_OUT_MATRIX_ENABLE <= 1'b0;
+          DATA_OUT_VECTOR_ENABLE <= 1'b0;
+          DATA_OUT_SCALAR_ENABLE <= 1'b0;
+        end
+        INPUT_VECTOR_STATE : begin  // STEP 1
+          if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
+            // Data Inputs
+            size_in_vector_softmax <= SIZE_J_IN;
+            data_in_vector_softmax <= DATA_IN;
+
+            if((index_vector_loop == ZERO_DATA)) begin
+              // Control Internal
+              start_vector_softmax <= 1'b1;
+            end
+
+            data_in_vector_enable_vector_softmax <= 1'b1;
+            data_in_scalar_enable_vector_softmax <= 1'b1;
+
+            // FSM Control
+            softmax_ctrl_fsm_int <= ENDER_STATE;
+          end
+          else begin
+            // Control Internal
+            data_in_vector_enable_vector_softmax <= 1'b0;
+            data_in_scalar_enable_vector_softmax <= 1'b0;
           end
 
           // Control Outputs
@@ -199,52 +210,52 @@ module ntm_vector_cosine_similarity #(
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         INPUT_SCALAR_STATE : begin  // STEP 2
-          if(DATA_A_IN_SCALAR_ENABLE == 1'b1) begin
+          if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_float_multiplier <= DATA_A_IN;
+            length_in_vector_softmax <= LENGTH_IN;
+            data_in_vector_softmax <= DATA_IN;
 
-            // Control Internal
-            data_a_in_scalar_float_multiplier_int <= 1'b1;
-          end
-          if(DATA_B_IN_SCALAR_ENABLE == 1'b1) begin
-            // Data Inputs
-            data_b_in_scalar_float_multiplier <= DATA_B_IN;
-
-            // Control Internal
-            data_b_in_scalar_float_multiplier_int <= 1'b1;
-          end
-          if(data_a_in_scalar_float_multiplier_int == 1'b1 && data_b_in_scalar_float_multiplier_int == 1'b1) begin
-            // Control Internal
-            if(index_scalar_loop == ZERO_DATA) begin
-              start_scalar_float_multiplier <= 1'b1;
+            if((index_scalar_loop == ZERO_DATA)) begin
+              // Control Internal
+              start_vector_softmax <= 1'b1;
             end
 
-            data_in_enable_scalar_float_multiplier <= 1'b1;
-
-            // Data Inputs
-            length_in_scalar_float_multiplier <= LENGTH_IN;
+            data_in_scalar_enable_vector_softmax <= 1'b1;
 
             // FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
+            softmax_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_float_multiplier <= 1'b0;
+            data_in_scalar_enable_vector_softmax <= 1'b0;
           end
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if(ready_scalar_float_multiplier == 1'b1) begin
-            if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
+          if(ready_vector_softmax == 1'b1) begin
+            if(index_matrix_loop == (SIZE_I_IN - ONE_CONTROL) && index_vector_loop == (SIZE_J_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
+              DATA_OUT_VECTOR_ENABLE <= 1'b1;
+
+              // FSM Control
+              softmax_ctrl_fsm_int <= STARTER_STATE;
+            end
+            else if(index_matrix_loop < (SIZE_I_IN - ONE_CONTROL) && index_vector_loop == (SIZE_J_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
+              // Control Internal
+              index_matrix_loop <= (index_matrix_loop + ONE_CONTROL);
+              index_vector_loop <= ZERO_DATA;
+
+              // Control Outputs
+              DATA_OUT_MATRIX_ENABLE <= 1'b1;
+              DATA_OUT_VECTOR_ENABLE <= 1'b1;
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
 
               // FSM Control
-              cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
+              softmax_ctrl_fsm_int <= INPUT_MATRIX_STATE;
             end
-            else if(index_vector_loop < (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE_CONTROL) && index_vector_loop < (SIZE_J_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Internal
               index_vector_loop <= (index_vector_loop + ONE_CONTROL);
               index_scalar_loop <= ZERO_DATA;
@@ -254,9 +265,9 @@ module ntm_vector_cosine_similarity #(
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
 
               // FSM Control
-              cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+              softmax_ctrl_fsm_int <= INPUT_VECTOR_STATE;
             end
-            else if(index_vector_loop < (SIZE_IN - ONE_CONTROL) && index_scalar_loop < (LENGTH_IN - ONE_CONTROL)) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE_CONTROL) && index_vector_loop < (SIZE_J_IN - ONE_CONTROL) && index_scalar_loop < (LENGTH_IN - ONE_CONTROL)) begin
               // Control Internal
               index_scalar_loop <= (index_scalar_loop + ONE_CONTROL);
 
@@ -264,50 +275,50 @@ module ntm_vector_cosine_similarity #(
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
 
               // FSM Control
-              cosine_similarity_ctrl_fsm_int <= INPUT_SCALAR_STATE;
+              softmax_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_float_multiplier;
+            DATA_OUT <= data_out_vector_softmax;
           end
           else begin
             // Control Internal
-            start_scalar_float_multiplier <= 1'b0;
-
-            data_a_in_vector_cosine_similarity_int <= 1'b0;
-            data_a_in_scalar_float_multiplier_int <= 1'b0;
-            data_b_in_vector_cosine_similarity_int <= 1'b0;
-            data_b_in_scalar_float_multiplier_int <= 1'b0;
+            start_vector_softmax <= 1'b0;
+            data_in_vector_enable_vector_softmax <= 1'b0;
+            data_in_scalar_enable_vector_softmax <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
+          softmax_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
-  // SCALAR MULTIPLIER
-  ntm_scalar_float_multiplier #(
+  // VECTOR SOFTMAX
+  ntm_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_float_multiplier(
+  vector_softmax(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_float_multiplier),
-    .READY(ready_scalar_float_multiplier),
-    .DATA_IN_ENABLE(data_in_enable_scalar_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_float_multiplier),
+    .START(start_vector_softmax),
+    .READY(ready_vector_softmax),
+
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_softmax),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_softmax),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_softmax),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_float_multiplier),
-    .DATA_A_IN(data_a_in_scalar_float_multiplier),
-    .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .SIZE_IN(size_in_vector_softmax),
+    .LENGTH_IN(length_in_vector_softmax),
+    .DATA_IN(data_in_vector_softmax),
+    .DATA_OUT(data_out_vector_softmax)
   );
 
 endmodule

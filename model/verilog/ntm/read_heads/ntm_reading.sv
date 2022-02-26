@@ -119,17 +119,17 @@ module ntm_reading #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire start_vector_float_multiplier;
+  wire ready_vector_float_multiplier;
+  wire data_a_in_enable_vector_float_multiplier;
+  wire data_b_in_enable_vector_float_multiplier;
+  wire data_out_enable_vector_float_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -176,14 +176,14 @@ module ntm_reading #(
 
   // DATA
   // VECTOR MULTIPLIER
-  assign size_in_vector_multiplier   = SIZE_W_IN;
-  assign data_a_in_vector_multiplier = W_IN;
-  assign data_b_in_vector_multiplier = M_IN;
+  assign size_in_vector_float_multiplier   = SIZE_W_IN;
+  assign data_a_in_vector_float_multiplier = W_IN;
+  assign data_b_in_vector_float_multiplier = M_IN;
 
   // VECTOR SUMMATION
   assign size_in_vector_summation   = SIZE_W_IN;
   assign length_in_vector_summation = SIZE_N_IN;
-  assign data_in_vector_summation   = data_out_vector_multiplier;
+  assign data_in_vector_summation   = data_out_vector_float_multiplier;
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(
@@ -212,28 +212,28 @@ module ntm_reading #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplier(
+  vector_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_float_multiplier),
+    .READY(ready_vector_float_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .SIZE_IN(size_in_vector_float_multiplier),
+    .DATA_A_IN(data_a_in_vector_float_multiplier),
+    .DATA_B_IN(data_b_in_vector_float_multiplier),
+    .DATA_OUT(data_out_vector_float_multiplier)
   );
 
 endmodule

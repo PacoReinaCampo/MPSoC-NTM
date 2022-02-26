@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_multiplier #(
+module ntm_vector_float_divider #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -93,29 +93,29 @@ module ntm_vector_multiplier #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] multiplier_ctrl_fsm_int;
+  reg [1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_loop;
 
-  reg data_a_in_multiplier_int;
-  reg data_b_in_multiplier_int;
+  reg data_a_in_divider_int;
+  reg data_b_in_divider_int;
 
-  // MULTIPLIER
+  // DIVIDER
   // CONTROL
-  reg start_scalar_multiplier;
-  wire ready_scalar_multiplier;
+  reg start_scalar_divider;
+  wire ready_scalar_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_divider;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
+  // DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -129,11 +129,11 @@ module ntm_vector_multiplier #(
       // Assignations
       index_loop <= ZERO_DATA;
 
-      data_a_in_multiplier_int <= 1'b0;
-      data_b_in_multiplier_int <= 1'b0;
+      data_a_in_divider_int <= 1'b0;
+      data_b_in_divider_int <= 1'b0;
     end
-    else begin
-      case(multiplier_ctrl_fsm_int)
+	else begin
+      case(divider_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
@@ -144,94 +144,95 @@ module ntm_vector_multiplier #(
             index_loop <= ZERO_DATA;
 
             // FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_STATE;
+            divider_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_multiplier <= DATA_A_IN;
+            data_a_in_scalar_divider <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_multiplier_int <= 1'b1;
+            data_a_in_divider_int <= 1'b1;
           end
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_multiplier <= DATA_B_IN;
+            data_b_in_scalar_divider <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_multiplier_int <= 1'b1;
+            data_b_in_divider_int <= 1'b1;
           end
-          if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
+          if(data_a_in_divider_int == 1'b1 && data_b_in_divider_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_multiplier <= 1'b1;
+              start_scalar_divider <= 1'b1;
             end
             // Data Inputs
 
             // FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_STATE;
+            divider_ctrl_fsm_int <= ENDER_STATE;
           end
+
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_multiplier == 1'b1) begin
+          if(ready_scalar_divider == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
+              divider_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE_CONTROL);
 
               // FSM Control
-              multiplier_ctrl_fsm_int <= INPUT_STATE;
+              divider_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_multiplier;
+            DATA_OUT <= data_out_scalar_divider;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_multiplier <= 1'b0;
-            data_a_in_multiplier_int <= 1'b0;
-            data_b_in_multiplier_int <= 1'b0;
+            start_scalar_divider <= 1'b0;
+            data_a_in_divider_int <= 1'b0;
+            data_b_in_divider_int <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+          divider_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
-  // MULTIPLIER
-  ntm_scalar_multiplier #(
+  // DIVIDER
+  ntm_scalar_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_multiplier(
+  scalar_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_multiplier),
-    .READY(ready_scalar_multiplier),
+    .START(start_scalar_divider),
+    .READY(ready_scalar_divider),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_multiplier),
-    .DATA_B_IN(data_b_in_scalar_multiplier),
-    .DATA_OUT(data_out_scalar_multiplier)
+    .DATA_A_IN(data_a_in_scalar_divider),
+    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_OUT(data_out_scalar_divider)
   );
 
 endmodule

@@ -186,11 +186,11 @@ module ntm_reading #(
   assign data_in_vector_summation   = data_out_vector_multiplier;
 
   // VECTOR SUMMATION
-  ntm_vector_summation_function #(
+  ntm_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_summation_function(
+  vector_summation(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

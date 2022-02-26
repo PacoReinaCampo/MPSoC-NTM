@@ -37,12 +37,9 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_transpose #(
+module ntm_vector_multiplier #(
   parameter DATA_SIZE=128,
-  parameter CONTROL_SIZE=64,
-
-  parameter [DATA_SIZE-1:0] SIZE_I=64,
-  parameter [DATA_SIZE-1:0] SIZE_J=64
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -53,15 +50,14 @@ module ntm_matrix_transpose #(
     input START,
     output reg READY,
 
-    input DATA_IN_I_ENABLE,
-    input DATA_IN_J_ENABLE,
-    output reg DATA_OUT_I_ENABLE,
-    output reg DATA_OUT_J_ENABLE,
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_I_IN,
-    input [DATA_SIZE-1:0] SIZE_J_IN,
-    input [DATA_SIZE-1:0] DATA_IN,
+    input [DATA_SIZE-1:0] SIZE_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
@@ -69,15 +65,9 @@ module ntm_matrix_transpose #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [3:0] STARTER_STATE           = 0;
-  parameter [3:0] MATRIX_INITIAL_I_STATE  = 1;
-  parameter [3:0] MATRIX_INITIAL_J_STATE  = 2;
-  parameter [3:0] MATRIX_INPUT_I_STATE    = 3;
-  parameter [3:0] MATRIX_INPUT_J_STATE    = 4;
-  parameter [3:0] VECTOR_MULTIPLIER_STATE = 5;
-  parameter [3:0] SCALAR_ADDER_STATE      = 6;
-  parameter [3:0] MATRIX_UPDATE_I_STATE   = 7;
-  parameter [3:0] MATRIX_UPDATE_J_STATE   = 8;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -103,35 +93,29 @@ module ntm_matrix_transpose #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] algebra_ctrl_fsm_int;
+  reg [1:0] multiplier_ctrl_fsm_int;
 
-  // SCALAR ADDER
+  // Internal Signals
+  reg [CONTROL_SIZE-1:0] index_loop;
+
+  reg data_a_in_multiplier_int;
+  reg data_b_in_multiplier_int;
+
+  // MULTIPLIER
   // CONTROL
-  wire start_scalar_float_adder;
-  wire ready_scalar_float_adder;
-
-  wire operation_scalar_float_adder;
+  reg start_scalar_multiplier;
+  wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
-
-  // SCALAR MULTIPLIER
-  // CONTROL
-  wire start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = transpose(DATA_IN)
+  // DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -141,87 +125,113 @@ module ntm_matrix_transpose #(
 
       // Control Outputs
       READY <= 1'b0;
+
+      // Assignations
+      index_loop <= ZERO_DATA;
+
+      data_a_in_multiplier_int <= 1'b0;
+      data_b_in_multiplier_int <= 1'b0;
     end
     else begin
-      case(algebra_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+      case(multiplier_ctrl_fsm_int)
+        STARTER_STATE : begin
+          // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           if(START == 1'b1) begin
+            // Assignations
+            index_loop <= ZERO_DATA;
+
             // FSM Control
-            algebra_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
+            multiplier_ctrl_fsm_int <= INPUT_STATE;
           end
         end
+        INPUT_STATE : begin
+          // STEP 1
+          if(DATA_A_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_a_in_scalar_multiplier <= DATA_A_IN;
 
-        MATRIX_INITIAL_I_STATE : begin  // STEP 1
-        end
-        MATRIX_INITIAL_J_STATE : begin  // STEP 2
-        end
+            // Control Internal
+            data_a_in_multiplier_int <= 1'b1;
+          end
+          if(DATA_B_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            data_b_in_scalar_multiplier <= DATA_B_IN;
 
-        MATRIX_INPUT_I_STATE : begin  // STEP 3
-        end
-        MATRIX_INPUT_J_STATE : begin  // STEP 4
-        end
+            // Control Internal
+            data_b_in_multiplier_int <= 1'b1;
+          end
+          if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
+            if(index_loop == ZERO_DATA) begin
+              // Control Internal
+              start_scalar_multiplier <= 1'b1;
+            end
+            // Data Inputs
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 5
+            // FSM Control
+            multiplier_ctrl_fsm_int <= ENDER_STATE;
+          end
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
         end
-        SCALAR_ADDER_STATE : begin  // STEP 6
-        end
+        ENDER_STATE : begin
+          // STEP 2
+          if(ready_scalar_multiplier == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+              // Control Outputs
+              READY <= 1'b1;
 
-        MATRIX_UPDATE_I_STATE : begin  // STEP 7
-        end
-        MATRIX_UPDATE_J_STATE : begin  // STEP 8
-        end
+              // FSM Control
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
+            end
+            else begin
+              // Control Internal
+              index_loop <= (index_loop + ONE_CONTROL);
 
+              // FSM Control
+              multiplier_ctrl_fsm_int <= INPUT_STATE;
+            end
+            // Data Outputs
+            DATA_OUT <= data_out_scalar_multiplier;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_multiplier <= 1'b0;
+            data_a_in_multiplier_int <= 1'b0;
+            data_b_in_multiplier_int <= 1'b0;
+          end
+        end
         default : begin
           // FSM Control
-          algebra_ctrl_fsm_int <= STARTER_STATE;
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
-  // SCALAR ADDER
-  ntm_scalar_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_adder(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_float_adder),
-    .READY(ready_scalar_float_adder),
-
-    .OPERATION(operation_scalar_float_adder),
-
-    // DATA
-    .DATA_A_IN(data_a_in_scalar_float_adder),
-    .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT(data_out_scalar_float_adder)
-  );
-
-  // SCALAR MULTIPLIER
+  // MULTIPLIER
   ntm_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_float_multiplier(
+  scalar_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_float_multiplier),
-    .READY(ready_scalar_float_multiplier),
+    .START(start_scalar_multiplier),
+    .READY(ready_scalar_multiplier),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_float_multiplier),
-    .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .DATA_A_IN(data_a_in_scalar_multiplier),
+    .DATA_B_IN(data_b_in_scalar_multiplier),
+    .DATA_OUT(data_out_scalar_multiplier)
   );
 
 endmodule

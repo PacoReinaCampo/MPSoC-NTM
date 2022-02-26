@@ -159,50 +159,50 @@ module ntm_addressing #(
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_adder;
-  wire ready_vector_adder;
+  wire start_vector_float_adder;
+  wire ready_vector_float_adder;
 
-  wire operation_vector_adder;
+  wire operation_vector_float_adder;
 
-  wire data_a_in_enable_vector_adder;
-  wire data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  wire data_a_in_enable_vector_float_adder;
+  wire data_b_in_enable_vector_float_adder;
+  wire data_out_enable_vector_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_float_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
+  wire start_vector_float_multiplier;
+  wire ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire data_a_in_enable_vector_float_multiplier;
+  wire data_b_in_enable_vector_float_multiplier;
+  wire data_out_enable_vector_float_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
 
   // VECTOR DIVIDER
   // CONTROL
-  wire start_vector_divider;
-  wire ready_vector_divider;
+  wire start_vector_float_divider;
+  wire ready_vector_float_divider;
 
-  wire data_a_in_enable_vector_divider;
-  wire data_b_in_enable_vector_divider;
-  wire data_out_enable_vector_divider;
+  wire data_a_in_enable_vector_float_divider;
+  wire data_b_in_enable_vector_float_divider;
+  wire data_out_enable_vector_float_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_a_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_b_in_vector_divider;
-  wire [DATA_SIZE-1:0] data_out_vector_divider;
+  reg [DATA_SIZE-1:0] size_in_vector_float_divider;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_divider;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_divider;
+  wire [DATA_SIZE-1:0] data_out_vector_float_divider;
 
   // VECTOR EXPONENTIATOR
   // CONTROL
@@ -301,33 +301,33 @@ module ntm_addressing #(
             VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 1
 
               // Data Inputs
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+              size_in_vector_float_multiplier   <= FULL;
+              data_a_in_vector_float_multiplier <= FULL;
+              data_b_in_vector_float_multiplier <= FULL;
             end
 
             VECTOR_FIRST_ADDER_INTERPOLATION_STATE : begin  // STEP 2
 
               // Data Inputs
-              size_in_vector_adder   <= FULL;
-              data_a_in_vector_adder <= FULL;
-              data_b_in_vector_adder <= FULL;
+              size_in_vector_float_adder   <= FULL;
+              data_a_in_vector_float_adder <= FULL;
+              data_b_in_vector_float_adder <= FULL;
             end
 
             VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 3
 
               // Data Inputs
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+              size_in_vector_float_multiplier   <= FULL;
+              data_a_in_vector_float_multiplier <= FULL;
+              data_b_in_vector_float_multiplier <= FULL;
             end
 
             VECTOR_SECOND_ADDER_INTERPOLATION_STATE : begin  // STEP 4
 
               // Data Inputs
-              size_in_vector_adder   <= FULL;
-              data_a_in_vector_adder <= FULL;
-              data_b_in_vector_adder <= FULL;
+              size_in_vector_float_adder   <= FULL;
+              data_a_in_vector_float_adder <= FULL;
+              data_b_in_vector_float_adder <= FULL;
             end
             default : begin
               // FSM Control
@@ -369,9 +369,9 @@ module ntm_addressing #(
             VECTOR_DIVIDER_SHARPENING_STATE : begin  // STEP 3
 
               // Data Inputs
-              size_in_vector_divider   <= FULL;
-              data_a_in_vector_divider <= FULL;
-              data_b_in_vector_divider <= FULL;
+              size_in_vector_float_divider   <= FULL;
+              data_a_in_vector_float_divider <= FULL;
+              data_b_in_vector_float_divider <= FULL;
             end
             default : begin
               // FSM Control
@@ -425,80 +425,80 @@ module ntm_addressing #(
   );
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  ntm_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
+    .START(start_vector_float_adder),
+    .READY(ready_vector_float_adder),
 
-    .OPERATION(operation_vector_adder),
+    .OPERATION(operation_vector_float_adder),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .SIZE_IN(size_in_vector_float_adder),
+    .DATA_A_IN(data_a_in_vector_float_adder),
+    .DATA_B_IN(data_b_in_vector_float_adder),
+    .DATA_OUT(data_out_vector_float_adder)
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplier(
+  vector_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_float_multiplier),
+    .READY(ready_vector_float_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .SIZE_IN(size_in_vector_float_multiplier),
+    .DATA_A_IN(data_a_in_vector_float_multiplier),
+    .DATA_B_IN(data_b_in_vector_float_multiplier),
+    .DATA_OUT(data_out_vector_float_multiplier)
   );
 
   // VECTOR DIVIDER
-  ntm_vector_divider #(
+  ntm_vector_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_divider(
+  vector_float_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_divider),
-    .READY(ready_vector_divider),
+    .START(start_vector_float_divider),
+    .READY(ready_vector_float_divider),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_divider),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_divider),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_divider),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_divider),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_divider),
-    .DATA_A_IN(data_a_in_vector_divider),
-    .DATA_B_IN(data_b_in_vector_divider),
-    .DATA_OUT(data_out_vector_divider)
+    .SIZE_IN(size_in_vector_float_divider),
+    .DATA_A_IN(data_a_in_vector_float_divider),
+    .DATA_B_IN(data_b_in_vector_float_divider),
+    .DATA_OUT(data_out_vector_float_divider)
   );
 
   // VECTOR EXPONENTIATOR

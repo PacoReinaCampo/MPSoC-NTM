@@ -103,18 +103,18 @@ module ntm_hidden_gate_vector #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
+  wire start_vector_float_multiplier;
+  wire ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire data_a_in_enable_vector_float_multiplier;
+  wire data_b_in_enable_vector_float_multiplier;
+  wire data_out_enable_vector_float_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
 
   // VECTOR TANH
   // CONTROL
@@ -163,7 +163,7 @@ module ntm_hidden_gate_vector #(
         VECTOR_MULTIPLIER_STATE : begin  // STEP 2
 
           // Data Outputs
-          H_OUT <= data_out_vector_multiplier;
+          H_OUT <= data_out_vector_float_multiplier;
         end
 
         default : begin
@@ -179,33 +179,33 @@ module ntm_hidden_gate_vector #(
   assign data_in_vector_tanh   = S_IN;
 
   // VECTOR MULTIPLIER
-  assign size_in_vector_multiplier   = SIZE_L_IN;
-  assign data_a_in_vector_multiplier = O_IN;
-  assign data_b_in_vector_multiplier = data_out_vector_tanh;
+  assign size_in_vector_float_multiplier   = SIZE_L_IN;
+  assign data_a_in_vector_float_multiplier = O_IN;
+  assign data_b_in_vector_float_multiplier = data_out_vector_tanh;
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplier(
+  vector_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_float_multiplier),
+    .READY(ready_vector_float_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .SIZE_IN(size_in_vector_float_multiplier),
+    .DATA_A_IN(data_a_in_vector_float_multiplier),
+    .DATA_B_IN(data_b_in_vector_float_multiplier),
+    .DATA_OUT(data_out_vector_float_multiplier)
   );
 
   // VECTOR TANH
