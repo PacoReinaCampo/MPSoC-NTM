@@ -1,3 +1,4 @@
+../../../../../../../rtl/verilog/pkg/ntm_arithmetic_pkg.sv
 ../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
 
 ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_adder.sv
@@ -12,24 +13,17 @@
 ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_divider.sv
-
-../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_divider.sv
-
-../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
-
-../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_differentiation.sv
-../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_integration.sv
 ../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_differentiation.sv
 ../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_integration.sv
+../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_softmax.sv
+
 ../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_differentiation.sv
 ../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_integration.sv
+../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_softmax.sv
+
+../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_differentiation.sv
+../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_integration.sv
+../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_softmax.sv
 
 ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
 ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv

@@ -1,0 +1,42 @@
+verilog2008 work ../../../../../../../model/verilog/pkg/ntm_arithmetic_pkg.sv
+verilog2008 work ../../../../../../../model/verilog/pkg/ntm_math_pkg.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/scalar/ntm_scalar_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/vector/ntm_vector_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_adder.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
+verilog2008 work ../../../../../../../model/verilog/arithmetic/float/matrix/ntm_matrix_float_divider.sv
+
+verilog2008 work ../../../../../../../model/verilog/math/calculus/vector/ntm_vector_differentiation.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/vector/ntm_vector_integration.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/vector/ntm_vector_softmax.sv
+
+verilog2008 work ../../../../../../../model/verilog/math/calculus/matrix/ntm_matrix_differentiation.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/matrix/ntm_matrix_integration.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/matrix/ntm_matrix_softmax.sv
+
+verilog2008 work ../../../../../../../model/verilog/math/calculus/tensor/ntm_tensor_differentiation.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/tensor/ntm_tensor_integration.sv
+verilog2008 work ../../../../../../../model/verilog/math/calculus/tensor/ntm_tensor_softmax.sv
+
+verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_testbench.sv
