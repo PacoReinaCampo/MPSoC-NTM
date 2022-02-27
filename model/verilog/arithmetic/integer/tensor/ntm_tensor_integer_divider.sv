@@ -121,19 +121,19 @@ module ntm_tensor_integer_divider #(
 
   // DIVIDER
   // CONTROL
-  reg start_vector_divider;
-  wire ready_vector_divider;
-  reg data_a_in_enable_vector_divider;
-  reg data_b_in_enable_vector_divider;
-  wire data_out_enable_vector_divider;
+  reg start_vector_integer_divider;
+  wire ready_vector_integer_divider;
+  reg data_a_in_enable_vector_integer_divider;
+  reg data_b_in_enable_vector_integer_divider;
+  wire data_out_enable_vector_integer_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_a_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_b_in_vector_divider;
+  reg [DATA_SIZE-1:0] size_in_vector_integer_divider;
+  reg [DATA_SIZE-1:0] data_a_in_vector_integer_divider;
+  reg [DATA_SIZE-1:0] data_b_in_vector_integer_divider;
 
-  wire [DATA_SIZE-1:0] data_out_vector_divider;
-  wire [DATA_SIZE-1:0] rest_out_vector_divider;
+  wire [DATA_SIZE-1:0] data_out_vector_integer_divider;
+  wire [DATA_SIZE-1:0] rest_out_vector_integer_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -148,25 +148,25 @@ module ntm_tensor_integer_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_divider(
+  vector_integer_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_divider),
-    .READY(ready_vector_divider),
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_divider),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_divider),
+    .START(start_vector_integer_divider),
+    .READY(ready_vector_integer_divider),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_divider),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_divider),
+    .DATA_OUT_ENABLE(data_out_enable_vector_integer_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_divider),
-    .DATA_A_IN(data_a_in_vector_divider),
-    .DATA_B_IN(data_b_in_vector_divider),
+    .SIZE_IN(size_in_vector_integer_divider),
+    .DATA_A_IN(data_a_in_vector_integer_divider),
+    .DATA_B_IN(data_b_in_vector_integer_divider),
 
-    .DATA_OUT(data_out_vector_divider),
-    .REST_OUT(rest_out_vector_divider)
+    .DATA_OUT(data_out_vector_integer_divider),
+    .REST_OUT(rest_out_vector_integer_divider)
   );
 
 endmodule

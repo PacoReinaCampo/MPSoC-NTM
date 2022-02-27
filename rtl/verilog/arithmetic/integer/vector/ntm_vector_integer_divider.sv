@@ -105,15 +105,15 @@ module ntm_vector_integer_divider #(
 
   // DIVIDER
   // CONTROL
-  reg start_scalar_divider;
-  wire ready_scalar_divider;
+  reg start_scalar_integer_divider;
+  wire ready_scalar_integer_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_divider;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_integer_divider;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_integer_divider;
 
-  wire [DATA_SIZE-1:0] data_out_scalar_divider;
-  wire [DATA_SIZE-1:0] rest_out_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_integer_divider;
+  wire [DATA_SIZE-1:0] rest_out_scalar_integer_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -155,14 +155,14 @@ module ntm_vector_integer_divider #(
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_divider <= DATA_A_IN;
+            data_a_in_scalar_integer_divider <= DATA_A_IN;
 
             // Control Internal
             data_a_in_divider_int <= 1'b1;
           end
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_divider <= DATA_B_IN;
+            data_b_in_scalar_integer_divider <= DATA_B_IN;
 
             // Control Internal
             data_b_in_divider_int <= 1'b1;
@@ -170,7 +170,7 @@ module ntm_vector_integer_divider #(
           if(data_a_in_divider_int == 1'b1 && data_b_in_divider_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_divider <= 1'b1;
+              start_scalar_integer_divider <= 1'b1;
             end
 
             // FSM Control
@@ -182,7 +182,7 @@ module ntm_vector_integer_divider #(
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_divider == 1'b1) begin
+          if(ready_scalar_integer_divider == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -198,14 +198,14 @@ module ntm_vector_integer_divider #(
               divider_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
+            DATA_OUT <= data_out_scalar_integer_divider;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_divider <= 1'b0;
+            start_scalar_integer_divider <= 1'b0;
             data_a_in_divider_int <= 1'b0;
             data_b_in_divider_int <= 1'b0;
           end
@@ -223,21 +223,21 @@ module ntm_vector_integer_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_divider(
+  scalar_integer_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_divider),
-    .READY(ready_scalar_divider),
+    .START(start_scalar_integer_divider),
+    .READY(ready_scalar_integer_divider),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_divider),
-    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_A_IN(data_a_in_scalar_integer_divider),
+    .DATA_B_IN(data_b_in_scalar_integer_divider),
 
-    .DATA_OUT(data_out_scalar_divider),
-    .REST_OUT(rest_out_scalar_divider)
+    .DATA_OUT(data_out_scalar_integer_divider),
+    .REST_OUT(rest_out_scalar_integer_divider)
   );
 
 endmodule

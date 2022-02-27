@@ -8,7 +8,7 @@
 ../../../../../../../model/verilog/arithmetic/integer/vector/ntm_vector_integer_multiplier.sv
 ../../../../../../../model/verilog/arithmetic/integer/vector/ntm_vector_integer_divider.sv
 
-../../../../../../../model/verilog/arithmetic/integer/vector/ntm_vector_integer_divider.sv
+../../../../../../../model/verilog/arithmetic/integer/matrix/ntm_matrix_integer_adder.sv
 ../../../../../../../model/verilog/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.sv
 ../../../../../../../model/verilog/arithmetic/integer/matrix/ntm_matrix_integer_divider.sv
 

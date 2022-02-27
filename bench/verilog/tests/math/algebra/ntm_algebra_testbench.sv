@@ -99,18 +99,18 @@ module ntm_algebra_testbench;
 
   // DOT PRODUCT
   // CONTROL
-  wire start_scalar_product;
-  wire ready_scalar_product;
+  wire start_dot_product;
+  wire ready_dot_product;
 
-  wire data_a_in_enable_scalar_product;
-  wire data_b_in_enable_scalar_product;
-  wire data_out_enable_scalar_product;
+  wire data_a_in_enable_dot_product;
+  wire data_b_in_enable_dot_product;
+  wire data_out_enable_dot_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_out_scalar_product;
+  wire [DATA_SIZE-1:0] length_in_dot_product;
+  wire [DATA_SIZE-1:0] data_a_in_dot_product;
+  wire [DATA_SIZE-1:0] data_b_in_dot_product;
+  wire [DATA_SIZE-1:0] data_out_dot_product;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -245,16 +245,16 @@ module ntm_algebra_testbench;
 
     // DOT PRODUCT
     // CONTROL
-    .DOT_PRODUCT_START(start_scalar_product),
-    .DOT_PRODUCT_READY(ready_scalar_product),
+    .DOT_PRODUCT_START(start_dot_product),
+    .DOT_PRODUCT_READY(ready_dot_product),
 
-    .DOT_PRODUCT_DATA_A_IN_ENABLE(data_a_in_enable_scalar_product),
-    .DOT_PRODUCT_DATA_B_IN_ENABLE(data_b_in_enable_scalar_product),
-    .DOT_PRODUCT_DATA_OUT_ENABLE(data_out_enable_scalar_product),
+    .DOT_PRODUCT_DATA_A_IN_ENABLE(data_a_in_enable_dot_product),
+    .DOT_PRODUCT_DATA_B_IN_ENABLE(data_b_in_enable_dot_product),
+    .DOT_PRODUCT_DATA_OUT_ENABLE(data_out_enable_dot_product),
 
     // DATA
-    .DOT_PRODUCT_LENGTH_IN(length_in_scalar_product),
-    .DOT_PRODUCT_DATA_A_IN(data_a_in_scalar_product),
+    .DOT_PRODUCT_LENGTH_IN(length_in_dot_product),
+    .DOT_PRODUCT_DATA_A_IN(data_a_in_dot_product),
     .DOT_PRODUCT_DATA_B_IN(data_b_in_matrix_product),
     .DOT_PRODUCT_DATA_OUT(data_out_matrix_product),
 
@@ -323,48 +323,48 @@ module ntm_algebra_testbench;
 
     // TENSOR TRANSPOSE
     // CONTROL
-    .TENSOR_transpose_START(start_tensor_transpose),
-    .TENSOR_transpose_READY(ready_tensor_transpose),
+    .TENSOR_TRANSPOSE_START(start_tensor_transpose),
+    .TENSOR_TRANSPOSE_READY(ready_tensor_transpose),
 
-    .TENSOR_transpose_DATA_IN_I_ENABLE(data_in_i_enable_tensor_transpose),
-    .TENSOR_transpose_DATA_IN_J_ENABLE(data_in_j_enable_tensor_transpose),
-    .TENSOR_transpose_DATA_IN_K_ENABLE(data_in_k_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_IN_I_ENABLE(data_in_i_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_IN_J_ENABLE(data_in_j_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_IN_K_ENABLE(data_in_k_enable_tensor_transpose),
 
-    .TENSOR_transpose_DATA_OUT_I_ENABLE(data_out_i_enable_tensor_transpose),
-    .TENSOR_transpose_DATA_OUT_J_ENABLE(data_out_j_enable_tensor_transpose),
-    .TENSOR_transpose_DATA_OUT_K_ENABLE(data_out_k_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE(data_out_i_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE(data_out_j_enable_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE(data_out_k_enable_tensor_transpose),
 
     // DATA
-    .TENSOR_transpose_SIZE_I_IN(size_i_in_tensor_transpose),
-    .TENSOR_transpose_SIZE_J_IN(size_j_in_tensor_transpose),
-    .TENSOR_transpose_SIZE_K_IN(size_k_in_tensor_transpose),
-    .TENSOR_transpose_DATA_IN(data_in_tensor_transpose),
-    .TENSOR_transpose_DATA_OUT(data_out_tensor_transpose)
+    .TENSOR_TRANSPOSE_SIZE_I_IN(size_i_in_tensor_transpose),
+    .TENSOR_TRANSPOSE_SIZE_J_IN(size_j_in_tensor_transpose),
+    .TENSOR_TRANSPOSE_SIZE_K_IN(size_k_in_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_IN(data_in_tensor_transpose),
+    .TENSOR_TRANSPOSE_DATA_OUT(data_out_tensor_transpose)
   );
 
   // DOT PRODUCT
-  ntm_scalar_product #(
+  ntm_dot_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_product(
+  dot_product(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_product),
-    .READY(ready_scalar_product),
+    .START(start_dot_product),
+    .READY(ready_dot_product),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_product),
-    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_product),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_product),
+    .DATA_A_IN_ENABLE(data_a_in_enable_dot_product),
+    .DATA_B_IN_ENABLE(data_b_in_enable_dot_product),
+    .DATA_OUT_ENABLE(data_out_enable_dot_product),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_product),
-    .DATA_A_IN(data_a_in_scalar_product),
-    .DATA_B_IN(data_b_in_scalar_product),
-    .DATA_OUT(data_out_scalar_product)
+    .LENGTH_IN(length_in_dot_product),
+    .DATA_A_IN(data_a_in_dot_product),
+    .DATA_B_IN(data_b_in_dot_product),
+    .DATA_OUT(data_out_dot_product)
   );
 
   // MATRIX PRODUCT
@@ -461,11 +461,11 @@ module ntm_algebra_testbench;
   );
 
   // TENSOR TRANSPOSE
-  ntm_TENSOR_TRANSPOSE #(
+  ntm_tensor_transpose #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  TENSOR_TRANSPOSE(
+  tensor_transpose(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

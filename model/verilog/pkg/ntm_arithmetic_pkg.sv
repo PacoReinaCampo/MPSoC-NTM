@@ -75,7 +75,7 @@ package ntm_arithmetic_pkg;
 
     input [DATA_SIZE-1:0] scalar_input;
     begin
-      scalar_output = scalar_input % scalar_modulo_input;
+      function_scalar_modular_mod = scalar_input % scalar_modulo_input;
     end
   endfunction
 

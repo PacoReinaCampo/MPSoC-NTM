@@ -107,15 +107,15 @@ module ntm_vector_integer_adder #(
 
   // ADDER
   // CONTROL
-  reg start_scalar_adder;
-  wire ready_scalar_adder;
-  reg operation_scalar_adder;
+  reg start_scalar_integer_adder;
+  wire ready_scalar_integer_adder;
+  reg operation_scalar_integer_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
-  wire overflow_out_scalar_adder;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_integer_adder;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_integer_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_integer_adder;
+  wire overflow_out_scalar_integer_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -157,7 +157,7 @@ module ntm_vector_integer_adder #(
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_adder <= DATA_A_IN;
+            data_a_in_scalar_integer_adder <= DATA_A_IN;
 
             // Control Internal
             data_a_in_adder_int <= 1'b1;
@@ -165,16 +165,16 @@ module ntm_vector_integer_adder #(
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
 
-            data_b_in_scalar_adder <= DATA_B_IN;
+            data_b_in_scalar_integer_adder <= DATA_B_IN;
             // Control Internal
             data_b_in_adder_int <= 1'b1;
           end
           if(data_a_in_adder_int == 1'b1 && data_b_in_adder_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_adder <= 1'b1;
+              start_scalar_integer_adder <= 1'b1;
             end
-            operation_scalar_adder <= OPERATION;
+            operation_scalar_integer_adder <= OPERATION;
 
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -184,7 +184,7 @@ module ntm_vector_integer_adder #(
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_adder == 1'b1) begin
+          if(ready_scalar_integer_adder == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -200,14 +200,14 @@ module ntm_vector_integer_adder #(
               adder_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_integer_adder;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_adder <= 1'b0;
+            start_scalar_integer_adder <= 1'b0;
             data_a_in_adder_int <= 1'b0;
             data_b_in_adder_int <= 1'b0;
           end
@@ -225,22 +225,22 @@ module ntm_vector_integer_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_adder(
+  scalar_integer_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_scalar_integer_adder),
+    .READY(ready_scalar_integer_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_scalar_integer_adder),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder),
-    .OVERFLOW_OUT(overflow_out_scalar_adder)
+    .DATA_A_IN(data_a_in_scalar_integer_adder),
+    .DATA_B_IN(data_b_in_scalar_integer_adder),
+    .DATA_OUT(data_out_scalar_integer_adder),
+    .OVERFLOW_OUT(overflow_out_scalar_integer_adder)
   );
 
 endmodule

@@ -47,19 +47,23 @@ package dnc_core_pkg;
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  // SYSTEM-SIZE
   parameter DATA_SIZE=128;
   parameter CONTROL_SIZE=64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter ZERO_CONTROL=0;
+  parameter ONE_CONTROL=1;
+  parameter TWO_CONTROL=2;
+  parameter THREE_CONTROL=3;
+
+  parameter ZERO_DATA=0.0;
+  parameter ONE_DATA=1.0;
+  parameter TWO_DATA=2.0;
+  parameter THREE_DATA=3.0;
+
+  parameter LENGTH_IN=0.001;
 
   ///////////////////////////////////////////////////////////////////////
-  // Signals
+  // Functions
   ///////////////////////////////////////////////////////////////////////
 
 endpackage

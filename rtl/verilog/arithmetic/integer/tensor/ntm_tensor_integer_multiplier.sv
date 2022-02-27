@@ -121,19 +121,19 @@ module ntm_tensor_integer_multiplier #(
 
   // MULTIPLIER
   // CONTROL
-  reg start_vector_multiplier;
-  wire ready_vector_multiplier;
-  reg data_a_in_enable_vector_multiplier;
-  reg data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  reg start_vector_integer_multiplier;
+  wire ready_vector_integer_multiplier;
+  reg data_a_in_enable_vector_integer_multiplier;
+  reg data_b_in_enable_vector_integer_multiplier;
+  wire data_out_enable_vector_integer_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_integer_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_integer_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_integer_multiplier;
 
-  wire [DATA_SIZE-1:0] overflow_out_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] overflow_out_vector_integer_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_integer_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -148,26 +148,26 @@ module ntm_tensor_integer_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplier(
+  vector_integer_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_integer_multiplier),
+    .READY(ready_vector_integer_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_integer_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
+    .SIZE_IN(size_in_vector_integer_multiplier),
+    .DATA_A_IN(data_a_in_vector_integer_multiplier),
+    .DATA_B_IN(data_b_in_vector_integer_multiplier),
 
-    .DATA_OUT(data_out_vector_multiplier),
-    .OVERFLOW_OUT(overflow_out_vector_multiplier)
+    .DATA_OUT(data_out_vector_integer_multiplier),
+    .OVERFLOW_OUT(overflow_out_vector_integer_multiplier)
   );
 
 endmodule

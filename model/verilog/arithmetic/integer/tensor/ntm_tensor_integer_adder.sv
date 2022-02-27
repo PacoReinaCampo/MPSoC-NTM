@@ -123,21 +123,21 @@ module ntm_tensor_integer_adder #(
 
   // ADDER
   // CONTROL
-  reg start_vector_adder;
-  wire ready_vector_adder;
+  reg start_vector_integer_adder;
+  wire ready_vector_integer_adder;
 
-  reg operation_vector_adder;
+  reg operation_vector_integer_adder;
 
-  reg data_a_in_enable_vector_adder;
-  reg data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  reg data_a_in_enable_vector_integer_adder;
+  reg data_b_in_enable_vector_integer_adder;
+  wire data_out_enable_vector_integer_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
-  wire overflow_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_integer_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_integer_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_integer_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_integer_adder;
+  wire overflow_out_vector_integer_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -152,26 +152,26 @@ module ntm_tensor_integer_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_integer_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
+    .START(start_vector_integer_adder),
+    .READY(ready_vector_integer_adder),
 
-    .OPERATION(operation_vector_adder),
+    .OPERATION(operation_vector_integer_adder),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_integer_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder),
-    .OVERFLOW_OUT(overflow_out_vector_adder)
+    .SIZE_IN(size_in_vector_integer_adder),
+    .DATA_A_IN(data_a_in_vector_integer_adder),
+    .DATA_B_IN(data_b_in_vector_integer_adder),
+    .DATA_OUT(data_out_vector_integer_adder),
+    .OVERFLOW_OUT(overflow_out_vector_integer_adder)
   );
 
 endmodule
