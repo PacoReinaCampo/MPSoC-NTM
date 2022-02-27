@@ -59,53 +59,26 @@ module ntm_function_testbench;
   parameter R=64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_COSH_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_SINH_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_TANH_TEST=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0;
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_COSH_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_SINH_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_TANH_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_COSH_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_SINH_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_TANH_CASE_1=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0;
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_COSH_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_SINH_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_TANH_TEST=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0;
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_COSH_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_SINH_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_TANH_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_COSH_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_SINH_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_TANH_CASE_1=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0;
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_COSH_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_SINH_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_TANH_TEST=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0;
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_COSH_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_SINH_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_TANH_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_COSH_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_SINH_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_TANH_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0;
 
@@ -121,55 +94,6 @@ module ntm_function_testbench;
   // SCALAR
   ///////////////////////////////////////////////////////////////////////
 
-  // CONTROL
-
-
-
-  // DATA
-
-  // CONTROL
-
-
-
-  // DATA
-
-  // CONTROL
-
-
-  // DATA
-
-  // CONTROL
-
-
-  // DATA
-
-  // SCALAR COSH
-  // CONTROL
-  wire start_scalar_cosh;
-  wire ready_scalar_cosh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_cosh;
-  wire [DATA_SIZE-1:0] data_out_scalar_cosh;
-
-  // SCALAR SINH
-  // CONTROL
-  wire start_scalar_sinh;
-  wire ready_scalar_sinh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_sinh;
-  wire [DATA_SIZE-1:0] data_out_scalar_sinh;
-
-  // SCALAR TANH
-  // CONTROL
-  wire start_scalar_tanh;
-  wire ready_scalar_tanh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_tanh;
-  wire [DATA_SIZE-1:0] data_out_scalar_tanh;
-
   // SCALAR LOGISTIC
   // CONTROL
   wire start_scalar_logistic;
@@ -178,11 +102,6 @@ module ntm_function_testbench;
   // DATA
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
-
-  // CONTROL
-
-
-  // DATA
 
   // SCALAR ONEPLUS
   // CONTROL
@@ -193,73 +112,9 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_out_scalar_oneplus;
 
-  // CONTROL
-
-
-  // DATA
-
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
   ///////////////////////////////////////////////////////////////////////
-
-  // CONTROL
-
-
-  // DATA
-
-  // CONTROL
-
-
-  // DATA
-
-  // CONTROL
-
-
-  // DATA
-
-  // CONTROL
-
-
-  // DATA
-
-  // VECTOR COSH
-  // CONTROL
-  wire start_vector_cosh;
-  wire ready_vector_cosh;
-
-  wire data_in_enable_vector_cosh;
-  wire data_out_enable_vector_cosh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_cosh;
-  wire [DATA_SIZE-1:0] data_in_vector_cosh;
-  wire [DATA_SIZE-1:0] data_out_vector_cosh;
-
-  // VECTOR SINH
-  // CONTROL
-  wire start_vector_sinh;
-  wire ready_vector_sinh;
-
-  wire data_in_enable_vector_sinh;
-  wire data_out_enable_vector_sinh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_sinh;
-  wire [DATA_SIZE-1:0] data_in_vector_sinh;
-  wire [DATA_SIZE-1:0] data_out_vector_sinh;
-
-  // VECTOR TANH
-  // CONTROL
-  wire start_vector_tanh;
-  wire ready_vector_tanh;
-
-  wire data_in_enable_vector_tanh;
-  wire data_out_enable_vector_tanh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_tanh;
-  wire [DATA_SIZE-1:0] data_in_vector_tanh;
-  wire [DATA_SIZE-1:0] data_out_vector_tanh;
 
   // VECTOR LOGISTIC
   // CONTROL
@@ -274,12 +129,6 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
-  // CONTROL
-
-
-
-  // DATA
-
   // VECTOR ONEPLUS
   // CONTROL
   wire start_vector_oneplus;
@@ -293,62 +142,9 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_out_vector_oneplus;
 
-  // CONTROL
-
-
-  // DATA
-
   ///////////////////////////////////////////////////////////////////////
   // MATRIX
   ///////////////////////////////////////////////////////////////////////
-
-  // MATRIX COSH
-  // CONTROL
-  wire start_matrix_cosh;
-  wire ready_matrix_cosh;
-
-  wire data_in_i_enable_matrix_cosh;
-  wire data_in_j_enable_matrix_cosh;
-  wire data_out_i_enable_matrix_cosh;
-  wire data_out_j_enable_matrix_cosh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_cosh;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_cosh;
-  wire [DATA_SIZE-1:0] data_in_matrix_cosh;
-  wire [DATA_SIZE-1:0] data_out_matrix_cosh;
-
-  // MATRIX SINH
-  // CONTROL
-  wire start_matrix_sinh;
-  wire ready_matrix_sinh;
-
-  wire data_in_i_enable_matrix_sinh;
-  wire data_in_j_enable_matrix_sinh;
-  wire data_out_i_enable_matrix_sinh;
-  wire data_out_j_enable_matrix_sinh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_sinh;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_sinh;
-  wire [DATA_SIZE-1:0] data_in_matrix_sinh;
-  wire [DATA_SIZE-1:0] data_out_matrix_sinh;
-
-  // MATRIX TANH
-  // CONTROL
-  wire start_matrix_tanh;
-  wire ready_matrix_tanh;
-
-  wire data_in_i_enable_matrix_tanh;
-  wire data_in_j_enable_matrix_tanh;
-  wire data_out_i_enable_matrix_tanh;
-  wire data_out_j_enable_matrix_tanh;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_tanh;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_tanh;
-  wire [DATA_SIZE-1:0] data_in_matrix_tanh;
-  wire [DATA_SIZE-1:0] data_out_matrix_tanh;
 
   // MATRIX LOGISTIC
   // CONTROL
@@ -366,12 +162,6 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_matrix_logistic;
   wire [DATA_SIZE-1:0] data_out_matrix_logistic;
 
-  // CONTROL
-
-
-
-  // DATA
-
   // MATRIX ONEPLUS
   // CONTROL
   wire start_matrix_oneplus;
@@ -388,14 +178,10 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_matrix_oneplus;
   wire [DATA_SIZE-1:0] data_out_matrix_oneplus;
 
-  // CONTROL
-
-
-  // DATA
-
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
+
   ntm_function_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
@@ -409,53 +195,26 @@ module ntm_function_testbench;
     .R(R),
 
     // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_COSH_TEST(STIMULUS_NTM_SCALAR_COSH_TEST),
-    .STIMULUS_NTM_SCALAR_SINH_TEST(STIMULUS_NTM_SCALAR_SINH_TEST),
-    .STIMULUS_NTM_SCALAR_TANH_TEST(STIMULUS_NTM_SCALAR_TANH_TEST),
     .STIMULUS_NTM_SCALAR_LOGISTIC_TEST(STIMULUS_NTM_SCALAR_LOGISTIC_TEST),
     .STIMULUS_NTM_SCALAR_ONEPLUS_TEST(STIMULUS_NTM_SCALAR_ONEPLUS_TEST),
-    .STIMULUS_NTM_SCALAR_COSH_CASE_0(STIMULUS_NTM_SCALAR_COSH_CASE_0),
-    .STIMULUS_NTM_SCALAR_SINH_CASE_0(STIMULUS_NTM_SCALAR_SINH_CASE_0),
-    .STIMULUS_NTM_SCALAR_TANH_CASE_0(STIMULUS_NTM_SCALAR_TANH_CASE_0),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0),
     .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0),
-    .STIMULUS_NTM_SCALAR_COSH_CASE_1(STIMULUS_NTM_SCALAR_COSH_CASE_1),
-    .STIMULUS_NTM_SCALAR_SINH_CASE_1(STIMULUS_NTM_SCALAR_SINH_CASE_1),
-    .STIMULUS_NTM_SCALAR_TANH_CASE_1(STIMULUS_NTM_SCALAR_TANH_CASE_1),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1),
     .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_COSH_TEST(STIMULUS_NTM_VECTOR_COSH_TEST),
-    .STIMULUS_NTM_VECTOR_SINH_TEST(STIMULUS_NTM_VECTOR_SINH_TEST),
-    .STIMULUS_NTM_VECTOR_TANH_TEST(STIMULUS_NTM_VECTOR_TANH_TEST),
     .STIMULUS_NTM_VECTOR_LOGISTIC_TEST(STIMULUS_NTM_VECTOR_LOGISTIC_TEST),
     .STIMULUS_NTM_VECTOR_ONEPLUS_TEST(STIMULUS_NTM_VECTOR_ONEPLUS_TEST),
-    .STIMULUS_NTM_VECTOR_COSH_CASE_0(STIMULUS_NTM_VECTOR_COSH_CASE_0),
-    .STIMULUS_NTM_VECTOR_SINH_CASE_0(STIMULUS_NTM_VECTOR_SINH_CASE_0),
-    .STIMULUS_NTM_VECTOR_TANH_CASE_0(STIMULUS_NTM_VECTOR_TANH_CASE_0),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0),
     .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0),
-    .STIMULUS_NTM_VECTOR_COSH_CASE_1(STIMULUS_NTM_VECTOR_COSH_CASE_1),
-    .STIMULUS_NTM_VECTOR_SINH_CASE_1(STIMULUS_NTM_VECTOR_SINH_CASE_1),
-    .STIMULUS_NTM_VECTOR_TANH_CASE_1(STIMULUS_NTM_VECTOR_TANH_CASE_1),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1),
     .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_COSH_TEST(STIMULUS_NTM_MATRIX_COSH_TEST),
-    .STIMULUS_NTM_MATRIX_SINH_TEST(STIMULUS_NTM_MATRIX_SINH_TEST),
-    .STIMULUS_NTM_MATRIX_TANH_TEST(STIMULUS_NTM_MATRIX_TANH_TEST),
     .STIMULUS_NTM_MATRIX_LOGISTIC_TEST(STIMULUS_NTM_MATRIX_LOGISTIC_TEST),
     .STIMULUS_NTM_MATRIX_ONEPLUS_TEST(STIMULUS_NTM_MATRIX_ONEPLUS_TEST),
-    .STIMULUS_NTM_MATRIX_COSH_CASE_0(STIMULUS_NTM_MATRIX_COSH_CASE_0),
-    .STIMULUS_NTM_MATRIX_SINH_CASE_0(STIMULUS_NTM_MATRIX_SINH_CASE_0),
-    .STIMULUS_NTM_MATRIX_TANH_CASE_0(STIMULUS_NTM_MATRIX_TANH_CASE_0),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0),
     .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0),
-    .STIMULUS_NTM_MATRIX_COSH_CASE_1(STIMULUS_NTM_MATRIX_COSH_CASE_1),
-    .STIMULUS_NTM_MATRIX_SINH_CASE_1(STIMULUS_NTM_MATRIX_SINH_CASE_1),
-    .STIMULUS_NTM_MATRIX_TANH_CASE_1(STIMULUS_NTM_MATRIX_TANH_CASE_1),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1),
     .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1)
   )
@@ -467,33 +226,6 @@ module ntm_function_testbench;
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS SCALAR
     ///////////////////////////////////////////////////////////////////////
-
-    // SCALAR COSH
-    // CONTROL
-    .SCALAR_COSH_START(start_scalar_cosh),
-    .SCALAR_COSH_READY(ready_scalar_cosh),
-
-    // DATA
-    .SCALAR_COSH_DATA_IN(data_in_scalar_cosh),
-    .SCALAR_COSH_DATA_OUT(data_out_scalar_cosh),
-
-    // SCALAR SINH
-    // CONTROL
-    .SCALAR_SINH_START(start_scalar_sinh),
-    .SCALAR_SINH_READY(ready_scalar_sinh),
-
-    // DATA
-    .SCALAR_SINH_DATA_IN(data_in_scalar_sinh),
-    .SCALAR_SINH_DATA_OUT(data_out_scalar_sinh),
-
-    // SCALAR TANH
-    // CONTROL
-    .SCALAR_TANH_START(start_scalar_tanh),
-    .SCALAR_TANH_READY(ready_scalar_tanh),
-
-    // DATA
-    .SCALAR_TANH_DATA_IN(data_in_scalar_tanh),
-    .SCALAR_TANH_DATA_OUT(data_out_scalar_tanh),
 
     // SCALAR LOGISTIC
     // CONTROL
@@ -516,44 +248,6 @@ module ntm_function_testbench;
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
     ///////////////////////////////////////////////////////////////////////
-
-    // VECTOR COSH
-    // CONTROL
-    .VECTOR_COSH_START(start_vector_cosh),
-    .VECTOR_COSH_READY(ready_vector_cosh),
-
-    .VECTOR_COSH_DATA_IN_ENABLE(data_in_enable_vector_cosh),
-    .VECTOR_COSH_DATA_OUT_ENABLE(data_out_enable_vector_cosh),
-
-    // DATA
-    .VECTOR_COSH_SIZE_IN(size_in_vector_cosh),
-    .VECTOR_COSH_DATA_IN(data_in_vector_cosh),
-    .VECTOR_COSH_DATA_OUT(data_out_vector_cosh),
-
-    // VECTOR SINH
-    // CONTROL
-    .VECTOR_SINH_START(start_vector_sinh),
-    .VECTOR_SINH_READY(ready_vector_sinh),
-
-    .VECTOR_SINH_DATA_IN_ENABLE(data_in_enable_vector_sinh),
-    .VECTOR_SINH_DATA_OUT_ENABLE(data_out_enable_vector_sinh),
-
-    // DATA
-    .VECTOR_SINH_SIZE_IN(size_in_vector_sinh),
-    .VECTOR_SINH_DATA_IN(data_in_vector_sinh),
-    .VECTOR_SINH_DATA_OUT(data_out_vector_sinh),
-
-    // VECTOR TANH
-    // CONTROL
-    .VECTOR_TANH_START(start_vector_tanh),
-    .VECTOR_TANH_READY(ready_vector_tanh),
-    .VECTOR_TANH_DATA_IN_ENABLE(data_in_enable_vector_tanh),
-    .VECTOR_TANH_DATA_OUT_ENABLE(data_out_enable_vector_tanh),
-
-    // DATA
-    .VECTOR_TANH_SIZE_IN(size_in_vector_tanh),
-    .VECTOR_TANH_DATA_IN(data_in_vector_tanh),
-    .VECTOR_TANH_DATA_OUT(data_out_vector_tanh),
 
     // VECTOR LOGISTIC
     // CONTROL
@@ -584,54 +278,6 @@ module ntm_function_testbench;
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
     ///////////////////////////////////////////////////////////////////////
-
-    // MATRIX COSH
-    // CONTROL
-    .MATRIX_COSH_START(start_matrix_cosh),
-    .MATRIX_COSH_READY(ready_matrix_cosh),
-
-    .MATRIX_COSH_DATA_IN_I_ENABLE(data_in_i_enable_matrix_cosh),
-    .MATRIX_COSH_DATA_IN_J_ENABLE(data_in_j_enable_matrix_cosh),
-    .MATRIX_COSH_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_cosh),
-    .MATRIX_COSH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_cosh),
-
-    // DATA
-    .MATRIX_COSH_SIZE_I_IN(size_i_in_matrix_cosh),
-    .MATRIX_COSH_SIZE_J_IN(size_j_in_matrix_cosh),
-    .MATRIX_COSH_DATA_IN(data_in_matrix_cosh),
-    .MATRIX_COSH_DATA_OUT(data_out_matrix_cosh),
-
-    // MATRIX SINH
-    // CONTROL
-    .MATRIX_SINH_START(start_matrix_sinh),
-    .MATRIX_SINH_READY(ready_matrix_sinh),
-
-    .MATRIX_SINH_DATA_IN_I_ENABLE(data_in_i_enable_matrix_sinh),
-    .MATRIX_SINH_DATA_IN_J_ENABLE(data_in_j_enable_matrix_sinh),
-    .MATRIX_SINH_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_sinh),
-    .MATRIX_SINH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_sinh),
-
-    // DATA
-    .MATRIX_SINH_SIZE_I_IN(size_i_in_matrix_sinh),
-    .MATRIX_SINH_SIZE_J_IN(size_j_in_matrix_sinh),
-    .MATRIX_SINH_DATA_IN(data_in_matrix_sinh),
-    .MATRIX_SINH_DATA_OUT(data_out_matrix_sinh),
-
-    // MATRIX TANH
-    // CONTROL
-    .MATRIX_TANH_START(start_matrix_tanh),
-    .MATRIX_TANH_READY(ready_matrix_tanh),
-
-    .MATRIX_TANH_DATA_IN_I_ENABLE(data_in_i_enable_matrix_tanh),
-    .MATRIX_TANH_DATA_IN_J_ENABLE(data_in_j_enable_matrix_tanh),
-    .MATRIX_TANH_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_tanh),
-    .MATRIX_TANH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_tanh),
-
-    // DATA
-    .MATRIX_TANH_SIZE_I_IN(size_i_in_matrix_tanh),
-    .MATRIX_TANH_SIZE_J_IN(size_j_in_matrix_tanh),
-    .MATRIX_TANH_DATA_IN(data_in_matrix_tanh),
-    .MATRIX_TANH_DATA_OUT(data_out_matrix_tanh),
 
     // MATRIX LOGISTIC
     // CONTROL
@@ -669,63 +315,6 @@ module ntm_function_testbench;
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
   ///////////////////////////////////////////////////////////////////////
-
-  // SCALAR COSH
-  ntm_scalar_cosh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_cosh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_cosh),
-    .READY(ready_scalar_cosh),
-
-    // DATA
-    .DATA_IN(data_in_scalar_cosh),
-    .DATA_OUT(data_out_scalar_cosh)
-  );
-
-  // SCALAR SINH
-  ntm_scalar_sinh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_sinh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_sinh),
-    .READY(ready_scalar_sinh),
-
-    // DATA
-    .DATA_IN(data_in_scalar_sinh),
-    .DATA_OUT(data_out_scalar_sinh)
-  );
-
-  // SCALAR TANH
-  ntm_scalar_tanh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_tanh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_tanh),
-    .READY(ready_scalar_tanh),
-
-    // DATA
-    .DATA_IN(data_in_scalar_tanh),
-    .DATA_OUT(data_out_scalar_tanh)
-  );
 
   // SCALAR LOGISTIC
   ntm_scalar_logistic_function #(
@@ -768,75 +357,6 @@ module ntm_function_testbench;
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
   ///////////////////////////////////////////////////////////////////////
-
-  // VECTOR COSH
-  ntm_vector_cosh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_cosh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_cosh),
-    .READY(ready_vector_cosh),
-
-    .DATA_IN_ENABLE(data_in_enable_vector_cosh),
-    .DATA_OUT_ENABLE(data_out_enable_vector_cosh),
-
-    // DATA
-    .SIZE_IN(size_in_vector_cosh),
-    .DATA_IN(data_in_vector_cosh),
-    .DATA_OUT(data_out_vector_cosh)
-  );
-
-  // VECTOR SINH
-  ntm_vector_sinh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_sinh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_sinh),
-    .READY(ready_vector_sinh),
-
-    .DATA_IN_ENABLE(data_in_enable_vector_sinh),
-    .DATA_OUT_ENABLE(data_out_enable_vector_sinh),
-
-    // DATA
-    .SIZE_IN(size_in_vector_sinh),
-    .DATA_IN(data_in_vector_sinh),
-    .DATA_OUT(data_out_vector_sinh)
-  );
-
-  // VECTOR TANH
-  ntm_vector_tanh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_tanh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_tanh),
-    .READY(ready_vector_tanh),
-
-    .DATA_IN_ENABLE(data_in_enable_vector_tanh),
-    .DATA_OUT_ENABLE(data_out_enable_vector_tanh),
-
-    // DATA
-    .SIZE_IN(size_in_vector_tanh),
-    .DATA_IN(data_in_vector_tanh),
-    .DATA_OUT(data_out_vector_tanh)
-  );
 
   // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
@@ -887,84 +407,6 @@ module ntm_function_testbench;
   ///////////////////////////////////////////////////////////////////////
   // MATRIX
   ///////////////////////////////////////////////////////////////////////
-
-  // MATRIX COSH
-  ntm_matrix_cosh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_cosh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_cosh),
-    .READY(ready_matrix_cosh),
-
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_cosh),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_cosh),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_cosh),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_cosh),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_cosh),
-    .SIZE_J_IN(size_j_in_matrix_cosh),
-    .DATA_IN(data_in_matrix_cosh),
-    .DATA_OUT(data_out_matrix_cosh)
-  );
-
-  // MATRIX SINH
-  ntm_matrix_sinh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_sinh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_sinh),
-    .READY(ready_matrix_sinh),
-
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_sinh),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_sinh),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_sinh),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_sinh),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_sinh),
-    .SIZE_J_IN(size_j_in_matrix_sinh),
-    .DATA_IN(data_in_matrix_sinh),
-    .DATA_OUT(data_out_matrix_sinh)
-  );
-
-  // MATRIX TANH
-  ntm_matrix_tanh_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_tanh_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_tanh),
-    .READY(ready_matrix_tanh),
-
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_tanh),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_tanh),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_tanh),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_tanh),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_tanh),
-    .SIZE_J_IN(size_j_in_matrix_tanh),
-    .DATA_IN(data_in_matrix_tanh),
-    .DATA_OUT(data_out_matrix_tanh)
-  );
 
   // MATRIX LOGISTIC
   ntm_matrix_logistic_function #(

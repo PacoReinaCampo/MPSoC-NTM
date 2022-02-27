@@ -50,53 +50,26 @@ module ntm_function_stimulus #(
   parameter R=64,
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_COSH_TEST=0,
-  parameter STIMULUS_NTM_SCALAR_SINH_TEST=0,
-  parameter STIMULUS_NTM_SCALAR_TANH_TEST=0,
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0,
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_SCALAR_COSH_CASE_0=0,
-  parameter STIMULUS_NTM_SCALAR_SINH_CASE_0=0,
-  parameter STIMULUS_NTM_SCALAR_TANH_CASE_0=0,
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0,
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_SCALAR_COSH_CASE_1=0,
-  parameter STIMULUS_NTM_SCALAR_SINH_CASE_1=0,
-  parameter STIMULUS_NTM_SCALAR_TANH_CASE_1=0,
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0,
   parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0,
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_COSH_TEST=0,
-  parameter STIMULUS_NTM_VECTOR_SINH_TEST=0,
-  parameter STIMULUS_NTM_VECTOR_TANH_TEST=0,
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0,
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_VECTOR_COSH_CASE_0=0,
-  parameter STIMULUS_NTM_VECTOR_SINH_CASE_0=0,
-  parameter STIMULUS_NTM_VECTOR_TANH_CASE_0=0,
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0,
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_VECTOR_COSH_CASE_1=0,
-  parameter STIMULUS_NTM_VECTOR_SINH_CASE_1=0,
-  parameter STIMULUS_NTM_VECTOR_TANH_CASE_1=0,
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0,
   parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0,
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_COSH_TEST=0,
-  parameter STIMULUS_NTM_MATRIX_SINH_TEST=0,
-  parameter STIMULUS_NTM_MATRIX_TANH_TEST=0,
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0,
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_MATRIX_COSH_CASE_0=0,
-  parameter STIMULUS_NTM_MATRIX_SINH_CASE_0=0,
-  parameter STIMULUS_NTM_MATRIX_TANH_CASE_0=0,
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0,
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_MATRIX_COSH_CASE_1=0,
-  parameter STIMULUS_NTM_MATRIX_SINH_CASE_1=0,
-  parameter STIMULUS_NTM_MATRIX_TANH_CASE_1=0,
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0,
   parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0
 )
@@ -109,33 +82,7 @@ module ntm_function_stimulus #(
     // STIMULUS SCALAR
     ///////////////////////////////////////////////////////////////////////
 
-    // SCALAR COSH
-    // CONTROL
-    output SCALAR_COSH_START,
-    input SCALAR_COSH_READY,
-
-    // DATA
-    output [DATA_SIZE-1:0] SCALAR_COSH_DATA_IN,
-    input [DATA_SIZE-1:0] SCALAR_COSH_DATA_OUT,
-
-    // SCALAR SINH
-    // CONTROL
-    output SCALAR_SINH_START,
-    input SCALAR_SINH_READY,
-
-    // DATA
-    output [DATA_SIZE-1:0] SCALAR_SINH_DATA_IN,
-    input [DATA_SIZE-1:0] SCALAR_SINH_DATA_OUT,
-
-    // SCALAR TANH
-    // CONTROL
-    output SCALAR_TANH_START,
-    input SCALAR_TANH_READY,
-
-    // DATA
-    output [DATA_SIZE-1:0] SCALAR_TANH_DATA_IN,
-    input [DATA_SIZE-1:0] SCALAR_TANH_DATA_OUT,
-
+    // SCALAR LOGISTIC
     // CONTROL
     output SCALAR_LOGISTIC_START,
     input SCALAR_LOGISTIC_READY,
@@ -156,45 +103,6 @@ module ntm_function_stimulus #(
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
     ///////////////////////////////////////////////////////////////////////
-
-    // VECTOR COSH
-    // CONTROL
-    output VECTOR_COSH_START,
-    input VECTOR_COSH_READY,
-
-    output VECTOR_COSH_DATA_IN_ENABLE,
-    input VECTOR_COSH_DATA_OUT_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] VECTOR_COSH_SIZE_IN,
-    output [DATA_SIZE-1:0] VECTOR_COSH_DATA_IN,
-    input [DATA_SIZE-1:0] VECTOR_COSH_DATA_OUT,
-
-    // VECTOR SINH
-    // CONTROL
-    output VECTOR_SINH_START,
-    input VECTOR_SINH_READY,
-
-    output VECTOR_SINH_DATA_IN_ENABLE,
-    input VECTOR_SINH_DATA_OUT_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] VECTOR_SINH_SIZE_IN,
-    output [DATA_SIZE-1:0] VECTOR_SINH_DATA_IN,
-    input [DATA_SIZE-1:0] VECTOR_SINH_DATA_OUT,
-
-    // VECTOR TANH
-    // CONTROL
-    output VECTOR_TANH_START,
-    input VECTOR_TANH_READY,
-
-    output VECTOR_TANH_DATA_IN_ENABLE,
-    input VECTOR_TANH_DATA_OUT_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] VECTOR_TANH_SIZE_IN,
-    output [DATA_SIZE-1:0] VECTOR_TANH_DATA_IN,
-    input [DATA_SIZE-1:0] VECTOR_TANH_DATA_OUT,
 
     // VECTOR LOGISTIC
     // CONTROL
@@ -225,54 +133,6 @@ module ntm_function_stimulus #(
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
     ///////////////////////////////////////////////////////////////////////
-
-    // MATRIX COSH
-    // CONTROL
-    output MATRIX_COSH_START,
-    input MATRIX_COSH_READY,
-
-    output MATRIX_COSH_DATA_IN_I_ENABLE,
-    output MATRIX_COSH_DATA_IN_J_ENABLE,
-    input MATRIX_COSH_DATA_OUT_I_ENABLE,
-    input MATRIX_COSH_DATA_OUT_J_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] MATRIX_COSH_SIZE_I_IN,
-    output [DATA_SIZE-1:0] MATRIX_COSH_SIZE_J_IN,
-    output [DATA_SIZE-1:0] MATRIX_COSH_DATA_IN,
-    input [DATA_SIZE-1:0] MATRIX_COSH_DATA_OUT,
-
-    // MATRIX SINH
-    // CONTROL
-    output MATRIX_SINH_START,
-    input MATRIX_SINH_READY,
-
-    output MATRIX_SINH_DATA_IN_I_ENABLE,
-    output MATRIX_SINH_DATA_IN_J_ENABLE,
-    input MATRIX_SINH_DATA_OUT_I_ENABLE,
-    input MATRIX_SINH_DATA_OUT_J_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] MATRIX_SINH_SIZE_I_IN,
-    output [DATA_SIZE-1:0] MATRIX_SINH_SIZE_J_IN,
-    output [DATA_SIZE-1:0] MATRIX_SINH_DATA_IN,
-    input [DATA_SIZE-1:0] MATRIX_SINH_DATA_OUT,
-
-    // MATRIX TANH
-    // CONTROL
-    output MATRIX_TANH_START,
-    input MATRIX_TANH_READY,
-
-    output MATRIX_TANH_DATA_IN_I_ENABLE,
-    output MATRIX_TANH_DATA_IN_J_ENABLE,
-    input MATRIX_TANH_DATA_OUT_I_ENABLE,
-    input MATRIX_TANH_DATA_OUT_J_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] MATRIX_TANH_SIZE_I_IN,
-    output [DATA_SIZE-1:0] MATRIX_TANH_SIZE_J_IN,
-    output [DATA_SIZE-1:0] MATRIX_TANH_DATA_IN,
-    input [DATA_SIZE-1:0] MATRIX_TANH_DATA_OUT,
 
     // MATRIX LOGISTIC
     // CONTROL
