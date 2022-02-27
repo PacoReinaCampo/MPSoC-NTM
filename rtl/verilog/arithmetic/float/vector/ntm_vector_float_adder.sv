@@ -106,14 +106,14 @@ module ntm_vector_float_adder #(
 
   // ADDER
   // CONTROL
-  reg start_scalar_adder;
-  wire ready_scalar_adder;
-  reg operation_scalar_adder;
+  reg start_scalar_float_adder;
+  wire ready_scalar_float_adder;
+  reg operation_scalar_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -155,7 +155,7 @@ module ntm_vector_float_adder #(
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_adder <= DATA_A_IN;
+            data_a_in_scalar_float_adder <= DATA_A_IN;
 
             // Control Internal
             data_a_in_adder_int <= 1'b1;
@@ -163,16 +163,16 @@ module ntm_vector_float_adder #(
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
 
-            data_b_in_scalar_adder <= DATA_B_IN;
+            data_b_in_scalar_float_adder <= DATA_B_IN;
             // Control Internal
             data_b_in_adder_int <= 1'b1;
           end
           if(data_a_in_adder_int == 1'b1 && data_b_in_adder_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_adder <= 1'b1;
+              start_scalar_float_adder <= 1'b1;
             end
-            operation_scalar_adder <= OPERATION;
+            operation_scalar_float_adder <= OPERATION;
             // Data Inputs
 
             // FSM Control
@@ -183,7 +183,7 @@ module ntm_vector_float_adder #(
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_adder == 1'b1) begin
+          if(ready_scalar_float_adder == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -199,14 +199,14 @@ module ntm_vector_float_adder #(
               adder_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_float_adder;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_adder <= 1'b0;
+            start_scalar_float_adder <= 1'b0;
             data_a_in_adder_int <= 1'b0;
             data_b_in_adder_int <= 1'b0;
           end
@@ -224,21 +224,21 @@ module ntm_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_adder(
+  scalar_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_scalar_float_adder),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder)
+    .DATA_A_IN(data_a_in_scalar_float_adder),
+    .DATA_B_IN(data_b_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
   );
 
 endmodule

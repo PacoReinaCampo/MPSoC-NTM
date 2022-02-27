@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_modular_inverter #(
+module ntm_tensor_modular_inverter #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )

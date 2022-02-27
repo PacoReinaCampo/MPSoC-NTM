@@ -102,19 +102,19 @@ module ntm_vector_softmax #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // MULTIPLICATION
+  // VECTOR MULTIPLIER
   // CONTROL
-  reg start_scalar_softmax;
-  wire ready_scalar_softmax;
+  reg start_vector_float_multiplier;
+  wire ready_vector_float_multiplier;
 
-  reg data_in_enable_scalar_softmax;
-  wire data_out_enable_scalar_softmax;
+  reg data_in_enable_vector_float_multiplier;
+  wire data_out_enable_vector_float_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_scalar_softmax;
-  reg [DATA_SIZE-1:0] length_in_scalar_softmax;
-  reg [DATA_SIZE-1:0] data_in_scalar_softmax;
-  wire [DATA_SIZE-1:0] data_out_scalar_softmax;
+  wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] length_in_vector_float_multiplier;
+  reg [DATA_SIZE-1:0] data_in_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -151,21 +151,21 @@ module ntm_vector_softmax #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_in_scalar_softmax <= DATA_IN;
+            data_in_vector_float_multiplier <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_softmax <= 1'b1;
+              start_vector_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_softmax <= 1'b1;
+            data_in_enable_vector_float_multiplier <= 1'b1;
 
             // FSM Control
             softmax_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_softmax <= 1'b0;
+            data_in_enable_vector_float_multiplier <= 1'b0;
           end
 
           // Control Outputs
@@ -175,29 +175,29 @@ module ntm_vector_softmax #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            length_in_scalar_softmax <= LENGTH_IN;
-            data_in_scalar_softmax <= DATA_IN;
+            length_in_vector_float_multiplier <= LENGTH_IN;
+            data_in_vector_float_multiplier <= DATA_IN;
 
             if(index_scalar_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_softmax <= 1'b1;
+              start_vector_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_softmax <= 1'b1;
+            data_in_enable_vector_float_multiplier <= 1'b1;
 
             // FSM Control
             softmax_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_softmax <= 1'b0;
+            data_in_enable_vector_float_multiplier <= 1'b0;
           end
 
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin // STEP 3
-          if(ready_scalar_softmax == 1'b1) begin
+          if(ready_vector_float_multiplier == 1'b1) begin
             if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -229,11 +229,11 @@ module ntm_vector_softmax #(
               softmax_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_softmax;
+            DATA_OUT <= data_out_vector_float_multiplier;
           end
           else begin
             // Control Internal
-            start_scalar_softmax <= 1'b0;
+            start_vector_float_multiplier <= 1'b0;
           end
         end
         default : begin
@@ -244,27 +244,27 @@ module ntm_vector_softmax #(
     end
   end
 
-  // SOFTMAX
-  ntm_scalar_softmax #(
+  // VECTOR MULTIPLIER
+  ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_softmax(
+  vector_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_softmax),
-    .READY(ready_scalar_softmax),
+    .START(start_vector_float_multiplier),
+    .READY(ready_vector_float_multiplier),
 
-    .DATA_IN_ENABLE(data_in_enable_scalar_softmax),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
+    .DATA_IN_ENABLE(data_in_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_softmax),
-    .DATA_IN(data_in_scalar_softmax),
-    .DATA_OUT(data_out_scalar_softmax)
+    .LENGTH_IN(length_in_vector_float_multiplier),
+    .DATA_IN(data_in_vector_float_multiplier),
+    .DATA_OUT(data_out_vector_float_multiplier)
   );
 
 endmodule

@@ -69,15 +69,15 @@ module ntm_scalar_oneplus_function #(
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_adder;
-  wire ready_scalar_adder;
+  wire start_scalar_float_adder;
+  wire ready_scalar_float_adder;
 
-  wire operation_scalar_adder;
+  wire operation_scalar_float_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   // SCALAR EXPONENTIATOR
   // CONTROL
@@ -93,25 +93,25 @@ module ntm_scalar_oneplus_function #(
   ///////////////////////////////////////////////////////////////////////
 
   // SCALAR ADDER
-  ntm_scalar_adder #(
+  ntm_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_adder(
+  scalar_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_scalar_float_adder),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder)
+    .DATA_A_IN(data_a_in_scalar_float_adder),
+    .DATA_B_IN(data_b_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
   );
 
   // SCALAR EXPONENTIATOR

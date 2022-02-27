@@ -105,22 +105,22 @@ module ntm_vector_cosine_similarity #(
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
   reg data_a_in_vector_cosine_similarity_int;
-  reg data_a_in_scalar_cosine_similarity_int;
+  reg data_a_in_scalar_float_multiplier_int;
   reg data_b_in_vector_cosine_similarity_int;
-  reg data_b_in_scalar_cosine_similarity_int;
+  reg data_b_in_scalar_float_multiplier_int;
 
-  // COSINE SIMILARITY
+  // SCALAR MULTIPLIER
   // CONTROL
-  reg start_scalar_cosine_similarity;
-  wire ready_scalar_cosine_similarity;
-  reg data_in_enable_scalar_cosine_similarity;
-  wire data_out_enable_scalar_cosine_similarity;
+  reg start_scalar_float_multiplier;
+  wire ready_scalar_float_multiplier;
+  reg data_in_enable_scalar_float_multiplier;
+  wire data_out_enable_scalar_float_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] length_in_scalar_cosine_similarity;
-  reg [DATA_SIZE-1:0] data_a_in_scalar_cosine_similarity;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_out_scalar_cosine_similarity;
+  reg [DATA_SIZE-1:0] length_in_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -140,9 +140,9 @@ module ntm_vector_cosine_similarity #(
       index_scalar_loop <= ZERO_DATA;
 
       data_a_in_vector_cosine_similarity_int <= 1'b0;
-      data_a_in_scalar_cosine_similarity_int <= 1'b0;
+      data_a_in_scalar_float_multiplier_int <= 1'b0;
       data_b_in_vector_cosine_similarity_int <= 1'b0;
-      data_b_in_scalar_cosine_similarity_int <= 1'b0;
+      data_b_in_scalar_float_multiplier_int <= 1'b0;
     end
     else begin
       case(cosine_similarity_ctrl_fsm_int)
@@ -163,14 +163,14 @@ module ntm_vector_cosine_similarity #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_A_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_cosine_similarity <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             // Control Internal
             data_a_in_vector_cosine_similarity_int <= 1'b1;
           end
           if(DATA_B_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_cosine_similarity <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             // Control Internal
             data_b_in_vector_cosine_similarity_int <= 1'b1;
@@ -178,20 +178,20 @@ module ntm_vector_cosine_similarity #(
           if(data_a_in_vector_cosine_similarity_int == 1'b1 && data_b_in_vector_cosine_similarity_int == 1'b1) begin
             // Control Internal
             if(index_vector_loop == ZERO_DATA) begin
-              start_scalar_cosine_similarity <= 1'b1;
+              start_scalar_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_cosine_similarity <= 1'b1;
+            data_in_enable_scalar_float_multiplier <= 1'b1;
 
             // Data Inputs
-            length_in_scalar_cosine_similarity <= LENGTH_IN;
+            length_in_scalar_float_multiplier <= LENGTH_IN;
 
             // FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_cosine_similarity <= 1'b0;
+            data_in_enable_scalar_float_multiplier <= 1'b0;
           end
 
           // Control Outputs
@@ -201,41 +201,41 @@ module ntm_vector_cosine_similarity #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_A_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_cosine_similarity <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_scalar_cosine_similarity_int <= 1'b1;
+            data_a_in_scalar_float_multiplier_int <= 1'b1;
           end
           if(DATA_B_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_cosine_similarity <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_scalar_cosine_similarity_int <= 1'b1;
+            data_b_in_scalar_float_multiplier_int <= 1'b1;
           end
-          if(data_a_in_scalar_cosine_similarity_int == 1'b1 && data_b_in_scalar_cosine_similarity_int == 1'b1) begin
+          if(data_a_in_scalar_float_multiplier_int == 1'b1 && data_b_in_scalar_float_multiplier_int == 1'b1) begin
             // Control Internal
             if(index_scalar_loop == ZERO_DATA) begin
-              start_scalar_cosine_similarity <= 1'b1;
+              start_scalar_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_cosine_similarity <= 1'b1;
+            data_in_enable_scalar_float_multiplier <= 1'b1;
 
             // Data Inputs
-            length_in_scalar_cosine_similarity <= LENGTH_IN;
+            length_in_scalar_float_multiplier <= LENGTH_IN;
 
             // FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_cosine_similarity <= 1'b0;
+            data_in_enable_scalar_float_multiplier <= 1'b0;
           end
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if(ready_scalar_cosine_similarity == 1'b1) begin
+          if(ready_scalar_float_multiplier == 1'b1) begin
             if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -267,16 +267,16 @@ module ntm_vector_cosine_similarity #(
               cosine_similarity_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_cosine_similarity;
+            DATA_OUT <= data_out_scalar_float_multiplier;
           end
           else begin
             // Control Internal
-            start_scalar_cosine_similarity <= 1'b0;
+            start_scalar_float_multiplier <= 1'b0;
 
             data_a_in_vector_cosine_similarity_int <= 1'b0;
-            data_a_in_scalar_cosine_similarity_int <= 1'b0;
+            data_a_in_scalar_float_multiplier_int <= 1'b0;
             data_b_in_vector_cosine_similarity_int <= 1'b0;
-            data_b_in_scalar_cosine_similarity_int <= 1'b0;
+            data_b_in_scalar_float_multiplier_int <= 1'b0;
           end
         end
         default : begin
@@ -287,27 +287,27 @@ module ntm_vector_cosine_similarity #(
     end
   end
 
-  // COSINE SIMILARITY
-  ntm_scalar_cosine_similarity #(
+  // SCALAR MULTIPLIER
+  ntm_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_cosine_similarity(
+  scalar_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_cosine_similarity),
-    .READY(ready_scalar_cosine_similarity),
-    .DATA_IN_ENABLE(data_in_enable_scalar_cosine_similarity),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_cosine_similarity),
+    .START(start_scalar_float_multiplier),
+    .READY(ready_scalar_float_multiplier),
+    .DATA_IN_ENABLE(data_in_enable_scalar_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_float_multiplier),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_cosine_similarity),
-    .DATA_A_IN(data_a_in_scalar_cosine_similarity),
-    .DATA_B_IN(data_b_in_scalar_cosine_similarity),
-    .DATA_OUT(data_out_scalar_cosine_similarity)
+    .LENGTH_IN(length_in_scalar_float_multiplier),
+    .DATA_A_IN(data_a_in_scalar_float_multiplier),
+    .DATA_B_IN(data_b_in_scalar_float_multiplier),
+    .DATA_OUT(data_out_scalar_float_multiplier)
   );
 
 endmodule

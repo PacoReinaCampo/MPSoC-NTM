@@ -96,99 +96,99 @@ module ntm_tensor_integration #(
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_adder;
-  wire ready_scalar_adder;
+  wire start_scalar_float_adder;
+  wire ready_scalar_float_adder;
 
-  wire operation_scalar_adder;
+  wire operation_scalar_float_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_multiplier;
-  wire ready_scalar_multiplier;
+  wire start_scalar_float_multiplier;
+  wire ready_scalar_float_multiplier;
   // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_divider;
-  wire ready_scalar_divider;
+  wire start_scalar_float_divider;
+  wire ready_scalar_float_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
-  wire [DATA_SIZE-1:0] data_out_scalar_divider;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_float_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
   // SCALAR ADDER
-  ntm_scalar_adder #(
+  ntm_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_scalar_adder_i(
+  scalar_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_scalar_float_adder),
+    .READY(ready_scalar_float_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_scalar_float_adder),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder)
+    .DATA_A_IN(data_a_in_scalar_float_adder),
+    .DATA_B_IN(data_b_in_scalar_float_adder),
+    .DATA_OUT(data_out_scalar_float_adder)
   );
 
   // SCALAR MULTIPLIER
-  ntm_scalar_multiplier #(
+  ntm_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_scalar_multiplier_i(
+  scalar_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_multiplier),
-    .READY(ready_scalar_multiplier),
+    .START(start_scalar_float_multiplier),
+    .READY(ready_scalar_float_multiplier),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_multiplier),
-    .DATA_B_IN(data_b_in_scalar_multiplier),
-    .DATA_OUT(data_out_scalar_multiplier)
+    .DATA_A_IN(data_a_in_scalar_float_multiplier),
+    .DATA_B_IN(data_b_in_scalar_float_multiplier),
+    .DATA_OUT(data_out_scalar_float_multiplier)
   );
 
   // SCALAR DIVIDER
-  ntm_scalar_divider #(
+  ntm_scalar_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_divider(
+  scalar_float_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_divider),
-    .READY(ready_scalar_divider),
+    .START(start_scalar_float_divider),
+    .READY(ready_scalar_float_divider),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_divider),
-    .DATA_B_IN(data_b_in_scalar_divider),
-    .DATA_OUT(data_out_scalar_divider)
+    .DATA_A_IN(data_a_in_scalar_float_divider),
+    .DATA_B_IN(data_b_in_scalar_float_divider),
+    .DATA_OUT(data_out_scalar_float_divider)
   );
 
 endmodule

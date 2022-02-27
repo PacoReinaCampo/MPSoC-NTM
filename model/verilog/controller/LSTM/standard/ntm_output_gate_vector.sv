@@ -150,20 +150,20 @@ module ntm_output_gate_vector #(
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_adder;
-  wire ready_vector_adder;
+  wire start_vector_float_adder;
+  wire ready_vector_float_adder;
 
-  wire operation_vector_adder;
+  wire operation_vector_float_adder;
 
-  wire data_a_in_enable_vector_adder;
-  wire data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  wire data_a_in_enable_vector_float_adder;
+  wire data_b_in_enable_vector_float_adder;
+  wire data_out_enable_vector_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_float_adder;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -238,9 +238,9 @@ module ntm_output_gate_vector #(
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Inputs
-          size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_product;
-          data_b_in_vector_adder <= B_IN;
+          size_in_vector_float_adder   <= FULL;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= B_IN;
         end
 
         MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
@@ -257,9 +257,9 @@ module ntm_output_gate_vector #(
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Inputs
-          size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_product;
-          data_b_in_vector_adder <= data_out_vector_adder;
+          size_in_vector_float_adder   <= FULL;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
         end
 
         MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 5
@@ -276,9 +276,9 @@ module ntm_output_gate_vector #(
         VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
 
           // Data Inputs
-          size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_product;
-          data_b_in_vector_adder <= data_out_vector_adder;
+          size_in_vector_float_adder   <= FULL;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
         end
 
         MATRIX_FOURTH_PRODUCT_STATE : begin  // STEP 7
@@ -295,9 +295,9 @@ module ntm_output_gate_vector #(
         VECTOR_FOURTH_ADDER_STATE : begin  // STEP 8
 
           // Data Inputs
-          size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_product;
-          data_b_in_vector_adder <= data_out_vector_adder;
+          size_in_vector_float_adder   <= FULL;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
         end
 
         VECTOR_LOGISTIC_STATE : begin  // STEP 9
@@ -319,30 +319,30 @@ module ntm_output_gate_vector #(
   end
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  ntm_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
+    .START(start_vector_float_adder),
+    .READY(ready_vector_float_adder),
 
-    .OPERATION(operation_vector_adder),
+    .OPERATION(operation_vector_float_adder),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .SIZE_IN(size_in_vector_float_adder),
+    .DATA_A_IN(data_a_in_vector_float_adder),
+    .DATA_B_IN(data_b_in_vector_float_adder),
+    .DATA_OUT(data_out_vector_float_adder)
   );
 
   // MATRIX PRODUCT

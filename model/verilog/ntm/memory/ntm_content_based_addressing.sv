@@ -110,18 +110,18 @@ module ntm_content_based_addressing #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_float_multiplier;
-  wire ready_vector_float_multiplier;
+  wire start_vector_multiplier;
+  wire ready_vector_multiplier;
 
-  wire data_a_in_enable_vector_float_multiplier;
-  wire data_b_in_enable_vector_float_multiplier;
-  wire data_out_enable_vector_float_multiplier;
+  wire data_a_in_enable_vector_multiplier;
+  wire data_b_in_enable_vector_multiplier;
+  wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_float_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_float_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_float_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
@@ -227,14 +227,14 @@ module ntm_content_based_addressing #(
   assign data_b_in_vector_cosine_similarity = M_IN;
 
   // VECTOR MULTIPLIER
-  assign size_in_vector_float_multiplier   = SIZE_I_IN;
-  assign data_a_in_vector_float_multiplier = data_out_vector_cosine_similarity;
-  assign data_b_in_vector_float_multiplier = BETA_IN;
+  assign size_in_vector_multiplier   = SIZE_I_IN;
+  assign data_a_in_vector_multiplier = data_out_vector_cosine_similarity;
+  assign data_b_in_vector_multiplier = BETA_IN;
 
   // VECTOR EXPONE_CONTROLNTIATOR
   assign size_in_vector_exponentiator_function   = SIZE_I_IN;
   assign data_a_in_vector_exponentiator_function = FULL;
-  assign data_b_in_vector_exponentiator_function = data_out_vector_float_multiplier;
+  assign data_b_in_vector_exponentiator_function = data_out_vector_multiplier;
 
   // VECTOR SOFTMAX
   assign size_in_vector_softmax   = SIZE_I_IN;
@@ -242,28 +242,28 @@ module ntm_content_based_addressing #(
   assign data_in_vector_softmax   = data_out_vector_exponentiator_function;
 
   // VECTOR MULTIPLIER
-  ntm_vector_float_multiplier #(
+  ntm_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_float_multiplier(
+  vector_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_float_multiplier),
-    .READY(ready_vector_float_multiplier),
+    .START(start_vector_multiplier),
+    .READY(ready_vector_multiplier),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_multiplier),
-    .DATA_A_IN(data_a_in_vector_float_multiplier),
-    .DATA_B_IN(data_b_in_vector_float_multiplier),
-    .DATA_OUT(data_out_vector_float_multiplier)
+    .SIZE_IN(size_in_vector_multiplier),
+    .DATA_A_IN(data_a_in_vector_multiplier),
+    .DATA_B_IN(data_b_in_vector_multiplier),
+    .DATA_OUT(data_out_vector_multiplier)
   );
 
   // VECTOR EXPONE_CONTROLNTIATOR
@@ -292,11 +292,11 @@ module ntm_content_based_addressing #(
   );
 
   // VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity_function #(
+  ntm_vector_cosine_similarity #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_cosine_similarity_function(
+  vector_cosine_similarity(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -321,11 +321,11 @@ module ntm_content_based_addressing #(
   );
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax_function #(
+  ntm_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_softmax_function(
+  vector_softmax(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

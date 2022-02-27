@@ -195,11 +195,11 @@ module dnc_memory_retention_vector #(
   end
 
   // VECTOR MULTIPLICATION
-  ntm_vector_multiplication_function #(
+  ntm_vector_multiplication #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_multiplication_function(
+  vector_multiplication(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

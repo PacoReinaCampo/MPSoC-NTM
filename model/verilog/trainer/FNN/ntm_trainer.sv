@@ -344,11 +344,11 @@ module ntm_trainer #(
   end
 
   // VECTOR SUMMATION
-  ntm_vector_summation_function #(
+  ntm_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_summation_function(
+  vector_summation(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -370,11 +370,11 @@ module ntm_trainer #(
   );
 
   // VECTOR DIFFERENTIATION
-  ntm_vector_differentiation_function #(
+  ntm_vector_differentiation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_differentiation_function(
+  vector_differentiation(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

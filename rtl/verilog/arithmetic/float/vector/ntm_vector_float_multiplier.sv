@@ -103,13 +103,13 @@ module ntm_vector_float_multiplier #(
 
   // MULTIPLIER
   // CONTROL
-  reg start_scalar_multiplier;
-  wire ready_scalar_multiplier;
+  reg start_scalar_float_multiplier;
+  wire ready_scalar_float_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -151,14 +151,14 @@ module ntm_vector_float_multiplier #(
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_multiplier <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             // Control Internal
             data_a_in_multiplier_int <= 1'b1;
           end
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_multiplier <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             // Control Internal
             data_b_in_multiplier_int <= 1'b1;
@@ -166,7 +166,7 @@ module ntm_vector_float_multiplier #(
           if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_multiplier <= 1'b1;
+              start_scalar_float_multiplier <= 1'b1;
             end
             // Data Inputs
 
@@ -178,7 +178,7 @@ module ntm_vector_float_multiplier #(
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_multiplier == 1'b1) begin
+          if(ready_scalar_float_multiplier == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -194,14 +194,14 @@ module ntm_vector_float_multiplier #(
               multiplier_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_multiplier;
+            DATA_OUT <= data_out_scalar_float_multiplier;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_multiplier <= 1'b0;
+            start_scalar_float_multiplier <= 1'b0;
             data_a_in_multiplier_int <= 1'b0;
             data_b_in_multiplier_int <= 1'b0;
           end
@@ -219,19 +219,19 @@ module ntm_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_multiplier(
+  scalar_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_multiplier),
-    .READY(ready_scalar_multiplier),
+    .START(start_scalar_float_multiplier),
+    .READY(ready_scalar_float_multiplier),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_multiplier),
-    .DATA_B_IN(data_b_in_scalar_multiplier),
-    .DATA_OUT(data_out_scalar_multiplier)
+    .DATA_A_IN(data_a_in_scalar_float_multiplier),
+    .DATA_B_IN(data_b_in_scalar_float_multiplier),
+    .DATA_OUT(data_out_scalar_float_multiplier)
   );
 
 endmodule

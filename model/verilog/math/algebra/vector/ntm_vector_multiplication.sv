@@ -100,18 +100,18 @@ module ntm_vector_multiplication #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // MULTIPLICATION
+  // SCALAR MULTIPLIER
   // CONTROL
-  reg start_scalar_multiplication;
-  wire ready_scalar_multiplication;
-  reg data_in_enable_scalar_multiplication;
-  wire data_out_enable_scalar_multiplication;
+  reg start_scalar_float_multiplier;
+  wire ready_scalar_float_multiplier;
+  reg data_in_enable_scalar_float_multiplier;
+  wire data_out_enable_scalar_float_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_scalar_multiplication;
-  reg [DATA_SIZE-1:0] length_in_scalar_multiplication;
-  reg [DATA_SIZE-1:0] data_in_scalar_multiplication;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplication;
+  wire [DATA_SIZE-1:0] size_in_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] length_in_scalar_float_multiplier;
+  reg [DATA_SIZE-1:0] data_in_scalar_float_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -148,21 +148,21 @@ module ntm_vector_multiplication #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            data_in_scalar_multiplication <= DATA_IN;
+            data_in_scalar_float_multiplier <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_multiplication <= 1'b1;
+              start_scalar_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_multiplication <= 1'b1;
+            data_in_enable_scalar_float_multiplier <= 1'b1;
 
             // FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_multiplication <= 1'b0;
+            data_in_enable_scalar_float_multiplier <= 1'b0;
           end
 
           // Control Outputs
@@ -172,29 +172,29 @@ module ntm_vector_multiplication #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            length_in_scalar_multiplication <= LENGTH_IN;
-            data_in_scalar_multiplication <= DATA_IN;
+            length_in_scalar_float_multiplier <= LENGTH_IN;
+            data_in_scalar_float_multiplier <= DATA_IN;
 
             if(index_scalar_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_multiplication <= 1'b1;
+              start_scalar_float_multiplier <= 1'b1;
             end
 
-            data_in_enable_scalar_multiplication <= 1'b1;
+            data_in_enable_scalar_float_multiplier <= 1'b1;
 
             // FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_scalar_multiplication <= 1'b0;
+            data_in_enable_scalar_float_multiplier <= 1'b0;
           end
 
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin // STEP 3
-          if(ready_scalar_multiplication == 1'b1) begin
+          if(ready_scalar_float_multiplier == 1'b1) begin
             if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
@@ -226,11 +226,11 @@ module ntm_vector_multiplication #(
               multiplication_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_multiplication;
+            DATA_OUT <= data_out_scalar_float_multiplier;
           end
           else begin
             // Control Internal
-            start_scalar_multiplication <= 1'b0;
+            start_scalar_float_multiplier <= 1'b0;
           end
         end
         default : begin
@@ -241,26 +241,26 @@ module ntm_vector_multiplication #(
     end
   end
 
-  // MULTIPLICATION
-  ntm_scalar_multiplication #(
+  // SCALAR MULTIPLIER
+  ntm_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_multiplication(
+  scalar_float_multiplier(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_multiplication),
-    .READY(ready_scalar_multiplication),
-    .DATA_IN_ENABLE(data_in_enable_scalar_multiplication),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
+    .START(start_scalar_float_multiplier),
+    .READY(ready_scalar_float_multiplier),
+    .DATA_IN_ENABLE(data_in_enable_scalar_float_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_float_multiplier),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_multiplication),
-    .DATA_IN(data_in_scalar_multiplication),
-    .DATA_OUT(data_out_scalar_multiplication)
+    .LENGTH_IN(length_in_scalar_float_multiplier),
+    .DATA_IN(data_in_scalar_float_multiplier),
+    .DATA_OUT(data_out_scalar_float_multiplier)
   );
 
 endmodule

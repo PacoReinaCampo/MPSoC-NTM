@@ -144,18 +144,18 @@ module ntm_interface_vector #(
 
   // SCALAR PRODUCT
   // CONTROL
-  wire start_scalar_product;
-  wire ready_scalar_product;
+  wire start_dot_product;
+  wire ready_dot_product;
 
-  wire data_a_in_enable_scalar_product;
-  wire data_b_in_enable_scalar_product;
-  wire data_out_enable_scalar_product;
+  wire data_a_in_enable_dot_product;
+  wire data_b_in_enable_dot_product;
+  wire data_out_enable_dot_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] length_in_scalar_product;
-  reg [DATA_SIZE-1:0] data_a_in_scalar_product;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_out_scalar_product;
+  reg [DATA_SIZE-1:0] length_in_dot_product;
+  reg [DATA_SIZE-1:0] data_a_in_dot_product;
+  reg [DATA_SIZE-1:0] data_b_in_dot_product;
+  wire [DATA_SIZE-1:0] data_out_dot_product;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -239,34 +239,34 @@ module ntm_interface_vector #(
         SCALAR_FIRST_PRODUCT_STATE : begin  // STEP 3
 
           // Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WBETA_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WBETA_IN;
+          data_b_in_dot_product <= H_IN;
 
           // Data Outputs
-          BETA_OUT <= data_out_scalar_product;
+          BETA_OUT <= data_out_dot_product;
         end
 
         SCALAR_SECOND_PRODUCT_STATE : begin  // STEP 4
 
           // Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WG_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WG_IN;
+          data_b_in_dot_product <= H_IN;
 
           // Data Outputs
-          G_OUT <= data_out_scalar_product;
+          G_OUT <= data_out_dot_product;
         end
 
         SCALAR_THIRD_PRODUCT_STATE : begin  // STEP 5
 
           // Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WGAMMA_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WGAMMA_IN;
+          data_b_in_dot_product <= H_IN;
 
           // Data Outputs
-          GAMMA_OUT <= data_out_scalar_product;
+          GAMMA_OUT <= data_out_dot_product;
         end
         default : begin
           // FSM Control
@@ -277,28 +277,28 @@ module ntm_interface_vector #(
   end
 
   // SCALAR PRODUCT
-  ntm_scalar_product #(
+  ntm_dot_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_product(
+  dot_product(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_product),
-    .READY(ready_scalar_product),
+    .START(start_dot_product),
+    .READY(ready_dot_product),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_product),
-    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_product),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_product),
+    .DATA_A_IN_ENABLE(data_a_in_enable_dot_product),
+    .DATA_B_IN_ENABLE(data_b_in_enable_dot_product),
+    .DATA_OUT_ENABLE(data_out_enable_dot_product),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_product),
-    .DATA_A_IN(data_a_in_scalar_product),
-    .DATA_B_IN(data_b_in_scalar_product),
-    .DATA_OUT(data_out_scalar_product)
+    .LENGTH_IN(length_in_dot_product),
+    .DATA_A_IN(data_a_in_dot_product),
+    .DATA_B_IN(data_b_in_dot_product),
+    .DATA_OUT(data_out_dot_product)
   );
 
   // MATRIX PRODUCT

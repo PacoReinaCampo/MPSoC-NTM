@@ -113,20 +113,20 @@ module ntm_matrix_float_adder #(
 
   // ADDER
   // CONTROL
-  reg start_vector_adder;
-  wire ready_vector_adder;
+  reg start_vector_float_adder;
+  wire ready_vector_float_adder;
 
-  reg operation_vector_adder;
+  reg operation_vector_float_adder;
 
-  reg data_a_in_enable_vector_adder;
-  reg data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
+  reg data_a_in_enable_vector_float_adder;
+  reg data_b_in_enable_vector_float_adder;
+  wire data_out_enable_vector_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_float_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_float_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_float_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -170,34 +170,34 @@ module ntm_matrix_float_adder #(
         INPUT_I_STATE : begin  // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_float_adder <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b1;
+            data_a_in_enable_vector_float_adder <= 1'b1;
             data_a_in_i_adder_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b0;
+            data_a_in_enable_vector_float_adder <= 1'b0;
           end
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_float_adder <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b1;
+            data_b_in_enable_vector_float_adder <= 1'b1;
             data_b_in_i_adder_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b0;
+            data_b_in_enable_vector_float_adder <= 1'b0;
           end
           if(data_a_in_i_adder_int == 1'b1 && data_b_in_i_adder_int == 1'b1) begin
             if(index_i_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_adder <= 1'b1;
+              start_vector_float_adder <= 1'b1;
 
-              operation_vector_adder <= OPERATION;
+              operation_vector_float_adder <= OPERATION;
             end
             // Data Inputs
 
@@ -211,37 +211,37 @@ module ntm_matrix_float_adder #(
         INPUT_J_STATE : begin  // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_float_adder <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b1;
+            data_a_in_enable_vector_float_adder <= 1'b1;
             data_a_in_j_adder_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_adder <= 1'b0;
+            data_a_in_enable_vector_float_adder <= 1'b0;
           end
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_float_adder <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b1;
+            data_b_in_enable_vector_float_adder <= 1'b1;
             data_b_in_j_adder_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_adder <= 1'b0;
+            data_b_in_enable_vector_float_adder <= 1'b0;
           end
           if((data_a_in_j_adder_int == 1'b1 && data_b_in_j_adder_int == 1'b1)) begin
             if(index_j_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_adder <= 1'b1;
+              start_vector_float_adder <= 1'b1;
 
-              operation_vector_adder <= OPERATION;
+              operation_vector_float_adder <= OPERATION;
             end
             // Data Inputs
-            size_in_vector_adder <= SIZE_J_IN;
+            size_in_vector_float_adder <= SIZE_J_IN;
 
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -250,7 +250,7 @@ module ntm_matrix_float_adder #(
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if((ready_vector_adder == 1'b1)) begin
+          if((ready_vector_float_adder == 1'b1)) begin
             if((index_i_loop == (SIZE_I_IN - ONE_CONTROL)) && (index_j_loop == (SIZE_J_IN - ONE_CONTROL))) begin
               // Control Outputs
               READY <= 1'b1;
@@ -282,11 +282,11 @@ module ntm_matrix_float_adder #(
               adder_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_adder;
+            DATA_OUT <= data_out_vector_float_adder;
           end
           else begin
             // Control Internal
-            start_vector_adder <= 1'b0;
+            start_vector_float_adder <= 1'b0;
 
             data_a_in_i_adder_int <= 1'b0;
             data_a_in_j_adder_int <= 1'b0;
@@ -303,29 +303,29 @@ module ntm_matrix_float_adder #(
   end
 
   // ADDER
-  ntm_vector_adder #(
+  ntm_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_adder(
+  vector_float_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
     // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
+    .START(start_vector_float_adder),
+    .READY(ready_vector_float_adder),
 
-    .OPERATION(operation_vector_adder),
+    .OPERATION(operation_vector_float_adder),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .SIZE_IN(size_in_vector_float_adder),
+    .DATA_A_IN(data_a_in_vector_float_adder),
+    .DATA_B_IN(data_b_in_vector_float_adder),
+    .DATA_OUT(data_out_vector_float_adder)
   );
 
 endmodule

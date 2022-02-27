@@ -223,11 +223,11 @@ module dnc_content_based_addressing #(
   );
 
   // VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity_function #(
+  ntm_vector_cosine_similarity #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_cosine_similarity_function(
+  vector_cosine_similarity(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -252,11 +252,11 @@ module dnc_content_based_addressing #(
   );
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax_function #(
+  ntm_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_softmax_function(
+  vector_softmax(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
