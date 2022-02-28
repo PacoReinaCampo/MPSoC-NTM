@@ -114,19 +114,15 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
   -----------------------------------------------------------------------
 
   type state_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_I_STATE,                -- STEP 1
-    INPUT_FIRST_J_STATE,                -- STEP 2
-    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
-    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 4
-    MATRIX_ADDER_I_STATE,               -- STEP 5
-    MATRIX_ADDER_J_STATE,               -- STEP 6
-    MATRIX_INVERSE_I_STATE,             -- STEP 7
-    MATRIX_INVERSE_J_STATE,             -- STEP 8
-    INPUT_SECOND_I_STATE,               -- STEP 9
-    INPUT_SECOND_J_STATE,               -- STEP 10
-    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
-    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 12
+    STARTER_STATE,             -- STEP 0
+    INPUT_FIRST_I_STATE,       -- STEP 1
+    INPUT_FIRST_J_STATE,       -- STEP 2
+    CLEAN_FIRST_I_STATE,       -- STEP 3
+    CLEAN_FIRST_J_STATE,       -- STEP 4
+    INPUT_SECOND_I_STATE,      -- STEP 9
+    INPUT_SECOND_J_STATE,      -- STEP 10
+    CLEAN_SECOND_I_STATE,      -- STEP 11
+    CLEAN_SECOND_J_STATE       -- STEP 12
     );
 
   -----------------------------------------------------------------------
@@ -324,71 +320,6 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
 
   signal data_d_out_matrix_feedforward : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX ADDER
-  -- CONTROL
-  signal start_matrix_float_adder : std_logic;
-  signal ready_matrix_float_adder : std_logic;
-
-  signal operation_matrix_float_adder : std_logic;
-
-  signal data_a_in_i_enable_matrix_float_adder : std_logic;
-  signal data_a_in_j_enable_matrix_float_adder : std_logic;
-  signal data_b_in_i_enable_matrix_float_adder : std_logic;
-  signal data_b_in_j_enable_matrix_float_adder : std_logic;
-
-  signal data_out_i_enable_matrix_float_adder : std_logic;
-  signal data_out_j_enable_matrix_float_adder : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX PRODUCT
-  -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
-
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
-
-  signal data_i_enable_matrix_product : std_logic;
-  signal data_j_enable_matrix_product : std_logic;
-
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
-
-  -- DATA
-  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX EXPONENTIATOR
-  -- CONTROL
-  signal start_matrix_exponentiator : std_logic;
-  signal ready_matrix_exponentiator : std_logic;
-
-  signal data_in_i_enable_matrix_exponentiator : std_logic;
-  signal data_in_j_enable_matrix_exponentiator : std_logic;
-
-  signal data_out_i_enable_matrix_exponentiator : std_logic;
-  signal data_out_j_enable_matrix_exponentiator : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -430,29 +361,21 @@ begin
             state_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>     -- STEP 1 D,K
+        when INPUT_FIRST_I_STATE =>  -- STEP 1 D,K
 
-        when INPUT_FIRST_J_STATE =>     -- STEP 2 D,K
+        when INPUT_FIRST_J_STATE =>  -- STEP 2 D,K
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3 (D·K)
+        when CLEAN_FIRST_I_STATE =>  -- STEP 3
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4 (D·K)
+        when CLEAN_FIRST_J_STATE =>  -- STEP 4
 
-        when MATRIX_ADDER_I_STATE =>    -- STEP 5 (I+D·K)
+        when INPUT_SECOND_I_STATE =>  -- STEP 5 C
 
-        when MATRIX_ADDER_J_STATE =>    -- STEP 6 (I+D·K)
+        when INPUT_SECOND_J_STATE =>  -- STEP 6 C
 
-        when MATRIX_INVERSE_I_STATE =>  -- STEP 7 inv(I+D·K)
+        when CLEAN_SECOND_I_STATE =>  -- STEP 7
 
-        when MATRIX_INVERSE_J_STATE =>  -- STEP 8 inv(I+D·K)
-
-        when INPUT_SECOND_I_STATE =>    -- STEP 9 C
-
-        when INPUT_SECOND_J_STATE =>    -- STEP 10 C
-
-        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11 inv(I+D·K)·C
-
-        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 12 inv(I+D·K)·C
+        when CLEAN_SECOND_J_STATE =>  -- STEP 8
 
         when others =>
           -- FSM Control
@@ -804,104 +727,6 @@ begin
       DATA_K_IN => data_k_in_matrix_feedforward,
 
       DATA_D_OUT => data_d_out_matrix_feedforward
-      );
-
-  -- MATRIX ADDER
-  matrix_float_adder : ntm_matrix_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_float_adder,
-      READY => ready_matrix_float_adder,
-
-      OPERATION => operation_matrix_float_adder,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_adder,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
-
-      -- DATA
-      SIZE_I_IN => size_i_in_matrix_float_adder,
-      SIZE_J_IN => size_j_in_matrix_float_adder,
-      DATA_A_IN => data_a_in_matrix_float_adder,
-      DATA_B_IN => data_b_in_matrix_float_adder,
-
-      DATA_OUT => data_out_matrix_float_adder
-      );
-
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
-
-      DATA_I_ENABLE => data_i_enable_matrix_product,
-      DATA_J_ENABLE => data_j_enable_matrix_product,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
-
-      -- DATA
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
-      );
-
-  -- MATRIX EXPONENTIATOR
-  matrix_exponentiator_function : ntm_matrix_exponentiator_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_exponentiator,
-      READY => ready_matrix_exponentiator,
-
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_exponentiator,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_exponentiator,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
-
-      -- DATA
-      SIZE_I_IN => size_i_in_matrix_exponentiator,
-      SIZE_J_IN => size_j_in_matrix_exponentiator,
-      DATA_IN   => data_in_matrix_exponentiator,
-      DATA_OUT  => data_out_matrix_exponentiator
       );
 
 end architecture;
