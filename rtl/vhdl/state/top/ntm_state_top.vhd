@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+
 use work.ntm_state_pkg.all;
 
 entity ntm_state_top is
@@ -84,7 +85,10 @@ entity ntm_state_top is
     DATA_K_I_ENABLE : out std_logic;
     DATA_K_J_ENABLE : out std_logic;
 
-    DATA_X_OUT_ENABLE : out std_logic;
+    DATA_U_IN_ENABLE : in std_logic;
+
+    DATA_U_ENABLE : out std_logic;
+
     DATA_Y_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -104,7 +108,8 @@ entity ntm_state_top is
 
     DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -152,7 +157,10 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_k_i_enable_vector_output : std_logic;
   signal data_k_j_enable_vector_output : std_logic;
 
-  signal data_x_out_enable_vector_output : std_logic;
+  signal data_u_in_enable_vector_output : std_logic;
+
+  signal data_u_enable_vector_output : std_logic;
+
   signal data_y_out_enable_vector_output : std_logic;
 
   -- DATA
@@ -172,7 +180,8 @@ architecture ntm_state_top_architecture of ntm_state_top is
 
   signal data_k_in_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_out_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal data_y_out_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -219,7 +228,10 @@ begin
   DATA_K_I_ENABLE <= data_k_i_enable_vector_output;
   DATA_K_J_ENABLE <= data_k_j_enable_vector_output;
 
-  data_x_out_enable_vector_output <= DATA_X_OUT_ENABLE;
+  data_u_in_enable_vector_output <= DATA_U_IN_ENABLE;
+
+  DATA_U_ENABLE <= data_u_enable_vector_output;
+
   data_y_out_enable_vector_output <= DATA_Y_OUT_ENABLE;
 
   -- DATA
@@ -239,7 +251,8 @@ begin
 
   data_k_in_vector_output <= DATA_K_IN;
 
-  DATA_X_OUT <= data_x_out_vector_output;
+  data_u_in_vector_output <= DATA_U_IN;
+
   DATA_Y_OUT <= data_y_out_vector_output;
 
   -- VECTOR OUTPUT
@@ -281,7 +294,10 @@ begin
       DATA_K_I_ENABLE => data_k_i_enable_vector_output,
       DATA_K_J_ENABLE => data_k_j_enable_vector_output,
 
-      DATA_X_OUT_ENABLE => data_x_out_enable_vector_output,
+      DATA_U_IN_ENABLE => data_u_in_enable_vector_output,
+
+      DATA_U_ENABLE => data_u_enable_vector_output,
+
       DATA_Y_OUT_ENABLE => data_y_out_enable_vector_output,
 
       -- DATA
@@ -301,7 +317,8 @@ begin
 
       DATA_K_IN => data_k_in_vector_output,
 
-      DATA_X_OUT => data_x_out_vector_output,
+      DATA_U_IN => data_u_in_vector_output,
+
       DATA_Y_OUT => data_y_out_vector_output
       );
 

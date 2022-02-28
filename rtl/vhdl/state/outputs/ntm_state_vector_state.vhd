@@ -84,6 +84,10 @@ entity ntm_state_vector_state is
     DATA_K_I_ENABLE : out std_logic;
     DATA_K_J_ENABLE : out std_logic;
 
+    DATA_U_IN_ENABLE : in std_logic;
+
+    DATA_U_ENABLE : out std_logic;
+
     DATA_X_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -102,6 +106,8 @@ entity ntm_state_vector_state is
     DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );

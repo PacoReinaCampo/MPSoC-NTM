@@ -84,7 +84,10 @@ entity ntm_state_vector_output is
     DATA_K_I_ENABLE : out std_logic;
     DATA_K_J_ENABLE : out std_logic;
 
-    DATA_X_OUT_ENABLE : out std_logic;
+    DATA_U_IN_ENABLE : out std_logic;
+
+    DATA_U_ENABLE : in std_logic;
+
     DATA_Y_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -104,7 +107,8 @@ entity ntm_state_vector_output is
 
     DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -392,7 +396,6 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_X_OUT <= ZERO_DATA;
       DATA_Y_OUT <= ZERO_DATA;
 
       -- Control Outputs

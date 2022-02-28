@@ -188,7 +188,10 @@ package ntm_state_top_pkg is
       NTM_STATE_TOP_DATA_K_I_ENABLE : in std_logic;
       NTM_STATE_TOP_DATA_K_J_ENABLE : in std_logic;
 
-      NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
+      NTM_STATE_TOP_DATA_U_IN_ENABLE : out std_logic;
+
+      NTM_STATE_TOP_DATA_U_ENABLE : in std_logic;
+
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
@@ -208,7 +211,8 @@ package ntm_state_top_pkg is
 
       NTM_STATE_TOP_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
       NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

@@ -93,7 +93,10 @@ architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
   signal data_k_i_enable_state_top : std_logic;
   signal data_k_j_enable_state_top : std_logic;
 
-  signal data_x_out_enable_state_top : std_logic;
+  signal data_u_in_enable_state_top : std_logic;
+
+  signal data_u_enable_state_top : std_logic;
+
   signal data_y_out_enable_state_top : std_logic;
 
   -- DATA
@@ -113,7 +116,8 @@ architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
 
   signal data_k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal data_y_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -160,7 +164,10 @@ begin
       NTM_STATE_TOP_DATA_K_I_ENABLE => data_k_i_enable_state_top,
       NTM_STATE_TOP_DATA_K_J_ENABLE => data_k_j_enable_state_top,
 
-      NTM_STATE_TOP_DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
+      NTM_STATE_TOP_DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+
+      NTM_STATE_TOP_DATA_U_ENABLE => data_u_enable_state_top,
+
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
       -- DATA
@@ -180,7 +187,8 @@ begin
 
       NTM_STATE_TOP_DATA_K_IN => data_k_in_top,
 
-      NTM_STATE_TOP_DATA_X_OUT => data_x_out_state_top,
+      NTM_STATE_TOP_DATA_U_IN => data_u_in_state_top,
+
       NTM_STATE_TOP_DATA_Y_OUT => data_y_out_state_top
       );
 
@@ -215,7 +223,10 @@ begin
         DATA_K_I_ENABLE => data_k_i_enable_state_top,
         DATA_K_J_ENABLE => data_k_j_enable_state_top,
 
-        DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
+        DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+
+        DATA_U_ENABLE => data_u_enable_state_top,
+
         DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
         -- DATA
@@ -235,7 +246,8 @@ begin
 
         DATA_K_IN => data_k_in_top,
 
-        DATA_X_OUT => data_x_out_state_top,
+        DATA_U_IN => data_u_in_state_top,
+
         DATA_Y_OUT => data_y_out_state_top
         );
   end generate ntm_state_top_test;
