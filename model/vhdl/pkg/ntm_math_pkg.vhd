@@ -2693,7 +2693,7 @@ package body ntm_math_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(scalar_input))))));
+    scalar_output := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(scalar_input))))));
 
     return scalar_output;
   end function function_scalar_logistic;
@@ -2706,7 +2706,7 @@ package body ntm_math_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_input))))));
+    scalar_output := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(scalar_input))))));
 
     return scalar_output;
   end function function_scalar_oneplus;
@@ -2722,7 +2722,7 @@ package body ntm_math_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_input(i)))))));
+      vector_output(i) := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(vector_input(i)))))));
     end loop;
 
     return vector_output;
@@ -2738,7 +2738,7 @@ package body ntm_math_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_input(i)))))));
+      vector_output(i) := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(vector_input(i)))))));
     end loop;
 
     return vector_output;
@@ -2757,7 +2757,7 @@ package body ntm_math_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(matrix_input(i, j)))))));
+        matrix_output(i, j) := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(matrix_input(i, j)))))));
       end loop;
     end loop;
 
@@ -2776,7 +2776,7 @@ package body ntm_math_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(matrix_input(i, j)))))));
+        matrix_output(i, j) := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(matrix_input(i, j)))))));
       end loop;
     end loop;
 

@@ -66,4 +66,298 @@ package ntm_math_pkg;
   // Functions
   ///////////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////////
+  // MATH - SERIES
+  ///////////////////////////////////////////////////////////////////////
+
+  // SCALAR
+  function [DATA_SIZE-1:0] function_scalar_cosh;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_cosh = $cosh(scalar_input);
+    end
+  endfunction
+
+  function [DATA_SIZE-1:0] function_scalar_exponentiator;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_exponentiator = $exp(scalar_input);
+    end
+  endfunction
+
+  function [DATA_SIZE-1:0] function_scalar_logarithm;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_logarithm = $ln(scalar_input);
+    end
+  endfunction
+
+  function [DATA_SIZE-1:0] function_scalar_sinh;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_sinh = $sinh(scalar_input);
+    end
+  endfunction
+
+  function [DATA_SIZE-1:0] function_scalar_tanh;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_tanh = $tanh(scalar_input);
+    end
+  endfunction
+
+  // VECTOR
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_cosh;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_cosh[i] = $cosh(vector_input[i]);
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_exponentiator;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_exponentiator[i] = $exp(vector_input[i]);
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_logarithm;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_logarithm[i] = $ln(vector_input[i]);
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_sinh;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_sinh[i] = $sinh(vector_input[i]);
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_tanh;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_tanh[i] = $tanh(vector_input[i]);
+      end
+    end
+  endfunction
+
+  // MATRIX
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_cosh;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_cosh[i][j] = $cosh(matrix_input[i][j]);
+        end
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_exponentiator;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_exponentiator[i][j] = $exp(matrix_input[i][j]);
+        end
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_logarithm;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_logarithm[i][j] = $ln(matrix_input[i][j]);
+        end
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_sinh;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_sinh[i][j] = $sinh(matrix_input[i][j]);
+        end
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_tanh;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_tanh[i][j] = $tanh(matrix_input[i][j]);
+        end
+      end
+    end
+  endfunction
+
+  ///////////////////////////////////////////////////////////////////////
+  // MATH - FUNCTION
+  ///////////////////////////////////////////////////////////////////////
+
+  // SCALAR
+  function [DATA_SIZE-1:0] function_scalar_logistic;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_logistic = 1.0/(1.0+1.0/$exp(scalar_input));
+    end
+  endfunction
+
+  function [DATA_SIZE-1:0] function_scalar_oneplus;
+    input [DATA_SIZE-1:0] scalar_input;
+
+    begin
+      function_scalar_oneplus = 1.0+$ln(1.0+$exp(scalar_input));
+    end
+  endfunction
+
+  // VECTOR
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_logistic;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_logistic[i] = 1.0/(1.0+1.0/$exp(vector_input[i]));
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_vector_oneplus;
+    input [DATA_SIZE-1:0] SIZE_IN;
+
+    input [CONTROL_SIZE-1:0][DATA_SIZE-1:0] vector_input;
+
+    reg [CONTROL_SIZE-1:0] i;
+
+    begin
+      for(i = 0; i < SIZE_IN; i = i + 1) begin
+        function_vector_oneplus[i] = 1.0+$ln(1.0+$exp(vector_input[i]));
+      end
+    end
+  endfunction
+
+  // MATRIX
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_logistic;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_logistic[i][j] = 1.0/(1.0+1.0/$exp(matrix_input[i][j]));
+        end
+      end
+    end
+  endfunction
+
+  function [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] function_matrix_oneplus;
+    input [DATA_SIZE-1:0] SIZE_I_IN;
+    input [DATA_SIZE-1:0] SIZE_J_IN;
+
+    input [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0][DATA_SIZE-1:0] matrix_input;
+
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] i;
+    reg [CONTROL_SIZE-1:0][CONTROL_SIZE-1:0] j;
+
+    begin
+      for(i = 0; i < SIZE_I_IN; i = i + 1) begin
+        for(j = 0; j < SIZE_J_IN; j = j + 1) begin
+          function_matrix_oneplus[i][j] = 1.0+$ln(1.0+$exp(matrix_input[i][j]));
+        end
+      end
+    end
+  endfunction
+
 endpackage
