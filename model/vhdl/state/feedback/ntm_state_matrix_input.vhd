@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+
 use work.ntm_state_pkg.all;
 
 entity ntm_state_matrix_input is
@@ -414,7 +415,6 @@ begin
 
             DATA_B_OUT_I_ENABLE <= '1';
             DATA_B_OUT_J_ENABLE <= '1';
-
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;

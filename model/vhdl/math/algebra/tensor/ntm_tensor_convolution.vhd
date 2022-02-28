@@ -42,11 +42,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use ieee.math_real.all;
-use ieee.float_pkg.all;
-
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+
+use ieee.math_real.all;
+use ieee.float_pkg.all;
 
 entity ntm_tensor_convolution is
   generic (
@@ -121,21 +121,6 @@ architecture ntm_tensor_convolution_architecture of ntm_tensor_convolution is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
-
-  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
-  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
-  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
-  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
-
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
-
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals

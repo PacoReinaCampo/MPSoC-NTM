@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+
 use work.ntm_state_pkg.all;
 
 entity ntm_state_matrix_state is

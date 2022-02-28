@@ -665,13 +665,6 @@ package body ntm_state_pkg is
     variable matrix_adder          : matrix_buffer;
     variable matrix_inverse        : matrix_buffer;
 
-    variable matrix_in_int : matrix_buffer;
-
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
     variable matrix_a_output : matrix_buffer;
 
   begin
@@ -696,35 +689,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    matrix_in_int := matrix_adder;
+    matrix_inverse := function_matrix_inverse (
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
 
-    for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      if (matrix_in_int(m, m) = ZERO_DATA) then
-        for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-          if (matrix_in_int(i, m) /= ZERO_DATA) then
-            for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-              data_interchange_in_int(j)  := matrix_in_int(m, j);
-              data_interchange_out_int(j) := matrix_inverse(m, j);
-
-              matrix_in_int(m, j)  := matrix_in_int(i, j);
-              matrix_inverse(m, j) := matrix_inverse(i, j);
-
-              matrix_in_int(i, j)  := data_interchange_in_int(j);
-              matrix_inverse(i, j) := data_interchange_out_int(j);
-            end loop;
-          end if;
-        end loop;
-      end if;
-
-      for i in m+1 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
-
-        for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
-          matrix_inverse(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_inverse(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_input => matrix_adder
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
@@ -785,13 +755,6 @@ package body ntm_state_pkg is
     variable matrix_adder          : matrix_buffer;
     variable matrix_inverse        : matrix_buffer;
 
-    variable matrix_in_int : matrix_buffer;
-
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
     variable matrix_b_output : matrix_buffer;
 
   begin
@@ -816,35 +779,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    matrix_in_int := matrix_adder;
+    matrix_inverse := function_matrix_inverse (
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
 
-    for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      if (matrix_in_int(m, m) = ZERO_DATA) then
-        for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-          if (matrix_in_int(i, m) /= ZERO_DATA) then
-            for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-              data_interchange_in_int(j)  := matrix_in_int(m, j);
-              data_interchange_out_int(j) := matrix_inverse(m, j);
-
-              matrix_in_int(m, j)  := matrix_in_int(i, j);
-              matrix_inverse(m, j) := matrix_inverse(i, j);
-
-              matrix_in_int(i, j)  := data_interchange_in_int(j);
-              matrix_inverse(i, j) := data_interchange_out_int(j);
-            end loop;
-          end if;
-        end loop;
-      end if;
-
-      for i in m+1 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
-
-        for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
-          matrix_inverse(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_inverse(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_input => matrix_adder
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
@@ -904,13 +844,6 @@ package body ntm_state_pkg is
     variable matrix_adder   : matrix_buffer;
     variable matrix_inverse : matrix_buffer;
 
-    variable matrix_in_int : matrix_buffer;
-
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
     variable matrix_c_output : matrix_buffer;
 
   begin
@@ -935,35 +868,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    matrix_in_int := matrix_adder;
+    matrix_inverse := function_matrix_inverse (
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
 
-    for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      if (matrix_in_int(m, m) = ZERO_DATA) then
-        for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-          if (matrix_in_int(i, m) /= ZERO_DATA) then
-            for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-              data_interchange_in_int(j)  := matrix_in_int(m, j);
-              data_interchange_out_int(j) := matrix_inverse(m, j);
-
-              matrix_in_int(m, j)  := matrix_in_int(i, j);
-              matrix_inverse(m, j) := matrix_inverse(i, j);
-
-              matrix_in_int(i, j)  := data_interchange_in_int(j);
-              matrix_inverse(i, j) := data_interchange_out_int(j);
-            end loop;
-          end if;
-        end loop;
-      end if;
-
-      for i in m+1 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
-
-        for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
-          matrix_inverse(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_inverse(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_input => matrix_adder
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
@@ -994,13 +904,6 @@ package body ntm_state_pkg is
     variable matrix_adder   : matrix_buffer;
     variable matrix_inverse : matrix_buffer;
 
-    variable matrix_in_int : matrix_buffer;
-
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
     variable matrix_d_output : matrix_buffer;
 
   begin
@@ -1025,35 +928,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    matrix_in_int := matrix_adder;
+    matrix_adder := function_matrix_inverse (
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_D_J_IN,
 
-    for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      if (matrix_in_int(m, m) = ZERO_DATA) then
-        for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-          if (matrix_in_int(i, m) /= ZERO_DATA) then
-            for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-              data_interchange_in_int(j)  := matrix_in_int(m, j);
-              data_interchange_out_int(j) := matrix_inverse(m, j);
-
-              matrix_in_int(m, j)  := matrix_in_int(i, j);
-              matrix_inverse(m, j) := matrix_inverse(i, j);
-
-              matrix_in_int(i, j)  := data_interchange_in_int(j);
-              matrix_inverse(i, j) := data_interchange_out_int(j);
-            end loop;
-          end if;
-        end loop;
-      end if;
-
-      for i in m+1 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
-
-        for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
-          matrix_inverse(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_inverse(i, j)))-(to_real(to_float(data_quotient_int))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_input => matrix_adder
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
