@@ -377,7 +377,7 @@ begin
               );
 
             -- FSM Control
-            state_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
+            state_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
           end if;
 
           -- Control Outputs
@@ -392,9 +392,9 @@ begin
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-              state_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
+              state_ctrl_fsm_int <= CLEAN_SECOND_I_STATE;
             else
-              state_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
+              state_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
             end if;
           end if;
 
