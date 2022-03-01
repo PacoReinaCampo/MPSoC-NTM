@@ -195,6 +195,8 @@ package ntm_state_top_pkg is
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_STATE_TOP_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_STATE_TOP_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_STATE_TOP_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_STATE_TOP_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

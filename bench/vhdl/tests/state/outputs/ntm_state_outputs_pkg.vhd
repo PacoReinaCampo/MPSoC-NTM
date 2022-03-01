@@ -209,6 +209,8 @@ package ntm_state_outputs_pkg is
       NTM_VECTOR_STATE_DATA_X_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_VECTOR_STATE_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_VECTOR_STATE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_STATE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_STATE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -265,6 +267,8 @@ package ntm_state_outputs_pkg is
       NTM_VECTOR_OUTPUT_DATA_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_VECTOR_OUTPUT_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_VECTOR_OUTPUT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_OUTPUT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_OUTPUT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

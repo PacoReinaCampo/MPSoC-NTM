@@ -92,6 +92,8 @@ entity ntm_state_top is
     DATA_Y_OUT_ENABLE : out std_logic;
 
     -- DATA
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
     SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -164,6 +166,8 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_y_out_enable_vector_output : std_logic;
 
   -- DATA
+  signal length_k_in_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal size_a_in_i_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_in_j_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_in_i_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -235,6 +239,8 @@ begin
   data_y_out_enable_vector_output <= DATA_Y_OUT_ENABLE;
 
   -- DATA
+  length_k_in_vector_output <= LENGTH_K_IN;
+
   size_a_in_i_vector_output <= SIZE_A_I_IN;
   size_a_in_j_vector_output <= SIZE_A_J_IN;
   size_b_in_i_vector_output <= SIZE_B_I_IN;
@@ -301,6 +307,8 @@ begin
       DATA_Y_OUT_ENABLE => data_y_out_enable_vector_output,
 
       -- DATA
+      LENGTH_K_IN => length_k_in_vector_output,
+
       SIZE_A_I_IN => size_a_in_i_vector_output,
       SIZE_A_J_IN => size_a_in_j_vector_output,
       SIZE_B_I_IN => size_b_in_i_vector_output,

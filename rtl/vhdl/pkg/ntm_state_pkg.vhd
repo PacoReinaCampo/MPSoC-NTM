@@ -101,6 +101,8 @@ package ntm_state_pkg is
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -172,6 +174,8 @@ package ntm_state_pkg is
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -239,6 +243,8 @@ package ntm_state_pkg is
       DATA_X_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

@@ -107,6 +107,8 @@ package ntm_state_pkg is
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -178,6 +180,8 @@ package ntm_state_pkg is
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -245,6 +249,8 @@ package ntm_state_pkg is
       DATA_X_OUT_ENABLE : out std_logic;
 
       -- DATA
+      LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -563,7 +569,7 @@ package ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer;
 
   function function_state_vector_state (
@@ -588,7 +594,7 @@ package ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer;
 
   -----------------------------------------------------------------------
@@ -617,7 +623,7 @@ package ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer;
 
 end ntm_state_pkg;
@@ -687,21 +693,25 @@ package body ntm_state_pkg is
 
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_K_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_d_input(i, m)))*to_real(to_float(matrix_data_k_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_input,
+      matrix_b_input => matrix_data_k_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_adder := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
+
+      matrix_a_input => MATRIX_IDENTITY,
+      matrix_b_input => matrix_first_product
+      );
 
     matrix_inverse := function_matrix_inverse (
       SIZE_I_IN => SIZE_D_I_IN,
@@ -710,41 +720,45 @@ package body ntm_state_pkg is
       matrix_input => matrix_adder
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_K_I_IN,
+      SIZE_A_J_IN => SIZE_K_J_IN,
+      SIZE_B_I_IN => SIZE_K_J_IN,
+      SIZE_B_J_IN => SIZE_D_I_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_k_input(i, m)))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_k_input,
+      matrix_b_input => matrix_inverse
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_second_product(i, j) := ZERO_DATA;
+    matrix_second_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_B_I_IN,
+      SIZE_A_J_IN => SIZE_B_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_K_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_second_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_second_product(i, j))) + (to_real(to_float(matrix_data_k_input(i, m)))*to_real(to_float(matrix_first_product(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_b_input,
+      matrix_b_input => matrix_first_product
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_B_I_IN,
+      SIZE_A_J_IN => SIZE_K_J_IN,
+      SIZE_B_I_IN => SIZE_C_I_IN,
+      SIZE_B_J_IN => SIZE_C_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_second_product(i, m)))*to_real(to_float(matrix_data_c_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_second_product,
+      matrix_b_input => matrix_data_c_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-        matrix_a_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_input(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_a_output := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_B_I_IN,
+      SIZE_J_IN => SIZE_C_J_IN,
+
+      matrix_a_input => matrix_data_a_input,
+      matrix_b_input => matrix_first_product
+      );
 
     return matrix_a_output;
   end function function_state_matrix_state;
@@ -777,21 +791,25 @@ package body ntm_state_pkg is
 
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_K_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_d_input(i, m)))*to_real(to_float(matrix_data_k_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_input,
+      matrix_b_input => matrix_data_k_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_adder := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
+
+      matrix_a_input => MATRIX_IDENTITY,
+      matrix_b_input => matrix_first_product
+      );
 
     matrix_inverse := function_matrix_inverse (
       SIZE_I_IN => SIZE_D_I_IN,
@@ -800,41 +818,45 @@ package body ntm_state_pkg is
       matrix_input => matrix_adder
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_K_I_IN,
+      SIZE_A_J_IN => SIZE_K_J_IN,
+      SIZE_B_I_IN => SIZE_K_J_IN,
+      SIZE_B_J_IN => SIZE_D_I_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_k_input(i, m)))*to_real(to_float(matrix_inverse(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_k_input,
+      matrix_b_input => matrix_inverse
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        matrix_second_product(i, j) := ZERO_DATA;
+    matrix_second_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_K_I_IN,
+      SIZE_A_J_IN => SIZE_K_J_IN,
+      SIZE_B_I_IN => SIZE_D_I_IN,
+      SIZE_B_J_IN => SIZE_D_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_second_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_second_product(i, j))) + (to_real(to_float(matrix_first_product(i, m)))*to_real(to_float(matrix_data_d_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_first_product,
+      matrix_b_input => matrix_data_d_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_second_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_adder := function_matrix_float_adder (
+      OPERATION => '0',
 
-    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        matrix_b_output(i, j) := ZERO_DATA;
+      SIZE_I_IN => SIZE_K_I_IN,
+      SIZE_J_IN => SIZE_D_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-          matrix_b_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_second_product(i, j))) + (to_real(to_float(matrix_adder(i, m)))*to_real(to_float(matrix_data_b_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => MATRIX_IDENTITY,
+      matrix_b_input => matrix_second_product
+      );
+
+    matrix_b_output := function_matrix_product (
+      SIZE_A_I_IN => SIZE_B_I_IN,
+      SIZE_A_J_IN => SIZE_B_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+
+      matrix_a_input => matrix_data_b_input,
+      matrix_b_input => matrix_adder
+      );
 
     return matrix_b_output;
   end function function_state_matrix_input;
@@ -866,21 +888,25 @@ package body ntm_state_pkg is
 
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_product(i, j) := ZERO_DATA;
+    matrix_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_K_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-          matrix_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_product(i, j))) + (to_real(to_float(matrix_data_d_input(i, m)))*to_real(to_float(matrix_data_k_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_input,
+      matrix_b_input => matrix_data_k_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_adder := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
+
+      matrix_a_input => MATRIX_IDENTITY,
+      matrix_b_input => matrix_product
+      );
 
     matrix_inverse := function_matrix_inverse (
       SIZE_I_IN => SIZE_D_I_IN,
@@ -889,15 +915,15 @@ package body ntm_state_pkg is
       matrix_input => matrix_adder
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        matrix_c_output(i, j) := ZERO_DATA;
+    matrix_c_output := function_matrix_product (
+      SIZE_A_I_IN => SIZE_K_J_IN,
+      SIZE_A_J_IN => SIZE_D_I_IN,
+      SIZE_B_I_IN => SIZE_C_I_IN,
+      SIZE_B_J_IN => SIZE_C_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_c_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_c_output(i, j))) + (to_real(to_float(matrix_inverse(i, m)))*to_real(to_float(matrix_data_c_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_inverse,
+      matrix_b_input => matrix_data_c_input
+      );
 
     return matrix_c_output;
   end function function_state_matrix_output;
@@ -926,38 +952,42 @@ package body ntm_state_pkg is
 
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_product(i, j) := ZERO_DATA;
+    matrix_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_I_IN => SIZE_K_I_IN,
+      SIZE_B_J_IN => SIZE_K_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-          matrix_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_product(i, j))) + (to_real(to_float(matrix_data_d_input(i, m)))*to_real(to_float(matrix_data_k_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_input,
+      matrix_b_input => matrix_data_k_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_product(i, j)))));
-      end loop;
-    end loop;
+    matrix_adder := function_matrix_float_adder (
+      OPERATION => '0',
 
-    matrix_adder := function_matrix_inverse (
       SIZE_I_IN => SIZE_D_I_IN,
-      SIZE_J_IN => SIZE_D_J_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
+
+      matrix_a_input => MATRIX_IDENTITY,
+      matrix_b_input => matrix_product
+      );
+
+    matrix_inverse := function_matrix_inverse (
+      SIZE_I_IN => SIZE_D_I_IN,
+      SIZE_J_IN => SIZE_K_J_IN,
 
       matrix_input => matrix_adder
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        matrix_d_output(i, j) := ZERO_DATA;
+    matrix_d_output := function_matrix_product (
+      SIZE_A_I_IN => SIZE_K_J_IN,
+      SIZE_A_J_IN => SIZE_D_I_IN,
+      SIZE_B_I_IN => SIZE_D_I_IN,
+      SIZE_B_J_IN => SIZE_D_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
-          matrix_d_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_d_output(i, j))) + (to_real(to_float(matrix_inverse(i, m)))*to_real(to_float(matrix_data_d_input(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_inverse,
+      matrix_b_input => matrix_data_d_input
+      );
 
     return matrix_d_output;
   end function function_state_matrix_feedforward;
@@ -988,7 +1018,7 @@ package body ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer is
 
     variable matrix_data_a_int : matrix_buffer;
@@ -1083,15 +1113,15 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        matrix_first_product(i, j) := ZERO_DATA;
+    matrix_first_product := function_matrix_product (
+      SIZE_A_I_IN => SIZE_C_I_IN,
+      SIZE_A_J_IN => SIZE_C_J_IN,
+      SIZE_B_I_IN => SIZE_A_I_IN,
+      SIZE_B_J_IN => SIZE_A_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_c_int(i, m)))*to_real(to_float(matrix_exponent(m, j))))));
-        end loop;
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_c_int,
+      matrix_b_input => matrix_exponent
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
       vector_product(i) := ZERO_DATA;
@@ -1113,31 +1143,31 @@ package body ntm_state_pkg is
         end loop;
       end loop;
 
-      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_first_product(i, j) := ZERO_DATA;
+      matrix_first_product := function_matrix_product (
+        SIZE_A_I_IN => SIZE_C_I_IN,
+        SIZE_A_J_IN => SIZE_C_J_IN,
+        SIZE_B_I_IN => SIZE_A_I_IN,
+        SIZE_B_J_IN => SIZE_A_J_IN,
 
-          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-            matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_c_int(i, m)))*to_real(to_float(matrix_exponent(m, j))))));
-          end loop;
-        end loop;
-      end loop;
+        matrix_a_input => matrix_data_c_int,
+        matrix_b_input => matrix_exponent
+        );
 
-      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-          matrix_second_product(i, j) := ZERO_DATA;
+      matrix_second_product := function_matrix_product (
+        SIZE_A_I_IN => SIZE_C_I_IN,
+        SIZE_A_J_IN => SIZE_A_J_IN,
+        SIZE_B_I_IN => SIZE_B_I_IN,
+        SIZE_B_J_IN => SIZE_B_J_IN,
 
-          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-            matrix_second_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_second_product(i, j))) + (to_real(to_float(matrix_first_product(i, m)))*to_real(to_float(matrix_data_b_int(m, j))))));
-          end loop;
-        end loop;
-      end loop;
+        matrix_a_input => matrix_first_product,
+        matrix_b_input => matrix_data_b_int
+        );
 
       for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
         vector_product(i) := ZERO_DATA;
 
         for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_second_product(i, m)))*to_real(to_float(vector_data_u_input(k, m))))));
+          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_second_product(i, m)))*to_real(to_float(vector_data_u_input(k))))));
         end loop;
       end loop;
 
@@ -1151,7 +1181,7 @@ package body ntm_state_pkg is
       vector_product(i) := ZERO_DATA;
 
       for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), m))))));
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN))))))));
       end loop;
     end loop;
 
@@ -1186,7 +1216,7 @@ package body ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer is
 
     variable matrix_data_a_int : matrix_buffer;
@@ -1299,21 +1329,21 @@ package body ntm_state_pkg is
         end loop;
       end loop;
 
-      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-          matrix_product(i, j) := ZERO_DATA;
+      matrix_product := function_matrix_product (
+        SIZE_A_I_IN => SIZE_A_I_IN,
+        SIZE_A_J_IN => SIZE_A_J_IN,
+        SIZE_B_I_IN => SIZE_B_I_IN,
+        SIZE_B_J_IN => SIZE_B_J_IN,
 
-          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
-            matrix_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_product(i, j))) + (to_real(to_float(matrix_exponent(i, m)))*to_real(to_float(matrix_data_b_int(m, j))))));
-          end loop;
-        end loop;
-      end loop;
+        matrix_a_input => matrix_exponent,
+        matrix_b_input => matrix_data_b_int
+        );
 
       for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
         vector_product(i) := ZERO_DATA;
 
         for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_product(i, m)))*to_real(to_float(vector_data_u_input(k, m))))));
+          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_product(i, m)))*to_real(to_float(vector_data_u_input(k))))));
         end loop;
       end loop;
 
@@ -1327,7 +1357,7 @@ package body ntm_state_pkg is
       vector_product(i) := ZERO_DATA;
 
       for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), m))))));
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN))))))));
       end loop;
     end loop;
 
@@ -1366,7 +1396,7 @@ package body ntm_state_pkg is
 
     matrix_data_k_input : in matrix_buffer;
 
-    vector_data_u_input : in matrix_buffer
+    vector_data_u_input : in vector_buffer
     ) return vector_buffer is
 
     variable vector_y_output : vector_buffer;

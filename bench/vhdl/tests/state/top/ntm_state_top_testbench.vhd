@@ -100,6 +100,8 @@ architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
   signal data_y_out_enable_state_top : std_logic;
 
   -- DATA
+  signal length_k_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal size_a_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -171,6 +173,8 @@ begin
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
       -- DATA
+      NTM_STATE_TOP_LENGTH_K_IN => length_k_in_top,
+
       NTM_STATE_TOP_SIZE_A_I_IN => size_a_i_in_top,
       NTM_STATE_TOP_SIZE_A_J_IN => size_a_j_in_top,
       NTM_STATE_TOP_SIZE_B_I_IN => size_b_i_in_top,
@@ -230,6 +234,8 @@ begin
         DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
         -- DATA
+        LENGTH_K_IN => length_k_in_top,
+
         SIZE_A_I_IN => size_a_i_in_top,
         SIZE_A_J_IN => size_a_j_in_top,
         SIZE_B_I_IN => size_b_i_in_top,
