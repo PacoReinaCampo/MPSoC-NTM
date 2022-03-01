@@ -1527,6 +1527,15 @@ package ntm_math_pkg is
     matrix_b_input : matrix_buffer
 
     ) return matrix_buffer;
+    
+  function function_matrix_vector_convolution (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
 
   function function_matrix_inverse (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1554,6 +1563,15 @@ package ntm_math_pkg is
     matrix_b_input : matrix_buffer
 
     ) return matrix_buffer;
+    
+  function function_matrix_vector_product (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
 
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1585,6 +1603,17 @@ package ntm_math_pkg is
 
     ) return tensor_buffer;
 
+  function function_tensor_matrix_convolution (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
   function function_tensor_inverse (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1615,6 +1644,17 @@ package ntm_math_pkg is
     tensor_b_input : tensor_buffer
 
     ) return tensor_buffer;
+
+  function function_tensor_matrix_product (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
 
   function function_tensor_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2060,6 +2100,33 @@ package body ntm_math_pkg is
     return matrix_output;
   end function function_matrix_convolution;
 
+  function function_matrix_vector_convolution (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      vector_output(i) := ZERO_DATA;
+
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        for m in 0 to i loop
+          for n in 0 to j loop
+            vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(matrix_a_input(m, n)))*to_real(to_float(vector_b_input(j-n))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    return vector_output;
+  end function function_matrix_vector_convolution;
+
   function function_matrix_inverse (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2161,6 +2228,29 @@ package body ntm_math_pkg is
     return matrix_output;
   end function function_matrix_product;
 
+  function function_matrix_vector_product (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      vector_output(i) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(matrix_a_input(i, m)))*to_real(to_float(vector_b_input(m))))));
+      end loop;
+    end loop;
+
+    return vector_output;
+  end function function_matrix_vector_product;
+
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2239,6 +2329,39 @@ package body ntm_math_pkg is
 
     return tensor_output;
   end function function_tensor_convolution;
+
+  function function_tensor_matrix_convolution (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        matrix_output(i, j) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_A_K_IN))-1 loop
+          for m in 0 to i loop
+            for n in 0 to j loop
+              for p in 0 to k loop
+                matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) + (to_real(to_float(tensor_a_input(m, n, p)))*to_real(to_float(matrix_b_input(i-m, j-n))))));
+              end loop;
+            end loop;
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_tensor_matrix_convolution;
 
   function function_tensor_inverse (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2356,6 +2479,33 @@ package body ntm_math_pkg is
 
     return tensor_output;
   end function function_tensor_product;
+
+  function function_tensor_matrix_product (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        matrix_output(i, j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) + (to_real(to_float(tensor_a_input(i, j, m)))*to_real(to_float(matrix_b_input(i, m))))));
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_tensor_matrix_product;
 
   function function_tensor_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);

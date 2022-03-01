@@ -1,0 +1,250 @@
+# vsim -c -do "run.do" work.ntm_standard_lstm_testbench 
+# Start time: 14:27:16 on Mar 01,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading ieee.fixed_float_types
+# Loading ieee.fixed_generic_pkg(body)
+# Loading ieee.float_generic_pkg(body)
+# Loading ieee.fixed_pkg
+# Loading ieee.float_pkg
+# Loading work.ntm_arithmetic_pkg
+# Loading work.ntm_math_pkg
+# Loading work.ntm_lstm_controller_pkg
+# Loading work.ntm_standard_lstm_pkg
+# Loading work.ntm_standard_lstm_testbench(ntm_standard_lstm_testbench_architecture)
+# Loading work.ntm_standard_lstm_stimulus(ntm_standard_lstm_stimulus_architecture)
+# Loading work.ntm_controller(ntm_controller_architecture)
+# Loading work.ntm_activation_gate_vector(ntm_activation_gate_vector_architecture)
+# Loading work.ntm_vector_float_adder(ntm_vector_float_adder_architecture)
+# Loading work.ntm_scalar_float_adder(ntm_scalar_float_adder_architecture)
+# Loading work.ntm_matrix_product(ntm_matrix_product_architecture)
+# Loading work.ntm_scalar_float_multiplier(ntm_scalar_float_multiplier_architecture)
+# Loading work.ntm_vector_tanh_function(ntm_vector_tanh_function_architecture)
+# Loading work.ntm_scalar_tanh_function(ntm_scalar_tanh_function_architecture)
+# Loading work.ntm_scalar_float_divider(ntm_scalar_float_divider_architecture)
+# Loading work.ntm_activation_trainer(ntm_activation_trainer_architecture)
+# Loading work.ntm_vector_summation(ntm_vector_summation_architecture)
+# Loading work.ntm_vector_float_multiplier(ntm_vector_float_multiplier_architecture)
+# Loading work.ntm_vector_exponentiator_function(ntm_vector_exponentiator_function_architecture)
+# Loading work.ntm_scalar_exponentiator_function(ntm_scalar_exponentiator_function_architecture)
+# Loading work.ntm_vector_differentiation(ntm_vector_differentiation_architecture)
+# Loading work.ntm_input_gate_vector(ntm_input_gate_vector_architecture)
+# Loading work.ntm_vector_logistic_function(ntm_vector_logistic_function_architecture)
+# Loading work.ntm_scalar_logistic_function(ntm_scalar_logistic_function_architecture)
+# Loading work.ntm_input_trainer(ntm_input_trainer_architecture)
+# Loading work.ntm_output_gate_vector(ntm_output_gate_vector_architecture)
+# Loading work.ntm_output_trainer(ntm_output_trainer_architecture)
+# Loading work.ntm_forget_gate_vector(ntm_forget_gate_vector_architecture)
+# Loading work.ntm_forget_trainer(ntm_forget_trainer_architecture)
+# Loading work.ntm_state_gate_vector(ntm_state_gate_vector_architecture)
+# Loading work.ntm_hidden_gate_vector(ntm_hidden_gate_vector_architecture)
+# ** Warning: Design size of 21168 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# Expect performance to be adversely affected.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_START has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_W_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_W_IN_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_K_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_K_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_K_IN_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_U_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_U_IN_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_B_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_X_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_R_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_R_IN_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_H_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_SIZE_X_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_SIZE_W_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_SIZE_L_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_SIZE_R_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_W_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_K_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_U_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_B_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_X_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_R_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_standard_lstm_stimulus_i/NTM_STANDARD_LSTM_H_IN(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/X_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/R_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/R_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/H_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/A_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/I_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/S_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/W_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/W_OUT_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/K_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/K_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/K_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/U_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/U_OUT_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/activation_trainer/B_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/X_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/R_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/R_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/H_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/A_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/I_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/S_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/W_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/W_OUT_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/K_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/K_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/K_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/U_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/U_OUT_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/input_trainer/B_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/X_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/R_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/R_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/H_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/A_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/O_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/W_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/W_OUT_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/K_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/K_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/K_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/U_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/U_OUT_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/output_trainer/B_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/X_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/R_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/R_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/H_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/F_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/S_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/W_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/W_OUT_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/K_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/K_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/K_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/U_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/U_OUT_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/forget_trainer/B_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/state_gate_vector/I_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/state_gate_vector/F_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/state_gate_vector/A_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/hidden_gate_vector/S_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/hidden_gate_vector/O_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/X_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/R_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/R_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/W_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/W_OUT_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/K_OUT_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/K_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/K_OUT_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/U_OUT_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/U_OUT_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/B_OUT_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/W_OUT(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/K_OUT(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/U_OUT(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_lstm_testbench/ntm_controller_i/B_OUT(31 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# do run.do

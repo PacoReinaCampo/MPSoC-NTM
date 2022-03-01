@@ -209,7 +209,7 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            if (unsigned(SIZE_A_J_IN) = unsigned(SIZE_B_I_IN)) then
+            if (unsigned(SIZE_A_J_IN) = unsigned(SIZE_B_IN)) then
               -- Control Outputs
               DATA_I_ENABLE <= '1';
               DATA_J_ENABLE <= '1';
@@ -274,37 +274,20 @@ begin
             -- Data Inputs
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
-            -- Control Internal
-            data_a_in_j_convolution_int <= '1';
-          end if;
-
-          if (DATA_B_IN_J_ENABLE = '1') then
-            -- Data Inputs
-            vector_b_int(to_integer(unsigned(index_i_loop))) <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_j_convolution_int <= '1';
-          end if;
-
-          -- Control Outputs
-          DATA_J_ENABLE <= '0';
-
-          if (data_a_in_j_convolution_int = '1' and data_b_in_j_convolution_int = '1') then
-            -- Control Internal
-            data_a_in_j_convolution_int <= '0';
-            data_b_in_j_convolution_int <= '0';
-
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
               convolution_ctrl_fsm_int <= ENDER_I_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
+          -- Control Outputs
+          DATA_J_ENABLE <= '0';
+
         when ENDER_I_STATE =>           -- STEP 3
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
@@ -314,7 +297,7 @@ begin
 
             -- FSM Control
             convolution_ctrl_fsm_int <= CLEAN_I_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
@@ -332,7 +315,7 @@ begin
 
         when ENDER_J_STATE =>           -- STEP 4
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
@@ -362,7 +345,7 @@ begin
           start_scalar_float_multiplier <= '1';
 
           -- FSM Control
-          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           else
             convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
@@ -380,7 +363,7 @@ begin
           start_scalar_float_multiplier <= '1';
 
           -- FSM Control
-          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           else
             convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
@@ -437,7 +420,7 @@ begin
         when SCALAR_ADDER_I_STATE =>    -- STEP 9
 
           if (ready_scalar_float_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
                 -- Data Outputs
                 DATA_OUT <= data_out_scalar_float_adder;
@@ -461,7 +444,7 @@ begin
                 -- FSM Control
                 convolution_ctrl_fsm_int <= CLEAN_I_STATE;
               end if;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
                 -- Data Outputs
                 DATA_OUT <= data_out_scalar_float_adder;
@@ -489,7 +472,7 @@ begin
         when SCALAR_ADDER_J_STATE =>    -- STEP 10
 
           if (ready_scalar_float_adder = '1') then
-            if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
               if (unsigned(index_n_loop) = unsigned(index_j_loop)) then
                 -- Control Internal
                 index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));

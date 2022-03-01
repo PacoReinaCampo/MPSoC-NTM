@@ -276,12 +276,12 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
-          data_a_in_matrix_product   <= FULL;
-          data_b_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= THREE_CONTROL;
+          size_a_j_in_matrix_product <= THREE_CONTROL;
+          size_b_i_in_matrix_product <= THREE_CONTROL;
+          size_b_j_in_matrix_product <= THREE_CONTROL;
+          data_a_in_matrix_product   <= THREE_CONTROL;
+          data_b_in_matrix_product   <= THREE_CONTROL;
 
         when VECTOR_SUMMATION_DW_STATE =>  -- STEP 5
 
@@ -289,8 +289,8 @@ begin
           data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          length_in_vector_summation <= FULL;
-          data_in_vector_summation   <= FULL;
+          length_in_vector_summation <= THREE_CONTROL;
+          data_in_vector_summation   <= THREE_CONTROL;
 
           -- Data Outputs
           W_OUT <= data_out_vector_summation;
@@ -352,12 +352,12 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
-          data_a_in_matrix_product   <= FULL;
-          data_b_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= THREE_CONTROL;
+          size_a_j_in_matrix_product <= THREE_CONTROL;
+          size_b_i_in_matrix_product <= THREE_CONTROL;
+          size_b_j_in_matrix_product <= THREE_CONTROL;
+          data_a_in_matrix_product   <= THREE_CONTROL;
+          data_b_in_matrix_product   <= THREE_CONTROL;
 
         when VECTOR_SUMMATION_DK_STATE =>  -- STEP 5
 
@@ -365,8 +365,8 @@ begin
           data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          length_in_vector_summation <= FULL;
-          data_in_vector_summation   <= FULL;
+          length_in_vector_summation <= THREE_CONTROL;
+          data_in_vector_summation   <= THREE_CONTROL;
 
           -- Data Outputs
           K_OUT <= data_out_vector_summation;
@@ -428,12 +428,12 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
-          data_a_in_matrix_product   <= FULL;
-          data_b_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= THREE_CONTROL;
+          size_a_j_in_matrix_product <= THREE_CONTROL;
+          size_b_i_in_matrix_product <= THREE_CONTROL;
+          size_b_j_in_matrix_product <= THREE_CONTROL;
+          data_a_in_matrix_product   <= THREE_CONTROL;
+          data_b_in_matrix_product   <= THREE_CONTROL;
 
         when VECTOR_SUMMATION_DU_STATE =>  -- STEP 5
 
@@ -441,8 +441,8 @@ begin
           data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          length_in_vector_summation <= FULL;
-          data_in_vector_summation   <= FULL;
+          length_in_vector_summation <= THREE_CONTROL;
+          data_in_vector_summation   <= THREE_CONTROL;
 
           -- Data Outputs
           U_OUT <= data_out_vector_summation;
@@ -499,8 +499,8 @@ begin
           data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          length_in_vector_summation <= FULL;
-          data_in_vector_summation   <= FULL;
+          length_in_vector_summation <= THREE_CONTROL;
+          data_in_vector_summation   <= THREE_CONTROL;
 
           -- Data Outputs
           B_OUT <= data_out_vector_summation;
