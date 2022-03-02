@@ -49,12 +49,12 @@ entity ntm_float_testbench is
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64;
 
-    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- x in 0 to X-1
-    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- y in 0 to Y-1
-    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- j in 0 to N-1
-    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- k in 0 to W-1
-    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- i in 0 to R-1
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
     ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
@@ -660,7 +660,7 @@ begin
   ntm_scalar_float_adder_test : if (ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST) generate
     scalar_float_adder : ntm_scalar_float_adder
       generic map (
-        DATA_SIZE    => 32,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -686,7 +686,7 @@ begin
   ntm_scalar_float_multiplier_test : if (ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_TEST) generate
     scalar_float_multiplier : ntm_scalar_float_multiplier
       generic map (
-        DATA_SIZE    => 32,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -711,7 +711,7 @@ begin
   ntm_scalar_float_divider_test : if (ENABLE_NTM_SCALAR_FLOAT_DIVIDER_TEST) generate
     scalar_float_divider : ntm_scalar_float_divider
       generic map (
-        DATA_SIZE    => 32,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (

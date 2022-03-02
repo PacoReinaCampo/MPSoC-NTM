@@ -124,8 +124,8 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            data_a_int <= to_real(to_float(DATA_A_IN));
-            data_b_int <= to_real(to_float(DATA_B_IN));
+            data_a_int <= to_real(to_float(DATA_A_IN, float64'high, -float64'low));
+            data_b_int <= to_real(to_float(DATA_B_IN, float64'high, -float64'low));
 
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -135,9 +135,9 @@ begin
 
           -- Data Outputs
           if (OPERATION = '1') then
-            DATA_OUT <= std_logic_vector(to_float(data_a_int-data_b_int));
+            DATA_OUT <= std_logic_vector(to_float(data_a_int-data_b_int, float64'high, -float64'low));
           else
-            DATA_OUT <= std_logic_vector(to_float(data_a_int+data_b_int));
+            DATA_OUT <= std_logic_vector(to_float(data_a_int+data_b_int, float64'high, -float64'low));
           end if;
 
           OVERFLOW_OUT <= '0';

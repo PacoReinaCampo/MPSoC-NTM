@@ -1109,7 +1109,7 @@ package body ntm_state_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j)))**to_integer(unsigned(LENGTH_K_IN))));
+        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j), float64'high, -float64'low))**to_integer(unsigned(LENGTH_K_IN)), float64'high, -float64'low));
       end loop;
     end loop;
 
@@ -1123,13 +1123,14 @@ package body ntm_state_pkg is
       matrix_b_input => matrix_exponent
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-      vector_product(i) := ZERO_DATA;
+    vector_product := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_C_I_IN,
+      SIZE_A_J_IN => SIZE_A_J_IN,
+      SIZE_B_IN   => SIZE_A_J_IN,
 
-      for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_first_product(i, m)))*to_real(to_float(INITIAL_X(m))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_first_product,
+      vector_b_input => INITIAL_X
+      );
 
     -- Initial Summation
     data_summation_int := vector_product;
@@ -1139,7 +1140,7 @@ package body ntm_state_pkg is
 
       for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
         for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j)))**(to_integer(unsigned(LENGTH_K_IN))-k)));
+          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j), float64'high, -float64'low))**(to_integer(unsigned(LENGTH_K_IN))-k), float64'high, -float64'low));
         end loop;
       end loop;
 
@@ -1163,33 +1164,43 @@ package body ntm_state_pkg is
         matrix_b_input => matrix_data_b_int
         );
 
-      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        vector_product(i) := ZERO_DATA;
+      vector_product := function_matrix_vector_product (
+        SIZE_A_I_IN => SIZE_C_I_IN,
+        SIZE_A_J_IN => SIZE_A_J_IN,
+        SIZE_B_IN   => SIZE_A_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_second_product(i, m)))*to_real(to_float(vector_data_u_input(k))))));
-        end loop;
-      end loop;
+        matrix_a_input => matrix_second_product,
+        vector_b_input => vector_data_u_input
+        );
 
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
-      end loop;
+      data_summation_int := function_vector_float_adder (
+        OPERATION => '0',
+
+        SIZE_IN => SIZE_A_J_IN,
+
+        vector_a_input => data_summation_int,
+        vector_b_input => vector_product
+        );
 
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      vector_product(i) := ZERO_DATA;
+    vector_product := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_IN   => SIZE_D_J_IN,
 
-      for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN))))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_int,
+      vector_b_input => vector_data_u_input
+      );
 
-    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-      data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
-    end loop;
+    vector_y_output := function_vector_float_adder (
+      OPERATION => '0',
 
-    vector_y_output := data_summation_int;
+      SIZE_IN => SIZE_A_J_IN,
+
+      vector_a_input => data_summation_int,
+      vector_b_input => vector_product
+      );
 
     return vector_y_output;
   end function function_state_vector_output;
@@ -1305,17 +1316,18 @@ package body ntm_state_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j)))**to_integer(unsigned(LENGTH_K_IN))));
+        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j), float64'high, -float64'low))**to_integer(unsigned(LENGTH_K_IN)), float64'high, -float64'low));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-      vector_product(i) := ZERO_DATA;
+    vector_product := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_C_I_IN,
+      SIZE_A_J_IN => SIZE_A_J_IN,
+      SIZE_B_IN   => SIZE_A_J_IN,
 
-      for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_exponent(i, m)))*to_real(to_float(INITIAL_X(m))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_exponent,
+      vector_b_input => INITIAL_X
+      );
 
     -- Initial Summation
     data_summation_int := vector_product;
@@ -1325,7 +1337,7 @@ package body ntm_state_pkg is
 
       for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
         for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j)))**(to_integer(unsigned(LENGTH_K_IN))-k)));
+          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j), float64'high, -float64'low))**(to_integer(unsigned(LENGTH_K_IN))-k), float64'high, -float64'low));
         end loop;
       end loop;
 
@@ -1339,33 +1351,43 @@ package body ntm_state_pkg is
         matrix_b_input => matrix_data_b_int
         );
 
-      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        vector_product(i) := ZERO_DATA;
+      vector_product := function_matrix_vector_product (
+        SIZE_A_I_IN => SIZE_A_I_IN,
+        SIZE_A_J_IN => SIZE_B_J_IN,
+        SIZE_B_IN   => SIZE_B_J_IN,
 
-        for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_product(i, m)))*to_real(to_float(vector_data_u_input(k))))));
-        end loop;
-      end loop;
+        matrix_a_input => matrix_product,
+        vector_b_input => vector_data_u_input
+        );
 
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
-      end loop;
+      data_summation_int := function_vector_float_adder (
+        OPERATION => '0',
+
+        SIZE_IN => SIZE_A_J_IN,
+
+        vector_a_input => data_summation_int,
+        vector_b_input => vector_product
+        );
 
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-      vector_product(i) := ZERO_DATA;
+    vector_product := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_D_I_IN,
+      SIZE_A_J_IN => SIZE_D_J_IN,
+      SIZE_B_IN   => SIZE_D_J_IN,
 
-      for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN))))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_data_d_int,
+      vector_b_input => vector_data_u_input
+      );
 
-    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-      data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
-    end loop;
+    vector_x_output := function_vector_float_adder (
+      OPERATION => '0',
 
-    vector_x_output := data_summation_int;
+      SIZE_IN => SIZE_A_J_IN,
+
+      vector_a_input => data_summation_int,
+      vector_b_input => vector_product
+      );
 
     return vector_x_output;
   end function function_state_vector_state;

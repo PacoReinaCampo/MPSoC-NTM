@@ -62,12 +62,13 @@ package ntm_arithmetic_pkg is
   constant EMPTY : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '0');
   constant FULL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '1');
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
-  constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0, float64'high, -float64'low));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0, float64'high, -float64'low));
+
+  constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001, float64'high, -float64'low));
 
   -----------------------------------------------------------------------
   -- Types
@@ -2305,9 +2306,9 @@ package body ntm_arithmetic_pkg is
   begin
     -- Data Inputs
     if (OPERATION = '1') then
-      scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input)) - to_real(to_float(scalar_b_input))));
+      scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low)) - to_real(to_float(scalar_b_input, float64'high, -float64'low)), float64'high, -float64'low));
     else
-      scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input)) + to_real(to_float(scalar_b_input))));
+      scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low)) + to_real(to_float(scalar_b_input, float64'high, -float64'low)), float64'high, -float64'low));
     end if;
 
     return scalar_output;
@@ -2321,7 +2322,7 @@ package body ntm_arithmetic_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input))*to_real(to_float(scalar_b_input))));
+    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low))*to_real(to_float(scalar_b_input, float64'high, -float64'low)), float64'high, -float64'low));
 
     return scalar_output;
   end function function_scalar_float_multiplier;
@@ -2334,7 +2335,7 @@ package body ntm_arithmetic_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input))/to_real(to_float(scalar_b_input))));
+    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low))/to_real(to_float(scalar_b_input, float64'high, -float64'low)), float64'high, -float64'low));
 
     return scalar_output;
   end function function_scalar_float_divider;
@@ -2354,9 +2355,9 @@ package body ntm_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
       if (OPERATION = '1') then
-        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i))) - to_real(to_float(vector_b_input(i)))));
+        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low)) - to_real(to_float(vector_b_input(i), float64'high, -float64'low)), float64'high, -float64'low));
       else
-        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i))) + to_real(to_float(vector_b_input(i)))));
+        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low)) + to_real(to_float(vector_b_input(i), float64'high, -float64'low)), float64'high, -float64'low));
       end if;
     end loop;
 
@@ -2374,7 +2375,7 @@ package body ntm_arithmetic_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i)))*to_real(to_float(vector_b_input(i)))));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low))*to_real(to_float(vector_b_input(i), float64'high, -float64'low)), float64'high, -float64'low));
     end loop;
 
     return vector_output;
@@ -2391,7 +2392,7 @@ package body ntm_arithmetic_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i)))/to_real(to_float(vector_b_input(i)))));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low))/to_real(to_float(vector_b_input(i), float64'high, -float64'low)), float64'high, -float64'low));
     end loop;
 
     return vector_output;
@@ -2414,9 +2415,9 @@ package body ntm_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         if (OPERATION = '1') then
-          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j))) - to_real(to_float(matrix_b_input(i, j)))));
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low)), float64'high, -float64'low));
         else
-          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j))) + to_real(to_float(matrix_b_input(i, j)))));
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low)) + to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low)), float64'high, -float64'low));
         end if;
       end loop;
     end loop;
@@ -2437,7 +2438,7 @@ package body ntm_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j)))*to_real(to_float(matrix_b_input(i, j)))));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low))*to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low)), float64'high, -float64'low));
       end loop;
     end loop;
 
@@ -2457,7 +2458,7 @@ package body ntm_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j)))/to_real(to_float(matrix_b_input(i, j)))));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low))/to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low)), float64'high, -float64'low));
       end loop;
     end loop;
 
@@ -2483,9 +2484,9 @@ package body ntm_arithmetic_pkg is
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
           if (OPERATION = '1') then
-            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k))) - to_real(to_float(tensor_b_input(i, j, k)))));
+            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_b_input(i, j, k), float64'high, -float64'low)), float64'high, -float64'low));
           else
-            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k))) + to_real(to_float(tensor_b_input(i, j, k)))));
+            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k), float64'high, -float64'low)) + to_real(to_float(tensor_b_input(i, j, k), float64'high, -float64'low)), float64'high, -float64'low));
           end if;
         end loop;
       end loop;
@@ -2509,7 +2510,7 @@ package body ntm_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k)))*to_real(to_float(tensor_b_input(i, j, k)))));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k), float64'high, -float64'low))*to_real(to_float(tensor_b_input(i, j, k), float64'high, -float64'low)), float64'high, -float64'low));
         end loop;
       end loop;
     end loop;
@@ -2532,7 +2533,7 @@ package body ntm_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k)))/to_real(to_float(tensor_b_input(i, j, k)))));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_a_input(i, j, k), float64'high, -float64'low))/to_real(to_float(tensor_b_input(i, j, k), float64'high, -float64'low)), float64'high, -float64'low));
         end loop;
       end loop;
     end loop;
