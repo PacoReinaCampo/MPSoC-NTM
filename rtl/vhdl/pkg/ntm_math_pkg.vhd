@@ -524,6 +524,45 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_tensor_matrix_convolution is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_tensor_inverse is
     generic (
       DATA_SIZE    : integer := 64;
@@ -630,6 +669,45 @@ package ntm_math_pkg is
       SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_tensor_matrix_product is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)

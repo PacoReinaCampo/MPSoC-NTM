@@ -27,9 +27,13 @@
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
 
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd

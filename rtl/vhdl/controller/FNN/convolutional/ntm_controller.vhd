@@ -175,7 +175,31 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION
+  -- TENSOR MATRIX CONVOLUTION
+  -- CONTROL
+  signal start_tensor_matrix_convolution : std_logic;
+  signal ready_tensor_matrix_convolution : std_logic;
+
+  signal data_a_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_k_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_j_enable_tensor_matrix_convolution : std_logic;
+
+  signal data_out_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_out_j_enable_tensor_matrix_convolution : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX VECTOR CONVOLUTION
   -- CONTROL
   signal start_matrix_vector_convolution : std_logic;
   signal ready_matrix_vector_convolution : std_logic;
@@ -619,7 +643,42 @@ begin
       DATA_OUT  => data_out_vector_float_adder
       );
 
-  -- MATRIX CONVOLUTION
+  -- TENSOR MATRIX CONVOLUTION
+  tensor_matrix_convolution : ntm_tensor_matrix_convolution
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_tensor_matrix_convolution,
+      READY => ready_tensor_matrix_convolution,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_convolution,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_convolution,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_convolution,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_convolution,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_convolution,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_convolution,
+      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_convolution,
+
+      -- DATA
+      SIZE_A_I_IN => size_a_i_in_tensor_matrix_convolution,
+      SIZE_A_J_IN => size_a_j_in_tensor_matrix_convolution,
+      SIZE_A_K_IN => size_a_k_in_tensor_matrix_convolution,
+      SIZE_B_I_IN => size_b_i_in_tensor_matrix_convolution,
+      SIZE_B_J_IN => size_b_j_in_tensor_matrix_convolution,
+      DATA_A_IN   => data_a_in_tensor_matrix_convolution,
+      DATA_B_IN   => data_b_in_tensor_matrix_convolution,
+      DATA_OUT    => data_out_tensor_matrix_convolution
+      );
+
+  -- MATRIX VECTOR CONVOLUTION
   matrix_vector_convolution : ntm_matrix_vector_convolution
     generic map (
       DATA_SIZE    => DATA_SIZE,

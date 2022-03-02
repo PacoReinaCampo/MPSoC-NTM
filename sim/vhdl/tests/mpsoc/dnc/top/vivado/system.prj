@@ -28,9 +28,13 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_multi
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_matrix_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_matrix_product.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd

@@ -16,6 +16,7 @@ add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector
 add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/V_IN_ENABLE
 add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/V_IN
 add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/READY
+add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/V_ENABLE
 add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/V_OUT_ENABLE
 add wave -noupdate /dnc_write_heads_testbench/dnc_write_vector_test/write_vector/V_OUT
 

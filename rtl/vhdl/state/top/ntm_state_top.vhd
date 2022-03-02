@@ -200,6 +200,8 @@ begin
   -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
   -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
+  -- SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,Q]; K[P,Q]; x[N,1]; y[Q,1]; u[P,1];
+
   -- CONTROL
 
   -- STATE OUTPUT

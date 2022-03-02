@@ -177,7 +177,31 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT
+  -- TENSOR MATRIX PRODUCT
+  -- CONTROL
+  signal start_tensor_matrix_product : std_logic;
+  signal ready_tensor_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_tensor_matrix_product : std_logic;
+  signal data_a_in_j_enable_tensor_matrix_product : std_logic;
+  signal data_a_in_k_enable_tensor_matrix_product : std_logic;
+  signal data_b_in_i_enable_tensor_matrix_product : std_logic;
+  signal data_b_in_j_enable_tensor_matrix_product : std_logic;
+
+  signal data_out_i_enable_tensor_matrix_product : std_logic;
+  signal data_out_j_enable_tensor_matrix_product : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX VECTOR PRODUCT
   -- CONTROL
   signal start_matrix_vector_product : std_logic;
   signal ready_matrix_vector_product : std_logic;
@@ -557,7 +581,42 @@ begin
       DATA_OUT  => data_out_vector_float_adder
       );
 
-  -- MATRIX PRODUCT
+  -- TENSOR MATRIX PRODUCT
+  tensor_matrix_product : ntm_tensor_matrix_product
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_tensor_matrix_product,
+      READY => ready_tensor_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_product,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_product,
+
+      -- DATA
+      SIZE_A_I_IN => size_a_i_in_tensor_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_tensor_matrix_product,
+      SIZE_A_K_IN => size_a_k_in_tensor_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_tensor_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_tensor_matrix_product,
+      DATA_A_IN   => data_a_in_tensor_matrix_product,
+      DATA_B_IN   => data_b_in_tensor_matrix_product,
+      DATA_OUT    => data_out_tensor_matrix_product
+      );
+
+  -- MATRIX VECTOR PRODUCT
   matrix_vector_product : ntm_matrix_vector_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
