@@ -316,19 +316,15 @@ begin
         when CONVOLUTION_STATE =>       -- STEP 5
 
           -- Data Inputs
-          for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-            for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-              matrix_convolution_int(i, j) := ZERO_DATA;
+          -- matrix_out_int function_matrix_convolution (
+            -- SIZE_A_I_IN => SIZE_A_I_IN,
+            -- SIZE_A_J_IN => SIZE_A_J_IN,
+            -- SIZE_B_I_IN => SIZE_B_I_IN,
+            -- SIZE_B_J_IN => SIZE_B_J_IN,
 
-              for m in 0 to i loop
-                for n in 0 to j loop
-                  matrix_convolution_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_convolution_int(i, j))) + (to_real(to_float(matrix_a_int(m, n)))*to_real(to_float(matrix_b_int(i-m, j-n))))));
-                end loop;
-              end loop;
-
-              matrix_out_int(i, j) <= matrix_convolution_int(i, j);
-            end loop;
-          end loop;
+            -- matrix_a_input => matrix_a_int,
+            -- matrix_b_input => matrix_b_int
+            -- );
 
           -- FSM Control
           convolution_ctrl_fsm_int <= CLEAN_I_STATE;

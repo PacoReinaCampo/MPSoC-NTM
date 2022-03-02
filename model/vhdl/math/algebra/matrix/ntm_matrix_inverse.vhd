@@ -114,6 +114,11 @@ architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
   -- Finite State Machine
   signal inverse_ctrl_fsm_int : inverse_ctrl_fsm;
 
+  -- Buffer
+  signal matrix_in_int : matrix_buffer;
+
+  signal matrix_out_int : matrix_buffer;
+
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -128,15 +133,6 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    -- Data Internal
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- Buffer
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
-    variable matrix_in_int  : matrix_buffer;
-    variable matrix_out_int : matrix_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -186,12 +182,12 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
-              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := ONE_DATA;
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
             else
-              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := ZERO_DATA;
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ZERO_DATA;
             end if;
 
             -- FSM Control
@@ -206,12 +202,12 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
-              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := ONE_DATA;
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
             else
-              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) := ZERO_DATA;
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ZERO_DATA;
             end if;
 
             -- FSM Control
@@ -273,34 +269,13 @@ begin
         when INVERSION_STATE =>         -- STEP 5
 
           -- Data Inputs
-          for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-            if (matrix_in_int(m, m) = ZERO_DATA) then
-              for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-                if (matrix_in_int(i, m) /= ZERO_DATA) then
-                  for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-                    data_interchange_in_int(j)  := matrix_in_int(m, j);
-                    data_interchange_out_int(j) := matrix_out_int(m, j);
+          -- matrix_out_int <= function_matrix_inverse (
+            -- SIZE_I_IN => SIZE_I_IN,
+            -- SIZE_J_IN => SIZE_J_IN,
 
-                    matrix_in_int(m, j)  := matrix_in_int(i, j);
-                    matrix_out_int(m, j) := matrix_out_int(i, j);
-
-                    matrix_in_int(i, j)  := data_interchange_in_int(j);
-                    matrix_out_int(i, j) := data_interchange_out_int(j);
-                  end loop;
-                end if;
-              end loop;
-            end if;
-
-            for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-              data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
-
-              for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-                matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
-                matrix_out_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_out_int(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_out_int(m, j))))));
-              end loop;
-            end loop;
-          end loop;
-
+            -- matrix_input => matrix_in_int
+            -- );
+    
           -- FSM Control
           inverse_ctrl_fsm_int <= CLEAN_I_STATE;
 

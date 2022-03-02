@@ -215,18 +215,15 @@ begin
             product_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-          -- Data Outputs
-          DATA_OUT <= ZERO_DATA;
-
         when PRODUCT_STATE =>           -- STEP 3
 
           -- Data Inputs
-          vector_out_int <= function_dot_product (
-            LENGTH_IN => LENGTH_IN,
+          -- vector_out_int <= function_dot_product (
+            -- LENGTH_IN => LENGTH_IN,
 
-            vector_a_input => vector_a_int,
-            vector_b_input => vector_b_int
-            );
+            -- vector_a_input => vector_a_int,
+            -- vector_b_input => vector_b_int
+            -- );
 
           -- FSM Control
           product_ctrl_fsm_int <= CLEAN_STATE;

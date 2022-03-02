@@ -189,20 +189,17 @@ begin
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-          -- Data Outputs
-          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
         when MULTIPLICATION_STATE =>    -- STEP 3
 
           -- Data Inputs
-          vector_out_int <= function_vector_multiplication (
-            LENGTH_IN => LENGTH_IN,
+          -- vector_out_int <= function_vector_multiplication (
+            -- LENGTH_IN => LENGTH_IN,
 
-            vector_input => vector_in_int,
-            );
+            -- vector_input => vector_in_int
+            -- );
 
           -- FSM Control
-          product_ctrl_fsm_int <= CLEAN_STATE;
+          multiplication_ctrl_fsm_int <= CLEAN_STATE;
 
         when CLEAN_STATE =>             -- STEP 4
 
