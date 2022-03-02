@@ -90,9 +90,6 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   -- Finite State Machine
   signal logistic_ctrl_fsm_int : logistic_ctrl_fsm;
 
-  -- Internal Signals
-  signal data_int : real;
-
 begin
 
   ctrl_fsm : process (CLK, RST)
@@ -104,9 +101,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Data Internal
-      data_int <= 0.0;
-
     elsif rising_edge(CLK) then
 
       case logistic_ctrl_fsm_int is
@@ -115,9 +109,6 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Data Internal
-            data_int <= to_real(to_float(DATA_IN));
-
             -- FSM Control
             logistic_ctrl_fsm_int <= ENDER_STATE;
           end if;
@@ -125,7 +116,9 @@ begin
         when ENDER_STATE =>
 
           -- Data Outputs
-          DATA_OUT <= std_logic_vector(to_float(1.0/(1.0+1.0/exp(data_int))));
+          DATA_OUT <= function_scalar_logistic (
+            scalar_input => DATA_IN
+          );
 
           -- Control Outputs
           READY <= '1';

@@ -82,9 +82,10 @@ architecture ntm_vector_module_architecture of ntm_vector_module is
   type module_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE,                        -- STEP 3
-    CLEAN_STATE,                        -- STEP 5
-    OPERATION_STATE                     -- STEP 8
+    ENDER_STATE,                        -- STEP 2
+    MODULE_STATE,                       -- STEP 3
+    CLEAN_STATE,                        -- STEP 4
+    OPERATION_STATE                     -- STEP 5
     );
 
   -- Buffer
@@ -102,7 +103,9 @@ architecture ntm_vector_module_architecture of ntm_vector_module is
   signal module_ctrl_fsm_int : module_ctrl_fsm;
 
   -- Buffer
-  signal vector_int : vector_buffer;
+  signal vector_in_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
 
   -- Control Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -154,11 +157,11 @@ begin
             module_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 2
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+            vector_in_int(to_integer(unsigned(index_loop))) <= DATA_IN;
 
             -- FSM Control
             module_ctrl_fsm_int <= ENDER_STATE;
@@ -167,14 +170,14 @@ begin
           -- Control Outputs
           DATA_ENABLE <= '0';
 
-        when ENDER_STATE =>             -- STEP 4
+        when ENDER_STATE =>             -- STEP 2
 
           if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            module_ctrl_fsm_int <= CLEAN_STATE;
+            module_ctrl_fsm_int <= MODULE_STATE;
           else
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
@@ -189,7 +192,19 @@ begin
           -- Data Outputs
           DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
 
-        when CLEAN_STATE =>             -- STEP 5
+        when MODULE_STATE =>           -- STEP 3
+
+          -- Data Inputs
+          vector_out_int <= function_vector_module (
+            LENGTH_IN => LENGTH_IN,
+
+            vector_input => vector_in_int,
+            );
+
+          -- FSM Control
+          product_ctrl_fsm_int <= CLEAN_STATE;
+
+        when CLEAN_STATE =>             -- STEP 4
 
           -- Control Outputs
           DATA_ENABLE <= '0';
@@ -199,7 +214,7 @@ begin
           -- FSM Control
           module_ctrl_fsm_int <= OPERATION_STATE;
 
-        when OPERATION_STATE =>         -- STEP 8
+        when OPERATION_STATE =>         -- STEP 5
 
           if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -219,7 +234,7 @@ begin
           end if;
 
           -- Data Outputs
-          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+          DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
 
           -- Control Outputs
           DATA_OUT_ENABLE <= '1';

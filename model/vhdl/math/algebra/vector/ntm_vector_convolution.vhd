@@ -125,11 +125,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+  -- DATA_OUT = DATA_A_IN * DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable vector_convolution_int : vector_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -222,15 +221,12 @@ begin
         when CONVOLUTION_STATE =>       -- STEP 3
 
           -- Data Inputs
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            vector_convolution_int(i) := ZERO_DATA;
+          vector_out_int <= function_vector_convolution (
+            LENGTH_IN => LENGTH_IN,
 
-            for m in 0 to i loop
-              vector_convolution_int(i) := std_logic_vector(to_float(to_real(to_float(vector_convolution_int(i))) + (to_real(to_float(vector_a_int(m)))*to_real(to_float(vector_b_int(i-m))))));
-            end loop;
-
-            vector_out_int(i) <= vector_convolution_int(i);
-          end loop;
+            vector_a_input => vector_a_int,
+            vector_b_input => vector_b_int
+            );
 
           -- FSM Control
           convolution_ctrl_fsm_int <= CLEAN_STATE;

@@ -125,14 +125,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+  -- DATA_OUT = cosine_similarity(DATA_A_IN, DATA_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable data_a_int : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable data_b_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable data_p_int : vector_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -225,23 +221,12 @@ begin
         when COSINE_SIMILARITY_STATE =>  -- STEP 3
 
           -- Data Inputs
-          data_a_int := ZERO_DATA;
-          data_b_int := ZERO_DATA;
+          vector_out_int <= function_vector_cosine_similarity (
+            LENGTH_IN => LENGTH_IN,
 
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_p_int(i) := ZERO_DATA;
-          end loop;
-
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_a_int := std_logic_vector(to_float(to_real(to_float(data_a_int)) + (to_real(to_float(vector_a_int(i)))*to_real(to_float(vector_a_int(i))))));
-            data_b_int := std_logic_vector(to_float(to_real(to_float(data_b_int)) + (to_real(to_float(vector_b_int(i)))*to_real(to_float(vector_b_int(i))))));
-
-            data_p_int(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i))) + (to_real(to_float(vector_a_int(i)))*to_real(to_float(vector_b_int(i))))));
-          end loop;
-
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            vector_out_int(i) <= std_logic_vector(to_float(to_real(to_float(data_p_int(i)))/(to_real(to_float(data_a_int))*to_real(to_float(data_b_int)))));
-          end loop;
+            vector_a_input => vector_a_int,
+            vector_b_input => vector_b_int
+            );
 
           -- FSM Control
           cosine_similarity_ctrl_fsm_int <= CLEAN_STATE;
