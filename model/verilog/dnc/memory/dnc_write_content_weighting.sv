@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_content_weighting #(
-  parameter DATA_SIZE=128,
+  parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
   (

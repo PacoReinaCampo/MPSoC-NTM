@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_scalar_modular_inverter is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -81,10 +81,6 @@ architecture ntm_scalar_modular_inverter_architecture of ntm_scalar_modular_inve
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
-
-  constant ZERO_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-
-  constant ONE_DATA : std_logic_vector(2*DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, 2*DATA_SIZE));
 
   -----------------------------------------------------------------------
   -- Signals

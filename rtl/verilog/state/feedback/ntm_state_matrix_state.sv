@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_state_matrix_state #(
-  parameter DATA_SIZE=128,
+  parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
   (

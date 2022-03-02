@@ -58,7 +58,7 @@ package dnc_core_pkg is
 
   component dnc_content_based_addressing is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -96,7 +96,7 @@ package dnc_core_pkg is
 
   component dnc_allocation_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -124,7 +124,7 @@ package dnc_core_pkg is
 
   component dnc_backward_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -165,7 +165,7 @@ package dnc_core_pkg is
 
   component dnc_forward_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -204,7 +204,7 @@ package dnc_core_pkg is
 
   component dnc_memory_matrix is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -246,7 +246,7 @@ package dnc_core_pkg is
 
   component dnc_memory_retention_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -283,7 +283,7 @@ package dnc_core_pkg is
 
   component dnc_precedence_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -314,7 +314,7 @@ package dnc_core_pkg is
 
   component dnc_read_content_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -352,7 +352,7 @@ package dnc_core_pkg is
 
   component dnc_read_vectors is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -393,7 +393,7 @@ package dnc_core_pkg is
 
   component dnc_read_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -448,7 +448,7 @@ package dnc_core_pkg is
 
   component dnc_sort_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -477,7 +477,7 @@ package dnc_core_pkg is
 
   component dnc_temporal_link_matrix is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -514,7 +514,7 @@ package dnc_core_pkg is
 
   component dnc_usage_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -547,7 +547,7 @@ package dnc_core_pkg is
 
   component dnc_write_content_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -585,7 +585,7 @@ package dnc_core_pkg is
 
   component dnc_write_weighting is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -620,7 +620,7 @@ package dnc_core_pkg is
 
   component dnc_addressing is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -687,7 +687,7 @@ package dnc_core_pkg is
 
   component dnc_free_gates is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -714,7 +714,7 @@ package dnc_core_pkg is
 
   component dnc_read_keys is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -747,7 +747,7 @@ package dnc_core_pkg is
 
   component dnc_read_modes is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -776,7 +776,7 @@ package dnc_core_pkg is
 
   component dnc_read_strengths is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -807,7 +807,7 @@ package dnc_core_pkg is
 
   component dnc_allocation_gate is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -828,7 +828,7 @@ package dnc_core_pkg is
 
   component dnc_erase_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -855,7 +855,7 @@ package dnc_core_pkg is
 
   component dnc_write_gate is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -876,7 +876,7 @@ package dnc_core_pkg is
 
   component dnc_write_key is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -905,7 +905,7 @@ package dnc_core_pkg is
 
   component dnc_write_strength is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -926,7 +926,7 @@ package dnc_core_pkg is
 
   component dnc_write_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -959,7 +959,7 @@ package dnc_core_pkg is
 
   component dnc_top is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1018,7 +1018,7 @@ package dnc_core_pkg is
 
   component dnc_output_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1074,7 +1074,7 @@ package dnc_core_pkg is
 
   component dnc_read_interface_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1151,7 +1151,7 @@ package dnc_core_pkg is
 
   component dnc_write_interface_vector is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (

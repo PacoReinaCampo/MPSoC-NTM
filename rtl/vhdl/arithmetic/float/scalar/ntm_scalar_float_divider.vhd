@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_scalar_float_divider is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port(
@@ -85,8 +85,8 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
   -- Constants
   -----------------------------------------------------------------------
 
-  constant MANTISSA_SIZE : integer := 23;
-  constant EXPONENT_SIZE : integer := 8;
+  constant MANTISSA_SIZE : integer := 52;
+  constant EXPONENT_SIZE : integer := 11;
 
   constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+2));
   constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+2));
@@ -100,9 +100,9 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
   constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
   constant EXPONENT_EMPTY : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
 
-  constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := X"800000";
+  constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := "10000000000000000000000000000000000000000000000000000";
 
-  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111";
+  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111111";
 
   -----------------------------------------------------------------------
   -- Signals

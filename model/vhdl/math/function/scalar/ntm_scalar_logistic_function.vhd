@@ -50,7 +50,7 @@ use ieee.float_pkg.all;
 
 entity ntm_scalar_logistic_function is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port(

@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_scalar_float_multiplier is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port(
@@ -84,8 +84,8 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
   -- Constants
   -----------------------------------------------------------------------
 
-  constant MANTISSA_SIZE : integer := 23;
-  constant EXPONENT_SIZE : integer := 8;
+  constant MANTISSA_SIZE : integer := 52;
+  constant EXPONENT_SIZE : integer := 11;
 
   constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE-2 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE-1));
   constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE-2 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE-1));
@@ -103,7 +103,7 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
 
   constant ZERO_PADDING : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+1));
 
-  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := "001111111";
+  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := "001111111111";
 
   -----------------------------------------------------------------------
   -- Signals

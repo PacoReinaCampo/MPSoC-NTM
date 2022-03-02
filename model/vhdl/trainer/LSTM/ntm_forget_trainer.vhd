@@ -49,7 +49,7 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_forget_trainer is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

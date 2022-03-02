@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_keys is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

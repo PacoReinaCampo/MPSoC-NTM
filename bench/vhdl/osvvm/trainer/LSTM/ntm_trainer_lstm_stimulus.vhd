@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_trainer_lstm_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1

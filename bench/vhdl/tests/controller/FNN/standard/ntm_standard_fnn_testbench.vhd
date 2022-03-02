@@ -63,7 +63,7 @@ architecture ntm_standard_fnn_testbench_architecture of ntm_standard_fnn_testben
   constant L : integer := 64;           -- l in 0 to L-1
   constant R : integer := 64;           -- i in 0 to R-1
 
-  constant DATA_SIZE    : integer := 32;
+  constant DATA_SIZE    : integer := 64;
   constant CONTROL_SIZE : integer := 64;
 
   -----------------------------------------------------------------------

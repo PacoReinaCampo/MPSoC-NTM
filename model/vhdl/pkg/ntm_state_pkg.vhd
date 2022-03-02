@@ -64,7 +64,7 @@ package ntm_state_pkg is
 
   component ntm_state_top is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -137,7 +137,7 @@ package ntm_state_pkg is
 
   component ntm_state_vector_output is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -206,7 +206,7 @@ package ntm_state_pkg is
 
   component ntm_state_vector_state is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -279,7 +279,7 @@ package ntm_state_pkg is
 
   component ntm_state_matrix_state is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -341,7 +341,7 @@ package ntm_state_pkg is
 
   component ntm_state_matrix_input is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -389,7 +389,7 @@ package ntm_state_pkg is
 
   component ntm_state_matrix_output is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -437,7 +437,7 @@ package ntm_state_pkg is
 
   component ntm_state_matrix_feedforward is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (

@@ -48,7 +48,7 @@ use work.ntm_state_pkg.all;
 
 entity ntm_state_vector_output is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

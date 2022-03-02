@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 entity ntm_matrix_multiplication is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

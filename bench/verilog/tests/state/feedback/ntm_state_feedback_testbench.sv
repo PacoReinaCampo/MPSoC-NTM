@@ -48,7 +48,7 @@ module dnc_memory_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=128;
+  parameter DATA_SIZE=64;
   parameter CONTROL_SIZE=64;
 
   parameter X=64;

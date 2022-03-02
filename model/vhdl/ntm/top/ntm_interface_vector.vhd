@@ -50,7 +50,7 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_interface_vector is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

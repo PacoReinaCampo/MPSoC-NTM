@@ -49,7 +49,7 @@ use work.dnc_core_pkg.all;
 
 entity dnc_write_content_weighting is
   generic (
-    DATA_SIZE    : integer := 32;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (

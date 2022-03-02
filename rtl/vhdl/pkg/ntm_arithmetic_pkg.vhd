@@ -49,7 +49,7 @@ package ntm_arithmetic_pkg is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant DATA_SIZE    : integer := 32;
+  constant DATA_SIZE    : integer := 64;
   constant CONTROL_SIZE : integer := 64;
 
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
@@ -87,7 +87,7 @@ package ntm_arithmetic_pkg is
   -- SCALAR
   component ntm_scalar_modular_mod is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -108,7 +108,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_modular_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -132,7 +132,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_modular_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -154,7 +154,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_modular_inverter is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -176,7 +176,7 @@ package ntm_arithmetic_pkg is
   -- VECTOR
   component ntm_vector_modular_mod is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -202,7 +202,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_modular_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -232,7 +232,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_modular_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -260,7 +260,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_modular_inverter is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -287,7 +287,7 @@ package ntm_arithmetic_pkg is
   -- MATRIX
   component ntm_matrix_modular_mod is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -316,7 +316,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_modular_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -350,7 +350,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_modular_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -382,7 +382,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_modular_inverter is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -412,7 +412,7 @@ package ntm_arithmetic_pkg is
   -- TENSOR
   component ntm_tensor_modular_mod is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -444,7 +444,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_modular_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -482,7 +482,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_modular_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -518,7 +518,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_modular_inverter is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -555,7 +555,7 @@ package ntm_arithmetic_pkg is
   -- SCALAR
   component ntm_scalar_integer_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -580,7 +580,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_integer_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -603,7 +603,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_integer_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -627,7 +627,7 @@ package ntm_arithmetic_pkg is
   -- VECTOR
   component ntm_vector_integer_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -658,7 +658,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_integer_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -687,7 +687,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_integer_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -717,7 +717,7 @@ package ntm_arithmetic_pkg is
   -- MATRIX
   component ntm_matrix_integer_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -752,7 +752,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_integer_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -785,7 +785,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_integer_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -819,7 +819,7 @@ package ntm_arithmetic_pkg is
   -- TENSOR
   component ntm_tensor_integer_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -858,7 +858,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_integer_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -895,7 +895,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_integer_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -937,7 +937,7 @@ package ntm_arithmetic_pkg is
   -- SCALAR
   component ntm_scalar_float_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -962,7 +962,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_float_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -985,7 +985,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_scalar_float_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1009,7 +1009,7 @@ package ntm_arithmetic_pkg is
   -- VECTOR
   component ntm_vector_float_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1040,7 +1040,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_float_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1069,7 +1069,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_vector_float_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1099,7 +1099,7 @@ package ntm_arithmetic_pkg is
   -- MATRIX
   component ntm_matrix_float_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1134,7 +1134,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_float_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1167,7 +1167,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_matrix_float_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1201,7 +1201,7 @@ package ntm_arithmetic_pkg is
   -- TENSOR
   component ntm_tensor_float_adder is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1240,7 +1240,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_float_multiplier is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1277,7 +1277,7 @@ package ntm_arithmetic_pkg is
 
   component ntm_tensor_float_divider is
     generic (
-      DATA_SIZE    : integer := 32;
+      DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
       );
     port (

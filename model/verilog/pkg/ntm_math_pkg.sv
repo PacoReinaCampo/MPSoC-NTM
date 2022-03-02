@@ -47,7 +47,7 @@ package ntm_math_pkg;
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter DATA_SIZE=128;
+  parameter DATA_SIZE=64;
   parameter CONTROL_SIZE=64;
 
   parameter ZERO_CONTROL=0;
