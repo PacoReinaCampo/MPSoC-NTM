@@ -95,17 +95,13 @@ architecture ntm_tensor_softmax_architecture of ntm_tensor_softmax is
     ENDER_I_STATE,                      -- STEP 4
     ENDER_J_STATE,                      -- STEP 5
     ENDER_K_STATE,                      -- STEP 6
-    SOFTMAX_STATE,                      -- STEP 7
-    CLEAN_I_STATE,                      -- STEP 8
-    CLEAN_J_STATE,                      -- STEP 9
-    CLEAN_K_STATE,                      -- STEP 10
-    OPERATION_I_STATE,                  -- STEP 11
-    OPERATION_J_STATE,                  -- STEP 12
-    OPERATION_K_STATE                   -- STEP 13
+    CLEAN_I_STATE,                      -- STEP 7
+    CLEAN_J_STATE,                      -- STEP 8
+    CLEAN_K_STATE,                      -- STEP 9
+    OPERATION_I_STATE,                  -- STEP 10
+    OPERATION_J_STATE,                  -- STEP 11
+    OPERATION_K_STATE                   -- STEP 12
     );
-
-  -- Buffer
-  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -119,7 +115,8 @@ architecture ntm_tensor_softmax_architecture of ntm_tensor_softmax is
   signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
 
   -- Buffer
-  signal tensor_in_int  : tensor_buffer;
+  signal tensor_in_int : tensor_buffer;
+
   signal tensor_out_int : tensor_buffer;
 
   -- Control Internal
@@ -137,7 +134,6 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -248,20 +244,23 @@ begin
         when ENDER_I_STATE =>           -- STEP 4
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            softmax_ctrl_fsm_int <= SOFTMAX_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            -- Data Internal
+            tensor_out_int <= function_tensor_softmax (
+              SIZE_I_IN => SIZE_I_IN,
+              SIZE_J_IN => SIZE_J_IN,
+              SIZE_K_IN => SIZE_K_IN,
 
+              tensor_input => tensor_in_int
+              );
+
+            -- FSM Control
+            softmax_ctrl_fsm_int <= CLEAN_I_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
@@ -279,9 +278,6 @@ begin
         when ENDER_J_STATE =>           -- STEP 5
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
@@ -297,9 +293,6 @@ begin
         when ENDER_K_STATE =>           -- STEP 6
 
           if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_K_ENABLE <= '1';
 
@@ -309,30 +302,6 @@ begin
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_K_STATE;
           end if;
-
-        when SOFTMAX_STATE =>           -- STEP 3
-
-          -- Data Internal
-          data_summation_int := ZERO_DATA;
-
-          for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-            for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-              for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-                data_summation_int := std_logic_vector(signed(data_summation_int) + signed(tensor_in_int(m, n, p)));
-              end loop;
-            end loop;
-          end loop;
-
-          for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-            for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-              for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-                tensor_out_int(i, j, k) <= std_logic_vector(signed(tensor_in_int(i, j, k))/signed(data_summation_int));
-              end loop;
-            end loop;
-          end loop;
-
-          -- FSM Control
-          softmax_ctrl_fsm_int <= CLEAN_I_STATE;
 
         when CLEAN_I_STATE =>           -- STEP 7
 

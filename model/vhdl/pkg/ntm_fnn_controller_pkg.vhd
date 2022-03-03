@@ -432,9 +432,14 @@ package body ntm_fnn_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -446,14 +451,21 @@ package body ntm_fnn_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- logistic(h(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_h_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_h_output;
   end function function_ntm_fnn_convolutional_controller;
@@ -521,9 +533,14 @@ package body ntm_fnn_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (
@@ -535,10 +552,21 @@ package body ntm_fnn_controller_pkg is
       vector_b_input => vector_h_input
       );
 
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
+
     -- logistic(h(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_h_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_h_output;
   end function function_ntm_fnn_standard_controller;

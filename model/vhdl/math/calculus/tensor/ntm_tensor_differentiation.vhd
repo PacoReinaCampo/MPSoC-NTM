@@ -103,16 +103,10 @@ architecture ntm_tensor_differentiation_architecture of ntm_tensor_differentiati
     CLEAN_I_STATE,                      -- STEP 7
     CLEAN_J_STATE,                      -- STEP 8
     CLEAN_K_STATE,                      -- STEP 9
-    SCALAR_ADDER_I_STATE,               -- STEP 10
-    SCALAR_ADDER_J_STATE,               -- STEP 11
-    SCALAR_ADDER_K_STATE,               -- STEP 12
-    SCALAR_DIVIDER_I_STATE,             -- STEP 13
-    SCALAR_DIVIDER_J_STATE,             -- STEP 14
-    SCALAR_DIVIDER_K_STATE              -- STEP 15
+    OPERATION_I_STATE,                  -- STEP 10
+    OPERATION_J_STATE,                  -- STEP 11
+    OPERATION_K_STATE                   -- STEP 12
     );
-
-  -- Buffer
-  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -126,36 +120,14 @@ architecture ntm_tensor_differentiation_architecture of ntm_tensor_differentiati
   signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
   -- Buffer
-  signal tensor_int : tensor_buffer;
+  signal tensor_in_int : tensor_buffer;
+
+  signal tensor_out_int : tensor_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_float_adder : std_logic;
-  signal ready_scalar_float_adder : std_logic;
-
-  signal operation_scalar_float_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR DIVIDER
-  -- CONTROL
-  signal start_scalar_float_divider : std_logic;
-  signal ready_scalar_float_divider : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -184,21 +156,9 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_float_adder   <= '0';
-      start_scalar_float_divider <= '0';
-
-      operation_scalar_float_adder <= '0';
-
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
-
-      -- Data Internal
-      data_a_in_scalar_float_adder <= ZERO_DATA;
-      data_b_in_scalar_float_adder <= ZERO_DATA;
-
-      data_a_in_scalar_float_divider <= ZERO_DATA;
-      data_b_in_scalar_float_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -235,7 +195,7 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
+            tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
 
             -- FSM Control
             differentiation_ctrl_fsm_int <= ENDER_K_STATE;
@@ -250,7 +210,7 @@ begin
 
           if ((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
+            tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
 
             -- FSM Control
             if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
@@ -269,7 +229,7 @@ begin
 
           if (DATA_IN_K_ENABLE = '1') then
             -- Data Inputs
-            tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
+            tensor_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_IN;
 
             -- FSM Control
             if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
@@ -289,20 +249,29 @@ begin
         when ENDER_I_STATE =>           -- STEP 4
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
+            -- Data Internal
+            tensor_out_int <= function_tensor_differentiation (
+              CONTROL => CONTROL,
+
+              SIZE_I_IN => SIZE_I_IN,
+              SIZE_J_IN => SIZE_J_IN,
+              SIZE_K_IN => SIZE_K_IN,
+
+              LENGTH_I_IN => LENGTH_I_IN,
+              LENGTH_J_IN => LENGTH_J_IN,
+              LENGTH_K_IN => LENGTH_K_IN,
+
+              tensor_input => tensor_in_int
+              );
+
             -- FSM Control
             differentiation_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
@@ -320,9 +289,6 @@ begin
         when ENDER_J_STATE =>           -- STEP 5
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
@@ -338,9 +304,6 @@ begin
         when ENDER_K_STATE =>           -- STEP 6
 
           if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_K_ENABLE <= '1';
 
@@ -353,21 +316,6 @@ begin
 
         when CLEAN_I_STATE =>           -- STEP 7
 
-          -- Data Inputs
-          data_a_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-          if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) then
-            data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          else
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)-unsigned(ONE_CONTROL)));
-            end if;
-          end if;
-
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
@@ -377,31 +325,11 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_adder <= '1';
-
-          operation_scalar_float_adder <= '1';
-
           -- FSM Control
-          differentiation_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
+          differentiation_ctrl_fsm_int <= OPERATION_K_STATE;
 
         when CLEAN_J_STATE =>           -- STEP 8
 
-          -- Data Inputs
-          data_a_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-          if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) then
-            data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          else
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)-unsigned(ONE_CONTROL)));
-            end if;
-          end if;
-
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
@@ -411,35 +339,15 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_adder <= '1';
-
-          operation_scalar_float_adder <= '1';
-
           -- FSM Control
           if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            differentiation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
+            differentiation_ctrl_fsm_int <= OPERATION_J_STATE;
           else
-            differentiation_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
+            differentiation_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
         when CLEAN_K_STATE =>           -- STEP 9
 
-          -- Data Inputs
-          data_a_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-          if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) then
-            data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          else
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_k_loop)));
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_adder <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)-unsigned(ONE_CONTROL)));
-            end if;
-          end if;
-
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
@@ -449,177 +357,85 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_adder <= '1';
-
-          operation_scalar_float_adder <= '1';
-
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            differentiation_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
+            differentiation_ctrl_fsm_int <= OPERATION_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            differentiation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
+            differentiation_ctrl_fsm_int <= OPERATION_J_STATE;
           else
-            differentiation_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
+            differentiation_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
-        when SCALAR_DIVIDER_I_STATE =>  -- STEP 10
+        when OPERATION_I_STATE =>       -- STEP 10
 
-          if (ready_scalar_float_divider = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= tensor_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
-              -- Control Outputs
-              READY <= '1';
+            -- Control Outputs
+            READY <= '1';
 
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
-              DATA_OUT_K_ENABLE <= '1';
-
-              -- Control Internal
-              index_i_loop <= ZERO_CONTROL;
-              index_j_loop <= ZERO_CONTROL;
-              index_k_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              differentiation_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-              -- Control Outputs
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
-              DATA_OUT_K_ENABLE <= '1';
-
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
-              index_k_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              differentiation_ctrl_fsm_int <= CLEAN_I_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_float_divider <= '0';
-          end if;
-
-        when SCALAR_ADDER_I_STATE =>    -- STEP 11
-
-          if (ready_scalar_float_adder = '1') then
-            -- Data Inputs
-            data_a_in_scalar_float_divider <= data_out_scalar_float_adder;
-
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_divider <= LENGTH_I_IN;
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_divider <= LENGTH_J_IN;
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_divider <= LENGTH_K_IN;
-            end if;
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
 
             -- Control Internal
-            start_scalar_float_divider <= '1';
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            differentiation_ctrl_fsm_int <= SCALAR_DIVIDER_I_STATE;
-          else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
-          end if;
+            differentiation_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= tensor_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
-        when SCALAR_ADDER_J_STATE =>    -- STEP 12
-
-          if (ready_scalar_float_adder = '1') then
-            -- Data Inputs
-            data_a_in_scalar_float_divider <= data_out_scalar_float_adder;
-
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_divider <= LENGTH_I_IN;
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_divider <= LENGTH_J_IN;
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_divider <= LENGTH_K_IN;
-            end if;
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
 
             -- Control Internal
-            start_scalar_float_divider <= '1';
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            differentiation_ctrl_fsm_int <= SCALAR_DIVIDER_J_STATE;
-          else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
+            differentiation_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when SCALAR_ADDER_K_STATE =>    -- STEP 13
+        when OPERATION_J_STATE =>       -- STEP 11
 
-          if (ready_scalar_float_adder = '1') then
-            -- Data Inputs
-            data_a_in_scalar_float_divider <= data_out_scalar_float_adder;
+          if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= tensor_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
-            if (CONTROL = "01") then
-              data_b_in_scalar_float_divider <= LENGTH_I_IN;
-            elsif (CONTROL = "10") then
-              data_b_in_scalar_float_divider <= LENGTH_J_IN;
-            elsif (CONTROL = "11") then
-              data_b_in_scalar_float_divider <= LENGTH_K_IN;
-            end if;
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
 
             -- Control Internal
-            start_scalar_float_divider <= '1';
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            differentiation_ctrl_fsm_int <= SCALAR_DIVIDER_K_STATE;
-          else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
+            differentiation_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
-        when SCALAR_DIVIDER_J_STATE =>  -- STEP 14
+        when OPERATION_K_STATE =>       -- STEP 12
 
-          if (ready_scalar_float_divider = '1') then
-            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= tensor_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
-              DATA_OUT_K_ENABLE <= '1';
+            -- Control Outputs
+            DATA_OUT_K_ENABLE <= '1';
 
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
-              index_k_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              differentiation_ctrl_fsm_int <= CLEAN_J_STATE;
-            end if;
-          else
             -- Control Internal
-            start_scalar_float_divider <= '0';
-          end if;
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
 
-        when SCALAR_DIVIDER_K_STATE =>  -- STEP 15
-
-          if (ready_scalar_float_divider = '1') then
-            if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= tensor_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-              -- Control Outputs
-              DATA_OUT_K_ENABLE <= '1';
-
-              -- Control Internal
-              index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              differentiation_ctrl_fsm_int <= CLEAN_K_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_float_divider <= '0';
+            -- FSM Control
+            differentiation_ctrl_fsm_int <= CLEAN_K_STATE;
           end if;
 
         when others =>
@@ -628,51 +444,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  scalar_float_adder : ntm_scalar_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_adder,
-      READY => ready_scalar_float_adder,
-
-      OPERATION => operation_scalar_float_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_adder,
-      DATA_B_IN => data_b_in_scalar_float_adder,
-
-      DATA_OUT => data_out_scalar_float_adder
-      );
-
-  -- SCALAR DIVIDER
-  scalar_float_divider : ntm_scalar_float_divider
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_divider,
-      READY => ready_scalar_float_divider,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_divider,
-      DATA_B_IN => data_b_in_scalar_float_divider,
-
-      DATA_OUT => data_out_scalar_float_divider
-      );
 
 end architecture;

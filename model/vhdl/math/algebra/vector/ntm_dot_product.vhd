@@ -133,8 +133,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_ENABLE <= '0';
-
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -155,11 +153,17 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             product_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1

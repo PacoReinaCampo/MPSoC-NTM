@@ -106,17 +106,13 @@ architecture ntm_tensor_product_architecture of ntm_tensor_product is
     ENDER_I_STATE,                      -- STEP 4
     ENDER_J_STATE,                      -- STEP 5
     ENDER_K_STATE,                      -- STEP 6
-    PRODUCT_STATE,                      -- STEP 7
-    CLEAN_I_STATE,                      -- STEP 8
-    CLEAN_J_STATE,                      -- STEP 9
-    CLEAN_K_STATE,                      -- STEP 10
-    OPERATION_I_STATE,                  -- STEP 11
-    OPERATION_J_STATE,                  -- STEP 12
-    OPERATION_K_STATE                   -- STEP 13
+    CLEAN_I_STATE,                      -- STEP 7
+    CLEAN_J_STATE,                      -- STEP 8
+    CLEAN_K_STATE,                      -- STEP 9
+    OPERATION_I_STATE,                  -- STEP 10
+    OPERATION_J_STATE,                  -- STEP 11
+    OPERATION_K_STATE                   -- STEP 12
     );
-
-  -- Buffer
-  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -158,7 +154,6 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable tensor_product_int : tensor_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -261,6 +256,19 @@ begin
             data_b_in_j_product_int <= '0';
             data_b_in_k_product_int <= '0';
 
+            -- Data Internal
+            tensor_out_int <= function_tensor_product (
+              SIZE_A_I_IN => SIZE_A_I_IN,
+              SIZE_A_J_IN => SIZE_A_J_IN,
+              SIZE_A_K_IN => SIZE_A_K_IN,
+              SIZE_B_I_IN => SIZE_B_I_IN,
+              SIZE_B_J_IN => SIZE_B_J_IN,
+              SIZE_B_K_IN => SIZE_B_K_IN,
+
+              tensor_a_input => tensor_a_int,
+              tensor_b_input => tensor_b_int
+              );
+
             -- FSM Control
             product_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
@@ -343,20 +351,14 @@ begin
         when ENDER_I_STATE =>           -- STEP 4
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            product_ctrl_fsm_int <= PRODUCT_STATE;
+            product_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
@@ -374,9 +376,6 @@ begin
         when ENDER_J_STATE =>           -- STEP 5
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
@@ -392,9 +391,6 @@ begin
         when ENDER_K_STATE =>           -- STEP 6
 
           if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_K_ENABLE <= '1';
 
@@ -404,26 +400,6 @@ begin
             -- FSM Control
             product_ctrl_fsm_int <= INPUT_K_STATE;
           end if;
-
-        when PRODUCT_STATE =>           -- STEP 5
-
-          -- Data Inputs
-          for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-            for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-              for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
-                tensor_product_int(i, j, k) := ZERO_DATA;
-
-                for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-                  tensor_product_int(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_product_int(i, j, k))) + (to_real(to_float(tensor_a_int(i, j, m)))*to_real(to_float(tensor_b_int(i, m, k))))));
-                end loop;
-
-                tensor_out_int(i, j, k) <= tensor_product_int(i, j, k);
-              end loop;
-            end loop;
-          end loop;
-
-          -- FSM Control
-          product_ctrl_fsm_int <= CLEAN_I_STATE;
 
         when CLEAN_I_STATE =>           -- STEP 7
 
@@ -479,7 +455,7 @@ begin
             product_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
-        when OPERATION_I_STATE =>       -- STEP 13
+        when OPERATION_I_STATE =>       -- STEP 10
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -519,7 +495,7 @@ begin
             product_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when OPERATION_J_STATE =>       -- STEP 14
+        when OPERATION_J_STATE =>       -- STEP 11
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -537,7 +513,7 @@ begin
             product_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
-        when OPERATION_K_STATE =>       -- STEP 15
+        when OPERATION_K_STATE =>       -- STEP 12
 
           if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

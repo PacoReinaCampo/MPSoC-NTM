@@ -45,6 +45,9 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 entity ntm_tensor_matrix_convolution is
   generic (
     DATA_SIZE    : integer := 64;
@@ -103,16 +106,10 @@ architecture ntm_tensor_matrix_convolution_architecture of ntm_tensor_matrix_con
     CLEAN_I_STATE,                      -- STEP 7
     CLEAN_J_STATE,                      -- STEP 8
     CLEAN_K_STATE,                      -- STEP 9
-    SCALAR_MULTIPLIER_I_STATE,          -- STEP 10
-    SCALAR_MULTIPLIER_J_STATE,          -- STEP 11
-    SCALAR_MULTIPLIER_K_STATE,          -- STEP 12
-    SCALAR_ADDER_I_STATE,               -- STEP 13
-    SCALAR_ADDER_J_STATE,               -- STEP 14
-    SCALAR_ADDER_K_STATE                -- STEP 15
+    OPERATION_I_STATE,                  -- STEP 10
+    OPERATION_J_STATE,                  -- STEP 11
+    OPERATION_K_STATE                   -- STEP 12
     );
-
-  -- Buffer
-  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -127,15 +124,15 @@ architecture ntm_tensor_matrix_convolution_architecture of ntm_tensor_matrix_con
 
   -- Buffer
   signal tensor_a_int : tensor_buffer;
-  signal tensor_b_int : tensor_buffer;
+  signal matrix_b_int : matrix_buffer;
+
+  signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_m_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_n_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_p_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_i_convolution_int : std_logic;
   signal data_a_in_j_convolution_int : std_logic;
@@ -143,37 +140,13 @@ architecture ntm_tensor_matrix_convolution_architecture of ntm_tensor_matrix_con
   signal data_b_in_i_convolution_int : std_logic;
   signal data_b_in_j_convolution_int : std_logic;
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_float_adder : std_logic;
-  signal ready_scalar_float_adder : std_logic;
-
-  signal operation_scalar_float_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_float_multiplier : std_logic;
-  signal ready_scalar_float_multiplier : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+  -- DATA_OUT = DATA_A_IN * DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -193,30 +166,16 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_float_adder      <= '0';
-      start_scalar_float_multiplier <= '0';
-
-      operation_scalar_float_adder <= '0';
-
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
       index_m_loop <= ZERO_CONTROL;
-      index_n_loop <= ZERO_CONTROL;
-      index_p_loop <= ZERO_CONTROL;
 
       data_a_in_i_convolution_int <= '0';
       data_a_in_j_convolution_int <= '0';
       data_a_in_k_convolution_int <= '0';
       data_b_in_i_convolution_int <= '0';
       data_b_in_j_convolution_int <= '0';
-
-      -- Data Internal
-      data_a_in_scalar_float_adder <= ZERO_DATA;
-      data_b_in_scalar_float_adder <= ZERO_DATA;
-
-      data_a_in_scalar_float_multiplier <= ZERO_DATA;
-      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -238,8 +197,6 @@ begin
               index_j_loop <= ZERO_CONTROL;
               index_k_loop <= ZERO_CONTROL;
               index_m_loop <= ZERO_CONTROL;
-              index_n_loop <= ZERO_CONTROL;
-              index_p_loop <= ZERO_CONTROL;
 
               -- FSM Control
               convolution_ctrl_fsm_int <= INPUT_I_STATE;
@@ -270,7 +227,7 @@ begin
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_i_convolution_int <= '1';
@@ -290,6 +247,18 @@ begin
             data_b_in_i_convolution_int <= '0';
             data_b_in_j_convolution_int <= '0';
 
+            -- Data Internal
+            matrix_out_int <= function_tensor_matrix_convolution (
+              SIZE_A_I_IN => SIZE_A_I_IN,
+              SIZE_A_J_IN => SIZE_A_J_IN,
+              SIZE_A_K_IN => SIZE_A_K_IN,
+              SIZE_B_I_IN => SIZE_B_I_IN,
+              SIZE_B_J_IN => SIZE_B_J_IN,
+
+              tensor_a_input => tensor_a_int,
+              matrix_b_input => matrix_b_int
+              );
+
             -- FSM Control
             convolution_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
@@ -307,7 +276,7 @@ begin
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_j_convolution_int <= '1';
@@ -353,9 +322,6 @@ begin
         when ENDER_I_STATE =>           -- STEP 4
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
@@ -364,9 +330,6 @@ begin
             -- FSM Control
             convolution_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
@@ -384,9 +347,6 @@ begin
         when ENDER_J_STATE =>           -- STEP 5
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
@@ -402,9 +362,6 @@ begin
         when ENDER_K_STATE =>           -- STEP 6
 
           if (unsigned(index_k_loop) < unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_K_ENABLE <= '1';
 
@@ -417,10 +374,6 @@ begin
 
         when CLEAN_I_STATE =>           -- STEP 7
 
-          -- Data Inputs
-          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_m_loop)), to_integer(unsigned(index_n_loop)), to_integer(unsigned(index_p_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)-unsigned(index_m_loop)), to_integer(unsigned(index_j_loop)-unsigned(index_n_loop)), to_integer(unsigned(index_k_loop)-unsigned(index_p_loop)));
-
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
@@ -429,23 +382,16 @@ begin
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_multiplier <= '1';
-
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_J_STATE;
           else
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
         when CLEAN_J_STATE =>           -- STEP 8
-
-          -- Data Inputs
-          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_m_loop)), to_integer(unsigned(index_n_loop)), to_integer(unsigned(index_p_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)-unsigned(index_m_loop)), to_integer(unsigned(index_j_loop)-unsigned(index_n_loop)), to_integer(unsigned(index_k_loop)-unsigned(index_p_loop)));
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
@@ -453,214 +399,93 @@ begin
 
           DATA_OUT_J_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_multiplier <= '1';
-
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_J_STATE;
           else
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
         when CLEAN_K_STATE =>           -- STEP 9
 
-          -- Data Inputs
-          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
           -- Control Outputs
           DATA_K_ENABLE <= '0';
 
-          -- Control Internal
-          start_scalar_float_multiplier <= '1';
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_J_STATE;
           else
-            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            convolution_ctrl_fsm_int <= OPERATION_K_STATE;
           end if;
 
-        when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 10
+        when OPERATION_I_STATE =>       -- STEP 10
 
-          if (ready_scalar_float_multiplier = '1') then
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
+            READY <= '1';
+
             -- Control Internal
-            start_scalar_float_adder <= '1';
-
-            operation_scalar_float_adder <= '0';
-
-            -- Data Internal
-            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
-
-            if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_float_adder <= ZERO_DATA;
-            else
-              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
-            end if;
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+            index_m_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            convolution_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
-          else
+            convolution_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
             -- Control Internal
-            start_scalar_float_multiplier <= '0';
-          end if;
-
-        when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 11
-
-          if (ready_scalar_float_multiplier = '1') then
-            -- Control Internal
-            start_scalar_float_adder <= '1';
-
-            operation_scalar_float_adder <= '0';
-
-            -- Data Internal
-            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
-
-            if (unsigned(index_n_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_float_adder <= ZERO_DATA;
-            else
-              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
-            end if;
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+            index_m_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            convolution_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
-          else
-            -- Control Internal
-            start_scalar_float_multiplier <= '0';
+            convolution_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when SCALAR_MULTIPLIER_K_STATE =>  -- STEP 12
+        when OPERATION_J_STATE =>       -- STEP 11
 
-          if (ready_scalar_float_multiplier = '1') then
+          if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '1';
+
             -- Control Internal
-            start_scalar_float_adder <= '1';
-
-            operation_scalar_float_adder <= '0';
-
-            -- Data Internal
-            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
-
-            if (unsigned(index_p_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_float_adder <= ZERO_DATA;
-            else
-              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
-            end if;
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            convolution_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
-          else
-            -- Control Internal
-            start_scalar_float_multiplier <= '0';
+            convolution_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
-        when SCALAR_ADDER_I_STATE =>    -- STEP 13
+        when OPERATION_K_STATE =>       -- STEP 12
 
-          if (ready_scalar_float_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-              if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
-                -- Data Outputs
-                DATA_OUT <= data_out_scalar_float_adder;
-
-                -- Control Outputs
-                DATA_OUT_I_ENABLE <= '1';
-                DATA_OUT_J_ENABLE <= '1';
-
-                READY <= '1';
-
-                -- Control Internal
-                index_i_loop <= ZERO_CONTROL;
-                index_j_loop <= ZERO_CONTROL;
-                index_k_loop <= ZERO_CONTROL;
-                index_m_loop <= ZERO_CONTROL;
-
-                -- FSM Control
-                convolution_ctrl_fsm_int <= STARTER_STATE;
-              else
-                -- Control Internal
-                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
-
-                -- FSM Control
-                convolution_ctrl_fsm_int <= CLEAN_I_STATE;
-              end if;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-              if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
-                -- Data Outputs
-                DATA_OUT <= data_out_scalar_float_adder;
-
-                -- Control Outputs
-                DATA_OUT_I_ENABLE <= '1';
-                DATA_OUT_J_ENABLE <= '1';
-
-                -- Control Internal
-                index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
-                index_j_loop <= ZERO_CONTROL;
-                index_k_loop <= ZERO_CONTROL;
-                index_m_loop <= ZERO_CONTROL;
-              else
-                -- Control Internal
-                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
-              end if;
-
-              -- FSM Control
-              convolution_ctrl_fsm_int <= CLEAN_I_STATE;
-            end if;
-          else
+          if (unsigned(index_k_loop) < unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
-            start_scalar_float_adder <= '0';
-          end if;
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
 
-        when SCALAR_ADDER_J_STATE =>    -- STEP 14
-
-          if (ready_scalar_float_adder = '1') then
-            if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-              if (unsigned(index_n_loop) = unsigned(index_j_loop)) then
-                -- Data Outputs
-                DATA_OUT <= data_out_scalar_float_adder;
-
-                -- Control Outputs
-                DATA_OUT_J_ENABLE <= '1';
-
-                -- Control Internal
-                index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
-                index_k_loop <= ZERO_CONTROL;
-                index_n_loop <= ZERO_CONTROL;
-              else
-                -- Control Internal
-                index_n_loop <= std_logic_vector(unsigned(index_n_loop)+unsigned(ONE_CONTROL));
-              end if;
-
-              -- FSM Control
-              convolution_ctrl_fsm_int <= CLEAN_J_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
-          end if;
-
-        when SCALAR_ADDER_K_STATE =>    -- STEP 15
-
-          if (ready_scalar_float_adder = '1') then
-            if (unsigned(index_k_loop) < unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_p_loop) = unsigned(index_k_loop)) then
-                -- Control Internal
-                index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
-                index_p_loop <= ZERO_CONTROL;
-              else
-                -- Control Internal
-                index_p_loop <= std_logic_vector(unsigned(index_p_loop)+unsigned(ONE_CONTROL));
-              end if;
-
-              -- FSM Control
-              convolution_ctrl_fsm_int <= CLEAN_K_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
+            -- FSM Control
+            convolution_ctrl_fsm_int <= CLEAN_K_STATE;
           end if;
 
         when others =>
@@ -669,51 +494,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  scalar_float_adder : ntm_scalar_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_adder,
-      READY => ready_scalar_float_adder,
-
-      OPERATION => operation_scalar_float_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_adder,
-      DATA_B_IN => data_b_in_scalar_float_adder,
-
-      DATA_OUT => data_out_scalar_float_adder
-      );
-
-  -- SCALAR MULTIPLIER
-  scalar_float_multiplier : ntm_scalar_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_multiplier,
-      READY => ready_scalar_float_multiplier,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_multiplier,
-      DATA_B_IN => data_b_in_scalar_float_multiplier,
-
-      DATA_OUT => data_out_scalar_float_multiplier
-      );
 
 end architecture;

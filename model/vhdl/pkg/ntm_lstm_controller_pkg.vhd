@@ -1387,9 +1387,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -1401,14 +1406,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- tanh(i(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_a_output(l) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(l))))));
-    end loop;
+    vector_a_output := function_vector_tanh (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_a_output;
   end function function_ntm_activation_convolutional_gate_vector;
@@ -1472,9 +1484,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -1486,14 +1503,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- logistic(i(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_i_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_i_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_i_output;
   end function function_ntm_input_convolutional_gate_vector;
@@ -1557,9 +1581,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -1571,14 +1600,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- logistic(o(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_o_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_o_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_o_output;
   end function function_ntm_output_convolutional_gate_vector;
@@ -1642,9 +1678,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -1656,14 +1697,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_convolution(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
 
     -- logistic(f(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_f_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_f_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_f_output;
   end function function_ntm_forget_convolutional_gate_vector;
@@ -1712,10 +1760,18 @@ package body ntm_lstm_controller_pkg is
     -- h(t;l) = o(t;l) o tanh(s(t;l))
 
     -- h(t=0;l) = 0; h(t;l=0) = 0
+    vector_h_output := function_vector_tanh (
+      SIZE_IN => SIZE_L_IN,
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(l) := std_logic_vector(to_float(to_real(to_float(vector_o_input(l)))*tanh(to_real(to_float(vector_s_input(l))))));
-    end loop;
+      vector_input => vector_s_input
+      );
+
+    vector_h_output := function_vector_float_multiplier (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_o_input,
+      vector_b_input => vector_h_output
+      );
 
     return vector_h_output;
   end function function_ntm_hidden_convolutional_gate_vector;
@@ -1920,9 +1976,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (
@@ -1934,14 +1995,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- tanh(i(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_a_output(l) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(l))))));
-    end loop;
+    vector_a_output := function_vector_tanh (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_a_output;
   end function function_ntm_activation_standard_gate_vector;
@@ -2005,9 +2073,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (
@@ -2019,14 +2092,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- logistic(i(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_i_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_i_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_i_output;
   end function function_ntm_input_standard_gate_vector;
@@ -2090,9 +2170,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (
@@ -2104,14 +2189,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- logistic(o(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_o_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_o_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_o_output;
   end function function_ntm_output_standard_gate_vector;
@@ -2175,9 +2267,14 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (
@@ -2189,14 +2286,21 @@ package body ntm_lstm_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
 
     -- logistic(f(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_f_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
+    vector_f_output := function_vector_logistic (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_input => vector_adder
+      );
 
     return vector_f_output;
   end function function_ntm_forget_standard_gate_vector;
@@ -2245,10 +2349,18 @@ package body ntm_lstm_controller_pkg is
     -- h(t;l) = o(t;l) o tanh(s(t;l))
 
     -- h(t=0;l) = 0; h(t;l=0) = 0
+    vector_h_output := function_vector_tanh (
+      SIZE_IN => SIZE_L_IN,
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(l) := std_logic_vector(to_float(to_real(to_float(vector_o_input(l)))*tanh(to_real(to_float(vector_s_input(l))))));
-    end loop;
+      vector_input => vector_s_input
+      );
+
+    vector_h_output := function_vector_float_multiplier (
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_o_input,
+      vector_b_input => vector_h_output
+      );
 
     return vector_h_output;
   end function function_ntm_hidden_standard_gate_vector;

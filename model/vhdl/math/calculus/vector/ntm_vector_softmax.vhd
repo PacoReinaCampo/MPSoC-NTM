@@ -66,9 +66,9 @@ entity ntm_vector_softmax is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -83,13 +83,9 @@ architecture ntm_vector_softmax_architecture of ntm_vector_softmax is
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE,                        -- STEP 2
-    SOFTMAX_STATE,                      -- STEP 3
-    CLEAN_STATE,                        -- STEP 4
-    OPERATION_STATE                     -- STEP 5
+    CLEAN_STATE,                        -- STEP 3
+    OPERATION_STATE                     -- STEP 4
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -103,7 +99,8 @@ architecture ntm_vector_softmax_architecture of ntm_vector_softmax is
   signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
 
   -- Buffer
-  signal vector_in_int  : vector_buffer;
+  signal vector_in_int : vector_buffer;
+
   signal vector_out_int : vector_buffer;
 
   -- Control Internal
@@ -119,7 +116,6 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -127,8 +123,6 @@ begin
 
       -- Control Outputs
       READY <= '0';
-
-      DATA_ENABLE <= '0';
 
       DATA_OUT_ENABLE <= '0';
 
@@ -141,8 +135,6 @@ begin
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
-
-          DATA_ENABLE <= '0';
 
           DATA_OUT_ENABLE <= '0';
 
@@ -175,12 +167,19 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
+            -- Data Internal
+            vector_out_int <= function_vector_softmax (
+              SIZE_IN => LENGTH_IN,
+
+              vector_input => vector_in_int
+              );
+
             -- FSM Control
-            softmax_ctrl_fsm_int <= SOFTMAX_STATE;
+            softmax_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
@@ -192,26 +191,7 @@ begin
             softmax_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-          -- Data Outputs
-          DATA_OUT <= vector_in_int(to_integer(unsigned(index_loop)));
-
-        when SOFTMAX_STATE =>           -- STEP 3
-
-          -- Data Internal
-          data_summation_int := ZERO_DATA;
-
-          for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-            data_summation_int := std_logic_vector(signed(data_summation_int) + signed(vector_in_int(m)));
-          end loop;
-
-          for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-            vector_out_int(i) <= std_logic_vector(signed(vector_in_int(i))/signed(data_summation_int));
-          end loop;
-
-          -- FSM Control
-          softmax_ctrl_fsm_int <= CLEAN_STATE;
-
-        when CLEAN_STATE =>             -- STEP 4
+        when CLEAN_STATE =>             -- STEP 3
 
           -- Control Outputs
           DATA_ENABLE <= '0';
@@ -221,9 +201,9 @@ begin
           -- FSM Control
           softmax_ctrl_fsm_int <= OPERATION_STATE;
 
-        when OPERATION_STATE =>         -- STEP 5
+        when OPERATION_STATE =>         -- STEP 4
 
-          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             READY <= '1';
 

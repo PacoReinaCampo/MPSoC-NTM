@@ -45,6 +45,7 @@ use ieee.float_pkg.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.ntm_fnn_controller_pkg.all;
 
 package dnc_core_pkg is
 
@@ -1237,87 +1238,6 @@ package dnc_core_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-  function function_vector_controller_differentiation (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    vector_input : matrix_buffer
-    ) return matrix_buffer;
-
-  -----------------------------------------------------------------------
-  -- CONTROLLER TEMPLATE
-  -----------------------------------------------------------------------
-
-  function function_ntm_fnn_standard_controller (
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_w_input : matrix_buffer;
-    tensor_k_input : tensor_buffer;
-    matrix_u_input : matrix_buffer;
-    vector_b_input : vector_buffer;
-
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return vector_buffer;
-
-  -----------------------------------------------------------------------
-  -- TRAINER TEMPLATE
-  -----------------------------------------------------------------------
-
-  function function_ntm_fnn_w_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return tensor_buffer;
-
-  function function_ntm_fnn_k_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return array4_buffer;
-
-  function function_ntm_fnn_u_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return tensor_buffer;
-
-  function function_ntm_fnn_b_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return matrix_buffer;
-
   -----------------------------------------------------------------------
   -- MEMORY
   -----------------------------------------------------------------------
@@ -1742,315 +1662,6 @@ package body dnc_core_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-  function function_vector_controller_differentiation (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    vector_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable vector_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        if (t = 0) then
-          vector_output(t, l) := std_logic_vector(to_float((to_real(to_float(vector_input(t, l))) - to_real(to_float(vector_input(t, l))))/to_real(to_float(LENGTH_IN))));
-        else
-          vector_output(t, l) := std_logic_vector(to_float((to_real(to_float(vector_input(t, l))) - to_real(to_float(vector_input(t-1, l))))/to_real(to_float(LENGTH_IN))));
-        end if;
-      end loop;
-    end loop;
-
-    return vector_output;
-  end function function_vector_controller_differentiation;
-
-  -----------------------------------------------------------------------
-  -- CONTROLLER TEMPLATE
-  -----------------------------------------------------------------------
-
-  function function_ntm_fnn_standard_controller (
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_w_input : matrix_buffer;
-    tensor_k_input : tensor_buffer;
-    matrix_u_input : matrix_buffer;
-    vector_b_input : vector_buffer;
-
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return vector_buffer is
-
-    variable tensor_product : matrix_buffer;
-    variable matrix_product : vector_buffer;
-    variable vector_adder   : vector_buffer;
-
-    variable vector_h_output : vector_buffer;
-
-  begin
-
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-
-    -- Data Inputs
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := ZERO_DATA;
-    end loop;
-
-    -- K(i;l;k)·r(t;i;k)
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        tensor_product(i, l) := ZERO_DATA;
-
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
-      end loop;
-    end loop;
-
-    -- W(l;x)·x(t;x)
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(l) := ZERO_DATA;
-
-      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
-      end loop;
-    end loop;
-
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
-
-    -- U(l;l)·h(t-1;l)
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(l) := ZERO_DATA;
-
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
-      end loop;
-    end loop;
-
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
-    end loop;
-
-    -- logistic(h(t;l))
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
-    end loop;
-
-    return vector_h_output;
-  end function function_ntm_fnn_standard_controller;
-
-  -----------------------------------------------------------------------
-  -- TRAINER TEMPLATE
-  -----------------------------------------------------------------------
-
-  function function_ntm_fnn_w_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return tensor_buffer is
-
-    variable vector_dh_int : matrix_buffer;
-
-    variable matrix_w_output : tensor_buffer;
-
-  begin
-
-    -- dW(t;l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
-
-    vector_dh_int := function_vector_controller_differentiation (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      LENGTH_IN => LENGTH_IN,
-
-      vector_input => vector_h_input
-      );
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := std_logic_vector(to_float(to_real(to_float(matrix_w_output(t, l, x))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(vector_x_input(t, x))))));
-        end loop;
-      end loop;
-    end loop;
-
-    return matrix_w_output;
-  end function function_ntm_fnn_w_trainer;
-
-  function function_ntm_fnn_k_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return array4_buffer is
-
-    variable vector_dh_int : matrix_buffer;
-
-    variable tensor_k_output : array4_buffer;
-
-  begin
-
-    -- dK(t;l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    vector_dh_int := function_vector_controller_differentiation (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      LENGTH_IN => LENGTH_IN,
-
-      vector_input => vector_h_input
-      );
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := std_logic_vector(to_float(to_real(to_float(tensor_k_output(t, l, i, k))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(matrix_r_input(t, i, k))))));
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_k_output;
-  end function function_ntm_fnn_k_trainer;
-
-  function function_ntm_fnn_u_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return tensor_buffer is
-
-    variable vector_dh_int : matrix_buffer;
-
-    variable matrix_u_output : tensor_buffer;
-
-  begin
-
-    -- dU(t;l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
-
-    vector_dh_int := function_vector_controller_differentiation (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      LENGTH_IN => LENGTH_IN,
-
-      vector_input => vector_h_input
-      );
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := std_logic_vector(to_float(to_real(to_float(matrix_u_output(t, l, m))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(vector_h_input(t, m))))));
-        end loop;
-      end loop;
-    end loop;
-
-    return matrix_u_output;
-  end function function_ntm_fnn_u_trainer;
-
-  function function_ntm_fnn_b_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable vector_dh_int : matrix_buffer;
-
-    variable vector_b_output : matrix_buffer;
-
-  begin
-
-    -- db(t;l) = summation(d*(t;l))[t in 0 to T]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
-
-    vector_dh_int := function_vector_controller_differentiation (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      LENGTH_IN => LENGTH_IN,
-
-      vector_input => vector_h_input
-      );
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_dh_int(t, l)))));
-      end loop;
-    end loop;
-
-    return vector_b_output;
-  end function function_ntm_fnn_b_trainer;
-
   -----------------------------------------------------------------------
   -- MEMORY
   -----------------------------------------------------------------------
@@ -2392,12 +2003,12 @@ package body dnc_core_pkg is
   begin
 
     -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+    matrix_operation_int := function_matrix_transpose (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_operation_int(j, k) := matrix_m_input(k, j);
-      end loop;
-    end loop;
+      matrix_input => matrix_m_input
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
@@ -2762,9 +2373,11 @@ package body dnc_core_pkg is
 
     -- f(t;i) = sigmoid(f^(t;i))
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_f_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_f_input(i)))))));
-    end loop;
+    vector_f_output := function_vector_logistic (
+      SIZE_IN => SIZE_R_IN,
+
+      vector_input => vector_f_input
+      );
 
     return vector_f_output;
   end function function_dnc_free_gates;
@@ -2799,11 +2412,12 @@ package body dnc_core_pkg is
 
     -- pi(t;i;p) = softmax(pi^(t;i;p))
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for p in 0 to to_integer(unsigned(TWO_CONTROL)) loop
-        matrix_pi_output(i, p) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(matrix_pi_input(i, p)))))));
-      end loop;
-    end loop;
+    matrix_pi_output := function_matrix_softmax (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => THREE_CONTROL,
+
+      matrix_input => matrix_pi_input
+      );
 
     return matrix_pi_output;
   end function function_dnc_read_modes;
@@ -2820,9 +2434,11 @@ package body dnc_core_pkg is
 
     -- beta(t;i) = oneplus(beta^(t;i))
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_beta_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_beta_input(i)))))));
-    end loop;
+    vector_beta_output := function_vector_oneplus (
+      SIZE_IN => SIZE_R_IN,
+
+      vector_input => vector_beta_input
+      );
 
     return vector_beta_output;
   end function function_dnc_read_strengths;
@@ -2841,7 +2457,9 @@ package body dnc_core_pkg is
 
     -- ga(t) = sigmoid(g^(t))
 
-    scalar_ga_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_ga_input))))));
+    scalar_ga_output := function_scalar_logistic (
+      scalar_input => scalar_ga_input
+      );
 
     return scalar_ga_output;
   end function function_dnc_allocation_gate;
@@ -2858,10 +2476,12 @@ package body dnc_core_pkg is
 
     -- e(t;k) = sigmoid(e^(t;k))
 
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      vector_e_output(k) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_e_input(k)))))));
-    end loop;
+    vector_e_output := function_vector_logistic (
+      SIZE_IN => SIZE_W_IN,
 
+      vector_input => vector_e_input
+      );
+    
     return vector_e_output;
   end function function_dnc_erase_vector;
 
@@ -2875,8 +2495,10 @@ package body dnc_core_pkg is
 
     -- gw(t) = sigmoid(gw^(t))
 
-    scalar_gw_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_gw_input))))));
-
+    scalar_gw_output := function_scalar_logistic (
+      scalar_input => scalar_gw_input
+      );
+    
     return scalar_gw_output;
   end function function_dnc_write_gate;
 
@@ -2907,8 +2529,10 @@ package body dnc_core_pkg is
 
     -- beta(t) = oneplus(beta^(t))
 
-    scalar_beta_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_beta_input))))));
-
+    scalar_beta_output := function_scalar_oneplus (
+      scalar_input => scalar_beta_input
+      );
+    
     return scalar_beta_output;
   end function function_dnc_write_strength;
 
@@ -3086,13 +2710,14 @@ package body dnc_core_pkg is
 
     -- k(t;k) = U(t;k;l)·h(t;l)
 
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      vector_k_output(k) := ZERO_DATA;
+    vector_k_output := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_W_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
 
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_k_output(k) := std_logic_vector(to_float(to_real(to_float(vector_k_output(k))) + (to_real(to_float(matrix_wk_input(k, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_wk_input,
+      vector_b_input => vector_h_input
+      );
 
     return vector_k_output;
   end function function_ntm_write_interface_k_vector;
@@ -3148,13 +2773,14 @@ package body dnc_core_pkg is
 
     -- e(t;k) = U(t;k;l)·h(t;l)
 
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      vector_e_output(k) := ZERO_DATA;
+    vector_e_output := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_W_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
 
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_e_output(k) := std_logic_vector(to_float(to_real(to_float(vector_e_output(k))) + (to_real(to_float(matrix_we_input(k, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_we_input,
+      vector_b_input => vector_h_input
+      );
 
     return vector_e_output;
   end function function_ntm_write_interface_e_vector;
@@ -3180,13 +2806,14 @@ package body dnc_core_pkg is
 
     -- v(t;k) = U(t;k;l)·h(t;l)
 
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      vector_v_output(k) := ZERO_DATA;
+    vector_v_output := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_W_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
 
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_v_output(k) := std_logic_vector(to_float(to_real(to_float(vector_v_output(k))) + (to_real(to_float(matrix_wv_input(k, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_wv_input,
+      vector_b_input => vector_h_input
+      );
 
     return vector_v_output;
   end function function_ntm_write_interface_v_vector;

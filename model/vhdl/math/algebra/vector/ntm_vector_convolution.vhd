@@ -133,8 +133,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_ENABLE <= '0';
-
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -155,11 +153,17 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             convolution_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
@@ -186,12 +190,12 @@ begin
             data_b_in_convolution_int <= '0';
 
             -- Data Internal
-            -- vector_out_int <= function_vector_convolution (
-              -- LENGTH_IN => LENGTH_IN,
+            vector_out_int <= function_vector_convolution (
+              LENGTH_IN => LENGTH_IN,
 
-              -- vector_a_input => vector_a_int,
-              -- vector_b_input => vector_b_int
-              -- );
+              vector_a_input => vector_a_int,
+              vector_b_input => vector_b_int
+              );
 
             -- FSM Control
             convolution_ctrl_fsm_int <= ENDER_STATE;

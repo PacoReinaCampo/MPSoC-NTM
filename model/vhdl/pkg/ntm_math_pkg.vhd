@@ -524,6 +524,45 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_tensor_matrix_convolution is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_tensor_inverse is
     generic (
       DATA_SIZE    : integer := 64;
@@ -630,6 +669,45 @@ package ntm_math_pkg is
       SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_tensor_matrix_product is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1429,11 +1507,11 @@ package ntm_math_pkg is
       CLK : in std_logic;
       RST : in std_logic;
 
-      CONTROL : in std_logic_vector(1 downto 0);
-
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
+
+      CONTROL : in std_logic_vector(1 downto 0);
 
       DATA_IN_I_ENABLE : in std_logic;
       DATA_IN_J_ENABLE : in std_logic;
@@ -1926,7 +2004,8 @@ package ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_I_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_J_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
     matrix_input : matrix_buffer
     ) return matrix_buffer;
@@ -1955,7 +2034,9 @@ package ntm_math_pkg is
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_I_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_J_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_K_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
     tensor_input : tensor_buffer
     ) return tensor_buffer;
@@ -3061,7 +3142,8 @@ package body ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_I_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_J_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
     matrix_input : matrix_buffer
     ) return matrix_buffer is
@@ -3073,15 +3155,15 @@ package body ntm_math_pkg is
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         if (CONTROL = '0') then
           if (i = 0) then
-            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_I_IN, float64'high, -float64'low)), float64'high, -float64'low));
           else
-            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i-1, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i-1, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_I_IN, float64'high, -float64'low)), float64'high, -float64'low));
           end if;
         elsif (CONTROL = '1') then
           if (j = 0) then
-            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))/to_real(to_float(LENGTH_J_IN, float64'high, -float64'low)), float64'high, -float64'low));
           else
-            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j-1), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j), float64'high, -float64'low)) - to_real(to_float(matrix_input(i, j-1), float64'high, -float64'low)))/to_real(to_float(LENGTH_J_IN, float64'high, -float64'low)), float64'high, -float64'low));
           end if;
         end if;
       end loop;
@@ -3158,7 +3240,9 @@ package body ntm_math_pkg is
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_I_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_J_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_K_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
     tensor_input : tensor_buffer
     ) return tensor_buffer is
@@ -3171,21 +3255,21 @@ package body ntm_math_pkg is
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
           if (CONTROL = "01") then
             if (i = 0) then
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_I_IN, float64'high, -float64'low)), float64'high, -float64'low));
             else
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i-1, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i-1, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_I_IN, float64'high, -float64'low)), float64'high, -float64'low));
             end if;
           elsif (CONTROL = "10") then
             if (j = 0) then
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_J_IN, float64'high, -float64'low)), float64'high, -float64'low));
             else
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j-1, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j-1, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_J_IN, float64'high, -float64'low)), float64'high, -float64'low));
             end if;
           elsif (CONTROL = "11") then
             if (k = 0) then
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)))/to_real(to_float(LENGTH_K_IN, float64'high, -float64'low)), float64'high, -float64'low));
             else
-              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k-1), float64'high, -float64'low)))/to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low)) - to_real(to_float(tensor_input(i, j, k-1), float64'high, -float64'low)))/to_real(to_float(LENGTH_K_IN, float64'high, -float64'low)), float64'high, -float64'low));
             end if;
           end if;
         end loop;
