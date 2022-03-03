@@ -83,13 +83,9 @@ architecture ntm_vector_module_architecture of ntm_vector_module is
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE,                        -- STEP 2
-    MODULE_STATE,                       -- STEP 3
-    CLEAN_STATE,                        -- STEP 4
-    OPERATION_STATE                     -- STEP 5
+    CLEAN_STATE,                        -- STEP 3
+    OPERATION_STATE                     -- STEP 4
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -176,8 +172,15 @@ begin
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
+            -- Data Internal
+            vector_out_int <= function_vector_module (
+              LENGTH_IN => LENGTH_IN,
+
+              vector_input => vector_in_int
+              );
+
             -- FSM Control
-            module_ctrl_fsm_int <= MODULE_STATE;
+            module_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
@@ -189,19 +192,7 @@ begin
             module_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when MODULE_STATE =>           -- STEP 3
-
-          -- Data Inputs
-          -- vector_out_int <= function_vector_module (
-            -- LENGTH_IN => LENGTH_IN,
-
-            -- vector_input => vector_in_int
-            -- );
-
-          -- FSM Control
-          module_ctrl_fsm_int <= CLEAN_STATE;
-
-        when CLEAN_STATE =>             -- STEP 4
+        when CLEAN_STATE =>             -- STEP 3
 
           -- Control Outputs
           DATA_ENABLE <= '0';
@@ -211,7 +202,7 @@ begin
           -- FSM Control
           module_ctrl_fsm_int <= OPERATION_STATE;
 
-        when OPERATION_STATE =>         -- STEP 5
+        when OPERATION_STATE =>         -- STEP 4
 
           if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

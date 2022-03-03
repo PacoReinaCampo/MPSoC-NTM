@@ -92,16 +92,11 @@ architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
     INPUT_J_STATE,                      -- STEP 2
     ENDER_I_STATE,                      -- STEP 3
     ENDER_J_STATE,                      -- STEP 4
-    INVERSION_STATE,                    -- STEP 5
-    CLEAN_I_STATE,                      -- STEP 6
-    CLEAN_J_STATE,                      -- STEP 7
-    OPERATION_I_STATE,                  -- STEP 8
-    OPERATION_J_STATE                   -- STEP 9
+    CLEAN_I_STATE,                      -- STEP 5
+    CLEAN_J_STATE,                      -- STEP 6
+    OPERATION_I_STATE,                  -- STEP 7
+    OPERATION_J_STATE                   -- STEP 8
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -225,19 +220,21 @@ begin
         when ENDER_I_STATE =>           -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            inverse_ctrl_fsm_int <= INVERSION_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            -- Data Internal
+            matrix_out_int <= function_matrix_inverse (
+              SIZE_I_IN => SIZE_I_IN,
+              SIZE_J_IN => SIZE_J_IN,
 
+              matrix_input => matrix_in_int
+              );
+
+            -- FSM Control
+            inverse_ctrl_fsm_int <= CLEAN_I_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
@@ -266,20 +263,7 @@ begin
             inverse_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when INVERSION_STATE =>         -- STEP 5
-
-          -- Data Inputs
-          -- matrix_out_int <= function_matrix_inverse (
-            -- SIZE_I_IN => SIZE_I_IN,
-            -- SIZE_J_IN => SIZE_J_IN,
-
-            -- matrix_input => matrix_in_int
-            -- );
-    
-          -- FSM Control
-          inverse_ctrl_fsm_int <= CLEAN_I_STATE;
-
-        when CLEAN_I_STATE =>           -- STEP 6
+        when CLEAN_I_STATE =>           -- STEP 5
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
@@ -291,7 +275,7 @@ begin
           -- FSM Control
           inverse_ctrl_fsm_int <= OPERATION_J_STATE;
 
-        when CLEAN_J_STATE =>           -- STEP 7
+        when CLEAN_J_STATE =>           -- STEP 6
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
@@ -307,7 +291,7 @@ begin
             inverse_ctrl_fsm_int <= OPERATION_J_STATE;
           end if;
 
-        when OPERATION_I_STATE =>       -- STEP 8
+        when OPERATION_I_STATE =>       -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -341,7 +325,7 @@ begin
             inverse_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when OPERATION_J_STATE =>       -- STEP 9
+        when OPERATION_J_STATE =>       -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

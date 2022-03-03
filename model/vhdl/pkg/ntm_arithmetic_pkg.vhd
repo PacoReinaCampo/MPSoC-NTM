@@ -62,7 +62,6 @@ package ntm_arithmetic_pkg is
   constant EMPTY : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '0');
   constant FULL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '1');
 
-
   constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0, float64'high, -float64'low));
   constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));

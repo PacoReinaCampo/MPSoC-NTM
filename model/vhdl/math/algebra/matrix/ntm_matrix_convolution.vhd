@@ -98,15 +98,11 @@ architecture ntm_matrix_convolution_architecture of ntm_matrix_convolution is
     INPUT_J_STATE,                      -- STEP 2
     ENDER_I_STATE,                      -- STEP 3
     ENDER_J_STATE,                      -- STEP 4
-    CONVOLUTION_STATE,                  -- STEP 5
-    CLEAN_I_STATE,                      -- STEP 6
-    CLEAN_J_STATE,                      -- STEP 7
-    OPERATION_I_STATE,                  -- STEP 8
-    OPERATION_J_STATE                   -- STEP 9
+    CLEAN_I_STATE,                      -- STEP 5
+    CLEAN_J_STATE,                      -- STEP 6
+    OPERATION_I_STATE,                  -- STEP 7
+    OPERATION_J_STATE                   -- STEP 8
     );
-
-  -- Buffer
-  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -140,11 +136,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+  -- DATA_OUT = DATA_A_IN * DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable matrix_convolution_int : matrix_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -261,6 +256,17 @@ begin
             data_a_in_j_convolution_int <= '0';
             data_b_in_j_convolution_int <= '0';
 
+            -- Data Internal
+            matrix_out_int <= function_matrix_convolution (
+              SIZE_A_I_IN => SIZE_A_I_IN,
+              SIZE_A_J_IN => SIZE_A_J_IN,
+              SIZE_B_I_IN => SIZE_B_I_IN,
+              SIZE_B_J_IN => SIZE_B_J_IN,
+
+              matrix_a_input => matrix_a_int,
+              matrix_b_input => matrix_b_int
+              );
+
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
               convolution_ctrl_fsm_int <= ENDER_I_STATE;
@@ -280,7 +286,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            convolution_ctrl_fsm_int <= CONVOLUTION_STATE;
+            convolution_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
@@ -313,23 +319,7 @@ begin
             convolution_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CONVOLUTION_STATE =>       -- STEP 5
-
-          -- Data Inputs
-          -- matrix_out_int function_matrix_convolution (
-            -- SIZE_A_I_IN => SIZE_A_I_IN,
-            -- SIZE_A_J_IN => SIZE_A_J_IN,
-            -- SIZE_B_I_IN => SIZE_B_I_IN,
-            -- SIZE_B_J_IN => SIZE_B_J_IN,
-
-            -- matrix_a_input => matrix_a_int,
-            -- matrix_b_input => matrix_b_int
-            -- );
-
-          -- FSM Control
-          convolution_ctrl_fsm_int <= CLEAN_I_STATE;
-
-        when CLEAN_I_STATE =>           -- STEP 6
+        when CLEAN_I_STATE =>           -- STEP 5
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
@@ -345,7 +335,7 @@ begin
             convolution_ctrl_fsm_int <= OPERATION_J_STATE;
           end if;
 
-        when CLEAN_J_STATE =>           -- STEP 7
+        when CLEAN_J_STATE =>           -- STEP 6
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
@@ -359,7 +349,7 @@ begin
             convolution_ctrl_fsm_int <= OPERATION_J_STATE;
           end if;
 
-        when OPERATION_I_STATE =>       -- STEP 8
+        when OPERATION_I_STATE =>       -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -393,7 +383,7 @@ begin
             convolution_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when OPERATION_J_STATE =>       -- STEP 9
+        when OPERATION_J_STATE =>       -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

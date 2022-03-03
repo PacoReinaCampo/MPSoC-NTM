@@ -124,7 +124,7 @@ module ntm_state_top #(
   // x(k) = exp(a,k)·x(0) + summation(exp(a,k-j-1)·b·u(j))[j in 0 to k-1]
   // y(k) = c·exp(a,k)·x(0) + summation(c·exp(a,k-j)·b·u(j))[j in 0 to k-1] + d·u(k)
 
-  // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,Q]; K[P,Q]; x[N,1]; y[Q,1]; u[P,1];
+  // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P]; K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 
   // CONTROL
 

@@ -27,9 +27,13 @@
 ../../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 ../../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 ../../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
 
 ../../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 ../../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
 ../../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 ../../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 ../../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
