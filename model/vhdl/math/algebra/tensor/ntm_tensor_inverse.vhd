@@ -314,9 +314,6 @@ begin
         when ENDER_K_STATE =>           -- STEP 6
 
           if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
             -- Control Outputs
             DATA_K_ENABLE <= '1';
 

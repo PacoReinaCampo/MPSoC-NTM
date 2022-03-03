@@ -2481,7 +2481,7 @@ package body dnc_core_pkg is
 
       vector_input => vector_e_input
       );
-
+    
     return vector_e_output;
   end function function_dnc_erase_vector;
 
@@ -2498,7 +2498,7 @@ package body dnc_core_pkg is
     scalar_gw_output := function_scalar_logistic (
       scalar_input => scalar_gw_input
       );
-
+    
     return scalar_gw_output;
   end function function_dnc_write_gate;
 
@@ -2532,7 +2532,7 @@ package body dnc_core_pkg is
     scalar_beta_output := function_scalar_oneplus (
       scalar_input => scalar_beta_input
       );
-
+    
     return scalar_beta_output;
   end function function_dnc_write_strength;
 
@@ -2912,23 +2912,16 @@ package body dnc_core_pkg is
       vector_y_output(y) := ZERO_DATA;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-        data_summation_int(i, y) := ZERO_DATA;
+    data_summation_int := function_tensor_matrix_product (
+      SIZE_A_I_IN => SIZE_R_IN,
+      SIZE_A_J_IN => SIZE_Y_IN,
+      SIZE_A_K_IN => SIZE_W_IN,
+      SIZE_B_I_IN => SIZE_Y_IN,
+      SIZE_B_J_IN => SIZE_W_IN,
 
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          data_summation_int(i, y) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i, y))) + (to_real(to_float(tensor_k_input(i, y, k)))*to_real(to_float(matrix_r_input(i, k))))));
-        end loop;
-      end loop;
-    end loop;
-
-    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-      data_product_int(y) := ZERO_DATA;
-
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        data_product_int(y) := std_logic_vector(to_float(to_real(to_float(data_product_int(y))) + (to_real(to_float(matrix_u_input(y, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      tensor_a_input => tensor_k_input,
+      matrix_b_input => matrix_r_input
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
@@ -2936,9 +2929,23 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-      vector_y_output(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_product_int(y)))));
-    end loop;
+    data_product_int := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_Y_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
+
+      matrix_a_input => matrix_u_input,
+      vector_b_input => vector_h_input
+      );
+
+    vector_y_output := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_Y_IN,
+
+      vector_a_input => data_addition_int,
+      vector_b_input => data_product_int
+      );
 
     return vector_y_output;
   end function function_dnc_output_vector;
