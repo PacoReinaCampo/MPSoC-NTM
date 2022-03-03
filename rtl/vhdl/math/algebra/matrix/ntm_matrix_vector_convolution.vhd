@@ -130,7 +130,7 @@ architecture ntm_matrix_vector_convolution_architecture of ntm_matrix_vector_con
   signal data_a_in_j_convolution_int : std_logic;
 
   signal data_b_in_convolution_int : std_logic;
-  
+
   -- SCALAR ADDER
   -- CONTROL
   signal start_scalar_float_adder : std_logic;

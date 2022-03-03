@@ -40,31 +40,27 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.ntm_fnn_controller_pkg.all;
 use work.ntm_standard_fnn_pkg.all;
 
 entity ntm_standard_fnn_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE    : integer := 64;
+    CONTROL_SIZE : integer := 64;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+    );
 end ntm_standard_fnn_testbench;
 
 architecture ntm_standard_fnn_testbench_architecture of ntm_standard_fnn_testbench is
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
-
-  constant I : integer := 64;
-  constant J : integer := 64;
-
-  constant X : integer := 64;           -- x in 0 to X-1
-  constant Y : integer := 64;           -- y in 0 to Y-1
-  constant N : integer := 64;           -- j in 0 to N-1
-  constant W : integer := 64;           -- k in 0 to W-1
-  constant L : integer := 64;           -- l in 0 to L-1
-  constant R : integer := 64;           -- i in 0 to R-1
-
-  constant DATA_SIZE    : integer := 64;
-  constant CONTROL_SIZE : integer := 64;
 
   -----------------------------------------------------------------------
   -- Signals

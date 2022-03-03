@@ -78,7 +78,6 @@
 │           ├── ntm_output_gate_vector.vhd
 │           └── ntm_state_gate_vector.vhd
 ├── dnc
-│   ├── DNC.png
 │   ├── memory
 │   │   ├── dnc_addressing.vhd
 │   │   ├── dnc_allocation_weighting.vhd
@@ -113,6 +112,8 @@
 │       ├── dnc_write_key.vhd
 │       ├── dnc_write_strength.vhd
 │       └── dnc_write_vector.vhd
+├── intro
+│   └── ntm_intro_adder.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -121,10 +122,14 @@
 │   │   │   ├── ntm_matrix_multiplication.vhd
 │   │   │   ├── ntm_matrix_product.vhd
 │   │   │   ├── ntm_matrix_summation.vhd
-│   │   │   └── ntm_matrix_transpose.vhd
+│   │   │   ├── ntm_matrix_transpose.vhd
+│   │   │   ├── ntm_matrix_vector_convolution.vhd
+│   │   │   └── ntm_matrix_vector_product.vhd
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.vhd
 │   │   │   ├── ntm_tensor_inverse.vhd
+│   │   │   ├── ntm_tensor_matrix_convolution.vhd
+│   │   │   ├── ntm_tensor_matrix_product.vhd
 │   │   │   ├── ntm_tensor_multiplication.vhd
 │   │   │   ├── ntm_tensor_product.vhd
 │   │   │   ├── ntm_tensor_summation.vhd
@@ -196,6 +201,7 @@
 │   ├── ntm_arithmetic_pkg.vhd
 │   ├── ntm_core_pkg.vhd
 │   ├── ntm_fnn_controller_pkg.vhd
+│   ├── ntm_intro_pkg.vhd
 │   ├── ntm_lstm_controller_pkg.vhd
 │   ├── ntm_math_pkg.vhd
 │   └── ntm_state_pkg.vhd

@@ -84,14 +84,19 @@ emacs -batch vhdl/dnc/write_heads/dnc_write_gate.vhd -f vhdl-beautify-buffer -f 
 emacs -batch vhdl/dnc/write_heads/dnc_write_key.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_write_strength.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_write_vector.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/intro/ntm_intro_adder.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_summation.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/tensor/ntm_tensor_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/tensor/ntm_tensor_summation.vhd -f vhdl-beautify-buffer -f save-buffer
@@ -144,6 +149,7 @@ emacs -batch vhdl/pkg/dnc_core_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_arithmetic_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_core_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_fnn_controller_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/pkg/ntm_intro_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_lstm_controller_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_math_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/pkg/ntm_state_pkg.vhd -f vhdl-beautify-buffer -f save-buffer

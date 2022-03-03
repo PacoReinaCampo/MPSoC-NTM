@@ -78,7 +78,6 @@
 │           ├── ntm_output_gate_vector.sv
 │           └── ntm_state_gate_vector.sv
 ├── dnc
-│   ├── DNC.png
 │   ├── memory
 │   │   ├── dnc_addressing.sv
 │   │   ├── dnc_allocation_weighting.sv
@@ -113,6 +112,8 @@
 │       ├── dnc_write_key.sv
 │       ├── dnc_write_strength.sv
 │       └── dnc_write_vector.sv
+├── intro
+│   └── ntm_intro_adder.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -121,10 +122,14 @@
 │   │   │   ├── ntm_matrix_multiplication.sv
 │   │   │   ├── ntm_matrix_product.sv
 │   │   │   ├── ntm_matrix_summation.sv
-│   │   │   └── ntm_matrix_transpose.sv
+│   │   │   ├── ntm_matrix_transpose.sv
+│   │   │   ├── ntm_matrix_vector_convolution.sv
+│   │   │   └── ntm_matrix_vector_product.sv
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.sv
 │   │   │   ├── ntm_tensor_inverse.sv
+│   │   │   ├── ntm_tensor_matrix_convolution.sv
+│   │   │   ├── ntm_tensor_matrix_product.sv
 │   │   │   ├── ntm_tensor_multiplication.sv
 │   │   │   ├── ntm_tensor_product.sv
 │   │   │   ├── ntm_tensor_summation.sv
@@ -196,6 +201,7 @@
 │   ├── ntm_arithmetic_pkg.sv
 │   ├── ntm_core_pkg.sv
 │   ├── ntm_fnn_controller_pkg.sv
+│   ├── ntm_intro_pkg.sv
 │   ├── ntm_lstm_controller_pkg.sv
 │   ├── ntm_math_pkg.sv
 │   └── ntm_state_pkg.sv

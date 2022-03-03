@@ -216,10 +216,10 @@ begin
             -- Data Internal
             matrix_out_int <= function_matrix_differentiation (
               CONTROL => CONTROL,
-    
+
               SIZE_I_IN => SIZE_I_IN,
               SIZE_J_IN => SIZE_J_IN,
-              
+
               LENGTH_I_IN => LENGTH_I_IN,
               LENGTH_J_IN => LENGTH_J_IN,
 

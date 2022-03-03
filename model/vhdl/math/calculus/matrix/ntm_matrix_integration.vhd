@@ -214,7 +214,7 @@ begin
             matrix_out_int <= function_matrix_integration (
               SIZE_I_IN => SIZE_I_IN,
               SIZE_J_IN => SIZE_J_IN,
-              
+
               LENGTH_IN => LENGTH_IN,
 
               matrix_input => matrix_in_int

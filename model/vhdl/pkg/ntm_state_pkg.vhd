@@ -103,7 +103,7 @@ package ntm_state_pkg is
       DATA_U_IN_ENABLE : in std_logic;
 
       DATA_U_ENABLE : out std_logic;
-      
+
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA

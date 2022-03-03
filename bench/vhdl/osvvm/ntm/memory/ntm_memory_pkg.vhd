@@ -137,19 +137,15 @@ package ntm_memory_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_TEST   : boolean := false;
-  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_TEST   : boolean := false;
-  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MEMORY_TEST   : boolean := false;
+  signal STIMULUS_NTM_MEMORY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MEMORY_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component dnc_memory_stimulus is
+  component ntm_memory_stimulus is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
@@ -167,187 +163,39 @@ package ntm_memory_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- FORWARD WEIGHTING
       -- CONTROL
-      DNC_MEMORY_FORWARD_WEIGHTING_START : out std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_READY : in  std_logic;
+      NTM_MEMORY_START : out std_logic;
+      NTM_MEMORY_READY : in  std_logic;
 
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE : out std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE : out std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE : out std_logic;
+      NTM_MEMORY_K_IN_ENABLE : out std_logic;
+      NTM_MEMORY_S_IN_ENABLE : out std_logic;
 
-      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_I_ENABLE : out std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_J_ENABLE : out std_logic;
+      NTM_MEMORY_K_OUT_ENABLE : in std_logic;
+      NTM_MEMORY_S_OUT_ENABLE : in std_logic;
 
-      DNC_MEMORY_FORWARD_WEIGHTING_F_I_ENABLE : in std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_F_J_ENABLE : in std_logic;
+      NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
+      NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
 
-      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_I_ENABLE : in std_logic;
-      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_J_ENABLE : in std_logic;
+      NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
+      NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
+
+      NTM_MEMORY_W_IN_ENABLE  : out std_logic;
+      NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
 
       -- DATA
-      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_MEMORY_FORWARD_WEIGHTING_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SORT VECTOR
-      -- CONTROL
-      DNC_MEMORY_SORT_VECTOR_START : out std_logic;
-      DNC_MEMORY_SORT_VECTOR_READY : in  std_logic;
-
-      DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE : out std_logic;  -- for j in 0 to N-1
-
-      DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
-
-      DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
-
-      -- DATA
-      DNC_MEMORY_SORT_VECTOR_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DNC_MEMORY_SORT_VECTOR_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_MEMORY_SORT_VECTOR_PHI_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- ADDRESSING
-      -- CONTROL
-      DNC_MEMORY_START : out std_logic;
-      DNC_MEMORY_READY : in  std_logic;
-
-      DNC_MEMORY_K_READ_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
-      DNC_MEMORY_K_READ_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
-
-      DNC_MEMORY_K_READ_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-      DNC_MEMORY_K_READ_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
-
-      DNC_MEMORY_BETA_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_BETA_READ_OUT_ENABLE : in std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_F_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_F_READ_OUT_ENABLE : in std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_PI_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_PI_READ_OUT_ENABLE : in std_logic;  -- for i out 0 to R-1
-
-      DNC_MEMORY_K_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
-      DNC_MEMORY_E_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
-      DNC_MEMORY_V_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
-
-      DNC_MEMORY_K_WRITE_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
-      DNC_MEMORY_E_WRITE_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
-      DNC_MEMORY_V_WRITE_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
-
-      DNC_MEMORY_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-      DNC_MEMORY_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
-
-      -- DATA
-      DNC_MEMORY_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DNC_MEMORY_K_READ_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_BETA_READ_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_F_READ_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_PI_READ_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_MEMORY_K_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_BETA_WRITE_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_E_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_V_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_GA_WRITE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_GW_WRITE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_MEMORY_R_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_content_based_addressing is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      K_IN_ENABLE : in std_logic;
-
-      K_OUT_ENABLE : out std_logic;
-
-      M_IN_I_ENABLE : in std_logic;
-      M_IN_J_ENABLE : in std_logic;
-
-      M_OUT_I_ENABLE : out std_logic;
-      M_OUT_J_ENABLE : out std_logic;
-
-      C_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_addressing is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
-      S_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
-
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-      S_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
-
-      M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
-      M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
-
-      W_IN_ENABLE  : in  std_logic;     -- for j in 0 to N-1
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
-
-      -- DATA
-      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-      G_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      S_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      GAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      NTM_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

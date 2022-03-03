@@ -328,7 +328,7 @@ begin
 
           -- Control Inputs
           data_a_in_i_enable_matrix_vector_convolution <= '0';
-          data_b_in_enable_matrix_vector_convolution <= '0';
+          data_b_in_enable_matrix_vector_convolution   <= '0';
 
           -- Data Inputs
           size_a_i_in_matrix_vector_convolution <= THREE_CONTROL;
@@ -402,7 +402,7 @@ begin
 
           -- Control Inputs
           data_a_in_i_enable_matrix_vector_convolution <= '0';
-          data_b_in_enable_matrix_vector_convolution <= '0';
+          data_b_in_enable_matrix_vector_convolution   <= '0';
 
           -- Data Inputs
           size_a_i_in_matrix_vector_convolution <= THREE_CONTROL;
@@ -476,7 +476,7 @@ begin
 
           -- Control Inputs
           data_a_in_i_enable_matrix_vector_convolution <= '0';
-          data_b_in_enable_matrix_vector_convolution <= '0';
+          data_b_in_enable_matrix_vector_convolution   <= '0';
 
           -- Data Inputs
           size_a_i_in_matrix_vector_convolution <= THREE_CONTROL;

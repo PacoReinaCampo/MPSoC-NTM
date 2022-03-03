@@ -2481,7 +2481,7 @@ package body dnc_core_pkg is
 
       vector_input => vector_e_input
       );
-    
+
     return vector_e_output;
   end function function_dnc_erase_vector;
 
@@ -2498,7 +2498,7 @@ package body dnc_core_pkg is
     scalar_gw_output := function_scalar_logistic (
       scalar_input => scalar_gw_input
       );
-    
+
     return scalar_gw_output;
   end function function_dnc_write_gate;
 
@@ -2532,7 +2532,7 @@ package body dnc_core_pkg is
     scalar_beta_output := function_scalar_oneplus (
       scalar_input => scalar_beta_input
       );
-    
+
     return scalar_beta_output;
   end function function_dnc_write_strength;
 

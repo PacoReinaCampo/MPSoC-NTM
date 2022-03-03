@@ -124,17 +124,17 @@ package ntm_state_outputs_pkg is
   constant FLOAT_N_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"FFF0000000000000";
 
   -- Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((INT_P_TWO, INT_P_ONE, INT_P_FOUR), (INT_P_NINE, INT_P_FOUR, INT_P_TWO), (INT_P_ONE, INT_P_ONE, INT_P_TWO)), ((INT_P_EIGHT, INT_P_SIX, INT_P_TWO), (INT_P_EIGHT, INT_P_FIVE, INT_P_TWO), (INT_P_ONE, INT_P_FOUR, INT_P_ONE)), ((INT_P_THREE, INT_P_ONE, INT_P_SIX), (INT_P_FIVE, INT_P_ZERO, INT_P_FOUR), (INT_P_FIVE, INT_P_EIGHT, INT_P_FIVE)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((INT_P_ONE, INT_P_THREE, INT_P_ONE), (INT_P_TWO, INT_P_FOUR, INT_P_EIGHT), (INT_P_FOUR, INT_P_ONE, INT_P_TWO)), ((INT_P_NINE, INT_P_ONE, INT_P_FIVE), (INT_P_NINE, INT_P_EIGHT, INT_P_ONE), (INT_P_FIVE, INT_P_EIGHT, INT_P_FOUR)), ((INT_P_FIVE, INT_P_FOUR, INT_P_ONE), (INT_P_THREE, INT_P_FOUR, INT_P_SIX), (INT_P_ONE, INT_P_EIGHT, INT_P_EIGHT)));
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((FLOAT_P_TWO, FLOAT_P_ONE, FLOAT_P_FOUR), (FLOAT_P_NINE, FLOAT_P_FOUR, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_EIGHT, FLOAT_P_SIX, FLOAT_P_TWO), (FLOAT_P_EIGHT, FLOAT_P_FIVE, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE)), ((FLOAT_P_THREE, FLOAT_P_ONE, FLOAT_P_SIX), (FLOAT_P_FIVE, FLOAT_P_ZERO, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FIVE)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_ONE), (FLOAT_P_TWO, FLOAT_P_FOUR, FLOAT_P_EIGHT), (FLOAT_P_FOUR, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_NINE, FLOAT_P_ONE, FLOAT_P_FIVE), (FLOAT_P_NINE, FLOAT_P_EIGHT, FLOAT_P_ONE), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FOUR)), ((FLOAT_P_FIVE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_THREE, FLOAT_P_FOUR, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_EIGHT, FLOAT_P_EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((INT_P_ONE, INT_P_FOUR, INT_P_ONE), (INT_P_ZERO, INT_P_EIGHT, INT_P_FOUR), (INT_P_FIVE, INT_P_THREE, INT_P_NINE));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((INT_P_ONE, INT_P_TWO, INT_P_SIX), (INT_P_ONE, INT_P_THREE, INT_P_SIX), (INT_P_EIGHT, INT_P_FOUR, INT_P_FOUR));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_ZERO, FLOAT_P_EIGHT, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_THREE, FLOAT_P_NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((FLOAT_P_ONE, FLOAT_P_TWO, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_SIX), (FLOAT_P_EIGHT, FLOAT_P_FOUR, FLOAT_P_FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (INT_P_FOUR, INT_P_SEVEN, INT_N_THREE);
-  constant VECTOR_SAMPLE_B : vector_buffer := (INT_P_THREE, INT_N_NINE, INT_N_ONE);
+  constant VECTOR_SAMPLE_A : vector_buffer := (FLOAT_P_FOUR, FLOAT_P_SEVEN, FLOAT_N_THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (FLOAT_P_THREE, FLOAT_N_NINE, FLOAT_N_ONE);
 
-  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
-  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
+  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_P_NINE;
+  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
   signal STIMULUS_NTM_VECTOR_STATE_TEST   : boolean := false;
@@ -196,9 +196,15 @@ package ntm_state_outputs_pkg is
       NTM_VECTOR_STATE_DATA_K_I_ENABLE : in std_logic;
       NTM_VECTOR_STATE_DATA_K_J_ENABLE : in std_logic;
 
+      NTM_VECTOR_STATE_DATA_U_IN_ENABLE : out std_logic;
+
+      NTM_VECTOR_STATE_DATA_U_ENABLE : in std_logic;
+
       NTM_VECTOR_STATE_DATA_X_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_VECTOR_STATE_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_VECTOR_STATE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_STATE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_STATE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -214,6 +220,8 @@ package ntm_state_outputs_pkg is
       NTM_VECTOR_STATE_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       NTM_VECTOR_STATE_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_VECTOR_STATE_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       NTM_VECTOR_STATE_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -246,10 +254,15 @@ package ntm_state_outputs_pkg is
       NTM_VECTOR_OUTPUT_DATA_K_I_ENABLE : in std_logic;
       NTM_VECTOR_OUTPUT_DATA_K_J_ENABLE : in std_logic;
 
-      NTM_VECTOR_OUTPUT_DATA_X_OUT_ENABLE : in std_logic;
+      NTM_VECTOR_OUTPUT_DATA_U_IN_ENABLE : out std_logic;
+
+      NTM_VECTOR_OUTPUT_DATA_U_ENABLE : in std_logic;
+
       NTM_VECTOR_OUTPUT_DATA_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_VECTOR_OUTPUT_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_VECTOR_OUTPUT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_OUTPUT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_VECTOR_OUTPUT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -266,132 +279,9 @@ package ntm_state_outputs_pkg is
 
       NTM_VECTOR_OUTPUT_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_VECTOR_OUTPUT_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_VECTOR_OUTPUT_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
       NTM_VECTOR_OUTPUT_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_state_vector_output is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_C_IN_I_ENABLE : in std_logic;
-      DATA_C_IN_J_ENABLE : in std_logic;
-      DATA_D_IN_I_ENABLE : in std_logic;
-      DATA_D_IN_J_ENABLE : in std_logic;
-
-      DATA_A_I_ENABLE : out std_logic;
-      DATA_A_J_ENABLE : out std_logic;
-      DATA_B_I_ENABLE : out std_logic;
-      DATA_B_J_ENABLE : out std_logic;
-      DATA_C_I_ENABLE : out std_logic;
-      DATA_C_J_ENABLE : out std_logic;
-      DATA_D_I_ENABLE : out std_logic;
-      DATA_D_J_ENABLE : out std_logic;
-
-      DATA_K_IN_I_ENABLE : in std_logic;
-      DATA_K_IN_J_ENABLE : in std_logic;
-
-      DATA_K_I_ENABLE : out std_logic;
-      DATA_K_J_ENABLE : out std_logic;
-
-      DATA_X_OUT_ENABLE : out std_logic;
-      DATA_Y_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_state_vector_state is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_C_IN_I_ENABLE : in std_logic;
-      DATA_C_IN_J_ENABLE : in std_logic;
-      DATA_D_IN_I_ENABLE : in std_logic;
-      DATA_D_IN_J_ENABLE : in std_logic;
-
-      DATA_A_I_ENABLE : out std_logic;
-      DATA_A_J_ENABLE : out std_logic;
-      DATA_B_I_ENABLE : out std_logic;
-      DATA_B_J_ENABLE : out std_logic;
-      DATA_C_I_ENABLE : out std_logic;
-      DATA_C_J_ENABLE : out std_logic;
-      DATA_D_I_ENABLE : out std_logic;
-      DATA_D_J_ENABLE : out std_logic;
-
-      DATA_K_IN_I_ENABLE : in std_logic;
-      DATA_K_IN_J_ENABLE : in std_logic;
-
-      DATA_K_I_ENABLE : out std_logic;
-      DATA_K_J_ENABLE : out std_logic;
-
-      DATA_X_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

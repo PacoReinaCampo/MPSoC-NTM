@@ -110,7 +110,11 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_in_j_enable_erasing : std_logic;
   signal m_in_k_enable_erasing : std_logic;
 
+  signal w_in_enable_erasing : std_logic;
+
   signal e_in_enable_erasing : std_logic;
+
+  signal w_out_enable_erasing : std_logic;
 
   signal e_out_enable_erasing : std_logic;
 
@@ -236,7 +240,11 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_erasing,
       M_IN_K_ENABLE => m_in_k_enable_erasing,
 
-      E_IN_ENABLE => e_in_enable_erasing,
+      W_IN_ENABLE => e_in_enable_erasing,
+
+      E_IN_ENABLE => w_in_enable_erasing,
+
+      W_OUT_ENABLE => w_out_enable_erasing,
 
       E_OUT_ENABLE => e_out_enable_erasing,
 

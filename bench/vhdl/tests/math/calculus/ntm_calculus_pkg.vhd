@@ -162,9 +162,9 @@ package ntm_calculus_pkg is
   signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
   signal STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1         : boolean := false;
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGRATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SOFTMAX_TEST         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INTEGRATION_TEST       : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SOFTMAX_TEST           : boolean := false;
 
   signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0     : boolean := false;

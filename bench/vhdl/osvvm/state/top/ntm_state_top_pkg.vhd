@@ -182,10 +182,15 @@ package ntm_state_top_pkg is
       NTM_STATE_TOP_DATA_K_I_ENABLE : in std_logic;
       NTM_STATE_TOP_DATA_K_J_ENABLE : in std_logic;
 
-      NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
+      NTM_STATE_TOP_DATA_U_IN_ENABLE : out std_logic;
+
+      NTM_STATE_TOP_DATA_U_ENABLE : in std_logic;
+
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
+      NTM_STATE_TOP_LENGTH_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
       NTM_STATE_TOP_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_STATE_TOP_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_STATE_TOP_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -202,71 +207,9 @@ package ntm_state_top_pkg is
 
       NTM_STATE_TOP_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
       NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_state_top is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_C_IN_I_ENABLE : in std_logic;
-      DATA_C_IN_J_ENABLE : in std_logic;
-      DATA_D_IN_I_ENABLE : in std_logic;
-      DATA_D_IN_J_ENABLE : in std_logic;
-
-      DATA_A_I_ENABLE : out std_logic;
-      DATA_A_J_ENABLE : out std_logic;
-      DATA_B_I_ENABLE : out std_logic;
-      DATA_B_J_ENABLE : out std_logic;
-      DATA_C_I_ENABLE : out std_logic;
-      DATA_C_J_ENABLE : out std_logic;
-      DATA_D_I_ENABLE : out std_logic;
-      DATA_D_J_ENABLE : out std_logic;
-
-      DATA_K_IN_I_ENABLE : in std_logic;
-      DATA_K_IN_J_ENABLE : in std_logic;
-
-      DATA_K_I_ENABLE : out std_logic;
-      DATA_K_J_ENABLE : out std_logic;
-
-      DATA_X_OUT_ENABLE : out std_logic;
-      DATA_Y_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

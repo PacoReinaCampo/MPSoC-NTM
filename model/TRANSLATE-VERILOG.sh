@@ -84,14 +84,19 @@ vhdl2verilog vhdl/dnc/write_heads/dnc_write_gate.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_key.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_strength.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_vector.sv
+vhdl2verilog vhdl/intro/ntm_intro_adder.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_convolution.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_inverse.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_multiplication.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_product.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_summation.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_transpose.sv
+vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.sv
+vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_vector_product.sv
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_convolution.sv
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_inverse.sv
+vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.sv
+vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_matrix_product.sv
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_multiplication.sv
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_product.sv
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_summation.sv
@@ -144,6 +149,7 @@ vhdl2verilog vhdl/pkg/dnc_core_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_arithmetic_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_core_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_fnn_controller_pkg.sv
+vhdl2verilog vhdl/pkg/ntm_intro_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_lstm_controller_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_math_pkg.sv
 vhdl2verilog vhdl/pkg/ntm_state_pkg.sv

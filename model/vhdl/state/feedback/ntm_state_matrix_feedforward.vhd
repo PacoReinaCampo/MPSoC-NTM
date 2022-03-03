@@ -96,11 +96,11 @@ architecture ntm_state_matrix_output_architecture of ntm_state_matrix_output is
 
   -- Finite State Machine
   type state_ctrl_fsm is (
-    STARTER_STATE,                -- STEP 0
-    INPUT_I_STATE,                -- STEP 1
-    INPUT_J_STATE,                -- STEP 2
-    CLEAN_I_STATE,                -- STEP 3
-    CLEAN_J_STATE                 -- STEP 4
+    STARTER_STATE,                      -- STEP 0
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    CLEAN_I_STATE,                      -- STEP 3
+    CLEAN_J_STATE                       -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -189,7 +189,7 @@ begin
             DATA_K_J_ENABLE <= '0';
           end if;
 
-        when INPUT_I_STATE =>     -- STEP 1 B,D,K
+        when INPUT_I_STATE =>           -- STEP 1 B,D,K
 
           if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -239,7 +239,7 @@ begin
             state_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
-        when INPUT_J_STATE =>     -- STEP 2 B,D,K
+        when INPUT_J_STATE =>           -- STEP 2 B,D,K
 
           if (DATA_D_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -274,7 +274,7 @@ begin
             end if;
           end if;
 
-        when CLEAN_I_STATE =>  -- STEP 3
+        when CLEAN_I_STATE =>           -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_D_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -318,7 +318,7 @@ begin
             state_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when CLEAN_J_STATE =>  -- STEP 4
+        when CLEAN_J_STATE =>           -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

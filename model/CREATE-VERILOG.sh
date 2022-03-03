@@ -84,14 +84,19 @@ touch verilog/dnc/write_heads/dnc_write_gate.sv
 touch verilog/dnc/write_heads/dnc_write_key.sv
 touch verilog/dnc/write_heads/dnc_write_strength.sv
 touch verilog/dnc/write_heads/dnc_write_vector.sv
+touch verilog/intro/ntm_intro_adder.sv
 touch verilog/math/algebra/matrix/ntm_matrix_convolution.sv
 touch verilog/math/algebra/matrix/ntm_matrix_inverse.sv
 touch verilog/math/algebra/matrix/ntm_matrix_multiplication.sv
 touch verilog/math/algebra/matrix/ntm_matrix_product.sv
 touch verilog/math/algebra/matrix/ntm_matrix_summation.sv
 touch verilog/math/algebra/matrix/ntm_matrix_transpose.sv
+touch verilog/math/algebra/matrix/ntm_matrix_vector_convolution.sv
+touch verilog/math/algebra/matrix/ntm_matrix_vector_product.sv
 touch verilog/math/algebra/tensor/ntm_tensor_convolution.sv
 touch verilog/math/algebra/tensor/ntm_tensor_inverse.sv
+touch verilog/math/algebra/tensor/ntm_tensor_matrix_convolution.sv
+touch verilog/math/algebra/tensor/ntm_tensor_matrix_product.sv
 touch verilog/math/algebra/tensor/ntm_tensor_multiplication.sv
 touch verilog/math/algebra/tensor/ntm_tensor_product.sv
 touch verilog/math/algebra/tensor/ntm_tensor_summation.sv
@@ -144,6 +149,7 @@ touch verilog/pkg/dnc_core_pkg.sv
 touch verilog/pkg/ntm_arithmetic_pkg.sv
 touch verilog/pkg/ntm_core_pkg.sv
 touch verilog/pkg/ntm_fnn_controller_pkg.sv
+touch verilog/pkg/ntm_intro_pkg.sv
 touch verilog/pkg/ntm_lstm_controller_pkg.sv
 touch verilog/pkg/ntm_math_pkg.sv
 touch verilog/pkg/ntm_state_pkg.sv

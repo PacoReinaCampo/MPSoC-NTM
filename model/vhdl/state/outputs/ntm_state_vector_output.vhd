@@ -123,23 +123,23 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
   -----------------------------------------------------------------------
 
   type output_ctrl_fsm is (
-    STARTER_STATE,             -- STEP 0
-    INPUT_FIRST_I_STATE,       -- STEP 1
-    INPUT_FIRST_J_STATE,       -- STEP 2
-    CLEAN_FIRST_I_STATE,       -- STEP 3
-    CLEAN_FIRST_J_STATE,       -- STEP 4
-    INPUT_SECOND_I_STATE,      -- STEP 5
-    INPUT_SECOND_J_STATE,      -- STEP 6
-    CLEAN_SECOND_I_STATE,      -- STEP 7
-    CLEAN_SECOND_J_STATE,      -- STEP 8
-    INPUT_THIRD_I_STATE,       -- STEP 9
-    INPUT_THIRD_J_STATE,       -- STEP 10
-    CLEAN_THIRD_I_STATE,       -- STEP 11
-    CLEAN_THIRD_J_STATE,       -- STEP 12
-    INPUT_FOURTH_I_STATE,      -- STEP 13
-    INPUT_FOURTH_J_STATE,      -- STEP 14
-    CLEAN_FOURTH_I_STATE,      -- STEP 15
-    CLEAN_FOURTH_J_STATE       -- STEP 16
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_I_STATE,                -- STEP 1
+    INPUT_FIRST_J_STATE,                -- STEP 2
+    CLEAN_FIRST_I_STATE,                -- STEP 3
+    CLEAN_FIRST_J_STATE,                -- STEP 4
+    INPUT_SECOND_I_STATE,               -- STEP 5
+    INPUT_SECOND_J_STATE,               -- STEP 6
+    CLEAN_SECOND_I_STATE,               -- STEP 7
+    CLEAN_SECOND_J_STATE,               -- STEP 8
+    INPUT_THIRD_I_STATE,                -- STEP 9
+    INPUT_THIRD_J_STATE,                -- STEP 10
+    CLEAN_THIRD_I_STATE,                -- STEP 11
+    CLEAN_THIRD_J_STATE,                -- STEP 12
+    INPUT_FOURTH_I_STATE,               -- STEP 13
+    INPUT_FOURTH_J_STATE,               -- STEP 14
+    CLEAN_FOURTH_I_STATE,               -- STEP 15
+    CLEAN_FOURTH_J_STATE                -- STEP 16
     );
 
   -----------------------------------------------------------------------
@@ -256,7 +256,7 @@ begin
             DATA_K_J_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_I_STATE =>  -- STEP 1 A
+        when INPUT_FIRST_I_STATE =>     -- STEP 1 A
 
           if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -270,7 +270,7 @@ begin
           DATA_A_I_ENABLE <= '0';
           DATA_A_J_ENABLE <= '0';
 
-        when INPUT_FIRST_J_STATE =>  -- STEP 2 A
+        when INPUT_FIRST_J_STATE =>     -- STEP 2 A
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -287,7 +287,7 @@ begin
           -- Control Outputs
           DATA_A_J_ENABLE <= '0';
 
-        when CLEAN_FIRST_I_STATE =>  -- STEP 3
+        when CLEAN_FIRST_I_STATE =>     -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -313,7 +313,7 @@ begin
             output_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when CLEAN_FIRST_J_STATE =>  -- STEP 4
+        when CLEAN_FIRST_J_STATE =>     -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -326,7 +326,7 @@ begin
             output_ctrl_fsm_int <= INPUT_FIRST_J_STATE;
           end if;
 
-        when INPUT_SECOND_I_STATE =>  -- STEP 5 C
+        when INPUT_SECOND_I_STATE =>    -- STEP 5 C
 
           if ((DATA_C_IN_I_ENABLE = '1') and (DATA_C_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -340,7 +340,7 @@ begin
           DATA_C_I_ENABLE <= '0';
           DATA_C_J_ENABLE <= '0';
 
-        when INPUT_SECOND_J_STATE =>  -- STEP 6 C
+        when INPUT_SECOND_J_STATE =>    -- STEP 6 C
 
           if (DATA_C_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -357,7 +357,7 @@ begin
           -- Control Outputs
           DATA_C_J_ENABLE <= '0';
 
-        when CLEAN_SECOND_I_STATE =>  -- STEP 7
+        when CLEAN_SECOND_I_STATE =>    -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_C_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_C_J_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -386,7 +386,7 @@ begin
           -- Control Outputs
           DATA_C_J_ENABLE <= '0';
 
-        when CLEAN_SECOND_J_STATE =>  -- STEP 8
+        when CLEAN_SECOND_J_STATE =>    -- STEP 8
 
           if (DATA_C_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -400,7 +400,7 @@ begin
             end if;
           end if;
 
-        when INPUT_THIRD_I_STATE =>  -- STEP 9 B, u
+        when INPUT_THIRD_I_STATE =>     -- STEP 9 B, u
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -436,7 +436,7 @@ begin
             output_ctrl_fsm_int <= CLEAN_THIRD_J_STATE;
           end if;
 
-        when INPUT_THIRD_J_STATE =>  -- STEP 10 B
+        when INPUT_THIRD_J_STATE =>     -- STEP 10 B
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -453,7 +453,7 @@ begin
           -- Control Outputs
           DATA_B_J_ENABLE <= '0';
 
-        when CLEAN_THIRD_I_STATE =>  -- STEP 11
+        when CLEAN_THIRD_I_STATE =>     -- STEP 11
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_B_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -483,7 +483,7 @@ begin
             output_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
           end if;
 
-        when CLEAN_THIRD_J_STATE =>  -- STEP 12
+        when CLEAN_THIRD_J_STATE =>     -- STEP 12
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -496,7 +496,7 @@ begin
             output_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
           end if;
 
-        when INPUT_FOURTH_I_STATE =>  -- STEP 13 D
+        when INPUT_FOURTH_I_STATE =>    -- STEP 13 D
 
           if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -538,7 +538,7 @@ begin
 
           DATA_Y_OUT_ENABLE <= '0';
 
-        when INPUT_FOURTH_J_STATE =>  -- STEP 14 D
+        when INPUT_FOURTH_J_STATE =>    -- STEP 14 D
 
           if (DATA_D_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -552,7 +552,7 @@ begin
             end if;
           end if;
 
-        when CLEAN_FOURTH_I_STATE =>  -- STEP 15
+        when CLEAN_FOURTH_I_STATE =>    -- STEP 15
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_D_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -591,7 +591,7 @@ begin
           -- Control Outputs
           DATA_D_J_ENABLE <= '0';
 
-        when CLEAN_FOURTH_J_STATE =>  -- STEP 16
+        when CLEAN_FOURTH_J_STATE =>    -- STEP 16
 
           if (unsigned(index_j_loop) < unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

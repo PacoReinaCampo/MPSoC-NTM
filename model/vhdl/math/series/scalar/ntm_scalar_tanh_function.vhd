@@ -118,7 +118,7 @@ begin
           -- Data Outputs
           DATA_OUT <= function_scalar_tanh (
             scalar_input => DATA_IN
-          );
+            );
 
           -- Control Outputs
           READY <= '1';
