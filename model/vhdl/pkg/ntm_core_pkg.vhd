@@ -837,13 +837,12 @@ package body ntm_core_pkg is
     end loop;
 
     -- w(t;j) = wg(t;j)*s(t;k)
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_w_output(j) := ZERO_DATA;
+    vector_w_output := function_vector_convolution (
+      LENGTH_IN => SIZE_N_IN,
 
-      for m in 0 to j loop
-        vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(vector_w_output(j))) + (to_real(to_float(vector_wg_output(m)))*to_real(to_float(vector_s_input(j-m))))));
-      end loop;
-    end loop;
+      vector_a_input => vector_wg_output,
+      vector_b_input => vector_s_input
+      );
 
     -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
