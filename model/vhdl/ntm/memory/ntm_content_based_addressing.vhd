@@ -202,7 +202,7 @@ begin
           end if;
 
           -- Control Outputs
-          C_OUT_ENABLE <= '1';
+          C_OUT_ENABLE <= '0';
 
           M_OUT_I_ENABLE <= '0';
           M_OUT_J_ENABLE <= '0';

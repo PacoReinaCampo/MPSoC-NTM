@@ -172,7 +172,6 @@ package dnc_memory_pkg is
       DNC_MEMORY_FORWARD_WEIGHTING_START : out std_logic;
       DNC_MEMORY_FORWARD_WEIGHTING_READY : in  std_logic;
 
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE : out std_logic;
       DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE : out std_logic;
       DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE : out std_logic;
 

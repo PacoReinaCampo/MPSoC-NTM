@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_forward_weighting is
   generic (
@@ -59,7 +60,6 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square tensor)
     L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square tensor)
 
@@ -90,44 +90,36 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  -- Finite State Machine
+  type state_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    CLEAN_I_STATE,                      -- STEP 3
+    CLEAN_J_STATE                       -- STEP 4
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- TENSOR PRODUCT
-  -- CONTROL
-  signal start_tensor_product : std_logic;
-  signal ready_tensor_product : std_logic;
+  -- Finite State Machine
+  signal state_ctrl_fsm_int : state_ctrl_fsm;
 
-  signal data_a_in_i_enable_tensor_product : std_logic;
-  signal data_a_in_j_enable_tensor_product : std_logic;
-  signal data_a_in_k_enable_tensor_product : std_logic;
-  signal data_b_in_i_enable_tensor_product : std_logic;
-  signal data_b_in_j_enable_tensor_product : std_logic;
-  signal data_b_in_k_enable_tensor_product : std_logic;
+  -- Buffer
+  signal matrix_l_int : matrix_buffer;
+  signal matrix_w_int : matrix_buffer;
 
-  signal data_i_enable_tensor_product : std_logic;
-  signal data_j_enable_tensor_product : std_logic;
-  signal data_k_enable_tensor_product : std_logic;
+  signal matrix_out_int : matrix_buffer;
 
-  signal data_out_i_enable_tensor_product : std_logic;
-  signal data_out_j_enable_tensor_product : std_logic;
-  signal data_out_k_enable_tensor_product : std_logic;
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- DATA
-  signal size_a_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_l_in_g_state_int : std_logic;
+  signal data_l_in_j_state_int : std_logic;
+  signal data_w_in_i_state_int : std_logic;
+  signal data_w_in_j_state_int : std_logic;
 
 begin
 
@@ -137,77 +129,198 @@ begin
 
   -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_tensor_product <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      F_OUT <= ZERO_DATA;
 
-  READY <= ready_tensor_product;
+      -- Control Outputs
+      READY <= '0';
 
-  data_a_in_i_enable_tensor_product <= L_IN_I_ENABLE;
-  data_a_in_j_enable_tensor_product <= L_IN_G_ENABLE;
-  data_a_in_k_enable_tensor_product <= L_IN_J_ENABLE;
-  data_b_in_i_enable_tensor_product <= W_IN_I_ENABLE;
-  data_b_in_j_enable_tensor_product <= W_IN_J_ENABLE;
-  data_b_in_k_enable_tensor_product <= '0';
+      F_I_ENABLE <= '0';
+      F_J_ENABLE <= '0';
 
-  F_I_ENABLE <= data_i_enable_tensor_product;
-  F_J_ENABLE <= data_j_enable_tensor_product;
+      F_OUT_I_ENABLE <= '0';
+      F_OUT_J_ENABLE <= '0';
 
-  F_OUT_I_ENABLE <= data_out_i_enable_tensor_product;
-  F_OUT_J_ENABLE <= data_out_j_enable_tensor_product;
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
-  -- DATA
-  size_a_i_in_tensor_product <= SIZE_R_IN;
-  size_a_j_in_tensor_product <= SIZE_N_IN;
-  size_a_k_in_tensor_product <= SIZE_N_IN;
-  size_b_i_in_tensor_product <= SIZE_R_IN;
-  size_b_j_in_tensor_product <= SIZE_N_IN;
-  size_b_k_in_tensor_product <= ONE_CONTROL;
-  data_a_in_tensor_product   <= L_IN;
-  data_b_in_tensor_product   <= W_IN;
+    elsif (rising_edge(CLK)) then
 
-  F_OUT <= data_out_tensor_product;
+      case state_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          F_OUT <= ZERO_DATA;
 
-  -- TENSOR PRODUCT
-  tensor_product : ntm_tensor_product
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          -- Control Outputs
+          READY <= '0';
 
-      -- CONTROL
-      START => start_tensor_product,
-      READY => ready_tensor_product,
+          F_OUT_I_ENABLE <= '0';
+          F_OUT_J_ENABLE <= '0';
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_product,
-      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
-      DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
+          if (START = '1') then
+            -- Control Outputs
+            F_I_ENABLE <= '1';
+            F_J_ENABLE <= '1';
 
-      DATA_I_ENABLE => data_i_enable_tensor_product,
-      DATA_J_ENABLE => data_j_enable_tensor_product,
-      DATA_K_ENABLE => data_k_enable_tensor_product,
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
-      DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
+            -- FSM Control
+            state_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            F_I_ENABLE <= '0';
+            F_J_ENABLE <= '0';
+          end if;
 
-      -- DATA
-      SIZE_A_I_IN => size_a_i_in_tensor_product,
-      SIZE_A_J_IN => size_a_j_in_tensor_product,
-      SIZE_A_K_IN => size_a_k_in_tensor_product,
-      SIZE_B_I_IN => size_b_i_in_tensor_product,
-      SIZE_B_J_IN => size_b_j_in_tensor_product,
-      SIZE_B_K_IN => size_b_k_in_tensor_product,
-      DATA_A_IN   => data_a_in_tensor_product,
-      DATA_B_IN   => data_b_in_tensor_product,
-      DATA_OUT    => data_out_tensor_product
-      );
+        when INPUT_I_STATE =>           -- STEP 1 L,w
+
+          if ((L_IN_G_ENABLE = '1') and (L_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
+
+            -- Control Internal
+            data_l_in_g_state_int <= '1';
+            data_l_in_j_state_int <= '1';
+          end if;
+
+          if ((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
+
+            -- Control Internal
+            data_w_in_i_state_int <= '1';
+            data_w_in_j_state_int <= '1';
+          end if;
+
+          -- Control Outputs
+          F_I_ENABLE <= '0';
+          F_J_ENABLE <= '0';
+
+          if (data_l_in_g_state_int = '1' and data_l_in_j_state_int = '1' and data_w_in_i_state_int = '1' and data_w_in_j_state_int = '1') then
+            -- Control Internal
+            data_l_in_g_state_int <= '0';
+            data_l_in_j_state_int <= '0';
+            data_w_in_i_state_int <= '0';
+            data_w_in_j_state_int <= '0';
+
+            -- Data Internal
+            matrix_out_int <= function_dnc_forward_weighting (
+              SIZE_R_IN => SIZE_R_IN,
+              SIZE_N_IN => SIZE_N_IN,
+
+              matrix_l_input => matrix_l_int,
+              matrix_w_input => matrix_w_int
+              );
+    
+            -- FSM Control
+            state_ctrl_fsm_int <= CLEAN_J_STATE;
+          end if;
+
+        when INPUT_J_STATE =>           -- STEP 2 L,w
+
+          if (L_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
+
+            -- Control Internal
+            data_l_in_j_state_int <= '1';
+          end if;
+
+          if (W_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
+
+            -- Control Internal
+            data_w_in_j_state_int <= '1';
+          end if;
+
+          -- Control Outputs
+          F_J_ENABLE <= '0';
+
+          if (data_l_in_j_state_int = '1' and data_w_in_j_state_int = '1') then
+            -- Control Internal
+            data_l_in_j_state_int <= '0';
+            data_w_in_j_state_int <= '0';
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              state_ctrl_fsm_int <= CLEAN_I_STATE;
+            else
+              state_ctrl_fsm_int <= CLEAN_J_STATE;
+            end if;
+          end if;
+
+        when CLEAN_I_STATE =>           -- STEP 3
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            F_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            READY <= '0';
+
+            F_I_ENABLE <= '1';
+            F_J_ENABLE <= '1';
+
+            F_OUT_I_ENABLE <= '1';
+            F_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            state_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            F_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            F_I_ENABLE <= '1';
+            F_J_ENABLE <= '1';
+
+            F_OUT_I_ENABLE <= '1';
+            F_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            state_ctrl_fsm_int <= INPUT_I_STATE;
+          end if;
+
+        when CLEAN_J_STATE =>           -- STEP 4
+
+          if (unsigned(index_j_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            F_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            F_J_ENABLE <= '1';
+
+            F_OUT_I_ENABLE <= '1';
+            F_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            state_ctrl_fsm_int <= INPUT_J_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          state_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

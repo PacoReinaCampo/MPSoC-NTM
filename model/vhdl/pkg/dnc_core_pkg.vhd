@@ -178,7 +178,6 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      L_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       L_IN_G_ENABLE : in std_logic;     -- for g in 0 to N-1 (square matrix)
       L_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1 (square matrix)
 

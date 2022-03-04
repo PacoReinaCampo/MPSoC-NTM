@@ -169,7 +169,6 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_forward_weighting : std_logic;
   signal ready_forward_weighting : std_logic;
 
-  signal l_in_i_enable_forward_weighting : std_logic;
   signal l_in_g_enable_forward_weighting : std_logic;
   signal l_in_j_enable_forward_weighting : std_logic;
 
@@ -569,7 +568,6 @@ begin
       DNC_MEMORY_FORWARD_WEIGHTING_START => start_forward_weighting,
       DNC_MEMORY_FORWARD_WEIGHTING_READY => ready_forward_weighting,
 
-      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE => l_in_i_enable_forward_weighting,
       DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
       DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
 
@@ -753,7 +751,6 @@ begin
         START => start_forward_weighting,
         READY => ready_forward_weighting,
 
-        L_IN_I_ENABLE => l_in_i_enable_forward_weighting,
         L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
         L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
 

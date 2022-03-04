@@ -193,7 +193,6 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_forward_weighting : std_logic;
   signal ready_forward_weighting : std_logic;
 
-  signal l_in_i_enable_forward_weighting : std_logic;
   signal l_in_g_enable_forward_weighting : std_logic;
   signal l_in_j_enable_forward_weighting : std_logic;
 
@@ -599,7 +598,6 @@ begin
   w_in_j_enable_backward_weighting <= '0';
 
   -- FORWARD WEIGHTING
-  l_in_i_enable_forward_weighting <= '0';
   l_in_g_enable_forward_weighting <= '0';
   l_in_j_enable_forward_weighting <= '0';
 
@@ -881,7 +879,6 @@ begin
       START => start_forward_weighting,
       READY => ready_forward_weighting,
 
-      L_IN_I_ENABLE => l_in_i_enable_forward_weighting,
       L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
       L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
 

@@ -3,6 +3,8 @@ call ../../../../../../../settings64_ghdl.bat
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_arithmetic_pkg.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_math_pkg.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_fnn_controller_pkg.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/dnc_core_pkg.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
@@ -30,9 +32,13 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
@@ -94,9 +100,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/memory/dnc_write_content_we
 ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/memory/dnc_write_weighting.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/memory/dnc_addressing.vhd
 
-ghdl -a --std=08bench/vhdl/tests/dnc/memory/dnc_memory_pkg.vhd
-ghdl -a --std=08bench/vhdl/tests/dnc/memory/dnc_memory_stimulus.vhd
-ghdl -a --std=08bench/vhdl/tests/dnc/memory/dnc_memory_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_testbench.vhd
 
 ghdl -m --std=08 dnc_memory_testbench
 ghdl -r --std=08 dnc_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > dnc_memory_testbench.tree
