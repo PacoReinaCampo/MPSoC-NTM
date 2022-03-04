@@ -200,6 +200,9 @@ begin
 
       case state_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          DATA_A_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
@@ -339,9 +342,6 @@ begin
         when CLEAN_FIRST_I_STATE =>     -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_B_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_B_I_ENABLE <= '1';
             DATA_B_J_ENABLE <= '1';
@@ -357,9 +357,6 @@ begin
             -- FSM Control
             state_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_B_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_B_I_ENABLE <= '1';
             DATA_B_J_ENABLE <= '1';
@@ -379,9 +376,6 @@ begin
         when CLEAN_FIRST_J_STATE =>     -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_B_J_ENABLE <= '1';
             DATA_D_J_ENABLE <= '1';
@@ -428,9 +422,6 @@ begin
         when CLEAN_SECOND_I_STATE =>    -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_B_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_C_I_ENABLE <= '1';
             DATA_C_J_ENABLE <= '1';
@@ -442,9 +433,6 @@ begin
             -- FSM Control
             state_ctrl_fsm_int <= INPUT_THIRD_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_B_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_C_I_ENABLE <= '1';
             DATA_C_J_ENABLE <= '1';
@@ -460,9 +448,6 @@ begin
         when CLEAN_SECOND_J_STATE =>    -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_A_OUT <= ZERO_DATA;
-
             -- Control Outputs
             DATA_C_J_ENABLE <= '1';
 

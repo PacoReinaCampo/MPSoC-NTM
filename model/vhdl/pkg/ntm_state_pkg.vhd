@@ -1240,8 +1240,6 @@ package body ntm_state_pkg is
 
     variable vector_product : vector_buffer;
 
-    variable data_summation_int : vector_buffer;
-
     variable vector_x_output : vector_buffer;
 
   begin
@@ -1330,7 +1328,7 @@ package body ntm_state_pkg is
       );
 
     -- Initial Summation
-    data_summation_int := vector_product;
+    vector_x_output := vector_product;
 
     -- Summation
     for k in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
@@ -1360,34 +1358,16 @@ package body ntm_state_pkg is
         vector_b_input => vector_data_u_input
         );
 
-      data_summation_int := function_vector_float_adder (
+      vector_x_output := function_vector_float_adder (
         OPERATION => '0',
 
         SIZE_IN => SIZE_A_J_IN,
 
-        vector_a_input => data_summation_int,
+        vector_a_input => vector_x_output,
         vector_b_input => vector_product
         );
 
     end loop;
-
-    vector_product := function_matrix_vector_product (
-      SIZE_A_I_IN => SIZE_D_I_IN,
-      SIZE_A_J_IN => SIZE_D_J_IN,
-      SIZE_B_IN   => SIZE_D_J_IN,
-
-      matrix_a_input => matrix_data_d_int,
-      vector_b_input => vector_data_u_input
-      );
-
-    vector_x_output := function_vector_float_adder (
-      OPERATION => '0',
-
-      SIZE_IN => SIZE_A_J_IN,
-
-      vector_a_input => data_summation_int,
-      vector_b_input => vector_product
-      );
 
     return vector_x_output;
   end function function_state_vector_state;

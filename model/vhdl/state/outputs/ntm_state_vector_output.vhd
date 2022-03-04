@@ -216,6 +216,9 @@ begin
 
       case output_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          DATA_Y_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 

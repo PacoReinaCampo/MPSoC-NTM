@@ -160,6 +160,9 @@ begin
 
       case state_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          DATA_D_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
@@ -189,7 +192,7 @@ begin
             DATA_K_J_ENABLE <= '0';
           end if;
 
-        when INPUT_I_STATE =>           -- STEP 1 B,D,K
+        when INPUT_I_STATE =>           -- STEP 1 D,K
 
           if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -239,7 +242,7 @@ begin
             state_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
-        when INPUT_J_STATE =>           -- STEP 2 B,D,K
+        when INPUT_J_STATE =>           -- STEP 2 D,K
 
           if (DATA_D_IN_J_ENABLE = '1') then
             -- Data Inputs
