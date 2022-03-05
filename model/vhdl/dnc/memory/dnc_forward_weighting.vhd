@@ -264,7 +264,7 @@ begin
             F_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            READY <= '0';
+            READY <= '1';
 
             F_I_ENABLE <= '1';
             F_J_ENABLE <= '1';

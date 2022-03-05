@@ -1333,9 +1333,9 @@ package dnc_core_pkg is
 
     matrix_pi_input : matrix_buffer;
 
-    vector_b_input : vector_buffer;
+    matrix_b_input : matrix_buffer;
     matrix_c_input : matrix_buffer;
-    vector_f_input : vector_buffer
+    matrix_f_input : matrix_buffer
     ) return matrix_buffer;
 
   function function_dnc_sort_vector (
@@ -2028,9 +2028,9 @@ package body dnc_core_pkg is
 
     matrix_pi_input : matrix_buffer;
 
-    vector_b_input : vector_buffer;
+    matrix_b_input : matrix_buffer;
     matrix_c_input : matrix_buffer;
-    vector_f_input : vector_buffer
+    matrix_f_input : matrix_buffer
     ) return matrix_buffer is
 
     variable matrix_w_output : matrix_buffer;
@@ -2041,7 +2041,7 @@ package body dnc_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_w_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_pi_input(i, 0)))*to_real(to_float(vector_b_input(j)))) + (to_real(to_float(matrix_pi_input(i, 1)))*to_real(to_float(matrix_c_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 2)))*to_real(to_float(vector_f_input(j))))));
+        matrix_w_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_pi_input(i, 0)))*to_real(to_float(matrix_b_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 1)))*to_real(to_float(matrix_c_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 2)))*to_real(to_float(matrix_f_input(i, j))))));
       end loop;
     end loop;
 
@@ -2195,7 +2195,6 @@ package body dnc_core_pkg is
     variable vector_u_out_int : vector_buffer;
 
     variable vector_a_int : vector_buffer;
-    variable vector_b_int : vector_buffer;
     variable vector_c_int : vector_buffer;
     variable vector_w_int : vector_buffer;
 
@@ -2311,9 +2310,9 @@ package body dnc_core_pkg is
 
       matrix_pi_input => matrix_pi_read_input,
 
-      vector_b_input => vector_b_int,
+      matrix_b_input => matrix_b_int,
       matrix_c_input => matrix_c_int,
-      vector_f_input => vector_f_read_input
+      matrix_f_input => matrix_f_int
       );
 
     -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
