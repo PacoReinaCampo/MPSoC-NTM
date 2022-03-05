@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_usage_vector is
   generic (
@@ -78,24 +79,18 @@ entity dnc_usage_vector is
     );
 end entity;
 
-architecture dnc_usage_vector_architecture of dnc_usage_vector is
+architecture dnc_usage_vector_urchitecture of dnc_usage_vector is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_STATE,                  -- STEP 1
-    VECTOR_ADDER_MULTIPLIER_STATE,      -- STEP 2
-    VECTOR_ADDER_STATE,                 -- STEP 3
-    INPUT_SECOND_STATE,                 -- STEP 4
-    VECTOR_MULTIPLIER_STATE             -- STEP 5
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
     );
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -104,42 +99,19 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Buffer
+  signal vector_u_int   : vector_buffer;
+  signal vector_w_int   : vector_buffer;
+  signal vector_psi_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
+
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR ADDER
-  -- CONTROL
-  signal start_vector_float_adder : std_logic;
-  signal ready_vector_float_adder : std_logic;
-
-  signal operation_vector_float_adder : std_logic;
-
-  signal data_a_in_enable_vector_float_adder : std_logic;
-  signal data_b_in_enable_vector_float_adder : std_logic;
-
-  signal data_out_enable_vector_float_adder : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR MULTIPLIER
-  -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
-
-  signal data_out_enable_vector_float_multiplier : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_int   : std_logic;
+  signal data_w_in_state_int   : std_logic;
+  signal data_psi_in_state_int : std_logic;
 
 begin
 
@@ -159,132 +131,123 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      U_OUT_ENABLE <= '0';
+      U_OUT_ENABLE   <= '0';
+      W_OUT_ENABLE   <= '0';
+      PSI_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_i_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          U_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
-          -- Control Internal
-          index_loop <= ZERO_CONTROL;
+          U_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            W_OUT_ENABLE   <= '1';
+            PSI_OUT_ENABLE <= '1';
+
             -- Control Internal
-            start_vector_float_multiplier <= '1';
+            index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
-          end if;
-
-        when INPUT_FIRST_STATE =>       -- STEP 1
-
-        when VECTOR_ADDER_MULTIPLIER_STATE =>  -- STEP 2
-
-          -- Control Inputs
-          operation_vector_float_adder <= '0';
-
-          data_a_in_enable_vector_float_adder <= U_IN_ENABLE;
-          data_b_in_enable_vector_float_adder <= W_IN_ENABLE;
-
-          data_a_in_enable_vector_float_multiplier <= U_IN_ENABLE;
-          data_b_in_enable_vector_float_multiplier <= W_IN_ENABLE;
-
-          -- Data Inputs
-          size_in_vector_float_adder   <= SIZE_N_IN;
-          data_a_in_vector_float_adder <= U_IN;
-          data_b_in_vector_float_adder <= W_IN;
-
-          size_in_vector_float_multiplier   <= SIZE_N_IN;
-          data_a_in_vector_float_multiplier <= U_IN;
-          data_b_in_vector_float_multiplier <= W_IN;
-
-          if (data_out_enable_vector_float_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_float_adder <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+            controller_ctrl_fsm_int <= INPUT_STATE;
           else
-            -- Control Internal
-            start_vector_float_adder      <= '0';
-            start_vector_float_multiplier <= '0';
+            -- Control Outputs
+            W_OUT_ENABLE   <= '0';
+            PSI_OUT_ENABLE <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>      -- STEP 3
+        when INPUT_STATE =>           -- STEP 1 u,w,psi
 
-          -- Control Inputs
-          operation_vector_float_adder <= '0';
+          if (U_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_u_int(to_integer(unsigned(index_i_loop))) <= U_IN;
 
-          data_a_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
-          data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_multiplier;
+            -- Control Internal
+            data_u_in_state_int <= '1';
+          end if;
 
-          -- Data Inputs
-          size_in_vector_float_adder   <= SIZE_N_IN;
-          data_a_in_vector_float_adder <= data_out_vector_float_adder;
-          data_b_in_vector_float_adder <= data_out_vector_float_multiplier;
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
 
-          if (data_out_enable_vector_float_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_float_multiplier <= '1';
-            end if;
+            -- Control Internal
+            data_w_in_state_int <= '1';
+          end if;
 
+          if (PSI_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_psi_int(to_integer(unsigned(index_i_loop))) <= PSI_IN;
+
+            -- Control Internal
+            data_psi_in_state_int <= '1';
+          end if;
+
+          -- Control Outputs
+          U_OUT_ENABLE   <= '0';
+          W_OUT_ENABLE   <= '0';
+          PSI_OUT_ENABLE <= '0';
+
+          if (data_u_in_state_int = '1' and data_w_in_state_int = '1' and data_psi_in_state_int = '1') then
+            -- Control Internal
+            data_u_in_state_int   <= '0';
+            data_w_in_state_int   <= '0';
+            data_psi_in_state_int <= '0';
+
+            -- Data Internal
+            vector_out_int <= function_dnc_usage_vector (
+              SIZE_N_IN => SIZE_N_IN,
+
+              vector_u_input   => vector_u_int,
+              vector_w_input   => vector_w_int,
+              vector_psi_input => vector_psi_int
+              );
+    
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_float_adder <= '0';
+            controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when INPUT_SECOND_STATE =>      -- STEP 4
+        when CLEAN_STATE =>           -- STEP 2
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
-
-          -- Control Inputs
-          operation_vector_float_adder <= '0';
-
-          data_a_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
-          data_b_in_enable_vector_float_adder <= PSI_IN_ENABLE;
-
-          -- Data Inputs
-          size_in_vector_float_adder   <= SIZE_N_IN;
-          data_a_in_vector_float_adder <= data_out_vector_float_adder;
-          data_b_in_vector_float_adder <= PSI_IN;
-
-          if (data_out_enable_vector_float_adder = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_ADDER_MULTIPLIER_STATE;
-            end if;
-
+          if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            U_OUT <= data_out_vector_float_multiplier;
+            U_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
-            U_OUT_ENABLE <= '1';
-          else
-            -- Control Outputs
-            U_OUT_ENABLE <= '0';
+            READY <= '1';
+
+            U_OUT_ENABLE   <= '1';
+            W_OUT_ENABLE   <= '1';
+            PSI_OUT_ENABLE <= '1';
 
             -- Control Internal
-            start_vector_float_multiplier <= '0';
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            U_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            U_OUT_ENABLE   <= '1';
+            W_OUT_ENABLE   <= '1';
+            PSI_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when others =>
@@ -293,61 +256,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- VECTOR ADDER
-  vector_float_adder : ntm_vector_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_adder,
-      READY => ready_vector_float_adder,
-
-      OPERATION => operation_vector_float_adder,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_adder,
-      DATA_A_IN => data_a_in_vector_float_adder,
-      DATA_B_IN => data_b_in_vector_float_adder,
-      DATA_OUT  => data_out_vector_float_adder
-      );
-
-  -- VECTOR MULTIPLIER
-  vector_float_multiplier : ntm_vector_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
-      );
 
 end architecture;

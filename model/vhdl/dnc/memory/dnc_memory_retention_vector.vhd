@@ -256,7 +256,7 @@ begin
             W_OUT_I_ENABLE <= '1';
             W_OUT_J_ENABLE <= '1';
 
-            F_OUT_ENABLE <= '0';
+            F_OUT_ENABLE <= '1';
 
             PSI_OUT_ENABLE <= '1';
 

@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.dnc_core_pkg.all;
 
 entity dnc_allocation_weighting is
@@ -61,11 +60,11 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    U_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    U_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    U_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
-    A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    A_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -76,26 +75,18 @@ entity dnc_allocation_weighting is
     );
 end entity;
 
-architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting is
+architecture dnc_allocation_weighting_urchitecture of dnc_allocation_weighting is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_STATE,                  -- STEP 1
-    VECTOR_FIRST_SORT_STATE,            -- STEP 2
-    VECTOR_ADDER_STATE,                 -- STEP 3
-    INPUT_SECOND_STATE,                 -- STEP 4
-    VECTOR_SECOND_SORT_STATE,           -- STEP 5
-    VECTOR_MULTIPLICATION_STATE,        -- STEP 6
-    VECTOR_MULTIPLIER_STATE             -- STEP 7
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
     );
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -104,74 +95,13 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Buffer
+  signal vector_u_int   : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
+
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  -- VECTOR ADDER
-  -- CONTROL
-  signal start_vector_float_adder : std_logic;
-  signal ready_vector_float_adder : std_logic;
-
-  signal operation_vector_float_adder : std_logic;
-
-  signal data_a_in_enable_vector_float_adder : std_logic;
-  signal data_b_in_enable_vector_float_adder : std_logic;
-
-  signal data_out_enable_vector_float_adder : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR MULTIPLIER
-  -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
-
-  signal data_out_enable_vector_float_multiplier : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR MULTIPLICATION
-  -- CONTROL
-  signal start_vector_multiplication : std_logic;
-  signal ready_vector_multiplication : std_logic;
-
-  signal data_in_enable_vector_multiplication : std_logic;
-
-  signal data_out_enable_vector_multiplication : std_logic;
-
-  -- DATA
-  signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SORT VECTOR
-  -- CONTROL
-  signal start_vector_sort : std_logic;
-  signal ready_vector_sort : std_logic;
-
-  signal u_in_enable_vector_sort : std_logic;
-
-  signal u_out_enable_vector_sort : std_logic;
-
-  signal phi_out_enable_vector_sort : std_logic;
-
-  -- DATA
-  signal size_n_in_vector_sort : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal u_in_vector_sort    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal phi_out_vector_sort : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -191,127 +121,89 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      A_OUT_ENABLE   <= '0';
+      U_OUT_ENABLE   <= '0';
+
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_i_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          A_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
-          -- Control Internal
-          index_loop <= ZERO_CONTROL;
+          A_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            U_OUT_ENABLE   <= '1';
+
             -- Control Internal
-            start_vector_sort <= '1';
+            index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
-          end if;
-
-        when INPUT_FIRST_STATE =>       -- STEP 1
-
-        when VECTOR_FIRST_SORT_STATE =>  -- STEP 2
-
-          -- Data Inputs
-          size_n_in_vector_sort <= SIZE_N_IN;
-          u_in_vector_sort      <= U_IN;
-
-          if (phi_out_enable_vector_sort = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_float_adder <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+            controller_ctrl_fsm_int <= INPUT_STATE;
           else
-            -- Control Internal
-            start_vector_sort <= '0';
+            -- Control Outputs
+            U_OUT_ENABLE   <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>      -- STEP 3
+        when INPUT_STATE =>           -- STEP 1 u
 
-          if (data_out_enable_vector_float_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_sort <= '1';
-            end if;
+          if (U_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_u_int(to_integer(unsigned(index_i_loop))) <= U_IN;
 
+            -- Data Internal
+            vector_out_int <= function_dnc_allocation_weighting (
+              SIZE_N_IN => SIZE_N_IN,
+
+              vector_u_input   => vector_u_int
+              );
+    
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
-          else
-            -- Control Internal
-            start_vector_float_adder <= '0';
+            controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when INPUT_SECOND_STATE =>      -- STEP 4
+          -- Control Outputs
+          A_OUT_ENABLE <= '0';
+          U_OUT_ENABLE <= '0';
 
-        when VECTOR_SECOND_SORT_STATE =>  -- STEP 5
+        when CLEAN_STATE =>           -- STEP 2
 
-          -- Data Inputs
-          size_n_in_vector_sort <= SIZE_N_IN;
-          u_in_vector_sort      <= U_IN;
-
-          if (phi_out_enable_vector_sort = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_multiplication <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLICATION_STATE;
-          else
-            -- Control Internal
-            start_vector_sort <= '0';
-          end if;
-
-        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 6
-
-          if (data_out_enable_vector_multiplication = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_float_multiplier <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplication <= '0';
-          end if;
-
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 7
-
-          if (data_out_enable_vector_float_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_FIRST_SORT_STATE;
-            end if;
-
+          if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            A_OUT <= data_out_vector_float_multiplier;
+            A_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            A_OUT_ENABLE <= '1';
+            U_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            A_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             A_OUT_ENABLE <= '1';
-          else
-            -- Control Outputs
-            A_OUT_ENABLE <= '0';
+            U_OUT_ENABLE <= '1';
 
             -- Control Internal
-            start_vector_float_multiplier <= '0';
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when others =>
@@ -320,131 +212,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- DATA
-  -- VECTOR ADDER
-  size_in_vector_float_adder   <= SIZE_N_IN;
-  data_a_in_vector_float_adder <= ONE_DATA;
-  data_b_in_vector_float_adder <= phi_out_vector_sort;
-
-  -- VECTOR MULTIPLICATION
-  length_in_vector_multiplication <= SIZE_N_IN;
-  data_in_vector_multiplication   <= phi_out_vector_sort;
-
-  -- VECTOR MULTIPLIER
-  size_in_vector_float_multiplier   <= SIZE_N_IN;
-  data_a_in_vector_float_multiplier <= data_out_vector_float_adder;
-  data_b_in_vector_float_multiplier <= data_out_vector_multiplication;
-
-  -- VECTOR ADDER
-  vector_float_adder : ntm_vector_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_adder,
-      READY => ready_vector_float_adder,
-
-      OPERATION => operation_vector_float_adder,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_adder,
-      DATA_A_IN => data_a_in_vector_float_adder,
-      DATA_B_IN => data_b_in_vector_float_adder,
-      DATA_OUT  => data_out_vector_float_adder
-      );
-
-  -- VECTOR MULTIPLIER
-  vector_float_multiplier : ntm_vector_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
-      );
-
-  -- VECTOR MULTIPLICATION
-  vector_multiplication : ntm_vector_multiplication
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_multiplication,
-      READY => ready_vector_multiplication,
-
-      DATA_IN_ENABLE => data_in_enable_vector_multiplication,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
-
-      -- DATA
-      SIZE_IN => size_in_vector_multiplication,
-      LENGTH_IN => length_in_vector_multiplication,
-      DATA_IN   => data_in_vector_multiplication,
-      DATA_OUT  => data_out_vector_multiplication
-      );
-
-  -- VECTOR SORT
-  sort_vector : dnc_sort_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_sort,
-      READY => ready_vector_sort,
-
-      U_IN_ENABLE => u_in_enable_vector_sort,
-
-      U_OUT_ENABLE => u_out_enable_vector_sort,
-
-      PHI_OUT_ENABLE => phi_out_enable_vector_sort,
-
-      -- DATA
-      SIZE_N_IN => size_n_in_vector_sort,
-
-      U_IN => u_in_vector_sort,
-
-      PHI_OUT => phi_out_vector_sort
-      );
 
 end architecture;

@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_temporal_link_matrix is
   generic (
@@ -88,20 +89,14 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_STATE,                  -- STEP 1
-    SCALAR_MULTIPLIER_ADDER_STATE,      -- STEP 2
-    INPUT_SECOND_STATE,                 -- STEP 3
-    SCALAR_FIRST_ADDER_STATE,           -- STEP 4
-    INPUT_THIRD_STATE,                  -- STEP 5
-    SCALAR_MULTIPLIER_STATE,            -- STEP 6
-    SCALAR_SECOND_ADDER_STATE           -- STEP 7
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    CLEAN_I_STATE,                      -- STEP 3
+    CLEAN_J_STATE                       -- STEP 4
     );
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -110,34 +105,21 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Buffer
+  signal matrix_l_int : matrix_buffer;
+  signal vector_w_int : vector_buffer;
+  signal vector_p_int : vector_buffer;
+
+  signal matrix_out_int : matrix_buffer;
+
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- Data Internal
-  signal data_int_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_float_adder : std_logic;
-  signal ready_scalar_float_adder : std_logic;
-
-  signal operation_scalar_float_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_float_multiplier : std_logic;
-  signal ready_scalar_float_multiplier : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_l_in_i_state_int : std_logic;
+  signal data_l_in_j_state_int : std_logic;
+  signal data_w_in_state_int   : std_logic;
+  signal data_p_in_state_int   : std_logic;
 
 begin
 
@@ -159,6 +141,12 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      L_OUT_G_ENABLE <= '0';
+      L_OUT_J_ENABLE <= '0';
+
+      W_OUT_ENABLE <= '0';
+      P_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
@@ -167,68 +155,158 @@ begin
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          L_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
-          -- Control Internal
-          index_i_loop <= ZERO_CONTROL;
-          index_j_loop <= ZERO_CONTROL;
+          L_OUT_G_ENABLE <= '0';
+          L_OUT_J_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            W_OUT_ENABLE <= '0';
+            P_OUT_ENABLE <= '0';
+
             -- Control Internal
-            start_scalar_float_adder <= '1';
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_STATE;
           else
-            -- Control Internal
-            start_scalar_float_adder <= '0';
+            -- Control Outputs
+            W_OUT_ENABLE <= '0';
+            P_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>       -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1 L,w,p
 
-        when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 2
+          if ((L_IN_G_ENABLE = '1') and (L_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
-          -- Control Input
-          operation_scalar_float_adder <= '1';
+            -- Control Internal
+            data_l_in_i_state_int <= '1';
+            data_l_in_j_state_int <= '1';
+          end if;
 
-          -- Data Input
-          data_a_in_scalar_float_adder <= ONE_DATA;
-          data_b_in_scalar_float_adder <= W_IN;
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
 
-          data_a_in_scalar_float_multiplier <= W_IN;
-          data_b_in_scalar_float_multiplier <= P_IN;
+            -- Control Internal
+            data_w_in_state_int <= '1';
+          end if;
 
-          -- Data Internal
-          data_int_scalar_float_multiplier <= data_out_scalar_float_multiplier;
+          if (P_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_p_int(to_integer(unsigned(index_i_loop))) <= P_IN;
 
-        when INPUT_SECOND_STATE =>      -- STEP 3
+            -- Control Internal
+            data_p_in_state_int <= '1';
+          end if;
 
-        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 4
+          -- Control Outputs
+          L_OUT_G_ENABLE <= '0';
+          L_OUT_J_ENABLE <= '0';
 
-          -- Control Input
-          operation_scalar_float_adder <= '1';
+          W_OUT_ENABLE <= '0';
+          P_OUT_ENABLE <= '0';
 
-          -- Data Input
-          data_a_in_scalar_float_adder <= data_out_scalar_float_adder;
-          data_b_in_scalar_float_adder <= W_IN;
+          if (data_l_in_i_state_int = '1' and data_l_in_j_state_int = '1' and data_w_in_state_int = '1' and data_p_in_state_int = '1') then
+            -- Control Internal
+            data_l_in_i_state_int <= '0';
+            data_l_in_j_state_int <= '0';
+            data_w_in_state_int   <= '0';
+            data_p_in_state_int   <= '0';
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 5
+            -- Data Internal
+            matrix_out_int <= function_dnc_temporal_link_matrix (
+              SIZE_N_IN => SIZE_N_IN,
 
-          -- Data Input
-          data_a_in_scalar_float_multiplier <= data_out_scalar_float_adder;
-          data_b_in_scalar_float_multiplier <= L_OUT;
+              matrix_l_input => matrix_l_int,
+              vector_w_input => vector_w_int,
+              vector_p_input => vector_p_int
+              );
+    
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_J_STATE;
+          end if;
 
-        when INPUT_THIRD_STATE =>       -- STEP 6
+        when INPUT_J_STATE =>           -- STEP 2 L,w,p
 
-        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 7
+          if (L_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
-          -- Control Input
-          operation_scalar_float_adder <= '0';
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              controller_ctrl_fsm_int <= CLEAN_I_STATE;
+            else
+              controller_ctrl_fsm_int <= CLEAN_J_STATE;
+            end if;
+          end if;
 
-          -- Data Input
-          data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
-          data_b_in_scalar_float_adder <= data_int_scalar_float_multiplier;
+          -- Control Outputs
+          L_OUT_J_ENABLE <= '0';
+
+        when CLEAN_I_STATE =>           -- STEP 3
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            L_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            L_OUT_G_ENABLE <= '1';
+            L_OUT_J_ENABLE <= '1';
+
+            W_OUT_ENABLE <= '1';
+            P_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            L_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            L_OUT_G_ENABLE <= '1';
+            L_OUT_J_ENABLE <= '1';
+
+            W_OUT_ENABLE <= '1';
+            P_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_I_STATE;
+          end if;
+
+        when CLEAN_J_STATE =>           -- STEP 4
+
+          if (unsigned(index_j_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then            -- Data Outputs
+            -- Data Outputs
+            L_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            L_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_J_STATE;
+          end if;
 
         when others =>
           -- FSM Control
@@ -236,49 +314,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  scalar_float_adder : ntm_scalar_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_adder,
-      READY => ready_scalar_float_adder,
-
-      OPERATION => operation_scalar_float_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_adder,
-      DATA_B_IN => data_b_in_scalar_float_adder,
-      DATA_OUT  => data_out_scalar_float_adder
-      );
-
-  -- SCALAR MULTIPLIER
-  scalar_float_multiplier : ntm_scalar_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_float_multiplier,
-      READY => ready_scalar_float_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_float_multiplier,
-      DATA_B_IN => data_b_in_scalar_float_multiplier,
-      DATA_OUT  => data_out_scalar_float_multiplier
-      );
 
 end architecture;

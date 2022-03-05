@@ -163,7 +163,7 @@ begin
 
         when INPUT_STATE =>           -- STEP 1 p,w
 
-          if (P_IN_ENABLE = '1') then
+          if (W_IN_ENABLE = '1') then
             -- Data Inputs
             vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
 
