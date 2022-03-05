@@ -92,14 +92,11 @@ module dnc_memory_testbench;
   wire l_in_g_enable_backward_weighting;
   wire l_in_j_enable_backward_weighting;
 
-  wire l_out_g_enable_backward_weighting;
-  wire l_out_j_enable_backward_weighting;
-
   wire w_in_i_enable_backward_weighting;
   wire w_in_j_enable_backward_weighting;
 
-  wire w_out_i_enable_backward_weighting;
-  wire w_out_j_enable_backward_weighting;
+  wire b_i_enable_backward_weighting;
+  wire b_j_enable_backward_weighting;
 
   wire b_out_i_enable_backward_weighting;
   wire b_out_j_enable_backward_weighting;
@@ -588,14 +585,11 @@ module dnc_memory_testbench;
     .L_IN_G_ENABLE(l_in_g_enable_backward_weighting),
     .L_IN_J_ENABLE(l_in_j_enable_backward_weighting),
 
-    .L_OUT_G_ENABLE(l_out_g_enable_backward_weighting),
-    .L_OUT_J_ENABLE(l_out_j_enable_backward_weighting),
-
     .W_IN_I_ENABLE(w_in_i_enable_backward_weighting),
     .W_IN_J_ENABLE(w_in_j_enable_backward_weighting),
 
-    .W_OUT_I_ENABLE(w_out_i_enable_backward_weighting),
-    .W_OUT_J_ENABLE(w_out_j_enable_backward_weighting),
+    .W_OUT_I_ENABLE(b_i_enable_backward_weighting),
+    .W_OUT_J_ENABLE(b_j_enable_backward_weighting),
 
     .B_OUT_I_ENABLE(b_out_i_enable_backward_weighting),
     .B_OUT_J_ENABLE(b_out_j_enable_backward_weighting),

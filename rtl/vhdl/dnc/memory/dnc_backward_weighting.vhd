@@ -62,14 +62,11 @@ entity dnc_backward_weighting is
     L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
     L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
 
-    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
-    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
-
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
-    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    B_I_ENABLE : out std_logic;         -- for i in 0 to R-1 (read heads flow)
+    B_J_ENABLE : out std_logic;         -- for j in 0 to N-1
 
     B_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     B_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
@@ -235,10 +232,6 @@ begin
             controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
           end if;
 
-          -- Control Outputs
-          L_OUT_G_ENABLE <= '0';
-          L_OUT_J_ENABLE <= '0';
-
         when INPUT_J_FIRST_STATE =>     -- STEP 2
 
           if (L_IN_J_ENABLE = '1') then
@@ -256,19 +249,12 @@ begin
             end if;
           end if;
 
-          -- Control Outputs
-          L_OUT_J_ENABLE <= '0';
-
         when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1') then
             if ((unsigned(index_i_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               data_int_matrix_transpose <= data_out_matrix_transpose;
-
-              -- Control Outputs
-              L_OUT_G_ENABLE <= '1';
-              L_OUT_J_ENABLE <= '1';
 
               READY <= '1';
 
@@ -281,10 +267,6 @@ begin
             elsif ((unsigned(index_i_transpose_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               data_int_matrix_transpose <= data_out_matrix_transpose;
-
-              -- Control Outputs
-              L_OUT_G_ENABLE <= '1';
-              L_OUT_J_ENABLE <= '1';
 
               -- Control Internal
               index_i_transpose_loop <= std_logic_vector(unsigned(index_i_transpose_loop) + unsigned(ONE_CONTROL));
@@ -307,9 +289,6 @@ begin
             if (unsigned(index_j_transpose_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               data_int_matrix_transpose <= data_out_matrix_transpose;
-
-              -- Control Outputs
-              L_OUT_J_ENABLE <= '1';
 
               -- Control Internal
               index_j_transpose_loop <= std_logic_vector(unsigned(index_j_transpose_loop) + unsigned(ONE_CONTROL));
@@ -352,8 +331,8 @@ begin
           end if;
 
           -- Control Outputs
-          W_OUT_I_ENABLE <= '0';
-          W_OUT_J_ENABLE <= '0';
+          B_I_ENABLE <= '0';
+          B_J_ENABLE <= '0';
 
           B_OUT_I_ENABLE <= '0';
           B_OUT_J_ENABLE <= '0';
@@ -378,7 +357,7 @@ begin
           end if;
 
           -- Control Outputs
-          W_OUT_J_ENABLE <= '0';
+          B_J_ENABLE <= '0';
 
           B_OUT_J_ENABLE <= '0';
 
@@ -392,8 +371,8 @@ begin
               -- Control Outputs
               READY <= '1';
 
-              W_OUT_I_ENABLE <= '1';
-              W_OUT_J_ENABLE <= '1';
+              B_I_ENABLE <= '1';
+              B_J_ENABLE <= '1';
 
               B_OUT_I_ENABLE <= '1';
               B_OUT_J_ENABLE <= '1';
@@ -409,8 +388,8 @@ begin
               B_OUT <= data_out_matrix_product;
 
               -- Control Outputs
-              W_OUT_I_ENABLE <= '1';
-              W_OUT_J_ENABLE <= '1';
+              B_I_ENABLE <= '1';
+              B_J_ENABLE <= '1';
 
               B_OUT_I_ENABLE <= '1';
               B_OUT_J_ENABLE <= '1';
@@ -440,7 +419,7 @@ begin
               B_OUT <= data_out_matrix_product;
 
               -- Control Outputs
-              W_OUT_J_ENABLE <= '1';
+              B_J_ENABLE <= '1';
 
               B_OUT_J_ENABLE <= '1';
 

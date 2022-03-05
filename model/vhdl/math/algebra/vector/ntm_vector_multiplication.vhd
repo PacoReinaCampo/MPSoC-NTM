@@ -66,7 +66,8 @@ entity ntm_vector_multiplication is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -99,12 +100,14 @@ architecture ntm_vector_multiplication_architecture of ntm_vector_multiplication
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
   -- Buffer
-  signal vector_in_int : vector_buffer;
+  signal vector_in_int : matrix_buffer;
 
   signal vector_out_int : vector_buffer;
 
   -- Control Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_t_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -129,6 +132,8 @@ begin
       -- Control Internal
       index_loop <= ZERO_CONTROL;
 
+      index_t_loop <= ZERO_CONTROL;
+
     elsif (rising_edge(CLK)) then
 
       case multiplication_ctrl_fsm_int is
@@ -147,6 +152,8 @@ begin
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
+            index_t_loop <= ZERO_CONTROL;
+
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           else
@@ -158,7 +165,7 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_in_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+            vector_in_int(to_integer(unsigned(index_t_loop)), to_integer(unsigned(index_loop))) <= DATA_IN;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
@@ -169,12 +176,13 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- Data Internal
             vector_out_int <= function_vector_multiplication (
+              SIZE_IN   => SIZE_IN,
               LENGTH_IN => LENGTH_IN,
 
               vector_input => vector_in_int
@@ -205,7 +213,7 @@ begin
 
         when OPERATION_STATE =>         -- STEP 4
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             READY <= '1';
 

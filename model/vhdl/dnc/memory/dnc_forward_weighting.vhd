@@ -91,7 +91,7 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type state_ctrl_fsm is (
+  type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -104,7 +104,7 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal state_ctrl_fsm_int : state_ctrl_fsm;
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Buffer
   signal matrix_l_int : matrix_buffer;
@@ -151,7 +151,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case state_ctrl_fsm_int is
+      case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Data Outputs
           F_OUT <= ZERO_DATA;
@@ -172,7 +172,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            state_ctrl_fsm_int <= INPUT_I_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_STATE;
           else
             -- Control Outputs
             F_I_ENABLE <= '0';
@@ -220,7 +220,7 @@ begin
               );
     
             -- FSM Control
-            state_ctrl_fsm_int <= CLEAN_J_STATE;
+            controller_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2 L,w
@@ -251,9 +251,9 @@ begin
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
-              state_ctrl_fsm_int <= CLEAN_I_STATE;
+              controller_ctrl_fsm_int <= CLEAN_I_STATE;
             else
-              state_ctrl_fsm_int <= CLEAN_J_STATE;
+              controller_ctrl_fsm_int <= CLEAN_J_STATE;
             end if;
           end if;
 
@@ -277,7 +277,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            state_ctrl_fsm_int <= STARTER_STATE;
+            controller_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             F_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
@@ -294,7 +294,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            state_ctrl_fsm_int <= INPUT_I_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when CLEAN_J_STATE =>           -- STEP 4
@@ -313,12 +313,12 @@ begin
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            state_ctrl_fsm_int <= INPUT_J_STATE;
+            controller_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          state_ctrl_fsm_int <= STARTER_STATE;
+          controller_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

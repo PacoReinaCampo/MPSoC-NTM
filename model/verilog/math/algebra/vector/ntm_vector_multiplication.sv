@@ -55,7 +55,7 @@ module ntm_vector_multiplication #(
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_IN,
+    input [CONTROL_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -195,7 +195,7 @@ module ntm_vector_multiplication #(
         end
         ENDER_STATE : begin // STEP 3
           if(ready_scalar_float_multiplier == 1'b1) begin
-            if(index_vector_loop == (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
+            if(index_vector_loop == (LENGTH_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
@@ -203,7 +203,7 @@ module ntm_vector_multiplication #(
               // FSM Control
               multiplication_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if(index_vector_loop < (SIZE_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
+            else if(index_vector_loop < (LENGTH_IN - ONE_CONTROL) && index_scalar_loop == (LENGTH_IN - ONE_CONTROL)) begin
               // Control Internal
               index_vector_loop <= (index_vector_loop + ONE_CONTROL);
               index_scalar_loop <= ZERO_DATA;
@@ -215,7 +215,7 @@ module ntm_vector_multiplication #(
               // FSM Control
               multiplication_ctrl_fsm_int <= INPUT_VECTOR_STATE;
             end
-            else if(index_vector_loop < (SIZE_IN - ONE_CONTROL) && index_scalar_loop < (LENGTH_IN - ONE_CONTROL)) begin
+            else if(index_vector_loop < (LENGTH_IN - ONE_CONTROL) && index_scalar_loop < (LENGTH_IN - ONE_CONTROL)) begin
               // Control Internal
               index_scalar_loop <= (index_scalar_loop + ONE_CONTROL);
 

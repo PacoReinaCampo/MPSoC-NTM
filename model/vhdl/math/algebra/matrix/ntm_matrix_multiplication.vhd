@@ -71,6 +71,7 @@ entity ntm_matrix_multiplication is
     -- DATA
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -107,11 +108,12 @@ architecture ntm_matrix_multiplication_architecture of ntm_matrix_multiplication
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
   -- Buffer
-  signal matrix_in_int : matrix_buffer;
+  signal matrix_in_int : tensor_buffer;
 
   signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
+  signal index_t_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -140,6 +142,7 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
+      index_t_loop <= ZERO_CONTROL;
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
@@ -159,6 +162,7 @@ begin
             DATA_J_ENABLE <= '1';
 
             -- Control Internal
+            index_t_loop <= ZERO_CONTROL;
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
@@ -174,7 +178,7 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_t_loop)), to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= ENDER_J_STATE;
@@ -188,7 +192,7 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_t_loop)), to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -213,6 +217,7 @@ begin
             matrix_out_int <= function_matrix_multiplication (
               SIZE_I_IN => SIZE_I_IN,
               SIZE_J_IN => SIZE_J_IN,
+              LENGTH_IN => LENGTH_IN,
 
               matrix_input => matrix_in_int
               );

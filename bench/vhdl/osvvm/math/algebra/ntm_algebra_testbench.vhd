@@ -196,7 +196,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -210,7 +211,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -292,6 +294,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- DATA
   signal size_i_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -337,6 +340,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- DATA
   signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -436,6 +440,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_i_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_tensor_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_tensor_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -491,6 +496,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_i_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_tensor_summation: std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_tensor_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -602,6 +608,7 @@ begin
       VECTOR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
       -- DATA
+      VECTOR_MULTIPLICATION_SIZE_IN   => size_in_vector_multiplication,
       VECTOR_MULTIPLICATION_LENGTH_IN => length_in_vector_multiplication,
       VECTOR_MULTIPLICATION_DATA_IN   => data_in_vector_multiplication,
       VECTOR_MULTIPLICATION_DATA_OUT  => data_out_vector_multiplication,
@@ -616,7 +623,7 @@ begin
       VECTOR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
+      VECTOR_SUMMATION_SIZE_IN => size_in_vector_summation,
       VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
       VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
 
@@ -698,6 +705,7 @@ begin
       -- DATA
       MATRIX_MULTIPLICATION_SIZE_I_IN => size_i_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_SIZE_J_IN => size_j_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_LENGTH_IN => length_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_DATA_IN   => data_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_DATA_OUT  => data_out_matrix_multiplication,
 
@@ -743,6 +751,7 @@ begin
       -- DATA
       MATRIX_SUMMATION_SIZE_I_IN => size_i_in_matrix_summation,
       MATRIX_SUMMATION_SIZE_J_IN => size_j_in_matrix_summation,
+      MATRIX_SUMMATION_LENGTH_IN => length_in_matrix_summation,
       MATRIX_SUMMATION_DATA_IN   => data_in_matrix_summation,
       MATRIX_SUMMATION_DATA_OUT  => data_out_matrix_summation,
 
@@ -842,6 +851,7 @@ begin
       TENSOR_MULTIPLICATION_SIZE_I_IN => size_i_in_tensor_multiplication,
       TENSOR_MULTIPLICATION_SIZE_J_IN => size_j_in_tensor_multiplication,
       TENSOR_MULTIPLICATION_SIZE_K_IN => size_k_in_tensor_multiplication,
+      TENSOR_MULTIPLICATION_LENGTH_IN => length_in_tensor_multiplication,
       TENSOR_MULTIPLICATION_DATA_IN   => data_in_tensor_multiplication,
       TENSOR_MULTIPLICATION_DATA_OUT  => data_out_tensor_multiplication,
 
@@ -897,6 +907,7 @@ begin
       TENSOR_SUMMATION_SIZE_I_IN => size_i_in_tensor_summation,
       TENSOR_SUMMATION_SIZE_J_IN => size_j_in_tensor_summation,
       TENSOR_SUMMATION_SIZE_K_IN => size_k_in_tensor_summation,
+      TENSOR_SUMMATION_LENGTH_IN => length_in_tensor_summation,
       TENSOR_SUMMATION_DATA_IN   => data_in_tensor_summation,
       TENSOR_SUMMATION_DATA_OUT  => data_out_tensor_summation,
 
@@ -1035,6 +1046,7 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
         -- DATA
+        SIZE_IN   => size_in_vector_multiplication,
         LENGTH_IN => length_in_vector_multiplication,
         DATA_IN   => data_in_vector_multiplication,
         DATA_OUT  => data_out_vector_multiplication
@@ -1062,6 +1074,7 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
         -- DATA
+        SIZE_IN   => size_in_vector_summation,
         LENGTH_IN => length_in_vector_summation,
         DATA_IN   => data_in_vector_summation,
         DATA_OUT  => data_out_vector_summation
@@ -1196,6 +1209,7 @@ begin
         -- DATA
         SIZE_I_IN => size_i_in_matrix_multiplication,
         SIZE_J_IN => size_j_in_matrix_multiplication,
+        LENGTH_IN => length_in_matrix_multiplication,
         DATA_IN   => data_in_matrix_multiplication,
         DATA_OUT  => data_out_matrix_multiplication
         );
@@ -1267,6 +1281,7 @@ begin
         -- DATA
         SIZE_I_IN => size_i_in_matrix_summation,
         SIZE_J_IN => size_j_in_matrix_summation,
+        LENGTH_IN => length_in_matrix_summation,
         DATA_IN   => data_in_matrix_summation,
         DATA_OUT  => data_out_matrix_summation
         );
@@ -1418,6 +1433,7 @@ begin
         SIZE_I_IN => size_i_in_tensor_multiplication,
         SIZE_J_IN => size_j_in_tensor_multiplication,
         SIZE_K_IN => size_k_in_tensor_multiplication,
+        LENGTH_IN => length_in_tensor_multiplication,
         DATA_IN   => data_in_tensor_multiplication,
         DATA_OUT  => data_out_tensor_multiplication
         );
@@ -1499,6 +1515,7 @@ begin
         SIZE_I_IN => size_i_in_tensor_summation,
         SIZE_J_IN => size_j_in_tensor_summation,
         SIZE_K_IN => size_k_in_tensor_summation,
+        LENGTH_IN => length_in_tensor_summation,
         DATA_IN   => data_in_tensor_summation,
         DATA_OUT  => data_out_tensor_summation
         );

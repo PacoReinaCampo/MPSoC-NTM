@@ -124,7 +124,8 @@ entity ntm_algebra_stimulus is
     VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_MULTIPLICATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -138,7 +139,8 @@ entity ntm_algebra_stimulus is
     VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SUMMATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -220,6 +222,7 @@ entity ntm_algebra_stimulus is
     -- DATA
     MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_MULTIPLICATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -265,6 +268,7 @@ entity ntm_algebra_stimulus is
     -- DATA
     MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -364,6 +368,7 @@ entity ntm_algebra_stimulus is
     TENSOR_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_LRNGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -419,6 +424,7 @@ entity ntm_algebra_stimulus is
     TENSOR_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_SUMMATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -920,7 +926,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_MULTIPLICATION_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
 
@@ -936,7 +942,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_MULTIPLICATION_FIRST_RUN : loop
-          if (VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -945,7 +951,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' or VECTOR_MULTIPLICATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' or VECTOR_MULTIPLICATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -981,7 +987,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_MULTIPLICATION_SECOND_RUN : loop
-          if ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -990,7 +996,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') or (VECTOR_MULTIPLICATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') or (VECTOR_MULTIPLICATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -1023,7 +1029,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_SUMMATION_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_0) then
 
@@ -1039,7 +1045,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SUMMATION_FIRST_RUN : loop
-          if (VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1048,7 +1054,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' or VECTOR_SUMMATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' or VECTOR_SUMMATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1084,7 +1090,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SUMMATION_SECOND_RUN : loop
-          if ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1093,7 +1099,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') or (VECTOR_SUMMATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') or (VECTOR_SUMMATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
