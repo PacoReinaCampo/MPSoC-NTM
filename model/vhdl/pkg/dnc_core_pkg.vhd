@@ -2609,13 +2609,14 @@ package body dnc_core_pkg is
 
     -- beta(t;i) = U(t;i;l)·h(t;l)
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_beta_output(i) := ZERO_DATA;
+    vector_beta_output := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_R_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
 
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_beta_output(i) := std_logic_vector(to_float(to_real(to_float(vector_beta_output(i))) + (to_real(to_float(matrix_wbeta_input(i, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_wbeta_input,
+      vector_b_input => vector_h_input
+      );
 
     return vector_beta_output;
   end function function_dnc_read_interface_beta_vector;
@@ -2640,13 +2641,14 @@ package body dnc_core_pkg is
 
     -- f(t;i) = U(t;i;l)·h(t;l)
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_f_output(i) := ZERO_DATA;
+    vector_f_output := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_R_IN,
+      SIZE_A_J_IN => SIZE_L_IN,
+      SIZE_B_IN   => SIZE_L_IN,
 
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_f_output(i) := std_logic_vector(to_float(to_real(to_float(vector_f_output(i))) + (to_real(to_float(matrix_wf_input(i, l)))*to_real(to_float(vector_h_input(l))))));
-      end loop;
-    end loop;
+      matrix_a_input => matrix_wf_input,
+      vector_b_input => vector_h_input
+      );
 
     return vector_f_output;
   end function function_dnc_read_interface_f_vector;
@@ -2922,11 +2924,12 @@ package body dnc_core_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-        data_addition_int(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_summation_int(i, y)))));
-      end loop;
-    end loop;
+    data_addition_int := function_vector_summation (
+      SIZE_IN   => SIZE_R_IN,
+      LENGTH_IN => SIZE_Y_IN,
+
+      vector_input => data_summation_int
+      );
 
     data_product_int := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_Y_IN,

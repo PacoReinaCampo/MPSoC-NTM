@@ -117,6 +117,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -337,6 +338,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
+      SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation

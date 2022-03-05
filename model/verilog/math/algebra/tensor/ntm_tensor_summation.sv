@@ -57,7 +57,7 @@ module ntm_tensor_summation #(
     input [CONTROL_SIZE-1:0] SIZE_I_IN,
     input [CONTROL_SIZE-1:0] SIZE_J_IN,
     input [CONTROL_SIZE-1:0] SIZE_K_IN,
-    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [CONTROL_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );

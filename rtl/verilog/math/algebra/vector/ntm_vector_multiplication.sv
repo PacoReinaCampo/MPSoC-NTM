@@ -56,7 +56,7 @@ module ntm_vector_multiplication #(
 
     // DATA
     input [CONTROL_SIZE-1:0] SIZE_IN,
-    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [CONTROL_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
@@ -108,8 +108,8 @@ module ntm_vector_multiplication #(
   wire data_out_enable_scalar_float_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_scalar_float_multiplier;
-  reg [DATA_SIZE-1:0] length_in_scalar_float_multiplier;
+  wire [CONTROL_SIZE-1:0] size_in_scalar_float_multiplier;
+  reg [CONTROL_SIZE-1:0] length_in_scalar_float_multiplier;
   reg [DATA_SIZE-1:0] data_in_scalar_float_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_float_multiplier;
 

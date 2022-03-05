@@ -60,7 +60,7 @@ module ntm_matrix_multiplication #(
     // DATA
     input [CONTROL_SIZE-1:0] SIZE_I_IN,
     input [CONTROL_SIZE-1:0] SIZE_J_IN,
-    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [CONTROL_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
@@ -117,8 +117,8 @@ module ntm_matrix_multiplication #(
   wire data_out_scalar_enable_vector_multiplication;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_multiplication;
-  reg [DATA_SIZE-1:0] length_in_vector_multiplication;
+  reg [CONTROL_SIZE-1:0] size_in_vector_multiplication;
+  reg [CONTROL_SIZE-1:0] length_in_vector_multiplication;
   reg [DATA_SIZE-1:0] data_in_vector_multiplication;
   wire [DATA_SIZE-1:0] data_out_vector_multiplication;
 

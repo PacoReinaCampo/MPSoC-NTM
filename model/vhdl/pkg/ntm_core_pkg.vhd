@@ -1065,11 +1065,12 @@ package body ntm_core_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-        data_addition_int(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_summation_int(i, y)))));
-      end loop;
-    end loop;
+    data_addition_int := function_vector_summation (
+      SIZE_IN   => SIZE_R_IN,
+      LENGTH_IN => SIZE_Y_IN,
+
+      vector_input => data_summation_int
+      );
 
     data_product_int := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_Y_IN,

@@ -197,7 +197,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -212,7 +212,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -294,7 +294,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- DATA
   signal size_i_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -340,7 +340,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- DATA
   signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -440,7 +440,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_i_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_tensor_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_tensor_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -496,7 +496,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_i_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_tensor_summation: std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_tensor_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 

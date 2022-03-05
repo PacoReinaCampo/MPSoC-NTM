@@ -159,7 +159,7 @@ package ntm_math_pkg is
 
       -- DATA
       SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -185,7 +185,7 @@ package ntm_math_pkg is
 
       -- DATA
       SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -346,7 +346,7 @@ package ntm_math_pkg is
       -- DATA
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -448,7 +448,7 @@ package ntm_math_pkg is
       -- DATA
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -632,7 +632,7 @@ package ntm_math_pkg is
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -749,7 +749,7 @@ package ntm_math_pkg is
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1656,7 +1656,7 @@ package ntm_math_pkg is
 
   function function_vector_multiplication (
     SIZE_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_input : matrix_buffer
 
@@ -1664,7 +1664,7 @@ package ntm_math_pkg is
 
   function function_vector_summation (
     SIZE_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_input : matrix_buffer
 
@@ -1702,7 +1702,7 @@ package ntm_math_pkg is
   function function_matrix_multiplication (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_input : tensor_buffer
 
@@ -1731,7 +1731,7 @@ package ntm_math_pkg is
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_input : tensor_buffer
 
@@ -1783,7 +1783,7 @@ package ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     tensor_input : array4_buffer
 
@@ -1817,7 +1817,7 @@ package ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     tensor_input : array4_buffer
 
@@ -2192,7 +2192,7 @@ package body ntm_math_pkg is
 
   function function_vector_multiplication (
     SIZE_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_input : matrix_buffer
 
@@ -2216,7 +2216,7 @@ package body ntm_math_pkg is
 
   function function_vector_summation (
     SIZE_IN   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_input : matrix_buffer
 
@@ -2357,7 +2357,7 @@ package body ntm_math_pkg is
   function function_matrix_multiplication (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_input : tensor_buffer
     ) return matrix_buffer is
@@ -2434,7 +2434,7 @@ package body ntm_math_pkg is
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_input : tensor_buffer
     ) return matrix_buffer is
@@ -2619,7 +2619,7 @@ package body ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     tensor_input : array4_buffer
     ) return tensor_buffer is
@@ -2709,7 +2709,7 @@ package body ntm_math_pkg is
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     tensor_input : array4_buffer
     ) return tensor_buffer is
