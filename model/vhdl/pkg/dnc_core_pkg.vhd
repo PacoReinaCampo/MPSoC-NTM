@@ -2097,15 +2097,45 @@ package body dnc_core_pkg is
     vector_psi_input : vector_buffer
     ) return vector_buffer is
 
+    variable vector_operation_int : vector_buffer;
+
     variable vector_u_output : vector_buffer;
 
   begin
 
     -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_u_output(j) := std_logic_vector(to_float((to_real(to_float(vector_u_input(j))) + to_real(to_float(vector_w_input(j))) - (to_real(to_float(vector_u_input(j)))*to_real(to_float(vector_w_input(j)))))*to_real(to_float(vector_psi_input(j)))));
-    end loop;
+    vector_operation_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_u_input,
+      vector_b_input => vector_w_input
+      );
+
+    vector_operation_int := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_operation_int
+      );
+
+    vector_operation_int := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_u_input,
+      vector_b_input => vector_operation_int
+      );
+
+    vector_u_output := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_operation_int,
+      vector_b_input => vector_psi_input
+      );
 
     return vector_u_output;
   end function function_dnc_usage_vector;
@@ -2146,6 +2176,14 @@ package body dnc_core_pkg is
     scalar_gw_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return vector_buffer is
 
+    variable vector_operation_int : vector_buffer;
+
+    variable vector_gw_int : vector_buffer;
+    variable vector_ga_int : vector_buffer;
+
+    variable vector_one_int : vector_buffer;
+    variable vector_cga_int : vector_buffer;
+
     variable vector_w_output : vector_buffer;
 
   begin
@@ -2153,8 +2191,50 @@ package body dnc_core_pkg is
     -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(scalar_gw_input))*((to_real(to_float(scalar_ga_input))*to_real(to_float(vector_a_input(j)))) + ((1.0 - to_real(to_float(scalar_ga_input)))*to_real(to_float(vector_c_input(j)))))));
+      vector_ga_int(j) := scalar_ga_input;
+      vector_gw_int(j) := scalar_gw_input;
+
+      vector_one_int(j) := ONE_DATA;
     end loop;
+
+    vector_cga_int := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_one_int,
+      vector_b_input => vector_ga_int
+      );
+
+    vector_ga_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_ga_int,
+      vector_b_input => vector_a_input
+      );
+
+    vector_cga_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_cga_int,
+      vector_b_input => vector_c_input
+      );
+
+    vector_operation_int := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_ga_int,
+      vector_b_input => vector_cga_int
+      );
+
+    vector_w_output := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_gw_int,
+      vector_b_input => vector_operation_int
+      );
 
     return vector_w_output;
   end function function_dnc_write_weighting;
