@@ -1071,7 +1071,7 @@ package dnc_core_pkg is
       );
   end component;
 
-  component dnc_read_interface_vector is
+  component dnc_interface_vector is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -1085,44 +1085,12 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- Read Key
-      WK_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
-      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+      -- Weight
+      U_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
-      WK_OUT_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-      WK_OUT_L_ENABLE : in std_logic;   -- for l in 0 to L-1
-      WK_OUT_K_ENABLE : in std_logic;   -- for k in 0 to W-1
-
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
-      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
-
-      -- Read Strength
-      WBETA_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
-      WBETA_IN_L_ENABLE : in std_logic;  -- for l in 0 to L-1
-
-      WBETA_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
-      WBETA_OUT_L_ENABLE : in std_logic;  -- for l in 0 to L-1
-
-      BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
-
-      -- Free Gate
-      WF_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
-      WF_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-
-      WF_OUT_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-      WF_OUT_L_ENABLE : in std_logic;   -- for l in 0 to L-1
-
-      F_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
-
-      -- Read Mode
-      WPI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-      WPI_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
-
-      WPI_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
-      WPI_OUT_L_ENABLE : in std_logic;  -- for l in 0 to L-1
-
-      PI_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+      U_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
 
       -- Hidden State
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
@@ -1134,101 +1102,11 @@ package dnc_core_pkg is
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WPI_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      PI_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component dnc_write_interface_vector is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- Write Key
-      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
-
-      WK_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WK_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
-
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      -- Write Strength
-      WBETA_IN_ENABLE : in std_logic;   -- for l in 0 to L-1
-
-      WBETA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
-
-      -- Erase Vector
-      WE_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WE_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
-
-      WE_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WE_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
-
-      E_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      -- Write Vector
-      WV_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WV_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
-
-      WV_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WV_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
-
-      V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      -- Allocation Gate
-      WGA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
-
-      WGA_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
-
-      -- Write Gate
-      WGW_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
-
-      WGW_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
-
-      -- Hidden State
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-
-      -- DATA
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WE_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WV_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WGA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WGW_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      E_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
+      XI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

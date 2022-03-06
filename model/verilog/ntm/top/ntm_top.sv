@@ -268,58 +268,25 @@ module ntm_top #(
   wire ready_interface_vector;
 
   // Key Vector
-  wire wk_in_l_enable_interface_vector;
-  wire wk_in_k_enable_interface_vector;
+  wire u_in_s_enable_interface_vector;
+  wire u_in_l_enable_interface_vector;
 
-  wire wk_out_l_enable_interface_vector;
-  wire wk_out_k_enable_interface_vector;
-
-  wire k_out_enable_interface_vector;
-
-  // Key Strength
-  wire wbeta_in_enable_interface_vector;
-
-  wire wbeta_out_enable_interface_vector;
-
-  // Interpolation Gate
-  wire wg_in_enable_interface_vector;
-
-  wire wg_out_enable_interface_vector;
-
-  // Shift Weighting
-  wire ws_in_l_enable_interface_vector;
-  wire ws_in_j_enable_interface_vector;
-
-  wire ws_out_l_enable_interface_vector;
-  wire ws_out_j_enable_interface_vector;
-
-  wire s_out_enable_interface_vector;
-
-  // Sharpening
-  wire wgamma_in_enable_interface_vector;
-
-  wire wgamma_out_enable_interface_vector;
+  wire u_out_s_enable_interface_vector;
+  wire u_out_l_enable_interface_vector;
 
   // Hidden State
   wire h_in_enable_interface_vector;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_n_in_interface_vector;
   wire [DATA_SIZE-1:0] size_w_in_interface_vector;
   wire [DATA_SIZE-1:0] size_l_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_r_in_interface_vector;
 
-  wire [DATA_SIZE-1:0] wk_in_interface_vector;
-  wire [DATA_SIZE-1:0] wbeta_in_interface_vector;
-  wire [DATA_SIZE-1:0] wg_in_interface_vector;
-  wire [DATA_SIZE-1:0] ws_in_interface_vector;
-  wire [DATA_SIZE-1:0] wgamma_in_interface_vector;
+  wire [DATA_SIZE-1:0] u_in_interface_vector;
+
   wire [DATA_SIZE-1:0] h_in_interface_vector;
-
-  wire [DATA_SIZE-1:0] k_out_interface_vector;
-  wire [DATA_SIZE-1:0] beta_out_interface_vector;
-  wire [DATA_SIZE-1:0] g_out_interface_vector;
-  wire [DATA_SIZE-1:0] s_out_interface_vector;
-  wire [DATA_SIZE-1:0] gamma_out_interface_vector;
+  
+  wire [DATA_SIZE-1:0] xi_out_interface_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // READ HEADS
@@ -693,59 +660,28 @@ module ntm_top #(
     .START(start_interface_vector),
     .READY(ready_interface_vector),
 
-    // Key Vector
-    .WK_IN_L_ENABLE(wk_in_l_enable_interface_vector),
-    .WK_IN_K_ENABLE(wk_in_k_enable_interface_vector),
+    // Weight
+    .U_IN_S_ENABLE(u_in_s_enable_interface_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_interface_vector),
 
-    .WK_OUT_L_ENABLE(wk_out_l_enable_interface_vector),
-    .WK_OUT_K_ENABLE(wk_out_k_enable_interface_vector),
-
-    .K_OUT_ENABLE(k_out_enable_interface_vector),
-
-    // Key Strength
-    .WBETA_IN_ENABLE(wbeta_in_enable_interface_vector),
-
-    .WBETA_OUT_ENABLE(wbeta_out_enable_interface_vector),
-
-    // Interpolation Gate
-    .WG_IN_ENABLE(wg_in_enable_interface_vector),
-
-    .WG_OUT_ENABLE(wg_out_enable_interface_vector),
-
-    // Shift Weighting
-    .WS_IN_L_ENABLE(ws_in_l_enable_interface_vector),
-    .WS_IN_J_ENABLE(ws_in_j_enable_interface_vector),
-
-    .WS_OUT_L_ENABLE(ws_out_l_enable_interface_vector),
-    .WS_OUT_J_ENABLE(ws_out_j_enable_interface_vector),
-
-    .S_OUT_ENABLE(s_out_enable_interface_vector),
-
-    // Sharpening
-    .WGAMMA_IN_ENABLE(wgamma_in_enable_interface_vector),
-
-    .WGAMMA_OUT_ENABLE(wgamma_out_enable_interface_vector),
+    .U_OUT_S_ENABLE(u_out_s_enable_interface_vector),
+    .U_OUT_L_ENABLE(u_out_l_enable_interface_vector),
 
     // Hidden State
     .H_IN_ENABLE(h_in_enable_interface_vector),
 
+    .H_OUT_ENABLE(h_out_enable_interface_vector),
+
     // DATA
-    .SIZE_N_IN(size_n_in_interface_vector),
     .SIZE_W_IN(size_w_in_interface_vector),
     .SIZE_L_IN(size_l_in_interface_vector),
+    .SIZE_R_IN(size_r_in_interface_vector),
 
-    .WK_IN(wk_in_interface_vector),
-    .WBETA_IN(wbeta_in_interface_vector),
-    .WG_IN(wg_in_interface_vector),
-    .WS_IN(ws_in_interface_vector),
-    .WGAMMA_IN(wgamma_in_interface_vector),
+    .U_IN(u_in_interface_vector),
+
     .H_IN(h_in_interface_vector),
 
-    .K_OUT(k_out_interface_vector),
-    .BETA_OUT(beta_out_interface_vector),
-    .G_OUT(g_out_interface_vector),
-    .S_OUT(s_out_interface_vector),
-    .GAMMA_OUT(gamma_out_interface_vector)
+    .XI_OUT(xi_out_interface_vector)
   );
 
   ///////////////////////////////////////////////////////////////////////

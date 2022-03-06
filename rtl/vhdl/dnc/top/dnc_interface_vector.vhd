@@ -44,11 +44,10 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
-use work.ntm_core_pkg.all;
+use work.dnc_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_interface_vector is
+entity dnc_interface_vector is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -66,18 +65,20 @@ entity ntm_interface_vector is
     U_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
     U_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
 
-    U_OUT_K_ENABLE : out std_logic;    -- for s in 0 to S-1
+    U_OUT_S_ENABLE : out std_logic;    -- for s in 0 to S-1
     U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    U_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -85,7 +86,7 @@ entity ntm_interface_vector is
     );
 end entity;
 
-architecture ntm_interface_vector_architecture of ntm_interface_vector is
+architecture dnc_interface_vector_architecture of dnc_interface_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -95,12 +96,16 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_FIRST_STATE,                -- STEP 1
     INPUT_J_FIRST_STATE,                -- STEP 2
-    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
-    MATRIX_FIRST_PRODUCT_j_STATE,       -- STEP 4
+    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 3
+    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 4
     INPUT_I_SECOND_STATE,               -- STEP 5
     INPUT_J_SECOND_STATE,               -- STEP 6
-    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 7
-    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 8
+    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 7
+    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 8
+    INPUT_I_THIRD_STATE,                -- STEP 9
+    INPUT_J_THIRD_STATE,                -- STEP 10
+    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 11
+    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 12
     );
 
   -----------------------------------------------------------------------
@@ -123,9 +128,6 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   signal data_a_in_j_enable_matrix_product : std_logic;
   signal data_b_in_i_enable_matrix_product : std_logic;
   signal data_b_in_j_enable_matrix_product : std_logic;
-
-  signal data_i_enable_matrix_product : std_logic;
-  signal data_j_enable_matrix_product : std_logic;
 
   signal data_out_i_enable_matrix_product : std_logic;
   signal data_out_j_enable_matrix_product : std_logic;
@@ -168,9 +170,6 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
-
-      DATA_I_ENABLE => data_i_enable_matrix_product,
-      DATA_J_ENABLE => data_j_enable_matrix_product,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,

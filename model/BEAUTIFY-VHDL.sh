@@ -75,9 +75,8 @@ emacs -batch vhdl/dnc/read_heads/dnc_read_keys.vhd -f vhdl-beautify-buffer -f sa
 emacs -batch vhdl/dnc/read_heads/dnc_read_modes.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/read_heads/dnc_read_strengths.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/dnc_read_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/dnc/top/dnc_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_top.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/dnc_write_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_allocation_gate.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_erase_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_write_gate.vhd -f vhdl-beautify-buffer -f save-buffer

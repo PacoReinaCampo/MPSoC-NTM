@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.ntm_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
@@ -273,60 +272,28 @@ architecture ntm_top_architecture of ntm_top is
   signal start_interface_vector : std_logic;
   signal ready_interface_vector : std_logic;
 
-  -- Key Vector
-  signal wk_in_l_enable_interface_vector : std_logic;
-  signal wk_in_k_enable_interface_vector : std_logic;
+  -- Weight
+  signal u_in_s_enable_interface_vector : std_logic;
+  signal u_in_l_enable_interface_vector : std_logic;
 
-  signal wk_out_l_enable_interface_vector : std_logic;
-  signal wk_out_k_enable_interface_vector : std_logic;
-
-  signal k_out_enable_interface_vector : std_logic;
-
-  -- Key Strength
-  signal wbeta_in_enable_interface_vector : std_logic;
-
-  signal wbeta_out_enable_interface_vector : std_logic;
-
-  -- Interpolation Gate
-  signal wg_in_enable_interface_vector : std_logic;
-
-  signal wg_out_enable_interface_vector : std_logic;
-
-  -- Shift Weighting
-  signal ws_in_l_enable_interface_vector : std_logic;
-  signal ws_in_j_enable_interface_vector : std_logic;
-
-  signal ws_out_l_enable_interface_vector : std_logic;
-  signal ws_out_j_enable_interface_vector : std_logic;
-
-  signal s_out_enable_interface_vector : std_logic;
-
-  -- Sharpening
-  signal wgamma_in_enable_interface_vector : std_logic;
-
-  signal wgamma_out_enable_interface_vector : std_logic;
+  signal u_out_s_enable_interface_vector : std_logic;
+  signal u_out_l_enable_interface_vector : std_logic;
 
   -- Hidden State
   signal h_in_enable_interface_vector : std_logic;
 
+  signal h_out_enable_interface_vector : std_logic;
+
   -- DATA
-  signal size_n_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_l_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal wk_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wbeta_in_interface_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wg_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ws_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wgamma_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal k_out_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_interface_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal g_out_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_out_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gamma_out_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_out_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- READ HEADS
@@ -623,26 +590,9 @@ begin
   y_in_enable_output_vector <= '0';
 
   -- INTERFACE VECTOR
-  -- Key Vector
-  wk_in_l_enable_interface_vector <= '0';
-  wk_in_k_enable_interface_vector <= '0';
-
-  k_out_enable_interface_vector <= '0';
-
-  -- Key Strength
-  wbeta_in_enable_interface_vector <= '0';
-
-  -- Interpolation Gate
-  wg_in_enable_interface_vector <= '0';
-
-  -- Shift Weighting
-  ws_in_l_enable_interface_vector <= '0';
-  ws_in_j_enable_interface_vector <= '0';
-
-  s_out_enable_interface_vector <= '0';
-
-  -- Sharpening
-  wgamma_in_enable_interface_vector <= '0';
+  -- Weight
+  u_in_s_enable_interface_vector <= '0';
+  u_in_l_enable_interface_vector <= '0';
 
   -- Hidden State
   h_in_enable_interface_vector <= '0';
@@ -718,23 +668,13 @@ begin
   y_out_output_vector <= FULL;
 
   -- INTERFACE VECTOR
-  size_n_in_interface_vector <= FULL;
   size_w_in_interface_vector <= FULL;
   size_l_in_interface_vector <= FULL;
+  size_r_in_interface_vector <= FULL;
 
-  wk_in_interface_vector     <= FULL;
-  wbeta_in_interface_vector  <= FULL;
-  wg_in_interface_vector     <= FULL;
-  ws_in_interface_vector     <= FULL;
-  wgamma_in_interface_vector <= FULL;
+  u_in_interface_vector <= FULL;
 
   h_in_interface_vector <= FULL;
-
-  k_out_interface_vector     <= FULL;
-  beta_out_interface_vector  <= FULL;
-  g_out_interface_vector     <= FULL;
-  s_out_interface_vector     <= FULL;
-  gamma_out_interface_vector <= FULL;
 
   -- READING
   size_n_in_reading <= FULL;
@@ -929,60 +869,28 @@ begin
       START => start_interface_vector,
       READY => ready_interface_vector,
 
-      -- Key Vector
-      WK_IN_L_ENABLE => wk_in_l_enable_interface_vector,
-      WK_IN_K_ENABLE => wk_in_k_enable_interface_vector,
+      -- Weight
+      U_IN_S_ENABLE => u_in_s_enable_interface_vector,
+      U_IN_L_ENABLE => u_in_l_enable_interface_vector,
 
-      WK_OUT_L_ENABLE => wk_out_l_enable_interface_vector,
-      WK_OUT_K_ENABLE => wk_out_k_enable_interface_vector,
-
-      K_OUT_ENABLE => k_out_enable_interface_vector,
-
-      -- Key Strength
-      WBETA_IN_ENABLE => wbeta_in_enable_interface_vector,
-
-      WBETA_OUT_ENABLE => wbeta_out_enable_interface_vector,
-
-      -- Interpolation Gate
-      WG_IN_ENABLE => wg_in_enable_interface_vector,
-
-      WG_OUT_ENABLE => wg_out_enable_interface_vector,
-
-      -- Shift Weighting
-      WS_IN_L_ENABLE => ws_in_l_enable_interface_vector,
-      WS_IN_J_ENABLE => ws_in_j_enable_interface_vector,
-
-      WS_OUT_L_ENABLE => ws_out_l_enable_interface_vector,
-      WS_OUT_J_ENABLE => ws_out_j_enable_interface_vector,
-
-      S_OUT_ENABLE => s_out_enable_interface_vector,
-
-      -- Sharpening
-      WGAMMA_IN_ENABLE => wgamma_in_enable_interface_vector,
-
-      WGAMMA_OUT_ENABLE => wgamma_out_enable_interface_vector,
+      U_OUT_S_ENABLE => u_out_s_enable_interface_vector,
+      U_OUT_L_ENABLE => u_out_l_enable_interface_vector,
 
       -- Hidden State
       H_IN_ENABLE => h_in_enable_interface_vector,
 
+      H_OUT_ENABLE => h_out_enable_interface_vector,
+
       -- DATA
-      SIZE_N_IN => size_n_in_interface_vector,
       SIZE_W_IN => size_w_in_interface_vector,
       SIZE_L_IN => size_l_in_interface_vector,
+      SIZE_R_IN => size_r_in_interface_vector,
 
-      WK_IN     => wk_in_interface_vector,
-      WBETA_IN  => wbeta_in_interface_vector,
-      WG_IN     => wg_in_interface_vector,
-      WS_IN     => ws_in_interface_vector,
-      WGAMMA_IN => wgamma_in_interface_vector,
+      U_IN => u_in_interface_vector,
 
       H_IN => h_in_interface_vector,
 
-      K_OUT     => k_out_interface_vector,
-      BETA_OUT  => beta_out_interface_vector,
-      G_OUT     => g_out_interface_vector,
-      S_OUT     => s_out_interface_vector,
-      GAMMA_OUT => gamma_out_interface_vector
+      XI_OUT => xi_out_interface_vector
       );
 
   -----------------------------------------------------------------------

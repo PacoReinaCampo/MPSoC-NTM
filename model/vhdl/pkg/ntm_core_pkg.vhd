@@ -347,59 +347,27 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- Key Vector
-      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+      U_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
-      WK_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WK_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
-
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      -- Key Strength
-      WBETA_IN_ENABLE : in std_logic;   -- for l in 0 to L-1
-
-      WBETA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
-
-      -- Interpolation Gate
-      WG_IN_ENABLE : in std_logic;      -- for l in 0 to L-1
-
-      WG_OUT_ENABLE : out std_logic;    -- for l in 0 to L-1
-
-      -- Shift Weighting
-      WS_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WS_IN_J_ENABLE : in std_logic;    -- for j in 0 to N-1
-
-      WS_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WS_OUT_J_ENABLE : out std_logic;  -- for j in 0 to N-1
-
-      S_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
-
-      -- Sharpening
-      WGAMMA_IN_ENABLE : in std_logic;  -- for l in 0 to L-1
-
-      WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
+      U_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
 
       -- Hidden State
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
+      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
       -- DATA
-      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WG_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WS_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WGAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      K_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      XI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -531,80 +499,15 @@ package ntm_core_pkg is
   -- TOP - INTERFACE
   -----------------------------------------------------------------------
 
-  function function_ntm_interface_k_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+  function function_ntm_interface_vector (
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
+    matrix_u_input : matrix_buffer;
 
     vector_h_input : vector_buffer
     ) return vector_buffer;
-
-  function function_ntm_interface_beta_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector;
-
-  function function_ntm_interface_g_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector;
-
-  function function_ntm_interface_s_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return vector_buffer;
-
-  function function_ntm_interface_gamma_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector;
 
   -----------------------------------------------------------------------
   -- TOP - OUTPUT
@@ -864,161 +767,33 @@ package body ntm_core_pkg is
   -- TOP - INTERFACE
   -----------------------------------------------------------------------
 
-  function function_ntm_interface_k_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+  function function_ntm_interface_vector (
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
+    matrix_u_input : matrix_buffer;
 
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
-    variable vector_k_output : vector_buffer;
+    variable vector_xi_output : vector_buffer;
 
   begin
 
-    -- k(t;k) = U(t;k;l)·h(t;l)
+    -- xi(t;s) = U(t;s;l)·h(t;l)
 
-    vector_k_output := function_matrix_vector_product (
+    vector_xi_output := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_W_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_B_IN   => SIZE_L_IN,
 
-      matrix_a_input => matrix_wk_input,
+      matrix_a_input => matrix_u_input,
       vector_b_input => vector_h_input
       );
 
-    return vector_k_output;
-  end function function_ntm_interface_k_vector;
-
-  function function_ntm_interface_beta_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector is
-
-    variable scalar_beta_output : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  begin
-
-    -- beta(t) = U(t;l)·h(t;l)
-
-    scalar_beta_output := ZERO_DATA;
-
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      scalar_beta_output := std_logic_vector(to_float(to_real(to_float(scalar_beta_output)) + (to_real(to_float(vector_wbeta_input(l)))*to_real(to_float(vector_h_input(l))))));
-    end loop;
-
-    return scalar_beta_output;
-  end function function_ntm_interface_beta_vector;
-
-  function function_ntm_interface_g_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector is
-
-    variable scalar_g_output : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  begin
-
-    -- g(t) = U(t;l)·h(t;l)
-
-    scalar_g_output := ZERO_DATA;
-
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      scalar_g_output := std_logic_vector(to_float(to_real(to_float(scalar_g_output)) + (to_real(to_float(vector_wg_input(l)))*to_real(to_float(vector_h_input(l))))));
-    end loop;
-
-    return scalar_g_output;
-  end function function_ntm_interface_g_vector;
-
-  function function_ntm_interface_s_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_s_output : vector_buffer;
-
-  begin
-
-    -- s(t;j) = U(t;j;l)·h(t;l)
-
-    vector_s_output := function_matrix_vector_product (
-      SIZE_A_I_IN => SIZE_N_IN,
-      SIZE_A_J_IN => SIZE_L_IN,
-      SIZE_B_IN   => SIZE_L_IN,
-
-      matrix_a_input => matrix_ws_input,
-      vector_b_input => vector_h_input
-      );
-
-    return vector_s_output;
-  end function function_ntm_interface_s_vector;
-
-  function function_ntm_interface_gamma_vector (
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_wk_input     : matrix_buffer;
-    vector_wbeta_input  : vector_buffer;
-    vector_wg_input     : vector_buffer;
-    matrix_ws_input     : matrix_buffer;
-    vector_wgamma_input : vector_buffer;
-
-    vector_h_input : vector_buffer
-    ) return std_logic_vector is
-
-    variable scalar_gamma_output : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  begin
-
-    -- gamma(t) = U(t;l)·h(t;l)
-
-    scalar_gamma_output := ZERO_DATA;
-
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      scalar_gamma_output := std_logic_vector(to_float(to_real(to_float(scalar_gamma_output)) + (to_real(to_float(vector_wgamma_input(l)))*to_real(to_float(vector_h_input(l))))));
-    end loop;
-
-    return scalar_gamma_output;
-  end function function_ntm_interface_gamma_vector;
+    return vector_xi_output;
+  end function function_ntm_interface_vector;
 
   -----------------------------------------------------------------------
   -- TOP - OUTPUT
@@ -1115,14 +890,9 @@ package body ntm_core_pkg is
     ) return vector_buffer is
 
     -- Trainer Variable
-    variable matrix_wk_int     : matrix_buffer;
-    variable vector_wbeta_int  : vector_buffer;
-    variable vector_wg_int     : vector_buffer;
-    variable matrix_ws_int     : matrix_buffer;
-    variable vector_wgamma_int : vector_buffer;
-
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
+    variable matrix_w_int : matrix_buffer;
 
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
@@ -1149,6 +919,8 @@ package body ntm_core_pkg is
     variable vector_h_int : vector_buffer;
     variable vector_k_int : vector_buffer;
     variable vector_s_int : vector_buffer;
+
+    variable vector_xi_int : vector_buffer;
 
     variable scalar_g_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -1209,84 +981,14 @@ package body ntm_core_pkg is
 
     -- INTERFACE_VECTOR_STATE
 
-    -- xi(t;?) = U(t;?;l)·h(t;l)
+    -- xi(t;s) = U(t;s;l)·h(t;l)
 
-    -- k(t;k) = U(t;k;l)·h(t;l)
-    vector_k_int := function_ntm_interface_k_vector (
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
+    vector_xi_int := function_ntm_interface_vector (
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-
-      matrix_wk_input     => matrix_wk_int,
-      vector_wbeta_input  => vector_wbeta_int,
-      vector_wg_input     => vector_wg_int,
-      matrix_ws_input     => matrix_ws_int,
-      vector_wgamma_input => vector_wgamma_int,
-
-      vector_h_input => vector_h_int
-      );
-
-    -- beta(t) = U(t;l)·h(t;l)
-    scalar_beta_int := function_ntm_interface_beta_vector (
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
 
-      matrix_wk_input     => matrix_wk_int,
-      vector_wbeta_input  => vector_wbeta_int,
-      vector_wg_input     => vector_wg_int,
-      matrix_ws_input     => matrix_ws_int,
-      vector_wgamma_input => vector_wgamma_int,
-
-      vector_h_input => vector_h_int
-      );
-
-    -- g(t) = U(t;l)·h(t;l)
-    scalar_g_int := function_ntm_interface_g_vector (
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      matrix_wk_input     => matrix_wk_int,
-      vector_wbeta_input  => vector_wbeta_int,
-      vector_wg_input     => vector_wg_int,
-      matrix_ws_input     => matrix_ws_int,
-      vector_wgamma_input => vector_wgamma_int,
-
-      vector_h_input => vector_h_int
-      );
-
-    -- s(t;j) = U(t;j;l)·h(t;l)
-    vector_s_int := function_ntm_interface_s_vector (
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      matrix_wk_input     => matrix_wk_int,
-      vector_wbeta_input  => vector_wbeta_int,
-      vector_wg_input     => vector_wg_int,
-      matrix_ws_input     => matrix_ws_int,
-      vector_wgamma_input => vector_wgamma_int,
-
-      vector_h_input => vector_h_int
-      );
-
-    -- gamma(t) = U(t;l)·h(t;l)
-    scalar_gamma_int := function_ntm_interface_gamma_vector (
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      matrix_wk_input     => matrix_wk_int,
-      vector_wbeta_input  => vector_wbeta_int,
-      vector_wg_input     => vector_wg_int,
-      matrix_ws_input     => matrix_ws_int,
-      vector_wgamma_input => vector_wgamma_int,
+      matrix_u_input => matrix_w_int,
 
       vector_h_input => vector_h_int
       );

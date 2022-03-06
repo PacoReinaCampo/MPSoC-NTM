@@ -273,6 +273,36 @@ module dnc_top #(
 
   wire [DATA_SIZE-1:0] y_out_output_vector;
 
+  // INTERFACE VECTOR
+  // CONTROL
+  wire start_interface_vector;
+  wire ready_interface_vector;
+
+  // Weight
+  wire u_in_s_enable_interface_vector;
+  wire u_in_l_enable_interface_vector;
+
+  wire u_out_s_enable_interface_vector;
+  wire u_out_l_enable_interface_vector;
+
+  wire wgw_out_enable_interface_vector;
+
+  // Hidden State
+  wire h_in_enable_interface_vector;
+
+  wire h_out_enable_interface_vector;
+
+  // DATA
+  wire [DATA_SIZE-1:0] size_w_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_l_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_r_in_interface_vector;
+
+  wire [DATA_SIZE-1:0] u_in_interface_vector;
+
+  wire [DATA_SIZE-1:0] h_in_interface_vector;
+  
+  wire [DATA_SIZE-1:0] xi_out_interface_vector;
+
   ///////////////////////////////////////////////////////////////////////
   // READ HEADS
   ///////////////////////////////////////////////////////////////////////
@@ -333,55 +363,6 @@ module dnc_top #(
   wire [DATA_SIZE-1:0] size_r_in_read_strengths;
   wire [DATA_SIZE-1:0] beta_in_read_strengths;
   wire [DATA_SIZE-1:0] beta_out_read_strengths;
-
-  // READ INTERFACE VECTOR
-  // CONTROL
-  wire start_read_interface_vector;
-  wire ready_read_interface_vector;
-
-  // Read Key
-  wire wk_in_i_enable_read_interface_vector;
-  wire wk_in_l_enable_read_interface_vector;
-  wire wk_in_k_enable_read_interface_vector;
-
-  wire wk_out_i_enable_read_interface_vector;
-  wire wk_out_l_enable_read_interface_vector;
-  wire wk_out_k_enable_read_interface_vector;
-
-  wire k_out_i_enable_read_interface_vector;
-  wire k_out_k_enable_read_interface_vector;
-
-  // Read Strength
-  wire wbeta_in_i_enable_read_interface_vector;
-  wire wbeta_in_l_enable_read_interface_vector;
-
-  wire wbeta_out_i_enable_read_interface_vector;
-  wire wbeta_out_l_enable_read_interface_vector;
-
-  wire beta_out_enable_read_interface_vector;
-
-  // Free Gate
-  wire wf_in_i_enable_read_interface_vector;
-  wire wf_in_l_enable_read_interface_vector;
-
-  wire wf_out_i_enable_read_interface_vector;
-  wire wf_out_l_enable_read_interface_vector;
-
-  wire f_out_enable_read_interface_vector;
-
-  // Read Mode
-  wire wpi_in_i_enable_read_interface_vector;
-  wire wpi_in_l_enable_read_interface_vector;
-
-  wire wpi_out_i_enable_read_interface_vector;
-  wire wpi_out_l_enable_read_interface_vector;
-
-  wire pi_out_enable_read_interface_vector;
-
-  // Hidden State
-  wire h_in_enable_read_interface_vector;
-
-  wire h_out_enable_read_interface_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_w_in_read_interface_vector;
@@ -468,79 +449,6 @@ module dnc_top #(
   wire [DATA_SIZE-1:0] size_w_in_write_vector;
   wire [DATA_SIZE-1:0] v_in_write_vector;
   wire [DATA_SIZE-1:0] v_out_write_vector;
-
-  // WRITE INTERFACE VECTOR
-  // CONTROL
-  wire start_write_interface_vector;
-  wire ready_write_interface_vector;
-
-  // Write Key
-  wire wk_in_l_enable_write_interface_vector;
-  wire wk_in_k_enable_write_interface_vector;
-
-  wire wk_out_l_enable_write_interface_vector;
-  wire wk_out_k_enable_write_interface_vector;
-
-  wire k_out_enable_write_interface_vector;
-
-  // Write Strength
-  wire wbeta_in_enable_write_interface_vector;
-
-  wire wbeta_out_enable_write_interface_vector;
-
-  // Erase Vector
-  wire we_in_l_enable_write_interface_vector;
-  wire we_in_k_enable_write_interface_vector;
-
-  wire we_out_l_enable_write_interface_vector;
-  wire we_out_k_enable_write_interface_vector;
-
-  wire e_out_enable_write_interface_vector;
-
-  // Write Vector
-  wire wv_in_l_enable_write_interface_vector;
-  wire wv_in_k_enable_write_interface_vector;
-
-  wire wv_out_l_enable_write_interface_vector;
-  wire wv_out_k_enable_write_interface_vector;
-
-  wire v_out_enable_write_interface_vector;
-
-  // Allocation Gate
-  wire wga_in_enable_write_interface_vector;
-
-  wire wga_out_enable_write_interface_vector;
-
-  // Write Gate
-  wire wgw_in_enable_write_interface_vector;
-
-  wire wgw_out_enable_write_interface_vector;
-
-  // Hidden State
-  wire h_in_enable_write_interface_vector;
-
-  wire h_out_enable_write_interface_vector;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_w_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] size_l_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] size_r_in_write_interface_vector;
-
-  wire [DATA_SIZE-1:0] wk_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] wbeta_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] we_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] wv_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] wga_in_write_interface_vector;
-  wire [DATA_SIZE-1:0] wgw_in_write_interface_vector;
-
-  wire [DATA_SIZE-1:0] h_in_write_interface_vector;
-
-  wire [DATA_SIZE-1:0] k_out_write_interface_vector;
-  wire [DATA_SIZE-1:0] beta_out_write_interface_vector;
-  wire [DATA_SIZE-1:0] e_out_write_interface_vector;
-  wire [DATA_SIZE-1:0] v_out_write_interface_vector;
-  wire [DATA_SIZE-1:0] ga_out_write_interface_vector;
-  wire [DATA_SIZE-1:0] gw_out_write_interface_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // MEMORY
@@ -963,82 +871,6 @@ module dnc_top #(
     .BETA_OUT(beta_out_read_strengths)
   );
 
-  // READ INTERFACE VECTOR
-  dnc_read_interface_vector #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  read_interface_vector(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_read_interface_vector),
-    .READY(ready_read_interface_vector),
-
-    // Read Key
-    .WK_IN_I_ENABLE(wk_in_i_enable_read_interface_vector),
-    .WK_IN_L_ENABLE(wk_in_l_enable_read_interface_vector),
-    .WK_IN_K_ENABLE(wk_in_k_enable_read_interface_vector),
-
-    .WK_OUT_I_ENABLE(wk_out_i_enable_read_interface_vector),
-    .WK_OUT_L_ENABLE(wk_out_l_enable_read_interface_vector),
-    .WK_OUT_K_ENABLE(wk_out_k_enable_read_interface_vector),
-
-    .K_OUT_I_ENABLE(k_out_i_enable_read_interface_vector),
-    .K_OUT_K_ENABLE(k_out_k_enable_read_interface_vector),
-
-    // Read Strength
-    .WBETA_IN_I_ENABLE(wbeta_in_i_enable_read_interface_vector),
-    .WBETA_IN_L_ENABLE(wbeta_in_l_enable_read_interface_vector),
-
-    .WBETA_OUT_I_ENABLE(wbeta_out_i_enable_read_interface_vector),
-    .WBETA_OUT_L_ENABLE(wbeta_out_l_enable_read_interface_vector),
-
-    .BETA_OUT_ENABLE(beta_out_enable_read_interface_vector),
-
-    // Free Gate
-    .WF_IN_I_ENABLE(wf_in_i_enable_read_interface_vector),
-    .WF_IN_L_ENABLE(wf_in_l_enable_read_interface_vector),
-
-    .WF_OUT_I_ENABLE(wf_out_i_enable_read_interface_vector),
-    .WF_OUT_L_ENABLE(wf_out_l_enable_read_interface_vector),
-
-    .F_OUT_ENABLE(f_out_enable_read_interface_vector),
-
-    // Read Mode
-    .WPI_IN_I_ENABLE(wpi_in_i_enable_read_interface_vector),
-    .WPI_IN_L_ENABLE(wpi_in_l_enable_read_interface_vector),
-
-    .WPI_OUT_I_ENABLE(wpi_out_i_enable_read_interface_vector),
-    .WPI_OUT_L_ENABLE(wpi_out_l_enable_read_interface_vector),
-
-    .PI_OUT_ENABLE(pi_out_enable_read_interface_vector),
-
-    // Hidden State
-    .H_IN_ENABLE(h_in_enable_read_interface_vector),
-
-    .H_OUT_ENABLE(h_out_enable_read_interface_vector),
-
-    // DATA
-    .SIZE_W_IN(size_w_in_read_interface_vector),
-    .SIZE_L_IN(size_l_in_read_interface_vector),
-    .SIZE_R_IN(size_r_in_read_interface_vector),
-
-    .WK_IN(wk_in_read_interface_vector),
-    .WBETA_IN(wbeta_in_read_interface_vector),
-    .WF_IN(wf_in_read_interface_vector),
-    .WPI_IN(wpi_in_read_interface_vector),
-
-    .H_IN(h_in_read_interface_vector),
-
-    .K_OUT(k_out_read_interface_vector),
-    .BETA_OUT(beta_out_read_interface_vector),
-    .F_OUT(f_out_read_interface_vector),
-    .PI_OUT(pi_out_read_interface_vector)
-  );
-
   ///////////////////////////////////////////////////////////////////////
   // WRITE HEADS
   ///////////////////////////////////////////////////////////////////////
@@ -1169,87 +1001,42 @@ module dnc_top #(
     .V_OUT(v_out_write_vector)
   );
 
-  // WRITE INTERFACE VECTOR
-  dnc_write_interface_vector #(
+  // INTERFACE VECTOR
+  dnc_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  write_interface_vector(
+  interface_vector(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_write_interface_vector),
-    .READY(ready_write_interface_vector),
+    .START(start_interface_vector),
+    .READY(ready_interface_vector),
 
-    // Write Key
-    .WK_IN_L_ENABLE(wk_in_l_enable_write_interface_vector),
-    .WK_IN_K_ENABLE(wk_in_k_enable_write_interface_vector),
+    // Weight
+    .U_IN_S_ENABLE(u_in_s_enable_interface_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_interface_vector),
 
-    .WK_OUT_L_ENABLE(wk_out_l_enable_write_interface_vector),
-    .WK_OUT_K_ENABLE(wk_out_k_enable_write_interface_vector),
-
-    .K_OUT_ENABLE(k_out_enable_write_interface_vector),
-
-    // Write Strength
-    .WBETA_IN_ENABLE(wbeta_in_enable_write_interface_vector),
-
-    .WBETA_OUT_ENABLE(wbeta_out_enable_write_interface_vector),
-
-    // Erase Vector
-    .WE_IN_L_ENABLE(we_in_l_enable_write_interface_vector),
-    .WE_IN_K_ENABLE(we_in_k_enable_write_interface_vector),
-
-    .WE_OUT_L_ENABLE(we_out_l_enable_write_interface_vector),
-    .WE_OUT_K_ENABLE(we_out_k_enable_write_interface_vector),
-
-    .E_OUT_ENABLE(e_out_enable_write_interface_vector),
-
-    // Write Vector
-    .WV_IN_L_ENABLE(wv_in_l_enable_write_interface_vector),
-    .WV_IN_K_ENABLE(wv_in_k_enable_write_interface_vector),
-
-    .WV_OUT_L_ENABLE(wv_out_l_enable_write_interface_vector),
-    .WV_OUT_K_ENABLE(wv_out_k_enable_write_interface_vector),
-
-    .V_OUT_ENABLE(v_out_enable_write_interface_vector),
-
-    // Allocation Gate
-    .WGA_IN_ENABLE(wga_in_enable_write_interface_vector),
-
-    .WGA_OUT_ENABLE(wga_out_enable_write_interface_vector),
-
-    // Write Gate
-    .WGW_IN_ENABLE(wgw_in_enable_write_interface_vector),
-
-    .WGW_OUT_ENABLE(wgw_out_enable_write_interface_vector),
+    .U_OUT_S_ENABLE(u_out_s_enable_interface_vector),
+    .U_OUT_L_ENABLE(u_out_l_enable_interface_vector),
 
     // Hidden State
-    .H_IN_ENABLE(h_in_enable_write_interface_vector),
+    .H_IN_ENABLE(h_in_enable_interface_vector),
 
-    .H_OUT_ENABLE(h_out_enable_write_interface_vector),
+    .H_OUT_ENABLE(h_out_enable_interface_vector),
 
     // DATA
-    .SIZE_W_IN(size_w_in_write_interface_vector),
-    .SIZE_L_IN(size_l_in_write_interface_vector),
-    .SIZE_R_IN(size_r_in_write_interface_vector),
+    .SIZE_W_IN(size_w_in_interface_vector),
+    .SIZE_L_IN(size_l_in_interface_vector),
+    .SIZE_R_IN(size_r_in_interface_vector),
 
-    .WK_IN(wk_in_write_interface_vector),
-    .WBETA_IN(wbeta_in_write_interface_vector),
-    .WE_IN(we_in_write_interface_vector),
-    .WV_IN(wv_in_write_interface_vector),
-    .WGA_IN(wga_in_write_interface_vector),
-    .WGW_IN(wgw_in_write_interface_vector),
+    .U_IN(u_in_interface_vector),
 
-    .H_IN(h_in_write_interface_vector),
+    .H_IN(h_in_interface_vector),
 
-    .K_OUT(k_out_write_interface_vector),
-    .BETA_OUT(beta_out_write_interface_vector),
-    .E_OUT(e_out_write_interface_vector),
-    .V_OUT(v_out_write_interface_vector),
-    .GA_OUT(ga_out_write_interface_vector),
-    .GW_OUT(gw_out_write_interface_vector)
+    .XI_OUT(xi_out_interface_vector)
   );
 
   ///////////////////////////////////////////////////////////////////////

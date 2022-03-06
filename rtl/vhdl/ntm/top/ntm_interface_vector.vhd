@@ -61,60 +61,26 @@ entity ntm_interface_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- Key Vector
-    WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
-    WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+    -- Weight
+    U_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
+    U_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
 
-    WK_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
-    WK_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
-
-    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
-
-    -- Key Strength
-    WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
-
-    WBETA_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
-
-    -- Interpolation Gate
-    WG_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
-
-    WG_OUT_ENABLE : out std_logic;      -- for l in 0 to L-1
-
-    -- Shift Weighting
-    WS_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
-    WS_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
-
-    WS_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
-    WS_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
-
-    S_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
-
-    -- Sharpening
-    WGAMMA_IN_ENABLE : in std_logic;    -- for l in 0 to L-1
-
-    WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
+    U_OUT_K_ENABLE : out std_logic;    -- for s in 0 to S-1
+    U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WG_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WS_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WGAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    K_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    BETA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    XI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -124,14 +90,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_scalar_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    SCALAR_FIRST_PRODUCT_STATE,         -- STEP 1
-    SCALAR_SECOND_PRODUCT_STATE,        -- STEP 2
-    SCALAR_THIRD_PRODUCT_STATE          -- STEP 3
-    );
-
-  type controller_ctrl_matrix_fsm is (
+  type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_FIRST_STATE,                -- STEP 1
     INPUT_J_FIRST_STATE,                -- STEP 2
@@ -152,24 +111,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_scalar_fsm_int : controller_ctrl_scalar_fsm;
-  signal controller_ctrl_matrix_fsm_int : controller_ctrl_matrix_fsm;
-
-  -- SCALAR PRODUCT
-  -- CONTROL
-  signal start_dot_product : std_logic;
-  signal ready_dot_product : std_logic;
-
-  signal data_a_in_enable_dot_product : std_logic;
-  signal data_b_in_enable_dot_product : std_logic;
-
-  signal data_out_enable_dot_product : std_logic;
-
-  -- DATA
-  signal length_in_dot_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_dot_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -205,199 +147,6 @@ begin
   -- xi(t;?) = U(t;?;l)·h(t;l)
 
   -- CONTROL
-  ctrl_scalar_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      BETA_OUT  <= ZERO_DATA;
-      G_OUT     <= ZERO_DATA;
-      GAMMA_OUT <= ZERO_DATA;
-
-      -- Control Outputs
-      READY <= '0';
-
-    elsif (rising_edge(CLK)) then
-
-      case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Control Outputs
-          READY <= '0';
-
-          if (START = '1') then
-            -- Control Internal
-            start_dot_product <= '1';
-
-            -- FSM Control
-            controller_ctrl_scalar_fsm_int <= SCALAR_FIRST_PRODUCT_STATE;
-          else
-            -- Control Internal
-            start_dot_product <= '0';
-          end if;
-
-        when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 1
-
-          -- beta(t) = Wbeta(t;l)·h(t;l)
-
-          -- Control Inputs
-          data_a_in_enable_dot_product <= WBETA_IN_ENABLE;
-          data_b_in_enable_dot_product <= H_IN_ENABLE;
-
-          -- Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WBETA_IN;
-          data_b_in_dot_product <= H_IN;
-
-          -- Data Outputs
-          BETA_OUT <= data_out_dot_product;
-
-        when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 2
-
-          -- g(t) = Wg(t;l)·h(t;l)
-
-          -- Control Inputs
-          data_a_in_enable_dot_product <= WG_IN_ENABLE;
-          data_b_in_enable_dot_product <= H_IN_ENABLE;
-
-          -- Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WG_IN;
-          data_b_in_dot_product <= H_IN;
-
-          -- Data Outputs
-          G_OUT <= data_out_dot_product;
-
-        when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 3
-
-          -- gamma(t) = Wgamma(t;l)·h(t;l)
-
-          -- Control Inputs
-          data_a_in_enable_dot_product <= WGAMMA_IN_ENABLE;
-          data_b_in_enable_dot_product <= H_IN_ENABLE;
-
-          -- Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WGAMMA_IN;
-          data_b_in_dot_product <= H_IN;
-
-          -- Data Outputs
-          GAMMA_OUT <= data_out_dot_product;
-
-        when others =>
-          -- FSM Control
-          controller_ctrl_scalar_fsm_int <= STARTER_STATE;
-      end case;
-    end if;
-  end process;
-
-  ctrl_matrix_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      K_OUT <= ZERO_DATA;
-      S_OUT <= ZERO_DATA;
-
-      -- Control Outputs
-      READY <= '0';
-
-    elsif (rising_edge(CLK)) then
-
-      case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Control Outputs
-          READY <= '0';
-
-          if (START = '1') then
-            -- FSM Control
-            controller_ctrl_matrix_fsm_int <= INPUT_I_FIRST_STATE;
-          end if;
-
-        when INPUT_I_FIRST_STATE =>     -- STEP 1
-
-        when INPUT_J_FIRST_STATE =>     -- STEP 2
-
-        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3
-
-        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4
-
-          -- k(t;k) = Wk(t;l;k)·h(t;l)
-
-          -- Control Inputs
-          data_a_in_i_enable_matrix_product <= WK_IN_L_ENABLE;
-          data_a_in_j_enable_matrix_product <= WK_IN_K_ENABLE;
-          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
-          data_b_in_j_enable_matrix_product <= '0';
-
-          -- Data Inputs
-          size_a_i_in_matrix_product <= SIZE_W_IN;
-          size_a_j_in_matrix_product <= SIZE_L_IN;
-          size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE_DATA;
-          data_a_in_matrix_product   <= WK_IN;
-          data_b_in_matrix_product   <= H_IN;
-
-          -- Data Outputs
-          K_OUT <= data_out_matrix_product;
-
-        when INPUT_I_SECOND_STATE =>    -- STEP 5
-
-        when INPUT_J_SECOND_STATE =>    -- STEP 6
-
-        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 7
-
-        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 8
-
-          -- s(t;j) = Wk(t;l;j)·h(t;l)
-
-          -- Control Inputs
-          data_a_in_i_enable_matrix_product <= WS_IN_L_ENABLE;
-          data_a_in_j_enable_matrix_product <= WS_IN_J_ENABLE;
-          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
-          data_b_in_j_enable_matrix_product <= '0';
-
-          -- Data Inputs
-          size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= SIZE_L_IN;
-          size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE_DATA;
-          data_a_in_matrix_product   <= WS_IN;
-          data_b_in_matrix_product   <= H_IN;
-
-          -- Data Outputs
-          S_OUT <= data_out_matrix_product;
-
-        when others =>
-          -- FSM Control
-          controller_ctrl_matrix_fsm_int <= STARTER_STATE;
-      end case;
-    end if;
-  end process;
-
-  -- DOT PRODUCT
-  dot_product : ntm_dot_product
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_dot_product,
-      READY => ready_dot_product,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_dot_product,
-      DATA_B_IN_ENABLE => data_b_in_enable_dot_product,
-
-      DATA_OUT_ENABLE => data_out_enable_dot_product,
-
-      -- DATA
-      LENGTH_IN => length_in_dot_product,
-      DATA_A_IN => data_a_in_dot_product,
-      DATA_B_IN => data_b_in_dot_product,
-      DATA_OUT  => data_out_dot_product
-      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product

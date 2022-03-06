@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.dnc_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
@@ -281,6 +280,34 @@ architecture dnc_top_architecture of dnc_top is
 
   signal y_out_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- INTERFACE VECTOR
+  -- CONTROL
+  signal start_interface_vector : std_logic;
+  signal ready_interface_vector : std_logic;
+
+  -- Weight
+  signal u_in_s_enable_interface_vector : std_logic;
+  signal u_in_l_enable_interface_vector : std_logic;
+
+  signal u_out_s_enable_interface_vector : std_logic;
+  signal u_out_l_enable_interface_vector : std_logic;
+
+  -- Hidden State
+  signal h_in_enable_interface_vector : std_logic;
+
+  signal h_out_enable_interface_vector : std_logic;
+
+  -- DATA
+  signal size_w_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal h_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal xi_out_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
@@ -347,72 +374,6 @@ architecture dnc_top_architecture of dnc_top is
 
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- READ INTERFACE VECTOR
-  -- CONTROL
-  signal start_read_interface_vector : std_logic;
-  signal ready_read_interface_vector : std_logic;
-
-  -- Read Key
-  signal wk_in_i_enable_read_interface_vector : std_logic;
-  signal wk_in_l_enable_read_interface_vector : std_logic;
-  signal wk_in_k_enable_read_interface_vector : std_logic;
-
-  signal wk_out_i_enable_read_interface_vector : std_logic;
-  signal wk_out_l_enable_read_interface_vector : std_logic;
-  signal wk_out_k_enable_read_interface_vector : std_logic;
-
-  signal k_out_i_enable_read_interface_vector : std_logic;
-  signal k_out_k_enable_read_interface_vector : std_logic;
-
-  -- Read Strength
-  signal wbeta_in_i_enable_read_interface_vector : std_logic;
-  signal wbeta_in_l_enable_read_interface_vector : std_logic;
-
-  signal wbeta_out_i_enable_read_interface_vector : std_logic;
-  signal wbeta_out_l_enable_read_interface_vector : std_logic;
-
-  signal beta_out_enable_read_interface_vector : std_logic;
-
-  -- Free Gate
-  signal wf_in_i_enable_read_interface_vector : std_logic;
-  signal wf_in_l_enable_read_interface_vector : std_logic;
-
-  signal wf_out_i_enable_read_interface_vector : std_logic;
-  signal wf_out_l_enable_read_interface_vector : std_logic;
-
-  signal f_out_enable_read_interface_vector : std_logic;
-
-  -- Read Mode
-  signal wpi_in_i_enable_read_interface_vector : std_logic;
-  signal wpi_in_l_enable_read_interface_vector : std_logic;
-
-  signal wpi_out_i_enable_read_interface_vector : std_logic;
-  signal wpi_out_l_enable_read_interface_vector : std_logic;
-
-  signal pi_out_enable_read_interface_vector : std_logic;
-
-  -- Hidden State
-  signal h_in_enable_read_interface_vector : std_logic;
-
-  signal h_out_enable_read_interface_vector : std_logic;
-
-  -- DATA
-  signal size_w_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal wk_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wbeta_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wf_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wpi_in_read_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal h_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_out_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_out_read_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -493,79 +454,6 @@ architecture dnc_top_architecture of dnc_top is
 
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE INTERFACE VECTOR
-  -- CONTROL
-  signal start_write_interface_vector : std_logic;
-  signal ready_write_interface_vector : std_logic;
-
-  -- Write Key
-  signal wk_in_l_enable_write_interface_vector : std_logic;
-  signal wk_in_k_enable_write_interface_vector : std_logic;
-
-  signal wk_out_l_enable_write_interface_vector : std_logic;
-  signal wk_out_k_enable_write_interface_vector : std_logic;
-
-  signal k_out_enable_write_interface_vector : std_logic;
-
-  -- Write Strength
-  signal wbeta_in_enable_write_interface_vector : std_logic;
-
-  signal wbeta_out_enable_write_interface_vector : std_logic;
-
-  -- Erase Vector
-  signal we_in_l_enable_write_interface_vector : std_logic;
-  signal we_in_k_enable_write_interface_vector : std_logic;
-
-  signal we_out_l_enable_write_interface_vector : std_logic;
-  signal we_out_k_enable_write_interface_vector : std_logic;
-
-  signal e_out_enable_write_interface_vector : std_logic;
-
-  -- Write Vector
-  signal wv_in_l_enable_write_interface_vector : std_logic;
-  signal wv_in_k_enable_write_interface_vector : std_logic;
-
-  signal wv_out_l_enable_write_interface_vector : std_logic;
-  signal wv_out_k_enable_write_interface_vector : std_logic;
-
-  signal v_out_enable_write_interface_vector : std_logic;
-
-  -- Allocation Gate
-  signal wga_in_enable_write_interface_vector : std_logic;
-
-  signal wga_out_enable_write_interface_vector : std_logic;
-
-  -- Write Gate
-  signal wgw_in_enable_write_interface_vector : std_logic;
-
-  signal wgw_out_enable_write_interface_vector : std_logic;
-
-  -- Hidden State
-  signal h_in_enable_write_interface_vector : std_logic;
-
-  signal h_out_enable_write_interface_vector : std_logic;
-
-  -- DATA
-  signal size_w_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal wk_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wbeta_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal we_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wv_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wga_in_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wgw_in_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal h_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -865,36 +753,6 @@ begin
   beta_in_enable_read_strengths  <= '0';
   beta_out_enable_read_strengths <= '0';
 
-  -- READ INTERFACE VECTOR
-  -- Read Key
-  wk_in_i_enable_read_interface_vector <= '0';
-  wk_in_l_enable_read_interface_vector <= '0';
-  wk_in_k_enable_read_interface_vector <= '0';
-
-  k_out_i_enable_read_interface_vector <= '0';
-  k_out_k_enable_read_interface_vector <= '0';
-
-  -- Read Strength
-  wbeta_in_i_enable_read_interface_vector <= '0';
-  wbeta_in_l_enable_read_interface_vector <= '0';
-
-  beta_out_enable_read_interface_vector <= '0';
-
-  -- Free Gate
-  wf_in_i_enable_read_interface_vector <= '0';
-  wf_in_l_enable_read_interface_vector <= '0';
-
-  f_out_enable_read_interface_vector <= '0';
-
-  -- Read Mode
-  wpi_in_i_enable_read_interface_vector <= '0';
-  wpi_in_l_enable_read_interface_vector <= '0';
-
-  pi_out_enable_read_interface_vector <= '0';
-
-  -- Hidden State
-  h_in_enable_read_interface_vector <= '0';
-
   -- DATA
   -- CONTROLLER
   size_x_in_controller <= FULL;
@@ -929,6 +787,15 @@ begin
 
   y_out_output_vector <= FULL;
 
+  -- INTERFACE VECTOR
+  size_w_in_interface_vector <= FULL;
+  size_l_in_interface_vector <= FULL;
+  size_r_in_interface_vector <= FULL;
+
+  u_in_interface_vector <= FULL;
+
+  h_in_interface_vector <= FULL;
+
   -- FREE GATES
   size_r_in_free_gates <= FULL;
 
@@ -953,23 +820,6 @@ begin
 
   beta_in_read_strengths  <= FULL;
   beta_out_read_strengths <= FULL;
-
-  -- READ INTERFACE VECTOR
-  size_w_in_read_interface_vector <= FULL;
-  size_l_in_read_interface_vector <= FULL;
-  size_r_in_read_interface_vector <= FULL;
-
-  wk_in_read_interface_vector    <= FULL;
-  wbeta_in_read_interface_vector <= FULL;
-  wf_in_read_interface_vector    <= FULL;
-  wpi_in_read_interface_vector   <= FULL;
-
-  h_in_read_interface_vector <= FULL;
-
-  k_out_read_interface_vector    <= FULL;
-  beta_out_read_interface_vector <= FULL;
-  f_out_read_interface_vector    <= FULL;
-  pi_out_read_interface_vector   <= FULL;
 
   -- ALLOCATION GATE
   ga_in_allocation_gate  <= FULL;
@@ -1000,27 +850,6 @@ begin
 
   v_in_write_vector  <= FULL;
   v_out_write_vector <= FULL;
-
-  -- WRITE INTERFACE VECTOR
-  size_w_in_write_interface_vector <= FULL;
-  size_l_in_write_interface_vector <= FULL;
-  size_r_in_write_interface_vector <= FULL;
-
-  wk_in_write_interface_vector    <= FULL;
-  wbeta_in_write_interface_vector <= FULL;
-  we_in_write_interface_vector    <= FULL;
-  wv_in_write_interface_vector    <= FULL;
-  wga_in_write_interface_vector   <= FULL;
-  wgw_in_write_interface_vector   <= FULL;
-
-  h_in_write_interface_vector <= FULL;
-
-  k_out_write_interface_vector    <= FULL;
-  beta_out_write_interface_vector <= FULL;
-  e_out_write_interface_vector    <= FULL;
-  v_out_write_interface_vector    <= FULL;
-  ga_out_write_interface_vector   <= FULL;
-  gw_out_write_interface_vector   <= FULL;
 
   -- ADDRESSING
   size_r_in_addressing <= FULL;
@@ -1176,6 +1005,45 @@ begin
       Y_OUT => y_out_output_vector
       );
 
+  -- INTERFACE VECTOR
+  interface_vector : dnc_interface_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_interface_vector,
+      READY => ready_interface_vector,
+
+      -- Weight
+      U_IN_S_ENABLE => u_in_s_enable_interface_vector,
+      U_IN_L_ENABLE => u_in_l_enable_interface_vector,
+
+      U_OUT_S_ENABLE => u_out_s_enable_interface_vector,
+      U_OUT_L_ENABLE => u_out_l_enable_interface_vector,
+
+      -- Hidden State
+      H_IN_ENABLE => h_in_enable_interface_vector,
+
+      H_OUT_ENABLE => h_out_enable_interface_vector,
+
+      -- DATA
+      SIZE_W_IN => size_w_in_interface_vector,
+      SIZE_L_IN => size_l_in_interface_vector,
+      SIZE_R_IN => size_r_in_interface_vector,
+
+      U_IN => u_in_interface_vector,
+
+      H_IN => h_in_interface_vector,
+
+      XI_OUT => xi_out_interface_vector
+      );
+
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
@@ -1290,83 +1158,6 @@ begin
       BETA_IN => beta_in_read_strengths,
 
       BETA_OUT => beta_out_read_strengths
-      );
-
-  -- READ INTERFACE VECTOR
-  read_interface_vector : dnc_read_interface_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_read_interface_vector,
-      READY => ready_read_interface_vector,
-
-      -- Read Key
-      WK_IN_I_ENABLE => wk_in_i_enable_read_interface_vector,
-      WK_IN_L_ENABLE => wk_in_l_enable_read_interface_vector,
-      WK_IN_K_ENABLE => wk_in_k_enable_read_interface_vector,
-
-      WK_OUT_I_ENABLE => wk_out_i_enable_read_interface_vector,
-      WK_OUT_L_ENABLE => wk_out_l_enable_read_interface_vector,
-      WK_OUT_K_ENABLE => wk_out_k_enable_read_interface_vector,
-
-      K_OUT_I_ENABLE => k_out_i_enable_read_interface_vector,
-      K_OUT_K_ENABLE => k_out_k_enable_read_interface_vector,
-
-      -- Read Strength
-      WBETA_IN_I_ENABLE => wbeta_in_i_enable_read_interface_vector,
-      WBETA_IN_L_ENABLE => wbeta_in_l_enable_read_interface_vector,
-
-      WBETA_OUT_I_ENABLE => wbeta_out_i_enable_read_interface_vector,
-      WBETA_OUT_L_ENABLE => wbeta_out_l_enable_read_interface_vector,
-
-      BETA_OUT_ENABLE => beta_out_enable_read_interface_vector,
-
-      -- Free Gate
-      WF_IN_I_ENABLE => wf_in_i_enable_read_interface_vector,
-      WF_IN_L_ENABLE => wf_in_l_enable_read_interface_vector,
-
-      WF_OUT_I_ENABLE => wf_out_i_enable_read_interface_vector,
-      WF_OUT_L_ENABLE => wf_out_l_enable_read_interface_vector,
-
-      F_OUT_ENABLE => f_out_enable_read_interface_vector,
-
-      -- Read Mode
-      WPI_IN_I_ENABLE => wpi_in_i_enable_read_interface_vector,
-      WPI_IN_L_ENABLE => wpi_in_l_enable_read_interface_vector,
-
-      WPI_OUT_I_ENABLE => wpi_out_i_enable_read_interface_vector,
-      WPI_OUT_L_ENABLE => wpi_out_l_enable_read_interface_vector,
-
-      PI_OUT_ENABLE => pi_out_enable_read_interface_vector,
-
-      -- Hidden State
-      H_IN_ENABLE => h_in_enable_read_interface_vector,
-
-      H_OUT_ENABLE => h_out_enable_read_interface_vector,
-
-      -- DATA
-      SIZE_W_IN => size_w_in_read_interface_vector,
-      SIZE_L_IN => size_l_in_read_interface_vector,
-      SIZE_R_IN => size_r_in_read_interface_vector,
-
-      WK_IN    => wk_in_read_interface_vector,
-      WBETA_IN => wbeta_in_read_interface_vector,
-      WF_IN    => wf_in_read_interface_vector,
-      WPI_IN   => wpi_in_read_interface_vector,
-
-      H_IN => h_in_read_interface_vector,
-
-      K_OUT    => k_out_read_interface_vector,
-      BETA_OUT => beta_out_read_interface_vector,
-      F_OUT    => f_out_read_interface_vector,
-      PI_OUT   => pi_out_read_interface_vector
       );
 
   -----------------------------------------------------------------------
@@ -1519,90 +1310,6 @@ begin
       V_IN => v_in_write_vector,
 
       V_OUT => v_out_write_vector
-      );
-
-  -- WRITE INTERFACE VECTOR
-  write_interface_vector : dnc_write_interface_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_write_interface_vector,
-      READY => ready_write_interface_vector,
-
-      -- Write Key
-      WK_IN_L_ENABLE => wk_in_l_enable_write_interface_vector,
-      WK_IN_K_ENABLE => wk_in_k_enable_write_interface_vector,
-
-      WK_OUT_L_ENABLE => wk_out_l_enable_write_interface_vector,
-      WK_OUT_K_ENABLE => wk_out_k_enable_write_interface_vector,
-
-      K_OUT_ENABLE => k_out_enable_write_interface_vector,
-
-      -- Write Strength
-      WBETA_IN_ENABLE => wbeta_in_enable_write_interface_vector,
-
-      WBETA_OUT_ENABLE => wbeta_out_enable_write_interface_vector,
-
-      -- Erase Vector
-      WE_IN_L_ENABLE => we_in_l_enable_write_interface_vector,
-      WE_IN_K_ENABLE => we_in_k_enable_write_interface_vector,
-
-      WE_OUT_L_ENABLE => we_out_l_enable_write_interface_vector,
-      WE_OUT_K_ENABLE => we_out_k_enable_write_interface_vector,
-
-      E_OUT_ENABLE => e_out_enable_write_interface_vector,
-
-      -- Write Vector
-      WV_IN_L_ENABLE => wv_in_l_enable_write_interface_vector,
-      WV_IN_K_ENABLE => wv_in_k_enable_write_interface_vector,
-
-      WV_OUT_L_ENABLE => wv_out_l_enable_write_interface_vector,
-      WV_OUT_K_ENABLE => wv_out_k_enable_write_interface_vector,
-
-      V_OUT_ENABLE => v_out_enable_write_interface_vector,
-
-      -- Allocation Gate
-      WGA_IN_ENABLE => wga_in_enable_write_interface_vector,
-
-      WGA_OUT_ENABLE => wga_out_enable_write_interface_vector,
-
-      -- Write Gate
-      WGW_IN_ENABLE => wgw_in_enable_write_interface_vector,
-
-      WGW_OUT_ENABLE => wgw_out_enable_write_interface_vector,
-
-      -- Hidden State
-      H_IN_ENABLE => h_in_enable_write_interface_vector,
-
-      H_OUT_ENABLE => h_out_enable_write_interface_vector,
-
-      -- DATA
-      SIZE_W_IN => size_w_in_write_interface_vector,
-      SIZE_L_IN => size_l_in_write_interface_vector,
-      SIZE_R_IN => size_r_in_write_interface_vector,
-
-      WK_IN    => wk_in_write_interface_vector,
-      WBETA_IN => wbeta_in_write_interface_vector,
-      WE_IN    => we_in_write_interface_vector,
-      WV_IN    => wv_in_write_interface_vector,
-      WGA_IN   => wga_in_write_interface_vector,
-      WGW_IN   => wgw_in_write_interface_vector,
-
-      H_IN => h_in_write_interface_vector,
-
-      K_OUT    => k_out_write_interface_vector,
-      BETA_OUT => beta_out_write_interface_vector,
-      E_OUT    => e_out_write_interface_vector,
-      V_OUT    => v_out_write_interface_vector,
-      GA_OUT   => ga_out_write_interface_vector,
-      GW_OUT   => gw_out_write_interface_vector
       );
 
   -----------------------------------------------------------------------

@@ -102,9 +102,8 @@
 │   │   └── dnc_read_strengths.sv
 │   ├── top
 │   │   ├── dnc_output_vector.sv
-│   │   ├── dnc_read_interface_vector.sv
-│   │   ├── dnc_top.sv
-│   │   └── dnc_write_interface_vector.sv
+│   │   ├── dnc_interface_vector.sv
+│   │   └── dnc_top.sv
 │   └── write_heads
 │       ├── dnc_allocation_gate.sv
 │       ├── dnc_erase_vector.sv

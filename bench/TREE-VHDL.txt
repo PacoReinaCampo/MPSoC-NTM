@@ -41,8 +41,8 @@
 │   │   │   ├── dnc_read_heads_stimulus.vhd
 │   │   │   └── dnc_read_heads_testbench.vhd
 │   │   ├── top
-│   │   │   ├── dnc_top_pkg.vhd
-│   │   │   ├── dnc_top_stimulus.vhd
+│   │   │   └── dnc_top_pkg.vhd
+│   │   │   └── dnc_top_stimulus.vhd
 │   │   │   └── dnc_top_testbench.vhd
 │   │   └── write_heads
 │   │       ├── dnc_write_heads_pkg.vhd
@@ -150,8 +150,8 @@
     │   │   ├── dnc_read_heads_stimulus.vhd
     │   │   └── dnc_read_heads_testbench.vhd
     │   ├── top
-    │   │   ├── dnc_top_pkg.vhd
-    │   │   ├── dnc_top_stimulus.vhd
+    │   │   └── dnc_top_pkg.vhd
+    │   │   └── dnc_top_stimulus.vhd
     │   │   └── dnc_top_testbench.vhd
     │   └── write_heads
     │       ├── dnc_write_heads_pkg.vhd

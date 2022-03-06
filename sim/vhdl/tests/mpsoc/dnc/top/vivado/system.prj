@@ -123,8 +123,7 @@ vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_top.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_output_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_read_interface_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_write_interface_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_interface_vector.vhd
 
 vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_pkg.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_stimulus.vhd

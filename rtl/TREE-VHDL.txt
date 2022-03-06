@@ -102,9 +102,8 @@
 │   │   └── dnc_read_strengths.vhd
 │   ├── top
 │   │   ├── dnc_output_vector.vhd
-│   │   ├── dnc_read_interface_vector.vhd
-│   │   ├── dnc_top.vhd
-│   │   └── dnc_write_interface_vector.vhd
+│   │   ├── dnc_interface_vector.vhd
+│   │   └── dnc_top.vhd
 │   └── write_heads
 │       ├── dnc_allocation_gate.vhd
 │       ├── dnc_erase_vector.vhd

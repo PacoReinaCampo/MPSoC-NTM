@@ -75,9 +75,8 @@ touch verilog/dnc/read_heads/dnc_read_keys.sv
 touch verilog/dnc/read_heads/dnc_read_modes.sv
 touch verilog/dnc/read_heads/dnc_read_strengths.sv
 touch verilog/dnc/top/dnc_output_vector.sv
-touch verilog/dnc/top/dnc_read_interface_vector.sv
+touch verilog/dnc/top/dnc_interface_vector.sv
 touch verilog/dnc/top/dnc_top.sv
-touch verilog/dnc/top/dnc_write_interface_vector.sv
 touch verilog/dnc/write_heads/dnc_allocation_gate.sv
 touch verilog/dnc/write_heads/dnc_erase_vector.sv
 touch verilog/dnc/write_heads/dnc_write_gate.sv

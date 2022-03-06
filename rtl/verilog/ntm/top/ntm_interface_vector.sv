@@ -50,59 +50,26 @@ module ntm_interface_vector #(
     input START,
     output reg READY,
 
-    // Key Vector
-    input WK_IN_L_ENABLE,  // for l in 0 to L-1
-    input WK_IN_K_ENABLE,  // for k in 0 to W-1
+    // Weight
+    input U_IN_S_ENABLE,  // for s in 0 to S-1
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
 
-    output reg WK_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg WK_OUT_K_ENABLE,  // for k in 0 to W-1
-
-    output reg K_OUT_ENABLE,  // for k in 0 to W-1
-
-    // Key Strength
-    input WBETA_IN_ENABLE,  // for l in 0 to L-1
-
-    output reg WBETA_OUT_ENABLE,  // for l in 0 to L-1
-
-    // Interpolation Gate
-    input WG_IN_ENABLE,  // for l in 0 to L-1
-
-    output reg WG_OUT_ENABLE,  // for l in 0 to L-1
-
-    // Shift Weighting
-    input WS_IN_L_ENABLE,  // for l in 0 to L-1
-    input WS_IN_J_ENABLE,  // for j in 0 to N-1
-
-    output reg WS_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg WS_OUT_J_ENABLE,  // for j in 0 to N-1
-
-    output reg S_OUT_ENABLE,  // for j in 0 to N-1
-
-    // Sharpening
-    input WGAMMA_IN_ENABLE,  // for l in 0 to L-1
-
-    output reg WGAMMA_OUT_ENABLE,  // for l in 0 to L-1
+    output reg U_OUT_K_ENABLE,  // for s in 0 to S-1
+    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
 
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] SIZE_R_IN,
 
-    input [DATA_SIZE-1:0] WK_IN,
-    input [DATA_SIZE-1:0] WBETA_IN,
-    input [DATA_SIZE-1:0] WG_IN,
-    input [DATA_SIZE-1:0] WS_IN,
-    input [DATA_SIZE-1:0] WGAMMA_IN,
+    input [DATA_SIZE-1:0] U_IN,
+
     input [DATA_SIZE-1:0] H_IN,
 
-    output reg [DATA_SIZE-1:0] K_OUT,
-    output reg [DATA_SIZE-1:0] BETA_OUT,
-    output reg [DATA_SIZE-1:0] G_OUT,
-    output reg [DATA_SIZE-1:0] S_OUT,
-    output reg [DATA_SIZE-1:0] GAMMA_OUT
+    output [DATA_SIZE-1:0] XI_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -142,21 +109,6 @@ module ntm_interface_vector #(
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
 
-  // SCALAR PRODUCT
-  // CONTROL
-  wire start_dot_product;
-  wire ready_dot_product;
-
-  wire data_a_in_enable_dot_product;
-  wire data_b_in_enable_dot_product;
-  wire data_out_enable_dot_product;
-
-  // DATA
-  reg [DATA_SIZE-1:0] length_in_dot_product;
-  reg [DATA_SIZE-1:0] data_a_in_dot_product;
-  reg [DATA_SIZE-1:0] data_b_in_dot_product;
-  wire [DATA_SIZE-1:0] data_out_dot_product;
-
   // MATRIX PRODUCT
   // CONTROL
   wire start_matrix_product;
@@ -184,122 +136,6 @@ module ntm_interface_vector #(
   // xi(t;?) = U(t;?;l)·h(t;l)
 
   // CONTROL
-  always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
-      // Data Outputs
-      K_OUT     <= ZERO_DATA;
-      BETA_OUT  <= ZERO_DATA;
-      G_OUT     <= ZERO_DATA;
-      S_OUT     <= ZERO_DATA;
-      GAMMA_OUT <= ZERO_DATA;
-
-      // Control Outputs
-      READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
-          // Control Outputs
-          READY <= 1'b0;
-
-          if(START == 1'b1) begin
-            // FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
-          end
-        end
-
-        MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
-
-          // Data Inputs
-          size_a_i_in_matrix_product <= SIZE_W_IN;
-          size_a_j_in_matrix_product <= SIZE_L_IN;
-          size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE_CONTROL;
-          data_a_in_matrix_product   <= WK_IN;
-          data_b_in_matrix_product   <= H_IN;
-
-          // Data Outputs
-          K_OUT <= data_out_matrix_product;
-        end
-
-        MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 2
-
-          // Data Inputs
-          size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= SIZE_L_IN;
-          size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE_CONTROL;
-          data_a_in_matrix_product   <= WS_IN;
-          data_b_in_matrix_product   <= H_IN;
-
-          // Data Outputs
-          S_OUT <= data_out_matrix_product;
-        end
-
-        SCALAR_FIRST_PRODUCT_STATE : begin  // STEP 3
-
-          // Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WBETA_IN;
-          data_b_in_dot_product <= H_IN;
-
-          // Data Outputs
-          BETA_OUT <= data_out_dot_product;
-        end
-
-        SCALAR_SECOND_PRODUCT_STATE : begin  // STEP 4
-
-          // Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WG_IN;
-          data_b_in_dot_product <= H_IN;
-
-          // Data Outputs
-          G_OUT <= data_out_dot_product;
-        end
-
-        SCALAR_THIRD_PRODUCT_STATE : begin  // STEP 5
-
-          // Data Inputs
-          length_in_dot_product <= SIZE_L_IN;
-          data_a_in_dot_product <= WGAMMA_IN;
-          data_b_in_dot_product <= H_IN;
-
-          // Data Outputs
-          GAMMA_OUT <= data_out_dot_product;
-        end
-        default : begin
-          // FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
-        end
-      endcase
-    end
-  end
-
-  // SCALAR PRODUCT
-  ntm_dot_product #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  dot_product(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_dot_product),
-    .READY(ready_dot_product),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_dot_product),
-    .DATA_B_IN_ENABLE(data_b_in_enable_dot_product),
-    .DATA_OUT_ENABLE(data_out_enable_dot_product),
-
-    // DATA
-    .LENGTH_IN(length_in_dot_product),
-    .DATA_A_IN(data_a_in_dot_product),
-    .DATA_B_IN(data_b_in_dot_product),
-    .DATA_OUT(data_out_dot_product)
-  );
 
   // MATRIX PRODUCT
   ntm_matrix_product #(

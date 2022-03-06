@@ -238,6 +238,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -435,6 +436,7 @@ begin
   data_in_vector_exponentiator_function <= FULL;
 
   -- VECTOR SUMMATION
+  size_in_vector_summation   <= THREE_CONTROL;
   length_in_vector_summation <= THREE_CONTROL;
   data_in_vector_summation   <= FULL;
 
@@ -609,6 +611,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
+      SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation

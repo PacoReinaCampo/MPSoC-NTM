@@ -75,9 +75,8 @@ vhdl2verilog vhdl/dnc/read_heads/dnc_read_keys.sv
 vhdl2verilog vhdl/dnc/read_heads/dnc_read_modes.sv
 vhdl2verilog vhdl/dnc/read_heads/dnc_read_strengths.sv
 vhdl2verilog vhdl/dnc/top/dnc_output_vector.sv
-vhdl2verilog vhdl/dnc/top/dnc_read_interface_vector.sv
+vhdl2verilog vhdl/dnc/top/dnc_interface_vector.sv
 vhdl2verilog vhdl/dnc/top/dnc_top.sv
-vhdl2verilog vhdl/dnc/top/dnc_write_interface_vector.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_allocation_gate.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_erase_vector.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_gate.sv

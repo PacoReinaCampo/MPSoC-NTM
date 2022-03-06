@@ -122,8 +122,7 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/memory/dnc_addressing.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/dnc_top.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/dnc_output_vector.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/dnc_read_interface_vector.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/dnc_write_interface_vector.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/dnc_interface_vector.vhd
 
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_stimulus.vhd

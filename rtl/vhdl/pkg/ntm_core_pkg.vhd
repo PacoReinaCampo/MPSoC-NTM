@@ -346,59 +346,27 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- Key Vector
-      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+      U_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
-      WK_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WK_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
-
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-      -- Key Strength
-      WBETA_IN_ENABLE : in std_logic;   -- for l in 0 to L-1
-
-      WBETA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
-
-      -- Interpolation Gate
-      WG_IN_ENABLE : in std_logic;      -- for l in 0 to L-1
-
-      WG_OUT_ENABLE : out std_logic;    -- for l in 0 to L-1
-
-      -- Shift Weighting
-      WS_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WS_IN_J_ENABLE : in std_logic;    -- for j in 0 to N-1
-
-      WS_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
-      WS_OUT_J_ENABLE : out std_logic;  -- for j in 0 to N-1
-
-      S_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
-
-      -- Sharpening
-      WGAMMA_IN_ENABLE : in std_logic;  -- for l in 0 to L-1
-
-      WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
+      U_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
 
       -- Hidden State
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
+      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
       -- DATA
-      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WG_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WS_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      WGAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      K_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      XI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
