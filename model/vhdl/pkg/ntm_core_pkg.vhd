@@ -347,21 +347,23 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- Key Vector
-      U_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
-      U_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      U_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
 
-      U_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
-      U_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
+      U_OUT_S_ENABLE : out std_logic;    -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
 
       -- Hidden State
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_ENABLE : in std_logic;       -- for l in 0 to L-1
+
+      -- Interface
+      XI_OUT_ENABLE : in std_logic;      -- for s in 0 to S-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -500,9 +502,8 @@ package ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_interface_vector (
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_u_input : matrix_buffer;
 
@@ -768,9 +769,8 @@ package body ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_interface_vector (
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_u_input : matrix_buffer;
 
@@ -784,7 +784,7 @@ package body ntm_core_pkg is
     -- xi(t;s) = U(t;s;l)·h(t;l)
 
     vector_xi_output := function_matrix_vector_product (
-      SIZE_A_I_IN => SIZE_W_IN,
+      SIZE_A_I_IN => SIZE_S_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_B_IN   => SIZE_L_IN,
 
@@ -984,9 +984,8 @@ package body ntm_core_pkg is
     -- xi(t;s) = U(t;s;l)·h(t;l)
 
     vector_xi_int := function_ntm_interface_vector (
-      SIZE_W_IN => SIZE_W_IN,
+      SIZE_S_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
 
       matrix_u_input => matrix_w_int,
 

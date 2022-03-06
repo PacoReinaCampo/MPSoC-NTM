@@ -277,10 +277,14 @@ module ntm_top #(
   // Hidden State
   wire h_in_enable_interface_vector;
 
+  wire h_out_enable_interface_vector;
+
+  // Interface
+  wire xi_out_enable_interface_vector;
+
   // DATA
-  wire [DATA_SIZE-1:0] size_w_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_s_in_interface_vector;
   wire [DATA_SIZE-1:0] size_l_in_interface_vector;
-  wire [DATA_SIZE-1:0] size_r_in_interface_vector;
 
   wire [DATA_SIZE-1:0] u_in_interface_vector;
 
@@ -651,7 +655,7 @@ module ntm_top #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_interface_vector_i(
+  interface_vector(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -672,10 +676,12 @@ module ntm_top #(
 
     .H_OUT_ENABLE(h_out_enable_interface_vector),
 
+    // Interface
+    .XI_OUT_ENABLE(xi_out_enable_interface_vector),
+
     // DATA
-    .SIZE_W_IN(size_w_in_interface_vector),
+    .SIZE_S_IN(size_s_in_interface_vector),
     .SIZE_L_IN(size_l_in_interface_vector),
-    .SIZE_R_IN(size_r_in_interface_vector),
 
     .U_IN(u_in_interface_vector),
 

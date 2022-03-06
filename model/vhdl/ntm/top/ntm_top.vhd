@@ -284,10 +284,12 @@ architecture ntm_top_architecture of ntm_top is
 
   signal h_out_enable_interface_vector : std_logic;
 
+  -- Interface
+  signal xi_out_enable_interface_vector : std_logic;
+
   -- DATA
-  signal size_w_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_l_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal u_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -596,7 +598,7 @@ begin
 
   -- Hidden State
   h_in_enable_interface_vector <= '0';
-
+  
   -- READING
   m_in_j_enable_reading <= '0';
   m_in_k_enable_reading <= '0';
@@ -668,9 +670,8 @@ begin
   y_out_output_vector <= FULL;
 
   -- INTERFACE VECTOR
-  size_w_in_interface_vector <= FULL;
+  size_s_in_interface_vector <= FULL;
   size_l_in_interface_vector <= FULL;
-  size_r_in_interface_vector <= FULL;
 
   u_in_interface_vector <= FULL;
 
@@ -881,10 +882,12 @@ begin
 
       H_OUT_ENABLE => h_out_enable_interface_vector,
 
+      -- Interface
+      XI_OUT_ENABLE => xi_out_enable_interface_vector,
+
       -- DATA
-      SIZE_W_IN => size_w_in_interface_vector,
+      SIZE_S_IN => size_s_in_interface_vector,
       SIZE_L_IN => size_l_in_interface_vector,
-      SIZE_R_IN => size_r_in_interface_vector,
 
       U_IN => u_in_interface_vector,
 

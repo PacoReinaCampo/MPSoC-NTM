@@ -60,12 +60,14 @@ module dnc_interface_vector #(
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+    input H_OUT_ENABLE,  // for l in 0 to L-1
+
+    // Interface
+    input XI_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] SIZE_S_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
-    input [DATA_SIZE-1:0] SIZE_R_IN,
 
     input [DATA_SIZE-1:0] U_IN,
 
@@ -89,21 +91,6 @@ module dnc_interface_vector #(
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
-
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
-  parameter THREE_CONTROL = 3;
-
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
-  parameter THREE_DATA = 3;
-
-  parameter FULL  = 1;
-  parameter EMPTY = 0;
-
-  parameter EULER = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

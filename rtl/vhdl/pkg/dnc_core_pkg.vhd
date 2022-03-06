@@ -1097,10 +1097,12 @@ package dnc_core_pkg is
 
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
+      -- Interface
+      XI_OUT_ENABLE : in std_logic;      -- for s in 0 to S-1
+
       -- DATA
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

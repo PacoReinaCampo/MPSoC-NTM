@@ -44,8 +44,9 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-use work.dnc_core_pkg.all;
+
 use work.ntm_lstm_controller_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_interface_vector is
   generic (
@@ -69,14 +70,16 @@ entity dnc_interface_vector is
     U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
 
     -- Hidden State
-    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
 
-    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    H_OUT_ENABLE : out std_logic;      -- for l in 0 to L-1
+
+    -- Interface
+    XI_OUT_ENABLE : out std_logic;     -- for s in 0 to S-1
 
     -- DATA
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -92,22 +95,6 @@ architecture dnc_interface_vector_architecture of dnc_interface_vector is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    INPUT_I_FIRST_STATE,                -- STEP 1
-    INPUT_J_FIRST_STATE,                -- STEP 2
-    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 3
-    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 4
-    INPUT_I_SECOND_STATE,               -- STEP 5
-    INPUT_J_SECOND_STATE,               -- STEP 6
-    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 7
-    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 8
-    INPUT_I_THIRD_STATE,                -- STEP 9
-    INPUT_J_THIRD_STATE,                -- STEP 10
-    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 11
-    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 12
-    );
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -116,30 +103,27 @@ architecture dnc_interface_vector_architecture of dnc_interface_vector is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
-
   -- MATRIX PRODUCT
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_matrix_vector_product : std_logic;
+  signal ready_matrix_vector_product : std_logic;
 
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
+  signal data_a_in_i_enable_matrix_vector_product : std_logic;
+  signal data_a_in_j_enable_matrix_vector_product : std_logic;
+  signal data_b_in_enable_matrix_vector_product   : std_logic;
 
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
+  signal data_i_enable_matrix_vector_product : std_logic;
+  signal data_j_enable_matrix_vector_product : std_logic;
+
+  signal data_out_enable_matrix_vector_product : std_logic;
 
   -- DATA
-  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_matrix_vector_product   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,12 +131,37 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- xi(t;?) = U(t;?;l)·h(t;l)
+  -- xi(t;s) = U(t;s;l)·h(t;l)
 
+  -- ASSIGNATIONS
   -- CONTROL
+  start_matrix_vector_product <= START;
 
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
+  READY <= ready_matrix_vector_product;
+
+  data_a_in_i_enable_matrix_vector_product <= U_IN_S_ENABLE;
+  data_a_in_j_enable_matrix_vector_product <= U_IN_L_ENABLE;
+
+  data_b_in_enable_matrix_vector_product <= H_IN_ENABLE;
+
+  U_OUT_S_ENABLE <= data_i_enable_matrix_vector_product;
+  U_OUT_L_ENABLE <= data_j_enable_matrix_vector_product;
+
+  H_OUT_ENABLE <= data_i_enable_matrix_vector_product;
+
+  XI_OUT_ENABLE <= data_out_enable_matrix_vector_product;
+
+  -- DATA
+  size_a_i_in_matrix_vector_product <= SIZE_S_IN;
+  size_a_j_in_matrix_vector_product <= SIZE_L_IN;
+  size_b_in_matrix_vector_product   <= SIZE_L_IN;
+  data_a_in_matrix_vector_product   <= U_IN;
+  data_b_in_matrix_vector_product   <= H_IN;
+
+  XI_OUT <= data_out_matrix_vector_product;
+
+  -- MATRIX VECTOR PRODUCT
+  matrix_vector_product : ntm_matrix_vector_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -163,25 +172,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_matrix_vector_product,
+      READY => ready_matrix_vector_product,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
+      DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+      DATA_I_ENABLE => data_i_enable_matrix_vector_product,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_product,
+
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
 
       -- DATA
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
+      SIZE_A_I_IN => size_a_i_in_matrix_vector_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_vector_product,
+      SIZE_B_IN   => size_b_in_matrix_vector_product,
+      DATA_A_IN   => data_a_in_matrix_vector_product,
+      DATA_B_IN   => data_b_in_matrix_vector_product,
+      DATA_OUT    => data_out_matrix_vector_product
       );
 
 end architecture;
