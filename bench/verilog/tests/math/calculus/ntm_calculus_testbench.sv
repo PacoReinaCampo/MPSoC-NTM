@@ -58,14 +58,6 @@ module ntm_calculus_testbench;
   parameter L=64;
   parameter R=64;
 
-  // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_INTEGRATION_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1=0;
-
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST=0;
   parameter STIMULUS_NTM_VECTOR_INTEGRATION_TEST=0;
@@ -82,6 +74,14 @@ module ntm_calculus_testbench;
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1=0;
 
+  // TENSOR-FUNCTIONALITY
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_TEST=0;
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0=0;
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1=0;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
@@ -89,24 +89,6 @@ module ntm_calculus_testbench;
   // GLOBAL
   wire CLK;
   wire RST;
-
-  ///////////////////////////////////////////////////////////////////////
-  // SCALAR
-  ///////////////////////////////////////////////////////////////////////
-
-  // SCALAR DIFFERENTIATION
-  // CONTROL
-  wire start_scalar_differentiation;
-  wire ready_scalar_differentiation;
-
-  wire data_in_enable_scalar_differentiation;
-  wire data_out_enable_scalar_differentiation;
-
-  // DATA
-  wire [DATA_SIZE-1:0] period_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] length_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] data_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] data_out_scalar_differentiation;
 
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
@@ -169,14 +151,6 @@ module ntm_calculus_testbench;
     .L(L),
     .R(R),
 
-    // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST(STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST),
-    .STIMULUS_NTM_SCALAR_INTEGRATION_TEST(STIMULUS_NTM_SCALAR_INTEGRATION_TEST),
-    .STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0),
-    .STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0(STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0),
-    .STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1),
-    .STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1(STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1),
-
     // VECTOR-FUNCTIONALITY
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST(STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST),
     .STIMULUS_NTM_VECTOR_INTEGRATION_TEST(STIMULUS_NTM_VECTOR_INTEGRATION_TEST),
@@ -191,46 +165,20 @@ module ntm_calculus_testbench;
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0),
     .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0),
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1),
-    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1)
+    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1),
+
+    // TENSOR-FUNCTIONALITY
+    .STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST(STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_TENSOR_INTEGRATION_TEST(STIMULUS_NTM_TENSOR_INTEGRATION_TEST),
+    .STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0),
+    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0(STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0),
+    .STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1),
+    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1(STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1)
   )
   function_stimulus(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
-
-    ///////////////////////////////////////////////////////////////////////
-    // STIMULUS SCALAR
-    ///////////////////////////////////////////////////////////////////////
-
-    // SCALAR DIFFERENTIATION
-    // CONTROL
-    .SCALAR_DIFFERENTIATION_START(start_scalar_differentiation),
-    .SCALAR_DIFFERENTIATION_READY(ready_scalar_differentiation),
-
-    .SCALAR_DIFFERENTIATION_DATA_IN_ENABLE(data_in_enable_scalar_differentiation),
-
-    .SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
-
-    // DATA
-    .SCALAR_DIFFERENTIATION_PERIOD_IN(period_in_scalar_differentiation),
-    .SCALAR_DIFFERENTIATION_LENGTH_IN(length_in_scalar_differentiation),
-    .SCALAR_DIFFERENTIATION_DATA_IN(data_in_scalar_differentiation),
-    .SCALAR_DIFFERENTIATION_DATA_OUT(data_out_scalar_differentiation),
-
-    // SCALAR INTEGRATION
-    // CONTROL
-    .SCALAR_INTEGRATION_START(start_scalar_integration),
-    .SCALAR_INTEGRATION_READY(ready_scalar_integration),
-
-    .SCALAR_INTEGRATION_DATA_IN_ENABLE(data_in_enable_scalar_integration),
-
-    .SCALAR_INTEGRATION_DATA_OUT_ENABLE(data_out_enable_scalar_integration),
-
-    // DATA
-    .SCALAR_INTEGRATION_PERIOD_IN(period_in_scalar_integration),
-    .SCALAR_INTEGRATION_LENGTH_IN(length_in_scalar_integration),
-    .SCALAR_INTEGRATION_DATA_IN(data_in_scalar_integration),
-    .SCALAR_INTEGRATION_DATA_OUT(data_out_scalar_integration),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
@@ -242,10 +190,10 @@ module ntm_calculus_testbench;
     .VECTOR_DIFFERENTIATION_READY(ready_vector_differentiation),
 
     .VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
-    .VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_differentiation),
 
     .VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
-    .VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
     .VECTOR_DIFFERENTIATION_SIZE_IN(size_in_vector_differentiation),
@@ -260,10 +208,10 @@ module ntm_calculus_testbench;
     .VECTOR_INTEGRATION_READY(ready_vector_integration),
 
     .VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_integration),
-    .VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_integration),
+    .VECTOR_INTEGRATION_DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_integration),
 
     .VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_integration),
-    .VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_integration),
+    .VECTOR_INTEGRATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_integration),
 
     // DATA
     .VECTOR_INTEGRATION_SIZE_IN(size_in_vector_integration),
@@ -283,11 +231,11 @@ module ntm_calculus_testbench;
 
     .MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_differentiation),
     .MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_differentiation),
-    .MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_differentiation),
 
     .MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_differentiation),
     .MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_differentiation),
-    .MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_differentiation),
 
     // DATA
     .MATRIX_DIFFERENTIATION_SIZE_I_IN(size_i_in_matrix_differentiation),
@@ -304,11 +252,11 @@ module ntm_calculus_testbench;
 
     .MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_integration),
     .MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_integration),
-    .MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_integration),
 
     .MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_integration),
     .MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_integration),
-    .MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_integration),
 
     // DATA
     .MATRIX_INTEGRATION_SIZE_I_IN(size_i_in_matrix_integration),
@@ -320,67 +268,15 @@ module ntm_calculus_testbench;
   );
 
   ///////////////////////////////////////////////////////////////////////
-  // SCALAR
-  ///////////////////////////////////////////////////////////////////////
-
-  // SCALAR DIFFERENTIATION
-  ntm_scalar_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_differentiation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_differentiation),
-    .READY(ready_scalar_differentiation),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_differentiation),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
-
-    // DATA
-    .PERIOD_IN(period_in_scalar_differentiation),
-    .LENGTH_IN(length_in_scalar_differentiation),
-    .DATA_IN(data_in_scalar_differentiation),
-    .DATA_OUT(data_out_scalar_differentiation)
-  );
-
-  // SCALAR INTEGRATION
-  ntm_scalar_integration_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_integration_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_integration),
-    .READY(ready_scalar_integration),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_integration),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_integration),
-
-    // DATA
-    .PERIOD_IN(period_in_scalar_integration),
-    .LENGTH_IN(length_in_scalar_integration),
-    .DATA_IN(data_in_scalar_integration),
-    .DATA_OUT(data_out_scalar_integration)
-  );
-
-  ///////////////////////////////////////////////////////////////////////
   // VECTOR
   ///////////////////////////////////////////////////////////////////////
 
   // VECTOR DIFFERENTIATION
-  ntm_vector_differentiation_function #(
+  ntm_vector_differentiation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_differentiation_function(
+  vector_differentiation(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -390,9 +286,9 @@ module ntm_calculus_testbench;
     .READY(ready_vector_differentiation),
 
     .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
+    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_differentiation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
+    .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
     .SIZE_IN(size_in_vector_differentiation),
@@ -403,11 +299,11 @@ module ntm_calculus_testbench;
   );
 
   // VECTOR INTEGRATION
-  ntm_vector_integration_function #(
+  ntm_vector_integration #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_integration_function(
+  vector_integration(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -417,9 +313,9 @@ module ntm_calculus_testbench;
     .READY(ready_vector_integration),
 
     .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_integration),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_integration),
+    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_integration),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_integration),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_integration),
+    .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_integration),
 
     // DATA
     .SIZE_IN(size_in_vector_integration),
@@ -434,11 +330,11 @@ module ntm_calculus_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // MATRIX DIFFERENTIATION
-  ntm_matrix_differentiation_function #(
+  ntm_matrix_differentiation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  matrix_differentiation_function(
+  matrix_differentiation(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -449,10 +345,10 @@ module ntm_calculus_testbench;
 
     .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_differentiation),
     .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_differentiation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_differentiation),
+    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_differentiation),
     .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_differentiation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_differentiation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_differentiation),
+    .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_differentiation),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_differentiation),
@@ -464,11 +360,11 @@ module ntm_calculus_testbench;
   );
 
   // MATRIX INTEGRATION
-  ntm_matrix_integration_function #(
+  ntm_matrix_integration #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  matrix_integration_function(
+  matrix_integration(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -479,10 +375,10 @@ module ntm_calculus_testbench;
 
     .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_integration),
     .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_integration),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_integration),
+    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_integration),
     .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_integration),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_integration),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_integration),
+    .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_integration),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_integration),
