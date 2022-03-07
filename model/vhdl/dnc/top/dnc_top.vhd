@@ -533,7 +533,6 @@ begin
               SIZE_W_IN => SIZE_W_IN,
               SIZE_L_IN => SIZE_L_IN,
               SIZE_R_IN => SIZE_R_IN,
-              SIZE_S_IN => THREE_CONTROL,
 
               matrix_w_input => matrix_w_int,
               tensor_k_input => tensor_k_int,
