@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package dnc_top_pkg;
+package ntm_state_top_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types

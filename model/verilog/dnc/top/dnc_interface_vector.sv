@@ -80,6 +80,14 @@ module dnc_interface_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] MATRIX_FIRST_PRODUCT_STATE = 1;
+  parameter [2:0] MATRIX_SECOND_PRODUCT_STATE = 2;
+  parameter [2:0] MATRIX_THIRD_PRODUCT_STATE = 3;
+  parameter [2:0] SCALAR_FIRST_PRODUCT_STATE = 4;
+  parameter [2:0] SCALAR_SECOND_PRODUCT_STATE = 5;
+  parameter [2:0] SCALAR_THIRD_PRODUCT_STATE = 6;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////

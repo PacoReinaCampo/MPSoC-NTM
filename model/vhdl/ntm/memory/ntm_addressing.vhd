@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
@@ -99,32 +98,16 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type controller_ctrl_fsm is (
-    STARTER_STATE,                          -- STEP 0
-    VECTOR_CONTENT_BASED_ADDRESSING_STATE,  -- STEP 1
-    VECTOR_INTERPOLATION_STATE,             -- STEP 2
-    VECTOR_CONVOLUTION_STATE,               -- STEP 3
-    VECTOR_SHARPENING_STATE                 -- STEP 4
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_STATE,                  -- STEP 1
+    CLEAN_FIRST_STATE,                  -- STEP 2
+    INPUT_SECOND_I_STATE,               -- STEP 3
+    INPUT_SECOND_J_STATE,               -- STEP 4
+    CLEAN_SECOND_I_STATE,               -- STEP 5
+    CLEAN_SECOND_J_STATE                -- STEP 6
     );
-
-  type controller_ctrl_interpolation_fsm is (
-    STARTER_INTERPOLATION_STATE,                   -- STEP 0
-    VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE,   -- STEP 1
-    VECTOR_FIRST_ADDER_INTERPOLATION_STATE,        -- STEP 2
-    VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_INTERPOLATION_STATE        -- STEP 4
-    );
-
-  type controller_ctrl_sharpening_fsm is (
-    STARTER_SHARPENING_STATE,               -- STEP 0
-    VECTOR_EXPONENTIATOR_SHARPENING_STATE,  -- STEP 1
-    VECTOR_SUMMATION_SHARPENING_STATE,      -- STEP 2
-    VECTOR_DIVIDER_SHARPENING_STATE         -- STEP 3
-    );
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -133,131 +116,23 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  signal controller_ctrl_interpolation_fsm_int : controller_ctrl_interpolation_fsm;
+  -- Buffer
+  signal matrix_m_int : matrix_buffer;
+  signal vector_w_int : vector_buffer;
+  signal vector_k_int : vector_buffer;
+  signal vector_s_int : vector_buffer;
 
-  signal controller_ctrl_sharpening_fsm_int : controller_ctrl_sharpening_fsm;
+  signal vector_out_int : vector_buffer;
 
-  -- VECTOR CONTENT BASED ADDRESSING
-  -- CONTROL
-  signal start_vector_content_based_addressing : std_logic;
-  signal ready_vector_content_based_addressing : std_logic;
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal k_in_enable_vector_content_based_addressing : std_logic;
-
-  signal k_out_enable_vector_content_based_addressing : std_logic;
-
-  signal m_in_i_enable_vector_content_based_addressing : std_logic;
-  signal m_in_j_enable_vector_content_based_addressing : std_logic;
-
-  signal m_out_i_enable_vector_content_based_addressing : std_logic;
-  signal m_out_j_enable_vector_content_based_addressing : std_logic;
-
-  signal c_out_enable_vector_content_based_addressing : std_logic;
-
-  -- DATA
-  signal size_i_in_vector_content_based_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_vector_content_based_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal c_out_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR ADDER
-  -- CONTROL
-  signal start_vector_float_adder : std_logic;
-  signal ready_vector_float_adder : std_logic;
-
-  signal operation_vector_float_adder : std_logic;
-
-  signal data_a_in_enable_vector_float_adder : std_logic;
-  signal data_b_in_enable_vector_float_adder : std_logic;
-
-  signal data_out_enable_vector_float_adder : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR MULTIPLIER
-  -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
-
-  signal data_out_enable_vector_float_multiplier : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR DIVIDER
-  -- CONTROL
-  signal start_vector_float_divider : std_logic;
-  signal ready_vector_float_divider : std_logic;
-
-  signal data_a_in_enable_vector_float_divider : std_logic;
-  signal data_b_in_enable_vector_float_divider : std_logic;
-
-  signal data_out_enable_vector_float_divider : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR EXPONENTIATOR
-  -- CONTROL
-  signal start_vector_exponentiator_function : std_logic;
-  signal ready_vector_exponentiator_function : std_logic;
-
-  signal data_in_enable_vector_exponentiator_function : std_logic;
-
-  signal data_out_enable_vector_exponentiator_function : std_logic;
-
-  -- DATA
-  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR SUMMATION
-  -- CONTROL
-  signal start_vector_summation : std_logic;
-  signal ready_vector_summation : std_logic;
-
-  signal data_in_enable_vector_summation : std_logic;
-
-  signal data_out_enable_vector_summation : std_logic;
-
-  -- DATA
-  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR CONVOLUTION
-  -- CONTROL
-  signal start_vector_convolution : std_logic;
-  signal ready_vector_convolution : std_logic;
-
-  signal data_a_in_enable_vector_convolution : std_logic;
-  signal data_b_in_enable_vector_convolution : std_logic;
-
-  signal data_out_enable_vector_convolution : std_logic;
-
-  -- DATA
-  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_m_in_i_int : std_logic;
+  signal data_m_in_j_int : std_logic;
+  signal data_w_in_int   : std_logic;
+  signal data_k_in_int   : std_logic;
+  signal data_s_in_int   : std_logic;
 
 begin
 
@@ -285,111 +160,222 @@ begin
 
       W_OUT_ENABLE <= '0';
 
+      K_OUT_ENABLE <= '0';
+
+      M_OUT_J_ENABLE <= '0';
+      M_OUT_K_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          W_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
-          W_OUT_ENABLE <= '0';
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            W_OUT_ENABLE <= '1';
+
+            K_OUT_ENABLE <= '1';
+
             -- Control Internal
-            start_vector_content_based_addressing <= '1';
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_CONTENT_BASED_ADDRESSING_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
-            -- Control Internal
-            start_vector_content_based_addressing <= '0';
+            -- Control Outputs
+            W_OUT_ENABLE <= '0';
+
+            K_OUT_ENABLE <= '0';
           end if;
 
-        when VECTOR_CONTENT_BASED_ADDRESSING_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>     -- STEP 1 k,s
 
-          -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+          if (K_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_k_int(to_integer(unsigned(index_j_loop))) <= K_IN;
 
-        when VECTOR_INTERPOLATION_STATE =>  -- STEP 2
+            -- Control Internal
+            data_k_in_int <= '1';
+          end if;
 
-          -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+          if (S_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_s_int(to_integer(unsigned(index_j_loop))) <= S_IN;
 
-          case controller_ctrl_interpolation_fsm_int is
-            when STARTER_INTERPOLATION_STATE =>  -- STEP 0
+            -- Control Internal
+            data_s_in_int <= '1';
+          end if;
 
-            when VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE =>  -- STEP 1
+          -- Control Outputs
+          K_OUT_ENABLE <= '0';
+          S_OUT_ENABLE <= '0';
 
-              -- Control Inputs
-              data_a_in_enable_vector_float_multiplier <= '0';
-              data_b_in_enable_vector_float_multiplier <= '0';
+          if (data_k_in_int = '1' and data_s_in_int = '1') then
+            -- Control Internal
+            data_k_in_int <= '0';
+            data_s_in_int <= '0';
+    
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_FIRST_STATE;
+          end if;
 
-              -- Data Inputs
-              size_in_vector_float_multiplier   <= FULL;
-              data_a_in_vector_float_multiplier <= FULL;
-              data_b_in_vector_float_multiplier <= FULL;
+        when CLEAN_FIRST_STATE =>     -- STEP 2 k,s
 
-            when VECTOR_FIRST_ADDER_INTERPOLATION_STATE =>  -- STEP 2
+          if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            K_OUT_ENABLE <= '1';
+            S_OUT_ENABLE <= '1';
 
-              -- Control Inputs
-              operation_vector_float_adder <= '0';
+            -- Control Internal
+            index_j_loop <= ZERO_CONTROL;
 
-              data_a_in_enable_vector_float_adder <= '0';
-              data_b_in_enable_vector_float_adder <= '0';
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
+          elsif (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            K_OUT_ENABLE <= '1';
+            S_OUT_ENABLE <= '1';
 
-              -- Data Inputs
-              size_in_vector_float_adder   <= FULL;
-              data_a_in_vector_float_adder <= FULL;
-              data_b_in_vector_float_adder <= FULL;
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
-            when VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE =>  -- STEP 3
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
+          end if;
 
-              -- Control Inputs
-              data_a_in_enable_vector_float_multiplier <= '0';
-              data_b_in_enable_vector_float_multiplier <= '0';
+        when INPUT_SECOND_I_STATE =>    -- STEP 3 M,w
 
-              -- Data Inputs
-              size_in_vector_float_multiplier   <= FULL;
-              data_a_in_vector_float_multiplier <= FULL;
-              data_b_in_vector_float_multiplier <= FULL;
+          if ((M_IN_J_ENABLE = '1') and (M_IN_K_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_m_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= M_IN;
 
-            when VECTOR_SECOND_ADDER_INTERPOLATION_STATE =>  -- STEP 4
+            -- Control Internal
+            data_m_in_i_int <= '1';
+            data_m_in_j_int <= '1';
+          end if;
 
-              -- Control Inputs
-              operation_vector_float_adder <= '0';
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
 
-              data_a_in_enable_vector_float_adder <= '0';
-              data_b_in_enable_vector_float_adder <= '0';
+            -- Control Internal
+            data_w_in_int <= '1';
+          end if;
 
-              -- Data Inputs
-              size_in_vector_float_adder   <= FULL;
-              data_a_in_vector_float_adder <= FULL;
-              data_b_in_vector_float_adder <= FULL;
+          if (data_m_in_i_int = '1' and data_m_in_j_int = '1' and data_w_in_int = '1') then
+            -- Control Internal
+            data_m_in_i_int <= '0';
+            data_m_in_j_int <= '0';
+            data_w_in_int   <= '0';
 
-            when others =>
-              -- FSM Control
-              controller_ctrl_interpolation_fsm_int <= STARTER_INTERPOLATION_STATE;
-          end case;
+            -- Data Internal
+            vector_out_int <= function_ntm_addressing (
+              SIZE_N_IN => SIZE_N_IN,
+              SIZE_W_IN => SIZE_W_IN,
 
-        when VECTOR_CONVOLUTION_STATE =>  -- STEP 3
+              vector_k_input     => vector_k_int,
+              scalar_beta_input  => BETA_IN,
+              scalar_g_input     => G_IN,
+              vector_s_input     => vector_s_int,
+              scalar_gamma_input => GAMMA_IN,
 
-          -- w(t;j) = wg(t;j)*s(t;k)
+              matrix_m_input => matrix_m_int,
 
-        when VECTOR_SHARPENING_STATE =>  -- STEP 4
+              vector_w_input => vector_w_int
+              );
+    
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
+          end if;
 
-          -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+          -- Control Outputs
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
 
-          case controller_ctrl_sharpening_fsm_int is
-            when STARTER_SHARPENING_STATE =>  -- STEP 0
+          W_OUT_ENABLE <= '0';
 
-            when VECTOR_EXPONENTIATOR_SHARPENING_STATE =>  -- STEP 1
+        when INPUT_SECOND_J_STATE =>    -- STEP 4 M
 
-            when VECTOR_SUMMATION_SHARPENING_STATE =>  -- STEP 2
+          if (M_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_m_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= M_IN;
 
-            when VECTOR_DIVIDER_SHARPENING_STATE =>  -- STEP 3
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              controller_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
+            else
+              controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
+            end if;
+          end if;
 
-            when others =>
-              -- FSM Control
-              controller_ctrl_sharpening_fsm_int <= STARTER_SHARPENING_STATE;
-          end case;
+          -- Control Outputs
+          M_OUT_K_ENABLE <= '0';
+
+          W_OUT_ENABLE <= '0';
+
+        when CLEAN_SECOND_I_STATE =>    -- STEP 5
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            W_OUT <= vector_out_int(to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            M_OUT_J_ENABLE <= '1';
+            M_OUT_K_ENABLE <= '1';
+
+            W_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            W_OUT <= vector_out_int(to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            M_OUT_J_ENABLE <= '1';
+            M_OUT_K_ENABLE <= '1';
+
+            W_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_SECOND_I_STATE;
+          end if;
+
+        when CLEAN_SECOND_J_STATE =>    -- STEP 6
+
+          if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            M_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
+          end if;
 
         when others =>
           -- FSM Control
@@ -397,251 +383,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- VECTOR CONTENT BASED ADDRESSING
-  k_in_enable_vector_content_based_addressing <= '0';
-
-  m_in_i_enable_vector_content_based_addressing <= '0';
-  m_in_j_enable_vector_content_based_addressing <= '0';
-
-  -- VECTOR CONVOLUTION
-  data_a_in_enable_vector_convolution <= '0';
-  data_b_in_enable_vector_convolution <= '0';
-
-  -- VECTOR EXPONENTIATOR
-  data_in_enable_vector_exponentiator_function <= '0';
-
-  -- VECTOR SUMMATION
-  data_in_enable_vector_summation <= '0';
-
-  -- VECTOR DIVIDER
-  data_a_in_enable_vector_float_divider <= '0';
-  data_b_in_enable_vector_float_divider <= '0';
-
-  -- DATA
-  -- VECTOR CONTENT BASED ADDRESSING
-  size_i_in_vector_content_based_addressing <= SIZE_N_IN;
-  size_j_in_vector_content_based_addressing <= SIZE_W_IN;
-  k_in_vector_content_based_addressing      <= K_IN;
-  beta_in_vector_content_based_addressing   <= BETA_IN;
-  m_in_vector_content_based_addressing      <= M_IN;
-
-  -- VECTOR CONVOLUTION
-  length_in_vector_convolution <= THREE_CONTROL;
-  data_a_in_vector_convolution <= FULL;
-  data_b_in_vector_convolution <= FULL;
-
-  -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator_function <= THREE_CONTROL;
-  data_in_vector_exponentiator_function <= FULL;
-
-  -- VECTOR SUMMATION
-  size_in_vector_summation   <= THREE_CONTROL;
-  length_in_vector_summation <= THREE_CONTROL;
-  data_in_vector_summation   <= FULL;
-
-  -- VECTOR DIVIDER
-  size_in_vector_float_divider   <= THREE_CONTROL;
-  data_a_in_vector_float_divider <= FULL;
-  data_b_in_vector_float_divider <= FULL;
-
-  -- VECTOR CONTENT BASED ADDRESSING
-  content_based_addressing : ntm_content_based_addressing
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_content_based_addressing,
-      READY => ready_vector_content_based_addressing,
-
-      K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
-
-      K_OUT_ENABLE => k_out_enable_vector_content_based_addressing,
-
-      M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
-      M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
-
-      M_OUT_I_ENABLE => m_out_i_enable_vector_content_based_addressing,
-      M_OUT_J_ENABLE => m_out_j_enable_vector_content_based_addressing,
-
-      C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
-
-      -- DATA
-      SIZE_I_IN => size_i_in_vector_content_based_addressing,
-      SIZE_J_IN => size_j_in_vector_content_based_addressing,
-
-      K_IN    => k_in_vector_content_based_addressing,
-      BETA_IN => beta_in_vector_content_based_addressing,
-      M_IN    => m_in_vector_content_based_addressing,
-
-      C_OUT => c_out_vector_content_based_addressing
-      );
-
-  -- VECTOR ADDER
-  vector_float_adder : ntm_vector_float_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_adder,
-      READY => ready_vector_float_adder,
-
-      OPERATION => operation_vector_float_adder,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_adder,
-      DATA_A_IN => data_a_in_vector_float_adder,
-      DATA_B_IN => data_b_in_vector_float_adder,
-      DATA_OUT  => data_out_vector_float_adder
-      );
-
-  -- VECTOR MULTIPLIER
-  vecto_float_multiplier : ntm_vector_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
-      );
-
-  -- VECTOR DIVIDER
-  vecto_float_divider : ntm_vector_float_divider
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_divider,
-      READY => ready_vector_float_divider,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_divider,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_divider,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_divider,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_divider,
-      DATA_A_IN => data_a_in_vector_float_divider,
-      DATA_B_IN => data_b_in_vector_float_divider,
-      DATA_OUT  => data_out_vector_float_divider
-      );
-
-  -- VECTOR EXPONENTIATOR
-  vector_exponentiator_function : ntm_vector_exponentiator_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_exponentiator_function,
-      READY => ready_vector_exponentiator_function,
-
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
-
-      -- DATA
-      SIZE_IN  => size_in_vector_exponentiator_function,
-      DATA_IN  => data_in_vector_exponentiator_function,
-      DATA_OUT => data_out_vector_exponentiator_function
-      );
-
-  -- VECTOR SUMMATION
-  vector_summation : ntm_vector_summation
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_summation,
-      READY => ready_vector_summation,
-
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_summation,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_summation,
-      LENGTH_IN => length_in_vector_summation,
-      DATA_IN   => data_in_vector_summation,
-      DATA_OUT  => data_out_vector_summation
-      );
-
-  -- VECTOR CONVOLUTION
-  vector_convolution : ntm_vector_convolution
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution,
-      READY => ready_vector_convolution,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
-
-      -- DATA
-      LENGTH_IN => length_in_vector_convolution,
-      DATA_A_IN => data_a_in_vector_convolution,
-      DATA_B_IN => data_b_in_vector_convolution,
-      DATA_OUT  => data_out_vector_convolution
-      );
 
 end architecture;

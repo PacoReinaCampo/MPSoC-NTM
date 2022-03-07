@@ -104,7 +104,10 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
 
   signal b_out_enable_top : std_logic;
 
-  signal x_in_enable_top  : std_logic;
+  signal x_in_enable_top : std_logic;
+
+  signal x_out_enable_top : std_logic;
+
   signal y_out_enable_top : std_logic;
 
   -- DATA
@@ -176,7 +179,10 @@ begin
 
       DNC_TOP_B_OUT_ENABLE => b_out_enable_top,
 
-      DNC_TOP_X_IN_ENABLE  => x_in_enable_top,
+      DNC_TOP_X_IN_ENABLE => x_in_enable_top,
+
+      DNC_TOP_X_OUT_ENABLE => x_out_enable_top,
+
       DNC_TOP_Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
@@ -237,6 +243,9 @@ begin
         B_OUT_ENABLE => b_in_enable_top,
 
         X_IN_ENABLE  => x_in_enable_top,
+
+        X_OUT_ENABLE => x_out_enable_top,
+
         Y_OUT_ENABLE => y_out_enable_top,
 
         -- DATA

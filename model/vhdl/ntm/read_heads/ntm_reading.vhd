@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.ntm_core_pkg.all;
 
 entity ntm_reading is
   generic (
@@ -114,9 +115,9 @@ architecture ntm_reading_architecture of ntm_reading is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_m_in_i_state_int : std_logic;
-  signal data_m_in_j_state_int : std_logic;
-  signal data_w_in_state_int   : std_logic;
+  signal data_m_in_i_int : std_logic;
+  signal data_m_in_j_int : std_logic;
+  signal data_w_in_int   : std_logic;
 
 begin
 
@@ -187,8 +188,8 @@ begin
             matrix_m_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= M_IN;
 
             -- Control Internal
-            data_m_in_i_state_int <= '1';
-            data_m_in_j_state_int <= '1';
+            data_m_in_i_int <= '1';
+            data_m_in_j_int <= '1';
           end if;
 
           if (W_IN_ENABLE = '1') then
@@ -196,7 +197,7 @@ begin
             vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
 
             -- Control Internal
-            data_w_in_state_int <= '1';
+            data_w_in_int <= '1';
           end if;
 
           -- Control Outputs
@@ -204,21 +205,20 @@ begin
           M_OUT_K_ENABLE <= '0';
           W_OUT_ENABLE   <= '0';
 
-          if (data_m_in_i_state_int = '1' and data_m_in_j_state_int = '1' and data_w_in_state_int = '1') then
+          if (data_m_in_i_int = '1' and data_m_in_j_int = '1' and data_w_in_int = '1') then
             -- Control Internal
-            data_m_in_i_state_int <= '0';
-            data_m_in_j_state_int <= '0';
-            data_w_in_state_int   <= '0';
+            data_m_in_i_int <= '0';
+            data_m_in_j_int <= '0';
+            data_w_in_int   <= '0';
 
             -- -- Data Internal
-            -- vector_out_int <= function_ntm_reading (
-              -- SIZE_R_IN => SIZE_R_IN,
-              -- SIZE_N_IN => SIZE_N_IN,
-              -- SIZE_W_IN => SIZE_W_IN,
+            vector_out_int <= function_ntm_reading (
+              SIZE_N_IN => SIZE_N_IN,
+              SIZE_W_IN => SIZE_W_IN,
 
-              -- matrix_w_input => vector_w_int,
-              -- matrix_m_input => matrix_m_int
-              -- );
+              vector_w_input => vector_w_int,
+              matrix_m_input => matrix_m_int
+              );
 
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_J_STATE;

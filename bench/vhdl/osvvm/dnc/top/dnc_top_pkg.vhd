@@ -183,7 +183,10 @@ package dnc_top_pkg is
 
       DNC_TOP_B_OUT_ENABLE : in std_logic;
 
-      DNC_TOP_X_IN_ENABLE  : out std_logic;
+      DNC_TOP_X_IN_ENABLE : out std_logic;
+
+      DNC_TOP_X_OUT_ENABLE  : in std_logic;
+
       DNC_TOP_Y_OUT_ENABLE : in  std_logic;
 
       -- DATA

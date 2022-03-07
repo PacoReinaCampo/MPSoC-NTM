@@ -5,7 +5,7 @@ build:
 	vlog -sv -stats=none -f system.vc
 
 simulate:
-	vsim -c -do run.do work.dnc_top_testbench
+	vsim -c -do run.do work.ntm_state_top_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

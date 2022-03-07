@@ -85,7 +85,10 @@ entity dnc_top is
 
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
-    X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
+
+    X_OUT_ENABLE : out std_logic;       -- for x in 0 to X-1
+
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA

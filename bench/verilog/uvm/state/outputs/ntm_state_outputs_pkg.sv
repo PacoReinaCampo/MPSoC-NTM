@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package dnc_read_heads_pkg;
+package ntm_state_outputs_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -438,13 +438,12 @@ package ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_w_input : matrix_buffer;
+    vector_w_input : vector_buffer;
     matrix_m_input : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -557,31 +556,30 @@ package body ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_w_input : matrix_buffer;
+    vector_w_input : vector_buffer;
     matrix_m_input : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
-    variable matrix_r_output : matrix_buffer;
+    variable vector_r_output : vector_buffer;
 
   begin
 
-    -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
+    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_r_output(i, k) := ZERO_DATA;
+    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+      vector_r_output(k) := ZERO_DATA;
+    end loop;
 
-        for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-          matrix_r_output(i, k) := std_logic_vector(to_float(to_real(to_float(matrix_r_output(i, k))) + (to_real(to_float(matrix_w_input(i, j)))*to_real(to_float(matrix_m_input(j, k))))));
-        end loop;
+    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_r_output(k) := std_logic_vector(to_float(to_real(to_float(vector_r_output(k))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(matrix_m_input(j, k))))));
       end loop;
     end loop;
 
-    return matrix_r_output;
+    return vector_r_output;
   end function function_ntm_reading;
 
   -----------------------------------------------------------------------
@@ -910,6 +908,8 @@ package body ntm_core_pkg is
 
     variable matrix_r_int : matrix_buffer;
 
+    variable vector_r_int : vector_buffer;
+
     variable vector_w_in_int : vector_buffer;
 
     variable vector_w_out_int : vector_buffer;
@@ -994,13 +994,12 @@ package body ntm_core_pkg is
 
     -- READ_HEADS_STATE
 
-    -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
-    matrix_r_int := function_ntm_reading (
-      SIZE_R_IN => SIZE_R_IN,
+    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+    vector_r_int := function_ntm_reading (
       SIZE_N_IN => SIZE_N_IN,
       SIZE_W_IN => SIZE_W_IN,
 
-      matrix_w_input => matrix_w_in_int,
+      vector_w_input => vector_w_in_int,
       matrix_m_input => matrix_m_in_int
       );
 

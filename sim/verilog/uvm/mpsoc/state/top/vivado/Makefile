@@ -48,8 +48,8 @@ build:
 	xvlog -prj system.prj
 
 simulate:
-	xelab dnc_top_testbench
-	xsim -R dnc_top_testbench
+	xelab ntm_state_top_testbench
+	xsim -R ntm_state_top_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

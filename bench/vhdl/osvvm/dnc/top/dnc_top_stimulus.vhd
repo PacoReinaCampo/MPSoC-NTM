@@ -108,6 +108,9 @@ entity dnc_top_stimulus is
     DNC_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     DNC_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_TOP_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     DNC_TOP_Y_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
