@@ -166,7 +166,7 @@ begin
             PSI_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1 u,w,psi
+        when INPUT_STATE =>             -- STEP 1 u,w,psi
 
           if (U_IN_ENABLE = '1') then
             -- Data Inputs
@@ -211,12 +211,12 @@ begin
               vector_w_input   => vector_w_int,
               vector_psi_input => vector_psi_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when CLEAN_STATE =>           -- STEP 2
+        when CLEAN_STATE =>             -- STEP 2
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

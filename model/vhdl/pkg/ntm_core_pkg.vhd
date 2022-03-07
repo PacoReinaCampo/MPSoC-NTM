@@ -347,19 +347,19 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- Key Vector
-      U_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
-      U_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      U_IN_S_ENABLE : in std_logic;     -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      U_OUT_S_ENABLE : out std_logic;    -- for s in 0 to S-1
-      U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+      U_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- Hidden State
-      H_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      H_OUT_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_OUT_ENABLE : in std_logic;      -- for l in 0 to L-1
 
       -- Interface
-      XI_OUT_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_OUT_ENABLE : in std_logic;     -- for s in 0 to S-1
 
       -- DATA
       SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -687,8 +687,8 @@ package body ntm_core_pkg is
 
     data_summation_int := ZERO_DATA;
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(i)))));
+    for j in 0 to to_integer(unsigned(SIZE_j_IN))-1 loop
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(j)))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop

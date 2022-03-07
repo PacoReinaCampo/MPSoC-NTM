@@ -184,7 +184,7 @@ begin
             A_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>     -- STEP 1 w
+        when INPUT_FIRST_STATE =>       -- STEP 1 w
 
           if (W_IN_ENABLE = '1') then
             -- Data Inputs
@@ -197,7 +197,7 @@ begin
           -- Control Outputs
           W_OUT_ENABLE <= '0';
 
-        when CLEAN_FIRST_STATE =>     -- STEP 2 w
+        when CLEAN_FIRST_STATE =>       -- STEP 2 w
 
           if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -219,7 +219,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_SECOND_STATE =>     -- STEP 3 a
+        when INPUT_SECOND_STATE =>      -- STEP 3 a
 
           if (A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -232,7 +232,7 @@ begin
           -- Control Outputs
           A_OUT_ENABLE <= '0';
 
-        when CLEAN_SECOND_STATE =>     -- STEP 4 a
+        when CLEAN_SECOND_STATE =>      -- STEP 4 a
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -254,7 +254,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
           end if;
 
-        when INPUT_THIRD_I_STATE =>    -- STEP 5 M
+        when INPUT_THIRD_I_STATE =>     -- STEP 5 M
 
           if ((M_IN_J_ENABLE = '1') and (M_IN_K_ENABLE = '1')) then
             -- Data Inputs
@@ -278,7 +278,7 @@ begin
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
 
-        when INPUT_THIRD_J_STATE =>    -- STEP 6 M
+        when INPUT_THIRD_J_STATE =>     -- STEP 6 M
 
           if (M_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -295,7 +295,7 @@ begin
           -- Control Outputs
           M_OUT_K_ENABLE <= '0';
 
-        when CLEAN_THIRD_I_STATE =>    -- STEP 7
+        when CLEAN_THIRD_I_STATE =>     -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -329,7 +329,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_THIRD_I_STATE;
           end if;
 
-        when CLEAN_THIRD_J_STATE =>    -- STEP 8
+        when CLEAN_THIRD_J_STATE =>     -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

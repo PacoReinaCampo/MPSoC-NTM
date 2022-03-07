@@ -63,19 +63,19 @@ entity ntm_interface_vector is
     READY : out std_logic;
 
     -- Weight
-    U_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
-    U_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    U_IN_S_ENABLE : in std_logic;       -- for s in 0 to S-1
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-    U_OUT_S_ENABLE : out std_logic;    -- for s in 0 to S-1
-    U_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    U_OUT_S_ENABLE : out std_logic;     -- for s in 0 to S-1
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     -- Hidden State
-    H_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    H_OUT_ENABLE : out std_logic;      -- for l in 0 to L-1
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- Interface
-    XI_OUT_ENABLE : out std_logic;     -- for s in 0 to S-1
+    XI_OUT_ENABLE : out std_logic;      -- for s in 0 to S-1
 
     -- DATA
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

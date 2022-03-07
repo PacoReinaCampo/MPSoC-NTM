@@ -144,8 +144,8 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_b_in_i_state_int : std_logic;
-  signal data_b_in_j_state_int : std_logic;
+  signal data_b_in_i_state_int  : std_logic;
+  signal data_b_in_j_state_int  : std_logic;
   signal data_pi_in_i_state_int : std_logic;
   signal data_pi_in_p_state_int : std_logic;
 

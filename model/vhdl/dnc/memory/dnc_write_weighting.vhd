@@ -167,7 +167,7 @@ begin
             C_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1 p,w
+        when INPUT_STATE =>             -- STEP 1 p,w
 
           if (A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -206,12 +206,12 @@ begin
               scalar_ga_input => GA_IN,
               scalar_gw_input => GW_IN
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when CLEAN_STATE =>           -- STEP 3
+        when CLEAN_STATE =>             -- STEP 3
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

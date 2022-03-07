@@ -201,7 +201,7 @@ begin
             K_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>     -- STEP 1 k,s
+        when INPUT_FIRST_STATE =>       -- STEP 1 k,s
 
           if (K_IN_ENABLE = '1') then
             -- Data Inputs
@@ -227,12 +227,12 @@ begin
             -- Control Internal
             data_k_in_int <= '0';
             data_s_in_int <= '0';
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_FIRST_STATE;
           end if;
 
-        when CLEAN_FIRST_STATE =>     -- STEP 2 k,s
+        when CLEAN_FIRST_STATE =>       -- STEP 2 k,s
 
           if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -296,7 +296,7 @@ begin
 
               vector_w_input => vector_w_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
           end if;

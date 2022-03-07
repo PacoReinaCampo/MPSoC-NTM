@@ -995,7 +995,7 @@ package dnc_core_pkg is
 
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
-      X_IN_ENABLE  : in  std_logic;     -- for x in 0 to X-1
+      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
 
       X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
 
@@ -1090,11 +1090,11 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- Weight
-      U_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
-      U_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      U_IN_S_ENABLE : in std_logic;     -- for s in 0 to S-1
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      U_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
-      U_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
+      U_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- Hidden State
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
@@ -1102,7 +1102,7 @@ package dnc_core_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- Interface
-      XI_OUT_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_OUT_ENABLE : in std_logic;     -- for s in 0 to S-1
 
       -- DATA
       SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2372,7 +2372,7 @@ package body dnc_core_pkg is
 
       vector_input => vector_e_int
       );
-    
+
     return vector_e_output;
   end function function_dnc_erase_vector;
 
@@ -2396,7 +2396,7 @@ package body dnc_core_pkg is
     scalar_gw_output := function_scalar_logistic (
       scalar_input => scalar_gw_int
       );
-    
+
     return scalar_gw_output;
   end function function_dnc_write_gate;
 
@@ -2440,7 +2440,7 @@ package body dnc_core_pkg is
     scalar_beta_output := function_scalar_oneplus (
       scalar_input => scalar_beta_int
       );
-    
+
     return scalar_beta_output;
   end function function_dnc_write_strength;
 
@@ -2590,6 +2590,9 @@ package body dnc_core_pkg is
     vector_x_input : vector_buffer
     ) return vector_buffer is
 
+    -- Constant
+    constant FIVE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
+    
     -- Trainer Variable
     variable matrix_w_int : matrix_buffer;
 
@@ -2636,6 +2639,8 @@ package body dnc_core_pkg is
 
     -- Output Variable
     variable vector_y_output : vector_buffer;
+
+    variable SCALAR_OPERATION_INT : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -2693,11 +2698,55 @@ package body dnc_core_pkg is
 
 
     -- INTERFACE_VECTOR_STATE
-    SIZE_S_IN := std_logic_vector(to_unsigned((to_integer(unsigned(SIZE_W_IN))*to_integer(unsigned(SIZE_R_IN))) + (3*to_integer(unsigned(SIZE_W_IN))) + (5*to_integer(unsigned(SIZE_R_IN))) + 3, CONTROL_SIZE));
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => SIZE_W_IN,
+      scalar_b_input => SIZE_R_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => THREE_CONTROL,
+      scalar_b_input => SIZE_W_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => FIVE_CONTROL,
+      scalar_b_input => SIZE_R_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => THREE_CONTROL,
+      scalar_b_input => SIZE_S_IN
+      );
+
+
 
     -- xi(t;s) = U(t;s;l)·h(t;l)
     vector_xi_int := function_dnc_interface_vector (
-      SIZE_S_IN => SIZE_W_IN,
+      SIZE_S_IN => SIZE_S_IN,
       SIZE_L_IN => SIZE_L_IN,
 
       matrix_u_input => matrix_w_int,

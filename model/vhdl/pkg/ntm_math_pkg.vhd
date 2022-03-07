@@ -1680,7 +1680,7 @@ package ntm_math_pkg is
     matrix_b_input : matrix_buffer
 
     ) return matrix_buffer;
-    
+
   function function_matrix_vector_convolution (
     SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1717,7 +1717,7 @@ package ntm_math_pkg is
     matrix_b_input : matrix_buffer
 
     ) return matrix_buffer;
-    
+
   function function_matrix_vector_product (
     SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2321,7 +2321,7 @@ package body ntm_math_pkg is
         end if;
       end loop;
     end loop;
-            
+
     for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       if (matrix_in_int(m, m) = ZERO_DATA) then
         for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop

@@ -3,8 +3,9 @@ call ../../../../../../../settings64_ghdl.bat
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_arithmetic_pkg.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_math_pkg.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/dnc_core_pkg.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/ntm_lstm_controller_pkg.vhd
+ghdl -a --std=08 ../../../../../../../model/vhdl/pkg/dnc_core_pkg.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd

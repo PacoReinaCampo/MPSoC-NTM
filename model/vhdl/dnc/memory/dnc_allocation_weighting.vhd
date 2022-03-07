@@ -60,11 +60,11 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+    U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    U_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+    U_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
-    A_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+    A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -96,7 +96,7 @@ architecture dnc_allocation_weighting_urchitecture of dnc_allocation_weighting i
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Buffer
-  signal vector_u_int   : vector_buffer;
+  signal vector_u_int : vector_buffer;
 
   signal vector_out_int : vector_buffer;
 
@@ -121,8 +121,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      A_OUT_ENABLE   <= '0';
-      U_OUT_ENABLE   <= '0';
+      A_OUT_ENABLE <= '0';
+      U_OUT_ENABLE <= '0';
 
       -- Control Internal
       index_i_loop <= ZERO_CONTROL;
@@ -141,7 +141,7 @@ begin
 
           if (START = '1') then
             -- Control Outputs
-            U_OUT_ENABLE   <= '1';
+            U_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -150,10 +150,10 @@ begin
             controller_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Outputs
-            U_OUT_ENABLE   <= '0';
+            U_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1 u
+        when INPUT_STATE =>             -- STEP 1 u
 
           if (U_IN_ENABLE = '1') then
             -- Data Inputs
@@ -163,9 +163,9 @@ begin
             vector_out_int <= function_dnc_allocation_weighting (
               SIZE_N_IN => SIZE_N_IN,
 
-              vector_u_input   => vector_u_int
+              vector_u_input => vector_u_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
@@ -174,7 +174,7 @@ begin
           A_OUT_ENABLE <= '0';
           U_OUT_ENABLE <= '0';
 
-        when CLEAN_STATE =>           -- STEP 2
+        when CLEAN_STATE =>             -- STEP 2
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

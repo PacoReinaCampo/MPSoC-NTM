@@ -242,7 +242,7 @@ begin
 
         B_OUT_ENABLE => b_in_enable_top,
 
-        X_IN_ENABLE  => x_in_enable_top,
+        X_IN_ENABLE => x_in_enable_top,
 
         X_OUT_ENABLE => x_out_enable_top,
 

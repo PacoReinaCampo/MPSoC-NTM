@@ -118,8 +118,8 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   signal data_l_in_i_state_int : std_logic;
   signal data_l_in_j_state_int : std_logic;
-  signal data_w_in_int   : std_logic;
-  signal data_p_in_int   : std_logic;
+  signal data_w_in_int         : std_logic;
+  signal data_p_in_int         : std_logic;
 
 begin
 
@@ -219,8 +219,8 @@ begin
             -- Control Internal
             data_l_in_i_state_int <= '0';
             data_l_in_j_state_int <= '0';
-            data_w_in_int   <= '0';
-            data_p_in_int   <= '0';
+            data_w_in_int         <= '0';
+            data_p_in_int         <= '0';
 
             -- Data Internal
             matrix_out_int <= function_dnc_temporal_link_matrix (
@@ -230,7 +230,7 @@ begin
               vector_w_input => vector_w_int,
               vector_p_input => vector_p_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
@@ -294,7 +294,7 @@ begin
 
         when CLEAN_J_STATE =>           -- STEP 4
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then            -- Data Outputs
+          if (unsigned(index_j_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then  -- Data Outputs
             -- Data Outputs
             L_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 

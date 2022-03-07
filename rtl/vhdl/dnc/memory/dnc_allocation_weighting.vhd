@@ -412,7 +412,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
       -- DATA
-      SIZE_IN => size_in_vector_multiplication,
+      SIZE_IN   => size_in_vector_multiplication,
       LENGTH_IN => length_in_vector_multiplication,
       DATA_IN   => data_in_vector_multiplication,
       DATA_OUT  => data_out_vector_multiplication

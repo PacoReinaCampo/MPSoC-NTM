@@ -161,7 +161,7 @@ begin
             P_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1 p,w
+        when INPUT_STATE =>             -- STEP 1 p,w
 
           if (W_IN_ENABLE = '1') then
             -- Data Inputs
@@ -195,12 +195,12 @@ begin
               vector_w_input => vector_w_int,
               vector_p_input => vector_p_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when CLEAN_STATE =>           -- STEP 3
+        when CLEAN_STATE =>             -- STEP 3
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

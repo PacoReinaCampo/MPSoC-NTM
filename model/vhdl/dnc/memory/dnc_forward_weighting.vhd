@@ -218,7 +218,7 @@ begin
               matrix_l_input => matrix_l_int,
               matrix_w_input => matrix_w_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;

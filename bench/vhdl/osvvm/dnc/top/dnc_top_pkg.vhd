@@ -185,9 +185,9 @@ package dnc_top_pkg is
 
       DNC_TOP_X_IN_ENABLE : out std_logic;
 
-      DNC_TOP_X_OUT_ENABLE  : in std_logic;
+      DNC_TOP_X_OUT_ENABLE : in std_logic;
 
-      DNC_TOP_Y_OUT_ENABLE : in  std_logic;
+      DNC_TOP_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
       DNC_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

@@ -127,7 +127,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   signal data_m_in_i_int : std_logic;
   signal data_m_in_j_int : std_logic;
-            
+
   signal data_w_in_int : std_logic;
   signal data_v_in_int : std_logic;
   signal data_e_in_int : std_logic;
@@ -193,7 +193,7 @@ begin
             E_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>     -- STEP 1 v,e
+        when INPUT_FIRST_STATE =>       -- STEP 1 v,e
 
           if (V_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -219,12 +219,12 @@ begin
             -- Control Internal
             data_v_in_int <= '0';
             data_e_in_int <= '0';
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_FIRST_STATE;
           end if;
 
-        when CLEAN_FIRST_STATE =>     -- STEP 2
+        when CLEAN_FIRST_STATE =>       -- STEP 2
 
           if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -284,7 +284,7 @@ begin
               vector_v_input => vector_v_int,
               vector_e_input => vector_e_int
               );
-    
+
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
           end if;
