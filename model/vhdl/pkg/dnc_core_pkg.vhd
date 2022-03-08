@@ -2628,6 +2628,7 @@ package body dnc_core_pkg is
 
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
+    variable matrix_vt_int : tensor_buffer;
 
     variable vector_xt_int  : matrix_buffer;
     variable matrix_rt_int  : tensor_buffer;
@@ -2639,12 +2640,12 @@ package body dnc_core_pkg is
 
     variable vector_h_int : vector_buffer;
 
-    -- Output Variable
-    variable vector_y_output : vector_buffer;
-
     variable SCALAR_OPERATION_INT : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    -- Output Variable
+    variable vector_y_output : vector_buffer;
 
   begin
 
@@ -2673,7 +2674,6 @@ package body dnc_core_pkg is
       scalar_b_input => SIZE_S_IN
       );
 
-
     SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
       scalar_a_input => FIVE_CONTROL,
       scalar_b_input => SIZE_R_IN
@@ -2695,8 +2695,8 @@ package body dnc_core_pkg is
 
     -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,
@@ -2736,6 +2736,20 @@ package body dnc_core_pkg is
       );
 
     matrix_ut_int := function_ntm_fnn_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+
+      vector_x_input  => vector_xt_int,
+      matrix_r_input  => matrix_rt_int,
+      vector_xi_input => vector_xit_int,
+      vector_h_input  => vector_ht_int
+      );
+
+    matrix_vt_int := function_ntm_fnn_v_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,

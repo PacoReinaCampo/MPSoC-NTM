@@ -928,6 +928,9 @@ package body ntm_core_pkg is
     vector_x_input : vector_buffer
     ) return vector_buffer is
 
+    -- Constant
+    constant FIVE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
+
     -- Trainer Variable
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
@@ -969,10 +972,58 @@ package body ntm_core_pkg is
     variable scalar_beta_int  : std_logic_vector(DATA_SIZE-1 downto 0);
     variable scalar_gamma_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
+    variable SCALAR_OPERATION_INT : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
     -- Output Variable
     variable vector_y_output : vector_buffer;
 
   begin
+
+    -- ARITHMETIC S
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => SIZE_W_IN,
+      scalar_b_input => SIZE_R_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => THREE_CONTROL,
+      scalar_b_input => SIZE_W_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+      scalar_a_input => FIVE_CONTROL,
+      scalar_b_input => SIZE_R_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => SCALAR_OPERATION_INT,
+      scalar_b_input => SIZE_S_IN
+      );
+
+    SIZE_S_IN := function_scalar_integer_adder (
+      OPERATION => '0',
+
+      scalar_a_input => THREE_CONTROL,
+      scalar_b_input => SIZE_S_IN
+      );
 
     -- CONTROLLER_BODY_STATE
 
@@ -984,7 +1035,7 @@ package body ntm_core_pkg is
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
 
       matrix_w_input => matrix_w_input,
       tensor_k_input => tensor_k_input,
@@ -1006,7 +1057,7 @@ package body ntm_core_pkg is
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_W_IN,
+      SIZE_S_IN => SIZE_S_IN,
 
       vector_x_input  => vector_xt_int,
       matrix_r_input  => matrix_rt_int,
@@ -1020,7 +1071,7 @@ package body ntm_core_pkg is
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_W_IN,
+      SIZE_S_IN => SIZE_S_IN,
 
       vector_x_input  => vector_xt_int,
       matrix_r_input  => matrix_rt_int,
@@ -1031,9 +1082,8 @@ package body ntm_core_pkg is
     -- INTERFACE_VECTOR_STATE
 
     -- xi(t;s) = U(t;s;l)·h(t;l)
-
     vector_xi_int := function_ntm_interface_vector (
-      SIZE_S_IN => SIZE_W_IN,
+      SIZE_S_IN => SIZE_S_IN,
       SIZE_L_IN => SIZE_L_IN,
 
       matrix_u_input => matrix_v_int,
