@@ -146,6 +146,7 @@ architecture ntm_top_architecture of ntm_top is
   signal matrix_w_int : matrix_buffer;
   signal tensor_k_int : tensor_buffer;
   signal matrix_u_int : matrix_buffer;
+  signal matrix_v_int : matrix_buffer;
   signal vector_b_int : vector_buffer;
 
   signal vector_x_int : vector_buffer;
@@ -537,6 +538,7 @@ begin
               matrix_w_input => matrix_w_int,
               tensor_k_input => tensor_k_int,
               matrix_u_input => matrix_u_int,
+              matrix_v_input => matrix_v_int,
               vector_b_input => vector_b_int,
 
               vector_x_input => vector_x_int

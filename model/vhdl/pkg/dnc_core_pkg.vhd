@@ -1411,6 +1411,7 @@ package dnc_core_pkg is
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -2585,6 +2586,7 @@ package body dnc_core_pkg is
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -2627,9 +2629,10 @@ package body dnc_core_pkg is
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
 
-    variable vector_xt_int : matrix_buffer;
-    variable matrix_rt_int : tensor_buffer;
-    variable vector_ht_int : matrix_buffer;
+    variable vector_xt_int  : matrix_buffer;
+    variable matrix_rt_int  : tensor_buffer;
+    variable vector_xit_int : matrix_buffer;
+    variable vector_ht_int  : matrix_buffer;
 
     -- Internal Variable
     variable matrix_r_int : matrix_buffer;
@@ -2645,58 +2648,7 @@ package body dnc_core_pkg is
 
   begin
 
-    -- CONTROLLER_BODY_STATE
-
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
-
-    vector_h_int := function_ntm_fnn_standard_controller (
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-
-      matrix_w_input => matrix_w_input,
-      tensor_k_input => tensor_k_input,
-      matrix_u_input => matrix_u_input,
-      vector_b_input => vector_b_input,
-
-      vector_x_input => vector_x_input,
-      matrix_r_input => matrix_r_int,
-      vector_h_input => vector_h_int
-      );
-
-
-
-    -- TRAINER_STATE
-
-    tensor_kt_int := function_ntm_fnn_k_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-
-      vector_x_input => vector_xt_int,
-      matrix_r_input => matrix_rt_int,
-      vector_h_input => vector_ht_int
-      );
-
-    matrix_ut_int := function_ntm_fnn_u_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-
-      vector_x_input => vector_xt_int,
-      matrix_r_input => matrix_rt_int,
-      vector_h_input => vector_ht_int
-      );
-
-
-
-    -- INTERFACE_VECTOR_STATE
+    -- ARITHMETIC S
     SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
       scalar_a_input => SIZE_W_IN,
       scalar_b_input => SIZE_R_IN
@@ -2741,7 +2693,65 @@ package body dnc_core_pkg is
       scalar_b_input => SIZE_S_IN
       );
 
+    -- CONTROLLER_BODY_STATE
 
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+
+    vector_h_int := function_ntm_fnn_standard_controller (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      matrix_v_input => matrix_v_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input  => vector_x_input,
+      matrix_r_input  => matrix_r_int,
+      vector_xi_input => vector_xi_int,
+      vector_h_input  => vector_h_int
+      );
+
+
+
+    -- TRAINER_STATE
+
+    tensor_kt_int := function_ntm_fnn_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+
+      vector_x_input  => vector_xt_int,
+      matrix_r_input  => matrix_rt_int,
+      vector_xi_input => vector_xit_int,
+      vector_h_input  => vector_ht_int
+      );
+
+    matrix_ut_int := function_ntm_fnn_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+
+      vector_x_input  => vector_xt_int,
+      matrix_r_input  => matrix_rt_int,
+      vector_xi_input => vector_xit_int,
+      vector_h_input  => vector_ht_int
+      );
+
+
+
+    -- INTERFACE_VECTOR_STATE
 
     -- xi(t;s) = U(t;s;l)·h(t;l)
     vector_xi_int := function_dnc_interface_vector (

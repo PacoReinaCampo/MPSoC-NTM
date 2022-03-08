@@ -542,6 +542,7 @@ package ntm_core_pkg is
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -717,9 +718,14 @@ package body ntm_core_pkg is
     variable vector_wc_output : vector_buffer;
     variable vector_wg_output : vector_buffer;
 
-    variable vector_w_output : vector_buffer;
+    variable vector_g_int : vector_buffer;
+
+    variable vector_one_int : vector_buffer;
+    variable vector_cg_int  : vector_buffer;
 
     variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_w_output : vector_buffer;
 
   begin
 
@@ -735,8 +741,42 @@ package body ntm_core_pkg is
 
     -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_wg_output(j) := std_logic_vector(to_float(to_real(to_float(scalar_g_input))*to_real(to_float(vector_wc_output(j))) + (1.0 - to_real(to_float(scalar_g_input)))*to_real(to_float(vector_w_input(j)))));
+      vector_g_int(j) := scalar_g_input;
+
+      vector_one_int(j) := ONE_DATA;
     end loop;
+
+    vector_cg_int := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_one_int,
+      vector_b_input => vector_g_int
+      );
+
+    vector_g_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_g_int,
+      vector_b_input => vector_wc_output
+      );
+
+    vector_cg_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_cg_int,
+      vector_b_input => vector_w_input
+      );
+
+    vector_wg_output := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_g_int,
+      vector_b_input => vector_cg_int
+      );
 
     -- w(t;j) = wg(t;j)*s(t;k)
     vector_w_output := function_vector_convolution (
@@ -882,6 +922,7 @@ package body ntm_core_pkg is
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -890,14 +931,15 @@ package body ntm_core_pkg is
     -- Trainer Variable
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
-    variable matrix_w_int : matrix_buffer;
+    variable matrix_v_int : matrix_buffer;
 
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
 
-    variable vector_xt_int : matrix_buffer;
-    variable matrix_rt_int : tensor_buffer;
-    variable vector_ht_int : matrix_buffer;
+    variable vector_xt_int  : matrix_buffer;
+    variable matrix_rt_int  : tensor_buffer;
+    variable vector_xit_int : matrix_buffer;
+    variable vector_ht_int  : matrix_buffer;
 
     -- Internal Variable
     variable matrix_m_in_int : matrix_buffer;
@@ -934,23 +976,26 @@ package body ntm_core_pkg is
 
     -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_R_IN,
 
       matrix_w_input => matrix_w_input,
       tensor_k_input => tensor_k_input,
       matrix_u_input => matrix_u_input,
+      matrix_v_input => matrix_v_input,
       vector_b_input => vector_b_input,
 
-      vector_x_input => vector_x_input,
-      matrix_r_input => matrix_r_int,
-      vector_h_input => vector_h_int
+      vector_x_input  => vector_x_input,
+      matrix_r_input  => matrix_r_int,
+      vector_xi_input => vector_xi_int,
+      vector_h_input  => vector_h_int
       );
 
     -- TRAINER_STATE
@@ -961,10 +1006,12 @@ package body ntm_core_pkg is
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_W_IN,
 
-      vector_x_input => vector_xt_int,
-      matrix_r_input => matrix_rt_int,
-      vector_h_input => vector_ht_int
+      vector_x_input  => vector_xt_int,
+      matrix_r_input  => matrix_rt_int,
+      vector_xi_input => vector_xit_int,
+      vector_h_input  => vector_ht_int
       );
 
     matrix_ut_int := function_ntm_fnn_u_trainer (
@@ -973,10 +1020,12 @@ package body ntm_core_pkg is
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_W_IN,
 
-      vector_x_input => vector_xt_int,
-      matrix_r_input => matrix_rt_int,
-      vector_h_input => vector_ht_int
+      vector_x_input  => vector_xt_int,
+      matrix_r_input  => matrix_rt_int,
+      vector_xi_input => vector_xit_int,
+      vector_h_input  => vector_ht_int
       );
 
     -- INTERFACE_VECTOR_STATE
@@ -987,7 +1036,7 @@ package body ntm_core_pkg is
       SIZE_S_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      matrix_u_input => matrix_w_int,
+      matrix_u_input => matrix_v_int,
 
       vector_h_input => vector_h_int
       );

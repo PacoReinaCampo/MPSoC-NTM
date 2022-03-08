@@ -221,15 +221,18 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
+    vector_x_input  : vector_buffer;
+    matrix_r_input  : matrix_buffer;
+    vector_xi_input : vector_buffer;
+    vector_h_input  : vector_buffer
     ) return vector_buffer;
 
   -----------------------------------------------------------------------
@@ -241,15 +244,18 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
+    vector_x_input  : vector_buffer;
+    matrix_r_input  : matrix_buffer;
+    vector_xi_input : vector_buffer;
+    vector_h_input  : vector_buffer
     ) return vector_buffer;
 
   -----------------------------------------------------------------------
@@ -262,10 +268,12 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return tensor_buffer;
 
   function function_ntm_fnn_k_trainer (
@@ -274,10 +282,12 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return array4_buffer;
 
   function function_ntm_fnn_u_trainer (
@@ -286,10 +296,26 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
+    ) return tensor_buffer;
+
+  function function_ntm_fnn_v_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return tensor_buffer;
 
   function function_ntm_fnn_b_trainer (
@@ -298,10 +324,12 @@ package ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return matrix_buffer;
 
 end ntm_fnn_controller_pkg;
@@ -378,15 +406,18 @@ package body ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
+    vector_x_input  : vector_buffer;
+    matrix_r_input  : matrix_buffer;
+    vector_xi_input : vector_buffer;
+    vector_h_input  : vector_buffer
     ) return vector_buffer is
 
     variable tensor_convolution : matrix_buffer;
@@ -397,7 +428,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
 
     -- Data Inputs
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -430,6 +461,25 @@ package body ntm_fnn_controller_pkg is
 
       matrix_a_input => matrix_w_input,
       vector_b_input => vector_x_input
+      );
+
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_convolution
+      );
+
+    -- V(l;s)*xi(t;s)
+    matrix_convolution := function_matrix_vector_convolution (
+      SIZE_A_I_IN => SIZE_L_IN,
+      SIZE_A_J_IN => SIZE_S_IN,
+      SIZE_B_IN   => SIZE_S_IN,
+
+      matrix_a_input => matrix_v_input,
+      vector_b_input => vector_xi_input
       );
 
     vector_adder := function_vector_float_adder (
@@ -479,15 +529,18 @@ package body ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_w_input : matrix_buffer;
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
+    vector_x_input  : vector_buffer;
+    matrix_r_input  : matrix_buffer;
+    vector_xi_input : vector_buffer;
+    vector_h_input  : vector_buffer
     ) return vector_buffer is
 
     variable tensor_product : matrix_buffer;
@@ -498,7 +551,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
 
     -- Data Inputs
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -531,6 +584,25 @@ package body ntm_fnn_controller_pkg is
 
       matrix_a_input => matrix_w_input,
       vector_b_input => vector_x_input
+      );
+
+    vector_adder := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_adder,
+      vector_b_input => matrix_product
+      );
+
+    -- V(l;s)·xi(t;s)
+    matrix_product := function_matrix_vector_product (
+      SIZE_A_I_IN => SIZE_L_IN,
+      SIZE_A_J_IN => SIZE_S_IN,
+      SIZE_B_IN   => SIZE_S_IN,
+
+      matrix_a_input => matrix_v_input,
+      vector_b_input => vector_xi_input
       );
 
     vector_adder := function_vector_float_adder (
@@ -581,10 +653,12 @@ package body ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return tensor_buffer is
 
     variable vector_dh_int : matrix_buffer;
@@ -629,10 +703,12 @@ package body ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return array4_buffer is
 
     variable vector_dh_int : matrix_buffer;
@@ -681,10 +757,12 @@ package body ntm_fnn_controller_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return tensor_buffer is
 
     variable vector_dh_int : matrix_buffer;
@@ -723,16 +801,68 @@ package body ntm_fnn_controller_pkg is
     return matrix_u_output;
   end function function_ntm_fnn_u_trainer;
 
+  function function_ntm_fnn_v_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
+    ) return tensor_buffer is
+
+    variable vector_dh_int : matrix_buffer;
+
+    variable matrix_v_output : tensor_buffer;
+
+  begin
+
+    -- dV(t;l;s) = summation(d*(t+1;l) · xi(t;s))[t in 0 to T-1]
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+          matrix_v_output(t, l, s) := ZERO_DATA;
+        end loop;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+          matrix_v_output(t, l, s) := std_logic_vector(to_float(to_real(to_float(matrix_v_output(t, l, s))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(vector_xi_input(t, s))))));
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_v_output;
+  end function function_ntm_fnn_v_trainer;
+
   function function_ntm_fnn_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : matrix_buffer;
-    matrix_r_input : tensor_buffer;
-    vector_h_input : matrix_buffer
+    vector_x_input  : matrix_buffer;
+    matrix_r_input  : tensor_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer
     ) return matrix_buffer is
 
     variable vector_dh_int : matrix_buffer;
