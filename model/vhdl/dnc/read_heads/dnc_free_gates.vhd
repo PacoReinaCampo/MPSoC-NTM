@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_free_gates is
   generic (
@@ -72,33 +73,33 @@ entity dnc_free_gates is
     );
 end entity;
 
-architecture dnc_free_gates_architecture of dnc_free_gates is
+architecture dnc_free_gates_urchitecture of dnc_free_gates is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  -- Finite State Machine
+  type free_gates_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR LOGISTIC
-  -- CONTROL
-  signal start_vector_logistic : std_logic;
-  signal ready_vector_logistic : std_logic;
+  -- Finite State Machine
+  signal free_gates_ctrl_fsm_int : free_gates_ctrl_fsm;
 
-  signal data_in_enable_vector_logistic : std_logic;
+  -- Buffer
+  signal vector_xi_int : vector_buffer;
 
-  signal data_out_enable_vector_logistic : std_logic;
+  signal vector_out_int : vector_buffer;
 
-  -- DATA
-  signal size_in_vector_logistic  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -108,46 +109,97 @@ begin
 
   -- f(t;i) = sigmoid(f^(t;i))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_vector_logistic <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      F_OUT <= ZERO_DATA;
 
-  READY <= ready_vector_logistic;
+      -- Control Outputs
+      READY <= '0';
 
-  data_in_enable_vector_logistic <= F_IN_ENABLE;
+      F_OUT_ENABLE <= '0';
 
-  F_OUT_ENABLE <= data_out_enable_vector_logistic;
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
 
-  -- DATA
-  size_in_vector_logistic <= SIZE_R_IN;
+    elsif (rising_edge(CLK)) then
 
-  data_in_vector_logistic <= F_IN;
+      case free_gates_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          F_OUT <= ZERO_DATA;
 
-  F_OUT <= data_out_vector_logistic;
+          -- Control Outputs
+          READY <= '0';
 
-  -- VECTOR LOGISTIC
-  vector_logistic_function : ntm_vector_logistic_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          F_OUT_ENABLE <= '0';
 
-      -- CONTROL
-      START => start_vector_logistic,
-      READY => ready_vector_logistic,
+          if (START = '1') then
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
 
-      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+            -- FSM Control
+            free_gates_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+        when INPUT_STATE =>             -- STEP 1 u
 
-      -- DATA
-      SIZE_IN  => size_in_vector_logistic,
-      DATA_IN  => data_in_vector_logistic,
-      DATA_OUT => data_out_vector_logistic
-      );
+          if (F_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_xi_int(to_integer(unsigned(index_i_loop))) <= F_IN;
+
+            -- Data Internal
+            vector_out_int <= function_dnc_free_gates (
+              SIZE_S_IN => SIZE_R_IN,
+              SIZE_R_IN => SIZE_R_IN,
+
+              vector_xi_input => vector_xi_int
+              );
+
+            -- FSM Control
+            free_gates_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Control Outputs
+          F_OUT_ENABLE <= '0';
+
+        when CLEAN_STATE =>             -- STEP 2
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            F_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            F_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            free_gates_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            F_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            F_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            free_gates_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          free_gates_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_read_strengths is
   generic (
@@ -59,9 +60,9 @@ entity dnc_read_strengths is
     START : in  std_logic;
     READY : out std_logic;
 
-    BETA_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
+    BETA_IN_ENABLE : in std_logic;         -- for i in 0 to R-1
 
-    BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+    BETA_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
 
     -- DATA
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -72,33 +73,33 @@ entity dnc_read_strengths is
     );
 end entity;
 
-architecture dnc_read_strengths_architecture of dnc_read_strengths is
+architecture dnc_read_strengths_urchitecture of dnc_read_strengths is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  -- Finite State Machine
+  type read_strengths_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR ONEPLUS
-  -- CONTROL
-  signal start_vector_oneplus : std_logic;
-  signal ready_vector_oneplus : std_logic;
+  -- Finite State Machine
+  signal read_strengths_ctrl_fsm_int : read_strengths_ctrl_fsm;
 
-  signal data_in_enable_vector_oneplus : std_logic;
+  -- Buffer
+  signal vector_xi_int : vector_buffer;
 
-  signal data_out_enable_vector_oneplus : std_logic;
+  signal vector_out_int : vector_buffer;
 
-  -- DATA
-  signal size_in_vector_oneplus  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -108,47 +109,98 @@ begin
 
   -- beta(t;i) = oneplus(beta^(t;i))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_vector_oneplus <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      BETA_OUT <= ZERO_DATA;
 
-  READY <= ready_vector_oneplus;
+      -- Control Outputs
+      READY <= '0';
 
-  data_in_enable_vector_oneplus <= BETA_IN_ENABLE;
+      BETA_OUT_ENABLE <= '0';
 
-  BETA_OUT_ENABLE <= data_out_enable_vector_oneplus;
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
 
-  -- DATA
-  size_in_vector_oneplus <= SIZE_R_IN;
+    elsif (rising_edge(CLK)) then
 
-  data_in_vector_oneplus <= BETA_IN;
+      case read_strengths_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          BETA_OUT <= ZERO_DATA;
 
-  BETA_OUT <= data_out_vector_oneplus;
+          -- Control Outputs
+          READY <= '0';
 
-  -- VECTOR ONEPLUS
-  vector_oneplus_function : ntm_vector_oneplus_function
-    generic map (
+          BETA_OUT_ENABLE <= '0';
 
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          if (START = '1') then
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
 
-      -- CONTROL
-      START => start_vector_oneplus,
-      READY => ready_vector_oneplus,
+            -- FSM Control
+            read_strengths_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-      DATA_IN_ENABLE => data_in_enable_vector_oneplus,
+        when INPUT_STATE =>             -- STEP 1 u
 
-      DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
+          if (BETA_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_xi_int(to_integer(unsigned(index_i_loop))) <= BETA_IN;
 
-      -- DATA
-      SIZE_IN  => size_in_vector_oneplus,
-      DATA_IN  => data_in_vector_oneplus,
-      DATA_OUT => data_out_vector_oneplus
-      );
+            -- Data Internal
+            vector_out_int <= function_dnc_read_strengths (
+              SIZE_S_IN => SIZE_R_IN,
+              SIZE_R_IN => SIZE_R_IN,
+              SIZE_W_IN => SIZE_R_IN,
+
+              vector_xi_input => vector_xi_int
+              );
+
+            -- FSM Control
+            read_strengths_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Control Outputs
+          BETA_OUT_ENABLE <= '0';
+
+        when CLEAN_STATE =>             -- STEP 2
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            BETA_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            BETA_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            read_strengths_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            BETA_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            BETA_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            read_strengths_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          read_strengths_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

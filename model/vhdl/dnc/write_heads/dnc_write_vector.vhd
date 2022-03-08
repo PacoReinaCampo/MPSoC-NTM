@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_write_vector is
   generic (
@@ -61,7 +62,7 @@ entity dnc_write_vector is
 
     V_IN_ENABLE : in std_logic;
 
-    V_ENABLE : out std_logic;
+    K_ENABLE : out std_logic;
 
     V_OUT_ENABLE : out std_logic;
 
@@ -73,7 +74,7 @@ entity dnc_write_vector is
     );
 end entity;
 
-architecture dnc_write_vector_architecture of dnc_write_vector is
+architecture dnc_write_vector_urchitecture of dnc_write_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -83,17 +84,8 @@ architecture dnc_write_vector_architecture of dnc_write_vector is
   type write_vector_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE,                        -- STEP 3
-    CLEAN_STATE,                        -- STEP 5
-    OPERATION_STATE                     -- STEP 8
+    CLEAN_STATE                         -- STEP 2
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -103,10 +95,12 @@ architecture dnc_write_vector_architecture of dnc_write_vector is
   signal write_vector_ctrl_fsm_int : write_vector_ctrl_fsm;
 
   -- Buffer
-  signal vector_int : vector_buffer;
+  signal vector_xi_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -126,104 +120,94 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      V_ENABLE <= '0';
-
       V_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_i_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
       case write_vector_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          V_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
-
-          V_ENABLE <= '0';
 
           V_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Control Outputs
-            V_ENABLE <= '1';
+            -- Data Outputs
+            K_ENABLE <= '1';
 
             -- Control Internal
-            index_loop <= ZERO_CONTROL;
+            index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
             write_vector_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Data Outputs
+            K_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>             -- STEP 2
+        when INPUT_STATE =>             -- STEP 1 k
 
           if (V_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_int(to_integer(unsigned(index_loop))) <= V_IN;
+            vector_xi_int(to_integer(unsigned(index_i_loop))) <= V_IN;
 
-            -- FSM Control
-            write_vector_ctrl_fsm_int <= ENDER_STATE;
-          end if;
+            -- Data Internal
+            vector_out_int <= function_dnc_write_vector (
+              SIZE_S_IN => SIZE_W_IN,
+              SIZE_R_IN => SIZE_W_IN,
+              SIZE_W_IN => SIZE_W_IN,
 
-          -- Control Outputs
-          V_ENABLE <= '0';
-
-        when ENDER_STATE =>             -- STEP 4
-
-          if (unsigned(index_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            -- Control Internal
-            index_loop <= ZERO_CONTROL;
+              vector_xi_input => vector_xi_int
+              );
 
             -- FSM Control
             write_vector_ctrl_fsm_int <= CLEAN_STATE;
-          else
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+          end if;
+
+          -- Control Outputs
+          V_OUT_ENABLE <= '0';
+
+          K_ENABLE <= '0';
+
+        when CLEAN_STATE =>             -- STEP 2
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            V_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
-            V_ENABLE <= '1';
+            READY <= '1';
+
+            V_OUT_ENABLE <= '1';
+
+            K_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            write_vector_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            V_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            V_OUT_ENABLE <= '1';
+
+            K_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
             write_vector_ctrl_fsm_int <= INPUT_STATE;
           end if;
-
-          -- Data Outputs
-          V_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
-        when CLEAN_STATE =>             -- STEP 5
-
-          -- Control Outputs
-          V_ENABLE <= '0';
-
-          V_OUT_ENABLE <= '0';
-
-          -- FSM Control
-          write_vector_ctrl_fsm_int <= OPERATION_STATE;
-
-        when OPERATION_STATE =>         -- STEP 8
-
-          if (unsigned(index_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            -- Control Outputs
-            READY <= '1';
-
-            -- Control Internal
-            index_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            write_vector_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-            -- FSM Control
-            write_vector_ctrl_fsm_int <= CLEAN_STATE;
-          end if;
-
-          -- Data Outputs
-          V_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
-          -- Control Outputs
-          V_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control

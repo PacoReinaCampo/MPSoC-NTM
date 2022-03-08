@@ -208,8 +208,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_a_in_j_enable_matrix_vector_product : std_logic;
   signal data_b_in_enable_matrix_vector_product   : std_logic;
 
-  signal data_out_i_enable_matrix_vector_product : std_logic;
-  signal data_out_j_enable_matrix_vector_product : std_logic;
+  signal data_out_enable_matrix_vector_product : std_logic;
 
   -- DATA
   signal size_a_i_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -338,7 +337,7 @@ begin
           data_a_in_j_enable_matrix_vector_product <= W_IN_X_ENABLE;
           data_b_in_enable_matrix_vector_product   <= X_IN_ENABLE;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -360,7 +359,7 @@ begin
 
         when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 2
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -418,7 +417,7 @@ begin
           data_a_in_j_enable_matrix_vector_product <= K_IN_K_ENABLE;
           data_b_in_enable_matrix_vector_product   <= X_IN_ENABLE;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -440,7 +439,7 @@ begin
 
         when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 5
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -470,7 +469,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
           if (data_out_enable_vector_float_adder = '1') then
@@ -498,7 +497,7 @@ begin
           data_a_in_j_enable_matrix_vector_product <= U_IN_P_ENABLE;
           data_b_in_enable_matrix_vector_product   <= H_IN_ENABLE;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -520,7 +519,7 @@ begin
 
         when MATRIX_THIRD_PRODUCT_J_STATE =>  -- STEP 8
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -550,7 +549,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
           if (data_out_enable_vector_float_adder = '1') then
@@ -715,8 +714,7 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
       DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_vector_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_vector_product,
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
 
       -- DATA
       SIZE_A_I_IN => size_a_i_in_matrix_vector_product,

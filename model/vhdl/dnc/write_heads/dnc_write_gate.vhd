@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_write_gate is
   generic (
@@ -72,6 +73,11 @@ architecture dnc_write_gate_architecture of dnc_write_gate is
   -- Types
   -----------------------------------------------------------------------
 
+  type write_gate_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE                         -- STEP 1
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -80,14 +86,14 @@ architecture dnc_write_gate_architecture of dnc_write_gate is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR LOGISTIC
-  -- CONTROL
-  signal start_scalar_logistic : std_logic;
-  signal ready_scalar_logistic : std_logic;
+  -- Finite State Machine
+  signal write_gate_fsm_int : write_gate_fsm;
 
-  -- DATA
-  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Buffer
+  signal vector_xi_int : vector_buffer;
+
+  -- Control Internal
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -97,35 +103,49 @@ begin
 
   -- gw(t) = sigmoid(gw^(t))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_scalar_logistic <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      GW_OUT <= ZERO_DATA;
 
-  READY <= ready_scalar_logistic;
+      -- Control Outputs
+      READY <= '0';
 
-  -- DATA
-  data_in_scalar_logistic <= GW_IN;
+    elsif (rising_edge(CLK)) then
 
-  GW_OUT <= data_out_scalar_logistic;
+      case write_gate_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
 
-  -- SCALAR LOGISTIC
-  scalar_logistic_function : ntm_scalar_logistic_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          if (START = '1') then
+            -- FSM Control
+            write_gate_fsm_int <= ENDER_STATE;
+          end if;
 
-      -- CONTROL
-      START => start_scalar_logistic,
-      READY => ready_scalar_logistic,
+        when ENDER_STATE =>             -- STEP 1
 
-      -- DATA
-      DATA_IN  => data_in_scalar_logistic,
-      DATA_OUT => data_out_scalar_logistic
-      );
+          -- Data Outputs
+          GW_OUT <= function_dnc_write_gate (
+            SIZE_S_IN => THREE_CONTROL,
+            SIZE_R_IN => THREE_CONTROL,
+
+            vector_xi_input => vector_xi_int
+            );
+
+          -- Control Outputs
+          READY <= '1';
+
+          -- FSM Control
+          write_gate_fsm_int <= STARTER_STATE;
+
+        when others =>
+          -- FSM Control
+          write_gate_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

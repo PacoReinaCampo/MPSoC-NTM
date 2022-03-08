@@ -2594,8 +2594,6 @@ package body dnc_core_pkg is
     constant FIVE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
     
     -- Trainer Variable
-    variable matrix_w_int : matrix_buffer;
-
     variable vector_xi_int : vector_buffer;
 
     variable matrix_k_int    : matrix_buffer;
@@ -2624,6 +2622,7 @@ package body dnc_core_pkg is
 
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
+    variable matrix_v_int : matrix_buffer;
 
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
@@ -2749,7 +2748,7 @@ package body dnc_core_pkg is
       SIZE_S_IN => SIZE_S_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      matrix_u_input => matrix_w_int,
+      matrix_u_input => matrix_v_int,
 
       vector_h_input => vector_h_int
       );

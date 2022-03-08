@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_read_keys is
   generic (
@@ -70,7 +71,7 @@ entity dnc_read_keys is
 
     -- DATA
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -89,20 +90,9 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_I_STATE,                      -- STEP 3
-    ENDER_J_STATE,                      -- STEP 4
-    CLEAN_I_STATE,                      -- STEP 5
-    CLEAN_J_STATE,                      -- STEP 6
-    OPERATION_I_STATE,                  -- STEP 7
-    OPERATION_J_STATE                   -- STEP 8
+    CLEAN_I_STATE,                      -- STEP 3
+    CLEAN_J_STATE                       -- STEP 4
     );
-
-  -- Buffer
-  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -112,7 +102,11 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   signal read_keys_ctrl_fsm_int : read_keys_ctrl_fsm;
 
   -- Buffer
-  signal matrix_int : matrix_buffer;
+  signal matrix_k_int : matrix_buffer;
+
+  signal vector_xi_int : vector_buffer;
+
+  signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -150,6 +144,9 @@ begin
 
       case read_keys_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          K_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
@@ -173,115 +170,56 @@ begin
             K_K_ENABLE <= '0';
           end if;
 
-        when INPUT_I_STATE =>           -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1 k
 
           if ((K_IN_I_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= K_IN;
+            matrix_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= K_IN;
+
+            -- Data Internal
+            matrix_out_int <= function_dnc_read_keys (
+              SIZE_S_IN => SIZE_R_IN,
+              SIZE_R_IN => SIZE_R_IN,
+              SIZE_W_IN => SIZE_R_IN,
+
+              vector_xi_input => vector_xi_int
+              );
 
             -- FSM Control
-            read_keys_ctrl_fsm_int <= ENDER_J_STATE;
+            read_keys_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
           -- Control Outputs
+          K_OUT_I_ENABLE <= '0';
+          K_OUT_K_ENABLE <= '0';
+
           K_I_ENABLE <= '0';
           K_K_ENABLE <= '0';
 
-        when INPUT_J_STATE =>           -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2 k
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= K_IN;
+            matrix_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= K_IN;
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-              read_keys_ctrl_fsm_int <= ENDER_I_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              read_keys_ctrl_fsm_int <= CLEAN_I_STATE;
             else
-              read_keys_ctrl_fsm_int <= ENDER_J_STATE;
+              read_keys_ctrl_fsm_int <= CLEAN_J_STATE;
             end if;
           end if;
 
           -- Control Outputs
-          K_I_ENABLE <= '0';
-          K_K_ENABLE <= '0';
-
-        when ENDER_I_STATE =>           -- STEP 3
-
-          if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- Control Internal
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            read_keys_ctrl_fsm_int <= CLEAN_I_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- Control Outputs
-            K_I_ENABLE <= '1';
-            K_K_ENABLE <= '1';
-
-            -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            read_keys_ctrl_fsm_int <= INPUT_I_STATE;
-          end if;
-
-        when ENDER_J_STATE =>           -- STEP 4
-
-          if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- Control Outputs
-            K_K_ENABLE <= '1';
-
-            -- Control Internal
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
-
-            -- FSM Control
-            read_keys_ctrl_fsm_int <= INPUT_J_STATE;
-          end if;
-
-        when CLEAN_I_STATE =>           -- STEP 5
-
-          -- Control Outputs
-          K_I_ENABLE <= '0';
-          K_K_ENABLE <= '0';
-
-          K_OUT_I_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
 
-          -- FSM Control
-          read_keys_ctrl_fsm_int <= OPERATION_J_STATE;
-
-        when CLEAN_J_STATE =>           -- STEP 6
-
-          -- Control Outputs
-          K_I_ENABLE <= '0';
           K_K_ENABLE <= '0';
 
-          K_OUT_K_ENABLE <= '0';
-          K_OUT_K_ENABLE <= '0';
+        when CLEAN_I_STATE =>           -- STEP 3
 
-          -- FSM Control
-          if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            read_keys_ctrl_fsm_int <= OPERATION_I_STATE;
-          else
-            read_keys_ctrl_fsm_int <= OPERATION_J_STATE;
-          end if;
-
-        when OPERATION_I_STATE =>       -- STEP 7
-
-          if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            K_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -289,42 +227,50 @@ begin
             K_OUT_I_ENABLE <= '1';
             K_OUT_K_ENABLE <= '1';
 
+            K_I_ENABLE <= '1';
+            K_K_ENABLE <= '1';
+
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
             read_keys_ctrl_fsm_int <= STARTER_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            K_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             K_OUT_I_ENABLE <= '1';
             K_OUT_K_ENABLE <= '1';
 
+            K_I_ENABLE <= '1';
+            K_K_ENABLE <= '1';
+
             -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            read_keys_ctrl_fsm_int <= CLEAN_I_STATE;
+            read_keys_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when OPERATION_J_STATE =>       -- STEP 8
+        when CLEAN_J_STATE =>           -- STEP 4
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_j_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            K_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            K_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             K_OUT_K_ENABLE <= '1';
 
+            K_K_ENABLE <= '1';
+
             -- Control Internal
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            read_keys_ctrl_fsm_int <= CLEAN_J_STATE;
+            read_keys_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when others =>

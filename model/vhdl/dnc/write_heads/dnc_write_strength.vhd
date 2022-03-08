@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_write_strength is
   generic (
@@ -72,6 +73,11 @@ architecture dnc_write_strength_architecture of dnc_write_strength is
   -- Types
   -----------------------------------------------------------------------
 
+  type write_strength_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE                         -- STEP 1
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -80,14 +86,14 @@ architecture dnc_write_strength_architecture of dnc_write_strength is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ONEPLUS
-  -- CONTROL
-  signal start_scalar_oneplus : std_logic;
-  signal ready_scalar_oneplus : std_logic;
+  -- Finite State Machine
+  signal write_strength_fsm_int : write_strength_fsm;
 
-  -- DATA
-  signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Buffer
+  signal vector_xi_int : vector_buffer;
+
+  -- Control Internal
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -95,37 +101,52 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- beta(t) = oneplus(beta^(t))
+  -- ga(t) = sigmoid(g^(t))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_scalar_oneplus <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      BETA_OUT <= ZERO_DATA;
 
-  READY <= ready_scalar_oneplus;
+      -- Control Outputs
+      READY <= '0';
 
-  -- DATA
-  data_in_scalar_oneplus <= BETA_IN;
+    elsif (rising_edge(CLK)) then
 
-  BETA_OUT <= data_out_scalar_oneplus;
+      case write_strength_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
 
-  -- SCALAR ONEPLUS
-  scalar_oneplus_function : ntm_scalar_oneplus_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          if (START = '1') then
+            -- FSM Control
+            write_strength_fsm_int <= ENDER_STATE;
+          end if;
 
-      -- CONTROL
-      START => start_scalar_oneplus,
-      READY => ready_scalar_oneplus,
+        when ENDER_STATE =>             -- STEP 1
 
-      -- DATA
-      DATA_IN  => data_in_scalar_oneplus,
-      DATA_OUT => data_out_scalar_oneplus
-      );
+          -- Data Outputs
+          BETA_OUT <= function_dnc_write_strength (
+            SIZE_S_IN => THREE_CONTROL,
+            SIZE_R_IN => THREE_CONTROL,
+            SIZE_W_IN => THREE_CONTROL,
+
+            vector_xi_input => vector_xi_int
+            );
+
+          -- Control Outputs
+          READY <= '1';
+
+          -- FSM Control
+          write_strength_fsm_int <= STARTER_STATE;
+
+        when others =>
+          -- FSM Control
+          write_strength_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

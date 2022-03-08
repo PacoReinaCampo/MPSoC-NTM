@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_erase_vector is
   generic (
@@ -72,33 +73,33 @@ entity dnc_erase_vector is
     );
 end entity;
 
-architecture dnc_erase_vector_architecture of dnc_erase_vector is
+architecture dnc_erase_vector_urchitecture of dnc_erase_vector is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  -- Finite State Machine
+  type erase_vector_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR LOGISTIC
-  -- CONTROL
-  signal start_vector_logistic : std_logic;
-  signal ready_vector_logistic : std_logic;
+  -- Finite State Machine
+  signal erase_vector_ctrl_fsm_int : erase_vector_ctrl_fsm;
 
-  signal data_in_enable_vector_logistic : std_logic;
+  -- Buffer
+  signal vector_xi_int : vector_buffer;
 
-  signal data_out_enable_vector_logistic : std_logic;
+  signal vector_out_int : vector_buffer;
 
-  -- DATA
-  signal size_in_vector_logistic  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -108,46 +109,98 @@ begin
 
   -- e(t;k) = sigmoid(e^(t;k))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_vector_logistic <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      E_OUT <= ZERO_DATA;
 
-  READY <= ready_vector_logistic;
+      -- Control Outputs
+      READY <= '0';
 
-  data_in_enable_vector_logistic <= E_IN_ENABLE;
+      E_OUT_ENABLE <= '0';
 
-  E_OUT_ENABLE <= data_out_enable_vector_logistic;
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
 
-  -- DATA
-  size_in_vector_logistic <= SIZE_W_IN;
+    elsif (rising_edge(CLK)) then
 
-  data_in_vector_logistic <= E_IN;
+      case erase_vector_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          E_OUT <= ZERO_DATA;
 
-  E_OUT <= data_out_vector_logistic;
+          -- Control Outputs
+          READY <= '0';
 
-  -- VECTOR LOGISTIC
-  vector_logistic_function : ntm_vector_logistic_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          E_OUT_ENABLE <= '0';
 
-      -- CONTROL
-      START => start_vector_logistic,
-      READY => ready_vector_logistic,
+          if (START = '1') then
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
 
-      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+        when INPUT_STATE =>             -- STEP 1 e
 
-      -- DATA
-      SIZE_IN  => size_in_vector_logistic,
-      DATA_IN  => data_in_vector_logistic,
-      DATA_OUT => data_out_vector_logistic
-      );
+          if (E_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_xi_int(to_integer(unsigned(index_i_loop))) <= E_IN;
+
+            -- Data Internal
+            vector_out_int <= function_dnc_erase_vector (
+              SIZE_S_IN => SIZE_W_IN,
+              SIZE_R_IN => SIZE_W_IN,
+              SIZE_W_IN => SIZE_W_IN,
+
+              vector_xi_input => vector_xi_int
+              );
+
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Control Outputs
+          E_OUT_ENABLE <= '0';
+
+        when CLEAN_STATE =>             -- STEP 2
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            E_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            E_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            E_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            E_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          erase_vector_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

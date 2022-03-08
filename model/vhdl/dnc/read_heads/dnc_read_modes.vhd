@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_read_modes is
   generic (
@@ -80,33 +81,32 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  -- Finite State Machine
+  type read_modes_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    CLEAN_I_STATE,                      -- STEP 3
+    CLEAN_J_STATE                       -- STEP 4
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX SOFTMAX
-  -- CONTROL
-  signal start_matrix_softmax : std_logic;
-  signal ready_matrix_softmax : std_logic;
+  -- Finite State Machine
+  signal read_modes_ctrl_fsm_int : read_modes_ctrl_fsm;
 
-  signal data_in_i_enable_matrix_softmax : std_logic;
-  signal data_in_j_enable_matrix_softmax : std_logic;
+  -- Buffer
+  signal matrix_pi_int : matrix_buffer;
 
-  signal data_i_enable_matrix_softmax : std_logic;
-  signal data_j_enable_matrix_softmax : std_logic;
+  signal vector_xi_int : vector_buffer;
 
-  signal data_out_i_enable_matrix_softmax : std_logic;
-  signal data_out_j_enable_matrix_softmax : std_logic;
+  signal matrix_out_int : matrix_buffer;
 
-  -- DATA
-  signal size_i_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -116,55 +116,144 @@ begin
 
   -- pi(t;i;p) = softmax(pi^(t;i;p))
 
-  -- ASSIGNATIONS
   -- CONTROL
-  start_matrix_softmax <= START;
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      PI_OUT <= ZERO_DATA;
 
-  READY <= ready_matrix_softmax;
+      -- Control Outputs
+      READY <= '0';
 
-  data_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
-  data_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
+      PI_OUT_I_ENABLE <= '0';
+      PI_OUT_P_ENABLE <= '0';
 
-  PI_OUT_I_ENABLE <= data_out_i_enable_matrix_softmax;
-  PI_OUT_P_ENABLE <= data_out_j_enable_matrix_softmax;
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
-  -- DATA
-  size_i_in_matrix_softmax <= SIZE_R_IN;
-  size_j_in_matrix_softmax <= THREE_CONTROL;
+    elsif (rising_edge(CLK)) then
 
-  data_in_matrix_softmax <= PI_IN;
+      case read_modes_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          PI_OUT <= ZERO_DATA;
 
-  PI_OUT <= data_out_matrix_softmax;
+          -- Control Outputs
+          READY <= '0';
 
-  -- MATRIX SOFTMAX
-  matrix_softmax : ntm_matrix_softmax
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+          if (START = '1') then
+            -- Control Outputs
+            PI_OUT_I_ENABLE <= '1';
+            PI_OUT_P_ENABLE <= '1';
 
-      -- CONTROL
-      START => start_matrix_softmax,
-      READY => ready_matrix_softmax,
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_softmax,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_softmax,
+            -- FSM Control
+            read_modes_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            PI_OUT_I_ENABLE <= '0';
+            PI_OUT_P_ENABLE <= '0';
+          end if;
 
-      DATA_I_ENABLE => data_i_enable_matrix_softmax,
-      DATA_J_ENABLE => data_j_enable_matrix_softmax,
+        when INPUT_I_STATE =>           -- STEP 1 k
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_softmax,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_softmax,
+          if ((PI_IN_I_ENABLE = '1') and (PI_IN_P_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_pi_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
 
-      -- DATA
-      SIZE_I_IN => size_i_in_matrix_softmax,
-      SIZE_J_IN => size_j_in_matrix_softmax,
-      DATA_IN   => data_in_matrix_softmax,
-      DATA_OUT  => data_out_matrix_softmax
-      );
+            -- Data Internal
+            matrix_out_int <= function_dnc_read_modes (
+              SIZE_S_IN => SIZE_R_IN,
+              SIZE_R_IN => SIZE_R_IN,
+
+              vector_xi_input => vector_xi_int
+              );
+
+            -- FSM Control
+            read_modes_ctrl_fsm_int <= CLEAN_J_STATE;
+          end if;
+
+          -- Control Outputs
+          PI_OUT_I_ENABLE <= '0';
+          PI_OUT_P_ENABLE <= '0';
+
+        when INPUT_J_STATE =>           -- STEP 2 k
+
+          if (PI_IN_P_ENABLE = '1') then
+            -- Data Inputs
+            matrix_pi_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
+              read_modes_ctrl_fsm_int <= CLEAN_I_STATE;
+            else
+              read_modes_ctrl_fsm_int <= CLEAN_J_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          PI_OUT_P_ENABLE <= '0';
+
+        when CLEAN_I_STATE =>           -- STEP 3
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            PI_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            PI_OUT_I_ENABLE <= '1';
+            PI_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            read_modes_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            PI_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            PI_OUT_I_ENABLE <= '1';
+            PI_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            read_modes_ctrl_fsm_int <= INPUT_I_STATE;
+          end if;
+
+        when CLEAN_J_STATE =>           -- STEP 4
+
+          if (unsigned(index_j_loop) < unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            PI_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            PI_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            read_modes_ctrl_fsm_int <= INPUT_J_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          read_modes_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

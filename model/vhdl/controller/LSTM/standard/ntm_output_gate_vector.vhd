@@ -210,8 +210,7 @@ architecture ntm_output_gate_vector_architecture of ntm_output_gate_vector is
   signal data_a_in_j_enable_matrix_vector_product : std_logic;
   signal data_b_in_enable_matrix_vector_product   : std_logic;
 
-  signal data_out_i_enable_matrix_vector_product : std_logic;
-  signal data_out_j_enable_matrix_vector_product : std_logic;
+  signal data_out_enable_matrix_vector_product : std_logic;
 
   -- DATA
   signal size_a_i_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -301,7 +300,7 @@ begin
           data_a_in_matrix_vector_product   <= W_IN;
           data_b_in_matrix_vector_product   <= X_IN;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -321,7 +320,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= B_IN_ENABLE;
 
           -- Data Inputs
@@ -356,7 +355,7 @@ begin
           data_a_in_matrix_vector_product   <= K_IN;
           data_b_in_matrix_vector_product   <= R_IN;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -376,7 +375,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
           -- Data Inputs
@@ -411,7 +410,7 @@ begin
           data_a_in_matrix_vector_product   <= U_IN;
           data_b_in_matrix_vector_product   <= H_IN;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -431,7 +430,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
           -- Data Inputs
@@ -466,7 +465,7 @@ begin
           data_a_in_matrix_vector_product   <= U_IN;
           data_b_in_matrix_vector_product   <= H_IN;
 
-          if (data_out_i_enable_matrix_vector_product = '1') then
+          if (data_out_enable_matrix_vector_product = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -486,7 +485,7 @@ begin
           -- Control Inputs
           operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_vector_product;
+          data_a_in_enable_vector_float_adder <= data_out_enable_matrix_vector_product;
           data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
           -- Data Inputs
@@ -634,8 +633,7 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
       DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_vector_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_vector_product,
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
 
       -- DATA
       SIZE_A_I_IN => size_a_i_in_matrix_vector_product,
