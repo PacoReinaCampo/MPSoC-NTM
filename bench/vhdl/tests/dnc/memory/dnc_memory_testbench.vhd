@@ -521,6 +521,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   -- DATA
   signal size_r_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -645,6 +646,7 @@ begin
 
       -- DATA
       DNC_MEMORY_SIZE_R_IN => size_r_in_addressing,
+      DNC_MEMORY_SIZE_N_IN => size_n_in_addressing,
       DNC_MEMORY_SIZE_W_IN => size_w_in_addressing,
 
       DNC_MEMORY_K_READ_IN    => k_read_in_addressing,
@@ -1258,6 +1260,7 @@ begin
 
         -- DATA
         SIZE_R_IN => size_r_in_addressing,
+        SIZE_N_IN => size_n_in_addressing,
         SIZE_W_IN => size_w_in_addressing,
 
         K_READ_IN    => k_read_in_addressing,

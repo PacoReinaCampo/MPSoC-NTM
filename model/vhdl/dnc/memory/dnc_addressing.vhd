@@ -93,6 +93,7 @@ entity dnc_addressing is
 
     -- DATA
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -448,7 +449,7 @@ begin
             -- Data Internal
             matrix_out_int <= function_dnc_addressing (
               SIZE_R_IN => SIZE_R_IN,
-              SIZE_N_IN => SIZE_W_IN,
+              SIZE_N_IN => SIZE_N_IN,
               SIZE_W_IN => SIZE_W_IN,
 
               matrix_k_read_input    => matrix_k_read_int,
