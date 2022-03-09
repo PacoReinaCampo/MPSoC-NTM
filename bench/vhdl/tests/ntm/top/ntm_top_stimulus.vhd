@@ -87,6 +87,12 @@ entity ntm_top_stimulus is
     NTM_TOP_U_OUT_L_ENABLE : in std_logic;
     NTM_TOP_U_OUT_P_ENABLE : in std_logic;
 
+    NTM_TOP_V_IN_L_ENABLE : out std_logic;
+    NTM_TOP_V_IN_S_ENABLE : out std_logic;
+
+    NTM_TOP_V_OUT_L_ENABLE : in std_logic;
+    NTM_TOP_V_OUT_S_ENABLE : in std_logic;
+
     NTM_TOP_B_IN_ENABLE : out std_logic;
 
     NTM_TOP_B_OUT_ENABLE : in std_logic;
@@ -108,6 +114,7 @@ entity ntm_top_stimulus is
     NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     NTM_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -226,6 +233,7 @@ begin
         NTM_TOP_W_IN <= EMPTY;
         NTM_TOP_K_IN <= EMPTY;
         NTM_TOP_U_IN <= EMPTY;
+        NTM_TOP_V_IN <= EMPTY;
         NTM_TOP_B_IN <= EMPTY;
 
         NTM_TOP_X_IN <= EMPTY;
@@ -246,6 +254,7 @@ begin
         NTM_TOP_W_IN <= FULL;
         NTM_TOP_K_IN <= FULL;
         NTM_TOP_U_IN <= FULL;
+        NTM_TOP_V_IN <= FULL;
         NTM_TOP_B_IN <= FULL;
 
         NTM_TOP_X_IN <= FULL;

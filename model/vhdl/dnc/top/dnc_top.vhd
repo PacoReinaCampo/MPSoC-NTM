@@ -80,6 +80,12 @@ entity dnc_top is
     U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
 
+    V_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    V_IN_S_ENABLE : in std_logic;       -- for s in 0 to S-1
+
+    V_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    V_OUT_S_ENABLE : out std_logic;     -- for s in 0 to S-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
@@ -101,6 +107,7 @@ entity dnc_top is
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);

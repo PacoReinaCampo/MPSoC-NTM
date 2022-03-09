@@ -368,7 +368,7 @@ entity ntm_algebra_stimulus is
     TENSOR_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_LRNGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -425,6 +425,7 @@ entity ntm_algebra_stimulus is
     TENSOR_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_SUMMATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR TRANSPOSE

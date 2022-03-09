@@ -145,7 +145,7 @@ package ntm_convolutional_fnn_pkg is
   component ntm_convolutional_fnn_stimulus is
     generic (
       -- SYSTEM-SIZE
-      DATA_SIZE    : integer := 64;
+      DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
