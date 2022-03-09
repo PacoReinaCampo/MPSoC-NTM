@@ -167,6 +167,10 @@ architecture ntm_top_architecture of ntm_top is
 
   signal data_m_in_i_int : std_logic;
   signal data_m_in_j_int : std_logic;
+  signal data_u_in_i_int : std_logic;
+  signal data_u_in_j_int : std_logic;
+  signal data_v_in_i_int : std_logic;
+  signal data_v_in_j_int : std_logic;
   signal data_w_in_int   : std_logic;
 
 begin
@@ -194,6 +198,9 @@ begin
 
       U_OUT_L_ENABLE <= '0';
       U_OUT_P_ENABLE <= '0';
+
+      V_OUT_L_ENABLE <= '0';
+      V_OUT_S_ENABLE <= '0';
 
       B_OUT_ENABLE <= '0';
 
@@ -229,6 +236,9 @@ begin
             U_OUT_L_ENABLE <= '1';
             U_OUT_P_ENABLE <= '1';
 
+            V_OUT_L_ENABLE <= '1';
+            V_OUT_S_ENABLE <= '1';
+
             B_OUT_ENABLE <= '1';
 
             X_OUT_ENABLE <= '1';
@@ -250,6 +260,9 @@ begin
 
             U_OUT_L_ENABLE <= '0';
             U_OUT_P_ENABLE <= '0';
+
+            V_OUT_L_ENABLE <= '0';
+            V_OUT_S_ENABLE <= '0';
 
             B_OUT_ENABLE <= '0';
 
@@ -348,36 +361,80 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_J_STATE;
           end if;
 
-        when INPUT_SECOND_I_STATE =>    -- STEP 5 U
+        when INPUT_SECOND_I_STATE =>    -- STEP 5 U,V
 
           if ((U_IN_L_ENABLE = '1') and (U_IN_P_ENABLE = '1')) then
             -- Data Inputs
             matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
+            -- Control Internal
+           data_u_in_i_int <= '1';
+           data_u_in_j_int <= '1';
+          end if;
+
+          if ((V_IN_L_ENABLE = '1') and (V_IN_S_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_v_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= V_IN;
+
+            -- Control Internal
+           data_v_in_i_int <= '1';
+           data_v_in_j_int <= '1';
           end if;
 
           -- Control Outputs
           U_OUT_L_ENABLE <= '0';
           U_OUT_P_ENABLE <= '0';
 
-        when INPUT_SECOND_J_STATE =>    -- STEP 6 U
+          V_OUT_L_ENABLE <= '0';
+          V_OUT_S_ENABLE <= '0';
+
+          if (data_u_in_i_int = '1' and data_u_in_j_int = '1' and data_v_in_i_int = '1' and data_v_in_j_int = '1') then
+            -- Control Internal
+            data_u_in_i_int <= '0';
+            data_u_in_j_int <= '0';
+
+            data_v_in_i_int <= '0';
+            data_v_in_j_int <= '0';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
+          end if;
+          
+        when INPUT_SECOND_J_STATE =>    -- STEP 6 U,V
 
           if (U_IN_P_ENABLE = '1') then
             -- Data Inputs
             matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
+            -- Control Internal
+           data_u_in_j_int <= '1';
+          end if;
+
+          if (V_IN_S_ENABLE = '1') then
+            -- Data Inputs
+            matrix_v_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= V_IN;
+
+            -- Control Internal
+           data_v_in_j_int <= '1';
+          end if;
+
+          -- Control Outputs
+          U_OUT_P_ENABLE <= '0';
+
+          V_OUT_S_ENABLE <= '0';
+
+          if (data_u_in_j_int = '1' and data_v_in_j_int = '1') then
+            -- Control Internal
+            data_u_in_j_int <= '0';
+            data_v_in_j_int <= '0';
+
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
               controller_ctrl_fsm_int <= CLEAN_SECOND_I_STATE;
             else
               controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
             end if;
           end if;
-
-          -- Control Outputs
-          U_OUT_P_ENABLE <= '0';
 
         when CLEAN_SECOND_I_STATE =>    -- STEP 7
 
@@ -385,6 +442,9 @@ begin
             -- Control Outputs
             U_OUT_L_ENABLE <= '1';
             U_OUT_P_ENABLE <= '1';
+
+            V_OUT_L_ENABLE <= '1';
+            V_OUT_S_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -396,6 +456,9 @@ begin
             -- Control Outputs
             U_OUT_L_ENABLE <= '1';
             U_OUT_P_ENABLE <= '1';
+
+            V_OUT_L_ENABLE <= '1';
+            V_OUT_S_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -411,6 +474,8 @@ begin
             -- Control Outputs
             U_OUT_P_ENABLE <= '1';
 
+            V_OUT_S_ENABLE <= '1';
+
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
@@ -418,7 +483,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
           end if;
 
-        when INPUT_THIRD_I_STATE =>     -- STEP 9
+        when INPUT_THIRD_I_STATE =>     -- STEP 9 K
 
           if ((K_IN_I_ENABLE = '1') and (K_IN_L_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
@@ -433,7 +498,7 @@ begin
           K_OUT_L_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
 
-        when INPUT_THIRD_J_STATE =>     -- STEP 10
+        when INPUT_THIRD_J_STATE =>     -- STEP 10 K
 
           if ((K_IN_L_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
@@ -452,7 +517,7 @@ begin
           K_OUT_L_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
 
-        when INPUT_THIRD_K_STATE =>     -- STEP 11
+        when INPUT_THIRD_K_STATE =>     -- STEP 11 K
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs

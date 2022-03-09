@@ -112,7 +112,7 @@
 │       ├── dnc_write_strength.sv
 │       └── dnc_write_vector.sv
 ├── intro
-│   └── ntm_intro_adder.sv
+│   └── ntm_intro_adder_model.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix

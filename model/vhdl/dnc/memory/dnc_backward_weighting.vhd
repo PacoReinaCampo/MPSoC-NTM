@@ -116,10 +116,10 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_l_in_g_state_int : std_logic;
-  signal data_l_in_j_state_int : std_logic;
-  signal data_w_in_i_state_int : std_logic;
-  signal data_w_in_j_state_int : std_logic;
+  signal data_l_in_g_int : std_logic;
+  signal data_l_in_j_int : std_logic;
+  signal data_w_in_i_int : std_logic;
+  signal data_w_in_j_int : std_logic;
 
 begin
 
@@ -186,8 +186,8 @@ begin
             matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
             -- Control Internal
-            data_l_in_g_state_int <= '1';
-            data_l_in_j_state_int <= '1';
+            data_l_in_g_int <= '1';
+            data_l_in_j_int <= '1';
           end if;
 
           if ((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) then
@@ -195,20 +195,20 @@ begin
             matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
 
             -- Control Internal
-            data_w_in_i_state_int <= '1';
-            data_w_in_j_state_int <= '1';
+            data_w_in_i_int <= '1';
+            data_w_in_j_int <= '1';
           end if;
 
           -- Control Outputs
           B_I_ENABLE <= '0';
           B_J_ENABLE <= '0';
 
-          if (data_l_in_g_state_int = '1' and data_l_in_j_state_int = '1' and data_w_in_i_state_int = '1' and data_w_in_j_state_int = '1') then
+          if (data_l_in_g_int = '1' and data_l_in_j_int = '1' and data_w_in_i_int = '1' and data_w_in_j_int = '1') then
             -- Control Internal
-            data_l_in_g_state_int <= '0';
-            data_l_in_j_state_int <= '0';
-            data_w_in_i_state_int <= '0';
-            data_w_in_j_state_int <= '0';
+            data_l_in_g_int <= '0';
+            data_l_in_j_int <= '0';
+            data_w_in_i_int <= '0';
+            data_w_in_j_int <= '0';
 
             -- Data Internal
             matrix_out_int <= function_dnc_backward_weighting (
@@ -230,7 +230,7 @@ begin
             matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
             -- Control Internal
-            data_l_in_j_state_int <= '1';
+            data_l_in_j_int <= '1';
           end if;
 
           if (W_IN_J_ENABLE = '1') then
@@ -238,16 +238,16 @@ begin
             matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
 
             -- Control Internal
-            data_w_in_j_state_int <= '1';
+            data_w_in_j_int <= '1';
           end if;
 
           -- Control Outputs
           B_J_ENABLE <= '0';
 
-          if (data_l_in_j_state_int = '1' and data_w_in_j_state_int = '1') then
+          if (data_l_in_j_int = '1' and data_w_in_j_int = '1') then
             -- Control Internal
-            data_l_in_j_state_int <= '0';
-            data_w_in_j_state_int <= '0';
+            data_l_in_j_int <= '0';
+            data_w_in_j_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then

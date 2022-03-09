@@ -112,7 +112,7 @@
 │       ├── dnc_write_strength.vhd
 │       └── dnc_write_vector.vhd
 ├── intro
-│   └── ntm_intro_adder.vhd
+│   └── ntm_intro_adder_model.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix

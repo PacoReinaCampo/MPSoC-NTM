@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_sort_vector is
   generic (
@@ -74,41 +75,33 @@ entity dnc_sort_vector is
     );
 end entity;
 
-architecture dnc_sort_vector_architecture of dnc_sort_vector is
+architecture dnc_sort_vector_urchitecture of dnc_sort_vector is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type sort_ctrl_fsm is (
+  type sort_vector_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE,                        -- STEP 3
-    CLEAN_STATE,                        -- STEP 5
-    OPERATION_STATE                     -- STEP 8
+    CLEAN_STATE                         -- STEP 2
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal sort_ctrl_fsm_int : sort_ctrl_fsm;
+  signal sort_vector_ctrl_fsm_int : sort_vector_ctrl_fsm;
 
   -- Buffer
-  signal vector_in_int : vector_buffer;
+  signal vector_u_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_m_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -116,11 +109,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- PHI_OUT = sort(U_IN)
+  -- f(t;i) = sigmoid(f^(t;i))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
-    variable vector_out_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -129,127 +121,94 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      U_OUT_ENABLE <= '0';
-
       PHI_OUT_ENABLE <= '0';
 
       -- Control Internal
       index_i_loop <= ZERO_CONTROL;
-      index_m_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case sort_ctrl_fsm_int is
+      case sort_vector_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          PHI_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
           PHI_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Control Outputs
+            -- Control Internal
             U_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
-            index_m_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            sort_ctrl_fsm_int <= INPUT_STATE;
+            sort_vector_ctrl_fsm_int <= INPUT_STATE;
           else
+            -- Control Internal
             U_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>             -- STEP 2
+        when INPUT_STATE =>             -- STEP 1 u
 
           if (U_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_in_int(to_integer(unsigned(index_i_loop))) <= U_IN;
+            vector_u_int(to_integer(unsigned(index_i_loop))) <= U_IN;
+
+            -- Data Internal
+            vector_out_int <= function_dnc_sort_vector (
+              SIZE_N_IN => SIZE_N_IN,
+
+              vector_u_input => vector_u_int
+              );
 
             -- FSM Control
-            sort_ctrl_fsm_int <= ENDER_STATE;
+            sort_vector_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
           -- Control Outputs
-          U_OUT_ENABLE <= '0';
+          PHI_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>             -- STEP 4
+        when CLEAN_STATE =>             -- STEP 2
 
           if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            PHI_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            U_OUT_ENABLE <= '1';
+
+            PHI_OUT_ENABLE <= '1';
+
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            sort_ctrl_fsm_int <= CLEAN_STATE;
-          else
-            -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            sort_vector_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            PHI_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             U_OUT_ENABLE <= '1';
 
-            -- FSM Control
-            sort_ctrl_fsm_int <= INPUT_STATE;
-          end if;
-
-          -- Data Outputs
-          PHI_OUT <= vector_in_int(to_integer(unsigned(index_i_loop)));
-
-        when CLEAN_STATE =>             -- STEP 5
-
-          if (unsigned(index_m_loop) = unsigned(SIZE_N_IN)-unsigned(index_i_loop)-unsigned(ONE_CONTROL)) then
-            -- FSM Control
-            sort_ctrl_fsm_int <= OPERATION_STATE;
+            PHI_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_m_loop <= ZERO_CONTROL;
-          else
-            -- Control Internal
-            index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
-          end if;
-
-          -- Data Internal
-          if (signed(vector_in_int(to_integer(unsigned(index_m_loop)))) < signed(vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL))))) then
-            vector_out_int := vector_in_int(to_integer(unsigned(index_i_loop)));
-
-            vector_in_int(to_integer(unsigned(index_m_loop))) <= vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL)));
-
-            vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL))) <= vector_out_int;
-          end if;
-
-          -- Control Outputs
-          U_OUT_ENABLE <= '0';
-
-          PHI_OUT_ENABLE <= '0';
-
-        when OPERATION_STATE =>         -- STEP 8
-
-          if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
-            -- Control Outputs
-            READY <= '1';
-
-            -- Control Internal
-            index_i_loop <= ZERO_CONTROL;
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            sort_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
-
-            -- FSM Control
-            sort_ctrl_fsm_int <= CLEAN_STATE;
+            sort_vector_ctrl_fsm_int <= INPUT_STATE;
           end if;
-
-          -- Data Outputs
-          PHI_OUT <= vector_in_int(to_integer(unsigned(index_i_loop)));
-
-          -- Control Outputs
-          PHI_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
-          sort_ctrl_fsm_int <= STARTER_STATE;
+          sort_vector_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

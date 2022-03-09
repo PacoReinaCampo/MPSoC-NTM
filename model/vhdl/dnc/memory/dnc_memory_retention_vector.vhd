@@ -116,8 +116,8 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_f_in_int         : std_logic;
-  signal data_w_in_i_state_int : std_logic;
-  signal data_w_in_j_state_int : std_logic;
+  signal data_w_in_i_int : std_logic;
+  signal data_w_in_j_int : std_logic;
 
 begin
 
@@ -196,8 +196,8 @@ begin
             matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
 
             -- Control Internal
-            data_w_in_i_state_int <= '1';
-            data_w_in_j_state_int <= '1';
+            data_w_in_i_int <= '1';
+            data_w_in_j_int <= '1';
           end if;
 
           -- Control Outputs
@@ -208,11 +208,11 @@ begin
 
           PSI_OUT_ENABLE <= '0';
 
-          if (data_f_in_int = '1' and data_w_in_i_state_int = '1' and data_w_in_j_state_int = '1') then
+          if (data_f_in_int = '1' and data_w_in_i_int = '1' and data_w_in_j_int = '1') then
             -- Control Internal
             data_f_in_int         <= '0';
-            data_w_in_i_state_int <= '0';
-            data_w_in_j_state_int <= '0';
+            data_w_in_i_int <= '0';
+            data_w_in_j_int <= '0';
 
             -- Data Internal
             vector_out_int <= function_dnc_memory_retention_vector (

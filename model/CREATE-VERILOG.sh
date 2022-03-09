@@ -83,7 +83,7 @@ touch verilog/dnc/write_heads/dnc_write_gate.sv
 touch verilog/dnc/write_heads/dnc_write_key.sv
 touch verilog/dnc/write_heads/dnc_write_strength.sv
 touch verilog/dnc/write_heads/dnc_write_vector.sv
-touch verilog/intro/ntm_intro_adder.sv
+touch verilog/intro/ntm_intro_adder_model.sv
 touch verilog/math/algebra/matrix/ntm_matrix_convolution.sv
 touch verilog/math/algebra/matrix/ntm_matrix_inverse.sv
 touch verilog/math/algebra/matrix/ntm_matrix_multiplication.sv

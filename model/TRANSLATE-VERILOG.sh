@@ -83,7 +83,7 @@ vhdl2verilog vhdl/dnc/write_heads/dnc_write_gate.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_key.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_strength.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_vector.sv
-vhdl2verilog vhdl/intro/ntm_intro_adder.sv
+vhdl2verilog vhdl/intro/ntm_intro_adder_model.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_convolution.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_inverse.sv
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_multiplication.sv

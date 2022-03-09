@@ -490,9 +490,11 @@ architecture dnc_top_architecture of dnc_top is
 
   signal f_read_out_enable_addressing : std_logic;
 
-  signal pi_read_in_enable_addressing : std_logic;
+  signal pi_read_in_i_enable_addressing : std_logic;
+  signal pi_read_in_p_enable_addressing : std_logic;
 
-  signal pi_read_out_enable_addressing : std_logic;
+  signal pi_read_out_i_enable_addressing : std_logic;
+  signal pi_read_out_p_enable_addressing : std_logic;
 
   signal k_write_in_k_enable_addressing : std_logic;
   signal e_write_in_k_enable_addressing : std_logic;
@@ -1358,9 +1360,11 @@ begin
 
       F_READ_OUT_ENABLE => f_read_out_enable_addressing,
 
-      PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+      PI_READ_IN_I_ENABLE => pi_read_in_i_enable_addressing,
+      PI_READ_IN_P_ENABLE => pi_read_in_p_enable_addressing,
 
-      PI_READ_OUT_ENABLE => pi_read_out_enable_addressing,
+      PI_READ_OUT_I_ENABLE => pi_read_out_i_enable_addressing,
+      PI_READ_OUT_P_ENABLE => pi_read_out_p_enable_addressing,
 
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,

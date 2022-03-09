@@ -116,8 +116,8 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_l_in_i_state_int : std_logic;
-  signal data_l_in_j_state_int : std_logic;
+  signal data_l_in_i_int : std_logic;
+  signal data_l_in_j_int : std_logic;
   signal data_w_in_int         : std_logic;
   signal data_p_in_int         : std_logic;
 
@@ -188,8 +188,8 @@ begin
             matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
             -- Control Internal
-            data_l_in_i_state_int <= '1';
-            data_l_in_j_state_int <= '1';
+            data_l_in_i_int <= '1';
+            data_l_in_j_int <= '1';
           end if;
 
           if (W_IN_ENABLE = '1') then
@@ -215,10 +215,10 @@ begin
           W_OUT_ENABLE <= '0';
           P_OUT_ENABLE <= '0';
 
-          if (data_l_in_i_state_int = '1' and data_l_in_j_state_int = '1' and data_w_in_int = '1' and data_p_in_int = '1') then
+          if (data_l_in_i_int = '1' and data_l_in_j_int = '1' and data_w_in_int = '1' and data_p_in_int = '1') then
             -- Control Internal
-            data_l_in_i_state_int <= '0';
-            data_l_in_j_state_int <= '0';
+            data_l_in_i_int <= '0';
+            data_l_in_j_int <= '0';
             data_w_in_int         <= '0';
             data_p_in_int         <= '0';
 

@@ -116,9 +116,9 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_m_in_i_state_int : std_logic;
-  signal data_m_in_j_state_int : std_logic;
-  signal data_k_in_state_int   : std_logic;
+  signal data_m_in_i_int : std_logic;
+  signal data_m_in_j_int : std_logic;
+  signal data_k_in_int   : std_logic;
 
 begin
 
@@ -189,8 +189,8 @@ begin
             matrix_m_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= M_IN;
 
             -- Control Internal
-            data_m_in_i_state_int <= '1';
-            data_m_in_j_state_int <= '1';
+            data_m_in_i_int <= '1';
+            data_m_in_j_int <= '1';
           end if;
 
           if (K_IN_ENABLE = '1') then
@@ -198,7 +198,7 @@ begin
             vector_k_int(to_integer(unsigned(index_i_loop))) <= K_IN;
 
             -- Control Internal
-            data_k_in_state_int <= '1';
+            data_k_in_int <= '1';
           end if;
 
           -- Control Outputs
@@ -209,11 +209,11 @@ begin
 
           K_OUT_ENABLE <= '0';
 
-          if (data_m_in_i_state_int = '1' and data_m_in_j_state_int = '1' and data_k_in_state_int = '1') then
+          if (data_m_in_i_int = '1' and data_m_in_j_int = '1' and data_k_in_int = '1') then
             -- Control Internal
-            data_m_in_i_state_int <= '0';
-            data_m_in_j_state_int <= '0';
-            data_k_in_state_int   <= '0';
+            data_m_in_i_int <= '0';
+            data_m_in_j_int <= '0';
+            data_k_in_int   <= '0';
 
             -- Data Internal
             vector_out_int <= function_dnc_vector_content_based_addressing (
