@@ -1057,24 +1057,24 @@ package body ntm_core_pkg is
       );
 
     -- ARITHMETIC M: [RHO] = 2·N + 3
-    SIZE_S_IN := THREE_CONTROL;
+    SIZE_M_IN := THREE_CONTROL;
 
     SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
       scalar_a_input => TWO_CONTROL,
       scalar_b_input => SIZE_N_IN
       );
 
-    SIZE_S_IN := function_scalar_integer_adder (
+    SIZE_M_IN := function_scalar_integer_adder (
       OPERATION => '0',
 
       scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_S_IN
+      scalar_b_input => SIZE_M_IN
       );
 
     -- CONTROLLER_BODY_STATE
 
     -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + B(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,

@@ -2652,11 +2652,6 @@ package body dnc_core_pkg is
     variable vector_xi_int  : vector_buffer;
     variable matrix_rho_int : matrix_buffer;
 
-    variable matrix_k_int    : matrix_buffer;
-    variable vector_beta_int : vector_buffer;
-    variable vector_f_int    : vector_buffer;
-    variable matrix_pi_int   : matrix_buffer;
-
     variable matrix_k_read_int    : matrix_buffer;
     variable vector_beta_read_int : vector_buffer;
     variable vector_f_read_int    : vector_buffer;
@@ -2733,7 +2728,7 @@ package body dnc_core_pkg is
     -- CONTROLLER_BODY_STATE
 
     -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + B(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,
@@ -2841,7 +2836,7 @@ package body dnc_core_pkg is
 
     -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
     matrix_rho_int := function_dnc_interface_matrix (
-      SIZE_M_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -2857,7 +2852,7 @@ package body dnc_core_pkg is
     -- FREE_GATES_STATE
 
     -- f(t;i) = sigmoid(f^(t;i))
-    vector_f_int := function_dnc_free_gates (
+    vector_f_read_int := function_dnc_free_gates (
       SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
 
@@ -2867,7 +2862,7 @@ package body dnc_core_pkg is
     -- READ_KEYS_STATE
 
     -- k(t;i;k) = k^(t;i;k)
-    matrix_k_int := function_dnc_read_keys (
+    matrix_k_read_int := function_dnc_read_keys (
       SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2878,7 +2873,7 @@ package body dnc_core_pkg is
     -- READ_MODES_STATE
 
     -- pi(t;i;p) = softmax(pi^(t;i;p))
-    matrix_pi_int := function_dnc_read_modes (
+    matrix_pi_read_int := function_dnc_read_modes (
       SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
 
@@ -2888,7 +2883,7 @@ package body dnc_core_pkg is
     -- READ_STRENGTHS_STATE
 
     -- beta(t;i) = oneplus(beta^(t;i))
-    vector_beta_int := function_dnc_read_strengths (
+    vector_beta_read_int := function_dnc_read_strengths (
       SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2903,7 +2898,7 @@ package body dnc_core_pkg is
     -- ALLOCATION_GATE_STATE
 
     -- ga(t) = sigmoid(g^(t))
-    scalar_ga_int := function_dnc_allocation_gate (
+    scalar_ga_write_int := function_dnc_allocation_gate (
       SIZE_S_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,
 
@@ -2913,7 +2908,7 @@ package body dnc_core_pkg is
     -- ERASE_VECTOR_STATE
 
     -- e(t;k) = sigmoid(e^(t;k))
-    vector_e_int := function_dnc_erase_vector (
+    vector_e_write_int := function_dnc_erase_vector (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2924,7 +2919,7 @@ package body dnc_core_pkg is
     -- WRITE_GATE_STATE
 
     -- gw(t) = sigmoid(gw^(t))
-    scalar_gw_int := function_dnc_write_gate (
+    scalar_gw_write_int := function_dnc_write_gate (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_R_IN => SIZE_R_IN,
 
@@ -2934,7 +2929,7 @@ package body dnc_core_pkg is
     -- WRITE_KEY_STATE
 
     -- k(t;k) = k^(t;k)
-    vector_k_int := function_dnc_write_key (
+    vector_k_write_int := function_dnc_write_key (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2945,7 +2940,7 @@ package body dnc_core_pkg is
     -- WRITE_STRENGTH_STATE
 
     -- beta(t) = oneplus(beta^(t))
-    scalar_beta_int := function_dnc_write_strength (
+    scalar_beta_write_int := function_dnc_write_strength (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2956,7 +2951,7 @@ package body dnc_core_pkg is
     -- WRITE_VECTOR_STATE
 
     -- v(t;k) = v^(t;k)
-    vector_v_int := function_dnc_write_vector (
+    vector_v_write_int := function_dnc_write_vector (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_W_IN => SIZE_W_IN,
