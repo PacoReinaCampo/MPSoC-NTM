@@ -2233,7 +2233,7 @@ package body dnc_core_pkg is
   -- READ HEADS
   -----------------------------------------------------------------------
 
-  -- [XI] = W·R + 3·W 5·R + 3
+  -- [RHO] = W + 5
 
   function function_dnc_free_gates (
     SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2354,7 +2354,7 @@ package body dnc_core_pkg is
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
-  -- [XI] = W·R + 3·W + 5·R + 3
+  -- [XI] = 3·W + 3
 
   function function_dnc_allocation_gate (
     SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2723,20 +2723,8 @@ package body dnc_core_pkg is
 
   begin
 
-    -- ARITHMETIC S: [XI] = W·R + 3·W + 5·R + 3
+    -- ARITHMETIC S: [XI] = 3·W + 3
     SIZE_S_IN := THREE_CONTROL;
-
-    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => FIVE_CONTROL,
-      scalar_b_input => SIZE_R_IN
-      );
-
-    SIZE_S_IN := function_scalar_integer_adder (
-      OPERATION => '0',
-
-      scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_S_IN
-      );
 
     SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
       scalar_a_input => THREE_CONTROL,
@@ -2750,16 +2738,12 @@ package body dnc_core_pkg is
       scalar_b_input => SIZE_S_IN
       );
 
-    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => SIZE_W_IN,
-      scalar_b_input => SIZE_R_IN
-      );
-
-    SIZE_S_IN := function_scalar_integer_adder (
+    -- ARITHMETIC M: [RHO] = W + 5
+    SIZE_M_IN := function_scalar_integer_adder (
       OPERATION => '0',
 
-      scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_S_IN
+      scalar_a_input => FIVE_CONTROL,
+      scalar_b_input => SIZE_W_IN
       );
 
     -- CONTROLLER_BODY_STATE

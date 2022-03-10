@@ -1050,24 +1050,18 @@ package body ntm_core_pkg is
 
   begin
 
-    -- ARITHMETIC S: [XI] = 3·W + 3·N + 3
+    -- ARITHMETIC S: [XI] = 2·W
+    SIZE_S_IN := function_scalar_integer_multiplier (
+      scalar_a_input => TWO_CONTROL,
+      scalar_b_input => SIZE_W_IN
+      );
+
+    -- ARITHMETIC M: [RHO] = 2·N + 3
     SIZE_S_IN := THREE_CONTROL;
 
     SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => THREE_CONTROL,
+      scalar_a_input => TWO_CONTROL,
       scalar_b_input => SIZE_N_IN
-      );
-
-    SIZE_S_IN := function_scalar_integer_adder (
-      OPERATION => '0',
-
-      scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_S_IN
-      );
-
-    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => THREE_CONTROL,
-      scalar_b_input => SIZE_W_IN
       );
 
     SIZE_S_IN := function_scalar_integer_adder (
