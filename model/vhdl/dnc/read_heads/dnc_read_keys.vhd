@@ -104,7 +104,8 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   -- Buffer
   signal matrix_k_int : matrix_buffer;
 
-  signal vector_xi_int : vector_buffer;
+  signal matrix_rho_int : matrix_buffer;
+  signal vector_rho_int : vector_buffer;
 
   signal matrix_out_int : matrix_buffer;
 
@@ -178,11 +179,11 @@ begin
 
             -- Data Internal
             matrix_out_int <= function_dnc_read_keys (
-              SIZE_S_IN => SIZE_R_IN,
+              SIZE_M_IN => SIZE_R_IN,
               SIZE_R_IN => SIZE_R_IN,
               SIZE_W_IN => SIZE_R_IN,
 
-              vector_xi_input => vector_xi_int
+              matrix_rho_input => matrix_rho_int
               );
 
             -- FSM Control

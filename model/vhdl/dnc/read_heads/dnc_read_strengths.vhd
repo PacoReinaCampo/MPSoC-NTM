@@ -94,8 +94,10 @@ architecture dnc_read_strengths_urchitecture of dnc_read_strengths is
   signal read_strengths_ctrl_fsm_int : read_strengths_ctrl_fsm;
 
   -- Buffer
-  signal vector_xi_int : vector_buffer;
+  signal matrix_rho_int : matrix_buffer;
+  signal vector_rho_int : vector_buffer;
 
+  signal matrix_out_int : matrix_buffer;
   signal vector_out_int : vector_buffer;
 
   -- Control Internal
@@ -148,15 +150,15 @@ begin
 
           if (BETA_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_xi_int(to_integer(unsigned(index_i_loop))) <= BETA_IN;
+            vector_rho_int(to_integer(unsigned(index_i_loop))) <= BETA_IN;
 
             -- Data Internal
             vector_out_int <= function_dnc_read_strengths (
-              SIZE_S_IN => SIZE_R_IN,
+              SIZE_M_IN => SIZE_R_IN,
               SIZE_R_IN => SIZE_R_IN,
               SIZE_W_IN => SIZE_R_IN,
 
-              vector_xi_input => vector_xi_int
+              matrix_rho_input => matrix_rho_int
               );
 
             -- FSM Control
