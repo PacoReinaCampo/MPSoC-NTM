@@ -69,6 +69,7 @@ entity dnc_read_keys is
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 

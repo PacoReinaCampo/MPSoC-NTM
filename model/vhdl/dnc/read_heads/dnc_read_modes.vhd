@@ -67,6 +67,7 @@ entity dnc_read_modes is
     PI_OUT_P_ENABLE : out std_logic;    -- for i in 0 to 2
 
     -- DATA
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -98,10 +99,9 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal read_modes_ctrl_fsm_int : read_modes_ctrl_fsm;
 
   -- Buffer
-  signal matrix_pi_int : matrix_buffer;
-
   signal matrix_rho_int : matrix_buffer;
-  signal vector_rho_int : vector_buffer;
+
+  signal matrix_in_int : matrix_buffer;
 
   signal matrix_out_int : matrix_buffer;
 
@@ -165,11 +165,11 @@ begin
 
           if ((PI_IN_I_ENABLE = '1') and (PI_IN_P_ENABLE = '1')) then
             -- Data Inputs
-            matrix_pi_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
 
             -- Data Internal
             matrix_out_int <= function_dnc_read_modes (
-              SIZE_M_IN => SIZE_R_IN,
+              SIZE_M_IN => SIZE_M_IN,
               SIZE_R_IN => SIZE_R_IN,
 
               matrix_rho_input => matrix_rho_int
@@ -187,7 +187,7 @@ begin
 
           if (PI_IN_P_ENABLE = '1') then
             -- Data Inputs
-            matrix_pi_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= PI_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then

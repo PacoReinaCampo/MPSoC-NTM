@@ -73,6 +73,7 @@ entity dnc_read_heads_stimulus is
     DNC_FREE_GATES_F_OUT_ENABLE : in std_logic;
 
     -- DATA
+    DNC_FREE_GATES_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_FREE_GATES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_FREE_GATES_F_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -94,6 +95,7 @@ entity dnc_read_heads_stimulus is
     DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
 
     -- DATA
+    DNC_READ_KEYS_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_READ_KEYS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_READ_KEYS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -113,6 +115,7 @@ entity dnc_read_heads_stimulus is
     DNC_READ_MODES_PI_OUT_P_ENABLE : in std_logic;
 
     -- DATA
+    DNC_READ_MODES_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_READ_MODES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_MODES_PI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -128,6 +131,7 @@ entity dnc_read_heads_stimulus is
     DNC_READ_STRENGTHS_BETA_OUT_ENABLE : in  std_logic;
 
     -- DATA
+    DNC_READ_STRENGTHS_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_STRENGTHS_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -245,6 +249,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      DNC_FREE_GATES_SIZE_M_IN <= THREE_CONTROL;
       DNC_FREE_GATES_SIZE_R_IN <= THREE_CONTROL;
 
       if (STIMULUS_DNC_FREE_GATES_CASE_0) then
@@ -347,6 +352,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      DNC_READ_KEYS_SIZE_M_IN <= THREE_CONTROL;
       DNC_READ_KEYS_SIZE_R_IN <= THREE_CONTROL;
       DNC_READ_KEYS_SIZE_W_IN <= THREE_CONTROL;
 
@@ -481,6 +487,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      DNC_READ_MODES_SIZE_M_IN <= THREE_CONTROL;
       DNC_READ_MODES_SIZE_R_IN <= THREE_CONTROL;
 
       if (STIMULUS_DNC_READ_MODES_CASE_0) then
@@ -614,6 +621,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      DNC_READ_STRENGTHS_SIZE_M_IN <= THREE_CONTROL;
       DNC_READ_STRENGTHS_SIZE_R_IN <= THREE_CONTROL;
 
       if (STIMULUS_DNC_READ_STRENGTHS_CASE_0) then

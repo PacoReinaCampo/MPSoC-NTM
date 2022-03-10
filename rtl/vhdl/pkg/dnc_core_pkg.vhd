@@ -706,6 +706,7 @@ package dnc_core_pkg is
       F_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
       -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -738,6 +739,7 @@ package dnc_core_pkg is
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -768,6 +770,7 @@ package dnc_core_pkg is
       PI_OUT_P_ENABLE : out std_logic;  -- for i in 0 to 2
 
       -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -795,6 +798,7 @@ package dnc_core_pkg is
       BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
       -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

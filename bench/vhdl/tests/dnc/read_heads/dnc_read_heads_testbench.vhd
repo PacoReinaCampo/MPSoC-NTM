@@ -95,6 +95,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_free_gates : std_logic;
 
   -- DATA
+  signal size_m_in_free_gates : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_free_gates : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -115,6 +116,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_keys : std_logic;
 
   -- DATA
+  signal size_m_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -133,6 +135,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_modes : std_logic;
 
   -- DATA
+  signal size_m_in_read_modes : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_read_modes : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -147,6 +150,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_strengths : std_logic;
 
   -- DATA
+  signal size_m_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -187,6 +191,7 @@ begin
       DNC_FREE_GATES_F_OUT_ENABLE => f_out_enable_free_gates,
 
       -- DATA
+      DNC_FREE_GATES_SIZE_M_IN => size_m_in_free_gates,
       DNC_FREE_GATES_SIZE_R_IN => size_r_in_free_gates,
 
       DNC_FREE_GATES_F_IN => f_in_free_gates,
@@ -208,6 +213,7 @@ begin
       DNC_READ_KEYS_K_OUT_K_ENABLE => k_out_k_enable_read_keys,
 
       -- DATA
+      DNC_READ_KEYS_SIZE_M_IN => size_m_in_read_keys,
       DNC_READ_KEYS_SIZE_R_IN => size_r_in_read_keys,
       DNC_READ_KEYS_SIZE_W_IN => size_w_in_read_keys,
 
@@ -227,6 +233,7 @@ begin
       DNC_READ_MODES_PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
       -- DATA
+      DNC_READ_MODES_SIZE_M_IN => size_m_in_read_modes,
       DNC_READ_MODES_SIZE_R_IN => size_r_in_read_modes,
 
       DNC_READ_MODES_PI_IN => pi_in_read_modes,
@@ -242,6 +249,7 @@ begin
       DNC_READ_STRENGTHS_BETA_OUT_ENABLE => beta_out_enable_read_strengths,
 
       -- DATA
+      DNC_READ_STRENGTHS_SIZE_M_IN => size_m_in_read_strengths,
       DNC_READ_STRENGTHS_SIZE_R_IN => size_r_in_read_strengths,
 
       DNC_READ_STRENGTHS_BETA_IN => beta_in_read_strengths,
@@ -270,6 +278,7 @@ begin
         F_OUT_ENABLE => f_out_enable_free_gates,
 
         -- DATA
+        SIZE_M_IN => size_m_in_free_gates,
         SIZE_R_IN => size_r_in_free_gates,
 
         F_IN => f_in_free_gates,
@@ -304,6 +313,7 @@ begin
         K_OUT_K_ENABLE => k_out_k_enable_read_keys,
 
         -- DATA
+        SIZE_M_IN => size_m_in_read_keys,
         SIZE_R_IN => size_r_in_read_keys,
         SIZE_W_IN => size_w_in_read_keys,
 
@@ -336,6 +346,7 @@ begin
         PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
         -- DATA
+        SIZE_M_IN => size_m_in_read_modes,
         SIZE_R_IN => size_r_in_read_modes,
 
         PI_IN => pi_in_read_modes,
@@ -364,6 +375,7 @@ begin
         BETA_OUT_ENABLE => beta_out_enable_read_strengths,
 
         -- DATA
+        SIZE_M_IN => size_m_in_read_strengths,
         SIZE_R_IN => size_r_in_read_strengths,
 
         BETA_IN => beta_in_read_strengths,

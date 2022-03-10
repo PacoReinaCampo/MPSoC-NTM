@@ -342,6 +342,7 @@ architecture dnc_top_architecture of dnc_top is
   signal f_out_enable_free_gates : std_logic;
 
   -- DATA
+  signal size_m_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -359,6 +360,7 @@ architecture dnc_top_architecture of dnc_top is
   signal k_out_k_enable_read_keys : std_logic;
 
   -- DATA
+  signal size_m_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -377,6 +379,7 @@ architecture dnc_top_architecture of dnc_top is
   signal pi_out_p_enable_read_modes : std_logic;
 
   -- DATA
+  signal size_m_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -391,6 +394,7 @@ architecture dnc_top_architecture of dnc_top is
   signal beta_out_enable_read_strengths : std_logic;
 
   -- DATA
+  signal size_m_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1095,6 +1099,7 @@ begin
       F_OUT_ENABLE => f_out_enable_free_gates,
 
       -- DATA
+      SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_free_gates,
 
       F_IN => f_in_free_gates,
@@ -1124,6 +1129,7 @@ begin
       K_OUT_K_ENABLE => k_out_k_enable_read_keys,
 
       -- DATA
+      SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_read_keys,
       SIZE_W_IN => size_w_in_read_keys,
 
@@ -1154,6 +1160,7 @@ begin
       PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
       -- DATA
+      SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_free_gates,
 
       PI_IN => pi_in_read_modes,
@@ -1180,6 +1187,7 @@ begin
       BETA_OUT_ENABLE => beta_out_enable_read_strengths,
 
       -- DATA
+      SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_free_gates,
 
       BETA_IN => beta_in_read_strengths,
