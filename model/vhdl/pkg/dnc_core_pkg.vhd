@@ -646,8 +646,8 @@ package dnc_core_pkg is
 
       F_READ_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
 
-      PI_READ_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      PI_READ_IN_P_ENABLE : in std_logic;   -- for p in 0 to 2
+      PI_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
+      PI_READ_IN_P_ENABLE : in std_logic;  -- for p in 0 to 2
 
       PI_READ_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
       PI_READ_OUT_P_ENABLE : out std_logic;  -- for p in 0 to 2
@@ -1000,6 +1000,14 @@ package dnc_core_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
+      D_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      D_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      D_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+
       B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
@@ -1022,6 +1030,7 @@ package dnc_core_pkg is
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1388,6 +1397,16 @@ package dnc_core_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer;
 
+  function function_dnc_interface_matrix (
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_u_input : tensor_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer;
+
   -----------------------------------------------------------------------
   -- TOP - OUTPUT
   -----------------------------------------------------------------------
@@ -1422,6 +1441,7 @@ package dnc_core_pkg is
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
     matrix_v_input : matrix_buffer;
+    tensor_d_input : tensor_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -2507,6 +2527,44 @@ package body dnc_core_pkg is
     return vector_xi_output;
   end function function_dnc_interface_vector;
 
+  function function_dnc_interface_matrix (
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_u_input : tensor_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_h_int : matrix_buffer;
+
+    variable matrix_rho_output : matrix_buffer;
+
+  begin
+
+    -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_h_int(i, l) := vector_h_input(l);
+      end loop;
+    end loop;
+
+    matrix_rho_output := function_tensor_matrix_product (
+      SIZE_A_I_IN => SIZE_R_IN,
+      SIZE_A_J_IN => SIZE_M_IN,
+      SIZE_A_K_IN => SIZE_L_IN,
+      SIZE_B_I_IN => SIZE_R_IN,
+      SIZE_B_J_IN => SIZE_L_IN,
+
+      tensor_a_input => tensor_u_input,
+      matrix_b_input => matrix_h_int
+      );
+
+    return matrix_rho_output;
+  end function function_dnc_interface_matrix;
+
   -----------------------------------------------------------------------
   -- TOP - OUTPUT
   -----------------------------------------------------------------------
@@ -2597,6 +2655,7 @@ package body dnc_core_pkg is
     tensor_k_input : tensor_buffer;
     matrix_u_input : matrix_buffer;
     matrix_v_input : matrix_buffer;
+    tensor_d_input : tensor_buffer;
     vector_b_input : vector_buffer;
 
     vector_x_input : vector_buffer
@@ -2604,9 +2663,10 @@ package body dnc_core_pkg is
 
     -- Constant
     constant FIVE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
-    
+
     -- Trainer Variable
-    variable vector_xi_int : vector_buffer;
+    variable vector_xi_int  : vector_buffer;
+    variable matrix_rho_int : matrix_buffer;
 
     variable matrix_k_int    : matrix_buffer;
     variable vector_beta_int : vector_buffer;
@@ -2635,15 +2695,18 @@ package body dnc_core_pkg is
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
     variable matrix_v_int : matrix_buffer;
+    variable tensor_d_int : tensor_buffer;
 
     variable tensor_kt_int : array4_buffer;
     variable matrix_ut_int : tensor_buffer;
     variable matrix_vt_int : tensor_buffer;
+    variable tensor_dt_int : array4_buffer;
 
-    variable vector_xt_int  : matrix_buffer;
-    variable matrix_rt_int  : tensor_buffer;
-    variable vector_xit_int : matrix_buffer;
-    variable vector_ht_int  : matrix_buffer;
+    variable vector_xt_int   : matrix_buffer;
+    variable matrix_rt_int   : tensor_buffer;
+    variable vector_xit_int  : matrix_buffer;
+    variable matrix_rhot_int : tensor_buffer;
+    variable vector_ht_int   : matrix_buffer;
 
     -- Internal Variable
     variable matrix_r_int : matrix_buffer;
@@ -2653,6 +2716,7 @@ package body dnc_core_pkg is
     variable SCALAR_OPERATION_INT : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    variable SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     -- Output Variable
     variable vector_y_output : vector_buffer;
@@ -2700,8 +2764,8 @@ package body dnc_core_pkg is
 
     -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + B(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,
@@ -2709,17 +2773,20 @@ package body dnc_core_pkg is
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
 
       matrix_w_input => matrix_w_input,
       tensor_k_input => tensor_k_input,
       matrix_u_input => matrix_u_input,
       matrix_v_input => matrix_v_input,
+      tensor_d_input => tensor_d_input,
       vector_b_input => vector_b_input,
 
-      vector_x_input  => vector_x_input,
-      matrix_r_input  => matrix_r_int,
-      vector_xi_input => vector_xi_int,
-      vector_h_input  => vector_h_int
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_int,
+      vector_xi_input  => vector_xi_int,
+      matrix_rho_input => matrix_rho_int,
+      vector_h_input   => vector_h_int
       );
 
 
@@ -2733,11 +2800,13 @@ package body dnc_core_pkg is
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input  => vector_xt_int,
-      matrix_r_input  => matrix_rt_int,
-      vector_xi_input => vector_xit_int,
-      vector_h_input  => vector_ht_int
+      vector_x_input   => vector_xt_int,
+      matrix_r_input   => matrix_rt_int,
+      vector_xi_input  => vector_xit_int,
+      matrix_rho_input => matrix_rhot_int,
+      vector_h_input   => vector_ht_int
       );
 
     matrix_ut_int := function_ntm_fnn_u_trainer (
@@ -2747,11 +2816,29 @@ package body dnc_core_pkg is
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input  => vector_xt_int,
-      matrix_r_input  => matrix_rt_int,
-      vector_xi_input => vector_xit_int,
-      vector_h_input  => vector_ht_int
+      vector_x_input   => vector_xt_int,
+      matrix_r_input   => matrix_rt_int,
+      vector_xi_input  => vector_xit_int,
+      matrix_rho_input => matrix_rhot_int,
+      vector_h_input   => vector_ht_int
+      );
+
+    tensor_dt_int := function_ntm_fnn_d_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_xt_int,
+      matrix_r_input   => matrix_rt_int,
+      vector_xi_input  => vector_xit_int,
+      matrix_rho_input => matrix_rhot_int,
+      vector_h_input   => vector_ht_int
       );
 
     matrix_vt_int := function_ntm_fnn_v_trainer (
@@ -2761,11 +2848,13 @@ package body dnc_core_pkg is
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
       SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input  => vector_xt_int,
-      matrix_r_input  => matrix_rt_int,
-      vector_xi_input => vector_xit_int,
-      vector_h_input  => vector_ht_int
+      vector_x_input   => vector_xt_int,
+      matrix_r_input   => matrix_rt_int,
+      vector_xi_input  => vector_xit_int,
+      matrix_rho_input => matrix_rhot_int,
+      vector_h_input   => vector_ht_int
       );
 
 
@@ -2778,6 +2867,17 @@ package body dnc_core_pkg is
       SIZE_L_IN => SIZE_L_IN,
 
       matrix_u_input => matrix_v_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+    matrix_rho_int := function_dnc_interface_matrix (
+      SIZE_M_IN => SIZE_S_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_u_input => tensor_d_int,
 
       vector_h_input => vector_h_int
       );

@@ -86,6 +86,14 @@ entity dnc_top is
     V_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     V_OUT_S_ENABLE : out std_logic;     -- for s in 0 to S-1
 
+    D_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    D_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    D_IN_M_ENABLE : in std_logic;       -- for m in 0 to M-1
+
+    D_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    D_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    D_OUT_M_ENABLE : out std_logic;     -- for m in 0 to M-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
@@ -108,6 +116,7 @@ entity dnc_top is
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -154,6 +163,7 @@ architecture dnc_top_architecture of dnc_top is
   signal tensor_k_int : tensor_buffer;
   signal matrix_u_int : matrix_buffer;
   signal matrix_v_int : matrix_buffer;
+  signal tensor_d_int : tensor_buffer;
   signal vector_b_int : vector_buffer;
 
   signal vector_x_int : vector_buffer;
@@ -368,8 +378,8 @@ begin
             matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
             -- Control Internal
-           data_u_in_i_int <= '1';
-           data_u_in_j_int <= '1';
+            data_u_in_i_int <= '1';
+            data_u_in_j_int <= '1';
           end if;
 
           if ((V_IN_L_ENABLE = '1') and (V_IN_S_ENABLE = '1')) then
@@ -377,8 +387,8 @@ begin
             matrix_v_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= V_IN;
 
             -- Control Internal
-           data_v_in_i_int <= '1';
-           data_v_in_j_int <= '1';
+            data_v_in_i_int <= '1';
+            data_v_in_j_int <= '1';
           end if;
 
           -- Control Outputs
@@ -399,7 +409,7 @@ begin
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
           end if;
-          
+
         when INPUT_SECOND_J_STATE =>    -- STEP 6 U,V
 
           if (U_IN_P_ENABLE = '1') then
@@ -407,7 +417,7 @@ begin
             matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
             -- Control Internal
-           data_u_in_j_int <= '1';
+            data_u_in_j_int <= '1';
           end if;
 
           if (V_IN_S_ENABLE = '1') then
@@ -415,7 +425,7 @@ begin
             matrix_v_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= V_IN;
 
             -- Control Internal
-           data_v_in_j_int <= '1';
+            data_v_in_j_int <= '1';
           end if;
 
           -- Control Outputs
@@ -611,6 +621,7 @@ begin
               tensor_k_input => tensor_k_int,
               matrix_u_input => matrix_u_int,
               matrix_v_input => matrix_v_int,
+              tensor_d_input => tensor_d_int,
               vector_b_input => vector_b_int,
 
               vector_x_input => vector_x_int

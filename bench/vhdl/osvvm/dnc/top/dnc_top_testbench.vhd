@@ -106,6 +106,14 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal v_out_l_enable_top : std_logic;
   signal v_out_s_enable_top : std_logic;
 
+  signal d_in_i_enable_top : std_logic;
+  signal d_in_l_enable_top : std_logic;
+  signal d_in_m_enable_top : std_logic;
+
+  signal d_out_i_enable_top : std_logic;
+  signal d_out_l_enable_top : std_logic;
+  signal d_out_m_enable_top : std_logic;
+
   signal b_in_enable_top : std_logic;
 
   signal b_out_enable_top : std_logic;
@@ -128,6 +136,7 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal d_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal x_in_top  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -188,6 +197,14 @@ begin
       DNC_TOP_V_OUT_L_ENABLE => v_out_l_enable_top,
       DNC_TOP_V_OUT_S_ENABLE => v_out_s_enable_top,
 
+      DNC_TOP_D_IN_I_ENABLE => d_in_i_enable_top,
+      DNC_TOP_D_IN_L_ENABLE => d_in_l_enable_top,
+      DNC_TOP_D_IN_M_ENABLE => d_in_m_enable_top,
+
+      DNC_TOP_D_OUT_I_ENABLE => d_out_i_enable_top,
+      DNC_TOP_D_OUT_L_ENABLE => d_out_l_enable_top,
+      DNC_TOP_D_OUT_M_ENABLE => d_out_m_enable_top,
+
       DNC_TOP_B_IN_ENABLE => b_in_enable_top,
 
       DNC_TOP_B_OUT_ENABLE => b_out_enable_top,
@@ -210,6 +227,7 @@ begin
       DNC_TOP_K_IN => k_in_top,
       DNC_TOP_U_IN => u_in_top,
       DNC_TOP_V_IN => v_in_top,
+      DNC_TOP_D_IN => d_in_top,
       DNC_TOP_B_IN => b_in_top,
 
       DNC_TOP_X_IN  => x_in_top,
@@ -258,6 +276,14 @@ begin
         V_OUT_L_ENABLE => v_out_l_enable_top,
         V_OUT_S_ENABLE => v_out_s_enable_top,
 
+        D_IN_I_ENABLE => d_in_i_enable_top,
+        D_IN_L_ENABLE => d_in_l_enable_top,
+        D_IN_M_ENABLE => d_in_m_enable_top,
+
+        D_OUT_I_ENABLE => d_out_i_enable_top,
+        D_OUT_L_ENABLE => d_out_l_enable_top,
+        D_OUT_M_ENABLE => d_out_m_enable_top,
+
         B_IN_ENABLE => b_in_enable_top,
 
         B_OUT_ENABLE => b_in_enable_top,
@@ -278,6 +304,7 @@ begin
         K_IN => k_in_top,
         U_IN => u_in_top,
         V_IN => v_in_top,
+        D_IN => d_in_top,
         B_IN => b_in_top,
 
         X_IN  => x_in_top,
