@@ -102,6 +102,7 @@
 │   │   └── dnc_read_strengths.sv
 │   ├── top
 │   │   ├── dnc_output_vector.sv
+│   │   ├── dnc_interface_matrix.sv
 │   │   ├── dnc_interface_vector.sv
 │   │   └── dnc_top.sv
 │   └── write_heads
@@ -189,6 +190,7 @@
 │   ├── read_heads
 │   │   └── ntm_reading.sv
 │   ├── top
+│   │   ├── ntm_interface_matrix.sv
 │   │   ├── ntm_interface_vector.sv
 │   │   ├── ntm_output_vector.sv
 │   │   └── ntm_top.sv

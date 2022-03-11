@@ -321,7 +321,7 @@ begin
           -- Control Outputs
           U_OUT_Y_ENABLE <= '0';
           U_OUT_L_ENABLE <= '0';
-          
+
         when INPUT_SECOND_J_STATE =>    -- STEP 6 U
 
           if (U_IN_L_ENABLE = '1') then

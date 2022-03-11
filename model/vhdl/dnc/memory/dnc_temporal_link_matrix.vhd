@@ -118,8 +118,8 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   signal data_l_in_i_int : std_logic;
   signal data_l_in_j_int : std_logic;
-  signal data_w_in_int         : std_logic;
-  signal data_p_in_int         : std_logic;
+  signal data_w_in_int   : std_logic;
+  signal data_p_in_int   : std_logic;
 
 begin
 
@@ -219,8 +219,8 @@ begin
             -- Control Internal
             data_l_in_i_int <= '0';
             data_l_in_j_int <= '0';
-            data_w_in_int         <= '0';
-            data_p_in_int         <= '0';
+            data_w_in_int   <= '0';
+            data_p_in_int   <= '0';
 
             -- Data Internal
             matrix_out_int <= function_dnc_temporal_link_matrix (

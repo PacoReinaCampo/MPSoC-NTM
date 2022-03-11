@@ -115,7 +115,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_f_in_int         : std_logic;
+  signal data_f_in_int   : std_logic;
   signal data_w_in_i_int : std_logic;
   signal data_w_in_j_int : std_logic;
 
@@ -210,7 +210,7 @@ begin
 
           if (data_f_in_int = '1' and data_w_in_i_int = '1' and data_w_in_j_int = '1') then
             -- Control Internal
-            data_f_in_int         <= '0';
+            data_f_in_int   <= '0';
             data_w_in_i_int <= '0';
             data_w_in_j_int <= '0';
 

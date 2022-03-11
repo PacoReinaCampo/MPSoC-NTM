@@ -74,8 +74,8 @@ entity dnc_addressing is
 
     F_READ_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
 
-    PI_READ_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-    PI_READ_IN_P_ENABLE : in std_logic;   -- for p in 0 to 2
+    PI_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
+    PI_READ_IN_P_ENABLE : in std_logic;  -- for p in 0 to 2
 
     PI_READ_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
     PI_READ_OUT_P_ENABLE : out std_logic;  -- for p in 0 to 2
@@ -258,7 +258,7 @@ begin
             V_WRITE_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>     -- STEP 1 k,e,v
+        when INPUT_FIRST_STATE =>       -- STEP 1 k,e,v
 
           if (K_WRITE_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -299,7 +299,7 @@ begin
             controller_ctrl_fsm_int <= CLEAN_FIRST_STATE;
           end if;
 
-        when CLEAN_FIRST_STATE =>     -- STEP 3
+        when CLEAN_FIRST_STATE =>       -- STEP 3
 
           if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

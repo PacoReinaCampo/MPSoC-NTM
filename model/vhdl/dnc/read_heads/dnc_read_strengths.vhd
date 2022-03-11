@@ -60,9 +60,9 @@ entity dnc_read_strengths is
     START : in  std_logic;
     READY : out std_logic;
 
-    BETA_IN_ENABLE : in std_logic;         -- for i in 0 to R-1
+    BETA_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
 
-    BETA_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
+    BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
 
     -- DATA
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

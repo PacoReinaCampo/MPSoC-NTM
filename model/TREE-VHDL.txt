@@ -102,6 +102,7 @@
 │   │   └── dnc_read_strengths.vhd
 │   ├── top
 │   │   ├── dnc_output_vector.vhd
+│   │   ├── dnc_interface_matrix.vhd
 │   │   ├── dnc_interface_vector.vhd
 │   │   └── dnc_top.vhd
 │   └── write_heads
@@ -189,6 +190,7 @@
 │   ├── read_heads
 │   │   └── ntm_reading.vhd
 │   ├── top
+│   │   ├── ntm_interface_matrix.vhd
 │   │   ├── ntm_interface_vector.vhd
 │   │   ├── ntm_output_vector.vhd
 │   │   └── ntm_top.vhd

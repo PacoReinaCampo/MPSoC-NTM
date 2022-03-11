@@ -74,8 +74,8 @@ entity dnc_addressing is
 
     F_READ_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
 
-    PI_READ_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-    PI_READ_IN_P_ENABLE : in std_logic;   -- for p in 0 to 2
+    PI_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
+    PI_READ_IN_P_ENABLE : in std_logic;  -- for p in 0 to 2
 
     PI_READ_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
     PI_READ_OUT_P_ENABLE : out std_logic;  -- for p in 0 to 2

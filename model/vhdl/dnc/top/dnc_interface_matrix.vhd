@@ -142,7 +142,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-    -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+  -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
 
   -- ASSIGNATIONS
   -- CONTROL

@@ -75,6 +75,7 @@ vhdl2verilog vhdl/dnc/read_heads/dnc_read_keys.sv
 vhdl2verilog vhdl/dnc/read_heads/dnc_read_modes.sv
 vhdl2verilog vhdl/dnc/read_heads/dnc_read_strengths.sv
 vhdl2verilog vhdl/dnc/top/dnc_output_vector.sv
+vhdl2verilog vhdl/dnc/top/dnc_interface_matrix.sv
 vhdl2verilog vhdl/dnc/top/dnc_interface_vector.sv
 vhdl2verilog vhdl/dnc/top/dnc_top.sv
 vhdl2verilog vhdl/dnc/write_heads/dnc_allocation_gate.sv
@@ -139,6 +140,7 @@ vhdl2verilog vhdl/math/series/vector/ntm_vector_tanh_function.sv
 vhdl2verilog vhdl/ntm/memory/ntm_addressing.sv
 vhdl2verilog vhdl/ntm/memory/ntm_content_based_addressing.sv
 vhdl2verilog vhdl/ntm/read_heads/ntm_reading.sv
+vhdl2verilog vhdl/ntm/top/ntm_interface_matrix.sv
 vhdl2verilog vhdl/ntm/top/ntm_interface_vector.sv
 vhdl2verilog vhdl/ntm/top/ntm_output_vector.sv
 vhdl2verilog vhdl/ntm/top/ntm_top.sv

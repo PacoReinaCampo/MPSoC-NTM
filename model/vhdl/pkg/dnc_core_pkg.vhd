@@ -1869,11 +1869,30 @@ package body dnc_core_pkg is
 
     ) return vector_buffer is
 
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_operation_int : vector_buffer;
+
     variable vector_phi_output : vector_buffer;
 
   begin
 
     -- PHI_OUT = sort(U_IN)
+
+    vector_operation_int := vector_u_input;
+
+    for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop 
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-2-i loop 
+        if (to_real(to_float(vector_operation_int(j), float64'high, -float64'low)) > to_real(to_float(vector_operation_int(j + 1), float64'high, -float64'low))) then
+          scalar_operation_int := vector_operation_int(j);
+
+          vector_operation_int(j) := vector_operation_int(j + 1);
+
+          vector_operation_int(j + 1) := scalar_operation_int;
+        end if;
+      end loop;
+    end loop;
+
+    vector_phi_output := vector_operation_int;
 
     return vector_phi_output;
   end function function_dnc_sort_vector;

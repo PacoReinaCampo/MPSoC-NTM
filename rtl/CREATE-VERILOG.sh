@@ -75,6 +75,7 @@ touch verilog/dnc/read_heads/dnc_read_keys.sv
 touch verilog/dnc/read_heads/dnc_read_modes.sv
 touch verilog/dnc/read_heads/dnc_read_strengths.sv
 touch verilog/dnc/top/dnc_output_vector.sv
+touch verilog/dnc/top/dnc_interface_matrix.sv
 touch verilog/dnc/top/dnc_interface_vector.sv
 touch verilog/dnc/top/dnc_top.sv
 touch verilog/dnc/write_heads/dnc_allocation_gate.sv
@@ -139,6 +140,7 @@ touch verilog/math/series/vector/ntm_vector_tanh_function.sv
 touch verilog/ntm/memory/ntm_addressing.sv
 touch verilog/ntm/memory/ntm_content_based_addressing.sv
 touch verilog/ntm/read_heads/ntm_reading.sv
+touch verilog/ntm/top/ntm_interface_matrix.sv
 touch verilog/ntm/top/ntm_interface_vector.sv
 touch verilog/ntm/top/ntm_output_vector.sv
 touch verilog/ntm/top/ntm_top.sv

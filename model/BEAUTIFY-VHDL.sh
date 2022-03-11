@@ -75,6 +75,7 @@ emacs -batch vhdl/dnc/read_heads/dnc_read_keys.vhd -f vhdl-beautify-buffer -f sa
 emacs -batch vhdl/dnc/read_heads/dnc_read_modes.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/read_heads/dnc_read_strengths.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/dnc/top/dnc_interface_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_top.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_allocation_gate.vhd -f vhdl-beautify-buffer -f save-buffer
@@ -139,6 +140,7 @@ emacs -batch vhdl/math/series/vector/ntm_vector_tanh_function.vhd -f vhdl-beauti
 emacs -batch vhdl/ntm/memory/ntm_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/ntm/memory/ntm_content_based_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/ntm/read_heads/ntm_reading.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/ntm/top/ntm_interface_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/ntm/top/ntm_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/ntm/top/ntm_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/ntm/top/ntm_top.vhd -f vhdl-beautify-buffer -f save-buffer
