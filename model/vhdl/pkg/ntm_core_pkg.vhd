@@ -655,7 +655,7 @@ package body ntm_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(1.0 - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k))))));
+        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(ONE_REAL - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k))))));
       end loop;
     end loop;
 
@@ -680,7 +680,8 @@ package body ntm_core_pkg is
     variable vector_m_operation_int : vector_buffer;
     variable scalar_k_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_summation_int : vector_buffer;
 
     variable vector_c_output : vector_buffer;
 
@@ -713,15 +714,22 @@ package body ntm_core_pkg is
       vector_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(i))))))));
     end loop;
 
-    data_summation_int := ZERO_DATA;
+    scalar_summation_int := function_scalar_summation (
+      LENGTH_IN => SIZE_J_IN,
 
-    for j in 0 to to_integer(unsigned(SIZE_j_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(j)))));
+      scalar_input => vector_operation_int
+      );
+
+    for j in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      vector_summation_int(j) := scalar_summation_int;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      vector_c_output(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))/to_real(to_float(data_summation_int)))));
-    end loop;
+    vector_c_output := function_vector_float_divider (
+      SIZE_IN => SIZE_J_IN,
+
+      vector_a_input => vector_c_output,
+      vector_b_input => vector_summation_int
+      );
 
     return vector_c_output;
   end function function_ntm_content_based_addressing;
@@ -750,7 +758,8 @@ package body ntm_core_pkg is
     variable vector_one_int : vector_buffer;
     variable vector_cg_int  : vector_buffer;
 
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_summation_int : vector_buffer;
 
     variable vector_w_output : vector_buffer;
 
@@ -818,13 +827,22 @@ package body ntm_core_pkg is
       vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(vector_w_output(j)))**to_real(to_float(scalar_gamma_input))));
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_w_output(j)))));
-    end loop;
+    scalar_summation_int := function_scalar_summation (
+      LENGTH_IN => SIZE_N_IN,
+
+      scalar_input => vector_w_output
+      );
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_w_output(j) := std_logic_vector(to_float(exp(to_real(to_float(vector_w_output(j)))/to_real(to_float(data_summation_int)))));
+      vector_summation_int(j) := scalar_summation_int;
     end loop;
+
+    vector_w_output := function_vector_float_divider (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_w_output,
+      vector_b_input => vector_summation_int
+      );
 
     return vector_w_output;
   end function function_ntm_addressing;
@@ -1073,8 +1091,8 @@ package body ntm_core_pkg is
 
     -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,

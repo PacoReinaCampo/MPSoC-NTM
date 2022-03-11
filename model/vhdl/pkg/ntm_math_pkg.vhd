@@ -1621,6 +1621,14 @@ package ntm_math_pkg is
   -- MATH - ALGEBRA
   -----------------------------------------------------------------------
 
+  -- SCALAR
+  function function_scalar_summation (
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer
+
+    ) return std_logic_vector;
+
   -- VECTOR
   function function_dot_product (
     LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2081,6 +2089,26 @@ package body ntm_math_pkg is
   -----------------------------------------------------------------------
   -- MATH - ALGEBRA
   -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_summation (
+    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := ZERO_DATA;
+
+    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_output, float64'high, -float64'low)) + to_real(to_float(scalar_input(t), float64'high, -float64'low)), float64'high, -float64'low));
+    end loop;
+
+    return scalar_output;
+  end function function_scalar_summation;
 
   -- VECTOR
   function function_dot_product (

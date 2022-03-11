@@ -1477,7 +1477,8 @@ package body dnc_core_pkg is
     variable vector_m_operation_int : vector_buffer;
     variable scalar_k_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_summation_int : vector_buffer;
 
     variable vector_c_output : vector_buffer;
 
@@ -1510,15 +1511,22 @@ package body dnc_core_pkg is
       vector_operation_int(j) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(j)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(j))))))));
     end loop;
 
-    data_summation_int := ZERO_DATA;
+    scalar_summation_int := function_scalar_summation (
+      LENGTH_IN => SIZE_N_IN,
+
+      scalar_input => vector_operation_int
+      );
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(j)))));
+      vector_summation_int(j) := scalar_summation_int;
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_c_output(j) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(j)))/to_real(to_float(data_summation_int)))));
-    end loop;
+    vector_c_output := function_vector_float_divider (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_operation_int,
+      vector_b_input => vector_summation_int
+      );
 
     return vector_c_output;
   end function function_dnc_vector_content_based_addressing;
@@ -1538,7 +1546,8 @@ package body dnc_core_pkg is
     variable matrix_m_operation_int : matrix_buffer;
     variable vector_k_operation_int : vector_buffer;
 
-    variable data_summation_int : vector_buffer;
+    variable vector_summation_int : vector_buffer;
+    variable matrix_summation_int : matrix_buffer;
 
     variable matrix_c_output : matrix_buffer;
 
@@ -1579,21 +1588,26 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      data_summation_int(i) := ZERO_DATA;
-    end loop;
+    vector_summation_int := function_vector_summation (
+      SIZE_IN   => SIZE_N_IN,
+      LENGTH_IN => SIZE_R_IN,
+
+      vector_input => matrix_operation_int
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        data_summation_int(i) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i))) + to_real(to_float(matrix_operation_int(i, j)))));
+        matrix_summation_int(i, j) := vector_summation_int(i);
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_c_output(i, j) := std_logic_vector(to_float(exp(to_real(to_float(matrix_operation_int(i, j)))/to_real(to_float(data_summation_int(i))))));
-      end loop;
-    end loop;
+    matrix_c_output := function_matrix_float_divider (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_summation_int
+      );
 
     return matrix_c_output;
   end function function_dnc_matrix_content_based_addressing;
@@ -1697,7 +1711,7 @@ package body dnc_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(1.0 - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k)))) + to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_v_input(k)))));
+        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(ONE_REAL - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k)))) + to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_v_input(k)))));
       end loop;
     end loop;
 
@@ -1720,7 +1734,7 @@ package body dnc_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        vector_psi_output(j) := std_logic_vector(to_float(1.0 - to_real(to_float(vector_f_input(i)))*to_real(to_float(matrix_w_input(i, j)))));
+        vector_psi_output(j) := std_logic_vector(to_float(ONE_REAL - to_real(to_float(vector_f_input(i)))*to_real(to_float(matrix_w_input(i, j)))));
       end loop;
     end loop;
 
@@ -1744,12 +1758,14 @@ package body dnc_core_pkg is
 
     -- p(t=0) = 0
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_w_input(j)))));
-    end loop;
+    data_summation_int := function_scalar_summation (
+      LENGTH_IN => SIZE_N_IN,
+
+      scalar_input => vector_w_input
+      );
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_p_output(j) := std_logic_vector(to_float((1.0 - to_real(to_float(data_summation_int)))*to_real(to_float(vector_p_input(j))) + to_real(to_float(vector_w_input(j)))));
+      vector_p_output(j) := std_logic_vector(to_float((ONE_REAL - to_real(to_float(data_summation_int)))*to_real(to_float(vector_p_input(j))) + to_real(to_float(vector_w_input(j)))));
     end loop;
 
     return vector_p_output;
@@ -1880,7 +1896,7 @@ package body dnc_core_pkg is
 
     for g in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_l_output(g, j) := std_logic_vector(to_float((1.0 - to_real(to_float(vector_w_input(g))) - to_real(to_float(vector_w_input(j))))*to_real(to_float(matrix_l_input(g, j))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_p_input(j))))));
+        matrix_l_output(g, j) := std_logic_vector(to_float((ONE_REAL - to_real(to_float(vector_w_input(g))) - to_real(to_float(vector_w_input(j))))*to_real(to_float(matrix_l_input(g, j))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_p_input(j))))));
       end loop;
     end loop;
 
@@ -2254,6 +2270,10 @@ package body dnc_core_pkg is
 
     -- f(t;i) = sigmoid(f^(t;i))
 
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_f_int(i) := matrix_rho_input(i, 3);
+    end loop;
+
     vector_f_output := function_vector_logistic (
       SIZE_IN => SIZE_R_IN,
 
@@ -2279,6 +2299,12 @@ package body dnc_core_pkg is
 
     -- k(t;i;k) = k^(t;i;k)
 
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for m in 5 to to_integer(unsigned(SIZE_W_IN))+4 loop
+        matrix_k_output(i, m) := matrix_rho_int(i, m);
+      end loop;
+    end loop;
+
     return matrix_k_output;
   end function function_dnc_read_keys;
 
@@ -2298,6 +2324,12 @@ package body dnc_core_pkg is
   begin
 
     -- pi(t;i;p) = softmax(pi^(t;i;p))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for m in 0 to 2 loop
+        matrix_pi_int(i, m) := matrix_rho_int(i, m);
+      end loop;
+    end loop;
 
     matrix_pi_output := function_matrix_softmax (
       SIZE_I_IN => SIZE_R_IN,
@@ -2324,6 +2356,10 @@ package body dnc_core_pkg is
   begin
 
     -- beta(t;i) = oneplus(beta^(t;i))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_beta_int(i) := matrix_rho_input(i, 4);
+    end loop;
 
     vector_beta_output := function_vector_oneplus (
       SIZE_IN => SIZE_R_IN,
@@ -2355,7 +2391,7 @@ package body dnc_core_pkg is
 
     -- ga(t) = sigmoid(g^(t))
 
-    scalar_ga_int := vector_xi_input(3*to_integer(unsigned(SIZE_R_IN))+1);
+    scalar_ga_int := vector_xi_input(1);
 
     scalar_ga_output := function_scalar_logistic (
       scalar_input => scalar_ga_int
@@ -2380,7 +2416,7 @@ package body dnc_core_pkg is
 
     -- e(t;k) = sigmoid(e^(t;k))
 
-    vector_e_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 1 downto to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 2);
+    vector_e_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 1 downto to_integer(unsigned(SIZE_W_IN)) + 2);
 
     vector_e_output := function_vector_logistic (
       SIZE_IN => SIZE_W_IN,
@@ -2406,7 +2442,7 @@ package body dnc_core_pkg is
 
     -- gw(t) = sigmoid(gw^(t))
 
-    scalar_gw_int := vector_xi_input(3*to_integer(unsigned(SIZE_R_IN)));
+    scalar_gw_int := vector_xi_input(0);
 
     scalar_gw_output := function_scalar_logistic (
       scalar_input => scalar_gw_int
@@ -2429,7 +2465,7 @@ package body dnc_core_pkg is
 
     -- k(t;k) = k^(t;k)
 
-    vector_k_output := vector_xi_input(3*to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 2 downto 2*to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 3);
+    vector_k_output := vector_xi_input(3*to_integer(unsigned(SIZE_W_IN)) + 2 downto 2*to_integer(unsigned(SIZE_W_IN)) + 3);
 
     return vector_k_output;
   end function function_dnc_write_key;
@@ -2450,7 +2486,7 @@ package body dnc_core_pkg is
 
     -- beta(t) = oneplus(beta^(t))
 
-    scalar_beta_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 2);
+    scalar_beta_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 2);
 
     scalar_beta_output := function_scalar_oneplus (
       scalar_input => scalar_beta_int
@@ -2475,7 +2511,7 @@ package body dnc_core_pkg is
 
     -- v(t;k) = v^(t;k)
 
-    vector_v_output := vector_v_int(to_integer(unsigned(SIZE_W_IN)) + 4*to_integer(unsigned(SIZE_R_IN)) + 1 downto 4*to_integer(unsigned(SIZE_R_IN)) + 2);
+    vector_v_output := vector_v_int(to_integer(unsigned(SIZE_W_IN)) + 1 downto + 2);
 
     return vector_v_output;
   end function function_dnc_write_vector;
@@ -2727,8 +2763,8 @@ package body dnc_core_pkg is
 
     -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;k)·rho(t;i;k) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     vector_h_int := function_ntm_fnn_standard_controller (
       SIZE_X_IN => SIZE_X_IN,

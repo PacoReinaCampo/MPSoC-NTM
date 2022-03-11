@@ -463,12 +463,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;k)*rho(t;i;k) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-
-    -- Data Inputs
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := ZERO_DATA;
-    end loop;
+    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -482,11 +477,12 @@ package body ntm_fnn_controller_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_convolution(i, l)))));
-      end loop;
-    end loop;
+    vector_adder := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_R_IN,
+
+      vector_input => tensor_convolution
+      );
 
     -- W(l;x)*x(t;x)
     matrix_convolution := function_matrix_vector_convolution (
@@ -538,11 +534,12 @@ package body ntm_fnn_controller_pkg is
       matrix_b_input => matrix_rho_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_convolution(i, l)))));
-      end loop;
-    end loop;
+    vector_adder := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_R_IN,
+
+      vector_input => tensor_convolution
+      );
 
     -- U(l;l)*h(t-1;l)
     matrix_convolution := function_matrix_vector_convolution (
@@ -607,12 +604,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;k)·rho(t;i;k) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
-
-    -- Data Inputs
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(l) := ZERO_DATA;
-    end loop;
+    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (
@@ -626,11 +618,12 @@ package body ntm_fnn_controller_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
-      end loop;
-    end loop;
+    vector_adder := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_R_IN,
+
+      vector_input => tensor_product
+      );
 
     -- W(l;x)·x(t;x)
     matrix_product := function_matrix_vector_product (
@@ -670,7 +663,7 @@ package body ntm_fnn_controller_pkg is
       vector_b_input => matrix_product
       );
 
-    -- D(i;l;k)·rho(t;i;k)
+    -- D(i;l;m)·rho(t;i;m)
     tensor_product := function_tensor_matrix_product (
       SIZE_A_I_IN => SIZE_R_IN,
       SIZE_A_J_IN => SIZE_L_IN,
@@ -682,11 +675,12 @@ package body ntm_fnn_controller_pkg is
       matrix_b_input => matrix_rho_input
       );
 
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
-      end loop;
-    end loop;
+    vector_adder := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_R_IN,
+
+      vector_input => tensor_product
+      );
 
     -- U(l;l)·h(t-1;l)
     matrix_product := function_matrix_vector_product (

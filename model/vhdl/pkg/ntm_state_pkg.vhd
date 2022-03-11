@@ -1107,10 +1107,18 @@ package body ntm_state_pkg is
 
     -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j), float64'high, -float64'low))**to_integer(unsigned(LENGTH_K_IN)), float64'high, -float64'low));
-      end loop;
+    matrix_exponent := matrix_data_a_int;
+
+    for i in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+      matrix_exponent := function_matrix_product (
+        SIZE_A_I_IN => SIZE_A_I_IN,
+        SIZE_A_J_IN => SIZE_A_J_IN,
+        SIZE_B_I_IN => SIZE_A_I_IN,
+        SIZE_B_J_IN => SIZE_A_J_IN,
+
+        matrix_a_input => matrix_data_a_int,
+        matrix_b_input => matrix_exponent
+        );
     end loop;
 
     matrix_first_product := function_matrix_product (
@@ -1136,12 +1144,20 @@ package body ntm_state_pkg is
     data_summation_int := vector_product;
 
     -- Summation
-    for k in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+    for j in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
 
-      for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j), float64'high, -float64'low))**(to_integer(unsigned(LENGTH_K_IN))-k), float64'high, -float64'low));
-        end loop;
+      matrix_exponent := matrix_data_a_int;
+
+      for i in 0 to to_integer(unsigned(LENGTH_K_IN))-j loop
+        matrix_exponent := function_matrix_product (
+          SIZE_A_I_IN => SIZE_A_I_IN,
+          SIZE_A_J_IN => SIZE_A_J_IN,
+          SIZE_B_I_IN => SIZE_A_I_IN,
+          SIZE_B_J_IN => SIZE_A_J_IN,
+
+          matrix_a_input => matrix_data_a_int,
+          matrix_b_input => matrix_exponent
+          );
       end loop;
 
       matrix_first_product := function_matrix_product (
@@ -1312,10 +1328,18 @@ package body ntm_state_pkg is
 
     -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
 
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j), float64'high, -float64'low))**to_integer(unsigned(LENGTH_K_IN)), float64'high, -float64'low));
-      end loop;
+    matrix_exponent := matrix_data_a_int;
+
+    for i in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+      matrix_exponent := function_matrix_product (
+        SIZE_A_I_IN => SIZE_A_I_IN,
+        SIZE_A_J_IN => SIZE_A_J_IN,
+        SIZE_B_I_IN => SIZE_A_I_IN,
+        SIZE_B_J_IN => SIZE_A_J_IN,
+
+        matrix_a_input => matrix_data_a_int,
+        matrix_b_input => matrix_exponent
+        );
     end loop;
 
     vector_product := function_matrix_vector_product (
@@ -1331,12 +1355,20 @@ package body ntm_state_pkg is
     vector_x_output := vector_product;
 
     -- Summation
-    for k in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+    for j in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
 
-      for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j), float64'high, -float64'low))**(to_integer(unsigned(LENGTH_K_IN))-k), float64'high, -float64'low));
-        end loop;
+      matrix_exponent := matrix_data_a_int;
+
+      for i in 0 to to_integer(unsigned(LENGTH_K_IN))-j loop
+        matrix_exponent := function_matrix_product (
+          SIZE_A_I_IN => SIZE_A_I_IN,
+          SIZE_A_J_IN => SIZE_A_J_IN,
+          SIZE_B_I_IN => SIZE_A_I_IN,
+          SIZE_B_J_IN => SIZE_A_J_IN,
+
+          matrix_a_input => matrix_data_a_int,
+          matrix_b_input => matrix_exponent
+          );
       end loop;
 
       matrix_product := function_matrix_product (
