@@ -78,7 +78,7 @@ entity dnc_interface_matrix is
     H_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     -- Interface
-    RHO_OUT_I_ENABLE : out std_logic;   -- for m in 0 to M-1
+    RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
     RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
 
     -- DATA

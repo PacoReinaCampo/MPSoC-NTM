@@ -362,7 +362,7 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- Key Vector
+      -- Weight
       U_IN_S_ENABLE : in std_logic;     -- for s in 0 to S-1
       U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
@@ -386,6 +386,53 @@ package ntm_core_pkg is
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       XI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_interface_matrix is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- Weight
+      U_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      U_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      U_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      U_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      -- Hidden State
+      H_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      H_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      H_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+
+      -- Interface
+      RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+
+      -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      RHO_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

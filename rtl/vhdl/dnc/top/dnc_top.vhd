@@ -329,6 +329,42 @@ architecture dnc_top_architecture of dnc_top is
 
   signal xi_out_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- INTERFACE MATRIX
+  -- CONTROL
+  signal start_interface_matrix : std_logic;
+  signal ready_interface_matrix : std_logic;
+
+  -- Weight
+  signal u_in_m_enable_interface_matrix : std_logic;
+  signal u_in_l_enable_interface_matrix : std_logic;
+  signal u_in_i_enable_interface_matrix : std_logic;
+
+  signal u_out_m_enable_interface_matrix : std_logic;
+  signal u_out_l_enable_interface_matrix : std_logic;
+  signal u_out_i_enable_interface_matrix : std_logic;
+
+  -- Hidden State
+  signal h_in_i_enable_interface_matrix : std_logic;
+  signal h_in_l_enable_interface_matrix : std_logic;
+
+  signal h_out_i_enable_interface_matrix : std_logic;
+  signal h_out_l_enable_interface_matrix : std_logic;
+
+  -- Interface
+  signal rho_out_i_enable_interface_matrix : std_logic;
+  signal rho_out_m_enable_interface_matrix : std_logic;
+
+  -- DATA
+  signal size_m_in_interface_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_interface_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_interface_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal u_in_interface_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal h_in_interface_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal rho_out_interface_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
@@ -1073,6 +1109,53 @@ begin
       H_IN => h_in_interface_vector,
 
       XI_OUT => xi_out_interface_vector
+      );
+
+  -- INTERFACE MATRIX
+  interface_matrix : dnc_interface_matrix
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_interface_matrix,
+      READY => ready_interface_matrix,
+
+      -- Weight
+      U_IN_I_ENABLE => u_in_i_enable_interface_matrix,
+      U_IN_M_ENABLE => u_in_m_enable_interface_matrix,
+      U_IN_L_ENABLE => u_in_l_enable_interface_matrix,
+
+      U_OUT_I_ENABLE => u_out_i_enable_interface_matrix,
+      U_OUT_M_ENABLE => u_out_m_enable_interface_matrix,
+      U_OUT_L_ENABLE => u_out_l_enable_interface_matrix,
+
+      -- Hidden State
+      H_IN_I_ENABLE => h_in_i_enable_interface_matrix,
+      H_IN_L_ENABLE => h_in_l_enable_interface_matrix,
+
+      H_OUT_I_ENABLE => h_out_i_enable_interface_matrix,
+      H_OUT_L_ENABLE => h_out_l_enable_interface_matrix,
+
+      -- Interface
+      RHO_OUT_I_ENABLE => rho_out_i_enable_interface_matrix,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_interface_matrix,
+
+      -- DATA
+      SIZE_M_IN => size_m_in_interface_matrix,
+      SIZE_R_IN => size_r_in_interface_matrix,
+      SIZE_L_IN => size_l_in_interface_matrix,
+
+      U_IN => u_in_interface_matrix,
+
+      H_IN => h_in_interface_matrix,
+
+      RHO_OUT => rho_out_interface_matrix
       );
 
   -----------------------------------------------------------------------
