@@ -175,6 +175,12 @@ architecture ntm_top_architecture of ntm_top is
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal data_k_in_i_int : std_logic;
+  signal data_k_in_j_int : std_logic;
+  signal data_k_in_k_int : std_logic;
+  signal data_d_in_i_int : std_logic;
+  signal data_d_in_j_int : std_logic;
+  signal data_d_in_k_int : std_logic;
   signal data_m_in_i_int : std_logic;
   signal data_m_in_j_int : std_logic;
   signal data_u_in_i_int : std_logic;
@@ -493,14 +499,26 @@ begin
             controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
           end if;
 
-        when INPUT_THIRD_I_STATE =>     -- STEP 9 K
+        when INPUT_THIRD_I_STATE =>     -- STEP 9 K,D
 
           if ((K_IN_I_ENABLE = '1') and (K_IN_L_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
             tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= CLEAN_THIRD_K_STATE;
+            -- Control Internal
+            data_k_in_i_int <= '1';
+            data_k_in_j_int <= '1';
+            data_k_in_k_int <= '1';
+          end if;
+
+          if ((D_IN_I_ENABLE = '1') and (D_IN_L_ENABLE = '1') and (D_IN_M_ENABLE = '1')) then
+            -- Data Inputs
+            tensor_d_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= D_IN;
+
+            -- Control Internal
+            data_d_in_i_int <= '1';
+            data_d_in_j_int <= '1';
+            data_d_in_k_int <= '1';
           end if;
 
           -- Control Outputs
@@ -508,45 +526,95 @@ begin
           K_OUT_L_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
 
-        when INPUT_THIRD_J_STATE =>     -- STEP 10 K
+          D_OUT_I_ENABLE <= '0';
+          D_OUT_L_ENABLE <= '0';
+          D_OUT_M_ENABLE <= '0';
+
+          if (data_k_in_i_int = '1' and data_k_in_j_int = '1' and data_k_in_k_int = '1' and data_d_in_i_int = '1' and data_d_in_j_int = '1' and data_d_in_k_int = '1') then
+            -- Control Internal
+            data_k_in_i_int <= '0';
+            data_k_in_j_int <= '0';
+            data_k_in_k_int <= '0';
+
+            data_d_in_i_int <= '0';
+            data_d_in_j_int <= '0';
+            data_d_in_k_int <= '0';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
+          end if;
+
+        when INPUT_THIRD_J_STATE =>     -- STEP 10 K,D
 
           if ((K_IN_L_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
             tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
-            -- FSM Control
-            if (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-              controller_ctrl_fsm_int <= CLEAN_THIRD_J_STATE;
-            else
-              controller_ctrl_fsm_int <= CLEAN_THIRD_K_STATE;
-            end if;
+            -- Control Internal
+            data_k_in_j_int <= '1';
+            data_k_in_k_int <= '1';
+          end if;
+
+          if ((D_IN_L_ENABLE = '1') and (D_IN_M_ENABLE = '1')) then
+            -- Data Inputs
+            tensor_d_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= D_IN;
+
+            -- Control Internal
+            data_d_in_j_int <= '1';
+            data_d_in_k_int <= '1';
           end if;
 
           -- Control Outputs
-          K_OUT_I_ENABLE <= '0';
           K_OUT_L_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
 
-        when INPUT_THIRD_K_STATE =>     -- STEP 11 K
+          D_OUT_L_ENABLE <= '0';
+          D_OUT_M_ENABLE <= '0';
+
+          if (data_k_in_j_int = '1' and data_k_in_k_int = '1' and data_d_in_j_int = '1' and data_d_in_k_int = '1') then
+            -- Control Internal
+            data_k_in_j_int <= '0';
+            data_k_in_k_int <= '0';
+
+            data_d_in_j_int <= '0';
+            data_d_in_k_int <= '0';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
+          end if;
+
+        when INPUT_THIRD_K_STATE =>     -- STEP 11 K,D
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
             tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
-            -- FSM Control
-            if ((unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-              controller_ctrl_fsm_int <= CLEAN_THIRD_I_STATE;
-            elsif (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-              controller_ctrl_fsm_int <= CLEAN_THIRD_J_STATE;
-            else
-              controller_ctrl_fsm_int <= CLEAN_THIRD_K_STATE;
-            end if;
+            -- Control Internal
+            data_k_in_k_int <= '1';
+          end if;
+
+          if (D_IN_M_ENABLE = '1') then
+            -- Data Inputs
+            tensor_d_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= D_IN;
+
+            -- Control Internal
+            data_d_in_k_int <= '1';
           end if;
 
           -- Control Outputs
-          K_OUT_I_ENABLE <= '0';
-          K_OUT_L_ENABLE <= '0';
           K_OUT_K_ENABLE <= '0';
+
+          D_OUT_M_ENABLE <= '0';
+
+          if (data_k_in_k_int = '1' and data_d_in_k_int = '1') then
+            -- Control Internal
+            data_k_in_k_int <= '0';
+
+            data_d_in_k_int <= '0';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
+          end if;
 
         when CLEAN_THIRD_I_STATE =>     -- STEP 12
 

@@ -186,6 +186,10 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   signal data_b_in_i_enable_tensor_matrix_convolution : std_logic;
   signal data_b_in_j_enable_tensor_matrix_convolution : std_logic;
 
+  signal data_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_k_enable_tensor_matrix_convolution : std_logic;
+
   signal data_out_i_enable_tensor_matrix_convolution : std_logic;
   signal data_out_j_enable_tensor_matrix_convolution : std_logic;
 
@@ -208,8 +212,10 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   signal data_a_in_j_enable_matrix_vector_convolution : std_logic;
   signal data_b_in_enable_matrix_vector_convolution   : std_logic;
 
-  signal data_out_i_enable_matrix_vector_convolution : std_logic;
-  signal data_out_j_enable_matrix_vector_convolution : std_logic;
+  signal data_i_enable_matrix_vector_convolution : std_logic;
+  signal data_j_enable_matrix_vector_convolution : std_logic;
+
+  signal data_out_enable_matrix_vector_convolution : std_logic;
 
   -- DATA
   signal size_a_i_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -283,7 +289,7 @@ begin
           data_a_in_matrix_vector_convolution <= W_IN;
           data_b_in_matrix_vector_convolution <= X_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -326,7 +332,7 @@ begin
           data_a_in_matrix_vector_convolution <= K_IN;
           data_b_in_matrix_vector_convolution <= R_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -369,7 +375,7 @@ begin
           data_a_in_matrix_vector_convolution <= U_IN;
           data_b_in_matrix_vector_convolution <= H_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -412,7 +418,7 @@ begin
           data_a_in_matrix_vector_convolution <= U_IN;
           data_b_in_matrix_vector_convolution <= H_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_float_adder <= '1';
@@ -533,6 +539,10 @@ begin
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_convolution,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_convolution,
 
+      DATA_I_ENABLE => data_i_enable_tensor_matrix_convolution,
+      DATA_J_ENABLE => data_j_enable_tensor_matrix_convolution,
+      DATA_K_ENABLE => data_k_enable_tensor_matrix_convolution,
+
       DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_convolution,
       DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_convolution,
 
@@ -566,8 +576,10 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_convolution,
       DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_convolution,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_vector_convolution,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_vector_convolution,
+      DATA_I_ENABLE => data_i_enable_matrix_vector_convolution,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_convolution,
+
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_convolution,
 
       -- DATA
       SIZE_A_I_IN => size_a_i_in_matrix_vector_convolution,

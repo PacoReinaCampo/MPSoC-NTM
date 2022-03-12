@@ -188,6 +188,10 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   signal data_b_in_i_enable_tensor_matrix_product : std_logic;
   signal data_b_in_j_enable_tensor_matrix_product : std_logic;
 
+  signal data_i_enable_tensor_matrix_product : std_logic;
+  signal data_j_enable_tensor_matrix_product : std_logic;
+  signal data_k_enable_tensor_matrix_product : std_logic;
+
   signal data_out_i_enable_tensor_matrix_product : std_logic;
   signal data_out_j_enable_tensor_matrix_product : std_logic;
 
@@ -209,6 +213,9 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   signal data_a_in_i_enable_matrix_vector_product : std_logic;
   signal data_a_in_j_enable_matrix_vector_product : std_logic;
   signal data_b_in_enable_matrix_vector_product   : std_logic;
+
+  signal data_i_enable_matrix_vector_product : std_logic;
+  signal data_j_enable_matrix_vector_product : std_logic;
 
   signal data_out_enable_matrix_vector_product : std_logic;
 
@@ -601,6 +608,10 @@ begin
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_product,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_product,
 
+      DATA_I_ENABLE => data_i_enable_tensor_matrix_product,
+      DATA_J_ENABLE => data_j_enable_tensor_matrix_product,
+      DATA_K_ENABLE => data_k_enable_tensor_matrix_product,
+
       DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_product,
       DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_product,
 
@@ -633,6 +644,9 @@ begin
       DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_product,
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
       DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
+
+      DATA_I_ENABLE => data_i_enable_matrix_vector_product,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_product,
 
       DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
 
