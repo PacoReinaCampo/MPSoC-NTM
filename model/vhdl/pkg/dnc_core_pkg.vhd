@@ -1158,7 +1158,7 @@ package dnc_core_pkg is
       U_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
       U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      U_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      U_OUT_I_ENABLE : in  std_logic;   -- for i in 0 to R-1
       U_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
@@ -1170,8 +1170,8 @@ package dnc_core_pkg is
       H_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
       -- Interface
-      RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
-      RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
       -- DATA
       SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1927,8 +1927,8 @@ package body dnc_core_pkg is
 
     vector_operation_int := vector_u_input;
 
-    for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop 
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-2-i loop 
+    for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-2-i loop
         if (to_real(to_float(vector_operation_int(j), float64'high, -float64'low)) > to_real(to_float(vector_operation_int(j + 1), float64'high, -float64'low))) then
           scalar_operation_int := vector_operation_int(j);
 

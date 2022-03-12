@@ -408,7 +408,7 @@ package ntm_core_pkg is
       U_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
       U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      U_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      U_OUT_I_ENABLE : in  std_logic;   -- for i in 0 to R-1
       U_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
@@ -420,8 +420,8 @@ package ntm_core_pkg is
       H_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
       -- Interface
-      RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
-      RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
       -- DATA
       SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

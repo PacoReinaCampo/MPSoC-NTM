@@ -63,14 +63,40 @@ entity ntm_controller is
     W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
+
     K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+    D_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    D_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    D_IN_M_ENABLE : in std_logic;       -- for m in 0 to M-1
+
+    D_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    D_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    D_OUT_M_ENABLE : out std_logic;     -- for m in 0 to M-1
+
     U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
 
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
+    V_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    V_IN_S_ENABLE : in std_logic;       -- for s in 0 to S-1
+
+    V_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    V_OUT_S_ENABLE : out std_logic;     -- for s in 0 to S-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
@@ -82,19 +108,17 @@ entity ntm_controller is
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
+    RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+    RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+
+    RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+    RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+
+    XI_IN_ENABLE : in std_logic;        -- for s in 0 to S-1
+
+    XI_OUT_ENABLE : out std_logic;      -- for s in 0 to S-1
+
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-
-    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
-
-    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
-    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
-
-    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
@@ -103,17 +127,23 @@ entity ntm_controller is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -208,8 +238,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_a_in_j_enable_matrix_vector_convolution : std_logic;
   signal data_b_in_enable_matrix_vector_convolution   : std_logic;
 
-  signal data_out_i_enable_matrix_vector_convolution : std_logic;
-  signal data_out_j_enable_matrix_vector_convolution : std_logic;
+  signal data_i_enable_matrix_vector_convolution : std_logic;
+  signal data_j_enable_matrix_vector_convolution : std_logic;
+
+  signal data_out_enable_matrix_vector_convolution : std_logic;
 
   -- DATA
   signal size_a_i_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -338,7 +370,7 @@ begin
           data_a_in_matrix_vector_convolution <= W_IN;
           data_b_in_matrix_vector_convolution <= X_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -360,7 +392,7 @@ begin
 
         when MATRIX_J_FIRST_CONVOLUTION_STATE =>  -- STEP 2
 
-          if (data_out_j_enable_matrix_vector_convolution = '1') then
+          if (data_j_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
@@ -412,7 +444,7 @@ begin
           data_a_in_matrix_vector_convolution <= K_IN;
           data_b_in_matrix_vector_convolution <= R_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -434,7 +466,7 @@ begin
 
         when MATRIX_J_SECOND_CONVOLUTION_STATE =>  -- STEP 5
 
-          if (data_out_j_enable_matrix_vector_convolution = '1') then
+          if (data_j_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
@@ -486,7 +518,7 @@ begin
           data_a_in_matrix_vector_convolution <= K_IN;
           data_b_in_matrix_vector_convolution <= R_IN;
 
-          if (data_out_i_enable_matrix_vector_convolution = '1') then
+          if (data_i_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(ONE_CONTROL) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -508,7 +540,7 @@ begin
 
         when MATRIX_J_THIRD_CONVOLUTION_STATE =>  -- STEP 8
 
-          if (data_out_j_enable_matrix_vector_convolution = '1') then
+          if (data_j_enable_matrix_vector_convolution = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
@@ -697,8 +729,10 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_convolution,
       DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_convolution,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_vector_convolution,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_vector_convolution,
+      DATA_I_ENABLE => data_i_enable_matrix_vector_convolution,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_convolution,
+
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_convolution,
 
       -- DATA
       SIZE_A_I_IN => size_a_i_in_matrix_vector_convolution,
