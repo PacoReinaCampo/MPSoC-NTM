@@ -224,6 +224,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_v_in_j_int : std_logic;
   signal data_w_in_int   : std_logic;
 
+  signal data_x_in_int  : std_logic;
+  signal data_xi_in_int : std_logic;
+
 begin
 
   -----------------------------------------------------------------------
@@ -704,11 +707,29 @@ begin
             controller_ctrl_fsm_int <= INPUT_THIRD_K_STATE;
           end if;
 
-        when INPUT_FOURTH_STATE =>      -- STEP 15 x
+        when INPUT_FOURTH_STATE =>      -- STEP 15 x,xi
 
           if (X_IN_ENABLE = '1') then
             -- Data Inputs
             vector_x_int(to_integer(unsigned(index_i_loop))) <= X_IN;
+
+            -- Control Internal
+            data_x_in_int <= '1';
+          end if;
+
+          if (XI_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_xi_int(to_integer(unsigned(index_i_loop))) <= XI_IN;
+
+            -- Control Internal
+            data_xi_in_int <= '1';
+          end if;
+
+          if (data_x_in_int = '1' and data_xi_in_int = '1') then
+            -- Control Internal
+            data_x_in_int <= '0';
+
+            data_xi_in_int <= '0';
 
             -- Data Internal
             vector_out_int <= function_ntm_fnn_convolutional_controller (
@@ -734,12 +755,15 @@ begin
               );
 
             -- FSM Control
-            controller_ctrl_fsm_int <= CLEAN_FOURTH_STATE;
+            controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
           end if;
 
           -- Control Outputs
           H_OUT_ENABLE <= '0';
+
           X_OUT_ENABLE <= '0';
+
+          XI_OUT_ENABLE <= '0';
 
         when CLEAN_FOURTH_STATE =>      -- STEP 16
 
@@ -751,7 +775,10 @@ begin
             READY <= '1';
 
             H_OUT_ENABLE <= '1';
+
             X_OUT_ENABLE <= '1';
+
+            XI_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -764,7 +791,10 @@ begin
 
             -- Control Outputs
             H_OUT_ENABLE <= '1';
+
             X_OUT_ENABLE <= '1';
+
+            XI_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
