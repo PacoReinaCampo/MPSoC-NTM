@@ -45,6 +45,8 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
+use work.ntm_lstm_controller_pkg.all;
+
 entity ntm_hidden_gate_vector is
   generic (
     DATA_SIZE    : integer := 64;
@@ -77,21 +79,18 @@ entity ntm_hidden_gate_vector is
     );
 end entity;
 
-architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
+architecture ntm_hidden_gate_vector_urchitecture of ntm_hidden_gate_vector is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_TANH_STATE,                  -- STEP 1
-    VECTOR_MULTIPLIER_STATE             -- STEP 2
+    INPUT_STATE,                        -- STEP 1
+    CLEAN_STATE                         -- STEP 2
     );
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
@@ -100,38 +99,17 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Buffer
+  signal vector_s_int : vector_buffer;
+  signal vector_o_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
+
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
-  -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
-
-  signal data_out_enable_vector_float_multiplier : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR TANH
-  -- CONTROL
-  signal start_vector_tanh : std_logic;
-  signal ready_vector_tanh : std_logic;
-
-  signal data_in_enable_vector_tanh : std_logic;
-
-  signal data_out_enable_vector_tanh : std_logic;
-
-  -- DATA
-  signal size_in_vector_tanh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_s_in_int : std_logic;
+  signal data_o_in_int : std_logic;
 
 begin
 
@@ -154,81 +132,116 @@ begin
       READY <= '0';
 
       H_OUT_ENABLE <= '0';
+      S_OUT_ENABLE <= '0';
+      O_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_i_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          H_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
           H_OUT_ENABLE <= '0';
 
-          -- Control Internal
-          index_loop <= ZERO_CONTROL;
-
           if (START = '1') then
-            -- Data Outputs
-            H_OUT <= ZERO_DATA;
+            -- Control Outputs
+            S_OUT_ENABLE <= '1';
+            O_OUT_ENABLE <= '1';
 
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_tanh <= '1';
-            end if;
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+            controller_ctrl_fsm_int <= INPUT_STATE;
           else
-            -- Control Internal
-            start_vector_tanh <= '0';
+            -- Control Outputs
+            S_OUT_ENABLE <= '0';
+            O_OUT_ENABLE <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>       -- STEP 1
+        when INPUT_STATE =>             -- STEP 1 s,o
 
-          if (data_out_enable_vector_tanh = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_float_multiplier <= '1';
-            end if;
+          if (S_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_s_int(to_integer(unsigned(index_i_loop))) <= S_IN;
+
+            -- Control Internal
+            data_s_in_int <= '1';
+          end if;
+
+          if (O_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_o_int(to_integer(unsigned(index_i_loop))) <= O_IN;
+
+            -- Control Internal
+            data_o_in_int <= '1';
+          end if;
+
+          -- Control Outputs
+          H_OUT_ENABLE <= '0';
+          O_OUT_ENABLE <= '0';
+
+          if (data_s_in_int = '1' and data_o_in_int = '1') then
+            -- Control Internal
+            data_s_in_int <= '0';
+            data_o_in_int <= '0';
+
+            -- Data Internal
+            vector_out_int <= function_ntm_hidden_convolutional_gate_vector (
+              SIZE_X_IN => SIZE_L_IN,
+              SIZE_W_IN => SIZE_L_IN,
+              SIZE_L_IN => SIZE_L_IN,
+              SIZE_R_IN => SIZE_L_IN,
+              SIZE_S_IN => SIZE_L_IN,
+              SIZE_M_IN => SIZE_L_IN,
+
+              vector_s_input => vector_s_int,
+              vector_o_input => vector_o_int
+              );
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_tanh <= '0';
+            controller_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+        when CLEAN_STATE =>             -- STEP 2
 
-          if (data_out_enable_vector_float_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
-            end if;
-
+          if (unsigned(index_i_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            H_OUT <= data_out_vector_float_multiplier;
+            H_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            H_OUT_ENABLE <= '1';
+            S_OUT_ENABLE <= '1';
+            O_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_i_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            H_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             H_OUT_ENABLE <= '1';
-          else
-            -- Control Outputs
-            H_OUT_ENABLE <= '0';
+            S_OUT_ENABLE <= '1';
+            O_OUT_ENABLE <= '1';
 
             -- Control Internal
-            start_vector_float_multiplier <= '0';
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when others =>
@@ -237,74 +250,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- VECTOR TANH
-  data_in_enable_vector_tanh <= S_IN_ENABLE;
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_float_multiplier <= O_IN_ENABLE;
-  data_b_in_enable_vector_float_multiplier <= data_out_enable_vector_tanh;
-
-  -- DATA
-  -- VECTOR TANH
-  size_in_vector_tanh <= SIZE_L_IN;
-  data_in_vector_tanh <= S_IN;
-
-  -- VECTOR MULTIPLIER
-  size_in_vector_float_multiplier   <= SIZE_L_IN;
-  data_a_in_vector_float_multiplier <= O_IN;
-  data_b_in_vector_float_multiplier <= data_out_vector_tanh;
-
-  -- VECTOR MULTIPLIER
-  vector_float_multiplier : ntm_vector_float_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
-
-      -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
-      );
-
-  -- VECTOR TANH
-  vector_tanh_function : ntm_vector_tanh_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_tanh,
-      READY => ready_vector_tanh,
-
-      DATA_IN_ENABLE => data_in_enable_vector_tanh,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_tanh,
-
-      -- DATA
-      SIZE_IN  => size_in_vector_tanh,
-      DATA_IN  => data_in_vector_tanh,
-      DATA_OUT => data_out_vector_tanh
-      );
 
 end architecture;

@@ -149,6 +149,7 @@ architecture ntm_convolutional_fnn_testbench_architecture of ntm_convolutional_f
   signal d_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal x_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -161,6 +162,7 @@ architecture ntm_convolutional_fnn_testbench_architecture of ntm_convolutional_f
   signal d_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -268,6 +270,7 @@ begin
       NTM_CONVOLUTIONAL_FNN_D_IN => d_in_controller,
       NTM_CONVOLUTIONAL_FNN_K_IN => k_in_controller,
       NTM_CONVOLUTIONAL_FNN_U_IN => u_in_controller,
+      NTM_CONVOLUTIONAL_FNN_V_IN => v_in_controller,
       NTM_CONVOLUTIONAL_FNN_B_IN => b_in_controller,
 
       NTM_CONVOLUTIONAL_FNN_X_IN   => x_in_controller,
@@ -280,6 +283,7 @@ begin
       NTM_CONVOLUTIONAL_FNN_D_OUT => d_out_controller,
       NTM_CONVOLUTIONAL_FNN_K_OUT => k_out_controller,
       NTM_CONVOLUTIONAL_FNN_U_OUT => u_out_controller,
+      NTM_CONVOLUTIONAL_FNN_V_OUT => v_out_controller,
       NTM_CONVOLUTIONAL_FNN_B_OUT => b_out_controller,
 
       NTM_CONVOLUTIONAL_FNN_H_OUT => h_out_controller
@@ -374,6 +378,7 @@ begin
       D_IN => d_in_controller,
       K_IN => k_in_controller,
       U_IN => u_in_controller,
+      V_IN => v_in_controller,
       B_IN => b_in_controller,
 
       X_IN   => x_in_controller,
@@ -386,6 +391,7 @@ begin
       D_OUT => d_out_controller,
       K_OUT => k_out_controller,
       U_OUT => u_out_controller,
+      V_OUT => v_out_controller,
       B_OUT => b_out_controller,
 
       H_OUT => h_out_controller

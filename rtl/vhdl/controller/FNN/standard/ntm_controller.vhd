@@ -134,6 +134,7 @@ entity ntm_controller is
     D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -146,6 +147,7 @@ entity ntm_controller is
     D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -159,17 +161,17 @@ architecture ntm_controller_architecture of ntm_controller is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
+    STARTER_STATE,                  -- STEP 0
     MATRIX_I_FIRST_PRODUCT_STATE,   -- STEP 1
     MATRIX_J_FIRST_PRODUCT_STATE,   -- STEP 2
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 3
+    VECTOR_FIRST_ADDER_STATE,       -- STEP 3
     MATRIX_I_SECOND_PRODUCT_STATE,  -- STEP 4
     MATRIX_J_SECOND_PRODUCT_STATE,  -- STEP 5
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 6
+    VECTOR_SECOND_ADDER_STATE,      -- STEP 6
     MATRIX_I_THIRD_PRODUCT_STATE,   -- STEP 7
     MATRIX_J_THIRD_PRODUCT_STATE,   -- STEP 8
-    VECTOR_THIRD_ADDER_STATE,           -- STEP 9
-    VECTOR_LOGISTIC_STATE               -- STEP 10
+    VECTOR_THIRD_ADDER_STATE,       -- STEP 9
+    VECTOR_LOGISTIC_STATE           -- STEP 10
     );
 
   -----------------------------------------------------------------------

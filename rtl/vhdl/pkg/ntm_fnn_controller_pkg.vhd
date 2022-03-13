@@ -140,6 +140,7 @@ package ntm_fnn_controller_pkg is
       D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -152,6 +153,7 @@ package ntm_fnn_controller_pkg is
       D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
