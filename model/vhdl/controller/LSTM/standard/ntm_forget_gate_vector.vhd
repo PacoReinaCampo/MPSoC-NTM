@@ -203,7 +203,7 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal vector_xi_int  : vector_buffer;
   signal matrix_rho_int : matrix_buffer;
 
-  signal vector_h_int  : vector_buffer;
+  signal vector_h_int : vector_buffer;
 
   signal vector_out_int : vector_buffer;
 
@@ -235,7 +235,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+  -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

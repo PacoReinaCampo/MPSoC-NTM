@@ -201,7 +201,7 @@ module ntm_activation_gate_vector #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+  // a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

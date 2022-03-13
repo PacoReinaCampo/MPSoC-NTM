@@ -201,7 +201,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal vector_xi_int  : vector_buffer;
   signal matrix_rho_int : matrix_buffer;
 
-  signal vector_h_int  : vector_buffer;
+  signal vector_h_int : vector_buffer;
 
   signal vector_out_int : vector_buffer;
 
