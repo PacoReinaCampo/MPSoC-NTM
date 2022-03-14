@@ -1461,7 +1461,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
   function function_ntm_lstm_forget_w_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1575,7 +1575,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
   function function_ntm_lstm_input_w_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1695,7 +1695,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
   function function_ntm_lstm_output_w_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1809,7 +1809,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
 end ntm_lstm_controller_pkg;
 
@@ -3805,22 +3805,16 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable vector_b_output : matrix_buffer;
+    variable vector_b_output : vector_buffer;
 
   begin
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -3839,11 +3833,12 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(da(t;l))[t in 0 to T]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_da_int(t, l)))));
-      end loop;
-    end loop;
+    vector_b_output := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_T_IN,
+
+      vector_input => vector_da_int
+      );
 
     return vector_b_output;
   end function function_ntm_lstm_activation_b_trainer;
@@ -4193,22 +4188,16 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable vector_b_output : matrix_buffer;
+    variable vector_b_output :vector_buffer;
 
   begin
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4227,11 +4216,12 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(df(t;l))[t in 0 to T]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_df_int(t, l)))));
-      end loop;
-    end loop;
+    vector_b_output := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_T_IN,
+
+      vector_input => vector_df_int
+      );
 
     return vector_b_output;
   end function function_ntm_lstm_forget_b_trainer;
@@ -4587,22 +4577,16 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable vector_b_output : matrix_buffer;
+    variable vector_b_output : vector_buffer;
 
   begin
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4619,13 +4603,14 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- db(t;l) = summation(di(t;l))[t in 0 to T]
+    -- db(l) = summation(di(t;l))[t in 0 to T]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_di_int(t, l)))));
-      end loop;
-    end loop;
+    vector_b_output := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_T_IN,
+
+      vector_input => vector_di_int
+      );
 
     return vector_b_output;
   end function function_ntm_lstm_input_b_trainer;
@@ -4975,22 +4960,16 @@ package body ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
     variable vector_dh_int : matrix_buffer;
     variable vector_do_int : matrix_buffer;
 
-    variable vector_b_output : matrix_buffer;
+    variable vector_b_output : vector_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5007,13 +4986,14 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- db(t;l) = summation(do(t;l))[t in 0 to T]
+    -- db(l) = summation(do(t;l))[t in 0 to T]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_do_int(t, l)))));
-      end loop;
-    end loop;
+    vector_b_output := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_T_IN,
+
+      vector_input => vector_do_int
+      );
 
     return vector_b_output;
   end function function_ntm_lstm_output_b_trainer;

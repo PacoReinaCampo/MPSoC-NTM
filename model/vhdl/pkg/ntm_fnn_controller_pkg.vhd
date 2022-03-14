@@ -417,7 +417,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return matrix_buffer;
+    ) return vector_buffer;
 
 end ntm_fnn_controller_pkg;
 
@@ -1052,21 +1052,15 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return matrix_buffer is
+    ) return vector_buffer is
 
     variable vector_dh_int : matrix_buffer;
 
-    variable vector_b_output : matrix_buffer;
+    variable vector_b_output : vector_buffer;
 
   begin
 
-    -- db(t;l) = summation(d*(t;l))[t in 0 to T]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := ZERO_DATA;
-      end loop;
-    end loop;
+    -- db(l) = summation(d*(t;l))[t in 0 to T]
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1077,11 +1071,12 @@ package body ntm_fnn_controller_pkg is
       vector_input => vector_h_input
       );
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_dh_int(t, l)))));
-      end loop;
-    end loop;
+    vector_b_output := function_vector_summation (
+      SIZE_IN   => SIZE_L_IN,
+      LENGTH_IN => SIZE_T_IN,
+
+      vector_input => vector_dh_int
+      );
 
     return vector_b_output;
   end function function_ntm_fnn_b_trainer;

@@ -420,6 +420,38 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_transpose_vector_product is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+    -- DATA
+      SIZE_A_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_matrix_summation is
     generic (
       DATA_SIZE    : integer := 64;

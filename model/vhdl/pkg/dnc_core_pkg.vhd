@@ -1750,6 +1750,11 @@ package body dnc_core_pkg is
     vector_e_input : vector_buffer
     ) return matrix_buffer is
 
+    variable matrix_ones_output : matrix_buffer;
+
+    variable matrix_first_operation_output  : matrix_buffer;
+    variable matrix_second_operation_output : matrix_buffer;
+
     variable matrix_m_output : matrix_buffer;
 
   begin
@@ -1758,9 +1763,45 @@ package body dnc_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(ONE_REAL - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k)))) + to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_v_input(k)))));
+        matrix_ones_output(j, k) := ONE_DATA;
       end loop;
     end loop;
+
+    matrix_first_operation_output := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_N_IN,
+      SIZE_B_IN => SIZE_W_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_e_input
+      );
+
+    matrix_second_operation_output := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_ones_output,
+      matrix_b_input => matrix_first_operation_output
+      );
+
+    matrix_second_operation_output := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_m_input,
+      matrix_b_input => matrix_second_operation_output
+      );
+
+    matrix_m_output := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_first_operation_output,
+      matrix_b_input => matrix_second_operation_output
+      );
 
     return matrix_m_output;
   end function function_dnc_memory_matrix;

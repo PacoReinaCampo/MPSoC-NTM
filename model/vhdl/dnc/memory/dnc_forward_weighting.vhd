@@ -113,6 +113,7 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
+  signal index_g_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -183,7 +184,7 @@ begin
 
           if ((L_IN_G_ENABLE = '1') and (L_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
+            matrix_l_int(to_integer(unsigned(index_g_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
             -- Control Internal
             data_l_in_g_int <= '1';
@@ -203,7 +204,7 @@ begin
           F_I_ENABLE <= '0';
           F_J_ENABLE <= '0';
 
-          if (data_l_in_g_int = '1' and data_l_in_j_int = '1' and data_w_in_i_int = '1' and data_w_in_j_int = '1') then
+          if (((data_l_in_g_int = '1' and data_l_in_j_int = '1') or ((unsigned(index_g_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)))) and ((data_w_in_i_int = '1' and data_w_in_j_int = '1') or ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))))) then
             -- Control Internal
             data_l_in_g_int <= '0';
             data_l_in_j_int <= '0';
@@ -227,7 +228,7 @@ begin
 
           if (L_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_l_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
+            matrix_l_int(to_integer(unsigned(index_g_loop)), to_integer(unsigned(index_j_loop))) <= L_IN;
 
             -- Control Internal
             data_l_in_j_int <= '1';
@@ -244,7 +245,7 @@ begin
           -- Control Outputs
           F_J_ENABLE <= '0';
 
-          if (data_l_in_j_int = '1' and data_w_in_j_int = '1') then
+          if ((data_l_in_j_int = '1' and data_w_in_j_int = '1') or (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Control Internal
             data_l_in_j_int <= '0';
             data_w_in_j_int <= '0';

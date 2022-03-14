@@ -420,6 +420,38 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_transpose_vector_product is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+    -- DATA
+      SIZE_A_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_matrix_summation is
     generic (
       DATA_SIZE    : integer := 64;
@@ -1734,6 +1766,14 @@ package ntm_math_pkg is
     vector_b_input : vector_buffer
     ) return vector_buffer;
 
+  function function_transpose_vector_product (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return matrix_buffer;
+
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2456,6 +2496,30 @@ package body ntm_math_pkg is
 
     return vector_output;
   end function function_matrix_vector_product;
+
+  function function_transpose_vector_product (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_IN))-1 loop
+        matrix_output(i, j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_B_IN))-1 loop
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j), float64'high, -float64'low)) + (to_real(to_float(vector_a_input(m), float64'high, -float64'low))*to_real(to_float(vector_b_input(m), float64'high, -float64'low))), float64'high, -float64'low));
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_transpose_vector_product;
 
   function function_matrix_summation (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);

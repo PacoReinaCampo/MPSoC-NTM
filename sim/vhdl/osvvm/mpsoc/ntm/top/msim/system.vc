@@ -30,6 +30,7 @@
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_transpose_vector_product.vhd
 
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
