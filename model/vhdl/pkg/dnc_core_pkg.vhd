@@ -1817,6 +1817,7 @@ package body dnc_core_pkg is
     variable vector_ones_output : vector_buffer;
 
     variable vector_operation_output : vector_buffer;
+    variable matrix_operation_output : matrix_buffer;
 
     variable vector_psi_output : vector_buffer;
 
@@ -1837,11 +1838,26 @@ package body dnc_core_pkg is
       vector_b_input => vector_operation_output
       );
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        vector_psi_output(j) := std_logic_vector(to_float(to_real(to_float(vector_operation_output(i)))*to_real(to_float(matrix_w_input(i, j)))));
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_operation_output(i, j) := vector_operation_output(i);
       end loop;
     end loop;
+
+    matrix_operation_output := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_operation_output,
+      matrix_b_input => matrix_w_input
+      );
+
+    vector_psi_output := function_vector_summation (
+      SIZE_IN   => SIZE_R_IN,
+      LENGTH_IN => SIZE_N_IN,
+
+      vector_input => matrix_operation_output
+      );
 
     return vector_psi_output;
   end function function_dnc_memory_retention_vector;
@@ -1854,6 +1870,10 @@ package body dnc_core_pkg is
     ) return vector_buffer is
 
     variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_ones_output : vector_buffer;
+
+    variable vector_operation_output : vector_buffer;
 
     variable vector_p_output : vector_buffer;
 
@@ -1870,8 +1890,35 @@ package body dnc_core_pkg is
       );
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_p_output(j) := std_logic_vector(to_float((ONE_REAL - to_real(to_float(data_summation_int)))*to_real(to_float(vector_p_input(j))) + to_real(to_float(vector_w_input(j)))));
+      vector_ones_output(j) := ONE_DATA;
+
+      vector_operation_output(j) := data_summation_int;
     end loop;
+
+    vector_operation_output := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_ones_output,
+      vector_b_input => vector_operation_output
+      );
+
+    vector_operation_output := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_operation_output,
+      vector_b_input => vector_p_input
+      );
+
+    vector_p_output := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_operation_output,
+      vector_b_input => vector_w_input
+      );
 
     return vector_p_output;
   end function function_dnc_precedence_weighting;

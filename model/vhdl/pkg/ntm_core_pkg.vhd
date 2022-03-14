@@ -638,21 +638,34 @@ package body ntm_core_pkg is
     matrix_m_input : matrix_buffer
     ) return vector_buffer is
 
+    variable matrix_operation_output : matrix_buffer;
+
     variable vector_r_output : vector_buffer;
 
   begin
 
     -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      vector_r_output(k) := ZERO_DATA;
-    end loop;
-
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        vector_r_output(k) := std_logic_vector(to_float(to_real(to_float(vector_r_output(k))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(matrix_m_input(j, k))))));
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_operation_output(j, k) := vector_w_input(j);
       end loop;
     end loop;
+
+    matrix_operation_output := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_operation_output,
+      matrix_b_input => matrix_m_input
+      );
+
+    vector_r_output := function_vector_summation (
+      SIZE_IN   => SIZE_W_IN,
+      LENGTH_IN => SIZE_N_IN,
+
+      vector_input => matrix_operation_output
+      );
 
     return vector_r_output;
   end function function_ntm_reading;
