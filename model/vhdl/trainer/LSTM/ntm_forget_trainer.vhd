@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_forget_trainer is
@@ -71,6 +70,16 @@ entity ntm_forget_trainer is
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
+    RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+    RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+
+    RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+    RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+
+    XI_IN_ENABLE : in std_logic;        -- for s in 0 to S-1
+
+    XI_OUT_ENABLE : out std_logic;      -- for s in 0 to S-1
+
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
@@ -88,8 +97,15 @@ entity ntm_forget_trainer is
     K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
+    D_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    D_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    D_OUT_M_ENABLE : out std_logic;     -- for m in 0 to M-1
+
     U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
+    V_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    V_OUT_S_ENABLE : out std_logic;     -- for s in 0 to S-1
 
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
@@ -98,17 +114,23 @@ entity ntm_forget_trainer is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

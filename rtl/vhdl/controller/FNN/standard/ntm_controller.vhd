@@ -161,17 +161,17 @@ architecture ntm_controller_architecture of ntm_controller is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 1
-    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 2
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 3
-    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 4
-    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 5
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 6
-    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 7
-    MATRIX_J_THIRD_PRODUCT_STATE,       -- STEP 8
-    VECTOR_THIRD_ADDER_STATE,           -- STEP 9
-    VECTOR_LOGISTIC_STATE               -- STEP 10
+    STARTER_STATE,                  -- STEP 0
+    MATRIX_I_FIRST_PRODUCT_STATE,   -- STEP 1
+    MATRIX_J_FIRST_PRODUCT_STATE,   -- STEP 2
+    VECTOR_FIRST_ADDER_STATE,       -- STEP 3
+    MATRIX_I_SECOND_PRODUCT_STATE,  -- STEP 4
+    MATRIX_J_SECOND_PRODUCT_STATE,  -- STEP 5
+    VECTOR_SECOND_ADDER_STATE,      -- STEP 6
+    MATRIX_I_THIRD_PRODUCT_STATE,   -- STEP 7
+    MATRIX_J_THIRD_PRODUCT_STATE,   -- STEP 8
+    VECTOR_THIRD_ADDER_STATE,       -- STEP 9
+    VECTOR_LOGISTIC_STATE           -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -282,6 +282,16 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_out_i_enable_trainer : std_logic;
   signal r_out_k_enable_trainer : std_logic;
 
+  signal rho_in_i_enable_trainer : std_logic;
+  signal rho_in_m_enable_trainer : std_logic;
+
+  signal rho_out_i_enable_trainer : std_logic;
+  signal rho_out_m_enable_trainer : std_logic;
+
+  signal xi_in_enable_trainer : std_logic;
+
+  signal xi_out_enable_trainer : std_logic;
+
   signal h_in_enable_trainer : std_logic;
 
   signal h_out_enable_trainer : std_logic;
@@ -293,8 +303,15 @@ architecture ntm_controller_architecture of ntm_controller is
   signal k_out_l_enable_trainer : std_logic;
   signal k_out_k_enable_trainer : std_logic;
 
+  signal d_out_i_enable_trainer : std_logic;
+  signal d_out_l_enable_trainer : std_logic;
+  signal d_out_m_enable_trainer : std_logic;
+
   signal u_out_l_enable_trainer : std_logic;
   signal u_out_p_enable_trainer : std_logic;
+
+  signal v_out_l_enable_trainer : std_logic;
+  signal v_out_s_enable_trainer : std_logic;
 
   signal b_out_enable_trainer : std_logic;
 
@@ -303,14 +320,20 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_w_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_l_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_in_trainer  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal d_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -319,7 +342,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+  -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -795,6 +818,16 @@ begin
       R_OUT_I_ENABLE => r_out_i_enable_trainer,
       R_OUT_K_ENABLE => r_out_k_enable_trainer,
 
+      RHO_IN_I_ENABLE => rho_in_i_enable_trainer,
+      RHO_IN_M_ENABLE => rho_in_m_enable_trainer,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_trainer,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_trainer,
+
+      XI_IN_ENABLE => xi_in_enable_trainer,
+
+      XI_OUT_ENABLE => xi_out_enable_trainer,
+
       H_IN_ENABLE => h_in_enable_trainer,
 
       H_OUT_ENABLE => h_out_enable_trainer,
@@ -806,8 +839,15 @@ begin
       K_OUT_L_ENABLE => k_out_l_enable_trainer,
       K_OUT_K_ENABLE => k_out_k_enable_trainer,
 
+      D_OUT_I_ENABLE => d_out_i_enable_trainer,
+      D_OUT_L_ENABLE => d_out_l_enable_trainer,
+      D_OUT_M_ENABLE => d_out_m_enable_trainer,
+
       U_OUT_L_ENABLE => u_out_l_enable_trainer,
       U_OUT_P_ENABLE => u_out_p_enable_trainer,
+
+      V_OUT_L_ENABLE => v_out_l_enable_trainer,
+      V_OUT_S_ENABLE => v_out_s_enable_trainer,
 
       B_OUT_ENABLE => b_out_enable_trainer,
 
@@ -816,14 +856,20 @@ begin
       SIZE_W_IN => size_w_in_trainer,
       SIZE_L_IN => size_l_in_trainer,
       SIZE_R_IN => size_r_in_trainer,
+      SIZE_S_IN => size_s_in_trainer,
+      SIZE_M_IN => size_m_in_trainer,
 
-      X_IN => x_in_trainer,
-      R_IN => h_in_trainer,
-      H_IN => h_in_trainer,
+      X_IN   => x_in_trainer,
+      R_IN   => h_in_trainer,
+      RHO_IN => rho_in_trainer,
+      XI_IN  => xi_in_trainer,
+      H_IN   => h_in_trainer,
 
       W_OUT => w_out_trainer,
       K_OUT => k_out_trainer,
+      D_OUT => d_out_trainer,
       U_OUT => u_out_trainer,
+      V_OUT => v_out_trainer,
       B_OUT => b_out_trainer
       );
 
