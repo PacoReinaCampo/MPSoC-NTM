@@ -442,7 +442,7 @@ package ntm_math_pkg is
       DATA_OUT_I_ENABLE : out std_logic;
       DATA_OUT_J_ENABLE : out std_logic;
 
-    -- DATA
+      -- DATA
       SIZE_A_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 

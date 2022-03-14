@@ -4193,7 +4193,7 @@ package body ntm_lstm_controller_pkg is
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable vector_b_output :vector_buffer;
+    variable vector_b_output : vector_buffer;
 
   begin
 

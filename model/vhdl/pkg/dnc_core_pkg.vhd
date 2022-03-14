@@ -1814,15 +1814,32 @@ package body dnc_core_pkg is
     matrix_w_input : matrix_buffer
     ) return vector_buffer is
 
+    variable vector_ones_output : vector_buffer;
+
+    variable vector_operation_output : vector_buffer;
+
     variable vector_psi_output : vector_buffer;
 
   begin
 
     -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_ones_output(i) := ONE_DATA;
+    end loop;
+
+    vector_operation_output := function_vector_float_adder (
+      OPERATION => '1',
+
+      SIZE_IN => SIZE_R_IN,
+
+      vector_a_input => vector_ones_output,
+      vector_b_input => vector_operation_output
+      );
+
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        vector_psi_output(j) := std_logic_vector(to_float(ONE_REAL - to_real(to_float(vector_f_input(i)))*to_real(to_float(matrix_w_input(i, j)))));
+        vector_psi_output(j) := std_logic_vector(to_float(to_real(to_float(vector_operation_output(i)))*to_real(to_float(matrix_w_input(i, j)))));
       end loop;
     end loop;
 
