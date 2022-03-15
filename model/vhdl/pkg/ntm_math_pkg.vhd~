@@ -2226,7 +2226,7 @@ package body ntm_math_pkg is
     ) return vector_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
+    
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
@@ -2465,7 +2465,7 @@ package body ntm_math_pkg is
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => vector_output(i)
+              scalar_b_input =>vector_output(i)
               );
           end loop;
         end loop;
@@ -2542,7 +2542,7 @@ package body ntm_math_pkg is
             scalar_a_input => matrix_in_int(i, j),
             scalar_b_input => scalar_operation_int
             );
-
+          
           scalar_operation_int := function_scalar_float_multiplier (
             scalar_a_input => data_quotient_int,
             scalar_b_input => matrix_output(m, j)
@@ -2909,29 +2909,29 @@ package body ntm_math_pkg is
 
         for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
           for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-            scalar_operation_int := function_scalar_float_multiplier (
-              scalar_a_input => data_quotient_int,
-              scalar_b_input => tensor_in_int(m, j, k)
-              );
+          scalar_operation_int := function_scalar_float_multiplier (
+            scalar_a_input => data_quotient_int,
+            scalar_b_input => tensor_in_int(m, j, k)
+            );
 
-            tensor_in_int(i, j, k) := function_scalar_float_adder (
-              OPERATION => '1',
+          tensor_in_int(i, j, k) := function_scalar_float_adder (
+            OPERATION => '1',
 
-              scalar_a_input => tensor_in_int(i, j, k),
-              scalar_b_input => scalar_operation_int
-              );
+            scalar_a_input => tensor_in_int(i, j, k),
+            scalar_b_input => scalar_operation_int
+            );
+          
+          scalar_operation_int := function_scalar_float_multiplier (
+            scalar_a_input => data_quotient_int,
+            scalar_b_input => tensor_output(m, j, k)
+            );
 
-            scalar_operation_int := function_scalar_float_multiplier (
-              scalar_a_input => data_quotient_int,
-              scalar_b_input => tensor_output(m, j, k)
-              );
+          tensor_output(i, j, k) := function_scalar_float_adder (
+            OPERATION => '1',
 
-            tensor_output(i, j, k) := function_scalar_float_adder (
-              OPERATION => '1',
-
-              scalar_a_input => tensor_output(i, j, k),
-              scalar_b_input => scalar_operation_int
-              );
+            scalar_a_input => tensor_output(i, j, k),
+            scalar_b_input => scalar_operation_int
+            );
           end loop;
         end loop;
       end loop;
@@ -3445,7 +3445,7 @@ package body ntm_math_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(ONE_REAL/(ONE_REAL/exp(to_real(to_float(scalar_input, float64'high, -float64'low)))), float64'high, -float64'low));
+    scalar_output := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(scalar_input, float64'high, -float64'low)))), float64'high, -float64'low));
 
     return scalar_output;
   end function function_scalar_logistic;
@@ -3458,7 +3458,7 @@ package body ntm_math_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(to_float(ONE_REAL+log(ONE_REAL+exp(to_real(to_float(scalar_input, float64'high, -float64'low)))), float64'high, -float64'low));
+    scalar_output := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(scalar_input, float64'high, -float64'low)))), float64'high, -float64'low));
 
     return scalar_output;
   end function function_scalar_oneplus;
@@ -3474,7 +3474,7 @@ package body ntm_math_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(ONE_REAL/(ONE_REAL/exp(to_real(to_float(vector_input(i), float64'high, -float64'low)))), float64'high, -float64'low));
+      vector_output(i) := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(vector_input(i), float64'high, -float64'low)))), float64'high, -float64'low));
     end loop;
 
     return vector_output;
@@ -3490,7 +3490,7 @@ package body ntm_math_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(ONE_REAL+log(ONE_REAL+exp(to_real(to_float(vector_input(i), float64'high, -float64'low)))), float64'high, -float64'low));
+      vector_output(i) := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(vector_input(i), float64'high, -float64'low)))), float64'high, -float64'low));
     end loop;
 
     return vector_output;
@@ -3509,7 +3509,7 @@ package body ntm_math_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(ONE_REAL/(ONE_REAL/exp(to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))), float64'high, -float64'low));
+        matrix_output(i, j) := std_logic_vector(to_float(1.0/(1.0/exp(to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))), float64'high, -float64'low));
       end loop;
     end loop;
 
@@ -3528,7 +3528,7 @@ package body ntm_math_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(ONE_REAL+log(ONE_REAL+exp(to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))), float64'high, -float64'low));
+        matrix_output(i, j) := std_logic_vector(to_float(1.0+log(1.0+exp(to_real(to_float(matrix_input(i, j), float64'high, -float64'low)))), float64'high, -float64'low));
       end loop;
     end loop;
 
@@ -3570,25 +3570,19 @@ package body ntm_math_pkg is
     vector_input : vector_buffer
     ) return vector_buffer is
 
-    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int, float64'high, -float64'low)) + to_real(to_float(vector_input(m), float64'high, -float64'low)), float64'high, -float64'low));
+    end loop;
+
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := ZERO_DATA;
-
-      scalar_operation_int := function_scalar_float_multiplier (
-        scalar_a_input => vector_input(i),
-        scalar_b_input => LENGTH_IN
-        );
-
-      vector_output(i) := function_scalar_float_adder (
-        OPERATION => '0',
-
-        scalar_a_input => scalar_operation_int,
-        scalar_b_input => vector_input(i)
-        );
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_input(i), float64'high, -float64'low))*to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
     end loop;
 
     return vector_output;
