@@ -111,7 +111,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = (exponentiation(DATA_IN) - inverter(exponentiation(DATA_IN)))/2
+  -- DATA_OUT = sinh(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

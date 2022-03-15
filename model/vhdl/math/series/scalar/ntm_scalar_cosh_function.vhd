@@ -92,6 +92,12 @@ architecture ntm_scalar_cosh_function_architecture of ntm_scalar_cosh_function i
 
 begin
 
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- DATA_OUT = cosh(DATA_IN)
+
   ctrl_fsm : process (CLK, RST)
   begin
     if(RST = '0') then

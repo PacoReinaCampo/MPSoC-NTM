@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_exponentiator_function is
+entity ntm_vector_power_function is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -59,27 +59,34 @@ entity ntm_vector_exponentiator_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
+
+    DATA_ENABLE : out std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_vector_exponentiator_function_architecture of ntm_vector_exponentiator_function is
+architecture ntm_vector_power_function_architecture of ntm_vector_power_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type exponentiator_ctrl_fsm is (
+  -- Finite State Machine
+  type power_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    ENDER_STATE,                        -- STEP 2
+    CLEAN_STATE,                        -- STEP 3
+    OPERATION_STATE                     -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -91,19 +98,19 @@ architecture ntm_vector_exponentiator_function_architecture of ntm_vector_expone
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
+  signal power_ctrl_fsm_int : power_ctrl_fsm;
+
+  -- Buffer
+  signal vector_a_int : vector_buffer;
+  signal vector_b_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- SCALAR EXPONENTIATOR
-  -- CONTROL
-  signal start_scalar_exponentiator_function : std_logic;
-  signal ready_scalar_exponentiator_function : std_logic;
-
-  -- DATA
-  signal data_in_scalar_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_int : std_logic;
+  signal data_b_in_int : std_logic;
 
 begin
 
@@ -111,7 +118,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator(DATA_IN)
+  -- DATA_OUT = power(DATA_A_IN, DATA_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -123,108 +130,136 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_ENABLE <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_exponentiator_function <= '0';
+      data_a_in_int <= '0';
+      data_b_in_int <= '0';
 
       index_loop <= ZERO_CONTROL;
 
-      -- Data Internal
-      data_in_scalar_exponentiator_function <= ZERO_DATA;
-
     elsif (rising_edge(CLK)) then
 
-      case exponentiator_ctrl_fsm_int is
+      case power_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_ENABLE <= '0';
+
           if (START = '1') then
             -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            DATA_ENABLE <= '1';
 
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= INPUT_STATE;
+            power_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
+            DATA_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_in_scalar_exponentiator_function <= DATA_IN;
+            vector_a_int(to_integer(unsigned(index_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            start_scalar_exponentiator_function <= '1';
+            data_a_in_int <= '1';
+          end if;
+
+          if (DATA_B_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_b_int(to_integer(unsigned(index_loop))) <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_int <= '1';
+          end if;
+
+          if (data_a_in_int = '1' and data_b_in_int = '1') then
+            -- Control Internal
+            data_a_in_int <= '0';
+            data_b_in_int <= '0';
+
+            -- Data Internal
+            vector_out_int <= function_vector_power (
+              SIZE_IN => SIZE_IN,
+
+              vector_a_input => vector_a_int,
+              vector_b_input => vector_b_int
+              );
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            power_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
+          DATA_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_exponentiator_function = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
 
-              -- Control Internal
-              index_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              exponentiator_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              exponentiator_ctrl_fsm_int <= INPUT_STATE;
-            end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_exponentiator_function;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            -- FSM Control
+            power_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator_function <= '0';
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
+            -- FSM Control
+            power_ctrl_fsm_int <= INPUT_STATE;
           end if;
+
+        when CLEAN_STATE =>             -- STEP 3
+
+          -- Control Outputs
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          power_ctrl_fsm_int <= OPERATION_STATE;
+
+        when OPERATION_STATE =>         -- STEP 4
+
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            power_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            power_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+          power_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
-
-  -- SCALAR EXPONENTIATOR
-  scalar_exponentiator_function : ntm_scalar_exponentiator_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_exponentiator_function,
-      READY => ready_scalar_exponentiator_function,
-
-      -- DATA
-      DATA_IN  => data_in_scalar_exponentiator_function,
-      DATA_OUT => data_out_scalar_exponentiator_function
-      );
 
 end architecture;

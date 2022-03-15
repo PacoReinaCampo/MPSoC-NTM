@@ -92,6 +92,12 @@ architecture ntm_scalar_logarithm_function_architecture of ntm_scalar_logarithm_
 
 begin
 
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- DATA_OUT = logarithm(DATA_IN)
+
   ctrl_fsm : process (CLK, RST)
   begin
     if(RST = '0') then

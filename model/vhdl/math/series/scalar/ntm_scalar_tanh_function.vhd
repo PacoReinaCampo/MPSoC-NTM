@@ -92,6 +92,12 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
 
 begin
 
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- DATA_OUT = tanh(DATA_IN)
+
   ctrl_fsm : process (CLK, RST)
   begin
     if(RST = '0') then

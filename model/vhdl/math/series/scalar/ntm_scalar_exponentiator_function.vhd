@@ -92,6 +92,12 @@ architecture ntm_scalar_exponentiator_function_architecture of ntm_scalar_expone
 
 begin
 
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- DATA_OUT = exponentiator(DATA_IN)
+
   ctrl_fsm : process (CLK, RST)
   begin
     if(RST = '0') then

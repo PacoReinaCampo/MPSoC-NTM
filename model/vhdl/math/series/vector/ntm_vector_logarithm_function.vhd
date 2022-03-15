@@ -111,7 +111,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(1 + DATA_IN)
+  -- DATA_OUT = logarithm(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

@@ -48,7 +48,7 @@ use work.ntm_math_pkg.all;
 use ieee.math_real.all;
 use ieee.float_pkg.all;
 
-entity ntm_scalar_sinh_function is
+entity ntm_scalar_power_function is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -63,18 +63,19 @@ entity ntm_scalar_sinh_function is
     READY : out std_logic;
 
     -- DATA
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
-end ntm_scalar_sinh_function;
+end ntm_scalar_power_function;
 
-architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function is
+architecture ntm_scalar_power_function_architecture of ntm_scalar_power_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type sinh_ctrl_fsm is (
+  type power_ctrl_fsm is (
     STARTER_STATE,
     ENDER_STATE
     );
@@ -88,7 +89,7 @@ architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal sinh_ctrl_fsm_int : sinh_ctrl_fsm;
+  signal power_ctrl_fsm_int : power_ctrl_fsm;
 
 begin
 
@@ -96,7 +97,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = sinh(DATA_IN)
+  -- DATA_OUT = power(DATA_A_IN, DATA_B_IN)
 
   ctrl_fsm : process (CLK, RST)
   begin
@@ -109,34 +110,35 @@ begin
 
     elsif rising_edge(CLK) then
 
-      case sinh_ctrl_fsm_int is
+      case power_ctrl_fsm_int is
         when STARTER_STATE =>
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- FSM Control
-            sinh_ctrl_fsm_int <= ENDER_STATE;
+            power_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
         when ENDER_STATE =>
 
           -- Data Outputs
-          DATA_OUT <= function_scalar_sinh (
-            scalar_input => DATA_IN
+          DATA_OUT <= function_scalar_power (
+            scalar_a_input => DATA_A_IN,
+            scalar_b_input => DATA_B_IN
             );
 
           -- Control Outputs
           READY <= '1';
 
           -- FSM Control
-          sinh_ctrl_fsm_int <= STARTER_STATE;
+          power_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          sinh_ctrl_fsm_int <= STARTER_STATE;
+          power_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-end ntm_scalar_sinh_function_architecture;
+end ntm_scalar_power_function_architecture;
