@@ -683,17 +683,31 @@ package body ntm_core_pkg is
     vector_w_input : vector_buffer
     ) return matrix_buffer is
 
+    variable matrix_operation_output : matrix_buffer;
+
     variable matrix_m_output : matrix_buffer;
 
   begin
 
     -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_a_input(k))))));
-      end loop;
-    end loop;
+    matrix_operation_output := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_N_IN,
+      SIZE_B_IN => SIZE_W_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_a_input
+      );
+
+    matrix_m_output := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_m_input,
+      matrix_b_input => matrix_operation_output
+      );
 
     return matrix_m_output;
   end function function_ntm_writing;
@@ -707,6 +721,8 @@ package body ntm_core_pkg is
     vector_w_input : vector_buffer
     ) return matrix_buffer is
 
+    variable matrix_ones_int : matrix_buffer;
+
     variable matrix_m_output : matrix_buffer;
 
   begin
@@ -715,9 +731,35 @@ package body ntm_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(ONE_REAL - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k))))));
+        matrix_ones_int(j, k) := ONE_DATA;
       end loop;
     end loop;
+
+    matrix_operation_output := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_N_IN,
+      SIZE_B_IN => SIZE_W_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_e_input
+      );
+
+    matrix_operation_output := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_ones_int,
+      matrix_b_input => matrix_operation_output
+      );
+
+    matrix_m_output := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      matrix_a_input => matrix_m_input,
+      matrix_b_input => matrix_operation_output
+      );
 
     return matrix_m_output;
   end function function_ntm_erasing;

@@ -1750,7 +1750,7 @@ package body dnc_core_pkg is
     vector_e_input : vector_buffer
     ) return matrix_buffer is
 
-    variable matrix_ones_output : matrix_buffer;
+    variable matrix_ones_int : matrix_buffer;
 
     variable matrix_first_operation_output  : matrix_buffer;
     variable matrix_second_operation_output : matrix_buffer;
@@ -1763,7 +1763,7 @@ package body dnc_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_ones_output(j, k) := ONE_DATA;
+        matrix_ones_int(j, k) := ONE_DATA;
       end loop;
     end loop;
 
@@ -1781,7 +1781,7 @@ package body dnc_core_pkg is
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
-      matrix_a_input => matrix_ones_output,
+      matrix_a_input => matrix_ones_int,
       matrix_b_input => matrix_first_operation_output
       );
 
