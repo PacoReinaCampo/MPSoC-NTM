@@ -1999,17 +1999,87 @@ package body dnc_core_pkg is
     matrix_f_input : matrix_buffer
     ) return matrix_buffer is
 
+    variable matrix_operation_int  : matrix_buffer;
+    variable matrix_multiplier_int : matrix_buffer;
+    variable matrix_adder_int      : matrix_buffer;
+
     variable matrix_w_output : matrix_buffer;
 
   begin
 
-    -- w(t;i,j) = pi(t;i)[1]·b(t;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;j)
+    -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_w_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_pi_input(i, 0)))*to_real(to_float(matrix_b_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 1)))*to_real(to_float(matrix_c_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 2)))*to_real(to_float(matrix_f_input(i, j))))));
+        matrix_operation_int(i, j) := matrix_pi_input(j, 0);
       end loop;
     end loop;
+
+    matrix_multiplier_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_b_input
+      );
+
+    matrix_adder_int := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => ZERO_DATA,
+      matrix_b_input => matrix_multiplier_int
+      );
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_operation_int(i, j) := matrix_pi_input(j, 1);
+      end loop;
+    end loop;
+
+    matrix_multiplier_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_c_input
+      );
+
+    matrix_adder_int := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_multiplier_int,
+      matrix_b_input => matrix_adder_int
+      );
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_operation_int(i, j) := matrix_pi_input(j, 2);
+      end loop;
+    end loop;
+
+    matrix_multiplier_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_f_input
+      );
+
+    matrix_w_output := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_multiplier_int,
+      matrix_b_input => matrix_adder_int
+      );
 
     return matrix_w_output;
   end function function_dnc_read_weighting;
@@ -2034,7 +2104,7 @@ package body dnc_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-2-i loop
-        if (to_real(to_float(vector_operation_int(j), float64'high, -float64'low)) > to_real(to_float(vector_operation_int(j + 1), float64'high, -float64'low))) then
+        if (unsigned(vector_operation_int(j)) > unsigned(vector_operation_int(j + 1))) then
           scalar_operation_int := vector_operation_int(j);
 
           vector_operation_int(j) := vector_operation_int(j + 1);
