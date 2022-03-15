@@ -2967,9 +2967,6 @@ package body dnc_core_pkg is
     vector_x_input : vector_buffer
     ) return vector_buffer is
 
-    -- Constant
-    constant FIVE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
-
     -- Trainer Variable
     variable vector_xi_int  : vector_buffer;
     variable matrix_rho_int : matrix_buffer;

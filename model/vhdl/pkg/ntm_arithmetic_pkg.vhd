@@ -56,6 +56,8 @@ package ntm_arithmetic_pkg is
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+  constant FOUR_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(4, CONTROL_SIZE));
+  constant FIVE_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, CONTROL_SIZE));
 
   constant EULER : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
@@ -66,6 +68,8 @@ package ntm_arithmetic_pkg is
   constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0, float64'high, -float64'low));
+  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(4.0, float64'high, -float64'low));
+  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(5.0, float64'high, -float64'low));
 
   constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001, float64'high, -float64'low));
 

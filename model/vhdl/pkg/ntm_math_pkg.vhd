@@ -2964,9 +2964,7 @@ package body ntm_math_pkg is
       for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
         for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
           for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-            tensor_output(i, j, k) := function_scalar_float_adder (
-              OPERATION => '0',
-
+            tensor_output(i, j, k) := function_scalar_float_multiplier (
               scalar_a_input => tensor_input(t, i, j, k),
               scalar_b_input => tensor_output(i, j, k)
               );
@@ -3664,22 +3662,26 @@ package body ntm_math_pkg is
     matrix_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable matrix_output : matrix_buffer;
   begin
     -- Data Inputs
-    data_summation_int := ZERO_DATA;
-
-    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int, float64'high, -float64'low)) + to_real(to_float(matrix_input(m, n), float64'high, -float64'low)), float64'high, -float64'low));
-      end loop;
-    end loop;
-
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))*to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+        matrix_output(i, j) := ZERO_DATA;
+
+        scalar_operation_int := function_scalar_float_multiplier (
+          scalar_a_input => matrix_input(i, j),
+          scalar_b_input => LENGTH_IN
+          );
+
+        matrix_output(i, j) := function_scalar_float_adder (
+          OPERATION => '0',
+
+          scalar_a_input => scalar_operation_int,
+          scalar_b_input => matrix_output(i, j)
+          );
       end loop;
     end loop;
 
@@ -3772,25 +3774,27 @@ package body ntm_math_pkg is
     tensor_input : tensor_buffer
     ) return tensor_buffer is
 
-    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable tensor_output : tensor_buffer;
   begin
     -- Data Inputs
-    data_summation_int := ZERO_DATA;
-
-    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int, float64'high, -float64'low)) + to_real(to_float(tensor_input(m, n, p), float64'high, -float64'low)), float64'high, -float64'low));
-        end loop;
-      end loop;
-    end loop;
-
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_input(i, j, k), float64'high, -float64'low))*to_real(to_float(LENGTH_IN, float64'high, -float64'low)), float64'high, -float64'low));
+          tensor_output(i, j, k) := ZERO_DATA;
+
+          scalar_operation_int := function_scalar_float_multiplier (
+            scalar_a_input => tensor_input(i, j, k),
+            scalar_b_input => LENGTH_IN
+            );
+
+          tensor_output(i, j, k) := function_scalar_float_adder (
+            OPERATION => '0',
+
+            scalar_a_input => scalar_operation_int,
+            scalar_b_input => tensor_output(i, j, k)
+            );
         end loop;
       end loop;
     end loop;
