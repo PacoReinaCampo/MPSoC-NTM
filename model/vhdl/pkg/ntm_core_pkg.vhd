@@ -638,7 +638,7 @@ package body ntm_core_pkg is
     matrix_m_input : matrix_buffer
     ) return vector_buffer is
 
-    variable matrix_operation_output : matrix_buffer;
+    variable matrix_operation_int : matrix_buffer;
 
     variable vector_r_output : vector_buffer;
 
@@ -648,15 +648,15 @@ package body ntm_core_pkg is
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_operation_output(j, k) := vector_w_input(j);
+        matrix_operation_int(j, k) := vector_w_input(j);
       end loop;
     end loop;
 
-    matrix_operation_output := function_matrix_float_multiplier (
+    matrix_operation_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
-      matrix_a_input => matrix_operation_output,
+      matrix_a_input => matrix_operation_int,
       matrix_b_input => matrix_m_input
       );
 
@@ -664,7 +664,7 @@ package body ntm_core_pkg is
       SIZE_IN   => SIZE_W_IN,
       LENGTH_IN => SIZE_N_IN,
 
-      vector_input => matrix_operation_output
+      vector_input => matrix_operation_int
       );
 
     return vector_r_output;
@@ -683,7 +683,7 @@ package body ntm_core_pkg is
     vector_w_input : vector_buffer
     ) return matrix_buffer is
 
-    variable matrix_operation_output : matrix_buffer;
+    variable matrix_operation_int : matrix_buffer;
 
     variable matrix_m_output : matrix_buffer;
 
@@ -691,7 +691,7 @@ package body ntm_core_pkg is
 
     -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-    matrix_operation_output := function_transpose_vector_product (
+    matrix_operation_int := function_transpose_vector_product (
       SIZE_A_IN => SIZE_N_IN,
       SIZE_B_IN => SIZE_W_IN,
 
@@ -706,7 +706,7 @@ package body ntm_core_pkg is
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_m_input,
-      matrix_b_input => matrix_operation_output
+      matrix_b_input => matrix_operation_int
       );
 
     return matrix_m_output;
@@ -723,6 +723,8 @@ package body ntm_core_pkg is
 
     variable matrix_ones_int : matrix_buffer;
 
+    variable matrix_operation_int : matrix_buffer;
+
     variable matrix_m_output : matrix_buffer;
 
   begin
@@ -735,7 +737,7 @@ package body ntm_core_pkg is
       end loop;
     end loop;
 
-    matrix_operation_output := function_transpose_vector_product (
+    matrix_operation_int := function_transpose_vector_product (
       SIZE_A_IN => SIZE_N_IN,
       SIZE_B_IN => SIZE_W_IN,
 
@@ -743,14 +745,14 @@ package body ntm_core_pkg is
       vector_b_input => vector_e_input
       );
 
-    matrix_operation_output := function_matrix_float_adder (
+    matrix_operation_int := function_matrix_float_adder (
       OPERATION => '1',
 
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_ones_int,
-      matrix_b_input => matrix_operation_output
+      matrix_b_input => matrix_operation_int
       );
 
     matrix_m_output := function_matrix_float_multiplier (
@@ -758,7 +760,7 @@ package body ntm_core_pkg is
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_m_input,
-      matrix_b_input => matrix_operation_output
+      matrix_b_input => matrix_operation_int
       );
 
     return matrix_m_output;
@@ -777,60 +779,45 @@ package body ntm_core_pkg is
     matrix_m_input    : matrix_buffer
     ) return vector_buffer is
 
-    variable vector_operation_int : vector_buffer;
+    variable vector_i_operation_int : vector_buffer;
+    variable vector_j_operation_int : vector_buffer;
 
-    variable vector_m_operation_int : vector_buffer;
-    variable scalar_k_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable vector_summation_int : vector_buffer;
+    variable vector_beta_int : vector_buffer;
 
     variable vector_c_output : vector_buffer;
 
   begin
 
-    -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
+    -- C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      -- Dot product k,M[i,·]
-      vector_operation_int(i) := ZERO_DATA;
-
-      -- Module M[i,·]
-      vector_m_operation_int(i) := ZERO_DATA;
+      vector_beta_int(i) := scalar_beta_input;
 
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        -- Dot product k,M[i,·]
-        vector_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i, j))))));
-
-        -- Module M[i,·]
-        vector_m_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_m_operation_int(i))) + (to_real(to_float(matrix_m_input(i, j)))*to_real(to_float(matrix_m_input(i, j))))));
+        vector_j_operation_int(j) := matrix_m_input(i, j);
       end loop;
+
+      vector_j_operation_int := function_vector_cosine_similarity (
+        LENGTH_IN => SIZE_J_IN,
+
+        vector_a_input => vector_k_input,
+        vector_b_input => vector_j_operation_int
+        );
+
+      vector_i_operation_int(i) := vector_j_operation_int(to_integer(unsigned(SIZE_J_IN))-1);
     end loop;
 
-    -- Module k
-    for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-      scalar_k_operation_int := std_logic_vector(to_float(to_real(to_float(scalar_k_operation_int)) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(vector_k_input(j))))));
-    end loop;
+    vector_i_operation_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_I_IN,
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      vector_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(i))))))));
-    end loop;
-
-    scalar_summation_int := function_scalar_summation (
-      LENGTH_IN => SIZE_J_IN,
-
-      scalar_input => vector_operation_int
+      vector_a_input => vector_i_operation_int,
+      vector_b_input => vector_beta_int
       );
 
-    for j in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      vector_summation_int(j) := scalar_summation_int;
-    end loop;
+    vector_c_output := function_vector_softmax (
+      SIZE_IN => SIZE_I_IN,
 
-    vector_c_output := function_vector_float_divider (
-      SIZE_IN => SIZE_J_IN,
-
-      vector_a_input => vector_c_output,
-      vector_b_input => vector_summation_int
+      vector_input => vector_i_operation_int
       );
 
     return vector_c_output;
@@ -860,6 +847,8 @@ package body ntm_core_pkg is
     variable vector_one_int : vector_buffer;
     variable vector_cg_int  : vector_buffer;
 
+    variable vector_gamma_int : vector_buffer;
+
     variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
     variable vector_summation_int : vector_buffer;
 
@@ -880,6 +869,8 @@ package body ntm_core_pkg is
     -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       vector_g_int(j) := scalar_g_input;
+
+      vector_gamma_int(j) := scalar_gamma_input;
 
       vector_one_int(j) := ONE_DATA;
     end loop;
@@ -925,9 +916,12 @@ package body ntm_core_pkg is
       );
 
     -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(vector_w_output(j)))**to_real(to_float(scalar_gamma_input))));
-    end loop;
+    vector_w_output := function_vector_power (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_a_input => vector_w_output,
+      vector_b_input => vector_gamma_int
+      );
 
     scalar_summation_int := function_scalar_summation (
       LENGTH_IN => SIZE_N_IN,

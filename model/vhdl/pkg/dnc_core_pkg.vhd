@@ -1519,60 +1519,45 @@ package body dnc_core_pkg is
     matrix_m_input    : matrix_buffer
     ) return vector_buffer is
 
-    variable vector_operation_int : vector_buffer;
+    variable vector_j_operation_int : vector_buffer;
+    variable vector_k_operation_int : vector_buffer;
 
-    variable vector_m_operation_int : vector_buffer;
-    variable scalar_k_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable vector_summation_int : vector_buffer;
+    variable vector_beta_int : vector_buffer;
 
     variable vector_c_output : vector_buffer;
 
   begin
 
-    -- C(M[j,·],k,beta)[j] = softmax(exponentiation(cosine_similarity(k,M[j,·])·beta))[j]
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      -- Dot product k,M[j,·]
-      vector_operation_int(j) := ZERO_DATA;
-
-      -- Module M[j,·]
-      vector_m_operation_int(j) := ZERO_DATA;
+      vector_beta_int(j) := scalar_beta_input;
 
       for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        -- Dot product k,M[j,·]
-        vector_operation_int(j) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(j))) + (to_real(to_float(vector_k_input(k)))*to_real(to_float(matrix_m_input(j, k))))));
-
-        -- Module M[j,·]
-        vector_m_operation_int(j) := std_logic_vector(to_float(to_real(to_float(vector_m_operation_int(j))) + (to_real(to_float(matrix_m_input(j, k)))*to_real(to_float(matrix_m_input(j, k))))));
+        vector_k_operation_int(k) := matrix_m_input(j, k);
       end loop;
+
+      vector_k_operation_int := function_vector_cosine_similarity (
+        LENGTH_IN => SIZE_W_IN,
+
+        vector_a_input => vector_k_input,
+        vector_b_input => vector_k_operation_int
+        );
+
+      vector_j_operation_int(j) := vector_k_operation_int(to_integer(unsigned(SIZE_W_IN))-1);
     end loop;
 
-    -- Module k
-    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-      scalar_k_operation_int := std_logic_vector(to_float(to_real(to_float(scalar_k_operation_int)) + (to_real(to_float(vector_k_input(k)))*to_real(to_float(vector_k_input(k))))));
-    end loop;
-
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_operation_int(j) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(j)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(j))))))));
-    end loop;
-
-    scalar_summation_int := function_scalar_summation (
-      LENGTH_IN => SIZE_N_IN,
-
-      scalar_input => vector_operation_int
-      );
-
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_summation_int(j) := scalar_summation_int;
-    end loop;
-
-    vector_c_output := function_vector_float_divider (
+    vector_j_operation_int := function_vector_float_multiplier (
       SIZE_IN => SIZE_N_IN,
 
-      vector_a_input => vector_operation_int,
-      vector_b_input => vector_summation_int
+      vector_a_input => vector_j_operation_int,
+      vector_b_input => vector_beta_int
+      );
+
+    vector_c_output := function_vector_softmax (
+      SIZE_IN => SIZE_N_IN,
+
+      vector_input => vector_j_operation_int
       );
 
     return vector_c_output;
@@ -1588,72 +1573,53 @@ package body dnc_core_pkg is
     matrix_m_input    : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_operation_int : matrix_buffer;
+    variable vector_k_input : vector_buffer;
 
-    variable matrix_m_operation_int : matrix_buffer;
+    variable matrix_j_operation_int : matrix_buffer;
     variable vector_k_operation_int : vector_buffer;
 
-    variable vector_summation_int : vector_buffer;
-    variable matrix_summation_int : matrix_buffer;
+    variable matrix_beta_int : matrix_buffer;
 
     variable matrix_c_output : matrix_buffer;
 
   begin
 
-    -- C(M[j,·],k,beta)[j] = softmax(exponentiation(cosine_similarity(k,M[j,·])·beta))[j]
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        -- Dot product k,M[j,·]
-        matrix_operation_int(i, j) := ZERO_DATA;
-
-        -- Module M[j,·]
-        matrix_m_operation_int(i, j) := ZERO_DATA;
+        matrix_beta_int(i, j) := vector_beta_input(i);
 
         for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          -- Dot product k,M[j,·]
-          matrix_operation_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_operation_int(i, j))) + (to_real(to_float(matrix_k_input(i, k)))*to_real(to_float(matrix_m_input(j, k))))));
+          vector_k_operation_int(k) := matrix_m_input(j, k);
 
-          -- Module M[j,·]
-          matrix_m_operation_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_m_operation_int(i, j))) + (to_real(to_float(matrix_m_input(j, k)))*to_real(to_float(matrix_m_input(j, k))))));
+          vector_k_input(k) := matrix_k_input(i, k);
         end loop;
+
+        vector_k_operation_int := function_vector_cosine_similarity (
+          LENGTH_IN => SIZE_W_IN,
+
+          vector_a_input => vector_k_input,
+          vector_b_input => vector_k_operation_int
+          );
+
+        matrix_j_operation_int(i, j) := vector_k_operation_int(to_integer(unsigned(SIZE_W_IN))-1);
       end loop;
     end loop;
 
-    -- Module k
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_k_operation_int(i) := ZERO_DATA;
-
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        vector_k_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_k_operation_int(i))) + (to_real(to_float(matrix_k_input(i, k)))*to_real(to_float(matrix_k_input(i, k))))));
-      end loop;
-    end loop;
-
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_operation_int(i, j) := std_logic_vector(to_float(exp(to_real(to_float(matrix_operation_int(i, j)))*to_real(to_float(vector_beta_input(i)))/(sqrt(to_real(to_float(vector_k_operation_int(i))))*sqrt(to_real(to_float(matrix_m_operation_int(i, j))))))));
-      end loop;
-    end loop;
-
-    vector_summation_int := function_vector_summation (
-      SIZE_IN   => SIZE_N_IN,
-      LENGTH_IN => SIZE_R_IN,
-
-      vector_input => matrix_operation_int
-      );
-
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_summation_int(i, j) := vector_summation_int(i);
-      end loop;
-    end loop;
-
-    matrix_c_output := function_matrix_float_divider (
+    matrix_j_operation_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
-      matrix_a_input => matrix_operation_int,
-      matrix_b_input => matrix_summation_int
+      matrix_a_input => matrix_j_operation_int,
+      matrix_b_input => matrix_beta_int
+      );
+
+    matrix_c_output := function_matrix_softmax (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_input => matrix_j_operation_int
       );
 
     return matrix_c_output;
@@ -1691,19 +1657,29 @@ package body dnc_core_pkg is
 
     -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
 
-    for g in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_operation_int(g, j) := matrix_l_input(j, g);
-      end loop;
-    end loop;
-
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        vector_operation_int(j) := ZERO_DATA;
+        vector_operation_int(j) := matrix_w_input(i, j);
+      end loop;
 
-        for g in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-          matrix_b_output(i, j) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(j))) + (to_real(to_float(matrix_operation_int(j, g)))*to_real(to_float(matrix_w_input(i, j))))));
-        end loop;
+      matrix_operation_int := function_matrix_transpose (
+        SIZE_I_IN => SIZE_N_IN,
+        SIZE_J_IN => SIZE_N_IN,
+
+        matrix_input => matrix_l_input
+       );
+
+      vector_operation_int := function_matrix_vector_product (
+        SIZE_A_I_IN => SIZE_N_IN,
+        SIZE_A_J_IN => SIZE_N_IN,
+        SIZE_B_IN   => SIZE_N_IN,
+
+        matrix_a_input => matrix_operation_int,
+        vector_b_input => vector_operation_int
+        );
+
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_b_output(i, j) := vector_operation_int(j);
       end loop;
     end loop;
 
@@ -1727,12 +1703,21 @@ package body dnc_core_pkg is
     -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for g in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        vector_operation_int(g) := ZERO_DATA;
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_operation_int(j) := matrix_w_input(i, j);
+      end loop;
 
-        for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-          matrix_f_output(i, j) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(g))) + (to_real(to_float(matrix_l_input(g, j)))*to_real(to_float(matrix_w_input(i, j))))));
-        end loop;
+      vector_operation_int := function_matrix_vector_product (
+        SIZE_A_I_IN => SIZE_N_IN,
+        SIZE_A_J_IN => SIZE_N_IN,
+        SIZE_B_IN   => SIZE_N_IN,
+
+        matrix_a_input => matrix_l_input,
+        vector_b_input => vector_operation_int
+        );
+
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_f_output(i, j) := vector_operation_int(j);
       end loop;
     end loop;
 
@@ -1817,7 +1802,7 @@ package body dnc_core_pkg is
     variable vector_ones_output : vector_buffer;
 
     variable vector_operation_output : vector_buffer;
-    variable matrix_operation_output : matrix_buffer;
+    variable matrix_operation_int : matrix_buffer;
 
     variable vector_psi_output : vector_buffer;
 
@@ -1840,15 +1825,15 @@ package body dnc_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_operation_output(i, j) := vector_operation_output(i);
+        matrix_operation_int(i, j) := vector_operation_output(i);
       end loop;
     end loop;
 
-    matrix_operation_output := function_matrix_float_multiplier (
+    matrix_operation_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
-      matrix_a_input => matrix_operation_output,
+      matrix_a_input => matrix_operation_int,
       matrix_b_input => matrix_w_input
       );
 
@@ -1856,7 +1841,7 @@ package body dnc_core_pkg is
       SIZE_IN   => SIZE_R_IN,
       LENGTH_IN => SIZE_N_IN,
 
-      vector_input => matrix_operation_output
+      vector_input => matrix_operation_int
       );
 
     return vector_psi_output;
@@ -1968,20 +1953,30 @@ package body dnc_core_pkg is
   begin
 
     -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
-    matrix_operation_int := function_matrix_transpose (
-      SIZE_I_IN => SIZE_N_IN,
-      SIZE_J_IN => SIZE_W_IN,
-
-      matrix_input => matrix_m_input
-      );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        vector_operation_int(k) := ZERO_DATA;
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_operation_int(j) := matrix_w_input(i, j);
+      end loop;
 
-        for j in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          matrix_r_output(i, k) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(k))) + (to_real(to_float(matrix_operation_int(k, j)))*to_real(to_float(matrix_w_input(i, j))))));
-        end loop;
+      matrix_operation_int := function_matrix_transpose (
+        SIZE_I_IN => SIZE_N_IN,
+        SIZE_J_IN => SIZE_W_IN,
+
+        matrix_input => matrix_m_input
+       );
+
+      vector_operation_int := function_matrix_vector_product (
+        SIZE_A_I_IN => SIZE_W_IN,
+        SIZE_A_J_IN => SIZE_N_IN,
+        SIZE_B_IN   => SIZE_N_IN,
+
+        matrix_a_input => matrix_operation_int,
+        vector_b_input => vector_operation_int
+        );
+
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_r_output(i, k) := vector_operation_int(k);
       end loop;
     end loop;
 
@@ -2000,7 +1995,10 @@ package body dnc_core_pkg is
     ) return matrix_buffer is
 
     variable matrix_operation_int  : matrix_buffer;
-    variable matrix_multiplier_int : matrix_buffer;
+
+    variable matrix_first_multiplier_int  : matrix_buffer;
+    variable matrix_second_multiplier_int : matrix_buffer;
+
     variable matrix_adder_int      : matrix_buffer;
 
     variable matrix_w_output : matrix_buffer;
@@ -2015,22 +2013,12 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    matrix_multiplier_int := function_matrix_float_multiplier (
+    matrix_first_multiplier_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
       matrix_a_input => matrix_operation_int,
       matrix_b_input => matrix_b_input
-      );
-
-    matrix_adder_int := function_matrix_float_adder (
-      OPERATION => '0',
-
-      SIZE_I_IN => SIZE_R_IN,
-      SIZE_J_IN => SIZE_N_IN,
-
-      matrix_a_input => ZERO_DATA,
-      matrix_b_input => matrix_multiplier_int
       );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
@@ -2039,7 +2027,7 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    matrix_multiplier_int := function_matrix_float_multiplier (
+    matrix_second_multiplier_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
@@ -2053,8 +2041,8 @@ package body dnc_core_pkg is
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
-      matrix_a_input => matrix_multiplier_int,
-      matrix_b_input => matrix_adder_int
+      matrix_a_input => matrix_first_multiplier_int,
+      matrix_b_input => matrix_second_multiplier_int
       );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
@@ -2063,7 +2051,7 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    matrix_multiplier_int := function_matrix_float_multiplier (
+    matrix_first_multiplier_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
@@ -2077,7 +2065,7 @@ package body dnc_core_pkg is
       SIZE_I_IN => SIZE_R_IN,
       SIZE_J_IN => SIZE_N_IN,
 
-      matrix_a_input => matrix_multiplier_int,
+      matrix_a_input => matrix_first_multiplier_int,
       matrix_b_input => matrix_adder_int
       );
 
@@ -2127,6 +2115,14 @@ package body dnc_core_pkg is
     vector_p_input : vector_buffer
     ) return matrix_buffer is
 
+    variable matrix_ones_int : matrix_buffer;
+
+    variable matrix_w_i_int : matrix_buffer;
+    variable matrix_w_j_int : matrix_buffer;
+
+    variable matrix_first_operation_int  : matrix_buffer;
+    variable matrix_second_operation_int : matrix_buffer;
+
     variable matrix_l_output : matrix_buffer;
 
   begin
@@ -2137,9 +2133,58 @@ package body dnc_core_pkg is
 
     for g in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_l_output(g, j) := std_logic_vector(to_float((ONE_REAL - to_real(to_float(vector_w_input(g))) - to_real(to_float(vector_w_input(j))))*to_real(to_float(matrix_l_input(g, j))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_p_input(j))))));
+        matrix_ones_int(g, j) := ONE_DATA;
+
+        matrix_w_i_int(g, j) := vector_w_input(g);
+        matrix_w_j_int(g, j) := vector_w_input(j);
       end loop;
     end loop;
+
+    matrix_first_operation_int := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_ones_int,
+      matrix_b_input => matrix_w_i_int
+      );
+
+    matrix_first_operation_int := function_matrix_float_adder (
+      OPERATION => '1',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_first_operation_int,
+      matrix_b_input => matrix_w_j_int
+      );
+
+    matrix_first_operation_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_first_operation_int,
+      matrix_b_input => matrix_l_input
+      );
+
+    matrix_second_operation_int := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_N_IN,
+      SIZE_B_IN => SIZE_N_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_p_input
+      );
+
+    matrix_l_output := function_matrix_float_adder (
+      OPERATION => '0',
+
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_first_operation_int,
+      matrix_b_input => matrix_second_operation_int
+      );
 
     return matrix_l_output;
   end function function_dnc_temporal_link_matrix;

@@ -1893,6 +1893,12 @@ package ntm_math_pkg is
 
     ) return std_logic_vector;
 
+  function function_scalar_power (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
   function function_scalar_logarithm (
     scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
 
@@ -1920,6 +1926,14 @@ package ntm_math_pkg is
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  function function_vector_power (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
 
     ) return vector_buffer;
 
@@ -1958,6 +1972,15 @@ package ntm_math_pkg is
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_power (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
 
     ) return matrix_buffer;
 
@@ -2881,6 +2904,20 @@ package body ntm_math_pkg is
     return scalar_output;
   end function function_scalar_exponentiator;
 
+  function function_scalar_power (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low))**to_real(to_float(scalar_b_input, float64'high, -float64'low))));
+
+    return scalar_output;
+  end function function_scalar_power;
+
   function function_scalar_logarithm (
     scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
 
@@ -2952,6 +2989,24 @@ package body ntm_math_pkg is
 
     return vector_output;
   end function function_vector_exponentiator;
+
+  function function_vector_power (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low))**to_real(to_float(vector_b_input(i), float64'high, -float64'low))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_power;
 
   function function_vector_logarithm (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -3039,6 +3094,27 @@ package body ntm_math_pkg is
 
     return matrix_output;
   end function function_matrix_exponentiator;
+
+  function function_matrix_power (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low))**to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_power;
 
   function function_matrix_logarithm (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
