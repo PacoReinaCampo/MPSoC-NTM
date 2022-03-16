@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_power_function is
+entity ntm_vector_sqrt_function is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -59,27 +59,24 @@ entity ntm_vector_power_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_ENABLE : in std_logic;
-    DATA_B_IN_ENABLE : in std_logic;
+    DATA_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
+    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_vector_power_function_architecture of ntm_vector_power_function is
+architecture ntm_vector_sqrt_function_architecture of ntm_vector_sqrt_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type power_ctrl_fsm is (
+  type sqrt_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE                         -- STEP 2
@@ -94,24 +91,19 @@ architecture ntm_vector_power_function_architecture of ntm_vector_power_function
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal power_ctrl_fsm_int : power_ctrl_fsm;
+  signal sqrt_ctrl_fsm_int : sqrt_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_power_int : std_logic;
-  signal data_b_in_power_int : std_logic;
-
-  -- MULTIPLIER
+  -- SCALAR SQRT
   -- CONTROL
-  signal start_scalar_power_function : std_logic;
-  signal ready_scalar_power_function : std_logic;
+  signal start_scalar_sqrt_function : std_logic;
+  signal ready_scalar_sqrt_function : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_scalar_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_sqrt_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_sqrt_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -119,7 +111,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = power(DATA_A_IN, DATA_B_IN)
+  -- DATA_OUT = sqrt(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -134,20 +126,16 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_power_function <= '0';
+      start_scalar_sqrt_function <= '0';
 
       index_loop <= ZERO_CONTROL;
 
-      data_a_in_power_int <= '0';
-      data_b_in_power_int <= '0';
-
       -- Data Internal
-      data_a_in_scalar_power_function <= ZERO_DATA;
-      data_b_in_scalar_power_function <= ZERO_DATA;
+      data_in_scalar_sqrt_function <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case power_ctrl_fsm_int is
+      case sqrt_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -160,7 +148,7 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            power_ctrl_fsm_int <= INPUT_STATE;
+            sqrt_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Outputs
             DATA_OUT_ENABLE <= '0';
@@ -168,31 +156,15 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_A_IN_ENABLE = '1') then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_power_function <= DATA_A_IN;
+            data_in_scalar_sqrt_function <= DATA_IN;
 
             -- Control Internal
-            data_a_in_power_int <= '1';
-          end if;
-
-          if (DATA_B_IN_ENABLE = '1') then
-            -- Data Inputs
-            data_b_in_scalar_power_function <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_power_int <= '1';
-          end if;
-
-          if (data_a_in_power_int = '1' and data_b_in_power_int = '1') then
-            -- Control Internal
-            start_scalar_power_function <= '1';
-
-            data_a_in_power_int <= '0';
-            data_b_in_power_int <= '0';
+            start_scalar_sqrt_function <= '1';
 
             -- FSM Control
-            power_ctrl_fsm_int <= ENDER_STATE;
+            sqrt_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -200,7 +172,7 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_power_function = '1') then
+          if (ready_scalar_sqrt_function = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -209,37 +181,34 @@ begin
               index_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              power_ctrl_fsm_int <= STARTER_STATE;
+              sqrt_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              power_ctrl_fsm_int <= INPUT_STATE;
+              sqrt_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_power_function;
+            DATA_OUT <= data_out_scalar_sqrt_function;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_power_function <= '0';
-
-            data_a_in_power_int <= '0';
-            data_b_in_power_int <= '0';
+            start_scalar_sqrt_function <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          power_ctrl_fsm_int <= STARTER_STATE;
+          sqrt_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- SCALAR POWER
-  scalar_power_function : ntm_scalar_power_function
+  -- SCALAR SQRT
+  scalar_sqrt_function : ntm_scalar_sqrt_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -250,14 +219,12 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_power_function,
-      READY => ready_scalar_power_function,
+      START => start_scalar_sqrt_function,
+      READY => ready_scalar_sqrt_function,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_power_function,
-      DATA_B_IN => data_b_in_scalar_power_function,
-
-      DATA_OUT => data_out_scalar_power_function
+      DATA_IN  => data_in_scalar_sqrt_function,
+      DATA_OUT => data_out_scalar_sqrt_function
       );
 
 end architecture;

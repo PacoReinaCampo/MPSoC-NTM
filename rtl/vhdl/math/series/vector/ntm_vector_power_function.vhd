@@ -43,7 +43,6 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
-use work.ntm_math_pkg.all;
 
 entity ntm_vector_power_function is
   generic (
@@ -102,7 +101,7 @@ architecture ntm_vector_power_function_architecture of ntm_vector_power_function
   signal data_a_in_power_int : std_logic;
   signal data_b_in_power_int : std_logic;
 
-  -- MULTIPLIER
+  -- POWER
   -- CONTROL
   signal start_scalar_power_function : std_logic;
   signal ready_scalar_power_function : std_logic;
@@ -126,7 +125,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';

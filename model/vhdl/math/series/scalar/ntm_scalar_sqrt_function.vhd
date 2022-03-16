@@ -48,7 +48,7 @@ use work.ntm_math_pkg.all;
 use ieee.math_real.all;
 use ieee.float_pkg.all;
 
-entity ntm_scalar_sinh_function is
+entity ntm_scalar_sqrt_function is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -66,15 +66,15 @@ entity ntm_scalar_sinh_function is
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
-end ntm_scalar_sinh_function;
+end ntm_scalar_sqrt_function;
 
-architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function is
+architecture ntm_scalar_sqrt_function_architecture of ntm_scalar_sqrt_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type sinh_ctrl_fsm is (
+  type sqrt_ctrl_fsm is (
     STARTER_STATE,
     ENDER_STATE
     );
@@ -88,7 +88,7 @@ architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal sinh_ctrl_fsm_int : sinh_ctrl_fsm;
+  signal sqrt_ctrl_fsm_int : sqrt_ctrl_fsm;
 
 begin
 
@@ -96,7 +96,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = sinh(DATA_IN)
+  -- DATA_OUT = sqrt(DATA_IN)
 
   ctrl_fsm : process (CLK, RST)
   begin
@@ -109,20 +109,20 @@ begin
 
     elsif rising_edge(CLK) then
 
-      case sinh_ctrl_fsm_int is
+      case sqrt_ctrl_fsm_int is
         when STARTER_STATE =>
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- FSM Control
-            sinh_ctrl_fsm_int <= ENDER_STATE;
+            sqrt_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
         when ENDER_STATE =>
 
           -- Data Outputs
-          DATA_OUT <= function_scalar_sinh (
+          DATA_OUT <= function_scalar_sqrt (
             scalar_input => DATA_IN
             );
 
@@ -130,13 +130,13 @@ begin
           READY <= '1';
 
           -- FSM Control
-          sinh_ctrl_fsm_int <= STARTER_STATE;
+          sqrt_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          sinh_ctrl_fsm_int <= STARTER_STATE;
+          sqrt_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-end ntm_scalar_sinh_function_architecture;
+end ntm_scalar_sqrt_function_architecture;
