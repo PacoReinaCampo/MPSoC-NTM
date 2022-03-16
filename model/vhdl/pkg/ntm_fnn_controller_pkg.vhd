@@ -845,7 +845,7 @@ package body ntm_fnn_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-           matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(t, l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -1103,17 +1103,17 @@ package body ntm_fnn_controller_pkg is
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
           for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          scalar_operation_int := function_scalar_float_multiplier (
-            scalar_a_input => vector_dh_int(t, l),
-            scalar_b_input => matrix_rho_input(t, i, m)
-            );
+            scalar_operation_int := function_scalar_float_multiplier (
+              scalar_a_input => vector_dh_int(t, l),
+              scalar_b_input => matrix_rho_input(t, i, m)
+              );
 
-          tensor_d_output(t, l, i, m) := function_scalar_float_adder (
-            OPERATION => '0',
+            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+              OPERATION => '0',
 
-            scalar_a_input => scalar_operation_int,
-            scalar_b_input => tensor_d_output(t, l, i, m)
-            );
+              scalar_a_input => scalar_operation_int,
+              scalar_b_input => tensor_d_output(t, l, i, m)
+              );
           end loop;
         end loop;
       end loop;

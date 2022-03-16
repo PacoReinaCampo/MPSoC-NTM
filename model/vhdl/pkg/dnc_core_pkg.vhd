@@ -1667,7 +1667,7 @@ package body dnc_core_pkg is
         SIZE_J_IN => SIZE_N_IN,
 
         matrix_input => matrix_l_input
-       );
+        );
 
       vector_operation_int := function_matrix_vector_product (
         SIZE_A_I_IN => SIZE_N_IN,
@@ -1802,7 +1802,7 @@ package body dnc_core_pkg is
     variable vector_ones_output : vector_buffer;
 
     variable vector_operation_output : vector_buffer;
-    variable matrix_operation_int : matrix_buffer;
+    variable matrix_operation_int    : matrix_buffer;
 
     variable vector_psi_output : vector_buffer;
 
@@ -1964,7 +1964,7 @@ package body dnc_core_pkg is
         SIZE_J_IN => SIZE_W_IN,
 
         matrix_input => matrix_m_input
-       );
+        );
 
       vector_operation_int := function_matrix_vector_product (
         SIZE_A_I_IN => SIZE_W_IN,
@@ -1994,12 +1994,12 @@ package body dnc_core_pkg is
     matrix_f_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_operation_int  : matrix_buffer;
+    variable matrix_operation_int : matrix_buffer;
 
     variable matrix_first_multiplier_int  : matrix_buffer;
     variable matrix_second_multiplier_int : matrix_buffer;
 
-    variable matrix_adder_int      : matrix_buffer;
+    variable matrix_adder_int : matrix_buffer;
 
     variable matrix_w_output : matrix_buffer;
 

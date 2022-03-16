@@ -2028,141 +2028,6 @@ package ntm_math_pkg is
     ) return tensor_buffer;
 
   -----------------------------------------------------------------------
-  -- MATH - SERIES
-  -----------------------------------------------------------------------
-
-  -- SCALAR
-  function function_scalar_cosh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_exponentiator (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_sqrt (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_power (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_logarithm (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_sinh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  function function_scalar_tanh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector;
-
-  -- VECTOR
-  function function_vector_cosh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-
-    ) return vector_buffer;
-
-  function function_vector_exponentiator (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-
-    ) return vector_buffer;
-
-  function function_vector_power (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-
-    ) return vector_buffer;
-
-  function function_vector_logarithm (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-
-    ) return vector_buffer;
-
-  function function_vector_sinh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-
-    ) return vector_buffer;
-
-  function function_vector_tanh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-
-    ) return vector_buffer;
-
-  -- MATRIX
-  function function_matrix_cosh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  function function_matrix_exponentiator (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  function function_matrix_power (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  function function_matrix_logarithm (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  function function_matrix_sinh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  function function_matrix_tanh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-
-    ) return matrix_buffer;
-
-  -----------------------------------------------------------------------
   -- MATH - FUNCTION
   -----------------------------------------------------------------------
 
@@ -3267,319 +3132,6 @@ package body ntm_math_pkg is
   end function function_tensor_transpose;
 
   -----------------------------------------------------------------------
-  -- MATH - SERIES
-  -----------------------------------------------------------------------
-
-  -- SCALAR
-  function function_scalar_cosh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(cosh(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_cosh;
-
-  function function_scalar_exponentiator (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(exp(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_exponentiator;
-
-  function function_scalar_sqrt (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(sqrt(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_sqrt;
-
-  function function_scalar_power (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(to_real(to_float(scalar_a_input, float64'high, -float64'low))**to_real(to_float(scalar_b_input, float64'high, -float64'low))));
-
-    return scalar_output;
-  end function function_scalar_power;
-
-  function function_scalar_logarithm (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(log(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_logarithm;
-
-  function function_scalar_sinh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(sinh(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_sinh;
-
-  function function_scalar_tanh (
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_float(tanh(to_real(to_float(scalar_input, float64'high, -float64'low))), float64'high, -float64'low));
-
-    return scalar_output;
-  end function function_scalar_tanh;
-
-  -- VECTOR
-  function function_vector_cosh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(cosh(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
-    end loop;
-
-    return vector_output;
-  end function function_vector_cosh;
-
-  function function_vector_exponentiator (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
-    end loop;
-
-    return vector_output;
-  end function function_vector_exponentiator;
-
-  function function_vector_power (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_a_input(i), float64'high, -float64'low))**to_real(to_float(vector_b_input(i), float64'high, -float64'low))));
-    end loop;
-
-    return vector_output;
-  end function function_vector_power;
-
-  function function_vector_logarithm (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(log(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
-    end loop;
-
-    return vector_output;
-  end function function_vector_logarithm;
-
-  function function_vector_sinh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(sinh(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
-    end loop;
-
-    return vector_output;
-  end function function_vector_sinh;
-
-  function function_vector_tanh (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
-    end loop;
-
-    return vector_output;
-  end function function_vector_tanh;
-
-  -- MATRIX
-  function function_matrix_cosh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(cosh(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_cosh;
-
-  function function_matrix_exponentiator (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(exp(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_exponentiator;
-
-  function function_matrix_power (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_a_input(i, j), float64'high, -float64'low))**to_real(to_float(matrix_b_input(i, j), float64'high, -float64'low))));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_power;
-
-  function function_matrix_logarithm (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(log(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_logarithm;
-
-  function function_matrix_sinh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(sinh(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_sinh;
-
-  function function_matrix_tanh (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_float(tanh(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_tanh;
-
-  -----------------------------------------------------------------------
   -- MATH - FUNCTION
   -----------------------------------------------------------------------
 
@@ -3597,7 +3149,7 @@ package body ntm_math_pkg is
     scalar_operation_int := function_scalar_exponentiator (
       scalar_input => scalar_input
       );
-    
+
     scalar_operation_int := function_scalar_float_divider (
       scalar_a_input => ONE_DATA,
       scalar_b_input => scalar_operation_int
@@ -3609,7 +3161,7 @@ package body ntm_math_pkg is
       scalar_a_input => ONE_DATA,
       scalar_b_input => scalar_operation_int
       );
-    
+
     scalar_output := function_scalar_float_divider (
       scalar_a_input => ONE_DATA,
       scalar_b_input => scalar_operation_int
@@ -3638,11 +3190,11 @@ package body ntm_math_pkg is
       scalar_a_input => ONE_DATA,
       scalar_b_input => scalar_operation_int
       );
-    
+
     scalar_operation_int := function_scalar_logarithm (
       scalar_input => scalar_operation_int
       );
-    
+
     scalar_output := function_scalar_float_adder (
       OPERATION => '0',
 
@@ -3669,7 +3221,7 @@ package body ntm_math_pkg is
       scalar_operation_int := function_scalar_exponentiator (
         scalar_input => vector_input(i)
         );
-    
+
       scalar_operation_int := function_scalar_float_divider (
         scalar_a_input => ONE_DATA,
         scalar_b_input => scalar_operation_int
@@ -3681,7 +3233,7 @@ package body ntm_math_pkg is
         scalar_a_input => ONE_DATA,
         scalar_b_input => scalar_operation_int
         );
-    
+
       vector_output(i) := function_scalar_float_divider (
         scalar_a_input => ONE_DATA,
         scalar_b_input => scalar_operation_int
@@ -3713,15 +3265,15 @@ package body ntm_math_pkg is
         scalar_a_input => ONE_DATA,
         scalar_b_input => scalar_operation_int
         );
-    
+
       scalar_operation_int := function_scalar_logarithm (
         scalar_input => scalar_operation_int
         );
-    
+
       vector_output(i) := function_scalar_float_adder (
         OPERATION => '0',
 
-      scalar_a_input => ONE_DATA,
+        scalar_a_input => ONE_DATA,
         scalar_b_input => scalar_operation_int
         );
     end loop;
@@ -3747,7 +3299,7 @@ package body ntm_math_pkg is
         scalar_operation_int := function_scalar_exponentiator (
           scalar_input => matrix_input(i, j)
           );
-    
+
         scalar_operation_int := function_scalar_float_divider (
           scalar_a_input => ONE_DATA,
           scalar_b_input => scalar_operation_int
@@ -3759,7 +3311,7 @@ package body ntm_math_pkg is
           scalar_a_input => ONE_DATA,
           scalar_b_input => scalar_operation_int
           );
-    
+
         matrix_output(i, j) := function_scalar_float_divider (
           scalar_a_input => ONE_DATA,
           scalar_b_input => scalar_operation_int
@@ -3794,15 +3346,15 @@ package body ntm_math_pkg is
           scalar_a_input => ONE_DATA,
           scalar_b_input => scalar_operation_int
           );
-    
+
         scalar_operation_int := function_scalar_logarithm (
           scalar_input => scalar_operation_int
           );
-    
+
         matrix_output(i, j) := function_scalar_float_adder (
           OPERATION => '0',
 
-        scalar_a_input => ONE_DATA,
+          scalar_a_input => ONE_DATA,
           scalar_b_input => scalar_operation_int
           );
       end loop;

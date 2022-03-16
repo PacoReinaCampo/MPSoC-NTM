@@ -3598,7 +3598,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-           matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(t, l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -3698,7 +3698,7 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-             tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
@@ -3796,7 +3796,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-           matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(t, l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -4168,7 +4168,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-           matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(t, l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -4267,7 +4267,7 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-             tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
@@ -4364,7 +4364,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-           matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(t, l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -4734,7 +4734,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-           matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(t, l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -4834,7 +4834,7 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-             tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
@@ -4932,7 +4932,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-           matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(t, l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -5164,7 +5164,7 @@ package body ntm_lstm_controller_pkg is
     ) return vector_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-    
+
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
@@ -5311,7 +5311,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-           matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(t, l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
@@ -5417,7 +5417,7 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-             tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
@@ -5521,7 +5521,7 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-           matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(t, l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
