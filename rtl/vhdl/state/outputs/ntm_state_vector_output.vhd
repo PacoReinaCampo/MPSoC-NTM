@@ -391,7 +391,16 @@ begin
   -- x(k+1) = A·x(k) + B·u(k)
   -- y(k) = C·x(k) + D·u(k)
 
+  -- -- ntm_state_matrix_feedforward
+  -- -- ntm_state_matrix_input
+  -- -- ntm_state_matrix_output
+  -- -- ntm_state_matrix_state
+
   -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+
+  -- -- ntm_matrix_product
+  -- -- ntm_matrix_vector_product
+  -- -- ntm_vector_float_adder
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

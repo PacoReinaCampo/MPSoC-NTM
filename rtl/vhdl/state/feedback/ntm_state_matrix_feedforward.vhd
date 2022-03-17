@@ -203,6 +203,10 @@ begin
 
   -- d = inv(I+D·K)·D
 
+  -- -- ntm_matrix_float_adder
+  -- -- ntm_matrix_product
+  -- -- ntm_matrix_inverse
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
