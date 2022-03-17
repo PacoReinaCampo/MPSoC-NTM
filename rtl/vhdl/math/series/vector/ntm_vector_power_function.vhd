@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_vector_power_function is
   generic (
@@ -125,8 +126,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
-      OVERFLOW_OUT <= '0';
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';

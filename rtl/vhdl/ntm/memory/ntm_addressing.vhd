@@ -116,7 +116,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   type controller_ctrl_sharpening_fsm is (
     STARTER_SHARPENING_STATE,               -- STEP 0
-    VECTOR_EXPONENTIATOR_SHARPENING_STATE,  -- STEP 1
+    VECTOR_POWER_SHARPENING_STATE,  -- STEP 1
     VECTOR_SUMMATION_SHARPENING_STATE,      -- STEP 2
     VECTOR_DIVIDER_SHARPENING_STATE         -- STEP 3
     );
@@ -213,19 +213,20 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_b_in_vector_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR EXPONENTIATOR
+  -- VECTOR POWER
   -- CONTROL
-  signal start_vector_exponentiator_function : std_logic;
-  signal ready_vector_exponentiator_function : std_logic;
+  signal start_vector_power_function : std_logic;
+  signal ready_vector_power_function : std_logic;
 
-  signal data_in_enable_vector_exponentiator_function : std_logic;
+  signal data_in_enable_vector_power_function : std_logic;
 
-  signal data_out_enable_vector_exponentiator_function : std_logic;
+  signal data_out_enable_vector_power_function : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_power_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_a_vector_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_b_vector_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_power_function  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -266,11 +267,22 @@ begin
 
   -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
 
+  -- -- ntm_content_based_addressing
+
   -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+
+  -- -- ntm_vector_float_adder
+  -- -- ntm_vector_float_multiplier
 
   -- w(t;j) = wg(t;j)*s(t;k)
 
+  -- -- ntm_vector_convolution
+
   -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+  -- -- ntm_vector_float_divider
+  -- -- ntm_vector_power
+  -- -- ntm_vector_summation
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -379,7 +391,7 @@ begin
           case controller_ctrl_sharpening_fsm_int is
             when STARTER_SHARPENING_STATE =>  -- STEP 0
 
-            when VECTOR_EXPONENTIATOR_SHARPENING_STATE =>  -- STEP 1
+            when VECTOR_POWER_SHARPENING_STATE =>  -- STEP 1
 
             when VECTOR_SUMMATION_SHARPENING_STATE =>  -- STEP 2
 
@@ -407,8 +419,8 @@ begin
   data_a_in_enable_vector_convolution <= '0';
   data_b_in_enable_vector_convolution <= '0';
 
-  -- VECTOR EXPONENTIATOR
-  data_in_enable_vector_exponentiator_function <= '0';
+  -- VECTOR POWER
+  data_in_enable_vector_power_function <= '0';
 
   -- VECTOR SUMMATION
   data_in_enable_vector_summation <= '0';
@@ -430,9 +442,10 @@ begin
   data_a_in_vector_convolution <= FULL;
   data_b_in_vector_convolution <= FULL;
 
-  -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator_function <= THREE_CONTROL;
-  data_in_vector_exponentiator_function <= FULL;
+  -- VECTOR POWER
+  size_in_vector_power_function   <= THREE_CONTROL;
+  data_in_a_vector_power_function <= FULL;
+  data_in_b_vector_power_function <= FULL;
 
   -- VECTOR SUMMATION
   size_in_vector_summation   <= THREE_CONTROL;
@@ -565,8 +578,8 @@ begin
       DATA_OUT  => data_out_vector_float_divider
       );
 
-  -- VECTOR EXPONENTIATOR
-  vector_exponentiator_function : ntm_vector_exponentiator_function
+  -- VECTOR POWER
+  vector_power_function : ntm_vector_power_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -577,17 +590,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_exponentiator_function,
-      READY => ready_vector_exponentiator_function,
+      START => start_vector_power_function,
+      READY => ready_vector_power_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
+      DATA_IN_ENABLE => data_in_enable_vector_power_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
+      DATA_OUT_ENABLE => data_out_enable_vector_power_function,
 
       -- DATA
-      SIZE_IN  => size_in_vector_exponentiator_function,
-      DATA_IN  => data_in_vector_exponentiator_function,
-      DATA_OUT => data_out_vector_exponentiator_function
+      SIZE_IN   => size_in_vector_power_function,
+      DATA_A_IN => data_in_a_vector_power_function,
+      DATA_B_IN => data_in_b_vector_power_function,
+
+      DATA_OUT => data_out_vector_power_function
       );
 
   -- VECTOR SUMMATION

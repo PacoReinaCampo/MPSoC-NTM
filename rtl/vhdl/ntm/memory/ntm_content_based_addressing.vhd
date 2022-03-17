@@ -95,8 +95,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
     VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 2
     INPUT_SECOND_STATE,                 -- STEP 3
     VECTOR_MULTIPLIER_STATE,            -- STEP 4
-    VECTOR_EXPONENTIATOR_STATE,         -- STEP 5
-    VECTOR_SOFTMAX_STATE                -- STEP 6
+    VECTOR_SOFTMAX_STATE                -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -128,20 +127,6 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR EXPONENTIATOR
-  -- CONTROL
-  signal start_vector_exponentiator_function : std_logic;
-  signal ready_vector_exponentiator_function : std_logic;
-
-  signal data_in_enable_vector_exponentiator_function : std_logic;
-
-  signal data_out_enable_vector_exponentiator_function : std_logic;
-
-  -- DATA
-  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
@@ -182,7 +167,11 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
+  -- C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
+
+  -- -- ntm_vector_float_multiplier
+  -- -- ntm_vector_cosine_similarity
+  -- -- ntm_vector_softmax
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -248,21 +237,6 @@ begin
           if (data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_exponentiator_function <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
-          else
-            -- Control Internal
-            start_vector_float_multiplier <= '0';
-          end if;
-
-        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 5
-
-          if (data_out_enable_vector_exponentiator_function = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
               start_vector_softmax <= '1';
             end if;
 
@@ -270,7 +244,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SOFTMAX_STATE;
           else
             -- Control Internal
-            start_vector_exponentiator_function <= '0';
+            start_vector_float_multiplier <= '0';
           end if;
 
         when VECTOR_SOFTMAX_STATE =>    -- STEP 6
@@ -321,13 +295,9 @@ begin
   data_a_in_vector_float_multiplier <= data_out_vector_cosine_similarity;
   data_b_in_vector_float_multiplier <= BETA_IN;
 
-  -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator_function <= SIZE_I_IN;
-  data_in_vector_exponentiator_function <= data_out_vector_float_multiplier;
-
   -- VECTOR SOFTMAX
   size_in_vector_softmax <= SIZE_I_IN;
-  data_in_vector_softmax <= data_out_vector_exponentiator_function;
+  data_in_vector_softmax <= data_out_vector_float_multiplier;
 
   -- VECTOR MULTIPLIER
   vecto_float_multiplier : ntm_vector_float_multiplier
@@ -354,31 +324,6 @@ begin
       DATA_A_IN => data_a_in_vector_float_multiplier,
       DATA_B_IN => data_b_in_vector_float_multiplier,
       DATA_OUT  => data_out_vector_float_multiplier
-      );
-
-  -- VECTOR EXPONENTIATOR
-  vector_exponentiator_function : ntm_vector_exponentiator_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_exponentiator_function,
-      READY => ready_vector_exponentiator_function,
-
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
-
-      -- DATA
-      SIZE_IN  => size_in_vector_exponentiator_function,
-      DATA_IN  => data_in_vector_exponentiator_function,
-      DATA_OUT => data_out_vector_exponentiator_function
       );
 
   -- VECTOR COSINE SIMILARITY
