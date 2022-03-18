@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_matrix_convolution(M_A_IN, M_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(M_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(M_B_IN);
+function DATA_OUT = ntm_matrix_convolution(DATA_A_IN, DATA_B_IN)
+  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
+  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
 
   DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
 
@@ -54,7 +54,7 @@ function DATA_OUT = ntm_matrix_convolution(M_A_IN, M_B_IN)
 
       for m = 1:i
         for n = j
-          DATA_OUT(i, j) = DATA_OUT(i, j) + M_A_IN(m, n)*M_B_IN(m-i, n-j);
+          DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(m, n)*DATA_B_IN(m-i, n-j);
         endfor
       endfor
     endfor

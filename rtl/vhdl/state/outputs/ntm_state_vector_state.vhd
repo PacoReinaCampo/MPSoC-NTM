@@ -396,7 +396,7 @@ begin
   -- -- ntm_state_matrix_output
   -- -- ntm_state_matrix_state
 
-  -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
 
   -- -- ntm_matrix_product
   -- -- ntm_matrix_vector_product

@@ -42,14 +42,14 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_dot_product(M_A_IN, M_B_IN)
-  SIZE_A_IN = length(M_A_IN);
-  SIZE_B_IN = length(M_B_IN);
+function DATA_OUT = ntm_dot_product(DATA_A_IN, DATA_B_IN)
+  SIZE_A_IN = length(DATA_A_IN);
+  SIZE_B_IN = length(DATA_B_IN);
 
   DATA_OUT = zeros(SIZE_A_IN, 1);
 
   for i = 1:SIZE_A_IN
-    DATA_OUT(i) = DATA_OUT(i) + M_A_IN(i)*M_B_IN(i);
+    DATA_OUT(i) = DATA_OUT(i) + DATA_A_IN(i)*DATA_B_IN(i);
   endfor
 
 endfunction

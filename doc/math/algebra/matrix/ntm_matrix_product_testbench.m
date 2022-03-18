@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-M_A_IN = rand(3);
-M_B_IN = rand(3);
+DATA_A_IN = rand(3, 3);
+DATA_B_IN = rand(3, 3);
 
-DATA_OUT = ntm_matrix_product(M_A_IN, M_B_IN);
+DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN);

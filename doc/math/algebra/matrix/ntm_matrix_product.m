@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_matrix_product(M_A_IN, M_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(M_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(M_B_IN);
+function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
+  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
+  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
 
   DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
 
@@ -53,7 +53,7 @@ function DATA_OUT = ntm_matrix_product(M_A_IN, M_B_IN)
       DATA_OUT(i, j) = 0;
 
       for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + M_A_IN(i, m)*M_B_IN(m, j);
+        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
       endfor
     endfor
   endfor
