@@ -3150,6 +3150,8 @@ package body dnc_core_pkg is
       vector_h_input => vector_h_int
       );
 
+    -- INTERFACE_MATRIX_STATE
+
     -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
     matrix_rho_int := function_dnc_interface_matrix (
       SIZE_M_IN => SIZE_M_IN,

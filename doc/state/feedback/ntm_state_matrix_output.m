@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,17 +42,13 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_C_OUT = ntm_state_matrix_output(DATA_K_IN, DATA_C_IN, DATA_D_IN)
-  [SIZE_K_I_IN, SIZE_K_J_IN] = size(DATA_K_IN);
-  [SIZE_C_I_IN, SIZE_C_J_IN] = size(DATA_C_IN);
+  % SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  % SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
   [SIZE_D_I_IN, SIZE_D_J_IN] = size(DATA_D_IN);
 
-  # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
-  # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
-
-  DATA_C_OUT = zeros(SIZE_C_I_IN, SIZE_C_J_IN);
-
-  DATA_C_OUT = inv(eye(SIZE_D_I_IN)+DATA_D_IN*DATA_K_IN)*DATA_C_IN;
-
-endfunction
+  DATA_C_OUT = (eye(SIZE_D_I_IN, SIZE_D_J_IN)+DATA_D_IN*DATA_K_IN)\DATA_C_IN;
+end

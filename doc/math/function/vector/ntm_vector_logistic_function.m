@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,6 +42,7 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_OUT = ntm_vector_logistic_function(DATA_IN)
   SIZE_IN = length(DATA_IN);
@@ -49,6 +51,5 @@ function DATA_OUT = ntm_vector_logistic_function(DATA_IN)
 
   for i = 1:SIZE_IN
     DATA_OUT(i) = 1/(1 + 1/exp(DATA_IN(i));
-  endfor
-
-endfunction
+  end
+end

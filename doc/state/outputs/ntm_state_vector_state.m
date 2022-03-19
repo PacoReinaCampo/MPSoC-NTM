@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,25 +42,19 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
-function DATA_Y_OUT = ntm_state_vector_state(DATA_K_IN, DATA_A_IN, DATA_B_IN, DATA_C_IN, DATA_D_IN, DATA_U_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
-  [SIZE_C_I_IN, SIZE_C_J_IN] = size(DATA_C_IN);
-  [SIZE_D_I_IN, SIZE_D_J_IN] = size(DATA_D_IN);
+function DATA_X_OUT = ntm_state_vector_state(DATA_K_IN, DATA_A_IN, DATA_B_IN, DATA_C_IN, DATA_D_IN, DATA_U_IN, INITIAL_X, k)
+  addpath(genpath('../feedback'));
 
-  [k, SIZE_U_IN] = size(DATA_U_IN);
-  
-  INITIAL_X = zeros(SIZE_A_I_IN, 1);
+  % x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+  DATA_A_OUT = ntm_state_matrix_state(DATA_K_IN, DATA_A_IN, DATA_B_IN, DATA_C_IN, DATA_D_IN);
+  DATA_B_OUT = ntm_state_matrix_input(DATA_K_IN, DATA_B_IN, DATA_D_IN);
+  DATA_C_OUT = ntm_state_matrix_output(DATA_K_IN, DATA_C_IN, DATA_D_IN);
 
-  # x(k) = exp(A,k)Â·x(0) + summation(exp(A,k-j-1)Â·BÂ·u(j))[j in 0 to k-1]
-
-  DATA_Y_OUT = zeros(SIZE_A_I_IN, 1);
-
-  DATA_Y_OUT = (DATA_A_IN^k)*INITIAL_X;
+  DATA_X_OUT = (DATA_A_OUT^k)*INITIAL_X;
 
   for j = 1:k
-    DATA_Y_OUT = DATA_Y_OUT + DATA_C_IN*(DATA_A_IN^(k-j-1))*DATA_B_IN*DATA_U_IN(k, :);
-  endfor
-
-endfunction
+    DATA_X_OUT = DATA_X_OUT + DATA_C_OUT*(DATA_A_OUT^(k-j-1))*DATA_B_OUT*DATA_U_IN(:, k);
+  end
+end

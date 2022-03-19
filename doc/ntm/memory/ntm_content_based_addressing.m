@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,26 +42,25 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function C_OUT = ntm_content_based_addressing(K_IN, BETA_IN, M_IN)
   [SIZE_I_IN, SIZE_J_IN] = size(M_IN);
 
   C_OUT = zeros(SIZE_I_IN, 1);
 
-  # C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
+  % C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
 
   data_summation_int = 0;
 
   for j = 1:SIZE_I_IN
     for k = 1:SIZE_J_IN
       data_summation_int = data_summation_int + exp(dot(K_IN, M_IN(j, :))*BETA_IN);
-    endfor
-  endfor
+    end
+  end
 
   for j = 1:SIZE_I_IN
     for k = 1:SIZE_J_IN
       C_OUT(j) = exp(dot(K_IN, M_IN(j, :))*BETA_IN)/data_summation_int;
-    endfor
-  endfor
-
-endfunction
+    end
+  endend

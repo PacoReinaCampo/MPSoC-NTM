@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,16 +42,14 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_OUT = ntm_matrix_inverse(DATA_IN)
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
-  data_in_int  = DATA_IN;
-  data_out_int = eye(SIZE_I_IN, SIZE_J_IN);
+  data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
 
-  data_int = [data_in_int data_out_int];
-
-  for i = 1:SIZE_I_IN - 1
+  for i = 1:SIZE_I_IN
     data_int(i, :) = data_int(i, :)/data_int(i, i);
 
     for m = i:SIZE_I_IN - 1
@@ -58,13 +57,11 @@ function DATA_OUT = ntm_matrix_inverse(DATA_IN)
     end
   end
 
-  data_int(SIZE_I_IN, :) = data_int(SIZE_I_IN, :)/data_int(SIZE_I_IN, SIZE_J_IN);
-
   for i = 2:SIZE_I_IN
     for m = (i - 1): - 1:1
       data_int(m, :) = data_int(m, :) - data_int(i, :)*data_int(m, i);
     end
   end
 
-  DATA_OUT = data_int(:,SIZE_J_IN + 1:2*SIZE_J_IN);
+  DATA_OUT = data_int(:, SIZE_J_IN + 1:2*SIZE_J_IN);
 end

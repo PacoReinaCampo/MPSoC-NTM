@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,14 +42,13 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function XI_OUT = ntm_interface_vector(U_IN, H_IN)
-  [SIZE_N_IN, SIZE_W_IN] = size(U_IN);
+  [SIZE_S_IN, SIZE_L_IN] = size(U_IN);
 
   XI_OUT = zeros(SIZE_S_IN, 1);
 
-  # xi(t;s) = U(t;s;l)·h(t;l)
+  % xi(t;s) = U(t;s;l)·h(t;l)
 
-  Y_OUT = U_IN*H_IN;
-
-endfunction
+  Y_OUT = U_IN*H_IN;end

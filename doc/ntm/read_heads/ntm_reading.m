@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,18 +42,17 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function R_OUT = ntm_reading(W_IN, M_IN)
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
   R_OUT = zeros(SIZE_W_IN, 1);
 
-  # r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+  % r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
   for j = 1:SIZE_N_IN
     for k = 1:SIZE_W_IN
       R_OUT(j) = R_OUT(j) + W_IN(j)*M_IN(j, k);
-    endfor
-  endfor
-
-endfunction
+    end
+  endend

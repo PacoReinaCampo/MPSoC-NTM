@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,14 +42,13 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
   Y_OUT = zeros(SIZE_Y_IN, 1);
 
-  # y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+  % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
-  Y_OUT = K_IN*R_IN + U_IN*H_IN;
-
-endfunction
+  Y_OUT = K_IN*R_IN + U_IN*H_IN;end

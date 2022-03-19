@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,18 +42,17 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
   M_OUT = zeros(SIZE_N_IN, SIZE_W_IN);
 
-  # M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+  % M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
   for j = 1:SIZE_N_IN
     for k = 1:SIZE_W_IN
       M_OUT(j, k) = M_IN(j, k) + W_IN(j)*A_IN(k);
-    endfor
-  endfor
-
-endfunction
+    end
+  endend

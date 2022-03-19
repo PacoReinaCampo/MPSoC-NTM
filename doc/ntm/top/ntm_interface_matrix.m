@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,14 +42,21 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function RHO_OUT = ntm_interface_matrix(U_IN, H_IN)
   [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
 
   RHO_OUT = zeros(SIZE_R_IN, SIZE_M_IN);
 
-  # rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+  % rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
 
-  Y_OUT = U_IN*H_IN;
+  for i = 1:SIZE_R_IN
+    for j = 1:SIZE_M_IN
+      RHO_OUT(i, j) = 0;
 
-endfunction
+      for m = 1:SIZE_L_IN
+        RHO_OUT(i, j) = RHO_OUT(i, j) + U_IN(i, j, m)*H_IN(i, m);
+      end
+    end
+  endend

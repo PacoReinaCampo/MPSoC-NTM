@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,6 +42,7 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_OUT = ntm_matrix_transpose(DATA_IN)
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
@@ -50,7 +52,6 @@ function DATA_OUT = ntm_matrix_transpose(DATA_IN)
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_J_IN
       DATA_OUT(i, j) = DATA_IN(j, i);
-    endfor
-  endfor
-
-endfunction
+    end
+  end
+end

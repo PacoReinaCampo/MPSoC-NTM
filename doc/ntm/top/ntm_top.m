@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,6 +42,7 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN)
   [SIZE_L_IN, SIZE_X_IN] = size(W_IN);
@@ -49,22 +51,20 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN)
 
   Y_OUT = zeros(SIZE_Y_IN, 1);
 
-  # CONTROLLER
+  % CONTROLLER
 
-  # OUTPUT VECTOR
+  % OUTPUT VECTOR
 
-  # INTERFACE VECTOR
+  % INTERFACE VECTOR
 
-  # INTERFACE MATRIX
+  % INTERFACE MATRIX
 
-  # READING
+  % READING
 
-  # WRITING
+  % WRITING
 
-  # ERASING
+  % ERASING
 
-  # WRITING
+  % WRITING
 
-  # ADDRESSING
-
-endfunction
+  % ADDRESSINGend

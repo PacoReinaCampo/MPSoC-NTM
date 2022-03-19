@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,18 +42,26 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_OUT = ntm_tensor_inverse(DATA_IN)
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
-  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
+  data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN)];
 
   for i = 1:SIZE_I_IN
-    for j = 1:SIZE_J_IN
-      for k = 1:SIZE_K_IN
-        DATA_OUT(i, j, k) = DATA_IN(i, j, k);
-      endfor
-    endfor
-  endfor
+    data_int(i, :, :) = data_int(i, :, :)/data_int(i, i, i);
 
-endfunction
+    for m = i:SIZE_I_IN - 1
+      data_int(m + 1, :, :) = data_int(m + 1, :, :) - data_int(i, :, :)*data_int(m + 1, i, i);
+    end
+  end
+
+  for i = 2:SIZE_I_IN
+    for m = (i - 1): - 1:1
+      data_int(m, :, :) = data_int(m, :, :) - data_int(i, :, :)*data_int(m, i, i);
+    end
+  end
+
+  DATA_OUT = data_int(:, SIZE_J_IN + 1:2*SIZE_J_IN, SIZE_K_IN + 1:2*SIZE_K_IN);
+end

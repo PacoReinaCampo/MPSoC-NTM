@@ -1,3 +1,4 @@
+%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -16,7 +17,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -41,6 +42,7 @@
 ##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
 ##                                                                               ##
 ###################################################################################
+%}
 
 function DATA_OUT = ntm_tensor_product(DATA_A_IN, DATA_B_IN)
   [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
@@ -55,9 +57,8 @@ function DATA_OUT = ntm_tensor_product(DATA_A_IN, DATA_B_IN)
 
         for m = 1:SIZE_A_J_IN
           DATA_OUT(i, j, k) = DATA_OUT(i, j, k) + DATA_A_IN(i, j, m)*DATA_B_IN(i, m, k);
-        endfor
-      endfor
-    endfor
-  endfor
-
-endfunction
+        end
+      end
+    end
+  end
+end
