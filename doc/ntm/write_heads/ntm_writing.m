@@ -45,14 +45,11 @@
 %}
 
 function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
-
-  M_OUT = zeros(SIZE_N_IN, SIZE_W_IN);
+  addpath(genpath('../../math/algebra/matrix'));
 
   % M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-  for j = 1:SIZE_N_IN
-    for k = 1:SIZE_W_IN
-      M_OUT(j, k) = M_IN(j, k) + W_IN(j)*A_IN(k);
-    end
-  endend
+  matrix_operation_int = ntm_transpose_vector_product(W_IN, A_IN);
+  
+  M_OUT = M_IN + matrix_operation_int;
+end

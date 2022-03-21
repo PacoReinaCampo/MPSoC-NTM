@@ -1,0 +1,120 @@
+├───controller
+│   └───transformer
+│           ntm_controller.m
+│           ntm_keys_vector.m
+│           ntm_queries_vector.m
+│           ntm_values_vector.m
+│
+├───dnc
+│   ├───memory
+│   │       dnc_addressing.m
+│   │       dnc_allocation_weighting.m
+│   │       dnc_backward_weighting.m
+│   │       dnc_content_based_addressing.m
+│   │       dnc_forward_weighting.m
+│   │       dnc_memory_matrix.m
+│   │       dnc_memory_retention_vector.m
+│   │       dnc_precedence_weighting.m
+│   │       dnc_read_content_weighting.m
+│   │       dnc_read_vectors.m
+│   │       dnc_read_weighting.m
+│   │       dnc_sort_vector.m
+│   │       dnc_temporal_link_matrix.m
+│   │       dnc_usage_vector.m
+│   │       dnc_write_content_weighting.m
+│   │       dnc_write_weighting.m
+│   │
+│   └───top
+│           dnc_interface_matrix.m
+│           dnc_interface_vector.m
+│           dnc_top.m
+│
+├───math
+│   ├───algebra
+│   │   ├───matrix
+│   │   │       ntm_matrix_convolution.m
+│   │   │       ntm_matrix_inverse.m
+│   │   │       ntm_matrix_multiplication.m
+│   │   │       ntm_matrix_product.m
+│   │   │       ntm_matrix_summation.m
+│   │   │       ntm_matrix_transpose.m
+│   │   │       ntm_matrix_vector_convolution.m
+│   │   │       ntm_matrix_vector_product.m
+│   │   │       ntm_transpose_vector_product.m
+│   │   │
+│   │   ├───tensor
+│   │   │       ntm_tensor_convolution.m
+│   │   │       ntm_tensor_inverse.m
+│   │   │       ntm_tensor_matrix_convolution.m
+│   │   │       ntm_tensor_matrix_product.m
+│   │   │       ntm_tensor_multiplication.m
+│   │   │       ntm_tensor_product.m
+│   │   │       ntm_tensor_summation.m
+│   │   │       ntm_tensor_transpose.m
+│   │   │
+│   │   └───vector
+│   │           ntm_dot_product.m
+│   │           ntm_vector_convolution.m
+│   │           ntm_vector_cosine_similarity.m
+│   │           ntm_vector_module.m
+│   │           ntm_vector_multiplication.m
+│   │           ntm_vector_summation.m
+│   │
+│   ├───calculus
+│   │   ├───matrix
+│   │   │       ntm_matrix_softmax.m
+│   │   │
+│   │   ├───tensor
+│   │   │       ntm_tensor_softmax.m
+│   │   │
+│   │   └───vector
+│   │           ntm_vector_softmax.m
+│   │
+│   └───function
+│       ├───matrix
+│       │       ntm_matrix_logistic_function.m
+│       │       ntm_matrix_oneplus_function.m
+│       │
+│       ├───scalar
+│       │       ntm_scalar_logistic_function.m
+│       │       ntm_scalar_oneplus_function.m
+│       │
+│       └───vector
+│               ntm_vector_logistic_function.m
+│               ntm_vector_oneplus_function.m
+│
+├───ntm
+│   ├───memory
+│   │       ntm_addressing.m
+│   │       ntm_content_based_addressing.m
+│   │
+│   ├───read_heads
+│   │       ntm_reading.m
+│   │       ntm_reading_tesbench.m
+│   │
+│   ├───top
+│   │       ntm_interface_matrix.m
+│   │       ntm_interface_vector.m
+│   │       ntm_output_vector.m
+│   │       ntm_top.m
+│   │
+│   └───write_heads
+│           ntm_erasing.m
+│           ntm_erasing_tesbench.m
+│           ntm_writing.m
+│           ntm_writing_tesbench.m
+│
+└───state
+    ├───feedback
+    │       ntm_state_matrix_feedforward.m
+    │       ntm_state_matrix_input.m
+    │       ntm_state_matrix_output.m
+    │       ntm_state_matrix_state.m
+    │
+    ├───outputs
+    │       ntm_state_vector_output.m
+    │       ntm_state_vector_state.m
+    │
+    └───top
+            ntm_state_top.m
+            ntm_state_top_testbench.m

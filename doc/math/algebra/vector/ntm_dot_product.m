@@ -46,11 +46,10 @@
 
 function DATA_OUT = ntm_dot_product(DATA_A_IN, DATA_B_IN)
   SIZE_A_IN = length(DATA_A_IN);
-  SIZE_B_IN = length(DATA_B_IN);
 
-  DATA_OUT = zeros(SIZE_A_IN, 1);
+  DATA_OUT = 0;
 
   for i = 1:SIZE_A_IN
-    DATA_OUT(i) = DATA_OUT(i) + DATA_A_IN(i)*DATA_B_IN(i);
+    DATA_OUT = DATA_OUT + DATA_A_IN(i)*DATA_B_IN(i);
   end
 end

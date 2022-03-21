@@ -50,6 +50,6 @@ function DATA_OUT = ntm_vector_logistic_function(DATA_IN)
   DATA_OUT = zeros(SIZE_IN, 1);
 
   for i = 1:SIZE_IN
-    DATA_OUT(i) = 1/(1 + 1/exp(DATA_IN(i));
+    DATA_OUT(i) = 1/(1 + 1/exp(DATA_IN(i)));
   end
 end

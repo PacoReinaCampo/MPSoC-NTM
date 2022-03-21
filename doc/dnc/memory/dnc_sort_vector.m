@@ -44,19 +44,22 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function PHI_OUT = dnc_sort_vector(U_IN)
+  SIZE_IN = length(U_IN);
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  vector_operation_int = U_IN;
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  for i = 1:SIZE_IN
+    for j = 1:SIZE_IN-i
+      if (vector_operation_int(j) > vector_operation_int(j+1))
+        scalar_operation_int = vector_operation_int(j);
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
+        vector_operation_int(j) = vector_operation_int(j + 1);
+
+        vector_operation_int(j + 1) = scalar_operation_int;
       end
     end
   end
+
+  PHI_OUT = vector_operation_int;
 end

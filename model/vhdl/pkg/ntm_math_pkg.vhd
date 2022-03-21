@@ -3459,7 +3459,7 @@ package body ntm_math_pkg is
         );
 
       vector_output(i) := function_scalar_float_divider (
-        scalar_a_input => vector_output(i),
+        scalar_a_input => scalar_operation_int,
         scalar_b_input => data_summation_int
         );
     end loop;
@@ -3591,7 +3591,7 @@ package body ntm_math_pkg is
           );
 
         matrix_output(i, j) := function_scalar_float_divider (
-          scalar_a_input => matrix_output(i, j),
+          scalar_a_input => scalar_operation_int,
           scalar_b_input => data_summation_int
           );
       end loop;
@@ -3749,7 +3749,7 @@ package body ntm_math_pkg is
             );
 
           tensor_output(i, j, k) := function_scalar_float_divider (
-            scalar_a_input => tensor_output(i, j, k),
+            scalar_a_input => scalar_operation_int,
             scalar_b_input => data_summation_int
             );
         end loop;

@@ -45,19 +45,8 @@
 %}
 
 function RHO_OUT = dnc_interface_matrix(U_IN, H_IN)
-  [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
+  addpath(genpath('../../math/algebra/tensor'));
 
-  RHO_OUT = zeros(SIZE_R_IN, SIZE_M_IN);
-
-  % rho(t;i;m) = U(t;i;m;l)Â·h(t;i;l)
-
-  for i = 1:SIZE_R_IN
-    for j = 1:SIZE_M_IN
-      RHO_OUT(i, j) = 0;
-
-      for m = 1:SIZE_L_IN
-        RHO_OUT(i, j) = RHO_OUT(i, j) + U_IN(i, j, m)*H_IN(i, m);
-      end
-    end
-  end
+  % rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+  RHO_OUT = ntm_tensor_matrix_product(U_IN, H_IN);
 end
