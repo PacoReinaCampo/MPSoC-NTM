@@ -56,4 +56,4 @@ XI_IN = rand(3, 1);
 RHO_IN = rand(3, 3);
 H_IN = rand(3, 1);
 
-function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);

@@ -50,11 +50,7 @@ function DATA_OUT = ntm_matrix_multiplication(DATA_IN, LENGTH_IN)
   data_multiplication_int = ones(SIZE_I_IN, SIZE_J_IN);
 
   for t = 1:LENGTH_IN
-    for i = 1:SIZE_I_IN
-      for j = 1:SIZE_J_IN
-        data_multiplication_int(i, j) = data_multiplication_int(i, j) + DATA_IN(t, i, j);
-      end
-    end
+    data_multiplication_int = data_multiplication_int + DATA_IN(t);
   end
 
   DATA_OUT = data_multiplication_int;

@@ -1,4 +1,11 @@
 ├───controller
+│   ├───FNN
+│   │   ├───convolutional
+│   │   │       ntm_controller.m
+│   │   │
+│   │   └───standard
+│   │           ntm_controller.m
+│   │
 │   └───transformer
 │           ntm_controller.m
 │           ntm_keys_vector.m
@@ -100,9 +107,7 @@
 │   │
 │   └───write_heads
 │           ntm_erasing.m
-│           ntm_erasing_tesbench.m
 │           ntm_writing.m
-│           ntm_writing_tesbench.m
 │
 └───state
     ├───feedback
@@ -117,4 +122,3 @@
     │
     └───top
             ntm_state_top.m
-            ntm_state_top_testbench.m
