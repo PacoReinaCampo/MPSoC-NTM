@@ -44,18 +44,18 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_summation(DATA_IN)
+function DATA_OUT = ntm_matrix_summation(DATA_IN, LENGTH_IN)
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
-  
-  scalar_summation_int = 0;
 
-  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
+  data_multiplication_int = zeros(SIZE_I_IN, SIZE_J_IN);
 
-  for i = 1:SIZE_I_IN
-    for j = 1:SIZE_J_IN
-      scalar_summation_int = scalar_summation_int + DATA_IN(i, j);
-
-      DATA_OUT(i, j) = scalar_summation_int;
+  for t = 1:LENGTH_IN
+    for i = 1:SIZE_I_IN
+      for j = 1:SIZE_J_IN
+        data_multiplication_int(i, j) = data_multiplication_int(i, j) + DATA_IN(t, i, j);
+      end
     end
   end
+
+  DATA_OUT = data_multiplication_int;
 end

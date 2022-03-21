@@ -44,8 +44,35 @@
 ###################################################################################
 %}
 
-LENGTH_IN = 3;
+function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+  addpath(genpath('../../math/algebra/matrix'));
 
-DATA_IN = rand(3, 3);
+  % h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+  vector_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
 
-DATA_OUT = ntm_vector_summation(DATA_IN, LENGTH_IN);
+  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
+
+  for l = 1:SIZE_L_IN
+    for i = 1:SIZE_I_IN
+      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
+    end
+  end
+
+  matrix_operation_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
+
+  for l = 1:SIZE_L_IN
+    for i = 1:SIZE_I_IN
+      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
+    end
+  end
+
+  H_OUT = vector_operation_int;
+
+  vector_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
+
+  H_OUT = H_OUT + vector_operation_int;
+
+  vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
+
+  H_OUT = H_OUT + vector_operation_int;
+end

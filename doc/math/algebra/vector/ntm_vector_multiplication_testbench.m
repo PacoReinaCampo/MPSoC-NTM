@@ -44,6 +44,8 @@
 ###################################################################################
 %}
 
-DATA_IN = rand(3, 1);
+LENGTH_IN = 3;
 
-DATA_OUT = ntm_vector_multiplication(DATA_IN);
+DATA_IN = rand(3, 3);
+
+DATA_OUT = ntm_vector_multiplication(DATA_IN, LENGTH_IN);

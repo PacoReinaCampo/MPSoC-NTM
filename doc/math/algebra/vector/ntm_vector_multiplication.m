@@ -44,16 +44,16 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_vector_multiplication(DATA_IN)
+function DATA_OUT = ntm_vector_multiplication(DATA_IN, LENGTH_IN)
   SIZE_IN = length(DATA_IN);
 
-  DATA_OUT = zeros(SIZE_IN, 1);
+  data_multiplication_int = ones(SIZE_IN, 1);
 
-  data_multiplication_int = 1;
-
-  for i = 1:SIZE_IN
-    data_multiplication_int = data_multiplication_int*DATA_IN(i);
-
-    DATA_OUT(i) = data_multiplication_int;
+  for t = 1:LENGTH_IN
+    for i = 1:SIZE_IN
+      data_multiplication_int(i) = data_multiplication_int(i) + DATA_IN(t, i);
+    end
   end
+
+  DATA_OUT = data_multiplication_int;
 end
