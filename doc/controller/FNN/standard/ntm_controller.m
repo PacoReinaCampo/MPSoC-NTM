@@ -55,16 +55,16 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   matrix_operation_int = ntm_tensor_matrix_convolution(K_IN, R_IN);
 
-  for l = 1:SIZE_L_IN
-    for i = 1:SIZE_R_IN
+  for i = 1:SIZE_R_IN
+    for l = 1:SIZE_L_IN
       vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
     end
   end
 
   matrix_operation_int = ntm_tensor_matrix_convolution(D_IN, RHO_IN);
 
-  for l = 1:SIZE_L_IN
-    for i = 1:SIZE_R_IN
+  for i = 1:SIZE_R_IN
+    for l = 1:SIZE_L_IN
       vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
     end
   end

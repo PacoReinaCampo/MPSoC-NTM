@@ -44,38 +44,16 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
+W_IN = rand(3, 3);
+K_IN = rand(3, 3, 3);
+U_IN = rand(3, 3);
+V_IN = rand(3, 3);
+D_IN = rand(3, 3, 3);
+B_IN = rand(3, 1);
+X_IN = rand(3, 1);
+R_IN = rand(3, 3);
+XI_IN = rand(3, 1);
+RHO_IN = rand(3, 3);
+H_IN = rand(3, 1);
 
-  [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
-
-  % h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
-  vector_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
-
-  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  matrix_operation_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  H_OUT = vector_operation_int + B_IN;
-
-  vector_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
-
-  H_OUT = H_OUT + vector_operation_int;
-
-  vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
-
-  H_OUT = H_OUT + vector_operation_int;
-end
+O_OUT = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
