@@ -44,31 +44,20 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN)
-  [SIZE_L_IN, SIZE_X_IN] = size(W_IN);
+function DATA_OUT = ntm_matrix_integration(DATA_IN, LENGTH_IN)
+  addpath(genpath('../../math/algebra/vector'));
 
-  SIZE_Y_IN = 3;
+  [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
-  Y_OUT = zeros(SIZE_Y_IN, 1);
+  data_summation_int = 0;
 
-  % CONTROLLER
+  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
-  % OUTPUT VECTOR
-  % Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
+  for i = 1:SIZE_I_IN
+    for j = 1:SIZE_J_IN
+      data_summation_int = data_summation_int + DATA_IN(i, j);
 
-  % INTERFACE VECTOR
-  % XI_OUT = ntm_interface_vector(U_IN, H_IN);
-
-  % INTERFACE MATRIX
-  % RHO_OUT = ntm_interface_matrix(U_IN, H_IN);
-
-  % READING
-
-  % WRITING
-
-  % ERASING
-
-  % WRITING
-
-  % ADDRESSING
+      DATA_OUT(i, j) = data_summation_int*LENGTH_IN;
+    end
+  end
 end
