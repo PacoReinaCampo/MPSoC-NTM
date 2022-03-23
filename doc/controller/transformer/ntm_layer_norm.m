@@ -44,15 +44,10 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_encoder(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
+  addpath(genpath('../../math/function/vector'));
 
-  Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
-
-  Z_IN = rand(3, 1);
-  GAMMA_IN = rand(3, 1);
-  BETA_IN = rand(3, 1); 
-
-  N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);
-
-  H_OUT = ntm_fnn(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  N_OUT = Z_IN;
 end

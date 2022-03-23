@@ -44,15 +44,16 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_encoder(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function DATA_OUT = ntm_deviation(DATA_IN, MEAN_IN)
+  LENGTH_IN = length(DATA_IN);
 
-  Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  DATA_OUT = 0;
 
-  Z_IN = rand(3, 1);
-  GAMMA_IN = rand(3, 1);
-  BETA_IN = rand(3, 1); 
+  for i = 1:LENGTH_IN
+    DATA_OUT = DATA_OUT + (DATA_IN(i) - MEAN_IN)^2;
+  end
 
-  N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);
+  DATA_OUT = DATA_OUT/LENGTH_IN;
 
-  H_OUT = ntm_fnn(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  DATA_OUT = sqrt(DATA_OUT);
 end
