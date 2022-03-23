@@ -45,4 +45,10 @@
 %}
 
 function Y_OUT = ntm_multi_head_attention(X_IN)
+
+  X1_OUT = ntm_keys_vector(X_IN);
+  X2_OUT = ntm_queries_vector(X_IN);
+  X3_OUT = ntm_values_vector(X_IN);
+
+  Y_OUT = ntm_scaled_dot_product_attention(X_IN);
 end

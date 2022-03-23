@@ -45,4 +45,5 @@
 %}
 
 function Y_OUT = ntm_keys_vector(X_IN)
+  Y_OUT = X_IN;
 end

@@ -45,4 +45,10 @@
 %}
 
 function Y_OUT = ntm_controller(X_IN)
+
+  Y1_OUT = ntm_positional_encoding(X_IN);
+  Y1_OUT = ntm_encoder(X_IN);
+
+  Y2_OUT = ntm_positional_encoding(X_IN);
+  Y_OUT = ntm_decoder(X_IN);
 end

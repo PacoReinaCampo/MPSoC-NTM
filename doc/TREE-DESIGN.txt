@@ -29,8 +29,10 @@
 │           ntm_controller.m
 │           ntm_decoder.m
 │           ntm_encoder.m
+│           ntm_fnn.m
 │           ntm_keys_vector.m
 │           ntm_multi_head_attention.m
+│           ntm_positional_encoding.m
 │           ntm_queries_vector.m
 │           ntm_scaled_dot_product_attention.m
 │           ntm_values_vector.m

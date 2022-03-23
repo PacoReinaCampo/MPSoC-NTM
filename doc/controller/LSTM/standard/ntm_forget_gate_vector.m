@@ -47,6 +47,7 @@
 function F_OUT = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));
+  addpath(genpath('../../../math/function/vector'));
 
   [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
 
@@ -78,4 +79,6 @@ function F_OUT = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN
   vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
 
   F_OUT = F_OUT + vector_operation_int;
+
+  F_OUT = ntm_vector_logistic_function(F_OUT);
 end

@@ -45,4 +45,5 @@
 %}
 
 function Y_OUT = ntm_scaled_dot_product_attention(X_IN)
+  Y_OUT = X_IN;
 end

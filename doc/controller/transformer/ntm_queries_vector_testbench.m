@@ -44,41 +44,6 @@
 ###################################################################################
 %}
 
-function I_OUT = ntm_input_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
-  addpath(genpath('../../../math/function/vector'));
+X_IN = rand(3, 1);
 
-  [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
-
-  % i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
-  vector_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
-
-  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  matrix_operation_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  I_OUT = vector_operation_int + B_IN;
-
-  vector_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
-
-  I_OUT = I_OUT + vector_operation_int;
-
-  vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
-
-  I_OUT = I_OUT + vector_operation_int;
-
-  I_OUT = ntm_vector_logistic_function(I_OUT);
-end
+Y_OUT = ntm_queries_vector(X_IN);

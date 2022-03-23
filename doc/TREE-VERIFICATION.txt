@@ -29,8 +29,10 @@
 │           ntm_controller_testbench.m
 │           ntm_decoder_testbench.m
 │           ntm_encoder_testbench.m
+│           ntm_fnn_testbench.m
 │           ntm_keys_vector_testbench.m
 │           ntm_multi_head_attention_testbench.m
+│           ntm_positional_encoding_testbench.m
 │           ntm_queries_vector_testbench.m
 │           ntm_scaled_dot_product_attention_testbench.m
 │           ntm_values_vector_testbench.m
