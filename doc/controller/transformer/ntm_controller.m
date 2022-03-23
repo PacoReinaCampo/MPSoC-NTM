@@ -44,11 +44,11 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_controller(X_IN)
+function Y_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
 
-  Y1_OUT = ntm_positional_encoding(X_IN);
-  Y1_OUT = ntm_encoder(X_IN);
+  X1_OUT = ntm_positional_encoding(X_IN);
+  Y1_OUT = ntm_encoder(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
-  Y2_OUT = ntm_positional_encoding(X_IN);
-  Y_OUT = ntm_decoder(X_IN);
+  X2_OUT = ntm_positional_encoding(X_IN);
+  Y_OUT = ntm_decoder(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 end

@@ -44,11 +44,11 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_multi_head_attention(X_IN)
+function Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
 
-  X1_OUT = ntm_keys_vector(X_IN);
-  X2_OUT = ntm_queries_vector(X_IN);
-  X3_OUT = ntm_values_vector(X_IN);
+  K_OUT = ntm_keys_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  Q_OUT = ntm_queries_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  V_OUT = ntm_values_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
   Y_OUT = ntm_scaled_dot_product_attention(X_IN);
 end
