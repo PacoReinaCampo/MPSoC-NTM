@@ -6,10 +6,33 @@
 │   │   └───standard
 │   │           ntm_controller_testbench.m
 │   │
+│   ├───LSTM
+│   │   ├───convolutional
+│   │   │       ntm_activation_gate_vector_testbench.m
+│   │   │       ntm_controller_testbench.m
+│   │   │       ntm_forget_gate_vector_testbench.m
+│   │   │       ntm_hidden_gate_vector_testbench.m
+│   │   │       ntm_input_gate_vector_testbench.m
+│   │   │       ntm_output_gate_vector_testbench.m
+│   │   │       ntm_state_gate_vector_testbench.m
+│   │   │
+│   │   └───standard
+│   │           ntm_activation_gate_vector_testbench.m
+│   │           ntm_controller_testbench.m
+│   │           ntm_forget_gate_vector_testbench.m
+│   │           ntm_hidden_gate_vector_testbench.m
+│   │           ntm_input_gate_vector_testbench.m
+│   │           ntm_output_gate_vector_testbench.m
+│   │           ntm_state_gate_vector_testbench.m
+│   │
 │   └───transformer
 │           ntm_controller_testbench.m
+│           ntm_decoder_testbench.m
+│           ntm_encoder_testbench.m
 │           ntm_keys_vector_testbench.m
+│           ntm_multi_head_attention_testbench.m
 │           ntm_queries_vector_testbench.m
+│           ntm_scaled_dot_product_attention_testbench.m
 │           ntm_values_vector_testbench.m
 │
 ├───dnc
@@ -69,12 +92,15 @@
 │   │
 │   ├───calculus
 │   │   ├───matrix
+│   │   │       ntm_matrix_integration_testbench.m
 │   │   │       ntm_matrix_softmax_testbench.m
 │   │   │
 │   │   ├───tensor
+│   │   │       ntm_tensor_integration_testbench.m
 │   │   │       ntm_tensor_softmax_testbench.m
 │   │   │
 │   │   └───vector
+│   │           ntm_vector_integration_testbench.m
 │   │           ntm_vector_softmax_testbench.m
 │   │
 │   └───function
@@ -107,7 +133,9 @@
 │   │
 │   └───write_heads
 │           ntm_erasing_testbench.m
+│           ntm_erasing_tesbench_testbench.m
 │           ntm_writing_testbench.m
+│           ntm_writing_tesbench_testbench.m
 │
 └───state
     ├───feedback
@@ -122,3 +150,4 @@
     │
     └───top
             ntm_state_top_testbench.m
+            ntm_state_top_testbench_testbench.m

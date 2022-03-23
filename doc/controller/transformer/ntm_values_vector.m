@@ -39,10 +39,10 @@
 ##                                                                               ##
 ## ============================================================================= ##
 ## Author(s):                                                                    ##
-##   Francisco Javier Reina Campo <frareicam@gmail.com>                          ##
+##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
 %}
 
-function Y_OUT = ntm_controller(X_IN)
+function Y_OUT = ntm_values_vector(X_IN)
 end

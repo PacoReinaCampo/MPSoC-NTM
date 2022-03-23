@@ -6,10 +6,33 @@
 │   │   └───standard
 │   │           ntm_controller.m
 │   │
+│   ├───LSTM
+│   │   ├───convolutional
+│   │   │       ntm_activation_gate_vector.m
+│   │   │       ntm_controller.m
+│   │   │       ntm_forget_gate_vector.m
+│   │   │       ntm_hidden_gate_vector.m
+│   │   │       ntm_input_gate_vector.m
+│   │   │       ntm_output_gate_vector.m
+│   │   │       ntm_state_gate_vector.m
+│   │   │
+│   │   └───standard
+│   │           ntm_activation_gate_vector.m
+│   │           ntm_controller.m
+│   │           ntm_forget_gate_vector.m
+│   │           ntm_hidden_gate_vector.m
+│   │           ntm_input_gate_vector.m
+│   │           ntm_output_gate_vector.m
+│   │           ntm_state_gate_vector.m
+│   │
 │   └───transformer
 │           ntm_controller.m
+│           ntm_decoder.m
+│           ntm_encoder.m
 │           ntm_keys_vector.m
+│           ntm_multi_head_attention.m
 │           ntm_queries_vector.m
+│           ntm_scaled_dot_product_attention.m
 │           ntm_values_vector.m
 │
 ├───dnc
@@ -69,12 +92,15 @@
 │   │
 │   ├───calculus
 │   │   ├───matrix
+│   │   │       ntm_matrix_integration.m
 │   │   │       ntm_matrix_softmax.m
 │   │   │
 │   │   ├───tensor
+│   │   │       ntm_tensor_integration.m
 │   │   │       ntm_tensor_softmax.m
 │   │   │
 │   │   └───vector
+│   │           ntm_vector_integration.m
 │   │           ntm_vector_softmax.m
 │   │
 │   └───function
@@ -107,7 +133,9 @@
 │   │
 │   └───write_heads
 │           ntm_erasing.m
+│           ntm_erasing_tesbench.m
 │           ntm_writing.m
+│           ntm_writing_tesbench.m
 │
 └───state
     ├───feedback
@@ -122,3 +150,4 @@
     │
     └───top
             ntm_state_top.m
+            ntm_state_top_testbench.m
