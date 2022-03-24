@@ -1734,8 +1734,8 @@ package body dnc_core_pkg is
 
     variable matrix_ones_int : matrix_buffer;
 
-    variable matrix_first_operation_output  : matrix_buffer;
-    variable matrix_second_operation_output : matrix_buffer;
+    variable matrix_first_operation_int  : matrix_buffer;
+    variable matrix_second_operation_int : matrix_buffer;
 
     variable matrix_m_output : matrix_buffer;
 
@@ -1749,7 +1749,7 @@ package body dnc_core_pkg is
       end loop;
     end loop;
 
-    matrix_first_operation_output := function_transpose_vector_product (
+    matrix_first_operation_int := function_transpose_vector_product (
       SIZE_A_IN => SIZE_N_IN,
       SIZE_B_IN => SIZE_W_IN,
 
@@ -1757,22 +1757,30 @@ package body dnc_core_pkg is
       vector_b_input => vector_e_input
       );
 
-    matrix_second_operation_output := function_matrix_float_adder (
+    matrix_second_operation_int := function_matrix_float_adder (
       OPERATION => '1',
 
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_ones_int,
-      matrix_b_input => matrix_first_operation_output
+      matrix_b_input => matrix_first_operation_int
       );
 
-    matrix_second_operation_output := function_matrix_float_multiplier (
+    matrix_first_operation_int := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_m_input,
-      matrix_b_input => matrix_second_operation_output
+      matrix_b_input => matrix_second_operation_int
+      );
+
+    matrix_second_operation_int := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_N_IN,
+      SIZE_B_IN => SIZE_W_IN,
+
+      vector_a_input => vector_w_input,
+      vector_b_input => vector_v_input
       );
 
     matrix_m_output := function_matrix_float_adder (
@@ -1781,8 +1789,8 @@ package body dnc_core_pkg is
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
-      matrix_a_input => matrix_first_operation_output,
-      matrix_b_input => matrix_second_operation_output
+      matrix_a_input => matrix_first_operation_int,
+      matrix_b_input => matrix_second_operation_int
       );
 
     return matrix_m_output;
@@ -1796,10 +1804,10 @@ package body dnc_core_pkg is
     matrix_w_input : matrix_buffer
     ) return vector_buffer is
 
-    variable vector_ones_output : vector_buffer;
+    variable vector_ones_int : vector_buffer;
 
-    variable vector_operation_output : vector_buffer;
-    variable matrix_operation_int    : matrix_buffer;
+    variable vector_operation_int : vector_buffer;
+    variable matrix_operation_int : matrix_buffer;
 
     variable vector_psi_output : vector_buffer;
 
@@ -1808,21 +1816,21 @@ package body dnc_core_pkg is
     -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      vector_ones_output(i) := ONE_DATA;
+      vector_ones_int(i) := ONE_DATA;
     end loop;
 
-    vector_operation_output := function_vector_float_adder (
+    vector_operation_int := function_vector_float_adder (
       OPERATION => '1',
 
       SIZE_IN => SIZE_R_IN,
 
-      vector_a_input => vector_ones_output,
-      vector_b_input => vector_operation_output
+      vector_a_input => vector_ones_int,
+      vector_b_input => vector_f_input
       );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        matrix_operation_int(i, j) := vector_operation_output(i);
+        matrix_operation_int(i, j) := vector_operation_int(i);
       end loop;
     end loop;
 
@@ -1835,8 +1843,8 @@ package body dnc_core_pkg is
       );
 
     vector_psi_output := function_vector_summation (
-      SIZE_IN   => SIZE_R_IN,
-      LENGTH_IN => SIZE_N_IN,
+      SIZE_IN   => SIZE_N_IN,
+      LENGTH_IN => SIZE_R_IN,
 
       vector_input => matrix_operation_int
       );
@@ -1853,9 +1861,9 @@ package body dnc_core_pkg is
 
     variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-    variable vector_ones_output : vector_buffer;
+    variable vector_ones_int : vector_buffer;
 
-    variable vector_operation_output : vector_buffer;
+    variable vector_operation_int : vector_buffer;
 
     variable vector_p_output : vector_buffer;
 
@@ -1872,24 +1880,24 @@ package body dnc_core_pkg is
       );
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_ones_output(j) := ONE_DATA;
+      vector_ones_int(j) := ONE_DATA;
 
-      vector_operation_output(j) := data_summation_int;
+      vector_operation_int(j) := data_summation_int;
     end loop;
 
-    vector_operation_output := function_vector_float_adder (
+    vector_operation_int := function_vector_float_adder (
       OPERATION => '1',
 
       SIZE_IN => SIZE_N_IN,
 
-      vector_a_input => vector_ones_output,
-      vector_b_input => vector_operation_output
+      vector_a_input => vector_ones_int,
+      vector_b_input => vector_operation_int
       );
 
-    vector_operation_output := function_vector_float_multiplier (
+    vector_operation_int := function_vector_float_multiplier (
       SIZE_IN => SIZE_N_IN,
 
-      vector_a_input => vector_operation_output,
+      vector_a_input => vector_operation_int,
       vector_b_input => vector_p_input
       );
 
@@ -1898,7 +1906,7 @@ package body dnc_core_pkg is
 
       SIZE_IN => SIZE_N_IN,
 
-      vector_a_input => vector_operation_output,
+      vector_a_input => vector_operation_int,
       vector_b_input => vector_w_input
       );
 
@@ -2318,7 +2326,7 @@ package body dnc_core_pkg is
       );
 
     vector_operation_int := function_vector_float_adder (
-      OPERATION => '1',
+      OPERATION => '0',
 
       SIZE_IN => SIZE_N_IN,
 

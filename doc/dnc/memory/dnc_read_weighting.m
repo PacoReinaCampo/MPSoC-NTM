@@ -44,19 +44,42 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
+  addpath(genpath('../../math/algebra/matrix'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  [SIZE_R_IN, SIZE_N_IN] = size(B_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
+  matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
+
+  for i = 1:SIZE_R_IN
+    for j = 1:SIZE_N_IN
+      matrix_operation_int(i, j) = PI_IN(j, 1);
     end
   end
+
+  matrix_first_multiplier_int = matrix_operation_int.*B_IN;
+
+  for i = 1:SIZE_R_IN
+    for j = 1:SIZE_N_IN
+      matrix_operation_int(i, j) = PI_IN(j, 2);
+    end
+  end
+
+  matrix_second_multiplier_int = matrix_operation_int.*C_IN;
+
+  matrix_adder_int = matrix_first_multiplier_int + matrix_second_multiplier_int;
+
+  matrix_first_multiplier_int = matrix_operation_int.*B_IN;
+
+  for i = 1:SIZE_R_IN
+    for j = 1:SIZE_N_IN
+      matrix_operation_int(i, j) = PI_IN(j, 3);
+    end
+  end
+
+  matrix_first_multiplier_int = matrix_operation_int.*F_IN;
+
+  W_OUT = matrix_first_multiplier_int + matrix_adder_int;
 end

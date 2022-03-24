@@ -44,19 +44,18 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function U_OUT = dnc_usage_vector(U_IN, W_IN, PSI_IN)
+  addpath(genpath('../../math/algebra/vector'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  SIZE_N_IN = length(U_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
-    end
-  end
+  vector_operation_int = U_IN.*W_IN;
+
+  vector_operation_int = W_IN - vector_operation_int;
+
+  vector_operation_int = U_IN - vector_operation_int;
+
+  U_OUT = vector_operation_int.*PSI_IN;
 end

@@ -44,19 +44,20 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function M_OUT = dnc_memory_matrix(M_IN, W_IN, V_IN, E_IN)
+  addpath(genpath('../../math/algebra/matrix'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
-    end
-  end
+  matrix_first_operation_int = ntm_transpose_vector_product(W_IN, E_IN);
+
+  matrix_second_operation_int = ones(SIZE_N_IN, SIZE_W_IN) - matrix_first_operation_int;
+
+  matrix_first_operation_int = M_IN.*matrix_second_operation_int;
+
+  matrix_second_operation_int = ntm_transpose_vector_product(W_IN, V_IN);
+
+  M_OUT = matrix_first_operation_int + matrix_second_operation_int;
 end

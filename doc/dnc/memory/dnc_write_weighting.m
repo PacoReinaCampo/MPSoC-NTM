@@ -44,19 +44,28 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function W_OUT = dnc_write_weighting(A_IN, C_IN, GA_IN, GW_IN)
+  addpath(genpath('../../math/algebra/vector'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  SIZE_N_IN = length(A_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
-    end
+  vector_ga_int = zeros(SIZE_N_IN, 1);
+  vector_gw_int = zeros(SIZE_N_IN, 1);
+
+  for j = 1:SIZE_N_IN
+    vector_ga_int(j) = GA_IN;
+    vector_gw_int(j) = GW_IN;
   end
+
+  vector_cga_int = ones(SIZE_N_IN, 1) - vector_ga_int;
+
+  vector_ga_int = vector_ga_int.*A_IN;
+
+  vector_cga_int = vector_cga_int.*C_IN;
+
+  vector_operation_int = vector_ga_int + vector_cga_int;
+
+  W_OUT = vector_gw_int.*vector_operation_int;
 end

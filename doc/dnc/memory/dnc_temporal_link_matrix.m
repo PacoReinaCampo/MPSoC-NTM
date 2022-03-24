@@ -44,19 +44,32 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function L_OUT = dnc_temporal_link_matrix(L_IN, W_IN, P_IN)
+  addpath(genpath('../../math/algebra/matrix'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  SIZE_N_IN = length(W_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
+  % L(t=0)[g,j] = 0
+
+  matrix_w_i_int = zeros(SIZE_N_IN, SIZE_N_IN);
+  matrix_w_j_int = zeros(SIZE_N_IN, SIZE_N_IN);
+
+  for g = 1:SIZE_N_IN
+    for j = 1:SIZE_N_IN
+      matrix_w_i_int(g, j) = W_IN(g);
+      matrix_w_j_int(g, j) = W_IN(j);
     end
   end
+
+  matrix_first_operation_int = ones(SIZE_N_IN, SIZE_N_IN) - matrix_w_i_int;
+
+  matrix_first_operation_int = matrix_first_operation_int - matrix_w_j_int;
+
+  matrix_first_operation_int = matrix_first_operation_int.*L_IN;
+
+  matrix_second_operation_int = ntm_transpose_vector_product(W_IN, P_IN);
+
+  L_OUT = matrix_first_operation_int + matrix_second_operation_int;
 end

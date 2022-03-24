@@ -44,19 +44,32 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN)
+  addpath(genpath('../../math/algebra/vector'));
+  addpath(genpath('../../math/calculus/vector'));
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
+  % C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
+  vector_beta_int = zeros(SIZE_N_IN, 1);
+
+  vector_j_operation_int = zeros(SIZE_N_IN, 1);
+  vector_k_operation_int = zeros(SIZE_W_IN, 1);
+
+  for j = 1:SIZE_N_IN
+    vector_beta_int(j) = BETA_IN;
+
+    for k = 1:SIZE_W_IN
+      vector_k_operation_int(k) = M_IN(j, k);
     end
+
+    scalar_operation_int = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
+    
+    vector_j_operation_int(j) = scalar_operation_int;
   end
+
+  vector_j_operation_int = ntm_matrix_vector_product(vector_j_operation_int, vector_beta_int);
+
+  C_OUT = ntm_vector_softmax(vector_j_operation_int);
 end

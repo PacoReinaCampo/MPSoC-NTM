@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function M_OUT = dnc_backward_weighting(L_IN, W_IN)
+function B_OUT = dnc_backward_weighting(L_IN, W_IN)
   addpath(genpath('../../math/algebra/matrix'));
 
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
@@ -53,7 +53,7 @@ function M_OUT = dnc_backward_weighting(L_IN, W_IN)
 
   vector_operation_int = zeros(SIZE_R_IN, 1);
 
-  M_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
+  B_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN
@@ -65,7 +65,7 @@ function M_OUT = dnc_backward_weighting(L_IN, W_IN)
     vector_operation_int = ntm_matrix_vector_product(matrix_operation_int, vector_operation_int);
 
     for j = 1:SIZE_N_IN
-      M_OUT(i, j) = vector_operation_int(j);
+      B_OUT(i, j) = vector_operation_int(j);
     end
   end
 end

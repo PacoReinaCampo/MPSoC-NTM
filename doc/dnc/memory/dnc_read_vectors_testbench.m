@@ -44,26 +44,11 @@
 ###################################################################################
 %}
 
-function P_OUT = dnc_precedence_weighting(W_IN, P_IN)
-  addpath(genpath('../../math/algebra/scalar'));
+SIZE_R_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
 
-  SIZE_N_IN = length(W_IN);
+M_IN = rand(SIZE_N_IN, SIZE_W_IN);
+W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 
-  % p(t;j) = (1 - summation(w(t;j))[j in 1 to N])·p(t-1;j) + w(t;j)
-
-  % p(t=0) = 0
-
-  vector_operation_int = zeros(SIZE_N_IN, 1);
-
-  data_summation_int = ntm_scalar_summation(W_IN, SIZE_N_IN);
-
-  for j = 1:SIZE_N_IN
-    vector_operation_int(j) = data_summation_int;
-  end
-
-  vector_operation_int = ones(SIZE_N_IN, 1) - vector_operation_int;
-
-  vector_operation_int = vector_operation_int.*P_IN;
-
-  P_OUT = vector_operation_int + W_IN;
-end
+R_OUT = dnc_read_vectors(M_IN, W_IN);

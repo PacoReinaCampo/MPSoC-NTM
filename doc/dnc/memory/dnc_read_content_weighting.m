@@ -44,19 +44,9 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_product(DATA_A_IN, DATA_B_IN)
-  [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-  [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
+function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
 
-  DATA_OUT = zeros(SIZE_A_I_IN, SIZE_B_J_IN);
+  % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 
-  for i = 1:SIZE_A_I_IN
-    for j = 1:SIZE_B_J_IN
-      DATA_OUT(i, j) = 0;
-
-      for m = 1:SIZE_A_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(i, m)*DATA_B_IN(m, j);
-      end
-    end
-  end
+  C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN);
 end
