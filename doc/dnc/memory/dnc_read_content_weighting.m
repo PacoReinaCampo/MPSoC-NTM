@@ -47,6 +47,10 @@
 function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
 
   SIZE_R_IN = length(BETA_IN);
+  
+  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+
+  C_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
 
   % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 

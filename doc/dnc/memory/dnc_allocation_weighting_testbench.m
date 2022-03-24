@@ -49,4 +49,4 @@ SIZE_N_IN = 3;
 U_IN = rand(SIZE_N_IN, 1);
 PHI_IN = rand(SIZE_N_IN, 1);
 
-A_OUT = dnc_allocation_weighting(U_IN, PHI_IN);
+A_OUT = dnc_allocation_weighting(U_IN);
