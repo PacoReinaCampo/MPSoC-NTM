@@ -47,8 +47,8 @@
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
-K_IN = rand(SIZE_W_IN, 1);
-BETA_IN = rand(1, 1);
+K_IN = rand(SIZE_R_IN, SIZE_W_IN);
+BETA_IN = rand(SIZE_R_IN, 1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
 C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN);

@@ -46,7 +46,11 @@
 
 function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
 
+  SIZE_R_IN = length(BETA_IN);
+
   % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 
-  C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN);
+  for i = 1:SIZE_R_IN
+    C_OUT(i, :) = dnc_content_based_addressing(K_IN(i, :), BETA_IN(i), M_IN);
+  end
 end

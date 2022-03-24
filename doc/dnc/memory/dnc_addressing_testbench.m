@@ -44,14 +44,20 @@
 ###################################################################################
 %}
 
-function A_OUT = dnc_allocation_weighting(U_IN)
-  addpath(genpath('../../math/algebra/matrix'));
+SIZE_R_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
 
-  SIZE_N_IN = length(U_IN);
+K_READ_IN = rand(SIZE_R_IN, SIZE_W_IN);
+BETA_READ_IN = rand(SIZE_R_IN, 1);
+F_READ_IN = rand(SIZE_R_IN, 1);
+PI_READ_IN = rand(SIZE_R_IN, 3);
 
-  % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+K_WRITE_IN = rand(SIZE_W_IN, 1);
+BETA_WRITE_IN = rand(1, 1);
+E_WRITE_IN = rand(SIZE_W_IN, 1);
+V_WRITE_IN = rand(SIZE_W_IN, 1);
+GA_WRITE_IN = rand(1, 1);
+GW_WRITE_IN = rand(1, 1);
 
-  vector_operation_int = dnc_sort_vector(U_IN);
-
-  A_OUT = vector_operation_int;
-end
+R_OUT = dnc_addressing(K_READ_IN, BETA_READ_IN, F_READ_IN, PI_READ_IN, K_WRITE_IN, BETA_WRITE_IN, E_WRITE_IN, V_WRITE_IN, GA_WRITE_IN, GW_WRITE_IN);
