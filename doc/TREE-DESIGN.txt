@@ -27,14 +27,20 @@
 │   │
 │   └───transformer
 │           ntm_controller.m
+│           ntm_controller.png
 │           ntm_decoder.m
+│           ntm_decoder.png
 │           ntm_encoder.m
+│           ntm_encoder.png
 │           ntm_fnn.m
 │           ntm_keys_vector.m
+│           ntm_layer_norm.m
 │           ntm_multi_head_attention.m
+│           ntm_multi_head_attention.png
 │           ntm_positional_encoding.m
 │           ntm_queries_vector.m
 │           ntm_scaled_dot_product_attention.m
+│           ntm_scaled_dot_product_attention.png
 │           ntm_values_vector.m
 │
 ├───dnc
@@ -42,6 +48,7 @@
 │   │       dnc_addressing.m
 │   │       dnc_allocation_weighting.m
 │   │       dnc_backward_weighting.m
+│   │       dnc_content_based_addressing.asv
 │   │       dnc_content_based_addressing.m
 │   │       dnc_forward_weighting.m
 │   │       dnc_memory_matrix.m
@@ -74,6 +81,10 @@
 │   │   │       ntm_matrix_vector_product.m
 │   │   │       ntm_transpose_vector_product.m
 │   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_multiplication.m
+│   │   │       ntm_scalar_summation.m
+│   │   │
 │   │   ├───tensor
 │   │   │       ntm_tensor_convolution.m
 │   │   │       ntm_tensor_inverse.m
@@ -105,18 +116,23 @@
 │   │           ntm_vector_integration.m
 │   │           ntm_vector_softmax.m
 │   │
-│   └───function
-│       ├───matrix
-│       │       ntm_matrix_logistic_function.m
-│       │       ntm_matrix_oneplus_function.m
-│       │
-│       ├───scalar
-│       │       ntm_scalar_logistic_function.m
-│       │       ntm_scalar_oneplus_function.m
-│       │
+│   ├───function
+│   │   ├───matrix
+│   │   │       ntm_matrix_logistic_function.m
+│   │   │       ntm_matrix_oneplus_function.m
+│   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_logistic_function.m
+│   │   │       ntm_scalar_oneplus_function.m
+│   │   │
+│   │   └───vector
+│   │           ntm_vector_logistic_function.m
+│   │           ntm_vector_oneplus_function.m
+│   │
+│   └───statistics
 │       └───vector
-│               ntm_vector_logistic_function.m
-│               ntm_vector_oneplus_function.m
+│               ntm_deviation.m
+│               ntm_mean.m
 │
 ├───ntm
 │   ├───memory

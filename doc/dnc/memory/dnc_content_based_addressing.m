@@ -52,21 +52,17 @@ function C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN)
 
   % C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
-  vector_beta_int = zeros(SIZE_N_IN, 1);
+  vector_beta_int = BETA_IN*ones(SIZE_N_IN, 1);
 
   vector_j_operation_int = zeros(SIZE_N_IN, 1);
   vector_k_operation_int = zeros(SIZE_W_IN, 1);
 
   for j = 1:SIZE_N_IN
-    vector_beta_int(j) = BETA_IN;
-
     for k = 1:SIZE_W_IN
       vector_k_operation_int(k) = M_IN(j, k);
     end
-
-    scalar_operation_int = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
     
-    vector_j_operation_int(j) = scalar_operation_int;
+    vector_j_operation_int(j) = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
   end
 
   vector_j_operation_int = ntm_matrix_vector_product(vector_j_operation_int, vector_beta_int);

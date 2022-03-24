@@ -27,14 +27,20 @@
 │   │
 │   └───transformer
 │           ntm_controller_testbench.m
+│           ntm_controller.png
 │           ntm_decoder_testbench.m
+│           ntm_decoder.png
 │           ntm_encoder_testbench.m
+│           ntm_encoder.png
 │           ntm_fnn_testbench.m
 │           ntm_keys_vector_testbench.m
+│           ntm_layer_norm_testbench.m
 │           ntm_multi_head_attention_testbench.m
+│           ntm_multi_head_attention.png
 │           ntm_positional_encoding_testbench.m
 │           ntm_queries_vector_testbench.m
 │           ntm_scaled_dot_product_attention_testbench.m
+│           ntm_scaled_dot_product_attention.png
 │           ntm_values_vector_testbench.m
 │
 ├───dnc
@@ -42,6 +48,7 @@
 │   │       dnc_addressing_testbench.m
 │   │       dnc_allocation_weighting_testbench.m
 │   │       dnc_backward_weighting_testbench.m
+│   │       dnc_content_based_addressing.asv
 │   │       dnc_content_based_addressing_testbench.m
 │   │       dnc_forward_weighting_testbench.m
 │   │       dnc_memory_matrix_testbench.m
@@ -74,6 +81,10 @@
 │   │   │       ntm_matrix_vector_product_testbench.m
 │   │   │       ntm_transpose_vector_product_testbench.m
 │   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_multiplication_testbench.m
+│   │   │       ntm_scalar_summation_testbench.m
+│   │   │
 │   │   ├───tensor
 │   │   │       ntm_tensor_convolution_testbench.m
 │   │   │       ntm_tensor_inverse_testbench.m
@@ -105,18 +116,23 @@
 │   │           ntm_vector_integration_testbench.m
 │   │           ntm_vector_softmax_testbench.m
 │   │
-│   └───function
-│       ├───matrix
-│       │       ntm_matrix_logistic_function_testbench.m
-│       │       ntm_matrix_oneplus_function_testbench.m
-│       │
-│       ├───scalar
-│       │       ntm_scalar_logistic_function_testbench.m
-│       │       ntm_scalar_oneplus_function_testbench.m
-│       │
+│   ├───function
+│   │   ├───matrix
+│   │   │       ntm_matrix_logistic_function_testbench.m
+│   │   │       ntm_matrix_oneplus_function_testbench.m
+│   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_logistic_function_testbench.m
+│   │   │       ntm_scalar_oneplus_function_testbench.m
+│   │   │
+│   │   └───vector
+│   │           ntm_vector_logistic_function_testbench.m
+│   │           ntm_vector_oneplus_function_testbench.m
+│   │
+│   └───statistics
 │       └───vector
-│               ntm_vector_logistic_function_testbench.m
-│               ntm_vector_oneplus_function_testbench.m
+│               ntm_deviation_testbench.m
+│               ntm_mean_testbench.m
 │
 ├───ntm
 │   ├───memory
@@ -152,4 +168,4 @@
     │
     └───top
             ntm_state_top_testbench.m
-            ntm_state_top_testbench_testbench.m
+            ntm_state_top_testbench.m
