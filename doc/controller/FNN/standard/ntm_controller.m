@@ -53,9 +53,9 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   [SIZE_T_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
 
-  matrix_first_operation_int = zeros(SIZE_R_IN, SIZE_W_IN);
+  r_int = zeros(SIZE_R_IN, SIZE_W_IN);
 
-  matrix_second_operation_int = zeros(SIZE_R_IN, SIZE_M_IN);
+  rho_int = zeros(SIZE_R_IN, SIZE_M_IN);
 
   H_OUT = zeros(SIZE_T_IN, SIZE_L_IN);
 
@@ -71,30 +71,30 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
       % K(i;l;k)·r(t;i;k)
       for i = 1:SIZE_R_IN
         for k = 1:SIZE_W_IN
-          matrix_first_operation_int(i, k) = R_IN(t, i, k);
+          r_int(i, k) = R_IN(t, i, k);
         end
       end
 
-      matrix_first_operation_int = ntm_tensor_matrix_product(K_IN, matrix_first_operation_int);
+      r_int = ntm_tensor_matrix_product(K_IN, r_int);
 
       for l = 1:SIZE_L_IN
         for i = 1:SIZE_R_IN
-          vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
+          vector_first_operation_int(l) = vector_first_operation_int(l) + r_int(i, l);
         end
       end
 
       % D(i;l;m)·rho(t;i;m)
       for i = 1:SIZE_R_IN
         for m = 1:SIZE_M_IN
-          matrix_second_operation_int(i, m) = RHO_IN(t, i, m);
+          rho_int(i, m) = RHO_IN(t, i, m);
         end
       end
 
-      matrix_second_operation_int = ntm_tensor_matrix_product(D_IN, matrix_second_operation_int);
+      rho_int = ntm_tensor_matrix_product(D_IN, rho_int);
 
       for l = 1:SIZE_L_IN
         for i = 1:SIZE_R_IN
-          vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
+          vector_first_operation_int(l) = vector_first_operation_int(l) + rho_int(i, l);
         end
       end
 
