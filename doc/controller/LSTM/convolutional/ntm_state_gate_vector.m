@@ -45,15 +45,21 @@
 %}
 
 function S_OUT = ntm_state_gate_vector(I_IN, F_IN, A_IN)
-  SIZE_L_IN  = length(I_IN);
+  [SIZE_T_IN, SIZE_L_IN]  = size(I_IN);
+
+  S_OUT = zeros(SIZE_T_IN, SIZE_L_IN);
 
   % s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
   % s(t=0;l) = 0
-  vector_s_int = zeros(SIZE_L_IN, 1);
+  for t = 1:SIZE_T_IN
+    if (t == 1)
+      S_OUT(t, :) = zeros(SIZE_L_IN, 1);
+    else
+      vector_first_operation_int = F_IN(t, :).*S_OUT(t-1, :);
 
-  vector_first_operation_int = F_IN.*vector_s_int;
+      vector_second_operation_int = I_IN(t, :).*A_IN(t, :);
 
-  vector_second_operation_int = I_IN.*A_IN;
-
-  S_OUT = vector_first_operation_int + vector_second_operation_int;
+      S_OUT(t, :) = vector_first_operation_int + vector_second_operation_int;
+    end
+  end
 end

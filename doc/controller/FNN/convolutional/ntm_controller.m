@@ -51,13 +51,13 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
 
-  [SIZE_T_IN, SIZE_R_IN] = size(X_IN);
-
   [SIZE_T_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
 
   matrix_first_operation_int = zeros(SIZE_R_IN, SIZE_W_IN);
 
   matrix_second_operation_int = zeros(SIZE_R_IN, SIZE_M_IN);
+
+  H_OUT = zeros(SIZE_T_IN, SIZE_L_IN);
 
   % h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t))
   for t = 1:SIZE_T_IN
