@@ -51,32 +51,66 @@ function O_OUT = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN
 
   [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
 
-  % o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
-  vector_operation_int = ntm_matrix_vector_convolution(W_IN, X_IN);
+  [SIZE_T_IN, SIZE_R_IN] = size(X_IN);
 
-  matrix_operation_int = ntm_tensor_matrix_convolution(K_IN, R_IN);
+  [SIZE_T_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
 
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
+  matrix_first_operation_int = zeros(SIZE_R_IN, SIZE_W_IN);
+
+  matrix_second_operation_int = zeros(SIZE_R_IN, SIZE_M_IN);
+
+  % o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t))
+  for t = 1:SIZE_T_IN
+    % W(l;x)*x(t;x)
+    vector_first_operation_int = ntm_matrix_vector_convolution(W_IN, X_IN(t, :));
+
+    % K(i;l;k)*r(t;i;k)
+    for i = 1:SIZE_R_IN
+      for k = 1:SIZE_W_IN
+        matrix_first_operation_int(i, k) = R_IN(t, i, k);
+      end
     end
-  end
 
-  matrix_operation_int = ntm_tensor_matrix_convolution(D_IN, RHO_IN);
+    matrix_first_operation_int = ntm_tensor_matrix_convolution(K_IN, matrix_first_operation_int);
 
-  for i = 1:SIZE_R_IN
     for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
+      for i = 1:SIZE_R_IN
+        vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
+      end
     end
+
+    % D(i;l;m)*rho(t;i;m)
+    for i = 1:SIZE_R_IN
+      for m = 1:SIZE_M_IN
+        matrix_second_operation_int(i, m) = RHO_IN(t, i, m);
+      end
+    end
+
+    matrix_second_operation_int = ntm_tensor_matrix_convolution(D_IN, matrix_second_operation_int);
+
+    for l = 1:SIZE_L_IN
+      for i = 1:SIZE_R_IN
+        vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
+      end
+    end
+
+    % V(s;l)*xi(t;s)
+    vector_second_operation_int = ntm_matrix_vector_convolution(V_IN, XI_IN(t, :));
+    vector_second_operation_int = vector_second_operation_int + vector_first_operation_int;
+
+    % U(l;l)*h(t-1;l)
+    if (t == 1)
+      vector_first_operation_int = ntm_matrix_vector_convolution(U_IN, zeros(SIZE_L_IN, 1));
+    else
+      vector_first_operation_int = ntm_matrix_vector_convolution(U_IN, H_IN(t-1, :));
+    end
+
+    vector_first_operation_int = vector_first_operation_int + vector_second_operation_int;
+
+    % b(t)
+    vector_second_operation_int = vector_first_operation_int + B_IN;
+
+    % sigmoid(.)
+    O_OUT(t, :) = ntm_vector_logistic_function(vector_second_operation_int);
   end
-
-  O_OUT = vector_operation_int + B_IN;
-
-  vector_operation_int = ntm_matrix_vector_convolution(V_IN, XI_IN);
-
-  O_OUT = O_OUT + vector_operation_int;
-
-  vector_operation_int = ntm_matrix_vector_convolution(U_IN, H_IN);
-
-  O_OUT = O_OUT + vector_operation_int;
 end

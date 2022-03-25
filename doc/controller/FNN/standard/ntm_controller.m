@@ -73,8 +73,8 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
     matrix_first_operation_int = ntm_tensor_matrix_product(K_IN, matrix_first_operation_int);
 
-    for i = 1:SIZE_R_IN
-      for l = 1:SIZE_L_IN
+    for l = 1:SIZE_L_IN
+      for i = 1:SIZE_R_IN
         vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
       end
     end
@@ -88,8 +88,8 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
     matrix_second_operation_int = ntm_tensor_matrix_product(D_IN, matrix_second_operation_int);
 
-    for i = 1:SIZE_R_IN
-      for l = 1:SIZE_L_IN
+    for l = 1:SIZE_L_IN
+      for i = 1:SIZE_R_IN
         vector_first_operation_int(l) = vector_first_operation_int(l) + matrix_first_operation_int(i, l);
       end
     end
