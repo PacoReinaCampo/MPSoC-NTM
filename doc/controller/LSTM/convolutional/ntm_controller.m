@@ -50,7 +50,9 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   SIZE_L_IN = size(U_IN);
 
-  vector_s_in_int = zeros(SIZE_L_IN, 1);
+  [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
+
+  vector_s_in_int = zeros(SIZE_T_IN, SIZE_X_IN);
 
   % a(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
   vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
