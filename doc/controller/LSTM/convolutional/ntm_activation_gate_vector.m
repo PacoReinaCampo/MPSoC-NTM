@@ -50,7 +50,7 @@ function A_OUT = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, 
 
   [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
 
-  % a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+  % a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
   vector_operation_int = ntm_matrix_vector_convolution(W_IN, X_IN);
 
   matrix_operation_int = ntm_tensor_matrix_convolution(K_IN, R_IN);
