@@ -62,6 +62,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
   % h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(t))
   for t = 1:SIZE_T_IN
     if (t == 1)
+      % h(t=0;l) = 0; h(t;l=0) = 0
       H_OUT(t, :) = zeros(SIZE_L_IN, 1);
     else
       % W(l;x)·x(t;x)

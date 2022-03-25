@@ -64,6 +64,5 @@ X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
-H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
-H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);
