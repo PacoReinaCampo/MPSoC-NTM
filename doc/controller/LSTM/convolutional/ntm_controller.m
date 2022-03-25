@@ -48,12 +48,6 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));
 
-  SIZE_L_IN = size(U_IN);
-
-  [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
-
-  vector_s_in_int = zeros(SIZE_T_IN, SIZE_X_IN);
-
   % a(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
   vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
@@ -65,12 +59,12 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   % s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
   % s(t=0;l) = 0
-  vector_s_out_int = ntm_state_gate_vector(vector_s_in_int, vector_i_int, vector_f_int, vector_a_int);
+  vector_s_int = ntm_state_gate_vector(vector_i_int, vector_f_int, vector_a_int);
 
   % o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
   vector_o_int = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
   % h(t;l) = o(t;l) o tanh(s(t;l))
   % h(t=0;l) = 0; h(t;l=0) = 0
-  H_OUT = ntm_hidden_gate_vector(vector_s_out_int, vector_o_int);
+  H_OUT = ntm_hidden_gate_vector(vector_s_int, vector_o_int);
 end
