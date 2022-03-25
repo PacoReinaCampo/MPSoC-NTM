@@ -49,7 +49,7 @@ function F_OUT = dnc_forward_weighting(L_IN, W_IN)
 
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % f(t;i;j) = L(t;g;j)Â·w(t-1;i;j)
+  % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
   vector_operation_int = zeros(SIZE_R_IN, 1);
 

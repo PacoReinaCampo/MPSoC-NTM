@@ -49,7 +49,7 @@ function PSI_OUT = dnc_memory_retention_vector(W_IN, F_IN)
 
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % psi(t;j) = multiplication(1 - f(t;i)Â·w(t-1;i;j))[i in 1 to R]
+  % psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
   matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
 

@@ -50,7 +50,7 @@ function C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN)
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % C(M[j,Â·],k,beta)[j] = softmax(cosine_similarity(k,M[j,Â·])Â·beta)[j]
+  % C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
   vector_beta_int = BETA_IN*ones(SIZE_N_IN, 1);
 

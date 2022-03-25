@@ -49,7 +49,7 @@ function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
 
   [SIZE_R_IN, SIZE_N_IN] = size(B_IN);
 
-  % w(t;i,j) = pi(t;i)[1]Â·b(t;i;j) + pi(t;i)[2]Â·c(t;i,j) + pi(t;i)[3]Â·f(t;i;j)
+  % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
   matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
 

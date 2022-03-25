@@ -49,7 +49,7 @@ function M_OUT = dnc_memory_matrix(M_IN, W_IN, V_IN, E_IN)
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)Â·transpose(e(t;k))) + w(t;j)Â·transpose(v(t;k))
+  % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
   matrix_first_operation_int = ntm_transpose_vector_product(W_IN, E_IN);
 

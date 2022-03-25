@@ -48,6 +48,12 @@ function PHI_OUT = dnc_sort_vector(U_IN)
   SIZE_IN = length(U_IN);
 
   vector_operation_int = U_IN;
+  
+  vector_index_int = zeros(SIZE_IN, 1);
+
+  for i = 1:SIZE_IN
+    vector_index_int(i) = i;
+  end
 
   for i = 1:SIZE_IN
     for j = 1:SIZE_IN-i
@@ -57,9 +63,15 @@ function PHI_OUT = dnc_sort_vector(U_IN)
         vector_operation_int(j) = vector_operation_int(j + 1);
 
         vector_operation_int(j + 1) = scalar_operation_int;
+
+        scalar_index_int = vector_index_int(j);
+
+        vector_index_int(j) = vector_index_int(j + 1);
+
+        vector_index_int(j + 1) = scalar_index_int;
       end
     end
   end
 
-  PHI_OUT = vector_operation_int;
+  PHI_OUT = vector_index_int;
 end

@@ -50,7 +50,7 @@ function R_OUT = dnc_read_vectors(M_IN, W_IN)
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % r(t;i;k) = transpose(M(t;j;k))Â·w(t;i;j)
+  % r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN

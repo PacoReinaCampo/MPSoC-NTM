@@ -49,7 +49,7 @@ function P_OUT = dnc_precedence_weighting(W_IN, P_IN)
 
   SIZE_N_IN = length(W_IN);
 
-  % p(t;j) = (1 - summation(w(t;j))[j in 1 to N])Â·p(t-1;j) + w(t;j)
+  % p(t;j) = (1 - summation(w(t;j))[j in 1 to N])·p(t-1;j) + w(t;j)
 
   % p(t=0) = 0
 
