@@ -53,6 +53,5 @@ X_IN = rand(3, 1);
 R_IN = rand(3, 3);
 XI_IN = rand(3, 1);
 RHO_IN = rand(3, 3);
-H_IN = rand(3, 1); 
 
-Q_OUT = ntm_queries_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+Q_OUT = ntm_queries_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
