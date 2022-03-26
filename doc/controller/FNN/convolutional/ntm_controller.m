@@ -59,7 +59,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
 
   H_OUT = zeros(SIZE_T_IN, SIZE_L_IN);
 
-  % h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t))
+  % h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(t))
   for t = 1:SIZE_T_IN
     if (t == 1)
       % h(t=0;l) = 0; h(t;l=0) = 0
@@ -98,7 +98,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
         end
       end
 
-      % V(s;l)*xi(t;s)
+      % V(l;s)*xi(t;s)
       vector_second_operation_int = ntm_matrix_vector_convolution(V_IN, XI_IN(t, :));
       vector_second_operation_int = vector_second_operation_int + vector_first_operation_int;
 
