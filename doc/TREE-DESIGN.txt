@@ -28,9 +28,7 @@
 │   └───transformer
 │       ├───components
 │       │       ntm_multi_head_attention_testbench.m
-│       │       ntm_multi_head_attention.png
 │       │       ntm_scaled_dot_product_attention_testbench.m
-│       │       ntm_scaled_dot_product_attention.png
 │       │
 │       ├───functions
 │       │       ntm_fnn_testbench.m
@@ -45,11 +43,8 @@
 │       │
 │       └───top
 │               ntm_controller_testbench.m
-│               ntm_controller.png
 │               ntm_decoder_testbench.m
-│               ntm_decoder.png
 │               ntm_encoder_testbench.m
-│               ntm_encoder.png
 │
 ├───dnc
 │   ├───memory
@@ -136,7 +131,7 @@
 │   │           ntm_vector_logistic_function_testbench.m
 │   │           ntm_vector_oneplus_function_testbench.m
 │   │
-│   └───statistics
+│   └───statitics
 │       ├───matrix
 │       │       ntm_deviation_testbench.m
 │       │       ntm_mean_testbench.m

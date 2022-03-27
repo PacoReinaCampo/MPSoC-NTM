@@ -52,4 +52,4 @@ DEVIATION_IN = rand(SIZE_K_IN, 1);
 GAMMA_IN = rand(SIZE_K_IN, 1);
 BETA_IN = rand(SIZE_K_IN, 1); 
 
-N_OUT = ntm_layer_norm(Z_IN, MEAN_IN, DEVIATION_IN, GAMMA_IN, BETA_IN);
+N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);

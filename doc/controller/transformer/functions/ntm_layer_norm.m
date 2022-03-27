@@ -44,17 +44,19 @@
 ###################################################################################
 %}
 
-function N_OUT = ntm_layer_norm(Z_IN, MEAN_IN, DEVIATION_IN, GAMMA_IN, BETA_IN)
+function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));
   addpath(genpath('../../../math/function/vector'));
-  addpath(genpath('../../../math/statitics/matrix'));
+  addpath(genpath('../../../math/statitics/scalar'));
 
-  SIZE_K_IN = length(Z_IN);
+  scalar_operation_int = ntm_scalar_mean(Z_IN);
 
-  N_OUT = Z_IN - MEAN_IN;
+  N_OUT = Z_IN - scalar_operation_int;
 
-  N_OUT = N_OUT/DEVIATION_IN;
+  scalar_operation_int = ntm_scalar_deviation(Z_IN, scalar_operation_int);
+
+  N_OUT = N_OUT/scalar_operation_int;
 
   N_OUT = GAMMA_IN.*N_OUT;
 
