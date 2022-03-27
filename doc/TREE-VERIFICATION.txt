@@ -26,29 +26,36 @@
 │   │           ntm_state_gate_vector_testbench.m
 │   │
 │   └───transformer
-│           ntm_controller_testbench.m
-│           ntm_controller.png
-│           ntm_decoder_testbench.m
-│           ntm_decoder.png
-│           ntm_encoder_testbench.m
-│           ntm_encoder.png
-│           ntm_fnn_testbench.m
-│           ntm_keys_vector_testbench.m
-│           ntm_layer_norm_testbench.m
-│           ntm_multi_head_attention_testbench.m
-│           ntm_multi_head_attention.png
-│           ntm_positional_encoding_testbench.m
-│           ntm_queries_vector_testbench.m
-│           ntm_scaled_dot_product_attention_testbench.m
-│           ntm_scaled_dot_product_attention.png
-│           ntm_values_vector_testbench.m
+│       ├───components
+│       │       ntm_multi_head_attention_testbench.m
+│       │       ntm_multi_head_attention.png
+│       │       ntm_scaled_dot_product_attention_testbench.m
+│       │       ntm_scaled_dot_product_attention.png
+│       │
+│       ├───functions
+│       │       ntm_fnn_testbench.m
+│       │       ntm_layer_norm_testbench.m
+│       │       ntm_positional_encoding_testbench.m
+│       │
+│       ├───inputs
+│       │       ntm_inputs_vector_testbench.m
+│       │       ntm_keys_vector_testbench.m
+│       │       ntm_queries_vector_testbench.m
+│       │       ntm_values_vector_testbench.m
+│       │
+│       └───top
+│               ntm_controller_testbench.m
+│               ntm_controller.png
+│               ntm_decoder_testbench.m
+│               ntm_decoder.png
+│               ntm_encoder_testbench.m
+│               ntm_encoder.png
 │
 ├───dnc
 │   ├───memory
 │   │       dnc_addressing_testbench.m
 │   │       dnc_allocation_weighting_testbench.m
 │   │       dnc_backward_weighting_testbench.m
-│   │       dnc_content_based_addressing.asv
 │   │       dnc_content_based_addressing_testbench.m
 │   │       dnc_forward_weighting_testbench.m
 │   │       dnc_memory_matrix_testbench.m
@@ -130,6 +137,14 @@
 │   │           ntm_vector_oneplus_function_testbench.m
 │   │
 │   └───statistics
+│       ├───matrix
+│       │       ntm_deviation_testbench.m
+│       │       ntm_mean_testbench.m
+│       │
+│       ├───tensor
+│       │       ntm_deviation_testbench.m
+│       │       ntm_mean_testbench.m
+│       │
 │       └───vector
 │               ntm_deviation_testbench.m
 │               ntm_mean_testbench.m
@@ -168,4 +183,4 @@
     │
     └───top
             ntm_state_top_testbench.m
-            ntm_state_top_testbench.m
+            ntm_state_top_testbench_testbench.m
