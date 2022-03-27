@@ -44,8 +44,18 @@
 ###################################################################################
 %}
 
-LENGTH_IN = 3;
+function DATA_OUT = ntm_matrix_mean(DATA_IN)
+  [SIZE_I_IN, SIZE_J_IN, LENGTH_IN] = size(DATA_IN);
 
-DATA_IN = rand(LENGTH_IN, 1);
+  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
-DATA_OUT = ntm_mean(DATA_IN);
+  for i = 1:SIZE_I_IN
+    for j = 1:SIZE_J_IN
+      for m = 1:LENGTH_IN
+        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_IN(i, j, m);
+      end
+    end
+  end
+
+  DATA_OUT = DATA_OUT/LENGTH_IN;
+end

@@ -44,14 +44,9 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_mean(DATA_IN)
-  LENGTH_IN = length(DATA_IN);
+SIZE_IN = 3;
+LENGTH_IN = 3;
 
-  DATA_OUT = 0;
+DATA_IN = rand(SIZE_IN, LENGTH_IN);
 
-  for i = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + DATA_IN(i);
-  end
-
-  DATA_OUT = DATA_OUT/LENGTH_IN;
-end
+DATA_OUT = ntm_vector_mean(DATA_IN);

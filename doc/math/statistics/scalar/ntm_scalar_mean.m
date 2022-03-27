@@ -44,13 +44,13 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_mean(DATA_IN)
+function DATA_OUT = ntm_scalar_mean(DATA_IN)
   LENGTH_IN = length(DATA_IN);
 
   DATA_OUT = 0;
 
-  for i = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + DATA_IN(i);
+  for m = 1:LENGTH_IN
+    DATA_OUT = DATA_OUT + DATA_IN(m);
   end
 
   DATA_OUT = DATA_OUT/LENGTH_IN;

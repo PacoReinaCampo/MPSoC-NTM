@@ -45,9 +45,9 @@
 %}
 
 function H_OUT = ntm_fnn(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN)
-  addpath(genpath('../../math/algebra/matrix'));
-  addpath(genpath('../../math/algebra/tensor'));
-  addpath(genpath('../../math/function/vector'));
+  addpath(genpath('../../../math/algebra/matrix'));
+  addpath(genpath('../../../math/algebra/tensor'));
+  addpath(genpath('../../../math/function/vector'));
 
   [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
 

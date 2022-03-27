@@ -44,13 +44,17 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_deviation(DATA_IN, MEAN_IN)
-  LENGTH_IN = length(DATA_IN);
+function DATA_OUT = ntm_matrix_deviation(DATA_IN, MEAN_IN)
+  [SIZE_I_IN, SIZE_J_IN, LENGTH_IN] = size(DATA_IN);
 
-  DATA_OUT = 0;
+  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
-  for i = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + (DATA_IN(i) - MEAN_IN)^2;
+  for i = 1:SIZE_I_IN
+    for j = 1:SIZE_J_IN
+      for m = 1:LENGTH_IN
+        DATA_OUT(i, j) = DATA_OUT(i, j) + (DATA_IN(i, j, m) - MEAN_IN(i, j))^2;
+      end
+    end
   end
 
   DATA_OUT = DATA_OUT/LENGTH_IN;

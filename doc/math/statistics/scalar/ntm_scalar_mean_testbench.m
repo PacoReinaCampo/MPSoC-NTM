@@ -48,4 +48,4 @@ LENGTH_IN = 3;
 
 DATA_IN = rand(LENGTH_IN, 1);
 
-DATA_OUT = ntm_mean(DATA_IN);
+DATA_OUT = ntm_scalar_mean(DATA_IN);

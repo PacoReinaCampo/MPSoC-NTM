@@ -44,10 +44,18 @@
 ###################################################################################
 %}
 
-LENGTH_IN = 3;
+function DATA_OUT = ntm_vector_deviation(DATA_IN, MEAN_IN)
+  [SIZE_IN, LENGTH_IN] = size(DATA_IN);
 
-MEAN_IN = 1;
+  DATA_OUT = zeros(SIZE_IN, 1);
 
-DATA_IN = rand(LENGTH_IN, 1);
+  for i = 1:SIZE_IN
+    for m = 1:LENGTH_IN
+      DATA_OUT(i) = DATA_OUT(i) + (DATA_IN(i, m) - MEAN_IN(i))^2;
+    end
+  end
 
-DATA_OUT = ntm_deviation(DATA_IN, MEAN_IN);
+  DATA_OUT = DATA_OUT/LENGTH_IN;
+
+  DATA_OUT = sqrt(DATA_OUT);
+end

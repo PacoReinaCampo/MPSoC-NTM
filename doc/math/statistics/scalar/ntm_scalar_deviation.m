@@ -44,10 +44,16 @@
 ###################################################################################
 %}
 
-LENGTH_IN = 3;
+function DATA_OUT = ntm_scalar_deviation(DATA_IN, MEAN_IN)
+  LENGTH_IN = length(DATA_IN);
 
-MEAN_IN = 1;
+  DATA_OUT = 0;
 
-DATA_IN = rand(LENGTH_IN, 1);
+  for m = 1:LENGTH_IN
+    DATA_OUT = DATA_OUT + (DATA_IN(m) - MEAN_IN)^2;
+  end
 
-DATA_OUT = ntm_deviation(DATA_IN, MEAN_IN);
+  DATA_OUT = DATA_OUT/LENGTH_IN;
+
+  DATA_OUT = sqrt(DATA_OUT);
+end

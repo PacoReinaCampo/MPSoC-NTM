@@ -44,10 +44,11 @@
 ###################################################################################
 %}
 
+SIZE_IN = 3;
 LENGTH_IN = 3;
 
-MEAN_IN = 1;
+MEAN_IN = rand(SIZE_IN, 1);
 
-DATA_IN = rand(LENGTH_IN, 1);
+DATA_IN = rand(SIZE_IN, LENGTH_IN);
 
-DATA_OUT = ntm_deviation(DATA_IN, MEAN_IN);
+DATA_OUT = ntm_vector_deviation(DATA_IN, MEAN_IN);
