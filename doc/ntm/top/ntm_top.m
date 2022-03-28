@@ -82,9 +82,6 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, 
 
   matrix_w_int = rand(SIZE_L_IN, SIZE_X_IN);
 
-  KO_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
-  RO_IN = rand(SIZE_R_IN, SIZE_W_IN);
-  UO_IN = rand(SIZE_Y_IN, SIZE_L_IN);
   HO_IN = rand(SIZE_L_IN, 1);
 
   for t = 1:SIZE_T_IN
@@ -92,7 +89,7 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, 
     matrix_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
     % OUTPUT VECTOR
-    Y_OUT = ntm_output_vector(KO_IN, RO_IN, UO_IN, HO_IN);
+    Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, HO_IN);
 
     % INTERFACE VECTOR
     XI_OUT = ntm_interface_vector(matrix_u_int, matrix_h_int);
