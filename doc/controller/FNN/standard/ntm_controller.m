@@ -110,7 +110,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
       vector_second_operation_int = vector_first_operation_int + B_IN;
 
       % sigmoid(.)
-      H_OUT(t, :) = ntm_vector_logistic_function(vector_second_operation_int);
+      %%%% H_OUT(t, :) = ntm_vector_logistic_function(vector_second_operation_int);
     end
   end
 end
