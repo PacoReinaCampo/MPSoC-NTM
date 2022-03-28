@@ -47,8 +47,6 @@
 SIZE_K_IN = 3;
 
 Z_IN = rand(SIZE_K_IN, 1);
-MEAN_IN = rand(SIZE_K_IN, 1);
-DEVIATION_IN = rand(SIZE_K_IN, 1);
 GAMMA_IN = rand(SIZE_K_IN, 1);
 BETA_IN = rand(SIZE_K_IN, 1); 
 

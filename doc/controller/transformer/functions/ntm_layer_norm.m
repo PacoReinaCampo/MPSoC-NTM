@@ -45,9 +45,6 @@
 %}
 
 function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
-  addpath(genpath('../../../math/function/vector'));
   addpath(genpath('../../../math/statitics/scalar'));
 
   scalar_operation_int = ntm_scalar_mean(Z_IN);
