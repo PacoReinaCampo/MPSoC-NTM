@@ -45,6 +45,9 @@
 %}
 
 function Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
+
   [SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 
   SIZE_Y_IN = 3;
