@@ -45,13 +45,14 @@
 %}
 
 function Y_OUT = ntm_positional_encoding(X_IN)
-
+  % Constants
   SIZE_D_IN = 3;
   SIZE_K_IN = 3;
 
-  if ((-1)^X_IN == 0)
-    Y_OUT = sin(SIZE_K_IN/10000^(2*X_IN/SIZE_D_IN));
+  % Body
+  if ((-1).^X_IN == 0)
+    Y_OUT = sin(SIZE_K_IN/10000.^(2*X_IN/SIZE_D_IN));
   else
-    Y_OUT = cos(SIZE_K_IN/10000^(2*X_IN/SIZE_D_IN));
+    Y_OUT = cos(SIZE_K_IN/10000.^(2*X_IN/SIZE_D_IN));
   end
 end

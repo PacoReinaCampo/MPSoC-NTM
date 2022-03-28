@@ -44,6 +44,27 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_scaled_dot_product_attention(X_IN)
-  Y_OUT = X_IN;
+function U_OUT = ntm_scaled_dot_product_attention(W_HQ_IN, W_HK_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+  % Package
+  addpath(genpath('../../../math/algebra/matrix'));
+
+  addpath(genpath('../inputs'));
+
+  % Constants
+  [SIZE_D_IN, SIZE_K_IN] = size(W_HQ_IN);
+
+  [SIZE_N_IN, SIZE_X_IN] = size(X_IN);
+
+  % Body
+  q_int = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+  k_int = ntm_keys_vector(W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+
+  matrix_operation_int = ntm_matrix_transpose(k_int);
+  matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int);
+  scalar_operation_int = sqrt(SIZE_K_IN);
+  matrix_operation_int = matrix_operation_int/scalar_operation_int;
+
+  v_int = ntm_values_vector(W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+
+  U_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
 end

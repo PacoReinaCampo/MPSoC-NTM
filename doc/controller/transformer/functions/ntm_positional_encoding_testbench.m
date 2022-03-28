@@ -44,8 +44,11 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_D_IN = 3;
 
+% Signals
 X_IN = rand(SIZE_D_IN, 1);
 
+% DUT
 Y_OUT = ntm_positional_encoding(X_IN);

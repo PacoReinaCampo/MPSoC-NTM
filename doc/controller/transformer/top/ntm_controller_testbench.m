@@ -44,6 +44,7 @@
 ###################################################################################
 %}
 
+% Constants
 W_IN = rand(3, 3);
 K_IN = rand(3, 3, 3);
 U_IN = rand(3, 3);
@@ -55,4 +56,5 @@ R_IN = rand(3, 3);
 XI_IN = rand(3, 1);
 RHO_IN = rand(3, 3);
 
+% DUT
 Y_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);

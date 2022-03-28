@@ -45,8 +45,10 @@
 %}
 
 function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
+  % Package
   addpath(genpath('../../../math/statitics/scalar'));
 
+  % Body
   scalar_operation_int = ntm_scalar_mean(Z_IN);
 
   N_OUT = Z_IN - scalar_operation_int;
