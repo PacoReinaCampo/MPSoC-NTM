@@ -45,30 +45,64 @@
 %}
 
 function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN)
+  addpath(genpath('../memory'));
+  addpath(genpath('../read_heads'));
+  addpath(genpath('../write_heads'));
+
   [SIZE_L_IN, SIZE_X_IN] = size(W_IN);
 
   SIZE_Y_IN = 3;
+  SIZE_R_IN = 3;
+  SIZE_N_IN = 3;
+  SIZE_W_IN = 3;
+  SIZE_M_IN = 3;
+  SIZE_S_IN = 3;
 
   Y_OUT = zeros(SIZE_Y_IN, 1);
+
+  M_IN = zeros(SIZE_N_IN, SIZE_W_IN);
+  WA_IN = rand(SIZE_R_IN, 1);
+
+  A_IN = rand(1, SIZE_W_IN);
+  E_IN = rand(1, SIZE_W_IN);
+
+  KA_IN = rand(1, SIZE_W_IN);
+  BETA_IN = rand(1);
+  G_IN = rand(1);
+  S_IN = rand(1, SIZE_W_IN);
+  GAMMA_IN = rand(1);
+
+  matrix_u_int = rand(SIZE_R_IN, SIZE_M_IN, SIZE_L_IN);
+  matrix_h_int = rand(SIZE_R_IN, SIZE_L_IN);
+
+  vector_u_int = rand(SIZE_S_IN, SIZE_L_IN);
+  vector_h_int = rand(SIZE_L_IN, 1);
+
+  KO_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
+  RO_IN = rand(SIZE_R_IN, SIZE_W_IN);
+  UO_IN = rand(SIZE_Y_IN, SIZE_L_IN);
+  HO_IN = rand(SIZE_L_IN, 1);
 
   % CONTROLLER
 
   % OUTPUT VECTOR
-  % Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
+  Y_OUT = ntm_output_vector(KO_IN, RO_IN, UO_IN, HO_IN);
 
   % INTERFACE VECTOR
-  % XI_OUT = ntm_interface_vector(U_IN, H_IN);
+  XI_OUT = ntm_interface_vector(matrix_u_int, matrix_h_int);
 
   % INTERFACE MATRIX
-  % RHO_OUT = ntm_interface_matrix(U_IN, H_IN);
+  RHO_OUT = ntm_interface_matrix(vector_u_int, vector_h_int);
 
   % READING
+  R_OUT = ntm_reading(W_IN, M_IN);
 
   % WRITING
+  M_OUT = ntm_writing(M_IN, W_IN, A_IN);
 
   % ERASING
-
-  % WRITING
+  M_OUT = ntm_erasing(M_IN, W_IN, E_IN);
 
   % ADDRESSING
+  W_OUT = ntm_addressing(KA_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, WA_IN);
 end

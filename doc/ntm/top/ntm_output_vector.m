@@ -45,10 +45,20 @@
 %}
 
 function Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+  [SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 
-  Y_OUT = zeros(SIZE_Y_IN, 1);
+  SIZE_Y_IN = 3;
 
   % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
-  Y_OUT = K_IN*R_IN + U_IN*H_IN;end
+  % U(t;y;l)·h(t;l)
+  Y_OUT = ntm_matrix_vector_product(U_IN, H_IN);
+
+  % K(t;i;y;k)·r(t;i;k)
+  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
+  
+  for y = 1:SIZE_Y_IN
+    for i = 1:SIZE_R_IN
+      Y_OUT(y) = Y_OUT(y) + matrix_operation_int(i, y);
+    end
+  endend

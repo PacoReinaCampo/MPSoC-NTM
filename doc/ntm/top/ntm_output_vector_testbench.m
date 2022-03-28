@@ -44,22 +44,18 @@
 ###################################################################################
 %}
 
-function R_OUT = ntm_reading(W_IN, M_IN)
-  addpath(genpath('../../math/algebra/vector'));
+SIZE_X_IN = 3;
+SIZE_Y_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
+SIZE_L_IN = 3;
+SIZE_R_IN = 3;
+SIZE_S_IN = 3;
+SIZE_M_IN = 3;
 
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+K_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
+R_IN = rand(SIZE_R_IN, SIZE_W_IN);
+U_IN = rand(SIZE_Y_IN, SIZE_L_IN);
+H_IN = rand(SIZE_L_IN, 1);
 
-  matrix_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
-
-  % r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
-
-  for j = 1:SIZE_N_IN
-    for k = 1:SIZE_W_IN
-      matrix_operation_int(j, k) = W_IN(j);
-    end
-  end
-
-  matrix_operation_int = matrix_operation_int.*M_IN;
-
-  R_OUT = ntm_vector_summation(matrix_operation_int, SIZE_N_IN);
-end
+Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN);
