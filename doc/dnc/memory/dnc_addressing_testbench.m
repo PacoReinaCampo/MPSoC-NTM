@@ -44,20 +44,21 @@
 ###################################################################################
 %}
 
+SIZE_T_IN = 3;
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
-K_READ_IN = rand(SIZE_R_IN, SIZE_W_IN);
-BETA_READ_IN = rand(SIZE_R_IN, 1);
-F_READ_IN = rand(SIZE_R_IN, 1);
-PI_READ_IN = rand(SIZE_R_IN, 3);
+K_READ_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
+BETA_READ_IN = rand(SIZE_T_IN, SIZE_R_IN);
+F_READ_IN = rand(SIZE_T_IN, SIZE_R_IN);
+PI_READ_IN = rand(SIZE_T_IN, SIZE_R_IN, 3);
 
-K_WRITE_IN = rand(SIZE_W_IN, 1);
-BETA_WRITE_IN = rand(1, 1);
-E_WRITE_IN = rand(SIZE_W_IN, 1);
-V_WRITE_IN = rand(SIZE_W_IN, 1);
-GA_WRITE_IN = rand(1, 1);
-GW_WRITE_IN = rand(1, 1);
+K_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
+BETA_WRITE_IN = rand(SIZE_T_IN, 1);
+E_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
+V_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
+GA_WRITE_IN = rand(SIZE_T_IN, 1);
+GW_WRITE_IN = rand(SIZE_T_IN, 1);
 
 R_OUT = dnc_addressing(K_READ_IN, BETA_READ_IN, F_READ_IN, PI_READ_IN, K_WRITE_IN, BETA_WRITE_IN, E_WRITE_IN, V_WRITE_IN, GA_WRITE_IN, GW_WRITE_IN);

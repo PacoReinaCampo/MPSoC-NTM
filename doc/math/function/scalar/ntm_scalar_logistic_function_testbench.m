@@ -44,6 +44,6 @@
 ###################################################################################
 %}
 
-DATA_IN = rand(1, 1);
+DATA_IN = rand(1);
 
 DATA_OUT = ntm_scalar_logistic_function(DATA_IN);

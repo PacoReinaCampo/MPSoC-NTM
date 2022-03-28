@@ -49,7 +49,7 @@ SIZE_N_IN = 3;
 A_IN = rand(SIZE_N_IN, 1);
 C_IN = rand(SIZE_N_IN, 1);
 
-GA_IN = rand(1, 1);
-GW_IN = rand(1, 1);
+GA_IN = rand(1);
+GW_IN = rand(1);
 
 W_OUT = dnc_write_weighting(A_IN, C_IN, GA_IN, GW_IN);

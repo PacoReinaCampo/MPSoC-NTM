@@ -48,10 +48,10 @@ SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
 K_IN = rand(1, SIZE_W_IN);
-BETA_IN = rand(1, 1);
-G_IN = rand(1, 1);
+BETA_IN = rand(1);
+G_IN = rand(1);
 S_IN = rand(1, SIZE_W_IN);
-GAMMA_IN = rand(1, 1);
+GAMMA_IN = rand(1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_I_IN, 1);
 
