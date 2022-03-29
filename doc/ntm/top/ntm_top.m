@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN)
+function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN)
   % Package
   addpath(genpath('../../controller/FNN/standard'));
 
@@ -69,10 +69,7 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN)
   
   vector_u_int = rand(SIZE_S_IN, SIZE_L_IN);
 
-  matrix_h_int = rand(SIZE_R_IN, SIZE_L_IN);
-
   % Body
-
   for t = 1:SIZE_T_IN
     if (t == 1)
       vector_w_int = zeros(SIZE_N_IN, 1);
@@ -82,7 +79,9 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN)
       matrix_m_int = zeros(SIZE_N_IN, SIZE_W_IN);
     else
       % INTERFACE VECTOR
-      vector_xi_int = ntm_interface_vector(vector_u_int, vector_h_int);
+      matrix_operation_int = ntm_matrix_transpose(V_IN);
+
+      vector_xi_int = ntm_interface_vector(matrix_operation_int, vector_h_int);
 
       vector_e_int = vector_xi_int(SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
       vector_a_int = vector_xi_int(SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
@@ -94,7 +93,9 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN)
       scalar_gamma_int = vector_xi_int(1);
 
       % INTERFACE MATRIX
-      matrix_rho_int = ntm_interface_matrix(matrix_u_int, vector_h_int);
+      tensor_operation_int = ntm_tensor_transpose(D_IN);
+
+      matrix_rho_int = ntm_interface_matrix(tensor_operation_int, vector_h_int);
 
       matrix_e_int = matrix_rho_int(SIZE_N_IN, SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
       matrix_a_int = matrix_rho_int(SIZE_N_IN, SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
@@ -112,16 +113,20 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN)
       matrix_m_int = ntm_erasing(matrix_m_int, vector_w_int, vector_e_int);
 
       % READING
-      R_OUT = ntm_reading(vector_w_int, matrix_m_int);
+      vector_r_int = ntm_reading(vector_w_int, matrix_m_int);
+      
+      for i = 1:SIZE_R_IN
+        matrix_r_int(i, :) = vector_r_int;
+      end
 
       % ADDRESSING
       vector_w_int = ntm_addressing(vector_k_int, scalar_beta_int, scalar_g_int, vector_s_int, scalar_gamma_int, matrix_m_int, vector_w_int);
 
       % CONTROLLER
-      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, vector_xi_int, matrix_rho_int, vector_h_int);
+      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
 
       % OUTPUT VECTOR
-      Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, vector_h_int);
+      Y_OUT = ntm_output_vector(K_OUTPUT_IN, matrix_r_int, U_OUTPUT_IN, vector_h_int);
     end
   end
 end

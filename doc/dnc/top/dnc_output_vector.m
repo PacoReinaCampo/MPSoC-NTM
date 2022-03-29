@@ -44,21 +44,25 @@
 ###################################################################################
 %}
 
-SIZE_X_IN = 3;
-SIZE_Y_IN = 3;
-SIZE_N_IN = 3;
-SIZE_W_IN = 3;
-SIZE_L_IN = 3;
-SIZE_R_IN = 3;
-SIZE_S_IN = 3;
-SIZE_M_IN = 3;
+function Y_OUT = dnc_output_vector(K_IN, R_IN, U_IN, H_IN)
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
 
-W_IN = rand(SIZE_L_IN, SIZE_X_IN);
-K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN);
-U_IN = rand(SIZE_L_IN, SIZE_L_IN);
-V_IN = rand(SIZE_L_IN, SIZE_S_IN);
-D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
-B_IN = rand(SIZE_L_IN, 1);
-X_IN = rand(SIZE_X_IN, 1);
+  [SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 
-Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN);
+  SIZE_Y_IN = 3;
+
+  % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+
+  % U(t;y;l)·h(t;l)
+  Y_OUT = ntm_matrix_vector_product(U_IN, H_IN);
+
+  % K(t;i;y;k)·r(t;i;k)
+  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
+  
+  for y = 1:SIZE_Y_IN
+    for i = 1:SIZE_R_IN
+      Y_OUT(y) = Y_OUT(y) + matrix_operation_int(i, y);
+      end
+    end
+  end
