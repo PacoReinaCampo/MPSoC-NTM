@@ -57,6 +57,10 @@ function DATA_OUT = ntm_vector_softmax(DATA_IN)
     scalar_operation_int = exp(DATA_IN(i));
 
     data_summation_int = data_summation_int + scalar_operation_int;
+  end
+
+  for i = 1:SIZE_IN
+    scalar_operation_int = exp(DATA_IN(i));
 
     DATA_OUT(i) = scalar_operation_int/data_summation_int;
   end

@@ -59,6 +59,10 @@ function DATA_OUT = ntm_tensor_softmax(DATA_IN)
         scalar_operation_int = exp(DATA_IN(i, j, k));
 
         data_summation_int = data_summation_int + scalar_operation_int;
+      end
+
+      for k = 1:SIZE_K_IN
+        scalar_operation_int = exp(DATA_IN(i, j, k));
 
         DATA_OUT(i, j, k) = scalar_operation_int/data_summation_int;
       end

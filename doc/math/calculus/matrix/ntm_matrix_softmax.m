@@ -58,6 +58,10 @@ function DATA_OUT = ntm_matrix_softmax(DATA_IN)
       scalar_operation_int = exp(DATA_IN(i, j));
 
       data_summation_int = data_summation_int + scalar_operation_int;
+    end
+
+    for j = 1:SIZE_J_IN
+      scalar_operation_int = exp(DATA_IN(i, j));
 
       DATA_OUT(i, j) = scalar_operation_int/data_summation_int;
     end
