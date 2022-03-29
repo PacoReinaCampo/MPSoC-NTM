@@ -125,19 +125,19 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % v(t;k) = v^(t;k)
 
       % MEMORY_STATE
-      K_READ_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-      BETA_READ_IN = rand(SIZE_T_IN, SIZE_R_IN);
-      F_READ_IN = rand(SIZE_T_IN, SIZE_R_IN);
-      PI_READ_IN = rand(SIZE_T_IN, SIZE_R_IN, 3);
+      k_read_int = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
+      beta_read_int = rand(SIZE_T_IN, SIZE_R_IN);
+      f_read_int = rand(SIZE_T_IN, SIZE_R_IN);
+      pi_read_int = rand(SIZE_T_IN, SIZE_R_IN, 3);
 
-      K_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
-      BETA_WRITE_IN = rand(SIZE_T_IN, 1);
-      E_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
-      V_WRITE_IN = rand(SIZE_T_IN, SIZE_W_IN);
-      GA_WRITE_IN = rand(SIZE_T_IN, 1);
-      GW_WRITE_IN = rand(SIZE_T_IN, 1);
+      k_write_int = rand(SIZE_T_IN, SIZE_W_IN);
+      beta_write_int = rand(SIZE_T_IN, 1);
+      e_write_int = rand(SIZE_T_IN, SIZE_W_IN);
+      v_write_int = rand(SIZE_T_IN, SIZE_W_IN);
+      ga_write_int = rand(SIZE_T_IN, 1);
+      gw_write_int = rand(SIZE_T_IN, 1);
 
-      matrix_r_int = dnc_addressing(K_READ_IN, BETA_READ_IN, F_READ_IN, PI_READ_IN, K_WRITE_IN, BETA_WRITE_IN, E_WRITE_IN, V_WRITE_IN, GA_WRITE_IN, GW_WRITE_IN);
+      matrix_r_int = dnc_addressing(k_read_int, beta_read_int, f_read_int, pi_read_int, k_write_int, beta_write_int, e_write_int, v_write_int, ga_write_int, gw_write_int);
 
       % CONTROLLER_BODY_STATE
       vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
