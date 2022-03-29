@@ -49,7 +49,7 @@ function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  W_OUT = zeros(SIZE_W_IN, 1);
+  W_OUT = zeros(SIZE_N_IN, 1);
 
   % wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
   vector_operation_int = ntm_content_based_addressing(K_IN, BETA_IN, M_IN);

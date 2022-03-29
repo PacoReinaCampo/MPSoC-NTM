@@ -44,10 +44,9 @@
 ###################################################################################
 %}
 
-SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 
-S_IN = rand(SIZE_T_IN, SIZE_L_IN);
-O_IN = rand(SIZE_T_IN, SIZE_L_IN);
+S_IN = rand(SIZE_L_IN, 1);
+O_IN = rand(SIZE_L_IN, 1);
 
 H_OUT = ntm_hidden_gate_vector(S_IN, O_IN);

@@ -44,61 +44,25 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN)
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));
 
-  [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
+  % a(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
+  vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
-  [SIZE_T_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
+  % f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
+  vector_f_int = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
-  vector_a_int = zeros(SIZE_T_IN, SIZE_L_IN);
-  vector_f_int = zeros(SIZE_T_IN, SIZE_L_IN);
-  vector_i_int = zeros(SIZE_T_IN, SIZE_L_IN);
-  vector_o_int = zeros(SIZE_T_IN, SIZE_L_IN);
+  % i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
+  vector_i_int = ntm_input_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
-  vector_s_int = zeros(SIZE_T_IN, SIZE_L_IN);
+  % s(t;l) = f(t;l) o s(t-1,l) + i(t;l) o a(t;l)
+  vector_s_int = ntm_state_gate_vector(S_IN, vector_i_int, vector_f_int, vector_a_int);
 
-  r_int = zeros(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-  rho_int = zeros(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
+  % o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
+  vector_o_int = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
 
-  H_OUT = zeros(SIZE_T_IN, SIZE_L_IN);
-
-  for t = 1:SIZE_T_IN
-    if (t == 1)
-      % h(t=0;l) = 0; h(t;l=0) = 0
-      H_OUT(t, :) = zeros(SIZE_L_IN, 1);
-
-      % s(t=0;l) = 0
-      vector_s_int(t, :) = zeros(SIZE_L_IN, 1);
-    else
-      for i = 1:SIZE_R_IN
-        for k = 1:SIZE_W_IN
-          r_int(i, k) = R_IN(t, i, k);
-        end
-
-        for m = 1:SIZE_M_IN
-          rho_int(i, m) = RHO_IN(t, i, m);
-        end
-      end
-
-      % a(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
-      vector_a_int(t, :) = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), r_int, XI_IN(t, :), rho_int, H_OUT(t-1, :));
-
-      % f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
-      vector_f_int(t, :) = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), r_int, XI_IN(t, :), rho_int, H_OUT(t-1, :));
-
-      % i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
-      vector_i_int(t, :) = ntm_input_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), r_int, XI_IN(t, :), rho_int, H_OUT(t-1, :));
-
-      % s(t;l) = f(t;l) o s(t-1,l) + i(t;l) o a(t;l)
-      vector_s_int(t, :) = ntm_state_gate_vector(vector_s_int(t-1, :), vector_i_int(t, :), vector_f_int(t, :), vector_a_int(t, :));
-
-      % o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1,l) + b(l))
-      vector_o_int(t, :) = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), r_int, XI_IN(t, :), rho_int, H_OUT(t-1, :));
-
-      % h(t;l) = o(t;l) o tanh(s(t;l))
-      H_OUT(t, :) = ntm_hidden_gate_vector(vector_s_int(t, :), vector_o_int(t, :));
-    end
-  end
+  % h(t;l) = o(t;l) o tanh(s(t;l))
+  H_OUT = ntm_hidden_gate_vector(vector_s_int, vector_o_int);
 end

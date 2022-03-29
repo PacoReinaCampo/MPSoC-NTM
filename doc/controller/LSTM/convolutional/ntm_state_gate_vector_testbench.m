@@ -44,12 +44,11 @@
 ###################################################################################
 %}
 
-SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 
-S_IN = rand(SIZE_T_IN, SIZE_L_IN);
-I_IN = rand(SIZE_T_IN, SIZE_L_IN);
-F_IN = rand(SIZE_T_IN, SIZE_L_IN);
-A_IN = rand(SIZE_T_IN, SIZE_L_IN);
+S_IN = rand(SIZE_L_IN, 1);
+I_IN = rand(SIZE_L_IN, 1);
+F_IN = rand(SIZE_L_IN, 1);
+A_IN = rand(SIZE_L_IN, 1);
 
 S_OUT = ntm_state_gate_vector(S_IN, I_IN, F_IN, A_IN);

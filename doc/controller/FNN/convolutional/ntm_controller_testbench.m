@@ -44,7 +44,6 @@
 ###################################################################################
 %}
 
-SIZE_T_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
 SIZE_N_IN = 3;
@@ -60,9 +59,10 @@ U_IN = rand(SIZE_L_IN, SIZE_L_IN);
 V_IN = rand(SIZE_L_IN, SIZE_S_IN);
 D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
 B_IN = rand(SIZE_L_IN, 1);
-X_IN = rand(SIZE_T_IN, SIZE_X_IN);
-R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
-RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
+X_IN = rand(SIZE_X_IN, 1);
+R_IN = rand(SIZE_R_IN, SIZE_W_IN);
+XI_IN = rand(SIZE_S_IN, 1);
+RHO_IN = rand(SIZE_R_IN, SIZE_M_IN);
+H_IN = rand(SIZE_L_IN, 1);
 
-H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);
+H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);

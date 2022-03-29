@@ -44,7 +44,6 @@
 ###################################################################################
 %}
 
-SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
@@ -54,6 +53,6 @@ G_IN = rand(1);
 S_IN = rand(1, SIZE_W_IN);
 GAMMA_IN = rand(1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
-W_IN = rand(SIZE_R_IN, 1);
+W_IN = rand(SIZE_N_IN, 1);
 
 W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN);
