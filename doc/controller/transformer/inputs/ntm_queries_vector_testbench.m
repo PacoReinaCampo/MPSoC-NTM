@@ -47,15 +47,18 @@
 % Constants
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
+SIZE_K_IN = 3;
+SIZE_V_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
 SIZE_W_IN = 3;
 SIZE_R_IN = 3;
-SIZE_M_IN = 3;
-SIZE_S_IN = 3;
+
+SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
+SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
 % Signals
-W_HQ_IN = rand(SIZE_D_IN, SIZE_N_IN);
+W_HQ_IN = rand(SIZE_D_IN, SIZE_K_IN);
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
 V_IN = rand(SIZE_D_IN, SIZE_S_IN);
@@ -66,4 +69,4 @@ XI_IN = rand(SIZE_N_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_M_IN);
 
 % DUT
-Q_OUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+K_OUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

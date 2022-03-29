@@ -47,6 +47,7 @@
 function U_OUT = ntm_scaled_dot_product_attention(W_HQ_IN, W_HK_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
+  addpath(genpath('../../../math/calculus/matrix'));
 
   addpath(genpath('../inputs'));
 
@@ -63,8 +64,9 @@ function U_OUT = ntm_scaled_dot_product_attention(W_HQ_IN, W_HK_IN, W_HV_IN, W_I
   matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int);
   scalar_operation_int = sqrt(SIZE_K_IN);
   matrix_operation_int = matrix_operation_int/scalar_operation_int;
+  matrix_operation_int = ntm_matrix_softmax(matrix_operation_int);
 
   v_int = ntm_values_vector(W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  U_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
+  U_OUT = ntm_matrix_product(matrix_operation_int, v_int);
 end

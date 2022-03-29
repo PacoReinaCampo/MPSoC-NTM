@@ -48,41 +48,9 @@ function K_OUT = ntm_keys_vector(W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
 
-  % Constants
-  [SIZE_N_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);
-
-  [SIZE_N_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
-
-  [SIZE_D_IN, SIZE_N_IN] = size(W_HK_IN);
-
-  % Signals
-  r_int = zeros(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
-  rho_int = zeros(SIZE_N_IN, SIZE_R_IN, SIZE_M_IN);
-
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
-
-  K_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
-
   % Body
-  % K(n;d) = transpose(W(d;n))·x(n;d)
+  x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  % transpose(W(d;n))
-  matrix_operation_int = ntm_matrix_transpose(W_HK_IN);
-
-  for n = 1:SIZE_N_IN
-    for i = 1:SIZE_R_IN
-      for k = 1:SIZE_W_IN
-        r_int(i, k) = R_IN(n, i, k);
-      end
-
-      for m = 1:SIZE_M_IN
-        rho_int(i, m) = RHO_IN(n, i, m);
-      end
-    end
-
-    x_int(n, :) = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN(n, :), r_int, XI_IN(n, :), rho_int);
-
-    % transpose(W(d;n))·x(n;d)
-    K_OUT(n, :) = ntm_matrix_vector_product(matrix_operation_int, x_int(n, :));
-  end
+  % K(n;d) = X(n;d)·W(d;k)
+  K_OUT = ntm_matrix_product(W_HK_IN, x_int);
 end
