@@ -46,6 +46,10 @@
 
 function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN)
   % Package
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
+  addpath(genpath('../../math/function/vector'));
+
   addpath(genpath('../../controller/FNN/standard'));
 
   addpath(genpath('../memory'));
@@ -65,9 +69,7 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
   SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
   % Signals
-  matrix_u_int = rand(SIZE_R_IN, SIZE_M_IN, SIZE_L_IN);
-  
-  vector_u_int = rand(SIZE_S_IN, SIZE_L_IN);
+  matrix_r_int = rand(SIZE_R_IN, SIZE_W_IN);
 
   % Body
   for t = 1:SIZE_T_IN
