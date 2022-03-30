@@ -44,13 +44,16 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 PI_IN = rand(SIZE_N_IN, 3);
 B_IN = rand(SIZE_R_IN, SIZE_N_IN);
 C_IN = rand(SIZE_R_IN, SIZE_N_IN);
 F_IN = rand(SIZE_R_IN, SIZE_N_IN);
 
+% DUT
 W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN);

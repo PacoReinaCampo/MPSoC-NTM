@@ -45,10 +45,13 @@
 %}
 
 function RHO_OUT = ntm_interface_matrix(U_IN, H_IN)
+  % Package
   addpath(genpath('../../math/algebra/tensor'));
 
+  % Constants
   [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
 
+  % Body
   % rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
   for i = 1:SIZE_R_IN
     for l = 1:SIZE_L_IN

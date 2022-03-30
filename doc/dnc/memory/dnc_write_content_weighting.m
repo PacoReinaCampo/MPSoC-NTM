@@ -46,6 +46,7 @@
 
 function C_OUT = dnc_write_content_weighting(K_IN, BETA_IN, M_IN)
 
+  % Body
   % c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
 
   C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN);

@@ -45,10 +45,13 @@
 %}
 
 function M_OUT = ntm_erasing(M_IN, W_IN, E_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
+  % Body
   % M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
   matrix_operation_int = ntm_transpose_vector_product(W_IN, E_IN);

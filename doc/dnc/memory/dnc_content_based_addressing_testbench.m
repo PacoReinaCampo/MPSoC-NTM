@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 K_IN = rand(SIZE_W_IN, 1);
 BETA_IN = rand(1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
+% DUT
 C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN);

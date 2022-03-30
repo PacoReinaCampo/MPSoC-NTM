@@ -44,9 +44,12 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 
+% Signals
 W_IN = rand(SIZE_N_IN, 1);
 P_IN = rand(SIZE_N_IN, 1);
 
+% DUT
 P_OUT = dnc_precedence_weighting(W_IN, P_IN);

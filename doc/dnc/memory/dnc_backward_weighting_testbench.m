@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 
+% Signals
 L_IN = rand(SIZE_N_IN, SIZE_N_IN);
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 
+% DUT
 B_OUT = dnc_backward_weighting(L_IN, W_IN);

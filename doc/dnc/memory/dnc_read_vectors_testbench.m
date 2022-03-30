@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 
+% DUT
 R_OUT = dnc_read_vectors(M_IN, W_IN);

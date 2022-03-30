@@ -45,12 +45,16 @@
 %}
 
 function R_OUT = ntm_reading(W_IN, M_IN)
+  % Package
   addpath(genpath('../../math/algebra/vector'));
 
+  % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
+  % Signals
   matrix_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
+  % Body
   % r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
   for j = 1:SIZE_N_IN

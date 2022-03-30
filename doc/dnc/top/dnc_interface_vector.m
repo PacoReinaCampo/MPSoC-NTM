@@ -45,8 +45,10 @@
 %}
 
 function XI_OUT = dnc_interface_vector(U_IN, H_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Body
   % xi(t;s) = U(t;s;l)·h(t;l)
   XI_OUT = ntm_matrix_vector_product(U_IN, H_IN);
 end

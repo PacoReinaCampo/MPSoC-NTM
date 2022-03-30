@@ -44,16 +44,23 @@
 ###################################################################################
 %}
 
-DATA_K_IN = rand(3, 3);
-DATA_A_IN = rand(3, 3);
-DATA_B_IN = rand(3, 3);
-DATA_C_IN = rand(3, 3);
-DATA_D_IN = rand(3, 3);
-
-DATA_U_IN = rand(3, 4);
-
-INITIAL_X = rand(3, 1);
+% Constants
+SIZE_N_IN = 3;
+SIZE_P_IN = 3;
+SIZE_Q_IN = 3;
 
 k = 4;
 
+% Signals
+DATA_K_IN = rand(SIZE_P_IN, SIZE_P_IN);
+DATA_A_IN = rand(SIZE_N_IN, SIZE_N_IN);
+DATA_B_IN = rand(SIZE_N_IN, SIZE_P_IN);
+DATA_C_IN = rand(SIZE_Q_IN, SIZE_N_IN);
+DATA_D_IN = rand(SIZE_Q_IN, SIZE_P_IN);
+
+DATA_U_IN = rand(SIZE_P_IN, k);
+
+INITIAL_X = rand(SIZE_N_IN, 1);
+
+% DUT
 DATA_X_OUT = ntm_state_vector_state(DATA_K_IN, DATA_A_IN, DATA_B_IN, DATA_C_IN, DATA_D_IN, DATA_U_IN, INITIAL_X, k);

@@ -46,6 +46,10 @@
 
 function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN)
   % Package
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
+  addpath(genpath('../../math/function/vector'));
+
   addpath(genpath('../../controller/FNN/standard'));
 
   addpath(genpath('../memory'));
@@ -59,85 +63,156 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
 
+  SIZE_M_IN = SIZE_W_IN + 5;
+  SIZE_S_IN = 3*SIZE_W_IN + 3;
+
   % Body
   for t = 1:SIZE_T_IN
     if (t == 1)
-      vector_w_int = zeros(SIZE_N_IN, 1);
-
       vector_h_int = zeros(SIZE_L_IN, 1);
 
       matrix_m_int = zeros(SIZE_N_IN, SIZE_W_IN);
+      matrix_l_int = zeros(SIZE_N_IN, SIZE_N_IN);
+      vector_p_int = zeros(SIZE_N_IN, 1);
+      vector_u_int = zeros(SIZE_N_IN, 1);
+
+      vector_w_int = zeros(SIZE_N_IN, 1);
+      matrix_w_int = zeros(SIZE_R_IN, SIZE_N_IN);
     else
       % TRAINER_STATE
+
+
 
       % INTERFACE_VECTOR_STATE
 
       % xi(t;s) = U(t;s;l)·h(t;l)
-      vector_xi_int = dnc_interface_vector(V_IN, vector_h_int);
+      matrix_operation_int = ntm_matrix_transpose(V_IN);
+
+      vector_xi_int = dnc_interface_vector(matrix_operation_int, vector_h_int);
+
+
 
       % INTERFACE_MATRIX_STATE MATRIX
 
       % rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
-      matrix_rho_int = dnc_interface_matrix(D_IN, vector_h_int);
+      tensor_operation_int = ntm_tensor_transpose(D_IN);
+
+      matrix_rho_int = dnc_interface_matrix(tensor_operation_int, vector_h_int);
+
+
 
       % READ_HEADS_STATE
 
       % FREE_GATES_STATE
 
       % f(t;i) = sigmoid(f^(t;i))
+      f_read_int = rand(SIZE_R_IN, 1);
 
       % READ_KEYS_STATE
 
       % k(t;i;k) = k^(t;i;k)
+      k_read_int = rand(SIZE_R_IN, SIZE_W_IN);
 
       % READ_MODES_STATE
 
       % pi(t;i;p) = softmax(pi^(t;i;p))
+      pi_read_int = rand(SIZE_R_IN, 3);
 
       % READ_STRENGTHS_STATE
 
       % beta(t;i) = oneplus(beta^(t;i))
+      beta_read_int = rand(SIZE_R_IN, 1);
+
+
 
       % WRITE_HEADS_STATE
 
       % ALLOCATION_GATE_STATE
 
       % ga(t) = sigmoid(g^(t))
+      ga_write_int = rand(1);
 
       % ERASE_VECTOR_STATE
 
       % e(t;k) = sigmoid(e^(t;k))
+      e_write_int = rand(SIZE_W_IN, 1);
 
       % WRITE_GATE_STATE
 
       % gw(t) = sigmoid(gw^(t))
+      gw_write_int = rand(1);
 
       % WRITE_KEY_STATE
 
       % k(t;k) = k^(t;k)
+      k_write_int = rand(SIZE_W_IN, 1);
 
       % WRITE_STRENGTH_STATE
 
       % beta(t) = oneplus(beta^(t))
+      beta_write_int = rand(1);
 
       % WRITE_VECTOR_STATE
 
       % v(t;k) = v^(t;k)
+      v_write_int = rand(SIZE_W_IN, 1);
+
+
 
       % MEMORY_STATE
-      k_read_int = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-      beta_read_int = rand(SIZE_T_IN, SIZE_R_IN);
-      f_read_int = rand(SIZE_T_IN, SIZE_R_IN);
-      pi_read_int = rand(SIZE_T_IN, SIZE_R_IN, 3);
+      % MEMORY_RETENTION_VECTOR
+      % psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+      vector_psi_int = dnc_memory_retention_vector(matrix_w_int, f_read_int);
 
-      k_write_int = rand(SIZE_T_IN, SIZE_W_IN);
-      beta_write_int = rand(SIZE_T_IN, 1);
-      e_write_int = rand(SIZE_T_IN, SIZE_W_IN);
-      v_write_int = rand(SIZE_T_IN, SIZE_W_IN);
-      ga_write_int = rand(SIZE_T_IN, 1);
-      gw_write_int = rand(SIZE_T_IN, 1);
+      % USAGE_VECTOR
+      % u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+      vector_u_int = dnc_usage_vector(vector_u_int, vector_w_int, vector_psi_int);
 
-      matrix_r_int = dnc_addressing(k_read_int, beta_read_int, f_read_int, pi_read_int, k_write_int, beta_write_int, e_write_int, v_write_int, ga_write_int, gw_write_int);
+      % ALLOCATION_WEIGHTING
+      % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+      vector_a_int = dnc_allocation_weighting(vector_u_int);
+
+      % WRITE_CONTENT_WEIGHTING
+      % c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
+      vector_c_int = dnc_write_content_weighting(k_write_int, beta_write_int, matrix_m_int);
+
+      % WRITE_WEIGHTING
+      % w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
+      vector_w_int = dnc_write_weighting(vector_a_int, vector_c_int, ga_write_int, gw_write_int);
+
+      % MEMORY_MATRIX
+      % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
+      matrix_m_int = dnc_memory_matrix(matrix_m_int, vector_w_int, v_write_int, e_write_int);
+
+      % PRECEDENCE_WEIGHTING
+      % p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+      vector_p_int = dnc_precedence_weighting(vector_w_int, vector_p_int);
+
+      % TEMPORAL_LINK_MATRIX
+      % L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+      matrix_l_int = dnc_temporal_link_matrix(matrix_l_int, vector_w_int, vector_p_int);
+
+      % FORWARD_WEIGHTING
+      % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+      matrix_f_int = dnc_forward_weighting(matrix_l_int, matrix_w_int);
+
+      % BACKWARD_WEIGHTING
+      % b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+      matrix_b_int = dnc_backward_weighting(matrix_l_int, matrix_w_int);
+
+      % READ_CONTENT_WEIGHTING
+      % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+      matrix_c_int = dnc_read_content_weighting(k_read_int, beta_read_int, matrix_m_int);
+
+      % READ_WEIGHTING
+      % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+      matrix_w_int = dnc_read_weighting(pi_read_int, matrix_b_int, matrix_c_int, matrix_f_int);
+
+      % READ_VECTORS
+      % r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+      matrix_r_int = dnc_read_vectors(matrix_m_int, matrix_w_int);
+
+
 
       % CONTROLLER_BODY_STATE
       vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
@@ -145,7 +220,7 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % OUTPUT_VECTOR_STATE
 
       % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
-      Y_OUT = dnc_output_vector(K_IN, matrix_r_int, U_IN, vector_h_int);
+      Y_OUT = dnc_output_vector(K_OUTPUT_IN, matrix_r_int, U_OUTPUT_IN, vector_h_int);
     end
   end
 end

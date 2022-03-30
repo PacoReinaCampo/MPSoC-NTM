@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_L_IN = 3;
 
+% Signals
 S_IN = rand(SIZE_L_IN, 1);
 I_IN = rand(SIZE_L_IN, 1);
 F_IN = rand(SIZE_L_IN, 1);
 A_IN = rand(SIZE_L_IN, 1);
 
+% DUT
 S_OUT = ntm_state_gate_vector(S_IN, I_IN, F_IN, A_IN);

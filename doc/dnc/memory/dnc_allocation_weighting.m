@@ -45,14 +45,18 @@
 %}
 
 function A_OUT = dnc_allocation_weighting(U_IN)
+  % Package
   addpath(genpath('../../math/algebra/scalar'));
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constants
   SIZE_N_IN = length(U_IN);
 
-  % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
-
+  % Signals
   vector_index_int = zeros(SIZE_N_IN, 1);
+
+  % Body
+  % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
 
   vector_operation_int = dnc_sort_vector(U_IN);
 

@@ -45,16 +45,20 @@
 %}
 
 function L_OUT = dnc_temporal_link_matrix(L_IN, W_IN, P_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constants
   SIZE_N_IN = length(W_IN);
 
+  % Signals
+  matrix_w_i_int = zeros(SIZE_N_IN, SIZE_N_IN);
+  matrix_w_j_int = zeros(SIZE_N_IN, SIZE_N_IN);
+
+  % Body
   % L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
 
   % L(t=0)[g,j] = 0
-
-  matrix_w_i_int = zeros(SIZE_N_IN, SIZE_N_IN);
-  matrix_w_j_int = zeros(SIZE_N_IN, SIZE_N_IN);
 
   for g = 1:SIZE_N_IN
     for j = 1:SIZE_N_IN

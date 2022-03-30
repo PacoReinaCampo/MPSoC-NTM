@@ -44,12 +44,15 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_N_IN, 1);
 V_IN = rand(1, SIZE_W_IN);
 E_IN = rand(1, SIZE_W_IN);
 
+% DUT
 M_OUT = dnc_memory_matrix(M_IN, W_IN, V_IN, E_IN);

@@ -44,6 +44,11 @@
 ###################################################################################
 %}
 
-U_IN = rand(3, 1);
+% Constants
+SIZE_IN = 3;
 
+% Signals
+U_IN = rand(SIZE_IN, 1);
+
+% DUT
 PHI_OUT = dnc_sort_vector(U_IN);

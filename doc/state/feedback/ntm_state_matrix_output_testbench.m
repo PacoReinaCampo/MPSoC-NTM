@@ -44,8 +44,15 @@
 ###################################################################################
 %}
 
-DATA_K_IN = rand(3, 3);
-DATA_C_IN = rand(3, 3);
-DATA_D_IN = rand(3, 3);
+% Constants
+SIZE_N_IN = 3;
+SIZE_P_IN = 3;
+SIZE_Q_IN = 3;
 
+% Signals
+DATA_K_IN = rand(SIZE_P_IN, SIZE_P_IN);
+DATA_C_IN = rand(SIZE_Q_IN, SIZE_N_IN);
+DATA_D_IN = rand(SIZE_Q_IN, SIZE_P_IN);
+
+% DUT
 DATA_C_OUT = ntm_state_matrix_output(DATA_K_IN, DATA_C_IN, DATA_D_IN);

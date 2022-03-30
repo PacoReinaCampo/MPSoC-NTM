@@ -44,9 +44,12 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 
+% Signals
 U_IN = rand(SIZE_N_IN, 1);
 PHI_IN = rand(SIZE_N_IN, 1);
 
+% DUT
 A_OUT = dnc_allocation_weighting(U_IN);

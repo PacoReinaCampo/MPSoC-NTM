@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 
+% Signals
 U_IN = rand(SIZE_N_IN, 1);
 W_IN = rand(SIZE_N_IN, 1);
 PSI_IN = rand(SIZE_N_IN, 1);
 
+% DUT
 U_OUT = dnc_usage_vector(U_IN, W_IN, PSI_IN);

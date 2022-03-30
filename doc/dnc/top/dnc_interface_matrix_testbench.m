@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_R_IN = 3;
 SIZE_M_IN = 3;
 SIZE_L_IN = 3;
 
+% Signals
 U_IN = rand(SIZE_R_IN, SIZE_M_IN, SIZE_L_IN);
 H_IN = rand(SIZE_L_IN, 1);
 
+% DUT
 RHO_OUT = dnc_interface_matrix(U_IN, H_IN);

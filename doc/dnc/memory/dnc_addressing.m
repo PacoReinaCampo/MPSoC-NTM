@@ -44,88 +44,57 @@
 ###################################################################################
 %}
 
-function R_OUT = dnc_addressing(K_READ_IN, BETA_READ_IN, F_READ_IN, PI_READ_IN, K_WRITE_IN, BETA_WRITE_IN, E_WRITE_IN, V_WRITE_IN, GA_WRITE_IN, GW_WRITE_IN)
+function R_OUT = dnc_addressing(K_READ_IN, BETA_READ_IN, F_READ_IN, PI_READ_IN, K_WRITE_IN, BETA_WRITE_IN, E_WRITE_IN, V_WRITE_IN, GA_WRITE_IN, GW_WRITE_IN, M_IN, L_IN, P_IN, U_IN, WR_IN, WW_IN)
+  % Body
+  % MEMORY_RETENTION_VECTOR
+  % psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+  vector_psi_int = dnc_memory_retention_vector(WR_IN, F_READ_IN);
 
-  SIZE_T_IN = 3;
-  SIZE_R_IN = 3;
-  SIZE_N_IN = 3;
-  SIZE_W_IN = 3;
+  % USAGE_VECTOR
+  % u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+  vector_u_int = dnc_usage_vector(U_IN, WW_IN, vector_psi_int);
 
-  k_read_int = zeros(SIZE_R_IN, SIZE_W_IN);
-  pi_read_int = zeros(SIZE_R_IN, 3);
+  % ALLOCATION_WEIGHTING
+  % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+  vector_a_int = dnc_allocation_weighting(vector_u_int);
 
-  for t = 1:SIZE_T_IN
-    if (t == 1)
-      % p(t=0) = 0
-      vector_p_int = zeros(SIZE_N_IN, 1);
+  % WRITE_CONTENT_WEIGHTING
+  % c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
+  vector_c_int = dnc_write_content_weighting(K_WRITE_IN, BETA_WRITE_IN, M_IN);
 
-      % L(t=0)[g,j] = 0
-      matrix_l_int = zeros(SIZE_N_IN, SIZE_N_IN);
+  % WRITE_WEIGHTING
+  % w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
+  vector_w_int = dnc_write_weighting(vector_a_int, vector_c_int, GA_WRITE_IN, GW_WRITE_IN);
 
-      % t=0;
-      vector_u_int = zeros(SIZE_N_IN, 1);
-      matrix_m_int = zeros(SIZE_N_IN, SIZE_W_IN);
+  % MEMORY_MATRIX
+  % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
+  matrix_m_int = dnc_memory_matrix(M_IN, vector_w_int, V_WRITE_IN, E_WRITE_IN);
 
-      matrix_w_int = zeros(SIZE_R_IN, SIZE_N_IN);
-    else
-      for i = 1:SIZE_R_IN
-        for k = 1:SIZE_W_IN
-          k_read_int(i, k) = K_READ_IN(t, i, k);
-        end
+  % PRECEDENCE_WEIGHTING
+  % p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+  vector_p_int = dnc_precedence_weighting(vector_w_int, P_IN);
 
-        for p = 1:3
-          pi_read_int(i, p) = PI_READ_IN(t, i, p);
-        end
-      end
+  % TEMPORAL_LINK_MATRIX
+  % L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+  matrix_l_int = dnc_temporal_link_matrix(L_IN, vector_w_int, P_IN);
 
-      % BACKWARD_FORWARD_WEIGHTING
-      % b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
-      matrix_b_int = dnc_backward_weighting(matrix_l_int, matrix_w_int);
+  % FORWARD_WEIGHTING
+  % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+  matrix_f_int = dnc_forward_weighting(matrix_l_int, WR_IN);
 
-      % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
-      matrix_f_int = dnc_forward_weighting(matrix_l_int, matrix_w_int);
+  % BACKWARD_WEIGHTING
+  % b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+  matrix_b_int = dnc_backward_weighting(matrix_l_int, WR_IN);
 
-      % MEMORY_RETENTION_VECTOR
-      % psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
-      vector_psi_int = dnc_memory_retention_vector(matrix_w_int, F_READ_IN(t, :));
+  % READ_CONTENT_WEIGHTING
+  % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+  matrix_c_int = dnc_read_content_weighting(K_READ_IN, BETA_READ_IN, M_IN);
 
-      % ALLOCATION_WEIGHTING
-      % a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
-      vector_a_int = dnc_allocation_weighting(vector_u_int);
+  % READ_WEIGHTING
+  % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+  matrix_w_int = dnc_read_weighting(PI_READ_IN, matrix_b_int, matrix_c_int, matrix_f_int);
 
-      % READ_WRITE_CONTENT_WEIGHTING
-      % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
-      matrix_c_int = dnc_read_content_weighting(k_read_int, BETA_READ_IN(t, :), matrix_m_int);
-
-      % c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
-      vector_c_int = dnc_write_content_weighting(K_WRITE_IN(t, :), BETA_WRITE_IN(t), matrix_m_int);
-
-      % READ_WRITE_WEIGHTING
-      % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
-      matrix_w_int = dnc_read_weighting(PI_READ_IN, matrix_b_int, matrix_c_int, matrix_f_int);
-
-      % w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
-      vector_w_int = dnc_write_weighting(vector_a_int, vector_c_int, GA_WRITE_IN(t), GW_WRITE_IN(t));
-
-      % PRECEDENCE_WEIGHTING
-      % p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
-      vector_p_int = dnc_precedence_weighting(vector_w_int, vector_p_int);
-
-      % TEMPORAL_LINK_MATRIX
-      % L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
-      matrix_l_int = dnc_temporal_link_matrix(matrix_l_int, vector_w_int, vector_p_int);
-
-      % USAGE_VECTOR
-      % u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
-      vector_u_int = dnc_usage_vector(vector_u_int, vector_w_int, vector_psi_int);
-
-      % MEMORY_MATRIX
-      % M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
-      matrix_m_int = dnc_memory_matrix(matrix_m_int, vector_w_int, V_WRITE_IN(t, :), E_WRITE_IN(t, :));
-
-      % READ_VECTORS
-      % r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
-      R_OUT = dnc_read_vectors(matrix_m_int, matrix_w_int);
-    end
-  end
+  % READ_VECTORS
+  % r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+  R_OUT = dnc_read_vectors(matrix_m_int, matrix_w_int);
 end

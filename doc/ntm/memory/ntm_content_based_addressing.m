@@ -45,16 +45,20 @@
 %}
 
 function C_OUT = ntm_content_based_addressing(K_IN, BETA_IN, M_IN)
+  % Package
   addpath(genpath('../../math/algebra/vector'));
   addpath(genpath('../../math/calculus/vector'));
 
+  % Constants
   [SIZE_I_IN, SIZE_J_IN] = size(M_IN);
 
+  % Signals
   vector_beta_int = zeros(SIZE_I_IN, 1);
 
   vector_i_operation_int = zeros(SIZE_I_IN, 1);
   vector_j_operation_int = zeros(SIZE_J_IN, 1);
 
+  % Body
   % C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
 
   for i = 1:SIZE_I_IN

@@ -44,9 +44,11 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 K_IN = rand(1, SIZE_W_IN);
 BETA_IN = rand(1);
 G_IN = rand(1);
@@ -55,4 +57,5 @@ GAMMA_IN = rand(1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_N_IN, 1);
 
+% DUT
 W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN);

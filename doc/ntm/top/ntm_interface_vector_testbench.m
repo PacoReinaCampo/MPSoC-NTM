@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_S_IN =3;
 SIZE_L_IN =3;
 
+% Signals
 U_IN = rand(SIZE_S_IN, SIZE_L_IN);
 H_IN = rand(SIZE_L_IN, 1);
 
+% DUT
 XI_OUT = ntm_interface_vector(U_IN, H_IN);

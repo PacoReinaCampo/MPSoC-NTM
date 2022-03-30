@@ -45,8 +45,10 @@
 %}
 
 function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Body
   % M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
   matrix_operation_int = ntm_transpose_vector_product(W_IN, A_IN);

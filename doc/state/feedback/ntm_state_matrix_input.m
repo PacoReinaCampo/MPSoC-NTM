@@ -45,13 +45,16 @@
 %}
 
 function DATA_B_OUT = ntm_state_matrix_input(DATA_K_IN, DATA_B_IN, DATA_D_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constans
   % SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
   % SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 
   [SIZE_D_I_IN, SIZE_D_J_IN] = size(DATA_D_IN);
 
+  % Body
   % b = B·(I-K·inv(I+D·K)·D)
   matrix_operation_int = ntm_matrix_product(DATA_D_IN, DATA_K_IN);
 

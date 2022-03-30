@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 W_IN = rand(SIZE_N_IN, 1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
+% DUT
 R_OUT = ntm_reading(W_IN, M_IN);

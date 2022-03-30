@@ -45,13 +45,16 @@
 %}
 
 function Y_OUT = dnc_output_vector(K_IN, R_IN, U_IN, H_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/algebra/tensor'));
 
+  % Constants
   [SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 
   SIZE_Y_IN = 3;
 
+  % Body
   % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
   % U(t;y;l)·h(t;l)

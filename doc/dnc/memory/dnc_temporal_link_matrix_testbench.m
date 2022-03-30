@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 
+% Signals
 L_IN = rand(SIZE_N_IN, SIZE_N_IN);
 W_IN = rand(SIZE_N_IN, 1);
 P_IN = rand(SIZE_N_IN, 1);
 
+% DUT
 L_OUT = dnc_temporal_link_matrix(L_IN, W_IN, P_IN);

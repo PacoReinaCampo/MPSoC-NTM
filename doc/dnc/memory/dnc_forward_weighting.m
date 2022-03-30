@@ -45,13 +45,17 @@
 %}
 
 function F_OUT = dnc_forward_weighting(L_IN, W_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
-
+  % Signals
   vector_operation_int = zeros(SIZE_R_IN, 1);
+
+  % Body
+  % f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
   F_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
 

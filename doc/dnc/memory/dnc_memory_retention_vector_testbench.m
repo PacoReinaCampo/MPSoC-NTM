@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 
+% Signals
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 F_IN = rand(SIZE_R_IN, 1);
 
+% DUT
 PSI_OUT = dnc_memory_retention_vector(W_IN, F_IN);

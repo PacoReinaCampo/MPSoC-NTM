@@ -45,13 +45,17 @@
 %}
 
 function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
+  % Package
   addpath(genpath('../../math/algebra/matrix'));
 
+  % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(B_IN);
 
-  % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
-
+  % Signals
   matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
+
+  % Body
+  % w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN

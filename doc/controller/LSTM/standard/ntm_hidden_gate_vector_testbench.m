@@ -44,9 +44,12 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_L_IN = 3;
 
+% Signals
 S_IN = rand(SIZE_L_IN, 1);
 O_IN = rand(SIZE_L_IN, 1);
 
+% DUT
 H_OUT = ntm_hidden_gate_vector(S_IN, O_IN);

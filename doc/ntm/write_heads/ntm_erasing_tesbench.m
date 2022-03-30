@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
+% Signals
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_N_IN, 1);
 E_IN = rand(1, SIZE_W_IN);
 
+% DUT
 M_OUT = ntm_erasing(M_IN, W_IN, E_IN);
