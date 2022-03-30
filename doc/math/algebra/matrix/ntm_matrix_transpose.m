@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_matrix_transpose(DATA_IN)
+  % Constants
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
+  % Signals
   DATA_OUT = zeros(SIZE_J_IN, SIZE_I_IN);
 
+  % Body
   for i = 1:SIZE_J_IN
     for j = 1:SIZE_I_IN
       DATA_OUT(i, j) = DATA_IN(j, i);

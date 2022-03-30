@@ -45,13 +45,13 @@
 %}
 
 function DATA_OUT = ntm_scalar_multiplication(DATA_IN, LENGTH_IN)
+  % Constants
   SIZE_IN = length(DATA_IN);
 
-  data_multiplication_int = 1;
+  % Body
+  DATA_OUT = 1;
 
   for t = 1:LENGTH_IN
-    data_multiplication_int = data_multiplication_int*DATA_IN(t);
+    DATA_OUT = DATA_OUT*DATA_IN(t);
   end
-
-  DATA_OUT = data_multiplication_int;
 end

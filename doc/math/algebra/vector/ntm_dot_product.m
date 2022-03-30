@@ -45,8 +45,10 @@
 %}
 
 function DATA_OUT = ntm_dot_product(DATA_A_IN, DATA_B_IN)
+  % Constants
   SIZE_A_IN = length(DATA_A_IN);
 
+  % Body
   DATA_OUT = 0;
 
   for i = 1:SIZE_A_IN

@@ -45,13 +45,13 @@
 %}
 
 function DATA_OUT = ntm_scalar_summation(DATA_IN, LENGTH_IN)
+  % Constants
   SIZE_IN = length(DATA_IN);
 
-  data_summation_int = 0;
+  % Body
+  DATA_OUT = 0;
 
   for t = 1:LENGTH_IN
-    data_summation_int = data_summation_int + DATA_IN(t);
+    DATA_OUT = DATA_OUT + DATA_IN(t);
   end
-
-  DATA_OUT = data_summation_int;
 end

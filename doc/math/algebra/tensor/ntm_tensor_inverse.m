@@ -45,8 +45,10 @@
 %}
 
 function DATA_OUT = ntm_tensor_inverse(DATA_IN)
+  % Constants
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
+  % Body
   data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN)];
 
   for i = 1:SIZE_I_IN

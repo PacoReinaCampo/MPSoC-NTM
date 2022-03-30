@@ -99,14 +99,14 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
 
       matrix_rho_int = ntm_interface_matrix(tensor_operation_int, vector_h_int);
 
-      matrix_e_int = matrix_rho_int(SIZE_R_IN, SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
-      matrix_a_int = matrix_rho_int(SIZE_R_IN, SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
+      matrix_e_int = matrix_rho_int(:, SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
+      matrix_a_int = matrix_rho_int(:, SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
 
-      matrix_k_int = matrix_rho_int(SIZE_R_IN, SIZE_N_IN+4:SIZE_N_IN+SIZE_W_IN+3);
-      vector_beta_int = matrix_rho_int(SIZE_R_IN, SIZE_N_IN+3);
-      vector_g_int = matrix_rho_int(SIZE_R_IN, SIZE_N_IN+2);
-      matrix_s_int = matrix_rho_int(SIZE_R_IN, 2:SIZE_N_IN+1);
-      vector_gamma_int = matrix_rho_int(SIZE_R_IN, 1);
+      matrix_k_int = matrix_rho_int(:, SIZE_N_IN+4:SIZE_N_IN+SIZE_W_IN+3);
+      vector_beta_int = matrix_rho_int(:, SIZE_N_IN+3);
+      vector_g_int = matrix_rho_int(:, SIZE_N_IN+2);
+      matrix_s_int = matrix_rho_int(:, 2:SIZE_N_IN+1);
+      vector_gamma_int = matrix_rho_int(:, 1);
 
       % WRITING
       matrix_m_int = ntm_writing(matrix_m_int, vector_w_int, vector_a_int);

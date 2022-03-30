@@ -45,15 +45,15 @@
 %}
 
 function DATA_OUT = ntm_vector_multiplication(DATA_IN, LENGTH_IN)
+  % Constants
   SIZE_IN = length(DATA_IN);
 
-  data_multiplication_int = ones(SIZE_IN, 1);
+  % Body
+  DATA_OUT = ones(SIZE_IN, 1);
 
   for t = 1:LENGTH_IN
     for i = 1:SIZE_IN
-      data_multiplication_int(i) = data_multiplication_int(i) + DATA_IN(t, i);
+      DATA_OUT(i) = DATA_OUT(i) + DATA_IN(t, i);
     end
   end
-
-  DATA_OUT = data_multiplication_int;
 end

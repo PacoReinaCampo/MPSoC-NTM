@@ -45,8 +45,10 @@
 %}
 
 function DATA_OUT = ntm_vector_module(DATA_IN)
+  % Constants
   SIZE_IN = length(DATA_IN);
 
+  % Body
   DATA_OUT = 0;
 
   for i = 1:SIZE_IN

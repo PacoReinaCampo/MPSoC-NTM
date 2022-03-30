@@ -106,22 +106,22 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % FREE_GATES_STATE
 
       % f(t;i) = sigmoid(f^(t;i))
-      f_read_int = rand(SIZE_R_IN, 1);
+      f_read_int = matrix_rho_int(:, SIZE_W_IN+5);
 
       % READ_KEYS_STATE
 
       % k(t;i;k) = k^(t;i;k)
-      k_read_int = rand(SIZE_R_IN, SIZE_W_IN);
+      k_read_int = matrix_rho_int(:, 5:SIZE_W_IN+4);
 
       % READ_MODES_STATE
 
       % pi(t;i;p) = softmax(pi^(t;i;p))
-      pi_read_int = rand(SIZE_R_IN, 3);
+      pi_read_int = matrix_rho_int(:, 2:4);
 
       % READ_STRENGTHS_STATE
 
       % beta(t;i) = oneplus(beta^(t;i))
-      beta_read_int = rand(SIZE_R_IN, 1);
+      beta_read_int = matrix_rho_int(:, 1);
 
 
 
@@ -130,32 +130,32 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % ALLOCATION_GATE_STATE
 
       % ga(t) = sigmoid(g^(t))
-      ga_write_int = rand(1);
+      ga_write_int = vector_xi_int(3*SIZE_W_IN + 3);
 
       % ERASE_VECTOR_STATE
 
       % e(t;k) = sigmoid(e^(t;k))
-      e_write_int = rand(SIZE_W_IN, 1);
+      e_write_int = vector_xi_int(2*SIZE_W_IN+3:3*SIZE_W_IN+2);
 
       % WRITE_GATE_STATE
 
       % gw(t) = sigmoid(gw^(t))
-      gw_write_int = rand(1);
+      gw_write_int = vector_xi_int(2*SIZE_W_IN+2);
 
       % WRITE_KEY_STATE
 
       % k(t;k) = k^(t;k)
-      k_write_int = rand(SIZE_W_IN, 1);
+      k_write_int = vector_xi_int(SIZE_W_IN+2:2*SIZE_W_IN+1);
 
       % WRITE_STRENGTH_STATE
 
       % beta(t) = oneplus(beta^(t))
-      beta_write_int = rand(1);
+      beta_write_int = vector_xi_int(SIZE_W_IN+1);
 
       % WRITE_VECTOR_STATE
 
       % v(t;k) = v^(t;k)
-      v_write_int = rand(SIZE_W_IN, 1);
+      v_write_int = vector_xi_int(1:SIZE_W_IN);
 
 
 

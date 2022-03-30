@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_matrix_vector_convolution(DATA_A_IN, DATA_B_IN)
+  % Constants
   [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
 
+  % Signals
   DATA_OUT = zeros(SIZE_A_I_IN, 1);
 
+  % Body
   for i = 1:SIZE_A_I_IN
     for j = 1:SIZE_A_J_IN
       DATA_OUT(i) = 0;
