@@ -44,7 +44,13 @@
 ###################################################################################
 %}
 
-DATA_A_IN = rand(3, 1);
-DATA_B_IN = rand(1, 3);
+% Constants
+SIZE_I_IN = 3;
+SIZE_J_IN = 3;
 
+% Signals
+DATA_A_IN = rand(SIZE_I_IN, 1);
+DATA_B_IN = rand(1, SIZE_J_IN);
+
+% DUT
 DATA_OUT = ntm_transpose_vector_product(DATA_A_IN, DATA_B_IN);

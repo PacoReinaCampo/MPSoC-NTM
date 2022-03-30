@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_matrix_logistic_function(DATA_IN)
+  % Constants
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
+  % Signals
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
+  % Body
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_J_IN
       DATA_OUT(i, j) = 1/(1 + 1/exp(DATA_IN(i, j)));

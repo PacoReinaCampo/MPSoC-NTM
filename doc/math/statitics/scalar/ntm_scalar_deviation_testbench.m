@@ -44,10 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
 LENGTH_IN = 3;
 
-MEAN_IN = 1;
+% Signals
+MEAN_IN = rand(1);
 
 DATA_IN = rand(LENGTH_IN, 1);
 
+% DUT
 DATA_OUT = ntm_scalar_deviation(DATA_IN, MEAN_IN);

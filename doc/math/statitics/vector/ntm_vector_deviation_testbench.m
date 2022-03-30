@@ -44,11 +44,14 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_IN = 3;
 LENGTH_IN = 3;
 
+% Signals
 MEAN_IN = rand(SIZE_IN, 1);
 
 DATA_IN = rand(SIZE_IN, LENGTH_IN);
 
+% DUT
 DATA_OUT = ntm_vector_deviation(DATA_IN, MEAN_IN);

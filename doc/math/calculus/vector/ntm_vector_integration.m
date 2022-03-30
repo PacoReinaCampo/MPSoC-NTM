@@ -45,14 +45,18 @@
 %}
 
 function DATA_OUT = ntm_vector_integration(DATA_IN, LENGTH_IN)
+  % Package
   addpath(genpath('../../math/algebra/vector'));
 
+  % Constants
   SIZE_IN = length(DATA_IN);
 
+  % Signals
   data_summation_int = 0;
 
   DATA_OUT = zeros(SIZE_IN, 1);
 
+  % Body
   for i = 1:SIZE_IN
     data_summation_int = data_summation_int + DATA_IN(i);
 

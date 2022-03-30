@@ -44,8 +44,13 @@
 ###################################################################################
 %}
 
+% Constants
+SIZE_I_IN = 3;
+SIZE_J_IN = 3;
 LENGTH_IN = 3;
 
-DATA_IN = rand(3, 3, 3);
+% Signals
+DATA_IN = rand(SIZE_I_IN, SIZE_J_IN);
 
+% DUT
 DATA_OUT = ntm_matrix_summation(DATA_IN, LENGTH_IN);

@@ -44,6 +44,8 @@
 ###################################################################################
 %}
 
-DATA_IN = rand(3, 3);
+% Signals
+DATA_IN = rand(SIZE_I_IN, SIZE_J_IN);
 
+% DUT
 DATA_OUT = ntm_matrix_transpose(DATA_IN);

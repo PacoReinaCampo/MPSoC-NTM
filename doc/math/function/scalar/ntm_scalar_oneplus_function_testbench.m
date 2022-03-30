@@ -44,6 +44,8 @@
 ###################################################################################
 %}
 
+% Signals
 DATA_IN = rand(1);
 
+% DUT
 DATA_OUT = ntm_scalar_oneplus_function(DATA_IN);

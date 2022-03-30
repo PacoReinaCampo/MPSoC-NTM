@@ -44,12 +44,15 @@
 ###################################################################################
 %}
 
+% Constants
 SIZE_I_IN = 3;
 SIZE_J_IN = 3;
 LENGTH_IN = 3;
 
+% Signals
 MEAN_IN = rand(SIZE_I_IN, SIZE_J_IN);
 
 DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, LENGTH_IN);
 
+% DUT
 DATA_OUT = ntm_matrix_deviation(DATA_IN, MEAN_IN);

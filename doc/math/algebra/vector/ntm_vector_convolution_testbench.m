@@ -44,7 +44,12 @@
 ###################################################################################
 %}
 
-DATA_A_IN = rand(3, 1);
-DATA_B_IN = rand(3, 1);
+% Constants
+SIZE_IN = 3;
 
+% Signals
+DATA_A_IN = rand(SIZE_IN, 1);
+DATA_B_IN = rand(SIZE_IN, 1);
+
+% DUT
 DATA_OUT = ntm_vector_convolution(DATA_A_IN, DATA_B_IN);

@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_scalar_deviation(DATA_IN, MEAN_IN)
+  % Constants
   LENGTH_IN = length(DATA_IN);
 
+  % Signals
   DATA_OUT = 0;
 
+  % Body
   for m = 1:LENGTH_IN
     DATA_OUT = DATA_OUT + (DATA_IN(m) - MEAN_IN)^2;
   end

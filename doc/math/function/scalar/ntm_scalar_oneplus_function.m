@@ -45,5 +45,6 @@
 %}
 
 function DATA_OUT = ntm_scalar_oneplus_function(DATA_IN)
+  % Body
   DATA_OUT = 1 + log(1 + exp(DATA_IN));
 end

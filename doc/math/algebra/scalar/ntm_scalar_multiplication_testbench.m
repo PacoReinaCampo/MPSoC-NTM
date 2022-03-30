@@ -44,8 +44,11 @@
 ###################################################################################
 %}
 
+% Constants
 LENGTH_IN = 3;
 
+% Signals
 DATA_IN = rand(LENGTH_IN, 1);
 
+% DUT
 DATA_OUT = ntm_scalar_multiplication(DATA_IN, LENGTH_IN);

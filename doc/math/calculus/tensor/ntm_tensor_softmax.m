@@ -45,14 +45,18 @@
 %}
 
 function DATA_OUT = ntm_tensor_softmax(DATA_IN)
+  % Package
   addpath(genpath('../../math/algebra/vector'));
 
+  % Constants
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
+  % Signals
   data_summation_int = 0;
 
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
+  % Body
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_J_IN
       for k = 1:SIZE_K_IN

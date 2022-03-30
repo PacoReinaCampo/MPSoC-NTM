@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_vector_logistic_function(DATA_IN)
+  % Constants
   SIZE_IN = length(DATA_IN);
 
+  % Signals
   DATA_OUT = zeros(SIZE_IN, 1);
 
+  % Body
   for i = 1:SIZE_IN
     DATA_OUT(i) = 1/(1 + 1/exp(DATA_IN(i)));
   end

@@ -44,6 +44,13 @@
 ###################################################################################
 %}
 
-DATA_IN = rand(3,3,3);
+% Constants
+SIZE_I_IN = 3;
+SIZE_J_IN = 3;
+SIZE_K_IN = 3;
 
+% Signals
+DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
+
+% DUT
 DATA_OUT = ntm_tensor_transpose(DATA_IN);

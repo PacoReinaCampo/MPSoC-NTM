@@ -45,10 +45,13 @@
 %}
 
 function DATA_OUT = ntm_matrix_mean(DATA_IN)
+  % Constants
   [SIZE_I_IN, SIZE_J_IN, LENGTH_IN] = size(DATA_IN);
 
+  % Signals
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
+  % Body
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_J_IN
       for m = 1:LENGTH_IN

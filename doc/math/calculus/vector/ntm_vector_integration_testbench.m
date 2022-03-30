@@ -44,8 +44,12 @@
 ###################################################################################
 %}
 
+% Constants
+SIZE_IN = 3;
 LENGTH_IN = 3;
 
-DATA_IN = rand(3, 1);
+% Signals
+DATA_IN = rand(SIZE_IN, 1);
 
+% DUT
 DATA_OUT = ntm_vector_integration(DATA_IN, LENGTH_IN);

@@ -44,7 +44,13 @@
 ###################################################################################
 %}
 
-DATA_A_IN = rand(3, 3);
-DATA_B_IN = rand(3, 3);
+% Constants
+SIZE_I_IN = 3;
+SIZE_J_IN = 3;
 
+% Signals
+DATA_A_IN = rand(SIZE_I_IN, SIZE_J_IN);
+DATA_B_IN = rand(SIZE_I_IN, SIZE_J_IN);
+
+% DUT
 DATA_OUT = ntm_matrix_convolution(DATA_A_IN, DATA_B_IN);

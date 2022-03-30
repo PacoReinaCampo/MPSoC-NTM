@@ -44,6 +44,11 @@
 ###################################################################################
 %}
 
-DATA_IN = rand(3, 1);
+% Constants
+SIZE_IN = 3;
 
+% Signals
+DATA_IN = rand(SIZE_IN, 1);
+
+% DUT
 DATA_OUT = ntm_vector_softmax(DATA_IN);
