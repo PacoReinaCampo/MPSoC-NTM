@@ -74,24 +74,24 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
   % Body
   for t = 1:SIZE_T_IN
     if (t == 1)
-      vector_w_int = zeros(SIZE_N_IN, 1);
-
       vector_h_int = zeros(SIZE_L_IN, 1);
 
       matrix_m_int = zeros(SIZE_N_IN, SIZE_W_IN);
+
+      vector_w_int = zeros(SIZE_N_IN, 1);
     else
       % INTERFACE VECTOR
       matrix_operation_int = ntm_matrix_transpose(V_IN);
 
       vector_xi_int = ntm_interface_vector(matrix_operation_int, vector_h_int);
 
-      vector_e_int = vector_xi_int(SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
-      vector_a_int = vector_xi_int(SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
+      vector_e_int = vector_xi_int(SIZE_N_IN + 2*SIZE_W_IN + 4:SIZE_N_IN + 3*SIZE_W_IN + 3);
+      vector_a_int = vector_xi_int(SIZE_N_IN + SIZE_W_IN + 4:SIZE_N_IN + 2*SIZE_W_IN + 3);
 
-      vector_k_int = vector_xi_int(SIZE_N_IN+4:SIZE_N_IN+SIZE_W_IN+3);
-      scalar_beta_int = vector_xi_int(SIZE_N_IN+3);
-      scalar_g_int = vector_xi_int(SIZE_N_IN+2);
-      vector_s_int = vector_xi_int(2:SIZE_N_IN+1);
+      vector_k_int = vector_xi_int(SIZE_N_IN + 4:SIZE_N_IN + SIZE_W_IN + 3);
+      scalar_beta_int = vector_xi_int(SIZE_N_IN + 3);
+      scalar_g_int = vector_xi_int(SIZE_N_IN + 2);
+      vector_s_int = vector_xi_int(2:SIZE_N_IN + 1);
       scalar_gamma_int = vector_xi_int(1);
 
       % INTERFACE MATRIX
@@ -99,13 +99,13 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
 
       matrix_rho_int = ntm_interface_matrix(tensor_operation_int, vector_h_int);
 
-      matrix_e_int = matrix_rho_int(:, SIZE_N_IN+2*SIZE_W_IN+4:SIZE_N_IN+3*SIZE_W_IN+3);
-      matrix_a_int = matrix_rho_int(:, SIZE_N_IN+SIZE_W_IN+4:SIZE_N_IN+2*SIZE_W_IN+3);
+      matrix_e_int = matrix_rho_int(:, SIZE_N_IN + 2*SIZE_W_IN + 4:SIZE_N_IN + 3*SIZE_W_IN + 3);
+      matrix_a_int = matrix_rho_int(:, SIZE_N_IN + SIZE_W_IN + 4:SIZE_N_IN + 2*SIZE_W_IN + 3);
 
-      matrix_k_int = matrix_rho_int(:, SIZE_N_IN+4:SIZE_N_IN+SIZE_W_IN+3);
-      vector_beta_int = matrix_rho_int(:, SIZE_N_IN+3);
-      vector_g_int = matrix_rho_int(:, SIZE_N_IN+2);
-      matrix_s_int = matrix_rho_int(:, 2:SIZE_N_IN+1);
+      matrix_k_int = matrix_rho_int(:, SIZE_N_IN + 4:SIZE_N_IN + SIZE_W_IN + 3);
+      vector_beta_int = matrix_rho_int(:, SIZE_N_IN + 3);
+      vector_g_int = matrix_rho_int(:, SIZE_N_IN + 2);
+      matrix_s_int = matrix_rho_int(:, 2:SIZE_N_IN + 1);
       vector_gamma_int = matrix_rho_int(:, 1);
 
       % WRITING

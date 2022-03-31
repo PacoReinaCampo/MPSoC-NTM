@@ -60,7 +60,7 @@ function PHI_OUT = dnc_sort_vector(U_IN)
 
   for i = 1:SIZE_IN
     for j = 1:SIZE_IN-i
-      if (vector_operation_int(j) > vector_operation_int(j+1))
+      if (vector_operation_int(j) > vector_operation_int(j + 1))
         scalar_operation_int = vector_operation_int(j);
 
         vector_operation_int(j) = vector_operation_int(j + 1);

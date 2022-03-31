@@ -58,7 +58,7 @@ function DATA_OUT = ntm_matrix_vector_convolution(DATA_A_IN, DATA_B_IN)
 
       for m = 1:i
         for n = 1:j
-          DATA_OUT(i) = DATA_OUT(i) + DATA_A_IN(m, n)*DATA_B_IN(i-m+1);
+          DATA_OUT(i) = DATA_OUT(i) + DATA_A_IN(m, n)*DATA_B_IN(i-m + 1);
         end
       end
     end

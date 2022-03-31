@@ -56,7 +56,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
   [SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
 
   % Body
-  % h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(t))
+  % h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
   % W(l;x)·x(t;x)
   vector_first_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
@@ -87,7 +87,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, 
   vector_first_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
   vector_first_operation_int = vector_first_operation_int + vector_second_operation_int;
 
-  % b(t)
+  % b(l)
   vector_second_operation_int = vector_first_operation_int + B_IN;
 
   % sigmoid(.)

@@ -59,7 +59,7 @@ function DATA_OUT = ntm_tensor_matrix_convolution(DATA_A_IN, DATA_B_IN)
         for m = 1:i
           for n = 1:j
             for p = 1:k
-              DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(m, n, p)*DATA_B_IN(i-m+1, j-n+1);
+              DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_A_IN(m, n, p)*DATA_B_IN(i-m + 1, j-n + 1);
             end
           end
         end

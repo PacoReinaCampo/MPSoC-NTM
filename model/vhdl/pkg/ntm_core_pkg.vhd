@@ -619,6 +619,24 @@ package ntm_core_pkg is
     vector_x_input : vector_buffer
     ) return vector_buffer;
 
+  function function_ntm_teacher (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input   : matrix_buffer;
+    matrix_r_input   : tensor_buffer;
+    vector_xi_input  : matrix_buffer;
+    matrix_rho_input : tensor_buffer;
+    vector_h_input   : matrix_buffer
+    ) return array4_buffer;
+
 end ntm_core_pkg;
 
 package body ntm_core_pkg is
@@ -1209,72 +1227,6 @@ package body ntm_core_pkg is
       vector_h_input   => vector_h_int
       );
 
-    -- TRAINER_STATE
-
-    tensor_kt_int := function_ntm_fnn_k_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_xt_int,
-      matrix_r_input   => matrix_rt_int,
-      vector_xi_input  => vector_xit_int,
-      matrix_rho_input => matrix_rhot_int,
-      vector_h_input   => vector_ht_int
-      );
-
-    matrix_ut_int := function_ntm_fnn_u_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_xt_int,
-      matrix_r_input   => matrix_rt_int,
-      vector_xi_input  => vector_xit_int,
-      matrix_rho_input => matrix_rhot_int,
-      vector_h_input   => vector_ht_int
-      );
-
-    tensor_dt_int := function_ntm_fnn_d_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_xt_int,
-      matrix_r_input   => matrix_rt_int,
-      vector_xi_input  => vector_xit_int,
-      matrix_rho_input => matrix_rhot_int,
-      vector_h_input   => vector_ht_int
-      );
-
-    matrix_vt_int := function_ntm_fnn_v_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_xt_int,
-      matrix_r_input   => matrix_rt_int,
-      vector_xi_input  => vector_xit_int,
-      matrix_rho_input => matrix_rhot_int,
-      vector_h_input   => vector_ht_int
-      );
-
     -- INTERFACE_VECTOR_STATE
 
     -- xi(t;s) = U(t;s;l)·h(t;l)
@@ -1372,5 +1324,106 @@ package body ntm_core_pkg is
     return vector_y_output;
 
   end function function_ntm_top;
+
+  function function_ntm_teacher (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input   : matrix_buffer;
+    matrix_r_input   : tensor_buffer;
+    vector_xi_input  : matrix_buffer;
+    matrix_rho_input : tensor_buffer;
+    vector_h_input   : matrix_buffer
+    ) return array4_buffer is
+
+    -- Trainer Variable
+    variable tensor_k_int : tensor_buffer;
+    variable matrix_u_int : matrix_buffer;
+    variable matrix_v_int : matrix_buffer;
+    variable tensor_d_int : tensor_buffer;
+
+    variable tensor_k_output : array4_buffer;
+    variable matrix_u_output : tensor_buffer;
+    variable matrix_v_output : tensor_buffer;
+    variable tensor_d_output : array4_buffer;
+
+  begin
+
+    -- TRAINER_STATE
+
+    tensor_k_output := function_ntm_fnn_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    matrix_u_output := function_ntm_fnn_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    tensor_d_output := function_ntm_fnn_d_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    matrix_v_output := function_ntm_fnn_v_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    return tensor_d_output;
+
+  end function function_ntm_teacher;
 
 end ntm_core_pkg;

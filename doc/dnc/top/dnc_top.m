@@ -79,10 +79,6 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       vector_w_int = zeros(SIZE_N_IN, 1);
       matrix_w_int = zeros(SIZE_R_IN, SIZE_N_IN);
     else
-      % TRAINER_STATE
-
-
-
       % INTERFACE_VECTOR_STATE
 
       % xi(t;s) = U(t;s;l)·h(t;l)
@@ -106,12 +102,12 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % FREE_GATES_STATE
 
       % f(t;i) = sigmoid(f^(t;i))
-      f_read_int = matrix_rho_int(:, SIZE_W_IN+5);
+      f_read_int = matrix_rho_int(:, SIZE_W_IN + 5);
 
       % READ_KEYS_STATE
 
       % k(t;i;k) = k^(t;i;k)
-      k_read_int = matrix_rho_int(:, 5:SIZE_W_IN+4);
+      k_read_int = matrix_rho_int(:, 5:SIZE_W_IN + 4);
 
       % READ_MODES_STATE
 
@@ -135,22 +131,22 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       % ERASE_VECTOR_STATE
 
       % e(t;k) = sigmoid(e^(t;k))
-      e_write_int = vector_xi_int(2*SIZE_W_IN+3:3*SIZE_W_IN+2);
+      e_write_int = vector_xi_int(2*SIZE_W_IN + 3:3*SIZE_W_IN + 2);
 
       % WRITE_GATE_STATE
 
       % gw(t) = sigmoid(gw^(t))
-      gw_write_int = vector_xi_int(2*SIZE_W_IN+2);
+      gw_write_int = vector_xi_int(2*SIZE_W_IN + 2);
 
       % WRITE_KEY_STATE
 
       % k(t;k) = k^(t;k)
-      k_write_int = vector_xi_int(SIZE_W_IN+2:2*SIZE_W_IN+1);
+      k_write_int = vector_xi_int(SIZE_W_IN + 2:2*SIZE_W_IN + 1);
 
       % WRITE_STRENGTH_STATE
 
       % beta(t) = oneplus(beta^(t))
-      beta_write_int = vector_xi_int(SIZE_W_IN+1);
+      beta_write_int = vector_xi_int(SIZE_W_IN + 1);
 
       % WRITE_VECTOR_STATE
 

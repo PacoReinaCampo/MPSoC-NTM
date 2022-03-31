@@ -55,7 +55,7 @@ function DATA_D_OUT = ntm_state_matrix_feedforward(DATA_K_IN, DATA_D_IN)
   [SIZE_D_I_IN, SIZE_D_J_IN] = size(DATA_D_IN);
 
   % Body
-  % d = inv(I+D·K)·D
+  % d = inv(I + D·K)·D
   matrix_operation_int = ntm_matrix_product(DATA_D_IN, DATA_K_IN);
 
   matrix_operation_int = eye(SIZE_D_I_IN, SIZE_D_J_IN) + matrix_operation_int;
