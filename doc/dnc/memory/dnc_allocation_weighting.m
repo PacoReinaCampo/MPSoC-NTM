@@ -60,9 +60,7 @@ function A_OUT = dnc_allocation_weighting(U_IN)
 
   vector_operation_int = dnc_sort_vector(U_IN);
 
-  for i = 1:SIZE_N_IN
-    vector_index_int(i) = ntm_scalar_multiplication(vector_operation_int, i);
-  end
+  vector_index_int = ntm_vector_integration(vector_index_int, 1);
   
   vector_operation_int = ones(SIZE_N_IN, 1) - vector_operation_int;
 

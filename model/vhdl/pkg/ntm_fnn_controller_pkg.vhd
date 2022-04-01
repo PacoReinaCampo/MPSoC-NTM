@@ -539,7 +539,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(t;l))
+    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -680,7 +680,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(t;l))
+    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (

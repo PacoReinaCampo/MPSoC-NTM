@@ -52,12 +52,16 @@ function R_OUT = dnc_read_vectors(M_IN, W_IN)
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
+  % Signals
+  vector_operation_int = zeros(SIZE_N_IN, 1);
+  R_OUT = zeros(SIZE_R_IN, SIZE_W_IN);
+
   % Body
   % r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN
-      vector_operation_int(i, j) = W_IN(i, j);
+      vector_operation_int(j) = W_IN(i, j);
     end
 
     matrix_operation_int = ntm_matrix_transpose(M_IN);

@@ -44,9 +44,9 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_scalar_multiplication(DATA_IN, LENGTH_IN)
+function DATA_OUT = ntm_scalar_multiplication(DATA_IN)
   % Constants
-  SIZE_IN = length(DATA_IN);
+  LENGTH_IN = length(DATA_IN);
 
   % Body
   DATA_OUT = 1;

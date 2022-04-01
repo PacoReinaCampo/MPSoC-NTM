@@ -58,15 +58,10 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
 
   % Constants
   SIZE_T_IN = 3;
-  SIZE_X_IN = 3;
-  SIZE_Y_IN = 3;
   SIZE_N_IN = 3;
   SIZE_W_IN = 3;
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
-
-  SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
-  SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
   % Signals
   matrix_r_int = zeros(SIZE_R_IN, SIZE_W_IN);
@@ -118,7 +113,9 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
       vector_r_int = ntm_reading(vector_w_int, matrix_m_int);
       
       for i = 1:SIZE_R_IN
-        matrix_r_int(i, :) = vector_r_int;
+        for k = 1:SIZE_W_IN
+          matrix_r_int(i, k) = vector_r_int(k);
+        end
       end
 
       % ADDRESSING

@@ -67,5 +67,5 @@ function PSI_OUT = dnc_memory_retention_vector(W_IN, F_IN)
 
   matrix_operation_int = matrix_operation_int.*W_IN;
 
-  PSI_OUT = ntm_vector_summation(matrix_operation_int, SIZE_R_IN);
+  PSI_OUT = ntm_vector_summation(matrix_operation_int);
 end

@@ -51,4 +51,4 @@ LENGTH_IN = 3;
 DATA_IN = rand(LENGTH_IN, 1);
 
 % DUT
-DATA_OUT = ntm_scalar_summation(DATA_IN, LENGTH_IN);
+DATA_OUT = ntm_scalar_summation(DATA_IN);

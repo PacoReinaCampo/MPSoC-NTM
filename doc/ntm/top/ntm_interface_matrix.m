@@ -51,6 +51,9 @@ function RHO_OUT = ntm_interface_matrix(U_IN, H_IN)
   % Constants
   [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
 
+  % Signals
+  matrix_h_int = zeros(SIZE_R_IN, SIZE_L_IN);
+
   % Body
   % rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
   for i = 1:SIZE_R_IN

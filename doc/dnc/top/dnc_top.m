@@ -56,15 +56,10 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
 
   % Constants
   SIZE_T_IN = 3;
-  SIZE_X_IN = 3;
-  SIZE_Y_IN = 3;
   SIZE_N_IN = 3;
   SIZE_W_IN = 3;
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
-
-  SIZE_M_IN = SIZE_W_IN + 5;
-  SIZE_S_IN = 3*SIZE_W_IN + 3;
 
   % Body
   for t = 1:SIZE_T_IN

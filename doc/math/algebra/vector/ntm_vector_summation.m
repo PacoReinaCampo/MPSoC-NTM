@@ -44,16 +44,14 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_vector_summation(DATA_IN, LENGTH_IN)
+function DATA_OUT = ntm_vector_summation(DATA_IN)
   % Constants
-  SIZE_IN = length(DATA_IN);
+  [LENGTH_IN, SIZE_IN] = size(DATA_IN);
 
   % Body
   DATA_OUT = zeros(SIZE_IN, 1);
 
   for t = 1:LENGTH_IN
-    for i = 1:SIZE_IN
-      DATA_OUT(i) = DATA_OUT(i) + DATA_IN(t, i);
-    end
+    DATA_OUT = DATA_OUT + DATA_IN(t, :);
   end
 end

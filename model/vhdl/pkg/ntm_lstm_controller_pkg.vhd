@@ -1931,7 +1931,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -2068,7 +2068,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -2205,7 +2205,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -2342,7 +2342,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
     tensor_convolution := function_tensor_matrix_convolution (
@@ -2567,7 +2567,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_ACTIVATION_STATE
 
-    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
     vector_a_int := function_ntm_activation_convolutional_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2592,7 +2592,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_FORGET_STATE
 
-    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
     vector_f_int := function_ntm_forget_convolutional_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2617,7 +2617,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_INPUT_STATE
 
-    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
     vector_i_int := function_ntm_input_convolutional_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2660,7 +2660,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_OUTPUT_GATE
 
-    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
     vector_o_int := function_ntm_output_convolutional_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -2736,7 +2736,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (
@@ -2873,7 +2873,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (
@@ -3010,7 +3010,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (
@@ -3147,7 +3147,7 @@ package body ntm_lstm_controller_pkg is
 
   begin
 
-    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
     tensor_product := function_tensor_matrix_product (
@@ -3372,7 +3372,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_ACTIVATION_STATE
 
-    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
     vector_a_int := function_ntm_activation_standard_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -3397,7 +3397,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_FORGET_STATE
 
-    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
     vector_f_int := function_ntm_forget_standard_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -3422,7 +3422,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_INPUT_STATE
 
-    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
     vector_i_int := function_ntm_input_standard_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -3465,7 +3465,7 @@ package body ntm_lstm_controller_pkg is
 
     -- VECTOR_OUTPUT_GATE
 
-    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(l))
     vector_o_int := function_ntm_output_standard_gate_vector (
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -4070,7 +4070,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- db(t;l) = summation(da(t;l))[t in 0 to T]
+    -- db(l) = summation(da(t;l))[t in 0 to T]
 
     vector_b_output := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,
@@ -4635,7 +4635,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- db(t;l) = summation(df(t;l))[t in 0 to T]
+    -- db(l) = summation(df(t;l))[t in 0 to T]
 
     vector_b_output := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,

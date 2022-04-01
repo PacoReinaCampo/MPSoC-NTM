@@ -65,5 +65,5 @@ function R_OUT = ntm_reading(W_IN, M_IN)
 
   matrix_operation_int = matrix_operation_int.*M_IN;
 
-  R_OUT = ntm_vector_summation(matrix_operation_int, SIZE_N_IN);
+  R_OUT = ntm_vector_summation(matrix_operation_int);
 end

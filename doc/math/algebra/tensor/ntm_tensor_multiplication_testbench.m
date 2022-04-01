@@ -51,7 +51,7 @@ SIZE_K_IN = 3;
 LENGTH_IN = 3;
 
 % Signals
-DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
+DATA_IN = rand(LENGTH_IN, SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
 % DUT
-DATA_OUT = ntm_tensor_multiplication(DATA_IN, LENGTH_IN);
+DATA_OUT = ntm_tensor_multiplication(DATA_IN);

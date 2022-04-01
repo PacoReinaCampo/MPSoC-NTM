@@ -75,8 +75,6 @@ function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
 
   matrix_adder_int = matrix_first_multiplier_int + matrix_second_multiplier_int;
 
-  matrix_first_multiplier_int = matrix_operation_int.*B_IN;
-
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN
       matrix_operation_int(i, j) = PI_IN(j, 3);

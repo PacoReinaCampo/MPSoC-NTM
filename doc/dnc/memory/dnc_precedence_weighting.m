@@ -59,7 +59,7 @@ function P_OUT = dnc_precedence_weighting(W_IN, P_IN)
 
   % p(t=0) = 0
 
-  data_summation_int = ntm_scalar_summation(W_IN, SIZE_N_IN);
+  data_summation_int = ntm_scalar_summation(W_IN);
 
   for j = 1:SIZE_N_IN
     vector_operation_int(j) = data_summation_int;

@@ -44,14 +44,14 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_summation(DATA_IN, LENGTH_IN)
+function DATA_OUT = ntm_matrix_summation(DATA_IN)
   % Constants
-  [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
+  [LENGTH_IN, SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
   % Body
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
   for t = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + DATA_IN(t);
+    DATA_OUT = DATA_OUT + DATA_IN(t, :, :);
   end
 end

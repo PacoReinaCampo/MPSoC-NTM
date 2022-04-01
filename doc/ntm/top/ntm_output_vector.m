@@ -66,6 +66,6 @@ function Y_OUT = ntm_output_vector(K_IN, R_IN, U_IN, H_IN)
   for y = 1:SIZE_Y_IN
     for i = 1:SIZE_R_IN
       Y_OUT(y) = Y_OUT(y) + matrix_operation_int(i, y);
-      end
     end
   end
+end
