@@ -44,6 +44,16 @@ use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
 package ntm_fnn_controller_pkg is
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  type trainer_output is record
+    tensor_k_output : array4_buffer;
+    matrix_u_output : tensor_buffer;
+    matrix_v_output : tensor_buffer;
+    tensor_d_output : array4_buffer;
+  end record trainer_output;
 
   -----------------------------------------------------------------------
   -- Components
@@ -415,6 +425,24 @@ package ntm_fnn_controller_pkg is
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
     ) return vector_buffer;
+
+  function function_ntm_fnn_trainer (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input   : matrix_buffer;
+    matrix_r_input   : tensor_buffer;
+    vector_xi_input  : matrix_buffer;
+    matrix_rho_input : tensor_buffer;
+    vector_h_input   : matrix_buffer
+    ) return trainer_output;
 
 end ntm_fnn_controller_pkg;
 
@@ -1161,5 +1189,113 @@ package body ntm_fnn_controller_pkg is
 
     return vector_b_output;
   end function function_ntm_fnn_b_trainer;
+
+  function function_ntm_fnn_trainer (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input   : matrix_buffer;
+    matrix_r_input   : tensor_buffer;
+    vector_xi_input  : matrix_buffer;
+    matrix_rho_input : tensor_buffer;
+    vector_h_input   : matrix_buffer
+    ) return trainer_output is
+
+    -- Trainer Variable
+    variable tensor_k_int : tensor_buffer;
+    variable matrix_u_int : matrix_buffer;
+    variable matrix_v_int : matrix_buffer;
+    variable tensor_d_int : tensor_buffer;
+
+    variable tensor_k_output : array4_buffer;
+    variable matrix_u_output : tensor_buffer;
+    variable matrix_v_output : tensor_buffer;
+    variable tensor_d_output : array4_buffer;
+
+    variable trainer_fnn_output : trainer_output;
+
+  begin
+
+    -- TRAINER_STATE
+
+    tensor_k_output := function_ntm_fnn_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    matrix_u_output := function_ntm_fnn_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    tensor_d_output := function_ntm_fnn_d_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    matrix_v_output := function_ntm_fnn_v_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input
+      );
+
+    trainer_fnn_output.tensor_k_output := tensor_k_output;
+    trainer_fnn_output.matrix_u_output := matrix_u_output;
+    trainer_fnn_output.matrix_v_output := matrix_v_output;
+    trainer_fnn_output.tensor_d_output := tensor_d_output;
+
+    return trainer_fnn_output;
+
+  end function function_ntm_fnn_trainer;
 
 end ntm_fnn_controller_pkg;
