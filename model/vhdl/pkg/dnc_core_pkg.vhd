@@ -1063,13 +1063,13 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      K_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
-      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      P_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      P_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
+      P_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
-      K_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
-      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+      P_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      P_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      P_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
       R_IN_K_ENABLE : in std_logic;     -- for j in 0 to W-1
@@ -1077,11 +1077,11 @@ package dnc_core_pkg is
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
       R_OUT_K_ENABLE : out std_logic;   -- for j in 0 to W-1
 
-      U_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
-      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      Q_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
+      Q_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      U_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
-      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      Q_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      Q_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
@@ -1095,10 +1095,10 @@ package dnc_core_pkg is
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      Q_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -2855,7 +2855,7 @@ package body dnc_core_pkg is
 
   begin
 
-    -- xi(t;s) = U(t;s;l)·h(t;l)
+    -- xi(t;s) = U(s;l)·h(t;l)
 
     vector_xi_output := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_S_IN,
@@ -2885,7 +2885,7 @@ package body dnc_core_pkg is
 
   begin
 
-    -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+    -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -3115,7 +3115,7 @@ package body dnc_core_pkg is
 
     -- INTERFACE_VECTOR_STATE
 
-    -- xi(t;s) = U(t;s;l)·h(t;l)
+    -- xi(t;s) = U(s;l)·h(t;l)
     vector_xi_int := function_dnc_interface_vector (
       SIZE_S_IN => SIZE_S_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -3127,7 +3127,7 @@ package body dnc_core_pkg is
 
     -- INTERFACE_MATRIX_STATE
 
-    -- rho(t;i;m) = U(t;i;m;l)·h(t;i;l)
+    -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
     matrix_rho_int := function_dnc_interface_matrix (
       SIZE_M_IN => SIZE_M_IN,
       SIZE_R_IN => SIZE_R_IN,

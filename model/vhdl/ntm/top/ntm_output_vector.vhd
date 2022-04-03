@@ -60,13 +60,13 @@ entity ntm_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
-    K_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
-    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+    P_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    P_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    P_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
-    K_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
-    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+    P_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    P_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
+    P_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     R_IN_K_ENABLE : in std_logic;       -- for j in 0 to W-1
@@ -74,11 +74,11 @@ entity ntm_output_vector is
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     R_OUT_K_ENABLE : out std_logic;     -- for j in 0 to W-1
 
-    U_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
-    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    Q_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    Q_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-    U_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
-    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    Q_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
+    Q_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
@@ -92,10 +92,10 @@ entity ntm_output_vector is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    Q_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -176,12 +176,12 @@ begin
       R_OUT_I_ENABLE <= '0';
       R_OUT_K_ENABLE <= '0';
 
-      K_OUT_I_ENABLE <= '0';
-      K_OUT_Y_ENABLE <= '0';
-      K_OUT_K_ENABLE <= '0';
+      P_OUT_I_ENABLE <= '0';
+      P_OUT_Y_ENABLE <= '0';
+      P_OUT_K_ENABLE <= '0';
 
-      U_OUT_Y_ENABLE <= '0';
-      U_OUT_L_ENABLE <= '0';
+      Q_OUT_Y_ENABLE <= '0';
+      Q_OUT_L_ENABLE <= '0';
 
       H_OUT_ENABLE <= '0';
 
@@ -208,12 +208,12 @@ begin
             R_OUT_I_ENABLE <= '1';
             R_OUT_K_ENABLE <= '1';
 
-            K_OUT_I_ENABLE <= '1';
-            K_OUT_Y_ENABLE <= '1';
-            K_OUT_K_ENABLE <= '1';
+            P_OUT_I_ENABLE <= '1';
+            P_OUT_Y_ENABLE <= '1';
+            P_OUT_K_ENABLE <= '1';
 
-            U_OUT_Y_ENABLE <= '1';
-            U_OUT_L_ENABLE <= '1';
+            Q_OUT_Y_ENABLE <= '1';
+            Q_OUT_L_ENABLE <= '1';
 
             H_OUT_ENABLE <= '1';
 
@@ -228,12 +228,12 @@ begin
             R_OUT_I_ENABLE <= '0';
             R_OUT_K_ENABLE <= '0';
 
-            K_OUT_I_ENABLE <= '0';
-            K_OUT_Y_ENABLE <= '0';
-            K_OUT_K_ENABLE <= '0';
+            P_OUT_I_ENABLE <= '0';
+            P_OUT_Y_ENABLE <= '0';
+            P_OUT_K_ENABLE <= '0';
 
-            U_OUT_Y_ENABLE <= '0';
-            U_OUT_L_ENABLE <= '0';
+            Q_OUT_Y_ENABLE <= '0';
+            Q_OUT_L_ENABLE <= '0';
 
             H_OUT_ENABLE <= '0';
           end if;
@@ -310,23 +310,23 @@ begin
 
         when INPUT_SECOND_I_STATE =>    -- STEP 5 U
 
-          if ((U_IN_Y_ENABLE = '1') and (U_IN_L_ENABLE = '1')) then
+          if ((Q_IN_Y_ENABLE = '1') and (Q_IN_L_ENABLE = '1')) then
             -- Data Inputs
-            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
+            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= Q_IN;
 
             -- Control Internal
             controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
           end if;
 
           -- Control Outputs
-          U_OUT_Y_ENABLE <= '0';
-          U_OUT_L_ENABLE <= '0';
+          Q_OUT_Y_ENABLE <= '0';
+          Q_OUT_L_ENABLE <= '0';
 
         when INPUT_SECOND_J_STATE =>    -- STEP 6 U
 
-          if (U_IN_L_ENABLE = '1') then
+          if (Q_IN_L_ENABLE = '1') then
             -- Data Inputs
-            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
+            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= Q_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
@@ -337,14 +337,14 @@ begin
           end if;
 
           -- Control Outputs
-          U_OUT_L_ENABLE <= '0';
+          Q_OUT_L_ENABLE <= '0';
 
         when CLEAN_SECOND_I_STATE =>    -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            U_OUT_Y_ENABLE <= '1';
-            U_OUT_L_ENABLE <= '1';
+            Q_OUT_Y_ENABLE <= '1';
+            Q_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -354,8 +354,8 @@ begin
             controller_ctrl_fsm_int <= INPUT_THIRD_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            U_OUT_Y_ENABLE <= '1';
-            U_OUT_L_ENABLE <= '1';
+            Q_OUT_Y_ENABLE <= '1';
+            Q_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -369,7 +369,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            U_OUT_L_ENABLE <= '1';
+            Q_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -380,24 +380,24 @@ begin
 
         when INPUT_THIRD_I_STATE =>     -- STEP 9 K
 
-          if ((K_IN_I_ENABLE = '1') and (K_IN_Y_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
+          if ((P_IN_I_ENABLE = '1') and (P_IN_Y_ENABLE = '1') and (P_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= P_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_THIRD_K_STATE;
           end if;
 
           -- Control Outputs
-          K_OUT_I_ENABLE <= '0';
-          K_OUT_Y_ENABLE <= '0';
-          K_OUT_K_ENABLE <= '0';
+          P_OUT_I_ENABLE <= '0';
+          P_OUT_Y_ENABLE <= '0';
+          P_OUT_K_ENABLE <= '0';
 
         when INPUT_THIRD_J_STATE =>     -- STEP 10 K
 
-          if ((K_IN_Y_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
+          if ((P_IN_Y_ENABLE = '1') and (P_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= P_IN;
 
             -- FSM Control
             if (unsigned(index_k_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
@@ -408,15 +408,15 @@ begin
           end if;
 
           -- Control Outputs
-          K_OUT_I_ENABLE <= '0';
-          K_OUT_Y_ENABLE <= '0';
-          K_OUT_K_ENABLE <= '0';
+          P_OUT_I_ENABLE <= '0';
+          P_OUT_Y_ENABLE <= '0';
+          P_OUT_K_ENABLE <= '0';
 
         when INPUT_THIRD_K_STATE =>     -- STEP 11 K
 
-          if (K_IN_K_ENABLE = '1') then
+          if (P_IN_K_ENABLE = '1') then
             -- Data Inputs
-            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= P_IN;
 
             -- FSM Control
             if ((unsigned(index_j_loop) = unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
@@ -429,9 +429,9 @@ begin
           end if;
 
           -- Control Outputs
-          K_OUT_I_ENABLE <= '0';
-          K_OUT_Y_ENABLE <= '0';
-          K_OUT_K_ENABLE <= '0';
+          P_OUT_I_ENABLE <= '0';
+          P_OUT_Y_ENABLE <= '0';
+          P_OUT_K_ENABLE <= '0';
 
         when CLEAN_THIRD_I_STATE =>     -- STEP 12
 
@@ -445,9 +445,9 @@ begin
             controller_ctrl_fsm_int <= CLEAN_FOURTH_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            K_OUT_I_ENABLE <= '1';
-            K_OUT_Y_ENABLE <= '1';
-            K_OUT_K_ENABLE <= '1';
+            P_OUT_I_ENABLE <= '1';
+            P_OUT_Y_ENABLE <= '1';
+            P_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
@@ -462,8 +462,8 @@ begin
 
           if ((unsigned(index_j_loop) < unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            K_OUT_Y_ENABLE <= '1';
-            K_OUT_K_ENABLE <= '1';
+            P_OUT_Y_ENABLE <= '1';
+            P_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
@@ -477,7 +477,7 @@ begin
 
           if (unsigned(index_k_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            K_OUT_K_ENABLE <= '1';
+            P_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));

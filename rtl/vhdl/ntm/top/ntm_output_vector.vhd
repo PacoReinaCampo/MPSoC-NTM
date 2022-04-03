@@ -61,13 +61,13 @@ entity ntm_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
-    K_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
-    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+    P_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    P_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    P_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
-    K_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
-    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+    P_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    P_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
+    P_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     R_IN_K_ENABLE : in std_logic;       -- for j in 0 to W-1
@@ -75,11 +75,11 @@ entity ntm_output_vector is
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     R_OUT_K_ENABLE : out std_logic;     -- for j in 0 to W-1
 
-    U_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
-    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    Q_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    Q_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-    U_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
-    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    Q_OUT_Y_ENABLE : out std_logic;     -- for y in 0 to Y-1
+    Q_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
@@ -93,10 +93,10 @@ entity ntm_output_vector is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    Q_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -229,9 +229,9 @@ begin
 
         when INPUT_FIRST_I_STATE =>     -- STEP 1
 
-          if (K_IN_Y_ENABLE = '1') then
+          if (P_IN_Y_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_matrix_product <= K_IN;
+            data_a_in_matrix_product <= P_IN;
 
             -- Control Internal
             data_a_in_i_enable_matrix_product <= '1';
@@ -274,12 +274,12 @@ begin
 
         when INPUT_FIRST_J_STATE =>     -- STEP 2
 
-          if (K_IN_K_ENABLE = '1') then
+          if (P_IN_K_ENABLE = '1') then
             -- Data Inputs
             size_a_j_in_matrix_product <= SIZE_W_IN;
             size_b_j_in_matrix_product <= ONE_DATA;
 
-            data_a_in_matrix_product <= K_IN;
+            data_a_in_matrix_product <= P_IN;
 
             if (index_j_loop = ZERO_CONTROL) then
               -- Control Internal
@@ -303,7 +303,7 @@ begin
             data_b_in_matrix_float_adder <= ZERO_DATA;
 
             -- Control Outputs
-            K_OUT_Y_ENABLE <= '1';
+            P_OUT_Y_ENABLE <= '1';
             R_OUT_K_ENABLE <= '1';
 
             data_a_in_i_enable_matrix_float_adder <= '1';
@@ -325,7 +325,7 @@ begin
             data_b_in_matrix_float_adder <= ZERO_DATA;
 
             -- Control Outputs
-            K_OUT_K_ENABLE <= '1';
+            P_OUT_K_ENABLE <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_ADDER_J_STATE;
@@ -354,7 +354,7 @@ begin
             data_a_in_i_enable_matrix_float_adder <= '1';
           else
             -- Control Outputs
-            K_OUT_Y_ENABLE <= '0';
+            P_OUT_Y_ENABLE <= '0';
             R_OUT_K_ENABLE <= '0';
 
             data_a_in_i_enable_matrix_float_adder <= '0';
@@ -383,17 +383,17 @@ begin
             data_b_in_j_enable_matrix_float_adder <= '1';
           else
             -- Control Outputs
-            K_OUT_K_ENABLE <= '0';
+            P_OUT_K_ENABLE <= '0';
           end if;
 
         when INPUT_SECOND_I_STATE =>    -- STEP 7
 
-          if (U_IN_Y_ENABLE = '1') then
+          if (Q_IN_Y_ENABLE = '1') then
             -- Data Inputs
             size_a_i_in_matrix_product <= SIZE_L_IN;
             size_b_i_in_matrix_product <= ONE_DATA;
 
-            data_a_in_matrix_product <= U_IN;
+            data_a_in_matrix_product <= Q_IN;
 
             if (index_i_loop = ZERO_CONTROL) then
               -- Control Internal
@@ -411,9 +411,9 @@ begin
 
         when INPUT_SECOND_J_STATE =>    -- STEP 8
 
-          if (K_IN_K_ENABLE = '1') then
+          if (P_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_matrix_product <= K_IN;
+            data_a_in_matrix_product <= P_IN;
 
             -- Control Internal
             data_a_in_j_enable_matrix_product <= '1';
@@ -448,7 +448,7 @@ begin
             data_b_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            U_OUT_Y_ENABLE <= '1';
+            Q_OUT_Y_ENABLE <= '1';
             H_OUT_ENABLE   <= '1';
 
             data_b_in_i_enable_matrix_float_adder <= '1';
@@ -467,7 +467,7 @@ begin
             data_b_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            U_OUT_L_ENABLE <= '1';
+            Q_OUT_L_ENABLE <= '1';
 
             data_b_in_j_enable_matrix_float_adder <= '1';
 
@@ -497,7 +497,7 @@ begin
             Y_OUT_ENABLE <= '1';
           else
             -- Control Outputs
-            U_OUT_Y_ENABLE <= '0';
+            Q_OUT_Y_ENABLE <= '0';
             H_OUT_ENABLE   <= '0';
 
             data_b_in_i_enable_matrix_product <= '0';
@@ -518,7 +518,7 @@ begin
             end if;
           else
             -- Control Outputs
-            U_OUT_L_ENABLE <= '0';
+            Q_OUT_L_ENABLE <= '0';
           end if;
 
         when others =>
