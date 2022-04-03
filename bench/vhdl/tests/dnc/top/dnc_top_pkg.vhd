@@ -201,6 +201,20 @@ package dnc_top_pkg is
 
       DNC_TOP_X_OUT_ENABLE : in std_logic;
 
+      DNC_TOP_P_IN_I_ENABLE : out std_logic;
+      DNC_TOP_P_IN_Y_ENABLE : out std_logic;
+      DNC_TOP_P_IN_K_ENABLE : out std_logic;
+
+      DNC_TOP_P_OUT_I_ENABLE : in std_logic;
+      DNC_TOP_P_OUT_Y_ENABLE : in std_logic;
+      DNC_TOP_P_OUT_K_ENABLE : in std_logic;
+
+      DNC_TOP_Q_IN_Y_ENABLE : out std_logic;
+      DNC_TOP_Q_IN_L_ENABLE : out std_logic;
+
+      DNC_TOP_Q_OUT_Y_ENABLE : in std_logic;
+      DNC_TOP_Q_OUT_L_ENABLE : in std_logic;
+
       DNC_TOP_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
@@ -219,7 +233,11 @@ package dnc_top_pkg is
       DNC_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       DNC_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_TOP_Y_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+
+      DNC_TOP_P_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_Q_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_TOP_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

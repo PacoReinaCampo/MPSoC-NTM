@@ -9,7 +9,7 @@
 --                  |_|                                                       --
 --                                                                            --
 --                                                                            --
---              Peripheral-NTM for MPSoC                                      --
+--              Peripheral-DNC for MPSoC                                      --
 --              Neural Turing Machine for MPSoC                               --
 --                                                                            --
 --------------------------------------------------------------------------------
@@ -122,6 +122,20 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
 
   signal x_out_enable_top : std_logic;
 
+  signal p_in_i_enable_top : std_logic;
+  signal p_in_y_enable_top : std_logic;
+  signal p_in_l_enable_top : std_logic;
+
+  signal p_out_i_enable_top : std_logic;
+  signal p_out_y_enable_top : std_logic;
+  signal p_out_k_enable_top : std_logic;
+
+  signal q_in_y_enable_top : std_logic;
+  signal q_in_l_enable_top : std_logic;
+
+  signal q_out_y_enable_top : std_logic;
+  signal q_out_l_enable_top : std_logic;
+
   signal y_out_enable_top : std_logic;
 
   -- DATA
@@ -139,7 +153,11 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal d_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_top  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal p_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal q_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal y_out_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -148,7 +166,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- STIMULUS
   top_stimulus : dnc_top_stimulus
     generic map (
       -- SYSTEM-SIZE
@@ -213,6 +230,20 @@ begin
 
       DNC_TOP_X_OUT_ENABLE => x_out_enable_top,
 
+      DNC_TOP_P_IN_I_ENABLE => p_in_i_enable_top,
+      DNC_TOP_P_IN_Y_ENABLE => p_in_y_enable_top,
+      DNC_TOP_P_IN_K_ENABLE => p_in_l_enable_top,
+
+      DNC_TOP_P_OUT_I_ENABLE => p_out_i_enable_top,
+      DNC_TOP_P_OUT_Y_ENABLE => p_out_y_enable_top,
+      DNC_TOP_P_OUT_K_ENABLE => p_out_k_enable_top,
+
+      DNC_TOP_Q_IN_Y_ENABLE => q_in_y_enable_top,
+      DNC_TOP_Q_IN_L_ENABLE => q_in_l_enable_top,
+
+      DNC_TOP_Q_OUT_Y_ENABLE => q_out_y_enable_top,
+      DNC_TOP_Q_OUT_L_ENABLE => q_out_l_enable_top,
+
       DNC_TOP_Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
@@ -230,7 +261,11 @@ begin
       DNC_TOP_D_IN => d_in_top,
       DNC_TOP_B_IN => b_in_top,
 
-      DNC_TOP_X_IN  => x_in_top,
+      DNC_TOP_X_IN => x_in_top,
+
+      DNC_TOP_P_IN => p_in_top,
+      DNC_TOP_Q_IN => q_in_top,
+
       DNC_TOP_Y_OUT => y_out_top
       );
 
@@ -286,9 +321,25 @@ begin
 
         B_IN_ENABLE => b_in_enable_top,
 
-        B_OUT_ENABLE => b_in_enable_top,
+        B_OUT_ENABLE => b_out_enable_top,
 
         X_IN_ENABLE => x_in_enable_top,
+
+        X_OUT_ENABLE => x_out_enable_top,
+
+        P_IN_I_ENABLE => p_in_i_enable_top,
+        P_IN_Y_ENABLE => p_in_y_enable_top,
+        P_IN_K_ENABLE => p_in_l_enable_top,
+
+        P_OUT_I_ENABLE => p_out_i_enable_top,
+        P_OUT_Y_ENABLE => p_out_y_enable_top,
+        P_OUT_K_ENABLE => p_out_k_enable_top,
+
+        Q_IN_Y_ENABLE => q_in_y_enable_top,
+        Q_IN_L_ENABLE => q_in_l_enable_top,
+
+        Q_OUT_Y_ENABLE => q_out_y_enable_top,
+        Q_OUT_L_ENABLE => q_out_l_enable_top,
 
         Y_OUT_ENABLE => y_out_enable_top,
 
@@ -307,7 +358,11 @@ begin
         D_IN => d_in_top,
         B_IN => b_in_top,
 
-        X_IN  => x_in_top,
+        X_IN => x_in_top,
+
+        P_IN => p_in_top,
+        Q_IN => q_in_top,
+
         Y_OUT => y_out_top
         );
   end generate dnc_top_test;
