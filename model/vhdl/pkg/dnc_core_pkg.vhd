@@ -45,16 +45,6 @@ use work.ntm_math_pkg.all;
 use work.ntm_fnn_controller_pkg.all;
 
 package dnc_core_pkg is
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
-
-  type teacher_output is record
-    tensor_k_output : array4_buffer;
-    matrix_u_output : tensor_buffer;
-    matrix_v_output : tensor_buffer;
-    tensor_d_output : array4_buffer;
-  end record teacher_output;
 
   -----------------------------------------------------------------------
   -- Components
@@ -1525,24 +1515,6 @@ package dnc_core_pkg is
     tensor_p_input : tensor_buffer;
     matrix_q_input : matrix_buffer
     ) return vector_buffer;
-
-  function function_ntm_teacher (
-    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer
-    ) return teacher_output;
 
 end dnc_core_pkg;
 
@@ -3079,345 +3051,242 @@ package body dnc_core_pkg is
 
   begin
 
-    -- ARITHMETIC S: [XI] = 3·W + 3
-    SIZE_S_IN := THREE_CONTROL;
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      if (t = 0) then
+      else
+        -- ARITHMETIC S: [XI] = 3·W + 3
+        SIZE_S_IN := THREE_CONTROL;
 
-    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => THREE_CONTROL,
-      scalar_b_input => SIZE_W_IN
-      );
+        SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+          scalar_a_input => THREE_CONTROL,
+          scalar_b_input => SIZE_W_IN
+          );
 
-    SIZE_S_IN := function_scalar_integer_adder (
-      OPERATION => '0',
+        SIZE_S_IN := function_scalar_integer_adder (
+          OPERATION => '0',
 
-      scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_S_IN
-      );
+          scalar_a_input => SCALAR_OPERATION_INT,
+          scalar_b_input => SIZE_S_IN
+          );
 
-    -- ARITHMETIC M: [RHO] = W + 5
-    SIZE_M_IN := function_scalar_integer_adder (
-      OPERATION => '0',
+        -- ARITHMETIC M: [RHO] = W + 5
+        SIZE_M_IN := function_scalar_integer_adder (
+          OPERATION => '0',
 
-      scalar_a_input => FIVE_CONTROL,
-      scalar_b_input => SIZE_W_IN
-      );
+          scalar_a_input => FIVE_CONTROL,
+          scalar_b_input => SIZE_W_IN
+          );
 
-    -- CONTROLLER_BODY_STATE
+        -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+        -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
+        -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
-    vector_h_int := function_ntm_fnn_standard_controller (
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
+        vector_h_int := function_ntm_fnn_standard_controller (
+          SIZE_X_IN => SIZE_X_IN,
+          SIZE_W_IN => SIZE_W_IN,
+          SIZE_L_IN => SIZE_L_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_M_IN => SIZE_M_IN,
 
-      matrix_w_input => matrix_w_input,
-      tensor_k_input => tensor_k_input,
-      matrix_u_input => matrix_u_input,
-      matrix_v_input => matrix_v_input,
-      tensor_d_input => tensor_d_input,
-      vector_b_input => vector_b_input,
+          matrix_w_input => matrix_w_input,
+          tensor_k_input => tensor_k_input,
+          matrix_u_input => matrix_u_input,
+          matrix_v_input => matrix_v_input,
+          tensor_d_input => tensor_d_input,
+          vector_b_input => vector_b_input,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_int,
-      vector_xi_input  => vector_xi_int,
-      matrix_rho_input => matrix_rho_int,
-      vector_h_input   => vector_h_int
-      );
+          vector_x_input   => vector_x_input,
+          matrix_r_input   => matrix_r_int,
+          vector_xi_input  => vector_xi_int,
+          matrix_rho_input => matrix_rho_int,
+          vector_h_input   => vector_h_int
+          );
 
 
 
-    -- INTERFACE_VECTOR_STATE
+        -- INTERFACE_VECTOR_STATE
 
-    -- xi(t;s) = U(s;l)·h(t;l)
-    vector_xi_int := function_dnc_interface_vector (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_L_IN => SIZE_L_IN,
+        -- xi(t;s) = U(s;l)·h(t;l)
+        vector_xi_int := function_dnc_interface_vector (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_L_IN => SIZE_L_IN,
 
-      matrix_u_input => matrix_v_int,
+          matrix_u_input => matrix_v_int,
 
-      vector_h_input => vector_h_int
-      );
+          vector_h_input => vector_h_int
+          );
 
-    -- INTERFACE_MATRIX_STATE
+        -- INTERFACE_MATRIX_STATE
 
-    -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
-    matrix_rho_int := function_dnc_interface_matrix (
-      SIZE_M_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_L_IN => SIZE_L_IN,
+        -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
+        matrix_rho_int := function_dnc_interface_matrix (
+          SIZE_M_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_L_IN => SIZE_L_IN,
 
-      tensor_u_input => tensor_d_int,
+          tensor_u_input => tensor_d_int,
 
-      vector_h_input => vector_h_int
-      );
+          vector_h_input => vector_h_int
+          );
 
 
 
-    -- READ_HEADS_STATE
+        -- READ_HEADS_STATE
 
-    -- FREE_GATES_STATE
+        -- FREE_GATES_STATE
 
-    -- f(t;i) = sigmoid(f^(t;i))
-    vector_f_read_int := function_dnc_free_gates (
-      SIZE_M_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- f(t;i) = sigmoid(f^(t;i))
+        vector_f_read_int := function_dnc_free_gates (
+          SIZE_M_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      matrix_rho_input => matrix_rho_int
-      );
+          matrix_rho_input => matrix_rho_int
+          );
 
-    -- READ_KEYS_STATE
+        -- READ_KEYS_STATE
 
-    -- k(t;i;k) = k^(t;i;k)
-    matrix_k_read_int := function_dnc_read_keys (
-      SIZE_M_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- k(t;i;k) = k^(t;i;k)
+        matrix_k_read_int := function_dnc_read_keys (
+          SIZE_M_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      matrix_rho_input => matrix_rho_int
-      );
+          matrix_rho_input => matrix_rho_int
+          );
 
-    -- READ_MODES_STATE
+        -- READ_MODES_STATE
 
-    -- pi(t;i;p) = softmax(pi^(t;i;p))
-    matrix_pi_read_int := function_dnc_read_modes (
-      SIZE_M_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- pi(t;i;p) = softmax(pi^(t;i;p))
+        matrix_pi_read_int := function_dnc_read_modes (
+          SIZE_M_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      matrix_rho_input => matrix_rho_int
-      );
+          matrix_rho_input => matrix_rho_int
+          );
 
-    -- READ_STRENGTHS_STATE
+        -- READ_STRENGTHS_STATE
 
-    -- beta(t;i) = oneplus(beta^(t;i))
-    vector_beta_read_int := function_dnc_read_strengths (
-      SIZE_M_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- beta(t;i) = oneplus(beta^(t;i))
+        vector_beta_read_int := function_dnc_read_strengths (
+          SIZE_M_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      matrix_rho_input => matrix_rho_int
-      );
+          matrix_rho_input => matrix_rho_int
+          );
 
 
 
-    -- WRITE_HEADS_STATE
+        -- WRITE_HEADS_STATE
 
-    -- ALLOCATION_GATE_STATE
+        -- ALLOCATION_GATE_STATE
 
-    -- ga(t) = sigmoid(g^(t))
-    scalar_ga_write_int := function_dnc_allocation_gate (
-      SIZE_S_IN => SIZE_M_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- ga(t) = sigmoid(g^(t))
+        scalar_ga_write_int := function_dnc_allocation_gate (
+          SIZE_S_IN => SIZE_M_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
-    -- ERASE_VECTOR_STATE
+        -- ERASE_VECTOR_STATE
 
-    -- e(t;k) = sigmoid(e^(t;k))
-    vector_e_write_int := function_dnc_erase_vector (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- e(t;k) = sigmoid(e^(t;k))
+        vector_e_write_int := function_dnc_erase_vector (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
-    -- WRITE_GATE_STATE
+        -- WRITE_GATE_STATE
 
-    -- gw(t) = sigmoid(gw^(t))
-    scalar_gw_write_int := function_dnc_write_gate (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- gw(t) = sigmoid(gw^(t))
+        scalar_gw_write_int := function_dnc_write_gate (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
-    -- WRITE_KEY_STATE
+        -- WRITE_KEY_STATE
 
-    -- k(t;k) = k^(t;k)
-    vector_k_write_int := function_dnc_write_key (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- k(t;k) = k^(t;k)
+        vector_k_write_int := function_dnc_write_key (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
-    -- WRITE_STRENGTH_STATE
+        -- WRITE_STRENGTH_STATE
 
-    -- beta(t) = oneplus(beta^(t))
-    scalar_beta_write_int := function_dnc_write_strength (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- beta(t) = oneplus(beta^(t))
+        scalar_beta_write_int := function_dnc_write_strength (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
-    -- WRITE_VECTOR_STATE
+        -- WRITE_VECTOR_STATE
 
-    -- v(t;k) = v^(t;k)
-    vector_v_write_int := function_dnc_write_vector (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- v(t;k) = v^(t;k)
+        vector_v_write_int := function_dnc_write_vector (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_xi_input => vector_xi_int
-      );
+          vector_xi_input => vector_xi_int
+          );
 
 
 
-    -- MEMORY_STATE
-    matrix_r_int := function_dnc_addressing (
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- MEMORY_STATE
+        matrix_r_int := function_dnc_addressing (
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      matrix_k_read_input    => matrix_k_read_int,
-      vector_beta_read_input => vector_beta_read_int,
-      vector_f_read_input    => vector_f_read_int,
-      matrix_pi_read_input   => matrix_pi_read_int,
+          matrix_k_read_input    => matrix_k_read_int,
+          vector_beta_read_input => vector_beta_read_int,
+          vector_f_read_input    => vector_f_read_int,
+          matrix_pi_read_input   => matrix_pi_read_int,
 
-      vector_k_write_input    => vector_k_write_int,
-      scalar_beta_write_input => scalar_beta_write_int,
-      vector_e_write_input    => vector_e_write_int,
-      vector_v_write_input    => vector_v_write_int,
-      scalar_ga_write_input   => scalar_ga_write_int,
-      scalar_gw_write_input   => scalar_gw_write_int
-      );
+          vector_k_write_input    => vector_k_write_int,
+          scalar_beta_write_input => scalar_beta_write_int,
+          vector_e_write_input    => vector_e_write_int,
+          vector_v_write_input    => vector_v_write_int,
+          scalar_ga_write_input   => scalar_ga_write_int,
+          scalar_gw_write_input   => scalar_gw_write_int
+          );
 
 
 
-    -- OUTPUT_VECTOR_STATE
+        -- OUTPUT_VECTOR_STATE
 
-    -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
-    vector_y_output := function_dnc_output_vector (
-      SIZE_Y_IN => SIZE_Y_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
+        vector_y_output := function_dnc_output_vector (
+          SIZE_Y_IN => SIZE_Y_IN,
+          SIZE_L_IN => SIZE_L_IN,
+          SIZE_W_IN => SIZE_W_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      tensor_p_input => tensor_p_input,
-      matrix_r_input => matrix_r_int,
+          tensor_p_input => tensor_p_input,
+          matrix_r_input => matrix_r_int,
 
-      matrix_q_input => matrix_q_input,
-      vector_h_input => vector_h_int
-      );
+          matrix_q_input => matrix_q_input,
+          vector_h_input => vector_h_int
+          );
 
-    return vector_y_output;
+        return vector_y_output;
+      end if;
+    end loop;
   end function function_dnc_top;
-
-  function function_ntm_teacher (
-    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer
-    ) return teacher_output is
-
-    -- Trainer Variable
-    variable tensor_k_int : tensor_buffer;
-    variable matrix_u_int : matrix_buffer;
-    variable matrix_v_int : matrix_buffer;
-    variable tensor_d_int : tensor_buffer;
-
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
-
-    variable trainer_output : teacher_output;
-
-  begin
-
-    -- TRAINER_STATE
-
-    tensor_k_output := function_ntm_fnn_k_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input
-      );
-
-    matrix_u_output := function_ntm_fnn_u_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input
-      );
-
-    tensor_d_output := function_ntm_fnn_d_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input
-      );
-
-    matrix_v_output := function_ntm_fnn_v_trainer (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
-
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input
-      );
-
-    trainer_output.tensor_k_output := tensor_k_output;
-    trainer_output.matrix_u_output := matrix_u_output;
-    trainer_output.matrix_v_output := matrix_v_output;
-    trainer_output.tensor_d_output := tensor_d_output;
-
-    return trainer_output;
-
-  end function function_ntm_teacher;
 
 end dnc_core_pkg;

@@ -1185,150 +1185,154 @@ package body ntm_core_pkg is
 
   begin
 
-    -- ARITHMETIC S: [XI] = 2·W
-    SIZE_S_IN := function_scalar_integer_multiplier (
-      scalar_a_input => TWO_CONTROL,
-      scalar_b_input => SIZE_W_IN
-      );
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      if (t = 0) then
+      else
+        -- ARITHMETIC S: [XI] = 2·W
+        SIZE_S_IN := function_scalar_integer_multiplier (
+          scalar_a_input => TWO_CONTROL,
+          scalar_b_input => SIZE_W_IN
+          );
 
-    -- ARITHMETIC M: [RHO] = 2·N + 3
-    SIZE_M_IN := THREE_CONTROL;
+        -- ARITHMETIC M: [RHO] = 2·N + 3
+        SIZE_M_IN := THREE_CONTROL;
 
-    SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-      scalar_a_input => TWO_CONTROL,
-      scalar_b_input => SIZE_N_IN
-      );
+        SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
+          scalar_a_input => TWO_CONTROL,
+          scalar_b_input => SIZE_N_IN
+          );
 
-    SIZE_M_IN := function_scalar_integer_adder (
-      OPERATION => '0',
+        SIZE_M_IN := function_scalar_integer_adder (
+          OPERATION => '0',
 
-      scalar_a_input => SCALAR_OPERATION_INT,
-      scalar_b_input => SIZE_M_IN
-      );
+          scalar_a_input => SCALAR_OPERATION_INT,
+          scalar_b_input => SIZE_M_IN
+          );
 
-    -- CONTROLLER_BODY_STATE
+        -- CONTROLLER_BODY_STATE
 
-    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
-    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+        -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(s;l)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
+        -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
-    vector_h_int := function_ntm_fnn_standard_controller (
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
+        vector_h_int := function_ntm_fnn_standard_controller (
+          SIZE_X_IN => SIZE_X_IN,
+          SIZE_W_IN => SIZE_W_IN,
+          SIZE_L_IN => SIZE_L_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_M_IN => SIZE_M_IN,
 
-      matrix_w_input => matrix_w_input,
-      tensor_k_input => tensor_k_input,
-      matrix_u_input => matrix_u_input,
-      matrix_v_input => matrix_v_input,
-      tensor_d_input => tensor_d_input,
-      vector_b_input => vector_b_input,
+          matrix_w_input => matrix_w_input,
+          tensor_k_input => tensor_k_input,
+          matrix_u_input => matrix_u_input,
+          matrix_v_input => matrix_v_input,
+          tensor_d_input => tensor_d_input,
+          vector_b_input => vector_b_input,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_int,
-      vector_xi_input  => vector_xi_int,
-      matrix_rho_input => matrix_rho_int,
-      vector_h_input   => vector_h_int
-      );
+          vector_x_input   => vector_x_input,
+          matrix_r_input   => matrix_r_int,
+          vector_xi_input  => vector_xi_int,
+          matrix_rho_input => matrix_rho_int,
+          vector_h_input   => vector_h_int
+          );
 
-    -- INTERFACE_VECTOR_STATE
+        -- INTERFACE_VECTOR_STATE
 
-    -- xi(t;s) = U(s;l)·h(t;l)
-    vector_xi_int := function_ntm_interface_vector (
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_L_IN => SIZE_L_IN,
+        -- xi(t;s) = U(s;l)·h(t;l)
+        vector_xi_int := function_ntm_interface_vector (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_L_IN => SIZE_L_IN,
 
-      matrix_u_input => matrix_v_int,
+          matrix_u_input => matrix_v_int,
 
-      vector_h_input => vector_h_int
-      );
+          vector_h_input => vector_h_int
+          );
 
-    -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
-    matrix_rho_int := function_ntm_interface_matrix (
-      SIZE_M_IN => SIZE_S_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_L_IN => SIZE_L_IN,
+        -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
+        matrix_rho_int := function_ntm_interface_matrix (
+          SIZE_M_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_L_IN => SIZE_L_IN,
 
-      tensor_u_input => tensor_d_int,
+          tensor_u_input => tensor_d_int,
 
-      vector_h_input => vector_h_int
-      );
+          vector_h_input => vector_h_int
+          );
 
-    -- READ_HEADS_STATE
+        -- READ_HEADS_STATE
 
-    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
-    vector_r_int := function_ntm_reading (
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+        vector_r_int := function_ntm_reading (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_w_input => vector_w_in_int,
-      matrix_m_input => matrix_m_in_int
-      );
+          vector_w_input => vector_w_in_int,
+          matrix_m_input => matrix_m_in_int
+          );
 
-    -- WRITE_HEADS_STATE
+        -- WRITE_HEADS_STATE
 
-    -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
-    matrix_wm_out_int := function_ntm_writing (
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+        matrix_wm_out_int := function_ntm_writing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      matrix_m_input => matrix_m_in_int,
-      vector_a_input => vector_a_int,
-      vector_w_input => vector_w_in_int
-      );
+          matrix_m_input => matrix_m_in_int,
+          vector_a_input => vector_a_int,
+          vector_w_input => vector_w_in_int
+          );
 
-    -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
-    matrix_em_out_int := function_ntm_erasing (
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+        matrix_em_out_int := function_ntm_erasing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      matrix_m_input => matrix_m_in_int,
-      vector_e_input => vector_e_int,
-      vector_w_input => vector_w_in_int
-      );
+          matrix_m_input => matrix_m_in_int,
+          vector_e_input => vector_e_int,
+          vector_w_input => vector_w_in_int
+          );
 
-    -- MEMORY_STATE
+        -- MEMORY_STATE
 
-    -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
-    -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
-    -- w(t;j) = wg(t;j)*s(t;k)
-    -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+        -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+        -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+        -- w(t;j) = wg(t;j)*s(t;k)
+        -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
-    vector_w_out_int := function_ntm_addressing (
-      SIZE_N_IN => SIZE_N_IN,
-      SIZE_W_IN => SIZE_W_IN,
+        vector_w_out_int := function_ntm_addressing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
 
-      vector_k_input     => vector_k_int,
-      scalar_beta_input  => scalar_beta_int,
-      scalar_g_input     => scalar_g_int,
-      vector_s_input     => vector_s_int,
-      scalar_gamma_input => scalar_gamma_int,
+          vector_k_input     => vector_k_int,
+          scalar_beta_input  => scalar_beta_int,
+          scalar_g_input     => scalar_g_int,
+          vector_s_input     => vector_s_int,
+          scalar_gamma_input => scalar_gamma_int,
 
-      matrix_m_input => matrix_m_in_int,
+          matrix_m_input => matrix_m_in_int,
 
-      vector_w_input => vector_w_in_int
-      );
+          vector_w_input => vector_w_in_int
+          );
 
-    -- OUTPUT_VECTOR_STATE
+        -- OUTPUT_VECTOR_STATE
 
-    -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
-    vector_y_output := function_ntm_output_vector (
-      SIZE_Y_IN => SIZE_Y_IN,
-      SIZE_L_IN => SIZE_L_IN,
-      SIZE_W_IN => SIZE_W_IN,
-      SIZE_R_IN => SIZE_R_IN,
+        -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
+        vector_y_output := function_ntm_output_vector (
+          SIZE_Y_IN => SIZE_Y_IN,
+          SIZE_L_IN => SIZE_L_IN,
+          SIZE_W_IN => SIZE_W_IN,
+          SIZE_R_IN => SIZE_R_IN,
 
-      tensor_p_input => tensor_p_input,
-      matrix_r_input => matrix_r_int,
+          tensor_p_input => tensor_p_input,
+          matrix_r_input => matrix_r_int,
 
-      matrix_q_input => matrix_q_input,
-      vector_h_input => vector_h_int
-      );
+          matrix_q_input => matrix_q_input,
+          vector_h_input => vector_h_int
+          );
 
-    return vector_y_output;
-
+        return vector_y_output;
+      end if;
+    end loop;
   end function function_ntm_top;
 
 end ntm_core_pkg;
