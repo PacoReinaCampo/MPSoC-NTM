@@ -52,6 +52,10 @@ function DATA_OUT = ntm_matrix_summation(DATA_IN)
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
 
   for t = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + DATA_IN(t, :, :);
+    for i = 1:SIZE_I_IN
+      for j = 1:SIZE_J_IN
+        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_IN(t, i, j);
+      end
+    end
   end
 end

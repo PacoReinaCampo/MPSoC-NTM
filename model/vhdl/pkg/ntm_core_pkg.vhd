@@ -589,10 +589,10 @@ package ntm_core_pkg is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_k_input : tensor_buffer;
+    tensor_p_input : tensor_buffer;
     matrix_r_input : matrix_buffer;
 
-    matrix_u_input : matrix_buffer;
+    matrix_q_input : matrix_buffer;
     vector_h_input : vector_buffer
     ) return vector_buffer;
 
@@ -616,7 +616,10 @@ package ntm_core_pkg is
     tensor_d_input : tensor_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer
+    vector_x_input : vector_buffer;
+
+    tensor_p_input : tensor_buffer;
+    matrix_q_input : matrix_buffer
     ) return vector_buffer;
 
 end ntm_core_pkg;
@@ -1019,10 +1022,10 @@ package body ntm_core_pkg is
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_k_input : tensor_buffer;
+    tensor_p_input : tensor_buffer;
     matrix_r_input : matrix_buffer;
 
-    matrix_u_input : matrix_buffer;
+    matrix_q_input : matrix_buffer;
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
@@ -1034,7 +1037,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+    -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
     for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
       data_product_int(y)  := ZERO_DATA;
@@ -1050,7 +1053,7 @@ package body ntm_core_pkg is
       SIZE_B_I_IN => SIZE_Y_IN,
       SIZE_B_J_IN => SIZE_W_IN,
 
-      tensor_a_input => tensor_k_input,
+      tensor_a_input => tensor_p_input,
       matrix_b_input => matrix_r_input
       );
 
@@ -1066,7 +1069,7 @@ package body ntm_core_pkg is
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_B_IN   => SIZE_L_IN,
 
-      matrix_a_input => matrix_u_input,
+      matrix_a_input => matrix_q_input,
       vector_b_input => vector_h_input
       );
 
@@ -1102,7 +1105,10 @@ package body ntm_core_pkg is
     tensor_d_input : tensor_buffer;
     vector_b_input : vector_buffer;
 
-    vector_x_input : vector_buffer
+    vector_x_input : vector_buffer;
+
+    tensor_p_input : tensor_buffer;
+    matrix_q_input : matrix_buffer
     ) return vector_buffer is
 
     -- Trainer Variable
@@ -1289,17 +1295,17 @@ package body ntm_core_pkg is
 
     -- OUTPUT_VECTOR_STATE
 
-    -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+    -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
     vector_y_output := function_ntm_output_vector (
       SIZE_Y_IN => SIZE_Y_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_R_IN => SIZE_R_IN,
 
-      tensor_k_input => tensor_k_int,
+      tensor_p_input => tensor_p_input,
       matrix_r_input => matrix_r_int,
 
-      matrix_u_input => matrix_u_int,
+      matrix_q_input => matrix_q_input,
       vector_h_input => vector_h_int
       );
 

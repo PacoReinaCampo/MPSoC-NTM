@@ -62,8 +62,8 @@ V_IN = rand(SIZE_L_IN, SIZE_S_IN);
 D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
 B_IN = rand(SIZE_L_IN, 1);
 X_IN = rand(SIZE_X_IN, 1);
-K_OUTPUT_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
-U_OUTPUT_IN = rand(SIZE_Y_IN, SIZE_L_IN);
+P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
+Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 
 % DUT
-Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN);
+Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN);

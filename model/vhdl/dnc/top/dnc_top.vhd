@@ -168,6 +168,9 @@ architecture dnc_top_architecture of dnc_top is
 
   signal vector_x_int : vector_buffer;
 
+  signal tensor_p_int : tensor_buffer;
+  signal matrix_q_int : matrix_buffer;
+
   signal vector_out_int : vector_buffer;
 
   -- Control Internal
@@ -692,7 +695,10 @@ begin
               tensor_d_input => tensor_d_int,
               vector_b_input => vector_b_int,
 
-              vector_x_input => vector_x_int
+              vector_x_input => vector_x_int,
+
+              tensor_p_input => tensor_p_int,
+              matrix_q_input => matrix_q_int
               );
 
             -- FSM Control

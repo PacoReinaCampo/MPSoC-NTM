@@ -52,6 +52,12 @@ function DATA_OUT = ntm_tensor_multiplication(DATA_IN)
   DATA_OUT = ones(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
   for t = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT + DATA_IN(t, :, :, :);
+    for i = 1:SIZE_I_IN
+      for j = 1:SIZE_J_IN
+        for k = 1:SIZE_K_IN
+          DATA_OUT(i, j, k) = DATA_OUT(i, j, k) + DATA_IN(t, i, j, k);
+        end
+      end
+    end
   end
 end

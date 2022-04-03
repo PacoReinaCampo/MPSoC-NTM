@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = dnc_output_vector(K_IN, R_IN, U_IN, H_IN)
+function Y_OUT = dnc_output_vector(P_IN, R_IN, Q_IN, H_IN)
   % Package
   addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/algebra/tensor'));
@@ -55,13 +55,13 @@ function Y_OUT = dnc_output_vector(K_IN, R_IN, U_IN, H_IN)
   SIZE_Y_IN = 3;
 
   % Body
-  % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+  % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
   % U(t;y;l)·h(t;l)
-  Y_OUT = ntm_matrix_vector_product(U_IN, H_IN);
+  Y_OUT = ntm_matrix_vector_product(Q_IN, H_IN);
 
   % K(t;i;y;k)·r(t;i;k)
-  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
+  matrix_operation_int = ntm_tensor_matrix_product(P_IN, R_IN);
   
   for y = 1:SIZE_Y_IN
     for i = 1:SIZE_R_IN

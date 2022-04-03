@@ -52,6 +52,8 @@ function DATA_OUT = ntm_vector_multiplication(DATA_IN)
   DATA_OUT = ones(SIZE_IN, 1);
 
   for t = 1:LENGTH_IN
-    DATA_OUT = DATA_OUT.*DATA_IN(t, :);
+   for i = 1:SIZE_IN
+     DATA_OUT(i) = DATA_OUT(i).*DATA_IN(t, i);
+    end
   end
 end

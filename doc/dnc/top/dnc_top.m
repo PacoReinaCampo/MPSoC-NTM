@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, U_OUTPUT_IN)
+function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN)
   % Package
   addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/algebra/tensor'));
@@ -210,8 +210,8 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, K_OUTPUT_IN, 
 
       % OUTPUT_VECTOR_STATE
 
-      % y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
-      Y_OUT = dnc_output_vector(K_OUTPUT_IN, matrix_r_int, U_OUTPUT_IN, vector_h_int);
+      % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
+      Y_OUT = dnc_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);
     end
   end
 end

@@ -137,9 +137,9 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Buffer
+  signal tensor_p_int : tensor_buffer;
   signal matrix_r_int : matrix_buffer;
-  signal tensor_k_int : tensor_buffer;
-  signal matrix_u_int : matrix_buffer;
+  signal matrix_q_int : matrix_buffer;
   signal vector_h_int : vector_buffer;
 
   signal vector_out_int : vector_buffer;
@@ -312,7 +312,7 @@ begin
 
           if ((U_IN_Y_ENABLE = '1') and (U_IN_L_ENABLE = '1')) then
             -- Data Inputs
-            matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
+            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
             -- Control Internal
             controller_ctrl_fsm_int <= CLEAN_SECOND_J_STATE;
@@ -326,7 +326,7 @@ begin
 
           if (U_IN_L_ENABLE = '1') then
             -- Data Inputs
-            matrix_u_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
+            matrix_q_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= U_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
@@ -382,7 +382,7 @@ begin
 
           if ((K_IN_I_ENABLE = '1') and (K_IN_Y_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_THIRD_K_STATE;
@@ -397,7 +397,7 @@ begin
 
           if ((K_IN_Y_ENABLE = '1') and (K_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
             -- FSM Control
             if (unsigned(index_k_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
@@ -416,7 +416,7 @@ begin
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
-            tensor_k_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
+            tensor_p_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= K_IN;
 
             -- FSM Control
             if ((unsigned(index_j_loop) = unsigned(SIZE_Y_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
@@ -499,10 +499,10 @@ begin
               SIZE_W_IN => SIZE_W_IN,
               SIZE_R_IN => SIZE_R_IN,
 
-              tensor_k_input => tensor_k_int,
+              tensor_p_input => tensor_p_int,
               matrix_r_input => matrix_r_int,
 
-              matrix_u_input => matrix_u_int,
+              matrix_q_input => matrix_q_int,
               vector_h_input => vector_h_int
               );
 
