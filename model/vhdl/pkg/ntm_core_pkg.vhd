@@ -1147,19 +1147,13 @@ package body ntm_core_pkg is
     variable vector_ht_int   : matrix_buffer;
 
     -- Internal Variable
-    variable matrix_m_in_int : matrix_buffer;
-    variable matrix_w_in_int : matrix_buffer;
-
-    variable matrix_wm_out_int : matrix_buffer;
-    variable matrix_em_out_int : matrix_buffer;
+    variable matrix_m_int : matrix_buffer;
 
     variable matrix_r_int : matrix_buffer;
 
     variable vector_r_int : vector_buffer;
 
-    variable vector_w_in_int : vector_buffer;
-
-    variable vector_w_out_int : vector_buffer;
+    variable vector_w_int : vector_buffer;
 
     variable vector_a_int : vector_buffer;
     variable vector_e_int : vector_buffer;
@@ -1187,6 +1181,11 @@ package body ntm_core_pkg is
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       if (t = 0) then
+        vector_h_int := (others => ZERO_DATA);
+
+        matrix_m_int := (others => (others => ZERO_DATA));
+
+        vector_w_int := (others => ZERO_DATA);
       else
         -- ARITHMETIC S: [XI] = 2·W
         SIZE_S_IN := function_scalar_integer_multiplier (
@@ -1207,6 +1206,86 @@ package body ntm_core_pkg is
 
           scalar_a_input => SCALAR_OPERATION_INT,
           scalar_b_input => SIZE_M_IN
+          );
+
+        -- INTERFACE_VECTOR_STATE
+
+        -- xi(t;s) = U(s;l)·h(t;l)
+        vector_xi_int := function_ntm_interface_vector (
+          SIZE_S_IN => SIZE_S_IN,
+          SIZE_L_IN => SIZE_L_IN,
+
+          matrix_u_input => matrix_v_int,
+
+          vector_h_input => vector_h_int
+          );
+
+        -- INTERFACE_MATRIX_STATE
+
+        -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
+        matrix_rho_int := function_ntm_interface_matrix (
+          SIZE_M_IN => SIZE_S_IN,
+          SIZE_R_IN => SIZE_R_IN,
+          SIZE_L_IN => SIZE_L_IN,
+
+          tensor_u_input => tensor_d_int,
+
+          vector_h_input => vector_h_int
+          );
+
+        -- WRITE_HEADS_STATE
+
+        -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+        matrix_m_int := function_ntm_erasing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
+
+          matrix_m_input => matrix_m_int,
+          vector_e_input => vector_e_int,
+          vector_w_input => vector_w_int
+          );
+
+        -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+        matrix_m_int := function_ntm_writing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
+
+          matrix_m_input => matrix_m_int,
+          vector_a_input => vector_a_int,
+          vector_w_input => vector_w_int
+          );
+
+        -- READ_HEADS_STATE
+
+        -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+        vector_r_int := function_ntm_reading (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
+
+          vector_w_input => vector_w_int,
+          matrix_m_input => matrix_m_int
+          );
+
+        -- MEMORY_STATE
+
+        -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+        -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+        -- w(t;j) = wg(t;j)*s(t;k)
+        -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+        vector_w_int := function_ntm_addressing (
+          SIZE_N_IN => SIZE_N_IN,
+          SIZE_W_IN => SIZE_W_IN,
+
+          vector_k_input     => vector_k_int,
+          scalar_beta_input  => scalar_beta_int,
+          scalar_g_input     => scalar_g_int,
+          vector_s_input     => vector_s_int,
+          scalar_gamma_input => scalar_gamma_int,
+
+          matrix_m_input => matrix_m_int,
+
+          vector_w_input => vector_w_int
           );
 
         -- CONTROLLER_BODY_STATE
@@ -1234,84 +1313,6 @@ package body ntm_core_pkg is
           vector_xi_input  => vector_xi_int,
           matrix_rho_input => matrix_rho_int,
           vector_h_input   => vector_h_int
-          );
-
-        -- INTERFACE_VECTOR_STATE
-
-        -- xi(t;s) = U(s;l)·h(t;l)
-        vector_xi_int := function_ntm_interface_vector (
-          SIZE_S_IN => SIZE_S_IN,
-          SIZE_L_IN => SIZE_L_IN,
-
-          matrix_u_input => matrix_v_int,
-
-          vector_h_input => vector_h_int
-          );
-
-        -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
-        matrix_rho_int := function_ntm_interface_matrix (
-          SIZE_M_IN => SIZE_S_IN,
-          SIZE_R_IN => SIZE_R_IN,
-          SIZE_L_IN => SIZE_L_IN,
-
-          tensor_u_input => tensor_d_int,
-
-          vector_h_input => vector_h_int
-          );
-
-        -- READ_HEADS_STATE
-
-        -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
-        vector_r_int := function_ntm_reading (
-          SIZE_N_IN => SIZE_N_IN,
-          SIZE_W_IN => SIZE_W_IN,
-
-          vector_w_input => vector_w_in_int,
-          matrix_m_input => matrix_m_in_int
-          );
-
-        -- WRITE_HEADS_STATE
-
-        -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
-        matrix_wm_out_int := function_ntm_writing (
-          SIZE_N_IN => SIZE_N_IN,
-          SIZE_W_IN => SIZE_W_IN,
-
-          matrix_m_input => matrix_m_in_int,
-          vector_a_input => vector_a_int,
-          vector_w_input => vector_w_in_int
-          );
-
-        -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
-        matrix_em_out_int := function_ntm_erasing (
-          SIZE_N_IN => SIZE_N_IN,
-          SIZE_W_IN => SIZE_W_IN,
-
-          matrix_m_input => matrix_m_in_int,
-          vector_e_input => vector_e_int,
-          vector_w_input => vector_w_in_int
-          );
-
-        -- MEMORY_STATE
-
-        -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
-        -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
-        -- w(t;j) = wg(t;j)*s(t;k)
-        -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
-
-        vector_w_out_int := function_ntm_addressing (
-          SIZE_N_IN => SIZE_N_IN,
-          SIZE_W_IN => SIZE_W_IN,
-
-          vector_k_input     => vector_k_int,
-          scalar_beta_input  => scalar_beta_int,
-          scalar_g_input     => scalar_g_int,
-          vector_s_input     => vector_s_int,
-          scalar_gamma_input => scalar_gamma_int,
-
-          matrix_m_input => matrix_m_in_int,
-
-          vector_w_input => vector_w_in_int
           );
 
         -- OUTPUT_VECTOR_STATE
