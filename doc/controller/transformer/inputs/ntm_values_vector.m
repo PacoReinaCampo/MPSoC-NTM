@@ -51,6 +51,6 @@ function V_OUT = ntm_values_vector(W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, 
   % Body
   x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  % V(n;d) = X(n;d)·W(d;v)
+  % V(n;v) = X(n;d)·W(d;v)
   V_OUT = ntm_matrix_product(W_HV_IN, x_int);
 end

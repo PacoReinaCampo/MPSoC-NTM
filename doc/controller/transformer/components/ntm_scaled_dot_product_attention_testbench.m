@@ -58,8 +58,8 @@ SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
 % Signals
-W_HQ_IN = rand(SIZE_D_IN, SIZE_K_IN);
 W_HK_IN = rand(SIZE_D_IN, SIZE_K_IN);
+W_HQ_IN = rand(SIZE_D_IN, SIZE_K_IN);
 W_HV_IN = rand(SIZE_D_IN, SIZE_V_IN);
 
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);
@@ -71,4 +71,4 @@ R_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_N_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_M_IN);
 
-U_OUT = ntm_scaled_dot_product_attention(W_HQ_IN, W_HK_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+U_OUT = ntm_scaled_dot_product_attention(W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

@@ -51,6 +51,6 @@ function K_OUT = ntm_keys_vector(W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI
   % Body
   x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  % K(n;d) = X(n;d)·W(d;k)
+  % K(n;k) = X(n;d)·W(d;k)
   K_OUT = ntm_matrix_product(W_HK_IN, x_int);
 end
