@@ -53,9 +53,9 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
   SIZE_N_IN = 3;
   SIZE_D_IN = 3;
   SIZE_X_IN = 3;
-  SIZE_Y_IN = 3;
   SIZE_W_IN = 3;
   SIZE_R_IN = 3;
+
   SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
   SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
@@ -72,7 +72,7 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
 
   for n = 1:SIZE_N_IN
     for x = 1:SIZE_X_IN
-      x_int(x) = R_IN(n, x);
+      x_int(x) = X_IN(n, x);
     end
 
     for i = 1:SIZE_R_IN

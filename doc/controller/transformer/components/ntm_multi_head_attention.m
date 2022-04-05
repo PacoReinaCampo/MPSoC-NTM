@@ -46,9 +46,9 @@
 
 function Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
 
-  K_OUT = ntm_keys_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-  Q_OUT = ntm_queries_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-  V_OUT = ntm_values_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-
-  Y_OUT = ntm_scaled_dot_product_attention(X_IN);
+  W_HK_IN = ntm_keys_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+  W_HQ_IN = ntm_queries_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+  W_HV_IN = ntm_values_vector(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+  
+  Y_OUT = ntm_scaled_dot_product_attention(W_HQ_IN, W_HK_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 end
