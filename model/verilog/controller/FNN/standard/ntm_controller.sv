@@ -256,7 +256,7 @@ module ntm_controller #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+  // h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)*h(t-1;l) + b(l))
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

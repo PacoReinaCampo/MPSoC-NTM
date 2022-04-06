@@ -578,12 +578,12 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
-              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(l))
+              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(l))
 
             when OUTPUT_VECTOR_STATE =>  -- STEP 2
 
-              -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+              -- y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
 
             when INTERFACE_VECTOR_STATE =>  -- STEP 3
 

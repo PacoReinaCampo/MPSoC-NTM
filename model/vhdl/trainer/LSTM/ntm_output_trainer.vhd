@@ -294,7 +294,7 @@ begin
   -- dW(t;l) = summation(do(t;l) · x(t;x))[t in 0 to T]
   -- dK(t;l) = summation(do(t;i;l) · r(t;i;k))[t in 0 to T-1]
   -- dU(t;l) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
-  -- db(t;l) = summation(do(t;l))[t in 0 to T]
+  -- db(l) = summation(do(t;l))[t in 0 to T]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -623,7 +623,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      -- db(t;l) = summation(d*(t;l))[t in 0 to T]
+      -- db(l) = summation(d*(t;l))[t in 0 to T]
 
       case differentiation_b_ctrl_fsm_int is
         when STARTER_DB_STATE =>        -- STEP 0

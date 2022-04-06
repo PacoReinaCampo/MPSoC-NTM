@@ -263,7 +263,7 @@ module ntm_input_trainer #(
   // dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
   // dK(t;l) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
   // dU(t;l) = summation(di(t+1;l) · h(t;l))[t in 0 to T-1]
-  // db(t;l) = summation(di(t;l))[t in 0 to T]
+  // db(l) = summation(di(t;l))[t in 0 to T]
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

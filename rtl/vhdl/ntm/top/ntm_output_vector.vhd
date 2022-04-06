@@ -195,7 +195,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+  -- y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

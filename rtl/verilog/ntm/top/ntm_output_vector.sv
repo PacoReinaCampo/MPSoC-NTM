@@ -169,7 +169,7 @@ module ntm_output_vector #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+  // y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

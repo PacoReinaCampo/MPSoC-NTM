@@ -446,12 +446,12 @@ module ntm_top #(
             end
 
             CONTROLLER_BODY_STATE : begin  // STEP 1
-              // FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
-              // FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+              // FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(l))
+              // FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(l))
             end
 
             OUTPUT_VECTOR_STATE : begin  // STEP 2
-              // y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+              // y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
             end
 
             INTERFACE_VECTOR_STATE : begin  // STEP 3

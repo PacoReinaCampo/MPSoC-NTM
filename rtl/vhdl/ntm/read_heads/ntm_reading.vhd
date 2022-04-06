@@ -62,14 +62,17 @@ entity ntm_reading is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
     M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
-    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
-    R_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+    R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -166,8 +169,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      W_OUT_ENABLE <= '0';
-      R_OUT_ENABLE <= '0';
+      W_OUT_I_ENABLE <= '0';
+      R_OUT_I_ENABLE <= '0';
 
       M_OUT_J_ENABLE <= '0';
       M_OUT_K_ENABLE <= '0';
@@ -186,8 +189,8 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          W_OUT_ENABLE <= '0';
-          R_OUT_ENABLE <= '0';
+          W_OUT_I_ENABLE <= '0';
+          R_OUT_I_ENABLE <= '0';
 
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
@@ -203,7 +206,7 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (W_IN_ENABLE = '1') then
+          if (W_IN_I_ENABLE = '1') then
             -- Data Inputs
             data_a_in_vector_float_multiplier <= W_IN;
 
@@ -252,7 +255,7 @@ begin
 
           if (data_out_enable_vector_float_multiplier = '1') then
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
+            W_OUT_I_ENABLE <= '1';
 
             -- Data Internal
             if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
@@ -328,7 +331,7 @@ begin
             end if;
           else
             -- Control Outputs
-            W_OUT_ENABLE <= '0';
+            W_OUT_I_ENABLE <= '0';
 
             -- Control Internal
             start_vector_float_adder <= '0';

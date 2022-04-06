@@ -282,7 +282,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(s;l)·xi(t;s) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+  -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
