@@ -71,14 +71,17 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
       M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+      W_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
 
       M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
       M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
-      R_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+      R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -552,25 +555,35 @@ package ntm_core_pkg is
   -- MEMORY
   -----------------------------------------------------------------------
 
-  function function_ntm_content_based_addressing (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  function function_ntm_vector_content_based_addressing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input    : vector_buffer;
     scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
     matrix_m_input    : matrix_buffer
     ) return vector_buffer;
 
+  function function_ntm_matrix_content_based_addressing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_k_input    : matrix_buffer;
+    vector_beta_input : vector_buffer;
+    matrix_m_input    : matrix_buffer
+    ) return matrix_buffer;
+
   function function_ntm_addressing (
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_k_input     : vector_buffer;
-    scalar_beta_input  : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_g_input     : std_logic_vector(DATA_SIZE-1 downto 0);
-    vector_s_input     : vector_buffer;
-    scalar_gamma_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    matrix_k_input     : matrix_buffer;
+    vector_beta_input  : vector_buffer;
+    vector_g_input     : vector_buffer;
+    matrix_s_input     : matrix_buffer;
+    vector_gamma_input : vector_buffer;
 
     matrix_m_input : matrix_buffer;
 
@@ -828,17 +841,17 @@ package body ntm_core_pkg is
   -- MEMORY
   -----------------------------------------------------------------------
 
-  function function_ntm_content_based_addressing (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  function function_ntm_vector_content_based_addressing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input    : vector_buffer;
     scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
     matrix_m_input    : matrix_buffer
     ) return vector_buffer is
 
-    variable vector_i_operation_int : vector_buffer;
     variable vector_j_operation_int : vector_buffer;
+    variable vector_k_operation_int : vector_buffer;
 
     variable vector_beta_int : vector_buffer;
 
@@ -846,51 +859,113 @@ package body ntm_core_pkg is
 
   begin
 
-    -- C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      vector_beta_int(i) := scalar_beta_input;
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_beta_int(j) := scalar_beta_input;
 
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        vector_j_operation_int(j) := matrix_m_input(i, j);
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        vector_k_operation_int(k) := matrix_m_input(j, k);
       end loop;
 
-      vector_j_operation_int := function_vector_cosine_similarity (
-        LENGTH_IN => SIZE_J_IN,
+      vector_k_operation_int := function_vector_cosine_similarity (
+        LENGTH_IN => SIZE_W_IN,
 
         vector_a_input => vector_k_input,
-        vector_b_input => vector_j_operation_int
+        vector_b_input => vector_k_operation_int
         );
 
-      vector_i_operation_int(i) := vector_j_operation_int(to_integer(unsigned(SIZE_J_IN))-1);
+      vector_j_operation_int(j) := vector_k_operation_int(to_integer(unsigned(SIZE_W_IN))-1);
     end loop;
 
-    vector_i_operation_int := function_vector_float_multiplier (
-      SIZE_IN => SIZE_I_IN,
+    vector_j_operation_int := function_vector_float_multiplier (
+      SIZE_IN => SIZE_N_IN,
 
-      vector_a_input => vector_i_operation_int,
+      vector_a_input => vector_j_operation_int,
       vector_b_input => vector_beta_int
       );
 
     vector_c_output := function_vector_softmax (
-      SIZE_IN => SIZE_I_IN,
+      SIZE_IN => SIZE_N_IN,
 
-      vector_input => vector_i_operation_int
+      vector_input => vector_j_operation_int
       );
 
     return vector_c_output;
-  end function function_ntm_content_based_addressing;
+  end function function_ntm_vector_content_based_addressing;
+
+  function function_ntm_matrix_content_based_addressing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_k_input    : matrix_buffer;
+    vector_beta_input : vector_buffer;
+    matrix_m_input    : matrix_buffer
+    ) return matrix_buffer is
+
+    variable vector_k_input : vector_buffer;
+
+    variable matrix_j_operation_int : matrix_buffer;
+    variable vector_k_operation_int : vector_buffer;
+
+    variable matrix_beta_int : matrix_buffer;
+
+    variable matrix_c_output : matrix_buffer;
+
+  begin
+
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_beta_int(i, j) := vector_beta_input(i);
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          vector_k_operation_int(k) := matrix_m_input(j, k);
+
+          vector_k_input(k) := matrix_k_input(i, k);
+        end loop;
+
+        vector_k_operation_int := function_vector_cosine_similarity (
+          LENGTH_IN => SIZE_W_IN,
+
+          vector_a_input => vector_k_input,
+          vector_b_input => vector_k_operation_int
+          );
+
+        matrix_j_operation_int(i, j) := vector_k_operation_int(to_integer(unsigned(SIZE_W_IN))-1);
+      end loop;
+    end loop;
+
+    matrix_j_operation_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_j_operation_int,
+      matrix_b_input => matrix_beta_int
+      );
+
+    matrix_c_output := function_matrix_softmax (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_input => matrix_j_operation_int
+      );
+
+    return matrix_c_output;
+  end function function_ntm_matrix_content_based_addressing;
 
   function function_ntm_addressing (
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_k_input     : vector_buffer;
-    scalar_beta_input  : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_g_input     : std_logic_vector(DATA_SIZE-1 downto 0);
-    vector_s_input     : vector_buffer;
-    scalar_gamma_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    matrix_k_input     : matrix_buffer;
+    vector_beta_input  : vector_buffer;
+    vector_g_input     : vector_buffer;
+    matrix_s_input     : matrix_buffer;
+    vector_gamma_input : vector_buffer;
 
     matrix_m_input : matrix_buffer;
 
@@ -898,108 +973,132 @@ package body ntm_core_pkg is
 
     ) return matrix_buffer is
 
-    variable vector_wc_output : vector_buffer;
-    variable vector_wg_output : vector_buffer;
+    variable matrix_wc_output : matrix_buffer;
 
-    variable vector_g_int : vector_buffer;
+    variable vector_wg_output : vector_buffer;
+    variable matrix_wg_output : matrix_buffer;
+
+    variable matrix_operation_int : matrix_buffer;
 
     variable vector_one_int : vector_buffer;
-    variable vector_cg_int  : vector_buffer;
 
-    variable vector_gamma_int : vector_buffer;
-
-    variable scalar_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
     variable vector_summation_int : vector_buffer;
+    variable matrix_summation_int : matrix_buffer;
+
+    variable vector_s_input : vector_buffer;
+    variable matrix_gamma_input : matrix_buffer;
 
     variable vector_w_output : vector_buffer;
+    variable matrix_w_output : matrix_buffer;
 
   begin
 
     -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
-    vector_wc_output := function_ntm_content_based_addressing (
-      SIZE_I_IN => SIZE_N_IN,
-      SIZE_J_IN => SIZE_W_IN,
+    matrix_wc_output := function_ntm_matrix_content_based_addressing (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
 
-      vector_k_input    => vector_k_input,
-      scalar_beta_input => scalar_beta_input,
+      matrix_k_input    => matrix_k_input,
+      vector_beta_input => vector_beta_input,
       matrix_m_input    => matrix_m_input
       );
 
-    -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+    -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_g_int(j) := scalar_g_input;
-
-      vector_gamma_int(j) := scalar_gamma_input;
-
       vector_one_int(j) := ONE_DATA;
     end loop;
 
-    vector_cg_int := function_vector_float_adder (
-      OPERATION => '1',
+    -- 1 - g(t;i)
+    matrix_operation_int := function_transpose_vector_product (
+      SIZE_A_IN => SIZE_R_IN,
+      SIZE_B_IN => SIZE_N_IN,
 
-      SIZE_IN => SIZE_N_IN,
-
-      vector_a_input => vector_one_int,
-      vector_b_input => vector_g_int
+      vector_a_input => vector_g_input,
+      vector_b_input => vector_one_int
       );
 
-    vector_g_int := function_vector_float_multiplier (
-      SIZE_IN => SIZE_N_IN,
+    -- (1 - g(t;i))·w(t-1;i;j)
+    matrix_operation_int := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
 
-      vector_a_input => vector_g_int,
-      vector_b_input => vector_wc_output
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_w_input
       );
 
-    vector_cg_int := function_vector_float_multiplier (
-      SIZE_IN => SIZE_N_IN,
+    -- g(t;i)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_operation_int(i, j) := vector_g_input(j);
+      end loop;
+    end loop;
 
-      vector_a_input => vector_cg_int,
-      vector_b_input => vector_w_input
-      );
+    -- g(t;i)·wc(t;i;j)
+    matrix_wg_output := function_matrix_float_multiplier (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
 
-    vector_wg_output := function_vector_float_adder (
-      OPERATION => '0',
-
-      SIZE_IN => SIZE_N_IN,
-
-      vector_a_input => vector_g_int,
-      vector_b_input => vector_cg_int
+      matrix_a_input => matrix_operation_int,
+      matrix_b_input => matrix_wc_output
       );
 
     -- w(t;j) = wg(t;j)*s(t;k)
-    vector_w_output := function_vector_convolution (
-      LENGTH_IN => SIZE_N_IN,
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_wg_output(j) := matrix_wg_output(i, j);
+        vector_s_input(j) := matrix_s_input(i, j);
+      end loop;
+        
+        vector_w_output := function_vector_convolution (
+          LENGTH_IN => SIZE_N_IN,
 
-      vector_a_input => vector_wg_output,
-      vector_b_input => vector_s_input
-      );
+          vector_a_input => vector_wg_output,
+          vector_b_input => vector_s_input
+          );
 
-    -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
-    vector_w_output := function_vector_power (
-      SIZE_IN => SIZE_N_IN,
-
-      vector_a_input => vector_w_output,
-      vector_b_input => vector_gamma_int
-      );
-
-    scalar_summation_int := function_scalar_summation (
-      LENGTH_IN => SIZE_N_IN,
-
-      scalar_input => vector_w_output
-      );
-
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_summation_int(j) := scalar_summation_int;
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_w_output(i, j) := vector_w_output(j);
+      end loop;
     end loop;
 
-    vector_w_output := function_vector_float_divider (
-      SIZE_IN => SIZE_N_IN,
+    -- w(t;j) = exponentiation(w(t;j),gamma(t)) / summation(exponentiation(w(t;j),gamma(t)))[j in 0 to N-1]
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_gamma_input(i, j) := vector_gamma_input(i);
+      end loop;
+    end loop;
 
-      vector_a_input => vector_w_output,
-      vector_b_input => vector_summation_int
+    matrix_w_output := function_matrix_power (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_w_output,
+      matrix_b_input => matrix_gamma_input
       );
 
-    return vector_w_output;
+  vector_summation_int := function_vector_summation (
+    SIZE_IN   => SIZE_R_IN,
+    LENGTH_IN => SIZE_N_IN,
+
+    vector_input => matrix_w_output
+    );
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_summation_int(i, j) := vector_summation_int(i);
+      end loop;
+    end loop;
+
+    matrix_w_output := function_matrix_float_divider (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => SIZE_N_IN,
+
+      matrix_a_input => matrix_w_output,
+      matrix_b_input => matrix_summation_int
+      );
+
+    return matrix_w_output;
   end function function_ntm_addressing;
 
   -----------------------------------------------------------------------
@@ -1175,19 +1274,18 @@ package body ntm_core_pkg is
 
     variable matrix_w_int : matrix_buffer;
 
-    variable vector_a_int : vector_buffer;
-    variable vector_e_int : vector_buffer;
-    variable vector_h_int : vector_buffer;
-    variable vector_k_int : vector_buffer;
-    variable vector_s_int : vector_buffer;
-
     variable vector_xi_int  : vector_buffer;
     variable matrix_rho_int : matrix_buffer;
 
-    variable scalar_g_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_a_int : vector_buffer;
+    variable vector_e_int : vector_buffer;
+    variable vector_h_int : vector_buffer;
 
-    variable scalar_beta_int  : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable scalar_gamma_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable matrix_k_int     : matrix_buffer;
+    variable vector_beta_int  : vector_buffer;
+    variable vector_g_int     : vector_buffer;
+    variable matrix_s_int     : matrix_buffer;
+    variable vector_gamma_int : vector_buffer;
 
     variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     variable SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1238,11 +1336,8 @@ package body ntm_core_pkg is
           vector_h_input => vector_h_int
           );
 
-        vector_k_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + 3);
-        scalar_beta_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 2);
-        scalar_g_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 1);
-        vector_s_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) downto 1);
-        scalar_gamma_int := vector_xi_int(0);
+        vector_e_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 3*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 3);
+        vector_a_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 3);
 
         -- INTERFACE_MATRIX_STATE
 
@@ -1257,12 +1352,24 @@ package body ntm_core_pkg is
           vector_h_input => vector_h_int
           );
 
-        vector_e_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 3*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 3);
-        vector_a_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 3);
+        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+          for j in to_integer(unsigned(SIZE_N_IN)) + 3 to to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 2 loop
+            matrix_k_int(i, j) := matrix_rho_int(i, j);
+          end loop;
+
+          vector_beta_int(i) := matrix_rho_int(i, to_integer(unsigned(SIZE_N_IN)) + 2);
+          vector_g_int(i) := matrix_rho_int(i, to_integer(unsigned(SIZE_N_IN)) + 1);
+
+          for j in 1 to to_integer(unsigned(SIZE_N_IN)) loop
+            matrix_s_int(i, j) := matrix_rho_int(i, j);
+          end loop;
+
+          vector_gamma_int(i) := matrix_rho_int(i, 0);
+        end loop;
 
         -- WRITE_HEADS_STATE
 
-        -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+        -- M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
         matrix_m_int := function_ntm_erasing (
           SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
@@ -1273,7 +1380,7 @@ package body ntm_core_pkg is
           matrix_w_input => matrix_w_int
           );
 
-        -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+        -- M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
         matrix_m_int := function_ntm_writing (
           SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
@@ -1308,11 +1415,11 @@ package body ntm_core_pkg is
           SIZE_N_IN => SIZE_N_IN,
           SIZE_W_IN => SIZE_W_IN,
 
-          vector_k_input     => vector_k_int,
-          scalar_beta_input  => scalar_beta_int,
-          scalar_g_input     => scalar_g_int,
-          vector_s_input     => vector_s_int,
-          scalar_gamma_input => scalar_gamma_int,
+          matrix_k_input     => matrix_k_int,
+          vector_beta_input  => vector_beta_int,
+          vector_g_input     => vector_g_int,
+          matrix_s_input     => matrix_s_int,
+          vector_gamma_input => vector_gamma_int,
 
           matrix_m_input => matrix_m_int,
 
