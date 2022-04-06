@@ -51,12 +51,17 @@ function M_OUT = ntm_erasing(M_IN, W_IN, E_IN)
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
+  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
+
   % Body
   % M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+  matrix_first_operation_int = ones(SIZE_N_IN, SIZE_W_IN);
 
-  matrix_operation_int = ntm_matrix_vector_product(W_IN, E_IN);
-  
-  matrix_operation_int = ones(SIZE_N_IN, SIZE_W_IN) - matrix_operation_int;
+  for i = 1:SIZE_R_IN
+    matrix_second_operation_int = ntm_transpose_vector_product(W_IN(i, :), E_IN);
 
-  M_OUT = matrix_operation_int.*M_IN;
+    matrix_first_operation_int = matrix_first_operation_int - matrix_second_operation_int;
+  end
+
+  M_OUT = M_IN.*matrix_first_operation_int;
 end

@@ -53,5 +53,9 @@ function DATA_OUT = ntm_vector_cosine_similarity(DATA_A_IN, DATA_B_IN)
 
   scalar_second_operation_int = scalar_a_int*scalar_b_int;
 
-  DATA_OUT = scalar_first_operation_int/scalar_second_operation_int;
+  if (scalar_second_operation_int == 0)
+    DATA_OUT = 0;
+  else
+    DATA_OUT = scalar_first_operation_int/scalar_second_operation_int;
+  end
 end

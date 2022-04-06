@@ -516,33 +516,36 @@ package ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_w_input : vector_buffer;
+    matrix_w_input : matrix_buffer;
     matrix_m_input : matrix_buffer
-    ) return vector_buffer;
+    ) return matrix_buffer;
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
   function function_ntm_writing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
     vector_a_input : vector_buffer;
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
     ) return matrix_buffer;
 
   function function_ntm_erasing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
     vector_e_input : vector_buffer;
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
     ) return matrix_buffer;
 
   -----------------------------------------------------------------------
@@ -559,6 +562,7 @@ package ntm_core_pkg is
     ) return vector_buffer;
 
   function function_ntm_addressing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -570,9 +574,9 @@ package ntm_core_pkg is
 
     matrix_m_input : matrix_buffer;
 
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
 
-    ) return vector_buffer;
+    ) return matrix_buffer;
 
   -----------------------------------------------------------------------
   -- TOP - INTERFACE
@@ -649,43 +653,55 @@ package body ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_w_input : vector_buffer;
+    matrix_w_input : matrix_buffer;
     matrix_m_input : matrix_buffer
-    ) return vector_buffer is
+    ) return matrix_buffer is
 
     variable matrix_operation_int : matrix_buffer;
 
-    variable vector_r_output : vector_buffer;
+    variable tensor_operation_int : tensor_buffer;
+
+    variable matrix_r_output : matrix_buffer;
 
   begin
 
-    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+    -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_operation_int(j, k) := vector_w_input(j);
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          matrix_operation_int(j, k) := matrix_w_input(i, j);
+        end loop;
+      end loop;
+
+      matrix_operation_int := function_matrix_float_multiplier (
+        SIZE_I_IN => SIZE_N_IN,
+        SIZE_J_IN => SIZE_W_IN,
+
+        matrix_a_input => matrix_operation_int,
+        matrix_b_input => matrix_m_input
+        );
+
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_operation_int(i, j, k) := matrix_operation_int(j, k);
+        end loop;
       end loop;
     end loop;
 
-    matrix_operation_int := function_matrix_float_multiplier (
+    matrix_r_output := function_matrix_summation (
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
+      LENGTH_IN => SIZE_R_IN,
 
-      matrix_a_input => matrix_operation_int,
-      matrix_b_input => matrix_m_input
+      matrix_input => tensor_operation_int
       );
 
-    vector_r_output := function_vector_summation (
-      SIZE_IN   => SIZE_W_IN,
-      LENGTH_IN => SIZE_N_IN,
-
-      vector_input => matrix_operation_int
-      );
-
-    return vector_r_output;
+    return matrix_r_output;
   end function function_ntm_reading;
 
   -----------------------------------------------------------------------
@@ -693,29 +709,50 @@ package body ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_writing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
     vector_a_input : vector_buffer;
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_operation_int : matrix_buffer;
+    variable matrix_first_operation_int  : matrix_buffer;
+    variable matrix_second_operation_int : matrix_buffer;
+
+    variable vector_w_int : vector_buffer;
 
     variable matrix_m_output : matrix_buffer;
 
   begin
 
-    -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+    -- M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
+    matrix_first_operation_int := (others => (others => ZERO_DATA));
 
-    matrix_operation_int := function_transpose_vector_product (
-      SIZE_A_IN => SIZE_N_IN,
-      SIZE_B_IN => SIZE_W_IN,
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_w_int(j) := matrix_w_input(i, j);
+      end loop;
 
-      vector_a_input => vector_w_input,
-      vector_b_input => vector_a_input
-      );
+      matrix_second_operation_int := function_transpose_vector_product (
+        SIZE_A_IN => SIZE_N_IN,
+        SIZE_B_IN => SIZE_W_IN,
+
+        vector_a_input => vector_w_int,
+        vector_b_input => vector_a_input
+        );
+
+      matrix_first_operation_int := function_matrix_float_adder (
+        OPERATION => '0',
+
+        SIZE_I_IN => SIZE_N_IN,
+        SIZE_J_IN => SIZE_W_IN,
+
+        matrix_a_input => matrix_first_operation_int,
+        matrix_b_input => matrix_second_operation_int
+        );
+    end loop;
 
     matrix_m_output := function_matrix_float_adder (
       OPERATION => '0',
@@ -724,61 +761,64 @@ package body ntm_core_pkg is
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_m_input,
-      matrix_b_input => matrix_operation_int
+      matrix_b_input => matrix_first_operation_int
       );
 
     return matrix_m_output;
   end function function_ntm_writing;
 
   function function_ntm_erasing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
     vector_e_input : vector_buffer;
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_ones_int : matrix_buffer;
+    variable matrix_first_operation_int  : matrix_buffer;
+    variable matrix_second_operation_int : matrix_buffer;
 
-    variable matrix_operation_int : matrix_buffer;
+    variable vector_w_int : vector_buffer;
 
     variable matrix_m_output : matrix_buffer;
 
   begin
 
     -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+    matrix_first_operation_int := (others => (others => ONE_DATA));
 
-    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        matrix_ones_int(j, k) := ONE_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        vector_w_int(j) := matrix_w_input(i, j);
       end loop;
+
+      matrix_second_operation_int := function_transpose_vector_product (
+        SIZE_A_IN => SIZE_N_IN,
+        SIZE_B_IN => SIZE_W_IN,
+
+        vector_a_input => vector_w_int,
+        vector_b_input => vector_e_input
+        );
+
+      matrix_first_operation_int := function_matrix_float_adder (
+        OPERATION => '0',
+
+        SIZE_I_IN => SIZE_N_IN,
+        SIZE_J_IN => SIZE_W_IN,
+
+        matrix_a_input => matrix_first_operation_int,
+        matrix_b_input => matrix_second_operation_int
+        );
     end loop;
-
-    matrix_operation_int := function_transpose_vector_product (
-      SIZE_A_IN => SIZE_N_IN,
-      SIZE_B_IN => SIZE_W_IN,
-
-      vector_a_input => vector_w_input,
-      vector_b_input => vector_e_input
-      );
-
-    matrix_operation_int := function_matrix_float_adder (
-      OPERATION => '1',
-
-      SIZE_I_IN => SIZE_N_IN,
-      SIZE_J_IN => SIZE_W_IN,
-
-      matrix_a_input => matrix_ones_int,
-      matrix_b_input => matrix_operation_int
-      );
 
     matrix_m_output := function_matrix_float_multiplier (
       SIZE_I_IN => SIZE_N_IN,
       SIZE_J_IN => SIZE_W_IN,
 
       matrix_a_input => matrix_m_input,
-      matrix_b_input => matrix_operation_int
+      matrix_b_input => matrix_first_operation_int
       );
 
     return matrix_m_output;
@@ -842,6 +882,7 @@ package body ntm_core_pkg is
   end function function_ntm_content_based_addressing;
 
   function function_ntm_addressing (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -853,9 +894,9 @@ package body ntm_core_pkg is
 
     matrix_m_input : matrix_buffer;
 
-    vector_w_input : vector_buffer
+    matrix_w_input : matrix_buffer
 
-    ) return vector_buffer is
+    ) return matrix_buffer is
 
     variable vector_wc_output : vector_buffer;
     variable vector_wg_output : vector_buffer;
@@ -1057,12 +1098,10 @@ package body ntm_core_pkg is
 
     -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
-    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-      data_product_int(y)  := ZERO_DATA;
-      data_addition_int(y) := ZERO_DATA;
+    data_product_int  := (others => ZERO_DATA);
+    data_addition_int := (others => ZERO_DATA);
 
-      vector_y_output(y) := ZERO_DATA;
-    end loop;
+    vector_y_output := (others => ZERO_DATA);
 
     data_summation_int := function_tensor_matrix_product (
       SIZE_A_I_IN => SIZE_R_IN,
@@ -1134,9 +1173,7 @@ package body ntm_core_pkg is
 
     variable matrix_r_int : matrix_buffer;
 
-    variable vector_r_int : vector_buffer;
-
-    variable vector_w_int : vector_buffer;
+    variable matrix_w_int : matrix_buffer;
 
     variable vector_a_int : vector_buffer;
     variable vector_e_int : vector_buffer;
@@ -1166,7 +1203,7 @@ package body ntm_core_pkg is
 
         matrix_m_int := (others => (others => ZERO_DATA));
 
-        vector_w_int := (others => ZERO_DATA);
+        matrix_w_int := (others => (others => ZERO_DATA));
       else
         -- ARITHMETIC S: [XI] = 2·W
         SIZE_S_IN := function_scalar_integer_multiplier (
@@ -1227,32 +1264,35 @@ package body ntm_core_pkg is
 
         -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
         matrix_m_int := function_ntm_erasing (
+          SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
           SIZE_W_IN => SIZE_W_IN,
 
           matrix_m_input => matrix_m_int,
           vector_e_input => vector_e_int,
-          vector_w_input => vector_w_int
+          matrix_w_input => matrix_w_int
           );
 
         -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
         matrix_m_int := function_ntm_writing (
+          SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
           SIZE_W_IN => SIZE_W_IN,
 
           matrix_m_input => matrix_m_int,
           vector_a_input => vector_a_int,
-          vector_w_input => vector_w_int
+          matrix_w_input => matrix_w_int
           );
 
         -- READ_HEADS_STATE
 
-        -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
-        vector_r_int := function_ntm_reading (
+        -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
+        matrix_r_int := function_ntm_reading (
+          SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
           SIZE_W_IN => SIZE_W_IN,
 
-          vector_w_input => vector_w_int,
+          matrix_w_input => matrix_w_int,
           matrix_m_input => matrix_m_int
           );
 
@@ -1263,7 +1303,8 @@ package body ntm_core_pkg is
         -- w(t;j) = wg(t;j)*s(t;k)
         -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
-        vector_w_int := function_ntm_addressing (
+        matrix_w_int := function_ntm_addressing (
+          SIZE_R_IN => SIZE_R_IN,
           SIZE_N_IN => SIZE_N_IN,
           SIZE_W_IN => SIZE_W_IN,
 
@@ -1275,7 +1316,7 @@ package body ntm_core_pkg is
 
           matrix_m_input => matrix_m_int,
 
-          vector_w_input => vector_w_int
+          matrix_w_input => matrix_w_int
           );
 
         -- CONTROLLER_BODY_STATE
