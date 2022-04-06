@@ -48,6 +48,7 @@
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_K_IN = 3;
+SIZE_Q_IN = 3;
 SIZE_V_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
@@ -58,8 +59,8 @@ SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
 
 % Signals
-W_HQ_IN = rand(SIZE_D_IN, SIZE_K_IN);
 W_HK_IN = rand(SIZE_D_IN, SIZE_K_IN);
+W_HQ_IN = rand(SIZE_D_IN, SIZE_Q_IN);
 W_HV_IN = rand(SIZE_D_IN, SIZE_V_IN);
 
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);

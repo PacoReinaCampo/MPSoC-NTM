@@ -51,7 +51,7 @@ function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
   % Body
   % M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-  matrix_operation_int = ntm_transpose_vector_product(W_IN, A_IN);
+  matrix_operation_int = ntm_matrix_vector_product(W_IN, A_IN);
   
   M_OUT = M_IN + matrix_operation_int;
 end

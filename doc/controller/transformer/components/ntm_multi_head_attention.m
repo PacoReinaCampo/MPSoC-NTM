@@ -46,6 +46,7 @@
 
 function Y_OUT = ntm_multi_head_attention(W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
 
+  % Body
   K_INPUT = ntm_keys_vector(W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
   Q_INPUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
   V_INPUT = ntm_values_vector(W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

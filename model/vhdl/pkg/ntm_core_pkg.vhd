@@ -1129,23 +1129,6 @@ package body ntm_core_pkg is
     matrix_q_input : matrix_buffer
     ) return vector_buffer is
 
-    -- Trainer Variable
-    variable tensor_k_int : tensor_buffer;
-    variable matrix_u_int : matrix_buffer;
-    variable matrix_v_int : matrix_buffer;
-    variable tensor_d_int : tensor_buffer;
-
-    variable tensor_kt_int : array4_buffer;
-    variable matrix_ut_int : tensor_buffer;
-    variable matrix_vt_int : tensor_buffer;
-    variable tensor_dt_int : array4_buffer;
-
-    variable vector_xt_int   : matrix_buffer;
-    variable matrix_rt_int   : tensor_buffer;
-    variable vector_xit_int  : matrix_buffer;
-    variable matrix_rhot_int : tensor_buffer;
-    variable vector_ht_int   : matrix_buffer;
-
     -- Internal Variable
     variable matrix_m_int : matrix_buffer;
 
@@ -1169,8 +1152,6 @@ package body ntm_core_pkg is
     variable scalar_beta_int  : std_logic_vector(DATA_SIZE-1 downto 0);
     variable scalar_gamma_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-    variable SCALAR_OPERATION_INT : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
     variable SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     variable SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -1193,19 +1174,19 @@ package body ntm_core_pkg is
           scalar_b_input => SIZE_W_IN
           );
 
-        -- ARITHMETIC M: [RHO] = 2·N + 3
-        SIZE_M_IN := THREE_CONTROL;
+        -- ARITHMETIC M: [RHO] = N + W + 3
+        SIZE_M_IN := function_scalar_integer_adder (
+          OPERATION => '0',
 
-        SCALAR_OPERATION_INT := function_scalar_integer_multiplier (
-          scalar_a_input => TWO_CONTROL,
-          scalar_b_input => SIZE_N_IN
+          scalar_a_input => SIZE_N_IN,
+          scalar_b_input => SIZE_W_IN
           );
 
         SIZE_M_IN := function_scalar_integer_adder (
           OPERATION => '0',
 
-          scalar_a_input => SCALAR_OPERATION_INT,
-          scalar_b_input => SIZE_M_IN
+          scalar_a_input => SIZE_M_IN,
+          scalar_b_input => THREE_CONTROL
           );
 
         -- INTERFACE_VECTOR_STATE
@@ -1215,10 +1196,16 @@ package body ntm_core_pkg is
           SIZE_S_IN => SIZE_S_IN,
           SIZE_L_IN => SIZE_L_IN,
 
-          matrix_u_input => matrix_v_int,
+          matrix_u_input => matrix_v_input,
 
           vector_h_input => vector_h_int
           );
+
+        vector_k_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + 3);
+        scalar_beta_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 2);
+        scalar_g_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 1);
+        vector_s_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) downto 1);
+        scalar_gamma_int := vector_xi_int(0);
 
         -- INTERFACE_MATRIX_STATE
 
@@ -1228,10 +1215,13 @@ package body ntm_core_pkg is
           SIZE_R_IN => SIZE_R_IN,
           SIZE_L_IN => SIZE_L_IN,
 
-          tensor_u_input => tensor_d_int,
+          tensor_u_input => tensor_d_input,
 
           vector_h_input => vector_h_int
           );
+
+        vector_e_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 3*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 3);
+        vector_a_int := vector_xi_int(to_integer(unsigned(SIZE_N_IN)) + 2*to_integer(unsigned(SIZE_W_IN)) + 2 downto to_integer(unsigned(SIZE_N_IN)) + to_integer(unsigned(SIZE_W_IN)) + 3);
 
         -- WRITE_HEADS_STATE
 

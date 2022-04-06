@@ -45,11 +45,12 @@
 %}
 
 % Constants
+SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
 % Signals
-W_IN = rand(SIZE_N_IN, 1);
+W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
 % DUT

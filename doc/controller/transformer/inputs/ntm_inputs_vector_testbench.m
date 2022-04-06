@@ -48,6 +48,7 @@
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_K_IN = 3;
+SIZE_Q_IN = 3;
 SIZE_V_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;

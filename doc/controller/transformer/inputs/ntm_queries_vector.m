@@ -51,6 +51,6 @@ function Q_OUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN,
   % Body
   x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  % Q(n;k) = X(n;d)·W(d;k)
+  % Q(n;q) = X(n;d)·W(d;q)
   Q_OUT = ntm_matrix_product(W_HQ_IN, x_int);
 end

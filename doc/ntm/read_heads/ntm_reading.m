@@ -49,21 +49,24 @@ function R_OUT = ntm_reading(W_IN, M_IN)
   addpath(genpath('../../math/algebra/vector'));
 
   % Constants
+  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
   % Signals
   matrix_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
   % Body
-  % r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+  % r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
-  for j = 1:SIZE_N_IN
-    for k = 1:SIZE_W_IN
-      matrix_operation_int(j, k) = W_IN(j);
+  for i = 1:SIZE_R_IN
+    for j = 1:SIZE_N_IN
+      for k = 1:SIZE_W_IN
+        matrix_operation_int(j, k) = W_IN(i, j);
+      end
     end
+
+    matrix_operation_int = matrix_operation_int.*M_IN;
+
+    R_OUT(i, :) = ntm_vector_summation(matrix_operation_int);
   end
-
-  matrix_operation_int = matrix_operation_int.*M_IN;
-
-  R_OUT = ntm_vector_summation(matrix_operation_int);
 end
