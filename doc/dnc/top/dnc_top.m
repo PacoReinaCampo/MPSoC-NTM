@@ -56,10 +56,14 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN)
 
   % Constants
   SIZE_T_IN = 3;
+  SIZE_Y_IN = 3;
   SIZE_N_IN = 3;
   SIZE_W_IN = 3;
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
+
+  % Signals
+  Y_OUT = zeros(SIZE_T_IN, SIZE_Y_IN);
 
   % Body
   for t = 1:SIZE_T_IN
@@ -206,12 +210,12 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN)
 
 
       % CONTROLLER_BODY_STATE
-      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
+      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
 
       % OUTPUT_VECTOR_STATE
 
       % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
-      Y_OUT = dnc_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);
+      Y_OUT(t, :) = dnc_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);
     end
   end
 end

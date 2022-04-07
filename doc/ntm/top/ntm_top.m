@@ -58,13 +58,14 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN)
 
   % Constants
   SIZE_T_IN = 3;
+  SIZE_Y_IN = 3;
   SIZE_N_IN = 3;
   SIZE_W_IN = 3;
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
 
   % Signals
-  matrix_r_int = zeros(SIZE_R_IN, SIZE_W_IN);
+  Y_OUT = zeros(SIZE_T_IN, SIZE_Y_IN);
 
   % Body
   for t = 1:SIZE_T_IN
@@ -107,10 +108,10 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN)
       matrix_w_int = ntm_addressing(matrix_k_int, vector_beta_int, vector_g_int, matrix_s_int, vector_gamma_int, matrix_m_int, matrix_w_int);
 
       % CONTROLLER
-      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
+      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN(t, :), matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int);
 
       % OUTPUT VECTOR
-      Y_OUT = ntm_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);
+      Y_OUT(t, :) = ntm_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);
     end
   end
 end
