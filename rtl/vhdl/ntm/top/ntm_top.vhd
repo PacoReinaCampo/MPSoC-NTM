@@ -411,16 +411,20 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_reading : std_logic;
   signal m_in_k_enable_reading : std_logic;
 
-  signal w_in_enable_reading : std_logic;
+  signal w_in_i_enable_reading : std_logic;
+  signal w_in_j_enable_reading : std_logic;
 
   signal m_out_j_enable_reading : std_logic;
   signal m_out_k_enable_reading : std_logic;
 
-  signal w_out_enable_reading : std_logic;
+  signal w_out_i_enable_reading : std_logic;
+  signal w_out_j_enable_reading : std_logic;
 
-  signal r_out_enable_reading : std_logic;
+  signal r_out_i_enable_reading : std_logic;
+  signal r_out_k_enable_reading : std_logic;
 
   -- DATA
+  signal size_r_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -440,11 +444,13 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_writing : std_logic;
   signal m_in_k_enable_writing : std_logic;
 
-  signal w_in_enable_writing : std_logic;
+  signal w_in_i_enable_writing : std_logic;
+  signal w_in_j_enable_writing : std_logic;
 
   signal a_in_enable_writing : std_logic;
 
-  signal w_out_enable_writing : std_logic;
+  signal w_out_i_enable_writing : std_logic;
+  signal w_out_j_enable_writing : std_logic;
 
   signal a_out_enable_writing : std_logic;
 
@@ -452,6 +458,7 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_writing : std_logic;
 
   -- DATA
+  signal size_r_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -468,11 +475,13 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_erasing : std_logic;
   signal m_in_k_enable_erasing : std_logic;
 
-  signal w_in_enable_erasing : std_logic;
+  signal w_in_i_enable_erasing : std_logic;
+  signal w_in_j_enable_erasing : std_logic;
 
   signal e_in_enable_erasing : std_logic;
 
-  signal w_out_enable_erasing : std_logic;
+  signal w_out_i_enable_erasing : std_logic;
+  signal w_out_j_enable_erasing : std_logic;
 
   signal e_out_enable_erasing : std_logic;
 
@@ -480,6 +489,7 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
+  signal size_r_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -497,11 +507,29 @@ architecture ntm_top_architecture of ntm_top is
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
 
-  signal k_in_enable_addressing : std_logic;
-  signal s_in_enable_addressing : std_logic;
+  signal k_in_i_enable_addressing : std_logic;
+  signal k_in_k_enable_addressing : std_logic;
 
-  signal k_out_enable_addressing : std_logic;
-  signal s_out_enable_addressing : std_logic;
+  signal beta_in_enable_addressing : std_logic;
+
+  signal g_in_enable_addressing : std_logic;
+
+  signal s_in_i_enable_addressing : std_logic;
+  signal s_in_j_enable_addressing : std_logic;
+
+  signal gamma_in_enable_addressing : std_logic;
+
+  signal k_out_i_enable_addressing : std_logic;
+  signal k_out_k_enable_addressing : std_logic;
+
+  signal beta_out_enable_addressing : std_logic;
+
+  signal g_out_enable_addressing : std_logic;
+
+  signal s_out_i_enable_addressing : std_logic;
+  signal s_out_j_enable_addressing : std_logic;
+
+  signal gamma_out_enable_addressing : std_logic;
 
   signal m_in_j_enable_addressing : std_logic;
   signal m_in_k_enable_addressing : std_logic;
@@ -509,10 +537,14 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_j_enable_addressing : std_logic;
   signal m_out_k_enable_addressing : std_logic;
 
-  signal w_in_enable_addressing  : std_logic;
-  signal w_out_enable_addressing : std_logic;
+  signal w_in_i_enable_addressing : std_logic;
+  signal w_in_j_enable_addressing : std_logic;
+
+  signal w_out_i_enable_addressing : std_logic;
+  signal w_out_j_enable_addressing : std_logic;
 
   -- DATA
+  signal size_r_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -632,7 +664,7 @@ begin
 
           -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
-          if (w_out_enable_addressing = '1') then
+          if (w_out_i_enable_addressing = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
               -- FSM Control
               top_ctrl_fsm_int <= STARTER_STATE;
@@ -651,175 +683,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- CONTROLLER
-  w_in_l_enable_controller <= '0';
-  w_in_x_enable_controller <= '0';
-
-  k_in_i_enable_controller <= '0';
-  k_in_l_enable_controller <= '0';
-  k_in_k_enable_controller <= '0';
-
-  b_in_enable_controller <= '0';
-
-  x_in_enable_controller <= '0';
-
-  r_in_i_enable_controller <= '0';
-  r_in_k_enable_controller <= '0';
-
-  w_out_l_enable_controller <= '0';
-  w_out_x_enable_controller <= '0';
-
-  k_out_i_enable_controller <= '0';
-  k_out_l_enable_controller <= '0';
-  k_out_k_enable_controller <= '0';
-
-  b_out_enable_controller <= '0';
-
-  h_out_enable_controller <= '0';
-
-  -- OUTPUT VECTOR
-  p_in_i_enable_output_vector <= '0';
-  p_in_y_enable_output_vector <= '0';
-  p_in_k_enable_output_vector <= '0';
-
-  r_in_i_enable_output_vector <= '0';
-  r_in_k_enable_output_vector <= '0';
-
-  q_in_y_enable_output_vector <= '0';
-  q_in_l_enable_output_vector <= '0';
-
-  h_in_enable_output_vector <= '0';
-
-  y_in_enable_output_vector <= '0';
-
-  -- INTERFACE VECTOR
-  -- Weight
-  u_in_s_enable_interface_vector <= '0';
-  u_in_l_enable_interface_vector <= '0';
-
-  -- Hidden State
-  h_in_enable_interface_vector <= '0';
-
-  -- READING
-  m_in_j_enable_reading <= '0';
-  m_in_k_enable_reading <= '0';
-
-  r_out_enable_reading <= '0';
-
-  -- WRITING
-  m_in_j_enable_writing <= '0';
-  m_in_k_enable_writing <= '0';
-
-  w_in_enable_writing <= '0';
-
-  a_in_enable_writing <= '0';
-
-  m_out_j_enable_writing <= '0';
-  m_out_k_enable_writing <= '0';
-
-  -- ERASING
-  m_in_j_enable_erasing <= '0';
-  m_in_k_enable_erasing <= '0';
-
-  e_in_enable_erasing <= '0';
-
-  m_out_j_enable_erasing <= '0';
-  m_out_k_enable_erasing <= '0';
-
-  -- ADDRESSING
-  k_in_enable_addressing <= '0';
-  s_in_enable_addressing <= '0';
-
-  m_in_j_enable_addressing <= '0';
-  m_in_k_enable_addressing <= '0';
-
-  w_in_enable_addressing  <= '0';
-  w_out_enable_addressing <= '0';
-
-  -- DATA
-  -- CONTROLLER
-  size_x_in_controller <= FULL;
-  size_w_in_controller <= FULL;
-  size_l_in_controller <= FULL;
-  size_r_in_controller <= FULL;
-
-  w_in_controller <= FULL;
-  k_in_controller <= FULL;
-  b_in_controller <= FULL;
-
-  x_in_controller <= FULL;
-  r_in_controller <= FULL;
-
-  w_out_controller <= FULL;
-  k_out_controller <= FULL;
-  b_out_controller <= FULL;
-
-  h_out_controller <= FULL;
-
-  -- OUTPUT VECTOR
-  size_y_in_output_vector <= FULL;
-  size_l_in_output_vector <= FULL;
-  size_w_in_output_vector <= FULL;
-  size_r_in_output_vector <= FULL;
-
-  p_in_output_vector <= FULL;
-  r_in_output_vector <= FULL;
-
-  q_in_output_vector <= FULL;
-  h_in_output_vector <= FULL;
-
-  y_out_output_vector <= FULL;
-
-  -- INTERFACE VECTOR
-  size_s_in_interface_vector <= FULL;
-  size_l_in_interface_vector <= FULL;
-
-  u_in_interface_vector <= FULL;
-
-  h_in_interface_vector <= FULL;
-
-  -- READING
-  size_n_in_reading <= FULL;
-  size_w_in_reading <= FULL;
-
-  w_in_reading  <= FULL;
-  m_in_reading  <= FULL;
-  r_out_reading <= FULL;
-
-  -- WRITING
-  size_n_in_writing <= FULL;
-  size_w_in_writing <= FULL;
-
-  m_in_writing  <= FULL;
-  a_in_writing  <= FULL;
-  w_in_writing  <= FULL;
-  m_out_writing <= FULL;
-
-  -- ERASING
-  size_n_in_erasing <= FULL;
-  size_w_in_erasing <= FULL;
-
-  m_in_erasing <= FULL;
-  e_in_erasing <= FULL;
-  w_in_erasing <= FULL;
-
-  m_out_erasing <= FULL;
-
-  -- ADDRESSING
-  size_n_in_addressing <= FULL;
-  size_w_in_addressing <= FULL;
-
-  k_in_addressing     <= FULL;
-  beta_in_addressing  <= FULL;
-  g_in_addressing     <= FULL;
-  s_in_addressing     <= FULL;
-  gamma_in_addressing <= FULL;
-
-  m_in_addressing <= FULL;
-
-  w_in_addressing  <= FULL;
-  w_out_addressing <= FULL;
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -1099,16 +962,20 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_reading,
       M_IN_K_ENABLE => m_in_k_enable_reading,
 
-      W_IN_ENABLE => w_in_enable_reading,
+      W_IN_I_ENABLE => w_in_i_enable_reading,
+      W_IN_J_ENABLE => w_in_j_enable_reading,
 
       M_OUT_J_ENABLE => m_out_j_enable_reading,
       M_OUT_K_ENABLE => m_out_k_enable_reading,
 
-      W_OUT_ENABLE => w_out_enable_reading,
+      W_OUT_I_ENABLE => w_out_i_enable_reading,
+      W_OUT_J_ENABLE => w_out_j_enable_reading,
 
-      R_OUT_ENABLE => r_out_enable_reading,
+      R_OUT_I_ENABLE => r_out_i_enable_reading,
+      R_OUT_K_ENABLE => r_out_k_enable_reading,
 
       -- DATA
+      SIZE_R_IN => size_r_in_reading,
       SIZE_N_IN => size_n_in_reading,
       SIZE_W_IN => size_w_in_reading,
 
@@ -1139,11 +1006,13 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_writing,
       M_IN_K_ENABLE => m_in_k_enable_writing,
 
-      W_IN_ENABLE => w_in_enable_writing,
+      W_IN_I_ENABLE => w_in_i_enable_writing,
+      W_IN_J_ENABLE => w_in_j_enable_writing,
 
       A_IN_ENABLE => a_in_enable_writing,
 
-      W_OUT_ENABLE => w_out_enable_writing,
+      W_OUT_I_ENABLE => w_out_i_enable_writing,
+      W_OUT_J_ENABLE => w_out_j_enable_writing,
 
       A_OUT_ENABLE => a_out_enable_writing,
 
@@ -1151,6 +1020,7 @@ begin
       M_OUT_K_ENABLE => m_out_k_enable_writing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_writing,
       SIZE_N_IN => size_n_in_writing,
       SIZE_W_IN => size_w_in_writing,
 
@@ -1178,11 +1048,13 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_erasing,
       M_IN_K_ENABLE => m_in_k_enable_erasing,
 
-      W_IN_ENABLE => w_in_enable_erasing,
+      W_IN_I_ENABLE => w_in_i_enable_erasing,
+      W_IN_J_ENABLE => w_in_j_enable_erasing,
 
       E_IN_ENABLE => e_in_enable_erasing,
 
-      W_OUT_ENABLE => w_out_enable_erasing,
+      W_OUT_I_ENABLE => w_out_i_enable_erasing,
+      W_OUT_J_ENABLE => w_out_j_enable_erasing,
 
       E_OUT_ENABLE => e_out_enable_erasing,
 
@@ -1190,6 +1062,7 @@ begin
       M_OUT_K_ENABLE => m_out_k_enable_erasing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_erasing,
       SIZE_N_IN => size_n_in_erasing,
       SIZE_W_IN => size_w_in_erasing,
 
@@ -1218,11 +1091,29 @@ begin
       START => start_addressing,
       READY => ready_addressing,
 
-      K_IN_ENABLE => k_in_enable_addressing,
-      S_IN_ENABLE => s_in_enable_addressing,
+      K_IN_I_ENABLE => k_in_i_enable_addressing,
+      K_IN_K_ENABLE => k_in_k_enable_addressing,
 
-      K_OUT_ENABLE => k_out_enable_addressing,
-      S_OUT_ENABLE => s_out_enable_addressing,
+      BETA_IN_ENABLE => beta_in_enable_addressing,
+
+      G_IN_ENABLE => g_in_enable_addressing,
+
+      S_IN_I_ENABLE => s_in_i_enable_addressing,
+      S_IN_J_ENABLE => s_in_j_enable_addressing,
+
+      GAMMA_IN_ENABLE => gamma_in_enable_addressing,
+
+      K_OUT_I_ENABLE => k_out_i_enable_addressing,
+      K_OUT_K_ENABLE => k_out_k_enable_addressing,
+
+      BETA_OUT_ENABLE => beta_out_enable_addressing,
+
+      G_OUT_ENABLE => g_out_enable_addressing,
+
+      S_OUT_I_ENABLE => s_out_i_enable_addressing,
+      S_OUT_J_ENABLE => s_out_j_enable_addressing,
+
+      GAMMA_OUT_ENABLE => gamma_out_enable_addressing,
 
       M_IN_J_ENABLE => m_in_j_enable_addressing,
       M_IN_K_ENABLE => m_in_k_enable_addressing,
@@ -1230,10 +1121,14 @@ begin
       M_OUT_J_ENABLE => m_out_j_enable_addressing,
       M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      W_IN_ENABLE  => w_in_enable_addressing,
-      W_OUT_ENABLE => w_out_enable_addressing,
+      W_IN_I_ENABLE  => w_in_i_enable_addressing,
+      W_IN_J_ENABLE  => w_in_j_enable_addressing,
+
+      W_OUT_I_ENABLE => w_out_i_enable_addressing,
+      W_OUT_J_ENABLE => w_out_j_enable_addressing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_addressing,
       SIZE_N_IN => size_n_in_addressing,
       SIZE_W_IN => size_w_in_addressing,
 

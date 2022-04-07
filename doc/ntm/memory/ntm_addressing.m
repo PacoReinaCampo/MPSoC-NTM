@@ -49,20 +49,22 @@ function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
   addpath(genpath('../../math/algebra/vector'));
 
   % Constants
-  SIZE_R_IN = length(GAMMA_IN);
-
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
   % Signals
   W_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
 
   % Body
-  for i = 1:SIZE_R_IN
-    % wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
-    vector_operation_int = ntm_vector_content_based_addressing(K_IN(i, :), BETA_IN(i), M_IN);
+  % wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(i;t))
+  matrix_operation_int = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN);
 
+  for i = 1:SIZE_R_IN
     % wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
-    vector_operation_int = G_IN(i).*vector_operation_int + (1-G_IN(i)).*W_IN(i, :);
+    for j = 1:SIZE_N_IN
+      matrix_operation_int(i, j) = G_IN(i)*matrix_operation_int(i, j) + (1-G_IN(i))*W_IN(i, j);
+
+      vector_operation_int(j) = matrix_operation_int(i, j);
+    end
 
     % w(t;j) = wg(t;j)*s(t;k)
     vector_operation_int = ntm_vector_convolution(vector_operation_int, S_IN(i, :));
@@ -70,14 +72,12 @@ function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
     % w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
     data_summation_int = 0;
 
-    for k = 1:SIZE_W_IN
-      data_summation_int = data_summation_int + vector_operation_int(k)^GAMMA_IN(i);
+    for j = 1:SIZE_N_IN
+      data_summation_int = data_summation_int + vector_operation_int(j)^GAMMA_IN(i);
     end
 
     for j = 1:SIZE_N_IN
-      for k = 1:SIZE_W_IN
-        W_OUT(i, j) = exp(dot(K_IN(i, :), M_IN(j, :))*BETA_IN(i))/data_summation_int;
-      end
+      W_OUT(i, j) = vector_operation_int(j)^GAMMA_IN(i)/data_summation_int;
     end
   end
 end
