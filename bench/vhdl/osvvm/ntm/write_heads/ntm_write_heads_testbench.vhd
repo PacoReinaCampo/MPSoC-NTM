@@ -82,11 +82,13 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_in_j_enable_writing : std_logic;
   signal m_in_k_enable_writing : std_logic;
 
-  signal w_in_enable_writing : std_logic;
+  signal w_in_i_enable_writing : std_logic;
+  signal w_in_j_enable_writing : std_logic;
 
   signal a_in_enable_writing : std_logic;
 
-  signal w_out_enable_writing : std_logic;
+  signal w_out_i_enable_writing : std_logic;
+  signal w_out_j_enable_writing : std_logic;
 
   signal a_out_enable_writing : std_logic;
 
@@ -94,6 +96,7 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_out_k_enable_writing : std_logic;
 
   -- DATA
+  signal size_r_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -110,11 +113,13 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_in_j_enable_erasing : std_logic;
   signal m_in_k_enable_erasing : std_logic;
 
-  signal w_in_enable_erasing : std_logic;
+  signal w_in_i_enable_erasing : std_logic;
+  signal w_in_j_enable_erasing : std_logic;
 
   signal e_in_enable_erasing : std_logic;
 
-  signal w_out_enable_erasing : std_logic;
+  signal w_out_i_enable_erasing : std_logic;
+  signal w_out_j_enable_erasing : std_logic;
 
   signal e_out_enable_erasing : std_logic;
 
@@ -122,6 +127,7 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
+  signal size_r_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -162,11 +168,13 @@ begin
       NTM_WRITE_HEADS_M_IN_J_ENABLE => m_in_j_enable_writing,
       NTM_WRITE_HEADS_M_IN_K_ENABLE => m_in_k_enable_writing,
 
-      NTM_WRITE_HEADS_W_IN_ENABLE => w_in_enable_writing,
+      NTM_WRITE_HEADS_W_IN_I_ENABLE => w_in_i_enable_writing,
+      NTM_WRITE_HEADS_W_IN_J_ENABLE => w_in_j_enable_writing,
 
       NTM_WRITE_HEADS_A_IN_ENABLE => a_in_enable_writing,
 
-      NTM_WRITE_HEADS_W_OUT_ENABLE => w_out_enable_writing,
+      NTM_WRITE_HEADS_W_OUT_I_ENABLE => w_out_i_enable_writing,
+      NTM_WRITE_HEADS_W_OUT_J_ENABLE => w_out_j_enable_writing,
 
       NTM_WRITE_HEADS_A_OUT_ENABLE => a_out_enable_writing,
 
@@ -174,6 +182,7 @@ begin
       NTM_WRITE_HEADS_M_OUT_K_ENABLE => m_out_k_enable_writing,
 
       -- DATA
+      NTM_WRITE_HEADS_SIZE_R_IN => size_r_in_writing,
       NTM_WRITE_HEADS_SIZE_N_IN => size_n_in_writing,
       NTM_WRITE_HEADS_SIZE_W_IN => size_w_in_writing,
 
@@ -201,11 +210,13 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_writing,
       M_IN_K_ENABLE => m_in_k_enable_writing,
 
-      W_IN_ENABLE => w_in_enable_writing,
+      W_IN_I_ENABLE => w_in_i_enable_writing,
+      W_IN_J_ENABLE => w_in_j_enable_writing,
 
       A_IN_ENABLE => a_in_enable_writing,
 
-      W_OUT_ENABLE => w_out_enable_writing,
+      W_OUT_I_ENABLE => w_out_i_enable_writing,
+      W_OUT_J_ENABLE => w_out_j_enable_writing,
 
       A_OUT_ENABLE => a_out_enable_writing,
 
@@ -213,6 +224,7 @@ begin
       M_OUT_K_ENABLE => m_out_k_enable_writing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_writing,
       SIZE_N_IN => size_n_in_writing,
       SIZE_W_IN => size_w_in_writing,
 
@@ -240,11 +252,13 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_erasing,
       M_IN_K_ENABLE => m_in_k_enable_erasing,
 
-      W_IN_ENABLE => e_in_enable_erasing,
+      W_IN_I_ENABLE => w_in_i_enable_erasing,
+      W_IN_J_ENABLE => w_in_j_enable_erasing,
 
-      E_IN_ENABLE => w_in_enable_erasing,
+      E_IN_ENABLE => e_in_enable_erasing,
 
-      W_OUT_ENABLE => w_out_enable_erasing,
+      W_OUT_I_ENABLE => w_out_i_enable_erasing,
+      W_OUT_J_ENABLE => w_out_j_enable_erasing,
 
       E_OUT_ENABLE => e_out_enable_erasing,
 
@@ -252,6 +266,7 @@ begin
       M_OUT_K_ENABLE => m_out_k_enable_erasing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_erasing,
       SIZE_N_IN => size_n_in_erasing,
       SIZE_W_IN => size_w_in_erasing,
 

@@ -167,11 +167,29 @@ package ntm_memory_pkg is
       NTM_MEMORY_START : out std_logic;
       NTM_MEMORY_READY : in  std_logic;
 
-      NTM_MEMORY_K_IN_ENABLE : out std_logic;
-      NTM_MEMORY_S_IN_ENABLE : out std_logic;
+      NTM_MEMORY_K_IN_I_ENABLE : out std_logic;
+      NTM_MEMORY_K_IN_K_ENABLE : out std_logic;
 
-      NTM_MEMORY_K_OUT_ENABLE : in std_logic;
-      NTM_MEMORY_S_OUT_ENABLE : in std_logic;
+      NTM_MEMORY_BETA_IN_ENABLE : out std_logic;
+
+      NTM_MEMORY_G_IN_ENABLE : out std_logic;
+
+      NTM_MEMORY_S_IN_I_ENABLE : out std_logic;
+      NTM_MEMORY_S_IN_J_ENABLE : out std_logic;
+
+      NTM_MEMORY_GAMMA_IN_ENABLE : out std_logic;
+
+      NTM_MEMORY_K_OUT_I_ENABLE : in std_logic;
+      NTM_MEMORY_K_OUT_K_ENABLE : in std_logic;
+
+      NTM_MEMORY_BETA_OUT_ENABLE : in std_logic;
+
+      NTM_MEMORY_G_OUT_ENABLE : in std_logic;
+
+      NTM_MEMORY_S_OUT_I_ENABLE : in std_logic;
+      NTM_MEMORY_S_OUT_J_ENABLE : in std_logic;
+
+      NTM_MEMORY_GAMMA_OUT_ENABLE : in std_logic;
 
       NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
       NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
@@ -179,10 +197,14 @@ package ntm_memory_pkg is
       NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
       NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
 
-      NTM_MEMORY_W_IN_ENABLE  : out std_logic;
-      NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
+      NTM_MEMORY_W_IN_I_ENABLE : out std_logic;
+      NTM_MEMORY_W_IN_J_ENABLE : out std_logic;
+
+      NTM_MEMORY_W_OUT_I_ENABLE : in std_logic;
+      NTM_MEMORY_W_OUT_J_ENABLE : in std_logic;
 
       -- DATA
+      NTM_MEMORY_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 

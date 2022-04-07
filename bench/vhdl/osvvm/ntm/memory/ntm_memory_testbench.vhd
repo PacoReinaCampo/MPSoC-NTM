@@ -79,11 +79,29 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
 
-  signal k_in_enable_addressing : std_logic;
-  signal s_in_enable_addressing : std_logic;
+  signal k_in_i_enable_addressing : std_logic;
+  signal k_in_k_enable_addressing : std_logic;
 
-  signal k_out_enable_addressing : std_logic;
-  signal s_out_enable_addressing : std_logic;
+  signal beta_in_enable_addressing : std_logic;
+
+  signal g_in_enable_addressing : std_logic;
+
+  signal s_in_i_enable_addressing : std_logic;
+  signal s_in_j_enable_addressing : std_logic;
+
+  signal gamma_in_enable_addressing : std_logic;
+
+  signal k_out_i_enable_addressing : std_logic;
+  signal k_out_k_enable_addressing : std_logic;
+
+  signal beta_out_enable_addressing : std_logic;
+
+  signal g_out_enable_addressing : std_logic;
+
+  signal s_out_i_enable_addressing : std_logic;
+  signal s_out_j_enable_addressing : std_logic;
+
+  signal gamma_out_enable_addressing : std_logic;
 
   signal m_in_j_enable_addressing : std_logic;
   signal m_in_k_enable_addressing : std_logic;
@@ -91,10 +109,14 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal m_out_j_enable_addressing : std_logic;
   signal m_out_k_enable_addressing : std_logic;
 
-  signal w_in_enable_addressing  : std_logic;
-  signal w_out_enable_addressing : std_logic;
+  signal w_in_i_enable_addressing : std_logic;
+  signal w_in_j_enable_addressing : std_logic;
+
+  signal w_out_i_enable_addressing : std_logic;
+  signal w_out_j_enable_addressing : std_logic;
 
   -- DATA
+  signal size_r_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -138,11 +160,29 @@ begin
       NTM_MEMORY_START => start_addressing,
       NTM_MEMORY_READY => ready_addressing,
 
-      NTM_MEMORY_K_IN_ENABLE => k_in_enable_addressing,
-      NTM_MEMORY_S_IN_ENABLE => s_in_enable_addressing,
+      NTM_MEMORY_K_IN_I_ENABLE => k_in_i_enable_addressing,
+      NTM_MEMORY_K_IN_K_ENABLE => k_in_k_enable_addressing,
 
-      NTM_MEMORY_K_OUT_ENABLE => k_out_enable_addressing,
-      NTM_MEMORY_S_OUT_ENABLE => s_out_enable_addressing,
+      NTM_MEMORY_BETA_IN_ENABLE => beta_in_enable_addressing,
+
+      NTM_MEMORY_G_IN_ENABLE => g_in_enable_addressing,
+
+      NTM_MEMORY_S_IN_I_ENABLE => s_in_i_enable_addressing,
+      NTM_MEMORY_S_IN_J_ENABLE => s_in_j_enable_addressing,
+
+      NTM_MEMORY_GAMMA_IN_ENABLE => gamma_in_enable_addressing,
+
+      NTM_MEMORY_K_OUT_I_ENABLE => k_out_i_enable_addressing,
+      NTM_MEMORY_K_OUT_K_ENABLE => k_out_k_enable_addressing,
+
+      NTM_MEMORY_BETA_OUT_ENABLE => beta_out_enable_addressing,
+
+      NTM_MEMORY_G_OUT_ENABLE => g_out_enable_addressing,
+
+      NTM_MEMORY_S_OUT_I_ENABLE => s_out_i_enable_addressing,
+      NTM_MEMORY_S_OUT_J_ENABLE => s_out_j_enable_addressing,
+
+      NTM_MEMORY_GAMMA_OUT_ENABLE => gamma_out_enable_addressing,
 
       NTM_MEMORY_M_IN_J_ENABLE => m_in_j_enable_addressing,
       NTM_MEMORY_M_IN_K_ENABLE => m_in_k_enable_addressing,
@@ -150,10 +190,14 @@ begin
       NTM_MEMORY_M_OUT_J_ENABLE => m_out_j_enable_addressing,
       NTM_MEMORY_M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      NTM_MEMORY_W_IN_ENABLE  => w_in_enable_addressing,
-      NTM_MEMORY_W_OUT_ENABLE => w_out_enable_addressing,
+      NTM_MEMORY_W_IN_I_ENABLE  => w_in_i_enable_addressing,
+      NTM_MEMORY_W_IN_J_ENABLE  => w_in_j_enable_addressing,
+
+      NTM_MEMORY_W_OUT_I_ENABLE => w_out_i_enable_addressing,
+      NTM_MEMORY_W_OUT_J_ENABLE => w_out_j_enable_addressing,
 
       -- DATA
+      NTM_MEMORY_SIZE_R_IN => size_r_in_addressing,
       NTM_MEMORY_SIZE_N_IN => size_n_in_addressing,
       NTM_MEMORY_SIZE_W_IN => size_w_in_addressing,
 
@@ -184,11 +228,29 @@ begin
       START => start_addressing,
       READY => ready_addressing,
 
-      K_IN_ENABLE => k_in_enable_addressing,
-      S_IN_ENABLE => s_in_enable_addressing,
+      K_IN_I_ENABLE => k_in_i_enable_addressing,
+      K_IN_K_ENABLE => k_in_k_enable_addressing,
 
-      K_OUT_ENABLE => k_out_enable_addressing,
-      S_OUT_ENABLE => s_out_enable_addressing,
+      BETA_IN_ENABLE => beta_in_enable_addressing,
+
+      G_IN_ENABLE => g_in_enable_addressing,
+
+      S_IN_I_ENABLE => s_in_i_enable_addressing,
+      S_IN_J_ENABLE => s_in_j_enable_addressing,
+
+      GAMMA_IN_ENABLE => gamma_in_enable_addressing,
+
+      K_OUT_I_ENABLE => k_out_i_enable_addressing,
+      K_OUT_K_ENABLE => k_out_k_enable_addressing,
+
+      BETA_OUT_ENABLE => beta_out_enable_addressing,
+
+      G_OUT_ENABLE => g_out_enable_addressing,
+
+      S_OUT_I_ENABLE => s_out_i_enable_addressing,
+      S_OUT_J_ENABLE => s_out_j_enable_addressing,
+
+      GAMMA_OUT_ENABLE => gamma_out_enable_addressing,
 
       M_IN_J_ENABLE => m_in_j_enable_addressing,
       M_IN_K_ENABLE => m_in_k_enable_addressing,
@@ -196,10 +258,14 @@ begin
       M_OUT_J_ENABLE => m_out_j_enable_addressing,
       M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      W_IN_ENABLE  => w_in_enable_addressing,
-      W_OUT_ENABLE => w_out_enable_addressing,
+      W_IN_I_ENABLE  => w_in_i_enable_addressing,
+      W_IN_J_ENABLE  => w_in_j_enable_addressing,
+
+      W_OUT_I_ENABLE => w_out_i_enable_addressing,
+      W_OUT_J_ENABLE => w_out_j_enable_addressing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_addressing,
       SIZE_N_IN => size_n_in_addressing,
       SIZE_W_IN => size_w_in_addressing,
 

@@ -84,6 +84,7 @@ package ntm_core_pkg is
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -115,11 +116,13 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
-      W_IN_ENABLE : in std_logic;
+      W_IN_I_ENABLE : in std_logic;
+      W_IN_J_ENABLE : in std_logic;
 
       A_IN_ENABLE : in std_logic;
 
-      W_OUT_ENABLE : out std_logic;
+      W_OUT_I_ENABLE : out std_logic;
+      W_OUT_J_ENABLE : out std_logic;
 
       A_OUT_ENABLE : out std_logic;
 
@@ -127,6 +130,7 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -155,11 +159,13 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
-      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+      W_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
 
       E_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       E_OUT_ENABLE : in std_logic;      -- for k in 0 to W-1
 
@@ -167,6 +173,7 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -234,22 +241,44 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
-      S_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
+      K_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      K_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-      S_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+      BETA_IN_ENABLE : in std_logic;     -- for i in 0 to R-1
 
-      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      G_IN_ENABLE : in std_logic;        -- for i in 0 to R-1
 
-      M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
-      M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+      S_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      S_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
 
-      W_IN_ENABLE  : in  std_logic;     -- for j in 0 to N-1
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      GAMMA_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+
+      K_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
+      BETA_OUT_ENABLE : out std_logic;   -- for i in 0 to R-1
+
+      G_OUT_ENABLE : out std_logic;      -- for i in 0 to R-1
+
+      S_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      S_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+
+      GAMMA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
+
+      M_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
+      M_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      M_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+      M_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
+      W_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
+
+      W_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -859,7 +888,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
+    -- C(M[j,·],k,beta)[i] = softmax(cosine_similarity(k,M[j,·])·beta)[i]
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       vector_beta_int(j) := scalar_beta_input;
@@ -915,7 +944,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
+    -- C(M[j,·],k,beta)[i] = softmax(cosine_similarity(k,M[j,·])·beta)[i]
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
@@ -985,7 +1014,7 @@ package body ntm_core_pkg is
     variable vector_summation_int : vector_buffer;
     variable matrix_summation_int : matrix_buffer;
 
-    variable vector_s_input : vector_buffer;
+    variable vector_s_input     : vector_buffer;
     variable matrix_gamma_input : matrix_buffer;
 
     variable vector_w_output : vector_buffer;
@@ -1047,15 +1076,15 @@ package body ntm_core_pkg is
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
         vector_wg_output(j) := matrix_wg_output(i, j);
-        vector_s_input(j) := matrix_s_input(i, j);
+        vector_s_input(j)   := matrix_s_input(i, j);
       end loop;
-        
-        vector_w_output := function_vector_convolution (
-          LENGTH_IN => SIZE_N_IN,
 
-          vector_a_input => vector_wg_output,
-          vector_b_input => vector_s_input
-          );
+      vector_w_output := function_vector_convolution (
+        LENGTH_IN => SIZE_N_IN,
+
+        vector_a_input => vector_wg_output,
+        vector_b_input => vector_s_input
+        );
 
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
         matrix_w_output(i, j) := vector_w_output(j);
@@ -1077,12 +1106,12 @@ package body ntm_core_pkg is
       matrix_b_input => matrix_gamma_input
       );
 
-  vector_summation_int := function_vector_summation (
-    SIZE_IN   => SIZE_R_IN,
-    LENGTH_IN => SIZE_N_IN,
+    vector_summation_int := function_vector_summation (
+      SIZE_IN   => SIZE_R_IN,
+      LENGTH_IN => SIZE_N_IN,
 
-    vector_input => matrix_w_output
-    );
+      vector_input => matrix_w_output
+      );
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
@@ -1358,7 +1387,7 @@ package body ntm_core_pkg is
           end loop;
 
           vector_beta_int(i) := matrix_rho_int(i, to_integer(unsigned(SIZE_N_IN)) + 2);
-          vector_g_int(i) := matrix_rho_int(i, to_integer(unsigned(SIZE_N_IN)) + 1);
+          vector_g_int(i)    := matrix_rho_int(i, to_integer(unsigned(SIZE_N_IN)) + 1);
 
           for j in 1 to to_integer(unsigned(SIZE_N_IN)) loop
             matrix_s_int(i, j) := matrix_rho_int(i, j);

@@ -62,11 +62,13 @@ entity ntm_writing is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
     A_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     A_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
@@ -74,6 +76,7 @@ entity ntm_writing is
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -171,7 +174,7 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      W_OUT_ENABLE <= '0';
+      W_OUT_J_ENABLE <= '0';
       A_OUT_ENABLE <= '0';
 
       M_OUT_J_ENABLE <= '0';
@@ -191,7 +194,7 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          W_OUT_ENABLE <= '0';
+          W_OUT_J_ENABLE <= '0';
           A_OUT_ENABLE <= '0';
 
           M_OUT_J_ENABLE <= '0';
@@ -208,7 +211,7 @@ begin
 
         when INPUT_FIRST_STATE =>       -- STEP 1
 
-          if (W_IN_ENABLE = '1') then
+          if (W_IN_J_ENABLE = '1') then
             -- Data Inputs
             data_a_in_vector_float_multiplier <= W_IN;
 
@@ -260,7 +263,7 @@ begin
             data_b_in_vector_float_adder <= data_out_vector_float_adder;
 
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
             A_OUT_ENABLE <= '1';
 
             -- FSM Control
@@ -294,7 +297,7 @@ begin
           end if;
 
           -- Control Outputs
-          W_OUT_ENABLE <= '0';
+          W_OUT_J_ENABLE <= '0';
           A_OUT_ENABLE <= '0';
 
         when VECTOR_ADDER_STATE =>      -- STEP 4

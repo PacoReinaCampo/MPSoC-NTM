@@ -63,11 +63,13 @@ entity ntm_writing is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
     A_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     A_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
@@ -75,6 +77,7 @@ entity ntm_writing is
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -114,8 +117,8 @@ architecture ntm_writing_architecture of ntm_writing is
 
   -- Buffer
   signal matrix_m_int : matrix_buffer;
-  signal vector_w_int : vector_buffer;
   signal vector_a_int : vector_buffer;
+  signal matrix_w_int : matrix_buffer;
 
   signal matrix_out_int : matrix_buffer;
 
@@ -141,7 +144,7 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      W_OUT_ENABLE <= '0';
+      W_OUT_J_ENABLE <= '0';
 
       A_OUT_ENABLE <= '0';
 
@@ -167,7 +170,7 @@ begin
 
           if (START = '1') then
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
 
             A_OUT_ENABLE <= '1';
 
@@ -179,29 +182,29 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Outputs
-            W_OUT_ENABLE <= '0';
+            W_OUT_J_ENABLE <= '0';
 
             A_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_FIRST_STATE =>       -- STEP 1 w
 
-          if (W_IN_ENABLE = '1') then
+          if (W_IN_J_ENABLE = '1') then
             -- Data Inputs
-            vector_w_int(to_integer(unsigned(index_j_loop))) <= W_IN;
+            matrix_w_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= W_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= CLEAN_FIRST_STATE;
           end if;
 
           -- Control Outputs
-          W_OUT_ENABLE <= '0';
+          W_OUT_J_ENABLE <= '0';
 
         when CLEAN_FIRST_STATE =>       -- STEP 2 w
 
           if (unsigned(index_j_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= ZERO_CONTROL;
@@ -210,7 +213,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
           elsif (unsigned(index_j_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -262,12 +265,13 @@ begin
 
             -- Data Internal
             matrix_out_int <= function_ntm_writing (
+              SIZE_R_IN => SIZE_R_IN,
               SIZE_N_IN => SIZE_N_IN,
               SIZE_W_IN => SIZE_W_IN,
 
               matrix_m_input => matrix_m_int,
-              vector_a_input => vector_w_int,
-              vector_w_input => vector_a_int
+              vector_a_input => vector_a_int,
+              matrix_w_input => matrix_w_int
               );
 
             -- FSM Control

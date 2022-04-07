@@ -70,16 +70,20 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
       M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+      W_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
 
       M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
       M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
-      R_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+      R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -111,11 +115,13 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
-      W_IN_ENABLE : in std_logic;
+      W_IN_I_ENABLE : in std_logic;
+      W_IN_J_ENABLE : in std_logic;
 
       A_IN_ENABLE : in std_logic;
 
-      W_OUT_ENABLE : out std_logic;
+      W_OUT_I_ENABLE : out std_logic;
+      W_OUT_J_ENABLE : out std_logic;
 
       A_OUT_ENABLE : out std_logic;
 
@@ -123,6 +129,7 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -151,11 +158,13 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
-      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+      W_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
 
       E_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       E_OUT_ENABLE : in std_logic;      -- for k in 0 to W-1
 
@@ -163,6 +172,7 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -230,22 +240,44 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
-      S_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
+      K_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      K_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
-      S_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+      BETA_IN_ENABLE : in std_logic;     -- for i in 0 to R-1
 
-      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      G_IN_ENABLE : in std_logic;        -- for i in 0 to R-1
 
-      M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
-      M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+      S_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      S_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
 
-      W_IN_ENABLE  : in  std_logic;     -- for j in 0 to N-1
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      GAMMA_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+
+      K_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
+      BETA_OUT_ENABLE : out std_logic;   -- for i in 0 to R-1
+
+      G_OUT_ENABLE : out std_logic;      -- for i in 0 to R-1
+
+      S_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      S_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+
+      GAMMA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
+
+      M_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
+      M_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      M_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+      M_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
+      W_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+      W_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
+
+      W_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      W_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
 
       -- DATA
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 

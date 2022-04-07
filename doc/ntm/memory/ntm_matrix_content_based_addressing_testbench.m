@@ -45,13 +45,14 @@
 %}
 
 % Constants
-SIZE_I_IN = 3;
-SIZE_J_IN = 3;
+SIZE_R_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
 
 % Signals
-K_IN = rand(SIZE_J_IN, 1);
-BETA_IN = rand(1);
-M_IN = rand(SIZE_I_IN, SIZE_J_IN);
+K_IN = rand(SIZE_R_IN, SIZE_W_IN);
+BETA_IN = rand(SIZE_R_IN);
+M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
 % DUT
-C_OUT = ntm_content_based_addressing(K_IN, BETA_IN, M_IN);
+C_OUT = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN);

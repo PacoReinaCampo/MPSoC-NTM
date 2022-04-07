@@ -70,7 +70,7 @@ entity ntm_reading is
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
-    W_OUT_N_ENABLE : out std_logic;     -- for j in 0 to N-1
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1

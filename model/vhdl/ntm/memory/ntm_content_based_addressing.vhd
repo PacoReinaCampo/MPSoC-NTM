@@ -216,9 +216,9 @@ begin
             data_k_in_state_int   <= '0';
 
             -- Data Internal
-            vector_out_int <= function_ntm_content_based_addressing (
-              SIZE_I_IN => SIZE_I_IN,
-              SIZE_J_IN => SIZE_J_IN,
+            vector_out_int <= function_ntm_vector_content_based_addressing (
+              SIZE_N_IN => SIZE_I_IN,
+              SIZE_W_IN => SIZE_J_IN,
 
               vector_k_input    => vector_k_int,
               scalar_beta_input => BETA_IN,

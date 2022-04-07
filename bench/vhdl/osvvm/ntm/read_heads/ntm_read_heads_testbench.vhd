@@ -82,16 +82,20 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal m_in_j_enable_reading : std_logic;
   signal m_in_k_enable_reading : std_logic;
 
-  signal w_in_enable_reading : std_logic;
+  signal w_in_i_enable_reading : std_logic;
+  signal w_in_j_enable_reading : std_logic;
 
   signal m_out_j_enable_reading : std_logic;
   signal m_out_k_enable_reading : std_logic;
 
-  signal w_out_enable_reading : std_logic;
+  signal w_out_i_enable_reading : std_logic;
+  signal w_out_j_enable_reading : std_logic;
 
-  signal r_out_enable_reading : std_logic;
+  signal r_out_i_enable_reading : std_logic;
+  signal r_out_k_enable_reading : std_logic;
 
   -- DATA
+  signal size_r_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -131,16 +135,20 @@ begin
       NTM_READ_HEADS_M_IN_J_ENABLE => m_in_j_enable_reading,
       NTM_READ_HEADS_M_IN_K_ENABLE => m_in_k_enable_reading,
 
-      NTM_READ_HEADS_W_IN_ENABLE => w_in_enable_reading,
+      NTM_READ_HEADS_W_IN_I_ENABLE => w_in_i_enable_reading,
+      NTM_READ_HEADS_W_IN_J_ENABLE => w_in_j_enable_reading,
 
       NTM_READ_HEADS_M_OUT_J_ENABLE => m_out_j_enable_reading,
       NTM_READ_HEADS_M_OUT_K_ENABLE => m_out_k_enable_reading,
 
-      NTM_READ_HEADS_W_OUT_ENABLE => w_out_enable_reading,
+      NTM_READ_HEADS_W_OUT_I_ENABLE => w_out_i_enable_reading,
+      NTM_READ_HEADS_W_OUT_J_ENABLE => w_out_j_enable_reading,
 
-      NTM_READ_HEADS_R_OUT_ENABLE => r_out_enable_reading,
+      NTM_READ_HEADS_R_OUT_I_ENABLE => r_out_i_enable_reading,
+      NTM_READ_HEADS_R_OUT_K_ENABLE => r_out_k_enable_reading,
 
       -- DATA
+      NTM_READ_HEADS_SIZE_R_IN => size_r_in_reading,
       NTM_READ_HEADS_SIZE_N_IN => size_n_in_reading,
       NTM_READ_HEADS_SIZE_W_IN => size_w_in_reading,
 
@@ -167,16 +175,20 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_reading,
       M_IN_K_ENABLE => m_in_k_enable_reading,
 
-      W_IN_ENABLE => w_in_enable_reading,
+      W_IN_I_ENABLE => w_in_i_enable_reading,
+      W_IN_J_ENABLE => w_in_j_enable_reading,
 
       M_OUT_J_ENABLE => m_out_j_enable_reading,
       M_OUT_K_ENABLE => m_out_k_enable_reading,
 
-      W_OUT_ENABLE => w_out_enable_reading,
+      W_OUT_I_ENABLE => w_out_i_enable_reading,
+      W_OUT_J_ENABLE => w_out_j_enable_reading,
 
-      R_OUT_ENABLE => r_out_enable_reading,
+      R_OUT_I_ENABLE => r_out_i_enable_reading,
+      R_OUT_K_ENABLE => r_out_k_enable_reading,
 
       -- DATA
+      SIZE_R_IN => size_r_in_reading,
       SIZE_N_IN => size_n_in_reading,
       SIZE_W_IN => size_w_in_reading,
 
