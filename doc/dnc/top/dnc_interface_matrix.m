@@ -51,7 +51,7 @@ function RHO_OUT = dnc_interface_matrix(U_IN, H_IN)
   % Constants
   [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
 
-  % Signals
+  % Internal Signals
   matrix_h_int = zeros(SIZE_R_IN, SIZE_L_IN);
 
   % Body

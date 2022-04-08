@@ -51,7 +51,7 @@ function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(B_IN);
 
-  % Signals
+  % Internal Signals
   matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
 
   % Body

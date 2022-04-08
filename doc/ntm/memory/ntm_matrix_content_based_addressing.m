@@ -47,6 +47,7 @@
 function C_OUT = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN)
   % Package
   addpath(genpath('../../math/algebra/vector'));
+  addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/calculus/matrix'));
 
   % Constants
@@ -54,7 +55,7 @@ function C_OUT = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN)
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % Signals
+  % Internal Signals
   matrix_beta_int = zeros(SIZE_R_IN, SIZE_N_IN);
 
   matrix_j_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);

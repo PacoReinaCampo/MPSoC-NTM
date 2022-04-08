@@ -52,7 +52,7 @@ function C_OUT = ntm_vector_content_based_addressing(K_IN, BETA_IN, M_IN)
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % Signals
+  % Internal Signals
   vector_beta_int = zeros(SIZE_N_IN, 1);
 
   vector_j_operation_int = zeros(SIZE_N_IN, 1);
@@ -68,9 +68,7 @@ function C_OUT = ntm_vector_content_based_addressing(K_IN, BETA_IN, M_IN)
       vector_k_operation_int(k) = M_IN(j, k);
     end
 
-    scalar_operation_int = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
-
-    vector_j_operation_int(j) = scalar_operation_int;
+    vector_j_operation_int(j) = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
   end
 
   vector_j_operation_int = vector_j_operation_int.*vector_beta_int;

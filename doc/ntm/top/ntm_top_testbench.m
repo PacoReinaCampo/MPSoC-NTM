@@ -69,4 +69,4 @@ Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
 % DUT
-Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, P_IN, Q_IN);
+Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN);

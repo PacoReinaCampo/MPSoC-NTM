@@ -45,18 +45,43 @@
 %}
 
 function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
+  % Package
+  addpath(genpath('../../math/algebra/vector'));
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/calculus/matrix'));
+
   % Constants
   SIZE_R_IN = length(BETA_IN);
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % Signals
-  C_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
+  % Internal Signals
+  matrix_beta_int = zeros(SIZE_R_IN, SIZE_N_IN);
+
+  matrix_j_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
+  vector_j_operation_int = zeros(SIZE_N_IN, 1);
+  vector_k_operation_int = zeros(SIZE_W_IN, 1);
 
   % Body
-  % c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+  % C(M[j,·],k,beta)[i;j] = softmax(cosine_similarity(k,M[j,·])·beta)[i;j]
 
   for i = 1:SIZE_R_IN
-    C_OUT(i, :) = dnc_content_based_addressing(K_IN(i, :), BETA_IN(i), M_IN);
+    for j = 1:SIZE_N_IN
+      matrix_beta_int(i, j) = BETA_IN(i);
+
+      for k = 1:SIZE_W_IN
+        vector_k_operation_int(k) = M_IN(j, k);
+
+        vector_j_operation_int(j) = K_IN(i, k);
+      end
+
+      scalar_operation_int = ntm_vector_cosine_similarity(vector_j_operation_int, vector_k_operation_int);
+
+      matrix_j_operation_int(i, j) = scalar_operation_int;
+    end
   end
+
+  matrix_j_operation_int = matrix_j_operation_int.*matrix_beta_int;
+
+  C_OUT = ntm_matrix_softmax(matrix_beta_int);
 end

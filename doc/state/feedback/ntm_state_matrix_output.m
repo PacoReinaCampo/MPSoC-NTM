@@ -48,7 +48,7 @@ function DATA_C_OUT = ntm_state_matrix_output(DATA_K_IN, DATA_C_IN, DATA_D_IN)
   % Package
   addpath(genpath('../../math/algebra/matrix'));
 
-  % Constans
+  % Constants
   % SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
   % SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 

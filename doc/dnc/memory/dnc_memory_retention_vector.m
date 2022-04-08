@@ -51,10 +51,10 @@ function PSI_OUT = dnc_memory_retention_vector(W_IN, F_IN)
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % Body
-  % Signals
+  % Internal Signals
   matrix_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
 
+  % Body
   % psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
   vector_operation_int = ones(SIZE_R_IN, 1) - F_IN;

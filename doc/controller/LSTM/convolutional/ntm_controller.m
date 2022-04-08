@@ -44,26 +44,26 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN)
+function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));
 
   % Body
   % a(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1,l) + b(l))
-  vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
   % f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1,l) + b(l))
-  vector_f_int = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  vector_f_int = ntm_forget_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
   % i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1,l) + b(l))
-  vector_i_int = ntm_input_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  vector_i_int = ntm_input_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
   % s(t;l) = f(t;l) o s(t-1,l) + i(t;l) o a(t;l)
   vector_s_int = ntm_state_gate_vector(S_IN, vector_i_int, vector_f_int, vector_a_int);
 
   % o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1,l) + b(l))
-  vector_o_int = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  vector_o_int = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
   % h(t;l) = o(t;l) o tanh(s(t;l))
   H_OUT = ntm_hidden_gate_vector(vector_s_int, vector_o_int);

@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function H_OUT = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));

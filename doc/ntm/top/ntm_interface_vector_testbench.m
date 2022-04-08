@@ -45,8 +45,8 @@
 %}
 
 % Constants
-SIZE_S_IN =3;
-SIZE_L_IN =3;
+SIZE_S_IN = 3;
+SIZE_L_IN = 3;
 
 % Signals
 U_IN = rand(SIZE_S_IN, SIZE_L_IN);

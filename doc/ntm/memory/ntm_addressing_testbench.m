@@ -55,6 +55,7 @@ BETA_IN = rand(SIZE_R_IN, 1);
 G_IN = rand(SIZE_R_IN, 1);
 S_IN = rand(SIZE_R_IN, SIZE_W_IN);
 GAMMA_IN = rand(SIZE_R_IN, 1);
+
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 

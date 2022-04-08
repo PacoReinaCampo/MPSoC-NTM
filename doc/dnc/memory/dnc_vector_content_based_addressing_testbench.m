@@ -44,32 +44,14 @@
 ###################################################################################
 %}
 
-function C_OUT = dnc_content_based_addressing(K_IN, BETA_IN, M_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-  addpath(genpath('../../math/calculus/vector'));
+% Constants
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
 
-  % Constants
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+% Signals
+K_IN = rand(SIZE_W_IN, 1);
+BETA_IN = rand(1);
+M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 
-  % Signals
-  vector_beta_int = BETA_IN*ones(SIZE_N_IN, 1);
-
-  vector_j_operation_int = zeros(SIZE_N_IN, 1);
-  vector_k_operation_int = zeros(SIZE_W_IN, 1);
-
-  % Body
-  % C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
-
-  for j = 1:SIZE_N_IN
-    for k = 1:SIZE_W_IN
-      vector_k_operation_int(k) = M_IN(j, k);
-    end
-    
-    vector_j_operation_int(j) = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int);
-  end
-
-  vector_j_operation_int = ntm_matrix_vector_product(vector_j_operation_int, vector_beta_int);
-
-  C_OUT = ntm_vector_softmax(vector_j_operation_int);
-end
+% DUT
+C_OUT = dnc_vector_content_based_addressing(K_IN, BETA_IN, M_IN);

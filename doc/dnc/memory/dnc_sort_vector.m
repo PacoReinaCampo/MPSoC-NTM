@@ -48,7 +48,7 @@ function PHI_OUT = dnc_sort_vector(U_IN)
   % Constants
   SIZE_IN = length(U_IN);
 
-  % Signals
+  % Internal Signals
   vector_index_int = zeros(SIZE_IN, 1);
 
   % Body

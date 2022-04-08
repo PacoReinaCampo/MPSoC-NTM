@@ -51,7 +51,7 @@ function F_OUT = dnc_forward_weighting(L_IN, W_IN)
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % Signals
+  % Internal Signals
   vector_operation_int = zeros(SIZE_R_IN, 1);
 
   % Body

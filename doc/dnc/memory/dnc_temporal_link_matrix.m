@@ -51,7 +51,7 @@ function L_OUT = dnc_temporal_link_matrix(L_IN, W_IN, P_IN)
   % Constants
   SIZE_N_IN = length(W_IN);
 
-  % Signals
+  % Internal Signals
   matrix_w_i_int = zeros(SIZE_N_IN, SIZE_N_IN);
   matrix_w_j_int = zeros(SIZE_N_IN, SIZE_N_IN);
 

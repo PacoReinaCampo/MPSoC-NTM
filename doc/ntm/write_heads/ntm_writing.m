@@ -53,11 +53,11 @@ function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
 
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
-  % Signals
+  % Internal Signals
   matrix_first_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
   % Body
-  % M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+  % M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
   for i = 1:SIZE_R_IN
     matrix_second_operation_int = ntm_transpose_vector_product(W_IN(i, :), A_IN);
 

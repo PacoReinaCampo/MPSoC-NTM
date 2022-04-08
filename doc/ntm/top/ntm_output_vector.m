@@ -50,17 +50,15 @@ function Y_OUT = ntm_output_vector(P_IN, R_IN, Q_IN, H_IN)
   addpath(genpath('../../math/algebra/tensor'));
 
   % Constants
-  [SIZE_R_IN, SIZE_W_IN] = size(R_IN);
-
-  SIZE_Y_IN = 3;
+  [SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN] = size(P_IN);
 
   % Body
   % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
-  % U(t;y;l)·h(t;l)
+  % Q(y;l)·h(t;l)
   Y_OUT = ntm_matrix_vector_product(Q_IN, H_IN);
 
-  % K(t;i;y;k)·r(t;i;k)
+  % P(i;y;k)·r(t;i;k)
   matrix_operation_int = ntm_tensor_matrix_product(P_IN, R_IN);
   
   for y = 1:SIZE_Y_IN
