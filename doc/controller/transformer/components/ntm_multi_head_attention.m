@@ -44,12 +44,36 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_multi_head_attention(W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+
+  % Constants
+  [SIZE_H_IN, SIZE_D_IN, SIZE_K_IN] = size(W_HK_IN);
+  [SIZE_H_IN, SIZE_D_IN, SIZE_Q_IN] = size(W_HQ_IN);
+  [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(W_HV_IN);
+
+  [SIZE_Z_IN, SIZE_M_IN] = size(HQ_IN);
+
+  % Internal Signals
+  hk_int = zeros(SIZE_D_IN, SIZE_K_IN);
+  hq_int = zeros(SIZE_D_IN, SIZE_Q_IN);
+  hv_int = zeros(SIZE_D_IN, SIZE_V_IN);
+
+  head_int = zeros(SIZE_M_IN, SIZE_V_IN);
+
+  multi_head_int = zeros(SIZE_M_IN, SIZE_H_IN*SIZE_V_IN);
 
   % Body
-  K_INPUT = ntm_keys_vector(W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-  Q_INPUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-  V_INPUT = ntm_values_vector(W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-  
-  Y_OUT = ntm_scaled_dot_product_attention(K_INPUT, Q_INPUT, V_INPUT, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+  for h = 1:SIZE_H_IN
+    for d = 1:SIZE_D_IN
+      hk_int(d, :) = HK_IN(h, d, :);
+      hq_int(d, :) = HQ_IN(h, d, :);
+      hv_int(d, :) = HV_IN(h, d, :);
+    end
+
+   %head_int = ntm_scaled_dot_product_attention(hk_int, hq_int, hv_int, W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+    
+    multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
+  end
+
+  Y_OUT = ntm_matrix_product(multi_head_int, W_O_IN);
 end

@@ -45,27 +45,27 @@
 %}
 
 % Constants
-SIZE_N_IN = 3;
+SIZE_Z_IN = 3;
 SIZE_D_IN = 3;
 SIZE_K_IN = 3;
 SIZE_Q_IN = 3;
 SIZE_V_IN = 3;
 SIZE_X_IN = 3;
-SIZE_Y_IN = 3;
 SIZE_W_IN = 3;
 SIZE_R_IN = 3;
-SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
-SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
+
+SIZE_P_IN = 3;
+SIZE_S_IN = 3;
 
 % Signals
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
 V_IN = rand(SIZE_D_IN, SIZE_S_IN);
-D_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_M_IN);
-X_IN = rand(SIZE_N_IN, SIZE_X_IN, 1);
-R_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
-XI_IN = rand(SIZE_N_IN, SIZE_S_IN);
-RHO_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_M_IN);
+D_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
+X_IN = rand(SIZE_Z_IN, SIZE_X_IN);
+R_IN = rand(SIZE_Z_IN, SIZE_R_IN, SIZE_W_IN);
+XI_IN = rand(SIZE_Z_IN, SIZE_S_IN);
+RHO_IN = rand(SIZE_Z_IN, SIZE_R_IN, SIZE_P_IN);
 
 % DUT
 X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

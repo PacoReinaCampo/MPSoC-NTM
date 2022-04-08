@@ -44,13 +44,17 @@
 ###################################################################################
 %}
 
-function Q_OUT = ntm_queries_vector(W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function Q_OUT = ntm_queries_vector(HQ_IN, W_HQ_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
 
   % Body
+  % Q(m;q) = transpose(Q(z;m))·X(z;d)·WQ(d;q)
+  q_int = ntm_matrix_transpose(HQ_IN);
+
   x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  % Q(n;q) = X(n;d)·W(d;q)
-  Q_OUT = ntm_matrix_product(W_HQ_IN, x_int);
+  matrix_operation_int = ntm_matrix_product(q_int, x_int);
+
+  Q_OUT = ntm_matrix_product(matrix_operation_int, W_HQ_IN);
 end

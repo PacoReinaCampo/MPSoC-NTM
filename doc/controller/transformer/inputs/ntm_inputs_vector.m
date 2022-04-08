@@ -50,49 +50,49 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
   addpath(genpath('../../../math/algebra/tensor'));
 
   % Constants
-  SIZE_N_IN = 3;
+  SIZE_Z_IN = 3;
   SIZE_D_IN = 3;
   SIZE_X_IN = 3;
   SIZE_W_IN = 3;
   SIZE_R_IN = 3;
 
-  SIZE_M_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
-  SIZE_S_IN = SIZE_N_IN + 3*SIZE_W_IN + 3;
+  SIZE_P_IN = 3;
+  SIZE_S_IN = 3;
 
   % Signals
   x_int = zeros(SIZE_X_IN, 1);
   r_int = zeros(SIZE_R_IN, SIZE_W_IN);
-  rho_int = zeros(SIZE_R_IN, SIZE_M_IN);
+  rho_int = zeros(SIZE_R_IN, SIZE_P_IN);
   xi_int = zeros(SIZE_S_IN, 1);
 
-  X_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
+  X_OUT = zeros(SIZE_Z_IN, SIZE_D_IN);
 
   % Body
-  % X(n;d) = W(d;x)·x(n;x) + K(i;d;k)·r(n;i;k) + D(i;d;m)·rho(n;i;m) + V(d;s)·xi(n;s)
+  % X(z;d) = W(d;x)·x(z;x) + K(i;d;k)·r(z;i;k) + D(i;d;p)·rho(z;i;p) + V(d;s)·xi(z;s)
 
-  for n = 1:SIZE_N_IN
+  for z = 1:SIZE_Z_IN
     for x = 1:SIZE_X_IN
-      x_int(x) = X_IN(n, x);
+      x_int(x) = X_IN(z, x);
     end
 
     for i = 1:SIZE_R_IN
       for k = 1:SIZE_W_IN
-        r_int(i, k) = R_IN(n, i, k);
+        r_int(i, k) = R_IN(z, i, k);
       end
 
-      for m = 1:SIZE_M_IN
-        rho_int(i, m) = RHO_IN(n, i, m);
+      for m = 1:SIZE_P_IN
+        rho_int(i, m) = RHO_IN(z, i, m);
       end
     end
 
     for s = 1:SIZE_S_IN
-      xi_int(x) = XI_IN(n, s);
+      xi_int(x) = XI_IN(z, s);
     end
 
-    % W(d;x)·x(n;x)
+    % W(d;x)·x(z;x)
     vector_first_operation_int = ntm_matrix_vector_product(W_IN, x_int);
 
-    % K(i;d;k)·r(n;i;k)
+    % K(i;d;k)·r(z;i;k)
     matrix_operation_int = ntm_tensor_matrix_product(K_IN, r_int);
 
     for d = 1:SIZE_D_IN
@@ -101,7 +101,7 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
       end
     end
 
-    % D(i;d;m)·rho(n;i;m)
+    % D(i;d;p)·rho(z;i;p)
     matrix_operation_int = ntm_tensor_matrix_product(D_IN, rho_int);
 
     for d = 1:SIZE_D_IN
@@ -110,9 +110,9 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
       end
     end
 
-    % V(d;s)·xi(n;s)
+    % V(d;s)·xi(z;s)
     vector_second_operation_int = ntm_matrix_vector_product(V_IN, xi_int);
 
-    X_OUT(n, :) = vector_first_operation_int + vector_second_operation_int;
+    X_OUT(z, :) = vector_first_operation_int + vector_second_operation_int;
   end
 end
