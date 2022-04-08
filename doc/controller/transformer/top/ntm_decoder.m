@@ -46,11 +46,13 @@
 
 function Y_OUT = ntm_decoder(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN)
 
-  Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-
+  % Internal Signals
   Z_IN = rand(3, 1);
   GAMMA_IN = rand(3, 1);
   BETA_IN = rand(3, 1); 
+
+  % Body
+  Y_OUT = ntm_multi_head_attention(W_IN, K_IN, U_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
   N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);
 

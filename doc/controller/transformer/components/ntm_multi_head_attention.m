@@ -45,7 +45,6 @@
 %}
 
 function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
-
   % Constants
   [SIZE_H_IN, SIZE_D_IN, SIZE_K_IN] = size(W_HK_IN);
   [SIZE_H_IN, SIZE_D_IN, SIZE_Q_IN] = size(W_HQ_IN);
@@ -54,23 +53,21 @@ function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN,
   [SIZE_Z_IN, SIZE_M_IN] = size(HQ_IN);
 
   % Internal Signals
-  hk_int = zeros(SIZE_D_IN, SIZE_K_IN);
-  hq_int = zeros(SIZE_D_IN, SIZE_Q_IN);
-  hv_int = zeros(SIZE_D_IN, SIZE_V_IN);
-
-  head_int = zeros(SIZE_M_IN, SIZE_V_IN);
+  w_hk_int = zeros(SIZE_D_IN, SIZE_K_IN);
+  w_hq_int = zeros(SIZE_D_IN, SIZE_Q_IN);
+  w_hv_int = zeros(SIZE_D_IN, SIZE_V_IN);
 
   multi_head_int = zeros(SIZE_M_IN, SIZE_H_IN*SIZE_V_IN);
 
   % Body
   for h = 1:SIZE_H_IN
     for d = 1:SIZE_D_IN
-      hk_int(d, :) = HK_IN(h, d, :);
-      hq_int(d, :) = HQ_IN(h, d, :);
-      hv_int(d, :) = HV_IN(h, d, :);
+      w_hk_int(d, :) = W_HK_IN(h, d, :);
+      w_hq_int(d, :) = W_HQ_IN(h, d, :);
+      w_hv_int(d, :) = W_HV_IN(h, d, :);
     end
 
-   %head_int = ntm_scaled_dot_product_attention(hk_int, hq_int, hv_int, W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+    head_int = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, w_hk_int, w_hq_int, w_hv_int, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
     
     multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
   end
