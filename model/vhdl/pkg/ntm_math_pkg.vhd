@@ -3500,7 +3500,7 @@ package body ntm_math_pkg is
 
             matrix_output(i, j) := function_scalar_float_divider (
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => LENGTH_IN
+              scalar_b_input => LENGTH_I_IN
               );
           end if;
         elsif (CONTROL = '1') then
@@ -3516,7 +3516,7 @@ package body ntm_math_pkg is
 
             matrix_output(i, j) := function_scalar_float_divider (
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => LENGTH_IN
+              scalar_b_input => LENGTH_J_IN
               );
           end if;
         end if;
