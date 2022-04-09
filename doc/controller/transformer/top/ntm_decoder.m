@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function Y_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
   % Package
   addpath(genpath('../components'));
   addpath(genpath('../functions'));
