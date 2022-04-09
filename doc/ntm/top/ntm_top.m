@@ -59,7 +59,7 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN)
   % Constants
   [SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN] = size(P_IN);
 
-  [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
+  [SIZE_T_IN, ~] = size(X_IN);
 
   SIZE_L_IN = length(B_IN);
 

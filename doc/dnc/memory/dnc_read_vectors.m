@@ -50,7 +50,7 @@ function R_OUT = dnc_read_vectors(M_IN, W_IN)
 
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
-  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
+  [SIZE_R_IN, ~] = size(W_IN);
 
   % Internal Signals
   vector_operation_int = zeros(SIZE_N_IN, 1);

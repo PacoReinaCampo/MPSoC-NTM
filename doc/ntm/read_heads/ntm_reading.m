@@ -51,7 +51,7 @@ function R_OUT = ntm_reading(W_IN, M_IN)
 
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
-  [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
+  [~, SIZE_W_IN] = size(M_IN);
 
   % Internal Signals
   matrix_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);

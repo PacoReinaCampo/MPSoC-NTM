@@ -50,7 +50,7 @@ function Y_OUT = dnc_output_vector(P_IN, R_IN, Q_IN, H_IN)
   addpath(genpath('../../math/algebra/tensor'));
 
   % Constants
-  [SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN] = size(P_IN);
+  [SIZE_R_IN, SIZE_Y_IN, ~] = size(P_IN);
 
   % Body
   % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)

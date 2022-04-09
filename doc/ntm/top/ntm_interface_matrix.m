@@ -49,7 +49,7 @@ function RHO_OUT = ntm_interface_matrix(U_IN, H_IN)
   addpath(genpath('../../math/algebra/tensor'));
 
   % Constants
-  [SIZE_R_IN, SIZE_M_IN, SIZE_L_IN] = size(U_IN);
+  [SIZE_R_IN, ~, SIZE_L_IN] = size(U_IN);
 
   % Internal Signals
   matrix_h_int = zeros(SIZE_R_IN, SIZE_L_IN);

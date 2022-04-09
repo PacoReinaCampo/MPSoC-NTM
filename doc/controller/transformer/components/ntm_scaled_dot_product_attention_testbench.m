@@ -77,4 +77,5 @@ R_IN = rand(SIZE_Z_IN, SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_Z_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_Z_IN, SIZE_R_IN, SIZE_P_IN);
 
+% DUT
 U_OUT = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

@@ -83,5 +83,5 @@ function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
 
   matrix_j_operation_int = matrix_j_operation_int.*matrix_beta_int;
 
-  C_OUT = ntm_matrix_softmax(matrix_beta_int);
+  C_OUT = ntm_matrix_softmax(matrix_j_operation_int);
 end

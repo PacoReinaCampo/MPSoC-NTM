@@ -49,10 +49,15 @@ function Y_OUT = ntm_positional_encoding(X_IN)
   SIZE_D_IN = 3;
   SIZE_K_IN = 3;
 
+  % Output Signals
+  Y_OUT = zeros(SIZE_D_IN, 1);
+
   % Body
-  if ((-1).^X_IN == 0)
-    Y_OUT = sin(SIZE_K_IN/10000.^(2*X_IN/SIZE_D_IN));
-  else
-    Y_OUT = cos(SIZE_K_IN/10000.^(2*X_IN/SIZE_D_IN));
+  for d = 1:SIZE_D_IN
+    if ((-1)^X_IN(d) == 0)
+      Y_OUT(d) = sin(SIZE_K_IN/10000.^(2*X_IN(d)/SIZE_D_IN));
+    else
+      Y_OUT(d) = cos(SIZE_K_IN/10000.^(2*X_IN(d)/SIZE_D_IN));
+    end
   end
 end

@@ -46,11 +46,11 @@
 
 function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
   % Constants
-  [SIZE_H_IN, SIZE_D_IN, SIZE_K_IN] = size(W_HK_IN);
-  [SIZE_H_IN, SIZE_D_IN, SIZE_Q_IN] = size(W_HQ_IN);
+  [~, ~, SIZE_K_IN] = size(W_HK_IN);
+  [~, ~, SIZE_Q_IN] = size(W_HQ_IN);
   [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(W_HV_IN);
 
-  [SIZE_Z_IN, SIZE_M_IN] = size(HQ_IN);
+  [~, SIZE_M_IN] = size(HQ_IN);
 
   % Internal Signals
   w_hk_int = zeros(SIZE_D_IN, SIZE_K_IN);

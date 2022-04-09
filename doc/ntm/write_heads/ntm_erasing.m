@@ -51,7 +51,7 @@ function M_OUT = ntm_erasing(M_IN, W_IN, E_IN)
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
+  [SIZE_R_IN, ~] = size(W_IN);
 
   % Body
   % M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))

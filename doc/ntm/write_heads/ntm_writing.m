@@ -51,7 +51,7 @@ function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
+  [SIZE_R_IN, ~] = size(W_IN);
 
   % Internal Signals
   matrix_first_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);

@@ -50,7 +50,7 @@ function A_OUT = ntm_activation_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, 
   addpath(genpath('../../../math/algebra/tensor'));
 
   % Constants
-  [SIZE_R_IN, SIZE_L_IN, SIZE_W_IN] = size(K_IN);
+  [SIZE_R_IN, SIZE_L_IN, ~] = size(K_IN);
 
   % Body
   % a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))

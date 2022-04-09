@@ -52,9 +52,7 @@ function U_OUT = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, 
   addpath(genpath('../inputs'));
 
   % Constants
-  [SIZE_D_IN, SIZE_K_IN] = size(W_HK_IN);
-
-  [SIZE_N_IN, SIZE_X_IN] = size(X_IN);
+  [~, SIZE_K_IN] = size(W_HK_IN);
 
   % Body
   k_int = ntm_keys_vector(HK_IN, W_HK_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

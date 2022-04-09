@@ -51,6 +51,9 @@ function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 
+  % Internal Signals
+  vector_operation_int = zeros(SIZE_N_IN, 1);
+
   % Output Signals
   W_OUT = zeros(SIZE_R_IN, SIZE_N_IN);
 
