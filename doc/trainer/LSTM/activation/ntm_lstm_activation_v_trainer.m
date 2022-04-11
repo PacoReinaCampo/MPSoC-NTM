@@ -67,12 +67,10 @@ function V_OUT = ntm_lstm_activation_v_trainer(XI_IN, A_IN, I_IN, F_IN, O_IN, S_
   vector_da_int = vector_ds_int.*I_IN.*(1-A_IN).^2;
 
   % dV(l;s) = summation(da(t;l) · xi(t;s))[t in 0 to T-1]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_da_int, LENGTH_IN);
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for s = 1:SIZE_S_IN
-        scalar_operation_int = vector_dh_int(t, l)*XI_IN(t, s);
+        scalar_operation_int = vector_da_int(t, l)*XI_IN(t, s);
 
         V_OUT(l, s) = V_OUT(l, s) + scalar_operation_int;
       end

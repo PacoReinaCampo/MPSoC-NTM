@@ -61,11 +61,10 @@ function U_OUT = ntm_lstm_output_u_trainer(O_IN, S_IN, H_IN, LENGTH_IN)
   vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
   % dU(l;m) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for m = 1:SIZE_L_IN
-        scalar_operation_int = vector_dh_int(t, l)*H_IN(t, m);
+        scalar_operation_int = vector_do_int(t, l)*H_IN(t, m);
 
         U_OUT(l, m) = U_OUT(l, m) + scalar_operation_int;
       end

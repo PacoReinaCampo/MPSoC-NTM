@@ -55,4 +55,4 @@ DATA_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_L_IN);
 LENGTH_IN = 3;
 
 % DUT
-DATA_OUT = ntm_vector_controller_differentiation(DATA_IN, LENGTH_IN);
+DATA_OUT = ntm_matrix_controller_differentiation(DATA_IN, LENGTH_IN);

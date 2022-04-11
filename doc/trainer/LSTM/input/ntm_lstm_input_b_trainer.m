@@ -65,11 +65,9 @@ function B_OUT = ntm_lstm_input_b_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LE
   vector_di_int = vector_ds_int.*A_IN.*I_IN.*(1-I_IN);
 
   % db(l) = summation(di(t+1+;l))[t in 0 to T]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_di_int, LENGTH_IN);
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
-      scalar_operation_int = vector_dh_int(t, l);
+      scalar_operation_int = vector_di_int(t, l);
 
       B_OUT(l) = B_OUT(l) + scalar_operation_int;
     end

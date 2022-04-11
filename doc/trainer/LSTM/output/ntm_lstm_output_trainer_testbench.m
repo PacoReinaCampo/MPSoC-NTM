@@ -50,18 +50,20 @@ SIZE_W_IN = 3;
 SIZE_L_IN = 3;
 SIZE_R_IN = 3;
 
+SIZE_M_IN = 3;
+SIZE_S_IN = 3;
+
 % Signals
 X_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_W_IN);
 R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-XO_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_H_IN);
+XI_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
 
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
 O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 H_IN = rand(SIZE_T_IN, SIZE_L_IN);
-H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-[W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_output_trainer(X_IN, R_IN, XO_IN, RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+[W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_output_trainer(X_IN, R_IN, XI_IN, RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN);

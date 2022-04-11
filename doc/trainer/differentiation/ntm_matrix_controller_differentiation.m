@@ -44,13 +44,11 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_vector_controller_differentiation(DATA_IN, LENGTH_IN)
+function DATA_OUT = ntm_matrix_controller_differentiation(DATA_IN, LENGTH_IN)
   % Constants
   [SIZE_T_IN, SIZE_R_IN, SIZE_L_IN] = size(DATA_IN);
 
-  % Signals
-  scalar_operation_int = 0;
-
+  % Output Signals
   DATA_OUT = zeros(SIZE_T_IN, SIZE_R_IN, SIZE_L_IN);
 
   % Body

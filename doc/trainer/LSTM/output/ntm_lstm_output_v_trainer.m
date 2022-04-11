@@ -44,17 +44,17 @@
 ###################################################################################
 %}
 
-function V_OUT = ntm_lstm_output_v_trainer(XO_IN, O_IN, S_IN, H_IN, LENGTH_IN)
+function V_OUT = ntm_lstm_output_v_trainer(XI_IN, O_IN, S_IN, H_IN, LENGTH_IN)
   % Package
   addpath(genpath('../differentiation'));
 
   % Constants
-  [SIZE_T_IN, SIZE_H_IN] = size(XO_IN);
+  [SIZE_T_IN, SIZE_S_IN] = size(XI_IN);
 
   [~, SIZE_L_IN] = size(S_IN);
 
   % Output Signals
-  V_OUT = zeros(SIZE_L_IN, SIZE_H_IN);
+  V_OUT = zeros(SIZE_L_IN, SIZE_S_IN);
 
   % Body
   % do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
@@ -63,11 +63,10 @@ function V_OUT = ntm_lstm_output_v_trainer(XO_IN, O_IN, S_IN, H_IN, LENGTH_IN)
   vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
   % dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T-1]
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
-      for s = 1:SIZE_H_IN
-        scalar_operation_int = vector_dh_int(t, l)*XO_IN(t, s);
+      for s = 1:SIZE_S_IN
+        scalar_operation_int = vector_do_int(t, l)*XI_IN(t, s);
 
         V_OUT(l, s) = V_OUT(l, s) + scalar_operation_int;
       end

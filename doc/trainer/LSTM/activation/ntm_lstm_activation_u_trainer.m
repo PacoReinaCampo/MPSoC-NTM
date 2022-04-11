@@ -65,12 +65,10 @@ function U_OUT = ntm_lstm_activation_u_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_I
   vector_da_int = vector_ds_int.*I_IN.*(1-A_IN).^2;
 
   % dU(l;m) = summation(da(t+1;l) · h(t;l))[t in 0 to T-1]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_da_int, LENGTH_IN);
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for m = 1:SIZE_L_IN
-        scalar_operation_int = vector_dh_int(t, l)*H_IN(t, m);
+        scalar_operation_int = vector_da_int(t, l)*H_IN(t, m);
 
         U_OUT(l, m) = U_OUT(l, m) + scalar_operation_int;
       end

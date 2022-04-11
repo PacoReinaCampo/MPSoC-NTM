@@ -61,10 +61,9 @@ function B_OUT = ntm_lstm_output_b_trainer(O_IN, S_IN, H_IN, LENGTH_IN)
   vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
   % db(l) = summation(do(t+1+;l))[t in 0 to T]
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
-      scalar_operation_int = vector_dh_int(t, l);
+      scalar_operation_int = vector_do_int(t, l);
 
       B_OUT(l) = B_OUT(l) + scalar_operation_int;
     end

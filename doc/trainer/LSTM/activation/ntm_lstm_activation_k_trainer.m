@@ -67,13 +67,11 @@ function K_OUT = ntm_lstm_activation_k_trainer(R_IN, A_IN, I_IN, F_IN, O_IN, S_I
   vector_da_int = vector_ds_int.*I_IN.*(1-A_IN).^2;
 
   % dK(l;i;k) = summation(da(t;l) · r(t;i;k))[t in 0 to T-1]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_da_int, LENGTH_IN);
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for i = 1:SIZE_R_IN
         for k = 1:SIZE_W_IN
-          scalar_operation_int = vector_dh_int(t, l)*R_IN(t, i, k);
+          scalar_operation_int = vector_da_int(t, l)*R_IN(t, i, k);
 
           K_OUT(l, i, k) = K_OUT(l, i, k) + scalar_operation_int;
         end

@@ -46,7 +46,7 @@
 
 function [W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_fnn_trainer(X_IN, R_IN, XI_IN, RHO_IN, H_IN, LENGTH_IN)
   % Body
-  W_OUT = ntm_fnn_v_trainer(X_IN, H_IN, LENGTH_IN);
+  W_OUT = ntm_fnn_w_trainer(X_IN, H_IN, LENGTH_IN);
   K_OUT = ntm_fnn_k_trainer(R_IN, H_IN, LENGTH_IN);
   V_OUT = ntm_fnn_v_trainer(XI_IN, H_IN, LENGTH_IN);
   D_OUT = ntm_fnn_d_trainer(RHO_IN, H_IN, LENGTH_IN);

@@ -63,11 +63,10 @@ function W_OUT = ntm_lstm_output_w_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN)
   vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
   % dW(l;x) = summation(do(t;l) · x(t;x))[t in 0 to T]
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for x = 1:SIZE_X_IN
-        scalar_operation_int = vector_dh_int(t, l)*X_IN(t, x);
+        scalar_operation_int = vector_do_int(t, l)*X_IN(t, x);
 
         W_OUT(l, x) = W_OUT(l, x) + scalar_operation_int;
       end

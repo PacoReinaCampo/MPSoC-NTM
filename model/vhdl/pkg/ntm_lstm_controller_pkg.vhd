@@ -49,10 +49,12 @@ package ntm_lstm_controller_pkg is
   -----------------------------------------------------------------------
 
   type trainer_output is record
-    tensor_k_output : array4_buffer;
-    matrix_u_output : tensor_buffer;
-    matrix_v_output : tensor_buffer;
-    tensor_d_output : array4_buffer;
+    matrix_w_output : matrix_buffer;
+    tensor_k_output : tensor_buffer;
+    matrix_v_output : matrix_buffer;
+    tensor_d_output : tensor_buffer;
+    matrix_u_output : matrix_buffer;
+    vector_b_output : vector_buffer;
   end record trainer_output;
 
   -----------------------------------------------------------------------
@@ -1368,7 +1370,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_activation_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1388,7 +1390,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_activation_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1408,7 +1410,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_activation_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1428,7 +1430,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_activation_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1448,7 +1450,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_activation_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1509,7 +1511,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_forget_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1528,7 +1530,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_forget_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1547,7 +1549,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_forget_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1566,7 +1568,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_forget_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1585,7 +1587,7 @@ package ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_forget_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1645,7 +1647,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_input_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1665,7 +1667,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_input_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1685,7 +1687,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_input_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1705,7 +1707,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_input_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1725,7 +1727,7 @@ package ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_input_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1786,7 +1788,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_output_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1805,7 +1807,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_output_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1824,7 +1826,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_output_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1843,7 +1845,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_lstm_output_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1862,7 +1864,7 @@ package ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_lstm_output_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -3625,14 +3627,14 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_w_output : tensor_buffer;
+    variable matrix_w_output : matrix_buffer;
 
   begin
 
@@ -3641,7 +3643,7 @@ package body ntm_lstm_controller_pkg is
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
+          matrix_w_output(l, x) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -3681,7 +3683,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dW(t;l) = summation(da(t;l) · x(t;x))[t in 0 to T]
+    -- dW(l;x) = summation(da(t;l) · x(t;x))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -3691,11 +3693,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-          matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_w_output(t, l, x)
+            scalar_b_input => matrix_w_output(l, x)
             );
         end loop;
       end loop;
@@ -3722,25 +3724,23 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_k_output : array4_buffer;
+    variable tensor_k_output : tensor_buffer;
 
   begin
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_k_output(l, i, k) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -3780,7 +3780,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dK(t;l;i;k) = summation(da(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(l;i;k) = summation(da(t;l) · r(t;i;k))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -3791,11 +3791,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_k_output(t, l, i, k)
+              scalar_b_input => tensor_k_output(l, i, k)
               );
           end loop;
         end loop;
@@ -3823,24 +3823,22 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_u_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
 
   begin
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_u_output(l, m) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -3879,7 +3877,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dU(t;l;m) = summation(da(t+1;l) · h(t;m))[t in 0 to T-1]
+    -- dU(l;m) = summation(da(t+1;l) · h(t;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -3889,11 +3887,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-          matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_u_output(t, l, m)
+            scalar_b_input => matrix_u_output(l, m)
             );
         end loop;
       end loop;
@@ -3920,25 +3918,23 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_d_output : array4_buffer;
+    variable tensor_d_output : tensor_buffer;
 
   begin
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-            tensor_d_output(t, l, i, m) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
+          tensor_d_output(l, i, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -3978,7 +3974,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dD(t;l;i;m) = summation(da(t;l) · rho(t;i;m))[t in 0 to T-1]
+    -- dD(l;i;m) = summation(da(t;l) · rho(t;i;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -3989,11 +3985,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_rho_input(t, i, m)
               );
 
-            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+            tensor_d_output(l, i, m) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_d_output(t, l, i, m)
+              scalar_b_input => tensor_d_output(l, i, m)
               );
           end loop;
         end loop;
@@ -4021,24 +4017,22 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_da_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_v_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
 
   begin
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-          matrix_v_output(t, l, s) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+        matrix_v_output(l, s) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -4077,7 +4071,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dW(t;l) = summation(da(t;l) · xi(t;s))[t in 0 to T]
+    -- dW(l;x) = summation(da(t;l) · xi(t;s))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4087,11 +4081,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_xi_input(t, s)
             );
 
-          matrix_v_output(t, l, s) := function_scalar_float_adder (
+          matrix_v_output(l, s) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_v_output(t, l, s)
+            scalar_b_input => matrix_v_output(l, s)
             );
         end loop;
       end loop;
@@ -4201,10 +4195,12 @@ package body ntm_lstm_controller_pkg is
     ) return trainer_output is
 
     -- Trainer Variable
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
+    variable matrix_w_output : matrix_buffer;
+    variable tensor_k_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
+    variable matrix_v_output : matrix_buffer;
+    variable tensor_d_output : tensor_buffer;
+    variable vector_b_output : vector_buffer;
 
     variable trainer_lstm_output : trainer_output;
 
@@ -4212,7 +4208,7 @@ package body ntm_lstm_controller_pkg is
 
     -- TRAINER_STATE
 
-    tensor_k_output := function_ntm_lstm_activation_k_trainer (
+    matrix_w_output := function_ntm_lstm_activation_w_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -4232,7 +4228,7 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
-    matrix_u_output := function_ntm_lstm_activation_u_trainer (
+    tensor_k_output := function_ntm_lstm_activation_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -4292,10 +4288,52 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
+    matrix_u_output := function_ntm_lstm_activation_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_i_input => vector_i_input,
+      vector_s_input => vector_s_input
+      );
+
+    vector_b_output := function_ntm_lstm_activation_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_i_input => vector_i_input,
+      vector_s_input => vector_s_input
+      );
+
+    trainer_lstm_output.matrix_w_output := matrix_w_output;
     trainer_lstm_output.tensor_k_output := tensor_k_output;
-    trainer_lstm_output.matrix_u_output := matrix_u_output;
     trainer_lstm_output.matrix_v_output := matrix_v_output;
     trainer_lstm_output.tensor_d_output := tensor_d_output;
+    trainer_lstm_output.matrix_u_output := matrix_u_output;
+    trainer_lstm_output.vector_b_output := vector_b_output;
 
     return trainer_lstm_output;
 
@@ -4318,14 +4356,14 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_w_output : tensor_buffer;
+    variable matrix_w_output : matrix_buffer;
 
   begin
 
@@ -4334,7 +4372,7 @@ package body ntm_lstm_controller_pkg is
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
+          matrix_w_output(l, x) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -4374,7 +4412,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dV(t;l;x) = summation(df(t;l) · x(t;x))[t in 0 to T]
+    -- dW(l;x) = summation(df(t;l) · x(t;x))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4384,11 +4422,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-          matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_w_output(t, l, x)
+            scalar_b_input => matrix_w_output(l, x)
             );
         end loop;
       end loop;
@@ -4414,25 +4452,23 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_k_output : array4_buffer;
+    variable tensor_k_output : tensor_buffer;
 
   begin
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_k_output(l, i, k) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -4472,7 +4508,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dK(t;l;i;k) = summation(df(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(l;i;k) = summation(df(t;l) · r(t;i;k))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4483,11 +4519,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_k_output(t, l, i, k)
+              scalar_b_input => tensor_k_output(l, i, k)
               );
           end loop;
         end loop;
@@ -4514,14 +4550,14 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_u_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
 
   begin
 
@@ -4530,7 +4566,7 @@ package body ntm_lstm_controller_pkg is
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
+          matrix_u_output(l, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -4570,7 +4606,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dU(t;l;m) = summation(df(t+1;l) · h(t;m))[t in 0 to T-1]
+    -- dU(l;m) = summation(df(t+1;l) · h(t;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4580,11 +4616,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-          matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_u_output(t, l, m)
+            scalar_b_input => matrix_u_output(l, m)
             );
         end loop;
       end loop;
@@ -4610,24 +4646,22 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_v_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
 
   begin
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-          matrix_v_output(t, l, s) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+        matrix_v_output(l, s) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -4666,7 +4700,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dV(t;l;s) = summation(df(t;l) · xi(t;s))[t in 0 to T]
+    -- dV(l;s) = summation(df(t;l) · xi(t;s))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4676,11 +4710,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_xi_input(t, s)
             );
 
-          matrix_v_output(t, l, s) := function_scalar_float_adder (
+          matrix_v_output(l, s) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_v_output(t, l, s)
+            scalar_b_input => matrix_v_output(l, s)
             );
         end loop;
       end loop;
@@ -4706,25 +4740,23 @@ package body ntm_lstm_controller_pkg is
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_df_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_d_output : array4_buffer;
+    variable tensor_d_output : tensor_buffer;
 
   begin
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-            tensor_d_output(t, l, i, m) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
+          tensor_d_output(l, i, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -4764,7 +4796,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dD(t;l;i;m) = summation(df(t;l) · rho(t;i;m))[t in 0 to T-1]
+    -- dD(l;i;m) = summation(df(t;l) · rho(t;i;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -4775,11 +4807,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_rho_input(t, i, m)
               );
 
-            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+            tensor_d_output(l, i, m) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_d_output(t, l, i, m)
+              scalar_b_input => tensor_d_output(l, i, m)
               );
           end loop;
         end loop;
@@ -4888,10 +4920,12 @@ package body ntm_lstm_controller_pkg is
     ) return trainer_output is
 
     -- Trainer Variable
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
+    variable matrix_w_output : matrix_buffer;
+    variable tensor_k_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
+    variable matrix_v_output : matrix_buffer;
+    variable tensor_d_output : tensor_buffer;
+    variable vector_b_output : vector_buffer;
 
     variable trainer_lstm_output : trainer_output;
 
@@ -4899,7 +4933,7 @@ package body ntm_lstm_controller_pkg is
 
     -- TRAINER_STATE
 
-    tensor_k_output := function_ntm_lstm_forget_k_trainer (
+    matrix_w_output := function_ntm_lstm_forget_w_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -4918,7 +4952,7 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
-    matrix_u_output := function_ntm_lstm_forget_u_trainer (
+    tensor_k_output := function_ntm_lstm_forget_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -4975,10 +5009,50 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
+    matrix_u_output := function_ntm_lstm_forget_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_f_input => vector_f_input,
+      vector_s_input => vector_s_input
+      );
+
+    vector_b_output := function_ntm_lstm_forget_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_f_input => vector_f_input,
+      vector_s_input => vector_s_input
+      );
+
+    trainer_lstm_output.matrix_w_output := matrix_w_output;
     trainer_lstm_output.tensor_k_output := tensor_k_output;
-    trainer_lstm_output.matrix_u_output := matrix_u_output;
     trainer_lstm_output.matrix_v_output := matrix_v_output;
     trainer_lstm_output.tensor_d_output := tensor_d_output;
+    trainer_lstm_output.matrix_u_output := matrix_u_output;
+    trainer_lstm_output.vector_b_output := vector_b_output;
 
     return trainer_lstm_output;
 
@@ -5002,14 +5076,14 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_w_output : tensor_buffer;
+    variable matrix_w_output : matrix_buffer;
 
   begin
 
@@ -5018,7 +5092,7 @@ package body ntm_lstm_controller_pkg is
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
+          matrix_w_output(l, x) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -5058,7 +5132,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
+    -- dW(l;x) = summation(di(t;l) · x(t;x))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5068,11 +5142,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-          matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_w_output(t, l, x)
+            scalar_b_input => matrix_w_output(l, x)
             );
         end loop;
       end loop;
@@ -5099,25 +5173,23 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_k_output : array4_buffer;
+    variable tensor_k_output : tensor_buffer;
 
   begin
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_k_output(l, i, k) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -5157,7 +5229,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dK(t;l;i;k) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(l;i;k) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5168,11 +5240,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_k_output(t, l, i, k)
+              scalar_b_input => tensor_k_output(l, i, k)
               );
           end loop;
         end loop;
@@ -5200,14 +5272,14 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_u_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
 
   begin
 
@@ -5216,7 +5288,7 @@ package body ntm_lstm_controller_pkg is
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
         for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
+          matrix_u_output(l, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -5256,7 +5328,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dU(t;l;m) = summation(di(t+1;l) · h(t;m))[t in 0 to T-1]
+    -- dU(l;m) = summation(di(t+1;l) · h(t;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5266,11 +5338,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-          matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_u_output(t, l, m)
+            scalar_b_input => matrix_u_output(l, m)
             );
         end loop;
       end loop;
@@ -5297,24 +5369,22 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable matrix_v_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
 
   begin
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-          matrix_v_output(t, l, s) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+        matrix_v_output(l, s) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -5353,7 +5423,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dV(t;l) = summation(di(t;l) · xi(t;s))[t in 0 to T]
+    -- dV(l;s) = summation(di(t;l) · xi(t;s))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5363,11 +5433,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_xi_input(t, s)
             );
 
-          matrix_v_output(t, l, s) := function_scalar_float_adder (
+          matrix_v_output(l, s) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_v_output(t, l, s)
+            scalar_b_input => matrix_v_output(l, s)
             );
         end loop;
       end loop;
@@ -5394,25 +5464,23 @@ package body ntm_lstm_controller_pkg is
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
     vector_s_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_di_int : matrix_buffer;
     variable vector_ds_int : matrix_buffer;
 
-    variable tensor_d_output : array4_buffer;
+    variable tensor_d_output : tensor_buffer;
 
   begin
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-            tensor_d_output(t, l, i, m) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
+          tensor_d_output(l, i, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -5452,7 +5520,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dD(t;l;i;m) = summation(di(t;l) · rho(t;i;m))[t in 0 to T-1]
+    -- dD(l;i;m) = summation(di(t;l) · rho(t;i;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5463,11 +5531,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_rho_input(t, i, m)
               );
 
-            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+            tensor_d_output(l, i, m) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_d_output(t, l, i, m)
+              scalar_b_input => tensor_d_output(l, i, m)
               );
           end loop;
         end loop;
@@ -5578,10 +5646,12 @@ package body ntm_lstm_controller_pkg is
     ) return trainer_output is
 
     -- Trainer Variable
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
+    variable matrix_w_output : matrix_buffer;
+    variable tensor_k_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
+    variable matrix_v_output : matrix_buffer;
+    variable tensor_d_output : tensor_buffer;
+    variable vector_b_output : vector_buffer;
 
     variable trainer_lstm_output : trainer_output;
 
@@ -5589,7 +5659,7 @@ package body ntm_lstm_controller_pkg is
 
     -- TRAINER_STATE
 
-    tensor_k_output := function_ntm_lstm_input_k_trainer (
+    matrix_w_output := function_ntm_lstm_input_w_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -5609,7 +5679,7 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
-    matrix_u_output := function_ntm_lstm_input_u_trainer (
+    tensor_k_output := function_ntm_lstm_input_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -5669,16 +5739,161 @@ package body ntm_lstm_controller_pkg is
       vector_s_input => vector_s_input
       );
 
+    matrix_u_output := function_ntm_lstm_input_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_i_input => vector_i_input,
+      vector_s_input => vector_s_input
+      );
+
+    vector_b_output := function_ntm_lstm_input_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_i_input => vector_i_input,
+      vector_s_input => vector_s_input
+      );
+
+    trainer_lstm_output.matrix_w_output := matrix_w_output;
     trainer_lstm_output.tensor_k_output := tensor_k_output;
-    trainer_lstm_output.matrix_u_output := matrix_u_output;
     trainer_lstm_output.matrix_v_output := matrix_v_output;
     trainer_lstm_output.tensor_d_output := tensor_d_output;
+    trainer_lstm_output.matrix_u_output := matrix_u_output;
+    trainer_lstm_output.vector_b_output := vector_b_output;
 
     return trainer_lstm_output;
 
   end function function_ntm_lstm_input_trainer;
 
   function function_ntm_lstm_output_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input   : matrix_buffer;
+    matrix_r_input   : tensor_buffer;
+    vector_xi_input  : matrix_buffer;
+    matrix_rho_input : tensor_buffer;
+    vector_h_input   : matrix_buffer;
+
+    vector_a_input : matrix_buffer;
+    vector_o_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable scalar_first_operation_int  : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_second_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_dh_int : matrix_buffer;
+    variable vector_do_int : matrix_buffer;
+
+    variable matrix_w_output : matrix_buffer;
+
+  begin
+
+    -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+          matrix_w_output(l, x) := ZERO_DATA;
+        end loop;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        scalar_first_operation_int := function_scalar_float_adder (
+          OPERATION => '1',
+
+          scalar_a_input => ONE_DATA,
+          scalar_b_input => vector_o_input(t, l)
+          );
+
+        scalar_first_operation_int := function_scalar_float_multiplier (
+          scalar_a_input => vector_o_input(t, l),
+          scalar_b_input => scalar_first_operation_int
+          );
+
+        scalar_second_operation_int := function_scalar_tanh (
+          scalar_input => vector_a_input(t, l)
+          );
+
+        scalar_first_operation_int := function_scalar_float_multiplier (
+          scalar_a_input => scalar_first_operation_int,
+          scalar_b_input => scalar_second_operation_int
+          );
+
+        vector_do_int(t, l) := function_scalar_float_multiplier (
+          scalar_a_input => vector_dh_int(t, l),
+          scalar_b_input => scalar_first_operation_int
+          );
+      end loop;
+    end loop;
+
+    -- dW(l;x) = summation(do(t;l) · x(t;x))[t in 0 to T]
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+          scalar_operation_int := function_scalar_float_multiplier (
+            scalar_a_input => vector_do_int(t, l),
+            scalar_b_input => vector_x_input(t, x)
+            );
+
+          matrix_w_output(l, x) := function_scalar_float_adder (
+            OPERATION => '0',
+
+            scalar_a_input => scalar_operation_int,
+            scalar_b_input => matrix_w_output(l, x)
+            );
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_w_output;
+  end function function_ntm_lstm_output_w_trainer;
+
+  function function_ntm_lstm_output_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -5705,16 +5920,16 @@ package body ntm_lstm_controller_pkg is
     variable vector_dh_int : matrix_buffer;
     variable vector_do_int : matrix_buffer;
 
-    variable matrix_w_output : tensor_buffer;
+    variable tensor_k_output : tensor_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_k_output(l, i, k) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -5758,112 +5973,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dW(t;l) = summation(do(t;l) · x(t;x))[t in 0 to T]
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          scalar_operation_int := function_scalar_float_multiplier (
-            scalar_a_input => vector_do_int(t, l),
-            scalar_b_input => vector_x_input(t, x)
-            );
-
-          matrix_w_output(t, l, x) := function_scalar_float_adder (
-            OPERATION => '0',
-
-            scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_w_output(t, l, x)
-            );
-        end loop;
-      end loop;
-    end loop;
-
-    return matrix_w_output;
-  end function function_ntm_lstm_output_w_trainer;
-
-  function function_ntm_lstm_output_k_trainer (
-    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
-
-    vector_a_input : matrix_buffer;
-    vector_o_input : matrix_buffer
-    ) return array4_buffer is
-
-    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable scalar_first_operation_int  : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable scalar_second_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable vector_dh_int : matrix_buffer;
-    variable vector_do_int : matrix_buffer;
-
-    variable tensor_k_output : array4_buffer;
-
-  begin
-
-    -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    vector_dh_int := function_vector_controller_differentiation (
-      SIZE_T_IN => SIZE_T_IN,
-      SIZE_L_IN => SIZE_L_IN,
-
-      LENGTH_IN => LENGTH_IN,
-
-      vector_input => vector_h_input
-      );
-
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        scalar_first_operation_int := function_scalar_float_adder (
-          OPERATION => '1',
-
-          scalar_a_input => ONE_DATA,
-          scalar_b_input => vector_o_input(t, l)
-          );
-
-        scalar_first_operation_int := function_scalar_float_multiplier (
-          scalar_a_input => vector_o_input(t, l),
-          scalar_b_input => scalar_first_operation_int
-          );
-
-        scalar_second_operation_int := function_scalar_tanh (
-          scalar_input => vector_a_input(t, l)
-          );
-
-        scalar_first_operation_int := function_scalar_float_multiplier (
-          scalar_a_input => scalar_first_operation_int,
-          scalar_b_input => scalar_second_operation_int
-          );
-
-        vector_do_int(t, l) := function_scalar_float_multiplier (
-          scalar_a_input => vector_dh_int(t, l),
-          scalar_b_input => scalar_first_operation_int
-          );
-      end loop;
-    end loop;
-
-    -- dK(t;l;i;k) = summation(do(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(l;i;k) = summation(do(t;l) · r(t;i;k))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5874,11 +5984,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_k_output(t, l, i, k)
+              scalar_b_input => tensor_k_output(l, i, k)
               );
           end loop;
         end loop;
@@ -5905,7 +6015,7 @@ package body ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -5915,17 +6025,15 @@ package body ntm_lstm_controller_pkg is
     variable vector_dh_int : matrix_buffer;
     variable vector_do_int : matrix_buffer;
 
-    variable matrix_u_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_u_output(l, m) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -5968,7 +6076,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dU(t;l;m) = summation(do(t+1;l) · h(t;m))[t in 0 to T-1]
+    -- dU(l;m) = summation(do(t+1;l) · h(t;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -5978,11 +6086,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-          matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_u_output(t, l, m)
+            scalar_b_input => matrix_u_output(l, m)
             );
         end loop;
       end loop;
@@ -6008,7 +6116,7 @@ package body ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -6018,17 +6126,15 @@ package body ntm_lstm_controller_pkg is
     variable vector_dh_int : matrix_buffer;
     variable vector_do_int : matrix_buffer;
 
-    variable matrix_v_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-          matrix_v_output(t, l, s) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+        matrix_v_output(l, s) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -6071,7 +6177,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dV(t;l) = summation(do(t;l) · xi(t;s))[t in 0 to T]
+    -- dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -6081,11 +6187,11 @@ package body ntm_lstm_controller_pkg is
             scalar_b_input => vector_xi_input(t, s)
             );
 
-          matrix_v_output(t, l, s) := function_scalar_float_adder (
+          matrix_v_output(l, s) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_v_output(t, l, s)
+            scalar_b_input => matrix_v_output(l, s)
             );
         end loop;
       end loop;
@@ -6111,7 +6217,7 @@ package body ntm_lstm_controller_pkg is
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -6121,18 +6227,16 @@ package body ntm_lstm_controller_pkg is
     variable vector_dh_int : matrix_buffer;
     variable vector_do_int : matrix_buffer;
 
-    variable tensor_d_output : array4_buffer;
+    variable tensor_d_output : tensor_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-            tensor_d_output(t, l, i, m) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
+          tensor_d_output(l, i, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -6176,7 +6280,7 @@ package body ntm_lstm_controller_pkg is
       end loop;
     end loop;
 
-    -- dD(t;l;i;m) = summation(do(t;l) · rho(t;i;m))[t in 0 to T-1]
+    -- dD(l;i;m) = summation(do(t;l) · rho(t;i;m))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -6187,11 +6291,11 @@ package body ntm_lstm_controller_pkg is
               scalar_b_input => matrix_rho_input(t, i, m)
               );
 
-            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+            tensor_d_output(l, i, m) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_d_output(t, l, i, m)
+              scalar_b_input => tensor_d_output(l, i, m)
               );
           end loop;
         end loop;
@@ -6305,10 +6409,12 @@ package body ntm_lstm_controller_pkg is
     ) return trainer_output is
 
     -- Trainer Variable
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
+    variable matrix_w_output : matrix_buffer;
+    variable tensor_k_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
+    variable matrix_v_output : matrix_buffer;
+    variable tensor_d_output : tensor_buffer;
+    variable vector_b_output : vector_buffer;
 
     variable trainer_lstm_output : trainer_output;
 
@@ -6316,7 +6422,7 @@ package body ntm_lstm_controller_pkg is
 
     -- TRAINER_STATE
 
-    tensor_k_output := function_ntm_lstm_output_k_trainer (
+    matrix_w_output := function_ntm_lstm_output_w_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -6335,7 +6441,7 @@ package body ntm_lstm_controller_pkg is
       vector_o_input => vector_o_input
       );
 
-    matrix_u_output := function_ntm_lstm_output_u_trainer (
+    tensor_k_output := function_ntm_lstm_output_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
@@ -6392,10 +6498,50 @@ package body ntm_lstm_controller_pkg is
       vector_o_input => vector_o_input
       );
 
+    matrix_u_output := function_ntm_lstm_output_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_o_input => vector_o_input
+      );
+
+   vector_b_output := function_ntm_lstm_output_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_x_input,
+      matrix_r_input   => matrix_r_input,
+      vector_xi_input  => vector_xi_input,
+      matrix_rho_input => matrix_rho_input,
+      vector_h_input   => vector_h_input,
+
+      vector_a_input => vector_a_input,
+      vector_o_input => vector_o_input
+      );
+
+    trainer_lstm_output.matrix_w_output := matrix_w_output;
     trainer_lstm_output.tensor_k_output := tensor_k_output;
-    trainer_lstm_output.matrix_u_output := matrix_u_output;
     trainer_lstm_output.matrix_v_output := matrix_v_output;
     trainer_lstm_output.tensor_d_output := tensor_d_output;
+    trainer_lstm_output.matrix_u_output := matrix_u_output;
+    trainer_lstm_output.vector_b_output := vector_b_output;
 
     return trainer_lstm_output;
 

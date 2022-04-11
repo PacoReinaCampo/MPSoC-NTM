@@ -52,8 +52,12 @@ SIZE_S_IN = 3;
 % Signals
 XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
 
+A_IN = rand(SIZE_T_IN, SIZE_L_IN);
+I_IN = rand(SIZE_T_IN, SIZE_L_IN);
 F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
+H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 

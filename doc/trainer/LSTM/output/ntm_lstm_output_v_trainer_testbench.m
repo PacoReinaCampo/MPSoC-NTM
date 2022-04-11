@@ -47,10 +47,11 @@
 % Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
-SIZE_H_IN = 3;
+
+SIZE_S_IN = 3;
 
 % Signals
-XO_IN = rand(SIZE_T_IN, SIZE_H_IN);
+XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
 
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
 O_IN = rand(SIZE_T_IN, SIZE_L_IN);
@@ -59,4 +60,4 @@ H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 LENGTH_IN = 3;
 
 % DUT
-V_OUT = ntm_lstm_output_v_trainer(XO_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+V_OUT = ntm_lstm_output_v_trainer(XI_IN, O_IN, S_IN, H_IN, LENGTH_IN);

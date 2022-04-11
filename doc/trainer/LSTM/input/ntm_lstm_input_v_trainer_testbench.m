@@ -47,6 +47,7 @@
 % Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
+
 SIZE_S_IN = 3;
 
 % Signals

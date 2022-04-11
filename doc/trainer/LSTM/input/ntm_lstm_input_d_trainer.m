@@ -67,13 +67,11 @@ function D_OUT = ntm_lstm_input_d_trainer(RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, 
   vector_di_int = vector_ds_int.*A_IN.*I_IN.*(1-I_IN);
 
   % dD(l;i;m) = summation(di(t;l) · rho(t;i;m))[t in 0 to T-1]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_di_int, LENGTH_IN);
-
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for i = 1:SIZE_R_IN
         for m = 1:SIZE_M_IN
-          scalar_operation_int = vector_dh_int(t, l)*RHO_IN(t, i, m);
+          scalar_operation_int = vector_di_int(t, l)*RHO_IN(t, i, m);
 
           D_OUT(l, i, m) = D_OUT(l, i, m) + scalar_operation_int;
         end
