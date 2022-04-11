@@ -58,4 +58,4 @@ S_IN = rand(SIZE_T_IN, SIZE_L_IN);
 LENGTH_IN = 3;
 
 % DUT
-W_OUT = ntm_lstm_forget_w_trainer(X_IN, F_IN, S_IN, LENGTH_IN);
+W_OUT = ntm_lstm_forget_w_trainer(X_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

@@ -44,24 +44,23 @@
 ###################################################################################
 %}
 
-function B_OUT = ntm_lstm_output_b_trainer(A_IN, O_IN, H_IN, LENGTH_IN)
+function B_OUT = ntm_lstm_output_b_trainer(O_IN, S_IN, H_IN, LENGTH_IN)
   % Package
   addpath(genpath('../differentiation'));
 
   % Constants
-  [SIZE_T_IN, SIZE_L_IN] = size(A_IN);
+  [SIZE_T_IN, SIZE_L_IN] = size(S_IN);
 
   % Output Signals
   B_OUT = zeros(SIZE_L_IN);
 
   % Body
-  % do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
+  % do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
-  vector_do_int = vector_dh_int.*tanh(A_IN).*O_IN.*(1-O_IN).^2;
+  vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
   % db(l) = summation(do(t+1+;l))[t in 0 to T]
-  vector_dh_int = ntm_vector_controller_differentiation(vector_do_int, LENGTH_IN);
 
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN

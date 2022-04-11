@@ -49,10 +49,12 @@ package ntm_fnn_controller_pkg is
   -----------------------------------------------------------------------
 
   type trainer_output is record
-    tensor_k_output : array4_buffer;
-    matrix_u_output : tensor_buffer;
-    matrix_v_output : tensor_buffer;
-    tensor_d_output : array4_buffer;
+    matrix_w_output : matrix_buffer;
+    tensor_k_output : tensor_buffer;
+    matrix_v_output : matrix_buffer;
+    tensor_d_output : tensor_buffer;
+    matrix_u_output : matrix_buffer;
+    vector_b_output : vector_buffer;
   end record trainer_output;
 
   -----------------------------------------------------------------------
@@ -344,7 +346,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_fnn_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -360,7 +362,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_fnn_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -376,7 +378,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_fnn_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -392,7 +394,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer;
+    ) return matrix_buffer;
 
   function function_ntm_fnn_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -408,7 +410,7 @@ package ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return array4_buffer;
+    ) return tensor_buffer;
 
   function function_ntm_fnn_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -437,17 +439,23 @@ package ntm_fnn_controller_pkg is
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+    vector_w_x_input   : matrix_buffer;
+    matrix_w_r_input   : tensor_buffer;
+    vector_w_xi_input  : matrix_buffer;
+    matrix_w_rho_input : tensor_buffer;
+    vector_w_h_input   : matrix_buffer;
+
     vector_k_x_input   : matrix_buffer;
     matrix_k_r_input   : tensor_buffer;
     vector_k_xi_input  : matrix_buffer;
     matrix_k_rho_input : tensor_buffer;
     vector_k_h_input   : matrix_buffer;
 
-    vector_u_x_input   : matrix_buffer;
-    matrix_u_r_input   : tensor_buffer;
-    vector_u_xi_input  : matrix_buffer;
-    matrix_u_rho_input : tensor_buffer;
-    vector_u_h_input   : matrix_buffer;
+    vector_v_x_input   : matrix_buffer;
+    matrix_v_r_input   : tensor_buffer;
+    vector_v_xi_input  : matrix_buffer;
+    matrix_v_rho_input : tensor_buffer;
+    vector_v_h_input   : matrix_buffer;
 
     vector_d_x_input   : matrix_buffer;
     matrix_d_r_input   : tensor_buffer;
@@ -455,11 +463,17 @@ package ntm_fnn_controller_pkg is
     matrix_d_rho_input : tensor_buffer;
     vector_d_h_input   : matrix_buffer;
 
-    vector_v_x_input   : matrix_buffer;
-    matrix_v_r_input   : tensor_buffer;
-    vector_v_xi_input  : matrix_buffer;
-    matrix_v_rho_input : tensor_buffer;
-    vector_v_h_input   : matrix_buffer
+    vector_u_x_input   : matrix_buffer;
+    matrix_u_r_input   : tensor_buffer;
+    vector_u_xi_input  : matrix_buffer;
+    matrix_u_rho_input : tensor_buffer;
+    vector_u_h_input   : matrix_buffer;
+
+    vector_b_x_input   : matrix_buffer;
+    matrix_b_r_input   : tensor_buffer;
+    vector_b_xi_input  : matrix_buffer;
+    matrix_b_rho_input : tensor_buffer;
+    vector_b_h_input   : matrix_buffer
     ) return trainer_output;
 
 end ntm_fnn_controller_pkg;
@@ -851,23 +865,21 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_dh_int : matrix_buffer;
 
-    variable matrix_w_output : tensor_buffer;
+    variable matrix_w_output : matrix_buffer;
 
   begin
 
-    -- dW(t;l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+    -- dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(t, l, x) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_w_output(l, x) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -888,11 +900,11 @@ package body ntm_fnn_controller_pkg is
             scalar_b_input => vector_x_input(t, x)
             );
 
-          matrix_w_output(t, l, x) := function_scalar_float_adder (
+          matrix_w_output(l, x) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_w_output(t, l, x)
+            scalar_b_input => matrix_w_output(l, x)
             );
         end loop;
       end loop;
@@ -915,24 +927,22 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_dh_int : matrix_buffer;
 
-    variable tensor_k_output : array4_buffer;
+    variable tensor_k_output : tensor_buffer;
 
   begin
 
-    -- dK(t;l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-            tensor_k_output(t, l, i, k) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          tensor_k_output(l, i, k) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -955,11 +965,11 @@ package body ntm_fnn_controller_pkg is
               scalar_b_input => matrix_r_input(t, i, k)
               );
 
-            tensor_k_output(t, l, i, k) := function_scalar_float_adder (
+            tensor_k_output(l, i, k) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_k_output(t, l, i, k)
+              scalar_b_input => tensor_k_output(l, i, k)
               );
           end loop;
         end loop;
@@ -983,23 +993,21 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_dh_int : matrix_buffer;
 
-    variable matrix_u_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
 
   begin
 
-    -- dU(t;l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+    -- dU(l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(t, l, m) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_u_output(l, m) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -1020,11 +1028,11 @@ package body ntm_fnn_controller_pkg is
             scalar_b_input => vector_h_input(t, m)
             );
 
-          matrix_u_output(t, l, m) := function_scalar_float_adder (
+          matrix_u_output(l, m) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_u_output(t, l, m)
+            scalar_b_input => matrix_u_output(l, m)
             );
         end loop;
       end loop;
@@ -1047,23 +1055,21 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return tensor_buffer is
+    ) return matrix_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_dh_int : matrix_buffer;
 
-    variable matrix_v_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
 
   begin
 
-    -- dV(t;l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
+    -- dV(l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-          matrix_v_output(t, l, s) := ZERO_DATA;
-        end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
+        matrix_v_output(l, s) := ZERO_DATA;
       end loop;
     end loop;
 
@@ -1084,11 +1090,11 @@ package body ntm_fnn_controller_pkg is
             scalar_b_input => vector_xi_input(t, s)
             );
 
-          matrix_v_output(t, l, s) := function_scalar_float_adder (
+          matrix_v_output(l, s) := function_scalar_float_adder (
             OPERATION => '0',
 
             scalar_a_input => scalar_operation_int,
-            scalar_b_input => matrix_v_output(t, l, s)
+            scalar_b_input => matrix_v_output(l, s)
             );
         end loop;
       end loop;
@@ -1111,24 +1117,22 @@ package body ntm_fnn_controller_pkg is
     vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer
-    ) return array4_buffer is
+    ) return tensor_buffer is
 
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_dh_int : matrix_buffer;
 
-    variable tensor_d_output : array4_buffer;
+    variable tensor_d_output : tensor_buffer;
 
   begin
 
-    -- dD(t;l;i;m) = summation(d*(t;l) · rho(t;i;m))[t in 0 to T-1]
+    -- dD(l;i;m) = summation(d*(t;l) · rho(t;i;m))[t in 0 to T-1]
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-          for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-            tensor_d_output(t, l, i, m) := ZERO_DATA;
-          end loop;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
+          tensor_d_output(l, i, m) := ZERO_DATA;
         end loop;
       end loop;
     end loop;
@@ -1151,11 +1155,11 @@ package body ntm_fnn_controller_pkg is
               scalar_b_input => matrix_rho_input(t, i, m)
               );
 
-            tensor_d_output(t, l, i, m) := function_scalar_float_adder (
+            tensor_d_output(l, i, m) := function_scalar_float_adder (
               OPERATION => '0',
 
               scalar_a_input => scalar_operation_int,
-              scalar_b_input => tensor_d_output(t, l, i, m)
+              scalar_b_input => tensor_d_output(l, i, m)
               );
           end loop;
         end loop;
@@ -1227,17 +1231,23 @@ package body ntm_fnn_controller_pkg is
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+    vector_w_x_input   : matrix_buffer;
+    matrix_w_r_input   : tensor_buffer;
+    vector_w_xi_input  : matrix_buffer;
+    matrix_w_rho_input : tensor_buffer;
+    vector_w_h_input   : matrix_buffer;
+
     vector_k_x_input   : matrix_buffer;
     matrix_k_r_input   : tensor_buffer;
     vector_k_xi_input  : matrix_buffer;
     matrix_k_rho_input : tensor_buffer;
     vector_k_h_input   : matrix_buffer;
 
-    vector_u_x_input   : matrix_buffer;
-    matrix_u_r_input   : tensor_buffer;
-    vector_u_xi_input  : matrix_buffer;
-    matrix_u_rho_input : tensor_buffer;
-    vector_u_h_input   : matrix_buffer;
+    vector_v_x_input   : matrix_buffer;
+    matrix_v_r_input   : tensor_buffer;
+    vector_v_xi_input  : matrix_buffer;
+    matrix_v_rho_input : tensor_buffer;
+    vector_v_h_input   : matrix_buffer;
 
     vector_d_x_input   : matrix_buffer;
     matrix_d_r_input   : tensor_buffer;
@@ -1245,24 +1255,48 @@ package body ntm_fnn_controller_pkg is
     matrix_d_rho_input : tensor_buffer;
     vector_d_h_input   : matrix_buffer;
 
-    vector_v_x_input   : matrix_buffer;
-    matrix_v_r_input   : tensor_buffer;
-    vector_v_xi_input  : matrix_buffer;
-    matrix_v_rho_input : tensor_buffer;
-    vector_v_h_input   : matrix_buffer
+    vector_u_x_input   : matrix_buffer;
+    matrix_u_r_input   : tensor_buffer;
+    vector_u_xi_input  : matrix_buffer;
+    matrix_u_rho_input : tensor_buffer;
+    vector_u_h_input   : matrix_buffer;
+
+    vector_b_x_input   : matrix_buffer;
+    matrix_b_r_input   : tensor_buffer;
+    vector_b_xi_input  : matrix_buffer;
+    matrix_b_rho_input : tensor_buffer;
+    vector_b_h_input   : matrix_buffer
     ) return trainer_output is
 
     -- Trainer Variable
-    variable tensor_k_output : array4_buffer;
-    variable matrix_u_output : tensor_buffer;
-    variable matrix_v_output : tensor_buffer;
-    variable tensor_d_output : array4_buffer;
+    variable matrix_w_output : matrix_buffer;
+    variable tensor_k_output : tensor_buffer;
+    variable matrix_v_output : matrix_buffer;
+    variable tensor_d_output : tensor_buffer;
+    variable matrix_u_output : matrix_buffer;
+    variable vector_b_output : vector_buffer;
 
     variable trainer_fnn_output : trainer_output;
 
   begin
 
     -- TRAINER_STATE
+
+    matrix_w_output := function_ntm_fnn_w_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_w_x_input,
+      matrix_r_input   => matrix_w_r_input,
+      vector_xi_input  => vector_w_xi_input,
+      matrix_rho_input => matrix_w_rho_input,
+      vector_h_input   => vector_w_h_input
+      );
 
     tensor_k_output := function_ntm_fnn_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
@@ -1328,10 +1362,28 @@ package body ntm_fnn_controller_pkg is
       vector_h_input   => vector_v_h_input
       );
 
+    vector_b_output := function_ntm_fnn_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_S_IN => SIZE_S_IN,
+      SIZE_M_IN => SIZE_M_IN,
+
+      vector_x_input   => vector_b_x_input,
+      matrix_r_input   => matrix_b_r_input,
+      vector_xi_input  => vector_b_xi_input,
+      matrix_rho_input => matrix_b_rho_input,
+      vector_h_input   => vector_b_h_input
+      );
+
+    trainer_fnn_output.matrix_w_output := matrix_w_output;
     trainer_fnn_output.tensor_k_output := tensor_k_output;
-    trainer_fnn_output.matrix_u_output := matrix_u_output;
     trainer_fnn_output.matrix_v_output := matrix_v_output;
     trainer_fnn_output.tensor_d_output := tensor_d_output;
+    trainer_fnn_output.matrix_u_output := matrix_u_output;
+    trainer_fnn_output.vector_b_output := vector_b_output;
 
     return trainer_fnn_output;
 

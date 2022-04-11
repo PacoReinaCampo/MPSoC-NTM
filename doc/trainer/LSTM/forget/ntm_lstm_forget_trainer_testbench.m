@@ -56,11 +56,14 @@ R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
 
+A_IN = rand(SIZE_T_IN, SIZE_L_IN);
+I_IN = rand(SIZE_T_IN, SIZE_L_IN);
 F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
 H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-[W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_forget_trainer(X_IN, R_IN, XI_IN, RHO_IN, F_IN, S_IN, H_IN, LENGTH_IN);
+[W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_forget_trainer(X_IN, R_IN, XI_IN, RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

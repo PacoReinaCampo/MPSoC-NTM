@@ -53,10 +53,14 @@ SIZE_M_IN = 3;
 % Signals
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
 
+A_IN = rand(SIZE_T_IN, SIZE_L_IN);
+I_IN = rand(SIZE_T_IN, SIZE_L_IN);
 F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
+H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-D_OUT = ntm_lstm_forget_d_trainer(RHO_IN, F_IN, S_IN, LENGTH_IN);
+D_OUT = ntm_lstm_forget_d_trainer(RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

@@ -49,10 +49,14 @@ SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 
 % Signals
+A_IN = rand(SIZE_T_IN, SIZE_L_IN);
+I_IN = rand(SIZE_T_IN, SIZE_L_IN);
 F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
+H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-B_OUT = ntm_lstm_forget_b_trainer(F_IN, S_IN, LENGTH_IN);
+B_OUT = ntm_lstm_forget_b_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

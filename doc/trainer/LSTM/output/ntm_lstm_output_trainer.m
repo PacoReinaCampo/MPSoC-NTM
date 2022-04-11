@@ -44,12 +44,12 @@
 ###################################################################################
 %}
 
-function [W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_output_trainer(X_IN, R_IN, XO_IN, RHO_IN, A_IN, O_IN, H_IN, LENGTH_IN)
+function [W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_output_trainer(X_IN, R_IN, XO_IN, RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN)
   % Body
-  W_OUT = ntm_lstm_output_v_trainer(X_IN, A_IN, O_IN, H_IN, LENGTH_IN);
-  K_OUT = ntm_lstm_output_k_trainer(R_IN, A_IN, O_IN, H_IN, LENGTH_IN);
-  V_OUT = ntm_lstm_output_v_trainer(XO_IN, A_IN, O_IN, H_IN, LENGTH_IN);
-  D_OUT = ntm_lstm_output_d_trainer(RHO_IN, A_IN, O_IN, H_IN, LENGTH_IN);
-  U_OUT = ntm_lstm_output_u_trainer(A_IN, O_IN, H_IN, LENGTH_IN);
-  B_OUT = ntm_lstm_output_b_trainer(A_IN, O_IN, H_IN, LENGTH_IN);
+  W_OUT = ntm_lstm_output_v_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+  K_OUT = ntm_lstm_output_k_trainer(R_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+  V_OUT = ntm_lstm_output_v_trainer(XO_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+  D_OUT = ntm_lstm_output_d_trainer(RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN);
+  U_OUT = ntm_lstm_output_u_trainer(O_IN, S_IN, H_IN, LENGTH_IN);
+  B_OUT = ntm_lstm_output_b_trainer(O_IN, S_IN, H_IN, LENGTH_IN);
 end

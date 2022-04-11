@@ -54,9 +54,12 @@ X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
 A_IN = rand(SIZE_T_IN, SIZE_L_IN);
 I_IN = rand(SIZE_T_IN, SIZE_L_IN);
+F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
+H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-W_OUT = ntm_lstm_input_w_trainer(X_IN, A_IN, I_IN, S_IN, LENGTH_IN);
+W_OUT = ntm_lstm_input_w_trainer(X_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

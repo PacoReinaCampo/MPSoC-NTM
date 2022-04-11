@@ -51,10 +51,12 @@ SIZE_L_IN = 3;
 % Signals
 A_IN = rand(SIZE_T_IN, SIZE_L_IN);
 I_IN = rand(SIZE_T_IN, SIZE_L_IN);
+F_IN = rand(SIZE_T_IN, SIZE_L_IN);
+O_IN = rand(SIZE_T_IN, SIZE_L_IN);
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
 H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
 % DUT
-U_OUT = ntm_lstm_input_u_trainer(A_IN, I_IN, S_IN, H_IN, LENGTH_IN);
+U_OUT = ntm_lstm_input_u_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);
