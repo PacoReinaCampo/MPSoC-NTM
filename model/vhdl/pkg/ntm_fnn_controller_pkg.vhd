@@ -1057,7 +1057,7 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- dV(t;l;s) = summation(d*(t+1;l) · xi(t;s))[t in 0 to T-1]
+    -- dV(t;l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
 
     for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
       for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
@@ -1187,7 +1187,11 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- db(l) = summation(d*(t;l))[t in 0 to T]
+    -- db(l) = summation(d*(t+1;l))[t in 0 to T]
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_b_output(l) := ZERO_DATA;
+    end loop;
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1198,12 +1202,16 @@ package body ntm_fnn_controller_pkg is
       vector_input => vector_h_input
       );
 
-    vector_b_output := function_vector_summation (
-      SIZE_IN   => SIZE_L_IN,
-      LENGTH_IN => SIZE_T_IN,
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_b_output(l) := function_scalar_float_adder (
+          OPERATION => '0',
 
-      vector_input => vector_dh_int
-      );
+          scalar_a_input => vector_dh_int(t, l),
+          scalar_b_input => vector_b_output(l)
+          );
+      end loop;
+    end loop;
 
     return vector_b_output;
   end function function_ntm_fnn_b_trainer;
