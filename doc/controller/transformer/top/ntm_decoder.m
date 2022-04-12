@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, B_IN, X_IN, Z_IN)
+function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN, Z_IN)
   % Package
   addpath(genpath('../inputs'));
   addpath(genpath('../components'));
@@ -71,7 +71,7 @@ function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O
   x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
 
   for i = 1:SIZE_Z_IN
-    y_int(i, :) = ntm_fnn(W_IN, B_IN, y_int(i, :));
+    y_int(i, :) = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int(i, :));
   end
 
   z_int = x_int + y_int;

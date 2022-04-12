@@ -45,10 +45,11 @@
 %}
 
 % Constants
+SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 
 % Signals
-X_IN = rand(SIZE_D_IN, 1);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
 Y_OUT = ntm_positional_encoding(X_IN);
