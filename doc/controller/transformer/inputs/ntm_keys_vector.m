@@ -44,15 +44,11 @@
 ###################################################################################
 %}
 
-function K_OUT = ntm_keys_vector(HK_IN, W_HK_IN, X_IN)
+function K_OUT = ntm_keys_vector(K_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
 
   % Body
-  % K(n;k) = transpose(K(z;n))·X(z;d)·WK(d;k)
-  k_int = ntm_matrix_transpose(HK_IN);
-
-  matrix_operation_int = ntm_matrix_product(k_int, X_IN);
-
-  K_OUT = ntm_matrix_product(matrix_operation_int, W_HK_IN);
+  % K(n;k) = X(n;d)·K(d;k)
+  K_OUT = ntm_matrix_product(X_IN, K_IN);
 end

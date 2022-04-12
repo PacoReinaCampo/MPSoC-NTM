@@ -44,15 +44,15 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
+function Y_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/function/vector'));
 
   % Body
-  % h(z;d) = W2(d;m)·(sigmoid(W1(m;d)·x(z;d) + b1(m))) + b2(d)
+  % y(n;d) = W2(d;m)·(sigmoid(W1(m;d)·x(n;d) + b1(m))) + b2(d)
 
-  % W1(m;d)·x(z;d)
+  % W1(m;d)·x(n;d)
   vector_operation_int = ntm_matrix_vector_product(W1_IN, X_IN);
 
   % b1(m)
@@ -65,5 +65,5 @@ function H_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
   vector_operation_int = ntm_matrix_vector_product(W2_IN, vector_operation_int);
 
   % b2(d)
-  H_OUT = vector_operation_int + B2_IN;
+  Y_OUT = vector_operation_int + B2_IN;
 end

@@ -45,26 +45,20 @@
 %}
 
 % Constants
-SIZE_Z_IN = 3;
-SIZE_D_IN = 3;
 SIZE_N_IN = 3;
+SIZE_D_IN = 3;
 SIZE_K_IN = 3;
-SIZE_Q_IN = 3;
 SIZE_V_IN = 3;
 SIZE_H_IN = 3;
 
 % Signals
-HK_IN = rand(SIZE_Z_IN, SIZE_N_IN);
-HQ_IN = rand(SIZE_Z_IN, SIZE_N_IN);
-HV_IN = rand(SIZE_Z_IN, SIZE_N_IN);
+K_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
+Q_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
+V_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
 
-W_HK_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
-W_HQ_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_Q_IN);
-W_HV_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
+W_OH_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
 
-W_O_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
-
-X_IN = rand(SIZE_Z_IN, SIZE_D_IN);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, X_IN);
+Y_OUT = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN);

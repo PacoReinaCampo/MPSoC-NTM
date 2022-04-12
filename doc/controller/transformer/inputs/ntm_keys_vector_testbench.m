@@ -45,16 +45,13 @@
 %}
 
 % Constants
-SIZE_Z_IN = 3;
-SIZE_D_IN = 3;
 SIZE_N_IN = 3;
+SIZE_D_IN = 3;
 SIZE_K_IN = 3;
 
 % Signals
-W_HK_IN = rand(SIZE_Z_IN, SIZE_N_IN);
-HK_IN = rand(SIZE_D_IN, SIZE_K_IN);
-
-X_IN = rand(SIZE_Z_IN, SIZE_D_IN);
+K_IN = rand(SIZE_D_IN, SIZE_K_IN);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-K_OUT = ntm_keys_vector(HK_IN, W_HK_IN, X_IN);
+K_OUT = ntm_keys_vector(K_IN, X_IN);

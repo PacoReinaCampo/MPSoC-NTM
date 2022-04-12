@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function U_OUT = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, X_IN)
+function U_OUT = ntm_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/calculus/matrix'));
@@ -52,11 +52,11 @@ function U_OUT = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, 
   addpath(genpath('../inputs'));
 
   % Constants
-  [~, SIZE_K_IN] = size(W_HK_IN);
+  [~, SIZE_K_IN] = size(K_IN);
 
   % Body
-  k_int = ntm_keys_vector(HK_IN, W_HK_IN, X_IN);
-  q_int = ntm_queries_vector(HQ_IN, W_HQ_IN, X_IN);
+  k_int = ntm_keys_vector(K_IN, X_IN);
+  q_int = ntm_queries_vector(Q_IN, X_IN);
 
   matrix_operation_int = ntm_matrix_transpose(k_int);
   matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int);
@@ -64,7 +64,7 @@ function U_OUT = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, 
   matrix_operation_int = matrix_operation_int/scalar_operation_int;
   matrix_operation_int = ntm_matrix_softmax(matrix_operation_int);
 
-  v_int = ntm_values_vector(HV_IN, W_HV_IN, X_IN);
+  v_int = ntm_values_vector(V_IN, X_IN);
 
   U_OUT = ntm_matrix_product(matrix_operation_int, v_int);
 end

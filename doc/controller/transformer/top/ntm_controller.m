@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_controller(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, W_I_IN, K_I_IN, V_I_IN, D_I_IN, X_I_IN, R_I_IN, XI_I_IN, RHO_I_IN, W_O_IN, K_O_IN, V_O_IN, D_O_IN, X_O_IN, R_O_IN, XI_O_IN, RHO_O_IN)
+function Z_OUT = ntm_controller(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, W_I_IN, K_I_IN, V_I_IN, D_I_IN, X_I_IN, R_I_IN, XI_I_IN, RHO_I_IN, W_O_IN, K_O_IN, V_O_IN, D_O_IN, X_O_IN, R_O_IN, XI_O_IN, RHO_O_IN)
   % Package
   addpath(genpath('../inputs'));
   addpath(genpath('../components'));
@@ -66,8 +66,8 @@ function Z_OUT = ntm_controller(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, 
   x_out_int = x_out_int + y_int;
 
   % Encoder
-  z_int = ntm_encoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, x_in_int);
+  z_int = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, x_in_int);
 
   % Decoder
-  Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, x_out_int, z_int);
+  Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, x_out_int, z_int);
 end

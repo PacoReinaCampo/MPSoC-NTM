@@ -49,25 +49,25 @@ function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
   addpath(genpath('../../../math/statitics/vector'));
 
   % Constants
-  [SIZE_Z_IN, SIZE_K_IN] = size(Z_IN);
+  [SIZE_N_IN, SIZE_D_IN] = size(Z_IN);
 
   % Output Signals
-  N_OUT = zeros(SIZE_Z_IN, SIZE_K_IN);
+  N_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
 
   % Body
   vector_operation_int = ntm_vector_mean(Z_IN);
 
-  for z = 1:SIZE_Z_IN
-    for k = 1:SIZE_K_IN
-      N_OUT(z,k) = Z_IN(z,k) - vector_operation_int(z);
+  for n = 1:SIZE_N_IN
+    for d = 1:SIZE_D_IN
+      N_OUT(n, d) = Z_IN(n, d) - vector_operation_int(n);
     end
   end
 
   vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int);
 
-  for z = 1:SIZE_Z_IN
-    for k = 1:SIZE_K_IN
-      N_OUT(z,k) = N_OUT(z,k)/vector_operation_int(z);
+  for n = 1:SIZE_N_IN
+    for d = 1:SIZE_D_IN
+      N_OUT(n, d) = N_OUT(n, d)/vector_operation_int(n);
     end
   end
 

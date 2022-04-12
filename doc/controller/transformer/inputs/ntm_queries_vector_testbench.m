@@ -45,16 +45,13 @@
 %}
 
 % Constants
-SIZE_Z_IN = 3;
+SIZE_N_IN = 3;
 SIZE_D_IN = 3;
-SIZE_M_IN = 3;
-SIZE_Q_IN = 3;
+SIZE_K_IN = 3;
 
 % Signals
-W_HQ_IN = rand(SIZE_Z_IN, SIZE_M_IN);
-HQ_IN = rand(SIZE_D_IN, SIZE_Q_IN);
-
-X_IN = rand(SIZE_Z_IN, SIZE_D_IN);
+Q_IN = rand(SIZE_N_IN, SIZE_K_IN);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-K_OUT = ntm_queries_vector(HQ_IN, W_HQ_IN, X_IN);
+K_OUT = ntm_queries_vector(Q_IN, X_IN);

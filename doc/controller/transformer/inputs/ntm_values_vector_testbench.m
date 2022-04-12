@@ -45,16 +45,13 @@
 %}
 
 % Constants
-SIZE_Z_IN = 3;
-SIZE_D_IN = 3;
 SIZE_N_IN = 3;
+SIZE_D_IN = 3;
 SIZE_V_IN = 3;
 
 % Signals
-HV_IN = rand(SIZE_Z_IN, SIZE_N_IN);
-W_HV_IN = rand(SIZE_D_IN, SIZE_V_IN);
-
-X_IN = rand(SIZE_Z_IN, SIZE_D_IN);
+V_IN = rand(SIZE_D_IN, SIZE_V_IN);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-V_OUT = ntm_values_vector(HV_IN, W_HV_IN, X_IN);
+V_OUT = ntm_values_vector(V_IN, X_IN);
