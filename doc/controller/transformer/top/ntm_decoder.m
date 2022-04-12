@@ -44,8 +44,9 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN)
   % Package
+  addpath(genpath('../inputs'));
   addpath(genpath('../components'));
   addpath(genpath('../functions'));
 
@@ -54,19 +55,31 @@ function Z_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O
   [~, SIZE_M_IN] = size(HQ_IN);
 
   % Internal Signals
-  GAMMA_IN = rand(3, 1);
-  BETA_IN = rand(3, 1); 
+  GAMMA_IN = rand(SIZE_Z_IN, 3);
+  BETA_IN = rand(SIZE_Z_IN, 3); 
 
   % Body
   x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  X1_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, x_int);
+  y_int = ntm_masked_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, x_int);
 
-  X2_OUT = ntm_masked_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, x_int);
+  z_int = x_int + y_int;
+
+  x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+
+  x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+
+  y_int = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, x_int);
+
+  z_int = x_int + y_int;
+
+  x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
 
   for i = 1:SIZE_Z_IN
-    Y_OUT = ntm_layer_norm(x_int(i, :), GAMMA_IN, BETA_IN);
+    y_int(i, :) = ntm_fnn(W_IN, B_IN, y_int(i, :));
   end
 
-  Z_OUT = ntm_fnn(W_IN, U_IN, B_IN, X_IN, H_IN);
+  z_int = x_int + y_int;
+
+  Z_OUT = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
 end

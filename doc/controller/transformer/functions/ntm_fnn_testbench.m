@@ -50,10 +50,8 @@ SIZE_M_IN = 3;
 
 % Signals
 W_IN = rand(SIZE_M_IN, SIZE_D_IN);
-U_IN = rand(SIZE_M_IN, SIZE_M_IN);
 B_IN = rand(SIZE_M_IN, 1);
 X_IN = rand(SIZE_D_IN, 1);
-H_IN = rand(SIZE_M_IN, 1);
 
 % DUT
-H_OUT = ntm_fnn(W_IN, U_IN, B_IN, X_IN, H_IN);
+H_OUT = ntm_fnn(W_IN, B_IN, X_IN);

@@ -44,13 +44,13 @@
 ###################################################################################
 %}
 
-function [Y1_OUT, Y2_OUT] = ntm_controller(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function [Y1_OUT, Y2_OUT] = ntm_controller(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN)
   % Package
   addpath(genpath('../components'));
   addpath(genpath('../functions'));
 
   % Body
-  Y1_OUT = ntm_encoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  Y1_OUT = ntm_encoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);
 
-  Y2_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN);
+  Y2_OUT = ntm_decoder(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN);
 end

@@ -44,23 +44,16 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_fnn(W_IN, U_IN, B_IN, X_IN, H_IN)
+function H_OUT = ntm_fnn(W_IN, B_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/function/vector'));
 
-  % Constants
-  SIZE_M_IN = length(H_IN);
-
   % Body
-  % h(t;m) = sigmoid(W(m;d)·x(t;d) + U(m;m)·h(t-1;m) + b(m))
+  % h(z;m) = sigmoid(W(m;d)·x(z;d) + b(m))
 
-  % W(m;x)·x(t;x)
+  % W(m;x)·x(z;x)
   vector_first_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
-
-  % U(m;m)·h(t-1;m)
-  vector_second_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
-  vector_first_operation_int  = vector_first_operation_int + vector_second_operation_int;
 
   % b(m)
   vector_first_operation_int = vector_first_operation_int + B_IN;

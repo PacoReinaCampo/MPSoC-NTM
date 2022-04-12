@@ -45,12 +45,13 @@
 %}
 
 % Constants
+SIZE_Z_IN = 3;
 SIZE_K_IN = 3;
 
 % Signals
-Z_IN = rand(SIZE_K_IN, 1);
-GAMMA_IN = rand(SIZE_K_IN, 1);
-BETA_IN = rand(SIZE_K_IN, 1); 
+Z_IN = rand(SIZE_Z_IN, SIZE_K_IN);
+GAMMA_IN = rand(SIZE_Z_IN, SIZE_K_IN);
+BETA_IN = rand(SIZE_Z_IN, SIZE_K_IN); 
 
 % DUT
 N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);

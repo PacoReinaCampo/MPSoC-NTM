@@ -46,16 +46,30 @@
 
 function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
   % Package
-  addpath(genpath('../../../math/statitics/scalar'));
+  addpath(genpath('../../../math/statitics/vector'));
+
+  % Constants
+  [SIZE_Z_IN, SIZE_K_IN] = size(Z_IN);
+
+  % Output Signals
+  N_OUT = zeros(SIZE_Z_IN, SIZE_K_IN);
 
   % Body
-  scalar_operation_int = ntm_scalar_mean(Z_IN);
+  vector_operation_int = ntm_vector_mean(Z_IN);
 
-  N_OUT = Z_IN - scalar_operation_int;
+  for z = 1:SIZE_Z_IN
+    for k = 1:SIZE_K_IN
+      N_OUT(z,k) = Z_IN(z,k) - vector_operation_int(z);
+    end
+  end
 
-  scalar_operation_int = ntm_scalar_deviation(Z_IN, scalar_operation_int);
+  vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int);
 
-  N_OUT = N_OUT/scalar_operation_int;
+  for z = 1:SIZE_Z_IN
+    for k = 1:SIZE_K_IN
+      N_OUT(z,k) = N_OUT(z,k)/vector_operation_int(z);
+    end
+  end
 
   N_OUT = GAMMA_IN.*N_OUT;
 
