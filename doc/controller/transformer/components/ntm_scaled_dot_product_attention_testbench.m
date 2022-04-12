@@ -47,25 +47,17 @@
 % Constants
 SIZE_Z_IN = 3;
 SIZE_D_IN = 3;
-SIZE_M_IN = 3;
 SIZE_N_IN = 3;
 SIZE_K_IN = 3;
-SIZE_Q_IN = 3;
 SIZE_V_IN = 3;
-SIZE_X_IN = 3;
-SIZE_W_IN = 3;
-SIZE_R_IN = 3;
-
-SIZE_P_IN = 3;
-SIZE_S_IN = 3;
 
 % Signals
 HK_IN = rand(SIZE_Z_IN, SIZE_N_IN);
-HQ_IN = rand(SIZE_Z_IN, SIZE_M_IN);
+HQ_IN = rand(SIZE_Z_IN, SIZE_N_IN);
 HV_IN = rand(SIZE_Z_IN, SIZE_N_IN);
 
 W_HK_IN = rand(SIZE_D_IN, SIZE_K_IN);
-W_HQ_IN = rand(SIZE_D_IN, SIZE_Q_IN);
+W_HQ_IN = rand(SIZE_D_IN, SIZE_K_IN);
 W_HV_IN = rand(SIZE_D_IN, SIZE_V_IN);
 
 X_IN = rand(SIZE_Z_IN, SIZE_D_IN);

@@ -49,18 +49,17 @@ function Y_OUT = ntm_masked_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W
   addpath(genpath('../inputs'));
 
   % Constants
-  [~, ~, SIZE_K_IN] = size(W_HK_IN);
-  [~, ~, SIZE_Q_IN] = size(W_HQ_IN);
-  [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(W_HV_IN);
+  [~, SIZE_N_IN] = size(HK_IN);
 
-  [~, SIZE_M_IN] = size(HQ_IN);
+  [~, ~, SIZE_K_IN] = size(W_HK_IN);
+  [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(W_HV_IN);
 
   % Internal Signals
   w_hk_int = zeros(SIZE_D_IN, SIZE_K_IN);
-  w_hq_int = zeros(SIZE_D_IN, SIZE_Q_IN);
+  w_hq_int = zeros(SIZE_D_IN, SIZE_K_IN);
   w_hv_int = zeros(SIZE_D_IN, SIZE_V_IN);
 
-  multi_head_int = zeros(SIZE_M_IN, SIZE_H_IN*SIZE_V_IN);
+  multi_head_int = zeros(SIZE_N_IN, SIZE_H_IN*SIZE_V_IN);
 
   % Body
   for h = 1:SIZE_H_IN
