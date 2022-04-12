@@ -9,24 +9,25 @@
 │   ├───LSTM
 │   │   ├───convolutional
 │   │   │       ntm_activation_gate_vector.m
-│   │   │       ntm_controller.m
 │   │   │       ntm_forget_gate_vector.m
 │   │   │       ntm_hidden_gate_vector.m
 │   │   │       ntm_input_gate_vector.m
 │   │   │       ntm_output_gate_vector.m
 │   │   │       ntm_state_gate_vector.m
+│   │   │       ntm_controller.m
 │   │   │
 │   │   └───standard
 │   │           ntm_activation_gate_vector.m
-│   │           ntm_controller.m
 │   │           ntm_forget_gate_vector.m
 │   │           ntm_hidden_gate_vector.m
 │   │           ntm_input_gate_vector.m
 │   │           ntm_output_gate_vector.m
 │   │           ntm_state_gate_vector.m
+│   │           ntm_controller.m
 │   │
 │   └───transformer
 │       ├───components
+│       │       ntm_masked_multi_head_attention.m
 │       │       ntm_multi_head_attention.m
 │       │       ntm_scaled_dot_product_attention.m
 │       │
@@ -51,8 +52,8 @@
 │   │       dnc_addressing.m
 │   │       dnc_allocation_weighting.m
 │   │       dnc_backward_weighting.m
-│   │       dnc_content_based_addressing.m
 │   │       dnc_forward_weighting.m
+│   │       dnc_matrix_content_based_addressing.m
 │   │       dnc_memory_matrix.m
 │   │       dnc_memory_retention_vector.m
 │   │       dnc_precedence_weighting.m
@@ -62,12 +63,14 @@
 │   │       dnc_sort_vector.m
 │   │       dnc_temporal_link_matrix.m
 │   │       dnc_usage_vector.m
+│   │       dnc_vector_content_based_addressing.m
 │   │       dnc_write_content_weighting.m
 │   │       dnc_write_weighting.m
 │   │
 │   └───top
 │           dnc_interface_matrix.m
 │           dnc_interface_vector.m
+│           dnc_output_vector.m
 │           dnc_top.m
 │
 ├───math
@@ -107,14 +110,17 @@
 │   │
 │   ├───calculus
 │   │   ├───matrix
+│   │   │       ntm_matrix_differentiation.m
 │   │   │       ntm_matrix_integration.m
 │   │   │       ntm_matrix_softmax.m
 │   │   │
 │   │   ├───tensor
+│   │   │       ntm_tensor_differentiation.m
 │   │   │       ntm_tensor_integration.m
 │   │   │       ntm_tensor_softmax.m
 │   │   │
 │   │   └───vector
+│   │           ntm_vector_differentiation.m
 │   │           ntm_vector_integration.m
 │   │           ntm_vector_softmax.m
 │   │
@@ -133,21 +139,22 @@
 │   │
 │   └───statitics
 │       ├───matrix
-│       │       ntm_deviation.m
-│       │       ntm_mean.m
+│       │       ntm_matrix_deviation.m
+│       │       ntm_matrix_mean.m
 │       │
-│       ├───tensor
-│       │       ntm_deviation.m
-│       │       ntm_mean.m
+│       ├───scalar
+│       │       ntm_scalar_deviation.m
+│       │       ntm_scalar_mean.m
 │       │
 │       └───vector
-│               ntm_deviation.m
-│               ntm_mean.m
+│               ntm_vector_deviation.m
+│               ntm_vector_mean.m
 │
 ├───ntm
 │   ├───memory
 │   │       ntm_addressing.m
-│   │       ntm_content_based_addressing.m
+│   │       ntm_matrix_content_based_addressing.m
+│   │       ntm_vector_content_based_addressing.m
 │   │
 │   ├───read_heads
 │   │       ntm_reading.m
@@ -165,17 +172,67 @@
 │           ntm_writing.m
 │           ntm_writing_tesbench.m
 │
-└───state
-    ├───feedback
-    │       ntm_state_matrix_feedforward.m
-    │       ntm_state_matrix_input.m
-    │       ntm_state_matrix_output.m
-    │       ntm_state_matrix_state.m
+├───state
+│   ├───feedback
+│   │       ntm_state_matrix_feedforward.m
+│   │       ntm_state_matrix_input.m
+│   │       ntm_state_matrix_output.m
+│   │       ntm_state_matrix_state.m
+│   │
+│   ├───outputs
+│   │       ntm_state_vector_output.m
+│   │       ntm_state_vector_state.m
+│   │
+│   └───top
+│           ntm_state_top.m
+│
+└───trainer
+    ├───differentiation
+    │       ntm_matrix_controller_differentiation.m
+    │       ntm_vector_controller_differentiation.m
     │
-    ├───outputs
-    │       ntm_state_vector_output.m
-    │       ntm_state_vector_state.m
+    ├───FNN
+    │       ntm_fnn_b_trainer.m
+    │       ntm_fnn_d_trainer.m
+    │       ntm_fnn_k_trainer.m
+    │       ntm_fnn_u_trainer.m
+    │       ntm_fnn_v_trainer.m
+    │       ntm_fnn_w_trainer.m
+    │       ntm_fnn_trainer.m
     │
-    └───top
-            ntm_state_top.m
-            ntm_state_top.m
+    └───LSTM
+        ├───activation
+        │       ntm_lstm_activation_b_trainer.m
+        │       ntm_lstm_activation_d_trainer.m
+        │       ntm_lstm_activation_k_trainer.m
+        │       ntm_lstm_activation_u_trainer.m
+        │       ntm_lstm_activation_v_trainer.m
+        │       ntm_lstm_activation_w_trainer.m
+        │       ntm_lstm_activation_trainer.m
+        │
+        ├───forget
+        │       ntm_lstm_forget_b_trainer.m
+        │       ntm_lstm_forget_d_trainer.m
+        │       ntm_lstm_forget_k_trainer.m
+        │       ntm_lstm_forget_u_trainer.m
+        │       ntm_lstm_forget_v_trainer.m
+        │       ntm_lstm_forget_w_trainer.m
+        │       ntm_lstm_forget_trainer.m
+        │
+        ├───input
+        │       ntm_lstm_input_b_trainer.m
+        │       ntm_lstm_input_d_trainer.m
+        │       ntm_lstm_input_k_trainer.m
+        │       ntm_lstm_input_u_trainer.m
+        │       ntm_lstm_input_v_trainer.m
+        │       ntm_lstm_input_w_trainer.m
+        │       ntm_lstm_input_trainer.m
+        │
+        └───output
+                ntm_lstm_output_b_trainer.m
+                ntm_lstm_output_d_trainer.m
+                ntm_lstm_output_k_trainer.m
+                ntm_lstm_output_u_trainer.m
+                ntm_lstm_output_v_trainer.m
+                ntm_lstm_output_w_trainer.m
+                ntm_lstm_output_trainer.m

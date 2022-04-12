@@ -44,15 +44,33 @@
 ###################################################################################
 %}
 
-function Q_OUT = ntm_queries_vector(HQ_IN, W_HQ_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
+function Y_OUT = ntm_masked_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, X_IN)
+  % Constants
+  [~, ~, SIZE_K_IN] = size(W_HK_IN);
+  [~, ~, SIZE_Q_IN] = size(W_HQ_IN);
+  [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(W_HV_IN);
+
+  [~, SIZE_M_IN] = size(HQ_IN);
+
+  % Internal Signals
+  w_hk_int = zeros(SIZE_D_IN, SIZE_K_IN);
+  w_hq_int = zeros(SIZE_D_IN, SIZE_Q_IN);
+  w_hv_int = zeros(SIZE_D_IN, SIZE_V_IN);
+
+  multi_head_int = zeros(SIZE_M_IN, SIZE_H_IN*SIZE_V_IN);
 
   % Body
-  % Q(m;q) = transpose(Q(z;m))·X(z;d)·WQ(d;q)
-  q_int = ntm_matrix_transpose(HQ_IN);
+  for h = 1:SIZE_H_IN
+    for d = 1:SIZE_D_IN
+      w_hk_int(d, :) = W_HK_IN(h, d, :);
+      w_hq_int(d, :) = W_HQ_IN(h, d, :);
+      w_hv_int(d, :) = W_HV_IN(h, d, :);
+    end
 
-  matrix_operation_int = ntm_matrix_product(q_int, X_IN);
+    head_int = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, w_hk_int, w_hq_int, w_hv_int, X_IN);
+    
+    multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
+  end
 
-  Q_OUT = ntm_matrix_product(matrix_operation_int, W_HQ_IN);
+  Y_OUT = ntm_matrix_product(multi_head_int, W_O_IN);
 end

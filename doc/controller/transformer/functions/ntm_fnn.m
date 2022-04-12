@@ -44,52 +44,27 @@
 ###################################################################################
 %}
 
-function H_OUT = ntm_fnn(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, X_IN, R_IN, XI_IN, RHO_IN, H_IN)
+function H_OUT = ntm_fnn(W_IN, U_IN, B_IN, X_IN, H_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
   addpath(genpath('../../../math/function/vector'));
 
   % Constants
-  [SIZE_R_IN, ~] = size(RHO_IN);
-
-  SIZE_L_IN = length(H_IN);
+  SIZE_M_IN = length(H_IN);
 
   % Body
-  % h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+  % h(t;m) = sigmoid(W(m;d)·x(t;d) + U(m;m)·h(t-1;m) + b(m))
 
-  % W(l;x)·x(t;x)
+  % W(m;x)·x(t;x)
   vector_first_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
 
-  % K(i;l;k)·r(t;i;k)
-  r_int = ntm_tensor_matrix_product(K_IN, R_IN);
+  % U(m;m)·h(t-1;m)
+  vector_second_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
+  vector_first_operation_int  = vector_first_operation_int + vector_second_operation_int;
 
-  for l = 1:SIZE_L_IN
-    for i = 1:SIZE_R_IN
-      vector_first_operation_int(l) = vector_first_operation_int(l) + r_int(i, l);
-    end
-  end
-
-  % D(i;l;m)·rho(t;i;m)
-  rho_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
-
-  for l = 1:SIZE_L_IN
-    for i = 1:SIZE_R_IN
-      vector_first_operation_int(l) = vector_first_operation_int(l) + rho_int(i, l);
-    end
-  end
-
-  % V(l;s)·xi(t;s)
-  vector_second_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
-  vector_second_operation_int = vector_second_operation_int + vector_first_operation_int;
-
-  % U(l;l)·h(t-1;l)
-  vector_first_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
-  vector_first_operation_int = vector_first_operation_int + vector_second_operation_int;
-
-  % b(l)
-  vector_second_operation_int = vector_first_operation_int + B_IN;
+  % b(m)
+  vector_first_operation_int = vector_first_operation_int + B_IN;
 
   % sigmoid(.)
-  H_OUT = ntm_vector_logistic_function(vector_second_operation_int);
+  H_OUT = ntm_vector_logistic_function(vector_first_operation_int);
 end

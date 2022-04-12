@@ -50,21 +50,18 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
   addpath(genpath('../../../math/algebra/tensor'));
 
   % Constants
-  SIZE_Z_IN = 3;
-  SIZE_D_IN = 3;
-  SIZE_X_IN = 3;
-  SIZE_W_IN = 3;
-  SIZE_R_IN = 3;
+  [SIZE_D_IN, SIZE_X_IN] = size(W_IN);
+  [SIZE_Z_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);
+  [~, SIZE_S_IN] = size(XI_IN);
+  [~, ~, SIZE_P_IN] = size(RHO_IN);
 
-  SIZE_P_IN = 3;
-  SIZE_S_IN = 3;
-
-  % Signals
+  % Internal Signals
   x_int = zeros(SIZE_X_IN, 1);
   r_int = zeros(SIZE_R_IN, SIZE_W_IN);
   rho_int = zeros(SIZE_R_IN, SIZE_P_IN);
   xi_int = zeros(SIZE_S_IN, 1);
 
+  % Output Signals
   X_OUT = zeros(SIZE_Z_IN, SIZE_D_IN);
 
   % Body

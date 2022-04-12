@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, X_IN)
   % Constants
   [~, ~, SIZE_K_IN] = size(W_HK_IN);
   [~, ~, SIZE_Q_IN] = size(W_HQ_IN);
@@ -67,7 +67,7 @@ function Y_OUT = ntm_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN,
       w_hv_int(d, :) = W_HV_IN(h, d, :);
     end
 
-    head_int = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, w_hk_int, w_hq_int, w_hv_int, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
+    head_int = ntm_scaled_dot_product_attention(HK_IN, HQ_IN, HV_IN, w_hk_int, w_hq_int, w_hv_int, X_IN);
     
     multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
   end

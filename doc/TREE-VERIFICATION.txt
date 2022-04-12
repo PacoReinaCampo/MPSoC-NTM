@@ -9,24 +9,25 @@
 │   ├───LSTM
 │   │   ├───convolutional
 │   │   │       ntm_activation_gate_vector_testbench.m
-│   │   │       ntm_controller_testbench.m
 │   │   │       ntm_forget_gate_vector_testbench.m
 │   │   │       ntm_hidden_gate_vector_testbench.m
 │   │   │       ntm_input_gate_vector_testbench.m
 │   │   │       ntm_output_gate_vector_testbench.m
 │   │   │       ntm_state_gate_vector_testbench.m
+│   │   │       ntm_controller_testbench.m
 │   │   │
 │   │   └───standard
 │   │           ntm_activation_gate_vector_testbench.m
-│   │           ntm_controller_testbench.m
 │   │           ntm_forget_gate_vector_testbench.m
 │   │           ntm_hidden_gate_vector_testbench.m
 │   │           ntm_input_gate_vector_testbench.m
 │   │           ntm_output_gate_vector_testbench.m
 │   │           ntm_state_gate_vector_testbench.m
+│   │           ntm_controller_testbench.m
 │   │
 │   └───transformer
 │       ├───components
+│       │       ntm_masked_multi_head_attention_testbench.m
 │       │       ntm_multi_head_attention_testbench.m
 │       │       ntm_scaled_dot_product_attention_testbench.m
 │       │
@@ -51,8 +52,8 @@
 │   │       dnc_addressing_testbench.m
 │   │       dnc_allocation_weighting_testbench.m
 │   │       dnc_backward_weighting_testbench.m
-│   │       dnc_content_based_addressing_testbench.m
 │   │       dnc_forward_weighting_testbench.m
+│   │       dnc_matrix_content_based_addressing_testbench.m
 │   │       dnc_memory_matrix_testbench.m
 │   │       dnc_memory_retention_vector_testbench.m
 │   │       dnc_precedence_weighting_testbench.m
@@ -62,12 +63,14 @@
 │   │       dnc_sort_vector_testbench.m
 │   │       dnc_temporal_link_matrix_testbench.m
 │   │       dnc_usage_vector_testbench.m
+│   │       dnc_vector_content_based_addressing_testbench.m
 │   │       dnc_write_content_weighting_testbench.m
 │   │       dnc_write_weighting_testbench.m
 │   │
 │   └───top
 │           dnc_interface_matrix_testbench.m
 │           dnc_interface_vector_testbench.m
+│           dnc_output_vector_testbench.m
 │           dnc_top_testbench.m
 │
 ├───math
@@ -107,14 +110,17 @@
 │   │
 │   ├───calculus
 │   │   ├───matrix
+│   │   │       ntm_matrix_differentiation_testbench.m
 │   │   │       ntm_matrix_integration_testbench.m
 │   │   │       ntm_matrix_softmax_testbench.m
 │   │   │
 │   │   ├───tensor
+│   │   │       ntm_tensor_differentiation_testbench.m
 │   │   │       ntm_tensor_integration_testbench.m
 │   │   │       ntm_tensor_softmax_testbench.m
 │   │   │
 │   │   └───vector
+│   │           ntm_vector_differentiation_testbench.m
 │   │           ntm_vector_integration_testbench.m
 │   │           ntm_vector_softmax_testbench.m
 │   │
@@ -133,21 +139,22 @@
 │   │
 │   └───statitics
 │       ├───matrix
-│       │       ntm_deviation_testbench.m
-│       │       ntm_mean_testbench.m
+│       │       ntm_matrix_deviation_testbench.m
+│       │       ntm_matrix_mean_testbench.m
 │       │
-│       ├───tensor
-│       │       ntm_deviation_testbench.m
-│       │       ntm_mean_testbench.m
+│       ├───scalar
+│       │       ntm_scalar_deviation_testbench.m
+│       │       ntm_scalar_mean_testbench.m
 │       │
 │       └───vector
-│               ntm_deviation_testbench.m
-│               ntm_mean_testbench.m
+│               ntm_vector_deviation_testbench.m
+│               ntm_vector_mean_testbench.m
 │
 ├───ntm
 │   ├───memory
 │   │       ntm_addressing_testbench.m
-│   │       ntm_content_based_addressing_testbench.m
+│   │       ntm_matrix_content_based_addressing_testbench.m
+│   │       ntm_vector_content_based_addressing_testbench.m
 │   │
 │   ├───read_heads
 │   │       ntm_reading_testbench.m
@@ -165,17 +172,67 @@
 │           ntm_writing_testbench.m
 │           ntm_writing_tesbench_testbench.m
 │
-└───state
-    ├───feedback
-    │       ntm_state_matrix_feedforward_testbench.m
-    │       ntm_state_matrix_input_testbench.m
-    │       ntm_state_matrix_output_testbench.m
-    │       ntm_state_matrix_state_testbench.m
+├───state
+│   ├───feedback
+│   │       ntm_state_matrix_feedforward_testbench.m
+│   │       ntm_state_matrix_input_testbench.m
+│   │       ntm_state_matrix_output_testbench.m
+│   │       ntm_state_matrix_state_testbench.m
+│   │
+│   ├───outputs
+│   │       ntm_state_vector_output_testbench.m
+│   │       ntm_state_vector_state_testbench.m
+│   │
+│   └───top
+│           ntm_state_top_testbench.m
+│
+└───trainer
+    ├───differentiation
+    │       ntm_matrix_controller_differentiation_testbench.m
+    │       ntm_vector_controller_differentiation_testbench.m
     │
-    ├───outputs
-    │       ntm_state_vector_output_testbench.m
-    │       ntm_state_vector_state_testbench.m
+    ├───FNN
+    │       ntm_fnn_b_trainer_testbench.m
+    │       ntm_fnn_d_trainer_testbench.m
+    │       ntm_fnn_k_trainer_testbench.m
+    │       ntm_fnn_u_trainer_testbench.m
+    │       ntm_fnn_v_trainer_testbench.m
+    │       ntm_fnn_w_trainer_testbench.m
+    │       ntm_fnn_trainer_testbench.m
     │
-    └───top
-            ntm_state_top_testbench.m
-            ntm_state_top_testbench_testbench.m
+    └───LSTM
+        ├───activation
+        │       ntm_lstm_activation_b_trainer_testbench.m
+        │       ntm_lstm_activation_d_trainer_testbench.m
+        │       ntm_lstm_activation_k_trainer_testbench.m
+        │       ntm_lstm_activation_u_trainer_testbench.m
+        │       ntm_lstm_activation_v_trainer_testbench.m
+        │       ntm_lstm_activation_w_trainer_testbench.m
+        │       ntm_lstm_activation_trainer_testbench.m
+        │
+        ├───forget
+        │       ntm_lstm_forget_b_trainer_testbench.m
+        │       ntm_lstm_forget_d_trainer_testbench.m
+        │       ntm_lstm_forget_k_trainer_testbench.m
+        │       ntm_lstm_forget_u_trainer_testbench.m
+        │       ntm_lstm_forget_v_trainer_testbench.m
+        │       ntm_lstm_forget_w_trainer_testbench.m
+        │       ntm_lstm_forget_trainer_testbench.m
+        │
+        ├───input
+        │       ntm_lstm_input_b_trainer_testbench.m
+        │       ntm_lstm_input_d_trainer_testbench.m
+        │       ntm_lstm_input_k_trainer_testbench.m
+        │       ntm_lstm_input_u_trainer_testbench.m
+        │       ntm_lstm_input_v_trainer_testbench.m
+        │       ntm_lstm_input_w_trainer_testbench.m
+        │       ntm_lstm_input_trainer_testbench.m
+        │
+        └───output
+                ntm_lstm_output_b_trainer_testbench.m
+                ntm_lstm_output_d_trainer_testbench.m
+                ntm_lstm_output_k_trainer_testbench.m
+                ntm_lstm_output_u_trainer_testbench.m
+                ntm_lstm_output_v_trainer_testbench.m
+                ntm_lstm_output_w_trainer_testbench.m
+                ntm_lstm_output_trainer_testbench.m

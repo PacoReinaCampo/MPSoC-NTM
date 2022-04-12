@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function V_OUT = ntm_values_vector(HV_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+function V_OUT = ntm_values_vector(HV_IN, W_HV_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
 
@@ -52,9 +52,7 @@ function V_OUT = ntm_values_vector(HV_IN, W_HV_IN, W_IN, K_IN, V_IN, D_IN, X_IN,
   % V(n;v) = transpose(V(z;n))·X(z;d)·WV(d;v)
   v_int = ntm_matrix_transpose(HV_IN);
 
-  x_int = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
-
-  matrix_operation_int = ntm_matrix_product(v_int, x_int);
+  matrix_operation_int = ntm_matrix_product(v_int, X_IN);
 
   V_OUT = ntm_matrix_product(matrix_operation_int, W_HV_IN);
 end

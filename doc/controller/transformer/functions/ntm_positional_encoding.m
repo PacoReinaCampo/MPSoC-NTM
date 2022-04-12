@@ -55,9 +55,9 @@ function Y_OUT = ntm_positional_encoding(X_IN)
   % Body
   for d = 1:SIZE_D_IN
     if ((-1)^X_IN(d) == 0)
-      Y_OUT(d) = sin(SIZE_K_IN/10000.^(2*X_IN(d)/SIZE_D_IN));
+      Y_OUT(d) = sin(SIZE_K_IN/10000^(2*X_IN(d)/SIZE_D_IN));
     else
-      Y_OUT(d) = cos(SIZE_K_IN/10000.^(2*X_IN(d)/SIZE_D_IN));
+      Y_OUT(d) = cos(SIZE_K_IN/10000^(2*X_IN(d)/SIZE_D_IN));
     end
   end
 end

@@ -44,15 +44,34 @@
 ###################################################################################
 %}
 
-function Q_OUT = ntm_queries_vector(HQ_IN, W_HQ_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
+% Constants
+SIZE_Z_IN = 3;
+SIZE_D_IN = 3;
+SIZE_M_IN = 3;
+SIZE_N_IN = 3;
+SIZE_K_IN = 3;
+SIZE_Q_IN = 3;
+SIZE_V_IN = 3;
+SIZE_H_IN = 3;
+SIZE_X_IN = 3;
+SIZE_W_IN = 3;
+SIZE_R_IN = 3;
 
-  % Body
-  % Q(m;q) = transpose(Q(z;m))·X(z;d)·WQ(d;q)
-  q_int = ntm_matrix_transpose(HQ_IN);
+SIZE_P_IN = 3;
+SIZE_S_IN = 3;
 
-  matrix_operation_int = ntm_matrix_product(q_int, X_IN);
+% Signals
+HK_IN = rand(SIZE_Z_IN, SIZE_N_IN);
+HQ_IN = rand(SIZE_Z_IN, SIZE_M_IN);
+HV_IN = rand(SIZE_Z_IN, SIZE_N_IN);
 
-  Q_OUT = ntm_matrix_product(matrix_operation_int, W_HQ_IN);
-end
+W_HK_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
+W_HQ_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_Q_IN);
+W_HV_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
+
+W_O_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
+
+X_IN = rand(SIZE_Z_IN, SIZE_D_IN);
+
+% DUT
+Y_OUT = ntm_masked_multi_head_attention(HK_IN, HQ_IN, HV_IN, W_HK_IN, W_HQ_IN, W_HV_IN, W_O_IN, X_IN);
