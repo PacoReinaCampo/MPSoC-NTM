@@ -55,9 +55,9 @@ SIZE_M_IN = 3;
 SIZE_S_IN = 3;
 
 % Signals
-X_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_X_IN);
+X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-XI_IN = rand(SIZE_T_IN, SIZE_L_IN, SIZE_S_IN);
+XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
 
 A_IN = rand(SIZE_T_IN, SIZE_L_IN);
