@@ -57,9 +57,9 @@ SIZE_S_IN = 3;
 % Signals
 W_IN = rand(SIZE_L_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_W_IN);
-U_IN = rand(SIZE_L_IN, SIZE_L_IN);
 V_IN = rand(SIZE_L_IN, SIZE_S_IN);
 D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
+U_IN = rand(SIZE_L_IN, SIZE_L_IN);
 B_IN = rand(SIZE_L_IN, 1);
 R_IN = rand(SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_S_IN, 1);
@@ -68,4 +68,4 @@ H_IN = rand(SIZE_L_IN, 1);
 X_IN = rand(SIZE_X_IN, 1);
 
 % DUT
-O_OUT = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
+O_OUT = ntm_output_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);

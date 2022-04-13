@@ -46,6 +46,7 @@
 
 % Constants
 SIZE_T_IN = 3;
+SIZE_X_IN = 3;
 SIZE_W_IN = 3;
 SIZE_L_IN = 3;
 SIZE_R_IN = 3;

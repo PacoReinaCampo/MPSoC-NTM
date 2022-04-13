@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN)
+function Y_OUT = ntm_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
   % Package
   addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/algebra/tensor'));
@@ -109,7 +109,7 @@ function Y_OUT = ntm_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN)
       matrix_w_int = ntm_addressing(matrix_k_int, vector_beta_int, vector_g_int, matrix_s_int, vector_gamma_int, matrix_m_int, matrix_w_int);
 
       % CONTROLLER
-      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int, X_IN(t, :));
+      vector_h_int = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int, X_IN(t, :));
 
       % OUTPUT VECTOR
       Y_OUT(t, :) = ntm_output_vector(P_IN, matrix_r_int, Q_IN, vector_h_int);

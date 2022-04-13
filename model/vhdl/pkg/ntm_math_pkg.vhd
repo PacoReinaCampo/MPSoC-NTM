@@ -2156,6 +2156,62 @@ package ntm_math_pkg is
     tensor_input : tensor_buffer
     ) return tensor_buffer;
 
+  -----------------------------------------------------------------------
+  -- MATH - STATITICS
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_ntm_scalar_mean (
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer
+    ) return std_logic_vector;
+
+  function function_ntm_scalar_deviation (
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer;
+    scalar_mean  : std_logic_vector
+    ) return std_logic_vector;
+
+  -- VECTOR
+  function function_ntm_vector_mean (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer
+    ) return vector_buffer;
+
+  function function_ntm_vector_deviation (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer;
+    vector_mean  : vector_buffer
+    ) return vector_buffer;
+
+  -- MATRIX
+  function function_ntm_matrix_mean (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_matrix_deviation (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer;
+    matrix_mean  : matrix_buffer
+    ) return matrix_buffer;
+
 end ntm_math_pkg;
 
 package body ntm_math_pkg is
@@ -3758,5 +3814,283 @@ package body ntm_math_pkg is
 
     return tensor_output;
   end function function_tensor_softmax;
+
+  -----------------------------------------------------------------------
+  -- MATH - STATITICS
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_ntm_scalar_mean (
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      scalar_output := function_scalar_float_adder (
+        OPERATION => '0',
+
+        scalar_a_input => scalar_output,
+        scalar_b_input => scalar_input(m)
+        );
+    end loop;
+
+  scalar_output := function_scalar_float_divider (
+    scalar_a_input => scalar_output,
+    scalar_b_input => LENGTH_IN
+    );
+
+    return scalar_output;
+  end function function_ntm_scalar_mean;
+
+  function function_ntm_scalar_deviation (
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    scalar_input : vector_buffer;
+    scalar_mean  : std_logic_vector
+
+    ) return std_logic_vector is
+
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      scalar_output := function_scalar_float_adder (
+        OPERATION => '0',
+
+        scalar_a_input => scalar_output,
+        scalar_b_input => scalar_input(m)
+        );
+
+      scalar_operation_int := function_scalar_power (
+        scalar_a_input => scalar_mean,
+        scalar_b_input => TWO_DATA
+        );
+
+      scalar_output := function_scalar_float_adder (
+        OPERATION => '1',
+
+        scalar_a_input => scalar_output,
+        scalar_b_input => scalar_operation_int
+        );
+    end loop;
+
+  scalar_output := function_scalar_float_divider (
+    scalar_a_input => scalar_output,
+    scalar_b_input => LENGTH_IN
+    );
+
+  scalar_output := function_scalar_sqrt (
+    scalar_input => scalar_output
+    );
+
+    return scalar_output;
+  end function function_ntm_scalar_deviation;
+
+  -- VECTOR
+  function function_ntm_vector_mean (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer
+
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    vector_output := (others => ZERO_DATA);
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+        vector_output(i) := function_scalar_float_adder (
+          OPERATION => '0',
+
+          scalar_a_input => vector_output(i),
+          scalar_b_input => vector_input(i, m)
+          );
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := function_scalar_float_divider (
+        scalar_a_input => vector_output(i),
+        scalar_b_input => LENGTH_IN
+        );
+    end loop;
+
+    return vector_output;
+  end function function_ntm_vector_mean;
+
+  function function_ntm_vector_deviation (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer;
+    vector_mean  : vector_buffer
+
+    ) return vector_buffer is
+
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    vector_output := (others => ZERO_DATA);
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+        vector_output(i) := function_scalar_float_adder (
+          OPERATION => '0',
+
+          scalar_a_input => vector_output(i),
+          scalar_b_input => vector_input(i, m)
+          );
+
+        scalar_operation_int := function_scalar_power (
+          scalar_a_input => vector_mean(i),
+          scalar_b_input => TWO_DATA
+          );
+
+        vector_output(i) := function_scalar_float_adder (
+          OPERATION => '1',
+
+          scalar_a_input => vector_output(i),
+          scalar_b_input => scalar_operation_int
+          );
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := function_scalar_float_divider (
+        scalar_a_input => vector_output(i),
+        scalar_b_input => LENGTH_IN
+      );
+    end loop;
+
+    vector_output := function_vector_sqrt (
+      SIZE_IN => SIZE_IN,
+
+      vector_input => vector_output
+      );
+
+    return vector_output;
+  end function function_ntm_vector_deviation;
+
+  -- MATRIX
+  function function_ntm_matrix_mean (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer
+
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    matrix_output := (others => (others => ZERO_DATA));
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+          matrix_output(i, j) := function_scalar_float_adder (
+            OPERATION => '0',
+
+            scalar_a_input => matrix_output(i, j),
+            scalar_b_input => matrix_input(i, j, m)
+            );
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := function_scalar_float_divider (
+
+          scalar_a_input => matrix_output(i, j),
+          scalar_b_input => LENGTH_IN
+          );
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_ntm_matrix_mean;
+
+  function function_ntm_matrix_deviation (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer;
+    matrix_mean  : matrix_buffer
+    ) return matrix_buffer is
+
+    variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    matrix_output := (others => (others => ZERO_DATA));
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for m in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+          matrix_output(i, j) := function_scalar_float_adder (
+            OPERATION => '0',
+
+            scalar_a_input => matrix_output(i, j),
+            scalar_b_input => matrix_input(i, j, m)
+            );
+
+          scalar_operation_int := function_scalar_power (
+            scalar_a_input => matrix_mean(i, j),
+            scalar_b_input => TWO_DATA
+            );
+
+          matrix_output(i, j) := function_scalar_float_adder (
+            OPERATION => '1',
+
+            scalar_a_input => matrix_output(i, j),
+            scalar_b_input => scalar_operation_int
+            );
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := function_scalar_float_divider (
+
+          scalar_a_input => matrix_output(i, j),
+          scalar_b_input => LENGTH_IN
+          );
+      end loop;
+    end loop;
+
+    matrix_output := function_matrix_sqrt (
+      SIZE_I_IN => SIZE_I_IN,
+      SIZE_J_IN => SIZE_J_IN,
+
+      matrix_input => matrix_output
+      );
+
+    return matrix_output;
+  end function function_ntm_matrix_deviation;
 
 end ntm_math_pkg;

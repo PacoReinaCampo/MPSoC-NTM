@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN)
+function Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
   % Package
   addpath(genpath('../../math/algebra/matrix'));
   addpath(genpath('../../math/algebra/tensor'));
@@ -211,7 +211,7 @@ function Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN)
 
 
       % CONTROLLER_BODY_STATE
-      vector_h_int = ntm_controller(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int, X_IN(t, :));
+      vector_h_int = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int, X_IN(t, :));
 
       % OUTPUT_VECTOR_STATE
 

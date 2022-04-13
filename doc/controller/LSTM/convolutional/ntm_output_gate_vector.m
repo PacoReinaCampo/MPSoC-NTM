@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function O_OUT = ntm_output_gate_vector(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
+function O_OUT = ntm_output_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/algebra/tensor'));

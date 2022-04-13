@@ -59,9 +59,9 @@ SIZE_M_IN = SIZE_W_IN + 5;
 % Signals
 W_IN = rand(SIZE_L_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN);
-U_IN = rand(SIZE_L_IN, SIZE_L_IN);
 V_IN = rand(SIZE_L_IN, SIZE_S_IN);
 D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
+U_IN = rand(SIZE_L_IN, SIZE_L_IN);
 B_IN = rand(SIZE_L_IN, 1);
 P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
 Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
@@ -69,4 +69,4 @@ Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
 % DUT
-Y_OUT = dnc_top(W_IN, K_IN, U_IN, V_IN, D_IN, B_IN, P_IN, Q_IN, X_IN);
+Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN);

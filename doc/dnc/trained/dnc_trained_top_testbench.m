@@ -44,52 +44,12 @@
 ###################################################################################
 %}
 
-function F_OUT = ntm_forget_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
-  addpath(genpath('../../../math/function/vector'));
+% Constants
+SIZE_T_IN = 3;
+SIZE_X_IN = 3;
 
-  % Constants
-  [SIZE_R_IN, SIZE_L_IN, ~] = size(K_IN);
+% Signals
+X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
-  % Body
-  % f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
-  
-  % W(l;x)·x(t;x)
-  vector_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
-
-  % K(i;l;k)·r(t;i;k)
-  matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  % D(i;l;m)·rho(t;i;m)
-  matrix_operation_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
-
-  for i = 1:SIZE_R_IN
-    for l = 1:SIZE_L_IN
-      vector_operation_int(l) = vector_operation_int(l) + matrix_operation_int(i, l);
-    end
-  end
-
-  % b(l)
-  F_OUT = vector_operation_int + B_IN;
-
-  % V(l;s)·xi(t;s)
-  vector_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
-
-  F_OUT = F_OUT + vector_operation_int;
-
-  % U(l;l)·h(t-1;l)
-  vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
-
-  F_OUT = F_OUT + vector_operation_int;
-
-  % sigmoid(.)
-  F_OUT = ntm_vector_logistic_function(F_OUT);
-end
+% DUT
+Y_OUT = dnc_trained_top(X_IN);

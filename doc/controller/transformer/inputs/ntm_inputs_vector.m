@@ -79,12 +79,12 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
         end
 
         for p = 1:SIZE_P_IN
-          rho_int(n, i, n) = RHO_IN(l, n, i, p);
+          rho_int(n, i, p) = RHO_IN(l, n, i, p);
         end
       end
 
       for s = 1:SIZE_S_IN
-        xi_int(l, x) = XI_IN(l, n, s);
+        xi_int(n, s) = XI_IN(l, n, s);
       end
 
       % W(d;x)·x(l;n;x)

@@ -1743,6 +1743,13 @@ package ntm_arithmetic_pkg is
 
     ) return vector_buffer;
 
+  function function_vector_sqrt (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
   function function_vector_power (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -1782,6 +1789,14 @@ package ntm_arithmetic_pkg is
     ) return matrix_buffer;
 
   function function_matrix_exponentiator (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_sqrt (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -2811,6 +2826,22 @@ package body ntm_arithmetic_pkg is
     return vector_output;
   end function function_vector_exponentiator;
 
+  function function_vector_sqrt (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(sqrt(to_real(to_float(vector_input(i), float64'high, -float64'low))), float64'high, -float64'low));
+    end loop;
+
+    return vector_output;
+  end function function_vector_sqrt;
+
   function function_vector_power (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -2915,6 +2946,25 @@ package body ntm_arithmetic_pkg is
 
     return matrix_output;
   end function function_matrix_exponentiator;
+
+  function function_matrix_sqrt (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(sqrt(to_real(to_float(matrix_input(i, j), float64'high, -float64'low))), float64'high, -float64'low));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_sqrt;
 
   function function_matrix_power (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
