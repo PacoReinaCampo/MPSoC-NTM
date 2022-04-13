@@ -59,8 +59,9 @@ function Y_OUT = dnc_trained_top(X_IN)
   SIZE_W_IN = 3;
   SIZE_L_IN = 3;
   SIZE_R_IN = 3;
-  SIZE_S_IN = 3;
-  SIZE_M_IN = 3;
+
+  SIZE_S_IN = 3*SIZE_W_IN + 3;
+  SIZE_M_IN = SIZE_W_IN + 5;
 
   % Signals
   P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
