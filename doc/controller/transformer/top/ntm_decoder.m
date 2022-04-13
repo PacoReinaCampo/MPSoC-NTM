@@ -57,7 +57,10 @@ function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_
   GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
   BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN); 
+  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
+
+  % Output Signals
+  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
 
   % Body
   for l = 1:SIZE_L_IN
@@ -89,6 +92,6 @@ function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_
 
     z_int = x_int + y_int;
 
-    Z_OUT = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
   end
 end
