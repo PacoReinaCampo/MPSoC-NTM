@@ -51,28 +51,44 @@ function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_
   addpath(genpath('../functions'));
 
   % Constants
-  [SIZE_N_IN, SIZE_D_IN] = size(X_IN);
+  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
 
   % Internal Signals
   GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN); 
+  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
+
+  x_int = zeros(SIZE_N_IN, SIZE_D_IN); 
 
   % Body
-  y_int = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN);
+  for l = 1:SIZE_L_IN
+    for n = 1:SIZE_N_IN
+      for d = 1:SIZE_D_IN
+        x_int(n, d) = X_IN(l, n, d);
+      end
+    end
 
-  z_int = X_IN + y_int;
+    y_int = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
 
-  x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+    z_int = x_int + y_int;
 
-  y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, Z_IN);
+    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
 
-  z_int = x_int + y_int;
+    for n = 1:SIZE_N_IN
+      for d = 1:SIZE_D_IN
+        z_int(n, d) = Z_IN(l, n, d);
+      end
+    end
 
-  x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, z_int);
 
-  y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
+    z_int = x_int + y_int;
 
-  z_int = x_int + y_int;
+    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
 
-  Z_OUT = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
+
+    z_int = x_int + y_int;
+
+    Z_OUT = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+  end
 end

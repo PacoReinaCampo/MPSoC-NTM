@@ -49,7 +49,7 @@ function Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN
   addpath(genpath('../inputs'));
 
   % Constants
-  [~, SIZE_N_IN] = size(X_IN);
+  [SIZE_N_IN, ~] = size(X_IN);
 
   [~, ~, SIZE_K_IN] = size(K_IN);
   [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(V_IN);

@@ -45,6 +45,7 @@
 %}
 
 % Constants
+SIZE_L_IN = 3;
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_M_IN = 3;
@@ -70,23 +71,23 @@ B1_IN = rand(SIZE_M_IN, 1);
 W2_IN = rand(SIZE_D_IN, SIZE_M_IN);
 B2_IN = rand(SIZE_D_IN, 1);
 
-W_I_IN = rand(SIZE_D_IN, SIZE_X_IN);
-K_I_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
-V_I_IN = rand(SIZE_D_IN, SIZE_S_IN);
-D_I_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
-X_I_IN = rand(SIZE_N_IN, SIZE_X_IN);
-R_I_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
-XI_I_IN = rand(SIZE_N_IN, SIZE_S_IN);
-RHO_I_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
+W_I_IN = rand(SIZE_L_IN, SIZE_D_IN, SIZE_X_IN);
+K_I_IN = rand(SIZE_L_IN, SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_I_IN = rand(SIZE_L_IN, SIZE_D_IN, SIZE_S_IN);
+D_I_IN = rand(SIZE_L_IN, SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
+X_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_X_IN);
+R_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
+XI_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
+RHO_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
 
-W_O_IN = rand(SIZE_D_IN, SIZE_X_IN);
-K_O_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
-V_O_IN = rand(SIZE_D_IN, SIZE_S_IN);
-D_O_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
-X_O_IN = rand(SIZE_N_IN, SIZE_X_IN);
-R_O_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
-XI_O_IN = rand(SIZE_N_IN, SIZE_S_IN);
-RHO_O_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
+W_O_IN = rand(SIZE_L_IN, SIZE_D_IN, SIZE_X_IN);
+K_O_IN = rand(SIZE_L_IN, SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_O_IN = rand(SIZE_L_IN, SIZE_D_IN, SIZE_S_IN);
+D_O_IN = rand(SIZE_L_IN, SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
+X_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_X_IN);
+R_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
+XI_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
+RHO_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
 
 % DUT
 Z_OUT = ntm_controller(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, W_I_IN, K_I_IN, V_I_IN, D_I_IN, X_I_IN, R_I_IN, XI_I_IN, RHO_I_IN, W_O_IN, K_O_IN, V_O_IN, D_O_IN, X_O_IN, R_O_IN, XI_O_IN, RHO_O_IN);
