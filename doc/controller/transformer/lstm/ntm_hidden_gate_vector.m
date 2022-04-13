@@ -44,43 +44,11 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
-  % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
-
-  % Constants
-  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
-
-  % Internal Signals
-  GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
-
-  % Output Signals
-  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
-
+function H_OUT = ntm_hidden_gate_vector(S_IN, O_IN)
   % Body
-  for l = 1:SIZE_L_IN
-    for n = 1:SIZE_N_IN
-      for d = 1:SIZE_D_IN
-        x_int(n, d) = X_IN(l, n, d);
-      end
-    end
+  % h(n;d) = o(n;d) o tanh(s(n;d))
+  % h(n=0;d) = 0; h(n;d=0) = 0
+  vector_operation_int = tanh(S_IN);
 
-    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
-
-    z_int = x_int + y_int;
-
-    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-
-    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
-
-    z_int = x_int + y_int;
-
-    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-  end
+  H_OUT = O_IN.*vector_operation_int;
 end

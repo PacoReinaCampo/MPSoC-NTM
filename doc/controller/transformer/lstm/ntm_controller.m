@@ -44,43 +44,27 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
+function H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN, X_IN)
   % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
-
-  % Constants
-  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
-
-  % Internal Signals
-  GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
-
-  % Output Signals
-  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
+  addpath(genpath('../../../math/algebra/matrix'));
+  addpath(genpath('../../../math/algebra/tensor'));
 
   % Body
-  for l = 1:SIZE_L_IN
-    for n = 1:SIZE_N_IN
-      for d = 1:SIZE_D_IN
-        x_int(n, d) = X_IN(l, n, d);
-      end
-    end
+  % a(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b(d))
+  vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
-    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
+  % f(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b(d))
+  vector_f_int = ntm_forget_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
-    z_int = x_int + y_int;
+  % i(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b(d))
+  vector_i_int = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
-    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
+  % s(n;d) = f(n;d) o s(n-1,d) + i(n;d) o a(n;d)
+  vector_s_int = ntm_state_gate_vector(S_IN, vector_i_int, vector_f_int, vector_a_int);
 
-    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
+  % o(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b(d))
+  vector_o_int = ntm_output_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);
 
-    z_int = x_int + y_int;
-
-    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-  end
+  % h(n;d) = o(n;d) o tanh(s(n;d))
+  H_OUT = ntm_hidden_gate_vector(vector_s_int, vector_o_int);
 end

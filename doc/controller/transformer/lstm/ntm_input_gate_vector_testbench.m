@@ -44,43 +44,30 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
-  % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
+% Constants
+SIZE_X_IN = 3;
+SIZE_Y_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
+SIZE_D_IN = 3;
+SIZE_R_IN = 3;
+SIZE_M_IN = 3;
+SIZE_S_IN = 3;
 
-  % Constants
-  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
+% Signals
+W_IN = rand(SIZE_D_IN, SIZE_X_IN);
+K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_IN = rand(SIZE_D_IN, SIZE_S_IN);
+D_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_M_IN);
+U_IN = rand(SIZE_D_IN, SIZE_D_IN);
 
-  % Internal Signals
-  GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
+B_IN = rand(SIZE_D_IN, 1);
+X_IN = rand(SIZE_X_IN, 1);
+R_IN = rand(SIZE_R_IN, SIZE_W_IN);
+XI_IN = rand(SIZE_S_IN, 1);
+RHO_IN = rand(SIZE_R_IN, SIZE_M_IN);
 
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
+H_IN = rand(SIZE_D_IN, 1);
 
-  % Output Signals
-  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
-
-  % Body
-  for l = 1:SIZE_L_IN
-    for n = 1:SIZE_N_IN
-      for d = 1:SIZE_D_IN
-        x_int(n, d) = X_IN(l, n, d);
-      end
-    end
-
-    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
-
-    z_int = x_int + y_int;
-
-    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-
-    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
-
-    z_int = x_int + y_int;
-
-    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-  end
-end
+% DUT
+I_OUT = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN);

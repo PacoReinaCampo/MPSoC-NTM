@@ -14,7 +14,6 @@
 ##              Neural Turing Machine for MPSoC                                  ##
 ##                                                                               ##
 ###################################################################################
-
 ###################################################################################
 ##                                                                               ##
 ## Copyright (c) 2020-2024 by the author(s)                                      ##
@@ -44,43 +43,13 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
-  % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
-
-  % Constants
-  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
-
-  % Internal Signals
-  GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
-
-  % Output Signals
-  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
-
+function S_OUT = ntm_state_gate_vector(S_IN, I_IN, F_IN, A_IN)
   % Body
-  for l = 1:SIZE_L_IN
-    for n = 1:SIZE_N_IN
-      for d = 1:SIZE_D_IN
-        x_int(n, d) = X_IN(l, n, d);
-      end
-    end
+  % s(n;d) = f(n;d) o s(n-1;d) + i(n;d) o a(n;d)
+  % s(n=0;d) = 0
+  vector_first_operation_int = F_IN.*S_IN;
 
-    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
+  vector_second_operation_int = I_IN.*A_IN;
 
-    z_int = x_int + y_int;
-
-    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-
-    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
-
-    z_int = x_int + y_int;
-
-    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-  end
+  S_OUT = vector_first_operation_int + vector_second_operation_int;
 end

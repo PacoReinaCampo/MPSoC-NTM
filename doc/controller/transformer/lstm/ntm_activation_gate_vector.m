@@ -44,43 +44,51 @@
 ###################################################################################
 %}
 
-function Z_OUT = ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
+function A_OUT = ntm_activation_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
   % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
+  addpath(genpath('../../../math/algebra/matrix'));
+  addpath(genpath('../../../math/algebra/tensor'));
 
   % Constants
-  [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
-
-  % Internal Signals
-  GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-  BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
-
-  x_int = zeros(SIZE_N_IN, SIZE_D_IN);
-
-  % Output Signals
-  Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
+  [SIZE_R_IN, SIZE_L_IN, ~] = size(K_IN);
 
   % Body
-  for l = 1:SIZE_L_IN
-    for n = 1:SIZE_N_IN
-      for d = 1:SIZE_D_IN
-        x_int(n, d) = X_IN(l, n, d);
-      end
+  % a(n;d) = tanh(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1;d) + b(d))
+  
+  % W(d;x)*x(n;x)
+  vector_operation_int = ntm_matrix_vector_convolution(W_IN, X_IN);
+
+  % K(i;d;k)*r(n;i;k)
+  matrix_operation_int = ntm_tensor_matrix_convolution(K_IN, R_IN);
+
+  for i = 1:SIZE_R_IN
+    for d = 1:SIZE_L_IN
+      vector_operation_int(d) = vector_operation_int(d) + matrix_operation_int(i, d);
     end
-
-    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int);
-
-    z_int = x_int + y_int;
-
-    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
-
-    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int);
-
-    z_int = x_int + y_int;
-
-    Z_OUT(l, :, :) = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN);
   end
+
+  % D(i;d;m)*rho(n;i;m)
+  matrix_operation_int = ntm_tensor_matrix_convolution(D_IN, RHO_IN);
+
+  for i = 1:SIZE_R_IN
+    for d = 1:SIZE_L_IN
+      vector_operation_int(d) = vector_operation_int(d) + matrix_operation_int(i, d);
+    end
+  end
+
+  % b(d)
+  A_OUT = vector_operation_int + B_IN;
+
+  % V(d;s)*xi(n;s)
+  vector_operation_int = ntm_matrix_vector_convolution(V_IN, XI_IN);
+
+  A_OUT = A_OUT + vector_operation_int;
+
+  % U(d;d)*h(n-1;d)
+  vector_operation_int = ntm_matrix_vector_convolution(U_IN, H_IN);
+
+  A_OUT = A_OUT + vector_operation_int;
+
+  % tanh(.)
+  A_OUT = tanh(A_OUT);
 end
