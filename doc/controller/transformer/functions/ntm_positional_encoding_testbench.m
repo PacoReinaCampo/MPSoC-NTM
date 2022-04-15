@@ -51,6 +51,7 @@ SIZE_D_IN = 3;
 
 % Signals
 X_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
+PE_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-Y_OUT = ntm_positional_encoding(X_IN);
+Y_OUT = ntm_positional_encoding(X_IN, PE_IN);

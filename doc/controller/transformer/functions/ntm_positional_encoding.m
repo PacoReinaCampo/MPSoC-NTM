@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_positional_encoding(X_IN)
+function Y_OUT = ntm_positional_encoding(X_IN, PE_IN)
   % Constants
   [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
 
@@ -56,9 +56,9 @@ function Y_OUT = ntm_positional_encoding(X_IN)
     for n = 1:SIZE_N_IN
       for d = 1:SIZE_D_IN
         if ((-1)^X_IN(l, n, d) == 0)
-          Y_OUT(l, n, d) = sin(SIZE_N_IN/10000^(2*X_IN(l, n, d)/SIZE_D_IN));
+          Y_OUT(l, n, d) = sin(PE_IN(l, n, d)/10000^(2*X_IN(l, n, d)/SIZE_D_IN));
         else
-          Y_OUT(l, n, d) = cos(SIZE_N_IN/10000^(2*X_IN(l, n, d)/SIZE_D_IN));
+          Y_OUT(l, n, d) = cos(PE_IN(l, n, d)/10000^(2*X_IN(l, n, d)/SIZE_D_IN));
         end
       end
     end
