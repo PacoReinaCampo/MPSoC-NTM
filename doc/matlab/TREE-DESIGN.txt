@@ -1,0 +1,239 @@
+├───controller
+│   ├───FNN
+│   │   ├───convolutional
+│   │   │       ntm_controller.m
+│   │   │
+│   │   └───standard
+│   │           ntm_controller.m
+│   │
+│   ├───LSTM
+│   │   ├───convolutional
+│   │   │       ntm_activation_gate_vector.m
+│   │   │       ntm_forget_gate_vector.m
+│   │   │       ntm_hidden_gate_vector.m
+│   │   │       ntm_input_gate_vector.m
+│   │   │       ntm_output_gate_vector.m
+│   │   │       ntm_state_gate_vector.m
+│   │   │       ntm_controller.m
+│   │   │
+│   │   └───standard
+│   │           ntm_activation_gate_vector.m
+│   │           ntm_forget_gate_vector.m
+│   │           ntm_hidden_gate_vector.m
+│   │           ntm_input_gate_vector.m
+│   │           ntm_output_gate_vector.m
+│   │           ntm_state_gate_vector.m
+│   │           ntm_controller.m
+│   │
+│   └───transformer
+│       ├───components
+│       │       ntm_masked_multi_head_attention.m
+│       │       ntm_masked_scaled_dot_product_attention.m
+│       │       ntm_multi_head_attention.m
+│       │       ntm_scaled_dot_product_attention.m
+│       │
+│       ├───functions
+│       │       ntm_fnn.m
+│       │       ntm_layer_norm.m
+│       │       ntm_positional_encoding.m
+│       │
+│       ├───inputs
+│       │       ntm_inputs_vector.m
+│       │       ntm_keys_vector.m
+│       │       ntm_queries_vector.m
+│       │       ntm_values_vector.m
+│       │
+│       └───top
+│               ntm_controller.m
+│               ntm_decoder.m
+│               ntm_encoder.m
+│
+├───dnc
+│   ├───memory
+│   │       dnc_addressing.m
+│   │       dnc_allocation_weighting.m
+│   │       dnc_backward_weighting.m
+│   │       dnc_forward_weighting.m
+│   │       dnc_matrix_content_based_addressing.m
+│   │       dnc_memory_matrix.m
+│   │       dnc_memory_retention_vector.m
+│   │       dnc_precedence_weighting.m
+│   │       dnc_read_content_weighting.m
+│   │       dnc_read_vectors.m
+│   │       dnc_read_weighting.m
+│   │       dnc_sort_vector.m
+│   │       dnc_temporal_link_matrix.m
+│   │       dnc_usage_vector.m
+│   │       dnc_vector_content_based_addressing.m
+│   │       dnc_write_content_weighting.m
+│   │       dnc_write_weighting.m
+│   │
+│   └───top
+│           dnc_interface_matrix.m
+│           dnc_interface_vector.m
+│           dnc_output_vector.m
+│           dnc_top.m
+│
+├───math
+│   ├───algebra
+│   │   ├───matrix
+│   │   │       ntm_matrix_convolution.m
+│   │   │       ntm_matrix_inverse.m
+│   │   │       ntm_matrix_multiplication.m
+│   │   │       ntm_matrix_product.m
+│   │   │       ntm_matrix_summation.m
+│   │   │       ntm_matrix_transpose.m
+│   │   │       ntm_matrix_vector_convolution.m
+│   │   │       ntm_matrix_vector_product.m
+│   │   │       ntm_transpose_vector_product.m
+│   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_multiplication.m
+│   │   │       ntm_scalar_summation.m
+│   │   │
+│   │   ├───tensor
+│   │   │       ntm_tensor_convolution.m
+│   │   │       ntm_tensor_inverse.m
+│   │   │       ntm_tensor_matrix_convolution.m
+│   │   │       ntm_tensor_matrix_product.m
+│   │   │       ntm_tensor_multiplication.m
+│   │   │       ntm_tensor_product.m
+│   │   │       ntm_tensor_summation.m
+│   │   │       ntm_tensor_transpose.m
+│   │   │
+│   │   └───vector
+│   │           ntm_dot_product.m
+│   │           ntm_vector_convolution.m
+│   │           ntm_vector_cosine_similarity.m
+│   │           ntm_vector_module.m
+│   │           ntm_vector_multiplication.m
+│   │           ntm_vector_summation.m
+│   │
+│   ├───calculus
+│   │   ├───matrix
+│   │   │       ntm_matrix_differentiation.m
+│   │   │       ntm_matrix_integration.m
+│   │   │       ntm_matrix_softmax.m
+│   │   │
+│   │   ├───tensor
+│   │   │       ntm_tensor_differentiation.m
+│   │   │       ntm_tensor_integration.m
+│   │   │       ntm_tensor_softmax.m
+│   │   │
+│   │   └───vector
+│   │           ntm_vector_differentiation.m
+│   │           ntm_vector_integration.m
+│   │           ntm_vector_softmax.m
+│   │
+│   ├───function
+│   │   ├───matrix
+│   │   │       ntm_matrix_logistic_function.m
+│   │   │       ntm_matrix_oneplus_function.m
+│   │   │
+│   │   ├───scalar
+│   │   │       ntm_scalar_logistic_function.m
+│   │   │       ntm_scalar_oneplus_function.m
+│   │   │
+│   │   └───vector
+│   │           ntm_vector_logistic_function.m
+│   │           ntm_vector_oneplus_function.m
+│   │
+│   └───statitics
+│       ├───matrix
+│       │       ntm_matrix_deviation.m
+│       │       ntm_matrix_mean.m
+│       │
+│       ├───scalar
+│       │       ntm_scalar_deviation.m
+│       │       ntm_scalar_mean.m
+│       │
+│       └───vector
+│               ntm_vector_deviation.m
+│               ntm_vector_mean.m
+│
+├───ntm
+│   ├───memory
+│   │       ntm_addressing.m
+│   │       ntm_matrix_content_based_addressing.m
+│   │       ntm_vector_content_based_addressing.m
+│   │
+│   ├───read_heads
+│   │       ntm_reading.m
+│   │       ntm_reading_tesbench.m
+│   │
+│   ├───top
+│   │       ntm_interface_matrix.m
+│   │       ntm_interface_vector.m
+│   │       ntm_output_vector.m
+│   │       ntm_top.m
+│   │
+│   └───write_heads
+│           ntm_erasing.m
+│           ntm_erasing_tesbench.m
+│           ntm_writing.m
+│           ntm_writing_tesbench.m
+│
+├───state
+│   ├───feedback
+│   │       ntm_state_matrix_feedforward.m
+│   │       ntm_state_matrix_input.m
+│   │       ntm_state_matrix_output.m
+│   │       ntm_state_matrix_state.m
+│   │
+│   ├───outputs
+│   │       ntm_state_vector_output.m
+│   │       ntm_state_vector_state.m
+│   │
+│   └───top
+│           ntm_state_top.m
+│
+└───trainer
+    ├───differentiation
+    │       ntm_matrix_controller_differentiation.m
+    │       ntm_vector_controller_differentiation.m
+    │
+    ├───FNN
+    │       ntm_fnn_b_trainer.m
+    │       ntm_fnn_d_trainer.m
+    │       ntm_fnn_k_trainer.m
+    │       ntm_fnn_u_trainer.m
+    │       ntm_fnn_v_trainer.m
+    │       ntm_fnn_w_trainer.m
+    │       ntm_fnn_trainer.m
+    │
+    └───LSTM
+        ├───activation
+        │       ntm_lstm_activation_b_trainer.m
+        │       ntm_lstm_activation_d_trainer.m
+        │       ntm_lstm_activation_k_trainer.m
+        │       ntm_lstm_activation_u_trainer.m
+        │       ntm_lstm_activation_v_trainer.m
+        │       ntm_lstm_activation_w_trainer.m
+        │       ntm_lstm_activation_trainer.m
+        │
+        ├───forget
+        │       ntm_lstm_forget_b_trainer.m
+        │       ntm_lstm_forget_d_trainer.m
+        │       ntm_lstm_forget_k_trainer.m
+        │       ntm_lstm_forget_u_trainer.m
+        │       ntm_lstm_forget_v_trainer.m
+        │       ntm_lstm_forget_w_trainer.m
+        │       ntm_lstm_forget_trainer.m
+        │
+        ├───input
+        │       ntm_lstm_input_b_trainer.m
+        │       ntm_lstm_input_d_trainer.m
+        │       ntm_lstm_input_k_trainer.m
+        │       ntm_lstm_input_u_trainer.m
+        │       ntm_lstm_input_v_trainer.m
+        │       ntm_lstm_input_w_trainer.m
+        │       ntm_lstm_input_trainer.m
+        │
+        └───output
+                ntm_lstm_output_b_trainer.m
+                ntm_lstm_output_d_trainer.m
+                ntm_lstm_output_k_trainer.m
+                ntm_lstm_output_u_trainer.m
+                ntm_lstm_output_v_trainer.m
+                ntm_lstm_output_w_trainer.m
+                ntm_lstm_output_trainer.m
