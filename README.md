@@ -12,7 +12,11 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 
 ### 2.2. Logic Gate
 
-### 2.3. Finite State Machine
+### 2.3. Combinational Logic
+
+### 2.4. Finite State Machine
+
+### 2.5. Pushdown Automaton
 
 ## 3. Neural Network
 
