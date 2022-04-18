@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN)
+function U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN)
   % Package
   addpath(genpath('../../../math/algebra/matrix'));
   addpath(genpath('../../../math/calculus/matrix'));
@@ -60,6 +60,7 @@ function U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN)
 
   matrix_operation_int = ntm_matrix_transpose(k_int);
   matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int);
+  matrix_operation_int = matrix_operation_int + M_IN;
   scalar_operation_int = sqrt(SIZE_K_IN);
   matrix_operation_int = matrix_operation_int/scalar_operation_int;
   matrix_operation_int = ntm_matrix_softmax(matrix_operation_int);

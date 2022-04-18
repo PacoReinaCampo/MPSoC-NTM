@@ -44,7 +44,7 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN)
+function Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, M_IN, W_OH_IN, X_IN)
   % Package
   addpath(genpath('../inputs'));
 
@@ -69,7 +69,7 @@ function Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN
       v_int(d, :) = V_IN(h, d, :);
     end
 
-    head_int = ntm_masked_scaled_dot_product_attention(k_int, q_int, v_int, X_IN);
+    head_int = ntm_masked_scaled_dot_product_attention(k_int, q_int, v_int, M_IN, X_IN);
     
     multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
   end

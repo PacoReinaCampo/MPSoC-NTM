@@ -22,7 +22,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following conditions..
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -41,5 +41,14 @@
  */
 
 fn main() {
-  println!("Hello QueenField!");
+  // Body
+  for t in 1..LENGTH_IN {
+    for i in 1..SIZE_I_IN {
+      for j in 1..SIZE_J_IN {
+        for k in 1..SIZE_K_IN {
+          DATA_OUT(i, j, k) = DATA_OUT(i, j, k) + DATA_IN(t, i, j, k);
+        }
+      }
+    }
+  }
 }

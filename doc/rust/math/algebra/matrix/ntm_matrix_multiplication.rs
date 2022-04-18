@@ -41,5 +41,12 @@
  */
 
 fn main() {
-  println!("Hello QueenField!");
+  // Body
+  for t in 1..LENGTH_IN {
+    for i in 1..SIZE_I_IN {
+      for j in 1..SIZE_J_IN {
+        DATA_OUT(i, j) = DATA_OUT(i, j)*DATA_IN(t, i, j);
+      }
+    }
+  }
 }

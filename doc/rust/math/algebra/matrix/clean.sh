@@ -1,9 +1,0 @@
-rm -rf ntm_matrix_convolution_testbench
-rm -rf ntm_matrix_inverse_testbench
-rm -rf ntm_matrix_multiplication_testbench
-rm -rf ntm_matrix_product_testbench
-rm -rf ntm_matrix_summation_testbench
-rm -rf ntm_matrix_transpose_testbench
-rm -rf ntm_matrix_vector_convolution_testbench
-rm -rf ntm_matrix_vector_product_testbench
-rm -rf ntm_transpose_vector_product_testbench

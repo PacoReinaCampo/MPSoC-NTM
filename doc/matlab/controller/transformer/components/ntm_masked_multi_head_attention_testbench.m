@@ -56,9 +56,11 @@ K_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 Q_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 V_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
 
+M_IN = rand(SIZE_N_IN, SIZE_N_IN);
+
 W_OH_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
 
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN);
+Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, M_IN, W_OH_IN, X_IN);

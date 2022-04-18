@@ -55,7 +55,9 @@ K_IN = rand(SIZE_D_IN, SIZE_K_IN);
 Q_IN = rand(SIZE_D_IN, SIZE_K_IN);
 V_IN = rand(SIZE_D_IN, SIZE_V_IN);
 
+M_IN = rand(SIZE_N_IN, SIZE_N_IN);
+
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN);
+U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN);

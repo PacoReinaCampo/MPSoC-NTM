@@ -54,7 +54,7 @@ function DATA_OUT = ntm_matrix_multiplication(DATA_IN)
   for t = 1:LENGTH_IN
     for i = 1:SIZE_I_IN
       for j = 1:SIZE_J_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_IN(t, i, j);
+        DATA_OUT(i, j) = DATA_OUT(i, j)*DATA_IN(t, i, j);
       end
     end
   end
