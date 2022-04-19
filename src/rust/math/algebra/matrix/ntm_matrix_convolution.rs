@@ -41,6 +41,13 @@
  */
 
 fn main() {
+
+  // Constants
+  const SIZE_A_I_IN: u32 = 3;
+  const SIZE_A_J_IN: u32 = 3;
+  const SIZE_B_I_IN: u32 = 3;
+  const SIZE_B_J_IN: u32 = 3;
+
   // Body
   for i in 1..SIZE_A_I_IN {
     for j in 1..SIZE_B_J_IN {

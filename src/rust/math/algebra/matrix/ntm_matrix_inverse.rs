@@ -41,6 +41,11 @@
  */
 
 fn main() {
+
+  // Constants
+  const SIZE_I_IN: u32 = 3;
+  const SIZE_J_IN: u32 = 3;
+
   // Body
   for i in 1..SIZE_I_IN {
     data_int(i, :) = data_int(i, :)/data_int(i, i);
