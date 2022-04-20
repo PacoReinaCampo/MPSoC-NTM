@@ -44,40 +44,29 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_trained_top(X_IN)
-  % Package
-  addpath(genpath('../top'));
-  addpath(genpath('../../trainer/fnn'));
+% Constants
+SIZE_T_IN = 3;
+SIZE_X_IN = 3;
+SIZE_Y_IN = 3;
+SIZE_N_IN = 3;
+SIZE_W_IN = 3;
+SIZE_L_IN = 3;
+SIZE_R_IN = 3;
 
-  % Constants
-  LENGTH_IN = 3;
+SIZE_S_IN = 3*SIZE_W_IN + 3;
+SIZE_M_IN = SIZE_W_IN + 5;
 
-  SIZE_T_IN = 3;
-  SIZE_X_IN = 3;
-  SIZE_Y_IN = 3;
-  SIZE_N_IN = 3;
-  SIZE_W_IN = 3;
-  SIZE_L_IN = 3;
-  SIZE_R_IN = 3;
+% Signals
+W_IN = rand(SIZE_L_IN, SIZE_X_IN);
+K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN);
+V_IN = rand(SIZE_L_IN, SIZE_S_IN);
+D_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
+U_IN = rand(SIZE_L_IN, SIZE_L_IN);
+B_IN = rand(SIZE_L_IN, 1);
+P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
+Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 
-  SIZE_S_IN = 2*SIZE_W_IN;
-  SIZE_M_IN = SIZE_N_IN + SIZE_W_IN + 3;
+X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
-  % Signals
-  P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
-  Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
-
-  w_int = rand(SIZE_L_IN, SIZE_X_IN);
-  k_int = rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN);
-  v_int = rand(SIZE_L_IN, SIZE_S_IN);
-  d_int = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
-  u_int = rand(SIZE_L_IN, SIZE_L_IN);
-  b_int = rand(SIZE_L_IN, 1);
-
-  % Body
-  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
-
-  [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN);
-
-  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT]= ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
-end
+% DUT
+[Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = dnc_interface_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN);

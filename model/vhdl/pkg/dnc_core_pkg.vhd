@@ -2938,12 +2938,10 @@ package body dnc_core_pkg is
 
     -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
-    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-      data_product_int(y)  := ZERO_DATA;
-      data_addition_int(y) := ZERO_DATA;
+    data_product_int  := (others => ZERO_DATA);
+    data_addition_int := (others => ZERO_DATA);
 
-      vector_y_output(y) := ZERO_DATA;
-    end loop;
+    vector_y_output := (others => ZERO_DATA);
 
     data_summation_int := function_tensor_matrix_product (
       SIZE_A_I_IN => SIZE_R_IN,

@@ -2263,9 +2263,7 @@ package body ntm_math_pkg is
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := ZERO_DATA;
-    end loop;
+    vector_output := (others => ZERO_DATA);
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       scalar_operation_int := function_scalar_float_multiplier (
@@ -2381,9 +2379,7 @@ package body ntm_math_pkg is
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := ZERO_DATA;
-    end loop;
+    vector_output := (others => ZERO_DATA);
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       scalar_operation_int := function_scalar_float_multiplier (
@@ -2446,9 +2442,7 @@ package body ntm_math_pkg is
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := ZERO_DATA;
-    end loop;
+    vector_output := (others => ZERO_DATA);
 
     for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
@@ -2779,11 +2773,7 @@ package body ntm_math_pkg is
     variable matrix_output : matrix_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_output := (others => (others => ZERO_DATA));
 
     for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
@@ -3136,13 +3126,7 @@ package body ntm_math_pkg is
     variable tensor_output : tensor_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_output := (others => (others => (others => ZERO_DATA)));
 
     for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop

@@ -877,11 +877,7 @@ package body ntm_fnn_controller_pkg is
 
     -- dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_w_output(l, x) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_w_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -939,13 +935,7 @@ package body ntm_fnn_controller_pkg is
 
     -- dK(l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_k_output(l, i, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1005,11 +995,7 @@ package body ntm_fnn_controller_pkg is
 
     -- dU(l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_u_output(l, m) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_u_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1067,11 +1053,7 @@ package body ntm_fnn_controller_pkg is
 
     -- dV(l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-        matrix_v_output(l, s) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_v_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1129,13 +1111,7 @@ package body ntm_fnn_controller_pkg is
 
     -- dD(l;i;m) = summation(d*(t;l) · rho(t;i;m))[t in 0 to T-1]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          tensor_d_output(l, i, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -1193,9 +1169,7 @@ package body ntm_fnn_controller_pkg is
 
     -- db(l) = summation(d*(t+1;l))[t in 0 to T]
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_b_output(l) := ZERO_DATA;
-    end loop;
+    vector_b_output := (others => ZERO_DATA);
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,

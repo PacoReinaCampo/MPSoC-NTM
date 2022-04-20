@@ -44,40 +44,75 @@
 ###################################################################################
 %}
 
-function Y_OUT = ntm_trained_top(X_IN)
+function [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
   % Package
-  addpath(genpath('../top'));
-  addpath(genpath('../../trainer/fnn'));
+  addpath(genpath('../../math/algebra/matrix'));
+  addpath(genpath('../../math/algebra/tensor'));
+  addpath(genpath('../../math/function/vector'));
+
+  addpath(genpath('../../controller/FNN/standard'));
+
+  addpath(genpath('../memory'));
+  addpath(genpath('../read_heads'));
+  addpath(genpath('../write_heads'));
 
   % Constants
-  LENGTH_IN = 3;
+  [SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN] = size(P_IN);
 
-  SIZE_T_IN = 3;
-  SIZE_X_IN = 3;
-  SIZE_Y_IN = 3;
+  [SIZE_T_IN, ~] = size(X_IN);
+
+  SIZE_L_IN = length(B_IN);
+
   SIZE_N_IN = 3;
-  SIZE_W_IN = 3;
-  SIZE_L_IN = 3;
-  SIZE_R_IN = 3;
-
-  SIZE_S_IN = 2*SIZE_W_IN;
-  SIZE_M_IN = SIZE_N_IN + SIZE_W_IN + 3;
 
   % Signals
-  P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
-  Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
-
-  w_int = rand(SIZE_L_IN, SIZE_X_IN);
-  k_int = rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN);
-  v_int = rand(SIZE_L_IN, SIZE_S_IN);
-  d_int = rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN);
-  u_int = rand(SIZE_L_IN, SIZE_L_IN);
-  b_int = rand(SIZE_L_IN, 1);
+  Y_OUT = zeros(SIZE_T_IN, SIZE_Y_IN);
 
   % Body
-  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
+  for t = 1:SIZE_T_IN
+    if (t == 1)
+      H_OUT = zeros(SIZE_L_IN, 1);
 
-  [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN);
+      matrix_m_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
-  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT]= ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
+      matrix_w_int = zeros(SIZE_R_IN, SIZE_N_IN);
+    else
+      % INTERFACE VECTOR
+      matrix_operation_int = ntm_matrix_transpose(V_IN);
+
+      XI_OUT = ntm_interface_vector(matrix_operation_int, H_OUT);
+
+      vector_e_int = XI_OUT(SIZE_W_IN + 1:2*SIZE_W_IN);
+      vector_a_int = XI_OUT(1:SIZE_W_IN);
+
+      % INTERFACE MATRIX
+      tensor_operation_int = ntm_tensor_transpose(D_IN);
+
+      RHO_OUT = ntm_interface_matrix(tensor_operation_int, H_OUT);
+
+      matrix_k_int = RHO_OUT(:, SIZE_N_IN + 4:SIZE_N_IN + SIZE_W_IN + 3);
+      vector_beta_int = RHO_OUT(:, SIZE_N_IN + 3);
+      vector_g_int = RHO_OUT(:, SIZE_N_IN + 2);
+      matrix_s_int = RHO_OUT(:, 2:SIZE_N_IN + 1);
+      vector_gamma_int = RHO_OUT(:, 1);
+
+      % ERASING
+      matrix_m_int = ntm_erasing(matrix_m_int, matrix_w_int, vector_e_int);
+
+      % WRITING
+      matrix_m_int = ntm_writing(matrix_m_int, matrix_w_int, vector_a_int);
+
+      % READING
+      R_OUT = ntm_reading(matrix_w_int, matrix_m_int);
+
+      % ADDRESSING
+      matrix_w_int = ntm_addressing(matrix_k_int, vector_beta_int, vector_g_int, matrix_s_int, vector_gamma_int, matrix_m_int, matrix_w_int);
+
+      % CONTROLLER
+      H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, X_IN(t, :));
+
+      % OUTPUT VECTOR
+      Y_OUT(t, :) = ntm_output_vector(P_IN, R_OUT, Q_IN, H_OUT);
+    end
+  end
 end

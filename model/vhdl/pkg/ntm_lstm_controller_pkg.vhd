@@ -3640,13 +3640,7 @@ package body ntm_lstm_controller_pkg is
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(l, x) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_w_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -3737,13 +3731,7 @@ package body ntm_lstm_controller_pkg is
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_k_output(l, i, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -3836,11 +3824,7 @@ package body ntm_lstm_controller_pkg is
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_u_output(l, m) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_u_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -3931,13 +3915,7 @@ package body ntm_lstm_controller_pkg is
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          tensor_d_output(l, i, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4030,11 +4008,7 @@ package body ntm_lstm_controller_pkg is
 
     -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-        matrix_v_output(l, s) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_v_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4369,13 +4343,7 @@ package body ntm_lstm_controller_pkg is
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(l, x) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_w_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4465,13 +4433,7 @@ package body ntm_lstm_controller_pkg is
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_k_output(l, i, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4563,13 +4525,7 @@ package body ntm_lstm_controller_pkg is
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(l, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_u_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4659,11 +4615,7 @@ package body ntm_lstm_controller_pkg is
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-        matrix_v_output(l, s) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_v_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -4753,13 +4705,7 @@ package body ntm_lstm_controller_pkg is
 
     -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          tensor_d_output(l, i, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5089,13 +5035,7 @@ package body ntm_lstm_controller_pkg is
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(l, x) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_w_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5186,13 +5126,7 @@ package body ntm_lstm_controller_pkg is
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_k_output(l, i, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5285,13 +5219,7 @@ package body ntm_lstm_controller_pkg is
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-          matrix_u_output(l, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_u_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5382,11 +5310,7 @@ package body ntm_lstm_controller_pkg is
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-        matrix_v_output(l, s) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_v_output := (others => (others => ZERO_DATA));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5477,13 +5401,7 @@ package body ntm_lstm_controller_pkg is
 
     -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          tensor_d_output(l, i, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
     vector_ds_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5823,13 +5741,7 @@ package body ntm_lstm_controller_pkg is
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
-      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-          matrix_w_output(l, x) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    matrix_w_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -5926,13 +5838,7 @@ package body ntm_lstm_controller_pkg is
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_k_output(l, i, k) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -6031,11 +5937,7 @@ package body ntm_lstm_controller_pkg is
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_u_output(l, m) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_u_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -6132,11 +6034,7 @@ package body ntm_lstm_controller_pkg is
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for s in 0 to to_integer(unsigned(SIZE_S_IN))-1 loop
-        matrix_v_output(l, s) := ZERO_DATA;
-      end loop;
-    end loop;
+    matrix_v_output := (others => (others => ZERO_DATA));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,
@@ -6233,13 +6131,7 @@ package body ntm_lstm_controller_pkg is
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-        for m in 0 to to_integer(unsigned(SIZE_M_IN))-1 loop
-          tensor_d_output(l, i, m) := ZERO_DATA;
-        end loop;
-      end loop;
-    end loop;
+    tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
     vector_dh_int := function_vector_controller_differentiation (
       SIZE_T_IN => SIZE_T_IN,

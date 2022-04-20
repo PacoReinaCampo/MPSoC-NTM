@@ -74,14 +74,10 @@ function Y_OUT = dnc_trained_top(X_IN)
   u_int = rand(SIZE_L_IN, SIZE_L_IN);
   b_int = rand(SIZE_L_IN, 1);
 
-  R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
-  XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
-  RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
-
-  H_IN = rand(SIZE_T_IN, SIZE_L_IN);
-
   % Body
-  Y_OUT = dnc_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
+  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = dnc_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
 
-  [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_IN, XI_IN, RHO_IN, H_IN, LENGTH_IN);
+  [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN);
+
+  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT]= dnc_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
 end
