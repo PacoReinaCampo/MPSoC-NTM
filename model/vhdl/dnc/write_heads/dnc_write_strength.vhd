@@ -70,6 +70,21 @@ end entity;
 architecture dnc_write_strength_architecture of dnc_write_strength is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- XI_IN [S]
+
+  -- Outputs:
+  -- BETA_OUT [1]
+
+  -- States:
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+
+  -- OUTPUT_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -70,6 +70,21 @@ end entity;
 architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- XI_IN [S]
+
+  -- Outputs:
+  -- GA_OUT [1]
+
+  -- States:
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+
+  -- OUTPUT_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

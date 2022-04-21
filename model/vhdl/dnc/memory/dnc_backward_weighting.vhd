@@ -87,6 +87,25 @@ end entity;
 architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- W_IN [R,N]
+  -- L_IN [N,N]
+
+  -- Outputs:
+  -- B_OUT [R,N]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

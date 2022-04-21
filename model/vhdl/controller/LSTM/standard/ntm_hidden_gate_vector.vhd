@@ -82,6 +82,23 @@ end entity;
 architecture ntm_hidden_gate_vector_urchitecture of ntm_hidden_gate_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- S_IN [L]
+  -- O_IN [L]
+
+  -- Outputs:
+  -- H_OUT [L]
+
+  -- States:
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+  -- INPUT_O_STATE, CLEAN_IN_O_STATE
+
+  -- OUTPUT_L_STATE, CLEAN_OUT_L_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

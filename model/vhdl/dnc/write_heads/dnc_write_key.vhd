@@ -77,6 +77,21 @@ end entity;
 architecture dnc_write_key_urchitecture of dnc_write_key is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- XI_IN [S]
+
+  -- Outputs:
+  -- K_OUT [W]
+
+  -- States:
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+
+  -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

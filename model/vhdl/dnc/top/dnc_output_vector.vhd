@@ -105,6 +105,24 @@ end entity;
 architecture dnc_output_vector_architecture of dnc_output_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- P_IN [R,Y,W], R_IN [Y,L]
+  -- Q_IN [Y,L],   H_IN [L]
+
+  -- Outputs:
+  -- Y_OUT [Y]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_Y_STATE, CLEAN_IN_Y_STATE
+  -- INPUT_L_STATE, CLEAN_IN_L_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+
+  -- OUTPUT_Y_STATE, CLEAN_OUT_Y_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
@@ -162,6 +180,8 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

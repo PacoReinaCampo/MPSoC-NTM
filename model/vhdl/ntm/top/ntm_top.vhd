@@ -145,6 +145,36 @@ end entity;
 architecture ntm_top_architecture of ntm_top is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- W_IN [L,X],  X_IN [X]
+  -- K_IN [R,L,W]
+  -- D_IN [R,L,M]
+  -- V_IN [L,S]
+  -- U_IN [L,L]
+  -- B_IN [L]
+
+  -- P_IN [R,Y,W]
+  -- Q_IN [Y,L]
+
+  -- Outputs:
+  -- Y_OUT [Y]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_Y_STATE, CLEAN_IN_Y_STATE
+  -- INPUT_L_STATE, CLEAN_IN_L_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+  -- INPUT_X_STATE, CLEAN_IN_X_STATE
+
+  -- OUTPUT_Y_STATE, CLEAN_OUT_Y_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

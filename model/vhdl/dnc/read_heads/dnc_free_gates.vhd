@@ -77,6 +77,22 @@ end entity;
 architecture dnc_free_gates_urchitecture of dnc_free_gates is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- RHO_IN [R,M]
+
+  -- Outputs:
+  -- F_OUT [R]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

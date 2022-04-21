@@ -84,6 +84,25 @@ end entity;
 architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- A_IN [N]
+  -- C_IN [N]
+
+  -- GA_IN [1]
+  -- GW_IN [1]
+
+  -- Outputs:
+  -- W_OUT [N,N]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -76,6 +76,21 @@ end entity;
 architecture dnc_erase_vector_urchitecture of dnc_erase_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- XI_IN [S]
+
+  -- Outputs:
+  -- E_OUT [W]
+
+  -- States:
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+
+  -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -88,6 +88,24 @@ end entity;
 architecture ntm_state_gate_vector_urchitecture of ntm_state_gate_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- A_IN [L]
+  -- I_IN [L]
+  -- F_IN [L]
+  -- S_IN [L]
+
+  -- Outputs:
+  -- S_OUT [L]
+
+  -- States:
+  -- INPUT_L_STATE, CLEAN_IN_L_STATE
+
+  -- OUTPUT_L_STATE, CLEAN_OUT_L_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -78,6 +78,21 @@ end entity;
 architecture dnc_sort_vector_urchitecture of dnc_sort_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- U_IN [N]
+
+  -- Outputs:
+  -- PHI_OUT [N]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
@@ -109,7 +124,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- f(t;i) = sigmoid(f^(t;i))
+  -- psi(t;j) = sort(u(t;j))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
