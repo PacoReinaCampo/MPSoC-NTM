@@ -1,4 +1,4 @@
 cargo clean
 rm -rf *.lock
 
-cargo run
+cargo build

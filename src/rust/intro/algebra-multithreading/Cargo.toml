@@ -1,0 +1,12 @@
+[package]
+name = "algebra-multithreading"
+version = "0.1.0"
+authors = ["PacoReinaCampo <pacoreinacampo@queenfield.tech>"]
+edition = "2018"
+
+[dependencies]
+clap = "^2.33"
+rayon = "^1.3"
+
+[dev-dependencies]
+rand = "^0.7"
