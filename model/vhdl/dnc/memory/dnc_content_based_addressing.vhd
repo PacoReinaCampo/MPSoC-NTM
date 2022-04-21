@@ -87,6 +87,24 @@ end entity;
 architecture dnc_content_based_addressing_architecture of dnc_content_based_addressing is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- K_IN [J]
+  -- BETA_IN [1]
+  -- M_IN [I,J]
+
+  -- Outputs:
+  -- C_OUT [I]
+
+  -- States:
+  -- INPUT_I_STATE, CLEAN_IN_I_STATE
+  -- INPUT_J_STATE, CLEAN_IN_J_STATE
+
+  -- OUTPUT_I_STATE, CLEAN_OUT_I_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

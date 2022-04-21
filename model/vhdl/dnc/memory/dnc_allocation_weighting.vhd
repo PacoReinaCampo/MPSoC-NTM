@@ -78,6 +78,22 @@ end entity;
 architecture dnc_allocation_weighting_urchitecture of dnc_allocation_weighting is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- A_IN [N]
+  -- U_IN [N]
+
+  -- Outputs:
+  -- P_OUT [N]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

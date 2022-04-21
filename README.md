@@ -12,7 +12,19 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 
 ### 2.2. Logic Gate
 
+#### 2.2.1. YES/NOT Gate
+
+#### 2.2.2. AND/NAND Gate
+
+#### 2.2.3. OR/NOR Gate
+
+#### 2.2.4. XOR/XNOR Gate
+
 ### 2.3. Combinational Logic
+
+#### 2.3.1. Arithmetic Circuits
+
+#### 2.3.2. Logic Circuits
 
 ### 2.4. Finite State Machine
 

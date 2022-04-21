@@ -104,6 +104,27 @@ end entity;
 architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- PI_IN [R,P]
+  -- B_IN  [R,N]
+  -- C_IN  [R,N]
+  -- F_IN  [R,N]
+
+  -- Outputs:
+  -- W_OUT [R,N]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
