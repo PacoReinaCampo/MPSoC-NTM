@@ -117,6 +117,28 @@ end entity;
 architecture ntm_addressing_architecture of ntm_addressing is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- K_IN [R,W]
+  -- BETA_IN [R]
+  -- G_IN [R]
+  -- S_IN [R,N]
+  -- GAMMA_IN [R]
+
+  -- Outputs:
+  -- W_OUT [R,N]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

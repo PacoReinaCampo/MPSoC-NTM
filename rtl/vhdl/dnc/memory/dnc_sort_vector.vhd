@@ -77,6 +77,21 @@ end entity;
 architecture dnc_sort_vector_architecture of dnc_sort_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- U_IN [N]
+
+  -- Outputs:
+  -- PHI_OUT [N]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -82,6 +82,23 @@ end entity;
 architecture dnc_read_keys_architecture of dnc_read_keys is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- RHO_IN [R,M]
+
+  -- Outputs:
+  -- K_OUT [R,W]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -85,6 +85,25 @@ end entity;
 architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- L_IN [N,N]
+  -- W_IN [N]
+  -- P_IN [N]
+
+  -- Outputs:
+  -- L_OUT [N,N]
+
+  -- States:
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_P_STATE, CLEAN_OUT_P_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

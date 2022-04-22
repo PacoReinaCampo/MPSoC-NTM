@@ -78,6 +78,23 @@ end entity;
 architecture dnc_read_modes_architecture of dnc_read_modes is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- RHO_IN [R,M]
+
+  -- Outputs:
+  -- PI_OUT [R,P]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_P_STATE, CLEAN_OUT_P_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

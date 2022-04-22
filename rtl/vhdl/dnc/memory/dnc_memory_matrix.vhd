@@ -90,6 +90,26 @@ end entity;
 architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- M_IN [N,W]
+  -- W_IN [N]
+  -- E_IN [W]
+  -- V_IN [W]
+
+  -- Outputs:
+  -- M_OUT [N,W]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+  -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

@@ -76,6 +76,22 @@ end entity;
 architecture dnc_read_strengths_architecture of dnc_read_strengths is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- RHO_IN [R,M]
+
+  -- Outputs:
+  -- BETA_OUT [R]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

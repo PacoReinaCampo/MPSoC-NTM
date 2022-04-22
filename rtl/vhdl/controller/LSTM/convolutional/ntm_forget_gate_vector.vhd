@@ -158,6 +158,32 @@ end entity;
 architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- W_IN [L,X],   X_IN   [X]
+  -- K_IN [R,L,W], R_IN   [R,W]
+  -- D_IN [R,L,M], RHO_IN [R,M]
+  -- V_IN [L,S],   XI_IN  [S]
+  -- U_IN [L,L],   H_IN   [L]
+  -- B_IN [L]
+
+  -- Outputs:
+  -- F_OUT [L]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_L_STATE, CLEAN_IN_L_STATE
+  -- INPUT_M_STATE, CLEAN_IN_M_STATE
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_S_STATE, CLEAN_IN_S_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+  -- INPUT_X_STATE, CLEAN_IN_X_STATE
+
+  -- OUTPUT_L_STATE, CLEAN_OUT_L_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

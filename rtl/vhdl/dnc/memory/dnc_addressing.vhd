@@ -115,6 +115,34 @@ end dnc_addressing;
 architecture dnc_addressing_architecture of dnc_addressing is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- K_READ_IN    [R,W]
+  -- BETA_READ_IN [R]
+  -- F_READ_IN    [R,P]
+  -- PI_READ_IN   [R]
+
+  -- K_WRITE_IN    [W]
+  -- BETA_WRITE_IN [1]
+  -- E_WRITE_IN    [W]
+  -- V_WRITE_IN    [W]
+  -- GA_WRITE_IN   [1]
+  -- GW_WRITE_IN   [1]
+
+  -- Outputs:
+  -- R_OUT [R,W]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_P_STATE, CLEAN_IN_P_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

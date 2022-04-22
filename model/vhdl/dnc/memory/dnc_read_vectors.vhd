@@ -90,6 +90,25 @@ end entity;
 architecture dnc_read_vectors_architecture of dnc_read_vectors is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- W_IN [R,N]
+  -- M_IN [N,W]
+
+  -- Outputs:
+  -- R_OUT [R,W]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
+
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
@@ -124,25 +143,6 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
-
-  -----------------------------------------------------------------------
-  -- Functionality
-  -----------------------------------------------------------------------
-
-  -- Inputs:
-  -- W_IN [R,N]
-  -- M_IN [N,W]
-
-  -- Outputs:
-  -- R_OUT [R,W]
-
-  -- States:
-  -- INPUT_R_STATE, CLEAN_IN_R_STATE
-  -- INPUT_N_STATE, CLEAN_IN_N_STATE
-  -- INPUT_W_STATE, CLEAN_IN_W_STATE
-
-  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
-  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
 
   -----------------------------------------------------------------------
   -- Body

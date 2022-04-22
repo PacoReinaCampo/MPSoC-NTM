@@ -85,6 +85,23 @@ end entity;
 architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- W_IN [R,N]
+  -- F_IN [R]
+
+  -- Outputs:
+  -- PSI_OUT [N]
+
+  -- States:
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 

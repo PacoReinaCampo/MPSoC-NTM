@@ -81,6 +81,23 @@ end entity;
 architecture dnc_usage_vector_architecture of dnc_usage_vector is
 
   -----------------------------------------------------------------------
+  -- Functionality
+  -----------------------------------------------------------------------
+
+  -- Inputs:
+  -- U_IN   [N]
+  -- W_IN   [N]
+  -- PSI_IN [N]
+
+  -- Outputs:
+  -- U_OUT [N]
+
+  -- States:
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
