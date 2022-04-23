@@ -133,9 +133,9 @@ package ntm_core_pkg is
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -166,7 +166,7 @@ package ntm_core_pkg is
       W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
       W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
-      E_OUT_ENABLE : in std_logic;      -- for k in 0 to W-1
+      E_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       M_OUT_J_ENABLE : out std_logic;
       M_OUT_K_ENABLE : out std_logic;
@@ -176,9 +176,9 @@ package ntm_core_pkg is
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

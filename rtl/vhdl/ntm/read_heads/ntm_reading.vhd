@@ -158,26 +158,22 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_out_matrix_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_float_multiplier : std_logic;
 
-  -- MATRIX SUMMATION
+  -- VECTOR SUMMATION
   -- CONTROL
-  signal start_matrix_summation : std_logic;
-  signal ready_matrix_summation : std_logic;
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
 
-  signal data_in_i_enable_matrix_summation : std_logic;
-  signal data_in_j_enable_matrix_summation : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
-  signal data_i_enable_matrix_summation : std_logic;
-  signal data_j_enable_matrix_summation : std_logic;
+  signal data_enable_vector_summation : std_logic;
 
-  signal data_out_i_enable_matrix_summation : std_logic;
-  signal data_out_j_enable_matrix_summation : std_logic;
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -185,7 +181,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+  -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -408,8 +404,8 @@ begin
       OVERFLOW_OUT => overflow_out_matrix_float_multiplier
       );
 
-  -- MATRIX SUMMATION
-  matrix_summation : ntm_matrix_summation
+  -- VECTOR SUMMATION
+  vector_summation : ntm_vector_summation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -420,24 +416,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_summation,
-      READY => ready_matrix_summation,
+      START => start_vector_summation,
+      READY => ready_vector_summation,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
-      DATA_I_ENABLE => data_i_enable_matrix_summation,
-      DATA_J_ENABLE => data_j_enable_matrix_summation,
+      DATA_ENABLE => data_enable_vector_summation,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_summation,
-      SIZE_J_IN => size_j_in_matrix_summation,
-      LENGTH_IN => length_in_matrix_summation,
-      DATA_IN   => data_in_matrix_summation,
-      DATA_OUT  => data_out_matrix_summation
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
 end architecture;

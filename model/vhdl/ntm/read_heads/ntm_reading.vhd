@@ -101,12 +101,12 @@ architecture ntm_reading_architecture of ntm_reading is
   -- M_OUT [R,W]
 
   -- States:
-  -- INPUT_R_STATE, OUTPUT_IN_R_STATE
-  -- INPUT_N_STATE, OUTPUT_IN_N_STATE
-  -- INPUT_W_STATE, OUTPUT_IN_W_STATE
+  -- INPUT_R_STATE, CLEAN_IN_R_STATE
+  -- INPUT_N_STATE, CLEAN_IN_N_STATE
+  -- INPUT_W_STATE, CLEAN_IN_W_STATE
 
-  -- OUTPUT_R_STATE, OUTPUT_OUT_R_STATE
-  -- OUTPUT_N_STATE, OUTPUT_OUT_N_STATE
+  -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
+  -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
 
   -----------------------------------------------------------------------
   -- Types
@@ -426,6 +426,16 @@ begin
       case controller_r_out_fsm_int is
         when STARTER_R_OUT_STATE =>           -- STEP 0
           if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Data Internal
+            matrix_r_out_int <= function_ntm_reading (
+              SIZE_R_IN => SIZE_R_IN,
+              SIZE_N_IN => SIZE_N_IN,
+              SIZE_W_IN => SIZE_W_IN,
+
+              matrix_w_input => matrix_w_in_int,
+              matrix_m_input => matrix_m_in_int
+              );
+
             -- Control Internal
             index_i_r_out_loop <= ZERO_CONTROL;
             index_k_r_out_loop <= ZERO_CONTROL;

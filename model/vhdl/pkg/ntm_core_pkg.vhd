@@ -167,7 +167,7 @@ package ntm_core_pkg is
       W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
       W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
-      E_OUT_ENABLE : in std_logic;      -- for k in 0 to W-1
+      E_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       M_OUT_J_ENABLE : out std_logic;
       M_OUT_K_ENABLE : out std_logic;
@@ -703,6 +703,8 @@ package body ntm_core_pkg is
     matrix_m_input : matrix_buffer
     ) return matrix_buffer is
 
+    variable vector_summation_int : vector_buffer;
+
     variable matrix_operation_int : matrix_buffer;
 
     variable tensor_operation_int : tensor_buffer;
@@ -728,20 +730,17 @@ package body ntm_core_pkg is
         matrix_b_input => matrix_m_input
         );
 
-      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_operation_int(i, j, k) := matrix_operation_int(j, k);
-        end loop;
+      vector_summation_int := function_vector_summation (
+        SIZE_IN   => SIZE_N_IN,
+        LENGTH_IN => SIZE_W_IN,
+
+        vector_input => matrix_operation_int
+       );
+
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_r_output(i, k) := vector_summation_int(k);
       end loop;
     end loop;
-
-    matrix_r_output := function_matrix_summation (
-      SIZE_I_IN => SIZE_N_IN,
-      SIZE_J_IN => SIZE_W_IN,
-      LENGTH_IN => SIZE_R_IN,
-
-      matrix_input => tensor_operation_int
-      );
 
     return matrix_r_output;
   end function function_ntm_reading;
@@ -828,7 +827,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+    -- M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
     matrix_first_operation_int := (others => (others => ONE_DATA));
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
