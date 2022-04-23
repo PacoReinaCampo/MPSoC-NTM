@@ -75,6 +75,7 @@ entity ntm_reading is
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -135,40 +136,48 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_a_in_reading_int : std_logic;
   signal data_b_in_reading_int : std_logic;
 
-  -- VECTOR ADDER
+  -- MATRIX FLOAT MULTIPLIER
   -- CONTROL
-  signal start_vector_float_adder : std_logic;
-  signal ready_vector_float_adder : std_logic;
+  signal start_matrix_float_multiplier : std_logic;
+  signal ready_matrix_float_multiplier : std_logic;
 
-  signal operation_vector_float_adder : std_logic;
+  signal data_a_in_i_enable_matrix_float_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_float_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_float_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_float_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_float_adder : std_logic;
-  signal data_b_in_enable_vector_float_adder : std_logic;
-
-  signal data_out_enable_vector_float_adder : std_logic;
+  signal data_out_i_enable_matrix_float_multiplier : std_logic;
+  signal data_out_j_enable_matrix_float_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_float_multiplier : std_logic;
 
-  -- VECTOR MULTIPLIER
+  -- MATRIX SUMMATION
   -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
+  signal start_matrix_summation : std_logic;
+  signal ready_matrix_summation : std_logic;
 
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
+  signal data_in_i_enable_matrix_summation : std_logic;
+  signal data_in_j_enable_matrix_summation : std_logic;
 
-  signal data_out_enable_vector_float_multiplier : std_logic;
+  signal data_i_enable_matrix_summation : std_logic;
+  signal data_j_enable_matrix_summation : std_logic;
+
+  signal data_out_i_enable_matrix_summation : std_logic;
+  signal data_out_j_enable_matrix_summation : std_logic;
 
   -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -366,8 +375,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR ADDER
-  vector_float_adder : ntm_vector_float_adder
+  -- MATRIX FLOAT MULTIPLIER
+  matrix_float_multiplier : ntm_matrix_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -378,25 +387,29 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_float_adder,
-      READY => ready_vector_float_adder,
+      START => start_matrix_float_multiplier,
+      READY => ready_matrix_float_multiplier,
 
-      OPERATION => operation_vector_float_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_multiplier,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_multiplier,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_multiplier,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_multiplier,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_float_adder,
-      DATA_A_IN => data_a_in_vector_float_adder,
-      DATA_B_IN => data_b_in_vector_float_adder,
-      DATA_OUT  => data_out_vector_float_adder
+      SIZE_I_IN => size_i_in_matrix_float_multiplier,
+      SIZE_J_IN => size_j_in_matrix_float_multiplier,
+      DATA_A_IN => data_a_in_matrix_float_multiplier,
+      DATA_B_IN => data_b_in_matrix_float_multiplier,
+
+      DATA_OUT     => data_out_matrix_float_multiplier,
+      OVERFLOW_OUT => overflow_out_matrix_float_multiplier
       );
 
-  -- VECTOR MULTIPLIER
-  vector_float_multiplier : ntm_vector_float_multiplier
+  -- MATRIX SUMMATION
+  matrix_summation : ntm_matrix_summation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -407,19 +420,24 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
+      START => start_matrix_summation,
+      READY => ready_matrix_summation,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
+      DATA_I_ENABLE => data_i_enable_matrix_summation,
+      DATA_J_ENABLE => data_j_enable_matrix_summation,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
 
       -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
+      SIZE_I_IN => size_i_in_matrix_summation,
+      SIZE_J_IN => size_j_in_matrix_summation,
+      LENGTH_IN => length_in_matrix_summation,
+      DATA_IN   => data_in_matrix_summation,
+      DATA_OUT  => data_out_matrix_summation
       );
 
 end architecture;
