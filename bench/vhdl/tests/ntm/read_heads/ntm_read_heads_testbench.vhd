@@ -194,7 +194,7 @@ begin
       SIZE_N_IN => size_n_in_reading,
       SIZE_W_IN => size_w_in_reading,
 
-      W_IN  > w_in_reading,
+      W_IN => w_in_reading,
       M_IN => m_in_reading,
 
       R_OUT => r_out_reading

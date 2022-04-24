@@ -148,8 +148,8 @@ architecture ntm_reading_architecture of ntm_reading is
   signal controller_r_out_fsm_int : controller_r_out_fsm;
 
   -- Buffer
-  signal matrix_m_in_int : matrix_buffer;
   signal matrix_w_in_int : matrix_buffer;
+  signal matrix_m_in_int : matrix_buffer;
 
   signal matrix_r_out_int : matrix_buffer;
 

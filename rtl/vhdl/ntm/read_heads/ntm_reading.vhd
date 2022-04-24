@@ -111,6 +111,15 @@ architecture ntm_reading_architecture of ntm_reading is
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
+  type controller_w_in_fsm is (
+    STARTER_W_IN_STATE,                      -- STEP 0
+    INPUT_W_IN_I_STATE,                      -- STEP 1
+    INPUT_W_IN_J_STATE,                      -- STEP 2
+    CLEAN_W_IN_I_STATE,                      -- STEP 3
+    CLEAN_W_IN_J_STATE                       -- STEP 4
+    );
+
   type controller_m_in_fsm is (
     STARTER_M_IN_STATE,                      -- STEP 0
     INPUT_M_IN_J_STATE,                      -- STEP 1
@@ -119,14 +128,20 @@ architecture ntm_reading_architecture of ntm_reading is
     CLEAN_M_IN_K_STATE                       -- STEP 4
     );
 
-  type controller_fsm is (
+  type controller_matrix_float_multiplier_fsm is (
     STARTER_STATE,                           -- STEP 0
-    INPUT_I_STATE,                           -- STEP 1
-    INPUT_J_STATE,                           -- STEP 2
-    INPUT_K_STATE,                           -- STEP 3
-    CLEAN_I_STATE,                           -- STEP 4
-    CLEAN_J_STATE,                           -- STEP 5
-    CLEAN_K_STATE                            -- STEP 6
+    INPUT_J_STATE,                           -- STEP 1
+    INPUT_K_STATE,                           -- STEP 2
+    CLEAN_J_STATE,                           -- STEP 3
+    CLEAN_K_STATE                            -- STEP 4
+    );
+
+  type controller_r_out_fsm is (
+    STARTER_R_OUT_STATE,                     -- STEP 0
+    CLEAN_R_OUT_I_STATE,                     -- STEP 1
+    CLEAN_R_OUT_K_STATE,                     -- STEP 2
+    OUTPUT_R_OUT_I_STATE,                    -- STEP 3
+    OUTPUT_R_OUT_K_STATE                     -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -138,20 +153,33 @@ architecture ntm_reading_architecture of ntm_reading is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  signal controller_w_in_fsm_int : controller_w_in_fsm;
   signal controller_m_in_fsm_int : controller_m_in_fsm;
 
-  signal controller_fsm_int : controller_fsm;
+  signal controller_matrix_float_multiplier_fsm_int : controller_matrix_float_multiplier_fsm;
+
+  signal controller_r_out_fsm_int : controller_r_out_fsm;
 
   -- Buffer
+  signal matrix_w_in_int : matrix_buffer;
   signal matrix_m_in_int : matrix_buffer;
 
+  signal matrix_r_out_int : matrix_buffer;
+
   -- Control Internal
+  signal index_i_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_j_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal index_i_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_w_in_enable_int : std_logic;
   signal data_m_in_enable_int : std_logic;
 
   -- MATRIX FLOAT MULTIPLIER
@@ -200,6 +228,121 @@ begin
   -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
   -- CONTROL
+  w_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      W_OUT_I_ENABLE <= '0';
+      W_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_w_in_loop <= ZERO_CONTROL;
+      index_j_w_in_loop <= ZERO_CONTROL;
+
+      data_w_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_w_in_fsm_int is
+        when STARTER_W_IN_STATE =>           -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= ZERO_CONTROL;
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            data_w_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
+          else
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '0';
+            W_OUT_J_ENABLE <= '0';
+          end if;
+
+        when INPUT_W_IN_I_STATE =>           -- STEP 1
+
+          if ((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_w_in_int(to_integer(unsigned(index_i_w_in_loop)), to_integer(unsigned(index_j_w_in_loop))) <= W_IN;
+
+            -- FSM Control
+            controller_w_in_fsm_int <= CLEAN_W_IN_J_STATE;
+          end if;
+
+          -- Control Outputs
+          W_OUT_I_ENABLE <= '0';
+          W_OUT_J_ENABLE <= '0';
+
+        when INPUT_W_IN_J_STATE =>           -- STEP 2
+
+          if (W_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_w_in_int(to_integer(unsigned(index_i_w_in_loop)), to_integer(unsigned(index_j_w_in_loop))) <= W_IN;
+
+            -- FSM Control
+            if (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              controller_w_in_fsm_int <= CLEAN_W_IN_I_STATE;
+            else
+              controller_w_in_fsm_int <= CLEAN_W_IN_J_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          W_OUT_J_ENABLE <= '0';
+
+        when CLEAN_W_IN_I_STATE =>           -- STEP 3
+
+          if ((unsigned(index_i_w_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= ZERO_CONTROL;
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            data_w_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_w_in_fsm_int <= STARTER_W_IN_STATE;
+          elsif ((unsigned(index_i_w_in_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= std_logic_vector(unsigned(index_i_w_in_loop) + unsigned(ONE_CONTROL));
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
+          end if;
+
+        when CLEAN_W_IN_J_STATE =>           -- STEP 4
+
+          if (unsigned(index_j_w_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_w_in_loop <= std_logic_vector(unsigned(index_j_w_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_J_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_w_in_fsm_int <= STARTER_W_IN_STATE;
+      end case;
+    end if;
+  end process;
+
   m_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -315,7 +458,7 @@ begin
     end if;
   end process;
 
-  output_fsm : process(CLK, RST)
+  matrix_float_multiplier_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -333,7 +476,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case controller_fsm_int is
+      case controller_matrix_float_multiplier_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -347,7 +490,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_fsm_int <= INPUT_I_STATE;
+            controller_matrix_float_multiplier_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_J_STATE =>    -- STEP 5
@@ -371,7 +514,7 @@ begin
             data_b_in_j_enable_matrix_float_multiplier <= '1';
 
             -- FSM Control
-            controller_fsm_int <= CLEAN_K_STATE;
+            controller_matrix_float_multiplier_fsm_int <= CLEAN_K_STATE;
           end if;
 
           -- Control Outputs
@@ -391,9 +534,9 @@ begin
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
-              controller_fsm_int <= CLEAN_J_STATE;
+              controller_matrix_float_multiplier_fsm_int <= CLEAN_J_STATE;
             else
-              controller_fsm_int <= CLEAN_K_STATE;
+              controller_matrix_float_multiplier_fsm_int <= CLEAN_K_STATE;
             end if;
           end if;
 
@@ -418,7 +561,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_fsm_int <= STARTER_STATE;
+              controller_matrix_float_multiplier_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               R_OUT <= data_out_matrix_float_multiplier;
@@ -432,7 +575,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_fsm_int <= INPUT_I_STATE;
+              controller_matrix_float_multiplier_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
@@ -458,7 +601,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_fsm_int <= INPUT_J_STATE;
+              controller_matrix_float_multiplier_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
@@ -472,7 +615,110 @@ begin
 
         when others =>
           -- FSM Control
-          controller_fsm_int <= STARTER_STATE;
+          controller_matrix_float_multiplier_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  r_out_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      R_OUT <= ZERO_DATA;
+
+      -- Control Outputs
+      READY <= '0';
+
+      R_OUT_I_ENABLE <= '0';
+      R_OUT_K_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_r_out_loop <= ZERO_CONTROL;
+      index_k_r_out_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_r_out_fsm_int is
+        when STARTER_R_OUT_STATE =>           -- STEP 0
+          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Control Internal
+            index_i_r_out_loop <= ZERO_CONTROL;
+            index_k_r_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
+          end if;
+
+        when CLEAN_R_OUT_I_STATE =>           -- STEP 1
+          -- Control Outputs
+          R_OUT_I_ENABLE <= '0';
+          R_OUT_K_ENABLE <= '0';
+
+          -- FSM Control
+          controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
+
+        when CLEAN_R_OUT_K_STATE =>           -- STEP 2
+
+          -- Control Outputs
+          R_OUT_K_ENABLE <= '0';
+
+          -- FSM Control
+          if (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_r_out_fsm_int <= OUTPUT_R_OUT_I_STATE;
+          else
+            controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
+          end if;
+
+        when OUTPUT_R_OUT_I_STATE =>           -- STEP 3
+
+          if ((unsigned(index_i_r_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            R_OUT <= matrix_r_out_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            R_OUT_I_ENABLE <= '1';
+            R_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_r_out_loop <= ZERO_CONTROL;
+            index_k_r_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_r_out_fsm_int <= STARTER_R_OUT_STATE;
+          elsif ((unsigned(index_i_r_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            R_OUT <= matrix_r_out_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
+
+            -- Control Outputs
+            R_OUT_I_ENABLE <= '1';
+            R_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_r_out_loop <= std_logic_vector(unsigned(index_i_r_out_loop) + unsigned(ONE_CONTROL));
+            index_k_r_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
+          end if;
+
+        when OUTPUT_R_OUT_K_STATE =>           -- STEP 4
+
+          if (unsigned(index_k_r_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            R_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_r_out_loop <= std_logic_vector(unsigned(index_k_r_out_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_r_out_fsm_int <= CLEAN_R_OUT_K_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_r_out_fsm_int <= STARTER_R_OUT_STATE;
       end case;
     end if;
   end process;
