@@ -6409,7 +6409,7 @@ package body ntm_lstm_controller_pkg is
       vector_o_input => vector_o_input
       );
 
-   vector_b_output := function_ntm_lstm_output_b_trainer (
+    vector_b_output := function_ntm_lstm_output_b_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,

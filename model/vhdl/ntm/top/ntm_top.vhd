@@ -133,7 +133,7 @@ entity ntm_top is
     D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    X_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     Q_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

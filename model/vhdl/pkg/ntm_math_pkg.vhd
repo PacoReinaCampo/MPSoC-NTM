@@ -3825,10 +3825,10 @@ package body ntm_math_pkg is
         );
     end loop;
 
-  scalar_output := function_scalar_float_divider (
-    scalar_a_input => scalar_output,
-    scalar_b_input => LENGTH_IN
-    );
+    scalar_output := function_scalar_float_divider (
+      scalar_a_input => scalar_output,
+      scalar_b_input => LENGTH_IN
+      );
 
     return scalar_output;
   end function function_ntm_scalar_mean;
@@ -3869,14 +3869,14 @@ package body ntm_math_pkg is
         );
     end loop;
 
-  scalar_output := function_scalar_float_divider (
-    scalar_a_input => scalar_output,
-    scalar_b_input => LENGTH_IN
-    );
+    scalar_output := function_scalar_float_divider (
+      scalar_a_input => scalar_output,
+      scalar_b_input => LENGTH_IN
+      );
 
-  scalar_output := function_scalar_sqrt (
-    scalar_input => scalar_output
-    );
+    scalar_output := function_scalar_sqrt (
+      scalar_input => scalar_output
+      );
 
     return scalar_output;
   end function function_ntm_scalar_deviation;
@@ -3961,7 +3961,7 @@ package body ntm_math_pkg is
       vector_output(i) := function_scalar_float_divider (
         scalar_a_input => vector_output(i),
         scalar_b_input => LENGTH_IN
-      );
+        );
     end loop;
 
     vector_output := function_vector_sqrt (

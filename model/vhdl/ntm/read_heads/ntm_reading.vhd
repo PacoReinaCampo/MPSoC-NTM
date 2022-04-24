@@ -114,27 +114,27 @@ architecture ntm_reading_architecture of ntm_reading is
 
   -- Finite State Machine
   type controller_w_in_fsm is (
-    STARTER_W_IN_STATE,                      -- STEP 0
-    INPUT_W_IN_I_STATE,                      -- STEP 1
-    INPUT_W_IN_J_STATE,                      -- STEP 2
-    CLEAN_W_IN_I_STATE,                      -- STEP 3
-    CLEAN_W_IN_J_STATE                       -- STEP 4
+    STARTER_W_IN_STATE,                 -- STEP 0
+    INPUT_W_IN_I_STATE,                 -- STEP 1
+    INPUT_W_IN_J_STATE,                 -- STEP 2
+    CLEAN_W_IN_I_STATE,                 -- STEP 3
+    CLEAN_W_IN_J_STATE                  -- STEP 4
     );
 
   type controller_m_in_fsm is (
-    STARTER_M_IN_STATE,                      -- STEP 0
-    INPUT_M_IN_J_STATE,                      -- STEP 1
-    INPUT_M_IN_K_STATE,                      -- STEP 2
-    CLEAN_M_IN_J_STATE,                      -- STEP 3
-    CLEAN_M_IN_K_STATE                       -- STEP 4
+    STARTER_M_IN_STATE,                 -- STEP 0
+    INPUT_M_IN_J_STATE,                 -- STEP 1
+    INPUT_M_IN_K_STATE,                 -- STEP 2
+    CLEAN_M_IN_J_STATE,                 -- STEP 3
+    CLEAN_M_IN_K_STATE                  -- STEP 4
     );
 
   type controller_r_out_fsm is (
-    STARTER_R_OUT_STATE,                     -- STEP 0
-    CLEAN_R_OUT_I_STATE,                     -- STEP 1
-    CLEAN_R_OUT_K_STATE,                     -- STEP 2
-    OUTPUT_R_OUT_I_STATE,                    -- STEP 3
-    OUTPUT_R_OUT_K_STATE                     -- STEP 4
+    STARTER_R_OUT_STATE,                -- STEP 0
+    CLEAN_R_OUT_I_STATE,                -- STEP 1
+    CLEAN_R_OUT_K_STATE,                -- STEP 2
+    OUTPUT_R_OUT_I_STATE,               -- STEP 3
+    OUTPUT_R_OUT_K_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -191,7 +191,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_w_in_fsm_int is
-        when STARTER_W_IN_STATE =>           -- STEP 0
+        when STARTER_W_IN_STATE =>      -- STEP 0
           if (START = '1') then
             -- Control Outputs
             W_OUT_I_ENABLE <= '1';
@@ -211,7 +211,7 @@ begin
             W_OUT_J_ENABLE <= '0';
           end if;
 
-        when INPUT_W_IN_I_STATE =>           -- STEP 1
+        when INPUT_W_IN_I_STATE =>      -- STEP 1
 
           if ((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -225,7 +225,7 @@ begin
           W_OUT_I_ENABLE <= '0';
           W_OUT_J_ENABLE <= '0';
 
-        when INPUT_W_IN_J_STATE =>           -- STEP 2
+        when INPUT_W_IN_J_STATE =>      -- STEP 2
 
           if (W_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -242,7 +242,7 @@ begin
           -- Control Outputs
           W_OUT_J_ENABLE <= '0';
 
-        when CLEAN_W_IN_I_STATE =>           -- STEP 3
+        when CLEAN_W_IN_I_STATE =>      -- STEP 3
 
           if ((unsigned(index_i_w_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -270,7 +270,7 @@ begin
             controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
           end if;
 
-        when CLEAN_W_IN_J_STATE =>           -- STEP 4
+        when CLEAN_W_IN_J_STATE =>      -- STEP 4
 
           if (unsigned(index_j_w_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -305,7 +305,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_m_in_fsm_int is
-        when STARTER_M_IN_STATE =>           -- STEP 0
+        when STARTER_M_IN_STATE =>      -- STEP 0
           if (START = '1') then
             -- Control Outputs
             M_OUT_J_ENABLE <= '1';
@@ -325,7 +325,7 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_M_IN_J_STATE =>           -- STEP 1
+        when INPUT_M_IN_J_STATE =>      -- STEP 1
 
           if ((M_IN_J_ENABLE = '1') and (M_IN_K_ENABLE = '1')) then
             -- Data Inputs
@@ -339,7 +339,7 @@ begin
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
 
-        when INPUT_M_IN_K_STATE =>           -- STEP 2
+        when INPUT_M_IN_K_STATE =>      -- STEP 2
 
           if (M_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -357,7 +357,7 @@ begin
           M_OUT_K_ENABLE <= '0';
           W_OUT_J_ENABLE <= '0';
 
-        when CLEAN_M_IN_J_STATE =>           -- STEP 3
+        when CLEAN_M_IN_J_STATE =>      -- STEP 3
 
           if ((unsigned(index_j_m_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_m_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -385,7 +385,7 @@ begin
             controller_m_in_fsm_int <= INPUT_M_IN_J_STATE;
           end if;
 
-        when CLEAN_M_IN_K_STATE =>           -- STEP 4
+        when CLEAN_M_IN_K_STATE =>      -- STEP 4
 
           if (unsigned(index_k_m_in_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -424,7 +424,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_r_out_fsm_int is
-        when STARTER_R_OUT_STATE =>           -- STEP 0
+        when STARTER_R_OUT_STATE =>     -- STEP 0
           if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1') then
             -- Data Internal
             matrix_r_out_int <= function_ntm_reading (
@@ -444,7 +444,7 @@ begin
             controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
           end if;
 
-        when CLEAN_R_OUT_I_STATE =>           -- STEP 1
+        when CLEAN_R_OUT_I_STATE =>     -- STEP 1
           -- Control Outputs
           R_OUT_I_ENABLE <= '0';
           R_OUT_K_ENABLE <= '0';
@@ -452,7 +452,7 @@ begin
           -- FSM Control
           controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
 
-        when CLEAN_R_OUT_K_STATE =>           -- STEP 2
+        when CLEAN_R_OUT_K_STATE =>     -- STEP 2
 
           -- Control Outputs
           R_OUT_K_ENABLE <= '0';
@@ -464,7 +464,7 @@ begin
             controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
           end if;
 
-        when OUTPUT_R_OUT_I_STATE =>           -- STEP 3
+        when OUTPUT_R_OUT_I_STATE =>    -- STEP 3
 
           if ((unsigned(index_i_r_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -498,7 +498,7 @@ begin
             controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
           end if;
 
-        when OUTPUT_R_OUT_K_STATE =>           -- STEP 4
+        when OUTPUT_R_OUT_K_STATE =>    -- STEP 4
 
           if (unsigned(index_k_r_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

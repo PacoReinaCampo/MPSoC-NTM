@@ -122,7 +122,7 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   -- OUTPUT_R_STATE, CLEAN_OUT_R_STATE
   -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
-  
+
 
   -----------------------------------------------------------------------
   -- Types

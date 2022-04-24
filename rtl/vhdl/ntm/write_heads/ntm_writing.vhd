@@ -194,7 +194,7 @@ begin
       READY <= '0';
 
       W_OUT_J_ENABLE <= '0';
-      A_OUT_ENABLE <= '0';
+      A_OUT_ENABLE   <= '0';
 
       M_OUT_J_ENABLE <= '0';
       M_OUT_K_ENABLE <= '0';
@@ -214,7 +214,7 @@ begin
           READY <= '0';
 
           W_OUT_J_ENABLE <= '0';
-          A_OUT_ENABLE <= '0';
+          A_OUT_ENABLE   <= '0';
 
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
@@ -283,7 +283,7 @@ begin
 
             -- Control Outputs
             W_OUT_J_ENABLE <= '1';
-            A_OUT_ENABLE <= '1';
+            A_OUT_ENABLE   <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
@@ -317,7 +317,7 @@ begin
 
           -- Control Outputs
           W_OUT_J_ENABLE <= '0';
-          A_OUT_ENABLE <= '0';
+          A_OUT_ENABLE   <= '0';
 
         when VECTOR_ADDER_STATE =>      -- STEP 4
 

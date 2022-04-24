@@ -193,7 +193,7 @@ begin
       READY <= '0';
 
       W_OUT_J_ENABLE <= '0';
-      E_OUT_ENABLE <= '0';
+      E_OUT_ENABLE   <= '0';
 
       M_OUT_J_ENABLE <= '0';
       M_OUT_K_ENABLE <= '0';
@@ -213,7 +213,7 @@ begin
           READY <= '0';
 
           W_OUT_J_ENABLE <= '0';
-          E_OUT_ENABLE <= '0';
+          E_OUT_ENABLE   <= '0';
 
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
@@ -279,7 +279,7 @@ begin
           if (data_out_enable_vector_float_multiplier = '1') then
             -- Control Outputs
             W_OUT_J_ENABLE <= '1';
-            E_OUT_ENABLE <= '1';
+            E_OUT_ENABLE   <= '1';
 
             -- Data Internal
             data_a_in_vector_float_adder <= ONE_DATA;
@@ -316,7 +316,7 @@ begin
 
           -- Control Outputs
           W_OUT_J_ENABLE <= '0';
-          E_OUT_ENABLE <= '0';
+          E_OUT_ENABLE   <= '0';
 
         when INPUT_SECOND_STATE =>      -- STEP 4
 
