@@ -100,9 +100,10 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_out_writing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASING
@@ -131,9 +132,10 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_out_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin

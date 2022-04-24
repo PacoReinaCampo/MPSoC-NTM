@@ -89,6 +89,7 @@ entity ntm_read_heads_stimulus is
 
     NTM_READ_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_READ_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+
     NTM_READ_HEADS_R_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

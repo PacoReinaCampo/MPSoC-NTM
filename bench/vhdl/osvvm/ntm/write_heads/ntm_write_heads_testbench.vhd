@@ -100,9 +100,10 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal w_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_out_writing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASING
@@ -131,9 +132,10 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_out_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -186,9 +188,10 @@ begin
       NTM_WRITE_HEADS_SIZE_N_IN => size_n_in_writing,
       NTM_WRITE_HEADS_SIZE_W_IN => size_w_in_writing,
 
+      NTM_WRITE_HEADS_W_IN  => w_in_writing,
       NTM_WRITE_HEADS_M_IN  => m_in_writing,
       NTM_WRITE_HEADS_A_IN  => a_in_writing,
-      NTM_WRITE_HEADS_W_IN  => w_in_writing,
+
       NTM_WRITE_HEADS_M_OUT => m_out_writing
       );
 
@@ -228,9 +231,10 @@ begin
       SIZE_N_IN => size_n_in_writing,
       SIZE_W_IN => size_w_in_writing,
 
+      W_IN  => w_in_writing,
       M_IN  => m_in_writing,
       A_IN  => a_in_writing,
-      W_IN  => w_in_writing,
+
       M_OUT => m_out_writing
       );
 
@@ -270,9 +274,10 @@ begin
       SIZE_N_IN => size_n_in_erasing,
       SIZE_W_IN => size_w_in_erasing,
 
+      W_IN  => w_in_erasing,
       M_IN  => m_in_erasing,
       E_IN  => e_in_erasing,
-      W_IN  => w_in_erasing,
+
       M_OUT => m_out_erasing
       );
 

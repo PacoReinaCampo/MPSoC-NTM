@@ -187,9 +187,10 @@ package ntm_read_heads_pkg is
       NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_READ_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_READ_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_READ_HEADS_R_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      NTM_READ_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_READ_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_READ_HEADS_R_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

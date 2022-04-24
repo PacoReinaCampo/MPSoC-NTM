@@ -707,8 +707,6 @@ package body ntm_core_pkg is
 
     variable matrix_operation_int : matrix_buffer;
 
-    variable tensor_operation_int : tensor_buffer;
-
     variable matrix_r_output : matrix_buffer;
 
   begin
