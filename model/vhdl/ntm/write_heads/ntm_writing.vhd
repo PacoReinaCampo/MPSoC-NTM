@@ -175,9 +175,9 @@ architecture ntm_writing_architecture of ntm_writing is
   signal index_j_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_w_in_enabla_int : std_logic;
-  signal data_m_in_enabla_int : std_logic;
-  signal data_a_in_enabla_int : std_logic;
+  signal data_w_in_enable_int : std_logic;
+  signal data_m_in_enable_int : std_logic;
+  signal data_a_in_enable_int : std_logic;
 
 begin
 
@@ -199,7 +199,7 @@ begin
       index_i_w_in_loop <= ZERO_CONTROL;
       index_j_w_in_loop <= ZERO_CONTROL;
 
-      data_w_in_enabla_int <= '0';
+      data_w_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -214,7 +214,7 @@ begin
             index_i_w_in_loop <= ZERO_CONTROL;
             index_j_w_in_loop <= ZERO_CONTROL;
 
-            data_w_in_enabla_int <= '0';
+            data_w_in_enable_int <= '0';
 
             -- FSM Control
             controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
@@ -266,7 +266,7 @@ begin
             index_i_w_in_loop <= ZERO_CONTROL;
             index_j_w_in_loop <= ZERO_CONTROL;
 
-            data_w_in_enabla_int <= '1';
+            data_w_in_enable_int <= '1';
 
             -- FSM Control
             controller_w_in_fsm_int <= STARTER_W_IN_STATE;
@@ -313,7 +313,7 @@ begin
       index_j_m_in_loop <= ZERO_CONTROL;
       index_k_m_in_loop <= ZERO_CONTROL;
 
-      data_m_in_enabla_int <= '0';
+      data_m_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -328,7 +328,7 @@ begin
             index_j_m_in_loop <= ZERO_CONTROL;
             index_k_m_in_loop <= ZERO_CONTROL;
 
-            data_m_in_enabla_int <= '0';
+            data_m_in_enable_int <= '0';
 
             -- FSM Control
             controller_m_in_fsm_int <= INPUT_M_IN_J_STATE;
@@ -381,7 +381,7 @@ begin
             index_j_m_in_loop <= ZERO_CONTROL;
             index_k_m_in_loop <= ZERO_CONTROL;
 
-            data_m_in_enabla_int <= '1';
+            data_m_in_enable_int <= '1';
 
             -- FSM Control
             controller_m_in_fsm_int <= STARTER_M_IN_STATE;
@@ -426,7 +426,7 @@ begin
       -- Control Internal
       index_k_a_in_loop <= ZERO_CONTROL;
 
-      data_a_in_enabla_int <= '0';
+      data_a_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -439,7 +439,7 @@ begin
             -- Control Internal
             index_k_a_in_loop <= ZERO_CONTROL;
 
-            data_a_in_enabla_int <= '0';
+            data_a_in_enable_int <= '0';
 
             -- FSM Control
             controller_a_in_fsm_int <= INPUT_A_IN_STATE;
@@ -501,7 +501,7 @@ begin
 
       case controller_m_out_fsm_int is
         when STARTER_M_OUT_STATE =>     -- STEP 0
-          if (data_w_in_enabla_int = '1' and data_m_in_enabla_int = '1' and data_a_in_enabla_int = '1') then
+          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1' and data_a_in_enable_int = '1') then
             -- Control Internal
             matrix_m_out_int <= function_ntm_writing (
               SIZE_R_IN => SIZE_R_IN,
