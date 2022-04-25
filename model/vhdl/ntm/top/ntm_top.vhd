@@ -178,8 +178,8 @@ architecture ntm_top_architecture of ntm_top is
   -- Constants
   -----------------------------------------------------------------------
 
-   constant SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
-   constant SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+   constant SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
+   constant SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
 
   -----------------------------------------------------------------------
   -- Types
