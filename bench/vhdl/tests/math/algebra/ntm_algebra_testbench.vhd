@@ -191,7 +191,11 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
-  signal data_in_enable_vector_multiplication : std_logic;
+  signal data_in_length_enable_vector_multiplication : std_logic;
+  signal data_in_enable_vector_multiplication        : std_logic;
+
+  signal data_length_enable_vector_multiplication : std_logic;
+  signal data_enable_vector_multiplication        : std_logic;
 
   signal data_out_enable_vector_multiplication : std_logic;
 
@@ -206,7 +210,11 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal data_in_length_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
+
+  signal data_length_enable_vector_summation : std_logic;
+  signal data_enable_vector_summation        : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
@@ -282,11 +290,13 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_matrix_multiplication : std_logic;
   signal ready_matrix_multiplication : std_logic;
 
-  signal data_in_i_enable_matrix_multiplication : std_logic;
-  signal data_in_j_enable_matrix_multiplication : std_logic;
+  signal data_in_length_enable_matrix_multiplication : std_logic;
+  signal data_in_i_enable_matrix_multiplication      : std_logic;
+  signal data_in_j_enable_matrix_multiplication      : std_logic;
 
-  signal data_i_enable_matrix_multiplication : std_logic;
-  signal data_j_enable_matrix_multiplication : std_logic;
+  signal data_length_enable_matrix_multiplication : std_logic;
+  signal data_i_enable_matrix_multiplication      : std_logic;
+  signal data_j_enable_matrix_multiplication      : std_logic;
 
   signal data_out_i_enable_matrix_multiplication : std_logic;
   signal data_out_j_enable_matrix_multiplication : std_logic;
@@ -328,11 +338,13 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_matrix_summation : std_logic;
   signal ready_matrix_summation : std_logic;
 
-  signal data_in_i_enable_matrix_summation : std_logic;
-  signal data_in_j_enable_matrix_summation : std_logic;
+  signal data_in_length_enable_matrix_summation : std_logic;
+  signal data_in_i_enable_matrix_summation      : std_logic;
+  signal data_in_j_enable_matrix_summation      : std_logic;
 
-  signal data_i_enable_matrix_summation : std_logic;
-  signal data_j_enable_matrix_summation : std_logic;
+  signal data_length_enable_matrix_summation : std_logic;
+  signal data_i_enable_matrix_summation      : std_logic;
+  signal data_j_enable_matrix_summation      : std_logic;
 
   signal data_out_i_enable_matrix_summation : std_logic;
   signal data_out_j_enable_matrix_summation : std_logic;
@@ -424,13 +436,15 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_tensor_multiplication : std_logic;
   signal ready_tensor_multiplication : std_logic;
 
-  signal data_in_i_enable_tensor_multiplication : std_logic;
-  signal data_in_j_enable_tensor_multiplication : std_logic;
-  signal data_in_k_enable_tensor_multiplication : std_logic;
+  signal data_in_length_enable_tensor_multiplication : std_logic;
+  signal data_in_i_enable_tensor_multiplication      : std_logic;
+  signal data_in_j_enable_tensor_multiplication      : std_logic;
+  signal data_in_k_enable_tensor_multiplication      : std_logic;
 
-  signal data_i_enable_tensor_multiplication : std_logic;
-  signal data_j_enable_tensor_multiplication : std_logic;
-  signal data_k_enable_tensor_multiplication : std_logic;
+  signal data_length_enable_tensor_multiplication : std_logic;
+  signal data_i_enable_tensor_multiplication      : std_logic;
+  signal data_j_enable_tensor_multiplication      : std_logic;
+  signal data_k_enable_tensor_multiplication      : std_logic;
 
   signal data_out_i_enable_tensor_multiplication : std_logic;
   signal data_out_j_enable_tensor_multiplication : std_logic;
@@ -480,13 +494,15 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_tensor_summation : std_logic;
   signal ready_tensor_summation : std_logic;
 
-  signal data_in_i_enable_tensor_summation : std_logic;
-  signal data_in_j_enable_tensor_summation : std_logic;
-  signal data_in_k_enable_tensor_summation : std_logic;
+  signal data_in_length_enable_tensor_summation : std_logic;
+  signal data_in_i_enable_tensor_summation      : std_logic;
+  signal data_in_j_enable_tensor_summation      : std_logic;
+  signal data_in_k_enable_tensor_summation      : std_logic;
 
-  signal data_i_enable_tensor_summation : std_logic;
-  signal data_j_enable_tensor_summation : std_logic;
-  signal data_k_enable_tensor_summation : std_logic;
+  signal data_length_enable_tensor_summation : std_logic;
+  signal data_i_enable_tensor_summation      : std_logic;
+  signal data_j_enable_tensor_summation      : std_logic;
+  signal data_k_enable_tensor_summation      : std_logic;
 
   signal data_out_i_enable_tensor_summation : std_logic;
   signal data_out_j_enable_tensor_summation : std_logic;
@@ -603,7 +619,11 @@ begin
       VECTOR_MULTIPLICATION_START => start_vector_multiplication,
       VECTOR_MULTIPLICATION_READY => ready_vector_multiplication,
 
-      VECTOR_MULTIPLICATION_DATA_IN_ENABLE => data_in_enable_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_IN_ENABLE        => data_in_enable_vector_multiplication,
+
+      VECTOR_MULTIPLICATION_DATA_LENGTH_ENABLE => data_length_enable_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_ENABLE        => data_enable_vector_multiplication,
 
       VECTOR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
@@ -618,7 +638,11 @@ begin
       VECTOR_SUMMATION_START => start_vector_summation,
       VECTOR_SUMMATION_READY => ready_vector_summation,
 
-      VECTOR_SUMMATION_DATA_IN_ENABLE => data_in_enable_vector_summation,
+      VECTOR_SUMMATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
+      VECTOR_SUMMATION_DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      VECTOR_SUMMATION_DATA_LENGTH_ENABLE => data_length_enable_vector_summation,
+      VECTOR_SUMMATION_DATA_ENABLE        => data_enable_vector_summation,
 
       VECTOR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
@@ -693,11 +717,13 @@ begin
       MATRIX_MULTIPLICATION_START => start_matrix_multiplication,
       MATRIX_MULTIPLICATION_READY => ready_matrix_multiplication,
 
-      MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE      => data_in_i_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE      => data_in_j_enable_matrix_multiplication,
 
-      MATRIX_MULTIPLICATION_DATA_I_ENABLE => data_i_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_J_ENABLE => data_j_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_LENGTH_ENABLE => data_length_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_I_ENABLE      => data_i_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_J_ENABLE      => data_j_enable_matrix_multiplication,
 
       MATRIX_MULTIPLICATION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplication,
       MATRIX_MULTIPLICATION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplication,
@@ -739,9 +765,11 @@ begin
       MATRIX_SUMMATION_START => start_matrix_summation,
       MATRIX_SUMMATION_READY => ready_matrix_summation,
 
+      MATRIX_SUMMATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_summation,
       MATRIX_SUMMATION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
       MATRIX_SUMMATION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
 
+      MATRIX_SUMMATION_DATA_LENGTH_ENABLE => data_length_enable_matrix_summation,
       MATRIX_SUMMATION_DATA_I_ENABLE => data_i_enable_matrix_summation,
       MATRIX_SUMMATION_DATA_J_ENABLE => data_j_enable_matrix_summation,
 
@@ -835,13 +863,15 @@ begin
       TENSOR_MULTIPLICATION_START => start_tensor_multiplication,
       TENSOR_MULTIPLICATION_READY => ready_tensor_multiplication,
 
-      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE => data_in_i_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE => data_in_j_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE => data_in_k_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE      => data_in_i_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE      => data_in_j_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE      => data_in_k_enable_tensor_multiplication,
 
-      TENSOR_MULTIPLICATION_DATA_I_ENABLE => data_i_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_J_ENABLE => data_j_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_K_ENABLE => data_k_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_LENGTH_ENABLE => data_length_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_I_ENABLE      => data_i_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_J_ENABLE      => data_j_enable_tensor_multiplication,
+      TENSOR_MULTIPLICATION_DATA_K_ENABLE      => data_k_enable_tensor_multiplication,
 
       TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_multiplication,
       TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_multiplication,
@@ -891,13 +921,15 @@ begin
       TENSOR_SUMMATION_START => start_tensor_summation,
       TENSOR_SUMMATION_READY => ready_tensor_summation,
 
-      TENSOR_SUMMATION_DATA_IN_I_ENABLE => data_in_i_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN_J_ENABLE => data_in_j_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN_K_ENABLE => data_in_k_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_IN_I_ENABLE      => data_in_i_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_IN_J_ENABLE      => data_in_j_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_IN_K_ENABLE      => data_in_k_enable_tensor_summation,
 
-      TENSOR_SUMMATION_DATA_I_ENABLE => data_i_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_J_ENABLE => data_j_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_K_ENABLE => data_k_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_LENGTH_ENABLE => data_length_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_I_ENABLE      => data_i_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_J_ENABLE      => data_j_enable_tensor_summation,
+      TENSOR_SUMMATION_DATA_K_ENABLE      => data_k_enable_tensor_summation,
 
       TENSOR_SUMMATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_summation,
       TENSOR_SUMMATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_summation,
@@ -1041,7 +1073,11 @@ begin
         START => start_vector_multiplication,
         READY => ready_vector_multiplication,
 
-        DATA_IN_ENABLE => data_in_enable_vector_multiplication,
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_multiplication,
+        DATA_IN_ENABLE        => data_in_enable_vector_multiplication,
+
+        DATA_LENGTH_ENABLE => data_length_enable_vector_multiplication,
+        DATA_ENABLE        => data_enable_vector_multiplication,
 
         DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
@@ -1069,7 +1105,11 @@ begin
         START => start_vector_summation,
         READY => ready_vector_summation,
 
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
         DATA_IN_ENABLE => data_in_enable_vector_summation,
+
+        DATA_LENGTH_ENABLE => data_length_enable_vector_summation,
+        DATA_ENABLE        => data_enable_vector_summation,
 
         DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
@@ -1197,11 +1237,13 @@ begin
         START => start_matrix_multiplication,
         READY => ready_matrix_multiplication,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_multiplication,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_multiplication,
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_multiplication,
+        DATA_IN_I_ENABLE      => data_in_i_enable_matrix_multiplication,
+        DATA_IN_J_ENABLE      => data_in_j_enable_matrix_multiplication,
 
-        DATA_I_ENABLE => data_i_enable_matrix_multiplication,
-        DATA_J_ENABLE => data_j_enable_matrix_multiplication,
+        DATA_LENGTH_ENABLE => data_length_enable_matrix_multiplication,
+        DATA_I_ENABLE      => data_i_enable_matrix_multiplication,
+        DATA_J_ENABLE      => data_j_enable_matrix_multiplication,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplication,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplication,
@@ -1269,11 +1311,13 @@ begin
         START => start_matrix_summation,
         READY => ready_matrix_summation,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_summation,
+        DATA_IN_I_ENABLE      => data_in_i_enable_matrix_summation,
+        DATA_IN_J_ENABLE      => data_in_j_enable_matrix_summation,
 
-        DATA_I_ENABLE => data_i_enable_matrix_summation,
-        DATA_J_ENABLE => data_j_enable_matrix_summation,
+        DATA_LENGTH_ENABLE => data_length_enable_matrix_summation,
+        DATA_I_ENABLE      => data_i_enable_matrix_summation,
+        DATA_J_ENABLE      => data_j_enable_matrix_summation,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
@@ -1417,13 +1461,15 @@ begin
         START => start_tensor_multiplication,
         READY => ready_tensor_multiplication,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_tensor_multiplication,
-        DATA_IN_J_ENABLE => data_in_j_enable_tensor_multiplication,
-        DATA_IN_K_ENABLE => data_in_k_enable_tensor_multiplication,
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_multiplication,
+        DATA_IN_I_ENABLE      => data_in_i_enable_tensor_multiplication,
+        DATA_IN_J_ENABLE      => data_in_j_enable_tensor_multiplication,
+        DATA_IN_K_ENABLE      => data_in_k_enable_tensor_multiplication,
 
-        DATA_I_ENABLE => data_i_enable_tensor_multiplication,
-        DATA_J_ENABLE => data_j_enable_tensor_multiplication,
-        DATA_K_ENABLE => data_k_enable_tensor_multiplication,
+        DATA_LENGTH_ENABLE => data_length_enable_tensor_multiplication,
+        DATA_I_ENABLE      => data_i_enable_tensor_multiplication,
+        DATA_J_ENABLE      => data_j_enable_tensor_multiplication,
+        DATA_K_ENABLE      => data_k_enable_tensor_multiplication,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_tensor_multiplication,
         DATA_OUT_J_ENABLE => data_out_j_enable_tensor_multiplication,
@@ -1499,13 +1545,15 @@ begin
         START => start_tensor_summation,
         READY => ready_tensor_summation,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_tensor_summation,
-        DATA_IN_J_ENABLE => data_in_j_enable_tensor_summation,
-        DATA_IN_K_ENABLE => data_in_k_enable_tensor_summation,
+        DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_summation,
+        DATA_IN_I_ENABLE      => data_in_i_enable_tensor_summation,
+        DATA_IN_J_ENABLE      => data_in_j_enable_tensor_summation,
+        DATA_IN_K_ENABLE      => data_in_k_enable_tensor_summation,
 
-        DATA_I_ENABLE => data_i_enable_tensor_summation,
-        DATA_J_ENABLE => data_j_enable_tensor_summation,
-        DATA_K_ENABLE => data_k_enable_tensor_summation,
+        DATA_LENGTH_ENABLE => data_length_enable_tensor_summation,
+        DATA_I_ENABLE      => data_i_enable_tensor_summation,
+        DATA_J_ENABLE      => data_j_enable_tensor_summation,
+        DATA_K_ENABLE      => data_k_enable_tensor_summation,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_tensor_summation,
         DATA_OUT_J_ENABLE => data_out_j_enable_tensor_summation,

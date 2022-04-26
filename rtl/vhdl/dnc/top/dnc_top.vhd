@@ -792,16 +792,25 @@ begin
 
               -- v(t;k) = v^(t;k)
 
-            when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
+            when WRITE_INTERFACE_MATRIX_STATE =>  -- STEP 7
 
-              -- xi(t;?) = U(t;?;l)·h(t;l)
+              -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
 
-              -- k(t;k) = Wk(t;l;k)·h(t;l)
-              -- beta(t) = Wbeta(t;l)·h(t;l)
-              -- e(t;k) = We(t;l;k)·h(t;l)
-              -- v(t;k) = Wv(t;l;k)·h(t;l)
-              -- ga(t) = Wga(t;l)·h(t;l)
-              -- gw(t) = Wgw(t;l)·h(t;l)
+              -- f(t;i) = rho(t;i;m)
+              -- k(t;i;k) = rho(t;i;m)
+              -- beta(t;i) = rho(t;i;m)
+              -- pi(t;i;p) = rho(t;i;m)
+              
+            when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 8
+
+              -- xi(t;s) = U(t;?;l)·h(t;l)
+
+              -- k(t;k) = xi(t;s)
+              -- beta(t) = xi(t;s)
+              -- e(t;k) = xi(t;s)
+              -- v(t;k) = xi(t;s)
+              -- ga(t) = xi(t;s)
+              -- gw(t) = xi(t;s)
 
             when others =>
               -- FSM Control

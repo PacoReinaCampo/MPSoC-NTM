@@ -279,7 +279,11 @@ package ntm_algebra_pkg is
       VECTOR_MULTIPLICATION_START : out std_logic;
       VECTOR_MULTIPLICATION_READY : in  std_logic;
 
-      VECTOR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
+      VECTOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      VECTOR_MULTIPLICATION_DATA_IN_ENABLE        : out std_logic;
+
+      VECTOR_MULTIPLICATION_DATA_LENGTH_ENABLE : in std_logic;
+      VECTOR_MULTIPLICATION_DATA_ENABLE        : in std_logic;
 
       VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
 
@@ -294,7 +298,11 @@ package ntm_algebra_pkg is
       VECTOR_SUMMATION_START : out std_logic;
       VECTOR_SUMMATION_READY : in  std_logic;
 
-      VECTOR_SUMMATION_DATA_IN_ENABLE : out std_logic;
+      VECTOR_SUMMATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      VECTOR_SUMMATION_DATA_IN_ENABLE        : out std_logic;
+
+      VECTOR_SUMMATION_DATA_LENGTH_ENABLE : in std_logic;
+      VECTOR_SUMMATION_DATA_ENABLE        : in std_logic;
 
       VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
 
@@ -370,11 +378,13 @@ package ntm_algebra_pkg is
       MATRIX_MULTIPLICATION_START : out std_logic;
       MATRIX_MULTIPLICATION_READY : in  std_logic;
 
-      MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
+      MATRIX_MULTIPLICATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE      : out std_logic;
+      MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE      : out std_logic;
 
-      MATRIX_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
-      MATRIX_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
+      MATRIX_MULTIPLICATION_DATA_LENGTH_ENABLE : in std_logic;
+      MATRIX_MULTIPLICATION_DATA_I_ENABLE      : in std_logic;
+      MATRIX_MULTIPLICATION_DATA_J_ENABLE      : in std_logic;
 
       MATRIX_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
       MATRIX_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
@@ -416,11 +426,13 @@ package ntm_algebra_pkg is
       MATRIX_SUMMATION_START : out std_logic;
       MATRIX_SUMMATION_READY : in  std_logic;
 
-      MATRIX_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
+      MATRIX_SUMMATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      MATRIX_SUMMATION_DATA_IN_I_ENABLE      : out std_logic;
+      MATRIX_SUMMATION_DATA_IN_J_ENABLE      : out std_logic;
 
-      MATRIX_SUMMATION_DATA_I_ENABLE : in std_logic;
-      MATRIX_SUMMATION_DATA_J_ENABLE : in std_logic;
+      MATRIX_SUMMATION_DATA_LENGTH_ENABLE : in std_logic;
+      MATRIX_SUMMATION_DATA_I_ENABLE      : in std_logic;
+      MATRIX_SUMMATION_DATA_J_ENABLE      : in std_logic;
 
       MATRIX_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
       MATRIX_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
@@ -512,13 +524,15 @@ package ntm_algebra_pkg is
       TENSOR_MULTIPLICATION_START : out std_logic;
       TENSOR_MULTIPLICATION_READY : in  std_logic;
 
-      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
-      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
-      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE      : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE      : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE      : out std_logic;
 
-      TENSOR_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_K_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_LENGTH_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_I_ENABLE      : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_J_ENABLE      : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_K_ENABLE      : in std_logic;
 
       TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
       TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
@@ -568,13 +582,15 @@ package ntm_algebra_pkg is
       TENSOR_SUMMATION_START : out std_logic;
       TENSOR_SUMMATION_READY : in  std_logic;
 
-      TENSOR_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
-      TENSOR_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
-      TENSOR_SUMMATION_DATA_IN_K_ENABLE : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_LENGTH_ENABLE : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_I_ENABLE      : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_J_ENABLE      : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_K_ENABLE      : out std_logic;
 
-      TENSOR_SUMMATION_DATA_I_ENABLE : in std_logic;
-      TENSOR_SUMMATION_DATA_J_ENABLE : in std_logic;
-      TENSOR_SUMMATION_DATA_K_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_LENGTH_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_I_ENABLE      : in std_logic;
+      TENSOR_SUMMATION_DATA_J_ENABLE      : in std_logic;
+      TENSOR_SUMMATION_DATA_K_ENABLE      : in std_logic;
 
       TENSOR_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
       TENSOR_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;

@@ -191,7 +191,8 @@ architecture ntm_top_architecture of ntm_top is
     STARTER_CONTROLLER_STATE,           -- STEP 0
     CONTROLLER_BODY_STATE,              -- STEP 1
     OUTPUT_VECTOR_STATE,                -- STEP 2
-    INTERFACE_VECTOR_STATE              -- STEP 3
+    INTERFACE_MATRIX_STATE,             -- STEP 3
+    INTERFACE_VECTOR_STATE              -- STEP 4
     );
 
   type write_heads_ctrl_fsm is (
@@ -655,15 +656,22 @@ begin
 
               -- y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
 
-            when INTERFACE_VECTOR_STATE =>  -- STEP 3
+            when INTERFACE_MATRIX_STATE =>  -- STEP 3
 
-              -- xi(t;?) = U(t;?;l)·h(t;l)
+              -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
 
-              -- k(t;i;k) = Wk(t;l;k)·h(t;l)
-              -- beta(t;i) = Wbeta(t;l)·h(t;l)
-              -- g(t;i) = Wg(t;l)·h(t;l)
-              -- s(t;j) = Wk(t;l;j)·h(t;l)
-              -- gamma(t;i) = Wgamma(t;l)·h(t;l)
+              -- k(t;i;k) = rho(t;i;m)
+              -- beta(t;i) = rho(t;i;m)
+              -- g(t;i) = rho(t;i;m)
+              -- s(t;i;j) = rho(t;i;m)
+              -- gamma(t;i) = rho(t;i;m)
+
+            when INTERFACE_VECTOR_STATE =>  -- STEP 4
+
+              -- xi(t;s) = U(t;s;l)·h(t;l)
+
+              -- a(t;k) = xi(t;s)
+              -- e(t;k) = xi(t;s)
 
             when others =>
               -- FSM Control
