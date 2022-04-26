@@ -175,13 +175,6 @@ architecture ntm_top_architecture of ntm_top is
   -- OUTPUT_Y_STATE, CLEAN_OUT_Y_STATE
 
   -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
-
-   constant SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
-   constant SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
-
-  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
@@ -267,8 +260,16 @@ architecture ntm_top_architecture of ntm_top is
     );
 
   -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Size
+  signal SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Finite State Machine
   signal controller_w_in_fsm_int : controller_w_in_fsm;
@@ -348,6 +349,10 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- SIZE
+  SIZE_M_IN <= std_logic_vector(unsigned(SIZE_N_IN) + unsigned(SIZE_W_IN) + to_unsigned(3, CONTROL_SIZE));
+  SIZE_S_IN <= std_logic_vector(unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN));
 
   -- CONTROL
   w_in_fsm : process(CLK, RST)

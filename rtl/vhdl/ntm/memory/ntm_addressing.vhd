@@ -277,13 +277,17 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal data_in_enable_length_vector_summation : std_logic;
+  signal data_in_enable_vector_summation   : std_logic;
+
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation   : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -309,20 +313,20 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
+  -- wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
 
   -- -- ntm_content_based_addressing
 
-  -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+  -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
 
   -- -- ntm_vector_float_adder
   -- -- ntm_vector_float_multiplier
 
-  -- w(t;j) = wg(t;j)*s(t;k)
+  -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
 
   -- -- ntm_vector_convolution
 
-  -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+  -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
 
   -- -- ntm_vector_float_divider
   -- -- ntm_vector_power
@@ -364,11 +368,11 @@ begin
 
         when VECTOR_CONTENT_BASED_ADDRESSING_STATE =>  -- STEP 1
 
-          -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+          -- wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
 
         when VECTOR_INTERPOLATION_STATE =>  -- STEP 2
 
-          -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+          -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
 
           case controller_ctrl_interpolation_fsm_int is
             when STARTER_INTERPOLATION_STATE =>  -- STEP 0
@@ -428,11 +432,11 @@ begin
 
         when VECTOR_CONVOLUTION_STATE =>  -- STEP 3
 
-          -- w(t;j) = wg(t;j)*s(t;k)
+          -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
 
         when VECTOR_SHARPENING_STATE =>  -- STEP 4
 
-          -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+          -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
 
           case controller_ctrl_sharpening_fsm_int is
             when STARTER_SHARPENING_STATE =>  -- STEP 0
@@ -666,7 +670,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
+      DATA_IN_LENGTH_ENABLE => data_in_enable_length_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
 
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 

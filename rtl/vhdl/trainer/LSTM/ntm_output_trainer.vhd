@@ -202,7 +202,11 @@ architecture ntm_output_trainer_architecture of ntm_output_trainer is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal data_in_enable_length_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
+
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation   : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
@@ -689,7 +693,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
+      DATA_IN_LENGTH_ENABLE => data_in_enable_length_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
 
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 

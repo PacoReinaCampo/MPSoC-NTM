@@ -58,11 +58,13 @@ entity ntm_matrix_summation is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_I_ENABLE : in std_logic;
-    DATA_IN_J_ENABLE : in std_logic;
+    DATA_IN_LENGTH_ENABLE : in std_logic;
+    DATA_IN_I_ENABLE      : in std_logic;
+    DATA_IN_J_ENABLE      : in std_logic;
 
-    DATA_I_ENABLE : out std_logic;
-    DATA_J_ENABLE : out std_logic;
+    DATA_LENGTH_ENABLE : out std_logic;
+    DATA_I_ENABLE      : out std_logic;
+    DATA_J_ENABLE      : out std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;

@@ -842,7 +842,7 @@ package body ntm_core_pkg is
         );
 
       matrix_first_operation_int := function_matrix_float_adder (
-        OPERATION => '0',
+        OPERATION => '1',
 
         SIZE_I_IN => SIZE_N_IN,
         SIZE_J_IN => SIZE_W_IN,
@@ -1019,7 +1019,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
+    -- wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
     matrix_wc_output := function_ntm_matrix_content_based_addressing (
       SIZE_R_IN => SIZE_R_IN,
       SIZE_N_IN => SIZE_N_IN,
@@ -1069,7 +1069,7 @@ package body ntm_core_pkg is
       matrix_b_input => matrix_wc_output
       );
 
-    -- w(t;j) = wg(t;j)*s(t;k)
+    -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
         vector_wg_output(j) := matrix_wg_output(i, j);
@@ -1088,7 +1088,7 @@ package body ntm_core_pkg is
       end loop;
     end loop;
 
-    -- w(t;j) = exponentiation(w(t;j),gamma(t)) / summation(exponentiation(w(t;j),gamma(t)))[j in 0 to N-1]
+    -- w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
         matrix_gamma_input(i, j) := vector_gamma_input(i);
@@ -1431,10 +1431,10 @@ package body ntm_core_pkg is
 
         -- MEMORY_STATE
 
-        -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
-        -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
-        -- w(t;j) = wg(t;j)*s(t;k)
-        -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+        -- wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
+        -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
+        -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
+        -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
 
         matrix_w_int := function_ntm_addressing (
           SIZE_R_IN => SIZE_R_IN,

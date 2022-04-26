@@ -234,7 +234,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+  -- M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
 
   -- CONTROL
   w_in_fsm : process(CLK, RST)

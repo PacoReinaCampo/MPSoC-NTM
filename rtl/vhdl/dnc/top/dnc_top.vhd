@@ -222,6 +222,10 @@ architecture dnc_top_architecture of dnc_top is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- Size
+  signal SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   -- Finite State Machine
   signal top_ctrl_fsm_int : top_ctrl_fsm;
 
@@ -660,6 +664,10 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- SIZE
+  SIZE_M_IN <= std_logic_vector(to_unsigned(5, CONTROL_SIZE) + unsigned(SIZE_W_IN));
+  SIZE_S_IN <= std_logic_vector(to_unsigned(3, CONTROL_SIZE) + unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN));
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

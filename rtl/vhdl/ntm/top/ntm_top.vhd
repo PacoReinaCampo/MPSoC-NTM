@@ -208,6 +208,10 @@ architecture ntm_top_architecture of ntm_top is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- Size
+  signal SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   -- Finite State Machine
   signal top_ctrl_fsm_int : top_ctrl_fsm;
 
@@ -595,6 +599,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- SIZE
+  SIZE_M_IN <= std_logic_vector(unsigned(SIZE_N_IN) + unsigned(SIZE_W_IN) + to_unsigned(3, CONTROL_SIZE));
+  SIZE_S_IN <= std_logic_vector(unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN));
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
@@ -651,11 +659,11 @@ begin
 
               -- xi(t;?) = U(t;?;l)·h(t;l)
 
-              -- k(t;k) = Wk(t;l;k)·h(t;l)
-              -- beta(t) = Wbeta(t;l)·h(t;l)
-              -- g(t) = Wg(t;l)·h(t;l)
+              -- k(t;i;k) = Wk(t;l;k)·h(t;l)
+              -- beta(t;i) = Wbeta(t;l)·h(t;l)
+              -- g(t;i) = Wg(t;l)·h(t;l)
               -- s(t;j) = Wk(t;l;j)·h(t;l)
-              -- gamma(t) = Wgamma(t;l)·h(t;l)
+              -- gamma(t;i) = Wgamma(t;l)·h(t;l)
 
             when others =>
               -- FSM Control
@@ -664,7 +672,7 @@ begin
 
         when READ_HEADS_STATE =>        -- STEP 2
 
-          -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+          -- r(t;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
         when WRITE_HEADS_STATE =>       -- STEP 3
 
@@ -673,11 +681,11 @@ begin
 
             when WRITING_STATE =>       -- STEP 1
 
-              -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+              -- M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
 
             when ERASING_STATE =>       -- STEP 2
 
-              -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+              -- M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
 
             when others =>
               -- FSM Control
@@ -686,13 +694,13 @@ begin
 
         when MEMORY_STATE =>            -- STEP 4
 
-          -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+          -- wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
 
-          -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+          -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
 
-          -- w(t;j) = wg(t;j)*s(t;k)
+          -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
 
-          -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+          -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
 
           if (w_out_i_enable_addressing = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then

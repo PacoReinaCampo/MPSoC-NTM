@@ -135,7 +135,7 @@ module ntm_reading #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+  // r(t;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

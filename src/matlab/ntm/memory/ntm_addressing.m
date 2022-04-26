@@ -62,7 +62,7 @@ function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
   matrix_operation_int = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN);
 
   for i = 1:SIZE_R_IN
-    % wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t))·w(t-1;i;j)
+    % wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
     for j = 1:SIZE_N_IN
       matrix_operation_int(i, j) = G_IN(i)*matrix_operation_int(i, j) + (1-G_IN(i))*W_IN(i, j);
 
