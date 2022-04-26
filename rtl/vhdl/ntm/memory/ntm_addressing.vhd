@@ -326,7 +326,7 @@ begin
 
   -- -- ntm_vector_convolution
 
-  -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
+  -- w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
 
   -- -- ntm_vector_float_divider
   -- -- ntm_vector_power
@@ -436,7 +436,7 @@ begin
 
         when VECTOR_SHARPENING_STATE =>  -- STEP 4
 
-          -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
+          -- w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
 
           case controller_ctrl_sharpening_fsm_int is
             when STARTER_SHARPENING_STATE =>  -- STEP 0

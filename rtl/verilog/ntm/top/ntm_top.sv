@@ -501,7 +501,7 @@ module ntm_top #(
 
           // w(t;i;j) = wg(t;i;j)*s(t;i;k)
 
-          // w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
+          // w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
         
           if (index_loop == SIZE_R_IN - ONE_CONTROL) begin
             // FSM Control

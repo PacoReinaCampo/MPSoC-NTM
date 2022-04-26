@@ -259,7 +259,7 @@ module ntm_addressing #(
   // wc(t;i;j) = C(M(t;j;k),k(t;i;k),beta(t;i))
   // wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
   // w(t;i;j) = wg(t;i;j)*s(t;i;k)
-  // w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
+  // w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

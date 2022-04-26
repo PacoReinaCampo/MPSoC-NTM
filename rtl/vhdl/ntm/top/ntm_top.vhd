@@ -708,7 +708,7 @@ begin
 
           -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
 
-          -- w(t;i;j) = exponentiation(w(t;k),gamma(t;i)) / summation(exponentiation(w(t;k),gamma(t;i)))[j in 0 to N-1]
+          -- w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
 
           if (w_out_i_enable_addressing = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then

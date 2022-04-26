@@ -926,6 +926,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      VECTOR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+
       VECTOR_MULTIPLICATION_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
@@ -1029,6 +1031,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      VECTOR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+
       VECTOR_SUMMATION_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_0) then
@@ -1527,6 +1531,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      MATRIX_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+
       MATRIX_MULTIPLICATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MULTIPLICATION_SIZE_J_IN <= THREE_CONTROL;
 
@@ -1819,6 +1825,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      MATRIX_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+
       MATRIX_SUMMATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_SUMMATION_SIZE_J_IN <= THREE_CONTROL;
 
@@ -2458,6 +2466,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      MATRIX_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+
       TENSOR_MULTIPLICATION_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_MULTIPLICATION_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_MULTIPLICATION_SIZE_K_IN <= THREE_CONTROL;
@@ -2829,6 +2839,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
+      MATRIX_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+
       TENSOR_SUMMATION_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_SUMMATION_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_SUMMATION_SIZE_K_IN <= THREE_CONTROL;
