@@ -278,10 +278,10 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal ready_vector_summation : std_logic;
 
   signal data_in_enable_length_vector_summation : std_logic;
-  signal data_in_enable_vector_summation   : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
 
   signal data_enable_length_vector_summation : std_logic;
-  signal data_enable_vector_summation   : std_logic;
+  signal data_enable_vector_summation        : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 

@@ -206,7 +206,7 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
   signal data_in_enable_vector_summation        : std_logic;
 
   signal data_enable_length_vector_summation : std_logic;
-  signal data_enable_vector_summation   : std_logic;
+  signal data_enable_vector_summation        : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 

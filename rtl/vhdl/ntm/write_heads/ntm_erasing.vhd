@@ -115,27 +115,27 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   -- Finite State Machine
   type controller_w_in_fsm is (
-    STARTER_W_IN_STATE,                   -- STEP 0
-    INPUT_W_IN_I_STATE,                   -- STEP 1
-    INPUT_W_IN_J_STATE,                   -- STEP 2
-    CLEAN_W_IN_I_STATE,                   -- STEP 3
-    CLEAN_W_IN_J_STATE                    -- STEP 4
+    STARTER_W_IN_STATE,                 -- STEP 0
+    INPUT_W_IN_I_STATE,                 -- STEP 1
+    INPUT_W_IN_J_STATE,                 -- STEP 2
+    CLEAN_W_IN_I_STATE,                 -- STEP 3
+    CLEAN_W_IN_J_STATE                  -- STEP 4
     );
 
   type controller_m_in_fsm is (
-    STARTER_M_IN_STATE,                   -- STEP 0
-    INPUT_M_IN_J_STATE,                   -- STEP 1
-    INPUT_M_IN_K_STATE,                   -- STEP 2
-    CLEAN_M_IN_J_STATE,                   -- STEP 3
-    CLEAN_M_IN_K_STATE                    -- STEP 4
+    STARTER_M_IN_STATE,                 -- STEP 0
+    INPUT_M_IN_J_STATE,                 -- STEP 1
+    INPUT_M_IN_K_STATE,                 -- STEP 2
+    CLEAN_M_IN_J_STATE,                 -- STEP 3
+    CLEAN_M_IN_K_STATE                  -- STEP 4
     );
 
   type controller_matrix_float_multiplier_fsm is (
-    STARTER_MATRIX_MULTIPLIER_STATE,      -- STEP 0
-    INPUT_J_MATRIX_MULTIPLIER_STATE,      -- STEP 1
-    INPUT_K_MATRIX_MULTIPLIER_STATE,      -- STEP 2
-    CLEAN_J_MATRIX_MULTIPLIER_STATE,      -- STEP 3
-    CLEAN_K_MATRIX_MULTIPLIER_STATE       -- STEP 4
+    STARTER_MATRIX_MULTIPLIER_STATE,    -- STEP 0
+    INPUT_J_MATRIX_MULTIPLIER_STATE,    -- STEP 1
+    INPUT_K_MATRIX_MULTIPLIER_STATE,    -- STEP 2
+    CLEAN_J_MATRIX_MULTIPLIER_STATE,    -- STEP 3
+    CLEAN_K_MATRIX_MULTIPLIER_STATE     -- STEP 4
     );
 
   type controller_vector_summation_fsm is (
@@ -147,11 +147,11 @@ architecture ntm_erasing_architecture of ntm_erasing is
     );
 
   type controller_m_out_fsm is (
-    STARTER_M_OUT_STATE,                  -- STEP 0
-    CLEAN_M_OUT_J_STATE,                  -- STEP 1
-    CLEAN_M_OUT_K_STATE,                  -- STEP 2
-    OUTPUT_M_OUT_J_STATE,                 -- STEP 3
-    OUTPUT_M_OUT_K_STATE                  -- STEP 4
+    STARTER_M_OUT_STATE,                -- STEP 0
+    CLEAN_M_OUT_J_STATE,                -- STEP 1
+    CLEAN_M_OUT_K_STATE,                -- STEP 2
+    OUTPUT_M_OUT_J_STATE,               -- STEP 3
+    OUTPUT_M_OUT_K_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------

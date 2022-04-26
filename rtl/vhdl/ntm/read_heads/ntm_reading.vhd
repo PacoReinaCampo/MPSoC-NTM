@@ -113,27 +113,27 @@ architecture ntm_reading_architecture of ntm_reading is
 
   -- Finite State Machine
   type controller_w_in_fsm is (
-    STARTER_W_IN_STATE,                   -- STEP 0
-    INPUT_W_IN_I_STATE,                   -- STEP 1
-    INPUT_W_IN_J_STATE,                   -- STEP 2
-    CLEAN_W_IN_I_STATE,                   -- STEP 3
-    CLEAN_W_IN_J_STATE                    -- STEP 4
+    STARTER_W_IN_STATE,                 -- STEP 0
+    INPUT_W_IN_I_STATE,                 -- STEP 1
+    INPUT_W_IN_J_STATE,                 -- STEP 2
+    CLEAN_W_IN_I_STATE,                 -- STEP 3
+    CLEAN_W_IN_J_STATE                  -- STEP 4
     );
 
   type controller_m_in_fsm is (
-    STARTER_M_IN_STATE,                   -- STEP 0
-    INPUT_M_IN_J_STATE,                   -- STEP 1
-    INPUT_M_IN_K_STATE,                   -- STEP 2
-    CLEAN_M_IN_J_STATE,                   -- STEP 3
-    CLEAN_M_IN_K_STATE                    -- STEP 4
+    STARTER_M_IN_STATE,                 -- STEP 0
+    INPUT_M_IN_J_STATE,                 -- STEP 1
+    INPUT_M_IN_K_STATE,                 -- STEP 2
+    CLEAN_M_IN_J_STATE,                 -- STEP 3
+    CLEAN_M_IN_K_STATE                  -- STEP 4
     );
 
   type controller_matrix_float_multiplier_fsm is (
-    STARTER_MATRIX_MULTIPLIER_STATE,      -- STEP 0
-    INPUT_J_MATRIX_MULTIPLIER_STATE,      -- STEP 1
-    INPUT_K_MATRIX_MULTIPLIER_STATE,      -- STEP 2
-    CLEAN_J_MATRIX_MULTIPLIER_STATE,      -- STEP 3
-    CLEAN_K_MATRIX_MULTIPLIER_STATE       -- STEP 4
+    STARTER_MATRIX_MULTIPLIER_STATE,    -- STEP 0
+    INPUT_J_MATRIX_MULTIPLIER_STATE,    -- STEP 1
+    INPUT_K_MATRIX_MULTIPLIER_STATE,    -- STEP 2
+    CLEAN_J_MATRIX_MULTIPLIER_STATE,    -- STEP 3
+    CLEAN_K_MATRIX_MULTIPLIER_STATE     -- STEP 4
     );
 
   type controller_vector_summation_fsm is (
@@ -145,11 +145,11 @@ architecture ntm_reading_architecture of ntm_reading is
     );
 
   type controller_r_out_fsm is (
-    STARTER_R_OUT_STATE,                  -- STEP 0
-    CLEAN_R_OUT_I_STATE,                  -- STEP 1
-    CLEAN_R_OUT_K_STATE,                  -- STEP 2
-    OUTPUT_R_OUT_I_STATE,                 -- STEP 3
-    OUTPUT_R_OUT_K_STATE                  -- STEP 4
+    STARTER_R_OUT_STATE,                -- STEP 0
+    CLEAN_R_OUT_I_STATE,                -- STEP 1
+    CLEAN_R_OUT_K_STATE,                -- STEP 2
+    OUTPUT_R_OUT_I_STATE,               -- STEP 3
+    OUTPUT_R_OUT_K_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -229,7 +229,7 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_in_enable_vector_summation        : std_logic;
 
   signal data_enable_length_vector_summation : std_logic;
-  signal data_enable_vector_summation   : std_logic;
+  signal data_enable_vector_summation        : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
@@ -618,7 +618,7 @@ begin
     if (RST = '0') then
       -- Control Internal
       data_in_enable_length_vector_summation <= '0';
-      data_in_enable_vector_summation   <= '0';
+      data_in_enable_vector_summation        <= '0';
 
       index_i_vector_summation_loop <= ZERO_CONTROL;
       index_k_vector_summation_loop <= ZERO_CONTROL;
@@ -629,7 +629,7 @@ begin
         when STARTER_VECTOR_SUMMATION_STATE =>  -- STEP 0
           -- Control Internal
           data_in_enable_length_vector_summation <= '0';
-          data_in_enable_vector_summation   <= '0';
+          data_in_enable_vector_summation        <= '0';
 
           if (data_matrix_float_multiplier_enable_int = '1') then
             -- Data Inputs
@@ -655,7 +655,7 @@ begin
           end if;
 
           data_in_enable_length_vector_summation <= '1';
-          data_in_enable_vector_summation   <= '1';
+          data_in_enable_vector_summation        <= '1';
 
           -- FSM Control
           controller_vector_summation_fsm_int <= CLEAN_VECTOR_SIZE_SUMMATION_STATE;
@@ -701,7 +701,7 @@ begin
             start_vector_summation <= '0';
 
             data_in_enable_length_vector_summation <= '0';
-            data_in_enable_vector_summation   <= '0';
+            data_in_enable_vector_summation        <= '0';
           end if;
 
         when CLEAN_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 8
@@ -719,7 +719,7 @@ begin
             start_vector_summation <= '0';
 
             data_in_enable_length_vector_summation <= '0';
-            data_in_enable_vector_summation   <= '0';
+            data_in_enable_vector_summation        <= '0';
           end if;
 
         when others =>

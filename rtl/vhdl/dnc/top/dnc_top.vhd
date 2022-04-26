@@ -800,7 +800,7 @@ begin
               -- k(t;i;k) = rho(t;i;m)
               -- beta(t;i) = rho(t;i;m)
               -- pi(t;i;p) = rho(t;i;m)
-              
+
             when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 8
 
               -- xi(t;s) = U(t;?;l)·h(t;l)
