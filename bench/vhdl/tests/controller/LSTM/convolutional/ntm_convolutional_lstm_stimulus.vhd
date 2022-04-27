@@ -130,6 +130,7 @@ entity ntm_convolutional_lstm_stimulus is
 
     -- DATA
     NTM_CONVOLUTIONAL_LSTM_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

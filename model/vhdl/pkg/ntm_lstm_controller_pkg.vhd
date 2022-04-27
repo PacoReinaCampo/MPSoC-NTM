@@ -1011,6 +1011,7 @@ package ntm_lstm_controller_pkg is
 
       -- DATA
       SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

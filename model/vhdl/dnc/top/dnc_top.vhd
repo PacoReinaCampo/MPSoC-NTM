@@ -536,7 +536,7 @@ begin
             tensor_k_in_int(to_integer(unsigned(index_i_k_in_loop)), to_integer(unsigned(index_l_k_in_loop)), to_integer(unsigned(index_k_k_in_loop))) <= K_IN;
 
             -- FSM Control
-            if (unsigned(index_k_k_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_k_k_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
               controller_k_in_fsm_int <= CLEAN_K_IN_I_STATE;
             else
               controller_k_in_fsm_int <= CLEAN_K_IN_L_STATE;

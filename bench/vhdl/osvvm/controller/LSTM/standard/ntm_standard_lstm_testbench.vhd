@@ -139,6 +139,7 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
 
   -- DATA
   signal size_x_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_l_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -260,6 +261,7 @@ begin
 
       -- DATA
       NTM_STANDARD_LSTM_SIZE_X_IN => size_x_in_controller,
+      NTM_STANDARD_LSTM_SIZE_N_IN => size_n_in_controller,
       NTM_STANDARD_LSTM_SIZE_W_IN => size_w_in_controller,
       NTM_STANDARD_LSTM_SIZE_L_IN => size_l_in_controller,
       NTM_STANDARD_LSTM_SIZE_R_IN => size_r_in_controller,
@@ -368,6 +370,7 @@ begin
 
       -- DATA
       SIZE_X_IN => size_x_in_controller,
+      SIZE_N_IN => size_n_in_controller,
       SIZE_W_IN => size_w_in_controller,
       SIZE_L_IN => size_l_in_controller,
       SIZE_R_IN => size_r_in_controller,
