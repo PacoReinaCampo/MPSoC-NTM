@@ -1891,7 +1891,6 @@ package body dnc_core_pkg is
   begin
 
     -- p(t;j) = (1 - summation(w(t;j))[j in 1 to N])·p(t-1;j) + w(t;j)
-
     -- p(t=0) = 0
 
     data_summation_int := function_scalar_summation (
@@ -2154,7 +2153,6 @@ package body dnc_core_pkg is
   begin
 
     -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
-
     -- L(t=0)[g,j] = 0
 
     for g in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
