@@ -150,10 +150,8 @@ architecture ntm_reading_architecture of ntm_reading is
     MATRIX_RESHAPE_STATE,               -- STEP 1
     MATRIX_MULTIPLIER_STATE,            -- STEP 2
     VECTOR_SUMMATION_STATE,             -- STEP 3
-    CLEAN_R_OUT_I_STATE,                -- STEP 4
-    CLEAN_R_OUT_K_STATE,                -- STEP 5
-    OUTPUT_R_OUT_I_STATE,               -- STEP 6
-    OUTPUT_R_OUT_K_STATE                -- STEP 7
+    OUTPUT_R_OUT_I_STATE,               -- STEP 4
+    OUTPUT_R_OUT_K_STATE                -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -697,14 +695,14 @@ begin
         when CLEAN_IN_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 3
 
           if (data_enable_length_vector_summation = '1' and data_enable_vector_summation = '1') then
-            if ((unsigned(index_j_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            if ((unsigned(index_j_vector_summation_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_j_vector_summation_loop <= ZERO_CONTROL;
               index_k_vector_summation_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_vector_summation_fsm_int <= OUTPUT_OUT_VECTOR_SIZE_SUMMATION_STATE;
-            elsif ((unsigned(index_j_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            elsif ((unsigned(index_j_vector_summation_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_j_vector_summation_loop <= std_logic_vector(unsigned(index_j_vector_summation_loop) + unsigned(ONE_CONTROL));
               index_k_vector_summation_loop <= ZERO_CONTROL;
@@ -827,33 +825,21 @@ begin
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 3
 
-          -- FSM Control
-          if (data_vector_summation_ready_int = '1') then
-            controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
-          end if;
-
-          -- Control Internal
-          data_vector_summation_start_int <= '0';
-
-        when CLEAN_R_OUT_I_STATE =>     -- STEP 4
           -- Control Outputs
           R_OUT_I_ENABLE <= '0';
           R_OUT_K_ENABLE <= '0';
 
           -- FSM Control
-          controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
-
-        when CLEAN_R_OUT_K_STATE =>     -- STEP 5
-
-          -- Control Outputs
-          R_OUT_K_ENABLE <= '0';
-
-          -- FSM Control
-          if (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            controller_r_out_fsm_int <= OUTPUT_R_OUT_I_STATE;
-          else
-            controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
+          if (data_vector_summation_ready_int = '1') then
+            if (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              controller_r_out_fsm_int <= OUTPUT_R_OUT_I_STATE;
+            else
+              controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
+            end if;
           end if;
+
+          -- Control Internal
+          data_vector_summation_start_int <= '0';
 
         when OUTPUT_R_OUT_I_STATE =>    -- STEP 6
 
@@ -902,7 +888,7 @@ begin
             index_k_r_out_loop <= std_logic_vector(unsigned(index_k_r_out_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_r_out_fsm_int <= CLEAN_R_OUT_K_STATE;
+            controller_r_out_fsm_int <= MATRIX_RESHAPE_STATE;
           end if;
 
         when others =>

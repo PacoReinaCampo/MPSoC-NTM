@@ -177,7 +177,7 @@ module ntm_content_based_addressing #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
+  // C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

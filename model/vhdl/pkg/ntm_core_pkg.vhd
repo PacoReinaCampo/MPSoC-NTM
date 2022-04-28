@@ -885,7 +885,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- C(M[j,·],k,beta)[i] = softmax(cosine_similarity(k,M[j,·])·beta)[i]
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
     for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
       vector_beta_int(j) := scalar_beta_input;
@@ -941,7 +941,7 @@ package body ntm_core_pkg is
 
   begin
 
-    -- C(M[j,·],k,beta)[i] = softmax(cosine_similarity(k,M[j,·])·beta)[i]
+    -- C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
