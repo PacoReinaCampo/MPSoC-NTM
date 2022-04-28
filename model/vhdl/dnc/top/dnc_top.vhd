@@ -178,9 +178,6 @@ architecture dnc_top_architecture of dnc_top is
   -- Constants
   -----------------------------------------------------------------------
 
-   constant SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
-   constant SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0) := THREE_CONTROL;
-
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------

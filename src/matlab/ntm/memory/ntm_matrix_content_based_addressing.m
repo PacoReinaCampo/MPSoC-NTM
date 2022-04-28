@@ -75,9 +75,7 @@ function C_OUT = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN)
         vector_j_operation_int(j) = K_IN(i, k);
       end
 
-      scalar_operation_int = ntm_vector_cosine_similarity(vector_j_operation_int, vector_k_operation_int);
-
-      matrix_j_operation_int(i, j) = scalar_operation_int;
+      matrix_j_operation_int(i, j) = ntm_vector_cosine_similarity(vector_j_operation_int, vector_k_operation_int);
     end
   end
 
