@@ -522,7 +522,7 @@ begin
 
           if ((unsigned(index_j_m_out_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_m_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            M_OUT <= matrix_second_operation_int(to_integer(unsigned(index_j_m_out_loop)), to_integer(unsigned(index_k_m_out_loop)));
+            M_OUT <= matrix_first_operation_int(to_integer(unsigned(index_j_m_out_loop)), to_integer(unsigned(index_k_m_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -538,7 +538,7 @@ begin
             controller_m_out_fsm_int <= STARTER_M_OUT_STATE;
           elsif ((unsigned(index_j_m_out_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_m_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            M_OUT <= matrix_second_operation_int(to_integer(unsigned(index_j_m_out_loop)), to_integer(unsigned(index_k_m_out_loop)));
+            M_OUT <= matrix_first_operation_int(to_integer(unsigned(index_j_m_out_loop)), to_integer(unsigned(index_k_m_out_loop)));
 
             -- Control Outputs
             M_OUT_J_ENABLE <= '1';

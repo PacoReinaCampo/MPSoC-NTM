@@ -137,11 +137,12 @@ architecture ntm_reading_architecture of ntm_reading is
     );
 
   type controller_vector_summation_fsm is (
-    STARTER_VECTOR_SUMMATION_STATE,       -- STEP 0
-    INPUT_VECTOR_LENGTH_SUMMATION_STATE,  -- STEP 1
-    INPUT_VECTOR_SIZE_SUMMATION_STATE,    -- STEP 2
-    CLEAN_VECTOR_LENGTH_SUMMATION_STATE,  -- STEP 3
-    CLEAN_VECTOR_SIZE_SUMMATION_STATE     -- STEP 4
+    STARTER_VECTOR_SUMMATION_STATE,          -- STEP 0
+    INPUT_IN_VECTOR_LENGTH_SUMMATION_STATE,  -- STEP 1
+    INPUT_IN_VECTOR_SIZE_SUMMATION_STATE,    -- STEP 2
+    CLEAN_IN_VECTOR_LENGTH_SUMMATION_STATE,  -- STEP 3
+    CLEAN_IN_VECTOR_SIZE_SUMMATION_STATE,    -- STEP 4
+    OUTPUT_OUT_VECTOR_SIZE_SUMMATION_STATE   -- STEP 5
     );
 
   type controller_r_out_fsm is (
@@ -176,8 +177,9 @@ architecture ntm_reading_architecture of ntm_reading is
   signal matrix_w_in_int : matrix_buffer;
   signal matrix_m_in_int : matrix_buffer;
 
-  signal matrix_first_operation_int  : matrix_buffer;
-  signal matrix_second_operation_int : matrix_buffer;
+  signal matrix_operation_int : matrix_buffer;
+
+  signal vector_summation_int : vector_buffer;
 
   -- Control Internal
   signal index_i_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -189,7 +191,7 @@ architecture ntm_reading_architecture of ntm_reading is
   signal index_j_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal index_i_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_i_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -510,7 +512,7 @@ begin
 
           data_matrix_float_multiplier_ready_int <= '0';
 
-          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1') then
+          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1' and data_matrix_float_multiplier_start_int = '1') then
             -- Data Inputs
             size_i_in_matrix_float_multiplier <= SIZE_N_IN;
             size_j_in_matrix_float_multiplier <= SIZE_W_IN;
@@ -526,11 +528,11 @@ begin
         when INPUT_J_MATRIX_MULTIPLIER_STATE =>  -- STEP 5
 
           -- Data Inputs
-          data_a_in_matrix_float_multiplier <= matrix_first_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
+          data_a_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
           data_b_in_matrix_float_multiplier <= matrix_m_in_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
 
           -- Control Internal
-          if (unsigned(index_k_matrix_float_multiplier_loop) = unsigned(ZERO_CONTROL)) then
+          if (unsigned(index_j_matrix_float_multiplier_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_matrix_float_multiplier_loop) = unsigned(ZERO_CONTROL)) then
             start_matrix_float_multiplier <= '1';
           end if;
 
@@ -545,7 +547,7 @@ begin
         when INPUT_K_MATRIX_MULTIPLIER_STATE =>  -- STEP 6
 
           -- Data Inputs
-          data_a_in_matrix_float_multiplier <= matrix_first_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
+          data_a_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
           data_b_in_matrix_float_multiplier <= matrix_m_in_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop)));
 
           -- Control Internal
@@ -564,7 +566,7 @@ begin
           if (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1') then
             if ((unsigned(index_j_matrix_float_multiplier_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_matrix_float_multiplier_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Data Internal
-              matrix_first_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+              matrix_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
 
               -- Control Internal
               data_matrix_float_multiplier_ready_int <= '1';
@@ -576,7 +578,7 @@ begin
               controller_matrix_float_multiplier_fsm_int <= STARTER_MATRIX_MULTIPLIER_STATE;
             elsif ((unsigned(index_j_matrix_float_multiplier_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_matrix_float_multiplier_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Data Internal
-              matrix_first_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+              matrix_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
 
               -- Control Internal
               index_j_matrix_float_multiplier_loop <= std_logic_vector(unsigned(index_j_matrix_float_multiplier_loop) + unsigned(ONE_CONTROL));
@@ -600,7 +602,7 @@ begin
           if (data_out_j_enable_matrix_float_multiplier = '1') then
             if (unsigned(index_k_matrix_float_multiplier_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
               -- Data Internal
-              matrix_first_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+              matrix_operation_int(to_integer(unsigned(index_j_matrix_float_multiplier_loop)), to_integer(unsigned(index_k_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
 
               -- Control Internal
               index_k_matrix_float_multiplier_loop <= std_logic_vector(unsigned(index_k_matrix_float_multiplier_loop) + unsigned(ONE_CONTROL));
@@ -633,8 +635,8 @@ begin
       data_in_enable_vector_summation        <= '0';
 
       data_vector_summation_ready_int <= '0';
-          
-      index_i_vector_summation_loop <= ZERO_CONTROL;
+
+      index_j_vector_summation_loop <= ZERO_CONTROL;
       index_k_vector_summation_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
@@ -645,29 +647,29 @@ begin
           data_in_enable_length_vector_summation <= '0';
           data_in_enable_vector_summation        <= '0';
 
-          if (data_vector_summation_start_int = '1') then
+          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1' and data_vector_summation_start_int = '1') then
             -- Data Inputs
             length_in_vector_summation <= SIZE_R_IN;
             size_in_vector_summation   <= SIZE_W_IN;
 
             -- Control Internal
-            index_i_vector_summation_loop <= ZERO_CONTROL;
+            index_j_vector_summation_loop <= ZERO_CONTROL;
             index_k_vector_summation_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_vector_summation_fsm_int <= INPUT_VECTOR_LENGTH_SUMMATION_STATE;
+            controller_vector_summation_fsm_int <= INPUT_IN_VECTOR_LENGTH_SUMMATION_STATE;
           end if;
 
           -- Control Internal
           data_vector_summation_ready_int <= '0';
 
-        when INPUT_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 5
+        when INPUT_IN_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 1
 
           -- Data Inputs
-          data_in_vector_summation <= matrix_first_operation_int(to_integer(unsigned(index_i_vector_summation_loop)), to_integer(unsigned(index_k_vector_summation_loop)));
+          data_in_vector_summation <= matrix_operation_int(to_integer(unsigned(index_j_vector_summation_loop)), to_integer(unsigned(index_k_vector_summation_loop)));
 
           -- Control Internal
-          if (unsigned(index_k_vector_summation_loop) = unsigned(ZERO_CONTROL)) then
+          if (unsigned(index_j_vector_summation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_vector_summation_loop) = unsigned(ZERO_CONTROL)) then
             start_vector_summation <= '1';
           end if;
 
@@ -675,45 +677,40 @@ begin
           data_in_enable_vector_summation        <= '1';
 
           -- FSM Control
-          controller_vector_summation_fsm_int <= CLEAN_VECTOR_SIZE_SUMMATION_STATE;
+          controller_vector_summation_fsm_int <= CLEAN_IN_VECTOR_SIZE_SUMMATION_STATE;
 
-        when INPUT_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 6
+        when INPUT_IN_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 2
 
           -- Data Inputs
-          data_in_vector_summation <= matrix_first_operation_int(to_integer(unsigned(index_i_vector_summation_loop)), to_integer(unsigned(index_k_vector_summation_loop)));
+          data_in_vector_summation <= matrix_operation_int(to_integer(unsigned(index_j_vector_summation_loop)), to_integer(unsigned(index_k_vector_summation_loop)));
 
           -- Control Internal
           data_in_enable_vector_summation <= '1';
 
           -- FSM Control
           if (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            controller_vector_summation_fsm_int <= CLEAN_VECTOR_LENGTH_SUMMATION_STATE;
+            controller_vector_summation_fsm_int <= CLEAN_IN_VECTOR_LENGTH_SUMMATION_STATE;
           else
-            controller_vector_summation_fsm_int <= CLEAN_VECTOR_SIZE_SUMMATION_STATE;
+            controller_vector_summation_fsm_int <= CLEAN_IN_VECTOR_SIZE_SUMMATION_STATE;
           end if;
 
-        when CLEAN_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 7
+        when CLEAN_IN_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 3
 
           if (data_enable_length_vector_summation = '1' and data_enable_vector_summation = '1') then
-            if ((unsigned(index_i_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Internal
-              matrix_second_operation_int(to_integer(unsigned(index_i_vector_summation_loop)), to_integer(unsigned(index_k_vector_summation_loop))) <= data_out_vector_summation;
-
+            if ((unsigned(index_j_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Control Internal
-              data_vector_summation_ready_int <= '1';
-
-              index_i_vector_summation_loop <= ZERO_CONTROL;
+              index_j_vector_summation_loop <= ZERO_CONTROL;
               index_k_vector_summation_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
-            elsif ((unsigned(index_i_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              controller_vector_summation_fsm_int <= OUTPUT_OUT_VECTOR_SIZE_SUMMATION_STATE;
+            elsif ((unsigned(index_j_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_vector_summation_loop <= std_logic_vector(unsigned(index_i_vector_summation_loop) + unsigned(ONE_CONTROL));
+              index_j_vector_summation_loop <= std_logic_vector(unsigned(index_j_vector_summation_loop) + unsigned(ONE_CONTROL));
               index_k_vector_summation_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_vector_summation_fsm_int <= INPUT_VECTOR_LENGTH_SUMMATION_STATE;
+              controller_vector_summation_fsm_int <= INPUT_IN_VECTOR_LENGTH_SUMMATION_STATE;
             end if;
           else
             -- Control Internal
@@ -723,7 +720,7 @@ begin
             data_in_enable_vector_summation        <= '0';
           end if;
 
-        when CLEAN_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 8
+        when CLEAN_IN_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 4
 
           if (data_enable_vector_summation = '1') then
             if (unsigned(index_k_vector_summation_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
@@ -731,7 +728,7 @@ begin
               index_k_vector_summation_loop <= std_logic_vector(unsigned(index_k_vector_summation_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_vector_summation_fsm_int <= INPUT_VECTOR_LENGTH_SUMMATION_STATE;
+              controller_vector_summation_fsm_int <= INPUT_IN_VECTOR_LENGTH_SUMMATION_STATE;
             end if;
           else
             -- Control Internal
@@ -739,6 +736,29 @@ begin
 
             data_in_enable_length_vector_summation <= '0';
             data_in_enable_vector_summation        <= '0';
+          end if;
+
+        when OUTPUT_OUT_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 5
+
+          if (data_out_enable_vector_summation = '1') then
+            if (unsigned(index_k_vector_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_summation_int(to_integer(unsigned(index_k_vector_summation_loop))) <= data_out_vector_summation;
+
+              -- Control Internal
+              data_vector_summation_ready_int <= '1';
+
+              index_k_vector_summation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
+            else
+              -- Data Internal
+              vector_summation_int(to_integer(unsigned(index_k_vector_summation_loop))) <= data_out_vector_summation;
+
+              -- Control Internal
+              index_k_vector_summation_loop <= std_logic_vector(unsigned(index_k_vector_summation_loop) + unsigned(ONE_CONTROL));
+            end if;
           end if;
 
         when others =>
@@ -767,7 +787,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_r_out_fsm_int is
-        when STARTER_R_OUT_STATE =>      -- STEP 0
+        when STARTER_R_OUT_STATE =>     -- STEP 0
           if (START = '1') then
             -- Control Internal
             index_i_r_out_loop <= ZERO_CONTROL;
@@ -777,12 +797,12 @@ begin
             controller_r_out_fsm_int <= MATRIX_RESHAPE_STATE;
           end if;
 
-        when MATRIX_RESHAPE_STATE =>     -- STEP 1
+        when MATRIX_RESHAPE_STATE =>    -- STEP 1
 
           -- Data Internal
           for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
             for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-              matrix_first_operation_int(j, k) <= matrix_w_in_int(to_integer(unsigned(index_i_r_out_loop)), j);
+              matrix_operation_int(j, k) <= matrix_w_in_int(to_integer(unsigned(index_i_r_out_loop)), j);
             end loop;
           end loop;
 
@@ -802,14 +822,20 @@ begin
             controller_r_out_fsm_int <= VECTOR_SUMMATION_STATE;
           end if;
 
-        when VECTOR_SUMMATION_STATE =>   -- STEP 3
+          -- Control Internal
+          data_matrix_float_multiplier_start_int <= '0';
+
+        when VECTOR_SUMMATION_STATE =>  -- STEP 3
 
           -- FSM Control
           if (data_vector_summation_ready_int = '1') then
             controller_r_out_fsm_int <= CLEAN_R_OUT_I_STATE;
           end if;
 
-        when CLEAN_R_OUT_I_STATE =>      -- STEP 4
+          -- Control Internal
+          data_vector_summation_start_int <= '0';
+
+        when CLEAN_R_OUT_I_STATE =>     -- STEP 4
           -- Control Outputs
           R_OUT_I_ENABLE <= '0';
           R_OUT_K_ENABLE <= '0';
@@ -817,7 +843,7 @@ begin
           -- FSM Control
           controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
 
-        when CLEAN_R_OUT_K_STATE =>      -- STEP 5
+        when CLEAN_R_OUT_K_STATE =>     -- STEP 5
 
           -- Control Outputs
           R_OUT_K_ENABLE <= '0';
@@ -829,11 +855,11 @@ begin
             controller_r_out_fsm_int <= OUTPUT_R_OUT_K_STATE;
           end if;
 
-        when OUTPUT_R_OUT_I_STATE =>     -- STEP 6
+        when OUTPUT_R_OUT_I_STATE =>    -- STEP 6
 
           if ((unsigned(index_i_r_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            R_OUT <= matrix_second_operation_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
+            R_OUT <= vector_summation_int(to_integer(unsigned(index_k_r_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -849,7 +875,7 @@ begin
             controller_r_out_fsm_int <= STARTER_R_OUT_STATE;
           elsif ((unsigned(index_i_r_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            R_OUT <= matrix_second_operation_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
+            R_OUT <= vector_summation_int(to_integer(unsigned(index_k_r_out_loop)));
 
             -- Control Outputs
             R_OUT_I_ENABLE <= '1';
@@ -863,9 +889,12 @@ begin
             controller_r_out_fsm_int <= MATRIX_RESHAPE_STATE;
           end if;
 
-        when OUTPUT_R_OUT_K_STATE =>     -- STEP 7
+        when OUTPUT_R_OUT_K_STATE =>    -- STEP 7
 
           if (unsigned(index_k_r_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            R_OUT <= vector_summation_int(to_integer(unsigned(index_k_r_out_loop)));
+
             -- Control Outputs
             R_OUT_K_ENABLE <= '1';
 
