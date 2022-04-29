@@ -61,11 +61,10 @@ entity dnc_write_key is
 
     K_IN_ENABLE : in std_logic;
 
-    K_ENABLE : out std_logic;
-
     K_OUT_ENABLE : out std_logic;
 
     -- DATA
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,8 +140,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      K_ENABLE <= '0';
-
       K_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -155,19 +152,17 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          K_ENABLE <= '0';
-
-          K_OUT_ENABLE <= '0';
-
           if (START = '1') then
             -- Control Outputs
-            K_ENABLE <= '1';
+            K_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             write_key_ctrl_fsm_int <= INPUT_STATE;
+          else
+            K_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 2
@@ -181,7 +176,7 @@ begin
           end if;
 
           -- Control Outputs
-          K_ENABLE <= '0';
+          K_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 4
 
@@ -196,7 +191,7 @@ begin
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- Control Outputs
-            K_ENABLE <= '1';
+            K_OUT_ENABLE <= '1';
 
             -- FSM Control
             write_key_ctrl_fsm_int <= INPUT_STATE;
@@ -208,8 +203,6 @@ begin
         when CLEAN_STATE =>             -- STEP 5
 
           -- Control Outputs
-          K_ENABLE <= '0';
-
           K_OUT_ENABLE <= '0';
 
           -- FSM Control

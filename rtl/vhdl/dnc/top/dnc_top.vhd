@@ -200,7 +200,7 @@ architecture dnc_top_architecture of dnc_top is
     READ_KEYS_STATE,                    -- STEP 2
     READ_MODES_STATE,                   -- STEP 3
     READ_STRENGTHS_STATE,               -- STEP 4
-    READ_INTERFACE_VECTOR_STATE         -- STEP 5
+    READ_INTERFACE_MATRIX_STATE         -- STEP 5
     );
 
   type write_heads_ctrl_fsm is (
@@ -465,6 +465,7 @@ architecture dnc_top_architecture of dnc_top is
   -- DATA
   signal size_m_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -544,6 +545,7 @@ architecture dnc_top_architecture of dnc_top is
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
+  signal size_s_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -565,11 +567,10 @@ architecture dnc_top_architecture of dnc_top is
 
   signal k_in_enable_write_key : std_logic;
 
-  signal k_enable_write_key : std_logic;
-
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
+  signal size_s_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -591,11 +592,10 @@ architecture dnc_top_architecture of dnc_top is
 
   signal v_in_enable_write_vector : std_logic;
 
-  signal v_enable_write_vector : std_logic;
-
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
+  signal size_s_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -750,14 +750,14 @@ begin
 
               -- beta(t;i) = oneplus(beta^(t;i))
 
-            when READ_INTERFACE_VECTOR_STATE =>  -- STEP 5
+            when READ_INTERFACE_MATRIX_STATE =>  -- STEP 5
 
-              -- xi(t;?) = U(t;?;l)·h(t;l)
+              -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
 
-              -- k(t;i;k) = Wk(t;i;l;k)·h(t;l)
-              -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
-              -- f(t;i) = Wf(t;i;l)·h(t;l)
-              -- pi(t;i) = Wpi(t;i;l)·h(t;l)
+              -- f(t;i) = rho(t;i;m)
+              -- k(t;i;k) = rho(t;i;m)
+              -- beta(t;i) = rho(t;i;m)
+              -- pi(t;i;p) = rho(t;i;m)
 
             when others =>
               -- FSM Control
@@ -793,16 +793,7 @@ begin
 
               -- v(t;k) = v^(t;k)
 
-            when WRITE_INTERFACE_MATRIX_STATE =>  -- STEP 7
-
-              -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
-
-              -- f(t;i) = rho(t;i;m)
-              -- k(t;i;k) = rho(t;i;m)
-              -- beta(t;i) = rho(t;i;m)
-              -- pi(t;i;p) = rho(t;i;m)
-
-            when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 8
+            when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
 
               -- xi(t;s) = U(t;?;l)·h(t;l)
 
@@ -1403,6 +1394,7 @@ begin
       -- DATA
       SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_free_gates,
+      SIZE_W_IN => size_w_in_free_gates,
 
       BETA_IN => beta_in_read_strengths,
 
@@ -1454,6 +1446,7 @@ begin
       E_OUT_ENABLE => e_out_enable_erase_vector,
 
       -- DATA
+      SIZE_S_IN => size_s_in_erase_vector,
       SIZE_W_IN => size_w_in_erase_vector,
 
       E_IN => e_in_erase_vector,
@@ -1499,11 +1492,10 @@ begin
 
       K_IN_ENABLE => k_in_enable_write_key,
 
-      K_ENABLE => k_enable_write_key,
-
       K_OUT_ENABLE => k_out_enable_write_key,
 
       -- DATA
+      SIZE_S_IN => size_s_in_write_key,
       SIZE_W_IN => size_w_in_write_key,
 
       K_IN => k_in_write_key,
@@ -1549,11 +1541,10 @@ begin
 
       V_IN_ENABLE => v_in_enable_write_vector,
 
-      V_ENABLE => v_enable_write_vector,
-
       V_OUT_ENABLE => v_out_enable_write_vector,
 
       -- DATA
+      SIZE_S_IN => size_s_in_write_vector,
       SIZE_W_IN => size_w_in_write_vector,
 
       V_IN => v_in_write_vector,

@@ -60,11 +60,12 @@ entity dnc_erase_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    E_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
+    E_IN_ENABLE : in std_logic;      -- for i in 0 to W-1
 
-    E_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+    E_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
 
     -- DATA
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -98,7 +99,9 @@ architecture dnc_erase_vector_urchitecture of dnc_erase_vector is
   type erase_vector_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    CLEAN_STATE                         -- STEP 2
+    CLEAN_IN_STATE,                     -- STEP 2
+    CLEAN_OUT_STATE,                    -- STEP 3
+    OUTPUT_STATE                        -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -110,6 +113,8 @@ architecture dnc_erase_vector_urchitecture of dnc_erase_vector is
 
   -- Buffer
   signal vector_xi_int : vector_buffer;
+
+  signal vector_in_int : vector_buffer;
 
   signal vector_out_int : vector_buffer;
 
@@ -125,7 +130,7 @@ begin
   -- e(t;k) = sigmoid(e^(t;k))
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  inout_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -159,57 +164,76 @@ begin
             erase_vector_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1 e
+        when INPUT_STATE =>             -- STEP 1
 
           if (E_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_xi_int(to_integer(unsigned(index_i_loop))) <= E_IN;
+            vector_in_int(to_integer(unsigned(index_i_loop))) <= E_IN;
 
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= CLEAN_IN_STATE;
+          end if;
+
+          -- Control Outputs
+          E_OUT_ENABLE <= '0';
+
+        when CLEAN_IN_STATE =>          -- STEP 2
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Internal
             vector_out_int <= function_dnc_erase_vector (
-              SIZE_S_IN => SIZE_W_IN,
+              SIZE_S_IN => SIZE_S_IN,
               SIZE_R_IN => SIZE_W_IN,
               SIZE_W_IN => SIZE_W_IN,
 
               vector_xi_input => vector_xi_int
               );
 
-            -- FSM Control
-            erase_vector_ctrl_fsm_int <= CLEAN_STATE;
-          end if;
-
-          -- Control Outputs
-          E_OUT_ENABLE <= '0';
-
-        when CLEAN_STATE =>             -- STEP 2
-
-          if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            E_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
-
-            -- Control Outputs
-            READY <= '1';
-
-            E_OUT_ENABLE <= '1';
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            erase_vector_ctrl_fsm_int <= STARTER_STATE;
+            erase_vector_ctrl_fsm_int <= CLEAN_OUT_STATE;
           elsif (unsigned(index_i_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            E_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
-
-            -- Control Outputs
-            E_OUT_ENABLE <= '1';
-
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
             erase_vector_ctrl_fsm_int <= INPUT_STATE;
           end if;
+
+        when CLEAN_OUT_STATE =>         -- STEP 3
+
+          -- Control Outputs
+          E_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          erase_vector_ctrl_fsm_int <= OUTPUT_STATE;
+          
+        when OUTPUT_STATE =>            -- STEP 4
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            erase_vector_ctrl_fsm_int <= CLEAN_OUT_STATE;
+          end if;
+
+          -- Data Outputs
+          E_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+          -- Control Outputs
+          E_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control

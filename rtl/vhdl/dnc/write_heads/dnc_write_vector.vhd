@@ -61,11 +61,10 @@ entity dnc_write_vector is
 
     V_IN_ENABLE : in std_logic;
 
-    V_ENABLE : out std_logic;
-
     V_OUT_ENABLE : out std_logic;
 
     -- DATA
+    SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     V_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,8 +140,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      V_ENABLE <= '0';
-
       V_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -155,19 +152,18 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          V_ENABLE <= '0';
-
-          V_OUT_ENABLE <= '0';
-
           if (START = '1') then
             -- Control Outputs
-            V_ENABLE <= '1';
+            V_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             write_vector_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            V_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 2
@@ -181,7 +177,7 @@ begin
           end if;
 
           -- Control Outputs
-          V_ENABLE <= '0';
+          V_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 4
 
@@ -196,7 +192,7 @@ begin
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- Control Outputs
-            V_ENABLE <= '1';
+            V_OUT_ENABLE <= '1';
 
             -- FSM Control
             write_vector_ctrl_fsm_int <= INPUT_STATE;
@@ -208,8 +204,6 @@ begin
         when CLEAN_STATE =>             -- STEP 5
 
           -- Control Outputs
-          V_ENABLE <= '0';
-
           V_OUT_ENABLE <= '0';
 
           -- FSM Control

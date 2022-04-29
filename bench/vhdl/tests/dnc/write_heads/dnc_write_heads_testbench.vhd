@@ -113,6 +113,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
+  signal size_s_in_erase_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_erase_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -134,11 +135,10 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   signal k_in_enable_write_key : std_logic;
 
-  signal k_enable_write_key : std_logic;
-
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
+  signal size_s_in_write_key : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_write_key : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,11 +160,10 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   signal v_in_enable_write_vector : std_logic;
 
-  signal v_enable_write_vector : std_logic;
-
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
+  signal size_s_in_write_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_write_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -215,6 +214,7 @@ begin
       DNC_ERASE_VECTOR_E_OUT_ENABLE => e_out_enable_erase_vector,
 
       -- DATA
+      DNC_ERASE_VECTOR_SIZE_S_IN => size_s_in_erase_vector,
       DNC_ERASE_VECTOR_SIZE_W_IN => size_w_in_erase_vector,
 
       DNC_ERASE_VECTOR_E_IN => e_in_erase_vector,
@@ -238,11 +238,10 @@ begin
 
       DNC_WRITE_KEY_K_IN_ENABLE => k_in_enable_write_key,
 
-      DNC_WRITE_KEY_K_ENABLE => k_enable_write_key,
-
       DNC_WRITE_KEY_K_OUT_ENABLE => k_out_enable_write_key,
 
       -- DATA
+      DNC_WRITE_KEY_SIZE_S_IN => size_s_in_write_key,
       DNC_WRITE_KEY_SIZE_W_IN => size_w_in_write_key,
 
       DNC_WRITE_KEY_K_IN => k_in_write_key,
@@ -266,11 +265,10 @@ begin
 
       DNC_WRITE_VECTOR_V_IN_ENABLE => v_in_enable_write_vector,
 
-      DNC_WRITE_VECTOR_V_ENABLE => v_enable_write_vector,
-
       DNC_WRITE_VECTOR_V_OUT_ENABLE => v_out_enable_write_vector,
 
       -- DATA
+      DNC_WRITE_VECTOR_SIZE_S_IN => size_s_in_write_vector,
       DNC_WRITE_VECTOR_SIZE_W_IN => size_w_in_write_vector,
 
       DNC_WRITE_VECTOR_V_IN => v_in_write_vector,
@@ -322,6 +320,7 @@ begin
         E_OUT_ENABLE => e_out_enable_erase_vector,
 
         -- DATA
+        SIZE_S_IN => size_s_in_erase_vector,
         SIZE_W_IN => size_w_in_erase_vector,
 
         E_IN => e_in_erase_vector,
@@ -371,11 +370,10 @@ begin
 
         K_IN_ENABLE => k_in_enable_write_key,
 
-        K_ENABLE => k_enable_write_key,
-
         K_OUT_ENABLE => k_out_enable_write_key,
 
         -- DATA
+        SIZE_S_IN => size_s_in_write_key,
         SIZE_W_IN => size_w_in_write_key,
 
         K_IN => k_in_write_key,
@@ -425,11 +423,10 @@ begin
 
         V_IN_ENABLE => v_in_enable_write_vector,
 
-        V_ENABLE => v_enable_write_vector,
-
         V_OUT_ENABLE => v_out_enable_write_vector,
 
         -- DATA
+        SIZE_S_IN => size_s_in_write_vector,
         SIZE_W_IN => size_w_in_write_vector,
 
         V_IN => v_in_write_vector,

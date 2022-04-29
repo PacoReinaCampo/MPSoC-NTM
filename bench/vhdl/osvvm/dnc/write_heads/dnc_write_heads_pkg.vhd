@@ -203,6 +203,7 @@ package dnc_write_heads_pkg is
       DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
 
       -- DATA
+      DNC_ERASE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -226,11 +227,10 @@ package dnc_write_heads_pkg is
 
       DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
 
-      DNC_WRITE_KEY_K_ENABLE : in std_logic;
-
       DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
 
       -- DATA
+      DNC_WRITE_KEY_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -254,11 +254,10 @@ package dnc_write_heads_pkg is
 
       DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
 
-      DNC_WRITE_VECTOR_V_ENABLE : in std_logic;
-
       DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
 
       -- DATA
+      DNC_WRITE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
