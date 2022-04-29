@@ -88,9 +88,6 @@ entity dnc_read_heads_stimulus is
     DNC_READ_KEYS_K_IN_I_ENABLE : out std_logic;
     DNC_READ_KEYS_K_IN_K_ENABLE : out std_logic;
 
-    DNC_READ_KEYS_K_I_ENABLE : in std_logic;
-    DNC_READ_KEYS_K_K_ENABLE : in std_logic;
-
     DNC_READ_KEYS_K_OUT_I_ENABLE : in std_logic;
     DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
 
@@ -372,21 +369,21 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         READ_KEYS_FIRST_RUN : loop
-          if (DNC_READ_KEYS_K_I_ENABLE = '1' and DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+          if (DNC_READ_KEYS_K_OUT_I_ENABLE = '1' and DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             DNC_READ_KEYS_K_IN_I_ENABLE <= '1';
             DNC_READ_KEYS_K_IN_K_ENABLE <= '1';
-          elsif (DNC_READ_KEYS_K_I_ENABLE = '1' and DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+          elsif (DNC_READ_KEYS_K_OUT_I_ENABLE = '1' and DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             DNC_READ_KEYS_K_IN_I_ENABLE <= '1';
             DNC_READ_KEYS_K_IN_K_ENABLE <= '1';
-          elsif (DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+          elsif (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
@@ -399,13 +396,13 @@ begin
           end if;
 
           -- LOOP
-          if (DNC_READ_KEYS_K_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          if (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif (DNC_READ_KEYS_K_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((DNC_READ_KEYS_K_K_ENABLE = '1' or DNC_READ_KEYS_START = '1') and (unsigned(index_j_loop) < unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((DNC_READ_KEYS_K_OUT_K_ENABLE = '1' or DNC_READ_KEYS_START = '1') and (unsigned(index_j_loop) < unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -432,21 +429,21 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         READ_KEYS_SECOND_RUN : loop
-          if (DNC_READ_KEYS_K_I_ENABLE = '1' and DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+          if (DNC_READ_KEYS_K_OUT_I_ENABLE = '1' and DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             DNC_READ_KEYS_K_IN_I_ENABLE <= '1';
             DNC_READ_KEYS_K_IN_K_ENABLE <= '1';
-          elsif (DNC_READ_KEYS_K_I_ENABLE = '1' and DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+          elsif (DNC_READ_KEYS_K_OUT_I_ENABLE = '1' and DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             DNC_READ_KEYS_K_IN_I_ENABLE <= '1';
             DNC_READ_KEYS_K_IN_K_ENABLE <= '1';
-          elsif (DNC_READ_KEYS_K_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+          elsif (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
             DNC_READ_KEYS_K_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
@@ -459,13 +456,13 @@ begin
           end if;
 
           -- LOOP
-          if (DNC_READ_KEYS_K_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          if (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif (DNC_READ_KEYS_K_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif (DNC_READ_KEYS_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(DNC_READ_KEYS_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((DNC_READ_KEYS_K_K_ENABLE = '1' or DNC_READ_KEYS_START = '1') and (unsigned(index_j_loop) < unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((DNC_READ_KEYS_K_OUT_K_ENABLE = '1' or DNC_READ_KEYS_START = '1') and (unsigned(index_j_loop) < unsigned(DNC_READ_KEYS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 

@@ -63,9 +63,6 @@ entity dnc_read_keys is
     K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    K_I_ENABLE : out std_logic;         -- for i in 0 to R-1
-    K_K_ENABLE : out std_logic;         -- for k in 0 to W-1
-
     K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
@@ -124,7 +121,6 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   signal read_keys_inout_fsm_int : read_keys_inout_fsm;
 
   -- Buffer
-
   signal matrix_rho_int : matrix_buffer;
 
   signal matrix_k_int : matrix_buffer;
@@ -153,9 +149,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      K_I_ENABLE <= '0';
-      K_K_ENABLE <= '0';
-
       K_OUT_I_ENABLE <= '0';
       K_OUT_K_ENABLE <= '0';
 
@@ -173,13 +166,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          K_OUT_I_ENABLE <= '0';
-          K_OUT_K_ENABLE <= '0';
-
           if (START = '1') then
             -- Control Outputs
-            K_I_ENABLE <= '1';
-            K_K_ENABLE <= '1';
+            K_OUT_I_ENABLE <= '1';
+            K_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -189,8 +179,8 @@ begin
             read_keys_inout_fsm_int <= INPUT_I_STATE;
           else
             -- Control Outputs
-            K_I_ENABLE <= '0';
-            K_K_ENABLE <= '0';
+            K_OUT_I_ENABLE <= '0';
+            K_OUT_K_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1 k
@@ -204,8 +194,8 @@ begin
           end if;
 
           -- Control Outputs
-          K_I_ENABLE <= '0';
-          K_K_ENABLE <= '0';
+          K_OUT_I_ENABLE <= '0';
+          K_OUT_K_ENABLE <= '0';
 
         when INPUT_J_STATE =>           -- STEP 2 k
 
@@ -222,7 +212,7 @@ begin
           end if;
 
           -- Control Outputs
-          K_K_ENABLE <= '0';
+          K_OUT_K_ENABLE <= '0';
 
         when CLEAN_I_IN_STATE =>           -- STEP 3
 
@@ -237,8 +227,8 @@ begin
               );
 
             -- Control Outputs
-            K_I_ENABLE <= '1';
-            K_K_ENABLE <= '1';
+            K_OUT_I_ENABLE <= '1';
+            K_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -248,8 +238,8 @@ begin
             read_keys_inout_fsm_int <= CLEAN_I_OUT_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            K_I_ENABLE <= '1';
-            K_K_ENABLE <= '1';
+            K_OUT_I_ENABLE <= '1';
+            K_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -263,7 +253,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            K_K_ENABLE <= '1';
+            K_OUT_K_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));

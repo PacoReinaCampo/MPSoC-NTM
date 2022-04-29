@@ -120,7 +120,6 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal read_modes_inout_fsm_int : read_modes_inout_fsm;
 
   -- Buffer
-
   signal matrix_rho_int : matrix_buffer;
 
   signal matrix_in_int : matrix_buffer;

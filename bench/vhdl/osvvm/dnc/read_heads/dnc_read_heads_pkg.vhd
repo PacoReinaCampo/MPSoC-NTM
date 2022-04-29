@@ -200,9 +200,6 @@ package dnc_read_heads_pkg is
       DNC_READ_KEYS_K_IN_I_ENABLE : out std_logic;
       DNC_READ_KEYS_K_IN_K_ENABLE : out std_logic;
 
-      DNC_READ_KEYS_K_I_ENABLE : in std_logic;
-      DNC_READ_KEYS_K_K_ENABLE : in std_logic;
-
       DNC_READ_KEYS_K_OUT_I_ENABLE : in std_logic;
       DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
 
