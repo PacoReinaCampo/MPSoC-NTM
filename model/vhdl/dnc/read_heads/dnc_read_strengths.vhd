@@ -67,6 +67,7 @@ entity dnc_read_strengths is
     -- DATA
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -97,10 +98,12 @@ architecture dnc_read_strengths_urchitecture of dnc_read_strengths is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type read_strengths_ctrl_fsm is (
+  type read_strengths_inout_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    CLEAN_STATE                         -- STEP 2
+    CLEAN_IN_STATE,                     -- STEP 2
+    CLEAN_OUT_STATE,                    -- STEP 3
+    OUTPUT_STATE                        -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -108,7 +111,7 @@ architecture dnc_read_strengths_urchitecture of dnc_read_strengths is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal read_strengths_ctrl_fsm_int : read_strengths_ctrl_fsm;
+  signal read_strengths_inout_fsm_int : read_strengths_inout_fsm;
 
   -- Buffer
   signal matrix_rho_int : matrix_buffer;
@@ -129,7 +132,7 @@ begin
   -- beta(t;i) = oneplus(beta^(t;i))
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  inout_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -145,7 +148,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case read_strengths_ctrl_fsm_int is
+      case read_strengths_inout_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Data Outputs
           BETA_OUT <= ZERO_DATA;
@@ -160,64 +163,83 @@ begin
             index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            read_strengths_ctrl_fsm_int <= INPUT_STATE;
+            read_strengths_inout_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1 u
+        when INPUT_STATE =>             -- STEP 1
 
           if (BETA_IN_ENABLE = '1') then
             -- Data Inputs
             vector_in_int(to_integer(unsigned(index_i_loop))) <= BETA_IN;
 
-            -- Data Internal
-            vector_out_int <= function_dnc_read_strengths (
-              SIZE_M_IN => SIZE_M_IN,
-              SIZE_R_IN => SIZE_R_IN,
-              SIZE_W_IN => SIZE_R_IN,
-
-              matrix_rho_input => matrix_rho_int
-              );
-
             -- FSM Control
-            read_strengths_ctrl_fsm_int <= CLEAN_STATE;
+            read_strengths_inout_fsm_int <= CLEAN_IN_STATE;
           end if;
 
           -- Control Outputs
           BETA_OUT_ENABLE <= '0';
 
-        when CLEAN_STATE =>             -- STEP 2
+        when CLEAN_IN_STATE =>          -- STEP 2
 
           if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            BETA_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+            -- Data Internal
+            vector_out_int <= function_dnc_read_strengths (
+              SIZE_M_IN => SIZE_M_IN,
+              SIZE_R_IN => SIZE_R_IN,
+              SIZE_W_IN => SIZE_W_IN,
 
-            -- Control Outputs
-            READY <= '1';
-
-            BETA_OUT_ENABLE <= '1';
+              matrix_rho_input => matrix_rho_int
+              );
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            read_strengths_ctrl_fsm_int <= STARTER_STATE;
+            read_strengths_inout_fsm_int <= CLEAN_OUT_STATE;
           elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            BETA_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
-
-            -- Control Outputs
-            BETA_OUT_ENABLE <= '1';
-
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            read_strengths_ctrl_fsm_int <= INPUT_STATE;
+            read_strengths_inout_fsm_int <= INPUT_STATE;
           end if;
+
+        when CLEAN_OUT_STATE =>         -- STEP 3
+
+          -- Control Outputs
+          BETA_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          read_strengths_inout_fsm_int <= OUTPUT_STATE;
+          
+        when OUTPUT_STATE =>            -- STEP 4
+
+          if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            read_strengths_inout_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            read_strengths_inout_fsm_int <= CLEAN_OUT_STATE;
+          end if;
+
+          -- Data Outputs
+          BETA_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+
+          -- Control Outputs
+          BETA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
-          read_strengths_ctrl_fsm_int <= STARTER_STATE;
+          read_strengths_inout_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
