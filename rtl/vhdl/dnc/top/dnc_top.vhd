@@ -465,7 +465,6 @@ architecture dnc_top_architecture of dnc_top is
   -- DATA
   signal size_m_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1394,7 +1393,6 @@ begin
       -- DATA
       SIZE_M_IN => size_m_in_free_gates,
       SIZE_R_IN => size_r_in_free_gates,
-      SIZE_W_IN => size_w_in_free_gates,
 
       BETA_IN => beta_in_read_strengths,
 

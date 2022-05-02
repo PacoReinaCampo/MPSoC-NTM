@@ -149,7 +149,6 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   -- DATA
   signal size_m_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_r_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -246,7 +245,6 @@ begin
       -- DATA
       DNC_READ_STRENGTHS_SIZE_M_IN => size_m_in_read_strengths,
       DNC_READ_STRENGTHS_SIZE_R_IN => size_r_in_read_strengths,
-      DNC_READ_STRENGTHS_SIZE_W_IN => size_w_in_read_strengths,
 
       DNC_READ_STRENGTHS_BETA_IN => beta_in_read_strengths,
 
@@ -370,7 +368,6 @@ begin
         -- DATA
         SIZE_M_IN => size_m_in_read_strengths,
         SIZE_R_IN => size_r_in_read_strengths,
-        SIZE_W_IN => size_w_in_read_strengths,
 
         BETA_IN => beta_in_read_strengths,
 

@@ -116,7 +116,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- ga(t) = sigmoid(g^(t))
+  -- ga(t) = sigmoid(ga^(t))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

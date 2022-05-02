@@ -794,11 +794,51 @@ package dnc_core_pkg is
       -- DATA
       SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component dnc_read_heads is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+
+      K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+      BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+
+      F_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
+
+      PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
+
+      -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -950,6 +990,43 @@ package dnc_core_pkg is
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component dnc_write_heads is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      XI_IN_ENABLE : in std_logic;     -- for s in 0 to S-1
+
+      XI_OUT_ENABLE : out std_logic;   -- for s in 0 to S-1
+
+      K_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+      E_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+      V_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+
+      -- DATA
+      SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      XI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      E_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      V_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

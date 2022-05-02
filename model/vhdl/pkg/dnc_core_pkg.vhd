@@ -45,6 +45,25 @@ use work.ntm_math_pkg.all;
 use work.ntm_fnn_controller_pkg.all;
 
 package dnc_core_pkg is
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  type read_heads_output is record
+    matrix_k_output    : matrix_buffer;
+    vector_beta_output : vector_buffer;
+    vector_f_output    : vector_buffer;
+    matrix_pi_output   : matrix_buffer;
+  end record read_heads_output;
+
+  type write_heads_output is record
+    vector_k_output    : vector_buffer;
+    scalar_beta_output : std_logic_vector(DATA_SIZE-1 downto 0);
+    vector_e_output    : vector_buffer;
+    vector_v_output    : vector_buffer;
+    scalar_ga_output   : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_gw_output   : std_logic_vector(DATA_SIZE-1 downto 0);
+  end record write_heads_output;
 
   -----------------------------------------------------------------------
   -- Components
@@ -795,11 +814,51 @@ package dnc_core_pkg is
       -- DATA
       SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component dnc_read_heads is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+
+      K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+      BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+
+      F_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
+
+      PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
+
+      -- DATA
+      SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -944,8 +1003,6 @@ package dnc_core_pkg is
 
       V_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      V_ENABLE : out std_logic;         -- for k in 0 to W-1
-
       V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
@@ -955,6 +1012,43 @@ package dnc_core_pkg is
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component dnc_write_heads is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      XI_IN_ENABLE : in std_logic;     -- for s in 0 to S-1
+
+      XI_OUT_ENABLE : out std_logic;   -- for s in 0 to S-1
+
+      K_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+      E_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+      V_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+
+      -- DATA
+      SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      XI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      E_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      V_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1396,10 +1490,17 @@ package dnc_core_pkg is
   function function_dnc_read_strengths (
     SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_rho_input : matrix_buffer
     ) return vector_buffer;
+
+  function function_dnc_read_heads (
+    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_rho_input : matrix_buffer
+    ) return read_heads_output;
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -1450,6 +1551,13 @@ package dnc_core_pkg is
 
     vector_xi_input : vector_buffer
     ) return vector_buffer;
+
+  function function_dnc_write_heads (
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_xi_input : vector_buffer
+    ) return write_heads_output;
 
   -----------------------------------------------------------------------
   -- TOP - INTERFACE
@@ -2616,8 +2724,6 @@ package body dnc_core_pkg is
     matrix_rho_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_rho_int : matrix_buffer;
-
     variable matrix_k_output : matrix_buffer;
 
   begin
@@ -2626,7 +2732,7 @@ package body dnc_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for m in 5 to to_integer(unsigned(SIZE_W_IN))+4 loop
-        matrix_k_output(i, m) := matrix_rho_int(i, m);
+        matrix_k_output(i, m) := matrix_rho_input(i, m);
       end loop;
     end loop;
 
@@ -2640,8 +2746,6 @@ package body dnc_core_pkg is
     matrix_rho_input : matrix_buffer
     ) return matrix_buffer is
 
-    variable matrix_rho_int : matrix_buffer;
-
     variable matrix_pi_int : matrix_buffer;
 
     variable matrix_pi_output : matrix_buffer;
@@ -2652,7 +2756,7 @@ package body dnc_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for m in 0 to 2 loop
-        matrix_pi_int(i, m) := matrix_rho_int(i, m);
+        matrix_pi_int(i, m) := matrix_rho_input(i, m);
       end loop;
     end loop;
 
@@ -2669,7 +2773,6 @@ package body dnc_core_pkg is
   function function_dnc_read_strengths (
     SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_rho_input : matrix_buffer
     ) return vector_buffer is
@@ -2694,6 +2797,82 @@ package body dnc_core_pkg is
 
     return vector_beta_output;
   end function function_dnc_read_strengths;
+
+  function function_dnc_read_heads (
+    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_rho_input : matrix_buffer
+    ) return read_heads_output is
+
+    variable vector_beta_int : vector_buffer;
+    variable vector_f_int    : vector_buffer;
+    variable matrix_pi_int   : matrix_buffer;
+
+    variable matrix_k_output    : matrix_buffer;
+    variable vector_beta_output : vector_buffer;
+    variable vector_f_output    : vector_buffer;
+    variable matrix_pi_output   : matrix_buffer;
+
+    variable read_output : read_heads_output;
+
+  begin
+
+    -- k(t;i;k) = k^(t;i;k)
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for m in 5 to to_integer(unsigned(SIZE_W_IN))+4 loop
+        matrix_k_output(i, m) := matrix_rho_input(i, m);
+      end loop;
+    end loop;
+
+    -- beta(t;i) = oneplus(beta^(t;i))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_beta_int(i) := matrix_rho_input(i, 4);
+    end loop;
+
+    vector_beta_output := function_vector_oneplus (
+      SIZE_IN => SIZE_R_IN,
+
+      vector_input => vector_beta_int
+      );
+
+    -- f(t;i) = sigmoid(f^(t;i))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_f_int(i) := matrix_rho_input(i, 3);
+    end loop;
+
+    vector_f_output := function_vector_logistic (
+      SIZE_IN => SIZE_R_IN,
+
+      vector_input => vector_f_int
+      );
+
+    -- pi(t;i;p) = softmax(pi^(t;i;p))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for m in 0 to 2 loop
+        matrix_pi_int(i, m) := matrix_rho_input(i, m);
+      end loop;
+    end loop;
+
+    matrix_pi_output := function_matrix_softmax (
+      SIZE_I_IN => SIZE_R_IN,
+      SIZE_J_IN => THREE_CONTROL,
+
+      matrix_input => matrix_pi_int
+      );
+
+    read_output.matrix_k_output    := matrix_k_output;
+    read_output.vector_beta_output := vector_beta_output;
+    read_output.vector_f_output    := vector_f_output;
+    read_output.matrix_pi_output   := matrix_pi_output;
+
+    return read_output;
+  end function function_dnc_read_heads;
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -2828,18 +3007,91 @@ package body dnc_core_pkg is
     vector_xi_input : vector_buffer
     ) return vector_buffer is
 
-    variable vector_v_int : vector_buffer;
-
     variable vector_v_output : vector_buffer;
 
   begin
 
     -- v(t;k) = v^(t;k)
 
-    vector_v_output := vector_v_int(to_integer(unsigned(SIZE_W_IN)) + 1 downto + 2);
+    vector_v_output := vector_xi_input(to_integer(unsigned(SIZE_W_IN)) + 1 downto 2);
 
     return vector_v_output;
   end function function_dnc_write_vector;
+
+  function function_dnc_write_heads (
+    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_xi_input : vector_buffer
+    ) return write_heads_output is
+
+    variable scalar_beta_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_e_int    : vector_buffer;
+    variable scalar_ga_int   : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_gw_int   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_k_output    : vector_buffer;
+    variable scalar_beta_output : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable vector_e_output    : vector_buffer;
+    variable vector_v_output    : vector_buffer;
+    variable scalar_ga_output   : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_gw_output   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable write_output : write_heads_output;
+
+  begin
+
+    -- k(t;k) = k^(t;k)
+
+    vector_k_output := vector_xi_input(3*to_integer(unsigned(SIZE_W_IN)) + 2 downto 2*to_integer(unsigned(SIZE_W_IN)) + 3);
+
+    -- beta(t) = oneplus(beta^(t))
+
+    scalar_beta_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 2);
+
+    scalar_beta_output := function_scalar_oneplus (
+      scalar_input => scalar_beta_int
+      );
+
+    -- e(t;k) = sigmoid(e^(t;k))
+
+    vector_e_int := vector_xi_input(2*to_integer(unsigned(SIZE_W_IN)) + 1 downto to_integer(unsigned(SIZE_W_IN)) + 2);
+
+    vector_e_output := function_vector_logistic (
+      SIZE_IN => SIZE_W_IN,
+
+      vector_input => vector_e_int
+      );
+
+    -- v(t;k) = v^(t;k)
+
+    vector_v_output := vector_xi_input(to_integer(unsigned(SIZE_W_IN)) + 1 downto 2);
+
+    -- ga(t) = sigmoid(g^(t))
+
+    scalar_ga_int := vector_xi_input(1);
+
+    scalar_ga_output := function_scalar_logistic (
+      scalar_input => scalar_ga_int
+      );
+
+    -- gw(t) = sigmoid(gw^(t))
+
+    scalar_gw_int := vector_xi_input(0);
+
+    scalar_gw_output := function_scalar_logistic (
+      scalar_input => scalar_gw_int
+      );
+
+    write_output.vector_k_output    := vector_k_output;
+    write_output.scalar_beta_output := scalar_beta_output;
+    write_output.vector_e_output    := vector_e_output;
+    write_output.vector_v_output    := vector_v_output;
+    write_output.scalar_ga_output   := scalar_ga_output;
+    write_output.scalar_gw_output   := scalar_gw_output;
+
+    return write_output;
+  end function function_dnc_write_heads;
 
   -----------------------------------------------------------------------
   -- TOP - INTERFACE
@@ -3177,7 +3429,6 @@ package body dnc_core_pkg is
         vector_beta_read_int := function_dnc_read_strengths (
           SIZE_M_IN => SIZE_M_IN,
           SIZE_R_IN => SIZE_R_IN,
-          SIZE_W_IN => SIZE_W_IN,
 
           matrix_rho_input => matrix_rho_int
           );

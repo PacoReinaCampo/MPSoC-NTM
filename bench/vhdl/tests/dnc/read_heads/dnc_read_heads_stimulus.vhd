@@ -130,7 +130,6 @@ entity dnc_read_heads_stimulus is
     -- DATA
     DNC_READ_STRENGTHS_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_READ_STRENGTHS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_STRENGTHS_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -621,7 +620,6 @@ begin
       -- DATA
       DNC_READ_STRENGTHS_SIZE_M_IN <= THREE_CONTROL;
       DNC_READ_STRENGTHS_SIZE_R_IN <= THREE_CONTROL;
-      DNC_READ_STRENGTHS_SIZE_W_IN <= THREE_CONTROL;
 
       if (STIMULUS_DNC_READ_STRENGTHS_CASE_0) then
 
