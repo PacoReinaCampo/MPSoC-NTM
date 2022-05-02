@@ -168,8 +168,6 @@ architecture dnc_read_heads_architecture of dnc_read_heads is
   -- Buffer
   signal matrix_rho_in_int : matrix_buffer;
 
-  signal read_out_int : read_heads_output;
-
   -- Control Internal
   signal index_i_rho_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_m_rho_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -263,15 +261,6 @@ begin
         when CLEAN_RHO_IN_I_STATE =>           -- STEP 3
 
           if ((unsigned(index_i_rho_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Internal
-            read_out_int <= function_dnc_read_heads (
-              SIZE_M_IN => SIZE_M_IN,
-              SIZE_R_IN => SIZE_R_IN,
-              SIZE_W_IN => SIZE_W_IN,
-
-              matrix_rho_input => matrix_rho_in_int
-              );
-
             -- Control Outputs
             RHO_OUT_I_ENABLE <= '1';
             RHO_OUT_M_ENABLE <= '1';
@@ -371,7 +360,7 @@ begin
 
           if ((unsigned(index_i_k_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_k_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            K_OUT <= read_out_int.matrix_k_output(to_integer(unsigned(index_i_k_out_loop)), to_integer(unsigned(index_k_k_out_loop)));
+            K_OUT <= (others => '0');
 
             -- Control Outputs
             READY <= '1';
@@ -387,7 +376,7 @@ begin
             controller_k_out_fsm_int <= STARTER_K_OUT_STATE;
           elsif ((unsigned(index_i_k_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_k_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            K_OUT <= read_out_int.matrix_k_output(to_integer(unsigned(index_i_k_out_loop)), to_integer(unsigned(index_k_k_out_loop)));
+            K_OUT <= (others => '0');
 
             -- Control Outputs
             K_OUT_I_ENABLE <= '1';
@@ -459,7 +448,7 @@ begin
 
           if (unsigned(index_i_beta_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            BETA_OUT <= read_out_int.vector_beta_output(to_integer(unsigned(index_i_beta_out_loop)));
+            BETA_OUT <= (others => '0');
 
             -- Control Outputs
             READY <= '1';
@@ -473,7 +462,7 @@ begin
             controller_beta_out_fsm_int <= STARTER_BETA_OUT_STATE;
           elsif (unsigned(index_i_beta_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            BETA_OUT <= read_out_int.vector_beta_output(to_integer(unsigned(index_i_beta_out_loop)));
+            BETA_OUT <= (others => '0');
 
             -- Control Outputs
             BETA_OUT_ENABLE <= '1';
@@ -530,7 +519,7 @@ begin
 
           if (unsigned(index_i_f_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            F_OUT <= read_out_int.vector_f_output(to_integer(unsigned(index_i_f_out_loop)));
+            F_OUT <= (others => '0');
 
             -- Control Outputs
             READY <= '1';
@@ -544,7 +533,7 @@ begin
             controller_f_out_fsm_int <= STARTER_F_OUT_STATE;
           elsif (unsigned(index_i_f_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            F_OUT <= read_out_int.vector_f_output(to_integer(unsigned(index_i_f_out_loop)));
+            F_OUT <= (others => '0');
 
             -- Control Outputs
             F_OUT_ENABLE <= '1';
@@ -617,7 +606,7 @@ begin
 
           if ((unsigned(index_i_pi_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_out_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            PI_OUT <= read_out_int.matrix_pi_output(to_integer(unsigned(index_i_pi_out_loop)), to_integer(unsigned(index_p_pi_out_loop)));
+            PI_OUT <= (others => '0');
 
             -- Control Outputs
             READY <= '1';
@@ -633,7 +622,7 @@ begin
             controller_pi_out_fsm_int <= STARTER_PI_OUT_STATE;
           elsif ((unsigned(index_i_pi_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_out_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            PI_OUT <= read_out_int.matrix_pi_output(to_integer(unsigned(index_i_pi_out_loop)), to_integer(unsigned(index_p_pi_out_loop)));
+            PI_OUT <= (others => '0');
 
             -- Control Outputs
             PI_OUT_I_ENABLE <= '1';

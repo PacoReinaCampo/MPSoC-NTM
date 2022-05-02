@@ -1590,7 +1590,7 @@ begin
       case controller_f_out_fsm_int is
         when STARTER_F_OUT_STATE =>     -- STEP 0
           if (datf_w_in_enable_int = '1' and datf_k_in_enable_int = '1' and datf_u_in_enable_int = '1' and datf_d_in_enable_int = '1' and datf_b_in_enable_int = '1' and datf_x_in_enable_int = '1' and datf_xi_in_enable_int = '1' and datf_rho_in_enable_int = '1' and datf_h_in_enable_int = '1') then
-            -- Control Internal
+            -- Data Internal
             vector_f_out_int <= function_ntm_forget_convolutional_gate_vector (
               SIZE_X_IN => SIZE_X_IN,
               SIZE_W_IN => SIZE_W_IN,

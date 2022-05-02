@@ -1590,7 +1590,7 @@ begin
       case controller_i_out_fsm_int is
         when STARTER_I_OUT_STATE =>     -- STEP 0
           if (dati_w_in_enable_int = '1' and dati_k_in_enable_int = '1' and dati_u_in_enable_int = '1' and dati_d_in_enable_int = '1' and dati_b_in_enable_int = '1' and dati_x_in_enable_int = '1' and dati_xi_in_enable_int = '1' and dati_rho_in_enable_int = '1' and dati_h_in_enable_int = '1') then
-            -- Control Internal
+            -- Data Internal
             vector_i_out_int <= function_ntm_input_standard_gate_vector (
               SIZE_X_IN => SIZE_X_IN,
               SIZE_W_IN => SIZE_W_IN,
