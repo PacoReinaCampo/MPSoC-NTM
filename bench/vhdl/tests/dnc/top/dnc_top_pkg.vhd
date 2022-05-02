@@ -232,7 +232,7 @@ package dnc_top_pkg is
       DNC_TOP_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       DNC_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       DNC_TOP_P_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       DNC_TOP_Q_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

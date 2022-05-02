@@ -815,18 +815,18 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
+      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
-      K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+      BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
-      F_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
+      F_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
-      PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
-      PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
+      PI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      PI_OUT_P_ENABLE : out std_logic;  -- for p in 0 to 2
 
       -- DATA
       SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1007,13 +1007,13 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      XI_IN_ENABLE : in std_logic;     -- for s in 0 to S-1
+      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;   -- for s in 0 to S-1
+      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
 
-      K_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
-      E_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
-      V_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+      K_OUT_ENABLE : out std_logic;     -- for i in 0 to W-1
+      E_OUT_ENABLE : out std_logic;     -- for i in 0 to W-1
+      V_OUT_ENABLE : out std_logic;     -- for i in 0 to W-1
 
       -- DATA
       SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

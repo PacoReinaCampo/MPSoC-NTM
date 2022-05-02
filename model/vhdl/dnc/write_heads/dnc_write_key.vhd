@@ -60,9 +60,9 @@ entity dnc_write_key is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic;      -- for i in 0 to W-1
+    K_IN_ENABLE : in std_logic;         -- for i in 0 to W-1
 
-    K_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+    K_OUT_ENABLE : out std_logic;       -- for i in 0 to W-1
 
     -- DATA
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -209,7 +209,7 @@ begin
 
           -- FSM Control
           write_key_inout_fsm_int <= OUTPUT_STATE;
-          
+
         when OUTPUT_STATE =>            -- STEP 4
 
           if (unsigned(index_i_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then

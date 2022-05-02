@@ -404,7 +404,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_beta_in_fsm_int is
-        when STARTER_BETA_IN_STATE =>      -- STEP 0
+        when STARTER_BETA_IN_STATE =>   -- STEP 0
           if (START = '1') then
             -- Control Outputs
             BETA_OUT_ENABLE <= '1';
@@ -421,7 +421,7 @@ begin
             BETA_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_BETA_IN_I_STATE =>      -- STEP 1
+        when INPUT_BETA_IN_I_STATE =>   -- STEP 1
 
           if (BETA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -434,7 +434,7 @@ begin
           -- Control Outputs
           BETA_OUT_ENABLE <= '0';
 
-        when CLEAN_BETA_IN_I_STATE =>      -- STEP 2
+        when CLEAN_BETA_IN_I_STATE =>   -- STEP 2
 
           if (unsigned(index_i_beta_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -669,7 +669,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_gamma_in_fsm_int is
-        when STARTER_GAMMA_IN_STATE =>      -- STEP 0
+        when STARTER_GAMMA_IN_STATE =>  -- STEP 0
           if (START = '1') then
             -- Control Outputs
             GAMMA_OUT_ENABLE <= '1';
@@ -686,7 +686,7 @@ begin
             GAMMA_OUT_ENABLE <= '0';
           end if;
 
-        when INPUT_GAMMA_IN_I_STATE =>      -- STEP 1
+        when INPUT_GAMMA_IN_I_STATE =>  -- STEP 1
 
           if (GAMMA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -699,7 +699,7 @@ begin
           -- Control Outputs
           GAMMA_OUT_ENABLE <= '0';
 
-        when CLEAN_GAMMA_IN_I_STATE =>      -- STEP 2
+        when CLEAN_GAMMA_IN_I_STATE =>  -- STEP 2
 
           if (unsigned(index_i_gamma_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

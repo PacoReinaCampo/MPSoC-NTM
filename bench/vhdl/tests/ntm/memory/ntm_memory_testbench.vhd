@@ -190,8 +190,8 @@ begin
       NTM_MEMORY_M_OUT_J_ENABLE => m_out_j_enable_addressing,
       NTM_MEMORY_M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      NTM_MEMORY_W_IN_I_ENABLE  => w_in_i_enable_addressing,
-      NTM_MEMORY_W_IN_J_ENABLE  => w_in_j_enable_addressing,
+      NTM_MEMORY_W_IN_I_ENABLE => w_in_i_enable_addressing,
+      NTM_MEMORY_W_IN_J_ENABLE => w_in_j_enable_addressing,
 
       NTM_MEMORY_W_OUT_I_ENABLE => w_out_i_enable_addressing,
       NTM_MEMORY_W_OUT_J_ENABLE => w_out_j_enable_addressing,
@@ -258,8 +258,8 @@ begin
       M_OUT_J_ENABLE => m_out_j_enable_addressing,
       M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      W_IN_I_ENABLE  => w_in_i_enable_addressing,
-      W_IN_J_ENABLE  => w_in_j_enable_addressing,
+      W_IN_I_ENABLE => w_in_i_enable_addressing,
+      W_IN_J_ENABLE => w_in_j_enable_addressing,
 
       W_OUT_I_ENABLE => w_out_i_enable_addressing,
       W_OUT_J_ENABLE => w_out_j_enable_addressing,

@@ -102,6 +102,7 @@
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_erase_vector.vhd
@@ -109,6 +110,7 @@
 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_vector.vhd
+../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_allocation_weighting.vhd

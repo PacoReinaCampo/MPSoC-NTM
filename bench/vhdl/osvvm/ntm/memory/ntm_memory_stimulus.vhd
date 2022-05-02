@@ -97,11 +97,11 @@ entity ntm_memory_stimulus is
     NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
     NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
 
-    NTM_MEMORY_W_IN_I_ENABLE  : out std_logic;
-    NTM_MEMORY_W_IN_J_ENABLE  : out std_logic;
+    NTM_MEMORY_W_IN_I_ENABLE : out std_logic;
+    NTM_MEMORY_W_IN_J_ENABLE : out std_logic;
 
-    NTM_MEMORY_W_OUT_I_ENABLE : in  std_logic;
-    NTM_MEMORY_W_OUT_J_ENABLE : in  std_logic;
+    NTM_MEMORY_W_OUT_I_ENABLE : in std_logic;
+    NTM_MEMORY_W_OUT_J_ENABLE : in std_logic;
 
     -- DATA
     NTM_MEMORY_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

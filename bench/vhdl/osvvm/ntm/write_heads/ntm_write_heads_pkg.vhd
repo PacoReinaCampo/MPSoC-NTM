@@ -192,7 +192,7 @@ package ntm_write_heads_pkg is
       NTM_WRITE_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_WRITE_HEADS_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_WRITE_HEADS_M_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      NTM_WRITE_HEADS_M_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

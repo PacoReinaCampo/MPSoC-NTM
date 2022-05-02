@@ -456,149 +456,63 @@ architecture dnc_top_architecture of dnc_top is
 
   -- FREE GATES
   -- CONTROL
-  signal start_free_gates : std_logic;
-  signal ready_free_gates : std_logic;
+  signal start_read_heads : std_logic;
+  signal ready_read_heads : std_logic;
 
-  signal f_in_enable_free_gates  : std_logic;
-  signal f_out_enable_free_gates : std_logic;
+  signal k_in_i_enable_read_heads : std_logic;
+  signal k_in_m_enable_read_heads : std_logic;
 
-  -- DATA
-  signal size_m_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_i_enable_read_heads : std_logic;
+  signal k_out_k_enable_read_heads : std_logic;
 
-  signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_enable_read_heads : std_logic;
 
-  -- READ KEYS
-  -- CONTROL
-  signal start_read_keys : std_logic;
-  signal ready_read_keys : std_logic;
+  signal f_out_enable_read_heads : std_logic;
 
-  signal k_in_i_enable_read_keys : std_logic;
-  signal k_in_k_enable_read_keys : std_logic;
-
-  signal k_out_i_enable_read_keys : std_logic;
-  signal k_out_k_enable_read_keys : std_logic;
+  signal pi_out_i_enable_read_heads : std_logic;
+  signal pi_out_p_enable_read_heads : std_logic;
 
   -- DATA
-  signal size_m_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_m_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_read_heads : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- READ MODES
-  -- CONTROL
-  signal start_read_modes : std_logic;
-  signal ready_read_modes : std_logic;
-
-  signal pi_in_i_enable_read_modes : std_logic;
-  signal pi_in_p_enable_read_modes : std_logic;
-
-  signal pi_out_i_enable_read_modes : std_logic;
-  signal pi_out_p_enable_read_modes : std_logic;
-
-  -- DATA
-  signal size_m_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_out_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- READ STRENGTHS
-  -- CONTROL
-  signal start_read_strengths : std_logic;
-  signal ready_read_strengths : std_logic;
-
-  signal beta_in_enable_read_strengths  : std_logic;
-  signal beta_out_enable_read_strengths : std_logic;
-
-  -- DATA
-  signal size_m_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_read_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_read_heads : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_read_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal pi_out_read_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
-  -- ALLOCATION GATE
+  -- WRITE
   -- CONTROL
-  signal start_allocation_gate : std_logic;
-  signal ready_allocation_gate : std_logic;
+  signal start_write_heads : std_logic;
+  signal ready_write_heads : std_logic;
+
+  signal xi_in_enable_write_heads : std_logic;
+
+  signal xi_out_enable_write_heads : std_logic;
+
+  signal k_out_enable_write_heads : std_logic;
+  signal e_out_enable_write_heads : std_logic;
+  signal v_out_enable_write_heads : std_logic;
 
   -- DATA
-  signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_s_in_write_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_write_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ERASE VECTOR
-  -- CONTROL
-  signal start_erase_vector : std_logic;
-  signal ready_erase_vector : std_logic;
+  signal xi_in_write_heads : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal e_in_enable_erase_vector : std_logic;
-
-  signal e_out_enable_erase_vector : std_logic;
-
-  -- DATA
-  signal size_s_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE GATE
-  -- CONTROL
-  signal start_write_gate : std_logic;
-  signal ready_write_gate : std_logic;
-
-  -- DATA
-  signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE KEY
-  -- CONTROL
-  signal start_write_key : std_logic;
-  signal ready_write_key : std_logic;
-
-  signal k_in_enable_write_key : std_logic;
-
-  signal k_out_enable_write_key : std_logic;
-
-  -- DATA
-  signal size_s_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE STRENGHT
-  -- CONTROL
-  signal start_write_strength : std_logic;
-  signal ready_write_strength : std_logic;
-
-  -- DATA
-  signal beta_in_write_strength  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_write_strength : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE VECTOR
-  -- CONTROL
-  signal start_write_vector : std_logic;
-  signal ready_write_vector : std_logic;
-
-  signal v_in_enable_write_vector : std_logic;
-
-  signal v_out_enable_write_vector : std_logic;
-
-  -- DATA
-  signal size_s_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_write_heads : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_out_write_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_out_write_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -842,185 +756,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- CONTROLLER
-  w_in_l_enable_controller <= '0';
-  w_in_x_enable_controller <= '0';
-
-  k_in_i_enable_controller <= '0';
-  k_in_l_enable_controller <= '0';
-  k_in_k_enable_controller <= '0';
-
-  b_in_enable_controller <= '0';
-
-  x_in_enable_controller <= '0';
-
-  r_in_i_enable_controller <= '0';
-  r_in_k_enable_controller <= '0';
-
-  w_out_l_enable_controller <= '0';
-  w_out_x_enable_controller <= '0';
-
-  k_out_i_enable_controller <= '0';
-  k_out_l_enable_controller <= '0';
-  k_out_k_enable_controller <= '0';
-
-  b_out_enable_controller <= '0';
-
-  h_out_enable_controller <= '0';
-
-  -- OUTPUT VECTOR
-  p_in_i_enable_output_vector <= '0';
-  p_in_y_enable_output_vector <= '0';
-  p_in_k_enable_output_vector <= '0';
-
-  r_in_i_enable_output_vector <= '0';
-  r_in_k_enable_output_vector <= '0';
-
-  q_in_y_enable_output_vector <= '0';
-  q_in_l_enable_output_vector <= '0';
-
-  h_in_enable_output_vector <= '0';
-
-  y_in_enable_output_vector <= '0';
-
-  -- FREE GATES
-  f_in_enable_free_gates  <= '0';
-  f_out_enable_free_gates <= '0';
-
-  -- READ KEYS
-  k_in_i_enable_read_keys <= '0';
-  k_in_k_enable_read_keys <= '0';
-
-  k_out_i_enable_read_keys <= '0';
-  k_out_k_enable_read_keys <= '0';
-
-  -- READ MODES
-  pi_in_i_enable_read_modes <= '0';
-  pi_in_p_enable_read_modes <= '0';
-
-  pi_out_i_enable_read_modes <= '0';
-  pi_out_p_enable_read_modes <= '0';
-
-  -- READ STRENGTHS
-  beta_in_enable_read_strengths  <= '0';
-  beta_out_enable_read_strengths <= '0';
-
-  -- DATA
-  -- CONTROLLER
-  size_x_in_controller <= FULL;
-  size_w_in_controller <= FULL;
-  size_l_in_controller <= FULL;
-  size_r_in_controller <= FULL;
-
-  w_in_controller <= FULL;
-  k_in_controller <= FULL;
-  b_in_controller <= FULL;
-
-  x_in_controller <= FULL;
-  r_in_controller <= FULL;
-
-  w_out_controller <= FULL;
-  k_out_controller <= FULL;
-  b_out_controller <= FULL;
-
-  h_out_controller <= FULL;
-
-  -- OUTPUT VECTOR
-  size_y_in_output_vector <= FULL;
-  size_l_in_output_vector <= FULL;
-  size_w_in_output_vector <= FULL;
-  size_r_in_output_vector <= FULL;
-
-  p_in_output_vector <= FULL;
-  r_in_output_vector <= FULL;
-
-  q_in_output_vector <= FULL;
-  h_in_output_vector <= FULL;
-
-  y_out_output_vector <= FULL;
-
-  -- INTERFACE VECTOR
-  size_s_in_interface_vector <= FULL;
-  size_l_in_interface_vector <= FULL;
-
-  u_in_interface_vector <= FULL;
-
-  h_in_interface_vector <= FULL;
-
-  -- FREE GATES
-  size_r_in_free_gates <= FULL;
-
-  f_in_free_gates  <= FULL;
-  f_out_free_gates <= FULL;
-
-  -- READ KEYS
-  size_r_in_read_keys <= FULL;
-  size_w_in_read_keys <= FULL;
-
-  k_in_read_keys  <= FULL;
-  k_out_read_keys <= FULL;
-
-  -- READ MODES
-  size_r_in_read_modes <= FULL;
-
-  pi_in_read_modes  <= FULL;
-  pi_out_read_modes <= FULL;
-
-  -- READ STRENGTHS
-  size_r_in_read_strengths <= FULL;
-
-  beta_in_read_strengths  <= FULL;
-  beta_out_read_strengths <= FULL;
-
-  -- ALLOCATION GATE
-  ga_in_allocation_gate  <= FULL;
-  ga_out_allocation_gate <= FULL;
-
-  -- ERASE VECTOR
-  size_w_in_erase_vector <= FULL;
-
-  e_in_erase_vector  <= FULL;
-  e_out_erase_vector <= FULL;
-
-  -- WRITE GATE
-  gw_in_write_gate  <= FULL;
-  gw_out_write_gate <= FULL;
-
-  -- WRITE KEY
-  size_w_in_write_key <= FULL;
-
-  k_in_write_key  <= FULL;
-  k_out_write_key <= FULL;
-
-  -- WRITE STRENGHT
-  beta_in_write_strength  <= FULL;
-  beta_out_write_strength <= FULL;
-
-  -- WRITE VECTOR
-  size_w_in_write_vector <= FULL;
-
-  v_in_write_vector  <= FULL;
-  v_out_write_vector <= FULL;
-
-  -- ADDRESSING
-  size_r_in_addressing <= FULL;
-  size_n_in_addressing <= FULL;
-  size_w_in_addressing <= FULL;
-
-  k_read_in_addressing    <= FULL;
-  beta_read_in_addressing <= FULL;
-  f_read_in_addressing    <= FULL;
-  pi_read_in_addressing   <= FULL;
-
-  k_write_in_addressing    <= FULL;
-  beta_write_in_addressing <= FULL;
-  e_write_in_addressing    <= FULL;
-  v_write_in_addressing    <= FULL;
-  ga_write_in_addressing   <= FULL;
-  gw_write_in_addressing   <= FULL;
-
-  r_out_addressing <= FULL;
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -1283,8 +1018,8 @@ begin
   -- READ HEADS
   -----------------------------------------------------------------------
 
-  -- FREE GATES
-  free_gates : dnc_free_gates
+  -- READ
+  read_heads : dnc_read_heads
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1295,116 +1030,41 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_free_gates,
-      READY => ready_free_gates,
+      START => start_read_heads,
+      READY => ready_read_heads,
 
-      F_IN_ENABLE => f_in_enable_free_gates,
+      RHO_IN_I_ENABLE => k_in_i_enable_read_heads,
+      RHO_IN_M_ENABLE => k_in_m_enable_read_heads,
 
-      F_OUT_ENABLE => f_out_enable_free_gates,
+      K_OUT_I_ENABLE => k_out_i_enable_read_heads,
+      K_OUT_K_ENABLE => k_out_k_enable_read_heads,
 
-      -- DATA
-      SIZE_M_IN => size_m_in_free_gates,
-      SIZE_R_IN => size_r_in_free_gates,
+      BETA_OUT_ENABLE => beta_out_enable_read_heads,
 
-      F_IN => f_in_free_gates,
+      F_OUT_ENABLE => f_out_enable_read_heads,
 
-      F_OUT => f_out_free_gates
-      );
-
-  -- READ KEYS
-  read_keys : dnc_read_keys
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_read_keys,
-      READY => ready_read_keys,
-
-      K_IN_I_ENABLE => k_in_i_enable_read_keys,
-      K_IN_K_ENABLE => k_in_k_enable_read_keys,
-
-      K_OUT_I_ENABLE => k_out_i_enable_read_keys,
-      K_OUT_K_ENABLE => k_out_k_enable_read_keys,
+      PI_OUT_I_ENABLE => pi_out_i_enable_read_heads,
+      PI_OUT_P_ENABLE => pi_out_p_enable_read_heads,
 
       -- DATA
-      SIZE_M_IN => size_m_in_free_gates,
-      SIZE_R_IN => size_r_in_read_keys,
-      SIZE_W_IN => size_w_in_read_keys,
+      SIZE_M_IN => size_m_in_read_heads,
+      SIZE_R_IN => size_r_in_read_heads,
+      SIZE_W_IN => size_w_in_read_heads,
 
-      K_IN => k_in_read_keys,
+      RHO_IN => rho_in_read_heads,
 
-      K_OUT => k_out_read_keys
-      );
-
-  -- READ MODES
-  read_modes : dnc_read_modes
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_read_modes,
-      READY => ready_read_modes,
-
-      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
-      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
-
-      PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
-      PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
-
-      -- DATA
-      SIZE_M_IN => size_m_in_free_gates,
-      SIZE_R_IN => size_r_in_free_gates,
-
-      PI_IN => pi_in_read_modes,
-
-      PI_OUT => pi_out_read_modes
-      );
-
-  -- READ STRENGTHS
-  read_strengths : dnc_read_strengths
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_read_strengths,
-      READY => ready_read_strengths,
-
-      BETA_IN_ENABLE  => beta_in_enable_read_strengths,
-      BETA_OUT_ENABLE => beta_out_enable_read_strengths,
-
-      -- DATA
-      SIZE_M_IN => size_m_in_free_gates,
-      SIZE_R_IN => size_r_in_free_gates,
-
-      BETA_IN => beta_in_read_strengths,
-
-      BETA_OUT => beta_out_read_strengths
+      K_OUT    => k_out_read_heads,
+      BETA_OUT => beta_out_read_heads,
+      F_OUT    => f_out_read_heads,
+      PI_OUT   => pi_out_read_heads
       );
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
-  -- ALLOCATION GATE
-  allocation_gate : dnc_allocation_gate
+  -- WRITE
+  write_heads : dnc_write_heads
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1415,139 +1075,29 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_allocation_gate,
-      READY => ready_allocation_gate,
+      START => start_write_heads,
+      READY => ready_write_heads,
+
+      XI_IN_ENABLE => xi_in_enable_write_heads,
+
+      XI_OUT_ENABLE => xi_out_enable_write_heads,
+
+      K_OUT_ENABLE => k_out_enable_write_heads,
+      E_OUT_ENABLE => e_out_enable_write_heads,
+      V_OUT_ENABLE => v_out_enable_write_heads,
 
       -- DATA
-      GA_IN => ga_in_allocation_gate,
+      SIZE_S_IN => size_s_in_write_heads,
+      SIZE_W_IN => size_w_in_write_heads,
 
-      GA_OUT => ga_out_allocation_gate
-      );
+      XI_IN => xi_in_write_heads,
 
-  -- ERASE VECTOR
-  erase_vector : dnc_erase_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_erase_vector,
-      READY => ready_erase_vector,
-
-      E_IN_ENABLE => e_in_enable_erase_vector,
-
-      E_OUT_ENABLE => e_out_enable_erase_vector,
-
-      -- DATA
-      SIZE_S_IN => size_s_in_erase_vector,
-      SIZE_W_IN => size_w_in_erase_vector,
-
-      E_IN => e_in_erase_vector,
-
-      E_OUT => e_out_erase_vector
-      );
-
-  -- WRITE GATE
-  write_gate : dnc_write_gate
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_write_gate,
-      READY => ready_write_gate,
-
-      -- DATA
-      GW_IN => gw_in_write_gate,
-
-      GW_OUT => gw_out_write_gate
-      );
-
-  -- WRITE KEY
-  write_key : dnc_write_key
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_write_key,
-      READY => ready_write_key,
-
-      K_IN_ENABLE => k_in_enable_write_key,
-
-      K_OUT_ENABLE => k_out_enable_write_key,
-
-      -- DATA
-      SIZE_S_IN => size_s_in_write_key,
-      SIZE_W_IN => size_w_in_write_key,
-
-      K_IN => k_in_write_key,
-
-      K_OUT => k_out_write_key
-      );
-
-  -- WRITE STRENGTH
-  write_strength : dnc_write_strength
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_write_strength,
-      READY => ready_write_strength,
-
-      -- DATA
-      BETA_IN => beta_in_write_strength,
-
-      BETA_OUT => beta_out_write_strength
-      );
-
-  -- WRITE VECTOR
-  write_vector : dnc_write_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_write_vector,
-      READY => ready_write_vector,
-
-      V_IN_ENABLE => v_in_enable_write_vector,
-
-      V_OUT_ENABLE => v_out_enable_write_vector,
-
-      -- DATA
-      SIZE_S_IN => size_s_in_write_vector,
-      SIZE_W_IN => size_w_in_write_vector,
-
-      V_IN => v_in_write_vector,
-
-      V_OUT => v_out_write_vector
+      K_OUT    => k_out_write_heads,
+      BETA_OUT => beta_out_write_heads,
+      E_OUT    => e_out_write_heads,
+      V_OUT    => v_out_write_heads,
+      GA_OUT   => ga_out_write_heads,
+      GW_OUT   => gw_out_write_heads
       );
 
   -----------------------------------------------------------------------

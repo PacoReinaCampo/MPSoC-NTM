@@ -766,12 +766,12 @@ begin
       MATRIX_SUMMATION_READY => ready_matrix_summation,
 
       MATRIX_SUMMATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_IN_I_ENABLE      => data_in_i_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_IN_J_ENABLE      => data_in_j_enable_matrix_summation,
 
       MATRIX_SUMMATION_DATA_LENGTH_ENABLE => data_length_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_I_ENABLE => data_i_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_J_ENABLE => data_j_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_I_ENABLE      => data_i_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_J_ENABLE      => data_j_enable_matrix_summation,
 
       MATRIX_SUMMATION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
       MATRIX_SUMMATION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
@@ -1106,7 +1106,7 @@ begin
         READY => ready_vector_summation,
 
         DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
-        DATA_IN_ENABLE => data_in_enable_vector_summation,
+        DATA_IN_ENABLE        => data_in_enable_vector_summation,
 
         DATA_LENGTH_ENABLE => data_length_enable_vector_summation,
         DATA_ENABLE        => data_enable_vector_summation,

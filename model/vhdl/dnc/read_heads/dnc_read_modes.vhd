@@ -60,11 +60,11 @@ entity dnc_read_modes is
     START : in  std_logic;
     READY : out std_logic;
 
-    PI_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
-    PI_IN_P_ENABLE : in std_logic;       -- for p in 0 to 2
+    PI_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    PI_IN_P_ENABLE : in std_logic;      -- for p in 0 to 2
 
-    PI_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
-    PI_OUT_P_ENABLE : out std_logic;     -- for p in 0 to 2
+    PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
 
     -- DATA
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -219,7 +219,7 @@ begin
           -- Control Outputs
           PI_OUT_P_ENABLE <= '0';
 
-        when CLEAN_I_IN_STATE =>           -- STEP 3
+        when CLEAN_I_IN_STATE =>        -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
             -- Data Internal
@@ -253,7 +253,7 @@ begin
             read_modes_inout_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when CLEAN_J_IN_STATE =>           -- STEP 4
+        when CLEAN_J_IN_STATE =>        -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -266,7 +266,7 @@ begin
             read_modes_inout_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CLEAN_I_OUT_STATE =>          -- STEP 5
+        when CLEAN_I_OUT_STATE =>       -- STEP 5
 
           -- Control Outputs
           PI_OUT_I_ENABLE <= '1';
@@ -275,7 +275,7 @@ begin
           -- FSM Control
           read_modes_inout_fsm_int <= OUTPUT_J_STATE;
 
-        when CLEAN_J_OUT_STATE =>          -- STEP 6
+        when CLEAN_J_OUT_STATE =>       -- STEP 6
 
           -- Control Outputs
           PI_OUT_P_ENABLE <= '1';
@@ -287,7 +287,7 @@ begin
             read_modes_inout_fsm_int <= OUTPUT_J_STATE;
           end if;
 
-        when OUTPUT_I_STATE =>             -- STEP 7
+        when OUTPUT_I_STATE =>          -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -321,7 +321,7 @@ begin
             read_modes_inout_fsm_int <= CLEAN_I_OUT_STATE;
           end if;
 
-        when OUTPUT_J_STATE =>           -- STEP 8
+        when OUTPUT_J_STATE =>          -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

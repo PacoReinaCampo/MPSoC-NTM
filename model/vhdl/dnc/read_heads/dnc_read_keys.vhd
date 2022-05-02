@@ -214,7 +214,7 @@ begin
           -- Control Outputs
           K_OUT_K_ENABLE <= '0';
 
-        when CLEAN_I_IN_STATE =>           -- STEP 3
+        when CLEAN_I_IN_STATE =>        -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Internal
@@ -249,7 +249,7 @@ begin
             read_keys_inout_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when CLEAN_J_IN_STATE =>           -- STEP 4
+        when CLEAN_J_IN_STATE =>        -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -262,7 +262,7 @@ begin
             read_keys_inout_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CLEAN_I_OUT_STATE =>          -- STEP 5
+        when CLEAN_I_OUT_STATE =>       -- STEP 5
 
           -- Control Outputs
           K_OUT_I_ENABLE <= '1';
@@ -271,7 +271,7 @@ begin
           -- FSM Control
           read_keys_inout_fsm_int <= OUTPUT_J_STATE;
 
-        when CLEAN_J_OUT_STATE =>          -- STEP 6
+        when CLEAN_J_OUT_STATE =>       -- STEP 6
 
           -- Control Outputs
           K_OUT_K_ENABLE <= '1';
@@ -283,7 +283,7 @@ begin
             read_keys_inout_fsm_int <= OUTPUT_J_STATE;
           end if;
 
-        when OUTPUT_I_STATE =>             -- STEP 7
+        when OUTPUT_I_STATE =>          -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -317,7 +317,7 @@ begin
             read_keys_inout_fsm_int <= CLEAN_I_OUT_STATE;
           end if;
 
-        when OUTPUT_J_STATE =>           -- STEP 8
+        when OUTPUT_J_STATE =>          -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

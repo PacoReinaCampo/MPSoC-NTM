@@ -209,7 +209,7 @@ begin
 
           -- FSM Control
           read_strengths_inout_fsm_int <= OUTPUT_STATE;
-          
+
         when OUTPUT_STATE =>            -- STEP 4
 
           if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
