@@ -76,11 +76,6 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_erase_vector.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_gate.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_key.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_strength.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_pkg.vhd

@@ -91,16 +91,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_erase_vector.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_gate.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd

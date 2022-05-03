@@ -92,16 +92,8 @@ vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_in
 vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_erase_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_gate.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd

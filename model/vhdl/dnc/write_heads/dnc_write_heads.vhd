@@ -175,6 +175,7 @@ begin
       -- Control Internal
       index_s_xi_in_loop <= ZERO_CONTROL;
 
+      data_xi_in_enable_int <= '0';
     elsif (rising_edge(CLK)) then
 
       case controller_xi_in_fsm_int is
@@ -186,6 +187,8 @@ begin
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
 
+            data_xi_in_enable_int <= '0';
+
             -- FSM Control
             controller_xi_in_fsm_int <= INPUT_XI_IN_S_STATE;
           end if;
@@ -195,6 +198,8 @@ begin
           if (XI_IN_ENABLE = '1') then
             -- Data Inputs
             vector_xi_in_int(to_integer(unsigned(index_s_xi_in_loop))) <= XI_IN;
+
+            data_xi_in_enable_int <= '0';
 
             -- FSM Control
             controller_xi_in_fsm_int <= CLEAN_XI_IN_S_STATE;
@@ -216,6 +221,8 @@ begin
 
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
+
+            data_xi_in_enable_int <= '1';
 
             -- FSM Control
             controller_xi_in_fsm_int <= STARTER_XI_IN_STATE;

@@ -99,59 +99,59 @@ function Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
 
       % READ_HEADS_STATE
 
-      % FREE_GATES_STATE
-
-      % f(t;i) = sigmoid(f^(t;i))
-      f_read_int = matrix_rho_int(:, SIZE_W_IN + 5);
-
       % READ_KEYS_STATE
 
       % k(t;i;k) = k^(t;i;k)
-      k_read_int = matrix_rho_int(:, 5:SIZE_W_IN + 4);
-
-      % READ_MODES_STATE
-
-      % pi(t;i;p) = softmax(pi^(t;i;p))
-      pi_read_int = matrix_rho_int(:, 2:4);
+      k_read_int = matrix_rho_int(:, 6:SIZE_W_IN + 5);
 
       % READ_STRENGTHS_STATE
 
       % beta(t;i) = oneplus(beta^(t;i))
-      beta_read_int = matrix_rho_int(:, 1);
+      beta_read_int = matrix_rho_int(:, 5);
+
+      % FREE_GATES_STATE
+
+      % f(t;i) = sigmoid(f^(t;i))
+      f_read_int = matrix_rho_int(:, 4);
+
+      % READ_MODES_STATE
+
+      % pi(t;i;p) = softmax(pi^(t;i;p))
+      pi_read_int = matrix_rho_int(:, 1:3);
 
 
 
       % WRITE_HEADS_STATE
 
-      % ALLOCATION_GATE_STATE
-
-      % ga(t) = sigmoid(g^(t))
-      ga_write_int = vector_xi_int(3*SIZE_W_IN + 3);
-
-      % ERASE_VECTOR_STATE
-
-      % e(t;k) = sigmoid(e^(t;k))
-      e_write_int = vector_xi_int(2*SIZE_W_IN + 3:3*SIZE_W_IN + 2);
-
-      % WRITE_GATE_STATE
-
-      % gw(t) = sigmoid(gw^(t))
-      gw_write_int = vector_xi_int(2*SIZE_W_IN + 2);
-
       % WRITE_KEY_STATE
 
       % k(t;k) = k^(t;k)
-      k_write_int = vector_xi_int(SIZE_W_IN + 2:2*SIZE_W_IN + 1);
+      k_write_int = vector_xi_int(2*SIZE_W_IN + 4:3*SIZE_W_IN + 3);
 
       % WRITE_STRENGTH_STATE
 
       % beta(t) = oneplus(beta^(t))
-      beta_write_int = vector_xi_int(SIZE_W_IN + 1);
+      beta_write_int = vector_xi_int(2*SIZE_W_IN + 3);
+
+      % ERASE_VECTOR_STATE
+
+      % e(t;k) = sigmoid(e^(t;k))
+      e_write_int = vector_xi_int(SIZE_W_IN + 3:2*SIZE_W_IN + 2);
 
       % WRITE_VECTOR_STATE
 
       % v(t;k) = v^(t;k)
-      v_write_int = vector_xi_int(1:SIZE_W_IN);
+      v_write_int = vector_xi_int(3:SIZE_W_IN + 2);
+
+      % ALLOCATION_GATE_STATE
+
+      % ga(t) = sigmoid(g^(t))
+      ga_write_int = vector_xi_int(2);
+
+      % WRITE_GATE_STATE
+
+      % gw(t) = sigmoid(gw^(t))
+      gw_write_int = vector_xi_int(1);
 
 
 
