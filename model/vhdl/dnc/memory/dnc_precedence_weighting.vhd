@@ -67,7 +67,6 @@ entity dnc_precedence_weighting is
     P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -143,7 +142,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+  -- p(t;j) = (1 - summation(w(t;j))[j in 1 to N])·p(t-1;j) + w(t;j)
 
   -- p(t=0) = 0
 

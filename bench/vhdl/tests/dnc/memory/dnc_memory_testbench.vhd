@@ -257,7 +257,6 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal p_out_enable_precedence_weighting : std_logic;
 
   -- DATA
-  signal size_r_in_precedence_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_n_in_precedence_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -881,7 +880,6 @@ begin
         P_OUT_ENABLE => p_out_enable_precedence_weighting,
 
         -- DATA
-        SIZE_R_IN => size_n_in_precedence_weighting,
         SIZE_N_IN => size_n_in_precedence_weighting,
 
         W_IN => w_in_precedence_weighting,
