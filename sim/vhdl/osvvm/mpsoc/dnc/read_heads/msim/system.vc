@@ -87,7 +87,7 @@
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
-../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd

@@ -91,14 +91,14 @@ vhdl2008 work ../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_
 vhdl2008 work ../../../../../../../model/vhdl/dnc/read_heads/dnc_free_gates.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/read_heads/dnc_read_keys.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/read_heads/dnc_read_modes.vhd
-vhdl2008 work ../../../../../../../model/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+vhdl2008 work ../../../../../../../model/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
 vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_erase_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_gate.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_key.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_strength.vhd
-vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 vhdl2008 work ../../../../../../../model/vhdl/dnc/memory/dnc_content_based_addressing.vhd
 vhdl2008 work ../../../../../../../model/vhdl/dnc/memory/dnc_allocation_weighting.vhd

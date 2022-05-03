@@ -454,13 +454,16 @@ architecture dnc_top_architecture of dnc_top is
   -- READ HEADS
   -----------------------------------------------------------------------
 
-  -- FREE GATES
+  -- READ
   -- CONTROL
   signal start_read_heads : std_logic;
   signal ready_read_heads : std_logic;
 
-  signal k_in_i_enable_read_heads : std_logic;
-  signal k_in_m_enable_read_heads : std_logic;
+  signal rho_in_i_enable_read_heads : std_logic;
+  signal rho_in_m_enable_read_heads : std_logic;
+
+  signal rho_out_i_enable_read_heads : std_logic;
+  signal rho_out_m_enable_read_heads : std_logic;
 
   signal k_out_i_enable_read_heads : std_logic;
   signal k_out_k_enable_read_heads : std_logic;
@@ -1033,8 +1036,11 @@ begin
       START => start_read_heads,
       READY => ready_read_heads,
 
-      RHO_IN_I_ENABLE => k_in_i_enable_read_heads,
-      RHO_IN_M_ENABLE => k_in_m_enable_read_heads,
+      RHO_IN_I_ENABLE => rho_in_i_enable_read_heads,
+      RHO_IN_M_ENABLE => rho_in_m_enable_read_heads,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_read_heads,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_read_heads,
 
       K_OUT_I_ENABLE => k_out_i_enable_read_heads,
       K_OUT_K_ENABLE => k_out_k_enable_read_heads,

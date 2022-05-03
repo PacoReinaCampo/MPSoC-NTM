@@ -88,9 +88,9 @@ entity ntm_write_heads_stimulus is
     NTM_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     NTM_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_WRITE_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_WRITE_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_WRITE_HEADS_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_WRITE_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     NTM_WRITE_HEADS_M_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );

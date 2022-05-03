@@ -63,86 +63,31 @@ entity dnc_write_heads_stimulus is
     CLK : out std_logic;
     RST : out std_logic;
 
-    -- ALLOCATION GATE
+    -- WRITE HEADS
     -- CONTROL
-    DNC_ALLOCATION_GATE_START : out std_logic;
-    DNC_ALLOCATION_GATE_READY : in  std_logic;
+    DNC_WRITE_HEADS_START : out std_logic;
+    DNC_WRITE_HEADS_READY : in  std_logic;
+
+    DNC_WRITE_HEADS_XI_IN_ENABLE : out std_logic;
+
+    DNC_WRITE_HEADS_XI_OUT_ENABLE : in std_logic;
+
+    DNC_WRITE_HEADS_K_OUT_ENABLE : in std_logic;
+    DNC_WRITE_HEADS_E_OUT_ENABLE : in std_logic;
+    DNC_WRITE_HEADS_V_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_ALLOCATION_GATE_GA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    DNC_ALLOCATION_GATE_GA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_XI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- ERASE VECTOR
-    -- CONTROL
-    DNC_ERASE_VECTOR_START : out std_logic;
-    DNC_ERASE_VECTOR_READY : in  std_logic;
-
-    DNC_ERASE_VECTOR_E_IN_ENABLE : out std_logic;
-
-    DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    DNC_ERASE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DNC_ERASE_VECTOR_E_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- WRITE GATE
-    -- CONTROL
-    DNC_WRITE_GATE_START : out std_logic;
-    DNC_WRITE_GATE_READY : in  std_logic;
-
-    -- DATA
-    DNC_WRITE_GATE_GW_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DNC_WRITE_GATE_GW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- WRITE KEY
-    -- CONTROL
-    DNC_WRITE_KEY_START : out std_logic;
-    DNC_WRITE_KEY_READY : in  std_logic;
-
-    DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
-
-    DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    DNC_WRITE_KEY_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DNC_WRITE_KEY_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- WRITE STRENGTH
-    -- CONTROL
-    DNC_WRITE_STRENGTH_START : out std_logic;
-    DNC_WRITE_STRENGTH_READY : in  std_logic;
-
-    -- DATA
-    DNC_WRITE_STRENGTH_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DNC_WRITE_STRENGTH_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- WRITE VECTOR
-    -- CONTROL
-    DNC_WRITE_VECTOR_START : out std_logic;
-    DNC_WRITE_VECTOR_READY : in  std_logic;
-
-    DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
-
-    DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    DNC_WRITE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DNC_WRITE_VECTOR_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    DNC_WRITE_HEADS_K_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_E_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_V_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_GA_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_HEADS_GW_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -236,12 +181,7 @@ begin
   end process;
 
   -- FUNCTIONALITY
-  DNC_ALLOCATION_GATE_START <= start_int;
-  DNC_ERASE_VECTOR_START    <= start_int;
-  DNC_WRITE_GATE_START      <= start_int;
-  DNC_WRITE_KEY_START       <= start_int;
-  DNC_WRITE_STRENGTH_START  <= start_int;
-  DNC_WRITE_VECTOR_START    <= start_int;
+  DNC_WRITE_HEADS_START <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -250,396 +190,104 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_DNC_ALLOCATION_GATE_TEST) then
+    if (STIMULUS_DNC_WRITE_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_ALLOCATION_GATE_TEST       ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_DNC_ALLOCATION_GATE_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_ALLOCATION_GATE_CASE 0     ";
-        -------------------------------------------------------------------
-
-        DNC_ALLOCATION_GATE_GA_IN <= SCALAR_SAMPLE_A;
-      end if;
-
-      if (STIMULUS_DNC_ALLOCATION_GATE_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_ALLOCATION_GATE_CASE 1     ";
-        -------------------------------------------------------------------
-
-        DNC_ALLOCATION_GATE_GA_IN <= SCALAR_SAMPLE_B;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_ERASE_VECTOR_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_ERASE_VECTOR_TEST          ";
+      MONITOR_TEST <= "STIMULUS_DNC_WRITE_HEADS_TEST           ";
       -------------------------------------------------------------------
 
       -- DATA
-      DNC_ERASE_VECTOR_SIZE_S_IN <= THREE_CONTROL;
-      DNC_ERASE_VECTOR_SIZE_W_IN <= THREE_CONTROL;
+      DNC_WRITE_HEADS_SIZE_S_IN <= THREE_CONTROL;
+      DNC_WRITE_HEADS_SIZE_W_IN <= THREE_CONTROL;
 
-      if (STIMULUS_DNC_ERASE_VECTOR_CASE_0) then
+      if (STIMULUS_DNC_WRITE_HEADS_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_ERASE_VECTOR_CASE 0        ";
+        MONITOR_CASE <= "STIMULUS_DNC_WRITE_HEADS_CASE 0         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        DNC_ERASE_VECTOR_E_IN <= ZERO_DATA;
+        DNC_WRITE_HEADS_XI_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
 
-        ERASE_VECTOR_FIRST_RUN : loop
-          if (DNC_ERASE_VECTOR_E_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_ERASE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+        WRITE_HEADS_FIRST_RUN : loop
+          if (DNC_WRITE_HEADS_XI_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_WRITE_HEADS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '1';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '1';
 
             -- DATA
-            DNC_ERASE_VECTOR_E_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            DNC_WRITE_HEADS_XI_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((DNC_ERASE_VECTOR_E_OUT_ENABLE = '1' or DNC_ERASE_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_ERASE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((DNC_WRITE_HEADS_XI_OUT_ENABLE = '1' or DNC_WRITE_HEADS_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_WRITE_HEADS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '1';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '1';
 
             -- DATA
-            DNC_ERASE_VECTOR_E_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            DNC_WRITE_HEADS_XI_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '0';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit ERASE_VECTOR_FIRST_RUN when DNC_ERASE_VECTOR_READY = '1';
-        end loop ERASE_VECTOR_FIRST_RUN;
+          exit WRITE_HEADS_FIRST_RUN when DNC_WRITE_HEADS_READY = '1';
+        end loop WRITE_HEADS_FIRST_RUN;
       end if;
 
-      if (STIMULUS_DNC_ERASE_VECTOR_CASE_1) then
+      if (STIMULUS_DNC_WRITE_HEADS_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_ERASE_VECTOR_CASE 1        ";
+        MONITOR_CASE <= "STIMULUS_DNC_WRITE_HEADS_CASE 1         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        DNC_ERASE_VECTOR_E_IN <= ZERO_DATA;
+        DNC_WRITE_HEADS_XI_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
 
-        ERASE_VECTOR_SECOND_RUN : loop
-          if ((DNC_ERASE_VECTOR_E_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DNC_ERASE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+        WRITE_HEADS_SECOND_RUN : loop
+          if ((DNC_WRITE_HEADS_XI_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DNC_WRITE_HEADS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '1';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '1';
 
             -- DATA
-            DNC_ERASE_VECTOR_E_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            DNC_WRITE_HEADS_XI_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((DNC_ERASE_VECTOR_E_OUT_ENABLE = '1') or (DNC_ERASE_VECTOR_START = '1')) and (unsigned(index_i_loop) < unsigned(DNC_ERASE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((DNC_WRITE_HEADS_XI_OUT_ENABLE = '1') or (DNC_WRITE_HEADS_START = '1')) and (unsigned(index_i_loop) < unsigned(DNC_WRITE_HEADS_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '1';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '1';
 
             -- DATA
-            DNC_ERASE_VECTOR_E_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            DNC_WRITE_HEADS_XI_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            DNC_ERASE_VECTOR_E_IN_ENABLE <= '0';
+            DNC_WRITE_HEADS_XI_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit ERASE_VECTOR_SECOND_RUN when DNC_ERASE_VECTOR_READY = '1';
-        end loop ERASE_VECTOR_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_WRITE_GATE_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_WRITE_GATE_TEST            ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_DNC_WRITE_GATE_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_GATE_CASE 0          ";
-        -------------------------------------------------------------------
-
-        DNC_WRITE_GATE_GW_IN <= SCALAR_SAMPLE_A;
-      end if;
-
-      if (STIMULUS_DNC_WRITE_GATE_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_GATE_CASE 1          ";
-        -------------------------------------------------------------------
-
-        DNC_WRITE_GATE_GW_IN <= SCALAR_SAMPLE_B;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_WRITE_KEY_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_WRITE_KEY_TEST             ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      DNC_WRITE_KEY_SIZE_S_IN <= THREE_CONTROL;
-      DNC_WRITE_KEY_SIZE_W_IN <= THREE_CONTROL;
-
-      if (STIMULUS_DNC_WRITE_KEY_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_KEY_CASE 0           ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DNC_WRITE_KEY_K_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        WRITE_KEY_FIRST_RUN : loop
-          if (DNC_WRITE_KEY_K_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_WRITE_KEY_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_KEY_K_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((DNC_WRITE_KEY_K_OUT_ENABLE = '1' or DNC_WRITE_KEY_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_WRITE_KEY_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_KEY_K_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit WRITE_KEY_FIRST_RUN when DNC_WRITE_KEY_READY = '1';
-        end loop WRITE_KEY_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_DNC_WRITE_KEY_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_KEY_CASE 1           ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DNC_WRITE_KEY_K_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        WRITE_KEY_SECOND_RUN : loop
-          if ((DNC_WRITE_KEY_K_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DNC_WRITE_KEY_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_KEY_K_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((DNC_WRITE_KEY_K_OUT_ENABLE = '1') or (DNC_WRITE_KEY_START = '1')) and (unsigned(index_i_loop) < unsigned(DNC_WRITE_KEY_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_KEY_K_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DNC_WRITE_KEY_K_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit WRITE_KEY_SECOND_RUN when DNC_WRITE_KEY_READY = '1';
-        end loop WRITE_KEY_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_WRITE_STRENGTH_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_WRITE_STRENGTH_TEST        ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_DNC_WRITE_STRENGTH_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_STRENGTH_CASE 0      ";
-        -------------------------------------------------------------------
-
-        DNC_WRITE_STRENGTH_BETA_IN <= SCALAR_SAMPLE_A;
-      end if;
-
-      if (STIMULUS_DNC_WRITE_STRENGTH_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_STRENGTH_CASE 1      ";
-        -------------------------------------------------------------------
-
-        DNC_WRITE_STRENGTH_BETA_IN <= SCALAR_SAMPLE_B;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_WRITE_VECTOR_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_WRITE_VECTOR_TEST          ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      DNC_WRITE_VECTOR_SIZE_S_IN <= THREE_CONTROL;
-      DNC_WRITE_VECTOR_SIZE_W_IN <= THREE_CONTROL;
-
-      if (STIMULUS_DNC_WRITE_VECTOR_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_VECTOR_CASE 0        ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DNC_WRITE_VECTOR_V_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        WRITE_VECTOR_FIRST_RUN : loop
-          if (DNC_WRITE_VECTOR_V_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_VECTOR_V_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((DNC_WRITE_VECTOR_V_OUT_ENABLE = '1' or DNC_WRITE_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_VECTOR_V_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit WRITE_VECTOR_FIRST_RUN when DNC_WRITE_VECTOR_READY = '1';
-        end loop WRITE_VECTOR_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_DNC_WRITE_VECTOR_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_WRITE_VECTOR_CASE 1        ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DNC_WRITE_VECTOR_V_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        WRITE_VECTOR_SECOND_RUN : loop
-          if ((DNC_WRITE_VECTOR_V_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_VECTOR_V_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((DNC_WRITE_VECTOR_V_OUT_ENABLE = '1') or (DNC_WRITE_VECTOR_START = '1')) and (unsigned(index_i_loop) < unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
-
-            -- DATA
-            DNC_WRITE_VECTOR_V_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DNC_WRITE_VECTOR_V_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit WRITE_VECTOR_SECOND_RUN when DNC_WRITE_VECTOR_READY = '1';
-        end loop WRITE_VECTOR_SECOND_RUN;
+          exit WRITE_HEADS_SECOND_RUN when DNC_WRITE_HEADS_READY = '1';
+        end loop WRITE_HEADS_SECOND_RUN;
       end if;
 
       wait for WORKING;

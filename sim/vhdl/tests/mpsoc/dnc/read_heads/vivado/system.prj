@@ -81,7 +81,7 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_soft
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
 vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd

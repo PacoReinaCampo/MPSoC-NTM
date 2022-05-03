@@ -81,7 +81,7 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_gate.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_key.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_strength.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_vector.vhd
+	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_stimulus.vhd

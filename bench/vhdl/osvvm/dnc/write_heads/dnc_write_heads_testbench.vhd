@@ -58,29 +58,9 @@ entity dnc_write_heads_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_DNC_ALLOCATION_GATE_TEST   : boolean := false;
-    ENABLE_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
-    ENABLE_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
-
-    ENABLE_DNC_ERASE_VECTOR_TEST   : boolean := false;
-    ENABLE_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
-    ENABLE_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
-
-    ENABLE_DNC_WRITE_GATE_TEST   : boolean := false;
-    ENABLE_DNC_WRITE_GATE_CASE_0 : boolean := false;
-    ENABLE_DNC_WRITE_GATE_CASE_1 : boolean := false;
-
-    ENABLE_DNC_WRITE_KEY_TEST   : boolean := false;
-    ENABLE_DNC_WRITE_KEY_CASE_0 : boolean := false;
-    ENABLE_DNC_WRITE_KEY_CASE_1 : boolean := false;
-
-    ENABLE_DNC_WRITE_STRENGTH_TEST   : boolean := false;
-    ENABLE_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
-    ENABLE_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
-
-    ENABLE_DNC_WRITE_VECTOR_TEST   : boolean := false;
-    ENABLE_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
-    ENABLE_DNC_WRITE_VECTOR_CASE_1 : boolean := false
+    ENABLE_DNC_WRITE_HEADS_TEST   : boolean := false;
+    ENABLE_DNC_WRITE_HEADS_CASE_0 : boolean := false;
+    ENABLE_DNC_WRITE_HEADS_CASE_1 : boolean := false
     );
 end dnc_write_heads_testbench;
 
@@ -94,80 +74,31 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -- ALLOCATION GATE
+  -- WRITE HEADS
   -- CONTROL
-  signal start_allocation_gate : std_logic;
-  signal ready_allocation_gate : std_logic;
+  signal start_write_heads : std_logic;
+  signal ready_WRITE_HEADS : std_logic;
+
+  signal xi_in_enable_write_heads : std_logic;
+
+  signal xi_out_enable_write_heads : std_logic;
+
+  signal k_out_enable_write_heads : std_logic;
+  signal e_out_enable_write_heads : std_logic;
+  signal v_out_enable_write_heads : std_logic;
 
   -- DATA
-  signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_s_in_write_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_write_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ERASE VECTOR
-  -- CONTROL
-  signal start_erase_vector : std_logic;
-  signal ready_erase_vector : std_logic;
+  signal xi_in_write_heads : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal e_in_enable_erase_vector : std_logic;
-
-  signal e_out_enable_erase_vector : std_logic;
-
-  -- DATA
-  signal size_s_in_erase_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_erase_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE GATE
-  -- CONTROL
-  signal start_write_gate : std_logic;
-  signal ready_write_gate : std_logic;
-
-  -- DATA
-  signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE KEY
-  -- CONTROL
-  signal start_write_key : std_logic;
-  signal ready_write_key : std_logic;
-
-  signal k_in_enable_write_key : std_logic;
-
-  signal k_out_enable_write_key : std_logic;
-
-  -- DATA
-  signal size_s_in_write_key : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_write_key : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE STRENGHT
-  -- CONTROL
-  signal start_write_strength : std_logic;
-  signal ready_write_strength : std_logic;
-
-  -- DATA
-  signal beta_in_write_strength  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_write_strength : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- WRITE VECTOR
-  -- CONTROL
-  signal start_write_vector : std_logic;
-  signal ready_write_vector : std_logic;
-
-  signal v_in_enable_write_vector : std_logic;
-
-  signal v_out_enable_write_vector : std_logic;
-
-  -- DATA
-  signal size_s_in_write_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_write_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_write_heads : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_out_write_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_out_write_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -194,91 +125,36 @@ begin
       CLK => CLK,
       RST => RST,
 
-      -- ALLOCATION GATE
+      -- WRITE HEADS
       -- CONTROL
-      DNC_ALLOCATION_GATE_START => start_allocation_gate,
-      DNC_ALLOCATION_GATE_READY => ready_allocation_gate,
+      DNC_WRITE_HEADS_START => start_write_heads,
+      DNC_WRITE_HEADS_READY => ready_WRITE_HEADS,
+
+      DNC_WRITE_HEADS_XI_IN_ENABLE => xi_in_enable_write_heads,
+
+      DNC_WRITE_HEADS_XI_OUT_ENABLE => xi_out_enable_write_heads,
+
+      DNC_WRITE_HEADS_K_OUT_ENABLE => k_out_enable_write_heads,
+      DNC_WRITE_HEADS_E_OUT_ENABLE => e_out_enable_write_heads,
+      DNC_WRITE_HEADS_V_OUT_ENABLE => v_out_enable_write_heads,
 
       -- DATA
-      DNC_ALLOCATION_GATE_GA_IN => ga_in_allocation_gate,
+      DNC_WRITE_HEADS_SIZE_S_IN => size_s_in_write_heads,
+      DNC_WRITE_HEADS_SIZE_W_IN => size_w_in_write_heads,
 
-      DNC_ALLOCATION_GATE_GA_OUT => ga_out_allocation_gate,
+      DNC_WRITE_HEADS_XI_IN => xi_in_write_heads,
 
-      -- ERASE VECTOR
-      -- CONTROL
-      DNC_ERASE_VECTOR_START => start_erase_vector,
-      DNC_ERASE_VECTOR_READY => ready_erase_vector,
-
-      DNC_ERASE_VECTOR_E_IN_ENABLE => e_in_enable_erase_vector,
-
-      DNC_ERASE_VECTOR_E_OUT_ENABLE => e_out_enable_erase_vector,
-
-      -- DATA
-      DNC_ERASE_VECTOR_SIZE_S_IN => size_s_in_erase_vector,
-      DNC_ERASE_VECTOR_SIZE_W_IN => size_w_in_erase_vector,
-
-      DNC_ERASE_VECTOR_E_IN => e_in_erase_vector,
-
-      DNC_ERASE_VECTOR_E_OUT => e_out_erase_vector,
-
-      -- WRITE GATE
-      -- CONTROL
-      DNC_WRITE_GATE_START => start_write_gate,
-      DNC_WRITE_GATE_READY => ready_write_gate,
-
-      -- DATA
-      DNC_WRITE_GATE_GW_IN => gw_in_write_gate,
-
-      DNC_WRITE_GATE_GW_OUT => gw_out_write_gate,
-
-      -- WRITE KEY
-      -- CONTROL
-      DNC_WRITE_KEY_START => start_write_key,
-      DNC_WRITE_KEY_READY => ready_write_key,
-
-      DNC_WRITE_KEY_K_IN_ENABLE => k_in_enable_write_key,
-
-      DNC_WRITE_KEY_K_OUT_ENABLE => k_out_enable_write_key,
-
-      -- DATA
-      DNC_WRITE_KEY_SIZE_S_IN => size_s_in_write_key,
-      DNC_WRITE_KEY_SIZE_W_IN => size_w_in_write_key,
-
-      DNC_WRITE_KEY_K_IN => k_in_write_key,
-
-      DNC_WRITE_KEY_K_OUT => k_out_write_key,
-
-      -- WRITE STRENGTH
-      -- CONTROL
-      DNC_WRITE_STRENGTH_START => start_write_strength,
-      DNC_WRITE_STRENGTH_READY => ready_write_strength,
-
-      -- DATA
-      DNC_WRITE_STRENGTH_BETA_IN => beta_in_write_strength,
-
-      DNC_WRITE_STRENGTH_BETA_OUT => beta_out_write_strength,
-
-      -- WRITE VECTOR
-      -- CONTROL
-      DNC_WRITE_VECTOR_START => start_write_vector,
-      DNC_WRITE_VECTOR_READY => ready_write_vector,
-
-      DNC_WRITE_VECTOR_V_IN_ENABLE => v_in_enable_write_vector,
-
-      DNC_WRITE_VECTOR_V_OUT_ENABLE => v_out_enable_write_vector,
-
-      -- DATA
-      DNC_WRITE_VECTOR_SIZE_S_IN => size_s_in_write_vector,
-      DNC_WRITE_VECTOR_SIZE_W_IN => size_w_in_write_vector,
-
-      DNC_WRITE_VECTOR_V_IN => v_in_write_vector,
-
-      DNC_WRITE_VECTOR_V_OUT => v_out_write_vector
+      DNC_WRITE_HEADS_K_OUT    => k_out_write_heads,
+      DNC_WRITE_HEADS_BETA_OUT => beta_out_write_heads,
+      DNC_WRITE_HEADS_E_OUT    => e_out_write_heads,
+      DNC_WRITE_HEADS_V_OUT    => v_out_write_heads,
+      DNC_WRITE_HEADS_GA_OUT   => ga_out_write_heads,
+      DNC_WRITE_HEADS_GW_OUT   => gw_out_write_heads
       );
 
-  -- ALLOCATION GATE
-  dnc_allocation_gate_test : if (ENABLE_DNC_ALLOCATION_GATE_TEST) generate
-    allocation_gate : dnc_allocation_gate
+  -- WRITE HEADS
+  dnc_write_heads_test : if (ENABLE_DNC_WRITE_HEADS_TEST) generate
+    WRITE_HEADS : dnc_write_heads
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -289,150 +165,30 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_allocation_gate,
-        READY => ready_allocation_gate,
+        START => start_write_heads,
+        READY => ready_WRITE_HEADS,
+
+        XI_IN_ENABLE => xi_in_enable_write_heads,
+
+        XI_OUT_ENABLE => xi_out_enable_write_heads,
+
+        K_OUT_ENABLE => k_out_enable_write_heads,
+        E_OUT_ENABLE => e_out_enable_write_heads,
+        V_OUT_ENABLE => v_out_enable_write_heads,
 
         -- DATA
-        GA_IN => ga_in_allocation_gate,
+        SIZE_S_IN => size_s_in_write_heads,
+        SIZE_W_IN => size_w_in_write_heads,
 
-        GA_OUT => ga_out_allocation_gate
+        XI_IN => xi_in_write_heads,
+
+        K_OUT    => k_out_write_heads,
+        BETA_OUT => beta_out_write_heads,
+        E_OUT    => e_out_write_heads,
+        V_OUT    => v_out_write_heads,
+        GA_OUT   => ga_out_write_heads,
+        GW_OUT   => gw_out_write_heads
         );
-  end generate dnc_allocation_gate_test;
-
-  -- ERASE VECTOR
-  dnc_erase_vector_test : if (ENABLE_DNC_ERASE_VECTOR_TEST) generate
-    erase_vector : dnc_erase_vector
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_erase_vector,
-        READY => ready_erase_vector,
-
-        E_IN_ENABLE => e_in_enable_erase_vector,
-
-        E_OUT_ENABLE => e_out_enable_erase_vector,
-
-        -- DATA
-        SIZE_S_IN => size_s_in_erase_vector,
-        SIZE_W_IN => size_w_in_erase_vector,
-
-        E_IN => e_in_erase_vector,
-
-        E_OUT => e_out_erase_vector
-        );
-  end generate dnc_erase_vector_test;
-
-  -- WRITE GATE
-  dnc_write_gate_test : if (ENABLE_DNC_WRITE_GATE_TEST) generate
-    write_gate : dnc_write_gate
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_write_gate,
-        READY => ready_write_gate,
-
-        -- DATA
-        GW_IN => gw_in_write_gate,
-
-        GW_OUT => gw_out_write_gate
-        );
-  end generate dnc_write_gate_test;
-
-  -- WRITE KEY
-  dnc_write_key_test : if (ENABLE_DNC_WRITE_KEY_TEST) generate
-    write_key : dnc_write_key
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_write_key,
-        READY => ready_write_key,
-
-        K_IN_ENABLE => k_in_enable_write_key,
-
-        K_OUT_ENABLE => k_out_enable_write_key,
-
-        -- DATA
-        SIZE_S_IN => size_s_in_write_key,
-        SIZE_W_IN => size_w_in_write_key,
-
-        K_IN => k_in_write_key,
-
-        K_OUT => k_out_write_key
-        );
-  end generate dnc_write_key_test;
-
-  -- WRITE STRENGTH
-  dnc_write_strength_test : if (ENABLE_DNC_WRITE_STRENGTH_TEST) generate
-    write_strength : dnc_write_strength
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_write_strength,
-        READY => ready_write_strength,
-
-        -- DATA
-        BETA_IN => beta_in_write_strength,
-
-        BETA_OUT => beta_out_write_strength
-        );
-  end generate dnc_write_strength_test;
-
-  -- WRITE VECTOR
-  dnc_write_vector_test : if (ENABLE_DNC_WRITE_VECTOR_TEST) generate
-    write_vector : dnc_write_vector
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_write_vector,
-        READY => ready_write_vector,
-
-        V_IN_ENABLE => v_in_enable_write_vector,
-
-        V_OUT_ENABLE => v_out_enable_write_vector,
-
-        -- DATA
-        SIZE_S_IN => size_s_in_write_vector,
-        SIZE_W_IN => size_w_in_write_vector,
-
-        V_IN => v_in_write_vector,
-
-        V_OUT => v_out_write_vector
-        );
-  end generate dnc_write_vector_test;
+  end generate dnc_write_heads_test;
 
 end dnc_write_heads_testbench_architecture;

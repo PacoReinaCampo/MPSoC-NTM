@@ -137,29 +137,9 @@ package dnc_write_heads_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_ALLOCATION_GATE_TEST   : boolean := false;
-  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_ERASE_VECTOR_TEST   : boolean := false;
-  signal STIMULUS_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_GATE_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_GATE_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_GATE_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_KEY_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_KEY_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_KEY_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_STRENGTH_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_VECTOR_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_VECTOR_CASE_1 : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -183,86 +163,31 @@ package dnc_write_heads_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- ALLOCATION GATE
+      -- WRITE HEADS
       -- CONTROL
-      DNC_ALLOCATION_GATE_START : out std_logic;
-      DNC_ALLOCATION_GATE_READY : in  std_logic;
+      DNC_WRITE_HEADS_START : out std_logic;
+      DNC_WRITE_HEADS_READY : in  std_logic;
+
+      DNC_WRITE_HEADS_XI_IN_ENABLE : out std_logic;
+
+      DNC_WRITE_HEADS_XI_OUT_ENABLE : in std_logic;
+
+      DNC_WRITE_HEADS_K_OUT_ENABLE : in std_logic;
+      DNC_WRITE_HEADS_E_OUT_ENABLE : in std_logic;
+      DNC_WRITE_HEADS_V_OUT_ENABLE : in std_logic;
 
       -- DATA
-      DNC_ALLOCATION_GATE_GA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_ALLOCATION_GATE_GA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_XI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- ERASE VECTOR
-      -- CONTROL
-      DNC_ERASE_VECTOR_START : out std_logic;
-      DNC_ERASE_VECTOR_READY : in  std_logic;
-
-      DNC_ERASE_VECTOR_E_IN_ENABLE : out std_logic;
-
-      DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      DNC_ERASE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_ERASE_VECTOR_E_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- WRITE GATE
-      -- CONTROL
-      DNC_WRITE_GATE_START : out std_logic;
-      DNC_WRITE_GATE_READY : in  std_logic;
-
-      -- DATA
-      DNC_WRITE_GATE_GW_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_WRITE_GATE_GW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- WRITE KEY
-      -- CONTROL
-      DNC_WRITE_KEY_START : out std_logic;
-      DNC_WRITE_KEY_READY : in  std_logic;
-
-      DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
-
-      DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      DNC_WRITE_KEY_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_WRITE_KEY_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- WRITE STRENGTH
-      -- CONTROL
-      DNC_WRITE_STRENGTH_START : out std_logic;
-      DNC_WRITE_STRENGTH_READY : in  std_logic;
-
-      -- DATA
-      DNC_WRITE_STRENGTH_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_WRITE_STRENGTH_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- WRITE VECTOR
-      -- CONTROL
-      DNC_WRITE_VECTOR_START : out std_logic;
-      DNC_WRITE_VECTOR_READY : in  std_logic;
-
-      DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
-
-      DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      DNC_WRITE_VECTOR_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DNC_WRITE_VECTOR_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      DNC_WRITE_HEADS_K_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_E_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_V_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_GA_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_GW_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

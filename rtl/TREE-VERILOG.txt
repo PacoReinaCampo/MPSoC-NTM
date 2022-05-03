@@ -96,22 +96,14 @@
 │   │   ├── dnc_write_content_weighting.sv
 │   │   └── dnc_write_weighting.sv
 │   ├── read_heads
-│   │   ├── dnc_free_gates.sv
-│   │   ├── dnc_read_keys.sv
-│   │   ├── dnc_read_modes.sv
-│   │   └── dnc_read_strengths.sv
+│   │   └── dnc_read_heads.sv
 │   ├── top
 │   │   ├── dnc_output_vector.sv
 │   │   ├── dnc_interface_matrix.sv
 │   │   ├── dnc_interface_vector.sv
 │   │   └── dnc_top.sv
 │   └── write_heads
-│       ├── dnc_allocation_gate.sv
-│       ├── dnc_erase_vector.sv
-│       ├── dnc_write_gate.sv
-│       ├── dnc_write_key.sv
-│       ├── dnc_write_strength.sv
-│       └── dnc_write_vector.sv
+│       └── dnc_write_heads.sv
 ├── intro
 │   └── ntm_intro_adder.sv
 ├── math
