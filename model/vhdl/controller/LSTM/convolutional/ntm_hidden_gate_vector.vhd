@@ -181,6 +181,8 @@ begin
             data_s_in_enable_int <= '0';
             data_o_in_enable_int <= '0';
 
+            data_in_enable_int <= '0';
+
             -- FSM Control
             controller_in_fsm_int <= INPUT_STATE;
           else
