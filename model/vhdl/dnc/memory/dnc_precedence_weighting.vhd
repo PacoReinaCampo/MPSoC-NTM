@@ -100,10 +100,16 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type controller_ctrl_fsm is (
+  type controller_in_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    CLEAN_STATE                         -- STEP 3
+    CLEAN_STATE                         -- STEP 2
+    );
+
+  type controller_p_out_fsm is (
+    STARTER_P_OUT_STATE,                -- STEP 0
+    CLEAN_P_OUT_J_STATE,                -- STEP 1
+    OUTPUT_P_OUT_J_STATE                -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -111,19 +117,25 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal controller_in_fsm_int : controller_in_fsm;
+
+  signal controller_p_out_fsm_int : controller_p_out_fsm;
 
   -- Buffer
-  signal vector_w_int : vector_buffer;
-  signal vector_p_int : vector_buffer;
+  signal vector_w_in_int : vector_buffer;
+  signal vector_p_in_int : vector_buffer;
 
-  signal vector_out_int : vector_buffer;
+  signal vector_p_out_int : vector_buffer;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_w_in_int : std_logic;
-  signal data_p_in_int : std_logic;
+  signal index_j_p_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_w_in_enable_int : std_logic;
+  signal data_p_in_enable_int : std_logic;
+
+  signal datw_in_enable_int : std_logic;
 
 begin
 
@@ -136,7 +148,111 @@ begin
   -- p(t=0) = 0
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      W_OUT_ENABLE <= '0';
+      P_OUT_ENABLE <= '0';
+
+      -- Control Internal
+      index_j_in_loop <= ZERO_CONTROL;
+
+      data_w_in_enable_int <= '0';
+      data_p_in_enable_int <= '0';
+
+      datw_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_in_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            W_OUT_ENABLE <= '1';
+            P_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_in_loop <= ZERO_CONTROL;
+
+            data_w_in_enable_int <= '0';
+            data_p_in_enable_int <= '0';
+
+            datw_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_in_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            W_OUT_ENABLE <= '0';
+            P_OUT_ENABLE <= '0';
+          end if;
+
+        when INPUT_STATE =>             -- STEP 1
+
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_w_in_int(to_integer(unsigned(index_j_in_loop))) <= W_IN;
+
+            -- Control Internal
+            data_w_in_enable_int <= '1';
+          end if;
+
+          if (P_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_p_in_int(to_integer(unsigned(index_j_in_loop))) <= P_IN;
+
+            -- Control Internal
+            data_p_in_enable_int <= '1';
+          end if;
+
+          -- Control Outputs
+          W_OUT_ENABLE <= '0';
+          P_OUT_ENABLE <= '0';
+
+          if (data_w_in_enable_int = '1' and data_p_in_enable_int = '1') then
+            -- Control Internal
+            data_w_in_enable_int <= '0';
+            data_p_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_in_fsm_int <= CLEAN_STATE;
+          end if;
+
+        when CLEAN_STATE =>             -- STEP 2
+
+          if (unsigned(index_j_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            W_OUT_ENABLE <= '1';
+            P_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_in_loop <= ZERO_CONTROL;
+
+            datw_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_in_fsm_int <= STARTER_STATE;
+          elsif (unsigned(index_j_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            W_OUT_ENABLE <= '1';
+            P_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_in_loop <= std_logic_vector(unsigned(index_j_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_in_fsm_int <= INPUT_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_in_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  p_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -145,112 +261,71 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      W_OUT_ENABLE <= '0';
       P_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO_CONTROL;
+      index_j_p_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Data Outputs
-          P_OUT <= ZERO_DATA;
-
-          -- Control Outputs
-          READY <= '0';
-
-          if (START = '1') then
-            -- Control Outputs
-            W_OUT_ENABLE <= '1';
-            P_OUT_ENABLE <= '1';
-
-            -- Control Internal
-            index_i_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_STATE;
-          else
-            -- Control Outputs
-            W_OUT_ENABLE <= '0';
-            P_OUT_ENABLE <= '0';
-          end if;
-
-        when INPUT_STATE =>             -- STEP 1 p,w
-
-          if (W_IN_ENABLE = '1') then
-            -- Data Inputs
-            vector_w_int(to_integer(unsigned(index_i_loop))) <= W_IN;
-
-            -- Control Internal
-            data_w_in_int <= '1';
-          end if;
-
-          if (P_IN_ENABLE = '1') then
-            -- Data Inputs
-            vector_p_int(to_integer(unsigned(index_i_loop))) <= P_IN;
-
-            -- Control Internal
-            data_p_in_int <= '1';
-          end if;
-
-          -- Control Outputs
-          W_OUT_ENABLE <= '0';
-          P_OUT_ENABLE <= '0';
-
-          if (data_w_in_int = '1' and data_p_in_int = '1') then
-            -- Control Internal
-            data_w_in_int <= '0';
-            data_p_in_int <= '0';
-
+      case controller_p_out_fsm_int is
+        when STARTER_P_OUT_STATE =>     -- STEP 0
+          if (datw_in_enable_int = '1') then
             -- Data Internal
-            vector_out_int <= function_dnc_precedence_weighting (
+            vector_p_out_int <= function_dnc_precedence_weighting (
               SIZE_N_IN => SIZE_N_IN,
 
-              vector_w_input => vector_w_int,
-              vector_p_input => vector_p_int
+              vector_w_input => vector_w_in_int,
+              vector_p_input => vector_p_in_int
               );
 
+            -- Control Internal
+            index_j_p_out_loop <= ZERO_CONTROL;
+
             -- FSM Control
-            controller_ctrl_fsm_int <= CLEAN_STATE;
+            controller_p_out_fsm_int <= CLEAN_P_OUT_J_STATE;
           end if;
 
-        when CLEAN_STATE =>             -- STEP 3
+        when CLEAN_P_OUT_J_STATE =>     -- STEP 1
+          -- Control Outputs
+          P_OUT_ENABLE <= '0';
 
-          if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+          -- FSM Control
+          controller_p_out_fsm_int <= OUTPUT_P_OUT_J_STATE;
+
+        when OUTPUT_P_OUT_J_STATE =>    -- STEP 2
+
+          if (unsigned(index_j_p_out_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            P_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+            P_OUT <= vector_p_out_int(to_integer(unsigned(index_j_p_out_loop)));
 
             -- Control Outputs
             READY <= '1';
 
-            W_OUT_ENABLE <= '1';
             P_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_i_loop <= ZERO_CONTROL;
+            index_j_p_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= STARTER_STATE;
-          elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            controller_p_out_fsm_int <= STARTER_P_OUT_STATE;
+          elsif (unsigned(index_j_p_out_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            P_OUT <= vector_out_int(to_integer(unsigned(index_i_loop)));
+            P_OUT <= vector_p_out_int(to_integer(unsigned(index_j_p_out_loop)));
 
             -- Control Outputs
-            W_OUT_ENABLE <= '1';
             P_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_p_out_loop <= std_logic_vector(unsigned(index_j_p_out_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_STATE;
+            controller_p_out_fsm_int <= CLEAN_P_OUT_J_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          controller_p_out_fsm_int <= STARTER_P_OUT_STATE;
       end case;
     end if;
   end process;
