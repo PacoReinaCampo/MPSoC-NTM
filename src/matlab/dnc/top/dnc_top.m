@@ -88,7 +88,7 @@ function Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
 
 
 
-      % INTERFACE_MATRIX_STATE MATRIX
+      % INTERFACE_MATRIX_STATE
 
       % rho(t;i;m) = U(i;m;l)·h(t;i;l)
       tensor_operation_int = ntm_tensor_transpose(D_IN);
@@ -211,7 +211,13 @@ function Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
 
 
       % CONTROLLER_BODY_STATE
+
+      % FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
+      % FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+
       vector_h_int = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, matrix_r_int, vector_xi_int, matrix_rho_int, vector_h_int, X_IN(t, :));
+
+
 
       % OUTPUT_VECTOR_STATE
 

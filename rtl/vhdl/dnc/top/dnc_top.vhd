@@ -150,7 +150,7 @@ architecture dnc_top_architecture of dnc_top is
   -----------------------------------------------------------------------
 
   -- Inputs:
-  -- W_IN [L,X],  X_IN [X]
+  -- W_IN [L,X], X_IN [X]
   -- K_IN [R,L,W]
   -- D_IN [R,L,M]
   -- V_IN [L,S]
@@ -179,41 +179,6 @@ architecture dnc_top_architecture of dnc_top is
   -- Types
   -----------------------------------------------------------------------
 
-  type top_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    CONTROLLER_STATE,                   -- STEP 1
-    READ_HEADS_STATE,                   -- STEP 2
-    WRITE_HEADS_STATE,                  -- STEP 3
-    MEMORY_I_STATE,                     -- STEP 4
-    MEMORY_J_STATE                      -- STEP 5
-    );
-
-  type controller_ctrl_fsm is (
-    STARTER_CONTROLLER_STATE,           -- STEP 0
-    CONTROLLER_BODY_STATE,              -- STEP 1
-    OUTPUT_VECTOR_STATE                 -- STEP 2
-    );
-
-  type read_heads_ctrl_fsm is (
-    STARTER_READ_HEADS_STATE,           -- STEP 0
-    FREE_GATES_STATE,                   -- STEP 1
-    READ_KEYS_STATE,                    -- STEP 2
-    READ_MODES_STATE,                   -- STEP 3
-    READ_STRENGTHS_STATE,               -- STEP 4
-    READ_INTERFACE_MATRIX_STATE         -- STEP 5
-    );
-
-  type write_heads_ctrl_fsm is (
-    STARTER_WRITE_HEADS_STATE,          -- STEP 0
-    ALLOCATION_GATE_STATE,              -- STEP 1
-    ERASE_VECTOR_STATE,                 -- STEP 2
-    WRITE_GATE_STATE,                   -- STEP 3
-    WRITE_KEY_STATE,                    -- STEP 4
-    WRITE_STRENGTH_STATE,               -- STEP 5
-    WRITE_VECTOR_STATE,                 -- STEP 6
-    WRITE_INTERFACE_VECTOR_STATE        -- STEP 7
-    );
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -227,11 +192,6 @@ architecture dnc_top_architecture of dnc_top is
   signal SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Finite State Machine
-  signal top_ctrl_fsm_int : top_ctrl_fsm;
-
-  signal controller_ctrl_fsm_int  : controller_ctrl_fsm;
-  signal read_heads_ctrl_fsm_int  : read_heads_ctrl_fsm;
-  signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -583,182 +543,96 @@ begin
   -----------------------------------------------------------------------
 
   -- SIZE
+  -- ARITHMETIC M: [RHO] = W + 5
   SIZE_M_IN <= std_logic_vector(to_unsigned(5, CONTROL_SIZE) + unsigned(SIZE_W_IN));
+
+  -- ARITHMETIC S: [XI] = 3·W + 3
   SIZE_S_IN <= std_logic_vector(to_unsigned(3, CONTROL_SIZE) + unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN));
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      Y_OUT <= ZERO_DATA;
+  -- INTERFACE_VECTOR_STATE
 
-      -- Control Outputs
-      READY <= '0';
+  -- xi(t;s) = U(s;l)·h(t;l)
 
-      Y_OUT_ENABLE <= '0';
+  -- INTERFACE_MATRIX_STATE
 
-      -- Control Internal
-      index_i_loop <= ZERO_CONTROL;
-      index_j_loop <= ZERO_CONTROL;
+  -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
 
-    elsif (rising_edge(CLK)) then
 
-      case top_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Control Outputs
-          READY <= '0';
 
-          Y_OUT_ENABLE <= '0';
+  -- READ_HEADS_STATE
 
-          -- Control Internal
-          index_i_loop <= ZERO_CONTROL;
-          index_j_loop <= ZERO_CONTROL;
+  -- WRITE_HEADS_STATE
 
-          if (START = '1') then
-            -- Control Internal
-            start_controller <= '1';
 
-            -- FSM Control
-            top_ctrl_fsm_int <= CONTROLLER_STATE;
-          else
-            -- Control Internal
-            start_controller <= '0';
-          end if;
 
-        when CONTROLLER_STATE =>        -- STEP 1
+  -- MEMORY_STATE
+  -- MEMORY_RETENTION_VECTOR
 
-          case controller_ctrl_fsm_int is
-            when STARTER_CONTROLLER_STATE =>  -- STEP 0
+  -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
-            when CONTROLLER_BODY_STATE =>  -- STEP 1
+  -- USAGE_VECTOR
 
-              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(l))
-              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(l))
+  -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
-            when OUTPUT_VECTOR_STATE =>  -- STEP 2
+  -- ALLOCATION_WEIGHTING
 
-              -- y(t;y) = K(i;y;k)·r(t;i;k) + U(y;l)·h(t;l)
+  -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
 
-            when others =>
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
-          end case;
+  -- WRITE_CONTENT_WEIGHTING
 
-        when READ_HEADS_STATE =>        -- STEP 2
+  -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
 
-          case read_heads_ctrl_fsm_int is
-            when STARTER_READ_HEADS_STATE =>  -- STEP 0
+  -- WRITE_WEIGHTING
 
-            when FREE_GATES_STATE =>    -- STEP 1
+  -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
-              -- f(t;i) = sigmoid(f^(t;i))
+  -- MEMORY_MATRIX
 
-            when READ_KEYS_STATE =>     -- STEP 2
+  -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
-              -- k(t;i;k) = k^(t;i;k)
+  -- PRECEDENCE_WEIGHTING
 
-            when READ_MODES_STATE =>    -- STEP 3
+  -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+  -- p(t=0) = 0
 
-              -- pi(t;i;p) = softmax(pi^(t;i;p))
+  -- TEMPORAL_LINK_MATRIX
 
-            when READ_STRENGTHS_STATE =>  -- STEP 4
+  -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+  -- L(t=0)[g,j] = 0
 
-              -- beta(t;i) = oneplus(beta^(t;i))
+  -- FORWARD_WEIGHTING
 
-            when READ_INTERFACE_MATRIX_STATE =>  -- STEP 5
+  -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
-              -- rho(t;i;m) = U(i;m;l)·h(t;i;l)
+  -- BACKWARD_WEIGHTING
 
-              -- f(t;i) = rho(t;i;m)
-              -- k(t;i;k) = rho(t;i;m)
-              -- beta(t;i) = rho(t;i;m)
-              -- pi(t;i;p) = rho(t;i;m)
+  -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
 
-            when others =>
-              -- FSM Control
-              read_heads_ctrl_fsm_int <= STARTER_READ_HEADS_STATE;
-          end case;
+  -- READ_CONTENT_WEIGHTING
 
-        when WRITE_HEADS_STATE =>       -- STEP 3
+  -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 
-          case write_heads_ctrl_fsm_int is
-            when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
+  -- READ_WEIGHTING
 
-            when ALLOCATION_GATE_STATE =>  -- STEP 1
+  -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
-              -- ga(t) = sigmoid(g^(t))
+  -- READ_VECTORS
 
-            when ERASE_VECTOR_STATE =>  -- STEP 2
+  -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
-              -- e(t;k) = sigmoid(e^(t;k))
 
-            when WRITE_GATE_STATE =>    -- STEP 3
 
-              -- gw(t) = sigmoid(gw^(t))
+  -- CONTROLLER_BODY_STATE
 
-            when WRITE_KEY_STATE =>     -- STEP 4
+  -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
+  -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
-              -- k(t;k) = k^(t;k)
+  -- OUTPUT_VECTOR_STATE
 
-            when WRITE_STRENGTH_STATE =>  -- STEP 5
+  -- y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
-              -- beta(t) = oneplus(beta^(t))
 
-            when WRITE_VECTOR_STATE =>  -- STEP 6
-
-              -- v(t;k) = v^(t;k)
-
-            when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
-
-              -- xi(t;s) = U(t;?;l)·h(t;l)
-
-              -- k(t;k) = xi(t;s)
-              -- beta(t) = xi(t;s)
-              -- e(t;k) = xi(t;s)
-              -- v(t;k) = xi(t;s)
-              -- ga(t) = xi(t;s)
-              -- gw(t) = xi(t;s)
-
-            when others =>
-              -- FSM Control
-              write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
-          end case;
-
-        when MEMORY_I_STATE =>          -- STEP 4
-
-          if (r_out_i_enable_addressing = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              top_ctrl_fsm_int <= CONTROLLER_STATE;
-            end if;
-          end if;
-
-        when MEMORY_J_STATE =>          -- STEP 5
-
-          if (r_out_k_enable_addressing = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
-              -- FSM Control
-              top_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              top_ctrl_fsm_int <= CONTROLLER_STATE;
-            end if;
-          end if;
-
-        when others =>
-          -- FSM Control
-          top_ctrl_fsm_int <= STARTER_STATE;
-      end case;
-    end if;
-  end process;
 
   -----------------------------------------------------------------------
   -- CONTROLLER
