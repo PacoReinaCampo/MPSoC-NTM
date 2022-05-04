@@ -62,11 +62,14 @@ entity dnc_backward_weighting is
     L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
     L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
 
+    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
+    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
+
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    B_I_ENABLE : out std_logic;         -- for i in 0 to R-1 (read heads flow)
-    B_J_ENABLE : out std_logic;         -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     B_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     B_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
@@ -350,9 +353,6 @@ begin
           end if;
 
           -- Control Outputs
-          B_I_ENABLE <= '0';
-          B_J_ENABLE <= '0';
-
           B_OUT_I_ENABLE <= '0';
           B_OUT_J_ENABLE <= '0';
 
@@ -376,8 +376,6 @@ begin
           end if;
 
           -- Control Outputs
-          B_J_ENABLE <= '0';
-
           B_OUT_J_ENABLE <= '0';
 
         when MATRIX_PRODUCT_I_STATE =>  -- STEP 7
@@ -389,9 +387,6 @@ begin
 
               -- Control Outputs
               READY <= '1';
-
-              B_I_ENABLE <= '1';
-              B_J_ENABLE <= '1';
 
               B_OUT_I_ENABLE <= '1';
               B_OUT_J_ENABLE <= '1';
@@ -407,9 +402,6 @@ begin
               B_OUT <= data_out_matrix_product;
 
               -- Control Outputs
-              B_I_ENABLE <= '1';
-              B_J_ENABLE <= '1';
-
               B_OUT_I_ENABLE <= '1';
               B_OUT_J_ENABLE <= '1';
 
@@ -438,8 +430,6 @@ begin
               B_OUT <= data_out_matrix_product;
 
               -- Control Outputs
-              B_J_ENABLE <= '1';
-
               B_OUT_J_ENABLE <= '1';
 
               -- Control Internal

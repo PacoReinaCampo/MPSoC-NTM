@@ -62,11 +62,14 @@ entity dnc_forward_weighting is
     L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square tensor)
     L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square tensor)
 
+    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square tensor)
+    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square tensor)
+
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    F_I_ENABLE : out std_logic;         -- for i in 0 to R-1 (read heads flow)
-    F_J_ENABLE : out std_logic;         -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     F_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     F_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
@@ -167,8 +170,8 @@ begin
   data_b_in_j_enable_tensor_product <= W_IN_J_ENABLE;
   data_b_in_k_enable_tensor_product <= '0';
 
-  F_I_ENABLE <= data_i_enable_tensor_product;
-  F_J_ENABLE <= data_j_enable_tensor_product;
+  W_OUT_I_ENABLE <= data_i_enable_tensor_product;
+  W_OUT_J_ENABLE <= data_j_enable_tensor_product;
 
   F_OUT_I_ENABLE <= data_out_i_enable_tensor_product;
   F_OUT_J_ENABLE <= data_out_j_enable_tensor_product;

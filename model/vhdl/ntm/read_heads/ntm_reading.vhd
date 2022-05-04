@@ -355,7 +355,6 @@ begin
 
           -- Control Outputs
           M_OUT_K_ENABLE <= '0';
-          W_OUT_J_ENABLE <= '0';
 
         when CLEAN_M_IN_J_STATE =>      -- STEP 3
 
