@@ -577,6 +577,9 @@ begin
         when OUTPUT_M_OUT_K_STATE =>    -- STEP 4
 
           if (unsigned(index_k_m_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            M_OUT <= matrix_m_out_int(to_integer(unsigned(index_j_m_out_loop)), to_integer(unsigned(index_k_m_out_loop)));
+
             -- Control Outputs
             M_OUT_K_ENABLE <= '1';
 

@@ -58,21 +58,9 @@ entity dnc_read_heads_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_DNC_FREE_GATES_TEST   : boolean := false;
-    ENABLE_DNC_FREE_GATES_CASE_0 : boolean := false;
-    ENABLE_DNC_FREE_GATES_CASE_1 : boolean := false;
-
-    ENABLE_DNC_READ_KEYS_TEST   : boolean := false;
-    ENABLE_DNC_READ_KEYS_CASE_0 : boolean := false;
-    ENABLE_DNC_READ_KEYS_CASE_1 : boolean := false;
-
-    ENABLE_DNC_READ_MODES_TEST   : boolean := false;
-    ENABLE_DNC_READ_MODES_CASE_0 : boolean := false;
-    ENABLE_DNC_READ_MODES_CASE_1 : boolean := false;
-
-    ENABLE_DNC_READ_STRENGTHS_TEST   : boolean := false;
-    ENABLE_DNC_READ_STRENGTHS_CASE_0 : boolean := false;
-    ENABLE_DNC_READ_STRENGTHS_CASE_1 : boolean := false
+    ENABLE_DNC_READ_HEADS_TEST   : boolean := false;
+    ENABLE_DNC_READ_HEADS_CASE_0 : boolean := false;
+    ENABLE_DNC_READ_HEADS_CASE_1 : boolean := false
     );
 end dnc_read_heads_testbench;
 
@@ -86,72 +74,38 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -- FREE GATES
+  -- READ HEADS
   -- CONTROL
-  signal f_in_enable_free_gates  : std_logic;
-  signal f_out_enable_free_gates : std_logic;
+  signal start_read_heads : std_logic;
+  signal ready_read_heads : std_logic;
 
-  signal start_free_gates : std_logic;
-  signal ready_free_gates : std_logic;
+  signal rho_in_i_enable_read_heads : std_logic;
+  signal rho_in_m_enable_read_heads : std_logic;
+
+  signal rho_out_i_enable_read_heads : std_logic;
+  signal rho_out_m_enable_read_heads : std_logic;
+
+  signal k_out_i_enable_read_heads : std_logic;
+  signal k_out_k_enable_read_heads : std_logic;
+
+  signal beta_out_enable_read_heads : std_logic;
+
+  signal f_out_enable_read_heads : std_logic;
+
+  signal pi_out_i_enable_read_heads : std_logic;
+  signal pi_out_p_enable_read_heads : std_logic;
 
   -- DATA
-  signal size_m_in_free_gates : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_free_gates : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_read_heads  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- READ KEYS
-  -- CONTROL
-  signal k_in_i_enable_read_keys : std_logic;
-  signal k_in_k_enable_read_keys : std_logic;
-
-  signal k_out_i_enable_read_keys : std_logic;
-  signal k_out_k_enable_read_keys : std_logic;
-
-  signal start_read_keys : std_logic;
-  signal ready_read_keys : std_logic;
-
-  -- DATA
-  signal size_m_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_read_keys : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- READ MODES
-  -- CONTROL
-  signal pi_in_i_enable_read_modes : std_logic;
-  signal pi_in_p_enable_read_modes : std_logic;
-
-  signal pi_out_i_enable_read_modes : std_logic;
-  signal pi_out_p_enable_read_modes : std_logic;
-
-  signal start_read_modes : std_logic;
-  signal ready_read_modes : std_logic;
-
-  -- DATA
-  signal size_m_in_read_modes : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_read_modes : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_out_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- READ STRENGTHS
-  -- CONTROL
-  signal beta_in_enable_read_strengths  : std_logic;
-  signal beta_out_enable_read_strengths : std_logic;
-
-  signal start_read_strengths : std_logic;
-  signal ready_read_strengths : std_logic;
-
-  -- DATA
-  signal size_m_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_read_strengths : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_read_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_read_heads : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_read_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal pi_out_read_heads   : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -178,82 +132,43 @@ begin
       CLK => CLK,
       RST => RST,
 
-      -- FREE GATES
+      -- READ HEADS
       -- CONTROL
-      DNC_FREE_GATES_START => start_free_gates,
-      DNC_FREE_GATES_READY => ready_free_gates,
+      DNC_READ_HEADS_START => start_read_heads,
+      DNC_READ_HEADS_READY => ready_read_heads,
 
-      DNC_FREE_GATES_F_IN_ENABLE => f_in_enable_free_gates,
+      DNC_READ_HEADS_RHO_IN_I_ENABLE => rho_in_i_enable_read_heads,
+      DNC_READ_HEADS_RHO_IN_M_ENABLE => rho_in_m_enable_read_heads,
 
-      DNC_FREE_GATES_F_OUT_ENABLE => f_out_enable_free_gates,
+      DNC_READ_HEADS_RHO_OUT_I_ENABLE => rho_out_i_enable_read_heads,
+      DNC_READ_HEADS_RHO_OUT_M_ENABLE => rho_out_m_enable_read_heads,
+
+      DNC_READ_HEADS_K_OUT_I_ENABLE => k_out_i_enable_read_heads,
+      DNC_READ_HEADS_K_OUT_K_ENABLE => k_out_k_enable_read_heads,
+
+      DNC_READ_HEADS_BETA_OUT_ENABLE => beta_out_enable_read_heads,
+
+      DNC_READ_HEADS_F_OUT_ENABLE => f_out_enable_read_heads,
+
+      DNC_READ_HEADS_PI_OUT_I_ENABLE => pi_out_i_enable_read_heads,
+      DNC_READ_HEADS_PI_OUT_P_ENABLE => pi_out_p_enable_read_heads,
 
       -- DATA
-      DNC_FREE_GATES_SIZE_M_IN => size_m_in_free_gates,
-      DNC_FREE_GATES_SIZE_R_IN => size_r_in_free_gates,
+      DNC_READ_HEADS_SIZE_M_IN => size_m_in_read_heads,
+      DNC_READ_HEADS_SIZE_R_IN => size_r_in_read_heads,
+      DNC_READ_HEADS_SIZE_W_IN => size_w_in_read_heads,
 
-      DNC_FREE_GATES_F_IN => f_in_free_gates,
+      DNC_READ_HEADS_RHO_IN => rho_in_read_heads,
 
-      DNC_FREE_GATES_F_OUT => f_out_free_gates,
-
-      -- READ KEYS
-      -- CONTROL
-      DNC_READ_KEYS_START => start_read_keys,
-      DNC_READ_KEYS_READY => ready_read_keys,
-
-      DNC_READ_KEYS_K_IN_I_ENABLE => k_in_i_enable_read_keys,
-      DNC_READ_KEYS_K_IN_K_ENABLE => k_in_k_enable_read_keys,
-
-      DNC_READ_KEYS_K_OUT_I_ENABLE => k_out_i_enable_read_keys,
-      DNC_READ_KEYS_K_OUT_K_ENABLE => k_out_k_enable_read_keys,
-
-      -- DATA
-      DNC_READ_KEYS_SIZE_M_IN => size_m_in_read_keys,
-      DNC_READ_KEYS_SIZE_R_IN => size_r_in_read_keys,
-      DNC_READ_KEYS_SIZE_W_IN => size_w_in_read_keys,
-
-      DNC_READ_KEYS_K_IN => k_in_read_keys,
-
-      DNC_READ_KEYS_K_OUT => k_out_read_keys,
-
-      -- READ MODES
-      -- CONTROL
-      DNC_READ_MODES_START => start_read_modes,
-      DNC_READ_MODES_READY => ready_read_modes,
-
-      DNC_READ_MODES_PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
-      DNC_READ_MODES_PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
-
-      DNC_READ_MODES_PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
-      DNC_READ_MODES_PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
-
-      -- DATA
-      DNC_READ_MODES_SIZE_M_IN => size_m_in_read_modes,
-      DNC_READ_MODES_SIZE_R_IN => size_r_in_read_modes,
-
-      DNC_READ_MODES_PI_IN => pi_in_read_modes,
-
-      DNC_READ_MODES_PI_OUT => pi_out_read_modes,
-
-      -- READ STRENGTHS
-      -- CONTROL
-      DNC_READ_STRENGTHS_START => start_read_strengths,
-      DNC_READ_STRENGTHS_READY => ready_read_strengths,
-
-      DNC_READ_STRENGTHS_BETA_IN_ENABLE  => beta_in_enable_read_strengths,
-      DNC_READ_STRENGTHS_BETA_OUT_ENABLE => beta_out_enable_read_strengths,
-
-      -- DATA
-      DNC_READ_STRENGTHS_SIZE_M_IN => size_m_in_read_strengths,
-      DNC_READ_STRENGTHS_SIZE_R_IN => size_r_in_read_strengths,
-
-      DNC_READ_STRENGTHS_BETA_IN => beta_in_read_strengths,
-
-      DNC_READ_STRENGTHS_BETA_OUT => beta_out_read_strengths
+      DNC_READ_HEADS_K_OUT    => k_out_read_heads,
+      DNC_READ_HEADS_BETA_OUT => beta_out_read_heads,
+      DNC_READ_HEADS_F_OUT    => f_out_read_heads,
+      DNC_READ_HEADS_PI_OUT   => pi_out_read_heads
       );
 
-  -- FREE GATES
-  dnc_free_gates_test : if (ENABLE_DNC_FREE_GATES_TEST) generate
-    free_gates : dnc_free_gates
+  -- READ HEADS
+  dnc_read_heads_test : if (ENABLE_DNC_READ_HEADS_TEST) generate
+    read_heads : dnc_read_heads
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -264,115 +179,37 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_free_gates,
-        READY => ready_free_gates,
+        START => start_read_heads,
+        READY => ready_read_heads,
 
-        F_IN_ENABLE => f_in_enable_free_gates,
+        RHO_IN_I_ENABLE => rho_in_i_enable_read_heads,
+        RHO_IN_M_ENABLE => rho_in_m_enable_read_heads,
 
-        F_OUT_ENABLE => f_out_enable_free_gates,
+        RHO_OUT_I_ENABLE => rho_out_i_enable_read_heads,
+        RHO_OUT_M_ENABLE => rho_out_m_enable_read_heads,
 
-        -- DATA
-        SIZE_M_IN => size_m_in_free_gates,
-        SIZE_R_IN => size_r_in_free_gates,
+        K_OUT_I_ENABLE => k_out_i_enable_read_heads,
+        K_OUT_K_ENABLE => k_out_k_enable_read_heads,
 
-        F_IN => f_in_free_gates,
+        BETA_OUT_ENABLE => beta_out_enable_read_heads,
 
-        F_OUT => f_out_free_gates
-        );
-  end generate dnc_free_gates_test;
+        F_OUT_ENABLE => f_out_enable_read_heads,
 
-  -- READ KEYS
-  dnc_read_keys_test : if (ENABLE_DNC_READ_KEYS_TEST) generate
-    read_keys : dnc_read_keys
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_read_keys,
-        READY => ready_read_keys,
-
-        K_IN_I_ENABLE => k_in_i_enable_read_keys,
-        K_IN_K_ENABLE => k_in_k_enable_read_keys,
-
-        K_OUT_I_ENABLE => k_out_i_enable_read_keys,
-        K_OUT_K_ENABLE => k_out_k_enable_read_keys,
+        PI_OUT_I_ENABLE => pi_out_i_enable_read_heads,
+        PI_OUT_P_ENABLE => pi_out_p_enable_read_heads,
 
         -- DATA
-        SIZE_M_IN => size_m_in_read_keys,
-        SIZE_R_IN => size_r_in_read_keys,
-        SIZE_W_IN => size_w_in_read_keys,
+        SIZE_M_IN => size_m_in_read_heads,
+        SIZE_R_IN => size_r_in_read_heads,
+        SIZE_W_IN => size_w_in_read_heads,
 
-        K_IN => k_in_read_keys,
+        RHO_IN => rho_in_read_heads,
 
-        K_OUT => k_out_read_keys
+        K_OUT    => k_out_read_heads,
+        BETA_OUT => beta_out_read_heads,
+        F_OUT    => f_out_read_heads,
+        PI_OUT   => pi_out_read_heads
         );
-  end generate dnc_read_keys_test;
-
-  -- READ MODES
-  dnc_read_modes_test : if (ENABLE_DNC_READ_MODES_TEST) generate
-    read_modes : dnc_read_modes
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_read_modes,
-        READY => ready_read_modes,
-
-        PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
-        PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
-
-        PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
-        PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
-
-        -- DATA
-        SIZE_M_IN => size_m_in_read_modes,
-        SIZE_R_IN => size_r_in_read_modes,
-
-        PI_IN => pi_in_read_modes,
-
-        PI_OUT => pi_out_read_modes
-        );
-  end generate dnc_read_modes_test;
-
-  -- READ STRENGTHS
-  dnc_read_strengths_test : if (ENABLE_DNC_READ_STRENGTHS_TEST) generate
-    read_strengths : dnc_read_strengths
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_read_strengths,
-        READY => ready_read_strengths,
-
-        BETA_IN_ENABLE  => beta_in_enable_read_strengths,
-        BETA_OUT_ENABLE => beta_out_enable_read_strengths,
-
-        -- DATA
-        SIZE_M_IN => size_m_in_read_strengths,
-        SIZE_R_IN => size_r_in_read_strengths,
-
-        BETA_IN => beta_in_read_strengths,
-
-        BETA_OUT => beta_out_read_strengths
-        );
-  end generate dnc_read_strengths_test;
+  end generate dnc_read_heads_test;
 
 end dnc_read_heads_testbench_architecture;

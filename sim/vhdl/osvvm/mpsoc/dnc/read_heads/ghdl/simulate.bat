@@ -77,10 +77,7 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_d
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd

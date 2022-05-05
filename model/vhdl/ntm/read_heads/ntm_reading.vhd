@@ -500,6 +500,9 @@ begin
         when OUTPUT_R_OUT_K_STATE =>    -- STEP 4
 
           if (unsigned(index_k_r_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            R_OUT <= matrix_r_out_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
+
             -- Control Outputs
             R_OUT_K_ENABLE <= '1';
 

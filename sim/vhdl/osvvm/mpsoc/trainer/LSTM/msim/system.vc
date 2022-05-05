@@ -1,101 +1,101 @@
-../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
-../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
-../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
+../../../../../../../model/vhdl/pkg/ntm_arithmetic_pkg.vhd
+../../../../../../../model/vhdl/pkg/ntm_math_pkg.vhd
+../../../../../../../model/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 
-../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
 
-../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_adder.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_divider.vhd
 
-../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
-../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
 
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_convolution.vhd
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_cosine_similarity.vhd
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_multiplication.vhd
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_summation.vhd
-../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_module.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_dot_product.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_vector_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_vector_cosine_similarity.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_vector_multiplication.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_vector_summation.vhd
+../../../../../../../model/vhdl/math/algebra/vector/ntm_vector_module.vhd
 
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_transpose_vector_product.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
 
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
+../../../../../../../model/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
-../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
-../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_integration.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_softmax.vhd
 
-../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
-../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_softmax.vhd
 
-../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
-../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_logistic_function.vhd
-../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_oneplus_function.vhd
+../../../../../../../model/vhdl/math/function/scalar/ntm_scalar_logistic_function.vhd
+../../../../../../../model/vhdl/math/function/scalar/ntm_scalar_oneplus_function.vhd
 
-../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_logistic_function.vhd
-../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_oneplus_function.vhd
+../../../../../../../model/vhdl/math/function/vector/ntm_vector_logistic_function.vhd
+../../../../../../../model/vhdl/math/function/vector/ntm_vector_oneplus_function.vhd
 
-../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_logistic_function.vhd
-../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
+../../../../../../../model/vhdl/math/function/matrix/ntm_matrix_logistic_function.vhd
+../../../../../../../model/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
 
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_cosh_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_exponentiator_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_logarithm_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_power_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_sinh_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_sqrt_function.vhd
-../../../../../../../rtl/vhdl/math/series/scalar/ntm_scalar_tanh_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_cosh_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_exponentiator_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_logarithm_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_power_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_sinh_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_sqrt_function.vhd
+../../../../../../../model/vhdl/math/series/scalar/ntm_scalar_tanh_function.vhd
 
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_cosh_function.vhd
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_exponentiator_function.vhd
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_logarithm_function.vhd
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_sinh_function.vhd
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_sqrt_function.vhd
-../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_tanh_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_cosh_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_exponentiator_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_logarithm_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_power_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_sinh_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_sqrt_function.vhd
+../../../../../../../model/vhdl/math/series/vector/ntm_vector_tanh_function.vhd
 
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_cosh_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_exponentiator_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_logarithm_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_power_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_sinh_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_sqrt_function.vhd
-../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_tanh_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_cosh_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_exponentiator_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_logarithm_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_power_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_sinh_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_sqrt_function.vhd
+../../../../../../../model/vhdl/math/series/matrix/ntm_matrix_tanh_function.vhd
 
-../../../../../../../rtl/vhdl/trainer/LSTM/ntm_activation_trainer.vhd
-../../../../../../../rtl/vhdl/trainer/LSTM/ntm_forget_trainer.vhd
-../../../../../../../rtl/vhdl/trainer/LSTM/ntm_input_trainer.vhd
-../../../../../../../rtl/vhdl/trainer/LSTM/ntm_output_trainer.vhd
+../../../../../../../model/vhdl/trainer/LSTM/ntm_activation_trainer.vhd
+../../../../../../../model/vhdl/trainer/LSTM/ntm_forget_trainer.vhd
+../../../../../../../model/vhdl/trainer/LSTM/ntm_input_trainer.vhd
+../../../../../../../model/vhdl/trainer/LSTM/ntm_output_trainer.vhd
 
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
+../../../../../../../model/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
 ../../../../../../../bench/vhdl/tests/trainer/LSTM/ntm_trainer_lstm_pkg.vhd
 ../../../../../../../bench/vhdl/tests/trainer/LSTM/ntm_trainer_lstm_stimulus.vhd

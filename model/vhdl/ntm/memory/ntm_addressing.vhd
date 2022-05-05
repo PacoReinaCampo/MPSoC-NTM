@@ -1063,6 +1063,9 @@ begin
         when OUTPUT_W_OUT_K_STATE =>    -- STEP 4
 
           if (unsigned(index_k_w_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            W_OUT <= matrix_w_out_int(to_integer(unsigned(index_i_w_out_loop)), to_integer(unsigned(index_k_w_out_loop)));
+
             -- Control Outputs
             W_OUT_J_ENABLE <= '1';
 

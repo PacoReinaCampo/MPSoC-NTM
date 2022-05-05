@@ -76,6 +76,7 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
+
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_pkg.vhd

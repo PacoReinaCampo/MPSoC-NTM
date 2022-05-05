@@ -51,6 +51,7 @@
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_cosh_function.vhd
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_exponentiator_function.vhd
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_logarithm_function.vhd
+../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_power_function.vhd
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_sinh_function.vhd
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_sqrt_function.vhd
 ../../../../../../../rtl/vhdl/math/series/vector/ntm_vector_tanh_function.vhd
