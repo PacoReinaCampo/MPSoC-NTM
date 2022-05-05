@@ -173,48 +173,68 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      I_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      I_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      I_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      I_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      I_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      I_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -222,7 +242,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -376,48 +396,68 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      I_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      I_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      I_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      I_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      I_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      I_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -425,7 +465,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -579,46 +619,62 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
+      RHO_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
       RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
       RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
+      RHO_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
       RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
       RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      O_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      O_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      O_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      O_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      O_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      O_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -626,7 +682,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -779,46 +835,62 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHS_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHS_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHS_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHS_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHS_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHS_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      F_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      F_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      F_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      F_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      F_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      F_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -826,7 +898,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

@@ -185,48 +185,68 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      I_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      I_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      I_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      I_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      I_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      I_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -234,7 +254,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -388,48 +408,68 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      I_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      I_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      I_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      I_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      I_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      I_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -437,7 +477,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -591,46 +631,62 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
+      RHO_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
       RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
       RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
+      RHO_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
       RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
       RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      O_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      A_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      O_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      A_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      A_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      O_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      O_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      O_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      O_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -638,7 +694,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -791,46 +847,62 @@ package ntm_lstm_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to X-1
+      X_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to X-1
+      X_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
+      R_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      R_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHS_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHS_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHS_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHS_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHS_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHS_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
-      XI_IN_ENABLE : in std_logic;      -- for s in 0 to S-1
+      XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
+      XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
 
-      XI_OUT_ENABLE : out std_logic;    -- for s in 0 to S-1
+      XI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      XI_OUT_S_ENABLE : out std_logic;  -- for s in 0 to S-1
 
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      H_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      H_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      H_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
-      F_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-      S_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      F_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      F_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-      F_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
-      S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      F_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      F_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      S_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      S_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      S_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      S_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       D_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-      D_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+      D_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      D_OUT_M_ENABLE : out std_logic;   -- for s in 0 to M-1
 
       U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
@@ -838,7 +910,7 @@ package ntm_lstm_controller_pkg is
       V_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       V_OUT_S_ENABLE : out std_logic;   -- for s in 0 to S-1
 
-      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+      B_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- DATA
       SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1779,17 +1851,10 @@ package ntm_lstm_controller_pkg is
   function function_ntm_lstm_output_w_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_x_input : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -1797,18 +1862,12 @@ package ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -1816,18 +1875,9 @@ package ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -1835,18 +1885,11 @@ package ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -1854,16 +1897,10 @@ package ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer;
 
@@ -1873,17 +1910,8 @@ package ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer;
 
     vector_a_input : matrix_buffer;
@@ -1893,8 +1921,6 @@ package ntm_lstm_controller_pkg is
   function function_ntm_lstm_output_trainer (
     SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -5716,17 +5742,10 @@ package body ntm_lstm_controller_pkg is
   function function_ntm_lstm_output_w_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_x_input : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -5812,18 +5831,12 @@ package body ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_k_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -5911,18 +5924,9 @@ package body ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_u_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -6008,18 +6012,11 @@ package body ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_v_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_xi_input : matrix_buffer;
+    vector_h_input  : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -6105,16 +6102,10 @@ package body ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_d_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
     matrix_rho_input : tensor_buffer;
     vector_h_input   : matrix_buffer;
 
@@ -6204,18 +6195,9 @@ package body ntm_lstm_controller_pkg is
 
   function function_ntm_lstm_output_b_trainer (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_S_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_M_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input   : matrix_buffer;
-    matrix_r_input   : tensor_buffer;
-    vector_xi_input  : matrix_buffer;
-    matrix_rho_input : tensor_buffer;
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -6287,8 +6269,6 @@ package body ntm_lstm_controller_pkg is
   function function_ntm_lstm_output_trainer (
     SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -6322,17 +6302,10 @@ package body ntm_lstm_controller_pkg is
     matrix_w_output := function_ntm_lstm_output_w_trainer (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input,
+      vector_x_input => vector_x_input,
+      vector_h_input => vector_h_input,
 
       vector_a_input => vector_a_input,
       vector_o_input => vector_o_input
@@ -6340,18 +6313,12 @@ package body ntm_lstm_controller_pkg is
 
     tensor_k_output := function_ntm_lstm_output_k_trainer (
       SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input,
 
       vector_a_input => vector_a_input,
       vector_o_input => vector_o_input
@@ -6359,16 +6326,10 @@ package body ntm_lstm_controller_pkg is
 
     tensor_d_output := function_ntm_lstm_output_d_trainer (
       SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
       SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
       SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
       matrix_rho_input => matrix_rho_input,
       vector_h_input   => vector_h_input,
 
@@ -6378,18 +6339,11 @@ package body ntm_lstm_controller_pkg is
 
     matrix_v_output := function_ntm_lstm_output_v_trainer (
       SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
       SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input,
+      vector_xi_input => vector_xi_input,
+      vector_h_input  => vector_h_input,
 
       vector_a_input => vector_a_input,
       vector_o_input => vector_o_input
@@ -6397,18 +6351,9 @@ package body ntm_lstm_controller_pkg is
 
     matrix_u_output := function_ntm_lstm_output_u_trainer (
       SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input,
+      vector_h_input => vector_h_input,
 
       vector_a_input => vector_a_input,
       vector_o_input => vector_o_input
@@ -6416,18 +6361,9 @@ package body ntm_lstm_controller_pkg is
 
     vector_b_output := function_ntm_lstm_output_b_trainer (
       SIZE_T_IN => SIZE_T_IN,
-      SIZE_X_IN => SIZE_X_IN,
-      SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
-      SIZE_R_IN => SIZE_R_IN,
-      SIZE_S_IN => SIZE_S_IN,
-      SIZE_M_IN => SIZE_M_IN,
 
-      vector_x_input   => vector_x_input,
-      matrix_r_input   => matrix_r_input,
-      vector_xi_input  => vector_xi_input,
-      matrix_rho_input => matrix_rho_input,
-      vector_h_input   => vector_h_input,
+      vector_h_input => vector_h_input,
 
       vector_a_input => vector_a_input,
       vector_o_input => vector_o_input

@@ -44,9 +44,9 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-use work.ntm_fnn_controller_pkg.all;
+use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_trainer is
+entity ntm_output_trainer is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -60,10 +60,10 @@ entity ntm_trainer is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_T_ENABLE : in std_logic;       -- for t in 0 to T-1
+    X_IN_T_ENABLE : in std_logic;       -- for t in 0 to X-1
     X_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-    X_OUT_T_ENABLE : out std_logic;     -- for t in 0 to T-1
+    X_OUT_T_ENABLE : out std_logic;     -- for t in 0 to X-1
     X_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
 
     R_IN_T_ENABLE : in std_logic;       -- for t in 0 to T-1
@@ -93,6 +93,18 @@ entity ntm_trainer is
 
     H_OUT_T_ENABLE : out std_logic;     -- for t in 0 to T-1
     H_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+
+    A_IN_T_ENABLE : in std_logic;       -- for t in 0 to T-1
+    A_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+
+    A_OUT_T_ENABLE : out std_logic;     -- for t in 0 to T-1
+    A_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+
+    O_IN_T_ENABLE : in std_logic;       -- for t in 0 to T-1
+    O_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+
+    O_OUT_T_ENABLE : out std_logic;     -- for t in 0 to T-1
+    O_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
@@ -137,7 +149,7 @@ entity ntm_trainer is
     );
 end entity;
 
-architecture ntm_trainer_architecture of ntm_trainer is
+architecture ntm_output_trainer_architecture of ntm_output_trainer is
 
   -----------------------------------------------------------------------
   -- Constants
@@ -190,6 +202,22 @@ architecture ntm_trainer_architecture of ntm_trainer is
     INPUT_H_IN_L_STATE,                 -- STEP 2
     CLEAN_H_IN_T_STATE,                 -- STEP 3
     CLEAN_H_IN_L_STATE                  -- STEP 4
+    );
+
+  type controller_a_in_fsm is (
+    STARTER_A_IN_STATE,                 -- STEP 0
+    INPUT_A_IN_T_STATE,                 -- STEP 1
+    INPUT_A_IN_L_STATE,                 -- STEP 2
+    CLEAN_A_IN_T_STATE,                 -- STEP 3
+    CLEAN_A_IN_L_STATE                  -- STEP 4
+    );
+
+  type controller_o_in_fsm is (
+    STARTER_O_IN_STATE,                 -- STEP 0
+    INPUT_O_IN_T_STATE,                 -- STEP 1
+    INPUT_O_IN_L_STATE,                 -- STEP 2
+    CLEAN_O_IN_T_STATE,                 -- STEP 3
+    CLEAN_O_IN_L_STATE                  -- STEP 4
     );
 
   type controller_k_out_fsm is (
@@ -255,6 +283,9 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal controller_xi_in_fsm_int  : controller_xi_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
+  signal controller_a_in_fsm_int   : controller_a_in_fsm;
+  signal controller_o_in_fsm_int   : controller_o_in_fsm;
+
   signal controller_w_out_fsm_int   : controller_w_out_fsm;
   signal controller_k_out_fsm_int   : controller_k_out_fsm;
   signal controller_d_out_fsm_int   : controller_d_out_fsm;
@@ -268,6 +299,9 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal tensor_rho_in_int : tensor_buffer;
   signal matrix_xi_in_int  : matrix_buffer;
   signal matrix_h_in_int   : matrix_buffer;
+
+  signal matrix_a_in_int   : matrix_buffer;
+  signal matrix_o_in_int   : matrix_buffer;
 
   signal matrix_w_out_int : matrix_buffer;
   signal tensor_k_out_int : tensor_buffer;
@@ -294,6 +328,12 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal index_t_h_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_l_h_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal index_t_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_t_o_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_o_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_l_w_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_x_w_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -318,6 +358,9 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal data_rho_in_enable_int : std_logic;
   signal data_xi_in_enable_int  : std_logic;
   signal data_h_in_enable_int   : std_logic;
+
+  signal data_a_in_enable_int : std_logic;
+  signal data_o_in_enable_int : std_logic;
 
 begin
 
@@ -991,7 +1034,238 @@ begin
     end if;
   end process;
 
-  -- dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+  -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
+  a_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      A_OUT_T_ENABLE <= '0';
+      A_OUT_X_ENABLE <= '0';
+
+      -- Control Internal
+      index_t_a_in_loop <= ZERO_CONTROL;
+      index_l_a_in_loop <= ZERO_CONTROL;
+
+      data_a_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_a_in_fsm_int is
+        when STARTER_A_IN_STATE =>      -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            A_OUT_T_ENABLE <= '1';
+            A_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_a_in_loop <= ZERO_CONTROL;
+            index_l_a_in_loop <= ZERO_CONTROL;
+
+            data_a_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_a_in_fsm_int <= INPUT_A_IN_T_STATE;
+          else
+            -- Control Outputs
+            A_OUT_T_ENABLE <= '0';
+            A_OUT_X_ENABLE <= '0';
+          end if;
+
+        when INPUT_A_IN_T_STATE =>      -- STEP 1
+
+          if ((A_IN_T_ENABLE = '1') and (A_IN_X_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_a_in_int(to_integer(unsigned(index_t_a_in_loop)), to_integer(unsigned(index_l_a_in_loop))) <= A_IN;
+
+            -- FSM Control
+            controller_a_in_fsm_int <= CLEAN_A_IN_X_STATE;
+          end if;
+
+          -- Control Outputs
+          A_OUT_T_ENABLE <= '0';
+          A_OUT_X_ENABLE <= '0';
+
+        when INPUT_A_IN_X_STATE =>      -- STEP 2
+
+          if (A_IN_X_ENABLE = '1') then
+            -- Data Inputs
+            matrix_a_in_int(to_integer(unsigned(index_t_a_in_loop)), to_integer(unsigned(index_l_a_in_loop))) <= A_IN;
+
+            -- FSM Control
+            if (unsigned(index_l_a_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              controller_a_in_fsm_int <= CLEAN_A_IN_T_STATE;
+            else
+              controller_a_in_fsm_int <= CLEAN_A_IN_X_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          A_OUT_X_ENABLE <= '0';
+
+        when CLEAN_A_IN_T_STATE =>      -- STEP 3
+
+          if ((unsigned(index_t_a_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_a_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            A_OUT_T_ENABLE <= '1';
+            A_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_a_in_loop <= ZERO_CONTROL;
+            index_l_a_in_loop <= ZERO_CONTROL;
+
+            data_a_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_a_in_fsm_int <= STARTER_A_IN_STATE;
+          elsif ((unsigned(index_t_a_in_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_a_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            A_OUT_T_ENABLE <= '1';
+            A_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_a_in_loop <= std_logic_vector(unsigned(index_t_a_in_loop) + unsigned(ONE_CONTROL));
+            index_l_a_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_a_in_fsm_int <= INPUT_A_IN_T_STATE;
+          end if;
+
+        when CLEAN_A_IN_X_STATE =>      -- STEP 4
+
+          if (unsigned(index_l_a_in_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            A_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_l_a_in_loop <= std_logic_vector(unsigned(index_l_a_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_a_in_fsm_int <= INPUT_A_IN_X_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_a_in_fsm_int <= STARTER_A_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  o_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      O_OUT_T_ENABLE <= '0';
+      O_OUT_X_ENABLE <= '0';
+
+      -- Control Internal
+      index_t_o_in_loop <= ZERO_CONTROL;
+      index_l_o_in_loop <= ZERO_CONTROL;
+
+      data_o_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_o_in_fsm_int is
+        when STARTER_O_IN_STATE =>      -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            O_OUT_T_ENABLE <= '1';
+            O_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_o_in_loop <= ZERO_CONTROL;
+            index_l_o_in_loop <= ZERO_CONTROL;
+
+            data_o_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_o_in_fsm_int <= INPUT_O_IN_T_STATE;
+          else
+            -- Control Outputs
+            O_OUT_T_ENABLE <= '0';
+            O_OUT_X_ENABLE <= '0';
+          end if;
+
+        when INPUT_O_IN_T_STATE =>      -- STEP 1
+
+          if ((O_IN_T_ENABLE = '1') and (O_IN_X_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_o_in_int(to_integer(unsigned(index_t_o_in_loop)), to_integer(unsigned(index_l_o_in_loop))) <= O_IN;
+
+            -- FSM Control
+            controller_o_in_fsm_int <= CLEAN_O_IN_X_STATE;
+          end if;
+
+          -- Control Outputs
+          O_OUT_T_ENABLE <= '0';
+          O_OUT_X_ENABLE <= '0';
+
+        when INPUT_O_IN_X_STATE =>      -- STEP 2
+
+          if (O_IN_X_ENABLE = '1') then
+            -- Data Inputs
+            matrix_o_in_int(to_integer(unsigned(index_t_o_in_loop)), to_integer(unsigned(index_l_o_in_loop))) <= O_IN;
+
+            -- FSM Control
+            if (unsigned(index_l_o_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              controller_o_in_fsm_int <= CLEAN_O_IN_T_STATE;
+            else
+              controller_o_in_fsm_int <= CLEAN_O_IN_X_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          O_OUT_X_ENABLE <= '0';
+
+        when CLEAN_O_IN_T_STATE =>      -- STEP 3
+
+          if ((unsigned(index_t_o_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_o_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            O_OUT_T_ENABLE <= '1';
+            O_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_o_in_loop <= ZERO_CONTROL;
+            index_l_o_in_loop <= ZERO_CONTROL;
+
+            data_o_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_o_in_fsm_int <= STARTER_O_IN_STATE;
+          elsif ((unsigned(index_t_o_in_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_o_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            O_OUT_T_ENABLE <= '1';
+            O_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_t_o_in_loop <= std_logic_vector(unsigned(index_t_o_in_loop) + unsigned(ONE_CONTROL));
+            index_l_o_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_o_in_fsm_int <= INPUT_O_IN_T_STATE;
+          end if;
+
+        when CLEAN_O_IN_X_STATE =>      -- STEP 4
+
+          if (unsigned(index_l_o_in_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            O_OUT_X_ENABLE <= '1';
+
+            -- Control Internal
+            index_l_o_in_loop <= std_logic_vector(unsigned(index_l_o_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_o_in_fsm_int <= INPUT_O_IN_X_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_o_in_fsm_int <= STARTER_O_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- dW(l;x) = summation(do(t;l) · x(t;x))[t in 0 to T]
   w_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1012,15 +1286,18 @@ begin
 
       case controller_w_out_fsm_int is
         when STARTER_W_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_x_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Data Internal
-            matrix_w_out_int <= function_ntm_fnn_w_trainer (
+            matrix_w_out_int <= function_ntm_lstm_output_w_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_X_IN => SIZE_X_IN,
               SIZE_L_IN => SIZE_L_IN,
 
               vector_x_input => matrix_x_in_int,
-              vector_h_input => matrix_h_in_int
+              vector_h_input => matrix_h_in_int,
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
@@ -1105,7 +1382,7 @@ begin
     end if;
   end process;
 
-  -- dK(l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+  -- dK(l;i;k) = summation(do(t;l) · r(t;i;k))[t in 0 to T-1]
   k_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1128,16 +1405,19 @@ begin
 
       case controller_k_out_fsm_int is
         when STARTER_K_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_r_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Data Internal
-            tensor_k_out_int <= function_ntm_fnn_k_trainer (
+            tensor_k_out_int <= function_ntm_lstm_output_k_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_W_IN => SIZE_W_IN,
               SIZE_L_IN => SIZE_L_IN,
               SIZE_R_IN => SIZE_R_IN,
 
               matrix_r_input => tensor_r_in_int,
-              vector_h_input => matrix_h_in_int
+              vector_h_input => matrix_h_in_int,
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
@@ -1265,7 +1545,7 @@ begin
     end if;
   end process;
 
-  -- dD(l;i;m) = summation(d*(t;l) · rho(t;i;m))[t in 0 to T-1]
+  -- dD(l;i;m) = summation(do(t;l) · rho(t;i;m))[t in 0 to T-1]
   d_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1288,16 +1568,19 @@ begin
 
       case controller_d_out_fsm_int is
         when STARTER_D_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_rho_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Data Internal
-            tensor_d_out_int <= function_ntm_fnn_d_trainer (
+            tensor_d_out_int <= function_ntm_lstm_output_d_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_L_IN => SIZE_L_IN,
               SIZE_R_IN => SIZE_R_IN,
               SIZE_M_IN => SIZE_M_IN,
 
               matrix_rho_input => tensor_rho_in_int,
-              vector_h_input => matrix_h_in_int
+              vector_h_input => matrix_h_in_int,
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
@@ -1425,7 +1708,7 @@ begin
     end if;
   end process;
 
-  -- dU(l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+  -- dU(l;m) = summation(do(t+1;l) · h(t;m))[t in 0 to T-1]
   u_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1446,13 +1729,16 @@ begin
 
       case controller_u_out_fsm_int is
         when STARTER_U_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Data Internal
-            matrix_u_out_int <= function_ntm_fnn_u_trainer (
+            matrix_u_out_int <= function_ntm_lstm_output_u_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_L_IN => SIZE_L_IN,
 
-              vector_h_input => matrix_h_in_int
+              vector_h_input => matrix_h_in_int,
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
@@ -1541,7 +1827,7 @@ begin
     end if;
   end process;
 
-  -- dV(l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
+  -- dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T]
   v_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1562,15 +1848,18 @@ begin
 
       case controller_v_out_fsm_int is
         when STARTER_V_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_xi_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Data Internal
-            matrix_v_out_int <= function_ntm_fnn_v_trainer (
+            matrix_v_out_int <= function_ntm_lstm_output_v_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_L_IN => SIZE_L_IN,
               SIZE_S_IN => SIZE_S_IN,
 
               vector_xi_input => matrix_xi_in_int,
               vector_h_input  => matrix_h_in_int
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
@@ -1582,6 +1871,7 @@ begin
           end if;
 
         when CLEAN_V_OUT_L_STATE =>     -- STEP 1
+
           -- Control Outputs
           V_OUT_L_ENABLE <= '0';
           V_OUT_S_ENABLE <= '0';
@@ -1658,7 +1948,7 @@ begin
     end if;
   end process;
 
-  -- db(l) = summation(d*(t;l))[t in 0 to T]
+  -- db(l) = summation(do(t;l))[t in 0 to T]
   b_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1677,13 +1967,16 @@ begin
 
       case controller_b_out_fsm_int is
         when STARTER_B_OUT_STATE =>     -- STEP 0
-          if (data_h_in_enable_int = '1') then
+          if (data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_o_in_enable_int = '1') then
             -- Control Internal
-            vector_b_out_int <= function_ntm_fnn_b_trainer (
+            vector_b_out_int <= function_ntm_lstm_output_b_trainer (
               SIZE_T_IN => SIZE_T_IN,
               SIZE_L_IN => SIZE_L_IN,
 
-              vector_h_input => matrix_h_in_int
+              vector_h_input => matrix_h_in_int,
+
+              vector_a_input => matrix_a_in_int,
+              vector_o_input => matrix_o_in_int
               );
 
             -- Control Internal
