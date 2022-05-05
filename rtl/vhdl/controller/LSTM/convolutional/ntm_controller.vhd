@@ -306,87 +306,6 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal a_out_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ACTIVATION TRAINER
-  -- CONTROL
-  signal start_activation_trainer : std_logic;
-  signal ready_activation_trainer : std_logic;
-
-  signal x_in_enable_activation_trainer : std_logic;
-
-  signal x_out_enable_activation_trainer : std_logic;
-
-  signal r_in_i_enable_activation_trainer : std_logic;
-  signal r_in_k_enable_activation_trainer : std_logic;
-
-  signal r_out_i_enable_activation_trainer : std_logic;
-  signal r_out_k_enable_activation_trainer : std_logic;
-
-  signal rho_in_i_enable_activation_trainer : std_logic;
-  signal rho_in_m_enable_activation_trainer : std_logic;
-
-  signal rho_out_i_enable_activation_trainer : std_logic;
-  signal rho_out_m_enable_activation_trainer : std_logic;
-
-  signal xi_in_enable_activation_trainer : std_logic;
-
-  signal xi_out_enable_activation_trainer : std_logic;
-
-  signal h_in_enable_activation_trainer : std_logic;
-
-  signal h_out_enable_activation_trainer : std_logic;
-
-  signal a_in_enable_activation_trainer : std_logic;
-  signal i_in_enable_activation_trainer : std_logic;
-  signal s_in_enable_activation_trainer : std_logic;
-
-  signal a_out_enable_activation_trainer : std_logic;
-  signal i_out_enable_activation_trainer : std_logic;
-  signal s_out_enable_activation_trainer : std_logic;
-
-  signal w_out_l_enable_activation_trainer : std_logic;
-  signal w_out_x_enable_activation_trainer : std_logic;
-
-  signal k_out_i_enable_activation_trainer : std_logic;
-  signal k_out_l_enable_activation_trainer : std_logic;
-  signal k_out_k_enable_activation_trainer : std_logic;
-
-  signal d_out_i_enable_activation_trainer : std_logic;
-  signal d_out_l_enable_activation_trainer : std_logic;
-  signal d_out_m_enable_activation_trainer : std_logic;
-
-  signal u_out_l_enable_activation_trainer : std_logic;
-  signal u_out_p_enable_activation_trainer : std_logic;
-
-  signal v_out_l_enable_activation_trainer : std_logic;
-  signal v_out_s_enable_activation_trainer : std_logic;
-
-  signal b_out_enable_activation_trainer : std_logic;
-
-  -- DATA
-  signal size_x_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_activation_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal x_in_activation_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_activation_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_activation_trainer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_activation_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal a_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal i_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- INTPUT GATE VECTOR
   -- CONTROL
   signal start_input_gate_vector : std_logic;
@@ -482,87 +401,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- INPUT TRAINER
-  -- CONTROL
-  signal start_input_trainer : std_logic;
-  signal ready_input_trainer : std_logic;
-
-  signal x_in_enable_input_trainer : std_logic;
-
-  signal x_out_enable_input_trainer : std_logic;
-
-  signal r_in_i_enable_input_trainer : std_logic;
-  signal r_in_k_enable_input_trainer : std_logic;
-
-  signal r_out_i_enable_input_trainer : std_logic;
-  signal r_out_k_enable_input_trainer : std_logic;
-
-  signal rho_in_i_enable_input_trainer : std_logic;
-  signal rho_in_m_enable_input_trainer : std_logic;
-
-  signal rho_out_i_enable_input_trainer : std_logic;
-  signal rho_out_m_enable_input_trainer : std_logic;
-
-  signal xi_in_enable_input_trainer : std_logic;
-
-  signal xi_out_enable_input_trainer : std_logic;
-
-  signal h_in_enable_input_trainer : std_logic;
-
-  signal h_out_enable_input_trainer : std_logic;
-
-  signal a_in_enable_input_trainer : std_logic;
-  signal i_in_enable_input_trainer : std_logic;
-  signal s_in_enable_input_trainer : std_logic;
-
-  signal a_out_enable_input_trainer : std_logic;
-  signal i_out_enable_input_trainer : std_logic;
-  signal s_out_enable_input_trainer : std_logic;
-
-  signal w_out_l_enable_input_trainer : std_logic;
-  signal w_out_x_enable_input_trainer : std_logic;
-
-  signal k_out_i_enable_input_trainer : std_logic;
-  signal k_out_l_enable_input_trainer : std_logic;
-  signal k_out_k_enable_input_trainer : std_logic;
-
-  signal d_out_i_enable_input_trainer : std_logic;
-  signal d_out_l_enable_input_trainer : std_logic;
-  signal d_out_m_enable_input_trainer : std_logic;
-
-  signal v_out_l_enable_input_trainer : std_logic;
-  signal v_out_s_enable_input_trainer : std_logic;
-
-  signal u_out_l_enable_input_trainer : std_logic;
-  signal u_out_p_enable_input_trainer : std_logic;
-
-  signal b_out_enable_input_trainer : std_logic;
-
-  -- DATA
-  signal size_x_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_input_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal x_in_input_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_input_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_input_trainer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_input_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal a_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal i_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- OUTPUT GATE VECTOR
   -- CONTROL
@@ -660,84 +498,6 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- OUTPUT TRAINER
-  -- CONTROL
-  signal start_output_trainer : std_logic;
-  signal ready_output_trainer : std_logic;
-
-  signal x_in_enable_output_trainer : std_logic;
-
-  signal x_out_enable_output_trainer : std_logic;
-
-  signal r_in_i_enable_output_trainer : std_logic;
-  signal r_in_k_enable_output_trainer : std_logic;
-
-  signal r_out_i_enable_output_trainer : std_logic;
-  signal r_out_k_enable_output_trainer : std_logic;
-
-  signal rho_in_i_enable_output_trainer : std_logic;
-  signal rho_in_m_enable_output_trainer : std_logic;
-
-  signal rho_out_i_enable_output_trainer : std_logic;
-  signal rho_out_m_enable_output_trainer : std_logic;
-
-  signal xi_in_enable_output_trainer : std_logic;
-
-  signal xi_out_enable_output_trainer : std_logic;
-
-  signal h_in_enable_output_trainer : std_logic;
-
-  signal h_out_enable_output_trainer : std_logic;
-
-  signal a_in_enable_output_trainer : std_logic;
-  signal o_in_enable_output_trainer : std_logic;
-
-  signal a_out_enable_output_trainer : std_logic;
-  signal o_out_enable_output_trainer : std_logic;
-
-  signal w_out_l_enable_output_trainer : std_logic;
-  signal w_out_x_enable_output_trainer : std_logic;
-
-  signal k_out_i_enable_output_trainer : std_logic;
-  signal k_out_l_enable_output_trainer : std_logic;
-  signal k_out_k_enable_output_trainer : std_logic;
-
-  signal d_out_i_enable_output_trainer : std_logic;
-  signal d_out_l_enable_output_trainer : std_logic;
-  signal d_out_m_enable_output_trainer : std_logic;
-
-  signal u_out_l_enable_output_trainer : std_logic;
-  signal u_out_p_enable_output_trainer : std_logic;
-
-  signal v_out_l_enable_output_trainer : std_logic;
-  signal v_out_s_enable_output_trainer : std_logic;
-
-  signal b_out_enable_output_trainer : std_logic;
-
-  -- DATA
-  signal size_x_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_output_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal x_in_output_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_output_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_output_trainer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_output_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal a_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal o_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- FORGET GATE VECTOR
   -- CONTROL
   signal start_forget_gate_vector : std_logic;
@@ -833,84 +593,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- FORGET TRAINER
-  -- CONTROL
-  signal start_forget_trainer : std_logic;
-  signal ready_forget_trainer : std_logic;
-
-  signal x_in_enable_forget_trainer : std_logic;
-
-  signal x_out_enable_forget_trainer : std_logic;
-
-  signal r_in_i_enable_forget_trainer : std_logic;
-  signal r_in_k_enable_forget_trainer : std_logic;
-
-  signal r_out_i_enable_forget_trainer : std_logic;
-  signal r_out_k_enable_forget_trainer : std_logic;
-
-  signal rho_in_i_enable_forget_trainer : std_logic;
-  signal rho_in_m_enable_forget_trainer : std_logic;
-
-  signal rho_out_i_enable_forget_trainer : std_logic;
-  signal rho_out_m_enable_forget_trainer : std_logic;
-
-  signal xi_in_enable_forget_trainer : std_logic;
-
-  signal xi_out_enable_forget_trainer : std_logic;
-
-  signal h_in_enable_forget_trainer : std_logic;
-
-  signal h_out_enable_forget_trainer : std_logic;
-
-  signal f_in_enable_forget_trainer : std_logic;
-  signal s_in_enable_forget_trainer : std_logic;
-
-  signal f_out_enable_forget_trainer : std_logic;
-  signal s_out_enable_forget_trainer : std_logic;
-
-  signal w_out_l_enable_forget_trainer : std_logic;
-  signal w_out_x_enable_forget_trainer : std_logic;
-
-  signal k_out_i_enable_forget_trainer : std_logic;
-  signal k_out_l_enable_forget_trainer : std_logic;
-  signal k_out_k_enable_forget_trainer : std_logic;
-
-  signal d_out_i_enable_forget_trainer : std_logic;
-  signal d_out_l_enable_forget_trainer : std_logic;
-  signal d_out_m_enable_forget_trainer : std_logic;
-
-  signal u_out_l_enable_forget_trainer : std_logic;
-  signal u_out_p_enable_forget_trainer : std_logic;
-
-  signal v_out_l_enable_forget_trainer : std_logic;
-  signal v_out_s_enable_forget_trainer : std_logic;
-
-  signal b_out_enable_forget_trainer : std_logic;
-
-  -- DATA
-  signal size_x_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_forget_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal x_in_forget_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_forget_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_forget_trainer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_forget_trainer   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal f_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- STATE GATE VECTOR
   -- CONTROL
@@ -1120,18 +802,6 @@ begin
 
   b_in_enable_activation_gate_vector <= B_IN_ENABLE;
 
-  -- ACTIVATION TRAINER
-  x_in_enable_activation_trainer <= X_IN_ENABLE;
-
-  r_in_i_enable_activation_trainer <= R_IN_I_ENABLE;
-  r_in_k_enable_activation_trainer <= R_IN_K_ENABLE;
-
-  h_in_enable_activation_trainer <= H_IN_ENABLE;
-
-  a_in_enable_activation_trainer <= a_out_enable_activation_gate_vector;
-  i_in_enable_activation_trainer <= i_out_enable_input_gate_vector;
-  s_in_enable_activation_trainer <= s_out_enable_state_gate_vector;
-
   -- INTPUT GATE VECTOR
   w_in_l_enable_input_gate_vector <= W_IN_L_ENABLE;
   w_in_x_enable_input_gate_vector <= W_IN_X_ENABLE;
@@ -1148,18 +818,6 @@ begin
   h_in_enable_input_gate_vector   <= H_IN_ENABLE;
 
   b_in_enable_input_gate_vector <= B_IN_ENABLE;
-
-  -- INPUT TRAINER
-  x_in_enable_input_trainer <= X_IN_ENABLE;
-
-  r_in_i_enable_input_trainer <= R_IN_I_ENABLE;
-  r_in_k_enable_input_trainer <= R_IN_K_ENABLE;
-
-  h_in_enable_input_trainer <= H_IN_ENABLE;
-
-  a_in_enable_input_trainer <= a_out_enable_activation_gate_vector;
-  i_in_enable_input_trainer <= i_out_enable_input_gate_vector;
-  s_in_enable_input_trainer <= s_out_enable_state_gate_vector;
 
   -- OUTPUT GATE VECTOR
   w_in_l_enable_output_gate_vector <= W_IN_L_ENABLE;
@@ -1178,17 +836,6 @@ begin
 
   b_in_enable_output_gate_vector <= B_IN_ENABLE;
 
-  -- OUTPUT TRAINER
-  x_in_enable_output_trainer <= X_IN_ENABLE;
-
-  r_in_i_enable_input_trainer <= R_IN_I_ENABLE;
-  r_in_k_enable_input_trainer <= R_IN_K_ENABLE;
-
-  h_in_enable_output_trainer <= H_IN_ENABLE;
-
-  a_in_enable_output_trainer <= a_out_enable_activation_gate_vector;
-  o_in_enable_output_trainer <= o_out_enable_output_gate_vector;
-
   -- FORGET GATE VECTOR
   w_in_l_enable_forget_gate_vector <= W_IN_L_ENABLE;
   w_in_x_enable_forget_gate_vector <= W_IN_X_ENABLE;
@@ -1205,17 +852,6 @@ begin
   h_in_enable_forget_gate_vector   <= H_IN_ENABLE;
 
   b_in_enable_forget_gate_vector <= B_IN_ENABLE;
-
-  -- FORGET TRAINER
-  x_in_enable_forget_trainer <= X_IN_ENABLE;
-
-  r_in_i_enable_forget_trainer <= R_IN_I_ENABLE;
-  r_in_k_enable_forget_trainer <= R_IN_K_ENABLE;
-
-  h_in_enable_forget_trainer <= H_IN_ENABLE;
-
-  f_in_enable_forget_trainer <= f_out_enable_forget_gate_vector;
-  s_in_enable_forget_trainer <= s_out_enable_state_gate_vector;
 
   -- STATE GATE VECTOR
   s_in_enable_state_gate_vector <= s_out_enable_state_gate_vector;
@@ -1245,20 +881,6 @@ begin
 
   b_in_activation_gate_vector <= B_IN;
 
-  -- ACTIVATION TRAINER
-  size_x_in_activation_trainer <= SIZE_X_IN;
-  size_w_in_activation_trainer <= SIZE_W_IN;
-  size_l_in_activation_trainer <= SIZE_L_IN;
-  size_r_in_activation_trainer <= SIZE_R_IN;
-
-  x_in_activation_trainer <= X_IN;
-  r_in_activation_trainer <= R_IN;
-  h_in_activation_trainer <= H_IN;
-
-  a_in_activation_trainer <= a_out_activation_gate_vector;
-  i_in_activation_trainer <= i_out_input_gate_vector;
-  s_in_activation_trainer <= s_out_state_gate_vector;
-
   -- INTPUT GATE VECTOR
   size_x_in_input_gate_vector <= SIZE_X_IN;
   size_w_in_input_gate_vector <= SIZE_W_IN;
@@ -1275,20 +897,6 @@ begin
   h_in_input_gate_vector <= H_IN;
 
   b_in_input_gate_vector <= B_IN;
-
-  -- INPUT TRAINER
-  size_x_in_input_trainer <= SIZE_X_IN;
-  size_w_in_input_trainer <= SIZE_W_IN;
-  size_l_in_input_trainer <= SIZE_L_IN;
-  size_r_in_input_trainer <= SIZE_R_IN;
-
-  x_in_input_trainer <= X_IN;
-  r_in_input_trainer <= R_IN;
-  h_in_input_trainer <= H_IN;
-
-  a_in_input_trainer <= a_out_activation_gate_vector;
-  i_in_input_trainer <= i_out_input_gate_vector;
-  s_in_input_trainer <= s_out_state_gate_vector;
 
   -- OUTPUT GATE VECTOR
   size_x_in_output_gate_vector <= SIZE_X_IN;
@@ -1307,19 +915,6 @@ begin
 
   b_in_output_gate_vector <= B_IN;
 
-  -- OUTPUT TRAINER
-  size_x_in_output_trainer <= SIZE_X_IN;
-  size_w_in_output_trainer <= SIZE_W_IN;
-  size_l_in_output_trainer <= SIZE_L_IN;
-  size_r_in_output_trainer <= SIZE_R_IN;
-
-  x_in_output_trainer <= X_IN;
-  r_in_output_trainer <= R_IN;
-  h_in_output_trainer <= H_IN;
-
-  a_in_output_trainer <= a_out_activation_gate_vector;
-  o_in_output_trainer <= o_out_output_gate_vector;
-
   -- FORGET GATE VECTOR
   size_x_in_forget_gate_vector <= SIZE_X_IN;
   size_w_in_forget_gate_vector <= SIZE_W_IN;
@@ -1336,19 +931,6 @@ begin
   h_in_forget_gate_vector <= H_IN;
 
   b_in_forget_gate_vector <= B_IN;
-
-  -- FORGET TRAINER
-  size_x_in_forget_trainer <= SIZE_X_IN;
-  size_w_in_forget_trainer <= SIZE_W_IN;
-  size_l_in_forget_trainer <= SIZE_L_IN;
-  size_r_in_forget_trainer <= SIZE_R_IN;
-
-  x_in_forget_trainer <= X_IN;
-  r_in_forget_trainer <= R_IN;
-  h_in_forget_trainer <= H_IN;
-
-  f_in_forget_trainer <= f_out_forget_gate_vector;
-  s_in_forget_trainer <= s_out_state_gate_vector;
 
   -- STATE GATE VECTOR
   size_l_in_state_gate_vector <= SIZE_L_IN;
@@ -1471,98 +1053,6 @@ begin
       A_OUT => a_out_activation_gate_vector
       );
 
-  -- ACTIVATION TRAINER
-  activation_trainer : ntm_activation_trainer
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_activation_trainer,
-      READY => ready_activation_trainer,
-
-      X_IN_ENABLE => x_in_enable_activation_trainer,
-
-      X_OUT_ENABLE => x_out_enable_activation_trainer,
-
-      R_IN_I_ENABLE => r_in_i_enable_activation_trainer,
-      R_IN_K_ENABLE => r_in_k_enable_activation_trainer,
-
-      R_OUT_I_ENABLE => r_out_i_enable_activation_trainer,
-      R_OUT_K_ENABLE => r_out_k_enable_activation_trainer,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_activation_trainer,
-      RHO_IN_M_ENABLE => rho_in_m_enable_activation_trainer,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_activation_trainer,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_activation_trainer,
-
-      XI_IN_ENABLE => xi_in_enable_activation_trainer,
-
-      XI_OUT_ENABLE => xi_out_enable_activation_trainer,
-
-      H_IN_ENABLE => h_in_enable_activation_trainer,
-
-      H_OUT_ENABLE => h_out_enable_activation_trainer,
-
-      A_IN_ENABLE => a_in_enable_activation_trainer,
-      I_IN_ENABLE => i_in_enable_activation_trainer,
-      S_IN_ENABLE => s_in_enable_activation_trainer,
-
-      A_OUT_ENABLE => a_out_enable_activation_trainer,
-      I_OUT_ENABLE => i_out_enable_activation_trainer,
-      S_OUT_ENABLE => s_out_enable_activation_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_activation_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_activation_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_activation_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_activation_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_activation_trainer,
-
-      D_OUT_I_ENABLE => d_out_i_enable_activation_trainer,
-      D_OUT_L_ENABLE => d_out_l_enable_activation_trainer,
-      D_OUT_M_ENABLE => d_out_m_enable_activation_trainer,
-
-      U_OUT_L_ENABLE => u_out_l_enable_activation_trainer,
-      U_OUT_P_ENABLE => u_out_p_enable_activation_trainer,
-
-      V_OUT_L_ENABLE => v_out_l_enable_activation_trainer,
-      V_OUT_S_ENABLE => v_out_s_enable_activation_trainer,
-
-      B_OUT_ENABLE => b_out_enable_activation_trainer,
-
-      -- DATA
-      SIZE_X_IN => size_x_in_activation_trainer,
-      SIZE_W_IN => size_w_in_activation_trainer,
-      SIZE_L_IN => size_l_in_activation_trainer,
-      SIZE_R_IN => size_r_in_activation_trainer,
-      SIZE_S_IN => size_s_in_activation_trainer,
-      SIZE_M_IN => size_m_in_activation_trainer,
-
-      X_IN   => x_in_activation_trainer,
-      R_IN   => r_in_activation_trainer,
-      RHO_IN => rho_in_activation_trainer,
-      XI_IN  => xi_in_activation_trainer,
-      H_IN   => h_in_activation_trainer,
-
-      A_IN => a_in_activation_trainer,
-      I_IN => i_in_activation_trainer,
-      S_IN => s_in_activation_trainer,
-
-      W_OUT => w_out_activation_trainer,
-      D_OUT => d_out_activation_trainer,
-      K_OUT => k_out_activation_trainer,
-      U_OUT => u_out_activation_trainer,
-      V_OUT => v_out_activation_trainer,
-      B_OUT => b_out_activation_trainer
-      );
-
   -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
     generic map (
@@ -1668,98 +1158,6 @@ begin
       B_IN => b_in_input_gate_vector,
 
       I_OUT => i_out_input_gate_vector
-      );
-
-  -- INPUT TRAINER
-  input_trainer : ntm_input_trainer
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_input_trainer,
-      READY => ready_input_trainer,
-
-      X_IN_ENABLE => x_in_enable_input_trainer,
-
-      X_OUT_ENABLE => x_out_enable_input_trainer,
-
-      R_IN_I_ENABLE => r_in_i_enable_input_trainer,
-      R_IN_K_ENABLE => r_in_k_enable_input_trainer,
-
-      R_OUT_I_ENABLE => r_out_i_enable_input_trainer,
-      R_OUT_K_ENABLE => r_out_k_enable_input_trainer,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_input_trainer,
-      RHO_IN_M_ENABLE => rho_in_m_enable_input_trainer,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_input_trainer,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_input_trainer,
-
-      XI_IN_ENABLE => xi_in_enable_input_trainer,
-
-      XI_OUT_ENABLE => xi_out_enable_input_trainer,
-
-      H_IN_ENABLE => h_in_enable_input_trainer,
-
-      H_OUT_ENABLE => h_out_enable_input_trainer,
-
-      A_IN_ENABLE => a_in_enable_input_trainer,
-      I_IN_ENABLE => i_in_enable_input_trainer,
-      S_IN_ENABLE => s_in_enable_input_trainer,
-
-      A_OUT_ENABLE => a_out_enable_input_trainer,
-      I_OUT_ENABLE => i_out_enable_input_trainer,
-      S_OUT_ENABLE => s_out_enable_input_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_input_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_input_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_input_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_input_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_input_trainer,
-
-      D_OUT_I_ENABLE => d_out_i_enable_input_trainer,
-      D_OUT_L_ENABLE => d_out_l_enable_input_trainer,
-      D_OUT_M_ENABLE => d_out_m_enable_input_trainer,
-
-      U_OUT_L_ENABLE => u_out_l_enable_input_trainer,
-      U_OUT_P_ENABLE => u_out_p_enable_input_trainer,
-
-      V_OUT_L_ENABLE => v_out_l_enable_input_trainer,
-      V_OUT_S_ENABLE => v_out_s_enable_input_trainer,
-
-      B_OUT_ENABLE => b_out_enable_input_trainer,
-
-      -- DATA
-      SIZE_X_IN => size_x_in_input_trainer,
-      SIZE_W_IN => size_w_in_input_trainer,
-      SIZE_L_IN => size_l_in_input_trainer,
-      SIZE_R_IN => size_r_in_input_trainer,
-      SIZE_S_IN => size_s_in_input_trainer,
-      SIZE_M_IN => size_m_in_input_trainer,
-
-      X_IN   => x_in_input_trainer,
-      R_IN   => r_in_input_trainer,
-      RHO_IN => rho_in_input_trainer,
-      XI_IN  => xi_in_input_trainer,
-      H_IN   => h_in_input_trainer,
-
-      A_IN => a_in_input_trainer,
-      I_IN => i_in_input_trainer,
-      S_IN => s_in_input_trainer,
-
-      W_OUT => w_out_input_trainer,
-      D_OUT => d_out_input_trainer,
-      K_OUT => k_out_input_trainer,
-      U_OUT => u_out_input_trainer,
-      V_OUT => v_out_input_trainer,
-      B_OUT => b_out_input_trainer
       );
 
   -- OUTPUT GATE VECTOR
@@ -1869,95 +1267,6 @@ begin
       O_OUT => o_out_output_gate_vector
       );
 
-  -- OUTPUT TRAINER
-  output_trainer : ntm_output_trainer
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_output_trainer,
-      READY => ready_output_trainer,
-
-      X_IN_ENABLE => x_in_enable_output_trainer,
-
-      X_OUT_ENABLE => x_out_enable_output_trainer,
-
-      R_IN_I_ENABLE => r_in_i_enable_output_trainer,
-      R_IN_K_ENABLE => r_in_k_enable_output_trainer,
-
-      R_OUT_I_ENABLE => r_out_i_enable_output_trainer,
-      R_OUT_K_ENABLE => r_out_k_enable_output_trainer,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_output_trainer,
-      RHO_IN_M_ENABLE => rho_in_m_enable_output_trainer,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_output_trainer,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_output_trainer,
-
-      XI_IN_ENABLE => xi_in_enable_output_trainer,
-
-      XI_OUT_ENABLE => xi_out_enable_output_trainer,
-
-      H_IN_ENABLE => h_in_enable_output_trainer,
-
-      H_OUT_ENABLE => h_out_enable_output_trainer,
-
-      A_IN_ENABLE => a_in_enable_output_trainer,
-      O_IN_ENABLE => o_in_enable_output_trainer,
-
-      A_OUT_ENABLE => a_out_enable_output_trainer,
-      O_OUT_ENABLE => o_out_enable_output_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_output_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_output_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_output_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_output_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_output_trainer,
-
-      D_OUT_I_ENABLE => d_out_i_enable_output_trainer,
-      D_OUT_L_ENABLE => d_out_l_enable_output_trainer,
-      D_OUT_M_ENABLE => d_out_m_enable_output_trainer,
-
-      U_OUT_L_ENABLE => u_out_l_enable_output_trainer,
-      U_OUT_P_ENABLE => u_out_p_enable_output_trainer,
-
-      V_OUT_L_ENABLE => v_out_l_enable_output_trainer,
-      V_OUT_S_ENABLE => v_out_s_enable_output_trainer,
-
-      B_OUT_ENABLE => b_out_enable_output_trainer,
-
-      -- DATA
-      SIZE_X_IN => size_x_in_output_trainer,
-      SIZE_W_IN => size_w_in_output_trainer,
-      SIZE_L_IN => size_l_in_output_trainer,
-      SIZE_R_IN => size_r_in_output_trainer,
-      SIZE_S_IN => size_s_in_output_trainer,
-      SIZE_M_IN => size_m_in_output_trainer,
-
-      X_IN   => x_in_output_trainer,
-      R_IN   => r_in_output_trainer,
-      RHO_IN => rho_in_output_trainer,
-      XI_IN  => xi_in_output_trainer,
-      H_IN   => h_in_output_trainer,
-
-      A_IN => a_in_output_trainer,
-      O_IN => o_in_output_trainer,
-
-      W_OUT => w_out_output_trainer,
-      D_OUT => d_out_output_trainer,
-      K_OUT => k_out_output_trainer,
-      U_OUT => u_out_output_trainer,
-      V_OUT => v_out_output_trainer,
-      B_OUT => b_out_output_trainer
-      );
-
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
@@ -2063,95 +1372,6 @@ begin
       B_IN => b_in_forget_gate_vector,
 
       F_OUT => f_out_forget_gate_vector
-      );
-
-  -- FORGET TRAINER
-  forget_trainer : ntm_forget_trainer
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_forget_trainer,
-      READY => ready_forget_trainer,
-
-      X_IN_ENABLE => x_in_enable_forget_trainer,
-
-      X_OUT_ENABLE => x_out_enable_forget_trainer,
-
-      R_IN_I_ENABLE => r_in_i_enable_forget_trainer,
-      R_IN_K_ENABLE => r_in_k_enable_forget_trainer,
-
-      R_OUT_I_ENABLE => r_out_i_enable_forget_trainer,
-      R_OUT_K_ENABLE => r_out_k_enable_forget_trainer,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_forget_trainer,
-      RHO_IN_M_ENABLE => rho_in_m_enable_forget_trainer,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_forget_trainer,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_forget_trainer,
-
-      XI_IN_ENABLE => xi_in_enable_forget_trainer,
-
-      XI_OUT_ENABLE => xi_out_enable_forget_trainer,
-
-      H_IN_ENABLE => h_in_enable_forget_trainer,
-
-      H_OUT_ENABLE => h_out_enable_forget_trainer,
-
-      F_IN_ENABLE => f_in_enable_forget_trainer,
-      S_IN_ENABLE => s_in_enable_forget_trainer,
-
-      F_OUT_ENABLE => f_out_enable_forget_trainer,
-      S_OUT_ENABLE => s_out_enable_forget_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_forget_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_forget_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_forget_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_forget_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_forget_trainer,
-
-      D_OUT_I_ENABLE => d_out_i_enable_forget_trainer,
-      D_OUT_L_ENABLE => d_out_l_enable_forget_trainer,
-      D_OUT_M_ENABLE => d_out_m_enable_forget_trainer,
-
-      U_OUT_L_ENABLE => u_out_l_enable_forget_trainer,
-      U_OUT_P_ENABLE => u_out_p_enable_forget_trainer,
-
-      V_OUT_L_ENABLE => v_out_l_enable_forget_trainer,
-      V_OUT_S_ENABLE => v_out_s_enable_forget_trainer,
-
-      B_OUT_ENABLE => b_out_enable_forget_trainer,
-
-      -- DATA
-      SIZE_X_IN => size_x_in_forget_trainer,
-      SIZE_W_IN => size_w_in_forget_trainer,
-      SIZE_L_IN => size_l_in_forget_trainer,
-      SIZE_R_IN => size_r_in_forget_trainer,
-      SIZE_S_IN => size_s_in_forget_trainer,
-      SIZE_M_IN => size_m_in_forget_trainer,
-
-      X_IN   => x_in_forget_trainer,
-      R_IN   => r_in_forget_trainer,
-      RHO_IN => rho_in_forget_trainer,
-      XI_IN  => xi_in_forget_trainer,
-      H_IN   => h_in_forget_trainer,
-
-      F_IN => f_in_forget_trainer,
-      S_IN => s_in_forget_trainer,
-
-      W_OUT => w_out_forget_trainer,
-      D_OUT => d_out_forget_trainer,
-      K_OUT => k_out_forget_trainer,
-      U_OUT => u_out_forget_trainer,
-      V_OUT => v_out_forget_trainer,
-      B_OUT => b_out_forget_trainer
       );
 
   -- STATE GATE VECTOR
