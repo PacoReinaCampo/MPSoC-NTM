@@ -41,6 +41,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_trans
 
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/read_heads/ntm_reading.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/ntm/read_heads/ntm_read_heads_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/ntm/read_heads/ntm_read_heads_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/ntm/read_heads/ntm_read_heads_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_testbench.vhd

@@ -81,9 +81,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/trainer/FNN/ntm_trainer.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/controller/FNN/convolutional/ntm_controller.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_testbench.vhd
 
 ghdl -m --std=08 ntm_trainer_fnn_testbench
 ghdl -r --std=08 ntm_trainer_fnn_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_trainer_fnn_testbench.tree

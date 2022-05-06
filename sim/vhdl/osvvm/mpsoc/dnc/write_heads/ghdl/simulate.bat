@@ -79,9 +79,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_s
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd
 
 ghdl -m --std=08 dnc_write_heads_testbench
 ghdl -r --std=08 dnc_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > dnc_write_heads_testbench.tree

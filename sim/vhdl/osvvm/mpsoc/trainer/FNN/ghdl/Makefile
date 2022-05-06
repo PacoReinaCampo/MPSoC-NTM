@@ -76,9 +76,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/controller/FNN/convolutional/ntm_controller.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/controller/FNN/convolutional/ntm_trainer.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/ntm_trainer_fnn_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/trainer/FNN/ntm_trainer_fnn_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_trainer_fnn_testbench

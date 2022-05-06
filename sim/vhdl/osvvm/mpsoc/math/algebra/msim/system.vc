@@ -39,6 +39,6 @@
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
-../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
-../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd
-../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_testbench.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_pkg.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_stimulus.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_testbench.vhd
