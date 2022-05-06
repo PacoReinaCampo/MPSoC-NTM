@@ -187,13 +187,13 @@ package ntm_lstm_controller_pkg is
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
-      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHO_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
-      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHO_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
       XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
       XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
@@ -410,13 +410,13 @@ package ntm_lstm_controller_pkg is
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHI_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
-      RHI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHI_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHO_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHI_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
-      RHI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHI_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHO_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
       XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
       XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
@@ -849,13 +849,13 @@ package ntm_lstm_controller_pkg is
       R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      RHS_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
-      RHS_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
-      RHS_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
+      RHO_IN_T_ENABLE : in std_logic;   -- for t in 0 to T-1
+      RHO_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
+      RHO_IN_M_ENABLE : in std_logic;   -- for m in 0 to M-1
 
-      RHS_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
-      RHS_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
-      RHS_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
+      RHO_OUT_T_ENABLE : out std_logic;  -- for t in 0 to T-1
+      RHO_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1 (read heads flow)
+      RHO_OUT_M_ENABLE : out std_logic;  -- for m in 0 to M-1
 
       XI_IN_T_ENABLE : in std_logic;    -- for t in 0 to T-1
       XI_IN_S_ENABLE : in std_logic;    -- for s in 0 to S-1
