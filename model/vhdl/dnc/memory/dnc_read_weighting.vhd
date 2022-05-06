@@ -130,19 +130,19 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   -- Finite State Machine
   type controller_pi_in_fsm is (
-    STARTER_PI_IN_STATE,                 -- STEP 0
-    INPUT_PI_IN_I_STATE,                 -- STEP 1
-    INPUT_PI_IN_P_STATE,                 -- STEP 2
-    CLEAN_PI_IN_I_STATE,                 -- STEP 3
-    CLEAN_PI_IN_P_STATE                  -- STEP 4
+    STARTER_PI_IN_STATE,                -- STEP 0
+    INPUT_PI_IN_I_STATE,                -- STEP 1
+    INPUT_PI_IN_P_STATE,                -- STEP 2
+    CLEAN_PI_IN_I_STATE,                -- STEP 3
+    CLEAN_PI_IN_P_STATE                 -- STEP 4
     );
 
   type controller_in_fsm is (
-    STARTER_IN_STATE,                 -- STEP 0
-    INPUT_IN_I_STATE,                 -- STEP 1
-    INPUT_IN_J_STATE,                 -- STEP 2
-    CLEAN_IN_I_STATE,                 -- STEP 3
-    CLEAN_IN_J_STATE                  -- STEP 4
+    STARTER_IN_STATE,                   -- STEP 0
+    INPUT_IN_I_STATE,                   -- STEP 1
+    INPUT_IN_J_STATE,                   -- STEP 2
+    CLEAN_IN_I_STATE,                   -- STEP 3
+    CLEAN_IN_J_STATE                    -- STEP 4
     );
 
   type controller_w_out_fsm is (
@@ -215,7 +215,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_pi_in_fsm_int is
-        when STARTER_PI_IN_STATE =>      -- STEP 0
+        when STARTER_PI_IN_STATE =>     -- STEP 0
           if (START = '1') then
             -- Control Outputs
             PI_OUT_I_ENABLE <= '1';
@@ -235,7 +235,7 @@ begin
             PI_OUT_P_ENABLE <= '0';
           end if;
 
-        when INPUT_PI_IN_I_STATE =>      -- STEP 1
+        when INPUT_PI_IN_I_STATE =>     -- STEP 1
 
           if ((PI_IN_I_ENABLE = '1') and (PI_IN_P_ENABLE = '1')) then
             -- Data Inputs
@@ -249,7 +249,7 @@ begin
           PI_OUT_I_ENABLE <= '0';
           PI_OUT_P_ENABLE <= '0';
 
-        when INPUT_PI_IN_P_STATE =>      -- STEP 2
+        when INPUT_PI_IN_P_STATE =>     -- STEP 2
 
           if (PI_IN_P_ENABLE = '1') then
             -- Data Inputs
@@ -266,7 +266,7 @@ begin
           -- Control Outputs
           PI_OUT_P_ENABLE <= '0';
 
-        when CLEAN_PI_IN_I_STATE =>      -- STEP 3
+        when CLEAN_PI_IN_I_STATE =>     -- STEP 3
 
           if ((unsigned(index_i_pi_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -294,7 +294,7 @@ begin
             controller_pi_in_fsm_int <= INPUT_PI_IN_I_STATE;
           end if;
 
-        when CLEAN_PI_IN_P_STATE =>      -- STEP 4
+        when CLEAN_PI_IN_P_STATE =>     -- STEP 4
 
           if (unsigned(index_p_pi_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -340,7 +340,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_in_fsm_int is
-        when STARTER_IN_STATE =>      -- STEP 0
+        when STARTER_IN_STATE =>        -- STEP 0
           if (START = '1') then
             -- Control Outputs
             B_OUT_I_ENABLE <= '1';
@@ -376,7 +376,7 @@ begin
             F_OUT_J_ENABLE <= '0';
           end if;
 
-        when INPUT_IN_I_STATE =>      -- STEP 1
+        when INPUT_IN_I_STATE =>        -- STEP 1
 
           if ((B_IN_I_ENABLE = '1') and (B_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -422,7 +422,7 @@ begin
             controller_in_fsm_int <= CLEAN_IN_J_STATE;
           end if;
 
-        when INPUT_IN_J_STATE =>      -- STEP 2
+        when INPUT_IN_J_STATE =>        -- STEP 2
 
           if (B_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -447,7 +447,7 @@ begin
             -- Control Internal
             data_f_in_enable_int <= '1';
           end if;
-            
+
           if (data_b_in_enable_int = '1' and data_c_in_enable_int = '1' and data_f_in_enable_int = '1') then
             -- FSM Control
             if (unsigned(index_j_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
@@ -462,7 +462,7 @@ begin
           C_OUT_J_ENABLE <= '0';
           F_OUT_J_ENABLE <= '0';
 
-        when CLEAN_IN_I_STATE =>      -- STEP 3
+        when CLEAN_IN_I_STATE =>        -- STEP 3
 
           if ((unsigned(index_i_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -496,7 +496,7 @@ begin
             controller_in_fsm_int <= INPUT_IN_I_STATE;
           end if;
 
-        when CLEAN_IN_J_STATE =>      -- STEP 4
+        when CLEAN_IN_J_STATE =>        -- STEP 4
 
           if (unsigned(index_j_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

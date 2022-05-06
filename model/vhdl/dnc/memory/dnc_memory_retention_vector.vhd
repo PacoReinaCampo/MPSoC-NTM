@@ -176,7 +176,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_f_in_fsm_int is
-        when STARTER_F_IN_STATE =>           -- STEP 0
+        when STARTER_F_IN_STATE =>      -- STEP 0
           -- Control Outputs
           F_OUT_ENABLE <= '0';
 
@@ -190,7 +190,7 @@ begin
             controller_f_in_fsm_int <= INPUT_F_IN_J_STATE;
           end if;
 
-        when INPUT_F_IN_J_STATE =>             -- STEP 1
+        when INPUT_F_IN_J_STATE =>      -- STEP 1
 
           if (F_IN_ENABLE = '1') then
             -- Data Inputs
@@ -203,7 +203,7 @@ begin
           -- Control Outputs
           F_OUT_ENABLE <= '0';
 
-        when CLEAN_F_IN_J_STATE =>          -- STEP 2
+        when CLEAN_F_IN_J_STATE =>      -- STEP 2
 
           if (unsigned(index_j_f_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
@@ -360,7 +360,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_psi_out_fsm_int is
-        when STARTER_PSI_OUT_STATE =>     -- STEP 0
+        when STARTER_PSI_OUT_STATE =>   -- STEP 0
           if (data_f_in_enable_int = '1' and data_w_in_enable_int = '1') then
             -- Data Internal
             vector_psi_out_int <= function_dnc_memory_retention_vector (
@@ -378,14 +378,14 @@ begin
             controller_psi_out_fsm_int <= CLEAN_PSI_OUT_J_STATE;
           end if;
 
-        when CLEAN_PSI_OUT_J_STATE =>     -- STEP 1
+        when CLEAN_PSI_OUT_J_STATE =>   -- STEP 1
           -- Control Outputs
           PSI_OUT_ENABLE <= '0';
 
           -- FSM Control
           controller_psi_out_fsm_int <= OUTPUT_PSI_OUT_J_STATE;
 
-        when OUTPUT_PSI_OUT_J_STATE =>    -- STEP 2
+        when OUTPUT_PSI_OUT_J_STATE =>  -- STEP 2
 
           if (unsigned(index_j_psi_out_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

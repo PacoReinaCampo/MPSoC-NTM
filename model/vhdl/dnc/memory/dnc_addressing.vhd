@@ -188,7 +188,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_k_read_in_fsm_read_int : controller_k_read_in_fsm;
+  signal controller_k_read_in_fsm_read_int  : controller_k_read_in_fsm;
   signal controller_pi_read_in_fsm_read_int : controller_pi_read_in_fsm;
 
   signal controller_read_in_fsm_int : controller_read_in_fsm;
@@ -206,8 +206,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal vector_k_write_in_int : vector_buffer;
   signal vector_e_write_in_int : vector_buffer;
   signal vector_v_write_in_int : vector_buffer;
-  
-  
+
+
   signal matrix_r_out_int : matrix_buffer;
 
   -- Control Internal
@@ -261,7 +261,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_k_read_in_fsm_read_int is
-        when STARTER_K_READ_IN_STATE =>      -- STEP 0
+        when STARTER_K_READ_IN_STATE =>  -- STEP 0
           if (START = '1') then
             -- Control Outputs
             K_READ_OUT_I_ENABLE <= '1';
@@ -281,7 +281,7 @@ begin
             K_READ_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_K_READ_IN_I_STATE =>      -- STEP 1
+        when INPUT_K_READ_IN_I_STATE =>  -- STEP 1
 
           if ((K_READ_IN_I_ENABLE = '1') and (K_READ_IN_K_ENABLE = '1')) then
             -- Data Inputs
@@ -295,7 +295,7 @@ begin
           K_READ_OUT_I_ENABLE <= '0';
           K_READ_OUT_K_ENABLE <= '0';
 
-        when INPUT_K_READ_IN_K_STATE =>      -- STEP 2
+        when INPUT_K_READ_IN_K_STATE =>  -- STEP 2
 
           if (K_READ_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -312,7 +312,7 @@ begin
           -- Control Outputs
           K_READ_OUT_K_ENABLE <= '0';
 
-        when CLEAN_K_READ_IN_I_STATE =>      -- STEP 3
+        when CLEAN_K_READ_IN_I_STATE =>  -- STEP 3
 
           if ((unsigned(index_j_k_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_k_read_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -340,7 +340,7 @@ begin
             controller_k_read_in_fsm_read_int <= INPUT_K_READ_IN_I_STATE;
           end if;
 
-        when CLEAN_K_READ_IN_K_STATE =>      -- STEP 4
+        when CLEAN_K_READ_IN_K_STATE =>  -- STEP 4
 
           if (unsigned(index_k_k_read_in_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -376,7 +376,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_pi_read_in_fsm_read_int is
-        when STARTER_PI_READ_IN_STATE =>      -- STEP 0
+        when STARTER_PI_READ_IN_STATE =>  -- STEP 0
           if (START = '1') then
             -- Control Outputs
             PI_READ_OUT_I_ENABLE <= '1';
@@ -396,7 +396,7 @@ begin
             PI_READ_OUT_P_ENABLE <= '0';
           end if;
 
-        when INPUT_PI_READ_IN_I_STATE =>      -- STEP 1
+        when INPUT_PI_READ_IN_I_STATE =>  -- STEP 1
 
           if ((PI_READ_IN_I_ENABLE = '1') and (PI_READ_IN_P_ENABLE = '1')) then
             -- Data Inputs
@@ -410,7 +410,7 @@ begin
           PI_READ_OUT_I_ENABLE <= '0';
           PI_READ_OUT_P_ENABLE <= '0';
 
-        when INPUT_PI_READ_IN_P_STATE =>      -- STEP 2
+        when INPUT_PI_READ_IN_P_STATE =>  -- STEP 2
 
           if (PI_READ_IN_P_ENABLE = '1') then
             -- Data Inputs
@@ -427,7 +427,7 @@ begin
           -- Control Outputs
           PI_READ_OUT_P_ENABLE <= '0';
 
-        when CLEAN_PI_READ_IN_I_STATE =>      -- STEP 3
+        when CLEAN_PI_READ_IN_I_STATE =>  -- STEP 3
 
           if ((unsigned(index_i_pi_read_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -455,7 +455,7 @@ begin
             controller_pi_read_in_fsm_read_int <= INPUT_PI_READ_IN_I_STATE;
           end if;
 
-        when CLEAN_PI_READ_IN_P_STATE =>      -- STEP 4
+        when CLEAN_PI_READ_IN_P_STATE =>  -- STEP 4
 
           if (unsigned(index_p_pi_read_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -480,30 +480,30 @@ begin
     if (RST = '0') then
       -- Control Outputs
       BETA_READ_OUT_ENABLE <= '0';
-      F_READ_OUT_ENABLE <= '0';
+      F_READ_OUT_ENABLE    <= '0';
 
       -- Control Internal
       index_i_in_read_loop <= ZERO_CONTROL;
 
       data_beta_read_in_enable_int <= '0';
-      data_f_read_in_enable_int <= '0';
+      data_f_read_in_enable_int    <= '0';
 
       data_read_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
       case controller_read_in_fsm_int is
-        when STARTER_READ_IN_STATE =>           -- STEP 0
+        when STARTER_READ_IN_STATE =>   -- STEP 0
           if (START = '1') then
             -- Control Outputs
             BETA_READ_OUT_ENABLE <= '1';
-            F_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
 
             -- Control Internal
             index_i_in_read_loop <= ZERO_CONTROL;
 
             data_beta_read_in_enable_int <= '0';
-            data_f_read_in_enable_int <= '0';
+            data_f_read_in_enable_int    <= '0';
 
             data_read_in_enable_int <= '0';
 
@@ -512,10 +512,10 @@ begin
           else
             -- Control Outputs
             BETA_READ_OUT_ENABLE <= '0';
-            F_READ_OUT_ENABLE <= '0';
+            F_READ_OUT_ENABLE    <= '0';
           end if;
 
-        when INPUT_READ_STATE =>             -- STEP 1
+        when INPUT_READ_STATE =>        -- STEP 1
 
           if (BETA_READ_IN_ENABLE = '1') then
             -- Data Inputs
@@ -535,23 +535,23 @@ begin
 
           -- Control Outputs
           BETA_READ_OUT_ENABLE <= '0';
-          F_READ_OUT_ENABLE <= '0';
+          F_READ_OUT_ENABLE    <= '0';
 
           if (data_beta_read_in_enable_int = '1' and data_f_read_in_enable_int = '1') then
             -- Control Internal
             data_beta_read_in_enable_int <= '0';
-            data_f_read_in_enable_int <= '0';
+            data_f_read_in_enable_int    <= '0';
 
             -- FSM Control
             controller_read_in_fsm_int <= CLEAN_READ_STATE;
           end if;
 
-        when CLEAN_READ_STATE =>             -- STEP 2
+        when CLEAN_READ_STATE =>        -- STEP 2
 
           if (unsigned(index_i_in_read_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             BETA_READ_OUT_ENABLE <= '1';
-            F_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
 
             -- Control Internal
             index_i_in_read_loop <= ZERO_CONTROL;
@@ -563,7 +563,7 @@ begin
           elsif (unsigned(index_i_in_read_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             BETA_READ_OUT_ENABLE <= '1';
-            F_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
 
             -- Control Internal
             index_i_in_read_loop <= std_logic_vector(unsigned(index_i_in_read_loop) + unsigned(ONE_CONTROL));
@@ -599,7 +599,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_write_in_fsm_int is
-        when STARTER_WRITE_IN_STATE =>           -- STEP 0
+        when STARTER_WRITE_IN_STATE =>  -- STEP 0
           if (START = '1') then
             -- Control Outputs
             K_WRITE_OUT_K_ENABLE <= '1';
@@ -624,7 +624,7 @@ begin
             V_WRITE_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_WRITE_STATE =>             -- STEP 1
+        when INPUT_WRITE_STATE =>       -- STEP 1
 
           if (K_WRITE_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -665,7 +665,7 @@ begin
             controller_write_in_fsm_int <= CLEAN_WRITE_STATE;
           end if;
 
-        when CLEAN_WRITE_STATE =>             -- STEP 2
+        when CLEAN_WRITE_STATE =>       -- STEP 2
 
           if (unsigned(index_k_in_write_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

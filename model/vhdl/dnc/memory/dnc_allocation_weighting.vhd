@@ -152,7 +152,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_u_in_fsm_int is
-        when STARTER_U_IN_STATE =>           -- STEP 0
+        when STARTER_U_IN_STATE =>      -- STEP 0
           -- Control Outputs
           U_OUT_ENABLE <= '0';
 
@@ -166,7 +166,7 @@ begin
             controller_u_in_fsm_int <= INPUT_U_IN_J_STATE;
           end if;
 
-        when INPUT_U_IN_J_STATE =>             -- STEP 1
+        when INPUT_U_IN_J_STATE =>      -- STEP 1
 
           if (U_IN_ENABLE = '1') then
             -- Data Inputs
@@ -179,7 +179,7 @@ begin
           -- Control Outputs
           U_OUT_ENABLE <= '0';
 
-        when CLEAN_U_IN_J_STATE =>          -- STEP 2
+        when CLEAN_U_IN_J_STATE =>      -- STEP 2
 
           if (unsigned(index_j_u_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Internal

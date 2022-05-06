@@ -1548,7 +1548,7 @@ package ntm_lstm_controller_pkg is
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_h_input: matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_f_input : matrix_buffer;
     vector_s_input : matrix_buffer
@@ -1635,7 +1635,7 @@ package ntm_lstm_controller_pkg is
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
@@ -1762,7 +1762,7 @@ package ntm_lstm_controller_pkg is
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_o_input : matrix_buffer
@@ -4018,7 +4018,7 @@ package body ntm_lstm_controller_pkg is
       SIZE_X_IN => SIZE_X_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      vector_x_input   => vector_x_input,
+      vector_x_input => vector_x_input,
 
       vector_a_input => vector_a_input,
       vector_i_input => vector_i_input,
@@ -4858,7 +4858,7 @@ package body ntm_lstm_controller_pkg is
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_h_input   : matrix_buffer;
+    vector_h_input : matrix_buffer;
 
     vector_a_input : matrix_buffer;
     vector_i_input : matrix_buffer;
@@ -5213,7 +5213,7 @@ package body ntm_lstm_controller_pkg is
       SIZE_X_IN => SIZE_X_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      vector_x_input   => vector_x_input,
+      vector_x_input => vector_x_input,
 
       vector_a_input => vector_a_input,
       vector_i_input => vector_i_input,

@@ -854,7 +854,7 @@ begin
             DATA_U_ENABLE <= '0';
           end if;
 
-        when INPUT_U_IN_STATE =>      -- STEP 1
+        when INPUT_U_IN_STATE =>        -- STEP 1
 
           if (DATA_U_IN_ENABLE = '1') then
             -- Data Inputs
@@ -867,7 +867,7 @@ begin
           -- Control Outputs
           DATA_U_ENABLE <= '0';
 
-        when CLEAN_U_IN_STATE =>      -- STEP 2
+        when CLEAN_U_IN_STATE =>        -- STEP 2
 
           if (unsigned(index_u_in_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -950,14 +950,14 @@ begin
             controller_x_out_fsm_int <= CLEAN_X_OUT_STATE;
           end if;
 
-        when CLEAN_X_OUT_STATE =>     -- STEP 1
+        when CLEAN_X_OUT_STATE =>       -- STEP 1
           -- Control Outputs
           DATA_X_OUT_ENABLE <= '0';
 
           -- FSM Control
           controller_x_out_fsm_int <= OUTPUT_X_OUT_STATE;
 
-        when OUTPUT_X_OUT_STATE =>    -- STEP 2
+        when OUTPUT_X_OUT_STATE =>      -- STEP 2
 
           if (unsigned(index_x_out_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

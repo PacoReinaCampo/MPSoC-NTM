@@ -209,7 +209,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_rho_in_fsm_int is
-        when STARTER_RHO_IN_STATE =>           -- STEP 0
+        when STARTER_RHO_IN_STATE =>    -- STEP 0
           if (START = '1') then
             -- Control Outputs
             RHO_OUT_I_ENABLE <= '1';
@@ -229,7 +229,7 @@ begin
             RHO_OUT_M_ENABLE <= '0';
           end if;
 
-        when INPUT_RHO_IN_I_STATE =>           -- STEP 1 k
+        when INPUT_RHO_IN_I_STATE =>    -- STEP 1 k
 
           if ((RHO_IN_I_ENABLE = '1') and (RHO_IN_M_ENABLE = '1')) then
             -- Data Inputs
@@ -243,7 +243,7 @@ begin
           RHO_OUT_I_ENABLE <= '0';
           RHO_OUT_M_ENABLE <= '0';
 
-        when INPUT_RHO_IN_J_STATE =>           -- STEP 2 k
+        when INPUT_RHO_IN_J_STATE =>    -- STEP 2 k
 
           if (RHO_IN_M_ENABLE = '1') then
             -- Data Inputs
@@ -260,7 +260,7 @@ begin
           -- Control Outputs
           RHO_OUT_M_ENABLE <= '0';
 
-        when CLEAN_RHO_IN_I_STATE =>           -- STEP 3
+        when CLEAN_RHO_IN_I_STATE =>    -- STEP 3
 
           if ((unsigned(index_i_rho_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Data Internal
@@ -297,7 +297,7 @@ begin
             controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
           end if;
 
-        when CLEAN_RHO_IN_J_STATE =>           -- STEP 4
+        when CLEAN_RHO_IN_J_STATE =>    -- STEP 4
 
           if (unsigned(index_m_rho_in_loop) < unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -439,7 +439,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_beta_out_fsm_int is
-        when STARTER_BETA_OUT_STATE =>     -- STEP 0
+        when STARTER_BETA_OUT_STATE =>  -- STEP 0
           if (data_rho_in_enable_int = '1') then
             -- Control Internal
             index_i_beta_out_loop <= ZERO_CONTROL;
@@ -448,14 +448,14 @@ begin
             controller_beta_out_fsm_int <= CLEAN_BETA_OUT_I_STATE;
           end if;
 
-        when CLEAN_BETA_OUT_I_STATE =>     -- STEP 1
+        when CLEAN_BETA_OUT_I_STATE =>  -- STEP 1
           -- Control Outputs
           BETA_OUT_ENABLE <= '0';
 
           -- FSM Control
           controller_beta_out_fsm_int <= OUTPUT_BETA_OUT_I_STATE;
 
-        when OUTPUT_BETA_OUT_I_STATE =>    -- STEP 2
+        when OUTPUT_BETA_OUT_I_STATE =>  -- STEP 2
 
           if (unsigned(index_i_beta_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
@@ -583,7 +583,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_pi_out_fsm_int is
-        when STARTER_PI_OUT_STATE =>     -- STEP 0
+        when STARTER_PI_OUT_STATE =>    -- STEP 0
           if (data_rho_in_enable_int = '1') then
             -- Control Internal
             index_i_pi_out_loop <= ZERO_CONTROL;
@@ -593,7 +593,7 @@ begin
             controller_pi_out_fsm_int <= CLEAN_PI_OUT_I_STATE;
           end if;
 
-        when CLEAN_PI_OUT_I_STATE =>     -- STEP 1
+        when CLEAN_PI_OUT_I_STATE =>    -- STEP 1
           -- Control Outputs
           PI_OUT_I_ENABLE <= '0';
           PI_OUT_P_ENABLE <= '0';
@@ -601,7 +601,7 @@ begin
           -- FSM Control
           controller_pi_out_fsm_int <= OUTPUT_PI_OUT_P_STATE;
 
-        when CLEAN_PI_OUT_P_STATE =>     -- STEP 2
+        when CLEAN_PI_OUT_P_STATE =>    -- STEP 2
 
           -- Control Outputs
           PI_OUT_P_ENABLE <= '0';
@@ -613,7 +613,7 @@ begin
             controller_pi_out_fsm_int <= OUTPUT_PI_OUT_P_STATE;
           end if;
 
-        when OUTPUT_PI_OUT_I_STATE =>    -- STEP 3
+        when OUTPUT_PI_OUT_I_STATE =>   -- STEP 3
 
           if ((unsigned(index_i_pi_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_out_loop) = unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
@@ -647,7 +647,7 @@ begin
             controller_pi_out_fsm_int <= CLEAN_PI_OUT_I_STATE;
           end if;
 
-        when OUTPUT_PI_OUT_P_STATE =>    -- STEP 4
+        when OUTPUT_PI_OUT_P_STATE =>   -- STEP 4
 
           if (unsigned(index_p_pi_out_loop) < unsigned(THREE_CONTROL)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

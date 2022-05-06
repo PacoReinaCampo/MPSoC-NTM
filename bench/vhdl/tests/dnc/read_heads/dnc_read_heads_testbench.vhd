@@ -100,7 +100,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal size_r_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_read_heads : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal rho_in_read_heads  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_read_heads : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal k_out_read_heads    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_heads : std_logic_vector(DATA_SIZE-1 downto 0);

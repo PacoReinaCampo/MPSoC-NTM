@@ -255,12 +255,12 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal controller_xi_in_fsm_int  : controller_xi_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
-  signal controller_w_out_fsm_int   : controller_w_out_fsm;
-  signal controller_k_out_fsm_int   : controller_k_out_fsm;
-  signal controller_d_out_fsm_int   : controller_d_out_fsm;
-  signal controller_u_out_fsm_int   : controller_u_out_fsm;
-  signal controller_v_out_fsm_int   : controller_v_out_fsm;
-  signal controller_b_out_fsm_int   : controller_b_out_fsm;
+  signal controller_w_out_fsm_int : controller_w_out_fsm;
+  signal controller_k_out_fsm_int : controller_k_out_fsm;
+  signal controller_d_out_fsm_int : controller_d_out_fsm;
+  signal controller_u_out_fsm_int : controller_u_out_fsm;
+  signal controller_v_out_fsm_int : controller_v_out_fsm;
+  signal controller_b_out_fsm_int : controller_b_out_fsm;
 
   -- Buffer
   signal matrix_x_in_int   : matrix_buffer;
@@ -619,7 +619,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_rho_in_fsm_int is
-        when STARTER_RHO_IN_STATE =>      -- STEP 0
+        when STARTER_RHO_IN_STATE =>    -- STEP 0
           if (START = '1') then
             -- Control Outputs
             RHO_OUT_T_ENABLE <= '1';
@@ -642,7 +642,7 @@ begin
             RHO_OUT_M_ENABLE <= '0';
           end if;
 
-        when INPUT_RHO_IN_T_STATE =>      -- STEP 1
+        when INPUT_RHO_IN_T_STATE =>    -- STEP 1
 
           if ((RHO_IN_T_ENABLE = '1') and (RHO_IN_I_ENABLE = '1') and (RHO_IN_M_ENABLE = '1')) then
             -- Data Inputs
@@ -657,7 +657,7 @@ begin
           RHO_OUT_I_ENABLE <= '0';
           RHO_OUT_M_ENABLE <= '0';
 
-        when INPUT_RHO_IN_I_STATE =>      -- STEP 2
+        when INPUT_RHO_IN_I_STATE =>    -- STEP 2
 
           if ((RHO_IN_I_ENABLE = '1') and (RHO_IN_M_ENABLE = '1')) then
             -- Data Inputs
@@ -675,7 +675,7 @@ begin
           RHO_OUT_I_ENABLE <= '0';
           RHO_OUT_M_ENABLE <= '0';
 
-        when INPUT_RHO_IN_M_STATE =>      -- STEP 3
+        when INPUT_RHO_IN_M_STATE =>    -- STEP 3
 
           if (RHO_IN_M_ENABLE = '1') then
             -- Data Inputs
@@ -694,7 +694,7 @@ begin
           -- Control Outputs
           RHO_OUT_M_ENABLE <= '0';
 
-        when CLEAN_RHO_IN_T_STATE =>      -- STEP 3
+        when CLEAN_RHO_IN_T_STATE =>    -- STEP 3
 
           if ((unsigned(index_t_rho_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -726,7 +726,7 @@ begin
             controller_rho_in_fsm_int <= INPUT_RHO_IN_T_STATE;
           end if;
 
-        when CLEAN_RHO_IN_I_STATE =>      -- STEP 3
+        when CLEAN_RHO_IN_I_STATE =>    -- STEP 3
 
           if ((unsigned(index_i_rho_in_loop) < unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -741,7 +741,7 @@ begin
             controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
           end if;
 
-        when CLEAN_RHO_IN_M_STATE =>      -- STEP 4
+        when CLEAN_RHO_IN_M_STATE =>    -- STEP 4
 
           if (unsigned(index_m_rho_in_loop) < unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -777,7 +777,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_xi_in_fsm_int is
-        when STARTER_XI_IN_STATE =>      -- STEP 0
+        when STARTER_XI_IN_STATE =>     -- STEP 0
           if (START = '1') then
             -- Control Outputs
             XI_OUT_T_ENABLE <= '1';
@@ -797,7 +797,7 @@ begin
             XI_OUT_S_ENABLE <= '0';
           end if;
 
-        when INPUT_XI_IN_T_STATE =>      -- STEP 1
+        when INPUT_XI_IN_T_STATE =>     -- STEP 1
 
           if ((XI_IN_T_ENABLE = '1') and (XI_IN_S_ENABLE = '1')) then
             -- Data Inputs
@@ -811,7 +811,7 @@ begin
           XI_OUT_T_ENABLE <= '0';
           XI_OUT_S_ENABLE <= '0';
 
-        when INPUT_XI_IN_S_STATE =>      -- STEP 2
+        when INPUT_XI_IN_S_STATE =>     -- STEP 2
 
           if (XI_IN_S_ENABLE = '1') then
             -- Data Inputs
@@ -828,7 +828,7 @@ begin
           -- Control Outputs
           XI_OUT_S_ENABLE <= '0';
 
-        when CLEAN_XI_IN_T_STATE =>      -- STEP 3
+        when CLEAN_XI_IN_T_STATE =>     -- STEP 3
 
           if ((unsigned(index_t_xi_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_s_xi_in_loop) = unsigned(SIZE_S_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
@@ -856,7 +856,7 @@ begin
             controller_xi_in_fsm_int <= INPUT_XI_IN_T_STATE;
           end if;
 
-        when CLEAN_XI_IN_S_STATE =>      -- STEP 4
+        when CLEAN_XI_IN_S_STATE =>     -- STEP 4
 
           if (unsigned(index_s_xi_in_loop) < unsigned(SIZE_S_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -1297,7 +1297,7 @@ begin
               SIZE_M_IN => SIZE_M_IN,
 
               matrix_rho_input => tensor_rho_in_int,
-              vector_h_input => matrix_h_in_int
+              vector_h_input   => matrix_h_in_int
               );
 
             -- Control Internal

@@ -104,9 +104,9 @@ architecture dnc_sort_vector_urchitecture of dnc_sort_vector is
     );
 
   type controller_phi_out_fsm is (
-    STARTER_PHI_OUT_STATE,                -- STEP 0
-    CLEAN_PHI_OUT_J_STATE,                -- STEP 1
-    OUTPUT_PHI_OUT_J_STATE                -- STEP 2
+    STARTER_PHI_OUT_STATE,              -- STEP 0
+    CLEAN_PHI_OUT_J_STATE,              -- STEP 1
+    OUTPUT_PHI_OUT_J_STATE              -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -152,7 +152,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_u_in_fsm_int is
-        when STARTER_U_IN_STATE =>           -- STEP 0
+        when STARTER_U_IN_STATE =>      -- STEP 0
           -- Control Outputs
           U_OUT_ENABLE <= '0';
 
@@ -166,7 +166,7 @@ begin
             controller_u_in_fsm_int <= INPUT_U_IN_J_STATE;
           end if;
 
-        when INPUT_U_IN_J_STATE =>             -- STEP 1
+        when INPUT_U_IN_J_STATE =>      -- STEP 1
 
           if (U_IN_ENABLE = '1') then
             -- Data Inputs
@@ -179,7 +179,7 @@ begin
           -- Control Outputs
           U_OUT_ENABLE <= '0';
 
-        when CLEAN_U_IN_J_STATE =>          -- STEP 2
+        when CLEAN_U_IN_J_STATE =>      -- STEP 2
 
           if (unsigned(index_j_u_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Internal
@@ -228,7 +228,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_phi_out_fsm_int is
-        when STARTER_PHI_OUT_STATE =>     -- STEP 0
+        when STARTER_PHI_OUT_STATE =>   -- STEP 0
           if (data_u_in_enable_int = '1') then
             -- Control Internal
             index_j_phi_out_loop <= ZERO_CONTROL;
@@ -237,14 +237,14 @@ begin
             controller_phi_out_fsm_int <= CLEAN_PHI_OUT_J_STATE;
           end if;
 
-        when CLEAN_PHI_OUT_J_STATE =>     -- STEP 1
+        when CLEAN_PHI_OUT_J_STATE =>   -- STEP 1
           -- Control Outputs
           PHI_OUT_ENABLE <= '0';
 
           -- FSM Control
           controller_phi_out_fsm_int <= OUTPUT_PHI_OUT_J_STATE;
 
-        when OUTPUT_PHI_OUT_J_STATE =>    -- STEP 2
+        when OUTPUT_PHI_OUT_J_STATE =>  -- STEP 2
 
           if (unsigned(index_j_phi_out_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs

@@ -74,12 +74,12 @@ entity dnc_read_heads_stimulus is
     DNC_READ_HEADS_RHO_OUT_I_ENABLE : in std_logic;
     DNC_READ_HEADS_RHO_OUT_M_ENABLE : in std_logic;
 
-    DNC_READ_HEADS_K_OUT_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-    DNC_READ_HEADS_K_OUT_K_ENABLE : in std_logic;   -- for k in 0 to W-1
+    DNC_READ_HEADS_K_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+    DNC_READ_HEADS_K_OUT_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
     DNC_READ_HEADS_BETA_OUT_ENABLE : in std_logic;  -- for i in 0 to R-1
 
-    DNC_READ_HEADS_F_OUT_ENABLE : in std_logic;     -- for i in 0 to R-1
+    DNC_READ_HEADS_F_OUT_ENABLE : in std_logic;  -- for i in 0 to R-1
 
     DNC_READ_HEADS_PI_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
     DNC_READ_HEADS_PI_OUT_P_ENABLE : in std_logic;  -- for p in 0 to 2
@@ -139,7 +139,7 @@ architecture dnc_read_heads_stimulus_architecture of dnc_read_heads_stimulus is
 
   -- GLOBAL
   signal clrho_int : std_logic;
-  signal rst_int : std_logic;
+  signal rst_int   : std_logic;
 
   -- CONTROL
   signal start_int : std_logic;

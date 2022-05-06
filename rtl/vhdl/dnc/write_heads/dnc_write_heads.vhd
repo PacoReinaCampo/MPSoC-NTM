@@ -60,13 +60,13 @@ entity dnc_write_heads is
     START : in  std_logic;
     READY : out std_logic;
 
-    XI_IN_ENABLE : in std_logic;     -- for s in 0 to S-1
+    XI_IN_ENABLE : in std_logic;        -- for s in 0 to S-1
 
-    XI_OUT_ENABLE : out std_logic;   -- for s in 0 to S-1
+    XI_OUT_ENABLE : out std_logic;      -- for s in 0 to S-1
 
-    K_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
-    E_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
-    V_OUT_ENABLE : out std_logic;    -- for i in 0 to W-1
+    K_OUT_ENABLE : out std_logic;       -- for i in 0 to W-1
+    E_OUT_ENABLE : out std_logic;       -- for i in 0 to W-1
+    V_OUT_ENABLE : out std_logic;       -- for i in 0 to W-1
 
     -- DATA
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -176,7 +176,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_xi_in_fsm_int is
-        when STARTER_XI_IN_STATE =>           -- STEP 0
+        when STARTER_XI_IN_STATE =>     -- STEP 0
           -- Control Outputs
           XI_OUT_ENABLE <= '0';
 
@@ -188,7 +188,7 @@ begin
             controller_xi_in_fsm_int <= INPUT_XI_IN_S_STATE;
           end if;
 
-        when INPUT_XI_IN_S_STATE =>             -- STEP 1
+        when INPUT_XI_IN_S_STATE =>     -- STEP 1
 
           if (XI_IN_ENABLE = '1') then
             -- Data Inputs
@@ -201,7 +201,7 @@ begin
           -- Control Outputs
           XI_OUT_ENABLE <= '0';
 
-        when CLEAN_XI_IN_S_STATE =>          -- STEP 2
+        when CLEAN_XI_IN_S_STATE =>     -- STEP 2
 
           if (unsigned(index_s_xi_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
