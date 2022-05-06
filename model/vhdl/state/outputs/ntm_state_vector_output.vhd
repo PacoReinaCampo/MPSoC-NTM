@@ -173,7 +173,7 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
     CLEAN_U_IN_STATE                    -- STEP 2
     );
 
-  type controller_x_out_fsm is (
+  type controller_y_out_fsm is (
     STARTER_Y_OUT_STATE,                -- STEP 0
     CLEAN_Y_OUT_STATE,                  -- STEP 2
     OUTPUT_Y_OUT_STATE                  -- STEP 1
@@ -193,7 +193,7 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   signal controller_u_in_fsm_int : controller_u_in_fsm;
 
-  signal controller_x_out_fsm_int : controller_x_out_fsm;
+  signal controller_y_out_fsm_int : controller_y_out_fsm;
 
   -- Buffer
   signal matrix_a_in_int : matrix_buffer;
@@ -205,7 +205,7 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   signal vector_u_in_int : vector_buffer;
 
-  signal vector_x_out_int : vector_buffer;
+  signal vector_y_out_int : vector_buffer;
 
   -- Control Internal
   signal index_i_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -225,7 +225,7 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   signal index_u_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal index_x_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_y_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_enable_int : std_logic;
   signal data_b_in_enable_int : std_logic;
@@ -245,7 +245,7 @@ begin
   -- x(k+1) = A·x(k) + B·u(k)
   -- y(k) = C·x(k) + D·u(k)
 
-  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+  -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
   -- CONTROL
   a_in_fsm : process(CLK, RST)
@@ -898,7 +898,7 @@ begin
     end if;
   end process;
 
-  x_out_fsm : process(CLK, RST)
+  y_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -910,15 +910,15 @@ begin
       DATA_Y_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_x_out_loop <= ZERO_CONTROL;
+      index_y_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_x_out_fsm_int is
+      case controller_y_out_fsm_int is
         when STARTER_Y_OUT_STATE =>     -- STEP 0
           if (data_a_in_enable_int = '1' and data_b_in_enable_int = '1' and data_c_in_enable_int = '1' and data_d_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1') then
             -- Control Internal
-            vector_x_out_int <= function_state_vector_output (
+            vector_y_out_int <= function_state_vector_output (
               LENGTH_K_IN => LENGTH_K_IN,
 
               SIZE_A_I_IN => SIZE_A_I_IN,
@@ -938,16 +938,16 @@ begin
               matrix_data_c_input => matrix_c_in_int,
               matrix_data_d_input => matrix_d_in_int,
 
-              matrix_data_k_input => matrix_a_in_int,
+              matrix_data_k_input => matrix_k_in_int,
 
               vector_data_u_input => vector_u_in_int
               );
 
             -- Control Internal
-            index_x_out_loop <= ZERO_CONTROL;
+            index_y_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_x_out_fsm_int <= CLEAN_Y_OUT_STATE;
+            controller_y_out_fsm_int <= CLEAN_Y_OUT_STATE;
           end if;
 
         when CLEAN_Y_OUT_STATE =>     -- STEP 1
@@ -955,13 +955,13 @@ begin
           DATA_Y_OUT_ENABLE <= '0';
 
           -- FSM Control
-          controller_x_out_fsm_int <= OUTPUT_Y_OUT_STATE;
+          controller_y_out_fsm_int <= OUTPUT_Y_OUT_STATE;
 
         when OUTPUT_Y_OUT_STATE =>    -- STEP 2
 
-          if (unsigned(index_x_out_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_y_out_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_Y_OUT <= vector_x_out_int(to_integer(unsigned(index_x_out_loop)));
+            DATA_Y_OUT <= vector_y_out_int(to_integer(unsigned(index_y_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -969,27 +969,27 @@ begin
             DATA_Y_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_x_out_loop <= ZERO_CONTROL;
+            index_y_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_x_out_fsm_int <= STARTER_Y_OUT_STATE;
-          elsif (unsigned(index_x_out_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+            controller_y_out_fsm_int <= STARTER_Y_OUT_STATE;
+          elsif (unsigned(index_y_out_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_Y_OUT <= vector_x_out_int(to_integer(unsigned(index_x_out_loop)));
+            DATA_Y_OUT <= vector_y_out_int(to_integer(unsigned(index_y_out_loop)));
 
             -- Control Outputs
             DATA_Y_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_x_out_loop <= std_logic_vector(unsigned(index_x_out_loop) + unsigned(ONE_CONTROL));
+            index_y_out_loop <= std_logic_vector(unsigned(index_y_out_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_x_out_fsm_int <= CLEAN_Y_OUT_STATE;
+            controller_y_out_fsm_int <= CLEAN_Y_OUT_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_x_out_fsm_int <= STARTER_Y_OUT_STATE;
+          controller_y_out_fsm_int <= STARTER_Y_OUT_STATE;
       end case;
     end if;
   end process;

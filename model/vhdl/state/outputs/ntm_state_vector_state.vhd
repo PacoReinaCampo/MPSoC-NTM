@@ -938,7 +938,7 @@ begin
               matrix_data_c_input => matrix_c_in_int,
               matrix_data_d_input => matrix_d_in_int,
 
-              matrix_data_k_input => matrix_a_in_int,
+              matrix_data_k_input => matrix_k_in_int,
 
               vector_data_u_input => vector_u_in_int
               );
