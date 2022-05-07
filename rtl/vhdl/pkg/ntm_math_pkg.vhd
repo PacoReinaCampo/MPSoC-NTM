@@ -1069,7 +1069,8 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_ENABLE : in std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
       DATA_OUT_ENABLE : out std_logic;
 
@@ -1255,8 +1256,10 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
       DATA_OUT_I_ENABLE : out std_logic;
       DATA_OUT_J_ENABLE : out std_logic;

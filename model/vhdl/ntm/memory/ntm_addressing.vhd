@@ -270,7 +270,7 @@ begin
 
   -- wg(t;i;j) = g(t;i)·wc(t;i;j) + (1 - g(t;i))·w(t-1;i;j)
 
-  -- w(t;i;j) = wg(t;i;j)*s(t;i;k)
+  -- w(t;i;j) = wg(t;i;j)*s(t;i;j)
 
   -- w(t;i;j) = exponentiation(w(t;i;j),gamma(t;i)) / summation(exponentiation(w(t;i;j),gamma(t;i)))[j in 0 to N-1]
 
