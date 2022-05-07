@@ -108,7 +108,7 @@ architecture ntm_interface_matrix_architecture of ntm_interface_matrix is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
+  -- TENSOR MATRIX PRODUCT
   -- CONTROL
   signal start_tensor_matrix_product : std_logic;
   signal ready_tensor_matrix_product : std_logic;

@@ -103,7 +103,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
+  -- MATRIX VECTOR PRODUCT
   -- CONTROL
   signal start_matrix_vector_product : std_logic;
   signal ready_matrix_vector_product : std_logic;

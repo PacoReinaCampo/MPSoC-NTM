@@ -130,6 +130,12 @@ architecture ntm_writing_architecture of ntm_writing is
     CLEAN_M_IN_K_STATE                  -- STEP 4
     );
 
+  type controller_a_in_fsm is (
+    STARTER_A_IN_STATE,                 -- STEP 0
+    INPUT_A_IN_K_STATE,                 -- STEP 1
+    CLEAN_A_IN_K_STATE                  -- STEP 2
+    );
+
   type controller_matrix_float_multiplier_fsm is (
     STARTER_MATRIX_MULTIPLIER_STATE,    -- STEP 0
     INPUT_J_MATRIX_MULTIPLIER_STATE,    -- STEP 1
@@ -165,6 +171,7 @@ architecture ntm_writing_architecture of ntm_writing is
   -- Finite State Machine
   signal controller_w_in_fsm_int : controller_w_in_fsm;
   signal controller_m_in_fsm_int : controller_m_in_fsm;
+  signal controller_a_in_fsm_int : controller_a_in_fsm;
 
   signal controller_matrix_float_multiplier_fsm_int : controller_matrix_float_multiplier_fsm;
   signal controller_vector_summation_fsm_int        : controller_vector_summation_fsm;
@@ -174,6 +181,7 @@ architecture ntm_writing_architecture of ntm_writing is
   -- Buffer
   signal matrix_w_in_int : matrix_buffer;
   signal matrix_m_in_int : matrix_buffer;
+  signal vector_a_in_int : vector_buffer;
 
   signal matrix_first_operation_int  : matrix_buffer;
   signal matrix_second_operation_int : matrix_buffer;
@@ -185,11 +193,14 @@ architecture ntm_writing_architecture of ntm_writing is
   signal index_j_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  signal index_k_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_j_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_w_in_enable_int : std_logic;
   signal data_m_in_enable_int : std_logic;
+  signal data_a_in_enable_int : std_logic;
 
   signal data_matrix_float_multiplier_enable_int : std_logic;
   signal data_vector_summation_enable_int        : std_logic;
@@ -465,6 +476,81 @@ begin
         when others =>
           -- FSM Control
           controller_m_in_fsm_int <= STARTER_M_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  a_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      A_OUT_ENABLE <= '0';
+
+      -- Control Internal
+      index_k_a_in_loop <= ZERO_CONTROL;
+
+      data_a_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_a_in_fsm_int is
+        when STARTER_A_IN_STATE =>      -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            A_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_a_in_loop <= ZERO_CONTROL;
+
+            data_a_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_a_in_fsm_int <= INPUT_A_IN_K_STATE;
+          else
+            -- Control Outputs
+            A_OUT_ENABLE <= '0';
+          end if;
+
+        when INPUT_A_IN_K_STATE =>      -- STEP 1
+
+          if (A_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_a_in_int(to_integer(unsigned(index_k_a_in_loop))) <= A_IN;
+
+            -- FSM Control
+            controller_a_in_fsm_int <= CLEAN_A_IN_K_STATE;
+          end if;
+
+          -- Control Outputs
+          A_OUT_ENABLE <= '0';
+
+        when CLEAN_A_IN_K_STATE =>      -- STEP 2
+
+          if (unsigned(index_k_a_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            A_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_a_in_loop <= ZERO_CONTROL;
+
+            data_a_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_a_in_fsm_int <= STARTER_A_IN_STATE;
+          elsif (unsigned(index_k_a_in_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            A_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_a_in_loop <= std_logic_vector(unsigned(index_k_a_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_a_in_fsm_int <= INPUT_A_IN_K_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_a_in_fsm_int <= STARTER_A_IN_STATE;
       end case;
     end if;
   end process;
