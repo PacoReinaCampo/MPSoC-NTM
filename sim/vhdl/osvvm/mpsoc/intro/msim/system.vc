@@ -5,5 +5,5 @@
 
 ../../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
 
-../../../../../../model/vhdl/intro/ntm_intro_adder_model.vhd
+../../../../../../rtl/vhdl/intro/ntm_intro_adder_model.vhd
 ../../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd

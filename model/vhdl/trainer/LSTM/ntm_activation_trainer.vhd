@@ -74,13 +74,13 @@ entity ntm_activation_trainer is
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
-    RHI_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
-    RHI_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
-    RHI_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
+    RHO_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+    RHO_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+    RHO_IN_M_ENABLE : in std_logic;     -- for m in 0 to M-1
 
-    RHI_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
-    RHI_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
-    RHI_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
+    RHO_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+    RHO_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+    RHO_OUT_M_ENABLE : out std_logic;   -- for m in 0 to M-1
 
     XI_IN_T_ENABLE : in std_logic;      -- for t in 0 to T-1
     XI_IN_S_ENABLE : in std_logic;      -- for s in 0 to S-1
@@ -142,7 +142,7 @@ entity ntm_activation_trainer is
 
     X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    RHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
     H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -188,14 +188,14 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
     CLEAN_R_IN_K_STATE                  -- STEP 6
     );
 
-  type controller_rhi_in_fsm is (
-    STARTER_RHI_IN_STATE,               -- STEP 0
-    INPUT_RHI_IN_T_STATE,               -- STEP 1
-    INPUT_RHI_IN_I_STATE,               -- STEP 2
-    INPUT_RHI_IN_M_STATE,               -- STEP 3
-    CLEAN_RHI_IN_T_STATE,               -- STEP 4
-    CLEAN_RHI_IN_I_STATE,               -- STEP 5
-    CLEAN_RHI_IN_M_STATE                -- STEP 6
+  type controller_rho_in_fsm is (
+    STARTER_RHO_IN_STATE,               -- STEP 0
+    INPUT_RHO_IN_T_STATE,               -- STEP 1
+    INPUT_RHO_IN_I_STATE,               -- STEP 2
+    INPUT_RHO_IN_M_STATE,               -- STEP 3
+    CLEAN_RHO_IN_T_STATE,               -- STEP 4
+    CLEAN_RHO_IN_I_STATE,               -- STEP 5
+    CLEAN_RHO_IN_M_STATE                -- STEP 6
     );
 
   type controller_xi_in_fsm is (
@@ -297,7 +297,7 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   -- Finite State Machine
   signal controller_x_in_fsm_int   : controller_x_in_fsm;
   signal controller_r_in_fsm_int   : controller_r_in_fsm;
-  signal controller_rhi_in_fsm_int : controller_rhi_in_fsm;
+  signal controller_rho_in_fsm_int : controller_rho_in_fsm;
   signal controller_xi_in_fsm_int  : controller_xi_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
@@ -668,13 +668,13 @@ begin
     end if;
   end process;
 
-  rhi_in_fsm : process(CLK, RST)
+  rho_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Control Outputs
-      RHI_OUT_T_ENABLE <= '0';
-      RHI_OUT_I_ENABLE <= '0';
-      RHI_OUT_M_ENABLE <= '0';
+      RHO_OUT_T_ENABLE <= '0';
+      RHO_OUT_I_ENABLE <= '0';
+      RHO_OUT_M_ENABLE <= '0';
 
       -- Control Internal
       index_t_rho_in_loop <= ZERO_CONTROL;
@@ -685,13 +685,13 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case controller_rhi_in_fsm_int is
-        when STARTER_RHI_IN_STATE =>    -- STEP 0
+      case controller_rho_in_fsm_int is
+        when STARTER_RHO_IN_STATE =>    -- STEP 0
           if (START = '1') then
             -- Control Outputs
-            RHI_OUT_T_ENABLE <= '1';
-            RHI_OUT_I_ENABLE <= '1';
-            RHI_OUT_M_ENABLE <= '1';
+            RHO_OUT_T_ENABLE <= '1';
+            RHO_OUT_I_ENABLE <= '1';
+            RHO_OUT_M_ENABLE <= '1';
 
             -- Control Internal
             index_t_rho_in_loop <= ZERO_CONTROL;
@@ -701,73 +701,73 @@ begin
             data_rho_in_enable_int <= '0';
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= INPUT_RHI_IN_I_STATE;
+            controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
           else
             -- Control Outputs
-            RHI_OUT_T_ENABLE <= '0';
-            RHI_OUT_I_ENABLE <= '0';
-            RHI_OUT_M_ENABLE <= '0';
+            RHO_OUT_T_ENABLE <= '0';
+            RHO_OUT_I_ENABLE <= '0';
+            RHO_OUT_M_ENABLE <= '0';
           end if;
 
-        when INPUT_RHI_IN_T_STATE =>    -- STEP 1
+        when INPUT_RHO_IN_T_STATE =>    -- STEP 1
 
-          if ((RHI_IN_T_ENABLE = '1') and (RHI_IN_I_ENABLE = '1') and (RHI_IN_M_ENABLE = '1')) then
+          if ((RHO_IN_T_ENABLE = '1') and (RHO_IN_I_ENABLE = '1') and (RHO_IN_M_ENABLE = '1')) then
             -- Data Inputs
-            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHI_IN;
+            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHO_IN;
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= CLEAN_RHI_IN_T_STATE;
+            controller_rho_in_fsm_int <= CLEAN_RHO_IN_T_STATE;
           end if;
 
           -- Control Outputs
-          RHI_OUT_T_ENABLE <= '0';
-          RHI_OUT_I_ENABLE <= '0';
-          RHI_OUT_M_ENABLE <= '0';
+          RHO_OUT_T_ENABLE <= '0';
+          RHO_OUT_I_ENABLE <= '0';
+          RHO_OUT_M_ENABLE <= '0';
 
-        when INPUT_RHI_IN_I_STATE =>    -- STEP 2
+        when INPUT_RHO_IN_I_STATE =>    -- STEP 2
 
-          if ((RHI_IN_I_ENABLE = '1') and (RHI_IN_M_ENABLE = '1')) then
+          if ((RHO_IN_I_ENABLE = '1') and (RHO_IN_M_ENABLE = '1')) then
             -- Data Inputs
-            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHI_IN;
+            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHO_IN;
 
             -- FSM Control
             if (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
-              controller_rhi_in_fsm_int <= CLEAN_RHI_IN_T_STATE;
+              controller_rho_in_fsm_int <= CLEAN_RHO_IN_T_STATE;
             else
-              controller_rhi_in_fsm_int <= CLEAN_RHI_IN_I_STATE;
+              controller_rho_in_fsm_int <= CLEAN_RHO_IN_I_STATE;
             end if;
           end if;
 
           -- Control Outputs
-          RHI_OUT_I_ENABLE <= '0';
-          RHI_OUT_M_ENABLE <= '0';
+          RHO_OUT_I_ENABLE <= '0';
+          RHO_OUT_M_ENABLE <= '0';
 
-        when INPUT_RHI_IN_M_STATE =>    -- STEP 3
+        when INPUT_RHO_IN_M_STATE =>    -- STEP 3
 
-          if (RHI_IN_M_ENABLE = '1') then
+          if (RHO_IN_M_ENABLE = '1') then
             -- Data Inputs
-            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHI_IN;
+            tensor_rho_in_int(to_integer(unsigned(index_t_rho_in_loop)), to_integer(unsigned(index_i_rho_in_loop)), to_integer(unsigned(index_m_rho_in_loop))) <= RHO_IN;
 
             -- FSM Control
             if ((unsigned(index_i_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
-              controller_rhi_in_fsm_int <= CLEAN_RHI_IN_T_STATE;
+              controller_rho_in_fsm_int <= CLEAN_RHO_IN_T_STATE;
             elsif (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
-              controller_rhi_in_fsm_int <= CLEAN_RHI_IN_I_STATE;
+              controller_rho_in_fsm_int <= CLEAN_RHO_IN_I_STATE;
             else
-              controller_rhi_in_fsm_int <= CLEAN_RHI_IN_M_STATE;
+              controller_rho_in_fsm_int <= CLEAN_RHO_IN_M_STATE;
             end if;
           end if;
 
           -- Control Outputs
-          RHI_OUT_M_ENABLE <= '0';
+          RHO_OUT_M_ENABLE <= '0';
 
-        when CLEAN_RHI_IN_T_STATE =>    -- STEP 3
+        when CLEAN_RHO_IN_T_STATE =>    -- STEP 3
 
           if ((unsigned(index_t_rho_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            RHI_OUT_T_ENABLE <= '1';
-            RHI_OUT_I_ENABLE <= '1';
-            RHI_OUT_M_ENABLE <= '1';
+            RHO_OUT_T_ENABLE <= '1';
+            RHO_OUT_I_ENABLE <= '1';
+            RHO_OUT_M_ENABLE <= '1';
 
             -- Control Internal
             index_t_rho_in_loop <= ZERO_CONTROL;
@@ -777,12 +777,12 @@ begin
             data_rho_in_enable_int <= '1';
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= STARTER_RHI_IN_STATE;
+            controller_rho_in_fsm_int <= STARTER_RHO_IN_STATE;
           elsif ((unsigned(index_t_rho_in_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            RHI_OUT_T_ENABLE <= '1';
-            RHI_OUT_I_ENABLE <= '1';
-            RHI_OUT_M_ENABLE <= '1';
+            RHO_OUT_T_ENABLE <= '1';
+            RHO_OUT_I_ENABLE <= '1';
+            RHO_OUT_M_ENABLE <= '1';
 
             -- Control Internal
             index_t_rho_in_loop <= std_logic_vector(unsigned(index_t_rho_in_loop) + unsigned(ONE_CONTROL));
@@ -790,40 +790,40 @@ begin
             index_m_rho_in_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= INPUT_RHI_IN_T_STATE;
+            controller_rho_in_fsm_int <= INPUT_RHO_IN_T_STATE;
           end if;
 
-        when CLEAN_RHI_IN_I_STATE =>    -- STEP 3
+        when CLEAN_RHO_IN_I_STATE =>    -- STEP 3
 
           if ((unsigned(index_i_rho_in_loop) < unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_rho_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            RHI_OUT_I_ENABLE <= '1';
-            RHI_OUT_M_ENABLE <= '1';
+            RHO_OUT_I_ENABLE <= '1';
+            RHO_OUT_M_ENABLE <= '1';
 
             -- Control Internal
             index_i_rho_in_loop <= std_logic_vector(unsigned(index_i_rho_in_loop) + unsigned(ONE_CONTROL));
             index_m_rho_in_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= INPUT_RHI_IN_I_STATE;
+            controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
           end if;
 
-        when CLEAN_RHI_IN_M_STATE =>    -- STEP 4
+        when CLEAN_RHO_IN_M_STATE =>    -- STEP 4
 
           if (unsigned(index_m_rho_in_loop) < unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
-            RHI_OUT_M_ENABLE <= '1';
+            RHO_OUT_M_ENABLE <= '1';
 
             -- Control Internal
             index_m_rho_in_loop <= std_logic_vector(unsigned(index_m_rho_in_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_rhi_in_fsm_int <= INPUT_RHI_IN_M_STATE;
+            controller_rho_in_fsm_int <= INPUT_RHO_IN_M_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_rhi_in_fsm_int <= STARTER_RHI_IN_STATE;
+          controller_rho_in_fsm_int <= STARTER_RHO_IN_STATE;
       end case;
     end if;
   end process;
