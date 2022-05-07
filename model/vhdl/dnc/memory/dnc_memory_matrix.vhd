@@ -194,7 +194,6 @@ begin
   -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
   -- CONTROL
-
   m_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

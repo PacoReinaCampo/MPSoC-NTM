@@ -102,30 +102,60 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
 
   -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    INPUT_STATE,                        -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    VECTOR_ADDER_STATE,                 -- STEP 3
-    VECTOR_MULTIPLICATION_STATE         -- STEP 4
+  -- Finite State Machine
+  type controller_f_in_fsm is (
+    STARTER_F_IN_STATE,                 -- STEP 0
+    INPUT_F_IN_J_STATE,                 -- STEP 1
+    CLEAN_F_IN_J_STATE                  -- STEP 2
     );
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  type controller_w_in_fsm is (
+    STARTER_W_IN_STATE,                 -- STEP 0
+    INPUT_W_IN_I_STATE,                 -- STEP 1
+    INPUT_W_IN_J_STATE,                 -- STEP 2
+    CLEAN_W_IN_I_STATE,                 -- STEP 3
+    CLEAN_W_IN_J_STATE                  -- STEP 4
+    );
+
+  type controller_psi_out_fsm is (
+    STARTER_PSI_OUT_STATE,              -- STEP 0
+    CLEAN_PSI_OUT_J_STATE,              -- STEP 1
+    OUTPUT_PSI_OUT_J_STATE              -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal controller_f_in_fsm_int : controller_f_in_fsm;
+  signal controller_w_in_fsm_int : controller_w_in_fsm;
+
+  signal controller_psi_out_fsm_int : controller_psi_out_fsm;
+
+  -- Buffer
+  signal vector_f_in_int : vector_buffer;
+  signal matrix_w_in_int : matrix_buffer;
+
+  signal vector_psi_out_int : vector_buffer;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_f_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_j_psi_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_f_in_enable_int : std_logic;
+  signal data_w_in_enable_int : std_logic;
 
   -- VECTOR MULTIPLICATION
   -- CONTROL
@@ -189,7 +219,187 @@ begin
   -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  u_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      F_OUT_ENABLE <= '0';
+
+      -- Control Internal
+      index_j_f_in_loop <= ZERO_CONTROL;
+
+      data_f_in_enable_int <= '0';
+    elsif (rising_edge(CLK)) then
+
+      case controller_f_in_fsm_int is
+        when STARTER_F_IN_STATE =>      -- STEP 0
+          -- Control Outputs
+          F_OUT_ENABLE <= '0';
+
+          if (START = '1') then
+            -- Control Internal
+            index_j_f_in_loop <= ZERO_CONTROL;
+
+            data_f_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_f_in_fsm_int <= INPUT_F_IN_J_STATE;
+          end if;
+
+        when INPUT_F_IN_J_STATE =>      -- STEP 1
+
+          if (F_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_f_in_int(to_integer(unsigned(index_j_f_in_loop))) <= F_IN;
+
+            -- FSM Control
+            controller_f_in_fsm_int <= CLEAN_F_IN_J_STATE;
+          end if;
+
+          -- Control Outputs
+          F_OUT_ENABLE <= '0';
+
+        when CLEAN_F_IN_J_STATE =>      -- STEP 2
+
+          if (unsigned(index_j_f_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Internal
+            index_j_f_in_loop <= ZERO_CONTROL;
+
+            data_f_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_f_in_fsm_int <= STARTER_F_IN_STATE;
+          elsif (unsigned(index_j_f_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Internal
+            index_j_f_in_loop <= std_logic_vector(unsigned(index_j_f_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_f_in_fsm_int <= INPUT_F_IN_J_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_f_in_fsm_int <= STARTER_F_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  w_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      W_OUT_I_ENABLE <= '0';
+      W_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_w_in_loop <= ZERO_CONTROL;
+      index_j_w_in_loop <= ZERO_CONTROL;
+
+      data_w_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_w_in_fsm_int is
+        when STARTER_W_IN_STATE =>      -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= ZERO_CONTROL;
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            data_w_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
+          else
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '0';
+            W_OUT_J_ENABLE <= '0';
+          end if;
+
+        when INPUT_W_IN_I_STATE =>      -- STEP 1
+
+          if ((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_w_in_int(to_integer(unsigned(index_i_w_in_loop)), to_integer(unsigned(index_j_w_in_loop))) <= W_IN;
+
+            -- FSM Control
+            controller_w_in_fsm_int <= CLEAN_W_IN_J_STATE;
+          end if;
+
+          -- Control Outputs
+          W_OUT_I_ENABLE <= '0';
+          W_OUT_J_ENABLE <= '0';
+
+        when INPUT_W_IN_J_STATE =>      -- STEP 2
+
+          if (W_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_w_in_int(to_integer(unsigned(index_i_w_in_loop)), to_integer(unsigned(index_j_w_in_loop))) <= W_IN;
+
+            -- FSM Control
+            if (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              controller_w_in_fsm_int <= CLEAN_W_IN_I_STATE;
+            else
+              controller_w_in_fsm_int <= CLEAN_W_IN_J_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          W_OUT_J_ENABLE <= '0';
+
+        when CLEAN_W_IN_I_STATE =>      -- STEP 3
+
+          if ((unsigned(index_i_w_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= ZERO_CONTROL;
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            data_w_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_w_in_fsm_int <= STARTER_W_IN_STATE;
+          elsif ((unsigned(index_i_w_in_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_w_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_w_in_loop <= std_logic_vector(unsigned(index_i_w_in_loop) + unsigned(ONE_CONTROL));
+            index_j_w_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_I_STATE;
+          end if;
+
+        when CLEAN_W_IN_J_STATE =>      -- STEP 4
+
+          if (unsigned(index_j_w_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            W_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_w_in_loop <= std_logic_vector(unsigned(index_j_w_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_w_in_fsm_int <= INPUT_W_IN_J_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_w_in_fsm_int <= STARTER_W_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  psi_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -198,123 +408,68 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      PSI_OUT_ENABLE <= '0';
+
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_j_psi_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+      case controller_psi_out_fsm_int is
+        when STARTER_PSI_OUT_STATE =>   -- STEP 0
+          if (data_f_in_enable_int = '1' and data_w_in_enable_int = '1') then
+            -- Data Internal
+ 
+            -- Control Internal
+            index_j_psi_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_psi_out_fsm_int <= CLEAN_PSI_OUT_J_STATE;
+          end if;
+
+        when CLEAN_PSI_OUT_J_STATE =>   -- STEP 1
           -- Control Outputs
-          READY <= '0';
+          PSI_OUT_ENABLE <= '0';
 
-          -- Control Internal
-          index_loop <= ZERO_CONTROL;
+          -- FSM Control
+          controller_psi_out_fsm_int <= OUTPUT_PSI_OUT_J_STATE;
 
-          if (START = '1') then
-            -- Control Internal
-            start_vector_float_multiplier <= '1';
+        when OUTPUT_PSI_OUT_J_STATE =>  -- STEP 2
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_STATE;
-          else
-            -- Control Internal
-            start_vector_float_multiplier <= '0';
-          end if;
-
-        when INPUT_STATE =>             -- STEP 1
-
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
-
-          if (data_out_enable_vector_float_multiplier = '1') then
-            -- Control Internal
-            start_vector_float_adder <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
-          else
-            -- Control Internal
-            start_vector_float_multiplier <= '0';
-          end if;
-
-        when VECTOR_ADDER_STATE =>      -- STEP 3
-
-          if (data_out_enable_vector_float_adder = '1') then
-            -- Control Internal
-            start_vector_float_multiplier <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
-          else
-            -- Control Internal
-            start_vector_float_adder <= '0';
-          end if;
-
-        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
-
-          if (data_out_enable_vector_float_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-            end if;
-
+          if (unsigned(index_j_psi_out_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            PSI_OUT <= data_out_vector_multiplication;
+            PSI_OUT <= vector_psi_out_int(to_integer(unsigned(index_j_psi_out_loop)));
+
+            -- Control Outputs
+            READY <= '1';
+
+            PSI_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_psi_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_psi_out_fsm_int <= STARTER_PSI_OUT_STATE;
+          elsif (unsigned(index_j_psi_out_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            PSI_OUT <= vector_psi_out_int(to_integer(unsigned(index_j_psi_out_loop)));
 
             -- Control Outputs
             PSI_OUT_ENABLE <= '1';
-          else
-            -- Control Outputs
-            PSI_OUT_ENABLE <= '0';
 
             -- Control Internal
-            start_vector_float_multiplier <= '0';
+            index_j_psi_out_loop <= std_logic_vector(unsigned(index_j_psi_out_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_psi_out_fsm_int <= CLEAN_PSI_OUT_J_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          controller_psi_out_fsm_int <= STARTER_PSI_OUT_STATE;
       end case;
     end if;
   end process;
-
-  -- VECTOR ADDER
-  operation_vector_float_adder <= '0';
-
-  data_a_in_enable_vector_float_adder <= data_out_enable_vector_float_multiplier;
-  data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_multiplier;
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_float_multiplier <= F_IN_ENABLE;
-  data_b_in_enable_vector_float_multiplier <= W_IN_I_ENABLE;
-
-  -- VECTOR MULTIPLICATION
-  data_in_enable_vector_multiplication <= data_out_enable_vector_multiplication;
-  data_in_enable_vector_multiplication <= data_out_enable_vector_multiplication;
-
-  -- DATA
-  -- VECTOR ADDER
-  size_in_vector_float_adder   <= SIZE_N_IN;
-  data_a_in_vector_float_adder <= ONE_DATA;
-  data_b_in_vector_float_adder <= data_out_vector_float_multiplier;
-
-  -- VECTOR MULTIPLIER
-  size_in_vector_float_multiplier   <= SIZE_N_IN;
-  data_a_in_vector_float_multiplier <= F_IN;
-  data_b_in_vector_float_multiplier <= W_IN;
-
-  -- VECTOR MULTIPLICATION
-  length_in_vector_multiplication <= SIZE_N_IN;
-  data_in_vector_multiplication   <= data_out_vector_multiplication;
 
   -- VECTOR ADDER
   vector_float_adder : ntm_vector_float_adder

@@ -538,7 +538,7 @@ begin
 
       case controller_w_out_fsm_int is
         when STARTER_W_OUT_STATE =>     -- STEP 0
-          if (data_b_in_enable_int = '1' and data_pi_in_enable_int = '1') then
+          if (data_in_enable_int = '1' and data_pi_in_enable_int = '1') then
             -- Data Internal
             matrix_w_out_int <= function_dnc_read_weighting (
               SIZE_R_IN => SIZE_R_IN,

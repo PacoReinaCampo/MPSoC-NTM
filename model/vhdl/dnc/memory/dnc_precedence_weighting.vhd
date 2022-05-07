@@ -134,7 +134,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_w_in_enable_int : std_logic;
   signal data_p_in_enable_int : std_logic;
 
-  signal datw_in_enable_int : std_logic;
+  signal data_in_enable_int : std_logic;
 
 begin
 
@@ -159,7 +159,7 @@ begin
       data_w_in_enable_int <= '0';
       data_p_in_enable_int <= '0';
 
-      datw_in_enable_int <= '0';
+      data_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -176,7 +176,7 @@ begin
             data_w_in_enable_int <= '0';
             data_p_in_enable_int <= '0';
 
-            datw_in_enable_int <= '0';
+            data_in_enable_int <= '0';
 
             -- FSM Control
             controller_in_fsm_int <= INPUT_STATE;
@@ -227,7 +227,7 @@ begin
             -- Control Internal
             index_j_in_loop <= ZERO_CONTROL;
 
-            datw_in_enable_int <= '1';
+            data_in_enable_int <= '1';
 
             -- FSM Control
             controller_in_fsm_int <= STARTER_STATE;
@@ -268,7 +268,7 @@ begin
 
       case controller_p_out_fsm_int is
         when STARTER_P_OUT_STATE =>     -- STEP 0
-          if (datw_in_enable_int = '1') then
+          if (data_in_enable_int = '1') then
             -- Data Internal
             vector_p_out_int <= function_dnc_precedence_weighting (
               SIZE_N_IN => SIZE_N_IN,

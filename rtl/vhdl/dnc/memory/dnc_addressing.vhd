@@ -143,33 +143,105 @@ architecture dnc_addressing_architecture of dnc_addressing is
   -- OUTPUT_W_STATE, CLEAN_OUT_W_STATE
 
   -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
-    STARTER_STATE,                       -- STEP 0
-    PRECEDENCE_WEIGHTING_STATE,          -- STEP 1
-    TEMPORAL_LINK_MATRIX_STATE,          -- STEP 2
-    BACKWARD_FORWARD_WEIGHTING_STATE,    -- STEP 3
-    MEMORY_RETENTION_VECTOR_STATE,       -- STEP 4
-    USAGE_VECTOR_STATE,                  -- STEP 5
-    ALLOCATION_WEIGHTING_STATE,          -- STEP 6
-    READ_WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 7
-    READ_WRITE_WEIGHTING_STATE,          -- STEP 8
-    MEMORY_MATRIX_STATE,                 -- STEP 9
-    READ_VECTORS_STATE                   -- STEP 10
+  -- Finite State Machine
+  type controller_k_read_in_fsm is (
+    STARTER_K_READ_IN_STATE,            -- STEP 0
+    INPUT_K_READ_IN_I_STATE,            -- STEP 1
+    INPUT_K_READ_IN_K_STATE,            -- STEP 2
+    CLEAN_K_READ_IN_I_STATE,            -- STEP 3
+    CLEAN_K_READ_IN_K_STATE             -- STEP 4
     );
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+  type controller_pi_read_in_fsm is (
+    STARTER_PI_READ_IN_STATE,           -- STEP 0
+    INPUT_PI_READ_IN_I_STATE,           -- STEP 1
+    INPUT_PI_READ_IN_P_STATE,           -- STEP 2
+    CLEAN_PI_READ_IN_I_STATE,           -- STEP 3
+    CLEAN_PI_READ_IN_P_STATE            -- STEP 4
+    );
+
+  type controller_read_in_fsm is (
+    STARTER_READ_IN_STATE,              -- STEP 0
+    INPUT_READ_STATE,                   -- STEP 1
+    CLEAN_READ_STATE                    -- STEP 2
+    );
+
+  type controller_write_in_fsm is (
+    STARTER_WRITE_IN_STATE,             -- STEP 0
+    INPUT_WRITE_STATE,                  -- STEP 1
+    CLEAN_WRITE_STATE                   -- STEP 2
+    );
+
+  type controller_r_out_fsm is (
+    STARTER_R_OUT_STATE,                -- STEP 0
+    CLEAN_R_OUT_I_STATE,                -- STEP 1
+    CLEAN_R_OUT_K_STATE,                -- STEP 2
+    OUTPUT_R_OUT_I_STATE,               -- STEP 3
+    OUTPUT_R_OUT_K_STATE                -- STEP 4
+    );
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal controller_k_read_in_fsm_read_int  : controller_k_read_in_fsm;
+  signal controller_pi_read_in_fsm_read_int : controller_pi_read_in_fsm;
+
+  signal controller_read_in_fsm_int : controller_read_in_fsm;
+
+  signal controller_write_in_fsm_int : controller_write_in_fsm;
+
+  signal controller_r_out_fsm_read_int : controller_r_out_fsm;
+
+  -- Buffer
+  signal matrix_k_read_in_int    : matrix_buffer;
+  signal vector_beta_read_in_int : vector_buffer;
+  signal vector_f_read_in_int    : vector_buffer;
+  signal matrix_pi_read_in_int   : matrix_buffer;
+
+  signal vector_k_write_in_int : vector_buffer;
+  signal vector_e_write_in_int : vector_buffer;
+  signal vector_v_write_in_int : vector_buffer;
+
+
+  signal matrix_r_out_int : matrix_buffer;
+
+  -- Control Internal
+  signal index_j_k_read_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_k_read_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_pi_read_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_p_pi_read_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_in_read_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_k_in_write_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_k_read_in_enable_int : std_logic;
+
+  signal data_pi_read_in_enable_int : std_logic;
+
+  signal data_beta_read_in_enable_int : std_logic;
+  signal data_f_read_in_enable_int    : std_logic;
+
+  signal data_read_in_enable_int : std_logic;
+
+  signal data_k_write_in_enable_int : std_logic;
+  signal data_e_write_in_enable_int : std_logic;
+  signal data_v_write_in_enable_int : std_logic;
+
+  signal data_write_in_enable_int : std_logic;
 
   -- ALLOCATION WEIGHTING
   -- CONTROL
@@ -531,299 +603,600 @@ begin
   -----------------------------------------------------------------------
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  k_read_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      K_READ_OUT_I_ENABLE <= '0';
+      K_READ_OUT_K_ENABLE <= '0';
+
+      -- Control Internal
+      index_j_k_read_in_loop <= ZERO_CONTROL;
+      index_k_k_read_in_loop <= ZERO_CONTROL;
+
+      data_k_read_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_k_read_in_fsm_read_int is
+        when STARTER_K_READ_IN_STATE =>  -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            K_READ_OUT_I_ENABLE <= '1';
+            K_READ_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_k_read_in_loop <= ZERO_CONTROL;
+            index_k_k_read_in_loop <= ZERO_CONTROL;
+
+            data_k_read_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_k_read_in_fsm_read_int <= INPUT_K_READ_IN_I_STATE;
+          else
+            -- Control Outputs
+            K_READ_OUT_I_ENABLE <= '0';
+            K_READ_OUT_K_ENABLE <= '0';
+          end if;
+
+        when INPUT_K_READ_IN_I_STATE =>  -- STEP 1
+
+          if ((K_READ_IN_I_ENABLE = '1') and (K_READ_IN_K_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_k_read_in_int(to_integer(unsigned(index_j_k_read_in_loop)), to_integer(unsigned(index_k_k_read_in_loop))) <= K_READ_IN;
+
+            -- FSM Control
+            controller_k_read_in_fsm_read_int <= CLEAN_K_READ_IN_K_STATE;
+          end if;
+
+          -- Control Outputs
+          K_READ_OUT_I_ENABLE <= '0';
+          K_READ_OUT_K_ENABLE <= '0';
+
+        when INPUT_K_READ_IN_K_STATE =>  -- STEP 2
+
+          if (K_READ_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            matrix_k_read_in_int(to_integer(unsigned(index_j_k_read_in_loop)), to_integer(unsigned(index_k_k_read_in_loop))) <= K_READ_IN;
+
+            -- FSM Control
+            if (unsigned(index_k_k_read_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              controller_k_read_in_fsm_read_int <= CLEAN_K_READ_IN_I_STATE;
+            else
+              controller_k_read_in_fsm_read_int <= CLEAN_K_READ_IN_K_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          K_READ_OUT_K_ENABLE <= '0';
+
+        when CLEAN_K_READ_IN_I_STATE =>  -- STEP 3
+
+          if ((unsigned(index_j_k_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_k_read_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            K_READ_OUT_I_ENABLE <= '1';
+            K_READ_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_k_read_in_loop <= ZERO_CONTROL;
+            index_k_k_read_in_loop <= ZERO_CONTROL;
+
+            data_k_read_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_k_read_in_fsm_read_int <= STARTER_K_READ_IN_STATE;
+          elsif ((unsigned(index_j_k_read_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_k_read_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            K_READ_OUT_I_ENABLE <= '1';
+            K_READ_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_k_read_in_loop <= std_logic_vector(unsigned(index_j_k_read_in_loop) + unsigned(ONE_CONTROL));
+            index_k_k_read_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_k_read_in_fsm_read_int <= INPUT_K_READ_IN_I_STATE;
+          end if;
+
+        when CLEAN_K_READ_IN_K_STATE =>  -- STEP 4
+
+          if (unsigned(index_k_k_read_in_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            K_READ_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_k_read_in_loop <= std_logic_vector(unsigned(index_k_k_read_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_k_read_in_fsm_read_int <= INPUT_K_READ_IN_K_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_k_read_in_fsm_read_int <= STARTER_K_READ_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  pi_read_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      PI_READ_OUT_I_ENABLE <= '0';
+      PI_READ_OUT_P_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_pi_read_in_loop <= ZERO_CONTROL;
+      index_p_pi_read_in_loop <= ZERO_CONTROL;
+
+      data_pi_read_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_pi_read_in_fsm_read_int is
+        when STARTER_PI_READ_IN_STATE =>  -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            PI_READ_OUT_I_ENABLE <= '1';
+            PI_READ_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_pi_read_in_loop <= ZERO_CONTROL;
+            index_p_pi_read_in_loop <= ZERO_CONTROL;
+
+            data_pi_read_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_pi_read_in_fsm_read_int <= INPUT_PI_READ_IN_I_STATE;
+          else
+            -- Control Outputs
+            PI_READ_OUT_I_ENABLE <= '0';
+            PI_READ_OUT_P_ENABLE <= '0';
+          end if;
+
+        when INPUT_PI_READ_IN_I_STATE =>  -- STEP 1
+
+          if ((PI_READ_IN_I_ENABLE = '1') and (PI_READ_IN_P_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_pi_read_in_int(to_integer(unsigned(index_i_pi_read_in_loop)), to_integer(unsigned(index_p_pi_read_in_loop))) <= PI_READ_IN;
+
+            -- FSM Control
+            controller_pi_read_in_fsm_read_int <= CLEAN_PI_READ_IN_P_STATE;
+          end if;
+
+          -- Control Outputs
+          PI_READ_OUT_I_ENABLE <= '0';
+          PI_READ_OUT_P_ENABLE <= '0';
+
+        when INPUT_PI_READ_IN_P_STATE =>  -- STEP 2
+
+          if (PI_READ_IN_P_ENABLE = '1') then
+            -- Data Inputs
+            matrix_pi_read_in_int(to_integer(unsigned(index_i_pi_read_in_loop)), to_integer(unsigned(index_p_pi_read_in_loop))) <= PI_READ_IN;
+
+            -- FSM Control
+            if (unsigned(index_p_pi_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              controller_pi_read_in_fsm_read_int <= CLEAN_PI_READ_IN_I_STATE;
+            else
+              controller_pi_read_in_fsm_read_int <= CLEAN_PI_READ_IN_P_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          PI_READ_OUT_P_ENABLE <= '0';
+
+        when CLEAN_PI_READ_IN_I_STATE =>  -- STEP 3
+
+          if ((unsigned(index_i_pi_read_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            PI_READ_OUT_I_ENABLE <= '1';
+            PI_READ_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_pi_read_in_loop <= ZERO_CONTROL;
+            index_p_pi_read_in_loop <= ZERO_CONTROL;
+
+            data_pi_read_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_pi_read_in_fsm_read_int <= STARTER_PI_READ_IN_STATE;
+          elsif ((unsigned(index_i_pi_read_in_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_p_pi_read_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            PI_READ_OUT_I_ENABLE <= '1';
+            PI_READ_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_pi_read_in_loop <= std_logic_vector(unsigned(index_i_pi_read_in_loop) + unsigned(ONE_CONTROL));
+            index_p_pi_read_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_pi_read_in_fsm_read_int <= INPUT_PI_READ_IN_I_STATE;
+          end if;
+
+        when CLEAN_PI_READ_IN_P_STATE =>  -- STEP 4
+
+          if (unsigned(index_p_pi_read_in_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            PI_READ_OUT_P_ENABLE <= '1';
+
+            -- Control Internal
+            index_p_pi_read_in_loop <= std_logic_vector(unsigned(index_p_pi_read_in_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_pi_read_in_fsm_read_int <= INPUT_PI_READ_IN_P_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_pi_read_in_fsm_read_int <= STARTER_PI_READ_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  read_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      BETA_READ_OUT_ENABLE <= '0';
+      F_READ_OUT_ENABLE    <= '0';
+
+      -- Control Internal
+      index_i_in_read_loop <= ZERO_CONTROL;
+
+      data_beta_read_in_enable_int <= '0';
+      data_f_read_in_enable_int    <= '0';
+
+      data_read_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_read_in_fsm_int is
+        when STARTER_READ_IN_STATE =>   -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            BETA_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
+
+            -- Control Internal
+            index_i_in_read_loop <= ZERO_CONTROL;
+
+            data_beta_read_in_enable_int <= '0';
+            data_f_read_in_enable_int    <= '0';
+
+            data_read_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_read_in_fsm_int <= INPUT_READ_STATE;
+          else
+            -- Control Outputs
+            BETA_READ_OUT_ENABLE <= '0';
+            F_READ_OUT_ENABLE    <= '0';
+          end if;
+
+        when INPUT_READ_STATE =>        -- STEP 1
+
+          if (BETA_READ_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_beta_read_in_int(to_integer(unsigned(index_i_in_read_loop))) <= BETA_READ_IN;
+
+            -- Control Internal
+            data_beta_read_in_enable_int <= '1';
+          end if;
+
+          if (F_READ_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_f_read_in_int(to_integer(unsigned(index_i_in_read_loop))) <= F_READ_IN;
+
+            -- Control Internal
+            data_f_read_in_enable_int <= '1';
+          end if;
+
+          -- Control Outputs
+          BETA_READ_OUT_ENABLE <= '0';
+          F_READ_OUT_ENABLE    <= '0';
+
+          if (data_beta_read_in_enable_int = '1' and data_f_read_in_enable_int = '1') then
+            -- Control Internal
+            data_beta_read_in_enable_int <= '0';
+            data_f_read_in_enable_int    <= '0';
+
+            -- FSM Control
+            controller_read_in_fsm_int <= CLEAN_READ_STATE;
+          end if;
+
+        when CLEAN_READ_STATE =>        -- STEP 2
+
+          if (unsigned(index_i_in_read_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            BETA_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
+
+            -- Control Internal
+            index_i_in_read_loop <= ZERO_CONTROL;
+
+            data_read_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_read_in_fsm_int <= STARTER_READ_IN_STATE;
+          elsif (unsigned(index_i_in_read_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            BETA_READ_OUT_ENABLE <= '1';
+            F_READ_OUT_ENABLE    <= '1';
+
+            -- Control Internal
+            index_i_in_read_loop <= std_logic_vector(unsigned(index_i_in_read_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_read_in_fsm_int <= INPUT_READ_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_read_in_fsm_int <= STARTER_READ_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  write_in_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Outputs
+      K_WRITE_OUT_K_ENABLE <= '0';
+      E_WRITE_OUT_K_ENABLE <= '0';
+      V_WRITE_OUT_K_ENABLE <= '0';
+
+      -- Control Internal
+      index_k_in_write_loop <= ZERO_CONTROL;
+
+      data_k_write_in_enable_int <= '0';
+      data_e_write_in_enable_int <= '0';
+      data_v_write_in_enable_int <= '0';
+
+      data_write_in_enable_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_write_in_fsm_int is
+        when STARTER_WRITE_IN_STATE =>  -- STEP 0
+          if (START = '1') then
+            -- Control Outputs
+            K_WRITE_OUT_K_ENABLE <= '1';
+            E_WRITE_OUT_K_ENABLE <= '1';
+            V_WRITE_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_in_write_loop <= ZERO_CONTROL;
+
+            data_k_write_in_enable_int <= '0';
+            data_e_write_in_enable_int <= '0';
+            data_v_write_in_enable_int <= '0';
+
+            data_write_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_write_in_fsm_int <= INPUT_WRITE_STATE;
+          else
+            -- Control Outputs
+            K_WRITE_OUT_K_ENABLE <= '0';
+            E_WRITE_OUT_K_ENABLE <= '0';
+            V_WRITE_OUT_K_ENABLE <= '0';
+          end if;
+
+        when INPUT_WRITE_STATE =>       -- STEP 1
+
+          if (K_WRITE_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            vector_k_write_in_int(to_integer(unsigned(index_k_in_write_loop))) <= K_WRITE_IN;
+
+            -- Control Internal
+            data_k_write_in_enable_int <= '1';
+          end if;
+
+          if (E_WRITE_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            vector_e_write_in_int(to_integer(unsigned(index_k_in_write_loop))) <= E_WRITE_IN;
+
+            -- Control Internal
+            data_e_write_in_enable_int <= '1';
+          end if;
+
+          if (V_WRITE_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            vector_v_write_in_int(to_integer(unsigned(index_k_in_write_loop))) <= V_WRITE_IN;
+
+            -- Control Internal
+            data_v_write_in_enable_int <= '1';
+          end if;
+
+          -- Control Outputs
+          K_WRITE_OUT_K_ENABLE <= '0';
+          E_WRITE_OUT_K_ENABLE <= '0';
+          V_WRITE_OUT_K_ENABLE <= '0';
+
+          if (data_k_write_in_enable_int = '1' and data_e_write_in_enable_int = '1' and data_v_write_in_enable_int = '1') then
+            -- Control Internal
+            data_k_write_in_enable_int <= '0';
+            data_e_write_in_enable_int <= '0';
+            data_v_write_in_enable_int <= '0';
+
+            -- FSM Control
+            controller_write_in_fsm_int <= CLEAN_WRITE_STATE;
+          end if;
+
+        when CLEAN_WRITE_STATE =>       -- STEP 2
+
+          if (unsigned(index_k_in_write_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            K_WRITE_OUT_K_ENABLE <= '1';
+            E_WRITE_OUT_K_ENABLE <= '1';
+            V_WRITE_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_in_write_loop <= ZERO_CONTROL;
+
+            data_write_in_enable_int <= '1';
+
+            -- FSM Control
+            controller_write_in_fsm_int <= STARTER_WRITE_IN_STATE;
+          elsif (unsigned(index_k_in_write_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            K_WRITE_OUT_K_ENABLE <= '1';
+            E_WRITE_OUT_K_ENABLE <= '1';
+            V_WRITE_OUT_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_in_write_loop <= std_logic_vector(unsigned(index_k_in_write_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            controller_write_in_fsm_int <= INPUT_WRITE_STATE;
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_write_in_fsm_int <= STARTER_WRITE_IN_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+  -- p(t=0) = 0
+
+
+  -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+  -- L(t=0)[g,j] = 0
+
+
+  -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+
+  -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+
+
+  -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+
+
+  -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+
+
+  -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+
+
+  -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+
+  -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
+
+
+  -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+
+  -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
+
+
+  -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
+
+
+  -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+  r_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
       R_OUT <= ZERO_DATA;
 
-      R_OUT_I_ENABLE <= '0';
-      R_OUT_K_ENABLE <= '0';
-
       -- Control Outputs
       READY <= '0';
 
+      R_OUT_I_ENABLE <= '0';
+      R_OUT_K_ENABLE <= '0';
+
+      -- Control Internal
+      index_i_r_out_loop <= ZERO_CONTROL;
+      index_k_r_out_loop <= ZERO_CONTROL;
+
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Control Outputs
-          READY <= '0';
+      case controller_r_out_fsm_read_int is
+        when STARTER_R_OUT_STATE =>     -- STEP 0
+          if (data_pi_read_in_enable_int = '1' and data_k_read_in_enable_int = '1' and data_read_in_enable_int = '1' and data_write_in_enable_int = '1') then
+            -- Data Internal
 
+            -- Control Internal
+            index_i_r_out_loop <= ZERO_CONTROL;
+            index_k_r_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_r_out_fsm_read_int <= CLEAN_R_OUT_I_STATE;
+          end if;
+
+        when CLEAN_R_OUT_I_STATE =>     -- STEP 1
+          -- Control Outputs
           R_OUT_I_ENABLE <= '0';
           R_OUT_K_ENABLE <= '0';
 
-          if (START = '1') then
-            -- Control Internal
-            start_precedence_weighting <= '1';
+          -- FSM Control
+          controller_r_out_fsm_read_int <= OUTPUT_R_OUT_K_STATE;
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= PRECEDENCE_WEIGHTING_STATE;
+        when CLEAN_R_OUT_K_STATE =>     -- STEP 2
+
+          -- Control Outputs
+          R_OUT_K_ENABLE <= '0';
+
+          -- FSM Control
+          if (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_r_out_fsm_read_int <= OUTPUT_R_OUT_I_STATE;
           else
-            -- Control Internal
-            start_precedence_weighting <= '0';
+            controller_r_out_fsm_read_int <= OUTPUT_R_OUT_K_STATE;
           end if;
 
-        when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 1
+        when OUTPUT_R_OUT_I_STATE =>    -- STEP 3
 
-          -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
-          -- p(t=0) = 0
+          if ((unsigned(index_i_r_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            R_OUT <= matrix_r_out_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
 
-        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 2
+            -- Control Outputs
+            READY <= '1';
 
-          -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
-          -- L(t=0)[g,j] = 0
+            R_OUT_I_ENABLE <= '1';
+            R_OUT_K_ENABLE <= '1';
 
-        when BACKWARD_FORWARD_WEIGHTING_STATE =>  -- STEP 3
+            -- Control Internal
+            index_i_r_out_loop <= ZERO_CONTROL;
+            index_k_r_out_loop <= ZERO_CONTROL;
 
-          -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+            -- FSM Control
+            controller_r_out_fsm_read_int <= STARTER_R_OUT_STATE;
+          elsif ((unsigned(index_i_r_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_r_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            R_OUT <= matrix_r_out_int(to_integer(unsigned(index_i_r_out_loop)), to_integer(unsigned(index_k_r_out_loop)));
 
-          -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+            -- Control Outputs
+            R_OUT_I_ENABLE <= '1';
+            R_OUT_K_ENABLE <= '1';
 
-        when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 4
+            -- Control Internal
+            index_i_r_out_loop <= std_logic_vector(unsigned(index_i_r_out_loop) + unsigned(ONE_CONTROL));
+            index_k_r_out_loop <= ZERO_CONTROL;
 
-          -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+            -- FSM Control
+            controller_r_out_fsm_read_int <= CLEAN_R_OUT_I_STATE;
+          end if;
 
-        when USAGE_VECTOR_STATE =>      -- STEP 5
+        when OUTPUT_R_OUT_K_STATE =>    -- STEP 4
 
-          -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+          if (unsigned(index_k_r_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            R_OUT_K_ENABLE <= '1';
 
-        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 6
+            -- Control Internal
+            index_k_r_out_loop <= std_logic_vector(unsigned(index_k_r_out_loop) + unsigned(ONE_CONTROL));
 
-          -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
-
-        when READ_WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 7
-
-          -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
-
-          -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
-
-        when READ_WRITE_WEIGHTING_STATE =>  -- STEP 8
-
-          -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
-
-          -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
-
-        when MEMORY_MATRIX_STATE =>     -- STEP 9
-
-          -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
-
-        when READ_VECTORS_STATE =>      -- STEP 10
-
-          -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+            -- FSM Control
+            controller_r_out_fsm_read_int <= CLEAN_R_OUT_K_STATE;
+          end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          controller_r_out_fsm_read_int <= STARTER_R_OUT_STATE;
       end case;
     end if;
   end process;
-
-  -- ALLOCATION WEIGHTING
-  u_in_enable_allocation_weighting <= '0';
-
-  -- BACKWARD WEIGHTING
-  l_in_g_enable_backward_weighting <= '0';
-  l_in_j_enable_backward_weighting <= '0';
-
-  w_in_i_enable_backward_weighting <= '0';
-  w_in_j_enable_backward_weighting <= '0';
-
-  -- FORWARD WEIGHTING
-  l_in_g_enable_forward_weighting <= '0';
-  l_in_j_enable_forward_weighting <= '0';
-
-  w_in_i_enable_forward_weighting <= '0';
-  w_in_j_enable_forward_weighting <= '0';
-
-  -- MEMORY MATRIX
-  m_in_j_enable_memory_matrix <= '0';
-  m_in_k_enable_memory_matrix <= '0';
-
-  w_in_j_enable_memory_matrix <= '0';
-  v_in_k_enable_memory_matrix <= '0';
-  e_in_k_enable_memory_matrix <= '0';
-
-  -- MEMORY RETENTION VECTOR
-  f_in_enable_memory_retention_vector <= '0';
-
-  w_in_i_enable_memory_retention_vector <= '0';
-  w_in_j_enable_memory_retention_vector <= '0';
-
-  -- PRECEDENCE WEIGHTING
-  w_in_enable_precedence_weighting <= '0';
-  p_in_enable_precedence_weighting <= '0';
-
-  -- READ CONTENT WEIGHTING
-  k_in_enable_read_content_weighting <= '0';
-
-  m_in_j_enable_read_content_weighting <= '0';
-  m_in_k_enable_read_content_weighting <= '0';
-
-  -- READ VECTORS
-  m_in_j_enable_read_vectors <= '0';
-  m_in_k_enable_read_vectors <= '0';
-
-  w_in_i_enable_read_vectors <= '0';
-  w_in_j_enable_read_vectors <= '0';
-
-  -- READ WEIGHTING
-  pi_in_i_enable_read_weighting <= '0';
-  pi_in_p_enable_read_weighting <= '0';
-
-  b_in_i_enable_read_weighting <= '0';
-  b_in_j_enable_read_weighting <= '0';
-
-  c_in_i_enable_read_weighting <= '0';
-  c_in_j_enable_read_weighting <= '0';
-
-  f_in_i_enable_read_weighting <= '0';
-  f_in_j_enable_read_weighting <= '0';
-
-  -- TEMPORAL LINK MATRIX
-  l_in_g_enable_temporal_link_matrix <= '0';
-  l_in_j_enable_temporal_link_matrix <= '0';
-
-  w_in_enable_temporal_link_matrix <= '0';
-  p_in_enable_temporal_link_matrix <= '0';
-
-  -- USAGE VECTOR
-  u_in_enable_usage_vector   <= '0';
-  w_in_enable_usage_vector   <= '0';
-  psi_in_enable_usage_vector <= '0';
-
-  -- WRITE CONTENT WEIGHTING
-  k_in_enable_write_content_weighting <= '0';
-
-  m_in_j_enable_write_content_weighting <= '0';
-  m_in_k_enable_write_content_weighting <= '0';
-
-  -- WRITE WEIGHTING
-  a_in_enable_write_weighting <= '0';
-  c_in_enable_write_weighting <= '0';
-
-  -- DATA
-  -- ALLOCATION WEIGHTING
-  size_n_in_allocation_weighting <= ONE_CONTROL;
-
-  u_in_allocation_weighting <= FULL;
-
-  a_out_allocation_weighting <= FULL;
-
-  -- BACKWARD WEIGHTING
-  size_r_in_backward_weighting <= ONE_CONTROL;
-  size_n_in_backward_weighting <= ONE_CONTROL;
-
-  l_in_backward_weighting  <= FULL;
-  w_in_backward_weighting  <= FULL;
-  b_out_backward_weighting <= FULL;
-
-  -- FORWARD WEIGHTING
-  l_in_forward_weighting <= FULL;
-
-  w_in_forward_weighting <= FULL;
-
-  f_out_forward_weighting <= FULL;
-
-  -- MEMORY MATRIX
-  size_n_in_memory_matrix <= ONE_CONTROL;
-  size_w_in_memory_matrix <= ONE_CONTROL;
-
-  m_in_memory_matrix <= FULL;
-
-  w_in_memory_matrix <= FULL;
-  v_in_memory_matrix <= FULL;
-  e_in_memory_matrix <= FULL;
-
-  m_out_memory_matrix <= FULL;
-
-  -- MEMORY RETENTION VECTOR
-  size_r_in_memory_retention_vector <= ONE_CONTROL;
-  size_n_in_memory_retention_vector <= ONE_CONTROL;
-
-  f_in_memory_retention_vector <= FULL;
-  w_in_memory_retention_vector <= FULL;
-
-  psi_out_memory_retention_vector <= FULL;
-
-  -- PRECEDENCE WEIGHTING
-  size_n_in_precedence_weighting <= ONE_CONTROL;
-
-  w_in_precedence_weighting <= FULL;
-  p_in_precedence_weighting <= FULL;
-
-  p_out_precedence_weighting <= FULL;
-
-  -- READ CONTENT WEIGHTING
-  size_n_in_read_content_weighting <= ONE_CONTROL;
-  size_w_in_read_content_weighting <= ONE_CONTROL;
-
-  k_in_read_content_weighting    <= FULL;
-  m_in_read_content_weighting    <= FULL;
-  beta_in_read_content_weighting <= FULL;
-
-  c_out_read_content_weighting <= FULL;
-
-  -- READ VECTORS
-  size_r_in_read_vectors <= ONE_CONTROL;
-  size_n_in_read_vectors <= ONE_CONTROL;
-  size_w_in_read_vectors <= ONE_CONTROL;
-
-  m_in_read_vectors <= FULL;
-  w_in_read_vectors <= FULL;
-
-  r_out_read_vectors <= FULL;
-
-  -- READ WEIGHTING
-  size_r_in_read_weighting <= ONE_CONTROL;
-  size_n_in_read_weighting <= ONE_CONTROL;
-
-  pi_in_read_weighting <= FULL;
-
-  b_in_read_weighting <= FULL;
-  c_in_read_weighting <= FULL;
-  f_in_read_weighting <= FULL;
-
-  w_out_read_weighting <= FULL;
-
-  -- TEMPORAL LINK MATRIX
-  size_n_in_temporal_link_matrix <= ONE_CONTROL;
-
-  l_in_temporal_link_matrix <= FULL;
-  w_in_temporal_link_matrix <= FULL;
-  p_in_temporal_link_matrix <= FULL;
-
-  l_out_temporal_link_matrix <= FULL;
-
-  -- USAGE VECTOR
-  size_n_in_usage_vector <= ONE_CONTROL;
-
-  u_in_usage_vector   <= FULL;
-  w_in_usage_vector   <= FULL;
-  psi_in_usage_vector <= FULL;
-
-  u_out_usage_vector <= FULL;
-
-  -- WRITE CONTENT WEIGHTING
-  size_n_in_write_content_weighting <= ONE_CONTROL;
-  size_w_in_write_content_weighting <= ONE_CONTROL;
-
-  k_in_write_content_weighting    <= FULL;
-  m_in_write_content_weighting    <= FULL;
-  beta_in_write_content_weighting <= FULL;
-
-  c_out_content_weighting <= FULL;
-
-  -- WRITE WEIGHTING
-  size_n_in_write_weighting <= ONE_CONTROL;
-
-  a_in_write_weighting <= FULL;
-  c_in_write_weighting <= FULL;
-
-  ga_in_write_weighting <= FULL;
-  gw_in_write_weighting <= FULL;
-
-  w_out_write_weighting <= FULL;
 
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting

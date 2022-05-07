@@ -44,7 +44,6 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
-
 use work.dnc_core_pkg.all;
 
 entity dnc_read_content_weighting is

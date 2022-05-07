@@ -374,7 +374,7 @@ begin
       case controller_c_out_fsm_int is
         when STARTER_C_OUT_STATE =>     -- STEP 0
           if (data_k_in_enable_int = '1' and data_m_in_enable_int = '1') then
-            -- Control Internal
+            -- Data Internal
             vector_c_out_int <= function_dnc_vector_content_based_addressing (
               SIZE_N_IN => SIZE_I_IN,
               SIZE_W_IN => SIZE_J_IN,

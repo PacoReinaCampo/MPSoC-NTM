@@ -92,6 +92,10 @@ architecture dnc_sort_vector_architecture of dnc_sort_vector is
   -- OUTPUT_N_STATE, CLEAN_OUT_N_STATE
 
   -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
@@ -103,13 +107,6 @@ architecture dnc_sort_vector_architecture of dnc_sort_vector is
     CLEAN_STATE,                        -- STEP 5
     OPERATION_STATE                     -- STEP 8
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
