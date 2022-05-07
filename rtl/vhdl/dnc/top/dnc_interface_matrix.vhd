@@ -108,7 +108,7 @@ architecture dnc_interface_matrix_architecture of dnc_interface_matrix is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
+  -- TENSOR MATRIX PRODUCT
   -- CONTROL
   signal start_tensor_matrix_product : std_logic;
   signal ready_tensor_matrix_product : std_logic;
@@ -178,7 +178,7 @@ begin
 
   RHO_OUT <= data_out_tensor_matrix_product;
 
-  -- MATRIX VECTOR PRODUCT
+  -- TENSOR MATRIX PRODUCT
   tensor_matrix_product : ntm_tensor_matrix_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
