@@ -1531,17 +1531,6 @@ begin
         when STARTER_W_OUT_STATE =>     -- STEP 0
           if (data_x_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
             -- Data Internal
-            matrix_w_out_int <= function_ntm_lstm_activation_w_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_X_IN => SIZE_X_IN,
-              SIZE_L_IN => SIZE_L_IN,
-
-              vector_x_input => matrix_x_in_int,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
 
             -- Control Internal
             index_l_w_out_loop <= ZERO_CONTROL;
@@ -1650,19 +1639,6 @@ begin
         when STARTER_K_OUT_STATE =>     -- STEP 0
           if (data_r_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
             -- Data Internal
-            tensor_k_out_int <= function_ntm_lstm_activation_k_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_W_IN => SIZE_W_IN,
-              SIZE_L_IN => SIZE_L_IN,
-              SIZE_R_IN => SIZE_R_IN,
-
-              matrix_r_input => tensor_r_in_int,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
-
             -- Control Internal
             index_l_k_out_loop <= ZERO_CONTROL;
             index_i_k_out_loop <= ZERO_CONTROL;
@@ -1813,18 +1789,6 @@ begin
         when STARTER_D_OUT_STATE =>     -- STEP 0
           if (data_rho_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
             -- Data Internal
-            tensor_d_out_int <= function_ntm_lstm_activation_d_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_L_IN => SIZE_L_IN,
-              SIZE_R_IN => SIZE_R_IN,
-              SIZE_M_IN => SIZE_M_IN,
-
-              matrix_rho_input => tensor_rho_in_int,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
 
             -- Control Internal
             index_l_d_out_loop <= ZERO_CONTROL;
@@ -1974,16 +1938,6 @@ begin
         when STARTER_U_OUT_STATE =>     -- STEP 0
           if (data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
             -- Data Internal
-            matrix_u_out_int <= function_ntm_lstm_activation_u_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_L_IN => SIZE_L_IN,
-
-              vector_h_input => matrix_h_in_int,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
 
             -- Control Internal
             index_l_u_out_loop <= ZERO_CONTROL;
@@ -2094,17 +2048,6 @@ begin
         when STARTER_V_OUT_STATE =>     -- STEP 0
           if (data_xi_in_enable_int = '1' and data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
             -- Data Internal
-            matrix_v_out_int <= function_ntm_lstm_activation_v_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_L_IN => SIZE_L_IN,
-              SIZE_S_IN => SIZE_S_IN,
-
-              vector_xi_input => matrix_xi_in_int,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
 
             -- Control Internal
             index_l_v_out_loop <= ZERO_CONTROL;
@@ -2212,15 +2155,7 @@ begin
       case controller_b_out_fsm_int is
         when STARTER_B_OUT_STATE =>     -- STEP 0
           if (data_h_in_enable_int = '1' and data_a_in_enable_int = '1' and data_i_in_enable_int = '1' and data_s_in_enable_int = '1') then
-            -- Control Internal
-            vector_b_out_int <= function_ntm_lstm_activation_b_trainer (
-              SIZE_T_IN => SIZE_T_IN,
-              SIZE_L_IN => SIZE_L_IN,
-
-              vector_a_input => matrix_a_in_int,
-              vector_i_input => matrix_i_in_int,
-              vector_s_input => matrix_s_in_int
-              );
+            -- Data Internal
 
             -- Control Internal
             index_l_b_out_loop <= ZERO_CONTROL;

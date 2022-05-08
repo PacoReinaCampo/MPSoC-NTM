@@ -1,0 +1,108 @@
+# vsim -c -do "run.do" work.ntm_standard_fnn_testbench 
+# Start time: 18:34:22 on May 08,2022
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading ieee.fixed_float_types
+# Loading ieee.fixed_generic_pkg(body)
+# Loading ieee.float_generic_pkg(body)
+# Loading ieee.fixed_pkg
+# Loading ieee.float_pkg
+# Loading work.ntm_arithmetic_pkg(body)
+# Loading work.ntm_math_pkg(body)
+# Loading work.ntm_fnn_controller_pkg(body)
+# Loading work.ntm_standard_fnn_pkg
+# Loading work.ntm_standard_fnn_testbench(ntm_standard_fnn_testbench_architecture)
+# Loading work.ntm_standard_fnn_stimulus(ntm_standard_fnn_stimulus_architecture)
+# Loading work.ntm_controller(ntm_controller_architecture)
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_START has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_W_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_W_IN_X_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_K_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_K_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_K_IN_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_D_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_D_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_D_IN_M_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_U_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_U_IN_P_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_V_IN_L_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_V_IN_S_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_B_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_X_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_R_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_R_IN_K_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_RHO_IN_I_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_RHO_IN_M_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_XI_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_H_IN_ENABLE has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_X_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_W_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_L_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_R_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_S_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_SIZE_M_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_W_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_D_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_K_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_U_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_V_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_B_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_X_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_R_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_RHO_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_XI_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_standard_fnn_stimulus_i/NTM_STANDARD_FNN_H_IN(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/W_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/D_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/K_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/U_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/V_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /ntm_standard_fnn_testbench/ntm_controller_i/B_OUT(63 downto 0) has no driver.
+# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# do run.do
