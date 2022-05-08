@@ -351,7 +351,10 @@ begin
   -----------------------------------------------------------------------
 
   -- SIZE
+  -- ARITHMETIC M: [RHO] = N + W + 3
   SIZE_M_IN <= std_logic_vector(unsigned(SIZE_N_IN) + unsigned(SIZE_W_IN) + to_unsigned(3, CONTROL_SIZE));
+
+  -- ARITHMETIC S: [XI] = 2·W
   SIZE_S_IN <= std_logic_vector(unsigned(SIZE_W_IN) + unsigned(SIZE_W_IN));
 
   -- CONTROL
