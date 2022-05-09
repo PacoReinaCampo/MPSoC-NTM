@@ -1,3 +1,4 @@
+.
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -98,9 +99,9 @@
 │   ├── read_heads
 │   │   └── dnc_read_heads.sv
 │   ├── top
-│   │   ├── dnc_output_vector.sv
 │   │   ├── dnc_interface_matrix.sv
 │   │   ├── dnc_interface_vector.sv
+│   │   ├── dnc_output_vector.sv
 │   │   └── dnc_top.sv
 │   └── write_heads
 │       └── dnc_write_heads.sv
@@ -116,7 +117,8 @@
 │   │   │   ├── ntm_matrix_summation.sv
 │   │   │   ├── ntm_matrix_transpose.sv
 │   │   │   ├── ntm_matrix_vector_convolution.sv
-│   │   │   └── ntm_matrix_vector_product.sv
+│   │   │   ├── ntm_matrix_vector_product.sv
+│   │   │   └── ntm_transpose_vector_product.sv
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.sv
 │   │   │   ├── ntm_tensor_inverse.sv
@@ -161,19 +163,25 @@
 │       │   ├── ntm_matrix_cosh_function.sv
 │       │   ├── ntm_matrix_exponentiator_function.sv
 │       │   ├── ntm_matrix_logarithm_function.sv
+│       │   ├── ntm_matrix_power_function.sv
 │       │   ├── ntm_matrix_sinh_function.sv
+│       │   ├── ntm_matrix_sqrt_function.sv
 │       │   └── ntm_matrix_tanh_function.sv
 │       ├── scalar
 │       │   ├── ntm_scalar_cosh_function.sv
 │       │   ├── ntm_scalar_exponentiator_function.sv
 │       │   ├── ntm_scalar_logarithm_function.sv
+│       │   ├── ntm_scalar_power_function.sv
 │       │   ├── ntm_scalar_sinh_function.sv
+│       │   ├── ntm_scalar_sqrt_function.sv
 │       │   └── ntm_scalar_tanh_function.sv
 │       └── vector
 │           ├── ntm_vector_cosh_function.sv
 │           ├── ntm_vector_exponentiator_function.sv
 │           ├── ntm_vector_logarithm_function.sv
+│           ├── ntm_vector_power_function.sv
 │           ├── ntm_vector_sinh_function.sv
+│           ├── ntm_vector_sqrt_function.sv
 │           └── ntm_vector_tanh_function.sv
 ├── ntm
 │   ├── memory

@@ -181,7 +181,7 @@ begin
             DATA_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -220,7 +220,7 @@ begin
             product_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>           -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

@@ -41,8 +41,8 @@
 │   │   │   ├── dnc_read_heads_stimulus.sv
 │   │   │   └── dnc_read_heads_testbench.sv
 │   │   ├── top
-│   │   │   └── dnc_top_pkg.sv
-│   │   │   └── dnc_top_stimulus.sv
+│   │   │   ├── dnc_top_pkg.sv
+│   │   │   ├── dnc_top_stimulus.sv
 │   │   │   └── dnc_top_testbench.sv
 │   │   └── write_heads
 │   │       ├── dnc_write_heads_pkg.sv
@@ -150,8 +150,8 @@
     │   │   ├── dnc_read_heads_stimulus.sv
     │   │   └── dnc_read_heads_testbench.sv
     │   ├── top
-    │   │   └── dnc_top_pkg.sv
-    │   │   └── dnc_top_stimulus.sv
+    │   │   ├── dnc_top_pkg.sv
+    │   │   ├── dnc_top_stimulus.sv
     │   │   └── dnc_top_testbench.sv
     │   └── write_heads
     │       ├── dnc_write_heads_pkg.sv

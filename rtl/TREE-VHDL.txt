@@ -1,3 +1,4 @@
+.
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -98,9 +99,9 @@
 │   ├── read_heads
 │   │   └── dnc_read_heads.vhd
 │   ├── top
-│   │   ├── dnc_output_vector.vhd
 │   │   ├── dnc_interface_matrix.vhd
 │   │   ├── dnc_interface_vector.vhd
+│   │   ├── dnc_output_vector.vhd
 │   │   └── dnc_top.vhd
 │   └── write_heads
 │       └── dnc_write_heads.vhd
@@ -116,7 +117,8 @@
 │   │   │   ├── ntm_matrix_summation.vhd
 │   │   │   ├── ntm_matrix_transpose.vhd
 │   │   │   ├── ntm_matrix_vector_convolution.vhd
-│   │   │   └── ntm_matrix_vector_product.vhd
+│   │   │   ├── ntm_matrix_vector_product.vhd
+│   │   │   └── ntm_transpose_vector_product.vhd
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.vhd
 │   │   │   ├── ntm_tensor_inverse.vhd
@@ -161,19 +163,25 @@
 │       │   ├── ntm_matrix_cosh_function.vhd
 │       │   ├── ntm_matrix_exponentiator_function.vhd
 │       │   ├── ntm_matrix_logarithm_function.vhd
+│       │   ├── ntm_matrix_power_function.vhd
 │       │   ├── ntm_matrix_sinh_function.vhd
+│       │   ├── ntm_matrix_sqrt_function.vhd
 │       │   └── ntm_matrix_tanh_function.vhd
 │       ├── scalar
 │       │   ├── ntm_scalar_cosh_function.vhd
 │       │   ├── ntm_scalar_exponentiator_function.vhd
 │       │   ├── ntm_scalar_logarithm_function.vhd
+│       │   ├── ntm_scalar_power_function.vhd
 │       │   ├── ntm_scalar_sinh_function.vhd
+│       │   ├── ntm_scalar_sqrt_function.vhd
 │       │   └── ntm_scalar_tanh_function.vhd
 │       └── vector
 │           ├── ntm_vector_cosh_function.vhd
 │           ├── ntm_vector_exponentiator_function.vhd
 │           ├── ntm_vector_logarithm_function.vhd
+│           ├── ntm_vector_power_function.vhd
 │           ├── ntm_vector_sinh_function.vhd
+│           ├── ntm_vector_sqrt_function.vhd
 │           └── ntm_vector_tanh_function.vhd
 ├── ntm
 │   ├── memory
