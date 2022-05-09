@@ -114,6 +114,7 @@ architecture ntm_writing_architecture of ntm_writing is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_w_in_fsm is (
     STARTER_W_IN_STATE,                 -- STEP 0
     INPUT_W_IN_I_STATE,                 -- STEP 1
@@ -136,6 +137,7 @@ architecture ntm_writing_architecture of ntm_writing is
     CLEAN_A_IN_K_STATE                  -- STEP 2
     );
 
+  -- Ops
   type controller_matrix_float_multiplier_fsm is (
     STARTER_MATRIX_MULTIPLIER_STATE,    -- STEP 0
     INPUT_J_MATRIX_MULTIPLIER_STATE,    -- STEP 1
@@ -152,6 +154,7 @@ architecture ntm_writing_architecture of ntm_writing is
     CLEAN_VECTOR_SIZE_SUMMATION_STATE     -- STEP 4
     );
 
+  -- Output
   type controller_m_out_fsm is (
     STARTER_M_OUT_STATE,                -- STEP 0
     CLEAN_M_OUT_J_STATE,                -- STEP 1
@@ -169,24 +172,30 @@ architecture ntm_writing_architecture of ntm_writing is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_w_in_fsm_int : controller_w_in_fsm;
   signal controller_m_in_fsm_int : controller_m_in_fsm;
   signal controller_a_in_fsm_int : controller_a_in_fsm;
 
+  -- Ops
   signal controller_matrix_float_multiplier_fsm_int : controller_matrix_float_multiplier_fsm;
   signal controller_vector_summation_fsm_int        : controller_vector_summation_fsm;
 
+  -- Output
   signal controller_m_out_fsm_int : controller_m_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_w_in_int : matrix_buffer;
   signal matrix_m_in_int : matrix_buffer;
   signal vector_a_in_int : vector_buffer;
 
+  -- Ops
   signal matrix_first_operation_int  : matrix_buffer;
   signal matrix_second_operation_int : matrix_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_i_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -198,10 +207,13 @@ architecture ntm_writing_architecture of ntm_writing is
   signal index_j_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_w_in_enable_int : std_logic;
   signal data_m_in_enable_int : std_logic;
   signal data_a_in_enable_int : std_logic;
 
+  -- Ops
   signal data_matrix_float_multiplier_enable_int : std_logic;
   signal data_vector_summation_enable_int        : std_logic;
 
@@ -259,7 +271,7 @@ begin
 
   -- M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
 
-  -- CONTROL
+  -- INPUT CONTROL
   w_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -565,6 +577,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   m_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

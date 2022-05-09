@@ -112,6 +112,7 @@ architecture ntm_reading_architecture of ntm_reading is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_w_in_fsm is (
     STARTER_W_IN_STATE,                 -- STEP 0
     INPUT_W_IN_I_STATE,                 -- STEP 1
@@ -128,6 +129,7 @@ architecture ntm_reading_architecture of ntm_reading is
     CLEAN_M_IN_K_STATE                  -- STEP 4
     );
 
+  -- Ops
   type controller_matrix_float_multiplier_fsm is (
     STARTER_MATRIX_MULTIPLIER_STATE,    -- STEP 0
     INPUT_J_MATRIX_MULTIPLIER_STATE,    -- STEP 1
@@ -145,6 +147,7 @@ architecture ntm_reading_architecture of ntm_reading is
     OUTPUT_OUT_VECTOR_SIZE_SUMMATION_STATE   -- STEP 5
     );
 
+  -- Output
   type controller_r_out_fsm is (
     STARTER_R_OUT_STATE,                -- STEP 0
     MATRIX_RESHAPE_STATE,               -- STEP 1
@@ -163,29 +166,37 @@ architecture ntm_reading_architecture of ntm_reading is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_w_in_fsm_int : controller_w_in_fsm;
   signal controller_m_in_fsm_int : controller_m_in_fsm;
 
+  -- Ops
   signal controller_matrix_float_multiplier_fsm_int : controller_matrix_float_multiplier_fsm;
   signal controller_vector_summation_fsm_int        : controller_vector_summation_fsm;
 
+  -- Output
   signal controller_r_out_fsm_int : controller_r_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_w_in_int : matrix_buffer;
   signal matrix_m_in_int : matrix_buffer;
 
+  -- Ops
   signal matrix_operation_int : matrix_buffer;
 
+  -- Output
   signal vector_summation_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_i_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_j_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
   signal index_j_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -195,12 +206,16 @@ architecture ntm_reading_architecture of ntm_reading is
   signal index_i_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_r_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_w_in_enable_int : std_logic;
   signal data_m_in_enable_int : std_logic;
 
+  -- Ops
   signal data_matrix_float_multiplier_start_int : std_logic;
   signal data_matrix_float_multiplier_ready_int : std_logic;
 
+  -- Output
   signal data_vector_summation_start_int : std_logic;
   signal data_vector_summation_ready_int : std_logic;
 
@@ -253,7 +268,7 @@ begin
 
   -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
-  -- CONTROL
+  -- INPUT CONTROL
   w_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -484,6 +499,7 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
   matrix_float_multiplier_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -766,6 +782,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   r_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

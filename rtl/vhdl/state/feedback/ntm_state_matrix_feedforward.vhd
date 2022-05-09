@@ -98,6 +98,7 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_d_in_fsm is (
     STARTER_D_IN_STATE,                 -- STEP 0
     INPUT_D_IN_I_STATE,                 -- STEP 1
@@ -114,6 +115,7 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
     CLEAN_K_IN_J_STATE                  -- STEP 4
     );
 
+  -- Ops
   type controller_first_matrix_product_fsm is (
     STARTER_FIRST_MATRIX_PRODUCT_STATE,  -- STEP 0
     INPUT_I_FIRST_MATRIX_PRODUCT_STATE,  -- STEP 1
@@ -146,6 +148,7 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
     CLEAN_J_SECOND_MATRIX_PRODUCT_STATE   -- STEP 4
     );
 
+  -- Output
   type controller_d_out_fsm is (
     STARTER_D_OUT_STATE,                -- STEP 0
     CLEAN_D_OUT_I_STATE,                -- STEP 1
@@ -159,36 +162,39 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_d_in_fsm_int : controller_d_in_fsm;
-
   signal controller_k_in_fsm_int : controller_k_in_fsm;
 
-  signal controller_first_matrix_product_fsm_int : controller_first_matrix_product_fsm;
-
-  signal controller_matrix_float_adder_fsm_int : controller_matrix_float_adder_fsm;
-
+  -- Ops
+  signal controller_first_matrix_product_fsm_int  : controller_first_matrix_product_fsm;
+  signal controller_matrix_float_adder_fsm_int    : controller_matrix_float_adder_fsm;
   signal controller_second_matrix_product_fsm_int : controller_second_matrix_product_fsm;
+  signal controller_matrix_inverse_fsm_int        : controller_matrix_inverse_fsm;
 
-  signal controller_matrix_inverse_fsm_int : controller_matrix_inverse_fsm;
-
+  -- Output
   signal controller_d_out_fsm_int : controller_d_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_d_in_int : matrix_buffer;
-
   signal matrix_k_in_int : matrix_buffer;
 
+  -- Ops
   signal matrix_operation_int : matrix_buffer;
 
+  -- Output
   signal matrix_d_out_int : matrix_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_i_d_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_d_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_i_k_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_k_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
   signal index_i_matrix_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_matrix_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -198,20 +204,20 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   signal index_i_matrix_inverse_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_matrix_inverse_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Output
   signal index_i_d_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_d_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_d_in_enable_int : std_logic;
-
   signal data_k_in_enable_int : std_logic;
 
-  signal data_first_matrix_product_ready_int : std_logic;
-
-  signal data_matrix_float_adder_ready_int : std_logic;
-
-  signal data_matrix_inverse_ready_int : std_logic;
-
-  signal data_second_matrix_product_ready_int : std_logic;
+  -- Ops
+  signal data_first_matrix_product_enable_int  : std_logic;
+  signal data_matrix_float_adder_enable_int    : std_logic;
+  signal data_matrix_inverse_enable_int        : std_logic;
+  signal data_second_matrix_product_enable_int : std_logic;
 
   -- MATRIX ADDER
   -- CONTROL
@@ -289,7 +295,7 @@ begin
 
   -- d = inv(I+D·K)·D
 
-  -- CONTROL
+  -- INPUT CONTROL
   d_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -520,6 +526,7 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
   first_matrix_product_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -529,7 +536,7 @@ begin
       data_b_in_i_enable_matrix_product <= '0';
       data_b_in_j_enable_matrix_product <= '0';
 
-      data_first_matrix_product_ready_int <= '0';
+      data_first_matrix_product_enable_int <= '0';
 
       index_i_matrix_product_loop <= ZERO_CONTROL;
       index_j_matrix_product_loop <= ZERO_CONTROL;
@@ -544,7 +551,7 @@ begin
           data_b_in_i_enable_matrix_product <= '0';
           data_b_in_j_enable_matrix_product <= '0';
 
-          data_first_matrix_product_ready_int <= '0';
+          data_first_matrix_product_enable_int <= '0';
 
           if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
             -- Data Inputs
@@ -605,7 +612,7 @@ begin
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
 
               -- Control Internal
-              data_first_matrix_product_ready_int <= '1';
+              data_first_matrix_product_enable_int <= '1';
 
               index_i_matrix_product_loop <= ZERO_CONTROL;
               index_j_matrix_product_loop <= ZERO_CONTROL;
@@ -672,7 +679,7 @@ begin
       data_b_in_i_enable_matrix_float_adder <= '0';
       data_b_in_j_enable_matrix_float_adder <= '0';
 
-      data_matrix_float_adder_ready_int <= '0';
+      data_matrix_float_adder_enable_int <= '0';
 
       index_i_matrix_float_adder_loop <= ZERO_CONTROL;
       index_j_matrix_float_adder_loop <= ZERO_CONTROL;
@@ -687,7 +694,7 @@ begin
           data_b_in_i_enable_matrix_float_adder <= '0';
           data_b_in_j_enable_matrix_float_adder <= '0';
 
-          data_matrix_float_adder_ready_int <= '0';
+          data_matrix_float_adder_enable_int <= '0';
 
           if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
             -- Data Inputs
@@ -746,7 +753,7 @@ begin
               matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
 
               -- Control Internal
-              data_matrix_float_adder_ready_int <= '1';
+              data_matrix_float_adder_enable_int <= '1';
 
               index_i_matrix_float_adder_loop <= ZERO_CONTROL;
               index_j_matrix_float_adder_loop <= ZERO_CONTROL;
@@ -811,7 +818,7 @@ begin
       data_in_i_enable_matrix_inverse <= '0';
       data_in_j_enable_matrix_inverse <= '0';
 
-      data_matrix_inverse_ready_int <= '0';
+      data_matrix_inverse_enable_int <= '0';
 
       index_i_matrix_inverse_loop <= ZERO_CONTROL;
       index_j_matrix_inverse_loop <= ZERO_CONTROL;
@@ -824,7 +831,7 @@ begin
           data_in_i_enable_matrix_inverse <= '0';
           data_in_j_enable_matrix_inverse <= '0';
 
-          data_matrix_inverse_ready_int <= '0';
+          data_matrix_inverse_enable_int <= '0';
 
           if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
             -- Data Inputs
@@ -878,7 +885,7 @@ begin
               matrix_operation_int(to_integer(unsigned(index_i_matrix_inverse_loop)), to_integer(unsigned(index_j_matrix_inverse_loop))) <= data_out_matrix_inverse;
 
               -- Control Internal
-              data_matrix_inverse_ready_int <= '1';
+              data_matrix_inverse_enable_int <= '1';
 
               index_i_matrix_inverse_loop <= ZERO_CONTROL;
               index_j_matrix_inverse_loop <= ZERO_CONTROL;
@@ -941,7 +948,7 @@ begin
       data_b_in_i_enable_matrix_product <= '0';
       data_b_in_j_enable_matrix_product <= '0';
 
-      data_second_matrix_product_ready_int <= '0';
+      data_second_matrix_product_enable_int <= '0';
 
       index_i_matrix_product_loop <= ZERO_CONTROL;
       index_j_matrix_product_loop <= ZERO_CONTROL;
@@ -956,7 +963,7 @@ begin
           data_b_in_i_enable_matrix_product <= '0';
           data_b_in_j_enable_matrix_product <= '0';
 
-          data_second_matrix_product_ready_int <= '0';
+          data_second_matrix_product_enable_int <= '0';
 
           if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
             -- Data Inputs
@@ -1017,7 +1024,7 @@ begin
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
 
               -- Control Internal
-              data_second_matrix_product_ready_int <= '1';
+              data_second_matrix_product_enable_int <= '1';
 
               index_i_matrix_product_loop <= ZERO_CONTROL;
               index_j_matrix_product_loop <= ZERO_CONTROL;
@@ -1075,6 +1082,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   d_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
