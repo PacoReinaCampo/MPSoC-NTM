@@ -390,28 +390,23 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   signal data_d_out_matrix_feedforward : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX ADDER
+  -- VECTOR FLOAT ADDER
   -- CONTROL
-  signal start_matrix_float_adder : std_logic;
-  signal ready_matrix_float_adder : std_logic;
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
 
-  signal operation_matrix_float_adder : std_logic;
+  signal operation_vector_float_adder : std_logic;
 
-  signal data_a_in_i_enable_matrix_float_adder : std_logic;
-  signal data_a_in_j_enable_matrix_float_adder : std_logic;
-  signal data_b_in_i_enable_matrix_float_adder : std_logic;
-  signal data_b_in_j_enable_matrix_float_adder : std_logic;
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
 
-  signal data_out_i_enable_matrix_float_adder : std_logic;
-  signal data_out_j_enable_matrix_float_adder : std_logic;
+  signal data_out_enable_vector_float_adder : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_out_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -438,22 +433,27 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX EXPONENTIATOR
+  -- MATRIX VECTOR PRODUCT
   -- CONTROL
-  signal start_matrix_exponentiator : std_logic;
-  signal ready_matrix_exponentiator : std_logic;
+  signal start_matrix_vector_product : std_logic;
+  signal ready_matrix_vector_product : std_logic;
 
-  signal data_in_i_enable_matrix_exponentiator : std_logic;
-  signal data_in_j_enable_matrix_exponentiator : std_logic;
+  signal data_a_in_i_enable_matrix_vector_product : std_logic;
+  signal data_a_in_j_enable_matrix_vector_product : std_logic;
+  signal data_b_in_enable_matrix_vector_product   : std_logic;
 
-  signal data_out_i_enable_matrix_exponentiator : std_logic;
-  signal data_out_j_enable_matrix_exponentiator : std_logic;
+  signal data_i_enable_matrix_vector_product : std_logic;
+  signal data_j_enable_matrix_vector_product : std_logic;
+
+  signal data_out_enable_matrix_vector_product : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_matrix_vector_product   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -1388,8 +1388,8 @@ begin
       DATA_D_OUT => data_d_out_matrix_feedforward
       );
 
-  -- MATRIX ADDER
-  matrix_float_adder : ntm_matrix_float_adder
+  -- VECTOR FLOAT ADDER
+  vector_float_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1400,26 +1400,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_float_adder,
-      READY => ready_matrix_float_adder,
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
 
-      OPERATION => operation_matrix_float_adder,
+      OPERATION => operation_vector_float_adder,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_float_adder,
-      SIZE_J_IN => size_j_in_matrix_float_adder,
-      DATA_A_IN => data_a_in_matrix_float_adder,
-      DATA_B_IN => data_b_in_matrix_float_adder,
-
-      DATA_OUT => data_out_matrix_float_adder
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+      DATA_OUT  => data_out_vector_float_adder
       );
 
   -- MATRIX PRODUCT
@@ -1458,8 +1453,8 @@ begin
       DATA_OUT    => data_out_matrix_product
       );
 
-  -- MATRIX EXPONENTIATOR
-  matrix_exponentiator_function : ntm_matrix_exponentiator_function
+  -- MATRIX VECTOR PRODUCT
+  matrix_vector_product : ntm_matrix_vector_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1470,20 +1465,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_exponentiator,
-      READY => ready_matrix_exponentiator,
+      START => start_matrix_vector_product,
+      READY => ready_matrix_vector_product,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_exponentiator,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_exponentiator,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
+      DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
+      DATA_I_ENABLE => data_i_enable_matrix_vector_product,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_product,
+
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_exponentiator,
-      SIZE_J_IN => size_j_in_matrix_exponentiator,
-      DATA_IN   => data_in_matrix_exponentiator,
-      DATA_OUT  => data_out_matrix_exponentiator
+      SIZE_A_I_IN => size_a_i_in_matrix_vector_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_vector_product,
+      SIZE_B_IN   => size_b_in_matrix_vector_product,
+      DATA_A_IN   => data_a_in_matrix_vector_product,
+      DATA_B_IN   => data_b_in_matrix_vector_product,
+      DATA_OUT    => data_out_matrix_vector_product
       );
 
 end architecture;

@@ -1837,6 +1837,8 @@ begin
 
   -- M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
 
+  -- M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
+
   -- READ_HEADS_STATE
 
   -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]

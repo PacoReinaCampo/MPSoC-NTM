@@ -191,7 +191,6 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   signal vector_y_out_int : vector_buffer;
 
   -- Control Internal
-
   signal index_i_p_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_y_p_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_p_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -260,6 +259,45 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   signal data_a_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR FLOAT ADDER
+  -- CONTROL
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
+
+  signal operation_vector_float_adder : std_logic;
+
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
+
+  signal data_out_enable_vector_float_adder : std_logic;
+
+  -- DATA
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_float_adder       : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_float_divider : std_logic;
+
+  -- VECTOR SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_in_enable_length_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
+
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation        : std_logic;
+
+  signal data_out_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -876,6 +914,67 @@ begin
       DATA_A_IN   => data_a_in_matrix_vector_product,
       DATA_B_IN   => data_b_in_matrix_vector_product,
       DATA_OUT    => data_out_matrix_vector_product
+      );
+
+  -- VECTOR FLOAT ADDER
+  vector_float_adder : ntm_vector_float_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
+
+      OPERATION => operation_vector_float_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
+
+      -- DATA
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+
+      DATA_OUT     => data_out_vector_float_adder,
+      OVERFLOW_OUT => overflow_out_vector_float_divider
+      );
+
+  -- VECTOR SUMMATION
+  vector_summation : ntm_vector_summation
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_IN_LENGTH_ENABLE => data_in_enable_length_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+
+      -- DATA
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
 end architecture;

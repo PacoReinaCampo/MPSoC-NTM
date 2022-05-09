@@ -291,71 +291,130 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   signal c_out_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR ADDER
+  -- MATRIX FLOAT ADDER
   -- CONTROL
-  signal start_vector_float_adder : std_logic;
-  signal ready_vector_float_adder : std_logic;
+  signal start_matrix_float_adder : std_logic;
+  signal ready_matrix_float_adder : std_logic;
 
-  signal operation_vector_float_adder : std_logic;
+  signal operation_matrix_float_adder : std_logic;
 
-  signal data_a_in_enable_vector_float_adder : std_logic;
-  signal data_b_in_enable_vector_float_adder : std_logic;
+  signal data_a_in_i_enable_matrix_float_adder : std_logic;
+  signal data_a_in_j_enable_matrix_float_adder : std_logic;
+  signal data_b_in_i_enable_matrix_float_adder : std_logic;
+  signal data_b_in_j_enable_matrix_float_adder : std_logic;
 
-  signal data_out_enable_vector_float_adder : std_logic;
+  signal data_out_i_enable_matrix_float_adder : std_logic;
+  signal data_out_j_enable_matrix_float_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
+  signal data_out_matrix_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_float_adder : std_logic;
+
+  -- MATRIX FLOAT MULTIPLIER
   -- CONTROL
-  signal start_vector_float_multiplier : std_logic;
-  signal ready_vector_float_multiplier : std_logic;
+  signal start_matrix_float_multiplier : std_logic;
+  signal ready_matrix_float_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_float_multiplier : std_logic;
-  signal data_b_in_enable_vector_float_multiplier : std_logic;
+  signal data_a_in_i_enable_matrix_float_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_float_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_float_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_float_multiplier : std_logic;
 
-  signal data_out_enable_vector_float_multiplier : std_logic;
+  signal data_out_i_enable_matrix_float_multiplier : std_logic;
+  signal data_out_j_enable_matrix_float_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR DIVIDER
+  signal data_out_matrix_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_float_multiplier : std_logic;
+
+  -- MATRIX FLOAT DIVIDER
   -- CONTROL
-  signal start_vector_float_divider : std_logic;
-  signal ready_vector_float_divider : std_logic;
+  signal start_matrix_float_divider : std_logic;
+  signal ready_matrix_float_divider : std_logic;
 
-  signal data_a_in_enable_vector_float_divider : std_logic;
-  signal data_b_in_enable_vector_float_divider : std_logic;
+  signal data_a_in_i_enable_matrix_float_divider : std_logic;
+  signal data_a_in_j_enable_matrix_float_divider : std_logic;
+  signal data_b_in_i_enable_matrix_float_divider : std_logic;
+  signal data_b_in_j_enable_matrix_float_divider : std_logic;
 
-  signal data_out_enable_vector_float_divider : std_logic;
-
-  -- DATA
-  signal size_in_vector_float_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_float_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR POWER
-  -- CONTROLj
-  signal start_vector_power_function : std_logic;
-  signal ready_vector_power_function : std_logic;
-
-  signal data_a_in_enable_vector_power_function : std_logic;
-  signal data_b_in_enable_vector_power_function : std_logic;
-
-  signal data_out_enable_vector_power_function : std_logic;
+  signal data_out_i_enable_matrix_float_divider : std_logic;
+  signal data_out_j_enable_matrix_float_divider : std_logic;
 
   -- DATA
-  signal size_in_vector_power_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_a_vector_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_b_vector_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_power_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_float_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_float_divider : std_logic;
+
+  -- MATRIX POWER
+  -- CONTROL
+  signal start_matrix_power_function : std_logic;
+  signal ready_matrix_power_function : std_logic;
+
+  signal data_a_in_i_enable_matrix_power_function : std_logic;
+  signal data_a_in_j_enable_matrix_power_function : std_logic;
+  signal data_b_in_i_enable_matrix_power_function : std_logic;
+  signal data_b_in_j_enable_matrix_power_function : std_logic;
+
+  signal data_out_i_enable_matrix_power_function : std_logic;
+  signal data_out_j_enable_matrix_power_function : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_power_function : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_power_function : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_power_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_power_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TRANSPOSE VECTOR PRODUCT
+  -- CONTROL
+  signal start_transpose_vector_product : std_logic;
+  signal ready_transpose_vector_product : std_logic;
+
+  signal data_a_in_enable_transpose_vector_product : std_logic;
+  signal data_b_in_enable_transpose_vector_product : std_logic;
+
+  signal data_enable_transpose_vector_product : std_logic;
+
+  signal data_out_i_enable_transpose_vector_product : std_logic;
+  signal data_out_j_enable_transpose_vector_product : std_logic;
+
+  -- DATA
+  signal size_a_in_transpose_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_transpose_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_transpose_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_transpose_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_transpose_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR CONVOLUTION
+  -- CONTROL
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
+
+  signal data_a_in_enable_vector_convolution : std_logic;
+  signal data_b_in_enable_vector_convolution : std_logic;
+
+  signal data_out_enable_vector_convolution : std_logic;
+
+  -- DATA
+  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -375,22 +434,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR CONVOLUTION
-  -- CONTROL
-  signal start_vector_convolution : std_logic;
-  signal ready_vector_convolution : std_logic;
-
-  signal data_a_in_enable_vector_convolution : std_logic;
-  signal data_b_in_enable_vector_convolution : std_logic;
-
-  signal data_out_enable_vector_convolution : std_logic;
-
-  -- DATA
-  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -1238,8 +1281,8 @@ begin
       C_OUT => c_out_vector_content_based_addressing
       );
 
-  -- VECTOR ADDER
-  vector_float_adder : ntm_vector_float_adder
+  -- MATRIX FLOAT ADDER
+  matrix_float_adder : ntm_matrix_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1250,25 +1293,31 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_float_adder,
-      READY => ready_vector_float_adder,
+      START => start_matrix_float_adder,
+      READY => ready_matrix_float_adder,
 
-      OPERATION => operation_vector_float_adder,
+      OPERATION => operation_matrix_float_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_float_adder,
-      DATA_A_IN => data_a_in_vector_float_adder,
-      DATA_B_IN => data_b_in_vector_float_adder,
-      DATA_OUT  => data_out_vector_float_adder
+      SIZE_I_IN => size_i_in_matrix_float_adder,
+      SIZE_J_IN => size_j_in_matrix_float_adder,
+      DATA_A_IN => data_a_in_matrix_float_adder,
+      DATA_B_IN => data_b_in_matrix_float_adder,
+
+      DATA_OUT     => data_out_matrix_float_adder,
+      OVERFLOW_OUT => overflow_out_matrix_float_adder
       );
 
-  -- VECTOR MULTIPLIER
-  vecto_float_multiplier : ntm_vector_float_multiplier
+  -- MATRIX FLOAT MULTIPLIER
+  matrix_float_multiplier : ntm_matrix_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1279,23 +1328,29 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_float_multiplier,
-      READY => ready_vector_float_multiplier,
+      START => start_matrix_float_multiplier,
+      READY => ready_matrix_float_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_multiplier,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_multiplier,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_multiplier,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_multiplier,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_float_multiplier,
-      DATA_A_IN => data_a_in_vector_float_multiplier,
-      DATA_B_IN => data_b_in_vector_float_multiplier,
-      DATA_OUT  => data_out_vector_float_multiplier
+      SIZE_I_IN => size_i_in_matrix_float_multiplier,
+      SIZE_J_IN => size_j_in_matrix_float_multiplier,
+      DATA_A_IN => data_a_in_matrix_float_multiplier,
+      DATA_B_IN => data_b_in_matrix_float_multiplier,
+
+      DATA_OUT     => data_out_matrix_float_multiplier,
+      OVERFLOW_OUT => overflow_out_matrix_float_multiplier
       );
 
-  -- VECTOR DIVIDER
-  vecto_float_divider : ntm_vector_float_divider
+  -- MATRIX FLOAT DIVIDER
+  matrix_float_divider : ntm_matrix_float_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1306,23 +1361,29 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_float_divider,
-      READY => ready_vector_float_divider,
+      START => start_matrix_float_divider,
+      READY => ready_matrix_float_divider,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_divider,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_divider,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_divider,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_divider,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_divider,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_divider,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_float_divider,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_divider,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_divider,
 
       -- DATA
-      SIZE_IN   => size_in_vector_float_divider,
-      DATA_A_IN => data_a_in_vector_float_divider,
-      DATA_B_IN => data_b_in_vector_float_divider,
-      DATA_OUT  => data_out_vector_float_divider
+      SIZE_I_IN => size_i_in_matrix_float_divider,
+      SIZE_J_IN => size_j_in_matrix_float_divider,
+      DATA_A_IN => data_a_in_matrix_float_divider,
+      DATA_B_IN => data_b_in_matrix_float_divider,
+
+      DATA_OUT     => data_out_matrix_float_divider,
+      OVERFLOW_OUT => overflow_out_matrix_float_divider
       );
 
-  -- VECTOR POWER
-  vector_power_function : ntm_vector_power_function
+  -- MATRIX POWER
+  matrix_power_function : ntm_matrix_power_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1333,20 +1394,83 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_power_function,
-      READY => ready_vector_power_function,
+      START => start_matrix_power_function,
+      READY => ready_matrix_power_function,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_power_function,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_power_function,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_power_function,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_power_function,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_power_function,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_power_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_power_function,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_power_function,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_power_function,
 
       -- DATA
-      SIZE_IN   => size_in_vector_power_function,
-      DATA_A_IN => data_in_a_vector_power_function,
-      DATA_B_IN => data_in_b_vector_power_function,
+      SIZE_I_IN => size_i_in_matrix_power_function,
+      SIZE_J_IN => size_j_in_matrix_power_function,
+      DATA_A_IN => data_a_in_matrix_power_function,
+      DATA_B_IN => data_b_in_matrix_power_function,
 
-      DATA_OUT => data_out_vector_power_function
+      DATA_OUT => data_out_matrix_power_function
+      );
+
+  -- TRANSPOSE VECTOR PRODUCT
+  transpose_vector_product : ntm_transpose_vector_product
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_transpose_vector_product,
+      READY => ready_transpose_vector_product,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_transpose_vector_product,
+      DATA_B_IN_ENABLE => data_b_in_enable_transpose_vector_product,
+
+      DATA_ENABLE => data_enable_transpose_vector_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_transpose_vector_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_transpose_vector_product,
+
+      -- DATA
+      SIZE_A_IN => size_a_in_transpose_vector_product,
+      SIZE_B_IN => size_b_in_transpose_vector_product,
+
+      DATA_A_IN => data_a_in_transpose_vector_product,
+      DATA_B_IN => data_b_in_transpose_vector_product,
+      DATA_OUT  => data_out_transpose_vector_product
+      );
+
+  -- VECTOR CONVOLUTION
+  vector_convolution : ntm_vector_convolution
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
+
+      -- DATA
+      LENGTH_IN => length_in_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
       );
 
   -- VECTOR SUMMATION
@@ -1377,33 +1501,6 @@ begin
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
-      );
-
-  -- VECTOR CONVOLUTION
-  vector_convolution : ntm_vector_convolution
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution,
-      READY => ready_vector_convolution,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
-
-      -- DATA
-      LENGTH_IN => length_in_vector_convolution,
-      DATA_A_IN => data_a_in_vector_convolution,
-      DATA_B_IN => data_b_in_vector_convolution,
-      DATA_OUT  => data_out_vector_convolution
       );
 
 end architecture;
