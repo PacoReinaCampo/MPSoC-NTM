@@ -295,10 +295,20 @@ architecture ntm_controller_architecture of ntm_controller is
     CLEAN_K_TENSOR_MATRIX_PRODUCT_STATE   -- STEP 6
     );
 
+  type controller_matrix_summation_fsm is (
+    STARTER_MATRIX_SUMMATION_STATE,       -- STEP 0
+    INPUT_LENGTH_MATRIX_SUMMATION_STATE,  -- STEP 1
+    INPUT_I_MATRIX_SUMMATION_STATE,       -- STEP 2
+    INPUT_J_MATRIX_SUMMATION_STATE,       -- STEP 3
+    CLEAN_LENGTH_MATRIX_SUMMATION_STATE,  -- STEP 4
+    CLEAN_I_MATRIX_SUMMATION_STATE,       -- STEP 5
+    CLEAN_J_MATRIX_SUMMATION_STATE        -- STEP 6
+    );
+
   type controller_first_vector_float_adder_fsm is (
     STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
-    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,    -- STEP 2
-    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE     -- STEP 4
+    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,    -- STEP 1
+    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE     -- STEP 2
     );
 
   type controller_second_matrix_vector_product_fsm is (
@@ -350,6 +360,7 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Ops
   signal controller_first_matrix_vector_product_fsm_int  : controller_first_matrix_vector_product_fsm;
   signal controller_tensor_matrix_product_fsm_int        : controller_tensor_matrix_product_fsm;
+  signal controller_matrix_summation_fsm_int             : controller_matrix_summation_fsm;
   signal controller_first_vector_float_adder_fsm_int     : controller_first_vector_float_adder_fsm;
   signal controller_second_matrix_vector_product_fsm_int : controller_second_matrix_vector_product_fsm;
   signal controller_second_vector_float_adder_fsm_int    : controller_second_vector_float_adder_fsm;
@@ -421,7 +432,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal index_i_tensor_matrix_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_tensor_matrix_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_tensor_matrix_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  
+
+  signal index_length_matrix_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_matrix_summation_loop      : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_matrix_summation_loop      : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_vector_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_vector_logistic_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -446,9 +461,10 @@ architecture ntm_controller_architecture of ntm_controller is
 
   -- Ops
   signal data_first_matrix_vector_product_enable_int  : std_logic;
+  signal data_tensor_matrix_product_enable_int        : std_logic;
+  signal data_matrix_summation_enable_int             : std_logic;
   signal data_first_vector_float_adder_enable_int     : std_logic;
   signal data_second_matrix_vector_product_enable_int : std_logic;
-  signal data_tensor_matrix_product_enable_int        : std_logic;
   signal data_second_vector_float_adder_enable_int    : std_logic;
   signal data_vector_logistic_enable_int              : std_logic;
 
@@ -469,6 +485,29 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX SUMMATION
+  -- CONTROL
+  signal start_matrix_summation : std_logic;
+  signal ready_matrix_summation : std_logic;
+
+  signal data_in_length_enable_matrix_summation : std_logic;
+  signal data_in_i_enable_matrix_summation      : std_logic;
+  signal data_in_j_enable_matrix_summation      : std_logic;
+
+  signal data_length_enable_matrix_summation : std_logic;
+  signal data_i_enable_matrix_summation      : std_logic;
+  signal data_j_enable_matrix_summation      : std_logic;
+
+  signal data_out_i_enable_matrix_summation : std_logic;
+  signal data_out_j_enable_matrix_summation : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR MATRIX PRODUCT
   -- CONTROL
@@ -1745,7 +1784,7 @@ begin
       -- Control Internal
       data_a_in_i_enable_matrix_vector_product <= '0';
       data_a_in_j_enable_matrix_vector_product <= '0';
-      data_b_in_enable_matrix_vector_product <= '0';
+      data_b_in_enable_matrix_vector_product   <= '0';
 
       data_first_matrix_vector_product_enable_int <= '0';
 
@@ -1759,7 +1798,7 @@ begin
           -- Control Internal
           data_a_in_i_enable_matrix_vector_product <= '0';
           data_a_in_j_enable_matrix_vector_product <= '0';
-          data_b_in_enable_matrix_vector_product <= '0';
+          data_b_in_enable_matrix_vector_product   <= '0';
 
           data_first_matrix_vector_product_enable_int <= '0';
 
@@ -1790,7 +1829,7 @@ begin
 
           data_a_in_i_enable_matrix_vector_product <= '1';
           data_a_in_j_enable_matrix_vector_product <= '1';
-          data_b_in_enable_matrix_vector_product <= '1';
+          data_b_in_enable_matrix_vector_product   <= '1';
 
           -- FSM Control
           controller_first_matrix_vector_product_fsm_int <= CLEAN_J_FIRST_MATRIX_VECTOR_PRODUCT_STATE;
@@ -1843,7 +1882,7 @@ begin
 
             data_a_in_i_enable_matrix_vector_product <= '0';
             data_a_in_j_enable_matrix_vector_product <= '0';
-            data_b_in_enable_matrix_vector_product <= '0';
+            data_b_in_enable_matrix_vector_product   <= '0';
           end if;
 
         when CLEAN_J_FIRST_MATRIX_VECTOR_PRODUCT_STATE =>  -- STEP 8
@@ -1862,7 +1901,7 @@ begin
 
             data_a_in_i_enable_matrix_vector_product <= '0';
             data_a_in_j_enable_matrix_vector_product <= '0';
-            data_b_in_enable_matrix_vector_product <= '0';
+            data_b_in_enable_matrix_vector_product   <= '0';
           end if;
 
         when others =>
@@ -2068,6 +2107,184 @@ begin
     end if;
   end process;
 
+  matrix_summation_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_length_enable_matrix_summation <= '0';
+      data_in_i_enable_matrix_summation      <= '0';
+      data_in_j_enable_matrix_summation      <= '0';
+
+      data_matrix_summation_enable_int <= '0';
+
+      index_length_matrix_summation_loop <= ZERO_CONTROL;
+      index_i_matrix_summation_loop      <= ZERO_CONTROL;
+      index_j_matrix_summation_loop      <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_matrix_summation_fsm_int is
+        when STARTER_MATRIX_SUMMATION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_length_enable_matrix_summation <= '0';
+          data_in_i_enable_matrix_summation      <= '0';
+          data_in_j_enable_matrix_summation      <= '0';
+
+          data_matrix_summation_enable_int <= '0';
+
+          if (data_d_in_enable_int = '1' and data_d_in_enable_int = '1') then
+            -- Data Inputs
+            length_in_matrix_summation <= SIZE_R_IN;
+            size_i_in_matrix_summation <= SIZE_L_IN;
+            size_j_in_matrix_summation <= SIZE_W_IN;
+
+            -- Control Internal
+            index_length_matrix_summation_loop <= ZERO_CONTROL;
+            index_i_matrix_summation_loop      <= ZERO_CONTROL;
+            index_j_matrix_summation_loop      <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_matrix_summation_fsm_int <= INPUT_LENGTH_MATRIX_SUMMATION_STATE;
+          end if;
+
+        when INPUT_LENGTH_MATRIX_SUMMATION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_matrix_summation <= tensor_d_in_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop)));
+
+          -- Control Internal
+          if (unsigned(index_length_matrix_summation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_i_matrix_summation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_summation_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_summation <= '1';
+          end if;
+
+          data_in_length_enable_matrix_summation <= '1';
+          data_in_i_enable_matrix_summation      <= '1';
+          data_in_j_enable_matrix_summation      <= '1';
+
+          -- FSM Control
+          controller_matrix_summation_fsm_int <= CLEAN_J_MATRIX_SUMMATION_STATE;
+
+        when INPUT_i_MATRIX_SUMMATION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_matrix_summation <= tensor_d_in_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop)));
+
+          data_in_i_enable_matrix_summation <= '1';
+          data_in_j_enable_matrix_summation <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_matrix_summation_fsm_int <= CLEAN_I_MATRIX_SUMMATION_STATE;
+          else
+            controller_matrix_summation_fsm_int <= CLEAN_J_MATRIX_SUMMATION_STATE;
+          end if;
+
+        when INPUT_j_MATRIX_SUMMATION_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_in_matrix_summation <= tensor_d_in_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop)));
+
+          -- Control Internal
+          data_in_j_enable_matrix_summation <= '1';
+
+          -- FSM Control
+          if ((unsigned(index_i_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            controller_matrix_summation_fsm_int <= CLEAN_LENGTH_MATRIX_SUMMATION_STATE;
+          elsif (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_matrix_summation_fsm_int <= CLEAN_I_MATRIX_SUMMATION_STATE;
+          else
+            controller_matrix_summation_fsm_int <= CLEAN_J_MATRIX_SUMMATION_STATE;
+          end if;
+
+        when CLEAN_LENGTH_MATRIX_SUMMATION_STATE =>  -- STEP 7
+
+          if (data_length_enable_matrix_summation = '1' and data_i_enable_matrix_summation = '1' and data_j_enable_matrix_summation = '1') then
+            if ((unsigned(index_i_matrix_summation_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop))) <= data_out_matrix_summation;
+
+              -- Control Internal
+              data_matrix_summation_enable_int <= '1';
+
+              index_length_matrix_summation_loop <= ZERO_CONTROL;
+              index_i_matrix_summation_loop      <= ZERO_CONTROL;
+              index_j_matrix_summation_loop      <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_summation_fsm_int <= STARTER_MATRIX_SUMMATION_STATE;
+            elsif ((unsigned(index_i_matrix_summation_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop))) <= data_out_matrix_summation;
+
+              -- Control Internal
+              index_length_matrix_summation_loop <= std_logic_vector(unsigned(index_length_matrix_summation_loop) + unsigned(ONE_CONTROL));
+              index_i_matrix_summation_loop      <= ZERO_CONTROL;
+              index_j_matrix_summation_loop      <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_summation_fsm_int <= INPUT_i_MATRIX_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_summation <= '0';
+
+            data_in_length_enable_matrix_summation <= '0';
+            data_in_i_enable_matrix_summation      <= '0';
+            data_in_j_enable_matrix_summation      <= '0';
+          end if;
+
+        when CLEAN_I_MATRIX_SUMMATION_STATE =>  -- STEP 7
+
+          if (data_i_enable_matrix_summation = '1' and data_j_enable_matrix_summation = '1') then
+            if ((unsigned(index_i_matrix_summation_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_summation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop))) <= data_out_matrix_summation;
+
+              -- Control Internal
+              index_i_matrix_summation_loop <= std_logic_vector(unsigned(index_i_matrix_summation_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_summation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_summation_fsm_int <= INPUT_i_MATRIX_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_summation <= '0';
+
+            data_in_length_enable_matrix_summation <= '0';
+            data_in_i_enable_matrix_summation      <= '0';
+            data_in_j_enable_matrix_summation      <= '0';
+          end if;
+
+        when CLEAN_J_MATRIX_SUMMATION_STATE =>  -- STEP 8
+
+          if (data_j_enable_matrix_summation = '1') then
+            if (unsigned(index_j_matrix_summation_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_length_matrix_summation_loop)), to_integer(unsigned(index_i_matrix_summation_loop)), to_integer(unsigned(index_j_matrix_summation_loop))) <= data_out_matrix_summation;
+
+              -- Control Internal
+              index_j_matrix_summation_loop <= std_logic_vector(unsigned(index_j_matrix_summation_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_matrix_summation_fsm_int <= INPUT_i_MATRIX_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_summation <= '0';
+
+            data_in_length_enable_matrix_summation <= '0';
+            data_in_i_enable_matrix_summation      <= '0';
+            data_in_j_enable_matrix_summation      <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_matrix_summation_fsm_int <= STARTER_MATRIX_SUMMATION_STATE;
+      end case;
+    end if;
+  end process;
+
   first_vector_float_adder_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -2164,7 +2381,7 @@ begin
       -- Control Internal
       data_a_in_i_enable_matrix_vector_product <= '0';
       data_a_in_j_enable_matrix_vector_product <= '0';
-      data_b_in_enable_matrix_vector_product <= '0';
+      data_b_in_enable_matrix_vector_product   <= '0';
 
       data_second_matrix_vector_product_enable_int <= '0';
 
@@ -2178,7 +2395,7 @@ begin
           -- Control Internal
           data_a_in_i_enable_matrix_vector_product <= '0';
           data_a_in_j_enable_matrix_vector_product <= '0';
-          data_b_in_enable_matrix_vector_product <= '0';
+          data_b_in_enable_matrix_vector_product   <= '0';
 
           data_second_matrix_vector_product_enable_int <= '0';
 
@@ -2209,7 +2426,7 @@ begin
 
           data_a_in_i_enable_matrix_vector_product <= '1';
           data_a_in_j_enable_matrix_vector_product <= '1';
-          data_b_in_enable_matrix_vector_product <= '1';
+          data_b_in_enable_matrix_vector_product   <= '1';
 
           -- FSM Control
           controller_second_matrix_vector_product_fsm_int <= CLEAN_J_SECOND_MATRIX_VECTOR_PRODUCT_STATE;
@@ -2262,7 +2479,7 @@ begin
 
             data_a_in_i_enable_matrix_vector_product <= '0';
             data_a_in_j_enable_matrix_vector_product <= '0';
-            data_b_in_enable_matrix_vector_product <= '0';
+            data_b_in_enable_matrix_vector_product   <= '0';
           end if;
 
         when CLEAN_J_SECOND_MATRIX_VECTOR_PRODUCT_STATE =>  -- STEP 4
@@ -2281,7 +2498,7 @@ begin
 
             data_a_in_i_enable_matrix_vector_product <= '0';
             data_a_in_j_enable_matrix_vector_product <= '0';
-            data_b_in_enable_matrix_vector_product <= '0';
+            data_b_in_enable_matrix_vector_product   <= '0';
           end if;
 
         when others =>
@@ -2564,6 +2781,41 @@ begin
       DATA_A_IN => data_a_in_vector_float_adder,
       DATA_B_IN => data_b_in_vector_float_adder,
       DATA_OUT  => data_out_vector_float_adder
+      );
+
+
+  -- MATRIX SUMMATION
+  matrix_summation : ntm_matrix_summation
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_summation,
+      READY => ready_matrix_summation,
+
+      DATA_IN_LENGTH_ENABLE => data_in_length_enable_matrix_summation,
+      DATA_IN_I_ENABLE      => data_in_i_enable_matrix_summation,
+      DATA_IN_J_ENABLE      => data_in_j_enable_matrix_summation,
+
+      DATA_LENGTH_ENABLE => data_length_enable_matrix_summation,
+      DATA_I_ENABLE      => data_i_enable_matrix_summation,
+      DATA_J_ENABLE      => data_j_enable_matrix_summation,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
+
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_summation,
+      SIZE_J_IN => size_j_in_matrix_summation,
+      LENGTH_IN => length_in_matrix_summation,
+      DATA_IN   => data_in_matrix_summation,
+      DATA_OUT  => data_out_matrix_summation
       );
 
   -- TENSOR MATRIX PRODUCT
