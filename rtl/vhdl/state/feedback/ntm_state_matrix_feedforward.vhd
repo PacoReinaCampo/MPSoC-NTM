@@ -169,8 +169,8 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -- Ops
   signal controller_first_matrix_product_fsm_int  : controller_first_matrix_product_fsm;
   signal controller_matrix_float_adder_fsm_int    : controller_matrix_float_adder_fsm;
-  signal controller_second_matrix_product_fsm_int : controller_second_matrix_product_fsm;
   signal controller_matrix_inverse_fsm_int        : controller_matrix_inverse_fsm;
+  signal controller_second_matrix_product_fsm_int : controller_second_matrix_product_fsm;
 
   -- Output
   signal controller_d_out_fsm_int : controller_d_out_fsm;
@@ -606,7 +606,7 @@ begin
 
         when CLEAN_I_FIRST_MATRIX_PRODUCT_STATE =>  -- STEP 7
 
-          if (data_out_i_enable_matrix_product = '1' and data_out_i_enable_matrix_product = '1') then
+          if (data_i_enable_matrix_product = '1' and data_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_matrix_product_loop) = unsigned(SIZE_D_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_product_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
@@ -642,7 +642,7 @@ begin
 
         when CLEAN_J_FIRST_MATRIX_PRODUCT_STATE =>  -- STEP 8
 
-          if (data_out_i_enable_matrix_product = '1') then
+          if (data_i_enable_matrix_product = '1') then
             if (unsigned(index_j_matrix_product_loop) < unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
@@ -879,7 +879,7 @@ begin
 
         when CLEAN_I_MATRIX_INVERSE_STATE =>  -- STEP 7
 
-          if (data_out_i_enable_matrix_inverse = '1' and data_out_i_enable_matrix_inverse = '1') then
+          if (data_i_enable_matrix_inverse = '1' and data_j_enable_matrix_inverse = '1') then
             if ((unsigned(index_i_matrix_inverse_loop) = unsigned(SIZE_D_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_inverse_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_inverse_loop)), to_integer(unsigned(index_j_matrix_inverse_loop))) <= data_out_matrix_inverse;
@@ -913,7 +913,7 @@ begin
 
         when CLEAN_J_MATRIX_INVERSE_STATE =>  -- STEP 8
 
-          if (data_out_i_enable_matrix_inverse = '1') then
+          if (data_i_enable_matrix_inverse = '1') then
             if (unsigned(index_j_matrix_inverse_loop) < unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_inverse_loop)), to_integer(unsigned(index_j_matrix_inverse_loop))) <= data_out_matrix_inverse;
@@ -1018,7 +1018,7 @@ begin
 
         when CLEAN_I_SECOND_MATRIX_PRODUCT_STATE =>  -- STEP 7
 
-          if (data_out_i_enable_matrix_product = '1' and data_out_i_enable_matrix_product = '1') then
+          if (data_i_enable_matrix_product = '1' and data_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_matrix_product_loop) = unsigned(SIZE_D_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_product_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
@@ -1054,7 +1054,7 @@ begin
 
         when CLEAN_J_SECOND_MATRIX_PRODUCT_STATE =>  -- STEP 8
 
-          if (data_out_i_enable_matrix_product = '1') then
+          if (data_i_enable_matrix_product = '1') then
             if (unsigned(index_j_matrix_product_loop) < unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Internal
               matrix_operation_int(to_integer(unsigned(index_i_matrix_product_loop)), to_integer(unsigned(index_j_matrix_product_loop))) <= data_out_matrix_product;
