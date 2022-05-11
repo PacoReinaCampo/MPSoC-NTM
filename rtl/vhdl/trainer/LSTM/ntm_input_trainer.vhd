@@ -57,10 +57,10 @@ entity ntm_input_trainer is
     RST : in std_logic;
 
     -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-    X_IN_T_ENABLE : in std_logic;       -- for t in 0 to X-1
-    X_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
+    START         : in  std_logic;
+    READY         : out std_logic;
+    X_IN_T_ENABLE : in  std_logic;      -- for t in 0 to X-1
+    X_IN_X_ENABLE : in  std_logic;      -- for x in 0 to X-1
 
     X_OUT_T_ENABLE : out std_logic;     -- for t in 0 to X-1
     X_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
@@ -398,6 +398,25 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   signal data_out_scalar_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_float_adder : std_logic;
+
+  -- VECTOR SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_in_length_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
+
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation        : std_logic;
+
+  signal data_out_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR FLOAT MULTIPLIER
   -- CONTROL
@@ -2168,6 +2187,36 @@ begin
 
       DATA_OUT     => data_out_scalar_float_adder,
       OVERFLOW_OUT => overflow_out_scalar_float_adder
+      );
+
+  -- VECTOR SUMMATION
+  vector_summation : ntm_vector_summation
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+
+      -- DATA
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
   -- SCALAR MULTIPLIER

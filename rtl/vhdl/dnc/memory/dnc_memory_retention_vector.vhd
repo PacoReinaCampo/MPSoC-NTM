@@ -419,7 +419,7 @@ begin
         when STARTER_PSI_OUT_STATE =>   -- STEP 0
           if (data_f_in_enable_int = '1' and data_w_in_enable_int = '1') then
             -- Data Internal
- 
+
             -- Control Internal
             index_j_psi_out_loop <= ZERO_CONTROL;
 

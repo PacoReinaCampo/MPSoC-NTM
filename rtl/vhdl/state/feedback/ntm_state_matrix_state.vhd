@@ -170,11 +170,11 @@ architecture ntm_state_matrix_state_architecture of ntm_state_matrix_state is
     );
 
   type controller_first_matrix_float_adder_fsm is (
-    STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE,   -- STEP 0
-    INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE,   -- STEP 1
-    INPUT_J_FIRST_MATRIX_FLOAT_ADDER_STATE,   -- STEP 2
-    CLEAN_I_FIRST_MATRIX_FLOAT_ADDER_STATE,   -- STEP 3
-    CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE    -- STEP 4
+    STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 1
+    INPUT_J_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 2
+    CLEAN_I_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 3
+    CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE   -- STEP 4
     );
 
   type controller_matrix_inverse_fsm is (

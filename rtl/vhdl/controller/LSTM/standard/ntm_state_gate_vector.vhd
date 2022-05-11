@@ -129,9 +129,9 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
     );
 
   type controller_vector_float_adder_fsm is (
-    STARTER_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
-    INPUT_VECTOR_FLOAT_ADDER_STATE,    -- STEP 2
-    CLEAN_VECTOR_FLOAT_ADDER_STATE     -- STEP 4
+    STARTER_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
+    INPUT_VECTOR_FLOAT_ADDER_STATE,     -- STEP 2
+    CLEAN_VECTOR_FLOAT_ADDER_STATE      -- STEP 4
     );
 
   -- Output

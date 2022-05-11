@@ -264,7 +264,7 @@ begin
           if (ready_scalar_power_function = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT     <= data_out_scalar_power_function;
+              DATA_OUT <= data_out_scalar_power_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';

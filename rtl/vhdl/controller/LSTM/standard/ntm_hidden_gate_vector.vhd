@@ -165,7 +165,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- Ops
   signal index_vector_tanh_loop             : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_vector_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  
+
   -- Output
   signal index_l_h_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
