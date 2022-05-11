@@ -148,6 +148,10 @@ architecture dnc_write_heads_urchitecture of dnc_write_heads is
   -- Buffer
   signal vector_xi_in_int : vector_buffer;
 
+  signal vector_k_out_int : vector_buffer;
+  signal vector_e_out_int : vector_buffer;
+  signal vector_v_out_int : vector_buffer;
+
   -- Control Internal
   signal index_s_xi_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -244,6 +248,9 @@ begin
       case controller_k_out_fsm_int is
         when STARTER_K_OUT_STATE =>     -- STEP 0
           if (data_xi_in_enable_int = '1') then
+            -- Data Internal
+            vector_k_out_int <= vector_xi_in_int(3*to_integer(unsigned(SIZE_W_IN)) + 2 downto 2*to_integer(unsigned(SIZE_W_IN)) + 3);
+
             -- Control Internal
             index_k_k_out_loop <= ZERO_CONTROL;
 
@@ -262,7 +269,7 @@ begin
 
           if (unsigned(index_k_k_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            K_OUT <= (others => '0');
+            K_OUT <= vector_k_out_int(to_integer(unsigned(index_k_k_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -276,7 +283,7 @@ begin
             controller_k_out_fsm_int <= STARTER_K_OUT_STATE;
           elsif (unsigned(index_k_k_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            K_OUT <= (others => '0');
+            K_OUT <= vector_k_out_int(to_integer(unsigned(index_k_k_out_loop)));
 
             -- Control Outputs
             K_OUT_ENABLE <= '1';
@@ -315,6 +322,9 @@ begin
       case controller_e_out_fsm_int is
         when STARTER_E_OUT_STATE =>     -- STEP 0
           if (data_xi_in_enable_int = '1') then
+            -- Data Internal
+            vector_e_out_int <= vector_xi_in_int(2*to_integer(unsigned(SIZE_W_IN)) + 1 downto to_integer(unsigned(SIZE_W_IN)) + 2);
+
             -- Control Internal
             index_k_e_out_loop <= ZERO_CONTROL;
 
@@ -333,7 +343,7 @@ begin
 
           if (unsigned(index_k_e_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            E_OUT <= (others => '0');
+            E_OUT <= vector_e_out_int(to_integer(unsigned(index_k_e_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -347,7 +357,7 @@ begin
             controller_e_out_fsm_int <= STARTER_E_OUT_STATE;
           elsif (unsigned(index_k_e_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            E_OUT <= (others => '0');
+            E_OUT <= vector_e_out_int(to_integer(unsigned(index_k_e_out_loop)));
 
             -- Control Outputs
             E_OUT_ENABLE <= '1';
@@ -386,6 +396,9 @@ begin
       case controller_v_out_fsm_int is
         when STARTER_V_OUT_STATE =>     -- STEP 0
           if (data_xi_in_enable_int = '1') then
+            -- Data Internal
+            vector_v_out_int <= vector_xi_in_int(to_integer(unsigned(SIZE_W_IN)) + 1 downto 2);
+
             -- Control Internal
             index_k_v_out_loop <= ZERO_CONTROL;
 
@@ -404,7 +417,7 @@ begin
 
           if (unsigned(index_k_v_out_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            V_OUT <= (others => '0');
+            V_OUT <= vector_v_out_int(to_integer(unsigned(index_k_v_out_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -418,7 +431,7 @@ begin
             controller_v_out_fsm_int <= STARTER_V_OUT_STATE;
           elsif (unsigned(index_k_v_out_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            V_OUT <= (others => '0');
+            V_OUT <= vector_v_out_int(to_integer(unsigned(index_k_v_out_loop)));
 
             -- Control Outputs
             V_OUT_ENABLE <= '1';
