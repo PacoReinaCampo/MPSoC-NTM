@@ -76,7 +76,7 @@ emacs -batch vhdl/dnc/top/dnc_interface_vector.vhd -f vhdl-beautify-buffer -f sa
 emacs -batch vhdl/dnc/top/dnc_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/top/dnc_top.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/dnc/write_heads/dnc_write_heads.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/intro/ntm_intro_adder_model.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/intro/ntm_intro_adder.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
