@@ -271,7 +271,7 @@ architecture ntm_trainer_architecture of ntm_trainer is
 
   -- Ops
   signal controller_differentiation_fsm_int : controller_differentiation_fsm;
-  
+
   -- Output
   signal controller_w_out_fsm_int : controller_w_out_fsm;
   signal controller_k_out_fsm_int : controller_k_out_fsm;
@@ -443,7 +443,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- CONTROL
+  -- INPUT CONTROL
   x_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1109,6 +1109,7 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
   differentiation_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1287,6 +1288,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   -- dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
   w_out_fsm : process(CLK, RST)
   begin

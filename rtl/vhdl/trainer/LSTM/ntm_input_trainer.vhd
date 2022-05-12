@@ -169,6 +169,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_x_in_fsm is (
     STARTER_X_IN_STATE,                 -- STEP 0
     INPUT_X_IN_T_STATE,                 -- STEP 1
@@ -237,6 +238,18 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
     CLEAN_S_IN_L_STATE                  -- STEP 4
     );
 
+  -- Ops
+  type controller_differentiation_fsm is (
+    STARTER_DIFFERENTIATION_STATE,      -- STEP 0
+    INPUT_I_DIFFERENTIATION_STATE,      -- STEP 1
+    INPUT_J_DIFFERENTIATION_STATE,      -- STEP 2
+    INPUT_K_DIFFERENTIATION_STATE,      -- STEP 3
+    CLEAN_I_DIFFERENTIATION_STATE,      -- STEP 4
+    CLEAN_J_DIFFERENTIATION_STATE,      -- STEP 5
+    CLEAN_K_DIFFERENTIATION_STATE       -- STEP 6
+    );
+
+  -- Output
   type controller_k_out_fsm is (
     STARTER_K_OUT_STATE,                -- STEP 0
     CLEAN_K_OUT_L_STATE,                -- STEP 1
@@ -294,6 +307,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_x_in_fsm_int   : controller_x_in_fsm;
   signal controller_r_in_fsm_int   : controller_r_in_fsm;
   signal controller_rho_in_fsm_int : controller_rho_in_fsm;
@@ -304,6 +318,10 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal controller_i_in_fsm_int : controller_i_in_fsm;
   signal controller_s_in_fsm_int : controller_s_in_fsm;
 
+  -- Ops
+  signal controller_differentiation_fsm_int : controller_differentiation_fsm;
+
+  -- Output
   signal controller_w_out_fsm_int : controller_w_out_fsm;
   signal controller_k_out_fsm_int : controller_k_out_fsm;
   signal controller_d_out_fsm_int : controller_d_out_fsm;
@@ -312,6 +330,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal controller_b_out_fsm_int : controller_b_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_x_in_int   : matrix_buffer;
   signal tensor_r_in_int   : tensor_buffer;
   signal tensor_rho_in_int : tensor_buffer;
@@ -322,6 +341,10 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal matrix_i_in_int : matrix_buffer;
   signal matrix_s_in_int : matrix_buffer;
 
+  -- Ops
+  signal tensor_operation_int : tensor_buffer;
+
+  -- Output
   signal matrix_w_out_int : matrix_buffer;
   signal tensor_k_out_int : tensor_buffer;
   signal tensor_d_out_int : tensor_buffer;
@@ -329,7 +352,8 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal matrix_v_out_int : matrix_buffer;
   signal vector_b_out_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_t_x_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_x_x_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -356,6 +380,12 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal index_t_s_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_l_s_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
+  signal index_i_differentiation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_differentiation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_differentiation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- Output
   signal index_l_w_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_x_w_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -375,6 +405,8 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   signal index_l_b_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_x_in_enable_int   : std_logic;
   signal data_r_in_enable_int   : std_logic;
   signal data_rho_in_enable_int : std_logic;
@@ -384,6 +416,32 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal data_a_in_enable_int : std_logic;
   signal data_i_in_enable_int : std_logic;
   signal data_s_in_enable_int : std_logic;
+
+  -- Ops
+  signal data_differentiation_enable_int : std_logic;
+
+  -- DIFFERENTIATION
+  -- CONTROL
+  signal start_differentiation : std_logic;
+  signal ready_differentiation : std_logic;
+
+  signal data_in_i_enable_differentiation : std_logic;
+  signal data_in_j_enable_differentiation : std_logic;
+  signal data_in_k_enable_differentiation : std_logic;
+
+  signal data_i_enable_differentiation : std_logic;
+  signal data_j_enable_differentiation : std_logic;
+  signal data_k_enable_differentiation : std_logic;
+
+  signal data_out_i_enable_differentiation : std_logic;
+  signal data_out_j_enable_differentiation : std_logic;
+
+  -- DATA
+  signal size_i_in_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR FLOAT ADDER
   -- CONTROL
@@ -451,7 +509,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- CONTROL
+  -- INPUT CONTROL
   x_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1117,6 +1175,186 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
+  differentiation_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_i_enable_differentiation <= '0';
+      data_in_j_enable_differentiation <= '0';
+      data_in_k_enable_differentiation <= '0';
+
+      data_differentiation_enable_int <= '0';
+
+      index_i_differentiation_loop <= ZERO_CONTROL;
+      index_j_differentiation_loop <= ZERO_CONTROL;
+      index_k_differentiation_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_differentiation_fsm_int is
+        when STARTER_DIFFERENTIATION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_i_enable_differentiation <= '0';
+          data_in_j_enable_differentiation <= '0';
+          data_in_k_enable_differentiation <= '0';
+
+          data_differentiation_enable_int <= '0';
+
+          if (START = '1') then
+            -- Data Inputs
+            size_i_in_differentiation <= SIZE_R_IN;
+            size_j_in_differentiation <= SIZE_L_IN;
+            size_k_in_differentiation <= SIZE_W_IN;
+
+            -- Control Internal
+            index_i_differentiation_loop <= ZERO_CONTROL;
+            index_j_differentiation_loop <= ZERO_CONTROL;
+            index_k_differentiation_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_differentiation_fsm_int <= INPUT_I_DIFFERENTIATION_STATE;
+          end if;
+
+        when INPUT_I_DIFFERENTIATION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_differentiation <= tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_differentiation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_differentiation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_differentiation_loop) = unsigned(ZERO_CONTROL)) then
+            start_differentiation <= '1';
+          end if;
+
+          data_in_i_enable_differentiation <= '1';
+          data_in_j_enable_differentiation <= '1';
+          data_in_k_enable_differentiation <= '1';
+
+          -- FSM Control
+          controller_differentiation_fsm_int <= CLEAN_K_DIFFERENTIATION_STATE;
+
+        when INPUT_J_DIFFERENTIATION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_differentiation <= tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop)));
+
+          data_in_j_enable_differentiation <= '1';
+          data_in_k_enable_differentiation <= '1';
+
+          -- FSM Control
+          if (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_differentiation_fsm_int <= CLEAN_J_DIFFERENTIATION_STATE;
+          else
+            controller_differentiation_fsm_int <= CLEAN_K_DIFFERENTIATION_STATE;
+          end if;
+
+        when INPUT_K_DIFFERENTIATION_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_in_differentiation <= tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop)));
+
+          -- Control Internal
+          data_in_k_enable_differentiation <= '1';
+
+          -- FSM Control
+          if ((unsigned(index_j_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            controller_differentiation_fsm_int <= CLEAN_I_DIFFERENTIATION_STATE;
+          elsif (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_differentiation_fsm_int <= CLEAN_J_DIFFERENTIATION_STATE;
+          else
+            controller_differentiation_fsm_int <= CLEAN_K_DIFFERENTIATION_STATE;
+          end if;
+
+        when CLEAN_I_DIFFERENTIATION_STATE =>  -- STEP 7
+
+          if (data_i_enable_differentiation = '1' and data_j_enable_differentiation = '1' and data_k_enable_differentiation = '1') then
+            if ((unsigned(index_j_differentiation_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop))) <= data_out_differentiation;
+
+              -- Control Internal
+              data_differentiation_enable_int <= '1';
+
+              index_i_differentiation_loop <= ZERO_CONTROL;
+              index_j_differentiation_loop <= ZERO_CONTROL;
+              index_k_differentiation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_differentiation_fsm_int <= STARTER_DIFFERENTIATION_STATE;
+            elsif ((unsigned(index_j_differentiation_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop))) <= data_out_differentiation;
+
+              -- Control Internal
+              index_i_differentiation_loop <= std_logic_vector(unsigned(index_i_differentiation_loop) + unsigned(ONE_CONTROL));
+              index_j_differentiation_loop <= ZERO_CONTROL;
+              index_k_differentiation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_differentiation_fsm_int <= INPUT_J_DIFFERENTIATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_differentiation <= '0';
+
+            data_in_i_enable_differentiation <= '0';
+            data_in_j_enable_differentiation <= '0';
+            data_in_k_enable_differentiation <= '0';
+          end if;
+
+        when CLEAN_J_DIFFERENTIATION_STATE =>  -- STEP 7
+
+          if (data_j_enable_differentiation = '1' and data_k_enable_differentiation = '1') then
+            if ((unsigned(index_j_differentiation_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_differentiation_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop))) <= data_out_differentiation;
+
+              -- Control Internal
+              index_j_differentiation_loop <= std_logic_vector(unsigned(index_j_differentiation_loop) + unsigned(ONE_CONTROL));
+              index_k_differentiation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_differentiation_fsm_int <= INPUT_J_DIFFERENTIATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_differentiation <= '0';
+
+            data_in_i_enable_differentiation <= '0';
+            data_in_j_enable_differentiation <= '0';
+            data_in_k_enable_differentiation <= '0';
+          end if;
+
+        when CLEAN_K_DIFFERENTIATION_STATE =>  -- STEP 8
+
+          if (data_k_enable_differentiation = '1') then
+            if (unsigned(index_k_differentiation_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_differentiation_loop)), to_integer(unsigned(index_j_differentiation_loop)), to_integer(unsigned(index_k_differentiation_loop))) <= data_out_differentiation;
+
+              -- Control Internal
+              index_k_differentiation_loop <= std_logic_vector(unsigned(index_k_differentiation_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_differentiation_fsm_int <= INPUT_J_DIFFERENTIATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_differentiation <= '0';
+
+            data_in_i_enable_differentiation <= '0';
+            data_in_j_enable_differentiation <= '0';
+            data_in_k_enable_differentiation <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_differentiation_fsm_int <= STARTER_DIFFERENTIATION_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- OUTPUT CONTROL
   -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
   a_in_fsm : process(CLK, RST)
   begin
