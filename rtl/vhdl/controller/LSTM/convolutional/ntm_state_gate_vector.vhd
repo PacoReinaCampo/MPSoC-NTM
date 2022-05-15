@@ -190,6 +190,7 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
 
   signal data_in_enable_int : std_logic;
 
+  -- Ops
   signal data_first_vector_float_multiplier_enable_int  : std_logic;
   signal data_second_vector_float_multiplier_enable_int : std_logic;
   signal data_vector_float_adder_enable_int             : std_logic;
