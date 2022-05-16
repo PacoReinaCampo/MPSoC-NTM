@@ -148,7 +148,6 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
     CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 4
     );
 
-
   -- Output
   type controller_w_out_fsm is (
     STARTER_W_OUT_STATE,                -- STEP 0

@@ -204,6 +204,11 @@ architecture ntm_writing_architecture of ntm_writing is
 
   signal index_k_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
+  signal index_i_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- Output
   signal index_j_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -262,6 +267,24 @@ architecture ntm_writing_architecture of ntm_writing is
   signal data_out_matrix_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_float_adder : std_logic;
 
+  -- VECTOR SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_in_enable_length_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
+
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation        : std_logic;
+
+  signal data_out_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -577,6 +600,125 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
+  vector_summation_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_enable_length_vector_summation <= '0';
+      data_in_enable_vector_summation        <= '0';
+
+      data_vector_summation_enable_int <= '0';
+
+      index_i_vector_summation_loop <= ZERO_CONTROL;
+      index_j_vector_summation_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_summation_fsm_int is
+        when STARTER_VECTOR_SUMMATION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_enable_length_vector_summation <= '0';
+          data_in_enable_vector_summation        <= '0';
+
+          if (data_w_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Data Inputs
+            length_in_vector_summation <= SIZE_N_IN;
+            size_in_vector_summation   <= SIZE_N_IN;
+
+            -- Control Internal
+            index_i_vector_summation_loop <= ZERO_CONTROL;
+            index_j_vector_summation_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_summation_fsm_int <= INPUT_VECTOR_LENGTH_SUMMATION_STATE;
+          end if;
+
+          -- Control Internal
+          data_vector_summation_enable_int <= '0';
+
+        when INPUT_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 1
+
+          -- Data Inputs
+          data_in_vector_summation <= matrix_second_operation_int(to_integer(unsigned(index_i_vector_summation_loop)), to_integer(unsigned(index_j_vector_summation_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_vector_summation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_vector_summation_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_summation <= '1';
+          end if;
+
+          data_in_enable_length_vector_summation <= '1';
+          data_in_enable_vector_summation        <= '1';
+
+          -- FSM Control
+          controller_vector_summation_fsm_int <= CLEAN_VECTOR_SIZE_SUMMATION_STATE;
+
+        when INPUT_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          data_in_vector_summation <= matrix_second_operation_int(to_integer(unsigned(index_i_vector_summation_loop)), to_integer(unsigned(index_j_vector_summation_loop)));
+
+          -- Control Internal
+          data_in_enable_vector_summation <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_vector_summation_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            controller_vector_summation_fsm_int <= CLEAN_VECTOR_LENGTH_SUMMATION_STATE;
+          else
+            controller_vector_summation_fsm_int <= CLEAN_VECTOR_SIZE_SUMMATION_STATE;
+          end if;
+
+        when CLEAN_VECTOR_LENGTH_SUMMATION_STATE =>  -- STEP 3
+
+          if (data_enable_length_vector_summation = '1' and data_enable_vector_summation = '1') then
+            if ((unsigned(index_i_vector_summation_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_vector_summation_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Control Internal
+              index_i_vector_summation_loop <= ZERO_CONTROL;
+              index_j_vector_summation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
+            elsif ((unsigned(index_i_vector_summation_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_vector_summation_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Control Internal
+              index_i_vector_summation_loop <= std_logic_vector(unsigned(index_i_vector_summation_loop) + unsigned(ONE_CONTROL));
+              index_j_vector_summation_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= INPUT_VECTOR_LENGTH_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
+
+            data_in_enable_length_vector_summation <= '0';
+            data_in_enable_vector_summation        <= '0';
+          end if;
+
+        when CLEAN_VECTOR_SIZE_SUMMATION_STATE =>  -- STEP 4
+
+          if (data_enable_vector_summation = '1') then
+            if (unsigned(index_j_vector_summation_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Internal
+              index_j_vector_summation_loop <= std_logic_vector(unsigned(index_j_vector_summation_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= INPUT_VECTOR_SIZE_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
+
+            data_in_enable_length_vector_summation <= '0';
+            data_in_enable_vector_summation        <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
+      end case;
+    end if;
+  end process;
+
   -- OUTPUT CONTROL
   m_out_fsm : process(CLK, RST)
   begin
@@ -746,6 +888,36 @@ begin
 
       DATA_OUT     => data_out_matrix_float_adder,
       OVERFLOW_OUT => overflow_out_matrix_float_adder
+      );
+
+  -- VECTOR SUMMATION
+  vector_summation : ntm_vector_summation
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_IN_LENGTH_ENABLE => data_in_enable_length_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
+
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+
+      -- DATA
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
 end architecture;
