@@ -102,6 +102,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_u_in_fsm is (
     STARTER_U_IN_STATE,                 -- STEP 0
     INPUT_U_IN_J_STATE,                 -- STEP 1

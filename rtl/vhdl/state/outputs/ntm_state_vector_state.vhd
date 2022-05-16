@@ -126,6 +126,7 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_a_in_fsm is (
     STARTER_A_IN_STATE,                 -- STEP 0
     INPUT_A_IN_I_STATE,                 -- STEP 1
@@ -172,6 +173,7 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
     CLEAN_U_IN_STATE                    -- STEP 2
     );
 
+  -- Output
   type controller_x_out_fsm is (
     STARTER_X_OUT_STATE,                -- STEP 0
     CLEAN_X_OUT_STATE,                  -- STEP 2
@@ -183,6 +185,7 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_a_in_fsm_int : controller_a_in_fsm;
   signal controller_b_in_fsm_int : controller_b_in_fsm;
   signal controller_c_in_fsm_int : controller_c_in_fsm;
@@ -192,9 +195,11 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
 
   signal controller_u_in_fsm_int : controller_u_in_fsm;
 
+  -- Output
   signal controller_x_out_fsm_int : controller_x_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_a_in_int : matrix_buffer;
   signal matrix_b_in_int : matrix_buffer;
   signal matrix_c_in_int : matrix_buffer;
@@ -204,9 +209,11 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
 
   signal vector_u_in_int : vector_buffer;
 
+  -- Output
   signal vector_x_out_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_i_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_a_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -224,8 +231,11 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
 
   signal index_u_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Output
   signal index_x_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Index
+  -- Input
   signal data_a_in_enable_int : std_logic;
   signal data_b_in_enable_int : std_logic;
   signal data_c_in_enable_int : std_logic;
@@ -466,7 +476,7 @@ begin
 
   -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
 
-  -- CONTROL
+  -- INPUT CONTROL
   a_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1117,6 +1127,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   x_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

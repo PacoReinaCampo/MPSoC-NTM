@@ -1151,7 +1151,7 @@ begin
               index_vector_summation_loop <= std_logic_vector(unsigned(index_vector_summation_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_vector_summation_fsm_int <= INPUT_LENGTH_VECTOR_SUMMATION_STATE;
+              controller_vector_summation_fsm_int <= INPUT_VECTOR_SUMMATION_STATE;
             end if;
           else
             -- Control Internal
