@@ -120,32 +120,32 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   -- Ops
   type controller_first_vector_float_adder_fsm is (
     STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
-    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,     -- STEP 2
-    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE      -- STEP 4
+    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,     -- STEP 1
+    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE      -- STEP 2
     );
 
   type controller_first_vector_float_multiplier_fsm is (
     STARTER_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE,  -- STEP 0
-    INPUT_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 2
-    CLEAN_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 4
+    INPUT_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 1
+    CLEAN_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 2
     );
 
   type controller_second_vector_float_multiplier_fsm is (
     STARTER_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE,  -- STEP 0
-    INPUT_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 2
-    CLEAN_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 4
+    INPUT_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 1
+    CLEAN_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 2
     );
 
   type controller_second_vector_float_adder_fsm is (
     STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
-    INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE,     -- STEP 2
-    CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE      -- STEP 4
+    INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE,     -- STEP 1
+    CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE      -- STEP 2
     );
 
   type controller_third_vector_float_multiplier_fsm is (
     STARTER_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE,  -- STEP 0
-    INPUT_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 2
-    CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 4
+    INPUT_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 1
+    CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 2
     );
 
   -- Output
@@ -391,7 +391,7 @@ begin
             controller_first_vector_float_adder_fsm_int <= INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE;
           end if;
 
-        when INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 5
+        when INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 1
 
           -- Data Inputs
           data_a_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
@@ -408,7 +408,7 @@ begin
           -- FSM Control
           controller_first_vector_float_adder_fsm_int <= CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE;
 
-        when CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 7
+        when CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_float_adder = '1' and data_out_enable_vector_float_adder = '1') then
             if (unsigned(index_vector_float_adder_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
@@ -479,7 +479,7 @@ begin
             controller_first_vector_float_multiplier_fsm_int <= INPUT_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE;
           end if;
 
-        when INPUT_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
+        when INPUT_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 1
 
           -- Data Inputs
           data_a_in_vector_float_multiplier <= vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop)));
@@ -496,7 +496,7 @@ begin
           -- FSM Control
           controller_first_vector_float_multiplier_fsm_int <= CLEAN_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE;
 
-        when CLEAN_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 7
+        when CLEAN_FIRST_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_float_multiplier = '1' and data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_vector_float_multiplier_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
@@ -549,7 +549,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_second_vector_float_multiplier_fsm_int is
-        when STARTER_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 0
+        when STARTER_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 3
           -- Control Internal
           data_a_in_enable_vector_float_multiplier <= '0';
           data_b_in_enable_vector_float_multiplier <= '0';
@@ -567,7 +567,7 @@ begin
             controller_second_vector_float_multiplier_fsm_int <= INPUT_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE;
           end if;
 
-        when INPUT_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
+        when INPUT_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 4
 
           -- Data Inputs
           data_a_in_vector_float_multiplier <= vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop)));
@@ -584,7 +584,7 @@ begin
           -- FSM Control
           controller_second_vector_float_multiplier_fsm_int <= CLEAN_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE;
 
-        when CLEAN_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 7
+        when CLEAN_SECOND_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_float_multiplier = '1' and data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_vector_float_multiplier_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
@@ -657,7 +657,7 @@ begin
             controller_second_vector_float_adder_fsm_int <= INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE;
           end if;
 
-        when INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 5
+        when INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 1
 
           -- Data Inputs
           data_a_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
@@ -674,7 +674,7 @@ begin
           -- FSM Control
           controller_second_vector_float_adder_fsm_int <= CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE;
 
-        when CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 7
+        when CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_float_adder = '1' and data_out_enable_vector_float_adder = '1') then
             if (unsigned(index_vector_float_adder_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
@@ -745,7 +745,7 @@ begin
             controller_third_vector_float_multiplier_fsm_int <= INPUT_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE;
           end if;
 
-        when INPUT_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
+        when INPUT_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 1
 
           -- Data Inputs
           data_a_in_vector_float_multiplier <= vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop)));
@@ -762,7 +762,7 @@ begin
           -- FSM Control
           controller_third_vector_float_multiplier_fsm_int <= CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE;
 
-        when CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 7
+        when CLEAN_THIRD_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_float_multiplier = '1' and data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_vector_float_multiplier_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then

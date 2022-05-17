@@ -118,6 +118,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_m_in_fsm is (
     STARTER_M_IN_STATE,                 -- STEP 0
     INPUT_M_IN_J_STATE,                 -- STEP 1
@@ -137,6 +138,33 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
     INPUT_STATE,                        -- STEP 1
     CLEAN_STATE                         -- STEP 2
     );
+
+  -- Ops
+  type controller_first_matrix_float_adder_fsm is (
+    STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 1
+    INPUT_J_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 2
+    CLEAN_I_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 3
+    CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE   -- STEP 4
+    );
+
+  type controller_matrix_float_multiplier_fsm is (
+    STARTER_MATRIX_FLOAT_MULTIPLIER_STATE,  -- STEP 0
+    INPUT_I_MATRIX_FLOAT_MULTIPLIER_STATE,  -- STEP 1
+    INPUT_J_MATRIX_FLOAT_MULTIPLIER_STATE,  -- STEP 2
+    CLEAN_I_MATRIX_FLOAT_MULTIPLIER_STATE,  -- STEP 3
+    CLEAN_J_MATRIX_FLOAT_MULTIPLIER_STATE   -- STEP 4
+    );
+
+  type controller_second_matrix_float_adder_fsm is (
+    STARTER_SECOND_MATRIX_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_I_SECOND_MATRIX_FLOAT_ADDER_STATE,  -- STEP 1
+    INPUT_J_SECOND_MATRIX_FLOAT_ADDER_STATE,  -- STEP 2
+    CLEAN_I_SECOND_MATRIX_FLOAT_ADDER_STATE,  -- STEP 3
+    CLEAN_J_SECOND_MATRIX_FLOAT_ADDER_STATE   -- STEP 4
+    );
+
+  -- Output
   type controller_m_out_fsm is (
     STARTER_M_OUT_STATE,                -- STEP 0
     CLEAN_M_OUT_J_STATE,                -- STEP 1
@@ -150,24 +178,37 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_m_in_fsm_int : controller_m_in_fsm;
 
   signal controller_w_in_fsm_int : controller_w_in_fsm;
 
   signal controller_in_fsm_int : controller_in_fsm;
 
+  -- Ops
+  signal controller_first_matrix_float_adder_fsm_int  : controller_first_matrix_float_adder_fsm;
+  signal controller_matrix_float_multiplier_fsm_int   : controller_matrix_float_multiplier_fsm;
+  signal controller_second_matrix_float_adder_fsm_int : controller_second_matrix_float_adder_fsm;
+
+  -- Output
   signal controller_m_out_fsm_int : controller_m_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_m_in_int : matrix_buffer;
 
   signal vector_w_in_int : vector_buffer;
   signal vector_v_in_int : vector_buffer;
   signal vector_e_in_int : vector_buffer;
 
+  -- Ops
+  signal matrix_operation_int : matrix_buffer;
+
+  -- Output
   signal matrix_m_out_int : matrix_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_j_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -175,9 +216,19 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   signal index_j_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
+  signal index_i_matrix_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_matrix_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_matrix_float_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- Output
   signal index_j_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_m_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_m_in_enable_int : std_logic;
 
   signal data_w_in_enable_int : std_logic;
@@ -186,6 +237,11 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_e_in_enable_int : std_logic;
 
   signal data_in_enable_int : std_logic;
+
+  -- Ops
+  signal data_first_matrix_float_adder_enable_int  : std_logic;
+  signal data_matrix_float_multiplier_enable_int   : std_logic;
+  signal data_second_matrix_float_adder_enable_int : std_logic;
 
   -- MATRIX ADDER
   -- CONTROL
@@ -276,7 +332,7 @@ begin
 
   -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
-  -- CONTROL
+  -- INPUT CONTROL
   m_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -561,6 +617,431 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
+  first_matrix_float_adder_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_matrix_float_adder <= '0';
+      data_a_in_j_enable_matrix_float_adder <= '0';
+      data_b_in_i_enable_matrix_float_adder <= '0';
+      data_b_in_j_enable_matrix_float_adder <= '0';
+
+      data_first_matrix_float_adder_enable_int <= '0';
+
+      index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+      index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_first_matrix_float_adder_fsm_int is
+        when STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_matrix_float_adder <= '0';
+          data_a_in_j_enable_matrix_float_adder <= '0';
+          data_b_in_i_enable_matrix_float_adder <= '0';
+          data_b_in_j_enable_matrix_float_adder <= '0';
+
+          data_first_matrix_float_adder_enable_int <= '0';
+
+          if (data_m_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Data Inputs
+            size_i_in_matrix_float_adder <= SIZE_N_IN;
+            size_j_in_matrix_float_adder <= SIZE_W_IN;
+
+            -- Control Internal
+            index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+            index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_first_matrix_float_adder_fsm_int <= INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE;
+          end if;
+
+        when INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+          data_b_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_float_adder_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_float_adder_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_float_adder <= '1';
+          end if;
+
+          data_a_in_i_enable_matrix_float_adder <= '1';
+          data_a_in_j_enable_matrix_float_adder <= '1';
+          data_b_in_i_enable_matrix_float_adder <= '1';
+          data_b_in_j_enable_matrix_float_adder <= '1';
+
+          -- FSM Control
+          controller_first_matrix_float_adder_fsm_int <= CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE;
+
+        when INPUT_J_FIRST_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_a_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+          data_b_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+
+          -- Control Internal
+          data_a_in_j_enable_matrix_float_adder <= '1';
+          data_b_in_j_enable_matrix_float_adder <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_first_matrix_float_adder_fsm_int <= CLEAN_I_FIRST_MATRIX_FLOAT_ADDER_STATE;
+          else
+            controller_first_matrix_float_adder_fsm_int <= CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE;
+          end if;
+
+        when CLEAN_I_FIRST_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 7
+
+          if (data_out_i_enable_matrix_float_adder = '1' and data_out_i_enable_matrix_float_adder = '1') then
+            if ((unsigned(index_i_matrix_float_adder_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              data_first_matrix_float_adder_enable_int <= '1';
+
+              index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+              index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_first_matrix_float_adder_fsm_int <= STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE;
+            elsif ((unsigned(index_i_matrix_float_adder_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              index_i_matrix_float_adder_loop <= std_logic_vector(unsigned(index_i_matrix_float_adder_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_first_matrix_float_adder_fsm_int <= INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_adder <= '0';
+
+            data_a_in_i_enable_matrix_float_adder <= '0';
+            data_a_in_j_enable_matrix_float_adder <= '0';
+            data_b_in_i_enable_matrix_float_adder <= '0';
+            data_b_in_j_enable_matrix_float_adder <= '0';
+          end if;
+
+        when CLEAN_J_FIRST_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 8
+
+          if (data_out_i_enable_matrix_float_adder = '1') then
+            if (unsigned(index_j_matrix_float_adder_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              index_j_matrix_float_adder_loop <= std_logic_vector(unsigned(index_j_matrix_float_adder_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_first_matrix_float_adder_fsm_int <= INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_adder <= '0';
+
+            data_a_in_i_enable_matrix_float_adder <= '0';
+            data_a_in_j_enable_matrix_float_adder <= '0';
+            data_b_in_i_enable_matrix_float_adder <= '0';
+            data_b_in_j_enable_matrix_float_adder <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_first_matrix_float_adder_fsm_int <= STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE;
+      end case;
+    end if;
+  end process;
+
+  matrix_float_multiplier_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_matrix_float_multiplier <= '0';
+      data_a_in_j_enable_matrix_float_multiplier <= '0';
+      data_b_in_i_enable_matrix_float_multiplier <= '0';
+      data_b_in_j_enable_matrix_float_multiplier <= '0';
+
+      data_matrix_float_multiplier_enable_int <= '0';
+
+      index_i_matrix_float_multiplier_loop <= ZERO_CONTROL;
+      index_j_matrix_float_multiplier_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_matrix_float_multiplier_fsm_int is
+        when STARTER_MATRIX_FLOAT_MULTIPLIER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_matrix_float_multiplier <= '0';
+          data_a_in_j_enable_matrix_float_multiplier <= '0';
+          data_b_in_i_enable_matrix_float_multiplier <= '0';
+          data_b_in_j_enable_matrix_float_multiplier <= '0';
+
+          data_matrix_float_multiplier_enable_int <= '0';
+
+          if (data_m_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Data Inputs
+            size_i_in_matrix_float_multiplier <= SIZE_N_IN;
+            size_j_in_matrix_float_multiplier <= SIZE_W_IN;
+
+            -- Control Internal
+            index_i_matrix_float_multiplier_loop <= ZERO_CONTROL;
+            index_j_matrix_float_multiplier_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_matrix_float_multiplier_fsm_int <= INPUT_I_MATRIX_FLOAT_MULTIPLIER_STATE;
+          end if;
+
+        when INPUT_I_MATRIX_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop)));
+          data_b_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_float_multiplier_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_float_multiplier_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_float_multiplier <= '1';
+          end if;
+
+          data_a_in_i_enable_matrix_float_multiplier <= '1';
+          data_a_in_j_enable_matrix_float_multiplier <= '1';
+          data_b_in_i_enable_matrix_float_multiplier <= '1';
+          data_b_in_j_enable_matrix_float_multiplier <= '1';
+
+          -- FSM Control
+          controller_matrix_float_multiplier_fsm_int <= CLEAN_J_MATRIX_FLOAT_MULTIPLIER_STATE;
+
+        when INPUT_J_MATRIX_FLOAT_MULTIPLIER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_a_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop)));
+          data_b_in_matrix_float_multiplier <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop)));
+
+          -- Control Internal
+          data_a_in_j_enable_matrix_float_multiplier <= '1';
+          data_b_in_j_enable_matrix_float_multiplier <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_float_multiplier_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_matrix_float_multiplier_fsm_int <= CLEAN_I_MATRIX_FLOAT_MULTIPLIER_STATE;
+          else
+            controller_matrix_float_multiplier_fsm_int <= CLEAN_J_MATRIX_FLOAT_MULTIPLIER_STATE;
+          end if;
+
+        when CLEAN_I_MATRIX_FLOAT_MULTIPLIER_STATE =>  -- STEP 7
+
+          if (data_out_i_enable_matrix_float_multiplier = '1' and data_out_i_enable_matrix_float_multiplier = '1') then
+            if ((unsigned(index_i_matrix_float_multiplier_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_multiplier_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+
+              -- Control Internal
+              data_matrix_float_multiplier_enable_int <= '1';
+
+              index_i_matrix_float_multiplier_loop <= ZERO_CONTROL;
+              index_j_matrix_float_multiplier_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_float_multiplier_fsm_int <= STARTER_MATRIX_FLOAT_MULTIPLIER_STATE;
+            elsif ((unsigned(index_i_matrix_float_multiplier_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_multiplier_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+
+              -- Control Internal
+              index_i_matrix_float_multiplier_loop <= std_logic_vector(unsigned(index_i_matrix_float_multiplier_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_float_multiplier_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_float_multiplier_fsm_int <= INPUT_I_MATRIX_FLOAT_MULTIPLIER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_multiplier <= '0';
+
+            data_a_in_i_enable_matrix_float_multiplier <= '0';
+            data_a_in_j_enable_matrix_float_multiplier <= '0';
+            data_b_in_i_enable_matrix_float_multiplier <= '0';
+            data_b_in_j_enable_matrix_float_multiplier <= '0';
+          end if;
+
+        when CLEAN_J_MATRIX_FLOAT_MULTIPLIER_STATE =>  -- STEP 8
+
+          if (data_out_i_enable_matrix_float_multiplier = '1') then
+            if (unsigned(index_j_matrix_float_multiplier_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_multiplier_loop)), to_integer(unsigned(index_j_matrix_float_multiplier_loop))) <= data_out_matrix_float_multiplier;
+
+              -- Control Internal
+              index_j_matrix_float_multiplier_loop <= std_logic_vector(unsigned(index_j_matrix_float_multiplier_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_matrix_float_multiplier_fsm_int <= INPUT_I_MATRIX_FLOAT_MULTIPLIER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_multiplier <= '0';
+
+            data_a_in_i_enable_matrix_float_multiplier <= '0';
+            data_a_in_j_enable_matrix_float_multiplier <= '0';
+            data_b_in_i_enable_matrix_float_multiplier <= '0';
+            data_b_in_j_enable_matrix_float_multiplier <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_matrix_float_multiplier_fsm_int <= STARTER_MATRIX_FLOAT_MULTIPLIER_STATE;
+      end case;
+    end if;
+  end process;
+
+  second_matrix_float_adder_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_matrix_float_adder <= '0';
+      data_a_in_j_enable_matrix_float_adder <= '0';
+      data_b_in_i_enable_matrix_float_adder <= '0';
+      data_b_in_j_enable_matrix_float_adder <= '0';
+
+      data_second_matrix_float_adder_enable_int <= '0';
+
+      index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+      index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_second_matrix_float_adder_fsm_int is
+        when STARTER_SECOND_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_matrix_float_adder <= '0';
+          data_a_in_j_enable_matrix_float_adder <= '0';
+          data_b_in_i_enable_matrix_float_adder <= '0';
+          data_b_in_j_enable_matrix_float_adder <= '0';
+
+          data_second_matrix_float_adder_enable_int <= '0';
+
+          if (data_m_in_enable_int = '1' and data_m_in_enable_int = '1') then
+            -- Data Inputs
+            size_i_in_matrix_float_adder <= SIZE_N_IN;
+            size_j_in_matrix_float_adder <= SIZE_W_IN;
+
+            -- Control Internal
+            index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+            index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_second_matrix_float_adder_fsm_int <= INPUT_I_SECOND_MATRIX_FLOAT_ADDER_STATE;
+          end if;
+
+        when INPUT_I_SECOND_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+          data_b_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_float_adder_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_float_adder_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_float_adder <= '1';
+          end if;
+
+          data_a_in_i_enable_matrix_float_adder <= '1';
+          data_a_in_j_enable_matrix_float_adder <= '1';
+          data_b_in_i_enable_matrix_float_adder <= '1';
+          data_b_in_j_enable_matrix_float_adder <= '1';
+
+          -- FSM Control
+          controller_second_matrix_float_adder_fsm_int <= CLEAN_J_SECOND_MATRIX_FLOAT_ADDER_STATE;
+
+        when INPUT_J_SECOND_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_a_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+          data_b_in_matrix_float_adder <= matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop)));
+
+          -- Control Internal
+          data_a_in_j_enable_matrix_float_adder <= '1';
+          data_b_in_j_enable_matrix_float_adder <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_second_matrix_float_adder_fsm_int <= CLEAN_I_SECOND_MATRIX_FLOAT_ADDER_STATE;
+          else
+            controller_second_matrix_float_adder_fsm_int <= CLEAN_J_SECOND_MATRIX_FLOAT_ADDER_STATE;
+          end if;
+
+        when CLEAN_I_SECOND_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 7
+
+          if (data_out_i_enable_matrix_float_adder = '1' and data_out_i_enable_matrix_float_adder = '1') then
+            if ((unsigned(index_i_matrix_float_adder_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              data_second_matrix_float_adder_enable_int <= '1';
+
+              index_i_matrix_float_adder_loop <= ZERO_CONTROL;
+              index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_second_matrix_float_adder_fsm_int <= STARTER_SECOND_MATRIX_FLOAT_ADDER_STATE;
+            elsif ((unsigned(index_i_matrix_float_adder_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_float_adder_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              index_i_matrix_float_adder_loop <= std_logic_vector(unsigned(index_i_matrix_float_adder_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_second_matrix_float_adder_fsm_int <= INPUT_I_SECOND_MATRIX_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_adder <= '0';
+
+            data_a_in_i_enable_matrix_float_adder <= '0';
+            data_a_in_j_enable_matrix_float_adder <= '0';
+            data_b_in_i_enable_matrix_float_adder <= '0';
+            data_b_in_j_enable_matrix_float_adder <= '0';
+          end if;
+
+        when CLEAN_J_SECOND_MATRIX_FLOAT_ADDER_STATE =>  -- STEP 8
+
+          if (data_out_i_enable_matrix_float_adder = '1') then
+            if (unsigned(index_j_matrix_float_adder_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_float_adder_loop)), to_integer(unsigned(index_j_matrix_float_adder_loop))) <= data_out_matrix_float_adder;
+
+              -- Control Internal
+              index_j_matrix_float_adder_loop <= std_logic_vector(unsigned(index_j_matrix_float_adder_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_second_matrix_float_adder_fsm_int <= INPUT_I_SECOND_MATRIX_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_float_adder <= '0';
+
+            data_a_in_i_enable_matrix_float_adder <= '0';
+            data_a_in_j_enable_matrix_float_adder <= '0';
+            data_b_in_i_enable_matrix_float_adder <= '0';
+            data_b_in_j_enable_matrix_float_adder <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_second_matrix_float_adder_fsm_int <= STARTER_SECOND_MATRIX_FLOAT_ADDER_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- OUTPUT CONTROL
   m_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

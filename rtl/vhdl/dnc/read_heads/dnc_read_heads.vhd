@@ -117,6 +117,7 @@ architecture dnc_read_heads_architecture of dnc_read_heads is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_rho_in_fsm is (
     STARTER_RHO_IN_STATE,               -- STEP 0
     INPUT_RHO_IN_I_STATE,               -- STEP 1
@@ -145,6 +146,7 @@ architecture dnc_read_heads_architecture of dnc_read_heads is
     OUTPUT_F_OUT_I_STATE                -- STEP 2
     );
 
+  -- Output
   type controller_pi_out_fsm is (
     STARTER_PI_OUT_STATE,               -- STEP 0
     CLEAN_PI_OUT_I_STATE,               -- STEP 1
@@ -158,25 +160,31 @@ architecture dnc_read_heads_architecture of dnc_read_heads is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_rho_in_fsm_int : controller_rho_in_fsm;
 
+  -- Output
   signal controller_k_out_fsm_int    : controller_k_out_fsm;
   signal controller_beta_out_fsm_int : controller_beta_out_fsm;
   signal controller_f_out_fsm_int    : controller_f_out_fsm;
   signal controller_pi_out_fsm_int   : controller_pi_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_rho_in_int : matrix_buffer;
 
+  -- Output
   signal matrix_k_out_int    : matrix_buffer;
   signal vector_beta_out_int : vector_buffer;
   signal vector_f_out_int    : vector_buffer;
   signal matrix_pi_out_int   : matrix_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_i_rho_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_m_rho_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Output
   signal index_i_k_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_k_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -195,7 +203,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- CONTROL
+  -- INPUT CONTROL
   rho_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -311,6 +319,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   -- k(t;i;k) = k^(t;i;k)
   k_out_fsm : process(CLK, RST)
   begin

@@ -110,6 +110,7 @@ architecture dnc_write_heads_urchitecture of dnc_write_heads is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_xi_in_fsm is (
     STARTER_XI_IN_STATE,                -- STEP 0
     INPUT_XI_IN_S_STATE,                -- STEP 1
@@ -128,6 +129,7 @@ architecture dnc_write_heads_urchitecture of dnc_write_heads is
     OUTPUT_E_OUT_K_STATE                -- STEP 2
     );
 
+  -- Output
   type controller_v_out_fsm is (
     STARTER_V_OUT_STATE,                -- STEP 0
     CLEAN_V_OUT_K_STATE,                -- STEP 1
@@ -139,22 +141,28 @@ architecture dnc_write_heads_urchitecture of dnc_write_heads is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_xi_in_fsm_int : controller_xi_in_fsm;
 
+  -- Output
   signal controller_k_out_fsm_int : controller_k_out_fsm;
   signal controller_e_out_fsm_int : controller_e_out_fsm;
   signal controller_v_out_fsm_int : controller_v_out_fsm;
 
   -- Buffer
+  -- Input
   signal vector_xi_in_int : vector_buffer;
 
+  -- Output
   signal vector_k_out_int : vector_buffer;
   signal vector_e_out_int : vector_buffer;
   signal vector_v_out_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_s_xi_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Output
   signal index_k_k_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_e_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_v_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -167,7 +175,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- CONTROL
+  -- INPUT CONTROL
   xi_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -228,6 +236,7 @@ begin
     end if;
   end process;
 
+  -- OUTPUT CONTROL
   -- k(t;k) = k^(t;k)
   k_out_fsm : process(CLK, RST)
   begin
