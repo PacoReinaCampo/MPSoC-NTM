@@ -101,7 +101,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -- INPUT_I_STATE, CLEAN_IN_I_STATE
   -- INPUT_J_STATE, CLEAN_IN_J_STATE
 
-  -- OUTPUT_I_STATE, CLEAN_OUT_J_STATE
+  -- OUTPUT_I_STATE, CLEAN_OUT_I_STATE
 
   -----------------------------------------------------------------------
   -- Constants
@@ -112,6 +112,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_k_in_fsm is (
     STARTER_K_IN_STATE,                 -- STEP 0
     INPUT_K_IN_J_STATE,                 -- STEP 1
@@ -126,6 +127,32 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
     CLEAN_M_IN_J_STATE                  -- STEP 4
     );
 
+  -- Ops
+  type controller_vector_float_multiplier_fsm is (
+    STARTER_VECTOR_FLOAT_MULTIPLIER_STATE,  -- STEP 0
+    INPUT_VECTOR_FLOAT_MULTIPLIER_STATE,    -- STEP 1
+    CLEAN_VECTOR_FLOAT_MULTIPLIER_STATE     -- STEP 2
+    );
+
+  type controller_vector_cosine_similarity_fsm is (
+    STARTER_VECTOR_COSINE_SIMILARITY_STATE,  -- STEP 0
+    INPUT_VECTOR_COSINE_SIMILARITY_STATE,    -- STEP 1
+    CLEAN_VECTOR_COSINE_SIMILARITY_STATE     -- STEP 2
+    );
+
+  type controller_vector_exponentiator_fsm is (
+    STARTER_VECTOR_EXPONENTIATOR_STATE,  -- STEP 0
+    INPUT_VECTOR_EXPONENTIATOR_STATE,    -- STEP 1
+    CLEAN_VECTOR_EXPONENTIATOR_STATE     -- STEP 2
+    );
+
+  type controller_vector_softmax_fsm is (
+    STARTER_VECTOR_SOFTMAX_STATE,  -- STEP 0
+    INPUT_VECTOR_SOFTMAX_STATE,    -- STEP 1
+    CLEAN_VECTOR_SOFTMAX_STATE     -- STEP 2
+    );
+
+  -- Output
   type controller_c_out_fsm is (
     STARTER_C_OUT_STATE,                -- STEP 0
     CLEAN_C_OUT_I_STATE,                -- STEP 1
@@ -137,27 +164,57 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -----------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_k_in_fsm_int : controller_k_in_fsm;
   signal controller_m_in_fsm_int : controller_m_in_fsm;
 
+  -- Ops
+  signal controller_vector_float_multiplier_fsm_int  : controller_vector_float_multiplier_fsm;
+  signal controller_vector_cosine_similarity_fsm_int : controller_vector_cosine_similarity_fsm;
+  signal controller_vector_exponentiator_fsm_int     : controller_vector_exponentiator_fsm;
+  signal controller_vector_softmax_fsm_int           : controller_vector_softmax_fsm;
+
+  -- Output
   signal controller_c_out_fsm_int : controller_c_out_fsm;
 
   -- Buffer
+  -- Input
   signal vector_k_in_int : vector_buffer;
   signal matrix_m_in_int : matrix_buffer;
 
+  -- Ops
+  signal vector_operation_int : vector_buffer;
+  signal matrix_operation_int : matrix_buffer;
+
+  -- Output
   signal vector_c_out_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_j_k_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_i_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_m_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
+  signal index_vector_float_multiplier_loop  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_cosine_similarity_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_exponentiator_loop     : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_softmax_loop           : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- Output
   signal index_i_c_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_k_in_enable_int : std_logic;
   signal data_m_in_enable_int : std_logic;
+
+  -- Ops
+  signal data_vector_float_multiplier_enable_int  : std_logic;
+  signal data_vector_cosine_similarity_enable_int : std_logic;
+  signal data_vector_exponentiator_enable_int     : std_logic;
+  signal data_vector_softmax_enable_int           : std_logic;
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -174,6 +231,20 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR EXPONENTIATOR
+  -- CONTROL
+  signal start_vector_exponentiator : std_logic;
+  signal ready_vector_exponentiator : std_logic;
+
+  signal data_in_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator : std_logic;
+
+  -- DATA
+  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
@@ -203,8 +274,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal size_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
+  signal size_in_vector_softmax  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -214,9 +284,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M[i,·],k,beta)[i] = softmax(cosine_similarity(k,M[i,·])·beta)[i]
+  -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
-  -- CONTROL
+  -- INPUT CONTROL
   k_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -407,6 +477,350 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
+  vector_float_multiplier_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_enable_vector_float_multiplier <= '0';
+      data_b_in_enable_vector_float_multiplier <= '0';
+
+      data_vector_float_multiplier_enable_int <= '0';
+
+      index_vector_float_multiplier_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_float_multiplier_fsm_int is
+        when STARTER_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_enable_vector_float_multiplier <= '0';
+          data_b_in_enable_vector_float_multiplier <= '0';
+
+          data_vector_float_multiplier_enable_int <= '0';
+
+          if (data_k_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_in_vector_float_multiplier <= SIZE_I_IN;
+
+            -- Control Internal
+            index_vector_float_multiplier_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_float_multiplier_fsm_int <= INPUT_VECTOR_FLOAT_MULTIPLIER_STATE;
+          end if;
+
+        when INPUT_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_vector_float_multiplier <= vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop)));
+          data_b_in_vector_float_multiplier <= vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_float_multiplier_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_float_multiplier_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_float_multiplier <= '1';
+          end if;
+
+          data_a_in_enable_vector_float_multiplier <= '1';
+          data_b_in_enable_vector_float_multiplier <= '1';
+
+          -- FSM Control
+          controller_vector_float_multiplier_fsm_int <= CLEAN_VECTOR_FLOAT_MULTIPLIER_STATE;
+
+        when CLEAN_VECTOR_FLOAT_MULTIPLIER_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_float_multiplier = '1' and data_out_enable_vector_float_multiplier = '1') then
+            if (unsigned(index_vector_float_multiplier_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop))) <= data_out_vector_float_multiplier;
+
+              -- Control Internal
+              data_vector_float_multiplier_enable_int <= '1';
+
+              index_vector_float_multiplier_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_float_multiplier_fsm_int <= STARTER_VECTOR_FLOAT_MULTIPLIER_STATE;
+            elsif (unsigned(index_vector_float_multiplier_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_multiplier_loop))) <= data_out_vector_float_multiplier;
+
+              -- Control Internal
+              index_vector_float_multiplier_loop <= std_logic_vector(unsigned(index_vector_float_multiplier_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_float_multiplier_fsm_int <= INPUT_VECTOR_FLOAT_MULTIPLIER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_float_multiplier <= '0';
+
+            data_a_in_enable_vector_float_multiplier <= '0';
+            data_b_in_enable_vector_float_multiplier <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_float_multiplier_fsm_int <= STARTER_VECTOR_FLOAT_MULTIPLIER_STATE;
+      end case;
+    end if;
+  end process;
+
+  vector_cosine_similarity_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_enable_vector_cosine_similarity <= '0';
+      data_b_in_enable_vector_cosine_similarity <= '0';
+
+      data_vector_cosine_similarity_enable_int <= '0';
+
+      index_vector_cosine_similarity_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_cosine_similarity_fsm_int is
+        when STARTER_VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_enable_vector_cosine_similarity <= '0';
+          data_b_in_enable_vector_cosine_similarity <= '0';
+
+          data_vector_cosine_similarity_enable_int <= '0';
+
+          if (data_k_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            length_in_vector_cosine_similarity <= SIZE_I_IN;
+
+            -- Control Internal
+            index_vector_cosine_similarity_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_cosine_similarity_fsm_int <= INPUT_VECTOR_COSINE_SIMILARITY_STATE;
+          end if;
+
+        when INPUT_VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_vector_cosine_similarity <= vector_operation_int(to_integer(unsigned(index_vector_cosine_similarity_loop)));
+          data_b_in_vector_cosine_similarity <= vector_operation_int(to_integer(unsigned(index_vector_cosine_similarity_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_cosine_similarity_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_cosine_similarity_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_cosine_similarity <= '1';
+          end if;
+
+          data_a_in_enable_vector_cosine_similarity <= '1';
+          data_b_in_enable_vector_cosine_similarity <= '1';
+
+          -- FSM Control
+          controller_vector_cosine_similarity_fsm_int <= CLEAN_VECTOR_COSINE_SIMILARITY_STATE;
+
+        when CLEAN_VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_cosine_similarity = '1' and data_out_enable_vector_cosine_similarity = '1') then
+            if (unsigned(index_vector_cosine_similarity_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_cosine_similarity_loop))) <= data_out_vector_cosine_similarity;
+
+              -- Control Internal
+              data_vector_cosine_similarity_enable_int <= '1';
+
+              index_vector_cosine_similarity_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_cosine_similarity_fsm_int <= STARTER_VECTOR_COSINE_SIMILARITY_STATE;
+            elsif (unsigned(index_vector_cosine_similarity_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_cosine_similarity_loop))) <= data_out_vector_cosine_similarity;
+
+              -- Control Internal
+              index_vector_cosine_similarity_loop <= std_logic_vector(unsigned(index_vector_cosine_similarity_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_cosine_similarity_fsm_int <= INPUT_VECTOR_COSINE_SIMILARITY_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_cosine_similarity <= '0';
+
+            data_a_in_enable_vector_cosine_similarity <= '0';
+            data_b_in_enable_vector_cosine_similarity <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_cosine_similarity_fsm_int <= STARTER_VECTOR_COSINE_SIMILARITY_STATE;
+      end case;
+    end if;
+  end process;
+
+  vector_exponentiator_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_enable_vector_exponentiator <= '0';
+
+      data_vector_exponentiator_enable_int <= '0';
+
+      index_vector_exponentiator_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_exponentiator_fsm_int is
+        when STARTER_VECTOR_EXPONENTIATOR_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_enable_vector_exponentiator <= '0';
+
+          data_vector_exponentiator_enable_int <= '0';
+
+          if (data_k_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_in_vector_exponentiator <= SIZE_I_IN;
+
+            -- Control Internal
+            index_vector_exponentiator_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_exponentiator_fsm_int <= INPUT_VECTOR_EXPONENTIATOR_STATE;
+          end if;
+
+        when INPUT_VECTOR_EXPONENTIATOR_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_vector_exponentiator <= vector_operation_int(to_integer(unsigned(index_vector_exponentiator_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_exponentiator_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_exponentiator_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_exponentiator <= '1';
+          end if;
+
+          data_in_enable_vector_exponentiator <= '1';
+
+          -- FSM Control
+          controller_vector_exponentiator_fsm_int <= CLEAN_VECTOR_EXPONENTIATOR_STATE;
+
+        when CLEAN_VECTOR_EXPONENTIATOR_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_exponentiator = '1' and data_out_enable_vector_exponentiator = '1') then
+            if (unsigned(index_vector_exponentiator_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_exponentiator_loop))) <= data_out_vector_exponentiator;
+
+              -- Control Internal
+              data_vector_exponentiator_enable_int <= '1';
+
+              index_vector_exponentiator_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_exponentiator_fsm_int <= STARTER_VECTOR_EXPONENTIATOR_STATE;
+            elsif (unsigned(index_vector_exponentiator_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_exponentiator_loop))) <= data_out_vector_exponentiator;
+
+              -- Control Internal
+              index_vector_exponentiator_loop <= std_logic_vector(unsigned(index_vector_exponentiator_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_exponentiator_fsm_int <= INPUT_VECTOR_EXPONENTIATOR_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_exponentiator <= '0';
+
+            data_in_enable_vector_exponentiator <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_exponentiator_fsm_int <= STARTER_VECTOR_EXPONENTIATOR_STATE;
+      end case;
+    end if;
+  end process;
+
+  vector_softmax_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_enable_vector_softmax <= '0';
+
+      data_vector_softmax_enable_int <= '0';
+
+      index_vector_softmax_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_softmax_fsm_int is
+        when STARTER_VECTOR_SOFTMAX_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_enable_vector_softmax <= '0';
+
+          data_vector_softmax_enable_int <= '0';
+
+          if (data_k_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_in_vector_softmax <= SIZE_I_IN;
+
+            -- Control Internal
+            index_vector_softmax_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_softmax_fsm_int <= INPUT_VECTOR_SOFTMAX_STATE;
+          end if;
+
+        when INPUT_VECTOR_SOFTMAX_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_vector_softmax <= vector_operation_int(to_integer(unsigned(index_vector_softmax_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_softmax_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_softmax_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_softmax <= '1';
+          end if;
+
+          data_in_enable_vector_softmax <= '1';
+
+          -- FSM Control
+          controller_vector_softmax_fsm_int <= CLEAN_VECTOR_SOFTMAX_STATE;
+
+        when CLEAN_VECTOR_SOFTMAX_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_softmax = '1' and data_out_enable_vector_softmax = '1') then
+            if (unsigned(index_vector_softmax_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_softmax_loop))) <= data_out_vector_softmax;
+
+              -- Control Internal
+              data_vector_softmax_enable_int <= '1';
+
+              index_vector_softmax_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_softmax_fsm_int <= STARTER_VECTOR_SOFTMAX_STATE;
+            elsif (unsigned(index_vector_softmax_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_softmax_loop))) <= data_out_vector_softmax;
+
+              -- Control Internal
+              index_vector_softmax_loop <= std_logic_vector(unsigned(index_vector_softmax_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_softmax_fsm_int <= INPUT_VECTOR_SOFTMAX_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_softmax <= '0';
+
+            data_in_enable_vector_softmax <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_softmax_fsm_int <= STARTER_VECTOR_SOFTMAX_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- OUTPUT CONTROL
   c_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -426,7 +840,6 @@ begin
       case controller_c_out_fsm_int is
         when STARTER_C_OUT_STATE =>     -- STEP 0
           if (data_k_in_enable_int = '1' and data_m_in_enable_int = '1') then
-            -- Data Internal
 
             -- Control Internal
             index_i_c_out_loop <= ZERO_CONTROL;
@@ -480,7 +893,7 @@ begin
   end process;
 
   -- VECTOR MULTIPLIER
-  vecto_float_multiplier : ntm_vector_float_multiplier
+  vector_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -504,6 +917,31 @@ begin
       DATA_A_IN => data_a_in_vector_float_multiplier,
       DATA_B_IN => data_b_in_vector_float_multiplier,
       DATA_OUT  => data_out_vector_float_multiplier
+      );
+
+  -- VECTOR EXPONENTIATOR
+  vector_exponentiator_function : ntm_vector_exponentiator_function
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_exponentiator,
+      READY => ready_vector_exponentiator,
+
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
+      -- DATA
+      SIZE_IN  => size_in_vector_exponentiator,
+      DATA_IN  => data_in_vector_exponentiator,
+      DATA_OUT => data_out_vector_exponentiator
       );
 
   -- VECTOR COSINE SIMILARITY

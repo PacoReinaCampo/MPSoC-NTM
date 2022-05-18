@@ -134,6 +134,14 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
     );
 
   -- Ops
+  type controller_matrix_transpose_fsm is (
+    STARTER_MATRIX_TRANSPOSE_STATE,  -- STEP 0
+    INPUT_I_MATRIX_TRANSPOSE_STATE,  -- STEP 1
+    INPUT_J_MATRIX_TRANSPOSE_STATE,  -- STEP 2
+    CLEAN_I_MATRIX_TRANSPOSE_STATE,  -- STEP 3
+    CLEAN_J_MATRIX_TRANSPOSE_STATE   -- STEP 4
+    );
+
   type controller_matrix_vector_product_fsm is (
     STARTER_MATRIX_VECTOR_PRODUCT_STATE,  -- STEP 0
     INPUT_I_MATRIX_VECTOR_PRODUCT_STATE,  -- STEP 1
@@ -161,7 +169,8 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal controller_w_in_fsm_int : controller_w_in_fsm;
 
   -- Ops
-  signal controller_matrix_vector_product_fsm_int  : controller_matrix_vector_product_fsm;
+  signal controller_matrix_transpose_fsm_int      : controller_matrix_transpose_fsm;
+  signal controller_matrix_vector_product_fsm_int : controller_matrix_vector_product_fsm;
 
   -- Output
   signal controller_r_out_fsm_int : controller_r_out_fsm;
@@ -187,6 +196,9 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal index_j_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Ops
+  signal index_i_matrix_transpose_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_matrix_transpose_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_i_matrix_vector_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_matrix_vector_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -200,6 +212,7 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal data_w_in_enable_int : std_logic;
 
   -- Ops
+  signal data_matrix_transpose_enable_int      : std_logic;
   signal data_matrix_vector_product_enable_int : std_logic;
 
   -- MATRIX TRANSPOSE
@@ -480,6 +493,134 @@ begin
   end process;
 
   -- OPS CONTROL
+  matrix_transpose_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_i_enable_matrix_transpose <= '0';
+      data_in_j_enable_matrix_transpose <= '0';
+
+      data_matrix_transpose_enable_int <= '0';
+
+      index_i_matrix_transpose_loop <= ZERO_CONTROL;
+      index_j_matrix_transpose_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_matrix_transpose_fsm_int is
+        when STARTER_MATRIX_TRANSPOSE_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_i_enable_matrix_transpose <= '0';
+          data_in_j_enable_matrix_transpose <= '0';
+
+          data_matrix_transpose_enable_int <= '0';
+
+          if (data_m_in_enable_int = '1' and data_w_in_enable_int = '1') then
+            -- Data Inputs
+            size_i_in_matrix_transpose <= SIZE_R_IN;
+            size_j_in_matrix_transpose <= SIZE_N_IN;
+
+            -- Control Internal
+            index_i_matrix_transpose_loop <= ZERO_CONTROL;
+            index_j_matrix_transpose_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_matrix_transpose_fsm_int <= INPUT_I_MATRIX_TRANSPOSE_STATE;
+          end if;
+
+        when INPUT_I_MATRIX_TRANSPOSE_STATE =>  -- STEP 1
+
+          -- Data Inputs
+          data_in_matrix_transpose <= matrix_operation_int(to_integer(unsigned(index_i_matrix_transpose_loop)), to_integer(unsigned(index_j_matrix_transpose_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_transpose_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_transpose_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_transpose <= '1';
+          end if;
+
+          data_in_i_enable_matrix_transpose <= '1';
+          data_in_j_enable_matrix_transpose <= '1';
+
+          -- FSM Control
+          controller_matrix_transpose_fsm_int <= CLEAN_J_MATRIX_TRANSPOSE_STATE;
+
+        when INPUT_J_MATRIX_TRANSPOSE_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          data_in_matrix_transpose <= matrix_operation_int(to_integer(unsigned(index_i_matrix_transpose_loop)), to_integer(unsigned(index_j_matrix_transpose_loop)));
+
+          -- Control Internal
+          data_in_j_enable_matrix_transpose <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            controller_matrix_transpose_fsm_int <= CLEAN_I_MATRIX_TRANSPOSE_STATE;
+          else
+            controller_matrix_transpose_fsm_int <= CLEAN_J_MATRIX_TRANSPOSE_STATE;
+          end if;
+
+        when CLEAN_I_MATRIX_TRANSPOSE_STATE =>  -- STEP 3
+
+          if (data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1') then
+            if ((unsigned(index_i_matrix_transpose_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_transpose_loop)), to_integer(unsigned(index_j_matrix_transpose_loop))) <= data_out_matrix_transpose;
+
+              -- Control Internal
+              data_matrix_transpose_enable_int <= '1';
+
+              index_i_matrix_transpose_loop <= ZERO_CONTROL;
+              index_j_matrix_transpose_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_transpose_fsm_int <= STARTER_MATRIX_TRANSPOSE_STATE;
+            elsif ((unsigned(index_i_matrix_transpose_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_transpose_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_transpose_loop)), to_integer(unsigned(index_j_matrix_transpose_loop))) <= data_out_matrix_transpose;
+
+              -- Control Internal
+              index_i_matrix_transpose_loop <= std_logic_vector(unsigned(index_i_matrix_transpose_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_transpose_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_matrix_transpose_fsm_int <= INPUT_I_MATRIX_TRANSPOSE_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_transpose <= '0';
+
+            data_in_i_enable_matrix_transpose <= '0';
+            data_in_j_enable_matrix_transpose <= '0';
+          end if;
+
+        when CLEAN_J_MATRIX_TRANSPOSE_STATE =>  -- STEP 4
+
+          if (data_out_i_enable_matrix_transpose = '1') then
+            if (unsigned(index_j_matrix_transpose_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_matrix_transpose_loop)), to_integer(unsigned(index_j_matrix_transpose_loop))) <= data_out_matrix_transpose;
+
+              -- Control Internal
+              index_j_matrix_transpose_loop <= std_logic_vector(unsigned(index_j_matrix_transpose_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_matrix_transpose_fsm_int <= INPUT_I_MATRIX_TRANSPOSE_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_transpose <= '0';
+
+            data_in_i_enable_matrix_transpose <= '0';
+            data_in_j_enable_matrix_transpose <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_matrix_transpose_fsm_int <= STARTER_MATRIX_TRANSPOSE_STATE;
+      end case;
+    end if;
+  end process;
+
   matrix_vector_product_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

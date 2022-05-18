@@ -140,6 +140,14 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
     );
 
   -- Ops
+  type controller_transpose_vector_product_fsm is (
+    STARTER_TRANSPOSE_VECTOR_PRODUCT_STATE,  -- STEP 0
+    INPUT_I_TRANSPOSE_VECTOR_PRODUCT_STATE,  -- STEP 1
+    INPUT_J_TRANSPOSE_VECTOR_PRODUCT_STATE,  -- STEP 2
+    CLEAN_I_TRANSPOSE_VECTOR_PRODUCT_STATE,  -- STEP 3
+    CLEAN_J_TRANSPOSE_VECTOR_PRODUCT_STATE   -- STEP 4
+    );
+
   type controller_first_matrix_float_adder_fsm is (
     STARTER_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 0
     INPUT_I_FIRST_MATRIX_FLOAT_ADDER_STATE,  -- STEP 1
@@ -186,6 +194,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal controller_in_fsm_int : controller_in_fsm;
 
   -- Ops
+  signal controller_transpose_vector_product_fsm_int  : controller_transpose_vector_product_fsm;
   signal controller_first_matrix_float_adder_fsm_int  : controller_first_matrix_float_adder_fsm;
   signal controller_matrix_float_multiplier_fsm_int   : controller_matrix_float_multiplier_fsm;
   signal controller_second_matrix_float_adder_fsm_int : controller_second_matrix_float_adder_fsm;
@@ -203,6 +212,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- Ops
   signal matrix_operation_int : matrix_buffer;
+  signal vector_operation_int : vector_buffer;
 
   -- Output
   signal matrix_m_out_int : matrix_buffer;
@@ -217,6 +227,9 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal index_j_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Ops
+  signal index_i_transpose_vector_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_transpose_vector_product_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
   signal index_i_matrix_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_matrix_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -239,6 +252,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_in_enable_int : std_logic;
 
   -- Ops
+  signal data_transpose_vector_product_enable_int  : std_logic;
   signal data_first_matrix_float_adder_enable_int  : std_logic;
   signal data_matrix_float_multiplier_enable_int   : std_logic;
   signal data_second_matrix_float_adder_enable_int : std_logic;
@@ -285,22 +299,26 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_b_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX TRANSPOSE
+  -- TRANSPOSE VECTOR PRODUCT
   -- CONTROL
-  signal start_matrix_transpose : std_logic;
-  signal ready_matrix_transpose : std_logic;
+  signal start_transpose_vector_product : std_logic;
+  signal ready_transpose_vector_product : std_logic;
 
-  signal data_in_i_enable_matrix_transpose : std_logic;
-  signal data_in_j_enable_matrix_transpose : std_logic;
+  signal data_a_in_enable_transpose_vector_product : std_logic;
+  signal data_b_in_enable_transpose_vector_product : std_logic;
 
-  signal data_out_i_enable_matrix_transpose : std_logic;
-  signal data_out_j_enable_matrix_transpose : std_logic;
+  signal data_enable_transpose_vector_product : std_logic;
+
+  signal data_out_i_enable_transpose_vector_product : std_logic;
+  signal data_out_j_enable_transpose_vector_product : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_in_transpose_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_transpose_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_transpose_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_transpose_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_transpose_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -618,6 +636,134 @@ begin
   end process;
 
   -- OPS CONTROL
+  transpose_vector_product_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_enable_transpose_vector_product <= '0';
+      data_b_in_enable_transpose_vector_product <= '0';
+
+      data_transpose_vector_product_enable_int <= '0';
+
+      index_i_transpose_vector_product_loop <= ZERO_CONTROL;
+      index_j_transpose_vector_product_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_transpose_vector_product_fsm_int is
+        when STARTER_TRANSPOSE_VECTOR_PRODUCT_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_enable_transpose_vector_product <= '0';
+          data_b_in_enable_transpose_vector_product <= '0';
+
+          data_transpose_vector_product_enable_int <= '0';
+
+          if (data_m_in_enable_int = '1' and data_w_in_enable_int = '1') then
+            -- Data Inputs
+            size_a_in_transpose_vector_product <= SIZE_N_IN;
+            size_b_in_transpose_vector_product <= SIZE_N_IN;
+
+            -- Control Internal
+            index_i_transpose_vector_product_loop <= ZERO_CONTROL;
+            index_j_transpose_vector_product_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_transpose_vector_product_fsm_int <= INPUT_I_TRANSPOSE_VECTOR_PRODUCT_STATE;
+          end if;
+
+        when INPUT_I_TRANSPOSE_VECTOR_PRODUCT_STATE =>  -- STEP 1
+
+          -- Data Inputs
+          data_a_in_transpose_vector_product <= vector_operation_int(to_integer(unsigned(index_i_transpose_vector_product_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_transpose_vector_product_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_transpose_vector_product_loop) = unsigned(ZERO_CONTROL)) then
+            start_transpose_vector_product <= '1';
+          end if;
+
+          data_a_in_enable_transpose_vector_product <= '1';
+          data_b_in_enable_transpose_vector_product <= '1';
+
+          -- FSM Control
+          controller_transpose_vector_product_fsm_int <= CLEAN_J_TRANSPOSE_VECTOR_PRODUCT_STATE;
+
+        when INPUT_J_TRANSPOSE_VECTOR_PRODUCT_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          data_a_in_transpose_vector_product <= vector_operation_int(to_integer(unsigned(index_j_transpose_vector_product_loop)));
+
+          -- Control Internal
+          data_b_in_enable_transpose_vector_product <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_transpose_vector_product_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            controller_transpose_vector_product_fsm_int <= CLEAN_I_TRANSPOSE_VECTOR_PRODUCT_STATE;
+          else
+            controller_transpose_vector_product_fsm_int <= CLEAN_J_TRANSPOSE_VECTOR_PRODUCT_STATE;
+          end if;
+
+        when CLEAN_I_TRANSPOSE_VECTOR_PRODUCT_STATE =>  -- STEP 3
+
+          if (data_out_i_enable_transpose_vector_product = '1' and data_out_j_enable_transpose_vector_product = '1') then
+            if ((unsigned(index_i_transpose_vector_product_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_transpose_vector_product_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_transpose_vector_product_loop)), to_integer(unsigned(index_j_transpose_vector_product_loop))) <= data_out_transpose_vector_product;
+
+              -- Control Internal
+              data_transpose_vector_product_enable_int <= '1';
+
+              index_i_transpose_vector_product_loop <= ZERO_CONTROL;
+              index_j_transpose_vector_product_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_transpose_vector_product_fsm_int <= STARTER_TRANSPOSE_VECTOR_PRODUCT_STATE;
+            elsif ((unsigned(index_i_transpose_vector_product_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_transpose_vector_product_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_transpose_vector_product_loop)), to_integer(unsigned(index_j_transpose_vector_product_loop))) <= data_out_transpose_vector_product;
+
+              -- Control Internal
+              index_i_transpose_vector_product_loop <= std_logic_vector(unsigned(index_i_transpose_vector_product_loop) + unsigned(ONE_CONTROL));
+              index_j_transpose_vector_product_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_transpose_vector_product_fsm_int <= INPUT_I_TRANSPOSE_VECTOR_PRODUCT_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_transpose_vector_product <= '0';
+
+            data_a_in_enable_transpose_vector_product <= '0';
+            data_b_in_enable_transpose_vector_product <= '0';
+          end if;
+
+        when CLEAN_J_TRANSPOSE_VECTOR_PRODUCT_STATE =>  -- STEP 4
+
+          if (data_out_i_enable_transpose_vector_product = '1') then
+            if (unsigned(index_j_transpose_vector_product_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              matrix_operation_int(to_integer(unsigned(index_i_transpose_vector_product_loop)), to_integer(unsigned(index_j_transpose_vector_product_loop))) <= data_out_transpose_vector_product;
+
+              -- Control Internal
+              index_j_transpose_vector_product_loop <= std_logic_vector(unsigned(index_j_transpose_vector_product_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_transpose_vector_product_fsm_int <= INPUT_I_TRANSPOSE_VECTOR_PRODUCT_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_transpose_vector_product <= '0';
+
+            data_a_in_enable_transpose_vector_product <= '0';
+            data_b_in_enable_transpose_vector_product <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_transpose_vector_product_fsm_int <= STARTER_TRANSPOSE_VECTOR_PRODUCT_STATE;
+      end case;
+    end if;
+  end process;
+
   first_matrix_float_adder_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1211,8 +1357,8 @@ begin
       DATA_OUT  => data_out_matrix_float_multiplier
       );
 
-  -- MATRIX TRANSPOSE
-  matrix_transpose : ntm_matrix_transpose
+  -- TRANSPOSE VECTOR PRODUCT
+  transpose_vector_product : ntm_transpose_vector_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -1223,20 +1369,24 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_transpose,
-      READY => ready_matrix_transpose,
+      START => start_transpose_vector_product,
+      READY => ready_transpose_vector_product,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_transpose,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_transpose,
+      DATA_A_IN_ENABLE => data_a_in_enable_transpose_vector_product,
+      DATA_B_IN_ENABLE => data_b_in_enable_transpose_vector_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_transpose,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
+      DATA_ENABLE => data_enable_transpose_vector_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_transpose_vector_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_transpose_vector_product,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_transpose,
-      SIZE_J_IN => size_j_in_matrix_transpose,
-      DATA_IN   => data_in_matrix_transpose,
-      DATA_OUT  => data_out_matrix_transpose
+      SIZE_A_IN => size_a_in_transpose_vector_product,
+      SIZE_B_IN => size_b_in_transpose_vector_product,
+
+      DATA_A_IN => data_a_in_transpose_vector_product,
+      DATA_B_IN => data_b_in_transpose_vector_product,
+      DATA_OUT  => data_out_transpose_vector_product
       );
 
   -- MATRIX PRODUCT
