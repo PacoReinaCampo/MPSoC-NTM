@@ -257,7 +257,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_matrix_float_multiplier_enable_int   : std_logic;
   signal data_second_matrix_float_adder_enable_int : std_logic;
 
-  -- MATRIX ADDER
+  -- FLOAT MATRIX ADDER
   -- CONTROL
   signal start_matrix_float_adder : std_logic;
   signal ready_matrix_float_adder : std_logic;
@@ -279,7 +279,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX MULTIPLIER
+  -- FLOAT MATRIX MULTIPLIER
   -- CONTROL
   signal start_matrix_float_multiplier : std_logic;
   signal ready_matrix_float_multiplier : std_logic;
@@ -320,7 +320,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_b_in_transpose_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_transpose_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT
+  -- FLOAT MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
   signal ready_matrix_product : std_logic;
@@ -1293,7 +1293,7 @@ begin
     end if;
   end process;
 
-  -- MATRIX ADDER
+  -- FLOAT MATRIX ADDER
   matrix_float_adder : ntm_matrix_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
@@ -1326,7 +1326,7 @@ begin
       DATA_OUT  => data_out_matrix_float_adder
       );
 
-  -- MATRIX MULTIPLIER
+  -- FLOAT MATRIX MULTIPLIER
   matrix_float_multiplier : ntm_matrix_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
@@ -1389,7 +1389,7 @@ begin
       DATA_OUT  => data_out_transpose_vector_product
       );
 
-  -- MATRIX PRODUCT
+  -- FLOAT MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE    => DATA_SIZE,

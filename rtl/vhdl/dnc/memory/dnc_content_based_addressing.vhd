@@ -216,7 +216,7 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_vector_exponentiator_enable_int     : std_logic;
   signal data_vector_softmax_enable_int           : std_logic;
 
-  -- VECTOR MULTIPLIER
+  -- FLOAT VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_float_multiplier : std_logic;
   signal ready_vector_float_multiplier : std_logic;
@@ -892,7 +892,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR MULTIPLIER
+  -- FLOAT VECTOR MULTIPLIER
   vector_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,

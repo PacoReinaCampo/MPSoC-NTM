@@ -187,7 +187,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_vector_float_multiplier_enable_int : std_logic;
   signal data_vector_multiplication_enable_int   : std_logic;
 
-  -- VECTOR ADDER
+  -- FLOAT VECTOR ADDER
   -- CONTROL
   signal start_vector_float_adder : std_logic;
   signal ready_vector_float_adder : std_logic;
@@ -205,7 +205,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
+  -- FLOAT VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_float_multiplier : std_logic;
   signal ready_vector_float_multiplier : std_logic;
@@ -699,7 +699,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR ADDER
+  -- FLOAT VECTOR ADDER
   vector_float_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
@@ -728,7 +728,7 @@ begin
       DATA_OUT  => data_out_vector_float_adder
       );
 
-  -- VECTOR MULTIPLIER
+  -- FLOAT VECTOR MULTIPLIER
   vector_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
