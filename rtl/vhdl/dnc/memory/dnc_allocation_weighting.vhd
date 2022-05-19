@@ -178,7 +178,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -- Output
   signal index_j_a_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- Enable
+  -- Control Internal - Enable
   -- Input
   signal data_u_in_enable_int : std_logic;
 
