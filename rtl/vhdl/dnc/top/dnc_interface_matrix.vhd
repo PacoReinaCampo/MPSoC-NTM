@@ -195,7 +195,7 @@ begin
 
       DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_product,
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_k_enable_tensor_matrix_product,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_product,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_product,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_product,
 
