@@ -161,7 +161,7 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   signal controller_l_in_fsm_int : controller_l_in_fsm;
 
   -- Ops
-  signal controller_matrix_vector_product_fsm_int  : controller_matrix_vector_product_fsm;
+  signal controller_matrix_vector_product_fsm_int : controller_matrix_vector_product_fsm;
 
   -- Output
   signal controller_f_out_fsm_int : controller_f_out_fsm;

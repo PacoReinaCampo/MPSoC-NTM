@@ -119,9 +119,9 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   -- Ops
   type controller_first_vector_float_adder_fsm is (
-    STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
-    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,     -- STEP 1
-    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE      -- STEP 2
+    STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,    -- STEP 1
+    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE     -- STEP 2
     );
 
   type controller_first_vector_float_multiplier_fsm is (
@@ -137,9 +137,9 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
     );
 
   type controller_second_vector_float_adder_fsm is (
-    STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
-    INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE,     -- STEP 1
-    CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE      -- STEP 2
+    STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE,    -- STEP 1
+    CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE     -- STEP 2
     );
 
   type controller_third_vector_float_multiplier_fsm is (

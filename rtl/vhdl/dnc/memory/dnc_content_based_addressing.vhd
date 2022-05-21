@@ -147,9 +147,9 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
     );
 
   type controller_vector_softmax_fsm is (
-    STARTER_VECTOR_SOFTMAX_STATE,  -- STEP 0
-    INPUT_VECTOR_SOFTMAX_STATE,    -- STEP 1
-    CLEAN_VECTOR_SOFTMAX_STATE     -- STEP 2
+    STARTER_VECTOR_SOFTMAX_STATE,       -- STEP 0
+    INPUT_VECTOR_SOFTMAX_STATE,         -- STEP 1
+    CLEAN_VECTOR_SOFTMAX_STATE          -- STEP 2
     );
 
   -- Output

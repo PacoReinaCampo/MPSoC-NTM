@@ -135,11 +135,11 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
 
   -- Ops
   type controller_matrix_transpose_fsm is (
-    STARTER_MATRIX_TRANSPOSE_STATE,  -- STEP 0
-    INPUT_I_MATRIX_TRANSPOSE_STATE,  -- STEP 1
-    INPUT_J_MATRIX_TRANSPOSE_STATE,  -- STEP 2
-    CLEAN_I_MATRIX_TRANSPOSE_STATE,  -- STEP 3
-    CLEAN_J_MATRIX_TRANSPOSE_STATE   -- STEP 4
+    STARTER_MATRIX_TRANSPOSE_STATE,     -- STEP 0
+    INPUT_I_MATRIX_TRANSPOSE_STATE,     -- STEP 1
+    INPUT_J_MATRIX_TRANSPOSE_STATE,     -- STEP 2
+    CLEAN_I_MATRIX_TRANSPOSE_STATE,     -- STEP 3
+    CLEAN_J_MATRIX_TRANSPOSE_STATE      -- STEP 4
     );
 
   type controller_matrix_vector_product_fsm is (

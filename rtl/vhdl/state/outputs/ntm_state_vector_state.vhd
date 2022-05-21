@@ -183,11 +183,11 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
     );
 
   type controller_matrix_product_fsm is (
-    STARTER_MATRIX_PRODUCT_STATE,  -- STEP 0
-    INPUT_I_MATRIX_PRODUCT_STATE,  -- STEP 1
-    INPUT_J_MATRIX_PRODUCT_STATE,  -- STEP 2
-    CLEAN_I_MATRIX_PRODUCT_STATE,  -- STEP 3
-    CLEAN_J_MATRIX_PRODUCT_STATE   -- STEP 4
+    STARTER_MATRIX_PRODUCT_STATE,       -- STEP 0
+    INPUT_I_MATRIX_PRODUCT_STATE,       -- STEP 1
+    INPUT_J_MATRIX_PRODUCT_STATE,       -- STEP 2
+    CLEAN_I_MATRIX_PRODUCT_STATE,       -- STEP 3
+    CLEAN_J_MATRIX_PRODUCT_STATE        -- STEP 4
     );
 
   type controller_second_matrix_vector_product_fsm is (
