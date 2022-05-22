@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_intro_model_pkg is
+package model_intro_pkg is
 
   -----------------------------------------------------------------------
   -- Constants
@@ -50,7 +50,7 @@ package ntm_intro_model_pkg is
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_intro_adder_model is
+  component model_intro_adder is
     generic (
       DATA_SIZE : positive := 4
       );
@@ -62,6 +62,6 @@ package ntm_intro_model_pkg is
       DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);
       DATA_OUT  : out unsigned(DATA_SIZE downto 0)
       );
-  end component ntm_intro_adder_model;
+  end component model_intro_adder;
 
-end ntm_intro_model_pkg;
+end model_intro_pkg;

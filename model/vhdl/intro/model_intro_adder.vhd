@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_intro_adder_model is
+entity model_intro_adder is
   generic (
     DATA_SIZE : positive := 4
     );
@@ -57,9 +57,9 @@ entity ntm_intro_adder_model is
     DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);
     DATA_OUT  : out unsigned(DATA_SIZE downto 0)
     );
-end entity ntm_intro_adder_model;
+end entity model_intro_adder;
 
-architecture ntm_intro_adder_model_architecture of ntm_intro_adder_model is
+architecture model_intro_adder_architecture of model_intro_adder is
 
 begin
 
@@ -76,4 +76,4 @@ begin
     end if;
   end process model;
 
-end architecture ntm_intro_adder_model_architecture;
+end architecture model_intro_adder_architecture;

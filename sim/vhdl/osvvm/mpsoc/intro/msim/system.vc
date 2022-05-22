@@ -2,9 +2,9 @@
 ../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
 ../../../../../../rtl/vhdl/pkg/ntm_intro_pkg.vhd
-../../../../../../bench/vhdl/osvvm/intro/ntm_intro_model_pkg.vhd
+../../../../../../bench/vhdl/osvvm/intro/model_intro_pkg.vhd
 
-../../../../../../model/vhdl/intro/ntm_intro_adder_model.vhd
+../../../../../../model/vhdl/intro/model_intro_adder.vhd
 ../../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
 
 ../../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd

@@ -51,7 +51,7 @@ use osvvm.CoveragePkg.all;
 entity ntm_intro_testbench is
 end entity ntm_intro_testbench;
 
-use work.ntm_intro_model_pkg.all;
+use work.model_intro_pkg.all;
 use work.ntm_intro_pkg.all;
 
 architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
@@ -101,7 +101,7 @@ begin
   rst_int <= '1' after 100 ns;
 
   -- MODEL
-  intro_adder_model : ntm_intro_adder_model
+  intro_adder_model : model_intro_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
