@@ -3,5 +3,5 @@ call ../../../../../../../settings64_msim.bat
 
 vlib work
 vlog -sv -stats=none -f system.vc
-vsim -c -do run.do work.dnc_read_heads_testbench
+vsim -c -do run.do work.model_read_heads_testbench
 pause

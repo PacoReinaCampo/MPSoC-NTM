@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	iverilog -g2012 -o system.vvp -c system.vc -s ntm_state_outputs_testbench
+	iverilog -g2012 -o system.vvp -c system.vc -s model_state_outputs_testbench
 
 simulate:
 	vvp system.vvp

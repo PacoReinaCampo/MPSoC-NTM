@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	iverilog -g2012 -o system.vvp -c system.vc -s dnc_write_heads_testbench
+	iverilog -g2012 -o system.vvp -c system.vc -s model_write_heads_testbench
 
 simulate:
 	vvp system.vvp

@@ -3,5 +3,5 @@ call ../../../../../../../settings64_msim.bat
 
 vlib work
 vcom -2008 -f system.vc
-vsim -c -do run.do work.dnc_top_testbench
+vsim -c -do run.do work.model_top_testbench
 pause

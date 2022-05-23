@@ -2,6 +2,6 @@
 call ../../../../../../../settings64_vivado.bat
 
 xvhdl -prj system.prj
-xelab dnc_read_heads_testbench
-xsim -R dnc_read_heads_testbench
+xelab model_read_heads_testbench
+xsim -R model_read_heads_testbench
 pause

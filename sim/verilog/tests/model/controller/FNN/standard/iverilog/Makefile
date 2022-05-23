@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	iverilog -g2012 -o system.vvp -c system.vc -s ntm_standard_fnn_testbench
+	iverilog -g2012 -o system.vvp -c system.vc -s model_standard_fnn_testbench
 
 simulate:
 	vvp system.vvp

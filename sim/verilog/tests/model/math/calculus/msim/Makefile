@@ -5,7 +5,7 @@ build:
 	vlog -sv -stats=none -f system.vc
 
 simulate:
-	vsim -c -do run.do work.ntm_calculus_testbench
+	vsim -c -do run.do work.model_calculus_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

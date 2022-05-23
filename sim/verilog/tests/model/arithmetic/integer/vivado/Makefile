@@ -48,8 +48,8 @@ build:
 	xvlog -prj system.prj
 
 simulate:
-	xelab ntm_integer_testbench
-	xsim -R ntm_integer_testbench
+	xelab model_integer_testbench
+	xsim -R model_integer_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

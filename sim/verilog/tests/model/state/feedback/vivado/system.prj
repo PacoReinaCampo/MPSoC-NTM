@@ -1,45 +1,45 @@
-verilog2008 work ../../../../../../../rtl/verilog/pkg/ntm_arithmetic_pkg.sv
-verilog2008 work ../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
-verilog2008 work ../../../../../../../rtl/verilog/pkg/ntm_state_pkg.sv
+verilog2008 work ../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
+verilog2008 work ../../../../../../../rtl/verilog/pkg/model_math_pkg.sv
+verilog2008 work ../../../../../../../rtl/verilog/pkg/model_state_pkg.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_adder.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_divider.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_adder.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_multiplier.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_divider.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_adder.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_divider.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_adder.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
-verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_divider.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+verilog2008 work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_dot_product.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_convolution.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_cosine_similarity.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_multiplication.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_summation.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_module.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_dot_product.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_convolution.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_cosine_similarity.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_multiplication.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_summation.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_module.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_convolution.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_inverse.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_multiplication.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_summation.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_convolution.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_inverse.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_multiplication.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_product.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_summation.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_transpose.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_convolution.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_inverse.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_multiplication.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_product.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_summation.sv
-verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_convolution.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_inverse.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_multiplication.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_product.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_summation.sv
+verilog2008 work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_transpose.sv
 
-verilog2008 work ../../../../../../../rtl/verilog/state/feedback/ntm_state_matrix_feedforward.sv
-verilog2008 work ../../../../../../../rtl/verilog/state/feedback/ntm_state_matrix_input.sv
-verilog2008 work ../../../../../../../rtl/verilog/state/feedback/ntm_state_matrix_output.sv
-verilog2008 work ../../../../../../../rtl/verilog/state/feedback/ntm_state_matrix_state.sv
+verilog2008 work ../../../../../../../rtl/verilog/state/feedback/model_state_matrix_feedforward.sv
+verilog2008 work ../../../../../../../rtl/verilog/state/feedback/model_state_matrix_input.sv
+verilog2008 work ../../../../../../../rtl/verilog/state/feedback/model_state_matrix_output.sv
+verilog2008 work ../../../../../../../rtl/verilog/state/feedback/model_state_matrix_state.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/model_state_feedback_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/model_state_feedback_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/tests/state/feedback/model_state_feedback_testbench.sv

@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	iverilog -g2012 -o system.vvp -c system.vc -s ntm_integer_testbench
+	iverilog -g2012 -o system.vvp -c system.vc -s model_integer_testbench
 
 simulate:
 	vvp system.vvp
