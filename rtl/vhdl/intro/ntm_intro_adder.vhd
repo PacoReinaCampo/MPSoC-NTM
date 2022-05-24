@@ -67,7 +67,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  rtl : process (CLK, RST) is
+  design : process (CLK, RST) is
     variable carry_int : std_logic;
   begin
     if(RST = '0') then
@@ -89,6 +89,6 @@ begin
 
       DATA_OUT(DATA_SIZE) <= carry_int;
     end if;
-  end process rtl;
+  end process design;
 
 end architecture ntm_intro_adder_architecture;

@@ -115,7 +115,7 @@ begin
       );
 
   -- DUT
-  intro_adder : ntm_intro_adder
+  design_intro_adder : ntm_intro_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
