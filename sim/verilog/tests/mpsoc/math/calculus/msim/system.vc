@@ -25,6 +25,6 @@
 ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_integration.sv
 ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_softmax.sv
 
-../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
-../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv
-../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_testbench.sv
+../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_pkg.sv
+../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_stimulus.sv
+../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_testbench.sv

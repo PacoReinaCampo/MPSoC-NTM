@@ -22,6 +22,6 @@ verilog2008 work ../../../../../../../rtl/verilog/math/function/vector/ntm_vecto
 verilog2008 work ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_logistic_function.sv
 verilog2008 work ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_oneplus_function.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/math/function/ntm_function_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/math/function/ntm_function_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/math/function/ntm_function_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/function/ntm_function_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/function/ntm_function_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/function/ntm_function_testbench.sv

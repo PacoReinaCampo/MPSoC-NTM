@@ -20,6 +20,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/modular/tensor/ntm_tensor
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/modular/tensor/ntm_tensor_modular_inverter.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/modular/ntm_modular_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/modular/ntm_modular_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/modular/ntm_modular_testbench.vhd

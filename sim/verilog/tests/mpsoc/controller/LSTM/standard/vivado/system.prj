@@ -87,6 +87,6 @@ verilog2008 work ../../../../../../../../rtl/verilog/controller/LSTM/standard/nt
 verilog2008 work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_output_gate_vector.sv
 verilog2008 work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_state_gate_vector.sv
 
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_testbench.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.sv

@@ -121,6 +121,6 @@
 ../../../../../../../rtl/verilog/dnc/top/dnc_output_vector.sv
 ../../../../../../../rtl/verilog/dnc/top/dnc_interface_vector.sv
 
-../../../../../../../bench/verilog/tests/dnc/top/dnc_top_pkg.sv
-../../../../../../../bench/verilog/tests/dnc/top/dnc_top_stimulus.sv
-../../../../../../../bench/verilog/tests/dnc/top/dnc_top_testbench.sv
+../../../../../../../bench/verilog/osvvm/dnc/top/dnc_top_pkg.sv
+../../../../../../../bench/verilog/osvvm/dnc/top/dnc_top_stimulus.sv
+../../../../../../../bench/verilog/osvvm/dnc/top/dnc_top_testbench.sv

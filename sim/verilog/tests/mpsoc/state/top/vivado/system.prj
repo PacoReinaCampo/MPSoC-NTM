@@ -45,6 +45,6 @@ verilog2008 work ../../../../../../../rtl/verilog/state/outputs/ntm_state_vector
 
 verilog2008 work ../../../../../../../rtl/verilog/state/top/ntm_state_top.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/state/top/ntm_state_top_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/state/top/ntm_state_top_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/state/top/ntm_state_top_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/state/top/ntm_state_top_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/state/top/ntm_state_top_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/state/top/ntm_state_top_testbench.sv

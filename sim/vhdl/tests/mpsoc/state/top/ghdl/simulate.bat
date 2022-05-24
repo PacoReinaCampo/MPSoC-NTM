@@ -48,9 +48,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_st
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/top/ntm_state_top.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_testbench.vhd
 
 ghdl -m --std=08 ntm_state_top_testbench
 ghdl -r --std=08 ntm_state_top_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_top_testbench.tree

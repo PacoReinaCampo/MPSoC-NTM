@@ -34,6 +34,6 @@
 ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_summation.sv
 ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
 
-../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_pkg.sv
-../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_stimulus.sv
-../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_testbench.sv
+../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_pkg.sv
+../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_stimulus.sv
+../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_testbench.sv

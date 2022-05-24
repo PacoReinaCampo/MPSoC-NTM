@@ -100,6 +100,6 @@
 ../../../../../../../rtl/verilog/ntm/top/ntm_output_vector.sv
 ../../../../../../../rtl/verilog/ntm/top/ntm_top.sv
 
-../../../../../../../bench/verilog/tests/ntm/top/ntm_top_pkg.sv
-../../../../../../../bench/verilog/tests/ntm/top/ntm_top_stimulus.sv
-../../../../../../../bench/verilog/tests/ntm/top/ntm_top_testbench.sv
+../../../../../../../bench/verilog/osvvm/ntm/top/ntm_top_pkg.sv
+../../../../../../../bench/verilog/osvvm/ntm/top/ntm_top_stimulus.sv
+../../../../../../../bench/verilog/osvvm/ntm/top/ntm_top_testbench.sv

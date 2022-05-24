@@ -42,7 +42,7 @@ use ieee.numeric_std.all;
 
 use work.model_math_pkg.all;
 use work.model_lstm_controller_pkg.all;
-use work.model_core_pkg.all;
+use work.model_ntm_core_pkg.all;
 use work.model_top_pkg.all;
 
 entity model_top_testbench is

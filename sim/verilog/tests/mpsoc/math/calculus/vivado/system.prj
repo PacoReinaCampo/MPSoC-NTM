@@ -37,6 +37,6 @@ verilog2008 work ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tenso
 verilog2008 work ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_integration.sv
 verilog2008 work ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_softmax.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/math/calculus/ntm_calculus_testbench.sv

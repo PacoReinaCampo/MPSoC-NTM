@@ -16,6 +16,6 @@ verilog2008 work ../../../../../../../rtl/verilog/arithmetic/integer/tensor/ntm_
 verilog2008 work ../../../../../../../rtl/verilog/arithmetic/integer/tensor/ntm_tensor_integer_multiplier.sv
 verilog2008 work ../../../../../../../rtl/verilog/arithmetic/integer/tensor/ntm_tensor_integer_divider.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/arithmetic/integer/ntm_integer_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/arithmetic/integer/ntm_integer_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/arithmetic/integer/ntm_integer_testbench.sv

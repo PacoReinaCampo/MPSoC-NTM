@@ -91,6 +91,6 @@ verilog2008 work ../../../../../../../rtl/verilog/dnc/memory/dnc_write_content_w
 verilog2008 work ../../../../../../../rtl/verilog/dnc/memory/dnc_write_weighting.sv
 verilog2008 work ../../../../../../../rtl/verilog/dnc/memory/dnc_addressing.sv
 
-verilog2008 work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_pkg.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_stimulus.sv
-verilog2008 work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_testbench.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/dnc/memory/dnc_memory_pkg.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/dnc/memory/dnc_memory_stimulus.sv
+verilog2008 work ../../../../../../../bench/verilog/osvvm/dnc/memory/dnc_memory_testbench.sv

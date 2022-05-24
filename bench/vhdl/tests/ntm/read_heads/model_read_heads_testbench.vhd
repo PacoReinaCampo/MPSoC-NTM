@@ -41,7 +41,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.model_math_pkg.all;
-use work.model_core_pkg.all;
+use work.model_ntm_core_pkg.all;
 use work.model_read_heads_pkg.all;
 
 entity model_read_heads_testbench is

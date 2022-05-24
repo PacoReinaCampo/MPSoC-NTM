@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/tensor/ntm_tensor_f
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/tensor/ntm_tensor_float_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/tensor/ntm_tensor_float_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/float/ntm_float_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/float/ntm_float_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/float/ntm_float_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_testbench.vhd

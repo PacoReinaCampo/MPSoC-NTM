@@ -79,9 +79,9 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 dnc_read_heads_testbench

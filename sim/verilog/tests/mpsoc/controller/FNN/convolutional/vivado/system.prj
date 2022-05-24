@@ -78,6 +78,6 @@ verilog2008 work ../../../../../../../../rtl/verilog/trainer/FNN/ntm_trainer.sv
 
 verilog2008 work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_controller.sv
 
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
-verilog2008 work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
+verilog2008 work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
