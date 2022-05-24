@@ -61,23 +61,51 @@
 │   │   │   └── ntm_controller.sv
 │   │   └── standard
 │   │       └── ntm_controller.sv
-│   └── LSTM
-│       ├── convolutional
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   │   ├── ntm_activation_gate_vector.sv
+│   │   │   ├── ntm_controller.sv
+│   │   │   ├── ntm_forget_gate_vector.sv
+│   │   │   ├── ntm_hidden_gate_vector.sv
+│   │   │   ├── ntm_input_gate_vector.sv
+│   │   │   ├── ntm_output_gate_vector.sv
+│   │   │   └── ntm_state_gate_vector.sv
+│   │   └── standard
+│   │       ├── ntm_activation_gate_vector.sv
+│   │       ├── ntm_controller.sv
+│   │       ├── ntm_forget_gate_vector.sv
+│   │       ├── ntm_hidden_gate_vector.sv
+│   │       ├── ntm_input_gate_vector.sv
+│   │       ├── ntm_output_gate_vector.sv
+│   │       └── ntm_state_gate_vector.sv
+│   └── transformer
+│       ├── components
+│       │   ├── ntm_masked_multi_head_attention.sv
+│       │   ├── ntm_masked_scaled_dot_product_attention.sv
+│       │   ├── ntm_multi_head_attention.sv
+│       │   └── ntm_scaled_dot_product_attention.sv
+│       ├── fnn
+│       │   └── ntm_fnn.sv
+│       ├── functions
+│       │   ├── ntm_layer_norm.sv
+│       │   └── ntm_positional_encoding.sv
+│       ├── inputs
+│       │   ├── ntm_inputs_vector.sv
+│       │   ├── ntm_keys_vector.sv
+│       │   ├── ntm_queries_vector.sv
+│       │   └── ntm_values_vector.sv
+│       ├── lstm
 │       │   ├── ntm_activation_gate_vector.sv
-│       │   ├── ntm_controller.sv
 │       │   ├── ntm_forget_gate_vector.sv
 │       │   ├── ntm_hidden_gate_vector.sv
 │       │   ├── ntm_input_gate_vector.sv
+│       │   ├── ntm_lstm.sv
 │       │   ├── ntm_output_gate_vector.sv
 │       │   └── ntm_state_gate_vector.sv
-│       └── standard
-│           ├── ntm_activation_gate_vector.sv
+│       └── top
 │           ├── ntm_controller.sv
-│           ├── ntm_forget_gate_vector.sv
-│           ├── ntm_hidden_gate_vector.sv
-│           ├── ntm_input_gate_vector.sv
-│           ├── ntm_output_gate_vector.sv
-│           └── ntm_state_gate_vector.sv
+│           ├── ntm_decoder.sv
+│           └── ntm_encoder.sv
 ├── dnc
 │   ├── memory
 │   │   ├── dnc_addressing.sv

@@ -61,23 +61,51 @@
 │   │   │   └── model_controller.vhd
 │   │   └── standard
 │   │       └── model_controller.vhd
-│   └── LSTM
-│       ├── convolutional
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   │   ├── model_activation_gate_vector.vhd
+│   │   │   ├── model_controller.vhd
+│   │   │   ├── model_forget_gate_vector.vhd
+│   │   │   ├── model_hidden_gate_vector.vhd
+│   │   │   ├── model_input_gate_vector.vhd
+│   │   │   ├── model_output_gate_vector.vhd
+│   │   │   └── model_state_gate_vector.vhd
+│   │   └── standard
+│   │       ├── model_activation_gate_vector.vhd
+│   │       ├── model_controller.vhd
+│   │       ├── model_forget_gate_vector.vhd
+│   │       ├── model_hidden_gate_vector.vhd
+│   │       ├── model_input_gate_vector.vhd
+│   │       ├── model_output_gate_vector.vhd
+│   │       └── model_state_gate_vector.vhd
+│   └── transformer
+│       ├── components
+│       │   ├── model_masked_multi_head_attention.vhd
+│       │   ├── model_masked_scaled_dot_product_attention.vhd
+│       │   ├── model_multi_head_attention.vhd
+│       │   └── model_scaled_dot_product_attention.vhd
+│       ├── fnn
+│       │   └── model_fnn.vhd
+│       ├── functions
+│       │   ├── model_layer_norm.vhd
+│       │   └── model_positional_encoding.vhd
+│       ├── inputs
+│       │   ├── model_inputs_vector.vhd
+│       │   ├── model_keys_vector.vhd
+│       │   ├── model_queries_vector.vhd
+│       │   └── model_values_vector.vhd
+│       ├── lstm
 │       │   ├── model_activation_gate_vector.vhd
-│       │   ├── model_controller.vhd
 │       │   ├── model_forget_gate_vector.vhd
 │       │   ├── model_hidden_gate_vector.vhd
 │       │   ├── model_input_gate_vector.vhd
+│       │   ├── model_lstm.vhd
 │       │   ├── model_output_gate_vector.vhd
 │       │   └── model_state_gate_vector.vhd
-│       └── standard
-│           ├── model_activation_gate_vector.vhd
+│       └── top
 │           ├── model_controller.vhd
-│           ├── model_forget_gate_vector.vhd
-│           ├── model_hidden_gate_vector.vhd
-│           ├── model_input_gate_vector.vhd
-│           ├── model_output_gate_vector.vhd
-│           └── model_state_gate_vector.vhd
+│           ├── model_decoder.vhd
+│           └── model_encoder.vhd
 ├── dnc
 │   ├── memory
 │   │   ├── model_addressing.vhd
@@ -198,13 +226,13 @@
 │       ├── model_erasing.vhd
 │       └── model_writing.vhd
 ├── pkg
-│   ├── model_dnc_core_pkg.vhd
 │   ├── model_arithmetic_pkg.vhd
-│   ├── model_ntm_core_pkg.vhd
+│   ├── model_dnc_core_pkg.vhd
 │   ├── model_fnn_controller_pkg.vhd
 │   ├── model_intro_pkg.vhd
 │   ├── model_lstm_controller_pkg.vhd
 │   ├── model_math_pkg.vhd
+│   ├── model_ntm_core_pkg.vhd
 │   └── model_state_pkg.vhd
 ├── state
 │   ├── feedback

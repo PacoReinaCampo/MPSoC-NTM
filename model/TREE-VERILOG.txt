@@ -61,23 +61,51 @@
 │   │   │   └── model_controller.sv
 │   │   └── standard
 │   │       └── model_controller.sv
-│   └── LSTM
-│       ├── convolutional
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   │   ├── model_activation_gate_vector.sv
+│   │   │   ├── model_controller.sv
+│   │   │   ├── model_forget_gate_vector.sv
+│   │   │   ├── model_hidden_gate_vector.sv
+│   │   │   ├── model_input_gate_vector.sv
+│   │   │   ├── model_output_gate_vector.sv
+│   │   │   └── model_state_gate_vector.sv
+│   │   └── standard
+│   │       ├── model_activation_gate_vector.sv
+│   │       ├── model_controller.sv
+│   │       ├── model_forget_gate_vector.sv
+│   │       ├── model_hidden_gate_vector.sv
+│   │       ├── model_input_gate_vector.sv
+│   │       ├── model_output_gate_vector.sv
+│   │       └── model_state_gate_vector.sv
+│   └── transformer
+│       ├── components
+│       │   ├── model_masked_multi_head_attention.sv
+│       │   ├── model_masked_scaled_dot_product_attention.sv
+│       │   ├── model_multi_head_attention.sv
+│       │   └── model_scaled_dot_product_attention.sv
+│       ├── fnn
+│       │   └── model_fnn.sv
+│       ├── functions
+│       │   ├── model_layer_norm.sv
+│       │   └── model_positional_encoding.sv
+│       ├── inputs
+│       │   ├── model_inputs_vector.sv
+│       │   ├── model_keys_vector.sv
+│       │   ├── model_queries_vector.sv
+│       │   └── model_values_vector.sv
+│       ├── lstm
 │       │   ├── model_activation_gate_vector.sv
-│       │   ├── model_controller.sv
 │       │   ├── model_forget_gate_vector.sv
 │       │   ├── model_hidden_gate_vector.sv
 │       │   ├── model_input_gate_vector.sv
+│       │   ├── model_lstm.sv
 │       │   ├── model_output_gate_vector.sv
 │       │   └── model_state_gate_vector.sv
-│       └── standard
-│           ├── model_activation_gate_vector.sv
+│       └── top
 │           ├── model_controller.sv
-│           ├── model_forget_gate_vector.sv
-│           ├── model_hidden_gate_vector.sv
-│           ├── model_input_gate_vector.sv
-│           ├── model_output_gate_vector.sv
-│           └── model_state_gate_vector.sv
+│           ├── model_decoder.sv
+│           └── model_encoder.sv
 ├── dnc
 │   ├── memory
 │   │   ├── model_addressing.sv
@@ -198,13 +226,13 @@
 │       ├── model_erasing.sv
 │       └── model_writing.sv
 ├── pkg
-│   ├── model_dnc_core_pkg.sv
 │   ├── model_arithmetic_pkg.sv
-│   ├── model_ntm_core_pkg.sv
+│   ├── model_dnc_core_pkg.sv
 │   ├── model_fnn_controller_pkg.sv
 │   ├── model_intro_pkg.sv
 │   ├── model_lstm_controller_pkg.sv
 │   ├── model_math_pkg.sv
+│   ├── model_ntm_core_pkg.sv
 │   └── model_state_pkg.sv
 ├── state
 │   ├── feedback

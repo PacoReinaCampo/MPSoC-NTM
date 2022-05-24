@@ -31,7 +31,6 @@ emacs -batch vhdl/osvvm/dnc/top/dnc_top_testbench.vhd -f vhdl-beautify-buffer -f
 emacs -batch vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/osvvm/intro/ntm_intro_model_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/osvvm/intro/ntm_intro_testbench.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/osvvm/math/algebra/ntm_algebra_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/osvvm/math/algebra/ntm_algebra_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer

@@ -1,3 +1,4 @@
+.
 ├── uvm
 │   ├── arithmetic
 │   │   ├── float
@@ -49,7 +50,6 @@
 │   │       ├── dnc_write_heads_stimulus.sv
 │   │       └── dnc_write_heads_testbench.sv
 │   ├── intro
-│   │   ├── ntm_intro_model_pkg.sv
 │   │   └── ntm_intro_testbench.sv
 │   ├── math
 │   │   ├── algebra

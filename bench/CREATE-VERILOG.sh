@@ -31,7 +31,6 @@ touch verilog/uvm/dnc/top/dnc_top_testbench.sv
 touch verilog/uvm/dnc/write_heads/dnc_write_heads_pkg.sv
 touch verilog/uvm/dnc/write_heads/dnc_write_heads_stimulus.sv
 touch verilog/uvm/dnc/write_heads/dnc_write_heads_testbench.sv
-touch verilog/uvm/intro/ntm_intro_model_pkg.sv
 touch verilog/uvm/intro/ntm_intro_testbench.sv
 touch verilog/uvm/math/algebra/ntm_algebra_pkg.sv
 touch verilog/uvm/math/algebra/ntm_algebra_stimulus.sv

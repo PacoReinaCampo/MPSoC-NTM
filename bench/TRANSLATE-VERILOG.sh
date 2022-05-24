@@ -31,7 +31,6 @@ vhdl2verilog vhdl/osvvm/dnc/top/dnc_top_testbench.sv
 vhdl2verilog vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.sv
 vhdl2verilog vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.sv
 vhdl2verilog vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.sv
-vhdl2verilog vhdl/osvvm/intro/ntm_intro_model_pkg.sv
 vhdl2verilog vhdl/osvvm/intro/ntm_intro_testbench.sv
 vhdl2verilog vhdl/osvvm/math/algebra/ntm_algebra_pkg.sv
 vhdl2verilog vhdl/osvvm/math/algebra/ntm_algebra_stimulus.sv

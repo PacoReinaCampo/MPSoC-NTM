@@ -1,3 +1,4 @@
+.
 ├── osvvm
 │   ├── arithmetic
 │   │   ├── float
@@ -49,7 +50,6 @@
 │   │       ├── dnc_write_heads_stimulus.vhd
 │   │       └── dnc_write_heads_testbench.vhd
 │   ├── intro
-│   │   ├── ntm_intro_model_pkg.vhd
 │   │   └── ntm_intro_testbench.vhd
 │   ├── math
 │   │   ├── algebra
