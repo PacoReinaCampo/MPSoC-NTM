@@ -2,25 +2,25 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
-add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
+add wave -noupdate /model_integer_pkg/MONITOR_TEST
+add wave -noupdate /model_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/CLK
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/RST
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/START
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/OPERATION
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/DATA_A_IN
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/DATA_B_IN
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/READY
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/DATA_OUT
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/OVERFLOW_OUT
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/CLK
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/RST
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/START
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/OPERATION
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/DATA_A_IN
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/DATA_B_IN
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/READY
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/DATA_OUT
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/OVERFLOW_OUT
 
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/adder_ctrl_fsm_int
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/adder_int
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/adder_ctrl_fsm_int
+add wave -noupdate /model_integer_testbench/model_scalar_integer_adder_test/scalar_integer_adder/adder_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

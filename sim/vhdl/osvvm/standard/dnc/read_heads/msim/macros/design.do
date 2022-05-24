@@ -8,82 +8,82 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# dnc_free_gates_design_compilation ##############################################################
+# model_free_gates_design_compilation ##############################################################
 ##################################################################################################
 
-alias dnc_free_gates_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/dnc_core_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/dnc_free_gates.vhd
+alias model_free_gates_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_core_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_logistic_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/model_free_gates.vhd
 }
 
 ##################################################################################################
-# dnc_read_keys_design_compilation ###############################################################
+# model_read_keys_design_compilation ###############################################################
 ##################################################################################################
 
-alias dnc_read_keys_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/dnc_core_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/dnc_read_keys.vhd
+alias model_read_keys_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_core_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/model_read_keys.vhd
 }
 
 ##################################################################################################
-# dnc_read_modes_design_compilation ##############################################################
+# model_read_modes_design_compilation ##############################################################
 ##################################################################################################
 
-alias dnc_read_modes_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/dnc_core_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/matrix/ntm_matrix_softmax.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/dnc_read_modes.vhd
+alias model_read_modes_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_core_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/matrix/model_matrix_softmax.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/model_read_modes.vhd
 }
 
 ##################################################################################################
-# dnc_read_strengths_design_compilation ##########################################################
+# model_read_strengths_design_compilation ##########################################################
 ##################################################################################################
 
-alias dnc_read_strengths_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/dnc_core_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/dnc_read_strengths.vhd
+alias model_read_strengths_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_core_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_oneplus_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/dnc/read_heads/model_read_strengths.vhd
 }
 
 ##################################################################################################
 
 alias d01 {
-  dnc_free_gates_design_compilation 
+  model_free_gates_design_compilation 
 }
 
 alias d02 {
-  dnc_read_keys_design_compilation 
+  model_read_keys_design_compilation 
 }
 
 alias d03 {
-  dnc_read_modes_design_compilation 
+  model_read_modes_design_compilation 
 }
 
 alias d04 {
-  dnc_read_strengths_design_compilation 
+  model_read_strengths_design_compilation 
 }
 
 echo "****************************************"

@@ -13,398 +13,398 @@ do ./variables.do
 # NTM_SCALAR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
-alias ntm_scalar_integer_adder_verification_compilation {
+alias model_scalar_integer_adder_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_scalar_integer_adder wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_adder.do
+  view -title model_scalar_integer_adder wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_scalar_integer_adder.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_scalar_integer_adder_test.wlf
+  dataset save sim model_scalar_integer_adder_test.wlf
 }
 
 ##################################################################################################
 # NTM_SCALAR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
-alias ntm_scalar_integer_multiplier_verification_compilation {
+alias model_scalar_integer_multiplier_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_scalar_integer_multiplier wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_multiplier.do
+  view -title model_scalar_integer_multiplier wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_scalar_integer_multiplier.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_scalar_integer_multiplier_test.wlf
+  dataset save sim model_scalar_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
 # NTM_SCALAR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
-alias ntm_scalar_integer_divider_verification_compilation {
+alias model_scalar_integer_divider_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_scalar_integer_divider wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_divider.do
+  view -title model_scalar_integer_divider wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_scalar_integer_divider.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_scalar_integer_divider_test.wlf
+  dataset save sim model_scalar_integer_divider_test.wlf
 }
 
 ##################################################################################################
 # NTM_VECTOR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
-alias ntm_vector_integer_adder_verification_compilation {
+alias model_vector_integer_adder_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_vector_integer_adder wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_adder.do
+  view -title model_vector_integer_adder wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_vector_integer_adder.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_vector_integer_adder_test.wlf
+  dataset save sim model_vector_integer_adder_test.wlf
 }
 
 ##################################################################################################
 # NTM_VECTOR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
-alias ntm_vector_integer_multiplier_verification_compilation {
+alias model_vector_integer_multiplier_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_vector_integer_multiplier wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_multiplier.do
+  view -title model_vector_integer_multiplier wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_vector_integer_multiplier.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_vector_integer_multiplier_test.wlf
+  dataset save sim model_vector_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
 # NTM_VECTOR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
-alias ntm_vector_integer_divider_verification_compilation {
+alias model_vector_integer_divider_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_vector_integer_divider wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_divider.do
+  view -title model_vector_integer_divider wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_vector_integer_divider.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_vector_integer_divider_test.wlf
+  dataset save sim model_vector_integer_divider_test.wlf
 }
 
 ##################################################################################################
 # NTM_MATRIX_INTEGER_ADDER_TEST 
 ##################################################################################################
 
-alias ntm_matrix_integer_adder_verification_compilation {
+alias model_matrix_integer_adder_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_matrix_integer_adder wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_adder.do
+  view -title model_matrix_integer_adder wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_matrix_integer_adder.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_matrix_integer_adder_test.wlf
+  dataset save sim model_matrix_integer_adder_test.wlf
 }
 
 ##################################################################################################
 # NTM_MATRIX_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
-alias ntm_matrix_integer_multiplier_verification_compilation {
+alias model_matrix_integer_multiplier_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_matrix_integer_multiplier wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_multiplier.do
+  view -title model_matrix_integer_multiplier wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_matrix_integer_multiplier.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_matrix_integer_multiplier_test.wlf
+  dataset save sim model_matrix_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
 # NTM_MATRIX_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
-alias ntm_matrix_integer_divider_verification_compilation {
+alias model_matrix_integer_divider_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_matrix_integer_divider wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_divider.do
+  view -title model_matrix_integer_divider wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_matrix_integer_divider.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_matrix_integer_divider_test.wlf
+  dataset save sim model_matrix_integer_divider_test.wlf
 }
 
 ##################################################################################################
 # NTM_TENSOR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
-alias ntm_tensor_integer_adder_verification_compilation {
+alias model_tensor_integer_adder_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_tensor_integer_adder wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_adder.do
+  view -title model_tensor_integer_adder wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_tensor_integer_adder.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_tensor_integer_adder_test.wlf
+  dataset save sim model_tensor_integer_adder_test.wlf
 }
 
 ##################################################################################################
 # NTM_TENSOR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
-alias ntm_tensor_integer_multiplier_verification_compilation {
+alias model_tensor_integer_multiplier_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_tensor_integer_multiplier wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_multiplier.do
+  view -title model_tensor_integer_multiplier wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_tensor_integer_multiplier.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_tensor_integer_multiplier_test.wlf
+  dataset save sim model_tensor_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
 # NTM_TENSOR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
-alias ntm_tensor_integer_divider_verification_compilation {
+alias model_tensor_integer_divider_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
-  add log -r sim:/ntm_integer_testbench/*
+  add log -r sim:/model_integer_testbench/*
 
   #WAVES
-  view -title ntm_tensor_integer_divider wave
-  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_divider.do
+  view -title model_tensor_integer_divider wave
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/model_tensor_integer_divider.do
 
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_tensor_integer_divider_test.wlf
+  dataset save sim model_tensor_integer_divider_test.wlf
 }
 
 ##################################################################################################
 
 alias v01 {
-  ntm_scalar_integer_adder_verification_compilation 
+  model_scalar_integer_adder_verification_compilation 
 }
 
 alias v02 {
-  ntm_scalar_integer_multiplier_verification_compilation 
+  model_scalar_integer_multiplier_verification_compilation 
 }
 
 alias v03 {
-  ntm_scalar_integer_divider_verification_compilation 
+  model_scalar_integer_divider_verification_compilation 
 }
 
 alias v04 {
-  ntm_vector_integer_adder_verification_compilation 
+  model_vector_integer_adder_verification_compilation 
 }
 
 alias v05 {
-  ntm_vector_integer_multiplier_verification_compilation 
+  model_vector_integer_multiplier_verification_compilation 
 }
 
 alias v06 {
-  ntm_vector_integer_divider_verification_compilation 
+  model_vector_integer_divider_verification_compilation 
 }
 
 alias v07 {
-  ntm_matrix_integer_adder_verification_compilation 
+  model_matrix_integer_adder_verification_compilation 
 }
 
 alias v08 {
-  ntm_matrix_integer_multiplier_verification_compilation 
+  model_matrix_integer_multiplier_verification_compilation 
 }
 
 alias v09 {
-  ntm_matrix_integer_divider_verification_compilation 
+  model_matrix_integer_divider_verification_compilation 
 }
 
 alias v10 {
-  ntm_tensor_integer_adder_verification_compilation 
+  model_tensor_integer_adder_verification_compilation 
 }
 
 alias v11 {
-  ntm_tensor_integer_multiplier_verification_compilation 
+  model_tensor_integer_multiplier_verification_compilation 
 }
 
 alias v12 {
-  ntm_tensor_integer_divider_verification_compilation 
+  model_tensor_integer_divider_verification_compilation 
 }
 
 echo "************************************************************"

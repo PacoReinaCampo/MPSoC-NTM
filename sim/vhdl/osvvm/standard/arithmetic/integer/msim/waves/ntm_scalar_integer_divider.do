@@ -2,25 +2,25 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
-add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
+add wave -noupdate /model_integer_pkg/MONITOR_TEST
+add wave -noupdate /model_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR INTEGER DIVIDER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/CLK
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/RST
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/START
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/DATA_A_IN
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/DATA_B_IN
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/READY
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/DATA_OUT
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/REMAINDER_OUT
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/CLK
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/RST
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/START
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/DATA_A_IN
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/DATA_B_IN
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/READY
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/DATA_OUT
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/REMAINDER_OUT
 
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_ctrl_fsm_int
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_int
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/index_loop
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/divider_ctrl_fsm_int
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/divider_int
+add wave -noupdate /model_integer_testbench/model_scalar_integer_divider_test/scalar_integer_divider/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

@@ -2,26 +2,26 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /ntm_modular_pkg/MONITOR_TEST
-add wave -noupdate /ntm_modular_pkg/MONITOR_CASE
+add wave -noupdate /model_modular_pkg/MONITOR_TEST
+add wave -noupdate /model_modular_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/CLK
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/RST
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/START
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_A_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_B_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/READY
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_OUT
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/CLK
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/RST
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/START
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/MODULO_IN
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_A_IN
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_B_IN
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/READY
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/DATA_OUT
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/multiplier_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/u_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/v_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_multiplier_test/scalar_modular_multiplier/multiplier_int
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/multiplier_ctrl_fsm_int
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/u_int
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/v_int
+add wave -noupdate /model_modular_testbench/model_scalar_modular_multiplier_test/scalar_modular_multiplier/multiplier_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

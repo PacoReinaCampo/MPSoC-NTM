@@ -2,51 +2,51 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /ntm_algebra_pkg/MONITOR_TEST
-add wave -noupdate /ntm_algebra_pkg/MONITOR_CASE
+add wave -noupdate /model_algebra_pkg/MONITOR_TEST
+add wave -noupdate /model_algebra_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM TENSOR PRODUCT TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/CLK
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/RST
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/START
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_A_I_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_A_J_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_A_K_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_B_I_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_B_J_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/SIZE_B_K_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_A_IN_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_A_IN_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_A_IN_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_A_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_B_IN_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_B_IN_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_B_IN_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_B_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/READY
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_OUT_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_OUT_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_OUT_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/DATA_OUT
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/CLK
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/RST
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/START
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_A_I_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_A_J_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_A_K_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_B_I_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_B_J_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/SIZE_B_K_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_A_IN_I_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_A_IN_J_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_A_IN_K_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_A_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_B_IN_I_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_B_IN_J_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_B_IN_K_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_B_IN
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_I_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_J_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_K_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/READY
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_OUT_I_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_OUT_J_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_OUT_K_ENABLE
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/DATA_OUT
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/product_ctrl_fsm_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/product_ctrl_fsm_int
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/index_i_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/index_j_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/index_k_loop
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/index_i_loop
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/index_j_loop
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/index_k_loop
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_i_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_j_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_k_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_i_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_j_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_k_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_a_in_i_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_a_in_j_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_a_in_k_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_b_in_i_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_b_in_j_product_int
+add wave -noupdate /model_algebra_testbench/model_tensor_product_test/tensor_product/data_b_in_k_product_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

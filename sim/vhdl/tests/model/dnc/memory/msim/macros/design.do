@@ -8,20 +8,20 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# dnc_memory_sort_vector_design_compilation ######################################################
+# model_memory_sort_vector_design_compilation ######################################################
 ##################################################################################################
 
-alias dnc_memory_sort_vector_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/dnc_core_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/dnc/memory/dnc_sort_vector.vhd
+alias model_memory_sort_vector_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_dnc_core_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/dnc/memory/model_sort_vector.vhd
 }
 
 ##################################################################################################
 
 alias d01 {
-  dnc_memory_sort_vector_design_compilation 
+  model_memory_sort_vector_design_compilation 
 }
 
 echo "****************************************"
