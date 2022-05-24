@@ -2,226 +2,226 @@
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_float_adder.sv
-│   │   │   ├── ntm_matrix_float_divider.sv
-│   │   │   └── ntm_matrix_float_multiplier.sv
+│   │   │   ├── model_matrix_float_adder.sv
+│   │   │   ├── model_matrix_float_divider.sv
+│   │   │   └── model_matrix_float_multiplier.sv
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_float_adder.sv
-│   │   │   ├── ntm_scalar_float_divider.sv
-│   │   │   └── ntm_scalar_float_multiplier.sv
+│   │   │   ├── model_scalar_float_adder.sv
+│   │   │   ├── model_scalar_float_divider.sv
+│   │   │   └── model_scalar_float_multiplier.sv
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_float_adder.sv
-│   │   │   ├── ntm_tensor_float_divider.sv
-│   │   │   └── ntm_tensor_float_multiplier.sv
+│   │   │   ├── model_tensor_float_adder.sv
+│   │   │   ├── model_tensor_float_divider.sv
+│   │   │   └── model_tensor_float_multiplier.sv
 │   │   └── vector
-│   │       ├── ntm_vector_float_adder.sv
-│   │       ├── ntm_vector_float_divider.sv
-│   │       └── ntm_vector_float_multiplier.sv
+│   │       ├── model_vector_float_adder.sv
+│   │       ├── model_vector_float_divider.sv
+│   │       └── model_vector_float_multiplier.sv
 │   ├── integer
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_integer_adder.sv
-│   │   │   ├── ntm_matrix_integer_divider.sv
-│   │   │   └── ntm_matrix_integer_multiplier.sv
+│   │   │   ├── model_matrix_integer_adder.sv
+│   │   │   ├── model_matrix_integer_divider.sv
+│   │   │   └── model_matrix_integer_multiplier.sv
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_integer_adder.sv
-│   │   │   ├── ntm_scalar_integer_divider.sv
-│   │   │   └── ntm_scalar_integer_multiplier.sv
+│   │   │   ├── model_scalar_integer_adder.sv
+│   │   │   ├── model_scalar_integer_divider.sv
+│   │   │   └── model_scalar_integer_multiplier.sv
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_integer_adder.sv
-│   │   │   ├── ntm_tensor_integer_divider.sv
-│   │   │   └── ntm_tensor_integer_multiplier.sv
+│   │   │   ├── model_tensor_integer_adder.sv
+│   │   │   ├── model_tensor_integer_divider.sv
+│   │   │   └── model_tensor_integer_multiplier.sv
 │   │   └── vector
-│   │       ├── ntm_vector_integer_adder.sv
-│   │       ├── ntm_vector_integer_divider.sv
-│   │       └── ntm_vector_integer_multiplier.sv
+│   │       ├── model_vector_integer_adder.sv
+│   │       ├── model_vector_integer_divider.sv
+│   │       └── model_vector_integer_multiplier.sv
 │   └── modular
 │       ├── matrix
-│       │   ├── ntm_matrix_modular_adder.sv
-│       │   ├── ntm_matrix_modular_inverter.sv
-│       │   ├── ntm_matrix_modular_mod.sv
-│       │   └── ntm_matrix_modular_multiplier.sv
+│       │   ├── model_matrix_modular_adder.sv
+│       │   ├── model_matrix_modular_inverter.sv
+│       │   ├── model_matrix_modular_mod.sv
+│       │   └── model_matrix_modular_multiplier.sv
 │       ├── scalar
-│       │   ├── ntm_scalar_modular_adder.sv
-│       │   ├── ntm_scalar_modular_inverter.sv
-│       │   ├── ntm_scalar_modular_mod.sv
-│       │   └── ntm_scalar_modular_multiplier.sv
+│       │   ├── model_scalar_modular_adder.sv
+│       │   ├── model_scalar_modular_inverter.sv
+│       │   ├── model_scalar_modular_mod.sv
+│       │   └── model_scalar_modular_multiplier.sv
 │       ├── tensor
-│       │   ├── ntm_tensor_modular_adder.sv
-│       │   ├── ntm_tensor_modular_inverter.sv
-│       │   ├── ntm_tensor_modular_mod.sv
-│       │   └── ntm_tensor_modular_multiplier.sv
+│       │   ├── model_tensor_modular_adder.sv
+│       │   ├── model_tensor_modular_inverter.sv
+│       │   ├── model_tensor_modular_mod.sv
+│       │   └── model_tensor_modular_multiplier.sv
 │       └── vector
-│           ├── ntm_vector_modular_adder.sv
-│           ├── ntm_vector_modular_inverter.sv
-│           ├── ntm_vector_modular_mod.sv
-│           └── ntm_vector_modular_multiplier.sv
+│           ├── model_vector_modular_adder.sv
+│           ├── model_vector_modular_inverter.sv
+│           ├── model_vector_modular_mod.sv
+│           └── model_vector_modular_multiplier.sv
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.sv
+│   │   │   └── model_controller.sv
 │   │   └── standard
-│   │       └── ntm_controller.sv
+│   │       └── model_controller.sv
 │   └── LSTM
 │       ├── convolutional
-│       │   ├── ntm_activation_gate_vector.sv
-│       │   ├── ntm_controller.sv
-│       │   ├── ntm_forget_gate_vector.sv
-│       │   ├── ntm_hidden_gate_vector.sv
-│       │   ├── ntm_input_gate_vector.sv
-│       │   ├── ntm_output_gate_vector.sv
-│       │   └── ntm_state_gate_vector.sv
+│       │   ├── model_activation_gate_vector.sv
+│       │   ├── model_controller.sv
+│       │   ├── model_forget_gate_vector.sv
+│       │   ├── model_hidden_gate_vector.sv
+│       │   ├── model_input_gate_vector.sv
+│       │   ├── model_output_gate_vector.sv
+│       │   └── model_state_gate_vector.sv
 │       └── standard
-│           ├── ntm_activation_gate_vector.sv
-│           ├── ntm_controller.sv
-│           ├── ntm_forget_gate_vector.sv
-│           ├── ntm_hidden_gate_vector.sv
-│           ├── ntm_input_gate_vector.sv
-│           ├── ntm_output_gate_vector.sv
-│           └── ntm_state_gate_vector.sv
+│           ├── model_activation_gate_vector.sv
+│           ├── model_controller.sv
+│           ├── model_forget_gate_vector.sv
+│           ├── model_hidden_gate_vector.sv
+│           ├── model_input_gate_vector.sv
+│           ├── model_output_gate_vector.sv
+│           └── model_state_gate_vector.sv
 ├── dnc
 │   ├── memory
-│   │   ├── dnc_addressing.sv
-│   │   ├── dnc_allocation_weighting.sv
-│   │   ├── dnc_backward_weighting.sv
-│   │   ├── dnc_content_based_addressing.sv
-│   │   ├── dnc_forward_weighting.sv
-│   │   ├── dnc_memory_matrix.sv
-│   │   ├── dnc_memory_retention_vector.sv
-│   │   ├── dnc_precedence_weighting.sv
-│   │   ├── dnc_read_content_weighting.sv
-│   │   ├── dnc_read_vectors.sv
-│   │   ├── dnc_read_weighting.sv
-│   │   ├── dnc_sort_vector.sv
-│   │   ├── dnc_temporal_link_matrix.sv
-│   │   ├── dnc_usage_vector.sv
-│   │   ├── dnc_write_content_weighting.sv
-│   │   └── dnc_write_weighting.sv
+│   │   ├── model_addressing.sv
+│   │   ├── model_allocation_weighting.sv
+│   │   ├── model_backward_weighting.sv
+│   │   ├── model_content_based_addressing.sv
+│   │   ├── model_forward_weighting.sv
+│   │   ├── model_memory_matrix.sv
+│   │   ├── model_memory_retention_vector.sv
+│   │   ├── model_precedence_weighting.sv
+│   │   ├── model_read_content_weighting.sv
+│   │   ├── model_read_vectors.sv
+│   │   ├── model_read_weighting.sv
+│   │   ├── model_sort_vector.sv
+│   │   ├── model_temporal_link_matrix.sv
+│   │   ├── model_usage_vector.sv
+│   │   ├── model_write_content_weighting.sv
+│   │   └── model_write_weighting.sv
 │   ├── read_heads
-│   │   └── dnc_read_heads.sv
+│   │   └── model_read_heads.sv
 │   ├── top
-│   │   ├── dnc_interface_matrix.sv
-│   │   ├── dnc_interface_vector.sv
-│   │   ├── dnc_output_vector.sv
-│   │   └── dnc_top.sv
+│   │   ├── model_interface_matrix.sv
+│   │   ├── model_interface_vector.sv
+│   │   ├── model_output_vector.sv
+│   │   └── model_top.sv
 │   └── write_heads
-│       └── dnc_write_heads.sv
+│       └── model_write_heads.sv
 ├── intro
-│   └── ntm_intro_adder.sv
+│   └── model_intro_adder.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.sv
-│   │   │   ├── ntm_matrix_inverse.sv
-│   │   │   ├── ntm_matrix_multiplication.sv
-│   │   │   ├── ntm_matrix_product.sv
-│   │   │   ├── ntm_matrix_summation.sv
-│   │   │   ├── ntm_matrix_transpose.sv
-│   │   │   ├── ntm_matrix_vector_convolution.sv
-│   │   │   ├── ntm_matrix_vector_product.sv
-│   │   │   └── ntm_transpose_vector_product.sv
+│   │   │   ├── model_matrix_convolution.sv
+│   │   │   ├── model_matrix_inverse.sv
+│   │   │   ├── model_matrix_multiplication.sv
+│   │   │   ├── model_matrix_product.sv
+│   │   │   ├── model_matrix_summation.sv
+│   │   │   ├── model_matrix_transpose.sv
+│   │   │   ├── model_matrix_vector_convolution.sv
+│   │   │   ├── model_matrix_vector_product.sv
+│   │   │   └── model_transpose_vector_product.sv
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution.sv
-│   │   │   ├── ntm_tensor_inverse.sv
-│   │   │   ├── ntm_tensor_matrix_convolution.sv
-│   │   │   ├── ntm_tensor_matrix_product.sv
-│   │   │   ├── ntm_tensor_multiplication.sv
-│   │   │   ├── ntm_tensor_product.sv
-│   │   │   ├── ntm_tensor_summation.sv
-│   │   │   └── ntm_tensor_transpose.sv
+│   │   │   ├── model_tensor_convolution.sv
+│   │   │   ├── model_tensor_inverse.sv
+│   │   │   ├── model_tensor_matrix_convolution.sv
+│   │   │   ├── model_tensor_matrix_product.sv
+│   │   │   ├── model_tensor_multiplication.sv
+│   │   │   ├── model_tensor_product.sv
+│   │   │   ├── model_tensor_summation.sv
+│   │   │   └── model_tensor_transpose.sv
 │   │   └── vector
-│   │       ├── ntm_dot_product.sv
-│   │       ├── ntm_vector_convolution.sv
-│   │       ├── ntm_vector_cosine_similarity.sv
-│   │       ├── ntm_vector_module.sv
-│   │       ├── ntm_vector_multiplication.sv
-│   │       └── ntm_vector_summation.sv
+│   │       ├── model_dot_product.sv
+│   │       ├── model_vector_convolution.sv
+│   │       ├── model_vector_cosine_similarity.sv
+│   │       ├── model_vector_module.sv
+│   │       ├── model_vector_multiplication.sv
+│   │       └── model_vector_summation.sv
 │   ├── calculus
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.sv
-│   │   │   ├── ntm_matrix_integration.sv
-│   │   │   └── ntm_matrix_softmax.sv
+│   │   │   ├── model_matrix_differentiation.sv
+│   │   │   ├── model_matrix_integration.sv
+│   │   │   └── model_matrix_softmax.sv
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.sv
-│   │   │   ├── ntm_tensor_integration.sv
-│   │   │   └── ntm_tensor_softmax.sv
+│   │   │   ├── model_tensor_differentiation.sv
+│   │   │   ├── model_tensor_integration.sv
+│   │   │   └── model_tensor_softmax.sv
 │   │   └── vector
-│   │       ├── ntm_vector_differentiation.sv
-│   │       ├── ntm_vector_integration.sv
-│   │       └── ntm_vector_softmax.sv
+│   │       ├── model_vector_differentiation.sv
+│   │       ├── model_vector_integration.sv
+│   │       └── model_vector_softmax.sv
 │   ├── function
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.sv
-│   │   │   └── ntm_matrix_oneplus_function.sv
+│   │   │   ├── model_matrix_logistic_function.sv
+│   │   │   └── model_matrix_oneplus_function.sv
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.sv
-│   │   │   └── ntm_scalar_oneplus_function.sv
+│   │   │   ├── model_scalar_logistic_function.sv
+│   │   │   └── model_scalar_oneplus_function.sv
 │   │   └── vector
-│   │       ├── ntm_vector_logistic_function.sv
-│   │       └── ntm_vector_oneplus_function.sv
+│   │       ├── model_vector_logistic_function.sv
+│   │       └── model_vector_oneplus_function.sv
 │   └── series
 │       ├── matrix
-│       │   ├── ntm_matrix_cosh_function.sv
-│       │   ├── ntm_matrix_exponentiator_function.sv
-│       │   ├── ntm_matrix_logarithm_function.sv
-│       │   ├── ntm_matrix_power_function.sv
-│       │   ├── ntm_matrix_sinh_function.sv
-│       │   ├── ntm_matrix_sqrt_function.sv
-│       │   └── ntm_matrix_tanh_function.sv
+│       │   ├── model_matrix_cosh_function.sv
+│       │   ├── model_matrix_exponentiator_function.sv
+│       │   ├── model_matrix_logarithm_function.sv
+│       │   ├── model_matrix_power_function.sv
+│       │   ├── model_matrix_sinh_function.sv
+│       │   ├── model_matrix_sqrt_function.sv
+│       │   └── model_matrix_tanh_function.sv
 │       ├── scalar
-│       │   ├── ntm_scalar_cosh_function.sv
-│       │   ├── ntm_scalar_exponentiator_function.sv
-│       │   ├── ntm_scalar_logarithm_function.sv
-│       │   ├── ntm_scalar_power_function.sv
-│       │   ├── ntm_scalar_sinh_function.sv
-│       │   ├── ntm_scalar_sqrt_function.sv
-│       │   └── ntm_scalar_tanh_function.sv
+│       │   ├── model_scalar_cosh_function.sv
+│       │   ├── model_scalar_exponentiator_function.sv
+│       │   ├── model_scalar_logarithm_function.sv
+│       │   ├── model_scalar_power_function.sv
+│       │   ├── model_scalar_sinh_function.sv
+│       │   ├── model_scalar_sqrt_function.sv
+│       │   └── model_scalar_tanh_function.sv
 │       └── vector
-│           ├── ntm_vector_cosh_function.sv
-│           ├── ntm_vector_exponentiator_function.sv
-│           ├── ntm_vector_logarithm_function.sv
-│           ├── ntm_vector_power_function.sv
-│           ├── ntm_vector_sinh_function.sv
-│           ├── ntm_vector_sqrt_function.sv
-│           └── ntm_vector_tanh_function.sv
+│           ├── model_vector_cosh_function.sv
+│           ├── model_vector_exponentiator_function.sv
+│           ├── model_vector_logarithm_function.sv
+│           ├── model_vector_power_function.sv
+│           ├── model_vector_sinh_function.sv
+│           ├── model_vector_sqrt_function.sv
+│           └── model_vector_tanh_function.sv
 ├── ntm
 │   ├── memory
-│   │   ├── ntm_addressing.sv
-│   │   └── ntm_content_based_addressing.sv
+│   │   ├── model_addressing.sv
+│   │   └── model_content_based_addressing.sv
 │   ├── read_heads
-│   │   └── ntm_reading.sv
+│   │   └── model_reading.sv
 │   ├── top
-│   │   ├── ntm_interface_matrix.sv
-│   │   ├── ntm_interface_vector.sv
-│   │   ├── ntm_output_vector.sv
-│   │   └── ntm_top.sv
+│   │   ├── model_interface_matrix.sv
+│   │   ├── model_interface_vector.sv
+│   │   ├── model_output_vector.sv
+│   │   └── model_top.sv
 │   └── write_heads
-│       ├── ntm_erasing.sv
-│       └── ntm_writing.sv
+│       ├── model_erasing.sv
+│       └── model_writing.sv
 ├── pkg
-│   ├── dnc_core_pkg.sv
-│   ├── ntm_arithmetic_pkg.sv
-│   ├── ntm_core_pkg.sv
-│   ├── ntm_fnn_controller_pkg.sv
-│   ├── ntm_intro_pkg.sv
-│   ├── ntm_lstm_controller_pkg.sv
-│   ├── ntm_math_pkg.sv
-│   └── ntm_state_pkg.sv
+│   ├── model_dnc_core_pkg.sv
+│   ├── model_arithmetic_pkg.sv
+│   ├── model_ntm_core_pkg.sv
+│   ├── model_fnn_controller_pkg.sv
+│   ├── model_intro_pkg.sv
+│   ├── model_lstm_controller_pkg.sv
+│   ├── model_math_pkg.sv
+│   └── model_state_pkg.sv
 ├── state
 │   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.sv
-│   │   ├── ntm_state_matrix_input.sv
-│   │   ├── ntm_state_matrix_output.sv
-│   │   └── ntm_state_matrix_state.sv
+│   │   ├── model_state_matrix_feedforward.sv
+│   │   ├── model_state_matrix_input.sv
+│   │   ├── model_state_matrix_output.sv
+│   │   └── model_state_matrix_state.sv
 │   ├── outputs
-│   │   ├── ntm_state_vector_output.sv
-│   │   └── ntm_state_vector_state.sv
+│   │   ├── model_state_vector_output.sv
+│   │   └── model_state_vector_state.sv
 │   └── top
-│       └── ntm_state_top.sv
+│       └── model_state_top.sv
 └── trainer
     ├── FNN
-    │   └── ntm_trainer.sv
+    │   └── model_trainer.sv
     └── LSTM
-        ├── ntm_activation_trainer.sv
-        ├── ntm_forget_trainer.sv
-        ├── ntm_input_trainer.sv
-        └── ntm_output_trainer.sv
+        ├── model_activation_trainer.sv
+        ├── model_forget_trainer.sv
+        ├── model_input_trainer.sv
+        └── model_output_trainer.sv
