@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 
-use work.model_core_pkg.all;
+use work.model_dnc_core_pkg.all;
 
 entity model_interface_matrix is
   generic (

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_logarithm_function #(
+module model_vector_logarithm_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -188,7 +188,7 @@ module ntm_vector_logarithm_function #(
   end
 
   // SCALAR LOGARITHM
-  ntm_scalar_logarithm_function #(
+  model_scalar_logarithm_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

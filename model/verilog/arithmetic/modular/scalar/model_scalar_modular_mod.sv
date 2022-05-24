@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_modular_mod #(
+module model_scalar_modular_mod #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

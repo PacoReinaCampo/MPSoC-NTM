@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_top #(
+module model_top #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -643,11 +643,11 @@ module dnc_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // CONTROLLER
-  ntm_controller #(
+  model_controller #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_controller_i(
+  model_controller_i(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -718,7 +718,7 @@ module dnc_top #(
   );
 
   // OUTPUT VECTOR
-  dnc_output_vector #(
+  model_output_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -777,7 +777,7 @@ module dnc_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // FREE GATES
-  dnc_free_gates #(
+  model_free_gates #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -800,7 +800,7 @@ module dnc_top #(
   );
 
   // READ KEYS
-  dnc_read_keys #(
+  model_read_keys #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -826,7 +826,7 @@ module dnc_top #(
   );
 
   // READ MODES
-  dnc_read_modes #(
+  model_read_modes #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -851,7 +851,7 @@ module dnc_top #(
   );
 
   // READ STRENGTHS
-  dnc_read_strengths #(
+  model_read_strengths #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -878,7 +878,7 @@ module dnc_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // ALLOCATION GATE
-  dnc_allocation_gate #(
+  model_allocation_gate #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -897,7 +897,7 @@ module dnc_top #(
   );
 
   // ERASE VECTOR
-  dnc_erase_vector #(
+  model_erase_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -920,7 +920,7 @@ module dnc_top #(
   );
 
   // WRITE GATE
-  dnc_write_gate #(
+  model_write_gate #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -939,7 +939,7 @@ module dnc_top #(
   );
 
   // WRITE KEY
-  dnc_write_key #(
+  model_write_key #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -962,7 +962,7 @@ module dnc_top #(
   );
 
   // WRITE STRENGTH
-  dnc_write_strength #(
+  model_write_strength #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -981,7 +981,7 @@ module dnc_top #(
   );
 
   // WRITE VECTOR
-  dnc_write_vector #(
+  model_write_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1004,7 +1004,7 @@ module dnc_top #(
   );
 
   // INTERFACE VECTOR
-  dnc_interface_vector #(
+  model_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1048,7 +1048,7 @@ module dnc_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // ADDRESSING
-  dnc_addressing #(
+  model_addressing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

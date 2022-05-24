@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_sinh_function #(
+module model_matrix_sinh_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -242,7 +242,7 @@ module ntm_matrix_sinh_function #(
   end
 
   // VECTOR SINH
-  ntm_vector_sinh_function #(
+  model_vector_sinh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

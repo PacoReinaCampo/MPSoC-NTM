@@ -44,7 +44,7 @@ use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_fnn_controller_pkg.all;
 
-package model_core_pkg is
+package model_dnc_core_pkg is
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
@@ -1289,9 +1289,9 @@ package model_core_pkg is
     matrix_q_input : matrix_buffer
     ) return vector_buffer;
 
-end model_core_pkg;
+end model_dnc_core_pkg;
 
-package body model_core_pkg is
+package body model_dnc_core_pkg is
 
   -----------------------------------------------------------------------
   -- Functions
@@ -3024,4 +3024,4 @@ package body model_core_pkg is
     end loop;
   end function function_model_top;
 
-end model_core_pkg;
+end model_dnc_core_pkg;

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_logistic_function #(
+module model_scalar_logistic_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -103,7 +103,7 @@ module ntm_scalar_logistic_function #(
   ///////////////////////////////////////////////////////////////////////
 
   // SCALAR ADDER
-  ntm_scalar_float_adder #(
+  model_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -125,7 +125,7 @@ module ntm_scalar_logistic_function #(
   );
 
   // SCALAR DIVIDER
-  ntm_scalar_float_divider #(
+  model_scalar_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -145,7 +145,7 @@ module ntm_scalar_logistic_function #(
   );
 
   // SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator_function #(
+  model_scalar_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

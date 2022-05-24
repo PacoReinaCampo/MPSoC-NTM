@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_float_multiplier #(
+module model_matrix_float_multiplier #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -294,7 +294,7 @@ module ntm_matrix_float_multiplier #(
   end
 
   // MULTIPLIER
-  ntm_vector_float_multiplier #(
+  model_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

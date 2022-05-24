@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_input_gate_vector #(
+module model_input_gate_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -318,7 +318,7 @@ module ntm_input_gate_vector #(
   end
 
   // VECTOR ADDER
-  ntm_vector_float_adder #(
+  model_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -345,7 +345,7 @@ module ntm_input_gate_vector #(
   );
 
   // MATRIX CONVOLUTION
-  ntm_matrix_convolution #(
+  model_matrix_convolution #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -378,7 +378,7 @@ module ntm_input_gate_vector #(
   );
 
   // VECTOR LOGISTIC
-  ntm_vector_logistic_function #(
+  model_vector_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

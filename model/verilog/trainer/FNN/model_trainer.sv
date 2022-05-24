@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_trainer #(
+module model_trainer #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -344,7 +344,7 @@ module ntm_trainer #(
   end
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -370,7 +370,7 @@ module ntm_trainer #(
   );
 
   // VECTOR DIFFERENTIATION
-  ntm_vector_differentiation #(
+  model_vector_differentiation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -398,7 +398,7 @@ module ntm_trainer #(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_keys #(
+module model_read_keys #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

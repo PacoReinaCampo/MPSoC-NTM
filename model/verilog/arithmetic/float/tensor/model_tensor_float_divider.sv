@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_float_divider #(
+module model_tensor_float_divider #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -141,7 +141,7 @@ module ntm_tensor_float_divider #(
   // CONTROL
 
   // DIVIDER
-  ntm_vector_float_divider #(
+  model_vector_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

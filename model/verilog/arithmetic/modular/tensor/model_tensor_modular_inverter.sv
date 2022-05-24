@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_modular_inverter #(
+module model_tensor_modular_inverter #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -263,7 +263,7 @@ module ntm_tensor_modular_inverter #(
   end
 
   // INVERTER
-  ntm_vector_modular_inverter #(
+  model_vector_modular_inverter #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

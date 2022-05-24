@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_summation #(
+module model_matrix_summation #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -296,7 +296,7 @@ module ntm_matrix_summation #(
   end
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_transpose #(
+module model_tensor_transpose #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -193,7 +193,7 @@ module ntm_tensor_transpose #(
   end
 
   // SCALAR ADDER
-  ntm_scalar_float_adder #(
+  model_scalar_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -215,7 +215,7 @@ module ntm_tensor_transpose #(
   );
 
   // SCALAR MULTIPLIER
-  ntm_scalar_float_multiplier #(
+  model_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

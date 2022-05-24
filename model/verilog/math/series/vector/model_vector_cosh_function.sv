@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_cosh_function #(
+module model_vector_cosh_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -189,7 +189,7 @@ module ntm_vector_cosh_function #(
   end
 
   // COSH
-  ntm_scalar_cosh_function #(
+  model_scalar_cosh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

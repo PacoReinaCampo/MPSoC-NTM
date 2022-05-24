@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_controller #(
+module model_controller #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -374,7 +374,7 @@ module ntm_controller #(
   assign B_OUT = b_out_trainer;
 
   // VECTOR ADDER
-  ntm_vector_float_adder #(
+  model_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -400,7 +400,7 @@ module ntm_controller #(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -430,7 +430,7 @@ module ntm_controller #(
   );
 
   // VECTOR LOGISTIC
-  ntm_vector_logistic_function #(
+  model_vector_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -452,7 +452,7 @@ module ntm_controller #(
   );
 
   // TRAINER
-  ntm_trainer #(
+  model_trainer #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

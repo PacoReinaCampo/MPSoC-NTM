@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_precedence_weighting #(
+module model_precedence_weighting #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -190,7 +190,7 @@ module dnc_precedence_weighting #(
   end
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -216,7 +216,7 @@ module dnc_precedence_weighting #(
   );
 
   // VECTOR ADDER
-  ntm_vector_float_adder #(
+  model_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -243,7 +243,7 @@ module dnc_precedence_weighting #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_float_multiplier #(
+  model_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

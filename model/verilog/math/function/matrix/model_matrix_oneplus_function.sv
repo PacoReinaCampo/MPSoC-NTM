@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_oneplus_function #(
+module model_matrix_oneplus_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -242,7 +242,7 @@ module ntm_matrix_oneplus_function #(
   end
 
   // VECTOR ONEPLUS
-  ntm_vector_oneplus_function #(
+  model_vector_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_content_weighting #(
+module model_write_content_weighting #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -146,11 +146,11 @@ module dnc_write_content_weighting #(
   assign C_OUT = c_out_vector_content_based_addressing;
 
   // VECTOR CONTENT BASED ADDRESSING
-  dnc_content_based_addressing #(
+  model_content_based_addressing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  dnc_content_based_addressing_i(
+  model_content_based_addressing_i(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

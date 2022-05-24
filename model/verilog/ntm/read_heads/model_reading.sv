@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_reading #(
+module model_reading #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -186,7 +186,7 @@ module ntm_reading #(
   assign data_in_vector_summation   = data_out_vector_multiplier;
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -212,7 +212,7 @@ module ntm_reading #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  model_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

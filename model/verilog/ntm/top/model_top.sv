@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_top #(
+module model_top #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -521,11 +521,11 @@ module ntm_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // CONTROLLER
-  ntm_controller #(
+  model_controller #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_controller_i(
+  model_controller_i(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -596,7 +596,7 @@ module ntm_top #(
   );
 
   // OUTPUT VECTOR
-  ntm_output_vector #(
+  model_output_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -651,7 +651,7 @@ module ntm_top #(
   );
 
   // INTERFACE VECTOR
-  ntm_interface_vector #(
+  model_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -695,7 +695,7 @@ module ntm_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // READING
-  ntm_reading #(
+  model_reading #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -731,7 +731,7 @@ module ntm_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // WRITING
-  ntm_writing #(
+  model_writing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -770,7 +770,7 @@ module ntm_top #(
   );
 
   // ERASING
-  ntm_erasing #(
+  model_erasing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -809,7 +809,7 @@ module ntm_top #(
   ///////////////////////////////////////////////////////////////////////
 
   // ADDRESSING
-  ntm_addressing #(
+  model_addressing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

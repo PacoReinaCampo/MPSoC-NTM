@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_state_top #(
+module model_state_top #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

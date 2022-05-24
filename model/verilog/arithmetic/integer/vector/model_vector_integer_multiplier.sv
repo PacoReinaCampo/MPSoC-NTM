@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_integer_multiplier #(
+module model_vector_integer_multiplier #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -217,7 +217,7 @@ module ntm_vector_integer_multiplier #(
   end
 
   // MULTIPLIER
-  ntm_scalar_integer_multiplier #(
+  model_scalar_integer_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

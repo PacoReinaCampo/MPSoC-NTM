@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_exponentiator_function #(
+module model_scalar_exponentiator_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

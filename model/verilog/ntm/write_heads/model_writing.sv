@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_writing #(
+module model_writing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -191,7 +191,7 @@ module ntm_writing #(
   assign data_b_in_vector_adder = data_out_vector_multiplier;
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  model_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -218,7 +218,7 @@ module ntm_writing #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  model_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

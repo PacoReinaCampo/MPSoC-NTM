@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_modes #(
+module model_read_modes #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -126,7 +126,7 @@ module dnc_read_modes #(
   assign PI_OUT = data_out_vector_softmax;
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax #(
+  model_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

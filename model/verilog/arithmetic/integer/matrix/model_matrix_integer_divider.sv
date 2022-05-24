@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_integer_divider #(
+module model_matrix_integer_divider #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -297,7 +297,7 @@ module ntm_matrix_integer_divider #(
   end
 
   // DIVIDER
-  ntm_vector_integer_divider #(
+  model_vector_integer_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

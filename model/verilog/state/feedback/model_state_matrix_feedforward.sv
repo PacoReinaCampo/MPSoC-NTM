@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_state_matrix_feedforward #(
+module model_state_matrix_feedforward #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

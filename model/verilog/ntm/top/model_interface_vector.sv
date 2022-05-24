@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_interface_vector #(
+module model_interface_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -120,7 +120,7 @@ module ntm_interface_vector #(
   // CONTROL
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

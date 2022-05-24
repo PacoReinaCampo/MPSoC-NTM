@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_content_based_addressing #(
+module model_content_based_addressing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -200,7 +200,7 @@ module dnc_content_based_addressing #(
   end
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator_function #(
+  model_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -223,7 +223,7 @@ module dnc_content_based_addressing #(
   );
 
   // VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity #(
+  model_vector_cosine_similarity #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -252,7 +252,7 @@ module dnc_content_based_addressing #(
   );
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax #(
+  model_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

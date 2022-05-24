@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_controller #(
+module model_controller #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -710,7 +710,7 @@ module ntm_controller #(
   end
 
   // ACTIVATION GATE VECTOR
-  ntm_activation_gate_vector #(
+  model_activation_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -781,7 +781,7 @@ module ntm_controller #(
   );
 
   // ACTIVATION TRAINER
-  ntm_activation_trainer #(
+  model_activation_trainer #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -849,7 +849,7 @@ module ntm_controller #(
   );
 
   // INTPUT GATE VECTOR
-  ntm_input_gate_vector #(
+  model_input_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -920,7 +920,7 @@ module ntm_controller #(
   );
 
   // INPUT TRAINER
-  ntm_input_trainer #(
+  model_input_trainer #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -988,7 +988,7 @@ module ntm_controller #(
   );
 
   // OUTPUT GATE VECTOR
-  ntm_output_gate_vector #(
+  model_output_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1056,7 +1056,7 @@ module ntm_controller #(
   );
 
   // OUTPUT TRAINER
-  ntm_output_trainer #(
+  model_output_trainer #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1121,7 +1121,7 @@ module ntm_controller #(
   );
 
   // FORGET GATE VECTOR
-  ntm_forget_gate_vector #(
+  model_forget_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1192,7 +1192,7 @@ module ntm_controller #(
   );
 
   // FORGET TRAINER
-  ntm_forget_trainer #(
+  model_forget_trainer #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1257,7 +1257,7 @@ module ntm_controller #(
   );
 
   // STATE GATE VECTOR
-  ntm_state_gate_vector #(
+  model_state_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1294,7 +1294,7 @@ module ntm_controller #(
   );
 
   // HIDDEN GATE VECTOR
-  ntm_hidden_gate_vector #(
+  model_hidden_gate_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

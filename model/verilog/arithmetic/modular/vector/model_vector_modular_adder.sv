@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_modular_adder #(
+module model_vector_modular_adder #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -223,7 +223,7 @@ module ntm_vector_modular_adder #(
   end
 
   // ADDER
-  ntm_scalar_modular_adder #(
+  model_scalar_modular_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

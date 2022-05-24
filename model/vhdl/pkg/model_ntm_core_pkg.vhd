@@ -44,7 +44,7 @@ use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_fnn_controller_pkg.all;
 
-package model_core_pkg is
+package model_ntm_core_pkg is
 
   -----------------------------------------------------------------------
   -- Components
@@ -686,9 +686,9 @@ package model_core_pkg is
     matrix_q_input : matrix_buffer
     ) return vector_buffer;
 
-end model_core_pkg;
+end model_ntm_core_pkg;
 
-package body model_core_pkg is
+package body model_ntm_core_pkg is
 
   -----------------------------------------------------------------------
   -- READ HEADS
@@ -1500,4 +1500,4 @@ package body model_core_pkg is
     end loop;
   end function function_model_top;
 
-end model_core_pkg;
+end model_ntm_core_pkg;

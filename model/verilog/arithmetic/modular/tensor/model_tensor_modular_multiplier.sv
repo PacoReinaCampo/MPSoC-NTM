@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_modular_multiplier #(
+module model_tensor_modular_multiplier #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -143,7 +143,7 @@ module ntm_tensor_modular_multiplier #(
   // CONTROL
 
   // MULTIPLIER
-  ntm_vector_modular_multiplier #(
+  model_vector_modular_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

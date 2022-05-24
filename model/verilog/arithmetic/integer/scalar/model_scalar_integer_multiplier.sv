@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_integer_multiplier #(
+module model_scalar_integer_multiplier #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

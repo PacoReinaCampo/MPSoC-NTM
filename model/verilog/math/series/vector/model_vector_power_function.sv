@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_power_function #(
+module model_vector_power_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -188,7 +188,7 @@ module ntm_vector_power_function #(
   end
 
   // SCALAR POWER
-  ntm_scalar_power_function #(
+  model_scalar_power_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

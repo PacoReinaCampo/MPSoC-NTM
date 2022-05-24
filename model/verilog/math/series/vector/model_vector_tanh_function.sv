@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_tanh_function #(
+module model_vector_tanh_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -189,7 +189,7 @@ module ntm_vector_tanh_function #(
   end
 
   // TANH
-  ntm_scalar_tanh_function #(
+  model_scalar_tanh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

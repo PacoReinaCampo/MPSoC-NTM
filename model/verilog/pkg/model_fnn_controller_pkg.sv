@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package ntm_fnn_controller_pkg;
+package model_fnn_controller_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types

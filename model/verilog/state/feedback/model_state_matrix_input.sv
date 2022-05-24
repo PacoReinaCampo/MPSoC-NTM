@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_state_matrix_input #(
+module model_state_matrix_input #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

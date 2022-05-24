@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_power_function #(
+module model_matrix_power_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -242,7 +242,7 @@ module ntm_matrix_power_function #(
   end
 
   // VECTOR POWER
-  ntm_vector_power_function #(
+  model_vector_power_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_forget_trainer #(
+module model_forget_trainer #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -410,7 +410,7 @@ module ntm_forget_trainer #(
   end
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -436,7 +436,7 @@ module ntm_forget_trainer #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_float_multiplier #(
+  model_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -461,7 +461,7 @@ module ntm_forget_trainer #(
   );
 
   // VECTOR ADDER
-  ntm_vector_float_adder #(
+  model_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -488,7 +488,7 @@ module ntm_forget_trainer #(
   );
 
   // VECTOR DIFFERENTIATION
-  ntm_vector_differentiation #(
+  model_vector_differentiation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -516,7 +516,7 @@ module ntm_forget_trainer #(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

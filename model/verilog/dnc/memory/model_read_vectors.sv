@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_vectors #(
+module model_read_vectors #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -205,7 +205,7 @@ module dnc_read_vectors #(
   assign data_b_in_matrix_product   = W_IN;
 
   // MATRIX TRANSPOSE
-  ntm_matrix_transpose #(
+  model_matrix_transpose #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -231,7 +231,7 @@ module dnc_read_vectors #(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

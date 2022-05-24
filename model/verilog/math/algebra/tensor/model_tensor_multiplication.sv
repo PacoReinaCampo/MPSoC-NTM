@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_multiplication #(
+module model_tensor_multiplication #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -192,7 +192,7 @@ module ntm_tensor_multiplication #(
   end
 
   // SCALAR MULTIPLIER
-  ntm_scalar_float_multiplier #(
+  model_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

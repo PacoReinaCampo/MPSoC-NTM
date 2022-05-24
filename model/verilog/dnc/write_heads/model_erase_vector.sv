@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_erase_vector #(
+module model_erase_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -116,7 +116,7 @@ module dnc_erase_vector #(
   assign E_OUT = data_out_vector_logistic;
 
   // VECTOR LOGISTIC
-  ntm_vector_logistic_function #(
+  model_vector_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

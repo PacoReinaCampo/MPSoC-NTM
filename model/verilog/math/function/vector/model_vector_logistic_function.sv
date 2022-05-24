@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_logistic_function #(
+module model_vector_logistic_function #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -188,7 +188,7 @@ module ntm_vector_logistic_function #(
   end
 
   // LOGISTIC
-  ntm_scalar_logistic_function #(
+  model_scalar_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

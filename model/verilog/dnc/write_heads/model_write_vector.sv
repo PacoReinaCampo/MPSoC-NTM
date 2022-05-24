@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_vector #(
+module model_write_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

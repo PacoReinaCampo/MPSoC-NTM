@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_inverse #(
+module model_matrix_inverse #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -380,7 +380,7 @@ module ntm_matrix_inverse #(
   end
 
   // VECTOR COSINE SIMILARITY
-  ntm_vector_inverse #(
+  model_vector_inverse #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

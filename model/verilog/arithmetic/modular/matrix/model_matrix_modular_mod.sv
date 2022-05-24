@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_modular_mod #(
+module model_matrix_modular_mod #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -257,7 +257,7 @@ module ntm_matrix_modular_mod #(
   end
 
   // MOD
-  ntm_vector_modular_mod #(
+  model_vector_modular_mod #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

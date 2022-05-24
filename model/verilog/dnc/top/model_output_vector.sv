@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_output_vector #(
+module model_output_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -227,7 +227,7 @@ module dnc_output_vector #(
   assign data_b_in_matrix_product   = R_IN;
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -258,7 +258,7 @@ module dnc_output_vector #(
   );
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

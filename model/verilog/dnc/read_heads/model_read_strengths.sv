@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_strengths #(
+module model_read_strengths #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -117,7 +117,7 @@ module dnc_read_strengths #(
   assign BETA_OUT = data_out_vector_oneplus;
 
   // VECTOR ONE_CONTROLPLUS
-  ntm_vector_oneplus_function #(
+  model_vector_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

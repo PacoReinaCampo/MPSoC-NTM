@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_integer_multiplier #(
+module model_tensor_integer_multiplier #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -144,7 +144,7 @@ module ntm_tensor_integer_multiplier #(
   // CONTROL
 
   // MULTIPLIER
-  ntm_vector_integer_multiplier #(
+  model_vector_integer_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

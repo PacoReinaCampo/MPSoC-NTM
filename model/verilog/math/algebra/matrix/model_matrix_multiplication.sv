@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_multiplication #(
+module model_matrix_multiplication #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -296,7 +296,7 @@ module ntm_matrix_multiplication #(
   end
 
   // VECTOR MULTIPLICATION
-  ntm_vector_multiplication #(
+  model_vector_multiplication #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_addressing #(
+module model_addressing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -388,11 +388,11 @@ module ntm_addressing #(
   end
 
   // VECTOR CONTENT BASED ADDRESSING
-  ntm_content_based_addressing #(
+  model_content_based_addressing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_content_based_addressing_i(
+  model_content_based_addressing_i(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -425,7 +425,7 @@ module ntm_addressing #(
   );
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  model_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -452,7 +452,7 @@ module ntm_addressing #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  model_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -477,7 +477,7 @@ module ntm_addressing #(
   );
 
   // VECTOR DIVIDER
-  ntm_vector_divider #(
+  model_vector_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -502,7 +502,7 @@ module ntm_addressing #(
   );
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator_function #(
+  model_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -525,7 +525,7 @@ module ntm_addressing #(
   );
 
   // VECTOR SUMMATION
-  ntm_vector_summation #(
+  model_vector_summation #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -551,7 +551,7 @@ module ntm_addressing #(
   );
 
   // VECTOR CONVOLUTION
-  ntm_vector_convolution_function #(
+  model_vector_convolution_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_state_vector_state #(
+module model_state_vector_state #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

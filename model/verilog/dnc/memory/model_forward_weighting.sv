@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_forward_weighting #(
+module model_forward_weighting #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -146,7 +146,7 @@ module dnc_forward_weighting #(
   assign F_OUT = data_out_matrix_product;
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_inverse #(
+module model_tensor_inverse #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -114,7 +114,7 @@ module ntm_tensor_inverse #(
   ///////////////////////////////////////////////////////////////////////
 
   // SCALAR MULTIPLIER
-  ntm_scalar_float_multiplier #(
+  model_scalar_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -134,7 +134,7 @@ module ntm_tensor_inverse #(
   );
 
   // SCALAR DIVIDER
-  ntm_scalar_float_divider #(
+  model_scalar_float_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -154,7 +154,7 @@ module ntm_tensor_inverse #(
   );
 
   // SCALAR PRODUCT
-  ntm_scalar_product #(
+  model_scalar_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

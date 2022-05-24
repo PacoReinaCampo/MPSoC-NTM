@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_strength #(
+module model_write_strength #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -107,11 +107,11 @@ module dnc_write_strength #(
   assign BETA_OUT = data_out_scalar_oneplus;
 
   // SCALAR ONE_CONTROLPLUS
-  ntm_scalar_oneplus_function #(
+  model_scalar_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  ntm_scalar_oneplus_function_i(
+  model_scalar_oneplus_function_i(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

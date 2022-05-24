@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_key #(
+module model_write_key #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

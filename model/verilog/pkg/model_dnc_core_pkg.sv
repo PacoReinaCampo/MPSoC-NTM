@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package dnc_core_pkg;
+package model_dnc_core_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types

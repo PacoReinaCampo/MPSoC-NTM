@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_float_adder #(
+module model_scalar_float_adder #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )

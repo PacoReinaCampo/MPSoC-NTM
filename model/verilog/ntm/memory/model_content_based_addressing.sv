@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_content_based_addressing #(
+module model_content_based_addressing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -242,7 +242,7 @@ module ntm_content_based_addressing #(
   assign data_in_vector_softmax   = data_out_vector_exponentiator_function;
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  model_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -267,7 +267,7 @@ module ntm_content_based_addressing #(
   );
 
   // VECTOR EXPONE_CONTROLNTIATOR
-  ntm_vector_exponentiator_function #(
+  model_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -292,7 +292,7 @@ module ntm_content_based_addressing #(
   );
 
   // VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity #(
+  model_vector_cosine_similarity #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -321,7 +321,7 @@ module ntm_content_based_addressing #(
   );
 
   // VECTOR SOFTMAX
-  ntm_vector_softmax #(
+  model_vector_softmax #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

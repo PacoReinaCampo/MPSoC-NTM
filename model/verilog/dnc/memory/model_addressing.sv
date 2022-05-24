@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_addressing #(
+module model_addressing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -590,7 +590,7 @@ module dnc_addressing #(
   end
 
   // ALLOCATION WEIGHTING
-  dnc_allocation_weighting #(
+  model_allocation_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -618,7 +618,7 @@ module dnc_addressing #(
   );
 
   // BACKWARD WEIGHTING
-  dnc_backward_weighting #(
+  model_backward_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -655,7 +655,7 @@ module dnc_addressing #(
   );
 
   // FORWARD WEIGHTING
-  dnc_forward_weighting #(
+  model_forward_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -689,7 +689,7 @@ module dnc_addressing #(
   );
 
   // MEMORY MATRIX
-  dnc_memory_matrix #(
+  model_memory_matrix #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -730,7 +730,7 @@ module dnc_addressing #(
   );
 
   // MEMORY RETENTION VECTOR
-  dnc_memory_retention_vector #(
+  model_memory_retention_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -766,7 +766,7 @@ module dnc_addressing #(
   );
 
   // PRECEDENCE WEIGHTING
-  dnc_precedence_weighting #(
+  model_precedence_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -796,7 +796,7 @@ module dnc_addressing #(
   );
 
   // READ CONTENT WEIGHTING
-  dnc_read_content_weighting #(
+  model_read_content_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -833,7 +833,7 @@ module dnc_addressing #(
   );
 
   // READ VECTORS
-  dnc_read_vectors #(
+  model_read_vectors #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -873,7 +873,7 @@ module dnc_addressing #(
   );
 
   // READ WEIGHTING
-  dnc_read_weighting #(
+  model_read_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -927,7 +927,7 @@ module dnc_addressing #(
   );
 
   // TEMPORAL LINK MATRIX
-  dnc_temporal_link_matrix #(
+  model_temporal_link_matrix #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -963,7 +963,7 @@ module dnc_addressing #(
   );
 
   // USAGE VECTOR
-  dnc_usage_vector #(
+  model_usage_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -995,7 +995,7 @@ module dnc_addressing #(
   );
 
   // WRITE CONTENT WEIGHTING
-  dnc_write_content_weighting #(
+  model_write_content_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1032,7 +1032,7 @@ module dnc_addressing #(
   );
 
   // WRITE WEIGHTING
-  dnc_write_weighting #(
+  model_write_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

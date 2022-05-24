@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_erasing #(
+module model_erasing #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -225,7 +225,7 @@ module ntm_erasing #(
   assign data_b_in_matrix_product   = data_out_vector_multiplier;
 
   // VECTOR ADDER
-  ntm_vector_adder #(
+  model_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -252,7 +252,7 @@ module ntm_erasing #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  model_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -277,7 +277,7 @@ module ntm_erasing #(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product #(
+  model_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

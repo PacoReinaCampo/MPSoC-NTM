@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_sort_vector #(
+module model_sort_vector #(
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64
 )
@@ -168,7 +168,7 @@ module dnc_sort_vector #(
   end
 
   // VECTOR ADDER
-  ntm_vector_float_adder #(
+  model_vector_float_adder #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -195,7 +195,7 @@ module dnc_sort_vector #(
   );
 
   // VECTOR MULTIPLIER
-  ntm_vector_float_multiplier #(
+  model_vector_float_multiplier #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
