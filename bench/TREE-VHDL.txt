@@ -2,108 +2,140 @@
 ├── osvvm
 │   ├── arithmetic
 │   │   ├── float
+│   │   │   ├── ntm_float_checker.vhd
 │   │   │   ├── ntm_float_pkg.vhd
 │   │   │   ├── ntm_float_stimulus.vhd
 │   │   │   └── ntm_float_testbench.vhd
 │   │   ├── integer
+│   │   │   ├── ntm_integer_checker.vhd
 │   │   │   ├── ntm_integer_pkg.vhd
 │   │   │   ├── ntm_integer_stimulus.vhd
 │   │   │   └── ntm_integer_testbench.vhd
 │   │   └── modular
+│   │       ├── ntm_modular_checker.vhd
 │   │       ├── ntm_modular_pkg.vhd
 │   │       ├── ntm_modular_stimulus.vhd
 │   │       └── ntm_modular_testbench.vhd
 │   ├── controller
 │   │   ├── FNN
 │   │   │   ├── convolutional
+│   │   │   │   ├── ntm_convolutional_fnn_checker.vhd
 │   │   │   │   ├── ntm_convolutional_fnn_pkg.vhd
 │   │   │   │   ├── ntm_convolutional_fnn_stimulus.vhd
 │   │   │   │   └── ntm_convolutional_fnn_testbench.vhd
 │   │   │   └── standard
+│   │   │       ├── ntm_standard_fnn_checker.vhd
 │   │   │       ├── ntm_standard_fnn_pkg.vhd
 │   │   │       ├── ntm_standard_fnn_stimulus.vhd
 │   │   │       └── ntm_standard_fnn_testbench.vhd
-│   │   └── LSTM
-│   │       ├── convolutional
-│   │       │   ├── ntm_convolutional_lstm_pkg.vhd
-│   │       │   ├── ntm_convolutional_lstm_stimulus.vhd
-│   │       │   └── ntm_convolutional_lstm_testbench.vhd
-│   │       └── standard
-│   │           ├── ntm_standard_lstm_pkg.vhd
-│   │           ├── ntm_standard_lstm_stimulus.vhd
-│   │           └── ntm_standard_lstm_testbench.vhd
+│   │   ├── LSTM
+│   │   │   ├── convolutional
+│   │   │   │   ├── ntm_convolutional_lstm_checker.vhd
+│   │   │   │   ├── ntm_convolutional_lstm_pkg.vhd
+│   │   │   │   ├── ntm_convolutional_lstm_stimulus.vhd
+│   │   │   │   └── ntm_convolutional_lstm_testbench.vhd
+│   │   │   └── standard
+│   │   │       ├── ntm_standard_lstm_checker.vhd
+│   │   │       ├── ntm_standard_lstm_pkg.vhd
+│   │   │       ├── ntm_standard_lstm_stimulus.vhd
+│   │   │       └── ntm_standard_lstm_testbench.vhd
+│   │   └── transformer
+│   │       ├── ntm_transformer_checker.vhd
+│   │       ├── ntm_transformer_pkg.vhd
+│   │       ├── ntm_transformer_stimulus.vhd
+│   │       └── ntm_transformer_testbench.vhd
 │   ├── dnc
 │   │   ├── memory
+│   │   │   ├── dnc_memory_checker.vhd
 │   │   │   ├── dnc_memory_pkg.vhd
 │   │   │   ├── dnc_memory_stimulus.vhd
 │   │   │   └── dnc_memory_testbench.vhd
 │   │   ├── read_heads
+│   │   │   ├── dnc_read_heads_checker.vhd
 │   │   │   ├── dnc_read_heads_pkg.vhd
 │   │   │   ├── dnc_read_heads_stimulus.vhd
 │   │   │   └── dnc_read_heads_testbench.vhd
 │   │   ├── top
+│   │   │   ├── dnc_top_checker.vhd
 │   │   │   ├── dnc_top_pkg.vhd
 │   │   │   ├── dnc_top_stimulus.vhd
 │   │   │   └── dnc_top_testbench.vhd
 │   │   └── write_heads
+│   │       ├── dnc_write_heads_checker.vhd
 │   │       ├── dnc_write_heads_pkg.vhd
 │   │       ├── dnc_write_heads_stimulus.vhd
 │   │       └── dnc_write_heads_testbench.vhd
 │   ├── intro
+│   │   ├── ntm_intro_checker.vhd
+│   │   ├── ntm_intro_pkg.vhd
+│   │   ├── ntm_intro_stimulus.vhd
 │   │   └── ntm_intro_testbench.vhd
 │   ├── math
 │   │   ├── algebra
+│   │   │   ├── ntm_algebra_checker.vhd
 │   │   │   ├── ntm_algebra_pkg.vhd
 │   │   │   ├── ntm_algebra_stimulus.vhd
 │   │   │   └── ntm_algebra_testbench.vhd
 │   │   ├── calculus
+│   │   │   ├── ntm_calculus_checker.vhd
 │   │   │   ├── ntm_calculus_pkg.vhd
 │   │   │   ├── ntm_calculus_stimulus.vhd
 │   │   │   └── ntm_calculus_testbench.vhd
 │   │   ├── function
+│   │   │   ├── ntm_function_checker.vhd
 │   │   │   ├── ntm_function_pkg.vhd
 │   │   │   ├── ntm_function_stimulus.vhd
 │   │   │   └── ntm_function_testbench.vhd
 │   │   └── series
+│   │       ├── ntm_series_checker.vhd
 │   │       ├── ntm_series_pkg.vhd
 │   │       ├── ntm_series_stimulus.vhd
 │   │       └── ntm_series_testbench.vhd
 │   ├── ntm
 │   │   ├── memory
+│   │   │   ├── ntm_memory_checker.vhd
 │   │   │   ├── ntm_memory_pkg.vhd
 │   │   │   ├── ntm_memory_stimulus.vhd
 │   │   │   └── ntm_memory_testbench.vhd
 │   │   ├── read_heads
+│   │   │   ├── ntm_read_heads_checker.vhd
 │   │   │   ├── ntm_read_heads_pkg.vhd
 │   │   │   ├── ntm_read_heads_stimulus.vhd
 │   │   │   └── ntm_read_heads_testbench.vhd
 │   │   ├── top
+│   │   │   ├── ntm_top_checker.vhd
 │   │   │   ├── ntm_top_pkg.vhd
 │   │   │   ├── ntm_top_stimulus.vhd
 │   │   │   └── ntm_top_testbench.vhd
 │   │   └── write_heads
+│   │       ├── ntm_write_heads_checker.vhd
 │   │       ├── ntm_write_heads_pkg.vhd
 │   │       ├── ntm_write_heads_stimulus.vhd
 │   │       └── ntm_write_heads_testbench.vhd
 │   ├── state
 │   │   ├── feedback
+│   │   │   ├── ntm_state_feedback_checker.vhd
 │   │   │   ├── ntm_state_feedback_pkg.vhd
 │   │   │   ├── ntm_state_feedback_stimulus.vhd
 │   │   │   └── ntm_state_feedback_testbench.vhd
 │   │   ├── outputs
+│   │   │   ├── ntm_state_outputs_checker.vhd
 │   │   │   ├── ntm_state_outputs_pkg.vhd
 │   │   │   ├── ntm_state_outputs_stimulus.vhd
 │   │   │   └── ntm_state_outputs_testbench.vhd
 │   │   └── top
+│   │       ├── ntm_state_top_checker.vhd
 │   │       ├── ntm_state_top_pkg.vhd
 │   │       ├── ntm_state_top_stimulus.vhd
 │   │       └── ntm_state_top_testbench.vhd
 │   └── trainer
 │       ├── FNN
+│       │   ├── ntm_trainer_fnn_checker.vhd
 │       │   ├── ntm_trainer_fnn_pkg.vhd
 │       │   ├── ntm_trainer_fnn_stimulus.vhd
 │       │   └── ntm_trainer_fnn_testbench.vhd
 │       └── LSTM
+│           ├── ntm_trainer_lstm_checker.vhd
 │           ├── ntm_trainer_lstm_pkg.vhd
 │           ├── ntm_trainer_lstm_stimulus.vhd
 │           └── ntm_trainer_lstm_testbench.vhd
@@ -131,15 +163,19 @@
     │   │       ├── model_standard_fnn_pkg.vhd
     │   │       ├── model_standard_fnn_stimulus.vhd
     │   │       └── model_standard_fnn_testbench.vhd
-    │   └── LSTM
-    │       ├── convolutional
-    │       │   ├── model_convolutional_lstm_pkg.vhd
-    │       │   ├── model_convolutional_lstm_stimulus.vhd
-    │       │   └── model_convolutional_lstm_testbench.vhd
-    │       └── standard
-    │           ├── model_standard_lstm_pkg.vhd
-    │           ├── model_standard_lstm_stimulus.vhd
-    │           └── model_standard_lstm_testbench.vhd
+    │   ├── LSTM
+    │   │   ├── convolutional
+    │   │   │   ├── model_convolutional_lstm_pkg.vhd
+    │   │   │   ├── model_convolutional_lstm_stimulus.vhd
+    │   │   │   └── model_convolutional_lstm_testbench.vhd
+    │   │   └── standard
+    │   │       ├── model_standard_lstm_pkg.vhd
+    │   │       ├── model_standard_lstm_stimulus.vhd
+    │   │       └── model_standard_lstm_testbench.vhd
+    │   └── transformer
+    │       ├── model_transformer_pkg.vhd
+    │       ├── model_transformer_stimulus.vhd
+    │       └── model_transformer_testbench.vhd
     ├── dnc
     │   ├── memory
     │   │   ├── model_memory_pkg.vhd
