@@ -41,37 +41,21 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_env extends uvm_env;
-  `uvm_component_utils(ntm_intro_env);
+class ntm_intro_sequence extends uvm_sequence#(ntm_intro_transaction);
+  `uvm_object_utils(ntm_intro_sequence)
 
-  //ENV class will have agent as its sub component
-  ntm_intro_agent agt;
-  ntm_intro_scoreboard scb;
-  ntm_intro_subscriber ntm_intro_subscriber_h;
-
-  //virtual interface for INTRO interface
-  virtual dut_if vif;
-
-  function new(string name, uvm_component parent);
-    super.new(name, parent);
+  function new (string name = "");
+    super.new(name);
   endfunction
 
-  //Build phase
-  //Construct agent and get virtual interface handle from test and pass it down to agent
-  function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    agt = ntm_intro_agent::type_id::create("agt", this);
-    scb = ntm_intro_scoreboard::type_id::create("scb", this);
-    ntm_intro_subscriber_h=ntm_intro_subscriber::type_id::create("apn_subscriber_h",this);
-    if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif)) begin
-      `uvm_fatal("build phase", "No virtual interface specified for this env instance")
+  task body();
+    ntm_intro_transaction rw_trans;
+    //create 10 random INTRO read/write transaction and send to driver
+    repeat (80) begin
+      rw_trans=new();
+      start_item(rw_trans);
+      assert(rw_trans.randomize());
+      finish_item(rw_trans);
     end
-    uvm_config_db#(virtual dut_if)::set( this, "agt", "vif", vif);
-  endfunction
-
-  function void connect_phase(uvm_phase phase);
-    super.connect_phase(phase);
-    agt.mon.ap.connect(scb.mon_export);
-    agt.mon.ap.connect(ntm_intro_subscriber_h.analysis_export);
-  endfunction
+  endtask
 endclass

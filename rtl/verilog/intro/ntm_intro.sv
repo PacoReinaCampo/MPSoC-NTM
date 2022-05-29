@@ -41,59 +41,91 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-//Include UVM files
-`include "uvm_macros.sv"
-`include "uvm_pkg.sv"
-import uvm_pkg::*;
-
-//Include common files
-`include "ntm_intro_transaction.sv"
-`include "ntm_intro_sequence.sv"
-`include "ntm_intro_sequencer.sv"
-`include "ntm_intro_driver.sv"
-`include "ntm_intro_monitor.sv"
-`include "ntm_intro_agent.sv"
-`include "ntm_intro_scoreboard.sv"
-`include "ntm_intro_subscriber.sv"
-`include "ntm_intro_env.sv"
-`include "ntm_intro_test.sv"
-
-module test;
-  logic        pclk;
+interface dut_if;
   logic        prst;
+  logic        pclk;
   logic [31:0] paddr;
   logic        psel;
   logic        penable;
   logic        pwrite;
-  logic [31:0] prdata;
   logic [31:0] pwdata;
+  logic        pready;
+  logic [31:0] prdata;
+  
+  //Master Clocking block - used for Drivers
+  clocking master_cb @(posedge pclk);
+    output paddr;
+    output psel;
+    output penable;
+    output pwrite;
+    output pwdata;
+    input  prdata;
+  endclocking: master_cb
 
-  dut_if ntm_intro_if();
+  //Slave Clocking Block - used for any Slave BFMs
+  clocking slave_cb @(posedge pclk);
+    input  paddr;
+    input  psel;
+    input  penable;
+    input  pwrite;
+    input  pwdata;
+    output prdata;
+  endclocking: slave_cb
 
-  ntm_intro_slave dut(.dif(ntm_intro_if));
+  //Monitor Clocking block - For sampling by monitor components
+  clocking monitor_cb @(posedge pclk);
+    input paddr;
+    input psel;
+    input penable;
+    input pwrite;
+    input prdata;
+    input pwdata;
+  endclocking: monitor_cb
 
-  initial begin
-    ntm_intro_if.pclk=0;
-  end
+  modport master(clocking master_cb);
+  modport slave(clocking slave_cb);
+  modport passive(clocking monitor_cb);
+endinterface
 
-  //Generate a clock
-  always begin
-    #10 ntm_intro_if.pclk = ~ntm_intro_if.pclk;
-  end
+module intro_slave(dut_if dif);
+  logic [31:0] mem [0:256];
+  logic [ 1:0] intro_st;
 
-  initial begin
-    ntm_intro_if.prst=0;
-    repeat (1) @(posedge ntm_intro_if.pclk);
-    ntm_intro_if.prst=1;
-  end
-
-  initial begin
-    uvm_config_db#(virtual dut_if)::set( null, "uvm_test_top", "vif", ntm_intro_if);
-    run_test("ntm_intro_test");
-  end
-
-  initial begin
-    $dumpfile("dump.vcd");
-    $dumpvars;
+  const logic [1:0] SETUP=0;
+  const logic [1:0] W_ENABLE=1;
+  const logic [1:0] R_ENABLE=2;
+  
+  always @(posedge dif.pclk or negedge dif.prst) begin
+    if (dif.prst==0) begin
+      intro_st <=0;
+      dif.prdata <=0;
+      dif.pready <=1;
+      for(int i=0;i<256;i++) mem[i]=i;
+    end
+    else begin
+      case (intro_st)
+        SETUP: begin
+          dif.prdata <= 0;
+          if (dif.psel && !dif.penable) begin
+            if (dif.pwrite) begin
+              intro_st <= W_ENABLE;
+            end
+            else begin
+              intro_st <= R_ENABLE;
+              dif.prdata <= mem[dif.paddr];
+            end
+          end
+        end
+        W_ENABLE: begin
+          if (dif.psel && dif.penable && dif.pwrite) begin
+            mem[dif.paddr] <= dif.pwdata;
+          end
+          intro_st <= SETUP;
+        end
+        R_ENABLE: begin
+          intro_st <= SETUP;
+        end
+      endcase
+    end
   end
 endmodule

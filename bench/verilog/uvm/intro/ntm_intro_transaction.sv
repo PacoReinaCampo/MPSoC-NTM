@@ -41,37 +41,25 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_env extends uvm_env;
-  `uvm_component_utils(ntm_intro_env);
+class ntm_intro_transaction extends uvm_sequence_item;
+  `uvm_object_utils(ntm_intro_transaction)
 
-  //ENV class will have agent as its sub component
-  ntm_intro_agent agt;
-  ntm_intro_scoreboard scb;
-  ntm_intro_subscriber ntm_intro_subscriber_h;
+  //typedef for READ/WRITE transaction type
+  typedef enum {READ, WRITE} kind_e;
 
-  //virtual interface for INTRO interface
-  virtual dut_if vif;
+  rand bit [31:0] addr;  //Address
+  rand bit [31:0] data;  //Data - For write or read response
 
-  function new(string name, uvm_component parent);
-    super.new(name, parent);
+  rand kind_e pwrite;  //command type
+
+  constraint c1{addr[31:0]>=32'd0; addr[31:0] <32'd256;};
+  constraint c2{data[31:0]>=32'd0; data[31:0] <32'd256;};
+
+  function new (string name = "ntm_intro_transaction");
+    super.new(name);
   endfunction
 
-  //Build phase
-  //Construct agent and get virtual interface handle from test and pass it down to agent
-  function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    agt = ntm_intro_agent::type_id::create("agt", this);
-    scb = ntm_intro_scoreboard::type_id::create("scb", this);
-    ntm_intro_subscriber_h=ntm_intro_subscriber::type_id::create("apn_subscriber_h",this);
-    if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif)) begin
-      `uvm_fatal("build phase", "No virtual interface specified for this env instance")
-    end
-    uvm_config_db#(virtual dut_if)::set( this, "agt", "vif", vif);
-  endfunction
-
-  function void connect_phase(uvm_phase phase);
-    super.connect_phase(phase);
-    agt.mon.ap.connect(scb.mon_export);
-    agt.mon.ap.connect(ntm_intro_subscriber_h.analysis_export);
+  function string convert2string();
+    return $sformatf("pwrite=%s paddr=%0h data=%0h",pwrite,addr,data);
   endfunction
 endclass
