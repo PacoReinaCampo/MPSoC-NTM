@@ -224,9 +224,12 @@
     │   ├── ntm_intro_env.sv
     │   ├── ntm_intro_monitor.sv
     │   ├── ntm_intro_scoreboard.sv
+    │   ├── ntm_intro_sequence.sv
     │   ├── ntm_intro_sequencer.sv
     │   ├── ntm_intro_subscriber.sv
-    │   └── ntm_intro_testbench.sv
+    │   ├── ntm_intro_test.sv
+    │   ├── ntm_intro_testbench.sv
+    │   └── ntm_intro_transaction.sv
     ├── math
     │   ├── algebra
     │   │   ├── ntm_algebra_agent.sv
