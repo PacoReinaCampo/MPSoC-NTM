@@ -30,7 +30,7 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.3.2.1. uvm_agent
 ##### 0.3.2.2. uvm_driver
 ##### 0.3.2.3. uvm_env
-##### 0.3.2.3. uvm_monitor
+##### 0.3.2.4. uvm_monitor
 ##### 0.3.2.5. uvm_scoreboard
 ##### 0.3.2.6. uvm_sequence
 ##### 0.3.2.7. uvm_sequencer
