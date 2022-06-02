@@ -1,0 +1,17 @@
+../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
+
+../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_adder.sv
+../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_multiplier.sv
+../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_divider.sv
+
+../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_adder.sv
+../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_multiplier.sv
+../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_divider.sv
+
+../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_adder.sv
+../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
+../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_divider.sv
+
+../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_pkg.sv
+../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_stimulus.sv
+../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_testbench.sv

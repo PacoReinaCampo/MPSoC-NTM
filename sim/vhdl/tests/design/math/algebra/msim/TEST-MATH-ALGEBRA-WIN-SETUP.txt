@@ -1,0 +1,4 @@
+cd D:/GitHub/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim
+
+do D:/GitHub/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim/macros/design.do
+do D:/GitHub/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim/macros/verification.do

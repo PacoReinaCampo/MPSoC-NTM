@@ -1,0 +1,42 @@
+vhdl2008 work ../../../../../../../model/vhdl/pkg/model_arithmetic_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/pkg/model_math_pkg.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_divider.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/vector/model_vector_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/vector/model_vector_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/vector/model_vector_softmax.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/matrix/model_matrix_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/matrix/model_matrix_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/matrix/model_matrix_softmax.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/tensor/model_tensor_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/tensor/model_tensor_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/math/calculus/tensor/model_tensor_softmax.vhd
+
+vhdl2008 work ../../../../../../../bench/vhdl/tests/math/calculus/model_calculus_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/math/calculus/model_calculus_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/math/calculus/model_calculus_testbench.vhd
