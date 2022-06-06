@@ -1,6 +1,6 @@
 vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_dnc_core_pkg.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
@@ -88,31 +88,31 @@ vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_in
 vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/ntm_read_heads.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/ntm_write_heads.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_content_based_addressing.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_allocation_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_backward_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_forward_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_matrix.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_retention_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_precedence_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_content_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_vectors.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_sort_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_temporal_link_matrix.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_usage_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_content_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_weighting.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/ntm_addressing.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_allocation_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_backward_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_forward_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_matrix.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_retention_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_precedence_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_content_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_vectors.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_sort_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_temporal_link_matrix.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_usage_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/ntm_top.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/ntm_output_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/ntm_interface_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_top.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_output_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_interface_vector.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/ntm_top_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/ntm_top_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/ntm_top_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_testbench.vhd

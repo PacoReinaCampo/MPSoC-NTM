@@ -2,7 +2,7 @@
 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 ../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 ../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
-../../../../../../../rtl/vhdl/pkg/ntm_dnc_core_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 
 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
@@ -86,8 +86,8 @@
 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-../../../../../../../rtl/vhdl/dnc/read_heads/ntm_read_heads.vhd
+../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_heads.vhd
 
-../../../../../../../bench/vhdl/tests/dnc/read_heads/ntm_read_heads_pkg.vhd
-../../../../../../../bench/vhdl/tests/dnc/read_heads/ntm_read_heads_stimulus.vhd
-../../../../../../../bench/vhdl/tests/dnc/read_heads/ntm_read_heads_testbench.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_testbench.vhd

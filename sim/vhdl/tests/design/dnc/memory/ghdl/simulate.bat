@@ -5,7 +5,7 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_dnc_core_pkg.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
@@ -83,26 +83,26 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_d
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_content_based_addressing.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_allocation_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_backward_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_forward_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_matrix.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_retention_vector.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_precedence_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_content_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_vectors.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_read_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_sort_vector.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_temporal_link_matrix.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_usage_vector.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_content_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_weighting.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/ntm_addressing.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_allocation_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_backward_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_forward_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_matrix.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_retention_vector.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_precedence_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_content_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_vectors.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_sort_vector.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_temporal_link_matrix.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_usage_vector.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_weighting.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/ntm_memory_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/ntm_memory_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/ntm_memory_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_testbench.vhd
 
 ghdl -m --std=08 model_memory_testbench
 ghdl -r --std=08 model_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_memory_testbench.tree

@@ -3,7 +3,7 @@ call ../../../../../../../settings64_ghdl.bat
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_dnc_core_pkg.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
@@ -77,11 +77,11 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_d
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/ntm_write_heads.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_heads.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/ntm_write_heads_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/ntm_write_heads_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/ntm_write_heads_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/dnc_write_heads_testbench.vhd
 
 ghdl -m --std=08 model_write_heads_testbench
 ghdl -r --std=08 model_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_write_heads_testbench.tree
