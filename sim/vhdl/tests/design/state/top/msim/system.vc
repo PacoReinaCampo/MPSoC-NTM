@@ -1,54 +1,54 @@
-../../../../../../../model/vhdl/pkg/model_arithmetic_pkg.vhd
-../../../../../../../model/vhdl/pkg/model_math_pkg.vhd
-../../../../../../../model/vhdl/pkg/model_state_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/ntm_state_pkg.vhd
 
-../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_adder.vhd
-../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
-../../../../../../../model/vhdl/arithmetic/float/scalar/model_scalar_float_divider.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
 
-../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_adder.vhd
-../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_multiplier.vhd
-../../../../../../../model/vhdl/arithmetic/float/vector/model_vector_float_divider.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_adder.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_float_divider.vhd
 
-../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_adder.vhd
-../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
-../../../../../../../model/vhdl/arithmetic/float/matrix/model_matrix_float_divider.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
+../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
 
-../../../../../../../model/vhdl/math/algebra/vector/model_dot_product.vhd
-../../../../../../../model/vhdl/math/algebra/vector/model_vector_convolution.vhd
-../../../../../../../model/vhdl/math/algebra/vector/model_vector_cosine_similarity.vhd
-../../../../../../../model/vhdl/math/algebra/vector/model_vector_multiplication.vhd
-../../../../../../../model/vhdl/math/algebra/vector/model_vector_summation.vhd
-../../../../../../../model/vhdl/math/algebra/vector/model_vector_module.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_cosine_similarity.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_multiplication.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_summation.vhd
+../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_module.vhd
 
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_convolution.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_inverse.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_multiplication.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_product.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_summation.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_transpose.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_vector_convolution.vhd
-../../../../../../../model/vhdl/math/algebra/matrix/model_matrix_vector_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_vector_product.vhd
 
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_convolution.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_inverse.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_matrix_convolution.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_matrix_product.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_multiplication.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_product.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_summation.vhd
-../../../../../../../model/vhdl/math/algebra/tensor/model_tensor_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_convolution.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
-../../../../../../../model/vhdl/state/feedback/model_state_matrix_feedforward.vhd
-../../../../../../../model/vhdl/state/feedback/model_state_matrix_input.vhd
-../../../../../../../model/vhdl/state/feedback/model_state_matrix_output.vhd
-../../../../../../../model/vhdl/state/feedback/model_state_matrix_state.vhd
+../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_feedforward.vhd
+../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_input.vhd
+../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_output.vhd
+../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_state.vhd
 
-../../../../../../../model/vhdl/state/outputs/model_state_vector_output.vhd
-../../../../../../../model/vhdl/state/outputs/model_state_vector_state.vhd
+../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_output.vhd
+../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_state.vhd
 
-../../../../../../../model/vhdl/state/top/model_state_top.vhd
+../../../../../../../rtl/vhdl/state/top/ntm_state_top.vhd
 
-../../../../../../../bench/vhdl/tests/state/top/model_state_top_pkg.vhd
-../../../../../../../bench/vhdl/tests/state/top/model_state_top_stimulus.vhd
-../../../../../../../bench/vhdl/tests/state/top/model_state_top_testbench.vhd
+../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_pkg.vhd
+../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_stimulus.vhd
+../../../../../../../bench/vhdl/tests/state/top/ntm_state_top_testbench.vhd
