@@ -2,6 +2,6 @@
 call ../../../../../../../settings64_vivado.bat
 
 xvhdl -prj system.prj
-xelab model_series_testbench
-xsim -R model_series_testbench
+xelab ntm_series_testbench
+xsim -R ntm_series_testbench
 pause

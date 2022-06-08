@@ -48,8 +48,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_state_feedback_testbench
-	ghdl -r --std=08 model_state_feedback_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_state_feedback_testbench.tree
+	ghdl -m --std=08 ntm_state_feedback_testbench
+	ghdl -r --std=08 ntm_state_feedback_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_feedback_testbench.tree
 
 clean:
 	rm -f *.cf *.tree

@@ -83,8 +83,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/write_heads/dnc_write_heads_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_write_heads_testbench
-	ghdl -r --std=08 model_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_write_heads_testbench.tree
+	ghdl -m --std=08 ntm_write_heads_testbench
+	ghdl -r --std=08 ntm_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_write_heads_testbench.tree
 
 clean:
 	rm -f *.cf *.tree

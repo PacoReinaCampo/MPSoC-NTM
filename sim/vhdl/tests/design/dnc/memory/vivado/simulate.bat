@@ -2,6 +2,6 @@
 call ../../../../../../../settings64_vivado.bat
 
 xvhdl -prj system.prj
-xelab model_memory_testbench
-xsim -R model_memory_testbench
+xelab ntm_memory_testbench
+xsim -R ntm_memory_testbench
 pause

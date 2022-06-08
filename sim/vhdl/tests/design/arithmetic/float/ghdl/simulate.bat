@@ -22,6 +22,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_floa
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/float/ntm_float_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/float/ntm_float_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/float/ntm_float_testbench.vhd
-ghdl -m --std=08 model_float_testbench
-ghdl -r --std=08 model_float_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_float_testbench.tree
+ghdl -m --std=08 ntm_float_testbench
+ghdl -r --std=08 ntm_float_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_float_testbench.tree
 pause

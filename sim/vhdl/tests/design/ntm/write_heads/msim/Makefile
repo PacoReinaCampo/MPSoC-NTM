@@ -5,7 +5,7 @@ build:
 	vcom -2008 -f system.vc
 
 simulate:
-	vsim -c -do run.do work.model_write_heads_testbench
+	vsim -c -do run.do work.ntm_write_heads_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

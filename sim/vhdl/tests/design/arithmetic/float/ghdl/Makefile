@@ -24,8 +24,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/float/ntm_float_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_float_testbench
-	ghdl -r --std=08 model_float_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_float_testbench.tree
+	ghdl -m --std=08 ntm_float_testbench
+	ghdl -r --std=08 ntm_float_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_float_testbench.tree
 
 clean:
 	rm -f *.cf *.tree

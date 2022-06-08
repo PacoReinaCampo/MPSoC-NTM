@@ -83,6 +83,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addr
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/memory/ntm_memory_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/memory/ntm_memory_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/memory/ntm_memory_testbench.vhd
-ghdl -m --std=08 model_memory_testbench
-ghdl -r --std=08 model_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_memory_testbench.tree
+ghdl -m --std=08 ntm_memory_testbench
+ghdl -r --std=08 ntm_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_memory_testbench.tree
 pause

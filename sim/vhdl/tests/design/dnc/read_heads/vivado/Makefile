@@ -48,8 +48,8 @@ build:
 	xvhdl -prj system.prj
 
 simulate:
-	xelab model_read_heads_testbench
-	xsim -R model_read_heads_testbench
+	xelab ntm_read_heads_testbench
+	xsim -R ntm_read_heads_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

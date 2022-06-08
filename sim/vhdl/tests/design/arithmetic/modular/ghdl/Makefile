@@ -28,8 +28,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/modular/ntm_modular_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_modular_testbench
-	ghdl -r --std=08 model_modular_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_modular_testbench.tree
+	ghdl -m --std=08 ntm_modular_testbench
+	ghdl -r --std=08 ntm_modular_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_modular_testbench.tree
 
 clean:
 	rm -f *.cf *.tree

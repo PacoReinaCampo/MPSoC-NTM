@@ -50,6 +50,6 @@ ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_testbench.vhd
 
-ghdl -m --std=08 model_state_outputs_testbench
-ghdl -r --std=08 model_state_outputs_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_state_outputs_testbench.tree
+ghdl -m --std=08 ntm_state_outputs_testbench
+ghdl -r --std=08 ntm_state_outputs_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_outputs_testbench.tree
 pause

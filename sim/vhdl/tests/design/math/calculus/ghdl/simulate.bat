@@ -43,6 +43,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_s
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_testbench.vhd
-ghdl -m --std=08 model_calculus_testbench
-ghdl -r --std=08 model_calculus_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_calculus_testbench.tree
+ghdl -m --std=08 ntm_calculus_testbench
+ghdl -r --std=08 ntm_calculus_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_calculus_testbench.tree
 pause

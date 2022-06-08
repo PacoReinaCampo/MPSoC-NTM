@@ -86,8 +86,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/FNN/standard/ntm_standard_fnn_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_standard_fnn_testbench
-	ghdl -r --std=08 model_standard_fnn_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_standard_fnn_testbench.tree
+	ghdl -m --std=08 ntm_standard_fnn_testbench
+	ghdl -r --std=08 ntm_standard_fnn_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_standard_fnn_testbench.tree
 
 clean:
 	rm -f *.cf *.tree

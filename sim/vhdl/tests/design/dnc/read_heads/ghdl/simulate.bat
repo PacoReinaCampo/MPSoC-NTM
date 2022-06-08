@@ -83,6 +83,6 @@ ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/read_heads/dnc
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/read_heads/dnc_read_heads_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/read_heads/dnc_read_heads_testbench.vhd
 
-ghdl -m --std=08 model_read_heads_testbench
-ghdl -r --std=08 model_read_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_read_heads_testbench.tree
+ghdl -m --std=08 ntm_read_heads_testbench
+ghdl -r --std=08 ntm_read_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_read_heads_testbench.tree
 pause

@@ -2,6 +2,6 @@
 call ../../../../../../../settings64_vivado.bat
 
 xvhdl -prj system.prj
-xelab model_float_testbench
-xsim -R model_float_testbench
+xelab ntm_float_testbench
+xsim -R ntm_float_testbench
 pause

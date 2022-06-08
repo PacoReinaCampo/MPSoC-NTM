@@ -39,8 +39,8 @@ build:
     ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_series_testbench
-	ghdl -r --std=08 model_series_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_series_testbench.tree
+	ghdl -m --std=08 ntm_series_testbench
+	ghdl -r --std=08 ntm_series_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_series_testbench.tree
 
 clean:
 	rm -f *.cf *.tree
