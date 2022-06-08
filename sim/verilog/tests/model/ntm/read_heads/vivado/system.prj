@@ -1,41 +1,41 @@
-verilog work ../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
-verilog work ../../../../../../../rtl/verilog/pkg/model_math_pkg.sv
-verilog work ../../../../../../../rtl/verilog/pkg/model_ntm_core_pkg.sv
+verilog work ../../../../../../../model/verilog/pkg/model_arithmetic_pkg.sv
+verilog work ../../../../../../../model/verilog/pkg/model_math_pkg.sv
+verilog work ../../../../../../../model/verilog/pkg/model_ntm_core_pkg.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_dot_product.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_convolution.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_cosine_similarity.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_multiplication.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_summation.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/vector/model_vector_module.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_dot_product.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_vector_convolution.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_vector_cosine_similarity.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_vector_multiplication.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_vector_summation.sv
+verilog work ../../../../../../../model/verilog/math/algebra/vector/model_vector_module.sv
 
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_convolution.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_inverse.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_multiplication.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_product.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_summation.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/matrix/model_matrix_transpose.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_convolution.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_inverse.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_multiplication.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_product.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_summation.sv
+verilog work ../../../../../../../model/verilog/math/algebra/matrix/model_matrix_transpose.sv
 
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_convolution.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_inverse.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_multiplication.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_product.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_summation.sv
-verilog work ../../../../../../../rtl/verilog/math/algebra/tensor/model_tensor_transpose.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_convolution.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_inverse.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_multiplication.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_product.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_summation.sv
+verilog work ../../../../../../../model/verilog/math/algebra/tensor/model_tensor_transpose.sv
 
-verilog work ../../../../../../../rtl/verilog/ntm/read_heads/model_reading.sv
+verilog work ../../../../../../../model/verilog/ntm/read_heads/model_reading.sv
 
 verilog work ../../../../../../../bench/verilog/tests/model/ntm/read_heads/model_read_heads_pkg.sv
 verilog work ../../../../../../../bench/verilog/tests/model/ntm/read_heads/model_read_heads_stimulus.sv

@@ -1,29 +1,29 @@
-../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
-../../../../../../../rtl/verilog/pkg/model_math_pkg.sv
+../../../../../../../model/verilog/pkg/model_arithmetic_pkg.sv
+../../../../../../../model/verilog/pkg/model_math_pkg.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_divider.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_adder.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
 
-../../../../../../../rtl/verilog/math/calculus/vector/model_vector_differentiation.sv
-../../../../../../../rtl/verilog/math/calculus/vector/model_vector_integration.sv
-../../../../../../../rtl/verilog/math/calculus/vector/model_vector_softmax.sv
+../../../../../../../model/verilog/math/calculus/vector/model_vector_differentiation.sv
+../../../../../../../model/verilog/math/calculus/vector/model_vector_integration.sv
+../../../../../../../model/verilog/math/calculus/vector/model_vector_softmax.sv
 
-../../../../../../../rtl/verilog/math/calculus/matrix/model_matrix_differentiation.sv
-../../../../../../../rtl/verilog/math/calculus/matrix/model_matrix_integration.sv
-../../../../../../../rtl/verilog/math/calculus/matrix/model_matrix_softmax.sv
+../../../../../../../model/verilog/math/calculus/matrix/model_matrix_differentiation.sv
+../../../../../../../model/verilog/math/calculus/matrix/model_matrix_integration.sv
+../../../../../../../model/verilog/math/calculus/matrix/model_matrix_softmax.sv
 
-../../../../../../../rtl/verilog/math/calculus/tensor/model_tensor_differentiation.sv
-../../../../../../../rtl/verilog/math/calculus/tensor/model_tensor_integration.sv
-../../../../../../../rtl/verilog/math/calculus/tensor/model_tensor_softmax.sv
+../../../../../../../model/verilog/math/calculus/tensor/model_tensor_differentiation.sv
+../../../../../../../model/verilog/math/calculus/tensor/model_tensor_integration.sv
+../../../../../../../model/verilog/math/calculus/tensor/model_tensor_softmax.sv
 
 ../../../../../../../bench/verilog/tests/model/math/calculus/model_calculus_pkg.sv
 ../../../../../../../bench/verilog/tests/model/math/calculus/model_calculus_stimulus.sv

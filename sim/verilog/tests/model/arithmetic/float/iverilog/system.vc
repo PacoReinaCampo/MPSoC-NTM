@@ -1,28 +1,28 @@
-../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
+../../../../../../../model/verilog/pkg/model_arithmetic_pkg.sv
 
-../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_adder.sv
-../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/integer/scalar/model_scalar_integer_divider.sv
+../../../../../../../model/verilog/arithmetic/integer/scalar/model_scalar_integer_adder.sv
+../../../../../../../model/verilog/arithmetic/integer/scalar/model_scalar_integer_multiplier.sv
+../../../../../../../model/verilog/arithmetic/integer/scalar/model_scalar_integer_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_adder.sv
-../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/integer/vector/model_vector_integer_divider.sv
+../../../../../../../model/verilog/arithmetic/integer/vector/model_vector_integer_adder.sv
+../../../../../../../model/verilog/arithmetic/integer/vector/model_vector_integer_multiplier.sv
+../../../../../../../model/verilog/arithmetic/integer/vector/model_vector_integer_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_adder.sv
-../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_divider.sv
+../../../../../../../model/verilog/arithmetic/integer/matrix/model_matrix_integer_adder.sv
+../../../../../../../model/verilog/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
+../../../../../../../model/verilog/arithmetic/integer/matrix/model_matrix_integer_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_divider.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_adder.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_divider.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_adder.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/vector/model_vector_divider.sv
 
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_adder.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_multiplier.sv
-../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_divider.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_adder.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_multiplier.sv
+../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_divider.sv
 
 ../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_pkg.sv
 ../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_stimulus.sv

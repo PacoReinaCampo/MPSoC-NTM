@@ -1,20 +1,20 @@
-verilog work ../../../../../../../rtl/verilog/pkg/model_arithmetic_pkg.sv
+verilog work ../../../../../../../model/verilog/pkg/model_arithmetic_pkg.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/scalar/model_scalar_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/vector/model_vector_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/vector/model_vector_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/matrix/model_matrix_float_divider.sv
 
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/model_tensor_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/model_tensor_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/model_tensor_float_divider.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/tensor/model_tensor_float_adder.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/tensor/model_tensor_float_multiplier.sv
+verilog work ../../../../../../../model/verilog/arithmetic/float/tensor/model_tensor_float_divider.sv
 
 verilog work ../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_pkg.sv
 verilog work ../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_stimulus.sv
