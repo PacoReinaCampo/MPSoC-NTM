@@ -43,9 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_write_heads_pkg.all;
+use work.dnc_write_heads_pkg.all;
 
-entity ntm_write_heads_stimulus is
+entity dnc_write_heads_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -91,7 +91,7 @@ entity ntm_write_heads_stimulus is
     );
 end entity;
 
-architecture ntm_write_heads_stimulus_architecture of ntm_write_heads_stimulus is
+architecture dnc_write_heads_stimulus_architecture of dnc_write_heads_stimulus is
 
   -----------------------------------------------------------------------
   -- Types

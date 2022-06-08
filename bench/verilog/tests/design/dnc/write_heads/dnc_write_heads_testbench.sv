@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_write_heads_testbench;
+module dnc_write_heads_testbench;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -137,7 +137,7 @@ module ntm_write_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // STIMULUS
-  ntm_write_heads_stimulus #(
+  dnc_write_heads_stimulus #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -214,7 +214,7 @@ module ntm_write_heads_testbench;
   );
 
   // ALLOCATION GATE
-  ntm_allocation_gate #(
+  dnc_allocation_gate #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -233,7 +233,7 @@ module ntm_write_heads_testbench;
   );
 
   // ERASE VECTOR
-  ntm_erase_vector #(
+  dnc_erase_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -256,7 +256,7 @@ module ntm_write_heads_testbench;
   );
 
   // WRITE GATE
-  ntm_write_gate #(
+  dnc_write_gate #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -275,7 +275,7 @@ module ntm_write_heads_testbench;
   );
 
   // WRITE KEY
-  ntm_write_key #(
+  dnc_write_key #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -298,7 +298,7 @@ module ntm_write_heads_testbench;
   );
 
   // WRITE STRENGTH
-  ntm_write_strength #(
+  dnc_write_strength #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -317,7 +317,7 @@ module ntm_write_heads_testbench;
   );
 
   // WRITE VECTOR
-  ntm_write_vector #(
+  dnc_write_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

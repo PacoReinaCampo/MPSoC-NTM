@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_memory_testbench;
+module dnc_memory_testbench;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -475,7 +475,7 @@ module ntm_memory_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // STIMULUS
-  ntm_memory_stimulus #(
+  dnc_memory_stimulus #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -541,7 +541,7 @@ module ntm_memory_testbench;
   );
 
   // ALLOCATION WEIGHTING
-  ntm_allocation_weighting #(
+  dnc_allocation_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -569,7 +569,7 @@ module ntm_memory_testbench;
   );
 
   // BACKWARD WEIGHTING
-  ntm_backward_weighting #(
+  dnc_backward_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -606,7 +606,7 @@ module ntm_memory_testbench;
   );
 
   // FORWARD WEIGHTING
-  ntm_forward_weighting #(
+  dnc_forward_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -640,7 +640,7 @@ module ntm_memory_testbench;
   );
 
   // MEMORY MATRIX
-  ntm_memory_matrix #(
+  dnc_memory_matrix #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -681,7 +681,7 @@ module ntm_memory_testbench;
   );
 
   // MEMORY RETENTION VECTOR
-  ntm_memory_retention_vector #(
+  dnc_memory_retention_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -717,7 +717,7 @@ module ntm_memory_testbench;
   );
 
   // PRECEDENCE WEIGHTING
-  ntm_precedence_weighting #(
+  dnc_precedence_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -747,7 +747,7 @@ module ntm_memory_testbench;
   );
 
   // READ CONTENT WEIGHTING
-  ntm_read_content_weighting #(
+  dnc_read_content_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -784,7 +784,7 @@ module ntm_memory_testbench;
   );
 
   // READ VECTORS
-  ntm_read_vectors #(
+  dnc_read_vectors #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -824,7 +824,7 @@ module ntm_memory_testbench;
   );
 
   // READ WEIGHTING
-  ntm_read_weighting #(
+  dnc_read_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -878,7 +878,7 @@ module ntm_memory_testbench;
   );
 
   // TEMPORAL LINK MATRIX
-  ntm_temporal_link_matrix #(
+  dnc_temporal_link_matrix #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -914,7 +914,7 @@ module ntm_memory_testbench;
   );
 
   // USAGE VECTOR
-  ntm_usage_vector #(
+  dnc_usage_vector #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -946,7 +946,7 @@ module ntm_memory_testbench;
   );
 
   // WRITE CONTENT WEIGHTING
-  ntm_write_content_weighting #(
+  dnc_write_content_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -983,7 +983,7 @@ module ntm_memory_testbench;
   );
 
   // WRITE WEIGHTING
-  ntm_write_weighting #(
+  dnc_write_weighting #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -1017,7 +1017,7 @@ module ntm_memory_testbench;
   );
 
   // ADDRESSING
-  ntm_addressing #(
+  dnc_addressing #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

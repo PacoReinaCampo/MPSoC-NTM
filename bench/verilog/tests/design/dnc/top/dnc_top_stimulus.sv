@@ -9,7 +9,7 @@
 //                  |_|                                                       //
 //                                                                            //
 //                                                                            //
-//              Peripheral-NTM for MPSoC                                      //
+//              Peripheral-DNC for MPSoC                                      //
 //              Neural Turing Machine for MPSoC                               //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_memory_stimulus #(
+module dnc_top_stimulus #(
   // SYSTEM-SIZE
   parameter DATA_SIZE=64,
   parameter CONTROL_SIZE=64,
@@ -47,7 +47,11 @@ module ntm_memory_stimulus #(
   parameter N=64,
   parameter W=64,
   parameter L=64,
-  parameter R=64
+  parameter R=64,
+
+  parameter STIMULUS_DNC_TOP_TEST   = 0,
+  parameter STIMULUS_DNC_TOP_CASE_0 = 0,
+  parameter STIMULUS_DNC_TOP_CASE_1 = 0
 )
   (
     // GLOBAL
@@ -55,59 +59,51 @@ module ntm_memory_stimulus #(
     output RST,
 
     // CONTROL
-    output DNC_MEMORY_START,
-    input DNC_MEMORY_READY,
+    output DNC_TOP_START,
+    input DNC_TOP_READY,
 
-    output DNC_MEMORY_K_READ_IN_I_ENABLE,
-    output DNC_MEMORY_K_READ_IN_K_ENABLE,
+    output DNC_TOP_W_IN_L_ENABLE,
+    output DNC_TOP_W_IN_X_ENABLE,
 
-    input DNC_MEMORY_K_READ_OUT_I_ENABLE,
-    input DNC_MEMORY_K_READ_OUT_K_ENABLE,
+    input DNC_TOP_W_OUT_L_ENABLE,
+    input DNC_TOP_W_OUT_X_ENABLE,
 
-    output DNC_MEMORY_BETA_READ_IN_ENABLE,
+    output DNC_TOP_K_IN_I_ENABLE,
+    output DNC_TOP_K_IN_L_ENABLE,
+    output DNC_TOP_K_IN_K_ENABLE,
 
-    input DNC_MEMORY_BETA_READ_OUT_ENABLE,
+    input DNC_TOP_K_OUT_I_ENABLE,
+    input DNC_TOP_K_OUT_L_ENABLE,
+    input DNC_TOP_K_OUT_K_ENABLE,
 
-    output DNC_MEMORY_F_READ_IN_ENABLE,
+    output DNC_TOP_U_IN_L_ENABLE,
+    output DNC_TOP_U_IN_P_ENABLE,
 
-    input DNC_MEMORY_F_READ_OUT_ENABLE,
+    input DNC_TOP_U_OUT_L_ENABLE,
+    input DNC_TOP_U_OUT_P_ENABLE,
 
-    output DNC_MEMORY_PI_READ_IN_ENABLE,
+    output DNC_TOP_B_IN_ENABLE,
 
-    input DNC_MEMORY_PI_READ_OUT_ENABLE,
+    input DNC_TOP_B_OUT_ENABLE,
 
-    output DNC_MEMORY_K_WRITE_IN_K_ENABLE,
-
-    input DNC_MEMORY_K_WRITE_OUT_K_ENABLE,
-
-    output DNC_MEMORY_E_WRITE_IN_K_ENABLE,
-
-    input DNC_MEMORY_E_WRITE_OUT_K_ENABLE,
-
-    output DNC_MEMORY_V_WRITE_IN_K_ENABLE,
-
-    input DNC_MEMORY_V_WRITE_OUT_K_ENABLE,
-
-    input DNC_MEMORY_R_OUT_I_ENABLE,
-    input DNC_MEMORY_R_OUT_K_ENABLE,
+    output DNC_TOP_X_IN_ENABLE,
+    input DNC_TOP_Y_OUT_ENABLE,
 
     // DATA
-    output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_R_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_W_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_X_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_Y_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_N_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_W_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_L_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_SIZE_R_IN,
 
-    output [DATA_SIZE-1:0] DNC_MEMORY_K_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_BETA_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_F_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_PI_READ_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_W_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_K_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_U_IN,
+    output [DATA_SIZE-1:0] DNC_TOP_B_IN,
 
-    output [DATA_SIZE-1:0] DNC_MEMORY_K_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_BETA_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_E_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_V_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_GA_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_GW_WRITE_IN,
-
-    input [DATA_SIZE-1:0] DNC_MEMORY_R_OUT
+    output [DATA_SIZE-1:0] DNC_TOP_X_IN,
+    input [DATA_SIZE-1:0] DNC_TOP_Y_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

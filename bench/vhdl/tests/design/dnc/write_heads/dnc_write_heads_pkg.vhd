@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_read_heads_pkg is
+package dnc_write_heads_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -137,15 +137,15 @@ package ntm_read_heads_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_READ_HEADS_TEST   : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_1 : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_HEADS_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_read_heads_stimulus is
+  component dnc_write_heads_stimulus is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
@@ -163,38 +163,31 @@ package ntm_read_heads_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- READ HEADS
+      -- WRITE HEADS
       -- CONTROL
-      DNC_READ_HEADS_START : out std_logic;
-      DNC_READ_HEADS_READY : in  std_logic;
+      DNC_WRITE_HEADS_START : out std_logic;
+      DNC_WRITE_HEADS_READY : in  std_logic;
 
-      DNC_READ_HEADS_RHO_IN_I_ENABLE : out std_logic;
-      DNC_READ_HEADS_RHO_IN_M_ENABLE : out std_logic;
+      DNC_WRITE_HEADS_XI_IN_ENABLE : out std_logic;
 
-      DNC_READ_HEADS_RHO_OUT_I_ENABLE : in std_logic;
-      DNC_READ_HEADS_RHO_OUT_M_ENABLE : in std_logic;
+      DNC_WRITE_HEADS_XI_OUT_ENABLE : in std_logic;
 
-      DNC_READ_HEADS_K_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
-      DNC_READ_HEADS_K_OUT_K_ENABLE : in std_logic;  -- for k in 0 to W-1
-
-      DNC_READ_HEADS_BETA_OUT_ENABLE : in std_logic;  -- for i in 0 to R-1
-
-      DNC_READ_HEADS_F_OUT_ENABLE : in std_logic;  -- for i in 0 to R-1
-
-      DNC_READ_HEADS_PI_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
-      DNC_READ_HEADS_PI_OUT_P_ENABLE : in std_logic;  -- for p in 0 to 2
+      DNC_WRITE_HEADS_K_OUT_ENABLE : in std_logic;
+      DNC_WRITE_HEADS_E_OUT_ENABLE : in std_logic;
+      DNC_WRITE_HEADS_V_OUT_ENABLE : in std_logic;
 
       -- DATA
-      DNC_READ_HEADS_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_READ_HEADS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_READ_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_READ_HEADS_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_XI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_READ_HEADS_K_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_READ_HEADS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_READ_HEADS_F_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_READ_HEADS_PI_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0)
+      DNC_WRITE_HEADS_K_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_E_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_V_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_GA_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_WRITE_HEADS_GW_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -202,4 +195,4 @@ package ntm_read_heads_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_read_heads_pkg;
+end dnc_write_heads_pkg;

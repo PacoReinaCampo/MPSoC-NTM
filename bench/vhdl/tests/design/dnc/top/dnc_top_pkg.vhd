@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_write_heads_pkg is
+package dnc_top_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -67,14 +67,6 @@ package ntm_write_heads_pkg is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
-
-  -- SYSTEM-SIZE
-  constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-  constant Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-  constant N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-  constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-  constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-  constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- INTEGERS
   constant INT_P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
@@ -137,15 +129,15 @@ package ntm_write_heads_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_WRITE_HEADS_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_HEADS_CASE_1 : boolean := false;
+  signal STIMULUS_DNC_TOP_TEST   : boolean := false;
+  signal STIMULUS_DNC_TOP_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_TOP_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_write_heads_stimulus is
+  component dnc_top_stimulus is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
@@ -163,31 +155,89 @@ package ntm_write_heads_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- WRITE HEADS
       -- CONTROL
-      DNC_WRITE_HEADS_START : out std_logic;
-      DNC_WRITE_HEADS_READY : in  std_logic;
+      DNC_TOP_START : out std_logic;
+      DNC_TOP_READY : in  std_logic;
 
-      DNC_WRITE_HEADS_XI_IN_ENABLE : out std_logic;
+      DNC_TOP_W_IN_L_ENABLE : out std_logic;
+      DNC_TOP_W_IN_X_ENABLE : out std_logic;
 
-      DNC_WRITE_HEADS_XI_OUT_ENABLE : in std_logic;
+      DNC_TOP_W_OUT_L_ENABLE : in std_logic;
+      DNC_TOP_W_OUT_X_ENABLE : in std_logic;
 
-      DNC_WRITE_HEADS_K_OUT_ENABLE : in std_logic;
-      DNC_WRITE_HEADS_E_OUT_ENABLE : in std_logic;
-      DNC_WRITE_HEADS_V_OUT_ENABLE : in std_logic;
+      DNC_TOP_K_IN_I_ENABLE : out std_logic;
+      DNC_TOP_K_IN_L_ENABLE : out std_logic;
+      DNC_TOP_K_IN_K_ENABLE : out std_logic;
+
+      DNC_TOP_K_OUT_I_ENABLE : in std_logic;
+      DNC_TOP_K_OUT_L_ENABLE : in std_logic;
+      DNC_TOP_K_OUT_K_ENABLE : in std_logic;
+
+      DNC_TOP_U_IN_L_ENABLE : out std_logic;
+      DNC_TOP_U_IN_P_ENABLE : out std_logic;
+
+      DNC_TOP_U_OUT_L_ENABLE : in std_logic;
+      DNC_TOP_U_OUT_P_ENABLE : in std_logic;
+
+      DNC_TOP_V_IN_L_ENABLE : out std_logic;
+      DNC_TOP_V_IN_S_ENABLE : out std_logic;
+
+      DNC_TOP_V_OUT_L_ENABLE : in std_logic;
+      DNC_TOP_V_OUT_S_ENABLE : in std_logic;
+
+      DNC_TOP_D_IN_I_ENABLE : out std_logic;
+      DNC_TOP_D_IN_L_ENABLE : out std_logic;
+      DNC_TOP_D_IN_M_ENABLE : out std_logic;
+
+      DNC_TOP_D_OUT_I_ENABLE : in std_logic;
+      DNC_TOP_D_OUT_L_ENABLE : in std_logic;
+      DNC_TOP_D_OUT_M_ENABLE : in std_logic;
+
+      DNC_TOP_B_IN_ENABLE : out std_logic;
+
+      DNC_TOP_B_OUT_ENABLE : in std_logic;
+
+      DNC_TOP_X_IN_ENABLE : out std_logic;
+
+      DNC_TOP_X_OUT_ENABLE : in std_logic;
+
+      DNC_TOP_P_IN_I_ENABLE : out std_logic;
+      DNC_TOP_P_IN_Y_ENABLE : out std_logic;
+      DNC_TOP_P_IN_K_ENABLE : out std_logic;
+
+      DNC_TOP_P_OUT_I_ENABLE : in std_logic;
+      DNC_TOP_P_OUT_Y_ENABLE : in std_logic;
+      DNC_TOP_P_OUT_K_ENABLE : in std_logic;
+
+      DNC_TOP_Q_IN_Y_ENABLE : out std_logic;
+      DNC_TOP_Q_IN_L_ENABLE : out std_logic;
+
+      DNC_TOP_Q_OUT_Y_ENABLE : in std_logic;
+      DNC_TOP_Q_OUT_L_ENABLE : in std_logic;
+
+      DNC_TOP_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
-      DNC_WRITE_HEADS_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_Y_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_TOP_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_WRITE_HEADS_XI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_WRITE_HEADS_K_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_E_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_V_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_GA_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_WRITE_HEADS_GW_OUT   : in std_logic_vector(DATA_SIZE-1 downto 0)
+      DNC_TOP_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_TOP_P_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_TOP_Q_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_TOP_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -195,4 +245,4 @@ package ntm_write_heads_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_write_heads_pkg;
+end dnc_top_pkg;

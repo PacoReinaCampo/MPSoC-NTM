@@ -41,10 +41,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_dnc_core_pkg.all;
-use work.ntm_read_heads_pkg.all;
+use work.dnc_core_pkg.all;
+use work.dnc_read_heads_pkg.all;
 
-entity ntm_read_heads_testbench is
+entity dnc_read_heads_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -62,9 +62,9 @@ entity ntm_read_heads_testbench is
     ENABLE_DNC_READ_HEADS_CASE_0 : boolean := false;
     ENABLE_DNC_READ_HEADS_CASE_1 : boolean := false
     );
-end ntm_read_heads_testbench;
+end dnc_read_heads_testbench;
 
-architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench is
+architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -114,7 +114,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  read_heads_stimulus : ntm_read_heads_stimulus
+  read_heads_stimulus : dnc_read_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -167,8 +167,8 @@ begin
       );
 
   -- READ HEADS
-  ntm_read_heads_test : if (ENABLE_DNC_READ_HEADS_TEST) generate
-    read_heads : ntm_read_heads
+  dnc_read_heads_test : if (ENABLE_DNC_READ_HEADS_TEST) generate
+    read_heads : dnc_read_heads
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -210,6 +210,6 @@ begin
         F_OUT    => f_out_read_heads,
         PI_OUT   => pi_out_read_heads
         );
-  end generate ntm_read_heads_test;
+  end generate dnc_read_heads_test;
 
-end ntm_read_heads_testbench_architecture;
+end dnc_read_heads_testbench_architecture;

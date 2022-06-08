@@ -42,10 +42,10 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
-use work.ntm_dnc_core_pkg.all;
-use work.ntm_top_pkg.all;
+use work.dnc_core_pkg.all;
+use work.dnc_top_pkg.all;
 
-entity ntm_top_testbench is
+entity dnc_top_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -63,9 +63,9 @@ entity ntm_top_testbench is
     ENABLE_DNC_TOP_CASE_0 : boolean := false;
     ENABLE_DNC_TOP_CASE_1 : boolean := false
     );
-end ntm_top_testbench;
+end dnc_top_testbench;
 
-architecture ntm_top_testbench_architecture of ntm_top_testbench is
+architecture dnc_top_testbench_architecture of dnc_top_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -166,7 +166,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  top_stimulus : ntm_top_stimulus
+  top_stimulus : dnc_top_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -270,8 +270,8 @@ begin
       );
 
   -- TOP
-  ntm_top_test : if (ENABLE_DNC_TOP_TEST) generate
-    top : ntm_top
+  dnc_top_test : if (ENABLE_DNC_TOP_TEST) generate
+    top : dnc_top
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -365,6 +365,6 @@ begin
 
         Y_OUT => y_out_top
         );
-  end generate ntm_top_test;
+  end generate dnc_top_test;
 
-end ntm_top_testbench_architecture;
+end dnc_top_testbench_architecture;

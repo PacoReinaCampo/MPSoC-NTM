@@ -43,9 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_memory_pkg.all;
+use work.dnc_memory_pkg.all;
 
-entity ntm_memory_stimulus is
+entity dnc_memory_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -168,7 +168,7 @@ entity ntm_memory_stimulus is
     );
 end entity;
 
-architecture ntm_memory_stimulus_architecture of ntm_memory_stimulus is
+architecture dnc_memory_stimulus_architecture of dnc_memory_stimulus is
 
   -----------------------------------------------------------------------
   -- Types

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_top_testbench;
+module dnc_top_testbench;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -124,7 +124,7 @@ module ntm_top_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // STIMULUS
-  ntm_top_stimulus #(
+  dnc_top_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
@@ -195,7 +195,7 @@ module ntm_top_testbench;
   );
 
   // TOP
-  ntm_top #(
+  dnc_top #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

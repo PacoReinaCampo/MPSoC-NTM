@@ -41,10 +41,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_dnc_core_pkg.all;
-use work.ntm_memory_pkg.all;
+use work.dnc_core_pkg.all;
+use work.dnc_memory_pkg.all;
 
-entity ntm_memory_testbench is
+entity dnc_memory_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -106,9 +106,9 @@ entity ntm_memory_testbench is
     ENABLE_DNC_MEMORY_WRITE_WEIGHTING_CASE_1         : boolean := false;
     ENABLE_DNC_MEMORY_ADDRESSING_CASE_1              : boolean := false
     );
-end ntm_memory_testbench;
+end dnc_memory_testbench;
 
-architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
+architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -550,7 +550,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  memory_stimulus : ntm_memory_stimulus
+  memory_stimulus : dnc_memory_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -673,8 +673,8 @@ begin
       );
 
   -- ALLOCATION WEIGHTING
-  ntm_allocation_weighting_test : if (ENABLE_DNC_MEMORY_ALLOCATION_WEIGHTING_TEST) generate
-    allocation_weighting : ntm_allocation_weighting
+  dnc_allocation_weighting_test : if (ENABLE_DNC_MEMORY_ALLOCATION_WEIGHTING_TEST) generate
+    allocation_weighting : dnc_allocation_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -701,11 +701,11 @@ begin
 
         A_OUT => a_out_allocation_weighting
         );
-  end generate ntm_allocation_weighting_test;
+  end generate dnc_allocation_weighting_test;
 
   -- BACKWARD WEIGHTING
-  ntm_backward_weighting_test : if (ENABLE_DNC_MEMORY_BACKWARD_WEIGHTING_TEST) generate
-    backward_weighting : ntm_backward_weighting
+  dnc_backward_weighting_test : if (ENABLE_DNC_MEMORY_BACKWARD_WEIGHTING_TEST) generate
+    backward_weighting : dnc_backward_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -744,11 +744,11 @@ begin
 
         B_OUT => b_out_backward_weighting
         );
-  end generate ntm_backward_weighting_test;
+  end generate dnc_backward_weighting_test;
 
   -- FORWARD WEIGHTING
-  ntm_forward_weighting_test : if (ENABLE_DNC_MEMORY_FORWARD_WEIGHTING_TEST) generate
-    forward_weighting : ntm_forward_weighting
+  dnc_forward_weighting_test : if (ENABLE_DNC_MEMORY_FORWARD_WEIGHTING_TEST) generate
+    forward_weighting : dnc_forward_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -787,11 +787,11 @@ begin
 
         F_OUT => f_out_forward_weighting
         );
-  end generate ntm_forward_weighting_test;
+  end generate dnc_forward_weighting_test;
 
   -- MEMORY MATRIX
-  ntm_memory_matrix_test : if (ENABLE_DNC_MEMORY_MATRIX_TEST) generate
-    memory_matrix : ntm_memory_matrix
+  dnc_memory_matrix_test : if (ENABLE_DNC_MEMORY_MATRIX_TEST) generate
+    memory_matrix : dnc_memory_matrix
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -831,11 +831,11 @@ begin
 
         M_OUT => m_out_memory_matrix
         );
-  end generate ntm_memory_matrix_test;
+  end generate dnc_memory_matrix_test;
 
   -- MEMORY RETENTION VECTOR
-  ntm_memory_retention_vector_test : if (ENABLE_DNC_MEMORY_RETENTION_VECTOR_TEST) generate
-    memory_retention_vector : ntm_memory_retention_vector
+  dnc_memory_retention_vector_test : if (ENABLE_DNC_MEMORY_RETENTION_VECTOR_TEST) generate
+    memory_retention_vector : dnc_memory_retention_vector
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -870,11 +870,11 @@ begin
 
         PSI_OUT => psi_out_memory_retention_vector
         );
-  end generate ntm_memory_retention_vector_test;
+  end generate dnc_memory_retention_vector_test;
 
   -- PRECEDENCE WEIGHTING
-  ntm_precedence_weighting_test : if (ENABLE_DNC_MEMORY_PRECEDENCE_WEIGHTING_TEST) generate
-    precedence_weighting : ntm_precedence_weighting
+  dnc_precedence_weighting_test : if (ENABLE_DNC_MEMORY_PRECEDENCE_WEIGHTING_TEST) generate
+    precedence_weighting : dnc_precedence_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -902,11 +902,11 @@ begin
 
         P_OUT => p_out_precedence_weighting
         );
-  end generate ntm_precedence_weighting_test;
+  end generate dnc_precedence_weighting_test;
 
   -- READ CONTENT WEIGHTING
-  ntm_read_content_weighting_test : if (ENABLE_DNC_MEMORY_READ_CONTENT_WEIGHTING_TEST) generate
-    read_content_weighting : ntm_read_content_weighting
+  dnc_read_content_weighting_test : if (ENABLE_DNC_MEMORY_READ_CONTENT_WEIGHTING_TEST) generate
+    read_content_weighting : dnc_read_content_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -942,11 +942,11 @@ begin
 
         C_OUT => c_out_read_content_weighting
         );
-  end generate ntm_read_content_weighting_test;
+  end generate dnc_read_content_weighting_test;
 
   -- READ VECTORS
-  ntm_read_vectors_test : if (ENABLE_DNC_MEMORY_READ_VECTORS_TEST) generate
-    read_vectors : ntm_read_vectors
+  dnc_read_vectors_test : if (ENABLE_DNC_MEMORY_READ_VECTORS_TEST) generate
+    read_vectors : dnc_read_vectors
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -985,11 +985,11 @@ begin
 
         R_OUT => r_out_read_vectors
         );
-  end generate ntm_read_vectors_test;
+  end generate dnc_read_vectors_test;
 
   -- READ WEIGHTING
-  ntm_read_weighting_test : if (ENABLE_DNC_MEMORY_READ_WEIGHTING_TEST) generate
-    read_weighting : ntm_read_weighting
+  dnc_read_weighting_test : if (ENABLE_DNC_MEMORY_READ_WEIGHTING_TEST) generate
+    read_weighting : dnc_read_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1042,11 +1042,11 @@ begin
 
         W_OUT => w_out_read_weighting
         );
-  end generate ntm_read_weighting_test;
+  end generate dnc_read_weighting_test;
 
   -- SORT VECTOR
-  ntm_sort_vector_test : if (ENABLE_DNC_MEMORY_SORT_VECTOR_TEST) generate
-    sort_vector : ntm_sort_vector
+  dnc_sort_vector_test : if (ENABLE_DNC_MEMORY_SORT_VECTOR_TEST) generate
+    sort_vector : dnc_sort_vector
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1073,11 +1073,11 @@ begin
 
         PHI_OUT => phi_out_sort_vector
         );
-  end generate ntm_sort_vector_test;
+  end generate dnc_sort_vector_test;
 
   -- TEMPORAL LINK MATRIX
-  ntm_temporal_link_matrix_test : if (ENABLE_DNC_MEMORY_TEMPORAL_LINK_MATRIX_TEST) generate
-    temporal_link_matrix : ntm_temporal_link_matrix
+  dnc_temporal_link_matrix_test : if (ENABLE_DNC_MEMORY_TEMPORAL_LINK_MATRIX_TEST) generate
+    temporal_link_matrix : dnc_temporal_link_matrix
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1112,11 +1112,11 @@ begin
 
         L_OUT => l_out_temporal_link_matrix
         );
-  end generate ntm_temporal_link_matrix_test;
+  end generate dnc_temporal_link_matrix_test;
 
   -- USAGE VECTOR
-  ntm_usage_vector_test : if (ENABLE_DNC_MEMORY_USAGE_VECTOR_TEST) generate
-    usage_vector : ntm_usage_vector
+  dnc_usage_vector_test : if (ENABLE_DNC_MEMORY_USAGE_VECTOR_TEST) generate
+    usage_vector : dnc_usage_vector
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1147,11 +1147,11 @@ begin
 
         U_OUT => u_out_usage_vector
         );
-  end generate ntm_usage_vector_test;
+  end generate dnc_usage_vector_test;
 
   -- WRITE CONTENT WEIGHTING
-  ntm_write_content_weighting_test : if (ENABLE_DNC_MEMORY_WRITE_CONTENT_WEIGHTING_TEST) generate
-    write_content_weighting : ntm_write_content_weighting
+  dnc_write_content_weighting_test : if (ENABLE_DNC_MEMORY_WRITE_CONTENT_WEIGHTING_TEST) generate
+    write_content_weighting : dnc_write_content_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1185,11 +1185,11 @@ begin
 
         C_OUT => c_out_content_weighting
         );
-  end generate ntm_write_content_weighting_test;
+  end generate dnc_write_content_weighting_test;
 
   -- WRITE WEIGHTING
-  ntm_write_weighting_test : if (ENABLE_DNC_MEMORY_WRITE_WEIGHTING_TEST) generate
-    write_weighting : ntm_write_weighting
+  dnc_write_weighting_test : if (ENABLE_DNC_MEMORY_WRITE_WEIGHTING_TEST) generate
+    write_weighting : dnc_write_weighting
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1222,11 +1222,11 @@ begin
 
         W_OUT => w_out_write_weighting
         );
-  end generate ntm_write_weighting_test;
+  end generate dnc_write_weighting_test;
 
   -- ADDRESSING
-  ntm_addressing_test : if (ENABLE_DNC_MEMORY_ADDRESSING_TEST) generate
-    addressing : ntm_addressing
+  dnc_addressing_test : if (ENABLE_DNC_MEMORY_ADDRESSING_TEST) generate
+    addressing : dnc_addressing
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1290,6 +1290,6 @@ begin
 
         R_OUT => r_out_addressing
         );
-  end generate ntm_addressing_test;
+  end generate dnc_addressing_test;
 
-end ntm_memory_testbench_architecture;
+end dnc_memory_testbench_architecture;

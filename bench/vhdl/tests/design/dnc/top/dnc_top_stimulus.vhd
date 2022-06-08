@@ -43,9 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_top_pkg.all;
+use work.dnc_top_pkg.all;
 
-entity ntm_top_stimulus is
+entity dnc_top_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -149,7 +149,7 @@ entity ntm_top_stimulus is
     );
 end entity;
 
-architecture ntm_top_stimulus_architecture of ntm_top_stimulus is
+architecture dnc_top_stimulus_architecture of dnc_top_stimulus is
 
   -----------------------------------------------------------------------
   -- Types

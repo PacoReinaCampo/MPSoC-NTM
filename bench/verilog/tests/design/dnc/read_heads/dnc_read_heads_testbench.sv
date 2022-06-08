@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_read_heads_testbench;
+module dnc_read_heads_testbench;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -124,7 +124,7 @@ module ntm_read_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // STIMULUS
-  ntm_read_heads_memory_stimulus #(
+  dnc_read_heads_memory_stimulus #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -192,7 +192,7 @@ module ntm_read_heads_testbench;
   );
 
   // FREE GATES
-  ntm_free_gates #(
+  dnc_free_gates #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -215,7 +215,7 @@ module ntm_read_heads_testbench;
   );
 
   // READ KEYS
-  ntm_read_keys #(
+  dnc_read_keys #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -241,7 +241,7 @@ module ntm_read_heads_testbench;
   );
 
   // READ MODES
-  ntm_read_modes #(
+  dnc_read_modes #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
@@ -266,7 +266,7 @@ module ntm_read_heads_testbench;
   );
 
   // READ STRENGTHS
-  ntm_read_strengths #(
+  dnc_read_strengths #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )

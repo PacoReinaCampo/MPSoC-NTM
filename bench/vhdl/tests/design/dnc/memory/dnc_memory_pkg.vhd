@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_memory_pkg is
+package dnc_memory_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -149,7 +149,7 @@ package ntm_memory_pkg is
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_memory_stimulus is
+  component dnc_memory_stimulus is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
@@ -276,4 +276,4 @@ package ntm_memory_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_memory_pkg;
+end dnc_memory_pkg;

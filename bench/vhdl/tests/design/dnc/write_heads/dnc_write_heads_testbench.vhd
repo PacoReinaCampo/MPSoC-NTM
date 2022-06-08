@@ -41,10 +41,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_dnc_core_pkg.all;
-use work.ntm_write_heads_pkg.all;
+use work.dnc_core_pkg.all;
+use work.dnc_write_heads_pkg.all;
 
-entity ntm_write_heads_testbench is
+entity dnc_write_heads_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -62,9 +62,9 @@ entity ntm_write_heads_testbench is
     ENABLE_DNC_WRITE_HEADS_CASE_0 : boolean := false;
     ENABLE_DNC_WRITE_HEADS_CASE_1 : boolean := false
     );
-end ntm_write_heads_testbench;
+end dnc_write_heads_testbench;
 
-architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench is
+architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -107,7 +107,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  write_heads_stimulus : ntm_write_heads_stimulus
+  write_heads_stimulus : dnc_write_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -153,8 +153,8 @@ begin
       );
 
   -- WRITE HEADS
-  ntm_write_heads_test : if (ENABLE_DNC_WRITE_HEADS_TEST) generate
-    WRITE_HEADS : ntm_write_heads
+  dnc_write_heads_test : if (ENABLE_DNC_WRITE_HEADS_TEST) generate
+    WRITE_HEADS : dnc_write_heads
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -189,6 +189,6 @@ begin
         GA_OUT   => ga_out_write_heads,
         GW_OUT   => gw_out_write_heads
         );
-  end generate ntm_write_heads_test;
+  end generate dnc_write_heads_test;
 
-end ntm_write_heads_testbench_architecture;
+end dnc_write_heads_testbench_architecture;
