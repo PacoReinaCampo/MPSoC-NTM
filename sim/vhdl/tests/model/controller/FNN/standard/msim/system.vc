@@ -88,6 +88,6 @@
 
 ../../../../../../../../model/vhdl/controller/FNN/standard/model_controller.vhd
 
-../../../../../../../../bench/vhdl/tests/controller/FNN/standard/model_standard_fnn_pkg.vhd
-../../../../../../../../bench/vhdl/tests/controller/FNN/standard/model_standard_fnn_stimulus.vhd
-../../../../../../../../bench/vhdl/tests/controller/FNN/standard/model_standard_fnn_testbench.vhd
+../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_pkg.vhd
+../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_stimulus.vhd
+../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_testbench.vhd

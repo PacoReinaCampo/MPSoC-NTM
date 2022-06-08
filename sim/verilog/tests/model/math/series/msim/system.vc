@@ -31,6 +31,6 @@
 ../../../../../../../rtl/verilog/math/series/matrix/model_matrix_sinh_function.sv
 ../../../../../../../rtl/verilog/math/series/matrix/model_matrix_tanh_function.sv
 
-../../../../../../../bench/verilog/tests/math/series/model_series_pkg.sv
-../../../../../../../bench/verilog/tests/math/series/model_series_stimulus.sv
-../../../../../../../bench/verilog/tests/math/series/model_series_testbench.sv
+../../../../../../../bench/verilog/tests/model/math/series/model_series_pkg.sv
+../../../../../../../bench/verilog/tests/model/math/series/model_series_stimulus.sv
+../../../../../../../bench/verilog/tests/model/math/series/model_series_testbench.sv

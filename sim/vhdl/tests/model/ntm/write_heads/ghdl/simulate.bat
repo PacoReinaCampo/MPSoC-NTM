@@ -41,9 +41,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/math/algebra/tensor/model_tenso
 ghdl -a --std=08 ../../../../../../../model/vhdl/ntm/write_heads/model_writing.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/ntm/write_heads/model_erasing.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/model_write_heads_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/model_write_heads_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/model_write_heads_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_testbench.vhd
 ghdl -m --std=08 model_write_heads_testbench
 ghdl -r --std=08 model_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_write_heads_testbench.tree
 pause

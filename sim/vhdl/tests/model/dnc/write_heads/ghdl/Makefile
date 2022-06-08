@@ -78,9 +78,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/math/calculus/tensor/model_tensor_softmax.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/write_heads/model_write_heads.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/model_write_heads_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/model_write_heads_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/write_heads/model_write_heads_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/write_heads/model_write_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/write_heads/model_write_heads_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/write_heads/model_write_heads_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_write_heads_testbench

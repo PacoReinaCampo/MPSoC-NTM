@@ -44,6 +44,6 @@
 ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_output.vhd
 ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_state.vhd
 
-../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_pkg.vhd
-../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_stimulus.vhd
-../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_testbench.vhd
+../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_pkg.vhd
+../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_stimulus.vhd
+../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_testbench.vhd

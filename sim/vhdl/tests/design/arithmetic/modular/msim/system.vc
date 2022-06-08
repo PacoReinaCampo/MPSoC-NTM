@@ -20,6 +20,6 @@
 ../../../../../../../rtl/vhdl/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.vhd
 ../../../../../../../rtl/vhdl/arithmetic/modular/tensor/ntm_tensor_modular_inverter.vhd
 
-../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_pkg.vhd
-../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_stimulus.vhd
-../../../../../../../bench/vhdl/tests/arithmetic/modular/ntm_modular_testbench.vhd
+../../../../../../../bench/vhdl/tests/design/arithmetic/modular/ntm_modular_pkg.vhd
+../../../../../../../bench/vhdl/tests/design/arithmetic/modular/ntm_modular_stimulus.vhd
+../../../../../../../bench/vhdl/tests/design/arithmetic/modular/ntm_modular_testbench.vhd

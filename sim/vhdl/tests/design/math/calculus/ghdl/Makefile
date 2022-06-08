@@ -40,9 +40,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/calculus/ntm_calculus_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_calculus_testbench

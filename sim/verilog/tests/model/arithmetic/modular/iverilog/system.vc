@@ -15,6 +15,6 @@
 ../../../../../../../rtl/verilog/arithmetic/modular/matrix/model_matrix_modular_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/modular/matrix/model_matrix_modular_inverter.sv
 
-../../../../../../../bench/verilog/tests/arithmetic/modular/model_modular_pkg.sv
-../../../../../../../bench/verilog/tests/arithmetic/modular/model_modular_stimulus.sv
-../../../../../../../bench/verilog/tests/arithmetic/modular/model_modular_testbench.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/modular/model_modular_pkg.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/modular/model_modular_stimulus.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/modular/model_modular_testbench.sv

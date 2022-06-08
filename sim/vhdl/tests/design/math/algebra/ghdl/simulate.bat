@@ -41,9 +41,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_pr
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/algebra/ntm_algebra_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/algebra/ntm_algebra_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/algebra/ntm_algebra_testbench.vhd
 ghdl -m --std=08 model_algebra_testbench
 ghdl -r --std=08 model_algebra_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_algebra_testbench.tree
 pause

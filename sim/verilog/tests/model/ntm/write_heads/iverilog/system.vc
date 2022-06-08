@@ -71,6 +71,6 @@
 ../../../../../../../rtl/verilog/ntm/write_heads/model_writing.sv
 ../../../../../../../rtl/verilog/ntm/write_heads/model_erasing.sv
 
-../../../../../../../bench/verilog/tests/ntm/write_heads/model_write_heads_pkg.sv
-../../../../../../../bench/verilog/tests/ntm/write_heads/model_write_heads_stimulus.sv
-../../../../../../../bench/verilog/tests/ntm/write_heads/model_write_heads_testbench.sv
+../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_pkg.sv
+../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_stimulus.sv
+../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_testbench.sv

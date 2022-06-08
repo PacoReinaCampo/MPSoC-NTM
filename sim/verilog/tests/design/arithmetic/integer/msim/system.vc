@@ -16,6 +16,6 @@
 ../../../../../../../rtl/verilog/arithmetic/integer/tensor/ntm_tensor_integer_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/integer/tensor/ntm_tensor_integer_divider.sv
 
-../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_pkg.sv
-../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_stimulus.sv
-../../../../../../../bench/verilog/tests/arithmetic/integer/ntm_integer_testbench.sv
+../../../../../../../bench/verilog/tests/design/arithmetic/integer/ntm_integer_pkg.sv
+../../../../../../../bench/verilog/tests/design/arithmetic/integer/ntm_integer_stimulus.sv
+../../../../../../../bench/verilog/tests/design/arithmetic/integer/ntm_integer_testbench.sv

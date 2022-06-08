@@ -43,6 +43,6 @@
 
 ../../../../../../../model/vhdl/ntm/read_heads/model_reading.vhd
 
-../../../../../../../bench/vhdl/tests/ntm/read_heads/model_read_heads_pkg.vhd
-../../../../../../../bench/vhdl/tests/ntm/read_heads/model_read_heads_stimulus.vhd
-../../../../../../../bench/vhdl/tests/ntm/read_heads/model_read_heads_testbench.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_pkg.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_stimulus.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_testbench.vhd

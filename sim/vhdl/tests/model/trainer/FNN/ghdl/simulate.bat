@@ -81,9 +81,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/trainer/FNN/model_trainer.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/controller/FNN/convolutional/model_controller.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/model_trainer_fnn_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/model_trainer_fnn_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/trainer/FNN/model_trainer_fnn_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_testbench.vhd
 
 ghdl -m --std=08 model_trainer_fnn_testbench
 ghdl -r --std=08 model_trainer_fnn_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_trainer_fnn_testbench.tree

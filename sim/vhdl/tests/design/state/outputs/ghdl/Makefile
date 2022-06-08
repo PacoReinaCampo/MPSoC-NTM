@@ -46,9 +46,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_output.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_state.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_state_outputs_testbench

@@ -16,6 +16,6 @@ verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/ntm_tensor
 verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/ntm_tensor_float_multiplier.sv
 verilog work ../../../../../../../rtl/verilog/arithmetic/float/tensor/ntm_tensor_float_divider.sv
 
-verilog work ../../../../../../../bench/verilog/tests/arithmetic/float/ntm_float_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/arithmetic/float/ntm_float_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/arithmetic/float/ntm_float_testbench.sv
+verilog work ../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_pkg.sv
+verilog work ../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_stimulus.sv
+verilog work ../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_testbench.sv

@@ -34,9 +34,9 @@ build:
     ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_sinh_function.vhd
     ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_tanh_function.vhd
 
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/series/ntm_series_pkg.vhd
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/series/ntm_series_stimulus.vhd
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/series/ntm_series_testbench.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_pkg.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_stimulus.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_series_testbench

@@ -91,6 +91,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighti
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_weighting.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/dnc/memory/dnc_memory_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_testbench.vhd

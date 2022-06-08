@@ -78,6 +78,6 @@ verilog work ../../../../../../../../rtl/verilog/trainer/FNN/ntm_trainer.sv
 
 verilog work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_controller.sv
 
-verilog work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
-verilog work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
-verilog work ../../../../../../../../bench/verilog/tests/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
+verilog work ../../../../../../../../bench/verilog/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
+verilog work ../../../../../../../../bench/verilog/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
+verilog work ../../../../../../../../bench/verilog/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv

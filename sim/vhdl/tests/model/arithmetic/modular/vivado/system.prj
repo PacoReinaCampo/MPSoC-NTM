@@ -20,6 +20,6 @@ vhdl2008 work ../../../../../../../model/vhdl/arithmetic/modular/tensor/model_te
 vhdl2008 work ../../../../../../../model/vhdl/arithmetic/modular/tensor/model_tensor_modular_multiplier.vhd
 vhdl2008 work ../../../../../../../model/vhdl/arithmetic/modular/tensor/model_tensor_modular_inverter.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/model_modular_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/model_modular_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/arithmetic/modular/model_modular_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/arithmetic/modular/model_modular_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/arithmetic/modular/model_modular_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/arithmetic/modular/model_modular_testbench.vhd

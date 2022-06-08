@@ -31,6 +31,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_logari
 vhdl2008 work ../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/series/matrix/ntm_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/math/series/ntm_series_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/math/series/ntm_series_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/math/series/ntm_series_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/design/math/series/ntm_series_testbench.vhd

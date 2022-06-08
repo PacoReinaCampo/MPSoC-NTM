@@ -111,6 +111,6 @@
 ../../../../../../../model/vhdl/ntm/top/model_output_vector.vhd
 ../../../../../../../model/vhdl/ntm/top/model_top.vhd
 
-../../../../../../../bench/vhdl/tests/ntm/top/model_top_pkg.vhd
-../../../../../../../bench/vhdl/tests/ntm/top/model_top_stimulus.vhd
-../../../../../../../bench/vhdl/tests/ntm/top/model_top_testbench.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/top/model_top_pkg.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/top/model_top_stimulus.vhd
+../../../../../../../bench/vhdl/tests/model/ntm/top/model_top_testbench.vhd

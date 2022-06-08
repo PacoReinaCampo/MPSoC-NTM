@@ -77,6 +77,6 @@ verilog work ../../../../../../../rtl/verilog/math/calculus/tensor/ntm_tensor_so
 verilog work ../../../../../../../rtl/verilog/ntm/memory/ntm_addressing.sv
 verilog work ../../../../../../../rtl/verilog/ntm/memory/ntm_content_based_addressing.sv
 
-verilog work ../../../../../../../bench/verilog/tests/ntm/memory/ntm_memory_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/ntm/memory/ntm_memory_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/ntm/memory/ntm_memory_testbench.sv
+verilog work ../../../../../../../bench/verilog/tests/design/ntm/memory/ntm_memory_pkg.sv
+verilog work ../../../../../../../bench/verilog/tests/design/ntm/memory/ntm_memory_stimulus.sv
+verilog work ../../../../../../../bench/verilog/tests/design/ntm/memory/ntm_memory_testbench.sv

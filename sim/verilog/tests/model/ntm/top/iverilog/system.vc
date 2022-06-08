@@ -94,6 +94,6 @@
 ../../../../../../../rtl/verilog/ntm/top/model_output_vector.sv
 ../../../../../../../rtl/verilog/ntm/top/model_top.sv
 
-../../../../../../../bench/verilog/tests/ntm/top/model_top_pkg.sv
-../../../../../../../bench/verilog/tests/ntm/top/model_top_stimulus.sv
-../../../../../../../bench/verilog/tests/ntm/top/model_top_testbench.sv
+../../../../../../../bench/verilog/tests/model/ntm/top/model_top_pkg.sv
+../../../../../../../bench/verilog/tests/model/ntm/top/model_top_stimulus.sv
+../../../../../../../bench/verilog/tests/model/ntm/top/model_top_testbench.sv

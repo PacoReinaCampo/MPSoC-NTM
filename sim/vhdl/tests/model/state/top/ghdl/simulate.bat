@@ -48,9 +48,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/state/outputs/model_state_vecto
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/state/top/model_state_top.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/model_state_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/model_state_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/model_state_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_testbench.vhd
 
 ghdl -m --std=08 model_state_top_testbench
 ghdl -r --std=08 model_state_top_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_state_top_testbench.tree

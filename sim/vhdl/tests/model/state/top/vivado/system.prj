@@ -45,6 +45,6 @@ vhdl2008 work ../../../../../../../model/vhdl/state/outputs/model_state_vector_s
 
 vhdl2008 work ../../../../../../../model/vhdl/state/top/model_state_top.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/model_state_top_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/model_state_top_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/model_state_top_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/model/state/top/model_state_top_testbench.vhd

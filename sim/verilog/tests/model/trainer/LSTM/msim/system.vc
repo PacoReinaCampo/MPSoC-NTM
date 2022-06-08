@@ -87,6 +87,6 @@
 ../../../../../../../rtl/verilog/controller/LSTM/convolutional/model_output_gate_vector.sv
 ../../../../../../../rtl/verilog/controller/LSTM/convolutional/model_state_gate_vector.sv
 
-../../../../../../../bench/verilog/tests/trainer/LSTM/model_trainer_lstm_pkg.sv
-../../../../../../../bench/verilog/tests/trainer/LSTM/model_trainer_lstm_stimulus.sv
-../../../../../../../bench/verilog/tests/trainer/LSTM/model_trainer_lstm_testbench.sv
+../../../../../../../bench/verilog/tests/model/trainer/LSTM/model_trainer_lstm_pkg.sv
+../../../../../../../bench/verilog/tests/model/trainer/LSTM/model_trainer_lstm_stimulus.sv
+../../../../../../../bench/verilog/tests/model/trainer/LSTM/model_trainer_lstm_testbench.sv

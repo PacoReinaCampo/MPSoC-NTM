@@ -78,6 +78,6 @@ sv work ../../../../../../../rtl/verilog/trainer/FNN/model_trainer.sv
 
 sv work ../../../../../../../rtl/verilog/controller/FNN/convolutional/model_controller.sv
 
-sv work ../../../../../../../bench/verilog/tests/trainer/FNN/model_trainer_fnn_pkg.sv
-sv work ../../../../../../../bench/verilog/tests/trainer/FNN/model_trainer_fnn_stimulus.sv
-sv work ../../../../../../../bench/verilog/tests/trainer/FNN/model_trainer_fnn_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/model/trainer/FNN/model_trainer_fnn_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/model/trainer/FNN/model_trainer_fnn_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/model/trainer/FNN/model_trainer_fnn_testbench.sv

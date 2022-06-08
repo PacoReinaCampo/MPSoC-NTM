@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_i
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
 pause

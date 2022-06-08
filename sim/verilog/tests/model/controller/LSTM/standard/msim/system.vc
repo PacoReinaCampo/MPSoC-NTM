@@ -87,6 +87,6 @@
 ../../../../../../../../rtl/verilog/controller/LSTM/standard/model_output_gate_vector.sv
 ../../../../../../../../rtl/verilog/controller/LSTM/standard/model_state_gate_vector.sv
 
-../../../../../../../../bench/verilog/tests/controller/LSTM/standard/model_standard_lstm_pkg.sv
-../../../../../../../../bench/verilog/tests/controller/LSTM/standard/model_standard_lstm_stimulus.sv
-../../../../../../../../bench/verilog/tests/controller/LSTM/standard/model_standard_lstm_testbench.sv
+../../../../../../../../bench/verilog/tests/model/controller/LSTM/standard/model_standard_lstm_pkg.sv
+../../../../../../../../bench/verilog/tests/model/controller/LSTM/standard/model_standard_lstm_stimulus.sv
+../../../../../../../../bench/verilog/tests/model/controller/LSTM/standard/model_standard_lstm_testbench.sv

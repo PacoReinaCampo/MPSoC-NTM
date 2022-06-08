@@ -103,6 +103,6 @@
 ../../../../../../../model/vhdl/dnc/memory/model_write_weighting.vhd
 ../../../../../../../model/vhdl/dnc/memory/model_addressing.vhd
 
-../../../../../../../bench/vhdl/tests/dnc/memory/model_memory_pkg.vhd
-../../../../../../../bench/vhdl/tests/dnc/memory/model_memory_stimulus.vhd
-../../../../../../../bench/vhdl/tests/dnc/memory/model_memory_testbench.vhd
+../../../../../../../bench/vhdl/tests/model/dnc/memory/model_memory_pkg.vhd
+../../../../../../../bench/vhdl/tests/model/dnc/memory/model_memory_stimulus.vhd
+../../../../../../../bench/vhdl/tests/model/dnc/memory/model_memory_testbench.vhd

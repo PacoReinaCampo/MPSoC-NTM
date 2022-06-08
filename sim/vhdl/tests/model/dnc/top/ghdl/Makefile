@@ -117,9 +117,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/model_output_vector.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/dnc/top/model_interface_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/model_top_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/model_top_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/model_top_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_top_testbench

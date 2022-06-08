@@ -12,6 +12,6 @@
 ../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/integer/matrix/model_matrix_integer_divider.sv
 
-../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_pkg.sv
-../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_stimulus.sv
-../../../../../../../bench/verilog/tests/arithmetic/integer/model_integer_testbench.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_pkg.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_stimulus.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_testbench.sv

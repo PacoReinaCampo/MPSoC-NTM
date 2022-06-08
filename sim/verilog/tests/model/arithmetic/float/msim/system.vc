@@ -16,6 +16,6 @@
 ../../../../../../../rtl/verilog/arithmetic/float/tensor/model_tensor_float_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/float/tensor/model_tensor_float_divider.sv
 
-../../../../../../../bench/verilog/tests/arithmetic/float/model_float_pkg.sv
-../../../../../../../bench/verilog/tests/arithmetic/float/model_float_stimulus.sv
-../../../../../../../bench/verilog/tests/arithmetic/float/model_float_testbench.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_pkg.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_stimulus.sv
+../../../../../../../bench/verilog/tests/model/arithmetic/float/model_float_testbench.sv

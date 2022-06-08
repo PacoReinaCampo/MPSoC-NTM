@@ -104,9 +104,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_interface_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/top/ntm_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/top/ntm_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/ntm/top/ntm_top_testbench.vhd
 
 ghdl -m --std=08 model_top_testbench
 ghdl -r --std=08 model_top_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_top_testbench.tree
