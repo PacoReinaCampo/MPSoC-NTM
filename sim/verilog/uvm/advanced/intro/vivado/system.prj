@@ -1,3 +1,0 @@
-sv work ../../../../../../bench/verilog/uvm/intro/ntm_intro_testbench.sv
-
-sv work ../../../../../../rtl/verilog/intro/ntm_intro.sv
