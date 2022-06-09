@@ -1,4 +1,0 @@
-cd /home/us1/github/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/series/msim
-
-do /home/us1/github/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/series/msim/macros/design.do
-do /home/us1/github/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/series/msim/macros/verification.do
