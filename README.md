@@ -1,5 +1,5 @@
 ---
-title:  MPSoC-NTM (T-DNC/NTM-MPSoC)
+title:  SoC-NTM (T-DNC/NTM-SoC)
 author: QueenField
 geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ---
@@ -15,12 +15,24 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.0.1.5. Hardware Configuration Management Plan
 ##### 0.0.1.6. Hardware Process Assurance Plan
 #### 0.0.2. HARDWARE DESIGN PROCESS
+##### 0.0.2.1 Requirements Capture Process
+##### 0.0.2.2 Conceptual Design Process
+##### 0.0.2.3 Detailed Design Process
+##### 0.0.2.4 Implementation Process
+##### 0.0.2.5 Production Transition Process
 #### 0.0.3. VALIDATION AND VERIFICATION PROCESS
+##### 0.0.3.1 Validation Process
+##### 0.0.3.2 Verification Process
 #### 0.0.4. CONFIGURATION MANAGEMENT PROCESS
 #### 0.0.5. PROCESS ASSURANCE
 #### 0.0.6. CERTIFICATION LIAISON PROCESS
 #### 0.0.7. HARDWARE DESIGN LIFECYCLE DATA
+##### 0.0.7.1 The Certification Authority
+##### 0.0.7.2 Certification Reviews
+##### 0.0.7.3 Scheduling of Reviews
 #### 0.0.8. ADDITIONAL CONSIDERATIONS
+##### 0.0.8.1 Previously Developed Hardware
+##### 0.0.8.2 Commercial Components Usage
 
 ### 0.1. Model
 
