@@ -41,37 +41,36 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_env extends uvm_env;
-  `uvm_component_utils(ntm_intro_env);
+class ntm_intro_test extends uvm_test;
+  //Register with factory
+  `uvm_component_utils(ntm_intro_test);
 
-  //ENV class will have agent as its sub component
-  ntm_intro_agent agt;
-  ntm_intro_scoreboard scb;
-  ntm_intro_subscriber ntm_intro_subscriber_h;
-
-  //virtual interface for INTRO interface
+  ntm_intro_env env;
   virtual dut_if vif;
 
-  function new(string name, uvm_component parent);
+  function new(string name = "ntm_intro_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
-  //Build phase
-  //Construct agent and get virtual interface handle from test and pass it down to agent
+  //Build phase - Construct the env class using factory
+  //Get the virtual interface handle from Test and then set it config db for the env component
   function void build_phase(uvm_phase phase);
-    super.build_phase(phase);
-    agt = ntm_intro_agent::type_id::create("agt", this);
-    scb = ntm_intro_scoreboard::type_id::create("scb", this);
-    ntm_intro_subscriber_h=ntm_intro_subscriber::type_id::create("apn_subscriber_h",this);
+    env = ntm_intro_env::type_id::create("env", this);
+
     if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif)) begin
-      `uvm_fatal("build phase", "No virtual interface specified for this env instance")
-    end
-    uvm_config_db#(virtual dut_if)::set( this, "agt", "vif", vif);
+      `uvm_fatal("build_phase", "No virtual interface specified for this test instance")
+    end 
+    uvm_config_db#(virtual dut_if)::set( this, "env", "vif", vif);
   endfunction
 
-  function void connect_phase(uvm_phase phase);
-    super.connect_phase(phase);
-    agt.mon.ap.connect(scb.mon_export);
-    agt.mon.ap.connect(ntm_intro_subscriber_h.analysis_export);
-  endfunction
+  //Run phase - Create an ntm_intro_sequence and start it on the ntm_intro_sequencer
+  task run_phase( uvm_phase phase );
+    ntm_intro_sequence ntm_intro_seq;
+    ntm_intro_seq = ntm_intro_sequence::type_id::create("ntm_intro_seq");
+    phase.raise_objection( this, "Starting ntm_intro_base_seqin main phase" );
+    $display("%t Starting sequence ntm_intro_seq run_phase",$time);
+    ntm_intro_seq.start(env.agt.sqr);
+    #100ns;
+    phase.drop_objection( this , "Finished ntm_intro_seq in main phase" );
+  endtask
 endclass

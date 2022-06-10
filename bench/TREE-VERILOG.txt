@@ -294,20 +294,20 @@
     │   │   ├── dnc_memory_driver.sv
     │   │   ├── dnc_memory_sequencer.sv
     │   │   ├── dnc_memory_testbench.sv
-    │   │   ├── ntm_memory_agent.sv
-    │   │   ├── ntm_memory_env.sv
-    │   │   ├── ntm_memory_monitor.sv
-    │   │   ├── ntm_memory_scoreboard.sv
-    │   │   └── ntm_memory_subscriber.sv
+    │   │   ├── dnc_memory_agent.sv
+    │   │   ├── dnc_memory_env.sv
+    │   │   ├── dnc_memory_monitor.sv
+    │   │   ├── dnc_memory_scoreboard.sv
+    │   │   └── dnc_memory_subscriber.sv
     │   ├── read_heads
     │   │   ├── dnc_read_heads_driver.sv
     │   │   ├── dnc_read_heads_sequencer.sv
     │   │   ├── dnc_read_heads_testbench.sv
-    │   │   ├── ntm_read_heads_agent.sv
-    │   │   ├── ntm_read_heads_env.sv
-    │   │   ├── ntm_read_heads_monitor.sv
-    │   │   ├── ntm_read_heads_scoreboard.sv
-    │   │   └── ntm_read_heads_subscriber.sv
+    │   │   ├── dnc_read_heads_agent.sv
+    │   │   ├── dnc_read_heads_env.sv
+    │   │   ├── dnc_read_heads_monitor.sv
+    │   │   ├── dnc_read_heads_scoreboard.sv
+    │   │   └── dnc_read_heads_subscriber.sv
     │   ├── top
     │   │   ├── dnc_top_agent.sv
     │   │   ├── dnc_top_driver.sv
@@ -321,11 +321,11 @@
     │       ├── dnc_write_heads_driver.sv
     │       ├── dnc_write_heads_sequencer.sv
     │       ├── dnc_write_heads_testbench.sv
-    │       ├── ntm_write_heads_agent.sv
-    │       ├── ntm_write_heads_env.sv
-    │       ├── ntm_write_heads_monitor.sv
-    │       ├── ntm_write_heads_scoreboard.sv
-    │       └── ntm_write_heads_subscriber.sv
+    │       ├── dnc_write_heads_agent.sv
+    │       ├── dnc_write_heads_env.sv
+    │       ├── dnc_write_heads_monitor.sv
+    │       ├── dnc_write_heads_scoreboard.sv
+    │       └── dnc_write_heads_subscriber.sv
     ├── intro
     │   ├── ntm_intro_agent.sv
     │   ├── ntm_intro_driver.sv
