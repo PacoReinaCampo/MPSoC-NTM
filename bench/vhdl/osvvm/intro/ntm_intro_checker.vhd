@@ -40,26 +40,45 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_intro_checker is
+library osvvm;
+use osvvm.RandomPkg.all;
+use osvvm.CoveragePkg.all;
 
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
+entity ntm_intro_checker is
+end entity ntm_intro_checker;
 
-  -----------------------------------------------------------------------
-  -- Signals
-  -----------------------------------------------------------------------
+architecture ntm_intro_checker_architecture of ntm_intro_checker is
+begin
+  Random_Stimulus : process
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+    variable RndOp : RandomPType;
 
-  -----------------------------------------------------------------------
-  -- Components
-  -----------------------------------------------------------------------
+    variable covPoint : covPType;
 
-  -----------------------------------------------------------------------
-  -- Functions
-  -----------------------------------------------------------------------
+    variable A : std_logic_vector(7 downto 0);
 
-end ntm_intro_checker;
+  begin
+
+    RndOp.InitSeed(RndOp'instance_name);
+
+    RndOp.setRandomParm(NORMAL, 30.0, 10.0);
+
+    covPoint.AddBins(GenBin(10, 25, 3));
+    covPoint.AddBins(GenBin(26, 50, 8));
+
+    Random_Generation : for i in 0 to 1000 loop
+      A := RndOp.RandSlv(10, 50, (20, 21, 22, 23, 24, 25), 8);
+
+      report "A = " & integer'image(to_integer(unsigned(A)));
+
+      covPoint.ICover(to_integer(unsigned(A)));
+    end loop;
+
+    report "A Coverage : ";
+    covPoint.WriteBin;
+
+    wait;
+
+  end process;
+
+end architecture ntm_intro_checker_architecture;
