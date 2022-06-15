@@ -50,23 +50,23 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 
 #### 0.3.1. OSVVM-VHDL
 
-##### 0.3.1.1. osvvm_checker
-##### 0.3.1.2. osvvm_stimulus.vhd
-##### 0.3.1.3. osvvm_testbench.vhd
+##### 0.3.1.1. OSVVM Checker
+##### 0.3.1.2. OSVVM Stimulus
+##### 0.3.1.3. OSVVM Testbench
 
 #### 0.3.2. UVM-Verilog
 
-##### 0.3.2.1. uvm_agent
-##### 0.3.2.2. uvm_driver
-##### 0.3.2.3. uvm_env
-##### 0.3.2.4. uvm_monitor
-##### 0.3.2.5. uvm_scoreboard
-##### 0.3.2.6. uvm_sequence
-##### 0.3.2.7. uvm_sequencer
-##### 0.3.2.8. uvm_subscriber
-##### 0.3.2.9. uvm_test
-##### 0.3.2.10. uvm_testbench
-##### 0.3.2.11. uvm_transaction
+##### 0.3.2.1. UVM Agent
+##### 0.3.2.2. UVM Driver
+##### 0.3.2.3. UVM Enviroment
+##### 0.3.2.4. UVM Monitor
+##### 0.3.2.5. UVM Scoreboard
+##### 0.3.2.6. UVM Sequence
+##### 0.3.2.7. UVM Sequencer
+##### 0.3.2.8. UVM Subscriber
+##### 0.3.2.9. UVM Test
+##### 0.3.2.10. UVM Testbench
+##### 0.3.2.11. UVM Transaction
 
 ## 1. Mechanics
 
