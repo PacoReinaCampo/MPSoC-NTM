@@ -115,7 +115,7 @@ begin
       );
 
   -- DUT
-  design_intro_adder : ntm_intro_adder
+  intro_adder_design : ntm_intro_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -135,9 +135,6 @@ begin
   begin
     data_a_in_int <= (others => '0');
     data_b_in_int <= (others => '0');
-
-    -- cross bins for all possible combinations (very slow on large vector widths):
-    -- sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1), GenBin(0, 2**DATA_SIZE-1));
 
     -- cross bins for maximum of C_MAX_BINS slices with same width:
     sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS), GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS));
