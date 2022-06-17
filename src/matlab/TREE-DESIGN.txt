@@ -27,9 +27,7 @@
 │       │   ├── ntm_masked_multi_head_attention.m
 │       │   ├── ntm_masked_scaled_dot_product_attention.m
 │       │   ├── ntm_multi_head_attention.m
-│       │   ├── ntm_multi_head_attention.png
-│       │   ├── ntm_scaled_dot_product_attention.m
-│       │   └── ntm_scaled_dot_product_attention.png
+│       │   └── ntm_scaled_dot_product_attention.m
 │       ├── fnn
 │       │   └── ntm_fnn.m
 │       ├── functions
@@ -37,7 +35,6 @@
 │       │   └── ntm_positional_encoding.m
 │       ├── inputs
 │       │   ├── ntm_inputs_vector.m
-│       │   ├── ntm_inputs_vector.png
 │       │   ├── ntm_keys_vector.m
 │       │   ├── ntm_queries_vector.m
 │       │   └── ntm_values_vector.m
@@ -51,11 +48,8 @@
 │       │   └── ntm_state_gate_vector.m
 │       └── top
 │           ├── ntm_controller.m
-│           ├── ntm_controller.png
 │           ├── ntm_decoder.m
-│           ├── ntm_decoder.png
-│           ├── ntm_encoder.m
-│           └── ntm_encoder.png
+│           └── ntm_encoder.m
 ├── dnc
 │   ├── memory
 │   │   ├── dnc_addressing.m
