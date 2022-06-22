@@ -4,214 +4,180 @@
 │   │   ├── arithmetic
 │   │   │   ├── float
 │   │   │   │   ├── ntm_float_pkg.sv
-│   │   │   │   ├── ntm_float_stimulus.sv
-│   │   │   │   └── ntm_float_testbench.sv
+│   │   │   │   └── ntm_float_stimulus.sv
 │   │   │   ├── integer
 │   │   │   │   ├── ntm_integer_pkg.sv
-│   │   │   │   ├── ntm_integer_stimulus.sv
-│   │   │   │   └── ntm_integer_testbench.sv
+│   │   │   │   └── ntm_integer_stimulus.sv
 │   │   │   └── modular
 │   │   │       ├── ntm_modular_pkg.sv
-│   │   │       ├── ntm_modular_stimulus.sv
-│   │   │       └── ntm_modular_testbench.sv
+│   │   │       └── ntm_modular_stimulus.sv
 │   │   ├── controller
 │   │   │   ├── FNN
 │   │   │   │   ├── convolutional
 │   │   │   │   │   ├── ntm_convolutional_fnn_pkg.sv
-│   │   │   │   │   ├── ntm_convolutional_fnn_stimulus.sv
-│   │   │   │   │   └── ntm_convolutional_fnn_testbench.sv
+│   │   │   │   │   └── ntm_convolutional_fnn_stimulus.sv
 │   │   │   │   └── standard
 │   │   │   │       ├── ntm_standard_fnn_pkg.sv
-│   │   │   │       ├── ntm_standard_fnn_stimulus.sv
-│   │   │   │       └── ntm_standard_fnn_testbench.sv
-│   │   │   └── LSTM
+│   │   │   │       └── ntm_standard_fnn_stimulus.sv
+│   │   │   ├── LSTM
+│   │   │   │   ├── convolutional
+│   │   │   │   │   ├── ntm_convolutional_lstm_pkg.sv
+│   │   │   │   │   └── ntm_convolutional_lstm_stimulus.sv
+│   │   │   │   └── standard
+│   │   │   │       ├── ntm_standard_lstm_pkg.sv
+│   │   │   │       └── ntm_standard_lstm_stimulus.sv
+│   │   │   └── transformer
 │   │   │       ├── convolutional
-│   │   │       │   ├── ntm_convolutional_lstm_pkg.sv
-│   │   │       │   ├── ntm_convolutional_lstm_stimulus.sv
-│   │   │       │   └── ntm_convolutional_lstm_testbench.sv
+│   │   │       │   ├── ntm_convolutional_transformer_pkg.sv
+│   │   │       │   └── ntm_convolutional_transformer_stimulus.sv
 │   │   │       └── standard
-│   │   │           ├── ntm_standard_lstm_pkg.sv
-│   │   │           ├── ntm_standard_lstm_stimulus.sv
-│   │   │           └── ntm_standard_lstm_testbench.sv
+│   │   │           ├── ntm_standard_transformer_pkg.sv
+│   │   │           └── ntm_standard_transformer_stimulus.sv
 │   │   ├── dnc
 │   │   │   ├── memory
 │   │   │   │   ├── dnc_memory_pkg.sv
-│   │   │   │   ├── dnc_memory_stimulus.sv
-│   │   │   │   └── dnc_memory_testbench.sv
+│   │   │   │   └── dnc_memory_stimulus.sv
 │   │   │   ├── read_heads
 │   │   │   │   ├── dnc_read_heads_pkg.sv
-│   │   │   │   ├── dnc_read_heads_stimulus.sv
-│   │   │   │   └── dnc_read_heads_testbench.sv
+│   │   │   │   └── dnc_read_heads_stimulus.sv
 │   │   │   ├── top
 │   │   │   │   ├── dnc_top_pkg.sv
-│   │   │   │   ├── dnc_top_stimulus.sv
-│   │   │   │   └── dnc_top_testbench.sv
+│   │   │   │   └── dnc_top_stimulus.sv
 │   │   │   └── write_heads
 │   │   │       ├── dnc_write_heads_pkg.sv
-│   │   │       ├── dnc_write_heads_stimulus.sv
-│   │   │       └── dnc_write_heads_testbench.sv
+│   │   │       └── dnc_write_heads_stimulus.sv
 │   │   ├── math
 │   │   │   ├── algebra
 │   │   │   │   ├── ntm_algebra_pkg.sv
-│   │   │   │   ├── ntm_algebra_stimulus.sv
-│   │   │   │   └── ntm_algebra_testbench.sv
+│   │   │   │   └── ntm_algebra_stimulus.sv
 │   │   │   ├── calculus
 │   │   │   │   ├── ntm_calculus_pkg.sv
-│   │   │   │   ├── ntm_calculus_stimulus.sv
-│   │   │   │   └── ntm_calculus_testbench.sv
+│   │   │   │   └── ntm_calculus_stimulus.sv
 │   │   │   ├── function
 │   │   │   │   ├── ntm_function_pkg.sv
-│   │   │   │   ├── ntm_function_stimulus.sv
-│   │   │   │   └── ntm_function_testbench.sv
+│   │   │   │   └── ntm_function_stimulus.sv
 │   │   │   └── series
 │   │   │       ├── ntm_series_pkg.sv
-│   │   │       ├── ntm_series_stimulus.sv
-│   │   │       └── ntm_series_testbench.sv
+│   │   │       └── ntm_series_stimulus.sv
 │   │   ├── ntm
 │   │   │   ├── memory
 │   │   │   │   ├── ntm_memory_pkg.sv
-│   │   │   │   ├── ntm_memory_stimulus.sv
-│   │   │   │   └── ntm_memory_testbench.sv
+│   │   │   │   └── ntm_memory_stimulus.sv
 │   │   │   ├── read_heads
 │   │   │   │   ├── ntm_read_heads_pkg.sv
-│   │   │   │   ├── ntm_read_heads_stimulus.sv
-│   │   │   │   └── ntm_read_heads_testbench.sv
+│   │   │   │   └── ntm_read_heads_stimulus.sv
 │   │   │   ├── top
 │   │   │   │   ├── ntm_top_pkg.sv
-│   │   │   │   ├── ntm_top_stimulus.sv
-│   │   │   │   └── ntm_top_testbench.sv
+│   │   │   │   └── ntm_top_stimulus.sv
 │   │   │   └── write_heads
 │   │   │       ├── ntm_write_heads_pkg.sv
-│   │   │       ├── ntm_write_heads_stimulus.sv
-│   │   │       └── ntm_write_heads_testbench.sv
+│   │   │       └── ntm_write_heads_stimulus.sv
 │   │   ├── state
 │   │   │   ├── feedback
 │   │   │   │   ├── ntm_state_feedback_pkg.sv
-│   │   │   │   ├── ntm_state_feedback_stimulus.sv
-│   │   │   │   └── ntm_state_feedback_testbench.sv
+│   │   │   │   └── ntm_state_feedback_stimulus.sv
 │   │   │   ├── outputs
 │   │   │   │   ├── ntm_state_outputs_pkg.sv
-│   │   │   │   ├── ntm_state_outputs_stimulus.sv
-│   │   │   │   └── ntm_state_outputs_testbench.sv
+│   │   │   │   └── ntm_state_outputs_stimulus.sv
 │   │   │   └── top
 │   │   │       ├── ntm_state_top_pkg.sv
-│   │   │       ├── ntm_state_top_stimulus.sv
-│   │   │       └── ntm_state_top_testbench.sv
+│   │   │       └── ntm_state_top_stimulus.sv
 │   │   └── trainer
 │   │       ├── FNN
 │   │       │   ├── ntm_trainer_fnn_pkg.sv
-│   │       │   ├── ntm_trainer_fnn_stimulus.sv
-│   │       │   └── ntm_trainer_fnn_testbench.sv
+│   │       │   └── ntm_trainer_fnn_stimulus.sv
 │   │       └── LSTM
 │   │           ├── ntm_trainer_lstm_pkg.sv
-│   │           ├── ntm_trainer_lstm_stimulus.sv
-│   │           └── ntm_trainer_lstm_testbench.sv
+│   │           └── ntm_trainer_lstm_stimulus.sv
 │   └── model
 │       ├── arithmetic
 │       │   ├── float
 │       │   │   ├── model_float_pkg.sv
-│       │   │   ├── model_float_stimulus.sv
-│       │   │   └── model_float_testbench.sv
+│       │   │   └── model_float_stimulus.sv
 │       │   ├── integer
 │       │   │   ├── model_integer_pkg.sv
-│       │   │   ├── model_integer_stimulus.sv
-│       │   │   └── model_integer_testbench.sv
+│       │   │   └── model_integer_stimulus.sv
 │       │   └── modular
 │       │       ├── model_modular_pkg.sv
-│       │       ├── model_modular_stimulus.sv
-│       │       └── model_modular_testbench.sv
+│       │       └── model_modular_stimulus.sv
 │       ├── controller
 │       │   ├── FNN
 │       │   │   ├── convolutional
 │       │   │   │   ├── model_convolutional_fnn_pkg.sv
-│       │   │   │   ├── model_convolutional_fnn_stimulus.sv
-│       │   │   │   └── model_convolutional_fnn_testbench.sv
+│       │   │   │   └── model_convolutional_fnn_stimulus.sv
 │       │   │   └── standard
 │       │   │       ├── model_standard_fnn_pkg.sv
-│       │   │       ├── model_standard_fnn_stimulus.sv
-│       │   │       └── model_standard_fnn_testbench.sv
-│       │   └── LSTM
+│       │   │       └── model_standard_fnn_stimulus.sv
+│       │   ├── LSTM
+│       │   │   ├── convolutional
+│       │   │   │   ├── model_convolutional_lstm_pkg.sv
+│       │   │   │   └── model_convolutional_lstm_stimulus.sv
+│       │   │   └── standard
+│       │   │       ├── model_standard_lstm_pkg.sv
+│       │   │       └── model_standard_lstm_stimulus.sv
+│       │   └── transformer
 │       │       ├── convolutional
-│       │       │   ├── model_convolutional_lstm_pkg.sv
-│       │       │   ├── model_convolutional_lstm_stimulus.sv
-│       │       │   └── model_convolutional_lstm_testbench.sv
+│       │       │   ├── model_convolutional_transformer_pkg.sv
+│       │       │   └── model_convolutional_transformer_stimulus.sv
 │       │       └── standard
-│       │           ├── model_standard_lstm_pkg.sv
-│       │           ├── model_standard_lstm_stimulus.sv
-│       │           └── model_standard_lstm_testbench.sv
+│       │           ├── model_standard_transformer_pkg.sv
+│       │           └── model_standard_transformer_stimulus.sv
 │       ├── dnc
 │       │   ├── memory
 │       │   │   ├── model_memory_pkg.sv
-│       │   │   ├── model_memory_stimulus.sv
-│       │   │   └── model_memory_testbench.sv
+│       │   │   └── model_memory_stimulus.sv
 │       │   ├── read_heads
 │       │   │   ├── model_read_heads_pkg.sv
-│       │   │   ├── model_read_heads_stimulus.sv
-│       │   │   └── model_read_heads_testbench.sv
+│       │   │   └── model_read_heads_stimulus.sv
 │       │   ├── top
 │       │   │   ├── model_top_pkg.sv
-│       │   │   ├── model_top_stimulus.sv
-│       │   │   └── model_top_testbench.sv
+│       │   │   └── model_top_stimulus.sv
 │       │   └── write_heads
 │       │       ├── model_write_heads_pkg.sv
-│       │       ├── model_write_heads_stimulus.sv
-│       │       └── model_write_heads_testbench.sv
+│       │       └── model_write_heads_stimulus.sv
 │       ├── math
 │       │   ├── algebra
 │       │   │   ├── model_algebra_pkg.sv
-│       │   │   ├── model_algebra_stimulus.sv
-│       │   │   └── model_algebra_testbench.sv
+│       │   │   └── model_algebra_stimulus.sv
 │       │   ├── calculus
 │       │   │   ├── model_calculus_pkg.sv
-│       │   │   ├── model_calculus_stimulus.sv
-│       │   │   └── model_calculus_testbench.sv
+│       │   │   └── model_calculus_stimulus.sv
 │       │   ├── function
 │       │   │   ├── model_function_pkg.sv
-│       │   │   ├── model_function_stimulus.sv
-│       │   │   └── model_function_testbench.sv
+│       │   │   └── model_function_stimulus.sv
 │       │   └── series
 │       │       ├── model_series_pkg.sv
-│       │       ├── model_series_stimulus.sv
-│       │       └── model_series_testbench.sv
+│       │       └── model_series_stimulus.sv
 │       ├── ntm
 │       │   ├── memory
 │       │   │   ├── model_memory_pkg.sv
-│       │   │   ├── model_memory_stimulus.sv
-│       │   │   └── model_memory_testbench.sv
+│       │   │   └── model_memory_stimulus.sv
 │       │   ├── read_heads
 │       │   │   ├── model_read_heads_pkg.sv
-│       │   │   ├── model_read_heads_stimulus.sv
-│       │   │   └── model_read_heads_testbench.sv
+│       │   │   └── model_read_heads_stimulus.sv
 │       │   ├── top
 │       │   │   ├── model_top_pkg.sv
-│       │   │   ├── model_top_stimulus.sv
-│       │   │   └── model_top_testbench.sv
+│       │   │   └── model_top_stimulus.sv
 │       │   └── write_heads
 │       │       ├── model_write_heads_pkg.sv
-│       │       ├── model_write_heads_stimulus.sv
-│       │       └── model_write_heads_testbench.sv
+│       │       └── model_write_heads_stimulus.sv
 │       ├── state
 │       │   ├── feedback
 │       │   │   ├── model_state_feedback_pkg.sv
-│       │   │   ├── model_state_feedback_stimulus.sv
-│       │   │   └── model_state_feedback_testbench.sv
+│       │   │   └── model_state_feedback_stimulus.sv
 │       │   ├── outputs
 │       │   │   ├── model_state_outputs_pkg.sv
-│       │   │   ├── model_state_outputs_stimulus.sv
-│       │   │   └── model_state_outputs_testbench.sv
+│       │   │   └── model_state_outputs_stimulus.sv
 │       │   └── top
 │       │       ├── model_state_top_pkg.sv
-│       │       ├── model_state_top_stimulus.sv
-│       │       └── model_state_top_testbench.sv
+│       │       └── model_state_top_stimulus.sv
 │       └── trainer
 │           ├── FNN
 │           │   ├── model_trainer_fnn_pkg.sv
-│           │   ├── model_trainer_fnn_stimulus.sv
-│           │   └── model_trainer_fnn_testbench.sv
+│           │   └── model_trainer_fnn_stimulus.sv
 │           └── LSTM
 │               ├── model_trainer_lstm_pkg.sv
-│               ├── model_trainer_lstm_stimulus.sv
-│               └── model_trainer_lstm_testbench.sv
+│               └── model_trainer_lstm_stimulus.sv
 └── uvm
     ├── arithmetic
     │   ├── float
@@ -221,8 +187,7 @@
     │   │   ├── ntm_float_monitor.sv
     │   │   ├── ntm_float_scoreboard.sv
     │   │   ├── ntm_float_sequencer.sv
-    │   │   ├── ntm_float_subscriber.sv
-    │   │   └── ntm_float_testbench.sv
+    │   │   └── ntm_float_subscriber.sv
     │   ├── integer
     │   │   ├── ntm_integer_agent.sv
     │   │   ├── ntm_integer_driver.sv
@@ -230,8 +195,7 @@
     │   │   ├── ntm_integer_monitor.sv
     │   │   ├── ntm_integer_scoreboard.sv
     │   │   ├── ntm_integer_sequencer.sv
-    │   │   ├── ntm_integer_subscriber.sv
-    │   │   └── ntm_integer_testbench.sv
+    │   │   └── ntm_integer_subscriber.sv
     │   └── modular
     │       ├── ntm_modular_agent.sv
     │       ├── ntm_modular_driver.sv
@@ -239,8 +203,7 @@
     │       ├── ntm_modular_monitor.sv
     │       ├── ntm_modular_scoreboard.sv
     │       ├── ntm_modular_sequencer.sv
-    │       ├── ntm_modular_subscriber.sv
-    │       └── ntm_modular_testbench.sv
+    │       └── ntm_modular_subscriber.sv
     ├── controller
     │   ├── FNN
     │   │   ├── convolutional
@@ -250,8 +213,7 @@
     │   │   │   ├── ntm_convolutional_fnn_monitor.sv
     │   │   │   ├── ntm_convolutional_fnn_scoreboard.sv
     │   │   │   ├── ntm_convolutional_fnn_sequencer.sv
-    │   │   │   ├── ntm_convolutional_fnn_subscriber.sv
-    │   │   │   └── ntm_convolutional_fnn_testbench.sv
+    │   │   │   └── ntm_convolutional_fnn_subscriber.sv
     │   │   └── standard
     │   │       ├── ntm_standard_fnn_agent.sv
     │   │       ├── ntm_standard_fnn_driver.sv
@@ -259,8 +221,7 @@
     │   │       ├── ntm_standard_fnn_monitor.sv
     │   │       ├── ntm_standard_fnn_scoreboard.sv
     │   │       ├── ntm_standard_fnn_sequencer.sv
-    │   │       ├── ntm_standard_fnn_subscriber.sv
-    │   │       └── ntm_standard_fnn_testbench.sv
+    │   │       └── ntm_standard_fnn_subscriber.sv
     │   ├── LSTM
     │   │   ├── convolutional
     │   │   │   ├── ntm_convolutional_lstm_agent.sv
@@ -269,8 +230,7 @@
     │   │   │   ├── ntm_convolutional_lstm_monitor.sv
     │   │   │   ├── ntm_convolutional_lstm_scoreboard.sv
     │   │   │   ├── ntm_convolutional_lstm_sequencer.sv
-    │   │   │   ├── ntm_convolutional_lstm_subscriber.sv
-    │   │   │   └── ntm_convolutional_lstm_testbench.sv
+    │   │   │   └── ntm_convolutional_lstm_subscriber.sv
     │   │   └── standard
     │   │       ├── ntm_standard_lstm_agent.sv
     │   │       ├── ntm_standard_lstm_driver.sv
@@ -278,8 +238,7 @@
     │   │       ├── ntm_standard_lstm_monitor.sv
     │   │       ├── ntm_standard_lstm_scoreboard.sv
     │   │       ├── ntm_standard_lstm_sequencer.sv
-    │   │       ├── ntm_standard_lstm_subscriber.sv
-    │   │       └── ntm_standard_lstm_testbench.sv
+    │   │       └── ntm_standard_lstm_subscriber.sv
     │   └── transformer
     │       ├── ntm_transformer_agent.sv
     │       ├── ntm_transformer_driver.sv
@@ -287,27 +246,30 @@
     │       ├── ntm_transformer_monitor.sv
     │       ├── ntm_transformer_scoreboard.sv
     │       ├── ntm_transformer_sequencer.sv
-    │       ├── ntm_transformer_subscriber.sv
-    │       └── ntm_transformer_testbench.sv
+    │       └── ntm_transformer_subscriber.sv
     ├── dnc
     │   ├── memory
-    │   │   ├── dnc_memory_driver.sv
-    │   │   ├── dnc_memory_sequencer.sv
-    │   │   ├── dnc_memory_testbench.sv
     │   │   ├── dnc_memory_agent.sv
+    │   │   ├── dnc_memory_driver.sv
     │   │   ├── dnc_memory_env.sv
     │   │   ├── dnc_memory_monitor.sv
     │   │   ├── dnc_memory_scoreboard.sv
-    │   │   └── dnc_memory_subscriber.sv
+    │   │   ├── dnc_memory_sequencer.sv
+    │   │   ├── dnc_memory_sequence.sv
+    │   │   ├── dnc_memory_subscriber.sv
+    │   │   ├── dnc_memory_test.sv
+    │   │   └── dnc_memory_transaction.sv
     │   ├── read_heads
-    │   │   ├── dnc_read_heads_driver.sv
-    │   │   ├── dnc_read_heads_sequencer.sv
-    │   │   ├── dnc_read_heads_testbench.sv
     │   │   ├── dnc_read_heads_agent.sv
+    │   │   ├── dnc_read_heads_driver.sv
     │   │   ├── dnc_read_heads_env.sv
     │   │   ├── dnc_read_heads_monitor.sv
     │   │   ├── dnc_read_heads_scoreboard.sv
-    │   │   └── dnc_read_heads_subscriber.sv
+    │   │   ├── dnc_read_heads_sequencer.sv
+    │   │   ├── dnc_read_heads_sequence.sv
+    │   │   ├── dnc_read_heads_subscriber.sv
+    │   │   ├── dnc_read_heads_test.sv
+    │   │   └── dnc_read_heads_transaction.sv
     │   ├── top
     │   │   ├── dnc_top_agent.sv
     │   │   ├── dnc_top_driver.sv
@@ -315,17 +277,21 @@
     │   │   ├── dnc_top_monitor.sv
     │   │   ├── dnc_top_scoreboard.sv
     │   │   ├── dnc_top_sequencer.sv
+    │   │   ├── dnc_top_sequence.sv
     │   │   ├── dnc_top_subscriber.sv
-    │   │   └── dnc_top_testbench.sv
+    │   │   ├── dnc_top_test.sv
+    │   │   └── dnc_top_transaction.sv
     │   └── write_heads
-    │       ├── dnc_write_heads_driver.sv
-    │       ├── dnc_write_heads_sequencer.sv
-    │       ├── dnc_write_heads_testbench.sv
     │       ├── dnc_write_heads_agent.sv
+    │       ├── dnc_write_heads_driver.sv
     │       ├── dnc_write_heads_env.sv
     │       ├── dnc_write_heads_monitor.sv
     │       ├── dnc_write_heads_scoreboard.sv
-    │       └── dnc_write_heads_subscriber.sv
+    │       ├── dnc_write_heads_sequencer.sv
+    │       ├── dnc_write_heads_sequence.sv
+    │       ├── dnc_write_heads_subscriber.sv
+    │       ├── dnc_write_heads_test.sv
+    │       └── dnc_write_heads_transaction.sv
     ├── intro
     │   ├── ntm_intro_agent.sv
     │   ├── ntm_intro_driver.sv
@@ -335,7 +301,6 @@
     │   ├── ntm_intro_sequencer.sv
     │   ├── ntm_intro_sequence.sv
     │   ├── ntm_intro_subscriber.sv
-    │   ├── ntm_intro_testbench.sv
     │   ├── ntm_intro_test.sv
     │   └── ntm_intro_transaction.sv
     ├── math
@@ -346,8 +311,7 @@
     │   │   ├── ntm_algebra_monitor.sv
     │   │   ├── ntm_algebra_scoreboard.sv
     │   │   ├── ntm_algebra_sequencer.sv
-    │   │   ├── ntm_algebra_subscriber.sv
-    │   │   └── ntm_algebra_testbench.sv
+    │   │   └── ntm_algebra_subscriber.sv
     │   ├── calculus
     │   │   ├── ntm_calculus_agent.sv
     │   │   ├── ntm_calculus_driver.sv
@@ -355,8 +319,7 @@
     │   │   ├── ntm_calculus_monitor.sv
     │   │   ├── ntm_calculus_scoreboard.sv
     │   │   ├── ntm_calculus_sequencer.sv
-    │   │   ├── ntm_calculus_subscriber.sv
-    │   │   └── ntm_calculus_testbench.sv
+    │   │   └── ntm_calculus_subscriber.sv
     │   ├── function
     │   │   ├── ntm_function_agent.sv
     │   │   ├── ntm_function_driver.sv
@@ -364,8 +327,7 @@
     │   │   ├── ntm_function_monitor.sv
     │   │   ├── ntm_function_scoreboard.sv
     │   │   ├── ntm_function_sequencer.sv
-    │   │   ├── ntm_function_subscriber.sv
-    │   │   └── ntm_function_testbench.sv
+    │   │   └── ntm_function_subscriber.sv
     │   └── series
     │       ├── ntm_series_agent.sv
     │       ├── ntm_series_driver.sv
@@ -373,8 +335,7 @@
     │       ├── ntm_series_monitor.sv
     │       ├── ntm_series_scoreboard.sv
     │       ├── ntm_series_sequencer.sv
-    │       ├── ntm_series_subscriber.sv
-    │       └── ntm_series_testbench.sv
+    │       └── ntm_series_subscriber.sv
     ├── ntm
     │   ├── memory
     │   │   ├── ntm_memory_agent.sv
@@ -383,8 +344,7 @@
     │   │   ├── ntm_memory_monitor.sv
     │   │   ├── ntm_memory_scoreboard.sv
     │   │   ├── ntm_memory_sequencer.sv
-    │   │   ├── ntm_memory_subscriber.sv
-    │   │   └── ntm_memory_testbench.sv
+    │   │   └── ntm_memory_subscriber.sv
     │   ├── read_heads
     │   │   ├── ntm_read_heads_agent.sv
     │   │   ├── ntm_read_heads_driver.sv
@@ -392,8 +352,7 @@
     │   │   ├── ntm_read_heads_monitor.sv
     │   │   ├── ntm_read_heads_scoreboard.sv
     │   │   ├── ntm_read_heads_sequencer.sv
-    │   │   ├── ntm_read_heads_subscriber.sv
-    │   │   └── ntm_read_heads_testbench.sv
+    │   │   └── ntm_read_heads_subscriber.sv
     │   ├── top
     │   │   ├── ntm_top_agent.sv
     │   │   ├── ntm_top_driver.sv
@@ -401,8 +360,7 @@
     │   │   ├── ntm_top_monitor.sv
     │   │   ├── ntm_top_scoreboard.sv
     │   │   ├── ntm_top_sequencer.sv
-    │   │   ├── ntm_top_subscriber.sv
-    │   │   └── ntm_top_testbench.sv
+    │   │   └── ntm_top_subscriber.sv
     │   └── write_heads
     │       ├── ntm_write_heads_agent.sv
     │       ├── ntm_write_heads_driver.sv
@@ -410,8 +368,7 @@
     │       ├── ntm_write_heads_monitor.sv
     │       ├── ntm_write_heads_scoreboard.sv
     │       ├── ntm_write_heads_sequencer.sv
-    │       ├── ntm_write_heads_subscriber.sv
-    │       └── ntm_write_heads_testbench.sv
+    │       └── ntm_write_heads_subscriber.sv
     ├── state
     │   ├── feedback
     │   │   ├── ntm_state_feedback_agent.sv
@@ -420,8 +377,7 @@
     │   │   ├── ntm_state_feedback_monitor.sv
     │   │   ├── ntm_state_feedback_scoreboard.sv
     │   │   ├── ntm_state_feedback_sequencer.sv
-    │   │   ├── ntm_state_feedback_subscriber.sv
-    │   │   └── ntm_state_feedback_testbench.sv
+    │   │   └── ntm_state_feedback_subscriber.sv
     │   ├── outputs
     │   │   ├── ntm_state_outputs_agent.sv
     │   │   ├── ntm_state_outputs_driver.sv
@@ -429,8 +385,7 @@
     │   │   ├── ntm_state_outputs_monitor.sv
     │   │   ├── ntm_state_outputs_scoreboard.sv
     │   │   ├── ntm_state_outputs_sequencer.sv
-    │   │   ├── ntm_state_outputs_subscriber.sv
-    │   │   └── ntm_state_outputs_testbench.sv
+    │   │   └── ntm_state_outputs_subscriber.sv
     │   └── top
     │       ├── ntm_state_top_agent.sv
     │       ├── ntm_state_top_driver.sv
@@ -438,8 +393,7 @@
     │       ├── ntm_state_top_monitor.sv
     │       ├── ntm_state_top_scoreboard.sv
     │       ├── ntm_state_top_sequencer.sv
-    │       ├── ntm_state_top_subscriber.sv
-    │       └── ntm_state_top_testbench.sv
+    │       └── ntm_state_top_subscriber.sv
     └── trainer
         ├── FNN
         │   ├── ntm_trainer_fnn_agent.sv
@@ -448,8 +402,7 @@
         │   ├── ntm_trainer_fnn_monitor.sv
         │   ├── ntm_trainer_fnn_scoreboard.sv
         │   ├── ntm_trainer_fnn_sequencer.sv
-        │   ├── ntm_trainer_fnn_subscriber.sv
-        │   └── ntm_trainer_fnn_testbench.sv
+        │   └── ntm_trainer_fnn_subscriber.sv
         ├── LSTM
         │   ├── ntm_trainer_lstm_agent.sv
         │   ├── ntm_trainer_lstm_driver.sv
@@ -457,8 +410,7 @@
         │   ├── ntm_trainer_lstm_monitor.sv
         │   ├── ntm_trainer_lstm_scoreboard.sv
         │   ├── ntm_trainer_lstm_sequencer.sv
-        │   ├── ntm_trainer_lstm_subscriber.sv
-        │   └── ntm_trainer_lstm_testbench.sv
+        │   └── ntm_trainer_lstm_subscriber.sv
         └── transformer
             ├── ntm_trainer_transformer_agent.sv
             ├── ntm_trainer_transformer_driver.sv
@@ -466,5 +418,4 @@
             ├── ntm_trainer_transformer_monitor.sv
             ├── ntm_trainer_transformer_scoreboard.sv
             ├── ntm_trainer_transformer_sequencer.sv
-            ├── ntm_trainer_transformer_subscriber.sv
-            └── ntm_trainer_transformer_testbench.sv
+            └── ntm_trainer_transformer_subscriber.sv
