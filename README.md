@@ -41,7 +41,7 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.1.1.1. Structural UML diagrams
 ###### 0.1.1.1.1. Class diagram
 ###### 0.1.1.1.2. Component diagram
-###### 0.1.1.1.3. Composite structure diagram
+###### 0.1.1.1.3. Composite diagram
 ###### 0.1.1.1.4. Deployment diagram
 ###### 0.1.1.1.5. Object diagram
 ###### 0.1.1.1.6. Package diagram
@@ -49,7 +49,7 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.1.1.2. Behavioral UML diagrams
 ###### 0.1.1.2.1. Activity diagram
 ###### 0.1.1.2.2. Communication diagram
-###### 0.1.1.2.3. Interaction overview diagram
+###### 0.1.1.2.3. Interaction diagram
 ###### 0.1.1.2.4. Sequence diagram
 ###### 0.1.1.2.5. State diagram
 ###### 0.1.1.2.6. Timing diagram
@@ -60,7 +60,7 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.1.2.1. Structural UML diagrams
 ###### 0.1.2.1.1. Class diagram
 ###### 0.1.2.1.2. Component diagram
-###### 0.1.2.1.3. Composite structure diagram
+###### 0.1.2.1.3. Composite diagram
 ###### 0.1.2.1.4. Deployment diagram
 ###### 0.1.2.1.5. Object diagram
 ###### 0.1.2.1.6. Package diagram
@@ -68,7 +68,7 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 ##### 0.1.2.2. Behavioral UML diagrams
 ###### 0.1.2.2.1. Activity diagram
 ###### 0.1.2.2.2. Communication diagram
-###### 0.1.2.2.3. Interaction overview diagram
+###### 0.1.2.2.3. Interaction diagram
 ###### 0.1.2.2.4. Sequence diagram
 ###### 0.1.2.2.5. State diagram
 ###### 0.1.2.2.6. Timing diagram
