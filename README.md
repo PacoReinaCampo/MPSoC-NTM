@@ -37,6 +37,9 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 
 ## 0.1. Best Practices
 
+### 0.1.1. HARDWARE
+### 0.1.2. SOFTWARE
+
 # 1. Mechanics
 
 # 2. Information

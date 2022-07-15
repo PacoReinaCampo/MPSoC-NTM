@@ -2,216 +2,216 @@
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
-│   │   │   └── ntm_controller_testbench.m
+│   │   │   └── ntm_controller_testbench.adb
 │   │   └── standard
-│   │       └── ntm_controller_testbench.m
+│   │       └── ntm_controller_testbench.adb
 │   ├── LSTM
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector_testbench.m
-│   │   │   ├── ntm_controller_testbench.m
-│   │   │   ├── ntm_forget_gate_vector_testbench.m
-│   │   │   ├── ntm_hidden_gate_vector_testbench.m
-│   │   │   ├── ntm_input_gate_vector_testbench.m
-│   │   │   ├── ntm_output_gate_vector_testbench.m
-│   │   │   └── ntm_state_gate_vector_testbench.m
+│   │   │   ├── ntm_activation_gate_vector_testbench.adb
+│   │   │   ├── ntm_controller_testbench.adb
+│   │   │   ├── ntm_forget_gate_vector_testbench.adb
+│   │   │   ├── ntm_hidden_gate_vector_testbench.adb
+│   │   │   ├── ntm_input_gate_vector_testbench.adb
+│   │   │   ├── ntm_output_gate_vector_testbench.adb
+│   │   │   └── ntm_state_gate_vector_testbench.adb
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector_testbench.m
-│   │       ├── ntm_controller_testbench.m
-│   │       ├── ntm_forget_gate_vector_testbench.m
-│   │       ├── ntm_hidden_gate_vector_testbench.m
-│   │       ├── ntm_input_gate_vector_testbench.m
-│   │       ├── ntm_output_gate_vector_testbench.m
-│   │       └── ntm_state_gate_vector_testbench.m
+│   │       ├── ntm_activation_gate_vector_testbench.adb
+│   │       ├── ntm_controller_testbench.adb
+│   │       ├── ntm_forget_gate_vector_testbench.adb
+│   │       ├── ntm_hidden_gate_vector_testbench.adb
+│   │       ├── ntm_input_gate_vector_testbench.adb
+│   │       ├── ntm_output_gate_vector_testbench.adb
+│   │       └── ntm_state_gate_vector_testbench.adb
 │   └── transformer
 │       ├── components
-│       │   ├── ntm_masked_multi_head_attention_testbench.m
-│       │   ├── ntm_masked_scaled_dot_product_attention_testbench.m
-│       │   ├── ntm_multi_head_attention_testbench.m
-│       │   └── ntm_scaled_dot_product_attention_testbench.m
+│       │   ├── ntm_masked_multi_head_attention_testbench.adb
+│       │   ├── ntm_masked_scaled_dot_product_attention_testbench.adb
+│       │   ├── ntm_multi_head_attention_testbench.adb
+│       │   └── ntm_scaled_dot_product_attention_testbench.adb
 │       ├── fnn
-│       │   └── ntm_fnn_testbench.m
+│       │   └── ntm_fnn_testbench.adb
 │       ├── functions
-│       │   ├── ntm_layer_norm_testbench.m
-│       │   └── ntm_positional_encoding_testbench.m
+│       │   ├── ntm_layer_norm_testbench.adb
+│       │   └── ntm_positional_encoding_testbench.adb
 │       ├── inputs
-│       │   ├── ntm_inputs_vector_testbench.m
-│       │   ├── ntm_keys_vector_testbench.m
-│       │   ├── ntm_queries_vector_testbench.m
-│       │   └── ntm_values_vector_testbench.m
+│       │   ├── ntm_inputs_vector_testbench.adb
+│       │   ├── ntm_keys_vector_testbench.adb
+│       │   ├── ntm_queries_vector_testbench.adb
+│       │   └── ntm_values_vector_testbench.adb
 │       ├── lstm
-│       │   ├── ntm_activation_gate_vector_testbench.m
-│       │   ├── ntm_forget_gate_vector_testbench.m
-│       │   ├── ntm_hidden_gate_vector_testbench.m
-│       │   ├── ntm_input_gate_vector_testbench.m
-│       │   ├── ntm_lstm_testbench.m
-│       │   ├── ntm_output_gate_vector_testbench.m
-│       │   └── ntm_state_gate_vector_testbench.m
+│       │   ├── ntm_activation_gate_vector_testbench.adb
+│       │   ├── ntm_forget_gate_vector_testbench.adb
+│       │   ├── ntm_hidden_gate_vector_testbench.adb
+│       │   ├── ntm_input_gate_vector_testbench.adb
+│       │   ├── ntm_lstm_testbench.adb
+│       │   ├── ntm_output_gate_vector_testbench.adb
+│       │   └── ntm_state_gate_vector_testbench.adb
 │       └── top
-│           ├── ntm_controller_testbench.m
-│           ├── ntm_decoder_testbench.m
-│           └── ntm_encoder_testbench.m
+│           ├── ntm_controller_testbench.adb
+│           ├── ntm_decoder_testbench.adb
+│           └── ntm_encoder_testbench.adb
 ├── dnc
 │   ├── memory
-│   │   ├── dnc_addressing_testbench.m
-│   │   ├── dnc_allocation_weighting_testbench.m
-│   │   ├── dnc_backward_weighting_testbench.m
-│   │   ├── dnc_forward_weighting_testbench.m
-│   │   ├── dnc_matrix_content_based_addressing_testbench.m
-│   │   ├── dnc_memory_matrix_testbench.m
-│   │   ├── dnc_memory_retention_vector_testbench.m
-│   │   ├── dnc_precedence_weighting_testbench.m
-│   │   ├── dnc_read_content_weighting_testbench.m
-│   │   ├── dnc_read_vectors_testbench.m
-│   │   ├── dnc_read_weighting_testbench.m
-│   │   ├── dnc_sort_vector_testbench.m
-│   │   ├── dnc_temporal_link_matrix_testbench.m
-│   │   ├── dnc_usage_vector_testbench.m
-│   │   ├── dnc_vector_content_based_addressing_testbench.m
-│   │   ├── dnc_write_content_weighting_testbench.m
-│   │   └── dnc_write_weighting_testbench.m
+│   │   ├── dnc_addressing_testbench.adb
+│   │   ├── dnc_allocation_weighting_testbench.adb
+│   │   ├── dnc_backward_weighting_testbench.adb
+│   │   ├── dnc_forward_weighting_testbench.adb
+│   │   ├── dnc_matrix_content_based_addressing_testbench.adb
+│   │   ├── dnc_memory_matrix_testbench.adb
+│   │   ├── dnc_memory_retention_vector_testbench.adb
+│   │   ├── dnc_precedence_weighting_testbench.adb
+│   │   ├── dnc_read_content_weighting_testbench.adb
+│   │   ├── dnc_read_vectors_testbench.adb
+│   │   ├── dnc_read_weighting_testbench.adb
+│   │   ├── dnc_sort_vector_testbench.adb
+│   │   ├── dnc_temporal_link_matrix_testbench.adb
+│   │   ├── dnc_usage_vector_testbench.adb
+│   │   ├── dnc_vector_content_based_addressing_testbench.adb
+│   │   ├── dnc_write_content_weighting_testbench.adb
+│   │   └── dnc_write_weighting_testbench.adb
 │   ├── top
-│   │   ├── dnc_interface_matrix_testbench.m
-│   │   ├── dnc_interface_top_testbench.m
-│   │   ├── dnc_interface_vector_testbench.m
-│   │   ├── dnc_output_vector_testbench.m
-│   │   └── dnc_top_testbench.m
+│   │   ├── dnc_interface_matrix_testbench.adb
+│   │   ├── dnc_interface_top_testbench.adb
+│   │   ├── dnc_interface_vector_testbench.adb
+│   │   ├── dnc_output_vector_testbench.adb
+│   │   └── dnc_top_testbench.adb
 │   └── trained
-│       └── dnc_trained_top_testbench.m
+│       └── dnc_trained_top_testbench.adb
 ├── math
 │   ├── algebra
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution_testbench.m
-│   │   │   ├── ntm_matrix_inverse_testbench.m
-│   │   │   ├── ntm_matrix_multiplication_testbench.m
-│   │   │   ├── ntm_matrix_product_testbench.m
-│   │   │   ├── ntm_matrix_summation_testbench.m
-│   │   │   ├── ntm_matrix_transpose_testbench.m
-│   │   │   ├── ntm_matrix_vector_convolution_testbench.m
-│   │   │   ├── ntm_matrix_vector_product_testbench.m
-│   │   │   └── ntm_transpose_vector_product_testbench.m
+│   │   │   ├── ntm_matrix_convolution_testbench.adb
+│   │   │   ├── ntm_matrix_inverse_testbench.adb
+│   │   │   ├── ntm_matrix_multiplication_testbench.adb
+│   │   │   ├── ntm_matrix_product_testbench.adb
+│   │   │   ├── ntm_matrix_summation_testbench.adb
+│   │   │   ├── ntm_matrix_transpose_testbench.adb
+│   │   │   ├── ntm_matrix_vector_convolution_testbench.adb
+│   │   │   ├── ntm_matrix_vector_product_testbench.adb
+│   │   │   └── ntm_transpose_vector_product_testbench.adb
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication_testbench.m
-│   │   │   └── ntm_scalar_summation_testbench.m
+│   │   │   ├── ntm_scalar_multiplication_testbench.adb
+│   │   │   └── ntm_scalar_summation_testbench.adb
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution_testbench.m
-│   │   │   ├── ntm_tensor_inverse_testbench.m
-│   │   │   ├── ntm_tensor_matrix_convolution_testbench.m
-│   │   │   ├── ntm_tensor_matrix_product_testbench.m
-│   │   │   ├── ntm_tensor_multiplication_testbench.m
-│   │   │   ├── ntm_tensor_product_testbench.m
-│   │   │   ├── ntm_tensor_summation_testbench.m
-│   │   │   └── ntm_tensor_transpose_testbench.m
+│   │   │   ├── ntm_tensor_convolution_testbench.adb
+│   │   │   ├── ntm_tensor_inverse_testbench.adb
+│   │   │   ├── ntm_tensor_matrix_convolution_testbench.adb
+│   │   │   ├── ntm_tensor_matrix_product_testbench.adb
+│   │   │   ├── ntm_tensor_multiplication_testbench.adb
+│   │   │   ├── ntm_tensor_product_testbench.adb
+│   │   │   ├── ntm_tensor_summation_testbench.adb
+│   │   │   └── ntm_tensor_transpose_testbench.adb
 │   │   └── vector
-│   │       ├── ntm_dot_product_testbench.m
-│   │       ├── ntm_vector_convolution_testbench.m
-│   │       ├── ntm_vector_cosine_similarity_testbench.m
-│   │       ├── ntm_vector_module_testbench.m
-│   │       ├── ntm_vector_multiplication_testbench.m
-│   │       └── ntm_vector_summation_testbench.m
+│   │       ├── ntm_dot_product_testbench.adb
+│   │       ├── ntm_vector_convolution_testbench.adb
+│   │       ├── ntm_vector_cosine_similarity_testbench.adb
+│   │       ├── ntm_vector_module_testbench.adb
+│   │       ├── ntm_vector_multiplication_testbench.adb
+│   │       └── ntm_vector_summation_testbench.adb
 │   ├── calculus
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation_testbench.m
-│   │   │   ├── ntm_matrix_integration_testbench.m
-│   │   │   └── ntm_matrix_softmax_testbench.m
+│   │   │   ├── ntm_matrix_differentiation_testbench.adb
+│   │   │   ├── ntm_matrix_integration_testbench.adb
+│   │   │   └── ntm_matrix_softmax_testbench.adb
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation_testbench.m
-│   │   │   ├── ntm_tensor_integration_testbench.m
-│   │   │   └── ntm_tensor_softmax_testbench.m
+│   │   │   ├── ntm_tensor_differentiation_testbench.adb
+│   │   │   ├── ntm_tensor_integration_testbench.adb
+│   │   │   └── ntm_tensor_softmax_testbench.adb
 │   │   └── vector
-│   │       ├── ntm_vector_differentiation_testbench.m
-│   │       ├── ntm_vector_integration_testbench.m
-│   │       └── ntm_vector_softmax_testbench.m
+│   │       ├── ntm_vector_differentiation_testbench.adb
+│   │       ├── ntm_vector_integration_testbench.adb
+│   │       └── ntm_vector_softmax_testbench.adb
 │   ├── function
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function_testbench.m
-│   │   │   └── ntm_matrix_oneplus_function_testbench.m
+│   │   │   ├── ntm_matrix_logistic_function_testbench.adb
+│   │   │   └── ntm_matrix_oneplus_function_testbench.adb
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function_testbench.m
-│   │   │   └── ntm_scalar_oneplus_function_testbench.m
+│   │   │   ├── ntm_scalar_logistic_function_testbench.adb
+│   │   │   └── ntm_scalar_oneplus_function_testbench.adb
 │   │   └── vector
-│   │       ├── ntm_vector_logistic_function_testbench.m
-│   │       └── ntm_vector_oneplus_function_testbench.m
+│   │       ├── ntm_vector_logistic_function_testbench.adb
+│   │       └── ntm_vector_oneplus_function_testbench.adb
 │   └── statitics
 │       ├── matrix
-│       │   ├── ntm_matrix_deviation_testbench.m
-│       │   └── ntm_matrix_mean_testbench.m
+│       │   ├── ntm_matrix_deviation_testbench.adb
+│       │   └── ntm_matrix_mean_testbench.adb
 │       ├── scalar
-│       │   ├── ntm_scalar_deviation_testbench.m
-│       │   └── ntm_scalar_mean_testbench.m
+│       │   ├── ntm_scalar_deviation_testbench.adb
+│       │   └── ntm_scalar_mean_testbench.adb
 │       └── vector
-│           ├── ntm_vector_deviation_testbench.m
-│           └── ntm_vector_mean_testbench.m
+│           ├── ntm_vector_deviation_testbench.adb
+│           └── ntm_vector_mean_testbench.adb
 ├── ntm
 │   ├── memory
-│   │   ├── ntm_addressing_testbench.m
-│   │   ├── ntm_matrix_content_based_addressing_testbench.m
-│   │   └── ntm_vector_content_based_addressing_testbench.m
+│   │   ├── ntm_addressing_testbench.adb
+│   │   ├── ntm_matrix_content_based_addressing_testbench.adb
+│   │   └── ntm_vector_content_based_addressing_testbench.adb
 │   ├── read_heads
-│   │   └── ntm_reading_testbench.m
+│   │   └── ntm_reading_testbench.adb
 │   ├── top
-│   │   ├── ntm_interface_matrix_testbench.m
-│   │   ├── ntm_interface_top_testbench.m
-│   │   ├── ntm_interface_vector_testbench.m
-│   │   ├── ntm_output_vector_testbench.m
-│   │   └── ntm_top_testbench.m
+│   │   ├── ntm_interface_matrix_testbench.adb
+│   │   ├── ntm_interface_top_testbench.adb
+│   │   ├── ntm_interface_vector_testbench.adb
+│   │   ├── ntm_output_vector_testbench.adb
+│   │   └── ntm_top_testbench.adb
 │   ├── trained
-│   │   └── ntm_trained_top_testbench.m
+│   │   └── ntm_trained_top_testbench.adb
 │   └── write_heads
-│       ├── ntm_erasing_testbench.m
-│       └── ntm_writing_testbench.m
+│       ├── ntm_erasing_testbench.adb
+│       └── ntm_writing_testbench.adb
 ├── state
 │   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward_testbench.m
-│   │   ├── ntm_state_matrix_input_testbench.m
-│   │   ├── ntm_state_matrix_output_testbench.m
-│   │   └── ntm_state_matrix_state_testbench.m
+│   │   ├── ntm_state_matrix_feedforward_testbench.adb
+│   │   ├── ntm_state_matrix_input_testbench.adb
+│   │   ├── ntm_state_matrix_output_testbench.adb
+│   │   └── ntm_state_matrix_state_testbench.adb
 │   ├── outputs
-│   │   ├── ntm_state_vector_output_testbench.m
-│   │   └── ntm_state_vector_state_testbench.m
+│   │   ├── ntm_state_vector_output_testbench.adb
+│   │   └── ntm_state_vector_state_testbench.adb
 │   └── top
-│       └── ntm_state_top_testbench.m
+│       └── ntm_state_top_testbench.adb
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation_testbench.m
-    │   └── ntm_vector_controller_differentiation_testbench.m
+    │   ├── ntm_matrix_controller_differentiation_testbench.adb
+    │   └── ntm_vector_controller_differentiation_testbench.adb
     ├── FNN
-    │   ├── ntm_fnn_b_trainer_testbench.m
-    │   ├── ntm_fnn_d_trainer_testbench.m
-    │   ├── ntm_fnn_k_trainer_testbench.m
-    │   ├── ntm_fnn_trainer_testbench.m
-    │   ├── ntm_fnn_u_trainer_testbench.m
-    │   ├── ntm_fnn_v_trainer_testbench.m
-    │   └── ntm_fnn_w_trainer_testbench.m
+    │   ├── ntm_fnn_b_trainer_testbench.adb
+    │   ├── ntm_fnn_d_trainer_testbench.adb
+    │   ├── ntm_fnn_k_trainer_testbench.adb
+    │   ├── ntm_fnn_trainer_testbench.adb
+    │   ├── ntm_fnn_u_trainer_testbench.adb
+    │   ├── ntm_fnn_v_trainer_testbench.adb
+    │   └── ntm_fnn_w_trainer_testbench.adb
     └── LSTM
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer_testbench.m
-        │   ├── ntm_lstm_activation_d_trainer_testbench.m
-        │   ├── ntm_lstm_activation_k_trainer_testbench.m
-        │   ├── ntm_lstm_activation_trainer_testbench.m
-        │   ├── ntm_lstm_activation_u_trainer_testbench.m
-        │   ├── ntm_lstm_activation_v_trainer_testbench.m
-        │   └── ntm_lstm_activation_w_trainer_testbench.m
+        │   ├── ntm_lstm_activation_b_trainer_testbench.adb
+        │   ├── ntm_lstm_activation_d_trainer_testbench.adb
+        │   ├── ntm_lstm_activation_k_trainer_testbench.adb
+        │   ├── ntm_lstm_activation_trainer_testbench.adb
+        │   ├── ntm_lstm_activation_u_trainer_testbench.adb
+        │   ├── ntm_lstm_activation_v_trainer_testbench.adb
+        │   └── ntm_lstm_activation_w_trainer_testbench.adb
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer_testbench.m
-        │   ├── ntm_lstm_forget_d_trainer_testbench.m
-        │   ├── ntm_lstm_forget_k_trainer_testbench.m
-        │   ├── ntm_lstm_forget_trainer_testbench.m
-        │   ├── ntm_lstm_forget_u_trainer_testbench.m
-        │   ├── ntm_lstm_forget_v_trainer_testbench.m
-        │   └── ntm_lstm_forget_w_trainer_testbench.m
+        │   ├── ntm_lstm_forget_b_trainer_testbench.adb
+        │   ├── ntm_lstm_forget_d_trainer_testbench.adb
+        │   ├── ntm_lstm_forget_k_trainer_testbench.adb
+        │   ├── ntm_lstm_forget_trainer_testbench.adb
+        │   ├── ntm_lstm_forget_u_trainer_testbench.adb
+        │   ├── ntm_lstm_forget_v_trainer_testbench.adb
+        │   └── ntm_lstm_forget_w_trainer_testbench.adb
         ├── input
-        │   ├── ntm_lstm_input_b_trainer_testbench.m
-        │   ├── ntm_lstm_input_d_trainer_testbench.m
-        │   ├── ntm_lstm_input_k_trainer_testbench.m
-        │   ├── ntm_lstm_input_trainer_testbench.m
-        │   ├── ntm_lstm_input_u_trainer_testbench.m
-        │   ├── ntm_lstm_input_v_trainer_testbench.m
-        │   └── ntm_lstm_input_w_trainer_testbench.m
+        │   ├── ntm_lstm_input_b_trainer_testbench.adb
+        │   ├── ntm_lstm_input_d_trainer_testbench.adb
+        │   ├── ntm_lstm_input_k_trainer_testbench.adb
+        │   ├── ntm_lstm_input_trainer_testbench.adb
+        │   ├── ntm_lstm_input_u_trainer_testbench.adb
+        │   ├── ntm_lstm_input_v_trainer_testbench.adb
+        │   └── ntm_lstm_input_w_trainer_testbench.adb
         └── output
-            ├── ntm_lstm_output_b_trainer_testbench.m
-            ├── ntm_lstm_output_d_trainer_testbench.m
-            ├── ntm_lstm_output_k_trainer_testbench.m
-            ├── ntm_lstm_output_trainer_testbench.m
-            ├── ntm_lstm_output_u_trainer_testbench.m
-            ├── ntm_lstm_output_v_trainer_testbench.m
-            └── ntm_lstm_output_w_trainer_testbench.m
+            ├── ntm_lstm_output_b_trainer_testbench.adb
+            ├── ntm_lstm_output_d_trainer_testbench.adb
+            ├── ntm_lstm_output_k_trainer_testbench.adb
+            ├── ntm_lstm_output_trainer_testbench.adb
+            ├── ntm_lstm_output_u_trainer_testbench.adb
+            ├── ntm_lstm_output_v_trainer_testbench.adb
+            └── ntm_lstm_output_w_trainer_testbench.adb
