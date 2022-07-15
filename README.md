@@ -133,61 +133,66 @@ geometry: "left=3cm,right=2cm,top=3cm,bottom=2cm"
 
 # 7. METHODOGY
 
-## 0.1. Requeriments
+## 7.1. Requirements
 
-### 0.1.1. Structural UML diagrams
+### 7.1.1. Structural UML diagrams
 
-#### 0.1.1.1. Class diagram
-#### 0.1.1.2. Component diagram
-#### 0.1.1.3. Composite diagram
-#### 0.1.1.4. Deployment diagram
-#### 0.1.1.5. Object diagram
-#### 0.1.1.6. Package diagram
-#### 0.1.1.7. Profile diagram
+#### 7.1.1.1. Class diagram
+#### 7.1.1.2. Component diagram
+#### 7.1.1.3. Composite diagram
+#### 7.1.1.4. Deployment diagram
+#### 7.1.1.5. Object diagram
+#### 7.1.1.6. Package diagram
+#### 7.1.1.7. Profile diagram
 
-### 0.1.2. Behavioral UML diagrams
+### 7.1.2. Behavioral UML diagrams
 
-#### 0.1.2.1. Activity diagram
-#### 0.1.2.2. Communication diagram
-#### 0.1.2.3. Interaction diagram
-#### 0.1.2.4. Sequence diagram
-#### 0.1.2.5. State diagram
-#### 0.1.2.6. Timing diagram
-#### 0.1.2.7. Use diagram
+#### 7.1.2.1. Activity diagram
+#### 7.1.2.2. Communication diagram
+#### 7.1.2.3. Interaction diagram
+#### 7.1.2.4. Sequence diagram
+#### 7.1.2.5. State diagram
+#### 7.1.2.6. Timing diagram
+#### 7.1.2.7. Use diagram
 
-## 0.2. Source
+## 7.2. Source
 
-### 0.2.1. MatLab Language
-### 0.2.2. Rust Language
+### 7.2.1. Ada Language
+### 7.2.2. C Language
 
-## 0.3. Model
+## 7.3. Model
 
-### 0.3.1. VHDL
-### 0.3.2. Verilog
+### 7.3.1. VHDL
+### 7.3.2. Verilog
 
-## 0.4. Design
+## 7.4. Validation
 
-### 0.4.1. VHDL
-### 0.4.2. Verilog
+### 7.4.1. VHDL
+### 7.4.2. Verilog
 
-## 0.5. Verification
+## 7.5. Design
 
-### 0.5.1. OSVVM-VHDL
+### 7.5.1. VHDL
+### 7.5.2. Verilog
 
-#### 0.5.1.1. OSVVM Checker
-#### 0.5.1.2. OSVVM Stimulus
-#### 0.5.1.3. OSVVM Testbench
+## 7.6. Verification
 
-### 0.5.2. UVM-Verilog
+### 7.6.1. OSVVM-VHDL
 
-#### 0.5.2.1. UVM Agent
-#### 0.5.2.2. UVM Driver
-#### 0.5.2.3. UVM Enviroment
-#### 0.5.2.4. UVM Monitor
-#### 0.5.2.5. UVM Scoreboard
-#### 0.5.2.6. UVM Sequence
-#### 0.5.2.7. UVM Sequencer
-#### 0.5.2.8. UVM Subscriber
-#### 0.5.2.9. UVM Test
-#### 0.5.2.10. UVM Testbench
-#### 0.5.2.11. UVM Transaction
+#### 7.6.1.1. OSVVM Checker
+#### 7.6.1.2. OSVVM Stimulus
+#### 7.6.1.3. OSVVM Testbench
+
+### 7.6.2. UVM-Verilog
+
+#### 7.6.2.1. UVM Agent
+#### 7.6.2.2. UVM Driver
+#### 7.6.2.3. UVM Enviroment
+#### 7.6.2.4. UVM Monitor
+#### 7.6.2.5. UVM Scoreboard
+#### 7.6.2.6. UVM Sequence
+#### 7.6.2.7. UVM Sequencer
+#### 7.6.2.8. UVM Subscriber
+#### 7.6.2.9. UVM Test
+#### 7.6.2.10. UVM Testbench
+#### 7.6.2.11. UVM Transaction
