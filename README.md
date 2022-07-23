@@ -1,7 +1,7 @@
 # MPSoC-NTM (T-DNC/NTM-MPSoC)
 ## QueenField
 
-![QueenField](../main/icon.jpg)
+![QueenField](../master/icon.jpg)
 
 # 0. INTRODUCTION
 
