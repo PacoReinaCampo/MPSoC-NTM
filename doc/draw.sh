@@ -1,3 +1,7 @@
+dot -Tsvg back-end.dot > back-end.svg
+dot -Tsvg front-end.dot > front-end.svg
+dot -Tsvg project.dot > project.svg
+
 dot -Tsvg graphviz/behavioral/activity/controller/FNN/convolutional/ntm_controller.dot > graphviz/behavioral/activity/controller/FNN/convolutional/ntm_controller.svg
 dot -Tsvg graphviz/behavioral/activity/controller/FNN/standard/ntm_controller.dot > graphviz/behavioral/activity/controller/FNN/standard/ntm_controller.svg
 dot -Tsvg graphviz/behavioral/activity/controller/LSTM/convolutional/ntm_activation_gate_vector.dot > graphviz/behavioral/activity/controller/LSTM/convolutional/ntm_activation_gate_vector.svg
