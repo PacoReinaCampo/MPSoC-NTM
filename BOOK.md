@@ -44,7 +44,11 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 
 # 1. METHODOLOGY
 
+![Project Workflow](../doc/project.png)
+
 ## 1.1. Requirements
+
+![UML Diagrams Overview](../doc/graphviz/uml_diagrams_overview.png)
 
 ### 1.1.1. Structural UML diagrams
 
@@ -432,6 +436,8 @@ libboost-python-dev libboost-filesystem-dev zlib1g-dev
 
 ## 4.1. FRONT-END OPEN SOURCE TOOLS
 
+![Front-End](../doc/front-end.png)
+
 ### 4.1.1. Modeling System Level of Hardware
 
 *A System Description Language Editor is a computer tool that allows to generate software code. A System Description Language is a formal language, which comprises a Programming Language (input), producing a Hardware Description (output). Programming languages are used in computer programming to implement algorithms. The description of a programming language is  split into the two components of syntax (form) and semantics (meaning).*
@@ -625,6 +631,8 @@ git clone https://github.com/YosysHQ/SymbiYosys
 ```
 
 ## 4.2. BACK-END OPEN SOURCE TOOLS
+
+![Back-End](../doc/back-end.png)
 
 **Library**
 
