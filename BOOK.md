@@ -100,6 +100,8 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 
 ### 1.6.2. UVM-Verilog
 
+![UVM Diagram Overview](../bench/uvm-testbench.png)
+
 #### 1.6.2.1. UVM Agent
 #### 1.6.2.2. UVM Driver
 #### 1.6.2.3. UVM Enviroment
@@ -283,6 +285,10 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 | `dint`  |    1   |   Output  | Interrupt Signal Output         |
 
 ## 2.2. FUNCTIONALITY
+
+## 2.3. REGISTERS
+
+## 2.4. INTERRUPTIONS
 
 # 3. ORGANIZATION
 
