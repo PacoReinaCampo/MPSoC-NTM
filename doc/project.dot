@@ -5,6 +5,7 @@ digraph Project {
 
   // Blocks
   Requirements[label="Requirements \n(UML) [Dot]"];
+  Software[label="Software \n(Matlab/Rust) [Emacs]"];
   Source[label="Source \n(ADA/C) [Emacs]"];
   Model[label="Model \n(VHDL/Verilog) [Emacs]"];
   Validation[label="Validation \n(VHDL/Verilog) [GHDL / Icarus Verilog]"];
@@ -14,7 +15,8 @@ digraph Project {
   Documentation[label="Documentation \n(Tex) [Emacs]"];
 
   // Sequence
-  Requirements -> Source;
+  Requirements -> Software;
+  Software -> Source;
   Source -> Model;
   Model -> Validation;
   Validation -> Design;
