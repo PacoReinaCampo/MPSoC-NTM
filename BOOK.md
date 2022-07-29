@@ -48,7 +48,7 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 
 ## 1.1. Requirements
 
-![UML Diagrams Overview](../doc/graphviz/uml_diagrams_overview.png)
+![UML Diagrams Overview](../requirements/uml_diagrams_overview.png)
 
 ### 1.1.1. Structural UML diagrams
 

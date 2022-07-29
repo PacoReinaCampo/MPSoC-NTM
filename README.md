@@ -45,7 +45,7 @@
 
 ## 1.1. Requirements
 
-![UML Diagrams Overview](doc/graphviz/uml_diagrams_overview.svg)
+![UML Diagrams Overview](requirements/uml_diagrams_overview.svg)
 
 ### 1.1.1. Structural UML diagrams
 
