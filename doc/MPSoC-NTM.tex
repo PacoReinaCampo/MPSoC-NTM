@@ -42,6 +42,44 @@
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[left = 3cm, right = 2cm, top = 3cm, bottom = 2cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -85,240 +123,878 @@
 \hypertarget{introduction}{%
 \section{0. INTRODUCTION}\label{introduction}}
 
-\hypertarget{do-254}{%
-\subsection{0.0. DO-254}\label{do-254}}
-
-\hypertarget{planning-process}{%
-\subsubsection{0.0.1. PLANNING PROCESS}\label{planning-process}}
-
-\hypertarget{planning-process-objectives}{%
-\paragraph{0.0.1.1. Planning Process
-Objectives}\label{planning-process-objectives}}
-
-\hypertarget{planning-process-activities}{%
-\paragraph{0.0.1.2. Planning Process
-Activities}\label{planning-process-activities}}
-
-\hypertarget{hardware-design-process}{%
-\subsubsection{0.0.2. HARDWARE DESIGN
-PROCESS}\label{hardware-design-process}}
-
-\hypertarget{requirements-capture-process}{%
-\paragraph{0.0.2.1. Requirements Capture
-Process}\label{requirements-capture-process}}
-
-\hypertarget{conceptual-design-process}{%
-\paragraph{0.0.2.2. Conceptual Design
-Process}\label{conceptual-design-process}}
-
-\hypertarget{detailed-design-process}{%
-\paragraph{0.0.2.3. Detailed Design
-Process}\label{detailed-design-process}}
-
-\hypertarget{implementation-process}{%
-\paragraph{0.0.2.4. Implementation
-Process}\label{implementation-process}}
-
-\hypertarget{production-transition}{%
-\paragraph{0.0.2.5. Production Transition}\label{production-transition}}
-
-\hypertarget{acceptance-test}{%
-\paragraph{0.0.2.6. Acceptance Test}\label{acceptance-test}}
-
-\hypertarget{series-production}{%
-\paragraph{0.0.2.7. Series Production}\label{series-production}}
-
-\hypertarget{validation-and-verification-process}{%
-\subsubsection{0.0.3. VALIDATION AND VERIFICATION
-PROCESS}\label{validation-and-verification-process}}
-
-\hypertarget{validation-process}{%
-\paragraph{0.0.3.1. Validation Process}\label{validation-process}}
-
-\hypertarget{verification-process}{%
-\paragraph{0.0.3.2. Verification Process}\label{verification-process}}
-
-\hypertarget{validation-and-verification-methods}{%
-\paragraph{0.0.3.3. Validation and Verification
-Methods}\label{validation-and-verification-methods}}
-
-\hypertarget{configuration-management-process}{%
-\subsubsection{0.0.4. CONFIGURATION MANAGEMENT
-PROCESS}\label{configuration-management-process}}
-
-\hypertarget{configuration-management-objectives}{%
-\paragraph{0.0.4.1. Configuration Management
-Objectives}\label{configuration-management-objectives}}
-
-\hypertarget{configuration-management-activities}{%
-\paragraph{0.0.4.2. Configuration Management
-Activities}\label{configuration-management-activities}}
-
-\hypertarget{data-control-categories}{%
-\paragraph{0.0.4.3. Data Control
-Categories}\label{data-control-categories}}
-
-\hypertarget{process-assurance}{%
-\subsubsection{0.0.5. PROCESS ASSURANCE}\label{process-assurance}}
-
-\hypertarget{process-assurance-objectives}{%
-\paragraph{0.0.5.1. Process Assurance
-Objectives}\label{process-assurance-objectives}}
-
-\hypertarget{process-assurance-activities}{%
-\paragraph{0.0.5.2. Process Assurance
-Activities}\label{process-assurance-activities}}
-
-\hypertarget{certification-liaison-process}{%
-\subsubsection{0.0.6. CERTIFICATION LIAISON
-PROCESS}\label{certification-liaison-process}}
-
-\hypertarget{means-of-compliance-and-planning}{%
-\paragraph{0.0.6.1. Means of Compliance and
-Planning}\label{means-of-compliance-and-planning}}
-
-\hypertarget{compliance-substantiation}{%
-\paragraph{0.0.6.2. Compliance
-Substantiation}\label{compliance-substantiation}}
-
-\hypertarget{hardware-design-lifecycle-data}{%
-\subsubsection{0.0.7. HARDWARE DESIGN LIFECYCLE
-DATA}\label{hardware-design-lifecycle-data}}
-
-\hypertarget{hardware-plans}{%
-\paragraph{0.0.7.1. Hardware Plans}\label{hardware-plans}}
-
-\hypertarget{plan-for-hardware-aspects-of-certification}{%
-\subparagraph{0.0.7.1.1. Plan for Hardware Aspects of
-Certification}\label{plan-for-hardware-aspects-of-certification}}
-
-\hypertarget{hardware-design-plan}{%
-\subparagraph{0.0.7.1.2. Hardware Design
-Plan}\label{hardware-design-plan}}
-
-\hypertarget{hardware-validation-plan}{%
-\subparagraph{0.0.7.1.3. Hardware Validation
-Plan}\label{hardware-validation-plan}}
-
-\hypertarget{hardware-verification-plan}{%
-\subparagraph{0.0.7.1.4. Hardware Verification
-Plan}\label{hardware-verification-plan}}
-
-\hypertarget{hardware-configuration-management-plan}{%
-\subparagraph{0.0.7.1.5. Hardware Configuration Management
-Plan}\label{hardware-configuration-management-plan}}
-
-\hypertarget{hardware-process-assurance-plan}{%
-\subparagraph{0.0.7.1.6. Hardware Process Assurance
-Plan}\label{hardware-process-assurance-plan}}
-
-\hypertarget{hardware-design-standards-and-guidance}{%
-\paragraph{0.0.7.2. Hardware Design Standards and
-Guidance}\label{hardware-design-standards-and-guidance}}
-
-\hypertarget{requirements-standards}{%
-\subparagraph{0.0.7.2.1. Requirements
-Standards}\label{requirements-standards}}
-
-\hypertarget{hardware-design-standards}{%
-\subparagraph{0.0.7.2.2. Hardware Design
-Standards}\label{hardware-design-standards}}
-
-\hypertarget{validation-and-verification-standards}{%
-\subparagraph{0.0.7.2.3. Validation and Verification
-Standards}\label{validation-and-verification-standards}}
-
-\hypertarget{hardware-archive-standards}{%
-\subparagraph{0.0.7.2.4. Hardware Archive
-Standards}\label{hardware-archive-standards}}
-
-\hypertarget{hardware-design-data}{%
-\paragraph{0.0.7.3. Hardware Design Data}\label{hardware-design-data}}
-
-\hypertarget{hardware-requirements}{%
-\subparagraph{0.0.7.3.1. Hardware
-Requirements}\label{hardware-requirements}}
-
-\emph{The requirements specify the functional, performance, safety,
-quality, maintainability, and reliability requirements for the hardware
-item being developed.}
-
-\hypertarget{hardware-design-representation-data}{%
-\subparagraph{0.0.7.3.2. Hardware Design Representation
-Data}\label{hardware-design-representation-data}}
-
-\emph{The hardware design representation data provides a definition of
-the hardware item and is comprised of the set of drawings, documents and
-specifications used to build the hardware item. The following paragraphs
-define some typical hardware design data and their content. The type of
-data, drawings and documents produced for a given hardware design will
-vary depending on the size, complexity and number of components the
-hardware item contains.}
-
-0.0.7.3.2.1. Conceptual Design Data
-
-\emph{The conceptual design data is the data that describes the hardware
-item's architecture and functional design.}
-
-0.0.7.3.2.2. Detailed Design Data
-
-0.0.7.3.2.2.1. Top-Level Drawing
-
-0.0.7.3.2.2.2. Assembly Drawings
-
-0.0.7.3.2.2.3. Installation Control Drawings
-
-0.0.7.3.2.2.4. Hardware/Software Interface Data
-
-\hypertarget{validation-and-verification-data}{%
-\paragraph{0.0.7.4. Validation and Verification
-Data}\label{validation-and-verification-data}}
-
-\hypertarget{traceability-data}{%
-\subparagraph{0.0.7.4.1. Traceability Data}\label{traceability-data}}
-
-\hypertarget{review-and-analysis-procedures}{%
-\subparagraph{0.0.7.4.2. Review and Analysis
-Procedures}\label{review-and-analysis-procedures}}
-
-\hypertarget{review-and-analysis-results}{%
-\subparagraph{0.0.7.4.3. Review and Analysis
-Results}\label{review-and-analysis-results}}
-
-\hypertarget{test-procedures}{%
-\subparagraph{0.0.7.4.4. Test Procedures}\label{test-procedures}}
-
-\hypertarget{test-results}{%
-\subparagraph{0.0.7.4.5. Test Results}\label{test-results}}
-
-\hypertarget{additional-considerations}{%
-\subsubsection{0.0.8. ADDITIONAL
-CONSIDERATIONS}\label{additional-considerations}}
-
-\hypertarget{use-of-previously-developed-hardware}{%
-\paragraph{0.0.8.1. Use of Previously Developed
-Hardware}\label{use-of-previously-developed-hardware}}
-
-\hypertarget{commercial-components-usage}{%
-\paragraph{0.0.8.2. Commercial Components
-Usage}\label{commercial-components-usage}}
-
-\hypertarget{product-service-experience}{%
-\paragraph{0.0.8.3. Product Service
-Experience}\label{product-service-experience}}
-
-\hypertarget{tool-assessment-and-qualification}{%
-\paragraph{0.0.8.4. Tool Assessment and
-Qualification}\label{tool-assessment-and-qualification}}
-
 \hypertarget{best-practices}{%
 \subsection{0.1. BEST PRACTICES}\label{best-practices}}
 
 \hypertarget{hardware}{%
 \subsubsection{0.1.1. HARDWARE}\label{hardware}}
 
+\begin{verbatim}
+cd synthesis/yosys
+source SYNTHESIZE-IT
+\end{verbatim}
+
+\hypertarget{asic}{%
+\paragraph{0.1.1.1. ASIC}\label{asic}}
+
+type:
+
+\begin{verbatim}
+cd synthesis/qflow
+source FLOW-IT
+\end{verbatim}
+
+\hypertarget{fpga}{%
+\paragraph{0.1.1.2. FPGA}\label{fpga}}
+
+type:
+
+\begin{verbatim}
+cd synthesis/symbiflow
+source FLOW-IT
+\end{verbatim}
+
 \hypertarget{software}{%
 \subsubsection{0.1.2. SOFTWARE}\label{software}}
+
+\hypertarget{msp430}{%
+\paragraph{0.1.2.1. MSP430}\label{msp430}}
+
+\hypertarget{msp430-tests}{%
+\subparagraph{0.1.2.1.1. MSP430 Tests}\label{msp430-tests}}
+
+\hypertarget{msp430-bare-metal}{%
+\subparagraph{0.1.2.1.2. MSP430 Bare Metal}\label{msp430-bare-metal}}
+
+\hypertarget{msp430-operating-system}{%
+\subparagraph{0.1.2.1.3. MSP430 Operating
+System}\label{msp430-operating-system}}
+
+0.1.2.1.3.1. GNU Linux
+
+0.1.2.1.3.2. GNU Hurd
+
+\hypertarget{msp430-distribution}{%
+\subparagraph{0.1.2.1.4. MSP430
+Distribution}\label{msp430-distribution}}
+
+0.1.2.1.4.1. GNU Debian
+
+0.1.2.1.4.2. GNU Fedora
+
+\hypertarget{openrisc}{%
+\paragraph{0.1.2.2. OpenRISC}\label{openrisc}}
+
+\hypertarget{openrisc-tests}{%
+\subparagraph{0.1.2.2.1. OpenRISC Tests}\label{openrisc-tests}}
+
+\hypertarget{openrisc-bare-metal}{%
+\subparagraph{0.1.2.2.2. OpenRISC Bare
+Metal}\label{openrisc-bare-metal}}
+
+\hypertarget{openrisc-operating-system}{%
+\subparagraph{0.1.2.2.3. OpenRISC Operating
+System}\label{openrisc-operating-system}}
+
+0.1.2.2.3.1. GNU Linux
+
+0.1.2.2.3.2. GNU Hurd
+
+\hypertarget{openrisc-distribution}{%
+\subparagraph{0.1.2.2.4. OpenRISC
+Distribution}\label{openrisc-distribution}}
+
+0.1.2.2.4.1. GNU Debian
+
+0.1.2.2.4.2. GNU Fedora
+
+\hypertarget{risc-v}{%
+\paragraph{0.1.2.3. RISC-V}\label{risc-v}}
+
+\hypertarget{risc-v-tests}{%
+\subparagraph{0.1.2.3.1. RISC-V Tests}\label{risc-v-tests}}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+rm -rf tests
+rm -rf riscv-tests
+
+mkdir tests
+mkdir tests/dump
+mkdir tests/hex
+
+git clone --recursive https://github.com/riscv/riscv-tests
+cd riscv-tests
+
+autoconf
+./configure --prefix=/opt/riscv-elf-gcc/bin
+make
+
+cd isa
+
+source ../../elf2hex.sh
+
+mv *.dump ../../tests/dump
+mv *.hex ../../tests/hex
+
+cd ..
+
+make clean
+\end{verbatim}
+
+elf2hex.sh:
+
+\begin{verbatim}
+riscv64-unknown-elf-objcopy -O ihex rv32mi-p-breakpoint rv32mi-p-breakpoint.hex
+riscv64-unknown-elf-objcopy -O ihex rv32mi-p-csr rv32mi-p-csr.hex
+...
+riscv64-unknown-elf-objcopy -O ihex rv64um-v-remw rv64um-v-remw.hex
+\end{verbatim}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+spike rv32mi-p-breakpoint
+spike rv32mi-p-csr
+...
+spike rv64um-v-remw
+\end{verbatim}
+
+\hypertarget{risc-v-bare-metal}{%
+\subparagraph{0.1.2.3.2. RISC-V Bare Metal}\label{risc-v-bare-metal}}
+
+type:
+
+\begin{verbatim}
+rm -rf hello_c.elf
+rm -rf hello_c.hex
+
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+riscv64-unknown-elf-gcc -o hello_c.elf hello_c.c
+riscv64-unknown-elf-objcopy -O ihex hello_c.elf hello_c.hex
+\end{verbatim}
+
+C Language:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}stdio.h\textgreater{}}
+
+\DataTypeTok{int}\NormalTok{ main() \{}
+\NormalTok{  printf(}\StringTok{"Hello QueenField!}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{return} \DecValTok{0}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+spike pk hello_c.elf
+\end{verbatim}
+
+type:
+
+\begin{verbatim}
+rm -rf hello_cpp.elf
+rm -rf hello_cpp.hex
+
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+riscv64-unknown-elf-g++ -o hello_cpp.elf hello_cpp.cpp
+riscv64-unknown-elf-objcopy -O ihex hello_cpp.elf hello_cpp.hex
+\end{verbatim}
+
+C++ Language:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}iostream\textgreater{}}
+
+\DataTypeTok{int}\NormalTok{ main() \{}
+  \BuiltInTok{std::}\NormalTok{cout \textless{}\textless{} }\StringTok{"Hello QueenField!}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+  \ControlFlowTok{return} \DecValTok{0}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+spike pk hello_cpp.elf
+\end{verbatim}
+
+type:
+
+\begin{verbatim}
+rm -rf hello_go.elf
+rm -rf hello_go.hex
+
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+export PATH=/opt/riscv-go/bin:${PATH}
+
+GOOS=linux GOARCH=riscv64 go build -o hello_go.elf hello_go.go
+riscv64-unknown-elf-objcopy -O ihex hello_go.elf hello_go.hex
+\end{verbatim}
+
+Go Language:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{package}\NormalTok{ main}
+
+\KeywordTok{import} \StringTok{"fmt"}
+\KeywordTok{func}\NormalTok{ main() \{}
+\NormalTok{  fmt.Println(}\StringTok{"Hello QueenField!"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{risc-v-operating-system}{%
+\subparagraph{0.1.2.3.3. RISC-V Operating
+System}\label{risc-v-operating-system}}
+
+0.1.2.3.3.1. GNU Linux
+
+\textbf{Building BusyBox}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+git clone --recursive https://git.busybox.net/busybox
+
+cd busybox
+make CROSS_COMPILE=riscv64-unknown-linux-gnu- defconfig
+make CROSS_COMPILE=riscv64-unknown-linux-gnu-
+\end{verbatim}
+
+\textbf{Building Linux}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+git clone --recursive https://github.com/torvalds/linux
+
+cd linux
+make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- defconfig
+make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu-
+\end{verbatim}
+
+\textbf{Running Linux}
+
+type:
+
+\begin{verbatim}
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+qemu-system-riscv64 -nographic -machine virt \
+-kernel Image -append "root=/dev/vda ro console=ttyS0" \
+-drive file=busybox,format=raw,id=hd0 \
+-device virtio-blk-device,drive=hd0
+\end{verbatim}
+
+0.1.2.3.3.2. GNU Hurd
+
+\hypertarget{risc-v-distribution}{%
+\subparagraph{0.1.2.3.4. RISC-V
+Distribution}\label{risc-v-distribution}}
+
+0.1.2.3.4.1. GNU Debian
+
+0.1.2.3.4.2. GNU Fedora
+
+\hypertarget{open-source-philosophy}{%
+\subsection{0.2. OPEN SOURCE PHILOSOPHY}\label{open-source-philosophy}}
+
+\textbf{For Windows Users!}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Settings → Apps → Apps \& features → Related settings, Programs and
+  Features → Turn Windows features on or off → Windows Subsystem for
+  Linux
+\item
+  Microsoft Store → INSTALL UBUNTU
+\end{enumerate}
+
+type:
+
+\begin{verbatim}
+sudo apt update
+sudo apt upgrade
+\end{verbatim}
+
+\hypertarget{open-source-hardware}{%
+\subsubsection{0.2.1. Open Source Hardware}\label{open-source-hardware}}
+
+\hypertarget{msp430-processing-unit}{%
+\paragraph{0.2.1.1. MSP430 Processing
+Unit}\label{msp430-processing-unit}}
+
+\hypertarget{openrisc-processing-unit}{%
+\paragraph{0.2.1.2. OpenRISC Processing
+Unit}\label{openrisc-processing-unit}}
+
+\hypertarget{risc-v-processing-unit}{%
+\paragraph{0.2.1.3. RISC-V Processing
+Unit}\label{risc-v-processing-unit}}
+
+\hypertarget{open-source-software}{%
+\subsubsection{0.2.2. Open Source Software}\label{open-source-software}}
+
+\hypertarget{msp430-gnu-compiler-collection}{%
+\paragraph{0.2.2.1. MSP430 GNU Compiler
+Collection}\label{msp430-gnu-compiler-collection}}
+
+\hypertarget{openrisc-gnu-compiler-collection}{%
+\paragraph{0.2.2.2. OpenRISC GNU Compiler
+Collection}\label{openrisc-gnu-compiler-collection}}
+
+\hypertarget{risc-v-gnu-compiler-collection}{%
+\paragraph{0.2.2.3. RISC-V GNU Compiler
+Collection}\label{risc-v-gnu-compiler-collection}}
+
+\hypertarget{instruction-set-architecture}{%
+\subsection{0.3. INSTRUCTION SET
+ARCHITECTURE}\label{instruction-set-architecture}}
+
+\hypertarget{risc-v-isa}{%
+\subsubsection{0.3.1. RISC-V ISA}\label{risc-v-isa}}
+
+\hypertarget{isa-bases}{%
+\paragraph{0.3.1.1. ISA Bases}\label{isa-bases}}
+
+\hypertarget{risc-v-32}{%
+\subparagraph{0.3.1.1.1. RISC-V 32}\label{risc-v-32}}
+
+\hypertarget{risc-v-64}{%
+\subparagraph{0.3.1.1.2. RISC-V 64}\label{risc-v-64}}
+
+\hypertarget{risc-v-128}{%
+\subparagraph{0.3.1.1.3. RISC-V 128}\label{risc-v-128}}
+
+\hypertarget{isa-extensions}{%
+\paragraph{0.3.1.2. ISA Extensions}\label{isa-extensions}}
+
+\hypertarget{base-integer-instruction-set}{%
+\subparagraph{0.3.1.2.1. Base Integer Instruction
+Set}\label{base-integer-instruction-set}}
+
+\textbf{RV32I : Base Integer Instruction Set (32 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV32I & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+LUI RD, IMM & IIIIIII & IIIII & IIIII & III & RD4:0 &
+0110111\tabularnewline
+AUPIC RD, IMM & IIIIIII & IIIII & IIIII & III & RD4:0 &
+0010111\tabularnewline
+JAL RD, IMM & IIIIIII & IIIII & IIIII & III & RD4:0 &
+1101111\tabularnewline
+JALR RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 000 & RD4:0 &
+1101111\tabularnewline
+BEQ RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 000 & IIIII &
+1100011\tabularnewline
+BNE RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 001 & IIIII &
+1100011\tabularnewline
+BLT RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 100 & IIIII &
+1100011\tabularnewline
+BGE RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 101 & IIIII &
+1100011\tabularnewline
+BLTU RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 110 & IIIII &
+1100011\tabularnewline
+BGEU RS1,RS2,IMM & IIIIIII & RS24:0 & RS14:0 & 111 & IIIII &
+1100011\tabularnewline
+LB RD, RS1 & IIIIIII & IIIII & RS14:0 & 000 & RD4:0 &
+0000011\tabularnewline
+LH RD, RS1 & IIIIIII & IIIII & RS14:0 & 001 & RD4:0 &
+0000011\tabularnewline
+LW RD, RS1 & IIIIIII & IIIII & RS14:0 & 010 & RD4:0 &
+0000011\tabularnewline
+LBU RD, RS1 & IIIIIII & IIIII & RS14:0 & 100 & RD4:0 &
+0000011\tabularnewline
+LHU RD, RS1 & IIIIIII & IIIII & RS14:0 & 101 & RD4:0 &
+0000011\tabularnewline
+SB RS2,RS1 & IIIIIII & RS24:0 & RS14:0 & 000 & IIIII &
+0100011\tabularnewline
+SH RS2,RS1 & IIIIIII & RS24:0 & RS14:0 & 001 & IIIII &
+0100011\tabularnewline
+SW RS2,RS1 & IIIIIII & RS24:0 & RS14:0 & 010 & IIIII &
+0100011\tabularnewline
+ADDI RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 000 & RD4:0 &
+0010011\tabularnewline
+SLTI RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 010 & RD4:0 &
+0010011\tabularnewline
+SLTIU RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 011 & RD4:0 &
+0010011\tabularnewline
+XORI RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 100 & RD4:0 &
+0010011\tabularnewline
+ORI RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 110 & RD4:0 &
+0010011\tabularnewline
+ANDI RD,RS1,IMM & IIIIIII & IIIII & RS14:0 & 111 & RD4:0 &
+0010011\tabularnewline
+SLLI RD,RS1,IMM & 0000000 & IIII & RS14:0 & 001 & RD4:0 &
+0010011\tabularnewline
+SRLI RD,RS1,IMM & 0000000 & IIII & RS14:0 & 101 & RD4:0 &
+0010011\tabularnewline
+SRAI RD,RS1,IMM & 0100000 & IIII & RS14:0 & 101 & RD4:0 &
+0010011\tabularnewline
+ADD RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0110011\tabularnewline
+SUB RD,RS1,RS2 & 0100000 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0110011\tabularnewline
+SLL RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 001 & RD4:0 &
+0110011\tabularnewline
+SLT RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 010 & RD4:0 &
+0110011\tabularnewline
+SLTU RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 011 & RD4:0 &
+0110011\tabularnewline
+XOR RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 100 & RD4:0 &
+0110011\tabularnewline
+SRL RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0110011\tabularnewline
+SRA RD,RS1,RS2 & 0100000 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0110011\tabularnewline
+OR RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 110 & RD4:0 &
+0110011\tabularnewline
+AND RD,RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 111 & RD4:0 &
+0110011\tabularnewline
+FENCE PRED,SUCC & 0000PPP & PSSSS & 00000 & 000 & 00000 &
+0001111\tabularnewline
+FENCE.I & 0000P00 & 00000 & 00000 & 001 & 00000 & 0001111\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{RV64I : Base Integer Instruction Set (64 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV64I & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+LWU RD, RS1 & IIIIIII & IIIII & RS14:0 & 110 & RD4:0 &
+0000011\tabularnewline
+LD RD, RS1 & IIIIIII & IIIII & RS14:0 & 011 & RD4:0 &
+0000011\tabularnewline
+SD RD, RS1,RS2 & IIIIIII & RS24:0 & RS14:0 & 011 & IIIII &
+0000011\tabularnewline
+SLLI RD, RS1,IMM & 0000000 & IIIII & RS14:0 & 001 & RD4:0 &
+0010011\tabularnewline
+SRLI RD, RS1,IMM & 0000000 & IIIII & RS14:0 & 001 & RD4:0 &
+0010011\tabularnewline
+SRAI RD, RS1,IMM & 0100000 & IIIII & RS14:0 & 001 & RD4:0 &
+0010011\tabularnewline
+ADDIW RD, RS1 & IIIIIII & IIIII & RS14:0 & 000 & RD4:0 &
+0011011\tabularnewline
+SLLIW RD, RS1 & 0000000 & IIIII & RS14:0 & 001 & RD4:0 &
+0011011\tabularnewline
+SRLIW RD, RS1 & 0000000 & IIIII & RS14:0 & 101 & RD4:0 &
+0011011\tabularnewline
+SRAIW RD, RS1 & 0100000 & IIIII & RS14:0 & 101 & RD4:0 &
+0011011\tabularnewline
+ADDW RD, RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0111011\tabularnewline
+SUBW RD, RS1,RS2 & 0100000 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0111011\tabularnewline
+SLIW RD, RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 001 & RD4:0 &
+0111011\tabularnewline
+SRLW RD, RS1,RS2 & 0000000 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0111011\tabularnewline
+SRAW RD, RS1,RS2 & 0100000 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0111011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{standard-extension-for-integer-multiply-and-divide}{%
+\subparagraph{0.3.1.2.2. Standard Extension for Integer Multiply and
+Divide}\label{standard-extension-for-integer-multiply-and-divide}}
+
+\textbf{RV32M : Standard Extension for Integer Multiply and Divide (32
+bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV32M & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+MUL RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0110011\tabularnewline
+MULH RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 001 & RD4:0 &
+0110011\tabularnewline
+MULHSU RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 010 & RD4:0 &
+0110011\tabularnewline
+MULHU RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 011 & RD4:0 &
+0110011\tabularnewline
+DIV RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 100 & RD4:0 &
+0110011\tabularnewline
+DIVU RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0110011\tabularnewline
+REM RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 110 & RD4:0 &
+0110011\tabularnewline
+REMU RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 111 & RD4:0 &
+0110011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{Standard Extension for Integer Multiply and Divide (64 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV64M & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+MULW RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 000 & RD4:0 &
+0111011\tabularnewline
+DIVW RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 100 & RD4:0 &
+0111011\tabularnewline
+DIVUW RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 101 & RD4:0 &
+0111011\tabularnewline
+REMW RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 110 & RD4:0 &
+0111011\tabularnewline
+REMUW RD,RS1,RS2 & 0000001 & RS24:0 & RS14:0 & 111 & RD4:0 &
+0111011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{standard-extension-for-atomic-instructions}{%
+\subparagraph{0.3.1.2.3. Standard Extension for Atomic
+Instructions}\label{standard-extension-for-atomic-instructions}}
+
+\textbf{RV32A : Standard Extension for Atomic Instructions (32 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV32A & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+LR.W AQRL,RD,RS1 & 00010AQRL & 00000 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+SC.W AQRL,RD,RS2,RS1 & 00011AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOSWAP.W AQRL,RD,RS2,RS1 & 00001AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOSADD.W AQRL,RD,RS2,RS1 & 00000AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOSXOR.W AQRL,RD,RS2,RS1 & 00100AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOOR.W AQRL,RD,RS2,RS1 & 01000AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOAMD.W AQRL,RD,RS2,RS1 & 01100AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOMIN.W AQRL,RD,RS2,RS1 & 10000AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOMAX.W AQRL,RD,RS2,RS1 & 10100AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOMINU.W AQRL,RD,RS2,RS1 & 11000AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+AMOMAXU.W AQRL,RD,RS2,RS1 & 11100AQRL & RS24:0 & RS14:0 & 010 & RD4:0 &
+0101111\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{RV64A : Standard Extension for Atomic Instructions (64 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV64A & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+LR.D AQRL,RD,RS1 & 00010AQRL & 00000 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+SC.D AQRL,RD,RS2,RS1 & 00011AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOSWAP.D AQRL,RD,RS2,RS1 & 00001AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOSADD.D AQRL,RD,RS2,RS1 & 00000AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOSXOR.D AQRL,RD,RS2,RS1 & 00100AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOOR.D AQRL,RD,RS2,RS1 & 01000AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOAMD.D AQRL,RD,RS2,RS1 & 01100AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOMIN.D AQRL,RD,RS2,RS1 & 10000AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOMAX.D AQRL,RD,RS2,RS1 & 10100AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOMINU.D AQRL,RD,RS2,RS1 & 11000AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+AMOMAXU.D AQRL,RD,RS2,RS1 & 11100AQRL & RS24:0 & RS14:0 & 011 & RD4:0 &
+0101111\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{standard-extension-for-single-precision-floating-point}{%
+\subparagraph{0.3.1.2.4. Standard Extension for Single-Precision
+Floating-Point}\label{standard-extension-for-single-precision-floating-point}}
+
+\textbf{RV32F : Standard Extension for Single-Precision Floating-Point
+(32 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV32F & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+FLW FRD,RS1 & IIIIIII & IIIII & FRS1 & 010 & FRD &
+0000111\tabularnewline
+FSW FRS2,RS1 & IIIIIII & FRS2 & FRS1 & 010 & IIIII &
+0100111\tabularnewline
+FMADD.S RM,FRD,FRS1,FRS2,FRS3 & FRS3\_00 & FRS2 & FRS1 & RM & FRD &
+1000011\tabularnewline
+FMSUB.S RM,FRD,FRS1,FRS2,FRS3 & FRS3\_00 & FRS2 & FRS1 & RM & FRD &
+1000111\tabularnewline
+FNMSUB.S RM,FRD,FRS1,FRS2,FRS3 & FRS3\_00 & FRS2 & FRS1 & RM & FRD &
+1001011\tabularnewline
+FNMADD.S RM,FRD,FRS1,FRS2,FRS3 & FRS3\_00 & FRS2 & FRS1 & RM & FRD &
+1001111\tabularnewline
+FADD.S RM,FRD,FRS1,FRS2,FRS3 & 0000000 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FSUB.S RM,FRD,FRS1,FRS2,FRS3 & 0000100 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FMUL.S RM,FRD,FRS1,FRS2,FRS3 & 0001000 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FDIV.S RM,FRD,FRS1,FRS2,FRS3 & 0001100 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FSGNJ.S FRD,FRS1,FRS2 & 0010000 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FSGNJN.S FRD,FRS1,FRS2 & 0010000 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FSGNJX.S FRD,FRS1,FRS2 & 0010000 & FRS2 & FRS1 & 010 & FRD &
+1010011\tabularnewline
+FMIN.S FRD,FRS1,FRS2 & 0010100 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FMAX.S FRD,FRS1,FRS2 & 0010100 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FSQRT.S FRD,FRS1,FRS2 & 0101100 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FLE.S FRD,FRS1,FRS2 & 1010000 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FLT.S FRD,FRS1,FRS2 & 1010000 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FEQ.S FRD,FRS1,FRS2 & 1010000 & FRS2 & FRS1 & 010 & FRD &
+1010011\tabularnewline
+FCVT.W.S RM,RD,FRS1 & 1100000 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.WU.S RM,RD,FRS1 & 1100000 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.S.W RM,RD,FRS1 & 1101000 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.S.WU RM,RD,FRS1 & 1101000 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FMV.X.S RD,FRS1 & 1110000 & 00000 & FRS1 & 000 & RD &
+1010011\tabularnewline
+FCLASS.S RD,FRS1 & 1110000 & 00000 & FRS1 & 001 & RD &
+1010011\tabularnewline
+FMV.S.X RD,FRS1 & 1111000 & 00000 & RS1 & 000 & FRD &
+1010011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{RV64F : Standard Extension for Single-Precision Floating-Point
+(64 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV64F & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+FCVT.L.S RM,RD,FRS1 & 1100000 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.LU.S RM,RD,FRS1 & 1100000 & 00011 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.S.L RM,RD,FRS1 & 1101000 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.S.LU RM,RD,FRS1 & 1101000 & 00011 & FRS1 & RM & FRD &
+1010011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{standard-extension-for-double-precision-floating-point}{%
+\subparagraph{0.3.1.2.5. Standard Extension for Double-Precision
+Floating-Point}\label{standard-extension-for-double-precision-floating-point}}
+
+\textbf{RV32D : Standard Extension for Double-Precision Floating-Point
+(32 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV32F & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+FLW FRD,RS1 & IIIIIII & IIIII & FRS1 & 011 & FRD &
+0000111\tabularnewline
+FSW FRS2,RS1 & IIIIIII & FRS2 & FRS1 & 011 & IIIII &
+0100111\tabularnewline
+FMADD.D RM,FRD,FRS1,FRS2,FRS3 & FRS3\_01 & FRS2 & FRS1 & RM & FRD &
+1000011\tabularnewline
+FMSUB.D RM,FRD,FRS1,FRS2,FRS3 & FRS3\_01 & FRS2 & FRS1 & RM & FRD &
+1000111\tabularnewline
+FNMSUB.D RM,FRD,FRS1,FRS2,FRS3 & FRS3\_01 & FRS2 & FRS1 & RM & FRD &
+1001011\tabularnewline
+FNMADD.D RM,FRD,FRS1,FRS2,FRS3 & FRS3\_01 & FRS2 & FRS1 & RM & FRD &
+1001111\tabularnewline
+FADD.D RM,FRD,FRS1,FRS2,FRS3 & 0000001 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FSUB.D RM,FRD,FRS1,FRS2,FRS3 & 0000101 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FMUL.D RM,FRD,FRS1,FRS2,FRS3 & 0001001 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FDIV.D RM,FRD,FRS1,FRS2,FRS3 & 0001101 & FRS2 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FSGNJ.D FRD,FRS1,FRS2 & 0010001 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FSGNJN.D FRD,FRS1,FRS2 & 0010001 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FSGNJX.D FRD,FRS1,FRS2 & 0010001 & FRS2 & FRS1 & 010 & FRD &
+1010011\tabularnewline
+FMIN.D FRD,FRS1,FRS2 & 0010101 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FMAX.D FRD,FRS1,FRS2 & 0010101 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FSQRT.D FRD,FRS1,FRS2 & 0101101 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FLE.D FRD,FRS1,FRS2 & 1010001 & FRS2 & FRS1 & 000 & FRD &
+1010011\tabularnewline
+FLT.D FRD,FRS1,FRS2 & 1010001 & FRS2 & FRS1 & 001 & FRD &
+1010011\tabularnewline
+FEQ.D FRD,FRS1,FRS2 & 1010001 & FRS2 & FRS1 & 010 & FRD &
+1010011\tabularnewline
+FCVT.W.D RM,RD,FRS1 & 1100001 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.WU.D RM,RD,FRS1 & 1100001 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.D.W RM,RD,FRS1 & 1101001 & 00000 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.D.WU RM,RD,FRS1 & 1101001 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCLASS.D RD,FRS1 & 1110001 & 00000 & FRS1 & 001 & RD &
+1010011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{RV64D : Standard Extension for Double-Precision Floating-Point
+(64 bit)}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule
+RV64D & 31:25 & 24:20 & 19:15 & 14:12 & 11:7 & 6:0\tabularnewline
+\midrule
+\endhead
+FCVT.L.D RM,RD,FRS1 & 1100001 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.LU.D RM,RD,FRS1 & 1100001 & 00011 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.D.L RM,RD,FRS1 & 1101001 & 00010 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FCVT.D.LU RM,RD,FRS1 & 1101001 & 00011 & FRS1 & RM & FRD &
+1010011\tabularnewline
+FMV.X.D RD,FRS1 & 1110001 & 00000 & FRS1 & 000 & RD &
+1010011\tabularnewline
+FMV.D.X RD,FRS1 & 1111001 & 00000 & RS1 & 000 & FRD &
+1010011\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{isa-modes}{%
+\paragraph{0.3.1.3. ISA Modes}\label{isa-modes}}
+
+\hypertarget{risc-v-user}{%
+\subparagraph{0.3.1.3.1. RISC-V User}\label{risc-v-user}}
+
+\hypertarget{risc-v-supervisor}{%
+\subparagraph{0.3.1.3.2. RISC-V Supervisor}\label{risc-v-supervisor}}
+
+\hypertarget{risc-v-hypervisor}{%
+\subparagraph{0.3.1.3.3. RISC-V Hypervisor}\label{risc-v-hypervisor}}
+
+\hypertarget{risc-v-machine}{%
+\subparagraph{0.3.1.3.4. RISC-V Machine}\label{risc-v-machine}}
+
+\hypertarget{openrisc-isa}{%
+\subsubsection{0.3.2. OpenRISC ISA}\label{openrisc-isa}}
+
+\hypertarget{isa-bases-1}{%
+\paragraph{0.3.2.1. ISA Bases}\label{isa-bases-1}}
+
+\hypertarget{openrisc-32}{%
+\subparagraph{0.3.2.2.1. OpenRISC 32}\label{openrisc-32}}
+
+\hypertarget{openrisc-64}{%
+\subparagraph{0.3.2.2.2. OpenRISC 64}\label{openrisc-64}}
+
+\hypertarget{openrisc-128}{%
+\subparagraph{0.3.2.2.3. OpenRISC 128}\label{openrisc-128}}
+
+\hypertarget{isa-extensions-1}{%
+\paragraph{0.3.2.2. ISA Extensions}\label{isa-extensions-1}}
+
+\hypertarget{isa-modes-1}{%
+\paragraph{0.3.2.3. ISA Modes}\label{isa-modes-1}}
+
+\hypertarget{openrisc-user}{%
+\subparagraph{0.3.2.3.1. OpenRISC User}\label{openrisc-user}}
+
+\hypertarget{openrisc-supervisor}{%
+\subparagraph{0.3.2.3.2. OpenRISC
+Supervisor}\label{openrisc-supervisor}}
+
+\hypertarget{openrisc-hypervisor}{%
+\subparagraph{0.3.2.3.3. OpenRISC
+Hypervisor}\label{openrisc-hypervisor}}
+
+\hypertarget{openrisc-machine}{%
+\subparagraph{0.3.2.3.4. OpenRISC Machine}\label{openrisc-machine}}
+
+\hypertarget{msp430-isa}{%
+\subsubsection{0.3.3. MSP430 ISA}\label{msp430-isa}}
+
+\hypertarget{isa-bases-2}{%
+\paragraph{0.3.3.1. ISA Bases}\label{isa-bases-2}}
+
+\hypertarget{msp430-32}{%
+\subparagraph{0.3.3.2.1. MSP430 32}\label{msp430-32}}
+
+\hypertarget{msp430-64}{%
+\subparagraph{0.3.3.2.2. MSP430 64}\label{msp430-64}}
+
+\hypertarget{msp430-128}{%
+\subparagraph{0.3.3.2.3. MSP430 128}\label{msp430-128}}
+
+\hypertarget{isa-extensions-2}{%
+\paragraph{0.3.3.2. ISA Extensions}\label{isa-extensions-2}}
+
+\hypertarget{isa-modes-2}{%
+\paragraph{0.3.3.3. ISA Modes}\label{isa-modes-2}}
+
+\hypertarget{msp430-user}{%
+\subparagraph{0.3.3.3.1. MSP430 User}\label{msp430-user}}
+
+\hypertarget{msp430-supervisor}{%
+\subparagraph{0.3.3.3.2. MSP430 Supervisor}\label{msp430-supervisor}}
+
+\hypertarget{msp430-hypervisor}{%
+\subparagraph{0.3.3.3.3. MSP430 Hypervisor}\label{msp430-hypervisor}}
+
+\hypertarget{msp430-machine}{%
+\subparagraph{0.3.3.3.4. MSP430 Machine}\label{msp430-machine}}
 
 \hypertarget{methodology}{%
 \section{1. METHODOLOGY}\label{methodology}}
@@ -1598,8 +2274,8 @@ libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf \
 libtool patchutils bc zlib1g-dev libexpat-dev
 \end{verbatim}
 
-\hypertarget{msp430}{%
-\subsubsection{5.1.1. MSP430}\label{msp430}}
+\hypertarget{msp430-1}{%
+\subsubsection{5.1.1. MSP430}\label{msp430-1}}
 
 \hypertarget{msp430-gnu-cc}{%
 \paragraph{5.1.1.1. MSP430 GNU C/C++}\label{msp430-gnu-cc}}
@@ -1607,8 +2283,8 @@ libtool patchutils bc zlib1g-dev libexpat-dev
 \hypertarget{msp430-gnu-go}{%
 \paragraph{5.1.1.2. MSP430 GNU Go}\label{msp430-gnu-go}}
 
-\hypertarget{openrisc}{%
-\subsubsection{5.1.2. OpenRISC}\label{openrisc}}
+\hypertarget{openrisc-1}{%
+\subsubsection{5.1.2. OpenRISC}\label{openrisc-1}}
 
 \hypertarget{openrisc-gnu-cc}{%
 \paragraph{5.1.2.1. OpenRISC GNU C/C++}\label{openrisc-gnu-cc}}
@@ -1616,8 +2292,8 @@ libtool patchutils bc zlib1g-dev libexpat-dev
 \hypertarget{openrisc-gnu-go}{%
 \paragraph{5.1.2.2. OpenRISC GNU Go}\label{openrisc-gnu-go}}
 
-\hypertarget{risc-v}{%
-\subsubsection{5.1.3. RISC-V}\label{risc-v}}
+\hypertarget{risc-v-1}{%
+\subsubsection{5.1.3. RISC-V}\label{risc-v-1}}
 
 \hypertarget{risc-v-gnu-cc}{%
 \paragraph{5.1.3.1. RISC-V GNU C/C++}\label{risc-v-gnu-cc}}
@@ -1659,14 +2335,14 @@ sudo mv riscv-go /opt
 \subsection{5.2. FRONT-END OPEN SOURCE
 TOOLS}\label{front-end-open-source-tools-1}}
 
-\hypertarget{msp430-1}{%
-\subsubsection{5.2.1. MSP430}\label{msp430-1}}
+\hypertarget{msp430-2}{%
+\subsubsection{5.2.1. MSP430}\label{msp430-2}}
 
-\hypertarget{openrisc-1}{%
-\subsubsection{5.2.2. OpenRISC}\label{openrisc-1}}
+\hypertarget{openrisc-2}{%
+\subsubsection{5.2.2. OpenRISC}\label{openrisc-2}}
 
-\hypertarget{risc-v-1}{%
-\subsubsection{5.2.3. RISC-V}\label{risc-v-1}}
+\hypertarget{risc-v-2}{%
+\subsubsection{5.2.3. RISC-V}\label{risc-v-2}}
 
 type:
 
@@ -1729,5 +2405,253 @@ cd qemu
 make
 sudo make install
 \end{verbatim}
+
+\hypertarget{quality-assurance}{%
+\section{6. QUALITY ASSURANCE}\label{quality-assurance}}
+
+\hypertarget{scope}{%
+\subsection{6.1. SCOPE}\label{scope}}
+
+\hypertarget{nromative-reference}{%
+\subsection{6.2. NROMATIVE REFERENCE}\label{nromative-reference}}
+
+\hypertarget{terms-and-definitions}{%
+\subsection{6.3. TERMS AND DEFINITIONS}\label{terms-and-definitions}}
+
+\hypertarget{context-of-the-organization}{%
+\subsection{6.4. CONTEXT OF THE
+ORGANIZATION}\label{context-of-the-organization}}
+
+\hypertarget{leadership}{%
+\subsection{6.5. LEADERSHIP}\label{leadership}}
+
+\hypertarget{planning}{%
+\subsection{6.6. PLANNING}\label{planning}}
+
+\hypertarget{support}{%
+\subsection{6.7. SUPPORT}\label{support}}
+
+\hypertarget{operation}{%
+\subsection{6.8. OPERATION}\label{operation}}
+
+\hypertarget{performance-evaluation}{%
+\subsection{6.9. PERFORMANCE EVALUATION}\label{performance-evaluation}}
+
+\hypertarget{improvement}{%
+\subsection{6.10. IMPROVEMENT}\label{improvement}}
+
+\hypertarget{do-254}{%
+\section{7. DO-254}\label{do-254}}
+
+\hypertarget{planning-process}{%
+\subsection{7.1. PLANNING PROCESS}\label{planning-process}}
+
+\hypertarget{planning-process-objectives}{%
+\subsubsection{7.1.1. Planning Process
+Objectives}\label{planning-process-objectives}}
+
+\hypertarget{planning-process-activities}{%
+\subsubsection{7.1.2. Planning Process
+Activities}\label{planning-process-activities}}
+
+\hypertarget{hardware-design-process}{%
+\subsection{7.2. HARDWARE DESIGN
+PROCESS}\label{hardware-design-process}}
+
+\hypertarget{requirements-capture-process}{%
+\subsubsection{7.2.1. Requirements Capture
+Process}\label{requirements-capture-process}}
+
+\hypertarget{conceptual-design-process}{%
+\subsubsection{7.2.2. Conceptual Design
+Process}\label{conceptual-design-process}}
+
+\hypertarget{detailed-design-process}{%
+\subsubsection{7.2.3. Detailed Design
+Process}\label{detailed-design-process}}
+
+\hypertarget{implementation-process}{%
+\subsubsection{7.2.4. Implementation
+Process}\label{implementation-process}}
+
+\hypertarget{production-transition}{%
+\subsubsection{7.2.5. Production
+Transition}\label{production-transition}}
+
+\hypertarget{acceptance-test}{%
+\subsubsection{7.2.6. Acceptance Test}\label{acceptance-test}}
+
+\hypertarget{series-production}{%
+\subsubsection{7.2.7. Series Production}\label{series-production}}
+
+\hypertarget{validation-and-verification-process}{%
+\subsection{7.3. VALIDATION AND VERIFICATION
+PROCESS}\label{validation-and-verification-process}}
+
+\hypertarget{validation-process}{%
+\subsubsection{7.3.1. Validation Process}\label{validation-process}}
+
+\hypertarget{verification-process}{%
+\subsubsection{7.3.2. Verification Process}\label{verification-process}}
+
+\hypertarget{validation-and-verification-methods}{%
+\subsubsection{7.3.3. Validation and Verification
+Methods}\label{validation-and-verification-methods}}
+
+\hypertarget{configuration-management-process}{%
+\subsection{7.4. CONFIGURATION MANAGEMENT
+PROCESS}\label{configuration-management-process}}
+
+\hypertarget{configuration-management-objectives}{%
+\subsubsection{7.4.1. Configuration Management
+Objectives}\label{configuration-management-objectives}}
+
+\hypertarget{configuration-management-activities}{%
+\subsubsection{7.4.2. Configuration Management
+Activities}\label{configuration-management-activities}}
+
+\hypertarget{data-control-categories}{%
+\subsubsection{7.4.3. Data Control
+Categories}\label{data-control-categories}}
+
+\hypertarget{process-assurance}{%
+\subsection{7.5. PROCESS ASSURANCE}\label{process-assurance}}
+
+\hypertarget{process-assurance-objectives}{%
+\subsubsection{7.5.1. Process Assurance
+Objectives}\label{process-assurance-objectives}}
+
+\hypertarget{process-assurance-activities}{%
+\subsubsection{7.5.2. Process Assurance
+Activities}\label{process-assurance-activities}}
+
+\hypertarget{certification-liaison-process}{%
+\subsection{7.6. CERTIFICATION LIAISON
+PROCESS}\label{certification-liaison-process}}
+
+\hypertarget{means-of-compliance-and-planning}{%
+\subsubsection{7.6.1. Means of Compliance and
+Planning}\label{means-of-compliance-and-planning}}
+
+\hypertarget{compliance-substantiation}{%
+\subsubsection{7.6.2. Compliance
+Substantiation}\label{compliance-substantiation}}
+
+\hypertarget{hardware-design-lifecycle-data}{%
+\subsection{7.7. HARDWARE DESIGN LIFECYCLE
+DATA}\label{hardware-design-lifecycle-data}}
+
+\hypertarget{hardware-plans}{%
+\subsubsection{7.7.1. Hardware Plans}\label{hardware-plans}}
+
+\hypertarget{plan-for-hardware-aspects-of-certification}{%
+\paragraph{7.7.1.1. Plan for Hardware Aspects of
+Certification}\label{plan-for-hardware-aspects-of-certification}}
+
+\hypertarget{hardware-design-plan}{%
+\paragraph{7.7.1.2. Hardware Design Plan}\label{hardware-design-plan}}
+
+\hypertarget{hardware-validation-plan}{%
+\paragraph{7.7.1.3. Hardware Validation
+Plan}\label{hardware-validation-plan}}
+
+\hypertarget{hardware-verification-plan}{%
+\paragraph{7.7.1.4. Hardware Verification
+Plan}\label{hardware-verification-plan}}
+
+\hypertarget{hardware-configuration-management-plan}{%
+\paragraph{7.7.1.5. Hardware Configuration Management
+Plan}\label{hardware-configuration-management-plan}}
+
+\hypertarget{hardware-process-assurance-plan}{%
+\paragraph{7.7.1.6. Hardware Process Assurance
+Plan}\label{hardware-process-assurance-plan}}
+
+\hypertarget{hardware-design-standards-and-guidance}{%
+\subsubsection{7.7.2. Hardware Design Standards and
+Guidance}\label{hardware-design-standards-and-guidance}}
+
+\hypertarget{requirements-standards}{%
+\paragraph{7.7.2.1. Requirements
+Standards}\label{requirements-standards}}
+
+\hypertarget{hardware-design-standards}{%
+\paragraph{7.7.2.2. Hardware Design
+Standards}\label{hardware-design-standards}}
+
+\hypertarget{validation-and-verification-standards}{%
+\paragraph{7.7.2.3. Validation and Verification
+Standards}\label{validation-and-verification-standards}}
+
+\hypertarget{hardware-archive-standards}{%
+\paragraph{7.7.2.4. Hardware Archive
+Standards}\label{hardware-archive-standards}}
+
+\hypertarget{hardware-design-data}{%
+\subsubsection{7.7.3. Hardware Design Data}\label{hardware-design-data}}
+
+\hypertarget{hardware-requirements}{%
+\paragraph{7.7.3.1. Hardware Requirements}\label{hardware-requirements}}
+
+\hypertarget{hardware-design-representation-data}{%
+\paragraph{7.7.3.2. Hardware Design Representation
+Data}\label{hardware-design-representation-data}}
+
+\hypertarget{conceptual-design-data}{%
+\subparagraph{7.7.3.2.1. Conceptual Design
+Data}\label{conceptual-design-data}}
+
+\hypertarget{detailed-design-data}{%
+\subparagraph{7.7.3.2.2. Detailed Design
+Data}\label{detailed-design-data}}
+
+7.7.3.2.2.1. Top-Level Drawing
+
+7.7.3.2.2.2. Assembly Drawings
+
+7.7.3.2.2.3. Installation Control Drawings
+
+7.7.3.2.2.4. Hardware/Software Interface Data
+
+\hypertarget{validation-and-verification-data}{%
+\subsubsection{7.7.4. Validation and Verification
+Data}\label{validation-and-verification-data}}
+
+\hypertarget{traceability-data}{%
+\paragraph{7.7.4.1. Traceability Data}\label{traceability-data}}
+
+\hypertarget{review-and-analysis-procedures}{%
+\paragraph{7.7.4.2. Review and Analysis
+Procedures}\label{review-and-analysis-procedures}}
+
+\hypertarget{review-and-analysis-results}{%
+\paragraph{7.7.4.3. Review and Analysis
+Results}\label{review-and-analysis-results}}
+
+\hypertarget{test-procedures}{%
+\paragraph{7.7.4.4. Test Procedures}\label{test-procedures}}
+
+\hypertarget{test-results}{%
+\paragraph{7.7.4.5. Test Results}\label{test-results}}
+
+\hypertarget{additional-considerations}{%
+\subsection{7.8. ADDITIONAL
+CONSIDERATIONS}\label{additional-considerations}}
+
+\hypertarget{use-of-previously-developed-hardware}{%
+\subsubsection{7.8.1. Use of Previously Developed
+Hardware}\label{use-of-previously-developed-hardware}}
+
+\hypertarget{commercial-components-usage}{%
+\subsubsection{7.8.2. Commercial Components
+Usage}\label{commercial-components-usage}}
+
+\hypertarget{product-service-experience}{%
+\subsubsection{7.8.3. Product Service
+Experience}\label{product-service-experience}}
+
+\hypertarget{tool-assessment-and-qualification}{%
+\subsubsection{7.8.4. Tool Assessment and
+Qualification}\label{tool-assessment-and-qualification}}
 
 \end{document}
