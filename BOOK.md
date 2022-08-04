@@ -48,11 +48,20 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 ##### 0.0.7.2.2. Hardware Design Standards
 ##### 0.0.7.2.3. Validation and Verification Standards
 ##### 0.0.7.2.4. Hardware Archive Standards
-#### 0.0.7.3. Hardware Design Data 
-##### 0.0.7.3.1. Hardware Requirements 
+#### 0.0.7.3. Hardware Design Data
+##### 0.0.7.3.1. Hardware Requirements
+
+*The requirements specify the functional, performance, safety, quality, maintainability, and reliability requirements for the hardware item being developed.*
+
 ##### 0.0.7.3.2. Hardware Design Representation Data
-###### 0.0.7.3.2.1. Conceptual Design Data 
-###### 0.0.7.3.2.2. Detailed Design Data 
+
+*The hardware design representation data provides a definition of the hardware item and is comprised of the set of drawings, documents and specifications used to build the hardware item. The following paragraphs define some typical hardware design data and their content. The type of data, drawings and documents produced for a given hardware design will vary depending on the size, complexity and number of components the hardware item contains.*
+
+###### 0.0.7.3.2.1. Conceptual Design Data
+
+*The conceptual design data is the data that describes the hardware item’s architecture and functional design.*
+
+###### 0.0.7.3.2.2. Detailed Design Data
 ####### 0.0.7.3.2.2.1. Top-Level Drawing 
 ####### 0.0.7.3.2.2.2. Assembly Drawings
 ####### 0.0.7.3.2.2.3. Installation Control Drawings 
@@ -80,7 +89,7 @@ geometry: "left = 3cm, right = 2cm, top = 3cm, bottom = 2cm"
 
 ## 1.1. Requirements
 
-![UML Diagrams Overview](../requirements/uml_diagrams_overview.png)
+![UML Diagrams Overview](../requirements/uml_diagrams_overview.svg)
 
 ### 1.1.1. Structural UML diagrams
 
