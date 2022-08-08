@@ -1522,7 +1522,7 @@ sudo make install
 ## 6.9. PERFORMANCE EVALUATION
 ## 6.10. IMPROVEMENT
 
-# 7. DO-254
+# 7. CERTIFICATION
 
 ## 7.1. PLANNING PROCESS
 ### 7.1.1. Planning Process Objectives
