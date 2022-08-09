@@ -1,4 +1,3 @@
-.
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -69,7 +68,7 @@
 │   │   │   ├── ntm_hidden_gate_vector.sv
 │   │   │   ├── ntm_input_gate_vector.sv
 │   │   │   ├── ntm_output_gate_vector.sv
-│   │   │   └── ntm_state_gate_vector.sv
+│   │   │   ├── ntm_state_gate_vector.sv
 │   │   └── standard
 │   │       ├── ntm_activation_gate_vector.sv
 │   │       ├── ntm_controller.sv
@@ -77,7 +76,7 @@
 │   │       ├── ntm_hidden_gate_vector.sv
 │   │       ├── ntm_input_gate_vector.sv
 │   │       ├── ntm_output_gate_vector.sv
-│   │       └── ntm_state_gate_vector.sv
+│   │       ├── ntm_state_gate_vector.sv
 │   └── transformer
 │       ├── components
 │       │   ├── ntm_masked_multi_head_attention.sv
@@ -123,12 +122,12 @@
 │   │   ├── dnc_temporal_link_matrix.sv
 │   │   ├── dnc_usage_vector.sv
 │   │   ├── dnc_write_content_weighting.sv
-│   │   └── dnc_write_weighting.sv
+│   │   ├── dnc_write_weighting.sv
 │   ├── read_heads
 │   │   ├── dnc_free_gates.sv
 │   │   ├── dnc_read_keys.sv
 │   │   ├── dnc_read_modes.sv
-│   │   └── dnc_read_strengths.sv
+│   │   ├── dnc_read_strengths.sv
 │   ├── top
 │   │   ├── dnc_interface_vector.sv
 │   │   ├── dnc_output_vector.sv
@@ -139,7 +138,7 @@
 │       ├── dnc_write_gate.sv
 │       ├── dnc_write_key.sv
 │       ├── dnc_write_strength.sv
-│       └── dnc_write_vector.sv
+│       ├── dnc_write_vector.sv
 ├── intro
 │   └── ntm_intro.sv
 ├── math
@@ -174,25 +173,25 @@
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_differentiation.sv
 │   │   │   ├── ntm_matrix_integration.sv
-│   │   │   └── ntm_matrix_softmax.sv
+│   │   │   ├── ntm_matrix_softmax.sv
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_differentiation.sv
 │   │   │   ├── ntm_tensor_integration.sv
-│   │   │   └── ntm_tensor_softmax.sv
+│   │   │   ├── ntm_tensor_softmax.sv
 │   │   └── vector
 │   │       ├── ntm_vector_differentiation.sv
 │   │       ├── ntm_vector_integration.sv
-│   │       └── ntm_vector_softmax.sv
+│   │       ├── ntm_vector_softmax.sv
 │   ├── function
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_logistic_function.sv
-│   │   │   └── ntm_matrix_oneplus_function.sv
+│   │   │   ├── ntm_matrix_oneplus_function.sv
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_logistic_function.sv
-│   │   │   └── ntm_scalar_oneplus_function.sv
+│   │   │   ├── ntm_scalar_oneplus_function.sv
 │   │   └── vector
 │   │       ├── ntm_vector_logistic_function.sv
-│   │       └── ntm_vector_oneplus_function.sv
+│   │       ├── ntm_vector_oneplus_function.sv
 │   └── series
 │       ├── matrix
 │       │   ├── ntm_matrix_cosh_function.sv
@@ -201,7 +200,7 @@
 │       │   ├── ntm_matrix_power_function.sv
 │       │   ├── ntm_matrix_sinh_function.sv
 │       │   ├── ntm_matrix_sqrt_function.sv
-│       │   └── ntm_matrix_tanh_function.sv
+│       │   ├── ntm_matrix_tanh_function.sv
 │       ├── scalar
 │       │   ├── ntm_scalar_cosh_function.sv
 │       │   ├── ntm_scalar_exponentiator_function.sv
@@ -209,7 +208,7 @@
 │       │   ├── ntm_scalar_power_function.sv
 │       │   ├── ntm_scalar_sinh_function.sv
 │       │   ├── ntm_scalar_sqrt_function.sv
-│       │   └── ntm_scalar_tanh_function.sv
+│       │   ├── ntm_scalar_tanh_function.sv
 │       └── vector
 │           ├── ntm_vector_cosh_function.sv
 │           ├── ntm_vector_exponentiator_function.sv
@@ -217,11 +216,11 @@
 │           ├── ntm_vector_power_function.sv
 │           ├── ntm_vector_sinh_function.sv
 │           ├── ntm_vector_sqrt_function.sv
-│           └── ntm_vector_tanh_function.sv
+│           ├── ntm_vector_tanh_function.sv
 ├── ntm
 │   ├── memory
 │   │   ├── ntm_addressing.sv
-│   │   └── ntm_content_based_addressing.sv
+│   │   ├── ntm_content_based_addressing.sv
 │   ├── read_heads
 │   │   └── ntm_reading.sv
 │   ├── top
