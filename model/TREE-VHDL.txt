@@ -76,7 +76,7 @@
 │   │       ├── model_hidden_gate_vector.vhd
 │   │       ├── model_input_gate_vector.vhd
 │   │       ├── model_output_gate_vector.vhd
-│   │       ├── model_state_gate_vector.vhd
+│   │       └── model_state_gate_vector.vhd
 │   └── transformer
 │       ├── components
 │       │   ├── model_masked_multi_head_attention.vhd
@@ -124,14 +124,14 @@
 │   │   ├── model_write_content_weighting.vhd
 │   │   └── model_write_weighting.vhd
 │   ├── read_heads
-│   │   ├── model_read_heads.vhd
+│   │   └── model_read_heads.vhd
 │   ├── top
 │   │   ├── model_interface_matrix.vhd
 │   │   ├── model_interface_vector.vhd
 │   │   ├── model_output_vector.vhd
 │   │   └── model_top.vhd
 │   └── write_heads
-│       ├── model_write_heads.vhd
+│       └── model_write_heads.vhd
 ├── intro
 │   └── model_intro_adder.vhd
 ├── math
