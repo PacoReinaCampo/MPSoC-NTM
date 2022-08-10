@@ -1,3 +1,4 @@
+verilog
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -257,3 +258,5 @@
         ├── ntm_forget_trainer.sv
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
+
+66 directories, 193 files

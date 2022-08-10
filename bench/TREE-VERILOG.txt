@@ -1,3 +1,4 @@
+verilog
 ├── tests
 │   ├── design
 │   │   ├── arithmetic
@@ -563,3 +564,5 @@
             ├── ntm_trainer_transformer_testbench.sv
             ├── ntm_trainer_transformer_test.sv
             └── ntm_trainer_transformer_transaction.sv
+
+112 directories, 453 files

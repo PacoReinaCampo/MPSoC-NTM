@@ -1,3 +1,4 @@
+verilog
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -255,3 +256,5 @@
         ├── model_forget_trainer.sv
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
+
+65 directories, 192 files
