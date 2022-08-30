@@ -1,1 +1,0 @@
-del *.edif abc.history
