@@ -42,6 +42,25 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+pub fn ntm_matrix_multiplication(matrix: &[Vec<i32>], scalar: i32) -> Vec<Vec<i32>> {
+    // Multiply a matrix of any size with a scalar
+    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+
+    for row in 0..matrix.len() {
+        for column in 0..matrix[row].len() {
+            result[row].push(scalar * matrix[row][column]);
+        }
+    }
+    result
+}
+
 fn main() {
-  println!("Hello QueenField!");
+    let input0: Vec<Vec<i32>> = vec![vec![3, 2, 2], vec![0, 2, 0], vec![5, 4, 1]];
+    let input1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+
+    let output0: Vec<Vec<i32>> = vec![vec![9, 6, 6], vec![0, 6, 0], vec![15, 12, 3]];
+    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 0], vec![0, 3, 0], vec![0, 0, 3]];
+
+    assert_eq!(ntm_matrix_multiplication(&input0, 3), output0);
+    assert_eq!(ntm_matrix_multiplication(&input1, 3), output1);
 }

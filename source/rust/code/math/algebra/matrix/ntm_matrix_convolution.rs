@@ -42,6 +42,62 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+pub fn ntm_matrix_convolution(multiplier: &[Vec<i32>], multiplicand: &[Vec<i32>]) -> Vec<Vec<i32>> {
+    // Multiply two matching matrices. The multiplier needs to have the same amount of columns as the multiplicand has rows.
+    let mut result: Vec<Vec<i32>> = vec![];
+    let mut temporal;
+
+    // Using variable to compare lenghts of rows in multiplicand later
+    let row_right_length = multiplicand[0].len();
+
+    for row_left in 0..multiplier.len() {
+        if multiplier[row_left].len() != multiplicand.len() {
+            panic!("Matrix dimensions do not match");
+        }
+        result.push(vec![]);
+        for column_right in 0..multiplicand[0].len() {
+            temporal = 0;
+            for row_right in 0..multiplicand.len() {
+                if row_right_length != multiplicand[row_right].len() {
+                    // If row is longer than a previous row cancel operation with error
+                    panic!("Matrix dimensions do not match");
+                }
+                temporal += multiplier[row_left][row_right] * multiplicand[row_right][column_right];
+            }
+            result[row_left].push(temporal);
+        }
+    }
+    result
+}
+
 fn main() {
-  println!("Hello QueenField!");
+    let input0: Vec<Vec<i32>> = vec![vec![1, 2, 3], vec![4, 2, 6], vec![3, 4, 1], vec![2, 4, 8]];
+    let input1: Vec<Vec<i32>> = vec![vec![1, 3, 3, 2], vec![7, 6, 2, 1], vec![3, 4, 2, 1]];
+
+    let input_wrong0: Vec<Vec<i32>> = vec![
+        vec![1, 3, 3, 2, 4, 6, 6],
+        vec![7, 6, 2, 1],
+        vec![3, 4, 2, 1],
+    ];
+    let input_wrong1: Vec<Vec<i32>> = vec![
+        vec![1, 3, 3, 2],
+        vec![7, 6, 2, 1],
+        vec![3, 4, 2, 1],
+        vec![3, 4, 2, 1],
+    ];
+
+    let output: Vec<Vec<i32>> = vec![
+        vec![24, 27, 13, 7],
+        vec![36, 48, 28, 16],
+        vec![34, 37, 19, 11],
+        vec![54, 62, 30, 16],
+    ];
+
+    assert_eq!(ntm_matrix_convolution(&input0, &input1), output);
+
+    let result0 = std::panic::catch_unwind(|| ntm_matrix_convolution(&input0, &input_wrong0));
+    assert!(result0.is_err());
+
+    let result1 = std::panic::catch_unwind(|| ntm_matrix_convolution(&input0, &input_wrong1));
+    assert!(result1.is_err());
 }

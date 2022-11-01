@@ -42,6 +42,41 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+pub fn ntm_matrix_summation(summand0: &[Vec<i32>], summand1: &[Vec<i32>]) -> Vec<Vec<i32>> {
+    // Add two matrices of identical dimensions
+    let mut result: Vec<Vec<i32>> = vec![];
+    if summand0.len() != summand1.len() {
+        panic!("Matrix dimensions do not match");
+    }
+    for row in 0..summand0.len() {
+        if summand0[row].len() != summand1[row].len() {
+            panic!("Matrix dimensions do not match");
+        }
+        result.push(vec![]);
+        for column in 0..summand1[0].len() {
+            result[row].push(summand0[row][column] + summand1[row][column]);
+        }
+    }
+    result
+}
+
 fn main() {
-  println!("Hello QueenField!");
+    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
+    let input1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+
+    let input_wrong0: Vec<Vec<i32>> = vec![vec![1, 0, 0, 4], vec![0, 1, 0], vec![0, 0, 1]];
+    let input_wrong1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1], vec![1, 1, 1]];
+    let input_wrong2: Vec<Vec<i32>> = vec![vec![]];
+
+    let output: Vec<Vec<i32>> = vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]];
+    assert_eq!(ntm_matrix_summation(&input0, &input1), output);
+
+    let result0 = std::panic::catch_unwind(|| ntm_matrix_summation(&input0, &input_wrong0));
+    assert!(result0.is_err());
+
+    let result1 = std::panic::catch_unwind(|| ntm_matrix_summation(&input0, &input_wrong1));
+    assert!(result1.is_err());
+
+    let result2 = std::panic::catch_unwind(|| ntm_matrix_summation(&input0, &input_wrong2));
+    assert!(result2.is_err());
 }
