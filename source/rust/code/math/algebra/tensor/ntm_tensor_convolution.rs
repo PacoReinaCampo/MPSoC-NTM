@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_convolution(multiplier: &[Vec<i32>], multiplicand: &[Vec<i32>]) -> Vec<Vec<i32>> {
+pub fn ntm_tensor_convolution(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     // Multiply two matching matrices. The multiplier needs to have the same amount of columns as the multiplicand has rows.
     let mut result: Vec<Vec<i32>> = vec![];
     let mut temporal;
@@ -70,33 +70,24 @@ pub fn ntm_tensor_convolution(multiplier: &[Vec<i32>], multiplicand: &[Vec<i32>]
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 2, 3], vec![4, 2, 6], vec![3, 4, 1], vec![2, 4, 8]];
-    let input1: Vec<Vec<i32>> = vec![vec![1, 3, 3, 2], vec![7, 6, 2, 1], vec![3, 4, 2, 1]];
-
-    let input_wrong0: Vec<Vec<i32>> = vec![
-        vec![1, 3, 3, 2, 4, 6, 6],
-        vec![7, 6, 2, 1],
-        vec![3, 4, 2, 1],
+    let input0: Vec<Vec<i32>> = vec![
+        vec![1, 2, 3],
+        vec![4, 2, 6],
+        vec![3, 4, 1],
+        vec![2, 4, 8]
     ];
-    let input_wrong1: Vec<Vec<i32>> = vec![
+    let input1: Vec<Vec<i32>> = vec![
         vec![1, 3, 3, 2],
         vec![7, 6, 2, 1],
-        vec![3, 4, 2, 1],
-        vec![3, 4, 2, 1],
+        vec![3, 4, 2, 1]
     ];
 
     let output: Vec<Vec<i32>> = vec![
         vec![24, 27, 13, 7],
         vec![36, 48, 28, 16],
         vec![34, 37, 19, 11],
-        vec![54, 62, 30, 16],
+        vec![54, 62, 30, 16]
     ];
 
-    assert_eq!(ntm_tensor_convolution(&input0, &input1), output);
-
-    let result0 = std::panic::catch_unwind(|| ntm_tensor_convolution(&input0, &input_wrong0));
-    assert!(result0.is_err());
-
-    let result1 = std::panic::catch_unwind(|| ntm_tensor_convolution(&input0, &input_wrong1));
-    assert!(result1.is_err());
+    assert_eq!(ntm_tensor_convolution(input0, input1), output);
 }

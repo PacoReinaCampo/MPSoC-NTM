@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_inverse(matrix: &[Vec<i32>]) -> Vec<Vec<i32>> {
+pub fn ntm_matrix_inverse(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     // Transpose a matrix of any size
     let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
 
@@ -61,6 +61,6 @@ fn main() {
     let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
     let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
 
-    assert_eq!(ntm_matrix_inverse(&input0), output0);
-    assert_eq!(ntm_matrix_inverse(&input1), output1);
+    assert_eq!(ntm_matrix_inverse(input0), output0);
+    assert_eq!(ntm_matrix_inverse(input1), output1);
 }
