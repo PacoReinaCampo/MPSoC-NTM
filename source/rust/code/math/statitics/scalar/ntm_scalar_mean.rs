@@ -42,6 +42,18 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+pub fn ntm_scalar_mean(input: i32) -> i32 {
+
+    return input * 2;
+}
+
 fn main() {
-  println!("Hello QueenField!");
+    let input0: i32 = 3;
+    let input1: i32 = 4;
+
+    let output0: i32 = 6;
+    let output1: i32 = 8;
+
+    assert_eq!(ntm_scalar_mean(input0), output0);
+    assert_eq!(ntm_scalar_mean(input1), output1);
 }

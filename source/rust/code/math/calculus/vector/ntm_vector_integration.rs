@@ -42,6 +42,18 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+pub fn ntm_vector_integration(vector: Vec<i32>) -> Vec<i32> {
+
+    return vector;
+}
+
 fn main() {
-  println!("Hello QueenField!");
+    let input0: Vec<i32> = vec![1, 0, 1];
+    let input1: Vec<i32> = vec![3, 4, 2];
+
+    let output0: Vec<i32> = vec![1, 0, 1];
+    let output1: Vec<i32> = vec![3, 4, 2];
+
+    assert_eq!(ntm_vector_integration(input0), output0);
+    assert_eq!(ntm_vector_integration(input1), output1);
 }
