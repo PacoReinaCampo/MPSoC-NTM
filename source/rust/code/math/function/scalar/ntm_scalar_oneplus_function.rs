@@ -42,18 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_oneplus_function(input: i32) -> i32 {
+pub fn ntm_scalar_logistic_function(input: f64) -> f64 {
+    let temporal: f64 = 1.0 + input.exp();
 
-    return input * 2;
+    return 1.0 + temporal.ln();
 }
 
 fn main() {
-    let input0: i32 = 3;
-    let input1: i32 = 4;
+    let input0: f64 = 0.8909031788043871;
+    let input1: f64 = 3.2155195231797550;
 
-    let output0: i32 = 6;
-    let output1: i32 = 8;
+    let output0: f64 = 2.2346950078883427;
+    let output1: f64 = 4.254869533372874;
 
-    assert_eq!(ntm_scalar_oneplus_function(input0), output0);
-    assert_eq!(ntm_scalar_oneplus_function(input1), output1);
+    assert_eq!(ntm_scalar_logistic_function(input0), output0);
+    assert_eq!(ntm_scalar_logistic_function(input1), output1);
 }

@@ -44,7 +44,56 @@
 
 package main
 
-import "fmt"
+import (
+  "fmt"
+)
+
 func main() {
-  fmt.Println("Hello QueenField!")
+  var SIZE_A_I_IN, SIZE_A_J_IN int
+  var SIZE_B_I_IN, SIZE_B_J_IN int
+  var DATA_A_IN, DATA_B_IN, result [10][10] int
+
+  fmt.Print("Enter no of rows of DATA_A_IN: ")
+  fmt.Scanln(&SIZE_A_I_IN)
+  fmt.Print("Enter no of column of DATA_A_IN: ")
+  fmt.Scanln(&SIZE_A_J_IN)
+  fmt.Print("Enter no of rows of DATA_B_IN: ")
+  fmt.Scanln(&SIZE_B_I_IN)
+  fmt.Print("Enter no of column of DATA_B_IN: ")
+  fmt.Scanln(&SIZE_B_J_IN)
+  fmt.Println("\nEnter matrix_1 elements: ")
+
+  for i := 0; i < SIZE_A_I_IN; i++ {
+    for j := 0; j < SIZE_A_J_IN; j++ {
+      fmt.Scanf("%d ", &DATA_A_IN[i][j])
+    }
+  }
+
+  fmt.Println("\nEnter matrix_2 elements: ")
+
+  for i := 0; i < SIZE_B_I_IN; i++ {
+    for j := 0; j < SIZE_B_J_IN; j++ {
+      fmt.Scanf("%d ", &DATA_B_IN[i][j])
+    }
+  }
+
+  // Multiplication of two matrix
+  for i := 0; i < SIZE_A_I_IN; i++ {
+    for j := 0; j < SIZE_B_J_IN; j++ {
+      result[i][j] = 0
+
+      for k := 0; k < SIZE_B_J_IN; k++ {
+        result[i][j] += DATA_A_IN[i][k] * DATA_B_IN[k][j]
+      }
+    }
+  }
+
+  fmt.Println("\nAfter Multiplication Matrix is: \n")
+
+  for i := 0; i < SIZE_A_I_IN; i++ {
+    for j := 0; j < SIZE_B_J_IN; j++ {
+      fmt.Printf("%d ", result[i][j])
+    }
+    fmt.Println("\n")
+  }
 }

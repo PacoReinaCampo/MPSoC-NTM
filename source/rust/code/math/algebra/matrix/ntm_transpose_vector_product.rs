@@ -42,25 +42,31 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_vector_product(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_transpose_vector_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -> Vec<Vec<i32>> {
+    // Multiply two matching matrices. The multiplier needs to have the same amount of columns as the multiplicand has rows.
+    let mut result: Vec<Vec<i32>> = vec![];
+    let mut temporal;
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    for row_left in 0..multiplier.len() {
+        result.push(vec![]);
+        for column_right in 0..multiplicand.len() {
+            temporal = multiplier[row_left] * multiplicand[column_right];
+            result[row_left].push(temporal);
         }
     }
     result
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let input0: Vec<i32> = vec![1, 2, 3, 4];
+    let input1: Vec<i32> = vec![1, 3, 2];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let output: Vec<Vec<i32>> = vec![
+        vec![1, 3, 2],
+        vec![2, 6, 4],
+        vec![3, 9, 6],
+        vec![4, 12, 8]
+    ];
 
-    assert_eq!(ntm_matrix_vector_product(input0), output0);
-    assert_eq!(ntm_matrix_vector_product(input1), output1);
+    assert_eq!(ntm_transpose_vector_product(input0, input1), output);
 }
