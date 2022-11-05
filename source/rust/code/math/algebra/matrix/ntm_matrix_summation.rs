@@ -61,9 +61,10 @@ pub fn ntm_matrix_summation(summand0: Vec<Vec<i32>>, summand1: Vec<Vec<i32>>) ->
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+    let input_a: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
+    let input_b: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
 
     let output: Vec<Vec<i32>> = vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]];
-    assert_eq!(ntm_matrix_summation(input0, input1), output);
+
+    assert_eq!(ntm_matrix_summation(input_a, input_b), output);
 }

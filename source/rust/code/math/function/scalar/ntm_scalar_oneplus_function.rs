@@ -53,7 +53,7 @@ fn main() {
     let input1: f64 = 3.2155195231797550;
 
     let output0: f64 = 2.2346950078883427;
-    let output1: f64 = 4.254869533372874;
+    let output1: f64 = 4.2548695333728740;
 
     assert_eq!(ntm_scalar_logistic_function(input0), output0);
     assert_eq!(ntm_scalar_logistic_function(input1), output1);

@@ -43,8 +43,10 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_matrix_vector_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -> Vec<Vec<i32>> {
-    // Multiply two matching matrices. The multiplier needs to have the same amount of columns as the multiplicand has rows.
+    // Multiply two matching matrices.
     let mut result: Vec<Vec<i32>> = vec![];
+
+    // The multiplier needs to have the same amount of columns as the multiplicand has rows.
     let mut temporal;
 
     for row_left in 0..multiplier.len() {
@@ -58,8 +60,8 @@ pub fn ntm_matrix_vector_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![1, 2, 3, 4];
-    let input1: Vec<i32> = vec![1, 3, 2];
+    let input_a: Vec<i32> = vec![1, 2, 3, 4];
+    let input_b: Vec<i32> = vec![1, 3, 2];
 
     let output: Vec<Vec<i32>> = vec![
         vec![1, 3, 2],
@@ -68,5 +70,5 @@ fn main() {
         vec![4, 12, 8]
     ];
 
-    assert_eq!(ntm_matrix_vector_product(input0, input1), output);
+    assert_eq!(ntm_matrix_vector_product(input_a, input_b), output);
 }
