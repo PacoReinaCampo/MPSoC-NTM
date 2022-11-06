@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.tb.m
+│   ├── soldiers
+│   │   └── ntm_soldiers.tb.m
+│   └── workers
+│       └── ntm_workers.tb.m
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.tb.m
+│   │   ├── processing_unit
+│   │   │   ├── mimd.tb.m
+│   │   │   ├── misd.tb.m
+│   │   │   ├── simd.tb.m
+│   │   │   └── sisd.tb.m
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.tb.m
+│   │       └── network_on_chip.tb.m
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.tb.m
+│   │   │   ├── control_unit.tb.m
+│   │   │   ├── io_unit.tb.m
+│   │   │   └── memory_unit.tb.m
+│   │   └── von_neumann_architecture
+│   │       ├── alu.tb.m
+│   │       ├── control_unit.tb.m
+│   │       ├── io_unit.tb.m
+│   │       └── memory_unit.tb.m
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.tb.m
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.tb.m
+│   │   │   └── logic_circuits.tb.m
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.tb.m
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.tb.m
+│   │   │   ├── nand_gate.tb.m
+│   │   │   ├── nor_gate.tb.m
+│   │   │   ├── not_gate.tb.m
+│   │   │   ├── or_gate.tb.m
+│   │   │   ├── xnor_gate.tb.m
+│   │   │   ├── xor_gate.tb.m
+│   │   │   └── yes_gate.tb.m
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.tb.m
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.tb.m
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.tb.m
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.tb.m
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.tb.m
+│       │   ├── lstm_differentiable_neural_computer.tb.m
+│       │   └── transformer_differentiable_neural_computer.tb.m
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.tb.m
+│           ├── lstm_neural_turing_machine.tb.m
+│           └── transformer_neural_turing_machine.tb.m
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.tb.m
+    │   ├── ntm_soldiers_pkg.tb.m
+    │   └── ntm_workers_pkg.tb.m
+    ├── computing
+    │   └── state_pkg.tb.m
+    └── ieee
+        ├── math_complex-body.tb.m
+        ├── math_complex.tb.m
+        ├── math_real-body.tb.m
+        └── math_real.tb.m
+
+29 directories, 48 files

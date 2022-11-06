@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.c
+│   ├── soldiers
+│   │   └── ntm_soldiers.c
+│   └── workers
+│       └── ntm_workers.c
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.c
+│   │   ├── processing_unit
+│   │   │   ├── mimd.c
+│   │   │   ├── misd.c
+│   │   │   ├── simd.c
+│   │   │   └── sisd.c
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.c
+│   │       └── network_on_chip.c
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.c
+│   │   │   ├── control_unit.c
+│   │   │   ├── io_unit.c
+│   │   │   └── memory_unit.c
+│   │   └── von_neumann_architecture
+│   │       ├── alu.c
+│   │       ├── control_unit.c
+│   │       ├── io_unit.c
+│   │       └── memory_unit.c
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.c
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.c
+│   │   │   └── logic_circuits.c
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.c
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.c
+│   │   │   ├── nand_gate.c
+│   │   │   ├── nor_gate.c
+│   │   │   ├── not_gate.c
+│   │   │   ├── or_gate.c
+│   │   │   ├── xnor_gate.c
+│   │   │   ├── xor_gate.c
+│   │   │   └── yes_gate.c
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.c
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.c
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.c
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.c
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.c
+│       │   ├── lstm_differentiable_neural_computer.c
+│       │   └── transformer_differentiable_neural_computer.c
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.c
+│           ├── lstm_neural_turing_machine.c
+│           └── transformer_neural_turing_machine.c
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.c
+    │   ├── ntm_soldiers_pkg.c
+    │   └── ntm_workers_pkg.c
+    ├── computing
+    │   └── state_pkg.c
+    └── ieee
+        ├── math_complex-body.c
+        ├── math_complex.c
+        ├── math_real-body.c
+        └── math_real.c
+
+29 directories, 48 files

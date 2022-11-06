@@ -42,36 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-    let mut a: Vec<Vec<f64>> = vec![
-        vec![1.0, 2.0, 3.0],
-        vec![4.0, 1.0, 6.0],
-        vec![7.0, 8.0, 9.0]
-    ];
-    let mut b: Vec<Vec<f64>> = vec![
-        vec![2.0, -1.0, 0.0],
-        vec![-1.0, 2.0, -1.0],
-        vec![0.0, -1.0, 2.0]
-    ];
-
-    let mut ref_a = &mut a;
-    let rref_a = &mut ref_a;
-
-    let mut ref_b = &mut b;
-    let rref_b = &mut ref_b;
-
-    println!("Matrix A:\n");
-    print_matrix(rref_a);
-    println!("\nInverse of Matrix A:\n");
-    print_matrix(&mut matrix_inverse(rref_a));
-
-    println!("\n\nMatrix B:\n");
-    print_matrix(rref_b);
-    println!("\nInverse of Matrix B:\n");
-    print_matrix(&mut matrix_inverse(rref_b));
-}
-
-//Begin Matrix Inversion
+// Matrix Inversion
 fn matrix_inverse(matrix: &mut Vec<Vec<f64>>) -> Vec<Vec<f64>>{
     let length = matrix.len();
     let mut aug = zero_matrix(length, length * 2);
@@ -94,9 +65,8 @@ fn matrix_inverse(matrix: &mut Vec<Vec<f64>>) -> Vec<Vec<f64>>{
     }
     unaug
 }
-//End Matrix Inversion
 
-//Begin Generalised Reduced Row Echelon Form
+// Generalised Reduced Row Echelon Form
 fn gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
     let mut lead = 0;
     let row_count = matrix.len();
@@ -138,11 +108,10 @@ fn gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
             }
         }
         lead = lead + 1;
-
     }
-    //matrix.to_owned()
 }
 
+// Zero Matrix
 fn zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
     let mut matrix = Vec::with_capacity(columns);
     for _ in 0..rows {
@@ -155,8 +124,38 @@ fn zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
     matrix
 }
 
+// Printed Matrix
 fn print_matrix(matrix: &mut Vec<Vec<f64>>) {
     for row in 0..matrix.len(){
         println!("{:?}", matrix[row]);
     }
+}
+
+fn main() {
+    let mut a: Vec<Vec<f64>> = vec![
+        vec![1.0, 2.0, 3.0],
+        vec![4.0, 1.0, 6.0],
+        vec![7.0, 8.0, 9.0]
+    ];
+    let mut b: Vec<Vec<f64>> = vec![
+        vec![2.0, -1.0, 0.0],
+        vec![-1.0, 2.0, -1.0],
+        vec![0.0, -1.0, 2.0]
+    ];
+
+    let mut ref_a = &mut a;
+    let rref_a = &mut ref_a;
+
+    let mut ref_b = &mut b;
+    let rref_b = &mut ref_b;
+
+    println!("Matrix A:\n");
+    print_matrix(rref_a);
+    println!("\nInverse of Matrix A:\n");
+    print_matrix(&mut matrix_inverse(rref_a));
+
+    println!("\n\nMatrix B:\n");
+    print_matrix(rref_b);
+    println!("\nInverse of Matrix B:\n");
+    print_matrix(&mut matrix_inverse(rref_b));
 }

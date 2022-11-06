@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.rs
+│   ├── soldiers
+│   │   └── ntm_soldiers.rs
+│   └── workers
+│       └── ntm_workers.rs
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.rs
+│   │   ├── processing_unit
+│   │   │   ├── mimd.rs
+│   │   │   ├── misd.rs
+│   │   │   ├── simd.rs
+│   │   │   └── sisd.rs
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.rs
+│   │       └── network_on_chip.rs
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.rs
+│   │   │   ├── control_unit.rs
+│   │   │   ├── io_unit.rs
+│   │   │   └── memory_unit.rs
+│   │   └── von_neumann_architecture
+│   │       ├── alu.rs
+│   │       ├── control_unit.rs
+│   │       ├── io_unit.rs
+│   │       └── memory_unit.rs
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.rs
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.rs
+│   │   │   └── logic_circuits.rs
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.rs
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.rs
+│   │   │   ├── nand_gate.rs
+│   │   │   ├── nor_gate.rs
+│   │   │   ├── not_gate.rs
+│   │   │   ├── or_gate.rs
+│   │   │   ├── xnor_gate.rs
+│   │   │   ├── xor_gate.rs
+│   │   │   └── yes_gate.rs
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.rs
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.rs
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.rs
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.rs
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.rs
+│       │   ├── lstm_differentiable_neural_computer.rs
+│       │   └── transformer_differentiable_neural_computer.rs
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.rs
+│           ├── lstm_neural_turing_machine.rs
+│           └── transformer_neural_turing_machine.rs
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.rs
+    │   ├── ntm_soldiers_pkg.rs
+    │   └── ntm_workers_pkg.rs
+    ├── computing
+    │   └── state_pkg.rs
+    └── ieee
+        ├── math_complex-body.rs
+        ├── math_complex.rs
+        ├── math_real-body.rs
+        └── math_real.rs
+
+29 directories, 48 files
