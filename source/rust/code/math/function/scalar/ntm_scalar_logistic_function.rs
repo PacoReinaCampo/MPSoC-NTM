@@ -43,8 +43,9 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_scalar_logistic_function(input: f64) -> f64 {
+    const ONE: f64 = 1.0;
 
-    return 1.0/(1.0 + 1.0/input.exp());
+    return ONE/(ONE + ONE/input.exp());
 }
 
 fn main() {

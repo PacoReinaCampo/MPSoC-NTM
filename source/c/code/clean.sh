@@ -1,3 +1,15 @@
+rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_divider.run
+rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_divider.run
+rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
+rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_divider.run
+rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
+rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_divider.run
+rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/FNN/convolutional/ntm_controller.run
 rm -rf controller/FNN/standard/ntm_controller.run
 rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run

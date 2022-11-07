@@ -42,17 +42,23 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_logistic_function(vector: Vec<i32>) -> Vec<i32> {
+pub fn ntm_vector_logistic_function(vector: Vec<f64>) -> Vec<f64> {
+    const ONE: f64 = 1.0;
 
-    return vector;
+    let mut result: Vec<f64> = vec![];
+
+    for row in 0..vector.len() {
+        result[row] = ONE/(ONE + ONE/vector[row].exp());
+    }
+    result
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![1, 0, 1];
-    let input1: Vec<i32> = vec![3, 4, 2];
+    let input0: Vec<f64> = vec![1.0, 0.0, 1.0];
+    let input1: Vec<f64> = vec![3.0, 4.0, 2.0];
 
-    let output0: Vec<i32> = vec![1, 0, 1];
-    let output1: Vec<i32> = vec![3, 4, 2];
+    let output0: Vec<f64> = vec![1.0, 0.0, 1.0];
+    let output1: Vec<f64> = vec![3.0, 4.0, 2.0];
 
     assert_eq!(ntm_vector_logistic_function(input0), output0);
     assert_eq!(ntm_vector_logistic_function(input1), output1);

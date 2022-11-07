@@ -43,8 +43,19 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <assert.h>
+
+double ntm_scalar_oneplus_function(double input) {
+  // calculating result
+  return input;
+}
 
 int main() {
-  printf("Hello QueenField!\n");
+  double input = 48;
+
+  double output = 48;
+
+  assert(ntm_scalar_oneplus_function(input)==output);
+
   return 0;
 }

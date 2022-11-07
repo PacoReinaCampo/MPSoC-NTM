@@ -1,3 +1,15 @@
+rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_divider.run
+rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_divider.run
+rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
+rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_divider.run
+rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
+rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_divider.run
+rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/FNN/convolutional/ntm_controller.run
 rm -rf controller/FNN/standard/ntm_controller.run
 rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run
@@ -162,6 +174,18 @@ rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
 
 # x86-64 ISA
+gcc arithmetic/matrix/ntm_matrix_adder.c -o arithmetic/matrix/ntm_matrix_adder.run
+gcc arithmetic/matrix/ntm_matrix_divider.c -o arithmetic/matrix/ntm_matrix_divider.run
+gcc arithmetic/matrix/ntm_matrix_multiplier.c -o arithmetic/matrix/ntm_matrix_multiplier.run
+gcc arithmetic/scalar/ntm_scalar_adder.c -o arithmetic/scalar/ntm_scalar_adder.run
+gcc arithmetic/scalar/ntm_scalar_divider.c -o arithmetic/scalar/ntm_scalar_divider.run
+gcc arithmetic/scalar/ntm_scalar_multiplier.c -o arithmetic/scalar/ntm_scalar_multiplier.run
+gcc arithmetic/tensor/ntm_tensor_adder.c -o arithmetic/tensor/ntm_tensor_adder.run
+gcc arithmetic/tensor/ntm_tensor_divider.c -o arithmetic/tensor/ntm_tensor_divider.run
+gcc arithmetic/tensor/ntm_tensor_multiplier.c -o arithmetic/tensor/ntm_tensor_multiplier.run
+gcc arithmetic/vector/ntm_vector_adder.c -o arithmetic/vector/ntm_vector_adder.run
+gcc arithmetic/vector/ntm_vector_divider.c -o arithmetic/vector/ntm_vector_divider.run
+gcc arithmetic/vector/ntm_vector_multiplier.c -o arithmetic/vector/ntm_vector_multiplier.run
 gcc controller/FNN/convolutional/ntm_controller.c -o controller/FNN/convolutional/ntm_controller.run
 gcc controller/FNN/standard/ntm_controller.c -o controller/FNN/standard/ntm_controller.run
 gcc controller/LSTM/convolutional/ntm_activation_gate_vector.c -o controller/LSTM/convolutional/ntm_activation_gate_vector.run

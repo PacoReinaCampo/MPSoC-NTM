@@ -1,3 +1,15 @@
+rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_divider.run
+rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_divider.run
+rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
+rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_divider.run
+rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
+rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_divider.run
+rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/FNN/convolutional/ntm_controller.run
 rm -rf controller/FNN/standard/ntm_controller.run
 rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run
@@ -162,6 +174,18 @@ rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
 
 # x86-64 ISA
+rustc arithmetic/matrix/ntm_matrix_adder.rs -o arithmetic/matrix/ntm_matrix_adder.run
+rustc arithmetic/matrix/ntm_matrix_divider.rs -o arithmetic/matrix/ntm_matrix_divider.run
+rustc arithmetic/matrix/ntm_matrix_multiplier.rs -o arithmetic/matrix/ntm_matrix_multiplier.run
+rustc arithmetic/scalar/ntm_scalar_adder.rs -o arithmetic/scalar/ntm_scalar_adder.run
+rustc arithmetic/scalar/ntm_scalar_divider.rs -o arithmetic/scalar/ntm_scalar_divider.run
+rustc arithmetic/scalar/ntm_scalar_multiplier.rs -o arithmetic/scalar/ntm_scalar_multiplier.run
+rustc arithmetic/tensor/ntm_tensor_adder.rs -o arithmetic/tensor/ntm_tensor_adder.run
+rustc arithmetic/tensor/ntm_tensor_divider.rs -o arithmetic/tensor/ntm_tensor_divider.run
+rustc arithmetic/tensor/ntm_tensor_multiplier.rs -o arithmetic/tensor/ntm_tensor_multiplier.run
+rustc arithmetic/vector/ntm_vector_adder.rs -o arithmetic/vector/ntm_vector_adder.run
+rustc arithmetic/vector/ntm_vector_divider.rs -o arithmetic/vector/ntm_vector_divider.run
+rustc arithmetic/vector/ntm_vector_multiplier.rs -o arithmetic/vector/ntm_vector_multiplier.run
 rustc controller/FNN/convolutional/ntm_controller.rs -o controller/FNN/convolutional/ntm_controller.run
 rustc controller/FNN/standard/ntm_controller.rs -o controller/FNN/standard/ntm_controller.run
 rustc controller/LSTM/convolutional/ntm_activation_gate_vector.rs -o controller/LSTM/convolutional/ntm_activation_gate_vector.run

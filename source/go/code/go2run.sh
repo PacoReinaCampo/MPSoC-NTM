@@ -1,3 +1,15 @@
+rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_divider.run
+rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_divider.run
+rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
+rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_divider.run
+rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
+rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_divider.run
+rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/FNN/convolutional/ntm_controller.run
 rm -rf controller/FNN/standard/ntm_controller.run
 rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run
@@ -162,6 +174,18 @@ rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
 
 # x86-64 ISA
+go build -o arithmetic/matrix/ntm_matrix_adder.go arithmetic/matrix/ntm_matrix_adder.run
+go build -o arithmetic/matrix/ntm_matrix_divider.go arithmetic/matrix/ntm_matrix_divider.run
+go build -o arithmetic/matrix/ntm_matrix_multiplier.go arithmetic/matrix/ntm_matrix_multiplier.run
+go build -o arithmetic/scalar/ntm_scalar_adder.go arithmetic/scalar/ntm_scalar_adder.run
+go build -o arithmetic/scalar/ntm_scalar_divider.go arithmetic/scalar/ntm_scalar_divider.run
+go build -o arithmetic/scalar/ntm_scalar_multiplier.go arithmetic/scalar/ntm_scalar_multiplier.run
+go build -o arithmetic/tensor/ntm_tensor_adder.go arithmetic/tensor/ntm_tensor_adder.run
+go build -o arithmetic/tensor/ntm_tensor_divider.go arithmetic/tensor/ntm_tensor_divider.run
+go build -o arithmetic/tensor/ntm_tensor_multiplier.go arithmetic/tensor/ntm_tensor_multiplier.run
+go build -o arithmetic/vector/ntm_vector_adder.go arithmetic/vector/ntm_vector_adder.run
+go build -o arithmetic/vector/ntm_vector_divider.go arithmetic/vector/ntm_vector_divider.run
+go build -o arithmetic/vector/ntm_vector_multiplier.go arithmetic/vector/ntm_vector_multiplier.run
 go build -o controller/FNN/convolutional/ntm_controller.run controller/FNN/convolutional/ntm_controller.go
 go build -o controller/FNN/standard/ntm_controller.run controller/FNN/standard/ntm_controller.go
 go build -o controller/LSTM/convolutional/ntm_activation_gate_vector.run controller/LSTM/convolutional/ntm_activation_gate_vector.go

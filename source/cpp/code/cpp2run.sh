@@ -1,3 +1,15 @@
+rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_divider.run
+rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_divider.run
+rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
+rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_divider.run
+rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
+rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_divider.run
+rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/FNN/convolutional/ntm_controller.run
 rm -rf controller/FNN/standard/ntm_controller.run
 rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run
@@ -162,6 +174,18 @@ rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
 
 # x86-64 ISA
+g++ arithmetic/matrix/ntm_matrix_adder.cpp -o arithmetic/matrix/ntm_matrix_adder.run
+g++ arithmetic/matrix/ntm_matrix_divider.cpp -o arithmetic/matrix/ntm_matrix_divider.run
+g++ arithmetic/matrix/ntm_matrix_multiplier.cpp -o arithmetic/matrix/ntm_matrix_multiplier.run
+g++ arithmetic/scalar/ntm_scalar_adder.cpp -o arithmetic/scalar/ntm_scalar_adder.run
+g++ arithmetic/scalar/ntm_scalar_divider.cpp -o arithmetic/scalar/ntm_scalar_divider.run
+g++ arithmetic/scalar/ntm_scalar_multiplier.cpp -o arithmetic/scalar/ntm_scalar_multiplier.run
+g++ arithmetic/tensor/ntm_tensor_adder.cpp -o arithmetic/tensor/ntm_tensor_adder.run
+g++ arithmetic/tensor/ntm_tensor_divider.cpp -o arithmetic/tensor/ntm_tensor_divider.run
+g++ arithmetic/tensor/ntm_tensor_multiplier.cpp -o arithmetic/tensor/ntm_tensor_multiplier.run
+g++ arithmetic/vector/ntm_vector_adder.cpp -o arithmetic/vector/ntm_vector_adder.run
+g++ arithmetic/vector/ntm_vector_divider.cpp -o arithmetic/vector/ntm_vector_divider.run
+g++ arithmetic/vector/ntm_vector_multiplier.cpp -o arithmetic/vector/ntm_vector_multiplier.run
 g++ controller/FNN/convolutional/ntm_controller.cpp -o controller/FNN/convolutional/ntm_controller.run
 g++ controller/FNN/standard/ntm_controller.cpp -o controller/FNN/standard/ntm_controller.run
 g++ controller/LSTM/convolutional/ntm_activation_gate_vector.cpp -o controller/LSTM/convolutional/ntm_activation_gate_vector.run
