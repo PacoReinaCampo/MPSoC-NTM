@@ -44,7 +44,25 @@
 
 package main
 
+// fmt package provides the function to print anything
 import "fmt"
+
+// function to divide the two float32 numbers
+func ntm_scalar_divider(input_a, input_b float32) float32 {
+  return input_a / input_b
+}
+
 func main() {
-  fmt.Println("Hello QueenField!")
+  // define the float32 variables we want to divide
+  var input_a, input_b, output float32
+  
+  // initializing the variables
+  input_a = 48.0
+  input_b = 16.0
+  
+  // calling the function and storing the result
+  output = ntm_scalar_divider(input_a, input_b)
+  
+  // printing the results
+  fmt.Println("The division of ", input_a, " and ", input_b, " is ", output, "(dividing two float numbers outside the function)")
 }

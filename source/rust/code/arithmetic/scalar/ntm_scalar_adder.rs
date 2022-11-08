@@ -42,16 +42,16 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_adder(input_a: i32, input_b: i32) -> i32 {
-
+pub fn ntm_scalar_adder(input_a: f64, input_b: f64) -> f64 {
+    // calculating addition
     return input_a + input_b;
 }
 
 fn main() {
-    let input_a: i32 = 6;
-    let input_b: i32 = 3;
+    let input_a: f64 = 48.0;
+    let input_b: f64 = 16.0;
 
-    let output: i32 = 9;
+    let output: f64 = 64.0;
 
     assert_eq!(ntm_scalar_adder(input_a, input_b), output);
 }

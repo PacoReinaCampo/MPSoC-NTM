@@ -1,4 +1,21 @@
 code
+├── arithmetic
+│   ├── matrix
+│   │   ├── ntm_matrix_adder.cpp
+│   │   ├── ntm_matrix_divider.cpp
+│   │   └── ntm_matrix_multiplier.cpp
+│   ├── scalar
+│   │   ├── ntm_scalar_adder.cpp
+│   │   ├── ntm_scalar_divider.cpp
+│   │   └── ntm_scalar_multiplier.cpp
+│   ├── tensor
+│   │   ├── ntm_tensor_adder.cpp
+│   │   ├── ntm_tensor_divider.cpp
+│   │   └── ntm_tensor_multiplier.cpp
+│   └── vector
+│       ├── ntm_vector_adder.cpp
+│       ├── ntm_vector_divider.cpp
+│       └── ntm_vector_multiplier.cpp
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -216,4 +233,4 @@ code
             ├── ntm_lstm_output_v_trainer.cpp
             └── ntm_lstm_output_w_trainer.cpp
 
-54 directories, 162 files
+59 directories, 174 files

@@ -45,16 +45,16 @@
 #include <stdio.h>
 #include <assert.h>
 
-int ntm_scalar_divider(int input_a, int input_b) {
-  // calculating sum
+double ntm_scalar_divider(double input_a, double input_b) {
+  // calculating division
   return input_a / input_b;
 }
 
 int main() {
-  int input_a = 48;
-  int input_b = 16;
+  double input_a = 48.0;
+  double input_b = 16.0;
 
-  int output = 3;
+  double output = 3.0;
 
   assert(ntm_scalar_divider(input_a, input_b)==output);
 
