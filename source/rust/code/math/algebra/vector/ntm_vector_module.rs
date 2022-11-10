@@ -42,55 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_convolution(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Multiply two matching matrices.
-    let mut result: Vec<Vec<i32>> = vec![];
+pub fn ntm_vector_module(vector: Vec<f64>) -> f64 {
+    let mut result: f64 = 0.0;
 
-    // The multiplier needs to have the same amount of columns as the multiplicand has rows.
-    let mut temporal;
-
-    // Using variable to compare lenghts of rows in multiplicand later
-    let row_right_length = multiplicand[0].len();
-
-    for row_left in 0..multiplier.len() {
-        if multiplier[row_left].len() != multiplicand.len() {
-            panic!("Matrix dimensions do not match");
-        }
-        result.push(vec![]);
-        for column_right in 0..multiplicand[0].len() {
-            temporal = 0;
-            for row_right in 0..multiplicand.len() {
-                if row_right_length != multiplicand[row_right].len() {
-                    // If row is longer than a previous row cancel operation with error
-                    panic!("Matrix dimensions do not match");
-                }
-                temporal += multiplier[row_left][row_right] * multiplicand[row_right][column_right];
-            }
-            result[row_left].push(temporal);
-        }
+    for row in 0..vector.len() {
+        result += vector[row] * vector[row];
     }
-    result
+    result.sqrt()
 }
 
 fn main() {
-    let input_a: Vec<Vec<i32>> = vec![
-        vec![1, 2, 3],
-        vec![4, 2, 6],
-        vec![3, 4, 1],
-        vec![2, 4, 8]
-    ];
-    let input_b: Vec<Vec<i32>> = vec![
-        vec![1, 3, 3, 2],
-        vec![7, 6, 2, 1],
-        vec![3, 4, 2, 1]
-    ];
+    let input: Vec<f64> = vec![4.0, 0.0, 3.0];
 
-    let output: Vec<Vec<i32>> = vec![
-        vec![24, 27, 13, 7],
-        vec![36, 48, 28, 16],
-        vec![34, 37, 19, 11],
-        vec![54, 62, 30, 16]
-    ];
+    let output: f64 = 5.0;
 
-    assert_eq!(ntm_matrix_convolution(input_a, input_b), output);
+    assert_eq!(ntm_vector_module(input), output);
 }

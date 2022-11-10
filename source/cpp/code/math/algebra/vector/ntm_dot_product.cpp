@@ -42,9 +42,29 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+double ntm_dot_product(vector<double> input_a, vector<double> input_b) {
+  double result = 0;
+
+  for(int row=0; row<input_a.size(); row++) {
+    result += input_a[row] * input_b[row];
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input_a{1.0, 2.0, 3.0};
+  vector<double> input_b{1.0, 3.0, 3.0};
+
+  double output = 16.0;
+
+  assert(ntm_dot_product(input_a, input_b)==output);
+
   return 0;
 }

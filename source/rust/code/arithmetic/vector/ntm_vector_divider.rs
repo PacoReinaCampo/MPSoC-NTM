@@ -42,25 +42,25 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_divider(input_a: Vec<i32>, input_b: Vec<i32>) -> Vec<i32> {
-    // Add two vectors of identical dimensions
-    let mut result: Vec<i32> = vec![];
+pub fn ntm_vector_divider(input_a: Vec<f64>, input_b: Vec<f64>) -> Vec<f64> {
+    // Divide two vectors of identical dimensions
+    let mut result: Vec<f64> = vec![0.0; input_a.len()];
 
     if input_a.len() != input_b.len() {
         panic!("Vector dimensions do not match");
     }
 
     for row in 0..input_a.len() {
-        result[row] = input_a[row] + input_b[row];
+        result[row] = input_a[row] / input_b[row];
     }
     result
 }
 
 fn main() {
-    let input_a: Vec<i32> = vec![1, 0, 1];
-    let input_b: Vec<i32> = vec![1, 0, 0];
+    let input_a: Vec<f64> = vec![2.0, 0.0, 4.0];
+    let input_b: Vec<f64> = vec![1.0, 1.0, 2.0];
 
-    let output: Vec<i32> = vec![2, 0, 1];
+    let output: Vec<f64> = vec![2.0, 0.0, 2.0];
 
     assert_eq!(ntm_vector_divider(input_a, input_b), output);
 }

@@ -43,8 +43,57 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#define SIZE 3
+
+double ntm_vector_adder(double *input_a, double *input_b) {
+
+  double *result;
+
+  int i;
+
+  result = (double *) malloc(sizeof(int)*SIZE);
+
+  // calculating addition
+  for (i = 0; i < SIZE; i++) {
+    result[i] = input_a[i] + input_b[i];
+  }
+
+  return *result;
+}
 
 int main() {
-  printf("Hello QueenField!\n");
+
+  double *input_a;
+  double *input_b;
+
+  double *output;
+
+  input_a = (double *) malloc(sizeof(int)*SIZE);
+  input_b = (double *) malloc(sizeof(int)*SIZE);
+
+  output = (double *) malloc(sizeof(int)*SIZE);
+
+  input_a[0] = 2.0;
+  input_a[1] = 0.0;
+  input_a[2] = 4.0;
+
+  input_b[0] = 1.0;
+  input_b[1] = 1.0;
+  input_b[2] = 2.0;
+
+  output[0] = 3.0;
+  output[1] = 1.0;
+  output[2] = 6.0;
+
+  assert(ntm_vector_adder(input_a, input_b)==*output);
+
+  free(input_a);
+  free(input_b);
+
+  free(output);
+
   return 0;
 }

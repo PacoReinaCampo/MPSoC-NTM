@@ -42,9 +42,49 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_divider(vector<vector<double>> input_a, vector<vector<double>> input_b) {
+
+  vector<vector<double>> result;
+
+  for (int i = 0; i < input_a.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < input_a[0].size(); j++) {
+      double temporal = input_a[i][j] / input_b[i][j];
+
+      vector.push_back(temporal);
+    }
+    result.push_back(vector);
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> input_a {
+    { 2.0, 2.0, 2.0 },
+    { 0.0, 0.0, 0.0 },
+    { 4.0, 4.0, 4.0 }
+  };
+  vector<vector<double>> input_b {
+    { 1.0, 1.0, 1.0 },
+    { 1.0, 1.0, 1.0 },
+    { 2.0, 2.0, 2.0 }
+  };
+
+  vector<vector<double>> output {
+    { 2.0, 2.0, 2.0 },
+    { 0.0, 0.0, 0.0 },
+    { 2.0, 2.0, 2.0 }
+  };
+
+  assert(ntm_matrix_divider(input_a, input_b)==output);
+
   return 0;
 }

@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_adder(input_a: Vec<i32>, input_b: Vec<i32>) -> Vec<i32> {
+pub fn ntm_vector_adder(input_a: Vec<f64>, input_b: Vec<f64>) -> Vec<f64> {
     // Add two vectors of identical dimensions
-    let mut result: Vec<i32> = vec![];
+    let mut result: Vec<f64> = vec![0.0; input_a.len()];
 
     if input_a.len() != input_b.len() {
         panic!("Vector dimensions do not match");
@@ -57,10 +57,10 @@ pub fn ntm_vector_adder(input_a: Vec<i32>, input_b: Vec<i32>) -> Vec<i32> {
 }
 
 fn main() {
-    let input_a: Vec<i32> = vec![1, 0, 1];
-    let input_b: Vec<i32> = vec![1, 0, 0];
+    let input_a: Vec<f64> = vec![2.0, 0.0, 4.0];
+    let input_b: Vec<f64> = vec![1.0, 1.0, 2.0];
 
-    let output: Vec<i32> = vec![2, 0, 1];
+    let output: Vec<f64> = vec![3.0, 1.0, 6.0];
 
     assert_eq!(ntm_vector_adder(input_a, input_b), output);
 }

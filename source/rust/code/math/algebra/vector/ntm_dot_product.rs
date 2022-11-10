@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_dot_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -> i32 {
-    let mut result: i32 = 0;
+pub fn ntm_dot_product(multiplier: Vec<f64>, multiplicand: Vec<f64>) -> f64 {
+    let mut result: f64 = 0.0;
 
     if multiplier.len() != multiplicand.len() {
         panic!("Vector dimensions do not match");
@@ -56,10 +56,10 @@ pub fn ntm_dot_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -> i32 {
 }
 
 fn main() {
-    let input_a: Vec<i32> = vec![1, 2, 3];
-    let input_b: Vec<i32> = vec![1, 3, 3];
+    let input_a: Vec<f64> = vec![1.0, 2.0, 3.0];
+    let input_b: Vec<f64> = vec![1.0, 3.0, 3.0];
 
-    let output: i32 = 16;
+    let output: f64 = 16.0;
 
     assert_eq!(ntm_dot_product(input_a, input_b), output);
 }

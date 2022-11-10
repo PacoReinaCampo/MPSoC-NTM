@@ -42,9 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<cassert>
+
+using namespace std;
+
+double ntm_scalar_oneplus_function(double);
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  double input0 = 0.8909031788043871;
+  double input1 = 3.2155195231797550;
+
+  double output0 = 2.2346950078883427;
+  double output1 = 4.2548695333728740;
+
+  assert(ntm_scalar_oneplus_function(input0)==output0);
+  assert(ntm_scalar_oneplus_function(input1)==output1);
+
   return 0;
+}
+
+double ntm_scalar_oneplus_function(double input) {
+  double ONE = 1.0;
+
+  // calculating result
+  double temporal = ONE + exp(input);
+
+  return ONE + log(temporal);
 }

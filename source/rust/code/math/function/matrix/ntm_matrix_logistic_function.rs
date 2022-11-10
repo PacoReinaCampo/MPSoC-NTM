@@ -42,25 +42,37 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_logistic_function(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_logistic_function(input: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    // Add two matching matrices.
+    const ONE: f64 = 1.0;
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    let mut result: Vec<Vec<f64>> = vec![];
+
+    let mut temporal;
+
+    for row in 0..input.len() {
+        result.push(vec![]);
+        for column in 0..input[0].len() {
+            temporal = ONE/(ONE + ONE/input[row][column].exp());
+
+            result[row].push(temporal);
         }
     }
     result
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let input: Vec<Vec<f64>> = vec![
+        vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
+        vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
+        vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let output: Vec<Vec<f64>> = vec![
+        vec![0.9982079678583020, 0.9581688450893644, 0.9997639589554603],
+        vec![0.9867871586112067, 0.9950983109503272, 0.9987621580633643],
+        vec![0.9999545207076224, 0.9996503292557579, 0.9525634621372647]
+    ];
 
-    assert_eq!(ntm_matrix_logistic_function(input0), output0);
-    assert_eq!(ntm_matrix_logistic_function(input1), output1);
+    assert_eq!(ntm_matrix_logistic_function(input), output);
 }

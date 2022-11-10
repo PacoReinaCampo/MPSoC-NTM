@@ -42,9 +42,31 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+double ntm_scalar_summation(vector<double> input) {
+  double result = 0.0;
+
+  for(int row=0; row<input.size(); row++) {
+    result += input[row];
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input0{3.0, 2.0, 2.0};
+  vector<double> input1{1.0, 0.0, 0.0};
+
+  double output0 = 7.0;
+  double output1 = 1.0;
+
+  assert(ntm_scalar_summation(input0)==output0);
+  assert(ntm_scalar_summation(input1)==output1);
+
   return 0;
 }

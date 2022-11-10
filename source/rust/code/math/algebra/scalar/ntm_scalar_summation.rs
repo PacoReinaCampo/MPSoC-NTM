@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_summation(vector: Vec<i32>) -> i32 {
-    let mut result: i32 = 0;
+pub fn ntm_scalar_summation(vector: Vec<f64>) -> f64 {
+    let mut result: f64 = 0.0;
 
     for row in 0..vector.len() {
         result += vector[row];
@@ -52,11 +52,11 @@ pub fn ntm_scalar_summation(vector: Vec<i32>) -> i32 {
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![3, 2, 2];
-    let input1: Vec<i32> = vec![1, 0, 0];
+    let input0: Vec<f64> = vec![3.0, 2.0, 2.0];
+    let input1: Vec<f64> = vec![1.0, 0.0, 0.0];
 
-    let output0: i32 = 7;
-    let output1: i32 = 1;
+    let output0: f64 = 7.0;
+    let output1: f64 = 1.0;
 
     assert_eq!(ntm_scalar_summation(input0), output0);
     assert_eq!(ntm_scalar_summation(input1), output1);

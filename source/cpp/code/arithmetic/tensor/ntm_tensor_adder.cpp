@@ -42,9 +42,90 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> input_a, vector<vector<vector<double>>> input_b) {
+
+  vector<vector<vector<double>>> result;
+
+  for (int i = 0; i < input_a.size(); i++) {
+    vector<vector<double>> matrix;
+
+    for (int j = 0; j < input_a[0].size(); j++) {
+      vector<double> vector;
+
+      for (int k = 0; k < input_a[0][0].size(); k++) {
+        double temporal = input_a[i][j][k] + input_b[i][j][k];
+
+        vector.push_back(temporal);
+      }
+      matrix.push_back(vector);
+    }
+    result.push_back(matrix);
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<vector<double>>> input_a {
+    {
+      { 2.0, 2.0, 2.0 },
+      { 0.0, 0.0, 0.0 },
+      { 4.0, 4.0, 4.0 }
+    },
+    {
+      { 2.0, 2.0, 2.0 },
+      { 0.0, 0.0, 0.0 },
+      { 4.0, 4.0, 4.0 }
+    },
+    {
+      { 2.0, 2.0, 2.0 },
+      { 0.0, 0.0, 0.0 },
+      { 4.0, 4.0, 4.0 }
+    }
+  };
+  vector<vector<vector<double>>> input_b {
+    {
+      { 1.0, 1.0, 1.0 },
+      { 1.0, 1.0, 1.0 },
+      { 2.0, 2.0, 2.0 }
+    },
+    {
+      { 1.0, 1.0, 1.0 },
+      { 1.0, 1.0, 1.0 },
+      { 2.0, 2.0, 2.0 }
+    },
+    {
+      { 1.0, 1.0, 1.0 },
+      { 1.0, 1.0, 1.0 },
+      { 2.0, 2.0, 2.0 }
+    }
+  };
+
+  vector<vector<vector<double>>> output {
+    {
+      { 3.0, 3.0, 3.0 },
+      { 1.0, 1.0, 1.0 },
+      { 6.0, 6.0, 6.0 }
+    },
+    {
+      { 3.0, 3.0, 3.0 },
+      { 1.0, 1.0, 1.0 },
+      { 6.0, 6.0, 6.0 }
+    },
+    {
+      { 3.0, 3.0, 3.0 },
+      { 1.0, 1.0, 1.0 },
+      { 6.0, 6.0, 6.0 }
+    }
+  };
+
+  assert(ntm_tensor_adder(input_a, input_b)==output);
+
   return 0;
 }

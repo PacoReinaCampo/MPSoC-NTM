@@ -42,9 +42,33 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<numeric>
+#include<cassert>
+
+using namespace std;
+
+vector<double> ntm_vector_logistic_function(vector<double>, vector<double>);
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input_a{2.0, 0.0, 4.0};
+  vector<double> input_b{1.0, 1.0, 2.0};
+
+  vector<double> output{2.0, 0.0, 2.0};
+
+  assert(ntm_vector_logistic_function(input_a, input_b)==output);
+
   return 0;
+}
+
+vector<double> ntm_vector_logistic_function(vector<double> input_a, vector<double> input_b) {
+  // Divide two vectors of identical dimensions
+  vector<double> result;
+
+  for (int row = 0; row < input_a.size(); row++) {
+    result[row] = input_a[row] / input_a[row];
+  }
+
+  return result;
 }

@@ -42,26 +42,30 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_divider(input_a: Vec<Vec<Vec<i32>>>, input_b: Vec<Vec<Vec<i32>>>) -> Vec<Vec<Vec<i32>>> {
-    // Add two tensors of identical dimensions
-    let mut result: Vec<Vec<Vec<i32>>> = vec![vec![]];
+pub fn ntm_tensor_divider(input_a: Vec<Vec<Vec<f64>>>, input_b: Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
+    // Add two matching tensors.
+    let mut result: Vec<Vec<Vec<f64>>> = vec![vec![]];
+
+    let mut temporal;
 
     if input_a.len() != input_b.len() {
-        panic!("Tensor dimensions do not match");
+        panic!("Matrix dimensions do not match");
     }
 
-    for block in 0..input_a.len() {
-        if input_a[block].len() != input_b[block].len() {
-            panic!("Tensor dimensions do not match");
+    for i in 0..input_a.len() {
+        if input_a[i].len() != input_b[i].len() {
+            panic!("Matrix dimensions do not match");
         }
         result.push(vec![]);
-        for row in 0..input_b[0].len() {
-            if input_a[block][row].len() != input_b[block][row].len() {
-                panic!("Tensor dimensions do not match");
+        for j in 0..input_b[0].len() {
+            if input_a[i][j].len() != input_b[i][j].len() {
+                panic!("Matrix dimensions do not match");
             }
             result.push(vec![vec![]]);
-            for column in 0..input_b[0][0].len() {
-                result[block][row].push(input_a[block][row][column] / input_b[block][row][column]);
+            for k in 0..input_b[0][0].len() {
+                temporal = input_a[i][j][k] + input_b[i][j][k];
+
+                result[i][j].push(temporal);
             }
         }
     }
@@ -69,21 +73,57 @@ pub fn ntm_tensor_divider(input_a: Vec<Vec<Vec<i32>>>, input_b: Vec<Vec<Vec<i32>
 }
 
 fn main() {
-    let input_a: Vec<Vec<Vec<i32>>> = vec![
-        vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]],
-        vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]],
-        vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]]
+    let input_a: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ]
     ];
-    let input_b: Vec<Vec<Vec<i32>>> = vec![
-        vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]],
-        vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]],
-        vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]]
+    let input_b: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+        vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+        vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ]
     ];
 
-    let output: Vec<Vec<Vec<i32>>> = vec![
-        vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]],
-        vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]],
-        vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]]
+    let output: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![3.0, 3.0, 3.0],
+            vec![1.0, 1.0, 1.0],
+            vec![6.0, 6.0, 6.0]
+        ],
+        vec![
+            vec![3.0, 3.0, 3.0],
+            vec![1.0, 1.0, 1.0],
+            vec![6.0, 6.0, 6.0]
+        ],
+        vec![
+            vec![3.0, 3.0, 3.0],
+            vec![1.0, 1.0, 1.0],
+            vec![6.0, 6.0, 6.0]
+        ]
     ];
 
     assert_eq!(ntm_tensor_divider(input_a, input_b), output);

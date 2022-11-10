@@ -43,8 +43,87 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#define X 3
+#define Y 3
+#define Z 3
+
+double ntm_matrix_multiplier(double ***input_a, double ***input_b) {
+
+  double ***result;
+
+  int i, j, k;
+
+  result = (double ***) malloc(sizeof(int)*X*Y*Z);
+
+  // calculating multiplication
+  for (i = 0; i < X; i++) {
+    for (j = 0; j < Y; j++) {
+      for (k = 0; k < Z; k++) {
+        result[i][j][k] = input_a[i][j][k] * input_b[i][j][k];
+      }
+    }
+  }
+
+  return ***result;
+}
 
 int main() {
-  printf("Hello QueenField!\n");
+
+  double ***input_a;
+  double ***input_b;
+
+  double ***output;
+
+  input_a = (double ***) malloc(sizeof(int)*X*Y*Z);
+  input_b = (double ***) malloc(sizeof(int)*X*Y*Z);
+
+  output = (double ***) malloc(sizeof(int)*X*Y*Z);
+
+  input_a[0][0][0] = 2.0; input_a[0][1][0] = 2.0; input_a[0][2][0] = 2.0;
+  input_a[0][0][1] = 0.0; input_a[0][1][1] = 0.0; input_a[0][2][1] = 0.0;
+  input_a[0][0][2] = 4.0; input_a[0][1][2] = 4.0; input_a[0][2][2] = 4.0;
+
+  input_a[1][0][0] = 2.0; input_a[1][1][0] = 2.0; input_a[1][2][0] = 2.0;
+  input_a[1][0][1] = 0.0; input_a[1][1][1] = 0.0; input_a[1][2][1] = 0.0;
+  input_a[1][0][2] = 4.0; input_a[1][1][2] = 4.0; input_a[1][2][2] = 4.0;
+
+  input_a[2][0][0] = 2.0; input_a[2][1][0] = 2.0; input_a[2][2][0] = 2.0;
+  input_a[2][0][1] = 0.0; input_a[2][1][1] = 0.0; input_a[2][2][1] = 0.0;
+  input_a[2][0][2] = 4.0; input_a[2][1][2] = 4.0; input_a[2][2][2] = 4.0;
+
+  input_b[0][0][0] = 1.0; input_b[0][1][0] = 1.0; input_b[0][2][0] = 1.0;
+  input_b[0][0][1] = 1.0; input_b[0][1][1] = 1.0; input_b[0][2][1] = 1.0;
+  input_b[0][0][2] = 2.0; input_b[0][1][2] = 2.0; input_b[0][2][2] = 2.0;
+
+  input_b[1][0][0] = 1.0; input_b[1][1][0] = 1.0; input_b[1][2][0] = 1.0;
+  input_b[1][0][1] = 1.0; input_b[1][1][1] = 1.0; input_b[1][2][1] = 1.0;
+  input_b[1][0][2] = 2.0; input_b[1][1][2] = 2.0; input_b[1][2][2] = 2.0;
+
+  input_b[2][0][0] = 1.0; input_b[2][1][0] = 1.0; input_b[2][2][0] = 1.0;
+  input_b[2][0][1] = 1.0; input_b[2][1][1] = 1.0; input_b[2][2][1] = 1.0;
+  input_b[2][0][2] = 2.0; input_b[2][1][2] = 2.0; input_b[2][2][2] = 2.0;
+
+  output[0][0][0] = 2.0; output[0][1][0] = 2.0; output[0][2][0] = 2.0;
+  output[0][0][1] = 0.0; output[0][1][1] = 0.0; output[0][2][1] = 0.0;
+  output[0][0][2] = 8.0; output[0][1][2] = 8.0; output[0][2][2] = 8.0;
+
+  output[1][0][0] = 2.0; output[1][1][0] = 2.0; output[1][2][0] = 2.0;
+  output[1][0][1] = 0.0; output[1][1][1] = 0.0; output[1][2][1] = 0.0;
+  output[1][0][2] = 8.0; output[1][1][2] = 8.0; output[1][2][2] = 8.0;
+
+  output[2][0][0] = 2.0; output[2][1][0] = 2.0; output[2][2][0] = 2.0;
+  output[2][0][1] = 0.0; output[2][1][1] = 0.0; output[2][2][1] = 0.0;
+  output[2][0][2] = 8.0; output[2][1][2] = 8.0; output[2][2][2] = 8.0;
+
+  assert(ntm_matrix_multiplier(input_a, input_b)==***output);
+
+  free(input_a);
+  free(input_b);
+
+  free(output);
+
   return 0;
 }

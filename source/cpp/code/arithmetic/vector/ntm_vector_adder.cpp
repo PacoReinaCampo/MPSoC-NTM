@@ -42,9 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<double> ntm_vector_adder(vector<double> input_a, vector<double> input_b) {
+  // Add two vectors of identical dimensions
+  vector<double> result;
+
+  for (int row = 0; row < input_a.size(); row++) {
+    double temporal = input_a[row] + input_b[row];
+
+    result.push_back(temporal);
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input_a{2.0, 0.0, 4.0};
+  vector<double> input_b{1.0, 1.0, 2.0};
+
+  vector<double> output{3.0, 1.0, 6.0};
+
+  assert(ntm_vector_adder(input_a, input_b)==output);
+
   return 0;
 }

@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_summation(matrix: Vec<Vec<i32>>) -> Vec<i32> {
-    let mut result: Vec<i32> = vec![0; matrix[0].len()];
+pub fn ntm_vector_summation(matrix: Vec<Vec<f64>>) -> Vec<f64> {
+    let mut result: Vec<f64> = vec![0.0; matrix[0].len()];
 
     for row in 0..matrix.len() {
         for column in 0..matrix[row].len() {
@@ -54,11 +54,11 @@ pub fn ntm_vector_summation(matrix: Vec<Vec<i32>>) -> Vec<i32> {
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![3, 2, 2], vec![0, 2, 0], vec![5, 4, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+    let input0: Vec<Vec<f64>> = vec![vec![3.0, 2.0, 2.0], vec![0.0, 2.0, 0.0], vec![5.0, 4.0, 1.0]];
+    let input1: Vec<Vec<f64>> = vec![vec![1.0, 0.0, 0.0], vec![0.0, 1.0, 0.0], vec![0.0, 0.0, 1.0]];
 
-    let output0: Vec<i32> = vec![7, 2, 10];
-    let output1: Vec<i32> = vec![1, 1, 1];
+    let output0: Vec<f64> = vec![7.0, 2.0, 10.0];
+    let output1: Vec<f64> = vec![1.0, 1.0, 1.0];
 
     assert_eq!(ntm_vector_summation(input0), output0);
     assert_eq!(ntm_vector_summation(input1), output1);

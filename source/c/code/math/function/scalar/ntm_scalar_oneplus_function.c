@@ -43,19 +43,27 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <math.h>
 #include <assert.h>
 
 double ntm_scalar_oneplus_function(double input) {
+  double ONE = 1.0;
+
   // calculating result
-  return input;
+  double temporal = ONE + exp(input);
+
+  return ONE + log(temporal);
 }
 
 int main() {
-  double input = 48;
+  double input0 = 0.8909031788043871;
+  double input1 = 3.2155195231797550;
 
-  double output = 48;
+  double output0 = 2.2346950078883427;
+  double output1 = 4.2548695333728740;
 
-  assert(ntm_scalar_oneplus_function(input)==output);
+  assert(ntm_scalar_oneplus_function(input0)==output0);
+  assert(ntm_scalar_oneplus_function(input1)==output1);
 
   return 0;
 }

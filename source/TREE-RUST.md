@@ -1,3 +1,4 @@
+```
 code
 ├── arithmetic
 │   ├── matrix
@@ -13,9 +14,9 @@ code
 │   │   ├── ntm_tensor_divider.rs
 │   │   └── ntm_tensor_multiplier.rs
 │   └── vector
-│       ├── ntm_vector_adder.rs
-│       ├── ntm_vector_divider.rs
-│       └── ntm_vector_multiplier.rs
+│       ├── **ntm_vector_adder.rs**
+│       ├── **ntm_vector_divider.rs**
+│       └── **ntm_vector_multiplier.rs**
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -100,15 +101,15 @@ code
 │   │   │   ├── ntm_matrix_convolution.rs
 │   │   │   ├── ntm_matrix_inverse.rs
 │   │   │   ├── ntm_matrix_multiplication.rs
-│   │   │   ├── ntm_matrix_product.rs
+│   │   │   ├── **ntm_matrix_product.rs**
 │   │   │   ├── ntm_matrix_summation.rs
-│   │   │   ├── ntm_matrix_transpose.rs
+│   │   │   ├── **ntm_matrix_transpose.rs**
 │   │   │   ├── ntm_matrix_vector_convolution.rs
 │   │   │   ├── ntm_matrix_vector_product.rs
-│   │   │   └── ntm_transpose_vector_product.rs
+│   │   │   └── **ntm_transpose_vector_product.rs**
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication.rs
-│   │   │   └── ntm_scalar_summation.rs
+│   │   │   ├── **ntm_scalar_multiplication.rs**
+│   │   │   └── **ntm_scalar_summation.rs**
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.rs
 │   │   │   ├── ntm_tensor_inverse.rs
@@ -119,12 +120,12 @@ code
 │   │   │   ├── ntm_tensor_summation.rs
 │   │   │   └── ntm_tensor_transpose.rs
 │   │   └── vector
-│   │       ├── ntm_dot_product.rs
+│   │       ├── **ntm_dot_product.rs**
 │   │       ├── ntm_vector_convolution.rs
-│   │       ├── ntm_vector_cosine_similarity.rs
-│   │       ├── ntm_vector_module.rs
-│   │       ├── ntm_vector_multiplication.rs
-│   │       └── ntm_vector_summation.rs
+│   │       ├── **ntm_vector_cosine_similarity.rs**
+│   │       ├── **ntm_vector_module.rs**
+│   │       ├── **ntm_vector_multiplication.rs**
+│   │       └── **ntm_vector_summation.rs**
 │   ├── calculus
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_differentiation.rs
@@ -140,14 +141,14 @@ code
 │   │       └── ntm_vector_softmax.rs
 │   ├── function
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.rs
-│   │   │   └── ntm_matrix_oneplus_function.rs
+│   │   │   ├── **ntm_matrix_logistic_function.rs**
+│   │   │   └── **ntm_matrix_oneplus_function.rs**
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.rs
-│   │   │   └── ntm_scalar_oneplus_function.rs
+│   │   │   ├── **ntm_scalar_logistic_function.rs**
+│   │   │   └── **ntm_scalar_oneplus_function.rs**
 │   │   └── vector
-│   │       ├── ntm_vector_logistic_function.rs
-│   │       └── ntm_vector_oneplus_function.rs
+│   │       ├── **ntm_vector_logistic_function.rs**
+│   │       └── **ntm_vector_oneplus_function.rs**
 │   └── statitics
 │       ├── matrix
 │       │   ├── ntm_matrix_deviation.rs
@@ -232,5 +233,6 @@ code
             ├── ntm_lstm_output_u_trainer.rs
             ├── ntm_lstm_output_v_trainer.rs
             └── ntm_lstm_output_w_trainer.rs
+```
 
 59 directories, 174 files

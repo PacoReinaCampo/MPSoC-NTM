@@ -1,21 +1,22 @@
+```
 code
 ├── arithmetic
 │   ├── matrix
-│   │   ├── ntm_matrix_adder.cpp
-│   │   ├── ntm_matrix_divider.cpp
-│   │   └── ntm_matrix_multiplier.cpp
+│   │   ├── **ntm_matrix_adder.cpp**
+│   │   ├── **ntm_matrix_divider.cpp**
+│   │   └── **ntm_matrix_multiplier.cpp**
 │   ├── scalar
 │   │   ├── **ntm_scalar_adder.cpp**
 │   │   ├── **ntm_scalar_divider.cpp**
 │   │   └── **ntm_scalar_multiplier.cpp**
 │   ├── tensor
-│   │   ├── ntm_tensor_adder.cpp
-│   │   ├── ntm_tensor_divider.cpp
-│   │   └── ntm_tensor_multiplier.cpp
+│   │   ├── **ntm_tensor_adder.cpp**
+│   │   ├── **ntm_tensor_divider.cpp**
+│   │   └── **ntm_tensor_multiplier.cpp**
 │   └── vector
-│       ├── ntm_vector_adder.cpp
-│       ├── ntm_vector_divider.cpp
-│       └── ntm_vector_multiplier.cpp
+│       ├── **ntm_vector_adder.cpp**
+│       ├── **ntm_vector_divider.cpp**
+│       └── **ntm_vector_multiplier.cpp**
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -107,8 +108,8 @@ code
 │   │   │   ├── ntm_matrix_vector_product.cpp
 │   │   │   └── ntm_transpose_vector_product.cpp
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication.cpp
-│   │   │   └── ntm_scalar_summation.cpp
+│   │   │   ├── **ntm_scalar_multiplication.cpp**
+│   │   │   └── **ntm_scalar_summation.cpp**
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.cpp
 │   │   │   ├── ntm_tensor_inverse.cpp
@@ -119,10 +120,10 @@ code
 │   │   │   ├── ntm_tensor_summation.cpp
 │   │   │   └── ntm_tensor_transpose.cpp
 │   │   └── vector
-│   │       ├── ntm_dot_product.cpp
+│   │       ├── **ntm_dot_product.cpp**
 │   │       ├── ntm_vector_convolution.cpp
-│   │       ├── ntm_vector_cosine_similarity.cpp
-│   │       ├── ntm_vector_module.cpp
+│   │       ├── **ntm_vector_cosine_similarity.cpp**
+│   │       ├── **ntm_vector_module.cpp**
 │   │       ├── ntm_vector_multiplication.cpp
 │   │       └── ntm_vector_summation.cpp
 │   ├── calculus
@@ -143,8 +144,8 @@ code
 │   │   │   ├── ntm_matrix_logistic_function.cpp
 │   │   │   └── ntm_matrix_oneplus_function.cpp
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.cpp
-│   │   │   └── ntm_scalar_oneplus_function.cpp
+│   │   │   ├── **ntm_scalar_logistic_function.cpp**
+│   │   │   └── **ntm_scalar_oneplus_function.cpp**
 │   │   └── vector
 │   │       ├── ntm_vector_logistic_function.cpp
 │   │       └── ntm_vector_oneplus_function.cpp
@@ -232,5 +233,6 @@ code
             ├── ntm_lstm_output_u_trainer.cpp
             ├── ntm_lstm_output_v_trainer.cpp
             └── ntm_lstm_output_w_trainer.cpp
+```
 
 59 directories, 174 files

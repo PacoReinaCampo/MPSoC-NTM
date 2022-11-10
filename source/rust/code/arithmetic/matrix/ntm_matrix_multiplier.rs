@@ -42,9 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_multiplier(input_a: Vec<Vec<i32>>, input_b: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Add two matrices of identical dimensions
-    let mut result: Vec<Vec<i32>> = vec![];
+pub fn ntm_matrix_multiplier(input_a: Vec<Vec<f64>>, input_b: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    // Multiply two matching matrices.
+    let mut result: Vec<Vec<f64>> = vec![];
+
+    let mut temporal;
 
     if input_a.len() != input_b.len() {
         panic!("Matrix dimensions do not match");
@@ -56,17 +58,31 @@ pub fn ntm_matrix_multiplier(input_a: Vec<Vec<i32>>, input_b: Vec<Vec<i32>>) -> 
         }
         result.push(vec![]);
         for column in 0..input_b[0].len() {
-            result[row].push(input_a[row][column] * input_b[row][column]);
+            temporal = input_a[row][column] * input_b[row][column];
+
+            result[row].push(temporal);
         }
     }
     result
 }
 
 fn main() {
-    let input_a: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input_b: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+    let input_a: Vec<Vec<f64>> = vec![
+        vec![2.0, 2.0, 2.0],
+        vec![0.0, 0.0, 0.0],
+        vec![4.0, 4.0, 4.0]
+    ];
+    let input_b: Vec<Vec<f64>> = vec![
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0],
+        vec![2.0, 2.0, 2.0]
+    ];
 
-    let output: Vec<Vec<i32>> = vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]];
+    let output: Vec<Vec<f64>> = vec![
+        vec![2.0, 2.0, 2.0],
+        vec![0.0, 0.0, 0.0],
+        vec![8.0, 8.0, 8.0]
+    ];
 
     assert_eq!(ntm_matrix_multiplier(input_a, input_b), output);
 }

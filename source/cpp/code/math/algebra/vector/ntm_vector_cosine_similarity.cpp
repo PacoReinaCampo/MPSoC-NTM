@@ -42,9 +42,41 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+double ntm_vector_cosine_similarity(vector<double> input_a, vector<double> input_b) {
+  double dot_result = 0.0;
+
+  double input_a_result = 0.0;
+  double input_b_result = 0.0;
+
+  for(int row=0; row<input_a.size(); row++) {
+    dot_result += input_a[row] * input_b[row];
+  }
+
+  for(int row=0; row<input_a.size(); row++) {
+    input_a_result += input_a[row] * input_a[row];
+  }
+
+  for(int row=0; row<input_b.size(); row++) {
+    input_b_result += input_b[row] * input_b[row];
+  }
+
+  return dot_result/(sqrt(input_a_result)*sqrt(input_b_result));
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input_a{4.0, 0.0, 3.0};
+  vector<double> input_b{4.0, 0.0, 3.0};
+
+  double output = 1.0;
+
+  assert(ntm_vector_cosine_similarity(input_a, input_b)==output);
+
   return 0;
 }

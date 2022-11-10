@@ -42,25 +42,39 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_oneplus_function(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_oneplus_function(input: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    // Add two matching matrices.
+    const ONE: f64 = 1.0;
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    let mut result: Vec<Vec<f64>> = vec![];
+
+    let mut temporal0;
+    let mut temporal1;
+
+    for row in 0..input.len() {
+        result.push(vec![]);
+        for column in 0..input[0].len() {
+            temporal0 = ONE + input[row][column].exp();
+            temporal1 = ONE + temporal0.ln();
+
+            result[row].push(temporal1);
         }
     }
     result
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let input: Vec<Vec<f64>> = vec![
+        vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
+        vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
+        vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let output: Vec<Vec<f64>> = vec![
+        vec![7.324405028374851, 4.174113884283648, 9.351504850519834],
+        vec![5.326566089800315, 6.318175429247454, 7.694385789255728],
+        vec![10.998253448184894, 8.958518576982677, 4.048362506240452]
+    ];
 
-    assert_eq!(ntm_matrix_oneplus_function(input0), output0);
-    assert_eq!(ntm_matrix_oneplus_function(input1), output1);
+    assert_eq!(ntm_matrix_oneplus_function(input), output);
 }

@@ -1,3 +1,4 @@
+```
 code
 ├── arithmetic
 │   ├── matrix
@@ -232,5 +233,6 @@ code
             ├── ntm_lstm_output_u_trainer.go
             ├── ntm_lstm_output_v_trainer.go
             └── ntm_lstm_output_w_trainer.go
+```
 
 59 directories, 174 files

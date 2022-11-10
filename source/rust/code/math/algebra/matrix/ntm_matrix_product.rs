@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_product(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+pub fn ntm_matrix_product(multiplier: Vec<Vec<f64>>, multiplicand: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     // Multiply two matching matrices.
-    let mut result: Vec<Vec<i32>> = vec![];
+    let mut result: Vec<Vec<f64>> = vec![];
 
     // The multiplier needs to have the same amount of columns as the multiplicand has rows.
     let mut temporal;
@@ -58,7 +58,7 @@ pub fn ntm_matrix_product(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>
         }
         result.push(vec![]);
         for column_right in 0..multiplicand[0].len() {
-            temporal = 0;
+            temporal = 0.0;
             for row_right in 0..multiplicand.len() {
                 if row_right_length != multiplicand[row_right].len() {
                     // If row is longer than a previous row cancel operation with error
@@ -73,23 +73,23 @@ pub fn ntm_matrix_product(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>
 }
 
 fn main() {
-    let input_a: Vec<Vec<i32>> = vec![
-        vec![1, 2, 3],
-        vec![4, 2, 6],
-        vec![3, 4, 1],
-        vec![2, 4, 8]
+    let input_a: Vec<Vec<f64>> = vec![
+        vec![1.0, 2.0, 3.0],
+        vec![4.0, 2.0, 6.0],
+        vec![3.0, 4.0, 1.0],
+        vec![2.0, 4.0, 8.0]
     ];
-    let input_b: Vec<Vec<i32>> = vec![
-        vec![1, 3, 3, 2],
-        vec![7, 6, 2, 1],
-        vec![3, 4, 2, 1]
+    let input_b: Vec<Vec<f64>> = vec![
+        vec![1.0, 3.0, 3.0, 2.0],
+        vec![7.0, 6.0, 2.0, 1.0],
+        vec![3.0, 4.0, 2.0, 1.0]
     ];
 
-    let output: Vec<Vec<i32>> = vec![
-        vec![24, 27, 13, 7],
-        vec![36, 48, 28, 16],
-        vec![34, 37, 19, 11],
-        vec![54, 62, 30, 16]
+    let output: Vec<Vec<f64>> = vec![
+        vec![24.0, 27.0, 13.0, 7.0],
+        vec![36.0, 48.0, 28.0, 16.0],
+        vec![34.0, 37.0, 19.0, 11.0],
+        vec![54.0, 62.0, 30.0, 16.0]
     ];
 
     assert_eq!(ntm_matrix_product(input_a, input_b), output);

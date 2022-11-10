@@ -1,21 +1,22 @@
+```
 code
 ├── arithmetic
 │   ├── matrix
-│   │   ├── ntm_matrix_adder.c
-│   │   ├── ntm_matrix_divider.c
-│   │   └── ntm_matrix_multiplier.c
+│   │   ├── **ntm_matrix_adder.c**
+│   │   ├── **ntm_matrix_divider.c**
+│   │   └── **ntm_matrix_multiplier.c**
 │   ├── scalar
 │   │   ├── **ntm_scalar_adder.c**
 │   │   ├── **ntm_scalar_divider.c**
 │   │   └── **ntm_scalar_multiplier.c**
 │   ├── tensor
-│   │   ├── ntm_tensor_adder.c
-│   │   ├── ntm_tensor_divider.c
-│   │   └── ntm_tensor_multiplier.c
+│   │   ├── **ntm_tensor_adder.c**
+│   │   ├── **ntm_tensor_divider.c**
+│   │   └── **ntm_tensor_multiplier.c**
 │   └── vector
-│       ├── ntm_vector_adder.c
-│       ├── ntm_vector_divider.c
-│       └── ntm_vector_multiplier.c
+│       ├── **ntm_vector_adder.c**
+│       ├── **ntm_vector_divider.c**
+│       └── **ntm_vector_multiplier.c**
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -232,5 +233,6 @@ code
             ├── ntm_lstm_output_u_trainer.c
             ├── ntm_lstm_output_v_trainer.c
             └── ntm_lstm_output_w_trainer.c
+```
 
 59 directories, 174 files

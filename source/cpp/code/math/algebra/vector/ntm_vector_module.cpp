@@ -42,9 +42,29 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+double ntm_vector_module(vector<double> input) {
+  double result = 0.0;
+
+  for(int row=0; row<input.size(); row++) {
+    result += input[row] * input[row];
+  }
+
+  return sqrt(result);
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> input{4.0, 0.0, 3.0};
+
+  double output = 5.0;
+
+  assert(ntm_vector_module(input)==output);
+
   return 0;
 }

@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_logistic_function(input: f64) -> f64 {
+pub fn ntm_scalar_oneplus_function(input: f64) -> f64 {
     const ONE: f64 = 1.0;
 
     let temporal: f64 = ONE + input.exp();
@@ -57,6 +57,6 @@ fn main() {
     let output0: f64 = 2.2346950078883427;
     let output1: f64 = 4.2548695333728740;
 
-    assert_eq!(ntm_scalar_logistic_function(input0), output0);
-    assert_eq!(ntm_scalar_logistic_function(input1), output1);
+    assert_eq!(ntm_scalar_oneplus_function(input0), output0);
+    assert_eq!(ntm_scalar_oneplus_function(input1), output1);
 }
