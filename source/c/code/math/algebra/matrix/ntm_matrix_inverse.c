@@ -71,9 +71,9 @@ double ntm_matrix_inverse(double **data_in) {
       matrix[i][j] = data_in[i][j];
 
       if (i == j) {
-        matrix[i][j + SIZE_IN] = 1;
+        matrix[i][j + SIZE_IN] = 1.0;
       } else {
-        matrix[i][j + SIZE_IN] = 0;
+        matrix[i][j + SIZE_IN] = 0.0;
       }
     }
   }
