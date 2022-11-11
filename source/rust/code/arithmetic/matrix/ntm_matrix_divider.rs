@@ -42,47 +42,47 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_divider(input_a: Vec<Vec<f64>>, input_b: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+pub fn ntm_matrix_divider(data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     // Divide two matching matrices.
-    let mut result: Vec<Vec<f64>> = vec![];
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-    let mut temporal;
-
-    if input_a.len() != input_b.len() {
+    if data_a_in.len() != data_b_in.len() {
         panic!("Matrix dimensions do not match");
     }
 
-    for row in 0..input_a.len() {
-        if input_a[row].len() != input_b[row].len() {
+    for i in 0..data_a_in.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        if data_a_in[i].len() != data_b_in[i].len() {
             panic!("Matrix dimensions do not match");
         }
-        result.push(vec![]);
-        for column in 0..input_b[0].len() {
-            temporal = input_a[row][column] / input_b[row][column];
+        for j in 0..data_a_in[0].len() {
+            let temporal = data_a_in[i][j] / data_b_in[i][j];
 
-            result[row].push(temporal);
+            vector.push(temporal);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input_a: Vec<Vec<f64>> = vec![
+    let data_a_in: Vec<Vec<f64>> = vec![
         vec![2.0, 2.0, 2.0],
         vec![0.0, 0.0, 0.0],
         vec![4.0, 4.0, 4.0]
     ];
-    let input_b: Vec<Vec<f64>> = vec![
+    let data_b_in: Vec<Vec<f64>> = vec![
         vec![1.0, 1.0, 1.0],
         vec![1.0, 1.0, 1.0],
         vec![2.0, 2.0, 2.0]
     ];
 
-    let output: Vec<Vec<f64>> = vec![
+    let data_out: Vec<Vec<f64>> = vec![
         vec![2.0, 2.0, 2.0],
         vec![0.0, 0.0, 0.0],
         vec![2.0, 2.0, 2.0]
     ];
 
-    assert_eq!(ntm_matrix_divider(input_a, input_b), output);
+    assert_eq!(ntm_matrix_divider(data_a_in, data_b_in), data_out);
 }

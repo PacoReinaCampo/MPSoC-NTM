@@ -46,22 +46,22 @@
 #include <math.h>
 #include <assert.h>
 
-double ntm_scalar_logistic_function(double input) {
+double ntm_scalar_logistic_function(double data_in) {
   double ONE = 1.0;
 
   // calculating result
-  return ONE/(ONE + ONE/exp(input));
+  return ONE/(ONE + ONE/exp(data_in));
 }
 
 int main() {
   double input0 = 0.8909031788043871;
   double input1 = 3.2155195231797550;
 
-  double output0 = 0.7090765217957029;
-  double output1 = 0.9614141454987156;
+  double data_out_0 = 0.7090765217957029;
+  double data_out_1 = 0.9614141454987156;
 
-  assert(ntm_scalar_logistic_function(input0)==output0);
-  assert(ntm_scalar_logistic_function(input1)==output1);
+  assert(ntm_scalar_logistic_function(input0)==data_out_0);
+  assert(ntm_scalar_logistic_function(input1)==data_out_1);
 
   return 0;
 }

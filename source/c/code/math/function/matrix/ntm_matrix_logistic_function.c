@@ -43,8 +43,67 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#define SIZE_I_IN 3
+#define SIZE_J_IN 3
+
+double ntm_matrix_logistic_function(double **data_in) {
+  double ONE = 1.0;
+
+  double **data_out;
+
+  int i, j;
+
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int)); 
+  }
+		
+  // calculating addition
+  for (i = 0; i < SIZE_I_IN; i++) {
+    for (j = 0; j < SIZE_J_IN; j++) {
+      data_out[i][j] = ONE/(ONE + ONE/exp(data_in[i][j]));
+    }
+  }
+
+  return **data_out;
+}
 
 int main() {
-  printf("Hello QueenField!\n");
+
+  double **data_in;
+
+  double **data_out;
+
+  int i;
+
+  data_in = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_in[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  }
+
+  data_in[0][0] = 6.3226113886226751; data_in[1][0] = 3.1313826152262876; data_in[2][0] = 8.3512687816132226;
+  data_in[0][1] = 4.3132651822261687; data_in[1][1] = 5.3132616875182226; data_in[2][1] = 6.6931471805599454;
+  data_in[0][2] = 9.9982079678583020; data_in[1][2] = 7.9581688450893644; data_in[2][2] = 2.9997639589554603;
+
+  data_out[0][0] = 0.9982079678583020; data_out[1][0] = 0.9581688450893644; data_out[2][0] = 0.9997639589554603;
+  data_out[0][1] = 0.9867871586112067; data_out[1][1] = 0.9950983109503272; data_out[2][1] = 0.9987621580633643;
+  data_out[0][2] = 0.9999545207076224; data_out[1][2] = 0.9996503292557579; data_out[2][2] = 0.9525634621372647;
+
+  assert(ntm_matrix_logistic_function(data_in)==**data_out);
+
+  free(data_in);
+
+  free(data_out);
+
   return 0;
 }

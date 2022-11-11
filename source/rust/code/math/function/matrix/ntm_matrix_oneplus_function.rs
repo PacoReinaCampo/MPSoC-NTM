@@ -42,39 +42,41 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_oneplus_function(input: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+pub fn ntm_matrix_oneplus_function(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     // Add two matching matrices.
     const ONE: f64 = 1.0;
 
-    let mut result: Vec<Vec<f64>> = vec![];
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
     let mut temporal0;
     let mut temporal1;
 
-    for row in 0..input.len() {
-        result.push(vec![]);
-        for column in 0..input[0].len() {
-            temporal0 = ONE + input[row][column].exp();
+    for row in 0..data_in.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        for column in 0..data_in[0].len() {
+            temporal0 = ONE + data_in[row][column].exp();
             temporal1 = ONE + temporal0.ln();
 
-            result[row].push(temporal1);
+            vector.push(temporal1);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input: Vec<Vec<f64>> = vec![
+    let data_in: Vec<Vec<f64>> = vec![
         vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
         vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
         vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
     ];
 
-    let output: Vec<Vec<f64>> = vec![
+    let data_out: Vec<Vec<f64>> = vec![
         vec![7.324405028374851, 4.174113884283648, 9.351504850519834],
         vec![5.326566089800315, 6.318175429247454, 7.694385789255728],
         vec![10.998253448184894, 8.958518576982677, 4.048362506240452]
     ];
 
-    assert_eq!(ntm_matrix_oneplus_function(input), output);
+    assert_eq!(ntm_matrix_oneplus_function(data_in), data_out);
 }

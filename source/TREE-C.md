@@ -141,14 +141,14 @@ code
 │   │       └── ntm_vector_softmax.c
 │   ├── function
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.c
-│   │   │   └── ntm_matrix_oneplus_function.c
+│   │   │   ├── **ntm_matrix_logistic_function.c**
+│   │   │   └── **ntm_matrix_oneplus_function.c**
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.c
-│   │   │   └── ntm_scalar_oneplus_function.c
+│   │   │   ├── **ntm_scalar_logistic_function.c**
+│   │   │   └── **ntm_scalar_oneplus_function.c**
 │   │   └── vector
-│   │       ├── ntm_vector_logistic_function.c
-│   │       └── ntm_vector_oneplus_function.c
+│   │       ├── **ntm_vector_logistic_function.c**
+│   │       └── **ntm_vector_oneplus_function.c**
 │   └── statitics
 │       ├── matrix
 │       │   ├── ntm_matrix_deviation.c

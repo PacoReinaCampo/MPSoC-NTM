@@ -45,8 +45,8 @@
 pub fn ntm_vector_module(vector: Vec<f64>) -> f64 {
     let mut result: f64 = 0.0;
 
-    for row in 0..vector.len() {
-        result += vector[row] * vector[row];
+    for i in 0..vector.len() {
+        result += vector[i] * vector[i];
     }
     result.sqrt()
 }

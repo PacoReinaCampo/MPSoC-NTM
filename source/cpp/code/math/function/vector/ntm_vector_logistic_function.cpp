@@ -43,32 +43,33 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
+#include<math.h>
 #include<vector>
-#include<numeric>
 #include<cassert>
 
 using namespace std;
 
-vector<double> ntm_vector_logistic_function(vector<double>, vector<double>);
+vector<double> ntm_vector_logistic_function(vector<double> data_in) {
 
-int main() {
-  vector<double> input_a{2.0, 0.0, 4.0};
-  vector<double> input_b{1.0, 1.0, 2.0};
+  double ONE = 1.0;
 
-  vector<double> output{2.0, 0.0, 2.0};
-
-  assert(ntm_vector_logistic_function(input_a, input_b)==output);
-
-  return 0;
-}
-
-vector<double> ntm_vector_logistic_function(vector<double> input_a, vector<double> input_b) {
-  // Divide two vectors of identical dimensions
   vector<double> result;
 
-  for (int row = 0; row < input_a.size(); row++) {
-    result[row] = input_a[row] / input_a[row];
+  for (int row = 0; row < data_in.size(); row++) {
+    double temporal = ONE/(ONE + ONE/exp(data_in[row]));
+
+    result.push_back(temporal);
   }
 
   return result;
+}
+
+int main() {
+  vector<double> data_in{ 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 };
+
+  vector<double> data_out{ 0.9982079678583020, 0.9581688450893644, 0.9997639589554603 };
+
+  assert(ntm_vector_logistic_function(data_in)==data_out);
+
+  return 0;
 }

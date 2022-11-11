@@ -42,9 +42,47 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_in) {
+
+  double ONE = 1.0;
+
+  vector<vector<double>> result;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+      double temporal = ONE/(ONE + ONE/exp(data_in[i][j]));
+
+      vector.push_back(temporal);
+    }
+    result.push_back(vector);
+  }
+
+  return result;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_in {
+    { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+    { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+    { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
+  };
+
+  vector<vector<double>> data_out {
+    { 0.9982079678583020, 0.9581688450893644, 0.9997639589554603 },
+    { 0.9867871586112067, 0.9950983109503272, 0.9987621580633643 },
+    { 0.9999545207076224, 0.9996503292557579, 0.9525634621372647 }
+  };
+
+  assert(ntm_matrix_logistic_function(data_in)==data_out);
+
   return 0;
 }

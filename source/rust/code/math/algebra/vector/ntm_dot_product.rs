@@ -49,8 +49,8 @@ pub fn ntm_dot_product(multiplier: Vec<f64>, multiplicand: Vec<f64>) -> f64 {
         panic!("Vector dimensions do not match");
     }
 
-    for row in 0..multiplier.len() {
-        result += multiplier[row] * multiplicand[row];
+    for i in 0..multiplier.len() {
+        result += multiplier[i] * multiplicand[i];
     }
     result
 }

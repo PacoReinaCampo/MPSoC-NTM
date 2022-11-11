@@ -42,16 +42,16 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_divider(input_a: f64, input_b: f64) -> f64 {
+pub fn ntm_scalar_divider(data_a_in: f64, data_b_in: f64) -> f64 {
     // calculating division
-    return input_a / input_b;
+    return data_a_in / data_b_in;
 }
 
 fn main() {
-    let input_a: f64 = 48.0;
-    let input_b: f64 = 16.0;
+    let data_a_in: f64 = 48.0;
+    let data_b_in: f64 = 16.0;
 
-    let output: f64 = 3.0;
+    let data_out: f64 = 3.0;
 
-    assert_eq!(ntm_scalar_divider(input_a, input_b), output);
+    assert_eq!(ntm_scalar_divider(data_a_in, data_b_in), data_out);
 }

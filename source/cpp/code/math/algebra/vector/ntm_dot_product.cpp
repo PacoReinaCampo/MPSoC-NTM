@@ -48,23 +48,23 @@
 
 using namespace std;
 
-double ntm_dot_product(vector<double> input_a, vector<double> input_b) {
-  double result = 0;
+double ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in) {
+  double data_out = 0;
 
-  for(int row=0; row<input_a.size(); row++) {
-    result += input_a[row] * input_b[row];
+  for(int i=0; i<data_a_in.size(); i++) {
+    data_out += data_a_in[i] * data_b_in[i];
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {
-  vector<double> input_a{1.0, 2.0, 3.0};
-  vector<double> input_b{1.0, 3.0, 3.0};
+  vector<double> data_a_in{1.0, 2.0, 3.0};
+  vector<double> data_b_in{1.0, 3.0, 3.0};
 
-  double output = 16.0;
+  double data_out = 16.0;
 
-  assert(ntm_dot_product(input_a, input_b)==output);
+  assert(ntm_dot_product(data_a_in, data_b_in)==data_out);
 
   return 0;
 }

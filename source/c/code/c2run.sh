@@ -280,12 +280,12 @@ gcc math/calculus/tensor/ntm_tensor_softmax.c -o math/calculus/tensor/ntm_tensor
 gcc math/calculus/vector/ntm_vector_differentiation.c -o math/calculus/vector/ntm_vector_differentiation.run
 gcc math/calculus/vector/ntm_vector_integration.c -o math/calculus/vector/ntm_vector_integration.run
 gcc math/calculus/vector/ntm_vector_softmax.c -o math/calculus/vector/ntm_vector_softmax.run
-gcc math/function/matrix/ntm_matrix_logistic_function.c -o math/function/matrix/ntm_matrix_logistic_function.run
-gcc math/function/matrix/ntm_matrix_oneplus_function.c -o math/function/matrix/ntm_matrix_oneplus_function.run
-gcc math/function/scalar/ntm_scalar_logistic_function.c -o math/function/scalar/ntm_scalar_logistic_function.run
-gcc math/function/scalar/ntm_scalar_oneplus_function.c -o math/function/scalar/ntm_scalar_oneplus_function.run
-gcc math/function/vector/ntm_vector_logistic_function.c -o math/function/vector/ntm_vector_logistic_function.run
-gcc math/function/vector/ntm_vector_oneplus_function.c -o math/function/vector/ntm_vector_oneplus_function.run
+gcc math/function/matrix/ntm_matrix_logistic_function.c -lm -o math/function/matrix/ntm_matrix_logistic_function.run
+gcc math/function/matrix/ntm_matrix_oneplus_function.c -lm -o math/function/matrix/ntm_matrix_oneplus_function.run
+gcc math/function/scalar/ntm_scalar_logistic_function.c -lm -o math/function/scalar/ntm_scalar_logistic_function.run
+gcc math/function/scalar/ntm_scalar_oneplus_function.c -lm -o math/function/scalar/ntm_scalar_oneplus_function.run
+gcc math/function/vector/ntm_vector_logistic_function.c -lm -o math/function/vector/ntm_vector_logistic_function.run
+gcc math/function/vector/ntm_vector_oneplus_function.c -lm -o math/function/vector/ntm_vector_oneplus_function.run
 gcc math/statitics/matrix/ntm_matrix_deviation.c -o math/statitics/matrix/ntm_matrix_deviation.run
 gcc math/statitics/matrix/ntm_matrix_mean.c -o math/statitics/matrix/ntm_matrix_mean.run
 gcc math/statitics/scalar/ntm_scalar_deviation.c -o math/statitics/scalar/ntm_scalar_deviation.run

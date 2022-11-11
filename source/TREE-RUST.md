@@ -2,17 +2,17 @@
 code
 ├── arithmetic
 │   ├── matrix
-│   │   ├── ntm_matrix_adder.rs
-│   │   ├── ntm_matrix_divider.rs
-│   │   └── ntm_matrix_multiplier.rs
+│   │   ├── **ntm_matrix_adder.rs**
+│   │   ├── **ntm_matrix_divider.rs**
+│   │   └── **ntm_matrix_multiplier.rs**
 │   ├── scalar
 │   │   ├── **ntm_scalar_adder.rs**
 │   │   ├── **ntm_scalar_divider.rs**
 │   │   └── **ntm_scalar_multiplier.rs**
 │   ├── tensor
-│   │   ├── ntm_tensor_adder.rs
-│   │   ├── ntm_tensor_divider.rs
-│   │   └── ntm_tensor_multiplier.rs
+│   │   ├── **ntm_tensor_adder.rs**
+│   │   ├── **ntm_tensor_divider.rs**
+│   │   └── **ntm_tensor_multiplier.rs**
 │   └── vector
 │       ├── **ntm_vector_adder.rs**
 │       ├── **ntm_vector_divider.rs**

@@ -52,16 +52,16 @@ pub fn ntm_vector_cosine_similarity(input_a: Vec<f64>, input_b: Vec<f64>) -> f64
         panic!("Vector dimensions do not match");
     }
 
-    for row in 0..input_a.len() {
-        dot_result += input_a[row] * input_b[row];
+    for i in 0..input_a.len() {
+        dot_result += input_a[i] * input_b[i];
     }
 
-    for row in 0..input_a.len() {
-        input_a_result += input_a[row] * input_a[row];
+    for i in 0..input_a.len() {
+        input_a_result += input_a[i] * input_a[i];
     }
 
-    for row in 0..input_b.len() {
-        input_b_result += input_b[row] * input_b[row];
+    for i in 0..input_b.len() {
+        input_b_result += input_b[i] * input_b[i];
     }
     
     dot_result/(input_a_result.sqrt()*input_b_result.sqrt())

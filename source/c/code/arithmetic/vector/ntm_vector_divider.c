@@ -46,54 +46,54 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#define SIZE 3
+#define SIZE_IN 3
 
-double ntm_vector_divider(double *input_a, double *input_b) {
+double ntm_vector_divider(double *data_a_in, double *data_b_in) {
 
-  double *result;
+  double *data_out;
 
   int i;
 
-  result = (double *) malloc(sizeof(int)*SIZE);
+  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
 
   // calculating division
-  for (i = 0; i < SIZE; i++) {
-    result[i] = input_a[i] / input_b[i];
+  for (i = 0; i < SIZE_IN; i++) {
+    data_out[i] = data_a_in[i] / data_b_in[i];
   }
 
-  return *result;
+  return *data_out;
 }
 
 int main() {
 
-  double *input_a;
-  double *input_b;
+  double *data_a_in;
+  double *data_b_in;
 
-  double *output;
+  double *data_out;
 
-  input_a = (double *) malloc(sizeof(int)*SIZE);
-  input_b = (double *) malloc(sizeof(int)*SIZE);
+  data_a_in = (double *) malloc(sizeof(int)*SIZE_IN);
+  data_b_in = (double *) malloc(sizeof(int)*SIZE_IN);
 
-  output = (double *) malloc(sizeof(int)*SIZE);
+  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
 
-  input_a[0] = 2.0;
-  input_a[1] = 0.0;
-  input_a[2] = 4.0;
+  data_a_in[0] = 2.0;
+  data_a_in[1] = 0.0;
+  data_a_in[2] = 4.0;
 
-  input_b[0] = 1.0;
-  input_b[1] = 1.0;
-  input_b[2] = 2.0;
+  data_b_in[0] = 1.0;
+  data_b_in[1] = 1.0;
+  data_b_in[2] = 2.0;
 
-  output[0] = 2.0;
-  output[1] = 0.0;
-  output[2] = 2.0;
+  data_out[0] = 2.0;
+  data_out[1] = 0.0;
+  data_out[2] = 2.0;
 
-  assert(ntm_vector_divider(input_a, input_b)==*output);
+  assert(ntm_vector_divider(data_a_in, data_b_in)==*data_out);
 
-  free(input_a);
-  free(input_b);
+  free(data_a_in);
+  free(data_b_in);
 
-  free(output);
+  free(data_out);
 
   return 0;
 }

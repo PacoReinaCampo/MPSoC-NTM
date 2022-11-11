@@ -45,18 +45,18 @@
 #include <stdio.h>
 #include <assert.h>
 
-double ntm_scalar_multiplier(double input_a, double input_b) {
+double ntm_scalar_multiplier(double data_a_in, double data_b_in) {
   // calculating multiplication
-  return input_a * input_b;
+  return data_a_in * data_b_in;
 }
 
 int main() {
-  double input_a = 48.0;
-  double input_b = 16.0;
+  double data_a_in = 48.0;
+  double data_b_in = 16.0;
 
-  double output = 768.0;
+  double data_out = 768.0;
 
-  assert(ntm_scalar_multiplier(input_a, input_b)==output);
+  assert(ntm_scalar_multiplier(data_a_in, data_b_in)==data_out);
 
   return 0;
 }

@@ -49,11 +49,11 @@ pub fn ntm_matrix_vector_product(multiplier: Vec<f64>, multiplicand: Vec<f64>) -
     // The multiplier needs to have the same amount of columns as the multiplicand has rows.
     let mut temporal;
 
-    for row_left in 0..multiplier.len() {
+    for i in 0..multiplier.len() {
         result.push(vec![]);
-        for column_right in 0..multiplicand.len() {
-            temporal = multiplier[row_left] * multiplicand[column_right];
-            result[row_left].push(temporal);
+        for j in 0..multiplicand.len() {
+            temporal = multiplier[i] * multiplicand[j];
+            result[i].push(temporal);
         }
     }
     result

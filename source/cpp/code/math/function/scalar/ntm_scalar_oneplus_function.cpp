@@ -51,23 +51,23 @@ using namespace std;
 double ntm_scalar_oneplus_function(double);
 
 int main() {
-  double input0 = 0.8909031788043871;
-  double input1 = 3.2155195231797550;
+  double data_in_0 = 0.8909031788043871;
+  double data_in_1 = 3.2155195231797550;
 
-  double output0 = 2.2346950078883427;
-  double output1 = 4.2548695333728740;
+  double data_out_0 = 2.2346950078883427;
+  double data_out_1 = 4.2548695333728740;
 
-  assert(ntm_scalar_oneplus_function(input0)==output0);
-  assert(ntm_scalar_oneplus_function(input1)==output1);
+  assert(ntm_scalar_oneplus_function(data_in_0)==data_out_0);
+  assert(ntm_scalar_oneplus_function(data_in_1)==data_out_1);
 
   return 0;
 }
 
-double ntm_scalar_oneplus_function(double input) {
+double ntm_scalar_oneplus_function(double data_in) {
   double ONE = 1.0;
 
   // calculating result
-  double temporal = ONE + exp(input);
+  double temporal = ONE + exp(data_in);
 
   return ONE + log(temporal);
 }

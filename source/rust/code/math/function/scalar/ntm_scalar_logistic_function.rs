@@ -42,19 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_logistic_function(input: f64) -> f64 {
+pub fn ntm_scalar_logistic_function(data_in: f64) -> f64 {
     const ONE: f64 = 1.0;
 
-    return ONE/(ONE + ONE/input.exp());
+    return ONE/(ONE + ONE/data_in.exp());
 }
 
 fn main() {
-    let input0: f64 = 0.8909031788043871;
-    let input1: f64 = 3.2155195231797550;
+    let data_in_0: f64 = 0.8909031788043871;
+    let data_in_1: f64 = 3.2155195231797550;
 
-    let output0: f64 = 0.7090765217957029;
-    let output1: f64 = 0.9614141454987156;
+    let data_out_0: f64 = 0.7090765217957029;
+    let data_out_1: f64 = 0.9614141454987156;
 
-    assert_eq!(ntm_scalar_logistic_function(input0), output0);
-    assert_eq!(ntm_scalar_logistic_function(input1), output1);
+    assert_eq!(ntm_scalar_logistic_function(data_in_0), data_out_0);
+    assert_eq!(ntm_scalar_logistic_function(data_in_1), data_out_1);
 }

@@ -42,28 +42,66 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_summation(summand0: Vec<Vec<i32>>, summand1: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Add two matrices of identical dimensions
-    let mut result: Vec<Vec<i32>> = vec![];
-    if summand0.len() != summand1.len() {
-        panic!("Matrix dimensions do not match");
-    }
-    for row in 0..summand0.len() {
-        if summand0[row].len() != summand1[row].len() {
-            panic!("Matrix dimensions do not match");
-        }
-        result.push(vec![]);
-        for column in 0..summand1[0].len() {
-            result[row].push(summand0[row][column] + summand1[row][column]);
+pub fn ntm_tensor_summation(tensor: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
+    let mut result: Vec<Vec<f64>> = vec![vec![0.0; tensor.len()]; tensor[0].len()];
+
+    for i in 0..tensor.len() {
+        for j in 0..tensor[i].len() {
+            for k in 0..tensor[i][j].len() {
+                result[i][j] += tensor[i][j][k];
+            }
         }
     }
     result
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![1, 0, 0], vec![0, 1, 0], vec![0, 0, 1]];
+    let input0: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ]
+    ];
+    let input1: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ]
+    ];
 
-    let output: Vec<Vec<i32>> = vec![vec![2, 0, 1], vec![0, 3, 0], vec![5, 0, 2]];
-    assert_eq!(ntm_tensor_summation(input0, input1), output);
+    let output0: Vec<Vec<f64>> = vec![
+        vec![7.0, 2.0, 10.0],
+        vec![7.0, 2.0, 10.0],
+        vec![7.0, 2.0, 10.0]
+    ];
+    let output1: Vec<Vec<f64>> = vec![
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0]
+    ];
+
+    assert_eq!(ntm_tensor_summation(input0), output0);
+    assert_eq!(ntm_tensor_summation(input1), output1);
 }

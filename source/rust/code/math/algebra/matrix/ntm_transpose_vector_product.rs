@@ -42,32 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_transpose_vector_product(multiplier: Vec<i32>, multiplicand: Vec<i32>) -> Vec<Vec<i32>> {
+pub fn ntm_transpose_vector_product(multiplier: Vec<f64>, multiplicand: Vec<f64>) -> Vec<Vec<f64>> {
     // Multiply two matching matrices.
-    let mut result: Vec<Vec<i32>> = vec![];
+    let mut result: Vec<Vec<f64>> = vec![];
 
-    // The multiplier needs to have the same amount of columns as the multiplicand has rows.
-    let mut temporal;
+    for i in 0..multiplier.len() {
+        let mut vector: Vec<f64> = vec![];
 
-    for row_left in 0..multiplier.len() {
-        result.push(vec![]);
-        for column_right in 0..multiplicand.len() {
-            temporal = multiplier[row_left] * multiplicand[column_right];
-            result[row_left].push(temporal);
+        for j in 0..multiplicand.len() {
+            let temporal = multiplier[i] * multiplicand[j];
+
+            vector.push(temporal);
         }
+        result.push(vector);
     }
     result
 }
 
 fn main() {
-    let input_a: Vec<i32> = vec![1, 2, 3, 4];
-    let input_b: Vec<i32> = vec![1, 3, 2];
+    let input_a: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
+    let input_b: Vec<f64> = vec![1.0, 3.0, 2.0];
 
-    let output: Vec<Vec<i32>> = vec![
-        vec![1, 3, 2],
-        vec![2, 6, 4],
-        vec![3, 9, 6],
-        vec![4, 12, 8]
+    let output: Vec<Vec<f64>> = vec![
+        vec![1.0, 3.0, 2.0],
+        vec![2.0, 6.0, 4.0],
+        vec![3.0, 9.0, 6.0],
+        vec![4.0, 12.0, 8.0]
     ];
 
     assert_eq!(ntm_transpose_vector_product(input_a, input_b), output);

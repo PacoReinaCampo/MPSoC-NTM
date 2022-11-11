@@ -48,25 +48,25 @@
 
 using namespace std;
 
-double ntm_scalar_summation(vector<double> input) {
-  double result = 0.0;
+double ntm_scalar_summation(vector<double> data_in) {
+  double data_out = 0.0;
 
-  for(int row=0; row<input.size(); row++) {
-    result += input[row];
+  for(int i=0; i<data_in.size(); i++) {
+    data_out += data_in[i];
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {
-  vector<double> input0{3.0, 2.0, 2.0};
-  vector<double> input1{1.0, 0.0, 0.0};
+  vector<double> data_in_0{3.0, 2.0, 2.0};
+  vector<double> data_in_1{1.0, 0.0, 0.0};
 
-  double output0 = 7.0;
-  double output1 = 1.0;
+  double data_out_0 = 7.0;
+  double data_out_1 = 1.0;
 
-  assert(ntm_scalar_summation(input0)==output0);
-  assert(ntm_scalar_summation(input1)==output1);
+  assert(ntm_scalar_summation(data_in_0)==data_out_0);
+  assert(ntm_scalar_summation(data_in_1)==data_out_1);
 
   return 0;
 }

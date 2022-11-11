@@ -45,8 +45,8 @@
 pub fn ntm_scalar_multiplication(vector: Vec<f64>) -> f64 {
     let mut result: f64 = 1.0;
 
-    for row in 0..vector.len() {
-        result *= vector[row];
+    for i in 0..vector.len() {
+        result *= vector[i];
     }
     result
 }

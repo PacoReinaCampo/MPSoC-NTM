@@ -42,25 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_multiplier(input_a: Vec<f64>, input_b: Vec<f64>) -> Vec<f64> {
+pub fn ntm_vector_multiplier(data_a_in: Vec<f64>, data_b_in: Vec<f64>) -> Vec<f64> {
     // Multiply two vectors of identical dimensions
-    let mut result: Vec<f64> = vec![0.0; input_a.len()];
+    let mut data_out: Vec<f64> = vec![];
 
-    if input_a.len() != input_b.len() {
+    if data_a_in.len() != data_b_in.len() {
         panic!("Vector dimensions do not match");
     }
 
-    for row in 0..input_a.len() {
-        result[row] = input_a[row] * input_b[row];
+    for i in 0..data_a_in.len() {
+        let temporal = data_a_in[i] * data_b_in[i];
+
+        data_out.push(temporal);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input_a: Vec<f64> = vec![2.0, 0.0, 4.0];
-    let input_b: Vec<f64> = vec![1.0, 1.0, 2.0];
+    let data_a_in: Vec<f64> = vec![2.0, 0.0, 4.0];
+    let data_b_in: Vec<f64> = vec![1.0, 1.0, 2.0];
 
-    let output: Vec<f64> = vec![2.0, 0.0, 8.0];
+    let data_out: Vec<f64> = vec![2.0, 0.0, 8.0];
 
-    assert_eq!(ntm_vector_multiplier(input_a, input_b), output);
+    assert_eq!(ntm_vector_multiplier(data_a_in, data_b_in), data_out);
 }

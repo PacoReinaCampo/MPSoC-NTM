@@ -126,8 +126,8 @@ fn zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
 
 // Printed Matrix
 fn print_matrix(matrix: &mut Vec<Vec<f64>>) {
-    for row in 0..matrix.len(){
-        println!("{:?}", matrix[row]);
+    for i in 0..matrix.len(){
+        println!("{:?}", matrix[i]);
     }
 }
 

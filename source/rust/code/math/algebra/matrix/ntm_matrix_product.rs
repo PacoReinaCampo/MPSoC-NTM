@@ -46,28 +46,25 @@ pub fn ntm_matrix_product(multiplier: Vec<Vec<f64>>, multiplicand: Vec<Vec<f64>>
     // Multiply two matching matrices.
     let mut result: Vec<Vec<f64>> = vec![];
 
-    // The multiplier needs to have the same amount of columns as the multiplicand has rows.
-    let mut temporal;
+    for i in 0..multiplier.len() {
+        let mut vector: Vec<f64> = vec![];
 
-    // Using variable to compare lenghts of rows in multiplicand later
-    let row_right_length = multiplicand[0].len();
-
-    for row_left in 0..multiplier.len() {
-        if multiplier[row_left].len() != multiplicand.len() {
+        if multiplier[i].len() != multiplicand.len() {
             panic!("Matrix dimensions do not match");
         }
-        result.push(vec![]);
-        for column_right in 0..multiplicand[0].len() {
-            temporal = 0.0;
-            for row_right in 0..multiplicand.len() {
-                if row_right_length != multiplicand[row_right].len() {
-                    // If row is longer than a previous row cancel operation with error
+
+        for j in 0..multiplicand[0].len() {
+            let mut temporal: f64 = 0.0;
+
+            for m in 0..multiplicand.len() {
+                if multiplicand[0].len() != multiplicand[m].len() {
                     panic!("Matrix dimensions do not match");
                 }
-                temporal += multiplier[row_left][row_right] * multiplicand[row_right][column_right];
+                temporal += multiplier[i][m] * multiplicand[m][j];
             }
-            result[row_left].push(temporal);
+            vector.push(temporal);
         }
+        result.push(vector);
     }
     result
 }

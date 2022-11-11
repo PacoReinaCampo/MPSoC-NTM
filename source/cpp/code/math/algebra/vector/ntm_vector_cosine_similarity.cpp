@@ -49,34 +49,34 @@
 
 using namespace std;
 
-double ntm_vector_cosine_similarity(vector<double> input_a, vector<double> input_b) {
+double ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> data_b_in) {
   double dot_result = 0.0;
 
   double input_a_result = 0.0;
   double input_b_result = 0.0;
 
-  for(int row=0; row<input_a.size(); row++) {
-    dot_result += input_a[row] * input_b[row];
+  for(int i=0; i<data_a_in.size(); i++) {
+    dot_result += data_a_in[i] * data_b_in[i];
   }
 
-  for(int row=0; row<input_a.size(); row++) {
-    input_a_result += input_a[row] * input_a[row];
+  for(int i=0; i<data_a_in.size(); i++) {
+    input_a_result += data_a_in[i] * data_a_in[i];
   }
 
-  for(int row=0; row<input_b.size(); row++) {
-    input_b_result += input_b[row] * input_b[row];
+  for(int i=0; i<data_b_in.size(); i++) {
+    input_b_result += data_b_in[i] * data_b_in[i];
   }
 
   return dot_result/(sqrt(input_a_result)*sqrt(input_b_result));
 }
 
 int main() {
-  vector<double> input_a{4.0, 0.0, 3.0};
-  vector<double> input_b{4.0, 0.0, 3.0};
+  vector<double> data_a_in{4.0, 0.0, 3.0};
+  vector<double> data_b_in{4.0, 0.0, 3.0};
 
-  double output = 1.0;
+  double data_out = 1.0;
 
-  assert(ntm_vector_cosine_similarity(input_a, input_b)==output);
+  assert(ntm_vector_cosine_similarity(data_a_in, data_b_in)==data_out);
 
   return 0;
 }

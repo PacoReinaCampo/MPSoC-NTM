@@ -42,21 +42,21 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_oneplus_function(input: f64) -> f64 {
+pub fn ntm_scalar_oneplus_function(data_in: f64) -> f64 {
     const ONE: f64 = 1.0;
 
-    let temporal: f64 = ONE + input.exp();
+    let temporal: f64 = ONE + data_in.exp();
 
     return ONE + temporal.ln();
 }
 
 fn main() {
-    let input0: f64 = 0.8909031788043871;
-    let input1: f64 = 3.2155195231797550;
+    let data_in_0: f64 = 0.8909031788043871;
+    let data_in_1: f64 = 3.2155195231797550;
 
-    let output0: f64 = 2.2346950078883427;
-    let output1: f64 = 4.2548695333728740;
+    let data_out_0: f64 = 2.2346950078883427;
+    let data_out_1: f64 = 4.2548695333728740;
 
-    assert_eq!(ntm_scalar_oneplus_function(input0), output0);
-    assert_eq!(ntm_scalar_oneplus_function(input1), output1);
+    assert_eq!(ntm_scalar_oneplus_function(data_in_0), data_out_0);
+    assert_eq!(ntm_scalar_oneplus_function(data_in_1), data_out_1);
 }

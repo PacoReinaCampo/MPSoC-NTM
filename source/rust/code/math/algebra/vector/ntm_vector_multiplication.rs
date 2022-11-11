@@ -43,19 +43,27 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_vector_multiplication(matrix: Vec<Vec<f64>>) -> Vec<f64> {
-    let mut result: Vec<f64> = vec![1.0; matrix[0].len()];
+    let mut result: Vec<f64> = vec![1.0; matrix.len()];
 
-    for row in 0..matrix.len() {
-        for column in 0..matrix[row].len() {
-            result[row] *= matrix[row][column];
+    for i in 0..matrix.len() {
+        for column in 0..matrix[i].len() {
+            result[i] *= matrix[i][column];
         }
     }
     result
 }
 
 fn main() {
-    let input0: Vec<Vec<f64>> = vec![vec![3.0, 2.0, 2.0], vec![0.0, 2.0, 0.0], vec![5.0, 4.0, 1.0]];
-    let input1: Vec<Vec<f64>> = vec![vec![1.0, 0.0, 0.0], vec![0.0, 1.0, 0.0], vec![0.0, 0.0, 1.0]];
+    let input0: Vec<Vec<f64>> = vec![
+        vec![3.0, 2.0, 2.0],
+        vec![0.0, 2.0, 0.0],
+        vec![5.0, 4.0, 1.0]
+    ];
+    let input1: Vec<Vec<f64>> = vec![
+        vec![1.0, 0.0, 0.0],
+        vec![0.0, 1.0, 0.0],
+        vec![0.0, 0.0, 1.0]
+    ];
 
     let output0: Vec<f64> = vec![12.0, 0.0, 20.0];
     let output1: Vec<f64> = vec![0.0, 0.0, 0.0];

@@ -9,7 +9,7 @@
 ##                  |_|                                                          ##
 ##                                                                               ##
 ##                                                                               ##
-##              The Rust Programming Language                                    ##
+##              The Go Programming Language                                      ##
 ##              QueenField                                                       ##
 ##                                                                               ##
 ###################################################################################

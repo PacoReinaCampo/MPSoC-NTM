@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////////
 //                                            __ _      _     _                  //
-//                                           / _(_)    | |   | |                 //
+//                                          /_(_)    | |   | |                 //
 //                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 //
-//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 //
+//              /_` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 //
 //              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 //
 //               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 //
 //                  | |                                                          //
@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining matrix copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -43,68 +43,103 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
 #define SIZE 10
 
-int main() {
-  float a[SIZE][SIZE], x[SIZE], ratio;
+#define SIZE_IN 3
 
-  int i, j, k, n;
+double ntm_matrix_inverse(double **data_in) {
+  double matrix[SIZE][SIZE];
 
-  // Inputs
-  // 1. Reading order of matrix
-  printf("Enter order of matrix: ");
-  scanf("%d", & n);
+  double **data_out;
 
-  // 2. Reading Matrix
-  printf("Enter coefficients of Matrix:\n");
-  for (i = 1; i <= n; i++) {
-    for (j = 1; j <= n; j++) {
-      printf("a[%d][%d] = ", i, j);
-      scanf("%f", & a[i][j]);
-    }
+  double ratio;
+
+  int i, j, m;
+
+  data_out = (double **) malloc(SIZE_IN*sizeof(int*));
+
+  for (i = 0; i < SIZE_IN; i++) {
+    data_out[i] = (double *)malloc(SIZE_IN*sizeof(int));
   }
 
-  // Augmenting Identity Matrix of Order n
-  for (i = 1; i <= n; i++) {
-    for (j = 1; j <= n; j++) {
+  // Augmenting Identity Matrix of Order SIZE_IN
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = 0; j < SIZE_IN; j++) {
+      matrix[i][j] = data_in[i][j];
+
       if (i == j) {
-        a[i][j + n] = 1;
+        matrix[i][j + SIZE_IN] = 1;
       } else {
-        a[i][j + n] = 0;
+        matrix[i][j + SIZE_IN] = 0;
       }
     }
   }
 
   // Applying Gauss Jordan Elimination
-  for (i = 1; i <= n; i++) {
-    if (a[i][i] == 0.0) {
+  for (i = 0; i < SIZE_IN; i++) {
+    if (matrix[i][i] == 0.0) {
       printf("Mathematical Error!");
     }
-    for (j = 1; j <= n; j++) {
+    for (j = 0; j < SIZE_IN; j++) {
       if (i != j) {
-        ratio = a[j][i] / a[i][i];
-        for (k = 1; k <= 2 * n; k++) {
-          a[j][k] = a[j][k] - ratio * a[i][k];
+        ratio = matrix[j][i]/matrix[i][i];
+        for (m = 1; m <= 2*SIZE_IN; m++) {
+          matrix[j][m] = matrix[j][m] - ratio*matrix[i][m];
         }
       }
     }
   }
 
   // Row Operation to Make Principal Diagonal to 1
-  for (i = 1; i <= n; i++) {
-    for (j = n + 1; j <= 2 * n; j++) {
-      a[i][j] = a[i][j] / a[i][i];
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = SIZE_IN; j < 2*SIZE_IN; j++) {
+      matrix[i][j] = matrix[i][j]/matrix[i][i];
     }
   }
 
-  // Displaying Inverse Matrix
-  printf("\nInverse Matrix is:\n");
-  for (i = 1; i <= n; i++) {
-    for (j = n + 1; j <= 2 * n; j++) {
-      printf("%0.3f\t", a[i][j]);
+  // Output
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = 0; j < SIZE_IN; j++) {
+      data_out[i][j] = matrix[i][j + SIZE_IN];
     }
-    printf("\n");
   }
-  return (0);
+
+  return **data_out;
+}
+
+int main() {
+  double **data_in;
+
+  double **data_out;
+
+  int i;
+
+  data_in = (double **) malloc(SIZE_IN*sizeof(int*));
+
+  data_out = (double **) malloc(SIZE_IN*sizeof(int*));
+
+  for (i = 0; i < SIZE_IN; i++) {
+    data_in[i] = (double *)malloc(SIZE_IN*sizeof(int));
+
+    data_out[i] = (double *)malloc(SIZE_IN*sizeof(int));
+  }
+
+  data_in[0][0] = 1.0; data_in[1][0] =  1.0; data_in[2][0] = -2.0;
+  data_in[0][1] = 1.0; data_in[1][1] =  3.0; data_in[2][1] = -4.0;
+  data_in[0][2] = 3.0; data_in[1][2] = -3.0; data_in[2][2] = -4.0;
+
+  data_out[0][0] =  3.00; data_out[1][0] =  1.00; data_out[2][0] =  1.50;
+  data_out[0][1] = -1.25; data_out[1][1] = -0.25; data_out[2][1] = -0.75;
+  data_out[0][2] = -0.25; data_out[1][2] = -0.25; data_out[2][2] = -0.25;
+
+  assert(ntm_matrix_inverse(data_in)==**data_out);
+
+  free(data_in);
+
+  free(data_out);
+
+  return 0;
 }

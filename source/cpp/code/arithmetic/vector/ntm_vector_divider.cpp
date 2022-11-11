@@ -48,26 +48,26 @@
 
 using namespace std;
 
-vector<double> ntm_vector_divider(vector<double> input_a, vector<double> input_b) {
+vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_b_in) {
   // Divide two vectors of identical dimensions
-  vector<double> result;
+  vector<double> data_out;
 
-  for (int row = 0; row < input_a.size(); row++) {
-    double temporal = input_a[row] / input_b[row];
+  for (int i = 0; i < data_a_in.size(); i++) {
+    double temporal = data_a_in[i] / data_b_in[i];
 
-    result.push_back(temporal);
+    data_out.push_back(temporal);
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {
-  vector<double> input_a{2.0, 0.0, 4.0};
-  vector<double> input_b{1.0, 1.0, 2.0};
+  vector<double> data_a_in{2.0, 0.0, 4.0};
+  vector<double> data_b_in{1.0, 1.0, 2.0};
 
-  vector<double> output{2.0, 0.0, 2.0};
+  vector<double> data_out{2.0, 0.0, 2.0};
 
-  assert(ntm_vector_divider(input_a, input_b)==output);
+  assert(ntm_vector_divider(data_a_in, data_b_in)==data_out);
 
   return 0;
 }

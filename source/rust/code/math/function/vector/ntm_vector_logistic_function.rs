@@ -42,24 +42,26 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_logistic_function(vector: Vec<f64>) -> Vec<f64> {
+pub fn ntm_vector_logistic_function(data_in: Vec<f64>) -> Vec<f64> {
     const ONE: f64 = 1.0;
 
-    let mut result: Vec<f64> = vec![0.0; vector.len()];
+    let mut data_out: Vec<f64> = vec![];
 
-    for row in 0..vector.len() {
-        result[row] = ONE/(ONE + ONE/vector[row].exp());
+    for i in 0..data_in.len() {
+        let temporal = ONE/(ONE + ONE/data_in[i].exp());
+
+        data_out.push(temporal);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<f64> = vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226];
-    let input1: Vec<f64> = vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454];
+    let data_in_0: Vec<f64> = vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226];
+    let data_in_1: Vec<f64> = vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454];
 
-    let output0: Vec<f64> = vec![0.9982079678583020, 0.9581688450893644, 0.9997639589554603];
-    let output1: Vec<f64> = vec![0.9867871586112067, 0.9950983109503272, 0.9987621580633643];
+    let data_out_0: Vec<f64> = vec![0.9982079678583020, 0.9581688450893644, 0.9997639589554603];
+    let data_out_1: Vec<f64> = vec![0.9867871586112067, 0.9950983109503272, 0.9987621580633643];
 
-    assert_eq!(ntm_vector_logistic_function(input0), output0);
-    assert_eq!(ntm_vector_logistic_function(input1), output1);
+    assert_eq!(ntm_vector_logistic_function(data_in_0), data_out_0);
+    assert_eq!(ntm_vector_logistic_function(data_in_1), data_out_1);
 }

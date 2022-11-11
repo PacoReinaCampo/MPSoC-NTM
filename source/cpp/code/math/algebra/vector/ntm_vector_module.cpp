@@ -49,22 +49,22 @@
 
 using namespace std;
 
-double ntm_vector_module(vector<double> input) {
-  double result = 0.0;
+double ntm_vector_module(vector<double> data_in) {
+  double data_out = 0.0;
 
-  for(int row=0; row<input.size(); row++) {
-    result += input[row] * input[row];
+  for(int i=0; i<data_in.size(); i++) {
+    data_out += data_in[i] * data_in[i];
   }
 
-  return sqrt(result);
+  return sqrt(data_out);
 }
 
 int main() {
-  vector<double> input{4.0, 0.0, 3.0};
+  vector<double> data_in{4.0, 0.0, 3.0};
 
-  double output = 5.0;
+  double data_out = 5.0;
 
-  assert(ntm_vector_module(input)==output);
+  assert(ntm_vector_module(data_in)==data_out);
 
   return 0;
 }

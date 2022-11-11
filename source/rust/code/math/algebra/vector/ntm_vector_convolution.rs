@@ -61,7 +61,7 @@ pub fn ntm_matrix_convolution(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i
             temporal = 0;
             for row_right in 0..multiplicand.len() {
                 if row_right_length != multiplicand[row_right].len() {
-                    // If row is longer than a previous row cancel operation with error
+                    // If i is longer than a previous i cancel operation with error
                     panic!("Matrix dimensions do not match");
                 }
                 temporal += multiplier[row_left][row_right] * multiplicand[row_right][column_right];

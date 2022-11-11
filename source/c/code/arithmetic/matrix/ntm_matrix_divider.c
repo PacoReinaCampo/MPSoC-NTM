@@ -46,57 +46,70 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#define X 3
-#define Y 3
+#define SIZE_I_IN 3
+#define SIZE_J_IN 3
 
-double ntm_matrix_adder(double **input_a, double **input_b) {
+double ntm_matrix_adder(double **data_a_in, double **data_b_in) {
 
-  double **result;
+  double **data_out;
 
   int i, j;
 
-  result = (double **) malloc(sizeof(int)*X*Y);
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int)); 
+  }
 
   // calculating division
-  for (i = 0; i < X; i++) {
-    for (j = 0; j < Y; j++) {
-      result[i][j] = input_a[i][j] / input_b[i][j];
+  for (i = 0; i < SIZE_I_IN; i++) {
+    for (j = 0; j < SIZE_J_IN; j++) {
+      data_out[i][j] = data_a_in[i][j] / data_b_in[i][j];
     }
   }
 
-  return **result;
+  return **data_out;
 }
 
 int main() {
 
-  double **input_a;
-  double **input_b;
+  double **data_a_in;
+  double **data_b_in;
 
-  double **output;
+  double **data_out;
 
-  input_a = (double **) malloc(sizeof(int)*X*Y);
-  input_b = (double **) malloc(sizeof(int)*X*Y);
+  int i;
 
-  output = (double **) malloc(sizeof(int)*X*Y);
+  data_a_in = (double **) malloc(SIZE_I_IN*sizeof(int*));
+  data_b_in = (double **) malloc(SIZE_I_IN*sizeof(int*));
 
-  input_a[0][0] = 2.0; input_a[1][0] = 2.0; input_a[2][0] = 2.0;
-  input_a[0][1] = 0.0; input_a[1][1] = 0.0; input_a[2][1] = 0.0;
-  input_a[0][2] = 4.0; input_a[1][2] = 4.0; input_a[2][2] = 4.0;
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
 
-  input_b[0][0] = 1.0; input_b[1][0] = 1.0; input_b[2][0] = 1.0;
-  input_b[0][1] = 1.0; input_b[1][1] = 1.0; input_b[2][1] = 1.0;
-  input_b[0][2] = 2.0; input_b[1][2] = 2.0; input_b[2][2] = 2.0;
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_a_in[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+    data_b_in[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
 
-  output[0][0] = 2.0; output[1][0] = 2.0; output[2][0] = 2.0;
-  output[0][1] = 0.0; output[1][1] = 0.0; output[2][1] = 0.0;
-  output[0][2] = 2.0; output[1][2] = 2.0; output[2][2] = 2.0;
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  }
 
-  assert(ntm_matrix_adder(input_a, input_b)==**output);
+  data_a_in[0][0] = 2.0; data_a_in[1][0] = 2.0; data_a_in[2][0] = 2.0;
+  data_a_in[0][1] = 0.0; data_a_in[1][1] = 0.0; data_a_in[2][1] = 0.0;
+  data_a_in[0][2] = 4.0; data_a_in[1][2] = 4.0; data_a_in[2][2] = 4.0;
 
-  free(input_a);
-  free(input_b);
+  data_b_in[0][0] = 1.0; data_b_in[1][0] = 1.0; data_b_in[2][0] = 1.0;
+  data_b_in[0][1] = 1.0; data_b_in[1][1] = 1.0; data_b_in[2][1] = 1.0;
+  data_b_in[0][2] = 2.0; data_b_in[1][2] = 2.0; data_b_in[2][2] = 2.0;
 
-  free(output);
+  data_out[0][0] = 2.0; data_out[1][0] = 2.0; data_out[2][0] = 2.0;
+  data_out[0][1] = 0.0; data_out[1][1] = 0.0; data_out[2][1] = 0.0;
+  data_out[0][2] = 2.0; data_out[1][2] = 2.0; data_out[2][2] = 2.0;
+
+  assert(ntm_matrix_adder(data_a_in, data_b_in)==**data_out);
+
+  free(data_a_in);
+  free(data_b_in);
+
+  free(data_out);
 
   return 0;
 }

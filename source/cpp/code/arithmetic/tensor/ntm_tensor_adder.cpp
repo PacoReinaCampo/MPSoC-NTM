@@ -48,31 +48,31 @@
 
 using namespace std;
 
-vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> input_a, vector<vector<vector<double>>> input_b) {
+vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
 
-  vector<vector<vector<double>>> result;
+  vector<vector<vector<double>>> data_out;
 
-  for (int i = 0; i < input_a.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     vector<vector<double>> matrix;
 
-    for (int j = 0; j < input_a[0].size(); j++) {
+    for (int j = 0; j < data_a_in[0].size(); j++) {
       vector<double> vector;
 
-      for (int k = 0; k < input_a[0][0].size(); k++) {
-        double temporal = input_a[i][j][k] + input_b[i][j][k];
+      for (int k = 0; k < data_a_in[0][0].size(); k++) {
+        double temporal = data_a_in[i][j][k] + data_b_in[i][j][k];
 
         vector.push_back(temporal);
       }
       matrix.push_back(vector);
     }
-    result.push_back(matrix);
+    data_out.push_back(matrix);
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {
-  vector<vector<vector<double>>> input_a {
+  vector<vector<vector<double>>> data_a_in {
     {
       { 2.0, 2.0, 2.0 },
       { 0.0, 0.0, 0.0 },
@@ -89,7 +89,7 @@ int main() {
       { 4.0, 4.0, 4.0 }
     }
   };
-  vector<vector<vector<double>>> input_b {
+  vector<vector<vector<double>>> data_b_in {
     {
       { 1.0, 1.0, 1.0 },
       { 1.0, 1.0, 1.0 },
@@ -107,7 +107,7 @@ int main() {
     }
   };
 
-  vector<vector<vector<double>>> output {
+  vector<vector<vector<double>>> data_out {
     {
       { 3.0, 3.0, 3.0 },
       { 1.0, 1.0, 1.0 },
@@ -125,7 +125,7 @@ int main() {
     }
   };
 
-  assert(ntm_tensor_adder(input_a, input_b)==output);
+  assert(ntm_tensor_adder(data_a_in, data_b_in)==data_out);
 
   return 0;
 }

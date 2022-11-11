@@ -42,38 +42,40 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_adder(input_a: Vec<Vec<Vec<f64>>>, input_b: Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
+pub fn ntm_tensor_adder(data_a_in: Vec<Vec<Vec<f64>>>, data_b_in: Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
     // Add two matching tensors.
-    let mut result: Vec<Vec<Vec<f64>>> = vec![vec![]];
+    let mut data_out: Vec<Vec<Vec<f64>>> = vec![];
 
-    let mut temporal;
-
-    if input_a.len() != input_b.len() {
+    if data_a_in.len() != data_b_in.len() {
         panic!("Matrix dimensions do not match");
     }
 
-    for i in 0..input_a.len() {
-        if input_a[i].len() != input_b[i].len() {
+    for i in 0..data_a_in.len() {
+        let mut matrix: Vec<Vec<f64>> = vec![];
+
+        if data_a_in[i].len() != data_b_in[i].len() {
             panic!("Matrix dimensions do not match");
         }
-        result.push(vec![]);
-        for j in 0..input_b[0].len() {
-            if input_a[i][j].len() != input_b[i][j].len() {
+        for j in 0..data_a_in[0].len() {
+            let mut vector: Vec<f64> = vec![];
+
+            if data_a_in[i][j].len() != data_b_in[i][j].len() {
                 panic!("Matrix dimensions do not match");
             }
-            result.push(vec![vec![]]);
-            for k in 0..input_b[0][0].len() {
-                temporal = input_a[i][j][k] + input_b[i][j][k];
+            for k in 0..data_a_in[0][0].len() {
+                let temporal = data_a_in[i][j][k] + data_b_in[i][j][k];
 
-                result[i][j].push(temporal);
+                vector.push(temporal);
             }
+            matrix.push(vector);
         }
+        data_out.push(matrix);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input_a: Vec<Vec<Vec<f64>>> = vec![
+    let data_a_in: Vec<Vec<Vec<f64>>> = vec![
         vec![
             vec![2.0, 2.0, 2.0],
             vec![0.0, 0.0, 0.0],
@@ -90,7 +92,7 @@ fn main() {
             vec![4.0, 4.0, 4.0]
         ]
     ];
-    let input_b: Vec<Vec<Vec<f64>>> = vec![
+    let data_b_in: Vec<Vec<Vec<f64>>> = vec![
         vec![
             vec![1.0, 1.0, 1.0],
             vec![1.0, 1.0, 1.0],
@@ -108,7 +110,7 @@ fn main() {
         ]
     ];
 
-    let output: Vec<Vec<Vec<f64>>> = vec![
+    let data_out: Vec<Vec<Vec<f64>>> = vec![
         vec![
             vec![3.0, 3.0, 3.0],
             vec![1.0, 1.0, 1.0],
@@ -126,5 +128,5 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_adder(input_a, input_b), output);
+    assert_eq!(ntm_tensor_adder(data_a_in, data_b_in), data_out);
 }
