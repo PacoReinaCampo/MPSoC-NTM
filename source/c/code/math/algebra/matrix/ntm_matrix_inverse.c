@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////////
 //                                            __ _      _     _                  //
-//                                          /_(_)    | |   | |                 //
+//                                           / _(_)    | |   | |                 //
 //                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 //
-//              /_` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 //
+//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 //
 //              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 //
 //               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 //
 //                  | |                                                          //
@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining matrix copy  //
+// Permission is hereby granted, free of charge, to any person obtaining a copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -86,7 +86,7 @@ double ntm_matrix_inverse(double **data_in) {
     for (j = 0; j < SIZE_IN; j++) {
       if (i != j) {
         ratio = matrix[j][i]/matrix[i][i];
-        for (m = 1; m <= 2*SIZE_IN; m++) {
+        for (m = 0; m < 2*SIZE_IN; m++) {
           matrix[j][m] = matrix[j][m] - ratio*matrix[i][m];
         }
       }

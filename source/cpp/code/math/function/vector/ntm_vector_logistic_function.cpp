@@ -53,15 +53,15 @@ vector<double> ntm_vector_logistic_function(vector<double> data_in) {
 
   double ONE = 1.0;
 
-  vector<double> result;
+  vector<double> data_out;
 
-  for (int row = 0; row < data_in.size(); row++) {
-    double temporal = ONE/(ONE + ONE/exp(data_in[row]));
+  for (int i = 0; i < data_in.size(); i++) {
+    double temporal = ONE/(ONE + ONE/exp(data_in[i]));
 
-    result.push_back(temporal);
+    data_out.push_back(temporal);
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {

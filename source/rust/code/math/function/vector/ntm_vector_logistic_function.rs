@@ -43,6 +43,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_vector_logistic_function(data_in: Vec<f64>) -> Vec<f64> {
+
     const ONE: f64 = 1.0;
 
     let mut data_out: Vec<f64> = vec![];

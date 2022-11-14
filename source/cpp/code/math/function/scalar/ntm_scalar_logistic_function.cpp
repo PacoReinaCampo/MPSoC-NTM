@@ -66,6 +66,6 @@ int main() {
 double ntm_scalar_logistic_function(double data_in) {
   double ONE = 1.0;
 
-  // calculating result
+  // calculating data_out
   return ONE/(ONE + ONE/exp(data_in));
 }

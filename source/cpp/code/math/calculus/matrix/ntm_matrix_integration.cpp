@@ -42,9 +42,47 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_integration(vector<vector<double>> data_in, double length_in) {
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    double temporal = 0.0;
+
+    vector<double> vector;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+      temporal += data_in[i][j];
+
+      vector.push_back(temporal*length_in);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_in {
+    { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+    { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+    { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
+  };
+
+  vector<vector<double>> data_out {
+    { 6.322611388622675,  9.453994003848962, 17.805262785462183 },
+    { 4.313265182226169,  9.626526869744392, 16.319674050304336 },
+    { 9.998207967858303, 17.956376812947667, 20.956140771903126 }
+  };
+
+  assert(ntm_matrix_integration(data_in, 1.0)==data_out);
+
   return 0;
 }

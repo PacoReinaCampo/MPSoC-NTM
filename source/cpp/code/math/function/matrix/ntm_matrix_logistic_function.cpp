@@ -53,7 +53,7 @@ vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_
 
   double ONE = 1.0;
 
-  vector<vector<double>> result;
+  vector<vector<double>> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
     vector<double> vector;
@@ -63,10 +63,10 @@ vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_
 
       vector.push_back(temporal);
     }
-    result.push_back(vector);
+    data_out.push_back(vector);
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {

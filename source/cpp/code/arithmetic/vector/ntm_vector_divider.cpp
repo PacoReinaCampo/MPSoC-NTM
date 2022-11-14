@@ -52,6 +52,10 @@ vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_
   // Divide two vectors of identical dimensions
   vector<double> data_out;
 
+  if (data_a_in.size() != data_b_in.size()) {
+    throw std::runtime_error("Vector dimensions do not match");
+  }
+
   for (int i = 0; i < data_a_in.size(); i++) {
     double temporal = data_a_in[i] / data_b_in[i];
 

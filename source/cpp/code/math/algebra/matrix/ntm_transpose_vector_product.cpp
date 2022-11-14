@@ -42,9 +42,42 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_product(vector<double> data_a_in, vector<double> data_b_in) {
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < data_a_in.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < data_b_in.size(); j++) {
+      double temporal = data_a_in[i] * data_b_in[j];
+
+      vector.push_back(temporal);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> data_a_in { 1.0, 2.0, 3.0, 4.0 };
+  vector<double> data_b_in { 1.0, 3.0, 2.0 };
+
+  vector<vector<double>> data_out {
+    { 1.0,  3.0, 2.0 },
+    { 2.0,  6.0, 4.0 },
+    { 3.0,  9.0, 6.0 },
+    { 4.0, 12.0, 8.0 }
+  };
+
+  assert(ntm_matrix_product(data_a_in, data_b_in)==data_out);
+
   return 0;
 }

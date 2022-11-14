@@ -44,23 +44,42 @@
 
 pub fn ntm_matrix_transpose(matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     // Transpose a matrix of any size
-    let mut result: Vec<Vec<f64>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    for i in 0..matrix.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..matrix[0].len() {
+            vector.push(matrix[j][i]);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<f64>> = vec![vec![1.0, 0.0, 1.0], vec![0.0, 2.0, 0.0], vec![5.0, 0.0, 1.0]];
-    let input1: Vec<Vec<f64>> = vec![vec![3.0, 4.0, 2.0], vec![0.0, 1.0, 3.0], vec![3.0, 1.0, 1.0]];
+    let data_in_0: Vec<Vec<f64>> = vec![
+        vec![1.0, 0.0, 1.0],
+        vec![0.0, 2.0, 0.0],
+        vec![5.0, 0.0, 1.0]
+    ];
+    let data_in_1: Vec<Vec<f64>> = vec![
+        vec![3.0, 4.0, 2.0],
+        vec![0.0, 1.0, 3.0],
+        vec![3.0, 1.0, 1.0]
+    ];
 
-    let output0: Vec<Vec<f64>> = vec![vec![1.0, 0.0, 5.0], vec![0.0, 2.0, 0.0], vec![1.0, 0.0, 1.0]];
-    let output1: Vec<Vec<f64>> = vec![vec![3.0, 0.0, 3.0], vec![4.0, 1.0, 1.0], vec![2.0, 3.0, 1.0]];
+    let data_out_0: Vec<Vec<f64>> = vec![
+        vec![1.0, 0.0, 5.0],
+        vec![0.0, 2.0, 0.0],
+        vec![1.0, 0.0, 1.0]
+    ];
+    let data_out_1: Vec<Vec<f64>> = vec![
+        vec![3.0, 0.0, 3.0],
+        vec![4.0, 1.0, 1.0],
+        vec![2.0, 3.0, 1.0]
+    ];
 
-    assert_eq!(ntm_matrix_transpose(input0), output0);
-    assert_eq!(ntm_matrix_transpose(input1), output1);
+    assert_eq!(ntm_matrix_transpose(data_in_0), data_out_0);
+    assert_eq!(ntm_matrix_transpose(data_in_1), data_out_1);
 }

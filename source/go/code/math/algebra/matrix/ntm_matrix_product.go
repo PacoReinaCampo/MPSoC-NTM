@@ -51,21 +51,21 @@ import (
 func main() {
   var SIZE_A_I_IN, SIZE_A_J_IN int
   var SIZE_B_I_IN, SIZE_B_J_IN int
-  var DATA_A_IN, DATA_B_IN, result [10][10] int
+  var data_a_in, data_b_in, data_out [10][10] int
 
-  fmt.Print("Enter no of rows of DATA_A_IN: ")
+  fmt.Print("Enter no of rows of data_a_in: ")
   fmt.Scanln(&SIZE_A_I_IN)
-  fmt.Print("Enter no of column of DATA_A_IN: ")
+  fmt.Print("Enter no of column of data_a_in: ")
   fmt.Scanln(&SIZE_A_J_IN)
-  fmt.Print("Enter no of rows of DATA_B_IN: ")
+  fmt.Print("Enter no of rows of data_b_in: ")
   fmt.Scanln(&SIZE_B_I_IN)
-  fmt.Print("Enter no of column of DATA_B_IN: ")
+  fmt.Print("Enter no of column of data_b_in: ")
   fmt.Scanln(&SIZE_B_J_IN)
   fmt.Println("\nEnter matrix_1 elements: ")
 
   for i := 0; i < SIZE_A_I_IN; i++ {
     for j := 0; j < SIZE_A_J_IN; j++ {
-      fmt.Scanf("%d ", &DATA_A_IN[i][j])
+      fmt.Scanf("%d ", &data_a_in[i][j])
     }
   }
 
@@ -73,17 +73,17 @@ func main() {
 
   for i := 0; i < SIZE_B_I_IN; i++ {
     for j := 0; j < SIZE_B_J_IN; j++ {
-      fmt.Scanf("%d ", &DATA_B_IN[i][j])
+      fmt.Scanf("%d ", &data_b_in[i][j])
     }
   }
 
   // Multiplication of two matrix
   for i := 0; i < SIZE_A_I_IN; i++ {
     for j := 0; j < SIZE_B_J_IN; j++ {
-      result[i][j] = 0
+      data_out[i][j] = 0
 
       for k := 0; k < SIZE_B_J_IN; k++ {
-        result[i][j] += DATA_A_IN[i][k] * DATA_B_IN[k][j]
+        data_out[i][j] += data_a_in[i][k] * data_b_in[k][j]
       }
     }
   }
@@ -92,7 +92,7 @@ func main() {
 
   for i := 0; i < SIZE_A_I_IN; i++ {
     for j := 0; j < SIZE_B_J_IN; j++ {
-      fmt.Printf("%d ", result[i][j])
+      fmt.Printf("%d ", data_out[i][j])
     }
     fmt.Println("\n")
   }

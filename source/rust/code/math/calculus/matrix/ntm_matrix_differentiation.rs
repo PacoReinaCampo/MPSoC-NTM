@@ -42,25 +42,50 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_differentiation(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_differentiation(data_in: Vec<Vec<f64>>, length_i_in: f64, length_j_in: f64, control: u8) -> Vec<Vec<f64>> {
+    let mut temporal: f64;
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    let mut data_out: Vec<Vec<f64>> = vec![];
+
+    for i in 0..data_in.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..data_in[0].len() {
+            if control == 0 {
+                if i == 0 {
+                    temporal = 0.0;
+                }
+                else {
+                    temporal = (data_in[i][j] - data_in[i-1][j])/length_i_in;
+                }
+            }
+            else {
+                if j == 0 {
+                    temporal = 0.0;
+                }
+                else {
+                    temporal = (data_in[i][j] - data_in[i][j-1])/length_j_in;
+                }
+            }
+            vector.push(temporal);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in: Vec<Vec<f64>> = vec![
+        vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
+        vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
+        vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out: Vec<Vec<f64>> = vec![
+        vec![0.0, -3.1912287733963870,  5.2198861663869350],
+        vec![0.0,  0.9999965052920539,  1.3798854930417228],
+        vec![0.0, -2.0400391227689383, -4.9584048861339040]
+    ];
 
-    assert_eq!(ntm_matrix_differentiation(input0), output0);
-    assert_eq!(ntm_matrix_differentiation(input1), output1);
+    assert_eq!(ntm_matrix_differentiation(data_in, 1.0, 1.0, 1), data_out);
 }

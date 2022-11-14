@@ -42,25 +42,48 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_softmax(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_softmax(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    let mut temporal0: f64 = 0.0;
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    let mut data_int: Vec<Vec<f64>> = vec![];
+
+    let mut data_out: Vec<Vec<f64>> = vec![];
+
+    for i in 0..data_in.len() {
+
+        let mut vector0: Vec<f64> = vec![];
+
+        for j in 0..data_in[0].len() {
+            temporal0 += data_in[i][j].exp();
+
+            let temporal1: f64 = data_in[i][j].exp();
+
+            vector0.push(temporal1);
         }
+        data_int.push(vector0);
+
+        let mut vector1: Vec<f64> = vec![];
+
+        for j in 0..data_in[0].len() {
+            vector1.push(data_int[i][j]/temporal0);
+        }
+        data_out.push(vector1);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in: Vec<Vec<f64>> = vec![
+        vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
+        vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
+        vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out: Vec<Vec<f64>> = vec![
+        vec![0.115673909555040450, 0.004756662822010267, 0.8795694276229492000],
+        vec![0.012658220095684168, 0.034408489418901890, 0.1367547003294767900],
+        vec![0.714653980863293200, 0.092921900422636110, 0.0006526948744619639]
+    ];
 
-    assert_eq!(ntm_matrix_softmax(input0), output0);
-    assert_eq!(ntm_matrix_softmax(input1), output1);
+    assert_eq!(ntm_matrix_softmax(data_in), data_out);
 }

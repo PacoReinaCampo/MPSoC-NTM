@@ -64,7 +64,7 @@ double ntm_matrix_logistic_function(double **data_in) {
   for (i=0;i<SIZE_I_IN;i++) {
     data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int)); 
   }
-		
+
   // calculating addition
   for (i = 0; i < SIZE_I_IN; i++) {
     for (j = 0; j < SIZE_J_IN; j++) {

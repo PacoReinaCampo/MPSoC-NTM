@@ -42,9 +42,44 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<double> ntm_vector_multiplication(vector<vector<double>> matrix) {
+  vector<double> data_out;
+
+  for(int i=0; i<matrix.size(); i++) {
+    double temporal = 1.0;
+
+    for(int j=0; j<matrix[0].size(); j++) {
+      temporal *= matrix[i][j];
+    }
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_in_0 {
+    {3.0, 2.0, 2.0},
+    {0.0, 2.0, 0.0},
+    {5.0, 4.0, 1.0}
+  };
+  vector<vector<double>> data_in_1 {
+    {1.0, 0.0, 0.0},
+    {0.0, 1.0, 0.0},
+    {0.0, 0.0, 1.0}
+  };
+
+  vector<double> data_out_0{12.0, 0.0, 20.0};
+  vector<double> data_out_1{ 0.0, 0.0,  0.0};
+
+  assert(ntm_vector_multiplication(data_in_0)==data_out_0);
+  assert(ntm_vector_multiplication(data_in_1)==data_out_1);
+
   return 0;
 }

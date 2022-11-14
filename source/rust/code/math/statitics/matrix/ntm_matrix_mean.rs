@@ -44,14 +44,14 @@
 
 pub fn ntm_matrix_mean(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+    let mut data_out: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    for i in matrix {
+        for j in 0..i.len() {
+            data_out[j].push(i[j]);
         }
     }
-    result
+    data_out
 }
 
 fn main() {

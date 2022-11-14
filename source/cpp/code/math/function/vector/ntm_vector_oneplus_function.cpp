@@ -53,17 +53,17 @@ vector<double> ntm_vector_oneplus_function(vector<double> data_in) {
 
   double ONE = 1.0;
 
-  vector<double> result;
+  vector<double> data_out;
 
-  for (int row = 0; row < data_in.size(); row++) {
-      double temporal0 = ONE + exp(data_in[row]);
+  for (int i = 0; i < data_in.size(); i++) {
+      double temporal0 = ONE + exp(data_in[i]);
       double temporal1 = ONE + log(temporal0);
 
 
-    result.push_back(temporal1);
+    data_out.push_back(temporal1);
   }
 
-  return result;
+  return data_out;
 }
 
 int main() {

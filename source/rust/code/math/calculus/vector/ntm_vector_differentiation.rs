@@ -42,18 +42,30 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_differentiation(vector: Vec<i32>) -> Vec<i32> {
+pub fn ntm_vector_differentiation(data_in: Vec<f64>, length_in: f64) -> Vec<f64> {
+    let mut temporal: f64;
 
-    return vector;
+    let mut data_out: Vec<f64> = vec![];
+
+    for i in 0..data_in.len() {
+        if i == 0 {
+            temporal = 0.0;
+        }
+        else {
+            temporal = (data_in[i] - data_in[i-1])/length_in;
+        }
+
+        data_out.push(temporal);
+    }
+    data_out
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![1, 0, 1];
-    let input1: Vec<i32> = vec![3, 4, 2];
+    let length_in: f64 = 1.0;
+  
+    let data_in: Vec<f64> = vec![6.0, 3.0, 8.0];
 
-    let output0: Vec<i32> = vec![1, 0, 1];
-    let output1: Vec<i32> = vec![3, 4, 2];
+    let data_out: Vec<f64> = vec![0.0, -3.0, 5.0];
 
-    assert_eq!(ntm_vector_differentiation(input0), output0);
-    assert_eq!(ntm_vector_differentiation(input1), output1);
+    assert_eq!(ntm_vector_differentiation(data_in, length_in), data_out);
 }

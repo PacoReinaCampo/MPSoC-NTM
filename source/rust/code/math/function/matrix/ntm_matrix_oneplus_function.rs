@@ -43,20 +43,17 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_matrix_oneplus_function(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
-    // Add two matching matrices.
+
     const ONE: f64 = 1.0;
 
     let mut data_out: Vec<Vec<f64>> = vec![];
 
-    let mut temporal0;
-    let mut temporal1;
-
-    for row in 0..data_in.len() {
+    for i in 0..data_in.len() {
         let mut vector: Vec<f64> = vec![];
 
-        for column in 0..data_in[0].len() {
-            temporal0 = ONE + data_in[row][column].exp();
-            temporal1 = ONE + temporal0.ln();
+        for j in 0..data_in[0].len() {
+            let temporal0 = ONE + data_in[i][j].exp();
+            let temporal1 = ONE + temporal0.ln();
 
             vector.push(temporal1);
         }

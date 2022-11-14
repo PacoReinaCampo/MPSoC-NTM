@@ -42,25 +42,36 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_integration(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut result: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_differentiation(data_in: Vec<Vec<f64>>, length_in: f64) -> Vec<Vec<f64>> {
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for row in matrix {
-        for column in 0..row.len() {
-            result[column].push(row[column]);
+    for i in 0..data_in.len() {
+        let mut temporal = 0.0;
+
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..data_in[0].len() {
+            temporal += data_in[i][j];
+
+            vector.push(temporal*length_in);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in: Vec<Vec<f64>> = vec![
+        vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
+        vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454],
+        vec![9.9982079678583020, 7.9581688450893644, 2.9997639589554603]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out: Vec<Vec<f64>> = vec![
+        vec![6.322611388622675,  9.453994003848962, 17.805262785462183],
+        vec![4.313265182226169,  9.626526869744392, 16.319674050304336],
+        vec![9.998207967858303, 17.956376812947667, 20.956140771903126]
+    ];
 
-    assert_eq!(ntm_matrix_integration(input0), output0);
-    assert_eq!(ntm_matrix_integration(input1), output1);
+    assert_eq!(ntm_matrix_differentiation(data_in, 1.0), data_out);
 }

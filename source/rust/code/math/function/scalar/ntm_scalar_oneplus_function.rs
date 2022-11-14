@@ -43,6 +43,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_scalar_oneplus_function(data_in: f64) -> f64 {
+
     const ONE: f64 = 1.0;
 
     let temporal: f64 = ONE + data_in.exp();

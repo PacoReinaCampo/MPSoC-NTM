@@ -42,9 +42,84 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
+
+  double ratio;
+
+  vector<vector<double>> matrix;
+
+  vector<vector<double>> data_out;
+
+  if (data_in.size() != data_in[0].size()) {
+    throw std::runtime_error("Non-invertible matrix");
+  }
+
+  // Augmenting Identity Matrix of Order SIZE_IN
+  for (int i = 0; i < data_in.size(); i++) {
+    for (int j = 0; j < data_in.size(); j++) {
+      matrix[i][j] = data_in[i][j];
+
+      if (i == j) {
+        matrix[i][j + data_in.size()] = 1.0;
+      } else {
+        matrix[i][j + data_in.size()] = 0.0;
+      }
+    }
+  }
+
+  // Applying Gauss Jordan Elimination
+  for (int i = 0; i < data_in.size(); i++) {
+    if (data_in[i][i] == 0.0) {
+      throw std::runtime_error("Mathematical Error!");
+    }
+    for (int j = 0; j < data_in.size(); j++) {
+      if (i != j) {
+        ratio = matrix[j][i]/matrix[i][i];
+        for (int m = 0; m < 2*data_in.size(); m++) {
+          matrix[j][m] = matrix[j][m] - ratio*matrix[i][m];
+        }
+      }
+    }
+  }
+
+  // Row Operation to Make Principal Diagonal to 1
+  for (int i = 0; i < data_in.size(); i++) {
+    for (int j = data_in.size(); j < 2*data_in.size(); j++) {
+      matrix[i][j] = matrix[i][j]/matrix[i][i];
+    }
+  }
+
+  // Output
+  for (int i = 0; i < data_in.size(); i++) {
+    for (int j = 0; j < data_in.size(); j++) {
+      data_out[i][j] = matrix[i][j + data_in.size()];
+    }
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_in {
+    { -1.0,  1.0, -2.0 },
+    {  1.0,  3.0, -4.0 },
+    {  3.0, -3.0, -4.0 }
+  };
+
+  vector<vector<double>> data_out {
+    {  3.00,  1.00,  1.50 },
+    { -1.25, -0.25, -0.75 },
+    { -0.25, -0.25, -0.25 }
+  };
+
+  assert(ntm_matrix_inverse(data_in)==data_out);
+
   return 0;
 }

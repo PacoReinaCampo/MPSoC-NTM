@@ -42,36 +42,36 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_cosine_similarity(input_a: Vec<f64>, input_b: Vec<f64>) -> f64 {
+pub fn ntm_vector_cosine_similarity(data_a_in: Vec<f64>, data_b_in: Vec<f64>) -> f64 {
     let mut dot_result: f64 = 0.0;
 
     let mut input_a_result: f64 = 0.0;
     let mut input_b_result: f64 = 0.0;
 
-    if input_a.len() != input_b.len() {
+    if data_a_in.len() != data_b_in.len() {
         panic!("Vector dimensions do not match");
     }
 
-    for i in 0..input_a.len() {
-        dot_result += input_a[i] * input_b[i];
+    for i in 0..data_a_in.len() {
+        dot_result += data_a_in[i] * data_b_in[i];
     }
 
-    for i in 0..input_a.len() {
-        input_a_result += input_a[i] * input_a[i];
+    for i in 0..data_a_in.len() {
+        input_a_result += data_a_in[i] * data_a_in[i];
     }
 
-    for i in 0..input_b.len() {
-        input_b_result += input_b[i] * input_b[i];
+    for i in 0..data_b_in.len() {
+        input_b_result += data_b_in[i] * data_b_in[i];
     }
     
     dot_result/(input_a_result.sqrt()*input_b_result.sqrt())
 }
 
 fn main() {
-    let input_a: Vec<f64> = vec![4.0, 0.0, 3.0];
-    let input_b: Vec<f64> = vec![4.0, 0.0, 3.0];
+    let data_a_in: Vec<f64> = vec![4.0, 0.0, 3.0];
+    let data_b_in: Vec<f64> = vec![4.0, 0.0, 3.0];
 
-    let output: f64 = 1.0;
+    let data_out: f64 = 1.0;
 
-    assert_eq!(ntm_vector_cosine_similarity(input_a, input_b), output);
+    assert_eq!(ntm_vector_cosine_similarity(data_a_in, data_b_in), data_out);
 }

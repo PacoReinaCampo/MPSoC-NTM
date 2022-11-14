@@ -43,6 +43,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_scalar_logistic_function(data_in: f64) -> f64 {
+
     const ONE: f64 = 1.0;
 
     return ONE/(ONE + ONE/data_in.exp());

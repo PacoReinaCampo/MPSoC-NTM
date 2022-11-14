@@ -42,9 +42,40 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<double> ntm_vector_differentiation(vector<double> data_in, double length_in) {
+
+  double temporal = 0.0;
+
+  vector<double> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    if (i == 0) {
+      temporal = 0.0;
+    }
+    else {
+      temporal = (data_in[i] - data_in[i-1])/length_in;
+    }
+
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> data_in{ 6.0, 3.0, 8.0 };
+
+  vector<double> data_out{ 0.0, -3.0, 5.0 };
+
+  double length_in = 1.0;
+
+  assert(ntm_vector_differentiation(data_in, length_in)==data_out);
+
   return 0;
 }

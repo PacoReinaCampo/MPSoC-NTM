@@ -44,7 +44,7 @@
 
 pub fn ntm_tensor_convolution(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     // Multiply two matching matrices.
-    let mut result: Vec<Vec<i32>> = vec![];
+    let mut data_out: Vec<Vec<i32>> = vec![];
 
     // The multiplier needs to have the same amount of columns as the multiplicand has rows.
     let mut temporal;
@@ -55,20 +55,20 @@ pub fn ntm_tensor_convolution(multiplier: Vec<Vec<i32>>, multiplicand: Vec<Vec<i
         if multiplier[row_left].len() != multiplicand.len() {
             panic!("Matrix dimensions do not match");
         }
-        result.push(vec![]);
+        data_out.push(vec![]);
         for column_right in 0..multiplicand[0].len() {
             temporal = 0;
             for row_right in 0..multiplicand.len() {
                 if row_right_length != multiplicand[row_right].len() {
-                    // If row is longer than a previous row cancel operation with error
+                    // If i is longer than a previous i cancel operation with error
                     panic!("Matrix dimensions do not match");
                 }
                 temporal += multiplier[row_left][row_right] * multiplicand[row_right][column_right];
             }
-            result[row_left].push(temporal);
+            data_out[row_left].push(temporal);
         }
     }
-    result
+    data_out
 }
 
 fn main() {

@@ -43,20 +43,26 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_matrix_summation(tensor: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
-    let mut result: Vec<Vec<f64>> = vec![vec![0.0; tensor.len()]; tensor[0].len()];
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
     for i in 0..tensor.len() {
+        let mut vector: Vec<f64> = vec![];
+
         for j in 0..tensor[i].len() {
+            let mut temporal: f64 = 0.0;
+
             for k in 0..tensor[i][j].len() {
-                result[i][j] += tensor[i][j][k];
+                temporal += tensor[i][j][k];
             }
+            vector.push(temporal);
         }
+        data_out.push(vector);
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<Vec<f64>>> = vec![
+    let data_in_0: Vec<Vec<Vec<f64>>> = vec![
         vec![
             vec![3.0, 2.0, 2.0],
             vec![0.0, 2.0, 0.0],
@@ -73,7 +79,7 @@ fn main() {
             vec![5.0, 4.0, 1.0]
         ]
     ];
-    let input1: Vec<Vec<Vec<f64>>> = vec![
+    let data_in_1: Vec<Vec<Vec<f64>>> = vec![
         vec![
             vec![1.0, 0.0, 0.0],
             vec![0.0, 1.0, 0.0],
@@ -91,17 +97,17 @@ fn main() {
         ]
     ];
 
-    let output0: Vec<Vec<f64>> = vec![
+    let data_out_0: Vec<Vec<f64>> = vec![
         vec![7.0, 2.0, 10.0],
         vec![7.0, 2.0, 10.0],
         vec![7.0, 2.0, 10.0]
     ];
-    let output1: Vec<Vec<f64>> = vec![
+    let data_out_1: Vec<Vec<f64>> = vec![
         vec![1.0, 1.0, 1.0],
         vec![1.0, 1.0, 1.0],
         vec![1.0, 1.0, 1.0]
     ];
 
-    assert_eq!(ntm_matrix_summation(input0), output0);
-    assert_eq!(ntm_matrix_summation(input1), output1);
+    assert_eq!(ntm_matrix_summation(data_in_0), data_out_0);
+    assert_eq!(ntm_matrix_summation(data_in_1), data_out_1);
 }

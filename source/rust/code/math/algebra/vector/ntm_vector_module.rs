@@ -42,19 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_module(vector: Vec<f64>) -> f64 {
-    let mut result: f64 = 0.0;
+pub fn ntm_vector_module(data_in: Vec<f64>) -> f64 {
+    let mut data_out: f64 = 0.0;
 
-    for i in 0..vector.len() {
-        result += vector[i] * vector[i];
+    for i in 0..data_in.len() {
+        data_out += data_in[i] * data_in[i];
     }
-    result.sqrt()
+    data_out.sqrt()
 }
 
 fn main() {
-    let input: Vec<f64> = vec![4.0, 0.0, 3.0];
+    let data_in: Vec<f64> = vec![4.0, 0.0, 3.0];
 
-    let output: f64 = 5.0;
+    let data_out: f64 = 5.0;
 
-    assert_eq!(ntm_vector_module(input), output);
+    assert_eq!(ntm_vector_module(data_in), data_out);
 }

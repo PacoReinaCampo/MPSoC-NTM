@@ -42,9 +42,56 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_convolution(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < data_a_in.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < data_b_in[0].size(); j++) {
+      double temporal = 0.0;
+
+      for (int m = 0; m < i+1; m++) {
+        for (int n = 0; n < j+1; n++) {
+          temporal += data_a_in[m][n] * data_b_in[i-m][j-n];
+        }
+      }
+      vector.push_back(temporal);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_a_in {
+    { 1.0, 2.0, 3.0 },
+    { 4.0, 2.0, 6.0 },
+    { 3.0, 4.0, 1.0 },
+    { 2.0, 4.0, 8.0 }
+  };
+  vector<vector<double>> data_b_in {
+    { 1.0 },
+    { 7.0 },
+    { 3.0 }
+  };
+
+  vector<vector<double>> data_out {
+    { 24.0 },
+    { 36.0 },
+    { 34.0 },
+    { 54.0 }
+  };
+
+  assert(ntm_matrix_convolution(data_a_in, data_b_in)==data_out);
+
   return 0;
 }

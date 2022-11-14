@@ -42,9 +42,92 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>> data_in) {
+  double temporal0 = 0.0;
+
+  vector<vector<double>> data_matrix_int;
+
+  vector<vector<vector<double>>> data_tensor_int;
+
+  vector<vector<vector<double>>> data_out;
+
+  for (int i = 0; i < data_in[0].size(); i++) {
+
+    vector<vector<double>> matrix0;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+
+      vector<double> vector0;
+
+      for (int k = 0; k < data_in[0][0].size(); k++) {
+        temporal0 += exp(data_in[i][j][k]);
+
+        double temporal1 = exp(data_in[i][j][k]);
+
+        vector0.push_back(temporal1);
+      }
+      data_matrix_int.push_back(vector0);
+
+      data_tensor_int.push_back(data_matrix_int);
+
+      vector<double> vector1;
+
+      for (int k = 0; k < data_in[0][0].size(); k++) {
+        vector1.push_back(data_tensor_int[i][j][k]/temporal0);
+      }
+      matrix0.push_back(vector1);
+    }
+    data_out.push_back(matrix0);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<vector<double>>> data_in {
+    {
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
+    },
+    {
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
+    },
+    {
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
+    }
+  };
+
+  vector<vector<vector<double>>> data_out {
+    {
+      {0.115673909555040450, 0.004756662822010267, 0.8795694276229492000 },
+      {0.012658220095684168, 0.034408489418901890, 0.1367547003294767900 },
+      {0.714653980863293200, 0.092921900422636110, 0.0006526948744619639 }
+    },
+    {
+      {0.115673909555040450, 0.004756662822010267, 0.8795694276229492000 },
+      {0.012658220095684168, 0.034408489418901890, 0.1367547003294767900 },
+      {0.714653980863293200, 0.092921900422636110, 0.0006526948744619639 }
+    },
+    {
+      {0.115673909555040450, 0.004756662822010267, 0.8795694276229492000 },
+      {0.012658220095684168, 0.034408489418901890, 0.1367547003294767900 },
+      {0.714653980863293200, 0.092921900422636110, 0.0006526948744619639 }
+    }
+  };
+
+  assert(ntm_tensor_softmax(data_in)==data_out);
+
   return 0;
 }

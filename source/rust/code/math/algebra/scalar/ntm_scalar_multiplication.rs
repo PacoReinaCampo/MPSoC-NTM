@@ -43,21 +43,21 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_scalar_multiplication(vector: Vec<f64>) -> f64 {
-    let mut result: f64 = 1.0;
+    let mut data_out: f64 = 1.0;
 
     for i in 0..vector.len() {
-        result *= vector[i];
+        data_out *= vector[i];
     }
-    result
+    data_out
 }
 
 fn main() {
-    let input0: Vec<f64> = vec![3.0, 2.0, 2.0];
-    let input1: Vec<f64> = vec![1.0, 0.0, 0.0];
+    let data_in_0: Vec<f64> = vec![3.0, 2.0, 2.0];
+    let data_in_1: Vec<f64> = vec![1.0, 0.0, 0.0];
 
-    let output0: f64 = 12.0;
-    let output1: f64 = 0.0;
+    let data_out_0: f64 = 12.0;
+    let data_out_1: f64 = 0.0;
 
-    assert_eq!(ntm_scalar_multiplication(input0), output0);
-    assert_eq!(ntm_scalar_multiplication(input1), output1);
+    assert_eq!(ntm_scalar_multiplication(data_in_0), data_out_0);
+    assert_eq!(ntm_scalar_multiplication(data_in_1), data_out_1);
 }

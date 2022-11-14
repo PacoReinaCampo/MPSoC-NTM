@@ -121,24 +121,24 @@ code
 │   │   │   └── ntm_tensor_transpose.cpp
 │   │   └── vector
 │   │       ├── **ntm_dot_product.cpp**
-│   │       ├── ntm_vector_convolution.cpp
+│   │       ├── **ntm_vector_convolution.cpp**
 │   │       ├── **ntm_vector_cosine_similarity.cpp**
 │   │       ├── **ntm_vector_module.cpp**
-│   │       ├── ntm_vector_multiplication.cpp
-│   │       └── ntm_vector_summation.cpp
+│   │       ├── **ntm_vector_multiplication.cpp**
+│   │       └── **ntm_vector_summation.cpp**
 │   ├── calculus
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.cpp
-│   │   │   ├── ntm_matrix_integration.cpp
-│   │   │   └── ntm_matrix_softmax.cpp
+│   │   │   ├── **ntm_matrix_differentiation.cpp**
+│   │   │   ├── **ntm_matrix_integration.cpp**
+│   │   │   └── **ntm_matrix_softmax.cpp**
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_differentiation.cpp
 │   │   │   ├── ntm_tensor_integration.cpp
 │   │   │   └── ntm_tensor_softmax.cpp
 │   │   └── vector
-│   │       ├── ntm_vector_differentiation.cpp
-│   │       ├── ntm_vector_integration.cpp
-│   │       └── ntm_vector_softmax.cpp
+│   │       ├── **ntm_vector_differentiation.cpp**
+│   │       ├── **ntm_vector_integration.cpp**
+│   │       └── **ntm_vector_softmax.cpp**
 │   ├── function
 │   │   ├── matrix
 │   │   │   ├── **ntm_matrix_logistic_function.cpp**

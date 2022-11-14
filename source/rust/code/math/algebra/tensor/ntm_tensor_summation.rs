@@ -43,16 +43,16 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_tensor_summation(tensor: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
-    let mut result: Vec<Vec<f64>> = vec![vec![0.0; tensor.len()]; tensor[0].len()];
+    let mut data_out: Vec<Vec<f64>> = vec![vec![0.0; tensor.len()]; tensor[0].len()];
 
     for i in 0..tensor.len() {
         for j in 0..tensor[i].len() {
             for k in 0..tensor[i][j].len() {
-                result[i][j] += tensor[i][j][k];
+                data_out[i][j] += tensor[i][j][k];
             }
         }
     }
-    result
+    data_out
 }
 
 fn main() {

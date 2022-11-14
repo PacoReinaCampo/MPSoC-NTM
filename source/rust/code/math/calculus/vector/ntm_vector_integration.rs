@@ -42,18 +42,25 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_integration(vector: Vec<i32>) -> Vec<i32> {
+pub fn ntm_vector_integration(data_in: Vec<f64>, length_in: f64) -> Vec<f64> {
+    let mut temporal: f64 = 0.0;
 
-    return vector;
+    let mut data_out: Vec<f64> = vec![];
+
+    for i in 0..data_in.len() {
+        temporal += data_in[i];
+
+        data_out.push(temporal*length_in);
+    }
+    data_out
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![1, 0, 1];
-    let input1: Vec<i32> = vec![3, 4, 2];
+    let length_in: f64 = 1.0;
+  
+    let data_in: Vec<f64> = vec![6.0, 3.0, 8.0];
 
-    let output0: Vec<i32> = vec![1, 0, 1];
-    let output1: Vec<i32> = vec![3, 4, 2];
+    let data_out: Vec<f64> = vec![6.0, 9.0, 17.0];
 
-    assert_eq!(ntm_vector_integration(input0), output0);
-    assert_eq!(ntm_vector_integration(input1), output1);
+    assert_eq!(ntm_vector_integration(data_in, length_in), data_out);
 }

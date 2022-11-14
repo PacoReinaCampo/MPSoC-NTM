@@ -42,9 +42,47 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_transpose(vector<vector<double>> data_in) {
+
+  double ONE = 1.0;
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+      double temporal = data_in[j][i];
+
+      vector.push_back(temporal);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<double>> data_in {
+    { 1.0,  1.0, -2.0 },
+    { 1.0,  3.0, -2.0 },
+    { 1.0, -3.0, -4.0 }
+  };
+
+  vector<vector<double>> data_out {
+    {  1.0,  1.0,  1.0 },
+    {  1.0,  3.0, -3.0 },
+    { -2.0, -2.0, -4.0 }
+  };
+
+  assert(ntm_matrix_transpose(data_in)==data_out);
+
   return 0;
 }
