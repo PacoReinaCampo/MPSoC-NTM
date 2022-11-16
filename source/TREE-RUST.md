@@ -99,7 +99,7 @@ code
 │   ├── algebra
 │   │   ├── matrix
 │   │   │   ├── **ntm_matrix_convolution.rs**
-│   │   │   ├── ntm_matrix_inverse.rs
+│   │   │   ├── **ntm_matrix_inverse.rs**
 │   │   │   ├── **ntm_matrix_multiplication.rs**
 │   │   │   ├── **ntm_matrix_product.rs**
 │   │   │   ├── **ntm_matrix_summation.rs**

@@ -43,67 +43,76 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 // Matrix Inversion
-fn matrix_inverse(matrix: &mut Vec<Vec<f64>>) -> Vec<Vec<f64>>{
+pub fn ntm_matrix_inverse(matrix: &mut Vec<Vec<f64>>) -> Vec<Vec<f64>>{
     let length = matrix.len();
-    let mut aug = zero_matrix(length, length * 2);
+
+    let mut augmented_matrix = ntm_zero_matrix(length, 2*length);
 
     for i in 0..length {
         for j in 0.. length {
-            aug[i][j] = matrix[i][j];
+            augmented_matrix[i][j] = matrix[i][j];
         }
-        aug[i][i + length] = 1.0;
+        augmented_matrix[i][i + length] = 1.0;
     }
 
-    gauss_jordan_general(&mut aug);
+    ntm_gauss_jordan_general(&mut augmented_matrix);
 
-    let mut unaug = zero_matrix(length, length);
+    let mut data_out = ntm_zero_matrix(length, length);
 
     for i in 0..length {
         for j in 0..length {
-            unaug[i][j] = aug[i][j+length];
+            data_out[i][j] = augmented_matrix[i][j+length];
         }
     }
-    unaug
+    data_out
 }
 
 // Generalised Reduced Row Echelon Form
-fn gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
+pub fn ntm_gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
     let mut lead = 0;
-    let row_count = matrix.len();
-    let col_count = matrix[0].len();
 
-    for r in 0..row_count {
-        if col_count <= lead {
+    let row_counter = matrix.len();
+    let column_counter = matrix[0].len();
+
+    for r in 0..row_counter {
+        if column_counter <= lead {
             break;
         }
+
         let mut i = r;
+
         while matrix[i][lead] == 0.0 {
             i = i + 1;
-            if row_count == i {
+
+            if row_counter == i {
                 i = r;
                 lead = lead + 1;
-                if col_count == lead {
+
+                if column_counter == lead {
                     break;
                 }
             }
         }
 
-        let temp = matrix[i].to_owned();
+        let temporal = matrix[i].to_owned();
+
         matrix[i] = matrix[r].to_owned();
-        matrix[r] = temp.to_owned();
+        matrix[r] = temporal.to_owned();
 
         if matrix[r][lead] != 0.0 {
-            let div = matrix[r][lead];
-            for j in 0..col_count {
-                matrix[r][j] = matrix[r][j] / div;
+            let divider_ratio = matrix[r][lead];
+
+            for j in 0..column_counter {
+                matrix[r][j] = matrix[r][j] / divider_ratio;
             }
         }
 
-        for k in 0..row_count {
+        for k in 0..row_counter {
             if k != r {
-                let mult = matrix[k][lead];
-                for j in 0..col_count {
-                    matrix[k][j] = matrix[k][j] - matrix[r][j] * mult;
+                let multiplier_ratio = matrix[k][lead];
+
+                for j in 0..column_counter {
+                    matrix[k][j] = matrix[k][j] - matrix[r][j] * multiplier_ratio;
                 }
             }
         }
@@ -112,50 +121,66 @@ fn gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
 }
 
 // Zero Matrix
-fn zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
+pub fn ntm_zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
     let mut matrix = Vec::with_capacity(columns);
+
     for _ in 0..rows {
-        let mut col: Vec<f64> = Vec::with_capacity(rows);
+        let mut vector: Vec<f64> = Vec::with_capacity(rows);
+
         for _ in 0..columns {
-            col.push(0.0);
+            vector.push(0.0);
         }
-        matrix.push(col);
+        matrix.push(vector);
     }
     matrix
 }
 
 // Printed Matrix
-fn print_matrix(matrix: &mut Vec<Vec<f64>>) {
+pub fn ntm_print_matrix(matrix: &mut Vec<Vec<f64>>) {
     for i in 0..matrix.len(){
         println!("{:?}", matrix[i]);
     }
 }
 
 fn main() {
-    let mut a: Vec<Vec<f64>> = vec![
+    let mut data_in_0: Vec<Vec<f64>> = vec![
         vec![1.0, 2.0, 3.0],
         vec![4.0, 1.0, 6.0],
-        vec![7.0, 8.0, 9.0]
+        vec![7.0, 8.0, 0.0]
     ];
-    let mut b: Vec<Vec<f64>> = vec![
-        vec![2.0, -1.0, 0.0],
-        vec![-1.0, 2.0, -1.0],
-        vec![0.0, -1.0, 2.0]
+    let mut data_in_1: Vec<Vec<f64>> = vec![
+        vec![ 0.0, -1.0,  0.0],
+        vec![-1.0,  2.0, -1.0],
+        vec![ 0.0, -1.0,  2.0]
     ];
 
-    let mut ref_a = &mut a;
-    let rref_a = &mut ref_a;
+    let data_out_0: Vec<Vec<f64>> = vec![
+        vec![-0.43243243243243240,  0.21621621621621620,  0.08108108108108109],
+        vec![ 0.37837837837837834, -0.18918918918918917,  0.05405405405405404],
+        vec![ 0.22522522522522523,  0.05405405405405405, -0.06306306306306306]
+    ];
+    let data_out_1: Vec<Vec<f64>> = vec![
+        vec![-1.5, -1.0, -0.5],
+        vec![-1.0,  0.0,  0.0],
+        vec![-0.5,  0.0,  0.5]
+    ];
 
-    let mut ref_b = &mut b;
-    let rref_b = &mut ref_b;
+    let mut reference_0 = &mut data_in_0;
+    let mut reference_1 = &mut data_in_1;
 
-    println!("Matrix A:\n");
-    print_matrix(rref_a);
-    println!("\nInverse of Matrix A:\n");
-    print_matrix(&mut matrix_inverse(rref_a));
+    let double_reference_0 = &mut reference_0;
+    let double_reference_1 = &mut reference_1;
 
-    println!("\n\nMatrix B:\n");
-    print_matrix(rref_b);
-    println!("\nInverse of Matrix B:\n");
-    print_matrix(&mut matrix_inverse(rref_b));
+    println!("Matrix 0:\n");
+    ntm_print_matrix(double_reference_0);
+    println!("\nInverse of Matrix 0:\n");
+    ntm_print_matrix(&mut ntm_matrix_inverse(double_reference_0));
+
+    println!("\n\nMatrix 1:\n");
+    ntm_print_matrix(double_reference_1);
+    println!("\nInverse of Matrix 1:\n");
+    ntm_print_matrix(&mut ntm_matrix_inverse(double_reference_1));
+
+    assert_eq!(ntm_matrix_inverse(double_reference_0), data_out_0);
+    assert_eq!(ntm_matrix_inverse(double_reference_1), data_out_1);
 }
