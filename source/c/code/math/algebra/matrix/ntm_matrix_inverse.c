@@ -107,6 +107,13 @@ double ntm_matrix_inverse(double **data_in) {
     }
   }
 
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = 0; j < SIZE_IN; j++) {
+      printf("\t%f", data_out[i][j]);
+    }
+    printf("\n");
+  }
+
   return **data_out;
 }
 
@@ -127,13 +134,13 @@ int main() {
     data_out[i] = (double *)malloc(SIZE_IN*sizeof(int));
   }
 
-  data_in[0][0] = 1.0; data_in[1][0] =  1.0; data_in[2][0] = -2.0;
-  data_in[0][1] = 1.0; data_in[1][1] =  3.0; data_in[2][1] = -4.0;
-  data_in[0][2] = 3.0; data_in[1][2] = -3.0; data_in[2][2] = -4.0;
+  data_in[0][0] =  1.0; data_in[0][1] =  1.0; data_in[0][2] =  3.0;
+  data_in[1][0] =  1.0; data_in[1][1] =  3.0; data_in[1][2] = -3.0;
+  data_in[2][0] = -2.0; data_in[2][1] = -4.0; data_in[2][2] = -4.0;
 
-  data_out[0][0] =  3.00; data_out[1][0] =  1.00; data_out[2][0] =  1.50;
-  data_out[0][1] = -1.25; data_out[1][1] = -0.25; data_out[2][1] = -0.75;
-  data_out[0][2] = -0.25; data_out[1][2] = -0.25; data_out[2][2] = -0.25;
+  data_out[0][0] =  3.00; data_out[0][1] =  1.00; data_out[0][2] =  1.50;
+  data_out[1][0] = -1.25; data_out[1][1] = -0.25; data_out[1][2] = -0.75;
+  data_out[2][0] = -0.25; data_out[2][1] = -0.25; data_out[2][2] = -0.25;
 
   assert(ntm_matrix_inverse(data_in)==**data_out);
 

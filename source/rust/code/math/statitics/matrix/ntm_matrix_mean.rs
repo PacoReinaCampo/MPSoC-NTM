@@ -42,25 +42,72 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_mean(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut data_out: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_mean(tensor: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for i in matrix {
-        for j in 0..i.len() {
-            data_out[j].push(i[j]);
+    for i in 0..tensor.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..tensor[i].len() {
+            let mut temporal: f64 = 0.0;
+
+            for k in 0..tensor[i][j].len() {
+                temporal += tensor[i][j][k]/tensor[0][0].len() as f64;
+            }
+            vector.push(temporal);
         }
+        data_out.push(vector);
     }
     data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in_0: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ]
+    ];
+    let data_in_1: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![0.0, 2.0, 0.0],
+            vec![3.0, 2.0, 2.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![0.0, 2.0, 0.0],
+            vec![3.0, 2.0, 2.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![0.0, 2.0, 0.0],
+            vec![3.0, 2.0, 2.0],
+            vec![5.0, 4.0, 1.0]
+        ]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out_0: Vec<Vec<f64>> = vec![
+        vec![2.333333333333333, 0.6666666666666666, 3.3333333333333335],
+        vec![2.333333333333333, 0.6666666666666666, 3.3333333333333335],
+        vec![2.333333333333333, 0.6666666666666666, 3.3333333333333335]
+    ];
+    let data_out_1: Vec<Vec<f64>> = vec![
+        vec![0.6666666666666666, 2.333333333333333, 3.3333333333333335], 
+        vec![0.6666666666666666, 2.333333333333333, 3.3333333333333335],
+        vec![0.6666666666666666, 2.333333333333333, 3.3333333333333335]
+    ];
 
-    assert_eq!(ntm_matrix_mean(input0), output0);
-    assert_eq!(ntm_matrix_mean(input1), output1);
+    assert_eq!(ntm_matrix_mean(data_in_0), data_out_0);
+    assert_eq!(ntm_matrix_mean(data_in_1), data_out_1);
 }

@@ -75,8 +75,7 @@ int main() {
   vector<vector<double>> data_a_in {
     { 1.0, 2.0, 3.0 },
     { 4.0, 2.0, 6.0 },
-    { 3.0, 4.0, 1.0 },
-    { 2.0, 4.0, 8.0 }
+    { 3.0, 4.0, 1.0 }
   };
   vector<vector<double>> data_b_in {
     { 1.0 },
@@ -85,10 +84,9 @@ int main() {
   };
 
   vector<vector<double>> data_out {
-    { 24.0 },
-    { 36.0 },
-    { 34.0 },
-    { 54.0 }
+    {  1.0 },
+    { 11.0 },
+    { 34.0 }
   };
 
   assert(ntm_matrix_convolution(data_a_in, data_b_in)==data_out);

@@ -42,25 +42,83 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_deviation(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut data_out: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_matrix_deviation(tensor: Vec<Vec<Vec<f64>>>, mean: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for i in matrix {
-        for j in 0..i.len() {
-            data_out[j].push(i[j]);
+    for i in 0..tensor.len() {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..tensor[i].len() {
+            let mut temporal: f64 = 0.0;
+
+            for k in 0..tensor[i][j].len() {
+                temporal += (tensor[i][j][k] - mean[i][j])*(tensor[i][j][k] - mean[i][j])/tensor[0][0].len() as f64;
+            }
+            vector.push(temporal.sqrt());
         }
+        data_out.push(vector);
     }
     data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in_0: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 2.0, 2.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 4.0, 1.0]
+        ]
+    ];
+    let data_in_1: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 0.0],
+            vec![0.0, 1.0, 0.0],
+            vec![0.0, 0.0, 1.0]
+        ]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let mean_0: Vec<Vec<f64>> = vec![
+        vec![11.0, 12.0, 10.0],
+        vec![11.0, 12.0, 10.0],
+        vec![11.0, 12.0, 10.0]
+    ];
+    let mean_1: Vec<Vec<f64>> = vec![
+        vec![12.0, 10.0, 11.0],
+        vec![12.0, 10.0, 11.0],
+        vec![12.0, 10.0, 11.0]
+    ];
 
-    assert_eq!(ntm_matrix_deviation(input0), output0);
-    assert_eq!(ntm_matrix_deviation(input1), output1);
+    let data_out_0: Vec<Vec<f64>> = vec![
+        vec![8.679477710861024, 11.372481406154654, 6.879922480183431],
+        vec![8.679477710861024, 11.372481406154654, 6.879922480183431],
+        vec![8.679477710861024, 11.372481406154654, 6.879922480183431]
+    ];
+    let data_out_1: Vec<Vec<f64>> = vec![
+        vec![11.67618659209133, 9.678154093971983, 10.677078252031311],
+        vec![11.67618659209133, 9.678154093971983, 10.677078252031311],
+        vec![11.67618659209133, 9.678154093971983, 10.677078252031311]
+    ];
+
+    assert_eq!(ntm_matrix_deviation(data_in_0, mean_0), data_out_0);
+    assert_eq!(ntm_matrix_deviation(data_in_1, mean_1), data_out_1);
 }

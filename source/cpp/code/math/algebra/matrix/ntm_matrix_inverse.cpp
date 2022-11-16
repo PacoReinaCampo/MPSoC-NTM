@@ -103,14 +103,21 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
     }
   }
 
+  for (int i = 0; i < data_in.size(); i++) {
+    for (int j = 0; j < data_in.size(); j++) {
+      std::cout << "\t" << data_out[i][j];
+    }
+    std::cout << "\n";
+  }
+
   return data_out;
 }
 
 int main() {
   vector<vector<double>> data_in {
     { -1.0,  1.0, -2.0 },
-    {  1.0,  3.0, -4.0 },
-    {  3.0, -3.0, -4.0 }
+    {  1.0,  3.0, -3.0 },
+    { -2.0, -4.0, -4.0 }
   };
 
   vector<vector<double>> data_out {

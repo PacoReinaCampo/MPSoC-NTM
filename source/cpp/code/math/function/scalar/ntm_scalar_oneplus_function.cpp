@@ -48,7 +48,14 @@
 
 using namespace std;
 
-double ntm_scalar_oneplus_function(double);
+double ntm_scalar_oneplus_function(double data_in) {
+  double ONE = 1.0;
+
+  // calculating data_out
+  double temporal = ONE + exp(data_in);
+
+  return ONE + log(temporal);
+}
 
 int main() {
   double data_in_0 = 0.8909031788043871;

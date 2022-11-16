@@ -42,9 +42,31 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+double ntm_scalar_mean(vector<double> data_in) {
+  double data_out = 0.0;
+
+  for(int i=0; i<data_in.size(); i++) {
+    data_out += data_in[i]/(double)data_in.size();
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<double> data_in_0{3.0, 1.0, 2.0};
+  vector<double> data_in_1{1.0, 2.0, 3.0};
+
+  double data_out_0 = 2.0;
+  double data_out_1 = 2.0;
+
+  assert(ntm_scalar_mean(data_in_0)==data_out_0);
+  assert(ntm_scalar_mean(data_in_1)==data_out_1);
+
   return 0;
 }

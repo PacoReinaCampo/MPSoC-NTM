@@ -42,9 +42,84 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#include<iostream>
+#include<math.h>
+#include<vector>
+#include<cassert>
+
+using namespace std;
+
+vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>> tensor) {
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < tensor.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < tensor[0].size(); j++) {
+      double temporal = 0.0;
+
+      for (int k = 0; k < tensor[0][0].size(); k++) {
+        temporal += tensor[i][j][k]/(double)tensor[0][0].size();
+
+      }
+      vector.push_back(temporal);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+  vector<vector<vector<double>>> data_in_0 {
+    {
+      { 3.0, 2.0, 2.0 },
+      { 0.0, 2.0, 0.0 },
+      { 5.0, 4.0, 1.0 }
+    },
+    {
+      { 3.0, 2.0, 2.0 },
+      { 0.0, 2.0, 0.0 },
+      { 5.0, 4.0, 1.0 }
+    },
+    {
+      { 3.0, 2.0, 2.0 },
+      { 0.0, 2.0, 0.0 },
+      { 5.0, 4.0, 1.0 }
+    }
+  };
+  vector<vector<vector<double>>> data_in_1 {
+    {
+      { 0.0, 2.0, 0.0 },
+      { 3.0, 2.0, 2.0 },
+      { 5.0, 4.0, 1.0 }
+    },
+    {
+      { 0.0, 2.0, 0.0 },
+      { 3.0, 2.0, 2.0 },
+      { 5.0, 4.0, 1.0 }
+    },
+    {
+      { 0.0, 2.0, 0.0 },
+      { 3.0, 2.0, 2.0 },
+      { 5.0, 4.0, 1.0 }
+    }
+  };
+
+  vector<vector<double>> data_out_0 {
+    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
+    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
+    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 }
+  };
+  vector<vector<double>> data_out_1 {
+    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
+    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
+    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 }
+  };
+
+  assert(ntm_matrix_mean(data_in_0)==data_out_0);
+  assert(ntm_matrix_mean(data_in_1)==data_out_1);
+
   return 0;
 }

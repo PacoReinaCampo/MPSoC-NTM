@@ -98,15 +98,15 @@ code
 ├── math
 │   ├── algebra
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.cpp
+│   │   │   ├── **ntm_matrix_convolution.cpp**
 │   │   │   ├── ntm_matrix_inverse.cpp
-│   │   │   ├── ntm_matrix_multiplication.cpp
-│   │   │   ├── ntm_matrix_product.cpp
-│   │   │   ├── ntm_matrix_summation.cpp
-│   │   │   ├── ntm_matrix_transpose.cpp
-│   │   │   ├── ntm_matrix_vector_convolution.cpp
-│   │   │   ├── ntm_matrix_vector_product.cpp
-│   │   │   └── ntm_transpose_vector_product.cpp
+│   │   │   ├── **ntm_matrix_multiplication.cpp**
+│   │   │   ├── **ntm_matrix_product.cpp**
+│   │   │   ├── **ntm_matrix_summation.cpp**
+│   │   │   ├── **ntm_matrix_transpose.cpp**
+│   │   │   ├── **ntm_matrix_vector_convolution.cpp**
+│   │   │   ├── **ntm_matrix_vector_product.cpp**
+│   │   │   └── **ntm_transpose_vector_product.cpp**
 │   │   ├── scalar
 │   │   │   ├── **ntm_scalar_multiplication.cpp**
 │   │   │   └── **ntm_scalar_summation.cpp**
@@ -132,9 +132,9 @@ code
 │   │   │   ├── **ntm_matrix_integration.cpp**
 │   │   │   └── **ntm_matrix_softmax.cpp**
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.cpp
-│   │   │   ├── ntm_tensor_integration.cpp
-│   │   │   └── ntm_tensor_softmax.cpp
+│   │   │   ├── **ntm_tensor_differentiation.cpp**
+│   │   │   ├── **ntm_tensor_integration.cpp**
+│   │   │   └── **ntm_tensor_softmax.cpp**
 │   │   └── vector
 │   │       ├── **ntm_vector_differentiation.cpp**
 │   │       ├── **ntm_vector_integration.cpp**
@@ -151,14 +151,14 @@ code
 │   │       └── **ntm_vector_oneplus_function.cpp**
 │   └── statitics
 │       ├── matrix
-│       │   ├── ntm_matrix_deviation.cpp
-│       │   └── ntm_matrix_mean.cpp
+│       │   ├── **ntm_matrix_deviation.cpp**
+│       │   └── **ntm_matrix_mean.cpp**
 │       ├── scalar
-│       │   ├── ntm_scalar_deviation.cpp
-│       │   └── ntm_scalar_mean.cpp
+│       │   ├── **ntm_scalar_deviation.cpp**
+│       │   └── **ntm_scalar_mean.cpp**
 │       └── vector
-│           ├── ntm_vector_deviation.cpp
-│           └── ntm_vector_mean.cpp
+│           ├── **ntm_vector_deviation.cpp**
+│           └── **ntm_vector_mean.cpp**
 ├── ntm
 │   ├── memory
 │   │   ├── ntm_addressing.cpp

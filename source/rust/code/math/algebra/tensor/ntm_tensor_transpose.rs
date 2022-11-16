@@ -42,25 +42,62 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_transpose(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut data_out: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+pub fn ntm_tensor_transpose(tensor: Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>> {
+    // Transpose a tensor of any size
+    let mut data_out: Vec<Vec<Vec<f64>>> = vec![];
 
-    for i in matrix {
-        for j in 0..i.len() {
-            data_out[j].push(i[j]);
+    for i in 0..tensor.len() {
+        let mut matrix: Vec<Vec<f64>> = vec![];
+
+        for j in 0..tensor[0].len() {
+            let mut vector: Vec<f64> = vec![];
+
+            for k in 0..tensor[0][0].len() {
+                vector.push(tensor[i][k][j]);
+            }
+            matrix.push(vector);
         }
+        data_out.push(matrix);
     }
     data_out
 }
 
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let data_in: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![1.0, 0.0, 1.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 4.0, 2.0],
+            vec![0.0, 1.0, 3.0],
+            vec![3.0, 1.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 5.0],
+            vec![0.0, 2.0, 0.0],
+            vec![1.0, 0.0, 1.0]
+        ]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![1.0, 0.0, 5.0], 
+            vec![0.0, 2.0, 0.0], 
+            vec![1.0, 0.0, 1.0]
+        ],
+        vec![
+            vec![3.0, 0.0, 3.0],
+            vec![4.0, 1.0, 1.0], 
+            vec![2.0, 3.0, 1.0]
+        ],
+        vec![
+            vec![1.0, 0.0, 1.0],
+            vec![0.0, 2.0, 0.0],
+            vec![5.0, 0.0, 1.0]
+        ]
+    ];
 
-    assert_eq!(ntm_tensor_transpose(input0), output0);
-    assert_eq!(ntm_tensor_transpose(input1), output1);
+    assert_eq!(ntm_tensor_transpose(data_in), data_out);
 }

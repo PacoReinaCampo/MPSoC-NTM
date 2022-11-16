@@ -98,13 +98,13 @@ code
 ├── math
 │   ├── algebra
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.rs
+│   │   │   ├── **ntm_matrix_convolution.rs**
 │   │   │   ├── ntm_matrix_inverse.rs
-│   │   │   ├── ntm_matrix_multiplication.rs
+│   │   │   ├── **ntm_matrix_multiplication.rs**
 │   │   │   ├── **ntm_matrix_product.rs**
-│   │   │   ├── ntm_matrix_summation.rs
+│   │   │   ├── **ntm_matrix_summation.rs**
 │   │   │   ├── **ntm_matrix_transpose.rs**
-│   │   │   ├── ntm_matrix_vector_convolution.rs
+│   │   │   ├── **ntm_matrix_vector_convolution.rs**
 │   │   │   ├── **ntm_matrix_vector_product.rs**
 │   │   │   └── **ntm_transpose_vector_product.rs**
 │   │   ├── scalar
@@ -128,13 +128,13 @@ code
 │   │       └── **ntm_vector_summation.rs**
 │   ├── calculus
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.rs**
-│   │   │   ├── ntm_matrix_integration.rs**
-│   │   │   └── ntm_matrix_softmax.rs**
+│   │   │   ├── **ntm_matrix_differentiation.rs**
+│   │   │   ├── **ntm_matrix_integration.rs**
+│   │   │   └── **ntm_matrix_softmax.rs**
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.rs
-│   │   │   ├── ntm_tensor_integration.rs
-│   │   │   └── ntm_tensor_softmax.rs
+│   │   │   ├── **ntm_tensor_differentiation.rs**
+│   │   │   ├── **ntm_tensor_integration.rs**
+│   │   │   └── **ntm_tensor_softmax.rs**
 │   │   └── vector
 │   │       ├── **ntm_vector_differentiation.rs**
 │   │       ├── **ntm_vector_integration.rs**
@@ -151,14 +151,14 @@ code
 │   │       └── **ntm_vector_oneplus_function.rs**
 │   └── statitics
 │       ├── matrix
-│       │   ├── ntm_matrix_deviation.rs
-│       │   └── ntm_matrix_mean.rs
+│       │   ├── **ntm_matrix_deviation.rs**
+│       │   └── **ntm_matrix_mean.rs**
 │       ├── scalar
-│       │   ├── ntm_scalar_deviation.rs
-│       │   └── ntm_scalar_mean.rs
+│       │   ├── **ntm_scalar_deviation.rs**
+│       │   └── **ntm_scalar_mean.rs**
 │       └── vector
-│           ├── ntm_vector_deviation.rs
-│           └── ntm_vector_mean.rs
+│           ├── **ntm_vector_deviation.rs**
+│           └── **ntm_vector_mean.rs**
 ├── ntm
 │   ├── memory
 │   │   ├── ntm_addressing.rs

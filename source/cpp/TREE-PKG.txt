@@ -1,0 +1,67 @@
+code
+├── arithmetic
+│   ├── ntm_arithmetic.hpp
+│   ├── matrix
+│   ├── scalar
+│   ├── tensor
+│   └── vector
+├── controller
+│   ├── FNN
+│   │   ├── convolutional
+│   │   └── standard
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   └── standard
+│   └── transformer
+│       ├── components
+│       ├── fnn
+│       ├── functions
+│       ├── inputs
+│       ├── lstm
+│       └── top
+├── dnc
+│   ├── memory
+│   ├── top
+│   └── trained
+├── math
+│   ├── algebra
+│   │   ├── ntm_math_algebra.hpp
+│   │   ├── matrix
+│   │   ├── scalar
+│   │   ├── tensor
+│   │   └── vector
+│   ├── calculus
+│   │   ├── ntm_math_calculus.hpp
+│   │   ├── matrix
+│   │   ├── tensor
+│   │   └── vector
+│   ├── function
+│   │   ├── ntm_math_function.hpp
+│   │   ├── matrix
+│   │   ├── scalar
+│   │   └── vector
+│   └── statitics
+│       ├── ntm_math_statitics.hpp
+│       ├── matrix
+│       ├── scalar
+│       └── vector
+├── ntm
+│   ├── memory
+│   ├── read_heads
+│   ├── top
+│   ├── trained
+│   └── write_heads
+├── state
+│   ├── feedback
+│   ├── outputs
+│   └── top
+└── trainer
+    ├── differentiation
+    ├── FNN
+    └── LSTM
+        ├── activation
+        ├── forget
+        ├── input
+        └── output
+
+59 directories, 5 files

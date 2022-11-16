@@ -42,18 +42,22 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_deviation(input: i32) -> i32 {
+pub fn ntm_scalar_deviation(vector: Vec<f64>, mean: f64) -> f64 {
+    let mut data_out: f64 = 0.0;
 
-    return input * 2;
+    for i in 0..vector.len() {
+        data_out += (vector[i] - mean)*(vector[i] - mean)/vector.len() as f64;
+    }
+    data_out.sqrt()
 }
 
 fn main() {
-    let input0: i32 = 3;
-    let input1: i32 = 4;
+    let data_in_0: Vec<f64> = vec![3.0, 2.0, 2.0];
+    let data_in_1: Vec<f64> = vec![1.0, 2.0, 1.0];
 
-    let output0: i32 = 6;
-    let output1: i32 = 8;
+    let data_out_0: f64 = 7.681145747868608;
+    let data_out_1: f64 = 8.679477710861024;
 
-    assert_eq!(ntm_scalar_deviation(input0), output0);
-    assert_eq!(ntm_scalar_deviation(input1), output1);
+    assert_eq!(ntm_scalar_deviation(data_in_0, 10.0), data_out_0);
+    assert_eq!(ntm_scalar_deviation(data_in_1, 10.0), data_out_1);
 }

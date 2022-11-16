@@ -75,8 +75,7 @@ fn main() {
     let data_a_in: Vec<Vec<f64>> = vec![
         vec![1.0, 2.0, 3.0],
         vec![4.0, 2.0, 6.0],
-        vec![3.0, 4.0, 1.0],
-        vec![2.0, 4.0, 8.0]
+        vec![3.0, 4.0, 1.0]
     ];
     let data_b_in: Vec<Vec<f64>> = vec![
         vec![1.0],
@@ -85,10 +84,9 @@ fn main() {
     ];
 
     let data_out: Vec<Vec<f64>> = vec![
-        vec![24.0],
-        vec![36.0],
-        vec![34.0],
-        vec![54.0]
+        vec![ 1.0],
+        vec![11.0],
+        vec![34.0]
     ];
 
     assert_eq!(ntm_matrix_vector_convolution(data_a_in, data_b_in), data_out);

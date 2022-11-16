@@ -42,18 +42,35 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_mean(vector: Vec<i32>) -> Vec<i32> {
+pub fn ntm_vector_mean(matrix: Vec<Vec<f64>>) -> Vec<f64> {
+    let mut data_out: Vec<f64> = vec![];
 
-    return vector;
+    for i in 0..matrix.len() {
+        let mut temporal: f64 = 0.0;
+
+        for j in 0..matrix[i].len() {
+            temporal += matrix[i][j]/matrix[0].len() as f64;
+        }
+        data_out.push(temporal);
+    }
+    data_out
 }
 
 fn main() {
-    let input0: Vec<i32> = vec![1, 0, 1];
-    let input1: Vec<i32> = vec![3, 4, 2];
+    let data_in_0: Vec<Vec<f64>> = vec![
+        vec![3.0, 1.0, 2.0],
+        vec![1.0, 2.0, 0.0],
+        vec![5.0, 3.0, 4.0]
+    ];
+    let data_in_1: Vec<Vec<f64>> = vec![
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0]
+    ];
 
-    let output0: Vec<i32> = vec![1, 0, 1];
-    let output1: Vec<i32> = vec![3, 4, 2];
+    let data_out_0: Vec<f64> = vec![2.0, 1.0, 4.0];
+    let data_out_1: Vec<f64> = vec![1.0, 1.0, 1.0];
 
-    assert_eq!(ntm_vector_mean(input0), output0);
-    assert_eq!(ntm_vector_mean(input1), output1);
+    assert_eq!(ntm_vector_mean(data_in_0), data_out_0);
+    assert_eq!(ntm_vector_mean(data_in_1), data_out_1);
 }

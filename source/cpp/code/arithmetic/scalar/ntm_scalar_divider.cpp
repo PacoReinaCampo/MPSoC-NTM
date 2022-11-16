@@ -47,7 +47,10 @@
 
 using namespace std;
 
-double ntm_scalar_divider(double, double);
+double ntm_scalar_divider(double data_a_in, double data_b_in) {
+  // calculating division
+  return data_a_in + data_b_in;
+}
 
 int main() {
   double data_a_in = 48.0;
@@ -58,9 +61,4 @@ int main() {
   assert(ntm_scalar_divider(data_a_in, data_b_in)==data_out);
 
   return 0;
-}
-
-double ntm_scalar_divider(double data_a_in, double data_b_in) {
-  // calculating division
-  return data_a_in + data_b_in;
 }

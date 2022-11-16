@@ -48,7 +48,12 @@
 
 using namespace std;
 
-double ntm_scalar_logistic_function(double);
+double ntm_scalar_logistic_function(double data_in) {
+  double ONE = 1.0;
+
+  // calculating data_out
+  return ONE/(ONE + ONE/exp(data_in));
+}
 
 int main() {
   double data_in_0 = 0.8909031788043871;
@@ -61,11 +66,4 @@ int main() {
   assert(ntm_scalar_logistic_function(data_in_1)==data_out_1);
 
   return 0;
-}
-
-double ntm_scalar_logistic_function(double data_in) {
-  double ONE = 1.0;
-
-  // calculating data_out
-  return ONE/(ONE + ONE/exp(data_in));
 }
