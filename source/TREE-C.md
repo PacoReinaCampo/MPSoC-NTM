@@ -179,15 +179,15 @@ code
 │       └── ntm_writing.c
 ├── state
 │   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.c
-│   │   ├── ntm_state_matrix_input.c
-│   │   ├── ntm_state_matrix_output.c
-│   │   └── ntm_state_matrix_state.c
+│   │   ├── *ntm_state_matrix_feedforward.c*
+│   │   ├── *ntm_state_matrix_input.c*
+│   │   ├── *ntm_state_matrix_output.c*
+│   │   └── *ntm_state_matrix_state.c*
 │   ├── outputs
-│   │   ├── ntm_state_vector_output.c
-│   │   └── ntm_state_vector_state.c
+│   │   ├── *ntm_state_vector_output.c*
+│   │   └── *ntm_state_vector_state.c*
 │   └── top
-│       └── ntm_state_top.c
+│       └── *ntm_state_top.c*
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.c

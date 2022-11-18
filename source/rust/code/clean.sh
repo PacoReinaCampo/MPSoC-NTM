@@ -172,3 +172,8 @@ rm -rf trainer/LSTM/output/ntm_lstm_output_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_u_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
 rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
+
+rm -rf arithmetic/ntm_matrix_arithmetic.run
+rm -rf arithmetic/ntm_scalar_arithmetic.run
+rm -rf arithmetic/ntm_tensor_arithmetic.run
+rm -rf arithmetic/ntm_vector_arithmetic.run

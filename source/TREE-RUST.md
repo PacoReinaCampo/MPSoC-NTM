@@ -179,15 +179,15 @@ code
 │       └── ntm_writing.rs
 ├── state
 │   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.rs
-│   │   ├── ntm_state_matrix_input.rs
-│   │   ├── ntm_state_matrix_output.rs
-│   │   └── ntm_state_matrix_state.rs
+│   │   ├── *ntm_state_matrix_feedforward.rs*
+│   │   ├── *ntm_state_matrix_input.rs*
+│   │   ├── *ntm_state_matrix_output.rs*
+│   │   └── *ntm_state_matrix_state.rs*
 │   ├── outputs
-│   │   ├── ntm_state_vector_output.rs
-│   │   └── ntm_state_vector_state.rs
+│   │   ├── *ntm_state_vector_output.rs*
+│   │   └── *ntm_state_vector_state.rs*
 │   └── top
-│       └── ntm_state_top.rs
+│       └── *ntm_state_top.rs*
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.rs

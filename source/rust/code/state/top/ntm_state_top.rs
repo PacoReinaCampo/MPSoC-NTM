@@ -42,6 +42,25 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-  println!("Hello QueenField!");
+use ntm_math::algebra;
+
+// Package
+struct out {
+  let mut x_out : Vec<Vec<f64>;
+  let mut y_out : Vec<Vec<f64>;
+};
+
+pub fn Vec<Vec<f64>> ntm_state_top(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, initial_x: Vec<f64>, let k) -> out {
+
+  // Variables
+  out data_out;
+
+  // Body
+  // x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+  data_out.x_out = ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k);
+
+  // y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+  data_out.y_out = ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k);
+  
+  return data_out
 }

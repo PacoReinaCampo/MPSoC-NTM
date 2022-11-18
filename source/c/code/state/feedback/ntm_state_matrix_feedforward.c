@@ -44,7 +44,43 @@
 
 #include <stdio.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+// Package
+
+double ** ntm_state_matrix_feedforward(double **data_k_in, double **data_d_in) {
+
+  // Constants
+  // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  // SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
+  int SIZE_D_I_IN; // size(data_d_in);
+  int SIZE_D_J_IN; // size(data_d_in);
+
+  // Variables
+  double **matrix_operation_int;
+
+  double **data_d_out;
+
+  int i;
+
+  matrix_operation_int = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  data_d_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i=0;i<SIZE_I_IN;i++) {
+    matrix_operation_int[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+
+    data_d_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  }
+ 
+  // Body
+  // d = inv(I + D·K)·D
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in);
+
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);
+
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int);
+
+  data_d_out = ntm_matrix_product(matrix_operation_int, data_d_in);
+
+  return data_d_out;
 }

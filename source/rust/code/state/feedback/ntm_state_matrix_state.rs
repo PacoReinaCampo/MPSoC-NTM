@@ -42,6 +42,39 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-  println!("Hello QueenField!");
+use ntm_math::algebra;
+
+// Package
+
+pub fn Vec<Vec<f64>> ntm_state_matrix_state(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+
+  // Constants
+  // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  // SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
+  let SIZE_D_I_IN = data_d_in.len();
+  let SIZE_D_J_IN = data_d_in[0].len();
+
+  // Variables
+  let mut matrix_operation_int: Vec<Vec<f64>> = vec![];
+
+  let mut data_a_out: Vec<Vec<f64>> = vec![];
+
+  // Body
+  // a = A-B·K·inv(I + D·K)·C
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in);
+
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);
+
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int);
+
+  matrix_operation_int = ntm_matrix_product(matrix_operation_int, data_c_in);
+
+  matrix_operation_int = ntm_matrix_product(data_k_in, matrix_operation_int);
+
+  matrix_operation_int = ntm_matrix_product(data_b_in, matrix_operation_int);
+
+  data_a_out = ntm_matrix_adder(data_a_in, matrix_operation_int);
+
+  return data_a_out
 }
