@@ -50,7 +50,7 @@
 #define SIZE_J_IN 3
 #define SIZE_K_IN 3
 
-double ntm_matrix_adder(double ***data_a_in, double ***data_b_in) {
+double ntm_vector_adder(double ***data_a_in, double ***data_b_in) {
 
   double ***data_out;
 
@@ -142,7 +142,7 @@ int main() {
   data_out[2][0][1] = 1.0; data_out[2][1][1] = 1.0; data_out[2][2][1] = 1.0;
   data_out[2][0][2] = 6.0; data_out[2][1][2] = 6.0; data_out[2][2][2] = 6.0;
 
-  assert(ntm_matrix_adder(data_a_in, data_b_in)==***data_out);
+  assert(ntm_vector_adder(data_a_in, data_b_in)==***data_out);
 
   free(data_a_in);
   free(data_b_in);

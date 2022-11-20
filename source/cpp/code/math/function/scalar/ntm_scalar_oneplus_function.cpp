@@ -69,12 +69,3 @@ int main() {
 
   return 0;
 }
-
-double ntm_scalar_oneplus_function(double data_in) {
-  double ONE = 1.0;
-
-  // calculating data_out
-  double temporal = ONE + exp(data_in);
-
-  return ONE + log(temporal);
-}

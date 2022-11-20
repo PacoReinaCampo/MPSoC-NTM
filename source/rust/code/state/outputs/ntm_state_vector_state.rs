@@ -46,7 +46,7 @@ use ntm_math::algebra;
 
 // Package
 
-pub fn Vec<Vec<f64>> ntm_state_vector_state(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, double *initial_x, let k) -> Vec<Vec<f64>> {
+pub fn Vec<Vec<f64>> ntm_state_vector_state(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, double *initial_x, f64 k) -> Vec<Vec<f64>> {
 
   // Variables
   let mut data_a_out: Vec<Vec<f64>> = vec![];

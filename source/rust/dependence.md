@@ -13,38 +13,48 @@
 # lib: dnc
 ## mod:
 ### impl:
+#### fn:
 
 # lib: math_algebra
 ## mod: scalar
 ### impl: scalar
+#### fn: convolution, inverse, multiplication, product, summation, transpose
 ## mod: vector
 ### impl: vector
+#### fn: convolution, inverse, multiplication, product, summation, transpose
 ## mod: matrix
 ### impl: matrix
 #### fn: convolution, inverse, multiplication, product, summation, transpose
 ## mod: tensor
 ### impl: tensor
+#### fn: convolution, inverse, multiplication, product, summation, transpose
 
 # lib: math_calculus
 ## mod:
 ### impl:
+#### fn:
 
 # lib: math_function
 ## mod:
 ### impl:
+#### fn:
 
 # lib: math_statitics
 ## mod:
 ### impl:
+#### fn:
 
 # lib: ntm
 ## mod:
 ### impl:
+#### fn:
 
 # lib: state
 ## mod:
 ### impl:
+#### fn:
 
 # lib: trainer
 ## mod:
 ### impl:
+#### fn:
