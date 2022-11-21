@@ -79,8 +79,8 @@ int main() {
   vector<double> data_out_0{ 0.11567390955504045, 0.004756662822010267, 0.8795694276229492 };
   vector<double> data_out_1{ 0.06886151132461793, 0.187184340758189600, 0.7439541479171924 };
 
-  assert(ntm_vector_softmax(data_in_0)==data_out_0);
-  assert(ntm_vector_softmax(data_in_1)==data_out_1);
+  assert(ntm_vector_softmax(data_in_0) == data_out_0);
+  assert(ntm_vector_softmax(data_in_1) == data_out_1);
 
   return 0;
 }

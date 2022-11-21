@@ -49,53 +49,50 @@
 
 using namespace std;
 
-class ScalarMathStatitics {
+class ScalarMathAlgebra {
   public:
-    double ntm_scalar_mean(vector<double> data_in);
-    double ntm_scalar_deviation(vector<double> data_in, double mean);
+    double ntm_scalar_summation(vector<double> data_in);
+    double ntm_scalar_multiplication(vector<double> data_in);
 };
 
-double ScalarMathStatitics::ntm_scalar_mean(vector<double> data_in) {
+double ScalarMathAlgebra::ntm_scalar_summation(vector<double> data_in) {
   double data_out = 0.0;
 
   for(int i=0; i<data_in.size(); i++) {
-    data_out += data_in[i]/(double)data_in.size();
+    data_out += data_in[i];
   }
 
   return data_out;
 }
 
-double ScalarMathStatitics::ntm_scalar_deviation(vector<double> data_in, double mean) {
-  double data_out = 0.0;
+double ScalarMathAlgebra::ntm_scalar_multiplication(vector<double> data_in) {
+  double data_out = 1.0;
 
   for(int i=0; i<data_in.size(); i++) {
-    data_out += (data_in[i] - mean)*(data_in[i] - mean)/(double)data_in.size();
+    data_out *= data_in[i];
   }
 
-  return sqrt(data_out);
+  return data_out;
 }
 
 int main() {
 
-  ScalarMathStatitics MathStatitics;
+  ScalarMathAlgebra MathAlgebra;
 
-  vector<double> mean_data_in_0{3.0, 1.0, 2.0};
-  vector<double> mean_data_in_1{1.0, 2.0, 3.0};
+  vector<double> data_in_0{3.0, 2.0, 2.0};
+  vector<double> data_in_1{1.0, 0.0, 0.0};
 
-  vector<double> deviation_data_in_0{3.0, 2.0, 2.0};
-  vector<double> deviation_data_in_1{1.0, 2.0, 1.0};
+  double summation_data_out_0 = 7.0;
+  double summation_data_out_1 = 1.0;
 
-  double mean_data_out_0 = 2.0;
-  double mean_data_out_1 = 2.0;
+  double multiplication_data_out_0 = 12.0;
+  double multiplication_data_out_1 =  0.0;
 
-  double deviation_data_out_0 = 7.681145747868608;
-  double deviation_data_out_1 = 8.679477710861024;
+  assert(MathAlgebra.ntm_scalar_summation(data_in_0) == summation_data_out_0);
+  assert(MathAlgebra.ntm_scalar_summation(data_in_1) == summation_data_out_1);
 
-  assert(MathStatitics.ntm_scalar_mean(mean_data_in_0) == mean_data_out_0);
-  assert(MathStatitics.ntm_scalar_mean(mean_data_in_1) == mean_data_out_1);
-
-  assert(MathStatitics.ntm_scalar_deviation(deviation_data_in_0, 10.0) == deviation_data_out_0);
-  assert(MathStatitics.ntm_scalar_deviation(deviation_data_in_1, 10.0) == deviation_data_out_1);
+  assert(MathAlgebra.ntm_scalar_multiplication(data_in_0) == multiplication_data_out_0);
+  assert(MathAlgebra.ntm_scalar_multiplication(data_in_1) == multiplication_data_out_1);
 
   return 0;
 }

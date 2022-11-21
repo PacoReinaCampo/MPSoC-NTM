@@ -42,35 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+package main
 
-using namespace std;
-
-vector<double> ntm_vector_integration(vector<double> data_in, double length_in) {
-
-  double temporal = 0.0;
-
-  vector<double> data_out;
-
-  for (int i = 0; i < data_in.size(); i++) {
-    temporal += data_in[i];
-
-    data_out.push_back(temporal*length_in);
-  }
-
-  return data_out;
-}
-
-int main() {
-  vector<double> data_in{ 6.0, 3.0, 8.0 };
-
-  vector<double> data_out{ 6.0, 9.0, 17.0 };
-
-  double length_in = 1.0;
-
-  assert(ntm_vector_integration(data_in, length_in) == data_out);
-
-  return 0;
+import "fmt"
+func main() {
+  fmt.Println("Hello QueenField!")
 }

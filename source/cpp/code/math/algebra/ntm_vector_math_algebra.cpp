@@ -49,51 +49,98 @@
 
 using namespace std;
 
-class MatrixMathStatitics {
+class VectorMathAlgebra {
   public:
-    vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>> data_in);
-    vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean);
+    double ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in);
+    double ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> data_b_in);
+    double ntm_vector_module(vector<double> data_in);
+
+    vector<double> ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in);
+    vector<double> ntm_vector_summation(vector<vector<double>> matrix);
+    vector<double> ntm_vector_multiplication(vector<vector<double>> matrix);
 };
 
-vector<vector<double>> MatrixMathStatitics::ntm_matrix_mean(vector<vector<vector<double>>> data_in) {
+double VectorMathAlgebra::ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in) {
+  double data_out = 0;
 
-  vector<vector<double>> data_out;
-
-  for (int i = 0; i < data_in.size(); i++) {
-    vector<double> vector;
-
-    for (int j = 0; j < data_in[0].size(); j++) {
-      double temporal = 0.0;
-
-      for (int k = 0; k < data_in[0][0].size(); k++) {
-        temporal += data_in[i][j][k]/(double)data_in[0][0].size();
-
-      }
-      vector.push_back(temporal);
-    }
-    data_out.push_back(vector);
+  for(int i=0; i<data_a_in.size(); i++) {
+    data_out += data_a_in[i] * data_b_in[i];
   }
 
   return data_out;
 }
 
-vector<vector<double>> MatrixMathStatitics::ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean) {
+double VectorMathAlgebra::ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> data_b_in) {
+  double dot_result = 0.0;
 
-  vector<vector<double>> data_out;
+  double input_a_result = 0.0;
+  double input_b_result = 0.0;
 
-  for (int i = 0; i < data_in.size(); i++) {
-    vector<double> vector;
+  for(int i=0; i<data_a_in.size(); i++) {
+    dot_result += data_a_in[i] * data_b_in[i];
+  }
 
-    for (int j = 0; j < data_in[0].size(); j++) {
-      double temporal = 0.0;
+  for(int i=0; i<data_a_in.size(); i++) {
+    input_a_result += data_a_in[i] * data_a_in[i];
+  }
 
-      for (int k = 0; k < data_in[0][0].size(); k++) {
-        temporal += (data_in[i][j][k] - mean[i][j])*(data_in[i][j][k] - mean[i][j])/data_in[0][0].size();
+  for(int i=0; i<data_b_in.size(); i++) {
+    input_b_result += data_b_in[i] * data_b_in[i];
+  }
 
-      }
-      vector.push_back(sqrt(temporal));
+  return dot_result/(sqrt(input_a_result)*sqrt(input_b_result));
+}
+
+double VectorMathAlgebra::ntm_vector_module(vector<double> data_in) {
+  double data_out = 0.0;
+
+  for(int i=0; i<data_in.size(); i++) {
+    data_out += data_in[i] * data_in[i];
+  }
+
+  return sqrt(data_out);
+}
+
+vector<double> VectorMathAlgebra::ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in) {
+  vector<double> data_out;
+
+  for(int i=0; i<data_a_in.size(); i++) {
+    double temporal = 0.0;
+
+    for(int m=0; m<i+1; m++) {
+      temporal += data_a_in[m] * data_b_in[i-m];
     }
-    data_out.push_back(vector);
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
+}
+
+vector<double> VectorMathAlgebra::ntm_vector_summation(vector<vector<double>> matrix) {
+  vector<double> data_out;
+
+  for(int i=0; i<matrix.size(); i++) {
+    double temporal = 0.0;
+
+    for(int j=0; j<matrix[0].size(); j++) {
+      temporal += matrix[i][j];
+    }
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
+}
+
+vector<double> VectorMathAlgebra::ntm_vector_multiplication(vector<vector<double>> matrix) {
+  vector<double> data_out;
+
+  for(int i=0; i<matrix.size(); i++) {
+    double temporal = 1.0;
+
+    for(int j=0; j<matrix[0].size(); j++) {
+      temporal *= matrix[i][j];
+    }
+    data_out.push_back(temporal);
   }
 
   return data_out;
@@ -101,81 +148,60 @@ vector<vector<double>> MatrixMathStatitics::ntm_matrix_deviation(vector<vector<v
 
 int main() {
 
-  MatrixMathStatitics MathStatitics;
+  VectorMathAlgebra MathAlgebra;
 
-  vector<vector<vector<double>>> data_in_0 {
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    },
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    },
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    }
-  };
-  vector<vector<vector<double>>> data_in_1 {
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    }
+  vector<double> dot_product_data_a_in{1.0, 2.0, 3.0};
+  vector<double> dot_product_data_b_in{1.0, 3.0, 3.0};
+
+  vector<double> cosine_similarity_data_a_in{4.0, 0.0, 3.0};
+  vector<double> cosine_similarity_data_b_in{4.0, 0.0, 3.0};
+
+  vector<double> module_data_in{4.0, 0.0, 3.0};
+
+
+  vector<double> convolution_data_a_in{1.0, 2.0, 3.0};
+  vector<double> convolution_data_b_in{1.0, 3.0, 3.0};
+
+
+  vector<vector<double>> summation_data_in {
+    {3.0, 2.0, 2.0},
+    {0.0, 2.0, 0.0},
+    {5.0, 4.0, 1.0}
   };
 
-  vector<vector<double>> mean_0 {
-    { 11.0, 12.0, 10.0 },
-    { 11.0, 12.0, 10.0 },
-    { 11.0, 12.0, 10.0 }
-  };
-  vector<vector<double>> mean_1 {
-    { 12.0, 10.0, 11.0 },
-    { 12.0, 10.0, 11.0 },
-    { 12.0, 10.0, 11.0 }
+  vector<vector<double>> multiplication_data_in {
+    {3.0, 2.0, 2.0},
+    {0.0, 2.0, 0.0},
+    {5.0, 4.0, 1.0}
   };
 
-  vector<vector<double>> mean_data_out_0 {
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 }
-  };
-  vector<vector<double>> mean_data_out_1 {
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 }
-  };
 
-  vector<vector<double>> deviation_data_out_0 {
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 },
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 },
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 }
-  };
-  vector<vector<double>> deviation_data_out_1 {
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 },
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 },
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 }
-  };
+  double dot_product_data_out = 16.0;
 
-  assert(MathStatitics.ntm_matrix_mean(data_in_0) == mean_data_out_0);
-  assert(MathStatitics.ntm_matrix_mean(data_in_1) == mean_data_out_1);
+  double cosine_similarity_data_out = 1.0;
 
-  assert(MathStatitics.ntm_matrix_deviation(data_in_0, mean_0) == deviation_data_out_0);
-  assert(MathStatitics.ntm_matrix_deviation(data_in_1, mean_1) == deviation_data_out_1);
+  double module_data_out = 5.0;
+
+
+  vector<double> convolution_data_out{1.0, 5.0, 12.0};
+
+  vector<double> summation_data_out{7.0, 2.0, 10.0};
+
+  vector<double> multiplication_data_out{12.0, 0.0, 20.0};
+
+
+  assert(MathAlgebra.ntm_dot_product(dot_product_data_a_in, dot_product_data_b_in) == dot_product_data_out);
+
+  assert(MathAlgebra.ntm_vector_cosine_similarity(cosine_similarity_data_a_in, cosine_similarity_data_b_in) == cosine_similarity_data_out);
+
+  assert(MathAlgebra.ntm_vector_module(module_data_in) == module_data_out);
+
+
+  assert(MathAlgebra.ntm_vector_convolution(convolution_data_a_in, convolution_data_b_in) == convolution_data_out);
+
+  assert(MathAlgebra.ntm_vector_summation(summation_data_in) == summation_data_out);
+
+  assert(MathAlgebra.ntm_vector_multiplication(multiplication_data_in) == multiplication_data_out);
 
   return 0;
 }

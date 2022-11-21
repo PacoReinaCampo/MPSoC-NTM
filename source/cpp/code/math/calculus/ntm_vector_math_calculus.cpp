@@ -49,53 +49,97 @@
 
 using namespace std;
 
-class ScalarMathStatitics {
+class VectorMathCalculus {
   public:
-    double ntm_scalar_mean(vector<double> data_in);
-    double ntm_scalar_deviation(vector<double> data_in, double mean);
+    vector<double> ntm_vector_differentiation(vector<double> data_in, double length_in);
+    vector<double> ntm_vector_integration(vector<double> data_in, double length_in);
+    vector<double> ntm_vector_softmax(vector<double> data_in);
 };
 
-double ScalarMathStatitics::ntm_scalar_mean(vector<double> data_in) {
-  double data_out = 0.0;
+vector<double> VectorMathCalculus::ntm_vector_differentiation(vector<double> data_in, double length_in) {
 
-  for(int i=0; i<data_in.size(); i++) {
-    data_out += data_in[i]/(double)data_in.size();
+  double temporal = 0.0;
+
+  vector<double> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    if (i == 0) {
+      temporal = 0.0;
+    }
+    else {
+      temporal = (data_in[i] - data_in[i-1])/length_in;
+    }
+
+    data_out.push_back(temporal);
   }
 
   return data_out;
 }
 
-double ScalarMathStatitics::ntm_scalar_deviation(vector<double> data_in, double mean) {
-  double data_out = 0.0;
+vector<double> VectorMathCalculus::ntm_vector_integration(vector<double> data_in, double length_in) {
 
-  for(int i=0; i<data_in.size(); i++) {
-    data_out += (data_in[i] - mean)*(data_in[i] - mean)/(double)data_in.size();
+  double temporal = 0.0;
+
+  vector<double> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    temporal += data_in[i];
+
+    data_out.push_back(temporal*length_in);
   }
 
-  return sqrt(data_out);
+  return data_out;
+}
+
+vector<double> VectorMathCalculus::ntm_vector_softmax(vector<double> data_in) {
+
+  double temporal0 = 0.0;
+
+  vector<double> data_int;
+
+  vector<double> data_out;
+
+  for (int i = 0; i < data_in.size(); i++) {
+    temporal0 += exp(data_in[i]);
+
+    double temporal1 = exp(data_in[i]);
+
+    data_int.push_back(temporal1);
+  }
+
+  for (int i = 0; i < data_in.size(); i++) {
+    data_out.push_back(data_int[i]/temporal0);
+  }
+
+  return data_out;
 }
 
 int main() {
 
-  ScalarMathStatitics MathStatitics;
+  VectorMathCalculus MathCalculus;
 
-  vector<double> mean_data_in_0{3.0, 1.0, 2.0};
-  vector<double> mean_data_in_1{1.0, 2.0, 3.0};
+  vector<double> differentiation_data_in{ 6.0, 3.0, 8.0 };
 
-  vector<double> deviation_data_in_0{3.0, 2.0, 2.0};
-  vector<double> deviation_data_in_1{1.0, 2.0, 1.0};
+  vector<double> integration_data_in{ 6.0, 3.0, 8.0 };
 
-  double mean_data_out_0 = 2.0;
-  double mean_data_out_1 = 2.0;
+  vector<double> softmax_data_in{ 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 };
 
-  double deviation_data_out_0 = 7.681145747868608;
-  double deviation_data_out_1 = 8.679477710861024;
 
-  assert(MathStatitics.ntm_scalar_mean(mean_data_in_0) == mean_data_out_0);
-  assert(MathStatitics.ntm_scalar_mean(mean_data_in_1) == mean_data_out_1);
+  vector<double> differentiation_data_out{ 0.0, -3.0, 5.0 };
 
-  assert(MathStatitics.ntm_scalar_deviation(deviation_data_in_0, 10.0) == deviation_data_out_0);
-  assert(MathStatitics.ntm_scalar_deviation(deviation_data_in_1, 10.0) == deviation_data_out_1);
+  vector<double> integration_data_out{ 6.0, 9.0, 17.0 };
+
+  vector<double> softmax_data_out{ 0.11567390955504045, 0.004756662822010267, 0.8795694276229492 };
+
+
+  double length_in = 1.0;
+
+
+  assert(MathCalculus.ntm_vector_differentiation(differentiation_data_in, length_in) == differentiation_data_out);
+
+  assert(MathCalculus.ntm_vector_integration(integration_data_in, length_in) == integration_data_out);
+
+  assert(MathCalculus.ntm_vector_softmax(softmax_data_in) == softmax_data_out);
 
   return 0;
 }

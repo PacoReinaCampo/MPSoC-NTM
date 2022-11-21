@@ -75,7 +75,7 @@ int main() {
 
   double length_in = 1.0;
 
-  assert(ntm_vector_differentiation(data_in, length_in)==data_out);
+  assert(ntm_vector_differentiation(data_in, length_in) == data_out);
 
   return 0;
 }

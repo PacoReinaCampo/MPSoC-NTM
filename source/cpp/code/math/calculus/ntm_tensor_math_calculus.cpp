@@ -49,51 +49,126 @@
 
 using namespace std;
 
-class MatrixMathStatitics {
+class TensorMathCalculus {
   public:
-    vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>> data_in);
-    vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean);
+    vector<vector<vector<double>>> ntm_tensor_differentiation(vector<vector<vector<double>>> data_in, double length_i_in, double length_j_in, double length_k_in, int control);
+    vector<vector<vector<double>>> ntm_tensor_integration(vector<vector<vector<double>>> data_in, double length_in);
+    vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>> data_in);
 };
 
-vector<vector<double>> MatrixMathStatitics::ntm_matrix_mean(vector<vector<vector<double>>> data_in) {
+vector<vector<vector<double>>> TensorMathCalculus::ntm_tensor_differentiation(vector<vector<vector<double>>> data_in, double length_i_in, double length_j_in, double length_k_in, int control) {
 
-  vector<vector<double>> data_out;
+  double temporal;
 
-  for (int i = 0; i < data_in.size(); i++) {
-    vector<double> vector;
+  vector<vector<vector<double>>> data_out;
+
+  for (int i = 0; i < data_in[0].size(); i++) {
+    vector<vector<double>> matrix;
 
     for (int j = 0; j < data_in[0].size(); j++) {
-      double temporal = 0.0;
+      vector<double> vector;
 
       for (int k = 0; k < data_in[0][0].size(); k++) {
-        temporal += data_in[i][j][k]/(double)data_in[0][0].size();
-
+        if (control == 0) {
+          if (i == 0) {
+            temporal = 0.0;
+          }
+          else {
+            temporal = (data_in[i][j][k] - data_in[i-1][j][k])/length_i_in;
+          }
+        }
+        else if (control == 1) {
+          if (j == 0) {
+            temporal = 0.0;
+          }
+          else {
+            temporal = (data_in[i][j][k] - data_in[i][j-1][k])/length_j_in;
+          }
+        }
+        else {
+          if (k == 0) {
+            temporal = 0.0;
+          }
+          else {
+            temporal = (data_in[i][j][k] - data_in[i][j][k-1])/length_k_in;
+          }
+        }
+        vector.push_back(temporal);
       }
-      vector.push_back(temporal);
+      matrix.push_back(vector);
     }
-    data_out.push_back(vector);
+    data_out.push_back(matrix);
   }
 
   return data_out;
 }
 
-vector<vector<double>> MatrixMathStatitics::ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean) {
+vector<vector<vector<double>>> TensorMathCalculus::ntm_tensor_integration(vector<vector<vector<double>>> data_in, double length_in) {
 
-  vector<vector<double>> data_out;
+  vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
-    vector<double> vector;
+
+    vector<vector<double>> matrix;
 
     for (int j = 0; j < data_in[0].size(); j++) {
       double temporal = 0.0;
 
-      for (int k = 0; k < data_in[0][0].size(); k++) {
-        temporal += (data_in[i][j][k] - mean[i][j])*(data_in[i][j][k] - mean[i][j])/data_in[0][0].size();
+      vector<double> vector;
 
+      for (int k = 0; k < data_in[0][0].size(); k++) {
+        temporal += data_in[i][j][k];
+
+        vector.push_back(temporal*length_in);
       }
-      vector.push_back(sqrt(temporal));
+      matrix.push_back(vector);
     }
-    data_out.push_back(vector);
+    data_out.push_back(matrix);
+  }
+
+  return data_out;
+}
+
+vector<vector<vector<double>>> TensorMathCalculus::ntm_tensor_softmax(vector<vector<vector<double>>> data_in) {
+  double temporal0 = 0.0;
+
+  vector<vector<double>> data_matrix_int;
+
+  vector<vector<vector<double>>> data_tensor_int;
+
+  vector<vector<vector<double>>> data_out;
+
+  for (int i = 0; i < data_in[0].size(); i++) {
+
+    vector<vector<double>> matrix0;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+
+      vector<double> vector0;
+
+      for (int k = 0; k < data_in[0][0].size(); k++) {
+        temporal0 += exp(data_in[i][j][k]);
+
+        double temporal1 = exp(data_in[i][j][k]);
+
+        vector0.push_back(temporal1);
+      }
+      data_matrix_int.push_back(vector0);
+    }
+    data_tensor_int.push_back(data_matrix_int);
+
+    vector<vector<double>> matrix1;
+
+    for (int j = 0; j < data_in[0].size(); j++) {
+    
+      vector<double> vector1;
+
+      for (int k = 0; k < data_in[0][0].size(); k++) {
+        vector1.push_back(data_tensor_int[i][j][k]/temporal0);
+      }
+      matrix1.push_back(vector1);
+    }
+    data_out.push_back(matrix1);
   }
 
   return data_out;
@@ -101,81 +176,85 @@ vector<vector<double>> MatrixMathStatitics::ntm_matrix_deviation(vector<vector<v
 
 int main() {
 
-  MatrixMathStatitics MathStatitics;
+  TensorMathCalculus MathCalculus;
 
-  vector<vector<vector<double>>> data_in_0 {
+  vector<vector<vector<double>>> data_in {
     {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
     },
     {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
     },
     {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    }
-  };
-  vector<vector<vector<double>>> data_in_1 {
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
+      { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
+      { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
+      { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
     }
   };
 
-  vector<vector<double>> mean_0 {
-    { 11.0, 12.0, 10.0 },
-    { 11.0, 12.0, 10.0 },
-    { 11.0, 12.0, 10.0 }
-  };
-  vector<vector<double>> mean_1 {
-    { 12.0, 10.0, 11.0 },
-    { 12.0, 10.0, 11.0 },
-    { 12.0, 10.0, 11.0 }
-  };
-
-  vector<vector<double>> mean_data_out_0 {
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 },
-    { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 }
-  };
-  vector<vector<double>> mean_data_out_1 {
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 },
-    { 0.6666666666666666, 2.333333333333333, 3.3333333333333335 }
+  vector<vector<vector<double>>> differentiation_data_out {
+    {
+      {  0.000000000000000, 0.000000000000000,  0.0000000000000000 },
+      { -2.009346206396506, 2.181879072291935, -1.6581216010532778 },
+      {  5.684942785632134, 2.644907157571142, -3.6933832216044853 }
+    },
+    {
+      {  0.000000000000000, 0.000000000000000,  0.0000000000000000 },
+      { -2.009346206396506, 2.181879072291935, -1.6581216010532778 },
+      {  5.684942785632134, 2.644907157571142, -3.6933832216044853 }
+    },
+    {
+      {  0.000000000000000, 0.000000000000000,  0.0000000000000000 },
+      { -2.009346206396506, 2.181879072291935,-1.65812160105327780 },
+      {  5.684942785632134, 2.644907157571142, -3.6933832216044853 }
+    }
   };
 
-  vector<vector<double>> deviation_data_out_0 {
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 },
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 },
-    { 8.679477710861024, 11.372481406154654, 6.879922480183431 }
-  };
-  vector<vector<double>> deviation_data_out_1 {
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 },
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 },
-    { 11.67618659209133, 9.678154093971983, 10.677078252031311 }
+  vector<vector<vector<double>>> integration_data_out {
+    {
+      { 6.322611388622675,  9.453994003848962, 17.805262785462183 },
+      { 4.313265182226169,  9.626526869744392, 16.319674050304336 },
+      { 9.998207967858303, 17.956376812947667, 20.956140771903126 }
+    },
+    {
+      { 6.322611388622675,  9.453994003848962, 17.805262785462183 },
+      { 4.313265182226169,  9.626526869744392, 16.319674050304336 },
+      { 9.998207967858303, 17.956376812947667, 20.956140771903126 }
+    },
+    {
+      { 6.322611388622675,  9.453994003848962, 17.805262785462183 },
+      { 4.313265182226169,  9.626526869744392, 16.319674050304336 },
+      { 9.998207967858303, 17.956376812947667, 20.956140771903126 }
+    }
   };
 
-  assert(MathStatitics.ntm_matrix_mean(data_in_0) == mean_data_out_0);
-  assert(MathStatitics.ntm_matrix_mean(data_in_1) == mean_data_out_1);
+  vector<vector<vector<double>>> softmax_data_out {
+    {
+      { 0.0181052491311145360, 0.0007445115822270013, 0.1376699696282669000 },
+      { 0.0024274848910245004, 0.0065985650080329240, 0.0262256435989427600 },
+      { 0.7146539808632932000, 0.0929219004226361100, 0.0006526948744619639 }
+    },
+    {
+      { 0.0090526245655572700, 0.0003722557911135007, 0.068834984814133460 },
+      { 0.0012137424455122502, 0.0032992825040164620, 0.013112821799471382 },
+      { 0.3573269904316467000, 0.0464609502113180540, 0.000326347437230982 }
+    },
+    {
+      { 0.0060350830437048470, 0.0002481705274090005, 0.04588998987608898000 },
+      { 0.0008091616303415002, 0.0021995216693443080, 0.00874188119964758800 },
+      { 0.2382179936210978000, 0.0309739668075453730, 0.00021756495815398801 }
+    }
+  };
 
-  assert(MathStatitics.ntm_matrix_deviation(data_in_0, mean_0) == deviation_data_out_0);
-  assert(MathStatitics.ntm_matrix_deviation(data_in_1, mean_1) == deviation_data_out_1);
+  assert(MathCalculus.ntm_tensor_differentiation(data_in, 1.0, 1.0, 1.0, 1) == differentiation_data_out);
+
+  assert(MathCalculus.ntm_tensor_integration(data_in, 1.0) == integration_data_out);
+
+  assert(MathCalculus.ntm_tensor_softmax(data_in) == softmax_data_out);
 
   return 0;
 }
