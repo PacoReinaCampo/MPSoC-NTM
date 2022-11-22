@@ -6,6 +6,7 @@ code
 │   ├── tensor
 │   └── vector
 ├── controller
+│   ├── ntm_controller.h
 │   ├── FNN
 │   │   ├── convolutional
 │   │   └── standard
@@ -20,6 +21,7 @@ code
 │       ├── lstm
 │       └── top
 ├── dnc
+│   ├── dnc.h
 │   ├── memory
 │   ├── top
 │   └── trained
@@ -46,16 +48,19 @@ code
 │       ├── scalar
 │       └── vector
 ├── ntm
+│   ├── ntm.h
 │   ├── memory
 │   ├── read_heads
 │   ├── top
 │   ├── trained
 │   └── write_heads
 ├── state
+│   ├── ntm_state.h
 │   ├── feedback
 │   ├── outputs
 │   └── top
 └── trainer
+    ├── ntm_trainer.h
     ├── differentiation
     ├── FNN
     └── LSTM
@@ -64,4 +69,4 @@ code
         ├── input
         └── output
 
-59 directories, 5 files
+59 directories, 10 files

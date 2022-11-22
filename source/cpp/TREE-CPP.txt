@@ -4,6 +4,10 @@ code
 │   │   ├── ntm_matrix_adder.cpp
 │   │   ├── ntm_matrix_divider.cpp
 │   │   └── ntm_matrix_multiplier.cpp
+│   ├── ntm_matrix_arithmetic.cpp
+│   ├── ntm_scalar_arithmetic.cpp
+│   ├── ntm_tensor_arithmetic.cpp
+│   ├── ntm_vector_arithmetic.cpp
 │   ├── scalar
 │   │   ├── ntm_scalar_adder.cpp
 │   │   ├── ntm_scalar_divider.cpp
@@ -39,6 +43,9 @@ code
 │   │       ├── ntm_input_gate_vector.cpp
 │   │       ├── ntm_output_gate_vector.cpp
 │   │       └── ntm_state_gate_vector.cpp
+│   ├── ntm_fnn_controller.cpp
+│   ├── ntm_lstm_controller.cpp
+│   ├── ntm_transformer_controller.cpp
 │   └── transformer
 │       ├── components
 │       │   ├── ntm_masked_multi_head_attention.cpp
@@ -68,6 +75,7 @@ code
 │           ├── ntm_decoder.cpp
 │           └── ntm_encoder.cpp
 ├── dnc
+│   ├── dnc.cpp
 │   ├── memory
 │   │   ├── dnc_addressing.cpp
 │   │   ├── dnc_allocation_weighting.cpp
@@ -106,6 +114,10 @@ code
 │   │   │   ├── ntm_matrix_vector_convolution.cpp
 │   │   │   ├── ntm_matrix_vector_product.cpp
 │   │   │   └── ntm_transpose_vector_product.cpp
+│   │   ├── ntm_matrix_math_algebra.cpp
+│   │   ├── ntm_scalar_math_algebra.cpp
+│   │   ├── ntm_tensor_math_algebra.cpp
+│   │   ├── ntm_vector_math_algebra.cpp
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_multiplication.cpp
 │   │   │   └── ntm_scalar_summation.cpp
@@ -130,6 +142,9 @@ code
 │   │   │   ├── ntm_matrix_differentiation.cpp
 │   │   │   ├── ntm_matrix_integration.cpp
 │   │   │   └── ntm_matrix_softmax.cpp
+│   │   ├── ntm_matrix_math_calculus.cpp
+│   │   ├── ntm_tensor_math_calculus.cpp
+│   │   ├── ntm_vector_math_calculus.cpp
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_differentiation.cpp
 │   │   │   ├── ntm_tensor_integration.cpp
@@ -142,6 +157,9 @@ code
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_logistic_function.cpp
 │   │   │   └── ntm_matrix_oneplus_function.cpp
+│   │   ├── ntm_matrix_math_function.cpp
+│   │   ├── ntm_scalar_math_function.cpp
+│   │   ├── ntm_vector_math_function.cpp
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_logistic_function.cpp
 │   │   │   └── ntm_scalar_oneplus_function.cpp
@@ -152,6 +170,9 @@ code
 │       ├── matrix
 │       │   ├── ntm_matrix_deviation.cpp
 │       │   └── ntm_matrix_mean.cpp
+│       ├── ntm_matrix_math_statitics.cpp
+│       ├── ntm_scalar_math_statitics.cpp
+│       ├── ntm_vector_math_statitics.cpp
 │       ├── scalar
 │       │   ├── ntm_scalar_deviation.cpp
 │       │   └── ntm_scalar_mean.cpp
@@ -163,6 +184,7 @@ code
 │   │   ├── ntm_addressing.cpp
 │   │   ├── ntm_matrix_content_based_addressing.cpp
 │   │   └── ntm_vector_content_based_addressing.cpp
+│   ├── ntm.cpp
 │   ├── read_heads
 │   │   └── ntm_reading.cpp
 │   ├── top
@@ -182,6 +204,7 @@ code
 │   │   ├── ntm_state_matrix_input.cpp
 │   │   ├── ntm_state_matrix_output.cpp
 │   │   └── ntm_state_matrix_state.cpp
+│   ├── ntm_state.cpp
 │   ├── outputs
 │   │   ├── ntm_state_vector_output.cpp
 │   │   └── ntm_state_vector_state.cpp
@@ -199,38 +222,40 @@ code
     │   ├── ntm_fnn_u_trainer.cpp
     │   ├── ntm_fnn_v_trainer.cpp
     │   └── ntm_fnn_w_trainer.cpp
-    └── LSTM
-        ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.cpp
-        │   ├── ntm_lstm_activation_d_trainer.cpp
-        │   ├── ntm_lstm_activation_k_trainer.cpp
-        │   ├── ntm_lstm_activation_trainer.cpp
-        │   ├── ntm_lstm_activation_u_trainer.cpp
-        │   ├── ntm_lstm_activation_v_trainer.cpp
-        │   └── ntm_lstm_activation_w_trainer.cpp
-        ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.cpp
-        │   ├── ntm_lstm_forget_d_trainer.cpp
-        │   ├── ntm_lstm_forget_k_trainer.cpp
-        │   ├── ntm_lstm_forget_trainer.cpp
-        │   ├── ntm_lstm_forget_u_trainer.cpp
-        │   ├── ntm_lstm_forget_v_trainer.cpp
-        │   └── ntm_lstm_forget_w_trainer.cpp
-        ├── input
-        │   ├── ntm_lstm_input_b_trainer.cpp
-        │   ├── ntm_lstm_input_d_trainer.cpp
-        │   ├── ntm_lstm_input_k_trainer.cpp
-        │   ├── ntm_lstm_input_trainer.cpp
-        │   ├── ntm_lstm_input_u_trainer.cpp
-        │   ├── ntm_lstm_input_v_trainer.cpp
-        │   └── ntm_lstm_input_w_trainer.cpp
-        └── output
-            ├── ntm_lstm_output_b_trainer.cpp
-            ├── ntm_lstm_output_d_trainer.cpp
-            ├── ntm_lstm_output_k_trainer.cpp
-            ├── ntm_lstm_output_trainer.cpp
-            ├── ntm_lstm_output_u_trainer.cpp
-            ├── ntm_lstm_output_v_trainer.cpp
-            └── ntm_lstm_output_w_trainer.cpp
+    ├── LSTM
+    │   ├── activation
+    │   │   ├── ntm_lstm_activation_b_trainer.cpp
+    │   │   ├── ntm_lstm_activation_d_trainer.cpp
+    │   │   ├── ntm_lstm_activation_k_trainer.cpp
+    │   │   ├── ntm_lstm_activation_trainer.cpp
+    │   │   ├── ntm_lstm_activation_u_trainer.cpp
+    │   │   ├── ntm_lstm_activation_v_trainer.cpp
+    │   │   └── ntm_lstm_activation_w_trainer.cpp
+    │   ├── forget
+    │   │   ├── ntm_lstm_forget_b_trainer.cpp
+    │   │   ├── ntm_lstm_forget_d_trainer.cpp
+    │   │   ├── ntm_lstm_forget_k_trainer.cpp
+    │   │   ├── ntm_lstm_forget_trainer.cpp
+    │   │   ├── ntm_lstm_forget_u_trainer.cpp
+    │   │   ├── ntm_lstm_forget_v_trainer.cpp
+    │   │   └── ntm_lstm_forget_w_trainer.cpp
+    │   ├── input
+    │   │   ├── ntm_lstm_input_b_trainer.cpp
+    │   │   ├── ntm_lstm_input_d_trainer.cpp
+    │   │   ├── ntm_lstm_input_k_trainer.cpp
+    │   │   ├── ntm_lstm_input_trainer.cpp
+    │   │   ├── ntm_lstm_input_u_trainer.cpp
+    │   │   ├── ntm_lstm_input_v_trainer.cpp
+    │   │   └── ntm_lstm_input_w_trainer.cpp
+    │   └── output
+    │       ├── ntm_lstm_output_b_trainer.cpp
+    │       ├── ntm_lstm_output_d_trainer.cpp
+    │       ├── ntm_lstm_output_k_trainer.cpp
+    │       ├── ntm_lstm_output_trainer.cpp
+    │       ├── ntm_lstm_output_u_trainer.cpp
+    │       ├── ntm_lstm_output_v_trainer.cpp
+    │       └── ntm_lstm_output_w_trainer.cpp
+    ├── ntm_fnn.cpp
+    └── ntm_lstm.cpp
 
-59 directories, 174 files
+59 directories, 199 files

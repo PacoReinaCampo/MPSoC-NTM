@@ -55,7 +55,6 @@ class VectorMathFunction {
     vector<double> ntm_vector_oneplus_function(vector<double> data_in);
 };
 
-
 vector<double> VectorMathFunction::ntm_vector_logistic_function(vector<double> data_in) {
 
   double ONE = 1.0;
@@ -78,8 +77,8 @@ vector<double> VectorMathFunction::ntm_vector_oneplus_function(vector<double> da
   vector<double> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
-      double temporal0 = ONE + exp(data_in[i]);
-      double temporal1 = ONE + log(temporal0);
+    double temporal0 = ONE + exp(data_in[i]);
+    double temporal1 = ONE + log(temporal0);
 
 
     data_out.push_back(temporal1);
