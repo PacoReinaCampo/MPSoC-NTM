@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining x copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -44,7 +44,61 @@
 
 package main
 
-import "fmt"
+import (
+  "fmt"
+)
+
+func ntm_tensor_multiplier(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] * data_b_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
 func main() {
-  fmt.Println("Hello QueenField!")
+
+  var data_a_in = [][][]float64 {
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+  }
+  var data_b_in = [][][]float64 {
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+  }
+
+  fmt.Println("data_a_in:", data_a_in)
+  fmt.Println("data_b_in:", data_b_in)
+
+  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_tensor_multiplier(data_a_in, data_b_in))
 }

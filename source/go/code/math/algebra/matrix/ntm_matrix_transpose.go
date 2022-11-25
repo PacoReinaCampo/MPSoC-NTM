@@ -48,52 +48,25 @@ import (
   "fmt"
 )
 
+func ntm_matrix_transpose(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, a := range data_in {
+    for j, _ := range a {
+      data_out[i] = append(data_out[i], data_in[j][i])
+    }
+  }
+  return data_out
+}
+
 func main() {
-  var SIZE_A_I_IN, SIZE_A_J_IN int
-  var SIZE_B_I_IN, SIZE_B_J_IN int
-  var data_a_in, data_b_in, data_out [10][10] int
 
-  fmt.Print("Enter no of rows of data_a_in: ")
-  fmt.Scanln(&SIZE_A_I_IN)
-  fmt.Print("Enter no of column of data_a_in: ")
-  fmt.Scanln(&SIZE_A_J_IN)
-  fmt.Print("Enter no of rows of data_b_in: ")
-  fmt.Scanln(&SIZE_B_I_IN)
-  fmt.Print("Enter no of column of data_b_in: ")
-  fmt.Scanln(&SIZE_B_J_IN)
-  fmt.Println("\nEnter matrix_1 elements: ")
-
-  for i := 0; i < SIZE_A_I_IN; i++ {
-    for j := 0; j < SIZE_A_J_IN; j++ {
-      fmt.Scanf("%d ", &data_a_in[i][j])
-    }
+  var data_in = [][]float64 {
+    { 1.0, 0.0, 1.0 },
+    { 0.0, 2.0, 0.0 },
+    { 5.0, 0.0, 1.0 },
   }
 
-  fmt.Println("\nEnter matrix_2 elements: ")
+  fmt.Println("data_in:", data_in)
 
-  for i := 0; i < SIZE_B_I_IN; i++ {
-    for j := 0; j < SIZE_B_J_IN; j++ {
-      fmt.Scanf("%d ", &data_b_in[i][j])
-    }
-  }
-
-  // Multiplication of two matrix
-  for i := 0; i < SIZE_A_I_IN; i++ {
-    for j := 0; j < SIZE_B_J_IN; j++ {
-      data_out[i][j] = 0
-
-      for k := 0; k < SIZE_B_J_IN; k++ {
-        data_out[i][j] += data_a_in[i][k] * data_b_in[k][j]
-      }
-    }
-  }
-
-  fmt.Println("\nAfter Multiplication Matrix is: \n")
-
-  for i := 0; i < SIZE_A_I_IN; i++ {
-    for j := 0; j < SIZE_B_J_IN; j++ {
-      fmt.Printf("%d ", data_out[i][j])
-    }
-    fmt.Println("\n")
-  }
+  fmt.Println("transpose: data_in: ", ntm_matrix_transpose(data_in))
 }

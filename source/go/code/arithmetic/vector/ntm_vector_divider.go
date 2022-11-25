@@ -44,7 +44,25 @@
 
 package main
 
-import "fmt"
+import (
+  "fmt"
+)
+
+func ntm_vector_divider(data_a_in []float64, data_b_in []float64) []float64 {
+  data_out := make([]float64, len(data_a_in))
+  for i := range data_a_in {
+    data_out = append(data_out, data_a_in[i] / data_b_in[i])
+  }
+  return data_out
+}
+
 func main() {
-  fmt.Println("Hello QueenField!")
+
+  var data_a_in = []float64 { 2.0, 0.0, 4.0 }
+  var data_b_in = []float64 { 1.0, 1.0, 2.0 }
+
+  fmt.Println("data_a_in:", data_a_in)
+  fmt.Println("data_b_in:", data_b_in)
+
+  fmt.Println("divider: data_a_in / data_b_in: ", ntm_vector_divider(data_a_in, data_b_in))
 }
