@@ -71,11 +71,11 @@ pub fn ntm_matrix_inverse(matrix: &mut Vec<Vec<f64>>) -> Vec<Vec<f64>>{
 pub fn ntm_gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
     let mut lead = 0;
 
-    let row_counter = matrix.len();
-    let column_counter = matrix[0].len();
+    let i_counter = matrix.len();
+    let j_counter = matrix[0].len();
 
-    for r in 0..row_counter {
-        if column_counter <= lead {
+    for r in 0..i_counter {
+        if j_counter <= lead {
             break;
         }
 
@@ -84,11 +84,11 @@ pub fn ntm_gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
         while matrix[i][lead] == 0.0 {
             i = i + 1;
 
-            if row_counter == i {
+            if i_counter == i {
                 i = r;
                 lead = lead + 1;
 
-                if column_counter == lead {
+                if j_counter == lead {
                     break;
                 }
             }
@@ -102,16 +102,16 @@ pub fn ntm_gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
         if matrix[r][lead] != 0.0 {
             let divider_ratio = matrix[r][lead];
 
-            for j in 0..column_counter {
+            for j in 0..j_counter {
                 matrix[r][j] = matrix[r][j] / divider_ratio;
             }
         }
 
-        for k in 0..row_counter {
+        for k in 0..i_counter {
             if k != r {
                 let multiplier_ratio = matrix[k][lead];
 
-                for j in 0..column_counter {
+                for j in 0..j_counter {
                     matrix[k][j] = matrix[k][j] - matrix[r][j] * multiplier_ratio;
                 }
             }
@@ -121,13 +121,13 @@ pub fn ntm_gauss_jordan_general(matrix: &mut Vec<Vec<f64>>) {
 }
 
 // Zero Matrix
-pub fn ntm_zero_matrix(rows: usize, columns: usize) -> Vec<Vec<f64>> {
-    let mut matrix = Vec::with_capacity(columns);
+pub fn ntm_zero_matrix(size_i_in: usize, size_j_in: usize) -> Vec<Vec<f64>> {
+    let mut matrix = Vec::with_capacity(size_i_in);
 
-    for _ in 0..rows {
-        let mut vector: Vec<f64> = Vec::with_capacity(rows);
+    for _ in 0..size_i_in {
+        let mut vector: Vec<f64> = Vec::with_capacity(size_j_in);
 
-        for _ in 0..columns {
+        for _ in 0..size_j_in {
             vector.push(0.0);
         }
         matrix.push(vector);

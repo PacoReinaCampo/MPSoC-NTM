@@ -42,25 +42,166 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_inverse(matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-    // Transpose a matrix of any size
-    let mut data_out: Vec<Vec<i32>> = vec![Vec::with_capacity(matrix.len()); matrix[0].len()];
+// Tensor Inversion
+pub fn ntm_tensor_inverse(tensor: &mut Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>>{
+    let length = tensor.len();
 
-    for i in matrix {
-        for j in 0..i.len() {
-            data_out[j].push(i[j]);
+    let mut augmented_tensor = ntm_zero_tensor(length, length, 2*length);
+
+    for i in 0..length {
+        for j in 0.. length {
+            for k in 0.. length {
+                augmented_tensor[i][j][k] = tensor[i][j][k];
+            }
+            augmented_tensor[i][j][j + length] = 1.0;
+        }
+    }
+
+    ntm_gauss_jordan_general(&mut augmented_tensor);
+
+    let mut data_out = ntm_zero_tensor(length, length, length);
+
+    for i in 0..length {
+        for j in 0..length {
+            for k in 0..length {
+                data_out[i][j][k] = augmented_tensor[i][j][k+length];
+            }
         }
     }
     data_out
 }
 
+// Generalised Reduced Row Echelon Form
+pub fn ntm_gauss_jordan_general(tensor: &mut Vec<Vec<Vec<f64>>>) {
+    let mut lead = 0;
+
+    let i_counter = tensor.len();
+    let j_counter = tensor[0].len();
+    let k_counter = tensor[0][0].len();
+
+    for i in 0..i_counter {
+        for r in 0..j_counter {
+            if k_counter <= lead {
+                break;
+            }
+
+            let mut j = r;
+
+            while tensor[i][j][lead] == 0.0 {
+                j = j + 1;
+
+                if j_counter == j {
+                    j = r;
+                    lead = lead + 1;
+
+                    if k_counter == lead {
+                        break;
+                    }
+                }
+            }
+
+            let temporal = tensor[i][j].to_owned();
+
+            tensor[i][j] = tensor[i][r].to_owned();
+            tensor[i][r] = temporal.to_owned();
+
+            if tensor[i][r][lead] != 0.0 {
+                let divider_ratio = tensor[i][r][lead];
+
+                for k in 0..k_counter {
+                    tensor[i][r][k] = tensor[i][r][k] / divider_ratio;
+                }
+            }
+
+            for m in 0..j_counter {
+                if m != r {
+                    let multiplier_ratio = tensor[i][m][lead];
+
+                    for k in 0..k_counter {
+                        tensor[i][m][k] = tensor[i][m][k] - tensor[i][r][k] * multiplier_ratio;
+                    }
+                }
+            }
+            lead = lead + 1;
+        }
+    }
+}
+
+// Zero Tensor
+pub fn ntm_zero_tensor(size_i_in: usize, size_j_in: usize, size_k_in: usize) -> Vec<Vec<Vec<f64>>> {
+    let mut tensor = Vec::with_capacity(size_i_in);
+
+    for _ in 0..size_i_in {
+        let mut matrix = Vec::with_capacity(size_j_in);
+
+        for _ in 0..size_j_in {
+            let mut vector = Vec::with_capacity(size_k_in);
+
+            for _ in 0..size_k_in {
+                vector.push(0.0);
+            }
+            matrix.push(vector);
+        }
+        tensor.push(matrix);
+    }
+    tensor
+}
+
+// Printed Tensor
+pub fn ntm_print_tensor(tensor: &mut Vec<Vec<Vec<f64>>>) {
+    for i in 0..tensor.len(){
+        for j in 0..tensor.len(){
+            println!("{:?}", tensor[i][j]);
+        }
+        println!("\n");
+    }
+}
+
 fn main() {
-    let input0: Vec<Vec<i32>> = vec![vec![1, 0, 1], vec![0, 2, 0], vec![5, 0, 1]];
-    let input1: Vec<Vec<i32>> = vec![vec![3, 4, 2], vec![0, 1, 3], vec![3, 1, 1]];
+    let mut data_in: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![ 0.0, -1.0,  0.0],
+            vec![-1.0,  2.0, -1.0],
+            vec![ 0.0, -1.0,  2.0]
+        ],
+        vec![
+            vec![ 0.0, -1.0,  0.0],
+            vec![-1.0,  2.0, -1.0],
+            vec![ 0.0, -1.0,  2.0]
+        ],
+        vec![
+            vec![ 0.0, -1.0,  0.0],
+            vec![-1.0,  2.0, -1.0],
+            vec![ 0.0, -1.0,  2.0]
+        ]
+    ];
 
-    let output0: Vec<Vec<i32>> = vec![vec![1, 0, 5], vec![0, 2, 0], vec![1, 0, 1]];
-    let output1: Vec<Vec<i32>> = vec![vec![3, 0, 3], vec![4, 1, 1], vec![2, 3, 1]];
+    let data_out: Vec<Vec<Vec<f64>>> = vec![
+        vec![
+            vec![-1.5, -1.0, -0.5],
+            vec![-1.0,  0.0,  0.0],
+            vec![-0.5,  0.0,  0.5]
+        ],
+        vec![
+            vec![-1.5, -1.0, -0.5],
+            vec![-1.0,  0.0,  0.0],
+            vec![-0.5,  0.0,  0.5]
+        ],
+        vec![
+            vec![-1.5, -1.0, -0.5],
+            vec![-1.0,  0.0,  0.0],
+            vec![-0.5,  0.0,  0.5]
+        ]
+    ];
 
-    assert_eq!(ntm_tensor_inverse(input0), output0);
-    assert_eq!(ntm_tensor_inverse(input1), output1);
+    let mut reference = &mut data_in;
+
+    let double_reference = &mut reference;
+
+    println!("\n\nTensor:\n");
+    ntm_print_tensor(double_reference);
+    println!("\nInverse of Tensor:\n");
+    ntm_print_tensor(&mut ntm_tensor_inverse(double_reference));
+
+    assert_eq!(ntm_tensor_inverse(double_reference), data_out);
 }
