@@ -43,9 +43,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
-#include<math.h>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -81,22 +79,4 @@ vector<vector<double>> ntm_matrix_differentiation(vector<vector<double>> data_in
   }
 
   return data_out;
-}
-
-int main() {
-  vector<vector<double>> data_in {
-    { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
-    { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
-    { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 },
-  };
-
-  vector<vector<double>> data_out {
-    { 0.0, -3.1912287733963870,  5.2198861663869350 },
-    { 0.0,  0.9999965052920539,  1.3798854930417228 },
-    { 0.0, -2.0400391227689383, -4.9584048861339040 }
-  };
-
-  assert(ntm_matrix_differentiation(data_in, 1.0, 1.0, 1)==data_out);
-
-  return 0;
 }

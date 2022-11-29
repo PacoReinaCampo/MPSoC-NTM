@@ -43,16 +43,10 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
-#include<cassert>
+
+#include"ntm_arithmetic.hpp"
 
 using namespace std;
-
-class ScalarArithmetic {
-  public:
-    double ntm_scalar_adder(double data_a_in, double data_b_in);
-    double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-    double ntm_scalar_divider(double data_a_in, double data_b_in);
-};
 
 double ScalarArithmetic::ntm_scalar_adder(double data_a_in, double data_b_in) {
   // calculating addition
@@ -67,26 +61,4 @@ double ScalarArithmetic::ntm_scalar_multiplier(double data_a_in, double data_b_i
 double ScalarArithmetic::ntm_scalar_divider(double data_a_in, double data_b_in) {
   // calculating division
   return data_a_in / data_b_in;
-}
-
-int main() {
-
-  ScalarArithmetic Arithmetic;
-
-  double data_a_in = 48.0;
-  double data_b_in = 16.0;
-
-  double addition_data_out = 64.0;
-
-  double multiplication_data_out = 768.0;
-
-  double division_data_out = 3.0;
-
-  assert(Arithmetic.ntm_scalar_adder(data_a_in, data_b_in) == addition_data_out);
-
-  assert(Arithmetic.ntm_scalar_multiplier(data_a_in, data_b_in) == multiplication_data_out);
-
-  assert(Arithmetic.ntm_scalar_divider(data_a_in, data_b_in) == division_data_out);
-
-  return 0;
 }

@@ -45,7 +45,6 @@
 #include<iostream>
 #include<math.h>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -57,17 +56,4 @@ double ntm_scalar_deviation(vector<double> vector, double mean) {
   }
 
   return sqrt(data_out);
-}
-
-int main() {
-  vector<double> data_in_0{3.0, 2.0, 2.0};
-  vector<double> data_in_1{1.0, 2.0, 1.0};
-
-  double data_out_0 = 7.681145747868608;
-  double data_out_1 = 8.679477710861024;
-
-  assert(ntm_scalar_deviation(data_in_0, 10.0)==data_out_0);
-  assert(ntm_scalar_deviation(data_in_1, 10.0)==data_out_1);
-
-  return 0;
 }

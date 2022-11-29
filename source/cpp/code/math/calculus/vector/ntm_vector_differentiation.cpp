@@ -44,7 +44,6 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -66,16 +65,4 @@ vector<double> ntm_vector_differentiation(vector<double> data_in, double length_
   }
 
   return data_out;
-}
-
-int main() {
-  vector<double> data_in{ 6.0, 3.0, 8.0 };
-
-  vector<double> data_out{ 0.0, -3.0, 5.0 };
-
-  double length_in = 1.0;
-
-  assert(ntm_vector_differentiation(data_in, length_in) == data_out);
-
-  return 0;
 }

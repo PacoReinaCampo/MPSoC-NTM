@@ -44,7 +44,6 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -61,25 +60,4 @@ vector<double> ntm_vector_mean(vector<vector<double>> matrix) {
   }
 
   return data_out;
-}
-
-int main() {
-  vector<vector<double>> data_in_0 {
-    {3.0, 1.0, 2.0},
-    {1.0, 2.0, 0.0},
-    {5.0, 3.0, 4.0}
-  };
-  vector<vector<double>> data_in_1 {
-    {1.0, 1.0, 1.0},
-    {1.0, 1.0, 1.0},
-    {1.0, 1.0, 1.0}
-  };
-
-  vector<double> data_out_0{2.0, 1.0, 4.0};
-  vector<double> data_out_1{1.0, 1.0, 1.0};
-
-  assert(ntm_vector_mean(data_in_0)==data_out_0);
-  assert(ntm_vector_mean(data_in_1)==data_out_1);
-
-  return 0;
 }

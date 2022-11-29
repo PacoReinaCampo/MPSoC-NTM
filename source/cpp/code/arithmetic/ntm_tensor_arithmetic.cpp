@@ -44,16 +44,10 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
+
+#include"ntm_arithmetic.hpp"
 
 using namespace std;
-
-class TensorArithmetic {
-  public:
-    vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-    vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-    vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-};
 
 vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
 
@@ -122,106 +116,4 @@ vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_divider(vector<vecto
   }
 
   return data_out;
-}
-
-int main() {
-
-  TensorArithmetic Arithmetic;
-
-  vector<vector<vector<double>>> data_a_in {
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 4.0, 4.0, 4.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 4.0, 4.0, 4.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 4.0, 4.0, 4.0 }
-    }
-  };
-  vector<vector<vector<double>>> data_b_in {
-    {
-      { 1.0, 1.0, 1.0 },
-      { 1.0, 1.0, 1.0 },
-      { 2.0, 2.0, 2.0 }
-    },
-    {
-      { 1.0, 1.0, 1.0 },
-      { 1.0, 1.0, 1.0 },
-      { 2.0, 2.0, 2.0 }
-    },
-    {
-      { 1.0, 1.0, 1.0 },
-      { 1.0, 1.0, 1.0 },
-      { 2.0, 2.0, 2.0 }
-    }
-  };
-
-  vector<vector<vector<double>>> addition_data_out {
-    {
-      { 3.0, 3.0, 3.0 },
-      { 1.0, 1.0, 1.0 },
-      { 6.0, 6.0, 6.0 }
-    },
-    {
-      { 3.0, 3.0, 3.0 },
-      { 1.0, 1.0, 1.0 },
-      { 6.0, 6.0, 6.0 }
-    },
-    {
-      { 3.0, 3.0, 3.0 },
-      { 1.0, 1.0, 1.0 },
-      { 6.0, 6.0, 6.0 }
-    }
-  };
-
-  vector<vector<vector<double>>> multiplication_data_out {
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 8.0, 8.0, 8.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 8.0, 8.0, 8.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 8.0, 8.0, 8.0 }
-    }
-  };
-
-  vector<vector<vector<double>>> division_data_out {
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 2.0, 2.0, 2.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 2.0, 2.0, 2.0 }
-    },
-    {
-      { 2.0, 2.0, 2.0 },
-      { 0.0, 0.0, 0.0 },
-      { 2.0, 2.0, 2.0 }
-    }
-  };
-
-  assert(Arithmetic.ntm_tensor_adder(data_a_in, data_b_in) == addition_data_out);
-
-  assert(Arithmetic.ntm_tensor_multiplier(data_a_in, data_b_in) == multiplication_data_out);
-
-  assert(Arithmetic.ntm_tensor_divider(data_a_in, data_b_in) == division_data_out);
-
-  return 0;
 }

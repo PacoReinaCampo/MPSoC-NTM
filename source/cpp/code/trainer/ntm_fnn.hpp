@@ -47,18 +47,18 @@
 
 using namespace std;
 
-double ntm_scalar_adder(double, double)
-double ntm_scalar_multiplier(double, double)
-double ntm_scalar_divider(double, double)
+double ntm_scalar_adder(double, double);
+double ntm_scalar_multiplier(double, double);
+double ntm_scalar_divider(double, double);
 
-vector<double> ntm_vector_adder(vector<double>, vector<double>)
-vector<double> ntm_vector_multiplier(vector<double>, vector<double>)
-vector<double> ntm_vector_divider(vector<double>, vector<double>)
+vector<double> ntm_vector_adder(vector<double>, vector<double>);
+vector<double> ntm_vector_multiplier(vector<double>, vector<double>);
+vector<double> ntm_vector_divider(vector<double>, vector<double>);
 
-vector<vector<double>> ntm_matrix_adder(vector<vector<double>>, vector<vector<double>>)
-vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>>, vector<vector<double>>)
-vector<vector<double>> ntm_matrix_divider(vector<vector<double>>, vector<vector<double>>)
+vector<vector<double>> ntm_matrix_adder(vector<vector<double>>, vector<vector<double>>);
+vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>>, vector<vector<double>>);
+vector<vector<double>> ntm_matrix_divider(vector<vector<double>>, vector<vector<double>>);
 
-vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>>, vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>>, vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>>, vector<vector<vector<double>>>)
+vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>>, vector<vector<vector<double>>>);

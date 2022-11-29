@@ -45,7 +45,6 @@
 #include<iostream>
 #include<math.h>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -62,14 +61,4 @@ vector<double> ntm_vector_logistic_function(vector<double> data_in) {
   }
 
   return data_out;
-}
-
-int main() {
-  vector<double> data_in{ 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 };
-
-  vector<double> data_out{ 0.9982079678583020, 0.9581688450893644, 0.9997639589554603 };
-
-  assert(ntm_vector_logistic_function(data_in)==data_out);
-
-  return 0;
 }

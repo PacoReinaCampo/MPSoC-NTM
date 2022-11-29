@@ -47,11 +47,11 @@
 
 using namespace std;
 
-double ntm_scalar_logistic_function(double);
-double ntm_scalar_oneplus_function(double);
+double ntm_scalar_logistic_function(double);;
+double ntm_scalar_oneplus_function(double);;
 
-vector<double> ntm_vector_logistic_function(vector<double>)
-vector<double> ntm_vector_oneplus_function(vector<double>)
+vector<double> ntm_vector_logistic_function(vector<double>);
+vector<double> ntm_vector_oneplus_function(vector<double>);
 
-vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>>)
-vector<vector<double>> ntm_matrix_oneplus_function(vector<vector<double>>)
+vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>>);
+vector<vector<double>> ntm_matrix_oneplus_function(vector<vector<double>>);

@@ -44,7 +44,6 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -56,17 +55,4 @@ double ntm_scalar_multiplication(vector<double> data_in) {
   }
 
   return data_out;
-}
-
-int main() {
-  vector<double> data_in_0{3.0, 2.0, 2.0};
-  vector<double> data_in_1{1.0, 0.0, 0.0};
-
-  double data_out_0 = 12.0;
-  double data_out_1 = 0.0;
-
-  assert(ntm_scalar_multiplication(data_in_0)==data_out_0);
-  assert(ntm_scalar_multiplication(data_in_1)==data_out_1);
-
-  return 0;
 }

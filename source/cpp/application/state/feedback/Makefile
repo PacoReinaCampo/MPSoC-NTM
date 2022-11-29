@@ -48,7 +48,9 @@
 #
 ##########################################################################
 
--include Makefile.include
+-include include-arithmetic.txt
+-include include-math.txt
+#-include include-feedback.txt
 
 TARGET=state_feedback
 

@@ -44,17 +44,10 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
+
+#include"ntm_arithmetic.hpp"
 
 using namespace std;
-
-class VectorArithmetic {
-  public:
-    vector<double> ntm_vector_adder(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_multiplier(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_b_in);
-};
-
 
 vector<double> VectorArithmetic::ntm_vector_adder(vector<double> data_a_in, vector<double> data_b_in) {
   // Add two vectors of identical dimensions
@@ -105,26 +98,4 @@ vector<double> VectorArithmetic::ntm_vector_divider(vector<double> data_a_in, ve
   }
 
   return data_out;
-}
-
-int main() {
-
-  VectorArithmetic Arithmetic;
-
-  vector<double> data_a_in{2.0, 0.0, 4.0};
-  vector<double> data_b_in{1.0, 1.0, 2.0};
-
-  vector<double> addition_data_out{3.0, 1.0, 6.0};
-
-  vector<double> multiplication_data_out{2.0, 0.0, 8.0};
-
-  vector<double> division_data_out{2.0, 0.0, 2.0};
-
-  assert(Arithmetic.ntm_vector_adder(data_a_in, data_b_in) == addition_data_out);
-
-  assert(Arithmetic.ntm_vector_multiplier(data_a_in, data_b_in) == multiplication_data_out);
-
-  assert(Arithmetic.ntm_vector_divider(data_a_in, data_b_in) == division_data_out);
-
-  return 0;
 }

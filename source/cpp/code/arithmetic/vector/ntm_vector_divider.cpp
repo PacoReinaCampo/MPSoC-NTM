@@ -44,7 +44,6 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -63,15 +62,4 @@ vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_
   }
 
   return data_out;
-}
-
-int main() {
-  vector<double> data_a_in{2.0, 0.0, 4.0};
-  vector<double> data_b_in{1.0, 1.0, 2.0};
-
-  vector<double> data_out{2.0, 0.0, 2.0};
-
-  assert(ntm_vector_divider(data_a_in, data_b_in)==data_out);
-
-  return 0;
 }

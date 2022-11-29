@@ -47,11 +47,11 @@
 
 using namespace std;
 
-double ntm_scalar_mean(vector<vector<double>>)
-double ntm_scalar_deviation(vector<vector<double>>, double)
+double ntm_scalar_mean(vector<vector<double>>);
+double ntm_scalar_deviation(vector<vector<double>>, double);
 
-vector<double> ntm_vector_mean(vector<vector<double>>)
-vector<double> ntm_vector_deviation(vector<vector<double>>, vector<double> mean)
+vector<double> ntm_vector_mean(vector<vector<double>>);
+vector<double> ntm_vector_deviation(vector<vector<double>>, vector<double>);
 
-vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>>)
-vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>>, vector<vector<double>>)
+vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>>);
+vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>>, vector<vector<double>>);

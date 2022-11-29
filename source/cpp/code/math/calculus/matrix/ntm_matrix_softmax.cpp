@@ -45,7 +45,6 @@
 #include<iostream>
 #include<math.h>
 #include<vector>
-#include<cassert>
 
 using namespace std;
 
@@ -78,22 +77,4 @@ vector<vector<double>> ntm_matrix_softmax(vector<vector<double>> data_in) {
   }
 
   return data_out;
-}
-
-int main() {
-  vector<vector<double>> data_in {
-    { 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 },
-    { 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 },
-    { 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 }
-  };
-
-  vector<vector<double>> data_out {
-    { 0.115673909555040450, 0.004756662822010267, 0.8795694276229492000 },
-    { 0.012658220095684168, 0.034408489418901890, 0.1367547003294767900 },
-    { 0.714653980863293200, 0.092921900422636110, 0.0006526948744619639 }
-  };
-
-  assert(ntm_matrix_softmax(data_in)==data_out);
-
-  return 0;
 }

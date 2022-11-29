@@ -44,16 +44,10 @@
 
 #include<iostream>
 #include<vector>
-#include<cassert>
+
+#include"ntm_arithmetic.hpp"
 
 using namespace std;
-
-class MatrixArithmetic {
-  public:
-    vector<vector<double>> ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-    vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-    vector<vector<double>> ntm_matrix_divider(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-};
 
 vector<vector<double>> MatrixArithmetic::ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
 
@@ -107,46 +101,4 @@ vector<vector<double>> MatrixArithmetic::ntm_matrix_divider(vector<vector<double
   }
 
   return data_out;
-}
-
-int main() {
-
-  MatrixArithmetic Arithmetic;
-
-  vector<vector<double>> data_a_in {
-    { 2.0, 2.0, 2.0 },
-    { 0.0, 0.0, 0.0 },
-    { 4.0, 4.0, 4.0 }
-  };
-  vector<vector<double>> data_b_in {
-    { 1.0, 1.0, 1.0 },
-    { 1.0, 1.0, 1.0 },
-    { 2.0, 2.0, 2.0 }
-  };
-
-  vector<vector<double>> addition_data_out {
-    { 3.0, 3.0, 3.0 },
-    { 1.0, 1.0, 1.0 },
-    { 6.0, 6.0, 6.0 }
-  };
-
-  vector<vector<double>> multiplication_data_out {
-    { 2.0, 2.0, 2.0 },
-    { 0.0, 0.0, 0.0 },
-    { 8.0, 8.0, 8.0 }
-  };
-
-  vector<vector<double>> division_data_out {
-    { 2.0, 2.0, 2.0 },
-    { 0.0, 0.0, 0.0 },
-    { 2.0, 2.0, 2.0 }
-  };
-
-  assert(Arithmetic.ntm_matrix_adder(data_a_in, data_b_in) == addition_data_out);
-
-  assert(Arithmetic.ntm_matrix_multiplier(data_a_in, data_b_in) == multiplication_data_out);
-
-  assert(Arithmetic.ntm_matrix_divider(data_a_in, data_b_in) == division_data_out);
-
-  return 0;
 }

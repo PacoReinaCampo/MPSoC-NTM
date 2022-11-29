@@ -47,14 +47,14 @@
 
 using namespace std;
 
-vector<double> ntm_vector_differentiation(vector<double>, double)
-vector<double> ntm_vector_integration(vector<double>, double)
-vector<double> ntm_vector_softmax(vector<double>)
+vector<double> ntm_vector_differentiation(vector<double>, double);
+vector<double> ntm_vector_integration(vector<double>, double);
+vector<double> ntm_vector_softmax(vector<double>);
 
-vector<vector<double>> ntm_matrix_differentiation(vector<vector<double>>, double, double, int)
-vector<vector<double>> ntm_matrix_integration(vector<vector<double>>, double)
-vector<vector<double>> ntm_matrix_softmax(vector<vector<double>>)
+vector<vector<double>> ntm_matrix_differentiation(vector<vector<double>>, double, double, int);
+vector<vector<double>> ntm_matrix_integration(vector<vector<double>>, double);
+vector<vector<double>> ntm_matrix_softmax(vector<vector<double>>);
 
-vector<vector<vector<double>>> ntm_tensor_differentiation(vector<vector<vector<double>>>, double, double, double, int)
-vector<vector<vector<double>>> ntm_tensor_integration(vector<vector<vector<double>>>, double)
-vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>>)
+vector<vector<vector<double>>> ntm_tensor_differentiation(vector<vector<vector<double>>>, double, double, double, int);
+vector<vector<vector<double>>> ntm_tensor_integration(vector<vector<vector<double>>>, double);
+vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>>);

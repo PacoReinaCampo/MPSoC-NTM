@@ -47,31 +47,31 @@
 
 using namespace std;
 
-double ntm_scalar_multiplication(vector<double>)
-double ntm_scalar_summation(vector<double>)
+double ntm_scalar_multiplication(vector<double>);
+double ntm_scalar_summation(vector<double>);
 
-double ntm_dot_product(vector<double>, vector<double>)
-vector<double> ntm_vector_convolution(vector<double>, vector<double>)
-double ntm_vector_cosine_similarity(vector<double>, vector<double>)
-double ntm_vector_module(vector<double>)
-vector<double> ntm_vector_multiplication(vector<vector<double>>)
-vector<double> ntm_vector_summation(vector<vector<double>>)
+double ntm_dot_product(vector<double>, vector<double>);
+vector<double> ntm_vector_convolution(vector<double>, vector<double>);
+double ntm_vector_cosine_similarity(vector<double>, vector<double>);
+double ntm_vector_module(vector<double>);
+vector<double> ntm_vector_multiplication(vector<vector<double>>);
+vector<double> ntm_vector_summation(vector<vector<double>>);
 
-vector<vector<double>> ntm_matrix_convolution(vector<vector<double>>, vector<vector<double>>)
-vector<vector<double>> ntm_matrix_inverse(vector<vector<double>>)
-vector<vector<double>> ntm_matrix_multiplication(vector<vector<vector<double>>>)
-vector<vector<double>> ntm_matrix_product(vector<vector<double>>, vector<vector<double>>)
-vector<vector<double>> ntm_matrix_summation(vector<vector<vector<double>>>)
-vector<vector<double>> ntm_matrix_transpose(vector<vector<double>>)
-vector<vector<double>> ntm_matrix_vector_convolution(vector<vector<double>>, vector<double>)
-vector<vector<double>> ntm_matrix_vector_product(vector<vector<double>>, vector<double>)
-vector<vector<double>> ntm_transpose_vector_product(vector<double>, vector<double>)
+vector<vector<double>> ntm_matrix_convolution(vector<vector<double>>, vector<vector<double>>);
+vector<vector<double>> ntm_matrix_inverse(vector<vector<double>>);
+vector<vector<double>> ntm_matrix_multiplication(vector<vector<vector<double>>>);
+vector<vector<double>> ntm_matrix_product(vector<vector<double>>, vector<vector<double>>);
+vector<vector<double>> ntm_matrix_summation(vector<vector<vector<double>>>);
+vector<vector<double>> ntm_matrix_transpose(vector<vector<double>>);
+vector<vector<double>> ntm_matrix_vector_convolution(vector<vector<double>>, vector<double>);
+vector<vector<double>> ntm_matrix_vector_product(vector<vector<double>>, vector<double>);
+vector<vector<double>> ntm_transpose_vector_product(vector<double>, vector<double>);
 
-vector<vector<vector<double>>> ntm_tensor_convolution(vector<vector<vector<double>>>, vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_inverse(vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_matrix_convolution(vector<vector<vector<double>>>, vector<vector<double>>)
-vector<vector<vector<double>>> ntm_tensor_matrix_product(vector<vector<vector<double>>>, vector<vector<double>>)
-vector<vector<vector<double>>> ntm_tensor_multiplication(vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_product(vector<vector<vector<double>>>, vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_summation(vector<vector<vector<double>>>)
-vector<vector<vector<double>>> ntm_tensor_transpose(vector<vector<vector<double>>>)
+vector<vector<vector<double>>> ntm_tensor_convolution(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_inverse(vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_matrix_convolution(vector<vector<vector<double>>>, vector<vector<double>>);
+vector<vector<vector<double>>> ntm_tensor_matrix_product(vector<vector<vector<double>>>, vector<vector<double>>);
+vector<vector<vector<double>>> ntm_tensor_multiplication(vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_product(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_summation(vector<vector<vector<double>>>);
+vector<vector<vector<double>>> ntm_tensor_transpose(vector<vector<vector<double>>>);
