@@ -1,15 +1,74 @@
-code
+library
 ├── arithmetic
+│   └── src
+│       ├── matrix
+│       │   └── mod.rs
+│       ├── scalar
+│       │   └── mod.rs
+│       ├── tensor
+│       │   └── mod.rs
+│       └── vector
+│           └── mod.rs
 ├── controller
 │   ├── FNN
+│   │   ├── convolutional
+│   │   └── standard
 │   ├── LSTM
+│   │   ├── convolutional
+│   │   └── standard
 │   └── transformer
+│       ├── components
+│       ├── fnn
+│       ├── functions
+│       ├── inputs
+│       ├── lstm
+│       └── top
 ├── dnc
+│   ├── memory
+│   ├── top
+│   └── trained
 ├── math
 │   ├── algebra
+│   │   └── src
+│   │       ├── matrix
+│   │       ├── scalar
+│   │       ├── tensor
+│   │       └── vector
 │   ├── calculus
+│   │   └── src
+│   │       ├── matrix
+│   │       ├── tensor
+│   │       └── vector
 │   ├── function
+│   │   └── src
+│   │       ├── matrix
+│   │       ├── scalar
+│   │       └── vector
 │   └── statitics
+│       └── src
+│           ├── matrix
+│           │   └── mod.rs
+│           ├── scalar
+│           │   └── mod.rs
+│           └── vector
+│               └── mod.rs
 ├── ntm
+│   ├── memory
+│   ├── read_heads
+│   ├── top
+│   ├── trained
+│   └── write_heads
 ├── state
+│   ├── feedback
+│   ├── outputs
+│   └── top
 └── trainer
+    ├── differentiation
+    ├── FNN
+    └── LSTM
+        ├── activation
+        ├── forget
+        ├── input
+        └── output
+
+64 directories, 7 files

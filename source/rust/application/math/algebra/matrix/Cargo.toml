@@ -1,0 +1,8 @@
+[package]
+name = "math-algebra-matrix"
+version = "0.0.0"
+authors = []
+edition = "2021"
+
+[dependencies]
+math_algebra = { path = "../../../../library/math/algebra" }

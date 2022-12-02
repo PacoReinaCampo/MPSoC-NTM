@@ -44,13 +44,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
-#define SIZE_I_IN 3
-#define SIZE_J_IN 3
-#define SIZE_K_IN 3
+#include "../ntm_arithmetic.h"
 
-double ntm_vector_multiplier(double ***data_a_in, double ***data_b_in) {
+double ntm_tensor_multiplier(double ***data_a_in, double ***data_b_in) {
 
   double ***data_out;
 
@@ -76,78 +73,4 @@ double ntm_vector_multiplier(double ***data_a_in, double ***data_b_in) {
   }
 
   return ***data_out;
-}
-
-int main() {
-
-  double ***data_a_in;
-  double ***data_b_in;
-
-  double ***data_out;
-
-  int i, j;
-
-  data_a_in = (double ***) malloc(SIZE_I_IN*sizeof(int**));
-  data_b_in = (double ***) malloc(SIZE_I_IN*sizeof(int**));
-
-  data_out = (double ***) malloc(SIZE_I_IN*sizeof(int**));
-
-  for (i=0;i<SIZE_I_IN;i++) {
-    data_a_in[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
-    data_b_in[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
-
-    data_out[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
-
-    for (j=0;j<SIZE_J_IN;j++) {
-      data_a_in[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
-      data_b_in[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
-
-      data_out[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
-    }
-  }
-
-  data_a_in[0][0][0] = 2.0; data_a_in[0][1][0] = 2.0; data_a_in[0][2][0] = 2.0;
-  data_a_in[0][0][1] = 0.0; data_a_in[0][1][1] = 0.0; data_a_in[0][2][1] = 0.0;
-  data_a_in[0][0][2] = 4.0; data_a_in[0][1][2] = 4.0; data_a_in[0][2][2] = 4.0;
-
-  data_a_in[1][0][0] = 2.0; data_a_in[1][1][0] = 2.0; data_a_in[1][2][0] = 2.0;
-  data_a_in[1][0][1] = 0.0; data_a_in[1][1][1] = 0.0; data_a_in[1][2][1] = 0.0;
-  data_a_in[1][0][2] = 4.0; data_a_in[1][1][2] = 4.0; data_a_in[1][2][2] = 4.0;
-
-  data_a_in[2][0][0] = 2.0; data_a_in[2][1][0] = 2.0; data_a_in[2][2][0] = 2.0;
-  data_a_in[2][0][1] = 0.0; data_a_in[2][1][1] = 0.0; data_a_in[2][2][1] = 0.0;
-  data_a_in[2][0][2] = 4.0; data_a_in[2][1][2] = 4.0; data_a_in[2][2][2] = 4.0;
-
-  data_b_in[0][0][0] = 1.0; data_b_in[0][1][0] = 1.0; data_b_in[0][2][0] = 1.0;
-  data_b_in[0][0][1] = 1.0; data_b_in[0][1][1] = 1.0; data_b_in[0][2][1] = 1.0;
-  data_b_in[0][0][2] = 2.0; data_b_in[0][1][2] = 2.0; data_b_in[0][2][2] = 2.0;
-
-  data_b_in[1][0][0] = 1.0; data_b_in[1][1][0] = 1.0; data_b_in[1][2][0] = 1.0;
-  data_b_in[1][0][1] = 1.0; data_b_in[1][1][1] = 1.0; data_b_in[1][2][1] = 1.0;
-  data_b_in[1][0][2] = 2.0; data_b_in[1][1][2] = 2.0; data_b_in[1][2][2] = 2.0;
-
-  data_b_in[2][0][0] = 1.0; data_b_in[2][1][0] = 1.0; data_b_in[2][2][0] = 1.0;
-  data_b_in[2][0][1] = 1.0; data_b_in[2][1][1] = 1.0; data_b_in[2][2][1] = 1.0;
-  data_b_in[2][0][2] = 2.0; data_b_in[2][1][2] = 2.0; data_b_in[2][2][2] = 2.0;
-
-  data_out[0][0][0] = 2.0; data_out[0][1][0] = 2.0; data_out[0][2][0] = 2.0;
-  data_out[0][0][1] = 0.0; data_out[0][1][1] = 0.0; data_out[0][2][1] = 0.0;
-  data_out[0][0][2] = 8.0; data_out[0][1][2] = 8.0; data_out[0][2][2] = 8.0;
-
-  data_out[1][0][0] = 2.0; data_out[1][1][0] = 2.0; data_out[1][2][0] = 2.0;
-  data_out[1][0][1] = 0.0; data_out[1][1][1] = 0.0; data_out[1][2][1] = 0.0;
-  data_out[1][0][2] = 8.0; data_out[1][1][2] = 8.0; data_out[1][2][2] = 8.0;
-
-  data_out[2][0][0] = 2.0; data_out[2][1][0] = 2.0; data_out[2][2][0] = 2.0;
-  data_out[2][0][1] = 0.0; data_out[2][1][1] = 0.0; data_out[2][2][1] = 0.0;
-  data_out[2][0][2] = 8.0; data_out[2][1][2] = 8.0; data_out[2][2][2] = 8.0;
-
-  assert(ntm_vector_multiplier(data_a_in, data_b_in)==***data_out);
-
-  free(data_a_in);
-  free(data_b_in);
-
-  free(data_out);
-
-  return 0;
 }

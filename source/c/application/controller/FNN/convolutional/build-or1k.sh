@@ -1,0 +1,4 @@
+export PATH=/opt/or1k-elf-gcc/bin:${PATH}
+
+make clean
+make or1k

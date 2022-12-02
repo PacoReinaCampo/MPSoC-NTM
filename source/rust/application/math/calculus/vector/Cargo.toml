@@ -1,0 +1,8 @@
+[package]
+name = "math-calculus-vector"
+version = "0.0.0"
+authors = []
+edition = "2021"
+
+[dependencies]
+math_calculus = { path = "../../../../library/math/calculus" }

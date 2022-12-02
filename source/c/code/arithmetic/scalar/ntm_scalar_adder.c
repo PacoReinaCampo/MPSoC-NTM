@@ -43,20 +43,11 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
-#include <assert.h>
+#include <stdlib.h>
+
+#include "../ntm_arithmetic.h"
 
 double ntm_scalar_adder(double data_a_in, double data_b_in) {
   // calculating addition
   return data_a_in + data_b_in;
-}
-
-int main() {
-  double data_a_in = 48.0;
-  double data_b_in = 16.0;
-
-  double data_out = 64.0;
-
-  assert(ntm_scalar_adder(data_a_in, data_b_in)==data_out);
-
-  return 0;
 }

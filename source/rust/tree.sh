@@ -1,2 +1,2 @@
-tree -P '*.rs' code > TREE-RUST.txt
-tree --filesfirst -P '*.hrs' code > TREE-PKG.txt
+tree -P '*.rs' library > TREE-RUST.txt
+tree --filesfirst -P 'mod.rs' library > TREE-PKG.txt

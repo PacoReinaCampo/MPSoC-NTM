@@ -44,9 +44,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
-#define SIZE_IN 3
+#include "../ntm_arithmetic.h"
 
 double ntm_vector_divider(double *data_a_in, double *data_b_in) {
 
@@ -62,38 +61,4 @@ double ntm_vector_divider(double *data_a_in, double *data_b_in) {
   }
 
   return *data_out;
-}
-
-int main() {
-
-  double *data_a_in;
-  double *data_b_in;
-
-  double *data_out;
-
-  data_a_in = (double *) malloc(sizeof(int)*SIZE_IN);
-  data_b_in = (double *) malloc(sizeof(int)*SIZE_IN);
-
-  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
-
-  data_a_in[0] = 2.0;
-  data_a_in[1] = 0.0;
-  data_a_in[2] = 4.0;
-
-  data_b_in[0] = 1.0;
-  data_b_in[1] = 1.0;
-  data_b_in[2] = 2.0;
-
-  data_out[0] = 2.0;
-  data_out[1] = 0.0;
-  data_out[2] = 2.0;
-
-  assert(ntm_vector_divider(data_a_in, data_b_in)==*data_out);
-
-  free(data_a_in);
-  free(data_b_in);
-
-  free(data_out);
-
-  return 0;
 }
