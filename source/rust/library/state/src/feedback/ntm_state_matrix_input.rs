@@ -52,7 +52,7 @@ use arithmetic::matrix::ntm_matrix_subtrator::*;
 use math_algebra::matrix::ntm_matrix_inverse::*;
 use math_algebra::matrix::ntm_matrix_product::*;
 
-pub fn Vec<Vec<f64>> ntm_state_matrix_input(data_k_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+pub fn ntm_state_matrix_input(data_k_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
   // Constants
   // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];

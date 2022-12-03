@@ -42,11 +42,23 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-use ntm_math::algebra;
+extern crate arithmetic;
 
-// Package
+extern crate math_algebra;
 
-pub fn Vec<Vec<f64>> ntm_state_vector_output(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, initial_x: Vec<f64>, let k) -> Vec<Vec<f64>> {
+extern crate state;
+
+use arithmetic::matrix::ntm_matrix_adder::*;
+
+use math_algebra::matrix::ntm_matrix_inverse::*;
+use math_algebra::matrix::ntm_matrix_product::*;
+
+use state::feedback::ntm_state_matrix_feedforward::*;
+use state::feedback::ntm_state_matrix_input::*;
+use state::feedback::ntm_state_matrix_output::*;
+use state::feedback::ntm_state_matrix_state::*;
+
+pub fn ntm_state_vector_output(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, initial_x: Vec<f64>, let k) -> Vec<Vec<f64>> {
 
   // Variables
   let mut data_a_out: Vec<Vec<f64>> = vec![];
@@ -63,6 +75,7 @@ pub fn Vec<Vec<f64>> ntm_state_vector_output(data_k_in: Vec<Vec<f64>>, data_a_in
   data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in);
   data_d_out = ntm_state_matrix_feedforward(data_k_in, data_d_in);
 
+  """
   data_y_out = data_c_out*(data_a_out^k)*initial_x;
 
   for j in 0..k {
@@ -70,6 +83,7 @@ pub fn Vec<Vec<f64>> ntm_state_vector_output(data_k_in: Vec<Vec<f64>>, data_a_in
   }
 
   data_y_out = data_y_out + data_d_out*data_u_in(:, k);
+  """
 
   return data_y_out
 }

@@ -31,19 +31,29 @@ library
 │   ├── algebra
 │   │   └── src
 │   │       ├── matrix
+│   │       │   └── mod.rs
 │   │       ├── scalar
+│   │       │   └── mod.rs
 │   │       ├── tensor
+│   │       │   └── mod.rs
 │   │       └── vector
+│   │           └── mod.rs
 │   ├── calculus
 │   │   └── src
 │   │       ├── matrix
+│   │       │   └── mod.rs
 │   │       ├── tensor
+│   │       │   └── mod.rs
 │   │       └── vector
+│   │           └── mod.rs
 │   ├── function
 │   │   └── src
 │   │       ├── matrix
+│   │       │   └── mod.rs
 │   │       ├── scalar
+│   │       │   └── mod.rs
 │   │       └── vector
+│   │           └── mod.rs
 │   └── statitics
 │       └── src
 │           ├── matrix
@@ -59,9 +69,13 @@ library
 │   ├── trained
 │   └── write_heads
 ├── state
-│   ├── feedback
-│   ├── outputs
-│   └── top
+│   └── src
+│       ├── feedback
+│       │   └── mod.rs
+│       ├── outputs
+│       │   └── mod.rs
+│       └── top
+│           └── mod.rs
 └── trainer
     ├── differentiation
     ├── FNN
@@ -71,4 +85,4 @@ library
         ├── input
         └── output
 
-64 directories, 7 files
+65 directories, 20 files

@@ -42,11 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-use ntm_math::algebra;
+extern crate state;
 
-// Package
+use state::outputs::ntm_state_vector_output::*;
+use state::outputs::ntm_state_vector_state::*;
 
-pub fn Vec<Vec<f64>> ntm_state_top(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, initial_x: Vec<f64>, f64 k) -> Vec<Vec<f64>>, Vec<Vec<f64>> {
+pub fn ntm_state_top(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>, data_u_in: Vec<Vec<f64>>, initial_x: Vec<f64>, f64 k) -> Vec<Vec<f64>>, Vec<Vec<f64>> {
 
   // Variables
   let mut data_x_out : Vec<Vec<f64>;

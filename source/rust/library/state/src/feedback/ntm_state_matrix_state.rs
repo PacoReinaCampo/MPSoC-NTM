@@ -55,7 +55,7 @@ use ntm_math::algebra;
 
 // Package
 
-pub fn Vec<Vec<f64>> ntm_state_matrix_state(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+pub fn ntm_state_matrix_state(data_k_in: Vec<Vec<f64>>, data_a_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_c_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
   // Constants
   // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];

@@ -7,7 +7,7 @@ members = [
 "library/math/function",
 "library/math/statitics",
 
-#"library/state",
+"library/state",
 
 "application/arithmetic/scalar",
 "application/arithmetic/vector",
