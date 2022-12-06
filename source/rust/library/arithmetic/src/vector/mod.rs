@@ -46,3 +46,5 @@ pub mod ntm_vector_adder;
 pub mod ntm_vector_subtractor;
 pub mod ntm_vector_multiplier;
 pub mod ntm_vector_divider;
+
+pub mod ntm_vector_arithmetic;

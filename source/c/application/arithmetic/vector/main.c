@@ -46,7 +46,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "../../../code/arithmetic/ntm_arithmetic.h"
+#include "../../../library/arithmetic/ntm_arithmetic.h"
 
 int main() {
 

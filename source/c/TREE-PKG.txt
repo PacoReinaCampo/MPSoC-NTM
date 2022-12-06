@@ -1,4 +1,4 @@
-code
+library
 ├── arithmetic
 │   ├── ntm_arithmetic.h
 │   ├── matrix

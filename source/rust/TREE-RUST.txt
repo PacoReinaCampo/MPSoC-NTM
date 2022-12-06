@@ -5,28 +5,28 @@ library
 │       ├── matrix
 │       │   ├── mod.rs
 │       │   ├── ntm_matrix_adder.rs
+│       │   ├── ntm_matrix_arithmetic.rs
 │       │   ├── ntm_matrix_divider.rs
 │       │   ├── ntm_matrix_multiplier.rs
 │       │   └── ntm_matrix_subtractor.rs
-│       ├── ntm_matrix_arithmetic.rs
-│       ├── ntm_scalar_arithmetic.rs
-│       ├── ntm_tensor_arithmetic.rs
-│       ├── ntm_vector_arithmetic.rs
 │       ├── scalar
 │       │   ├── mod.rs
 │       │   ├── ntm_scalar_adder.rs
+│       │   ├── ntm_scalar_arithmetic.rs
 │       │   ├── ntm_scalar_divider.rs
 │       │   ├── ntm_scalar_multiplier.rs
 │       │   └── ntm_scalar_subtractor.rs
 │       ├── tensor
 │       │   ├── mod.rs
 │       │   ├── ntm_tensor_adder.rs
+│       │   ├── ntm_tensor_arithmetic.rs
 │       │   ├── ntm_tensor_divider.rs
 │       │   ├── ntm_tensor_multiplier.rs
 │       │   └── ntm_tensor_subtractor.rs
 │       └── vector
 │           ├── mod.rs
 │           ├── ntm_vector_adder.rs
+│           ├── ntm_vector_arithmetic.rs
 │           ├── ntm_vector_divider.rs
 │           ├── ntm_vector_multiplier.rs
 │           └── ntm_vector_subtractor.rs
@@ -120,6 +120,7 @@ library
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_matrix_convolution.rs
 │   │       │   ├── ntm_matrix_inverse.rs
+│   │       │   ├── ntm_matrix_math_algebra.rs
 │   │       │   ├── ntm_matrix_multiplication.rs
 │   │       │   ├── ntm_matrix_product.rs
 │   │       │   ├── ntm_matrix_summation.rs
@@ -127,18 +128,16 @@ library
 │   │       │   ├── ntm_matrix_vector_convolution.rs
 │   │       │   ├── ntm_matrix_vector_product.rs
 │   │       │   └── ntm_transpose_vector_product.rs
-│   │       ├── ntm_matrix_math_algebra.rs
-│   │       ├── ntm_scalar_math_algebra.rs
-│   │       ├── ntm_tensor_math_algebra.rs
-│   │       ├── ntm_vector_math_algebra.rs
 │   │       ├── scalar
 │   │       │   ├── mod.rs
+│   │       │   ├── ntm_scalar_math_algebra.rs
 │   │       │   ├── ntm_scalar_multiplication.rs
 │   │       │   └── ntm_scalar_summation.rs
 │   │       ├── tensor
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_tensor_convolution.rs
 │   │       │   ├── ntm_tensor_inverse.rs
+│   │       │   ├── ntm_tensor_math_algebra.rs
 │   │       │   ├── ntm_tensor_matrix_convolution.rs
 │   │       │   ├── ntm_tensor_matrix_product.rs
 │   │       │   ├── ntm_tensor_multiplication.rs
@@ -150,6 +149,7 @@ library
 │   │           ├── ntm_dot_product.rs
 │   │           ├── ntm_vector_convolution.rs
 │   │           ├── ntm_vector_cosine_similarity.rs
+│   │           ├── ntm_vector_math_algebra.rs
 │   │           ├── ntm_vector_module.rs
 │   │           ├── ntm_vector_multiplication.rs
 │   │           └── ntm_vector_summation.rs
@@ -160,19 +160,19 @@ library
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_matrix_differentiation.rs
 │   │       │   ├── ntm_matrix_integration.rs
+│   │       │   ├── ntm_matrix_math_calculus.rs
 │   │       │   └── ntm_matrix_softmax.rs
-│   │       ├── ntm_matrix_math_calculus.rs
-│   │       ├── ntm_tensor_math_calculus.rs
-│   │       ├── ntm_vector_math_calculus.rs
 │   │       ├── tensor
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_tensor_differentiation.rs
 │   │       │   ├── ntm_tensor_integration.rs
+│   │       │   ├── ntm_tensor_math_calculus.rs
 │   │       │   └── ntm_tensor_softmax.rs
 │   │       └── vector
 │   │           ├── mod.rs
 │   │           ├── ntm_vector_differentiation.rs
 │   │           ├── ntm_vector_integration.rs
+│   │           ├── ntm_vector_math_calculus.rs
 │   │           └── ntm_vector_softmax.rs
 │   ├── function
 │   │   └── src
@@ -180,17 +180,17 @@ library
 │   │       ├── matrix
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_matrix_logistic_function.rs
+│   │       │   ├── ntm_matrix_math_function.rs
 │   │       │   └── ntm_matrix_oneplus_function.rs
-│   │       ├── ntm_matrix_math_function.rs
-│   │       ├── ntm_scalar_math_function.rs
-│   │       ├── ntm_vector_math_function.rs
 │   │       ├── scalar
 │   │       │   ├── mod.rs
 │   │       │   ├── ntm_scalar_logistic_function.rs
+│   │       │   ├── ntm_scalar_math_function.rs
 │   │       │   └── ntm_scalar_oneplus_function.rs
 │   │       └── vector
 │   │           ├── mod.rs
 │   │           ├── ntm_vector_logistic_function.rs
+│   │           ├── ntm_vector_math_function.rs
 │   │           └── ntm_vector_oneplus_function.rs
 │   └── statitics
 │       └── src
@@ -198,17 +198,17 @@ library
 │           ├── matrix
 │           │   ├── mod.rs
 │           │   ├── ntm_matrix_deviation.rs
+│           │   ├── ntm_matrix_math_statitics.rs
 │           │   └── ntm_matrix_mean.rs
-│           ├── ntm_matrix_math_statitics.rs
-│           ├── ntm_scalar_math_statitics.rs
-│           ├── ntm_vector_math_statitics.rs
 │           ├── scalar
 │           │   ├── mod.rs
 │           │   ├── ntm_scalar_deviation.rs
+│           │   ├── ntm_scalar_math_statitics.rs
 │           │   └── ntm_scalar_mean.rs
 │           └── vector
 │               ├── mod.rs
 │               ├── ntm_vector_deviation.rs
+│               ├── ntm_vector_math_statitics.rs
 │               └── ntm_vector_mean.rs
 ├── ntm
 │   ├── memory

@@ -43,6 +43,6 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub mod ntm_state_matrix_feedforward;
-pub mod ntm_state_matrix_input;
-pub mod ntm_state_matrix_output;
-pub mod ntm_state_matrix_state;
+//pub mod ntm_state_matrix_input;
+//pub mod ntm_state_matrix_output;
+//pub mod ntm_state_matrix_state;

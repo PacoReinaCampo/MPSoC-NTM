@@ -48,6 +48,8 @@ use arithmetic::vector::ntm_vector_adder::*;
 use arithmetic::vector::ntm_vector_multiplier::*;
 use arithmetic::vector::ntm_vector_divider::*;
 
+use arithmetic::vector::ntm_vector_arithmetic::*;
+
 fn main() {
     let mut data_a_in: Vec<f64>;
     let mut data_b_in: Vec<f64>;
@@ -74,4 +76,32 @@ fn main() {
     data_out = vec![2.0, 0.0, 2.0];
 
     assert_eq!(ntm_vector_divider(data_a_in, data_b_in), data_out);
+
+
+    let addition = VectorArithmetic {
+        data_a_in: vec![2.0, 0.0, 4.0],
+        data_b_in: vec![1.0, 1.0, 2.0],
+
+        data_out: vec![3.0, 1.0, 6.0]
+    };
+
+    assert_eq!(addition.ntm_vector_adder(), addition.data_out);
+
+    let multiplication = VectorArithmetic {
+        data_a_in: vec![2.0, 0.0, 4.0],
+        data_b_in: vec![1.0, 1.0, 2.0],
+
+        data_out: vec![2.0, 0.0, 8.0]
+    };
+
+    assert_eq!(multiplication.ntm_vector_multiplier(), multiplication.data_out);
+
+    let division = VectorArithmetic {
+        data_a_in: vec![2.0, 0.0, 4.0],
+        data_b_in: vec![1.0, 1.0, 2.0],
+
+        data_out: vec![2.0, 0.0, 2.0]
+    };
+
+    assert_eq!(division.ntm_vector_divider(), division.data_out);
 }

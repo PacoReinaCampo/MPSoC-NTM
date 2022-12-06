@@ -46,3 +46,5 @@ pub mod ntm_tensor_adder;
 pub mod ntm_tensor_subtractor;
 pub mod ntm_tensor_multiplier;
 pub mod ntm_tensor_divider;
+
+pub mod ntm_tensor_arithmetic;

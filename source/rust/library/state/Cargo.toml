@@ -5,3 +5,5 @@ authors = []
 edition = "2021"
 
 [dependencies]
+arithmetic = { path = "../../library/arithmetic" }
+math_algebra = { path = "../../library/math/algebra" }

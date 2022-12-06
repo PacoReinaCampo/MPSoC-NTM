@@ -48,6 +48,8 @@ use arithmetic::tensor::ntm_tensor_adder::*;
 use arithmetic::tensor::ntm_tensor_multiplier::*;
 use arithmetic::tensor::ntm_tensor_divider::*;
 
+use arithmetic::tensor::ntm_tensor_arithmetic::*;
+
 fn main() {
     let mut data_a_in: Vec<Vec<Vec<f64>>>;
     let mut data_b_in: Vec<Vec<Vec<f64>>>;
@@ -218,4 +220,176 @@ fn main() {
     ];
 
     assert_eq!(ntm_tensor_divider(data_a_in, data_b_in), data_out);
+
+
+    let addition = TensorArithmetic {
+        data_a_in: vec![
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ]
+        ],
+        data_b_in: vec![
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ]
+        ],
+
+        data_out: vec![
+            vec![
+                vec![3.0, 3.0, 3.0],
+                vec![1.0, 1.0, 1.0],
+                vec![6.0, 6.0, 6.0]
+            ],
+            vec![
+                vec![3.0, 3.0, 3.0],
+                vec![1.0, 1.0, 1.0],
+                vec![6.0, 6.0, 6.0]
+            ],
+            vec![
+                vec![3.0, 3.0, 3.0],
+                vec![1.0, 1.0, 1.0],
+                vec![6.0, 6.0, 6.0]
+            ]
+        ]
+    };
+
+    assert_eq!(addition.ntm_tensor_adder(), addition.data_out);
+
+    let multiplication = TensorArithmetic {
+        data_a_in: vec![
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ]
+        ],
+        data_b_in: vec![
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ]
+        ],
+
+        data_out: vec![
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![8.0, 8.0, 8.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![8.0, 8.0, 8.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![8.0, 8.0, 8.0]
+            ]
+        ]
+    };
+
+    assert_eq!(multiplication.ntm_tensor_multiplier(), multiplication.data_out);
+
+    let division = TensorArithmetic {
+        data_a_in: vec![
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![4.0, 4.0, 4.0]
+            ]
+        ],
+        data_b_in: vec![
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![1.0, 1.0, 1.0],
+                vec![1.0, 1.0, 1.0],
+                vec![2.0, 2.0, 2.0]
+            ]
+        ],
+
+        data_out: vec![
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![2.0, 2.0, 2.0]
+            ],
+            vec![
+                vec![2.0, 2.0, 2.0],
+                vec![0.0, 0.0, 0.0],
+                vec![2.0, 2.0, 2.0]
+            ]
+        ]
+    };
+
+    assert_eq!(division.ntm_tensor_divider(), division.data_out);
 }

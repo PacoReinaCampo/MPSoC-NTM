@@ -48,6 +48,8 @@ use arithmetic::matrix::ntm_matrix_adder::*;
 use arithmetic::matrix::ntm_matrix_multiplier::*;
 use arithmetic::matrix::ntm_matrix_divider::*;
 
+use arithmetic::matrix::ntm_matrix_arithmetic::*;
+
 fn main() {
     let mut data_a_in: Vec<Vec<f64>>;
     let mut data_b_in: Vec<Vec<f64>>;
@@ -110,4 +112,68 @@ fn main() {
     ];
 
     assert_eq!(ntm_matrix_divider(data_a_in, data_b_in), data_out);
+
+
+    let addition = MatrixArithmetic {
+        data_a_in: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        data_b_in: vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+
+        data_out: vec![
+            vec![3.0, 3.0, 3.0],
+            vec![1.0, 1.0, 1.0],
+            vec![6.0, 6.0, 6.0]
+        ]
+    };
+
+    assert_eq!(addition.ntm_matrix_adder(), addition.data_out);
+
+    let multiplication = MatrixArithmetic {
+        data_a_in: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        data_b_in: vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+
+        data_out: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![8.0, 8.0, 8.0]
+        ]
+    };
+
+    assert_eq!(multiplication.ntm_matrix_multiplier(), multiplication.data_out);
+
+    let division = MatrixArithmetic {
+        data_a_in: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        data_b_in: vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+
+        data_out: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![2.0, 2.0, 2.0]
+        ]
+    };
+
+    assert_eq!(division.ntm_matrix_divider(), division.data_out);
 }

@@ -52,6 +52,30 @@ use arithmetic::matrix::ntm_matrix_subtrator::*;
 use math_algebra::matrix::ntm_matrix_inverse::*;
 use math_algebra::matrix::ntm_matrix_product::*;
 
+pub fn ntm_matrix_eye(SIZE_I_IN: usize, SIZE_J_IN: usize) -> Vec<Vec<f64>> {
+    // Eye Matrix
+    let mut data_out: Vec<Vec<f64>> = vec![];
+
+    for i in 0..SIZE_I_IN {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..SIZE_J_IN {
+            let temporal;
+
+            if i == j {
+                temporal = 1.0;
+            }
+            else {
+                temporal = 0.0;
+            }
+
+            vector.push(temporal);
+        }
+        data_out.push(vector);
+    }
+    data_out
+}
+
 pub fn ntm_state_matrix_input(data_k_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
   // Constants
@@ -62,9 +86,9 @@ pub fn ntm_state_matrix_input(data_k_in: Vec<Vec<f64>>, data_b_in: Vec<Vec<f64>>
   let SIZE_D_J_IN = data_d_in[0].len();
 
   // Variables
-  let mut matrix_operation_int: Vec<Vec<f64>> = vec![];
+  let mut matrix_operation_int: Vec<Vec<f64>>;
 
-  let mut data_b_out: Vec<Vec<f64>> = vec![];
+  let data_b_out: Vec<Vec<f64>>;
 
   // Body
   // b = B·(I-K·inv(I + D·K)·D)

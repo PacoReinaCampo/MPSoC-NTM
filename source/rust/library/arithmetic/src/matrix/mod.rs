@@ -46,3 +46,5 @@ pub mod ntm_matrix_adder;
 pub mod ntm_matrix_subtractor;
 pub mod ntm_matrix_multiplier;
 pub mod ntm_matrix_divider;
+
+pub mod ntm_matrix_arithmetic;

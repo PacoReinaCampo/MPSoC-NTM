@@ -48,6 +48,8 @@ use arithmetic::scalar::ntm_scalar_adder::*;
 use arithmetic::scalar::ntm_scalar_multiplier::*;
 use arithmetic::scalar::ntm_scalar_divider::*;
 
+use arithmetic::scalar::ntm_scalar_arithmetic::*;
+
 fn main() {
     let mut data_a_in: f64;
     let mut data_b_in: f64;
@@ -74,4 +76,32 @@ fn main() {
     data_out = 3.0;
 
     assert_eq!(ntm_scalar_divider(data_a_in, data_b_in), data_out);
+
+
+    let addition = ScalarArithmetic {
+        data_a_in: 48.0,
+        data_b_in: 16.0,
+
+        data_out: 64.0
+    };
+
+    assert_eq!(addition.ntm_scalar_adder(), addition.data_out);
+
+    let multiplication = ScalarArithmetic {
+        data_a_in: 48.0,
+        data_b_in: 16.0,
+
+        data_out: 768.0
+    };
+
+    assert_eq!(multiplication.ntm_scalar_multiplier(), multiplication.data_out);
+
+    let division = ScalarArithmetic {
+        data_a_in: 48.0,
+        data_b_in: 16.0,
+
+        data_out: 3.0
+    };
+
+    assert_eq!(division.ntm_scalar_divider(), division.data_out);
 }

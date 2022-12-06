@@ -46,7 +46,7 @@
 #include<vector>
 #include<cassert>
 
-#include"../../../code/arithmetic/ntm_arithmetic.hpp"
+#include"../../../library/arithmetic/ntm_arithmetic.hpp"
 
 using namespace std;
 

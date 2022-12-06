@@ -1,9 +1,13 @@
-code
+library
 ├── arithmetic
 │   ├── matrix
 │   │   ├── ntm_matrix_adder.go
 │   │   ├── ntm_matrix_divider.go
 │   │   └── ntm_matrix_multiplier.go
+│   ├── ntm_matrix_arithmetic.go
+│   ├── ntm_scalar_arithmetic.go
+│   ├── ntm_tensor_arithmetic.go
+│   ├── ntm_vector_arithmetic.go
 │   ├── scalar
 │   │   ├── ntm_scalar_adder.go
 │   │   ├── ntm_scalar_divider.go
@@ -39,6 +43,9 @@ code
 │   │       ├── ntm_input_gate_vector.go
 │   │       ├── ntm_output_gate_vector.go
 │   │       └── ntm_state_gate_vector.go
+│   ├── ntm_fnn_controller.go
+│   ├── ntm_lstm_controller.go
+│   ├── ntm_transformer_controller.go
 │   └── transformer
 │       ├── components
 │       │   ├── ntm_masked_multi_head_attention.go
@@ -68,6 +75,7 @@ code
 │           ├── ntm_decoder.go
 │           └── ntm_encoder.go
 ├── dnc
+│   ├── dnc.go
 │   ├── memory
 │   │   ├── dnc_addressing.go
 │   │   ├── dnc_allocation_weighting.go
@@ -106,6 +114,10 @@ code
 │   │   │   ├── ntm_matrix_vector_convolution.go
 │   │   │   ├── ntm_matrix_vector_product.go
 │   │   │   └── ntm_transpose_vector_product.go
+│   │   ├── ntm_matrix_math_algebra.go
+│   │   ├── ntm_scalar_math_algebra.go
+│   │   ├── ntm_tensor_math_algebra.go
+│   │   ├── ntm_vector_math_algebra.go
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_multiplication.go
 │   │   │   └── ntm_scalar_summation.go
@@ -130,6 +142,9 @@ code
 │   │   │   ├── ntm_matrix_differentiation.go
 │   │   │   ├── ntm_matrix_integration.go
 │   │   │   └── ntm_matrix_softmax.go
+│   │   ├── ntm_matrix_math_calculus.go
+│   │   ├── ntm_tensor_math_calculus.go
+│   │   ├── ntm_vector_math_calculus.go
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_differentiation.go
 │   │   │   ├── ntm_tensor_integration.go
@@ -142,6 +157,9 @@ code
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_logistic_function.go
 │   │   │   └── ntm_matrix_oneplus_function.go
+│   │   ├── ntm_matrix_math_function.go
+│   │   ├── ntm_scalar_math_function.go
+│   │   ├── ntm_vector_math_function.go
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_logistic_function.go
 │   │   │   └── ntm_scalar_oneplus_function.go
@@ -152,6 +170,9 @@ code
 │       ├── matrix
 │       │   ├── ntm_matrix_deviation.go
 │       │   └── ntm_matrix_mean.go
+│       ├── ntm_matrix_math_statitics.go
+│       ├── ntm_scalar_math_statitics.go
+│       ├── ntm_vector_math_statitics.go
 │       ├── scalar
 │       │   ├── ntm_scalar_deviation.go
 │       │   └── ntm_scalar_mean.go
@@ -163,6 +184,7 @@ code
 │   │   ├── ntm_addressing.go
 │   │   ├── ntm_matrix_content_based_addressing.go
 │   │   └── ntm_vector_content_based_addressing.go
+│   ├── ntm.go
 │   ├── read_heads
 │   │   └── ntm_reading.go
 │   ├── top
@@ -182,6 +204,7 @@ code
 │   │   ├── ntm_state_matrix_input.go
 │   │   ├── ntm_state_matrix_output.go
 │   │   └── ntm_state_matrix_state.go
+│   ├── ntm_state.go
 │   ├── outputs
 │   │   ├── ntm_state_vector_output.go
 │   │   └── ntm_state_vector_state.go
@@ -199,38 +222,40 @@ code
     │   ├── ntm_fnn_u_trainer.go
     │   ├── ntm_fnn_v_trainer.go
     │   └── ntm_fnn_w_trainer.go
-    └── LSTM
-        ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.go
-        │   ├── ntm_lstm_activation_d_trainer.go
-        │   ├── ntm_lstm_activation_k_trainer.go
-        │   ├── ntm_lstm_activation_trainer.go
-        │   ├── ntm_lstm_activation_u_trainer.go
-        │   ├── ntm_lstm_activation_v_trainer.go
-        │   └── ntm_lstm_activation_w_trainer.go
-        ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.go
-        │   ├── ntm_lstm_forget_d_trainer.go
-        │   ├── ntm_lstm_forget_k_trainer.go
-        │   ├── ntm_lstm_forget_trainer.go
-        │   ├── ntm_lstm_forget_u_trainer.go
-        │   ├── ntm_lstm_forget_v_trainer.go
-        │   └── ntm_lstm_forget_w_trainer.go
-        ├── input
-        │   ├── ntm_lstm_input_b_trainer.go
-        │   ├── ntm_lstm_input_d_trainer.go
-        │   ├── ntm_lstm_input_k_trainer.go
-        │   ├── ntm_lstm_input_trainer.go
-        │   ├── ntm_lstm_input_u_trainer.go
-        │   ├── ntm_lstm_input_v_trainer.go
-        │   └── ntm_lstm_input_w_trainer.go
-        └── output
-            ├── ntm_lstm_output_b_trainer.go
-            ├── ntm_lstm_output_d_trainer.go
-            ├── ntm_lstm_output_k_trainer.go
-            ├── ntm_lstm_output_trainer.go
-            ├── ntm_lstm_output_u_trainer.go
-            ├── ntm_lstm_output_v_trainer.go
-            └── ntm_lstm_output_w_trainer.go
+    ├── LSTM
+    │   ├── activation
+    │   │   ├── ntm_lstm_activation_b_trainer.go
+    │   │   ├── ntm_lstm_activation_d_trainer.go
+    │   │   ├── ntm_lstm_activation_k_trainer.go
+    │   │   ├── ntm_lstm_activation_trainer.go
+    │   │   ├── ntm_lstm_activation_u_trainer.go
+    │   │   ├── ntm_lstm_activation_v_trainer.go
+    │   │   └── ntm_lstm_activation_w_trainer.go
+    │   ├── forget
+    │   │   ├── ntm_lstm_forget_b_trainer.go
+    │   │   ├── ntm_lstm_forget_d_trainer.go
+    │   │   ├── ntm_lstm_forget_k_trainer.go
+    │   │   ├── ntm_lstm_forget_trainer.go
+    │   │   ├── ntm_lstm_forget_u_trainer.go
+    │   │   ├── ntm_lstm_forget_v_trainer.go
+    │   │   └── ntm_lstm_forget_w_trainer.go
+    │   ├── input
+    │   │   ├── ntm_lstm_input_b_trainer.go
+    │   │   ├── ntm_lstm_input_d_trainer.go
+    │   │   ├── ntm_lstm_input_k_trainer.go
+    │   │   ├── ntm_lstm_input_trainer.go
+    │   │   ├── ntm_lstm_input_u_trainer.go
+    │   │   ├── ntm_lstm_input_v_trainer.go
+    │   │   └── ntm_lstm_input_w_trainer.go
+    │   └── output
+    │       ├── ntm_lstm_output_b_trainer.go
+    │       ├── ntm_lstm_output_d_trainer.go
+    │       ├── ntm_lstm_output_k_trainer.go
+    │       ├── ntm_lstm_output_trainer.go
+    │       ├── ntm_lstm_output_u_trainer.go
+    │       ├── ntm_lstm_output_v_trainer.go
+    │       └── ntm_lstm_output_w_trainer.go
+    ├── ntm_fnn.go
+    └── ntm_lstm.go
 
-59 directories, 174 files
+59 directories, 199 files

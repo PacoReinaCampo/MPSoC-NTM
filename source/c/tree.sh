@@ -1,2 +1,2 @@
-tree -P '*.c' code > TREE-C.txt
-tree --filesfirst -P '*.h' code > TREE-PKG.txt
+tree -P '*.c' library > TREE-C.txt
+tree --filesfirst -P '*.h' library > TREE-PKG.txt

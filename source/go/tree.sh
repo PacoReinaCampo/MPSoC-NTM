@@ -1,2 +1,2 @@
-tree -P '*.go' code > TREE-GO.txt
-tree --filesfirst -P '*.hgo' code > TREE-PKG.txt
+tree -P '*.go' library > TREE-GO.txt
+tree --filesfirst -P '*.hgo' library > TREE-PKG.txt

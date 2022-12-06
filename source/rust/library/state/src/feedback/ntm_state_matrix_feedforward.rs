@@ -51,29 +51,57 @@ use arithmetic::matrix::ntm_matrix_adder::*;
 use math_algebra::matrix::ntm_matrix_inverse::*;
 use math_algebra::matrix::ntm_matrix_product::*;
 
+pub fn ntm_matrix_eye(SIZE_I_IN: usize, SIZE_J_IN: usize) -> Vec<Vec<f64>> {
+    // Eye Matrix
+    let mut data_out: Vec<Vec<f64>> = vec![];
+
+    for i in 0..SIZE_I_IN {
+        let mut vector: Vec<f64> = vec![];
+
+        for j in 0..SIZE_J_IN {
+            let temporal;
+
+            if i == j {
+                temporal = 1.0;
+            }
+            else {
+                temporal = 0.0;
+            }
+
+            vector.push(temporal);
+        }
+        data_out.push(vector);
+    }
+    data_out
+}
+
 pub fn ntm_state_matrix_feedforward(data_k_in: Vec<Vec<f64>>, data_d_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
-  // Constants
-  // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
-  // SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+    // Constants
+    // SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+    // SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 
-  let SIZE_D_I_IN = data_d_in.len();
-  let SIZE_D_J_IN = data_d_in[0].len();
+    let SIZE_D_I_IN = data_d_in.len();
+    let SIZE_D_J_IN = data_d_in[0].len();
 
-  // Variables
-  let mut matrix_operation_int: Vec<Vec<f64>> = vec![];
+    // Variables
+    let mut matrix_operation_int: Vec<Vec<f64>>;
 
-  let mut data_d_out: Vec<Vec<f64>> = vec![];
+    let data_d_out: Vec<Vec<f64>>;
  
-  // Body
-  // d = inv(I + D·K)·D
-  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in);
+    // Body
+    // d = inv(I + D·K)·D
+    matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in);
 
-  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);
+    matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);
 
-  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int);
+    let mut reference = &mut matrix_operation_int;
 
-  data_d_out = ntm_matrix_product(matrix_operation_int, data_d_in);
+    let double_reference = &mut reference;
 
-  return data_d_out
+    matrix_operation_int = ntm_matrix_inverse(double_reference);
+
+    data_d_out = ntm_matrix_product(matrix_operation_int, data_d_in);
+
+    return data_d_out
 }
