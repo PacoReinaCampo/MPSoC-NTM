@@ -56,22 +56,10 @@ func ntm_vector_adder(data_a_in []float64, data_b_in []float64) []float64 {
   return data_out
 }
 
-func ntm_vector_substracter(data_a_in []float64, data_b_in []float64) []float64 {
+func ntm_vector_substractor(data_a_in []float64, data_b_in []float64) []float64 {
   data_out := make([]float64, len(data_a_in))
   for i := range data_a_in {
     data_out = append(data_out, data_a_in[i] - data_b_in[i])
   }
   return data_out
-}
-
-func main() {
-
-  var data_a_in = []float64 { 2.0, 0.0, 4.0 }
-  var data_b_in = []float64 { 1.0, 1.0, 2.0 }
-
-  fmt.Println("data_a_in:", data_a_in)
-  fmt.Println("data_b_in:", data_b_in)
-
-  fmt.Println("adder: data_a_in + data_b_in: ", ntm_vector_adder(data_a_in, data_b_in))
-  fmt.Println("substracter: data_a_in - data_b_in: ", ntm_vector_substracter(data_a_in, data_b_in))
 }

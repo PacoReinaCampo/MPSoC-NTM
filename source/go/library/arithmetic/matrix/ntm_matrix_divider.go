@@ -57,22 +57,3 @@ func ntm_matrix_divider(data_a_in [][]float64, data_b_in [][]float64) [][]float6
   }
   return data_out
 }
-
-func main() {
-
-  var data_a_in = [][]float64 {
-    { 2.0, 2.0, 2.0 },
-    { 0.0, 0.0, 0.0 },
-    { 4.0, 4.0, 4.0 },
-  }
-  var data_b_in = [][]float64 {
-    { 1.0, 1.0, 1.0 },
-    { 1.0, 1.0, 1.0 },
-    { 2.0, 2.0, 2.0 },
-  }
-
-  fmt.Println("data_a_in:", data_a_in)
-  fmt.Println("data_b_in:", data_b_in)
-
-  fmt.Println("divider: data_a_in / data_b_in: ", ntm_matrix_divider(data_a_in, data_b_in))
-}

@@ -51,18 +51,3 @@ import "fmt"
 func ntm_scalar_multiplier(input_a, input_b float32) float32 {
   return input_a * input_b
 }
-
-func main() {
-  // define the float32 variables we want to multiply
-  var input_a, input_b, output float32
-  
-  // initializing the variables
-  input_a = 48.0
-  input_b = 16.0
-  
-  // calling the function and storing the result
-  output = ntm_scalar_multiplier(input_a, input_b)
-  
-  // printing the results
-  fmt.Println("The multiplication of ", input_a, " and ", input_b, " is ", output, "(multiplying two float numbers outside the function)")
-}

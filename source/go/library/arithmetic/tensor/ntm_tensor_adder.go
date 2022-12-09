@@ -60,7 +60,7 @@ func ntm_tensor_adder(data_a_in [][][]float64, data_b_in [][][]float64) [][][]fl
   return data_out
 }
 
-func ntm_tensor_substracter(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+func ntm_tensor_substractor(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
   data_out := make([][][]float64, len(data_a_in))
   for i, x := range data_a_in {
     for j, y := range x {
@@ -70,48 +70,4 @@ func ntm_tensor_substracter(data_a_in [][][]float64, data_b_in [][][]float64) []
     }
   }
   return data_out
-}
-
-func main() {
-
-  var data_a_in = [][][]float64 {
-    {
-        { 2.0, 2.0, 2.0 },
-        { 0.0, 0.0, 0.0 },
-        { 4.0, 4.0, 4.0 },
-    },
-    {
-        { 2.0, 2.0, 2.0 },
-        { 0.0, 0.0, 0.0 },
-        { 4.0, 4.0, 4.0 },
-    },
-    {
-        { 2.0, 2.0, 2.0 },
-        { 0.0, 0.0, 0.0 },
-        { 4.0, 4.0, 4.0 },
-    },
-  }
-  var data_b_in = [][][]float64 {
-    {
-        { 1.0, 1.0, 1.0 },
-        { 1.0, 1.0, 1.0 },
-        { 2.0, 2.0, 2.0 },
-    },
-    {
-        { 1.0, 1.0, 1.0 },
-        { 1.0, 1.0, 1.0 },
-        { 2.0, 2.0, 2.0 },
-    },
-    {
-        { 1.0, 1.0, 1.0 },
-        { 1.0, 1.0, 1.0 },
-        { 2.0, 2.0, 2.0 },
-    },
-  }
-
-  fmt.Println("data_a_in:", data_a_in)
-  fmt.Println("data_b_in:", data_b_in)
-
-  fmt.Println("adder: data_a_in + data_b_in: ", ntm_tensor_adder(data_a_in, data_b_in))
-  fmt.Println("adder: data_a_in - data_b_in: ", ntm_tensor_substracter(data_a_in, data_b_in))
 }
