@@ -42,9 +42,24 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_vector_math_function
 
-import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+import (
+  "fmt"
+)
+
+func ntm_vector_logistic_function(data_in []float64) []float64 {
+  data_out := make([]float64, len(data_in))
+  for i := range data_in {
+    data_out = append(data_out, data_in[i])
+  }
+  return data_out
+}
+
+func ntm_vector_oneplus_function(data_in []float64) []float64 {
+  data_out := make([]float64, len(data_in))
+  for i := range data_in {
+    data_out = append(data_out, data_in[i])
+  }
+  return data_out
 }

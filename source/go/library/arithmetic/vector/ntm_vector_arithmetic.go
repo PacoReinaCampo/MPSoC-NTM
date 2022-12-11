@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining x copy  //
+// Permission is hereby granted, free of charge, to any person obtaining a copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -42,28 +42,40 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_vector_arithmetic
 
 import (
   "fmt"
 )
 
-func main() {
-
-  var data_a_in = [][]float64 {
-    { 2.0, 2.0, 2.0 },
-    { 0.0, 0.0, 0.0 },
-    { 4.0, 4.0, 4.0 },
+func ntm_vector_adder(data_a_in []float64, data_b_in []float64) []float64 {
+  data_out := make([]float64, len(data_a_in))
+  for i := range data_a_in {
+    data_out = append(data_out, data_a_in[i] + data_b_in[i])
   }
-  var data_b_in = [][]float64 {
-    { 1.0, 1.0, 1.0 },
-    { 1.0, 1.0, 1.0 },
-    { 2.0, 2.0, 2.0 },
+  return data_out
+}
+
+func ntm_vector_substractor(data_a_in []float64, data_b_in []float64) []float64 {
+  data_out := make([]float64, len(data_a_in))
+  for i := range data_a_in {
+    data_out = append(data_out, data_a_in[i] - data_b_in[i])
   }
+  return data_out
+}
 
-  fmt.Println("data_a_in:", data_a_in)
-  fmt.Println("data_b_in:", data_b_in)
+func ntm_vector_multiplier(data_a_in []float64, data_b_in []float64) []float64 {
+  data_out := make([]float64, len(data_a_in))
+  for i := range data_a_in {
+    data_out = append(data_out, data_a_in[i] * data_b_in[i])
+  }
+  return data_out
+}
 
-  fmt.Println("adder: data_a_in + data_b_in: ", ntm_matrix_adder(data_a_in, data_b_in))
-  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_matrix_substractor(data_a_in, data_b_in))
+func ntm_vector_divider(data_a_in []float64, data_b_in []float64) []float64 {
+  data_out := make([]float64, len(data_a_in))
+  for i := range data_a_in {
+    data_out = append(data_out, data_a_in[i] / data_b_in[i])
+  }
+  return data_out
 }

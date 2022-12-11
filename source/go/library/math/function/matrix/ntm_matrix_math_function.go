@@ -42,17 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_matrix_math_function
 
 import (
   "fmt"
 )
 
-func ntm_matrix_multiplier(data_a_in [][]float64, data_b_in [][]float64) [][]float64 {
-  data_out := make([][]float64, len(data_a_in))
-  for i, x := range data_a_in {
+func ntm_matrix_logistic_function(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, x := range data_in {
     for j, _ := range x {
-      data_out[i] = append(data_out[i], data_a_in[i][j] * data_b_in[i][j])
+      data_out[i] = append(data_out[i], data_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_oneplus_function(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_in[i][j])
     }
   }
   return data_out

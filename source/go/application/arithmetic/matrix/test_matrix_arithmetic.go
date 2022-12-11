@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining x copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -44,7 +44,29 @@
 
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "ntm_matrix_arithmetic"
+)
+
 func main() {
-  fmt.Println("Hello QueenField!")
+
+  var data_a_in = [][]float64 {
+    { 2.0, 2.0, 2.0 },
+    { 0.0, 0.0, 0.0 },
+    { 4.0, 4.0, 4.0 },
+  }
+  var data_b_in = [][]float64 {
+    { 1.0, 1.0, 1.0 },
+    { 1.0, 1.0, 1.0 },
+    { 2.0, 2.0, 2.0 },
+  }
+
+  fmt.Println("data_a_in:", data_a_in)
+  fmt.Println("data_b_in:", data_b_in)
+
+  fmt.Println("adder: data_a_in + data_b_in: ", ntm_matrix_adder(data_a_in, data_b_in))
+  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_matrix_substractor(data_a_in, data_b_in))
+  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_matrix_multiplier(data_a_in, data_b_in))
+  fmt.Println("divider: data_a_in / data_b_in: ", ntm_matrix_divider(data_a_in, data_b_in))
 }

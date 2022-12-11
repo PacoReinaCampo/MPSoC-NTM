@@ -42,9 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_scalar_math_function
 
+// fmt package provides the function to print anything
 import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+
+func ntm_scalar_logistic_function(data_in float32) float32 {
+  return data_in
+}
+
+func ntm_scalar_oneplus_function(data_in float32) float32 {
+  return data_in
 }

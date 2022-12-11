@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining x copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -42,9 +42,56 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_tensor_arithmetic
 
-import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+import (
+  "fmt"
+)
+
+func ntm_tensor_adder(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] + data_b_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
+func ntm_tensor_substractor(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] - data_b_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
+func ntm_tensor_multiplier(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] * data_b_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
+func ntm_tensor_divider(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] / data_b_in[i][j][k])
+      }
+    }
+  }
+  return data_out
 }

@@ -42,9 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_vector_math_calculus
 
-import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+import (
+  "fmt"
+)
+
+func ntm_vector_differentiation(data_in []float64) []float64 {
+  data_out := make([]float64, len(data_in))
+  for i := range data_in {
+    data_out = append(data_out, data_in[i])
+  }
+  return data_out
+}
+
+func ntm_vector_integration(data_in []float64) []float64 {
+  data_out := make([]float64, len(data_in))
+  for i := range data_in {
+    data_out = append(data_out, data_in[i])
+  }
+  return data_out
+}
+
+func ntm_vector_softmax(data_in []float64) []float64 {
+  data_out := make([]float64, len(data_in))
+  for i := range data_in {
+    data_out = append(data_out, data_in[i])
+  }
+  return data_out
 }

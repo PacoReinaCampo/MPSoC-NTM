@@ -42,18 +42,42 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_tensor_math_calculus
 
 import (
   "fmt"
 )
 
-func ntm_tensor_divider(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
-  data_out := make([][][]float64, len(data_a_in))
-  for i, x := range data_a_in {
+func ntm_tensor_differentiation(data_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_in))
+  for i, x := range data_in {
     for j, y := range x {
       for k, _ := range y {
-        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] / data_b_in[i][j][k])
+        data_out[i][j] = append(data_out[i][j], data_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
+func ntm_tensor_integration(data_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_in[i][j][k])
+      }
+    }
+  }
+  return data_out
+}
+
+func ntm_tensor_softmax(data_in [][][]float64) [][][]float64 {
+  data_out := make([][][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, y := range x {
+      for k, _ := range y {
+        data_out[i][j] = append(data_out[i][j], data_in[i][j][k])
       }
     }
   }

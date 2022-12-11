@@ -44,7 +44,29 @@
 
 package main
 
-import "fmt"
+// fmt package provides the function to print anything
+import (
+  "fmt"
+  "ntm_scalar_arithmetic"
+)
+
 func main() {
-  fmt.Println("Hello QueenField!")
+  // define the float32 variables we want to add
+  var input_a, input_b, output float32
+
+  // initializing the variables
+  input_a = 48.0
+  input_b = 16.0
+
+  // calling the function and storing the result
+  adder_output = ntm_scalar_adder(input_a, input_b)
+  substractor_output = ntm_scalar_substractor(input_a, input_b)
+  divider_output = ntm_scalar_divider(input_a, input_b)
+  multiplier_output = ntm_scalar_multiplier(input_a, input_b)
+
+  // printing the results
+  fmt.Println("The addition of ", input_a, " and ", input_b, " is ", output, "(adding two float numbers outside the function)")
+  fmt.Println("The substraction of ", input_a, " and ", input_b, " is ", output, "(substracting two float numbers outside the function)")
+  fmt.Println("The multiplication of ", input_a, " and ", input_b, " is ", output, "(multiplying two float numbers outside the function)")
+  fmt.Println("The division of ", input_a, " and ", input_b, " is ", output, "(dividing two float numbers outside the function)")
 }

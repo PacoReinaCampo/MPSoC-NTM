@@ -44,10 +44,21 @@
 
 package main
 
-// fmt package provides the function to print anything
-import "fmt"
+import (
+  "fmt"
+  "ntm_vector_arithmetic"
+)
 
-// function to divide the two float32 numbers
-func ntm_scalar_divider(input_a, input_b float32) float32 {
-  return input_a / input_b
+func main() {
+
+  var data_a_in = []float64 { 2.0, 0.0, 4.0 }
+  var data_b_in = []float64 { 1.0, 1.0, 2.0 }
+
+  fmt.Println("data_a_in:", data_a_in)
+  fmt.Println("data_b_in:", data_b_in)
+
+  fmt.Println("adder: data_a_in + data_b_in: ", ntm_vector_adder(data_a_in, data_b_in))
+  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_vector_substractor(data_a_in, data_b_in))
+  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_vector_multiplier(data_a_in, data_b_in))
+  fmt.Println("divider: data_a_in / data_b_in: ", ntm_vector_divider(data_a_in, data_b_in))
 }

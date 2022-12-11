@@ -42,9 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_scalar_arithmetic
 
+// fmt package provides the function to print anything
 import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+
+// function to add the two float32 numbers
+func ntm_scalar_adder(data_a_in, data_b_in float32) float32 {
+  return data_a_in + data_b_in
+}
+
+// function to substract the two float32 numbers
+func ntm_scalar_substractor(data_a_in, data_b_in float32) float32 {
+  return data_a_in - data_b_in
+}
+
+// function to multiply the two float32 numbers
+func ntm_scalar_multiplier(data_a_in, data_b_in float32) float32 {
+  return data_a_in * data_b_in
+}
+
+// function to divide the two float32 numbers
+func ntm_scalar_divider(data_a_in, data_b_in float32) float32 {
+  return data_a_in / data_b_in
 }

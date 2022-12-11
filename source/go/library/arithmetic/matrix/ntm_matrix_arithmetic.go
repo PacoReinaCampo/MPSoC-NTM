@@ -42,19 +42,47 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_matrix_arithmetic
 
 import (
   "fmt"
 )
 
-func ntm_tensor_multiplier(data_a_in [][][]float64, data_b_in [][][]float64) [][][]float64 {
-  data_out := make([][][]float64, len(data_a_in))
+func ntm_matrix_adder(data_a_in [][]float64, data_b_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_a_in))
   for i, x := range data_a_in {
-    for j, y := range x {
-      for k, _ := range y {
-        data_out[i][j] = append(data_out[i][j], data_a_in[i][j][k] * data_b_in[i][j][k])
-      }
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_a_in[i][j] + data_b_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_substractor(data_a_in [][]float64, data_b_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_a_in[i][j] - data_b_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_multiplier(data_a_in [][]float64, data_b_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_a_in[i][j] * data_b_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_divider(data_a_in [][]float64, data_b_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_a_in))
+  for i, x := range data_a_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_a_in[i][j] / data_b_in[i][j])
     }
   }
   return data_out

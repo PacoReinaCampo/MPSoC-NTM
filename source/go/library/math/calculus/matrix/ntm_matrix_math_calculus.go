@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining x copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -42,9 +42,38 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package main
+package ntm_matrix_math_calculus
 
-import "fmt"
-func main() {
-  fmt.Println("Hello QueenField!")
+import (
+  "fmt"
+)
+
+func ntm_matrix_differentiation(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_integration(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_in[i][j])
+    }
+  }
+  return data_out
+}
+
+func ntm_matrix_softmax(data_in [][]float64) [][]float64 {
+  data_out := make([][]float64, len(data_in))
+  for i, x := range data_in {
+    for j, _ := range x {
+      data_out[i] = append(data_out[i], data_in[i][j])
+    }
+  }
+  return data_out
 }

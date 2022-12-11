@@ -18,7 +18,7 @@
 //                                                                               //
 // Copyright (c) 2020-2024 by the author(s)                                      //
 //                                                                               //
-// Permission is hereby granted, free of charge, to any person obtaining a copy  //
+// Permission is hereby granted, free of charge, to any person obtaining x copy  //
 // of this software and associated documentation files (the "Software"), to deal //
 // in the Software without restriction, including without limitation the rights  //
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     //
@@ -44,20 +44,53 @@
 
 package main
 
-// fmt package provides the function to print anything
-import "fmt"
+import (
+  "fmt"
+  "ntm_tensor_arithmetic"
+)
 
 func main() {
-  // define the float32 variables we want to multiply
-  var input_a, input_b, output float32
 
-  // initializing the variables
-  input_a = 48.0
-  input_b = 16.0
+  var data_a_in = [][][]float64 {
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+    {
+        { 2.0, 2.0, 2.0 },
+        { 0.0, 0.0, 0.0 },
+        { 4.0, 4.0, 4.0 },
+    },
+  }
+  var data_b_in = [][][]float64 {
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+    {
+        { 1.0, 1.0, 1.0 },
+        { 1.0, 1.0, 1.0 },
+        { 2.0, 2.0, 2.0 },
+    },
+  }
 
-  // calling the function and storing the result
-  output = ntm_scalar_multiplier(input_a, input_b)
+  fmt.Println("data_a_in:", data_a_in)
+  fmt.Println("data_b_in:", data_b_in)
 
-  // printing the results
-  fmt.Println("The multiplication of ", input_a, " and ", input_b, " is ", output, "(multiplying two float numbers outside the function)")
+  fmt.Println("adder: data_a_in + data_b_in: ", ntm_tensor_adder(data_a_in, data_b_in))
+  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_tensor_substractor(data_a_in, data_b_in))
+  fmt.Println("divider: data_a_in / data_b_in: ", ntm_tensor_divider(data_a_in, data_b_in))
+  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_tensor_multiplier(data_a_in, data_b_in))
 }
