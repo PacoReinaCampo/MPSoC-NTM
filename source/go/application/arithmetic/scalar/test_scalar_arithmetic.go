@@ -47,26 +47,32 @@ package main
 // fmt package provides the function to print anything
 import (
   "fmt"
-  "ntm_scalar_arithmetic"
+
+  "go/library/arithmetic/ScalarArithmetic"
 )
 
 func main() {
-  // define the float32 variables we want to add
-  var input_a, input_b, output float32
+  // define the float64 variables we want to add
+  var data_a_in, data_b_in float64
+
+  var adder_output float64
+  var substractor_output float64
+  var multiplier_output float64
+  var divider_output float64
 
   // initializing the variables
-  input_a = 48.0
-  input_b = 16.0
+  data_a_in = 48.0
+  data_b_in = 16.0
 
   // calling the function and storing the result
-  adder_output = ntm_scalar_adder(input_a, input_b)
-  substractor_output = ntm_scalar_substractor(input_a, input_b)
-  divider_output = ntm_scalar_divider(input_a, input_b)
-  multiplier_output = ntm_scalar_multiplier(input_a, input_b)
+  adder_output = ScalarArithmetic.ScalarAdder(data_a_in, data_b_in)
+  substractor_output = ScalarArithmetic.ScalarSubstractor(data_a_in, data_b_in)
+  multiplier_output = ScalarArithmetic.ScalarMultiplier(data_a_in, data_b_in)
+  divider_output = ScalarArithmetic.ScalarDivider(data_a_in, data_b_in)
 
   // printing the results
-  fmt.Println("The addition of ", input_a, " and ", input_b, " is ", output, "(adding two float numbers outside the function)")
-  fmt.Println("The substraction of ", input_a, " and ", input_b, " is ", output, "(substracting two float numbers outside the function)")
-  fmt.Println("The multiplication of ", input_a, " and ", input_b, " is ", output, "(multiplying two float numbers outside the function)")
-  fmt.Println("The division of ", input_a, " and ", input_b, " is ", output, "(dividing two float numbers outside the function)")
+  fmt.Println("The addition of ", data_a_in, " and ", data_b_in, " is ", adder_output, "(adding two float numbers outside the function)")
+  fmt.Println("The substraction of ", data_a_in, " and ", data_b_in, " is ", substractor_output, "(substracting two float numbers outside the function)")
+  fmt.Println("The multiplication of ", data_a_in, " and ", data_b_in, " is ", multiplier_output, "(multiplying two float numbers outside the function)")
+  fmt.Println("The division of ", data_a_in, " and ", data_b_in, " is ", divider_output, "(dividing two float numbers outside the function)")
 }

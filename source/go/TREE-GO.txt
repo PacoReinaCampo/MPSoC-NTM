@@ -1,13 +1,13 @@
 library
 ├── arithmetic
-│   ├── matrix
-│   │   └── ntm_matrix_arithmetic.go
-│   ├── scalar
-│   │   └── ntm_scalar_arithmetic.go
-│   ├── tensor
-│   │   └── ntm_tensor_arithmetic.go
-│   └── vector
-│       └── ntm_vector_arithmetic.go
+│   ├── MatrixArithmetic
+│   │   └── MatrixArithmetic.go
+│   ├── ScalarArithmetic
+│   │   └── ScalarArithmetic.go
+│   ├── TensorArithmetic
+│   │   └── TensorArithmetic.go
+│   └── VectorArithmetic
+│       └── VectorArithmetic.go
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -98,10 +98,6 @@ library
 │   │   │   ├── ntm_matrix_vector_convolution.go
 │   │   │   ├── ntm_matrix_vector_product.go
 │   │   │   └── ntm_transpose_vector_product.go
-│   │   ├── ntm_matrix_math_algebra.go
-│   │   ├── ntm_scalar_math_algebra.go
-│   │   ├── ntm_tensor_math_algebra.go
-│   │   ├── ntm_vector_math_algebra.go
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_multiplication.go
 │   │   │   └── ntm_scalar_summation.go
@@ -122,38 +118,26 @@ library
 │   │       ├── ntm_vector_multiplication.go
 │   │       └── ntm_vector_summation.go
 │   ├── calculus
-│   │   ├── matrix
-│   │   │   └── ntm_matrix_math_calculus.go
-│   │   ├── ntm_matrix_math_calculus.go
-│   │   ├── ntm_tensor_math_calculus.go
-│   │   ├── ntm_vector_math_calculus.go
-│   │   ├── tensor
-│   │   │   └── ntm_tensor_math_calculus.go
-│   │   └── vector
-│   │       └── ntm_vector_math_calculus.go
+│   │   ├── MatrixMathCalculus
+│   │   │   └── MatrixMathCalculus.go
+│   │   ├── TensorMathCalculus
+│   │   │   └── TensorMathCalculus.go
+│   │   └── VectorMathCalculus
+│   │       └── VectorMathCalculus.go
 │   ├── function
-│   │   ├── matrix
-│   │   │   └── ntm_matrix_math_function.go
-│   │   ├── ntm_matrix_math_function.go
-│   │   ├── ntm_scalar_math_function.go
-│   │   ├── ntm_vector_math_function.go
-│   │   ├── scalar
-│   │   │   └── ntm_scalar_math_function.go
-│   │   └── vector
-│   │       └── ntm_vector_math_function.go
+│   │   ├── MatrixMathFunction
+│   │   │   └── MatrixMathFunction.go
+│   │   ├── ScalarMathFunction
+│   │   │   └── ScalarMathFunction.go
+│   │   └── VectorMathFunction
+│   │       └── VectorMathFunction.go
 │   └── statitics
-│       ├── matrix
-│       │   ├── ntm_matrix_deviation.go
-│       │   └── ntm_matrix_mean.go
-│       ├── ntm_matrix_math_statitics.go
-│       ├── ntm_scalar_math_statitics.go
-│       ├── ntm_vector_math_statitics.go
-│       ├── scalar
-│       │   ├── ntm_scalar_deviation.go
-│       │   └── ntm_scalar_mean.go
-│       └── vector
-│           ├── ntm_vector_deviation.go
-│           └── ntm_vector_mean.go
+│       ├── MatrixMathStatitics
+│       │   └── MatrixMathStatitics.go
+│       ├── ScalarMathStatitics
+│       │   └── ScalarMathStatitics.go
+│       └── VectorMathStatitics
+│           └── VectorMathStatitics.go
 ├── ntm
 │   ├── memory
 │   │   ├── ntm_addressing.go
@@ -230,4 +214,4 @@ library
             ├── ntm_lstm_output_v_trainer.go
             └── ntm_lstm_output_w_trainer.go
 
-59 directories, 171 files
+59 directories, 155 files

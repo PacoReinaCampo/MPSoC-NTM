@@ -46,7 +46,8 @@ package main
 
 import (
   "fmt"
-  "ntm_matrix_arithmetic"
+
+  "go/library/arithmetic/MatrixArithmetic"
 )
 
 func main() {
@@ -65,8 +66,8 @@ func main() {
   fmt.Println("data_a_in:", data_a_in)
   fmt.Println("data_b_in:", data_b_in)
 
-  fmt.Println("adder: data_a_in + data_b_in: ", ntm_matrix_adder(data_a_in, data_b_in))
-  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_matrix_substractor(data_a_in, data_b_in))
-  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_matrix_multiplier(data_a_in, data_b_in))
-  fmt.Println("divider: data_a_in / data_b_in: ", ntm_matrix_divider(data_a_in, data_b_in))
+  fmt.Println("adder: data_a_in + data_b_in: ", MatrixArithmetic.MatrixAdder(data_a_in, data_b_in))
+  fmt.Println("substractor: data_a_in - data_b_in: ", MatrixArithmetic.MatrixSubstractor(data_a_in, data_b_in))
+  fmt.Println("multiplier: data_a_in * data_b_in: ", MatrixArithmetic.MatrixMultiplier(data_a_in, data_b_in))
+  fmt.Println("divider: data_a_in / data_b_in: ", MatrixArithmetic.MatrixDivider(data_a_in, data_b_in))
 }

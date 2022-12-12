@@ -46,7 +46,8 @@ package main
 
 import (
   "fmt"
-  "ntm_vector_arithmetic"
+
+  "go/library/arithmetic/VectorArithmetic"
 )
 
 func main() {
@@ -57,8 +58,8 @@ func main() {
   fmt.Println("data_a_in:", data_a_in)
   fmt.Println("data_b_in:", data_b_in)
 
-  fmt.Println("adder: data_a_in + data_b_in: ", ntm_vector_adder(data_a_in, data_b_in))
-  fmt.Println("substractor: data_a_in - data_b_in: ", ntm_vector_substractor(data_a_in, data_b_in))
-  fmt.Println("multiplier: data_a_in * data_b_in: ", ntm_vector_multiplier(data_a_in, data_b_in))
-  fmt.Println("divider: data_a_in / data_b_in: ", ntm_vector_divider(data_a_in, data_b_in))
+  fmt.Println("adder: data_a_in + data_b_in: ", VectorArithmetic.VectorAdder(data_a_in, data_b_in))
+  fmt.Println("substractor: data_a_in - data_b_in: ", VectorArithmetic.VectorSubstractor(data_a_in, data_b_in))
+  fmt.Println("multiplier: data_a_in * data_b_in: ", VectorArithmetic.VectorMultiplier(data_a_in, data_b_in))
+  fmt.Println("divider: data_a_in / data_b_in: ", VectorArithmetic.VectorDivider(data_a_in, data_b_in))
 }

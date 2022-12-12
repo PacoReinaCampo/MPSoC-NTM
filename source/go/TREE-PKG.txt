@@ -1,9 +1,9 @@
 library
 ├── arithmetic
-│   ├── matrix
-│   ├── scalar
-│   ├── tensor
-│   └── vector
+│   ├── MatrixArithmetic
+│   ├── ScalarArithmetic
+│   ├── TensorArithmetic
+│   └── VectorArithmetic
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -29,17 +29,17 @@ library
 │   │   ├── tensor
 │   │   └── vector
 │   ├── calculus
-│   │   ├── matrix
-│   │   ├── tensor
-│   │   └── vector
+│   │   ├── MatrixMathCalculus
+│   │   ├── TensorMathCalculus
+│   │   └── VectorMathCalculus
 │   ├── function
-│   │   ├── matrix
-│   │   ├── scalar
-│   │   └── vector
+│   │   ├── MatrixMathFunction
+│   │   ├── ScalarMathFunction
+│   │   └── VectorMathFunction
 │   └── statitics
-│       ├── matrix
-│       ├── scalar
-│       └── vector
+│       ├── MatrixMathStatitics
+│       ├── ScalarMathStatitics
+│       └── VectorMathStatitics
 ├── ntm
 │   ├── memory
 │   ├── read_heads
