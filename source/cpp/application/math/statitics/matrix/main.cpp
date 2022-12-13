@@ -46,6 +46,8 @@
 #include<vector>
 #include<cassert>
 
+#include"../../../../library/math/statitics/ntm_math_statitics.hpp"
+
 using namespace std;
 
 int main() {

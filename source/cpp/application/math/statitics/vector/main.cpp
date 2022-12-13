@@ -46,6 +46,8 @@
 #include<vector>
 #include<cassert>
 
+#include"../../../../library/math/statitics/ntm_math_statitics.hpp"
+
 int main() {
   vector<vector<double>> data_in {
     {3.0, 1.0, 2.0},

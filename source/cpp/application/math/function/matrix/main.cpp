@@ -46,6 +46,8 @@
 #include<vector>
 #include<cassert>
 
+#include"../../../../library/math/function/ntm_math_function.hpp"
+
 using namespace std;
 
 int main() {

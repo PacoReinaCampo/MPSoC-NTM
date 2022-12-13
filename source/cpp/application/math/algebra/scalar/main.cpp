@@ -46,6 +46,8 @@
 #include<vector>
 #include<cassert>
 
+#include"../../../../library/math/algebra/ntm_math_algebra.hpp"
+
 using namespace std;
 
 int main() {
