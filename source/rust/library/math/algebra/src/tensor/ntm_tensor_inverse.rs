@@ -43,15 +43,15 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 // Tensor Inversion
-pub fn ntm_tensor_inverse(tensor: &mut Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>>{
-    let length = tensor.len();
+pub fn ntm_tensor_inverse(data_in: &mut Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>>{
+    let length = data_in.len();
 
     let mut augmented_tensor = ntm_zero_tensor(length, length, 2*length);
 
     for i in 0..length {
         for j in 0.. length {
             for k in 0.. length {
-                augmented_tensor[i][j][k] = tensor[i][j][k];
+                augmented_tensor[i][j][k] = data_in[i][j][k];
             }
             augmented_tensor[i][j][j + length] = 1.0;
         }
@@ -72,12 +72,12 @@ pub fn ntm_tensor_inverse(tensor: &mut Vec<Vec<Vec<f64>>>) -> Vec<Vec<Vec<f64>>>
 }
 
 // Generalised Reduced Row Echelon Form
-pub fn ntm_gauss_jordan_general(tensor: &mut Vec<Vec<Vec<f64>>>) {
+pub fn ntm_gauss_jordan_general(data_in: &mut Vec<Vec<Vec<f64>>>) {
     let mut lead = 0;
 
-    let i_counter = tensor.len();
-    let j_counter = tensor[0].len();
-    let k_counter = tensor[0][0].len();
+    let i_counter = data_in.len();
+    let j_counter = data_in[0].len();
+    let k_counter = data_in[0][0].len();
 
     for i in 0..i_counter {
         for r in 0..j_counter {
@@ -87,7 +87,7 @@ pub fn ntm_gauss_jordan_general(tensor: &mut Vec<Vec<Vec<f64>>>) {
 
             let mut j = r;
 
-            while tensor[i][j][lead] == 0.0 {
+            while data_in[i][j][lead] == 0.0 {
                 j = j + 1;
 
                 if j_counter == j {
@@ -100,25 +100,25 @@ pub fn ntm_gauss_jordan_general(tensor: &mut Vec<Vec<Vec<f64>>>) {
                 }
             }
 
-            let temporal = tensor[i][j].to_owned();
+            let temporal = data_in[i][j].to_owned();
 
-            tensor[i][j] = tensor[i][r].to_owned();
-            tensor[i][r] = temporal.to_owned();
+            data_in[i][j] = data_in[i][r].to_owned();
+            data_in[i][r] = temporal.to_owned();
 
-            if tensor[i][r][lead] != 0.0 {
-                let divider_ratio = tensor[i][r][lead];
+            if data_in[i][r][lead] != 0.0 {
+                let divider_ratio = data_in[i][r][lead];
 
                 for k in 0..k_counter {
-                    tensor[i][r][k] = tensor[i][r][k] / divider_ratio;
+                    data_in[i][r][k] = data_in[i][r][k] / divider_ratio;
                 }
             }
 
             for m in 0..j_counter {
                 if m != r {
-                    let multiplier_ratio = tensor[i][m][lead];
+                    let multiplier_ratio = data_in[i][m][lead];
 
                     for k in 0..k_counter {
-                        tensor[i][m][k] = tensor[i][m][k] - tensor[i][r][k] * multiplier_ratio;
+                        data_in[i][m][k] = data_in[i][m][k] - data_in[i][r][k] * multiplier_ratio;
                     }
                 }
             }
@@ -129,7 +129,7 @@ pub fn ntm_gauss_jordan_general(tensor: &mut Vec<Vec<Vec<f64>>>) {
 
 // Zero Tensor
 pub fn ntm_zero_tensor(size_i_in: usize, size_j_in: usize, size_k_in: usize) -> Vec<Vec<Vec<f64>>> {
-    let mut tensor = Vec::with_capacity(size_i_in);
+    let mut data_in = Vec::with_capacity(size_i_in);
 
     for _ in 0..size_i_in {
         let mut matrix = Vec::with_capacity(size_j_in);
@@ -142,16 +142,16 @@ pub fn ntm_zero_tensor(size_i_in: usize, size_j_in: usize, size_k_in: usize) -> 
             }
             matrix.push(vector);
         }
-        tensor.push(matrix);
+        data_in.push(matrix);
     }
-    tensor
+    data_in
 }
 
 // Printed Tensor
-pub fn ntm_print_tensor(tensor: &mut Vec<Vec<Vec<f64>>>) {
-    for i in 0..tensor.len(){
-        for j in 0..tensor.len(){
-            println!("{:?}", tensor[i][j]);
+pub fn ntm_print_tensor(data_in: &mut Vec<Vec<Vec<f64>>>) {
+    for i in 0..data_in.len(){
+        for j in 0..data_in.len(){
+            println!("{:?}", data_in[i][j]);
         }
         println!("\n");
     }

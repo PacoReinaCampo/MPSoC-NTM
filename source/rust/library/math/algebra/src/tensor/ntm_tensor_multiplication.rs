@@ -42,20 +42,20 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_tensor_multiplication(tensor: Vec<Vec<Vec<Vec<f64>>>>) -> Vec<Vec<Vec<f64>>> {
+pub fn ntm_tensor_multiplication(data_in: Vec<Vec<Vec<Vec<f64>>>>) -> Vec<Vec<Vec<f64>>> {
     let mut data_out: Vec<Vec<Vec<f64>>> = vec![];
 
-    for t in 0..tensor.len() {
+    for t in 0..data_in.len() {
         let mut matrix: Vec<Vec<f64>> = vec![];
 
-        for i in 0..tensor[t].len() {
+        for i in 0..data_in[t].len() {
             let mut vector: Vec<f64> = vec![];
 
-            for j in 0..tensor[t][i].len() {
+            for j in 0..data_in[t][i].len() {
                 let mut temporal: f64 = 1.0;
 
-                for k in 0..tensor[t][i][j].len() {
-                    temporal *= tensor[t][i][j][k];
+                for k in 0..data_in[t][i][j].len() {
+                    temporal *= data_in[t][i][j][k];
                 }
                 vector.push(temporal);
             }

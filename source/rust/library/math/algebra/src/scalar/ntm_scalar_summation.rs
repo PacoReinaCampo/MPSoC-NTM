@@ -42,11 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_summation(vector: Vec<f64>) -> f64 {
+pub fn ntm_scalar_summation(data_in: Vec<f64>) -> f64 {
     let mut data_out: f64 = 0.0;
 
-    for i in 0..vector.len() {
-        data_out += vector[i];
+    for i in 0..data_in.len() {
+        data_out += data_in[i];
     }
     data_out
 }

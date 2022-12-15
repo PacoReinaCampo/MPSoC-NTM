@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_multiplication(matrix: Vec<Vec<f64>>) -> Vec<f64> {
+pub fn ntm_vector_multiplication(data_in: Vec<Vec<f64>>) -> Vec<f64> {
     let mut data_out: Vec<f64> = vec![];
 
-    for i in 0..matrix.len() {
+    for i in 0..data_in.len() {
         let mut temporal: f64 = 1.0;
 
-        for j in 0..matrix[i].len() {
-            temporal *= matrix[i][j];
+        for j in 0..data_in[i].len() {
+            temporal *= data_in[i][j];
         }
         data_out.push(temporal);
     }

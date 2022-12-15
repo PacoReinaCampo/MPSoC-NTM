@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_deviation(matrix: Vec<Vec<f64>>, mean: Vec<f64>) -> Vec<f64> {
+pub fn ntm_vector_deviation(data_in: Vec<Vec<f64>>, mean_in: Vec<f64>) -> Vec<f64> {
     let mut data_out: Vec<f64> = vec![];
 
-    for i in 0..matrix.len() {
+    for i in 0..data_in.len() {
         let mut temporal: f64 = 0.0;
 
-        for j in 0..matrix[i].len() {
-            temporal += (matrix[i][j] - mean[i])*(matrix[i][j] - mean[i])/matrix[0].len() as f64;
+        for j in 0..data_in[i].len() {
+            temporal += (data_in[i][j] - mean_in[i])*(data_in[i][j] - mean_in[i])/data_in[0].len() as f64;
         }
         data_out.push(temporal.sqrt());
     }

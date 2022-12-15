@@ -43,8 +43,42 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
 int main() {
-  printf("Hello QueenField!\n");
+
+  double *data_in;
+
+  double *data_out;
+
+  data_in = (double *) malloc(sizeof(int)*SIZE_IN);
+
+  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
+
+  data_in[0] = 6.3226113886226751;
+  data_in[1] = 3.1313826152262876;
+  data_in[2] = 8.3512687816132226;
+
+  data_out[0] = 0.9982079678583020;
+  data_out[1] = 0.9581688450893644;
+  data_out[2] = 0.9997639589554603;
+
+  assert(ntm_vector_logistic_function(data_in)==*data_out);
+
+  data_in[0] = 6.3226113886226751;
+  data_in[1] = 3.1313826152262876;
+  data_in[2] = 8.3512687816132226;
+
+  data_out[0] = 7.324405028374851;
+  data_out[1] = 4.174113884283648;
+  data_out[2] = 9.351504850519834;
+
+  assert(ntm_vector_oneplus_function(data_in)==*data_out);
+
+  free(data_in);
+
+  free(data_out);
+
   return 0;
 }

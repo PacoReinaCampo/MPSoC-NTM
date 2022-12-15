@@ -42,15 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_transpose(matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
-    // Transpose a matrix of any size
+pub fn ntm_matrix_transpose(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    // Transpose a data_in of any size
     let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for i in 0..matrix.len() {
+    for i in 0..data_in.len() {
         let mut vector: Vec<f64> = vec![];
 
-        for j in 0..matrix[0].len() {
-            vector.push(matrix[j][i]);
+        for j in 0..data_in[0].len() {
+            vector.push(data_in[j][i]);
         }
         data_out.push(vector);
     }

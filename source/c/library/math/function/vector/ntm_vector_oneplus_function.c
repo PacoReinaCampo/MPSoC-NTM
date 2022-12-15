@@ -43,9 +43,8 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
-#include <assert.h>
+#include <math.h>
 
 #define SIZE_IN 3
 
@@ -60,7 +59,7 @@ double ntm_vector_oneplus_function(double *data_in) {
 
   data_out = (double *) malloc(sizeof(int)*SIZE_IN);
 
-  // calculating addition
+  // calculating result
   for (i = 0; i < SIZE_IN; i++) {
     temporal = ONE + exp(data_in[i]);
 
@@ -68,31 +67,4 @@ double ntm_vector_oneplus_function(double *data_in) {
   }
 
   return *data_out;
-}
-
-int main() {
-
-  double *data_in;
-
-  double *data_out;
-
-  data_in = (double *) malloc(sizeof(int)*SIZE_IN);
-
-  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
-
-  data_in[0] = 6.3226113886226751;
-  data_in[1] = 3.1313826152262876;
-  data_in[2] = 8.3512687816132226;
-
-  data_out[0] = 7.324405028374851;
-  data_out[1] = 4.174113884283648;
-  data_out[2] = 9.351504850519834;
-
-  assert(ntm_vector_oneplus_function(data_in)==*data_out);
-
-  free(data_in);
-
-  free(data_out);
-
-  return 0;
 }

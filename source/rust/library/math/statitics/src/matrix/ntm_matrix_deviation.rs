@@ -42,17 +42,17 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_deviation(tensor: Vec<Vec<Vec<f64>>>, mean: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+pub fn ntm_matrix_deviation(data_in: Vec<Vec<Vec<f64>>>, mean_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     let mut data_out: Vec<Vec<f64>> = vec![];
 
-    for i in 0..tensor.len() {
+    for i in 0..data_in.len() {
         let mut vector: Vec<f64> = vec![];
 
-        for j in 0..tensor[i].len() {
+        for j in 0..data_in[i].len() {
             let mut temporal: f64 = 0.0;
 
-            for k in 0..tensor[i][j].len() {
-                temporal += (tensor[i][j][k] - mean[i][j])*(tensor[i][j][k] - mean[i][j])/tensor[0][0].len() as f64;
+            for k in 0..data_in[i][j].len() {
+                temporal += (data_in[i][j][k] - mean_in[i][j])*(data_in[i][j][k] - mean_in[i][j])/data_in[0][0].len() as f64;
             }
             vector.push(temporal.sqrt());
         }
