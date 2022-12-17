@@ -44,31 +44,33 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
-#include "../../../library/arithmetic/ntm_arithmetic.h"
+#include "../ntm_arithmetic.h"
 
-int main() {
-  double data_a_in = 48.0;
-  double data_b_in = 16.0;
+double ntm_tensor_substractor(double ***data_a_in, double ***data_b_in) {
 
-  double data_out;
+  double ***data_out;
 
-  data_out = 64.0;
+  int i, j, k;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  data_out = (double ***) malloc(SIZE_I_IN*sizeof(int**));
 
-  data_out = 32.0;
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_out[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
 
-  assert(ntm_scalar_substractor(data_a_in, data_b_in) == data_out);
+    for (j=0;j<SIZE_J_IN;j++) {
+      data_out[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
+    }
+  }
 
-  data_out = 768.0;
+  // calculating substraction
+  for (i = 0; i < SIZE_I_IN; i++) {
+    for (j = 0; j < SIZE_J_IN; j++) {
+      for (k = 0; k < SIZE_K_IN; k++) {
+        data_out[i][j][k] = data_a_in[i][j][k] - data_b_in[i][j][k];
+      }
+    }
+  }
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
-
-  data_out = 3.0;
-
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
-
-  return 0;
+  return ***data_out;
 }

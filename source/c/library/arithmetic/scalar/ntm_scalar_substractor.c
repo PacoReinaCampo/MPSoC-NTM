@@ -44,31 +44,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
-#include "../../../library/arithmetic/ntm_arithmetic.h"
+#include "../ntm_arithmetic.h"
 
-int main() {
-  double data_a_in = 48.0;
-  double data_b_in = 16.0;
-
-  double data_out;
-
-  data_out = 64.0;
-
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
-
-  data_out = 32.0;
-
-  assert(ntm_scalar_substractor(data_a_in, data_b_in) == data_out);
-
-  data_out = 768.0;
-
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
-
-  data_out = 3.0;
-
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
-
-  return 0;
+double ntm_scalar_substractor(double data_a_in, double data_b_in) {
+  // calculating substraction
+  return data_a_in - data_b_in;
 }

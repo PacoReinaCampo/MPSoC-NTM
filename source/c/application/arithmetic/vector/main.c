@@ -74,6 +74,12 @@ int main() {
 
   assert(ntm_vector_adder(data_a_in, data_b_in) == *data_out);
 
+  data_out[0] =  1.0;
+  data_out[1] = -1.0;
+  data_out[2] =  2.0;
+
+  assert(ntm_vector_substractor(data_a_in, data_b_in) == *data_out);
+
   data_out[0] = 2.0;
   data_out[1] = 0.0;
   data_out[2] = 8.0;
