@@ -60,7 +60,7 @@ int main() {
 
   data_out = 32.0;
 
-  assert(ntm_scalar_substractor(data_a_in, data_b_in) == data_out);
+  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = 768.0;
 

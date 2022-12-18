@@ -126,7 +126,7 @@ int main() {
   data_out[2][0][1] = -1.0; data_out[2][1][1] = -1.0; data_out[2][2][1] = -1.0;
   data_out[2][0][2] =  2.0; data_out[2][1][2] =  2.0; data_out[2][2][2] =  2.0;
 
-  assert(ntm_tensor_substractor(data_a_in, data_b_in) == ***data_out);
+  assert(ntm_tensor_subtractor(data_a_in, data_b_in) == ***data_out);
 
   data_out[0][0][0] = 2.0; data_out[0][1][0] = 2.0; data_out[0][2][0] = 2.0;
   data_out[0][0][1] = 0.0; data_out[0][1][1] = 0.0; data_out[0][2][1] = 0.0;

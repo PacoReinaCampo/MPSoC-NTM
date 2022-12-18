@@ -52,21 +52,21 @@
 #define SIZE_K_IN 3
 
 double ntm_scalar_adder(double, double);
-double ntm_scalar_substractor(double, double);
+double ntm_scalar_subtractor(double, double);
 double ntm_scalar_multiplier(double, double);
 double ntm_scalar_divider(double, double);
 
 double ntm_vector_adder(double *, double *);
-double ntm_vector_substractor(double *, double *);
+double ntm_vector_subtractor(double *, double *);
 double ntm_vector_multiplier(double *, double *);
 double ntm_vector_divider(double *, double *);
 
 double ntm_matrix_adder(double **, double **);
-double ntm_matrix_substractor(double **, double **);
+double ntm_matrix_subtractor(double **, double **);
 double ntm_matrix_multiplier(double **, double **);
 double ntm_matrix_divider(double **, double **);
 
 double ntm_tensor_adder(double ***, double ***);
-double ntm_tensor_substractor(double ***, double ***);
+double ntm_tensor_subtractor(double ***, double ***);
 double ntm_tensor_multiplier(double ***, double ***);
 double ntm_tensor_divider(double ***, double ***);

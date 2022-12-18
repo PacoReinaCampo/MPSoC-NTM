@@ -47,7 +47,18 @@
 
 #include "../ntm_arithmetic.h"
 
-double ntm_scalar_substractor(double data_a_in, double data_b_in) {
-  // calculating substraction
-  return data_a_in - data_b_in;
+double ntm_vector_subtractor(double *data_a_in, double *data_b_in) {
+
+  double *data_out;
+
+  int i;
+
+  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
+
+  // calculating subtraction
+  for (i = 0; i < SIZE_IN; i++) {
+    data_out[i] = data_a_in[i] - data_b_in[i];
+  }
+
+  return *data_out;
 }

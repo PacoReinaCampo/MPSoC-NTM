@@ -47,30 +47,7 @@
 
 #include "../ntm_arithmetic.h"
 
-double ntm_tensor_substractor(double ***data_a_in, double ***data_b_in) {
-
-  double ***data_out;
-
-  int i, j, k;
-
-  data_out = (double ***) malloc(SIZE_I_IN*sizeof(int**));
-
-  for (i=0;i<SIZE_I_IN;i++) {
-    data_out[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
-
-    for (j=0;j<SIZE_J_IN;j++) {
-      data_out[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
-    }
-  }
-
-  // calculating substraction
-  for (i = 0; i < SIZE_I_IN; i++) {
-    for (j = 0; j < SIZE_J_IN; j++) {
-      for (k = 0; k < SIZE_K_IN; k++) {
-        data_out[i][j][k] = data_a_in[i][j][k] - data_b_in[i][j][k];
-      }
-    }
-  }
-
-  return ***data_out;
+double ntm_scalar_subtractor(double data_a_in, double data_b_in) {
+  // calculating subtraction
+  return data_a_in - data_b_in;
 }
