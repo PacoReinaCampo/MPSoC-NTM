@@ -45,97 +45,21 @@
 #include<iostream>
 #include<vector>
 
-#include"ntm_arithmetic.hpp"
-
 using namespace std;
 
-vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
+vector<vector<double>> ntm_matrix_subtract(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
 
-  vector<vector<vector<double>>> data_out;
-
-  for (int i = 0; i < data_a_in.size(); i++) {
-    vector<vector<double>> matrix;
-
-    for (int j = 0; j < data_a_in[0].size(); j++) {
-      vector<double> vector;
-
-      for (int k = 0; k < data_a_in[0][0].size(); k++) {
-        double temporal = data_a_in[i][j][k] + data_b_in[i][j][k];
-
-        vector.push_back(temporal);
-      }
-      matrix.push_back(vector);
-    }
-    data_out.push_back(matrix);
-  }
-
-  return data_out;
-}
-
-vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_subtract(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
-  vector<vector<vector<double>>> data_out;
+  vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
-    vector<vector<double>> matrix;
+    vector<double> vector;
 
     for (int j = 0; j < data_a_in[0].size(); j++) {
-      vector<double> vector;
+      double temporal = data_a_in[i][j] - data_b_in[i][j];
 
-      for (int k = 0; k < data_a_in[0][0].size(); k++) {
-        double temporal = data_a_in[i][j][k] - data_b_in[i][j][k];
-
-        vector.push_back(temporal);
-      }
-      matrix.push_back(vector);
+      vector.push_back(temporal);
     }
-    data_out.push_back(matrix);
-  }
-
-  return data_out;
-}
-
-vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_multiplier(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
-  vector<vector<vector<double>>> data_out;
-
-  for (int i = 0; i < data_a_in.size(); i++) {
-    vector<vector<double>> matrix;
-
-    for (int j = 0; j < data_a_in[0].size(); j++) {
-      vector<double> vector;
-
-      for (int k = 0; k < data_a_in[0][0].size(); k++) {
-        double temporal = data_a_in[i][j][k] * data_b_in[i][j][k];
-
-        vector.push_back(temporal);
-      }
-      matrix.push_back(vector);
-    }
-    data_out.push_back(matrix);
-  }
-
-  return data_out;
-}
-
-vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_divider(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
-  vector<vector<vector<double>>> data_out;
-
-  for (int i = 0; i < data_a_in.size(); i++) {
-    vector<vector<double>> matrix;
-
-    for (int j = 0; j < data_a_in[0].size(); j++) {
-      vector<double> vector;
-
-      for (int k = 0; k < data_a_in[0][0].size(); k++) {
-        double temporal = data_a_in[i][j][k] / data_b_in[i][j][k];
-
-        vector.push_back(temporal);
-      }
-      matrix.push_back(vector);
-    }
-    data_out.push_back(matrix);
+    data_out.push_back(vector);
   }
 
   return data_out;

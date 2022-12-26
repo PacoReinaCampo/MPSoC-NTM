@@ -67,6 +67,24 @@ vector<vector<double>> MatrixArithmetic::ntm_matrix_adder(vector<vector<double>>
   return data_out;
 }
 
+vector<vector<double>> MatrixArithmetic::ntm_matrix_subtract(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
+
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < data_a_in.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < data_a_in[0].size(); j++) {
+      double temporal = data_a_in[i][j] - data_b_in[i][j];
+
+      vector.push_back(temporal);
+    }
+    data_out.push_back(vector);
+  }
+
+  return data_out;
+}
+
 vector<vector<double>> MatrixArithmetic::ntm_matrix_multiplier(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
 
   vector<vector<double>> data_out;

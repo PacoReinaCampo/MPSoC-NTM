@@ -66,6 +66,23 @@ vector<double> VectorArithmetic::ntm_vector_adder(vector<double> data_a_in, vect
   return data_out;
 }
 
+vector<double> VectorArithmetic::ntm_vector_subtract(vector<double> data_a_in, vector<double> data_b_in) {
+  // Add two vectors of identical dimensions
+  vector<double> data_out;
+
+  if (data_a_in.size() != data_b_in.size()) {
+    throw std::runtime_error("Vector dimensions do not match");
+  }
+
+  for (int i = 0; i < data_a_in.size(); i++) {
+    double temporal = data_a_in[i] - data_b_in[i];
+
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
+}
+
 vector<double> VectorArithmetic::ntm_vector_multiplier(vector<double> data_a_in, vector<double> data_b_in) {
   // Multiply two vectors of identical dimensions
   vector<double> data_out;

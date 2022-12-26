@@ -53,6 +53,11 @@ double ScalarArithmetic::ntm_scalar_adder(double data_a_in, double data_b_in) {
   return data_a_in + data_b_in;
 }
 
+double ScalarArithmetic::ntm_scalar_subtract(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in - data_b_in;
+}
+
 double ScalarArithmetic::ntm_scalar_multiplier(double data_a_in, double data_b_in) {
   // calculating multiplication
   return data_a_in * data_b_in;
