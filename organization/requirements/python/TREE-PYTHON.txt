@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.py
+│   ├── soldiers
+│   │   └── ntm_soldiers.py
+│   └── workers
+│       └── ntm_workers.py
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.py
+│   │   ├── processing_unit
+│   │   │   ├── mimd.py
+│   │   │   ├── misd.py
+│   │   │   ├── simd.py
+│   │   │   └── sisd.py
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.py
+│   │       └── network_on_chip.py
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.py
+│   │   │   ├── control_unit.py
+│   │   │   ├── io_unit.py
+│   │   │   └── memory_unit.py
+│   │   └── von_neumann_architecture
+│   │       ├── alu.py
+│   │       ├── control_unit.py
+│   │       ├── io_unit.py
+│   │       └── memory_unit.py
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.py
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.py
+│   │   │   └── logic_circuits.py
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.py
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.py
+│   │   │   ├── nand_gate.py
+│   │   │   ├── nor_gate.py
+│   │   │   ├── not_gate.py
+│   │   │   ├── or_gate.py
+│   │   │   ├── xnor_gate.py
+│   │   │   ├── xor_gate.py
+│   │   │   └── yes_gate.py
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.py
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.py
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.py
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.py
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.py
+│       │   ├── lstm_differentiable_neural_computer.py
+│       │   └── transformer_differentiable_neural_computer.py
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.py
+│           ├── lstm_neural_turing_machine.py
+│           └── transformer_neural_turing_machine.py
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.py
+    │   ├── ntm_soldiers_pkg.py
+    │   └── ntm_workers_pkg.py
+    ├── computing
+    │   └── state_pkg.py
+    └── ieee
+        ├── math_complex-body.py
+        ├── math_complex.py
+        ├── math_real-body.py
+        └── math_real.py
+
+29 directories, 48 files
