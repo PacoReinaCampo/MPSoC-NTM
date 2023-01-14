@@ -1,0 +1,9 @@
+1. Extract the Zip file
+
+2. Start ModelSim
+
+3. Type in the ModelSim console:
+    do C:/DATOS/GitHub/HOMEWORK/verification/OSVVM/buffer/sim/vhdl/msim/macros/run.do
+
+4. Follow the instructions in the ModelSim console
+    (type "runtb" to run the testbench)
