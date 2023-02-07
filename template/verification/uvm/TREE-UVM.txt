@@ -20,15 +20,11 @@ code
 │   │       └── network_on_chip.sv
 │   ├── computer_architecture
 │   │   ├── harvard_architecture
-│   │   │   ├── alu.sv
-│   │   │   ├── control_unit.sv
-│   │   │   ├── io_unit.sv
-│   │   │   └── memory_unit.sv
+│   │   │   ├── pu_or1k.sv
+│   │   │   └── pu_riscv.sv
 │   │   └── von_neumann_architecture
-│   │       ├── alu.sv
-│   │       ├── control_unit.sv
-│   │       ├── io_unit.sv
-│   │       └── memory_unit.sv
+│   │       ├── pu_or1k.sv
+│   │       └── pu_riscv.sv
 │   ├── information
 │   │   ├── bit
 │   │   │   └── bit.sv
@@ -77,4 +73,4 @@ code
         ├── math_real-body.sv
         └── math_real.sv
 
-29 directories, 48 files
+29 directories, 44 files

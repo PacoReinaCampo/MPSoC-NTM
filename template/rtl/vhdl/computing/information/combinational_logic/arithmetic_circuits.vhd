@@ -55,7 +55,7 @@ entity arithmetic_circuits is
     RST : in std_logic;
 
     -- CONTROL
-    OPERATION : in std_logic_vector(2 downto 0);
+    OPERATION : in std_logic_vector(1 downto 0);
 
     -- DATA
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

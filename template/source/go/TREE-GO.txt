@@ -20,15 +20,11 @@ code
 │   │       └── network_on_chip.go
 │   ├── computer_architecture
 │   │   ├── harvard_architecture
-│   │   │   ├── alu.go
-│   │   │   ├── control_unit.go
-│   │   │   ├── io_unit.go
-│   │   │   └── memory_unit.go
+│   │   │   ├── pu_or1k.go
+│   │   │   └── pu_riscv.go
 │   │   └── von_neumann_architecture
-│   │       ├── alu.go
-│   │       ├── control_unit.go
-│   │       ├── io_unit.go
-│   │       └── memory_unit.go
+│   │       ├── pu_or1k.go
+│   │       └── pu_riscv.go
 │   ├── information
 │   │   ├── bit
 │   │   │   └── bit.go
@@ -77,4 +73,4 @@ code
         ├── math_real-body.go
         └── math_real.go
 
-29 directories, 48 files
+29 directories, 44 files
