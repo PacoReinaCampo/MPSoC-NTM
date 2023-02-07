@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.psl
+│   ├── soldiers
+│   │   └── ntm_soldiers.psl
+│   └── workers
+│       └── ntm_workers.psl
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.psl
+│   │   ├── processing_unit
+│   │   │   ├── mimd.psl
+│   │   │   ├── misd.psl
+│   │   │   ├── simd.psl
+│   │   │   └── sisd.psl
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.psl
+│   │       └── network_on_chip.psl
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.psl
+│   │   │   ├── control_unit.psl
+│   │   │   ├── io_unit.psl
+│   │   │   └── memory_unit.psl
+│   │   └── von_neumann_architecture
+│   │       ├── alu.psl
+│   │       ├── control_unit.psl
+│   │       ├── io_unit.psl
+│   │       └── memory_unit.psl
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.psl
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.psl
+│   │   │   └── logic_circuits.psl
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.psl
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.psl
+│   │   │   ├── nand_gate.psl
+│   │   │   ├── nor_gate.psl
+│   │   │   ├── not_gate.psl
+│   │   │   ├── or_gate.psl
+│   │   │   ├── xnor_gate.psl
+│   │   │   ├── xor_gate.psl
+│   │   │   └── yes_gate.psl
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.psl
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.psl
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.psl
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.psl
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.psl
+│       │   ├── lstm_differentiable_neural_computer.psl
+│       │   └── transformer_differentiable_neural_computer.psl
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.psl
+│           ├── lstm_neural_turing_machine.psl
+│           └── transformer_neural_turing_machine.psl
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.psl
+    │   ├── ntm_soldiers_pkg.psl
+    │   └── ntm_workers_pkg.psl
+    ├── computing
+    │   └── state_pkg.psl
+    └── ieee
+        ├── math_complex-body.psl
+        ├── math_complex.psl
+        ├── math_real-body.psl
+        └── math_real.psl
+
+29 directories, 48 files

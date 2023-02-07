@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.uml
+│   ├── soldiers
+│   │   └── ntm_soldiers.uml
+│   └── workers
+│       └── ntm_workers.uml
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.uml
+│   │   ├── processing_unit
+│   │   │   ├── mimd.uml
+│   │   │   ├── misd.uml
+│   │   │   ├── simd.uml
+│   │   │   └── sisd.uml
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.uml
+│   │       └── network_on_chip.uml
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.uml
+│   │   │   ├── control_unit.uml
+│   │   │   ├── io_unit.uml
+│   │   │   └── memory_unit.uml
+│   │   └── von_neumann_architecture
+│   │       ├── alu.uml
+│   │       ├── control_unit.uml
+│   │       ├── io_unit.uml
+│   │       └── memory_unit.uml
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.uml
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.uml
+│   │   │   └── logic_circuits.uml
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.uml
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.uml
+│   │   │   ├── nand_gate.uml
+│   │   │   ├── nor_gate.uml
+│   │   │   ├── not_gate.uml
+│   │   │   ├── or_gate.uml
+│   │   │   ├── xnor_gate.uml
+│   │   │   ├── xor_gate.uml
+│   │   │   └── yes_gate.uml
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.uml
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.uml
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.uml
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.uml
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.uml
+│       │   ├── lstm_differentiable_neural_computer.uml
+│       │   └── transformer_differentiable_neural_computer.uml
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.uml
+│           ├── lstm_neural_turing_machine.uml
+│           └── transformer_neural_turing_machine.uml
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.uml
+    │   ├── ntm_soldiers_pkg.uml
+    │   └── ntm_workers_pkg.uml
+    ├── computing
+    │   └── state_pkg.uml
+    └── ieee
+        ├── math_complex-body.uml
+        ├── math_complex.uml
+        ├── math_real-body.uml
+        └── math_real.uml
+
+29 directories, 48 files

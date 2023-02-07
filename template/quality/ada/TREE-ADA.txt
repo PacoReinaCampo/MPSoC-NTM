@@ -1,0 +1,80 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers.adb
+│   ├── soldiers
+│   │   └── ntm_soldiers.adb
+│   └── workers
+│       └── ntm_workers.adb
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip.adb
+│   │   ├── processing_unit
+│   │   │   ├── mimd.adb
+│   │   │   ├── misd.adb
+│   │   │   ├── simd.adb
+│   │   │   └── sisd.adb
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip.adb
+│   │       └── network_on_chip.adb
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── alu.adb
+│   │   │   ├── control_unit.adb
+│   │   │   ├── io_unit.adb
+│   │   │   └── memory_unit.adb
+│   │   └── von_neumann_architecture
+│   │       ├── alu.adb
+│   │       ├── control_unit.adb
+│   │       ├── io_unit.adb
+│   │       └── memory_unit.adb
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit.adb
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits.adb
+│   │   │   └── logic_circuits.adb
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine.adb
+│   │   ├── logic_gate
+│   │   │   ├── and_gate.adb
+│   │   │   ├── nand_gate.adb
+│   │   │   ├── nor_gate.adb
+│   │   │   ├── not_gate.adb
+│   │   │   ├── or_gate.adb
+│   │   │   ├── xnor_gate.adb
+│   │   │   ├── xor_gate.adb
+│   │   │   └── yes_gate.adb
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton.adb
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network.adb
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network.adb
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network.adb
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer.adb
+│       │   ├── lstm_differentiable_neural_computer.adb
+│       │   └── transformer_differentiable_neural_computer.adb
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine.adb
+│           ├── lstm_neural_turing_machine.adb
+│           └── transformer_neural_turing_machine.adb
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.adb
+    │   ├── ntm_soldiers_pkg.adb
+    │   └── ntm_workers_pkg.adb
+    ├── computing
+    │   └── state_pkg.adb
+    └── ieee
+        ├── math_complex.adb
+        ├── math_complex-body.adb
+        ├── math_real.adb
+        └── math_real-body.adb
+
+29 directories, 48 files
