@@ -91,6 +91,7 @@ begin
     elsif (rising_edge(CLK)) then
       -- Data Outputs
       DATA_OUT <= not DATA_IN;
+    end if;
   end process;
 
 end architecture;
