@@ -23,7 +23,7 @@ code
 │   │   │   ├── pu_or1k.java
 │   │   │   └── pu_riscv.java
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.java
+│   │       ├── pu_msp430.java
 │   │       └── pu_riscv.java
 │   ├── information
 │   │   ├── bit

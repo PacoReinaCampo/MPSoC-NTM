@@ -23,7 +23,7 @@ code
 │   │   │   ├── pu_or1k.adb
 │   │   │   └── pu_riscv.adb
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.adb
+│   │       ├── pu_msp430.adb
 │   │       └── pu_riscv.adb
 │   ├── information
 │   │   ├── bit

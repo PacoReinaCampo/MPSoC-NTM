@@ -1,0 +1,148 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── ntm_philosophers
+│   │       ├── application
+│   │       └── library
+│   ├── soldiers
+│   │   └── ntm_soldiers
+│   │       ├── application
+│   │       └── library
+│   └── workers
+│       └── ntm_workers
+│           ├── application
+│           └── library
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   │   └── multi_processor_system_on_chip
+│   │   │       ├── application
+│   │   │       └── library
+│   │   ├── processing_unit
+│   │   │   ├── mimd
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── misd
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── simd
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   └── sisd
+│   │   │       ├── application
+│   │   │       └── library
+│   │   └── system_on_chip
+│   │       ├── bus_on_chip
+│   │       │   ├── application
+│   │       │   └── library
+│   │       └── network_on_chip
+│   │           ├── application
+│   │           └── library
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   │   ├── pu_or1k
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   └── pu_riscv
+│   │   │       ├── application
+│   │   │       └── library
+│   │   └── von_neumann_architecture
+│   │       ├── pu_or1k
+│   │       │   ├── application
+│   │       │   └── library
+│   │       └── pu_riscv
+│   │           ├── application
+│   │           └── library
+│   ├── information
+│   │   ├── bit
+│   │   │   └── bit
+│   │   │       ├── application
+│   │   │       └── library
+│   │   ├── combinational_logic
+│   │   │   ├── arithmetic_circuits
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   └── logic_circuits
+│   │   │       ├── application
+│   │   │       └── library
+│   │   ├── finite_state_machine
+│   │   │   └── finite_state_machine
+│   │   │       ├── application
+│   │   │       └── library
+│   │   ├── logic_gate
+│   │   │   ├── and_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── nand_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── nor_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── not_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── or_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── xnor_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   ├── xor_gate
+│   │   │   │   ├── application
+│   │   │   │   └── library
+│   │   │   └── yes_gate
+│   │   │       ├── application
+│   │   │       └── library
+│   │   └── pushdown_automaton
+│   │       └── pushdown_automaton
+│   │           ├── application
+│   │           └── library
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   │   └── feedforward_neural_network
+│   │   │       ├── application
+│   │   │       └── library
+│   │   ├── long_short_term_memory_neural_network
+│   │   │   └── long_short_term_memory_neural_network
+│   │   │       ├── application
+│   │   │       └── library
+│   │   └── transformer_neural_network
+│   │       └── transformer_neural_network
+│   │           ├── application
+│   │           └── library
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       │   ├── feedforward_differentiable_neural_computer
+│       │   │   ├── application
+│       │   │   └── library
+│       │   ├── lstm_differentiable_neural_computer
+│       │   │   ├── application
+│       │   │   └── library
+│       │   └── transformer_differentiable_neural_computer
+│       │       ├── application
+│       │       └── library
+│       └── neural_turing_machine
+│           ├── feedforward_neural_turing_machine
+│           │   ├── application
+│           │   └── library
+│           ├── lstm_neural_turing_machine
+│           │   ├── application
+│           │   └── library
+│           └── transformer_neural_turing_machine
+│               ├── application
+│               └── library
+└── pkg
+    ├── classes
+    │   ├── ntm_philosophers_pkg.vhd
+    │   ├── ntm_soldiers_pkg.vhd
+    │   └── ntm_workers_pkg.vhd
+    ├── computing
+    │   └── state_pkg.vhd
+    └── ieee
+        ├── math_complex-body.vhd
+        ├── math_complex.vhd
+        ├── math_real-body.vhd
+        └── math_real.vhd
+
+137 directories, 8 files

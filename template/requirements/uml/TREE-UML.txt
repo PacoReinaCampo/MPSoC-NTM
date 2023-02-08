@@ -23,7 +23,7 @@ code
 │   │   │   ├── pu_or1k.uml
 │   │   │   └── pu_riscv.uml
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.uml
+│   │       ├── pu_msp430.uml
 │   │       └── pu_riscv.uml
 │   ├── information
 │   │   ├── bit

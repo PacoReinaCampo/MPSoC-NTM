@@ -23,7 +23,7 @@ code
 │   │   │   ├── pu_or1k.cpp
 │   │   │   └── pu_riscv.cpp
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.cpp
+│   │       ├── pu_msp430.cpp
 │   │       └── pu_riscv.cpp
 │   ├── information
 │   │   ├── bit

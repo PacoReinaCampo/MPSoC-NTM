@@ -1,65 +1,569 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.sv
+│   │   └── ntm_philosophers
+│   │       ├── application
+│   │       │   ├── design_if.sv
+│   │       │   └── fsm.sv
+│   │       └── library
+│   │           ├── peripheral_agent.sv
+│   │           ├── peripheral_driver.sv
+│   │           ├── peripheral_environment.sv
+│   │           ├── peripheral_monitor.sv
+│   │           ├── peripheral_sample.sv
+│   │           ├── peripheral_scoreboard.sv
+│   │           ├── peripheral_sequence_item.sv
+│   │           ├── peripheral_sequence.sv
+│   │           ├── peripheral_testbench.sv
+│   │           └── peripheral_test.sv
 │   ├── soldiers
-│   │   └── ntm_soldiers.sv
+│   │   └── ntm_soldiers
+│   │       ├── application
+│   │       │   ├── design_if.sv
+│   │       │   └── fsm.sv
+│   │       └── library
+│   │           ├── peripheral_agent.sv
+│   │           ├── peripheral_driver.sv
+│   │           ├── peripheral_environment.sv
+│   │           ├── peripheral_monitor.sv
+│   │           ├── peripheral_sample.sv
+│   │           ├── peripheral_scoreboard.sv
+│   │           ├── peripheral_sequence_item.sv
+│   │           ├── peripheral_sequence.sv
+│   │           ├── peripheral_testbench.sv
+│   │           └── peripheral_test.sv
 │   └── workers
-│       └── ntm_workers.sv
+│       └── ntm_workers
+│           ├── application
+│           │   ├── design_if.sv
+│           │   └── fsm.sv
+│           └── library
+│               ├── peripheral_agent.sv
+│               ├── peripheral_driver.sv
+│               ├── peripheral_environment.sv
+│               ├── peripheral_monitor.sv
+│               ├── peripheral_sample.sv
+│               ├── peripheral_scoreboard.sv
+│               ├── peripheral_sequence_item.sv
+│               ├── peripheral_sequence.sv
+│               ├── peripheral_testbench.sv
+│               └── peripheral_test.sv
 ├── computing
 │   ├── advanced_computer_architecture
 │   │   ├── multi_processor_system_on_chip
-│   │   │   └── multi_processor_system_on_chip.sv
+│   │   │   └── multi_processor_system_on_chip
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   ├── processing_unit
-│   │   │   ├── mimd.sv
-│   │   │   ├── misd.sv
-│   │   │   ├── simd.sv
-│   │   │   └── sisd.sv
+│   │   │   ├── mimd
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── misd
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── simd
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   └── sisd
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   └── system_on_chip
-│   │       ├── bus_on_chip.sv
-│   │       └── network_on_chip.sv
+│   │       ├── bus_on_chip
+│   │       │   ├── application
+│   │       │   │   ├── design_if.sv
+│   │       │   │   └── fsm.sv
+│   │       │   └── library
+│   │       │       ├── peripheral_agent.sv
+│   │       │       ├── peripheral_driver.sv
+│   │       │       ├── peripheral_environment.sv
+│   │       │       ├── peripheral_monitor.sv
+│   │       │       ├── peripheral_sample.sv
+│   │       │       ├── peripheral_scoreboard.sv
+│   │       │       ├── peripheral_sequence_item.sv
+│   │       │       ├── peripheral_sequence.sv
+│   │       │       ├── peripheral_testbench.sv
+│   │       │       └── peripheral_test.sv
+│   │       └── network_on_chip
+│   │           ├── application
+│   │           │   ├── design_if.sv
+│   │           │   └── fsm.sv
+│   │           └── library
+│   │               ├── peripheral_agent.sv
+│   │               ├── peripheral_driver.sv
+│   │               ├── peripheral_environment.sv
+│   │               ├── peripheral_monitor.sv
+│   │               ├── peripheral_sample.sv
+│   │               ├── peripheral_scoreboard.sv
+│   │               ├── peripheral_sequence_item.sv
+│   │               ├── peripheral_sequence.sv
+│   │               ├── peripheral_testbench.sv
+│   │               └── peripheral_test.sv
 │   ├── computer_architecture
 │   │   ├── harvard_architecture
-│   │   │   ├── pu_or1k.sv
-│   │   │   └── pu_riscv.sv
+│   │   │   ├── pu_or1k
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   └── pu_riscv
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.sv
-│   │       └── pu_riscv.sv
+│   │       ├── pu_or1k
+│   │       │   ├── application
+│   │       │   │   ├── design_if.sv
+│   │       │   │   └── fsm.sv
+│   │       │   └── library
+│   │       │       ├── peripheral_agent.sv
+│   │       │       ├── peripheral_driver.sv
+│   │       │       ├── peripheral_environment.sv
+│   │       │       ├── peripheral_monitor.sv
+│   │       │       ├── peripheral_sample.sv
+│   │       │       ├── peripheral_scoreboard.sv
+│   │       │       ├── peripheral_sequence_item.sv
+│   │       │       ├── peripheral_sequence.sv
+│   │       │       ├── peripheral_testbench.sv
+│   │       │       └── peripheral_test.sv
+│   │       └── pu_riscv
+│   │           ├── application
+│   │           │   ├── design_if.sv
+│   │           │   └── fsm.sv
+│   │           └── library
+│   │               ├── peripheral_agent.sv
+│   │               ├── peripheral_driver.sv
+│   │               ├── peripheral_environment.sv
+│   │               ├── peripheral_monitor.sv
+│   │               ├── peripheral_sample.sv
+│   │               ├── peripheral_scoreboard.sv
+│   │               ├── peripheral_sequence_item.sv
+│   │               ├── peripheral_sequence.sv
+│   │               ├── peripheral_testbench.sv
+│   │               └── peripheral_test.sv
 │   ├── information
 │   │   ├── bit
-│   │   │   └── bit.sv
+│   │   │   └── bit
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   ├── combinational_logic
-│   │   │   ├── arithmetic_circuits.sv
-│   │   │   └── logic_circuits.sv
+│   │   │   ├── arithmetic_circuits
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   └── logic_circuits
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   ├── finite_state_machine
-│   │   │   └── finite_state_machine.sv
+│   │   │   └── finite_state_machine
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   ├── logic_gate
-│   │   │   ├── and_gate.sv
-│   │   │   ├── nand_gate.sv
-│   │   │   ├── nor_gate.sv
-│   │   │   ├── not_gate.sv
-│   │   │   ├── or_gate.sv
-│   │   │   ├── xnor_gate.sv
-│   │   │   ├── xor_gate.sv
-│   │   │   └── yes_gate.sv
+│   │   │   ├── and_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── nand_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── nor_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── not_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── or_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── xnor_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   ├── xor_gate
+│   │   │   │   ├── application
+│   │   │   │   │   ├── design_if.sv
+│   │   │   │   │   └── fsm.sv
+│   │   │   │   └── library
+│   │   │   │       ├── peripheral_agent.sv
+│   │   │   │       ├── peripheral_driver.sv
+│   │   │   │       ├── peripheral_environment.sv
+│   │   │   │       ├── peripheral_monitor.sv
+│   │   │   │       ├── peripheral_sample.sv
+│   │   │   │       ├── peripheral_scoreboard.sv
+│   │   │   │       ├── peripheral_sequence_item.sv
+│   │   │   │       ├── peripheral_sequence.sv
+│   │   │   │       ├── peripheral_testbench.sv
+│   │   │   │       └── peripheral_test.sv
+│   │   │   └── yes_gate
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.sv
+│   │       └── pushdown_automaton
+│   │           ├── application
+│   │           │   ├── design_if.sv
+│   │           │   └── fsm.sv
+│   │           └── library
+│   │               ├── peripheral_agent.sv
+│   │               ├── peripheral_driver.sv
+│   │               ├── peripheral_environment.sv
+│   │               ├── peripheral_monitor.sv
+│   │               ├── peripheral_sample.sv
+│   │               ├── peripheral_scoreboard.sv
+│   │               ├── peripheral_sequence_item.sv
+│   │               ├── peripheral_sequence.sv
+│   │               ├── peripheral_testbench.sv
+│   │               └── peripheral_test.sv
 │   ├── neural_network
 │   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.sv
+│   │   │   └── feedforward_neural_network
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.sv
+│   │   │   └── long_short_term_memory_neural_network
+│   │   │       ├── application
+│   │   │       │   ├── design_if.sv
+│   │   │       │   └── fsm.sv
+│   │   │       └── library
+│   │   │           ├── peripheral_agent.sv
+│   │   │           ├── peripheral_driver.sv
+│   │   │           ├── peripheral_environment.sv
+│   │   │           ├── peripheral_monitor.sv
+│   │   │           ├── peripheral_sample.sv
+│   │   │           ├── peripheral_scoreboard.sv
+│   │   │           ├── peripheral_sequence_item.sv
+│   │   │           ├── peripheral_sequence.sv
+│   │   │           ├── peripheral_testbench.sv
+│   │   │           └── peripheral_test.sv
 │   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.sv
+│   │       └── transformer_neural_network
+│   │           ├── application
+│   │           │   ├── design_if.sv
+│   │           │   └── fsm.sv
+│   │           └── library
+│   │               ├── peripheral_agent.sv
+│   │               ├── peripheral_driver.sv
+│   │               ├── peripheral_environment.sv
+│   │               ├── peripheral_monitor.sv
+│   │               ├── peripheral_sample.sv
+│   │               ├── peripheral_scoreboard.sv
+│   │               ├── peripheral_sequence_item.sv
+│   │               ├── peripheral_sequence.sv
+│   │               ├── peripheral_testbench.sv
+│   │               └── peripheral_test.sv
 │   └── turing_machine
 │       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.sv
-│       │   ├── lstm_differentiable_neural_computer.sv
-│       │   └── transformer_differentiable_neural_computer.sv
+│       │   ├── feedforward_differentiable_neural_computer
+│       │   │   ├── application
+│       │   │   │   ├── design_if.sv
+│       │   │   │   └── fsm.sv
+│       │   │   └── library
+│       │   │       ├── peripheral_agent.sv
+│       │   │       ├── peripheral_driver.sv
+│       │   │       ├── peripheral_environment.sv
+│       │   │       ├── peripheral_monitor.sv
+│       │   │       ├── peripheral_sample.sv
+│       │   │       ├── peripheral_scoreboard.sv
+│       │   │       ├── peripheral_sequence_item.sv
+│       │   │       ├── peripheral_sequence.sv
+│       │   │       ├── peripheral_testbench.sv
+│       │   │       └── peripheral_test.sv
+│       │   ├── lstm_differentiable_neural_computer
+│       │   │   ├── application
+│       │   │   │   ├── design_if.sv
+│       │   │   │   └── fsm.sv
+│       │   │   └── library
+│       │   │       ├── peripheral_agent.sv
+│       │   │       ├── peripheral_driver.sv
+│       │   │       ├── peripheral_environment.sv
+│       │   │       ├── peripheral_monitor.sv
+│       │   │       ├── peripheral_sample.sv
+│       │   │       ├── peripheral_scoreboard.sv
+│       │   │       ├── peripheral_sequence_item.sv
+│       │   │       ├── peripheral_sequence.sv
+│       │   │       ├── peripheral_testbench.sv
+│       │   │       └── peripheral_test.sv
+│       │   └── transformer_differentiable_neural_computer
+│       │       ├── application
+│       │       │   ├── design_if.sv
+│       │       │   └── fsm.sv
+│       │       └── library
+│       │           ├── peripheral_agent.sv
+│       │           ├── peripheral_driver.sv
+│       │           ├── peripheral_environment.sv
+│       │           ├── peripheral_monitor.sv
+│       │           ├── peripheral_sample.sv
+│       │           ├── peripheral_scoreboard.sv
+│       │           ├── peripheral_sequence_item.sv
+│       │           ├── peripheral_sequence.sv
+│       │           ├── peripheral_testbench.sv
+│       │           └── peripheral_test.sv
 │       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.sv
-│           ├── lstm_neural_turing_machine.sv
-│           └── transformer_neural_turing_machine.sv
+│           ├── feedforward_neural_turing_machine
+│           │   ├── application
+│           │   │   ├── design_if.sv
+│           │   │   └── fsm.sv
+│           │   └── library
+│           │       ├── peripheral_agent.sv
+│           │       ├── peripheral_driver.sv
+│           │       ├── peripheral_environment.sv
+│           │       ├── peripheral_monitor.sv
+│           │       ├── peripheral_sample.sv
+│           │       ├── peripheral_scoreboard.sv
+│           │       ├── peripheral_sequence_item.sv
+│           │       ├── peripheral_sequence.sv
+│           │       ├── peripheral_testbench.sv
+│           │       └── peripheral_test.sv
+│           ├── lstm_neural_turing_machine
+│           │   ├── application
+│           │   │   ├── design_if.sv
+│           │   │   └── fsm.sv
+│           │   └── library
+│           │       ├── peripheral_agent.sv
+│           │       ├── peripheral_driver.sv
+│           │       ├── peripheral_environment.sv
+│           │       ├── peripheral_monitor.sv
+│           │       ├── peripheral_sample.sv
+│           │       ├── peripheral_scoreboard.sv
+│           │       ├── peripheral_sequence_item.sv
+│           │       ├── peripheral_sequence.sv
+│           │       ├── peripheral_testbench.sv
+│           │       └── peripheral_test.sv
+│           └── transformer_neural_turing_machine
+│               ├── application
+│               │   ├── design_if.sv
+│               │   └── fsm.sv
+│               └── library
+│                   ├── peripheral_agent.sv
+│                   ├── peripheral_driver.sv
+│                   ├── peripheral_environment.sv
+│                   ├── peripheral_monitor.sv
+│                   ├── peripheral_sample.sv
+│                   ├── peripheral_scoreboard.sv
+│                   ├── peripheral_sequence_item.sv
+│                   ├── peripheral_sequence.sv
+│                   ├── peripheral_testbench.sv
+│                   └── peripheral_test.sv
 └── pkg
     ├── classes
     │   ├── ntm_philosophers_pkg.sv
@@ -73,4 +577,4 @@ code
         ├── math_real-body.sv
         └── math_real.sv
 
-29 directories, 44 files
+137 directories, 440 files

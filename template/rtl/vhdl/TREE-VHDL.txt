@@ -23,7 +23,7 @@ code
 │   │   │   ├── pu_or1k.vhd
 │   │   │   └── pu_riscv.vhd
 │   │   └── von_neumann_architecture
-│   │       ├── pu_or1k.vhd
+│   │       ├── pu_msp430.vhd
 │   │       └── pu_riscv.vhd
 │   ├── information
 │   │   ├── bit
