@@ -1,0 +1,31 @@
+code
+├── classes
+│   ├── philosophers
+│   ├── soldiers
+│   └── workers
+├── computing
+│   ├── advanced_computer_architecture
+│   │   ├── multi_processor_system_on_chip
+│   │   ├── processing_unit
+│   │   └── system_on_chip
+│   ├── computer_architecture
+│   │   ├── harvard_architecture
+│   │   └── von_neumann_architecture
+│   ├── information
+│   │   ├── bit
+│   │   ├── combinational_logic
+│   │   ├── finite_state_machine
+│   │   ├── logic_gate
+│   │   └── pushdown_automaton
+│   ├── neural_network
+│   │   ├── feedforward_neural_network
+│   │   ├── long_short_term_memory_neural_network
+│   │   └── transformer_neural_network
+│   └── turing_machine
+│       ├── differentiable_neural_computer
+│       └── neural_turing_machine
+└── pkg
+    ├── classes
+    └── computing
+
+28 directories, 0 files
