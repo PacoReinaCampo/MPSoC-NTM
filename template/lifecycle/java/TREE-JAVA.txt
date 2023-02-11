@@ -6,71 +6,59 @@ code
 │   │   └── ntm_soldiers.java
 │   └── workers
 │       └── ntm_workers.java
-├── computing
-│   ├── advanced_computer_architecture
-│   │   ├── multi_processor_system_on_chip
-│   │   │   └── multi_processor_system_on_chip.java
-│   │   ├── processing_unit
-│   │   │   ├── mimd.java
-│   │   │   ├── misd.java
-│   │   │   ├── simd.java
-│   │   │   └── sisd.java
-│   │   └── system_on_chip
-│   │       ├── bus_on_chip.java
-│   │       └── network_on_chip.java
-│   ├── computer_architecture
-│   │   ├── harvard_architecture
-│   │   │   ├── pu_or1k.java
-│   │   │   └── pu_riscv.java
-│   │   └── von_neumann_architecture
-│   │       ├── pu_msp430.java
-│   │       └── pu_riscv.java
-│   ├── information
-│   │   ├── bit
-│   │   │   └── bit.java
-│   │   ├── combinational_logic
-│   │   │   ├── arithmetic_circuits.java
-│   │   │   └── logic_circuits.java
-│   │   ├── finite_state_machine
-│   │   │   └── finite_state_machine.java
-│   │   ├── logic_gate
-│   │   │   ├── and_gate.java
-│   │   │   ├── nand_gate.java
-│   │   │   ├── nor_gate.java
-│   │   │   ├── not_gate.java
-│   │   │   ├── or_gate.java
-│   │   │   ├── xnor_gate.java
-│   │   │   ├── xor_gate.java
-│   │   │   └── yes_gate.java
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.java
-│   ├── neural_network
-│   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.java
-│   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.java
-│   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.java
-│   └── turing_machine
-│       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.java
-│       │   ├── lstm_differentiable_neural_computer.java
-│       │   └── transformer_differentiable_neural_computer.java
-│       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.java
-│           ├── lstm_neural_turing_machine.java
-│           └── transformer_neural_turing_machine.java
-└── pkg
-    ├── classes
-    │   ├── ntm_philosophers_pkg.java
-    │   ├── ntm_soldiers_pkg.java
-    │   └── ntm_workers_pkg.java
-    ├── computing
-    │   └── state_pkg.java
-    └── ieee
-        ├── math_complex-body.java
-        ├── math_complex.java
-        ├── math_real-body.java
-        └── math_real.java
+└── computing
+    ├── advanced_computer_architecture
+    │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip.java
+    │   ├── processing_unit
+    │   │   ├── mimd.java
+    │   │   ├── misd.java
+    │   │   ├── simd.java
+    │   │   └── sisd.java
+    │   └── system_on_chip
+    │       ├── bus_on_chip.java
+    │       └── network_on_chip.java
+    ├── computer_architecture
+    │   ├── harvard_architecture
+    │   │   ├── pu_or1k.java
+    │   │   └── pu_riscv.java
+    │   └── von_neumann_architecture
+    │       ├── pu_msp430.java
+    │       └── pu_riscv.java
+    ├── information
+    │   ├── bit
+    │   │   └── bit.java
+    │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits.java
+    │   │   └── logic_circuits.java
+    │   ├── finite_state_machine
+    │   │   └── finite_state_machine.java
+    │   ├── logic_gate
+    │   │   ├── and_gate.java
+    │   │   ├── nand_gate.java
+    │   │   ├── nor_gate.java
+    │   │   ├── not_gate.java
+    │   │   ├── or_gate.java
+    │   │   ├── xnor_gate.java
+    │   │   ├── xor_gate.java
+    │   │   └── yes_gate.java
+    │   └── pushdown_automaton
+    │       └── pushdown_automaton.java
+    ├── neural_network
+    │   ├── feedforward_neural_network
+    │   │   └── feedforward_neural_network.java
+    │   ├── long_short_term_memory_neural_network
+    │   │   └── long_short_term_memory_neural_network.java
+    │   └── transformer_neural_network
+    │       └── transformer_neural_network.java
+    └── turing_machine
+        ├── differentiable_neural_computer
+        │   ├── feedforward_differentiable_neural_computer.java
+        │   ├── lstm_differentiable_neural_computer.java
+        │   └── transformer_differentiable_neural_computer.java
+        └── neural_turing_machine
+            ├── feedforward_neural_turing_machine.java
+            ├── lstm_neural_turing_machine.java
+            └── transformer_neural_turing_machine.java
 
-29 directories, 44 files
+25 directories, 36 files

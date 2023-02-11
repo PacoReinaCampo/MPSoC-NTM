@@ -6,71 +6,59 @@ code
 │   │   └── ntm_soldiers.cpp
 │   └── workers
 │       └── ntm_workers.cpp
-├── computing
-│   ├── advanced_computer_architecture
-│   │   ├── multi_processor_system_on_chip
-│   │   │   └── multi_processor_system_on_chip.cpp
-│   │   ├── processing_unit
-│   │   │   ├── mimd.cpp
-│   │   │   ├── misd.cpp
-│   │   │   ├── simd.cpp
-│   │   │   └── sisd.cpp
-│   │   └── system_on_chip
-│   │       ├── bus_on_chip.cpp
-│   │       └── network_on_chip.cpp
-│   ├── computer_architecture
-│   │   ├── harvard_architecture
-│   │   │   ├── pu_or1k.cpp
-│   │   │   └── pu_riscv.cpp
-│   │   └── von_neumann_architecture
-│   │       ├── pu_msp430.cpp
-│   │       └── pu_riscv.cpp
-│   ├── information
-│   │   ├── bit
-│   │   │   └── bit.cpp
-│   │   ├── combinational_logic
-│   │   │   ├── arithmetic_circuits.cpp
-│   │   │   └── logic_circuits.cpp
-│   │   ├── finite_state_machine
-│   │   │   └── finite_state_machine.cpp
-│   │   ├── logic_gate
-│   │   │   ├── and_gate.cpp
-│   │   │   ├── nand_gate.cpp
-│   │   │   ├── nor_gate.cpp
-│   │   │   ├── not_gate.cpp
-│   │   │   ├── or_gate.cpp
-│   │   │   ├── xnor_gate.cpp
-│   │   │   ├── xor_gate.cpp
-│   │   │   └── yes_gate.cpp
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.cpp
-│   ├── neural_network
-│   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.cpp
-│   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.cpp
-│   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.cpp
-│   └── turing_machine
-│       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.cpp
-│       │   ├── lstm_differentiable_neural_computer.cpp
-│       │   └── transformer_differentiable_neural_computer.cpp
-│       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.cpp
-│           ├── lstm_neural_turing_machine.cpp
-│           └── transformer_neural_turing_machine.cpp
-└── pkg
-    ├── classes
-    │   ├── ntm_philosophers_pkg.cpp
-    │   ├── ntm_soldiers_pkg.cpp
-    │   └── ntm_workers_pkg.cpp
-    ├── computing
-    │   └── state_pkg.cpp
-    └── ieee
-        ├── math_complex-body.cpp
-        ├── math_complex.cpp
-        ├── math_real-body.cpp
-        └── math_real.cpp
+└── computing
+    ├── advanced_computer_architecture
+    │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip.cpp
+    │   ├── processing_unit
+    │   │   ├── mimd.cpp
+    │   │   ├── misd.cpp
+    │   │   ├── simd.cpp
+    │   │   └── sisd.cpp
+    │   └── system_on_chip
+    │       ├── bus_on_chip.cpp
+    │       └── network_on_chip.cpp
+    ├── computer_architecture
+    │   ├── harvard_architecture
+    │   │   ├── pu_or1k.cpp
+    │   │   └── pu_riscv.cpp
+    │   └── von_neumann_architecture
+    │       ├── pu_msp430.cpp
+    │       └── pu_riscv.cpp
+    ├── information
+    │   ├── bit
+    │   │   └── bit.cpp
+    │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits.cpp
+    │   │   └── logic_circuits.cpp
+    │   ├── finite_state_machine
+    │   │   └── finite_state_machine.cpp
+    │   ├── logic_gate
+    │   │   ├── and_gate.cpp
+    │   │   ├── nand_gate.cpp
+    │   │   ├── nor_gate.cpp
+    │   │   ├── not_gate.cpp
+    │   │   ├── or_gate.cpp
+    │   │   ├── xnor_gate.cpp
+    │   │   ├── xor_gate.cpp
+    │   │   └── yes_gate.cpp
+    │   └── pushdown_automaton
+    │       └── pushdown_automaton.cpp
+    ├── neural_network
+    │   ├── feedforward_neural_network
+    │   │   └── feedforward_neural_network.cpp
+    │   ├── long_short_term_memory_neural_network
+    │   │   └── long_short_term_memory_neural_network.cpp
+    │   └── transformer_neural_network
+    │       └── transformer_neural_network.cpp
+    └── turing_machine
+        ├── differentiable_neural_computer
+        │   ├── feedforward_differentiable_neural_computer.cpp
+        │   ├── lstm_differentiable_neural_computer.cpp
+        │   └── transformer_differentiable_neural_computer.cpp
+        └── neural_turing_machine
+            ├── feedforward_neural_turing_machine.cpp
+            ├── lstm_neural_turing_machine.cpp
+            └── transformer_neural_turing_machine.cpp
 
-29 directories, 44 files
+25 directories, 36 files

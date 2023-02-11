@@ -6,71 +6,59 @@ code
 │   │   └── ntm_soldiers.m
 │   └── workers
 │       └── ntm_workers.m
-├── computing
-│   ├── advanced_computer_architecture
-│   │   ├── multi_processor_system_on_chip
-│   │   │   └── multi_processor_system_on_chip.m
-│   │   ├── processing_unit
-│   │   │   ├── mimd.m
-│   │   │   ├── misd.m
-│   │   │   ├── simd.m
-│   │   │   └── sisd.m
-│   │   └── system_on_chip
-│   │       ├── bus_on_chip.m
-│   │       └── network_on_chip.m
-│   ├── computer_architecture
-│   │   ├── harvard_architecture
-│   │   │   ├── pu_or1k.m
-│   │   │   └── pu_riscv.m
-│   │   └── von_neumann_architecture
-│   │       ├── pu_msp430.m
-│   │       └── pu_riscv.m
-│   ├── information
-│   │   ├── bit
-│   │   │   └── bit.m
-│   │   ├── combinational_logic
-│   │   │   ├── arithmetic_circuits.m
-│   │   │   └── logic_circuits.m
-│   │   ├── finite_state_machine
-│   │   │   └── finite_state_machine.m
-│   │   ├── logic_gate
-│   │   │   ├── and_gate.m
-│   │   │   ├── nand_gate.m
-│   │   │   ├── nor_gate.m
-│   │   │   ├── not_gate.m
-│   │   │   ├── or_gate.m
-│   │   │   ├── xnor_gate.m
-│   │   │   ├── xor_gate.m
-│   │   │   └── yes_gate.m
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.m
-│   ├── neural_network
-│   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.m
-│   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.m
-│   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.m
-│   └── turing_machine
-│       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.m
-│       │   ├── lstm_differentiable_neural_computer.m
-│       │   └── transformer_differentiable_neural_computer.m
-│       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.m
-│           ├── lstm_neural_turing_machine.m
-│           └── transformer_neural_turing_machine.m
-└── pkg
-    ├── classes
-    │   ├── ntm_philosophers_pkg.m
-    │   ├── ntm_soldiers_pkg.m
-    │   └── ntm_workers_pkg.m
-    ├── computing
-    │   └── state_pkg.m
-    └── ieee
-        ├── math_complex-body.m
-        ├── math_complex.m
-        ├── math_real-body.m
-        └── math_real.m
+└── computing
+    ├── advanced_computer_architecture
+    │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip.m
+    │   ├── processing_unit
+    │   │   ├── mimd.m
+    │   │   ├── misd.m
+    │   │   ├── simd.m
+    │   │   └── sisd.m
+    │   └── system_on_chip
+    │       ├── bus_on_chip.m
+    │       └── network_on_chip.m
+    ├── computer_architecture
+    │   ├── harvard_architecture
+    │   │   ├── pu_or1k.m
+    │   │   └── pu_riscv.m
+    │   └── von_neumann_architecture
+    │       ├── pu_msp430.m
+    │       └── pu_riscv.m
+    ├── information
+    │   ├── bit
+    │   │   └── bit.m
+    │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits.m
+    │   │   └── logic_circuits.m
+    │   ├── finite_state_machine
+    │   │   └── finite_state_machine.m
+    │   ├── logic_gate
+    │   │   ├── and_gate.m
+    │   │   ├── nand_gate.m
+    │   │   ├── nor_gate.m
+    │   │   ├── not_gate.m
+    │   │   ├── or_gate.m
+    │   │   ├── xnor_gate.m
+    │   │   ├── xor_gate.m
+    │   │   └── yes_gate.m
+    │   └── pushdown_automaton
+    │       └── pushdown_automaton.m
+    ├── neural_network
+    │   ├── feedforward_neural_network
+    │   │   └── feedforward_neural_network.m
+    │   ├── long_short_term_memory_neural_network
+    │   │   └── long_short_term_memory_neural_network.m
+    │   └── transformer_neural_network
+    │       └── transformer_neural_network.m
+    └── turing_machine
+        ├── differentiable_neural_computer
+        │   ├── feedforward_differentiable_neural_computer.m
+        │   ├── lstm_differentiable_neural_computer.m
+        │   └── transformer_differentiable_neural_computer.m
+        └── neural_turing_machine
+            ├── feedforward_neural_turing_machine.m
+            ├── lstm_neural_turing_machine.m
+            └── transformer_neural_turing_machine.m
 
-29 directories, 44 files
+25 directories, 36 files

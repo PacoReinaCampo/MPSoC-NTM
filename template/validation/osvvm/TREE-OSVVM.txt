@@ -6,71 +6,59 @@ code
 │   │   └── ntm_soldiers.vhd
 │   └── workers
 │       └── ntm_workers.vhd
-├── computing
-│   ├── advanced_computer_architecture
-│   │   ├── multi_processor_system_on_chip
-│   │   │   └── multi_processor_system_on_chip.vhd
-│   │   ├── processing_unit
-│   │   │   ├── mimd.vhd
-│   │   │   ├── misd.vhd
-│   │   │   ├── simd.vhd
-│   │   │   └── sisd.vhd
-│   │   └── system_on_chip
-│   │       ├── bus_on_chip.vhd
-│   │       └── network_on_chip.vhd
-│   ├── computer_architecture
-│   │   ├── harvard_architecture
-│   │   │   ├── pu_or1k.vhd
-│   │   │   └── pu_riscv.vhd
-│   │   └── von_neumann_architecture
-│   │       ├── pu_msp430.vhd
-│   │       └── pu_riscv.vhd
-│   ├── information
-│   │   ├── bit
-│   │   │   └── bit.vhd
-│   │   ├── combinational_logic
-│   │   │   ├── arithmetic_circuits.vhd
-│   │   │   └── logic_circuits.vhd
-│   │   ├── finite_state_machine
-│   │   │   └── finite_state_machine.vhd
-│   │   ├── logic_gate
-│   │   │   ├── and_gate.vhd
-│   │   │   ├── nand_gate.vhd
-│   │   │   ├── nor_gate.vhd
-│   │   │   ├── not_gate.vhd
-│   │   │   ├── or_gate.vhd
-│   │   │   ├── xnor_gate.vhd
-│   │   │   ├── xor_gate.vhd
-│   │   │   └── yes_gate.vhd
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.vhd
-│   ├── neural_network
-│   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.vhd
-│   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.vhd
-│   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.vhd
-│   └── turing_machine
-│       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.vhd
-│       │   ├── lstm_differentiable_neural_computer.vhd
-│       │   └── transformer_differentiable_neural_computer.vhd
-│       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.vhd
-│           ├── lstm_neural_turing_machine.vhd
-│           └── transformer_neural_turing_machine.vhd
-└── pkg
-    ├── classes
-    │   ├── ntm_philosophers_pkg.vhd
-    │   ├── ntm_soldiers_pkg.vhd
-    │   └── ntm_workers_pkg.vhd
-    ├── computing
-    │   └── state_pkg.vhd
-    └── ieee
-        ├── math_complex-body.vhd
-        ├── math_complex.vhd
-        ├── math_real-body.vhd
-        └── math_real.vhd
+└── computing
+    ├── advanced_computer_architecture
+    │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip.vhd
+    │   ├── processing_unit
+    │   │   ├── mimd.vhd
+    │   │   ├── misd.vhd
+    │   │   ├── simd.vhd
+    │   │   └── sisd.vhd
+    │   └── system_on_chip
+    │       ├── bus_on_chip.vhd
+    │       └── network_on_chip.vhd
+    ├── computer_architecture
+    │   ├── harvard_architecture
+    │   │   ├── pu_or1k.vhd
+    │   │   └── pu_riscv.vhd
+    │   └── von_neumann_architecture
+    │       ├── pu_msp430.vhd
+    │       └── pu_riscv.vhd
+    ├── information
+    │   ├── bit
+    │   │   └── bit.vhd
+    │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits.vhd
+    │   │   └── logic_circuits.vhd
+    │   ├── finite_state_machine
+    │   │   └── finite_state_machine.vhd
+    │   ├── logic_gate
+    │   │   ├── and_gate.vhd
+    │   │   ├── nand_gate.vhd
+    │   │   ├── nor_gate.vhd
+    │   │   ├── not_gate.vhd
+    │   │   ├── or_gate.vhd
+    │   │   ├── xnor_gate.vhd
+    │   │   ├── xor_gate.vhd
+    │   │   └── yes_gate.vhd
+    │   └── pushdown_automaton
+    │       └── pushdown_automaton.vhd
+    ├── neural_network
+    │   ├── feedforward_neural_network
+    │   │   └── feedforward_neural_network.vhd
+    │   ├── long_short_term_memory_neural_network
+    │   │   └── long_short_term_memory_neural_network.vhd
+    │   └── transformer_neural_network
+    │       └── transformer_neural_network.vhd
+    └── turing_machine
+        ├── differentiable_neural_computer
+        │   ├── feedforward_differentiable_neural_computer.vhd
+        │   ├── lstm_differentiable_neural_computer.vhd
+        │   └── transformer_differentiable_neural_computer.vhd
+        └── neural_turing_machine
+            ├── feedforward_neural_turing_machine.vhd
+            ├── lstm_neural_turing_machine.vhd
+            └── transformer_neural_turing_machine.vhd
 
-29 directories, 44 files
+25 directories, 36 files
