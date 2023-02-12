@@ -56,8 +56,6 @@ module bit_gate #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_DATA  = 0;
-
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
@@ -72,7 +70,7 @@ module bit_gate #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT <= 1'b0';
     end
     else begin
       // Data Outputs

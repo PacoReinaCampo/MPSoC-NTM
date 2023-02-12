@@ -1,1 +1,1 @@
-tree -P '*.vhd' code > TREE-SV.txt
+tree -P '*.sv' code > TREE-SV.txt

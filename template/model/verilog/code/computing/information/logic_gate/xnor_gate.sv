@@ -13,7 +13,7 @@
 //              Neural Turing Machine for MPSoC                               //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2022-2023 by the author(s)
+// Copyright (c) 2020-2021 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,3 +36,52 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+module xnor_gate #(
+  parameter DATA_SIZE = 64
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
+
+    // DATA
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
+
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  parameter ZERO_DATA  = 0;
+
+  ///////////////////////////////////////////////////////////////////////
+  // Signals
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Body
+  ///////////////////////////////////////////////////////////////////////
+
+  // DATA_OUT = DATA_A_IN xnor DATA_B_IN
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO_DATA;
+    end
+    else begin
+      // Data Outputs
+      DATA_OUT <= ~(DATA_A_IN ^ DATA_B_IN);
+    end
+  end
+
+endmodule
