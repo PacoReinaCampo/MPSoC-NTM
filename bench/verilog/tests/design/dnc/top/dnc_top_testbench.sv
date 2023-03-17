@@ -48,18 +48,18 @@ module dnc_top_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // FUNCTIONALITY
-  parameter STIMULUS_DNC_TOP_TEST   = 0;
+  parameter STIMULUS_DNC_TOP_TEST = 0;
   parameter STIMULUS_DNC_TOP_CASE_0 = 0;
   parameter STIMULUS_DNC_TOP_CASE_1 = 0;
 
@@ -68,40 +68,40 @@ module dnc_top_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // TOP
   // CONTROL
-  wire start_top;
-  wire ready_top;
+  wire                 start_top;
+  wire                 ready_top;
 
-  wire w_in_l_enable_top;
-  wire w_in_x_enable_top;
+  wire                 w_in_l_enable_top;
+  wire                 w_in_x_enable_top;
 
-  wire w_out_l_enable_top;
-  wire w_out_x_enable_top;
+  wire                 w_out_l_enable_top;
+  wire                 w_out_x_enable_top;
 
-  wire k_in_i_enable_top;
-  wire k_in_l_enable_top;
-  wire k_in_k_enable_top;
+  wire                 k_in_i_enable_top;
+  wire                 k_in_l_enable_top;
+  wire                 k_in_k_enable_top;
 
-  wire k_out_i_enable_top;
-  wire k_out_l_enable_top;
-  wire k_out_k_enable_top;
+  wire                 k_out_i_enable_top;
+  wire                 k_out_l_enable_top;
+  wire                 k_out_k_enable_top;
 
-  wire u_in_l_enable_top;
-  wire u_in_p_enable_top;
+  wire                 u_in_l_enable_top;
+  wire                 u_in_p_enable_top;
 
-  wire u_out_l_enable_top;
-  wire u_out_p_enable_top;
+  wire                 u_out_l_enable_top;
+  wire                 u_out_p_enable_top;
 
-  wire b_in_enable_top;
+  wire                 b_in_enable_top;
 
-  wire b_out_enable_top;
+  wire                 b_out_enable_top;
 
-  wire x_in_enable_top;
-  wire y_out_enable_top;
+  wire                 x_in_enable_top;
+  wire                 y_out_enable_top;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_top;
@@ -126,7 +126,7 @@ module dnc_top_testbench;
   // STIMULUS
   dnc_top_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -137,11 +137,10 @@ module dnc_top_testbench;
     .R(R),
 
     // FUNCTIONALITY
-    .STIMULUS_DNC_TOP_TEST(STIMULUS_DNC_TOP_TEST),
+    .STIMULUS_DNC_TOP_TEST  (STIMULUS_DNC_TOP_TEST),
     .STIMULUS_DNC_TOP_CASE_0(STIMULUS_DNC_TOP_CASE_0),
     .STIMULUS_DNC_TOP_CASE_1(STIMULUS_DNC_TOP_CASE_1)
-  )
-  top_stimulus(
+  ) top_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -174,7 +173,7 @@ module dnc_top_testbench;
 
     .DNC_TOP_B_OUT_ENABLE(b_out_enable_top),
 
-    .DNC_TOP_X_IN_ENABLE(x_in_enable_top),
+    .DNC_TOP_X_IN_ENABLE (x_in_enable_top),
     .DNC_TOP_Y_OUT_ENABLE(y_out_enable_top),
 
     // DATA
@@ -190,16 +189,15 @@ module dnc_top_testbench;
     .DNC_TOP_U_IN(u_in_top),
     .DNC_TOP_B_IN(b_in_top),
 
-    .DNC_TOP_X_IN(x_in_top),
+    .DNC_TOP_X_IN (x_in_top),
     .DNC_TOP_Y_OUT(y_out_top)
   );
 
   // TOP
   dnc_top #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  top(
+  ) top (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -232,7 +230,7 @@ module dnc_top_testbench;
 
     .B_OUT_ENABLE(b_out_enable_top),
 
-    .X_IN_ENABLE(x_in_enable_top),
+    .X_IN_ENABLE (x_in_enable_top),
     .Y_OUT_ENABLE(y_out_enable_top),
 
     // DATA
@@ -248,7 +246,7 @@ module dnc_top_testbench;
     .U_IN(u_in_top),
     .B_IN(b_in_top),
 
-    .X_IN(x_in_top),
+    .X_IN (x_in_top),
     .Y_OUT(y_out_top)
   );
 

@@ -39,23 +39,22 @@
 
 module ntm_state_feedback_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64
-)
-  (
-    // GLOBAL
-    output CLK,
-    output RST
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64
+) (
+  // GLOBAL
+  output CLK,
+  output RST
 
-    // CONTROL
-  );
+  // CONTROL
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types

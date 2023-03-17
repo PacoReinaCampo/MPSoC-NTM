@@ -1,11 +1,11 @@
 class driver;
   virtual switch_if vif;
-  event drv_done;
-  mailbox drv_mbx;
+  event             drv_done;
+  mailbox           drv_mbx;
 
   task run();
-    $display ("T=%0t [Driver] starting ...", $time);
-    @ (posedge vif.clk);
+    $display("T=%0t [Driver] starting ...", $time);
+    @(posedge vif.clk);
 
     // Try to get a new transaction every time and then assign 
     // packet contents to the interface. But do this only if the 
@@ -13,8 +13,8 @@ class driver;
     forever begin
       switch_item item;
 
-      $display ("T=%0t [Driver] waiting for item ...", $time);
-      drv_mbx.get(item);      
+      $display("T=%0t [Driver] waiting for item ...", $time);
+      drv_mbx.get(item);
       item.print("Driver");
 
       vif.vld  <= 1;
@@ -22,8 +22,9 @@ class driver;
       vif.data <= item.data;
 
       // When transfer is over, raise the done event
-      @ (posedge vif.clk);
-      vif.vld <= 0; ->drv_done;
-    end   
+      @(posedge vif.clk);
+      vif.vld <= 0;
+      ->drv_done;
+    end
   endtask
 endclass

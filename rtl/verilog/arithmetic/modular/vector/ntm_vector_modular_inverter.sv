@@ -38,27 +38,26 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_modular_inverter #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_IN_ENABLE,
-    output reg DATA_OUT_ENABLE,
+  input      DATA_IN_ENABLE,
+  output reg DATA_OUT_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
-    input [DATA_SIZE-1:0] SIZE_IN,
-    input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] MODULO_IN,
+  input      [DATA_SIZE-1:0] SIZE_IN,
+  input      [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -72,17 +71,17 @@ module ntm_vector_modular_inverter #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -92,20 +91,20 @@ module ntm_vector_modular_inverter #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] inverter_ctrl_fsm_int;
+  reg  [             1:0] inverter_ctrl_fsm_int;
 
   // Internal Signals
-  reg [CONTROL_SIZE-1:0] index_loop;
+  reg  [CONTROL_SIZE-1:0] index_loop;
 
   // INVERTER
   // CONTROL
-  reg start_scalar_inverter;
-  wire ready_scalar_inverter;
+  reg                     start_scalar_inverter;
+  wire                    ready_scalar_inverter;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_inverter;
-  reg [DATA_SIZE-1:0] data_in_scalar_inverter;
-  wire [DATA_SIZE-1:0] data_out_scalar_inverter;
+  reg  [   DATA_SIZE-1:0] modulo_in_scalar_inverter;
+  reg  [   DATA_SIZE-1:0] data_in_scalar_inverter;
+  wire [   DATA_SIZE-1:0] data_out_scalar_inverter;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -115,39 +114,38 @@ module ntm_vector_modular_inverter #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT   <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY      <= 1'b0;
 
       // Assignations
       index_loop <= ZERO_DATA;
-    end
-	else begin
-      case(inverter_ctrl_fsm_int)
-        STARTER_STATE : begin
+    end else begin
+      case (inverter_ctrl_fsm_int)
+        STARTER_STATE: begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO_DATA;
+            index_loop            <= ZERO_DATA;
 
             // FSM Control
             inverter_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        INPUT_STATE : begin
+        INPUT_STATE: begin
           // STEP 1
-          if(DATA_IN_ENABLE == 1'b1) begin
+          if (DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_scalar_inverter <= MODULO_IN;
-            data_in_scalar_inverter <= DATA_IN;
+            data_in_scalar_inverter   <= DATA_IN;
 
-            if(index_loop == ZERO_DATA) begin
+            if (index_loop == ZERO_DATA) begin
               // Control Internal
               start_scalar_inverter <= 1'b1;
             end
@@ -157,35 +155,33 @@ module ntm_vector_modular_inverter #(
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
+        ENDER_STATE: begin
           // STEP 2
-          if(ready_scalar_inverter == 1'b1) begin
-            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+          if (ready_scalar_inverter == 1'b1) begin
+            if (index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
-              READY <= 1'b1;
+              READY                 <= 1'b1;
 
               // FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
-            end
-            else begin
+            end else begin
               // Control Internal
-              index_loop <= (index_loop + ONE_CONTROL);
+              index_loop            <= (index_loop + ONE_CONTROL);
 
               // FSM Control
               inverter_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_inverter;
+            DATA_OUT        <= data_out_scalar_inverter;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
-          end
-          else begin
+          end else begin
             // Control Internal
             start_scalar_inverter <= 1'b0;
           end
         end
-        default : begin
+        default: begin
           // FSM Control
           inverter_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -195,10 +191,9 @@ module ntm_vector_modular_inverter #(
 
   // INVERTER
   ntm_scalar_modular_inverter #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_inverter(
+  ) scalar_inverter (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -209,8 +204,8 @@ module ntm_vector_modular_inverter #(
 
     // DATA
     .MODULO_IN(modulo_in_scalar_inverter),
-    .DATA_IN(data_in_scalar_inverter),
-    .DATA_OUT(data_out_scalar_inverter)
+    .DATA_IN  (data_in_scalar_inverter),
+    .DATA_OUT (data_out_scalar_inverter)
   );
 
 endmodule

@@ -41,14 +41,14 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_sequencer extends uvm_sequencer#(ntm_intro_transaction);
+class ntm_intro_sequencer extends uvm_sequencer #(ntm_intro_transaction);
   `uvm_component_utils(ntm_intro_sequencer)
 
-  function new ( string name, uvm_component parent);
-    super.new(name,parent);
+  function new(string name, uvm_component parent);
+    super.new(name, parent);
   endfunction
 
-  function void build_phase (uvm_phase phase);
+  function void build_phase(uvm_phase phase);
     super.build_phase(phase);
   endfunction
 endclass

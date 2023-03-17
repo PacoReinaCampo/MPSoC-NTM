@@ -38,35 +38,34 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_reading #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input M_IN_J_ENABLE,  // for j in 0 to N-1
-    input M_IN_K_ENABLE,  // for k in 0 to W-1
+  input M_IN_J_ENABLE,  // for j in 0 to N-1
+  input M_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
-    output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
+  output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    output reg R_OUT_ENABLE,  // for k in 0 to W-1
+  output reg R_OUT_ENABLE,  // for k in 0 to W-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_N_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_N_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
 
-    input [DATA_SIZE-1:0] W_IN,
-    input [DATA_SIZE-1:0] M_IN,
+  input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] M_IN,
 
-    output reg [DATA_SIZE-1:0] R_OUT
-  );
+  output reg [DATA_SIZE-1:0] R_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -80,17 +79,17 @@ module ntm_reading #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -100,16 +99,16 @@ module ntm_reading #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg  [          1:0] controller_ctrl_fsm_int;
 
   // VECTOR SUMMATION
   // CONTROL
-  wire start_vector_summation;
-  wire ready_vector_summation;
-  wire data_in_vector_enable_vector_summation;
-  wire data_in_scalar_enable_vector_summation;
-  wire data_out_vector_enable_vector_summation;
-  wire data_out_scalar_enable_vector_summation;
+  wire                 start_vector_summation;
+  wire                 ready_vector_summation;
+  wire                 data_in_vector_enable_vector_summation;
+  wire                 data_in_scalar_enable_vector_summation;
+  wire                 data_out_vector_enable_vector_summation;
+  wire                 data_out_scalar_enable_vector_summation;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_summation;
@@ -119,11 +118,11 @@ module ntm_reading #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire                 start_vector_multiplier;
+  wire                 ready_vector_multiplier;
+  wire                 data_a_in_enable_vector_multiplier;
+  wire                 data_b_in_enable_vector_multiplier;
+  wire                 data_out_enable_vector_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
@@ -139,34 +138,33 @@ module ntm_reading #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       R_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           end
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        VECTOR_MULTIPLIER_STATE: begin  // STEP 1
         end
 
-        VECTOR_SUMMATION_STATE : begin  // STEP 2
+        VECTOR_SUMMATION_STATE: begin  // STEP 2
 
           // Data Outputs
           R_OUT <= data_out_vector_summation;
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -181,16 +179,15 @@ module ntm_reading #(
   assign data_b_in_vector_multiplier = M_IN;
 
   // VECTOR SUMMATION
-  assign size_in_vector_summation   = SIZE_W_IN;
-  assign length_in_vector_summation = SIZE_N_IN;
-  assign data_in_vector_summation   = data_out_vector_multiplier;
+  assign size_in_vector_summation    = SIZE_W_IN;
+  assign length_in_vector_summation  = SIZE_N_IN;
+  assign data_in_vector_summation    = data_out_vector_multiplier;
 
   // VECTOR SUMMATION
   ntm_vector_summation #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_summation(
+  ) vector_summation (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -199,24 +196,23 @@ module ntm_reading #(
     .START(start_vector_summation),
     .READY(ready_vector_summation),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_summation),
+    .DATA_IN_SCALAR_ENABLE (data_in_scalar_enable_vector_summation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .SIZE_IN(size_in_vector_summation),
+    .SIZE_IN  (size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
-    .DATA_IN(data_in_vector_summation),
-    .DATA_OUT(data_out_vector_summation)
+    .DATA_IN  (data_in_vector_summation),
+    .DATA_OUT (data_out_vector_summation)
   );
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_multiplier(
+  ) vector_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -227,13 +223,13 @@ module ntm_reading #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
+    .SIZE_IN  (size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .DATA_OUT (data_out_vector_multiplier)
   );
 
 endmodule

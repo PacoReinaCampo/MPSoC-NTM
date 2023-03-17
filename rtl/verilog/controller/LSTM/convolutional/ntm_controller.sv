@@ -38,78 +38,77 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_controller #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input W_IN_L_ENABLE,  // for l in 0 to L-1
-    input W_IN_X_ENABLE,  // for x in 0 to X-1
+  input W_IN_L_ENABLE,  // for l in 0 to L-1
+  input W_IN_X_ENABLE,  // for x in 0 to X-1
 
-    input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input K_IN_L_ENABLE,  // for l in 0 to L-1
-    input K_IN_K_ENABLE,  // for k in 0 to W-1
+  input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input K_IN_L_ENABLE,  // for l in 0 to L-1
+  input K_IN_K_ENABLE,  // for k in 0 to W-1
 
-    input U_IN_L_ENABLE,  // for l in 0 to L-1
-    input U_IN_P_ENABLE,  // for p in 0 to L-1
+  input U_IN_L_ENABLE,  // for l in 0 to L-1
+  input U_IN_P_ENABLE,  // for p in 0 to L-1
 
-    input B_IN_ENABLE,  // for l in 0 to L-1
+  input B_IN_ENABLE,  // for l in 0 to L-1
 
-    input X_IN_ENABLE,  // for x in 0 to X-1
+  input X_IN_ENABLE,  // for x in 0 to X-1
 
-    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+  output reg X_OUT_ENABLE,  // for x in 0 to X-1
 
-    input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input R_IN_K_ENABLE,  // for k in 0 to W-1
+  input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input R_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    input H_IN_ENABLE,  // for l in 0 to L-1
+  input H_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+  output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
 
-    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+  output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
 
-    output reg B_OUT_ENABLE,  // for l in 0 to L-1
+  output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
-    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+  output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_X_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] SIZE_L_IN,
-    input [DATA_SIZE-1:0] SIZE_R_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_X_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
+  input [DATA_SIZE-1:0] SIZE_L_IN,
+  input [DATA_SIZE-1:0] SIZE_R_IN,
 
-    input [DATA_SIZE-1:0] W_IN,
-    input [DATA_SIZE-1:0] K_IN,
-    input [DATA_SIZE-1:0] U_IN,
-    input [DATA_SIZE-1:0] B_IN,
+  input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] K_IN,
+  input [DATA_SIZE-1:0] U_IN,
+  input [DATA_SIZE-1:0] B_IN,
 
-    input [DATA_SIZE-1:0] X_IN,
-    input [DATA_SIZE-1:0] R_IN,
-    input [DATA_SIZE-1:0] H_IN,
+  input [DATA_SIZE-1:0] X_IN,
+  input [DATA_SIZE-1:0] R_IN,
+  input [DATA_SIZE-1:0] H_IN,
 
-    output reg [DATA_SIZE-1:0] W_OUT,
-    output reg [DATA_SIZE-1:0] K_OUT,
-    output reg [DATA_SIZE-1:0] U_OUT,
-    output reg [DATA_SIZE-1:0] B_OUT,
+  output reg [DATA_SIZE-1:0] W_OUT,
+  output reg [DATA_SIZE-1:0] K_OUT,
+  output reg [DATA_SIZE-1:0] U_OUT,
+  output reg [DATA_SIZE-1:0] B_OUT,
 
-    output reg [DATA_SIZE-1:0] H_OUT
-  );
+  output reg [DATA_SIZE-1:0] H_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -127,17 +126,17 @@ module ntm_controller #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -147,52 +146,52 @@ module ntm_controller #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg  [          2:0] controller_ctrl_fsm_int;
 
   // ACTIVATION GATE VECTOR
   // CONTROL
-  wire start_activation_gate_vector;
-  wire ready_activation_gate_vector;
+  wire                 start_activation_gate_vector;
+  wire                 ready_activation_gate_vector;
 
-  wire w_in_l_enable_activation_gate_vector;
-  wire w_in_x_enable_activation_gate_vector;
+  wire                 w_in_l_enable_activation_gate_vector;
+  wire                 w_in_x_enable_activation_gate_vector;
 
-  wire w_out_l_enable_activation_gate_vector;
-  wire w_out_x_enable_activation_gate_vector;
+  wire                 w_out_l_enable_activation_gate_vector;
+  wire                 w_out_x_enable_activation_gate_vector;
 
-  wire x_in_enable_activation_gate_vector;
+  wire                 x_in_enable_activation_gate_vector;
 
-  wire x_out_enable_activation_gate_vector;
+  wire                 x_out_enable_activation_gate_vector;
 
-  wire k_in_i_enable_activation_gate_vector;
-  wire k_in_l_enable_activation_gate_vector;
-  wire k_in_k_enable_activation_gate_vector;
+  wire                 k_in_i_enable_activation_gate_vector;
+  wire                 k_in_l_enable_activation_gate_vector;
+  wire                 k_in_k_enable_activation_gate_vector;
 
-  wire k_out_i_enable_activation_gate_vector;
-  wire k_out_l_enable_activation_gate_vector;
-  wire k_out_k_enable_activation_gate_vector;
+  wire                 k_out_i_enable_activation_gate_vector;
+  wire                 k_out_l_enable_activation_gate_vector;
+  wire                 k_out_k_enable_activation_gate_vector;
 
-  wire r_in_i_enable_activation_gate_vector;
-  wire r_in_k_enable_activation_gate_vector;
+  wire                 r_in_i_enable_activation_gate_vector;
+  wire                 r_in_k_enable_activation_gate_vector;
 
-  wire r_out_i_enable_activation_gate_vector;
-  wire r_out_k_enable_activation_gate_vector;
+  wire                 r_out_i_enable_activation_gate_vector;
+  wire                 r_out_k_enable_activation_gate_vector;
 
-  wire u_in_l_enable_activation_gate_vector;
-  wire u_in_p_enable_activation_gate_vector;
+  wire                 u_in_l_enable_activation_gate_vector;
+  wire                 u_in_p_enable_activation_gate_vector;
 
-  wire u_out_l_enable_activation_gate_vector;
-  wire u_out_p_enable_activation_gate_vector;
+  wire                 u_out_l_enable_activation_gate_vector;
+  wire                 u_out_p_enable_activation_gate_vector;
 
-  wire h_in_enable_activation_gate_vector;
+  wire                 h_in_enable_activation_gate_vector;
 
-  wire h_out_enable_activation_gate_vector;
+  wire                 h_out_enable_activation_gate_vector;
 
-  wire b_in_enable_activation_gate_vector;
+  wire                 b_in_enable_activation_gate_vector;
 
-  wire b_out_enable_activation_gate_vector;
+  wire                 b_out_enable_activation_gate_vector;
 
-  wire a_out_enable_activation_gate_vector;
+  wire                 a_out_enable_activation_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_activation_gate_vector;
@@ -212,42 +211,42 @@ module ntm_controller #(
 
   // ACTIVATION TRAINER
   // CONTROL
-  wire start_activation_trainer;
-  wire ready_activation_trainer;
+  wire                 start_activation_trainer;
+  wire                 ready_activation_trainer;
 
-  wire x_in_enable_activation_trainer;
+  wire                 x_in_enable_activation_trainer;
 
-  wire x_out_enable_activation_trainer;
+  wire                 x_out_enable_activation_trainer;
 
-  wire r_in_i_enable_activation_trainer;
-  wire r_in_k_enable_activation_trainer;
+  wire                 r_in_i_enable_activation_trainer;
+  wire                 r_in_k_enable_activation_trainer;
 
-  wire r_out_i_enable_activation_trainer;
-  wire r_out_k_enable_activation_trainer;
+  wire                 r_out_i_enable_activation_trainer;
+  wire                 r_out_k_enable_activation_trainer;
 
-  wire h_in_enable_activation_trainer;
+  wire                 h_in_enable_activation_trainer;
 
-  wire h_out_enable_activation_trainer;
+  wire                 h_out_enable_activation_trainer;
 
-  wire a_in_enable_activation_trainer;
-  wire i_in_enable_activation_trainer;
-  wire s_in_enable_activation_trainer;
+  wire                 a_in_enable_activation_trainer;
+  wire                 i_in_enable_activation_trainer;
+  wire                 s_in_enable_activation_trainer;
 
-  wire a_out_enable_activation_trainer;
-  wire i_out_enable_activation_trainer;
-  wire s_out_enable_activation_trainer;
+  wire                 a_out_enable_activation_trainer;
+  wire                 i_out_enable_activation_trainer;
+  wire                 s_out_enable_activation_trainer;
 
-  wire w_out_l_enable_activation_trainer;
-  wire w_out_x_enable_activation_trainer;
+  wire                 w_out_l_enable_activation_trainer;
+  wire                 w_out_x_enable_activation_trainer;
 
-  wire k_out_i_enable_activation_trainer;
-  wire k_out_l_enable_activation_trainer;
-  wire k_out_k_enable_activation_trainer;
+  wire                 k_out_i_enable_activation_trainer;
+  wire                 k_out_l_enable_activation_trainer;
+  wire                 k_out_k_enable_activation_trainer;
 
-  wire u_out_l_enable_activation_trainer;
-  wire u_out_p_enable_activation_trainer;
+  wire                 u_out_l_enable_activation_trainer;
+  wire                 u_out_p_enable_activation_trainer;
 
-  wire b_out_enable_activation_trainer;
+  wire                 b_out_enable_activation_trainer;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_activation_trainer;
@@ -270,48 +269,48 @@ module ntm_controller #(
 
   // INTPUT GATE VECTOR
   // CONTROL
-  wire start_input_gate_vector;
-  wire ready_input_gate_vector;
+  wire                 start_input_gate_vector;
+  wire                 ready_input_gate_vector;
 
-  wire w_in_l_enable_input_gate_vector;
-  wire w_in_x_enable_input_gate_vector;
+  wire                 w_in_l_enable_input_gate_vector;
+  wire                 w_in_x_enable_input_gate_vector;
 
-  wire w_out_l_enable_input_gate_vector;
-  wire w_out_x_enable_input_gate_vector;
+  wire                 w_out_l_enable_input_gate_vector;
+  wire                 w_out_x_enable_input_gate_vector;
 
-  wire x_in_enable_input_gate_vector;
+  wire                 x_in_enable_input_gate_vector;
 
-  wire x_out_enable_input_gate_vector;
+  wire                 x_out_enable_input_gate_vector;
 
-  wire k_in_i_enable_input_gate_vector;
-  wire k_in_l_enable_input_gate_vector;
-  wire k_in_k_enable_input_gate_vector;
+  wire                 k_in_i_enable_input_gate_vector;
+  wire                 k_in_l_enable_input_gate_vector;
+  wire                 k_in_k_enable_input_gate_vector;
 
-  wire k_out_i_enable_input_gate_vector;
-  wire k_out_l_enable_input_gate_vector;
-  wire k_out_k_enable_input_gate_vector;
+  wire                 k_out_i_enable_input_gate_vector;
+  wire                 k_out_l_enable_input_gate_vector;
+  wire                 k_out_k_enable_input_gate_vector;
 
-  wire r_in_i_enable_input_gate_vector;
-  wire r_in_k_enable_input_gate_vector;
+  wire                 r_in_i_enable_input_gate_vector;
+  wire                 r_in_k_enable_input_gate_vector;
 
-  wire r_out_i_enable_input_gate_vector;
-  wire r_out_k_enable_input_gate_vector;
+  wire                 r_out_i_enable_input_gate_vector;
+  wire                 r_out_k_enable_input_gate_vector;
 
-  wire u_in_l_enable_input_gate_vector;
-  wire u_in_p_enable_input_gate_vector;
+  wire                 u_in_l_enable_input_gate_vector;
+  wire                 u_in_p_enable_input_gate_vector;
 
-  wire u_out_l_enable_input_gate_vector;
-  wire u_out_p_enable_input_gate_vector;
+  wire                 u_out_l_enable_input_gate_vector;
+  wire                 u_out_p_enable_input_gate_vector;
 
-  wire h_in_enable_input_gate_vector;
+  wire                 h_in_enable_input_gate_vector;
 
-  wire h_out_enable_input_gate_vector;
+  wire                 h_out_enable_input_gate_vector;
 
-  wire b_in_enable_input_gate_vector;
+  wire                 b_in_enable_input_gate_vector;
 
-  wire b_out_enable_input_gate_vector;
+  wire                 b_out_enable_input_gate_vector;
 
-  wire i_out_enable_input_gate_vector;
+  wire                 i_out_enable_input_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_input_gate_vector;
@@ -331,42 +330,42 @@ module ntm_controller #(
 
   // INPUT TRAINER
   // CONTROL
-  wire start_input_trainer;
-  wire ready_input_trainer;
+  wire                 start_input_trainer;
+  wire                 ready_input_trainer;
 
-  wire x_in_enable_input_trainer;
+  wire                 x_in_enable_input_trainer;
 
-  wire x_out_enable_input_trainer;
+  wire                 x_out_enable_input_trainer;
 
-  wire r_in_i_enable_input_trainer;
-  wire r_in_k_enable_input_trainer;
+  wire                 r_in_i_enable_input_trainer;
+  wire                 r_in_k_enable_input_trainer;
 
-  wire r_out_i_enable_input_trainer;
-  wire r_out_k_enable_input_trainer;
+  wire                 r_out_i_enable_input_trainer;
+  wire                 r_out_k_enable_input_trainer;
 
-  wire h_in_enable_input_trainer;
+  wire                 h_in_enable_input_trainer;
 
-  wire h_out_enable_input_trainer;
+  wire                 h_out_enable_input_trainer;
 
-  wire a_in_enable_input_trainer;
-  wire i_in_enable_input_trainer;
-  wire s_in_enable_input_trainer;
+  wire                 a_in_enable_input_trainer;
+  wire                 i_in_enable_input_trainer;
+  wire                 s_in_enable_input_trainer;
 
-  wire a_out_enable_input_trainer;
-  wire i_out_enable_input_trainer;
-  wire s_out_enable_input_trainer;
+  wire                 a_out_enable_input_trainer;
+  wire                 i_out_enable_input_trainer;
+  wire                 s_out_enable_input_trainer;
 
-  wire w_out_l_enable_input_trainer;
-  wire w_out_x_enable_input_trainer;
+  wire                 w_out_l_enable_input_trainer;
+  wire                 w_out_x_enable_input_trainer;
 
-  wire k_out_i_enable_input_trainer;
-  wire k_out_l_enable_input_trainer;
-  wire k_out_k_enable_input_trainer;
+  wire                 k_out_i_enable_input_trainer;
+  wire                 k_out_l_enable_input_trainer;
+  wire                 k_out_k_enable_input_trainer;
 
-  wire u_out_l_enable_input_trainer;
-  wire u_out_p_enable_input_trainer;
+  wire                 u_out_l_enable_input_trainer;
+  wire                 u_out_p_enable_input_trainer;
 
-  wire b_out_enable_input_trainer;
+  wire                 b_out_enable_input_trainer;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_input_trainer;
@@ -389,48 +388,48 @@ module ntm_controller #(
 
   // OUTPUT GATE VECTOR
   // CONTROL
-  wire start_output_gate_vector;
-  wire ready_output_gate_vector;
- 
-  wire w_in_l_enable_output_gate_vector;
-  wire w_in_x_enable_output_gate_vector;
- 
-  wire w_out_l_enable_output_gate_vector;
-  wire w_out_x_enable_output_gate_vector;
+  wire                 start_output_gate_vector;
+  wire                 ready_output_gate_vector;
 
-  wire x_in_enable_output_gate_vector;
+  wire                 w_in_l_enable_output_gate_vector;
+  wire                 w_in_x_enable_output_gate_vector;
 
-  wire x_out_enable_output_gate_vector;
+  wire                 w_out_l_enable_output_gate_vector;
+  wire                 w_out_x_enable_output_gate_vector;
 
-  wire k_in_i_enable_output_gate_vector;
-  wire k_in_l_enable_output_gate_vector;
-  wire k_in_k_enable_output_gate_vector;
+  wire                 x_in_enable_output_gate_vector;
 
-  wire k_out_i_enable_output_gate_vector;
-  wire k_out_l_enable_output_gate_vector;
-  wire k_out_k_enable_output_gate_vector;
+  wire                 x_out_enable_output_gate_vector;
 
-  wire r_in_i_enable_output_gate_vector;
-  wire r_in_k_enable_output_gate_vector;
+  wire                 k_in_i_enable_output_gate_vector;
+  wire                 k_in_l_enable_output_gate_vector;
+  wire                 k_in_k_enable_output_gate_vector;
 
-  wire r_out_i_enable_output_gate_vector;
-  wire r_out_k_enable_output_gate_vector;
+  wire                 k_out_i_enable_output_gate_vector;
+  wire                 k_out_l_enable_output_gate_vector;
+  wire                 k_out_k_enable_output_gate_vector;
 
-  wire u_in_l_enable_output_gate_vector;
-  wire u_in_p_enable_output_gate_vector;
+  wire                 r_in_i_enable_output_gate_vector;
+  wire                 r_in_k_enable_output_gate_vector;
 
-  wire u_out_l_enable_output_gate_vector;
-  wire u_out_p_enable_output_gate_vector;
+  wire                 r_out_i_enable_output_gate_vector;
+  wire                 r_out_k_enable_output_gate_vector;
 
-  wire h_in_enable_output_gate_vector;
+  wire                 u_in_l_enable_output_gate_vector;
+  wire                 u_in_p_enable_output_gate_vector;
 
-  wire h_out_enable_output_gate_vector;
+  wire                 u_out_l_enable_output_gate_vector;
+  wire                 u_out_p_enable_output_gate_vector;
 
-  wire b_in_enable_output_gate_vector;
+  wire                 h_in_enable_output_gate_vector;
 
-  wire b_out_enable_output_gate_vector;
+  wire                 h_out_enable_output_gate_vector;
 
-  wire o_out_enable_output_gate_vector;
+  wire                 b_in_enable_output_gate_vector;
+
+  wire                 b_out_enable_output_gate_vector;
+
+  wire                 o_out_enable_output_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_output_gate_vector;
@@ -450,40 +449,40 @@ module ntm_controller #(
 
   // OUTPUT TRAINER
   // CONTROL
-  wire start_output_trainer;
-  wire ready_output_trainer;
+  wire                 start_output_trainer;
+  wire                 ready_output_trainer;
 
-  wire x_in_enable_output_trainer;
+  wire                 x_in_enable_output_trainer;
 
-  wire x_out_enable_output_trainer;
+  wire                 x_out_enable_output_trainer;
 
-  wire r_in_i_enable_output_trainer;
-  wire r_in_k_enable_output_trainer;
+  wire                 r_in_i_enable_output_trainer;
+  wire                 r_in_k_enable_output_trainer;
 
-  wire r_out_i_enable_output_trainer;
-  wire r_out_k_enable_output_trainer;
+  wire                 r_out_i_enable_output_trainer;
+  wire                 r_out_k_enable_output_trainer;
 
-  wire h_in_enable_output_trainer;
+  wire                 h_in_enable_output_trainer;
 
-  wire h_out_enable_output_trainer;
+  wire                 h_out_enable_output_trainer;
 
-  wire a_in_enable_output_trainer;
-  wire o_in_enable_output_trainer;
+  wire                 a_in_enable_output_trainer;
+  wire                 o_in_enable_output_trainer;
 
-  wire a_out_enable_output_trainer;
-  wire o_out_enable_output_trainer;
+  wire                 a_out_enable_output_trainer;
+  wire                 o_out_enable_output_trainer;
 
-  wire w_out_l_enable_output_trainer;
-  wire w_out_x_enable_output_trainer;
+  wire                 w_out_l_enable_output_trainer;
+  wire                 w_out_x_enable_output_trainer;
 
-  wire k_out_i_enable_output_trainer;
-  wire k_out_l_enable_output_trainer;
-  wire k_out_k_enable_output_trainer;
+  wire                 k_out_i_enable_output_trainer;
+  wire                 k_out_l_enable_output_trainer;
+  wire                 k_out_k_enable_output_trainer;
 
-  wire u_out_l_enable_output_trainer;
-  wire u_out_p_enable_output_trainer;
+  wire                 u_out_l_enable_output_trainer;
+  wire                 u_out_p_enable_output_trainer;
 
-  wire b_out_enable_output_trainer;
+  wire                 b_out_enable_output_trainer;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_output_trainer;
@@ -505,42 +504,42 @@ module ntm_controller #(
 
   // FORGET GATE VECTOR
   // CONTROL
-  wire start_forget_gate_vector;
-  wire ready_forget_gate_vector;
+  wire                 start_forget_gate_vector;
+  wire                 ready_forget_gate_vector;
 
-  wire w_in_l_enable_forget_gate_vector;
-  wire w_in_x_enable_forget_gate_vector;
+  wire                 w_in_l_enable_forget_gate_vector;
+  wire                 w_in_x_enable_forget_gate_vector;
 
-  wire w_out_l_enable_forget_gate_vector;
-  wire w_out_x_enable_forget_gate_vector;
+  wire                 w_out_l_enable_forget_gate_vector;
+  wire                 w_out_x_enable_forget_gate_vector;
 
-  wire x_in_enable_forget_gate_vector;
+  wire                 x_in_enable_forget_gate_vector;
 
-  wire x_out_enable_forget_gate_vector;
+  wire                 x_out_enable_forget_gate_vector;
 
-  wire k_in_i_enable_forget_gate_vector;
-  wire k_in_l_enable_forget_gate_vector;
-  wire k_in_k_enable_forget_gate_vector;
+  wire                 k_in_i_enable_forget_gate_vector;
+  wire                 k_in_l_enable_forget_gate_vector;
+  wire                 k_in_k_enable_forget_gate_vector;
 
-  wire k_out_i_enable_forget_gate_vector;
-  wire k_out_l_enable_forget_gate_vector;
-  wire k_out_k_enable_forget_gate_vector;
+  wire                 k_out_i_enable_forget_gate_vector;
+  wire                 k_out_l_enable_forget_gate_vector;
+  wire                 k_out_k_enable_forget_gate_vector;
 
-  wire r_in_i_enable_forget_gate_vector;
-  wire r_in_k_enable_forget_gate_vector;
+  wire                 r_in_i_enable_forget_gate_vector;
+  wire                 r_in_k_enable_forget_gate_vector;
 
-  wire r_out_i_enable_forget_gate_vector;
-  wire r_out_k_enable_forget_gate_vector;
+  wire                 r_out_i_enable_forget_gate_vector;
+  wire                 r_out_k_enable_forget_gate_vector;
 
-  wire u_in_enable_forget_gate_vector;
-  wire h_in_enable_forget_gate_vector;
-  wire b_in_enable_forget_gate_vector;
+  wire                 u_in_enable_forget_gate_vector;
+  wire                 h_in_enable_forget_gate_vector;
+  wire                 b_in_enable_forget_gate_vector;
 
-  wire u_out_enable_forget_gate_vector;
-  wire h_out_enable_forget_gate_vector;
-  wire b_out_enable_forget_gate_vector;
+  wire                 u_out_enable_forget_gate_vector;
+  wire                 h_out_enable_forget_gate_vector;
+  wire                 b_out_enable_forget_gate_vector;
 
-  wire f_out_enable_forget_gate_vector;
+  wire                 f_out_enable_forget_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_forget_gate_vector;
@@ -560,40 +559,40 @@ module ntm_controller #(
 
   // FORGET TRAINER
   // CONTROL
-  wire start_forget_trainer;
-  wire ready_forget_trainer;
+  wire                 start_forget_trainer;
+  wire                 ready_forget_trainer;
 
-  wire x_in_enable_forget_trainer;
+  wire                 x_in_enable_forget_trainer;
 
-  wire x_out_enable_forget_trainer;
+  wire                 x_out_enable_forget_trainer;
 
-  wire r_in_i_enable_forget_trainer;
-  wire r_in_k_enable_forget_trainer;
+  wire                 r_in_i_enable_forget_trainer;
+  wire                 r_in_k_enable_forget_trainer;
 
-  wire r_out_i_enable_forget_trainer;
-  wire r_out_k_enable_forget_trainer;
+  wire                 r_out_i_enable_forget_trainer;
+  wire                 r_out_k_enable_forget_trainer;
 
-  wire h_in_enable_forget_trainer;
+  wire                 h_in_enable_forget_trainer;
 
-  wire h_out_enable_forget_trainer;
+  wire                 h_out_enable_forget_trainer;
 
-  wire f_in_enable_forget_trainer;
-  wire s_in_enable_forget_trainer;
+  wire                 f_in_enable_forget_trainer;
+  wire                 s_in_enable_forget_trainer;
 
-  wire f_out_enable_forget_trainer;
-  wire s_out_enable_forget_trainer;
+  wire                 f_out_enable_forget_trainer;
+  wire                 s_out_enable_forget_trainer;
 
-  wire w_out_l_enable_forget_trainer;
-  wire w_out_x_enable_forget_trainer;
+  wire                 w_out_l_enable_forget_trainer;
+  wire                 w_out_x_enable_forget_trainer;
 
-  wire k_out_i_enable_forget_trainer;
-  wire k_out_l_enable_forget_trainer;
-  wire k_out_k_enable_forget_trainer;
+  wire                 k_out_i_enable_forget_trainer;
+  wire                 k_out_l_enable_forget_trainer;
+  wire                 k_out_k_enable_forget_trainer;
 
-  wire u_out_l_enable_forget_trainer;
-  wire u_out_p_enable_forget_trainer;
+  wire                 u_out_l_enable_forget_trainer;
+  wire                 u_out_p_enable_forget_trainer;
 
-  wire b_out_enable_forget_trainer;
+  wire                 b_out_enable_forget_trainer;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_forget_trainer;
@@ -615,20 +614,20 @@ module ntm_controller #(
 
   // STATE GATE VECTOR
   // CONTROL
-  wire start_state_gate_vector;
-  wire ready_state_gate_vector;
+  wire                 start_state_gate_vector;
+  wire                 ready_state_gate_vector;
 
-  wire i_in_enable_state_gate_vector;
-  wire f_in_enable_state_gate_vector;
-  wire a_in_enable_state_gate_vector;
+  wire                 i_in_enable_state_gate_vector;
+  wire                 f_in_enable_state_gate_vector;
+  wire                 a_in_enable_state_gate_vector;
 
-  wire i_out_enable_state_gate_vector;
-  wire f_out_enable_state_gate_vector;
-  wire a_out_enable_state_gate_vector;
+  wire                 i_out_enable_state_gate_vector;
+  wire                 f_out_enable_state_gate_vector;
+  wire                 a_out_enable_state_gate_vector;
 
-  wire s_in_enable_state_gate_vector;
+  wire                 s_in_enable_state_gate_vector;
 
-  wire s_out_enable_state_gate_vector;
+  wire                 s_out_enable_state_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_l_in_state_gate_vector;
@@ -642,16 +641,16 @@ module ntm_controller #(
 
   // HIDDEN GATE VECTOR
   // CONTROL
-  wire start_hidden_gate_vector;
-  wire ready_hidden_gate_vector;
+  wire                 start_hidden_gate_vector;
+  wire                 ready_hidden_gate_vector;
 
-  wire s_in_enable_hidden_gate_vector;
-  wire o_in_enable_hidden_gate_vector;
+  wire                 s_in_enable_hidden_gate_vector;
+  wire                 o_in_enable_hidden_gate_vector;
 
-  wire s_out_enable_hidden_gate_vector;
-  wire o_out_enable_hidden_gate_vector;
+  wire                 s_out_enable_hidden_gate_vector;
+  wire                 o_out_enable_hidden_gate_vector;
 
-  wire h_out_enable_hidden_gate_vector;
+  wire                 h_out_enable_hidden_gate_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_l_in_hidden_gate_vector;
@@ -667,43 +666,42 @@ module ntm_controller #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if ((RST == 1'b0)) begin
       // Data Outputs
       H_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;
           end
         end
 
-        VECTOR_ACTIVATION_STATE : begin  // STEP 1
+        VECTOR_ACTIVATION_STATE: begin  // STEP 1
         end
 
-        VECTOR_FORGET_STATE : begin  // STEP 2
+        VECTOR_FORGET_STATE: begin  // STEP 2
         end
 
-        VECTOR_INPUT_STATE : begin  // STEP 3
+        VECTOR_INPUT_STATE: begin  // STEP 3
         end
 
-        VECTOR_STATE_STATE : begin  // STEP 4
+        VECTOR_STATE_STATE: begin  // STEP 4
         end
 
-        VECTOR_OUTPUT_GATE : begin  // STEP 5
+        VECTOR_OUTPUT_GATE: begin  // STEP 5
         end
 
-        VECTOR_HIDDEN_GATE : begin  // STEP 6
+        VECTOR_HIDDEN_GATE: begin  // STEP 6
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -713,10 +711,9 @@ module ntm_controller #(
 
   // ACTIVATION GATE VECTOR
   ntm_activation_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  activation_gate_vector(
+  ) activation_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -784,10 +781,9 @@ module ntm_controller #(
 
   // ACTIVATION TRAINER
   ntm_activation_trainer #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  activation_trainer(
+  ) activation_trainer (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -852,10 +848,9 @@ module ntm_controller #(
 
   // INTPUT GATE VECTOR
   ntm_input_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  input_gate_vector(
+  ) input_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -923,10 +918,9 @@ module ntm_controller #(
 
   // INPUT TRAINER
   ntm_input_trainer #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  input_trainer(
+  ) input_trainer (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -991,10 +985,9 @@ module ntm_controller #(
 
   // OUTPUT GATE VECTOR
   ntm_output_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  output_gate_vector(
+  ) output_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1062,10 +1055,9 @@ module ntm_controller #(
 
   // OUTPUT TRAINER
   ntm_output_trainer #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  output_trainer(
+  ) output_trainer (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1127,10 +1119,9 @@ module ntm_controller #(
 
   // FORGET GATE VECTOR
   ntm_forget_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  forget_gate_vector(
+  ) forget_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1198,10 +1189,9 @@ module ntm_controller #(
 
   // FORGET TRAINER
   ntm_forget_trainer #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  forget_trainer(
+  ) forget_trainer (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1263,10 +1253,9 @@ module ntm_controller #(
 
   // STATE GATE VECTOR
   ntm_state_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  state_gate_vector(
+  ) state_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1300,10 +1289,9 @@ module ntm_controller #(
 
   // HIDDEN GATE VECTOR
   ntm_hidden_gate_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  hidden_gate_vector(
+  ) hidden_gate_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

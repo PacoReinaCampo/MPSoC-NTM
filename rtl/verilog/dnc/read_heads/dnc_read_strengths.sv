@@ -38,26 +38,25 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_strengths #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
+  // CONTROL
+  input  START,
+  output READY,
 
-    input BETA_IN_ENABLE,  // for i in 0 to R-1
-    output BETA_OUT_ENABLE,  // for i in 0 to R-1
+  input  BETA_IN_ENABLE,  // for i in 0 to R-1
+  output BETA_OUT_ENABLE, // for i in 0 to R-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_R_IN,
-    input [DATA_SIZE-1:0] BETA_IN,
-    output [DATA_SIZE-1:0] BETA_OUT
-  );
+  // DATA
+  input  [DATA_SIZE-1:0] SIZE_R_IN,
+  input  [DATA_SIZE-1:0] BETA_IN,
+  output [DATA_SIZE-1:0] BETA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -67,17 +66,17 @@ module dnc_read_strengths #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -88,10 +87,10 @@ module dnc_read_strengths #(
 
   // VECTOR ONE_CONTROLPLUS
   // CONTROL
-  wire start_vector_oneplus;
-  wire ready_vector_oneplus;
-  wire data_in_enable_vector_oneplus;
-  wire data_out_enable_vector_oneplus;
+  wire                 start_vector_oneplus;
+  wire                 ready_vector_oneplus;
+  wire                 data_in_enable_vector_oneplus;
+  wire                 data_out_enable_vector_oneplus;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_oneplus;
@@ -106,22 +105,21 @@ module dnc_read_strengths #(
 
   // ASSIGNATIONS
   // CONTROL
-  assign start_vector_oneplus = START;
-  assign READY = ready_vector_oneplus;
+  assign start_vector_oneplus          = START;
+  assign READY                         = ready_vector_oneplus;
   assign data_in_enable_vector_oneplus = BETA_IN_ENABLE;
-  assign BETA_OUT_ENABLE = data_out_enable_vector_oneplus;
+  assign BETA_OUT_ENABLE               = data_out_enable_vector_oneplus;
 
   // DATA
-  assign size_in_vector_oneplus = SIZE_R_IN;
-  assign data_in_vector_oneplus = BETA_IN;
-  assign BETA_OUT = data_out_vector_oneplus;
+  assign size_in_vector_oneplus        = SIZE_R_IN;
+  assign data_in_vector_oneplus        = BETA_IN;
+  assign BETA_OUT                      = data_out_vector_oneplus;
 
   // VECTOR ONE_CONTROLPLUS
   ntm_vector_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_oneplus_function(
+  ) vector_oneplus_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -130,12 +128,12 @@ module dnc_read_strengths #(
     .START(start_vector_oneplus),
     .READY(ready_vector_oneplus),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_oneplus),
+    .DATA_IN_ENABLE (data_in_enable_vector_oneplus),
     .DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .SIZE_IN(size_in_vector_oneplus),
-    .DATA_IN(data_in_vector_oneplus),
+    .SIZE_IN (size_in_vector_oneplus),
+    .DATA_IN (data_in_vector_oneplus),
     .DATA_OUT(data_out_vector_oneplus)
   );
 

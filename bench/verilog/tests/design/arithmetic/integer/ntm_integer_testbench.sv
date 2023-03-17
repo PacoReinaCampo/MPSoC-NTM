@@ -48,61 +48,61 @@ module ntm_integer_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
@@ -110,21 +110,21 @@ module ntm_integer_testbench;
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_integer_adder;
-  wire ready_scalar_integer_adder;
+  wire                 start_scalar_integer_adder;
+  wire                 ready_scalar_integer_adder;
 
-  wire operation_scalar_integer_adder;
+  wire                 operation_scalar_integer_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_integer_adder;
   wire [DATA_SIZE-1:0] data_b_in_scalar_integer_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_integer_adder;
-  wire overflow_out_scalar_integer_adder;
+  wire                 overflow_out_scalar_integer_adder;
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_integer_multiplier;
-  wire ready_scalar_integer_multiplier;
+  wire                 start_scalar_integer_multiplier;
+  wire                 ready_scalar_integer_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_integer_multiplier;
@@ -134,8 +134,8 @@ module ntm_integer_testbench;
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_integer_divider;
-  wire ready_scalar_integer_divider;
+  wire                 start_scalar_integer_divider;
+  wire                 ready_scalar_integer_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_integer_divider;
@@ -149,30 +149,30 @@ module ntm_integer_testbench;
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_integer_adder;
-  wire ready_vector_integer_adder;
+  wire                 start_vector_integer_adder;
+  wire                 ready_vector_integer_adder;
 
-  wire operation_vector_integer_adder;
+  wire                 operation_vector_integer_adder;
 
-  wire data_a_in_enable_vector_integer_adder;
-  wire data_b_in_enable_vector_integer_adder;
-  wire data_out_enable_vector_integer_adder;
+  wire                 data_a_in_enable_vector_integer_adder;
+  wire                 data_b_in_enable_vector_integer_adder;
+  wire                 data_out_enable_vector_integer_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_integer_adder;
   wire [DATA_SIZE-1:0] data_a_in_vector_integer_adder;
   wire [DATA_SIZE-1:0] data_b_in_vector_integer_adder;
   wire [DATA_SIZE-1:0] data_out_vector_integer_adder;
-  wire overflow_out_vector_integer_adder;
+  wire                 overflow_out_vector_integer_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_integer_multiplier;
-  wire ready_vector_integer_multiplier;
+  wire                 start_vector_integer_multiplier;
+  wire                 ready_vector_integer_multiplier;
 
-  wire data_a_in_enable_vector_integer_multiplier;
-  wire data_b_in_enable_vector_integer_multiplier;
-  wire data_out_enable_vector_integer_multiplier;
+  wire                 data_a_in_enable_vector_integer_multiplier;
+  wire                 data_b_in_enable_vector_integer_multiplier;
+  wire                 data_out_enable_vector_integer_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_integer_multiplier;
@@ -183,12 +183,12 @@ module ntm_integer_testbench;
 
   // VECTOR DIVIDER
   // CONTROL
-  wire start_vector_integer_divider;
-  wire ready_vector_integer_divider;
+  wire                 start_vector_integer_divider;
+  wire                 ready_vector_integer_divider;
 
-  wire data_a_in_enable_vector_integer_divider;
-  wire data_b_in_enable_vector_integer_divider;
-  wire data_out_enable_vector_integer_divider;
+  wire                 data_a_in_enable_vector_integer_divider;
+  wire                 data_b_in_enable_vector_integer_divider;
+  wire                 data_out_enable_vector_integer_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_integer_divider;
@@ -203,17 +203,17 @@ module ntm_integer_testbench;
 
   // MATRIX ADDER
   // CONTROL
-  wire start_matrix_integer_adder;
-  wire ready_matrix_integer_adder;
+  wire                 start_matrix_integer_adder;
+  wire                 ready_matrix_integer_adder;
 
-  wire operation_matrix_integer_adder;
+  wire                 operation_matrix_integer_adder;
 
-  wire data_a_in_i_enable_matrix_integer_adder;
-  wire data_a_in_j_enable_matrix_integer_adder;
-  wire data_b_in_i_enable_matrix_integer_adder;
-  wire data_b_in_j_enable_matrix_integer_adder;
-  wire data_out_i_enable_matrix_integer_adder;
-  wire data_out_j_enable_matrix_integer_adder;
+  wire                 data_a_in_i_enable_matrix_integer_adder;
+  wire                 data_a_in_j_enable_matrix_integer_adder;
+  wire                 data_b_in_i_enable_matrix_integer_adder;
+  wire                 data_b_in_j_enable_matrix_integer_adder;
+  wire                 data_out_i_enable_matrix_integer_adder;
+  wire                 data_out_j_enable_matrix_integer_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_integer_adder;
@@ -221,19 +221,19 @@ module ntm_integer_testbench;
   wire [DATA_SIZE-1:0] data_a_in_matrix_integer_adder;
   wire [DATA_SIZE-1:0] data_b_in_matrix_integer_adder;
   wire [DATA_SIZE-1:0] data_out_matrix_integer_adder;
-  wire overflow_out_matrix_integer_adder;
+  wire                 overflow_out_matrix_integer_adder;
 
   // MATRIX MULTIPLIER
   // CONTROL
-  wire start_matrix_integer_multiplier;
-  wire ready_matrix_integer_multiplier;
+  wire                 start_matrix_integer_multiplier;
+  wire                 ready_matrix_integer_multiplier;
 
-  wire data_a_in_i_enable_matrix_integer_multiplier;
-  wire data_a_in_j_enable_matrix_integer_multiplier;
-  wire data_b_in_i_enable_matrix_integer_multiplier;
-  wire data_b_in_j_enable_matrix_integer_multiplier;
-  wire data_out_i_enable_matrix_integer_multiplier;
-  wire data_out_j_enable_matrix_integer_multiplier;
+  wire                 data_a_in_i_enable_matrix_integer_multiplier;
+  wire                 data_a_in_j_enable_matrix_integer_multiplier;
+  wire                 data_b_in_i_enable_matrix_integer_multiplier;
+  wire                 data_b_in_j_enable_matrix_integer_multiplier;
+  wire                 data_out_i_enable_matrix_integer_multiplier;
+  wire                 data_out_j_enable_matrix_integer_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_integer_multiplier;
@@ -245,15 +245,15 @@ module ntm_integer_testbench;
 
   // MATRIX DIVIDER
   // CONTROL
-  wire start_matrix_integer_divider;
-  wire ready_matrix_integer_divider;
+  wire                 start_matrix_integer_divider;
+  wire                 ready_matrix_integer_divider;
 
-  wire data_a_in_i_enable_matrix_integer_divider;
-  wire data_a_in_j_enable_matrix_integer_divider;
-  wire data_b_in_i_enable_matrix_integer_divider;
-  wire data_b_in_j_enable_matrix_integer_divider;
-  wire data_out_i_enable_matrix_integer_divider;
-  wire data_out_j_enable_matrix_integer_divider;
+  wire                 data_a_in_i_enable_matrix_integer_divider;
+  wire                 data_a_in_j_enable_matrix_integer_divider;
+  wire                 data_b_in_i_enable_matrix_integer_divider;
+  wire                 data_b_in_j_enable_matrix_integer_divider;
+  wire                 data_out_i_enable_matrix_integer_divider;
+  wire                 data_out_j_enable_matrix_integer_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_integer_divider;
@@ -269,7 +269,7 @@ module ntm_integer_testbench;
 
   ntm_integer_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -280,39 +280,38 @@ module ntm_integer_testbench;
     .R(R),
 
     // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST(STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST),
-    .STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST(STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST),
-    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST(STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST),
-    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0(STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0),
+    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST       (STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST),
+    .STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST  (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST),
+    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST     (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST),
+    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0     (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0),
     .STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0(STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0(STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0),
-    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1(STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1),
+    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0   (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0),
+    .STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1     (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1),
     .STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1(STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1(STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1),
+    .STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1   (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST(STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST),
-    .STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST(STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST),
-    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST(STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST),
-    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0(STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0),
+    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST       (STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST),
+    .STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST  (STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST),
+    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST     (STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST),
+    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0     (STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0),
     .STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0(STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0(STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0),
-    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1(STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1),
+    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0   (STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0),
+    .STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1     (STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1),
     .STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1(STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1(STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1),
+    .STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1   (STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST(STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST),
-    .STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST(STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST),
-    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST(STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST),
-    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0(STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0),
+    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST       (STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST),
+    .STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST  (STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST),
+    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST     (STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST),
+    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0     (STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0),
     .STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0(STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0(STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0),
-    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1(STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1),
+    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0   (STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0),
+    .STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1     (STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1),
     .STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1(STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1)
-  )
-  integer_stimulus(
+    .STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1   (STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1)
+  ) integer_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -332,7 +331,7 @@ module ntm_integer_testbench;
     .SCALAR_INTEGER_ADDER_DATA_A_IN(data_a_in_scalar_integer_adder),
     .SCALAR_INTEGER_ADDER_DATA_B_IN(data_b_in_scalar_integer_adder),
 
-    .SCALAR_INTEGER_ADDER_DATA_OUT(data_out_scalar_integer_adder),
+    .SCALAR_INTEGER_ADDER_DATA_OUT    (data_out_scalar_integer_adder),
     .SCALAR_INTEGER_ADDER_OVERFLOW_OUT(overflow_out_scalar_integer_adder),
 
     // SCALAR MULTIPLIER
@@ -344,7 +343,7 @@ module ntm_integer_testbench;
     .SCALAR_INTEGER_MULTIPLIER_DATA_A_IN(data_a_in_scalar_integer_multiplier),
     .SCALAR_INTEGER_MULTIPLIER_DATA_B_IN(data_b_in_scalar_integer_multiplier),
 
-    .SCALAR_INTEGER_MULTIPLIER_DATA_OUT(data_out_scalar_integer_multiplier),
+    .SCALAR_INTEGER_MULTIPLIER_DATA_OUT    (data_out_scalar_integer_multiplier),
     .SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT(overflow_out_scalar_integer_multiplier),
 
     // SCALAR DIVIDER
@@ -372,14 +371,14 @@ module ntm_integer_testbench;
 
     .VECTOR_INTEGER_ADDER_DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_adder),
     .VECTOR_INTEGER_ADDER_DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_adder),
-    .VECTOR_INTEGER_ADDER_DATA_OUT_ENABLE(data_out_enable_vector_integer_adder),
+    .VECTOR_INTEGER_ADDER_DATA_OUT_ENABLE (data_out_enable_vector_integer_adder),
 
     // DATA
-    .VECTOR_INTEGER_ADDER_SIZE_IN(size_in_vector_integer_adder),
+    .VECTOR_INTEGER_ADDER_SIZE_IN  (size_in_vector_integer_adder),
     .VECTOR_INTEGER_ADDER_DATA_A_IN(data_a_in_vector_integer_adder),
     .VECTOR_INTEGER_ADDER_DATA_B_IN(data_b_in_vector_integer_adder),
 
-    .VECTOR_INTEGER_ADDER_DATA_OUT(data_out_vector_integer_adder),
+    .VECTOR_INTEGER_ADDER_DATA_OUT    (data_out_vector_integer_adder),
     .VECTOR_INTEGER_ADDER_OVERFLOW_OUT(overflow_out_vector_integer_adder),
 
     // VECTOR MULTIPLIER
@@ -389,14 +388,14 @@ module ntm_integer_testbench;
 
     .VECTOR_INTEGER_MULTIPLIER_DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_multiplier),
     .VECTOR_INTEGER_MULTIPLIER_DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_multiplier),
-    .VECTOR_INTEGER_MULTIPLIER_DATA_OUT_ENABLE(data_out_enable_vector_integer_multiplier),
+    .VECTOR_INTEGER_MULTIPLIER_DATA_OUT_ENABLE (data_out_enable_vector_integer_multiplier),
 
     // DATA
-    .VECTOR_INTEGER_MULTIPLIER_SIZE_IN(size_in_vector_integer_multiplier),
+    .VECTOR_INTEGER_MULTIPLIER_SIZE_IN  (size_in_vector_integer_multiplier),
     .VECTOR_INTEGER_MULTIPLIER_DATA_A_IN(data_a_in_vector_integer_multiplier),
     .VECTOR_INTEGER_MULTIPLIER_DATA_B_IN(data_b_in_vector_integer_multiplier),
 
-    .VECTOR_INTEGER_MULTIPLIER_DATA_OUT(data_out_vector_integer_multiplier),
+    .VECTOR_INTEGER_MULTIPLIER_DATA_OUT    (data_out_vector_integer_multiplier),
     .VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT(overflow_out_vector_integer_multiplier),
 
     // VECTOR DIVIDER
@@ -406,10 +405,10 @@ module ntm_integer_testbench;
 
     .VECTOR_INTEGER_DIVIDER_DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_divider),
     .VECTOR_INTEGER_DIVIDER_DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_divider),
-    .VECTOR_INTEGER_DIVIDER_DATA_OUT_ENABLE(data_out_enable_vector_integer_divider),
+    .VECTOR_INTEGER_DIVIDER_DATA_OUT_ENABLE (data_out_enable_vector_integer_divider),
 
     // DATA
-    .VECTOR_INTEGER_DIVIDER_SIZE_IN(size_in_vector_integer_divider),
+    .VECTOR_INTEGER_DIVIDER_SIZE_IN  (size_in_vector_integer_divider),
     .VECTOR_INTEGER_DIVIDER_DATA_A_IN(data_a_in_vector_integer_divider),
     .VECTOR_INTEGER_DIVIDER_DATA_B_IN(data_b_in_vector_integer_divider),
 
@@ -431,8 +430,8 @@ module ntm_integer_testbench;
     .MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_adder),
     .MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_adder),
     .MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_adder),
-    .MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_adder),
-    .MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_adder),
+    .MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_adder),
+    .MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_adder),
 
     // DATA
     .MATRIX_INTEGER_ADDER_SIZE_I_IN(size_i_in_matrix_integer_adder),
@@ -440,7 +439,7 @@ module ntm_integer_testbench;
     .MATRIX_INTEGER_ADDER_DATA_A_IN(data_a_in_matrix_integer_adder),
     .MATRIX_INTEGER_ADDER_DATA_B_IN(data_b_in_matrix_integer_adder),
 
-    .MATRIX_INTEGER_ADDER_DATA_OUT(data_out_matrix_integer_adder),
+    .MATRIX_INTEGER_ADDER_DATA_OUT    (data_out_matrix_integer_adder),
     .MATRIX_INTEGER_ADDER_OVERFLOW_OUT(overflow_out_matrix_integer_adder),
 
     // MATRIX MULTIPLIER
@@ -452,8 +451,8 @@ module ntm_integer_testbench;
     .MATRIX_INTEGER_MULTIPLIER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_multiplier),
     .MATRIX_INTEGER_MULTIPLIER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_multiplier),
     .MATRIX_INTEGER_MULTIPLIER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_multiplier),
-    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_multiplier),
-    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_multiplier),
+    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_multiplier),
+    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_multiplier),
 
     // DATA
     .MATRIX_INTEGER_MULTIPLIER_SIZE_I_IN(size_i_in_matrix_integer_multiplier),
@@ -461,7 +460,7 @@ module ntm_integer_testbench;
     .MATRIX_INTEGER_MULTIPLIER_DATA_A_IN(data_a_in_matrix_integer_multiplier),
     .MATRIX_INTEGER_MULTIPLIER_DATA_B_IN(data_b_in_matrix_integer_multiplier),
 
-    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT(data_out_matrix_integer_multiplier),
+    .MATRIX_INTEGER_MULTIPLIER_DATA_OUT    (data_out_matrix_integer_multiplier),
     .MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT(overflow_out_matrix_integer_multiplier),
 
     // MATRIX DIVIDER
@@ -473,8 +472,8 @@ module ntm_integer_testbench;
     .MATRIX_INTEGER_DIVIDER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_divider),
     .MATRIX_INTEGER_DIVIDER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_divider),
     .MATRIX_INTEGER_DIVIDER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_divider),
-    .MATRIX_INTEGER_DIVIDER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_divider),
-    .MATRIX_INTEGER_DIVIDER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_divider),
+    .MATRIX_INTEGER_DIVIDER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_divider),
+    .MATRIX_INTEGER_DIVIDER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_divider),
 
     // DATA
     .MATRIX_INTEGER_DIVIDER_SIZE_I_IN(size_i_in_matrix_integer_divider),
@@ -492,10 +491,9 @@ module ntm_integer_testbench;
 
   // SCALAR ADDER
   ntm_scalar_integer_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_integer_adder(
+  ) scalar_integer_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -508,17 +506,16 @@ module ntm_integer_testbench;
 
     // DATA
     .OVERFLOW_OUT(overflow_out_scalar_integer_adder),
-    .DATA_A_IN(data_a_in_scalar_integer_adder),
-    .DATA_B_IN(data_b_in_scalar_integer_adder),
-    .DATA_OUT(data_out_scalar_integer_adder)
+    .DATA_A_IN   (data_a_in_scalar_integer_adder),
+    .DATA_B_IN   (data_b_in_scalar_integer_adder),
+    .DATA_OUT    (data_out_scalar_integer_adder)
   );
 
   // SCALAR MULTIPLIER
   ntm_scalar_integer_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_integer_multiplier(
+  ) scalar_integer_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -529,17 +526,16 @@ module ntm_integer_testbench;
 
     // DATA
     .OVERFLOW_OUT(overflow_out_scalar_integer_multiplier),
-    .DATA_A_IN(data_a_in_scalar_integer_multiplier),
-    .DATA_B_IN(data_b_in_scalar_integer_multiplier),
-    .DATA_OUT(data_out_scalar_integer_multiplier)
+    .DATA_A_IN   (data_a_in_scalar_integer_multiplier),
+    .DATA_B_IN   (data_b_in_scalar_integer_multiplier),
+    .DATA_OUT    (data_out_scalar_integer_multiplier)
   );
 
   // SCALAR DIVIDER
   ntm_scalar_integer_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_integer_divider(
+  ) scalar_integer_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -549,10 +545,10 @@ module ntm_integer_testbench;
     .READY(ready_scalar_integer_divider),
 
     // DATA
-    .REST_OUT(rest_out_scalar_integer_divider),
+    .REST_OUT (rest_out_scalar_integer_divider),
     .DATA_A_IN(data_a_in_scalar_integer_divider),
     .DATA_B_IN(data_b_in_scalar_integer_divider),
-    .DATA_OUT(data_out_scalar_integer_divider)
+    .DATA_OUT (data_out_scalar_integer_divider)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -561,10 +557,9 @@ module ntm_integer_testbench;
 
   // VECTOR ADDER
   ntm_vector_integer_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_integer_adder(
+  ) vector_integer_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -577,22 +572,21 @@ module ntm_integer_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_integer_adder),
+    .DATA_OUT_ENABLE (data_out_enable_vector_integer_adder),
 
     // DATA
     .OVERFLOW_OUT(overflow_out_vector_integer_adder),
-    .SIZE_IN(size_in_vector_integer_adder),
-    .DATA_A_IN(data_a_in_vector_integer_adder),
-    .DATA_B_IN(data_b_in_vector_integer_adder),
-    .DATA_OUT(data_out_vector_integer_adder)
+    .SIZE_IN     (size_in_vector_integer_adder),
+    .DATA_A_IN   (data_a_in_vector_integer_adder),
+    .DATA_B_IN   (data_b_in_vector_integer_adder),
+    .DATA_OUT    (data_out_vector_integer_adder)
   );
 
   // VECTOR MULTIPLIER
   ntm_vector_integer_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_integer_multiplier(
+  ) vector_integer_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -603,22 +597,21 @@ module ntm_integer_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_integer_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_integer_multiplier),
 
     // DATA
     .OVERFLOW_OUT(overflow_out_vector_integer_multiplier),
-    .SIZE_IN(size_in_vector_integer_multiplier),
-    .DATA_A_IN(data_a_in_vector_integer_multiplier),
-    .DATA_B_IN(data_b_in_vector_integer_multiplier),
-    .DATA_OUT(data_out_vector_integer_multiplier)
+    .SIZE_IN     (size_in_vector_integer_multiplier),
+    .DATA_A_IN   (data_a_in_vector_integer_multiplier),
+    .DATA_B_IN   (data_b_in_vector_integer_multiplier),
+    .DATA_OUT    (data_out_vector_integer_multiplier)
   );
 
   // VECTOR DIVIDER
   ntm_vector_integer_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_integer_divider(
+  ) vector_integer_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -629,14 +622,14 @@ module ntm_integer_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_divider),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_integer_divider),
+    .DATA_OUT_ENABLE (data_out_enable_vector_integer_divider),
 
     // DATA
-    .REST_OUT(rest_out_vector_integer_divider),
-    .SIZE_IN(size_in_vector_integer_divider),
+    .REST_OUT (rest_out_vector_integer_divider),
+    .SIZE_IN  (size_in_vector_integer_divider),
     .DATA_A_IN(data_a_in_vector_integer_divider),
     .DATA_B_IN(data_b_in_vector_integer_divider),
-    .DATA_OUT(data_out_vector_integer_divider)
+    .DATA_OUT (data_out_vector_integer_divider)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -645,10 +638,9 @@ module ntm_integer_testbench;
 
   // MATRIX ADDER
   ntm_matrix_integer_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_integer_adder(
+  ) matrix_integer_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -663,24 +655,23 @@ module ntm_integer_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_adder),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_adder),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_adder),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_adder),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_adder),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_adder),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_adder),
 
     // DATA
     .OVERFLOW_OUT(overflow_out_matrix_integer_adder),
-    .SIZE_I_IN(size_i_in_matrix_integer_adder),
-    .SIZE_J_IN(size_j_in_matrix_integer_adder),
-    .DATA_A_IN(data_a_in_matrix_integer_adder),
-    .DATA_B_IN(data_b_in_matrix_integer_adder),
-    .DATA_OUT(data_out_matrix_integer_adder)
+    .SIZE_I_IN   (size_i_in_matrix_integer_adder),
+    .SIZE_J_IN   (size_j_in_matrix_integer_adder),
+    .DATA_A_IN   (data_a_in_matrix_integer_adder),
+    .DATA_B_IN   (data_b_in_matrix_integer_adder),
+    .DATA_OUT    (data_out_matrix_integer_adder)
   );
 
   // MATRIX MULTIPLIER
   ntm_matrix_integer_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_integer_multiplier(
+  ) matrix_integer_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -693,24 +684,23 @@ module ntm_integer_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_multiplier),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_multiplier),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_multiplier),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_multiplier),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_multiplier),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_multiplier),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_multiplier),
 
     // DATA
     .OVERFLOW_OUT(overflow_out_matrix_integer_multiplier),
-    .SIZE_I_IN(size_i_in_matrix_integer_multiplier),
-    .SIZE_J_IN(size_j_in_matrix_integer_multiplier),
-    .DATA_A_IN(data_a_in_matrix_integer_multiplier),
-    .DATA_B_IN(data_b_in_matrix_integer_multiplier),
-    .DATA_OUT(data_out_matrix_integer_multiplier)
+    .SIZE_I_IN   (size_i_in_matrix_integer_multiplier),
+    .SIZE_J_IN   (size_j_in_matrix_integer_multiplier),
+    .DATA_A_IN   (data_a_in_matrix_integer_multiplier),
+    .DATA_B_IN   (data_b_in_matrix_integer_multiplier),
+    .DATA_OUT    (data_out_matrix_integer_multiplier)
   );
 
   // MATRIX DIVIDER
   ntm_matrix_integer_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_integer_divider(
+  ) matrix_integer_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -723,16 +713,16 @@ module ntm_integer_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_integer_divider),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_integer_divider),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_integer_divider),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_integer_divider),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_integer_divider),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_integer_divider),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_integer_divider),
 
     // DATA
-    .REST_OUT(rest_out_matrix_integer_divider),
+    .REST_OUT (rest_out_matrix_integer_divider),
     .SIZE_I_IN(size_i_in_matrix_integer_divider),
     .SIZE_J_IN(size_j_in_matrix_integer_divider),
     .DATA_A_IN(data_a_in_matrix_integer_divider),
     .DATA_B_IN(data_b_in_matrix_integer_divider),
-    .DATA_OUT(data_out_matrix_integer_divider)
+    .DATA_OUT (data_out_matrix_integer_divider)
   );
 
 endmodule

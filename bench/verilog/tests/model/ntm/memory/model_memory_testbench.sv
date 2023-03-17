@@ -48,43 +48,43 @@ module model_memory_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // ADDRESSING
   // CONTROL
-  wire start_addressing;
-  wire ready_addressing;
+  wire                 start_addressing;
+  wire                 ready_addressing;
 
-  wire k_in_enable_addressing;
-  wire s_in_enable_addressing;
+  wire                 k_in_enable_addressing;
+  wire                 s_in_enable_addressing;
 
-  wire k_out_enable_addressing;
-  wire s_out_enable_addressing;
+  wire                 k_out_enable_addressing;
+  wire                 s_out_enable_addressing;
 
-  wire m_in_j_enable_addressing;
-  wire m_in_k_enable_addressing;
+  wire                 m_in_j_enable_addressing;
+  wire                 m_in_k_enable_addressing;
 
-  wire m_out_j_enable_addressing;
-  wire m_out_k_enable_addressing;
+  wire                 m_out_j_enable_addressing;
+  wire                 m_out_k_enable_addressing;
 
-  wire w_in_enable_addressing;
-  wire w_out_enable_addressing;
+  wire                 w_in_enable_addressing;
+  wire                 w_out_enable_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_addressing;
@@ -108,7 +108,7 @@ module model_memory_testbench;
   // STIMULUS
   model_memory_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -117,8 +117,7 @@ module model_memory_testbench;
     .W(W),
     .L(L),
     .R(R)
-  )
-  memory_stimulus(
+  ) memory_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -139,17 +138,17 @@ module model_memory_testbench;
     .NTM_MEMORY_M_OUT_J_ENABLE(m_out_j_enable_addressing),
     .NTM_MEMORY_M_OUT_K_ENABLE(m_out_k_enable_addressing),
 
-    .NTM_MEMORY_W_IN_ENABLE(w_in_enable_addressing),
+    .NTM_MEMORY_W_IN_ENABLE (w_in_enable_addressing),
     .NTM_MEMORY_W_OUT_ENABLE(w_out_enable_addressing),
 
     // DATA
     .NTM_MEMORY_SIZE_N_IN(size_n_in_addressing),
     .NTM_MEMORY_SIZE_W_IN(size_w_in_addressing),
 
-    .NTM_MEMORY_K_IN(k_in_addressing),
-    .NTM_MEMORY_BETA_IN(beta_in_addressing),
-    .NTM_MEMORY_G_IN(g_in_addressing),
-    .NTM_MEMORY_S_IN(s_in_addressing),
+    .NTM_MEMORY_K_IN    (k_in_addressing),
+    .NTM_MEMORY_BETA_IN (beta_in_addressing),
+    .NTM_MEMORY_G_IN    (g_in_addressing),
+    .NTM_MEMORY_S_IN    (s_in_addressing),
     .NTM_MEMORY_GAMMA_IN(gamma_in_addressing),
 
     .NTM_MEMORY_M_IN(m_in_addressing),
@@ -160,10 +159,9 @@ module model_memory_testbench;
 
   // ADDRESSING
   model_addressing #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  addressing(
+  ) addressing (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -184,17 +182,17 @@ module model_memory_testbench;
     .M_OUT_J_ENABLE(m_out_j_enable_addressing),
     .M_OUT_K_ENABLE(m_out_k_enable_addressing),
 
-    .W_IN_ENABLE(w_in_enable_addressing),
+    .W_IN_ENABLE (w_in_enable_addressing),
     .W_OUT_ENABLE(w_out_enable_addressing),
 
     // DATA
     .SIZE_N_IN(size_n_in_addressing),
     .SIZE_W_IN(size_w_in_addressing),
 
-    .K_IN(k_in_addressing),
-    .BETA_IN(beta_in_addressing),
-    .G_IN(g_in_addressing),
-    .S_IN(s_in_addressing),
+    .K_IN    (k_in_addressing),
+    .BETA_IN (beta_in_addressing),
+    .G_IN    (g_in_addressing),
+    .S_IN    (s_in_addressing),
     .GAMMA_IN(gamma_in_addressing),
 
     .M_IN(m_in_addressing),

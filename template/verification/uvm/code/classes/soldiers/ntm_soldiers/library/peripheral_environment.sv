@@ -9,7 +9,7 @@ class peripheral_environment extends uvm_env;
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    agent = peripheral_agent::type_id::create("agent", this);
+    agent      = peripheral_agent::type_id::create("agent", this);
     scoreboard = peripheral_scoreboard::type_id::create("scoreboard", this);
   endfunction
 

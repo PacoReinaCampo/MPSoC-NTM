@@ -41,38 +41,38 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_driver extends uvm_driver#(ntm_intro_transaction);
+class ntm_intro_driver extends uvm_driver #(ntm_intro_transaction);
   `uvm_component_utils(ntm_intro_driver)
-  
+
   virtual dut_if vif;
-  
+
   function new(string name, uvm_component parent);
-    super.new(name,parent);
+    super.new(name, parent);
   endfunction
-  
+
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if(!uvm_config_db#(virtual dut_if)::get(this,"","vif",vif)) begin
-      `uvm_error("build_phase","driver virtual interface failed")
+    if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif)) begin
+      `uvm_error("build_phase", "driver virtual interface failed")
     end
   endfunction
-  
+
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    
+
     this.vif.master_cb.psel    <= 0;
     this.vif.master_cb.penable <= 0;
 
     forever begin
       ntm_intro_transaction tr;
-      @ (this.vif.master_cb);
+      @(this.vif.master_cb);
       //First get an item from sequencer
       seq_item_port.get_next_item(tr);
-      @ (this.vif.master_cb);
-      uvm_report_info("INTRO_DRIVER ", $sformatf("Got Transaction %s",tr.convert2string()));
+      @(this.vif.master_cb);
+      uvm_report_info("INTRO_DRIVER ", $sformatf("Got Transaction %s", tr.convert2string()));
       //Decode the INTRO Command and call either the read/write function
       case (tr.pwrite)
-        ntm_intro_transaction::READ:  drive_read(tr.addr, tr.data);  
+        ntm_intro_transaction::READ:  drive_read(tr.addr, tr.data);
         ntm_intro_transaction::WRITE: drive_write(tr.addr, tr.data);
       endcase
       //Handshake DONE back to sequencer
@@ -81,25 +81,25 @@ class ntm_intro_driver extends uvm_driver#(ntm_intro_transaction);
   endtask
 
   virtual protected task drive_read(input bit [31:0] addr, output logic [31:0] data);
-    this.vif.master_cb.paddr   <= addr;
-    this.vif.master_cb.pwrite  <= 0;
-    this.vif.master_cb.psel    <= 1;
-    @ (this.vif.master_cb);
+    this.vif.master_cb.paddr  <= addr;
+    this.vif.master_cb.pwrite <= 0;
+    this.vif.master_cb.psel   <= 1;
+    @(this.vif.master_cb);
     this.vif.master_cb.penable <= 1;
-    @ (this.vif.master_cb);
+    @(this.vif.master_cb);
     data = this.vif.master_cb.prdata;
     this.vif.master_cb.psel    <= 0;
     this.vif.master_cb.penable <= 0;
   endtask
 
   virtual protected task drive_write(input bit [31:0] addr, input bit [31:0] data);
-    this.vif.master_cb.paddr   <= addr;
-    this.vif.master_cb.pwdata  <= data;
-    this.vif.master_cb.pwrite  <= 1;
-    this.vif.master_cb.psel    <= 1;
-    @ (this.vif.master_cb);
+    this.vif.master_cb.paddr  <= addr;
+    this.vif.master_cb.pwdata <= data;
+    this.vif.master_cb.pwrite <= 1;
+    this.vif.master_cb.psel   <= 1;
+    @(this.vif.master_cb);
     this.vif.master_cb.penable <= 1;
-    @ (this.vif.master_cb);
+    @(this.vif.master_cb);
     this.vif.master_cb.psel    <= 0;
     this.vif.master_cb.penable <= 0;
   endtask

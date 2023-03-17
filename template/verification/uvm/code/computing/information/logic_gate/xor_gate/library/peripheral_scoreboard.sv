@@ -4,19 +4,18 @@ class peripheral_scoreboard extends uvm_scoreboard;
     super.new(name, parent);
   endfunction
 
-  bit [`LENGTH-1:0] ref_pattern;
-  bit [`LENGTH-1:0] act_pattern;
+  bit                                                                 [`LENGTH-1:0] ref_pattern;
+  bit                                                                 [`LENGTH-1:0] act_pattern;
 
-  bit exp_out;
+  bit                                                                               exp_out;
 
-  uvm_analysis_imp #(peripheral_sequence_item, peripheral_scoreboard) m_analysis_imp;
+  uvm_analysis_imp #(peripheral_sequence_item, peripheral_scoreboard)               m_analysis_imp;
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
     m_analysis_imp = new("m_analysis_imp", this);
-    if (!uvm_config_db#(bit [`LENGTH-1:0])::get(this, "*", "ref_pattern", ref_pattern))
-      `uvm_fatal("SCOREBOARD", "Did not get ref_pattern !")
+    if (!uvm_config_db#(bit [`LENGTH-1:0])::get(this, "*", "ref_pattern", ref_pattern)) `uvm_fatal("SCOREBOARD", "Did not get ref_pattern !")
   endfunction
 
   virtual function write(peripheral_sequence_item item);

@@ -39,17 +39,16 @@
 
 module dnc_write_heads_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64
-)
-  (
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64
+) (
   // GLOBAL
   output CLK,
   output RST,
@@ -57,69 +56,69 @@ module dnc_write_heads_stimulus #(
   // ALLOCATION GATE
   // CONTROL
   output NTM_ALLOCATION_GATE_START,
-  input NTM_ALLOCATION_GATE_READY,
+  input  NTM_ALLOCATION_GATE_READY,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_ALLOCATION_GATE_GA_IN,
-  input NTM_ALLOCATION_GATE_GA_OUT,
+  input                  NTM_ALLOCATION_GATE_GA_OUT,
 
   // ERASE VECTOR
   // CONTROL
   output NTM_ERASE_VECTOR_START,
-  input NTM_ERASE_VECTOR_READY,
+  input  NTM_ERASE_VECTOR_READY,
 
   output NTM_ERASE_VECTOR_E_IN_ENABLE,
-  input NTM_ERASE_VECTOR_E_OUT_ENABLE,
+  input  NTM_ERASE_VECTOR_E_OUT_ENABLE,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_ERASE_VECTOR_SIZE_W_IN,
   output [DATA_SIZE-1:0] NTM_ERASE_VECTOR_E_IN,
-  input NTM_ERASE_VECTOR_E_OUT,
+  input                  NTM_ERASE_VECTOR_E_OUT,
 
   //WRITE GATE
   // CONTROL
   output NTM_WRITE_GATE_START,
-  input NTM_WRITE_GATE_READY,
+  input  NTM_WRITE_GATE_READY,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_WRITE_GATE_GW_IN,
-  input NTM_WRITE_GATE_GW_OUT,
+  input                  NTM_WRITE_GATE_GW_OUT,
 
   // WRITE KEY
   // CONTROL
   output NTM_WRITE_KEY_START,
-  input NTM_WRITE_KEY_READY,
+  input  NTM_WRITE_KEY_READY,
 
   output NTM_WRITE_KEY_K_IN_ENABLE,
-  input NTM_WRITE_KEY_K_OUT_ENABLE,
+  input  NTM_WRITE_KEY_K_OUT_ENABLE,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_WRITE_KEY_SIZE_W_IN,
   output [DATA_SIZE-1:0] NTM_WRITE_KEY_K_IN,
-  input [DATA_SIZE-1:0] NTM_WRITE_KEY_K_OUT,
+  input  [DATA_SIZE-1:0] NTM_WRITE_KEY_K_OUT,
 
   // WRITE STRENGTH
   // CONTROL
   output NTM_WRITE_STRENGTH_START,
-  input NTM_WRITE_STRENGTH_READY,
+  input  NTM_WRITE_STRENGTH_READY,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_WRITE_STRENGTH_BETA_IN,
-  input [DATA_SIZE-1:0] NTM_WRITE_STRENGTH_BETA_OUT,
+  input  [DATA_SIZE-1:0] NTM_WRITE_STRENGTH_BETA_OUT,
 
   // WRITE VECTOR
   // CONTROL
   output NTM_WRITE_VECTOR_START,
-  input NTM_WRITE_VECTOR_READY,
+  input  NTM_WRITE_VECTOR_READY,
 
   output NTM_WRITE_VECTOR_V_IN_ENABLE,
-  input NTM_WRITE_VECTOR_V_OUT_ENABLE,
+  input  NTM_WRITE_VECTOR_V_OUT_ENABLE,
 
   // DATA
   output [DATA_SIZE-1:0] NTM_WRITE_VECTOR_SIZE_W_IN,
   output [DATA_SIZE-1:0] NTM_WRITE_VECTOR_V_IN,
-  input [DATA_SIZE-1:0] NTM_WRITE_VECTOR_V_OUT
-  );
+  input  [DATA_SIZE-1:0] NTM_WRITE_VECTOR_V_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types

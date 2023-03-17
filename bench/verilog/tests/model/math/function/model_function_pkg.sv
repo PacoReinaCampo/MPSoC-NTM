@@ -48,39 +48,39 @@ package model_function_pkg;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

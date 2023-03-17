@@ -48,62 +48,62 @@ module model_float_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_SCALAR_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_SCALAR_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_SCALAR_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_SCALAR_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_SCALAR_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_SCALAR_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_VECTOR_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_VECTOR_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_VECTOR_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_VECTOR_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_VECTOR_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_VECTOR_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_ADDER_TEST         = 0;
-  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    = 0;
-  parameter STIMULUS_NTM_MATRIX_DIVIDER_TEST       = 0;
+  parameter STIMULUS_NTM_MATRIX_ADDER_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_DIVIDER_TEST = 0;
 
-  parameter STIMULUS_NTM_MATRIX_ADDER_CASE_0         = 0;
-  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    = 0;
-  parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       = 0;
+  parameter STIMULUS_NTM_MATRIX_ADDER_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_MATRIX_ADDER_CASE_1         = 0;
-  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    = 0;
-  parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       = 0;
+  parameter STIMULUS_NTM_MATRIX_ADDER_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
@@ -111,10 +111,10 @@ module model_float_testbench;
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_float_adder;
-  wire ready_scalar_float_adder;
+  wire                 start_scalar_float_adder;
+  wire                 ready_scalar_float_adder;
 
-  wire operation_scalar_float_adder;
+  wire                 operation_scalar_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
@@ -123,8 +123,8 @@ module model_float_testbench;
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
+  wire                 start_scalar_float_multiplier;
+  wire                 ready_scalar_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
@@ -133,8 +133,8 @@ module model_float_testbench;
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_float_divider;
-  wire ready_scalar_float_divider;
+  wire                 start_scalar_float_divider;
+  wire                 ready_scalar_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
@@ -147,14 +147,14 @@ module model_float_testbench;
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_float_adder;
-  wire ready_vector_float_adder;
+  wire                 start_vector_float_adder;
+  wire                 ready_vector_float_adder;
 
-  wire operation_vector_float_adder;
+  wire                 operation_vector_float_adder;
 
-  wire data_a_in_enable_vector_float_adder;
-  wire data_b_in_enable_vector_float_adder;
-  wire data_out_enable_vector_float_adder;
+  wire                 data_a_in_enable_vector_float_adder;
+  wire                 data_b_in_enable_vector_float_adder;
+  wire                 data_out_enable_vector_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_adder;
@@ -164,12 +164,12 @@ module model_float_testbench;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_float_multiplier;
-  wire ready_vector_float_multiplier;
+  wire                 start_vector_float_multiplier;
+  wire                 ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_float_multiplier;
-  wire data_b_in_enable_vector_float_multiplier;
-  wire data_out_enable_vector_float_multiplier;
+  wire                 data_a_in_enable_vector_float_multiplier;
+  wire                 data_b_in_enable_vector_float_multiplier;
+  wire                 data_out_enable_vector_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
@@ -179,12 +179,12 @@ module model_float_testbench;
 
   // VECTOR DIVIDER
   // CONTROL
-  wire start_vector_float_divider;
-  wire ready_vector_float_divider;
+  wire                 start_vector_float_divider;
+  wire                 ready_vector_float_divider;
 
-  wire data_a_in_enable_vector_float_divider;
-  wire data_b_in_enable_vector_float_divider;
-  wire data_out_enable_vector_float_divider;
+  wire                 data_a_in_enable_vector_float_divider;
+  wire                 data_b_in_enable_vector_float_divider;
+  wire                 data_out_enable_vector_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_divider;
@@ -198,17 +198,17 @@ module model_float_testbench;
 
   // MATRIX ADDER
   // CONTROL
-  wire start_matrix_float_adder;
-  wire ready_matrix_float_adder;
+  wire                 start_matrix_float_adder;
+  wire                 ready_matrix_float_adder;
 
-  wire operation_matrix_float_adder;
+  wire                 operation_matrix_float_adder;
 
-  wire data_a_in_i_enable_matrix_float_adder;
-  wire data_a_in_j_enable_matrix_float_adder;
-  wire data_b_in_i_enable_matrix_float_adder;
-  wire data_b_in_j_enable_matrix_float_adder;
-  wire data_out_i_enable_matrix_float_adder;
-  wire data_out_j_enable_matrix_float_adder;
+  wire                 data_a_in_i_enable_matrix_float_adder;
+  wire                 data_a_in_j_enable_matrix_float_adder;
+  wire                 data_b_in_i_enable_matrix_float_adder;
+  wire                 data_b_in_j_enable_matrix_float_adder;
+  wire                 data_out_i_enable_matrix_float_adder;
+  wire                 data_out_j_enable_matrix_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_float_adder;
@@ -219,15 +219,15 @@ module model_float_testbench;
 
   // MATRIX MULTIPLIER
   // CONTROL
-  wire start_matrix_float_multiplier;
-  wire ready_matrix_float_multiplier;
+  wire                 start_matrix_float_multiplier;
+  wire                 ready_matrix_float_multiplier;
 
-  wire data_a_in_i_enable_matrix_float_multiplier;
-  wire data_a_in_j_enable_matrix_float_multiplier;
-  wire data_b_in_i_enable_matrix_float_multiplier;
-  wire data_b_in_j_enable_matrix_float_multiplier;
-  wire data_out_i_enable_matrix_float_multiplier;
-  wire data_out_j_enable_matrix_float_multiplier;
+  wire                 data_a_in_i_enable_matrix_float_multiplier;
+  wire                 data_a_in_j_enable_matrix_float_multiplier;
+  wire                 data_b_in_i_enable_matrix_float_multiplier;
+  wire                 data_b_in_j_enable_matrix_float_multiplier;
+  wire                 data_out_i_enable_matrix_float_multiplier;
+  wire                 data_out_j_enable_matrix_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_float_multiplier;
@@ -238,15 +238,15 @@ module model_float_testbench;
 
   // MATRIX DIVIDER
   // CONTROL
-  wire start_matrix_float_divider;
-  wire ready_matrix_float_divider;
+  wire                 start_matrix_float_divider;
+  wire                 ready_matrix_float_divider;
 
-  wire data_a_in_i_enable_matrix_float_divider;
-  wire data_a_in_j_enable_matrix_float_divider;
-  wire data_b_in_i_enable_matrix_float_divider;
-  wire data_b_in_j_enable_matrix_float_divider;
-  wire data_out_i_enable_matrix_float_divider;
-  wire data_out_j_enable_matrix_float_divider;
+  wire                 data_a_in_i_enable_matrix_float_divider;
+  wire                 data_a_in_j_enable_matrix_float_divider;
+  wire                 data_b_in_i_enable_matrix_float_divider;
+  wire                 data_b_in_j_enable_matrix_float_divider;
+  wire                 data_out_i_enable_matrix_float_divider;
+  wire                 data_out_j_enable_matrix_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_float_divider;
@@ -261,7 +261,7 @@ module model_float_testbench;
 
   model_float_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -272,39 +272,38 @@ module model_float_testbench;
     .R(R),
 
     // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_ADDER_TEST(STIMULUS_NTM_SCALAR_ADDER_TEST),
-    .STIMULUS_NTM_SCALAR_MULTIPLIER_TEST(STIMULUS_NTM_SCALAR_MULTIPLIER_TEST),
-    .STIMULUS_NTM_SCALAR_DIVIDER_TEST(STIMULUS_NTM_SCALAR_DIVIDER_TEST),
-    .STIMULUS_NTM_SCALAR_ADDER_CASE_0(STIMULUS_NTM_SCALAR_ADDER_CASE_0),
+    .STIMULUS_NTM_SCALAR_ADDER_TEST       (STIMULUS_NTM_SCALAR_ADDER_TEST),
+    .STIMULUS_NTM_SCALAR_MULTIPLIER_TEST  (STIMULUS_NTM_SCALAR_MULTIPLIER_TEST),
+    .STIMULUS_NTM_SCALAR_DIVIDER_TEST     (STIMULUS_NTM_SCALAR_DIVIDER_TEST),
+    .STIMULUS_NTM_SCALAR_ADDER_CASE_0     (STIMULUS_NTM_SCALAR_ADDER_CASE_0),
     .STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0(STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_SCALAR_DIVIDER_CASE_0(STIMULUS_NTM_SCALAR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_SCALAR_ADDER_CASE_1(STIMULUS_NTM_SCALAR_ADDER_CASE_1),
+    .STIMULUS_NTM_SCALAR_DIVIDER_CASE_0   (STIMULUS_NTM_SCALAR_DIVIDER_CASE_0),
+    .STIMULUS_NTM_SCALAR_ADDER_CASE_1     (STIMULUS_NTM_SCALAR_ADDER_CASE_1),
     .STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1(STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_SCALAR_DIVIDER_CASE_1(STIMULUS_NTM_SCALAR_DIVIDER_CASE_1),
+    .STIMULUS_NTM_SCALAR_DIVIDER_CASE_1   (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_ADDER_TEST(STIMULUS_NTM_VECTOR_ADDER_TEST),
-    .STIMULUS_NTM_VECTOR_MULTIPLIER_TEST(STIMULUS_NTM_VECTOR_MULTIPLIER_TEST),
-    .STIMULUS_NTM_VECTOR_DIVIDER_TEST(STIMULUS_NTM_VECTOR_DIVIDER_TEST),
-    .STIMULUS_NTM_VECTOR_ADDER_CASE_0(STIMULUS_NTM_VECTOR_ADDER_CASE_0),
+    .STIMULUS_NTM_VECTOR_ADDER_TEST       (STIMULUS_NTM_VECTOR_ADDER_TEST),
+    .STIMULUS_NTM_VECTOR_MULTIPLIER_TEST  (STIMULUS_NTM_VECTOR_MULTIPLIER_TEST),
+    .STIMULUS_NTM_VECTOR_DIVIDER_TEST     (STIMULUS_NTM_VECTOR_DIVIDER_TEST),
+    .STIMULUS_NTM_VECTOR_ADDER_CASE_0     (STIMULUS_NTM_VECTOR_ADDER_CASE_0),
     .STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0(STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_VECTOR_DIVIDER_CASE_0(STIMULUS_NTM_VECTOR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_VECTOR_ADDER_CASE_1(STIMULUS_NTM_VECTOR_ADDER_CASE_1),
+    .STIMULUS_NTM_VECTOR_DIVIDER_CASE_0   (STIMULUS_NTM_VECTOR_DIVIDER_CASE_0),
+    .STIMULUS_NTM_VECTOR_ADDER_CASE_1     (STIMULUS_NTM_VECTOR_ADDER_CASE_1),
     .STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1(STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_VECTOR_DIVIDER_CASE_1(STIMULUS_NTM_VECTOR_DIVIDER_CASE_1),
+    .STIMULUS_NTM_VECTOR_DIVIDER_CASE_1   (STIMULUS_NTM_VECTOR_DIVIDER_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_ADDER_TEST(STIMULUS_NTM_MATRIX_ADDER_TEST),
-    .STIMULUS_NTM_MATRIX_MULTIPLIER_TEST(STIMULUS_NTM_MATRIX_MULTIPLIER_TEST),
-    .STIMULUS_NTM_MATRIX_DIVIDER_TEST(STIMULUS_NTM_MATRIX_DIVIDER_TEST),
-    .STIMULUS_NTM_MATRIX_ADDER_CASE_0(STIMULUS_NTM_MATRIX_ADDER_CASE_0),
+    .STIMULUS_NTM_MATRIX_ADDER_TEST       (STIMULUS_NTM_MATRIX_ADDER_TEST),
+    .STIMULUS_NTM_MATRIX_MULTIPLIER_TEST  (STIMULUS_NTM_MATRIX_MULTIPLIER_TEST),
+    .STIMULUS_NTM_MATRIX_DIVIDER_TEST     (STIMULUS_NTM_MATRIX_DIVIDER_TEST),
+    .STIMULUS_NTM_MATRIX_ADDER_CASE_0     (STIMULUS_NTM_MATRIX_ADDER_CASE_0),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0(STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0),
-    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_0(STIMULUS_NTM_MATRIX_DIVIDER_CASE_0),
-    .STIMULUS_NTM_MATRIX_ADDER_CASE_1(STIMULUS_NTM_MATRIX_ADDER_CASE_1),
+    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_0   (STIMULUS_NTM_MATRIX_DIVIDER_CASE_0),
+    .STIMULUS_NTM_MATRIX_ADDER_CASE_1     (STIMULUS_NTM_MATRIX_ADDER_CASE_1),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1(STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_DIVIDER_CASE_1)
-  )
-  float_stimulus(
+    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_1   (STIMULUS_NTM_MATRIX_DIVIDER_CASE_1)
+  ) float_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -323,7 +322,7 @@ module model_float_testbench;
     // DATA
     .SCALAR_ADDER_DATA_A_IN(data_a_in_scalar_float_adder),
     .SCALAR_ADDER_DATA_B_IN(data_b_in_scalar_float_adder),
-    .SCALAR_ADDER_DATA_OUT(data_out_scalar_float_adder),
+    .SCALAR_ADDER_DATA_OUT (data_out_scalar_float_adder),
 
     // SCALAR MULTIPLIER
     // CONTROL
@@ -333,7 +332,7 @@ module model_float_testbench;
     // DATA
     .SCALAR_MULTIPLIER_DATA_A_IN(data_a_in_scalar_float_multiplier),
     .SCALAR_MULTIPLIER_DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .SCALAR_MULTIPLIER_DATA_OUT(data_out_scalar_float_multiplier),
+    .SCALAR_MULTIPLIER_DATA_OUT (data_out_scalar_float_multiplier),
 
     // SCALAR DIVIDER
     // CONTROL
@@ -343,7 +342,7 @@ module model_float_testbench;
     // DATA
     .SCALAR_DIVIDER_DATA_A_IN(data_a_in_scalar_float_divider),
     .SCALAR_DIVIDER_DATA_B_IN(data_b_in_scalar_float_divider),
-    .SCALAR_DIVIDER_DATA_OUT(data_out_scalar_float_divider),
+    .SCALAR_DIVIDER_DATA_OUT (data_out_scalar_float_divider),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
@@ -358,13 +357,13 @@ module model_float_testbench;
 
     .VECTOR_ADDER_DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
     .VECTOR_ADDER_DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
-    .VECTOR_ADDER_DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
+    .VECTOR_ADDER_DATA_OUT_ENABLE (data_out_enable_vector_float_adder),
 
     // DATA
-    .VECTOR_ADDER_SIZE_IN(size_in_vector_float_adder),
+    .VECTOR_ADDER_SIZE_IN  (size_in_vector_float_adder),
     .VECTOR_ADDER_DATA_A_IN(data_a_in_vector_float_adder),
     .VECTOR_ADDER_DATA_B_IN(data_b_in_vector_float_adder),
-    .VECTOR_ADDER_DATA_OUT(data_out_vector_float_adder),
+    .VECTOR_ADDER_DATA_OUT (data_out_vector_float_adder),
 
     // VECTOR MULTIPLIER
     // CONTROL
@@ -373,13 +372,13 @@ module model_float_testbench;
 
     .VECTOR_MULTIPLIER_DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
     .VECTOR_MULTIPLIER_DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .VECTOR_MULTIPLIER_DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .VECTOR_MULTIPLIER_DATA_OUT_ENABLE (data_out_enable_vector_float_multiplier),
 
     // DATA
-    .VECTOR_MULTIPLIER_SIZE_IN(size_in_vector_float_multiplier),
+    .VECTOR_MULTIPLIER_SIZE_IN  (size_in_vector_float_multiplier),
     .VECTOR_MULTIPLIER_DATA_A_IN(data_a_in_vector_float_multiplier),
     .VECTOR_MULTIPLIER_DATA_B_IN(data_b_in_vector_float_multiplier),
-    .VECTOR_MULTIPLIER_DATA_OUT(data_out_vector_float_multiplier),
+    .VECTOR_MULTIPLIER_DATA_OUT (data_out_vector_float_multiplier),
 
     // VECTOR DIVIDER
     // CONTROL
@@ -388,13 +387,13 @@ module model_float_testbench;
 
     .VECTOR_DIVIDER_DATA_A_IN_ENABLE(data_a_in_enable_vector_float_divider),
     .VECTOR_DIVIDER_DATA_B_IN_ENABLE(data_b_in_enable_vector_float_divider),
-    .VECTOR_DIVIDER_DATA_OUT_ENABLE(data_out_enable_vector_float_divider),
+    .VECTOR_DIVIDER_DATA_OUT_ENABLE (data_out_enable_vector_float_divider),
 
     // DATA
-    .VECTOR_DIVIDER_SIZE_IN(size_in_vector_float_divider),
+    .VECTOR_DIVIDER_SIZE_IN  (size_in_vector_float_divider),
     .VECTOR_DIVIDER_DATA_A_IN(data_a_in_vector_float_divider),
     .VECTOR_DIVIDER_DATA_B_IN(data_b_in_vector_float_divider),
-    .VECTOR_DIVIDER_DATA_OUT(data_out_vector_float_divider),
+    .VECTOR_DIVIDER_DATA_OUT (data_out_vector_float_divider),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
@@ -411,15 +410,15 @@ module model_float_testbench;
     .MATRIX_ADDER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_adder),
     .MATRIX_ADDER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_adder),
     .MATRIX_ADDER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_adder),
-    .MATRIX_ADDER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_adder),
-    .MATRIX_ADDER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_adder),
+    .MATRIX_ADDER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_adder),
+    .MATRIX_ADDER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_adder),
 
     // DATA
     .MATRIX_ADDER_SIZE_I_IN(size_i_in_matrix_float_adder),
     .MATRIX_ADDER_SIZE_J_IN(size_j_in_matrix_float_adder),
     .MATRIX_ADDER_DATA_A_IN(data_a_in_matrix_float_adder),
     .MATRIX_ADDER_DATA_B_IN(data_b_in_matrix_float_adder),
-    .MATRIX_ADDER_DATA_OUT(data_out_matrix_float_adder),
+    .MATRIX_ADDER_DATA_OUT (data_out_matrix_float_adder),
 
     // MATRIX MULTIPLIER
     // CONTROL
@@ -430,15 +429,15 @@ module model_float_testbench;
     .MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_multiplier),
     .MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_multiplier),
     .MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_multiplier),
-    .MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_multiplier),
-    .MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_multiplier),
+    .MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_multiplier),
+    .MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_multiplier),
 
     // DATA
     .MATRIX_MULTIPLIER_SIZE_I_IN(size_i_in_matrix_float_multiplier),
     .MATRIX_MULTIPLIER_SIZE_J_IN(size_j_in_matrix_float_multiplier),
     .MATRIX_MULTIPLIER_DATA_A_IN(data_a_in_matrix_float_multiplier),
     .MATRIX_MULTIPLIER_DATA_B_IN(data_b_in_matrix_float_multiplier),
-    .MATRIX_MULTIPLIER_DATA_OUT(data_out_matrix_float_multiplier),
+    .MATRIX_MULTIPLIER_DATA_OUT (data_out_matrix_float_multiplier),
 
     // MATRIX DIVIDER
     // CONTROL
@@ -449,15 +448,15 @@ module model_float_testbench;
     .MATRIX_DIVIDER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_divider),
     .MATRIX_DIVIDER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_divider),
     .MATRIX_DIVIDER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_divider),
-    .MATRIX_DIVIDER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_divider),
-    .MATRIX_DIVIDER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_divider),
+    .MATRIX_DIVIDER_DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_divider),
+    .MATRIX_DIVIDER_DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_divider),
 
     // DATA
     .MATRIX_DIVIDER_SIZE_I_IN(size_i_in_matrix_float_divider),
     .MATRIX_DIVIDER_SIZE_J_IN(size_j_in_matrix_float_divider),
     .MATRIX_DIVIDER_DATA_A_IN(data_a_in_matrix_float_divider),
     .MATRIX_DIVIDER_DATA_B_IN(data_b_in_matrix_float_divider),
-    .MATRIX_DIVIDER_DATA_OUT(data_out_matrix_float_divider)
+    .MATRIX_DIVIDER_DATA_OUT (data_out_matrix_float_divider)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -466,10 +465,9 @@ module model_float_testbench;
 
   // SCALAR ADDER
   model_scalar_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_adder(
+  ) scalar_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -483,15 +481,14 @@ module model_float_testbench;
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_adder),
     .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT(data_out_scalar_float_adder)
+    .DATA_OUT (data_out_scalar_float_adder)
   );
 
   // SCALAR MULTIPLIER
   model_scalar_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_multiplier(
+  ) scalar_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -503,15 +500,14 @@ module model_float_testbench;
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_multiplier),
     .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .DATA_OUT (data_out_scalar_float_multiplier)
   );
 
   // SCALAR DIVIDER
   model_scalar_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_divider(
+  ) scalar_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -523,7 +519,7 @@ module model_float_testbench;
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_divider),
     .DATA_B_IN(data_b_in_scalar_float_divider),
-    .DATA_OUT(data_out_scalar_float_divider)
+    .DATA_OUT (data_out_scalar_float_divider)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -532,10 +528,9 @@ module model_float_testbench;
 
   // VECTOR ADDER
   model_vector_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_adder(
+  ) vector_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -548,21 +543,20 @@ module model_float_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_adder),
+    .SIZE_IN  (size_in_vector_float_adder),
     .DATA_A_IN(data_a_in_vector_float_adder),
     .DATA_B_IN(data_b_in_vector_float_adder),
-    .DATA_OUT(data_out_vector_float_adder)
+    .DATA_OUT (data_out_vector_float_adder)
   );
 
   // VECTOR MULTIPLIER
   model_vector_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_multiplier(
+  ) vector_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -573,21 +567,20 @@ module model_float_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_multiplier),
+    .SIZE_IN  (size_in_vector_float_multiplier),
     .DATA_A_IN(data_a_in_vector_float_multiplier),
     .DATA_B_IN(data_b_in_vector_float_multiplier),
-    .DATA_OUT(data_out_vector_float_multiplier)
+    .DATA_OUT (data_out_vector_float_multiplier)
   );
 
   // VECTOR DIVIDER
   model_vector_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_divider(
+  ) vector_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -598,13 +591,13 @@ module model_float_testbench;
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_divider),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_divider),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_divider),
+    .SIZE_IN  (size_in_vector_float_divider),
     .DATA_A_IN(data_a_in_vector_float_divider),
     .DATA_B_IN(data_b_in_vector_float_divider),
-    .DATA_OUT(data_out_vector_float_divider)
+    .DATA_OUT (data_out_vector_float_divider)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -613,10 +606,9 @@ module model_float_testbench;
 
   // MATRIX ADDER
   model_matrix_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_float_adder(
+  ) matrix_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -631,23 +623,22 @@ module model_float_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_adder),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_adder),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_adder),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_adder),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_adder),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_adder),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_adder),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_float_adder),
     .SIZE_J_IN(size_j_in_matrix_float_adder),
     .DATA_A_IN(data_a_in_matrix_float_adder),
     .DATA_B_IN(data_b_in_matrix_float_adder),
-    .DATA_OUT(data_out_matrix_float_adder)
+    .DATA_OUT (data_out_matrix_float_adder)
   );
 
   // MATRIX MULTIPLIER
   model_matrix_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_float_multiplier(
+  ) matrix_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -660,23 +651,22 @@ module model_float_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_multiplier),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_multiplier),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_multiplier),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_multiplier),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_multiplier),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_multiplier),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_multiplier),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_float_multiplier),
     .SIZE_J_IN(size_j_in_matrix_float_multiplier),
     .DATA_A_IN(data_a_in_matrix_float_multiplier),
     .DATA_B_IN(data_b_in_matrix_float_multiplier),
-    .DATA_OUT(data_out_matrix_float_multiplier)
+    .DATA_OUT (data_out_matrix_float_multiplier)
   );
 
   // MATRIX DIVIDER
   model_matrix_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_float_divider(
+  ) matrix_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -689,15 +679,15 @@ module model_float_testbench;
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_float_divider),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_float_divider),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_float_divider),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_float_divider),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_float_divider),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_float_divider),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_float_divider),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_float_divider),
     .SIZE_J_IN(size_j_in_matrix_float_divider),
     .DATA_A_IN(data_a_in_matrix_float_divider),
     .DATA_B_IN(data_b_in_matrix_float_divider),
-    .DATA_OUT(data_out_matrix_float_divider)
+    .DATA_OUT (data_out_matrix_float_divider)
   );
 
 endmodule

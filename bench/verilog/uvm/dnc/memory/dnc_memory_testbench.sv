@@ -68,12 +68,12 @@ module test;
   logic [31:0] prdata;
   logic [31:0] pwdata;
 
-  dut_if ntm_intro_if();
+  dut_if ntm_intro_if ();
 
-  ntm_intro_slave dut(.dif(ntm_intro_if));
+  ntm_intro_slave dut (.dif(ntm_intro_if));
 
   initial begin
-    ntm_intro_if.pclk=0;
+    ntm_intro_if.pclk = 0;
   end
 
   //Generate a clock
@@ -82,13 +82,13 @@ module test;
   end
 
   initial begin
-    ntm_intro_if.prst=0;
+    ntm_intro_if.prst = 0;
     repeat (1) @(posedge ntm_intro_if.pclk);
-    ntm_intro_if.prst=1;
+    ntm_intro_if.prst = 1;
   end
 
   initial begin
-    uvm_config_db#(virtual dut_if)::set( null, "uvm_test_top", "vif", ntm_intro_if);
+    uvm_config_db#(virtual dut_if)::set(null, "uvm_test_top", "vif", ntm_intro_if);
     run_test("ntm_intro_test");
   end
 

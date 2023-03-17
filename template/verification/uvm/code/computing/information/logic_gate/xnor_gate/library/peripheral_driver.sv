@@ -8,8 +8,7 @@ class peripheral_driver extends uvm_driver #(peripheral_sequence_item);
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif))
-      `uvm_fatal("DRIVER", "Could not get vif")
+    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif)) `uvm_fatal("DRIVER", "Could not get vif")
   endfunction
 
   virtual task run_phase(uvm_phase phase);

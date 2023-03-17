@@ -38,42 +38,41 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_tensor_modular_multiplier #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_A_IN_I_ENABLE,
-    input DATA_A_IN_J_ENABLE,
-    input DATA_A_IN_K_ENABLE,
-    input DATA_B_IN_I_ENABLE,
-    input DATA_B_IN_J_ENABLE,
-    input DATA_B_IN_K_ENABLE,
+  input DATA_A_IN_I_ENABLE,
+  input DATA_A_IN_J_ENABLE,
+  input DATA_A_IN_K_ENABLE,
+  input DATA_B_IN_I_ENABLE,
+  input DATA_B_IN_J_ENABLE,
+  input DATA_B_IN_K_ENABLE,
 
-    output reg DATA_OUT_I_ENABLE,
-    output reg DATA_OUT_J_ENABLE,
-    output reg DATA_OUT_K_ENABLE,
+  output reg DATA_OUT_I_ENABLE,
+  output reg DATA_OUT_J_ENABLE,
+  output reg DATA_OUT_K_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
-    input [DATA_SIZE-1:0] SIZE_A_I_IN,
-    input [DATA_SIZE-1:0] SIZE_A_J_IN,
-    input [DATA_SIZE-1:0] SIZE_A_K_IN,
-    input [DATA_SIZE-1:0] SIZE_B_I_IN,
-    input [DATA_SIZE-1:0] SIZE_B_J_IN,
-    input [DATA_SIZE-1:0] SIZE_B_K_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+  // DATA
+  input [DATA_SIZE-1:0] MODULO_IN,
+  input [DATA_SIZE-1:0] SIZE_A_I_IN,
+  input [DATA_SIZE-1:0] SIZE_A_J_IN,
+  input [DATA_SIZE-1:0] SIZE_A_K_IN,
+  input [DATA_SIZE-1:0] SIZE_B_I_IN,
+  input [DATA_SIZE-1:0] SIZE_B_J_IN,
+  input [DATA_SIZE-1:0] SIZE_B_K_IN,
+  input [DATA_SIZE-1:0] DATA_A_IN,
+  input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -88,17 +87,17 @@ module ntm_tensor_modular_multiplier #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -108,31 +107,31 @@ module ntm_tensor_modular_multiplier #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] multiplier_ctrl_fsm_int;
+  reg  [             1:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
-  reg [CONTROL_SIZE-1:0] index_i_loop;
-  reg [CONTROL_SIZE-1:0] index_j_loop;
+  reg  [CONTROL_SIZE-1:0] index_i_loop;
+  reg  [CONTROL_SIZE-1:0] index_j_loop;
 
-  reg data_a_in_i_multiplier_int;
-  reg data_a_in_j_multiplier_int;
-  reg data_b_in_i_multiplier_int;
-  reg data_b_in_j_multiplier_int;
+  reg                     data_a_in_i_multiplier_int;
+  reg                     data_a_in_j_multiplier_int;
+  reg                     data_b_in_i_multiplier_int;
+  reg                     data_b_in_j_multiplier_int;
 
   // MULTIPLIER
   // CONTROL
-  reg start_vector_multiplier;
-  wire ready_vector_multiplier;
-  reg data_a_in_enable_vector_multiplier;
-  reg data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  reg                     start_vector_multiplier;
+  wire                    ready_vector_multiplier;
+  reg                     data_a_in_enable_vector_multiplier;
+  reg                     data_b_in_enable_vector_multiplier;
+  wire                    data_out_enable_vector_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  reg  [   DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  reg  [   DATA_SIZE-1:0] size_in_vector_multiplier;
+  reg  [   DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  reg  [   DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [   DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -144,10 +143,9 @@ module ntm_tensor_modular_multiplier #(
 
   // MULTIPLIER
   ntm_vector_modular_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_multiplier(
+  ) vector_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -158,14 +156,14 @@ module ntm_tensor_modular_multiplier #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_multiplier),
 
     // DATA
     .MODULO_IN(modulo_in_vector_multiplier),
-    .SIZE_IN(size_in_vector_multiplier),
+    .SIZE_IN  (size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .DATA_OUT (data_out_vector_multiplier)
   );
 
 endmodule

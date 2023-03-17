@@ -38,51 +38,50 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_integer_multiplier #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+  // DATA
+  input [DATA_SIZE-1:0] DATA_A_IN,
+  input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT,
-    output reg [DATA_SIZE-1:0] OVERFLOW_OUT
-  );
+  output reg [DATA_SIZE-1:0] DATA_OUT,
+  output reg [DATA_SIZE-1:0] OVERFLOW_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE         = 0;
-  parameter [2:0] SET_DATA_B_STATE      = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] SET_DATA_B_STATE = 1;
+  parameter [2:0] REDUCE_DATA_B_STATE = 2;
   parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE           = 4;
+  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -92,7 +91,7 @@ module ntm_scalar_integer_multiplier #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] multiplier_ctrl_fsm_int;
+  reg [        2:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE:0] u_int;
@@ -108,34 +107,32 @@ module ntm_scalar_integer_multiplier #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT       <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY          <= 1'b0;
 
       // Assignation
-      u_int <= ZERO_DATA;
-      v_int <= ZERO_DATA;
+      u_int          <= ZERO_DATA;
+      v_int          <= ZERO_DATA;
 
       multiplier_int <= ZERO_DATA;
-    end
-    else begin
-      case(multiplier_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (multiplier_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // Assignation
-            u_int <= {1'b0,DATA_A_IN};
-            v_int <= {1'b0,DATA_B_IN};
+            u_int <= {1'b0, DATA_A_IN};
+            v_int <= {1'b0, DATA_B_IN};
 
-            if(DATA_A_IN[0] == 1'b1) begin
-              multiplier_int <= {1'b0,DATA_B_IN};
-            end
-            else begin
+            if (DATA_A_IN[0] == 1'b1) begin
+              multiplier_int <= {1'b0, DATA_B_IN};
+            end else begin
               multiplier_int <= ZERO_DATA;
             end
 
@@ -143,64 +140,59 @@ module ntm_scalar_integer_multiplier #(
             multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
           end
         end
-        SET_DATA_B_STATE : begin  // STEP 1
+        SET_DATA_B_STATE: begin  // STEP 1
           // Assignation
           u_int <= u_int;
           v_int <= v_int;
 
           // FSM Control
-          if(v_int < {1'b0,OVERFLOW_OUT}) begin
+          if (v_int < {1'b0, OVERFLOW_OUT}) begin
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end
-          else begin
+          end else begin
             multiplier_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
           end
         end
-        REDUCE_DATA_B_STATE : begin  // STEP 2
-          if(v_int < {1'b0,OVERFLOW_OUT}) begin
+        REDUCE_DATA_B_STATE: begin  // STEP 2
+          if (v_int < {1'b0, OVERFLOW_OUT}) begin
             // FSM Control
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end
-          else begin
+          end else begin
             // Assignation
-            v_int <= (v_int - {1'b0,OVERFLOW_OUT});
+            v_int <= (v_int - {1'b0, OVERFLOW_OUT});
           end
         end
-        SET_PRODUCT_OUT_STATE : begin  // STEP 3
+        SET_PRODUCT_OUT_STATE: begin  // STEP 3
           // Assignation
-          if(u_int[0] == 1'b1) begin
-            if((multiplier_int + v_int) < {1'b0,OVERFLOW_OUT}) begin
+          if (u_int[0] == 1'b1) begin
+            if ((multiplier_int + v_int) < {1'b0, OVERFLOW_OUT}) begin
               multiplier_int <= (multiplier_int + v_int);
+            end else begin
+              multiplier_int <= (multiplier_int + v_int - {1'b0, OVERFLOW_OUT});
             end
-            else begin
-              multiplier_int <= (multiplier_int + v_int - {1'b0,OVERFLOW_OUT});
-            end
-          end
-          else begin
-            if(multiplier_int >= {1'b0,OVERFLOW_OUT}) begin
+          end else begin
+            if (multiplier_int >= {1'b0, OVERFLOW_OUT}) begin
               multiplier_int <= (multiplier_int - OVERFLOW_OUT);
             end
           end
           // FSM Control
           multiplier_ctrl_fsm_int <= ENDER_STATE;
         end
-        ENDER_STATE : begin  // STEP 4
-          if(u_int == {1'b0,ONE_CONTROL}) begin
+        ENDER_STATE: begin  // STEP 4
+          if (u_int == {1'b0, ONE_CONTROL}) begin
             // Data Outputs
-            DATA_OUT <= multiplier_int[DATA_SIZE-1:0];
+            DATA_OUT                <= multiplier_int[DATA_SIZE-1:0];
 
             // Control Outputs
-            READY <= 1'b1;
+            READY                   <= 1'b1;
 
             // FSM Control
             multiplier_ctrl_fsm_int <= STARTER_STATE;
-          end
-          else begin
+          end else begin
             // FSM Control
             multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
           end
         end
-        default : begin
+        default: begin
           // FSM Control
           multiplier_ctrl_fsm_int <= STARTER_STATE;
         end

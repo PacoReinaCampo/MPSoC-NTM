@@ -45,7 +45,7 @@ class ntm_intro_test extends uvm_test;
   //Register with factory
   `uvm_component_utils(ntm_intro_test);
 
-  ntm_intro_env env;
+  ntm_intro_env  env;
   virtual dut_if vif;
 
   function new(string name = "ntm_intro_test", uvm_component parent = null);
@@ -59,18 +59,18 @@ class ntm_intro_test extends uvm_test;
 
     if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif)) begin
       `uvm_fatal("build_phase", "No virtual interface specified for this test instance")
-    end 
-    uvm_config_db#(virtual dut_if)::set( this, "env", "vif", vif);
+    end
+    uvm_config_db#(virtual dut_if)::set(this, "env", "vif", vif);
   endfunction
 
   //Run phase - Create an ntm_intro_sequence and start it on the ntm_intro_sequencer
-  task run_phase( uvm_phase phase );
+  task run_phase(uvm_phase phase);
     ntm_intro_sequence ntm_intro_seq;
     ntm_intro_seq = ntm_intro_sequence::type_id::create("ntm_intro_seq");
-    phase.raise_objection( this, "Starting ntm_intro_base_seqin main phase" );
-    $display("%t Starting sequence ntm_intro_seq run_phase",$time);
+    phase.raise_objection(this, "Starting ntm_intro_base_seqin main phase");
+    $display("%t Starting sequence ntm_intro_seq run_phase", $time);
     ntm_intro_seq.start(env.agt.sqr);
     #100ns;
-    phase.drop_objection( this , "Finished ntm_intro_seq in main phase" );
+    phase.drop_objection(this, "Finished ntm_intro_seq in main phase");
   endtask
 endclass

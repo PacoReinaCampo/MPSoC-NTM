@@ -38,68 +38,67 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_forget_trainer #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input X_IN_ENABLE,  // for x in 0 to X-1
+  input X_IN_ENABLE,  // for x in 0 to X-1
 
-    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+  output reg X_OUT_ENABLE,  // for x in 0 to X-1
 
-    input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input R_IN_K_ENABLE,  // for k in 0 to W-1
+  input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input R_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    input H_IN_ENABLE,  // for l in 0 to L-1
+  input H_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+  output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
-    input F_IN_ENABLE,  // for l in 0 to L-1
-    input S_IN_ENABLE,  // for l in 0 to L-1
+  input F_IN_ENABLE,  // for l in 0 to L-1
+  input S_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg F_OUT_ENABLE,  // for l in 0 to L-1
-    output reg S_OUT_ENABLE,  // for l in 0 to L-1
+  output reg F_OUT_ENABLE,  // for l in 0 to L-1
+  output reg S_OUT_ENABLE,  // for l in 0 to L-1
 
-    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+  output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
 
-    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+  output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
 
-    output reg B_OUT_ENABLE,  // for l in 0 to L-1
+  output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_X_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] SIZE_L_IN,
-    input [DATA_SIZE-1:0] SIZE_R_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_X_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
+  input [DATA_SIZE-1:0] SIZE_L_IN,
+  input [DATA_SIZE-1:0] SIZE_R_IN,
 
-    input [DATA_SIZE-1:0] X_IN,
-    input [DATA_SIZE-1:0] R_IN,
-    input [DATA_SIZE-1:0] H_IN,
+  input [DATA_SIZE-1:0] X_IN,
+  input [DATA_SIZE-1:0] R_IN,
+  input [DATA_SIZE-1:0] H_IN,
 
-    input [DATA_SIZE-1:0] F_IN,
-    input [DATA_SIZE-1:0] S_IN,
+  input [DATA_SIZE-1:0] F_IN,
+  input [DATA_SIZE-1:0] S_IN,
 
-    output reg [DATA_SIZE-1:0] W_OUT,
-    output reg [DATA_SIZE-1:0] K_OUT,
-    output reg [DATA_SIZE-1:0] U_OUT,
-    output reg [DATA_SIZE-1:0] B_OUT
-  );
+  output reg [DATA_SIZE-1:0] W_OUT,
+  output reg [DATA_SIZE-1:0] K_OUT,
+  output reg [DATA_SIZE-1:0] U_OUT,
+  output reg [DATA_SIZE-1:0] B_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -141,17 +140,17 @@ module ntm_forget_trainer #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -161,23 +160,23 @@ module ntm_forget_trainer #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg  [          2:0] controller_ctrl_fsm_int;
 
-  reg [2:0] differentiation_f_ctrl_fsm_int;
-  reg [2:0] differentiation_w_ctrl_fsm_int;
-  reg [2:0] differentiation_k_ctrl_fsm_int;
-  reg [2:0] differentiation_u_ctrl_fsm_int;
-  reg [1:0] differentiation_b_ctrl_fsm_int;
+  reg  [          2:0] differentiation_f_ctrl_fsm_int;
+  reg  [          2:0] differentiation_w_ctrl_fsm_int;
+  reg  [          2:0] differentiation_k_ctrl_fsm_int;
+  reg  [          2:0] differentiation_u_ctrl_fsm_int;
+  reg  [          1:0] differentiation_b_ctrl_fsm_int;
 
   // VECTOR SUMMATION
   // CONTROL
-  wire start_vector_summation;
-  wire ready_vector_summation;
+  wire                 start_vector_summation;
+  wire                 ready_vector_summation;
 
-  wire data_in_vector_enable_vector_summation;
-  wire data_in_scalar_enable_vector_summation;
-  wire data_out_vector_enable_vector_summation;
-  wire data_out_scalar_enable_vector_summation;
+  wire                 data_in_vector_enable_vector_summation;
+  wire                 data_in_scalar_enable_vector_summation;
+  wire                 data_out_vector_enable_vector_summation;
+  wire                 data_out_scalar_enable_vector_summation;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_summation;
@@ -187,12 +186,12 @@ module ntm_forget_trainer #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_float_multiplier;
-  wire ready_vector_float_multiplier;
+  wire                 start_vector_float_multiplier;
+  wire                 ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_float_multiplier;
-  wire data_b_in_enable_vector_float_multiplier;
-  wire data_out_enable_vector_float_multiplier;
+  wire                 data_a_in_enable_vector_float_multiplier;
+  wire                 data_b_in_enable_vector_float_multiplier;
+  wire                 data_out_enable_vector_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
@@ -202,14 +201,14 @@ module ntm_forget_trainer #(
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_float_adder;
-  wire ready_vector_float_adder;
+  wire                 start_vector_float_adder;
+  wire                 ready_vector_float_adder;
 
-  wire operation_vector_float_adder;
+  wire                 operation_vector_float_adder;
 
-  wire data_a_in_enable_vector_float_adder;
-  wire data_b_in_enable_vector_float_adder;
-  wire data_out_enable_vector_float_adder;
+  wire                 data_a_in_enable_vector_float_adder;
+  wire                 data_b_in_enable_vector_float_adder;
+  wire                 data_out_enable_vector_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_adder;
@@ -219,14 +218,14 @@ module ntm_forget_trainer #(
 
   // VECTOR DIFFERENTIATION
   // CONTROL
-  wire start_vector_differentiation;
-  wire ready_vector_differentiation;
+  wire                 start_vector_differentiation;
+  wire                 ready_vector_differentiation;
 
-  wire data_in_vector_enable_vector_differentiation;
-  wire data_in_scalar_enable_vector_differentiation;
+  wire                 data_in_vector_enable_vector_differentiation;
+  wire                 data_in_scalar_enable_vector_differentiation;
 
-  wire data_out_vector_enable_vector_differentiation;
-  wire data_out_scalar_enable_vector_differentiation;
+  wire                 data_out_vector_enable_vector_differentiation;
+  wire                 data_out_scalar_enable_vector_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_differentiation;
@@ -237,15 +236,15 @@ module ntm_forget_trainer #(
 
   // MATRIX PRODUCT
   // CONTROL
-  wire start_matrix_product;
-  wire ready_matrix_product;
+  wire                 start_matrix_product;
+  wire                 ready_matrix_product;
 
-  wire data_a_in_i_enable_matrix_product;
-  wire data_a_in_j_enable_matrix_product;
-  wire data_b_in_i_enable_matrix_product;
-  wire data_b_in_j_enable_matrix_product;
-  wire data_out_i_enable_matrix_product;
-  wire data_out_j_enable_matrix_product;
+  wire                 data_a_in_i_enable_matrix_product;
+  wire                 data_a_in_j_enable_matrix_product;
+  wire                 data_b_in_i_enable_matrix_product;
+  wire                 data_b_in_j_enable_matrix_product;
+  wire                 data_out_i_enable_matrix_product;
+  wire                 data_out_j_enable_matrix_product;
 
   // DATA
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
@@ -269,7 +268,7 @@ module ntm_forget_trainer #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       W_OUT <= ZERO_DATA;
       K_OUT <= ZERO_DATA;
@@ -278,130 +277,129 @@ module ntm_forget_trainer #(
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_F_STATE;
           end
         end
 
-        VECTOR_DIFFERENTIATION_F_STATE : begin  // STEP 1
+        VECTOR_DIFFERENTIATION_F_STATE: begin  // STEP 1
 
-          case(differentiation_f_ctrl_fsm_int)
-            STARTER_DF_STATE : begin  // STEP 0
+          case (differentiation_f_ctrl_fsm_int)
+            STARTER_DF_STATE: begin  // STEP 0
             end
 
-            VECTOR_ADDER_DF_STATE : begin  // STEP 1
+            VECTOR_ADDER_DF_STATE: begin  // STEP 1
             end
 
-            VECTOR_FIRST_MULTIPLIER_DF_STATE : begin  // STEP 2
+            VECTOR_FIRST_MULTIPLIER_DF_STATE: begin  // STEP 2
             end
 
-            VECTOR_SECOND_MULTIPLIER_DF_STATE : begin  // STEP 3
+            VECTOR_SECOND_MULTIPLIER_DF_STATE: begin  // STEP 3
             end
 
-            VECTOR_THIRD_MULTIPLIER_DF_STATE : begin  // STEP 4
+            VECTOR_THIRD_MULTIPLIER_DF_STATE: begin  // STEP 4
             end
 
-            default : begin
+            default: begin
               // FSM Control
               differentiation_f_ctrl_fsm_int <= STARTER_DF_STATE;
             end
           endcase
         end
 
-        VECTOR_DIFFERENTIATION_W_STATE : begin  // STEP 1
+        VECTOR_DIFFERENTIATION_W_STATE: begin  // STEP 1
 
-          case(differentiation_w_ctrl_fsm_int)
-            STARTER_DW_STATE : begin  // STEP 0
+          case (differentiation_w_ctrl_fsm_int)
+            STARTER_DW_STATE: begin  // STEP 0
             end
 
-            VECTOR_DIFFERENTIATION_DW_STATE : begin  // STEP 1
+            VECTOR_DIFFERENTIATION_DW_STATE: begin  // STEP 1
             end
 
-            MATRIX_PRODUCT_DW_STATE : begin  // STEP 2
+            MATRIX_PRODUCT_DW_STATE: begin  // STEP 2
             end
 
-            VECTOR_SUMMATION_DW_STATE : begin  // STEP 3
+            VECTOR_SUMMATION_DW_STATE: begin  // STEP 3
             end
 
-            default : begin
+            default: begin
               // FSM Control
               differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
             end
           endcase
         end
 
-        VECTOR_DIFFERENTIATION_K_STATE : begin  // STEP 2
+        VECTOR_DIFFERENTIATION_K_STATE: begin  // STEP 2
 
-          case(differentiation_k_ctrl_fsm_int)
-            STARTER_DK_STATE : begin  // STEP 0
+          case (differentiation_k_ctrl_fsm_int)
+            STARTER_DK_STATE: begin  // STEP 0
             end
 
-            VECTOR_DIFFERENTIATION_DK_STATE : begin  // STEP 1
+            VECTOR_DIFFERENTIATION_DK_STATE: begin  // STEP 1
             end
 
-            MATRIX_PRODUCT_DK_STATE : begin  // STEP 2
+            MATRIX_PRODUCT_DK_STATE: begin  // STEP 2
             end
 
-            VECTOR_SUMMATION_DK_STATE : begin  // STEP 3
+            VECTOR_SUMMATION_DK_STATE: begin  // STEP 3
             end
 
-            default : begin
+            default: begin
               // FSM Control
               differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
             end
           endcase
         end
 
-        VECTOR_DIFFERENTIATION_U_STATE : begin  // STEP 3
+        VECTOR_DIFFERENTIATION_U_STATE: begin  // STEP 3
 
-          case(differentiation_u_ctrl_fsm_int)
-            STARTER_DU_STATE : begin  // STEP 0
+          case (differentiation_u_ctrl_fsm_int)
+            STARTER_DU_STATE: begin  // STEP 0
             end
 
-            VECTOR_DIFFERENTIATION_DU_STATE : begin  // STEP 1
+            VECTOR_DIFFERENTIATION_DU_STATE: begin  // STEP 1
             end
 
-            MATRIX_PRODUCT_DU_STATE : begin  // STEP 2
+            MATRIX_PRODUCT_DU_STATE: begin  // STEP 2
             end
 
-            VECTOR_SUMMATION_DU_STATE : begin  // STEP 3
+            VECTOR_SUMMATION_DU_STATE: begin  // STEP 3
             end
 
-            default : begin
+            default: begin
               // FSM Control
               differentiation_u_ctrl_fsm_int <= STARTER_DU_STATE;
             end
           endcase
         end
 
-        VECTOR_DIFFERENTIATION_B_STATE : begin  // STEP 4
+        VECTOR_DIFFERENTIATION_B_STATE: begin  // STEP 4
 
-          case(differentiation_b_ctrl_fsm_int)
-            STARTER_DB_STATE : begin  // STEP 0
+          case (differentiation_b_ctrl_fsm_int)
+            STARTER_DB_STATE: begin  // STEP 0
             end
 
-            VECTOR_DIFFERENTIATION_DB_STATE : begin  // STEP 1
+            VECTOR_DIFFERENTIATION_DB_STATE: begin  // STEP 1
             end
 
-            VECTOR_SUMMATION_DB_STATE : begin  // STEP 2
+            VECTOR_SUMMATION_DB_STATE: begin  // STEP 2
             end
 
-            default : begin
+            default: begin
               // FSM Control
               differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
             end
           endcase
         end
 
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -411,10 +409,9 @@ module ntm_forget_trainer #(
 
   // VECTOR SUMMATION
   ntm_vector_summation #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_summation(
+  ) vector_summation (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -423,24 +420,23 @@ module ntm_forget_trainer #(
     .START(start_vector_summation),
     .READY(ready_vector_summation),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_summation),
+    .DATA_IN_SCALAR_ENABLE (data_in_scalar_enable_vector_summation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .SIZE_IN(size_in_vector_summation),
+    .SIZE_IN  (size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
-    .DATA_IN(data_in_vector_summation),
-    .DATA_OUT(data_out_vector_summation)
+    .DATA_IN  (data_in_vector_summation),
+    .DATA_OUT (data_out_vector_summation)
   );
 
   // VECTOR MULTIPLIER
   ntm_vector_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_multiplier(
+  ) vector_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -451,21 +447,20 @@ module ntm_forget_trainer #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_multiplier),
+    .SIZE_IN  (size_in_vector_float_multiplier),
     .DATA_A_IN(data_a_in_vector_float_multiplier),
     .DATA_B_IN(data_b_in_vector_float_multiplier),
-    .DATA_OUT(data_out_vector_float_multiplier)
+    .DATA_OUT (data_out_vector_float_multiplier)
   );
 
   // VECTOR ADDER
   ntm_vector_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_adder(
+  ) vector_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -478,21 +473,20 @@ module ntm_forget_trainer #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_adder),
+    .SIZE_IN  (size_in_vector_float_adder),
     .DATA_A_IN(data_a_in_vector_float_adder),
     .DATA_B_IN(data_b_in_vector_float_adder),
-    .DATA_OUT(data_out_vector_float_adder)
+    .DATA_OUT (data_out_vector_float_adder)
   );
 
   // VECTOR DIFFERENTIATION
   ntm_vector_differentiation #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_differentiation(
+  ) vector_differentiation (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -508,19 +502,18 @@ module ntm_forget_trainer #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .SIZE_IN(size_in_vector_differentiation),
+    .SIZE_IN  (size_in_vector_differentiation),
     .PERIOD_IN(period_in_vector_differentiation),
     .LENGTH_IN(length_in_vector_differentiation),
-    .DATA_IN(data_in_vector_differentiation),
-    .DATA_OUT(data_out_vector_differentiation)
+    .DATA_IN  (data_in_vector_differentiation),
+    .DATA_OUT (data_out_vector_differentiation)
   );
 
   // MATRIX PRODUCT
   ntm_matrix_product #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_product(
+  ) matrix_product (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -533,17 +526,17 @@ module ntm_forget_trainer #(
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_product),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_product),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_product),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_product),
 
     // DATA
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
     .SIZE_B_J_IN(size_b_j_in_matrix_product),
-    .DATA_A_IN(data_a_in_matrix_product),
-    .DATA_B_IN(data_b_in_matrix_product),
-    .DATA_OUT(data_out_matrix_product)
+    .DATA_A_IN  (data_a_in_matrix_product),
+    .DATA_B_IN  (data_b_in_matrix_product),
+    .DATA_OUT   (data_out_matrix_product)
   );
 
 endmodule

@@ -48,66 +48,66 @@ module model_convolutional_fnn_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // CONTROLLER
   // CONTROL
-  wire start_controller;
-  wire ready_controller;
+  wire                 start_controller;
+  wire                 ready_controller;
 
-  wire w_in_l_enable_controller;
-  wire w_in_x_enable_controller;
+  wire                 w_in_l_enable_controller;
+  wire                 w_in_x_enable_controller;
 
-  wire k_in_i_enable_controller;
-  wire k_in_l_enable_controller;
-  wire k_in_k_enable_controller;
+  wire                 k_in_i_enable_controller;
+  wire                 k_in_l_enable_controller;
+  wire                 k_in_k_enable_controller;
 
-  wire u_in_l_enable_controller;
-  wire u_in_p_enable_controller;
+  wire                 u_in_l_enable_controller;
+  wire                 u_in_p_enable_controller;
 
-  wire b_in_enable_controller;
+  wire                 b_in_enable_controller;
 
-  wire x_in_enable_controller;
+  wire                 x_in_enable_controller;
 
-  wire x_out_enable_controller;
+  wire                 x_out_enable_controller;
 
-  wire r_in_i_enable_controller;
-  wire r_in_k_enable_controller;
+  wire                 r_in_i_enable_controller;
+  wire                 r_in_k_enable_controller;
 
-  wire r_out_i_enable_controller;
-  wire r_out_k_enable_controller;
+  wire                 r_out_i_enable_controller;
+  wire                 r_out_k_enable_controller;
 
-  wire h_in_enable_controller;
+  wire                 h_in_enable_controller;
 
-  wire w_out_l_enable_controller;
-  wire w_out_x_enable_controller;
+  wire                 w_out_l_enable_controller;
+  wire                 w_out_x_enable_controller;
 
-  wire k_out_i_enable_controller;
-  wire k_out_l_enable_controller;
-  wire k_out_k_enable_controller;
+  wire                 k_out_i_enable_controller;
+  wire                 k_out_l_enable_controller;
+  wire                 k_out_k_enable_controller;
 
-  wire u_out_l_enable_controller;
-  wire u_out_p_enable_controller;
+  wire                 u_out_l_enable_controller;
+  wire                 u_out_p_enable_controller;
 
-  wire b_out_enable_controller;
+  wire                 b_out_enable_controller;
 
-  wire h_out_enable_controller;
+  wire                 h_out_enable_controller;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_controller;
@@ -137,10 +137,9 @@ module model_convolutional_fnn_testbench;
 
   // STIMULUS
   model_convolutional_fnn_stimulus #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  convolutional_fnn_stimulus(
+  ) convolutional_fnn_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -212,10 +211,9 @@ module model_convolutional_fnn_testbench;
 
   // CONTROLLER
   model_controller #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  model_controller_i(
+  ) model_controller_i (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

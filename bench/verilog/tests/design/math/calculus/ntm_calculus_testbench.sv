@@ -48,47 +48,47 @@ module ntm_calculus_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_INTEGRATION_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_INTEGRATION_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1 = 0;
 
   // TENSOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST=0;
-  parameter STIMULUS_NTM_TENSOR_INTEGRATION_TEST=0;
-  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0=0;
-  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0=0;
-  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1=0;
-  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1=0;
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST = 0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_TEST = 0;
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0 = 0;
+  parameter STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1 = 0;
+  parameter STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
@@ -96,13 +96,13 @@ module ntm_calculus_testbench;
 
   // VECTOR DIFFERENTIATION
   // CONTROL
-  wire start_vector_differentiation;
-  wire ready_vector_differentiation;
+  wire                 start_vector_differentiation;
+  wire                 ready_vector_differentiation;
 
-  wire data_in_vector_enable_vector_differentiation;
-  wire data_in_scalar_enable_vector_differentiation;
-  wire data_out_vector_enable_vector_differentiation;
-  wire data_out_scalar_enable_vector_differentiation;
+  wire                 data_in_vector_enable_vector_differentiation;
+  wire                 data_in_scalar_enable_vector_differentiation;
+  wire                 data_out_vector_enable_vector_differentiation;
+  wire                 data_out_scalar_enable_vector_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] period_in_vector_differentiation;
@@ -117,15 +117,15 @@ module ntm_calculus_testbench;
 
   // MATRIX DIFFERENTIATION
   // CONTROL
-  wire start_matrix_differentiation;
-  wire ready_matrix_differentiation;
+  wire                 start_matrix_differentiation;
+  wire                 ready_matrix_differentiation;
 
-  wire data_in_matrix_enable_matrix_differentiation;
-  wire data_in_vector_enable_matrix_differentiation;
-  wire data_in_scalar_enable_matrix_differentiation;
-  wire data_out_matrix_enable_matrix_differentiation;
-  wire data_out_vector_enable_matrix_differentiation;
-  wire data_out_scalar_enable_matrix_differentiation;
+  wire                 data_in_matrix_enable_matrix_differentiation;
+  wire                 data_in_vector_enable_matrix_differentiation;
+  wire                 data_in_scalar_enable_matrix_differentiation;
+  wire                 data_out_matrix_enable_matrix_differentiation;
+  wire                 data_out_vector_enable_matrix_differentiation;
+  wire                 data_out_scalar_enable_matrix_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_differentiation;
@@ -141,7 +141,7 @@ module ntm_calculus_testbench;
 
   ntm_calculus_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -152,30 +152,29 @@ module ntm_calculus_testbench;
     .R(R),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST(STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST),
-    .STIMULUS_NTM_VECTOR_INTEGRATION_TEST(STIMULUS_NTM_VECTOR_INTEGRATION_TEST),
+    .STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST  (STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_TEST      (STIMULUS_NTM_VECTOR_INTEGRATION_TEST),
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0),
-    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0(STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0    (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0),
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1),
-    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1(STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1    (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST(STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST),
-    .STIMULUS_NTM_MATRIX_INTEGRATION_TEST(STIMULUS_NTM_MATRIX_INTEGRATION_TEST),
+    .STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST  (STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_MATRIX_INTEGRATION_TEST      (STIMULUS_NTM_MATRIX_INTEGRATION_TEST),
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0),
-    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0),
+    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0    (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0),
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1),
-    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1),
+    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1    (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1),
 
     // TENSOR-FUNCTIONALITY
-    .STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST(STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST),
-    .STIMULUS_NTM_TENSOR_INTEGRATION_TEST(STIMULUS_NTM_TENSOR_INTEGRATION_TEST),
+    .STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST  (STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_TENSOR_INTEGRATION_TEST      (STIMULUS_NTM_TENSOR_INTEGRATION_TEST),
     .STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0),
-    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0(STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0),
+    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0    (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0),
     .STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1),
-    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1(STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1)
-  )
-  function_stimulus(
+    .STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1    (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1)
+  ) function_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -196,11 +195,11 @@ module ntm_calculus_testbench;
     .VECTOR_DIFFERENTIATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .VECTOR_DIFFERENTIATION_SIZE_IN(size_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_SIZE_IN  (size_in_vector_differentiation),
     .VECTOR_DIFFERENTIATION_PERIOD_IN(period_in_vector_differentiation),
     .VECTOR_DIFFERENTIATION_LENGTH_IN(length_in_vector_differentiation),
-    .VECTOR_DIFFERENTIATION_DATA_IN(data_in_vector_differentiation),
-    .VECTOR_DIFFERENTIATION_DATA_OUT(data_out_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_IN  (data_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_OUT (data_out_vector_differentiation),
 
     // VECTOR INTEGRATION
     // CONTROL
@@ -214,11 +213,11 @@ module ntm_calculus_testbench;
     .VECTOR_INTEGRATION_DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_integration),
 
     // DATA
-    .VECTOR_INTEGRATION_SIZE_IN(size_in_vector_integration),
+    .VECTOR_INTEGRATION_SIZE_IN  (size_in_vector_integration),
     .VECTOR_INTEGRATION_PERIOD_IN(period_in_vector_integration),
     .VECTOR_INTEGRATION_LENGTH_IN(length_in_vector_integration),
-    .VECTOR_INTEGRATION_DATA_IN(data_in_vector_integration),
-    .VECTOR_INTEGRATION_DATA_OUT(data_out_vector_integration),
+    .VECTOR_INTEGRATION_DATA_IN  (data_in_vector_integration),
+    .VECTOR_INTEGRATION_DATA_OUT (data_out_vector_integration),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
@@ -242,8 +241,8 @@ module ntm_calculus_testbench;
     .MATRIX_DIFFERENTIATION_SIZE_J_IN(size_j_in_matrix_differentiation),
     .MATRIX_DIFFERENTIATION_PERIOD_IN(period_in_matrix_differentiation),
     .MATRIX_DIFFERENTIATION_LENGTH_IN(length_in_matrix_differentiation),
-    .MATRIX_DIFFERENTIATION_DATA_IN(data_in_matrix_differentiation),
-    .MATRIX_DIFFERENTIATION_DATA_OUT(data_out_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_IN  (data_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_OUT (data_out_matrix_differentiation),
 
     // MATRIX INTEGRATION
     // CONTROL
@@ -263,8 +262,8 @@ module ntm_calculus_testbench;
     .MATRIX_INTEGRATION_SIZE_J_IN(size_j_in_matrix_integration),
     .MATRIX_INTEGRATION_PERIOD_IN(period_in_matrix_integration),
     .MATRIX_INTEGRATION_LENGTH_IN(length_in_matrix_integration),
-    .MATRIX_INTEGRATION_DATA_IN(data_in_matrix_integration),
-    .MATRIX_INTEGRATION_DATA_OUT(data_out_matrix_integration)
+    .MATRIX_INTEGRATION_DATA_IN  (data_in_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_OUT (data_out_matrix_integration)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -273,10 +272,9 @@ module ntm_calculus_testbench;
 
   // VECTOR DIFFERENTIATION
   ntm_vector_differentiation #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_differentiation(
+  ) vector_differentiation (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -285,25 +283,24 @@ module ntm_calculus_testbench;
     .START(start_vector_differentiation),
     .READY(ready_vector_differentiation),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
-    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_differentiation),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_differentiation),
+    .DATA_IN_TENSOR_ENABLE (data_in_scalar_enable_vector_differentiation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
     .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .SIZE_IN(size_in_vector_differentiation),
+    .SIZE_IN  (size_in_vector_differentiation),
     .PERIOD_IN(period_in_vector_differentiation),
     .LENGTH_IN(length_in_vector_differentiation),
-    .DATA_IN(data_in_vector_differentiation),
-    .DATA_OUT(data_out_vector_differentiation)
+    .DATA_IN  (data_in_vector_differentiation),
+    .DATA_OUT (data_out_vector_differentiation)
   );
 
   // VECTOR INTEGRATION
   ntm_vector_integration #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_integration(
+  ) vector_integration (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -312,17 +309,17 @@ module ntm_calculus_testbench;
     .START(start_vector_integration),
     .READY(ready_vector_integration),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_integration),
-    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_vector_integration),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_integration),
+    .DATA_IN_TENSOR_ENABLE (data_in_scalar_enable_vector_integration),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_integration),
     .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_vector_integration),
 
     // DATA
-    .SIZE_IN(size_in_vector_integration),
+    .SIZE_IN  (size_in_vector_integration),
     .PERIOD_IN(period_in_vector_integration),
     .LENGTH_IN(length_in_vector_integration),
-    .DATA_IN(data_in_vector_integration),
-    .DATA_OUT(data_out_vector_integration)
+    .DATA_IN  (data_in_vector_integration),
+    .DATA_OUT (data_out_vector_integration)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -331,10 +328,9 @@ module ntm_calculus_testbench;
 
   // MATRIX DIFFERENTIATION
   ntm_matrix_differentiation #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_differentiation(
+  ) matrix_differentiation (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -343,9 +339,9 @@ module ntm_calculus_testbench;
     .START(start_matrix_differentiation),
     .READY(ready_matrix_differentiation),
 
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_differentiation),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_differentiation),
-    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_differentiation),
+    .DATA_IN_MATRIX_ENABLE (data_in_matrix_enable_matrix_differentiation),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_matrix_differentiation),
+    .DATA_IN_TENSOR_ENABLE (data_in_scalar_enable_matrix_differentiation),
     .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_differentiation),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_differentiation),
     .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_differentiation),
@@ -355,16 +351,15 @@ module ntm_calculus_testbench;
     .SIZE_J_IN(size_j_in_matrix_differentiation),
     .PERIOD_IN(period_in_matrix_differentiation),
     .LENGTH_IN(length_in_matrix_differentiation),
-    .DATA_IN(data_in_matrix_differentiation),
-    .DATA_OUT(data_out_matrix_differentiation)
+    .DATA_IN  (data_in_matrix_differentiation),
+    .DATA_OUT (data_out_matrix_differentiation)
   );
 
   // MATRIX INTEGRATION
   ntm_matrix_integration #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_integration(
+  ) matrix_integration (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -373,9 +368,9 @@ module ntm_calculus_testbench;
     .START(start_matrix_integration),
     .READY(ready_matrix_integration),
 
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_integration),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_integration),
-    .DATA_IN_TENSOR_ENABLE(data_in_scalar_enable_matrix_integration),
+    .DATA_IN_MATRIX_ENABLE (data_in_matrix_enable_matrix_integration),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_matrix_integration),
+    .DATA_IN_TENSOR_ENABLE (data_in_scalar_enable_matrix_integration),
     .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_integration),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_integration),
     .DATA_OUT_TENSOR_ENABLE(data_out_scalar_enable_matrix_integration),
@@ -385,8 +380,8 @@ module ntm_calculus_testbench;
     .SIZE_J_IN(size_j_in_matrix_integration),
     .PERIOD_IN(period_in_matrix_integration),
     .LENGTH_IN(length_in_matrix_integration),
-    .DATA_IN(data_in_matrix_integration),
-    .DATA_OUT(data_out_matrix_integration)
+    .DATA_IN  (data_in_matrix_integration),
+    .DATA_OUT (data_out_matrix_integration)
   );
 
 endmodule

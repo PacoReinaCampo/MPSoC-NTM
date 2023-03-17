@@ -5,12 +5,11 @@ class peripheral_monitor extends uvm_monitor;
   endfunction
 
   uvm_analysis_port #(peripheral_sequence_item) mon_analysis_port;
-  virtual design_if vif;
+  virtual design_if                             vif;
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif))
-      `uvm_fatal("MONITOR", "Could not get vif")
+    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif)) `uvm_fatal("MONITOR", "Could not get vif")
     mon_analysis_port = new("mon_analysis_port", this);
   endfunction
 

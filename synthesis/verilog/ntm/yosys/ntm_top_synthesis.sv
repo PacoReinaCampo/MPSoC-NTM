@@ -39,46 +39,45 @@
 
 module ntm_top_synthesis #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=128,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 128,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
+  // CONTROL
+  input  START,
+  output READY,
 
-    input W_IN_L_ENABLE,  // for l in 0 to L-1
-    input W_IN_X_ENABLE,  // for x in 0 to X-1
+  input W_IN_L_ENABLE,  // for l in 0 to L-1
+  input W_IN_X_ENABLE,  // for x in 0 to X-1
 
-    output W_OUT_L_ENABLE,  // for l in 0 to L-1
-    output W_OUT_X_ENABLE,  // for x in 0 to X-1
+  output W_OUT_L_ENABLE,  // for l in 0 to L-1
+  output W_OUT_X_ENABLE,  // for x in 0 to X-1
 
-    input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input K_IN_L_ENABLE,  // for l in 0 to L-1
-    input K_IN_K_ENABLE,  // for k in 0 to W-1
+  input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input K_IN_L_ENABLE,  // for l in 0 to L-1
+  input K_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output K_OUT_L_ENABLE,  // for l in 0 to L-1
-    output K_OUT_K_ENABLE,  // for k in 0 to W-1
+  output K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output K_OUT_L_ENABLE,  // for l in 0 to L-1
+  output K_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    input B_IN_ENABLE,  // for l in 0 to L-1
+  input B_IN_ENABLE,  // for l in 0 to L-1
 
-    input B_OUT_ENABLE,  // for l in 0 to L-1
+  input B_OUT_ENABLE,  // for l in 0 to L-1
 
-    input X_IN_ENABLE,  // for x in 0 to X-1
-    output Y_OUT_ENABLE  // for y in 0 to Y-1
-  );
+  input  X_IN_ENABLE,  // for x in 0 to X-1
+  output Y_OUT_ENABLE  // for y in 0 to Y-1
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -112,10 +111,9 @@ module ntm_top_synthesis #(
 
   // TOP
   ntm_top #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .DATA_CONTROL(DATA_CONTROL)
-  )
-  top(
+  ) top (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -156,7 +154,7 @@ module ntm_top_synthesis #(
 
     .B_OUT_ENABLE(B_OUT_ENABLE),
 
-    .X_IN_ENABLE(X_IN_ENABLE),
+    .X_IN_ENABLE (X_IN_ENABLE),
     .Y_OUT_ENABLE(Y_OUT_ENABLE),
 
     // DATA
@@ -172,7 +170,7 @@ module ntm_top_synthesis #(
     .U_IN(u_in_top),
     .B_IN(b_in_top),
 
-    .X_IN(x_in_top),
+    .X_IN (x_in_top),
     .Y_OUT()
   );
 

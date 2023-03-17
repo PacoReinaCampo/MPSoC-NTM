@@ -48,47 +48,47 @@ module ntm_function_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
@@ -96,8 +96,8 @@ module ntm_function_testbench;
 
   // SCALAR LOGISTIC
   // CONTROL
-  wire start_scalar_logistic;
-  wire ready_scalar_logistic;
+  wire                 start_scalar_logistic;
+  wire                 ready_scalar_logistic;
 
   // DATA
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
@@ -105,8 +105,8 @@ module ntm_function_testbench;
 
   // SCALAR ONEPLUS
   // CONTROL
-  wire start_scalar_oneplus;
-  wire ready_scalar_oneplus;
+  wire                 start_scalar_oneplus;
+  wire                 ready_scalar_oneplus;
 
   // DATA
   wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
@@ -118,11 +118,11 @@ module ntm_function_testbench;
 
   // VECTOR LOGISTIC
   // CONTROL
-  wire start_vector_logistic;
-  wire ready_vector_logistic;
+  wire                 start_vector_logistic;
+  wire                 ready_vector_logistic;
 
-  wire data_in_enable_vector_logistic;
-  wire data_out_enable_vector_logistic;
+  wire                 data_in_enable_vector_logistic;
+  wire                 data_out_enable_vector_logistic;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
@@ -131,11 +131,11 @@ module ntm_function_testbench;
 
   // VECTOR ONEPLUS
   // CONTROL
-  wire start_vector_oneplus;
-  wire ready_vector_oneplus;
+  wire                 start_vector_oneplus;
+  wire                 ready_vector_oneplus;
 
-  wire data_in_enable_vector_oneplus;
-  wire data_out_enable_vector_oneplus;
+  wire                 data_in_enable_vector_oneplus;
+  wire                 data_out_enable_vector_oneplus;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_oneplus;
@@ -148,13 +148,13 @@ module ntm_function_testbench;
 
   // MATRIX LOGISTIC
   // CONTROL
-  wire start_matrix_logistic;
-  wire ready_matrix_logistic;
+  wire                 start_matrix_logistic;
+  wire                 ready_matrix_logistic;
 
-  wire data_in_i_enable_matrix_logistic;
-  wire data_in_j_enable_matrix_logistic;
-  wire data_out_i_enable_matrix_logistic;
-  wire data_out_j_enable_matrix_logistic;
+  wire                 data_in_i_enable_matrix_logistic;
+  wire                 data_in_j_enable_matrix_logistic;
+  wire                 data_out_i_enable_matrix_logistic;
+  wire                 data_out_j_enable_matrix_logistic;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_logistic;
@@ -164,13 +164,13 @@ module ntm_function_testbench;
 
   // MATRIX ONEPLUS
   // CONTROL
-  wire start_matrix_oneplus;
-  wire ready_matrix_oneplus;
+  wire                 start_matrix_oneplus;
+  wire                 ready_matrix_oneplus;
 
-  wire data_in_i_enable_matrix_oneplus;
-  wire data_in_j_enable_matrix_oneplus;
-  wire data_out_i_enable_matrix_oneplus;
-  wire data_out_j_enable_matrix_oneplus;
+  wire                 data_in_i_enable_matrix_oneplus;
+  wire                 data_in_j_enable_matrix_oneplus;
+  wire                 data_out_i_enable_matrix_oneplus;
+  wire                 data_out_j_enable_matrix_oneplus;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_oneplus;
@@ -184,7 +184,7 @@ module ntm_function_testbench;
 
   ntm_function_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -195,30 +195,29 @@ module ntm_function_testbench;
     .R(R),
 
     // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_LOGISTIC_TEST(STIMULUS_NTM_SCALAR_LOGISTIC_TEST),
-    .STIMULUS_NTM_SCALAR_ONEPLUS_TEST(STIMULUS_NTM_SCALAR_ONEPLUS_TEST),
+    .STIMULUS_NTM_SCALAR_LOGISTIC_TEST  (STIMULUS_NTM_SCALAR_LOGISTIC_TEST),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_TEST   (STIMULUS_NTM_SCALAR_ONEPLUS_TEST),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0 (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1 (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_LOGISTIC_TEST(STIMULUS_NTM_VECTOR_LOGISTIC_TEST),
-    .STIMULUS_NTM_VECTOR_ONEPLUS_TEST(STIMULUS_NTM_VECTOR_ONEPLUS_TEST),
+    .STIMULUS_NTM_VECTOR_LOGISTIC_TEST  (STIMULUS_NTM_VECTOR_LOGISTIC_TEST),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_TEST   (STIMULUS_NTM_VECTOR_ONEPLUS_TEST),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0 (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1 (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_LOGISTIC_TEST(STIMULUS_NTM_MATRIX_LOGISTIC_TEST),
-    .STIMULUS_NTM_MATRIX_ONEPLUS_TEST(STIMULUS_NTM_MATRIX_ONEPLUS_TEST),
+    .STIMULUS_NTM_MATRIX_LOGISTIC_TEST  (STIMULUS_NTM_MATRIX_LOGISTIC_TEST),
+    .STIMULUS_NTM_MATRIX_ONEPLUS_TEST   (STIMULUS_NTM_MATRIX_ONEPLUS_TEST),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0),
+    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0 (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1)
-  )
-  function_stimulus(
+    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1 (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1)
+  ) function_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -233,7 +232,7 @@ module ntm_function_testbench;
     .SCALAR_LOGISTIC_READY(ready_scalar_logistic),
 
     // DATA
-    .SCALAR_LOGISTIC_DATA_IN(data_in_scalar_logistic),
+    .SCALAR_LOGISTIC_DATA_IN (data_in_scalar_logistic),
     .SCALAR_LOGISTIC_DATA_OUT(data_out_scalar_logistic),
 
     // SCALAR ONEPLUS
@@ -242,7 +241,7 @@ module ntm_function_testbench;
     .SCALAR_ONEPLUS_READY(ready_scalar_oneplus),
 
     // DATA
-    .SCALAR_ONEPLUS_DATA_IN(data_in_scalar_oneplus),
+    .SCALAR_ONEPLUS_DATA_IN (data_in_scalar_oneplus),
     .SCALAR_ONEPLUS_DATA_OUT(data_out_scalar_oneplus),
 
     ///////////////////////////////////////////////////////////////////////
@@ -254,12 +253,12 @@ module ntm_function_testbench;
     .VECTOR_LOGISTIC_START(start_vector_logistic),
     .VECTOR_LOGISTIC_READY(ready_vector_logistic),
 
-    .VECTOR_LOGISTIC_DATA_IN_ENABLE(data_in_enable_vector_logistic),
+    .VECTOR_LOGISTIC_DATA_IN_ENABLE (data_in_enable_vector_logistic),
     .VECTOR_LOGISTIC_DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .VECTOR_LOGISTIC_SIZE_IN(size_in_vector_logistic),
-    .VECTOR_LOGISTIC_DATA_IN(data_in_vector_logistic),
+    .VECTOR_LOGISTIC_SIZE_IN (size_in_vector_logistic),
+    .VECTOR_LOGISTIC_DATA_IN (data_in_vector_logistic),
     .VECTOR_LOGISTIC_DATA_OUT(data_out_vector_logistic),
 
     // VECTOR ONEPLUS
@@ -267,12 +266,12 @@ module ntm_function_testbench;
     .VECTOR_ONEPLUS_START(start_vector_oneplus),
     .VECTOR_ONEPLUS_READY(ready_vector_oneplus),
 
-    .VECTOR_ONEPLUS_DATA_IN_ENABLE(data_in_enable_vector_oneplus),
+    .VECTOR_ONEPLUS_DATA_IN_ENABLE (data_in_enable_vector_oneplus),
     .VECTOR_ONEPLUS_DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .VECTOR_ONEPLUS_SIZE_IN(size_in_vector_oneplus),
-    .VECTOR_ONEPLUS_DATA_IN(data_in_vector_oneplus),
+    .VECTOR_ONEPLUS_SIZE_IN (size_in_vector_oneplus),
+    .VECTOR_ONEPLUS_DATA_IN (data_in_vector_oneplus),
     .VECTOR_ONEPLUS_DATA_OUT(data_out_vector_oneplus),
 
     ///////////////////////////////////////////////////////////////////////
@@ -284,32 +283,32 @@ module ntm_function_testbench;
     .MATRIX_LOGISTIC_START(start_matrix_logistic),
     .MATRIX_LOGISTIC_READY(ready_matrix_logistic),
 
-    .MATRIX_LOGISTIC_DATA_IN_I_ENABLE(data_in_i_enable_matrix_logistic),
-    .MATRIX_LOGISTIC_DATA_IN_J_ENABLE(data_in_j_enable_matrix_logistic),
+    .MATRIX_LOGISTIC_DATA_IN_I_ENABLE (data_in_i_enable_matrix_logistic),
+    .MATRIX_LOGISTIC_DATA_IN_J_ENABLE (data_in_j_enable_matrix_logistic),
     .MATRIX_LOGISTIC_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_logistic),
     .MATRIX_LOGISTIC_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_logistic),
 
     // DATA
     .MATRIX_LOGISTIC_SIZE_I_IN(size_i_in_matrix_logistic),
     .MATRIX_LOGISTIC_SIZE_J_IN(size_j_in_matrix_logistic),
-    .MATRIX_LOGISTIC_DATA_IN(data_in_matrix_logistic),
-    .MATRIX_LOGISTIC_DATA_OUT(data_out_matrix_logistic),
+    .MATRIX_LOGISTIC_DATA_IN  (data_in_matrix_logistic),
+    .MATRIX_LOGISTIC_DATA_OUT (data_out_matrix_logistic),
 
     // MATRIX ONEPLUS
     // CONTROL
     .MATRIX_ONEPLUS_START(start_matrix_oneplus),
     .MATRIX_ONEPLUS_READY(ready_matrix_oneplus),
 
-    .MATRIX_ONEPLUS_DATA_IN_I_ENABLE(data_in_i_enable_matrix_oneplus),
-    .MATRIX_ONEPLUS_DATA_IN_J_ENABLE(data_in_j_enable_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_IN_I_ENABLE (data_in_i_enable_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_IN_J_ENABLE (data_in_j_enable_matrix_oneplus),
     .MATRIX_ONEPLUS_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_oneplus),
     .MATRIX_ONEPLUS_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
 
     // DATA
     .MATRIX_ONEPLUS_SIZE_I_IN(size_i_in_matrix_oneplus),
     .MATRIX_ONEPLUS_SIZE_J_IN(size_j_in_matrix_oneplus),
-    .MATRIX_ONEPLUS_DATA_IN(data_in_matrix_oneplus),
-    .MATRIX_ONEPLUS_DATA_OUT(data_out_matrix_oneplus)
+    .MATRIX_ONEPLUS_DATA_IN  (data_in_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_OUT (data_out_matrix_oneplus)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -318,10 +317,9 @@ module ntm_function_testbench;
 
   // SCALAR LOGISTIC
   ntm_scalar_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_logistic_function(
+  ) scalar_logistic_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -331,16 +329,15 @@ module ntm_function_testbench;
     .READY(ready_scalar_logistic),
 
     // DATA
-    .DATA_IN(data_in_scalar_logistic),
+    .DATA_IN (data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );
 
   // SCALAR ONEPLUS
   ntm_scalar_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_oneplus_function(
+  ) scalar_oneplus_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -350,7 +347,7 @@ module ntm_function_testbench;
     .READY(ready_scalar_oneplus),
 
     // DATA
-    .DATA_IN(data_in_scalar_oneplus),
+    .DATA_IN (data_in_scalar_oneplus),
     .DATA_OUT(data_out_scalar_oneplus)
   );
 
@@ -360,10 +357,9 @@ module ntm_function_testbench;
 
   // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_logistic_function(
+  ) vector_logistic_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -372,21 +368,20 @@ module ntm_function_testbench;
     .START(start_vector_logistic),
     .READY(ready_vector_logistic),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_logistic),
+    .DATA_IN_ENABLE (data_in_enable_vector_logistic),
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .SIZE_IN(size_in_vector_logistic),
-    .DATA_IN(data_in_vector_logistic),
+    .SIZE_IN (size_in_vector_logistic),
+    .DATA_IN (data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)
   );
 
   // VECTOR ONEPLUS
   ntm_vector_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_oneplus_function(
+  ) vector_oneplus_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -395,12 +390,12 @@ module ntm_function_testbench;
     .START(start_vector_oneplus),
     .READY(ready_vector_oneplus),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_oneplus),
+    .DATA_IN_ENABLE (data_in_enable_vector_oneplus),
     .DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .SIZE_IN(size_in_vector_oneplus),
-    .DATA_IN(data_in_vector_oneplus),
+    .SIZE_IN (size_in_vector_oneplus),
+    .DATA_IN (data_in_vector_oneplus),
     .DATA_OUT(data_out_vector_oneplus)
   );
 
@@ -410,10 +405,9 @@ module ntm_function_testbench;
 
   // MATRIX LOGISTIC
   ntm_matrix_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_logistic_function(
+  ) matrix_logistic_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -422,24 +416,23 @@ module ntm_function_testbench;
     .START(start_matrix_logistic),
     .READY(ready_matrix_logistic),
 
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_logistic),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_logistic),
+    .DATA_IN_I_ENABLE (data_in_i_enable_matrix_logistic),
+    .DATA_IN_J_ENABLE (data_in_j_enable_matrix_logistic),
     .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_logistic),
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_logistic),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_logistic),
     .SIZE_J_IN(size_j_in_matrix_logistic),
-    .DATA_IN(data_in_matrix_logistic),
-    .DATA_OUT(data_out_matrix_logistic)
+    .DATA_IN  (data_in_matrix_logistic),
+    .DATA_OUT (data_out_matrix_logistic)
   );
 
   // MATRIX ONEPLUS
   ntm_matrix_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_oneplus_function(
+  ) matrix_oneplus_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -448,16 +441,16 @@ module ntm_function_testbench;
     .START(start_matrix_oneplus),
     .READY(ready_matrix_oneplus),
 
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_oneplus),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_oneplus),
+    .DATA_IN_I_ENABLE (data_in_i_enable_matrix_oneplus),
+    .DATA_IN_J_ENABLE (data_in_j_enable_matrix_oneplus),
     .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_oneplus),
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_oneplus),
     .SIZE_J_IN(size_j_in_matrix_oneplus),
-    .DATA_IN(data_in_matrix_oneplus),
-    .DATA_OUT(data_out_matrix_oneplus)
+    .DATA_IN  (data_in_matrix_oneplus),
+    .DATA_OUT (data_out_matrix_oneplus)
   );
 
 endmodule

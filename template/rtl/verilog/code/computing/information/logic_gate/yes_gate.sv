@@ -39,17 +39,16 @@
 
 module yes_gate #(
   parameter DATA_SIZE = 64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_IN,
+  // DATA
+  input [DATA_SIZE-1:0] DATA_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -59,7 +58,7 @@ module yes_gate #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_DATA  = 0;
+  parameter ZERO_DATA = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -73,11 +72,10 @@ module yes_gate #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO_DATA;
-    end
-    else begin
+    end else begin
       // Data Outputs
       DATA_OUT <= DATA_IN;
     end

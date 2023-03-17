@@ -1,7 +1,7 @@
 class peripheral_sequence_item extends uvm_sequence_item;
   `uvm_object_utils(peripheral_sequence_item)
   rand bit in;
-  bit out;
+  bit      out;
 
   virtual function string convert2str();
     return $sformatf("in=%0d, out=%0d", in, out);

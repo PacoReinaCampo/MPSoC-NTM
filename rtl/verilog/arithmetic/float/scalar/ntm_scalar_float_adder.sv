@@ -38,25 +38,24 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_float_adder #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input OPERATION,
+  input OPERATION,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] DATA_A_IN,
+  input      [DATA_SIZE-1:0] DATA_B_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -69,17 +68,17 @@ module ntm_scalar_float_adder #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -89,7 +88,7 @@ module ntm_scalar_float_adder #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg adder_ctrl_fsm_int;
+  reg               adder_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE:0] adder_int;

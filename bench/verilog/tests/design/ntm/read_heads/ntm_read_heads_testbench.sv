@@ -48,36 +48,36 @@ module ntm_read_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // READING
   // CONTROL
-  wire start_reading;
-  wire ready_reading;
+  wire                 start_reading;
+  wire                 ready_reading;
 
-  wire m_in_j_enable_reading;
-  wire m_in_k_enable_reading;
+  wire                 m_in_j_enable_reading;
+  wire                 m_in_k_enable_reading;
 
-  wire m_out_j_enable_reading;
-  wire m_out_k_enable_reading;
+  wire                 m_out_j_enable_reading;
+  wire                 m_out_k_enable_reading;
 
-  wire r_out_enable_reading;
+  wire                 r_out_enable_reading;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_reading;
@@ -95,7 +95,7 @@ module ntm_read_heads_testbench;
   // STIMULUS
   ntm_read_heads_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -104,8 +104,7 @@ module ntm_read_heads_testbench;
     .W(W),
     .L(L),
     .R(R)
-  )
-  read_heads_stimulus(
+  ) read_heads_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -134,10 +133,9 @@ module ntm_read_heads_testbench;
 
   // READING
   ntm_reading #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  reading(
+  ) reading (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

@@ -38,22 +38,21 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_exponentiator_function #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -66,17 +65,17 @@ module ntm_scalar_exponentiator_function #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -86,7 +85,7 @@ module ntm_scalar_exponentiator_function #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg exponentiator_function_ctrl_fsm_int;
+  reg                 exponentiator_function_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] exponentiator_function_int;
@@ -99,30 +98,29 @@ module ntm_scalar_exponentiator_function #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT                   <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY                      <= 1'b0;
 
       // Assignations
       exponentiator_function_int <= ZERO_DATA;
-    end
-    else begin
-      case(exponentiator_function_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (exponentiator_function_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
-          READY <= 1'b0;
+          READY                               <= 1'b0;
 
           // FSM Control
           exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
         end
-        ENDER_STATE : begin  // STEP 1
+        ENDER_STATE: begin  // STEP 1
           // FSM Control
           exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end
-        default : begin
+        default: begin
           // FSM Control
           exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end

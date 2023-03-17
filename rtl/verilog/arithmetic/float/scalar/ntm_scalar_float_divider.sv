@@ -38,49 +38,48 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_float_divider #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] DATA_A_IN,
+  input      [DATA_SIZE-1:0] DATA_B_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE         = 0;
-  parameter [2:0] SET_DATA_B_STATE      = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] SET_DATA_B_STATE = 1;
+  parameter [2:0] REDUCE_DATA_B_STATE = 2;
   parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE           = 4;
+  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -90,7 +89,7 @@ module ntm_scalar_float_divider #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] divider_ctrl_fsm_int;
+  reg [        2:0] divider_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE:0] u_int;

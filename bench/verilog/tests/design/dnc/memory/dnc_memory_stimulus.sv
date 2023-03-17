@@ -39,76 +39,75 @@
 
 module dnc_memory_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64
-)
-  (
-    // GLOBAL
-    output CLK,
-    output RST,
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64
+) (
+  // GLOBAL
+  output CLK,
+  output RST,
 
-    // CONTROL
-    output DNC_MEMORY_START,
-    input DNC_MEMORY_READY,
+  // CONTROL
+  output DNC_MEMORY_START,
+  input  DNC_MEMORY_READY,
 
-    output DNC_MEMORY_K_READ_IN_I_ENABLE,
-    output DNC_MEMORY_K_READ_IN_K_ENABLE,
+  output DNC_MEMORY_K_READ_IN_I_ENABLE,
+  output DNC_MEMORY_K_READ_IN_K_ENABLE,
 
-    input DNC_MEMORY_K_READ_OUT_I_ENABLE,
-    input DNC_MEMORY_K_READ_OUT_K_ENABLE,
+  input DNC_MEMORY_K_READ_OUT_I_ENABLE,
+  input DNC_MEMORY_K_READ_OUT_K_ENABLE,
 
-    output DNC_MEMORY_BETA_READ_IN_ENABLE,
+  output DNC_MEMORY_BETA_READ_IN_ENABLE,
 
-    input DNC_MEMORY_BETA_READ_OUT_ENABLE,
+  input DNC_MEMORY_BETA_READ_OUT_ENABLE,
 
-    output DNC_MEMORY_F_READ_IN_ENABLE,
+  output DNC_MEMORY_F_READ_IN_ENABLE,
 
-    input DNC_MEMORY_F_READ_OUT_ENABLE,
+  input DNC_MEMORY_F_READ_OUT_ENABLE,
 
-    output DNC_MEMORY_PI_READ_IN_ENABLE,
+  output DNC_MEMORY_PI_READ_IN_ENABLE,
 
-    input DNC_MEMORY_PI_READ_OUT_ENABLE,
+  input DNC_MEMORY_PI_READ_OUT_ENABLE,
 
-    output DNC_MEMORY_K_WRITE_IN_K_ENABLE,
+  output DNC_MEMORY_K_WRITE_IN_K_ENABLE,
 
-    input DNC_MEMORY_K_WRITE_OUT_K_ENABLE,
+  input DNC_MEMORY_K_WRITE_OUT_K_ENABLE,
 
-    output DNC_MEMORY_E_WRITE_IN_K_ENABLE,
+  output DNC_MEMORY_E_WRITE_IN_K_ENABLE,
 
-    input DNC_MEMORY_E_WRITE_OUT_K_ENABLE,
+  input DNC_MEMORY_E_WRITE_OUT_K_ENABLE,
 
-    output DNC_MEMORY_V_WRITE_IN_K_ENABLE,
+  output DNC_MEMORY_V_WRITE_IN_K_ENABLE,
 
-    input DNC_MEMORY_V_WRITE_OUT_K_ENABLE,
+  input DNC_MEMORY_V_WRITE_OUT_K_ENABLE,
 
-    input DNC_MEMORY_R_OUT_I_ENABLE,
-    input DNC_MEMORY_R_OUT_K_ENABLE,
+  input DNC_MEMORY_R_OUT_I_ENABLE,
+  input DNC_MEMORY_R_OUT_K_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_R_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_W_IN,
+  // DATA
+  output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_R_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_W_IN,
 
-    output [DATA_SIZE-1:0] DNC_MEMORY_K_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_BETA_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_F_READ_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_PI_READ_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_K_READ_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_BETA_READ_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_F_READ_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_PI_READ_IN,
 
-    output [DATA_SIZE-1:0] DNC_MEMORY_K_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_BETA_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_E_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_V_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_GA_WRITE_IN,
-    output [DATA_SIZE-1:0] DNC_MEMORY_GW_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_K_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_BETA_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_E_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_V_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_GA_WRITE_IN,
+  output [DATA_SIZE-1:0] DNC_MEMORY_GW_WRITE_IN,
 
-    input [DATA_SIZE-1:0] DNC_MEMORY_R_OUT
-  );
+  input [DATA_SIZE-1:0] DNC_MEMORY_R_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types

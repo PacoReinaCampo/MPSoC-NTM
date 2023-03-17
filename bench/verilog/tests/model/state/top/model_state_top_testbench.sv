@@ -48,18 +48,18 @@ module model_state_top_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   // FUNCTIONALITY
-  parameter STIMULUS_DNC_TOP_TEST   = 0;
+  parameter STIMULUS_DNC_TOP_TEST = 0;
   parameter STIMULUS_DNC_TOP_CASE_0 = 0;
   parameter STIMULUS_DNC_TOP_CASE_1 = 0;
 

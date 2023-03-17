@@ -1,15 +1,15 @@
 module peripheral_testbench;
   reg clk;
 
-  always #10 clk =~ clk;
+  always #10 clk = ~clk;
   design_if _if (clk);
 
   fsm dut (
     .clk(clk),
     .rst(_if.rst),
 
-    .in  (_if.in),
-    .out (_if.out)
+    .in (_if.in),
+    .out(_if.out)
   );
 
   initial begin

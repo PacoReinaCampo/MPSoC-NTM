@@ -38,29 +38,28 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_integer_multiplier #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_A_IN_ENABLE,
-    input DATA_B_IN_ENABLE,
-    output reg DATA_OUT_ENABLE,
+  input      DATA_A_IN_ENABLE,
+  input      DATA_B_IN_ENABLE,
+  output reg DATA_OUT_ENABLE,
 
-    // DATA
-    output reg [DATA_SIZE-1:0] OVERFLOW_OUT,
-    input [DATA_SIZE-1:0] SIZE_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  output reg [DATA_SIZE-1:0] OVERFLOW_OUT,
+  input      [DATA_SIZE-1:0] SIZE_IN,
+  input      [DATA_SIZE-1:0] DATA_A_IN,
+  input      [DATA_SIZE-1:0] DATA_B_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -74,17 +73,17 @@ module ntm_vector_integer_multiplier #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -94,25 +93,25 @@ module ntm_vector_integer_multiplier #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] multiplier_ctrl_fsm_int;
+  reg  [             1:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
-  reg [CONTROL_SIZE-1:0] index_loop;
+  reg  [CONTROL_SIZE-1:0] index_loop;
 
-  reg data_a_in_multiplier_int;
-  reg data_b_in_multiplier_int;
+  reg                     data_a_in_multiplier_int;
+  reg                     data_b_in_multiplier_int;
 
   // MULTIPLIER
   // CONTROL
-  reg start_scalar_integer_multiplier;
-  wire ready_scalar_integer_multiplier;
+  reg                     start_scalar_integer_multiplier;
+  wire                    ready_scalar_integer_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_integer_multiplier;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_integer_multiplier;
+  reg  [   DATA_SIZE-1:0] data_a_in_scalar_integer_multiplier;
+  reg  [   DATA_SIZE-1:0] data_b_in_scalar_integer_multiplier;
 
-  wire [DATA_SIZE-1:0] data_out_scalar_integer_multiplier;
-  wire [DATA_SIZE-1:0] overflow_out_scalar_integer_multiplier;
+  wire [   DATA_SIZE-1:0] data_out_scalar_integer_multiplier;
+  wire [   DATA_SIZE-1:0] overflow_out_scalar_integer_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -122,52 +121,51 @@ module ntm_vector_integer_multiplier #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT                 <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY                    <= 1'b0;
 
       // Assignations
-      index_loop <= ZERO_DATA;
+      index_loop               <= ZERO_DATA;
 
       data_a_in_multiplier_int <= 1'b0;
       data_b_in_multiplier_int <= 1'b0;
-    end
-    else begin
-      case(multiplier_ctrl_fsm_int)
-        STARTER_STATE : begin
+    end else begin
+      case (multiplier_ctrl_fsm_int)
+        STARTER_STATE: begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO_DATA;
+            index_loop              <= ZERO_DATA;
 
             // FSM Control
             multiplier_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        INPUT_STATE : begin
+        INPUT_STATE: begin
           // STEP 1
-          if(DATA_A_IN_ENABLE == 1'b1) begin
+          if (DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_scalar_integer_multiplier <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_multiplier_int <= 1'b1;
+            data_a_in_multiplier_int            <= 1'b1;
           end
-          if(DATA_B_IN_ENABLE == 1'b1) begin
+          if (DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
             data_b_in_scalar_integer_multiplier <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_multiplier_int <= 1'b1;
+            data_b_in_multiplier_int            <= 1'b1;
           end
-          if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
-            if(index_loop == ZERO_DATA) begin
+          if (data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
+            if (index_loop == ZERO_DATA) begin
               // Control Internal
               start_scalar_integer_multiplier <= 1'b1;
             end
@@ -178,37 +176,35 @@ module ntm_vector_integer_multiplier #(
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
+        ENDER_STATE: begin
           // STEP 2
-          if(ready_scalar_integer_multiplier == 1'b1) begin
-            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
+          if (ready_scalar_integer_multiplier == 1'b1) begin
+            if (index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
-              READY <= 1'b1;
+              READY                   <= 1'b1;
 
               // FSM Control
               multiplier_ctrl_fsm_int <= STARTER_STATE;
-            end
-            else begin
+            end else begin
               // Control Internal
-              index_loop <= (index_loop + ONE_CONTROL);
+              index_loop              <= (index_loop + ONE_CONTROL);
 
               // FSM Control
               multiplier_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_integer_multiplier;
+            DATA_OUT        <= data_out_scalar_integer_multiplier;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
-          end
-          else begin
+          end else begin
             // Control Internal
             start_scalar_integer_multiplier <= 1'b0;
-            data_a_in_multiplier_int <= 1'b0;
-            data_b_in_multiplier_int <= 1'b0;
+            data_a_in_multiplier_int        <= 1'b0;
+            data_b_in_multiplier_int        <= 1'b0;
           end
         end
-        default : begin
+        default: begin
           // FSM Control
           multiplier_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -218,10 +214,9 @@ module ntm_vector_integer_multiplier #(
 
   // MULTIPLIER
   ntm_scalar_integer_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_integer_multiplier(
+  ) scalar_integer_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -234,7 +229,7 @@ module ntm_vector_integer_multiplier #(
     .DATA_A_IN(data_a_in_scalar_integer_multiplier),
     .DATA_B_IN(data_b_in_scalar_integer_multiplier),
 
-    .DATA_OUT(data_out_scalar_integer_multiplier),
+    .DATA_OUT    (data_out_scalar_integer_multiplier),
     .OVERFLOW_OUT(overflow_out_scalar_integer_multiplier)
   );
 

@@ -48,42 +48,42 @@ module ntm_write_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // WRITING
   // CONTROL
-  wire start_writing;
-  wire ready_writing;
+  wire                 start_writing;
+  wire                 ready_writing;
 
-  wire m_in_j_enable_writing;
-  wire m_in_k_enable_writing;
+  wire                 m_in_j_enable_writing;
+  wire                 m_in_k_enable_writing;
 
-  wire w_in_enable_writing;
+  wire                 w_in_enable_writing;
 
-  wire a_in_enable_writing;
+  wire                 a_in_enable_writing;
 
-  wire w_out_enable_writing;
+  wire                 w_out_enable_writing;
 
-  wire a_out_enable_writing;
+  wire                 a_out_enable_writing;
 
-  wire m_out_j_enable_writing;
-  wire m_out_k_enable_writing;
+  wire                 m_out_j_enable_writing;
+  wire                 m_out_k_enable_writing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_writing;
@@ -97,18 +97,18 @@ module ntm_write_heads_testbench;
 
   // ERASING
   // CONTROL
-  wire start_erasing;
-  wire ready_erasing;
+  wire                 start_erasing;
+  wire                 ready_erasing;
 
-  wire m_in_j_enable_erasing;
-  wire m_in_k_enable_erasing;
-  
-  wire e_in_enable_erasing;
-  
-  wire e_out_enable_erasing;
-  
-  wire m_out_j_enable_erasing;
-  wire m_out_k_enable_erasing;
+  wire                 m_in_j_enable_erasing;
+  wire                 m_in_k_enable_erasing;
+
+  wire                 e_in_enable_erasing;
+
+  wire                 e_out_enable_erasing;
+
+  wire                 m_out_j_enable_erasing;
+  wire                 m_out_k_enable_erasing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_erasing;
@@ -127,7 +127,7 @@ module ntm_write_heads_testbench;
   // STIMULUS
   ntm_write_heads_stimulus #(
     // SYSTEM-SIZE
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
@@ -136,8 +136,7 @@ module ntm_write_heads_testbench;
     .W(W),
     .L(L),
     .R(R)
-  )
-  write_heads_stimulus(
+  ) write_heads_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -163,18 +162,17 @@ module ntm_write_heads_testbench;
     // DATA
     .NTM_WRITE_HEADS_SIZE_N_IN(size_n_in_writing),
     .NTM_WRITE_HEADS_SIZE_W_IN(size_w_in_writing),
-    .NTM_WRITE_HEADS_M_IN(m_in_writing),
-    .NTM_WRITE_HEADS_A_IN(a_in_writing),
-    .NTM_WRITE_HEADS_W_IN(w_in_writing),
-    .NTM_WRITE_HEADS_M_OUT(m_out_writing)
+    .NTM_WRITE_HEADS_M_IN     (m_in_writing),
+    .NTM_WRITE_HEADS_A_IN     (a_in_writing),
+    .NTM_WRITE_HEADS_W_IN     (w_in_writing),
+    .NTM_WRITE_HEADS_M_OUT    (m_out_writing)
   );
 
   // WRITING
   ntm_writing #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  writing(
+  ) writing (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -210,10 +208,9 @@ module ntm_write_heads_testbench;
 
   // ERASING
   ntm_erasing #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  erasing(
+  ) erasing (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -221,7 +218,7 @@ module ntm_write_heads_testbench;
     // CONTROL
     .START(start_erasing),
     .READY(ready_erasing),
-    
+
     .M_IN_J_ENABLE(m_in_j_enable_erasing),
     .M_IN_K_ENABLE(m_in_k_enable_erasing),
 

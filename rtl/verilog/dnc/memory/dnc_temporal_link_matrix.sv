@@ -38,39 +38,38 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_temporal_link_matrix #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
-    input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+  input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
+  input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
 
-    input W_IN_ENABLE,  // for j in 0 to N-1
-    input P_IN_ENABLE,  // for j in 0 to N-1
+  input W_IN_ENABLE,  // for j in 0 to N-1
+  input P_IN_ENABLE,  // for j in 0 to N-1
 
-    output reg W_OUT_ENABLE,  // for j in 0 to N-1
-    output reg P_OUT_ENABLE,  // for j in 0 to N-1
+  output reg W_OUT_ENABLE,  // for j in 0 to N-1
+  output reg P_OUT_ENABLE,  // for j in 0 to N-1
 
-    output reg L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
-    output reg L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+  output reg L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
+  output reg L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_N_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_N_IN,
 
-    input [DATA_SIZE-1:0] L_IN,
-    input [DATA_SIZE-1:0] W_IN,
-    input [DATA_SIZE-1:0] P_IN,
+  input [DATA_SIZE-1:0] L_IN,
+  input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] P_IN,
 
-    output reg [DATA_SIZE-1:0] L_OUT
-  );
+  output reg [DATA_SIZE-1:0] L_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -84,17 +83,17 @@ module dnc_temporal_link_matrix #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -104,14 +103,14 @@ module dnc_temporal_link_matrix #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg  [          1:0] controller_ctrl_fsm_int;
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_float_adder;
-  wire ready_scalar_float_adder;
+  wire                 start_scalar_float_adder;
+  wire                 ready_scalar_float_adder;
 
-  wire operation_scalar_float_adder;
+  wire                 operation_scalar_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
@@ -120,8 +119,8 @@ module dnc_temporal_link_matrix #(
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
+  wire                 start_scalar_float_multiplier;
+  wire                 ready_scalar_float_multiplier;
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
@@ -136,31 +135,30 @@ module dnc_temporal_link_matrix #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       L_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           end
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        VECTOR_MULTIPLIER_STATE: begin  // STEP 1
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        VECTOR_ADDER_STATE: begin  // STEP 2
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -170,10 +168,9 @@ module dnc_temporal_link_matrix #(
 
   // SCALAR ADDER
   ntm_scalar_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_adder(
+  ) scalar_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -187,15 +184,14 @@ module dnc_temporal_link_matrix #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_adder),
     .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT(data_out_scalar_float_adder)
+    .DATA_OUT (data_out_scalar_float_adder)
   );
 
   // SCALAR MULTIPLIER
   ntm_scalar_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_multiplier(
+  ) scalar_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -207,7 +203,7 @@ module dnc_temporal_link_matrix #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_multiplier),
     .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .DATA_OUT (data_out_scalar_float_multiplier)
   );
 
 endmodule

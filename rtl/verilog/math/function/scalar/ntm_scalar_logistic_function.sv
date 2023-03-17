@@ -38,22 +38,21 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_logistic_function #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -69,10 +68,10 @@ module ntm_scalar_logistic_function #(
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_float_adder;
-  wire ready_scalar_float_adder;
+  wire                 start_scalar_float_adder;
+  wire                 ready_scalar_float_adder;
 
-  wire operation_scalar_float_adder;
+  wire                 operation_scalar_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
@@ -81,8 +80,8 @@ module ntm_scalar_logistic_function #(
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_float_divider;
-  wire ready_scalar_float_divider;
+  wire                 start_scalar_float_divider;
+  wire                 ready_scalar_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
@@ -91,8 +90,8 @@ module ntm_scalar_logistic_function #(
 
   // SCALAR EXPONENTIATOR
   // CONTROL
-  wire start_scalar_exponentiator_function;
-  wire ready_scalar_exponentiator_function;
+  wire                 start_scalar_exponentiator_function;
+  wire                 ready_scalar_exponentiator_function;
 
   // DATA
   wire [DATA_SIZE-1:0] data_in_scalar_exponentiator_function;
@@ -104,10 +103,9 @@ module ntm_scalar_logistic_function #(
 
   // SCALAR ADDER
   ntm_scalar_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_adder(
+  ) scalar_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -121,15 +119,14 @@ module ntm_scalar_logistic_function #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_adder),
     .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT(data_out_scalar_float_adder)
+    .DATA_OUT (data_out_scalar_float_adder)
   );
 
   // SCALAR DIVIDER
   ntm_scalar_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_divider(
+  ) scalar_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -141,15 +138,14 @@ module ntm_scalar_logistic_function #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_divider),
     .DATA_B_IN(data_b_in_scalar_float_divider),
-    .DATA_OUT(data_out_scalar_float_divider)
+    .DATA_OUT (data_out_scalar_float_divider)
   );
 
   // SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_exponentiator_function(
+  ) scalar_exponentiator_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -159,7 +155,7 @@ module ntm_scalar_logistic_function #(
     .READY(ready_scalar_exponentiator_function),
 
     // DATA
-    .DATA_IN(data_in_scalar_exponentiator_function),
+    .DATA_IN (data_in_scalar_exponentiator_function),
     .DATA_OUT(data_out_scalar_exponentiator_function)
   );
 

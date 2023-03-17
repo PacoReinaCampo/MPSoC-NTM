@@ -48,49 +48,49 @@ package model_algebra_pkg;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;  // x in 0 to X-1
-  parameter Y=64;  // y in 0 to Y-1
-  parameter N=64;  // j in 0 to N-1
-  parameter W=64;  // k in 0 to W-1
-  parameter L=64;  // l in 0 to L-1
-  parameter R=64;  // i in 0 to R-1
+  parameter X = 64;  // x in 0 to X-1
+  parameter Y = 64;  // y in 0 to Y-1
+  parameter N = 64;  // j in 0 to N-1
+  parameter W = 64;  // k in 0 to W-1
+  parameter L = 64;  // l in 0 to L-1
+  parameter R = 64;  // i in 0 to R-1
 
-  parameter SIZE_I=64;
-  parameter SIZE_J=64;
+  parameter SIZE_I = 64;
+  parameter SIZE_J = 64;
 
-  parameter SIZE=64;
+  parameter SIZE = 64;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_DOT_PRODUCT_TEST      = 0;
+  parameter STIMULUS_NTM_DOT_PRODUCT_TEST = 0;
   parameter STIMULUS_NTM_VECTOR_TRANSPOSE_TEST = 0;
 
-  parameter STIMULUS_NTM_DOT_PRODUCT_CASE_0      = 0;
+  parameter STIMULUS_NTM_DOT_PRODUCT_CASE_0 = 0;
   parameter STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_DOT_PRODUCT_CASE_1      = 0;
+  parameter STIMULUS_NTM_DOT_PRODUCT_CASE_1 = 0;
   parameter STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST   = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_TEST = 0;
 
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0   = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0 = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1   = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1 = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1 = 0;
 
   // TENSOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_TENSOR_PRODUCT_TEST   = 0;
+  parameter STIMULUS_NTM_TENSOR_PRODUCT_TEST = 0;
   parameter STIMULUS_NTM_TENSOR_TRANSPOSE_TEST = 0;
 
-  parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_0   = 0;
+  parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_0 = 0;
   parameter STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 = 0;
 
-  parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_1   = 0;
+  parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_1 = 0;
   parameter STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////

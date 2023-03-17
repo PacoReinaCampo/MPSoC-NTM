@@ -48,34 +48,34 @@ module dnc_memory_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X = 64;
+  parameter Y = 64;
+  parameter N = 64;
+  parameter W = 64;
+  parameter L = 64;
+  parameter R = 64;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // GLOBAL
-  wire CLK;
-  wire RST;
+  wire                 CLK;
+  wire                 RST;
 
   // ALLOCATION WEIGHTING
   // CONTROL
-  wire start_allocation_weighting;
-  wire ready_allocation_weighting;
+  wire                 start_allocation_weighting;
+  wire                 ready_allocation_weighting;
 
-  wire u_in_enable_allocation_weighting;
+  wire                 u_in_enable_allocation_weighting;
 
-  wire u_out_enable_allocation_weighting;
+  wire                 u_out_enable_allocation_weighting;
 
-  wire a_out_enable_allocation_weighting;
+  wire                 a_out_enable_allocation_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_allocation_weighting;
@@ -86,20 +86,20 @@ module dnc_memory_testbench;
 
   // BACKWARD WEIGHTING
   // CONTROL
-  wire start_backward_weighting;
-  wire ready_backward_weighting;
+  wire                 start_backward_weighting;
+  wire                 ready_backward_weighting;
 
-  wire l_in_g_enable_backward_weighting;
-  wire l_in_j_enable_backward_weighting;
+  wire                 l_in_g_enable_backward_weighting;
+  wire                 l_in_j_enable_backward_weighting;
 
-  wire w_in_i_enable_backward_weighting;
-  wire w_in_j_enable_backward_weighting;
+  wire                 w_in_i_enable_backward_weighting;
+  wire                 w_in_j_enable_backward_weighting;
 
-  wire b_i_enable_backward_weighting;
-  wire b_j_enable_backward_weighting;
+  wire                 b_i_enable_backward_weighting;
+  wire                 b_j_enable_backward_weighting;
 
-  wire b_out_i_enable_backward_weighting;
-  wire b_out_j_enable_backward_weighting;
+  wire                 b_out_i_enable_backward_weighting;
+  wire                 b_out_j_enable_backward_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_backward_weighting;
@@ -112,20 +112,20 @@ module dnc_memory_testbench;
 
   // FORWARD WEIGHTING
   // CONTROL
-  wire start_forward_weighting;
-  wire ready_forward_weighting;
+  wire                 start_forward_weighting;
+  wire                 ready_forward_weighting;
 
-  wire l_in_g_enable_forward_weighting;
-  wire l_in_j_enable_forward_weighting;
+  wire                 l_in_g_enable_forward_weighting;
+  wire                 l_in_j_enable_forward_weighting;
 
-  wire w_in_i_enable_forward_weighting;
-  wire w_in_j_enable_forward_weighting;
+  wire                 w_in_i_enable_forward_weighting;
+  wire                 w_in_j_enable_forward_weighting;
 
-  wire f_i_enable_forward_weighting;
-  wire f_j_enable_forward_weighting;
+  wire                 f_i_enable_forward_weighting;
+  wire                 f_j_enable_forward_weighting;
 
-  wire f_out_i_enable_forward_weighting;
-  wire f_out_j_enable_forward_weighting;
+  wire                 f_out_i_enable_forward_weighting;
+  wire                 f_out_j_enable_forward_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_forward_weighting;
@@ -139,22 +139,22 @@ module dnc_memory_testbench;
 
   // MEMORY MATRIX
   // CONTROL
-  wire start_memory_matrix;
-  wire ready_memory_matrix;
+  wire                 start_memory_matrix;
+  wire                 ready_memory_matrix;
 
-  wire m_in_j_enable_memory_matrix;
-  wire m_in_k_enable_memory_matrix;
+  wire                 m_in_j_enable_memory_matrix;
+  wire                 m_in_k_enable_memory_matrix;
 
-  wire w_in_j_enable_memory_matrix;
-  wire v_in_k_enable_memory_matrix;
-  wire e_in_k_enable_memory_matrix;
+  wire                 w_in_j_enable_memory_matrix;
+  wire                 v_in_k_enable_memory_matrix;
+  wire                 e_in_k_enable_memory_matrix;
 
-  wire w_out_j_enable_memory_matrix;
-  wire v_out_k_enable_memory_matrix;
-  wire e_out_k_enable_memory_matrix;
+  wire                 w_out_j_enable_memory_matrix;
+  wire                 v_out_k_enable_memory_matrix;
+  wire                 e_out_k_enable_memory_matrix;
 
-  wire m_out_j_enable_memory_matrix;
-  wire m_out_k_enable_memory_matrix;
+  wire                 m_out_j_enable_memory_matrix;
+  wire                 m_out_k_enable_memory_matrix;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_memory_matrix;
@@ -170,20 +170,20 @@ module dnc_memory_testbench;
 
   // MEMORY RETENTION VECTOR
   // CONTROL
-  wire start_memory_retention_vector;
-  wire ready_memory_retention_vector;
+  wire                 start_memory_retention_vector;
+  wire                 ready_memory_retention_vector;
 
-  wire f_in_enable_memory_retention_vector;
+  wire                 f_in_enable_memory_retention_vector;
 
-  wire f_out_enable_memory_retention_vector;
+  wire                 f_out_enable_memory_retention_vector;
 
-  wire w_in_i_enable_memory_retention_vector;
-  wire w_in_j_enable_memory_retention_vector;
+  wire                 w_in_i_enable_memory_retention_vector;
+  wire                 w_in_j_enable_memory_retention_vector;
 
-  wire w_out_i_enable_memory_retention_vector;
-  wire w_out_j_enable_memory_retention_vector;
+  wire                 w_out_i_enable_memory_retention_vector;
+  wire                 w_out_j_enable_memory_retention_vector;
 
-  wire psi_out_enable_memory_retention_vector;
+  wire                 psi_out_enable_memory_retention_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_memory_retention_vector;
@@ -196,14 +196,14 @@ module dnc_memory_testbench;
 
   // PRECEDENCE WEIGHTING
   // CONTROL
-  wire start_precedence_weighting;
-  wire ready_precedence_weighting;
+  wire                 start_precedence_weighting;
+  wire                 ready_precedence_weighting;
 
-  wire w_in_enable_precedence_weighting;
-  wire p_in_enable_precedence_weighting;
+  wire                 w_in_enable_precedence_weighting;
+  wire                 p_in_enable_precedence_weighting;
 
-  wire w_out_enable_precedence_weighting;
-  wire p_out_enable_precedence_weighting;
+  wire                 w_out_enable_precedence_weighting;
+  wire                 p_out_enable_precedence_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_precedence_weighting;
@@ -216,20 +216,20 @@ module dnc_memory_testbench;
 
   // READ CONTENT WEIGHTING
   // CONTROL
-  wire start_read_content_weighting;
-  wire ready_read_content_weighting;
+  wire                 start_read_content_weighting;
+  wire                 ready_read_content_weighting;
 
-  wire k_in_enable_read_content_weighting;
+  wire                 k_in_enable_read_content_weighting;
 
-  wire k_out_enable_read_content_weighting;
+  wire                 k_out_enable_read_content_weighting;
 
-  wire m_in_j_enable_read_content_weighting;
-  wire m_in_k_enable_read_content_weighting;
+  wire                 m_in_j_enable_read_content_weighting;
+  wire                 m_in_k_enable_read_content_weighting;
 
-  wire m_out_j_enable_read_content_weighting;
-  wire m_out_k_enable_read_content_weighting;
+  wire                 m_out_j_enable_read_content_weighting;
+  wire                 m_out_k_enable_read_content_weighting;
 
-  wire c_out_enable_read_content_weighting;
+  wire                 c_out_enable_read_content_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_read_content_weighting;
@@ -243,23 +243,23 @@ module dnc_memory_testbench;
 
   // READ VECTORS
   // CONTROL
-  wire start_read_vectors;
-  wire ready_read_vectors;
+  wire                 start_read_vectors;
+  wire                 ready_read_vectors;
 
-  wire m_in_j_enable_read_vectors;
-  wire m_in_k_enable_read_vectors;
+  wire                 m_in_j_enable_read_vectors;
+  wire                 m_in_k_enable_read_vectors;
 
-  wire m_out_j_enable_read_vectors;
-  wire m_out_k_enable_read_vectors;
+  wire                 m_out_j_enable_read_vectors;
+  wire                 m_out_k_enable_read_vectors;
 
-  wire w_in_i_enable_read_vectors;
-  wire w_in_j_enable_read_vectors;
+  wire                 w_in_i_enable_read_vectors;
+  wire                 w_in_j_enable_read_vectors;
 
-  wire w_out_i_enable_read_vectors;
-  wire w_out_j_enable_read_vectors;
+  wire                 w_out_i_enable_read_vectors;
+  wire                 w_out_j_enable_read_vectors;
 
-  wire r_out_i_enable_read_vectors;
-  wire r_out_k_enable_read_vectors;
+  wire                 r_out_i_enable_read_vectors;
+  wire                 r_out_k_enable_read_vectors;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_read_vectors;
@@ -273,35 +273,35 @@ module dnc_memory_testbench;
 
   // READ WEIGHTING
   // CONTROL
-  wire start_read_weighting;
-  wire ready_read_weighting;
+  wire                 start_read_weighting;
+  wire                 ready_read_weighting;
 
-  wire pi_in_i_enable_read_weighting;
-  wire pi_in_p_enable_read_weighting;
+  wire                 pi_in_i_enable_read_weighting;
+  wire                 pi_in_p_enable_read_weighting;
 
-  wire pi_out_i_enable_read_weighting;
-  wire pi_out_p_enable_read_weighting;
+  wire                 pi_out_i_enable_read_weighting;
+  wire                 pi_out_p_enable_read_weighting;
 
-  wire b_in_i_enable_read_weighting;
-  wire b_in_j_enable_read_weighting;
+  wire                 b_in_i_enable_read_weighting;
+  wire                 b_in_j_enable_read_weighting;
 
-  wire b_out_i_enable_read_weighting;
-  wire b_out_j_enable_read_weighting;
+  wire                 b_out_i_enable_read_weighting;
+  wire                 b_out_j_enable_read_weighting;
 
-  wire c_in_i_enable_read_weighting;
-  wire c_in_j_enable_read_weighting;
+  wire                 c_in_i_enable_read_weighting;
+  wire                 c_in_j_enable_read_weighting;
 
-  wire c_out_i_enable_read_weighting;
-  wire c_out_j_enable_read_weighting;
+  wire                 c_out_i_enable_read_weighting;
+  wire                 c_out_j_enable_read_weighting;
 
-  wire f_in_i_enable_read_weighting;
-  wire f_in_j_enable_read_weighting;
+  wire                 f_in_i_enable_read_weighting;
+  wire                 f_in_j_enable_read_weighting;
 
-  wire f_out_i_enable_read_weighting;
-  wire f_out_j_enable_read_weighting;
+  wire                 f_out_i_enable_read_weighting;
+  wire                 f_out_j_enable_read_weighting;
 
-  wire w_out_i_enable_read_weighting;
-  wire w_out_j_enable_read_weighting;
+  wire                 w_out_i_enable_read_weighting;
+  wire                 w_out_j_enable_read_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_read_weighting;
@@ -317,20 +317,20 @@ module dnc_memory_testbench;
 
   // TEMPORAL LINK MATRIX
   // CONTROL
-  wire start_temporal_link_matrix;
-  wire ready_temporal_link_matrix;
+  wire                 start_temporal_link_matrix;
+  wire                 ready_temporal_link_matrix;
 
-  wire l_in_g_enable_temporal_link_matrix;
-  wire l_in_j_enable_temporal_link_matrix;
+  wire                 l_in_g_enable_temporal_link_matrix;
+  wire                 l_in_j_enable_temporal_link_matrix;
 
-  wire w_in_enable_temporal_link_matrix;
-  wire p_in_enable_temporal_link_matrix;
+  wire                 w_in_enable_temporal_link_matrix;
+  wire                 p_in_enable_temporal_link_matrix;
 
-  wire w_out_enable_temporal_link_matrix;
-  wire p_out_enable_temporal_link_matrix;
+  wire                 w_out_enable_temporal_link_matrix;
+  wire                 p_out_enable_temporal_link_matrix;
 
-  wire l_out_g_enable_temporal_link_matrix;
-  wire l_out_j_enable_temporal_link_matrix;
+  wire                 l_out_g_enable_temporal_link_matrix;
+  wire                 l_out_j_enable_temporal_link_matrix;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_temporal_link_matrix;
@@ -343,16 +343,16 @@ module dnc_memory_testbench;
 
   // USAGE VECTOR
   // CONTROL
-  wire start_usage_vector;
-  wire ready_usage_vector;
+  wire                 start_usage_vector;
+  wire                 ready_usage_vector;
 
-  wire u_in_enable_usage_vector;
-  wire w_in_enable_usage_vector;
-  wire psi_in_enable_usage_vector;
+  wire                 u_in_enable_usage_vector;
+  wire                 w_in_enable_usage_vector;
+  wire                 psi_in_enable_usage_vector;
 
-  wire u_out_enable_usage_vector;
-  wire w_out_enable_usage_vector;
-  wire psi_out_enable_usage_vector;
+  wire                 u_out_enable_usage_vector;
+  wire                 w_out_enable_usage_vector;
+  wire                 psi_out_enable_usage_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_usage_vector;
@@ -365,20 +365,20 @@ module dnc_memory_testbench;
 
   // WRITE CONTENT WEIGHTING
   // CONTROL
-  wire start_write_content_weighting;
-  wire ready_write_content_weighting;
+  wire                 start_write_content_weighting;
+  wire                 ready_write_content_weighting;
 
-  wire k_in_enable_write_content_weighting;
+  wire                 k_in_enable_write_content_weighting;
 
-  wire k_out_enable_write_content_weighting;
+  wire                 k_out_enable_write_content_weighting;
 
-  wire m_in_j_enable_write_content_weighting;
-  wire m_in_k_enable_write_content_weighting;
+  wire                 m_in_j_enable_write_content_weighting;
+  wire                 m_in_k_enable_write_content_weighting;
 
-  wire m_out_j_enable_write_content_weighting;
-  wire m_out_k_enable_write_content_weighting;
+  wire                 m_out_j_enable_write_content_weighting;
+  wire                 m_out_k_enable_write_content_weighting;
 
-  wire c_out_enable_write_content_weighting;
+  wire                 c_out_enable_write_content_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_write_content_weighting;
@@ -392,16 +392,16 @@ module dnc_memory_testbench;
 
   // WRITE WEIGHTING
   // CONTROL
-  wire start_write_weighting;
-  wire ready_write_weighting;
+  wire                 start_write_weighting;
+  wire                 ready_write_weighting;
 
-  wire a_in_enable_write_weighting;
-  wire c_in_enable_write_weighting;
+  wire                 a_in_enable_write_weighting;
+  wire                 c_in_enable_write_weighting;
 
-  wire a_out_enable_write_weighting;
-  wire c_out_enable_write_weighting;
+  wire                 a_out_enable_write_weighting;
+  wire                 c_out_enable_write_weighting;
 
-  wire w_out_enable_write_weighting;
+  wire                 w_out_enable_write_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_write_weighting;
@@ -416,41 +416,41 @@ module dnc_memory_testbench;
 
   // ADDRESSING
   // CONTROL
-  wire start_addressing;
-  wire ready_addressing;
+  wire                 start_addressing;
+  wire                 ready_addressing;
 
-  wire k_read_in_i_enable_addressing;
-  wire k_read_in_k_enable_addressing;
+  wire                 k_read_in_i_enable_addressing;
+  wire                 k_read_in_k_enable_addressing;
 
-  wire k_read_out_i_enable_addressing;
-  wire k_read_out_k_enable_addressing;
+  wire                 k_read_out_i_enable_addressing;
+  wire                 k_read_out_k_enable_addressing;
 
-  wire beta_read_in_enable_addressing;
+  wire                 beta_read_in_enable_addressing;
 
-  wire beta_read_out_enable_addressing;
+  wire                 beta_read_out_enable_addressing;
 
-  wire f_read_in_enable_addressing;
+  wire                 f_read_in_enable_addressing;
 
-  wire f_read_out_enable_addressing;
+  wire                 f_read_out_enable_addressing;
 
-  wire pi_read_in_enable_addressing;
+  wire                 pi_read_in_enable_addressing;
 
-  wire pi_read_out_enable_addressing;
+  wire                 pi_read_out_enable_addressing;
 
-  wire k_write_in_k_enable_addressing;
+  wire                 k_write_in_k_enable_addressing;
 
-  wire k_write_out_k_enable_addressing;
+  wire                 k_write_out_k_enable_addressing;
 
-  wire e_write_in_k_enable_addressing;
+  wire                 e_write_in_k_enable_addressing;
 
-  wire e_write_out_k_enable_addressing;
+  wire                 e_write_out_k_enable_addressing;
 
-  wire v_write_in_k_enable_addressing;
+  wire                 v_write_in_k_enable_addressing;
 
-  wire v_write_out_k_enable_addressing;
+  wire                 v_write_out_k_enable_addressing;
 
-  wire r_out_i_enable_addressing;
-  wire r_out_k_enable_addressing;
+  wire                 r_out_i_enable_addressing;
+  wire                 r_out_k_enable_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_addressing;
@@ -476,10 +476,9 @@ module dnc_memory_testbench;
 
   // STIMULUS
   dnc_memory_stimulus #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  memory_stimulus(
+  ) memory_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -525,27 +524,26 @@ module dnc_memory_testbench;
     .DNC_MEMORY_SIZE_R_IN(size_r_in_addressing),
     .DNC_MEMORY_SIZE_W_IN(size_w_in_addressing),
 
-    .DNC_MEMORY_K_READ_IN(k_read_in_addressing),
+    .DNC_MEMORY_K_READ_IN   (k_read_in_addressing),
     .DNC_MEMORY_BETA_READ_IN(beta_read_in_addressing),
-    .DNC_MEMORY_F_READ_IN(f_read_in_addressing),
-    .DNC_MEMORY_PI_READ_IN(pi_read_in_addressing),
+    .DNC_MEMORY_F_READ_IN   (f_read_in_addressing),
+    .DNC_MEMORY_PI_READ_IN  (pi_read_in_addressing),
 
-    .DNC_MEMORY_K_WRITE_IN(k_write_in_addressing),
+    .DNC_MEMORY_K_WRITE_IN   (k_write_in_addressing),
     .DNC_MEMORY_BETA_WRITE_IN(beta_write_in_addressing),
-    .DNC_MEMORY_E_WRITE_IN(e_write_in_addressing),
-    .DNC_MEMORY_V_WRITE_IN(v_write_in_addressing),
-    .DNC_MEMORY_GA_WRITE_IN(ga_write_in_addressing),
-    .DNC_MEMORY_GW_WRITE_IN(gw_write_in_addressing),
+    .DNC_MEMORY_E_WRITE_IN   (e_write_in_addressing),
+    .DNC_MEMORY_V_WRITE_IN   (v_write_in_addressing),
+    .DNC_MEMORY_GA_WRITE_IN  (ga_write_in_addressing),
+    .DNC_MEMORY_GW_WRITE_IN  (gw_write_in_addressing),
 
     .DNC_MEMORY_R_OUT(r_out_addressing)
   );
 
   // ALLOCATION WEIGHTING
   dnc_allocation_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  allocation_weighting(
+  ) allocation_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -570,10 +568,9 @@ module dnc_memory_testbench;
 
   // BACKWARD WEIGHTING
   dnc_backward_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  backward_weighting(
+  ) backward_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -607,10 +604,9 @@ module dnc_memory_testbench;
 
   // FORWARD WEIGHTING
   dnc_forward_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  forward_weighting(
+  ) forward_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -634,17 +630,16 @@ module dnc_memory_testbench;
     // DATA
     .SIZE_R_IN(size_r_in_forward_weighting),
     .SIZE_N_IN(size_n_in_forward_weighting),
-    .L_IN(l_in_forward_weighting),
-    .W_IN(w_in_forward_weighting),
-    .F_OUT(f_out_forward_weighting)
+    .L_IN     (l_in_forward_weighting),
+    .W_IN     (w_in_forward_weighting),
+    .F_OUT    (f_out_forward_weighting)
   );
 
   // MEMORY MATRIX
   dnc_memory_matrix #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  memory_matrix(
+  ) memory_matrix (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -682,10 +677,9 @@ module dnc_memory_testbench;
 
   // MEMORY RETENTION VECTOR
   dnc_memory_retention_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  memory_retention_vector(
+  ) memory_retention_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -718,10 +712,9 @@ module dnc_memory_testbench;
 
   // PRECEDENCE WEIGHTING
   dnc_precedence_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  precedence_weighting(
+  ) precedence_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -748,10 +741,9 @@ module dnc_memory_testbench;
 
   // READ CONTENT WEIGHTING
   dnc_read_content_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  read_content_weighting(
+  ) read_content_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -776,8 +768,8 @@ module dnc_memory_testbench;
     .SIZE_N_IN(size_n_in_read_content_weighting),
     .SIZE_W_IN(size_w_in_read_content_weighting),
 
-    .K_IN(k_in_read_content_weighting),
-    .M_IN(m_in_read_content_weighting),
+    .K_IN   (k_in_read_content_weighting),
+    .M_IN   (m_in_read_content_weighting),
     .BETA_IN(beta_in_read_content_weighting),
 
     .C_OUT(c_out_read_content_weighting)
@@ -785,10 +777,9 @@ module dnc_memory_testbench;
 
   // READ VECTORS
   dnc_read_vectors #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  read_vectors(
+  ) read_vectors (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -825,10 +816,9 @@ module dnc_memory_testbench;
 
   // READ WEIGHTING
   dnc_read_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  read_weighting(
+  ) read_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -879,10 +869,9 @@ module dnc_memory_testbench;
 
   // TEMPORAL LINK MATRIX
   dnc_temporal_link_matrix #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  temporal_link_matrix(
+  ) temporal_link_matrix (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -915,10 +904,9 @@ module dnc_memory_testbench;
 
   // USAGE VECTOR
   dnc_usage_vector #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  usage_vector(
+  ) usage_vector (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -927,19 +915,19 @@ module dnc_memory_testbench;
     .START(start_usage_vector),
     .READY(ready_usage_vector),
 
-    .U_IN_ENABLE(u_in_enable_usage_vector),
-    .W_IN_ENABLE(w_in_enable_usage_vector),
+    .U_IN_ENABLE  (u_in_enable_usage_vector),
+    .W_IN_ENABLE  (w_in_enable_usage_vector),
     .PSI_IN_ENABLE(psi_in_enable_usage_vector),
 
-    .U_OUT_ENABLE(u_out_enable_usage_vector),
-    .W_OUT_ENABLE(w_out_enable_usage_vector),
+    .U_OUT_ENABLE  (u_out_enable_usage_vector),
+    .W_OUT_ENABLE  (w_out_enable_usage_vector),
     .PSI_OUT_ENABLE(psi_out_enable_usage_vector),
 
     // DATA
     .SIZE_N_IN(size_n_in_usage_vector),
 
-    .U_IN(u_in_usage_vector),
-    .W_IN(w_in_usage_vector),
+    .U_IN  (u_in_usage_vector),
+    .W_IN  (w_in_usage_vector),
     .PSI_IN(psi_in_usage_vector),
 
     .U_OUT(u_out_usage_vector)
@@ -947,10 +935,9 @@ module dnc_memory_testbench;
 
   // WRITE CONTENT WEIGHTING
   dnc_write_content_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  write_content_weighting(
+  ) write_content_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -975,8 +962,8 @@ module dnc_memory_testbench;
     .SIZE_N_IN(size_n_in_write_content_weighting),
     .SIZE_W_IN(size_w_in_write_content_weighting),
 
-    .K_IN(k_in_write_content_weighting),
-    .M_IN(m_in_write_content_weighting),
+    .K_IN   (k_in_write_content_weighting),
+    .M_IN   (m_in_write_content_weighting),
     .BETA_IN(beta_in_write_content_weighting),
 
     .C_OUT(c_out_content_weighting)
@@ -984,10 +971,9 @@ module dnc_memory_testbench;
 
   // WRITE WEIGHTING
   dnc_write_weighting #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  write_weighting(
+  ) write_weighting (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1018,10 +1004,9 @@ module dnc_memory_testbench;
 
   // ADDRESSING
   dnc_addressing #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  addressing(
+  ) addressing (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -1067,17 +1052,17 @@ module dnc_memory_testbench;
     .SIZE_R_IN(size_r_in_addressing),
     .SIZE_W_IN(size_w_in_addressing),
 
-    .K_READ_IN(k_read_in_addressing),
+    .K_READ_IN   (k_read_in_addressing),
     .BETA_READ_IN(beta_read_in_addressing),
-    .F_READ_IN(f_read_in_addressing),
-    .PI_READ_IN(pi_read_in_addressing),
+    .F_READ_IN   (f_read_in_addressing),
+    .PI_READ_IN  (pi_read_in_addressing),
 
-    .K_WRITE_IN(k_write_in_addressing),
+    .K_WRITE_IN   (k_write_in_addressing),
     .BETA_WRITE_IN(beta_write_in_addressing),
-    .E_WRITE_IN(e_write_in_addressing),
-    .V_WRITE_IN(v_write_in_addressing),
-    .GA_WRITE_IN(ga_write_in_addressing),
-    .GW_WRITE_IN(gw_write_in_addressing),
+    .E_WRITE_IN   (e_write_in_addressing),
+    .V_WRITE_IN   (v_write_in_addressing),
+    .GA_WRITE_IN  (ga_write_in_addressing),
+    .GW_WRITE_IN  (gw_write_in_addressing),
 
     .R_OUT(r_out_addressing)
   );

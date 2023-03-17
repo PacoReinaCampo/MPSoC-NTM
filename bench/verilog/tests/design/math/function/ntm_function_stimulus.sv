@@ -39,133 +39,132 @@
 
 module ntm_function_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64,
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64,
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0,
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0,
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0,
-  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0,
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST   = 0,
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST    = 0,
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 = 0,
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0  = 0,
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1 = 0,
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1  = 0,
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0,
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0,
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0,
-  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0,
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST   = 0,
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST    = 0,
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 = 0,
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0  = 0,
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1 = 0,
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1  = 0,
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0,
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0,
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0,
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0,
-  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0,
-  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0
-)
-  (
-    // GLOBAL
-    output CLK,
-    output RST,
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST   = 0,
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST    = 0,
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 = 0,
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0  = 0,
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1 = 0,
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1  = 0
+) (
+  // GLOBAL
+  output CLK,
+  output RST,
 
-    ///////////////////////////////////////////////////////////////////////
-    // STIMULUS SCALAR
-    ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  // STIMULUS SCALAR
+  ///////////////////////////////////////////////////////////////////////
 
-    // SCALAR LOGISTIC
-    // CONTROL
-    output SCALAR_LOGISTIC_START,
-    input SCALAR_LOGISTIC_READY,
+  // SCALAR LOGISTIC
+  // CONTROL
+  output SCALAR_LOGISTIC_START,
+  input  SCALAR_LOGISTIC_READY,
 
-    // DATA
-    output [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_IN,
-    input [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_IN,
+  input  [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_OUT,
 
-    // SCALAR ONEPLUS
-    // CONTROL
-    output SCALAR_ONEPLUS_START,
-    input SCALAR_ONEPLUS_READY,
+  // SCALAR ONEPLUS
+  // CONTROL
+  output SCALAR_ONEPLUS_START,
+  input  SCALAR_ONEPLUS_READY,
 
-    // DATA
-    output [DATA_SIZE-1:0] SCALAR_ONEPLUS_DATA_IN,
-    input [DATA_SIZE-1:0] SCALAR_ONEPLUS_DATA_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] SCALAR_ONEPLUS_DATA_IN,
+  input  [DATA_SIZE-1:0] SCALAR_ONEPLUS_DATA_OUT,
 
-    ///////////////////////////////////////////////////////////////////////
-    // STIMULUS VECTOR
-    ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  // STIMULUS VECTOR
+  ///////////////////////////////////////////////////////////////////////
 
-    // VECTOR LOGISTIC
-    // CONTROL
-    output VECTOR_LOGISTIC_START,
-    input VECTOR_LOGISTIC_READY,
+  // VECTOR LOGISTIC
+  // CONTROL
+  output VECTOR_LOGISTIC_START,
+  input  VECTOR_LOGISTIC_READY,
 
-    output VECTOR_LOGISTIC_DATA_IN_ENABLE,
-    input VECTOR_LOGISTIC_DATA_OUT_ENABLE,
+  output VECTOR_LOGISTIC_DATA_IN_ENABLE,
+  input  VECTOR_LOGISTIC_DATA_OUT_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] VECTOR_LOGISTIC_SIZE_IN,
-    output [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_IN,
-    input [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] VECTOR_LOGISTIC_SIZE_IN,
+  output [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_IN,
+  input  [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_OUT,
 
-    // VECTOR ONEPLUS
-    // CONTROL
-    output VECTOR_ONEPLUS_START,
-    input VECTOR_ONEPLUS_READY,
+  // VECTOR ONEPLUS
+  // CONTROL
+  output VECTOR_ONEPLUS_START,
+  input  VECTOR_ONEPLUS_READY,
 
-    output VECTOR_ONEPLUS_DATA_IN_ENABLE,
-    input VECTOR_ONEPLUS_DATA_OUT_ENABLE,
+  output VECTOR_ONEPLUS_DATA_IN_ENABLE,
+  input  VECTOR_ONEPLUS_DATA_OUT_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] VECTOR_ONEPLUS_SIZE_IN,
-    output [DATA_SIZE-1:0] VECTOR_ONEPLUS_DATA_IN,
-    input [DATA_SIZE-1:0] VECTOR_ONEPLUS_DATA_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] VECTOR_ONEPLUS_SIZE_IN,
+  output [DATA_SIZE-1:0] VECTOR_ONEPLUS_DATA_IN,
+  input  [DATA_SIZE-1:0] VECTOR_ONEPLUS_DATA_OUT,
 
-    ///////////////////////////////////////////////////////////////////////
-    // STIMULUS MATRIX
-    ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  // STIMULUS MATRIX
+  ///////////////////////////////////////////////////////////////////////
 
-    // MATRIX LOGISTIC
-    // CONTROL
-    output MATRIX_LOGISTIC_START,
-    input MATRIX_LOGISTIC_READY,
+  // MATRIX LOGISTIC
+  // CONTROL
+  output MATRIX_LOGISTIC_START,
+  input  MATRIX_LOGISTIC_READY,
 
-    output MATRIX_LOGISTIC_DATA_IN_I_ENABLE,
-    output MATRIX_LOGISTIC_DATA_IN_J_ENABLE,
-    input MATRIX_LOGISTIC_DATA_OUT_I_ENABLE,
-    input MATRIX_LOGISTIC_DATA_OUT_J_ENABLE,
+  output MATRIX_LOGISTIC_DATA_IN_I_ENABLE,
+  output MATRIX_LOGISTIC_DATA_IN_J_ENABLE,
+  input  MATRIX_LOGISTIC_DATA_OUT_I_ENABLE,
+  input  MATRIX_LOGISTIC_DATA_OUT_J_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_I_IN,
-    output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_J_IN,
-    output [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_IN,
-    input [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_I_IN,
+  output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_J_IN,
+  output [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_IN,
+  input  [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_OUT,
 
-    // MATRIX ONEPLUS
-    // CONTROL
-    output MATRIX_ONEPLUS_START,
-    input MATRIX_ONEPLUS_READY,
+  // MATRIX ONEPLUS
+  // CONTROL
+  output MATRIX_ONEPLUS_START,
+  input  MATRIX_ONEPLUS_READY,
 
-    output MATRIX_ONEPLUS_DATA_IN_I_ENABLE,
-    output MATRIX_ONEPLUS_DATA_IN_J_ENABLE,
-    input MATRIX_ONEPLUS_DATA_OUT_I_ENABLE,
-    input MATRIX_ONEPLUS_DATA_OUT_J_ENABLE,
+  output MATRIX_ONEPLUS_DATA_IN_I_ENABLE,
+  output MATRIX_ONEPLUS_DATA_IN_J_ENABLE,
+  input  MATRIX_ONEPLUS_DATA_OUT_I_ENABLE,
+  input  MATRIX_ONEPLUS_DATA_OUT_J_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] MATRIX_ONEPLUS_SIZE_I_IN,
-    output [DATA_SIZE-1:0] MATRIX_ONEPLUS_SIZE_J_IN,
-    output [DATA_SIZE-1:0] MATRIX_ONEPLUS_DATA_IN,
-    input [DATA_SIZE-1:0] MATRIX_ONEPLUS_DATA_OUT
-  );
+  // DATA
+  output [DATA_SIZE-1:0] MATRIX_ONEPLUS_SIZE_I_IN,
+  output [DATA_SIZE-1:0] MATRIX_ONEPLUS_SIZE_J_IN,
+  output [DATA_SIZE-1:0] MATRIX_ONEPLUS_DATA_IN,
+  input  [DATA_SIZE-1:0] MATRIX_ONEPLUS_DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -42,11 +42,11 @@
  */
 
 class ntm_intro_monitor extends uvm_monitor;
-  virtual dut_if vif;
+  virtual dut_if                             vif;
 
   //Analysis port -parameterized to ntm_intro_rw transaction
   ///Monitor writes transaction objects to this port once detected on interface
-  uvm_analysis_port#(ntm_intro_transaction) ap;
+  uvm_analysis_port #(ntm_intro_transaction) ap;
 
   `uvm_component_utils(ntm_intro_monitor)
 
@@ -69,29 +69,27 @@ class ntm_intro_monitor extends uvm_monitor;
       ntm_intro_transaction tr;
       // Wait for a SETUP cycle
       do begin
-        @ (this.vif.monitor_cb);
-      end
-      while (this.vif.monitor_cb.psel !== 1'b1 || this.vif.monitor_cb.penable !== 1'b0);
+        @(this.vif.monitor_cb);
+      end while (this.vif.monitor_cb.psel !== 1'b1 || this.vif.monitor_cb.penable !== 1'b0);
       //create a transaction object
-      tr = ntm_intro_transaction::type_id::create("tr", this);
+      tr        = ntm_intro_transaction::type_id::create("tr", this);
 
       //populate fields based on values seen on interface
       tr.pwrite = (this.vif.monitor_cb.pwrite) ? ntm_intro_transaction::WRITE : ntm_intro_transaction::READ;
-      tr.addr = this.vif.monitor_cb.paddr;
+      tr.addr   = this.vif.monitor_cb.paddr;
 
-      @ (this.vif.monitor_cb);
+      @(this.vif.monitor_cb);
       if (this.vif.monitor_cb.penable !== 1'b1) begin
         `uvm_error("INTRO", "INTRO protocol violation: SETUP cycle not followed by ENABLE cycle");
       end
 
       if (tr.pwrite == ntm_intro_transaction::READ) begin
         tr.data = this.vif.monitor_cb.prdata;
-      end
-      else if (tr.pwrite == ntm_intro_transaction::WRITE) begin
+      end else if (tr.pwrite == ntm_intro_transaction::WRITE) begin
         tr.data = this.vif.monitor_cb.pwdata;
       end
 
-      uvm_report_info("INTRO_MONITOR", $sformatf("Got Transaction %s",tr.convert2string()));
+      uvm_report_info("INTRO_MONITOR", $sformatf("Got Transaction %s", tr.convert2string()));
       //Write to analysis port
       ap.write(tr);
     end

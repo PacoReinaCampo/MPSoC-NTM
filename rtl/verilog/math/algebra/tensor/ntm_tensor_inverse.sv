@@ -38,29 +38,28 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_tensor_inverse #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_A_IN_ENABLE,
-    input DATA_B_IN_ENABLE,
+  input DATA_A_IN_ENABLE,
+  input DATA_B_IN_ENABLE,
 
-    output reg DATA_OUT_ENABLE,
+  output reg DATA_OUT_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] LENGTH_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] LENGTH_IN,
+  input      [DATA_SIZE-1:0] DATA_A_IN,
+  input      [DATA_SIZE-1:0] DATA_B_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -76,8 +75,8 @@ module ntm_tensor_inverse #(
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
+  wire                 start_scalar_float_multiplier;
+  wire                 ready_scalar_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
@@ -86,8 +85,8 @@ module ntm_tensor_inverse #(
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_float_divider;
-  wire ready_scalar_float_divider;
+  wire                 start_scalar_float_divider;
+  wire                 ready_scalar_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
@@ -96,12 +95,12 @@ module ntm_tensor_inverse #(
 
   // SCALAR PRODUCT
   // CONTROL
-  wire start_scalar_product;
-  wire ready_scalar_product;
+  wire                 start_scalar_product;
+  wire                 ready_scalar_product;
 
-  wire data_a_in_enable_scalar_product;
-  wire data_b_in_enable_scalar_product;
-  wire data_out_enable_scalar_product;
+  wire                 data_a_in_enable_scalar_product;
+  wire                 data_b_in_enable_scalar_product;
+  wire                 data_out_enable_scalar_product;
 
   // DATA
   wire [DATA_SIZE-1:0] length_in_scalar_product;
@@ -115,10 +114,9 @@ module ntm_tensor_inverse #(
 
   // SCALAR MULTIPLIER
   ntm_scalar_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_multiplier(
+  ) scalar_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -130,15 +128,14 @@ module ntm_tensor_inverse #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_multiplier),
     .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .DATA_OUT (data_out_scalar_float_multiplier)
   );
 
   // SCALAR DIVIDER
   ntm_scalar_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_divider(
+  ) scalar_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -150,15 +147,14 @@ module ntm_tensor_inverse #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_divider),
     .DATA_B_IN(data_b_in_scalar_float_divider),
-    .DATA_OUT(data_out_scalar_float_divider)
+    .DATA_OUT (data_out_scalar_float_divider)
   );
 
   // SCALAR PRODUCT
   ntm_scalar_product #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_product(
+  ) scalar_product (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -169,13 +165,13 @@ module ntm_tensor_inverse #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_scalar_product),
     .DATA_B_IN_ENABLE(data_b_in_enable_scalar_product),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_product),
+    .DATA_OUT_ENABLE (data_out_enable_scalar_product),
 
     // DATA
     .LENGTH_IN(length_in_scalar_product),
     .DATA_A_IN(data_a_in_scalar_product),
     .DATA_B_IN(data_b_in_scalar_product),
-    .DATA_OUT(data_out_scalar_product)
+    .DATA_OUT (data_out_scalar_product)
   );
 
 endmodule

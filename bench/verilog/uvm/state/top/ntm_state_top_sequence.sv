@@ -41,10 +41,10 @@
  *   Paco Reina Campo <pacoreinacampo@queenfield.tech>
  */
 
-class ntm_intro_sequence extends uvm_sequence#(ntm_intro_transaction);
+class ntm_intro_sequence extends uvm_sequence #(ntm_intro_transaction);
   `uvm_object_utils(ntm_intro_sequence)
 
-  function new (string name = "");
+  function new(string name = "");
     super.new(name);
   endfunction
 
@@ -52,9 +52,9 @@ class ntm_intro_sequence extends uvm_sequence#(ntm_intro_transaction);
     ntm_intro_transaction rw_trans;
     //create 10 random INTRO read/write transaction and send to driver
     repeat (80) begin
-      rw_trans=new();
+      rw_trans = new();
       start_item(rw_trans);
-      assert(rw_trans.randomize());
+      assert (rw_trans.randomize());
       finish_item(rw_trans);
     end
   endtask

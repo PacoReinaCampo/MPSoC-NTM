@@ -39,78 +39,77 @@
 
 module dnc_read_heads_memory_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64,
 
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64
-)
-  (
-    // GLOBAL
-    output CLK,
-    output RST,
+  parameter X = 64,
+  parameter Y = 64,
+  parameter N = 64,
+  parameter W = 64,
+  parameter L = 64,
+  parameter R = 64
+) (
+  // GLOBAL
+  output CLK,
+  output RST,
 
-    // FREE GATES
-    // CONTROL
-    output NTM_FREE_GATES_START,
-    input NTM_FREE_GATES_READY,
+  // FREE GATES
+  // CONTROL
+  output NTM_FREE_GATES_START,
+  input  NTM_FREE_GATES_READY,
 
-    output NTM_FREE_GATES_F_IN_ENABLE,
-    input NTM_FREE_GATES_F_OUT_ENABLE,
+  output NTM_FREE_GATES_F_IN_ENABLE,
+  input  NTM_FREE_GATES_F_OUT_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] NTM_FREE_GATES_SIZE_R_IN,
-    output [DATA_SIZE-1:0] NTM_FREE_GATES_F_IN,
-    output NTM_FREE_GATES_F_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] NTM_FREE_GATES_SIZE_R_IN,
+  output [DATA_SIZE-1:0] NTM_FREE_GATES_F_IN,
+  output                 NTM_FREE_GATES_F_OUT,
 
-    // READ KEYS
-    // CONTROL
-    output NTM_READ_KEYS_START,
-    output NTM_READ_KEYS_READY,
+  // READ KEYS
+  // CONTROL
+  output NTM_READ_KEYS_START,
+  output NTM_READ_KEYS_READY,
 
-    output NTM_READ_KEYS_K_IN_I_ENABLE,
-    output NTM_READ_KEYS_K_IN_K_ENABLE,
-    output NTM_READ_KEYS_K_OUT_I_ENABLE,
-    output NTM_READ_KEYS_K_OUT_K_ENABLE,
+  output NTM_READ_KEYS_K_IN_I_ENABLE,
+  output NTM_READ_KEYS_K_IN_K_ENABLE,
+  output NTM_READ_KEYS_K_OUT_I_ENABLE,
+  output NTM_READ_KEYS_K_OUT_K_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] NTM_READ_KEYS_SIZE_R_IN,
-    output [DATA_SIZE-1:0] NTM_READ_KEYS_SIZE_W_IN,
-    output [DATA_SIZE-1:0] NTM_READ_KEYS_K_IN,
-    output [DATA_SIZE-1:0] NTM_READ_KEYS_K_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] NTM_READ_KEYS_SIZE_R_IN,
+  output [DATA_SIZE-1:0] NTM_READ_KEYS_SIZE_W_IN,
+  output [DATA_SIZE-1:0] NTM_READ_KEYS_K_IN,
+  output [DATA_SIZE-1:0] NTM_READ_KEYS_K_OUT,
 
-    // READ MODES
-    // CONTROL
-    output NTM_READ_MODES_START,
-    output NTM_READ_MODES_READY,
+  // READ MODES
+  // CONTROL
+  output NTM_READ_MODES_START,
+  output NTM_READ_MODES_READY,
 
-    output NTM_READ_MODES_PI_IN_I_ENABLE,
-    output NTM_READ_MODES_PI_IN_P_ENABLE,
-    output NTM_READ_MODES_PI_OUT_I_ENABLE,
-    output NTM_READ_MODES_PI_OUT_P_ENABLE,
+  output NTM_READ_MODES_PI_IN_I_ENABLE,
+  output NTM_READ_MODES_PI_IN_P_ENABLE,
+  output NTM_READ_MODES_PI_OUT_I_ENABLE,
+  output NTM_READ_MODES_PI_OUT_P_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] NTM_READ_MODES_SIZE_R_IN,
-    output [DATA_SIZE-1:0] NTM_READ_MODES_PI_IN,
-    output [DATA_SIZE-1:0] NTM_READ_MODES_PI_OUT,
+  // DATA
+  output [DATA_SIZE-1:0] NTM_READ_MODES_SIZE_R_IN,
+  output [DATA_SIZE-1:0] NTM_READ_MODES_PI_IN,
+  output [DATA_SIZE-1:0] NTM_READ_MODES_PI_OUT,
 
-    // READ STRENGTHS
-    // CONTROL
-    output NTM_READ_STRENGTHS_START,
-    output NTM_READ_STRENGTHS_READY,
+  // READ STRENGTHS
+  // CONTROL
+  output NTM_READ_STRENGTHS_START,
+  output NTM_READ_STRENGTHS_READY,
 
-    output NTM_READ_STRENGTHS_BETA_IN_ENABLE,
-    output NTM_READ_STRENGTHS_BETA_OUT_ENABLE,
+  output NTM_READ_STRENGTHS_BETA_IN_ENABLE,
+  output NTM_READ_STRENGTHS_BETA_OUT_ENABLE,
 
-    // DATA
-    output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_SIZE_R_IN,
-    output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_BETA_IN,
-    output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_BETA_OUT
-  );
+  // DATA
+  output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_SIZE_R_IN,
+  output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_BETA_IN,
+  output [DATA_SIZE-1:0] NTM_READ_STRENGTHS_BETA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
