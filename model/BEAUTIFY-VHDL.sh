@@ -1,188 +1,45 @@
-emacs -batch vhdl/arithmetic/float/matrix/model_matrix_float_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/matrix/model_matrix_float_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/matrix/model_matrix_float_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/scalar/model_scalar_float_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/scalar/model_scalar_float_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/scalar/model_scalar_float_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/tensor/model_tensor_float_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/tensor/model_tensor_float_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/tensor/model_tensor_float_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/vector/model_vector_float_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/vector/model_vector_float_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/float/vector/model_vector_float_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/matrix/model_matrix_integer_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/matrix/model_matrix_integer_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/matrix/model_matrix_integer_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/scalar/model_scalar_integer_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/scalar/model_scalar_integer_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/tensor/model_tensor_integer_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/tensor/model_tensor_integer_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/tensor/model_tensor_integer_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/vector/model_vector_integer_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/vector/model_vector_integer_divider.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/integer/vector/model_vector_integer_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/matrix/model_matrix_modular_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/matrix/model_matrix_modular_inverter.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/matrix/model_matrix_modular_mod.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/matrix/model_matrix_modular_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/scalar/model_scalar_modular_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/scalar/model_scalar_modular_mod.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/tensor/model_tensor_modular_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/tensor/model_tensor_modular_inverter.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/tensor/model_tensor_modular_mod.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/tensor/model_tensor_modular_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/vector/model_vector_modular_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/vector/model_vector_modular_inverter.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/vector/model_vector_modular_mod.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/arithmetic/modular/vector/model_vector_modular_multiplier.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/FNN/convolutional/model_controller.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/FNN/standard/model_controller.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_activation_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_controller.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_forget_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_hidden_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_input_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_output_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/convolutional/model_state_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_activation_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_controller.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_forget_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_hidden_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_input_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_output_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/controller/LSTM/standard/model_state_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/components/model_masked_multi_head_attention.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/components/model_masked_scaled_dot_product_attention.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/components/model_multi_head_attention.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/components/model_scaled_dot_product_attention.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/fnn/model_fnn.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/functions/model_layer_norm.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/functions/model_positional_encoding.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/inputs/model_inputs_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/inputs/model_keys_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/inputs/model_queries_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/inputs/model_values_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_activation_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_forget_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_hidden_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_input_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_lstm.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_output_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/lstm/model_state_gate_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/top/model_controller.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/top/model_decoder.vhd -f vhdl-beautify-buffer -f save-buffer
-#emacs -batch vhdl/controller/transformer/top/model_encoder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_allocation_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_backward_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_content_based_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_forward_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_memory_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_memory_retention_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_precedence_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_read_content_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_read_vectors.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_read_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_sort_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_temporal_link_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_usage_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_write_content_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/memory/model_write_weighting.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/read_heads/model_read_heads.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/model_interface_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/model_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/model_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/top/model_top.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/dnc/write_heads/model_write_heads.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/intro/model_intro_adder.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_summation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_transpose.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_vector_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_matrix_vector_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/matrix/model_transpose_vector_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_matrix_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_summation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/tensor/model_tensor_transpose.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_dot_product.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_vector_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_vector_cosine_similarity.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_vector_module.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_vector_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/algebra/vector/model_vector_summation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/matrix/model_matrix_differentiation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/matrix/model_matrix_integration.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/matrix/model_matrix_softmax.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/tensor/model_tensor_differentiation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/tensor/model_tensor_integration.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/tensor/model_tensor_softmax.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/vector/model_vector_differentiation.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/vector/model_vector_integration.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/calculus/vector/model_vector_softmax.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/matrix/model_matrix_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/matrix/model_matrix_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/scalar/model_scalar_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/scalar/model_scalar_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/vector/model_vector_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/function/vector/model_vector_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_cosh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_exponentiator_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_power_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_sinh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_sqrt_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/matrix/model_matrix_tanh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_cosh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_exponentiator_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_power_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_sinh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_sqrt_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/scalar/model_scalar_tanh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_cosh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_exponentiator_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_power_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_sinh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_sqrt_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/math/series/vector/model_vector_tanh_function.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/memory/model_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/memory/model_content_based_addressing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/read_heads/model_reading.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/top/model_interface_matrix.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/top/model_interface_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/top/model_output_vector.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/top/model_top.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/write_heads/model_erasing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/ntm/write_heads/model_writing.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_arithmetic_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_dnc_core_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_fnn_controller_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_intro_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_lstm_controller_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_math_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_ntm_core_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/pkg/model_state_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/feedback/model_state_matrix_feedforward.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/feedback/model_state_matrix_input.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/feedback/model_state_matrix_output.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/feedback/model_state_matrix_state.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/outputs/model_state_vector_output.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/outputs/model_state_vector_state.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/state/top/model_state_top.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/trainer/FNN/model_trainer.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/trainer/LSTM/model_activation_trainer.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/trainer/LSTM/model_forget_trainer.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/trainer/LSTM/model_input_trainer.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/trainer/LSTM/model_output_trainer.vhd -f vhdl-beautify-buffer -f save-buffer
+###################################################################################
+##                                            __ _      _     _                  ##
+##                                           / _(_)    | |   | |                 ##
+##                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 ##
+##               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 ##
+##              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 ##
+##               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 ##
+##                  | |                                                          ##
+##                  |_|                                                          ##
+##                                                                               ##
+##                                                                               ##
+##              QueenField                                                       ##
+##              Multi-Processor System on Chip                                   ##
+##                                                                               ##
+###################################################################################
+
+###################################################################################
+##                                                                               ##
+## Copyright (c) 2022-2025 by the author(s)                                      ##
+##                                                                               ##
+## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
+## of this software and associated documentation files (the "Software"), to deal ##
+## in the Software without restriction, including without limitation the rights  ##
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     ##
+## copies of the Software, and to permit persons to whom the Software is         ##
+## furnished to do so, subject to the following conditions:                      ##
+##                                                                               ##
+## The above copyright notice and this permission notice shall be included in    ##
+## all copies or substantial portions of the Software.                           ##
+##                                                                               ##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    ##
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      ##
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   ##
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        ##
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, ##
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     ##
+## THE SOFTWARE.                                                                 ##
+##                                                                               ##
+## ============================================================================= ##
+## Author(s):                                                                    ##
+##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
+##                                                                               ##
+###################################################################################
+
+find . -type f -name '*.vhd' -exec emacs -batch {} -f vhdl-beautify-buffer -f save-buffer \;

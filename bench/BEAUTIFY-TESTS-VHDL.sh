@@ -1,100 +1,45 @@
-emacs -batch vhdl/tests/design/arithmetic/float/ntm_float_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/arithmetic/float/ntm_float_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/arithmetic/integer/ntm_integer_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/arithmetic/integer/ntm_integer_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/arithmetic/modular/ntm_modular_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/arithmetic/modular/ntm_modular_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/FNN/standard/ntm_standard_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/LSTM/convolutional/ntm_convolutional_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/LSTM/convolutional/ntm_convolutional_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/transformer/ntm_transformer_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/controller/transformer/ntm_transformer_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/memory/dnc_memory_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/memory/dnc_memory_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/read_heads/dnc_read_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/read_heads/dnc_read_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/top/dnc_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/top/dnc_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/write_heads/dnc_write_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/dnc/write_heads/dnc_write_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/algebra/ntm_algebra_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/algebra/ntm_algebra_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/calculus/ntm_calculus_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/calculus/ntm_calculus_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/function/ntm_function_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/function/ntm_function_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/series/ntm_series_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/math/series/ntm_series_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/memory/ntm_memory_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/memory/ntm_memory_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/read_heads/ntm_read_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/read_heads/ntm_read_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/top/ntm_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/top/ntm_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/write_heads/ntm_write_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/ntm/write_heads/ntm_write_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/feedback/ntm_state_feedback_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/feedback/ntm_state_feedback_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/outputs/ntm_state_outputs_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/top/ntm_state_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/state/top/ntm_state_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/trainer/FNN/ntm_trainer_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/trainer/FNN/ntm_trainer_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/trainer/LSTM/ntm_trainer_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/design/trainer/LSTM/ntm_trainer_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/float/model_float_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/float/model_float_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/integer/model_integer_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/integer/model_integer_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/modular/model_modular_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/arithmetic/modular/model_modular_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/FNN/convolutional/model_convolutional_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/FNN/convolutional/model_convolutional_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/FNN/standard/model_standard_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/FNN/standard/model_standard_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/LSTM/convolutional/model_convolutional_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/LSTM/convolutional/model_convolutional_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/LSTM/standard/model_standard_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/LSTM/standard/model_standard_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/transformer/model_transformer_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/controller/transformer/model_transformer_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/memory/model_memory_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/memory/model_memory_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/read_heads/model_read_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/read_heads/model_read_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/top/model_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/top/model_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/write_heads/model_write_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/dnc/write_heads/model_write_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/algebra/model_algebra_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/algebra/model_algebra_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/calculus/model_calculus_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/calculus/model_calculus_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/function/model_function_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/function/model_function_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/series/model_series_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/math/series/model_series_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/memory/model_memory_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/memory/model_memory_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/read_heads/model_read_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/read_heads/model_read_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/top/model_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/top/model_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/write_heads/model_write_heads_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/ntm/write_heads/model_write_heads_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/feedback/model_state_feedback_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/feedback/model_state_feedback_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/outputs/model_state_outputs_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/outputs/model_state_outputs_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/top/model_state_top_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/state/top/model_state_top_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/trainer/FNN/model_trainer_fnn_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/trainer/FNN/model_trainer_fnn_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/trainer/LSTM/model_trainer_lstm_pkg.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/tests/model/trainer/LSTM/model_trainer_lstm_stimulus.vhd -f vhdl-beautify-buffer -f save-buffer
+###################################################################################
+##                                            __ _      _     _                  ##
+##                                           / _(_)    | |   | |                 ##
+##                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 ##
+##               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 ##
+##              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 ##
+##               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 ##
+##                  | |                                                          ##
+##                  |_|                                                          ##
+##                                                                               ##
+##                                                                               ##
+##              QueenField                                                       ##
+##              Multi-Processor System on Chip                                   ##
+##                                                                               ##
+###################################################################################
+
+###################################################################################
+##                                                                               ##
+## Copyright (c) 2022-2025 by the author(s)                                      ##
+##                                                                               ##
+## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
+## of this software and associated documentation files (the "Software"), to deal ##
+## in the Software without restriction, including without limitation the rights  ##
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     ##
+## copies of the Software, and to permit persons to whom the Software is         ##
+## furnished to do so, subject to the following conditions:                      ##
+##                                                                               ##
+## The above copyright notice and this permission notice shall be included in    ##
+## all copies or substantial portions of the Software.                           ##
+##                                                                               ##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    ##
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      ##
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   ##
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        ##
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, ##
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     ##
+## THE SOFTWARE.                                                                 ##
+##                                                                               ##
+## ============================================================================= ##
+## Author(s):                                                                    ##
+##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
+##                                                                               ##
+###################################################################################
+
+find . -type f -name '*.vhd' -exec emacs -batch {} -f vhdl-beautify-buffer -f save-buffer \;
