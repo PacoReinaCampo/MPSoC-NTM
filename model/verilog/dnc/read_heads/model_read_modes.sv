@@ -38,28 +38,27 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_read_modes #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
+  // CONTROL
+  input  START,
+  output READY,
 
-    input PI_IN_I_ENABLE,  // for i in 0 to R-1
-    input PI_IN_P_ENABLE,  // for i in 0 to 2
-    output PI_OUT_I_ENABLE,  // for i in 0 to R-1
-    output PI_OUT_P_ENABLE,  // for i in 0 to 2
+  input  PI_IN_I_ENABLE,   // for i in 0 to R-1
+  input  PI_IN_P_ENABLE,   // for i in 0 to 2
+  output PI_OUT_I_ENABLE,  // for i in 0 to R-1
+  output PI_OUT_P_ENABLE,  // for i in 0 to 2
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_R_IN,
-    input [DATA_SIZE-1:0] PI_IN,
-    output [DATA_SIZE-1:0] PI_OUT
-  );
+  // DATA
+  input  [DATA_SIZE-1:0] SIZE_R_IN,
+  input  [DATA_SIZE-1:0] PI_IN,
+  output [DATA_SIZE-1:0] PI_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -69,17 +68,17 @@ module model_read_modes #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -90,13 +89,13 @@ module model_read_modes #(
 
   // VECTOR SOFTMAX
   // CONTROL
-  wire start_vector_softmax;
-  wire ready_vector_softmax;
+  wire                 start_vector_softmax;
+  wire                 ready_vector_softmax;
 
-  wire data_in_vector_enable_vector_softmax;
-  wire data_in_scalar_enable_vector_softmax;
-  wire data_out_vector_enable_vector_softmax;
-  wire data_out_scalar_enable_vector_softmax;
+  wire                 data_in_vector_enable_vector_softmax;
+  wire                 data_in_scalar_enable_vector_softmax;
+  wire                 data_out_vector_enable_vector_softmax;
+  wire                 data_out_scalar_enable_vector_softmax;
 
   // DATA
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
@@ -112,25 +111,24 @@ module model_read_modes #(
 
   // ASSIGNATIONS
   // CONTROL
-  assign start_vector_softmax = START;
-  assign READY = ready_vector_softmax;
+  assign start_vector_softmax                 = START;
+  assign READY                                = ready_vector_softmax;
   assign data_in_vector_enable_vector_softmax = PI_IN_I_ENABLE;
   assign data_in_scalar_enable_vector_softmax = PI_IN_P_ENABLE;
-  assign PI_OUT_I_ENABLE = data_out_vector_enable_vector_softmax;
-  assign PI_OUT_P_ENABLE = data_out_scalar_enable_vector_softmax;
+  assign PI_OUT_I_ENABLE                      = data_out_vector_enable_vector_softmax;
+  assign PI_OUT_P_ENABLE                      = data_out_scalar_enable_vector_softmax;
 
   // DATA
-  assign length_in_vector_softmax = THREE_DATA;
-  assign size_in_vector_softmax = SIZE_R_IN;
-  assign data_in_vector_softmax = PI_IN;
-  assign PI_OUT = data_out_vector_softmax;
+  assign length_in_vector_softmax             = THREE_DATA;
+  assign size_in_vector_softmax               = SIZE_R_IN;
+  assign data_in_vector_softmax               = PI_IN;
+  assign PI_OUT                               = data_out_vector_softmax;
 
   // VECTOR SOFTMAX
   model_vector_softmax #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_softmax(
+  ) vector_softmax (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -139,16 +137,16 @@ module model_read_modes #(
     .START(start_vector_softmax),
     .READY(ready_vector_softmax),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_softmax),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_softmax),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_softmax),
+    .DATA_IN_SCALAR_ENABLE (data_in_scalar_enable_vector_softmax),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_softmax),
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .SIZE_IN(size_in_vector_softmax),
+    .SIZE_IN  (size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
-    .DATA_IN(data_in_vector_softmax),
-    .DATA_OUT(data_out_vector_softmax)
+    .DATA_IN  (data_in_vector_softmax),
+    .DATA_OUT (data_out_vector_softmax)
   );
 
 endmodule

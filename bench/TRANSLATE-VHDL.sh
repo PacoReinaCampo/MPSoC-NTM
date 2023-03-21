@@ -42,4 +42,4 @@
 ##                                                                               ##
 ###################################################################################
 
-find . -type f -name '*.vhd' -exec emacs -batch {} -f vhdl-beautify-buffer -f save-buffer \;
+find . -type f -name '*.vhd' -exec vhdl2verilog {} \;

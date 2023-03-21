@@ -38,34 +38,33 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_tensor_integration #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_IN_MATRIX_ENABLE,
-    input DATA_IN_VECTOR_ENABLE,
-    input DATA_IN_SCALAR_ENABLE,
+  input DATA_IN_MATRIX_ENABLE,
+  input DATA_IN_VECTOR_ENABLE,
+  input DATA_IN_SCALAR_ENABLE,
 
-    output reg DATA_OUT_MATRIX_ENABLE,
-    output reg DATA_OUT_VECTOR_ENABLE,
-    output reg DATA_OUT_SCALAR_ENABLE,
+  output reg DATA_OUT_MATRIX_ENABLE,
+  output reg DATA_OUT_VECTOR_ENABLE,
+  output reg DATA_OUT_SCALAR_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_I_IN,
-    input [DATA_SIZE-1:0] SIZE_J_IN,
-    input [DATA_SIZE-1:0] PERIOD_IN,
-    input [DATA_SIZE-1:0] LENGTH_IN,
-    input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] SIZE_I_IN,
+  input      [DATA_SIZE-1:0] SIZE_J_IN,
+  input      [DATA_SIZE-1:0] PERIOD_IN,
+  input      [DATA_SIZE-1:0] LENGTH_IN,
+  input      [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -75,17 +74,17 @@ module model_tensor_integration #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -96,10 +95,10 @@ module model_tensor_integration #(
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_float_adder;
-  wire ready_scalar_float_adder;
+  wire                 start_scalar_float_adder;
+  wire                 ready_scalar_float_adder;
 
-  wire operation_scalar_float_adder;
+  wire                 operation_scalar_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
@@ -108,8 +107,8 @@ module model_tensor_integration #(
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_float_multiplier;
-  wire ready_scalar_float_multiplier;
+  wire                 start_scalar_float_multiplier;
+  wire                 ready_scalar_float_multiplier;
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_float_multiplier;
@@ -117,8 +116,8 @@ module model_tensor_integration #(
 
   // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_float_divider;
-  wire ready_scalar_float_divider;
+  wire                 start_scalar_float_divider;
+  wire                 ready_scalar_float_divider;
 
   // DATA
   wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
@@ -131,10 +130,9 @@ module model_tensor_integration #(
 
   // SCALAR ADDER
   model_scalar_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_adder(
+  ) scalar_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -148,15 +146,14 @@ module model_tensor_integration #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_adder),
     .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT(data_out_scalar_float_adder)
+    .DATA_OUT (data_out_scalar_float_adder)
   );
 
   // SCALAR MULTIPLIER
   model_scalar_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_multiplier(
+  ) scalar_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -168,15 +165,14 @@ module model_tensor_integration #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_multiplier),
     .DATA_B_IN(data_b_in_scalar_float_multiplier),
-    .DATA_OUT(data_out_scalar_float_multiplier)
+    .DATA_OUT (data_out_scalar_float_multiplier)
   );
 
   // SCALAR DIVIDER
   model_scalar_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_float_divider(
+  ) scalar_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -188,7 +184,7 @@ module model_tensor_integration #(
     // DATA
     .DATA_A_IN(data_a_in_scalar_float_divider),
     .DATA_B_IN(data_b_in_scalar_float_divider),
-    .DATA_OUT(data_out_scalar_float_divider)
+    .DATA_OUT (data_out_scalar_float_divider)
   );
 
 endmodule

@@ -38,41 +38,40 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_tensor_float_divider #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_A_IN_I_ENABLE,
-    input DATA_A_IN_J_ENABLE,
-    input DATA_A_IN_K_ENABLE,
-    input DATA_B_IN_I_ENABLE,
-    input DATA_B_IN_J_ENABLE,
-    input DATA_B_IN_K_ENABLE,
+  input DATA_A_IN_I_ENABLE,
+  input DATA_A_IN_J_ENABLE,
+  input DATA_A_IN_K_ENABLE,
+  input DATA_B_IN_I_ENABLE,
+  input DATA_B_IN_J_ENABLE,
+  input DATA_B_IN_K_ENABLE,
 
-    output reg DATA_OUT_I_ENABLE,
-    output reg DATA_OUT_J_ENABLE,
-    output reg DATA_OUT_K_ENABLE,
+  output reg DATA_OUT_I_ENABLE,
+  output reg DATA_OUT_J_ENABLE,
+  output reg DATA_OUT_K_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_A_I_IN,
-    input [DATA_SIZE-1:0] SIZE_A_J_IN,
-    input [DATA_SIZE-1:0] SIZE_A_K_IN,
-    input [DATA_SIZE-1:0] SIZE_B_I_IN,
-    input [DATA_SIZE-1:0] SIZE_B_J_IN,
-    input [DATA_SIZE-1:0] SIZE_B_K_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_A_I_IN,
+  input [DATA_SIZE-1:0] SIZE_A_J_IN,
+  input [DATA_SIZE-1:0] SIZE_A_K_IN,
+  input [DATA_SIZE-1:0] SIZE_B_I_IN,
+  input [DATA_SIZE-1:0] SIZE_B_J_IN,
+  input [DATA_SIZE-1:0] SIZE_B_K_IN,
+  input [DATA_SIZE-1:0] DATA_A_IN,
+  input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -87,17 +86,17 @@ module model_tensor_float_divider #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -107,30 +106,30 @@ module model_tensor_float_divider #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] divider_ctrl_fsm_int;
+  reg  [             1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
-  reg [CONTROL_SIZE-1:0] index_i_loop;
-  reg [CONTROL_SIZE-1:0] index_j_loop;
+  reg  [CONTROL_SIZE-1:0] index_i_loop;
+  reg  [CONTROL_SIZE-1:0] index_j_loop;
 
-  reg data_a_in_i_divider_int;
-  reg data_a_in_j_divider_int;
-  reg data_b_in_i_divider_int;
-  reg data_b_in_j_divider_int;
+  reg                     data_a_in_i_divider_int;
+  reg                     data_a_in_j_divider_int;
+  reg                     data_b_in_i_divider_int;
+  reg                     data_b_in_j_divider_int;
 
   // DIVIDER
   // CONTROL
-  reg start_vector_float_divider;
-  wire ready_vector_float_divider;
-  reg data_a_in_enable_vector_float_divider;
-  reg data_b_in_enable_vector_float_divider;
-  wire data_out_enable_vector_float_divider;
+  reg                     start_vector_float_divider;
+  wire                    ready_vector_float_divider;
+  reg                     data_a_in_enable_vector_float_divider;
+  reg                     data_b_in_enable_vector_float_divider;
+  wire                    data_out_enable_vector_float_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_float_divider;
-  reg [DATA_SIZE-1:0] data_a_in_vector_float_divider;
-  reg [DATA_SIZE-1:0] data_b_in_vector_float_divider;
-  wire [DATA_SIZE-1:0] data_out_vector_float_divider;
+  reg  [   DATA_SIZE-1:0] size_in_vector_float_divider;
+  reg  [   DATA_SIZE-1:0] data_a_in_vector_float_divider;
+  reg  [   DATA_SIZE-1:0] data_b_in_vector_float_divider;
+  wire [   DATA_SIZE-1:0] data_out_vector_float_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -142,26 +141,25 @@ module model_tensor_float_divider #(
 
   // DIVIDER
   model_vector_float_divider #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_divider(
+  ) vector_float_divider (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_float_divider),
-    .READY(ready_vector_float_divider),
+    .START           (start_vector_float_divider),
+    .READY           (ready_vector_float_divider),
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_divider),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_divider),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_divider),
+    .SIZE_IN  (size_in_vector_float_divider),
     .DATA_A_IN(data_a_in_vector_float_divider),
     .DATA_B_IN(data_b_in_vector_float_divider),
-    .DATA_OUT(data_out_vector_float_divider)
+    .DATA_OUT (data_out_vector_float_divider)
   );
 
 endmodule

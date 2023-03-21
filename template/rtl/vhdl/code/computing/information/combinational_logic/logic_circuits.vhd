@@ -96,46 +96,46 @@ begin
     elsif (rising_edge(CLK)) then
 
       case OPERATION is
-        when "0000" =>  -- STEP 0
+        when "0000" =>                  -- STEP 0
           -- Control Outputs
           DATA_OUT <= DATA_A_IN and DATA_B_IN;
-        when "0001" =>  -- STEP 1
+        when "0001" =>                  -- STEP 1
           -- Data Outputs
           DATA_OUT <= DATA_A_IN nand DATA_B_IN;
-        when "0010" =>  -- STEP 2
+        when "0010" =>                  -- STEP 2
           -- Data Outputs
           DATA_OUT <= DATA_A_IN or DATA_B_IN;
-        when "0011" =>  -- STEP 3
+        when "0011" =>                  -- STEP 3
           -- Data Outputs
           DATA_OUT <= DATA_A_IN nor DATA_B_IN;
-        when "0100" =>  -- STEP 4
+        when "0100" =>                  -- STEP 4
           -- Data Outputs
           DATA_OUT <= DATA_A_IN xor DATA_B_IN;
-        when "0101" =>  -- STEP 5
+        when "0101" =>                  -- STEP 5
           -- Data Outputs
           DATA_OUT <= DATA_A_IN xnor DATA_B_IN;
-        when "0110" =>  -- STEP 6
+        when "0110" =>                  -- STEP 6
           -- Data Outputs
           DATA_OUT <= not DATA_A_IN;
-        when "0110" =>  -- STEP 7
+        when "0110" =>                  -- STEP 7
           -- Data Outputs
           DATA_OUT <= not DATA_B_IN;
-        when "1000" =>  -- STEP 8
+        when "1000" =>                  -- STEP 8
           -- Data Outputs
           DATA_OUT <= DATA_A_IN;
-        when "1001" =>  -- STEP 9
+        when "1001" =>                  -- STEP 9
           -- Data Outputs
           DATA_OUT <= DATA_B_IN;
-        when "1010" =>  -- STEP 10
+        when "1010" =>                  -- STEP 10
           -- Data Outputs
           DATA_OUT <= ZERO_DATA;
-        when "1011" =>  -- STEP 11
+        when "1011" =>                  -- STEP 11
           -- Data Outputs
           DATA_OUT <= FULL_DATA;
-        when "1110" =>  -- STEP 10
+        when "1110" =>                  -- STEP 10
           -- Data Outputs
           DATA_OUT <= ZERO_DATA;
-        when "1111" =>  -- STEP 11
+        when "1111" =>                  -- STEP 11
           -- Data Outputs
           DATA_OUT <= FULL_DATA;
         when others =>

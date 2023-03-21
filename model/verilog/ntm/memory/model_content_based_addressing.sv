@@ -38,40 +38,39 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_content_based_addressing #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input K_IN_ENABLE,  // for j in 0 to J-1
+  input K_IN_ENABLE,  // for j in 0 to J-1
 
-    output reg K_OUT_ENABLE,  // for j in 0 to J-1
+  output reg K_OUT_ENABLE,  // for j in 0 to J-1
 
-    input M_IN_I_ENABLE,  // for i in 0 to I-1
-    input M_IN_J_ENABLE,  // for j in 0 to J-1
+  input M_IN_I_ENABLE,  // for i in 0 to I-1
+  input M_IN_J_ENABLE,  // for j in 0 to J-1
 
-    output reg M_OUT_I_ENABLE,  // for i in 0 to I-1
-    output reg M_OUT_J_ENABLE,  // for j in 0 to J-1
+  output reg M_OUT_I_ENABLE,  // for i in 0 to I-1
+  output reg M_OUT_J_ENABLE,  // for j in 0 to J-1
 
-    output reg C_OUT_ENABLE,  // for i in 0 to I-1
+  output reg C_OUT_ENABLE,  // for i in 0 to I-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_I_IN,
-    input [DATA_SIZE-1:0] SIZE_J_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_I_IN,
+  input [DATA_SIZE-1:0] SIZE_J_IN,
 
-    input [DATA_SIZE-1:0] K_IN,
-    input [DATA_SIZE-1:0] BETA_IN,
-    input [DATA_SIZE-1:0] M_IN,
+  input [DATA_SIZE-1:0] K_IN,
+  input [DATA_SIZE-1:0] BETA_IN,
+  input [DATA_SIZE-1:0] M_IN,
 
-    output reg [DATA_SIZE-1:0] C_OUT
-  );
+  output reg [DATA_SIZE-1:0] C_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -86,17 +85,17 @@ module model_content_based_addressing #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -106,16 +105,16 @@ module model_content_based_addressing #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg  [          2:0] controller_ctrl_fsm_int;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
+  wire                 start_vector_multiplier;
+  wire                 ready_vector_multiplier;
 
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire                 data_a_in_enable_vector_multiplier;
+  wire                 data_b_in_enable_vector_multiplier;
+  wire                 data_out_enable_vector_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
@@ -125,12 +124,12 @@ module model_content_based_addressing #(
 
   // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
-  wire start_vector_exponentiator_function;
-  wire ready_vector_exponentiator_function;
+  wire                 start_vector_exponentiator_function;
+  wire                 ready_vector_exponentiator_function;
 
-  wire data_a_in_enable_vector_exponentiator_function;
-  wire data_b_in_enable_vector_exponentiator_function;
-  wire data_out_enable_vector_exponentiator_function;
+  wire                 data_a_in_enable_vector_exponentiator_function;
+  wire                 data_b_in_enable_vector_exponentiator_function;
+  wire                 data_out_enable_vector_exponentiator_function;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator_function;
@@ -140,15 +139,15 @@ module model_content_based_addressing #(
 
   // VECTOR COSINE SIMILARITY
   // CONTROL
-  wire start_vector_cosine_similarity;
-  wire ready_vector_cosine_similarity;
+  wire                 start_vector_cosine_similarity;
+  wire                 ready_vector_cosine_similarity;
 
-  wire data_a_in_vector_enable_vector_cosine_similarity;
-  wire data_a_in_scalar_enable_vector_cosine_similarity;
-  wire data_b_in_vector_enable_vector_cosine_similarity;
-  wire data_b_in_scalar_enable_vector_cosine_similarity;
-  wire data_out_vector_enable_vector_cosine_similarity;
-  wire data_out_scalar_enable_vector_cosine_similarity;
+  wire                 data_a_in_vector_enable_vector_cosine_similarity;
+  wire                 data_a_in_scalar_enable_vector_cosine_similarity;
+  wire                 data_b_in_vector_enable_vector_cosine_similarity;
+  wire                 data_b_in_scalar_enable_vector_cosine_similarity;
+  wire                 data_out_vector_enable_vector_cosine_similarity;
+  wire                 data_out_scalar_enable_vector_cosine_similarity;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_cosine_similarity;
@@ -159,13 +158,13 @@ module model_content_based_addressing #(
 
   // VECTOR SOFTMAX
   // CONTROL
-  wire start_vector_softmax;
-  wire ready_vector_softmax;
+  wire                 start_vector_softmax;
+  wire                 ready_vector_softmax;
 
-  wire data_in_vector_enable_vector_softmax;
-  wire data_in_scalar_enable_vector_softmax;
-  wire data_out_vector_enable_vector_softmax;
-  wire data_out_scalar_enable_vector_softmax;
+  wire                 data_in_vector_enable_vector_softmax;
+  wire                 data_in_scalar_enable_vector_softmax;
+  wire                 data_out_vector_enable_vector_softmax;
+  wire                 data_out_scalar_enable_vector_softmax;
 
   // DATA
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
@@ -181,37 +180,36 @@ module model_content_based_addressing #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       C_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
           end
         end
 
-        VECTOR_COSINE_SIMILARITY_STATE : begin  // STEP 1
+        VECTOR_COSINE_SIMILARITY_STATE: begin  // STEP 1
         end
 
-        VECTOR_EXPONE_CONTROLNTIATOR_STATE : begin  // STEP 2
+        VECTOR_EXPONE_CONTROLNTIATOR_STATE: begin  // STEP 2
         end
 
-        VECTOR_SOFTMAX_STATE : begin  // STEP 3
+        VECTOR_SOFTMAX_STATE: begin  // STEP 3
 
           // Data Outputs
           C_OUT <= data_out_vector_softmax;
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -221,15 +219,15 @@ module model_content_based_addressing #(
 
   // DATA
   // VECTOR COSINE SIMILARITY
-  assign size_in_vector_cosine_similarity   = SIZE_I_IN;
-  assign length_in_vector_cosine_similarity = SIZE_J_IN;
-  assign data_a_in_vector_cosine_similarity = K_IN;
-  assign data_b_in_vector_cosine_similarity = M_IN;
+  assign size_in_vector_cosine_similarity        = SIZE_I_IN;
+  assign length_in_vector_cosine_similarity      = SIZE_J_IN;
+  assign data_a_in_vector_cosine_similarity      = K_IN;
+  assign data_b_in_vector_cosine_similarity      = M_IN;
 
   // VECTOR MULTIPLIER
-  assign size_in_vector_multiplier   = SIZE_I_IN;
-  assign data_a_in_vector_multiplier = data_out_vector_cosine_similarity;
-  assign data_b_in_vector_multiplier = BETA_IN;
+  assign size_in_vector_multiplier               = SIZE_I_IN;
+  assign data_a_in_vector_multiplier             = data_out_vector_cosine_similarity;
+  assign data_b_in_vector_multiplier             = BETA_IN;
 
   // VECTOR EXPONE_CONTROLNTIATOR
   assign size_in_vector_exponentiator_function   = SIZE_I_IN;
@@ -237,16 +235,15 @@ module model_content_based_addressing #(
   assign data_b_in_vector_exponentiator_function = data_out_vector_multiplier;
 
   // VECTOR SOFTMAX
-  assign size_in_vector_softmax   = SIZE_I_IN;
-  assign length_in_vector_softmax = SIZE_J_IN;
-  assign data_in_vector_softmax   = data_out_vector_exponentiator_function;
+  assign size_in_vector_softmax                  = SIZE_I_IN;
+  assign length_in_vector_softmax                = SIZE_J_IN;
+  assign data_in_vector_softmax                  = data_out_vector_exponentiator_function;
 
   // VECTOR MULTIPLIER
   model_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_multiplier(
+  ) vector_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -257,21 +254,20 @@ module model_content_based_addressing #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_multiplier),
+    .SIZE_IN  (size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .DATA_OUT (data_out_vector_multiplier)
   );
 
   // VECTOR EXPONE_CONTROLNTIATOR
   model_vector_exponentiator_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_exponentiator_function(
+  ) vector_exponentiator_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -282,21 +278,20 @@ module model_content_based_addressing #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_exponentiator_function),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_exponentiator_function),
-    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator_function),
+    .DATA_OUT_ENABLE (data_out_enable_vector_exponentiator_function),
 
     // DATA
-    .SIZE_IN(size_in_vector_exponentiator_function),
+    .SIZE_IN  (size_in_vector_exponentiator_function),
     .DATA_A_IN(data_a_in_vector_exponentiator_function),
     .DATA_B_IN(data_b_in_vector_exponentiator_function),
-    .DATA_OUT(data_out_vector_exponentiator_function)
+    .DATA_OUT (data_out_vector_exponentiator_function)
   );
 
   // VECTOR COSINE SIMILARITY
   model_vector_cosine_similarity #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_cosine_similarity(
+  ) vector_cosine_similarity (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -309,23 +304,22 @@ module model_content_based_addressing #(
     .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
     .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
     .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
+    .DATA_OUT_VECTOR_ENABLE (data_out_vector_enable_vector_cosine_similarity),
+    .DATA_OUT_SCALAR_ENABLE (data_out_scalar_enable_vector_cosine_similarity),
 
     // DATA
-    .SIZE_IN(size_in_vector_cosine_similarity),
+    .SIZE_IN  (size_in_vector_cosine_similarity),
     .LENGTH_IN(length_in_vector_cosine_similarity),
     .DATA_A_IN(data_a_in_vector_cosine_similarity),
     .DATA_B_IN(data_b_in_vector_cosine_similarity),
-    .DATA_OUT(data_out_vector_cosine_similarity)
+    .DATA_OUT (data_out_vector_cosine_similarity)
   );
 
   // VECTOR SOFTMAX
   model_vector_softmax #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_softmax(
+  ) vector_softmax (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -334,16 +328,16 @@ module model_content_based_addressing #(
     .START(start_vector_softmax),
     .READY(ready_vector_softmax),
 
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_softmax),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_softmax),
+    .DATA_IN_VECTOR_ENABLE (data_in_vector_enable_vector_softmax),
+    .DATA_IN_SCALAR_ENABLE (data_in_scalar_enable_vector_softmax),
     .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_softmax),
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .SIZE_IN(size_in_vector_softmax),
+    .SIZE_IN  (size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
-    .DATA_IN(data_in_vector_softmax),
-    .DATA_OUT(data_out_vector_softmax)
+    .DATA_IN  (data_in_vector_softmax),
+    .DATA_OUT (data_out_vector_softmax)
   );
 
 endmodule

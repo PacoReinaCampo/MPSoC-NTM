@@ -38,25 +38,24 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_erase_vector #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
-    input E_IN_ENABLE,  // for k in 0 to W-1
-    output E_OUT_ENABLE,  // for k in 0 to W-1
+  // CONTROL
+  input  START,
+  output READY,
+  input  E_IN_ENABLE,  // for k in 0 to W-1
+  output E_OUT_ENABLE, // for k in 0 to W-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] E_IN,
-    output reg [DATA_SIZE-1:0] E_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] SIZE_W_IN,
+  input      [DATA_SIZE-1:0] E_IN,
+  output reg [DATA_SIZE-1:0] E_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -66,17 +65,17 @@ module model_erase_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -87,10 +86,10 @@ module model_erase_vector #(
 
   // VECTOR LOGISTIC
   // CONTROL
-  wire start_vector_logistic;
-  wire ready_vector_logistic;
-  wire data_in_enable_vector_logistic;
-  wire data_out_enable_vector_logistic;
+  wire                 start_vector_logistic;
+  wire                 ready_vector_logistic;
+  wire                 data_in_enable_vector_logistic;
+  wire                 data_out_enable_vector_logistic;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
@@ -105,35 +104,34 @@ module model_erase_vector #(
 
   // ASSIGNATIONS
   // CONTROL
-  assign start_vector_logistic = START;
-  assign READY = ready_vector_logistic;
+  assign start_vector_logistic          = START;
+  assign READY                          = ready_vector_logistic;
   assign data_in_enable_vector_logistic = E_IN_ENABLE;
-  assign E_OUT_ENABLE = data_out_enable_vector_logistic;
+  assign E_OUT_ENABLE                   = data_out_enable_vector_logistic;
 
   // DATA
-  assign size_in_vector_logistic = SIZE_W_IN;
-  assign data_in_vector_logistic = E_IN;
-  assign E_OUT = data_out_vector_logistic;
+  assign size_in_vector_logistic        = SIZE_W_IN;
+  assign data_in_vector_logistic        = E_IN;
+  assign E_OUT                          = data_out_vector_logistic;
 
   // VECTOR LOGISTIC
   model_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_logistic_function(
+  ) vector_logistic_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_logistic),
-    .READY(ready_vector_logistic),
-    .DATA_IN_ENABLE(data_in_enable_vector_logistic),
+    .START          (start_vector_logistic),
+    .READY          (ready_vector_logistic),
+    .DATA_IN_ENABLE (data_in_enable_vector_logistic),
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .SIZE_IN(size_in_vector_logistic),
-    .DATA_IN(data_in_vector_logistic),
+    .SIZE_IN (size_in_vector_logistic),
+    .DATA_IN (data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)
   );
 

@@ -47,20 +47,20 @@ package model_lstm_controller_pkg;
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter DATA_SIZE=64;
-  parameter CONTROL_SIZE=64;
+  parameter DATA_SIZE = 64;
+  parameter CONTROL_SIZE = 64;
 
-  parameter ZERO_CONTROL=0;
-  parameter ONE_CONTROL=1;
-  parameter TWO_CONTROL=2;
-  parameter THREE_CONTROL=3;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
+  parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA=0.0;
-  parameter ONE_DATA=1.0;
-  parameter TWO_DATA=2.0;
-  parameter THREE_DATA=3.0;
+  parameter ZERO_DATA = 0.0;
+  parameter ONE_DATA = 1.0;
+  parameter TWO_DATA = 2.0;
+  parameter THREE_DATA = 3.0;
 
-  parameter LENGTH_IN=0.001;
+  parameter LENGTH_IN = 0.001;
 
   ///////////////////////////////////////////////////////////////////////
   // Functions

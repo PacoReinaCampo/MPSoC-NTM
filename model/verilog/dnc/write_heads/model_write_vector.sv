@@ -38,26 +38,25 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_write_vector #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input V_IN_ENABLE,  // for k in 0 to W-1
-    output reg V_OUT_ENABLE,  // for k in 0 to W-1
+  input      V_IN_ENABLE,  // for k in 0 to W-1
+  output reg V_OUT_ENABLE, // for k in 0 to W-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] V_IN,
-    output reg [DATA_SIZE-1:0] V_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] SIZE_W_IN,
+  input      [DATA_SIZE-1:0] V_IN,
+  output reg [DATA_SIZE-1:0] V_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -70,17 +69,17 @@ module model_write_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -90,7 +89,7 @@ module model_write_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg write_vector_ctrl_fsm_int;
+  reg                    write_vector_ctrl_fsm_int;
 
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_loop;
@@ -103,56 +102,54 @@ module model_write_vector #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      V_OUT <= ZERO_DATA;
+      V_OUT      <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY      <= 1'b0;
 
       // Assignations
       index_loop <= ZERO_DATA;
     end else begin
-      case(write_vector_ctrl_fsm_int)
-        STARTER_STATE : begin
+      case (write_vector_ctrl_fsm_int)
+        STARTER_STATE: begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO_DATA;
+            index_loop                <= ZERO_DATA;
 
             // FSM Control
             write_vector_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
+        ENDER_STATE: begin
           // STEP 1
-          if(V_IN_ENABLE == 1'b1) begin
-            if(index_loop == (SIZE_W_IN - ONE_CONTROL)) begin
+          if (V_IN_ENABLE == 1'b1) begin
+            if (index_loop == (SIZE_W_IN - ONE_CONTROL)) begin
               // Control Outputs
-              READY <= 1'b1;
+              READY                     <= 1'b1;
 
               // FSM Control
               write_vector_ctrl_fsm_int <= STARTER_STATE;
-            end
-            else begin
+            end else begin
               // Control Internal
               index_loop <= (index_loop + ONE_CONTROL);
             end
             // Data Outputs
-            V_OUT <= V_IN;
+            V_OUT        <= V_IN;
 
             // Control Outputs
             V_OUT_ENABLE <= 1'b1;
-          end
-          else begin
+          end else begin
             // Control Outputs
             V_OUT_ENABLE <= 1'b0;
           end
         end
-        default : begin
+        default: begin
           // FSM Control
           write_vector_ctrl_fsm_int <= STARTER_STATE;
         end

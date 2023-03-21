@@ -38,22 +38,21 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_allocation_gate #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
+  // CONTROL
+  input  START,
+  output READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] GA_IN,
-    output reg [DATA_SIZE-1:0] GA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] GA_IN,
+  output reg [DATA_SIZE-1:0] GA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -63,17 +62,17 @@ module model_allocation_gate #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -84,8 +83,8 @@ module model_allocation_gate #(
 
   // SCALAR LOGISTIC
   // CONTROL
-  wire start_scalar_logistic;
-  wire ready_scalar_logistic;
+  wire                 start_scalar_logistic;
+  wire                 ready_scalar_logistic;
 
   // DATA
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
@@ -99,19 +98,18 @@ module model_allocation_gate #(
 
   // ASSIGNATIONS
   // CONTROL
-  assign start_scalar_logistic = START;
-  assign READY = ready_scalar_logistic;
+  assign start_scalar_logistic   = START;
+  assign READY                   = ready_scalar_logistic;
 
   // DATA
   assign data_in_scalar_logistic = GA_IN;
-  assign GA_OUT = data_out_scalar_logistic;
+  assign GA_OUT                  = data_out_scalar_logistic;
 
   // SCALAR LOGISTIC
   model_scalar_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  model_scalar_logistic_function_i(
+  ) model_scalar_logistic_function_i (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -121,7 +119,7 @@ module model_allocation_gate #(
     .READY(ready_scalar_logistic),
 
     // DATA
-    .DATA_IN(data_in_scalar_logistic),
+    .DATA_IN (data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );
 

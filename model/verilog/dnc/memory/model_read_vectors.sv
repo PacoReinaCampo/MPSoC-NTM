@@ -38,43 +38,42 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_read_vectors #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input M_IN_J_ENABLE,  // for j in 0 to N-1
-    input M_IN_K_ENABLE,  // for k in 0 to W-1
+  input M_IN_J_ENABLE,  // for j in 0 to N-1
+  input M_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
-    output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
+  output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input W_IN_J_ENABLE,  // for j in 0 to N-1
+  input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input W_IN_J_ENABLE,  // for j in 0 to N-1
 
-    output reg W_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
+  output reg W_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
 
-    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_R_IN,
-    input [DATA_SIZE-1:0] SIZE_N_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_R_IN,
+  input [DATA_SIZE-1:0] SIZE_N_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
 
-    input [DATA_SIZE-1:0] M_IN,
-    input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] M_IN,
+  input [DATA_SIZE-1:0] W_IN,
 
-    output reg [DATA_SIZE-1:0] R_OUT
-  );
+  output reg [DATA_SIZE-1:0] R_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -88,17 +87,17 @@ module model_read_vectors #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -108,17 +107,17 @@ module model_read_vectors #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg  [          1:0] controller_ctrl_fsm_int;
 
   // MATRIX TRANSPOSE
   // CONTROL
-  wire start_matrix_transpose;
-  wire ready_matrix_transpose;
+  wire                 start_matrix_transpose;
+  wire                 ready_matrix_transpose;
 
-  wire data_in_i_enable_matrix_transpose;
-  wire data_in_j_enable_matrix_transpose;
-  wire data_out_i_enable_matrix_transpose;
-  wire data_out_j_enable_matrix_transpose;
+  wire                 data_in_i_enable_matrix_transpose;
+  wire                 data_in_j_enable_matrix_transpose;
+  wire                 data_out_i_enable_matrix_transpose;
+  wire                 data_out_j_enable_matrix_transpose;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
@@ -128,15 +127,15 @@ module model_read_vectors #(
 
   // MATRIX PRODUCT
   // CONTROL
-  wire start_matrix_product;
-  wire ready_matrix_product;
+  wire                 start_matrix_product;
+  wire                 ready_matrix_product;
 
-  wire data_a_in_i_enable_matrix_product;
-  wire data_a_in_j_enable_matrix_product;
-  wire data_b_in_i_enable_matrix_product;
-  wire data_b_in_j_enable_matrix_product;
-  wire data_out_i_enable_matrix_product;
-  wire data_out_j_enable_matrix_product;
+  wire                 data_a_in_i_enable_matrix_product;
+  wire                 data_a_in_j_enable_matrix_product;
+  wire                 data_b_in_i_enable_matrix_product;
+  wire                 data_b_in_j_enable_matrix_product;
+  wire                 data_out_i_enable_matrix_product;
+  wire                 data_out_j_enable_matrix_product;
 
   // DATA
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
@@ -155,34 +154,33 @@ module model_read_vectors #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       R_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           end
         end
 
-        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        MATRIX_PRODUCT_STATE: begin  // STEP 1
         end
 
-        MATRIX_TRANSPOSE_STATE : begin  // STEP 2
+        MATRIX_TRANSPOSE_STATE: begin  // STEP 2
 
           // Data Outputs
           R_OUT <= data_out_matrix_product;
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -206,10 +204,9 @@ module model_read_vectors #(
 
   // MATRIX TRANSPOSE
   model_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_transpose(
+  ) matrix_transpose (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -218,24 +215,23 @@ module model_read_vectors #(
     .START(start_matrix_transpose),
     .READY(ready_matrix_transpose),
 
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_transpose),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_transpose),
+    .DATA_IN_I_ENABLE (data_in_i_enable_matrix_transpose),
+    .DATA_IN_J_ENABLE (data_in_j_enable_matrix_transpose),
     .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_transpose),
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_transpose),
 
     // DATA
     .SIZE_I_IN(size_i_in_matrix_transpose),
     .SIZE_J_IN(size_j_in_matrix_transpose),
-    .DATA_IN(data_in_matrix_transpose),
-    .DATA_OUT(data_out_matrix_transpose)
+    .DATA_IN  (data_in_matrix_transpose),
+    .DATA_OUT (data_out_matrix_transpose)
   );
 
   // MATRIX PRODUCT
   model_matrix_product #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_product(
+  ) matrix_product (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -248,17 +244,17 @@ module model_read_vectors #(
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_product),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_product),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_product),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_product),
 
     // DATA
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
     .SIZE_B_J_IN(size_b_j_in_matrix_product),
-    .DATA_A_IN(data_a_in_matrix_product),
-    .DATA_B_IN(data_b_in_matrix_product),
-    .DATA_OUT(data_out_matrix_product)
+    .DATA_A_IN  (data_a_in_matrix_product),
+    .DATA_B_IN  (data_b_in_matrix_product),
+    .DATA_OUT   (data_out_matrix_product)
   );
 
 endmodule

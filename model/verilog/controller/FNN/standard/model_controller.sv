@@ -38,78 +38,77 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_controller #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input W_IN_L_ENABLE,  // for l in 0 to L-1
-    input W_IN_X_ENABLE,  // for x in 0 to X-1
+  input W_IN_L_ENABLE,  // for l in 0 to L-1
+  input W_IN_X_ENABLE,  // for x in 0 to X-1
 
-    input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input K_IN_L_ENABLE,  // for l in 0 to L-1
-    input K_IN_K_ENABLE,  // for k in 0 to W-1
+  input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input K_IN_L_ENABLE,  // for l in 0 to L-1
+  input K_IN_K_ENABLE,  // for k in 0 to W-1
 
-    input U_IN_L_ENABLE,  // for l in 0 to L-1
-    input U_IN_P_ENABLE,  // for p in 0 to L-1
+  input U_IN_L_ENABLE,  // for l in 0 to L-1
+  input U_IN_P_ENABLE,  // for p in 0 to L-1
 
-    input B_IN_ENABLE,  // for l in 0 to L-1
+  input B_IN_ENABLE,  // for l in 0 to L-1
 
-    input X_IN_ENABLE,  // for x in 0 to X-1
+  input X_IN_ENABLE,  // for x in 0 to X-1
 
-    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+  output reg X_OUT_ENABLE,  // for x in 0 to X-1
 
-    input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    input R_IN_K_ENABLE,  // for k in 0 to W-1
+  input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  input R_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    input H_IN_ENABLE,  // for l in 0 to L-1
+  input H_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+  output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
 
-    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+  output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+  output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
-    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+  output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+  output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
 
-    output reg B_OUT_ENABLE,  // for l in 0 to L-1
+  output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
-    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+  output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_X_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] SIZE_L_IN,
-    input [DATA_SIZE-1:0] SIZE_R_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_X_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
+  input [DATA_SIZE-1:0] SIZE_L_IN,
+  input [DATA_SIZE-1:0] SIZE_R_IN,
 
-    input [DATA_SIZE-1:0] W_IN,
-    input [DATA_SIZE-1:0] K_IN,
-    input [DATA_SIZE-1:0] U_IN,
-    input [DATA_SIZE-1:0] B_IN,
+  input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] K_IN,
+  input [DATA_SIZE-1:0] U_IN,
+  input [DATA_SIZE-1:0] B_IN,
 
-    input [DATA_SIZE-1:0] X_IN,
-    input [DATA_SIZE-1:0] R_IN,
-    input [DATA_SIZE-1:0] H_IN,
+  input [DATA_SIZE-1:0] X_IN,
+  input [DATA_SIZE-1:0] R_IN,
+  input [DATA_SIZE-1:0] H_IN,
 
-    output reg [DATA_SIZE-1:0] W_OUT,
-    output reg [DATA_SIZE-1:0] K_OUT,
-    output reg [DATA_SIZE-1:0] U_OUT,
-    output reg [DATA_SIZE-1:0] B_OUT,
+  output reg [DATA_SIZE-1:0] W_OUT,
+  output reg [DATA_SIZE-1:0] K_OUT,
+  output reg [DATA_SIZE-1:0] U_OUT,
+  output reg [DATA_SIZE-1:0] B_OUT,
 
-    output reg [DATA_SIZE-1:0] H_OUT
-  );
+  output reg [DATA_SIZE-1:0] H_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -128,17 +127,17 @@ module model_controller #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -148,94 +147,94 @@ module model_controller #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg  [          2:0] controller_ctrl_fsm_int;
 
-  reg data_in_vector_summation_int;
-  reg data_a_in_i_matrix_product_int;
-  reg data_a_in_j_matrix_product_int;
-  reg data_b_in_i_matrix_product_int;
-  reg data_b_in_j_matrix_product_int;
-  reg data_in_vector_logistic_int;
+  reg                  data_in_vector_summation_int;
+  reg                  data_a_in_i_matrix_product_int;
+  reg                  data_a_in_j_matrix_product_int;
+  reg                  data_b_in_i_matrix_product_int;
+  reg                  data_b_in_j_matrix_product_int;
+  reg                  data_in_vector_logistic_int;
 
   // VECTOR ADDER
   // CONTROL
-  reg start_vector_float_adder;
-  wire ready_vector_float_adder;
+  reg                  start_vector_float_adder;
+  wire                 ready_vector_float_adder;
 
-  reg operation_vector_float_adder;
+  reg                  operation_vector_float_adder;
 
-  reg data_a_in_enable_vector_float_adder;
-  reg data_b_in_enable_vector_float_adder;
-  wire data_out_enable_vector_float_adder;
+  reg                  data_a_in_enable_vector_float_adder;
+  reg                  data_b_in_enable_vector_float_adder;
+  wire                 data_out_enable_vector_float_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_float_adder;
-  reg [DATA_SIZE-1:0] data_a_in_vector_float_adder;
-  reg [DATA_SIZE-1:0] data_b_in_vector_float_adder;
+  reg  [DATA_SIZE-1:0] size_in_vector_float_adder;
+  reg  [DATA_SIZE-1:0] data_a_in_vector_float_adder;
+  reg  [DATA_SIZE-1:0] data_b_in_vector_float_adder;
   wire [DATA_SIZE-1:0] data_out_vector_float_adder;
 
   // MATRIX PRODUCT
   // CONTROL
-  wire start_matrix_product;
-  wire ready_matrix_product;
-  wire data_a_in_i_enable_matrix_product;
-  wire data_a_in_j_enable_matrix_product;
-  wire data_b_in_i_enable_matrix_product;
-  wire data_b_in_j_enable_matrix_product;
-  wire data_out_i_enable_matrix_product;
-  wire data_out_j_enable_matrix_product;
+  wire                 start_matrix_product;
+  wire                 ready_matrix_product;
+  wire                 data_a_in_i_enable_matrix_product;
+  wire                 data_a_in_j_enable_matrix_product;
+  wire                 data_b_in_i_enable_matrix_product;
+  wire                 data_b_in_j_enable_matrix_product;
+  wire                 data_out_i_enable_matrix_product;
+  wire                 data_out_j_enable_matrix_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
-  reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
-  reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
-  reg [DATA_SIZE-1:0] size_b_j_in_matrix_product;
-  reg [DATA_SIZE-1:0] data_a_in_matrix_product;
-  reg [DATA_SIZE-1:0] data_b_in_matrix_product;
+  reg  [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  reg  [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  reg  [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  reg  [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  reg  [DATA_SIZE-1:0] data_a_in_matrix_product;
+  reg  [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   // VECTOR LOGISTIC
   // CONTROL
-  wire start_vector_logistic;
-  wire ready_vector_logistic;
-  wire data_in_enable_vector_logistic;
-  wire data_out_enable_vector_logistic;
+  wire                 start_vector_logistic;
+  wire                 ready_vector_logistic;
+  wire                 data_in_enable_vector_logistic;
+  wire                 data_out_enable_vector_logistic;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_logistic;
-  reg [DATA_SIZE-1:0] data_in_vector_logistic;
+  reg  [DATA_SIZE-1:0] size_in_vector_logistic;
+  reg  [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   // TRAINER
   // CONTROL
-  wire start_trainer;
-  wire ready_trainer;
+  wire                 start_trainer;
+  wire                 ready_trainer;
 
-  wire x_in_enable_trainer;
+  wire                 x_in_enable_trainer;
 
-  wire x_out_enable_trainer;
+  wire                 x_out_enable_trainer;
 
-  wire r_in_i_enable_trainer;
-  wire r_in_k_enable_trainer;
+  wire                 r_in_i_enable_trainer;
+  wire                 r_in_k_enable_trainer;
 
-  wire r_out_i_enable_trainer;
-  wire r_out_k_enable_trainer;
+  wire                 r_out_i_enable_trainer;
+  wire                 r_out_k_enable_trainer;
 
-  wire h_in_enable_trainer;
+  wire                 h_in_enable_trainer;
 
-  wire h_out_enable_trainer;
+  wire                 h_out_enable_trainer;
 
-  wire w_out_l_enable_trainer;
-  wire w_out_x_enable_trainer;
+  wire                 w_out_l_enable_trainer;
+  wire                 w_out_x_enable_trainer;
 
-  wire k_out_i_enable_trainer;
-  wire k_out_l_enable_trainer;
-  wire k_out_k_enable_trainer;
+  wire                 k_out_i_enable_trainer;
+  wire                 k_out_l_enable_trainer;
+  wire                 k_out_k_enable_trainer;
 
-  wire u_out_l_enable_trainer;
-  wire u_out_p_enable_trainer;
+  wire                 u_out_l_enable_trainer;
+  wire                 u_out_p_enable_trainer;
 
-  wire b_out_enable_trainer;
+  wire                 b_out_enable_trainer;
 
   // DATA
   wire [DATA_SIZE-1:0] size_x_in_trainer;
@@ -260,26 +259,25 @@ module model_controller #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       H_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end
         end
 
-        MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
+        MATRIX_FIRST_PRODUCT_STATE: begin  // STEP 1
 
           // Data Inputs
           size_a_i_in_matrix_product <= FULL;
@@ -290,7 +288,7 @@ module model_controller #(
           data_b_in_matrix_product   <= X_IN;
         end
 
-        VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
+        VECTOR_FIRST_ADDER_STATE: begin  // STEP 2
 
           // Data Inputs
           size_in_vector_float_adder   <= FULL;
@@ -298,7 +296,7 @@ module model_controller #(
           data_b_in_vector_float_adder <= B_IN;
         end
 
-        MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
+        MATRIX_SECOND_PRODUCT_STATE: begin  // STEP 3
 
           // Data Inputs
           size_a_i_in_matrix_product <= FULL;
@@ -309,7 +307,7 @@ module model_controller #(
           data_b_in_matrix_product   <= R_IN;
         end
 
-        VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
+        VECTOR_SECOND_ADDER_STATE: begin  // STEP 4
 
           // Data Inputs
           size_in_vector_float_adder   <= FULL;
@@ -317,7 +315,7 @@ module model_controller #(
           data_b_in_vector_float_adder <= data_out_vector_float_adder;
         end
 
-        MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 5
+        MATRIX_THIRD_PRODUCT_STATE: begin  // STEP 5
 
           // Data Inputs
           size_a_i_in_matrix_product <= FULL;
@@ -328,7 +326,7 @@ module model_controller #(
           data_b_in_matrix_product   <= R_IN;
         end
 
-        VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
+        VECTOR_THIRD_ADDER_STATE: begin  // STEP 6
 
           // Data Inputs
           size_in_vector_float_adder   <= FULL;
@@ -336,20 +334,20 @@ module model_controller #(
           data_b_in_vector_float_adder <= data_out_vector_float_adder;
         end
 
-        VECTOR_LOGISTIC_STATE : begin  // STEP 7
+        VECTOR_LOGISTIC_STATE: begin  // STEP 7
 
           // Data Inputs
-          size_in_vector_logistic   <= FULL;
-          data_in_vector_logistic   <= FULL;
+          size_in_vector_logistic <= FULL;
+          data_in_vector_logistic <= FULL;
 
           // Data Outputs
-          H_OUT <= data_out_vector_logistic;
+          H_OUT                   <= data_out_vector_logistic;
 
           // Control Outputs
-          H_OUT_ENABLE <= 1'b1;
+          H_OUT_ENABLE            <= 1'b1;
         end
 
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -364,24 +362,23 @@ module model_controller #(
   assign size_l_in_trainer = SIZE_L_IN;
   assign size_r_in_trainer = SIZE_R_IN;
 
-  assign x_in_trainer = X_IN;
-  assign r_in_trainer = FULL;
-  assign h_in_trainer = FULL;
+  assign x_in_trainer      = X_IN;
+  assign r_in_trainer      = FULL;
+  assign h_in_trainer      = FULL;
 
-  assign W_OUT = w_out_trainer;
-  assign K_OUT = k_out_trainer;
-  assign U_OUT = u_out_trainer;
-  assign B_OUT = b_out_trainer;
+  assign W_OUT             = w_out_trainer;
+  assign K_OUT             = k_out_trainer;
+  assign U_OUT             = u_out_trainer;
+  assign B_OUT             = b_out_trainer;
 
   // VECTOR ADDER
   model_vector_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_adder(
+  ) vector_float_adder (
     // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
+    .CLK  (CLK),
+    .RST  (RST),
     // CONTROL
     .START(start_vector_float_adder),
     .READY(ready_vector_float_adder),
@@ -390,73 +387,70 @@ module model_controller #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_adder),
+    .SIZE_IN  (size_in_vector_float_adder),
     .DATA_A_IN(data_a_in_vector_float_adder),
     .DATA_B_IN(data_b_in_vector_float_adder),
-    .DATA_OUT(data_out_vector_float_adder)
+    .DATA_OUT (data_out_vector_float_adder)
   );
 
   // MATRIX PRODUCT
   model_matrix_product #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_product(
+  ) matrix_product (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_matrix_product),
-    .READY(ready_matrix_product),
+    .START             (start_matrix_product),
+    .READY             (ready_matrix_product),
     .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_product),
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),
     .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_product),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_product),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
+    .DATA_OUT_I_ENABLE (data_out_i_enable_matrix_product),
+    .DATA_OUT_J_ENABLE (data_out_j_enable_matrix_product),
 
     // DATA
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
     .SIZE_B_J_IN(size_b_j_in_matrix_product),
-    .DATA_A_IN(data_a_in_matrix_product),
-    .DATA_B_IN(data_b_in_matrix_product),
-    .DATA_OUT(data_out_matrix_product)
+    .DATA_A_IN  (data_a_in_matrix_product),
+    .DATA_B_IN  (data_b_in_matrix_product),
+    .DATA_OUT   (data_out_matrix_product)
   );
 
   // VECTOR LOGISTIC
   model_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_logistic_function(
+  ) vector_logistic_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_logistic),
-    .READY(ready_vector_logistic),
-    .DATA_IN_ENABLE(data_in_enable_vector_logistic),
+    .START          (start_vector_logistic),
+    .READY          (ready_vector_logistic),
+    .DATA_IN_ENABLE (data_in_enable_vector_logistic),
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .SIZE_IN(size_in_vector_logistic),
-    .DATA_IN(data_in_vector_logistic),
+    .SIZE_IN (size_in_vector_logistic),
+    .DATA_IN (data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)
   );
 
   // TRAINER
   model_trainer #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  trainer(
+  ) trainer (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

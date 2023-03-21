@@ -38,52 +38,51 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_state_matrix_state #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input DATA_A_IN_I_ENABLE,
-    input DATA_A_IN_J_ENABLE,
-    input DATA_B_IN_I_ENABLE,
-    input DATA_B_IN_J_ENABLE,
-    input DATA_C_IN_I_ENABLE,
-    input DATA_C_IN_J_ENABLE,
-    input DATA_D_IN_I_ENABLE,
-    input DATA_D_IN_J_ENABLE,
+  input DATA_A_IN_I_ENABLE,
+  input DATA_A_IN_J_ENABLE,
+  input DATA_B_IN_I_ENABLE,
+  input DATA_B_IN_J_ENABLE,
+  input DATA_C_IN_I_ENABLE,
+  input DATA_C_IN_J_ENABLE,
+  input DATA_D_IN_I_ENABLE,
+  input DATA_D_IN_J_ENABLE,
 
-    input DATA_K_IN_I_ENABLE,
-    input DATA_K_IN_J_ENABLE,
+  input DATA_K_IN_I_ENABLE,
+  input DATA_K_IN_J_ENABLE,
 
-    output reg DATA_A_OUT_I_ENABLE,
-    output reg DATA_A_OUT_J_ENABLE,
+  output reg DATA_A_OUT_I_ENABLE,
+  output reg DATA_A_OUT_J_ENABLE,
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_A_I_IN,
-    input [DATA_SIZE-1:0] SIZE_A_J_IN,
-    input [DATA_SIZE-1:0] SIZE_B_I_IN,
-    input [DATA_SIZE-1:0] SIZE_B_J_IN,
-    input [DATA_SIZE-1:0] SIZE_C_I_IN,
-    input [DATA_SIZE-1:0] SIZE_C_J_IN,
-    input [DATA_SIZE-1:0] SIZE_D_I_IN,
-    input [DATA_SIZE-1:0] SIZE_D_J_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_A_I_IN,
+  input [DATA_SIZE-1:0] SIZE_A_J_IN,
+  input [DATA_SIZE-1:0] SIZE_B_I_IN,
+  input [DATA_SIZE-1:0] SIZE_B_J_IN,
+  input [DATA_SIZE-1:0] SIZE_C_I_IN,
+  input [DATA_SIZE-1:0] SIZE_C_J_IN,
+  input [DATA_SIZE-1:0] SIZE_D_I_IN,
+  input [DATA_SIZE-1:0] SIZE_D_J_IN,
 
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
-    input [DATA_SIZE-1:0] DATA_C_IN,
-    input [DATA_SIZE-1:0] DATA_D_IN,
+  input [DATA_SIZE-1:0] DATA_A_IN,
+  input [DATA_SIZE-1:0] DATA_B_IN,
+  input [DATA_SIZE-1:0] DATA_C_IN,
+  input [DATA_SIZE-1:0] DATA_D_IN,
 
-    input [DATA_SIZE-1:0] DATA_K_IN,
+  input [DATA_SIZE-1:0] DATA_K_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_A_OUT
-  );
+  output reg [DATA_SIZE-1:0] DATA_A_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,17 +92,17 @@ module model_state_matrix_state #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;

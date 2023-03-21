@@ -50,7 +50,7 @@
 
 use WORK.MATH_REAL.all;
 package MATH_COMPLEX is
-  constant CopyRightNotice : STRING
+  constant CopyRightNotice : string
     := "Copyright IEEE P1076 WG. Licensed Apache 2.0";
 
   --
@@ -58,13 +58,13 @@ package MATH_COMPLEX is
   --
   type COMPLEX is
   record
-    RE : REAL;                          -- Real part
-    IM : REAL;                          -- Imaginary part
+    RE : real;                          -- Real part
+    IM : real;                          -- Imaginary part
   end record;
 
-  subtype POSITIVE_REAL is REAL range 0.0 to REAL'high;
+  subtype POSITIVE_REAL is real range 0.0 to real'high;
 
-  subtype PRINCIPAL_VALUE is REAL range -MATH_PI to MATH_PI;
+  subtype PRINCIPAL_VALUE is real range -MATH_PI to MATH_PI;
 
   type COMPLEX_POLAR is
   record
@@ -85,7 +85,7 @@ package MATH_COMPLEX is
   -- (equality and inequality operators for COMPLEX are predefined)
   --
 
-  function "=" (L : in COMPLEX_POLAR; R : in COMPLEX_POLAR) return BOOLEAN;
+  function "=" (L : in COMPLEX_POLAR; R : in COMPLEX_POLAR) return boolean;
   -- Purpose:
   --         Returns TRUE if L is equal to R and returns FALSE otherwise
   -- Special values:
@@ -102,7 +102,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "/=" (L : in COMPLEX_POLAR; R : in COMPLEX_POLAR) return BOOLEAN;
+  function "/=" (L : in COMPLEX_POLAR; R : in COMPLEX_POLAR) return boolean;
   -- Purpose:
   --         Returns TRUE if L is not equal to R and returns FALSE
   --         otherwise
@@ -123,7 +123,7 @@ package MATH_COMPLEX is
   --
   -- Function Declarations
   --
-  function CMPLX(X : in REAL; Y : in REAL := 0.0) return COMPLEX;
+  function CMPLX(X : in real; Y : in real := 0.0) return COMPLEX;
   -- Purpose:
   --         Returns COMPLEX number X + iY
   -- Special values:
@@ -138,7 +138,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function GET_PRINCIPAL_VALUE(X : in REAL) return PRINCIPAL_VALUE;
+  function GET_PRINCIPAL_VALUE(X : in real) return PRINCIPAL_VALUE;
   -- Purpose:
   --         Returns principal value of angle X; X in radians
   -- Special values:
@@ -493,7 +493,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function LOG(Z : in COMPLEX; BASE : in REAL) return COMPLEX;
+  function LOG(Z : in COMPLEX; BASE : in real) return COMPLEX;
   -- Purpose:
   --         Returns logarithm base BASE of Z
   -- Special values:
@@ -512,7 +512,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function LOG(Z : in COMPLEX_POLAR; BASE : in REAL) return COMPLEX_POLAR;
+  function LOG(Z : in COMPLEX_POLAR; BASE : in real) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns principal value of logarithm base BASE of Z
   -- Special values:
@@ -707,7 +707,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "+" (L : in REAL; R : in COMPLEX) return COMPLEX;
+  function "+" (L : in real; R : in COMPLEX) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic addition of L and R
   -- Special values:
@@ -722,7 +722,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "+" (L : in COMPLEX; R : in REAL) return COMPLEX;
+  function "+" (L : in COMPLEX; R : in real) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic addition of L and R
   -- Special values:
@@ -756,7 +756,7 @@ package MATH_COMPLEX is
   --         None
 
 
-  function "+" (L : in REAL; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
+  function "+" (L : in real; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic addition of L and R
   -- Special values:
@@ -772,7 +772,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "+" (L : in COMPLEX_POLAR; R : in REAL) return COMPLEX_POLAR;
+  function "+" (L : in COMPLEX_POLAR; R : in real) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic addition of L and R
   -- Special values:
@@ -803,7 +803,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "-" (L : in REAL; R : in COMPLEX) return COMPLEX;
+  function "-" (L : in real; R : in COMPLEX) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic subtraction of L minus R
   -- Special values:
@@ -818,7 +818,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "-" (L : in COMPLEX; R : in REAL) return COMPLEX;
+  function "-" (L : in COMPLEX; R : in real) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic subtraction of L minus R
   -- Special values:
@@ -851,7 +851,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "-" (L : in REAL; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
+  function "-" (L : in real; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic subtraction of L minus R
   -- Special values:
@@ -868,7 +868,7 @@ package MATH_COMPLEX is
   --         None
 
 
-  function "-" (L : in COMPLEX_POLAR; R : in REAL) return COMPLEX_POLAR;
+  function "-" (L : in COMPLEX_POLAR; R : in real) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic subtraction of L minus R
   -- Special values:
@@ -899,7 +899,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "*" (L : in REAL; R : in COMPLEX) return COMPLEX;
+  function "*" (L : in real; R : in COMPLEX) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic multiplication of L and R
   -- Special values:
@@ -914,7 +914,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "*" (L : in COMPLEX; R : in REAL) return COMPLEX;
+  function "*" (L : in COMPLEX; R : in real) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic multiplication of L and R
   -- Special values:
@@ -948,7 +948,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "*" (L : in REAL; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
+  function "*" (L : in real; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic multiplication of L and R
   -- Special values:
@@ -964,7 +964,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "*" (L : in COMPLEX_POLAR; R : in REAL) return COMPLEX_POLAR;
+  function "*" (L : in COMPLEX_POLAR; R : in real) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic multiplication of L and R
   -- Special values:
@@ -996,7 +996,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "/" (L : in REAL; R : in COMPLEX) return COMPLEX;
+  function "/" (L : in real; R : in COMPLEX) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic division of L by R
   -- Special values:
@@ -1011,7 +1011,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "/" (L : in COMPLEX; R : in REAL) return COMPLEX;
+  function "/" (L : in COMPLEX; R : in real) return COMPLEX;
   -- Purpose:
   --         Returns arithmetic division of L by R
   -- Special values:
@@ -1046,7 +1046,7 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "/" (L : in REAL; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
+  function "/" (L : in real; R : in COMPLEX_POLAR) return COMPLEX_POLAR;
   -- Purpose:
   --         Returns arithmetic division of L by R
   -- Special values:
@@ -1064,20 +1064,20 @@ package MATH_COMPLEX is
   -- Notes:
   --         None
 
-  function "/" (L : in COMPLEX_POLAR; R : in REAL) return COMPLEX_POLAR;
-  -- Purpose:
-  --         Returns arithmetic division of L by R
-  -- Special values:
-  --         None
-  -- Domain:
-  --         L in COMPLEX_POLAR and L.ARG /= -MATH_PI
-  --         R /= 0.0
-  -- Error conditions:
-  --         Error if L.ARG = -MATH_PI
-  --         Error if R = 0.0
-  -- Range:
-  --         result.MAG >= 0.0
-  --         -MATH_PI < result.ARG <= MATH_PI
-  -- Notes:
-  --         None
+  function "/" (L : in COMPLEX_POLAR; R : in real) return COMPLEX_POLAR;
+-- Purpose:
+--         Returns arithmetic division of L by R
+-- Special values:
+--         None
+-- Domain:
+--         L in COMPLEX_POLAR and L.ARG /= -MATH_PI
+--         R /= 0.0
+-- Error conditions:
+--         Error if L.ARG = -MATH_PI
+--         Error if R = 0.0
+-- Range:
+--         result.MAG >= 0.0
+--         -MATH_PI < result.ARG <= MATH_PI
+-- Notes:
+--         None
 end package MATH_COMPLEX;

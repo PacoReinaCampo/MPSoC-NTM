@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module bit_gate #(
+module bit_gate (
   // GLOBAL
   input CLK,
   input RST,
@@ -68,11 +68,10 @@ module bit_gate #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= 1'b0';
-    end
-    else begin
+      DATA_OUT <= 1'b0;
+    end else begin
       // Data Outputs
       DATA_OUT <= DATA_IN;
     end

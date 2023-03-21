@@ -38,35 +38,34 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_usage_vector #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input U_IN_ENABLE,  // for j in 0 to N-1
-    input W_IN_ENABLE,  // for j in 0 to N-1
-    input PSI_IN_ENABLE,  // for j in 0 to N-1
+  input U_IN_ENABLE,   // for j in 0 to N-1
+  input W_IN_ENABLE,   // for j in 0 to N-1
+  input PSI_IN_ENABLE, // for j in 0 to N-1
 
-    output reg U_OUT_ENABLE,  // for j in 0 to N-1
-    output reg W_OUT_ENABLE,  // for j in 0 to N-1
-    output reg PSI_OUT_ENABLE,  // for j in 0 to N-1
+  output reg U_OUT_ENABLE,   // for j in 0 to N-1
+  output reg W_OUT_ENABLE,   // for j in 0 to N-1
+  output reg PSI_OUT_ENABLE, // for j in 0 to N-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_N_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_N_IN,
 
-    input [DATA_SIZE-1:0] U_IN,
-    input [DATA_SIZE-1:0] W_IN,
-    input [DATA_SIZE-1:0] PSI_IN,
+  input [DATA_SIZE-1:0] U_IN,
+  input [DATA_SIZE-1:0] W_IN,
+  input [DATA_SIZE-1:0] PSI_IN,
 
-    output reg [DATA_SIZE-1:0] U_OUT
-  );
+  output reg [DATA_SIZE-1:0] U_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -80,17 +79,17 @@ module model_usage_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -100,16 +99,16 @@ module model_usage_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg  [          1:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
-  wire start_vector_float_adder;
-  wire ready_vector_float_adder;
-  wire operation_vector_float_adder;
-  wire data_a_in_enable_vector_float_adder;
-  wire data_b_in_enable_vector_float_adder;
-  wire data_out_enable_vector_float_adder;
+  wire                 start_vector_float_adder;
+  wire                 ready_vector_float_adder;
+  wire                 operation_vector_float_adder;
+  wire                 data_a_in_enable_vector_float_adder;
+  wire                 data_b_in_enable_vector_float_adder;
+  wire                 data_out_enable_vector_float_adder;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_adder;
@@ -119,11 +118,11 @@ module model_usage_vector #(
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_float_multiplier;
-  wire ready_vector_float_multiplier;
-  wire data_a_in_enable_vector_float_multiplier;
-  wire data_b_in_enable_vector_float_multiplier;
-  wire data_out_enable_vector_float_multiplier;
+  wire                 start_vector_float_multiplier;
+  wire                 ready_vector_float_multiplier;
+  wire                 data_a_in_enable_vector_float_multiplier;
+  wire                 data_b_in_enable_vector_float_multiplier;
+  wire                 data_out_enable_vector_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
@@ -139,31 +138,30 @@ module model_usage_vector #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       U_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           end
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        VECTOR_MULTIPLIER_STATE: begin  // STEP 1
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        VECTOR_ADDER_STATE: begin  // STEP 2
         end
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -173,10 +171,9 @@ module model_usage_vector #(
 
   // VECTOR ADDER
   model_vector_float_adder #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_adder(
+  ) vector_float_adder (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -189,21 +186,20 @@ module model_usage_vector #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_adder),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_adder),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_adder),
+    .SIZE_IN  (size_in_vector_float_adder),
     .DATA_A_IN(data_a_in_vector_float_adder),
     .DATA_B_IN(data_b_in_vector_float_adder),
-    .DATA_OUT(data_out_vector_float_adder)
+    .DATA_OUT (data_out_vector_float_adder)
   );
 
   // VECTOR MULTIPLIER
   model_vector_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_multiplier(
+  ) vector_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -214,13 +210,13 @@ module model_usage_vector #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_multiplier),
+    .SIZE_IN  (size_in_vector_float_multiplier),
     .DATA_A_IN(data_a_in_vector_float_multiplier),
     .DATA_B_IN(data_b_in_vector_float_multiplier),
-    .DATA_OUT(data_out_vector_float_multiplier)
+    .DATA_OUT (data_out_vector_float_multiplier)
   );
 
 endmodule

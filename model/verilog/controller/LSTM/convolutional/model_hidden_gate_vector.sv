@@ -38,34 +38,33 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_hidden_gate_vector #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    input S_IN_ENABLE,  // for l in 0 to L-1
-    input O_IN_ENABLE,  // for l in 0 to L-1
+  input S_IN_ENABLE,  // for l in 0 to L-1
+  input O_IN_ENABLE,  // for l in 0 to L-1
 
-    output reg S_OUT_ENABLE,  // for l in 0 to L-1
-    output reg O_OUT_ENABLE,  // for l in 0 to L-1
+  output reg S_OUT_ENABLE,  // for l in 0 to L-1
+  output reg O_OUT_ENABLE,  // for l in 0 to L-1
 
-    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+  output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_L_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_L_IN,
 
-    input [DATA_SIZE-1:0] S_IN,
-    input [DATA_SIZE-1:0] O_IN,
+  input [DATA_SIZE-1:0] S_IN,
+  input [DATA_SIZE-1:0] O_IN,
 
-    output reg [DATA_SIZE-1:0] H_OUT
-  );
+  output reg [DATA_SIZE-1:0] H_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -79,17 +78,17 @@ module model_hidden_gate_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -99,16 +98,16 @@ module model_hidden_gate_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg  [          1:0] controller_ctrl_fsm_int;
 
   // VECTOR MULTIPLIER
   // CONTROL
-  wire start_vector_float_multiplier;
-  wire ready_vector_float_multiplier;
+  wire                 start_vector_float_multiplier;
+  wire                 ready_vector_float_multiplier;
 
-  wire data_a_in_enable_vector_float_multiplier;
-  wire data_b_in_enable_vector_float_multiplier;
-  wire data_out_enable_vector_float_multiplier;
+  wire                 data_a_in_enable_vector_float_multiplier;
+  wire                 data_b_in_enable_vector_float_multiplier;
+  wire                 data_out_enable_vector_float_multiplier;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_float_multiplier;
@@ -118,11 +117,11 @@ module model_hidden_gate_vector #(
 
   // VECTOR TANH
   // CONTROL
-  wire start_vector_tanh;
-  wire ready_vector_tanh;
+  wire                 start_vector_tanh;
+  wire                 ready_vector_tanh;
 
-  wire data_in_enable_vector_tanh;
-  wire data_out_enable_vector_tanh;
+  wire                 data_in_enable_vector_tanh;
+  wire                 data_out_enable_vector_tanh;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_tanh;
@@ -138,35 +137,34 @@ module model_hidden_gate_vector #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       H_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
-    end
-    else begin
-      case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+    end else begin
+      case (controller_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
           end
         end
 
-        VECTOR_TANH_STATE : begin  // STEP 1
+        VECTOR_TANH_STATE: begin  // STEP 1
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        VECTOR_MULTIPLIER_STATE: begin  // STEP 2
 
           // Data Outputs
           H_OUT <= data_out_vector_float_multiplier;
         end
 
-        default : begin
+        default: begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
         end
@@ -175,8 +173,8 @@ module model_hidden_gate_vector #(
   end
 
   // VECTOR TANH
-  assign size_in_vector_tanh   = SIZE_L_IN;
-  assign data_in_vector_tanh   = S_IN;
+  assign size_in_vector_tanh               = SIZE_L_IN;
+  assign data_in_vector_tanh               = S_IN;
 
   // VECTOR MULTIPLIER
   assign size_in_vector_float_multiplier   = SIZE_L_IN;
@@ -185,10 +183,9 @@ module model_hidden_gate_vector #(
 
   // VECTOR MULTIPLIER
   model_vector_float_multiplier #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_float_multiplier(
+  ) vector_float_multiplier (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -199,21 +196,20 @@ module model_hidden_gate_vector #(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_float_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_float_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_float_multiplier),
+    .DATA_OUT_ENABLE (data_out_enable_vector_float_multiplier),
 
     // DATA
-    .SIZE_IN(size_in_vector_float_multiplier),
+    .SIZE_IN  (size_in_vector_float_multiplier),
     .DATA_A_IN(data_a_in_vector_float_multiplier),
     .DATA_B_IN(data_b_in_vector_float_multiplier),
-    .DATA_OUT(data_out_vector_float_multiplier)
+    .DATA_OUT (data_out_vector_float_multiplier)
   );
 
   // VECTOR TANH
   model_vector_tanh_function #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_tanh_function(
+  ) vector_tanh_function (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -222,12 +218,12 @@ module model_hidden_gate_vector #(
     .START(start_vector_tanh),
     .READY(ready_vector_tanh),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_tanh),
+    .DATA_IN_ENABLE (data_in_enable_vector_tanh),
     .DATA_OUT_ENABLE(data_out_enable_vector_tanh),
 
     // DATA
-    .SIZE_IN(size_in_vector_tanh),
-    .DATA_IN(data_in_vector_tanh),
+    .SIZE_IN (size_in_vector_tanh),
+    .DATA_IN (data_in_vector_tanh),
     .DATA_OUT(data_out_vector_tanh)
   );
 

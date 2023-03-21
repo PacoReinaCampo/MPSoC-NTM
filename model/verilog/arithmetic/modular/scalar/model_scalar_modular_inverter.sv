@@ -38,23 +38,22 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_scalar_modular_inverter #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output reg READY,
+  // CONTROL
+  input      START,
+  output reg READY,
 
-    // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
-    input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
-  );
+  // DATA
+  input      [DATA_SIZE-1:0] MODULO_IN,
+  input      [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -70,17 +69,17 @@ module model_scalar_modular_inverter #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO_CONTROL  = 0;
-  parameter ONE_CONTROL   = 1;
-  parameter TWO_CONTROL   = 2;
+  parameter ZERO_CONTROL = 0;
+  parameter ONE_CONTROL = 1;
+  parameter TWO_CONTROL = 2;
   parameter THREE_CONTROL = 3;
 
-  parameter ZERO_DATA  = 0;
-  parameter ONE_DATA   = 1;
-  parameter TWO_DATA   = 2;
+  parameter ZERO_DATA = 0;
+  parameter ONE_DATA = 1;
+  parameter TWO_DATA = 2;
   parameter THREE_DATA = 3;
 
-  parameter FULL  = 1;
+  parameter FULL = 1;
   parameter EMPTY = 0;
 
   parameter EULER = 0;
@@ -90,7 +89,7 @@ module model_scalar_modular_inverter #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] inverter_ctrl_fsm_int;
+  reg [        2:0] inverter_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE:0] u_int;
@@ -106,136 +105,123 @@ module model_scalar_modular_inverter #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
+    if (RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
-      READY <= 1'b0;
+      READY    <= 1'b0;
 
       // Assignation
-      u_int <= ZERO_DATA;
-      v_int <= ZERO_DATA;
-      x_int <= ZERO_DATA;
-      y_int <= ZERO_DATA;
-    end
-    else begin
-      case(inverter_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+      u_int    <= ZERO_DATA;
+      v_int    <= ZERO_DATA;
+      x_int    <= ZERO_DATA;
+      y_int    <= ZERO_DATA;
+    end else begin
+      case (inverter_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
-          if(START == 1'b1) begin
+          if (START == 1'b1) begin
             // Assignation
-            u_int <= {1'b0,DATA_IN};
-            v_int <= {1'b0,MODULO_IN};
+            u_int                 <= {1'b0, DATA_IN};
+            v_int                 <= {1'b0, MODULO_IN};
 
-            x_int <= ONE_CONTROL;
-            y_int <= ZERO_DATA;
+            x_int                 <= ONE_CONTROL;
+            y_int                 <= ZERO_DATA;
 
             // FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin  // STEP 1
-          if(u_int == ONE_CONTROL) begin
-            if(x_int < {1'b0,MODULO_IN}) begin
+        ENDER_STATE: begin  // STEP 1
+          if (u_int == ONE_CONTROL) begin
+            if (x_int < {1'b0, MODULO_IN}) begin
               // Data Outputs
-              DATA_OUT <= x_int[DATA_SIZE-1:0];
+              DATA_OUT              <= x_int[DATA_SIZE-1:0];
 
               // Control Outputs
-              READY <= 1'b1;
+              READY                 <= 1'b1;
 
               // FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
-            end
-            else begin
+            end else begin
               // Assignations
-              x_int <= (x_int - {1'b0,MODULO_IN});
+              x_int <= (x_int - {1'b0, MODULO_IN});
             end
-          end
-          else if(v_int == ONE_CONTROL) begin
-            if(y_int < {1'b0,MODULO_IN}) begin
+          end else if (v_int == ONE_CONTROL) begin
+            if (y_int < {1'b0, MODULO_IN}) begin
               // Data Outputs
-              DATA_OUT <= y_int[DATA_SIZE-1:0];
+              DATA_OUT              <= y_int[DATA_SIZE-1:0];
 
               // Control Outputs
-              READY <= 1'b1;
+              READY                 <= 1'b1;
 
               // FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
-            end
-            else begin
+            end else begin
               // Assignations
-              y_int <= (y_int - {1'b0,MODULO_IN});
+              y_int <= (y_int - {1'b0, MODULO_IN});
             end
-          end
-          else if(u_int[0] == 1'b0) begin
+          end else if (u_int[0] == 1'b0) begin
             // FSM Control
             inverter_ctrl_fsm_int <= CHECK_U_STATE;
-          end
-          else if(v_int[0] == 1'b0) begin
+          end else if (v_int[0] == 1'b0) begin
             // FSM Control
             inverter_ctrl_fsm_int <= CHECK_V_STATE;
-          end
-          else begin
+          end else begin
             // FSM Control
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end
         end
-        CHECK_U_STATE : begin  // STEP 2
+        CHECK_U_STATE: begin  // STEP 2
           // Assignation
           u_int <= u_int;
-          if(x_int[0] == 1'b0) begin
+          if (x_int[0] == 1'b0) begin
             x_int <= x_int;
-          end
-          else begin
-            x_int <= (x_int + {1'b0,MODULO_IN});
+          end else begin
+            x_int <= (x_int + {1'b0, MODULO_IN});
           end
           // FSM Control
-          if(v_int[0] == 1'b0) begin
+          if (v_int[0] == 1'b0) begin
             inverter_ctrl_fsm_int <= CHECK_V_STATE;
-          end
-          else begin
+          end else begin
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end
         end
-        CHECK_V_STATE : begin  // STEP 3
+        CHECK_V_STATE: begin  // STEP 3
           // Assignation
           v_int <= v_int;
-          if(y_int[0] == 1'b0) begin
+          if (y_int[0] == 1'b0) begin
             y_int <= y_int;
-          end
-          else begin
-            y_int <= (y_int + {1'b0,MODULO_IN});
+          end else begin
+            y_int <= (y_int + {1'b0, MODULO_IN});
           end
           // FSM Control
           inverter_ctrl_fsm_int <= CHECK_D_STATE;
         end
-        CHECK_D_STATE : begin  // STEP 4
+        CHECK_D_STATE: begin  // STEP 4
           // Assignation
-          if(u_int < v_int) begin
+          if (u_int < v_int) begin
             v_int <= (v_int - u_int);
-            if(y_int > x_int) begin
+            if (y_int > x_int) begin
               y_int <= (y_int - x_int);
+            end else begin
+              y_int <= (y_int - x_int + {1'b0, MODULO_IN});
             end
-            else begin
-              y_int <= (y_int - x_int + {1'b0,MODULO_IN});
-            end
-          end
-          else begin
+          end else begin
             u_int <= (u_int - v_int);
-            if(x_int > y_int) begin
+            if (x_int > y_int) begin
               x_int <= (x_int - y_int);
-            end
-            else begin
-              x_int <= (x_int - y_int + {1'b0,MODULO_IN});
+            end else begin
+              x_int <= (x_int - y_int + {1'b0, MODULO_IN});
             end
           end
           // FSM Control
           inverter_ctrl_fsm_int <= ENDER_STATE;
         end
-        default : begin
+        default: begin
           // FSM Control
           inverter_ctrl_fsm_int <= STARTER_STATE;
         end

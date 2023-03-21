@@ -96,16 +96,16 @@ begin
     elsif (rising_edge(CLK)) then
 
       case OPERATION is
-        when "00" =>  -- STEP 0
+        when "00" =>                    -- STEP 0
           -- Control Outputs
           DATA_OUT <= std_logic_vector(signed(DATA_A_IN) + signed(DATA_B_IN));
-        when "01" =>  -- STEP 1
+        when "01" =>                    -- STEP 1
           -- Data Outputs
           DATA_OUT <= std_logic_vector(signed(DATA_A_IN) - signed(DATA_B_IN));
-        when "10" =>  -- STEP 2
+        when "10" =>                    -- STEP 2
           -- Data Outputs
           DATA_OUT <= std_logic_vector(signed(DATA_A_IN) * signed(DATA_B_IN));
-        when "11" =>  -- STEP 3
+        when "11" =>                    -- STEP 3
           -- Data Outputs
           DATA_OUT <= std_logic_vector(signed(DATA_A_IN) / signed(DATA_B_IN));
         when others =>

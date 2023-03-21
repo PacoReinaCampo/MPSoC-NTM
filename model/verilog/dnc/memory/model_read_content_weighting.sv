@@ -38,40 +38,39 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module model_read_content_weighting #(
-  parameter DATA_SIZE=64,
-  parameter CONTROL_SIZE=64
-)
-  (
-    // GLOBAL
-    input CLK,
-    input RST,
+  parameter DATA_SIZE    = 64,
+  parameter CONTROL_SIZE = 64
+) (
+  // GLOBAL
+  input CLK,
+  input RST,
 
-    // CONTROL
-    input START,
-    output READY,
+  // CONTROL
+  input  START,
+  output READY,
 
-    input K_IN_ENABLE,  // for k in 0 to W-1
+  input K_IN_ENABLE,  // for k in 0 to W-1
 
-    output K_OUT_ENABLE,  // for k in 0 to W-1
+  output K_OUT_ENABLE,  // for k in 0 to W-1
 
-    input M_IN_J_ENABLE,  // for j in 0 to N-1
-    input M_IN_K_ENABLE,  // for k in 0 to W-1
+  input M_IN_J_ENABLE,  // for j in 0 to N-1
+  input M_IN_K_ENABLE,  // for k in 0 to W-1
 
-    output M_OUT_J_ENABLE,  // for j in 0 to N-1
-    output M_OUT_K_ENABLE,  // for k in 0 to W-1
+  output M_OUT_J_ENABLE,  // for j in 0 to N-1
+  output M_OUT_K_ENABLE,  // for k in 0 to W-1
 
-    output C_OUT_ENABLE,  // for j in 0 to N-1
+  output C_OUT_ENABLE,  // for j in 0 to N-1
 
-    // DATA
-    input [DATA_SIZE-1:0] SIZE_N_IN,
-    input [DATA_SIZE-1:0] SIZE_W_IN,
+  // DATA
+  input [DATA_SIZE-1:0] SIZE_N_IN,
+  input [DATA_SIZE-1:0] SIZE_W_IN,
 
-    input [DATA_SIZE-1:0] K_IN,
-    input [DATA_SIZE-1:0] M_IN,
-    input [DATA_SIZE-1:0] BETA_IN,
+  input [DATA_SIZE-1:0] K_IN,
+  input [DATA_SIZE-1:0] M_IN,
+  input [DATA_SIZE-1:0] BETA_IN,
 
-    output [DATA_SIZE-1:0] C_OUT
-  );
+  output [DATA_SIZE-1:0] C_OUT
+);
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -87,20 +86,20 @@ module model_read_content_weighting #(
 
   // VECTOR CONTENT BASED ADDRESSING
   // CONTROL
-  wire start_vector_content_based_addressing;
-  wire ready_vector_content_based_addressing;
+  wire                 start_vector_content_based_addressing;
+  wire                 ready_vector_content_based_addressing;
 
-  wire k_in_enable_vector_content_based_addressing;
+  wire                 k_in_enable_vector_content_based_addressing;
 
-  wire k_out_enable_vector_content_based_addressing;
+  wire                 k_out_enable_vector_content_based_addressing;
 
-  wire m_in_i_enable_vector_content_based_addressing;
-  wire m_in_j_enable_vector_content_based_addressing;
+  wire                 m_in_i_enable_vector_content_based_addressing;
+  wire                 m_in_j_enable_vector_content_based_addressing;
 
-  wire m_out_i_enable_vector_content_based_addressing;
-  wire m_out_j_enable_vector_content_based_addressing;
+  wire                 m_out_i_enable_vector_content_based_addressing;
+  wire                 m_out_j_enable_vector_content_based_addressing;
 
-  wire c_out_enable_vector_content_based_addressing;
+  wire                 c_out_enable_vector_content_based_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
@@ -120,38 +119,37 @@ module model_read_content_weighting #(
 
   // ASSIGNATIONS
   // CONTROL
-  assign start_vector_content_based_addressing = START;
+  assign start_vector_content_based_addressing         = START;
 
-  assign READY = ready_vector_content_based_addressing;
+  assign READY                                         = ready_vector_content_based_addressing;
 
-  assign k_in_enable_vector_content_based_addressing = K_IN_ENABLE;
+  assign k_in_enable_vector_content_based_addressing   = K_IN_ENABLE;
 
-  assign K_OUT_ENABLE = k_out_enable_vector_content_based_addressing;
+  assign K_OUT_ENABLE                                  = k_out_enable_vector_content_based_addressing;
 
   assign m_in_i_enable_vector_content_based_addressing = M_IN_J_ENABLE;
   assign m_in_j_enable_vector_content_based_addressing = M_IN_K_ENABLE;
 
-  assign M_OUT_J_ENABLE = m_out_i_enable_vector_content_based_addressing;
-  assign M_OUT_K_ENABLE = m_out_j_enable_vector_content_based_addressing;
+  assign M_OUT_J_ENABLE                                = m_out_i_enable_vector_content_based_addressing;
+  assign M_OUT_K_ENABLE                                = m_out_j_enable_vector_content_based_addressing;
 
-  assign C_OUT_ENABLE = c_out_enable_vector_content_based_addressing;
+  assign C_OUT_ENABLE                                  = c_out_enable_vector_content_based_addressing;
 
   // DATA
-  assign size_i_in_vector_content_based_addressing = SIZE_N_IN;
-  assign size_j_in_vector_content_based_addressing = SIZE_N_IN;
+  assign size_i_in_vector_content_based_addressing     = SIZE_N_IN;
+  assign size_j_in_vector_content_based_addressing     = SIZE_N_IN;
 
-  assign k_in_vector_content_based_addressing = K_IN;
-  assign m_in_vector_content_based_addressing = M_IN;
-  assign beta_in_vector_content_based_addressing = BETA_IN;
+  assign k_in_vector_content_based_addressing          = K_IN;
+  assign m_in_vector_content_based_addressing          = M_IN;
+  assign beta_in_vector_content_based_addressing       = BETA_IN;
 
-  assign C_OUT = c_out_vector_content_based_addressing;
+  assign C_OUT                                         = c_out_vector_content_based_addressing;
 
   // VECTOR CONTENT BASED ADDRESSING
   model_content_based_addressing #(
-    .DATA_SIZE(DATA_SIZE),
+    .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  model_content_based_addressing_i(
+  ) model_content_based_addressing_i (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -176,8 +174,8 @@ module model_read_content_weighting #(
     .SIZE_I_IN(size_i_in_vector_content_based_addressing),
     .SIZE_J_IN(size_j_in_vector_content_based_addressing),
 
-    .K_IN(k_in_vector_content_based_addressing),
-    .M_IN(m_in_vector_content_based_addressing),
+    .K_IN   (k_in_vector_content_based_addressing),
+    .M_IN   (m_in_vector_content_based_addressing),
     .BETA_IN(beta_in_vector_content_based_addressing),
 
     .C_OUT(c_out_vector_content_based_addressing)
