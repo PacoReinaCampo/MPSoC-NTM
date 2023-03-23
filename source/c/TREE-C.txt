@@ -3,19 +3,23 @@ library
 │   ├── matrix
 │   │   ├── ntm_matrix_adder.c
 │   │   ├── ntm_matrix_divider.c
-│   │   └── ntm_matrix_multiplier.c
+│   │   ├── ntm_matrix_multiplier.c
+│   │   └── ntm_matrix_subtractor.c
 │   ├── scalar
 │   │   ├── ntm_scalar_adder.c
 │   │   ├── ntm_scalar_divider.c
-│   │   └── ntm_scalar_multiplier.c
+│   │   ├── ntm_scalar_multiplier.c
+│   │   └── ntm_scalar_subtractor.c
 │   ├── tensor
 │   │   ├── ntm_tensor_adder.c
 │   │   ├── ntm_tensor_divider.c
-│   │   └── ntm_tensor_multiplier.c
+│   │   ├── ntm_tensor_multiplier.c
+│   │   └── ntm_tensor_subtractor.c
 │   └── vector
 │       ├── ntm_vector_adder.c
 │       ├── ntm_vector_divider.c
-│       └── ntm_vector_multiplier.c
+│       ├── ntm_vector_multiplier.c
+│       └── ntm_vector_subtractor.c
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -233,4 +237,4 @@ library
             ├── ntm_lstm_output_v_trainer.c
             └── ntm_lstm_output_w_trainer.c
 
-59 directories, 174 files
+59 directories, 178 files

@@ -2,9 +2,25 @@ library
 ├── arithmetic
 │   ├── ntm_arithmetic.hpp
 │   ├── matrix
+│   │   ├── adder
+│   │   ├── divider
+│   │   ├── multiplier
+│   │   └── subtractor
 │   ├── scalar
+│   │   ├── adder
+│   │   ├── divider
+│   │   ├── multiplier
+│   │   └── subtractor
 │   ├── tensor
+│   │   ├── adder
+│   │   ├── divider
+│   │   ├── multiplier
+│   │   └── subtractor
 │   └── vector
+│       ├── adder
+│       ├── divider
+│       ├── multiplier
+│       └── subtractor
 ├── controller
 │   ├── ntm_controller.hpp
 │   ├── FNN
@@ -70,4 +86,4 @@ library
         ├── input
         └── output
 
-59 directories, 11 files
+75 directories, 11 files
