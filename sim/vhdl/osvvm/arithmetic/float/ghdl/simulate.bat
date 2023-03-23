@@ -1,23 +1,23 @@
 @echo off
 call ../../../../../../settings64_ghdl.bat
 
-ghdl -a --std=08 ../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
 
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_float_adder.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_float_multiplier.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_float_divider.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_adder.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_multiplier.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_divider.vhd
 
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/vector/ntm_vector_float_adder.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/vector/ntm_vector_float_multiplier.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/vector/ntm_vector_float_divider.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_adder.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_multiplier.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_divider.vhd
 
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_float_adder.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_float_multiplier.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_float_divider.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_adder.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_multiplier.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_divider.vhd
 
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_adder.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_multiplier.vhd
-ghdl -a --std=08 ../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_divider.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/tensor/ntm_tensor_float_adder.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/tensor/ntm_tensor_float_multiplier.vhd
+ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/tensor/ntm_tensor_float_divider.vhd
 
 ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/math/float/ntm_float_pkg.vhd
 ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/math/float/ntm_float_stimulus.vhd

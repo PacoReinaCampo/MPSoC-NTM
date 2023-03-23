@@ -1,17 +1,17 @@
 @echo off
 call ../../../../../settings64_ghdl.bat
 
-ghdl -a --std=08 ../../../../../model/vhdl/pkg/model_arithmetic_pkg.vhd
-ghdl -a --std=08 ../../../../../model/vhdl/pkg/model_math_pkg.vhd
+ghdl -a --std=08 ../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+ghdl -a --std=08 ../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
 
-ghdl -a --std=08 ../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
-ghdl -a --std=08 ../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
+ghdl -a --std=08 ../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
+ghdl -a --std=08 ../../../../../rtl/vhdl/code/pkg/ntm_math_pkg.vhd
 
-ghdl -a --std=08 ../../../../../model/vhdl/pkg/model_intro_pkg.vhd
-ghdl -a --std=08 ../../../../../model/vhdl/intro/model_intro_adder.vhd
+ghdl -a --std=08 ../../../../../model/vhdl/code/pkg/model_intro_pkg.vhd
+ghdl -a --std=08 ../../../../../model/vhdl/code/intro/model_intro_adder.vhd
 
-ghdl -a --std=08 ../../../../../rtl/vhdl/pkg/ntm_intro_pkg.vhd
-ghdl -a --std=08 ../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
+ghdl -a --std=08 ../../../../../rtl/vhdl/code/pkg/ntm_intro_pkg.vhd
+ghdl -a --std=08 ../../../../../rtl/vhdl/code/intro/ntm_intro_adder.vhd
 
 ghdl -a --std=08 ../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd
 
