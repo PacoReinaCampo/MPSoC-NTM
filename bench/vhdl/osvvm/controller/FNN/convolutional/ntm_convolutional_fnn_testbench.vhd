@@ -62,9 +62,9 @@ end ntm_convolutional_fnn_testbench;
 
 architecture ntm_convolutional_fnn_testbench_architecture of ntm_convolutional_fnn_testbench is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- GLOBAL
   signal CLK : std_logic;
@@ -169,9 +169,9 @@ architecture ntm_convolutional_fnn_testbench_architecture of ntm_convolutional_f
 
 begin
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Body
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- STIMULUS
   ntm_convolutional_fnn_stimulus_i : ntm_convolutional_fnn_stimulus

@@ -9,12 +9,12 @@
 --                  |_|                                                       --
 --                                                                            --
 --                                                                            --
---              Peripheral-DNC for MPSoC                                      --
+--              Peripheral-NTM for MPSoC                                      --
 --              Neural Turing Machine for MPSoC                               --
 --                                                                            --
 --------------------------------------------------------------------------------
 
--- Copyright (c) 2022-2023 by the author(s)
+-- Copyright (c) 2023-2024 by the author(s)
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -41,3 +41,58 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+use work.state_pkg.all;
+
+entity or_gate is
+  generic (
+    DATA_SIZE : integer := 64
+    );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- DATA
+    DATA_A_IN : in quantum_state_vector;
+    DATA_B_IN : in quantum_state_vector;
+
+    DATA_OUT : out quantum_state_vector
+    );
+end entity;
+
+architecture or_gate_architecture of or_gate is
+
+  ------------------------------------------------------------------------------
+  -- Types
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- Signals
+  ------------------------------------------------------------------------------
+
+begin
+
+  ------------------------------------------------------------------------------
+  -- Body
+  ------------------------------------------------------------------------------
+
+  -- DATA_OUT = DATA_A_IN or DATA_B_IN
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO_DATA;
+    elsif (rising_edge(CLK)) then
+      -- Data Outputs
+      DATA_OUT <= DATA_A_IN or DATA_B_IN;
+    end if;
+  end process;
+
+end architecture;

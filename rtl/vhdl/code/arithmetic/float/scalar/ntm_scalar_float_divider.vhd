@@ -69,9 +69,9 @@ end ntm_scalar_float_divider;
 
 architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Types
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   type divider_ctrl_fsm is (
     STARTER_STATE,
@@ -81,9 +81,9 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
     ENDER_STATE
     );
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   constant MANTISSA_SIZE : integer := 52;
   constant EXPONENT_SIZE : integer := 11;
@@ -104,9 +104,9 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
 
   constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111111";
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;

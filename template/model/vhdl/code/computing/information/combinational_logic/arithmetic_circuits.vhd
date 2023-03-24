@@ -9,12 +9,12 @@
 --                  |_|                                                       --
 --                                                                            --
 --                                                                            --
---              Peripheral-DNC for MPSoC                                      --
+--              Peripheral-NTM for MPSoC                                      --
 --              Neural Turing Machine for MPSoC                               --
 --                                                                            --
 --------------------------------------------------------------------------------
 
--- Copyright (c) 2022-2023 by the author(s)
+-- Copyright (c) 2023-2024 by the author(s)
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -41,3 +41,78 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+use work.computing_pkg.all;
+
+entity arithmetic_circuits is
+  generic (
+    DATA_SIZE    : integer := 64;
+    CONTROL_SIZE : integer := 64
+    );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    OPERATION : in std_logic_vector(1 downto 0);
+
+    -- DATA
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+end entity;
+
+architecture arithmetic_circuits_architecture of arithmetic_circuits is
+
+  ------------------------------------------------------------------------------
+  -- Types
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- Signals
+  ------------------------------------------------------------------------------
+
+begin
+
+  ------------------------------------------------------------------------------
+  -- Body
+  ------------------------------------------------------------------------------
+
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO_DATA;
+    elsif (rising_edge(CLK)) then
+
+      case OPERATION is
+        when "00" =>                    -- STEP 0
+          -- Control Outputs
+          DATA_OUT <= std_logic_vector(signed(DATA_A_IN) + signed(DATA_B_IN));
+        when "01" =>                    -- STEP 1
+          -- Data Outputs
+          DATA_OUT <= std_logic_vector(signed(DATA_A_IN) - signed(DATA_B_IN));
+        when "10" =>                    -- STEP 2
+          -- Data Outputs
+          DATA_OUT <= std_logic_vector(signed(DATA_A_IN) * signed(DATA_B_IN));
+        when "11" =>                    -- STEP 3
+          -- Data Outputs
+          DATA_OUT <= std_logic_vector(signed(DATA_A_IN) / signed(DATA_B_IN));
+        when others =>
+          -- FSM Control
+          DATA_OUT <= ZERO_DATA;
+      end case;
+    end if;
+  end process;
+
+end architecture;

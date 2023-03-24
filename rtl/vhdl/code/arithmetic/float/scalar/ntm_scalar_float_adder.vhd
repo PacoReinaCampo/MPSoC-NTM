@@ -71,9 +71,9 @@ end ntm_scalar_float_adder;
 
 architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Types
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   type adder_ctrl_fsm is (
     STARTER_STATE,
@@ -82,9 +82,9 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
     NORMALIZATION_STATE
     );
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   constant MANTISSA_SIZE : integer := 52;
   constant EXPONENT_SIZE : integer := 11;
@@ -95,9 +95,9 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
   constant ZERO_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+1));
   constant ONE_EXPONENT  : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+1));
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;

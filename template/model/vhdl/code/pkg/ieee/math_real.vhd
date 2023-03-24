@@ -49,53 +49,53 @@
 -- --------------------------------------------------------------------
 
 package MATH_REAL is
-  constant CopyRightNotice : string
+  constant CopyRightNotice : STRING
     := "Copyright IEEE P1076 WG. Licensed Apache 2.0";
 
   --
   -- Constant Definitions
   --
-  constant MATH_E             : real := 2.71828_18284_59045_23536;
+  constant MATH_E             : REAL := 2.71828_18284_59045_23536;
                                         -- Value of e
-  constant MATH_1_OVER_E      : real := 0.36787_94411_71442_32160;
+  constant MATH_1_OVER_E      : REAL := 0.36787_94411_71442_32160;
                                         -- Value of 1/e
-  constant MATH_PI            : real := 3.14159_26535_89793_23846;
+  constant MATH_PI            : REAL := 3.14159_26535_89793_23846;
                                         -- Value of pi
-  constant MATH_2_PI          : real := 6.28318_53071_79586_47693;
+  constant MATH_2_PI          : REAL := 6.28318_53071_79586_47693;
                                         -- Value of 2*pi
-  constant MATH_1_OVER_PI     : real := 0.31830_98861_83790_67154;
+  constant MATH_1_OVER_PI     : REAL := 0.31830_98861_83790_67154;
                                         -- Value of 1/pi
-  constant MATH_PI_OVER_2     : real := 1.57079_63267_94896_61923;
+  constant MATH_PI_OVER_2     : REAL := 1.57079_63267_94896_61923;
                                         -- Value of pi/2
-  constant MATH_PI_OVER_3     : real := 1.04719_75511_96597_74615;
+  constant MATH_PI_OVER_3     : REAL := 1.04719_75511_96597_74615;
                                         -- Value of pi/3
-  constant MATH_PI_OVER_4     : real := 0.78539_81633_97448_30962;
+  constant MATH_PI_OVER_4     : REAL := 0.78539_81633_97448_30962;
                                         -- Value of pi/4
-  constant MATH_3_PI_OVER_2   : real := 4.71238_89803_84689_85769;
+  constant MATH_3_PI_OVER_2   : REAL := 4.71238_89803_84689_85769;
                                         -- Value 3*pi/2
-  constant MATH_LOG_OF_2      : real := 0.69314_71805_59945_30942;
+  constant MATH_LOG_OF_2      : REAL := 0.69314_71805_59945_30942;
                                         -- Natural log of 2
-  constant MATH_LOG_OF_10     : real := 2.30258_50929_94045_68402;
+  constant MATH_LOG_OF_10     : REAL := 2.30258_50929_94045_68402;
                                         -- Natural log of 10
-  constant MATH_LOG2_OF_E     : real := 1.44269_50408_88963_4074;
+  constant MATH_LOG2_OF_E     : REAL := 1.44269_50408_88963_4074;
                                         -- Log base 2 of e
-  constant MATH_LOG10_OF_E    : real := 0.43429_44819_03251_82765;
+  constant MATH_LOG10_OF_E    : REAL := 0.43429_44819_03251_82765;
                                         -- Log base 10 of e
-  constant MATH_SQRT_2        : real := 1.41421_35623_73095_04880;
+  constant MATH_SQRT_2        : REAL := 1.41421_35623_73095_04880;
                                         -- square root of 2
-  constant MATH_1_OVER_SQRT_2 : real := 0.70710_67811_86547_52440;
+  constant MATH_1_OVER_SQRT_2 : REAL := 0.70710_67811_86547_52440;
                                         -- square root of 1/2
-  constant MATH_SQRT_PI       : real := 1.77245_38509_05516_02730;
+  constant MATH_SQRT_PI       : REAL := 1.77245_38509_05516_02730;
                                         -- square root of pi
-  constant MATH_DEG_TO_RAD    : real := 0.01745_32925_19943_29577;
+  constant MATH_DEG_TO_RAD    : REAL := 0.01745_32925_19943_29577;
   -- Conversion factor from degree to radian
-  constant MATH_RAD_TO_DEG    : real := 57.29577_95130_82320_87680;
+  constant MATH_RAD_TO_DEG    : REAL := 57.29577_95130_82320_87680;
   -- Conversion factor from radian to degree
 
   --
   -- Function Declarations
   --
-  function SIGN (X : in real) return real;
+  function SIGN (X : in REAL) return REAL;
   -- Purpose:
   --         Returns 1.0 if X > 0.0; 0.0 if X = 0.0; -1.0 if X < 0.0
   -- Special values:
@@ -109,7 +109,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function CEIL (X : in real) return real;
+  function CEIL (X : in REAL) return REAL;
   -- Purpose:
   --         Returns smallest INTEGER value (as REAL) not less than X
   -- Special values:
@@ -124,7 +124,7 @@ package MATH_REAL is
   --         a) Implementations have to support at least the domain
   --                ABS(X) < REAL(INTEGER'HIGH)
 
-  function FLOOR (X : in real) return real;
+  function FLOOR (X : in REAL) return REAL;
   -- Purpose:
   --         Returns largest INTEGER value (as REAL) not greater than X
   -- Special values:
@@ -139,7 +139,7 @@ package MATH_REAL is
   --         a) Implementations have to support at least the domain
   --                ABS(X) < REAL(INTEGER'HIGH)
 
-  function ROUND (X : in real) return real;
+  function ROUND (X : in REAL) return REAL;
   -- Purpose:
   --         Rounds X to the nearest integer value (as real). If X is
   --         halfway between two integers, rounding is away from 0.0
@@ -155,7 +155,7 @@ package MATH_REAL is
   --         a) Implementations have to support at least the domain
   --                ABS(X) < REAL(INTEGER'HIGH)
 
-  function TRUNC (X : in real) return real;
+  function TRUNC (X : in REAL) return REAL;
   -- Purpose:
   --         Truncates X towards 0.0 and returns truncated value
   -- Special values:
@@ -170,7 +170,7 @@ package MATH_REAL is
   --         a) Implementations have to support at least the domain
   --                ABS(X) < REAL(INTEGER'HIGH)
 
-  function "MOD" (X, Y : in real) return real;
+  function "MOD" (X, Y : in REAL) return REAL;
   -- Purpose:
   --         Returns floating point modulus of X/Y, with the same sign as
   --         Y, and absolute value less than the absolute value of Y, and
@@ -187,7 +187,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function REALMAX (X, Y : in real) return real;
+  function REALMAX (X, Y : in REAL) return REAL;
   -- Purpose:
   --         Returns the algebraically larger of X and Y
   -- Special values:
@@ -201,7 +201,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function REALMIN (X, Y : in real) return real;
+  function REALMIN (X, Y : in REAL) return REAL;
   -- Purpose:
   --         Returns the algebraically smaller of X and Y
   -- Special values:
@@ -215,7 +215,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  procedure UNIFORM(variable SEED1, SEED2 : inout positive; variable X : out real);
+  procedure UNIFORM(variable SEED1, SEED2 : inout POSITIVE; variable X : out REAL);
   -- Purpose:
   --         Returns, in X, a pseudo-random number with uniform
   --         distribution in the open interval (0.0, 1.0).
@@ -247,7 +247,7 @@ package MATH_REAL is
   --         d) For information on spectral tests for the algorithm, refer
   --            to the L'Ecuyer article.
 
-  function SQRT (X : in real) return real;
+  function SQRT (X : in REAL) return REAL;
   -- Purpose:
   --         Returns square root of X
   -- Special values:
@@ -264,7 +264,7 @@ package MATH_REAL is
   --            approximately given by:
   --                SQRT(X) <= SQRT(REAL'HIGH)
 
-  function CBRT (X : in real) return real;
+  function CBRT (X : in REAL) return REAL;
   -- Purpose:
   --         Returns cube root of X
   -- Special values:
@@ -281,7 +281,7 @@ package MATH_REAL is
   --         a) The reachable range of CBRT is approximately given by:
   --                ABS(CBRT(X)) <= CBRT(REAL'HIGH)
 
-  function "**" (X : in integer; Y : in real) return real;
+  function "**" (X : in INTEGER; Y : in REAL) return REAL;
   -- Purpose:
   --         Returns Y power of X ==>  X**Y
   -- Special values:
@@ -303,7 +303,7 @@ package MATH_REAL is
   --            approximately given by:
   --                X**Y <= REAL'HIGH
 
-  function "**" (X : in real; Y : in real) return real;
+  function "**" (X : in REAL; Y : in REAL) return REAL;
   -- Purpose:
   --         Returns Y power of X ==>  X**Y
   -- Special values:
@@ -325,7 +325,7 @@ package MATH_REAL is
   --            approximately given by:
   --                X**Y <= REAL'HIGH
 
-  function EXP (X : in real) return real;
+  function EXP (X : in REAL) return REAL;
   -- Purpose:
   --         Returns e**X; where e = MATH_E
   -- Special values:
@@ -343,7 +343,7 @@ package MATH_REAL is
   --         a) The usable domain of EXP is approximately given by:
   --                X <= LOG(REAL'HIGH)
 
-  function LOG (X : in real) return real;
+  function LOG (X : in REAL) return REAL;
   -- Purpose:
   --         Returns natural logarithm of X
   -- Special values:
@@ -359,7 +359,7 @@ package MATH_REAL is
   --         a) The reachable range of LOG is approximately given by:
   --                LOG(0+) <= LOG(X) <= LOG(REAL'HIGH)
 
-  function LOG2 (X : in real) return real;
+  function LOG2 (X : in REAL) return REAL;
   -- Purpose:
   --         Returns logarithm base 2 of X
   -- Special values:
@@ -375,7 +375,7 @@ package MATH_REAL is
   --         a) The reachable range of LOG2 is approximately given by:
   --                LOG2(0+) <= LOG2(X) <= LOG2(REAL'HIGH)
 
-  function LOG10 (X : in real) return real;
+  function LOG10 (X : in REAL) return REAL;
   -- Purpose:
   --         Returns logarithm base 10 of X
   -- Special values:
@@ -391,7 +391,7 @@ package MATH_REAL is
   --         a) The reachable range of LOG10 is approximately given by:
   --                LOG10(0+) <= LOG10(X) <= LOG10(REAL'HIGH)
 
-  function LOG (X : in real; BASE : in real) return real;
+  function LOG (X : in REAL; BASE : in REAL) return REAL;
   -- Purpose:
   --         Returns logarithm base BASE of X
   -- Special values:
@@ -415,7 +415,7 @@ package MATH_REAL is
   --            approximately given by:
   --                LOG(REAL'HIGH, BASE) <= LOG(X, BASE) <= LOG(0+, BASE)
 
-  function SIN (X : in real) return real;
+  function SIN (X : in REAL) return REAL;
   -- Purpose:
   --         Returns sine of X; X in radians
   -- Special values:
@@ -433,7 +433,7 @@ package MATH_REAL is
   -- Notes:
   --         a) For larger values of ABS(X), degraded accuracy is allowed.
 
-  function COS (X : in real) return real;
+  function COS (X : in REAL) return REAL;
   -- Purpose:
   --         Returns cosine of X; X in radians
   -- Special values:
@@ -450,7 +450,7 @@ package MATH_REAL is
   -- Notes:
   --         a) For larger values of ABS(X), degraded accuracy is allowed.
 
-  function TAN (X : in real) return real;
+  function TAN (X : in REAL) return REAL;
   -- Purpose:
   --         Returns tangent of X; X in radians
   -- Special values:
@@ -466,7 +466,7 @@ package MATH_REAL is
   -- Notes:
   --         a) For larger values of ABS(X), degraded accuracy is allowed.
 
-  function ARCSIN (X : in real) return real;
+  function ARCSIN (X : in REAL) return REAL;
   -- Purpose:
   --         Returns inverse sine of X
   -- Special values:
@@ -482,7 +482,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function ARCCOS (X : in real) return real;
+  function ARCCOS (X : in REAL) return REAL;
   -- Purpose:
   --         Returns inverse cosine of X
   -- Special values:
@@ -498,7 +498,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function ARCTAN (Y : in real) return real;
+  function ARCTAN (Y : in REAL) return REAL;
   -- Purpose:
   --         Returns the value of the angle in radians of the point
   --        (1.0, Y), which is in rectangular coordinates
@@ -513,7 +513,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function ARCTAN (Y : in real; X : in real) return real;
+  function ARCTAN (Y : in REAL; X : in REAL) return REAL;
   -- Purpose:
   --         Returns the principal value of the angle in radians of
   --         the point (X, Y), which is in rectangular coordinates
@@ -532,7 +532,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function SINH (X : in real) return real;
+  function SINH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns hyperbolic sine of X
   -- Special values:
@@ -548,7 +548,7 @@ package MATH_REAL is
   --                ABS(X) <= LOG(REAL'HIGH)
 
 
-  function COSH (X : in real) return real;
+  function COSH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns hyperbolic cosine of X
   -- Special values:
@@ -563,7 +563,7 @@ package MATH_REAL is
   --         a) The usable domain of COSH is approximately given by:
   --                ABS(X) <= LOG(REAL'HIGH)
 
-  function TANH (X : in real) return real;
+  function TANH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns hyperbolic tangent of X
   -- Special values:
@@ -577,7 +577,7 @@ package MATH_REAL is
   -- Notes:
   --         None
 
-  function ARCSINH (X : in real) return real;
+  function ARCSINH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns inverse hyperbolic sine of X
   -- Special values:
@@ -592,7 +592,7 @@ package MATH_REAL is
   --         a) The reachable range of ARCSINH is approximately given by:
   --                ABS(ARCSINH(X)) <= LOG(REAL'HIGH)
 
-  function ARCCOSH (X : in real) return real;
+  function ARCCOSH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns inverse hyperbolic cosine of X
   -- Special values:
@@ -607,7 +607,7 @@ package MATH_REAL is
   --         a) The upper bound of the reachable range of ARCCOSH is
   --            approximately given by:   ARCCOSH(X) <= LOG(REAL'HIGH)
 
-  function ARCTANH (X : in real) return real;
+  function ARCTANH (X : in REAL) return REAL;
   -- Purpose:
   --         Returns inverse hyperbolic tangent of X
   -- Special values:

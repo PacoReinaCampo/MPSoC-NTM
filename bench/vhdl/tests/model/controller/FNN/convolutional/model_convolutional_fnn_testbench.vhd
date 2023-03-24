@@ -62,9 +62,9 @@ end model_convolutional_fnn_testbench;
 
 architecture model_convolutional_fnn_testbench_architecture of model_convolutional_fnn_testbench is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- GLOBAL
   signal CLK : std_logic;
@@ -169,9 +169,9 @@ architecture model_convolutional_fnn_testbench_architecture of model_convolution
 
 begin
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Body
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- STIMULUS
   model_convolutional_fnn_stimulus_i : model_convolutional_fnn_stimulus

@@ -44,9 +44,9 @@ use work.model_math_pkg.all;
 
 package model_convolutional_lstm_pkg is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Types
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- SYSTEM-SIZE
   constant DATA_SIZE : integer := 64;
@@ -59,16 +59,16 @@ package model_convolutional_lstm_pkg is
   type matrix_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
   type vector_buffer is array (0 to CONTROL_X_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   signal MONITOR_TEST : string(40 downto 1) := "                                        ";
   signal MONITOR_CASE : string(40 downto 1) := "                                        ";
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- SYSTEM-SIZE
   constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
@@ -138,9 +138,9 @@ package model_convolutional_lstm_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Components
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   component model_convolutional_lstm_stimulus is
     generic (

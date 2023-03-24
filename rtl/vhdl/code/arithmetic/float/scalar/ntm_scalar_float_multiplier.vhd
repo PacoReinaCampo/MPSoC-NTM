@@ -69,9 +69,9 @@ end ntm_scalar_float_multiplier;
 
 architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multiplier is
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Types
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   type multiplier_ctrl_fsm is (
     STARTER_STATE,
@@ -80,9 +80,9 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
     ENDER_STATE
     );
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   constant MANTISSA_SIZE : integer := 52;
   constant EXPONENT_SIZE : integer := 11;
@@ -105,9 +105,9 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
 
   constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := "001111111111";
 
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
   -- Signals
-  -----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
