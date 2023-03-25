@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../rtl/vhdl/code/controller/transformer/convolut
 ghdl -a --std=08 ../../../../../../rtl/vhdl/code/controller/transformer/convolution/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../rtl/vhdl/code/controller/transformer/convolution/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/transformer/ntm_trainer_transformer_pkg.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/transformer/ntm_trainer_transformer_stimulus.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/transformer/ntm_trainer_transformer_testbench.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/transformer/ntm_trainer_transformer_pkg.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/transformer/ntm_trainer_transformer_stimulus.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/transformer/ntm_trainer_transformer_testbench.vhd
 pause

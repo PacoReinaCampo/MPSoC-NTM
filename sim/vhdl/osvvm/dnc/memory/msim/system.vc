@@ -101,6 +101,6 @@
 ../../../../../../rtl/vhdl/code/dnc/memory/dnc_write_weighting.vhd
 ../../../../../../rtl/vhdl/code/dnc/memory/dnc_addressing.vhd
 
-../../../../../../bench/vhdl/osvvm/dnc/memory/dnc_memory_pkg.vhd
-../../../../../../bench/vhdl/osvvm/dnc/memory/dnc_memory_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/dnc/memory/dnc_memory_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/memory/dnc_memory_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/memory/dnc_memory_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/memory/dnc_memory_testbench.vhd

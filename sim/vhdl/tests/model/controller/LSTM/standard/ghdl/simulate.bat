@@ -90,9 +90,9 @@ ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/LSTM/standar
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/LSTM/standard/model_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/LSTM/standard/model_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/LSTM/standard/model_standard_lstm_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/LSTM/standard/model_standard_lstm_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/LSTM/standard/model_standard_lstm_testbench.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/LSTM/standard/model_standard_lstm_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/LSTM/standard/model_standard_lstm_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/LSTM/standard/model_standard_lstm_testbench.vhd
 
 ghdl -m --std=08 model_standard_lstm_testbench
 ghdl -r --std=08 model_standard_lstm_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_standard_lstm_testbench.tree

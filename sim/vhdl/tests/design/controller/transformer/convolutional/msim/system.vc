@@ -97,6 +97,6 @@
 ../../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_output_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_state_gate_vector.vhd
 
-../../../../../../../../bench/vhdl/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.vhd
-../../../../../../../../bench/vhdl/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.vhd
-../../../../../../../../bench/vhdl/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.vhd
+../../../../../../../../bench/vhdl/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.vhd
+../../../../../../../../bench/vhdl/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.vhd
+../../../../../../../../bench/vhdl/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.vhd

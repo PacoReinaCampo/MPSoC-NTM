@@ -16,6 +16,6 @@
 ../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_multiplier.vhd
 ../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_divider.vhd
 
-../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_pkg.vhd
-../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/arithmetic/float/ntm_float_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_testbench.vhd

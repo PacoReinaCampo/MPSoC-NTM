@@ -22,6 +22,6 @@ verilog work ../../../../../../../rtl/verilog/code/math/function/vector/ntm_vect
 verilog work ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_logistic_function.sv
 verilog work ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_oneplus_function.sv
 
-verilog work ../../../../../../../bench/verilog/tests/design/math/function/ntm_function_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/design/math/function/ntm_function_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/design/math/function/ntm_function_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_testbench.sv

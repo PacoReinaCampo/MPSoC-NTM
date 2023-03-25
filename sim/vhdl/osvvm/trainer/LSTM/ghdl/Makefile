@@ -90,9 +90,9 @@ build:
 	ghdl -a --std=08 ../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 	ghdl -a --std=08 ../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/LSTM/ntm_trainer_lstm_pkg.vhd
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/LSTM/ntm_trainer_lstm_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/trainer/LSTM/ntm_trainer_lstm_testbench.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/LSTM/ntm_trainer_lstm_pkg.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/LSTM/ntm_trainer_lstm_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/trainer/LSTM/ntm_trainer_lstm_testbench.vhd
 
 simulate:
 

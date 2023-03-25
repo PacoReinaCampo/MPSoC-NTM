@@ -49,6 +49,6 @@ vhdl2008 work ../../../../../../rtl/vhdl/code/state/outputs/ntm_state_vector_sta
 
 vhdl2008 work ../../../../../../rtl/vhdl/code/state/top/ntm_state_top.vhd
 
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_pkg.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_stimulus.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_testbench.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_pkg.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_stimulus.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_testbench.vhd

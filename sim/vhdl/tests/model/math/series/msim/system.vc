@@ -37,6 +37,6 @@
 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_sqrt_function.vhd
 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_tanh_function.vhd
 
-../../../../../../../bench/vhdl/tests/model/math/series/model_series_pkg.vhd
-../../../../../../../bench/vhdl/tests/model/math/series/model_series_stimulus.vhd
-../../../../../../../bench/vhdl/tests/model/math/series/model_series_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/series/model_series_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/series/model_series_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/series/model_series_testbench.vhd

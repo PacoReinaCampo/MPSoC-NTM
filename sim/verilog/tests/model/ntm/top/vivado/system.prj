@@ -100,6 +100,6 @@ ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_interface
 ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_output_vector.sv
 ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_top.sv
 
-ghdl -a --std=08 ../../../../../../../bench/verilog/tests/model/ntm/top/model_top_pkg.sv
-ghdl -a --std=08 ../../../../../../../bench/verilog/tests/model/ntm/top/model_top_stimulus.sv
-ghdl -a --std=08 ../../../../../../../bench/verilog/tests/model/ntm/top/model_top_testbench.sv
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_pkg.sv
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_stimulus.sv
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_testbench.sv

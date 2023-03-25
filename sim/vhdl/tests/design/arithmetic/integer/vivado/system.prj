@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/ntm_t
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/ntm_tensor_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/ntm_tensor_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_testbench.vhd

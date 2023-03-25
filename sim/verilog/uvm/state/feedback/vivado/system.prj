@@ -40,6 +40,6 @@ verilog work ../../../../../../rtl/verilog/code/state/feedback/ntm_state_matrix_
 verilog work ../../../../../../rtl/verilog/code/state/feedback/ntm_state_matrix_output.sv
 verilog work ../../../../../../rtl/verilog/code/state/feedback/ntm_state_matrix_state.sv
 
-verilog work ../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_pkg.sv
-verilog work ../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_stimulus.sv
-verilog work ../../../../../../bench/verilog/tests/state/feedback/ntm_state_feedback_testbench.sv
+verilog work ../../../../../../bench/verilog/code/tests/state/feedback/ntm_state_feedback_pkg.sv
+verilog work ../../../../../../bench/verilog/code/tests/state/feedback/ntm_state_feedback_stimulus.sv
+verilog work ../../../../../../bench/verilog/code/tests/state/feedback/ntm_state_feedback_testbench.sv

@@ -50,6 +50,6 @@
 
 ../../../../../../rtl/vhdl/code/state/top/ntm_state_top.vhd
 
-../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_pkg.vhd
-../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/state/top/ntm_state_top_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/state/top/ntm_state_top_testbench.vhd

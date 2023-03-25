@@ -89,6 +89,6 @@
 ../../../../../../../model/vhdl/code/ntm/memory/model_addressing.vhd
 ../../../../../../../model/vhdl/code/ntm/memory/model_content_based_addressing.vhd
 
-../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_pkg.vhd
-../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_stimulus.vhd
-../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_testbench.vhd

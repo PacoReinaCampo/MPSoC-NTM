@@ -81,9 +81,9 @@ ghdl -a --std=08 ../../../../../../../../rtl/vhdl/code/trainer/FNN/ntm_trainer.v
 
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/code/controller/FNN/convolutional/ntm_controller.vhd
 
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd
 
 ghdl -m --std=08 ntm_convolutional_fnn_testbench
 ghdl -r --std=08 ntm_convolutional_fnn_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_convolutional_fnn_testbench.tree

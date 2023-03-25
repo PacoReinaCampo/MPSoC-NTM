@@ -86,6 +86,6 @@
 
 ../../../../../../rtl/vhdl/code/dnc/write_heads/dnc_write_heads.vhd
 
-../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd
-../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd

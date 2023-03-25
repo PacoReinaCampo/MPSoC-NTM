@@ -38,6 +38,6 @@
 ../../../../../../../rtl/verilog/code/ntm/write_heads/ntm_writing.sv
 ../../../../../../../rtl/verilog/code/ntm/write_heads/ntm_erasing.sv
 
-../../../../../../../bench/verilog/tests/design/ntm/write_heads/ntm_write_heads_pkg.sv
-../../../../../../../bench/verilog/tests/design/ntm/write_heads/ntm_write_heads_stimulus.sv
-../../../../../../../bench/verilog/tests/design/ntm/write_heads/ntm_write_heads_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/ntm/write_heads/ntm_write_heads_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/ntm/write_heads/ntm_write_heads_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/ntm/write_heads/ntm_write_heads_testbench.sv

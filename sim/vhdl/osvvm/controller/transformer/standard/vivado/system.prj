@@ -87,6 +87,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/transformer/standard
 vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_testbench.vhd

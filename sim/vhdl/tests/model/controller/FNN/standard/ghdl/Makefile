@@ -81,9 +81,9 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/FNN/standard/model_controller.vhd
 
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/standard/model_standard_fnn_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/standard/model_standard_fnn_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/standard/model_standard_fnn_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/standard/model_standard_fnn_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_standard_fnn_testbench

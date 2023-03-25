@@ -24,6 +24,6 @@
 ../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_multiplier.sv
 ../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_divider.sv
 
-../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_pkg.sv
-../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_stimulus.sv
-../../../../../../../bench/verilog/tests/design/arithmetic/float/ntm_float_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/float/ntm_float_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/float/ntm_float_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/float/ntm_float_testbench.sv

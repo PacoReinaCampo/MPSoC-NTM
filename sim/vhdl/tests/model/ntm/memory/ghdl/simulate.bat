@@ -80,9 +80,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/calculus/tensor/model
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/memory/model_addressing.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/memory/model_content_based_addressing.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/memory/model_memory_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_testbench.vhd
 ghdl -m --std=08 model_memory_testbench
 ghdl -r --std=08 model_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_memory_testbench.tree
 pause

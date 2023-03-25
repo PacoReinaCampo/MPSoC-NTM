@@ -41,9 +41,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/write_heads/model_writing.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/write_heads/model_erasing.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/write_heads/model_write_heads_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/write_heads/model_write_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/write_heads/model_write_heads_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/write_heads/model_write_heads_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_write_heads_testbench

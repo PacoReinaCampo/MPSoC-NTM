@@ -38,6 +38,6 @@ verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_t
 verilog work ../../../../../../../model/verilog/code/ntm/write_heads/model_writing.sv
 verilog work ../../../../../../../model/verilog/code/ntm/write_heads/model_erasing.sv
 
-verilog work ../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/model/ntm/write_heads/model_write_heads_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/write_heads/model_write_heads_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/write_heads/model_write_heads_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/write_heads/model_write_heads_testbench.sv

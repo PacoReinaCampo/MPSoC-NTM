@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/convo
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/transformer/standard/ntm_trainer_transformer_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/transformer/standard/ntm_trainer_transformer_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/transformer/standard/ntm_trainer_transformer_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/transformer/standard/ntm_trainer_transformer_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/transformer/standard/ntm_trainer_transformer_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/transformer/standard/ntm_trainer_transformer_testbench.vhd
 pause

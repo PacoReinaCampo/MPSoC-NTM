@@ -43,9 +43,9 @@ ghdl -a --std=08 ../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix
 ghdl -a --std=08 ../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix_output.vhd
 ghdl -a --std=08 ../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix_state.vhd
 
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/state/feedback/ntm_state_feedback_pkg.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/state/feedback/ntm_state_feedback_stimulus.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/state/feedback/ntm_state_feedback_testbench.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/state/feedback/ntm_state_feedback_pkg.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/state/feedback/ntm_state_feedback_stimulus.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/state/feedback/ntm_state_feedback_testbench.vhd
 
 ghdl -m --std=08 ntm_state_feedback_testbench
 ghdl -r --std=08 ntm_state_feedback_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_feedback_testbench.tree

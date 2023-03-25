@@ -88,6 +88,6 @@
 
 ../../../../../../../model/vhdl/code/controller/FNN/convolutional/model_controller.vhd
 
-../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_pkg.vhd
-../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_stimulus.vhd
-../../../../../../../bench/vhdl/tests/model/trainer/FNN/model_trainer_fnn_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/model/trainer/FNN/model_trainer_fnn_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/trainer/FNN/model_trainer_fnn_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/trainer/FNN/model_trainer_fnn_testbench.vhd

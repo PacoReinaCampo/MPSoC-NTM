@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/LSTM/convolutiona
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/trainer/LSTM/standard/ntm_trainer_lstm_testbench.vhd
 pause

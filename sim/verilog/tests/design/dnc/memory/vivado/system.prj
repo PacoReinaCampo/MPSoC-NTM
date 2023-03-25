@@ -91,6 +91,6 @@ verilog work ../../../../../../../rtl/verilog/code/dnc/memory/ntm_write_content_
 verilog work ../../../../../../../rtl/verilog/code/dnc/memory/ntm_write_weighting.sv
 verilog work ../../../../../../../rtl/verilog/code/dnc/memory/ntm_addressing.sv
 
-verilog work ../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_testbench.sv

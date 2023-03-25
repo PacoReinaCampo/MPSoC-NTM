@@ -94,9 +94,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/dnc/memory/dnc_write_weighting.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/dnc/memory/dnc_addressing.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_memory_testbench

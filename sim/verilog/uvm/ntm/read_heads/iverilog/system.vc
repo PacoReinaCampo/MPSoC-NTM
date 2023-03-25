@@ -70,6 +70,6 @@
 
 ../../../../../../rtl/verilog/code/ntm/read_heads/ntm_reading.sv
 
-../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_pkg.sv
-../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_stimulus.sv
-../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_testbench.sv
+../../../../../../bench/verilog/code/tests/ntm/read_heads/ntm_read_heads_pkg.sv
+../../../../../../bench/verilog/code/tests/ntm/read_heads/ntm_read_heads_stimulus.sv
+../../../../../../bench/verilog/code/tests/ntm/read_heads/ntm_read_heads_testbench.sv

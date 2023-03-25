@@ -25,6 +25,6 @@
 ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_integration.vhd
 ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_pkg.vhd
-../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_testbench.vhd

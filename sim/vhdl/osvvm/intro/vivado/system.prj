@@ -10,4 +10,4 @@ vhdl2008 work ../../../../../model/vhdl/code/intro/model_intro_adder.vhd
 vhdl2008 work ../../../../../rtl/vhdl/code/pkg/ntm_intro_pkg.vhd
 vhdl2008 work ../../../../../rtl/vhdl/code/intro/ntm_intro_adder.vhd
 
-vhdl2008 work ../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd
+vhdl2008 work ../../../../../bench/vhdl/code/osvvm/intro/ntm_intro_testbench.vhd

@@ -16,6 +16,6 @@
 ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/ntm_tensor_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/ntm_tensor_integer_divider.vhd
 
-../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_pkg.vhd
-../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_stimulus.vhd
-../../../../../../../bench/vhdl/tests/design/arithmetic/integer/ntm_integer_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/design/arithmetic/integer/ntm_integer_testbench.vhd

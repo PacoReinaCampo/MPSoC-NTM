@@ -113,6 +113,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/dnc/top/model_top.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/dnc/top/model_output_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/dnc/top/model_interface_vector.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/model/dnc/top/model_top_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/dnc/top/model_top_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/dnc/top/model_top_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/dnc/top/model_top_testbench.vhd

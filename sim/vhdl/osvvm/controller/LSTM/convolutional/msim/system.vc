@@ -97,6 +97,6 @@
 ../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 ../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_pkg.vhd
-../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_stimulus.vhd
-../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.vhd
+../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_pkg.vhd
+../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_stimulus.vhd
+../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.vhd

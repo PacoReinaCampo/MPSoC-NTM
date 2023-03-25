@@ -40,9 +40,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/calculus/tensor/model
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_integration.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_softmax.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_testbench.vhd
 ghdl -m --std=08 model_calculus_testbench
 ghdl -r --std=08 model_calculus_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_calculus_testbench.tree
 pause

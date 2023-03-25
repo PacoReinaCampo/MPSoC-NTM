@@ -43,9 +43,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix_output.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix_state.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/feedback/ntm_state_feedback_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/feedback/ntm_state_feedback_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/feedback/ntm_state_feedback_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/feedback/ntm_state_feedback_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_state_feedback_testbench

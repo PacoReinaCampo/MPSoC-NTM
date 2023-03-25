@@ -16,6 +16,6 @@ verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/m
 verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/model_tensor_integer_multiplier.sv
 verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/model_tensor_integer_divider.sv
 
-verilog work ../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/model/arithmetic/integer/model_integer_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_testbench.sv

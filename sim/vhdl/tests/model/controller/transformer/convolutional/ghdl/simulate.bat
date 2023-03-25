@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/transformer/
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/transformer/standard/model_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/transformer/standard/model_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/transformer/standard/model_standard_transformer_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/transformer/standard/model_standard_transformer_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/transformer/standard/model_standard_transformer_testbench.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/transformer/standard/model_standard_transformer_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/transformer/standard/model_standard_transformer_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/transformer/standard/model_standard_transformer_testbench.vhd
 pause

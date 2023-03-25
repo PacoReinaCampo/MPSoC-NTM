@@ -10,5 +10,5 @@
 ../../../../../rtl/vhdl/code/pkg/ntm_intro_pkg.vhd
 ../../../../../rtl/vhdl/code/intro/ntm_intro_adder.vhd
 
-../../../../../bench/vhdl/osvvm/intro/ntm_intro_checker.vhd
-../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd
+../../../../../bench/vhdl/code/osvvm/intro/ntm_intro_checker.vhd
+../../../../../bench/vhdl/code/osvvm/intro/ntm_intro_testbench.vhd

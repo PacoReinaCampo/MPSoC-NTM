@@ -43,9 +43,9 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/state/feedback/model_state
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_output.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_state.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/feedback/model_state_feedback_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/feedback/model_state_feedback_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/state/feedback/model_state_feedback_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_testbench.vhd
 
 ghdl -m --std=08 model_state_feedback_testbench
 ghdl -r --std=08 model_state_feedback_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_state_feedback_testbench.tree

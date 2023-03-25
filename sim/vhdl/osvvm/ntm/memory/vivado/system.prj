@@ -81,6 +81,6 @@ vhdl2008 work ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_so
 vhdl2008 work ../../../../../../rtl/vhdl/code/ntm/memory/ntm_addressing.vhd
 vhdl2008 work ../../../../../../rtl/vhdl/code/ntm/memory/ntm_content_based_addressing.vhd
 
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_pkg.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_stimulus.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_testbench.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/ntm/memory/ntm_memory_pkg.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/ntm/memory/ntm_memory_stimulus.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/ntm/memory/ntm_memory_testbench.vhd

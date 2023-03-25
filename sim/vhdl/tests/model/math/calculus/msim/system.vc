@@ -37,6 +37,6 @@
 ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_integration.vhd
 ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_softmax.vhd
 
-../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_pkg.vhd
-../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_stimulus.vhd
-../../../../../../../bench/vhdl/tests/model/math/calculus/model_calculus_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/math/calculus/model_calculus_testbench.vhd

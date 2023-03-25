@@ -46,6 +46,6 @@
 ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_sinh_function.sv
 ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_tanh_function.sv
 
-../../../../../../../bench/verilog/tests/design/math/function/ntm_function_pkg.sv
-../../../../../../../bench/verilog/tests/design/math/function/ntm_function_stimulus.sv
-../../../../../../../bench/verilog/tests/design/math/function/ntm_function_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_testbench.sv

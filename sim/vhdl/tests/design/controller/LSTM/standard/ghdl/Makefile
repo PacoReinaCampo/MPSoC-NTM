@@ -77,9 +77,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/code/math/series/matrix/ntm_matrix_sinh_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/code/math/series/matrix/ntm_matrix_tanh_function.vhd
 
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/design/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_standard_lstm_testbench

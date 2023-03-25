@@ -90,9 +90,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_output_gate_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/ntm_state_gate_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.vhd
 
 simulate:
 

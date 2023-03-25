@@ -124,6 +124,6 @@
 ../../../../../../../rtl/vhdl/code/dnc/top/dnc_output_vector.vhd
 ../../../../../../../rtl/vhdl/code/dnc/top/dnc_interface_vector.vhd
 
-../../../../../../../bench/vhdl/tests/design/dnc/top/dnc_top_pkg.vhd
-../../../../../../../bench/vhdl/tests/design/dnc/top/dnc_top_stimulus.vhd
-../../../../../../../bench/vhdl/tests/design/dnc/top/dnc_top_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/design/dnc/top/dnc_top_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/design/dnc/top/dnc_top_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/design/dnc/top/dnc_top_testbench.vhd

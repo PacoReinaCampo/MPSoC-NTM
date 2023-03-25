@@ -117,6 +117,6 @@ vhdl2008 work ../../../../../../rtl/vhdl/code/dnc/top/dnc_top.vhd
 vhdl2008 work ../../../../../../rtl/vhdl/code/dnc/top/dnc_output_vector.vhd
 vhdl2008 work ../../../../../../rtl/vhdl/code/dnc/top/dnc_interface_vector.vhd
 
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_pkg.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_stimulus.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_testbench.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/dnc/top/dnc_top_pkg.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/dnc/top/dnc_top_stimulus.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/dnc/top/dnc_top_testbench.vhd

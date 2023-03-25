@@ -100,9 +100,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/dnc/memory/dnc_write_content
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/dnc/memory/dnc_write_weighting.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/dnc/memory/dnc_addressing.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/dnc/memory/dnc_memory_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/dnc/memory/dnc_memory_testbench.vhd
 
 ghdl -m --std=08 ntm_memory_testbench
 ghdl -r --std=08 ntm_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_memory_testbench.tree

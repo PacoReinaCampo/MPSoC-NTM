@@ -23,9 +23,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/modular/tensor/model_tensor_modular_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/modular/tensor/model_tensor_modular_inverter.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/modular/model_modular_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/modular/model_modular_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/modular/model_modular_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/modular/model_modular_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/modular/model_modular_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/modular/model_modular_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_modular_testbench

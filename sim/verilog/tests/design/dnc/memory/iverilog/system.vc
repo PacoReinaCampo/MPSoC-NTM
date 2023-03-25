@@ -85,6 +85,6 @@
 ../../../../../../../rtl/verilog/code/dnc/memory/ntm_write_weighting.sv
 ../../../../../../../rtl/verilog/code/dnc/memory/ntm_addressing.sv
 
-../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_pkg.sv
-../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_stimulus.sv
-../../../../../../../bench/verilog/tests/design/dnc/memory/ntm_memory_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/memory/ntm_memory_testbench.sv

@@ -81,9 +81,9 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../../model/vhdl/code/controller/FNN/convolutional/model_controller.vhd
 
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/convolutional/model_convolutional_fnn_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/convolutional/model_convolutional_fnn_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/model/controller/FNN/convolutional/model_convolutional_fnn_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/convolutional/model_convolutional_fnn_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/convolutional/model_convolutional_fnn_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/FNN/convolutional/model_convolutional_fnn_testbench.vhd
 
 simulate:
 

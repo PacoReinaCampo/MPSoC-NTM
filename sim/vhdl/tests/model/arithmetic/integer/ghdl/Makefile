@@ -19,9 +19,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/integer/tensor/model_tensor_integer_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/integer/tensor/model_tensor_integer_divider.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/integer/model_integer_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/integer/model_integer_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/math/integer/model_integer_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/integer/model_integer_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/integer/model_integer_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/math/integer/model_integer_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_integer_testbench

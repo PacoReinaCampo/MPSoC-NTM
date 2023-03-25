@@ -43,6 +43,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/state/feedback/ntm_state_matrix
 vhdl2008 work ../../../../../../../rtl/vhdl/code/state/outputs/ntm_state_vector_output.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/state/outputs/ntm_state_vector_state.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_testbench.vhd

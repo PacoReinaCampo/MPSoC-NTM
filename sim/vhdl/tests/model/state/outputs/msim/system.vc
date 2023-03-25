@@ -47,6 +47,6 @@
 ../../../../../../../model/vhdl/code/state/outputs/model_state_vector_output.vhd
 ../../../../../../../model/vhdl/code/state/outputs/model_state_vector_state.vhd
 
-../../../../../../../bench/vhdl/tests/model/state/outputs/model_state_outputs_pkg.vhd
-../../../../../../../bench/vhdl/tests/model/state/outputs/model_state_outputs_stimulus.vhd
-../../../../../../../bench/vhdl/tests/model/state/outputs/model_state_outputs_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/model/state/outputs/model_state_outputs_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/state/outputs/model_state_outputs_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/state/outputs/model_state_outputs_testbench.vhd

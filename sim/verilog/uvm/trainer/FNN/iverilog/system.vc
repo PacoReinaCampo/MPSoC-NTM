@@ -78,6 +78,6 @@
 
 ../../../../../../rtl/verilog/code/controller/FNN/convolutional/ntm_controller.sv
 
-../../../../../../bench/verilog/tests/trainer/FNN/ntm_trainer_fnn_pkg.sv
-../../../../../../bench/verilog/tests/trainer/FNN/ntm_trainer_fnn_stimulus.sv
-../../../../../../bench/verilog/tests/trainer/FNN/ntm_trainer_fnn_testbench.sv
+../../../../../../bench/verilog/code/tests/trainer/FNN/ntm_trainer_fnn_pkg.sv
+../../../../../../bench/verilog/code/tests/trainer/FNN/ntm_trainer_fnn_stimulus.sv
+../../../../../../bench/verilog/code/tests/trainer/FNN/ntm_trainer_fnn_testbench.sv

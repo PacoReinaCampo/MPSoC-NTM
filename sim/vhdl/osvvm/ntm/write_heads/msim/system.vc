@@ -43,6 +43,6 @@
 ../../../../../../rtl/vhdl/code/ntm/write_heads/ntm_writing.vhd
 ../../../../../../rtl/vhdl/code/ntm/write_heads/ntm_erasing.vhd
 
-../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_pkg.vhd
-../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_stimulus.vhd
-../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_testbench.vhd
+../../../../../../bench/vhdl/code/osvvm/ntm/write_heads/ntm_write_heads_pkg.vhd
+../../../../../../bench/vhdl/code/osvvm/ntm/write_heads/ntm_write_heads_stimulus.vhd
+../../../../../../bench/vhdl/code/osvvm/ntm/write_heads/ntm_write_heads_testbench.vhd

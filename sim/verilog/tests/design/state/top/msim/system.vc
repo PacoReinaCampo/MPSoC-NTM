@@ -45,6 +45,6 @@
 
 ../../../../../../../rtl/verilog/code/state/top/ntm_state_top.sv
 
-../../../../../../../bench/verilog/tests/design/state/top/ntm_state_top_pkg.sv
-../../../../../../../bench/verilog/tests/design/state/top/ntm_state_top_stimulus.sv
-../../../../../../../bench/verilog/tests/design/state/top/ntm_state_top_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/state/top/ntm_state_top_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/state/top/ntm_state_top_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/state/top/ntm_state_top_testbench.sv

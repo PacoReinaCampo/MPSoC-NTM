@@ -20,6 +20,6 @@
 ../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.sv
 ../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_inverter.sv
 
-../../../../../../../bench/verilog/tests/design/arithmetic/modular/ntm_modular_pkg.sv
-../../../../../../../bench/verilog/tests/design/arithmetic/modular/ntm_modular_stimulus.sv
-../../../../../../../bench/verilog/tests/design/arithmetic/modular/ntm_modular_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_testbench.sv

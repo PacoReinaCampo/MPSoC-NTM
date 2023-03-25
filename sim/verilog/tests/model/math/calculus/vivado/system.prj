@@ -37,6 +37,6 @@ verilog work ../../../../../../../model/verilog/code/math/calculus/tensor/model_
 verilog work ../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_integration.sv
 verilog work ../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_softmax.sv
 
-verilog work ../../../../../../../bench/verilog/tests/model/math/calculus/model_calculus_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/model/math/calculus/model_calculus_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/model/math/calculus/model_calculus_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_testbench.sv

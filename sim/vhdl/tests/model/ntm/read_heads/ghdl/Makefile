@@ -40,9 +40,9 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/read_heads/model_reading.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/model/ntm/read_heads/model_read_heads_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/read_heads/model_read_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/read_heads/model_read_heads_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/read_heads/model_read_heads_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 model_read_heads_testbench

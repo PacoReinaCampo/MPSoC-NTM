@@ -37,6 +37,6 @@ vhdl2008 work ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_di
 vhdl2008 work ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_integration.vhd
 vhdl2008 work ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor_softmax.vhd
 
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_pkg.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_stimulus.vhd
-vhdl2008 work ../../../../../../bench/vhdl/osvvm/math/calculus/ntm_calculus_testbench.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_pkg.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_stimulus.vhd
+vhdl2008 work ../../../../../../bench/vhdl/code/osvvm/math/calculus/ntm_calculus_testbench.vhd

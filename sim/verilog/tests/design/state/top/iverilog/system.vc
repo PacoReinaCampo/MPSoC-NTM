@@ -115,6 +115,6 @@
 ../../../../../../../rtl/verilog/code/dnc/top/ntm_output_vector.sv
 ../../../../../../../rtl/verilog/code/dnc/top/ntm_interface_vector.sv
 
-../../../../../../../bench/verilog/tests/design/dnc/top/ntm_top_pkg.sv
-../../../../../../../bench/verilog/tests/design/dnc/top/ntm_top_stimulus.sv
-../../../../../../../bench/verilog/tests/design/dnc/top/ntm_top_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/top/ntm_top_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/top/ntm_top_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/dnc/top/ntm_top_testbench.sv

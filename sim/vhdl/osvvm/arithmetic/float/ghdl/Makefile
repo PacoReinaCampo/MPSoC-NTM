@@ -19,9 +19,9 @@ build:
 	ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/tensor/ntm_tensor_float_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/tensor/ntm_tensor_float_divider.vhd
 
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/math/float/ntm_float_pkg.vhd
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/math/float/ntm_float_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/math/float/ntm_float_testbench.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/float/ntm_float_pkg.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/float/ntm_float_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/float/ntm_float_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_float_testbench

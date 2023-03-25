@@ -34,6 +34,6 @@ verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_t
 verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_summation.sv
 verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
 
-verilog work ../../../../../../../bench/verilog/tests/model/math/algebra/model_algebra_pkg.sv
-verilog work ../../../../../../../bench/verilog/tests/model/math/algebra/model_algebra_stimulus.sv
-verilog work ../../../../../../../bench/verilog/tests/model/math/algebra/model_algebra_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_testbench.sv

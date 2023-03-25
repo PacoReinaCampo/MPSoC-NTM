@@ -31,6 +31,6 @@ verilog work ../../../../../../rtl/verilog/code/math/series/matrix/ntm_matrix_lo
 verilog work ../../../../../../rtl/verilog/code/math/series/matrix/ntm_matrix_sinh_function.sv
 verilog work ../../../../../../rtl/verilog/code/math/series/matrix/ntm_matrix_tanh_function.sv
 
-verilog work ../../../../../../bench/verilog/tests/math/series/ntm_series_pkg.sv
-verilog work ../../../../../../bench/verilog/tests/math/series/ntm_series_stimulus.sv
-verilog work ../../../../../../bench/verilog/tests/math/series/ntm_series_testbench.sv
+verilog work ../../../../../../bench/verilog/code/tests/math/series/ntm_series_pkg.sv
+verilog work ../../../../../../bench/verilog/code/tests/math/series/ntm_series_stimulus.sv
+verilog work ../../../../../../bench/verilog/code/tests/math/series/ntm_series_testbench.sv

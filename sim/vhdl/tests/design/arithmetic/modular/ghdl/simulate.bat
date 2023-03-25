@@ -23,9 +23,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/modular/tensor/ntm_tens
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/modular/tensor/ntm_tensor_modular_multiplier.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/modular/tensor/ntm_tensor_modular_inverter.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/modular/ntm_modular_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/modular/ntm_modular_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/math/modular/ntm_modular_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/modular/ntm_modular_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/modular/ntm_modular_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/modular/ntm_modular_testbench.vhd
 ghdl -m --std=08 ntm_modular_testbench
 ghdl -r --std=08 ntm_modular_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_modular_testbench.tree
 pause

@@ -40,6 +40,6 @@
 ../../../../../../../rtl/verilog/code/state/feedback/ntm_state_matrix_output.sv
 ../../../../../../../rtl/verilog/code/state/feedback/ntm_state_matrix_state.sv
 
-../../../../../../../bench/verilog/tests/design/state/feedback/ntm_state_feedback_pkg.sv
-../../../../../../../bench/verilog/tests/design/state/feedback/ntm_state_feedback_stimulus.sv
-../../../../../../../bench/verilog/tests/design/state/feedback/ntm_state_feedback_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/state/feedback/ntm_state_feedback_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/state/feedback/ntm_state_feedback_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/state/feedback/ntm_state_feedback_testbench.sv

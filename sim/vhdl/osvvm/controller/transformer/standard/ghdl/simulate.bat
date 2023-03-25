@@ -90,9 +90,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/stand
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/controller/transformer/standard/ntm_standard_transformer_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_testbench.vhd
 
 ghdl -m --std=08 ntm_standard_transformer_testbench
 ghdl -r --std=08 ntm_standard_transformer_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_standard_transformer_testbench.tree

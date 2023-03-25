@@ -79,9 +79,9 @@ ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/calculus/tensor/ntm_tensor
 
 ghdl -a --std=08 ../../../../../../rtl/vhdl/code/dnc/read_heads/dnc_read_heads.vhd
 
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_pkg.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_stimulus.vhd
-ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_testbench.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/dnc/read_heads/dnc_read_heads_pkg.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/dnc/read_heads/dnc_read_heads_stimulus.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/dnc/read_heads/dnc_read_heads_testbench.vhd
 
 ghdl -m --std=08 dnc_read_heads_testbench
 ghdl -r --std=08 dnc_read_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > dnc_read_heads_testbench.tree

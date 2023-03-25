@@ -46,9 +46,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/state/feedback/ntm_state_mat
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/state/outputs/ntm_state_vector_output.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/state/outputs/ntm_state_vector_state.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/design/state/outputs/ntm_state_outputs_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/outputs/ntm_state_outputs_testbench.vhd
 
 ghdl -m --std=08 ntm_state_outputs_testbench
 ghdl -r --std=08 ntm_state_outputs_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_outputs_testbench.tree
