@@ -1,4 +1,4 @@
-verilog
+code
 ├── tests
 │   ├── design
 │   │   ├── arithmetic
