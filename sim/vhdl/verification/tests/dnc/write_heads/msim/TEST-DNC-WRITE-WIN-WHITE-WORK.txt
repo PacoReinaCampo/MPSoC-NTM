@@ -1,4 +1,4 @@
-cd D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim
+cd D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim
 
-do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim/macros/design.do
-do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim/macros/verification.do
+do D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim/macros/design.do
+do D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/write_heads/msim/macros/verification.do

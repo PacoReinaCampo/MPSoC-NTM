@@ -87,6 +87,6 @@ verilog work ../../../../../../../../rtl/verilog/code/controller/transformer/con
 verilog work ../../../../../../../../rtl/verilog/code/controller/transformer/convolutional/ntm_output_gate_vector.sv
 verilog work ../../../../../../../../rtl/verilog/code/controller/transformer/convolutional/ntm_state_gate_vector.sv
 
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.sv
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.sv
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/transformer/convolutional/ntm_convolutional_transformer_pkg.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/transformer/convolutional/ntm_convolutional_transformer_stimulus.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/transformer/convolutional/ntm_convolutional_transformer_testbench.sv

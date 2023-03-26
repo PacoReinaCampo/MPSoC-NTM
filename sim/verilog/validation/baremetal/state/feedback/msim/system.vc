@@ -40,6 +40,6 @@
 ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_output.sv
 ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_state.sv
 
-../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/feedback/model_state_feedback_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/feedback/model_state_feedback_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/feedback/model_state_feedback_testbench.sv

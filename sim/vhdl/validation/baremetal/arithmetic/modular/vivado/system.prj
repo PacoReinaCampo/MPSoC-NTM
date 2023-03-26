@@ -1,0 +1,25 @@
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/scalar/model_scalar_modular_mod.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/scalar/model_scalar_modular_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/vector/model_vector_modular_mod.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/vector/model_vector_modular_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/vector/model_vector_modular_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/vector/model_vector_modular_inverter.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/matrix/model_matrix_modular_mod.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/matrix/model_matrix_modular_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/matrix/model_matrix_modular_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/matrix/model_matrix_modular_inverter.vhd
+
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/tensor/model_tensor_modular_mod.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/tensor/model_tensor_modular_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/tensor/model_tensor_modular_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/modular/tensor/model_tensor_modular_inverter.vhd
+
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/model/arithmetic/modular/model_modular_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/model/arithmetic/modular/model_modular_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/model/arithmetic/modular/model_modular_testbench.vhd

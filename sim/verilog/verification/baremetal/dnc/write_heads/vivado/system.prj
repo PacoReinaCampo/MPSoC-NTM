@@ -81,6 +81,6 @@ verilog work ../../../../../../../rtl/verilog/code/dnc/write_heads/ntm_write_key
 verilog work ../../../../../../../rtl/verilog/code/dnc/write_heads/ntm_write_strength.sv
 verilog work ../../../../../../../rtl/verilog/code/dnc/write_heads/ntm_write_vector.sv
 
-verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/write_heads/ntm_write_heads_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/write_heads/ntm_write_heads_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/tests/design/dnc/write_heads/ntm_write_heads_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/design/dnc/write_heads/ntm_write_heads_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/design/dnc/write_heads/ntm_write_heads_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/design/dnc/write_heads/ntm_write_heads_testbench.sv

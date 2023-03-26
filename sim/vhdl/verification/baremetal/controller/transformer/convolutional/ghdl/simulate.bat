@@ -90,7 +90,7 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/stand
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_output_gate_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/controller/transformer/standard/ntm_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/osvvm/controller/transformer/standard/ntm_standard_transformer_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/controller/transformer/standard/ntm_standard_transformer_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/controller/transformer/standard/ntm_standard_transformer_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/controller/transformer/standard/ntm_standard_transformer_testbench.vhd
 pause

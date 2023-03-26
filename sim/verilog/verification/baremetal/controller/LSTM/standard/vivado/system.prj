@@ -87,6 +87,6 @@ verilog work ../../../../../../../../rtl/verilog/code/controller/LSTM/standard/n
 verilog work ../../../../../../../../rtl/verilog/code/controller/LSTM/standard/ntm_output_gate_vector.sv
 verilog work ../../../../../../../../rtl/verilog/code/controller/LSTM/standard/ntm_state_gate_vector.sv
 
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
-verilog work ../../../../../../../../bench/verilog/code/tests/design/controller/LSTM/standard/ntm_standard_lstm_testbench.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
+verilog work ../../../../../../../../bench/verilog/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_testbench.sv

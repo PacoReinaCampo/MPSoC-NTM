@@ -1,33 +1,33 @@
 all: build simulate
 
 build:
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/pkg/ntm_math_pkg.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/pkg/ntm_math_pkg.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_adder.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_multiplier.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_divider.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_adder.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_multiplier.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/scalar/ntm_scalar_float_divider.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_adder.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_multiplier.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_divider.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_adder.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_multiplier.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/vector/ntm_vector_float_divider.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_adder.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_multiplier.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_divider.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_adder.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_multiplier.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/matrix/ntm_matrix_float_divider.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/scalar/ntm_scalar_logistic_function.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/scalar/ntm_scalar_oneplus_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/scalar/ntm_scalar_logistic_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/scalar/ntm_scalar_oneplus_function.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/vector/ntm_vector_logistic_function.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/vector/ntm_vector_oneplus_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/vector/ntm_vector_logistic_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/vector/ntm_vector_oneplus_function.vhd
 
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/matrix/ntm_matrix_logistic_function.vhd
-    ghdl -a --std=08 ../../../../../../rtl/vhdl/code/math/function/matrix/ntm_matrix_oneplus_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/matrix/ntm_matrix_logistic_function.vhd
+    ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/matrix/ntm_matrix_oneplus_function.vhd
 
-    ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/function/ntm_function_pkg.vhd
-    ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/function/ntm_function_stimulus.vhd
-    ghdl -a --std=08 ../../../../../../bench/vhdl/code/osvvm/math/function/ntm_function_testbench.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/function/ntm_function_pkg.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/function/ntm_function_stimulus.vhd
+    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/function/ntm_function_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_function_testbench

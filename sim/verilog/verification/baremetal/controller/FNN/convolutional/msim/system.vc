@@ -78,6 +78,6 @@
 
 ../../../../../../../../rtl/verilog/code/controller/FNN/convolutional/ntm_controller.sv
 
-../../../../../../../../bench/verilog/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
-../../../../../../../../bench/verilog/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
-../../../../../../../../bench/verilog/code/tests/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
+../../../../../../../../bench/verilog/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
+../../../../../../../../bench/verilog/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
+../../../../../../../../bench/verilog/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv

@@ -97,6 +97,6 @@
 ../../../../../../../rtl/vhdl/code/controller/LSTM/standard/ntm_output_gate_vector.vhd
 ../../../../../../../rtl/vhdl/code/controller/LSTM/standard/ntm_state_gate_vector.vhd
 
-../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
-../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
-../../../../../../../bench/vhdl/code/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd

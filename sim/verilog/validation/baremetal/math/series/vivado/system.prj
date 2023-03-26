@@ -31,6 +31,6 @@ verilog work ../../../../../../../model/verilog/code/math/series/matrix/model_ma
 verilog work ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_sinh_function.sv
 verilog work ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_tanh_function.sv
 
-verilog work ../../../../../../../bench/verilog/code/tests/model/math/series/model_series_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/math/series/model_series_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/math/series/model_series_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/math/series/model_series_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/math/series/model_series_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/math/series/model_series_testbench.sv

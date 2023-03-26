@@ -78,6 +78,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/FNN/ntm_trainer.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/FNN/standard/ntm_controller.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/standard/ntm_standard_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/standard/ntm_standard_fnn_testbench.vhd

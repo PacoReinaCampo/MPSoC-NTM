@@ -87,6 +87,6 @@
 ../../../../../../../../model/verilog/code/controller/transformer/standard/model_output_gate_vector.sv
 ../../../../../../../../model/verilog/code/controller/transformer/standard/model_state_gate_vector.sv
 
-../../../../../../../../bench/verilog/code/tests/model/controller/transformer/standard/model_standard_transformer_pkg.sv
-../../../../../../../../bench/verilog/code/tests/model/controller/transformer/standard/model_standard_transformer_stimulus.sv
-../../../../../../../../bench/verilog/code/tests/model/controller/transformer/standard/model_standard_transformer_testbench.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/transformer/standard/model_standard_transformer_pkg.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/transformer/standard/model_standard_transformer_stimulus.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/transformer/standard/model_standard_transformer_testbench.sv

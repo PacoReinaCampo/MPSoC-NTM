@@ -1,21 +1,21 @@
-../../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
+../../../../../../../rtl/vhdl/code/pkg/ntm_arithmetic_pkg.vhd
 
-../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
 
-../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_adder.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_divider.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_adder.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/vector/ntm_vector_float_divider.vhd
 
-../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
 
-../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_adder.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_multiplier.vhd
-../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_divider.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_adder.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_multiplier.vhd
+../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/ntm_tensor_float_divider.vhd
 
-../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_pkg.vhd
-../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_stimulus.vhd
-../../../../../../bench/vhdl/code/osvvm/arithmetic/float/ntm_float_testbench.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/arithmetic/float/ntm_float_pkg.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/arithmetic/float/ntm_float_stimulus.vhd
+../../../../../../../bench/vhdl/code/baremetal/design/arithmetic/float/ntm_float_testbench.vhd

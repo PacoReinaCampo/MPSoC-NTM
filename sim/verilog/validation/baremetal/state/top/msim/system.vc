@@ -45,6 +45,6 @@
 
 ../../../../../../../model/verilog/code/state/top/model_state_top.sv
 
-../../../../../../../bench/verilog/code/tests/model/state/top/model_state_top_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/state/top/model_state_top_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/state/top/model_state_top_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/top/model_state_top_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/top/model_state_top_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/state/top/model_state_top_testbench.sv

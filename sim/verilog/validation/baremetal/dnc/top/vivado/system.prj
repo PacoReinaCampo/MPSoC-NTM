@@ -121,6 +121,6 @@ verilog work ../../../../../../../model/verilog/code/dnc/top/model_top.sv
 verilog work ../../../../../../../model/verilog/code/dnc/top/model_output_vector.sv
 verilog work ../../../../../../../model/verilog/code/dnc/top/model_interface_vector.sv
 
-verilog work ../../../../../../../bench/verilog/code/tests/model/dnc/top/model_top_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/dnc/top/model_top_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/dnc/top/model_top_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/dnc/top/model_top_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/dnc/top/model_top_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/dnc/top/model_top_testbench.sv

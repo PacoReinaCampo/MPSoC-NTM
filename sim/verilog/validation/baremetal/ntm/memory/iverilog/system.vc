@@ -71,6 +71,6 @@
 ../../../../../../../model/verilog/code/ntm/memory/model_addressing.sv
 ../../../../../../../model/verilog/code/ntm/memory/model_content_based_addressing.sv
 
-../../../../../../../bench/verilog/code/tests/model/ntm/memory/model_memory_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/ntm/memory/model_memory_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/ntm/memory/model_memory_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/memory/model_memory_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/memory/model_memory_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/memory/model_memory_testbench.sv

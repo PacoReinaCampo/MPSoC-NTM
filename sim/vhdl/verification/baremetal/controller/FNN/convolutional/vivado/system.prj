@@ -78,6 +78,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/FNN/ntm_trainer.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/FNN/convolutional/ntm_controller.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/baremetal/design/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd

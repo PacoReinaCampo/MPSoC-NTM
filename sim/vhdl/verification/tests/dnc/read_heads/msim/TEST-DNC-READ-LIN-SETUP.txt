@@ -1,4 +1,4 @@
-cd /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim
+cd /home/usuario/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim
 
-do /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/design.do
-do /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/verification.do
+do /home/usuario/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/design.do
+do /home/usuario/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/verification.do

@@ -31,6 +31,6 @@
 ../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_differentiation.sv
 ../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_integration.sv
 
-../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/math/calculus/model_calculus_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/calculus/model_calculus_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/calculus/model_calculus_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/calculus/model_calculus_testbench.sv

@@ -94,6 +94,6 @@
 ../../../../../../../model/verilog/code/ntm/top/model_output_vector.sv
 ../../../../../../../model/verilog/code/ntm/top/model_top.sv
 
-../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/ntm/top/model_top_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/top/model_top_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/top/model_top_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/ntm/top/model_top_testbench.sv

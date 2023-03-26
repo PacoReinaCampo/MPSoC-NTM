@@ -37,6 +37,6 @@ verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_t
 
 verilog work ../../../../../../../model/verilog/code/ntm/read_heads/model_reading.sv
 
-verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/read_heads/model_read_heads_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/read_heads/model_read_heads_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/ntm/read_heads/model_read_heads_testbench.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/ntm/read_heads/model_read_heads_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/ntm/read_heads/model_read_heads_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/baremetal/model/ntm/read_heads/model_read_heads_testbench.sv

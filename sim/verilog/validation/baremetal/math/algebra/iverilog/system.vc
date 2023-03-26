@@ -31,6 +31,6 @@
 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
 
-../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/math/algebra/model_algebra_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/algebra/model_algebra_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/algebra/model_algebra_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/math/algebra/model_algebra_testbench.sv

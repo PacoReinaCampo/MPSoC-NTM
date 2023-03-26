@@ -22,6 +22,6 @@
 ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_logistic_function.sv
 ../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_oneplus_function.sv
 
-../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_pkg.sv
-../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_stimulus.sv
-../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/design/math/function/ntm_function_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/design/math/function/ntm_function_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/design/math/function/ntm_function_testbench.sv

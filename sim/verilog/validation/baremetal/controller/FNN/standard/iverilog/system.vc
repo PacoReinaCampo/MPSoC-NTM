@@ -68,6 +68,6 @@
 
 ../../../../../../../../model/verilog/code/controller/FNN/standard/model_controller.sv
 
-../../../../../../../../bench/verilog/code/tests/model/controller/FNN/standard/model_standard_fnn_pkg.sv
-../../../../../../../../bench/verilog/code/tests/model/controller/FNN/standard/model_standard_fnn_stimulus.sv
-../../../../../../../../bench/verilog/code/tests/model/controller/FNN/standard/model_standard_fnn_testbench.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/FNN/standard/model_standard_fnn_pkg.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/FNN/standard/model_standard_fnn_stimulus.sv
+../../../../../../../../bench/verilog/code/baremetal/model/controller/FNN/standard/model_standard_fnn_testbench.sv

@@ -24,6 +24,6 @@
 ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_multiplier.sv
 ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_divider.sv
 
-../../../../../../../bench/verilog/code/tests/model/arithmetic/float/model_float_pkg.sv
-../../../../../../../bench/verilog/code/tests/model/arithmetic/float/model_float_stimulus.sv
-../../../../../../../bench/verilog/code/tests/model/arithmetic/float/model_float_testbench.sv
+../../../../../../../bench/verilog/code/baremetal/model/arithmetic/float/model_float_pkg.sv
+../../../../../../../bench/verilog/code/baremetal/model/arithmetic/float/model_float_stimulus.sv
+../../../../../../../bench/verilog/code/baremetal/model/arithmetic/float/model_float_testbench.sv
