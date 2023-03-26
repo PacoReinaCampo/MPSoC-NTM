@@ -1,0 +1,21 @@
+verilog work ../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/scalar/model_scalar_integer_adder.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/scalar/model_scalar_integer_multiplier.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/scalar/model_scalar_integer_divider.sv
+
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_adder.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_multiplier.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_divider.sv
+
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_adder.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_divider.sv
+
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/model_tensor_integer_adder.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/model_tensor_integer_multiplier.sv
+verilog work ../../../../../../../model/verilog/code/arithmetic/integer/tensor/model_tensor_integer_divider.sv
+
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_pkg.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_stimulus.sv
+verilog work ../../../../../../../bench/verilog/code/tests/model/arithmetic/integer/model_integer_testbench.sv

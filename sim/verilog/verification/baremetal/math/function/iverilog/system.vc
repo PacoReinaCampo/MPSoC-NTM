@@ -1,51 +1,51 @@
-../../../../../../rtl/verilog/code/pkg/ntm_arithmetic_pkg.sv
-../../../../../../rtl/verilog/code/pkg/ntm_math_pkg.sv
+../../../../../../../rtl/verilog/code/pkg/ntm_arithmetic_pkg.sv
+../../../../../../../rtl/verilog/code/pkg/ntm_math_pkg.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_float_divider.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_float_divider.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_float_divider.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/scalar/ntm_scalar_divider.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/vector/ntm_vector_divider.sv
 
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_divider.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/float/matrix/ntm_matrix_divider.sv
 
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_cosh_function.sv
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_exponentiator_function.sv
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_logistic_function.sv
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_oneplus_function.sv
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_sinh_function.sv
-../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_tanh_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_cosh_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_exponentiator_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_logistic_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_oneplus_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_sinh_function.sv
+../../../../../../../rtl/verilog/code/math/function/scalar/ntm_scalar_tanh_function.sv
 
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_cosh_function.sv
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_exponentiator_function.sv
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_logistic_function.sv
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_oneplus_function.sv
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_sinh_function.sv
-../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_tanh_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_cosh_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_exponentiator_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_logistic_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_oneplus_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_sinh_function.sv
+../../../../../../../rtl/verilog/code/math/function/vector/ntm_vector_tanh_function.sv
 
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_cosh_function.sv
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_exponentiator_function.sv
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_logistic_function.sv
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_oneplus_function.sv
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_sinh_function.sv
-../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_tanh_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_cosh_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_exponentiator_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_logistic_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_oneplus_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_sinh_function.sv
+../../../../../../../rtl/verilog/code/math/function/matrix/ntm_matrix_tanh_function.sv
 
-../../../../../../bench/verilog/code/tests/math/function/ntm_function_pkg.sv
-../../../../../../bench/verilog/code/tests/math/function/ntm_function_stimulus.sv
-../../../../../../bench/verilog/code/tests/math/function/ntm_function_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/math/function/ntm_function_testbench.sv

@@ -1,25 +1,25 @@
-../../../../../../rtl/verilog/code/pkg/ntm_arithmetic_pkg.sv
+../../../../../../../rtl/verilog/code/pkg/ntm_arithmetic_pkg.sv
 
-../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_mod.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_inverter.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_mod.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/scalar/ntm_scalar_modular_inverter.sv
 
-../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_mod.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_inverter.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_mod.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/vector/ntm_vector_modular_inverter.sv
 
-../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_mod.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_inverter.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_mod.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/matrix/ntm_matrix_modular_inverter.sv
 
-../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_mod.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_adder.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.sv
-../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_inverter.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_mod.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_adder.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.sv
+../../../../../../../rtl/verilog/code/arithmetic/modular/tensor/ntm_tensor_modular_inverter.sv
 
-../../../../../../bench/verilog/code/tests/arithmetic/modular/ntm_modular_pkg.sv
-../../../../../../bench/verilog/code/tests/arithmetic/modular/ntm_modular_stimulus.sv
-../../../../../../bench/verilog/code/tests/arithmetic/modular/ntm_modular_testbench.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_pkg.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_stimulus.sv
+../../../../../../../bench/verilog/code/tests/design/arithmetic/modular/ntm_modular_testbench.sv

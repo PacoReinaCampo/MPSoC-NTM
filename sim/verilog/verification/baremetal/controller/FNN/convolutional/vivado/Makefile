@@ -48,8 +48,8 @@ build:
 	xvlog -prj system.prj
 
 simulate:
-	xelab ntm_convolutional_fnn_testbench
-	xsim -R ntm_convolutional_fnn_testbench
+	xelab model_convolutional_fnn_testbench
+	xsim -R model_convolutional_fnn_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

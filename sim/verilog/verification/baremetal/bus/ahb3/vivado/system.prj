@@ -1,3 +1,0 @@
-sv work ../../../../../../uvm/bus/ahb3/bench/verilog/code/testbench.sv
-
-sv work ../../../../../../uvm/bus/ahb3/rtl/verilog/code/design.sv
