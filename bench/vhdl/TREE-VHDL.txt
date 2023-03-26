@@ -1,5 +1,5 @@
 code
-├── osvvm
+├── baremetal
 │   ├── arithmetic
 │   │   ├── float
 │   │   │   ├── ntm_float_checker.vhd
