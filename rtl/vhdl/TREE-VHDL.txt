@@ -133,8 +133,6 @@ code
 │   │   └── dnc_top.vhd
 │   └── write_heads
 │       └── dnc_write_heads.vhd
-├── intro
-│   └── ntm_intro_adder.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -254,4 +252,4 @@ code
         ├── ntm_input_trainer.vhd
         └── ntm_output_trainer.vhd
 
-66 directories, 188 files
+65 directories, 187 files

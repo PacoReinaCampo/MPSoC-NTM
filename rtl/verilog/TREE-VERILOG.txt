@@ -140,8 +140,6 @@ code
 │       ├── dnc_write_key.sv
 │       ├── dnc_write_strength.sv
 │       └── dnc_write_vector.sv
-├── intro
-│   └── ntm_intro.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -259,4 +257,4 @@ code
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
 
-66 directories, 193 files
+65 directories, 192 files

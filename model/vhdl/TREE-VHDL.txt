@@ -133,8 +133,6 @@ code
 │   │   └── model_top.vhd
 │   └── write_heads
 │       └── model_write_heads.vhd
-├── intro
-│   └── model_intro_adder.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -254,4 +252,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-66 directories, 188 files
+65 directories, 187 files
