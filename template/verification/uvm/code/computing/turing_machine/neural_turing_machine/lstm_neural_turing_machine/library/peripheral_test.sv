@@ -4,7 +4,7 @@ class peripheral_test extends uvm_test;
     super.new(name, parent);
   endfunction
 
-  peripheral_environment               enviroment;
+  peripheral_environment               environment;
   bit                    [`LENGTH-1:0] pattern     = 4'b1011;
   peripheral_sequence                  seq;
   virtual design_if                    vif;
@@ -13,12 +13,12 @@ class peripheral_test extends uvm_test;
     super.build_phase(phase);
 
     // Create the environment
-    enviroment = peripheral_environment::type_id::create("enviroment", this);
+    environment = peripheral_environment::type_id::create("environment", this);
 
     // Get virtual IF handle from top level and pass it to everything
     // in peripheral_environment level
     if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif)) `uvm_fatal("TEST", "Did not get vif")
-    uvm_config_db#(virtual design_if)::set(this, "enviroment.agent.*", "des_vif", vif);
+    uvm_config_db#(virtual design_if)::set(this, "environment.agent.*", "des_vif", vif);
 
     // Setup pattern queue and place into config db
     uvm_config_db#(bit [`LENGTH-1:0])::set(this, "*", "ref_pattern", pattern);
@@ -31,7 +31,7 @@ class peripheral_test extends uvm_test;
   virtual task run_phase(uvm_phase phase);
     phase.raise_objection(this);
     apply_reset();
-    seq.start(enviroment.agent.sequencer);
+    seq.start(environment.agent.sequencer);
     #200;
     phase.drop_objection(this);
   endtask

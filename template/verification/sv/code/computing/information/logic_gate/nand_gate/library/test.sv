@@ -1,5 +1,5 @@
 class test;
-  enviroment e0;
+  environment e0;
 
   function new();
     e0 = new;

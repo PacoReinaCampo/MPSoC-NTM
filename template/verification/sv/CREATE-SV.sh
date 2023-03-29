@@ -45,7 +45,7 @@
 touch code/classes/philosophers/ntm_philosophers/application/switch_if.sv
 touch code/classes/philosophers/ntm_philosophers/application/switch.sv
 touch code/classes/philosophers/ntm_philosophers/library/driver.sv
-touch code/classes/philosophers/ntm_philosophers/library/enviroment.sv
+touch code/classes/philosophers/ntm_philosophers/library/environment.sv
 touch code/classes/philosophers/ntm_philosophers/library/generator.sv
 touch code/classes/philosophers/ntm_philosophers/library/monitor.sv
 touch code/classes/philosophers/ntm_philosophers/library/scoreboard.sv
@@ -55,7 +55,7 @@ touch code/classes/philosophers/ntm_philosophers/library/test.sv
 touch code/classes/soldiers/ntm_soldiers/application/switch_if.sv
 touch code/classes/soldiers/ntm_soldiers/application/switch.sv
 touch code/classes/soldiers/ntm_soldiers/library/driver.sv
-touch code/classes/soldiers/ntm_soldiers/library/enviroment.sv
+touch code/classes/soldiers/ntm_soldiers/library/environment.sv
 touch code/classes/soldiers/ntm_soldiers/library/generator.sv
 touch code/classes/soldiers/ntm_soldiers/library/monitor.sv
 touch code/classes/soldiers/ntm_soldiers/library/scoreboard.sv
@@ -65,7 +65,7 @@ touch code/classes/soldiers/ntm_soldiers/library/test.sv
 touch code/classes/workers/ntm_workers/application/switch_if.sv
 touch code/classes/workers/ntm_workers/application/switch.sv
 touch code/classes/workers/ntm_workers/library/driver.sv
-touch code/classes/workers/ntm_workers/library/enviroment.sv
+touch code/classes/workers/ntm_workers/library/environment.sv
 touch code/classes/workers/ntm_workers/library/generator.sv
 touch code/classes/workers/ntm_workers/library/monitor.sv
 touch code/classes/workers/ntm_workers/library/scoreboard.sv
@@ -75,7 +75,7 @@ touch code/classes/workers/ntm_workers/library/test.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/switch.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/driver.sv
-touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/environment.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/generator.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/monitor.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/scoreboard.sv
@@ -85,7 +85,7 @@ touch code/computing/advanced_computer_architecture/multi_processor_system_on_ch
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/application/switch.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/driver.sv
-touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/environment.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/generator.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/monitor.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd/library/scoreboard.sv
@@ -95,7 +95,7 @@ touch code/computing/advanced_computer_architecture/processing_unit/mimd/library
 touch code/computing/advanced_computer_architecture/processing_unit/misd/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd/application/switch.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd/library/driver.sv
-touch code/computing/advanced_computer_architecture/processing_unit/misd/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/processing_unit/misd/library/environment.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd/library/generator.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd/library/monitor.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd/library/scoreboard.sv
@@ -105,7 +105,7 @@ touch code/computing/advanced_computer_architecture/processing_unit/misd/library
 touch code/computing/advanced_computer_architecture/processing_unit/simd/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/processing_unit/simd/application/switch.sv
 touch code/computing/advanced_computer_architecture/processing_unit/simd/library/driver.sv
-touch code/computing/advanced_computer_architecture/processing_unit/simd/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/processing_unit/simd/library/environment.sv
 touch code/computing/advanced_computer_architecture/processing_unit/simd/library/generator.sv
 touch code/computing/advanced_computer_architecture/processing_unit/simd/library/monitor.sv
 touch code/computing/advanced_computer_architecture/processing_unit/simd/library/scoreboard.sv
@@ -115,7 +115,7 @@ touch code/computing/advanced_computer_architecture/processing_unit/simd/library
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/application/switch.sv
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/driver.sv
-touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/environment.sv
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/generator.sv
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/monitor.sv
 touch code/computing/advanced_computer_architecture/processing_unit/sisd/library/scoreboard.sv
@@ -125,7 +125,7 @@ touch code/computing/advanced_computer_architecture/processing_unit/sisd/library
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/switch.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/driver.sv
-touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/environment.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/generator.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/monitor.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/scoreboard.sv
@@ -135,7 +135,7 @@ touch code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/l
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/application/switch_if.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/application/switch.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/driver.sv
-touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/enviroment.sv
+touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/environment.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/generator.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/monitor.sv
 touch code/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/scoreboard.sv
@@ -145,7 +145,7 @@ touch code/computing/advanced_computer_architecture/system_on_chip/network_on_ch
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch_if.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/driver.sv
-touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/enviroment.sv
+touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/environment.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/generator.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/monitor.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/scoreboard.sv
@@ -155,7 +155,7 @@ touch code/computing/computer_architecture/harvard_architecture/pu_or1k/library/
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/application/switch_if.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/application/switch.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/driver.sv
-touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/enviroment.sv
+touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/environment.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/generator.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/monitor.sv
 touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library/scoreboard.sv
@@ -165,7 +165,7 @@ touch code/computing/computer_architecture/harvard_architecture/pu_riscv/library
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/application/switch_if.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/application/switch.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/driver.sv
-touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/enviroment.sv
+touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/environment.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/generator.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/monitor.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/library/scoreboard.sv
@@ -175,7 +175,7 @@ touch code/computing/computer_architecture/von_neumann_architecture/pu_or1k/libr
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/switch_if.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/switch.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/driver.sv
-touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/enviroment.sv
+touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/environment.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/generator.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/monitor.sv
 touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/scoreboard.sv
@@ -185,7 +185,7 @@ touch code/computing/computer_architecture/von_neumann_architecture/pu_riscv/lib
 touch code/computing/information/bit/bit/application/switch_if.sv
 touch code/computing/information/bit/bit/application/switch.sv
 touch code/computing/information/bit/bit/library/driver.sv
-touch code/computing/information/bit/bit/library/enviroment.sv
+touch code/computing/information/bit/bit/library/environment.sv
 touch code/computing/information/bit/bit/library/generator.sv
 touch code/computing/information/bit/bit/library/monitor.sv
 touch code/computing/information/bit/bit/library/scoreboard.sv
@@ -195,7 +195,7 @@ touch code/computing/information/bit/bit/library/test.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/application/switch_if.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/application/switch.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/library/driver.sv
-touch code/computing/information/combinational_logic/arithmetic_circuits/library/enviroment.sv
+touch code/computing/information/combinational_logic/arithmetic_circuits/library/environment.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/library/generator.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/library/monitor.sv
 touch code/computing/information/combinational_logic/arithmetic_circuits/library/scoreboard.sv
@@ -205,7 +205,7 @@ touch code/computing/information/combinational_logic/arithmetic_circuits/library
 touch code/computing/information/combinational_logic/logic_circuits/application/switch_if.sv
 touch code/computing/information/combinational_logic/logic_circuits/application/switch.sv
 touch code/computing/information/combinational_logic/logic_circuits/library/driver.sv
-touch code/computing/information/combinational_logic/logic_circuits/library/enviroment.sv
+touch code/computing/information/combinational_logic/logic_circuits/library/environment.sv
 touch code/computing/information/combinational_logic/logic_circuits/library/generator.sv
 touch code/computing/information/combinational_logic/logic_circuits/library/monitor.sv
 touch code/computing/information/combinational_logic/logic_circuits/library/scoreboard.sv
@@ -215,7 +215,7 @@ touch code/computing/information/combinational_logic/logic_circuits/library/test
 touch code/computing/information/finite_state_machine/finite_state_machine/application/switch_if.sv
 touch code/computing/information/finite_state_machine/finite_state_machine/application/switch.sv
 touch code/computing/information/finite_state_machine/finite_state_machine/library/driver.sv
-touch code/computing/information/finite_state_machine/finite_state_machine/library/enviroment.sv
+touch code/computing/information/finite_state_machine/finite_state_machine/library/environment.sv
 touch code/computing/information/finite_state_machine/finite_state_machine/library/generator.sv
 touch code/computing/information/finite_state_machine/finite_state_machine/library/monitor.sv
 touch code/computing/information/finite_state_machine/finite_state_machine/library/scoreboard.sv
@@ -225,7 +225,7 @@ touch code/computing/information/finite_state_machine/finite_state_machine/libra
 touch code/computing/information/logic_gate/and_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/and_gate/application/switch.sv
 touch code/computing/information/logic_gate/and_gate/library/driver.sv
-touch code/computing/information/logic_gate/and_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/and_gate/library/environment.sv
 touch code/computing/information/logic_gate/and_gate/library/generator.sv
 touch code/computing/information/logic_gate/and_gate/library/monitor.sv
 touch code/computing/information/logic_gate/and_gate/library/scoreboard.sv
@@ -235,7 +235,7 @@ touch code/computing/information/logic_gate/and_gate/library/test.sv
 touch code/computing/information/logic_gate/nand_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/nand_gate/application/switch.sv
 touch code/computing/information/logic_gate/nand_gate/library/driver.sv
-touch code/computing/information/logic_gate/nand_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/nand_gate/library/environment.sv
 touch code/computing/information/logic_gate/nand_gate/library/generator.sv
 touch code/computing/information/logic_gate/nand_gate/library/monitor.sv
 touch code/computing/information/logic_gate/nand_gate/library/scoreboard.sv
@@ -245,7 +245,7 @@ touch code/computing/information/logic_gate/nand_gate/library/test.sv
 touch code/computing/information/logic_gate/nor_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/nor_gate/application/switch.sv
 touch code/computing/information/logic_gate/nor_gate/library/driver.sv
-touch code/computing/information/logic_gate/nor_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/nor_gate/library/environment.sv
 touch code/computing/information/logic_gate/nor_gate/library/generator.sv
 touch code/computing/information/logic_gate/nor_gate/library/monitor.sv
 touch code/computing/information/logic_gate/nor_gate/library/scoreboard.sv
@@ -255,7 +255,7 @@ touch code/computing/information/logic_gate/nor_gate/library/test.sv
 touch code/computing/information/logic_gate/not_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/not_gate/application/switch.sv
 touch code/computing/information/logic_gate/not_gate/library/driver.sv
-touch code/computing/information/logic_gate/not_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/not_gate/library/environment.sv
 touch code/computing/information/logic_gate/not_gate/library/generator.sv
 touch code/computing/information/logic_gate/not_gate/library/monitor.sv
 touch code/computing/information/logic_gate/not_gate/library/scoreboard.sv
@@ -265,7 +265,7 @@ touch code/computing/information/logic_gate/not_gate/library/test.sv
 touch code/computing/information/logic_gate/or_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/or_gate/application/switch.sv
 touch code/computing/information/logic_gate/or_gate/library/driver.sv
-touch code/computing/information/logic_gate/or_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/or_gate/library/environment.sv
 touch code/computing/information/logic_gate/or_gate/library/generator.sv
 touch code/computing/information/logic_gate/or_gate/library/monitor.sv
 touch code/computing/information/logic_gate/or_gate/library/scoreboard.sv
@@ -275,7 +275,7 @@ touch code/computing/information/logic_gate/or_gate/library/test.sv
 touch code/computing/information/logic_gate/xnor_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/xnor_gate/application/switch.sv
 touch code/computing/information/logic_gate/xnor_gate/library/driver.sv
-touch code/computing/information/logic_gate/xnor_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/xnor_gate/library/environment.sv
 touch code/computing/information/logic_gate/xnor_gate/library/generator.sv
 touch code/computing/information/logic_gate/xnor_gate/library/monitor.sv
 touch code/computing/information/logic_gate/xnor_gate/library/scoreboard.sv
@@ -285,7 +285,7 @@ touch code/computing/information/logic_gate/xnor_gate/library/test.sv
 touch code/computing/information/logic_gate/xor_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/xor_gate/application/switch.sv
 touch code/computing/information/logic_gate/xor_gate/library/driver.sv
-touch code/computing/information/logic_gate/xor_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/xor_gate/library/environment.sv
 touch code/computing/information/logic_gate/xor_gate/library/generator.sv
 touch code/computing/information/logic_gate/xor_gate/library/monitor.sv
 touch code/computing/information/logic_gate/xor_gate/library/scoreboard.sv
@@ -295,7 +295,7 @@ touch code/computing/information/logic_gate/xor_gate/library/test.sv
 touch code/computing/information/logic_gate/yes_gate/application/switch_if.sv
 touch code/computing/information/logic_gate/yes_gate/application/switch.sv
 touch code/computing/information/logic_gate/yes_gate/library/driver.sv
-touch code/computing/information/logic_gate/yes_gate/library/enviroment.sv
+touch code/computing/information/logic_gate/yes_gate/library/environment.sv
 touch code/computing/information/logic_gate/yes_gate/library/generator.sv
 touch code/computing/information/logic_gate/yes_gate/library/monitor.sv
 touch code/computing/information/logic_gate/yes_gate/library/scoreboard.sv
@@ -305,7 +305,7 @@ touch code/computing/information/logic_gate/yes_gate/library/test.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/application/switch_if.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/application/switch.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/driver.sv
-touch code/computing/information/pushdown_automaton/pushdown_automaton/library/enviroment.sv
+touch code/computing/information/pushdown_automaton/pushdown_automaton/library/environment.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/generator.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/monitor.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/scoreboard.sv
@@ -315,7 +315,7 @@ touch code/computing/information/pushdown_automaton/pushdown_automaton/library/t
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/switch_if.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/switch.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/driver.sv
-touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/enviroment.sv
+touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/environment.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/generator.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/monitor.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/scoreboard.sv
@@ -325,7 +325,7 @@ touch code/computing/neural_network/feedforward_neural_network/feedforward_neura
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/application/switch_if.sv
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/application/switch.sv
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/driver.sv
-touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/enviroment.sv
+touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/environment.sv
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/generator.sv
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/monitor.sv
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/scoreboard.sv
@@ -335,7 +335,7 @@ touch code/computing/neural_network/long_short_term_memory_neural_network/long_s
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/application/switch_if.sv
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/application/switch.sv
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/driver.sv
-touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/enviroment.sv
+touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/environment.sv
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/generator.sv
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/monitor.sv
 touch code/computing/neural_network/transformer_neural_network/transformer_neural_network/library/scoreboard.sv
@@ -345,7 +345,7 @@ touch code/computing/neural_network/transformer_neural_network/transformer_neura
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/application/switch_if.sv
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/application/switch.sv
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/driver.sv
-touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/enviroment.sv
+touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/environment.sv
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/generator.sv
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/monitor.sv
 touch code/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/scoreboard.sv
@@ -355,7 +355,7 @@ touch code/computing/turing_machine/differentiable_neural_computer/feedforward_d
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/application/switch_if.sv
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/application/switch.sv
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/driver.sv
-touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/enviroment.sv
+touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/environment.sv
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/generator.sv
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/monitor.sv
 touch code/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/scoreboard.sv
@@ -365,7 +365,7 @@ touch code/computing/turing_machine/differentiable_neural_computer/lstm_differen
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/application/switch_if.sv
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/application/switch.sv
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/driver.sv
-touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/enviroment.sv
+touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/environment.sv
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/generator.sv
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/monitor.sv
 touch code/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/scoreboard.sv
@@ -375,7 +375,7 @@ touch code/computing/turing_machine/differentiable_neural_computer/transformer_d
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/application/switch_if.sv
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/application/switch.sv
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/driver.sv
-touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/enviroment.sv
+touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/environment.sv
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/generator.sv
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/monitor.sv
 touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/scoreboard.sv
@@ -385,7 +385,7 @@ touch code/computing/turing_machine/neural_turing_machine/feedforward_neural_tur
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/application/switch_if.sv
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/application/switch.sv
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/driver.sv
-touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/enviroment.sv
+touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/environment.sv
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/generator.sv
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/monitor.sv
 touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_machine/library/scoreboard.sv
@@ -395,7 +395,7 @@ touch code/computing/turing_machine/neural_turing_machine/lstm_neural_turing_mac
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/application/switch_if.sv
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/application/switch.sv
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/driver.sv
-touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/enviroment.sv
+touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/environment.sv
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/generator.sv
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/monitor.sv
 touch code/computing/turing_machine/neural_turing_machine/transformer_neural_turing_machine/library/scoreboard.sv
