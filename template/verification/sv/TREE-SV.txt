@@ -3,7 +3,6 @@ code
 │   ├── philosophers
 │   │   └── ntm_philosophers
 │   │       ├── application
-│   │       │   ├── switch_if.sv
 │   │       │   └── switch.sv
 │   │       └── library
 │   │           ├── driver.sv
@@ -11,13 +10,13 @@ code
 │   │           ├── generator.sv
 │   │           ├── monitor.sv
 │   │           ├── scoreboard.sv
+│   │           ├── switch_if.sv
 │   │           ├── switch_item.sv
 │   │           ├── testbench.sv
 │   │           └── test.sv
 │   ├── soldiers
 │   │   └── ntm_soldiers
 │   │       ├── application
-│   │       │   ├── switch_if.sv
 │   │       │   └── switch.sv
 │   │       └── library
 │   │           ├── driver.sv
@@ -25,13 +24,13 @@ code
 │   │           ├── generator.sv
 │   │           ├── monitor.sv
 │   │           ├── scoreboard.sv
+│   │           ├── switch_if.sv
 │   │           ├── switch_item.sv
 │   │           ├── testbench.sv
 │   │           └── test.sv
 │   └── workers
 │       └── ntm_workers
 │           ├── application
-│           │   ├── switch_if.sv
 │           │   └── switch.sv
 │           └── library
 │               ├── driver.sv
@@ -39,6 +38,7 @@ code
 │               ├── generator.sv
 │               ├── monitor.sv
 │               ├── scoreboard.sv
+│               ├── switch_if.sv
 │               ├── switch_item.sv
 │               ├── testbench.sv
 │               └── test.sv
@@ -47,7 +47,6 @@ code
     │   ├── multi_processor_system_on_chip
     │   │   └── multi_processor_system_on_chip
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -55,13 +54,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   ├── processing_unit
     │   │   ├── mimd
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -69,12 +68,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── misd
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -82,12 +81,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── simd
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -95,12 +94,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   └── sisd
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -108,13 +107,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   └── system_on_chip
     │       ├── bus_on_chip
     │       │   ├── application
-    │       │   │   ├── switch_if.sv
     │       │   │   └── switch.sv
     │       │   └── library
     │       │       ├── driver.sv
@@ -122,12 +121,12 @@ code
     │       │       ├── generator.sv
     │       │       ├── monitor.sv
     │       │       ├── scoreboard.sv
+    │       │       ├── switch_if.sv
     │       │       ├── switch_item.sv
     │       │       ├── testbench.sv
     │       │       └── test.sv
     │       └── network_on_chip
     │           ├── application
-    │           │   ├── switch_if.sv
     │           │   └── switch.sv
     │           └── library
     │               ├── driver.sv
@@ -135,6 +134,7 @@ code
     │               ├── generator.sv
     │               ├── monitor.sv
     │               ├── scoreboard.sv
+    │               ├── switch_if.sv
     │               ├── switch_item.sv
     │               ├── testbench.sv
     │               └── test.sv
@@ -142,7 +142,6 @@ code
     │   ├── harvard_architecture
     │   │   ├── pu_or1k
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -150,12 +149,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   └── pu_riscv
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -163,13 +162,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   └── von_neumann_architecture
     │       ├── pu_or1k
     │       │   ├── application
-    │       │   │   ├── switch_if.sv
     │       │   │   └── switch.sv
     │       │   └── library
     │       │       ├── driver.sv
@@ -177,12 +176,12 @@ code
     │       │       ├── generator.sv
     │       │       ├── monitor.sv
     │       │       ├── scoreboard.sv
+    │       │       ├── switch_if.sv
     │       │       ├── switch_item.sv
     │       │       ├── testbench.sv
     │       │       └── test.sv
     │       └── pu_riscv
     │           ├── application
-    │           │   ├── switch_if.sv
     │           │   └── switch.sv
     │           └── library
     │               ├── driver.sv
@@ -190,6 +189,7 @@ code
     │               ├── generator.sv
     │               ├── monitor.sv
     │               ├── scoreboard.sv
+    │               ├── switch_if.sv
     │               ├── switch_item.sv
     │               ├── testbench.sv
     │               └── test.sv
@@ -197,7 +197,6 @@ code
     │   ├── bit
     │   │   └── bit
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -205,13 +204,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   ├── combinational_logic
     │   │   ├── arithmetic_circuits
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -219,12 +218,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   └── logic_circuits
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -232,13 +231,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   ├── finite_state_machine
     │   │   └── finite_state_machine
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -246,13 +245,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   ├── logic_gate
     │   │   ├── and_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -260,12 +259,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── nand_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -273,12 +272,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── nor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -286,12 +285,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── not_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -299,12 +298,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── or_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -312,12 +311,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── xnor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -325,12 +324,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   ├── xor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── switch_if.sv
     │   │   │   │   └── switch.sv
     │   │   │   └── library
     │   │   │       ├── driver.sv
@@ -338,12 +337,12 @@ code
     │   │   │       ├── generator.sv
     │   │   │       ├── monitor.sv
     │   │   │       ├── scoreboard.sv
+    │   │   │       ├── switch_if.sv
     │   │   │       ├── switch_item.sv
     │   │   │       ├── testbench.sv
     │   │   │       └── test.sv
     │   │   └── yes_gate
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -351,13 +350,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   └── pushdown_automaton
     │       └── pushdown_automaton
     │           ├── application
-    │           │   ├── switch_if.sv
     │           │   └── switch.sv
     │           └── library
     │               ├── driver.sv
@@ -365,6 +364,7 @@ code
     │               ├── generator.sv
     │               ├── monitor.sv
     │               ├── scoreboard.sv
+    │               ├── switch_if.sv
     │               ├── switch_item.sv
     │               ├── testbench.sv
     │               └── test.sv
@@ -372,7 +372,6 @@ code
     │   ├── feedforward_neural_network
     │   │   └── feedforward_neural_network
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -380,13 +379,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   ├── long_short_term_memory_neural_network
     │   │   └── long_short_term_memory_neural_network
     │   │       ├── application
-    │   │       │   ├── switch_if.sv
     │   │       │   └── switch.sv
     │   │       └── library
     │   │           ├── driver.sv
@@ -394,13 +393,13 @@ code
     │   │           ├── generator.sv
     │   │           ├── monitor.sv
     │   │           ├── scoreboard.sv
+    │   │           ├── switch_if.sv
     │   │           ├── switch_item.sv
     │   │           ├── testbench.sv
     │   │           └── test.sv
     │   └── transformer_neural_network
     │       └── transformer_neural_network
     │           ├── application
-    │           │   ├── switch_if.sv
     │           │   └── switch.sv
     │           └── library
     │               ├── driver.sv
@@ -408,6 +407,7 @@ code
     │               ├── generator.sv
     │               ├── monitor.sv
     │               ├── scoreboard.sv
+    │               ├── switch_if.sv
     │               ├── switch_item.sv
     │               ├── testbench.sv
     │               └── test.sv
@@ -415,7 +415,6 @@ code
         ├── differentiable_neural_computer
         │   ├── feedforward_differentiable_neural_computer
         │   │   ├── application
-        │   │   │   ├── switch_if.sv
         │   │   │   └── switch.sv
         │   │   └── library
         │   │       ├── driver.sv
@@ -423,12 +422,12 @@ code
         │   │       ├── generator.sv
         │   │       ├── monitor.sv
         │   │       ├── scoreboard.sv
+        │   │       ├── switch_if.sv
         │   │       ├── switch_item.sv
         │   │       ├── testbench.sv
         │   │       └── test.sv
         │   ├── lstm_differentiable_neural_computer
         │   │   ├── application
-        │   │   │   ├── switch_if.sv
         │   │   │   └── switch.sv
         │   │   └── library
         │   │       ├── driver.sv
@@ -436,12 +435,12 @@ code
         │   │       ├── generator.sv
         │   │       ├── monitor.sv
         │   │       ├── scoreboard.sv
+        │   │       ├── switch_if.sv
         │   │       ├── switch_item.sv
         │   │       ├── testbench.sv
         │   │       └── test.sv
         │   └── transformer_differentiable_neural_computer
         │       ├── application
-        │       │   ├── switch_if.sv
         │       │   └── switch.sv
         │       └── library
         │           ├── driver.sv
@@ -449,13 +448,13 @@ code
         │           ├── generator.sv
         │           ├── monitor.sv
         │           ├── scoreboard.sv
+        │           ├── switch_if.sv
         │           ├── switch_item.sv
         │           ├── testbench.sv
         │           └── test.sv
         └── neural_turing_machine
             ├── feedforward_neural_turing_machine
             │   ├── application
-            │   │   ├── switch_if.sv
             │   │   └── switch.sv
             │   └── library
             │       ├── driver.sv
@@ -463,12 +462,12 @@ code
             │       ├── generator.sv
             │       ├── monitor.sv
             │       ├── scoreboard.sv
+            │       ├── switch_if.sv
             │       ├── switch_item.sv
             │       ├── testbench.sv
             │       └── test.sv
             ├── lstm_neural_turing_machine
             │   ├── application
-            │   │   ├── switch_if.sv
             │   │   └── switch.sv
             │   └── library
             │       ├── driver.sv
@@ -476,12 +475,12 @@ code
             │       ├── generator.sv
             │       ├── monitor.sv
             │       ├── scoreboard.sv
+            │       ├── switch_if.sv
             │       ├── switch_item.sv
             │       ├── testbench.sv
             │       └── test.sv
             └── transformer_neural_turing_machine
                 ├── application
-                │   ├── switch_if.sv
                 │   └── switch.sv
                 └── library
                     ├── driver.sv
@@ -489,6 +488,7 @@ code
                     ├── generator.sv
                     ├── monitor.sv
                     ├── scoreboard.sv
+                    ├── switch_if.sv
                     ├── switch_item.sv
                     ├── testbench.sv
                     └── test.sv

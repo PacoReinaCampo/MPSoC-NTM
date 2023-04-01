@@ -3,9 +3,9 @@ code
 │   ├── philosophers
 │   │   └── ntm_philosophers
 │   │       ├── application
-│   │       │   ├── design_if.sv
 │   │       │   └── fsm.sv
 │   │       └── library
+│   │           ├── design_if.sv
 │   │           ├── peripheral_agent.sv
 │   │           ├── peripheral_driver.sv
 │   │           ├── peripheral_environment.sv
@@ -19,9 +19,9 @@ code
 │   ├── soldiers
 │   │   └── ntm_soldiers
 │   │       ├── application
-│   │       │   ├── design_if.sv
 │   │       │   └── fsm.sv
 │   │       └── library
+│   │           ├── design_if.sv
 │   │           ├── peripheral_agent.sv
 │   │           ├── peripheral_driver.sv
 │   │           ├── peripheral_environment.sv
@@ -35,9 +35,9 @@ code
 │   └── workers
 │       └── ntm_workers
 │           ├── application
-│           │   ├── design_if.sv
 │           │   └── fsm.sv
 │           └── library
+│               ├── design_if.sv
 │               ├── peripheral_agent.sv
 │               ├── peripheral_driver.sv
 │               ├── peripheral_environment.sv
@@ -53,9 +53,9 @@ code
     │   ├── multi_processor_system_on_chip
     │   │   └── multi_processor_system_on_chip
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -69,9 +69,9 @@ code
     │   ├── processing_unit
     │   │   ├── mimd
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -84,9 +84,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── misd
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -99,9 +99,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── simd
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -114,9 +114,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   └── sisd
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -130,9 +130,9 @@ code
     │   └── system_on_chip
     │       ├── bus_on_chip
     │       │   ├── application
-    │       │   │   ├── design_if.sv
     │       │   │   └── fsm.sv
     │       │   └── library
+    │       │       ├── design_if.sv
     │       │       ├── peripheral_agent.sv
     │       │       ├── peripheral_driver.sv
     │       │       ├── peripheral_environment.sv
@@ -145,9 +145,9 @@ code
     │       │       └── peripheral_test.sv
     │       └── network_on_chip
     │           ├── application
-    │           │   ├── design_if.sv
     │           │   └── fsm.sv
     │           └── library
+    │               ├── design_if.sv
     │               ├── peripheral_agent.sv
     │               ├── peripheral_driver.sv
     │               ├── peripheral_environment.sv
@@ -162,9 +162,9 @@ code
     │   ├── harvard_architecture
     │   │   ├── pu_or1k
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -177,9 +177,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   └── pu_riscv
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -193,9 +193,9 @@ code
     │   └── von_neumann_architecture
     │       ├── pu_or1k
     │       │   ├── application
-    │       │   │   ├── design_if.sv
     │       │   │   └── fsm.sv
     │       │   └── library
+    │       │       ├── design_if.sv
     │       │       ├── peripheral_agent.sv
     │       │       ├── peripheral_driver.sv
     │       │       ├── peripheral_environment.sv
@@ -208,9 +208,9 @@ code
     │       │       └── peripheral_test.sv
     │       └── pu_riscv
     │           ├── application
-    │           │   ├── design_if.sv
     │           │   └── fsm.sv
     │           └── library
+    │               ├── design_if.sv
     │               ├── peripheral_agent.sv
     │               ├── peripheral_driver.sv
     │               ├── peripheral_environment.sv
@@ -225,9 +225,9 @@ code
     │   ├── bit
     │   │   └── bit
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -241,9 +241,9 @@ code
     │   ├── combinational_logic
     │   │   ├── arithmetic_circuits
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -256,9 +256,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   └── logic_circuits
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -272,9 +272,9 @@ code
     │   ├── finite_state_machine
     │   │   └── finite_state_machine
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -288,9 +288,9 @@ code
     │   ├── logic_gate
     │   │   ├── and_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -303,9 +303,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── nand_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -318,9 +318,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── nor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -333,9 +333,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── not_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -348,9 +348,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── or_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -363,9 +363,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── xnor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -378,9 +378,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   ├── xor_gate
     │   │   │   ├── application
-    │   │   │   │   ├── design_if.sv
     │   │   │   │   └── fsm.sv
     │   │   │   └── library
+    │   │   │       ├── design_if.sv
     │   │   │       ├── peripheral_agent.sv
     │   │   │       ├── peripheral_driver.sv
     │   │   │       ├── peripheral_environment.sv
@@ -393,9 +393,9 @@ code
     │   │   │       └── peripheral_test.sv
     │   │   └── yes_gate
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -409,9 +409,9 @@ code
     │   └── pushdown_automaton
     │       └── pushdown_automaton
     │           ├── application
-    │           │   ├── design_if.sv
     │           │   └── fsm.sv
     │           └── library
+    │               ├── design_if.sv
     │               ├── peripheral_agent.sv
     │               ├── peripheral_driver.sv
     │               ├── peripheral_environment.sv
@@ -426,9 +426,9 @@ code
     │   ├── feedforward_neural_network
     │   │   └── feedforward_neural_network
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -442,9 +442,9 @@ code
     │   ├── long_short_term_memory_neural_network
     │   │   └── long_short_term_memory_neural_network
     │   │       ├── application
-    │   │       │   ├── design_if.sv
     │   │       │   └── fsm.sv
     │   │       └── library
+    │   │           ├── design_if.sv
     │   │           ├── peripheral_agent.sv
     │   │           ├── peripheral_driver.sv
     │   │           ├── peripheral_environment.sv
@@ -458,9 +458,9 @@ code
     │   └── transformer_neural_network
     │       └── transformer_neural_network
     │           ├── application
-    │           │   ├── design_if.sv
     │           │   └── fsm.sv
     │           └── library
+    │               ├── design_if.sv
     │               ├── peripheral_agent.sv
     │               ├── peripheral_driver.sv
     │               ├── peripheral_environment.sv
@@ -475,9 +475,9 @@ code
         ├── differentiable_neural_computer
         │   ├── feedforward_differentiable_neural_computer
         │   │   ├── application
-        │   │   │   ├── design_if.sv
         │   │   │   └── fsm.sv
         │   │   └── library
+        │   │       ├── design_if.sv
         │   │       ├── peripheral_agent.sv
         │   │       ├── peripheral_driver.sv
         │   │       ├── peripheral_environment.sv
@@ -490,9 +490,9 @@ code
         │   │       └── peripheral_test.sv
         │   ├── lstm_differentiable_neural_computer
         │   │   ├── application
-        │   │   │   ├── design_if.sv
         │   │   │   └── fsm.sv
         │   │   └── library
+        │   │       ├── design_if.sv
         │   │       ├── peripheral_agent.sv
         │   │       ├── peripheral_driver.sv
         │   │       ├── peripheral_environment.sv
@@ -505,9 +505,9 @@ code
         │   │       └── peripheral_test.sv
         │   └── transformer_differentiable_neural_computer
         │       ├── application
-        │       │   ├── design_if.sv
         │       │   └── fsm.sv
         │       └── library
+        │           ├── design_if.sv
         │           ├── peripheral_agent.sv
         │           ├── peripheral_driver.sv
         │           ├── peripheral_environment.sv
@@ -521,9 +521,9 @@ code
         └── neural_turing_machine
             ├── feedforward_neural_turing_machine
             │   ├── application
-            │   │   ├── design_if.sv
             │   │   └── fsm.sv
             │   └── library
+            │       ├── design_if.sv
             │       ├── peripheral_agent.sv
             │       ├── peripheral_driver.sv
             │       ├── peripheral_environment.sv
@@ -536,9 +536,9 @@ code
             │       └── peripheral_test.sv
             ├── lstm_neural_turing_machine
             │   ├── application
-            │   │   ├── design_if.sv
             │   │   └── fsm.sv
             │   └── library
+            │       ├── design_if.sv
             │       ├── peripheral_agent.sv
             │       ├── peripheral_driver.sv
             │       ├── peripheral_environment.sv
@@ -551,9 +551,9 @@ code
             │       └── peripheral_test.sv
             └── transformer_neural_turing_machine
                 ├── application
-                │   ├── design_if.sv
                 │   └── fsm.sv
                 └── library
+                    ├── design_if.sv
                     ├── peripheral_agent.sv
                     ├── peripheral_driver.sv
                     ├── peripheral_environment.sv

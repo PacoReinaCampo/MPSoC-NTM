@@ -1,64 +1,316 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.vhd
+│   │   └── ntm_philosophers
+│   │       ├── application
+│   │       │   ├── ntm_design_pkg.vhd
+│   │       │   └── ntm_design.vhd
+│   │       └── library
+│   │           ├── ntm_model_pkg.vhd
+│   │           ├── ntm_model.vhd
+│   │           └── ntm_testbench.vhd
 │   ├── soldiers
-│   │   └── ntm_soldiers.vhd
+│   │   └── ntm_soldiers
+│   │       ├── application
+│   │       │   ├── ntm_design_pkg.vhd
+│   │       │   └── ntm_design.vhd
+│   │       └── library
+│   │           ├── ntm_model_pkg.vhd
+│   │           ├── ntm_model.vhd
+│   │           └── ntm_testbench.vhd
 │   └── workers
-│       └── ntm_workers.vhd
+│       └── ntm_workers
+│           ├── application
+│           │   ├── ntm_design_pkg.vhd
+│           │   └── ntm_design.vhd
+│           └── library
+│               ├── ntm_model_pkg.vhd
+│               ├── ntm_model.vhd
+│               └── ntm_testbench.vhd
 └── computing
     ├── advanced_computer_architecture
     │   ├── multi_processor_system_on_chip
-    │   │   └── multi_processor_system_on_chip.vhd
+    │   │   └── multi_processor_system_on_chip
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   ├── processing_unit
-    │   │   ├── mimd.vhd
-    │   │   ├── misd.vhd
-    │   │   ├── simd.vhd
-    │   │   └── sisd.vhd
+    │   │   ├── mimd
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── misd
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── simd
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   └── sisd
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   └── system_on_chip
-    │       ├── bus_on_chip.vhd
-    │       └── network_on_chip.vhd
+    │       ├── bus_on_chip
+    │       │   ├── application
+    │       │   │   ├── ntm_design_pkg.vhd
+    │       │   │   └── ntm_design.vhd
+    │       │   └── library
+    │       │       ├── ntm_model_pkg.vhd
+    │       │       ├── ntm_model.vhd
+    │       │       └── ntm_testbench.vhd
+    │       └── network_on_chip
+    │           ├── application
+    │           │   ├── ntm_design_pkg.vhd
+    │           │   └── ntm_design.vhd
+    │           └── library
+    │               ├── ntm_model_pkg.vhd
+    │               ├── ntm_model.vhd
+    │               └── ntm_testbench.vhd
     ├── computer_architecture
     │   ├── harvard_architecture
-    │   │   ├── pu_or1k.vhd
-    │   │   └── pu_riscv.vhd
+    │   │   ├── pu_or1k
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   └── pu_riscv
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   └── von_neumann_architecture
-    │       ├── pu_msp430.vhd
-    │       └── pu_riscv.vhd
+    │       ├── pu_or1k
+    │       │   ├── application
+    │       │   │   ├── ntm_design_pkg.vhd
+    │       │   │   └── ntm_design.vhd
+    │       │   └── library
+    │       │       ├── ntm_model_pkg.vhd
+    │       │       ├── ntm_model.vhd
+    │       │       └── ntm_testbench.vhd
+    │       └── pu_riscv
+    │           ├── application
+    │           │   ├── ntm_design_pkg.vhd
+    │           │   └── ntm_design.vhd
+    │           └── library
+    │               ├── ntm_model_pkg.vhd
+    │               ├── ntm_model.vhd
+    │               └── ntm_testbench.vhd
     ├── information
     │   ├── bit
-    │   │   └── bit.vhd
+    │   │   └── bit
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   ├── combinational_logic
-    │   │   ├── arithmetic_circuits.vhd
-    │   │   └── logic_circuits.vhd
+    │   │   ├── arithmetic_circuits
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   └── logic_circuits
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   ├── finite_state_machine
-    │   │   └── finite_state_machine.vhd
+    │   │   └── finite_state_machine
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   ├── logic_gate
-    │   │   ├── and_gate.vhd
-    │   │   ├── nand_gate.vhd
-    │   │   ├── nor_gate.vhd
-    │   │   ├── not_gate.vhd
-    │   │   ├── or_gate.vhd
-    │   │   ├── xnor_gate.vhd
-    │   │   ├── xor_gate.vhd
-    │   │   └── yes_gate.vhd
+    │   │   ├── and_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── nand_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── nor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── not_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── or_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── xnor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   ├── xor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── ntm_design_pkg.vhd
+    │   │   │   │   └── ntm_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── ntm_model_pkg.vhd
+    │   │   │       ├── ntm_model.vhd
+    │   │   │       └── ntm_testbench.vhd
+    │   │   └── yes_gate
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   └── pushdown_automaton
-    │       └── pushdown_automaton.vhd
+    │       └── pushdown_automaton
+    │           ├── application
+    │           │   ├── ntm_design_pkg.vhd
+    │           │   └── ntm_design.vhd
+    │           └── library
+    │               ├── ntm_model_pkg.vhd
+    │               ├── ntm_model.vhd
+    │               └── ntm_testbench.vhd
     ├── neural_network
     │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.vhd
+    │   │   └── feedforward_neural_network
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.vhd
+    │   │   └── long_short_term_memory_neural_network
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
     │   └── transformer_neural_network
-    │       └── transformer_neural_network.vhd
+    │       └── transformer_neural_network
+    │           ├── application
+    │           │   ├── ntm_design_pkg.vhd
+    │           │   └── ntm_design.vhd
+    │           └── library
+    │               ├── ntm_model_pkg.vhd
+    │               ├── ntm_model.vhd
+    │               └── ntm_testbench.vhd
     └── turing_machine
         ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.vhd
-        │   ├── lstm_differentiable_neural_computer.vhd
-        │   └── transformer_differentiable_neural_computer.vhd
+        │   ├── feedforward_differentiable_neural_computer
+        │   │   ├── application
+        │   │   │   ├── ntm_design_pkg.vhd
+        │   │   │   └── ntm_design.vhd
+        │   │   └── library
+        │   │       ├── ntm_model_pkg.vhd
+        │   │       ├── ntm_model.vhd
+        │   │       └── ntm_testbench.vhd
+        │   ├── lstm_differentiable_neural_computer
+        │   │   ├── application
+        │   │   │   ├── ntm_design_pkg.vhd
+        │   │   │   └── ntm_design.vhd
+        │   │   └── library
+        │   │       ├── ntm_model_pkg.vhd
+        │   │       ├── ntm_model.vhd
+        │   │       └── ntm_testbench.vhd
+        │   └── transformer_differentiable_neural_computer
+        │       ├── application
+        │       │   ├── ntm_design_pkg.vhd
+        │       │   └── ntm_design.vhd
+        │       └── library
+        │           ├── ntm_model_pkg.vhd
+        │           ├── ntm_model.vhd
+        │           └── ntm_testbench.vhd
         └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.vhd
-            ├── lstm_neural_turing_machine.vhd
-            └── transformer_neural_turing_machine.vhd
+            ├── feedforward_neural_turing_machine
+            │   ├── application
+            │   │   ├── ntm_design_pkg.vhd
+            │   │   └── ntm_design.vhd
+            │   └── library
+            │       ├── ntm_model_pkg.vhd
+            │       ├── ntm_model.vhd
+            │       └── ntm_testbench.vhd
+            ├── lstm_neural_turing_machine
+            │   ├── application
+            │   │   ├── ntm_design_pkg.vhd
+            │   │   └── ntm_design.vhd
+            │   └── library
+            │       ├── ntm_model_pkg.vhd
+            │       ├── ntm_model.vhd
+            │       └── ntm_testbench.vhd
+            └── transformer_neural_turing_machine
+                ├── application
+                │   ├── ntm_design_pkg.vhd
+                │   └── ntm_design.vhd
+                └── library
+                    ├── ntm_model_pkg.vhd
+                    ├── ntm_model.vhd
+                    └── ntm_testbench.vhd
 
-25 directories, 36 files
+133 directories, 180 files

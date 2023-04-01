@@ -1,3 +1,6 @@
+`include "switch_if.sv"
+`include "test.sv"
+
 module testbench;
   reg clk;
 

@@ -1,3 +1,11 @@
+`include "peripheral_sequence_item.sv"
+`include "peripheral_sequence.sv"
+`include "peripheral_driver.sv"
+`include "peripheral_monitor.sv"
+`include "peripheral_scoreboard.sv"
+`include "peripheral_agent.sv"
+`include "peripheral_environment.sv"
+
 class peripheral_test extends uvm_test;
   `uvm_component_utils(peripheral_test)
   function new(string name = "peripheral_test", uvm_component parent = null);
@@ -5,7 +13,7 @@ class peripheral_test extends uvm_test;
   endfunction
 
   peripheral_environment               environment;
-  bit                    [`LENGTH-1:0] pattern     = 4'b1011;
+  bit                            [3:0] pattern     = 4'b1011;
   peripheral_sequence                  seq;
   virtual design_if                    vif;
 
@@ -21,7 +29,7 @@ class peripheral_test extends uvm_test;
     uvm_config_db#(virtual design_if)::set(this, "environment.agent.*", "des_vif", vif);
 
     // Setup pattern queue and place into config db
-    uvm_config_db#(bit [`LENGTH-1:0])::set(this, "*", "ref_pattern", pattern);
+    uvm_config_db#(bit [3:0])::set(this, "*", "ref_pattern", pattern);
 
     // Create sequence and randomize it
     seq = peripheral_sequence::type_id::create("seq");
