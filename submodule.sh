@@ -42,5 +42,15 @@
 ##                                                                               ##
 ###################################################################################
 
+# Remove Submodule
+git rm -rf mpsoc-dv
+git rm -rf mpsoc-rtos
+git rm -rf opennn
+
 # Update Submodule
 git submodule update --init --recursive --remote
+
+# Add Submodule
+git submodule add --force https://github.com/PacoReinaCampo/MPSoC-DV.git mpsoc-dv
+git submodule add --force https://github.com/PacoReinaCampo/MPSoC-RTOS.git mpsoc-rtos
+git submodule add --force https://github.com/PacoReinaCampo/OpenNN.git opennn
