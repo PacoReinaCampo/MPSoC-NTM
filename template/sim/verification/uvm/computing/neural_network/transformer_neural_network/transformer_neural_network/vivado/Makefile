@@ -45,10 +45,10 @@
 all: build simulate
 
 build:
-	xvlog -i ../../../../../../../../../../verification/uvm/src -prj system.prj
+	xvlog -sv -prj system.prj -L uvm
 
 simulate:
-	xelab peripheral_testbench
-	xsim -R peripheral_testbench
+	xelab peripheral_testbench -relax -s top -timescale 1ns/1ps
+	xsim top -testplusarg UVM_TESTNAME=peripheral_test -testplusarg UVM_VERBOSITY=UVM_LOW -run
 clean:
-	rm -rf *.dir *.jou *.log *.pb
+	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

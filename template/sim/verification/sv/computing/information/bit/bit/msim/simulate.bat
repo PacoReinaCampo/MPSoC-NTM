@@ -47,5 +47,5 @@ call ../../../../../../../../../../settings64_msim.bat
 
 vlib work
 vlog -sv -f system.vc
-vsim -c -do run.do work.ntm_testbench
+vsim -c -do run.do work.ntestbench
 pause

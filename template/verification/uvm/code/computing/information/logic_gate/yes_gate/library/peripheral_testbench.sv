@@ -1,5 +1,4 @@
 `include "uvm_macros.svh"
-`include "uvm_pkg.sv"
 import uvm_pkg::*;
 
 `include "design_if.sv"
