@@ -45,9 +45,6 @@
 %}
 
 function PSI_OUT = dnc_memory_retention_vector(W_IN, F_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 

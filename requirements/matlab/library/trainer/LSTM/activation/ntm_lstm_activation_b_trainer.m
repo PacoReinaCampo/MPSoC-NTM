@@ -45,9 +45,6 @@
 %}
 
 function B_OUT = ntm_lstm_activation_b_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Package
-  addpath(genpath('../differentiation'));
-
   % Constants
   [SIZE_T_IN, SIZE_L_IN] = size(A_IN);
 

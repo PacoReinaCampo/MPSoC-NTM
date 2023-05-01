@@ -45,9 +45,6 @@
 %}
 
 function W_OUT = ntm_fnn_w_trainer(X_IN, H_IN, LENGTH_IN)
-  % Package
-  addpath(genpath('../differentiation'));
-
   % Constants
   [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
 

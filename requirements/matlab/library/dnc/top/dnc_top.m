@@ -45,15 +45,6 @@
 %}
 
 function Y_OUT = dnc_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-  addpath(genpath('../../math/algebra/tensor'));
-  addpath(genpath('../../math/function/vector'));
-
-  addpath(genpath('../../controller/FNN/standard'));
-
-  addpath(genpath('../memory'));
-
   % Constants
   [SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN] = size(P_IN);
 

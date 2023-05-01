@@ -45,10 +45,6 @@
 %}
 
 function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/algebra/tensor'));
-
   % Constants
   [SIZE_D_IN, SIZE_X_IN] = size(W_IN);
   [SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);

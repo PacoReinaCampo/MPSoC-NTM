@@ -45,10 +45,6 @@
 %}
 
 function Y_OUT = dnc_output_vector(P_IN, R_IN, Q_IN, H_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-  addpath(genpath('../../math/algebra/tensor'));
-
   % Constants
   [SIZE_R_IN, SIZE_Y_IN, ~] = size(P_IN);
 

@@ -45,9 +45,6 @@
 %}
 
 function P_OUT = dnc_precedence_weighting(W_IN, P_IN)
-  % Package
-  addpath(genpath('../../math/algebra/scalar'));
-
   % Constants
   SIZE_N_IN = length(W_IN);
 

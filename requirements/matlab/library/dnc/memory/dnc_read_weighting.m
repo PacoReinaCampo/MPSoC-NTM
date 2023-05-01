@@ -45,9 +45,6 @@
 %}
 
 function W_OUT = dnc_read_weighting(PI_IN, B_IN, C_IN, F_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(B_IN);
 

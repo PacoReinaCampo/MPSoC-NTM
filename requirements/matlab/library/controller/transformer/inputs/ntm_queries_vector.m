@@ -45,9 +45,6 @@
 %}
 
 function Q_OUT = ntm_queries_vector(Q_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-
   % Body
   % Q(n;k) = X(n;d)·Q(d;k)
   Q_OUT = ntm_matrix_product(X_IN, Q_IN);

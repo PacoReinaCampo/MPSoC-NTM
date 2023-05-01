@@ -45,9 +45,6 @@
 %}
 
 function W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 

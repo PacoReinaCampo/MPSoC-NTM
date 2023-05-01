@@ -45,9 +45,6 @@
 %}
 
 function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 

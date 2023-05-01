@@ -45,10 +45,6 @@
 %}
 
 function C_OUT = dnc_vector_content_based_addressing(K_IN, BETA_IN, M_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-  addpath(genpath('../../math/calculus/vector'));
-
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 

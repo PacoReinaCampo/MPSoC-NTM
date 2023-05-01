@@ -45,9 +45,6 @@
 %}
 
 function K_OUT = ntm_lstm_forget_k_trainer(R_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Package
-  addpath(genpath('../differentiation'));
-
   % Constants
   [SIZE_T_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 

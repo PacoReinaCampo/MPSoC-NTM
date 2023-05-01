@@ -45,9 +45,6 @@
 %}
 
 function Y_OUT = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN)
-  % Package
-  addpath(genpath('../inputs'));
-
   % Constants
   [SIZE_N_IN, ~] = size(X_IN);
 

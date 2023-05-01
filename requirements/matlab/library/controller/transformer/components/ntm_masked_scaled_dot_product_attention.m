@@ -45,12 +45,6 @@
 %}
 
 function U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/calculus/matrix'));
-
-  addpath(genpath('../inputs'));
-
   % Constants
   [~, SIZE_K_IN] = size(K_IN);
 

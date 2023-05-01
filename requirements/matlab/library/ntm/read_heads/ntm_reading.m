@@ -45,10 +45,6 @@
 %}
 
 function R_OUT = ntm_reading(W_IN, M_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
   [~, SIZE_W_IN] = size(M_IN);

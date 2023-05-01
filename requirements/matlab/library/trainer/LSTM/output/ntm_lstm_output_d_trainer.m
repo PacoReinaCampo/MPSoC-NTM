@@ -45,9 +45,6 @@
 %}
 
 function D_OUT = ntm_lstm_output_d_trainer(RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Package
-  addpath(genpath('../differentiation'));
-
   % Constants
   [SIZE_T_IN, SIZE_R_IN, SIZE_M_IN] = size(RHO_IN);
 

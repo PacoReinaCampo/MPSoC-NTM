@@ -45,10 +45,6 @@
 %}
 
 function Y_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-  addpath(genpath('../../../math/function/vector'));
-
   % Body
   % y(n;d) = W2(d;m)·(sigmoid(W1(m;d)·x(n;d) + b1(m))) + b2(d)
 

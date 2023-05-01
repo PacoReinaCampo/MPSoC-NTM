@@ -45,9 +45,6 @@
 %}
 
 function R_OUT = dnc_read_vectors(M_IN, W_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
   [SIZE_R_IN, ~] = size(W_IN);

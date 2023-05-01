@@ -45,12 +45,6 @@
 %}
 
 function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN, Z_IN)
-  % Package
-  addpath(genpath('../inputs'));
-  addpath(genpath('../components'));
-  addpath(genpath('../functions'));
-  addpath(genpath('../fnn'));
-
   % Constants
   [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
 

@@ -45,9 +45,6 @@
 %}
 
 function W_OUT = dnc_write_weighting(A_IN, C_IN, GA_IN, GW_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-
   % Constants
   SIZE_N_IN = length(A_IN);
 

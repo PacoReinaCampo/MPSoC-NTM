@@ -45,9 +45,6 @@
 %}
 
 function M_OUT = dnc_memory_matrix(M_IN, W_IN, V_IN, E_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 

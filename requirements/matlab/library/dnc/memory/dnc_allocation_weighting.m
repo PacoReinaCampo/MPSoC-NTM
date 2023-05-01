@@ -45,11 +45,6 @@
 %}
 
 function A_OUT = dnc_allocation_weighting(U_IN)
-  % Package
-  addpath(genpath('../../math/algebra/scalar'));
-  addpath(genpath('../../math/algebra/matrix'));
-  addpath(genpath('../../math/calculus/vector'));
-
   % Constants
   SIZE_N_IN = length(U_IN);
 

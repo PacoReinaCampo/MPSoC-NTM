@@ -45,9 +45,6 @@
 %}
 
 function V_OUT = ntm_values_vector(V_IN, X_IN)
-  % Package
-  addpath(genpath('../../../math/algebra/matrix'));
-
   % Body
   % V(n;v) = X(n;d)·V(d;v)
   V_OUT = ntm_matrix_product(X_IN, V_IN);

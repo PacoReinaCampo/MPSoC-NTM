@@ -2,237 +2,241 @@
 code
 ├── arithmetic
 │   ├── matrix
-│   │   ├── ntm_matrix_adder.tb.m
-│   │   ├── ntm_matrix_divider.tb.m
-│   │   └── ntm_matrix_multiplier.tb.m
+│   │   ├── ntm_matrix_adder_test.m
+│   │   ├── ntm_matrix_divider_test.m
+│   │   ├── ntm_matrix_multiplier_test.m
+│   │   └── ntm_matrix_subtractor_test.m
 │   ├── scalar
-│   │   ├── ntm_scalar_adder.tb.m
-│   │   ├── ntm_scalar_divider.tb.m
-│   │   └── ntm_scalar_multiplier.tb.m
+│   │   ├── ntm_scalar_adder_test.m
+│   │   ├── ntm_scalar_divider_test.m
+│   │   ├── ntm_scalar_multiplier_test.m
+│   │   └── ntm_scalar_subtractor_test.m
 │   ├── tensor
-│   │   ├── ntm_tensor_adder.tb.m
-│   │   ├── ntm_tensor_divider.tb.m
-│   │   └── ntm_tensor_multiplier.tb.m
+│   │   ├── ntm_tensor_adder_test.m
+│   │   ├── ntm_tensor_divider_test.m
+│   │   ├── ntm_tensor_multiplier_test.m
+│   │   └── ntm_tensor_subtractor_test.m
 │   └── vector
-│       ├── ntm_vector_adder.tb.m
-│       ├── ntm_vector_divider.tb.m
-│       └── ntm_vector_multiplier.tb.m
+│       ├── ntm_vector_adder_test.m
+│       ├── ntm_vector_divider_test.m
+│       ├── ntm_vector_multiplier_test.m
+│       └── ntm_vector_subtractor_test.m
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.tb.m
+│   │   │   └── ntm_controller_test.m
 │   │   └── standard
-│   │       └── ntm_controller.tb.m
+│   │       └── ntm_controller_test.m
 │   ├── LSTM
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.tb.m
-│   │   │   ├── ntm_controller.tb.m
-│   │   │   ├── ntm_forget_gate_vector.tb.m
-│   │   │   ├── ntm_hidden_gate_vector.tb.m
-│   │   │   ├── ntm_input_gate_vector.tb.m
-│   │   │   ├── ntm_output_gate_vector.tb.m
-│   │   │   └── ntm_state_gate_vector.tb.m
+│   │   │   ├── ntm_activation_gate_vector_test.m
+│   │   │   ├── ntm_controller_test.m
+│   │   │   ├── ntm_forget_gate_vector_test.m
+│   │   │   ├── ntm_hidden_gate_vector_test.m
+│   │   │   ├── ntm_input_gate_vector_test.m
+│   │   │   ├── ntm_output_gate_vector_test.m
+│   │   │   └── ntm_state_gate_vector_test.m
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.tb.m
-│   │       ├── ntm_controller.tb.m
-│   │       ├── ntm_forget_gate_vector.tb.m
-│   │       ├── ntm_hidden_gate_vector.tb.m
-│   │       ├── ntm_input_gate_vector.tb.m
-│   │       ├── ntm_output_gate_vector.tb.m
-│   │       └── ntm_state_gate_vector.tb.m
+│   │       ├── ntm_activation_gate_vector_test.m
+│   │       ├── ntm_controller_test.m
+│   │       ├── ntm_forget_gate_vector_test.m
+│   │       ├── ntm_hidden_gate_vector_test.m
+│   │       ├── ntm_input_gate_vector_test.m
+│   │       ├── ntm_output_gate_vector_test.m
+│   │       └── ntm_state_gate_vector_test.m
 │   └── transformer
 │       ├── components
-│       │   ├── ntm_masked_multi_head_attention.tb.m
-│       │   ├── ntm_masked_scaled_dot_product_attention.tb.m
-│       │   ├── ntm_multi_head_attention.tb.m
-│       │   └── ntm_scaled_dot_product_attention.tb.m
+│       │   ├── ntm_masked_multi_head_attention_test.m
+│       │   ├── ntm_masked_scaled_dot_product_attention_test.m
+│       │   ├── ntm_multi_head_attention_test.m
+│       │   └── ntm_scaled_dot_product_attention_test.m
 │       ├── fnn
-│       │   └── ntm_fnn.tb.m
+│       │   └── ntm_fnn_test.m
 │       ├── functions
-│       │   ├── ntm_layer_norm.tb.m
-│       │   └── ntm_positional_encoding.tb.m
+│       │   ├── ntm_layer_norm_test.m
+│       │   └── ntm_positional_encoding_test.m
 │       ├── inputs
-│       │   ├── ntm_inputs_vector.tb.m
-│       │   ├── ntm_keys_vector.tb.m
-│       │   ├── ntm_queries_vector.tb.m
-│       │   └── ntm_values_vector.tb.m
+│       │   ├── ntm_inputs_vector_test.m
+│       │   ├── ntm_keys_vector_test.m
+│       │   ├── ntm_queries_vector_test.m
+│       │   └── ntm_values_vector_test.m
 │       ├── lstm
-│       │   ├── ntm_activation_gate_vector.tb.m
-│       │   ├── ntm_forget_gate_vector.tb.m
-│       │   ├── ntm_hidden_gate_vector.tb.m
-│       │   ├── ntm_input_gate_vector.tb.m
-│       │   ├── ntm_lstm.tb.m
-│       │   ├── ntm_output_gate_vector.tb.m
-│       │   └── ntm_state_gate_vector.tb.m
+│       │   ├── ntm_activation_gate_vector_test.m
+│       │   ├── ntm_forget_gate_vector_test.m
+│       │   ├── ntm_hidden_gate_vector_test.m
+│       │   ├── ntm_input_gate_vector_test.m
+│       │   ├── ntm_lstm_test.m
+│       │   ├── ntm_output_gate_vector_test.m
+│       │   └── ntm_state_gate_vector_test.m
 │       └── top
-│           ├── ntm_controller.tb.m
-│           ├── ntm_decoder.tb.m
-│           └── ntm_encoder.tb.m
+│           ├── ntm_controller_test.m
+│           ├── ntm_decoder_test.m
+│           └── ntm_encoder_test.m
 ├── dnc
 │   ├── memory
-│   │   ├── dnc_addressing.tb.m
-│   │   ├── dnc_allocation_weighting.tb.m
-│   │   ├── dnc_backward_weighting.tb.m
-│   │   ├── dnc_forward_weighting.tb.m
-│   │   ├── dnc_matrix_content_based_addressing.tb.m
-│   │   ├── dnc_memory_matrix.tb.m
-│   │   ├── dnc_memory_retention_vector.tb.m
-│   │   ├── dnc_precedence_weighting.tb.m
-│   │   ├── dnc_read_content_weighting.tb.m
-│   │   ├── dnc_read_vectors.tb.m
-│   │   ├── dnc_read_weighting.tb.m
-│   │   ├── dnc_sort_vector.tb.m
-│   │   ├── dnc_temporal_link_matrix.tb.m
-│   │   ├── dnc_usage_vector.tb.m
-│   │   ├── dnc_vector_content_based_addressing.tb.m
-│   │   ├── dnc_write_content_weighting.tb.m
-│   │   └── dnc_write_weighting.tb.m
+│   │   ├── dnc_addressing_test.m
+│   │   ├── dnc_allocation_weighting_test.m
+│   │   ├── dnc_backward_weighting_test.m
+│   │   ├── dnc_forward_weighting_test.m
+│   │   ├── dnc_matrix_content_based_addressing_test.m
+│   │   ├── dnc_memory_matrix_test.m
+│   │   ├── dnc_memory_retention_vector_test.m
+│   │   ├── dnc_precedence_weighting_test.m
+│   │   ├── dnc_read_content_weighting_test.m
+│   │   ├── dnc_read_vectors_test.m
+│   │   ├── dnc_read_weighting_test.m
+│   │   ├── dnc_sort_vector_test.m
+│   │   ├── dnc_temporal_link_matrix_test.m
+│   │   ├── dnc_usage_vector_test.m
+│   │   ├── dnc_vector_content_based_addressing_test.m
+│   │   ├── dnc_write_content_weighting_test.m
+│   │   └── dnc_write_weighting_test.m
 │   ├── top
-│   │   ├── dnc_interface_matrix.tb.m
-│   │   ├── dnc_interface_top.tb.m
-│   │   ├── dnc_interface_vector.tb.m
-│   │   ├── dnc_output_vector.tb.m
-│   │   └── dnc_top.tb.m
+│   │   ├── dnc_interface_matrix_test.m
+│   │   ├── dnc_interface_top_test.m
+│   │   ├── dnc_interface_vector_test.m
+│   │   ├── dnc_output_vector_test.m
+│   │   └── dnc_top_test.m
 │   └── trained
-│       └── dnc_trained_top.tb.m
+│       └── dnc_trained_top_test.m
 ├── math
 │   ├── algebra
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.tb.m
-│   │   │   ├── ntm_matrix_inverse.tb.m
-│   │   │   ├── ntm_matrix_multiplication.tb.m
-│   │   │   ├── ntm_matrix_product.tb.m
-│   │   │   ├── ntm_matrix_summation.tb.m
-│   │   │   ├── ntm_matrix_transpose.tb.m
-│   │   │   ├── ntm_matrix_vector_convolution.tb.m
-│   │   │   ├── ntm_matrix_vector_product.tb.m
-│   │   │   └── ntm_transpose_vector_product.tb.m
+│   │   │   ├── ntm_matrix_convolution_test.m
+│   │   │   ├── ntm_matrix_inverse_test.m
+│   │   │   ├── ntm_matrix_multiplication_test.m
+│   │   │   ├── ntm_matrix_product_test.m
+│   │   │   ├── ntm_matrix_summation_test.m
+│   │   │   ├── ntm_matrix_transpose_test.m
+│   │   │   ├── ntm_matrix_vector_convolution_test.m
+│   │   │   ├── ntm_matrix_vector_product_test.m
+│   │   │   └── ntm_transpose_vector_product_test.m
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication.tb.m
-│   │   │   └── ntm_scalar_summation.tb.m
+│   │   │   ├── ntm_scalar_multiplication_test.m
+│   │   │   └── ntm_scalar_summation_test.m
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution.tb.m
-│   │   │   ├── ntm_tensor_inverse.tb.m
-│   │   │   ├── ntm_tensor_matrix_convolution.tb.m
-│   │   │   ├── ntm_tensor_matrix_product.tb.m
-│   │   │   ├── ntm_tensor_multiplication.tb.m
-│   │   │   ├── ntm_tensor_product.tb.m
-│   │   │   ├── ntm_tensor_summation.tb.m
-│   │   │   └── ntm_tensor_transpose.tb.m
+│   │   │   ├── ntm_tensor_convolution_test.m
+│   │   │   ├── ntm_tensor_inverse_test.m
+│   │   │   ├── ntm_tensor_matrix_convolution_test.m
+│   │   │   ├── ntm_tensor_matrix_product_test.m
+│   │   │   ├── ntm_tensor_multiplication_test.m
+│   │   │   ├── ntm_tensor_product_test.m
+│   │   │   ├── ntm_tensor_summation_test.m
+│   │   │   └── ntm_tensor_transpose_test.m
 │   │   └── vector
-│   │       ├── ntm_dot_product.tb.m
-│   │       ├── ntm_vector_convolution.tb.m
-│   │       ├── ntm_vector_cosine_similarity.tb.m
-│   │       ├── ntm_vector_module.tb.m
-│   │       ├── ntm_vector_multiplication.tb.m
-│   │       └── ntm_vector_summation.tb.m
+│   │       ├── ntm_dot_product_test.m
+│   │       ├── ntm_vector_convolution_test.m
+│   │       ├── ntm_vector_cosine_similarity_test.m
+│   │       ├── ntm_vector_module_test.m
+│   │       ├── ntm_vector_multiplication_test.m
+│   │       └── ntm_vector_summation_test.m
 │   ├── calculus
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.tb.m
-│   │   │   ├── ntm_matrix_integration.tb.m
-│   │   │   └── ntm_matrix_softmax.tb.m
+│   │   │   ├── ntm_matrix_differentiation_test.m
+│   │   │   ├── ntm_matrix_integration_test.m
+│   │   │   └── ntm_matrix_softmax_test.m
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.tb.m
-│   │   │   ├── ntm_tensor_integration.tb.m
-│   │   │   └── ntm_tensor_softmax.tb.m
+│   │   │   ├── ntm_tensor_differentiation_test.m
+│   │   │   ├── ntm_tensor_integration_test.m
+│   │   │   └── ntm_tensor_softmax_test.m
 │   │   └── vector
-│   │       ├── ntm_vector_differentiation.tb.m
-│   │       ├── ntm_vector_integration.tb.m
-│   │       └── ntm_vector_softmax.tb.m
+│   │       ├── ntm_vector_differentiation_test.m
+│   │       ├── ntm_vector_integration_test.m
+│   │       └── ntm_vector_softmax_test.m
 │   ├── function
 │   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.tb.m
-│   │   │   └── ntm_matrix_oneplus_function.tb.m
+│   │   │   ├── ntm_matrix_logistic_function_test.m
+│   │   │   └── ntm_matrix_oneplus_function_test.m
 │   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.tb.m
-│   │   │   └── ntm_scalar_oneplus_function.tb.m
+│   │   │   ├── ntm_scalar_logistic_function_test.m
+│   │   │   └── ntm_scalar_oneplus_function_test.m
 │   │   └── vector
-│   │       ├── ntm_vector_logistic_function.tb.m
-│   │       └── ntm_vector_oneplus_function.tb.m
+│   │       ├── ntm_vector_logistic_function_test.m
+│   │       └── ntm_vector_oneplus_function_test.m
 │   └── statitics
 │       ├── matrix
-│       │   ├── ntm_matrix_deviation.tb.m
-│       │   └── ntm_matrix_mean.tb.m
+│       │   ├── ntm_matrix_deviation_test.m
+│       │   └── ntm_matrix_mean_test.m
 │       ├── scalar
-│       │   ├── ntm_scalar_deviation.tb.m
-│       │   └── ntm_scalar_mean.tb.m
+│       │   ├── ntm_scalar_deviation_test.m
+│       │   └── ntm_scalar_mean_test.m
 │       └── vector
-│           ├── ntm_vector_deviation.tb.m
-│           └── ntm_vector_mean.tb.m
+│           ├── ntm_vector_deviation_test.m
+│           └── ntm_vector_mean_test.m
 ├── ntm
 │   ├── memory
-│   │   ├── ntm_addressing.tb.m
-│   │   ├── ntm_matrix_content_based_addressing.tb.m
-│   │   └── ntm_vector_content_based_addressing.tb.m
+│   │   ├── ntm_addressing_test.m
+│   │   ├── ntm_matrix_content_based_addressing_test.m
+│   │   └── ntm_vector_content_based_addressing_test.m
 │   ├── read_heads
-│   │   └── ntm_reading.tb.m
+│   │   └── ntm_reading_test.m
 │   ├── top
-│   │   ├── ntm_interface_matrix.tb.m
-│   │   ├── ntm_interface_top.tb.m
-│   │   ├── ntm_interface_vector.tb.m
-│   │   ├── ntm_output_vector.tb.m
-│   │   └── ntm_top.tb.m
+│   │   ├── ntm_interface_matrix_test.m
+│   │   ├── ntm_interface_top_test.m
+│   │   ├── ntm_interface_vector_test.m
+│   │   ├── ntm_output_vector_test.m
+│   │   └── ntm_top_test.m
 │   ├── trained
-│   │   └── ntm_trained_top.tb.m
+│   │   └── ntm_trained_top_test.m
 │   └── write_heads
-│       ├── ntm_erasing.tb.m
-│       └── ntm_writing.tb.m
+│       ├── ntm_erasing_test.m
+│       └── ntm_writing_test.m
 ├── state
 │   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.tb.m
-│   │   ├── ntm_state_matrix_input.tb.m
-│   │   ├── ntm_state_matrix_output.tb.m
-│   │   └── ntm_state_matrix_state.tb.m
+│   │   ├── ntm_state_matrix_feedforward_test.m
+│   │   ├── ntm_state_matrix_input_test.m
+│   │   ├── ntm_state_matrix_output_test.m
+│   │   └── ntm_state_matrix_state_test.m
 │   ├── outputs
-│   │   ├── ntm_state_vector_output.tb.m
-│   │   └── ntm_state_vector_state.tb.m
+│   │   ├── ntm_state_vector_output_test.m
+│   │   └── ntm_state_vector_state_test.m
 │   └── top
-│       └── ntm_state_top.tb.m
+│       └── ntm_state_top_test.m
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.tb.m
-    │   └── ntm_vector_controller_differentiation.tb.m
+    │   ├── ntm_matrix_controller_differentiation_test.m
+    │   └── ntm_vector_controller_differentiation_test.m
     ├── FNN
-    │   ├── ntm_fnn_b_trainer.tb.m
-    │   ├── ntm_fnn_d_trainer.tb.m
-    │   ├── ntm_fnn_k_trainer.tb.m
-    │   ├── ntm_fnn_trainer.tb.m
-    │   ├── ntm_fnn_u_trainer.tb.m
-    │   ├── ntm_fnn_v_trainer.tb.m
-    │   └── ntm_fnn_w_trainer.tb.m
+    │   ├── ntm_fnn_b_trainer_test.m
+    │   ├── ntm_fnn_d_trainer_test.m
+    │   ├── ntm_fnn_k_trainer_test.m
+    │   ├── ntm_fnn_trainer_test.m
+    │   ├── ntm_fnn_u_trainer_test.m
+    │   ├── ntm_fnn_v_trainer_test.m
+    │   └── ntm_fnn_w_trainer_test.m
     └── LSTM
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.tb.m
-        │   ├── ntm_lstm_activation_d_trainer.tb.m
-        │   ├── ntm_lstm_activation_k_trainer.tb.m
-        │   ├── ntm_lstm_activation_trainer.tb.m
-        │   ├── ntm_lstm_activation_u_trainer.tb.m
-        │   ├── ntm_lstm_activation_v_trainer.tb.m
-        │   └── ntm_lstm_activation_w_trainer.tb.m
+        │   ├── ntm_lstm_activation_b_trainer_test.m
+        │   ├── ntm_lstm_activation_d_trainer_test.m
+        │   ├── ntm_lstm_activation_k_trainer_test.m
+        │   ├── ntm_lstm_activation_trainer_test.m
+        │   ├── ntm_lstm_activation_u_trainer_test.m
+        │   ├── ntm_lstm_activation_v_trainer_test.m
+        │   └── ntm_lstm_activation_w_trainer_test.m
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.tb.m
-        │   ├── ntm_lstm_forget_d_trainer.tb.m
-        │   ├── ntm_lstm_forget_k_trainer.tb.m
-        │   ├── ntm_lstm_forget_trainer.tb.m
-        │   ├── ntm_lstm_forget_u_trainer.tb.m
-        │   ├── ntm_lstm_forget_v_trainer.tb.m
-        │   └── ntm_lstm_forget_w_trainer.tb.m
+        │   ├── ntm_lstm_forget_b_trainer_test.m
+        │   ├── ntm_lstm_forget_d_trainer_test.m
+        │   ├── ntm_lstm_forget_k_trainer_test.m
+        │   ├── ntm_lstm_forget_trainer_test.m
+        │   ├── ntm_lstm_forget_u_trainer_test.m
+        │   ├── ntm_lstm_forget_v_trainer_test.m
+        │   └── ntm_lstm_forget_w_trainer_test.m
         ├── input
-        │   ├── ntm_lstm_input_b_trainer.tb.m
-        │   ├── ntm_lstm_input_d_trainer.tb.m
-        │   ├── ntm_lstm_input_k_trainer.tb.m
-        │   ├── ntm_lstm_input_trainer.tb.m
-        │   ├── ntm_lstm_input_u_trainer.tb.m
-        │   ├── ntm_lstm_input_v_trainer.tb.m
-        │   └── ntm_lstm_input_w_trainer.tb.m
+        │   ├── ntm_lstm_input_b_trainer_test.m
+        │   ├── ntm_lstm_input_d_trainer_test.m
+        │   ├── ntm_lstm_input_k_trainer_test.m
+        │   ├── ntm_lstm_input_trainer_test.m
+        │   ├── ntm_lstm_input_u_trainer_test.m
+        │   ├── ntm_lstm_input_v_trainer_test.m
+        │   └── ntm_lstm_input_w_trainer_test.m
         └── output
-            ├── ntm_lstm_output_b_trainer.tb.m
-            ├── ntm_lstm_output_d_trainer.tb.m
-            ├── ntm_lstm_output_k_trainer.tb.m
-            ├── ntm_lstm_output_trainer.tb.m
-            ├── ntm_lstm_output_u_trainer.tb.m
-            ├── ntm_lstm_output_v_trainer.tb.m
-            └── ntm_lstm_output_w_trainer.tb.m
+            ├── ntm_lstm_output_b_trainer_test.m
+            ├── ntm_lstm_output_d_trainer_test.m
+            ├── ntm_lstm_output_k_trainer_test.m
+            ├── ntm_lstm_output_trainer_test.m
+            ├── ntm_lstm_output_u_trainer_test.m
+            ├── ntm_lstm_output_v_trainer_test.m
+            └── ntm_lstm_output_w_trainer_test.m
 ```
 
 54 directories, 162 files

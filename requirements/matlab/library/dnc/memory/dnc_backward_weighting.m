@@ -45,9 +45,6 @@
 %}
 
 function B_OUT = dnc_backward_weighting(L_IN, W_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
 

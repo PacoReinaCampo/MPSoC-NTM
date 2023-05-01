@@ -45,10 +45,6 @@
 %}
 
 function Y_OUT = dnc_trained_top(X_IN)
-  % Package
-  addpath(genpath('../top'));
-  addpath(genpath('../../trainer/fnn'));
-
   % Constants
   LENGTH_IN = 3;
 

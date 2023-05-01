@@ -45,11 +45,6 @@
 %}
 
 function C_OUT = dnc_read_content_weighting(K_IN, BETA_IN, M_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-  addpath(genpath('../../math/algebra/matrix'));
-  addpath(genpath('../../math/calculus/matrix'));
-
   % Constants
   SIZE_R_IN = length(BETA_IN);
 

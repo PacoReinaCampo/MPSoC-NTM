@@ -45,9 +45,6 @@
 %}
 
 function L_OUT = dnc_temporal_link_matrix(L_IN, W_IN, P_IN)
-  % Package
-  addpath(genpath('../../math/algebra/matrix'));
-
   % Constants
   SIZE_N_IN = length(W_IN);
 

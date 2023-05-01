@@ -45,9 +45,6 @@
 %}
 
 function U_OUT = dnc_usage_vector(U_IN, W_IN, PSI_IN)
-  % Package
-  addpath(genpath('../../math/algebra/vector'));
-
   % Body
   % u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
