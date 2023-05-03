@@ -1,4 +1,0 @@
-cd D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/modular/msim
-
-do D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/modular/msim/macros/design.do
-do D:/QueenField/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/modular/msim/macros/verification.do

@@ -1,4 +1,0 @@
-cd C:/Users/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/memory/msim
-
-do C:/Users/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/memory/msim/macros/design.do
-do C:/Users/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/model/dnc/memory/msim/macros/verification.do

@@ -1,4 +1,0 @@
-cd /home/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/write_heads/msim
-
-do /home/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/write_heads/msim/macros/design.do
-do /home/user/GitHub/Advanced/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/write_heads/msim/macros/verification.do

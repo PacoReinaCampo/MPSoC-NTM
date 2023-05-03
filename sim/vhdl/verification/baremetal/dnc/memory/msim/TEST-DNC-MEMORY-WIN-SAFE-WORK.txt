@@ -1,4 +1,0 @@
-cd D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/memory/msim
-
-do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/memory/msim/macros/design.do
-do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/dnc/memory/msim/macros/verification.do

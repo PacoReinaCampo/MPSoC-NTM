@@ -1,4 +1,0 @@
-cd D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim
-
-do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim/macros/design.do
-do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/model/math/algebra/msim/macros/verification.do
