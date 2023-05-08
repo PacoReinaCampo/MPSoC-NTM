@@ -181,6 +181,8 @@ touch code/state/feedback/model_state_matrix_state.sv
 touch code/state/outputs/model_state_vector_output.sv
 touch code/state/outputs/model_state_vector_state.sv
 touch code/state/top/model_state_top.sv
+touch code/trainer/differentiation/model_matrix_controller_differentiation.sv
+touch code/trainer/differentiation/model_vector_controller_differentiation.sv
 touch code/trainer/FNN/model_trainer.sv
 touch code/trainer/LSTM/model_activation_trainer.sv
 touch code/trainer/LSTM/model_forget_trainer.sv

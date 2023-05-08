@@ -249,6 +249,9 @@ code
 │   └── top
 │       └── ntm_state_top.sv
 └── trainer
+    ├── differentiation
+    │   ├── ntm_matrix_controller_differentiation.sv
+    │   └── ntm_vector_controller_differentiation.sv
     ├── FNN
     │   └── ntm_trainer.sv
     └── LSTM
@@ -257,4 +260,4 @@ code
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
 
-65 directories, 192 files
+66 directories, 194 files

@@ -181,6 +181,8 @@ touch code/state/feedback/ntm_state_matrix_state.sv
 touch code/state/outputs/ntm_state_vector_output.sv
 touch code/state/outputs/ntm_state_vector_state.sv
 touch code/state/top/ntm_state_top.sv
+touch code/trainer/differentiation/ntm_matrix_controller_differentiation.sv
+touch code/trainer/differentiation/ntm_vector_controller_differentiation.sv
 touch code/trainer/FNN/ntm_trainer.sv
 touch code/trainer/LSTM/ntm_activation_trainer.sv
 touch code/trainer/LSTM/ntm_forget_trainer.sv

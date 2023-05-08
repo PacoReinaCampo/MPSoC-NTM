@@ -244,6 +244,9 @@ code
 │   └── top
 │       └── model_state_top.vhd
 └── trainer
+    ├── differentiation
+    │   ├── model_matrix_controller_differentiation.vhd
+    │   └── model_vector_controller_differentiation.vhd
     ├── FNN
     │   └── model_trainer.vhd
     └── LSTM
@@ -252,4 +255,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-65 directories, 187 files
+66 directories, 189 files

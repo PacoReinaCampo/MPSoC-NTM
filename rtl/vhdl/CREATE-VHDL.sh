@@ -181,6 +181,8 @@ touch code/state/feedback/ntm_state_matrix_state.vhd
 touch code/state/outputs/ntm_state_vector_output.vhd
 touch code/state/outputs/ntm_state_vector_state.vhd
 touch code/state/top/ntm_state_top.vhd
+touch code/trainer/differentiation/ntm_matrix_controller_differentiation.vhd
+touch code/trainer/differentiation/ntm_vector_controller_differentiation.vhd
 touch code/trainer/FNN/ntm_trainer.vhd
 touch code/trainer/LSTM/ntm_activation_trainer.vhd
 touch code/trainer/LSTM/ntm_forget_trainer.vhd

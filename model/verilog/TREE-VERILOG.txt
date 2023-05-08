@@ -249,6 +249,9 @@ code
 │   └── top
 │       └── model_state_top.sv
 └── trainer
+    ├── differentiation
+    │   ├── model_matrix_controller_differentiation.sv
+    │   └── model_vector_controller_differentiation.sv
     ├── FNN
     │   └── model_trainer.sv
     └── LSTM
@@ -257,4 +260,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-65 directories, 192 files
+66 directories, 194 files
