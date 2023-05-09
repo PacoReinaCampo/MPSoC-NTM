@@ -102,6 +102,10 @@ code
 │   │   │       ├── ntm_state_top_stimulus.vhd
 │   │   │       └── ntm_state_top_testbench.vhd
 │   │   └── trainer
+│   │       ├── differentiation
+│   │       │   ├── ntm_trainer_differentiation_pkg.vhd
+│   │       │   ├── ntm_trainer_differentiation_stimulus.vhd
+│   │       │   └── ntm_trainer_differentiation_testbench.vhd
 │   │       ├── FNN
 │   │       │   ├── ntm_trainer_fnn_pkg.vhd
 │   │       │   ├── ntm_trainer_fnn_stimulus.vhd
@@ -212,6 +216,10 @@ code
 │       │       ├── model_state_top_stimulus.vhd
 │       │       └── model_state_top_testbench.vhd
 │       └── trainer
+│           ├── differentiation
+│           │   ├── model_trainer_differentiation_pkg.vhd
+│           │   ├── model_trainer_differentiation_stimulus.vhd
+│           │   └── model_trainer_differentiation_testbench.vhd
 │           ├── FNN
 │           │   ├── model_trainer_fnn_pkg.vhd
 │           │   ├── model_trainer_fnn_stimulus.vhd
@@ -323,6 +331,10 @@ code
     │   │       ├── ntm_state_top_stimulus.vhd
     │   │       └── ntm_state_top_testbench.vhd
     │   └── trainer
+    │       ├── differentiation
+    │       │   ├── ntm_trainer_differentiation_pkg.vhd
+    │       │   ├── ntm_trainer_differentiation_stimulus.vhd
+    │       │   └── ntm_trainer_differentiation_testbench.vhd
     │       ├── FNN
     │       │   ├── ntm_trainer_fnn_pkg.vhd
     │       │   ├── ntm_trainer_fnn_stimulus.vhd
@@ -433,6 +445,10 @@ code
         │       ├── model_state_top_stimulus.vhd
         │       └── model_state_top_testbench.vhd
         └── trainer
+            ├── differentiation
+            │   ├── model_trainer_differentiation_pkg.vhd
+            │   ├── model_trainer_differentiation_stimulus.vhd
+            │   └── model_trainer_differentiation_testbench.vhd
             ├── FNN
             │   ├── model_trainer_fnn_pkg.vhd
             │   ├── model_trainer_fnn_stimulus.vhd
@@ -442,4 +458,4 @@ code
                 ├── model_trainer_lstm_stimulus.vhd
                 └── model_trainer_lstm_testbench.vhd
 
-142 directories, 300 files
+146 directories, 312 files

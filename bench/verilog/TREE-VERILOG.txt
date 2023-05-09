@@ -107,6 +107,10 @@ code
 │   │   │       ├── ntm_state_top_stimulus.sv
 │   │   │       └── ntm_state_top_testbench.sv
 │   │   └── trainer
+│   │       ├── differentiation
+│   │       │   ├── ntm_trainer_differentiation_pkg.sv
+│   │       │   ├── ntm_trainer_differentiation_stimulus.sv
+│   │       │   └── ntm_trainer_differentiation_testbench.sv
 │   │       ├── FNN
 │   │       │   ├── ntm_trainer_fnn_pkg.sv
 │   │       │   ├── ntm_trainer_fnn_stimulus.sv
@@ -222,6 +226,10 @@ code
 │       │       ├── model_state_top_stimulus.sv
 │       │       └── model_state_top_testbench.sv
 │       └── trainer
+│           ├── differentiation
+│           │   ├── model_trainer_differentiation_pkg.sv
+│           │   ├── model_trainer_differentiation_stimulus.sv
+│           │   └── model_trainer_differentiation_testbench.sv
 │           ├── FNN
 │           │   ├── model_trainer_fnn_pkg.sv
 │           │   ├── model_trainer_fnn_stimulus.sv
@@ -338,6 +346,10 @@ code
     │   │       ├── ntm_state_top_stimulus.sv
     │   │       └── ntm_state_top_testbench.sv
     │   └── trainer
+    │       ├── differentiation
+    │       │   ├── ntm_trainer_differentiation_pkg.sv
+    │       │   ├── ntm_trainer_differentiation_stimulus.sv
+    │       │   └── ntm_trainer_differentiation_testbench.sv
     │       ├── FNN
     │       │   ├── ntm_trainer_fnn_pkg.sv
     │       │   ├── ntm_trainer_fnn_stimulus.sv
@@ -453,6 +465,10 @@ code
         │       ├── model_state_top_stimulus.sv
         │       └── model_state_top_testbench.sv
         └── trainer
+            ├── differentiation
+            │   ├── model_trainer_differentiation_pkg.sv
+            │   ├── model_trainer_differentiation_stimulus.sv
+            │   └── model_trainer_differentiation_testbench.sv
             ├── FNN
             │   ├── model_trainer_fnn_pkg.sv
             │   ├── model_trainer_fnn_stimulus.sv
@@ -462,4 +478,4 @@ code
                 ├── model_trainer_lstm_stimulus.sv
                 └── model_trainer_lstm_testbench.sv
 
-150 directories, 312 files
+154 directories, 324 files
