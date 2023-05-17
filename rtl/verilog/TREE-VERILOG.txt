@@ -1,4 +1,11 @@
 code
+├── architecture
+│   ├── mpsoc
+│   │   └── ntm_mpsoc.sv
+│   ├── pu
+│   │   └── ntm_pu.sv
+│   └── soc
+│       └── ntm_soc.sv
 ├── arithmetic
 │   ├── float
 │   │   ├── matrix
@@ -260,4 +267,4 @@ code
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
 
-66 directories, 194 files
+70 directories, 197 files
