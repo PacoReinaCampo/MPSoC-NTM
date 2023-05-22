@@ -42,58 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-package tensor;
+import scalar.ntm_scalar_arithmetic;
 
-public class ntm_tensor_arithmetic {
-  public static double[][][] ntm_tensor_adder(double data_a_in[][][], double data_b_in[][][]) {
-    int i, j;
+class test_scalar_arithmetic {
+  public static void main(String[] args) {
+    double data_a_in = 20.0;
+    double data_b_in = 10.0;
 
-    double data_out[][][] = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
- 
-    for (i = 0; i < data_a_in.length; i++)
-      for (j = 0; j < data_a_in[0].length; j++)
-        for (k = 0; k < data_a_in[0][0].length; k++)
-          data_out[i][j][k] = data_a_in[i][j][k] + data_b_in[i][j][k];
- 
-    return data_out;
-  }
+    assert ntm_scalar_arithmetic.ntm_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in;
 
-  public static double[][][] ntm_tensor_subtractor(double data_a_in[][][], double data_b_in[][][]) {
-    int i, j;
+    assert ntm_scalar_arithmetic.ntm_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in;
 
-    double data_out[][][] = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
- 
-    for (i = 0; i < data_a_in.length; i++)
-      for (j = 0; j < data_a_in[0].length; j++)
-        for (k = 0; k < data_a_in[0][0].length; k++)
-          data_out[i][j][k] = data_a_in[i][j][k] - data_b_in[i][j][k];
- 
-    return data_out;
-  }
+    assert ntm_scalar_arithmetic.ntm_scalar_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in;
 
-  public static double[][][] ntm_tensor_multiplier(double data_a_in[][][], double data_b_in[][][]) {
-    int i, j;
-
-    double data_out[][][] = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
- 
-    for (i = 0; i < data_a_in.length; i++)
-      for (j = 0; j < data_a_in[0].length; j++)
-        for (k = 0; k < data_a_in[0][0].length; k++)
-          data_out[i][j][k] = data_a_in[i][j][k] * data_b_in[i][j][k];
- 
-    return data_out;
-  }
-
-  public static double[][][] ntm_tensor_divider(double data_a_in[][][], double data_b_in[][][]) {
-    int i, j;
-
-    double data_out[][][] = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
- 
-    for (i = 0; i < data_a_in.length; i++)
-      for (j = 0; j < data_a_in[0].length; j++)
-        for (k = 0; k < data_a_in[0][0].length; k++)
-          data_out[i][j][k] = data_a_in[i][j][k] / data_b_in[i][j][k];
- 
-    return data_out;
+    assert ntm_scalar_arithmetic.ntm_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in;
   }
 }
