@@ -1,0 +1,65 @@
+src/test
+└── scala
+    ├── classes
+    │   ├── philosophers
+    │   │   └── ntm_philosophers_test.scala
+    │   ├── soldiers
+    │   │   └── ntm_soldiers_test.scala
+    │   └── workers
+    │       └── ntm_workers_test.scala
+    └── computing
+        ├── advanced_computer_architecture
+        │   ├── multi_processor_system_on_chip
+        │   │   └── multi_processor_system_on_chip_test.scala
+        │   ├── processing_unit
+        │   │   ├── mimd_test.scala
+        │   │   ├── misd_test.scala
+        │   │   ├── simd_test.scala
+        │   │   └── sisd_test.scala
+        │   └── system_on_chip
+        │       ├── bus_on_chip_test.scala
+        │       └── network_on_chip_test.scala
+        ├── computer_architecture
+        │   ├── harvard_architecture
+        │   │   ├── pu_or1k_test.scala
+        │   │   └── pu_riscv_test.scala
+        │   └── von_neumann_architecture
+        │       ├── pu_msp430_test.scala
+        │       └── pu_riscv_test.scala
+        ├── information
+        │   ├── bit
+        │   │   └── bit_test.scala
+        │   ├── combinational_logic
+        │   │   ├── arithmetic_circuits_test.scala
+        │   │   └── logic_circuits_test.scala
+        │   ├── finite_state_machine
+        │   │   └── finite_state_machine_test.scala
+        │   ├── logic_gate
+        │   │   ├── and_gate_test.scala
+        │   │   ├── nand_gate_test.scala
+        │   │   ├── nor_gate_test.scala
+        │   │   ├── not_gate_test.scala
+        │   │   ├── or_gate_test.scala
+        │   │   ├── xnor_gate_test.scala
+        │   │   ├── xor_gate_test.scala
+        │   │   └── yes_gate_test.scala
+        │   └── pushdown_automaton
+        │       └── pushdown_automaton_test.scala
+        ├── neural_network
+        │   ├── feedforward_neural_network
+        │   │   └── feedforward_neural_network_test.scala
+        │   ├── long_short_term_memory_neural_network
+        │   │   └── long_short_term_memory_neural_network_test.scala
+        │   └── transformer_neural_network
+        │       └── transformer_neural_network_test.scala
+        └── turing_machine
+            ├── differentiable_neural_computer
+            │   ├── feedforward_differentiable_neural_computer_test.scala
+            │   ├── lstm_differentiable_neural_computer_test.scala
+            │   └── transformer_differentiable_neural_computer_test.scala
+            └── neural_turing_machine
+                ├── feedforward_neural_turing_machine_test.scala
+                ├── lstm_neural_turing_machine_test.scala
+                └── transformer_neural_turing_machine_test.scala
+
+26 directories, 36 files
