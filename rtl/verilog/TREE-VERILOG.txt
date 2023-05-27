@@ -113,40 +113,6 @@ code
 │           ├── ntm_controller.sv
 │           ├── ntm_decoder.sv
 │           └── ntm_encoder.sv
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing.sv
-│   │   ├── dnc_allocation_weighting.sv
-│   │   ├── dnc_backward_weighting.sv
-│   │   ├── dnc_content_based_addressing.sv
-│   │   ├── dnc_forward_weighting.sv
-│   │   ├── dnc_memory_matrix.sv
-│   │   ├── dnc_memory_retention_vector.sv
-│   │   ├── dnc_precedence_weighting.sv
-│   │   ├── dnc_read_content_weighting.sv
-│   │   ├── dnc_read_vectors.sv
-│   │   ├── dnc_read_weighting.sv
-│   │   ├── dnc_sort_vector.sv
-│   │   ├── dnc_temporal_link_matrix.sv
-│   │   ├── dnc_usage_vector.sv
-│   │   ├── dnc_write_content_weighting.sv
-│   │   └── dnc_write_weighting.sv
-│   ├── read_heads
-│   │   ├── dnc_free_gates.sv
-│   │   ├── dnc_read_keys.sv
-│   │   ├── dnc_read_modes.sv
-│   │   └── dnc_read_strengths.sv
-│   ├── top
-│   │   ├── dnc_interface_vector.sv
-│   │   ├── dnc_output_vector.sv
-│   │   └── dnc_top.sv
-│   └── write_heads
-│       ├── dnc_allocation_gate.sv
-│       ├── dnc_erase_vector.sv
-│       ├── dnc_write_gate.sv
-│       ├── dnc_write_key.sv
-│       ├── dnc_write_strength.sv
-│       └── dnc_write_vector.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -237,7 +203,6 @@ code
 │       ├── ntm_erasing.sv
 │       └── ntm_writing.sv
 ├── pkg
-│   ├── dnc_core_pkg.sv
 │   ├── ntm_arithmetic_pkg.sv
 │   ├── ntm_core_pkg.sv
 │   ├── ntm_fnn_controller_pkg.sv
@@ -267,4 +232,4 @@ code
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
 
-70 directories, 197 files
+65 directories, 167 files

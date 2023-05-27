@@ -42,23 +42,6 @@ code
 │   │   │           ├── ntm_standard_transformer_pkg.sv
 │   │   │           ├── ntm_standard_transformer_stimulus.sv
 │   │   │           └── ntm_standard_transformer_testbench.sv
-│   │   ├── dnc
-│   │   │   ├── memory
-│   │   │   │   ├── dnc_memory_pkg.sv
-│   │   │   │   ├── dnc_memory_stimulus.sv
-│   │   │   │   └── dnc_memory_testbench.sv
-│   │   │   ├── read_heads
-│   │   │   │   ├── dnc_read_heads_pkg.sv
-│   │   │   │   ├── dnc_read_heads_stimulus.sv
-│   │   │   │   └── dnc_read_heads_testbench.sv
-│   │   │   ├── top
-│   │   │   │   ├── dnc_top_pkg.sv
-│   │   │   │   ├── dnc_top_stimulus.sv
-│   │   │   │   └── dnc_top_testbench.sv
-│   │   │   └── write_heads
-│   │   │       ├── dnc_write_heads_pkg.sv
-│   │   │       ├── dnc_write_heads_stimulus.sv
-│   │   │       └── dnc_write_heads_testbench.sv
 │   │   ├── math
 │   │   │   ├── algebra
 │   │   │   │   ├── ntm_algebra_pkg.sv
@@ -161,23 +144,6 @@ code
 │       │           ├── model_standard_transformer_pkg.sv
 │       │           ├── model_standard_transformer_stimulus.sv
 │       │           └── model_standard_transformer_testbench.sv
-│       ├── dnc
-│       │   ├── memory
-│       │   │   ├── model_memory_pkg.sv
-│       │   │   ├── model_memory_stimulus.sv
-│       │   │   └── model_memory_testbench.sv
-│       │   ├── read_heads
-│       │   │   ├── model_read_heads_pkg.sv
-│       │   │   ├── model_read_heads_stimulus.sv
-│       │   │   └── model_read_heads_testbench.sv
-│       │   ├── top
-│       │   │   ├── model_top_pkg.sv
-│       │   │   ├── model_top_stimulus.sv
-│       │   │   └── model_top_testbench.sv
-│       │   └── write_heads
-│       │       ├── model_write_heads_pkg.sv
-│       │       ├── model_write_heads_stimulus.sv
-│       │       └── model_write_heads_testbench.sv
 │       ├── math
 │       │   ├── algebra
 │       │   │   ├── model_algebra_pkg.sv
@@ -281,23 +247,6 @@ code
     │   │           ├── ntm_standard_transformer_pkg.sv
     │   │           ├── ntm_standard_transformer_stimulus.sv
     │   │           └── ntm_standard_transformer_testbench.sv
-    │   ├── dnc
-    │   │   ├── memory
-    │   │   │   ├── dnc_memory_pkg.sv
-    │   │   │   ├── dnc_memory_stimulus.sv
-    │   │   │   └── dnc_memory_testbench.sv
-    │   │   ├── read_heads
-    │   │   │   ├── dnc_read_heads_pkg.sv
-    │   │   │   ├── dnc_read_heads_stimulus.sv
-    │   │   │   └── dnc_read_heads_testbench.sv
-    │   │   ├── top
-    │   │   │   ├── dnc_top_pkg.sv
-    │   │   │   ├── dnc_top_stimulus.sv
-    │   │   │   └── dnc_top_testbench.sv
-    │   │   └── write_heads
-    │   │       ├── dnc_write_heads_pkg.sv
-    │   │       ├── dnc_write_heads_stimulus.sv
-    │   │       └── dnc_write_heads_testbench.sv
     │   ├── math
     │   │   ├── algebra
     │   │   │   ├── ntm_algebra_pkg.sv
@@ -400,23 +349,6 @@ code
         │           ├── model_standard_transformer_pkg.sv
         │           ├── model_standard_transformer_stimulus.sv
         │           └── model_standard_transformer_testbench.sv
-        ├── dnc
-        │   ├── memory
-        │   │   ├── model_memory_pkg.sv
-        │   │   ├── model_memory_stimulus.sv
-        │   │   └── model_memory_testbench.sv
-        │   ├── read_heads
-        │   │   ├── model_read_heads_pkg.sv
-        │   │   ├── model_read_heads_stimulus.sv
-        │   │   └── model_read_heads_testbench.sv
-        │   ├── top
-        │   │   ├── model_top_pkg.sv
-        │   │   ├── model_top_stimulus.sv
-        │   │   └── model_top_testbench.sv
-        │   └── write_heads
-        │       ├── model_write_heads_pkg.sv
-        │       ├── model_write_heads_stimulus.sv
-        │       └── model_write_heads_testbench.sv
         ├── math
         │   ├── algebra
         │   │   ├── model_algebra_pkg.sv
@@ -478,4 +410,4 @@ code
                 ├── model_trainer_lstm_stimulus.sv
                 └── model_trainer_lstm_testbench.sv
 
-154 directories, 324 files
+134 directories, 276 files

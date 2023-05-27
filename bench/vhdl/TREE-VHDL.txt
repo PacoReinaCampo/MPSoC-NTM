@@ -37,23 +37,6 @@ code
 │   │   │       ├── ntm_transformer_pkg.vhd
 │   │   │       ├── ntm_transformer_stimulus.vhd
 │   │   │       └── ntm_transformer_testbench.vhd
-│   │   ├── dnc
-│   │   │   ├── memory
-│   │   │   │   ├── dnc_memory_pkg.vhd
-│   │   │   │   ├── dnc_memory_stimulus.vhd
-│   │   │   │   └── dnc_memory_testbench.vhd
-│   │   │   ├── read_heads
-│   │   │   │   ├── dnc_read_heads_pkg.vhd
-│   │   │   │   ├── dnc_read_heads_stimulus.vhd
-│   │   │   │   └── dnc_read_heads_testbench.vhd
-│   │   │   ├── top
-│   │   │   │   ├── dnc_top_pkg.vhd
-│   │   │   │   ├── dnc_top_stimulus.vhd
-│   │   │   │   └── dnc_top_testbench.vhd
-│   │   │   └── write_heads
-│   │   │       ├── dnc_write_heads_pkg.vhd
-│   │   │       ├── dnc_write_heads_stimulus.vhd
-│   │   │       └── dnc_write_heads_testbench.vhd
 │   │   ├── math
 │   │   │   ├── algebra
 │   │   │   │   ├── ntm_algebra_pkg.vhd
@@ -151,23 +134,6 @@ code
 │       │       ├── model_transformer_pkg.vhd
 │       │       ├── model_transformer_stimulus.vhd
 │       │       └── model_transformer_testbench.vhd
-│       ├── dnc
-│       │   ├── memory
-│       │   │   ├── model_memory_pkg.vhd
-│       │   │   ├── model_memory_stimulus.vhd
-│       │   │   └── model_memory_testbench.vhd
-│       │   ├── read_heads
-│       │   │   ├── model_read_heads_pkg.vhd
-│       │   │   ├── model_read_heads_stimulus.vhd
-│       │   │   └── model_read_heads_testbench.vhd
-│       │   ├── top
-│       │   │   ├── model_top_pkg.vhd
-│       │   │   ├── model_top_stimulus.vhd
-│       │   │   └── model_top_testbench.vhd
-│       │   └── write_heads
-│       │       ├── model_write_heads_pkg.vhd
-│       │       ├── model_write_heads_stimulus.vhd
-│       │       └── model_write_heads_testbench.vhd
 │       ├── math
 │       │   ├── algebra
 │       │   │   ├── model_algebra_pkg.vhd
@@ -266,23 +232,6 @@ code
     │   │       ├── ntm_transformer_pkg.vhd
     │   │       ├── ntm_transformer_stimulus.vhd
     │   │       └── ntm_transformer_testbench.vhd
-    │   ├── dnc
-    │   │   ├── memory
-    │   │   │   ├── dnc_memory_pkg.vhd
-    │   │   │   ├── dnc_memory_stimulus.vhd
-    │   │   │   └── dnc_memory_testbench.vhd
-    │   │   ├── read_heads
-    │   │   │   ├── dnc_read_heads_pkg.vhd
-    │   │   │   ├── dnc_read_heads_stimulus.vhd
-    │   │   │   └── dnc_read_heads_testbench.vhd
-    │   │   ├── top
-    │   │   │   ├── dnc_top_pkg.vhd
-    │   │   │   ├── dnc_top_stimulus.vhd
-    │   │   │   └── dnc_top_testbench.vhd
-    │   │   └── write_heads
-    │   │       ├── dnc_write_heads_pkg.vhd
-    │   │       ├── dnc_write_heads_stimulus.vhd
-    │   │       └── dnc_write_heads_testbench.vhd
     │   ├── math
     │   │   ├── algebra
     │   │   │   ├── ntm_algebra_pkg.vhd
@@ -380,23 +329,6 @@ code
         │       ├── model_transformer_pkg.vhd
         │       ├── model_transformer_stimulus.vhd
         │       └── model_transformer_testbench.vhd
-        ├── dnc
-        │   ├── memory
-        │   │   ├── model_memory_pkg.vhd
-        │   │   ├── model_memory_stimulus.vhd
-        │   │   └── model_memory_testbench.vhd
-        │   ├── read_heads
-        │   │   ├── model_read_heads_pkg.vhd
-        │   │   ├── model_read_heads_stimulus.vhd
-        │   │   └── model_read_heads_testbench.vhd
-        │   ├── top
-        │   │   ├── model_top_pkg.vhd
-        │   │   ├── model_top_stimulus.vhd
-        │   │   └── model_top_testbench.vhd
-        │   └── write_heads
-        │       ├── model_write_heads_pkg.vhd
-        │       ├── model_write_heads_stimulus.vhd
-        │       └── model_write_heads_testbench.vhd
         ├── math
         │   ├── algebra
         │   │   ├── model_algebra_pkg.vhd
@@ -458,4 +390,4 @@ code
                 ├── model_trainer_lstm_stimulus.vhd
                 └── model_trainer_lstm_testbench.vhd
 
-146 directories, 312 files
+126 directories, 264 files

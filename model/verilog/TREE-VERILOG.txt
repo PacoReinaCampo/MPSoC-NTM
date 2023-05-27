@@ -113,40 +113,6 @@ code
 │           ├── model_controller.sv
 │           ├── model_decoder.sv
 │           └── model_encoder.sv
-├── dnc
-│   ├── memory
-│   │   ├── model_addressing.sv
-│   │   ├── model_allocation_weighting.sv
-│   │   ├── model_backward_weighting.sv
-│   │   ├── model_content_based_addressing.sv
-│   │   ├── model_forward_weighting.sv
-│   │   ├── model_memory_matrix.sv
-│   │   ├── model_memory_retention_vector.sv
-│   │   ├── model_precedence_weighting.sv
-│   │   ├── model_read_content_weighting.sv
-│   │   ├── model_read_vectors.sv
-│   │   ├── model_read_weighting.sv
-│   │   ├── model_sort_vector.sv
-│   │   ├── model_temporal_link_matrix.sv
-│   │   ├── model_usage_vector.sv
-│   │   ├── model_write_content_weighting.sv
-│   │   └── model_write_weighting.sv
-│   ├── read_heads
-│   │   ├── model_free_gates.sv
-│   │   ├── model_read_keys.sv
-│   │   ├── model_read_modes.sv
-│   │   └── model_read_strengths.sv
-│   ├── top
-│   │   ├── model_interface_vector.sv
-│   │   ├── model_output_vector.sv
-│   │   └── model_top.sv
-│   └── write_heads
-│       ├── model_allocation_gate.sv
-│       ├── model_erase_vector.sv
-│       ├── model_write_gate.sv
-│       ├── model_write_key.sv
-│       ├── model_write_strength.sv
-│       └── model_write_vector.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -238,7 +204,6 @@ code
 │       └── model_writing.sv
 ├── pkg
 │   ├── model_arithmetic_pkg.sv
-│   ├── model_dnc_core_pkg.sv
 │   ├── model_fnn_controller_pkg.sv
 │   ├── model_lstm_controller_pkg.sv
 │   ├── model_math_pkg.sv
@@ -267,4 +232,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-70 directories, 197 files
+65 directories, 167 files

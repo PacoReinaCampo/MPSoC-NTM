@@ -113,33 +113,6 @@ code
 │           ├── ntm_controller.vhd
 │           ├── ntm_decoder.vhd
 │           └── ntm_encoder.vhd
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing.vhd
-│   │   ├── dnc_allocation_weighting.vhd
-│   │   ├── dnc_backward_weighting.vhd
-│   │   ├── dnc_content_based_addressing.vhd
-│   │   ├── dnc_forward_weighting.vhd
-│   │   ├── dnc_memory_matrix.vhd
-│   │   ├── dnc_memory_retention_vector.vhd
-│   │   ├── dnc_precedence_weighting.vhd
-│   │   ├── dnc_read_content_weighting.vhd
-│   │   ├── dnc_read_vectors.vhd
-│   │   ├── dnc_read_weighting.vhd
-│   │   ├── dnc_sort_vector.vhd
-│   │   ├── dnc_temporal_link_matrix.vhd
-│   │   ├── dnc_usage_vector.vhd
-│   │   ├── dnc_write_content_weighting.vhd
-│   │   └── dnc_write_weighting.vhd
-│   ├── read_heads
-│   │   └── dnc_read_heads.vhd
-│   ├── top
-│   │   ├── dnc_interface_matrix.vhd
-│   │   ├── dnc_interface_vector.vhd
-│   │   ├── dnc_output_vector.vhd
-│   │   └── dnc_top.vhd
-│   └── write_heads
-│       └── dnc_write_heads.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -231,11 +204,9 @@ code
 │       ├── ntm_erasing.vhd
 │       └── ntm_writing.vhd
 ├── pkg
-│   ├── dnc_core_pkg.vhd
 │   ├── ntm_arithmetic_pkg.vhd
 │   ├── ntm_core_pkg.vhd
 │   ├── ntm_fnn_controller_pkg.vhd
-│   ├── ntm_intro_pkg.vhd
 │   ├── ntm_lstm_controller_pkg.vhd
 │   ├── ntm_math_pkg.vhd
 │   └── ntm_state_pkg.vhd
@@ -262,4 +233,4 @@ code
         ├── ntm_input_trainer.vhd
         └── ntm_output_trainer.vhd
 
-70 directories, 192 files
+65 directories, 168 files
