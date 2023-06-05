@@ -2,27 +2,27 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /model_algebra_pkg/MONITOR_TEST
-add wave -noupdate /model_algebra_pkg/MONITOR_CASE
+add wave -noupdate /ntm_algebra_pkg/MONITOR_TEST
+add wave -noupdate /ntm_algebra_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM VECTOR MODULE TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/CLK
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/RST
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/START
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/LENGTH_IN
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/DATA_IN_ENABLE
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/DATA_IN
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/DATA_ENABLE
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/READY
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/DATA_OUT_ENABLE
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/DATA_OUT
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/CLK
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/RST
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/START
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/LENGTH_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_IN_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/READY
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_OUT_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_OUT
 
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/module_ctrl_fsm_int
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/module_ctrl_fsm_int
 
-add wave -noupdate /model_algebra_testbench/model_vector_module_test/vector_module/index_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

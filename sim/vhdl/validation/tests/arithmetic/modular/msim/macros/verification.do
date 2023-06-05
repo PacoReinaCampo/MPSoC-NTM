@@ -28,7 +28,7 @@ alias model_scalar_modular_mod_verification_compilation {
 
   #WAVES
   view -title model_scalar_modular_mod wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_scalar_modular_mod.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_scalar_modular_mod.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MOD_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0 true 0
@@ -57,7 +57,7 @@ alias model_scalar_modular_adder_verification_compilation {
 
   #WAVES
   view -title model_scalar_modular_adder wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_scalar_modular_adder.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_scalar_modular_adder.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0 true 0
@@ -86,7 +86,7 @@ alias model_scalar_modular_multiplier_verification_compilation {
 
   #WAVES
   view -title model_scalar_modular_multiplier wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_scalar_modular_multiplier.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_scalar_modular_multiplier.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0 true 0
@@ -115,7 +115,7 @@ alias model_scalar_modular_inverter_verification_compilation {
 
   #WAVES
   view -title model_scalar_modular_inverter wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_scalar_modular_inverter.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_scalar_modular_inverter.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0 true 0
@@ -144,7 +144,7 @@ alias model_vector_modular_mod_verification_compilation {
 
   #WAVES
   view -title model_vector_modular_mod wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_vector_modular_mod.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_vector_modular_mod.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0 true 0
@@ -173,7 +173,7 @@ alias model_vector_modular_adder_verification_compilation {
 
   #WAVES
   view -title model_vector_modular_adder wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_vector_modular_adder.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_vector_modular_adder.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0 true 0
@@ -202,7 +202,7 @@ alias model_vector_modular_multiplier_verification_compilation {
 
   #WAVES
   view -title model_vector_modular_multiplier wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_vector_modular_multiplier.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_vector_modular_multiplier.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0 true 0
@@ -231,7 +231,7 @@ alias model_vector_modular_inverter_verification_compilation {
 
   #WAVES
   view -title model_vector_modular_inverter wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_vector_modular_inverter.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_vector_modular_inverter.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0 true 0
@@ -260,7 +260,7 @@ alias model_matrix_modular_mod_verification_compilation {
 
   #WAVES
   view -title model_matrix_modular_mod wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_matrix_modular_mod.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_matrix_modular_mod.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0 true 0
@@ -289,7 +289,7 @@ alias model_matrix_modular_adder_verification_compilation {
 
   #WAVES
   view -title model_matrix_modular_adder wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_matrix_modular_adder.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_matrix_modular_adder.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0 true 0
@@ -318,7 +318,7 @@ alias model_matrix_modular_multiplier_verification_compilation {
 
   #WAVES
   view -title model_matrix_modular_multiplier wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_matrix_modular_multiplier.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_matrix_modular_multiplier.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0 true 0
@@ -347,7 +347,7 @@ alias model_matrix_modular_inverter_verification_compilation {
 
   #WAVES
   view -title model_matrix_modular_inverter wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_matrix_modular_inverter.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_matrix_modular_inverter.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0 true 0
@@ -376,7 +376,7 @@ alias model_tensor_modular_mod_verification_compilation {
 
   #WAVES
   view -title model_tensor_modular_mod wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_tensor_modular_mod.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_tensor_modular_mod.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_MOD_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_0 true 0
@@ -405,7 +405,7 @@ alias model_tensor_modular_adder_verification_compilation {
 
   #WAVES
   view -title model_tensor_modular_adder wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_tensor_modular_adder.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_tensor_modular_adder.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_ADDER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_0 true 0
@@ -434,7 +434,7 @@ alias model_tensor_modular_multiplier_verification_compilation {
 
   #WAVES
   view -title model_tensor_modular_multiplier wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_tensor_modular_multiplier.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_tensor_modular_multiplier.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0 true 0
@@ -463,7 +463,7 @@ alias model_tensor_modular_inverter_verification_compilation {
 
   #WAVES
   view -title model_tensor_modular_inverter wave
-  do $simulation_path/model/arithmetic/modular/msim/waves/model_tensor_modular_inverter.do
+  do $simulation_path/arithmetic/modular/msim/waves/model_tensor_modular_inverter.do
 
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_INVERTER_TEST true 0
   force -freeze sim:/model_modular_pkg/STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_0 true 0

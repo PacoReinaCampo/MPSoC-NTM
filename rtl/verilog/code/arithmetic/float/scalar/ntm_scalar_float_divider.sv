@@ -37,6 +37,8 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
+import ntm_arithmetic_pkg::*;
+
 module ntm_scalar_float_divider #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
@@ -52,57 +54,89 @@ module ntm_scalar_float_divider #(
   // DATA
   input      [DATA_SIZE-1:0] DATA_A_IN,
   input      [DATA_SIZE-1:0] DATA_B_IN,
-  output reg [DATA_SIZE-1:0] DATA_OUT
+
+  output reg [DATA_SIZE-1:0] DATA_OUT,
+  output reg                 OVERFLOW_OUT
 );
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] SET_DATA_B_STATE = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE = 2;
-  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter STARTER_STATE = 1'b0;
+  parameter ENDER_STATE = 1'b1;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
   //////////////////////////////////////////////////////////////////////////////
-
-  parameter ZERO_CONTROL = 0;
-  parameter ONE_CONTROL = 1;
-  parameter TWO_CONTROL = 2;
-  parameter THREE_CONTROL = 3;
-
-  parameter ZERO_DATA = 0;
-  parameter ONE_DATA = 1;
-  parameter TWO_DATA = 2;
-  parameter THREE_DATA = 3;
-
-  parameter FULL = 1;
-  parameter EMPTY = 0;
-
-  parameter EULER = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Signals
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [        2:0] divider_ctrl_fsm_int;
+  reg  divider_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE:0] u_int;
-  reg [DATA_SIZE:0] v_int;
-
-  reg [DATA_SIZE:0] divider_int;
+  real data_a_int;
+  real data_b_int;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
-
   // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if (RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT             <= ZERO_DATA;
+
+      OVERFLOW_OUT         <= 1'b0;
+
+      // Control Outputs
+      READY                <= 1'b0;
+
+      // Data Internal
+      data_a_int           <= 0.0;
+      data_b_int           <= 0.0;
+
+      // FSM Control
+      divider_ctrl_fsm_int <= STARTER_STATE;
+
+    end else begin
+      case (divider_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if (START == 1'b1) begin
+            // Data Internal
+            data_a_int           <= $bitstoreal(DATA_A_IN);
+            data_b_int           <= $bitstoreal(DATA_B_IN);
+
+            // FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
+          end
+        end
+        ENDER_STATE: begin  // STEP 1
+
+          // Data Outputs
+          DATA_OUT             <= $realtobits(data_a_int / data_b_int);
+
+          OVERFLOW_OUT         <= 1'b0;
+
+          // Control Outputs
+          READY                <= 1'b1;
+
+          // FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
+        end
+        default: begin
+          // FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
 endmodule

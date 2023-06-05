@@ -27,7 +27,7 @@ alias model_scalar_float_adder_verification_compilation {
 
   #WAVES
   view -title model_scalar_float_adder wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_scalar_float_adder.do
+  do $simulation_path/arithmetic/float/msim/waves/model_scalar_float_adder.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0 true 0
@@ -56,7 +56,7 @@ alias model_scalar_float_multiplier_verification_compilation {
 
   #WAVES
   view -title model_scalar_float_multiplier wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_scalar_float_multiplier.do
+  do $simulation_path/arithmetic/float/msim/waves/model_scalar_float_multiplier.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 true 0
@@ -85,7 +85,7 @@ alias model_scalar_float_divider_verification_compilation {
 
   #WAVES
   view -title model_scalar_float_divider wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_scalar_float_divider.do
+  do $simulation_path/arithmetic/float/msim/waves/model_scalar_float_divider.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0 true 0
@@ -114,7 +114,7 @@ alias model_vector_float_adder_verification_compilation {
 
   #WAVES
   view -title model_vector_float_adder wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_vector_float_adder.do
+  do $simulation_path/arithmetic/float/msim/waves/model_vector_float_adder.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_ADDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_0 true 0
@@ -143,7 +143,7 @@ alias model_vector_float_multiplier_verification_compilation {
 
   #WAVES
   view -title model_vector_float_multiplier wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_vector_float_multiplier.do
+  do $simulation_path/arithmetic/float/msim/waves/model_vector_float_multiplier.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_0 true 0
@@ -172,7 +172,7 @@ alias model_vector_float_divider_verification_compilation {
 
   #WAVES
   view -title model_vector_float_divider wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_vector_float_divider.do
+  do $simulation_path/arithmetic/float/msim/waves/model_vector_float_divider.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_0 true 0
@@ -201,7 +201,7 @@ alias model_matrix_float_adder_verification_compilation {
 
   #WAVES
   view -title model_matrix_float_adder wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_matrix_float_adder.do
+  do $simulation_path/arithmetic/float/msim/waves/model_matrix_float_adder.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_ADDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_0 true 0
@@ -230,7 +230,7 @@ alias model_matrix_float_multiplier_verification_compilation {
 
   #WAVES
   view -title model_matrix_float_multiplier wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_matrix_float_multiplier.do
+  do $simulation_path/arithmetic/float/msim/waves/model_matrix_float_multiplier.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0 true 0
@@ -259,7 +259,7 @@ alias model_matrix_float_divider_verification_compilation {
 
   #WAVES
   view -title model_matrix_float_divider wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_matrix_float_divider.do
+  do $simulation_path/arithmetic/float/msim/waves/model_matrix_float_divider.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_0 true 0
@@ -288,7 +288,7 @@ alias model_tensor_float_adder_verification_compilation {
 
   #WAVES
   view -title model_tensor_float_adder wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_tensor_float_adder.do
+  do $simulation_path/arithmetic/float/msim/waves/model_tensor_float_adder.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0 true 0
@@ -317,7 +317,7 @@ alias model_tensor_float_multiplier_verification_compilation {
 
   #WAVES
   view -title model_tensor_float_multiplier wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_tensor_float_multiplier.do
+  do $simulation_path/arithmetic/float/msim/waves/model_tensor_float_multiplier.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 true 0
@@ -346,7 +346,7 @@ alias model_tensor_float_divider_verification_compilation {
 
   #WAVES
   view -title model_tensor_float_divider wave
-  do $simulation_path/model/arithmetic/float/msim/waves/model_tensor_float_divider.do
+  do $simulation_path/arithmetic/float/msim/waves/model_tensor_float_divider.do
 
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST true 0
   force -freeze sim:/model_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0 true 0

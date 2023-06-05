@@ -2,30 +2,30 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /model_series_pkg/MONITOR_TEST
-add wave -noupdate /model_series_pkg/MONITOR_CASE
+add wave -noupdate /ntm_series_pkg/MONITOR_TEST
+add wave -noupdate /ntm_series_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM VECTOR EXPONENTIATOR TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/CLK
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/RST
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/START
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/SIZE_IN
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/DATA_IN_ENABLE
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/DATA_IN
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/READY
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/DATA_OUT_ENABLE
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/index_loop
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/DATA_OUT
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/CLK
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/RST
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/START
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/SIZE_IN
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/DATA_IN_ENABLE
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/DATA_IN
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/READY
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/DATA_OUT_ENABLE
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/index_loop
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/DATA_OUT
 
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/exponentiator_ctrl_fsm_int
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/exponentiator_ctrl_fsm_int
 
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/start_scalar_exponentiator_function
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/data_in_scalar_exponentiator_function
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/ready_scalar_exponentiator_function
-add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/data_out_scalar_exponentiator_function
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/start_scalar_exponentiator_function
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/data_in_scalar_exponentiator_function
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/ready_scalar_exponentiator_function
+add wave -noupdate /ntm_series_testbench/ntm_vector_exponentiator_function_test/vector_exponentiator_function/data_out_scalar_exponentiator_function
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

@@ -28,7 +28,7 @@ alias model_scalar_cosh_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_cosh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_scalar_cosh_function.do
+  do $simulation_path/math/series/msim/waves/model_scalar_cosh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_COSH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_COSH_CASE_0 true 0
@@ -57,7 +57,7 @@ alias model_scalar_exponentiator_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_exponentiator_function wave
-  do $simulation_path/model/math/series/msim/waves/model_scalar_exponentiator_function.do
+  do $simulation_path/math/series/msim/waves/model_scalar_exponentiator_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 true 0
@@ -86,7 +86,7 @@ alias model_scalar_logarithm_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_logarithm_function wave
-  do $simulation_path/model/math/series/msim/waves/model_scalar_logarithm_function.do
+  do $simulation_path/math/series/msim/waves/model_scalar_logarithm_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_LOGARITHM_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0 true 0
@@ -115,7 +115,7 @@ alias model_scalar_sinh_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_sinh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_scalar_sinh_function.do
+  do $simulation_path/math/series/msim/waves/model_scalar_sinh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_SINH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_SINH_CASE_0 true 0
@@ -144,7 +144,7 @@ alias model_scalar_tanh_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_tanh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_scalar_tanh_function.do
+  do $simulation_path/math/series/msim/waves/model_scalar_tanh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_TANH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_SCALAR_TANH_CASE_0 true 0
@@ -173,7 +173,7 @@ alias model_vector_cosh_function_verification_compilation {
 
   #WAVES
   view -title model_vector_cosh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_vector_cosh_function.do
+  do $simulation_path/math/series/msim/waves/model_vector_cosh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_COSH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_COSH_CASE_0 true 0
@@ -202,7 +202,7 @@ alias model_vector_exponentiator_function_verification_compilation {
 
   #WAVES
   view -title model_vector_exponentiator_function wave
-  do $simulation_path/model/math/series/msim/waves/model_vector_exponentiator_function.do
+  do $simulation_path/math/series/msim/waves/model_vector_exponentiator_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 true 0
@@ -231,7 +231,7 @@ alias model_vector_logarithm_function_verification_compilation {
 
   #WAVES
   view -title model_vector_logarithm_function wave
-  do $simulation_path/model/math/series/msim/waves/model_vector_logarithm_function.do
+  do $simulation_path/math/series/msim/waves/model_vector_logarithm_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_LOGARITHM_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0 true 0
@@ -260,7 +260,7 @@ alias model_vector_sinh_function_verification_compilation {
 
   #WAVES
   view -title model_vector_sinh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_vector_sinh_function.do
+  do $simulation_path/math/series/msim/waves/model_vector_sinh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_SINH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_SINH_CASE_0 true 0
@@ -289,7 +289,7 @@ alias model_vector_tanh_function_verification_compilation {
 
   #WAVES
   view -title model_vector_tanh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_vector_tanh_function.do
+  do $simulation_path/math/series/msim/waves/model_vector_tanh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_TANH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_VECTOR_TANH_CASE_0 true 0
@@ -318,7 +318,7 @@ alias model_matrix_cosh_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_cosh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_matrix_cosh_function.do
+  do $simulation_path/math/series/msim/waves/model_matrix_cosh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_COSH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_COSH_CASE_0 true 0
@@ -347,7 +347,7 @@ alias model_matrix_exponentiator_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_exponentiator_function wave
-  do $simulation_path/model/math/series/msim/waves/model_matrix_exponentiator_function.do
+  do $simulation_path/math/series/msim/waves/model_matrix_exponentiator_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 true 0
@@ -376,7 +376,7 @@ alias model_matrix_logarithm_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_logarithm_function wave
-  do $simulation_path/model/math/series/msim/waves/model_matrix_logarithm_function.do
+  do $simulation_path/math/series/msim/waves/model_matrix_logarithm_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_LOGARITHM_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0 true 0
@@ -405,7 +405,7 @@ alias model_matrix_sinh_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_sinh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_matrix_sinh_function.do
+  do $simulation_path/math/series/msim/waves/model_matrix_sinh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_SINH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_SINH_CASE_0 true 0
@@ -434,7 +434,7 @@ alias model_matrix_tanh_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_tanh_function wave
-  do $simulation_path/model/math/series/msim/waves/model_matrix_tanh_function.do
+  do $simulation_path/math/series/msim/waves/model_matrix_tanh_function.do
 
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_TANH_TEST true 0
   force -freeze sim:/model_series_pkg/STIMULUS_NTM_MATRIX_TANH_CASE_0 true 0

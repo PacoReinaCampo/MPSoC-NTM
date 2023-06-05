@@ -9,225 +9,225 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# model_scalar_modular_mod_design_compilation ######################################################
+# ntm_scalar_modular_mod_design_compilation ######################################################
 ##################################################################################################
 
-alias model_scalar_modular_mod_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_mod.vhd
+alias ntm_scalar_modular_mod_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_mod.vhd
 }
 
 ##################################################################################################
-# model_scalar_modular_adder_design_compilation ####################################################
+# ntm_scalar_modular_adder_design_compilation ####################################################
 ##################################################################################################
 
-alias model_scalar_modular_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_adder.vhd
+alias ntm_scalar_modular_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_adder.vhd
 }
 
 ##################################################################################################
-# model_scalar_modular_multiplier_design_compilation ###############################################
+# ntm_scalar_modular_multiplier_design_compilation ###############################################
 ##################################################################################################
 
-alias model_scalar_modular_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd
+alias ntm_scalar_modular_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.vhd
 }
 
 ##################################################################################################
-# model_scalar_modular_inverter_design_compilation #################################################
+# ntm_scalar_modular_inverter_design_compilation #################################################
 ##################################################################################################
 
-alias model_scalar_modular_inverter_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd
+alias ntm_scalar_modular_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_inverter.vhd
 }
 
 ##################################################################################################
-# model_vector_modular_mod_design_compilation ######################################################
+# ntm_vector_modular_mod_design_compilation ######################################################
 ##################################################################################################
 
-alias model_vector_modular_mod_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_mod.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/model_vector_modular_mod.vhd
+alias ntm_vector_modular_mod_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/ntm_vector_modular_mod.vhd
 }
 
 ##################################################################################################
-# model_vector_modular_adder_design_compilation ####################################################
+# ntm_vector_modular_adder_design_compilation ####################################################
 ##################################################################################################
 
-alias model_vector_modular_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/model_vector_modular_adder.vhd
+alias ntm_vector_modular_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/ntm_vector_modular_adder.vhd
 }
 
 ##################################################################################################
-# model_vector_modular_multiplier_design_compilation ###############################################
+# ntm_vector_modular_multiplier_design_compilation ###############################################
 ##################################################################################################
 
-alias model_vector_modular_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/model_vector_modular_multiplier.vhd
+alias ntm_vector_modular_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/ntm_vector_modular_multiplier.vhd
 }
 
 ##################################################################################################
-# model_vector_modular_inverter_design_compilation #################################################
+# ntm_vector_modular_inverter_design_compilation #################################################
 ##################################################################################################
 
-alias model_vector_modular_inverter_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/model_vector_modular_inverter.vhd
+alias ntm_vector_modular_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/vector/ntm_vector_modular_inverter.vhd
 }
 
 ##################################################################################################
-# model_matrix_modular_mod_design_compilation ######################################################
+# ntm_matrix_modular_mod_design_compilation ######################################################
 ##################################################################################################
 
-alias model_matrix_modular_mod_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_mod.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/model_matrix_modular_mod.vhd
+alias ntm_matrix_modular_mod_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/ntm_matrix_modular_mod.vhd
 }
 
 ##################################################################################################
-# model_matrix_modular_adder_design_compilation ####################################################
+# ntm_matrix_modular_adder_design_compilation ####################################################
 ##################################################################################################
 
-alias model_matrix_modular_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/model_matrix_modular_adder.vhd
+alias ntm_matrix_modular_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/ntm_matrix_modular_adder.vhd
 }
 
 ##################################################################################################
-# model_matrix_modular_multiplier_design_compilation ###############################################
+# ntm_matrix_modular_multiplier_design_compilation ###############################################
 ##################################################################################################
 
-alias model_matrix_modular_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/model_matrix_modular_multiplier.vhd
+alias ntm_matrix_modular_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/ntm_matrix_modular_multiplier.vhd
 }
 
 ##################################################################################################
-# model_matrix_modular_inverter_design_compilation #################################################
+# ntm_matrix_modular_inverter_design_compilation #################################################
 ##################################################################################################
 
-alias model_matrix_modular_inverter_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/model_matrix_modular_inverter.vhd
+alias ntm_matrix_modular_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/matrix/ntm_matrix_modular_inverter.vhd
 }
 
 ##################################################################################################
-# model_tensor_modular_mod_design_compilation ######################################################
+# ntm_tensor_modular_mod_design_compilation ######################################################
 ##################################################################################################
 
-alias model_tensor_modular_mod_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_mod.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/model_tensor_modular_mod.vhd
+alias ntm_tensor_modular_mod_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/ntm_tensor_modular_mod.vhd
 }
 
 ##################################################################################################
-# model_tensor_modular_adder_design_compilation ####################################################
+# ntm_tensor_modular_adder_design_compilation ####################################################
 ##################################################################################################
 
-alias model_tensor_modular_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/model_tensor_modular_adder.vhd
+alias ntm_tensor_modular_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/ntm_tensor_modular_adder.vhd
 }
 
 ##################################################################################################
-# model_tensor_modular_multiplier_design_compilation ###############################################
+# ntm_tensor_modular_multiplier_design_compilation ###############################################
 ##################################################################################################
 
-alias model_tensor_modular_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/model_tensor_modular_multiplier.vhd
+alias ntm_tensor_modular_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/ntm_tensor_modular_multiplier.vhd
 }
 
 ##################################################################################################
-# model_tensor_modular_inverter_design_compilation #################################################
+# ntm_tensor_modular_inverter_design_compilation #################################################
 ##################################################################################################
 
-alias model_tensor_modular_inverter_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/model_scalar_modular_inverter.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/model_tensor_modular_inverter.vhd
+alias ntm_tensor_modular_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/scalar/ntm_scalar_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/modular/tensor/ntm_tensor_modular_inverter.vhd
 }
 
 ##################################################################################################
 
 alias d01 {
-  model_scalar_modular_mod_design_compilation 
+  ntm_scalar_modular_mod_design_compilation 
 }
 
 alias d02 {
-  model_scalar_modular_adder_design_compilation 
+  ntm_scalar_modular_adder_design_compilation 
 }
 
 alias d03 {
-  model_scalar_modular_multiplier_design_compilation 
+  ntm_scalar_modular_multiplier_design_compilation 
 }
 
 alias d04 {
-  model_scalar_modular_inverter_design_compilation 
+  ntm_scalar_modular_inverter_design_compilation 
 }
 
 alias d05 {
-  model_vector_modular_mod_design_compilation 
+  ntm_vector_modular_mod_design_compilation 
 }
 
 alias d06 {
-  model_vector_modular_adder_design_compilation 
+  ntm_vector_modular_adder_design_compilation 
 }
 
 alias d07 {
-  model_vector_modular_multiplier_design_compilation 
+  ntm_vector_modular_multiplier_design_compilation 
 }
 
 alias d08 {
-  model_vector_modular_inverter_design_compilation 
+  ntm_vector_modular_inverter_design_compilation 
 }
 
 alias d09 {
-  model_matrix_modular_mod_design_compilation 
+  ntm_matrix_modular_mod_design_compilation 
 }
 
 alias d10 {
-  model_matrix_modular_adder_design_compilation 
+  ntm_matrix_modular_adder_design_compilation 
 }
 
 alias d11 {
-  model_matrix_modular_multiplier_design_compilation 
+  ntm_matrix_modular_multiplier_design_compilation 
 }
 
 alias d12 {
-  model_matrix_modular_inverter_design_compilation 
+  ntm_matrix_modular_inverter_design_compilation 
 }
 
 alias d13 {
-  model_tensor_modular_mod_design_compilation 
+  ntm_tensor_modular_mod_design_compilation 
 }
 
 alias d14 {
-  model_tensor_modular_adder_design_compilation 
+  ntm_tensor_modular_adder_design_compilation 
 }
 
 alias d15 {
-  model_tensor_modular_multiplier_design_compilation 
+  ntm_tensor_modular_multiplier_design_compilation 
 }
 
 alias d16 {
-  model_tensor_modular_inverter_design_compilation 
+  ntm_tensor_modular_inverter_design_compilation 
 }
 
 echo "****************************************"

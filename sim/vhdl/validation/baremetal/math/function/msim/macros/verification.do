@@ -28,7 +28,7 @@ alias model_scalar_logistic_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_logistic_function wave
-  do $simulation_path/model/math/function/msim/waves/model_scalar_logistic_function.do
+  do $simulation_path/math/function/msim/waves/model_scalar_logistic_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_SCALAR_LOGISTIC_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 true 0
@@ -57,7 +57,7 @@ alias model_scalar_oneplus_function_verification_compilation {
 
   #WAVES
   view -title model_scalar_oneplus_function wave
-  do $simulation_path/model/math/function/msim/waves/model_scalar_oneplus_function.do
+  do $simulation_path/math/function/msim/waves/model_scalar_oneplus_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_SCALAR_ONEPLUS_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0 true 0
@@ -86,7 +86,7 @@ alias model_vector_logistic_function_verification_compilation {
 
   #WAVES
   view -title model_vector_logistic_function wave
-  do $simulation_path/model/math/function/msim/waves/model_vector_logistic_function.do
+  do $simulation_path/math/function/msim/waves/model_vector_logistic_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_VECTOR_LOGISTIC_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 true 0
@@ -115,7 +115,7 @@ alias model_vector_oneplus_function_verification_compilation {
 
   #WAVES
   view -title model_vector_oneplus_function wave
-  do $simulation_path/model/math/function/msim/waves/model_vector_oneplus_function.do
+  do $simulation_path/math/function/msim/waves/model_vector_oneplus_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_VECTOR_ONEPLUS_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0 true 0
@@ -144,7 +144,7 @@ alias model_matrix_logistic_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_logistic_function wave
-  do $simulation_path/model/math/function/msim/waves/model_matrix_logistic_function.do
+  do $simulation_path/math/function/msim/waves/model_matrix_logistic_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_MATRIX_LOGISTIC_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 true 0
@@ -173,7 +173,7 @@ alias model_matrix_oneplus_function_verification_compilation {
 
   #WAVES
   view -title model_matrix_oneplus_function wave
-  do $simulation_path/model/math/function/msim/waves/model_matrix_oneplus_function.do
+  do $simulation_path/math/function/msim/waves/model_matrix_oneplus_function.do
 
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_MATRIX_ONEPLUS_TEST true 0
   force -freeze sim:/model_function_pkg/STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0 true 0
