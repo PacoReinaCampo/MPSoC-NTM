@@ -37,7 +37,9 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module model_scalar_exponentiator_function #(
+import arithmetic_pkg::*;
+
+module model_scalar_cosh_function #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
 ) (
@@ -50,79 +52,84 @@ module model_scalar_exponentiator_function #(
   output reg READY,
 
   // DATA
-  input      [DATA_SIZE-1:0] DATA_IN,
-  output reg [DATA_SIZE-1:0] DATA_OUT
+  input [DATA_SIZE-1:0] DATA_IN,
+
+  output reg [DATA_SIZE-1:0] DATA_OUT,
+  output reg                 OVERFLOW_OUT
 );
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
+  parameter STARTER_STATE = 1'b0;
+  parameter ENDER_STATE = 1'b1;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
   //////////////////////////////////////////////////////////////////////////////
-
-  parameter ZERO_CONTROL = 0;
-  parameter ONE_CONTROL = 1;
-  parameter TWO_CONTROL = 2;
-  parameter THREE_CONTROL = 3;
-
-  parameter ZERO_DATA = 0;
-  parameter ONE_DATA = 1;
-  parameter TWO_DATA = 2;
-  parameter THREE_DATA = 3;
-
-  parameter FULL = 1;
-  parameter EMPTY = 0;
-
-  parameter EULER = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Signals
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg                 exponentiator_function_ctrl_fsm_int;
+  reg  cosh_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] exponentiator_function_int;
+  real data_int;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = exponentiator_function(M_A_IN · 2^(E_A_IN), M_B_IN · 2^(E_B_IN))
-
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT                   <= ZERO_DATA;
+      DATA_OUT         <= ZERO_DATA;
+
+      OVERFLOW_OUT     <= 1'b0;
 
       // Control Outputs
-      READY                      <= 1'b0;
+      READY            <= 1'b0;
 
-      // Assignations
-      exponentiator_function_int <= ZERO_DATA;
+      // Data Internal
+      data_int         <= 0.0;
+
+      // FSM Control
+      cosh_ctrl_fsm_int <= STARTER_STATE;
+
     end else begin
-      case (exponentiator_function_ctrl_fsm_int)
+      case (cosh_ctrl_fsm_int)
         STARTER_STATE: begin  // STEP 0
           // Control Outputs
-          READY                               <= 1'b0;
+          READY <= 1'b0;
 
-          // FSM Control
-          exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
+          if (START == 1'b1) begin
+            // Data Internal
+            data_int         <= $bitstoreal(DATA_IN);
+
+            // FSM Control
+            cosh_ctrl_fsm_int <= ENDER_STATE;
+          end
         end
         ENDER_STATE: begin  // STEP 1
+
+          // Data Outputs
+          DATA_OUT         <= $realtobits($exp(data_int));
+
+          OVERFLOW_OUT     <= 1'b0;
+
+          // Control Outputs
+          READY            <= 1'b1;
+
           // FSM Control
-          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
+          cosh_ctrl_fsm_int <= STARTER_STATE;
         end
         default: begin
           // FSM Control
-          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
+          cosh_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
