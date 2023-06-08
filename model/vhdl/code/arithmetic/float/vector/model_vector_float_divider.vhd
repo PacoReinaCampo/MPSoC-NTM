@@ -96,7 +96,7 @@ architecture model_vector_float_divider_architecture of model_vector_float_divid
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_divider_int : std_logic;

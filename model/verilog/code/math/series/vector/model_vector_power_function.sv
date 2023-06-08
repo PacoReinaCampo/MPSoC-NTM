@@ -92,7 +92,7 @@ module model_vector_power_function #(
   // Finite State Machine
   reg  [             1:0] power_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   // SCALAR POWER

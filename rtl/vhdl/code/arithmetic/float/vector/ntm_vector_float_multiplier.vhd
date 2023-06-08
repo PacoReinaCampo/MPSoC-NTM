@@ -96,7 +96,7 @@ architecture ntm_vector_float_multiplier_architecture of ntm_vector_float_multip
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_multiplier_int : std_logic;

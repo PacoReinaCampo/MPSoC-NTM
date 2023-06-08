@@ -88,7 +88,7 @@ module model_scalar_modular_mod #(
   // Finite State Machine
   reg                 mod_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg [DATA_SIZE-1:0] mod_int;
 
   //////////////////////////////////////////////////////////////////////////////

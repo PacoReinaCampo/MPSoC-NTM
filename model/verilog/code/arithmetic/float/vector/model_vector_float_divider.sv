@@ -94,7 +94,7 @@ module model_vector_float_divider #(
   // Finite State Machine
   reg  [             1:0] divider_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   reg                     data_a_in_divider_int;

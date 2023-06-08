@@ -95,7 +95,7 @@ architecture ntm_vector_cosine_similarity_architecture of ntm_vector_cosine_simi
   -- Finite State Machine
   signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_cosine_similarity_int : std_logic;

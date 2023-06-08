@@ -98,7 +98,7 @@ module model_vector_integer_adder #(
   // Finite State Machine
   reg  [             1:0] adder_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   reg                     data_a_in_adder_int;

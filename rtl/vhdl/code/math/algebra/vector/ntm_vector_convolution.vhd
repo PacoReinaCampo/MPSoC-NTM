@@ -108,7 +108,7 @@ architecture ntm_vector_convolution_architecture of ntm_vector_convolution is
   signal vector_a_int : vector_buffer;
   signal vector_b_int : vector_buffer;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_m_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 

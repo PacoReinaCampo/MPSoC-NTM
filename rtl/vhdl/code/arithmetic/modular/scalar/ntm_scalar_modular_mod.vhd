@@ -87,7 +87,7 @@ architecture ntm_scalar_modular_mod_architecture of ntm_scalar_modular_mod is
   -- Finite State Machine
   signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal mod_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin

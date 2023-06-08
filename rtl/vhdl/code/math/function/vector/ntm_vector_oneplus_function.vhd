@@ -93,7 +93,7 @@ architecture ntm_vector_oneplus_function_architecture of ntm_vector_oneplus_func
   -- Finite State Machine
   signal oneplus_ctrl_fsm_int : oneplus_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR ONEPLUS

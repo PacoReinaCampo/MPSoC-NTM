@@ -109,7 +109,7 @@ architecture model_dot_product_architecture of model_dot_product is
 
   signal vector_out_int : vector_buffer;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_product_int : std_logic;

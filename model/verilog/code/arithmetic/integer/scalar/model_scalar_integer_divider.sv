@@ -37,6 +37,8 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
+import model_arithmetic_pkg::*;
+
 module model_scalar_integer_divider #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
@@ -50,75 +52,57 @@ module model_scalar_integer_divider #(
   output reg READY,
 
   // DATA
-  input [DATA_SIZE-1:0] DATA_A_IN,
-  input [DATA_SIZE-1:0] DATA_B_IN,
+  input      [DATA_SIZE-1:0] DATA_A_IN,
+  input      [DATA_SIZE-1:0] DATA_B_IN,
 
   output reg [DATA_SIZE-1:0] DATA_OUT,
-  output reg [DATA_SIZE-1:0] REST_OUT
+  output reg                 OVERFLOW_OUT
 );
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] SET_DATA_B_STATE = 1;
-  parameter [2:0] REDUCE_DATA_B_STATE = 2;
-  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter STARTER_STATE = 1'b0;
+  parameter ENDER_STATE = 1'b1;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
   //////////////////////////////////////////////////////////////////////////////
-
-  parameter ZERO_CONTROL = 0;
-  parameter ONE_CONTROL = 1;
-  parameter TWO_CONTROL = 2;
-  parameter THREE_CONTROL = 3;
-
-  parameter ZERO_DATA = 0;
-  parameter ONE_DATA = 1;
-  parameter TWO_DATA = 2;
-  parameter THREE_DATA = 3;
-
-  parameter FULL = 1;
-  parameter EMPTY = 0;
-
-  parameter EULER = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Signals
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [        2:0] divider_ctrl_fsm_int;
+  reg  divider_ctrl_fsm_int;
 
-  // Internal Signals
-  reg [DATA_SIZE:0] u_int;
-  reg [DATA_SIZE:0] v_int;
-
-  reg [DATA_SIZE:0] divider_int;
+  // Data Internal
+  integer data_a_int;
+  integer data_b_int;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN
-
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT    <= ZERO_DATA;
+      DATA_OUT             <= ZERO_DATA;
+
+      REMAINDER_OUT        <= ZERO_DATA;
 
       // Control Outputs
-      READY       <= 1'b0;
+      READY                <= 1'b0;
 
-      // Assignation
-      u_int       <= ZERO_DATA;
-      v_int       <= ZERO_DATA;
+      // Data Internal
+      data_a_int           <= 0;
+      data_b_int           <= 0;
 
-      divider_int <= ZERO_DATA;
+      // FSM Control
+      divider_ctrl_fsm_int <= STARTER_STATE;
+
     end else begin
       case (divider_ctrl_fsm_int)
         STARTER_STATE: begin  // STEP 0
@@ -126,71 +110,26 @@ module model_scalar_integer_divider #(
           READY <= 1'b0;
 
           if (START == 1'b1) begin
-            // Assignation
-            u_int <= {1'b0, DATA_A_IN};
-            v_int <= {1'b0, DATA_B_IN};
-
-            if (DATA_A_IN[0] == 1'b1) begin
-              divider_int <= {1'b0, DATA_B_IN};
-            end else begin
-              divider_int <= ZERO_DATA;
-            end
+            // Data Internal
+            data_a_int           <= DATA_A_IN;
+            data_b_int           <= DATA_B_IN;
 
             // FSM Control
-            divider_ctrl_fsm_int <= SET_DATA_B_STATE;
+            divider_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        SET_DATA_B_STATE: begin  // STEP 1
-          // Assignation
-          u_int <= u_int;
-          v_int <= v_int;
+        ENDER_STATE: begin  // STEP 1
+
+          // Data Outputs
+          DATA_OUT             <= data_a_int / data_b_int;
+
+          REMAINDER_OUT        <= data_a_int rem data_b_int;
+
+          // Control Outputs
+          READY                <= 1'b1;
 
           // FSM Control
-          if (v_int < {1'b0, REST_OUT}) begin
-            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end else begin
-            divider_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
-          end
-        end
-        REDUCE_DATA_B_STATE: begin  // STEP 2
-          if (v_int < {1'b0, REST_OUT}) begin
-            // FSM Control
-            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end else begin
-            // Assignation
-            v_int <= (v_int - {1'b0, REST_OUT});
-          end
-        end
-        SET_PRODUCT_OUT_STATE: begin  // STEP 3
-          // Assignation
-          if (u_int[0] == 1'b1) begin
-            if ((divider_int + v_int) < {1'b0, REST_OUT}) begin
-              divider_int <= (divider_int + v_int);
-            end else begin
-              divider_int <= (divider_int + v_int - {1'b0, REST_OUT});
-            end
-          end else begin
-            if (divider_int >= {1'b0, REST_OUT}) begin
-              divider_int <= (divider_int - REST_OUT);
-            end
-          end
-          // FSM Control
-          divider_ctrl_fsm_int <= ENDER_STATE;
-        end
-        ENDER_STATE: begin  // STEP 4
-          if (u_int == {1'b0, ONE_CONTROL}) begin
-            // Data Outputs
-            DATA_OUT             <= divider_int[DATA_SIZE-1:0];
-
-            // Control Outputs
-            READY                <= 1'b1;
-
-            // FSM Control
-            divider_ctrl_fsm_int <= STARTER_STATE;
-          end else begin
-            // FSM Control
-            divider_ctrl_fsm_int <= SET_DATA_B_STATE;
-          end
+          divider_ctrl_fsm_int <= STARTER_STATE;
         end
         default: begin
           // FSM Control

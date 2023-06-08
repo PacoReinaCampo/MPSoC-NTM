@@ -93,7 +93,7 @@ architecture model_vector_logarithm_function_architecture of model_vector_logari
   -- Finite State Machine
   signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR LOGARITHM

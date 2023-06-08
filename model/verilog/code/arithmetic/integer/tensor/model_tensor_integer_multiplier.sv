@@ -109,7 +109,7 @@ module model_tensor_integer_multiplier #(
   // Finite State Machine
   reg  [             1:0] multiplier_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_i_loop;
   reg  [CONTROL_SIZE-1:0] index_j_loop;
 

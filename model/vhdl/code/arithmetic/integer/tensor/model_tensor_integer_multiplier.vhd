@@ -108,7 +108,7 @@ architecture model_tensor_integer_multiplier_architecture of model_tensor_intege
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);

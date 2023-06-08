@@ -96,7 +96,7 @@ module ntm_matrix_logarithm_function #(
   // Finite State Machine
   reg  [             1:0] logarithm_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_i_loop;
   reg  [CONTROL_SIZE-1:0] index_j_loop;
 

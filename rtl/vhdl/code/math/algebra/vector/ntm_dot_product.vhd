@@ -95,7 +95,7 @@ architecture ntm_dot_product_architecture of ntm_dot_product is
   -- Finite State Machine
   signal product_ctrl_fsm_int : product_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_product_int : std_logic;

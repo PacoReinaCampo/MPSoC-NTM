@@ -96,7 +96,7 @@ architecture model_vector_power_function_architecture of model_vector_power_func
   -- Finite State Machine
   signal power_ctrl_fsm_int : power_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_power_int : std_logic;

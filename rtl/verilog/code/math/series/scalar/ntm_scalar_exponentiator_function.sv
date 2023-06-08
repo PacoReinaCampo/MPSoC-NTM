@@ -87,7 +87,7 @@ module ntm_scalar_exponentiator_function #(
   // Finite State Machine
   reg                 exponentiator_function_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg [DATA_SIZE-1:0] exponentiator_function_int;
 
   //////////////////////////////////////////////////////////////////////////////

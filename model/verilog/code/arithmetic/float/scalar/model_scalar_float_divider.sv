@@ -77,7 +77,7 @@ module model_scalar_float_divider #(
   // Finite State Machine
   reg  divider_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   real data_a_int;
   real data_b_int;
 

@@ -92,7 +92,7 @@ architecture model_scalar_float_multiplier_architecture of model_scalar_float_mu
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal data_a_int : real;
   signal data_b_int : real;
 

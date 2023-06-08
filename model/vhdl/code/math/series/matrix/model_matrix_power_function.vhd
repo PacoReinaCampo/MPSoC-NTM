@@ -102,7 +102,7 @@ architecture model_matrix_power_function_architecture of model_matrix_power_func
   -- Finite State Machine
   signal power_ctrl_fsm_int : power_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 

@@ -79,7 +79,7 @@ module model_scalar_float_adder #(
   // Finite State Machine
   reg  adder_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   real data_a_int;
   real data_b_int;
 

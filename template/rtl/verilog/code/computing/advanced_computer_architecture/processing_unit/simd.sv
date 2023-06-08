@@ -87,7 +87,7 @@ module ntm_template #(
   // Finite State Machine
   reg [        2:0] template_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg [DATA_SIZE:0] variable_u_int;
   reg [DATA_SIZE:0] variable_v_int;
 

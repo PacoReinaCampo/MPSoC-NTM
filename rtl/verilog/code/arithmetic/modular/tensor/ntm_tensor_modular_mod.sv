@@ -102,7 +102,7 @@ module ntm_tensor_modular_mod #(
   // Finite State Machine
   reg  [             1:0] mod_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_i_loop;
   reg  [CONTROL_SIZE-1:0] index_j_loop;
   reg                     data_in_i_mod_int;

@@ -93,7 +93,7 @@ architecture ntm_scalar_modular_inverter_architecture of ntm_scalar_modular_inve
   -- Finite State Machine
   signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
   signal v_int : std_logic_vector(DATA_SIZE downto 0);
 

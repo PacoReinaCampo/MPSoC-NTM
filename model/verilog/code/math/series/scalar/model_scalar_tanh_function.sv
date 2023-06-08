@@ -76,7 +76,7 @@ module model_scalar_tanh__function #(
   // Finite State Machine
   reg  tanh__ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   real data_int;
 
   //////////////////////////////////////////////////////////////////////////////

@@ -93,7 +93,7 @@ architecture model_vector_exponentiator_function_architecture of model_vector_ex
   -- Finite State Machine
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR

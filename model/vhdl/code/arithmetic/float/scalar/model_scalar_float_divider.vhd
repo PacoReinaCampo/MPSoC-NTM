@@ -92,7 +92,7 @@ architecture model_scalar_float_divider_architecture of model_scalar_float_divid
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal data_a_int : real;
   signal data_b_int : real;
 

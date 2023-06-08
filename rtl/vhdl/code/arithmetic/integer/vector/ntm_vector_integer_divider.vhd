@@ -96,7 +96,7 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_divider_int : std_logic;

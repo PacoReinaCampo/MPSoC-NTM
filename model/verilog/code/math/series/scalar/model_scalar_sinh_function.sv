@@ -76,7 +76,7 @@ module model_scalar_sinh__function #(
   // Finite State Machine
   reg  sinh__ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   real data_int;
 
   //////////////////////////////////////////////////////////////////////////////

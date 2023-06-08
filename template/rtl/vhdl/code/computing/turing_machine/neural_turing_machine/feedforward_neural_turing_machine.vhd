@@ -104,7 +104,7 @@ architecture ntm_template_architecture of ntm_template is
   -- Finite State Machine
   signal template_ctrl_fsm_int : template_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal variable_u_int : std_logic_vector(DATA_SIZE downto 0);
   signal variable_v_int : std_logic_vector(DATA_SIZE downto 0);
 

@@ -96,7 +96,7 @@ architecture model_vector_integer_multiplier_architecture of model_vector_intege
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_multiplier_int : std_logic;

@@ -91,7 +91,7 @@ architecture ntm_scalar_modular_multiplier_architecture of ntm_scalar_modular_mu
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
   signal v_int : std_logic_vector(DATA_SIZE downto 0);
 

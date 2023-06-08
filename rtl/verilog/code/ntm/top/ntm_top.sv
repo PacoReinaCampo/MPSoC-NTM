@@ -144,7 +144,7 @@ module ntm_top #(
   reg  [             2:0] controller_ctrl_fsm_int;
   reg  [             1:0] write_heads_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   //////////////////////////////////////////////////////////////////////////////

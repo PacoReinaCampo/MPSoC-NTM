@@ -91,7 +91,7 @@ architecture model_scalar_integer_adder_architecture of model_scalar_integer_add
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal adder_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin

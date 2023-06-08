@@ -92,7 +92,7 @@ module ntm_vector_sinh_function #(
   // Finite State Machine
   reg  [             1:0] sinh_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   // ONE_CONTROLPLUS

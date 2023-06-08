@@ -91,7 +91,7 @@ module model_scalar_modular_adder #(
   // Finite State Machine
   reg               adder_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg [DATA_SIZE:0] adder_int;
 
   //////////////////////////////////////////////////////////////////////////////

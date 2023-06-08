@@ -37,6 +37,8 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
+import model_arithmetic_pkg::*;
+
 module model_scalar_integer_adder #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
@@ -54,6 +56,7 @@ module model_scalar_integer_adder #(
   // DATA
   input      [DATA_SIZE-1:0] DATA_A_IN,
   input      [DATA_SIZE-1:0] DATA_B_IN,
+
   output reg [DATA_SIZE-1:0] DATA_OUT,
   output reg                 OVERFLOW_OUT
 );
@@ -62,55 +65,46 @@ module model_scalar_integer_adder #(
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
+  parameter STARTER_STATE = 1'b0;
+  parameter ENDER_STATE = 1'b1;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
   //////////////////////////////////////////////////////////////////////////////
-
-  parameter ZERO_CONTROL = 0;
-  parameter ONE_CONTROL = 1;
-  parameter TWO_CONTROL = 2;
-  parameter THREE_CONTROL = 3;
-
-  parameter ZERO_DATA = 0;
-  parameter ONE_DATA = 1;
-  parameter TWO_DATA = 2;
-  parameter THREE_DATA = 3;
-
-  parameter FULL = 1;
-  parameter EMPTY = 0;
-
-  parameter EULER = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Signals
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg               adder_ctrl_fsm_int;
+  reg  adder_ctrl_fsm_int;
 
-  // Internal Signals
-  reg [DATA_SIZE:0] adder_int;
+  // Data Internal
+  integer data_a_int;
+  integer data_b_int;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN ± DATA_B_IN
-
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if (RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT  <= ZERO_DATA;
+      DATA_OUT           <= ZERO_DATA;
+
+      OVERFLOW_OUT       <= 1'b0;
 
       // Control Outputs
-      READY     <= 1'b0;
+      READY              <= 1'b0;
 
-      // Assignations
-      adder_int <= ZERO_DATA;
+      // Data Internal
+      data_a_int         <= 0;
+      data_b_int         <= 0;
+
+      // FSM Control
+      adder_ctrl_fsm_int <= STARTER_STATE;
+
     end else begin
       case (adder_ctrl_fsm_int)
         STARTER_STATE: begin  // STEP 0
@@ -118,138 +112,30 @@ module model_scalar_integer_adder #(
           READY <= 1'b0;
 
           if (START == 1'b1) begin
-            // Assignations
-            if (OPERATION == 1'b1) begin
-              if (DATA_A_IN > DATA_B_IN) begin
-                adder_int <= ({1'b0, DATA_A_IN} - {1'b0, DATA_B_IN});
-              end else begin
-                adder_int <= ({1'b0, DATA_B_IN} - {1'b0, DATA_A_IN});
-              end
-            end else begin
-              adder_int <= ({1'b0, DATA_A_IN} + ({1'b0, DATA_B_IN}));
-            end
+            // Data Internal
+            data_a_int         <= DATA_A_IN;
+            data_b_int         <= DATA_B_IN;
 
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE: begin  // STEP 1
-          if (OVERFLOW_OUT > ZERO_DATA) begin
-            if (DATA_A_IN > DATA_B_IN) begin
-              if (adder_int == {1'b0, OVERFLOW_OUT}) begin
-                // Data Outputs
-                DATA_OUT           <= ZERO_DATA;
 
-                // Control Outputs
-                READY              <= 1'b1;
-                // FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              end else if (adder_int < {1'b0, OVERFLOW_OUT}) begin
-                // Data Outputs
-                DATA_OUT           <= adder_int[DATA_SIZE-1:0];
-
-                // Control Outputs
-                READY              <= 1'b1;
-
-                // FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              end else begin
-                // Assignations
-                adder_int <= (adder_int - {1'b0, OVERFLOW_OUT});
-              end
-            end else if (DATA_A_IN == DATA_B_IN) begin
-              if (OPERATION == 1'b1) begin
-                // Data Outputs
-                DATA_OUT           <= ZERO_DATA;
-
-                // Control Outputs
-                READY              <= 1'b1;
-
-                // FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              end else begin
-                if (adder_int == {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= ZERO_DATA;
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else if (adder_int < {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= adder_int[DATA_SIZE-1:0];
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else begin
-                  // Assignations
-                  adder_int <= (adder_int - {1'b0, OVERFLOW_OUT});
-                end
-              end
-            end else if (DATA_A_IN < DATA_B_IN) begin
-              if (OPERATION == 1'b1) begin
-                if (adder_int == {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= ZERO_DATA;
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else if (adder_int < {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= (OVERFLOW_OUT - adder_int[DATA_SIZE-1:0]);
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else begin
-                  // Assignations
-                  adder_int <= (adder_int - {1'b0, OVERFLOW_OUT});
-                end
-              end else begin
-                if (adder_int == {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= ZERO_DATA;
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else if (adder_int < {1'b0, OVERFLOW_OUT}) begin
-                  // Data Outputs
-                  DATA_OUT           <= adder_int[DATA_SIZE-1:0];
-
-                  // Control Outputs
-                  READY              <= 1'b1;
-
-                  // FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                end else begin
-                  // Assignations
-                  adder_int <= (adder_int - {1'b0, OVERFLOW_OUT});
-                end
-              end
-            end
-          end else if (OVERFLOW_OUT == ZERO_DATA) begin
-            // Data Outputs
-            DATA_OUT           <= adder_int[DATA_SIZE-1:0];
-
-            // Control Outputs
-            READY              <= 1'b1;
-
-            // FSM Control
-            adder_ctrl_fsm_int <= STARTER_STATE;
+          // Data Outputs
+          if (OPERATION == 1'b1) begin
+            DATA_OUT         <= data_a_int - data_b_int;
+          else
+            DATA_OUT         <= data_a_int + data_b_int;
           end
+
+          OVERFLOW_OUT       <= 1'b0;
+
+          // Control Outputs
+          READY              <= 1'b1;
+
+          // FSM Control
+          adder_ctrl_fsm_int <= STARTER_STATE;
         end
         default: begin
           // FSM Control

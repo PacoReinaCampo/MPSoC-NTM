@@ -97,7 +97,7 @@ module model_vector_softmax #(
   // Finite State Machine
   reg  [             1:0] softmax_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_vector_loop;
   reg  [CONTROL_SIZE-1:0] index_scalar_loop;
 

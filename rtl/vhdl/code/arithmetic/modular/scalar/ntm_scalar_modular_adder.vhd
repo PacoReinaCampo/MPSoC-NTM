@@ -90,7 +90,7 @@ architecture ntm_scalar_modular_adder_architecture of ntm_scalar_modular_adder i
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal adder_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin

@@ -76,7 +76,7 @@ module model_scalar_cosh_function #(
   // Finite State Machine
   reg  cosh_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   real data_int;
 
   //////////////////////////////////////////////////////////////////////////////

@@ -94,7 +94,7 @@ architecture model_scalar_float_adder_architecture of model_scalar_float_adder i
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal data_a_int : real;
   signal data_b_int : real;
 

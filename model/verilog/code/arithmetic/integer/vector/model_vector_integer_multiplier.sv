@@ -95,7 +95,7 @@ module model_vector_integer_multiplier #(
   // Finite State Machine
   reg  [             1:0] multiplier_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg  [CONTROL_SIZE-1:0] index_loop;
 
   reg                     data_a_in_multiplier_int;

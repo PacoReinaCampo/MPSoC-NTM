@@ -92,7 +92,7 @@ module ntm_scalar_modular_multiplier #(
   // Finite State Machine
   reg [        2:0] multiplier_ctrl_fsm_int;
 
-  // Internal Signals
+  // Data Internal
   reg [DATA_SIZE:0] u_int;
   reg [DATA_SIZE:0] v_int;
 

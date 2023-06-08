@@ -99,7 +99,7 @@ architecture ntm_matrix_cosh_function_architecture of ntm_matrix_cosh_function i
   -- Finite State Machine
   signal cosh_ctrl_fsm_int : cosh_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
