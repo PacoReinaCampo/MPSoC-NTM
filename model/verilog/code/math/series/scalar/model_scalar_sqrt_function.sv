@@ -39,7 +39,7 @@
 
 import arithmetic_pkg::*;
 
-module model_scalar_cosh_function #(
+module model_scalar_sqrt_function #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
 ) (
@@ -74,7 +74,7 @@ module model_scalar_cosh_function #(
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg  cosh_ctrl_fsm_int;
+  reg  sqrt_ctrl_fsm_int;
 
   // Data Internal
   real data_int;
@@ -98,10 +98,10 @@ module model_scalar_cosh_function #(
       data_int         <= 0.0;
 
       // FSM Control
-      cosh_ctrl_fsm_int <= STARTER_STATE;
+      sqrt_ctrl_fsm_int <= STARTER_STATE;
 
     end else begin
-      case (cosh_ctrl_fsm_int)
+      case (sqrt_ctrl_fsm_int)
         STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
@@ -111,7 +111,7 @@ module model_scalar_cosh_function #(
             data_int         <= $bitstoreal(DATA_IN);
 
             // FSM Control
-            cosh_ctrl_fsm_int <= ENDER_STATE;
+            sqrt_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE: begin  // STEP 1
@@ -125,11 +125,11 @@ module model_scalar_cosh_function #(
           READY            <= 1'b1;
 
           // FSM Control
-          cosh_ctrl_fsm_int <= STARTER_STATE;
+          sqrt_ctrl_fsm_int <= STARTER_STATE;
         end
         default: begin
           // FSM Control
-          cosh_ctrl_fsm_int <= STARTER_STATE;
+          sqrt_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end

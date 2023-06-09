@@ -37,6 +37,8 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
+import arithmetic_pkg::*;
+
 module model_scalar_logistic_function #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
@@ -50,13 +52,18 @@ module model_scalar_logistic_function #(
   output reg READY,
 
   // DATA
-  input      [DATA_SIZE-1:0] DATA_IN,
-  output reg [DATA_SIZE-1:0] DATA_OUT
+  input [DATA_SIZE-1:0] DATA_IN,
+
+  output reg [DATA_SIZE-1:0] DATA_OUT,
+  output reg                 OVERFLOW_OUT
 );
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
   //////////////////////////////////////////////////////////////////////////////
+
+  parameter STARTER_STATE = 1'b0;
+  parameter ENDER_STATE = 1'b1;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
@@ -66,97 +73,66 @@ module model_scalar_logistic_function #(
   // Signals
   //////////////////////////////////////////////////////////////////////////////
 
-  // SCALAR ADDER
-  // CONTROL
-  wire                 start_scalar_float_adder;
-  wire                 ready_scalar_float_adder;
+  // Finite State Machine
+  reg  logistic_ctrl_fsm_int;
 
-  wire                 operation_scalar_float_adder;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_float_adder;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_float_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_float_adder;
-
-  // SCALAR DIVIDER
-  // CONTROL
-  wire                 start_scalar_float_divider;
-  wire                 ready_scalar_float_divider;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_a_in_scalar_float_divider;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_float_divider;
-  wire [DATA_SIZE-1:0] data_out_scalar_float_divider;
-
-  // SCALAR EXPONENTIATOR
-  // CONTROL
-  wire                 start_scalar_exponentiator_function;
-  wire                 ready_scalar_exponentiator_function;
-
-  // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_exponentiator_function;
-  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator_function;
+  // Data Internal
+  real data_int;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // SCALAR ADDER
-  model_scalar_float_adder #(
-    .DATA_SIZE   (DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  ) scalar_float_adder (
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if (RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT         <= ZERO_DATA;
 
-    // CONTROL
-    .START(start_scalar_float_adder),
-    .READY(ready_scalar_float_adder),
+      OVERFLOW_OUT     <= 1'b0;
 
-    .OPERATION(operation_scalar_float_adder),
+      // Control Outputs
+      READY            <= 1'b0;
 
-    // DATA
-    .DATA_A_IN(data_a_in_scalar_float_adder),
-    .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT (data_out_scalar_float_adder)
-  );
+      // Data Internal
+      data_int         <= 0.0;
 
-  // SCALAR DIVIDER
-  model_scalar_float_divider #(
-    .DATA_SIZE   (DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  ) scalar_float_divider (
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
+      // FSM Control
+      logistic_ctrl_fsm_int <= STARTER_STATE;
 
-    // CONTROL
-    .START(start_scalar_float_divider),
-    .READY(ready_scalar_float_divider),
+    end else begin
+      case (logistic_ctrl_fsm_int)
+        STARTER_STATE: begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
 
-    // DATA
-    .DATA_A_IN(data_a_in_scalar_float_divider),
-    .DATA_B_IN(data_b_in_scalar_float_divider),
-    .DATA_OUT (data_out_scalar_float_divider)
-  );
+          if (START == 1'b1) begin
+            // Data Internal
+            data_int         <= $bitstoreal(DATA_IN);
 
-  // SCALAR EXPONENTIATOR
-  model_scalar_exponentiator_function #(
-    .DATA_SIZE   (DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  ) scalar_exponentiator_function (
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
+            // FSM Control
+            logistic_ctrl_fsm_int <= ENDER_STATE;
+          end
+        end
+        ENDER_STATE: begin  // STEP 1
 
-    // CONTROL
-    .START(start_scalar_exponentiator_function),
-    .READY(ready_scalar_exponentiator_function),
+          // Data Outputs
+          DATA_OUT         <= $realtobits(1/(1 + 1/$exp(data_int)));
 
-    // DATA
-    .DATA_IN (data_in_scalar_exponentiator_function),
-    .DATA_OUT(data_out_scalar_exponentiator_function)
-  );
+          OVERFLOW_OUT     <= 1'b0;
+
+          // Control Outputs
+          READY            <= 1'b1;
+
+          // FSM Control
+          logistic_ctrl_fsm_int <= STARTER_STATE;
+        end
+        default: begin
+          // FSM Control
+          logistic_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
 endmodule

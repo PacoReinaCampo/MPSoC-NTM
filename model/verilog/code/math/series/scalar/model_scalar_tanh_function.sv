@@ -39,7 +39,7 @@
 
 import arithmetic_pkg::*;
 
-module model_scalar_tanh__function #(
+module model_scalar_tanh_function #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
 ) (
@@ -74,7 +74,7 @@ module model_scalar_tanh__function #(
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg  tanh__ctrl_fsm_int;
+  reg  tanh_ctrl_fsm_int;
 
   // Data Internal
   real data_int;
@@ -98,10 +98,10 @@ module model_scalar_tanh__function #(
       data_int         <= 0.0;
 
       // FSM Control
-      tanh__ctrl_fsm_int <= STARTER_STATE;
+      tanh_ctrl_fsm_int <= STARTER_STATE;
 
     end else begin
-      case (tanh__ctrl_fsm_int)
+      case (tanh_ctrl_fsm_int)
         STARTER_STATE: begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
@@ -111,7 +111,7 @@ module model_scalar_tanh__function #(
             data_int         <= $bitstoreal(DATA_IN);
 
             // FSM Control
-            tanh__ctrl_fsm_int <= ENDER_STATE;
+            tanh_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE: begin  // STEP 1
@@ -125,11 +125,11 @@ module model_scalar_tanh__function #(
           READY            <= 1'b1;
 
           // FSM Control
-          tanh__ctrl_fsm_int <= STARTER_STATE;
+          tanh_ctrl_fsm_int <= STARTER_STATE;
         end
         default: begin
           // FSM Control
-          tanh__ctrl_fsm_int <= STARTER_STATE;
+          tanh_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
