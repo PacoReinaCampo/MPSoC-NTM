@@ -7,6 +7,23 @@ code
 │   └── soc
 │       └── ntm_soc.sv
 ├── arithmetic
+│   ├── fixed
+│   │   ├── matrix
+│   │   │   ├── ntm_matrix_fixed_adder.sv
+│   │   │   ├── ntm_matrix_fixed_divider.sv
+│   │   │   └── ntm_matrix_fixed_multiplier.sv
+│   │   ├── scalar
+│   │   │   ├── ntm_scalar_fixed_adder.sv
+│   │   │   ├── ntm_scalar_fixed_divider.sv
+│   │   │   └── ntm_scalar_fixed_multiplier.sv
+│   │   ├── tensor
+│   │   │   ├── ntm_tensor_fixed_adder.sv
+│   │   │   ├── ntm_tensor_fixed_divider.sv
+│   │   │   └── ntm_tensor_fixed_multiplier.sv
+│   │   └── vector
+│   │       ├── ntm_vector_fixed_adder.sv
+│   │       ├── ntm_vector_fixed_divider.sv
+│   │       └── ntm_vector_fixed_multiplier.sv
 │   ├── float
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_float_adder.sv
@@ -24,44 +41,23 @@ code
 │   │       ├── ntm_vector_float_adder.sv
 │   │       ├── ntm_vector_float_divider.sv
 │   │       └── ntm_vector_float_multiplier.sv
-│   ├── integer
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_integer_adder.sv
-│   │   │   ├── ntm_matrix_integer_divider.sv
-│   │   │   └── ntm_matrix_integer_multiplier.sv
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_integer_adder.sv
-│   │   │   ├── ntm_scalar_integer_divider.sv
-│   │   │   └── ntm_scalar_integer_multiplier.sv
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_integer_adder.sv
-│   │   │   ├── ntm_tensor_integer_divider.sv
-│   │   │   └── ntm_tensor_integer_multiplier.sv
-│   │   └── vector
-│   │       ├── ntm_vector_integer_adder.sv
-│   │       ├── ntm_vector_integer_divider.sv
-│   │       └── ntm_vector_integer_multiplier.sv
-│   └── modular
+│   └── integer
 │       ├── matrix
-│       │   ├── ntm_matrix_modular_adder.sv
-│       │   ├── ntm_matrix_modular_inverter.sv
-│       │   ├── ntm_matrix_modular_mod.sv
-│       │   └── ntm_matrix_modular_multiplier.sv
+│       │   ├── ntm_matrix_integer_adder.sv
+│       │   ├── ntm_matrix_integer_divider.sv
+│       │   └── ntm_matrix_integer_multiplier.sv
 │       ├── scalar
-│       │   ├── ntm_scalar_modular_adder.sv
-│       │   ├── ntm_scalar_modular_inverter.sv
-│       │   ├── ntm_scalar_modular_mod.sv
-│       │   └── ntm_scalar_modular_multiplier.sv
+│       │   ├── ntm_scalar_integer_adder.sv
+│       │   ├── ntm_scalar_integer_divider.sv
+│       │   └── ntm_scalar_integer_multiplier.sv
 │       ├── tensor
-│       │   ├── ntm_tensor_modular_adder.sv
-│       │   ├── ntm_tensor_modular_inverter.sv
-│       │   ├── ntm_tensor_modular_mod.sv
-│       │   └── ntm_tensor_modular_multiplier.sv
+│       │   ├── ntm_tensor_integer_adder.sv
+│       │   ├── ntm_tensor_integer_divider.sv
+│       │   └── ntm_tensor_integer_multiplier.sv
 │       └── vector
-│           ├── ntm_vector_modular_adder.sv
-│           ├── ntm_vector_modular_inverter.sv
-│           ├── ntm_vector_modular_mod.sv
-│           └── ntm_vector_modular_multiplier.sv
+│           ├── ntm_vector_integer_adder.sv
+│           ├── ntm_vector_integer_divider.sv
+│           └── ntm_vector_integer_multiplier.sv
 ├── controller
 │   ├── FNN
 │   │   ├── convolutional
@@ -232,4 +228,4 @@ code
         ├── ntm_input_trainer.sv
         └── ntm_output_trainer.sv
 
-65 directories, 167 files
+65 directories, 163 files

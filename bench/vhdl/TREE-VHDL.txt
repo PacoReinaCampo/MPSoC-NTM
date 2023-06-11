@@ -2,18 +2,18 @@ code
 ├── baremetal
 │   ├── design
 │   │   ├── arithmetic
+│   │   │   ├── fixed
+│   │   │   │   ├── ntm_fixed_pkg.vhd
+│   │   │   │   ├── ntm_fixed_stimulus.vhd
+│   │   │   │   └── ntm_fixed_testbench.vhd
 │   │   │   ├── float
 │   │   │   │   ├── ntm_float_pkg.vhd
 │   │   │   │   ├── ntm_float_stimulus.vhd
 │   │   │   │   └── ntm_float_testbench.vhd
-│   │   │   ├── integer
-│   │   │   │   ├── ntm_integer_pkg.vhd
-│   │   │   │   ├── ntm_integer_stimulus.vhd
-│   │   │   │   └── ntm_integer_testbench.vhd
-│   │   │   └── modular
-│   │   │       ├── ntm_modular_pkg.vhd
-│   │   │       ├── ntm_modular_stimulus.vhd
-│   │   │       └── ntm_modular_testbench.vhd
+│   │   │   └── integer
+│   │   │       ├── ntm_integer_pkg.vhd
+│   │   │       ├── ntm_integer_stimulus.vhd
+│   │   │       └── ntm_integer_testbench.vhd
 │   │   ├── controller
 │   │   │   ├── FNN
 │   │   │   │   ├── convolutional
@@ -99,18 +99,18 @@ code
 │   │           └── ntm_trainer_lstm_testbench.vhd
 │   └── model
 │       ├── arithmetic
+│       │   ├── fixed
+│       │   │   ├── model_fixed_pkg.vhd
+│       │   │   ├── model_fixed_stimulus.vhd
+│       │   │   └── model_fixed_testbench.vhd
 │       │   ├── float
 │       │   │   ├── model_float_pkg.vhd
 │       │   │   ├── model_float_stimulus.vhd
 │       │   │   └── model_float_testbench.vhd
-│       │   ├── integer
-│       │   │   ├── model_integer_pkg.vhd
-│       │   │   ├── model_integer_stimulus.vhd
-│       │   │   └── model_integer_testbench.vhd
-│       │   └── modular
-│       │       ├── model_modular_pkg.vhd
-│       │       ├── model_modular_stimulus.vhd
-│       │       └── model_modular_testbench.vhd
+│       │   └── integer
+│       │       ├── model_integer_pkg.vhd
+│       │       ├── model_integer_stimulus.vhd
+│       │       └── model_integer_testbench.vhd
 │       ├── controller
 │       │   ├── FNN
 │       │   │   ├── convolutional
@@ -197,18 +197,18 @@ code
 └── tests
     ├── design
     │   ├── arithmetic
+    │   │   ├── fixed
+    │   │   │   ├── ntm_fixed_pkg.vhd
+    │   │   │   ├── ntm_fixed_stimulus.vhd
+    │   │   │   └── ntm_fixed_testbench.vhd
     │   │   ├── float
     │   │   │   ├── ntm_float_pkg.vhd
     │   │   │   ├── ntm_float_stimulus.vhd
     │   │   │   └── ntm_float_testbench.vhd
-    │   │   ├── integer
-    │   │   │   ├── ntm_integer_pkg.vhd
-    │   │   │   ├── ntm_integer_stimulus.vhd
-    │   │   │   └── ntm_integer_testbench.vhd
-    │   │   └── modular
-    │   │       ├── ntm_modular_pkg.vhd
-    │   │       ├── ntm_modular_stimulus.vhd
-    │   │       └── ntm_modular_testbench.vhd
+    │   │   └── integer
+    │   │       ├── ntm_integer_pkg.vhd
+    │   │       ├── ntm_integer_stimulus.vhd
+    │   │       └── ntm_integer_testbench.vhd
     │   ├── controller
     │   │   ├── FNN
     │   │   │   ├── convolutional
@@ -294,18 +294,18 @@ code
     │           └── ntm_trainer_lstm_testbench.vhd
     └── model
         ├── arithmetic
+        │   ├── fixed
+        │   │   ├── model_fixed_pkg.vhd
+        │   │   ├── model_fixed_stimulus.vhd
+        │   │   └── model_fixed_testbench.vhd
         │   ├── float
         │   │   ├── model_float_pkg.vhd
         │   │   ├── model_float_stimulus.vhd
         │   │   └── model_float_testbench.vhd
-        │   ├── integer
-        │   │   ├── model_integer_pkg.vhd
-        │   │   ├── model_integer_stimulus.vhd
-        │   │   └── model_integer_testbench.vhd
-        │   └── modular
-        │       ├── model_modular_pkg.vhd
-        │       ├── model_modular_stimulus.vhd
-        │       └── model_modular_testbench.vhd
+        │   └── integer
+        │       ├── model_integer_pkg.vhd
+        │       ├── model_integer_stimulus.vhd
+        │       └── model_integer_testbench.vhd
         ├── controller
         │   ├── FNN
         │   │   ├── convolutional

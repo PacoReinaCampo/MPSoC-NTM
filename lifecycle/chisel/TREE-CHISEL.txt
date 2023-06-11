@@ -6,6 +6,7 @@ library
 │   │   └── ntm_scalar_arithmetic.scala
 │   ├── tensor
 │   │   └── ntm_tensor_arithmetic.scala
+│   ├── test_scalar_arithmetic.scala
 │   └── vector
 │       └── ntm_vector_arithmetic.scala
 ├── controller
@@ -188,4 +189,4 @@ library
             ├── ntm_lstm_output_v_trainer.scala
             └── ntm_lstm_output_w_trainer.scala
 
-59 directories, 129 files
+59 directories, 130 files

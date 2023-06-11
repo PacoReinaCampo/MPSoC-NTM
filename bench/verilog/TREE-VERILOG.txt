@@ -2,18 +2,18 @@ code
 ├── baremetal
 │   ├── design
 │   │   ├── arithmetic
+│   │   │   ├── fixed
+│   │   │   │   ├── ntm_fixed_pkg.sv
+│   │   │   │   ├── ntm_fixed_stimulus.sv
+│   │   │   │   └── ntm_fixed_testbench.sv
 │   │   │   ├── float
 │   │   │   │   ├── ntm_float_pkg.sv
 │   │   │   │   ├── ntm_float_stimulus.sv
 │   │   │   │   └── ntm_float_testbench.sv
-│   │   │   ├── integer
-│   │   │   │   ├── ntm_integer_pkg.sv
-│   │   │   │   ├── ntm_integer_stimulus.sv
-│   │   │   │   └── ntm_integer_testbench.sv
-│   │   │   └── modular
-│   │   │       ├── ntm_modular_pkg.sv
-│   │   │       ├── ntm_modular_stimulus.sv
-│   │   │       └── ntm_modular_testbench.sv
+│   │   │   └── integer
+│   │   │       ├── ntm_integer_pkg.sv
+│   │   │       ├── ntm_integer_stimulus.sv
+│   │   │       └── ntm_integer_testbench.sv
 │   │   ├── controller
 │   │   │   ├── FNN
 │   │   │   │   ├── convolutional
@@ -104,18 +104,18 @@ code
 │   │           └── ntm_trainer_lstm_testbench.sv
 │   └── model
 │       ├── arithmetic
+│       │   ├── fixed
+│       │   │   ├── model_fixed_pkg.sv
+│       │   │   ├── model_fixed_stimulus.sv
+│       │   │   └── model_fixed_testbench.sv
 │       │   ├── float
 │       │   │   ├── model_float_pkg.sv
 │       │   │   ├── model_float_stimulus.sv
 │       │   │   └── model_float_testbench.sv
-│       │   ├── integer
-│       │   │   ├── model_integer_pkg.sv
-│       │   │   ├── model_integer_stimulus.sv
-│       │   │   └── model_integer_testbench.sv
-│       │   └── modular
-│       │       ├── model_modular_pkg.sv
-│       │       ├── model_modular_stimulus.sv
-│       │       └── model_modular_testbench.sv
+│       │   └── integer
+│       │       ├── model_integer_pkg.sv
+│       │       ├── model_integer_stimulus.sv
+│       │       └── model_integer_testbench.sv
 │       ├── controller
 │       │   ├── FNN
 │       │   │   ├── convolutional
@@ -207,18 +207,18 @@ code
 └── tests
     ├── design
     │   ├── arithmetic
+    │   │   ├── fixed
+    │   │   │   ├── ntm_fixed_pkg.sv
+    │   │   │   ├── ntm_fixed_stimulus.sv
+    │   │   │   └── ntm_fixed_testbench.sv
     │   │   ├── float
     │   │   │   ├── ntm_float_pkg.sv
     │   │   │   ├── ntm_float_stimulus.sv
     │   │   │   └── ntm_float_testbench.sv
-    │   │   ├── integer
-    │   │   │   ├── ntm_integer_pkg.sv
-    │   │   │   ├── ntm_integer_stimulus.sv
-    │   │   │   └── ntm_integer_testbench.sv
-    │   │   └── modular
-    │   │       ├── ntm_modular_pkg.sv
-    │   │       ├── ntm_modular_stimulus.sv
-    │   │       └── ntm_modular_testbench.sv
+    │   │   └── integer
+    │   │       ├── ntm_integer_pkg.sv
+    │   │       ├── ntm_integer_stimulus.sv
+    │   │       └── ntm_integer_testbench.sv
     │   ├── controller
     │   │   ├── FNN
     │   │   │   ├── convolutional
@@ -309,18 +309,18 @@ code
     │           └── ntm_trainer_lstm_testbench.sv
     └── model
         ├── arithmetic
+        │   ├── fixed
+        │   │   ├── model_fixed_pkg.sv
+        │   │   ├── model_fixed_stimulus.sv
+        │   │   └── model_fixed_testbench.sv
         │   ├── float
         │   │   ├── model_float_pkg.sv
         │   │   ├── model_float_stimulus.sv
         │   │   └── model_float_testbench.sv
-        │   ├── integer
-        │   │   ├── model_integer_pkg.sv
-        │   │   ├── model_integer_stimulus.sv
-        │   │   └── model_integer_testbench.sv
-        │   └── modular
-        │       ├── model_modular_pkg.sv
-        │       ├── model_modular_stimulus.sv
-        │       └── model_modular_testbench.sv
+        │   └── integer
+        │       ├── model_integer_pkg.sv
+        │       ├── model_integer_stimulus.sv
+        │       └── model_integer_testbench.sv
         ├── controller
         │   ├── FNN
         │   │   ├── convolutional
