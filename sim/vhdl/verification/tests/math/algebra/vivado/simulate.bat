@@ -2,6 +2,6 @@
 call ../../../../../../../settings64_vivado.bat
 
 xvhdl -prj system.prj
-xelab ntm_algebra_testbench
-xsim -R ntm_algebra_testbench
+xelab accelerator_algebra_testbench
+xsim -R accelerator_algebra_testbench
 pause

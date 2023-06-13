@@ -5,7 +5,7 @@ build:
 	vcom -2008 -f system.vc
 
 simulate:
-	vsim -c -do run.do work.ntm_state_outputs_testbench
+	vsim -c -do run.do work.accelerator_state_outputs_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

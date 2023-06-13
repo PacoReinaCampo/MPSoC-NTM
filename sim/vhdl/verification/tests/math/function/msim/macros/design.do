@@ -9,96 +9,96 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# ntm_scalar_logistic_function_design_compilation ################################################
+# accelerator_scalar_logistic_function_design_compilation ################################################
 ##################################################################################################
 
-alias ntm_scalar_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
+alias accelerator_scalar_logistic_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_logistic_function.vhd
 }
 
 ##################################################################################################
-# ntm_scalar_oneplus_function_design_compilation #################################################
+# accelerator_scalar_oneplus_function_design_compilation #################################################
 ##################################################################################################
 
-alias ntm_scalar_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
+alias accelerator_scalar_oneplus_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_oneplus_function.vhd
 }
 
 ##################################################################################################
-# ntm_vector_logistic_function_design_compilation ################################################
+# accelerator_vector_logistic_function_design_compilation ################################################
 ##################################################################################################
 
-alias ntm_vector_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_logistic_function.vhd
+alias accelerator_vector_logistic_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_logistic_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/accelerator_vector_logistic_function.vhd
 }
 
 ##################################################################################################
-# ntm_vector_oneplus_function_design_compilation #################################################
+# accelerator_vector_oneplus_function_design_compilation #################################################
 ##################################################################################################
 
-alias ntm_vector_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_oneplus_function.vhd
+alias accelerator_vector_oneplus_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_oneplus_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/accelerator_vector_oneplus_function.vhd
 }
 
 ##################################################################################################
-# ntm_matrix_logistic_function_design_compilation ################################################
+# accelerator_matrix_logistic_function_design_compilation ################################################
 ##################################################################################################
 
-alias ntm_matrix_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/ntm_matrix_logistic_function.vhd
+alias accelerator_matrix_logistic_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_logistic_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/accelerator_vector_logistic_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/accelerator_matrix_logistic_function.vhd
 }
 
 ##################################################################################################
-# ntm_matrix_oneplus_function_design_compilation #################################################
+# accelerator_matrix_oneplus_function_design_compilation #################################################
 ##################################################################################################
 
-alias ntm_matrix_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/ntm_matrix_oneplus_function.vhd
+alias accelerator_matrix_oneplus_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_logarithm_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/accelerator_scalar_oneplus_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/accelerator_vector_oneplus_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/accelerator_matrix_oneplus_function.vhd
 }
 
 ##################################################################################################
 
 alias d01 {
-  ntm_scalar_logistic_function_design_compilation 
+  accelerator_scalar_logistic_function_design_compilation 
 }
 
 alias d02 {
-  ntm_scalar_oneplus_function_design_compilation 
+  accelerator_scalar_oneplus_function_design_compilation 
 }
 
 alias d03 {
-  ntm_vector_logistic_function_design_compilation 
+  accelerator_vector_logistic_function_design_compilation 
 }
 
 alias d04 {
-  ntm_vector_oneplus_function_design_compilation 
+  accelerator_vector_oneplus_function_design_compilation 
 }
 
 alias d05 {
-  ntm_matrix_logistic_function_design_compilation 
+  accelerator_matrix_logistic_function_design_compilation 
 }
 
 alias d06 {
-  ntm_matrix_oneplus_function_design_compilation 
+  accelerator_matrix_oneplus_function_design_compilation 
 }
 
 echo "****************************************"

@@ -48,8 +48,8 @@ build:
 	xvhdl -prj system.prj
 
 simulate:
-	xelab ntm_state_feedback_testbench
-	xsim -R ntm_state_feedback_testbench
+	xelab accelerator_state_feedback_testbench
+	xsim -R accelerator_state_feedback_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

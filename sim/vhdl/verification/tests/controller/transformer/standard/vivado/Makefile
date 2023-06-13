@@ -48,8 +48,8 @@ build:
 	xvhdl -prj system.prj
 
 simulate:
-	xelab ntm_standard_transformer_testbench
-	xsim -R ntm_standard_transformer_testbench
+	xelab accelerator_standard_transformer_testbench
+	xsim -R accelerator_standard_transformer_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

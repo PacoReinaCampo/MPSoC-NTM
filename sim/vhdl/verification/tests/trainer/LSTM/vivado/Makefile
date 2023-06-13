@@ -48,8 +48,8 @@ build:
 	xvhdl -prj system.prj
 
 simulate:
-	xelab ntm_trainer_lstm_testbench
-	xsim -R ntm_trainer_lstm_testbench
+	xelab accelerator_trainer_lstm_testbench
+	xsim -R accelerator_trainer_lstm_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil
