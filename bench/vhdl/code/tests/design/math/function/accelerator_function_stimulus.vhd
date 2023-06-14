@@ -278,7 +278,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE 0     ";
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 0     ";
         -------------------------------------------------------------------
 
         SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_A;
@@ -287,7 +287,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE 1     ";
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 1     ";
         -------------------------------------------------------------------
 
         SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_B;
@@ -306,7 +306,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 0      ";
         -------------------------------------------------------------------
 
         SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_A;
@@ -315,7 +315,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 1      ";
         -------------------------------------------------------------------
 
         SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_B;
@@ -341,7 +341,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE 0     ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGISTIC_CASE 0     ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -386,7 +386,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE 1     ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGISTIC_CASE 1     ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -444,7 +444,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ONEPLUS_CASE 0      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -489,7 +489,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ONEPLUS_CASE 1      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -552,7 +552,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE 0     ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGISTIC_CASE 0     ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -612,7 +612,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE 1     ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGISTIC_CASE 1     ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -686,7 +686,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ONEPLUS_CASE 0      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -746,7 +746,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ONEPLUS_CASE 1      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
