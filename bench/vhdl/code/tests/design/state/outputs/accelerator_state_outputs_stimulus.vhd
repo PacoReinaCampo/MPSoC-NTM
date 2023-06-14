@@ -285,7 +285,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_OUTPUT_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_OUTPUT_CASE_0       ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_OUTPUT_CASE_0       ";
         -------------------------------------------------------------------
 
         ACCELERATOR_VECTOR_OUTPUT_SIZE_A_I_IN <= THREE_CONTROL;
@@ -303,7 +303,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_OUTPUT_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_OUTPUT_CASE_1       ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_OUTPUT_CASE_1       ";
         -------------------------------------------------------------------
 
         ACCELERATOR_VECTOR_OUTPUT_SIZE_A_I_IN <= THREE_CONTROL;
