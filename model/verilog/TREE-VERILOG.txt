@@ -125,9 +125,7 @@ code
 │   │   │   ├── model_tensor_inverse.sv
 │   │   │   ├── model_tensor_matrix_convolution.sv
 │   │   │   ├── model_tensor_matrix_product.sv
-│   │   │   ├── model_tensor_multiplication.sv
 │   │   │   ├── model_tensor_product.sv
-│   │   │   ├── model_tensor_summation.sv
 │   │   │   └── model_tensor_transpose.sv
 │   │   └── vector
 │   │       ├── model_dot_product.sv
@@ -228,4 +226,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-65 directories, 163 files
+65 directories, 161 files

@@ -1979,4 +1979,39 @@ begin
 
   end process main_test;
 
+  main_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST) then
+        if (SCALAR_INTEGER_ADDER_READY = '1') then
+          if (SCALAR_INTEGER_ADDER_OPERATION = '1') then
+            assert SCALAR_INTEGER_ADDER_DATA_OUT = std_logic_vector(signed(SCALAR_INTEGER_ADDER_DATA_A_IN) - signed(SCALAR_INTEGER_ADDER_DATA_B_IN))
+              report "SCALAR ADDER: " & to_string(to_integer(signed(SCALAR_INTEGER_ADDER_DATA_OUT)))
+              severity error;
+          else
+            assert SCALAR_INTEGER_ADDER_DATA_OUT = std_logic_vector(signed(SCALAR_INTEGER_ADDER_DATA_A_IN) + signed(SCALAR_INTEGER_ADDER_DATA_B_IN))
+              report "SCALAR ADDER: " & to_string(to_integer(signed(SCALAR_INTEGER_ADDER_DATA_OUT)))
+              severity error;
+          end if;
+        end if;
+      end if;
+
+      if (STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST) then
+        if (SCALAR_INTEGER_MULTIPLIER_READY = '1') then
+          assert SCALAR_INTEGER_MULTIPLIER_DATA_OUT = std_logic_vector(signed(SCALAR_INTEGER_MULTIPLIER_DATA_A_IN) * signed(SCALAR_INTEGER_MULTIPLIER_DATA_B_IN))
+            report "SCALAR MULTIPLIER: " & to_string(to_integer(signed(SCALAR_INTEGER_MULTIPLIER_DATA_OUT)))
+            severity error;
+        end if;
+      end if;
+
+      if (STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST) then
+        if (SCALAR_INTEGER_DIVIDER_READY = '1') then
+          assert SCALAR_INTEGER_DIVIDER_DATA_OUT = std_logic_vector(signed(SCALAR_INTEGER_DIVIDER_DATA_A_IN) / signed(SCALAR_INTEGER_DIVIDER_DATA_B_IN))
+            report "SCALAR DIVIDER: " & to_string(to_integer(signed(SCALAR_INTEGER_DIVIDER_DATA_OUT)))
+            severity error;
+        end if;
+      end if;
+    end if;
+  end process main_assertion;
+
 end architecture;

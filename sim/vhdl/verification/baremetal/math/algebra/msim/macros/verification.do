@@ -417,35 +417,6 @@ alias accelerator_tensor_inverse_verification_compilation {
 }
 
 ##################################################################################################
-# ACCELERATOR_TENSOR_MULTIPLICATION_TEST 
-##################################################################################################
-
-alias accelerator_tensor_multiplication_verification_compilation {
-  echo "TEST: ACCELERATOR_TENSOR_MULTIPLICATION_TEST"
-
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
-
-  vsim -g /accelerator_algebra_testbench/ENABLE_ACCELERATOR_TENSOR_MULTIPLICATION_TEST=true -t ps +notimingchecks -L unisim work.accelerator_algebra_testbench
-
-  #MACROS
-  add log -r sim:/accelerator_algebra_testbench/*
-
-  #WAVES
-  view -title accelerator_tensor_multiplication wave
-  do $simulation_path/math/algebra/msim/waves/accelerator_tensor_multiplication.do
-
-  force -freeze sim:/accelerator_algebra_pkg/STIMULUS_ACCELERATOR_TENSOR_MULTIPLICATION_TEST true 0
-  force -freeze sim:/accelerator_algebra_pkg/STIMULUS_ACCELERATOR_TENSOR_MULTIPLICATION_CASE_0 true 0
-
-  onbreak {resume}
-  run -all
-
-  dataset save sim accelerator_tensor_multiplication_test.wlf
-}
-
-##################################################################################################
 # ACCELERATOR_TENSOR_PRODUCT_TEST 
 ##################################################################################################
 
@@ -472,35 +443,6 @@ alias accelerator_tensor_product_verification_compilation {
   run -all
 
   dataset save sim accelerator_tensor_product_test.wlf
-}
-
-##################################################################################################
-# ACCELERATOR_TENSOR_SUMMATION_TEST 
-##################################################################################################
-
-alias accelerator_tensor_summation_verification_compilation {
-  echo "TEST: ACCELERATOR_TENSOR_SUMMATION_TEST"
-
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
-
-  vsim -g /accelerator_algebra_testbench/ENABLE_ACCELERATOR_TENSOR_SUMMATION_TEST=true -t ps +notimingchecks -L unisim work.accelerator_algebra_testbench
-
-  #MACROS
-  add log -r sim:/accelerator_algebra_testbench/*
-
-  #WAVES
-  view -title accelerator_tensor_summation wave
-  do $simulation_path/math/algebra/msim/waves/accelerator_tensor_summation.do
-
-  force -freeze sim:/accelerator_algebra_pkg/STIMULUS_ACCELERATOR_TENSOR_SUMMATION_TEST true 0
-  force -freeze sim:/accelerator_algebra_pkg/STIMULUS_ACCELERATOR_TENSOR_SUMMATION_CASE_0 true 0
-
-  onbreak {resume}
-  run -all
-
-  dataset save sim accelerator_tensor_summation_test.wlf
 }
 
 ##################################################################################################
@@ -591,18 +533,10 @@ alias v14 {
 }
 
 alias v15 {
-  accelerator_tensor_multiplication_verification_compilation
-}
-
-alias v16 {
   accelerator_tensor_product_verification_compilation
 }
 
-alias v17 {
-  accelerator_tensor_summation_verification_compilation
-}
-
-alias v18 {
+alias v16 {
   accelerator_tensor_transpose_verification_compilation
 }
 
@@ -621,8 +555,6 @@ echo "v11 . ACCELERATOR-MATRIX-SUMMATION-TEST"
 echo "v12 . ACCELERATOR-MATRIX-TRANSPOSE-TEST"
 echo "v13 . ACCELERATOR-TENSOR-CONVOLUTION-TEST"
 echo "v14 . ACCELERATOR-TENSOR-INVERSE-TEST"
-echo "v15 . ACCELERATOR-TENSOR-MULTIPLICATION-TEST"
-echo "v16 . ACCELERATOR-TENSOR-PRODUCT-TEST"
-echo "v17 . ACCELERATOR-TENSOR-SUMMATION-TEST"
-echo "v18 . ACCELERATOR-TENSOR-TRANSPOSE-TEST"
+echo "v15 . ACCELERATOR-TENSOR-PRODUCT-TEST"
+echo "v16 . ACCELERATOR-TENSOR-TRANSPOSE-TEST"
 echo "****************************************"

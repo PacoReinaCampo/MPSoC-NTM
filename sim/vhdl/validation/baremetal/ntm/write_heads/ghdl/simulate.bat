@@ -33,9 +33,7 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/matrix/model_
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_convolution.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_inverse.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_multiplication.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_product.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_summation.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_transpose.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/ntm/write_heads/model_writing.vhd

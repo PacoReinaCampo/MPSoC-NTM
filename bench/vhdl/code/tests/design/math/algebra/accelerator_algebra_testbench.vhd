@@ -101,26 +101,20 @@ entity accelerator_algebra_testbench is
     ENABLE_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_TEST    : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_INVERSE_TEST        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_MULTIPLICATION_TEST : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_PRODUCT_TEST        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_SUMMATION_TEST      : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_TEST   : boolean := false;
 
-    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0    : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_0        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_MULTIPLICATION_CASE_0 : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_0        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_SUMMATION_CASE_0      : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
 
-    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1    : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_1        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_MULTIPLICATION_CASE_1 : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_1        : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_SUMMATION_CASE_1      : boolean := false;
-    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1      : boolean := false
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1   : boolean := false
     );
 end accelerator_algebra_testbench;
 
@@ -431,33 +425,6 @@ architecture accelerator_algebra_testbench_architecture of accelerator_algebra_t
   signal data_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_inverse  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TENSOR MULTIPLICATION
-  -- CONTROL
-  signal start_tensor_multiplication : std_logic;
-  signal ready_tensor_multiplication : std_logic;
-
-  signal data_in_length_enable_tensor_multiplication : std_logic;
-  signal data_in_i_enable_tensor_multiplication      : std_logic;
-  signal data_in_j_enable_tensor_multiplication      : std_logic;
-  signal data_in_k_enable_tensor_multiplication      : std_logic;
-
-  signal data_length_enable_tensor_multiplication : std_logic;
-  signal data_i_enable_tensor_multiplication      : std_logic;
-  signal data_j_enable_tensor_multiplication      : std_logic;
-  signal data_k_enable_tensor_multiplication      : std_logic;
-
-  signal data_out_i_enable_tensor_multiplication : std_logic;
-  signal data_out_j_enable_tensor_multiplication : std_logic;
-  signal data_out_k_enable_tensor_multiplication : std_logic;
-
-  -- DATA
-  signal size_i_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_tensor_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_tensor_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- TENSOR PRODUCT
   -- CONTROL
   signal start_tensor_product : std_logic;
@@ -488,33 +455,6 @@ architecture accelerator_algebra_testbench_architecture of accelerator_algebra_t
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- TENSOR SUMMATION
-  -- CONTROL
-  signal start_tensor_summation : std_logic;
-  signal ready_tensor_summation : std_logic;
-
-  signal data_in_length_enable_tensor_summation : std_logic;
-  signal data_in_i_enable_tensor_summation      : std_logic;
-  signal data_in_j_enable_tensor_summation      : std_logic;
-  signal data_in_k_enable_tensor_summation      : std_logic;
-
-  signal data_length_enable_tensor_summation : std_logic;
-  signal data_i_enable_tensor_summation      : std_logic;
-  signal data_j_enable_tensor_summation      : std_logic;
-  signal data_k_enable_tensor_summation      : std_logic;
-
-  signal data_out_i_enable_tensor_summation : std_logic;
-  signal data_out_j_enable_tensor_summation : std_logic;
-  signal data_out_k_enable_tensor_summation : std_logic;
-
-  -- DATA
-  signal size_i_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_tensor_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_tensor_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR TRANSPOSE
   -- CONTROL
@@ -647,9 +587,10 @@ begin
       VECTOR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      VECTOR_SUMMATION_SIZE_IN  => size_in_vector_summation,
-      VECTOR_SUMMATION_DATA_IN  => data_in_vector_summation,
-      VECTOR_SUMMATION_DATA_OUT => data_out_vector_summation,
+      VECTOR_SUMMATION_SIZE_IN   => size_in_vector_summation,
+      VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
+      VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
+      VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
 
       -- VECTOR MODULE
       -- CONTROL
@@ -858,33 +799,6 @@ begin
       TENSOR_INVERSE_DATA_IN   => data_in_tensor_inverse,
       TENSOR_INVERSE_DATA_OUT  => data_out_tensor_inverse,
 
-      -- TENSOR MULTIPLICATION
-      -- CONTROL
-      TENSOR_MULTIPLICATION_START => start_tensor_multiplication,
-      TENSOR_MULTIPLICATION_READY => ready_tensor_multiplication,
-
-      TENSOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE      => data_in_i_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE      => data_in_j_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE      => data_in_k_enable_tensor_multiplication,
-
-      TENSOR_MULTIPLICATION_DATA_LENGTH_ENABLE => data_length_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_I_ENABLE      => data_i_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_J_ENABLE      => data_j_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_K_ENABLE      => data_k_enable_tensor_multiplication,
-
-      TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_multiplication,
-
-      -- DATA
-      TENSOR_MULTIPLICATION_SIZE_I_IN => size_i_in_tensor_multiplication,
-      TENSOR_MULTIPLICATION_SIZE_J_IN => size_j_in_tensor_multiplication,
-      TENSOR_MULTIPLICATION_SIZE_K_IN => size_k_in_tensor_multiplication,
-      TENSOR_MULTIPLICATION_LENGTH_IN => length_in_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_IN   => data_in_tensor_multiplication,
-      TENSOR_MULTIPLICATION_DATA_OUT  => data_out_tensor_multiplication,
-
       -- TENSOR PRODUCT
       -- CONTROL
       TENSOR_PRODUCT_START => start_tensor_product,
@@ -915,33 +829,6 @@ begin
       TENSOR_PRODUCT_DATA_A_IN   => data_a_in_tensor_product,
       TENSOR_PRODUCT_DATA_B_IN   => data_b_in_tensor_product,
       TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product,
-
-      -- TENSOR SUMMATION
-      -- CONTROL
-      TENSOR_SUMMATION_START => start_tensor_summation,
-      TENSOR_SUMMATION_READY => ready_tensor_summation,
-
-      TENSOR_SUMMATION_DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN_I_ENABLE      => data_in_i_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN_J_ENABLE      => data_in_j_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN_K_ENABLE      => data_in_k_enable_tensor_summation,
-
-      TENSOR_SUMMATION_DATA_LENGTH_ENABLE => data_length_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_I_ENABLE      => data_i_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_J_ENABLE      => data_j_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_K_ENABLE      => data_k_enable_tensor_summation,
-
-      TENSOR_SUMMATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_summation,
-      TENSOR_SUMMATION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_summation,
-
-      -- DATA
-      TENSOR_SUMMATION_SIZE_I_IN => size_i_in_tensor_summation,
-      TENSOR_SUMMATION_SIZE_J_IN => size_j_in_tensor_summation,
-      TENSOR_SUMMATION_SIZE_K_IN => size_k_in_tensor_summation,
-      TENSOR_SUMMATION_LENGTH_IN => length_in_tensor_summation,
-      TENSOR_SUMMATION_DATA_IN   => data_in_tensor_summation,
-      TENSOR_SUMMATION_DATA_OUT  => data_out_tensor_summation,
 
       -- TENSOR TRANSPOSE
       -- CONTROL
@@ -1445,46 +1332,6 @@ begin
         );
   end generate accelerator_tensor_inverse_test;
 
-  -- TENSOR MULTIPLICATION
-  accelerator_tensor_multiplication_test : if (ENABLE_ACCELERATOR_TENSOR_MULTIPLICATION_TEST) generate
-    tensor_multiplication : accelerator_tensor_multiplication
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_multiplication,
-        READY => ready_tensor_multiplication,
-
-        DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_multiplication,
-        DATA_IN_I_ENABLE      => data_in_i_enable_tensor_multiplication,
-        DATA_IN_J_ENABLE      => data_in_j_enable_tensor_multiplication,
-        DATA_IN_K_ENABLE      => data_in_k_enable_tensor_multiplication,
-
-        DATA_LENGTH_ENABLE => data_length_enable_tensor_multiplication,
-        DATA_I_ENABLE      => data_i_enable_tensor_multiplication,
-        DATA_J_ENABLE      => data_j_enable_tensor_multiplication,
-        DATA_K_ENABLE      => data_k_enable_tensor_multiplication,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_multiplication,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_multiplication,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_multiplication,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_tensor_multiplication,
-        SIZE_J_IN => size_j_in_tensor_multiplication,
-        SIZE_K_IN => size_k_in_tensor_multiplication,
-        LENGTH_IN => length_in_tensor_multiplication,
-        DATA_IN   => data_in_tensor_multiplication,
-        DATA_OUT  => data_out_tensor_multiplication
-        );
-  end generate accelerator_tensor_multiplication_test;
-
   -- TENSOR PRODUCT
   accelerator_tensor_product_test : if (ENABLE_ACCELERATOR_TENSOR_PRODUCT_TEST) generate
     tensor_product : accelerator_tensor_product
@@ -1528,46 +1375,6 @@ begin
         DATA_OUT    => data_out_tensor_product
         );
   end generate accelerator_tensor_product_test;
-
-  -- TENSOR SUMMATION
-  accelerator_tensor_summation_test : if (ENABLE_ACCELERATOR_TENSOR_SUMMATION_TEST) generate
-    tensor_summation : accelerator_tensor_summation
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_summation,
-        READY => ready_tensor_summation,
-
-        DATA_IN_LENGTH_ENABLE => data_in_length_enable_tensor_summation,
-        DATA_IN_I_ENABLE      => data_in_i_enable_tensor_summation,
-        DATA_IN_J_ENABLE      => data_in_j_enable_tensor_summation,
-        DATA_IN_K_ENABLE      => data_in_k_enable_tensor_summation,
-
-        DATA_LENGTH_ENABLE => data_length_enable_tensor_summation,
-        DATA_I_ENABLE      => data_i_enable_tensor_summation,
-        DATA_J_ENABLE      => data_j_enable_tensor_summation,
-        DATA_K_ENABLE      => data_k_enable_tensor_summation,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_summation,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_summation,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_summation,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_tensor_summation,
-        SIZE_J_IN => size_j_in_tensor_summation,
-        SIZE_K_IN => size_k_in_tensor_summation,
-        LENGTH_IN => length_in_tensor_summation,
-        DATA_IN   => data_in_tensor_summation,
-        DATA_OUT  => data_out_tensor_summation
-        );
-  end generate accelerator_tensor_summation_test;
 
   -- TENSOR TRANSPOSE
   accelerator_tensor_transpose_test : if (ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_TEST) generate

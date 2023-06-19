@@ -34,9 +34,7 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_inverse.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_matrix_convolution.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_matrix_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_multiplication.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_summation.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelerator_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_cosh_function.vhd

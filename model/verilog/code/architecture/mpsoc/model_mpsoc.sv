@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module accelerator_tensor_summation #(
+module model_mpsoc #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 64
 ) (
@@ -47,27 +47,14 @@ module accelerator_tensor_summation #(
 
   // CONTROL
   input      START,
-  output reg READY,
-
-  input      DATA_IN_ENABLE,
-  output reg DATA_OUT_ENABLE,
-
-  // DATA
-  input      [CONTROL_SIZE-1:0] SIZE_I_IN,
-  input      [CONTROL_SIZE-1:0] SIZE_J_IN,
-  input      [CONTROL_SIZE-1:0] SIZE_K_IN,
-  input      [CONTROL_SIZE-1:0] LENGTH_IN,
-  input      [   DATA_SIZE-1:0] DATA_IN,
-  output reg [   DATA_SIZE-1:0] DATA_OUT
+  output reg READY
 );
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] INPUT_STATE = 1;
-  parameter [1:0] ENDER_STATE = 2;
+  parameter [2:0] STARTER_STATE = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
@@ -93,121 +80,11 @@ module accelerator_tensor_summation #(
   //////////////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg  [             1:0] summation_ctrl_fsm_int;
-
-  // Data Internal
-  reg  [CONTROL_SIZE-1:0] index_loop;
-
-  // SCALAR ADDER
-  // CONTROL
-  reg                     start_scalar_float_adder;
-  wire                    ready_scalar_float_adder;
-
-  reg                     operation_scalar_float_adder;
-
-  // DATA
-  reg  [   DATA_SIZE-1:0] data_a_in_scalar_float_adder;
-  reg  [   DATA_SIZE-1:0] data_b_in_scalar_float_adder;
-  wire [   DATA_SIZE-1:0] data_out_scalar_float_adder;
 
   //////////////////////////////////////////////////////////////////////////////
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
   // CONTROL
-  always @(posedge CLK or posedge RST) begin
-    if (RST == 1'b0) begin
-      // Data Outputs
-      DATA_OUT   <= ZERO_DATA;
-
-      // Control Outputs
-      READY      <= 1'b0;
-
-      // Assignations
-      index_loop <= ZERO_DATA;
-    end else begin
-      case (summation_ctrl_fsm_int)
-        STARTER_STATE: begin  // STEP 0
-          // Control Outputs
-          READY <= 1'b0;
-
-          if (START == 1'b1) begin
-            // Assignations
-            index_loop             <= ZERO_DATA;
-
-            // FSM Control
-            summation_ctrl_fsm_int <= INPUT_STATE;
-          end
-        end
-        INPUT_STATE: begin  // STEP 1
-          if (DATA_IN_ENABLE == 1'b1) begin
-            // Data Inputs
-
-            data_a_in_scalar_float_adder <= DATA_IN;
-            data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
-
-            // Control Internal
-            start_scalar_float_adder     <= 1'b1;
-
-            // FSM Control
-            summation_ctrl_fsm_int       <= ENDER_STATE;
-          end
-          // Control Outputs
-          DATA_OUT_ENABLE <= 1'b0;
-        end
-        ENDER_STATE: begin  // STEP 2
-          if (ready_scalar_float_adder == 1'b1) begin
-            if (index_loop == (LENGTH_IN - ONE_CONTROL)) begin
-              // Control Outputs
-              READY                  <= 1'b1;
-
-              // FSM Control
-              summation_ctrl_fsm_int <= STARTER_STATE;
-            end else begin
-              // Control Internal
-              index_loop             <= (index_loop + ONE_CONTROL);
-
-              // FSM Control
-              summation_ctrl_fsm_int <= INPUT_STATE;
-            end
-
-            // Data Outputs
-            DATA_OUT        <= data_out_scalar_float_adder;
-
-            // Control Outputs
-            DATA_OUT_ENABLE <= 1'b1;
-          end else begin
-            // Control Internal
-            start_scalar_float_adder <= 1'b0;
-          end
-        end
-        default: begin
-          // FSM Control
-          summation_ctrl_fsm_int <= STARTER_STATE;
-        end
-      endcase
-    end
-  end
-
-  // SCALAR ADDER
-  accelerator_scalar_float_adder #(
-    .DATA_SIZE   (DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  ) scalar_float_adder (
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_float_adder),
-    .READY(ready_scalar_float_adder),
-
-    .OPERATION(operation_scalar_float_adder),
-
-    // DATA
-    .DATA_A_IN(data_a_in_scalar_float_adder),
-    .DATA_B_IN(data_b_in_scalar_float_adder),
-    .DATA_OUT (data_out_scalar_float_adder)
-  );
 
 endmodule

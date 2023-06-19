@@ -30,9 +30,7 @@ verilog work ../../../../../../../rtl/verilog/code/math/algebra/matrix/accelerat
 
 verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_convolution.sv
 verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_inverse.sv
-verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_multiplication.sv
 verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_product.sv
-verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_summation.sv
 verilog work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_transpose.sv
 
 verilog work ../../../../../../../rtl/verilog/code/ntm/read_heads/accelerator_reading.sv

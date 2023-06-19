@@ -81,11 +81,19 @@ architecture accelerator_vector_multiplication_architecture of accelerator_vecto
   -- Types
   ------------------------------------------------------------------------------
 
+  -- Finite State Machine
   type multiplication_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    SCALAR_MULTIPLIER_STATE             -- STEP 2
+    INPUT_LENGTH_STATE,                 -- STEP 2
+    ENDER_STATE,                        -- STEP 3
+    ENDER_LENGTH_STATE,                 -- STEP 4
+    CLEAN_STATE,                        -- STEP 5
+    SCALAR_MULTIPLIER_STATE             -- STEP 6
     );
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- Constants
@@ -98,8 +106,12 @@ architecture accelerator_vector_multiplication_architecture of accelerator_vecto
   -- Finite State Machine
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
+  -- Buffer
+  signal vector_int : vector_buffer;
+
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_loop   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -109,13 +121,17 @@ architecture accelerator_vector_multiplication_architecture of accelerator_vecto
   -- DATA
   signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
 
 begin
 
   ------------------------------------------------------------------------------
   -- Body
   ------------------------------------------------------------------------------
+
+  -- DATA_OUT = multiplication(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -127,12 +143,16 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_ENABLE        <= '0';
+      DATA_LENGTH_ENABLE <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
       start_scalar_float_multiplier <= '0';
 
-      index_loop <= ZERO_CONTROL;
+      index_loop   <= ZERO_CONTROL;
+      index_l_loop <= ZERO_CONTROL;
 
       -- Data Internal
       data_a_in_scalar_float_multiplier <= ZERO_DATA;
@@ -148,57 +168,151 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE        <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+
             -- Control Internal
-            index_loop <= ZERO_CONTROL;
+            index_loop   <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE        <= '0';
+            DATA_LENGTH_ENABLE <= '0';
+          end if;
+
+        when INPUT_STATE =>             -- STEP 1
+
+          if ((DATA_IN_ENABLE = '1') and (DATA_IN_LENGTH_ENABLE = '1')) then
+            -- Data Inputs
+            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= ENDER_LENGTH_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+
+        when INPUT_LENGTH_STATE =>      -- STEP 2
+
+          if (DATA_IN_LENGTH_ENABLE = '1') then
+            -- Data Inputs
+            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+
+            -- FSM Control
+            if (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              multiplication_ctrl_fsm_int <= ENDER_STATE;
+            else
+              multiplication_ctrl_fsm_int <= ENDER_LENGTH_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 3
+
+          if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+            -- Control Internal
+            index_loop   <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= CLEAN_STATE;
+          elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+            -- Control Outputs
+            DATA_ENABLE        <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+
+            -- Control Internal
+            index_loop   <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when ENDER_LENGTH_STATE =>      -- STEP 4
 
-          if (DATA_IN_ENABLE = '1') then
-            -- Data Inputs
-            data_a_in_scalar_float_multiplier <= DATA_IN;
+          if (unsigned(index_l_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
 
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_float_multiplier <= ONE_DATA;
-            else
-              data_b_in_scalar_float_multiplier <= data_out_scalar_float_multiplier;
-            end if;
+            -- Control Outputs
+            DATA_LENGTH_ENABLE <= '1';
 
             -- Control Internal
-            start_scalar_float_multiplier <= '1';
+            index_l_loop <= std_logic_vector(unsigned(index_l_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
-            multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            multiplication_ctrl_fsm_int <= INPUT_LENGTH_STATE;
+          end if;
+
+        when CLEAN_STATE =>             -- STEP 5
+
+          -- Data Inputs
+          data_a_in_scalar_float_multiplier <= vector_int(to_integer(unsigned(index_loop)));
+
+          if (unsigned(index_loop) = unsigned(ZERO_CONTROL) and unsigned(index_l_loop) = unsigned(ZERO_CONTROL)) then
+            data_b_in_scalar_float_multiplier <= ONE_DATA;
+          else
+            data_b_in_scalar_float_multiplier <= data_out_scalar_float_multiplier;
           end if;
 
           -- Control Outputs
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
+          -- Control Internal
+          start_scalar_float_multiplier <= '1';
+
+          -- FSM Control
+          multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 7
 
           if (ready_scalar_float_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_float_multiplier;
+
               -- Control Outputs
               READY <= '1';
 
+              DATA_OUT_ENABLE <= '1';
+
+              -- Control Internal
+              index_loop <= ZERO_CONTROL;
+
               -- FSM Control
               multiplication_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_float_multiplier;
+
+              -- Control Outputs
+              DATA_OUT_ENABLE <= '1';
+
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              multiplication_ctrl_fsm_int <= INPUT_STATE;
+              multiplication_ctrl_fsm_int <= CLEAN_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_float_multiplier;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
             start_scalar_float_multiplier <= '0';
@@ -229,7 +343,9 @@ begin
       -- DATA
       DATA_A_IN => data_a_in_scalar_float_multiplier,
       DATA_B_IN => data_b_in_scalar_float_multiplier,
-      DATA_OUT  => data_out_scalar_float_multiplier
+
+      DATA_OUT     => data_out_scalar_float_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_float_multiplier
       );
 
 end architecture;

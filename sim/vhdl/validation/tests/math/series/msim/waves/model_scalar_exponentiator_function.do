@@ -18,8 +18,6 @@ add wave -noupdate /model_series_testbench/model_scalar_exponentiator_function_t
 
 add wave -noupdate /model_series_testbench/model_scalar_exponentiator_function_test/scalar_exponentiator_function/exponentiator_ctrl_fsm_int
 
-add wave -noupdate /model_series_testbench/model_scalar_exponentiator_function_test/scalar_exponentiator_function/data_int
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

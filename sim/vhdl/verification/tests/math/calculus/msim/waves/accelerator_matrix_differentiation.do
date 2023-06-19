@@ -45,7 +45,7 @@ add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differenti
 add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differentiation_test/matrix_differentiation/data_b_in_scalar_float_divider
 add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differentiation_test/matrix_differentiation/ready_scalar_float_divider
 add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differentiation_test/matrix_differentiation/data_out_scalar_float_divider
-add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differentiation_test/matrix_differentiation/rest_out_scalar_float_divider
+add wave -noupdate /accelerator_calculus_testbench/accelerator_matrix_differentiation_test/matrix_differentiation/overflow_out_scalar_float_divider
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

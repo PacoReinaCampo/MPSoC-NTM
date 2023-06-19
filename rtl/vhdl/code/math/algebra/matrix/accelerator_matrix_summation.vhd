@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
+
 entity accelerator_matrix_summation is
   generic (
     DATA_SIZE    : integer := 64;
@@ -89,12 +90,14 @@ architecture accelerator_matrix_summation_architecture of accelerator_matrix_sum
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_I_STATE,                      -- STEP 3
-    ENDER_J_STATE,                      -- STEP 4
-    CLEAN_I_STATE,                      -- STEP 5
-    CLEAN_J_STATE,                      -- STEP 6
-    SCALAR_ADDER_I_STATE,               -- STEP 7
-    SCALAR_ADDER_J_STATE                -- STEP 8
+    INPUT_LENGTH_STATE,                 -- STEP 3
+    ENDER_I_STATE,                      -- STEP 4
+    ENDER_J_STATE,                      -- STEP 5
+    ENDER_LENGTH_STATE,                 -- STEP 6
+    CLEAN_I_STATE,                      -- STEP 7
+    CLEAN_J_STATE,                      -- STEP 8
+    SCALAR_ADDER_I_STATE,               -- STEP 9
+    SCALAR_ADDER_J_STATE                -- STEP 10
     );
 
   -- Buffer
@@ -117,6 +120,7 @@ architecture accelerator_matrix_summation_architecture of accelerator_matrix_sum
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -129,7 +133,8 @@ architecture accelerator_matrix_summation_architecture of accelerator_matrix_sum
   signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_adder : std_logic;
 
 begin
 
@@ -149,8 +154,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_I_ENABLE <= '0';
-      DATA_J_ENABLE <= '0';
+      DATA_LENGTH_ENABLE <= '0';
+      DATA_I_ENABLE      <= '0';
+      DATA_J_ENABLE      <= '0';
 
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
@@ -162,6 +168,7 @@ begin
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+      index_l_loop <= ZERO_CONTROL;
 
       -- Data Internal
       data_a_in_scalar_float_adder <= ZERO_DATA;
@@ -179,98 +186,145 @@ begin
 
           if (START = '1') then
             -- Control Outputs
-            DATA_I_ENABLE <= '1';
-            DATA_J_ENABLE <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+            DATA_I_ENABLE      <= '1';
+            DATA_J_ENABLE      <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             summation_ctrl_fsm_int <= INPUT_I_STATE;
           else
             -- Control Outputs
-            DATA_I_ENABLE <= '0';
-            DATA_J_ENABLE <= '0';
+            DATA_LENGTH_ENABLE <= '0';
+            DATA_I_ENABLE      <= '0';
+            DATA_J_ENABLE      <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_LENGTH_ENABLE = '1')) then
             -- Data Inputs
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_J_STATE;
+            summation_ctrl_fsm_int <= ENDER_LENGTH_STATE;
           end if;
 
           -- Control Outputs
-          DATA_I_ENABLE <= '0';
-          DATA_J_ENABLE <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+          DATA_I_ENABLE      <= '0';
+          DATA_J_ENABLE      <= '0';
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (DATA_IN_J_ENABLE = '1') then
+          if ((DATA_IN_J_ENABLE = '1') and (DATA_IN_LENGTH_ENABLE = '1')) then
             -- Data Inputs
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              summation_ctrl_fsm_int <= ENDER_I_STATE;
-            else
+            if (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               summation_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              summation_ctrl_fsm_int <= ENDER_LENGTH_STATE;
             end if;
           end if;
 
           -- Control Outputs
-          DATA_I_ENABLE <= '0';
-          DATA_J_ENABLE <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+          DATA_I_ENABLE      <= '0';
+          DATA_J_ENABLE      <= '0';
 
-        when ENDER_I_STATE =>           -- STEP 3
+        when INPUT_LENGTH_STATE =>      -- STEP 3
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          if (DATA_IN_LENGTH_ENABLE = '1') then
+            -- Data Inputs
+            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+
+            -- FSM Control
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+              summation_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              summation_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              summation_ctrl_fsm_int <= ENDER_LENGTH_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          DATA_LENGTH_ENABLE <= '0';
+          DATA_I_ENABLE      <= '0';
+          DATA_J_ENABLE      <= '0';
+
+        when ENDER_I_STATE =>           -- STEP 4
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             summation_ctrl_fsm_int <= CLEAN_I_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_I_ENABLE <= '1';
-            DATA_J_ENABLE <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+            DATA_I_ENABLE      <= '1';
+            DATA_J_ENABLE      <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             summation_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when ENDER_J_STATE =>           -- STEP 4
+        when ENDER_J_STATE =>           -- STEP 5
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_J_ENABLE <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+            DATA_J_ENABLE      <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             summation_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CLEAN_I_STATE =>           -- STEP 5
+        when ENDER_LENGTH_STATE =>      -- STEP 6
+
+          if (unsigned(index_l_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_LENGTH_ENABLE <= '1';
+
+            -- Control Internal
+            index_l_loop <= std_logic_vector(unsigned(index_l_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            summation_ctrl_fsm_int <= INPUT_LENGTH_STATE;
+          end if;
+
+        when CLEAN_I_STATE =>           -- STEP 7
 
           -- Data Inputs
           data_a_in_scalar_float_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
@@ -300,11 +354,16 @@ begin
             summation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           end if;
 
-        when CLEAN_J_STATE =>           -- STEP 6
+        when CLEAN_J_STATE =>           -- STEP 8
 
           -- Data Inputs
           data_a_in_scalar_float_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-          data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
+
+          if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            data_b_in_scalar_float_adder <= ZERO_DATA;
+          else
+            data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
+          end if;
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
@@ -323,7 +382,7 @@ begin
             summation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           end if;
 
-        when SCALAR_ADDER_I_STATE =>    -- STEP 7
+        when SCALAR_ADDER_I_STATE =>    -- STEP 10
 
           if (ready_scalar_float_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
@@ -331,10 +390,10 @@ begin
               DATA_OUT <= data_out_scalar_float_adder;
 
               -- Control Outputs
-              READY <= '1';
-
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
+
+              READY <= '1';
 
               -- Control Internal
               index_i_loop <= ZERO_CONTROL;
@@ -362,10 +421,10 @@ begin
             start_scalar_float_adder <= '0';
           end if;
 
-        when SCALAR_ADDER_J_STATE =>    -- STEP 8
+        when SCALAR_ADDER_J_STATE =>    -- STEP 11
 
           if (ready_scalar_float_adder = '1') then
-            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_float_adder;
 
@@ -411,7 +470,8 @@ begin
       DATA_A_IN => data_a_in_scalar_float_adder,
       DATA_B_IN => data_b_in_scalar_float_adder,
 
-      DATA_OUT => data_out_scalar_float_adder
+      DATA_OUT     => data_out_scalar_float_adder,
+      OVERFLOW_OUT => overflow_out_scalar_float_adder
       );
 
 end architecture;

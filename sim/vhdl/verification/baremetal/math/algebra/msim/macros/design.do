@@ -170,17 +170,6 @@ alias accelerator_tensor_inverse_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_multiplication_design_compilation ###################################################
-##################################################################################################
-
-alias accelerator_tensor_multiplication_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_multiplication.vhd
-}
-
-##################################################################################################
 # accelerator_tensor_product_design_compilation ##########################################################
 ##################################################################################################
 
@@ -190,17 +179,6 @@ alias accelerator_tensor_product_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_product.vhd
-}
-
-##################################################################################################
-# accelerator_tensor_summation_design_compilation ########################################################
-##################################################################################################
-
-alias accelerator_tensor_summation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_summation.vhd
 }
 
 ##################################################################################################
@@ -272,18 +250,10 @@ alias d14 {
 }
 
 alias d15 {
-  accelerator_tensor_multiplication_design_compilation
-}
-
-alias d16 {
   accelerator_tensor_product_design_compilation
 }
 
-alias d17 {
-  accelerator_tensor_summation_design_compilation
-}
-
-alias d18 {
+alias d16 {
   accelerator_tensor_transpose_design_compilation
 }
 
@@ -302,8 +272,6 @@ echo "d11 . ACCELERATOR-MATRIX-SUMMATION-TEST"
 echo "d12 . ACCELERATOR-MATRIX-TRANSPOSE-TEST"
 echo "d13 . ACCELERATOR-TENSOR-CONVOLUTION-TEST"
 echo "d14 . ACCELERATOR-TENSOR-INVERSE-TEST"
-echo "d15 . ACCELERATOR-TENSOR-MULTIPLICATION-TEST"
-echo "d16 . ACCELERATOR-TENSOR-PRODUCT-TEST"
-echo "d17 . ACCELERATOR-TENSOR-SUMMATION-TEST"
-echo "d18 . ACCELERATOR-TENSOR-TRANSPOSE-TEST"
+echo "d15 . ACCELERATOR-TENSOR-PRODUCT-TEST"
+echo "d16 . ACCELERATOR-TENSOR-TRANSPOSE-TEST"
 echo "****************************************"

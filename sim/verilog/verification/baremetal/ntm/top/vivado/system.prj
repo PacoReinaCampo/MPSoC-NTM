@@ -31,9 +31,7 @@ ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/matrix/accel
 
 ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_convolution.sv
 ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_inverse.sv
-ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_multiplication.sv
 ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_product.sv
-ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_summation.sv
 ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_transpose.sv
 
 ghdl -a --std=08 ../../../../../../../rtl/verilog/code/math/calculus/vector/accelerator_vector_differentiation.sv

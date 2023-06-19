@@ -29,9 +29,7 @@
 
 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_convolution.sv
 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_inverse.sv
-../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_multiplication.sv
 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_product.sv
-../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_summation.sv
 ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_transpose.sv
 
 ../../../../../../../bench/verilog/code/tests/design/math/algebra/accelerator_algebra_pkg.sv

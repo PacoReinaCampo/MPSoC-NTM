@@ -30,9 +30,7 @@
 
 ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_convolution.sv
 ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_inverse.sv
-../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_multiplication.sv
 ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
-../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_summation.sv
 ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
 
 ../../../../../../../../model/verilog/code/math/calculus/vector/model_vector_differentiation.sv

@@ -14,7 +14,10 @@ add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_t
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/START
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/LENGTH_IN
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_IN_ENABLE
+add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_IN_LENGTH_ENABLE
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_IN
+add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_ENABLE
+add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_LENGTH_ENABLE
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/READY
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_OUT_ENABLE
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/DATA_OUT
@@ -29,6 +32,7 @@ add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_t
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/data_b_in_scalar_float_adder
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/ready_scalar_float_adder
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/data_out_scalar_float_adder
+add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_summation_test/vector_summation/overflow_out_scalar_float_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

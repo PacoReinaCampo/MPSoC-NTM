@@ -25,21 +25,6 @@ add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vecto
 
 add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/index_loop
 
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/start_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/operation_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_a_in_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_b_in_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/ready_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_out_scalar_float_adder
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/overflow_out_scalar_float_adder
-
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/start_scalar_float_multiplier
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_a_in_scalar_float_multiplier
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_b_in_scalar_float_multiplier
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/ready_scalar_float_multiplier
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/data_out_scalar_float_multiplier
-add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/overflow_out_scalar_float_multiplier
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

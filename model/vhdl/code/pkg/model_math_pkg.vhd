@@ -641,44 +641,6 @@ package model_math_pkg is
       );
   end component;
 
-  component model_tensor_multiplication is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_LENGTH_ENABLE : in std_logic;
-      DATA_IN_I_ENABLE      : in std_logic;
-      DATA_IN_J_ENABLE      : in std_logic;
-      DATA_IN_K_ENABLE      : in std_logic;
-
-      DATA_LENGTH_ENABLE : out std_logic;
-      DATA_I_ENABLE      : out std_logic;
-      DATA_J_ENABLE      : out std_logic;
-      DATA_K_ENABLE      : out std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
   component model_tensor_product is
     generic (
       DATA_SIZE    : integer := 64;
@@ -757,44 +719,6 @@ package model_math_pkg is
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component model_tensor_summation is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_LENGTH_ENABLE : in std_logic;
-      DATA_IN_I_ENABLE      : in std_logic;
-      DATA_IN_J_ENABLE      : in std_logic;
-      DATA_IN_K_ENABLE      : in std_logic;
-
-      DATA_LENGTH_ENABLE : out std_logic;
-      DATA_I_ENABLE      : out std_logic;
-      DATA_J_ENABLE      : out std_logic;
-      DATA_K_ENABLE      : out std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1990,16 +1914,6 @@ package model_math_pkg is
 
     ) return tensor_buffer;
 
-  function function_tensor_multiplication (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_input : array4_buffer
-
-    ) return tensor_buffer;
-
   function function_tensor_product (
     SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2023,16 +1937,6 @@ package model_math_pkg is
     tensor_a_input : tensor_buffer;
     matrix_b_input : matrix_buffer
     ) return matrix_buffer;
-
-  function function_tensor_summation (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_input : array4_buffer
-
-    ) return tensor_buffer;
 
   function function_tensor_transpose (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2438,11 +2342,11 @@ package body model_math_pkg is
       vector_output(i) := ONE_DATA;
     end loop;
 
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
         vector_output(i) := function_scalar_float_multiplier (
           scalar_a_input => vector_output(i),
-          scalar_b_input => vector_input(t, i)
+          scalar_b_input => vector_input(i, t)
           );
       end loop;
     end loop;
@@ -2463,11 +2367,11 @@ package body model_math_pkg is
     -- Data Inputs
     vector_output := (others => ZERO_DATA);
 
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
         vector_output(i) := function_scalar_float_multiplier (
           scalar_a_input => vector_output(i),
-          scalar_b_input => vector_input(t, i)
+          scalar_b_input => vector_input(i, t)
           );
       end loop;
     end loop;
@@ -2658,12 +2562,12 @@ package body model_math_pkg is
       end loop;
     end loop;
 
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
           matrix_output(i, j) := function_scalar_float_multiplier (
             scalar_a_input => matrix_output(i, j),
-            scalar_b_input => matrix_input(t, i, j)
+            scalar_b_input => matrix_input(i, j, t)
             );
         end loop;
       end loop;
@@ -2794,14 +2698,14 @@ package body model_math_pkg is
     -- Data Inputs
     matrix_output := (others => (others => ZERO_DATA));
 
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
           matrix_output(i, j) := function_scalar_float_adder (
             OPERATION => '0',
 
-            scalar_a_input => matrix_input(t, i, j),
-            scalar_b_input => matrix_output(i, j)
+            scalar_a_input => matrix_output(i, j),
+            scalar_b_input => matrix_input(i, j, t)
             );
         end loop;
       end loop;
@@ -3016,42 +2920,6 @@ package body model_math_pkg is
     return tensor_output;
   end function function_tensor_inverse;
 
-  function function_tensor_multiplication (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_input : array4_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := ONE_DATA;
-        end loop;
-      end loop;
-    end loop;
-
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-            tensor_output(i, j, k) := function_scalar_float_multiplier (
-              scalar_a_input => tensor_input(t, i, j, k),
-              scalar_b_input => tensor_output(i, j, k)
-              );
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_multiplication;
-
   function function_tensor_product (
     SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -3132,38 +3000,6 @@ package body model_math_pkg is
 
     return matrix_output;
   end function function_tensor_matrix_product;
-
-  function function_tensor_summation (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    LENGTH_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_input : array4_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    tensor_output := (others => (others => (others => ZERO_DATA)));
-
-    for t in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-          for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-            tensor_output(i, j, k) := function_scalar_float_adder (
-              OPERATION => '0',
-
-              scalar_a_input => tensor_output(i, j, k),
-              scalar_b_input => tensor_input(t, i, j, k)
-              );
-          end loop;
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_summation;
 
   function function_tensor_transpose (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);

@@ -16,9 +16,7 @@ add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_fu
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_function_test/scalar_logarithm_function/READY
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_function_test/scalar_logarithm_function/DATA_OUT
 
-add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_function_test/scalar_logarithm_function/logarithm_ctrl_fsm_int
-
-add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_function_test/scalar_logarithm_function/data_int
+add wave -noupdate /accelerator_series_testbench/accelerator_scalar_logarithm_function_test/scalar_logarithm_function/controller_ctrl_fsm_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

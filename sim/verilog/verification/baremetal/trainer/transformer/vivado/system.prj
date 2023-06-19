@@ -30,9 +30,7 @@ sv work ../../../../../../../rtl/verilog/code/math/algebra/matrix/accelerator_ma
 
 sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_convolution.sv
 sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_inverse.sv
-sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_multiplication.sv
 sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_product.sv
-sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_summation.sv
 sv work ../../../../../../../rtl/verilog/code/math/algebra/tensor/accelerator_tensor_transpose.sv
 
 sv work ../../../../../../../rtl/verilog/code/math/calculus/vector/accelerator_vector_differentiation.sv

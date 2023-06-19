@@ -165,8 +165,8 @@ begin
 
       operation_scalar_float_adder <= '0';
 
-      index_adder_loop      <= ZERO_DATA;
-      index_multiplier_loop <= ZERO_DATA;
+      index_adder_loop      <= ZERO_IDATA;
+      index_multiplier_loop <= ZERO_IDATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -179,8 +179,8 @@ begin
             -- Control Internal
             start_scalar_float_multiplier <= '1';
 
-            index_adder_loop      <= ZERO_DATA;
-            index_multiplier_loop <= ZERO_DATA;
+            index_adder_loop      <= ZERO_IDATA;
+            index_multiplier_loop <= ZERO_IDATA;
 
             -- Data Input
             data_a_in_scalar_float_multiplier <= ONE_DATA;
@@ -207,7 +207,7 @@ begin
 
               data_int_scalar_float_multiplier <= data_out_scalar_float_multiplier;
 
-              index_multiplier_loop <= ZERO_DATA;
+              index_multiplier_loop <= ZERO_IDATA;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_SECOND_MULTIPLIER_STATE;
@@ -224,7 +224,7 @@ begin
               -- Control Internal
               start_scalar_float_multiplier <= '1';
 
-              index_multiplier_loop <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_DATA));
+              index_multiplier_loop <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_IDATA));
             end if;
           else
             -- Control Internal
@@ -244,13 +244,13 @@ begin
               data_a_in_scalar_float_divider <= data_int_scalar_float_multiplier;
               data_b_in_scalar_float_divider <= data_out_scalar_float_multiplier;
 
-              index_multiplier_loop <= ZERO_DATA;
+              index_multiplier_loop <= ZERO_IDATA;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
             else
               -- Data Internal
-              data_a_in_scalar_float_multiplier <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_DATA));
+              data_a_in_scalar_float_multiplier <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_IDATA));
 
               if (signed(index_multiplier_loop) = signed(ZERO_DATA)) then
                 data_b_in_scalar_float_multiplier <= ONE_DATA;
@@ -261,7 +261,7 @@ begin
               -- Control Internal
               start_scalar_float_multiplier <= '1';
 
-              index_multiplier_loop <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_DATA));
+              index_multiplier_loop <= std_logic_vector(signed(index_multiplier_loop)+signed(ONE_IDATA));
             end if;
           else
             -- Control Internal
@@ -279,7 +279,7 @@ begin
             -- Data Internal
             data_a_in_scalar_float_adder <= data_out_scalar_float_divider;
 
-            if (signed(index_adder_loop) = signed(ZERO_DATA)) then
+            if (signed(index_adder_loop) = signed(ZERO_IDATA)) then
               data_b_in_scalar_float_adder <= ZERO_DATA;
             else
               data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
@@ -296,7 +296,7 @@ begin
         when SCALAR_ADDER_STATE =>      -- STEP 3
 
           if (ready_scalar_float_adder = '1') then
-            if (signed(index_adder_loop) = signed(EULER)) then
+            if (signed(index_adder_loop) = signed(THREE_IDATA)) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_float_adder;
 
@@ -309,7 +309,7 @@ begin
               -- Control Internal
               start_scalar_float_multiplier <= '1';
 
-              index_adder_loop <= std_logic_vector(signed(index_adder_loop)+signed(ONE_DATA));
+              index_adder_loop <= std_logic_vector(signed(index_adder_loop)+signed(ONE_IDATA));
 
               -- Data Input
               data_a_in_scalar_float_multiplier <= ONE_DATA;

@@ -384,7 +384,7 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
- fixed_stimulus : accelerator_fixed_stimulus
+  fixed_stimulus : accelerator_fixed_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,

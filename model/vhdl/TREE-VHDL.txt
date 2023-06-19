@@ -126,9 +126,7 @@ code
 │   │   │   ├── model_tensor_inverse.vhd
 │   │   │   ├── model_tensor_matrix_convolution.vhd
 │   │   │   ├── model_tensor_matrix_product.vhd
-│   │   │   ├── model_tensor_multiplication.vhd
 │   │   │   ├── model_tensor_product.vhd
-│   │   │   ├── model_tensor_summation.vhd
 │   │   │   └── model_tensor_transpose.vhd
 │   │   └── vector
 │   │       ├── model_dot_product.vhd
@@ -229,4 +227,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-65 directories, 164 files
+65 directories, 162 files

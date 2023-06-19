@@ -41,7 +41,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.accelerator_math_pkg.all;
-use work.accelerator_accelerator_core_pkg.all;
+use work.accelerator_core_pkg.all;
 use work.accelerator_read_heads_pkg.all;
 
 entity accelerator_read_heads_testbench is

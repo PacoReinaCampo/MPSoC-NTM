@@ -108,17 +108,17 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT      <= ZERO_DATA;
-      REMAINDER_OUT <= ZERO_DATA;
+      DATA_OUT      <= ZERO_IDATA;
+      REMAINDER_OUT <= ZERO_IDATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Data Internal
-      divider_int <= ZERO_DATA;
+      divider_int <= ZERO_IDATA;
 
       -- Control Internal
-      index_loop <= ZERO_DATA;
+      index_loop <= ZERO_IDATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -129,7 +129,7 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            divider_int <= ZERO_DATA;
+            divider_int <= ZERO_IDATA;
 
             -- Control Internal
             index_loop <= DATA_A_IN;
@@ -140,10 +140,10 @@ begin
 
         when ENDER_STATE =>             -- STEP 1
 
-          if (signed(DATA_B_IN) = signed(ZERO_DATA)) then
+          if (signed(DATA_B_IN) = to_signed(0, DATA_SIZE)) then
             -- Data Outputs
-            DATA_OUT      <= ONE_DATA;
-            REMAINDER_OUT <= ZERO_DATA;
+            DATA_OUT      <= ONE_IDATA;
+            REMAINDER_OUT <= ZERO_IDATA;
 
             -- Control Outputs
             READY <= '1';
@@ -163,13 +163,13 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) + signed(ONE_DATA));
+              divider_int <= std_logic_vector(signed(divider_int) + to_signed(1, DATA_SIZE));
 
               -- Control Internal
               index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
             end if;
           elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(index_loop)+signed(DATA_B_IN) > signed(ZERO_DATA)) then
+            if (signed(index_loop)+signed(DATA_B_IN) > to_signed(0, DATA_SIZE)) then
               -- Data Outputs
               DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
@@ -181,13 +181,13 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
+              divider_int <= std_logic_vector(signed(divider_int) - to_signed(1, DATA_SIZE));
 
               -- Control Internal
               index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
             end if;
           elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(index_loop)+signed(DATA_B_IN) < signed(ZERO_DATA)) then
+            if (signed(index_loop)+signed(DATA_B_IN) < to_signed(0, DATA_SIZE)) then
               -- Data Outputs
               DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
@@ -199,7 +199,7 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
+              divider_int <= std_logic_vector(signed(divider_int) - to_signed(1, DATA_SIZE));
 
               -- Control Internal
               index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
@@ -217,7 +217,7 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) + signed(ONE_DATA));
+              divider_int <= std_logic_vector(signed(divider_int) + to_signed(1, DATA_SIZE));
 
               -- Control Internal
               index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));

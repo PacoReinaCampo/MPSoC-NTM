@@ -18,8 +18,6 @@ add wave -noupdate /model_series_testbench/model_scalar_sinh_function_test/scala
 
 add wave -noupdate /model_series_testbench/model_scalar_sinh_function_test/scalar_sinh_function/sinh_ctrl_fsm_int
 
-add wave -noupdate /model_series_testbench/model_scalar_sinh_function_test/scalar_sinh_function/data_int
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

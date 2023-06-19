@@ -18,8 +18,6 @@ add wave -noupdate /model_function_testbench/model_scalar_logistic_function_test
 
 add wave -noupdate /model_function_testbench/model_scalar_logistic_function_test/scalar_logistic_function/logistic_ctrl_fsm_int
 
-add wave -noupdate /model_function_testbench/model_scalar_logistic_function_test/scalar_logistic_function/data_int
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

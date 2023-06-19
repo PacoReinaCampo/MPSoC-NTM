@@ -59,11 +59,11 @@ entity model_vector_multiplication is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_LENGTH_ENABLE : in std_logic;
     DATA_IN_ENABLE        : in std_logic;
+    DATA_IN_LENGTH_ENABLE : in std_logic;
 
-    DATA_LENGTH_ENABLE : out std_logic;
     DATA_ENABLE        : out std_logic;
+    DATA_LENGTH_ENABLE : out std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
@@ -85,9 +85,11 @@ architecture model_vector_multiplication_architecture of model_vector_multiplica
   type multiplication_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE,                        -- STEP 2
-    CLEAN_STATE,                        -- STEP 3
-    OPERATION_STATE                     -- STEP 4
+    INPUT_LENGTH_STATE,                 -- STEP 2
+    ENDER_STATE,                        -- STEP 3
+    ENDER_LENGTH_STATE,                 -- STEP 4
+    CLEAN_STATE,                        -- STEP 5
+    OPERATION_STATE                     -- STEP 6
     );
 
   ------------------------------------------------------------------------------
@@ -107,9 +109,8 @@ architecture model_vector_multiplication_architecture of model_vector_multiplica
   signal vector_out_int : vector_buffer;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal index_t_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_loop   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -129,12 +130,14 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_ENABLE        <= '0';
+      DATA_LENGTH_ENABLE <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
-
-      index_t_loop <= ZERO_CONTROL;
+      index_loop   <= ZERO_CONTROL;
+      index_l_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -143,44 +146,63 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_ENABLE <= '0';
-
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
             -- Control Outputs
-            DATA_ENABLE <= '1';
+            DATA_ENABLE        <= '1';
+            DATA_LENGTH_ENABLE <= '1';
 
             -- Control Internal
-            index_loop <= ZERO_CONTROL;
-
-            index_t_loop <= ZERO_CONTROL;
+            index_loop   <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Outputs
-            DATA_ENABLE <= '0';
+            DATA_ENABLE        <= '0';
+            DATA_LENGTH_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if ((DATA_IN_ENABLE = '1') and (DATA_IN_LENGTH_ENABLE = '1')) then
             -- Data Inputs
-            vector_in_int(to_integer(unsigned(index_t_loop)), to_integer(unsigned(index_loop))) <= DATA_IN;
+            vector_in_int(to_integer(unsigned(index_loop)), to_integer(unsigned(index_l_loop))) <= DATA_IN;
 
             -- FSM Control
-            multiplication_ctrl_fsm_int <= ENDER_STATE;
+            multiplication_ctrl_fsm_int <= ENDER_LENGTH_STATE;
           end if;
 
           -- Control Outputs
-          DATA_ENABLE <= '0';
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
 
-        when ENDER_STATE =>             -- STEP 2
+        when INPUT_LENGTH_STATE =>      -- STEP 2
 
-          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+          if (DATA_IN_LENGTH_ENABLE = '1') then
+            -- Data Inputs
+            vector_in_int(to_integer(unsigned(index_loop)), to_integer(unsigned(index_l_loop))) <= DATA_IN;
+
+            -- FSM Control
+            if (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              multiplication_ctrl_fsm_int <= ENDER_STATE;
+            else
+              multiplication_ctrl_fsm_int <= ENDER_LENGTH_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 3
+
+          if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- Control Internal
-            index_loop <= ZERO_CONTROL;
+            index_loop   <= ZERO_CONTROL;
+            index_l_loop <= ZERO_CONTROL;
 
             -- Data Internal
             vector_out_int <= function_vector_multiplication (
@@ -192,51 +214,72 @@ begin
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= CLEAN_STATE;
-          else
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
+          elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
-            DATA_ENABLE <= '1';
+            DATA_ENABLE        <= '1';
+            DATA_LENGTH_ENABLE <= '1';
+
+            -- Control Internal
+            index_loop   <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+            index_l_loop <= ZERO_CONTROL;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when CLEAN_STATE =>             -- STEP 3
+        when ENDER_LENGTH_STATE =>      -- STEP 4
+
+          if (unsigned(index_l_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            DATA_LENGTH_ENABLE <= '1';
+
+            -- Control Internal
+            index_l_loop <= std_logic_vector(unsigned(index_l_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= INPUT_LENGTH_STATE;
+          end if;
+
+        when CLEAN_STATE =>             -- STEP 5
 
           -- Control Outputs
-          DATA_ENABLE <= '0';
+          DATA_ENABLE        <= '0';
+          DATA_LENGTH_ENABLE <= '0';
 
           DATA_OUT_ENABLE <= '0';
 
           -- FSM Control
           multiplication_ctrl_fsm_int <= OPERATION_STATE;
 
-        when OPERATION_STATE =>         -- STEP 4
+        when OPERATION_STATE =>         -- STEP 7
 
-          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
+
             -- Control Outputs
             READY <= '1';
+
+            DATA_OUT_ENABLE <= '1';
 
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= STARTER_STATE;
-          else
+          elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= CLEAN_STATE;
           end if;
-
-          -- Data Outputs
-          DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control

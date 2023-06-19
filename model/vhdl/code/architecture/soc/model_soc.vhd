@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntm_mpsoc is
+entity model_soc is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -58,7 +58,7 @@ entity ntm_mpsoc is
     );
 end entity;
 
-architecture ntm_mpsoc_architecture of ntm_mpsoc is
+architecture model_soc_architecture of model_soc is
 
   ------------------------------------------------------------------------------
   -- Functionality

@@ -66,9 +66,9 @@ entity model_vector_softmax is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -167,13 +167,13 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- Data Internal
             vector_out_int <= function_vector_softmax (
-              SIZE_IN => LENGTH_IN,
+              SIZE_IN => SIZE_IN,
 
               vector_input => vector_in_int
               );
@@ -203,7 +203,7 @@ begin
 
         when OPERATION_STATE =>         -- STEP 4
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             READY <= '1';
 

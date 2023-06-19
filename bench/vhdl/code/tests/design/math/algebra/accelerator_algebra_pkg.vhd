@@ -49,10 +49,12 @@ package accelerator_algebra_pkg is
   -- SYSTEM-SIZE
   constant DATA_SIZE : integer := 64;
 
+  constant CONTROL_T_SIZE : integer := 3;
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
   constant CONTROL_Z_SIZE : integer := 3;
 
+  type array4_buffer is array (0 to CONTROL_T_SIZE-1, 0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1, 0 to CONTROL_Z_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
   type tensor_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1, 0 to CONTROL_Z_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
   type matrix_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
   type vector_buffer is array (0 to CONTROL_X_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
@@ -124,6 +126,14 @@ package accelerator_algebra_pkg is
   constant FLOAT_N_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"FFF0000000000000";
 
   -- Buffer
+  constant ARRAY4_SAMPLE_A : array4_buffer := ((((FLOAT_P_TWO, FLOAT_P_ONE, FLOAT_P_FOUR), (FLOAT_P_NINE, FLOAT_P_FOUR, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_EIGHT, FLOAT_P_SIX, FLOAT_P_TWO), (FLOAT_P_EIGHT, FLOAT_P_FIVE, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE)), ((FLOAT_P_THREE, FLOAT_P_ONE, FLOAT_P_SIX), (FLOAT_P_FIVE, FLOAT_P_ZERO, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FIVE))),
+                                               (((FLOAT_P_TWO, FLOAT_P_ONE, FLOAT_P_FOUR), (FLOAT_P_NINE, FLOAT_P_FOUR, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_EIGHT, FLOAT_P_SIX, FLOAT_P_TWO), (FLOAT_P_EIGHT, FLOAT_P_FIVE, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE)), ((FLOAT_P_THREE, FLOAT_P_ONE, FLOAT_P_SIX), (FLOAT_P_FIVE, FLOAT_P_ZERO, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FIVE))),
+                                               (((FLOAT_P_TWO, FLOAT_P_ONE, FLOAT_P_FOUR), (FLOAT_P_NINE, FLOAT_P_FOUR, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_EIGHT, FLOAT_P_SIX, FLOAT_P_TWO), (FLOAT_P_EIGHT, FLOAT_P_FIVE, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE)), ((FLOAT_P_THREE, FLOAT_P_ONE, FLOAT_P_SIX), (FLOAT_P_FIVE, FLOAT_P_ZERO, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FIVE))));
+
+  constant ARRAY4_SAMPLE_B : array4_buffer := ((((FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_ONE), (FLOAT_P_TWO, FLOAT_P_FOUR, FLOAT_P_EIGHT), (FLOAT_P_FOUR, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_NINE, FLOAT_P_ONE, FLOAT_P_FIVE), (FLOAT_P_NINE, FLOAT_P_EIGHT, FLOAT_P_ONE), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FOUR)), ((FLOAT_P_FIVE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_THREE, FLOAT_P_FOUR, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_EIGHT, FLOAT_P_EIGHT))),
+                                               (((FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_ONE), (FLOAT_P_TWO, FLOAT_P_FOUR, FLOAT_P_EIGHT), (FLOAT_P_FOUR, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_NINE, FLOAT_P_ONE, FLOAT_P_FIVE), (FLOAT_P_NINE, FLOAT_P_EIGHT, FLOAT_P_ONE), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FOUR)), ((FLOAT_P_FIVE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_THREE, FLOAT_P_FOUR, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_EIGHT, FLOAT_P_EIGHT))),
+                                               (((FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_ONE), (FLOAT_P_TWO, FLOAT_P_FOUR, FLOAT_P_EIGHT), (FLOAT_P_FOUR, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_NINE, FLOAT_P_ONE, FLOAT_P_FIVE), (FLOAT_P_NINE, FLOAT_P_EIGHT, FLOAT_P_ONE), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FOUR)), ((FLOAT_P_FIVE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_THREE, FLOAT_P_FOUR, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_EIGHT, FLOAT_P_EIGHT))));
+
   constant TENSOR_SAMPLE_A : tensor_buffer := (((FLOAT_P_TWO, FLOAT_P_ONE, FLOAT_P_FOUR), (FLOAT_P_NINE, FLOAT_P_FOUR, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_EIGHT, FLOAT_P_SIX, FLOAT_P_TWO), (FLOAT_P_EIGHT, FLOAT_P_FIVE, FLOAT_P_TWO), (FLOAT_P_ONE, FLOAT_P_FOUR, FLOAT_P_ONE)), ((FLOAT_P_THREE, FLOAT_P_ONE, FLOAT_P_SIX), (FLOAT_P_FIVE, FLOAT_P_ZERO, FLOAT_P_FOUR), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FIVE)));
   constant TENSOR_SAMPLE_B : tensor_buffer := (((FLOAT_P_ONE, FLOAT_P_THREE, FLOAT_P_ONE), (FLOAT_P_TWO, FLOAT_P_FOUR, FLOAT_P_EIGHT), (FLOAT_P_FOUR, FLOAT_P_ONE, FLOAT_P_TWO)), ((FLOAT_P_NINE, FLOAT_P_ONE, FLOAT_P_FIVE), (FLOAT_P_NINE, FLOAT_P_EIGHT, FLOAT_P_ONE), (FLOAT_P_FIVE, FLOAT_P_EIGHT, FLOAT_P_FOUR)), ((FLOAT_P_FIVE, FLOAT_P_FOUR, FLOAT_P_ONE), (FLOAT_P_THREE, FLOAT_P_FOUR, FLOAT_P_SIX), (FLOAT_P_ONE, FLOAT_P_EIGHT, FLOAT_P_EIGHT)));
 
@@ -181,26 +191,20 @@ package accelerator_algebra_pkg is
   signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST    : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_MULTIPLICATION_TEST : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_SUMMATION_TEST      : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST   : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0    : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_MULTIPLICATION_CASE_0 : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_SUMMATION_CASE_0      : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1    : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_MULTIPLICATION_CASE_1 : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1        : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_SUMMATION_CASE_1      : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -519,33 +523,6 @@ package accelerator_algebra_pkg is
       TENSOR_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR MULTIPLICATION
-      -- CONTROL
-      TENSOR_MULTIPLICATION_START : out std_logic;
-      TENSOR_MULTIPLICATION_READY : in  std_logic;
-
-      TENSOR_MULTIPLICATION_DATA_IN_LENGTH_ENABLE : out std_logic;
-      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE      : out std_logic;
-      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE      : out std_logic;
-      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE      : out std_logic;
-
-      TENSOR_MULTIPLICATION_DATA_LENGTH_ENABLE : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_I_ENABLE      : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_J_ENABLE      : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_K_ENABLE      : in std_logic;
-
-      TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_MULTIPLICATION_DATA_OUT_K_ENABLE : in std_logic;
-
-      -- DATA
-      TENSOR_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_MULTIPLICATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- TENSOR PRODUCT
       -- CONTROL
       TENSOR_PRODUCT_START : out std_logic;
@@ -576,33 +553,6 @@ package accelerator_algebra_pkg is
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- TENSOR SUMMATION
-      -- CONTROL
-      TENSOR_SUMMATION_START : out std_logic;
-      TENSOR_SUMMATION_READY : in  std_logic;
-
-      TENSOR_SUMMATION_DATA_IN_LENGTH_ENABLE : out std_logic;
-      TENSOR_SUMMATION_DATA_IN_I_ENABLE      : out std_logic;
-      TENSOR_SUMMATION_DATA_IN_J_ENABLE      : out std_logic;
-      TENSOR_SUMMATION_DATA_IN_K_ENABLE      : out std_logic;
-
-      TENSOR_SUMMATION_DATA_LENGTH_ENABLE : in std_logic;
-      TENSOR_SUMMATION_DATA_I_ENABLE      : in std_logic;
-      TENSOR_SUMMATION_DATA_J_ENABLE      : in std_logic;
-      TENSOR_SUMMATION_DATA_K_ENABLE      : in std_logic;
-
-      TENSOR_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_SUMMATION_DATA_OUT_K_ENABLE : in std_logic;
-
-      -- DATA
-      TENSOR_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_SUMMATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR TRANSPOSE
       -- CONTROL

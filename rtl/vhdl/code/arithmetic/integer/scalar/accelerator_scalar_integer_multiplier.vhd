@@ -90,7 +90,7 @@ architecture accelerator_scalar_integer_multiplier_architecture of accelerator_s
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Data Internal
-  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal multiplier_int : std_logic_vector(2*DATA_SIZE-1 downto 0);
 
   -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -108,17 +108,17 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
-      OVERFLOW_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_IDATA;
+      OVERFLOW_OUT <= ZERO_IDATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Data Internal
-      multiplier_int <= ZERO_DATA;
+      multiplier_int <= std_logic_vector(to_signed(0, 2*DATA_SIZE));
 
       -- Control Internal
-      index_loop <= ZERO_DATA;
+      index_loop <= ZERO_IDATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -129,10 +129,10 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            multiplier_int <= ZERO_DATA;
+            multiplier_int <= std_logic_vector(to_signed(0, 2*DATA_SIZE));
 
             -- Control Internal
-            index_loop <= ZERO_DATA;
+            index_loop <= ZERO_IDATA;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -143,8 +143,8 @@ begin
           if (DATA_B_IN(DATA_SIZE-1) = '1') then
             if (signed(index_loop) = signed(DATA_B_IN)) then
               -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
+              DATA_OUT     <= multiplier_int(DATA_SIZE-1 downto 0);
+              OVERFLOW_OUT <= multiplier_int(2*DATA_SIZE-1 downto DATA_SIZE);
 
               -- Control Outputs
               READY <= '1';
@@ -153,16 +153,16 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) - signed(DATA_A_IN));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) - (to_signed(0, DATA_SIZE) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_DATA));
+              index_loop <= std_logic_vector(signed(index_loop) - to_signed(1, DATA_SIZE));
             end if;
           elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
             if (signed(index_loop) = signed(DATA_B_IN)) then
               -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
+              DATA_OUT     <= multiplier_int(DATA_SIZE-1 downto 0);
+              OVERFLOW_OUT <= multiplier_int(2*DATA_SIZE-1 downto DATA_SIZE);
 
               -- Control Outputs
               READY <= '1';
@@ -171,10 +171,10 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) + signed(DATA_A_IN));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) + (to_signed(0, DATA_SIZE) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_DATA));
+              index_loop <= std_logic_vector(signed(index_loop) + to_signed(1, DATA_SIZE));
             end if;
           end if;
 

@@ -30,9 +30,7 @@ sv work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix
 
 sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_convolution.sv
 sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_inverse.sv
-sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_multiplication.sv
 sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
-sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_summation.sv
 sv work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
 
 sv work ../../../../../../../model/verilog/code/math/calculus/vector/model_vector_differentiation.sv

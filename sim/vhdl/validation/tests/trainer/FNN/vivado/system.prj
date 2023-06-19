@@ -34,9 +34,7 @@ vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_ten
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_inverse.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_matrix_convolution.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_matrix_product.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_multiplication.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_product.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_summation.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/vector/model_vector_differentiation.vhd

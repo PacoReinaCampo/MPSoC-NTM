@@ -14,7 +14,10 @@ add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_s
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/START
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/LENGTH_IN
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_IN_ENABLE
+add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_IN_LENGTH_ENABLE
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_IN
+add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_ENABLE
+add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_LENGTH_ENABLE
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/READY
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_OUT_ENABLE
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/DATA_OUT
