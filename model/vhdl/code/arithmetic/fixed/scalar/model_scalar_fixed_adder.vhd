@@ -72,7 +72,7 @@ entity model_scalar_fixed_adder is
     );
 end model_scalar_fixed_adder;
 
-architecture model_scalar_fixed_adder_architecture of model_scalar_float_adder is
+architecture model_scalar_fixed_adder_architecture of model_scalar_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -124,8 +124,8 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            data_a_int <= to_real(to_fixed(DATA_A_IN, DATA_SIZE-1, 0));
-            data_b_int <= to_real(to_fixed(DATA_B_IN, DATA_SIZE-1, 0));
+            data_a_int <= to_real(to_sfixed(DATA_A_IN, DATA_SIZE-1, 0));
+            data_b_int <= to_real(to_sfixed(DATA_B_IN, DATA_SIZE-1, 0));
 
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -135,9 +135,9 @@ begin
 
           -- Data Outputs
           if (OPERATION = '1') then
-            DATA_OUT <= std_logic_vector(to_fixed(data_a_int-data_b_int, DATA_SIZE-1, 0));
+            DATA_OUT <= std_logic_vector(to_sfixed(data_a_int-data_b_int, DATA_SIZE-1, 0));
           else
-            DATA_OUT <= std_logic_vector(to_fixed(data_a_int+data_b_int, DATA_SIZE-1, 0));
+            DATA_OUT <= std_logic_vector(to_sfixed(data_a_int+data_b_int, DATA_SIZE-1, 0));
           end if;
 
           OVERFLOW_OUT <= '0';

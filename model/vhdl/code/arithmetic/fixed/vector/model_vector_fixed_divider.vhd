@@ -73,7 +73,7 @@ entity model_vector_fixed_divider is
     );
 end entity;
 
-architecture model_vector_fixed_divider_architecture of model_vector_float_divider is
+architecture model_vector_fixed_divider_architecture of model_vector_fixed_divider is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -242,7 +242,7 @@ begin
   end process;
 
   -- SCALAR FIXED DIVIDER
-  scalar_fixed_divider : model_scalar_float_divider
+  scalar_fixed_divider : model_scalar_fixed_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

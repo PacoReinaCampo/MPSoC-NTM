@@ -40,6 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_series_pkg.all;
 
@@ -687,6 +688,41 @@ begin
         DATA_OUT => data_out_scalar_tanh
         );
   end generate model_scalar_tanh_function_test;
+
+  scalar_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_scalar_cosh = '1') then
+        assert data_out_scalar_cosh = function_scalar_cosh(data_in_scalar_cosh)
+          report "SCALAR COSH: " & to_string(to_integer(signed(data_out_scalar_cosh)))
+          severity error;
+      end if;
+
+      if (ready_scalar_exponentiator = '1') then
+        assert data_out_scalar_exponentiator = function_scalar_exponentiator(data_in_scalar_exponentiator)
+          report "SCALAR EXPONENTIATOR: " & to_string(to_integer(signed(data_out_scalar_exponentiator)))
+          severity error;
+      end if;
+
+      if (ready_scalar_logarithm = '1') then
+        assert data_out_scalar_logarithm = function_scalar_logarithm(data_in_scalar_logarithm)
+          report "SCALAR LOGARITHM: " & to_string(to_integer(signed(data_out_scalar_logarithm)))
+          severity error;
+      end if;
+
+      if (ready_scalar_sinh = '1') then
+        assert data_out_scalar_sinh = function_scalar_sinh(data_in_scalar_sinh)
+          report "SCALAR SINH: " & to_string(to_integer(signed(data_out_scalar_sinh)))
+          severity error;
+      end if;
+
+      if (ready_scalar_tanh = '1') then
+        assert data_out_scalar_tanh = function_scalar_tanh(data_in_scalar_tanh)
+          report "SCALAR TANH: " & to_string(to_integer(signed(data_out_scalar_tanh)))
+          severity error;
+      end if;
+    end if;
+  end process scalar_assertion;
 
   ------------------------------------------------------------------------------
   -- VECTOR

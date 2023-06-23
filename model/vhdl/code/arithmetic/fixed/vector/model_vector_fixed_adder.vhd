@@ -75,7 +75,7 @@ entity model_vector_fixed_adder is
     );
 end entity;
 
-architecture model_vector_fixed_adder_architecture of model_vector_float_adder is
+architecture model_vector_fixed_adder_architecture of model_vector_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -249,7 +249,7 @@ begin
   end process;
 
   -- SCALAR FIXED ADDER
-  scalar_fixed_adder : model_scalar_float_adder
+  scalar_fixed_adder : model_scalar_fixed_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

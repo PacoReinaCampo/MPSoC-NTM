@@ -110,7 +110,7 @@ entity model_fixed_testbench is
     );
 end model_fixed_testbench;
 
-architecture model_fixed_testbench_architecture of model_float_testbench is
+architecture model_fixed_testbench_architecture of model_fixed_testbench is
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -658,7 +658,7 @@ begin
 
   -- SCALAR FIXED ADDER
   model_scalar_fixed_adder_test : if (ENABLE_NTM_SCALAR_FIXED_ADDER_TEST) generate
-    scalar_fixed_adder : model_scalar_float_adder
+    scalar_fixed_adder : model_scalar_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -684,7 +684,7 @@ begin
 
   -- SCALAR FIXED MULTIPLIER
   model_scalar_fixed_multiplier_test : if (ENABLE_NTM_SCALAR_FIXED_MULTIPLIER_TEST) generate
-    scalar_fixed_multiplier : model_scalar_float_multiplier
+    scalar_fixed_multiplier : model_scalar_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -709,7 +709,7 @@ begin
 
   -- SCALAR FIXED DIVIDER
   model_scalar_fixed_divider_test : if (ENABLE_NTM_SCALAR_FIXED_DIVIDER_TEST) generate
-    scalar_fixed_divider : model_scalar_float_divider
+    scalar_fixed_divider : model_scalar_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -738,7 +738,7 @@ begin
 
   -- VECTOR FIXED ADDER
   model_vector_fixed_adder_test : if (ENABLE_NTM_VECTOR_FIXED_ADDER_TEST) generate
-    vector_fixed_adder : model_vector_float_adder
+    vector_fixed_adder : model_vector_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -771,7 +771,7 @@ begin
 
   -- VECTOR FIXED MULTIPLIER
   model_vector_fixed_multiplier_test : if (ENABLE_NTM_VECTOR_FIXED_MULTIPLIER_TEST) generate
-    vector_fixed_multiplier : model_vector_float_multiplier
+    vector_fixed_multiplier : model_vector_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -802,7 +802,7 @@ begin
 
   -- VECTOR FIXED DIVIDER
   model_vector_fixed_divider_test : if (ENABLE_NTM_VECTOR_FIXED_DIVIDER_TEST) generate
-    vector_fixed_divider : model_vector_float_divider
+    vector_fixed_divider : model_vector_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -837,7 +837,7 @@ begin
 
   -- MATRIX FIXED ADDER
   model_matrix_fixed_adder_test : if (ENABLE_NTM_MATRIX_FIXED_ADDER_TEST) generate
-    matrix_fixed_adder : model_matrix_float_adder
+    matrix_fixed_adder : model_matrix_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -874,7 +874,7 @@ begin
 
   -- MATRIX FIXED MULTIPLIER
   model_matrix_fixed_multiplier_test : if (ENABLE_NTM_MATRIX_FIXED_MULTIPLIER_TEST) generate
-    matrix_fixed_multiplier : model_matrix_float_multiplier
+    matrix_fixed_multiplier : model_matrix_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -909,7 +909,7 @@ begin
 
   -- MATRIX FIXED DIVIDER
   model_matrix_fixed_divider_test : if (ENABLE_NTM_MATRIX_FIXED_DIVIDER_TEST) generate
-    matrix_fixed_divider : model_matrix_float_divider
+    matrix_fixed_divider : model_matrix_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -948,7 +948,7 @@ begin
 
   -- TENSOR FIXED ADDER
   model_tensor_fixed_adder_test : if (ENABLE_NTM_TENSOR_FIXED_ADDER_TEST) generate
-    tensor_fixed_adder : model_tensor_float_adder
+    tensor_fixed_adder : model_tensor_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -989,7 +989,7 @@ begin
 
   -- TENSOR FIXED MULTIPLIER
   model_tensor_fixed_multiplier_test : if (ENABLE_NTM_TENSOR_FIXED_MULTIPLIER_TEST) generate
-    tensor_fixed_multiplier : model_tensor_float_multiplier
+    tensor_fixed_multiplier : model_tensor_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1028,7 +1028,7 @@ begin
 
   -- TENSOR FIXED DIVIDER
   model_tensor_fixed_divider_test : if (ENABLE_NTM_TENSOR_FIXED_DIVIDER_TEST) generate
-    tensor_fixed_divider : model_tensor_float_divider
+    tensor_fixed_divider : model_tensor_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE

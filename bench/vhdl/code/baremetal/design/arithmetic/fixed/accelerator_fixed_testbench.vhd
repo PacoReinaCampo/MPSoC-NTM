@@ -110,7 +110,7 @@ entity accelerator_fixed_testbench is
     );
 end accelerator_fixed_testbench;
 
-architecture accelerator_fixed_testbench_architecture of accelerator_float_testbench is
+architecture accelerator_fixed_testbench_architecture of accelerator_fixed_testbench is
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -658,7 +658,7 @@ begin
 
   -- SCALAR FIXED ADDER
   accelerator_scalar_fixed_adder_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_ADDER_TEST) generate
-    scalar_fixed_adder : accelerator_scalar_float_adder
+    scalar_fixed_adder : accelerator_scalar_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -684,7 +684,7 @@ begin
 
   -- SCALAR FIXED MULTIPLIER
   accelerator_scalar_fixed_multiplier_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST) generate
-    scalar_fixed_multiplier : accelerator_scalar_float_multiplier
+    scalar_fixed_multiplier : accelerator_scalar_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -709,7 +709,7 @@ begin
 
   -- SCALAR FIXED DIVIDER
   accelerator_scalar_fixed_divider_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST) generate
-    scalar_fixed_divider : accelerator_scalar_float_divider
+    scalar_fixed_divider : accelerator_scalar_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -732,13 +732,36 @@ begin
         );
   end generate accelerator_scalar_fixed_divider_test;
 
+  scalar_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_scalar_fixed_adder = '1') then
+        assert data_out_scalar_fixed_adder = function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder)
+          report "SCALAR ADDER: " & to_string(to_integer(signed(data_out_scalar_fixed_adder)))
+          severity error;
+      end if;
+
+      if (ready_scalar_fixed_multiplier = '1') then
+        assert data_out_scalar_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier)
+          report "SCALAR MULTIPLIER: " & to_string(to_integer(signed(data_out_scalar_fixed_multiplier)))
+          severity error;
+      end if;
+
+      if (ready_scalar_fixed_divider = '1') then
+        assert data_out_scalar_fixed_divider = function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider)
+          report "SCALAR DIVIDER: " & to_string(to_integer(signed(data_out_scalar_fixed_divider)))
+          severity error;
+      end if;
+    end if;
+  end process scalar_assertion;
+
   ------------------------------------------------------------------------------
   -- VECTOR
   ------------------------------------------------------------------------------
 
   -- VECTOR FIXED ADDER
   accelerator_vector_fixed_adder_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_ADDER_TEST) generate
-    vector_fixed_adder : accelerator_vector_float_adder
+    vector_fixed_adder : accelerator_vector_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -771,7 +794,7 @@ begin
 
   -- VECTOR FIXED MULTIPLIER
   accelerator_vector_fixed_multiplier_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST) generate
-    vector_fixed_multiplier : accelerator_vector_float_multiplier
+    vector_fixed_multiplier : accelerator_vector_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -802,7 +825,7 @@ begin
 
   -- VECTOR FIXED DIVIDER
   accelerator_vector_fixed_divider_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST) generate
-    vector_fixed_divider : accelerator_vector_float_divider
+    vector_fixed_divider : accelerator_vector_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -831,13 +854,48 @@ begin
         );
   end generate accelerator_vector_fixed_divider_test;
 
+  vector_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_vector_fixed_adder = '1' and data_out_enable_vector_fixed_adder = '1') then
+        assert data_out_vector_fixed_adder = function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder)
+          report "VECTOR ADDER: " & to_string(to_integer(signed(data_out_vector_fixed_adder)))
+          severity error;
+      elsif (data_out_enable_vector_fixed_adder = '1') then
+        assert data_out_vector_fixed_adder = function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder)
+          report "VECTOR ADDER: " & to_string(to_integer(signed(data_out_vector_fixed_adder)))
+          severity error;
+      end if;
+
+      if (ready_vector_fixed_multiplier = '1' and data_out_enable_vector_fixed_multiplier = '1') then
+        assert data_out_vector_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier)
+          report "VECTOR MULTIPLIER: " & to_string(to_integer(signed(data_out_vector_fixed_multiplier)))
+          severity error;
+      elsif (data_out_enable_vector_fixed_multiplier = '1') then
+        assert data_out_vector_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier)
+          report "VECTOR MULTIPLIER: " & to_string(to_integer(signed(data_out_vector_fixed_multiplier)))
+          severity error;
+      end if;
+
+      if (ready_vector_fixed_divider = '1' and data_out_enable_vector_fixed_divider = '1') then
+        assert data_out_vector_fixed_divider = function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider)
+          report "VECTOR DIVIDER: " & to_string(to_integer(signed(data_out_vector_fixed_divider)))
+          severity error;
+      elsif (data_out_enable_vector_fixed_divider = '1') then
+        assert data_out_vector_fixed_divider = function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider)
+          report "VECTOR DIVIDER: " & to_string(to_integer(signed(data_out_vector_fixed_divider)))
+          severity error;
+      end if;
+    end if;
+  end process vector_assertion;
+
   ------------------------------------------------------------------------------
   -- MATRIX
   ------------------------------------------------------------------------------
 
   -- MATRIX FIXED ADDER
   accelerator_matrix_fixed_adder_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_ADDER_TEST) generate
-    matrix_fixed_adder : accelerator_matrix_float_adder
+    matrix_fixed_adder : accelerator_matrix_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -874,7 +932,7 @@ begin
 
   -- MATRIX FIXED MULTIPLIER
   accelerator_matrix_fixed_multiplier_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST) generate
-    matrix_fixed_multiplier : accelerator_matrix_float_multiplier
+    matrix_fixed_multiplier : accelerator_matrix_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -909,7 +967,7 @@ begin
 
   -- MATRIX FIXED DIVIDER
   accelerator_matrix_fixed_divider_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST) generate
-    matrix_fixed_divider : accelerator_matrix_float_divider
+    matrix_fixed_divider : accelerator_matrix_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -942,13 +1000,60 @@ begin
         );
   end generate accelerator_matrix_fixed_divider_test;
 
+  matrix_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_matrix_fixed_adder = '1' and data_out_i_enable_matrix_fixed_adder = '1' and data_out_j_enable_matrix_fixed_adder = '1') then
+        assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_matrix_fixed_adder)))
+          severity error;
+      elsif (data_out_i_enable_matrix_fixed_adder = '1' and data_out_j_enable_matrix_fixed_adder = '1') then
+        assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_matrix_fixed_adder)))
+          severity error;
+      elsif (data_out_j_enable_matrix_fixed_adder = '1') then
+        assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_matrix_fixed_adder)))
+          severity error;
+      end if;
+
+      if (ready_matrix_fixed_multiplier = '1' and data_out_i_enable_matrix_fixed_multiplier = '1' and data_out_j_enable_matrix_fixed_multiplier = '1') then
+        assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_matrix_fixed_multiplier)))
+          severity error;
+      elsif (data_out_i_enable_matrix_fixed_multiplier = '1' and data_out_j_enable_matrix_fixed_multiplier = '1') then
+        assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_matrix_fixed_multiplier)))
+          severity error;
+      elsif (data_out_j_enable_matrix_fixed_multiplier = '1') then
+        assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_matrix_fixed_multiplier)))
+          severity error;
+      end if;
+
+      if (ready_matrix_fixed_divider = '1' and data_out_i_enable_matrix_fixed_divider = '1' and data_out_j_enable_matrix_fixed_divider = '1') then
+        assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_matrix_fixed_divider)))
+          severity error;
+      elsif (data_out_i_enable_matrix_fixed_divider = '1' and data_out_j_enable_matrix_fixed_divider = '1') then
+        assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_matrix_fixed_divider)))
+          severity error;
+      elsif (data_out_j_enable_matrix_fixed_divider = '1') then
+        assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_matrix_fixed_divider)))
+          severity error;
+      end if;
+    end if;
+  end process matrix_assertion;
+
   ------------------------------------------------------------------------------
   -- TENSOR
   ------------------------------------------------------------------------------
 
   -- TENSOR FIXED ADDER
   accelerator_tensor_fixed_adder_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_ADDER_TEST) generate
-    tensor_fixed_adder : accelerator_tensor_float_adder
+    tensor_fixed_adder : accelerator_tensor_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -989,7 +1094,7 @@ begin
 
   -- TENSOR FIXED MULTIPLIER
   accelerator_tensor_fixed_multiplier_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST) generate
-    tensor_fixed_multiplier : accelerator_tensor_float_multiplier
+    tensor_fixed_multiplier : accelerator_tensor_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1028,7 +1133,7 @@ begin
 
   -- TENSOR FIXED DIVIDER
   accelerator_tensor_fixed_divider_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST) generate
-    tensor_fixed_divider : accelerator_tensor_float_divider
+    tensor_fixed_divider : accelerator_tensor_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1064,5 +1169,64 @@ begin
         OVERFLOW_OUT => overflow_out_tensor_fixed_divider
         );
   end generate accelerator_tensor_fixed_divider_test;
+
+  tensor_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_tensor_fixed_adder = '1' and data_out_i_enable_tensor_fixed_adder = '1' and data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_adder = '1') then
+        assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_tensor_fixed_adder)))
+          severity error;
+      elsif (data_out_i_enable_tensor_fixed_adder = '1' and data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_adder = '1') then
+        assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_tensor_fixed_adder)))
+          severity error;
+      elsif (data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_adder = '1') then
+        assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_tensor_fixed_adder)))
+          severity error;
+      elsif (data_out_k_enable_tensor_fixed_adder = '1') then
+        assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
+          report "MATRIX ADDER: " & to_string(to_integer(signed(data_out_tensor_fixed_adder)))
+          severity error;
+      end if;
+
+      if (ready_tensor_fixed_multiplier = '1' and data_out_i_enable_tensor_fixed_multiplier = '1' and data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_multiplier = '1') then
+        assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier)))
+          severity error;
+      elsif (data_out_i_enable_tensor_fixed_multiplier = '1' and data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_multiplier = '1') then
+        assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier)))
+          severity error;
+      elsif (data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_multiplier = '1') then
+        assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier)))
+          severity error;
+      elsif (data_out_k_enable_tensor_fixed_multiplier = '1') then
+        assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
+          report "MATRIX MULTIPLIER: " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier)))
+          severity error;
+      end if;
+
+      if (ready_tensor_fixed_divider = '1' and data_out_i_enable_tensor_fixed_divider = '1' and data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1') then
+        assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_tensor_fixed_divider)))
+          severity error;
+      elsif (data_out_i_enable_tensor_fixed_divider = '1' and data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1') then
+        assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_tensor_fixed_divider)))
+          severity error;
+      elsif (data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1') then
+        assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_tensor_fixed_divider)))
+          severity error;
+      elsif (data_out_k_enable_tensor_fixed_divider = '1') then
+        assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
+          report "MATRIX DIVIDER: " & to_string(to_integer(signed(data_out_tensor_fixed_divider)))
+          severity error;
+      end if;
+    end if;
+  end process tensor_assertion;
 
 end accelerator_fixed_testbench_architecture;

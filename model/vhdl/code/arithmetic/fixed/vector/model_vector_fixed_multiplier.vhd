@@ -73,7 +73,7 @@ entity model_vector_fixed_multiplier is
     );
 end entity;
 
-architecture model_vector_fixed_multiplier_architecture of model_vector_float_multiplier is
+architecture model_vector_fixed_multiplier_architecture of model_vector_fixed_multiplier is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -241,7 +241,7 @@ begin
   end process;
 
   -- SCALAR FIXED MULTIPLIER
-  scalar_fixed_multiplier : model_scalar_float_multiplier
+  scalar_fixed_multiplier : model_scalar_fixed_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

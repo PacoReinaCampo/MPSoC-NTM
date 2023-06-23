@@ -79,7 +79,7 @@ entity model_matrix_fixed_adder is
     );
 end entity;
 
-architecture model_matrix_fixed_adder_architecture of model_matrix_float_adder is
+architecture model_matrix_fixed_adder_architecture of model_matrix_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -342,7 +342,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_fixed_adder : model_scalar_float_adder
+  scalar_fixed_adder : model_scalar_fixed_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

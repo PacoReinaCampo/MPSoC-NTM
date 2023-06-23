@@ -41,6 +41,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use ieee.math_real.all;
+use ieee.fixed_pkg.all;
 use ieee.float_pkg.all;
 
 package model_arithmetic_pkg is
@@ -88,32 +89,11 @@ package model_arithmetic_pkg is
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
-  -- ARITHMETIC - MODULAR
+  -- ARITHMETIC - FIXED
   ------------------------------------------------------------------------------
 
   -- SCALAR
-  component model_scalar_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component model_scalar_modular_adder is
+  component model_scalar_fixed_adder is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -130,14 +110,15 @@ package model_arithmetic_pkg is
       OPERATION : in std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_scalar_modular_multiplier is
+  component model_scalar_fixed_multiplier is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -152,14 +133,15 @@ package model_arithmetic_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_scalar_modular_inverter is
+  component model_scalar_fixed_divider is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -174,40 +156,16 @@ package model_arithmetic_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
   -- VECTOR
-  component model_vector_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component model_vector_modular_adder is
+  component model_vector_fixed_adder is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -229,15 +187,16 @@ package model_arithmetic_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_vector_modular_multiplier is
+  component model_vector_fixed_multiplier is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -257,15 +216,16 @@ package model_arithmetic_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_vector_modular_inverter is
+  component model_vector_fixed_divider is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -279,49 +239,23 @@ package model_arithmetic_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_ENABLE : in std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
   -- MATRIX
-  component model_matrix_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component model_matrix_modular_adder is
+  component model_matrix_fixed_adder is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -346,16 +280,17 @@ package model_arithmetic_pkg is
       DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_matrix_modular_multiplier is
+  component model_matrix_fixed_multiplier is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -378,16 +313,17 @@ package model_arithmetic_pkg is
       DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_matrix_modular_inverter is
+  component model_matrix_fixed_divider is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -401,55 +337,27 @@ package model_arithmetic_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
       DATA_OUT_I_ENABLE : out std_logic;
       DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
   -- TENSOR
-  component model_tensor_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component model_tensor_modular_adder is
+  component model_tensor_fixed_adder is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -477,17 +385,18 @@ package model_arithmetic_pkg is
       DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_tensor_modular_multiplier is
+  component model_tensor_fixed_multiplier is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -513,17 +422,18 @@ package model_arithmetic_pkg is
       DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
-  component model_tensor_modular_inverter is
+  component model_tensor_fixed_divider is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -537,21 +447,26 @@ package model_arithmetic_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
       DATA_OUT_I_ENABLE : out std_logic;
       DATA_OUT_J_ENABLE : out std_logic;
       DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
@@ -1324,159 +1239,106 @@ package model_arithmetic_pkg is
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
-  -- ARITHMETIC - MODULAR
+  -- ARITHMETIC - FIXED
   ------------------------------------------------------------------------------
 
   -- SCALAR
-  function function_scalar_modular_mod (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector;
-
-  function function_scalar_modular_adder (
+  function function_scalar_fixed_adder (
     OPERATION : std_logic;
 
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
     scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
     scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return std_logic_vector;
 
-  function function_scalar_modular_multiplier (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
+  function function_scalar_fixed_multiplier (
     scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
     scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return std_logic_vector;
 
-  function function_scalar_modular_inverter (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+  function function_scalar_fixed_divider (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return std_logic_vector;
 
   -- VECTOR
-  function function_vector_modular_mod (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
-
-    vector_input : vector_buffer
-    ) return vector_buffer;
-
-  function function_vector_modular_adder (
+  function function_vector_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_modulo_input : vector_buffer;
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_fixed_multiplier (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_a_input : vector_buffer;
     vector_b_input : vector_buffer
     ) return vector_buffer;
 
-  function function_vector_modular_multiplier (
+  function function_vector_fixed_divider (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
 
     vector_a_input : vector_buffer;
     vector_b_input : vector_buffer
-    ) return vector_buffer;
-
-  function function_vector_modular_inverter (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
-
-    vector_input : vector_buffer
     ) return vector_buffer;
 
   -- MATRIX
-  function function_matrix_modular_mod (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer;
-
-  function function_matrix_modular_adder (
+  function function_matrix_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_modulo_input : matrix_buffer;
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_a_input : matrix_buffer;
     matrix_b_input : matrix_buffer
     ) return matrix_buffer;
 
-  function function_matrix_modular_multiplier (
+  function function_matrix_fixed_divider (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
 
     matrix_a_input : matrix_buffer;
     matrix_b_input : matrix_buffer
-    ) return matrix_buffer;
-
-  function function_matrix_modular_inverter (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
-
-    matrix_input : matrix_buffer
     ) return matrix_buffer;
 
   -- TENSOR
-  function function_tensor_modular_mod (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
-
-    tensor_input : tensor_buffer
-    ) return tensor_buffer;
-
-  function function_tensor_modular_adder (
+  function function_tensor_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_modulo_input : tensor_buffer;
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  function function_tensor_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     tensor_a_input : tensor_buffer;
     tensor_b_input : tensor_buffer
     ) return tensor_buffer;
 
-  function function_tensor_modular_multiplier (
+  function function_tensor_fixed_divider (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
 
     tensor_a_input : tensor_buffer;
     tensor_b_input : tensor_buffer
-    ) return tensor_buffer;
-
-  function function_tensor_modular_inverter (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
-
-    tensor_input : tensor_buffer
     ) return tensor_buffer;
 
   ------------------------------------------------------------------------------
@@ -1844,28 +1706,12 @@ package body model_arithmetic_pkg is
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
-  -- ARITHMETIC - MODULAR
+  -- ARITHMETIC - FIXED
   ------------------------------------------------------------------------------
 
   -- SCALAR
-  function function_scalar_modular_mod (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(unsigned(scalar_input) mod unsigned(scalar_modulo_input));
-
-    return scalar_output;
-  end function function_scalar_modular_mod;
-
-  function function_scalar_modular_adder (
+  function function_scalar_fixed_adder (
     OPERATION : std_logic;
-
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
 
     scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
     scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1875,17 +1721,15 @@ package body model_arithmetic_pkg is
   begin
     -- Data Inputs
     if (OPERATION = '1') then
-      scalar_output := std_logic_vector((unsigned(scalar_a_input) - unsigned(scalar_b_input)) mod unsigned(scalar_modulo_input));
+      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) - to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
     else
-      scalar_output := std_logic_vector((unsigned(scalar_a_input) + unsigned(scalar_b_input)) mod unsigned(scalar_modulo_input));
+      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) + to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
     end if;
 
     return scalar_output;
-  end function function_scalar_modular_adder;
+  end function function_scalar_fixed_adder;
 
-  function function_scalar_modular_multiplier (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
+  function function_scalar_fixed_multiplier (
     scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
     scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return std_logic_vector is
@@ -1893,50 +1737,29 @@ package body model_arithmetic_pkg is
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector((resize(unsigned(scalar_a_input), DATA_SIZE/2)*resize(unsigned(scalar_b_input), DATA_SIZE/2)) mod unsigned(scalar_modulo_input));
+    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))*to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
 
     return scalar_output;
-  end function function_scalar_modular_multiplier;
+  end function function_scalar_fixed_multiplier;
 
-  function function_scalar_modular_inverter (
-    scalar_modulo_input : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+  function function_scalar_fixed_divider (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return std_logic_vector is
 
     variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    scalar_output := std_logic_vector(unsigned(scalar_input) mod unsigned(scalar_modulo_input));
+    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))/to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
 
     return scalar_output;
-  end function function_scalar_modular_inverter;
+  end function function_scalar_fixed_divider;
 
   -- VECTOR
-  function function_vector_modular_mod (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
-
-    vector_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(unsigned(vector_input(i)) mod unsigned(vector_modulo_input(i)));
-    end loop;
-
-    return vector_output;
-  end function function_vector_modular_mod;
-
-  function function_vector_modular_adder (
+  function function_vector_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
 
     vector_a_input : vector_buffer;
     vector_b_input : vector_buffer
@@ -1947,19 +1770,17 @@ package body model_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
       if (OPERATION = '1') then
-        vector_output(i) := std_logic_vector((unsigned(vector_a_input(i)) - unsigned(vector_b_input(i))) mod unsigned(vector_modulo_input(i)));
+        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) - to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
       else
-        vector_output(i) := std_logic_vector((unsigned(vector_a_input(i)) + unsigned(vector_b_input(i))) mod unsigned(vector_modulo_input(i)));
+        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) + to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
       end if;
     end loop;
 
     return vector_output;
-  end function function_vector_modular_adder;
+  end function function_vector_fixed_adder;
 
-  function function_vector_modular_multiplier (
+  function function_vector_fixed_multiplier (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_modulo_input : vector_buffer;
 
     vector_a_input : vector_buffer;
     vector_b_input : vector_buffer
@@ -1969,59 +1790,35 @@ package body model_arithmetic_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector((resize(unsigned(vector_a_input(i)), DATA_SIZE/2)*resize(unsigned(vector_b_input(i)), DATA_SIZE/2)) mod unsigned(vector_modulo_input(i)));
+      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))*to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
     end loop;
 
     return vector_output;
-  end function function_vector_modular_multiplier;
+  end function function_vector_fixed_multiplier;
 
-  function function_vector_modular_inverter (
+  function function_vector_fixed_divider (
     SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_modulo_input : vector_buffer;
-
-    vector_input : vector_buffer
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
     ) return vector_buffer is
 
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(unsigned(vector_input(i)) mod unsigned(vector_modulo_input(i)));
+      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))/to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
     end loop;
 
     return vector_output;
-  end function function_vector_modular_inverter;
+  end function function_vector_fixed_divider;
 
   -- MATRIX
-  function function_matrix_modular_mod (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
-
-    matrix_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(unsigned(matrix_input(i, j)) mod unsigned(matrix_modulo_input(i, j)));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_modular_mod;
-
-  function function_matrix_modular_adder (
+  function function_matrix_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
 
     matrix_a_input : matrix_buffer;
     matrix_b_input : matrix_buffer
@@ -2033,21 +1830,19 @@ package body model_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         if (OPERATION = '1') then
-          matrix_output(i, j) := std_logic_vector((unsigned(matrix_a_input(i, j)) - unsigned(matrix_b_input(i, j))) mod unsigned(matrix_modulo_input(i, j)));
+          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) - to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
         else
-          matrix_output(i, j) := std_logic_vector((unsigned(matrix_a_input(i, j)) + unsigned(matrix_b_input(i, j))) mod unsigned(matrix_modulo_input(i, j)));
+          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) + to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
         end if;
       end loop;
     end loop;
 
     return matrix_output;
-  end function function_matrix_modular_adder;
+  end function function_matrix_fixed_adder;
 
-  function function_matrix_modular_multiplier (
+  function function_matrix_fixed_multiplier (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_modulo_input : matrix_buffer;
 
     matrix_a_input : matrix_buffer;
     matrix_b_input : matrix_buffer
@@ -2058,20 +1853,19 @@ package body model_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector((resize(unsigned(matrix_a_input(i, j)), DATA_SIZE/2)*resize(unsigned(matrix_b_input(i, j)), DATA_SIZE/2)) mod unsigned(matrix_modulo_input(i, j)));
+        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))*to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
       end loop;
     end loop;
 
     return matrix_output;
-  end function function_matrix_modular_multiplier;
+  end function function_matrix_fixed_multiplier;
 
-  function function_matrix_modular_inverter (
+  function function_matrix_fixed_divider (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_modulo_input : matrix_buffer;
-
-    matrix_input : matrix_buffer
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
     ) return matrix_buffer is
 
     variable matrix_output : matrix_buffer;
@@ -2079,47 +1873,20 @@ package body model_arithmetic_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(unsigned(matrix_input(i, j)) mod unsigned(matrix_modulo_input(i, j)));
+        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))/to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
       end loop;
     end loop;
 
     return matrix_output;
-  end function function_matrix_modular_inverter;
+  end function function_matrix_fixed_divider;
 
   -- TENSOR
-
-  function function_tensor_modular_mod (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
-
-    tensor_input : tensor_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(unsigned(tensor_input(i, j, k)) mod unsigned(tensor_modulo_input(i, j, k)));
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_modular_mod;
-
-  function function_tensor_modular_adder (
+  function function_tensor_fixed_adder (
     OPERATION : std_logic;
 
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
 
     tensor_a_input : tensor_buffer;
     tensor_b_input : tensor_buffer
@@ -2132,23 +1899,21 @@ package body model_arithmetic_pkg is
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
           if (OPERATION = '1') then
-            tensor_output(i, j, k) := std_logic_vector((unsigned(tensor_a_input(i, j, k)) - unsigned(tensor_b_input(i, j, k))) mod unsigned(tensor_modulo_input(i, j, k)));
+            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) - to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
           else
-            tensor_output(i, j, k) := std_logic_vector((unsigned(tensor_a_input(i, j, k)) + unsigned(tensor_b_input(i, j, k))) mod unsigned(tensor_modulo_input(i, j, k)));
+            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) + to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
           end if;
         end loop;
       end loop;
     end loop;
 
     return tensor_output;
-  end function function_tensor_modular_adder;
+  end function function_tensor_fixed_adder;
 
-  function function_tensor_modular_multiplier (
+  function function_tensor_fixed_multiplier (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_modulo_input : tensor_buffer;
 
     tensor_a_input : tensor_buffer;
     tensor_b_input : tensor_buffer
@@ -2160,22 +1925,21 @@ package body model_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector((resize(unsigned(tensor_a_input(i, j, k)), DATA_SIZE/2)*resize(unsigned(tensor_b_input(i, j, k)), DATA_SIZE/2)) mod unsigned(tensor_modulo_input(i, j, k)));
+          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))*to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
         end loop;
       end loop;
     end loop;
 
     return tensor_output;
-  end function function_tensor_modular_multiplier;
+  end function function_tensor_fixed_multiplier;
 
-  function function_tensor_modular_inverter (
+  function function_tensor_fixed_divider (
     SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_modulo_input : tensor_buffer;
-
-    tensor_input : tensor_buffer
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
     ) return tensor_buffer is
 
     variable tensor_output : tensor_buffer;
@@ -2184,13 +1948,13 @@ package body model_arithmetic_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(unsigned(tensor_input(i, j, k)) mod unsigned(tensor_modulo_input(i, j, k)));
+          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))/to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
         end loop;
       end loop;
     end loop;
 
     return tensor_output;
-  end function function_tensor_modular_inverter;
+  end function function_tensor_fixed_divider;
 
   ------------------------------------------------------------------------------
   -- ARITHMETIC - INTEGER

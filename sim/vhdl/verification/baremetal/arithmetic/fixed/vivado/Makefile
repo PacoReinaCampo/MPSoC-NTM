@@ -47,8 +47,8 @@ build:
 	xvhdl -prj system.prj
 
 simulate:
-	xelab accelerator_float_testbench
-	xsim -R accelerator_float_testbench
+	xelab accelerator_fixed_testbench
+	xsim -R accelerator_fixed_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil

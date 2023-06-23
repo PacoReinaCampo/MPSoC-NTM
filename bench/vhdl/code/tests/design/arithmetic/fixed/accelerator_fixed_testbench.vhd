@@ -110,7 +110,7 @@ entity accelerator_fixed_testbench is
     );
 end accelerator_fixed_testbench;
 
-architecture accelerator_fixed_testbench_architecture of accelerator_float_testbench is
+architecture accelerator_fixed_testbench_architecture of accelerator_fixed_testbench is
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -658,7 +658,7 @@ begin
 
   -- SCALAR FIXED ADDER
   accelerator_scalar_fixed_adder_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_ADDER_TEST) generate
-    scalar_fixed_adder : accelerator_scalar_float_adder
+    scalar_fixed_adder : accelerator_scalar_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -684,7 +684,7 @@ begin
 
   -- SCALAR FIXED MULTIPLIER
   accelerator_scalar_fixed_multiplier_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST) generate
-    scalar_fixed_multiplier : accelerator_scalar_float_multiplier
+    scalar_fixed_multiplier : accelerator_scalar_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -709,7 +709,7 @@ begin
 
   -- SCALAR FIXED DIVIDER
   accelerator_scalar_fixed_divider_test : if (ENABLE_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST) generate
-    scalar_fixed_divider : accelerator_scalar_float_divider
+    scalar_fixed_divider : accelerator_scalar_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -738,7 +738,7 @@ begin
 
   -- VECTOR FIXED ADDER
   accelerator_vector_fixed_adder_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_ADDER_TEST) generate
-    vector_fixed_adder : accelerator_vector_float_adder
+    vector_fixed_adder : accelerator_vector_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -771,7 +771,7 @@ begin
 
   -- VECTOR FIXED MULTIPLIER
   accelerator_vector_fixed_multiplier_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST) generate
-    vector_fixed_multiplier : accelerator_vector_float_multiplier
+    vector_fixed_multiplier : accelerator_vector_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -802,7 +802,7 @@ begin
 
   -- VECTOR FIXED DIVIDER
   accelerator_vector_fixed_divider_test : if (ENABLE_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST) generate
-    vector_fixed_divider : accelerator_vector_float_divider
+    vector_fixed_divider : accelerator_vector_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -837,7 +837,7 @@ begin
 
   -- MATRIX FIXED ADDER
   accelerator_matrix_fixed_adder_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_ADDER_TEST) generate
-    matrix_fixed_adder : accelerator_matrix_float_adder
+    matrix_fixed_adder : accelerator_matrix_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -874,7 +874,7 @@ begin
 
   -- MATRIX FIXED MULTIPLIER
   accelerator_matrix_fixed_multiplier_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST) generate
-    matrix_fixed_multiplier : accelerator_matrix_float_multiplier
+    matrix_fixed_multiplier : accelerator_matrix_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -909,7 +909,7 @@ begin
 
   -- MATRIX FIXED DIVIDER
   accelerator_matrix_fixed_divider_test : if (ENABLE_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST) generate
-    matrix_fixed_divider : accelerator_matrix_float_divider
+    matrix_fixed_divider : accelerator_matrix_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -948,7 +948,7 @@ begin
 
   -- TENSOR FIXED ADDER
   accelerator_tensor_fixed_adder_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_ADDER_TEST) generate
-    tensor_fixed_adder : accelerator_tensor_float_adder
+    tensor_fixed_adder : accelerator_tensor_fixed_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -989,7 +989,7 @@ begin
 
   -- TENSOR FIXED MULTIPLIER
   accelerator_tensor_fixed_multiplier_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST) generate
-    tensor_fixed_multiplier : accelerator_tensor_float_multiplier
+    tensor_fixed_multiplier : accelerator_tensor_fixed_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1028,7 +1028,7 @@ begin
 
   -- TENSOR FIXED DIVIDER
   accelerator_tensor_fixed_divider_test : if (ENABLE_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST) generate
-    tensor_fixed_divider : accelerator_tensor_float_divider
+    tensor_fixed_divider : accelerator_tensor_fixed_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE

@@ -70,7 +70,7 @@ entity model_scalar_fixed_multiplier is
     );
 end model_scalar_fixed_multiplier;
 
-architecture model_scalar_fixed_multiplier_architecture of model_scalar_float_multiplier is
+architecture model_scalar_fixed_multiplier_architecture of model_scalar_fixed_multiplier is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -122,8 +122,8 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            data_a_int <= to_real(to_fixed(DATA_A_IN, DATA_SIZE-1, 0));
-            data_b_int <= to_real(to_fixed(DATA_B_IN, DATA_SIZE-1, 0));
+            data_a_int <= to_real(to_sfixed(DATA_A_IN, DATA_SIZE-1, 0));
+            data_b_int <= to_real(to_sfixed(DATA_B_IN, DATA_SIZE-1, 0));
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -132,7 +132,7 @@ begin
         when ENDER_STATE =>
 
           -- Data Outputs
-          DATA_OUT <= std_logic_vector(to_fixed(data_a_int*data_b_int, DATA_SIZE-1, 0));
+          DATA_OUT <= std_logic_vector(to_sfixed(data_a_int*data_b_int, DATA_SIZE-1, 0));
 
           OVERFLOW_OUT <= '0';
 
