@@ -40,6 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
 use work.accelerator_function_pkg.all;
 
@@ -119,19 +120,6 @@ architecture accelerator_function_testbench_architecture of accelerator_function
   -- DATA
   signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- CONTROL
-  signal start_scalar_summation : std_logic;
-  signal ready_scalar_summation : std_logic;
-
-  signal data_in_enable_scalar_summation : std_logic;
-
-  signal data_out_enable_scalar_summation : std_logic;
-
-  -- DATA
-  signal length_in_scalar_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- VECTOR
@@ -368,6 +356,23 @@ begin
         );
   end generate accelerator_scalar_oneplus_function_test;
 
+  scalar_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_scalar_logistic = '1') then
+        assert data_out_scalar_logistic = function_scalar_logistic(data_in_scalar_logistic)
+          report "SCALAR LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_scalar_logistic))))
+          severity error;
+      end if;
+
+      if (ready_scalar_oneplus = '1') then
+        assert data_out_scalar_oneplus = function_scalar_oneplus(data_in_scalar_oneplus)
+          report "SCALAR ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_scalar_oneplus))))
+          severity error;
+      end if;
+    end if;
+  end process scalar_assertion;
+
   ------------------------------------------------------------------------------
   -- VECTOR
   ------------------------------------------------------------------------------
@@ -426,6 +431,31 @@ begin
         DATA_OUT => data_out_vector_oneplus
         );
   end generate accelerator_vector_oneplus_function_test;
+
+  vector_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_vector_logistic = '1' and data_out_enable_vector_logistic = '1') then
+        assert data_out_vector_logistic = function_scalar_logistic(data_in_vector_logistic)
+          report "VECTOR LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_vector_logistic))))
+          severity error;
+      elsif (data_out_enable_vector_logistic = '1' and not data_out_vector_logistic = ZERO_DATA) then
+        assert data_out_vector_logistic = function_scalar_logistic(data_in_vector_logistic)
+          report "VECTOR LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_vector_logistic))))
+          severity error;
+      end if;
+
+      if (ready_vector_oneplus = '1' and data_out_enable_vector_oneplus = '1') then
+        assert data_out_vector_oneplus = function_scalar_oneplus(data_in_vector_oneplus)
+          report "VECTOR ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_vector_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_vector_oneplus))))
+          severity error;
+      elsif (data_out_enable_vector_oneplus = '1' and not data_out_vector_oneplus = ZERO_DATA) then
+        assert data_out_vector_oneplus = function_scalar_oneplus(data_in_vector_oneplus)
+          report "VECTOR ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_vector_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_vector_oneplus))))
+          severity error;
+      end if;
+    end if;
+  end process vector_assertion;
 
   ------------------------------------------------------------------------------
   -- MATRIX
@@ -490,5 +520,38 @@ begin
         DATA_OUT  => data_out_matrix_oneplus
         );
   end generate accelerator_matrix_oneplus_function_test;
+
+  matrix_assertion : process (CLK, RST)
+  begin
+    if rising_edge(CLK) then
+      if (ready_matrix_logistic = '1' and data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1') then
+        assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
+          report "MATRIX LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_matrix_logistic))))
+          severity error;
+      elsif (data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = ZERO_DATA) then
+        assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
+          report "MATRIX LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_matrix_logistic))))
+          severity error;
+      elsif (data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = ZERO_DATA) then
+        assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
+          report "MATRIX LOGISTIC: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logistic))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logistic(data_in_matrix_logistic))))
+          severity error;
+      end if;
+
+      if (ready_matrix_oneplus = '1' and data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1') then
+        assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
+          report "MATRIX ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_matrix_oneplus))))
+          severity error;
+      elsif (data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = ZERO_DATA) then
+        assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
+          report "MATRIX ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_matrix_oneplus))))
+          severity error;
+      elsif (data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = ZERO_DATA) then
+        assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
+          report "MATRIX ONEPLUS: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_oneplus))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_oneplus(data_in_matrix_oneplus))))
+          severity error;
+      end if;
+    end if;
+  end process matrix_assertion;
 
 end accelerator_function_testbench_architecture;

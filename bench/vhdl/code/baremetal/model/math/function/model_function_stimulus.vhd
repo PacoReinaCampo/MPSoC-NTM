@@ -813,27 +813,4 @@ begin
 
   end process main_test;
 
-  scalar_assertion : process (CLK, RST)
-  begin
-    if rising_edge(CLK) then
-      if (STIMULUS_NTM_SCALAR_LOGISTIC_TEST) then
-        if (SCALAR_LOGISTIC_READY = '1') then
-          assert SCALAR_LOGISTIC_DATA_OUT = function_scalar_logistic(SCALAR_LOGISTIC_DATA_IN)
-            report "SCALAR LOGISTIC"
-            severity error;
-        end if;
-      end if;
-    end if;
-
-    if rising_edge(CLK) then
-      if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
-        if (SCALAR_ONEPLUS_READY = '1') then
-          assert SCALAR_ONEPLUS_DATA_OUT = function_scalar_oneplus(SCALAR_ONEPLUS_DATA_IN)
-            report "SCALAR ONEPLUS"
-            severity error;
-        end if;
-      end if;
-    end if;
-  end process scalar_assertion;
-
 end architecture;
