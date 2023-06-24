@@ -872,6 +872,7 @@ begin
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))))
           severity error;
       elsif (data_out_enable_vector_fixed_multiplier = '1' and not data_out_vector_fixed_multiplier = ZERO_DATA) then
+        assert data_out_vector_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier)
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))))
           severity error;
       end if;

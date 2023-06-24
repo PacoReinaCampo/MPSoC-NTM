@@ -83,7 +83,7 @@ entity accelerator_tensor_fixed_adder is
     );
 end entity;
 
-architecture accelerator_tensor_fixed_adder_architecture of accelerator_tensor_float_adder is
+architecture accelerator_tensor_fixed_adder_architecture of accelerator_tensor_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -233,7 +233,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_i_fixed_adder_int = '1' and data_a_in_j_float_adder_int = '1' and data_a_in_k_float_adder_int = '1' and data_b_in_i_float_adder_int = '1' and data_b_in_j_float_adder_int = '1' and data_b_in_k_float_adder_int = '1') then
+          if (data_a_in_i_fixed_adder_int = '1' and data_a_in_j_fixed_adder_int = '1' and data_a_in_k_fixed_adder_int = '1' and data_b_in_i_fixed_adder_int = '1' and data_b_in_j_fixed_adder_int = '1' and data_b_in_k_fixed_adder_int = '1') then
             -- Control Internal
             start_scalar_fixed_adder <= '1';
 
@@ -280,7 +280,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_j_fixed_adder_int = '1' and data_a_in_k_float_adder_int = '1' and data_b_in_j_float_adder_int = '1' and data_b_in_k_float_adder_int = '1') then
+          if (data_a_in_j_fixed_adder_int = '1' and data_a_in_k_fixed_adder_int = '1' and data_b_in_j_fixed_adder_int = '1' and data_b_in_k_fixed_adder_int = '1') then
             -- Control Internal
             start_scalar_fixed_adder <= '1';
 
@@ -322,7 +322,7 @@ begin
           -- Control Outputs
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_k_fixed_adder_int = '1' and data_b_in_k_float_adder_int = '1') then
+          if (data_a_in_k_fixed_adder_int = '1' and data_b_in_k_fixed_adder_int = '1') then
             -- Control Internal
             start_scalar_fixed_adder <= '1';
 
@@ -440,7 +440,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_fixed_adder : accelerator_scalar_float_adder
+  scalar_fixed_adder : accelerator_scalar_fixed_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

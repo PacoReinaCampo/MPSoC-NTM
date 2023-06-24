@@ -41,6 +41,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use ieee.math_real.all;
+use ieee.fixed_pkg.all;
 use ieee.float_pkg.all;
 
 package accelerator_arithmetic_pkg is
@@ -86,474 +87,6 @@ package accelerator_arithmetic_pkg is
   ------------------------------------------------------------------------------
   -- Components
   ------------------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
-  -- ARITHMETIC - MODULAR
-  ------------------------------------------------------------------------------
-
-  -- SCALAR
-  component accelerator_scalar_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_scalar_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_scalar_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_scalar_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- VECTOR
-  component accelerator_vector_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_vector_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_vector_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_vector_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- MATRIX
-  component accelerator_matrix_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_matrix_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_matrix_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_matrix_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- TENSOR
-  component accelerator_tensor_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_tensor_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_tensor_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component accelerator_tensor_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
 
   ------------------------------------------------------------------------------
   -- ARITHMETIC - INTEGER
@@ -1283,6 +816,388 @@ package accelerator_arithmetic_pkg is
   end component;
 
   component accelerator_tensor_float_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  ------------------------------------------------------------------------------
+  -- ARITHMETIC - FIXED
+  ------------------------------------------------------------------------------
+
+  -- SCALAR
+  component accelerator_scalar_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      OPERATION : in std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_scalar_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_scalar_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  -- VECTOR
+  component accelerator_vector_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      OPERATION : in std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_vector_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_vector_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  -- MATRIX
+  component accelerator_matrix_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      OPERATION : in std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_matrix_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_matrix_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  -- TENSOR
+  component accelerator_tensor_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      OPERATION : in std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_tensor_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component accelerator_tensor_fixed_divider is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64

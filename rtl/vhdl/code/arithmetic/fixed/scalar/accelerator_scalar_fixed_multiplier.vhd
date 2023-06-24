@@ -67,7 +67,7 @@ entity accelerator_scalar_fixed_multiplier is
     );
 end accelerator_scalar_fixed_multiplier;
 
-architecture accelerator_scalar_fixed_multiplier_architecture of accelerator_scalar_float_multiplier is
+architecture accelerator_scalar_fixed_multiplier_architecture of accelerator_scalar_fixed_multiplier is
 
   ------------------------------------------------------------------------------
   -- Types

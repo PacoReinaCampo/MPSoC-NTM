@@ -67,7 +67,7 @@ entity accelerator_scalar_fixed_divider is
     );
 end accelerator_scalar_fixed_divider;
 
-architecture accelerator_scalar_fixed_divider_architecture of accelerator_scalar_float_divider is
+architecture accelerator_scalar_fixed_divider_architecture of accelerator_scalar_fixed_divider is
 
   ------------------------------------------------------------------------------
   -- Types

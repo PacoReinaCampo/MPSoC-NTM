@@ -75,7 +75,7 @@ entity accelerator_vector_fixed_adder is
     );
 end entity;
 
-architecture accelerator_vector_fixed_adder_architecture of accelerator_vector_float_adder is
+architecture accelerator_vector_fixed_adder_architecture of accelerator_vector_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -249,7 +249,7 @@ begin
   end process;
 
   -- SCALAR FIXED ADDER
-  scalar_fixed_adder : accelerator_scalar_float_adder
+  scalar_fixed_adder : accelerator_scalar_fixed_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

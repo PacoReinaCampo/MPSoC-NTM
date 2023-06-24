@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
 use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_integer_pkg.all;
 
@@ -115,6 +116,12 @@ end accelerator_integer_testbench;
 architecture accelerator_integer_testbench_architecture of accelerator_integer_testbench is
 
   ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
 
@@ -131,6 +138,8 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal start_scalar_integer_adder : std_logic;
   signal ready_scalar_integer_adder : std_logic;
 
+  signal ready_scalar_integer_adder_model : std_logic;
+
   signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
@@ -140,10 +149,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_scalar_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_integer_adder : std_logic;
 
+  signal data_out_scalar_integer_adder_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_integer_adder_model : std_logic;
+
   -- SCALAR MULTIPLIER
   -- CONTROL
   signal start_scalar_integer_multiplier : std_logic;
   signal ready_scalar_integer_multiplier : std_logic;
+
+  signal ready_scalar_integer_multiplier_model : std_logic;
 
   -- DATA
   signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -152,10 +166,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_scalar_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_scalar_integer_multiplier_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_integer_multiplier_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- SCALAR DIVIDER
   -- CONTROL
   signal start_scalar_integer_divider : std_logic;
   signal ready_scalar_integer_divider : std_logic;
+
+  signal ready_scalar_integer_divider_model : std_logic;
 
   -- DATA
   signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -163,6 +182,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
 
   signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_integer_divider_model      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_scalar_integer_divider_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- VECTOR
@@ -173,12 +195,16 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal start_vector_integer_adder : std_logic;
   signal ready_vector_integer_adder : std_logic;
 
+  signal ready_vector_integer_adder_model : std_logic;
+
   signal operation_vector_integer_adder : std_logic;
 
   signal data_a_in_enable_vector_integer_adder : std_logic;
   signal data_b_in_enable_vector_integer_adder : std_logic;
 
   signal data_out_enable_vector_integer_adder : std_logic;
+
+  signal data_out_enable_vector_integer_adder_model : std_logic;
 
   -- DATA
   signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -188,15 +214,22 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_vector_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_vector_integer_adder : std_logic;
 
+  signal data_out_vector_integer_adder_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_integer_adder_model : std_logic;
+
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_integer_multiplier : std_logic;
   signal ready_vector_integer_multiplier : std_logic;
 
+  signal ready_vector_integer_multiplier_model : std_logic;
+
   signal data_a_in_enable_vector_integer_multiplier : std_logic;
   signal data_b_in_enable_vector_integer_multiplier : std_logic;
 
   signal data_out_enable_vector_integer_multiplier : std_logic;
+
+  signal data_out_enable_vector_integer_multiplier_model : std_logic;
 
   -- DATA
   signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -206,15 +239,22 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_vector_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_integer_multiplier_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_integer_multiplier_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR DIVIDER
   -- CONTROL
   signal start_vector_integer_divider : std_logic;
   signal ready_vector_integer_divider : std_logic;
 
+  signal ready_vector_integer_divider_model : std_logic;
+
   signal data_a_in_enable_vector_integer_divider : std_logic;
   signal data_b_in_enable_vector_integer_divider : std_logic;
 
   signal data_out_enable_vector_integer_divider : std_logic;
+
+  signal data_out_enable_vector_integer_divider_model : std_logic;
 
   -- DATA
   signal size_in_vector_integer_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -224,6 +264,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_vector_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal remainder_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_integer_divider_model      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_vector_integer_divider_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   ------------------------------------------------------------------------------
   -- MATRIX
   ------------------------------------------------------------------------------
@@ -232,6 +275,8 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   -- CONTROL
   signal start_matrix_integer_adder : std_logic;
   signal ready_matrix_integer_adder : std_logic;
+
+  signal ready_matrix_integer_adder_model : std_logic;
 
   signal operation_matrix_integer_adder : std_logic;
 
@@ -243,6 +288,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_i_enable_matrix_integer_adder : std_logic;
   signal data_out_j_enable_matrix_integer_adder : std_logic;
 
+  signal data_out_i_enable_matrix_integer_adder_model : std_logic;
+  signal data_out_j_enable_matrix_integer_adder_model : std_logic;
+
   -- DATA
   signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -252,10 +300,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_integer_adder : std_logic;
 
+  signal data_out_matrix_integer_adder_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_adder_model : std_logic;
+
   -- MATRIX MULTIPLIER
   -- CONTROL
   signal start_matrix_integer_multiplier : std_logic;
   signal ready_matrix_integer_multiplier : std_logic;
+
+  signal ready_matrix_integer_multiplier_model : std_logic;
 
   signal data_a_in_i_enable_matrix_integer_multiplier : std_logic;
   signal data_a_in_j_enable_matrix_integer_multiplier : std_logic;
@@ -264,6 +317,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
 
   signal data_out_i_enable_matrix_integer_multiplier : std_logic;
   signal data_out_j_enable_matrix_integer_multiplier : std_logic;
+
+  signal data_out_i_enable_matrix_integer_multiplier_model : std_logic;
+  signal data_out_j_enable_matrix_integer_multiplier_model : std_logic;
 
   -- DATA
   signal size_i_in_matrix_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -274,10 +330,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_matrix_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_integer_multiplier_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_multiplier_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX DIVIDER
   -- CONTROL
   signal start_matrix_integer_divider : std_logic;
   signal ready_matrix_integer_divider : std_logic;
+
+  signal ready_matrix_integer_divider_model : std_logic;
 
   signal data_a_in_i_enable_matrix_integer_divider : std_logic;
   signal data_a_in_j_enable_matrix_integer_divider : std_logic;
@@ -286,6 +347,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
 
   signal data_out_i_enable_matrix_integer_divider : std_logic;
   signal data_out_j_enable_matrix_integer_divider : std_logic;
+
+  signal data_out_i_enable_matrix_integer_divider_model : std_logic;
+  signal data_out_j_enable_matrix_integer_divider_model : std_logic;
 
   -- DATA
   signal size_i_in_matrix_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -296,6 +360,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_matrix_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal remainder_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_integer_divider_model      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_matrix_integer_divider_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   ------------------------------------------------------------------------------
   -- TENSOR
   ------------------------------------------------------------------------------
@@ -304,6 +371,8 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   -- CONTROL
   signal start_tensor_integer_adder : std_logic;
   signal ready_tensor_integer_adder : std_logic;
+
+  signal ready_tensor_integer_adder_model : std_logic;
 
   signal operation_tensor_integer_adder : std_logic;
 
@@ -318,6 +387,10 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_j_enable_tensor_integer_adder : std_logic;
   signal data_out_k_enable_tensor_integer_adder : std_logic;
 
+  signal data_out_i_enable_tensor_integer_adder_model : std_logic;
+  signal data_out_j_enable_tensor_integer_adder_model : std_logic;
+  signal data_out_k_enable_tensor_integer_adder_model : std_logic;
+
   -- DATA
   signal size_i_in_tensor_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -328,10 +401,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_tensor_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_tensor_integer_adder : std_logic;
 
+  signal data_out_tensor_integer_adder_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_integer_adder_model : std_logic;
+
   -- TENSOR MULTIPLIER
   -- CONTROL
   signal start_tensor_integer_multiplier : std_logic;
   signal ready_tensor_integer_multiplier : std_logic;
+
+  signal ready_tensor_integer_multiplier_model : std_logic;
 
   signal data_a_in_i_enable_tensor_integer_multiplier : std_logic;
   signal data_a_in_j_enable_tensor_integer_multiplier : std_logic;
@@ -344,6 +422,10 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_j_enable_tensor_integer_multiplier : std_logic;
   signal data_out_k_enable_tensor_integer_multiplier : std_logic;
 
+  signal data_out_i_enable_tensor_integer_multiplier_model : std_logic;
+  signal data_out_j_enable_tensor_integer_multiplier_model : std_logic;
+  signal data_out_k_enable_tensor_integer_multiplier_model : std_logic;
+
   -- DATA
   signal size_i_in_tensor_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -354,10 +436,15 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_tensor_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_tensor_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_tensor_integer_multiplier_model     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_integer_multiplier_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- TENSOR DIVIDER
   -- CONTROL
   signal start_tensor_integer_divider : std_logic;
   signal ready_tensor_integer_divider : std_logic;
+
+  signal ready_tensor_integer_divider_model : std_logic;
 
   signal data_a_in_i_enable_tensor_integer_divider : std_logic;
   signal data_a_in_j_enable_tensor_integer_divider : std_logic;
@@ -370,6 +457,10 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
   signal data_out_j_enable_tensor_integer_divider : std_logic;
   signal data_out_k_enable_tensor_integer_divider : std_logic;
 
+  signal data_out_i_enable_tensor_integer_divider_model : std_logic;
+  signal data_out_j_enable_tensor_integer_divider_model : std_logic;
+  signal data_out_k_enable_tensor_integer_divider_model : std_logic;
+
   -- DATA
   signal size_i_in_tensor_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -379,6 +470,9 @@ architecture accelerator_integer_testbench_architecture of accelerator_integer_t
 
   signal data_out_tensor_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal remainder_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_integer_divider_model      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_tensor_integer_divider_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -692,6 +786,30 @@ begin
         DATA_OUT     => data_out_scalar_integer_adder,
         OVERFLOW_OUT => overflow_out_scalar_integer_adder
         );
+
+    scalar_integer_adder_model : model_scalar_integer_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_integer_adder,
+        READY => ready_scalar_integer_adder_model,
+
+        OPERATION => operation_scalar_integer_adder,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_integer_adder,
+        DATA_B_IN => data_b_in_scalar_integer_adder,
+
+        DATA_OUT     => data_out_scalar_integer_adder_model,
+        OVERFLOW_OUT => overflow_out_scalar_integer_adder_model
+        );
   end generate accelerator_scalar_integer_adder_test;
 
   -- SCALAR MULTIPLIER
@@ -716,6 +834,28 @@ begin
 
         DATA_OUT     => data_out_scalar_integer_multiplier,
         OVERFLOW_OUT => overflow_out_scalar_integer_multiplier
+        );
+
+    scalar_integer_multiplier_model : model_scalar_integer_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_integer_multiplier,
+        READY => ready_scalar_integer_adder_model,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_integer_multiplier,
+        DATA_B_IN => data_b_in_scalar_integer_multiplier,
+
+        DATA_OUT     => data_out_scalar_integer_multiplier_model,
+        OVERFLOW_OUT => overflow_out_scalar_integer_multiplier_model
         );
   end generate accelerator_scalar_integer_multiplier_test;
 
@@ -742,26 +882,48 @@ begin
         DATA_OUT      => data_out_scalar_integer_divider,
         REMAINDER_OUT => remainder_out_scalar_integer_divider
         );
+
+    scalar_integer_divider_model : model_scalar_integer_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_integer_divider,
+        READY => ready_scalar_integer_divider_model,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_integer_divider,
+        DATA_B_IN => data_b_in_scalar_integer_divider,
+
+        DATA_OUT      => data_out_scalar_integer_divider_model,
+        REMAINDER_OUT => remainder_out_scalar_integer_divider_model
+        );
   end generate accelerator_scalar_integer_divider_test;
 
   scalar_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_scalar_integer_adder = '1') then
-        assert data_out_scalar_integer_adder = function_scalar_integer_adder(operation_scalar_integer_adder, data_a_in_scalar_integer_adder, data_b_in_scalar_integer_adder)
-          report "SCALAR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_scalar_integer_adder, data_a_in_scalar_integer_adder, data_b_in_scalar_integer_adder))))
+        assert data_out_scalar_integer_adder = data_out_scalar_integer_adder_model
+          report "SCALAR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_scalar_integer_adder_model)))
           severity error;
       end if;
 
       if (ready_scalar_integer_multiplier = '1') then
-        assert data_out_scalar_integer_multiplier = function_scalar_integer_multiplier(data_a_in_scalar_integer_multiplier, data_b_in_scalar_integer_multiplier)
-          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_scalar_integer_multiplier, data_b_in_scalar_integer_multiplier))))
+        assert data_out_scalar_integer_multiplier = data_out_scalar_integer_multiplier_model
+          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_scalar_integer_multiplier_model)))
           severity error;
       end if;
 
       if (ready_scalar_integer_divider = '1') then
-        assert data_out_scalar_integer_divider = function_scalar_integer_divider(data_a_in_scalar_integer_divider, data_b_in_scalar_integer_divider)
-          report "SCALAR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_scalar_integer_divider, data_b_in_scalar_integer_divider))))
+        assert data_out_scalar_integer_divider = data_out_scalar_integer_divider_model
+          report "SCALAR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_scalar_integer_divider_model)))
           severity error;
       end if;
     end if;
@@ -802,6 +964,36 @@ begin
         DATA_OUT     => data_out_vector_integer_adder,
         OVERFLOW_OUT => overflow_out_vector_integer_adder
         );
+
+    vector_integer_adder_model : model_vector_integer_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_integer_adder,
+        READY => ready_vector_integer_adder_model,
+
+        OPERATION => operation_vector_integer_adder,
+
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_integer_adder_model,
+
+        -- DATA
+        SIZE_IN   => size_in_vector_integer_adder,
+        DATA_A_IN => data_a_in_vector_integer_adder,
+        DATA_B_IN => data_b_in_vector_integer_adder,
+
+        DATA_OUT     => data_out_vector_integer_adder_model,
+        OVERFLOW_OUT => overflow_out_vector_integer_adder_model
+        );
   end generate accelerator_vector_integer_adder_test;
 
   -- VECTOR MULTIPLIER
@@ -832,6 +1024,34 @@ begin
 
         DATA_OUT     => data_out_vector_integer_multiplier,
         OVERFLOW_OUT => overflow_out_vector_integer_multiplier
+        );
+
+    vector_integer_multiplier_model : model_vector_integer_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_integer_multiplier,
+        READY => ready_vector_integer_multiplier_model,
+
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier_model,
+
+        -- DATA
+        SIZE_IN   => size_in_vector_integer_multiplier,
+        DATA_A_IN => data_a_in_vector_integer_multiplier,
+        DATA_B_IN => data_b_in_vector_integer_multiplier,
+
+        DATA_OUT     => data_out_vector_integer_multiplier_model,
+        OVERFLOW_OUT => overflow_out_vector_integer_multiplier_model
         );
   end generate accelerator_vector_integer_multiplier_test;
 
@@ -864,37 +1084,66 @@ begin
         DATA_OUT      => data_out_vector_integer_divider,
         REMAINDER_OUT => remainder_out_vector_integer_divider
         );
+
+    vector_integer_divider_model : model_vector_integer_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_integer_divider,
+        READY => ready_vector_integer_divider_model,
+
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_divider,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_divider,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_integer_divider_model,
+
+        -- DATA
+        SIZE_IN   => size_in_vector_integer_divider,
+        DATA_A_IN => data_a_in_vector_integer_divider,
+        DATA_B_IN => data_b_in_vector_integer_divider,
+
+        DATA_OUT      => data_out_vector_integer_divider_model,
+        REMAINDER_OUT => remainder_out_vector_integer_divider_model
+        );
   end generate accelerator_vector_integer_divider_test;
 
   vector_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_vector_integer_adder = '1' and data_out_enable_vector_integer_adder = '1') then
-        assert data_out_vector_integer_adder = function_scalar_integer_adder(operation_vector_integer_adder, data_a_in_vector_integer_adder, data_b_in_vector_integer_adder)
-          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_vector_integer_adder, data_a_in_vector_integer_adder, data_b_in_vector_integer_adder))))
+        assert data_out_vector_integer_adder = data_out_vector_integer_adder_model
+          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_adder_model)))
           severity error;
-      elsif (data_out_enable_vector_integer_adder = '1' and not data_out_vector_integer_adder = ZERO_DATA) then
-        assert data_out_vector_integer_adder = function_scalar_integer_adder(operation_vector_integer_adder, data_a_in_vector_integer_adder, data_b_in_vector_integer_adder)
-          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_vector_integer_adder, data_a_in_vector_integer_adder, data_b_in_vector_integer_adder))))
+      elsif (data_out_enable_vector_integer_adder = '1' and not data_out_vector_integer_adder = EMPTY) then
+        assert data_out_vector_integer_adder = data_out_vector_integer_adder_model
+          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_adder_model)))
           severity error;
       end if;
 
       if (ready_vector_integer_multiplier = '1' and data_out_enable_vector_integer_multiplier = '1') then
-        assert data_out_vector_integer_multiplier = function_scalar_integer_multiplier(data_a_in_vector_integer_multiplier, data_b_in_vector_integer_multiplier)
-          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_vector_integer_multiplier, data_b_in_vector_integer_multiplier))))
+        assert data_out_vector_integer_multiplier = data_out_vector_integer_multiplier_model
+          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_multiplier_model)))
           severity error;
-      elsif (data_out_enable_vector_integer_multiplier = '1' and not data_out_vector_integer_multiplier = ZERO_DATA) then
-          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_vector_integer_multiplier, data_b_in_vector_integer_multiplier))))
+      elsif (data_out_enable_vector_integer_multiplier = '1' and not data_out_vector_integer_multiplier = EMPTY) then
+        assert data_out_vector_integer_multiplier = data_out_vector_integer_multiplier_model
+          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_multiplier_model)))
           severity error;
       end if;
 
       if (ready_vector_integer_divider = '1' and data_out_enable_vector_integer_divider = '1') then
-        assert data_out_vector_integer_divider = function_scalar_integer_divider(data_a_in_vector_integer_divider, data_b_in_vector_integer_divider)
-          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_vector_integer_divider, data_b_in_vector_integer_divider))))
+        assert data_out_vector_integer_divider = data_out_vector_integer_divider_model
+          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_divider_model)))
           severity error;
-      elsif (data_out_enable_vector_integer_divider = '1' and not data_out_vector_integer_divider = ZERO_DATA) then
-        assert data_out_vector_integer_divider = function_scalar_integer_divider(data_a_in_vector_integer_divider, data_b_in_vector_integer_divider)
-          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_vector_integer_divider, data_b_in_vector_integer_divider))))
+      elsif (data_out_enable_vector_integer_divider = '1' and not data_out_vector_integer_divider = EMPTY) then
+        assert data_out_vector_integer_divider = data_out_vector_integer_divider_model
+          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_vector_integer_divider_model)))
           severity error;
       end if;
     end if;
@@ -939,6 +1188,40 @@ begin
         DATA_OUT     => data_out_matrix_integer_adder,
         OVERFLOW_OUT => overflow_out_matrix_integer_adder
         );
+
+    matrix_integer_adder_model : model_matrix_integer_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_integer_adder,
+        READY => ready_matrix_integer_adder_model,
+
+        OPERATION => operation_matrix_integer_adder,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_integer_adder,
+        SIZE_J_IN => size_j_in_matrix_integer_adder,
+        DATA_A_IN => data_a_in_matrix_integer_adder,
+        DATA_B_IN => data_b_in_matrix_integer_adder,
+
+        DATA_OUT     => data_out_matrix_integer_adder_model,
+        OVERFLOW_OUT => overflow_out_matrix_integer_adder_model
+        );
   end generate accelerator_matrix_integer_adder_test;
 
   -- MATRIX MULTIPLIER
@@ -973,6 +1256,38 @@ begin
 
         DATA_OUT     => data_out_matrix_integer_multiplier,
         OVERFLOW_OUT => overflow_out_matrix_integer_multiplier
+        );
+
+    matrix_integer_multiplier_model : model_matrix_integer_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_integer_multiplier,
+        READY => ready_matrix_integer_multiplier_model,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_multiplier,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_multiplier,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_multiplier,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_multiplier,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_multiplier_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_multiplier_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_integer_multiplier,
+        SIZE_J_IN => size_j_in_matrix_integer_multiplier,
+        DATA_A_IN => data_a_in_matrix_integer_multiplier,
+        DATA_B_IN => data_b_in_matrix_integer_multiplier,
+
+        DATA_OUT     => data_out_matrix_integer_multiplier_model,
+        OVERFLOW_OUT => overflow_out_matrix_integer_multiplier_model
         );
   end generate accelerator_matrix_integer_multiplier_test;
 
@@ -1009,50 +1324,82 @@ begin
         DATA_OUT      => data_out_matrix_integer_divider,
         REMAINDER_OUT => remainder_out_matrix_integer_divider
         );
+
+    matrix_integer_divider_model : model_matrix_integer_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_integer_divider,
+        READY => ready_matrix_integer_divider_model,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_divider,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_divider,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_divider,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_divider,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_divider_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_divider_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_integer_divider,
+        SIZE_J_IN => size_j_in_matrix_integer_divider,
+        DATA_A_IN => data_a_in_matrix_integer_divider,
+        DATA_B_IN => data_b_in_matrix_integer_divider,
+
+        DATA_OUT      => data_out_matrix_integer_divider_model,
+        REMAINDER_OUT => remainder_out_matrix_integer_divider_model
+        );
   end generate accelerator_matrix_integer_divider_test;
 
   matrix_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_matrix_integer_adder = '1' and data_out_i_enable_matrix_integer_adder = '1' and data_out_j_enable_matrix_integer_adder = '1') then
-        assert data_out_matrix_integer_adder = function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder))))
+        assert data_out_matrix_integer_adder = data_out_matrix_integer_adder_model
+          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_adder_model)))
           severity error;
-      elsif (data_out_i_enable_matrix_integer_adder = '1' and data_out_j_enable_matrix_integer_adder = '1' and not data_out_matrix_integer_adder = ZERO_DATA) then
-        assert data_out_matrix_integer_adder = function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder))))
+      elsif (data_out_i_enable_matrix_integer_adder = '1' and data_out_j_enable_matrix_integer_adder = '1' and not data_out_matrix_integer_adder = EMPTY) then
+        assert data_out_matrix_integer_adder = data_out_matrix_integer_adder_model
+          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_adder_model)))
           severity error;
-      elsif (data_out_j_enable_matrix_integer_adder = '1' and not data_out_matrix_integer_adder = ZERO_DATA) then
-        assert data_out_matrix_integer_adder = function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_matrix_integer_adder, data_a_in_matrix_integer_adder, data_b_in_matrix_integer_adder))))
+      elsif (data_out_j_enable_matrix_integer_adder = '1' and not data_out_matrix_integer_adder = EMPTY) then
+        assert data_out_matrix_integer_adder = data_out_matrix_integer_adder_model
+          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_adder_model)))
           severity error;
       end if;
 
       if (ready_matrix_integer_multiplier = '1' and data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1') then
-        assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+        assert data_out_matrix_integer_multiplier = data_out_matrix_integer_multiplier_model
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier_model)))
           severity error;
-      elsif (data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = ZERO_DATA) then
-        assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+      elsif (data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = EMPTY) then
+        assert data_out_matrix_integer_multiplier = data_out_matrix_integer_multiplier_model
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier_model)))
           severity error;
-      elsif (data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = ZERO_DATA) then
-        assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+      elsif (data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = EMPTY) then
+        assert data_out_matrix_integer_multiplier = data_out_matrix_integer_multiplier_model
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_multiplier_model)))
           severity error;
       end if;
 
       if (ready_matrix_integer_divider = '1' and data_out_i_enable_matrix_integer_divider = '1' and data_out_j_enable_matrix_integer_divider = '1') then
-        assert data_out_matrix_integer_divider = function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+        assert data_out_matrix_integer_divider = data_out_matrix_integer_divider_model
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_divider_model)))
           severity error;
-      elsif (data_out_i_enable_matrix_integer_divider = '1' and data_out_j_enable_matrix_integer_divider = '1' and not data_out_matrix_integer_divider = ZERO_DATA) then
-        assert data_out_matrix_integer_divider = function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+      elsif (data_out_i_enable_matrix_integer_divider = '1' and data_out_j_enable_matrix_integer_divider = '1' and not data_out_matrix_integer_divider = EMPTY) then
+        assert data_out_matrix_integer_divider = data_out_matrix_integer_divider_model
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_divider_model)))
           severity error;
-      elsif (data_out_j_enable_matrix_integer_divider = '1' and not data_out_matrix_integer_divider = ZERO_DATA) then
-        assert data_out_matrix_integer_divider = function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))))
+      elsif (data_out_j_enable_matrix_integer_divider = '1' and not data_out_matrix_integer_divider = EMPTY) then
+        assert data_out_matrix_integer_divider = data_out_matrix_integer_divider_model
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_matrix_integer_divider_model)))
           severity error;
       end if;
     end if;
@@ -1101,6 +1448,44 @@ begin
         DATA_OUT     => data_out_tensor_integer_adder,
         OVERFLOW_OUT => overflow_out_tensor_integer_adder
         );
+
+    tensor_integer_adder_model : model_tensor_integer_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_integer_adder,
+        READY => ready_tensor_integer_adder_model,
+
+        OPERATION => operation_tensor_integer_adder,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integer_adder,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integer_adder,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integer_adder,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integer_adder,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integer_adder,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integer_adder,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integer_adder_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integer_adder_model,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_adder_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_integer_adder,
+        SIZE_J_IN => size_j_in_tensor_integer_adder,
+        SIZE_K_IN => size_k_in_tensor_integer_adder,
+        DATA_A_IN => data_a_in_tensor_integer_adder,
+        DATA_B_IN => data_b_in_tensor_integer_adder,
+
+        DATA_OUT     => data_out_tensor_integer_adder_model,
+        OVERFLOW_OUT => overflow_out_tensor_integer_adder_model
+        );
   end generate accelerator_tensor_integer_adder_test;
 
   -- TENSOR MULTIPLIER
@@ -1139,6 +1524,42 @@ begin
 
         DATA_OUT     => data_out_tensor_integer_multiplier,
         OVERFLOW_OUT => overflow_out_tensor_integer_multiplier
+        );
+
+    tensor_integer_multiplier_model : model_tensor_integer_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_integer_multiplier,
+        READY => ready_tensor_integer_multiplier_model,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integer_multiplier,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integer_multiplier,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integer_multiplier,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integer_multiplier,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integer_multiplier,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integer_multiplier,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integer_multiplier_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integer_multiplier_model,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_multiplier_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_integer_multiplier,
+        SIZE_J_IN => size_j_in_tensor_integer_multiplier,
+        SIZE_K_IN => size_k_in_tensor_integer_multiplier,
+        DATA_A_IN => data_a_in_tensor_integer_multiplier,
+        DATA_B_IN => data_b_in_tensor_integer_multiplier,
+
+        DATA_OUT     => data_out_tensor_integer_multiplier_model,
+        OVERFLOW_OUT => overflow_out_tensor_integer_multiplier_model
         );
   end generate accelerator_tensor_integer_multiplier_test;
 
@@ -1179,62 +1600,98 @@ begin
         DATA_OUT      => data_out_tensor_integer_divider,
         REMAINDER_OUT => remainder_out_tensor_integer_divider
         );
+
+    tensor_integer_divider_model : model_tensor_integer_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_integer_divider,
+        READY => ready_tensor_integer_divider_model,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integer_divider,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integer_divider,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integer_divider,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integer_divider,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integer_divider,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integer_divider,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integer_divider_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integer_divider_model,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_divider_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_integer_divider,
+        SIZE_J_IN => size_j_in_tensor_integer_divider,
+        SIZE_K_IN => size_k_in_tensor_integer_divider,
+        DATA_A_IN => data_a_in_tensor_integer_divider,
+        DATA_B_IN => data_b_in_tensor_integer_divider,
+
+        DATA_OUT      => data_out_tensor_integer_divider_model,
+        REMAINDER_OUT => remainder_out_tensor_integer_divider_model
+        );
   end generate accelerator_tensor_integer_divider_test;
 
   tensor_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_tensor_integer_adder = '1' and data_out_i_enable_tensor_integer_adder = '1' and data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_adder = '1') then
-        assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))))
+        assert data_out_tensor_integer_adder = data_out_tensor_integer_adder_model
+          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_adder_model)))
           severity error;
-      elsif (data_out_i_enable_tensor_integer_adder = '1' and data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
-        assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))))
+      elsif (data_out_i_enable_tensor_integer_adder = '1' and data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = EMPTY) then
+        assert data_out_tensor_integer_adder = data_out_tensor_integer_adder_model
+          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_adder_model)))
           severity error;
-      elsif (data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
-        assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))))
+      elsif (data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = EMPTY) then
+        assert data_out_tensor_integer_adder = data_out_tensor_integer_adder_model
+          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_adder_model)))
           severity error;
-      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
-        assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))))
+      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = EMPTY) then
+        assert data_out_tensor_integer_adder = data_out_tensor_integer_adder_model
+          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_adder))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_adder_model)))
           severity error;
       end if;
 
       if (ready_tensor_integer_multiplier = '1' and data_out_i_enable_tensor_integer_multiplier = '1' and data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_multiplier = '1') then
-        assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))))
+        assert data_out_tensor_integer_multiplier = data_out_tensor_integer_multiplier_model
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier_model)))
           severity error;
-      elsif (data_out_i_enable_tensor_integer_multiplier = '1' and data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
-        assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))))
+      elsif (data_out_i_enable_tensor_integer_multiplier = '1' and data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = EMPTY) then
+        assert data_out_tensor_integer_multiplier = data_out_tensor_integer_multiplier_model
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier_model)))
           severity error;
-      elsif (data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
-        assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))))
+      elsif (data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = EMPTY) then
+        assert data_out_tensor_integer_multiplier = data_out_tensor_integer_multiplier_model
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier_model)))
           severity error;
-      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
-        assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))))
+      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = EMPTY) then
+        assert data_out_tensor_integer_multiplier = data_out_tensor_integer_multiplier_model
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_multiplier_model)))
           severity error;
       end if;
 
       if (ready_tensor_integer_divider = '1' and data_out_i_enable_tensor_integer_divider = '1' and data_out_j_enable_tensor_integer_divider = '1' and data_out_k_enable_tensor_integer_divider = '1') then
-        assert data_out_tensor_integer_divider = function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider))))
+        assert data_out_tensor_integer_divider = data_out_tensor_integer_divider_model
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_divider_model)))
           severity error;
-      elsif (data_out_i_enable_tensor_integer_divider = '1' and data_out_j_enable_tensor_integer_divider = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = ZERO_DATA) then
-        assert data_out_tensor_integer_divider = function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider))))
+      elsif (data_out_i_enable_tensor_integer_divider = '1' and data_out_j_enable_tensor_integer_divider = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = EMPTY) then
+        assert data_out_tensor_integer_divider = data_out_tensor_integer_divider_model
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_divider_model)))
           severity error;
-      elsif (data_out_j_enable_tensor_integer_divider = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = ZERO_DATA) then
-        assert data_out_tensor_integer_divider = function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider))))
+      elsif (data_out_j_enable_tensor_integer_divider = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = EMPTY) then
+        assert data_out_tensor_integer_divider = data_out_tensor_integer_divider_model
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_divider_model)))
           severity error;
-      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = ZERO_DATA) then
-        assert data_out_tensor_integer_divider = function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_integer_divider(data_a_in_tensor_integer_divider, data_b_in_tensor_integer_divider))))
+      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_divider = EMPTY) then
+        assert data_out_tensor_integer_divider = data_out_tensor_integer_divider_model
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_integer_divider))) & "; CORRECT = " & to_string(to_integer(signed(data_out_tensor_integer_divider_model)))
           severity error;
       end if;
     end if;

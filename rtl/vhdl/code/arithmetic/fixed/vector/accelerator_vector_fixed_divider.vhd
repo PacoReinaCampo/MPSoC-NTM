@@ -73,7 +73,7 @@ entity accelerator_vector_fixed_divider is
     );
 end entity;
 
-architecture accelerator_vector_fixed_divider_architecture of accelerator_vector_float_divider is
+architecture accelerator_vector_fixed_divider_architecture of accelerator_vector_fixed_divider is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -242,7 +242,7 @@ begin
   end process;
 
   -- SCALAR FIXED DIVIDER
-  scalar_fixed_divider : accelerator_scalar_float_divider
+  scalar_fixed_divider : accelerator_scalar_fixed_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

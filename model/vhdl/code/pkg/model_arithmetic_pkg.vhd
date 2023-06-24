@@ -89,388 +89,6 @@ package model_arithmetic_pkg is
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
-  -- ARITHMETIC - FIXED
-  ------------------------------------------------------------------------------
-
-  -- SCALAR
-  component model_scalar_fixed_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_scalar_fixed_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_scalar_fixed_divider is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  -- VECTOR
-  component model_vector_fixed_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_vector_fixed_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_vector_fixed_divider is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  -- MATRIX
-  component model_matrix_fixed_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_matrix_fixed_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_matrix_fixed_divider is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  -- TENSOR
-  component model_tensor_fixed_adder is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_tensor_fixed_multiplier is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component model_tensor_fixed_divider is
-    generic (
-      DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  ------------------------------------------------------------------------------
   -- ARITHMETIC - INTEGER
   ------------------------------------------------------------------------------
 
@@ -1235,111 +853,390 @@ package model_arithmetic_pkg is
   end component;
 
   ------------------------------------------------------------------------------
-  -- Functions
-  ------------------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
   -- ARITHMETIC - FIXED
   ------------------------------------------------------------------------------
 
   -- SCALAR
-  function function_scalar_fixed_adder (
-    OPERATION : std_logic;
+  component model_scalar_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector;
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
 
-  function function_scalar_fixed_multiplier (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector;
+      OPERATION : in std_logic;
 
-  function function_scalar_fixed_divider (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector;
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_scalar_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_scalar_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
   -- VECTOR
-  function function_vector_fixed_adder (
-    OPERATION : std_logic;
+  component model_vector_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer;
+      OPERATION : in std_logic;
 
-  function function_vector_fixed_multiplier (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer;
+      DATA_OUT_ENABLE : out std_logic;
 
-  function function_vector_fixed_divider (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_vector_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_vector_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
   -- MATRIX
-  function function_matrix_fixed_adder (
-    OPERATION : std_logic;
+  component model_matrix_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer;
+      OPERATION : in std_logic;
 
-  function function_matrix_fixed_multiplier (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
-  function function_matrix_fixed_divider (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_matrix_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_matrix_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
   -- TENSOR
-  function function_tensor_fixed_adder (
-    OPERATION : std_logic;
+  component model_tensor_fixed_adder is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer;
+      OPERATION : in std_logic;
 
-  function function_tensor_fixed_multiplier (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
-  function function_tensor_fixed_divider (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_tensor_fixed_multiplier is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component model_tensor_fixed_divider is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  ------------------------------------------------------------------------------
+  -- Functions
+  ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
   -- ARITHMETIC - INTEGER
@@ -1548,6 +1445,109 @@ package model_arithmetic_pkg is
     ) return tensor_buffer;
 
   ------------------------------------------------------------------------------
+  -- ARITHMETIC - FIXED
+  ------------------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_fixed_adder (
+    OPERATION : std_logic;
+
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  function function_scalar_fixed_multiplier (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  function function_scalar_fixed_divider (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  -- VECTOR
+  function function_vector_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_fixed_multiplier (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_fixed_divider (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  -- MATRIX
+  function function_matrix_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_fixed_divider (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  -- TENSOR
+  function function_tensor_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  function function_tensor_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  function function_tensor_fixed_divider (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  ------------------------------------------------------------------------------
   -- MATH - SERIES
   ------------------------------------------------------------------------------
 
@@ -1704,257 +1704,6 @@ package body model_arithmetic_pkg is
   ------------------------------------------------------------------------------
   -- Functions
   ------------------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
-  -- ARITHMETIC - FIXED
-  ------------------------------------------------------------------------------
-
-  -- SCALAR
-  function function_scalar_fixed_adder (
-    OPERATION : std_logic;
-
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    if (OPERATION = '1') then
-      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) - to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-    else
-      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) + to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-    end if;
-
-    return scalar_output;
-  end function function_scalar_fixed_adder;
-
-  function function_scalar_fixed_multiplier (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))*to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-
-    return scalar_output;
-  end function function_scalar_fixed_multiplier;
-
-  function function_scalar_fixed_divider (
-    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
-    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
-    ) return std_logic_vector is
-
-    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  begin
-    -- Data Inputs
-    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))/to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-
-    return scalar_output;
-  end function function_scalar_fixed_divider;
-
-  -- VECTOR
-  function function_vector_fixed_adder (
-    OPERATION : std_logic;
-
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      if (OPERATION = '1') then
-        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) - to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-      else
-        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) + to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-      end if;
-    end loop;
-
-    return vector_output;
-  end function function_vector_fixed_adder;
-
-  function function_vector_fixed_multiplier (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))*to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-    end loop;
-
-    return vector_output;
-  end function function_vector_fixed_multiplier;
-
-  function function_vector_fixed_divider (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
-    ) return vector_buffer is
-
-    variable vector_output : vector_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))/to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-    end loop;
-
-    return vector_output;
-  end function function_vector_fixed_divider;
-
-  -- MATRIX
-  function function_matrix_fixed_adder (
-    OPERATION : std_logic;
-
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        if (OPERATION = '1') then
-          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) - to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-        else
-          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) + to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-        end if;
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_fixed_adder;
-
-  function function_matrix_fixed_multiplier (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))*to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_fixed_multiplier;
-
-  function function_matrix_fixed_divider (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))/to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_fixed_divider;
-
-  -- TENSOR
-  function function_tensor_fixed_adder (
-    OPERATION : std_logic;
-
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          if (OPERATION = '1') then
-            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) - to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-          else
-            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) + to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-          end if;
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_fixed_adder;
-
-  function function_tensor_fixed_multiplier (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))*to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_fixed_multiplier;
-
-  function function_tensor_fixed_divider (
-    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
-    ) return tensor_buffer is
-
-    variable tensor_output : tensor_buffer;
-  begin
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))/to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
-        end loop;
-      end loop;
-    end loop;
-
-    return tensor_output;
-  end function function_tensor_fixed_divider;
 
   ------------------------------------------------------------------------------
   -- ARITHMETIC - INTEGER
@@ -2457,6 +2206,257 @@ package body model_arithmetic_pkg is
 
     return tensor_output;
   end function function_tensor_float_divider;
+
+  ------------------------------------------------------------------------------
+  -- ARITHMETIC - FIXED
+  ------------------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_fixed_adder (
+    OPERATION : std_logic;
+
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    if (OPERATION = '1') then
+      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) - to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+    else
+      scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0)) + to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+    end if;
+
+    return scalar_output;
+  end function function_scalar_fixed_adder;
+
+  function function_scalar_fixed_multiplier (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))*to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+
+    return scalar_output;
+  end function function_scalar_fixed_multiplier;
+
+  function function_scalar_fixed_divider (
+    scalar_a_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_b_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_sfixed(to_real(to_sfixed(scalar_a_input, DATA_SIZE-1, 0))/to_real(to_sfixed(scalar_b_input, DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+
+    return scalar_output;
+  end function function_scalar_fixed_divider;
+
+  -- VECTOR
+  function function_vector_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      if (OPERATION = '1') then
+        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) - to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+      else
+        vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0)) + to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+      end if;
+    end loop;
+
+    return vector_output;
+  end function function_vector_fixed_adder;
+
+  function function_vector_fixed_multiplier (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))*to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+    end loop;
+
+    return vector_output;
+  end function function_vector_fixed_multiplier;
+
+  function function_vector_fixed_divider (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_sfixed(to_real(to_sfixed(vector_a_input(i), DATA_SIZE-1, 0))/to_real(to_sfixed(vector_b_input(i), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+    end loop;
+
+    return vector_output;
+  end function function_vector_fixed_divider;
+
+  -- MATRIX
+  function function_matrix_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        if (OPERATION = '1') then
+          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) - to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+        else
+          matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0)) + to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+        end if;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_fixed_adder;
+
+  function function_matrix_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))*to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_fixed_multiplier;
+
+  function function_matrix_fixed_divider (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_sfixed(to_real(to_sfixed(matrix_a_input(i, j), DATA_SIZE-1, 0))/to_real(to_sfixed(matrix_b_input(i, j), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_fixed_divider;
+
+  -- TENSOR
+  function function_tensor_fixed_adder (
+    OPERATION : std_logic;
+
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          if (OPERATION = '1') then
+            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) - to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+          else
+            tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0)) + to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+          end if;
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_fixed_adder;
+
+  function function_tensor_fixed_multiplier (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))*to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_fixed_multiplier;
+
+  function function_tensor_fixed_divider (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(to_sfixed(to_real(to_sfixed(tensor_a_input(i, j, k), DATA_SIZE-1, 0))/to_real(to_sfixed(tensor_b_input(i, j, k), DATA_SIZE-1, 0)), DATA_SIZE-1, 0));
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_fixed_divider;
 
   ------------------------------------------------------------------------------
   -- MATH - SERIES

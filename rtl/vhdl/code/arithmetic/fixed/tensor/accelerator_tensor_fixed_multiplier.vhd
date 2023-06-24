@@ -81,7 +81,7 @@ entity accelerator_tensor_fixed_multiplier is
     );
 end entity;
 
-architecture accelerator_tensor_fixed_multiplier_architecture of accelerator_tensor_float_multiplier is
+architecture accelerator_tensor_fixed_multiplier_architecture of accelerator_tensor_fixed_multiplier is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -227,7 +227,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_i_fixed_multiplier_int = '1' and data_a_in_j_float_multiplier_int = '1' and data_a_in_k_float_multiplier_int = '1' and data_b_in_i_float_multiplier_int = '1' and data_b_in_j_float_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
+          if (data_a_in_i_fixed_multiplier_int = '1' and data_a_in_j_fixed_multiplier_int = '1' and data_a_in_k_fixed_multiplier_int = '1' and data_b_in_i_fixed_multiplier_int = '1' and data_b_in_j_fixed_multiplier_int = '1' and data_b_in_k_fixed_multiplier_int = '1') then
             -- Control Internal
             start_scalar_fixed_multiplier <= '1';
 
@@ -272,7 +272,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_j_fixed_multiplier_int = '1' and data_a_in_k_float_multiplier_int = '1' and data_b_in_j_float_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
+          if (data_a_in_j_fixed_multiplier_int = '1' and data_a_in_k_fixed_multiplier_int = '1' and data_b_in_j_fixed_multiplier_int = '1' and data_b_in_k_fixed_multiplier_int = '1') then
             -- Control Internal
             start_scalar_fixed_multiplier <= '1';
 
@@ -312,7 +312,7 @@ begin
           -- Control Outputs
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_k_fixed_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
+          if (data_a_in_k_fixed_multiplier_int = '1' and data_b_in_k_fixed_multiplier_int = '1') then
             -- Control Internal
             start_scalar_fixed_multiplier <= '1';
 
@@ -428,7 +428,7 @@ begin
   end process;
 
   -- SCALAR MULTIPLIER
-  scalar_fixed_multiplier : accelerator_scalar_float_multiplier
+  scalar_fixed_multiplier : accelerator_scalar_fixed_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

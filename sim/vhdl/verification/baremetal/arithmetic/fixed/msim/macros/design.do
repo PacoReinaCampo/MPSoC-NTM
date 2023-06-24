@@ -2,124 +2,156 @@
 # DESIGN COMPILATION
 #*******************
 
-
 do ./variables.do
 
 vlib work
 
 ##################################################################################################
-# accelerator_scalar_fixed_adder_design_compilation ######################################################
+# accelerator_scalar_fixed_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_adder.vhd
 }
 
 ##################################################################################################
-# accelerator_scalar_fixed_multiplier_design_compilation #################################################
+# accelerator_scalar_fixed_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_multiplier.vhd
 }
 
 ##################################################################################################
-# accelerator_scalar_fixed_divider_design_compilation ####################################################
+# accelerator_scalar_fixed_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_divider.vhd
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_adder_design_compilation ######################################################
+# accelerator_vector_fixed_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/vector/accelerator_vector_fixed_adder.vhd
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_multiplier_design_compilation #################################################
+# accelerator_vector_fixed_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/vector/accelerator_vector_fixed_multiplier.vhd
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_divider_design_compilation ####################################################
+# accelerator_vector_fixed_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/vector/accelerator_vector_fixed_divider.vhd
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_adder_design_compilation ######################################################
+# accelerator_matrix_fixed_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/matrix/accelerator_matrix_fixed_adder.vhd
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_multiplier_design_compilation #################################################
+# accelerator_matrix_fixed_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/matrix/accelerator_matrix_fixed_multiplier.vhd
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_divider_design_compilation ####################################################
+# accelerator_matrix_fixed_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/matrix/accelerator_matrix_fixed_divider.vhd
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_adder_design_compilation ######################################################
+# accelerator_tensor_fixed_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/tensor/accelerator_tensor_fixed_adder.vhd
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_multiplier_design_compilation #################################################
+# accelerator_tensor_fixed_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/tensor/accelerator_tensor_fixed_multiplier.vhd
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_divider_design_compilation ####################################################
+# accelerator_tensor_fixed_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/fixed/tensor/accelerator_tensor_fixed_divider.vhd
 }
@@ -159,7 +191,7 @@ alias d08 {
 }
 
 alias d09 {
-  accelerator_matrixr_fixed_divider_design_compilation 
+  accelerator_matrix_fixed_divider_design_compilation 
 }
 
 alias d10 {

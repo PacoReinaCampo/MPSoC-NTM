@@ -69,7 +69,7 @@ entity accelerator_scalar_fixed_adder is
     );
 end accelerator_scalar_fixed_adder;
 
-architecture accelerator_scalar_fixed_adder_architecture of accelerator_scalar_float_adder is
+architecture accelerator_scalar_fixed_adder_architecture of accelerator_scalar_fixed_adder is
 
   ------------------------------------------------------------------------------
   -- Types
