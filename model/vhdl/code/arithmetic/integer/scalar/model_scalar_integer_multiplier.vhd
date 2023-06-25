@@ -90,7 +90,7 @@ architecture model_scalar_integer_multiplier_architecture of model_scalar_intege
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Data Internal
-  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal multiplier_int : std_logic_vector(2*DATA_SIZE-1 downto 0);
 
 begin
 
@@ -123,7 +123,7 @@ begin
 
           if (START = '1') then
             -- Assignations
-            multiplier_int <= std_logic_vector(resize(signed(DATA_A_IN), DATA_SIZE/2) * resize(signed(DATA_B_IN), DATA_SIZE/2));
+            multiplier_int <= std_logic_vector(signed(DATA_A_IN) * signed(DATA_B_IN));
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -132,8 +132,8 @@ begin
         when ENDER_STATE =>             -- STEP 1
 
           -- Data Outputs
-          DATA_OUT     <= multiplier_int;
-          OVERFLOW_OUT <= (others => '0');
+          DATA_OUT     <= multiplier_int(DATA_SIZE-1 downto 0);
+          OVERFLOW_OUT <= multiplier_int(2*DATA_SIZE-1 downto DATA_SIZE);
 
           -- Control Outputs
           READY <= '1';

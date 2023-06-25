@@ -2,7 +2,6 @@
 # DESIGN COMPILATION
 #*******************
 
-
 do ./variables.do
 
 vlib work
@@ -159,7 +158,7 @@ alias d08 {
 }
 
 alias d09 {
-  model_matrixr_fixed_divider_design_compilation 
+  model_matrix_fixed_divider_design_compilation 
 }
 
 alias d10 {

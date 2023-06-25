@@ -737,19 +737,19 @@ begin
     if rising_edge(CLK) then
       if (ready_scalar_fixed_adder = '1') then
         assert data_out_scalar_fixed_adder = function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder)
-          report "SCALAR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder))))
+          report "SCALAR ADDER: CALCULATED = " & to_string(data_out_scalar_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder))
           severity error;
       end if;
 
       if (ready_scalar_fixed_multiplier = '1') then
         assert data_out_scalar_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier)
-          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier))))
+          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(data_out_scalar_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier))
           severity error;
       end if;
 
       if (ready_scalar_fixed_divider = '1') then
         assert data_out_scalar_fixed_divider = function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider)
-          report "SCALAR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider))))
+          report "SCALAR DIVIDER: CALCULATED = " & to_string(data_out_scalar_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider))
           severity error;
       end if;
     end if;
@@ -859,31 +859,31 @@ begin
     if rising_edge(CLK) then
       if (ready_vector_fixed_adder = '1' and data_out_enable_vector_fixed_adder = '1') then
         assert data_out_vector_fixed_adder = function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder)
-          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder))))
+          report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder))
           severity error;
       elsif (data_out_enable_vector_fixed_adder = '1' and not data_out_vector_fixed_adder = ZERO_DATA) then
         assert data_out_vector_fixed_adder = function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder)
-          report "VECTOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder))))
+          report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_vector_fixed_adder, data_a_in_vector_fixed_adder, data_b_in_vector_fixed_adder))
           severity error;
       end if;
 
       if (ready_vector_fixed_multiplier = '1' and data_out_enable_vector_fixed_multiplier = '1') then
         assert data_out_vector_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier)
-          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))))
+          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))
           severity error;
       elsif (data_out_enable_vector_fixed_multiplier = '1' and not data_out_vector_fixed_multiplier = ZERO_DATA) then
         assert data_out_vector_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier)
-          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))))
+          report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_vector_fixed_multiplier, data_b_in_vector_fixed_multiplier))
           severity error;
       end if;
 
       if (ready_vector_fixed_divider = '1' and data_out_enable_vector_fixed_divider = '1') then
         assert data_out_vector_fixed_divider = function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider)
-          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider))))
+          report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider))
           severity error;
       elsif (data_out_enable_vector_fixed_divider = '1' and not data_out_vector_fixed_divider = ZERO_DATA) then
         assert data_out_vector_fixed_divider = function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider)
-          report "VECTOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_vector_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider))))
+          report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_vector_fixed_divider, data_b_in_vector_fixed_divider))
           severity error;
       end if;
     end if;
@@ -1005,43 +1005,43 @@ begin
     if rising_edge(CLK) then
       if (ready_matrix_fixed_adder = '1' and data_out_i_enable_matrix_fixed_adder = '1' and data_out_j_enable_matrix_fixed_adder = '1') then
         assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))))
+          report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))
           severity error;
       elsif (data_out_i_enable_matrix_fixed_adder = '1' and data_out_j_enable_matrix_fixed_adder = '1' and not data_out_matrix_fixed_adder = ZERO_DATA) then
         assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))))
+          report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))
           severity error;
       elsif (data_out_j_enable_matrix_fixed_adder = '1' and not data_out_matrix_fixed_adder = ZERO_DATA) then
         assert data_out_matrix_fixed_adder = function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder)
-          report "MATRIX ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))))
+          report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_matrix_fixed_adder, data_a_in_matrix_fixed_adder, data_b_in_matrix_fixed_adder))
           severity error;
       end if;
 
       if (ready_matrix_fixed_multiplier = '1' and data_out_i_enable_matrix_fixed_multiplier = '1' and data_out_j_enable_matrix_fixed_multiplier = '1') then
         assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       elsif (data_out_i_enable_matrix_fixed_multiplier = '1' and data_out_j_enable_matrix_fixed_multiplier = '1' and not data_out_matrix_fixed_multiplier = ZERO_DATA) then
         assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       elsif (data_out_j_enable_matrix_fixed_multiplier = '1' and not data_out_matrix_fixed_multiplier = ZERO_DATA) then
         assert data_out_matrix_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_matrix_fixed_multiplier, data_b_in_matrix_fixed_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       end if;
 
       if (ready_matrix_fixed_divider = '1' and data_out_i_enable_matrix_fixed_divider = '1' and data_out_j_enable_matrix_fixed_divider = '1') then
         assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       elsif (data_out_i_enable_matrix_fixed_divider = '1' and data_out_j_enable_matrix_fixed_divider = '1' and not data_out_matrix_fixed_divider = ZERO_DATA) then
         assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       elsif (data_out_j_enable_matrix_fixed_divider = '1' and not data_out_matrix_fixed_divider = ZERO_DATA) then
         assert data_out_matrix_fixed_divider = function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider)
-          report "MATRIX DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))))
+          report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_matrix_fixed_divider, data_b_in_matrix_fixed_divider))
           severity error;
       end if;
     end if;
@@ -1175,55 +1175,55 @@ begin
     if rising_edge(CLK) then
       if (ready_tensor_fixed_adder = '1' and data_out_i_enable_tensor_fixed_adder = '1' and data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_adder = '1') then
         assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))))
+          report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))
           severity error;
       elsif (data_out_i_enable_tensor_fixed_adder = '1' and data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_adder = ZERO_DATA) then
         assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))))
+          report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))
           severity error;
       elsif (data_out_j_enable_tensor_fixed_adder = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_adder = ZERO_DATA) then
         assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))))
+          report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))
           severity error;
       elsif (data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_adder = ZERO_DATA) then
         assert data_out_tensor_fixed_adder = function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder)
-          report "TENSOR ADDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_adder))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))))
+          report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_tensor_fixed_adder, data_a_in_tensor_fixed_adder, data_b_in_tensor_fixed_adder))
           severity error;
       end if;
 
       if (ready_tensor_fixed_multiplier = '1' and data_out_i_enable_tensor_fixed_multiplier = '1' and data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_multiplier = '1') then
         assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))))
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))
           severity error;
       elsif (data_out_i_enable_tensor_fixed_multiplier = '1' and data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_multiplier = ZERO_DATA) then
         assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))))
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))
           severity error;
       elsif (data_out_j_enable_tensor_fixed_multiplier = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_multiplier = ZERO_DATA) then
         assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))))
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))
           severity error;
       elsif (data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_multiplier = ZERO_DATA) then
         assert data_out_tensor_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier)
-          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_multiplier))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))))
+          report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_tensor_fixed_multiplier, data_b_in_tensor_fixed_multiplier))
           severity error;
       end if;
 
       if (ready_tensor_fixed_divider = '1' and data_out_i_enable_tensor_fixed_divider = '1' and data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1') then
         assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))))
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))
           severity error;
       elsif (data_out_i_enable_tensor_fixed_divider = '1' and data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_divider = ZERO_DATA) then
         assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))))
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))
           severity error;
       elsif (data_out_j_enable_tensor_fixed_divider = '1' and data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_divider = ZERO_DATA) then
         assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))))
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))
           severity error;
       elsif (data_out_k_enable_tensor_fixed_divider = '1' and not data_out_tensor_fixed_divider = ZERO_DATA) then
         assert data_out_tensor_fixed_divider = function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider)
-          report "TENSOR DIVIDER: CALCULATED = " & to_string(to_integer(signed(data_out_tensor_fixed_divider))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))))
+          report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_tensor_fixed_divider, data_b_in_tensor_fixed_divider))
           severity error;
       end if;
     end if;

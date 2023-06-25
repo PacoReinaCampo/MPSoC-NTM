@@ -40,6 +40,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
+use work.model_math_pkg.all;
 use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
 use work.accelerator_series_pkg.all;
@@ -119,6 +121,12 @@ end accelerator_series_testbench;
 architecture accelerator_series_testbench_architecture of accelerator_series_testbench is
 
   ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
 
@@ -135,45 +143,65 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal start_scalar_cosh : std_logic;
   signal ready_scalar_cosh : std_logic;
 
+  signal ready_scalar_cosh_model : std_logic;
+
   -- DATA
   signal data_in_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_cosh_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
   signal start_scalar_exponentiator : std_logic;
   signal ready_scalar_exponentiator : std_logic;
 
+  signal ready_scalar_exponentiator_model : std_logic;
+
   -- DATA
   signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_exponentiator_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR LOGARITHM
   -- CONTROL
   signal start_scalar_logarithm : std_logic;
   signal ready_scalar_logarithm : std_logic;
 
+  signal ready_scalar_logarithm_model : std_logic;
+
   -- DATA
   signal data_in_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_logarithm_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR SINH
   -- CONTROL
   signal start_scalar_sinh : std_logic;
   signal ready_scalar_sinh : std_logic;
 
+  signal ready_scalar_sinh_model : std_logic;
+
   -- DATA
   signal data_in_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_sinh_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR TANH
   -- CONTROL
   signal start_scalar_tanh : std_logic;
   signal ready_scalar_tanh : std_logic;
 
+  signal ready_scalar_tanh_model : std_logic;
+
   -- DATA
   signal data_in_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_tanh_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- VECTOR
@@ -184,70 +212,100 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal start_vector_cosh : std_logic;
   signal ready_vector_cosh : std_logic;
 
+  signal ready_vector_cosh_model : std_logic;
+
   signal data_in_enable_vector_cosh : std_logic;
 
   signal data_out_enable_vector_cosh : std_logic;
+
+  signal data_out_enable_vector_cosh_model : std_logic;
 
   -- DATA
   signal size_in_vector_cosh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_cosh_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR EXPONENTIATOR
   -- CONTROL
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
 
+  signal ready_vector_exponentiator_model : std_logic;
+
   signal data_in_enable_vector_exponentiator : std_logic;
 
   signal data_out_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator_model : std_logic;
 
   -- DATA
   signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_exponentiator_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR LOGARITHM
   -- CONTROL
   signal start_vector_logarithm : std_logic;
   signal ready_vector_logarithm : std_logic;
 
+  signal ready_vector_logarithm_model : std_logic;
+
   signal data_in_enable_vector_logarithm : std_logic;
 
   signal data_out_enable_vector_logarithm : std_logic;
+
+  signal data_out_enable_vector_logarithm_model : std_logic;
 
   -- DATA
   signal size_in_vector_logarithm  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_logarithm_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR SINH
   -- CONTROL
   signal start_vector_sinh : std_logic;
   signal ready_vector_sinh : std_logic;
 
+  signal ready_vector_sinh_model : std_logic;
+
   signal data_in_enable_vector_sinh : std_logic;
 
   signal data_out_enable_vector_sinh : std_logic;
+
+  signal data_out_enable_vector_sinh_model : std_logic;
 
   -- DATA
   signal size_in_vector_sinh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_vector_sinh_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR TANH
   -- CONTROL
   signal start_vector_tanh : std_logic;
   signal ready_vector_tanh : std_logic;
 
+  signal ready_vector_tanh_model : std_logic;
+
   signal data_in_enable_vector_tanh : std_logic;
 
   signal data_out_enable_vector_tanh : std_logic;
+
+  signal data_out_enable_vector_tanh_model : std_logic;
 
   -- DATA
   signal size_in_vector_tanh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_tanh_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- MATRIX
@@ -258,11 +316,16 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal start_matrix_cosh : std_logic;
   signal ready_matrix_cosh : std_logic;
 
+  signal ready_matrix_cosh_model : std_logic;
+
   signal data_in_i_enable_matrix_cosh : std_logic;
   signal data_in_j_enable_matrix_cosh : std_logic;
 
   signal data_out_i_enable_matrix_cosh : std_logic;
   signal data_out_j_enable_matrix_cosh : std_logic;
+
+  signal data_out_i_enable_matrix_cosh_model : std_logic;
+  signal data_out_j_enable_matrix_cosh_model : std_logic;
 
   -- DATA
   signal size_i_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -270,10 +333,14 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal data_in_matrix_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_cosh_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX EXPONENTIATOR
   -- CONTROL
   signal start_matrix_exponentiator : std_logic;
   signal ready_matrix_exponentiator : std_logic;
+
+  signal ready_matrix_exponentiator_model : std_logic;
 
   signal data_in_i_enable_matrix_exponentiator : std_logic;
   signal data_in_j_enable_matrix_exponentiator : std_logic;
@@ -281,16 +348,23 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal data_out_i_enable_matrix_exponentiator : std_logic;
   signal data_out_j_enable_matrix_exponentiator : std_logic;
 
+  signal data_out_i_enable_matrix_exponentiator_model : std_logic;
+  signal data_out_j_enable_matrix_exponentiator_model : std_logic;
+
   -- DATA
   signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_exponentiator_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX LOGARITHM
   -- CONTROL
   signal start_matrix_logarithm : std_logic;
   signal ready_matrix_logarithm : std_logic;
+
+  signal ready_matrix_logarithm_model : std_logic;
 
   signal data_in_i_enable_matrix_logarithm : std_logic;
   signal data_in_j_enable_matrix_logarithm : std_logic;
@@ -298,16 +372,23 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal data_out_i_enable_matrix_logarithm : std_logic;
   signal data_out_j_enable_matrix_logarithm : std_logic;
 
+  signal data_out_i_enable_matrix_logarithm_model : std_logic;
+  signal data_out_j_enable_matrix_logarithm_model : std_logic;
+
   -- DATA
   signal size_i_in_matrix_logarithm : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_logarithm : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_logarithm_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX SINH
   -- CONTROL
   signal start_matrix_sinh : std_logic;
   signal ready_matrix_sinh : std_logic;
+
+  signal ready_matrix_sinh_model : std_logic;
 
   signal data_in_i_enable_matrix_sinh : std_logic;
   signal data_in_j_enable_matrix_sinh : std_logic;
@@ -315,16 +396,23 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal data_out_i_enable_matrix_sinh : std_logic;
   signal data_out_j_enable_matrix_sinh : std_logic;
 
+  signal data_out_i_enable_matrix_sinh_model : std_logic;
+  signal data_out_j_enable_matrix_sinh_model : std_logic;
+
   -- DATA
   signal size_i_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_out_matrix_sinh_model : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX TANH
   -- CONTROL
   signal start_matrix_tanh : std_logic;
   signal ready_matrix_tanh : std_logic;
+
+  signal ready_matrix_tanh_model : std_logic;
 
   signal data_in_i_enable_matrix_tanh : std_logic;
   signal data_in_j_enable_matrix_tanh : std_logic;
@@ -332,11 +420,16 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   signal data_out_i_enable_matrix_tanh : std_logic;
   signal data_out_j_enable_matrix_tanh : std_logic;
 
+  signal data_out_i_enable_matrix_tanh_model : std_logic;
+  signal data_out_j_enable_matrix_tanh_model : std_logic;
+
   -- DATA
   signal size_i_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_tanh_model : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -599,6 +692,25 @@ begin
         DATA_IN  => data_in_scalar_cosh,
         DATA_OUT => data_out_scalar_cosh
         );
+
+    scalar_cosh_function_model : model_scalar_cosh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_cosh,
+        READY => ready_scalar_cosh_model,
+
+        -- DATA
+        DATA_IN  => data_in_scalar_cosh,
+        DATA_OUT => data_out_scalar_cosh_model
+        );
   end generate accelerator_scalar_cosh_function_test;
 
   -- SCALAR EXPONENTIATOR
@@ -620,6 +732,25 @@ begin
         -- DATA
         DATA_IN  => data_in_scalar_exponentiator,
         DATA_OUT => data_out_scalar_exponentiator
+        );
+
+    scalar_exponentiator_function_model : model_scalar_exponentiator_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_exponentiator,
+        READY => ready_scalar_exponentiator_model,
+
+        -- DATA
+        DATA_IN  => data_in_scalar_exponentiator,
+        DATA_OUT => data_out_scalar_exponentiator_model
         );
   end generate accelerator_scalar_exponentiator_function_test;
 
@@ -643,6 +774,25 @@ begin
         DATA_IN  => data_in_scalar_logarithm,
         DATA_OUT => data_out_scalar_logarithm
         );
+
+    scalar_logarithm_function_model : model_scalar_logarithm_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_logarithm,
+        READY => ready_scalar_logarithm_model,
+
+        -- DATA
+        DATA_IN  => data_in_scalar_logarithm,
+        DATA_OUT => data_out_scalar_logarithm_model
+        );
   end generate accelerator_scalar_logarithm_function_test;
 
   -- SCALAR SINH
@@ -664,6 +814,25 @@ begin
         -- DATA
         DATA_IN  => data_in_scalar_sinh,
         DATA_OUT => data_out_scalar_sinh
+        );
+
+    scalar_sinh_function_model : model_scalar_sinh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_sinh,
+        READY => ready_scalar_sinh_model,
+
+        -- DATA
+        DATA_IN  => data_in_scalar_sinh,
+        DATA_OUT => data_out_scalar_sinh_model
         );
   end generate accelerator_scalar_sinh_function_test;
 
@@ -687,38 +856,57 @@ begin
         DATA_IN  => data_in_scalar_tanh,
         DATA_OUT => data_out_scalar_tanh
         );
+
+    scalar_tanh_function_model : model_scalar_tanh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_tanh,
+        READY => ready_scalar_tanh_model,
+
+        -- DATA
+        DATA_IN  => data_in_scalar_tanh,
+        DATA_OUT => data_out_scalar_tanh_model
+        );
   end generate accelerator_scalar_tanh_function_test;
 
   scalar_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_scalar_cosh = '1') then
-        assert data_out_scalar_cosh = function_scalar_cosh(data_in_scalar_cosh)
-          report "SCALAR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_scalar_cosh))))
+        assert data_out_scalar_cosh = data_out_scalar_cosh_model
+          report "SCALAR COSH: CALCULATED = " & to_string(data_out_scalar_cosh) & "; CORRECT = " & to_string(data_out_scalar_cosh_model)
           severity error;
       end if;
 
       if (ready_scalar_exponentiator = '1') then
-        assert data_out_scalar_exponentiator = function_scalar_exponentiator(data_in_scalar_exponentiator)
-          report "SCALAR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_scalar_exponentiator))))
+        assert data_out_scalar_exponentiator = data_out_scalar_exponentiator_model
+          report "SCALAR EXPONENTIATOR: CALCULATED = " & to_string(data_out_scalar_exponentiator) & "; CORRECT = " & to_string(data_out_scalar_exponentiator_model)
           severity error;
       end if;
 
       if (ready_scalar_logarithm = '1') then
-        assert data_out_scalar_logarithm = function_scalar_logarithm(data_in_scalar_logarithm)
-          report "SCALAR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_scalar_logarithm))))
+        assert data_out_scalar_logarithm = data_out_scalar_logarithm_model
+          report "SCALAR LOGARITHM: CALCULATED = " & to_string(data_out_scalar_logarithm) & "; CORRECT = " & to_string(data_out_scalar_logarithm_model)
           severity error;
       end if;
 
       if (ready_scalar_sinh = '1') then
-        assert data_out_scalar_sinh = function_scalar_sinh(data_in_scalar_sinh)
-          report "SCALAR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_scalar_sinh))))
+        assert data_out_scalar_sinh = data_out_scalar_sinh_model
+          report "SCALAR SINH: CALCULATED = " & to_string(data_out_scalar_sinh) & "; CORRECT = " & to_string(data_out_scalar_sinh_model)
           severity error;
       end if;
 
       if (ready_scalar_tanh = '1') then
-        assert data_out_scalar_tanh = function_scalar_tanh(data_in_scalar_tanh)
-          report "SCALAR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_scalar_tanh))))
+        assert data_out_scalar_tanh = data_out_scalar_tanh_model
+          report "SCALAR TANH: CALCULATED = " & to_string(data_out_scalar_tanh) & "; CORRECT = " & to_string(data_out_scalar_tanh_model)
           severity error;
       end if;
     end if;
@@ -753,6 +941,30 @@ begin
         DATA_IN  => data_in_vector_cosh,
         DATA_OUT => data_out_vector_cosh
         );
+
+    vector_cosh_function_model : model_vector_cosh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_cosh,
+        READY => ready_vector_cosh_model,
+
+        DATA_IN_ENABLE => data_in_enable_vector_cosh,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_cosh_model,
+
+        -- DATA
+        SIZE_IN  => size_in_vector_cosh,
+        DATA_IN  => data_in_vector_cosh,
+        DATA_OUT => data_out_vector_cosh_model
+        );
   end generate accelerator_vector_cosh_function_test;
 
   -- VECTOR EXPONENTIATOR
@@ -779,6 +991,30 @@ begin
         SIZE_IN  => size_in_vector_exponentiator,
         DATA_IN  => data_in_vector_exponentiator,
         DATA_OUT => data_out_vector_exponentiator
+        );
+
+    vector_exponentiator_function_model : model_vector_exponentiator_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_exponentiator,
+        READY => ready_vector_exponentiator_model,
+
+        DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_model,
+
+        -- DATA
+        SIZE_IN  => size_in_vector_exponentiator,
+        DATA_IN  => data_in_vector_exponentiator,
+        DATA_OUT => data_out_vector_exponentiator_model
         );
   end generate accelerator_vector_exponentiator_function_test;
 
@@ -807,6 +1043,30 @@ begin
         DATA_IN  => data_in_vector_logarithm,
         DATA_OUT => data_out_vector_logarithm
         );
+
+    vector_logarithm_function_model : model_vector_logarithm_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_logarithm,
+        READY => ready_vector_logarithm_model,
+
+        DATA_IN_ENABLE => data_in_enable_vector_logarithm,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_logarithm_model,
+
+        -- DATA
+        SIZE_IN  => size_in_vector_logarithm,
+        DATA_IN  => data_in_vector_logarithm,
+        DATA_OUT => data_out_vector_logarithm_model
+        );
   end generate accelerator_vector_logarithm_function_test;
 
   -- VECTOR SINH
@@ -833,6 +1093,30 @@ begin
         SIZE_IN  => size_in_vector_sinh,
         DATA_IN  => data_in_vector_sinh,
         DATA_OUT => data_out_vector_sinh
+        );
+
+    vector_sinh_function_model : model_vector_sinh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_sinh,
+        READY => ready_vector_sinh_model,
+
+        DATA_IN_ENABLE => data_in_enable_vector_sinh,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_sinh_model,
+
+        -- DATA
+        SIZE_IN  => size_in_vector_sinh,
+        DATA_IN  => data_in_vector_sinh,
+        DATA_OUT => data_out_vector_sinh_model
         );
   end generate accelerator_vector_sinh_function_test;
 
@@ -861,57 +1145,82 @@ begin
         DATA_IN  => data_in_vector_tanh,
         DATA_OUT => data_out_vector_tanh
         );
+
+    vector_tanh_function_model : model_vector_tanh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_tanh,
+        READY => ready_vector_tanh_model,
+
+        DATA_IN_ENABLE => data_in_enable_vector_tanh,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_tanh_model,
+
+        -- DATA
+        SIZE_IN  => size_in_vector_tanh,
+        DATA_IN  => data_in_vector_tanh,
+        DATA_OUT => data_out_vector_tanh_model
+        );
   end generate accelerator_vector_tanh_function_test;
 
   vector_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_vector_cosh = '1' and data_out_enable_vector_cosh = '1') then
-        assert data_out_vector_cosh = function_scalar_cosh(data_in_vector_cosh)
-          report "VECTOR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_vector_cosh))))
+        assert data_out_vector_cosh = data_out_vector_cosh_model
+          report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
-      elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = ZERO_DATA) then
-        assert data_out_vector_cosh = function_scalar_cosh(data_in_vector_cosh)
-          report "VECTOR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_vector_cosh))))
+      elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = EMPTY) then
+        assert data_out_vector_cosh = data_out_vector_cosh_model
+          report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
       end if;
 
       if (ready_vector_exponentiator = '1' and data_out_enable_vector_exponentiator = '1') then
-        assert data_out_vector_exponentiator = function_scalar_exponentiator(data_in_vector_exponentiator)
-          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_vector_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_vector_exponentiator))))
+        assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
+          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
-      elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = ZERO_DATA) then
-          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_vector_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_vector_exponentiator))))
+      elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = EMPTY) then
+        assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
+          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
       end if;
 
       if (ready_vector_logarithm = '1' and data_out_enable_vector_logarithm = '1') then
-        assert data_out_vector_logarithm = function_scalar_logarithm(data_in_vector_logarithm)
-          report "VECTOR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_vector_logarithm))))
+        assert data_out_vector_logarithm = data_out_vector_logarithm_model
+          report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
-      elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = ZERO_DATA) then
-        assert data_out_vector_logarithm = function_scalar_logarithm(data_in_vector_logarithm)
-          report "VECTOR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_vector_logarithm))))
+      elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = EMPTY) then
+        assert data_out_vector_logarithm = data_out_vector_logarithm_model
+          report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
       end if;
 
       if (ready_vector_sinh = '1' and data_out_enable_vector_sinh = '1') then
-        assert data_out_vector_sinh = function_scalar_sinh(data_in_vector_sinh)
-          report "VECTOR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_vector_sinh))))
+        assert data_out_vector_sinh = data_out_vector_sinh_model
+          report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
-      elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = ZERO_DATA) then
-        assert data_out_vector_sinh = function_scalar_sinh(data_in_vector_sinh)
-          report "VECTOR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_vector_sinh))))
+      elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = EMPTY) then
+        assert data_out_vector_sinh = data_out_vector_sinh_model
+          report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
       end if;
 
       if (ready_vector_tanh = '1' and data_out_enable_vector_tanh = '1') then
-        assert data_out_vector_tanh = function_scalar_tanh(data_in_vector_tanh)
-          report "VECTOR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_vector_tanh))))
+        assert data_out_vector_tanh = data_out_vector_tanh_model
+          report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
-      elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = ZERO_DATA) then
-        assert data_out_vector_tanh = function_scalar_tanh(data_in_vector_tanh)
-          report "VECTOR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_vector_tanh))))
+      elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = EMPTY) then
+        assert data_out_vector_tanh = data_out_vector_tanh_model
+          report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
       end if;
     end if;
@@ -949,6 +1258,33 @@ begin
         DATA_IN   => data_in_matrix_cosh,
         DATA_OUT  => data_out_matrix_cosh
         );
+
+    matrix_cosh_function_model : model_matrix_cosh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_cosh,
+        READY => ready_matrix_cosh_model,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_cosh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_cosh,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosh_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_cosh,
+        SIZE_J_IN => size_j_in_matrix_cosh,
+        DATA_IN   => data_in_matrix_cosh,
+        DATA_OUT  => data_out_matrix_cosh_model
+        );
   end generate accelerator_matrix_cosh_function_test;
 
   -- MATRIX EXPONENTIATOR
@@ -978,6 +1314,33 @@ begin
         SIZE_J_IN => size_j_in_matrix_exponentiator,
         DATA_IN   => data_in_matrix_exponentiator,
         DATA_OUT  => data_out_matrix_exponentiator
+        );
+
+    matrix_exponentiator_function_model : model_matrix_exponentiator_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_exponentiator,
+        READY => ready_matrix_exponentiator_model,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_exponentiator,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_exponentiator,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_exponentiator,
+        SIZE_J_IN => size_j_in_matrix_exponentiator,
+        DATA_IN   => data_in_matrix_exponentiator,
+        DATA_OUT  => data_out_matrix_exponentiator_model
         );
   end generate accelerator_matrix_exponentiator_function_test;
 
@@ -1009,6 +1372,33 @@ begin
         DATA_IN   => data_in_matrix_logarithm,
         DATA_OUT  => data_out_matrix_logarithm
         );
+
+    matrix_logarithm_function_model : model_matrix_logarithm_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_logarithm,
+        READY => ready_matrix_logarithm,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_logarithm,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_logarithm,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logarithm_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_logarithm,
+        SIZE_J_IN => size_j_in_matrix_logarithm,
+        DATA_IN   => data_in_matrix_logarithm,
+        DATA_OUT  => data_out_matrix_logarithm_model
+        );
   end generate accelerator_matrix_logarithm_function_test;
 
   -- MATRIX SINH
@@ -1038,6 +1428,33 @@ begin
         SIZE_J_IN => size_j_in_matrix_sinh,
         DATA_IN   => data_in_matrix_sinh,
         DATA_OUT  => data_out_matrix_sinh
+        );
+
+    matrix_sinh_function_model : model_matrix_sinh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_sinh,
+        READY => ready_matrix_sinh,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_sinh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_sinh,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_sinh_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_sinh,
+        SIZE_J_IN => size_j_in_matrix_sinh,
+        DATA_IN   => data_in_matrix_sinh,
+        DATA_OUT  => data_out_matrix_sinh_model
         );
   end generate accelerator_matrix_sinh_function_test;
 
@@ -1069,78 +1486,105 @@ begin
         DATA_IN   => data_in_matrix_tanh,
         DATA_OUT  => data_out_matrix_tanh
         );
+
+    matrix_tanh_function_model : model_matrix_tanh_function
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_tanh,
+        READY => ready_matrix_tanh_model,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_tanh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_tanh,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_tanh_model,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh_model,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_tanh,
+        SIZE_J_IN => size_j_in_matrix_tanh,
+        DATA_IN   => data_in_matrix_tanh,
+        DATA_OUT  => data_out_matrix_tanh_model
+        );
   end generate accelerator_matrix_tanh_function_test;
 
   matrix_assertion : process (CLK, RST)
   begin
     if rising_edge(CLK) then
       if (ready_matrix_cosh = '1' and data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1') then
-        assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+        assert data_out_matrix_cosh = data_out_matrix_cosh_model
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = ZERO_DATA) then
-        assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+      elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
+        assert data_out_matrix_cosh = data_out_matrix_cosh_model
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = ZERO_DATA) then
-        assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+      elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
+        assert data_out_matrix_cosh = data_out_matrix_cosh_model
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
       end if;
 
       if (ready_matrix_exponentiator = '1' and data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1') then
-        assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+        assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = ZERO_DATA) then
-        assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+      elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
+        assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = ZERO_DATA) then
-        assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+      elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
+        assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
       end if;
 
       if (ready_matrix_logarithm = '1' and data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1') then
-        assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+        assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = ZERO_DATA) then
-        assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+      elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
+        assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = ZERO_DATA) then
-        assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+      elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
+        assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
       end if;
 
       if (ready_matrix_sinh = '1' and data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1') then
-        assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+        assert data_out_matrix_sinh = data_out_matrix_sinh_model
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = ZERO_DATA) then
-        assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+      elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
+        assert data_out_matrix_sinh = data_out_matrix_sinh_model
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = ZERO_DATA) then
-        assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+      elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
+        assert data_out_matrix_sinh = data_out_matrix_sinh_model
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
       end if;
 
       if (ready_matrix_tanh = '1' and data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1') then
-        assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+        assert data_out_matrix_tanh = data_out_matrix_tanh_model
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = ZERO_DATA) then
-        assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+      elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
+        assert data_out_matrix_tanh = data_out_matrix_tanh_model
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = ZERO_DATA) then
-        assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+      elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
+        assert data_out_matrix_tanh = data_out_matrix_tanh_model
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
       end if;
     end if;

@@ -153,10 +153,10 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) - (to_signed(0, DATA_SIZE) & signed(DATA_A_IN)));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) - (signed(ZERO_IDATA) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - to_signed(1, DATA_SIZE));
+              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_IDATA));
             end if;
           elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
             if (signed(index_loop) = signed(DATA_B_IN)) then
@@ -171,10 +171,10 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) + (to_signed(0, DATA_SIZE) & signed(DATA_A_IN)));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) + (signed(ZERO_IDATA) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + to_signed(1, DATA_SIZE));
+              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_IDATA));
             end if;
           end if;
 

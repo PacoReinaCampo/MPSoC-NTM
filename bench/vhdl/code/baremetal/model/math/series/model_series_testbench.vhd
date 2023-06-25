@@ -694,31 +694,31 @@ begin
     if rising_edge(CLK) then
       if (ready_scalar_cosh = '1') then
         assert data_out_scalar_cosh = function_scalar_cosh(data_in_scalar_cosh)
-          report "SCALAR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_scalar_cosh))))
+          report "SCALAR COSH: CALCULATED = " & to_string(data_out_scalar_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_scalar_cosh))
           severity error;
       end if;
 
       if (ready_scalar_exponentiator = '1') then
         assert data_out_scalar_exponentiator = function_scalar_exponentiator(data_in_scalar_exponentiator)
-          report "SCALAR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_scalar_exponentiator))))
+          report "SCALAR EXPONENTIATOR: CALCULATED = " & to_string(data_out_scalar_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_scalar_exponentiator))
           severity error;
       end if;
 
       if (ready_scalar_logarithm = '1') then
         assert data_out_scalar_logarithm = function_scalar_logarithm(data_in_scalar_logarithm)
-          report "SCALAR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_scalar_logarithm))))
+          report "SCALAR LOGARITHM: CALCULATED = " & to_string(data_out_scalar_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_scalar_logarithm))
           severity error;
       end if;
 
       if (ready_scalar_sinh = '1') then
         assert data_out_scalar_sinh = function_scalar_sinh(data_in_scalar_sinh)
-          report "SCALAR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_scalar_sinh))))
+          report "SCALAR SINH: CALCULATED = " & to_string(data_out_scalar_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_scalar_sinh))
           severity error;
       end if;
 
       if (ready_scalar_tanh = '1') then
         assert data_out_scalar_tanh = function_scalar_tanh(data_in_scalar_tanh)
-          report "SCALAR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_scalar_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_scalar_tanh))))
+          report "SCALAR TANH: CALCULATED = " & to_string(data_out_scalar_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_scalar_tanh))
           severity error;
       end if;
     end if;
@@ -868,50 +868,50 @@ begin
     if rising_edge(CLK) then
       if (ready_vector_cosh = '1' and data_out_enable_vector_cosh = '1') then
         assert data_out_vector_cosh = function_scalar_cosh(data_in_vector_cosh)
-          report "VECTOR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_vector_cosh))))
+          report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_vector_cosh))
           severity error;
       elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = ZERO_DATA) then
         assert data_out_vector_cosh = function_scalar_cosh(data_in_vector_cosh)
-          report "VECTOR COSH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_vector_cosh))))
+          report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_vector_cosh))
           severity error;
       end if;
 
       if (ready_vector_exponentiator = '1' and data_out_enable_vector_exponentiator = '1') then
         assert data_out_vector_exponentiator = function_scalar_exponentiator(data_in_vector_exponentiator)
-          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_vector_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_vector_exponentiator))))
+          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_vector_exponentiator))
           severity error;
       elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = ZERO_DATA) then
-          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_vector_exponentiator))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_exponentiator(data_in_vector_exponentiator))))
+          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_vector_exponentiator))
           severity error;
       end if;
 
       if (ready_vector_logarithm = '1' and data_out_enable_vector_logarithm = '1') then
         assert data_out_vector_logarithm = function_scalar_logarithm(data_in_vector_logarithm)
-          report "VECTOR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_vector_logarithm))))
+          report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_vector_logarithm))
           severity error;
       elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = ZERO_DATA) then
         assert data_out_vector_logarithm = function_scalar_logarithm(data_in_vector_logarithm)
-          report "VECTOR LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_vector_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_vector_logarithm))))
+          report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_vector_logarithm))
           severity error;
       end if;
 
       if (ready_vector_sinh = '1' and data_out_enable_vector_sinh = '1') then
         assert data_out_vector_sinh = function_scalar_sinh(data_in_vector_sinh)
-          report "VECTOR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_vector_sinh))))
+          report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_vector_sinh))
           severity error;
       elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = ZERO_DATA) then
         assert data_out_vector_sinh = function_scalar_sinh(data_in_vector_sinh)
-          report "VECTOR SINH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_vector_sinh))))
+          report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_vector_sinh))
           severity error;
       end if;
 
       if (ready_vector_tanh = '1' and data_out_enable_vector_tanh = '1') then
         assert data_out_vector_tanh = function_scalar_tanh(data_in_vector_tanh)
-          report "VECTOR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_vector_tanh))))
+          report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_vector_tanh))
           severity error;
       elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = ZERO_DATA) then
         assert data_out_vector_tanh = function_scalar_tanh(data_in_vector_tanh)
-          report "VECTOR TANH: CALCULATED = " & to_string(to_integer(signed(data_out_vector_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_vector_tanh))))
+          report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_vector_tanh))
           severity error;
       end if;
     end if;
@@ -1076,71 +1076,71 @@ begin
     if rising_edge(CLK) then
       if (ready_matrix_cosh = '1' and data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1') then
         assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_matrix_cosh))
           severity error;
       elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = ZERO_DATA) then
         assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_matrix_cosh))
           severity error;
       elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = ZERO_DATA) then
         assert data_out_matrix_cosh = function_scalar_cosh(data_in_matrix_cosh)
-          report "MATRIX COSH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_cosh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_cosh(data_in_matrix_cosh))))
+          report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(function_scalar_cosh(data_in_matrix_cosh))
           severity error;
       end if;
 
       if (ready_matrix_exponentiator = '1' and data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1') then
         assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = ZERO_DATA) then
         assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = ZERO_DATA) then
         assert data_out_matrix_exponentiator = function_scalar_exponentiator(data_in_matrix_exponentiator)
-          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       end if;
 
       if (ready_matrix_logarithm = '1' and data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1') then
         assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = ZERO_DATA) then
         assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = ZERO_DATA) then
         assert data_out_matrix_logarithm = function_scalar_logarithm(data_in_matrix_logarithm)
-          report "MATRIX LOGARITHM: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_logarithm))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_logarithm(data_in_matrix_logarithm))))
+          report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(function_scalar_logarithm(data_in_matrix_logarithm))
           severity error;
       end if;
 
       if (ready_matrix_sinh = '1' and data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1') then
         assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_matrix_sinh))
           severity error;
       elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = ZERO_DATA) then
         assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_matrix_sinh))
           severity error;
       elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = ZERO_DATA) then
         assert data_out_matrix_sinh = function_scalar_sinh(data_in_matrix_sinh)
-          report "MATRIX SINH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_sinh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_sinh(data_in_matrix_sinh))))
+          report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(function_scalar_sinh(data_in_matrix_sinh))
           severity error;
       end if;
 
       if (ready_matrix_tanh = '1' and data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1') then
         assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_matrix_tanh))
           severity error;
       elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = ZERO_DATA) then
         assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_matrix_tanh))
           severity error;
       elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = ZERO_DATA) then
         assert data_out_matrix_tanh = function_scalar_tanh(data_in_matrix_tanh)
-          report "MATRIX TANH: CALCULATED = " & to_string(to_integer(signed(data_out_matrix_tanh))) & "; CORRECT = " & to_string(to_integer(signed(function_scalar_tanh(data_in_matrix_tanh))))
+          report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(function_scalar_tanh(data_in_matrix_tanh))
           severity error;
       end if;
     end if;

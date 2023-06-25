@@ -92,7 +92,7 @@ architecture model_scalar_integer_adder_architecture of model_scalar_integer_add
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Data Internal
-  signal adder_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal adder_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin
 
@@ -107,14 +107,14 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
+      DATA_OUT     <= ZERO_IDATA;
       OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
 
       -- Assignations
-      adder_int <= ZERO_DATA;
+      adder_int <= std_logic_vector(to_signed(0, DATA_SIZE+1));
 
     elsif (rising_edge(CLK)) then
 
@@ -126,9 +126,9 @@ begin
           if (START = '1') then
             -- Assignations
             if (OPERATION = '1') then
-              adder_int <= std_logic_vector(signed(DATA_A_IN) - signed(DATA_B_IN));
+              adder_int <= std_logic_vector('0' & signed(DATA_A_IN) - ('0' & signed(DATA_B_IN)));
             else
-              adder_int <= std_logic_vector(signed(DATA_A_IN) + signed(DATA_B_IN));
+              adder_int <= std_logic_vector('0' & signed(DATA_A_IN) + ('0' & signed(DATA_B_IN)));
             end if;
 
             -- FSM Control
@@ -138,8 +138,8 @@ begin
         when ENDER_STATE =>             -- STEP 1
 
           -- Data Outputs
-          DATA_OUT     <= adder_int;
-          OVERFLOW_OUT <= '0';
+          DATA_OUT     <= adder_int(DATA_SIZE-1 downto 0);
+          OVERFLOW_OUT <= adder_int(DATA_SIZE);
 
           -- Control Outputs
           READY <= '1';

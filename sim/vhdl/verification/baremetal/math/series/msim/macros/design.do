@@ -2,8 +2,6 @@
 # DESIGN COMPILATION
 #*******************
 
-# MODELSIM 10.4d
-
 do ./variables.do
 
 vlib work
@@ -13,8 +11,11 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_cosh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -26,8 +27,11 @@ alias accelerator_scalar_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_exponentiator_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -39,8 +43,11 @@ alias accelerator_scalar_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_logarithm_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -52,8 +59,11 @@ alias accelerator_scalar_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_sinh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -65,8 +75,11 @@ alias accelerator_scalar_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_tanh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -78,8 +91,12 @@ alias accelerator_scalar_tanh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_cosh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_cosh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -92,8 +109,12 @@ alias accelerator_vector_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_exponentiator_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -106,8 +127,12 @@ alias accelerator_vector_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_logarithm_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_logarithm_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -120,8 +145,12 @@ alias accelerator_vector_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_sinh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_sinh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -134,8 +163,12 @@ alias accelerator_vector_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_tanh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_tanh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -148,8 +181,13 @@ alias accelerator_vector_tanh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_cosh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_cosh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_cosh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/matrix/model_matrix_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -163,8 +201,13 @@ alias accelerator_matrix_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_exponentiator_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/matrix/model_matrix_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -178,8 +221,13 @@ alias accelerator_matrix_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_logarithm_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_logarithm_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_logarithm_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/matrix/model_matrix_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -193,8 +241,13 @@ alias accelerator_matrix_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_sinh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_sinh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_sinh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/matrix/model_matrix_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -208,8 +261,13 @@ alias accelerator_matrix_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_tanh_function_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/scalar/model_scalar_tanh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/vector/model_vector_tanh_function.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/math/series/matrix/model_matrix_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd

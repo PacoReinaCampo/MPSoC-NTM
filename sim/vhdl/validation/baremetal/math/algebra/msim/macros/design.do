@@ -2,8 +2,6 @@
 # DESIGN COMPILATION
 #*******************
 
-# MODELSIM 10.4d
-
 do ./variables.do
 
 vlib work
