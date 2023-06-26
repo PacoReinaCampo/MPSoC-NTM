@@ -73,7 +73,8 @@ package model_arithmetic_pkg is
 
   constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001, float64'high, -float64'low));
 
-  constant ONE_REAL : real := 1.0;
+  constant ZERO_REAL : real := 0.0;
+  constant ONE_REAL  : real := 1.0;
 
   ------------------------------------------------------------------------------
   -- Types

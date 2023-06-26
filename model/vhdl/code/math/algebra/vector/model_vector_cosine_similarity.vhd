@@ -65,8 +65,6 @@ entity model_vector_cosine_similarity is
     DATA_A_IN_ENABLE : in std_logic;
     DATA_B_IN_ENABLE : in std_logic;
 
-    DATA_ENABLE : out std_logic;
-
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -87,9 +85,7 @@ architecture model_vector_cosine_similarity_architecture of model_vector_cosine_
   type cosine_similarity_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE,                        -- STEP 2
-    CLEAN_STATE,                        -- STEP 3
-    OPERATION_STATE                     -- STEP 4
+    ENDER_STATE                         -- STEP 2
     );
 
   ------------------------------------------------------------------------------
@@ -133,8 +129,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_ENABLE <= '0';
-
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -153,17 +147,11 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Control Outputs
-            DATA_ENABLE <= '1';
-
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
-          else
-            -- Control Outputs
-            DATA_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
@@ -202,7 +190,7 @@ begin
           end if;
 
           -- Control Outputs
-          DATA_ENABLE <= '0';
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 2
 
@@ -210,37 +198,8 @@ begin
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= CLEAN_STATE;
-          else
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-            -- Control Outputs
-            DATA_ENABLE <= '1';
-
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
-          end if;
-
-        when CLEAN_STATE =>             -- STEP 3
-
-          -- Control Outputs
-          DATA_ENABLE <= '0';
-
-          DATA_OUT_ENABLE <= '0';
-
-          -- FSM Control
-          cosine_similarity_ctrl_fsm_int <= OPERATION_STATE;
-
-        when OPERATION_STATE =>         -- STEP 4
-
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             READY <= '1';
-
-            -- Control Internal
-            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
@@ -249,7 +208,7 @@ begin
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= CLEAN_STATE;
+            cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
           -- Data Outputs

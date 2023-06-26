@@ -2,3 +2,28 @@ cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/arithmetic/float/
 
 do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/arithmetic/float/msim/macros/design.do
 do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/arithmetic/float/msim/macros/verification.do
+
+d01
+v01
+d02
+v02
+d03
+v03
+d04
+v04
+d05
+v05
+d06
+v06
+d07
+v07
+d08
+v08
+d09
+v09
+d10
+v10
+d11
+v11
+d12
+v12

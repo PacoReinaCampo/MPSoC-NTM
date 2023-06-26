@@ -112,8 +112,8 @@ begin
       READY <= '0';
 
       -- Data Internal
-      data_a_int <= 0.0;
-      data_b_int <= 0.0;
+      data_a_int <= ZERO_REAL;
+      data_b_int <= ZERO_REAL;
 
     elsif rising_edge(CLK) then
 

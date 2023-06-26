@@ -6,7 +6,7 @@ add wave -noupdate /model_algebra_pkg/MONITOR_TEST
 add wave -noupdate /model_algebra_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM DOT COSINE_SIMILARITY TEST}
+add wave -noupdate -divider {NTM VECTOR COSINE_SIMILARITY TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_vector_cosine_similarity_test/vector_cosine_similarity/CLK

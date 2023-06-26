@@ -6,7 +6,7 @@ add wave -noupdate /model_algebra_pkg/MONITOR_TEST
 add wave -noupdate /model_algebra_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM DOT CONVOLUTION TEST}
+add wave -noupdate -divider {NTM VECTOR CONVOLUTION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_vector_convolution_test/vector_convolution/CLK
