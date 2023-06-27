@@ -121,7 +121,7 @@ architecture accelerator_float_testbench_architecture of accelerator_float_testb
   -- Constants
   ------------------------------------------------------------------------------
 
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -1123,7 +1123,7 @@ begin
         assert data_out_vector_float_adder = data_out_vector_float_adder_model
           report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_float_adder) & "; CORRECT = " & to_string(data_out_vector_float_adder_model)
           severity error;
-      elsif (data_out_enable_vector_float_adder = '1' and not data_out_vector_float_adder = EMPTY) then
+      elsif (data_out_enable_vector_float_adder = '1' and not data_out_vector_float_adder = MAX_POSITIVE) then
         assert data_out_vector_float_adder = data_out_vector_float_adder_model
           report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_float_adder) & "; CORRECT = " & to_string(data_out_vector_float_adder_model)
           severity error;
@@ -1133,7 +1133,7 @@ begin
         assert data_out_vector_float_multiplier = data_out_vector_float_multiplier_model
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_float_multiplier) & "; CORRECT = " & to_string(data_out_vector_float_multiplier_model)
           severity error;
-      elsif (data_out_enable_vector_float_multiplier = '1' and not data_out_vector_float_multiplier = EMPTY) then
+      elsif (data_out_enable_vector_float_multiplier = '1' and not data_out_vector_float_multiplier = MAX_POSITIVE) then
         assert data_out_vector_float_multiplier = data_out_vector_float_multiplier_model
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_float_multiplier) & "; CORRECT = " & to_string(data_out_vector_float_multiplier_model)
           severity error;
@@ -1143,7 +1143,7 @@ begin
         assert data_out_vector_float_divider = data_out_vector_float_divider_model
           report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_float_divider) & "; CORRECT = " & to_string(data_out_vector_float_divider_model)
           severity error;
-      elsif (data_out_enable_vector_float_divider = '1' and not data_out_vector_float_divider = EMPTY) then
+      elsif (data_out_enable_vector_float_divider = '1' and not data_out_vector_float_divider = MAX_POSITIVE) then
         assert data_out_vector_float_divider = data_out_vector_float_divider_model
           report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_float_divider) & "; CORRECT = " & to_string(data_out_vector_float_divider_model)
           severity error;
@@ -1367,11 +1367,11 @@ begin
         assert data_out_matrix_float_adder = data_out_matrix_float_adder_model
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(data_out_matrix_float_adder_model)
           severity error;
-      elsif (data_out_i_enable_matrix_float_adder = '1' and data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = EMPTY) then
+      elsif (data_out_i_enable_matrix_float_adder = '1' and data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = MAX_POSITIVE) then
         assert data_out_matrix_float_adder = data_out_matrix_float_adder_model
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(data_out_matrix_float_adder_model)
           severity error;
-      elsif (data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = EMPTY) then
+      elsif (data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = MAX_POSITIVE) then
         assert data_out_matrix_float_adder = data_out_matrix_float_adder_model
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(data_out_matrix_float_adder_model)
           severity error;
@@ -1381,11 +1381,11 @@ begin
         assert data_out_matrix_float_multiplier = data_out_matrix_float_multiplier_model
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(data_out_matrix_float_multiplier_model)
           severity error;
-      elsif (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = EMPTY) then
+      elsif (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = MAX_POSITIVE) then
         assert data_out_matrix_float_multiplier = data_out_matrix_float_multiplier_model
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(data_out_matrix_float_multiplier_model)
           severity error;
-      elsif (data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = EMPTY) then
+      elsif (data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = MAX_POSITIVE) then
         assert data_out_matrix_float_multiplier = data_out_matrix_float_multiplier_model
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(data_out_matrix_float_multiplier_model)
           severity error;
@@ -1395,11 +1395,11 @@ begin
         assert data_out_matrix_float_divider = data_out_matrix_float_divider_model
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(data_out_matrix_float_divider_model)
           severity error;
-      elsif (data_out_i_enable_matrix_float_divider = '1' and data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = EMPTY) then
+      elsif (data_out_i_enable_matrix_float_divider = '1' and data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = MAX_POSITIVE) then
         assert data_out_matrix_float_divider = data_out_matrix_float_divider_model
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(data_out_matrix_float_divider_model)
           severity error;
-      elsif (data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = EMPTY) then
+      elsif (data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = MAX_POSITIVE) then
         assert data_out_matrix_float_divider = data_out_matrix_float_divider_model
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(data_out_matrix_float_divider_model)
           severity error;
@@ -1647,15 +1647,15 @@ begin
         assert data_out_tensor_float_adder = data_out_tensor_float_adder_model
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(data_out_tensor_float_adder_model)
           severity error;
-      elsif (data_out_i_enable_tensor_float_adder = '1' and data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = EMPTY) then
+      elsif (data_out_i_enable_tensor_float_adder = '1' and data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = MAX_POSITIVE) then
         assert data_out_tensor_float_adder = data_out_tensor_float_adder_model
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(data_out_tensor_float_adder_model)
           severity error;
-      elsif (data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = EMPTY) then
+      elsif (data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = MAX_POSITIVE) then
         assert data_out_tensor_float_adder = data_out_tensor_float_adder_model
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(data_out_tensor_float_adder_model)
           severity error;
-      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = EMPTY) then
+      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = MAX_POSITIVE) then
         assert data_out_tensor_float_adder = data_out_tensor_float_adder_model
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(data_out_tensor_float_adder_model)
           severity error;
@@ -1665,15 +1665,15 @@ begin
         assert data_out_tensor_float_multiplier = data_out_tensor_float_multiplier_model
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(data_out_tensor_float_multiplier_model)
           severity error;
-      elsif (data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = EMPTY) then
+      elsif (data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = MAX_POSITIVE) then
         assert data_out_tensor_float_multiplier = data_out_tensor_float_multiplier_model
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(data_out_tensor_float_multiplier_model)
           severity error;
-      elsif (data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = EMPTY) then
+      elsif (data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = MAX_POSITIVE) then
         assert data_out_tensor_float_multiplier = data_out_tensor_float_multiplier_model
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(data_out_tensor_float_multiplier_model)
           severity error;
-      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = EMPTY) then
+      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = MAX_POSITIVE) then
         assert data_out_tensor_float_multiplier = data_out_tensor_float_multiplier_model
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(data_out_tensor_float_multiplier_model)
           severity error;
@@ -1683,15 +1683,15 @@ begin
         assert data_out_tensor_float_divider = data_out_tensor_float_divider_model
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(data_out_tensor_float_divider_model)
           severity error;
-      elsif (data_out_i_enable_tensor_float_divider = '1' and data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = EMPTY) then
+      elsif (data_out_i_enable_tensor_float_divider = '1' and data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = MAX_POSITIVE) then
         assert data_out_tensor_float_divider = data_out_tensor_float_divider_model
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(data_out_tensor_float_divider_model)
           severity error;
-      elsif (data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = EMPTY) then
+      elsif (data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = MAX_POSITIVE) then
         assert data_out_tensor_float_divider = data_out_tensor_float_divider_model
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(data_out_tensor_float_divider_model)
           severity error;
-      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = EMPTY) then
+      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = MAX_POSITIVE) then
         assert data_out_tensor_float_divider = data_out_tensor_float_divider_model
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(data_out_tensor_float_divider_model)
           severity error;

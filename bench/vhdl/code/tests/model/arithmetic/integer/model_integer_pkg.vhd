@@ -100,31 +100,6 @@ package model_integer_pkg is
   constant INT_N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-8, DATA_SIZE));
   constant INT_N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-9, DATA_SIZE));
 
-  -- FLOATS
-  constant FLOAT_P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"0000000000000000";
-  constant FLOAT_P_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := X"3FF199999999999A";
-  constant FLOAT_P_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := X"400199999999999A";
-  constant FLOAT_P_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := X"400A666666666666";
-  constant FLOAT_P_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := X"401199999999999A";
-  constant FLOAT_P_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"4016000000000000";
-  constant FLOAT_P_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := X"401A666666666666";
-  constant FLOAT_P_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := X"401ECCCCCCCCCCCD";
-  constant FLOAT_P_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := X"402199999999999A";
-  constant FLOAT_P_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"4023CCCCCCCCCCCD";
-  constant FLOAT_P_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"7FF0000000000000";
-
-  constant FLOAT_N_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"8000000000000000";
-  constant FLOAT_N_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := X"BFF199999999999A";
-  constant FLOAT_N_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := X"C00199999999999A";
-  constant FLOAT_N_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := X"C00A666666666666";
-  constant FLOAT_N_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := X"C01199999999999A";
-  constant FLOAT_N_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"C016000000000000";
-  constant FLOAT_N_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := X"C01A666666666666";
-  constant FLOAT_N_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := X"C01ECCCCCCCCCCCD";
-  constant FLOAT_N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := X"C02199999999999A";
-  constant FLOAT_N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"C023CCCCCCCCCCCD";
-  constant FLOAT_N_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"FFF0000000000000";
-
   -- Buffer
   constant TENSOR_SAMPLE_A : tensor_buffer := (((INT_P_TWO, INT_P_ONE, INT_P_FOUR), (INT_P_NINE, INT_P_FOUR, INT_P_TWO), (INT_P_ONE, INT_P_ONE, INT_P_TWO)), ((INT_P_EIGHT, INT_P_SIX, INT_P_TWO), (INT_P_EIGHT, INT_P_FIVE, INT_P_TWO), (INT_P_ONE, INT_P_FOUR, INT_P_ONE)), ((INT_P_THREE, INT_P_ONE, INT_P_SIX), (INT_P_FIVE, INT_P_ZERO, INT_P_FOUR), (INT_P_FIVE, INT_P_EIGHT, INT_P_FIVE)));
   constant TENSOR_SAMPLE_B : tensor_buffer := (((INT_P_ONE, INT_P_THREE, INT_P_ONE), (INT_P_TWO, INT_P_FOUR, INT_P_EIGHT), (INT_P_FOUR, INT_P_ONE, INT_P_TWO)), ((INT_P_NINE, INT_P_ONE, INT_P_FIVE), (INT_P_NINE, INT_P_EIGHT, INT_P_ONE), (INT_P_FIVE, INT_P_EIGHT, INT_P_FOUR)), ((INT_P_FIVE, INT_P_FOUR, INT_P_ONE), (INT_P_THREE, INT_P_FOUR, INT_P_SIX), (INT_P_ONE, INT_P_EIGHT, INT_P_EIGHT)));
@@ -150,6 +125,30 @@ package model_integer_pkg is
   signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_2      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_2 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_2    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_3      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_3 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_3    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_4      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_4 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_4    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_5      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_5 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_5    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_6      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_6 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_6    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_7      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_7 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_7    : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
   signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST      : boolean := false;

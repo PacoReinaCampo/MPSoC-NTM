@@ -81,7 +81,6 @@ entity accelerator_calculus_stimulus is
     VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-
     -- VECTOR INTEGRATION
     -- CONTROL
     VECTOR_INTEGRATION_START : out std_logic;
@@ -285,10 +284,8 @@ architecture accelerator_calculus_stimulus_architecture of accelerator_calculus_
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
+  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
 
   ------------------------------------------------------------------------------
   -- Signals

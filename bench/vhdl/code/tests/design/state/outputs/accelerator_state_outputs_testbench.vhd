@@ -88,7 +88,7 @@ architecture accelerator_state_outputs_testbench_architecture of accelerator_sta
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 

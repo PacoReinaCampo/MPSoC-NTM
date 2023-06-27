@@ -145,17 +145,9 @@ package model_float_pkg is
   signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
   signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
-
   signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
   signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;

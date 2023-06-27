@@ -342,10 +342,8 @@ architecture model_fixed_stimulus_architecture of model_fixed_stimulus is
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
+  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -434,7 +432,7 @@ begin
   begin
 
     -------------------------------------------------------------------
-    -- SCALAR- FIXED
+    -- SCALAR-FIXED
     -------------------------------------------------------------------
 
     if (STIMULUS_NTM_SCALAR_FIXED_ADDER_TEST) then
@@ -452,8 +450,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 0  ";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_ADDER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_FIXED_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_INF;
       end if;
 
       if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_1) then
@@ -462,8 +460,151 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 1  ";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_ADDER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_FIXED_ADDER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 2  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 3  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 4  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_NINE;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 5  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_TWO;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 6  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_SEVEN;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 7  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_FOUR;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_SIX;
+      end if;
+
+      -- CONTROL
+      SCALAR_FIXED_ADDER_OPERATION <= '1';
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_8) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 8  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_9) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 9  ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_10) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 10 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_11) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 11 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_12) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 12 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_NINE;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_13) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 13 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_P_TWO;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_14) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 14 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_SEVEN;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_15) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE 15 ";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_ADDER_DATA_A_IN <= FIXED_N_FOUR;
+        SCALAR_FIXED_ADDER_DATA_B_IN <= FIXED_N_SIX;
       end if;
 
       wait for WORKING;
@@ -482,8 +623,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 0";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_INF;
       end if;
 
       if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_1) then
@@ -492,8 +633,148 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 1";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 2";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 3";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 4";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 5";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 6";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 7";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_8) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 8";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_NINE;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_9) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIPL_CASE 9";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_TWO;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_10) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 10";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_SEVEN;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_11) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 11";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_FOUR;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_SIX;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_12) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 12";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_NINE;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_13) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 13";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_N_TWO;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_14) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 14";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_SEVEN;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_N_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_15) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_MULTIP_CASE 15";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_MULTIPLIER_DATA_A_IN <= FIXED_P_FOUR;
+        SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= FIXED_P_SIX;
       end if;
 
       wait for WORKING;
@@ -512,8 +793,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 0";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_FIXED_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_INF;
       end if;
 
       if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_1) then
@@ -522,8 +803,148 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 1";
         -------------------------------------------------------------------
 
-        SCALAR_FIXED_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_FIXED_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_INF;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 2";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 3";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_INF;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_INF;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 4";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_ZERO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 5";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_ZERO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 6";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_ZERO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 7";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_ZERO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_ZERO;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_8) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 8";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_NINE;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_9) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE 9";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_TWO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_10) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 10";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_SEVEN;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_11) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 11";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_FOUR;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_SIX;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_12) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 12";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_NINE;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_13) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 13";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_N_TWO;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_14) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 14";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_SEVEN;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_N_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_15) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FIXED_DIVIDE_CASE 15";
+        -------------------------------------------------------------------
+
+        SCALAR_FIXED_DIVIDER_DATA_A_IN <= FIXED_P_FOUR;
+        SCALAR_FIXED_DIVIDER_DATA_B_IN <= FIXED_P_SIX;
       end if;
 
       wait for WORKING;
@@ -531,7 +952,7 @@ begin
     end if;
 
     -------------------------------------------------------------------
-    -- VECTOR- FIXED
+    -- VECTOR-FIXED
     -------------------------------------------------------------------
 
     if (STIMULUS_NTM_VECTOR_FIXED_ADDER_TEST) then
@@ -883,7 +1304,7 @@ begin
     end if;
 
     -------------------------------------------------------------------
-    -- MATRIX- FIXED
+    -- MATRIX-FIXED
     -------------------------------------------------------------------
 
     if (STIMULUS_NTM_MATRIX_FIXED_ADDER_TEST) then
@@ -1358,7 +1779,7 @@ begin
     end if;
 
     -------------------------------------------------------------------
-    -- TENSOR- FIXED
+    -- TENSOR-FIXED
     -------------------------------------------------------------------
 
     if (STIMULUS_NTM_TENSOR_FIXED_ADDER_TEST) then

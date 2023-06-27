@@ -125,7 +125,7 @@ architecture accelerator_algebra_testbench_architecture of accelerator_algebra_t
   -- Constants
   ------------------------------------------------------------------------------
 
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -1373,7 +1373,7 @@ begin
         assert data_out_dot_product = data_out_dot_product_model
           report "DOT PROCUCT: CALCULATED = " & to_string(data_out_dot_product) & "; CORRECT = " & to_string(data_out_dot_product_model)
           severity error;
-      elsif (data_out_enable_dot_product = '1' and not data_out_dot_product = EMPTY) then
+      elsif (data_out_enable_dot_product = '1' and not data_out_dot_product = MAX_POSITIVE) then
         assert data_out_dot_product = data_out_dot_product_model
           report "DOT PROCUCT: CALCULATED = " & to_string(data_out_dot_product) & "; CORRECT = " & to_string(data_out_dot_product_model)
           severity error;
@@ -1383,7 +1383,7 @@ begin
         assert data_out_vector_convolution = data_out_vector_convolution_model
           report "VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_vector_convolution) & "; CORRECT = " & to_string(data_out_vector_convolution_model)
           severity error;
-      elsif (data_out_enable_vector_convolution = '1' and not data_out_vector_convolution = EMPTY) then
+      elsif (data_out_enable_vector_convolution = '1' and not data_out_vector_convolution = MAX_POSITIVE) then
         assert data_out_vector_convolution = data_out_vector_convolution_model
           report "VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_vector_convolution) & "; CORRECT = " & to_string(data_out_vector_convolution_model)
           severity error;
@@ -1393,7 +1393,7 @@ begin
         assert data_out_vector_cosine_similarity = data_out_vector_cosine_similarity_model
           report "VECTOR COSINE SIMILARITY: CALCULATED = " & to_string(data_out_vector_cosine_similarity) & "; CORRECT = " & to_string(data_out_vector_cosine_similarity_model)
           severity error;
-      elsif (data_out_enable_vector_cosine_similarity = '1' and not data_out_vector_cosine_similarity = EMPTY) then
+      elsif (data_out_enable_vector_cosine_similarity = '1' and not data_out_vector_cosine_similarity = MAX_POSITIVE) then
         assert data_out_vector_cosine_similarity = data_out_vector_cosine_similarity_model
           report "VECTOR COSINE SIMILARITY: CALCULATED = " & to_string(data_out_vector_cosine_similarity) & "; CORRECT = " & to_string(data_out_vector_cosine_similarity_model)
           severity error;
@@ -1403,7 +1403,7 @@ begin
         assert data_out_vector_multiplication = data_out_vector_multiplication_model
           report "VECTOR MULTIPLICATION: CALCULATED = " & to_string(data_out_vector_multiplication) & "; CORRECT = " & to_string(data_out_vector_multiplication_model)
           severity error;
-      elsif (data_out_enable_vector_multiplication = '1' and not data_out_vector_multiplication = EMPTY) then
+      elsif (data_out_enable_vector_multiplication = '1' and not data_out_vector_multiplication = MAX_POSITIVE) then
         assert data_out_vector_multiplication = data_out_vector_multiplication_model
           report "VECTOR MULTIPLICATION: CALCULATED = " & to_string(data_out_vector_multiplication) & "; CORRECT = " & to_string(data_out_vector_multiplication_model)
           severity error;
@@ -1413,7 +1413,7 @@ begin
         assert data_out_vector_summation = data_out_vector_summation_model
           report "VECTOR SUMMATION: CALCULATED = " & to_string(data_out_vector_summation) & "; CORRECT = " & to_string(data_out_vector_summation_model)
           severity error;
-      elsif (data_out_enable_vector_summation = '1' and not data_out_vector_summation = EMPTY) then
+      elsif (data_out_enable_vector_summation = '1' and not data_out_vector_summation = MAX_POSITIVE) then
         assert data_out_vector_summation = data_out_vector_summation_model
           report "VECTOR SUMMATION: CALCULATED = " & to_string(data_out_vector_summation) & "; CORRECT = " & to_string(data_out_vector_summation_model)
           severity error;
@@ -1423,7 +1423,7 @@ begin
         assert data_out_vector_module = data_out_vector_module_model
           report "VECTOR MODULE: CALCULATED = " & to_string(data_out_vector_module) & "; CORRECT = " & to_string(data_out_vector_module_model)
           severity error;
-      elsif (data_out_enable_vector_module = '1' and not data_out_vector_module = EMPTY) then
+      elsif (data_out_enable_vector_module = '1' and not data_out_vector_module = MAX_POSITIVE) then
         assert data_out_vector_module = data_out_vector_module_model
           report "VECTOR MODULE: CALCULATED = " & to_string(data_out_vector_module) & "; CORRECT = " & to_string(data_out_vector_module_model)
           severity error;
@@ -1848,11 +1848,11 @@ begin
         assert data_out_matrix_convolution = data_out_matrix_convolution_model
           report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(data_out_matrix_convolution_model)
           severity error;
-      elsif (data_out_i_enable_matrix_convolution = '1' and data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = EMPTY) then
+      elsif (data_out_i_enable_matrix_convolution = '1' and data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = MAX_POSITIVE) then
         assert data_out_matrix_convolution = data_out_matrix_convolution_model
           report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(data_out_matrix_convolution_model)
           severity error;
-      elsif (data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = EMPTY) then
+      elsif (data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = MAX_POSITIVE) then
         assert data_out_matrix_convolution = data_out_matrix_convolution_model
           report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(data_out_matrix_convolution_model)
           severity error;
@@ -1862,11 +1862,11 @@ begin
         assert data_out_matrix_inverse = data_out_matrix_inverse_model
           report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
-      elsif (data_out_i_enable_matrix_inverse = '1' and data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = EMPTY) then
+      elsif (data_out_i_enable_matrix_inverse = '1' and data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = MAX_POSITIVE) then
         assert data_out_matrix_inverse = data_out_matrix_inverse_model
           report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
-      elsif (data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = EMPTY) then
+      elsif (data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = MAX_POSITIVE) then
         assert data_out_matrix_inverse = data_out_matrix_inverse_model
           report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
@@ -1876,11 +1876,11 @@ begin
         assert data_out_matrix_multiplication = data_out_matrix_multiplication_model
           report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
-      elsif (data_out_i_enable_matrix_multiplication = '1' and data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = EMPTY) then
+      elsif (data_out_i_enable_matrix_multiplication = '1' and data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = MAX_POSITIVE) then
         assert data_out_matrix_multiplication = data_out_matrix_multiplication_model
           report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
-      elsif (data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = EMPTY) then
+      elsif (data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = MAX_POSITIVE) then
         assert data_out_matrix_multiplication = data_out_matrix_multiplication_model
           report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
           severity error;
@@ -1890,11 +1890,11 @@ begin
         assert data_out_matrix_product = data_out_matrix_product_model
           report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(data_out_matrix_product_model)
           severity error;
-      elsif (data_out_i_enable_matrix_product = '1' and data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = EMPTY) then
+      elsif (data_out_i_enable_matrix_product = '1' and data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = MAX_POSITIVE) then
         assert data_out_matrix_product = data_out_matrix_product_model
           report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(data_out_matrix_product_model)
           severity error;
-      elsif (data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = EMPTY) then
+      elsif (data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = MAX_POSITIVE) then
         assert data_out_matrix_product = data_out_matrix_product_model
           report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(data_out_matrix_product_model)
           severity error;
@@ -1904,11 +1904,11 @@ begin
         assert data_out_matrix_summation = data_out_matrix_summation_model
           report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(data_out_matrix_summation_model)
           severity error;
-      elsif (data_out_i_enable_matrix_summation = '1' and data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = EMPTY) then
+      elsif (data_out_i_enable_matrix_summation = '1' and data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = MAX_POSITIVE) then
         assert data_out_matrix_summation = data_out_matrix_summation_model
           report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(data_out_matrix_summation_model)
           severity error;
-      elsif (data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = EMPTY) then
+      elsif (data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = MAX_POSITIVE) then
         assert data_out_matrix_summation = data_out_matrix_summation_model
           report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(data_out_matrix_summation_model)
           severity error;
@@ -1918,11 +1918,11 @@ begin
         assert data_out_matrix_transpose = data_out_matrix_transpose_model
           report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(data_out_matrix_transpose_model)
           severity error;
-      elsif (data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = EMPTY) then
+      elsif (data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = MAX_POSITIVE) then
         assert data_out_matrix_transpose = data_out_matrix_transpose_model
           report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(data_out_matrix_transpose_model)
           severity error;
-      elsif (data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = EMPTY) then
+      elsif (data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = MAX_POSITIVE) then
         assert data_out_matrix_transpose = data_out_matrix_transpose_model
           report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(data_out_matrix_transpose_model)
           severity error;
@@ -2249,15 +2249,15 @@ begin
         assert data_out_tensor_convolution = data_out_tensor_convolution_model
           report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(data_out_tensor_convolution_model)
           severity error;
-      elsif (data_out_i_enable_tensor_convolution = '1' and data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+      elsif (data_out_i_enable_tensor_convolution = '1' and data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = MAX_POSITIVE) then
         assert data_out_tensor_convolution = data_out_tensor_convolution_model
           report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(data_out_tensor_convolution_model)
           severity error;
-      elsif (data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+      elsif (data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = MAX_POSITIVE) then
         assert data_out_tensor_convolution = data_out_tensor_convolution_model
           report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(data_out_tensor_convolution_model)
           severity error;
-      elsif (data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+      elsif (data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = MAX_POSITIVE) then
         assert data_out_tensor_convolution = data_out_tensor_convolution_model
           report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(data_out_tensor_convolution_model)
           severity error;
@@ -2269,15 +2269,15 @@ begin
         assert data_out_tensor_inverse = data_out_tensor_inverse_model
           report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(data_out_tensor_inverse_model)
           severity error;
-      elsif (data_out_i_enable_tensor_inverse = '1' and data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+      elsif (data_out_i_enable_tensor_inverse = '1' and data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = MAX_POSITIVE) then
         assert data_out_tensor_inverse = data_out_tensor_inverse_model
           report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(data_out_tensor_inverse_model)
           severity error;
-      elsif (data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+      elsif (data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = MAX_POSITIVE) then
         assert data_out_tensor_inverse = data_out_tensor_inverse_model
           report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(data_out_tensor_inverse_model)
           severity error;
-      elsif (data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+      elsif (data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = MAX_POSITIVE) then
         assert data_out_tensor_inverse = data_out_tensor_inverse_model
           report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(data_out_tensor_inverse_model)
           severity error;
@@ -2289,15 +2289,15 @@ begin
         assert data_out_tensor_product = data_out_tensor_product_model
           report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(data_out_tensor_product_model)
           severity error;
-      elsif (data_out_i_enable_tensor_product = '1' and data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+      elsif (data_out_i_enable_tensor_product = '1' and data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = MAX_POSITIVE) then
         assert data_out_tensor_product = data_out_tensor_product_model
           report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(data_out_tensor_product_model)
           severity error;
-      elsif (data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+      elsif (data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = MAX_POSITIVE) then
         assert data_out_tensor_product = data_out_tensor_product_model
           report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(data_out_tensor_product_model)
           severity error;
-      elsif (data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+      elsif (data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = MAX_POSITIVE) then
         assert data_out_tensor_product = data_out_tensor_product_model
           report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(data_out_tensor_product_model)
           severity error;
@@ -2309,15 +2309,15 @@ begin
         assert data_out_tensor_transpose = data_out_tensor_transpose_model
           report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(data_out_tensor_transpose_model)
           severity error;
-      elsif (data_out_i_enable_tensor_transpose = '1' and data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+      elsif (data_out_i_enable_tensor_transpose = '1' and data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = MAX_POSITIVE) then
         assert data_out_tensor_transpose = data_out_tensor_transpose_model
           report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(data_out_tensor_transpose_model)
           severity error;
-      elsif (data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+      elsif (data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = MAX_POSITIVE) then
         assert data_out_tensor_transpose = data_out_tensor_transpose_model
           report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(data_out_tensor_transpose_model)
           severity error;
-      elsif (data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+      elsif (data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = MAX_POSITIVE) then
         assert data_out_tensor_transpose = data_out_tensor_transpose_model
           report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(data_out_tensor_transpose_model)
           severity error;

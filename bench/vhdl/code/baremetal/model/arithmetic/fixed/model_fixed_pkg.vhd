@@ -145,17 +145,9 @@ package model_fixed_pkg is
   signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_TEST : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
-
   signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_1 : boolean := false;

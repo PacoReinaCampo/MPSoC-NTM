@@ -174,10 +174,8 @@ architecture accelerator_top_stimulus_architecture of accelerator_top_stimulus i
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
+  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -257,14 +255,14 @@ begin
         ACCELERATOR_TOP_SIZE_L_IN <= ONE_CONTROL;
         ACCELERATOR_TOP_SIZE_R_IN <= ONE_CONTROL;
 
-        ACCELERATOR_TOP_W_IN <= EMPTY;
-        ACCELERATOR_TOP_K_IN <= EMPTY;
-        ACCELERATOR_TOP_U_IN <= EMPTY;
-        ACCELERATOR_TOP_V_IN <= EMPTY;
-        ACCELERATOR_TOP_D_IN <= EMPTY;
-        ACCELERATOR_TOP_B_IN <= EMPTY;
+        ACCELERATOR_TOP_W_IN <= MAX_POSITIVE;
+        ACCELERATOR_TOP_K_IN <= MAX_POSITIVE;
+        ACCELERATOR_TOP_U_IN <= MAX_POSITIVE;
+        ACCELERATOR_TOP_V_IN <= MAX_POSITIVE;
+        ACCELERATOR_TOP_D_IN <= MAX_POSITIVE;
+        ACCELERATOR_TOP_B_IN <= MAX_POSITIVE;
 
-        ACCELERATOR_TOP_X_IN <= EMPTY;
+        ACCELERATOR_TOP_X_IN <= MAX_POSITIVE;
       end if;
 
       -------------------------------------------------------------------

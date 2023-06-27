@@ -1,11 +1,11 @@
 code
 ├── architecture
 │   ├── mpsoc
-│   │   └── ntm_mpsoc.vhd
+│   │   └── model_mpsoc.vhd
 │   ├── pu
-│   │   └── ntm_pu.vhd
+│   │   └── model_pu.vhd
 │   └── soc
-│       └── ntm_soc.vhd
+│       └── model_soc.vhd
 ├── arithmetic
 │   ├── fixed
 │   │   ├── matrix
@@ -163,25 +163,19 @@ code
 │       │   ├── model_matrix_cosh_function.vhd
 │       │   ├── model_matrix_exponentiator_function.vhd
 │       │   ├── model_matrix_logarithm_function.vhd
-│       │   ├── model_matrix_power_function.vhd
 │       │   ├── model_matrix_sinh_function.vhd
-│       │   ├── model_matrix_sqrt_function.vhd
 │       │   └── model_matrix_tanh_function.vhd
 │       ├── scalar
 │       │   ├── model_scalar_cosh_function.vhd
 │       │   ├── model_scalar_exponentiator_function.vhd
 │       │   ├── model_scalar_logarithm_function.vhd
-│       │   ├── model_scalar_power_function.vhd
 │       │   ├── model_scalar_sinh_function.vhd
-│       │   ├── model_scalar_sqrt_function.vhd
 │       │   └── model_scalar_tanh_function.vhd
 │       └── vector
 │           ├── model_vector_cosh_function.vhd
 │           ├── model_vector_exponentiator_function.vhd
 │           ├── model_vector_logarithm_function.vhd
-│           ├── model_vector_power_function.vhd
 │           ├── model_vector_sinh_function.vhd
-│           ├── model_vector_sqrt_function.vhd
 │           └── model_vector_tanh_function.vhd
 ├── ntm
 │   ├── memory
@@ -227,4 +221,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-65 directories, 162 files
+65 directories, 156 files

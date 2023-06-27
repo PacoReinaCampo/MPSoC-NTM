@@ -163,25 +163,19 @@ code
 │       │   ├── accelerator_matrix_cosh_function.vhd
 │       │   ├── accelerator_matrix_exponentiator_function.vhd
 │       │   ├── accelerator_matrix_logarithm_function.vhd
-│       │   ├── accelerator_matrix_power_function.vhd
 │       │   ├── accelerator_matrix_sinh_function.vhd
-│       │   ├── accelerator_matrix_sqrt_function.vhd
 │       │   └── accelerator_matrix_tanh_function.vhd
 │       ├── scalar
 │       │   ├── accelerator_scalar_cosh_function.vhd
 │       │   ├── accelerator_scalar_exponentiator_function.vhd
 │       │   ├── accelerator_scalar_logarithm_function.vhd
-│       │   ├── accelerator_scalar_power_function.vhd
 │       │   ├── accelerator_scalar_sinh_function.vhd
-│       │   ├── accelerator_scalar_sqrt_function.vhd
 │       │   └── accelerator_scalar_tanh_function.vhd
 │       └── vector
 │           ├── accelerator_vector_cosh_function.vhd
 │           ├── accelerator_vector_exponentiator_function.vhd
 │           ├── accelerator_vector_logarithm_function.vhd
-│           ├── accelerator_vector_power_function.vhd
 │           ├── accelerator_vector_sinh_function.vhd
-│           ├── accelerator_vector_sqrt_function.vhd
 │           └── accelerator_vector_tanh_function.vhd
 ├── ntm
 │   ├── memory
@@ -227,4 +221,4 @@ code
         ├── accelerator_input_trainer.vhd
         └── accelerator_output_trainer.vhd
 
-65 directories, 162 files
+65 directories, 156 files

@@ -1,11 +1,11 @@
 code
 ├── architecture
 │   ├── mpsoc
-│   │   └── ntm_mpsoc.sv
+│   │   └── model_mpsoc.sv
 │   ├── pu
-│   │   └── ntm_pu.sv
+│   │   └── model_pu.sv
 │   └── soc
-│       └── ntm_soc.sv
+│       └── model_soc.sv
 ├── arithmetic
 │   ├── fixed
 │   │   ├── matrix
@@ -163,25 +163,19 @@ code
 │       │   ├── model_matrix_cosh_function.sv
 │       │   ├── model_matrix_exponentiator_function.sv
 │       │   ├── model_matrix_logarithm_function.sv
-│       │   ├── model_matrix_power_function.sv
 │       │   ├── model_matrix_sinh_function.sv
-│       │   ├── model_matrix_sqrt_function.sv
 │       │   └── model_matrix_tanh_function.sv
 │       ├── scalar
 │       │   ├── model_scalar_cosh_function.sv
 │       │   ├── model_scalar_exponentiator_function.sv
 │       │   ├── model_scalar_logarithm_function.sv
-│       │   ├── model_scalar_power_function.sv
 │       │   ├── model_scalar_sinh_function.sv
-│       │   ├── model_scalar_sqrt_function.sv
 │       │   └── model_scalar_tanh_function.sv
 │       └── vector
 │           ├── model_vector_cosh_function.sv
 │           ├── model_vector_exponentiator_function.sv
 │           ├── model_vector_logarithm_function.sv
-│           ├── model_vector_power_function.sv
 │           ├── model_vector_sinh_function.sv
-│           ├── model_vector_sqrt_function.sv
 │           └── model_vector_tanh_function.sv
 ├── ntm
 │   ├── memory
@@ -226,4 +220,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-65 directories, 161 files
+65 directories, 155 files

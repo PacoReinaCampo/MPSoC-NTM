@@ -348,10 +348,8 @@ architecture model_integer_stimulus_architecture of model_integer_stimulus is
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
+  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -458,8 +456,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_ADDER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_INTEGER_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= MAX_POSITIVE;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1) then
@@ -468,8 +466,68 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_ADDER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_INTEGER_ADDER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 2        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= MAX_POSITIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 3        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 4        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= INT_P_NINE;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= INT_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 5        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= INT_P_TWO;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= INT_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 6        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= INT_N_SEVEN;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= INT_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 7        ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= INT_N_FOUR;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= INT_N_SIX;
       end if;
 
       wait for WORKING;
@@ -488,8 +546,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= MAX_POSITIVE;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1) then
@@ -498,8 +556,68 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 2   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= MAX_POSITIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 3   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 4   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= INT_P_NINE;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= INT_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 5   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= INT_P_TWO;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= INT_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 6   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= INT_N_SEVEN;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= INT_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 7   ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= INT_N_FOUR;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= INT_N_SIX;
       end if;
 
       wait for WORKING;
@@ -518,8 +636,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 0      ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_A;
-        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= MAX_POSITIVE;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1) then
@@ -528,8 +646,68 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 1      ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_B;
-        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= MAX_POSITIVE;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_2) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 2      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= MAX_POSITIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_3) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 3      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= MIN_NEGATIVE;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= MIN_NEGATIVE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_4) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 4      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= INT_P_NINE;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= INT_P_ONE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_5) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 5      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= INT_P_TWO;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= INT_N_EIGHT;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_6) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 6      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= INT_N_SEVEN;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= INT_P_THREE;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_7) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 7      ";
+        -------------------------------------------------------------------
+
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= INT_N_FOUR;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= INT_N_SIX;
       end if;
 
       wait for WORKING;
