@@ -96,7 +96,7 @@ architecture accelerator_function_testbench_architecture of accelerator_function
   -- Constants
   ------------------------------------------------------------------------------
 
-  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -567,7 +567,7 @@ begin
         assert data_out_vector_logistic = data_out_vector_logistic_model
           report "VECTOR LOGISTIC: CALCULATED = " & to_string(data_out_vector_logistic) & "; CORRECT = " & to_string(data_out_vector_logistic_model)
           severity error;
-      elsif (data_out_enable_vector_logistic = '1' and not data_out_vector_logistic = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_logistic = '1' and not data_out_vector_logistic = EMPTY) then
         assert data_out_vector_logistic = data_out_vector_logistic_model
           report "VECTOR LOGISTIC: CALCULATED = " & to_string(data_out_vector_logistic) & "; CORRECT = " & to_string(data_out_vector_logistic_model)
           severity error;
@@ -577,7 +577,7 @@ begin
         assert data_out_vector_oneplus = data_out_vector_oneplus_model
           report "VECTOR ONEPLUS: CALCULATED = " & to_string(data_out_vector_oneplus) & "; CORRECT = " & to_string(data_out_vector_oneplus_model)
           severity error;
-      elsif (data_out_enable_vector_oneplus = '1' and not data_out_vector_oneplus = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_oneplus = '1' and not data_out_vector_oneplus = EMPTY) then
         assert data_out_vector_oneplus = data_out_vector_oneplus_model
           report "VECTOR ONEPLUS: CALCULATED = " & to_string(data_out_vector_oneplus) & "; CORRECT = " & to_string(data_out_vector_oneplus_model)
           severity error;
@@ -710,11 +710,11 @@ begin
         assert data_out_matrix_logistic = data_out_matrix_logistic_model
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(data_out_matrix_logistic_model)
           severity error;
-      elsif (data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = EMPTY) then
         assert data_out_matrix_logistic = data_out_matrix_logistic_model
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(data_out_matrix_logistic_model)
           severity error;
-      elsif (data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = EMPTY) then
         assert data_out_matrix_logistic = data_out_matrix_logistic_model
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(data_out_matrix_logistic_model)
           severity error;
@@ -724,11 +724,11 @@ begin
         assert data_out_matrix_oneplus = data_out_matrix_oneplus_model
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(data_out_matrix_oneplus_model)
           severity error;
-      elsif (data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = EMPTY) then
         assert data_out_matrix_oneplus = data_out_matrix_oneplus_model
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(data_out_matrix_oneplus_model)
           severity error;
-      elsif (data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = EMPTY) then
         assert data_out_matrix_oneplus = data_out_matrix_oneplus_model
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(data_out_matrix_oneplus_model)
           severity error;

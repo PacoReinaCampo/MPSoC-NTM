@@ -124,7 +124,7 @@ architecture accelerator_series_testbench_architecture of accelerator_series_tes
   -- Constants
   ------------------------------------------------------------------------------
 
-  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -1178,7 +1178,7 @@ begin
         assert data_out_vector_cosh = data_out_vector_cosh_model
           report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
-      elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = EMPTY) then
         assert data_out_vector_cosh = data_out_vector_cosh_model
           report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
@@ -1188,7 +1188,7 @@ begin
         assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
           report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
-      elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = EMPTY) then
         assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
           report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
@@ -1198,7 +1198,7 @@ begin
         assert data_out_vector_logarithm = data_out_vector_logarithm_model
           report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
-      elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = EMPTY) then
         assert data_out_vector_logarithm = data_out_vector_logarithm_model
           report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
@@ -1208,7 +1208,7 @@ begin
         assert data_out_vector_sinh = data_out_vector_sinh_model
           report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
-      elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = EMPTY) then
         assert data_out_vector_sinh = data_out_vector_sinh_model
           report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
@@ -1218,7 +1218,7 @@ begin
         assert data_out_vector_tanh = data_out_vector_tanh_model
           report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
-      elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = MAX_POSITIVE) then
+      elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = EMPTY) then
         assert data_out_vector_tanh = data_out_vector_tanh_model
           report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
@@ -1522,11 +1522,11 @@ begin
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
@@ -1536,11 +1536,11 @@ begin
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
@@ -1550,11 +1550,11 @@ begin
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
-      elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
@@ -1564,11 +1564,11 @@ begin
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
@@ -1578,11 +1578,11 @@ begin
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
-      elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = MAX_POSITIVE) then
+      elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
-      elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = MAX_POSITIVE) then
+      elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;

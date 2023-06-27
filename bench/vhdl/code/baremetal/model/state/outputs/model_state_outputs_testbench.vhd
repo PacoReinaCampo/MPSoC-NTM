@@ -88,7 +88,7 @@ architecture model_state_outputs_testbench_architecture of model_state_outputs_t
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
