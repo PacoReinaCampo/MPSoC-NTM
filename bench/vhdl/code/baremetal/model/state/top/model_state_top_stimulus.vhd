@@ -242,7 +242,7 @@ begin
         NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
         NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        NTM_STATE_TOP_DATA_K_IN <= FULL;
+        NTM_STATE_TOP_DATA_K_IN <= MAX_POSITIVE;
       end if;
 
       wait for WORKING;

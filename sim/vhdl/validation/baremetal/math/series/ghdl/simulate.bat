@@ -19,25 +19,19 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/float/matrix/model_ma
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_power_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_sinh_function.vhdd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/scalar/model_scalar_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_power_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_sinh_function.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/vector/model_vector_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_power_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_sinh_function.vhd
-ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/model/math/series/model_series_pkg.vhd

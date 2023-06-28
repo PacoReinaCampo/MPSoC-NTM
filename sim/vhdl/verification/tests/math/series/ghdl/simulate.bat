@@ -19,25 +19,19 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/float/matrix/accelerato
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_power_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_sinh_function.vhdd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_power_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_sinh_function.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_cosh_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_exponentiator_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_logarithm_function.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_power_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_sinh_function.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_sqrt_function.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_tanh_function.vhd
 
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/series/accelerator_series_pkg.vhd

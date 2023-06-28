@@ -154,7 +154,8 @@ architecture accelerator_tensor_matrix_convolution_architecture of accelerator_t
   signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_adder : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -165,7 +166,8 @@ architecture accelerator_tensor_matrix_convolution_architecture of accelerator_t
   signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
 
 begin
 
@@ -691,7 +693,8 @@ begin
       DATA_A_IN => data_a_in_scalar_float_adder,
       DATA_B_IN => data_b_in_scalar_float_adder,
 
-      DATA_OUT => data_out_scalar_float_adder
+      DATA_OUT     => data_out_scalar_float_adder,
+      OVERFLOW_OUT => overflow_out_scalar_float_adder
       );
 
   -- SCALAR MULTIPLIER
@@ -713,7 +716,8 @@ begin
       DATA_A_IN => data_a_in_scalar_float_multiplier,
       DATA_B_IN => data_b_in_scalar_float_multiplier,
 
-      DATA_OUT => data_out_scalar_float_multiplier
+      DATA_OUT     => data_out_scalar_float_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_float_multiplier
       );
 
 end architecture;

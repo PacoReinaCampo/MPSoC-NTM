@@ -352,7 +352,7 @@ begin
         NTM_MATRIX_STATE_SIZE_D_I_IN <= THREE_CONTROL;
         NTM_MATRIX_STATE_SIZE_D_J_IN <= THREE_CONTROL;
 
-        NTM_MATRIX_STATE_DATA_K_IN <= FULL;
+        NTM_MATRIX_STATE_DATA_K_IN <= MAX_POSITIVE;
       end if;
 
       wait for WORKING;

@@ -79,42 +79,54 @@ entity model_algebra_testbench is
     ENABLE_NTM_VECTOR_MODULE_CASE_1            : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_TEST        : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_TEST        : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_TEST        : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_TEST            : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_TEST            : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_TEST          : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_TEST          : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_CASE_0        : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_0        : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_CASE_0            : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_0            : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_CASE_1        : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_1        : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_CASE_1            : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_1            : boolean := false;
+    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_CONVOLUTION_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
+    ENABLE_NTM_TENSOR_CONVOLUTION_TEST        : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_TEST            : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_TEST            : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST          : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
+    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_CASE_0            : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_0            : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false
+    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_CASE_1            : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_1            : boolean := false;
+    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1          : boolean := false
     );
 end model_algebra_testbench;
 
@@ -259,6 +271,28 @@ architecture model_algebra_testbench_architecture of model_algebra_testbench is
   signal data_b_in_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- MATRIX VECTOR CONVOLUTION
+  -- CONTROL
+  signal start_matrix_vector_convolution : std_logic;
+  signal ready_matrix_vector_convolution : std_logic;
+
+  signal data_a_in_i_enable_matrix_vector_convolution : std_logic;
+  signal data_a_in_j_enable_matrix_vector_convolution : std_logic;
+  signal data_b_in_enable_matrix_vector_convolution   : std_logic;
+
+  signal data_i_enable_matrix_vector_convolution : std_logic;
+  signal data_j_enable_matrix_vector_convolution : std_logic;
+
+  signal data_out_enable_matrix_vector_convolution : std_logic;
+
+  -- DATA
+  signal size_a_i_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_matrix_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX INVERSE
   -- CONTROL
   signal start_matrix_inverse : std_logic;
@@ -326,6 +360,28 @@ architecture model_algebra_testbench_architecture of model_algebra_testbench is
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX VECTOR PRODUCT
+  -- CONTROL
+  signal start_matrix_vector_product : std_logic;
+  signal ready_matrix_vector_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_vector_product : std_logic;
+  signal data_a_in_j_enable_matrix_vector_product : std_logic;
+  signal data_b_in_enable_matrix_vector_product   : std_logic;
+
+  signal data_i_enable_matrix_vector_product : std_logic;
+  signal data_j_enable_matrix_vector_product : std_logic;
+
+  signal data_out_enable_matrix_vector_product : std_logic;
+
+  -- DATA
+  signal size_a_i_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_vector_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_matrix_vector_product   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_vector_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX SUMMATION
   -- CONTROL
@@ -401,6 +457,34 @@ architecture model_algebra_testbench_architecture of model_algebra_testbench is
   signal data_b_in_tensor_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- TENSOR MATRIX CONVOLUTION
+  -- CONTROL
+  signal start_tensor_matrix_convolution : std_logic;
+  signal ready_tensor_matrix_convolution : std_logic;
+
+  signal data_a_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_k_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_j_enable_tensor_matrix_convolution : std_logic;
+
+  signal data_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_k_enable_tensor_matrix_convolution : std_logic;
+
+  signal data_out_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_out_j_enable_tensor_matrix_convolution : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- TENSOR INVERSE
   -- CONTROL
   signal start_tensor_inverse : std_logic;
@@ -455,6 +539,34 @@ architecture model_algebra_testbench_architecture of model_algebra_testbench is
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR MATRIX PRODUCT
+  -- CONTROL
+  signal start_tensor_matrix_product : std_logic;
+  signal ready_tensor_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_tensor_matrix_product : std_logic;
+  signal data_a_in_j_enable_tensor_matrix_product : std_logic;
+  signal data_a_in_k_enable_tensor_matrix_product : std_logic;
+  signal data_b_in_i_enable_tensor_matrix_product : std_logic;
+  signal data_b_in_j_enable_tensor_matrix_product : std_logic;
+
+  signal data_i_enable_tensor_matrix_product : std_logic;
+  signal data_j_enable_tensor_matrix_product : std_logic;
+  signal data_k_enable_tensor_matrix_product : std_logic;
+
+  signal data_out_i_enable_tensor_matrix_product : std_logic;
+  signal data_out_j_enable_tensor_matrix_product : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR TRANSPOSE
   -- CONTROL
@@ -633,6 +745,28 @@ begin
       MATRIX_CONVOLUTION_DATA_B_IN   => data_b_in_matrix_convolution,
       MATRIX_CONVOLUTION_DATA_OUT    => data_out_matrix_convolution,
 
+      -- MATRIX VECTOR CONVOLUTION
+      -- CONTROL
+      MATRIX_VECTOR_CONVOLUTION_START => start_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_READY => ready_matrix_vector_convolution,
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_convolution,
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_I_ENABLE => data_i_enable_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_J_ENABLE => data_j_enable_matrix_vector_convolution,
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_matrix_vector_convolution,
+
+      -- DATA
+      MATRIX_VECTOR_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_SIZE_B_IN   => size_b_in_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN   => data_a_in_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_B_IN   => data_b_in_matrix_vector_convolution,
+      MATRIX_VECTOR_CONVOLUTION_DATA_OUT    => data_out_matrix_vector_convolution,
+
       -- MATRIX INVERSE
       -- CONTROL
       MATRIX_INVERSE_START => start_matrix_inverse,
@@ -700,6 +834,28 @@ begin
       MATRIX_PRODUCT_DATA_A_IN   => data_a_in_matrix_product,
       MATRIX_PRODUCT_DATA_B_IN   => data_b_in_matrix_product,
       MATRIX_PRODUCT_DATA_OUT    => data_out_matrix_product,
+
+      -- MATRIX VECTOR PRODUCT
+      -- CONTROL
+      MATRIX_VECTOR_PRODUCT_START => start_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_READY => ready_matrix_vector_product,
+
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
+
+      MATRIX_VECTOR_PRODUCT_DATA_I_ENABLE => data_i_enable_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_J_ENABLE => data_j_enable_matrix_vector_product,
+
+      MATRIX_VECTOR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
+
+      -- DATA
+      MATRIX_VECTOR_PRODUCT_SIZE_A_I_IN => size_a_i_in_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_SIZE_A_J_IN => size_a_j_in_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_SIZE_B_IN   => size_b_in_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN   => data_a_in_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_B_IN   => data_b_in_matrix_vector_product,
+      MATRIX_VECTOR_PRODUCT_DATA_OUT    => data_out_matrix_vector_product,
 
       -- MATRIX SUMMATION
       -- CONTROL
@@ -775,6 +931,34 @@ begin
       TENSOR_CONVOLUTION_DATA_B_IN   => data_b_in_tensor_convolution,
       TENSOR_CONVOLUTION_DATA_OUT    => data_out_tensor_convolution,
 
+      -- TENSOR MATRIX CONVOLUTION
+      -- CONTROL
+      TENSOR_MATRIX_CONVOLUTION_START => start_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_READY => ready_tensor_matrix_convolution,
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_convolution,
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_I_ENABLE => data_i_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_J_ENABLE => data_j_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_K_ENABLE => data_k_enable_tensor_matrix_convolution,
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_convolution,
+
+      -- DATA
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_K_IN => size_a_k_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_SIZE_B_I_IN => size_b_i_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_SIZE_B_J_IN => size_b_j_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN   => data_a_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN   => data_b_in_tensor_matrix_convolution,
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT    => data_out_tensor_matrix_convolution,
+
       -- TENSOR INVERSE
       -- CONTROL
       TENSOR_INVERSE_START => start_tensor_inverse,
@@ -829,6 +1013,34 @@ begin
       TENSOR_PRODUCT_DATA_A_IN   => data_a_in_tensor_product,
       TENSOR_PRODUCT_DATA_B_IN   => data_b_in_tensor_product,
       TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product,
+
+      -- TENSOR MATRIX PRODUCT
+      -- CONTROL
+      TENSOR_MATRIX_PRODUCT_START => start_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_READY => ready_tensor_matrix_product,
+
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_product,
+
+      TENSOR_MATRIX_PRODUCT_DATA_I_ENABLE => data_i_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_J_ENABLE => data_j_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_K_ENABLE => data_k_enable_tensor_matrix_product,
+
+      TENSOR_MATRIX_PRODUCT_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_product,
+
+      -- DATA
+      TENSOR_MATRIX_PRODUCT_SIZE_A_I_IN => size_a_i_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_SIZE_A_J_IN => size_a_j_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_SIZE_A_K_IN => size_a_k_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_SIZE_B_I_IN => size_b_i_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_SIZE_B_J_IN => size_b_j_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN   => data_a_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN   => data_b_in_tensor_matrix_product,
+      TENSOR_MATRIX_PRODUCT_DATA_OUT    => data_out_tensor_matrix_product,
 
       -- TENSOR TRANSPOSE
       -- CONTROL
@@ -1075,6 +1287,41 @@ begin
         );
   end generate model_matrix_convolution_test;
 
+  -- MATRIX VECTOR CONVOLUTION
+  model_matrix_vector_convolution_test : if (ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_TEST) generate
+    matrix_vector_convolution : model_matrix_vector_convolution
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_vector_convolution,
+        READY => ready_matrix_vector_convolution,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_convolution,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_convolution,
+        DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_convolution,
+
+        DATA_I_ENABLE => data_i_enable_matrix_vector_convolution,
+        DATA_J_ENABLE => data_j_enable_matrix_vector_convolution,
+
+        DATA_OUT_ENABLE => data_out_enable_matrix_vector_convolution,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_matrix_vector_convolution,
+        SIZE_A_J_IN => size_a_j_in_matrix_vector_convolution,
+        SIZE_B_IN   => size_b_in_matrix_vector_convolution,
+        DATA_A_IN   => data_a_in_matrix_vector_convolution,
+        DATA_B_IN   => data_b_in_matrix_vector_convolution,
+        DATA_OUT    => data_out_matrix_vector_convolution
+        );
+  end generate model_matrix_vector_convolution_test;
+
   -- MATRIX INVERSE
   model_matrix_inverse_test : if (ENABLE_NTM_MATRIX_INVERSE_TEST) generate
     matrix_inverse : model_matrix_inverse
@@ -1181,6 +1428,41 @@ begin
         DATA_OUT    => data_out_matrix_product
         );
   end generate model_matrix_product_test;
+
+  -- MATRIX VECTOR PRODUCT
+  model_matrix_vector_product_test : if (ENABLE_NTM_MATRIX_VECTOR_PRODUCT_TEST) generate
+    matrix_vector_product : model_matrix_vector_product
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_vector_product,
+        READY => ready_matrix_vector_product,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_product,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_product,
+        DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_product,
+
+        DATA_I_ENABLE => data_i_enable_matrix_vector_product,
+        DATA_J_ENABLE => data_j_enable_matrix_vector_product,
+
+        DATA_OUT_ENABLE => data_out_enable_matrix_vector_product,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_matrix_vector_product,
+        SIZE_A_J_IN => size_a_j_in_matrix_vector_product,
+        SIZE_B_IN   => size_b_in_matrix_vector_product,
+        DATA_A_IN   => data_a_in_matrix_vector_product,
+        DATA_B_IN   => data_b_in_matrix_vector_product,
+        DATA_OUT    => data_out_matrix_vector_product
+        );
+  end generate model_matrix_vector_product_test;
 
   -- MATRIX SUMMATION
   model_matrix_summation_test : if (ENABLE_NTM_MATRIX_SUMMATION_TEST) generate
@@ -1295,6 +1577,47 @@ begin
         );
   end generate model_tensor_convolution_test;
 
+  -- TENSOR MATRIX CONVOLUTION
+  model_tensor_matrix_convolution_test : if (ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_TEST) generate
+    tensor_matrix_convolution : model_tensor_matrix_convolution
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_matrix_convolution,
+        READY => ready_tensor_matrix_convolution,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_convolution,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_convolution,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_convolution,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_convolution,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_convolution,
+
+        DATA_I_ENABLE => data_i_enable_tensor_matrix_convolution,
+        DATA_J_ENABLE => data_j_enable_tensor_matrix_convolution,
+        DATA_K_ENABLE => data_k_enable_tensor_matrix_convolution,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_convolution,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_convolution,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_tensor_matrix_convolution,
+        SIZE_A_J_IN => size_a_j_in_tensor_matrix_convolution,
+        SIZE_A_K_IN => size_a_k_in_tensor_matrix_convolution,
+        SIZE_B_I_IN => size_b_i_in_tensor_matrix_convolution,
+        SIZE_B_J_IN => size_b_j_in_tensor_matrix_convolution,
+        DATA_A_IN   => data_a_in_tensor_matrix_convolution,
+        DATA_B_IN   => data_b_in_tensor_matrix_convolution,
+        DATA_OUT    => data_out_tensor_matrix_convolution
+        );
+  end generate model_tensor_matrix_convolution_test;
+
   -- TENSOR INVERSE
   model_tensor_inverse_test : if (ENABLE_NTM_TENSOR_INVERSE_TEST) generate
     tensor_inverse : model_tensor_inverse
@@ -1375,6 +1698,47 @@ begin
         DATA_OUT    => data_out_tensor_product
         );
   end generate model_tensor_product_test;
+
+  -- TENSOR MATRIX PRODUCT
+  model_tensor_matrix_product_test : if (ENABLE_NTM_TENSOR_MATRIX_PRODUCT_TEST) generate
+    tensor_matrix_product : model_tensor_matrix_product
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_matrix_product,
+        READY => ready_tensor_matrix_product,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_product,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_product,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_product,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_product,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_product,
+
+        DATA_I_ENABLE => data_i_enable_tensor_matrix_product,
+        DATA_J_ENABLE => data_j_enable_tensor_matrix_product,
+        DATA_K_ENABLE => data_k_enable_tensor_matrix_product,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_product,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_product,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_tensor_matrix_product,
+        SIZE_A_J_IN => size_a_j_in_tensor_matrix_product,
+        SIZE_A_K_IN => size_a_k_in_tensor_matrix_product,
+        SIZE_B_I_IN => size_b_i_in_tensor_matrix_product,
+        SIZE_B_J_IN => size_b_j_in_tensor_matrix_product,
+        DATA_A_IN   => data_a_in_tensor_matrix_product,
+        DATA_B_IN   => data_b_in_tensor_matrix_product,
+        DATA_OUT    => data_out_tensor_matrix_product
+        );
+  end generate model_tensor_matrix_product_test;
 
   -- TENSOR TRANSPOSE
   model_tensor_transpose_test : if (ENABLE_NTM_TENSOR_TRANSPOSE_TEST) generate

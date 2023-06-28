@@ -277,14 +277,14 @@ begin
         NTM_TOP_SIZE_L_IN <= ONE_CONTROL;
         NTM_TOP_SIZE_R_IN <= ONE_CONTROL;
 
-        NTM_TOP_W_IN <= FULL;
-        NTM_TOP_K_IN <= FULL;
-        NTM_TOP_U_IN <= FULL;
-        NTM_TOP_V_IN <= FULL;
-        NTM_TOP_D_IN <= FULL;
-        NTM_TOP_B_IN <= FULL;
+        NTM_TOP_W_IN <= MAX_POSITIVE;
+        NTM_TOP_K_IN <= MAX_POSITIVE;
+        NTM_TOP_U_IN <= MAX_POSITIVE;
+        NTM_TOP_V_IN <= MAX_POSITIVE;
+        NTM_TOP_D_IN <= MAX_POSITIVE;
+        NTM_TOP_B_IN <= MAX_POSITIVE;
 
-        NTM_TOP_X_IN <= FULL;
+        NTM_TOP_X_IN <= MAX_POSITIVE;
       end if;
 
       wait for WORKING;

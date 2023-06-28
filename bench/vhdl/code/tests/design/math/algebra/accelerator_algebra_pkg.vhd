@@ -160,42 +160,54 @@ package accelerator_algebra_pkg is
   signal STIMULUS_ACCELERATOR_VECTOR_MODULE_CASE_1            : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_TEST    : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_TEST        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_TEST : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_TEST        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_TEST      : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_TEST        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_TEST          : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_0    : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_0        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_0 : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_0        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_0      : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_1    : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_1        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_1 : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_1        : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_1      : boolean := false;
-  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST   : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST          : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1          : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -348,6 +360,28 @@ package accelerator_algebra_pkg is
       MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX VECTOR CONVOLUTION
+      -- CONTROL
+      MATRIX_VECTOR_CONVOLUTION_START : out std_logic;
+      MATRIX_VECTOR_CONVOLUTION_READY : in  std_logic;
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_VECTOR_CONVOLUTION_DATA_B_IN_ENABLE   : out std_logic;
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      MATRIX_VECTOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_VECTOR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_VECTOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_CONVOLUTION_SIZE_B_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_VECTOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_VECTOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- MATRIX INVERSE
       -- CONTROL
       MATRIX_INVERSE_START : out std_logic;
@@ -415,6 +449,28 @@ package accelerator_algebra_pkg is
       MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX VECTOR PRODUCT
+      -- CONTROL
+      MATRIX_VECTOR_PRODUCT_START : out std_logic;
+      MATRIX_VECTOR_PRODUCT_READY : in  std_logic;
+
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_VECTOR_PRODUCT_DATA_B_IN_ENABLE   : out std_logic;
+
+      MATRIX_VECTOR_PRODUCT_DATA_I_ENABLE : in std_logic;
+      MATRIX_VECTOR_PRODUCT_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_VECTOR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_VECTOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_PRODUCT_SIZE_B_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_VECTOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_VECTOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_VECTOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX SUMMATION
       -- CONTROL
@@ -490,6 +546,34 @@ package accelerator_algebra_pkg is
       TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- TENSOR MATRIX CONVOLUTION
+      -- CONTROL
+      TENSOR_MATRIX_CONVOLUTION_START : out std_logic;
+      TENSOR_MATRIX_CONVOLUTION_READY : in  std_logic;
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- TENSOR INVERSE
       -- CONTROL
       TENSOR_INVERSE_START : out std_logic;
@@ -544,6 +628,34 @@ package accelerator_algebra_pkg is
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR MATRIX PRODUCT
+      -- CONTROL
+      TENSOR_MATRIX_PRODUCT_START : out std_logic;
+      TENSOR_MATRIX_PRODUCT_READY : in  std_logic;
+
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
+
+      TENSOR_MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR TRANSPOSE
       -- CONTROL

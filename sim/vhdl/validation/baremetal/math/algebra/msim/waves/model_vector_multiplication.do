@@ -16,7 +16,6 @@ add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vec
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_IN_ENABLE
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_IN_LENGTH_ENABLE
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_ENABLE
-add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_LENGTH
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_IN
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/READY
 add wave -noupdate /model_algebra_testbench/model_vector_multiplication_test/vector_multiplication/DATA_OUT_ENABLE
