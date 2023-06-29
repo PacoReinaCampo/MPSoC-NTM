@@ -7,6 +7,23 @@ code
 │   └── soc
 │       └── accelerator_soc.vhd
 ├── arithmetic
+│   ├── definition
+│   │   ├── matrix
+│   │   │   ├── accelerator_matrix_float_adder.vhd
+│   │   │   ├── accelerator_matrix_float_divider.vhd
+│   │   │   └── accelerator_matrix_float_multiplier.vhd
+│   │   ├── scalar
+│   │   │   ├── accelerator_scalar_float_adder.vhd
+│   │   │   ├── accelerator_scalar_float_divider.vhd
+│   │   │   └── accelerator_scalar_float_multiplier.vhd
+│   │   ├── tensor
+│   │   │   ├── accelerator_tensor_float_adder.vhd
+│   │   │   ├── accelerator_tensor_float_divider.vhd
+│   │   │   └── accelerator_tensor_float_multiplier.vhd
+│   │   └── vector
+│   │       ├── accelerator_vector_float_adder.vhd
+│   │       ├── accelerator_vector_float_divider.vhd
+│   │       └── accelerator_vector_float_multiplier.vhd
 │   ├── fixed
 │   │   ├── matrix
 │   │   │   ├── accelerator_matrix_fixed_adder.vhd
@@ -221,4 +238,4 @@ code
         ├── accelerator_input_trainer.vhd
         └── accelerator_output_trainer.vhd
 
-65 directories, 156 files
+70 directories, 168 files

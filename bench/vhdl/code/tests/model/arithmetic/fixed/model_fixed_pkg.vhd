@@ -158,7 +158,7 @@ package model_fixed_pkg is
   signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_8      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_8 : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_8    : boolean := false;
-  
+
   signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_9      : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_9 : boolean := false;
   signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_9    : boolean := false;

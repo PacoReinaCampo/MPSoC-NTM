@@ -881,7 +881,7 @@ begin
           report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_vector_exponentiator))
           severity error;
       elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = ZERO_DATA) then
-          report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_vector_exponentiator))
+        report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(function_scalar_exponentiator(data_in_vector_exponentiator))
           severity error;
       end if;
 

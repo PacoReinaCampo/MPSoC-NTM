@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.accelerator_arithmetic_pkg.all;
 
 entity accelerator_scalar_float_multiplier is
@@ -75,35 +78,12 @@ architecture accelerator_scalar_float_multiplier_architecture of accelerator_sca
 
   type multiplier_ctrl_fsm is (
     STARTER_STATE,
-    OPERATION_STATE,
-    NORMALIZATION_STATE,
     ENDER_STATE
     );
 
   ------------------------------------------------------------------------------
   -- Constants
   ------------------------------------------------------------------------------
-
-  constant MANTISSA_SIZE : integer := 52;
-  constant EXPONENT_SIZE : integer := 11;
-
-  constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE-2 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE-1));
-  constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE-2 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE-1));
-
-  constant ZERO_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+1));
-  constant ONE_EXPONENT  : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+1));
-
-  constant MANTISSA_FULL  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '1');
-  constant MANTISSA_EMPTY : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '0');
-
-  constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
-  constant EXPONENT_EMPTY : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
-
-  constant ZERO_PRODUCT : std_logic_vector(2*MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, 2*MANTISSA_SIZE+2));
-
-  constant ZERO_PADDING : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+1));
-
-  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := "001111111111";
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -113,67 +93,28 @@ architecture accelerator_scalar_float_multiplier_architecture of accelerator_sca
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Data Internal
-  signal data_a_in_mantissa_int : std_logic_vector(MANTISSA_SIZE downto 0);
-  signal data_b_in_mantissa_int : std_logic_vector(MANTISSA_SIZE downto 0);
-
-  signal data_a_in_exponent_int : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal data_b_in_exponent_int : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-
-  signal data_a_in_sign_int : std_logic;
-  signal data_b_in_sign_int : std_logic;
-
-  signal data_out_mantissa_int : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-
-  signal data_out_exponent_int : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-
-  signal data_out_sign_int : std_logic;
-
-  signal data_mantissa_int : std_logic_vector(2*MANTISSA_SIZE+1 downto 0);
-  signal data_product_int  : std_logic_vector(2*MANTISSA_SIZE+1 downto 0);
-
-  signal data_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
-
-  signal data_sign_int : std_logic;
-
-  -- Control Internal
-  signal index_loop : integer;
+  signal data_a_int : real;
+  signal data_b_int : real;
 
 begin
 
-  -- Data Internal
-  data_a_in_mantissa_int <= '1' & DATA_A_IN(MANTISSA_SIZE-1 downto 0);
-  data_b_in_mantissa_int <= '1' & DATA_B_IN(MANTISSA_SIZE-1 downto 0);
-
-  data_a_in_exponent_int <= DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
-  data_b_in_exponent_int <= DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
-
-  data_a_in_sign_int <= DATA_A_IN(DATA_SIZE-1);
-  data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
-
   ctrl_fsm : process (CLK, RST)
   begin
-    if (RST = '0') then
+    if(RST = '0') then
       -- Data Outputs
+      DATA_OUT <= ZERO_DATA;
+
       OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
 
       -- Data Internal
-      data_out_mantissa_int <= MANTISSA_EMPTY;
-
-      data_out_exponent_int <= EXPONENT_EMPTY;
-
-      data_out_sign_int <= '0';
-
-      data_mantissa_int <= ZERO_PRODUCT;
-      data_product_int  <= ZERO_PRODUCT;
-
-      data_exponent_int <= ZERO_EXPONENT;
-
-      data_sign_int <= '0';
+      data_a_int <= ZERO_REAL;
+      data_b_int <= ZERO_REAL;
 
     elsif rising_edge(CLK) then
+
       case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>
           -- Control Outputs
@@ -181,96 +122,19 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            data_product_int  <= ZERO_PADDING & data_a_in_mantissa_int;
-            data_mantissa_int <= ZERO_PRODUCT;
+            data_a_int <= to_real(to_float(DATA_A_IN, float64'high, -float64'low));
+            data_b_int <= to_real(to_float(DATA_B_IN, float64'high, -float64'low));
 
-            data_sign_int <= data_a_in_sign_int xor data_b_in_sign_int;
-
-            -- Control Internal
-            index_loop <= 0;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= OPERATION_STATE;
-          end if;
-
-        when OPERATION_STATE =>
-
-          if (unsigned(data_a_in_exponent_int) = unsigned(EXPONENT_FULL) or unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_FULL)) then
-            -- Control Outputs
-            READY <= '1';
-
-            -- Data Internal
-            data_out_exponent_int <= EXPONENT_FULL;
-            data_out_mantissa_int <= MANTISSA_EMPTY;
-            data_out_sign_int     <= data_sign_int;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_STATE;
-          elsif (unsigned(data_a_in_exponent_int) = unsigned(EXPONENT_EMPTY) or unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_EMPTY)) then
-            -- Control Outputs
-            READY <= '1';
-
-            -- Data Internal
-            data_out_exponent_int <= EXPONENT_EMPTY;
-            data_out_mantissa_int <= MANTISSA_EMPTY;
-            data_out_sign_int     <= '0';
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- Data Internal
-            if data_b_in_mantissa_int(index_loop) = '1' then
-              data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int)+unsigned(data_product_int));
-            end if;
-
-            data_product_int <= data_product_int(2*MANTISSA_SIZE downto 0) & '0';
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= NORMALIZATION_STATE;
-          end if;
-
-        when NORMALIZATION_STATE =>
-
-          -- Data Internal
-          if (data_mantissa_int(2*MANTISSA_SIZE+1) = '1') then
-            data_out_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int(2*MANTISSA_SIZE downto MANTISSA_SIZE+1))+(unsigned(ZERO_MANTISSA) & data_mantissa_int(MANTISSA_SIZE)));
-
-            data_exponent_int <= std_logic_vector(('0' & unsigned(data_a_in_exponent_int))+('0' & unsigned(data_b_in_exponent_int))+unsigned(ONE_EXPONENT)-unsigned(BIAS_EXPONENT));
-          else
-            data_out_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int(2*MANTISSA_SIZE-1 downto MANTISSA_SIZE))+(unsigned(ZERO_MANTISSA) & data_mantissa_int(MANTISSA_SIZE-1)));
-
-            data_exponent_int <= std_logic_vector(('0' & unsigned(data_a_in_exponent_int))+('0' & unsigned(data_b_in_exponent_int))-unsigned(BIAS_EXPONENT));
-          end if;
-
-          if (index_loop = MANTISSA_SIZE) then
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            index_loop <= index_loop+1;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= OPERATION_STATE;
           end if;
 
         when ENDER_STATE =>
 
-          -- Data Internal
-          if (data_exponent_int(EXPONENT_SIZE downto EXPONENT_SIZE-1) = "10") then
-            -- Overflow
-            data_out_exponent_int <= EXPONENT_FULL;
-            data_out_mantissa_int <= MANTISSA_EMPTY;
-            data_out_sign_int     <= data_sign_int;
-          elsif (data_exponent_int(EXPONENT_SIZE downto EXPONENT_SIZE-1) = "11") then
-            -- Underflow
-            data_out_exponent_int <= EXPONENT_EMPTY;
-            data_out_mantissa_int <= MANTISSA_EMPTY;
-            data_out_sign_int     <= '0';
-          else
-            -- Normal
-            data_out_exponent_int <= data_exponent_int(EXPONENT_SIZE-1 downto 0);
-            data_out_sign_int     <= data_sign_int;
-          end if;
+          -- Data Outputs
+          DATA_OUT <= std_logic_vector(to_float(data_a_int*data_b_int, float64'high, -float64'low));
+
+          OVERFLOW_OUT <= '0';
 
           -- Control Outputs
           READY <= '1';
@@ -284,8 +148,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- Data Outputs
-  DATA_OUT <= data_out_sign_int & data_out_exponent_int & data_out_mantissa_int;
 
 end accelerator_scalar_float_multiplier_architecture;

@@ -2184,6 +2184,16 @@ begin
           severity error;
       end if;
 
+      if (ready_matrix_vector_convolution = '1' and data_out_enable_matrix_vector_convolution = '1') then
+        assert data_out_matrix_vector_convolution = data_out_matrix_vector_convolution_model
+          report "MATRIX VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_vector_convolution) & "; CORRECT = " & to_string(data_out_matrix_vector_convolution_model)
+          severity error;
+      elsif (data_out_enable_matrix_vector_convolution = '1' and not data_out_matrix_vector_convolution = EMPTY) then
+        assert data_out_matrix_vector_convolution = data_out_matrix_vector_convolution_model
+          report "MATRIX VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_vector_convolution) & "; CORRECT = " & to_string(data_out_matrix_vector_convolution_model)
+          severity error;
+      end if;
+
       if (ready_matrix_inverse = '1' and data_out_i_enable_matrix_inverse = '1' and data_out_j_enable_matrix_inverse = '1') then
         assert data_out_matrix_inverse = data_out_matrix_inverse_model
           report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(data_out_matrix_multiplication_model)
@@ -2223,6 +2233,16 @@ begin
       elsif (data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = EMPTY) then
         assert data_out_matrix_product = data_out_matrix_product_model
           report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(data_out_matrix_product_model)
+          severity error;
+      end if;
+
+      if (ready_matrix_vector_product = '1' and data_out_enable_matrix_vector_product = '1') then
+        assert data_out_matrix_vector_product = data_out_matrix_vector_product_model
+          report "MATRIX VECTOR PRODUCT: CALCULATED = " & to_string(data_out_matrix_vector_product) & "; CORRECT = " & to_string(data_out_matrix_vector_product_model)
+          severity error;
+      elsif (data_out_enable_matrix_vector_product = '1' and not data_out_matrix_vector_product = EMPTY) then
+        assert data_out_matrix_vector_product = data_out_matrix_vector_product_model
+          report "MATRIX VECTOR PRODUCT: CALCULATED = " & to_string(data_out_matrix_vector_product) & "; CORRECT = " & to_string(data_out_matrix_vector_product_model)
           severity error;
       end if;
 
@@ -2671,6 +2691,20 @@ begin
           severity error;
       end if;
 
+      if (ready_tensor_matrix_convolution = '1' and data_out_i_enable_tensor_matrix_convolution = '1' and data_out_j_enable_tensor_matrix_convolution = '1') then
+        assert data_out_tensor_matrix_convolution = data_out_tensor_matrix_convolution_model
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(data_out_tensor_matrix_convolution_model)
+          severity error;
+      elsif (data_out_i_enable_tensor_matrix_convolution = '1' and data_out_j_enable_tensor_matrix_convolution = '1' and not data_out_tensor_matrix_convolution = EMPTY) then
+        assert data_out_tensor_matrix_convolution = data_out_tensor_matrix_convolution_model
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(data_out_tensor_matrix_convolution_model)
+          severity error;
+      elsif (data_out_j_enable_tensor_matrix_convolution = '1' and not data_out_tensor_matrix_convolution = EMPTY) then
+        assert data_out_tensor_matrix_convolution = data_out_tensor_matrix_convolution_model
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(data_out_tensor_matrix_convolution_model)
+          severity error;
+      end if;
+
       if (ready_tensor_inverse = '1' and data_out_i_enable_tensor_inverse = '1' and data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1') then
         assert data_out_tensor_inverse = data_out_tensor_inverse_model
           report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(data_out_tensor_inverse_model)
@@ -2704,6 +2738,20 @@ begin
       elsif (data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
         assert data_out_tensor_product = data_out_tensor_product_model
           report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(data_out_tensor_product_model)
+          severity error;
+      end if;
+
+      if (ready_tensor_matrix_product = '1' and data_out_i_enable_tensor_matrix_product = '1' and data_out_j_enable_tensor_matrix_product = '1') then
+        assert data_out_tensor_matrix_product = data_out_tensor_matrix_product_model
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(data_out_tensor_matrix_product_model)
+          severity error;
+      elsif (data_out_i_enable_tensor_matrix_product = '1' and data_out_j_enable_tensor_matrix_product = '1' and not data_out_tensor_matrix_product = EMPTY) then
+        assert data_out_tensor_matrix_product = data_out_tensor_matrix_product_model
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(data_out_tensor_matrix_product_model)
+          severity error;
+      elsif (data_out_j_enable_tensor_matrix_product = '1' and not data_out_tensor_matrix_product = EMPTY) then
+        assert data_out_tensor_matrix_product = data_out_tensor_matrix_product_model
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(data_out_tensor_matrix_product_model)
           severity error;
       end if;
 

@@ -171,7 +171,7 @@ architecture accelerator_function_testbench_architecture of accelerator_function
 
   signal data_out_enable_vector_oneplus : std_logic;
 
-  signal data_out_enable_vector_oneplus_model: std_logic;
+  signal data_out_enable_vector_oneplus_model : std_logic;
 
   -- DATA
   signal size_in_vector_oneplus  : std_logic_vector(CONTROL_SIZE-1 downto 0);
