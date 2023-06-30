@@ -105,8 +105,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
-      OVERFLOW_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_SDATA;
+      OVERFLOW_OUT <= ZERO_SDATA;
 
       -- Control Outputs
       READY <= '0';

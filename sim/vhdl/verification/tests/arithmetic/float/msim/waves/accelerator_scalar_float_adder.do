@@ -21,18 +21,8 @@ add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_t
 
 add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/adder_ctrl_fsm_int
 
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_a_in_mantissa_int
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_b_in_mantissa_int
-
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_a_in_exponent_int
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_b_in_exponent_int
-
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_a_in_sign_int
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_b_in_sign_int
-
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_out_mantissa_int
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_out_exponent_int
-add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_out_sign_int
+add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_a_int
+add wave -noupdate /accelerator_float_testbench/accelerator_scalar_float_adder_test/scalar_float_adder/data_b_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

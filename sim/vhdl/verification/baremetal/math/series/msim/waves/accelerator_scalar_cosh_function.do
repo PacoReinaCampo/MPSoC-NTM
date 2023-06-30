@@ -18,8 +18,6 @@ add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_functio
 
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_function_test/scalar_cosh_function/controller_ctrl_fsm_int
 
-add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_function_test/scalar_cosh_function/data_int_scalar_float_multiplier
-
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_function_test/scalar_cosh_function/index_adder_loop
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_function_test/scalar_cosh_function/index_multiplier_loop
 

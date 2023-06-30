@@ -108,8 +108,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_IDATA;
-      OVERFLOW_OUT <= ZERO_IDATA;
+      DATA_OUT     <= ZERO_SDATA;
+      OVERFLOW_OUT <= ZERO_SDATA;
 
       -- Control Outputs
       READY <= '0';
@@ -118,7 +118,7 @@ begin
       multiplier_int <= std_logic_vector(to_signed(0, 2*DATA_SIZE));
 
       -- Control Internal
-      index_loop <= ZERO_IDATA;
+      index_loop <= ZERO_SDATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -132,7 +132,7 @@ begin
             multiplier_int <= std_logic_vector(to_signed(0, 2*DATA_SIZE));
 
             -- Control Internal
-            index_loop <= ZERO_IDATA;
+            index_loop <= ZERO_SDATA;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -153,10 +153,10 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) - (signed(ZERO_IDATA) & signed(DATA_A_IN)));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) - (signed(ZERO_SDATA) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_IDATA));
+              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_SDATA));
             end if;
           elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
             if (signed(index_loop) = signed(DATA_B_IN)) then
@@ -171,10 +171,10 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) + (signed(ZERO_IDATA) & signed(DATA_A_IN)));
+              multiplier_int <= std_logic_vector(signed(multiplier_int) + (signed(ZERO_SDATA) & signed(DATA_A_IN)));
 
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_IDATA));
+              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_SDATA));
             end if;
           end if;
 

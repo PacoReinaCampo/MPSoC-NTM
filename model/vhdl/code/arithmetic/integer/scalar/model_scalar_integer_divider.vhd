@@ -109,15 +109,15 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT      <= ZERO_DATA;
-      REMAINDER_OUT <= ZERO_DATA;
+      DATA_OUT      <= ZERO_SDATA;
+      REMAINDER_OUT <= ZERO_SDATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Assignations
-      divider_int   <= ZERO_DATA;
-      remainder_int <= ZERO_DATA;
+      divider_int   <= ZERO_SDATA;
+      remainder_int <= ZERO_SDATA;
 
     elsif (rising_edge(CLK)) then
 

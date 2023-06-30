@@ -58,20 +58,26 @@ package accelerator_arithmetic_pkg is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_IDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant ONE_IDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant TWO_IDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant THREE_IDATA : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
+  constant ZERO_UDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_UDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_UDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_UDATA : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FOUR_UDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(4, DATA_SIZE));
+  constant FIVE_UDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, DATA_SIZE));
 
-  constant EMPTY : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '0');
-  constant FULL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := (others => '1');
+  constant ZERO_SDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
+  constant ONE_SDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
+  constant TWO_SDATA   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
+  constant THREE_SDATA : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
+  constant FOUR_SDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(4, DATA_SIZE));
+  constant FIVE_SDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
 
   constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0, float64'high, -float64'low));
   constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0, float64'high, -float64'low));
-
-  constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001, float64'high, -float64'low));
+  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(4.0, float64'high, -float64'low));
+  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(5.0, float64'high, -float64'low));
 
   constant ZERO_REAL : real := 0.0;
   constant ONE_REAL  : real := 1.0;
