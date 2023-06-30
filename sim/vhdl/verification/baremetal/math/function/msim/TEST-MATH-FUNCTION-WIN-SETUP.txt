@@ -3,15 +3,4 @@ cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/math/functi
 do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/math/function/msim/macros/design.do
 do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/math/function/msim/macros/verification.do
 
-d01
-v01
-d02
-v02
-d03
-v03
-d04
-v04
-d05
-v05
-d06
-v06
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/math/function/msim/list.do

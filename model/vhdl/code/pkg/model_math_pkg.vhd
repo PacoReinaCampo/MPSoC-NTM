@@ -2253,6 +2253,8 @@ package body model_math_pkg is
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
     variable vector_operation_int : vector_buffer;
 
+    variable scalar_vector_int : vector_buffer;
+
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
@@ -2275,18 +2277,21 @@ package body model_math_pkg is
       vector_input => vector_b_input
       );
 
-    scalar_operation_int := function_scalar_float_multiplier (
-      scalar_a_input => vector_a_int(to_integer(unsigned(LENGTH_IN))-1),
-      scalar_b_input => vector_b_int(to_integer(unsigned(LENGTH_IN))-1)
-      );
+    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      scalar_operation_int := function_scalar_float_multiplier (
+        scalar_a_input => vector_a_int(i),
+        scalar_b_input => vector_b_int(i)
+        );
 
-   -- for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-     -- vector_output(i) := function_scalar_float_divider (
-       -- scalar_a_input => vector_operation_int(i),
-       -- scalar_b_input => scalar_operation_int
-       -- );
-   -- end loop;
-    vector_output := (others => ZERO_DATA);
+      scalar_vector_int(i) := scalar_operation_int;
+    end loop;
+
+    vector_output := function_vector_float_divider (
+      SIZE_IN => LENGTH_IN,
+
+      vector_a_input => vector_operation_int,
+      vector_b_input => scalar_vector_int
+      );
 
     return vector_output;
   end function function_vector_cosine_similarity;
@@ -3285,11 +3290,10 @@ package body model_math_pkg is
           scalar_b_input => vector_input(i-1)
           );
 
-       -- vector_output(i) := function_scalar_float_divider (
-         -- scalar_a_input => scalar_operation_int,
-         -- scalar_b_input => LENGTH_IN
-         -- );
-        vector_output(i) := ZERO_DATA;
+        vector_output(i) := function_scalar_float_divider (
+          scalar_a_input => scalar_operation_int,
+          scalar_b_input => LENGTH_IN
+          );
       end if;
     end loop;
 
@@ -3395,11 +3399,10 @@ package body model_math_pkg is
               scalar_b_input => matrix_input(i-1, j)
               );
 
-           -- matrix_output(i, j) := function_scalar_float_divider (
-             -- scalar_a_input => scalar_operation_int,
-             -- scalar_b_input => LENGTH_I_IN
-             -- );
-            matrix_output(i, j) := ZERO_DATA;
+            matrix_output(i, j) := function_scalar_float_divider (
+              scalar_a_input => scalar_operation_int,
+              scalar_b_input => LENGTH_I_IN
+              );
           end if;
         elsif (CONTROL = '1') then
           if (j = 0) then
@@ -3412,11 +3415,10 @@ package body model_math_pkg is
               scalar_b_input => matrix_input(i, j-1)
               );
 
-           -- matrix_output(i, j) := function_scalar_float_divider (
-             -- scalar_a_input => scalar_operation_int,
-             -- scalar_b_input => LENGTH_J_IN
-             -- );
-            matrix_output(i, j) := ZERO_DATA;
+            matrix_output(i, j) := function_scalar_float_divider (
+              scalar_a_input => scalar_operation_int,
+              scalar_b_input => LENGTH_J_IN
+              );
           end if;
         end if;
       end loop;
@@ -3533,11 +3535,10 @@ package body model_math_pkg is
                 scalar_b_input => tensor_input(i-1, j, k)
                 );
 
-             -- tensor_output(i, j, k) := function_scalar_float_divider (
-               -- scalar_a_input => scalar_operation_int,
-               -- scalar_b_input => LENGTH_I_IN
-               -- );
-              tensor_output(i, j, k) := ZERO_DATA;
+              tensor_output(i, j, k) := function_scalar_float_divider (
+                scalar_a_input => scalar_operation_int,
+                scalar_b_input => LENGTH_I_IN
+                );
             end if;
           elsif (CONTROL = "10") then
             if (j = 0) then
@@ -3550,11 +3551,10 @@ package body model_math_pkg is
                 scalar_b_input => tensor_input(i, j-1, k)
                 );
 
-             -- tensor_output(i, j, k) := function_scalar_float_divider (
-               -- scalar_a_input => scalar_operation_int,
-               -- scalar_b_input => LENGTH_J_IN
-               -- );
-              tensor_output(i, j, k) := ZERO_DATA;
+              tensor_output(i, j, k) := function_scalar_float_divider (
+                scalar_a_input => scalar_operation_int,
+                scalar_b_input => LENGTH_J_IN
+                );
             end if;
           elsif (CONTROL = "11") then
             if (k = 0) then
@@ -3567,11 +3567,10 @@ package body model_math_pkg is
                 scalar_b_input => tensor_input(i, j, k-1)
                 );
 
-             -- tensor_output(i, j, k) := function_scalar_float_divider (
-               -- scalar_a_input => scalar_operation_int,
-               -- scalar_b_input => LENGTH_K_IN
-               -- );
-              tensor_output(i, j, k) := ZERO_DATA;
+              tensor_output(i, j, k) := function_scalar_float_divider (
+                scalar_a_input => scalar_operation_int,
+                scalar_b_input => LENGTH_K_IN
+                );
             end if;
           end if;
         end loop;
