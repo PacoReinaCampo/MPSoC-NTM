@@ -329,12 +329,6 @@ architecture model_float_stimulus_architecture of model_float_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant EXPONENT_SIZE : integer := 8;
-  constant MANTISSA_SIZE : integer := 23;
-
-  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
-  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
-
   ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------

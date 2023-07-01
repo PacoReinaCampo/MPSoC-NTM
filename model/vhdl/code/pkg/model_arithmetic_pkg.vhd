@@ -72,15 +72,19 @@ package model_arithmetic_pkg is
   constant FOUR_SDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(4, DATA_SIZE));
   constant FIVE_SDATA  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0, float64'high, -float64'low));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0, float64'high, -float64'low));
-  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(4.0, float64'high, -float64'low));
-  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(5.0, float64'high, -float64'low));
+  constant ZERO_REAL  : real := 0.0;
+  constant ONE_REAL   : real := 1.0;
+  constant TWO_REAL   : real := 2.0;
+  constant THREE_REAL : real := 3.0;
+  constant FOUR_REAL  : real := 4.0;
+  constant FIVE_REAL  : real := 5.0;
 
-  constant ZERO_REAL : real := 0.0;
-  constant ONE_REAL  : real := 1.0;
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(ZERO_REAL, float64'high, -float64'low));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(ONE_REAL, float64'high, -float64'low));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(TWO_REAL, float64'high, -float64'low));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(THREE_REAL, float64'high, -float64'low));
+  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(FOUR_REAL, float64'high, -float64'low));
+  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(FIVE_REAL, float64'high, -float64'low));
 
   ------------------------------------------------------------------------------
   -- Types

@@ -532,9 +532,6 @@ architecture accelerator_algebra_stimulus_architecture of accelerator_algebra_st
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant MAX_POSITIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "0111111111111111111111111111111111111111111111111111111111111111";
-  constant MIN_NEGATIVE : std_logic_vector(DATA_SIZE-1 downto 0) := "1000000000000000000000000000000000000000000000000000000000000000";
-
   ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
