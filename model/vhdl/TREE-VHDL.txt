@@ -197,7 +197,8 @@ code
 │   ├── model_lstm_controller_pkg.vhd
 │   ├── model_math_pkg.vhd
 │   ├── model_ntm_core_pkg.vhd
-│   └── model_state_pkg.vhd
+│   ├── model_state_pkg.vhd
+│   └── model_transformer_controller_pkg.vhd
 ├── state
 │   ├── feedback
 │   │   ├── model_state_matrix_feedforward.vhd
@@ -221,4 +222,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-65 directories, 156 files
+65 directories, 157 files

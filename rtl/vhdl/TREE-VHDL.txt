@@ -214,7 +214,8 @@ code
 │   ├── accelerator_fnn_controller_pkg.vhd
 │   ├── accelerator_lstm_controller_pkg.vhd
 │   ├── accelerator_math_pkg.vhd
-│   └── accelerator_state_pkg.vhd
+│   ├── accelerator_state_pkg.vhd
+│   └── accelerator_transformer_controller_pkg.vhd
 ├── state
 │   ├── feedback
 │   │   ├── accelerator_state_matrix_feedforward.vhd
@@ -238,4 +239,4 @@ code
         ├── accelerator_input_trainer.vhd
         └── accelerator_output_trainer.vhd
 
-70 directories, 168 files
+70 directories, 169 files
