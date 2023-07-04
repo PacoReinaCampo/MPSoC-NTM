@@ -44,11 +44,11 @@ use ieee.numeric_std.all;
 
 use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
-use work.accelerator_lstm_controller_pkg.all;
+use work.accelerator_transformer_controller_pkg.all;
 
-entity accelerator_output_gate_vector is
+entity accelerator_lstm is
   generic (
-    DATO_SIZE    : integer := 64;
+    DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -122,42 +122,39 @@ entity accelerator_output_gate_vector is
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
-    O_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
-
     -- DATA
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    W_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    D_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    K_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    U_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    V_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    B_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    X_IN   : in std_logic_vector(DATO_SIZE-1 downto 0);
-    R_IN   : in std_logic_vector(DATO_SIZE-1 downto 0);
-    RHO_IN : in std_logic_vector(DATO_SIZE-1 downto 0);
-    XI_IN  : in std_logic_vector(DATO_SIZE-1 downto 0);
-    H_IN   : in std_logic_vector(DATO_SIZE-1 downto 0);
+    X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    W_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
-    D_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
-    K_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
-    U_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
-    V_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
-    B_OUT : out std_logic_vector(DATO_SIZE-1 downto 0);
+    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    O_OUT : out std_logic_vector(DATO_SIZE-1 downto 0)
+    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture accelerator_output_gate_vector_architecture of accelerator_output_gate_vector is
+architecture accelerator_lstm_architecture of accelerator_lstm is
 
   ------------------------------------------------------------------------------
   -- Functionality
@@ -274,10 +271,10 @@ architecture accelerator_output_gate_vector_architecture of accelerator_output_g
     INPUT_H_IN_L_STATE                  -- STEP 2
     );
 
-  type controller_o_out_fsm is (
-    STARTER_O_OUT_STATE,                -- STEP 0
-    CLEAN_O_OUT_L_STATE,                -- STEP 1
-    OUTPUT_O_OUT_L_STATE                -- STEP 2
+  type controller_h_out_fsm is (
+    STARTER_H_OUT_STATE,                -- STEP 0
+    CLEAN_H_OUT_L_STATE,                -- STEP 1
+    OUTPUT_H_OUT_L_STATE                -- STEP 2
     );
 
   ------------------------------------------------------------------------------
@@ -302,7 +299,7 @@ architecture accelerator_output_gate_vector_architecture of accelerator_output_g
   signal controller_rho_in_fsm_int : controller_rho_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
-  signal controller_o_out_fsm_int : controller_o_out_fsm;
+  signal controller_h_out_fsm_int : controller_h_out_fsm;
 
   -- Buffer
   signal matrix_w_in_int : matrix_buffer;
@@ -318,7 +315,7 @@ architecture accelerator_output_gate_vector_architecture of accelerator_output_g
   signal matrix_rho_in_int : matrix_buffer;
   signal vector_h_in_int   : vector_buffer;
 
-  signal vector_o_out_int : vector_buffer;
+  signal vector_h_out_int : vector_buffer;
 
   -- Control Internal
   signal index_l_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -352,28 +349,458 @@ architecture accelerator_output_gate_vector_architecture of accelerator_output_g
 
   signal index_l_h_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal index_l_o_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_h_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal dato_w_in_enable_int : std_logic;
-  signal dato_k_in_enable_int : std_logic;
-  signal dato_u_in_enable_int : std_logic;
-  signal dato_v_in_enable_int : std_logic;
-  signal dato_d_in_enable_int : std_logic;
-  signal dato_b_in_enable_int : std_logic;
+  signal data_w_in_enable_int : std_logic;
+  signal data_k_in_enable_int : std_logic;
+  signal data_u_in_enable_int : std_logic;
+  signal data_v_in_enable_int : std_logic;
+  signal data_d_in_enable_int : std_logic;
+  signal data_b_in_enable_int : std_logic;
 
-  signal dato_x_in_enable_int   : std_logic;
-  signal dato_r_in_enable_int   : std_logic;
-  signal dato_xi_in_enable_int  : std_logic;
-  signal dato_rho_in_enable_int : std_logic;
-  signal dato_h_in_enable_int   : std_logic;
+  signal data_x_in_enable_int   : std_logic;
+  signal data_r_in_enable_int   : std_logic;
+  signal data_xi_in_enable_int  : std_logic;
+  signal data_rho_in_enable_int : std_logic;
+  signal data_h_in_enable_int   : std_logic;
+
+  -- ACTIVATION GATE VECTOR
+  -- CONTROL
+  signal start_activation_gate_vector : std_logic;
+  signal ready_activation_gate_vector : std_logic;
+
+  signal w_in_l_enable_activation_gate_vector : std_logic;
+  signal w_in_x_enable_activation_gate_vector : std_logic;
+
+  signal w_out_l_enable_activation_gate_vector : std_logic;
+  signal w_out_x_enable_activation_gate_vector : std_logic;
+
+  signal k_in_i_enable_activation_gate_vector : std_logic;
+  signal k_in_l_enable_activation_gate_vector : std_logic;
+  signal k_in_k_enable_activation_gate_vector : std_logic;
+
+  signal k_out_i_enable_activation_gate_vector : std_logic;
+  signal k_out_l_enable_activation_gate_vector : std_logic;
+  signal k_out_k_enable_activation_gate_vector : std_logic;
+
+  signal d_in_i_enable_activation_gate_vector : std_logic;
+  signal d_in_l_enable_activation_gate_vector : std_logic;
+  signal d_in_m_enable_activation_gate_vector : std_logic;
+
+  signal d_out_i_enable_activation_gate_vector : std_logic;
+  signal d_out_l_enable_activation_gate_vector : std_logic;
+  signal d_out_m_enable_activation_gate_vector : std_logic;
+
+  signal u_in_l_enable_activation_gate_vector : std_logic;
+  signal u_in_p_enable_activation_gate_vector : std_logic;
+
+  signal u_out_l_enable_activation_gate_vector : std_logic;
+  signal u_out_p_enable_activation_gate_vector : std_logic;
+
+  signal v_in_l_enable_activation_gate_vector : std_logic;
+  signal v_in_S_enable_activation_gate_vector : std_logic;
+
+  signal v_out_l_enable_activation_gate_vector : std_logic;
+  signal v_out_s_enable_activation_gate_vector : std_logic;
+
+  signal b_in_enable_activation_gate_vector : std_logic;
+
+  signal b_out_enable_activation_gate_vector : std_logic;
+
+  signal x_in_enable_activation_gate_vector : std_logic;
+
+  signal x_out_enable_activation_gate_vector : std_logic;
+
+  signal r_in_i_enable_activation_gate_vector : std_logic;
+  signal r_in_k_enable_activation_gate_vector : std_logic;
+
+  signal r_out_i_enable_activation_gate_vector : std_logic;
+  signal r_out_k_enable_activation_gate_vector : std_logic;
+
+  signal rho_in_i_enable_activation_gate_vector : std_logic;
+  signal rho_in_m_enable_activation_gate_vector : std_logic;
+
+  signal rho_out_i_enable_activation_gate_vector : std_logic;
+  signal rho_out_m_enable_activation_gate_vector : std_logic;
+
+  signal xi_in_enable_activation_gate_vector : std_logic;
+
+  signal xi_out_enable_activation_gate_vector : std_logic;
+
+  signal h_in_enable_activation_gate_vector : std_logic;
+
+  signal h_out_enable_activation_gate_vector : std_logic;
+
+  signal a_out_enable_activation_gate_vector : std_logic;
+
+  -- DATA
+  signal size_x_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal k_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal d_in_activation_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal v_in_activation_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal a_out_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- INTPUT GATE VECTOR
+  -- CONTROL
+  signal start_input_gate_vector : std_logic;
+  signal ready_input_gate_vector : std_logic;
+
+  signal w_in_l_enable_input_gate_vector : std_logic;
+  signal w_in_x_enable_input_gate_vector : std_logic;
+
+  signal w_out_l_enable_input_gate_vector : std_logic;
+  signal w_out_x_enable_input_gate_vector : std_logic;
+
+  signal k_in_i_enable_input_gate_vector : std_logic;
+  signal k_in_l_enable_input_gate_vector : std_logic;
+  signal k_in_k_enable_input_gate_vector : std_logic;
+
+  signal k_out_i_enable_input_gate_vector : std_logic;
+  signal k_out_l_enable_input_gate_vector : std_logic;
+  signal k_out_k_enable_input_gate_vector : std_logic;
+
+  signal d_in_i_enable_input_gate_vector : std_logic;
+  signal d_in_l_enable_input_gate_vector : std_logic;
+  signal d_in_m_enable_input_gate_vector : std_logic;
+
+  signal d_out_i_enable_input_gate_vector : std_logic;
+  signal d_out_l_enable_input_gate_vector : std_logic;
+  signal d_out_m_enable_input_gate_vector : std_logic;
+
+  signal u_in_l_enable_input_gate_vector : std_logic;
+  signal u_in_p_enable_input_gate_vector : std_logic;
+
+  signal u_out_l_enable_input_gate_vector : std_logic;
+  signal u_out_p_enable_input_gate_vector : std_logic;
+
+  signal v_in_l_enable_input_gate_vector : std_logic;
+  signal v_in_s_enable_input_gate_vector : std_logic;
+
+  signal v_out_l_enable_input_gate_vector : std_logic;
+  signal v_out_s_enable_input_gate_vector : std_logic;
+
+  signal b_in_enable_input_gate_vector : std_logic;
+
+  signal b_out_enable_input_gate_vector : std_logic;
+
+  signal x_in_enable_input_gate_vector : std_logic;
+
+  signal x_out_enable_input_gate_vector : std_logic;
+
+  signal r_in_i_enable_input_gate_vector : std_logic;
+  signal r_in_k_enable_input_gate_vector : std_logic;
+
+  signal r_out_i_enable_input_gate_vector : std_logic;
+  signal r_out_k_enable_input_gate_vector : std_logic;
+
+  signal rho_in_i_enable_input_gate_vector : std_logic;
+  signal rho_in_m_enable_input_gate_vector : std_logic;
+
+  signal rho_out_i_enable_input_gate_vector : std_logic;
+  signal rho_out_m_enable_input_gate_vector : std_logic;
+
+  signal xi_in_enable_input_gate_vector : std_logic;
+
+  signal xi_out_enable_input_gate_vector : std_logic;
+
+  signal h_in_enable_input_gate_vector : std_logic;
+
+  signal h_out_enable_input_gate_vector : std_logic;
+
+  signal i_out_enable_input_gate_vector : std_logic;
+
+  -- DATA
+  signal size_x_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal k_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal d_in_input_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal v_in_input_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- OUTPUT GATE VECTOR
+  -- CONTROL
+  signal start_output_gate_vector : std_logic;
+  signal ready_output_gate_vector : std_logic;
+
+  signal w_in_l_enable_output_gate_vector : std_logic;
+  signal w_in_x_enable_output_gate_vector : std_logic;
+
+  signal w_out_l_enable_output_gate_vector : std_logic;
+  signal w_out_x_enable_output_gate_vector : std_logic;
+
+  signal k_in_i_enable_output_gate_vector : std_logic;
+  signal k_in_l_enable_output_gate_vector : std_logic;
+  signal k_in_k_enable_output_gate_vector : std_logic;
+
+  signal k_out_i_enable_output_gate_vector : std_logic;
+  signal k_out_l_enable_output_gate_vector : std_logic;
+  signal k_out_k_enable_output_gate_vector : std_logic;
+
+  signal d_in_i_enable_output_gate_vector : std_logic;
+  signal d_in_l_enable_output_gate_vector : std_logic;
+  signal d_in_m_enable_output_gate_vector : std_logic;
+
+  signal d_out_i_enable_output_gate_vector : std_logic;
+  signal d_out_l_enable_output_gate_vector : std_logic;
+  signal d_out_m_enable_output_gate_vector : std_logic;
+
+  signal u_in_l_enable_output_gate_vector : std_logic;
+  signal u_in_p_enable_output_gate_vector : std_logic;
+
+  signal u_out_l_enable_output_gate_vector : std_logic;
+  signal u_out_p_enable_output_gate_vector : std_logic;
+
+  signal v_in_l_enable_output_gate_vector : std_logic;
+  signal v_in_s_enable_output_gate_vector : std_logic;
+
+  signal v_out_l_enable_output_gate_vector : std_logic;
+  signal v_out_s_enable_output_gate_vector : std_logic;
+
+  signal b_in_enable_output_gate_vector : std_logic;
+
+  signal b_out_enable_output_gate_vector : std_logic;
+
+  signal x_in_enable_output_gate_vector : std_logic;
+
+  signal x_out_enable_output_gate_vector : std_logic;
+
+  signal r_in_i_enable_output_gate_vector : std_logic;
+  signal r_in_k_enable_output_gate_vector : std_logic;
+
+  signal r_out_i_enable_output_gate_vector : std_logic;
+  signal r_out_k_enable_output_gate_vector : std_logic;
+
+  signal rho_in_i_enable_output_gate_vector : std_logic;
+  signal rho_in_m_enable_output_gate_vector : std_logic;
+
+  signal rho_out_i_enable_output_gate_vector : std_logic;
+  signal rho_out_m_enable_output_gate_vector : std_logic;
+
+  signal xi_in_enable_output_gate_vector : std_logic;
+
+  signal xi_out_enable_output_gate_vector : std_logic;
+
+  signal h_in_enable_output_gate_vector : std_logic;
+
+  signal h_out_enable_output_gate_vector : std_logic;
+
+  signal o_out_enable_output_gate_vector : std_logic;
+
+  -- DATA
+  signal size_x_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal k_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal d_in_output_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal v_in_output_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- FORGET GATE VECTOR
+  -- CONTROL
+  signal start_forget_gate_vector : std_logic;
+  signal ready_forget_gate_vector : std_logic;
+
+  signal w_in_l_enable_forget_gate_vector : std_logic;
+  signal w_in_x_enable_forget_gate_vector : std_logic;
+
+  signal w_out_l_enable_forget_gate_vector : std_logic;
+  signal w_out_x_enable_forget_gate_vector : std_logic;
+
+  signal k_in_i_enable_forget_gate_vector : std_logic;
+  signal k_in_l_enable_forget_gate_vector : std_logic;
+  signal k_in_k_enable_forget_gate_vector : std_logic;
+
+  signal k_out_i_enable_forget_gate_vector : std_logic;
+  signal k_out_l_enable_forget_gate_vector : std_logic;
+  signal k_out_k_enable_forget_gate_vector : std_logic;
+
+  signal d_in_i_enable_forget_gate_vector : std_logic;
+  signal d_in_l_enable_forget_gate_vector : std_logic;
+  signal d_in_m_enable_forget_gate_vector : std_logic;
+
+  signal d_out_i_enable_forget_gate_vector : std_logic;
+  signal d_out_l_enable_forget_gate_vector : std_logic;
+  signal d_out_m_enable_forget_gate_vector : std_logic;
+
+  signal u_in_l_enable_forget_gate_vector : std_logic;
+  signal u_in_p_enable_forget_gate_vector : std_logic;
+
+  signal u_out_l_enable_forget_gate_vector : std_logic;
+  signal u_out_p_enable_forget_gate_vector : std_logic;
+
+  signal v_in_l_enable_forget_gate_vector : std_logic;
+  signal v_in_s_enable_forget_gate_vector : std_logic;
+
+  signal v_out_l_enable_forget_gate_vector : std_logic;
+  signal v_out_s_enable_forget_gate_vector : std_logic;
+
+  signal b_in_enable_forget_gate_vector : std_logic;
+
+  signal b_out_enable_forget_gate_vector : std_logic;
+
+  signal x_in_enable_forget_gate_vector : std_logic;
+
+  signal x_out_enable_forget_gate_vector : std_logic;
+
+  signal r_in_i_enable_forget_gate_vector : std_logic;
+  signal r_in_k_enable_forget_gate_vector : std_logic;
+
+  signal r_out_i_enable_forget_gate_vector : std_logic;
+  signal r_out_k_enable_forget_gate_vector : std_logic;
+
+  signal rho_in_i_enable_forget_gate_vector : std_logic;
+  signal rho_in_m_enable_forget_gate_vector : std_logic;
+
+  signal rho_out_i_enable_forget_gate_vector : std_logic;
+  signal rho_out_m_enable_forget_gate_vector : std_logic;
+
+  signal xi_in_enable_forget_gate_vector : std_logic;
+
+  signal xi_out_enable_forget_gate_vector : std_logic;
+
+  signal h_in_enable_forget_gate_vector : std_logic;
+
+  signal h_out_enable_forget_gate_vector : std_logic;
+
+  signal f_out_enable_forget_gate_vector : std_logic;
+
+  -- DATA
+  signal size_x_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_s_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_m_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal k_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal d_in_forget_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rho_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal v_in_forget_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal xi_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- STATE GATE VECTOR
+  -- CONTROL
+  signal start_state_gate_vector : std_logic;
+  signal ready_state_gate_vector : std_logic;
+
+  signal i_in_enable_state_gate_vector : std_logic;
+  signal f_in_enable_state_gate_vector : std_logic;
+  signal a_in_enable_state_gate_vector : std_logic;
+
+  signal i_out_enable_state_gate_vector : std_logic;
+  signal f_out_enable_state_gate_vector : std_logic;
+  signal a_out_enable_state_gate_vector : std_logic;
+
+  signal s_in_enable_state_gate_vector : std_logic;
+
+  signal s_out_enable_state_gate_vector : std_logic;
+
+  -- DATA
+  signal size_l_in_state_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- HIDDEN GATE VECTOR
+  -- CONTROL
+  signal start_hidden_gate_vector : std_logic;
+  signal ready_hidden_gate_vector : std_logic;
+
+  signal s_in_enable_hidden_gate_vector : std_logic;
+  signal o_in_enable_hidden_gate_vector : std_logic;
+
+  signal s_out_enable_hidden_gate_vector : std_logic;
+  signal o_out_enable_hidden_gate_vector : std_logic;
+
+  signal h_out_enable_hidden_gate_vector : std_logic;
+
+  -- DATA
+  signal size_l_in_hidden_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal s_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   ------------------------------------------------------------------------------
   -- Body
   ------------------------------------------------------------------------------
-
-  -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
   -- CONTROL
   w_in_fsm : process(CLK, RST)
@@ -387,7 +814,7 @@ begin
       index_x_w_in_loop <= ZERO_CONTROL;
       index_l_w_in_loop <= ZERO_CONTROL;
 
-      dato_w_in_enable_int <= '0';
+      data_w_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -402,7 +829,7 @@ begin
             index_x_w_in_loop <= ZERO_CONTROL;
             index_l_w_in_loop <= ZERO_CONTROL;
 
-            dato_w_in_enable_int <= '0';
+            data_w_in_enable_int <= '0';
 
             -- FSM Control
             controller_w_in_fsm_int <= INPUT_W_IN_X_STATE;
@@ -454,7 +881,7 @@ begin
             index_x_w_in_loop <= ZERO_CONTROL;
             index_l_w_in_loop <= ZERO_CONTROL;
 
-            dato_w_in_enable_int <= '1';
+            data_w_in_enable_int <= '1';
 
             -- FSM Control
             controller_w_in_fsm_int <= STARTER_W_IN_STATE;
@@ -504,7 +931,7 @@ begin
       index_l_k_in_loop <= ZERO_CONTROL;
       index_k_k_in_loop <= ZERO_CONTROL;
 
-      dato_k_in_enable_int <= '0';
+      data_k_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -521,7 +948,7 @@ begin
             index_l_k_in_loop <= ZERO_CONTROL;
             index_k_k_in_loop <= ZERO_CONTROL;
 
-            dato_k_in_enable_int <= '0';
+            data_k_in_enable_int <= '0';
 
             -- FSM Control
             controller_k_in_fsm_int <= INPUT_K_IN_L_STATE;
@@ -597,7 +1024,7 @@ begin
             index_l_k_in_loop <= ZERO_CONTROL;
             index_k_k_in_loop <= ZERO_CONTROL;
 
-            dato_k_in_enable_int <= '1';
+            data_k_in_enable_int <= '1';
 
             -- FSM Control
             controller_k_in_fsm_int <= STARTER_K_IN_STATE;
@@ -662,7 +1089,7 @@ begin
       index_l_u_in_loop <= ZERO_CONTROL;
       index_p_u_in_loop <= ZERO_CONTROL;
 
-      dato_u_in_enable_int <= '0';
+      data_u_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -677,7 +1104,7 @@ begin
             index_l_u_in_loop <= ZERO_CONTROL;
             index_p_u_in_loop <= ZERO_CONTROL;
 
-            dato_u_in_enable_int <= '0';
+            data_u_in_enable_int <= '0';
 
             -- FSM Control
             controller_u_in_fsm_int <= INPUT_U_IN_L_STATE;
@@ -729,7 +1156,7 @@ begin
             index_l_u_in_loop <= ZERO_CONTROL;
             index_p_u_in_loop <= ZERO_CONTROL;
 
-            dato_u_in_enable_int <= '1';
+            data_u_in_enable_int <= '1';
 
             -- FSM Control
             controller_u_in_fsm_int <= STARTER_U_IN_STATE;
@@ -777,7 +1204,7 @@ begin
       index_l_v_in_loop <= ZERO_CONTROL;
       index_s_v_in_loop <= ZERO_CONTROL;
 
-      dato_v_in_enable_int <= '0';
+      data_v_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -792,7 +1219,7 @@ begin
             index_l_v_in_loop <= ZERO_CONTROL;
             index_s_v_in_loop <= ZERO_CONTROL;
 
-            dato_v_in_enable_int <= '0';
+            data_v_in_enable_int <= '0';
 
             -- FSM Control
             controller_v_in_fsm_int <= INPUT_V_IN_L_STATE;
@@ -844,7 +1271,7 @@ begin
             index_l_v_in_loop <= ZERO_CONTROL;
             index_s_v_in_loop <= ZERO_CONTROL;
 
-            dato_v_in_enable_int <= '1';
+            data_v_in_enable_int <= '1';
 
             -- FSM Control
             controller_v_in_fsm_int <= STARTER_V_IN_STATE;
@@ -894,7 +1321,7 @@ begin
       index_l_d_in_loop <= ZERO_CONTROL;
       index_m_d_in_loop <= ZERO_CONTROL;
 
-      dato_d_in_enable_int <= '0';
+      data_d_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -911,7 +1338,7 @@ begin
             index_l_d_in_loop <= ZERO_CONTROL;
             index_m_d_in_loop <= ZERO_CONTROL;
 
-            dato_d_in_enable_int <= '0';
+            data_d_in_enable_int <= '0';
 
             -- FSM Control
             controller_d_in_fsm_int <= INPUT_D_IN_L_STATE;
@@ -944,7 +1371,7 @@ begin
             tensor_d_in_int(to_integer(unsigned(index_i_d_in_loop)), to_integer(unsigned(index_l_d_in_loop)), to_integer(unsigned(index_m_d_in_loop))) <= D_IN;
 
             -- FSM Control
-            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
               controller_d_in_fsm_int <= CLEAN_D_IN_I_STATE;
             else
               controller_d_in_fsm_int <= CLEAN_D_IN_L_STATE;
@@ -987,7 +1414,7 @@ begin
             index_l_d_in_loop <= ZERO_CONTROL;
             index_m_d_in_loop <= ZERO_CONTROL;
 
-            dato_d_in_enable_int <= '1';
+            data_d_in_enable_int <= '1';
 
             -- FSM Control
             controller_d_in_fsm_int <= STARTER_D_IN_STATE;
@@ -1050,7 +1477,7 @@ begin
       -- Control Internal
       index_l_b_in_loop <= ZERO_CONTROL;
 
-      dato_b_in_enable_int <= '0';
+      data_b_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1063,7 +1490,7 @@ begin
             -- Control Internal
             index_l_b_in_loop <= ZERO_CONTROL;
 
-            dato_b_in_enable_int <= '0';
+            data_b_in_enable_int <= '0';
 
             -- FSM Control
             controller_b_in_fsm_int <= INPUT_B_IN_L_STATE;
@@ -1094,7 +1521,7 @@ begin
             -- Control Internal
             index_l_b_in_loop <= ZERO_CONTROL;
 
-            dato_b_in_enable_int <= '1';
+            data_b_in_enable_int <= '1';
 
             -- FSM Control
             controller_b_in_fsm_int <= STARTER_B_IN_STATE;
@@ -1125,7 +1552,7 @@ begin
       -- Control Internal
       index_x_x_in_loop <= ZERO_CONTROL;
 
-      dato_x_in_enable_int <= '0';
+      data_x_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1138,7 +1565,7 @@ begin
             -- Control Internal
             index_x_x_in_loop <= ZERO_CONTROL;
 
-            dato_x_in_enable_int <= '0';
+            data_x_in_enable_int <= '0';
 
             -- FSM Control
             controller_x_in_fsm_int <= INPUT_X_IN_X_STATE;
@@ -1169,7 +1596,7 @@ begin
             -- Control Internal
             index_x_x_in_loop <= ZERO_CONTROL;
 
-            dato_x_in_enable_int <= '1';
+            data_x_in_enable_int <= '1';
 
             -- FSM Control
             controller_x_in_fsm_int <= STARTER_X_IN_STATE;
@@ -1202,7 +1629,7 @@ begin
       index_i_r_in_loop <= ZERO_CONTROL;
       index_k_r_in_loop <= ZERO_CONTROL;
 
-      dato_r_in_enable_int <= '0';
+      data_r_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1217,7 +1644,7 @@ begin
             index_i_r_in_loop <= ZERO_CONTROL;
             index_k_r_in_loop <= ZERO_CONTROL;
 
-            dato_r_in_enable_int <= '0';
+            data_r_in_enable_int <= '0';
 
             -- FSM Control
             controller_r_in_fsm_int <= INPUT_R_IN_I_STATE;
@@ -1269,7 +1696,7 @@ begin
             index_i_r_in_loop <= ZERO_CONTROL;
             index_k_r_in_loop <= ZERO_CONTROL;
 
-            dato_r_in_enable_int <= '1';
+            data_r_in_enable_int <= '1';
 
             -- FSM Control
             controller_r_in_fsm_int <= STARTER_R_IN_STATE;
@@ -1317,7 +1744,7 @@ begin
       index_i_rho_in_loop <= ZERO_CONTROL;
       index_m_rho_in_loop <= ZERO_CONTROL;
 
-      dato_rho_in_enable_int <= '0';
+      data_rho_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1332,7 +1759,7 @@ begin
             index_i_rho_in_loop <= ZERO_CONTROL;
             index_m_rho_in_loop <= ZERO_CONTROL;
 
-            dato_rho_in_enable_int <= '0';
+            data_rho_in_enable_int <= '0';
 
             -- FSM Control
             controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
@@ -1384,7 +1811,7 @@ begin
             index_i_rho_in_loop <= ZERO_CONTROL;
             index_m_rho_in_loop <= ZERO_CONTROL;
 
-            dato_rho_in_enable_int <= '1';
+            data_rho_in_enable_int <= '1';
 
             -- FSM Control
             controller_rho_in_fsm_int <= STARTER_RHO_IN_STATE;
@@ -1430,7 +1857,7 @@ begin
       -- Control Internal
       index_s_xi_in_loop <= ZERO_CONTROL;
 
-      dato_xi_in_enable_int <= '0';
+      data_xi_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1443,7 +1870,7 @@ begin
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
 
-            dato_xi_in_enable_int <= '0';
+            data_xi_in_enable_int <= '0';
 
             -- FSM Control
             controller_xi_in_fsm_int <= INPUT_XI_IN_S_STATE;
@@ -1474,7 +1901,7 @@ begin
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
 
-            dato_xi_in_enable_int <= '1';
+            data_xi_in_enable_int <= '1';
 
             -- FSM Control
             controller_xi_in_fsm_int <= STARTER_XI_IN_STATE;
@@ -1505,7 +1932,7 @@ begin
       -- Control Internal
       index_l_h_in_loop <= ZERO_CONTROL;
 
-      dato_h_in_enable_int <= '0';
+      data_h_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1518,7 +1945,7 @@ begin
             -- Control Internal
             index_l_h_in_loop <= ZERO_CONTROL;
 
-            dato_h_in_enable_int <= '0';
+            data_h_in_enable_int <= '0';
 
             -- FSM Control
             controller_h_in_fsm_int <= INPUT_H_IN_L_STATE;
@@ -1549,7 +1976,7 @@ begin
             -- Control Internal
             index_l_h_in_loop <= ZERO_CONTROL;
 
-            dato_h_in_enable_int <= '1';
+            data_h_in_enable_int <= '1';
 
             -- FSM Control
             controller_h_in_fsm_int <= STARTER_H_IN_STATE;
@@ -1571,97 +1998,574 @@ begin
     end if;
   end process;
 
-  o_out_fsm : process(CLK, RST)
+  h_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      O_OUT <= ZERO_DATA;
+      H_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
-      O_OUT_ENABLE <= '0';
+      H_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_l_o_out_loop <= ZERO_CONTROL;
+      index_l_h_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_o_out_fsm_int is
-        when STARTER_O_OUT_STATE =>     -- STEP 0
-          if (dato_w_in_enable_int = '1' and dato_k_in_enable_int = '1' and dato_u_in_enable_int = '1' and dato_d_in_enable_int = '1' and dato_b_in_enable_int = '1' and dato_x_in_enable_int = '1' and dato_xi_in_enable_int = '1' and dato_rho_in_enable_int = '1' and dato_h_in_enable_int = '1') then
+      case controller_h_out_fsm_int is
+        when STARTER_H_OUT_STATE =>     -- STEP 0
+          if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
-            vector_o_out_int <= function_accelerator_output_standard_gate_vector (
-              SIZE_X_IN => SIZE_X_IN,
-              SIZE_W_IN => SIZE_W_IN,
-              SIZE_L_IN => SIZE_L_IN,
-              SIZE_R_IN => SIZE_R_IN,
-              SIZE_S_IN => SIZE_S_IN,
-              SIZE_M_IN => SIZE_M_IN,
-
-              matrix_w_input => matrix_w_in_int,
-              tensor_k_input => tensor_k_in_int,
-              matrix_u_input => matrix_u_in_int,
-              matrix_v_input => matrix_v_in_int,
-              tensor_d_input => tensor_d_in_int,
-              vector_b_input => vector_b_in_int,
-
-              vector_x_input   => vector_x_in_int,
-              matrix_r_input   => matrix_r_in_int,
-              vector_xi_input  => vector_xi_in_int,
-              matrix_rho_input => matrix_rho_in_int,
-              vector_h_input   => vector_h_in_int
-              );
 
             -- Control Internal
-            index_l_o_out_loop <= ZERO_CONTROL;
+            index_l_h_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_o_out_fsm_int <= CLEAN_O_OUT_L_STATE;
+            controller_h_out_fsm_int <= CLEAN_H_OUT_L_STATE;
           end if;
 
-        when CLEAN_O_OUT_L_STATE =>     -- STEP 1
+        when CLEAN_H_OUT_L_STATE =>     -- STEP 1
           -- Control Outputs
-          O_OUT_ENABLE <= '0';
+          H_OUT_ENABLE <= '0';
 
           -- FSM Control
-          controller_o_out_fsm_int <= OUTPUT_O_OUT_L_STATE;
+          controller_h_out_fsm_int <= OUTPUT_H_OUT_L_STATE;
 
-        when OUTPUT_O_OUT_L_STATE =>    -- STEP 2
+        when OUTPUT_H_OUT_L_STATE =>    -- STEP 2
 
-          if (unsigned(index_l_o_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_l_h_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            O_OUT <= vector_o_out_int(to_integer(unsigned(index_l_o_out_loop)));
+            H_OUT <= vector_h_out_int(to_integer(unsigned(index_l_h_out_loop)));
 
             -- Control Outputs
             READY <= '1';
 
-            O_OUT_ENABLE <= '1';
+            H_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_l_o_out_loop <= ZERO_CONTROL;
+            index_l_h_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_o_out_fsm_int <= STARTER_O_OUT_STATE;
-          elsif (unsigned(index_l_o_out_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            controller_h_out_fsm_int <= STARTER_H_OUT_STATE;
+          elsif (unsigned(index_l_h_out_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            O_OUT <= vector_o_out_int(to_integer(unsigned(index_l_o_out_loop)));
+            H_OUT <= vector_h_out_int(to_integer(unsigned(index_l_h_out_loop)));
 
             -- Control Outputs
-            O_OUT_ENABLE <= '1';
+            H_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_l_o_out_loop <= std_logic_vector(unsigned(index_l_o_out_loop) + unsigned(ONE_CONTROL));
+            index_l_h_out_loop <= std_logic_vector(unsigned(index_l_h_out_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_o_out_fsm_int <= CLEAN_O_OUT_L_STATE;
+            controller_h_out_fsm_int <= CLEAN_H_OUT_L_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_o_out_fsm_int <= STARTER_O_OUT_STATE;
+          controller_h_out_fsm_int <= STARTER_H_OUT_STATE;
       end case;
     end if;
   end process;
+
+  -- ACTIVATION GATE VECTOR
+  activation_gate_vector : accelerator_activation_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_activation_gate_vector,
+      READY => ready_activation_gate_vector,
+
+      W_IN_L_ENABLE => w_in_l_enable_activation_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_activation_gate_vector,
+
+      W_OUT_L_ENABLE => w_out_l_enable_activation_gate_vector,
+      W_OUT_X_ENABLE => w_out_x_enable_activation_gate_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_activation_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_activation_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_activation_gate_vector,
+
+      K_OUT_I_ENABLE => k_out_i_enable_activation_gate_vector,
+      K_OUT_L_ENABLE => k_out_l_enable_activation_gate_vector,
+      K_OUT_K_ENABLE => k_out_k_enable_activation_gate_vector,
+
+      D_IN_I_ENABLE => d_in_i_enable_activation_gate_vector,
+      D_IN_L_ENABLE => d_in_l_enable_activation_gate_vector,
+      D_IN_M_ENABLE => d_in_m_enable_activation_gate_vector,
+
+      D_OUT_I_ENABLE => d_out_i_enable_activation_gate_vector,
+      D_OUT_L_ENABLE => d_out_l_enable_activation_gate_vector,
+      D_OUT_M_ENABLE => d_out_m_enable_activation_gate_vector,
+
+      U_IN_L_ENABLE => u_in_l_enable_activation_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_activation_gate_vector,
+
+      U_OUT_L_ENABLE => u_out_l_enable_activation_gate_vector,
+      U_OUT_P_ENABLE => u_out_p_enable_activation_gate_vector,
+
+      V_IN_L_ENABLE => v_in_l_enable_activation_gate_vector,
+      V_IN_S_ENABLE => v_in_s_enable_activation_gate_vector,
+
+      V_OUT_L_ENABLE => v_out_l_enable_activation_gate_vector,
+      V_OUT_S_ENABLE => v_out_s_enable_activation_gate_vector,
+
+      B_IN_ENABLE => b_in_enable_activation_gate_vector,
+
+      B_OUT_ENABLE => b_out_enable_activation_gate_vector,
+
+      X_IN_ENABLE => x_in_enable_activation_gate_vector,
+
+      X_OUT_ENABLE => x_out_enable_activation_gate_vector,
+
+      R_IN_I_ENABLE => r_in_i_enable_activation_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_activation_gate_vector,
+
+      R_OUT_I_ENABLE => r_out_i_enable_activation_gate_vector,
+      R_OUT_K_ENABLE => r_out_k_enable_activation_gate_vector,
+
+      RHO_IN_I_ENABLE => rho_in_i_enable_activation_gate_vector,
+      RHO_IN_M_ENABLE => rho_in_m_enable_activation_gate_vector,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_activation_gate_vector,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_activation_gate_vector,
+
+      XI_IN_ENABLE => xi_in_enable_activation_gate_vector,
+
+      XI_OUT_ENABLE => xi_out_enable_activation_gate_vector,
+
+      H_IN_ENABLE => h_in_enable_activation_gate_vector,
+
+      H_OUT_ENABLE => h_out_enable_activation_gate_vector,
+
+      A_OUT_ENABLE => a_out_enable_activation_gate_vector,
+
+      -- DATA
+      SIZE_X_IN => size_x_in_activation_gate_vector,
+      SIZE_W_IN => size_w_in_activation_gate_vector,
+      SIZE_L_IN => size_l_in_activation_gate_vector,
+      SIZE_R_IN => size_r_in_activation_gate_vector,
+      SIZE_S_IN => size_s_in_activation_gate_vector,
+      SIZE_M_IN => size_m_in_activation_gate_vector,
+
+      W_IN => w_in_activation_gate_vector,
+      X_IN => x_in_activation_gate_vector,
+
+      K_IN => k_in_activation_gate_vector,
+      R_IN => r_in_activation_gate_vector,
+
+      D_IN   => d_in_activation_gate_vector,
+      RHO_IN => rho_in_activation_gate_vector,
+
+      U_IN => u_in_activation_gate_vector,
+      H_IN => h_in_activation_gate_vector,
+
+      V_IN  => v_in_activation_gate_vector,
+      XI_IN => xi_in_activation_gate_vector,
+
+      B_IN => b_in_activation_gate_vector,
+
+      A_OUT => a_out_activation_gate_vector
+      );
+
+  -- INTPUT GATE VECTOR
+  input_gate_vector : accelerator_input_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_input_gate_vector,
+      READY => ready_input_gate_vector,
+
+      W_IN_L_ENABLE => w_in_l_enable_input_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_input_gate_vector,
+
+      W_OUT_L_ENABLE => w_out_l_enable_input_gate_vector,
+      W_OUT_X_ENABLE => w_out_x_enable_input_gate_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_input_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_input_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_input_gate_vector,
+
+      K_OUT_I_ENABLE => k_out_i_enable_input_gate_vector,
+      K_OUT_L_ENABLE => k_out_l_enable_input_gate_vector,
+      K_OUT_K_ENABLE => k_out_k_enable_input_gate_vector,
+
+      D_IN_I_ENABLE => d_in_i_enable_input_gate_vector,
+      D_IN_L_ENABLE => d_in_l_enable_input_gate_vector,
+      D_IN_M_ENABLE => d_in_m_enable_input_gate_vector,
+
+      D_OUT_I_ENABLE => d_out_i_enable_input_gate_vector,
+      D_OUT_L_ENABLE => d_out_l_enable_input_gate_vector,
+      D_OUT_M_ENABLE => d_out_m_enable_input_gate_vector,
+
+      U_IN_L_ENABLE => u_in_l_enable_input_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_input_gate_vector,
+
+      U_OUT_L_ENABLE => u_out_l_enable_input_gate_vector,
+      U_OUT_P_ENABLE => u_out_p_enable_input_gate_vector,
+
+      V_IN_L_ENABLE => v_in_l_enable_input_gate_vector,
+      V_IN_S_ENABLE => v_in_s_enable_input_gate_vector,
+
+      V_OUT_L_ENABLE => v_out_l_enable_input_gate_vector,
+      V_OUT_S_ENABLE => v_out_s_enable_input_gate_vector,
+
+      B_IN_ENABLE => b_in_enable_input_gate_vector,
+
+      B_OUT_ENABLE => b_out_enable_input_gate_vector,
+
+      X_IN_ENABLE => x_in_enable_input_gate_vector,
+
+      X_OUT_ENABLE => x_out_enable_input_gate_vector,
+
+      R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_input_gate_vector,
+
+      R_OUT_I_ENABLE => r_out_i_enable_input_gate_vector,
+      R_OUT_K_ENABLE => r_out_k_enable_input_gate_vector,
+
+      RHO_IN_I_ENABLE => rho_in_i_enable_input_gate_vector,
+      RHO_IN_M_ENABLE => rho_in_m_enable_input_gate_vector,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_input_gate_vector,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_input_gate_vector,
+
+      XI_IN_ENABLE => xi_in_enable_input_gate_vector,
+
+      XI_OUT_ENABLE => xi_out_enable_input_gate_vector,
+
+      H_IN_ENABLE => h_in_enable_input_gate_vector,
+
+      H_OUT_ENABLE => h_out_enable_input_gate_vector,
+
+      I_OUT_ENABLE => i_out_enable_input_gate_vector,
+
+      -- DATA
+      SIZE_X_IN => size_x_in_input_gate_vector,
+      SIZE_W_IN => size_w_in_input_gate_vector,
+      SIZE_L_IN => size_l_in_input_gate_vector,
+      SIZE_R_IN => size_r_in_input_gate_vector,
+      SIZE_S_IN => size_s_in_input_gate_vector,
+      SIZE_M_IN => size_m_in_input_gate_vector,
+
+      W_IN => w_in_input_gate_vector,
+      X_IN => x_in_input_gate_vector,
+
+      K_IN => k_in_input_gate_vector,
+      R_IN => r_in_input_gate_vector,
+
+      D_IN   => d_in_input_gate_vector,
+      RHO_IN => rho_in_input_gate_vector,
+
+      U_IN => u_in_input_gate_vector,
+      H_IN => h_in_input_gate_vector,
+
+      V_IN  => v_in_input_gate_vector,
+      XI_IN => xi_in_input_gate_vector,
+
+      B_IN => b_in_input_gate_vector,
+
+      I_OUT => i_out_input_gate_vector
+      );
+
+  -- OUTPUT GATE VECTOR
+  output_gate_vector : accelerator_output_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_output_gate_vector,
+      READY => ready_output_gate_vector,
+
+      W_IN_L_ENABLE => w_in_l_enable_output_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_output_gate_vector,
+
+      W_OUT_L_ENABLE => w_out_l_enable_output_gate_vector,
+      W_OUT_X_ENABLE => w_out_x_enable_output_gate_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_output_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_output_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_output_gate_vector,
+
+      K_OUT_I_ENABLE => k_out_i_enable_output_gate_vector,
+      K_OUT_L_ENABLE => k_out_l_enable_output_gate_vector,
+      K_OUT_K_ENABLE => k_out_k_enable_output_gate_vector,
+
+      D_IN_I_ENABLE => d_in_i_enable_output_gate_vector,
+      D_IN_L_ENABLE => d_in_l_enable_output_gate_vector,
+      D_IN_M_ENABLE => d_in_m_enable_output_gate_vector,
+
+      D_OUT_I_ENABLE => d_out_i_enable_output_gate_vector,
+      D_OUT_L_ENABLE => d_out_l_enable_output_gate_vector,
+      D_OUT_M_ENABLE => d_out_m_enable_output_gate_vector,
+
+      U_IN_L_ENABLE => u_in_l_enable_output_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_output_gate_vector,
+
+      U_OUT_L_ENABLE => u_out_l_enable_output_gate_vector,
+      U_OUT_P_ENABLE => u_out_p_enable_output_gate_vector,
+
+      V_IN_L_ENABLE => v_in_l_enable_output_gate_vector,
+      V_IN_S_ENABLE => v_in_s_enable_output_gate_vector,
+
+      V_OUT_L_ENABLE => v_out_l_enable_output_gate_vector,
+      V_OUT_S_ENABLE => v_out_s_enable_output_gate_vector,
+
+      B_IN_ENABLE => b_in_enable_output_gate_vector,
+
+      B_OUT_ENABLE => b_out_enable_output_gate_vector,
+
+      X_IN_ENABLE => x_in_enable_output_gate_vector,
+
+      X_OUT_ENABLE => x_out_enable_output_gate_vector,
+
+      R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_output_gate_vector,
+
+      R_OUT_I_ENABLE => r_out_i_enable_output_gate_vector,
+      R_OUT_K_ENABLE => r_out_k_enable_output_gate_vector,
+
+      RHO_IN_I_ENABLE => rho_in_i_enable_output_gate_vector,
+      RHO_IN_M_ENABLE => rho_in_m_enable_output_gate_vector,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_output_gate_vector,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_output_gate_vector,
+
+      XI_IN_ENABLE => xi_in_enable_output_gate_vector,
+
+      XI_OUT_ENABLE => xi_out_enable_output_gate_vector,
+
+      H_IN_ENABLE => h_in_enable_output_gate_vector,
+
+      H_OUT_ENABLE => h_out_enable_output_gate_vector,
+
+      O_OUT_ENABLE => o_out_enable_output_gate_vector,
+
+      -- DATA
+      SIZE_X_IN => size_x_in_output_gate_vector,
+      SIZE_W_IN => size_w_in_output_gate_vector,
+      SIZE_L_IN => size_l_in_output_gate_vector,
+      SIZE_R_IN => size_r_in_output_gate_vector,
+      SIZE_S_IN => size_s_in_output_gate_vector,
+      SIZE_M_IN => size_m_in_output_gate_vector,
+
+      W_IN => w_in_output_gate_vector,
+      X_IN => x_in_output_gate_vector,
+
+      K_IN => k_in_output_gate_vector,
+      R_IN => r_in_output_gate_vector,
+
+      D_IN   => d_in_output_gate_vector,
+      RHO_IN => rho_in_output_gate_vector,
+
+      U_IN => u_in_output_gate_vector,
+      H_IN => h_in_output_gate_vector,
+
+      V_IN  => v_in_output_gate_vector,
+      XI_IN => xi_in_output_gate_vector,
+
+      B_IN => b_in_output_gate_vector,
+
+      O_OUT => o_out_output_gate_vector
+      );
+
+  -- FORGET GATE VECTOR
+  forget_gate_vector : accelerator_forget_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_forget_gate_vector,
+      READY => ready_forget_gate_vector,
+
+      W_IN_L_ENABLE => w_in_l_enable_forget_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_forget_gate_vector,
+
+      W_OUT_L_ENABLE => w_out_l_enable_forget_gate_vector,
+      W_OUT_X_ENABLE => w_out_x_enable_forget_gate_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_forget_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_forget_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_forget_gate_vector,
+
+      K_OUT_I_ENABLE => k_out_i_enable_forget_gate_vector,
+      K_OUT_L_ENABLE => k_out_l_enable_forget_gate_vector,
+      K_OUT_K_ENABLE => k_out_k_enable_forget_gate_vector,
+
+      D_IN_I_ENABLE => d_in_i_enable_forget_gate_vector,
+      D_IN_L_ENABLE => d_in_l_enable_forget_gate_vector,
+      D_IN_M_ENABLE => d_in_m_enable_forget_gate_vector,
+
+      D_OUT_I_ENABLE => d_out_i_enable_forget_gate_vector,
+      D_OUT_L_ENABLE => d_out_l_enable_forget_gate_vector,
+      D_OUT_M_ENABLE => d_out_m_enable_forget_gate_vector,
+
+      U_IN_L_ENABLE => u_in_l_enable_forget_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_forget_gate_vector,
+
+      U_OUT_L_ENABLE => u_out_l_enable_forget_gate_vector,
+      U_OUT_P_ENABLE => u_out_p_enable_forget_gate_vector,
+
+      V_IN_L_ENABLE => v_in_l_enable_forget_gate_vector,
+      V_IN_S_ENABLE => v_in_s_enable_forget_gate_vector,
+
+      V_OUT_L_ENABLE => v_out_l_enable_forget_gate_vector,
+      V_OUT_S_ENABLE => v_out_s_enable_forget_gate_vector,
+
+      B_IN_ENABLE => b_in_enable_forget_gate_vector,
+
+      B_OUT_ENABLE => b_out_enable_forget_gate_vector,
+
+      X_IN_ENABLE => x_in_enable_forget_gate_vector,
+
+      X_OUT_ENABLE => x_out_enable_forget_gate_vector,
+
+      R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_forget_gate_vector,
+
+      R_OUT_I_ENABLE => r_out_i_enable_forget_gate_vector,
+      R_OUT_K_ENABLE => r_out_k_enable_forget_gate_vector,
+
+      RHO_IN_I_ENABLE => rho_in_i_enable_forget_gate_vector,
+      RHO_IN_M_ENABLE => rho_in_m_enable_forget_gate_vector,
+
+      RHO_OUT_I_ENABLE => rho_out_i_enable_forget_gate_vector,
+      RHO_OUT_M_ENABLE => rho_out_m_enable_forget_gate_vector,
+
+      XI_IN_ENABLE => xi_in_enable_forget_gate_vector,
+
+      XI_OUT_ENABLE => xi_out_enable_forget_gate_vector,
+
+      H_IN_ENABLE => h_in_enable_forget_gate_vector,
+
+      H_OUT_ENABLE => h_out_enable_forget_gate_vector,
+
+      F_OUT_ENABLE => f_out_enable_forget_gate_vector,
+
+      -- DATA
+      SIZE_X_IN => size_x_in_forget_gate_vector,
+      SIZE_W_IN => size_w_in_forget_gate_vector,
+      SIZE_L_IN => size_l_in_forget_gate_vector,
+      SIZE_R_IN => size_r_in_forget_gate_vector,
+      SIZE_S_IN => size_s_in_forget_gate_vector,
+      SIZE_M_IN => size_m_in_forget_gate_vector,
+
+      W_IN => w_in_forget_gate_vector,
+      X_IN => x_in_forget_gate_vector,
+
+      K_IN => k_in_forget_gate_vector,
+      R_IN => r_in_forget_gate_vector,
+
+      D_IN   => d_in_forget_gate_vector,
+      RHO_IN => rho_in_forget_gate_vector,
+
+      U_IN => u_in_forget_gate_vector,
+      H_IN => h_in_forget_gate_vector,
+
+      V_IN  => v_in_forget_gate_vector,
+      XI_IN => xi_in_forget_gate_vector,
+
+      B_IN => b_in_forget_gate_vector,
+
+      F_OUT => f_out_forget_gate_vector
+      );
+
+  -- STATE GATE VECTOR
+  state_gate_vector : accelerator_state_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_state_gate_vector,
+      READY => ready_state_gate_vector,
+
+      I_IN_ENABLE => i_in_enable_state_gate_vector,
+      F_IN_ENABLE => f_in_enable_state_gate_vector,
+      A_IN_ENABLE => a_in_enable_state_gate_vector,
+
+      I_OUT_ENABLE => i_out_enable_state_gate_vector,
+      F_OUT_ENABLE => f_out_enable_state_gate_vector,
+      A_OUT_ENABLE => a_out_enable_state_gate_vector,
+
+      S_IN_ENABLE => s_in_enable_state_gate_vector,
+
+      S_OUT_ENABLE => s_out_enable_state_gate_vector,
+
+      -- DATA
+      SIZE_L_IN => size_l_in_state_gate_vector,
+
+      S_IN => s_in_state_gate_vector,
+      I_IN => i_in_state_gate_vector,
+      F_IN => f_in_state_gate_vector,
+      A_IN => a_in_state_gate_vector,
+
+      S_OUT => s_out_state_gate_vector
+      );
+
+  -- HIDDEN GATE VECTOR
+  hidden_gate_vector : accelerator_hidden_gate_vector
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_hidden_gate_vector,
+      READY => ready_hidden_gate_vector,
+
+      S_IN_ENABLE => s_in_enable_hidden_gate_vector,
+      O_IN_ENABLE => o_in_enable_hidden_gate_vector,
+
+      S_OUT_ENABLE => s_out_enable_hidden_gate_vector,
+      O_OUT_ENABLE => o_out_enable_hidden_gate_vector,
+
+      H_OUT_ENABLE => h_out_enable_hidden_gate_vector,
+
+      -- DATA
+      SIZE_L_IN => size_l_in_hidden_gate_vector,
+
+      S_IN => s_in_hidden_gate_vector,
+      O_IN => o_in_hidden_gate_vector,
+
+      H_OUT => h_out_hidden_gate_vector
+      );
 
 end architecture;

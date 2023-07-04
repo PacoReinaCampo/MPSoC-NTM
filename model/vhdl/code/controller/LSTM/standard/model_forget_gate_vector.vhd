@@ -1591,7 +1591,7 @@ begin
         when STARTER_F_OUT_STATE =>     -- STEP 0
           if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
-            vector_f_out_int <= function_model_forget_standard_gate_vector (
+            vector_f_out_int <= function_model_forget_convolutional_gate_vector (
               SIZE_X_IN => SIZE_X_IN,
               SIZE_W_IN => SIZE_W_IN,
               SIZE_L_IN => SIZE_L_IN,

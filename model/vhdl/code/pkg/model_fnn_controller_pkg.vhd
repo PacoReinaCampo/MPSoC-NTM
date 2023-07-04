@@ -843,7 +843,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );
@@ -895,7 +895,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );
@@ -946,7 +946,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );
@@ -997,7 +997,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );
@@ -1049,7 +1049,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );
@@ -1098,7 +1098,7 @@ package body model_fnn_controller_pkg is
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
-      LENGTH_IN => LENGTH_IN,
+      LENGTH_IN => ONE_DATA,
 
       vector_input => vector_h_input
       );

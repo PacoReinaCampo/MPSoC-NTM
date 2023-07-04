@@ -213,7 +213,7 @@ begin
         ACCELERATOR_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
         ACCELERATOR_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        ACCELERATOR_STATE_TOP_DATA_K_IN <= MAX_POSITIVE;
+        ACCELERATOR_STATE_TOP_DATA_K_IN <= ZERO_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -230,7 +230,7 @@ begin
         ACCELERATOR_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
         ACCELERATOR_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        ACCELERATOR_STATE_TOP_DATA_K_IN <= MAX_POSITIVE;
+        ACCELERATOR_STATE_TOP_DATA_K_IN <= ZERO_DATA;
       end if;
 
       wait for WORKING;

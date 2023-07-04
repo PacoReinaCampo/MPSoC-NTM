@@ -1585,27 +1585,7 @@ begin
         when STARTER_H_OUT_STATE =>     -- STEP 0
           if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
-            vector_h_out_int <= function_accelerator_multi_head_attention_standard_multi_head_attention (
-              SIZE_X_IN => SIZE_X_IN,
-              SIZE_W_IN => SIZE_W_IN,
-              SIZE_L_IN => SIZE_L_IN,
-              SIZE_R_IN => SIZE_R_IN,
-              SIZE_S_IN => SIZE_S_IN,
-              SIZE_M_IN => SIZE_M_IN,
-
-              matrix_w_input => matrix_w_in_int,
-              tensor_k_input => tensor_k_in_int,
-              matrix_u_input => matrix_u_in_int,
-              matrix_v_input => matrix_v_in_int,
-              tensor_d_input => tensor_d_in_int,
-              vector_b_input => vector_b_in_int,
-
-              vector_x_input   => vector_x_in_int,
-              matrix_r_input   => matrix_r_in_int,
-              vector_xi_input  => vector_xi_in_int,
-              matrix_rho_input => matrix_rho_in_int,
-              vector_h_input   => vector_h_in_int
-              );
+            vector_h_out_int <= (others => ZERO_DATA);
 
             -- Control Internal
             index_l_h_out_loop <= ZERO_CONTROL;

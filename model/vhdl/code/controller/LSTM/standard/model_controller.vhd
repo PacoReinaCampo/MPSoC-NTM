@@ -1586,7 +1586,7 @@ begin
         when STARTER_H_OUT_STATE =>     -- STEP 0
           if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
-            vector_h_out_int <= function_model_lstm_standard_controller (
+            vector_h_out_int <= function_model_lstm_convolutional_controller (
               SIZE_X_IN => SIZE_X_IN,
               SIZE_W_IN => SIZE_W_IN,
               SIZE_L_IN => SIZE_L_IN,

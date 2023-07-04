@@ -243,14 +243,14 @@ begin
         NTM_TOP_SIZE_L_IN <= ONE_CONTROL;
         NTM_TOP_SIZE_R_IN <= ONE_CONTROL;
 
-        NTM_TOP_W_IN <= MAX_POSITIVE;
-        NTM_TOP_K_IN <= MAX_POSITIVE;
-        NTM_TOP_U_IN <= MAX_POSITIVE;
-        NTM_TOP_V_IN <= MAX_POSITIVE;
-        NTM_TOP_D_IN <= MAX_POSITIVE;
-        NTM_TOP_B_IN <= MAX_POSITIVE;
+        NTM_TOP_W_IN <= ZERO_DATA;
+        NTM_TOP_K_IN <= ZERO_DATA;
+        NTM_TOP_U_IN <= ZERO_DATA;
+        NTM_TOP_V_IN <= ZERO_DATA;
+        NTM_TOP_D_IN <= ZERO_DATA;
+        NTM_TOP_B_IN <= ZERO_DATA;
 
-        NTM_TOP_X_IN <= MAX_POSITIVE;
+        NTM_TOP_X_IN <= ZERO_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -265,14 +265,14 @@ begin
         NTM_TOP_SIZE_L_IN <= ONE_CONTROL;
         NTM_TOP_SIZE_R_IN <= ONE_CONTROL;
 
-        NTM_TOP_W_IN <= MAX_POSITIVE;
-        NTM_TOP_K_IN <= MAX_POSITIVE;
-        NTM_TOP_U_IN <= MAX_POSITIVE;
-        NTM_TOP_V_IN <= MAX_POSITIVE;
-        NTM_TOP_D_IN <= MAX_POSITIVE;
-        NTM_TOP_B_IN <= MAX_POSITIVE;
+        NTM_TOP_W_IN <= ZERO_DATA;
+        NTM_TOP_K_IN <= ZERO_DATA;
+        NTM_TOP_U_IN <= ZERO_DATA;
+        NTM_TOP_V_IN <= ZERO_DATA;
+        NTM_TOP_D_IN <= ZERO_DATA;
+        NTM_TOP_B_IN <= ZERO_DATA;
 
-        NTM_TOP_X_IN <= MAX_POSITIVE;
+        NTM_TOP_X_IN <= ZERO_DATA;
       end if;
 
       wait for WORKING;

@@ -42,12 +42,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.model_arithmetic_pkg.all;
+use work.model_math_pkg.all;
 
-use work.accelerator_lstm_controller_pkg.all;
+use work.model_lstm_controller_pkg.all;
 
-entity accelerator_hidden_gate_vector is
+entity model_hidden_gate_vector is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -79,7 +79,7 @@ entity accelerator_hidden_gate_vector is
     );
 end entity;
 
-architecture accelerator_hidden_gate_vector_urchitecture of accelerator_hidden_gate_vector is
+architecture model_hidden_gate_vector_urchitecture of model_hidden_gate_vector is
 
   ------------------------------------------------------------------------------
   -- Functionality
@@ -275,7 +275,7 @@ begin
         when STARTER_H_OUT_STATE =>     -- STEP 0
           if (data_in_enable_int = '1') then
             -- Data Internal
-            vector_h_out_int <= function_accelerator_hidden_convolutional_gate_vector (
+            vector_h_out_int <= function_model_hidden_standard_gate_vector (
               SIZE_X_IN => SIZE_L_IN,
               SIZE_W_IN => SIZE_L_IN,
               SIZE_L_IN => SIZE_L_IN,

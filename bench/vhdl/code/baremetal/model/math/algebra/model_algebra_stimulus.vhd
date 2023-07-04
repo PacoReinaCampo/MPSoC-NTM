@@ -44,6 +44,7 @@ use ieee.numeric_std.all;
 
 use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
+
 use work.model_algebra_pkg.all;
 
 entity model_algebra_stimulus is

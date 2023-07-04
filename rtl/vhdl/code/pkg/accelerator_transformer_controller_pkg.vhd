@@ -79,7 +79,7 @@ package accelerator_transformer_controller_pkg is
       V_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
       V_IN_K_ENABLE : in std_logic;     -- for k in 0 to K-1
 
-      M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
+      M_IN_M_ENABLE : in std_logic;     -- for n in 0 to N-1
       M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
 
       W_OH_IN_L_ENABLE : in std_logic;  -- for l in 0 to L-1
@@ -138,7 +138,7 @@ package accelerator_transformer_controller_pkg is
       V_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
       V_IN_K_ENABLE : in std_logic;     -- for k in 0 to K-1
 
-      M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
+      M_IN_M_ENABLE : in std_logic;     -- for n in 0 to N-1
       M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
 
       X_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
@@ -513,8 +513,8 @@ package accelerator_transformer_controller_pkg is
       X_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
       X_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
 
-      PE_IN_N_ENABLE : in std_logic;    -- for l in 0 to L-1
-      PE_IN_D_ENABLE : in std_logic;    -- for n in 0 to N-1
+      PE_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      PE_IN_N_ENABLE : in std_logic;    -- for n in 0 to N-1
       PE_IN_D_ENABLE : in std_logic;    -- for d in 0 to D-1
 
       Y_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
@@ -1533,7 +1533,7 @@ package accelerator_transformer_controller_pkg is
       );
   end component;
 
-  component accelerator_controller is
+  component accelerator_lstm is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64

@@ -79,7 +79,7 @@ package model_transformer_controller_pkg is
       V_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
       V_IN_K_ENABLE : in std_logic;     -- for k in 0 to K-1
 
-      M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
+      M_IN_M_ENABLE : in std_logic;     -- for n in 0 to N-1
       M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
 
       W_OH_IN_L_ENABLE : in std_logic;  -- for l in 0 to L-1
@@ -138,7 +138,7 @@ package model_transformer_controller_pkg is
       V_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
       V_IN_K_ENABLE : in std_logic;     -- for k in 0 to K-1
 
-      M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
+      M_IN_M_ENABLE : in std_logic;     -- for n in 0 to N-1
       M_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
 
       X_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
@@ -513,8 +513,8 @@ package model_transformer_controller_pkg is
       X_IN_N_ENABLE : in std_logic;     -- for n in 0 to N-1
       X_IN_D_ENABLE : in std_logic;     -- for d in 0 to D-1
 
-      PE_IN_N_ENABLE : in std_logic;    -- for l in 0 to L-1
-      PE_IN_D_ENABLE : in std_logic;    -- for n in 0 to N-1
+      PE_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      PE_IN_N_ENABLE : in std_logic;    -- for n in 0 to N-1
       PE_IN_D_ENABLE : in std_logic;    -- for d in 0 to D-1
 
       Y_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
@@ -1533,7 +1533,7 @@ package model_transformer_controller_pkg is
       );
   end component;
 
-  component model_controller is
+  component model_lstm is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 64
@@ -1936,6 +1936,73 @@ package model_transformer_controller_pkg is
   ------------------------------------------------------------------------------
   -- COMPOMENTS
   ------------------------------------------------------------------------------
+
+  function function_model_masked_multi_head_attention (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_V_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_H_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_k_input : tensor_buffer;
+    tensor_q_input : tensor_buffer;
+    tensor_v_input : tensor_buffer;
+
+    matrix_m_input : matrix_buffer;
+
+    matrix_w_oh_input : matrix_buffer;
+
+    matrix_x_input : matrix_buffer;
+    ) return matrix_buffer;
+
+  function function_model_masked_scaled_dot_product_attention (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_V_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_k_input : matrix_buffer;
+    matrix_q_input : matrix_buffer;
+    matrix_v_input : matrix_buffer;
+
+    matrix_x_input : matrix_buffer;
+    ) return matrix_buffer;
+
+  function function_model_multi_head_attention (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_V_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_H_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_k_input : tensor_buffer;
+    tensor_q_input : tensor_buffer;
+    tensor_v_input : tensor_buffer;
+
+    matrix_m_input : matrix_buffer;
+
+    matrix_w_oh_input : matrix_buffer;
+
+    matrix_x_input : matrix_buffer;
+    ) return matrix_buffer;
+
+  function function_model_scaled_dot_product_attention (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_V_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_H_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_k_input : tensor_buffer;
+    tensor_q_input : tensor_buffer;
+    tensor_v_input : tensor_buffer;
+
+    matrix_m_input : matrix_buffer;
+
+    matrix_w_oh_input : matrix_buffer;
+
+    matrix_x_input : matrix_buffer;
+    ) return matrix_buffer;
 
   ------------------------------------------------------------------------------
   -- INPUTS

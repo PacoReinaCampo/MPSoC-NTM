@@ -42,6 +42,7 @@ use ieee.numeric_std.all;
 
 use work.model_math_pkg.all;
 use work.accelerator_math_pkg.all;
+
 use work.accelerator_algebra_pkg.all;
 
 entity accelerator_algebra_testbench is

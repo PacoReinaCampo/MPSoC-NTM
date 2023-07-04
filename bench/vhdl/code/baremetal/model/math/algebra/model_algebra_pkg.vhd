@@ -49,7 +49,6 @@ package model_algebra_pkg is
   -- SYSTEM-SIZE
   constant DATA_SIZE : integer := 64;
 
-  constant CONTROL_T_SIZE : integer := 3;
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
   constant CONTROL_Z_SIZE : integer := 3;
@@ -76,7 +75,6 @@ package model_algebra_pkg is
   constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
-
 
   -- FLOATS
   constant FLOAT_P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"0000000000000000";

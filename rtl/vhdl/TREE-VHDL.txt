@@ -105,7 +105,10 @@ code
 │       │   ├── accelerator_multi_head_attention.vhd
 │       │   └── accelerator_scaled_dot_product_attention.vhd
 │       ├── fnn
-│       │   └── accelerator_fnn.vhd
+│       │   ├── convolutional
+│       │   │   └── accelerator_fnn.vhd
+│       │   └── standard
+│       │       └── accelerator_fnn.vhd
 │       ├── functions
 │       │   ├── accelerator_layer_norm.vhd
 │       │   └── accelerator_positional_encoding.vhd
@@ -115,13 +118,22 @@ code
 │       │   ├── accelerator_queries_vector.vhd
 │       │   └── accelerator_values_vector.vhd
 │       ├── lstm
-│       │   ├── accelerator_activation_gate_vector.vhd
-│       │   ├── accelerator_forget_gate_vector.vhd
-│       │   ├── accelerator_hidden_gate_vector.vhd
-│       │   ├── accelerator_input_gate_vector.vhd
-│       │   ├── accelerator_lstm.vhd
-│       │   ├── accelerator_output_gate_vector.vhd
-│       │   └── accelerator_state_gate_vector.vhd
+│       │   ├── convolutional
+│       │   │   ├── accelerator_activation_gate_vector.vhd
+│       │   │   ├── accelerator_forget_gate_vector.vhd
+│       │   │   ├── accelerator_hidden_gate_vector.vhd
+│       │   │   ├── accelerator_input_gate_vector.vhd
+│       │   │   ├── accelerator_lstm.vhd
+│       │   │   ├── accelerator_output_gate_vector.vhd
+│       │   │   └── accelerator_state_gate_vector.vhd
+│       │   └── standard
+│       │       ├── accelerator_activation_gate_vector.vhd
+│       │       ├── accelerator_forget_gate_vector.vhd
+│       │       ├── accelerator_hidden_gate_vector.vhd
+│       │       ├── accelerator_input_gate_vector.vhd
+│       │       ├── accelerator_lstm.vhd
+│       │       ├── accelerator_output_gate_vector.vhd
+│       │       └── accelerator_state_gate_vector.vhd
 │       └── top
 │           ├── accelerator_controller.vhd
 │           ├── accelerator_decoder.vhd
@@ -239,4 +251,4 @@ code
         ├── accelerator_input_trainer.vhd
         └── accelerator_output_trainer.vhd
 
-70 directories, 169 files
+74 directories, 177 files

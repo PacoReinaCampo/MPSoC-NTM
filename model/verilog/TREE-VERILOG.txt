@@ -88,7 +88,10 @@ code
 │       │   ├── model_multi_head_attention.sv
 │       │   └── model_scaled_dot_product_attention.sv
 │       ├── fnn
-│       │   └── model_fnn.sv
+│       │   ├── convolutional
+│       │   │   └── model_fnn.sv
+│       │   └── standard
+│       │       └── model_fnn.sv
 │       ├── functions
 │       │   ├── model_layer_norm.sv
 │       │   └── model_positional_encoding.sv
@@ -98,13 +101,22 @@ code
 │       │   ├── model_queries_vector.sv
 │       │   └── model_values_vector.sv
 │       ├── lstm
-│       │   ├── model_activation_gate_vector.sv
-│       │   ├── model_forget_gate_vector.sv
-│       │   ├── model_hidden_gate_vector.sv
-│       │   ├── model_input_gate_vector.sv
-│       │   ├── model_lstm.sv
-│       │   ├── model_output_gate_vector.sv
-│       │   └── model_state_gate_vector.sv
+│       │   ├── convolutional
+│       │   │   ├── model_activation_gate_vector.sv
+│       │   │   ├── model_forget_gate_vector.sv
+│       │   │   ├── model_hidden_gate_vector.sv
+│       │   │   ├── model_input_gate_vector.sv
+│       │   │   ├── model_lstm.sv
+│       │   │   ├── model_output_gate_vector.sv
+│       │   │   └── model_state_gate_vector.sv
+│       │   └── standard
+│       │       ├── model_activation_gate_vector.sv
+│       │       ├── model_forget_gate_vector.sv
+│       │       ├── model_hidden_gate_vector.sv
+│       │       ├── model_input_gate_vector.sv
+│       │       ├── model_lstm.sv
+│       │       ├── model_output_gate_vector.sv
+│       │       └── model_state_gate_vector.sv
 │       └── top
 │           ├── model_controller.sv
 │           ├── model_decoder.sv
@@ -220,4 +232,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-65 directories, 155 files
+69 directories, 163 files

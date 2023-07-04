@@ -42,12 +42,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.model_arithmetic_pkg.all;
+use work.model_math_pkg.all;
 
-use work.accelerator_lstm_controller_pkg.all;
+use work.model_lstm_controller_pkg.all;
 
-entity accelerator_state_gate_vector is
+entity model_state_gate_vector is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
@@ -85,7 +85,7 @@ entity accelerator_state_gate_vector is
     );
 end entity;
 
-architecture accelerator_state_gate_vector_urchitecture of accelerator_state_gate_vector is
+architecture model_state_gate_vector_urchitecture of model_state_gate_vector is
 
   ------------------------------------------------------------------------------
   -- Functionality
@@ -320,7 +320,7 @@ begin
         when STARTER_S_OUT_STATE =>     -- STEP 0
           if (data_in_enable_int = '1') then
             -- Data Internal
-            vector_s_out_int <= function_accelerator_state_convolutional_gate_vector (
+            vector_s_out_int <= function_model_state_standard_gate_vector (
               SIZE_X_IN => SIZE_L_IN,
               SIZE_W_IN => SIZE_L_IN,
               SIZE_L_IN => SIZE_L_IN,

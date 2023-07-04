@@ -5,7 +5,7 @@ build:
 	vcom -2008 -f system.vc
 
 simulate:
-	vsim -c -do run.do work.model_standard_transformer_testbench
+	vsim -c -do run.do work.model_transformer_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

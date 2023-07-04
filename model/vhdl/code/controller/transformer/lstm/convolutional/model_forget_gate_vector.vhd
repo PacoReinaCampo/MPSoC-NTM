@@ -42,13 +42,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
-use work.accelerator_fnn_controller_pkg.all;
+use work.model_arithmetic_pkg.all;
+use work.model_math_pkg.all;
+use work.model_lstm_controller_pkg.all;
 
-entity accelerator_fnn is
+entity model_forget_gate_vector is
   generic (
-    DATA_SIZE    : integer := 64;
+    data_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -122,39 +122,42 @@ entity accelerator_fnn is
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
+    F_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+
     -- DATA
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_S_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_M_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    D_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    K_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    V_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    B_IN : in std_logic_vector(data_SIZE-1 downto 0);
 
-    X_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN   : in std_logic_vector(data_SIZE-1 downto 0);
+    R_IN   : in std_logic_vector(data_SIZE-1 downto 0);
+    RHO_IN : in std_logic_vector(data_SIZE-1 downto 0);
+    XI_IN  : in std_logic_vector(data_SIZE-1 downto 0);
+    H_IN   : in std_logic_vector(data_SIZE-1 downto 0);
 
-    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT : out std_logic_vector(data_SIZE-1 downto 0);
+    D_OUT : out std_logic_vector(data_SIZE-1 downto 0);
+    K_OUT : out std_logic_vector(data_SIZE-1 downto 0);
+    U_OUT : out std_logic_vector(data_SIZE-1 downto 0);
+    V_OUT : out std_logic_vector(data_SIZE-1 downto 0);
+    B_OUT : out std_logic_vector(data_SIZE-1 downto 0);
 
-    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    F_OUT : out std_logic_vector(data_SIZE-1 downto 0)
     );
 end entity;
 
-architecture accelerator_fnn_architecture of accelerator_fnn is
+architecture model_forget_gate_vector_architecture of model_forget_gate_vector is
 
   ------------------------------------------------------------------------------
   -- Functionality
@@ -271,10 +274,10 @@ architecture accelerator_fnn_architecture of accelerator_fnn is
     INPUT_H_IN_L_STATE                  -- STEP 2
     );
 
-  type controller_h_out_fsm is (
-    STARTER_H_OUT_STATE,                -- STEP 0
-    CLEAN_H_OUT_L_STATE,                -- STEP 1
-    OUTPUT_H_OUT_L_STATE                -- STEP 2
+  type controller_f_out_fsm is (
+    STARTER_F_OUT_STATE,                -- STEP 0
+    CLEAN_F_OUT_L_STATE,                -- STEP 1
+    OUTPUT_F_OUT_L_STATE                -- STEP 2
     );
 
   ------------------------------------------------------------------------------
@@ -299,7 +302,7 @@ architecture accelerator_fnn_architecture of accelerator_fnn is
   signal controller_rho_in_fsm_int : controller_rho_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
-  signal controller_h_out_fsm_int : controller_h_out_fsm;
+  signal controller_f_out_fsm_int : controller_f_out_fsm;
 
   -- Buffer
   signal matrix_w_in_int : matrix_buffer;
@@ -315,7 +318,7 @@ architecture accelerator_fnn_architecture of accelerator_fnn is
   signal matrix_rho_in_int : matrix_buffer;
   signal vector_h_in_int   : vector_buffer;
 
-  signal vector_h_out_int : vector_buffer;
+  signal vector_f_out_int : vector_buffer;
 
   -- Control Internal
   signal index_l_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -349,7 +352,7 @@ architecture accelerator_fnn_architecture of accelerator_fnn is
 
   signal index_l_h_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal index_l_h_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_l_f_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_w_in_enable_int : std_logic;
   signal data_k_in_enable_int : std_logic;
@@ -369,6 +372,8 @@ begin
   ------------------------------------------------------------------------------
   -- Body
   ------------------------------------------------------------------------------
+
+  -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
   -- CONTROL
   w_in_fsm : process(CLK, RST)
@@ -939,7 +944,7 @@ begin
             tensor_d_in_int(to_integer(unsigned(index_i_d_in_loop)), to_integer(unsigned(index_l_d_in_loop)), to_integer(unsigned(index_m_d_in_loop))) <= D_IN;
 
             -- FSM Control
-            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
               controller_d_in_fsm_int <= CLEAN_D_IN_I_STATE;
             else
               controller_d_in_fsm_int <= CLEAN_D_IN_L_STATE;
@@ -957,9 +962,9 @@ begin
             tensor_d_in_int(to_integer(unsigned(index_i_d_in_loop)), to_integer(unsigned(index_l_d_in_loop)), to_integer(unsigned(index_m_d_in_loop))) <= D_IN;
 
             -- FSM Control
-            if ((unsigned(index_l_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
+            if ((unsigned(index_l_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_d_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
               controller_d_in_fsm_int <= CLEAN_D_IN_I_STATE;
-            elsif (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
+            elsif (unsigned(index_m_d_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
               controller_d_in_fsm_int <= CLEAN_D_IN_L_STATE;
             else
               controller_d_in_fsm_int <= CLEAN_D_IN_M_STATE;
@@ -1566,27 +1571,27 @@ begin
     end if;
   end process;
 
-  h_out_fsm : process(CLK, RST)
+  f_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= ZERO_DATA;
+      F_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
-      H_OUT_ENABLE <= '0';
+      F_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_l_h_out_loop <= ZERO_CONTROL;
+      index_l_f_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_h_out_fsm_int is
-        when STARTER_H_OUT_STATE =>     -- STEP 0
+      case controller_f_out_fsm_int is
+        when STARTER_F_OUT_STATE =>     -- STEP 0
           if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
-            vector_h_out_int <= function_accelerator_fnn_standard_controller (
+            vector_f_out_int <= function_model_forget_convolutional_gate_vector (
               SIZE_X_IN => SIZE_X_IN,
               SIZE_W_IN => SIZE_W_IN,
               SIZE_L_IN => SIZE_L_IN,
@@ -1609,52 +1614,52 @@ begin
               );
 
             -- Control Internal
-            index_l_h_out_loop <= ZERO_CONTROL;
+            index_l_f_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_h_out_fsm_int <= CLEAN_H_OUT_L_STATE;
+            controller_f_out_fsm_int <= CLEAN_F_OUT_L_STATE;
           end if;
 
-        when CLEAN_H_OUT_L_STATE =>     -- STEP 1
+        when CLEAN_F_OUT_L_STATE =>     -- STEP 1
           -- Control Outputs
-          H_OUT_ENABLE <= '0';
+          F_OUT_ENABLE <= '0';
 
           -- FSM Control
-          controller_h_out_fsm_int <= OUTPUT_H_OUT_L_STATE;
+          controller_f_out_fsm_int <= OUTPUT_F_OUT_L_STATE;
 
-        when OUTPUT_H_OUT_L_STATE =>    -- STEP 2
+        when OUTPUT_F_OUT_L_STATE =>    -- STEP 2
 
-          if (unsigned(index_l_h_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_l_f_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            H_OUT <= vector_h_out_int(to_integer(unsigned(index_l_h_out_loop)));
+            F_OUT <= vector_f_out_int(to_integer(unsigned(index_l_f_out_loop)));
 
             -- Control Outputs
             READY <= '1';
 
-            H_OUT_ENABLE <= '1';
+            F_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_l_h_out_loop <= ZERO_CONTROL;
+            index_l_f_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_h_out_fsm_int <= STARTER_H_OUT_STATE;
-          elsif (unsigned(index_l_h_out_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            controller_f_out_fsm_int <= STARTER_F_OUT_STATE;
+          elsif (unsigned(index_l_f_out_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            H_OUT <= vector_h_out_int(to_integer(unsigned(index_l_h_out_loop)));
+            F_OUT <= vector_f_out_int(to_integer(unsigned(index_l_f_out_loop)));
 
             -- Control Outputs
-            H_OUT_ENABLE <= '1';
+            F_OUT_ENABLE <= '1';
 
             -- Control Internal
-            index_l_h_out_loop <= std_logic_vector(unsigned(index_l_h_out_loop) + unsigned(ONE_CONTROL));
+            index_l_f_out_loop <= std_logic_vector(unsigned(index_l_f_out_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            controller_h_out_fsm_int <= CLEAN_H_OUT_L_STATE;
+            controller_f_out_fsm_int <= CLEAN_F_OUT_L_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_h_out_fsm_int <= STARTER_H_OUT_STATE;
+          controller_f_out_fsm_int <= STARTER_F_OUT_STATE;
       end case;
     end if;
   end process;
