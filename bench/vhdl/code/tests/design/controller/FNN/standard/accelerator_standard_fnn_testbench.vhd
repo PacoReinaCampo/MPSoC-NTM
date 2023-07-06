@@ -55,14 +55,14 @@ entity accelerator_standard_fnn_testbench is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)); -- i in 0 to R-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_STANDARD_FNN_TEST : boolean := false;
+    ENABLE_ACCELERATOR_STANDARD_FNN_TEST : boolean := false;
 
-    ENABLE_STANDARD_FNN_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_STANDARD_FNN_CASE_0 : boolean := false;
 
-    ENABLE_STANDARD_FNN_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_STANDARD_FNN_CASE_1 : boolean := false
     );
 end accelerator_standard_fnn_testbench;
 
@@ -180,7 +180,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- STIMULUS
-  accelerator_standard_fnn_stimulus_i : accelerator_standard_fnn_stimulus
+  standard_fnn_stimulus : accelerator_standard_fnn_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -296,111 +296,113 @@ begin
       );
 
   -- CONTROLLER
-  accelerator_controller_i : accelerator_controller
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  accelerator_standard_fnn_test : if (ENABLE_ACCELERATOR_STANDARD_FNN_TEST) generate
+    controller : accelerator_controller
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_controller,
-      READY => ready_controller,
+        -- CONTROL
+        START => start_controller,
+        READY => ready_controller,
 
-      W_IN_L_ENABLE => w_in_l_enable_controller,
-      W_IN_X_ENABLE => w_in_x_enable_controller,
+        W_IN_L_ENABLE => w_in_l_enable_controller,
+        W_IN_X_ENABLE => w_in_x_enable_controller,
 
-      W_OUT_L_ENABLE => w_out_l_enable_controller,
-      W_OUT_X_ENABLE => w_out_x_enable_controller,
+        W_OUT_L_ENABLE => w_out_l_enable_controller,
+        W_OUT_X_ENABLE => w_out_x_enable_controller,
 
-      K_IN_I_ENABLE => k_in_i_enable_controller,
-      K_IN_L_ENABLE => k_in_l_enable_controller,
-      K_IN_K_ENABLE => k_in_k_enable_controller,
+        K_IN_I_ENABLE => k_in_i_enable_controller,
+        K_IN_L_ENABLE => k_in_l_enable_controller,
+        K_IN_K_ENABLE => k_in_k_enable_controller,
 
-      K_OUT_I_ENABLE => k_out_i_enable_controller,
-      K_OUT_L_ENABLE => k_out_l_enable_controller,
-      K_OUT_K_ENABLE => k_out_k_enable_controller,
+        K_OUT_I_ENABLE => k_out_i_enable_controller,
+        K_OUT_L_ENABLE => k_out_l_enable_controller,
+        K_OUT_K_ENABLE => k_out_k_enable_controller,
 
-      D_IN_I_ENABLE => d_in_i_enable_controller,
-      D_IN_L_ENABLE => d_in_l_enable_controller,
-      D_IN_M_ENABLE => d_in_m_enable_controller,
+        D_IN_I_ENABLE => d_in_i_enable_controller,
+        D_IN_L_ENABLE => d_in_l_enable_controller,
+        D_IN_M_ENABLE => d_in_m_enable_controller,
 
-      D_OUT_I_ENABLE => d_out_i_enable_controller,
-      D_OUT_L_ENABLE => d_out_l_enable_controller,
-      D_OUT_M_ENABLE => d_out_m_enable_controller,
+        D_OUT_I_ENABLE => d_out_i_enable_controller,
+        D_OUT_L_ENABLE => d_out_l_enable_controller,
+        D_OUT_M_ENABLE => d_out_m_enable_controller,
 
-      U_IN_L_ENABLE => u_in_l_enable_controller,
-      U_IN_P_ENABLE => u_in_p_enable_controller,
+        U_IN_L_ENABLE => u_in_l_enable_controller,
+        U_IN_P_ENABLE => u_in_p_enable_controller,
 
-      U_OUT_L_ENABLE => u_out_l_enable_controller,
-      U_OUT_P_ENABLE => u_out_p_enable_controller,
+        U_OUT_L_ENABLE => u_out_l_enable_controller,
+        U_OUT_P_ENABLE => u_out_p_enable_controller,
 
-      V_IN_L_ENABLE => v_in_l_enable_controller,
-      V_IN_S_ENABLE => v_in_s_enable_controller,
+        V_IN_L_ENABLE => v_in_l_enable_controller,
+        V_IN_S_ENABLE => v_in_s_enable_controller,
 
-      V_OUT_L_ENABLE => v_out_l_enable_controller,
-      V_OUT_S_ENABLE => v_out_s_enable_controller,
+        V_OUT_L_ENABLE => v_out_l_enable_controller,
+        V_OUT_S_ENABLE => v_out_s_enable_controller,
 
-      B_IN_ENABLE => b_in_enable_controller,
+        B_IN_ENABLE => b_in_enable_controller,
 
-      B_OUT_ENABLE => b_out_enable_controller,
+        B_OUT_ENABLE => b_out_enable_controller,
 
-      X_IN_ENABLE => x_in_enable_controller,
+        X_IN_ENABLE => x_in_enable_controller,
 
-      X_OUT_ENABLE => x_out_enable_controller,
+        X_OUT_ENABLE => x_out_enable_controller,
 
-      R_IN_I_ENABLE => r_in_i_enable_controller,
-      R_IN_K_ENABLE => r_in_k_enable_controller,
+        R_IN_I_ENABLE => r_in_i_enable_controller,
+        R_IN_K_ENABLE => r_in_k_enable_controller,
 
-      R_OUT_I_ENABLE => r_out_i_enable_controller,
-      R_OUT_K_ENABLE => r_out_k_enable_controller,
+        R_OUT_I_ENABLE => r_out_i_enable_controller,
+        R_OUT_K_ENABLE => r_out_k_enable_controller,
 
-      RHO_IN_I_ENABLE => rho_in_i_enable_controller,
-      RHO_IN_M_ENABLE => rho_in_m_enable_controller,
+        RHO_IN_I_ENABLE => rho_in_i_enable_controller,
+        RHO_IN_M_ENABLE => rho_in_m_enable_controller,
 
-      RHO_OUT_I_ENABLE => rho_out_i_enable_controller,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_controller,
+        RHO_OUT_I_ENABLE => rho_out_i_enable_controller,
+        RHO_OUT_M_ENABLE => rho_out_m_enable_controller,
 
-      XI_IN_ENABLE => xi_in_enable_controller,
+        XI_IN_ENABLE => xi_in_enable_controller,
 
-      XI_OUT_ENABLE => xi_out_enable_controller,
+        XI_OUT_ENABLE => xi_out_enable_controller,
 
-      H_IN_ENABLE => h_in_enable_controller,
+        H_IN_ENABLE => h_in_enable_controller,
 
-      H_OUT_ENABLE => h_out_enable_controller,
+        H_OUT_ENABLE => h_out_enable_controller,
 
-      -- DATA
-      SIZE_X_IN => size_x_in_controller,
-      SIZE_W_IN => size_w_in_controller,
-      SIZE_L_IN => size_l_in_controller,
-      SIZE_R_IN => size_r_in_controller,
-      SIZE_S_IN => size_s_in_controller,
-      SIZE_M_IN => size_m_in_controller,
+        -- DATA
+        SIZE_X_IN => size_x_in_controller,
+        SIZE_W_IN => size_w_in_controller,
+        SIZE_L_IN => size_l_in_controller,
+        SIZE_R_IN => size_r_in_controller,
+        SIZE_S_IN => size_s_in_controller,
+        SIZE_M_IN => size_m_in_controller,
 
-      W_IN => w_in_controller,
-      D_IN => d_in_controller,
-      K_IN => k_in_controller,
-      U_IN => u_in_controller,
-      V_IN => v_in_controller,
-      B_IN => b_in_controller,
+        W_IN => w_in_controller,
+        D_IN => d_in_controller,
+        K_IN => k_in_controller,
+        U_IN => u_in_controller,
+        V_IN => v_in_controller,
+        B_IN => b_in_controller,
 
-      X_IN   => x_in_controller,
-      R_IN   => r_in_controller,
-      RHO_IN => rho_in_controller,
-      XI_IN  => xi_in_controller,
-      H_IN   => h_in_controller,
+        X_IN   => x_in_controller,
+        R_IN   => r_in_controller,
+        RHO_IN => rho_in_controller,
+        XI_IN  => xi_in_controller,
+        H_IN   => h_in_controller,
 
-      W_OUT => w_out_controller,
-      D_OUT => d_out_controller,
-      K_OUT => k_out_controller,
-      U_OUT => u_out_controller,
-      V_OUT => v_out_controller,
-      B_OUT => b_out_controller,
+        W_OUT => w_out_controller,
+        D_OUT => d_out_controller,
+        K_OUT => k_out_controller,
+        U_OUT => u_out_controller,
+        V_OUT => v_out_controller,
+        B_OUT => b_out_controller,
 
-      H_OUT => h_out_controller
-      );
+        H_OUT => h_out_controller
+        );
+  end generate accelerator_standard_fnn_test;
 
 end accelerator_standard_fnn_testbench_architecture;

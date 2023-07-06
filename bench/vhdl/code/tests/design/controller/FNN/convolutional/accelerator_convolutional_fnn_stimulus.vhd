@@ -42,7 +42,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
+
+use work.accelerator_convolutional_fnn_pkg.all;
 
 entity accelerator_convolutional_fnn_stimulus is
   generic (
@@ -63,100 +66,100 @@ entity accelerator_convolutional_fnn_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    ACCELERATOR_CONVOLUTIONAL_FNN_START : out std_logic;
-    ACCELERATOR_CONVOLUTIONAL_FNN_READY : in  std_logic;
+    CONVOLUTIONAL_FNN_START : out std_logic;
+    CONVOLUTIONAL_FNN_READY : in  std_logic;
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
+    CONVOLUTIONAL_FNN_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
+    CONVOLUTIONAL_FNN_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    CONVOLUTIONAL_FNN_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+    CONVOLUTIONAL_FNN_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+    CONVOLUTIONAL_FNN_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+    CONVOLUTIONAL_FNN_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
+    CONVOLUTIONAL_FNN_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
+    CONVOLUTIONAL_FNN_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
+    CONVOLUTIONAL_FNN_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
+    CONVOLUTIONAL_FNN_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
+    CONVOLUTIONAL_FNN_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
+    CONVOLUTIONAL_FNN_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    CONVOLUTIONAL_FNN_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+    CONVOLUTIONAL_FNN_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+    CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    ACCELERATOR_CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+    CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
+    CONVOLUTIONAL_FNN_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
+    CONVOLUTIONAL_FNN_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+    CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
     -- DATA
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_CONVOLUTIONAL_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    CONVOLUTIONAL_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    ACCELERATOR_CONVOLUTIONAL_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    CONVOLUTIONAL_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -178,6 +181,11 @@ architecture accelerator_convolutional_fnn_stimulus_architecture of accelerator_
   ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
+
+  -- LOOP
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -229,8 +237,850 @@ begin
     wait for WORKING;
   end process;
 
+  -- VECTOR-FUNCTIONALITY
+  CONVOLUTIONAL_FNN_START <= start_int;
+
   ------------------------------------------------------------------------------
   -- STIMULUS
   ------------------------------------------------------------------------------
+
+  main_test : process
+  begin
+
+    if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_TEST          ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      CONVOLUTIONAL_FNN_SIZE_X_IN <= THREE_CONTROL;
+      CONVOLUTIONAL_FNN_SIZE_W_IN <= THREE_CONTROL;
+      CONVOLUTIONAL_FNN_SIZE_L_IN <= THREE_CONTROL;
+      CONVOLUTIONAL_FNN_SIZE_R_IN <= THREE_CONTROL;
+      CONVOLUTIONAL_FNN_SIZE_S_IN <= THREE_CONTROL;
+      CONVOLUTIONAL_FNN_SIZE_M_IN <= THREE_CONTROL;
+
+      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_CASE 0        ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        CONVOLUTIONAL_FNN_W_IN <= ZERO_DATA;
+        CONVOLUTIONAL_FNN_K_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        CONVOLUTIONAL_FNN_FIRST_RUN : loop
+          if (CONVOLUTIONAL_FNN_W_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_W_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_K_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_D_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_U_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_U_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_V_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_V_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_R_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_R_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_X_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_X_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_XI_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_XI_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_H_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_H_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit CONVOLUTIONAL_FNN_FIRST_RUN when CONVOLUTIONAL_FNN_READY = '1';
+        end loop CONVOLUTIONAL_FNN_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_CASE 1        ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        CONVOLUTIONAL_FNN_W_IN <= ZERO_DATA;
+        CONVOLUTIONAL_FNN_K_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        CONVOLUTIONAL_FNN_SECOND_RUN : loop
+          if (CONVOLUTIONAL_FNN_W_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_W_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_W_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_W_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_W_IN_X_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_K_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_K_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_K_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_K_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_K_IN_K_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_D_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_D_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_D_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_D_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_D_IN_M_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_U_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_U_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_U_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_U_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_U_IN_P_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_V_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_V_OUT_L_ENABLE = '1' and CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_V_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_V_IN_L_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_V_IN_S_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_R_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_R_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_R_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_R_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_R_IN_K_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE = '1' and CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '1';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            CONVOLUTIONAL_FNN_RHO_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '1';
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE <= '0';
+            CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_B_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_X_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_X_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_X_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_XI_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          elsif ((CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_XI_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_XI_IN_ENABLE <= '0';
+          end if;
+
+          if (CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_H_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '1';
+
+            -- DATA
+            CONVOLUTIONAL_FNN_H_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            CONVOLUTIONAL_FNN_H_IN_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_W_OUT_X_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_K_OUT_K_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_D_OUT_M_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_U_OUT_P_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_V_OUT_S_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_R_OUT_K_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_j_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_B_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_X_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_XI_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_S_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          if (CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((CONVOLUTIONAL_FNN_H_OUT_ENABLE = '1' or CONVOLUTIONAL_FNN_START = '1') and (unsigned(index_i_loop) < unsigned(CONVOLUTIONAL_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit CONVOLUTIONAL_FNN_SECOND_RUN when CONVOLUTIONAL_FNN_READY = '1';
+        end loop CONVOLUTIONAL_FNN_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    assert false
+      report "END OF TEST"
+      severity failure;
+
+  end process main_test;
 
 end architecture;

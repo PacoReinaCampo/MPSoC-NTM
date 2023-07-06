@@ -2628,77 +2628,84 @@ package body model_math_pkg is
 
     variable matrix_output : matrix_buffer;
 
+    variable vector_in_int : vector_buffer;
     variable matrix_in_int : matrix_buffer;
 
-    variable data_interchange_in_int  : vector_buffer;
-    variable data_interchange_out_int : vector_buffer;
-
     variable scalar_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     -- Data Inputs
-    matrix_in_int := matrix_input;
-
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_in_int(i, j) := matrix_input(i, j);
+
         if (i = j) then
-          matrix_output(i, j) := ONE_DATA;
+          matrix_in_int(i, j + to_integer(unsigned(SIZE_J_IN))) := ONE_DATA;
         else
-          matrix_output(i, j) := ZERO_DATA;
+          matrix_in_int(i, j + to_integer(unsigned(SIZE_J_IN))) := ZERO_DATA;
         end if;
       end loop;
     end loop;
 
-    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      if (matrix_in_int(m, m) = ZERO_DATA) then
-        for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-          if (matrix_in_int(i, m) /= ZERO_DATA) then
-            for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-              data_interchange_in_int(j)  := matrix_in_int(m, j);
-              data_interchange_out_int(j) := matrix_output(m, j);
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      while (matrix_input(i, i) = ZERO_DATA) loop
+        for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
+          vector_in_int(j) :=  matrix_in_int(i, j);
 
-              matrix_in_int(m, j) := matrix_in_int(i, j);
-              matrix_output(m, j) := matrix_output(i, j);
-
-              matrix_in_int(i, j) := data_interchange_in_int(j);
-              matrix_output(i, j) := data_interchange_out_int(j);
-            end loop;
+          if i < to_integer(unsigned(SIZE_I_IN))-1 then
+             matrix_in_int(i, j) :=  matrix_in_int(i+1, j);
+             matrix_in_int(i+1, j) := vector_in_int(j);
+          else
+             matrix_in_int(i, j) :=  matrix_in_int(i-1, j);
+             matrix_in_int(i-1, j) := vector_in_int(j);
           end if;
         end loop;
-      end if;
+      end loop;
 
-      for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        data_quotient_int := function_scalar_float_divider (
-          scalar_a_input => matrix_in_int(i, m),
-          scalar_b_input => matrix_in_int(m, m)
+      for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_in_int(i, j) := function_scalar_float_divider (
+          scalar_a_input => matrix_in_int(i, j),
+          scalar_b_input => matrix_in_int(i, i)
           );
+      end loop;
 
-        for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+      for m in i to to_integer(unsigned(SIZE_I_IN))-2 loop
+        for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
           scalar_operation_int := function_scalar_float_multiplier (
-            scalar_a_input => data_quotient_int,
-            scalar_b_input => matrix_in_int(m, j)
+            scalar_a_input => matrix_in_int(i, j),
+            scalar_b_input => matrix_in_int(m+1, i)
             );
 
-          matrix_in_int(i, j) := function_scalar_float_adder (
+          matrix_in_int(m+1, j) := function_scalar_float_adder (
             OPERATION => '1',
 
-            scalar_a_input => matrix_in_int(i, j),
+            scalar_a_input => matrix_in_int(m+1, j),
             scalar_b_input => scalar_operation_int
             );
+        end loop;
+      end loop;
+    end loop;
 
+    for i in 1 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for m in 0 to i-1 loop
+        for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
           scalar_operation_int := function_scalar_float_multiplier (
-            scalar_a_input => data_quotient_int,
-            scalar_b_input => matrix_output(m, j)
+            scalar_a_input => matrix_in_int(i, j),
+            scalar_b_input => matrix_in_int(m+1, i)
             );
 
           matrix_output(i, j) := function_scalar_float_adder (
             OPERATION => '1',
 
-            scalar_a_input => matrix_output(i, j),
+            scalar_a_input => matrix_in_int(i+1, j),
             scalar_b_input => scalar_operation_int
             );
         end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := matrix_in_int(i, j + to_integer(unsigned(SIZE_J_IN)));
       end loop;
     end loop;
 

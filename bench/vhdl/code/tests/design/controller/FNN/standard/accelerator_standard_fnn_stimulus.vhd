@@ -247,7 +247,7 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_STANDARD_FNN_TEST) then
+    if (STIMULUS_ACCELERATOR_STANDARD_FNN_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_NTM_STANDARD_FNN_TEST          ";
@@ -261,7 +261,7 @@ begin
       STANDARD_FNN_SIZE_S_IN <= THREE_CONTROL;
       STANDARD_FNN_SIZE_M_IN <= THREE_CONTROL;
 
-      if (STIMULUS_STANDARD_FNN_CASE_0) then
+      if (STIMULUS_ACCELERATOR_STANDARD_FNN_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_NTM_STANDARD_FNN_CASE 0        ";
@@ -578,7 +578,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
           elsif ((STANDARD_FNN_K_OUT_K_ENABLE = '1' or STANDARD_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(STANDARD_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
-          end if;          
+          end if;
 
           if (STANDARD_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(STANDARD_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(STANDARD_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(STANDARD_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
@@ -667,7 +667,7 @@ begin
         end loop STANDARD_FNN_FIRST_RUN;
       end if;
 
-      if (STIMULUS_STANDARD_FNN_CASE_1) then
+      if (STIMULUS_ACCELERATOR_STANDARD_FNN_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_NTM_STANDARD_FNN_CASE 1        ";
@@ -984,7 +984,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
           elsif ((STANDARD_FNN_K_OUT_K_ENABLE = '1' or STANDARD_FNN_START = '1') and (unsigned(index_k_loop) < unsigned(STANDARD_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
-          end if;          
+          end if;
 
           if (STANDARD_FNN_D_OUT_M_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(STANDARD_FNN_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(STANDARD_FNN_SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(STANDARD_FNN_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;

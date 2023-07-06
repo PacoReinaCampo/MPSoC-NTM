@@ -1,0 +1,6 @@
+cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/controller/FNN/convolutional/msim
+
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/controller/FNN/convolutional/msim/macros/design.do
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/controller/FNN/convolutional/msim/macros/verification.do
+
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/controller/FNN/convolutional/msim/list.do

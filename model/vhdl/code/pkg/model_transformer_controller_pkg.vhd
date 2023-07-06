@@ -1965,6 +1965,8 @@ package model_transformer_controller_pkg is
     matrix_q_input : matrix_buffer;
     matrix_v_input : matrix_buffer;
 
+    matrix_m_input : matrix_buffer;
+
     matrix_x_input : matrix_buffer;
     ) return matrix_buffer;
 
@@ -1978,8 +1980,6 @@ package model_transformer_controller_pkg is
     tensor_k_input : tensor_buffer;
     tensor_q_input : tensor_buffer;
     tensor_v_input : tensor_buffer;
-
-    matrix_m_input : matrix_buffer;
 
     matrix_w_oh_input : matrix_buffer;
 
@@ -1996,10 +1996,6 @@ package model_transformer_controller_pkg is
     tensor_k_input : tensor_buffer;
     tensor_q_input : tensor_buffer;
     tensor_v_input : tensor_buffer;
-
-    matrix_m_input : matrix_buffer;
-
-    matrix_w_oh_input : matrix_buffer;
 
     matrix_x_input : matrix_buffer;
     ) return matrix_buffer;
@@ -2436,6 +2432,8 @@ package body model_transformer_controller_pkg is
     matrix_q_input : matrix_buffer;
     matrix_v_input : matrix_buffer;
 
+    matrix_m_input : matrix_buffer;
+
     matrix_x_input : matrix_buffer;
     ) return matrix_buffer;
 
@@ -2456,8 +2454,6 @@ package body model_transformer_controller_pkg is
     tensor_k_input : tensor_buffer;
     tensor_q_input : tensor_buffer;
     tensor_v_input : tensor_buffer;
-
-    matrix_m_input : matrix_buffer;
 
     matrix_w_oh_input : matrix_buffer;
 
@@ -2481,10 +2477,6 @@ package body model_transformer_controller_pkg is
     tensor_k_input : tensor_buffer;
     tensor_q_input : tensor_buffer;
     tensor_v_input : tensor_buffer;
-
-    matrix_m_input : matrix_buffer;
-
-    matrix_w_oh_input : matrix_buffer;
 
     matrix_x_input : matrix_buffer;
     ) return matrix_buffer;
