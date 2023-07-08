@@ -51,13 +51,14 @@
 #define SIZE_IN 3
 
 double ntm_matrix_inverse(double **data_in) {
+  double vector[SIZE];
   double matrix[SIZE][SIZE];
 
   double **data_out;
 
   double ratio;
 
-  int i, j, m;
+  int i, j, m, n;
 
   data_out = (double **) malloc(SIZE_IN*sizeof(int*));
 
@@ -78,11 +79,35 @@ double ntm_matrix_inverse(double **data_in) {
     }
   }
 
-  // Applying Gauss Jordan Elimination
   for (i = 0; i < SIZE_IN; i++) {
-    if (matrix[i][i] == 0.0) {
-      printf("Mathematical Error!");
+    // Row swapping
+    n = 1;
+
+    while (matrix[i][i] == 0.0) {
+      for (j = 0; j < 2*SIZE_IN; j++) {
+        vector[j] = matrix[i][j];
+      }
+
+      if (i < SIZE_IN - 1) {
+        for (j = 0; j < 2*SIZE_IN; j++) {
+          matrix[i][j] = matrix[i + n][j];
+        }
+        for (j = 0; j < 2*SIZE_IN; j++) {
+          matrix[i + n][j] = vector[j];
+        }
+      } else {
+        for (j = 0; j < 2*SIZE_IN; j++) {
+          matrix[i][j] = matrix[i - n][j];
+        }
+        for (j = 0; j < 2*SIZE_IN; j++) {
+          matrix[i - n][j] = vector[j];
+        }
+      }
+
+      n = n + 1;
     }
+
+    // Applying Gauss Jordan Elimination
     for (j = 0; j < SIZE_IN; j++) {
       if (i != j) {
         ratio = matrix[j][i]/matrix[i][i];

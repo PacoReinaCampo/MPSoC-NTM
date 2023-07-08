@@ -1019,15 +1019,15 @@ begin
 
       if (ready_matrix_float_multiplier = '1' and data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1') then
         assert data_out_matrix_float_multiplier = function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(function_scalar_float_divider(data_a_in_matrix_float_divider, data_b_in_matrix_float_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier))
           severity error;
       elsif (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = ZERO_DATA) then
         assert data_out_matrix_float_multiplier = function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(function_scalar_float_divider(data_a_in_matrix_float_divider, data_b_in_matrix_float_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier))
           severity error;
       elsif (data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = ZERO_DATA) then
         assert data_out_matrix_float_multiplier = function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(function_scalar_float_divider(data_a_in_matrix_float_divider, data_b_in_matrix_float_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_matrix_float_multiplier, data_b_in_matrix_float_multiplier))
           severity error;
       end if;
 
@@ -1177,15 +1177,15 @@ begin
         assert data_out_tensor_float_adder = function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder))
           severity error;
-      elsif (data_out_i_enable_tensor_float_adder = '1' and data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
+      elsif (data_out_i_enable_tensor_float_adder = '1' and data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder))
           severity error;
-      elsif (data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
+      elsif (data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder))
           severity error;
-      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
+      elsif (data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(function_scalar_float_adder(operation_tensor_float_adder, data_a_in_tensor_float_adder, data_b_in_tensor_float_adder))
           severity error;
@@ -1195,15 +1195,15 @@ begin
         assert data_out_tensor_float_multiplier = function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier))
           severity error;
-      elsif (data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
+      elsif (data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier))
           severity error;
-      elsif (data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
+      elsif (data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier))
           severity error;
-      elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
+      elsif (data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(function_scalar_float_multiplier(data_a_in_tensor_float_multiplier, data_b_in_tensor_float_multiplier))
           severity error;

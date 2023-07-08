@@ -133,6 +133,80 @@ end model_algebra_testbench;
 architecture model_algebra_testbench_architecture of model_algebra_testbench is
 
   ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant CONTROL_X : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_X_SIZE, CONTROL_SIZE));
+  constant CONTROL_Y : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_Y_SIZE, CONTROL_SIZE));
+  constant CONTROL_Z : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_Z_SIZE, CONTROL_SIZE));
+  constant CONTROL_L : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_L_SIZE, CONTROL_SIZE));
+
+  -- VECTOR
+  constant DOT_PRODUCT_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_dot_product(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant DOT_PRODUCT_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_dot_product(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+
+  constant VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_convolution(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_convolution(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+
+  constant VECTOR_COSINE_SIMILARITY_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_cosine_similarity(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant VECTOR_COSINE_SIMILARITY_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_cosine_similarity(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+
+  constant VECTOR_MULTIPLICATION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
+  constant VECTOR_MULTIPLICATION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
+
+  constant VECTOR_SUMMATION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
+  constant VECTOR_SUMMATION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
+
+  constant VECTOR_MODULE_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_module(CONTROL_X, VECTOR_SAMPLE_A);
+  constant VECTOR_MODULE_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_module(CONTROL_X, VECTOR_SAMPLE_B);
+
+  -- MATRIX
+  constant MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
+
+  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
+
+  constant MATRIX_INVERSE_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
+  constant MATRIX_INVERSE_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
+
+  constant MATRIX_MULTIPLICATION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
+  constant MATRIX_MULTIPLICATION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
+
+  constant MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
+
+  constant MATRIX_VECTOR_PRODUCT_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant MATRIX_VECTOR_PRODUCT_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
+
+  constant MATRIX_TRANSPOSE_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
+  constant MATRIX_TRANSPOSE_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
+
+  constant MATRIX_SUMMATION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
+  constant MATRIX_SUMMATION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
+
+  -- TENSOR
+  constant TENSOR_CONVOLUTION_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
+  constant TENSOR_CONVOLUTION_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+
+  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+
+  constant TENSOR_INVERSE_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_INVERSE_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
+
+  constant TENSOR_PRODUCT_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant TENSOR_PRODUCT_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+
+  constant TENSOR_MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant TENSOR_MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+
+  constant TENSOR_TRANSPOSE_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_TRANSPOSE_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
+
+  ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
 
@@ -1252,6 +1326,96 @@ begin
         );
   end generate model_vector_module_test;
 
+  vector_assertion : process (CLK, RST)
+    variable i : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_dot_product = '1' and data_out_enable_dot_product = '1') then
+        assert data_out_dot_product = DOT_PRODUCT_OUTPUT_0(i)
+          report "DOT PRODUCT: CALCULATED = " & to_string(data_out_dot_product) & "; CORRECT = " & to_string(DOT_PRODUCT_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_dot_product = '1' and not data_out_dot_product = EMPTY) then
+        assert data_out_dot_product = DOT_PRODUCT_OUTPUT_0(i)
+          report "DOT PRODUCT: CALCULATED = " & to_string(data_out_dot_product) & "; CORRECT = " & to_string(DOT_PRODUCT_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_convolution = '1' and data_out_enable_vector_convolution = '1') then
+        assert data_out_vector_convolution = VECTOR_CONVOLUTION_OUTPUT_0(i)
+          report "VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_vector_convolution) & "; CORRECT = " & to_string(VECTOR_CONVOLUTION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_convolution = '1' and not data_out_vector_convolution = EMPTY) then
+        assert data_out_vector_convolution = VECTOR_CONVOLUTION_OUTPUT_0(i)
+          report "VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_vector_convolution) & "; CORRECT = " & to_string(VECTOR_CONVOLUTION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_cosine_similarity = '1' and data_out_enable_vector_cosine_similarity = '1') then
+        assert data_out_vector_cosine_similarity = VECTOR_COSINE_SIMILARITY_OUTPUT_0(i)
+          report "VECTOR COSINE SIMILARITY: CALCULATED = " & to_string(data_out_vector_cosine_similarity) & "; CORRECT = " & to_string(VECTOR_COSINE_SIMILARITY_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_cosine_similarity = '1' and not data_out_vector_cosine_similarity = EMPTY) then
+        assert data_out_vector_cosine_similarity = VECTOR_COSINE_SIMILARITY_OUTPUT_0(i)
+          report "VECTOR COSINE SIMILARITY: CALCULATED = " & to_string(data_out_vector_cosine_similarity) & "; CORRECT = " & to_string(VECTOR_COSINE_SIMILARITY_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_multiplication = '1' and data_out_enable_vector_multiplication = '1') then
+        assert data_out_vector_multiplication = VECTOR_MULTIPLICATION_OUTPUT_0(i)
+          report "VECTOR MULTIPLICATION: CALCULATED = " & to_string(data_out_vector_multiplication) & "; CORRECT = " & to_string(VECTOR_MULTIPLICATION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_multiplication = '1' and not data_out_vector_multiplication = EMPTY) then
+        assert data_out_vector_multiplication = VECTOR_MULTIPLICATION_OUTPUT_0(i)
+          report "VECTOR MULTIPLICATION: CALCULATED = " & to_string(data_out_vector_multiplication) & "; CORRECT = " & to_string(VECTOR_MULTIPLICATION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_summation = '1' and data_out_enable_vector_summation = '1') then
+        assert data_out_vector_summation = VECTOR_SUMMATION_OUTPUT_0(i)
+          report "VECTOR SUMMATION: CALCULATED = " & to_string(data_out_vector_summation) & "; CORRECT = " & to_string(VECTOR_SUMMATION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_summation = '1' and not data_out_vector_summation = EMPTY) then
+        assert data_out_vector_summation = VECTOR_SUMMATION_OUTPUT_0(i)
+          report "VECTOR SUMMATION: CALCULATED = " & to_string(data_out_vector_summation) & "; CORRECT = " & to_string(VECTOR_SUMMATION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_module = '1' and data_out_enable_vector_module = '1') then
+        assert data_out_vector_module = VECTOR_MODULE_OUTPUT_0(i)
+          report "VECTOR MODULE: CALCULATED = " & to_string(data_out_vector_module) & "; CORRECT = " & to_string(VECTOR_MODULE_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_module = '1' and not data_out_vector_module = EMPTY) then
+        assert data_out_vector_module = VECTOR_MODULE_OUTPUT_0(i)
+          report "VECTOR MODULE: CALCULATED = " & to_string(data_out_vector_module) & "; CORRECT = " & to_string(VECTOR_MODULE_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+    end if;
+  end process vector_assertion;
+
   -- MATRIX CONVOLUTION
   model_matrix_convolution_test : if (ENABLE_NTM_MATRIX_CONVOLUTION_TEST) generate
     matrix_convolution : model_matrix_convolution
@@ -1535,6 +1699,173 @@ begin
         DATA_OUT  => data_out_matrix_transpose
         );
   end generate model_matrix_transpose_test;
+
+  matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_matrix_convolution = '1' and data_out_i_enable_matrix_convolution = '1' and data_out_j_enable_matrix_convolution = '1') then
+        assert data_out_matrix_convolution = MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_convolution = '1' and data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = EMPTY) then
+        assert data_out_matrix_convolution = MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_convolution = '1' and not data_out_matrix_convolution = EMPTY) then
+        assert data_out_matrix_convolution = MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_convolution) & "; CORRECT = " & to_string(MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_vector_convolution = '1' and data_out_enable_matrix_vector_convolution = '1') then
+        assert data_out_matrix_vector_convolution = MATRIX_VECTOR_CONVOLUTION_OUTPUT_0(i)
+          report "MATRIX VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_vector_convolution) & "; CORRECT = " & to_string(MATRIX_VECTOR_CONVOLUTION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_matrix_vector_convolution = '1' and not data_out_matrix_vector_convolution = EMPTY) then
+        assert data_out_matrix_vector_convolution = MATRIX_VECTOR_CONVOLUTION_OUTPUT_0(i)
+          report "MATRIX VECTOR CONVOLUTION: CALCULATED = " & to_string(data_out_matrix_vector_convolution) & "; CORRECT = " & to_string(MATRIX_VECTOR_CONVOLUTION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_matrix_inverse = '1' and data_out_i_enable_matrix_inverse = '1' and data_out_j_enable_matrix_inverse = '1') then
+        assert data_out_matrix_inverse = MATRIX_INVERSE_OUTPUT_0(i, j)
+          report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_inverse) & "; CORRECT = " & to_string(MATRIX_INVERSE_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_inverse = '1' and data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = EMPTY) then
+        assert data_out_matrix_inverse = MATRIX_INVERSE_OUTPUT_0(i, j)
+          report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_inverse) & "; CORRECT = " & to_string(MATRIX_INVERSE_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_inverse = '1' and not data_out_matrix_inverse = EMPTY) then
+        assert data_out_matrix_inverse = MATRIX_INVERSE_OUTPUT_0(i, j)
+          report "MATRIX INVERSE: CALCULATED = " & to_string(data_out_matrix_inverse) & "; CORRECT = " & to_string(MATRIX_INVERSE_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_multiplication = '1' and data_out_i_enable_matrix_multiplication = '1' and data_out_j_enable_matrix_multiplication = '1') then
+        assert data_out_matrix_multiplication = MATRIX_MULTIPLICATION_OUTPUT_0(i, j)
+          report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(MATRIX_MULTIPLICATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_multiplication = '1' and data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = EMPTY) then
+        assert data_out_matrix_multiplication = MATRIX_MULTIPLICATION_OUTPUT_0(i, j)
+          report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(MATRIX_MULTIPLICATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_multiplication = '1' and not data_out_matrix_multiplication = EMPTY) then
+        assert data_out_matrix_multiplication = MATRIX_MULTIPLICATION_OUTPUT_0(i, j)
+          report "MATRIX MULTIPLICATION: CALCULATED = " & to_string(data_out_matrix_multiplication) & "; CORRECT = " & to_string(MATRIX_MULTIPLICATION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_product = '1' and data_out_i_enable_matrix_product = '1' and data_out_j_enable_matrix_product = '1') then
+        assert data_out_matrix_product = MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_product = '1' and data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = EMPTY) then
+        assert data_out_matrix_product = MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_product = '1' and not data_out_matrix_product = EMPTY) then
+        assert data_out_matrix_product = MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "MATRIX PRODUCT: CALCULATED = " & to_string(data_out_matrix_product) & "; CORRECT = " & to_string(MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_vector_product = '1' and data_out_enable_matrix_vector_product = '1') then
+        assert data_out_matrix_vector_product = MATRIX_VECTOR_PRODUCT_OUTPUT_0(i)
+          report "MATRIX VECTOR PRODUCT: CALCULATED = " & to_string(data_out_matrix_vector_product) & "; CORRECT = " & to_string(MATRIX_VECTOR_PRODUCT_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_matrix_vector_product = '1' and not data_out_matrix_vector_product = EMPTY) then
+        assert data_out_matrix_vector_product = MATRIX_VECTOR_PRODUCT_OUTPUT_0(i)
+          report "MATRIX VECTOR PRODUCT: CALCULATED = " & to_string(data_out_matrix_vector_product) & "; CORRECT = " & to_string(MATRIX_VECTOR_PRODUCT_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_matrix_summation = '1' and data_out_i_enable_matrix_summation = '1' and data_out_j_enable_matrix_summation = '1') then
+        assert data_out_matrix_summation = MATRIX_SUMMATION_OUTPUT_0(i, j)
+          report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(MATRIX_SUMMATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_summation = '1' and data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = EMPTY) then
+        assert data_out_matrix_summation = MATRIX_SUMMATION_OUTPUT_0(i, j)
+          report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(MATRIX_SUMMATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_summation = '1' and not data_out_matrix_summation = EMPTY) then
+        assert data_out_matrix_summation = MATRIX_SUMMATION_OUTPUT_0(i, j)
+          report "MATRIX SUMMATION: CALCULATED = " & to_string(data_out_matrix_summation) & "; CORRECT = " & to_string(MATRIX_SUMMATION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_transpose = '1' and data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1') then
+        assert data_out_matrix_transpose = MATRIX_TRANSPOSE_OUTPUT_0(i, j)
+          report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(MATRIX_TRANSPOSE_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_transpose = '1' and data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = EMPTY) then
+        assert data_out_matrix_transpose = MATRIX_TRANSPOSE_OUTPUT_0(i, j)
+          report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(MATRIX_TRANSPOSE_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_transpose = '1' and not data_out_matrix_transpose = EMPTY) then
+        assert data_out_matrix_transpose = MATRIX_TRANSPOSE_OUTPUT_0(i, j)
+          report "MATRIX TRANSPOSE: CALCULATED = " & to_string(data_out_matrix_transpose) & "; CORRECT = " & to_string(MATRIX_TRANSPOSE_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+    end if;
+  end process matrix_assertion;
 
   -- TENSOR CONVOLUTION
   model_tensor_convolution_test : if (ENABLE_NTM_TENSOR_CONVOLUTION_TEST) generate

@@ -270,7 +270,17 @@ begin
         -- INITIAL CONDITIONS
         -- DATA
         STANDARD_FNN_W_IN <= ZERO_DATA;
+        STANDARD_FNN_D_IN <= ZERO_DATA;
         STANDARD_FNN_K_IN <= ZERO_DATA;
+        STANDARD_FNN_U_IN <= ZERO_DATA;
+        STANDARD_FNN_V_IN <= ZERO_DATA;
+        STANDARD_FNN_B_IN <= ZERO_DATA;
+
+        STANDARD_FNN_X_IN   <= ZERO_DATA;
+        STANDARD_FNN_R_IN   <= ZERO_DATA;
+        STANDARD_FNN_RHO_IN <= ZERO_DATA;
+        STANDARD_FNN_XI_IN  <= ZERO_DATA;
+        STANDARD_FNN_H_IN   <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -676,7 +686,17 @@ begin
         -- INITIAL CONDITIONS
         -- DATA
         STANDARD_FNN_W_IN <= ZERO_DATA;
+        STANDARD_FNN_D_IN <= ZERO_DATA;
         STANDARD_FNN_K_IN <= ZERO_DATA;
+        STANDARD_FNN_U_IN <= ZERO_DATA;
+        STANDARD_FNN_V_IN <= ZERO_DATA;
+        STANDARD_FNN_B_IN <= ZERO_DATA;
+
+        STANDARD_FNN_X_IN   <= ZERO_DATA;
+        STANDARD_FNN_R_IN   <= ZERO_DATA;
+        STANDARD_FNN_RHO_IN <= ZERO_DATA;
+        STANDARD_FNN_XI_IN  <= ZERO_DATA;
+        STANDARD_FNN_H_IN   <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;

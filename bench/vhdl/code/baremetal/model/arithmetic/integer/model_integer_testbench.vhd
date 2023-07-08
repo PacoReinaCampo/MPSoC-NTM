@@ -1031,15 +1031,15 @@ begin
 
       if (ready_matrix_integer_multiplier = '1' and data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1') then
         assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_divider) & "; CORRECT = " & to_string(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier))
           severity error;
       elsif (data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = ZERO_DATA) then
         assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_divider) & "; CORRECT = " & to_string(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier))
           severity error;
       elsif (data_out_j_enable_matrix_integer_multiplier = '1' and not data_out_matrix_integer_multiplier = ZERO_DATA) then
         assert data_out_matrix_integer_multiplier = function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier)
-          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_divider) & "; CORRECT = " & to_string(function_scalar_integer_divider(data_a_in_matrix_integer_divider, data_b_in_matrix_integer_divider))
+          report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_matrix_integer_multiplier, data_b_in_matrix_integer_multiplier))
           severity error;
       end if;
 
@@ -1189,15 +1189,15 @@ begin
         assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_integer_adder) & "; CORRECT = " & to_string(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))
           severity error;
-      elsif (data_out_i_enable_tensor_integer_adder = '1' and data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
+      elsif (data_out_i_enable_tensor_integer_adder = '1' and data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_adder = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
         assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_integer_adder) & "; CORRECT = " & to_string(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))
           severity error;
-      elsif (data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
+      elsif (data_out_j_enable_tensor_integer_adder = '1' and data_out_k_enable_tensor_integer_adder = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
         assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_integer_adder) & "; CORRECT = " & to_string(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))
           severity error;
-      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
+      elsif (data_out_k_enable_tensor_integer_adder = '1' and not data_out_tensor_integer_adder = ZERO_DATA) then
         assert data_out_tensor_integer_adder = function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_integer_adder) & "; CORRECT = " & to_string(function_scalar_integer_adder(operation_tensor_integer_adder, data_a_in_tensor_integer_adder, data_b_in_tensor_integer_adder))
           severity error;
@@ -1207,15 +1207,15 @@ begin
         assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))
           severity error;
-      elsif (data_out_i_enable_tensor_integer_multiplier = '1' and data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
+      elsif (data_out_i_enable_tensor_integer_multiplier = '1' and data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_multiplier = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
         assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))
           severity error;
-      elsif (data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
+      elsif (data_out_j_enable_tensor_integer_multiplier = '1' and data_out_k_enable_tensor_integer_multiplier = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
         assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))
           severity error;
-      elsif (data_out_k_enable_tensor_integer_divider = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
+      elsif (data_out_k_enable_tensor_integer_multiplier = '1' and not data_out_tensor_integer_multiplier = ZERO_DATA) then
         assert data_out_tensor_integer_multiplier = function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_integer_multiplier) & "; CORRECT = " & to_string(function_scalar_integer_multiplier(data_a_in_tensor_integer_multiplier, data_b_in_tensor_integer_multiplier))
           severity error;
