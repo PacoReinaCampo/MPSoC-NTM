@@ -50,7 +50,7 @@ use work.model_arithmetic_pkg.all;
 entity model_scalar_float_adder is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port(
     -- GLOBAL

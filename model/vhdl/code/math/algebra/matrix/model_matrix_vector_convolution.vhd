@@ -51,7 +51,7 @@ use ieee.float_pkg.all;
 entity model_matrix_vector_convolution is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

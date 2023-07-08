@@ -41,7 +41,7 @@ import arithmetic_pkg::*;
 
 module model_scalar_tanh_function #(
   parameter DATA_SIZE    = 64,
-  parameter CONTROL_SIZE = 64
+  parameter CONTROL_SIZE = 4
 ) (
   // GLOBAL
   input CLK,

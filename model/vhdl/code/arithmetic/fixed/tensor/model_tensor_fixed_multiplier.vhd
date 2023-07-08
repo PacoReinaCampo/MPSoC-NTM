@@ -47,7 +47,7 @@ use work.model_arithmetic_pkg.all;
 entity model_tensor_fixed_multiplier is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

@@ -50,7 +50,7 @@ entity model_algebra_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -631,7 +631,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      DOT_PRODUCT_LENGTH_IN <= THREE_CONTROL;
+      DOT_PRODUCT_LENGTH_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_DOT_PRODUCT_CASE_0) then
 
@@ -746,7 +746,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_CONVOLUTION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_CONVOLUTION_LENGTH_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0) then
 
@@ -861,7 +861,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_COSINE_SIMILARITY_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0) then
 
@@ -976,9 +976,9 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_MULTIPLICATION_LENGTH_IN <= FOUR_CONTROL;
 
-      VECTOR_MULTIPLICATION_SIZE_IN <= THREE_CONTROL;
+      VECTOR_MULTIPLICATION_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
 
@@ -1111,9 +1111,9 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_SUMMATION_LENGTH_IN <= FOUR_CONTROL;
 
-      VECTOR_SUMMATION_SIZE_IN <= THREE_CONTROL;
+      VECTOR_SUMMATION_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_0) then
 
@@ -1246,7 +1246,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULE_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_MODULE_LENGTH_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULE_CASE_0) then
 
@@ -1790,7 +1790,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+      MATRIX_MULTIPLICATION_LENGTH_IN <= FOUR_CONTROL;
 
       MATRIX_MULTIPLICATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MULTIPLICATION_SIZE_J_IN <= THREE_CONTROL;
@@ -2265,7 +2265,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+      MATRIX_SUMMATION_LENGTH_IN <= FOUR_CONTROL;
 
       MATRIX_SUMMATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_SUMMATION_SIZE_J_IN <= THREE_CONTROL;

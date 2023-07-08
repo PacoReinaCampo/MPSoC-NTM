@@ -41,7 +41,7 @@ import accelerator_arithmetic_pkg::*;
 
 module accelerator_scalar_float_multiplier #(
   parameter DATA_SIZE    = 64,
-  parameter CONTROL_SIZE = 64
+  parameter CONTROL_SIZE = 4
 ) (
   // GLOBAL
   input CLK,

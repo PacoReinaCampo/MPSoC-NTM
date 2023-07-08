@@ -60,7 +60,7 @@ package model_math_pkg is
   component model_dot_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -87,7 +87,7 @@ package model_math_pkg is
   component model_vector_convolution is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -116,7 +116,7 @@ package model_math_pkg is
   component model_vector_cosine_similarity is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -143,7 +143,7 @@ package model_math_pkg is
   component model_vector_multiplication is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -173,7 +173,7 @@ package model_math_pkg is
   component model_vector_summation is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -203,7 +203,7 @@ package model_math_pkg is
   component model_vector_module is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -231,7 +231,7 @@ package model_math_pkg is
   component model_matrix_convolution is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -267,7 +267,7 @@ package model_math_pkg is
   component model_matrix_vector_convolution is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -300,7 +300,7 @@ package model_math_pkg is
   component model_matrix_inverse is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -331,7 +331,7 @@ package model_math_pkg is
   component model_matrix_multiplication is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -365,7 +365,7 @@ package model_math_pkg is
   component model_matrix_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -401,7 +401,7 @@ package model_math_pkg is
   component model_matrix_vector_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -434,7 +434,7 @@ package model_math_pkg is
   component model_transpose_vector_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -466,7 +466,7 @@ package model_math_pkg is
   component model_matrix_summation is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -500,7 +500,7 @@ package model_math_pkg is
   component model_matrix_transpose is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -532,7 +532,7 @@ package model_math_pkg is
   component model_tensor_convolution is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -574,7 +574,7 @@ package model_math_pkg is
   component model_tensor_matrix_convolution is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -613,7 +613,7 @@ package model_math_pkg is
   component model_tensor_inverse is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -648,7 +648,7 @@ package model_math_pkg is
   component model_tensor_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -690,7 +690,7 @@ package model_math_pkg is
   component model_tensor_matrix_product is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -729,7 +729,7 @@ package model_math_pkg is
   component model_tensor_transpose is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -769,7 +769,7 @@ package model_math_pkg is
   component model_scalar_cosh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -789,7 +789,7 @@ package model_math_pkg is
   component model_scalar_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -809,7 +809,7 @@ package model_math_pkg is
   component model_scalar_logarithm_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -829,7 +829,7 @@ package model_math_pkg is
   component model_scalar_power_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -850,7 +850,7 @@ package model_math_pkg is
   component model_scalar_sinh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -870,7 +870,7 @@ package model_math_pkg is
   component model_scalar_sqrt_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -890,7 +890,7 @@ package model_math_pkg is
   component model_scalar_tanh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -911,7 +911,7 @@ package model_math_pkg is
   component model_vector_cosh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -936,7 +936,7 @@ package model_math_pkg is
   component model_vector_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -961,7 +961,7 @@ package model_math_pkg is
   component model_vector_logarithm_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -986,7 +986,7 @@ package model_math_pkg is
   component model_vector_power_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1013,7 +1013,7 @@ package model_math_pkg is
   component model_vector_sinh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1038,7 +1038,7 @@ package model_math_pkg is
   component model_vector_sqrt_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1063,7 +1063,7 @@ package model_math_pkg is
   component model_vector_tanh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1089,7 +1089,7 @@ package model_math_pkg is
   component model_matrix_cosh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1117,7 +1117,7 @@ package model_math_pkg is
   component model_matrix_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1145,7 +1145,7 @@ package model_math_pkg is
   component model_matrix_logarithm_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1173,7 +1173,7 @@ package model_math_pkg is
   component model_matrix_power_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1204,7 +1204,7 @@ package model_math_pkg is
   component model_matrix_sinh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1232,7 +1232,7 @@ package model_math_pkg is
   component model_matrix_sqrt_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1260,7 +1260,7 @@ package model_math_pkg is
   component model_matrix_tanh_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1293,7 +1293,7 @@ package model_math_pkg is
   component model_scalar_logistic_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1313,7 +1313,7 @@ package model_math_pkg is
   component model_scalar_oneplus_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1334,7 +1334,7 @@ package model_math_pkg is
   component model_vector_logistic_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1359,7 +1359,7 @@ package model_math_pkg is
   component model_vector_oneplus_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1385,7 +1385,7 @@ package model_math_pkg is
   component model_matrix_logistic_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1413,7 +1413,7 @@ package model_math_pkg is
   component model_matrix_oneplus_function is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1446,7 +1446,7 @@ package model_math_pkg is
   component model_vector_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1474,7 +1474,7 @@ package model_math_pkg is
   component model_vector_integration is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1502,7 +1502,7 @@ package model_math_pkg is
   component model_vector_softmax is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1530,7 +1530,7 @@ package model_math_pkg is
   component model_matrix_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1565,7 +1565,7 @@ package model_math_pkg is
   component model_matrix_integration is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1597,7 +1597,7 @@ package model_math_pkg is
   component model_matrix_softmax is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1629,7 +1629,7 @@ package model_math_pkg is
   component model_tensor_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1669,7 +1669,7 @@ package model_math_pkg is
   component model_tensor_integration is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1705,7 +1705,7 @@ package model_math_pkg is
   component model_tensor_softmax is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -2626,12 +2626,15 @@ package body model_math_pkg is
     matrix_input : matrix_buffer
     ) return matrix_buffer is
 
+    type augmented_vector_buffer is array (2*CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+    type augmented_matrix_buffer is array (CONTROL_SIZE-1 downto 0, 2*CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+
     variable n : integer;
 
     variable matrix_output : matrix_buffer;
 
-    variable vector_in_int : vector_buffer;
-    variable matrix_in_int : matrix_buffer;
+    variable vector_in_int : augmented_vector_buffer;
+    variable matrix_in_int : augmented_matrix_buffer;
 
     variable scalar_ratio_int : std_logic_vector(DATA_SIZE-1 downto 0);
     variable scalar_sum_int   : std_logic_vector(DATA_SIZE-1 downto 0);

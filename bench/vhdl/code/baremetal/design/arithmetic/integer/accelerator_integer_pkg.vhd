@@ -42,6 +42,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.accelerator_arithmetic_pkg.all;
+
 package accelerator_integer_pkg is
 
   ------------------------------------------------------------------------------
@@ -49,15 +51,6 @@ package accelerator_integer_pkg is
   ------------------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 64;
-
-  constant CONTROL_X_SIZE : integer := 3;
-  constant CONTROL_Y_SIZE : integer := 3;
-  constant CONTROL_Z_SIZE : integer := 3;
-
-  type tensor_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1, 0 to CONTROL_Z_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type matrix_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type vector_buffer is array (0 to CONTROL_X_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -101,14 +94,14 @@ package accelerator_integer_pkg is
   constant INT_N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-9, DATA_SIZE));
 
   -- Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((INT_P_TWO, INT_P_ONE, INT_P_FOUR), (INT_P_NINE, INT_P_FOUR, INT_P_TWO), (INT_P_ONE, INT_P_ONE, INT_P_TWO)), ((INT_P_EIGHT, INT_P_SIX, INT_P_TWO), (INT_P_EIGHT, INT_P_FIVE, INT_P_TWO), (INT_P_ONE, INT_P_FOUR, INT_P_ONE)), ((INT_P_THREE, INT_P_ONE, INT_P_SIX), (INT_P_FIVE, INT_P_ZERO, INT_P_FOUR), (INT_P_FIVE, INT_P_EIGHT, INT_P_FIVE)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((INT_P_ONE, INT_P_THREE, INT_P_ONE), (INT_P_TWO, INT_P_FOUR, INT_P_EIGHT), (INT_P_FOUR, INT_P_ONE, INT_P_TWO)), ((INT_P_NINE, INT_P_ONE, INT_P_FIVE), (INT_P_NINE, INT_P_EIGHT, INT_P_ONE), (INT_P_FIVE, INT_P_EIGHT, INT_P_FOUR)), ((INT_P_FIVE, INT_P_FOUR, INT_P_ONE), (INT_P_THREE, INT_P_FOUR, INT_P_SIX), (INT_P_ONE, INT_P_EIGHT, INT_P_EIGHT)));
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((INT_P_TWO, INT_P_ONE, INT_P_THREE, INT_P_FOUR), (INT_P_TWO, INT_P_ONE, INT_P_ONE, INT_P_TWO), (INT_P_NINE, INT_P_ONE, INT_P_FOUR, INT_P_TWO), (INT_P_ONE, INT_P_SIX, INT_P_ONE, INT_P_TWO)), ((INT_P_FOUR, INT_P_NINE, INT_P_FOUR, INT_P_EIGHT), (INT_P_TWO, INT_P_TWO, INT_P_ONE, INT_P_ONE), (INT_P_THREE, INT_P_ONE, INT_P_SIX, INT_P_FIVE), (INT_P_ZERO, INT_P_FOUR, INT_P_FIVE, INT_P_EIGHT)), ((INT_P_EIGHT, INT_P_ONE, INT_P_SIX, INT_P_TWO), (INT_P_EIGHT, INT_P_FIVE, INT_P_SIX, INT_P_TWO), (INT_P_NINE, INT_P_ONE, INT_P_FIVE, INT_P_NINE), (INT_P_ONE, INT_P_FOUR, INT_P_ONE, INT_P_FOUR)), ((INT_P_ONE, INT_P_THREE, INT_P_ONE, INT_P_TWO), (INT_P_EIGHT, INT_P_FOUR, INT_P_ONE, INT_P_EIGHT), (INT_P_FIVE, INT_P_EIGHT, INT_P_THREE, INT_P_FOUR), (INT_P_ONE, INT_P_FOUR, INT_N_THREE, INT_P_EIGHT)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((INT_P_TWO, INT_P_FIVE, INT_P_THREE, INT_P_ONE), (INT_P_ONE, INT_P_FOUR, INT_P_ONE, INT_P_ZERO), (INT_P_TWO, INT_P_FOUR, INT_P_NINE, INT_P_EIGHT), (INT_P_FOUR, INT_P_TWO, INT_P_ONE, INT_P_TWO)),((INT_P_THREE, INT_P_ONE, INT_P_FIVE, INT_P_SIX), (INT_P_FIVE, INT_P_ZERO, INT_P_EIGHT, INT_P_FOUR), (INT_P_FOUR, INT_P_FIVE, INT_P_FOUR, INT_P_ONE), (INT_P_FIVE, INT_P_SIX, INT_P_EIGHT, INT_P_FIVE)), ((INT_P_EIGHT, INT_P_NINE, INT_P_ONE, INT_P_FIVE), (INT_P_ONE, INT_P_TWO, INT_P_SIX, INT_P_ONE), (INT_P_NINE, INT_P_FOUR, INT_P_EIGHT, INT_P_ONE), (INT_P_FIVE, INT_P_FOUR, INT_P_EIGHT, INT_P_FOUR)), ((INT_P_FIVE, INT_P_FOUR, INT_N_NINE, INT_P_ONE), (INT_P_THREE, INT_P_EIGHT, INT_P_FOUR, INT_P_FOUR), (INT_P_THREE, INT_P_six, INT_P_FOUR, INT_P_SIX), (INT_P_ONE, INT_P_EIGHT, INT_N_ONE, INT_P_EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((INT_P_ONE, INT_P_FOUR, INT_P_ONE), (INT_P_ZERO, INT_P_EIGHT, INT_P_FOUR), (INT_P_FIVE, INT_P_THREE, INT_P_NINE));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((INT_P_ONE, INT_P_TWO, INT_P_SIX), (INT_P_ONE, INT_P_THREE, INT_P_SIX), (INT_P_EIGHT, INT_P_FOUR, INT_P_FOUR));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((INT_P_ONE, INT_N_ONE, INT_P_FOUR, INT_P_ONE), (INT_P_THREE, INT_P_SIX, INT_N_ONE, INT_N_NINE), (INT_P_SEVEN, INT_P_ZERO, INT_P_EIGHT, INT_P_FOUR), (INT_P_FIVE, INT_P_SIX, INT_P_THREE, INT_P_NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((INT_P_ONE, INT_P_TWO, INT_P_SEVEN, INT_P_SIX), (INT_P_FOUR, INT_P_NINE, INT_P_TWO, INT_P_ONE), (INT_P_ONE, INT_P_FIVE, INT_P_THREE, INT_P_SIX), (INT_P_EIGHT, INT_P_FOUR, INT_N_ONE, INT_P_FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (INT_P_FOUR, INT_P_SEVEN, INT_N_THREE);
-  constant VECTOR_SAMPLE_B : vector_buffer := (INT_P_THREE, INT_N_NINE, INT_N_ONE);
+  constant VECTOR_SAMPLE_A : vector_buffer := (INT_P_FOUR, INT_N_ONE, INT_P_SEVEN, INT_N_THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (INT_P_THREE, INT_P_SIX, INT_N_NINE, INT_N_ONE);
 
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
@@ -173,7 +166,7 @@ package accelerator_integer_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
+      CONTROL_SIZE : integer := 4;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1

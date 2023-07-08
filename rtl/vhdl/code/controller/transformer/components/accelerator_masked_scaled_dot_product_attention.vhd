@@ -48,7 +48,7 @@ use work.accelerator_math_pkg.all;
 entity accelerator_masked_scaled_dot_product_attention is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

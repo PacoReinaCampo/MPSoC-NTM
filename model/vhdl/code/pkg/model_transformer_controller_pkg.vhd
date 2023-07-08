@@ -56,7 +56,7 @@ package model_transformer_controller_pkg is
   component model_masked_multi_head_attention is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -115,7 +115,7 @@ package model_transformer_controller_pkg is
   component model_masked_scaled_dot_product_attention is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -168,7 +168,7 @@ package model_transformer_controller_pkg is
   component model_multi_head_attention is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -222,7 +222,7 @@ package model_transformer_controller_pkg is
   component model_scaled_dot_product_attention is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -274,7 +274,7 @@ package model_transformer_controller_pkg is
   component model_inputs_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -351,7 +351,7 @@ package model_transformer_controller_pkg is
   component model_keys_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -386,7 +386,7 @@ package model_transformer_controller_pkg is
   component model_queries_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -421,7 +421,7 @@ package model_transformer_controller_pkg is
   component model_values_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -460,7 +460,7 @@ package model_transformer_controller_pkg is
   component model_layer_norm is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -498,7 +498,7 @@ package model_transformer_controller_pkg is
   component model_positional_encoding is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -540,7 +540,7 @@ package model_transformer_controller_pkg is
   component model_fnn is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -588,7 +588,7 @@ package model_transformer_controller_pkg is
   component model_activation_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -698,7 +698,7 @@ package model_transformer_controller_pkg is
   component model_activation_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -811,7 +811,7 @@ package model_transformer_controller_pkg is
   component model_input_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -921,7 +921,7 @@ package model_transformer_controller_pkg is
   component model_input_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1034,7 +1034,7 @@ package model_transformer_controller_pkg is
   component model_output_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1144,7 +1144,7 @@ package model_transformer_controller_pkg is
   component model_output_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1250,7 +1250,7 @@ package model_transformer_controller_pkg is
   component model_forget_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1360,7 +1360,7 @@ package model_transformer_controller_pkg is
   component model_forget_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1466,7 +1466,7 @@ package model_transformer_controller_pkg is
   component model_state_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1504,7 +1504,7 @@ package model_transformer_controller_pkg is
   component model_hidden_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1536,7 +1536,7 @@ package model_transformer_controller_pkg is
   component model_lstm is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1648,7 +1648,7 @@ package model_transformer_controller_pkg is
   component model_controller is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1754,7 +1754,7 @@ package model_transformer_controller_pkg is
   component model_decoder is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1833,7 +1833,7 @@ package model_transformer_controller_pkg is
   component model_encoder is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

@@ -50,7 +50,7 @@ use work.model_lstm_controller_pkg.all;
 entity model_hidden_gate_vector is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

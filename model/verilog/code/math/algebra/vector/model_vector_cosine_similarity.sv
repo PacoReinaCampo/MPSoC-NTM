@@ -39,7 +39,7 @@
 
 module model_vector_cosine_similarity #(
   parameter DATA_SIZE    = 64,
-  parameter CONTROL_SIZE = 64
+  parameter CONTROL_SIZE = 4
 ) (
   // GLOBAL
   input CLK,

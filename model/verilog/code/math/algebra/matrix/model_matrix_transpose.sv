@@ -39,7 +39,7 @@
 
 module model_matrix_transpose #(
   parameter DATA_SIZE    = 64,
-  parameter CONTROL_SIZE = 64,
+  parameter CONTROL_SIZE = 4,
 
   parameter [DATA_SIZE-1:0] SIZE_I = 64,
   parameter [DATA_SIZE-1:0] SIZE_J = 64

@@ -51,7 +51,7 @@ use ieee.float_pkg.all;
 entity model_scalar_logistic_function is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port(
     -- GLOBAL

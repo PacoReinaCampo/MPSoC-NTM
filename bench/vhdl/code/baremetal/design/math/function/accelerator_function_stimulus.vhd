@@ -50,7 +50,7 @@ entity accelerator_function_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
@@ -322,7 +322,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_LOGISTIC_SIZE_IN <= THREE_CONTROL;
+      VECTOR_LOGISTIC_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_0) then
 
@@ -425,7 +425,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_ONEPLUS_SIZE_IN <= THREE_CONTROL;
+      VECTOR_ONEPLUS_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_0) then
 

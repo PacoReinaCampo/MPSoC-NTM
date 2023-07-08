@@ -48,7 +48,7 @@ use work.model_math_pkg.all;
 entity model_tensor_softmax is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

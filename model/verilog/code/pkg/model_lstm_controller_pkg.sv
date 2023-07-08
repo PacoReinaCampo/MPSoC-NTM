@@ -48,7 +48,7 @@ package model_lstm_controller_pkg;
   //////////////////////////////////////////////////////////////////////////////
 
   parameter DATA_SIZE = 64;
-  parameter CONTROL_SIZE = 64;
+  parameter CONTROL_SIZE = 4;
 
   parameter ZERO_CONTROL = 0;
   parameter ONE_CONTROL = 1;

@@ -39,7 +39,7 @@
 
 module model_matrix_cosh_function #(
   parameter DATA_SIZE    = 64,
-  parameter CONTROL_SIZE = 64
+  parameter CONTROL_SIZE = 4
 ) (
   // GLOBAL
   input CLK,

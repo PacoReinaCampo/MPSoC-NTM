@@ -40,6 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_algebra_pkg.all;
 
@@ -47,7 +48,7 @@ entity model_algebra_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -138,73 +139,73 @@ architecture model_algebra_testbench_architecture of model_algebra_testbench is
 
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
-  constant CONTROL_X : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_X_SIZE, CONTROL_SIZE));
-  constant CONTROL_Y : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_Y_SIZE, CONTROL_SIZE));
-  constant CONTROL_Z : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_Z_SIZE, CONTROL_SIZE));
-  constant CONTROL_L : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_L_SIZE, CONTROL_SIZE));
+  constant CONTROL_X : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_Y : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_Z : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_L : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
 
   -- VECTOR
-  constant DOT_PRODUCT_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_dot_product(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
-  constant DOT_PRODUCT_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_dot_product(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+  constant DOT_PRODUCT_OUTPUT_0 : vector_buffer := function_dot_product(CONTROL_L, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant DOT_PRODUCT_OUTPUT_1 : vector_buffer := function_dot_product(CONTROL_L, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
 
-  constant VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_convolution(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
-  constant VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_convolution(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+  constant VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := function_vector_convolution(CONTROL_L, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := function_vector_convolution(CONTROL_L, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
 
-  constant VECTOR_COSINE_SIMILARITY_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_cosine_similarity(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
-  constant VECTOR_COSINE_SIMILARITY_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_cosine_similarity(CONTROL_X, CONTROL_X, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
+  constant VECTOR_COSINE_SIMILARITY_OUTPUT_0 : vector_buffer := function_vector_cosine_similarity(CONTROL_L, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant VECTOR_COSINE_SIMILARITY_OUTPUT_1 : vector_buffer := function_vector_cosine_similarity(CONTROL_L, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
 
-  constant VECTOR_MULTIPLICATION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
-  constant VECTOR_MULTIPLICATION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
+  constant VECTOR_MULTIPLICATION_OUTPUT_0 : vector_buffer := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
+  constant VECTOR_MULTIPLICATION_OUTPUT_1 : vector_buffer := function_vector_multiplication(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
 
-  constant VECTOR_SUMMATION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
-  constant VECTOR_SUMMATION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
+  constant VECTOR_SUMMATION_OUTPUT_0 : vector_buffer := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_A);
+  constant VECTOR_SUMMATION_OUTPUT_1 : vector_buffer := function_vector_summation(CONTROL_X, CONTROL_L, MATRIX_SAMPLE_B);
 
-  constant VECTOR_MODULE_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_vector_module(CONTROL_X, VECTOR_SAMPLE_A);
-  constant VECTOR_MODULE_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_vector_module(CONTROL_X, VECTOR_SAMPLE_B);
+  constant VECTOR_MODULE_OUTPUT_0 : vector_buffer := function_vector_module(CONTROL_X, VECTOR_SAMPLE_A);
+  constant VECTOR_MODULE_OUTPUT_1 : vector_buffer := function_vector_module(CONTROL_X, VECTOR_SAMPLE_B);
 
   -- MATRIX
-  constant MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
-  constant MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
+  constant MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := function_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
 
-  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
-  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
+  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_0 : vector_buffer := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant MATRIX_VECTOR_CONVOLUTION_OUTPUT_1 : vector_buffer := function_matrix_vector_convolution(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
 
-  constant MATRIX_INVERSE_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
-  constant MATRIX_INVERSE_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
+  constant MATRIX_INVERSE_OUTPUT_0 : matrix_buffer := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
+  constant MATRIX_INVERSE_OUTPUT_1 : matrix_buffer := function_matrix_inverse(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
 
-  constant MATRIX_MULTIPLICATION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
-  constant MATRIX_MULTIPLICATION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
+  constant MATRIX_MULTIPLICATION_OUTPUT_0 : matrix_buffer := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
+  constant MATRIX_MULTIPLICATION_OUTPUT_1 : matrix_buffer := function_matrix_multiplication(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
 
-  constant MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
-  constant MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
+  constant MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := function_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B, MATRIX_SAMPLE_A);
 
-  constant MATRIX_VECTOR_PRODUCT_OUTPUT_0 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
-  constant MATRIX_VECTOR_PRODUCT_OUTPUT_1 : vector_buffer := (others => (others => '0'));-- := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
+  constant MATRIX_VECTOR_PRODUCT_OUTPUT_0 : vector_buffer := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_A, VECTOR_SAMPLE_B);
+  constant MATRIX_VECTOR_PRODUCT_OUTPUT_1 : vector_buffer := function_matrix_vector_product(CONTROL_X, CONTROL_Y, CONTROL_X, MATRIX_SAMPLE_B, VECTOR_SAMPLE_A);
 
-  constant MATRIX_TRANSPOSE_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
-  constant MATRIX_TRANSPOSE_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
+  constant MATRIX_TRANSPOSE_OUTPUT_0 : matrix_buffer := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
+  constant MATRIX_TRANSPOSE_OUTPUT_1 : matrix_buffer := function_matrix_transpose(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
 
-  constant MATRIX_SUMMATION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
-  constant MATRIX_SUMMATION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
+  constant MATRIX_SUMMATION_OUTPUT_0 : matrix_buffer := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_A);
+  constant MATRIX_SUMMATION_OUTPUT_1 : matrix_buffer := function_matrix_summation(CONTROL_X, CONTROL_Y, CONTROL_L, TENSOR_SAMPLE_B);
 
   -- TENSOR
-  constant TENSOR_CONVOLUTION_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
-  constant TENSOR_CONVOLUTION_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_CONVOLUTION_OUTPUT_0 : tensor_buffer := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A, TENSOR_SAMPLE_B);
+  constant TENSOR_CONVOLUTION_OUTPUT_1 : tensor_buffer := function_tensor_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B, TENSOR_SAMPLE_A);
 
-  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
-  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_0 : matrix_buffer := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant TENSOR_MATRIX_CONVOLUTION_OUTPUT_1 : matrix_buffer := function_tensor_matrix_convolution(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
 
-  constant TENSOR_INVERSE_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
-  constant TENSOR_INVERSE_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
+  constant TENSOR_INVERSE_OUTPUT_0 : tensor_buffer := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_INVERSE_OUTPUT_1 : tensor_buffer := function_tensor_inverse(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
 
-  constant TENSOR_PRODUCT_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
-  constant TENSOR_PRODUCT_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+  constant TENSOR_PRODUCT_OUTPUT_0 : tensor_buffer := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A, TENSOR_SAMPLE_B);
+  constant TENSOR_PRODUCT_OUTPUT_1 : tensor_buffer := function_tensor_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B, TENSOR_SAMPLE_A);
 
-  constant TENSOR_MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
-  constant TENSOR_MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := (others => (others => (others => '0')));-- := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
+  constant TENSOR_MATRIX_PRODUCT_OUTPUT_0 : matrix_buffer := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_A, MATRIX_SAMPLE_B);
+  constant TENSOR_MATRIX_PRODUCT_OUTPUT_1 : matrix_buffer := function_tensor_matrix_product(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_X, CONTROL_Y, TENSOR_SAMPLE_B, MATRIX_SAMPLE_A);
 
-  constant TENSOR_TRANSPOSE_OUTPUT_0 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
-  constant TENSOR_TRANSPOSE_OUTPUT_1 : tensor_buffer := (others => (others => (others => (others => '0'))));-- := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
+  constant TENSOR_TRANSPOSE_OUTPUT_0 : tensor_buffer := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_TRANSPOSE_OUTPUT_1 : tensor_buffer := function_tensor_transpose(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
 
   ------------------------------------------------------------------------------
   -- Signals

@@ -50,7 +50,7 @@ use work.accelerator_state_pkg.all;
 entity accelerator_state_top is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

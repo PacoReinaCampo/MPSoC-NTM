@@ -56,7 +56,7 @@ package accelerator_core_pkg is
   component accelerator_reading is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -101,7 +101,7 @@ package accelerator_core_pkg is
   component accelerator_writing is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -144,7 +144,7 @@ package accelerator_core_pkg is
   component accelerator_erasing is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -191,7 +191,7 @@ package accelerator_core_pkg is
   component accelerator_content_based_addressing is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -229,7 +229,7 @@ package accelerator_core_pkg is
   component accelerator_addressing is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -301,7 +301,7 @@ package accelerator_core_pkg is
   component accelerator_top is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -397,7 +397,7 @@ package accelerator_core_pkg is
   component accelerator_interface_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -438,7 +438,7 @@ package accelerator_core_pkg is
   component accelerator_interface_matrix is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -485,7 +485,7 @@ package accelerator_core_pkg is
   component accelerator_output_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

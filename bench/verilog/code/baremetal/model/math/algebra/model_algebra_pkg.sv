@@ -49,7 +49,7 @@ package model_algebra_pkg;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE = 64;
-  parameter CONTROL_SIZE = 64;
+  parameter CONTROL_SIZE = 4;
 
   parameter X = 64;  // x in 0 to X-1
   parameter Y = 64;  // y in 0 to Y-1

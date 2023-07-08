@@ -64,7 +64,7 @@ package model_lstm_controller_pkg is
   component model_activation_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -174,7 +174,7 @@ package model_lstm_controller_pkg is
   component model_activation_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -287,7 +287,7 @@ package model_lstm_controller_pkg is
   component model_input_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -397,7 +397,7 @@ package model_lstm_controller_pkg is
   component model_input_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -510,7 +510,7 @@ package model_lstm_controller_pkg is
   component model_output_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -620,7 +620,7 @@ package model_lstm_controller_pkg is
   component model_output_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -726,7 +726,7 @@ package model_lstm_controller_pkg is
   component model_forget_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -836,7 +836,7 @@ package model_lstm_controller_pkg is
   component model_forget_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -942,7 +942,7 @@ package model_lstm_controller_pkg is
   component model_state_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -980,7 +980,7 @@ package model_lstm_controller_pkg is
   component model_hidden_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1012,7 +1012,7 @@ package model_lstm_controller_pkg is
   component model_controller is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

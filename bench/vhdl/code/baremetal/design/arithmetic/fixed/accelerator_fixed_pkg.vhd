@@ -40,6 +40,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.accelerator_arithmetic_pkg.all;
+
 package accelerator_fixed_pkg is
 
   ------------------------------------------------------------------------------
@@ -47,15 +49,6 @@ package accelerator_fixed_pkg is
   ------------------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 64;
-
-  constant CONTROL_X_SIZE : integer := 3;
-  constant CONTROL_Y_SIZE : integer := 3;
-  constant CONTROL_Z_SIZE : integer := 3;
-
-  type tensor_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1, 0 to CONTROL_Z_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type matrix_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type vector_buffer is array (0 to CONTROL_X_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -75,7 +68,6 @@ package accelerator_fixed_pkg is
   constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
-
 
   -- FIXEDS
   constant FIXED_P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"0000000000000000";
@@ -103,14 +95,14 @@ package accelerator_fixed_pkg is
   constant FIXED_N_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"FFF0000000000000";
 
   -- Integer Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((FIXED_P_TWO, FIXED_P_ONE, FIXED_P_FOUR), (FIXED_P_NINE, FIXED_P_FOUR, FIXED_P_TWO), (FIXED_P_ONE, FIXED_P_ONE, FIXED_P_TWO)), ((FIXED_P_EIGHT, FIXED_P_SIX, FIXED_P_TWO), (FIXED_P_EIGHT, FIXED_P_FIVE, FIXED_P_TWO), (FIXED_P_ONE, FIXED_P_FOUR, FIXED_P_ONE)), ((FIXED_P_THREE, FIXED_P_ONE, FIXED_P_SIX), (FIXED_P_FIVE, FIXED_P_ZERO, FIXED_P_FOUR), (FIXED_P_FIVE, FIXED_P_EIGHT, FIXED_P_FIVE)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((FIXED_P_ONE, FIXED_P_THREE, FIXED_P_ONE), (FIXED_P_TWO, FIXED_P_FOUR, FIXED_P_EIGHT), (FIXED_P_FOUR, FIXED_P_ONE, FIXED_P_TWO)), ((FIXED_P_NINE, FIXED_P_ONE, FIXED_P_FIVE), (FIXED_P_NINE, FIXED_P_EIGHT, FIXED_P_ONE), (FIXED_P_FIVE, FIXED_P_EIGHT, FIXED_P_FOUR)), ((FIXED_P_FIVE, FIXED_P_FOUR, FIXED_P_ONE), (FIXED_P_THREE, FIXED_P_FOUR, FIXED_P_SIX), (FIXED_P_ONE, FIXED_P_EIGHT, FIXED_P_EIGHT)));
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((FIXED_P_TWO, FIXED_P_ONE, FIXED_P_THREE, FIXED_P_FOUR), (FIXED_P_TWO, FIXED_P_ONE, FIXED_P_ONE, FIXED_P_TWO), (FIXED_P_NINE, FIXED_P_ONE, FIXED_P_FOUR, FIXED_P_TWO), (FIXED_P_ONE, FIXED_P_SIX, FIXED_P_ONE, FIXED_P_TWO)), ((FIXED_P_FOUR, FIXED_P_NINE, FIXED_P_FOUR, FIXED_P_EIGHT), (FIXED_P_TWO, FIXED_P_TWO, FIXED_P_ONE, FIXED_P_ONE), (FIXED_P_THREE, FIXED_P_ONE, FIXED_P_SIX, FIXED_P_FIVE), (FIXED_P_ZERO, FIXED_P_FOUR, FIXED_P_FIVE, FIXED_P_EIGHT)), ((FIXED_P_EIGHT, FIXED_P_ONE, FIXED_P_SIX, FIXED_P_TWO), (FIXED_P_EIGHT, FIXED_P_FIVE, FIXED_P_SIX, FIXED_P_TWO), (FIXED_P_NINE, FIXED_P_ONE, FIXED_P_FIVE, FIXED_P_NINE), (FIXED_P_ONE, FIXED_P_FOUR, FIXED_P_ONE, FIXED_P_FOUR)), ((FIXED_P_ONE, FIXED_P_THREE, FIXED_P_ONE, FIXED_P_TWO), (FIXED_P_EIGHT, FIXED_P_FOUR, FIXED_P_ONE, FIXED_P_EIGHT), (FIXED_P_FIVE, FIXED_P_EIGHT, FIXED_P_THREE, FIXED_P_FOUR), (FIXED_P_ONE, FIXED_P_FOUR, FIXED_N_THREE, FIXED_P_EIGHT)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((FIXED_P_TWO, FIXED_P_FIVE, FIXED_P_THREE, FIXED_P_ONE), (FIXED_P_ONE, FIXED_P_FOUR, FIXED_P_ONE, FIXED_P_ZERO), (FIXED_P_TWO, FIXED_P_FOUR, FIXED_P_NINE, FIXED_P_EIGHT), (FIXED_P_FOUR, FIXED_P_TWO, FIXED_P_ONE, FIXED_P_TWO)),((FIXED_P_THREE, FIXED_P_ONE, FIXED_P_FIVE, FIXED_P_SIX), (FIXED_P_FIVE, FIXED_P_ZERO, FIXED_P_EIGHT, FIXED_P_FOUR), (FIXED_P_FOUR, FIXED_P_FIVE, FIXED_P_FOUR, FIXED_P_ONE), (FIXED_P_FIVE, FIXED_P_SIX, FIXED_P_EIGHT, FIXED_P_FIVE)), ((FIXED_P_EIGHT, FIXED_P_NINE, FIXED_P_ONE, FIXED_P_FIVE), (FIXED_P_ONE, FIXED_P_TWO, FIXED_P_SIX, FIXED_P_ONE), (FIXED_P_NINE, FIXED_P_FOUR, FIXED_P_EIGHT, FIXED_P_ONE), (FIXED_P_FIVE, FIXED_P_FOUR, FIXED_P_EIGHT, FIXED_P_FOUR)), ((FIXED_P_FIVE, FIXED_P_FOUR, FIXED_N_NINE, FIXED_P_ONE), (FIXED_P_THREE, FIXED_P_EIGHT, FIXED_P_FOUR, FIXED_P_FOUR), (FIXED_P_THREE, FIXED_P_six, FIXED_P_FOUR, FIXED_P_SIX), (FIXED_P_ONE, FIXED_P_EIGHT, FIXED_N_ONE, FIXED_P_EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((FIXED_P_ONE, FIXED_P_FOUR, FIXED_P_ONE), (FIXED_P_ZERO, FIXED_P_EIGHT, FIXED_P_FOUR), (FIXED_P_FIVE, FIXED_P_THREE, FIXED_P_NINE));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((FIXED_P_ONE, FIXED_P_TWO, FIXED_P_SIX), (FIXED_P_ONE, FIXED_P_THREE, FIXED_P_SIX), (FIXED_P_EIGHT, FIXED_P_FOUR, FIXED_P_FOUR));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((FIXED_P_ONE, FIXED_N_ONE, FIXED_P_FOUR, FIXED_P_ONE), (FIXED_P_THREE, FIXED_P_SIX, FIXED_N_ONE, FIXED_N_NINE), (FIXED_P_SEVEN, FIXED_P_ZERO, FIXED_P_EIGHT, FIXED_P_FOUR), (FIXED_P_FIVE, FIXED_P_SIX, FIXED_P_THREE, FIXED_P_NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((FIXED_P_ONE, FIXED_P_TWO, FIXED_P_SEVEN, FIXED_P_SIX), (FIXED_P_FOUR, FIXED_P_NINE, FIXED_P_TWO, FIXED_P_ONE), (FIXED_P_ONE, FIXED_P_FIVE, FIXED_P_THREE, FIXED_P_SIX), (FIXED_P_EIGHT, FIXED_P_FOUR, FIXED_N_ONE, FIXED_P_FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (FIXED_P_FOUR, FIXED_P_SEVEN, FIXED_N_THREE);
-  constant VECTOR_SAMPLE_B : vector_buffer := (FIXED_P_THREE, FIXED_N_NINE, FIXED_N_ONE);
+  constant VECTOR_SAMPLE_A : vector_buffer := (FIXED_P_FOUR, FIXED_N_ONE, FIXED_P_SEVEN, FIXED_N_THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (FIXED_P_THREE, FIXED_P_SIX, FIXED_N_NINE, FIXED_N_ONE);
 
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := FIXED_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FIXED_N_FOUR;
@@ -179,7 +171,7 @@ package accelerator_fixed_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64;
+      CONTROL_SIZE : integer := 4;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1

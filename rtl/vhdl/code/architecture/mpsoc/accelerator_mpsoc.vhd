@@ -46,7 +46,7 @@ entity accelerator_mpsoc is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     -- FUNCTIONALITY
     ENABLE_ACCELERATOR_TOP : boolean := false

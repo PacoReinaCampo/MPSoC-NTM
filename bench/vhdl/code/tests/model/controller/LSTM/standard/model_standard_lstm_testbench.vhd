@@ -49,7 +49,7 @@ entity model_standard_lstm_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1

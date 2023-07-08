@@ -64,7 +64,7 @@ package model_fnn_controller_pkg is
   component model_controller is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -172,7 +172,7 @@ package model_fnn_controller_pkg is
   component model_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

@@ -50,7 +50,7 @@ use work.model_state_pkg.all;
 entity model_state_matrix_output is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

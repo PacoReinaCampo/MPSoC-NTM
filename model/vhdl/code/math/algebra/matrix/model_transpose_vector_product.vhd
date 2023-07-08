@@ -51,7 +51,7 @@ use ieee.float_pkg.all;
 entity model_transpose_vector_product is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

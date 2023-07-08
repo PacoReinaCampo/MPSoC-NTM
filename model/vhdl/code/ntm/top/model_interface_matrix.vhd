@@ -50,7 +50,7 @@ use work.model_ntm_core_pkg.all;
 entity model_interface_matrix is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

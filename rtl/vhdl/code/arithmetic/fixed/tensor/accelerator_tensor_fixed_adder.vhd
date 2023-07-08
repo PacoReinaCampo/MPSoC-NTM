@@ -47,7 +47,7 @@ use work.accelerator_arithmetic_pkg.all;
 entity accelerator_tensor_fixed_adder is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

@@ -49,7 +49,7 @@ use work.model_lstm_controller_pkg.all;
 entity model_forget_gate_vector is
   generic (
     DATF_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

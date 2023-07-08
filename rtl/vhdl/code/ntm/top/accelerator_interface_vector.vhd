@@ -51,7 +51,7 @@ use work.accelerator_core_pkg.all;
 entity accelerator_interface_vector is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

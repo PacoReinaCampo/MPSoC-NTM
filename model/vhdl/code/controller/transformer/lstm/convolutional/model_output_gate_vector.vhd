@@ -49,7 +49,7 @@ use work.model_lstm_controller_pkg.all;
 entity model_output_gate_vector is
   generic (
     DATO_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

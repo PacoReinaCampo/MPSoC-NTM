@@ -52,7 +52,7 @@ package accelerator_fnn_controller_pkg is
   component accelerator_controller is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -160,7 +160,7 @@ package accelerator_fnn_controller_pkg is
   component accelerator_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

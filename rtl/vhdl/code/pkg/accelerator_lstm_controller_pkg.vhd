@@ -52,7 +52,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_activation_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -162,7 +162,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_activation_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -275,7 +275,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_input_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -385,7 +385,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_input_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -498,7 +498,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_output_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -608,7 +608,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_output_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -714,7 +714,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_forget_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -824,7 +824,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_forget_trainer is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -930,7 +930,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_state_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -968,7 +968,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_hidden_gate_vector is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL
@@ -1000,7 +1000,7 @@ package accelerator_lstm_controller_pkg is
   component accelerator_controller is
     generic (
       DATA_SIZE    : integer := 64;
-      CONTROL_SIZE : integer := 64
+      CONTROL_SIZE : integer := 4
       );
     port (
       -- GLOBAL

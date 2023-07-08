@@ -50,7 +50,7 @@ use work.accelerator_lstm_controller_pkg.all;
 entity accelerator_output_vector is
   generic (
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    CONTROL_SIZE : integer := 4
     );
   port (
     -- GLOBAL

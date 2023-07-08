@@ -50,7 +50,7 @@ entity accelerator_series_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64;
+    CONTROL_SIZE : integer := 4;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
@@ -535,7 +535,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_COSH_SIZE_IN <= THREE_CONTROL;
+      VECTOR_COSH_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_0) then
 
@@ -638,7 +638,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN <= THREE_CONTROL;
+      VECTOR_EXPONENTIATOR_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_0) then
 
@@ -741,7 +741,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_LOGARITHM_SIZE_IN <= THREE_CONTROL;
+      VECTOR_LOGARITHM_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_0) then
 
@@ -844,7 +844,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_SINH_SIZE_IN <= THREE_CONTROL;
+      VECTOR_SINH_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_0) then
 
@@ -947,7 +947,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_TANH_SIZE_IN <= THREE_CONTROL;
+      VECTOR_TANH_SIZE_IN <= FOUR_CONTROL;
 
       if (STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_0) then
 
