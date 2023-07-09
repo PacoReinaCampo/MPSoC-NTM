@@ -1054,8 +1054,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_COSH_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_COSH_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_COSH_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_COSH_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_COSH_CASE_0) then
 
@@ -1188,8 +1188,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_EXPONENTIATOR_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_EXPONENTIATOR_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0) then
 
@@ -1322,8 +1322,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_LOGARITHM_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_LOGARITHM_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_LOGARITHM_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_LOGARITHM_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0) then
 
@@ -1456,8 +1456,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_SINH_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_SINH_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_SINH_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_SINH_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_SINH_CASE_0) then
 
@@ -1590,8 +1590,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_TANH_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_TANH_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_TANH_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_TANH_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_TANH_CASE_0) then
 

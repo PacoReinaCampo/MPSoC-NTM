@@ -123,6 +123,16 @@ architecture model_fixed_testbench_architecture of model_fixed_testbench is
   constant CONTROL_Z : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
   constant CONTROL_L : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
 
+  -- SCALAR
+  constant SCALAR_ADDER_OUTPUT_0 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_adder('0', SCALAR_SAMPLE_A, SCALAR_SAMPLE_B);
+  constant SCALAR_ADDER_OUTPUT_1 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_adder('0', SCALAR_SAMPLE_B, SCALAR_SAMPLE_A);
+
+  constant SCALAR_MULTIPLIER_OUTPUT_0 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_multiplier(SCALAR_SAMPLE_A, SCALAR_SAMPLE_B);
+  constant SCALAR_MULTIPLIER_OUTPUT_1 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_multiplier(SCALAR_SAMPLE_B, SCALAR_SAMPLE_A);
+
+  constant SCALAR_DIVIDER_OUTPUT_0 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_divider(SCALAR_SAMPLE_A, SCALAR_SAMPLE_B);
+  constant SCALAR_DIVIDER_OUTPUT_1 : std_logic_vector(DATA_SIZE-1 downto 0) := function_scalar_fixed_divider(SCALAR_SAMPLE_B, SCALAR_SAMPLE_A);
+
   -- VECTOR
   constant VECTOR_ADDER_OUTPUT_0 : vector_buffer := function_vector_fixed_adder('0', CONTROL_L, VECTOR_SAMPLE_A, VECTOR_SAMPLE_B);
   constant VECTOR_ADDER_OUTPUT_1 : vector_buffer := function_vector_fixed_adder('0', CONTROL_L, VECTOR_SAMPLE_B, VECTOR_SAMPLE_A);
@@ -777,20 +787,20 @@ begin
   begin
     if rising_edge(CLK) then
       if (ready_scalar_fixed_adder = '1') then
-        assert data_out_scalar_fixed_adder = function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder)
-          report "SCALAR ADDER: CALCULATED = " & to_string(data_out_scalar_fixed_adder) & "; CORRECT = " & to_string(function_scalar_fixed_adder(operation_scalar_fixed_adder, data_a_in_scalar_fixed_adder, data_b_in_scalar_fixed_adder))
+        assert data_out_scalar_fixed_adder = SCALAR_ADDER_OUTPUT_0
+          report "SCALAR ADDER: CALCULATED = " & to_string(data_out_scalar_fixed_adder) & "; CORRECT = " & to_string(SCALAR_ADDER_OUTPUT_0)
           severity error;
       end if;
 
       if (ready_scalar_fixed_multiplier = '1') then
-        assert data_out_scalar_fixed_multiplier = function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier)
-          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(data_out_scalar_fixed_multiplier) & "; CORRECT = " & to_string(function_scalar_fixed_multiplier(data_a_in_scalar_fixed_multiplier, data_b_in_scalar_fixed_multiplier))
+        assert data_out_scalar_fixed_multiplier = SCALAR_MULTIPLIER_OUTPUT_0
+          report "SCALAR MULTIPLIER: CALCULATED = " & to_string(data_out_scalar_fixed_multiplier) & "; CORRECT = " & to_string(SCALAR_MULTIPLIER_OUTPUT_0)
           severity error;
       end if;
 
       if (ready_scalar_fixed_divider = '1') then
-        assert data_out_scalar_fixed_divider = function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider)
-          report "SCALAR DIVIDER: CALCULATED = " & to_string(data_out_scalar_fixed_divider) & "; CORRECT = " & to_string(function_scalar_fixed_divider(data_a_in_scalar_fixed_divider, data_b_in_scalar_fixed_divider))
+        assert data_out_scalar_fixed_divider = SCALAR_DIVIDER_OUTPUT_0
+          report "SCALAR DIVIDER: CALCULATED = " & to_string(data_out_scalar_fixed_divider) & "; CORRECT = " & to_string(SCALAR_DIVIDER_OUTPUT_0)
           severity error;
       end if;
     end if;

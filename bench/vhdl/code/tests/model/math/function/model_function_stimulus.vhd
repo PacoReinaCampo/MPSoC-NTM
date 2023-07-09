@@ -532,8 +532,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_LOGISTIC_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_LOGISTIC_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_LOGISTIC_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_LOGISTIC_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0) then
 
@@ -666,8 +666,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_ONEPLUS_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_ONEPLUS_SIZE_J_IN <= THREE_CONTROL;
+      MATRIX_ONEPLUS_SIZE_I_IN <= FOUR_CONTROL;
+      MATRIX_ONEPLUS_SIZE_J_IN <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0) then
 
