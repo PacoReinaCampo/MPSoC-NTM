@@ -70,27 +70,27 @@ rm -rf controller/LSTM/standard/ntm_hidden_gate_vector.run
 rm -rf controller/LSTM/standard/ntm_input_gate_vector.run
 rm -rf controller/LSTM/standard/ntm_output_gate_vector.run
 rm -rf controller/LSTM/standard/ntm_state_gate_vector.run
-rm -rf controller/transformer/components/ntm_masked_multi_head_attention.run
-rm -rf controller/transformer/components/ntm_masked_scaled_dot_product_attention.run
-rm -rf controller/transformer/components/ntm_multi_head_attention.run
-rm -rf controller/transformer/components/ntm_scaled_dot_product_attention.run
-rm -rf controller/transformer/fnn/ntm_fnn.run
-rm -rf controller/transformer/functions/ntm_layer_norm.run
-rm -rf controller/transformer/functions/ntm_positional_encoding.run
-rm -rf controller/transformer/inputs/ntm_inputs_vector.run
-rm -rf controller/transformer/inputs/ntm_keys_vector.run
-rm -rf controller/transformer/inputs/ntm_queries_vector.run
-rm -rf controller/transformer/inputs/ntm_values_vector.run
-rm -rf controller/transformer/lstm/ntm_activation_gate_vector.run
-rm -rf controller/transformer/lstm/ntm_forget_gate_vector.run
-rm -rf controller/transformer/lstm/ntm_hidden_gate_vector.run
-rm -rf controller/transformer/lstm/ntm_input_gate_vector.run
-rm -rf controller/transformer/lstm/ntm_lstm.run
-rm -rf controller/transformer/lstm/ntm_output_gate_vector.run
-rm -rf controller/transformer/lstm/ntm_state_gate_vector.run
-rm -rf controller/transformer/top/ntm_controller.run
-rm -rf controller/transformer/top/ntm_decoder.run
-rm -rf controller/transformer/top/ntm_encoder.run
+rm -rf transformer/components/ntm_masked_multi_head_attention.run
+rm -rf transformer/components/ntm_masked_scaled_dot_product_attention.run
+rm -rf transformer/components/ntm_multi_head_attention.run
+rm -rf transformer/components/ntm_scaled_dot_product_attention.run
+rm -rf transformer/fnn/ntm_fnn.run
+rm -rf transformer/functions/ntm_layer_norm.run
+rm -rf transformer/functions/ntm_positional_encoding.run
+rm -rf transformer/inputs/ntm_inputs_vector.run
+rm -rf transformer/inputs/ntm_keys_vector.run
+rm -rf transformer/inputs/ntm_queries_vector.run
+rm -rf transformer/inputs/ntm_values_vector.run
+rm -rf transformer/lstm/ntm_activation_gate_vector.run
+rm -rf transformer/lstm/ntm_forget_gate_vector.run
+rm -rf transformer/lstm/ntm_hidden_gate_vector.run
+rm -rf transformer/lstm/ntm_input_gate_vector.run
+rm -rf transformer/lstm/ntm_lstm.run
+rm -rf transformer/lstm/ntm_output_gate_vector.run
+rm -rf transformer/lstm/ntm_state_gate_vector.run
+rm -rf transformer/top/ntm_controller.run
+rm -rf transformer/top/ntm_decoder.run
+rm -rf transformer/top/ntm_encoder.run
 rm -rf dnc/memory/dnc_addressing.run
 rm -rf dnc/memory/dnc_allocation_weighting.run
 rm -rf dnc/memory/dnc_backward_weighting.run
@@ -246,27 +246,27 @@ gcc controller/LSTM/standard/ntm_hidden_gate_vector.c -o controller/LSTM/standar
 gcc controller/LSTM/standard/ntm_input_gate_vector.c -o controller/LSTM/standard/ntm_input_gate_vector.run
 gcc controller/LSTM/standard/ntm_output_gate_vector.c -o controller/LSTM/standard/ntm_output_gate_vector.run
 gcc controller/LSTM/standard/ntm_state_gate_vector.c -o controller/LSTM/standard/ntm_state_gate_vector.run
-gcc controller/transformer/components/ntm_masked_multi_head_attention.c -o controller/transformer/components/ntm_masked_multi_head_attention.run
-gcc controller/transformer/components/ntm_masked_scaled_dot_product_attention.c -o controller/transformer/components/ntm_masked_scaled_dot_product_attention.run
-gcc controller/transformer/components/ntm_multi_head_attention.c -o controller/transformer/components/ntm_multi_head_attention.run
-gcc controller/transformer/components/ntm_scaled_dot_product_attention.c -o controller/transformer/components/ntm_scaled_dot_product_attention.run
-gcc controller/transformer/fnn/ntm_fnn.c -o controller/transformer/fnn/ntm_fnn.run
-gcc controller/transformer/functions/ntm_layer_norm.c -o controller/transformer/functions/ntm_layer_norm.run
-gcc controller/transformer/functions/ntm_positional_encoding.c -o controller/transformer/functions/ntm_positional_encoding.run
-gcc controller/transformer/inputs/ntm_inputs_vector.c -o controller/transformer/inputs/ntm_inputs_vector.run
-gcc controller/transformer/inputs/ntm_keys_vector.c -o controller/transformer/inputs/ntm_keys_vector.run
-gcc controller/transformer/inputs/ntm_queries_vector.c -o controller/transformer/inputs/ntm_queries_vector.run
-gcc controller/transformer/inputs/ntm_values_vector.c -o controller/transformer/inputs/ntm_values_vector.run
-gcc controller/transformer/lstm/ntm_activation_gate_vector.c -o controller/transformer/lstm/ntm_activation_gate_vector.run
-gcc controller/transformer/lstm/ntm_forget_gate_vector.c -o controller/transformer/lstm/ntm_forget_gate_vector.run
-gcc controller/transformer/lstm/ntm_hidden_gate_vector.c -o controller/transformer/lstm/ntm_hidden_gate_vector.run
-gcc controller/transformer/lstm/ntm_input_gate_vector.c -o controller/transformer/lstm/ntm_input_gate_vector.run
-gcc controller/transformer/lstm/ntm_lstm.c -o controller/transformer/lstm/ntm_lstm.run
-gcc controller/transformer/lstm/ntm_output_gate_vector.c -o controller/transformer/lstm/ntm_output_gate_vector.run
-gcc controller/transformer/lstm/ntm_state_gate_vector.c -o controller/transformer/lstm/ntm_state_gate_vector.run
-gcc controller/transformer/top/ntm_controller.c -o controller/transformer/top/ntm_controller.run
-gcc controller/transformer/top/ntm_decoder.c -o controller/transformer/top/ntm_decoder.run
-gcc controller/transformer/top/ntm_encoder.c -o controller/transformer/top/ntm_encoder.run
+gcc transformer/components/ntm_masked_multi_head_attention.c -o transformer/components/ntm_masked_multi_head_attention.run
+gcc transformer/components/ntm_masked_scaled_dot_product_attention.c -o transformer/components/ntm_masked_scaled_dot_product_attention.run
+gcc transformer/components/ntm_multi_head_attention.c -o transformer/components/ntm_multi_head_attention.run
+gcc transformer/components/ntm_scaled_dot_product_attention.c -o transformer/components/ntm_scaled_dot_product_attention.run
+gcc transformer/fnn/ntm_fnn.c -o transformer/fnn/ntm_fnn.run
+gcc transformer/functions/ntm_layer_norm.c -o transformer/functions/ntm_layer_norm.run
+gcc transformer/functions/ntm_positional_encoding.c -o transformer/functions/ntm_positional_encoding.run
+gcc transformer/inputs/ntm_inputs_vector.c -o transformer/inputs/ntm_inputs_vector.run
+gcc transformer/inputs/ntm_keys_vector.c -o transformer/inputs/ntm_keys_vector.run
+gcc transformer/inputs/ntm_queries_vector.c -o transformer/inputs/ntm_queries_vector.run
+gcc transformer/inputs/ntm_values_vector.c -o transformer/inputs/ntm_values_vector.run
+gcc transformer/lstm/ntm_activation_gate_vector.c -o transformer/lstm/ntm_activation_gate_vector.run
+gcc transformer/lstm/ntm_forget_gate_vector.c -o transformer/lstm/ntm_forget_gate_vector.run
+gcc transformer/lstm/ntm_hidden_gate_vector.c -o transformer/lstm/ntm_hidden_gate_vector.run
+gcc transformer/lstm/ntm_input_gate_vector.c -o transformer/lstm/ntm_input_gate_vector.run
+gcc transformer/lstm/ntm_lstm.c -o transformer/lstm/ntm_lstm.run
+gcc transformer/lstm/ntm_output_gate_vector.c -o transformer/lstm/ntm_output_gate_vector.run
+gcc transformer/lstm/ntm_state_gate_vector.c -o transformer/lstm/ntm_state_gate_vector.run
+gcc transformer/top/ntm_controller.c -o transformer/top/ntm_controller.run
+gcc transformer/top/ntm_decoder.c -o transformer/top/ntm_decoder.run
+gcc transformer/top/ntm_encoder.c -o transformer/top/ntm_encoder.run
 gcc dnc/memory/dnc_addressing.c -o dnc/memory/dnc_addressing.run
 gcc dnc/memory/dnc_allocation_weighting.c -o dnc/memory/dnc_allocation_weighting.run
 gcc dnc/memory/dnc_backward_weighting.c -o dnc/memory/dnc_backward_weighting.run

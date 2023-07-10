@@ -53,9 +53,7 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
 
   double ratio;
 
-  vector<double> vector_int;
-
-  vector<vector<double>> matrix_int;
+  vector<vector<double>> matrix;
 
   vector<vector<double>> data_out;
 
@@ -66,50 +64,26 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
   // Augmenting Identity Matrix of Order SIZE_IN
   for (int i = 0; i < data_in.size(); i++) {
     for (int j = 0; j < data_in.size(); j++) {
-      matrix_int[i][j] = data_in[i][j];
+      matrix[i][j] = data_in[i][j];
 
       if (i == j) {
-        matrix_int[i][j + data_in.size()] = 1.0;
+        matrix[i][j + data_in.size()] = 1.0;
       } else {
-        matrix_int[i][j + data_in.size()] = 0.0;
+        matrix[i][j + data_in.size()] = 0.0;
       }
     }
   }
 
+  // Applying Gauss Jordan Elimination
   for (int i = 0; i < data_in.size(); i++) {
-    // Row swapping
-    int n = 1;
-
-    while (matrix_int[i][i] == 0.0) {
-      for (int j = 0; j < 2*data_in.size(); j++) {
-        vector_int[j] = matrix_int[i][j];
-      }
-
-      if (i < data_in.size() - 1) {
-        for (int j = 0; j < 2*data_in.size(); j++) {
-          matrix_int[i][j] = matrix_int[i + n][j];
-        }
-        for (int j = 0; j < 2*data_in.size(); j++) {
-          matrix_int[i + n][j] = vector_int[j];
-        }
-      } else {
-        for (int j = 0; j < 2*data_in.size(); j++) {
-          matrix_int[i][j] = matrix_int[i - n][j];
-        }
-        for (int j = 0; j < 2*data_in.size(); j++) {
-          matrix_int[i - n][j] = vector_int[j];
-        }
-      }
-
-      n = n + 1;
+    if (data_in[i][i] == 0.0) {
+      throw std::runtime_error("Mathematical Error!");
     }
-
-    // Applying Gauss Jordan Elimination
     for (int j = 0; j < data_in.size(); j++) {
       if (i != j) {
-        ratio = matrix_int[j][i]/matrix_int[i][i];
+        ratio = matrix[j][i]/matrix[i][i];
         for (int m = 0; m < 2*data_in.size(); m++) {
-          matrix_int[j][m] = matrix_int[j][m] - ratio*matrix_int[i][m];
+          matrix[j][m] = matrix[j][m] - ratio*matrix[i][m];
         }
       }
     }
@@ -118,14 +92,14 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
   // Row Operation to Make Principal Diagonal to 1
   for (int i = 0; i < data_in.size(); i++) {
     for (int j = data_in.size(); j < 2*data_in.size(); j++) {
-      matrix_int[i][j] = matrix_int[i][j]/matrix_int[i][i];
+      matrix[i][j] = matrix[i][j]/matrix[i][i];
     }
   }
 
   // Output
   for (int i = 0; i < data_in.size(); i++) {
     for (int j = 0; j < data_in.size(); j++) {
-      data_out[i][j] = matrix_int[i][j + data_in.size()];
+      data_out[i][j] = matrix[i][j + data_in.size()];
     }
   }
 

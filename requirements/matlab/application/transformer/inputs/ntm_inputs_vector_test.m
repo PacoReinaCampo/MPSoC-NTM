@@ -44,26 +44,35 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_inverse(DATA_IN)
-  % Constants
-  [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
+% Package
+addpath(genpath('../../../../library/math/algebra/matrix'));
+addpath(genpath('../../../../library/math/algebra/tensor'));
 
-  % Body
-  data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
+addpath(genpath('../../../../library/transformer/inputs'));
 
-  for i = 1:SIZE_I_IN
-    data_int(i, :) = data_int(i, :)/data_int(i, i);
+% Constants
+SIZE_L_IN = 3;
+SIZE_N_IN = 3;
+SIZE_D_IN = 3;
+SIZE_K_IN = 3;
+SIZE_Q_IN = 3;
+SIZE_V_IN = 3;
+SIZE_X_IN = 3;
+SIZE_W_IN = 3;
+SIZE_R_IN = 3;
+SIZE_P_IN = 3;
+SIZE_S_IN = 3;
 
-    for m = i:SIZE_I_IN - 1
-      data_int(m + 1, :) = data_int(m + 1, :) - data_int(i, :)*data_int(m + 1, i);
-    end
-  end
+% Signals
+W_IN = rand(SIZE_D_IN, SIZE_X_IN);
+K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_IN = rand(SIZE_D_IN, SIZE_S_IN);
+D_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
 
-  for i = 2:SIZE_I_IN
-    for m = (i - 1): - 1:1
-      data_int(m, :) = data_int(m, :) - data_int(i, :)*data_int(m, i);
-    end
-  end
+X_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_X_IN);
+R_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
+XI_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
+RHO_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
 
-  DATA_OUT = data_int(:, SIZE_J_IN + 1:2*SIZE_J_IN);
-end
+% DUT
+X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);

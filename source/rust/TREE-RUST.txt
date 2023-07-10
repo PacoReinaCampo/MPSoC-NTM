@@ -54,36 +54,7 @@ library
 │   │       ├── ntm_output_gate_vector.rs
 │   │       └── ntm_state_gate_vector.rs
 │   ├── ntm_fnn_controller.rs
-│   ├── ntm_lstm_controller.rs
-│   ├── ntm_transformer_controller.rs
-│   └── transformer
-│       ├── components
-│       │   ├── ntm_masked_multi_head_attention.rs
-│       │   ├── ntm_masked_scaled_dot_product_attention.rs
-│       │   ├── ntm_multi_head_attention.rs
-│       │   └── ntm_scaled_dot_product_attention.rs
-│       ├── fnn
-│       │   └── ntm_fnn.rs
-│       ├── functions
-│       │   ├── ntm_layer_norm.rs
-│       │   └── ntm_positional_encoding.rs
-│       ├── inputs
-│       │   ├── ntm_inputs_vector.rs
-│       │   ├── ntm_keys_vector.rs
-│       │   ├── ntm_queries_vector.rs
-│       │   └── ntm_values_vector.rs
-│       ├── lstm
-│       │   ├── ntm_activation_gate_vector.rs
-│       │   ├── ntm_forget_gate_vector.rs
-│       │   ├── ntm_hidden_gate_vector.rs
-│       │   ├── ntm_input_gate_vector.rs
-│       │   ├── ntm_lstm.rs
-│       │   ├── ntm_output_gate_vector.rs
-│       │   └── ntm_state_gate_vector.rs
-│       └── top
-│           ├── ntm_controller.rs
-│           ├── ntm_decoder.rs
-│           └── ntm_encoder.rs
+│   └── ntm_lstm_controller.rs
 ├── dnc
 │   ├── dnc.rs
 │   ├── memory
@@ -246,52 +217,81 @@ library
 │       └── top
 │           ├── mod.rs
 │           └── ntm_state_top.rs
-└── trainer
-    ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.rs
-    │   └── ntm_vector_controller_differentiation.rs
-    ├── FNN
-    │   ├── ntm_fnn_b_trainer.rs
-    │   ├── ntm_fnn_d_trainer.rs
-    │   ├── ntm_fnn_k_trainer.rs
-    │   ├── ntm_fnn_trainer.rs
-    │   ├── ntm_fnn_u_trainer.rs
-    │   ├── ntm_fnn_v_trainer.rs
-    │   └── ntm_fnn_w_trainer.rs
-    ├── LSTM
-    │   ├── activation
-    │   │   ├── ntm_lstm_activation_b_trainer.rs
-    │   │   ├── ntm_lstm_activation_d_trainer.rs
-    │   │   ├── ntm_lstm_activation_k_trainer.rs
-    │   │   ├── ntm_lstm_activation_trainer.rs
-    │   │   ├── ntm_lstm_activation_u_trainer.rs
-    │   │   ├── ntm_lstm_activation_v_trainer.rs
-    │   │   └── ntm_lstm_activation_w_trainer.rs
-    │   ├── forget
-    │   │   ├── ntm_lstm_forget_b_trainer.rs
-    │   │   ├── ntm_lstm_forget_d_trainer.rs
-    │   │   ├── ntm_lstm_forget_k_trainer.rs
-    │   │   ├── ntm_lstm_forget_trainer.rs
-    │   │   ├── ntm_lstm_forget_u_trainer.rs
-    │   │   ├── ntm_lstm_forget_v_trainer.rs
-    │   │   └── ntm_lstm_forget_w_trainer.rs
-    │   ├── input
-    │   │   ├── ntm_lstm_input_b_trainer.rs
-    │   │   ├── ntm_lstm_input_d_trainer.rs
-    │   │   ├── ntm_lstm_input_k_trainer.rs
-    │   │   ├── ntm_lstm_input_trainer.rs
-    │   │   ├── ntm_lstm_input_u_trainer.rs
-    │   │   ├── ntm_lstm_input_v_trainer.rs
-    │   │   └── ntm_lstm_input_w_trainer.rs
-    │   └── output
-    │       ├── ntm_lstm_output_b_trainer.rs
-    │       ├── ntm_lstm_output_d_trainer.rs
-    │       ├── ntm_lstm_output_k_trainer.rs
-    │       ├── ntm_lstm_output_trainer.rs
-    │       ├── ntm_lstm_output_u_trainer.rs
-    │       ├── ntm_lstm_output_v_trainer.rs
-    │       └── ntm_lstm_output_w_trainer.rs
-    ├── ntm_fnn.rs
-    └── ntm_lstm.rs
+├── trainer
+│   ├── differentiation
+│   │   ├── ntm_matrix_controller_differentiation.rs
+│   │   └── ntm_vector_controller_differentiation.rs
+│   ├── FNN
+│   │   ├── ntm_fnn_b_trainer.rs
+│   │   ├── ntm_fnn_d_trainer.rs
+│   │   ├── ntm_fnn_k_trainer.rs
+│   │   ├── ntm_fnn_trainer.rs
+│   │   ├── ntm_fnn_u_trainer.rs
+│   │   ├── ntm_fnn_v_trainer.rs
+│   │   └── ntm_fnn_w_trainer.rs
+│   ├── LSTM
+│   │   ├── activation
+│   │   │   ├── ntm_lstm_activation_b_trainer.rs
+│   │   │   ├── ntm_lstm_activation_d_trainer.rs
+│   │   │   ├── ntm_lstm_activation_k_trainer.rs
+│   │   │   ├── ntm_lstm_activation_trainer.rs
+│   │   │   ├── ntm_lstm_activation_u_trainer.rs
+│   │   │   ├── ntm_lstm_activation_v_trainer.rs
+│   │   │   └── ntm_lstm_activation_w_trainer.rs
+│   │   ├── forget
+│   │   │   ├── ntm_lstm_forget_b_trainer.rs
+│   │   │   ├── ntm_lstm_forget_d_trainer.rs
+│   │   │   ├── ntm_lstm_forget_k_trainer.rs
+│   │   │   ├── ntm_lstm_forget_trainer.rs
+│   │   │   ├── ntm_lstm_forget_u_trainer.rs
+│   │   │   ├── ntm_lstm_forget_v_trainer.rs
+│   │   │   └── ntm_lstm_forget_w_trainer.rs
+│   │   ├── input
+│   │   │   ├── ntm_lstm_input_b_trainer.rs
+│   │   │   ├── ntm_lstm_input_d_trainer.rs
+│   │   │   ├── ntm_lstm_input_k_trainer.rs
+│   │   │   ├── ntm_lstm_input_trainer.rs
+│   │   │   ├── ntm_lstm_input_u_trainer.rs
+│   │   │   ├── ntm_lstm_input_v_trainer.rs
+│   │   │   └── ntm_lstm_input_w_trainer.rs
+│   │   └── output
+│   │       ├── ntm_lstm_output_b_trainer.rs
+│   │       ├── ntm_lstm_output_d_trainer.rs
+│   │       ├── ntm_lstm_output_k_trainer.rs
+│   │       ├── ntm_lstm_output_trainer.rs
+│   │       ├── ntm_lstm_output_u_trainer.rs
+│   │       ├── ntm_lstm_output_v_trainer.rs
+│   │       └── ntm_lstm_output_w_trainer.rs
+│   ├── ntm_fnn.rs
+│   └── ntm_lstm.rs
+└── transformer
+    ├── components
+    │   ├── ntm_masked_multi_head_attention.rs
+    │   ├── ntm_masked_scaled_dot_product_attention.rs
+    │   ├── ntm_multi_head_attention.rs
+    │   └── ntm_scaled_dot_product_attention.rs
+    ├── fnn
+    │   └── ntm_fnn.rs
+    ├── functions
+    │   ├── ntm_layer_norm.rs
+    │   └── ntm_positional_encoding.rs
+    ├── inputs
+    │   ├── ntm_inputs_vector.rs
+    │   ├── ntm_keys_vector.rs
+    │   ├── ntm_queries_vector.rs
+    │   └── ntm_values_vector.rs
+    ├── lstm
+    │   ├── ntm_activation_gate_vector.rs
+    │   ├── ntm_forget_gate_vector.rs
+    │   ├── ntm_hidden_gate_vector.rs
+    │   ├── ntm_input_gate_vector.rs
+    │   ├── ntm_lstm.rs
+    │   ├── ntm_output_gate_vector.rs
+    │   └── ntm_state_gate_vector.rs
+    ├── ntm_transformer_controller.rs
+    └── top
+        ├── ntm_controller.rs
+        ├── ntm_decoder.rs
+        └── ntm_encoder.rs
 
 65 directories, 229 files

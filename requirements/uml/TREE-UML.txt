@@ -94,390 +94,8 @@ library
 │   │           ├── ntm_controller_structural_object.dot
 │   │           ├── ntm_controller_structural_package.dot
 │   │           └── ntm_controller_structural_profile.dot
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_activity.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_communication.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_interaction.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_sequence.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_state.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_timing.dot
-│   │   │   │   ├── ntm_activation_gate_vector_behavioral_use.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_class.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_component.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_composite.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_deployment.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_object.dot
-│   │   │   │   ├── ntm_activation_gate_vector_structural_package.dot
-│   │   │   │   └── ntm_activation_gate_vector_structural_profile.dot
-│   │   │   ├── ntm_controller
-│   │   │   │   ├── ntm_controller_behavioral_activity.dot
-│   │   │   │   ├── ntm_controller_behavioral_communication.dot
-│   │   │   │   ├── ntm_controller_behavioral_interaction.dot
-│   │   │   │   ├── ntm_controller_behavioral_sequence.dot
-│   │   │   │   ├── ntm_controller_behavioral_state.dot
-│   │   │   │   ├── ntm_controller_behavioral_timing.dot
-│   │   │   │   ├── ntm_controller_behavioral_use.dot
-│   │   │   │   ├── ntm_controller_structural_class.dot
-│   │   │   │   ├── ntm_controller_structural_component.dot
-│   │   │   │   ├── ntm_controller_structural_composite.dot
-│   │   │   │   ├── ntm_controller_structural_deployment.dot
-│   │   │   │   ├── ntm_controller_structural_object.dot
-│   │   │   │   ├── ntm_controller_structural_package.dot
-│   │   │   │   └── ntm_controller_structural_profile.dot
-│   │   │   ├── ntm_forget_gate_vector
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_activity.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_communication.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_interaction.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_sequence.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_state.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_timing.dot
-│   │   │   │   ├── ntm_forget_gate_vector_behavioral_use.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_class.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_component.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_composite.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_deployment.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_object.dot
-│   │   │   │   ├── ntm_forget_gate_vector_structural_package.dot
-│   │   │   │   └── ntm_forget_gate_vector_structural_profile.dot
-│   │   │   ├── ntm_hidden_gate_vector
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_activity.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_communication.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_interaction.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_sequence.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_state.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_timing.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_behavioral_use.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_class.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_component.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_composite.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_deployment.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_object.dot
-│   │   │   │   ├── ntm_hidden_gate_vector_structural_package.dot
-│   │   │   │   └── ntm_hidden_gate_vector_structural_profile.dot
-│   │   │   ├── ntm_input_gate_vector
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_activity.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_communication.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_interaction.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_sequence.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_state.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_timing.dot
-│   │   │   │   ├── ntm_input_gate_vector_behavioral_use.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_class.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_component.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_composite.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_deployment.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_object.dot
-│   │   │   │   ├── ntm_input_gate_vector_structural_package.dot
-│   │   │   │   └── ntm_input_gate_vector_structural_profile.dot
-│   │   │   ├── ntm_output_gate_vector
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_activity.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_communication.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_interaction.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_sequence.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_state.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_timing.dot
-│   │   │   │   ├── ntm_output_gate_vector_behavioral_use.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_class.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_component.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_composite.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_deployment.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_object.dot
-│   │   │   │   ├── ntm_output_gate_vector_structural_package.dot
-│   │   │   │   └── ntm_output_gate_vector_structural_profile.dot
-│   │   │   └── ntm_state_gate_vector
-│   │   │       ├── ntm_state_gate_vector_behavioral_activity.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_communication.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_interaction.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_sequence.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_state.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_timing.dot
-│   │   │       ├── ntm_state_gate_vector_behavioral_use.dot
-│   │   │       ├── ntm_state_gate_vector_structural_class.dot
-│   │   │       ├── ntm_state_gate_vector_structural_component.dot
-│   │   │       ├── ntm_state_gate_vector_structural_composite.dot
-│   │   │       ├── ntm_state_gate_vector_structural_deployment.dot
-│   │   │       ├── ntm_state_gate_vector_structural_object.dot
-│   │   │       ├── ntm_state_gate_vector_structural_package.dot
-│   │   │       └── ntm_state_gate_vector_structural_profile.dot
-│   │   └── standard
-│   │       ├── ntm_activation_gate_vector
-│   │       │   ├── ntm_activation_gate_vector_behavioral_activity.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_communication.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_interaction.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_sequence.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_state.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_timing.dot
-│   │       │   ├── ntm_activation_gate_vector_behavioral_use.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_class.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_component.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_composite.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_deployment.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_object.dot
-│   │       │   ├── ntm_activation_gate_vector_structural_package.dot
-│   │       │   └── ntm_activation_gate_vector_structural_profile.dot
-│   │       ├── ntm_controller
-│   │       │   ├── ntm_controller_behavioral_activity.dot
-│   │       │   ├── ntm_controller_behavioral_communication.dot
-│   │       │   ├── ntm_controller_behavioral_interaction.dot
-│   │       │   ├── ntm_controller_behavioral_sequence.dot
-│   │       │   ├── ntm_controller_behavioral_state.dot
-│   │       │   ├── ntm_controller_behavioral_timing.dot
-│   │       │   ├── ntm_controller_behavioral_use.dot
-│   │       │   ├── ntm_controller_structural_class.dot
-│   │       │   ├── ntm_controller_structural_component.dot
-│   │       │   ├── ntm_controller_structural_composite.dot
-│   │       │   ├── ntm_controller_structural_deployment.dot
-│   │       │   ├── ntm_controller_structural_object.dot
-│   │       │   ├── ntm_controller_structural_package.dot
-│   │       │   └── ntm_controller_structural_profile.dot
-│   │       ├── ntm_forget_gate_vector
-│   │       │   ├── ntm_forget_gate_vector_behavioral_activity.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_communication.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_interaction.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_sequence.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_state.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_timing.dot
-│   │       │   ├── ntm_forget_gate_vector_behavioral_use.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_class.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_component.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_composite.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_deployment.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_object.dot
-│   │       │   ├── ntm_forget_gate_vector_structural_package.dot
-│   │       │   └── ntm_forget_gate_vector_structural_profile.dot
-│   │       ├── ntm_hidden_gate_vector
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_activity.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_communication.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_interaction.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_sequence.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_state.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_timing.dot
-│   │       │   ├── ntm_hidden_gate_vector_behavioral_use.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_class.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_component.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_composite.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_deployment.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_object.dot
-│   │       │   ├── ntm_hidden_gate_vector_structural_package.dot
-│   │       │   └── ntm_hidden_gate_vector_structural_profile.dot
-│   │       ├── ntm_input_gate_vector
-│   │       │   ├── ntm_input_gate_vector_behavioral_activity.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_communication.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_interaction.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_sequence.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_state.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_timing.dot
-│   │       │   ├── ntm_input_gate_vector_behavioral_use.dot
-│   │       │   ├── ntm_input_gate_vector_structural_class.dot
-│   │       │   ├── ntm_input_gate_vector_structural_component.dot
-│   │       │   ├── ntm_input_gate_vector_structural_composite.dot
-│   │       │   ├── ntm_input_gate_vector_structural_deployment.dot
-│   │       │   ├── ntm_input_gate_vector_structural_object.dot
-│   │       │   ├── ntm_input_gate_vector_structural_package.dot
-│   │       │   └── ntm_input_gate_vector_structural_profile.dot
-│   │       ├── ntm_output_gate_vector
-│   │       │   ├── ntm_output_gate_vector_behavioral_activity.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_communication.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_interaction.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_sequence.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_state.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_timing.dot
-│   │       │   ├── ntm_output_gate_vector_behavioral_use.dot
-│   │       │   ├── ntm_output_gate_vector_structural_class.dot
-│   │       │   ├── ntm_output_gate_vector_structural_component.dot
-│   │       │   ├── ntm_output_gate_vector_structural_composite.dot
-│   │       │   ├── ntm_output_gate_vector_structural_deployment.dot
-│   │       │   ├── ntm_output_gate_vector_structural_object.dot
-│   │       │   ├── ntm_output_gate_vector_structural_package.dot
-│   │       │   └── ntm_output_gate_vector_structural_profile.dot
-│   │       └── ntm_state_gate_vector
-│   │           ├── ntm_state_gate_vector_behavioral_activity.dot
-│   │           ├── ntm_state_gate_vector_behavioral_communication.dot
-│   │           ├── ntm_state_gate_vector_behavioral_interaction.dot
-│   │           ├── ntm_state_gate_vector_behavioral_sequence.dot
-│   │           ├── ntm_state_gate_vector_behavioral_state.dot
-│   │           ├── ntm_state_gate_vector_behavioral_timing.dot
-│   │           ├── ntm_state_gate_vector_behavioral_use.dot
-│   │           ├── ntm_state_gate_vector_structural_class.dot
-│   │           ├── ntm_state_gate_vector_structural_component.dot
-│   │           ├── ntm_state_gate_vector_structural_composite.dot
-│   │           ├── ntm_state_gate_vector_structural_deployment.dot
-│   │           ├── ntm_state_gate_vector_structural_object.dot
-│   │           ├── ntm_state_gate_vector_structural_package.dot
-│   │           └── ntm_state_gate_vector_structural_profile.dot
-│   └── transformer
-│       ├── components
-│       │   ├── ntm_masked_multi_head_attention
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_activity.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_communication.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_interaction.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_sequence.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_state.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_timing.dot
-│       │   │   ├── ntm_masked_multi_head_attention_behavioral_use.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_class.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_component.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_composite.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_deployment.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_object.dot
-│       │   │   ├── ntm_masked_multi_head_attention_structural_package.dot
-│       │   │   └── ntm_masked_multi_head_attention_structural_profile.dot
-│       │   ├── ntm_masked_scaled_dot_product_attention
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_activity.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_communication.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_interaction.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_sequence.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_state.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_timing.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_use.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_class.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_component.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_composite.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_deployment.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_object.dot
-│       │   │   ├── ntm_masked_scaled_dot_product_attention_structural_package.dot
-│       │   │   └── ntm_masked_scaled_dot_product_attention_structural_profile.dot
-│       │   ├── ntm_multi_head_attention
-│       │   │   ├── ntm_multi_head_attention_behavioral_activity.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_communication.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_interaction.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_sequence.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_state.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_timing.dot
-│       │   │   ├── ntm_multi_head_attention_behavioral_use.dot
-│       │   │   ├── ntm_multi_head_attention_structural_class.dot
-│       │   │   ├── ntm_multi_head_attention_structural_component.dot
-│       │   │   ├── ntm_multi_head_attention_structural_composite.dot
-│       │   │   ├── ntm_multi_head_attention_structural_deployment.dot
-│       │   │   ├── ntm_multi_head_attention_structural_object.dot
-│       │   │   ├── ntm_multi_head_attention_structural_package.dot
-│       │   │   └── ntm_multi_head_attention_structural_profile.dot
-│       │   └── ntm_scaled_dot_product_attention
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_activity.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_communication.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_interaction.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_sequence.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_state.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_timing.dot
-│       │       ├── ntm_scaled_dot_product_attention_behavioral_use.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_class.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_component.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_composite.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_deployment.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_object.dot
-│       │       ├── ntm_scaled_dot_product_attention_structural_package.dot
-│       │       └── ntm_scaled_dot_product_attention_structural_profile.dot
-│       ├── fnn
-│       │   └── ntm_fnn
-│       │       ├── ntm_fnn_behavioral_activity.dot
-│       │       ├── ntm_fnn_behavioral_communication.dot
-│       │       ├── ntm_fnn_behavioral_interaction.dot
-│       │       ├── ntm_fnn_behavioral_sequence.dot
-│       │       ├── ntm_fnn_behavioral_state.dot
-│       │       ├── ntm_fnn_behavioral_timing.dot
-│       │       ├── ntm_fnn_behavioral_use.dot
-│       │       ├── ntm_fnn_structural_class.dot
-│       │       ├── ntm_fnn_structural_component.dot
-│       │       ├── ntm_fnn_structural_composite.dot
-│       │       ├── ntm_fnn_structural_deployment.dot
-│       │       ├── ntm_fnn_structural_object.dot
-│       │       ├── ntm_fnn_structural_package.dot
-│       │       └── ntm_fnn_structural_profile.dot
-│       ├── functions
-│       │   ├── ntm_layer_norm
-│       │   │   ├── ntm_layer_norm_behavioral_activity.dot
-│       │   │   ├── ntm_layer_norm_behavioral_communication.dot
-│       │   │   ├── ntm_layer_norm_behavioral_interaction.dot
-│       │   │   ├── ntm_layer_norm_behavioral_sequence.dot
-│       │   │   ├── ntm_layer_norm_behavioral_state.dot
-│       │   │   ├── ntm_layer_norm_behavioral_timing.dot
-│       │   │   ├── ntm_layer_norm_behavioral_use.dot
-│       │   │   ├── ntm_layer_norm_structural_class.dot
-│       │   │   ├── ntm_layer_norm_structural_component.dot
-│       │   │   ├── ntm_layer_norm_structural_composite.dot
-│       │   │   ├── ntm_layer_norm_structural_deployment.dot
-│       │   │   ├── ntm_layer_norm_structural_object.dot
-│       │   │   ├── ntm_layer_norm_structural_package.dot
-│       │   │   └── ntm_layer_norm_structural_profile.dot
-│       │   └── ntm_positional_encoding
-│       │       ├── ntm_positional_encoding_behavioral_activity.dot
-│       │       ├── ntm_positional_encoding_behavioral_communication.dot
-│       │       ├── ntm_positional_encoding_behavioral_interaction.dot
-│       │       ├── ntm_positional_encoding_behavioral_sequence.dot
-│       │       ├── ntm_positional_encoding_behavioral_state.dot
-│       │       ├── ntm_positional_encoding_behavioral_timing.dot
-│       │       ├── ntm_positional_encoding_behavioral_use.dot
-│       │       ├── ntm_positional_encoding_structural_class.dot
-│       │       ├── ntm_positional_encoding_structural_component.dot
-│       │       ├── ntm_positional_encoding_structural_composite.dot
-│       │       ├── ntm_positional_encoding_structural_deployment.dot
-│       │       ├── ntm_positional_encoding_structural_object.dot
-│       │       ├── ntm_positional_encoding_structural_package.dot
-│       │       └── ntm_positional_encoding_structural_profile.dot
-│       ├── inputs
-│       │   ├── ntm_inputs_vector
-│       │   │   ├── ntm_inputs_vector_behavioral_activity.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_communication.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_interaction.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_sequence.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_state.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_timing.dot
-│       │   │   ├── ntm_inputs_vector_behavioral_use.dot
-│       │   │   ├── ntm_inputs_vector_structural_class.dot
-│       │   │   ├── ntm_inputs_vector_structural_component.dot
-│       │   │   ├── ntm_inputs_vector_structural_composite.dot
-│       │   │   ├── ntm_inputs_vector_structural_deployment.dot
-│       │   │   ├── ntm_inputs_vector_structural_object.dot
-│       │   │   ├── ntm_inputs_vector_structural_package.dot
-│       │   │   └── ntm_inputs_vector_structural_profile.dot
-│       │   ├── ntm_keys_vector
-│       │   │   ├── ntm_keys_vector_behavioral_activity.dot
-│       │   │   ├── ntm_keys_vector_behavioral_communication.dot
-│       │   │   ├── ntm_keys_vector_behavioral_interaction.dot
-│       │   │   ├── ntm_keys_vector_behavioral_sequence.dot
-│       │   │   ├── ntm_keys_vector_behavioral_state.dot
-│       │   │   ├── ntm_keys_vector_behavioral_timing.dot
-│       │   │   ├── ntm_keys_vector_behavioral_use.dot
-│       │   │   ├── ntm_keys_vector_structural_class.dot
-│       │   │   ├── ntm_keys_vector_structural_component.dot
-│       │   │   ├── ntm_keys_vector_structural_composite.dot
-│       │   │   ├── ntm_keys_vector_structural_deployment.dot
-│       │   │   ├── ntm_keys_vector_structural_object.dot
-│       │   │   ├── ntm_keys_vector_structural_package.dot
-│       │   │   └── ntm_keys_vector_structural_profile.dot
-│       │   ├── ntm_queries_vector
-│       │   │   ├── ntm_queries_vector_behavioral_activity.dot
-│       │   │   ├── ntm_queries_vector_behavioral_communication.dot
-│       │   │   ├── ntm_queries_vector_behavioral_interaction.dot
-│       │   │   ├── ntm_queries_vector_behavioral_sequence.dot
-│       │   │   ├── ntm_queries_vector_behavioral_state.dot
-│       │   │   ├── ntm_queries_vector_behavioral_timing.dot
-│       │   │   ├── ntm_queries_vector_behavioral_use.dot
-│       │   │   ├── ntm_queries_vector_structural_class.dot
-│       │   │   ├── ntm_queries_vector_structural_component.dot
-│       │   │   ├── ntm_queries_vector_structural_composite.dot
-│       │   │   ├── ntm_queries_vector_structural_deployment.dot
-│       │   │   ├── ntm_queries_vector_structural_object.dot
-│       │   │   ├── ntm_queries_vector_structural_package.dot
-│       │   │   └── ntm_queries_vector_structural_profile.dot
-│       │   └── ntm_values_vector
-│       │       ├── ntm_values_vector_behavioral_activity.dot
-│       │       ├── ntm_values_vector_behavioral_communication.dot
-│       │       ├── ntm_values_vector_behavioral_interaction.dot
-│       │       ├── ntm_values_vector_behavioral_sequence.dot
-│       │       ├── ntm_values_vector_behavioral_state.dot
-│       │       ├── ntm_values_vector_behavioral_timing.dot
-│       │       ├── ntm_values_vector_behavioral_use.dot
-│       │       ├── ntm_values_vector_structural_class.dot
-│       │       ├── ntm_values_vector_structural_component.dot
-│       │       ├── ntm_values_vector_structural_composite.dot
-│       │       ├── ntm_values_vector_structural_deployment.dot
-│       │       ├── ntm_values_vector_structural_object.dot
-│       │       ├── ntm_values_vector_structural_package.dot
-│       │       └── ntm_values_vector_structural_profile.dot
-│       ├── lstm
+│   └── LSTM
+│       ├── convolutional
 │       │   ├── ntm_activation_gate_vector
 │       │   │   ├── ntm_activation_gate_vector_behavioral_activity.dot
 │       │   │   ├── ntm_activation_gate_vector_behavioral_communication.dot
@@ -493,6 +111,21 @@ library
 │       │   │   ├── ntm_activation_gate_vector_structural_object.dot
 │       │   │   ├── ntm_activation_gate_vector_structural_package.dot
 │       │   │   └── ntm_activation_gate_vector_structural_profile.dot
+│       │   ├── ntm_controller
+│       │   │   ├── ntm_controller_behavioral_activity.dot
+│       │   │   ├── ntm_controller_behavioral_communication.dot
+│       │   │   ├── ntm_controller_behavioral_interaction.dot
+│       │   │   ├── ntm_controller_behavioral_sequence.dot
+│       │   │   ├── ntm_controller_behavioral_state.dot
+│       │   │   ├── ntm_controller_behavioral_timing.dot
+│       │   │   ├── ntm_controller_behavioral_use.dot
+│       │   │   ├── ntm_controller_structural_class.dot
+│       │   │   ├── ntm_controller_structural_component.dot
+│       │   │   ├── ntm_controller_structural_composite.dot
+│       │   │   ├── ntm_controller_structural_deployment.dot
+│       │   │   ├── ntm_controller_structural_object.dot
+│       │   │   ├── ntm_controller_structural_package.dot
+│       │   │   └── ntm_controller_structural_profile.dot
 │       │   ├── ntm_forget_gate_vector
 │       │   │   ├── ntm_forget_gate_vector_behavioral_activity.dot
 │       │   │   ├── ntm_forget_gate_vector_behavioral_communication.dot
@@ -538,21 +171,6 @@ library
 │       │   │   ├── ntm_input_gate_vector_structural_object.dot
 │       │   │   ├── ntm_input_gate_vector_structural_package.dot
 │       │   │   └── ntm_input_gate_vector_structural_profile.dot
-│       │   ├── ntm_lstm
-│       │   │   ├── ntm_lstm_behavioral_activity.dot
-│       │   │   ├── ntm_lstm_behavioral_communication.dot
-│       │   │   ├── ntm_lstm_behavioral_interaction.dot
-│       │   │   ├── ntm_lstm_behavioral_sequence.dot
-│       │   │   ├── ntm_lstm_behavioral_state.dot
-│       │   │   ├── ntm_lstm_behavioral_timing.dot
-│       │   │   ├── ntm_lstm_behavioral_use.dot
-│       │   │   ├── ntm_lstm_structural_class.dot
-│       │   │   ├── ntm_lstm_structural_component.dot
-│       │   │   ├── ntm_lstm_structural_composite.dot
-│       │   │   ├── ntm_lstm_structural_deployment.dot
-│       │   │   ├── ntm_lstm_structural_object.dot
-│       │   │   ├── ntm_lstm_structural_package.dot
-│       │   │   └── ntm_lstm_structural_profile.dot
 │       │   ├── ntm_output_gate_vector
 │       │   │   ├── ntm_output_gate_vector_behavioral_activity.dot
 │       │   │   ├── ntm_output_gate_vector_behavioral_communication.dot
@@ -583,7 +201,22 @@ library
 │       │       ├── ntm_state_gate_vector_structural_object.dot
 │       │       ├── ntm_state_gate_vector_structural_package.dot
 │       │       └── ntm_state_gate_vector_structural_profile.dot
-│       └── top
+│       └── standard
+│           ├── ntm_activation_gate_vector
+│           │   ├── ntm_activation_gate_vector_behavioral_activity.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_communication.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_interaction.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_sequence.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_state.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_timing.dot
+│           │   ├── ntm_activation_gate_vector_behavioral_use.dot
+│           │   ├── ntm_activation_gate_vector_structural_class.dot
+│           │   ├── ntm_activation_gate_vector_structural_component.dot
+│           │   ├── ntm_activation_gate_vector_structural_composite.dot
+│           │   ├── ntm_activation_gate_vector_structural_deployment.dot
+│           │   ├── ntm_activation_gate_vector_structural_object.dot
+│           │   ├── ntm_activation_gate_vector_structural_package.dot
+│           │   └── ntm_activation_gate_vector_structural_profile.dot
 │           ├── ntm_controller
 │           │   ├── ntm_controller_behavioral_activity.dot
 │           │   ├── ntm_controller_behavioral_communication.dot
@@ -599,36 +232,81 @@ library
 │           │   ├── ntm_controller_structural_object.dot
 │           │   ├── ntm_controller_structural_package.dot
 │           │   └── ntm_controller_structural_profile.dot
-│           ├── ntm_decoder
-│           │   ├── ntm_decoder_behavioral_activity.dot
-│           │   ├── ntm_decoder_behavioral_communication.dot
-│           │   ├── ntm_decoder_behavioral_interaction.dot
-│           │   ├── ntm_decoder_behavioral_sequence.dot
-│           │   ├── ntm_decoder_behavioral_state.dot
-│           │   ├── ntm_decoder_behavioral_timing.dot
-│           │   ├── ntm_decoder_behavioral_use.dot
-│           │   ├── ntm_decoder_structural_class.dot
-│           │   ├── ntm_decoder_structural_component.dot
-│           │   ├── ntm_decoder_structural_composite.dot
-│           │   ├── ntm_decoder_structural_deployment.dot
-│           │   ├── ntm_decoder_structural_object.dot
-│           │   ├── ntm_decoder_structural_package.dot
-│           │   └── ntm_decoder_structural_profile.dot
-│           └── ntm_encoder
-│               ├── ntm_encoder_behavioral_activity.dot
-│               ├── ntm_encoder_behavioral_communication.dot
-│               ├── ntm_encoder_behavioral_interaction.dot
-│               ├── ntm_encoder_behavioral_sequence.dot
-│               ├── ntm_encoder_behavioral_state.dot
-│               ├── ntm_encoder_behavioral_timing.dot
-│               ├── ntm_encoder_behavioral_use.dot
-│               ├── ntm_encoder_structural_class.dot
-│               ├── ntm_encoder_structural_component.dot
-│               ├── ntm_encoder_structural_composite.dot
-│               ├── ntm_encoder_structural_deployment.dot
-│               ├── ntm_encoder_structural_object.dot
-│               ├── ntm_encoder_structural_package.dot
-│               └── ntm_encoder_structural_profile.dot
+│           ├── ntm_forget_gate_vector
+│           │   ├── ntm_forget_gate_vector_behavioral_activity.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_communication.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_interaction.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_sequence.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_state.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_timing.dot
+│           │   ├── ntm_forget_gate_vector_behavioral_use.dot
+│           │   ├── ntm_forget_gate_vector_structural_class.dot
+│           │   ├── ntm_forget_gate_vector_structural_component.dot
+│           │   ├── ntm_forget_gate_vector_structural_composite.dot
+│           │   ├── ntm_forget_gate_vector_structural_deployment.dot
+│           │   ├── ntm_forget_gate_vector_structural_object.dot
+│           │   ├── ntm_forget_gate_vector_structural_package.dot
+│           │   └── ntm_forget_gate_vector_structural_profile.dot
+│           ├── ntm_hidden_gate_vector
+│           │   ├── ntm_hidden_gate_vector_behavioral_activity.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_communication.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_interaction.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_sequence.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_state.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_timing.dot
+│           │   ├── ntm_hidden_gate_vector_behavioral_use.dot
+│           │   ├── ntm_hidden_gate_vector_structural_class.dot
+│           │   ├── ntm_hidden_gate_vector_structural_component.dot
+│           │   ├── ntm_hidden_gate_vector_structural_composite.dot
+│           │   ├── ntm_hidden_gate_vector_structural_deployment.dot
+│           │   ├── ntm_hidden_gate_vector_structural_object.dot
+│           │   ├── ntm_hidden_gate_vector_structural_package.dot
+│           │   └── ntm_hidden_gate_vector_structural_profile.dot
+│           ├── ntm_input_gate_vector
+│           │   ├── ntm_input_gate_vector_behavioral_activity.dot
+│           │   ├── ntm_input_gate_vector_behavioral_communication.dot
+│           │   ├── ntm_input_gate_vector_behavioral_interaction.dot
+│           │   ├── ntm_input_gate_vector_behavioral_sequence.dot
+│           │   ├── ntm_input_gate_vector_behavioral_state.dot
+│           │   ├── ntm_input_gate_vector_behavioral_timing.dot
+│           │   ├── ntm_input_gate_vector_behavioral_use.dot
+│           │   ├── ntm_input_gate_vector_structural_class.dot
+│           │   ├── ntm_input_gate_vector_structural_component.dot
+│           │   ├── ntm_input_gate_vector_structural_composite.dot
+│           │   ├── ntm_input_gate_vector_structural_deployment.dot
+│           │   ├── ntm_input_gate_vector_structural_object.dot
+│           │   ├── ntm_input_gate_vector_structural_package.dot
+│           │   └── ntm_input_gate_vector_structural_profile.dot
+│           ├── ntm_output_gate_vector
+│           │   ├── ntm_output_gate_vector_behavioral_activity.dot
+│           │   ├── ntm_output_gate_vector_behavioral_communication.dot
+│           │   ├── ntm_output_gate_vector_behavioral_interaction.dot
+│           │   ├── ntm_output_gate_vector_behavioral_sequence.dot
+│           │   ├── ntm_output_gate_vector_behavioral_state.dot
+│           │   ├── ntm_output_gate_vector_behavioral_timing.dot
+│           │   ├── ntm_output_gate_vector_behavioral_use.dot
+│           │   ├── ntm_output_gate_vector_structural_class.dot
+│           │   ├── ntm_output_gate_vector_structural_component.dot
+│           │   ├── ntm_output_gate_vector_structural_composite.dot
+│           │   ├── ntm_output_gate_vector_structural_deployment.dot
+│           │   ├── ntm_output_gate_vector_structural_object.dot
+│           │   ├── ntm_output_gate_vector_structural_package.dot
+│           │   └── ntm_output_gate_vector_structural_profile.dot
+│           └── ntm_state_gate_vector
+│               ├── ntm_state_gate_vector_behavioral_activity.dot
+│               ├── ntm_state_gate_vector_behavioral_communication.dot
+│               ├── ntm_state_gate_vector_behavioral_interaction.dot
+│               ├── ntm_state_gate_vector_behavioral_sequence.dot
+│               ├── ntm_state_gate_vector_behavioral_state.dot
+│               ├── ntm_state_gate_vector_behavioral_timing.dot
+│               ├── ntm_state_gate_vector_behavioral_use.dot
+│               ├── ntm_state_gate_vector_structural_class.dot
+│               ├── ntm_state_gate_vector_structural_component.dot
+│               ├── ntm_state_gate_vector_structural_composite.dot
+│               ├── ntm_state_gate_vector_structural_deployment.dot
+│               ├── ntm_state_gate_vector_structural_object.dot
+│               ├── ntm_state_gate_vector_structural_package.dot
+│               └── ntm_state_gate_vector_structural_profile.dot
 ├── dnc
 │   ├── memory
 │   │   ├── dnc_addressing
@@ -1981,568 +1659,890 @@ library
 │           ├── ntm_state_top_structural_object.dot
 │           ├── ntm_state_top_structural_package.dot
 │           └── ntm_state_top_structural_profile.dot
-└── trainer
-    ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_activity.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_communication.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_interaction.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_sequence.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_state.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_timing.dot
-    │   │   ├── ntm_matrix_controller_differentiation_behavioral_use.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_class.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_component.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_composite.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_deployment.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_object.dot
-    │   │   ├── ntm_matrix_controller_differentiation_structural_package.dot
-    │   │   └── ntm_matrix_controller_differentiation_structural_profile.dot
-    │   └── ntm_vector_controller_differentiation
-    │       ├── ntm_vector_controller_differentiation_behavioral_activity.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_communication.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_interaction.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_sequence.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_state.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_timing.dot
-    │       ├── ntm_vector_controller_differentiation_behavioral_use.dot
-    │       ├── ntm_vector_controller_differentiation_structural_class.dot
-    │       ├── ntm_vector_controller_differentiation_structural_component.dot
-    │       ├── ntm_vector_controller_differentiation_structural_composite.dot
-    │       ├── ntm_vector_controller_differentiation_structural_deployment.dot
-    │       ├── ntm_vector_controller_differentiation_structural_object.dot
-    │       ├── ntm_vector_controller_differentiation_structural_package.dot
-    │       └── ntm_vector_controller_differentiation_structural_profile.dot
-    ├── FNN
-    │   ├── ntm_fnn_b_trainer
-    │   │   ├── ntm_fnn_b_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_b_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_b_trainer_structural_package.dot
-    │   │   └── ntm_fnn_b_trainer_structural_profile.dot
-    │   ├── ntm_fnn_d_trainer
-    │   │   ├── ntm_fnn_d_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_d_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_d_trainer_structural_package.dot
-    │   │   └── ntm_fnn_d_trainer_structural_profile.dot
-    │   ├── ntm_fnn_k_trainer
-    │   │   ├── ntm_fnn_k_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_k_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_k_trainer_structural_package.dot
-    │   │   └── ntm_fnn_k_trainer_structural_profile.dot
-    │   ├── ntm_fnn_trainer
-    │   │   ├── ntm_fnn_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_trainer_structural_package.dot
-    │   │   └── ntm_fnn_trainer_structural_profile.dot
-    │   ├── ntm_fnn_u_trainer
-    │   │   ├── ntm_fnn_u_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_u_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_u_trainer_structural_package.dot
-    │   │   └── ntm_fnn_u_trainer_structural_profile.dot
-    │   ├── ntm_fnn_v_trainer
-    │   │   ├── ntm_fnn_v_trainer_behavioral_activity.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_communication.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_interaction.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_sequence.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_state.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_timing.dot
-    │   │   ├── ntm_fnn_v_trainer_behavioral_use.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_class.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_component.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_composite.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_deployment.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_object.dot
-    │   │   ├── ntm_fnn_v_trainer_structural_package.dot
-    │   │   └── ntm_fnn_v_trainer_structural_profile.dot
-    │   └── ntm_fnn_w_trainer
-    │       ├── ntm_fnn_w_trainer_behavioral_activity.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_communication.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_interaction.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_sequence.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_state.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_timing.dot
-    │       ├── ntm_fnn_w_trainer_behavioral_use.dot
-    │       ├── ntm_fnn_w_trainer_structural_class.dot
-    │       ├── ntm_fnn_w_trainer_structural_component.dot
-    │       ├── ntm_fnn_w_trainer_structural_composite.dot
-    │       ├── ntm_fnn_w_trainer_structural_deployment.dot
-    │       ├── ntm_fnn_w_trainer_structural_object.dot
-    │       ├── ntm_fnn_w_trainer_structural_package.dot
-    │       └── ntm_fnn_w_trainer_structural_profile.dot
-    └── LSTM
-        ├── activation
-        │   ├── ntm_lstm_activation_b_trainer
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_b_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_b_trainer_structural_profile.dot
-        │   ├── ntm_lstm_activation_d_trainer
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_d_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_d_trainer_structural_profile.dot
-        │   ├── ntm_lstm_activation_k_trainer
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_k_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_k_trainer_structural_profile.dot
-        │   ├── ntm_lstm_activation_trainer
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_trainer_structural_profile.dot
-        │   ├── ntm_lstm_activation_u_trainer
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_u_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_u_trainer_structural_profile.dot
-        │   ├── ntm_lstm_activation_v_trainer
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_activation_v_trainer_structural_package.dot
-        │   │   └── ntm_lstm_activation_v_trainer_structural_profile.dot
-        │   └── ntm_lstm_activation_w_trainer
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_activity.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_communication.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_interaction.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_sequence.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_state.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_timing.dot
-        │       ├── ntm_lstm_activation_w_trainer_behavioral_use.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_class.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_component.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_composite.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_deployment.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_object.dot
-        │       ├── ntm_lstm_activation_w_trainer_structural_package.dot
-        │       └── ntm_lstm_activation_w_trainer_structural_profile.dot
-        ├── forget
-        │   ├── ntm_lstm_forget_b_trainer
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_b_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_b_trainer_structural_profile.dot
-        │   ├── ntm_lstm_forget_d_trainer
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_d_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_d_trainer_structural_profile.dot
-        │   ├── ntm_lstm_forget_k_trainer
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_k_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_k_trainer_structural_profile.dot
-        │   ├── ntm_lstm_forget_trainer
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_trainer_structural_profile.dot
-        │   ├── ntm_lstm_forget_u_trainer
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_u_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_u_trainer_structural_profile.dot
-        │   ├── ntm_lstm_forget_v_trainer
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_forget_v_trainer_structural_package.dot
-        │   │   └── ntm_lstm_forget_v_trainer_structural_profile.dot
-        │   └── ntm_lstm_forget_w_trainer
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_activity.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_communication.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_interaction.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_sequence.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_state.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_timing.dot
-        │       ├── ntm_lstm_forget_w_trainer_behavioral_use.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_class.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_component.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_composite.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_deployment.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_object.dot
-        │       ├── ntm_lstm_forget_w_trainer_structural_package.dot
-        │       └── ntm_lstm_forget_w_trainer_structural_profile.dot
-        ├── input
-        │   ├── ntm_lstm_input_b_trainer
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_b_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_b_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_b_trainer_structural_profile.dot
-        │   ├── ntm_lstm_input_d_trainer
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_d_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_d_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_d_trainer_structural_profile.dot
-        │   ├── ntm_lstm_input_k_trainer
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_k_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_k_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_k_trainer_structural_profile.dot
-        │   ├── ntm_lstm_input_trainer
-        │   │   ├── ntm_lstm_input_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_trainer_structural_profile.dot
-        │   ├── ntm_lstm_input_u_trainer
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_u_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_u_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_u_trainer_structural_profile.dot
-        │   ├── ntm_lstm_input_v_trainer
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_activity.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_communication.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_interaction.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_sequence.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_state.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_timing.dot
-        │   │   ├── ntm_lstm_input_v_trainer_behavioral_use.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_class.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_component.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_composite.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_deployment.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_object.dot
-        │   │   ├── ntm_lstm_input_v_trainer_structural_package.dot
-        │   │   └── ntm_lstm_input_v_trainer_structural_profile.dot
-        │   └── ntm_lstm_input_w_trainer
-        │       ├── ntm_lstm_input_w_trainer_behavioral_activity.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_communication.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_interaction.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_sequence.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_state.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_timing.dot
-        │       ├── ntm_lstm_input_w_trainer_behavioral_use.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_class.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_component.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_composite.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_deployment.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_object.dot
-        │       ├── ntm_lstm_input_w_trainer_structural_package.dot
-        │       └── ntm_lstm_input_w_trainer_structural_profile.dot
-        └── output
-            ├── ntm_lstm_output_b_trainer
-            │   ├── ntm_lstm_output_b_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_b_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_b_trainer_structural_package.dot
-            │   └── ntm_lstm_output_b_trainer_structural_profile.dot
-            ├── ntm_lstm_output_d_trainer
-            │   ├── ntm_lstm_output_d_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_d_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_d_trainer_structural_package.dot
-            │   └── ntm_lstm_output_d_trainer_structural_profile.dot
-            ├── ntm_lstm_output_k_trainer
-            │   ├── ntm_lstm_output_k_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_k_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_k_trainer_structural_package.dot
-            │   └── ntm_lstm_output_k_trainer_structural_profile.dot
-            ├── ntm_lstm_output_trainer
-            │   ├── ntm_lstm_output_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_trainer_structural_package.dot
-            │   └── ntm_lstm_output_trainer_structural_profile.dot
-            ├── ntm_lstm_output_u_trainer
-            │   ├── ntm_lstm_output_u_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_u_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_u_trainer_structural_package.dot
-            │   └── ntm_lstm_output_u_trainer_structural_profile.dot
-            ├── ntm_lstm_output_v_trainer
-            │   ├── ntm_lstm_output_v_trainer_behavioral_activity.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_communication.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_interaction.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_sequence.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_state.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_timing.dot
-            │   ├── ntm_lstm_output_v_trainer_behavioral_use.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_class.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_component.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_composite.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_deployment.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_object.dot
-            │   ├── ntm_lstm_output_v_trainer_structural_package.dot
-            │   └── ntm_lstm_output_v_trainer_structural_profile.dot
-            └── ntm_lstm_output_w_trainer
-                ├── ntm_lstm_output_w_trainer_behavioral_activity.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_communication.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_interaction.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_sequence.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_state.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_timing.dot
-                ├── ntm_lstm_output_w_trainer_behavioral_use.dot
-                ├── ntm_lstm_output_w_trainer_structural_class.dot
-                ├── ntm_lstm_output_w_trainer_structural_component.dot
-                ├── ntm_lstm_output_w_trainer_structural_composite.dot
-                ├── ntm_lstm_output_w_trainer_structural_deployment.dot
-                ├── ntm_lstm_output_w_trainer_structural_object.dot
-                ├── ntm_lstm_output_w_trainer_structural_package.dot
-                └── ntm_lstm_output_w_trainer_structural_profile.dot
+├── trainer
+│   ├── differentiation
+│   │   ├── ntm_matrix_controller_differentiation
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_activity.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_communication.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_interaction.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_sequence.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_state.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_timing.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_behavioral_use.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_class.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_component.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_composite.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_deployment.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_object.dot
+│   │   │   ├── ntm_matrix_controller_differentiation_structural_package.dot
+│   │   │   └── ntm_matrix_controller_differentiation_structural_profile.dot
+│   │   └── ntm_vector_controller_differentiation
+│   │       ├── ntm_vector_controller_differentiation_behavioral_activity.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_communication.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_interaction.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_sequence.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_state.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_timing.dot
+│   │       ├── ntm_vector_controller_differentiation_behavioral_use.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_class.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_component.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_composite.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_deployment.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_object.dot
+│   │       ├── ntm_vector_controller_differentiation_structural_package.dot
+│   │       └── ntm_vector_controller_differentiation_structural_profile.dot
+│   ├── FNN
+│   │   ├── ntm_fnn_b_trainer
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_b_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_b_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_b_trainer_structural_profile.dot
+│   │   ├── ntm_fnn_d_trainer
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_d_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_d_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_d_trainer_structural_profile.dot
+│   │   ├── ntm_fnn_k_trainer
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_k_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_k_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_k_trainer_structural_profile.dot
+│   │   ├── ntm_fnn_trainer
+│   │   │   ├── ntm_fnn_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_trainer_structural_profile.dot
+│   │   ├── ntm_fnn_u_trainer
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_u_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_u_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_u_trainer_structural_profile.dot
+│   │   ├── ntm_fnn_v_trainer
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_activity.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_communication.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_interaction.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_sequence.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_state.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_timing.dot
+│   │   │   ├── ntm_fnn_v_trainer_behavioral_use.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_class.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_component.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_composite.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_deployment.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_object.dot
+│   │   │   ├── ntm_fnn_v_trainer_structural_package.dot
+│   │   │   └── ntm_fnn_v_trainer_structural_profile.dot
+│   │   └── ntm_fnn_w_trainer
+│   │       ├── ntm_fnn_w_trainer_behavioral_activity.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_communication.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_interaction.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_sequence.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_state.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_timing.dot
+│   │       ├── ntm_fnn_w_trainer_behavioral_use.dot
+│   │       ├── ntm_fnn_w_trainer_structural_class.dot
+│   │       ├── ntm_fnn_w_trainer_structural_component.dot
+│   │       ├── ntm_fnn_w_trainer_structural_composite.dot
+│   │       ├── ntm_fnn_w_trainer_structural_deployment.dot
+│   │       ├── ntm_fnn_w_trainer_structural_object.dot
+│   │       ├── ntm_fnn_w_trainer_structural_package.dot
+│   │       └── ntm_fnn_w_trainer_structural_profile.dot
+│   └── LSTM
+│       ├── activation
+│       │   ├── ntm_lstm_activation_b_trainer
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_b_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_b_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_activation_d_trainer
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_d_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_d_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_activation_k_trainer
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_k_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_k_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_activation_trainer
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_activation_u_trainer
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_u_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_u_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_activation_v_trainer
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_activation_v_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_activation_v_trainer_structural_profile.dot
+│       │   └── ntm_lstm_activation_w_trainer
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_activity.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_communication.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_interaction.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_sequence.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_state.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_timing.dot
+│       │       ├── ntm_lstm_activation_w_trainer_behavioral_use.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_class.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_component.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_composite.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_deployment.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_object.dot
+│       │       ├── ntm_lstm_activation_w_trainer_structural_package.dot
+│       │       └── ntm_lstm_activation_w_trainer_structural_profile.dot
+│       ├── forget
+│       │   ├── ntm_lstm_forget_b_trainer
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_b_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_b_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_forget_d_trainer
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_d_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_d_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_forget_k_trainer
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_k_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_k_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_forget_trainer
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_forget_u_trainer
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_u_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_u_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_forget_v_trainer
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_forget_v_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_forget_v_trainer_structural_profile.dot
+│       │   └── ntm_lstm_forget_w_trainer
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_activity.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_communication.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_interaction.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_sequence.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_state.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_timing.dot
+│       │       ├── ntm_lstm_forget_w_trainer_behavioral_use.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_class.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_component.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_composite.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_deployment.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_object.dot
+│       │       ├── ntm_lstm_forget_w_trainer_structural_package.dot
+│       │       └── ntm_lstm_forget_w_trainer_structural_profile.dot
+│       ├── input
+│       │   ├── ntm_lstm_input_b_trainer
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_b_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_b_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_input_d_trainer
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_d_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_d_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_input_k_trainer
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_k_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_k_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_input_trainer
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_input_u_trainer
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_u_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_u_trainer_structural_profile.dot
+│       │   ├── ntm_lstm_input_v_trainer
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_activity.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_communication.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_interaction.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_sequence.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_state.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_timing.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_behavioral_use.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_class.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_component.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_composite.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_deployment.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_object.dot
+│       │   │   ├── ntm_lstm_input_v_trainer_structural_package.dot
+│       │   │   └── ntm_lstm_input_v_trainer_structural_profile.dot
+│       │   └── ntm_lstm_input_w_trainer
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_activity.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_communication.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_interaction.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_sequence.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_state.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_timing.dot
+│       │       ├── ntm_lstm_input_w_trainer_behavioral_use.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_class.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_component.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_composite.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_deployment.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_object.dot
+│       │       ├── ntm_lstm_input_w_trainer_structural_package.dot
+│       │       └── ntm_lstm_input_w_trainer_structural_profile.dot
+│       └── output
+│           ├── ntm_lstm_output_b_trainer
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_b_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_b_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_b_trainer_structural_profile.dot
+│           ├── ntm_lstm_output_d_trainer
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_d_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_d_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_d_trainer_structural_profile.dot
+│           ├── ntm_lstm_output_k_trainer
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_k_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_k_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_k_trainer_structural_profile.dot
+│           ├── ntm_lstm_output_trainer
+│           │   ├── ntm_lstm_output_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_trainer_structural_profile.dot
+│           ├── ntm_lstm_output_u_trainer
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_u_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_u_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_u_trainer_structural_profile.dot
+│           ├── ntm_lstm_output_v_trainer
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_activity.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_communication.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_interaction.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_sequence.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_state.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_timing.dot
+│           │   ├── ntm_lstm_output_v_trainer_behavioral_use.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_class.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_component.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_composite.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_deployment.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_object.dot
+│           │   ├── ntm_lstm_output_v_trainer_structural_package.dot
+│           │   └── ntm_lstm_output_v_trainer_structural_profile.dot
+│           └── ntm_lstm_output_w_trainer
+│               ├── ntm_lstm_output_w_trainer_behavioral_activity.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_communication.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_interaction.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_sequence.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_state.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_timing.dot
+│               ├── ntm_lstm_output_w_trainer_behavioral_use.dot
+│               ├── ntm_lstm_output_w_trainer_structural_class.dot
+│               ├── ntm_lstm_output_w_trainer_structural_component.dot
+│               ├── ntm_lstm_output_w_trainer_structural_composite.dot
+│               ├── ntm_lstm_output_w_trainer_structural_deployment.dot
+│               ├── ntm_lstm_output_w_trainer_structural_object.dot
+│               ├── ntm_lstm_output_w_trainer_structural_package.dot
+│               └── ntm_lstm_output_w_trainer_structural_profile.dot
+└── transformer
+    ├── components
+    │   ├── ntm_masked_multi_head_attention
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_activity.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_communication.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_interaction.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_sequence.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_state.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_timing.dot
+    │   │   ├── ntm_masked_multi_head_attention_behavioral_use.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_class.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_component.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_composite.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_deployment.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_object.dot
+    │   │   ├── ntm_masked_multi_head_attention_structural_package.dot
+    │   │   └── ntm_masked_multi_head_attention_structural_profile.dot
+    │   ├── ntm_masked_scaled_dot_product_attention
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_activity.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_communication.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_interaction.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_sequence.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_state.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_timing.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_behavioral_use.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_class.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_component.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_composite.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_deployment.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_object.dot
+    │   │   ├── ntm_masked_scaled_dot_product_attention_structural_package.dot
+    │   │   └── ntm_masked_scaled_dot_product_attention_structural_profile.dot
+    │   ├── ntm_multi_head_attention
+    │   │   ├── ntm_multi_head_attention_behavioral_activity.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_communication.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_interaction.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_sequence.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_state.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_timing.dot
+    │   │   ├── ntm_multi_head_attention_behavioral_use.dot
+    │   │   ├── ntm_multi_head_attention_structural_class.dot
+    │   │   ├── ntm_multi_head_attention_structural_component.dot
+    │   │   ├── ntm_multi_head_attention_structural_composite.dot
+    │   │   ├── ntm_multi_head_attention_structural_deployment.dot
+    │   │   ├── ntm_multi_head_attention_structural_object.dot
+    │   │   ├── ntm_multi_head_attention_structural_package.dot
+    │   │   └── ntm_multi_head_attention_structural_profile.dot
+    │   └── ntm_scaled_dot_product_attention
+    │       ├── ntm_scaled_dot_product_attention_behavioral_activity.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_communication.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_interaction.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_sequence.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_state.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_timing.dot
+    │       ├── ntm_scaled_dot_product_attention_behavioral_use.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_class.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_component.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_composite.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_deployment.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_object.dot
+    │       ├── ntm_scaled_dot_product_attention_structural_package.dot
+    │       └── ntm_scaled_dot_product_attention_structural_profile.dot
+    ├── fnn
+    │   └── ntm_fnn
+    │       ├── ntm_fnn_behavioral_activity.dot
+    │       ├── ntm_fnn_behavioral_communication.dot
+    │       ├── ntm_fnn_behavioral_interaction.dot
+    │       ├── ntm_fnn_behavioral_sequence.dot
+    │       ├── ntm_fnn_behavioral_state.dot
+    │       ├── ntm_fnn_behavioral_timing.dot
+    │       ├── ntm_fnn_behavioral_use.dot
+    │       ├── ntm_fnn_structural_class.dot
+    │       ├── ntm_fnn_structural_component.dot
+    │       ├── ntm_fnn_structural_composite.dot
+    │       ├── ntm_fnn_structural_deployment.dot
+    │       ├── ntm_fnn_structural_object.dot
+    │       ├── ntm_fnn_structural_package.dot
+    │       └── ntm_fnn_structural_profile.dot
+    ├── functions
+    │   ├── ntm_layer_norm
+    │   │   ├── ntm_layer_norm_behavioral_activity.dot
+    │   │   ├── ntm_layer_norm_behavioral_communication.dot
+    │   │   ├── ntm_layer_norm_behavioral_interaction.dot
+    │   │   ├── ntm_layer_norm_behavioral_sequence.dot
+    │   │   ├── ntm_layer_norm_behavioral_state.dot
+    │   │   ├── ntm_layer_norm_behavioral_timing.dot
+    │   │   ├── ntm_layer_norm_behavioral_use.dot
+    │   │   ├── ntm_layer_norm_structural_class.dot
+    │   │   ├── ntm_layer_norm_structural_component.dot
+    │   │   ├── ntm_layer_norm_structural_composite.dot
+    │   │   ├── ntm_layer_norm_structural_deployment.dot
+    │   │   ├── ntm_layer_norm_structural_object.dot
+    │   │   ├── ntm_layer_norm_structural_package.dot
+    │   │   └── ntm_layer_norm_structural_profile.dot
+    │   └── ntm_positional_encoding
+    │       ├── ntm_positional_encoding_behavioral_activity.dot
+    │       ├── ntm_positional_encoding_behavioral_communication.dot
+    │       ├── ntm_positional_encoding_behavioral_interaction.dot
+    │       ├── ntm_positional_encoding_behavioral_sequence.dot
+    │       ├── ntm_positional_encoding_behavioral_state.dot
+    │       ├── ntm_positional_encoding_behavioral_timing.dot
+    │       ├── ntm_positional_encoding_behavioral_use.dot
+    │       ├── ntm_positional_encoding_structural_class.dot
+    │       ├── ntm_positional_encoding_structural_component.dot
+    │       ├── ntm_positional_encoding_structural_composite.dot
+    │       ├── ntm_positional_encoding_structural_deployment.dot
+    │       ├── ntm_positional_encoding_structural_object.dot
+    │       ├── ntm_positional_encoding_structural_package.dot
+    │       └── ntm_positional_encoding_structural_profile.dot
+    ├── inputs
+    │   ├── ntm_inputs_vector
+    │   │   ├── ntm_inputs_vector_behavioral_activity.dot
+    │   │   ├── ntm_inputs_vector_behavioral_communication.dot
+    │   │   ├── ntm_inputs_vector_behavioral_interaction.dot
+    │   │   ├── ntm_inputs_vector_behavioral_sequence.dot
+    │   │   ├── ntm_inputs_vector_behavioral_state.dot
+    │   │   ├── ntm_inputs_vector_behavioral_timing.dot
+    │   │   ├── ntm_inputs_vector_behavioral_use.dot
+    │   │   ├── ntm_inputs_vector_structural_class.dot
+    │   │   ├── ntm_inputs_vector_structural_component.dot
+    │   │   ├── ntm_inputs_vector_structural_composite.dot
+    │   │   ├── ntm_inputs_vector_structural_deployment.dot
+    │   │   ├── ntm_inputs_vector_structural_object.dot
+    │   │   ├── ntm_inputs_vector_structural_package.dot
+    │   │   └── ntm_inputs_vector_structural_profile.dot
+    │   ├── ntm_keys_vector
+    │   │   ├── ntm_keys_vector_behavioral_activity.dot
+    │   │   ├── ntm_keys_vector_behavioral_communication.dot
+    │   │   ├── ntm_keys_vector_behavioral_interaction.dot
+    │   │   ├── ntm_keys_vector_behavioral_sequence.dot
+    │   │   ├── ntm_keys_vector_behavioral_state.dot
+    │   │   ├── ntm_keys_vector_behavioral_timing.dot
+    │   │   ├── ntm_keys_vector_behavioral_use.dot
+    │   │   ├── ntm_keys_vector_structural_class.dot
+    │   │   ├── ntm_keys_vector_structural_component.dot
+    │   │   ├── ntm_keys_vector_structural_composite.dot
+    │   │   ├── ntm_keys_vector_structural_deployment.dot
+    │   │   ├── ntm_keys_vector_structural_object.dot
+    │   │   ├── ntm_keys_vector_structural_package.dot
+    │   │   └── ntm_keys_vector_structural_profile.dot
+    │   ├── ntm_queries_vector
+    │   │   ├── ntm_queries_vector_behavioral_activity.dot
+    │   │   ├── ntm_queries_vector_behavioral_communication.dot
+    │   │   ├── ntm_queries_vector_behavioral_interaction.dot
+    │   │   ├── ntm_queries_vector_behavioral_sequence.dot
+    │   │   ├── ntm_queries_vector_behavioral_state.dot
+    │   │   ├── ntm_queries_vector_behavioral_timing.dot
+    │   │   ├── ntm_queries_vector_behavioral_use.dot
+    │   │   ├── ntm_queries_vector_structural_class.dot
+    │   │   ├── ntm_queries_vector_structural_component.dot
+    │   │   ├── ntm_queries_vector_structural_composite.dot
+    │   │   ├── ntm_queries_vector_structural_deployment.dot
+    │   │   ├── ntm_queries_vector_structural_object.dot
+    │   │   ├── ntm_queries_vector_structural_package.dot
+    │   │   └── ntm_queries_vector_structural_profile.dot
+    │   └── ntm_values_vector
+    │       ├── ntm_values_vector_behavioral_activity.dot
+    │       ├── ntm_values_vector_behavioral_communication.dot
+    │       ├── ntm_values_vector_behavioral_interaction.dot
+    │       ├── ntm_values_vector_behavioral_sequence.dot
+    │       ├── ntm_values_vector_behavioral_state.dot
+    │       ├── ntm_values_vector_behavioral_timing.dot
+    │       ├── ntm_values_vector_behavioral_use.dot
+    │       ├── ntm_values_vector_structural_class.dot
+    │       ├── ntm_values_vector_structural_component.dot
+    │       ├── ntm_values_vector_structural_composite.dot
+    │       ├── ntm_values_vector_structural_deployment.dot
+    │       ├── ntm_values_vector_structural_object.dot
+    │       ├── ntm_values_vector_structural_package.dot
+    │       └── ntm_values_vector_structural_profile.dot
+    ├── lstm
+    │   ├── ntm_activation_gate_vector
+    │   │   ├── ntm_activation_gate_vector_behavioral_activity.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_communication.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_interaction.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_sequence.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_state.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_timing.dot
+    │   │   ├── ntm_activation_gate_vector_behavioral_use.dot
+    │   │   ├── ntm_activation_gate_vector_structural_class.dot
+    │   │   ├── ntm_activation_gate_vector_structural_component.dot
+    │   │   ├── ntm_activation_gate_vector_structural_composite.dot
+    │   │   ├── ntm_activation_gate_vector_structural_deployment.dot
+    │   │   ├── ntm_activation_gate_vector_structural_object.dot
+    │   │   ├── ntm_activation_gate_vector_structural_package.dot
+    │   │   └── ntm_activation_gate_vector_structural_profile.dot
+    │   ├── ntm_forget_gate_vector
+    │   │   ├── ntm_forget_gate_vector_behavioral_activity.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_communication.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_interaction.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_sequence.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_state.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_timing.dot
+    │   │   ├── ntm_forget_gate_vector_behavioral_use.dot
+    │   │   ├── ntm_forget_gate_vector_structural_class.dot
+    │   │   ├── ntm_forget_gate_vector_structural_component.dot
+    │   │   ├── ntm_forget_gate_vector_structural_composite.dot
+    │   │   ├── ntm_forget_gate_vector_structural_deployment.dot
+    │   │   ├── ntm_forget_gate_vector_structural_object.dot
+    │   │   ├── ntm_forget_gate_vector_structural_package.dot
+    │   │   └── ntm_forget_gate_vector_structural_profile.dot
+    │   ├── ntm_hidden_gate_vector
+    │   │   ├── ntm_hidden_gate_vector_behavioral_activity.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_communication.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_interaction.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_sequence.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_state.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_timing.dot
+    │   │   ├── ntm_hidden_gate_vector_behavioral_use.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_class.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_component.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_composite.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_deployment.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_object.dot
+    │   │   ├── ntm_hidden_gate_vector_structural_package.dot
+    │   │   └── ntm_hidden_gate_vector_structural_profile.dot
+    │   ├── ntm_input_gate_vector
+    │   │   ├── ntm_input_gate_vector_behavioral_activity.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_communication.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_interaction.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_sequence.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_state.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_timing.dot
+    │   │   ├── ntm_input_gate_vector_behavioral_use.dot
+    │   │   ├── ntm_input_gate_vector_structural_class.dot
+    │   │   ├── ntm_input_gate_vector_structural_component.dot
+    │   │   ├── ntm_input_gate_vector_structural_composite.dot
+    │   │   ├── ntm_input_gate_vector_structural_deployment.dot
+    │   │   ├── ntm_input_gate_vector_structural_object.dot
+    │   │   ├── ntm_input_gate_vector_structural_package.dot
+    │   │   └── ntm_input_gate_vector_structural_profile.dot
+    │   ├── ntm_lstm
+    │   │   ├── ntm_lstm_behavioral_activity.dot
+    │   │   ├── ntm_lstm_behavioral_communication.dot
+    │   │   ├── ntm_lstm_behavioral_interaction.dot
+    │   │   ├── ntm_lstm_behavioral_sequence.dot
+    │   │   ├── ntm_lstm_behavioral_state.dot
+    │   │   ├── ntm_lstm_behavioral_timing.dot
+    │   │   ├── ntm_lstm_behavioral_use.dot
+    │   │   ├── ntm_lstm_structural_class.dot
+    │   │   ├── ntm_lstm_structural_component.dot
+    │   │   ├── ntm_lstm_structural_composite.dot
+    │   │   ├── ntm_lstm_structural_deployment.dot
+    │   │   ├── ntm_lstm_structural_object.dot
+    │   │   ├── ntm_lstm_structural_package.dot
+    │   │   └── ntm_lstm_structural_profile.dot
+    │   ├── ntm_output_gate_vector
+    │   │   ├── ntm_output_gate_vector_behavioral_activity.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_communication.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_interaction.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_sequence.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_state.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_timing.dot
+    │   │   ├── ntm_output_gate_vector_behavioral_use.dot
+    │   │   ├── ntm_output_gate_vector_structural_class.dot
+    │   │   ├── ntm_output_gate_vector_structural_component.dot
+    │   │   ├── ntm_output_gate_vector_structural_composite.dot
+    │   │   ├── ntm_output_gate_vector_structural_deployment.dot
+    │   │   ├── ntm_output_gate_vector_structural_object.dot
+    │   │   ├── ntm_output_gate_vector_structural_package.dot
+    │   │   └── ntm_output_gate_vector_structural_profile.dot
+    │   └── ntm_state_gate_vector
+    │       ├── ntm_state_gate_vector_behavioral_activity.dot
+    │       ├── ntm_state_gate_vector_behavioral_communication.dot
+    │       ├── ntm_state_gate_vector_behavioral_interaction.dot
+    │       ├── ntm_state_gate_vector_behavioral_sequence.dot
+    │       ├── ntm_state_gate_vector_behavioral_state.dot
+    │       ├── ntm_state_gate_vector_behavioral_timing.dot
+    │       ├── ntm_state_gate_vector_behavioral_use.dot
+    │       ├── ntm_state_gate_vector_structural_class.dot
+    │       ├── ntm_state_gate_vector_structural_component.dot
+    │       ├── ntm_state_gate_vector_structural_composite.dot
+    │       ├── ntm_state_gate_vector_structural_deployment.dot
+    │       ├── ntm_state_gate_vector_structural_object.dot
+    │       ├── ntm_state_gate_vector_structural_package.dot
+    │       └── ntm_state_gate_vector_structural_profile.dot
+    └── top
+        ├── ntm_controller
+        │   ├── ntm_controller_behavioral_activity.dot
+        │   ├── ntm_controller_behavioral_communication.dot
+        │   ├── ntm_controller_behavioral_interaction.dot
+        │   ├── ntm_controller_behavioral_sequence.dot
+        │   ├── ntm_controller_behavioral_state.dot
+        │   ├── ntm_controller_behavioral_timing.dot
+        │   ├── ntm_controller_behavioral_use.dot
+        │   ├── ntm_controller_structural_class.dot
+        │   ├── ntm_controller_structural_component.dot
+        │   ├── ntm_controller_structural_composite.dot
+        │   ├── ntm_controller_structural_deployment.dot
+        │   ├── ntm_controller_structural_object.dot
+        │   ├── ntm_controller_structural_package.dot
+        │   └── ntm_controller_structural_profile.dot
+        ├── ntm_decoder
+        │   ├── ntm_decoder_behavioral_activity.dot
+        │   ├── ntm_decoder_behavioral_communication.dot
+        │   ├── ntm_decoder_behavioral_interaction.dot
+        │   ├── ntm_decoder_behavioral_sequence.dot
+        │   ├── ntm_decoder_behavioral_state.dot
+        │   ├── ntm_decoder_behavioral_timing.dot
+        │   ├── ntm_decoder_behavioral_use.dot
+        │   ├── ntm_decoder_structural_class.dot
+        │   ├── ntm_decoder_structural_component.dot
+        │   ├── ntm_decoder_structural_composite.dot
+        │   ├── ntm_decoder_structural_deployment.dot
+        │   ├── ntm_decoder_structural_object.dot
+        │   ├── ntm_decoder_structural_package.dot
+        │   └── ntm_decoder_structural_profile.dot
+        └── ntm_encoder
+            ├── ntm_encoder_behavioral_activity.dot
+            ├── ntm_encoder_behavioral_communication.dot
+            ├── ntm_encoder_behavioral_interaction.dot
+            ├── ntm_encoder_behavioral_sequence.dot
+            ├── ntm_encoder_behavioral_state.dot
+            ├── ntm_encoder_behavioral_timing.dot
+            ├── ntm_encoder_behavioral_use.dot
+            ├── ntm_encoder_structural_class.dot
+            ├── ntm_encoder_structural_component.dot
+            ├── ntm_encoder_structural_composite.dot
+            ├── ntm_encoder_structural_deployment.dot
+            ├── ntm_encoder_structural_object.dot
+            ├── ntm_encoder_structural_package.dot
+            └── ntm_encoder_structural_profile.dot
 
 221 directories, 2324 files

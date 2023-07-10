@@ -44,26 +44,23 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_inverse(DATA_IN)
-  % Constants
-  [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
+% Package
+addpath(genpath('../../../../library/math/algebra/matrix'));
+addpath(genpath('../../../../library/math/function/vector'));
 
-  % Body
-  data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
+addpath(genpath('../../../../library/transformer/fnn'));
 
-  for i = 1:SIZE_I_IN
-    data_int(i, :) = data_int(i, :)/data_int(i, i);
+% Constants
+SIZE_N_IN = 3;
+SIZE_D_IN = 3;
+SIZE_M_IN = 3;
 
-    for m = i:SIZE_I_IN - 1
-      data_int(m + 1, :) = data_int(m + 1, :) - data_int(i, :)*data_int(m + 1, i);
-    end
-  end
+% Signals
+W1_IN = rand(SIZE_M_IN, SIZE_D_IN);
+B1_IN = rand(SIZE_M_IN, 1);
+W2_IN = rand(SIZE_D_IN, SIZE_M_IN);
+B2_IN = rand(SIZE_D_IN, 1);
+X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
-  for i = 2:SIZE_I_IN
-    for m = (i - 1): - 1:1
-      data_int(m, :) = data_int(m, :) - data_int(i, :)*data_int(m, i);
-    end
-  end
-
-  DATA_OUT = data_int(:, SIZE_J_IN + 1:2*SIZE_J_IN);
-end
+% DUT
+Y_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN);

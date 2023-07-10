@@ -52,36 +52,7 @@ library
 │   │       ├── ntm_output_gate_vector.py
 │   │       └── ntm_state_gate_vector.py
 │   ├── ntm_fnn_controller.py
-│   ├── ntm_lstm_controller.py
-│   ├── ntm_transformer_controller.py
-│   └── transformer
-│       ├── components
-│       │   ├── ntm_masked_multi_head_attention.py
-│       │   ├── ntm_masked_scaled_dot_product_attention.py
-│       │   ├── ntm_multi_head_attention.py
-│       │   └── ntm_scaled_dot_product_attention.py
-│       ├── fnn
-│       │   └── ntm_fnn.py
-│       ├── functions
-│       │   ├── ntm_layer_norm.py
-│       │   └── ntm_positional_encoding.py
-│       ├── inputs
-│       │   ├── ntm_inputs_vector.py
-│       │   ├── ntm_keys_vector.py
-│       │   ├── ntm_queries_vector.py
-│       │   └── ntm_values_vector.py
-│       ├── lstm
-│       │   ├── ntm_activation_gate_vector.py
-│       │   ├── ntm_forget_gate_vector.py
-│       │   ├── ntm_hidden_gate_vector.py
-│       │   ├── ntm_input_gate_vector.py
-│       │   ├── ntm_lstm.py
-│       │   ├── ntm_output_gate_vector.py
-│       │   └── ntm_state_gate_vector.py
-│       └── top
-│           ├── ntm_controller.py
-│           ├── ntm_decoder.py
-│           └── ntm_encoder.py
+│   └── ntm_lstm_controller.py
 ├── dnc
 │   ├── dnc.py
 │   ├── memory
@@ -231,52 +202,81 @@ library
 │   │   └── ntm_state_vector_state.py
 │   └── top
 │       └── ntm_state_top.py
-└── trainer
-    ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.py
-    │   └── ntm_vector_controller_differentiation.py
-    ├── FNN
-    │   ├── ntm_fnn_b_trainer.py
-    │   ├── ntm_fnn_d_trainer.py
-    │   ├── ntm_fnn_k_trainer.py
-    │   ├── ntm_fnn_trainer.py
-    │   ├── ntm_fnn_u_trainer.py
-    │   ├── ntm_fnn_v_trainer.py
-    │   └── ntm_fnn_w_trainer.py
-    ├── LSTM
-    │   ├── activation
-    │   │   ├── ntm_lstm_activation_b_trainer.py
-    │   │   ├── ntm_lstm_activation_d_trainer.py
-    │   │   ├── ntm_lstm_activation_k_trainer.py
-    │   │   ├── ntm_lstm_activation_trainer.py
-    │   │   ├── ntm_lstm_activation_u_trainer.py
-    │   │   ├── ntm_lstm_activation_v_trainer.py
-    │   │   └── ntm_lstm_activation_w_trainer.py
-    │   ├── forget
-    │   │   ├── ntm_lstm_forget_b_trainer.py
-    │   │   ├── ntm_lstm_forget_d_trainer.py
-    │   │   ├── ntm_lstm_forget_k_trainer.py
-    │   │   ├── ntm_lstm_forget_trainer.py
-    │   │   ├── ntm_lstm_forget_u_trainer.py
-    │   │   ├── ntm_lstm_forget_v_trainer.py
-    │   │   └── ntm_lstm_forget_w_trainer.py
-    │   ├── input
-    │   │   ├── ntm_lstm_input_b_trainer.py
-    │   │   ├── ntm_lstm_input_d_trainer.py
-    │   │   ├── ntm_lstm_input_k_trainer.py
-    │   │   ├── ntm_lstm_input_trainer.py
-    │   │   ├── ntm_lstm_input_u_trainer.py
-    │   │   ├── ntm_lstm_input_v_trainer.py
-    │   │   └── ntm_lstm_input_w_trainer.py
-    │   └── output
-    │       ├── ntm_lstm_output_b_trainer.py
-    │       ├── ntm_lstm_output_d_trainer.py
-    │       ├── ntm_lstm_output_k_trainer.py
-    │       ├── ntm_lstm_output_trainer.py
-    │       ├── ntm_lstm_output_u_trainer.py
-    │       ├── ntm_lstm_output_v_trainer.py
-    │       └── ntm_lstm_output_w_trainer.py
-    ├── ntm_fnn.py
-    └── ntm_lstm.py
+├── trainer
+│   ├── differentiation
+│   │   ├── ntm_matrix_controller_differentiation.py
+│   │   └── ntm_vector_controller_differentiation.py
+│   ├── FNN
+│   │   ├── ntm_fnn_b_trainer.py
+│   │   ├── ntm_fnn_d_trainer.py
+│   │   ├── ntm_fnn_k_trainer.py
+│   │   ├── ntm_fnn_trainer.py
+│   │   ├── ntm_fnn_u_trainer.py
+│   │   ├── ntm_fnn_v_trainer.py
+│   │   └── ntm_fnn_w_trainer.py
+│   ├── LSTM
+│   │   ├── activation
+│   │   │   ├── ntm_lstm_activation_b_trainer.py
+│   │   │   ├── ntm_lstm_activation_d_trainer.py
+│   │   │   ├── ntm_lstm_activation_k_trainer.py
+│   │   │   ├── ntm_lstm_activation_trainer.py
+│   │   │   ├── ntm_lstm_activation_u_trainer.py
+│   │   │   ├── ntm_lstm_activation_v_trainer.py
+│   │   │   └── ntm_lstm_activation_w_trainer.py
+│   │   ├── forget
+│   │   │   ├── ntm_lstm_forget_b_trainer.py
+│   │   │   ├── ntm_lstm_forget_d_trainer.py
+│   │   │   ├── ntm_lstm_forget_k_trainer.py
+│   │   │   ├── ntm_lstm_forget_trainer.py
+│   │   │   ├── ntm_lstm_forget_u_trainer.py
+│   │   │   ├── ntm_lstm_forget_v_trainer.py
+│   │   │   └── ntm_lstm_forget_w_trainer.py
+│   │   ├── input
+│   │   │   ├── ntm_lstm_input_b_trainer.py
+│   │   │   ├── ntm_lstm_input_d_trainer.py
+│   │   │   ├── ntm_lstm_input_k_trainer.py
+│   │   │   ├── ntm_lstm_input_trainer.py
+│   │   │   ├── ntm_lstm_input_u_trainer.py
+│   │   │   ├── ntm_lstm_input_v_trainer.py
+│   │   │   └── ntm_lstm_input_w_trainer.py
+│   │   └── output
+│   │       ├── ntm_lstm_output_b_trainer.py
+│   │       ├── ntm_lstm_output_d_trainer.py
+│   │       ├── ntm_lstm_output_k_trainer.py
+│   │       ├── ntm_lstm_output_trainer.py
+│   │       ├── ntm_lstm_output_u_trainer.py
+│   │       ├── ntm_lstm_output_v_trainer.py
+│   │       └── ntm_lstm_output_w_trainer.py
+│   ├── ntm_fnn.py
+│   └── ntm_lstm.py
+└── transformer
+    ├── components
+    │   ├── ntm_masked_multi_head_attention.py
+    │   ├── ntm_masked_scaled_dot_product_attention.py
+    │   ├── ntm_multi_head_attention.py
+    │   └── ntm_scaled_dot_product_attention.py
+    ├── fnn
+    │   └── ntm_fnn.py
+    ├── functions
+    │   ├── ntm_layer_norm.py
+    │   └── ntm_positional_encoding.py
+    ├── inputs
+    │   ├── ntm_inputs_vector.py
+    │   ├── ntm_keys_vector.py
+    │   ├── ntm_queries_vector.py
+    │   └── ntm_values_vector.py
+    ├── lstm
+    │   ├── ntm_activation_gate_vector.py
+    │   ├── ntm_forget_gate_vector.py
+    │   ├── ntm_hidden_gate_vector.py
+    │   ├── ntm_input_gate_vector.py
+    │   ├── ntm_lstm.py
+    │   ├── ntm_output_gate_vector.py
+    │   └── ntm_state_gate_vector.py
+    ├── ntm_transformer_controller.py
+    └── top
+        ├── ntm_controller.py
+        ├── ntm_decoder.py
+        └── ntm_encoder.py
 
 59 directories, 220 files

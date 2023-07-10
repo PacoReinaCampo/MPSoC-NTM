@@ -44,26 +44,67 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_matrix_inverse(DATA_IN)
-  % Constants
-  [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
+% Package
+addpath(genpath('../../../../library/math/algebra/matrix'));
+addpath(genpath('../../../../library/math/algebra/tensor'));
+addpath(genpath('../../../../library/math/calculus/matrix'));
+addpath(genpath('../../../../library/math/function/vector'));
+addpath(genpath('../../../../library/math/statitics/vector'));
 
-  % Body
-  data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
+addpath(genpath('../../../../library/transformer/inputs'));
+addpath(genpath('../../../../library/transformer/components'));
+addpath(genpath('../../../../library/transformer/functions'));
+addpath(genpath('../../../../library/transformer/fnn'));
+addpath(genpath('../../../../library/transformer/top'));
 
-  for i = 1:SIZE_I_IN
-    data_int(i, :) = data_int(i, :)/data_int(i, i);
+% Constants
+SIZE_L_IN = 3;
+SIZE_N_IN = 3;
+SIZE_D_IN = 3;
+SIZE_M_IN = 3;
+SIZE_K_IN = 3;
+SIZE_V_IN = 3;
+SIZE_H_IN = 3;
+SIZE_X_IN = 3;
+SIZE_W_IN = 3;
+SIZE_R_IN = 3;
+SIZE_P_IN = 3;
+SIZE_S_IN = 3;
 
-    for m = i:SIZE_I_IN - 1
-      data_int(m + 1, :) = data_int(m + 1, :) - data_int(i, :)*data_int(m + 1, i);
-    end
-  end
+% Signals
+K_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
+Q_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
+V_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
 
-  for i = 2:SIZE_I_IN
-    for m = (i - 1): - 1:1
-      data_int(m, :) = data_int(m, :) - data_int(i, :)*data_int(m, i);
-    end
-  end
+W_OH_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
 
-  DATA_OUT = data_int(:, SIZE_J_IN + 1:2*SIZE_J_IN);
-end
+W1_IN = rand(SIZE_M_IN, SIZE_D_IN);
+B1_IN = rand(SIZE_M_IN, 1);
+
+W2_IN = rand(SIZE_D_IN, SIZE_M_IN);
+B2_IN = rand(SIZE_D_IN, 1);
+
+W_I_IN = rand(SIZE_D_IN, SIZE_X_IN);
+K_I_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_I_IN = rand(SIZE_D_IN, SIZE_S_IN);
+D_I_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
+
+X_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_X_IN);
+R_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
+XI_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
+RHO_I_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
+
+W_O_IN = rand(SIZE_D_IN, SIZE_X_IN);
+K_O_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
+V_O_IN = rand(SIZE_D_IN, SIZE_S_IN);
+D_O_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_P_IN);
+
+X_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_X_IN);
+R_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
+XI_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
+RHO_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
+
+PE_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
+
+% DUT
+Z_OUT = ntm_controller(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, W_I_IN, K_I_IN, V_I_IN, D_I_IN, X_I_IN, R_I_IN, XI_I_IN, RHO_I_IN, W_O_IN, K_O_IN, V_O_IN, D_O_IN, X_O_IN, R_O_IN, XI_O_IN, RHO_O_IN, PE_IN);

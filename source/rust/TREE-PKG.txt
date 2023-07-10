@@ -13,16 +13,9 @@ library
 │   ├── FNN
 │   │   ├── convolutional
 │   │   └── standard
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   └── standard
-│   └── transformer
-│       ├── components
-│       ├── fnn
-│       ├── functions
-│       ├── inputs
-│       ├── lstm
-│       └── top
+│   └── LSTM
+│       ├── convolutional
+│       └── standard
 ├── dnc
 │   ├── memory
 │   ├── top
@@ -76,13 +69,20 @@ library
 │       │   └── mod.rs
 │       └── top
 │           └── mod.rs
-└── trainer
-    ├── differentiation
-    ├── FNN
-    └── LSTM
-        ├── activation
-        ├── forget
-        ├── input
-        └── output
+├── trainer
+│   ├── differentiation
+│   ├── FNN
+│   └── LSTM
+│       ├── activation
+│       ├── forget
+│       ├── input
+│       └── output
+└── transformer
+    ├── components
+    ├── fnn
+    ├── functions
+    ├── inputs
+    ├── lstm
+    └── top
 
 65 directories, 20 files

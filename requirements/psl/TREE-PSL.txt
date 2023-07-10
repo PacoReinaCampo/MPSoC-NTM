@@ -26,51 +26,23 @@ library
 │   │   │   └── ntm_controller.psl
 │   │   └── standard
 │   │       └── ntm_controller.psl
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.psl
-│   │   │   ├── ntm_controller.psl
-│   │   │   ├── ntm_forget_gate_vector.psl
-│   │   │   ├── ntm_hidden_gate_vector.psl
-│   │   │   ├── ntm_input_gate_vector.psl
-│   │   │   ├── ntm_output_gate_vector.psl
-│   │   │   └── ntm_state_gate_vector.psl
-│   │   └── standard
-│   │       ├── ntm_activation_gate_vector.psl
-│   │       ├── ntm_controller.psl
-│   │       ├── ntm_forget_gate_vector.psl
-│   │       ├── ntm_hidden_gate_vector.psl
-│   │       ├── ntm_input_gate_vector.psl
-│   │       ├── ntm_output_gate_vector.psl
-│   │       └── ntm_state_gate_vector.psl
-│   └── transformer
-│       ├── components
-│       │   ├── ntm_masked_multi_head_attention.psl
-│       │   ├── ntm_masked_scaled_dot_product_attention.psl
-│       │   ├── ntm_multi_head_attention.psl
-│       │   └── ntm_scaled_dot_product_attention.psl
-│       ├── fnn
-│       │   └── ntm_fnn.psl
-│       ├── functions
-│       │   ├── ntm_layer_norm.psl
-│       │   └── ntm_positional_encoding.psl
-│       ├── inputs
-│       │   ├── ntm_inputs_vector.psl
-│       │   ├── ntm_keys_vector.psl
-│       │   ├── ntm_queries_vector.psl
-│       │   └── ntm_values_vector.psl
-│       ├── lstm
+│   └── LSTM
+│       ├── convolutional
 │       │   ├── ntm_activation_gate_vector.psl
+│       │   ├── ntm_controller.psl
 │       │   ├── ntm_forget_gate_vector.psl
 │       │   ├── ntm_hidden_gate_vector.psl
 │       │   ├── ntm_input_gate_vector.psl
-│       │   ├── ntm_lstm.psl
 │       │   ├── ntm_output_gate_vector.psl
 │       │   └── ntm_state_gate_vector.psl
-│       └── top
+│       └── standard
+│           ├── ntm_activation_gate_vector.psl
 │           ├── ntm_controller.psl
-│           ├── ntm_decoder.psl
-│           └── ntm_encoder.psl
+│           ├── ntm_forget_gate_vector.psl
+│           ├── ntm_hidden_gate_vector.psl
+│           ├── ntm_input_gate_vector.psl
+│           ├── ntm_output_gate_vector.psl
+│           └── ntm_state_gate_vector.psl
 ├── dnc
 │   ├── memory
 │   │   ├── dnc_addressing.psl
@@ -191,50 +163,78 @@ library
 │   │   └── ntm_state_vector_state.psl
 │   └── top
 │       └── ntm_state_top.psl
-└── trainer
-    ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.psl
-    │   └── ntm_vector_controller_differentiation.psl
-    ├── FNN
-    │   ├── ntm_fnn_b_trainer.psl
-    │   ├── ntm_fnn_d_trainer.psl
-    │   ├── ntm_fnn_k_trainer.psl
-    │   ├── ntm_fnn_trainer.psl
-    │   ├── ntm_fnn_u_trainer.psl
-    │   ├── ntm_fnn_v_trainer.psl
-    │   └── ntm_fnn_w_trainer.psl
-    └── LSTM
-        ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.psl
-        │   ├── ntm_lstm_activation_d_trainer.psl
-        │   ├── ntm_lstm_activation_k_trainer.psl
-        │   ├── ntm_lstm_activation_trainer.psl
-        │   ├── ntm_lstm_activation_u_trainer.psl
-        │   ├── ntm_lstm_activation_v_trainer.psl
-        │   └── ntm_lstm_activation_w_trainer.psl
-        ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.psl
-        │   ├── ntm_lstm_forget_d_trainer.psl
-        │   ├── ntm_lstm_forget_k_trainer.psl
-        │   ├── ntm_lstm_forget_trainer.psl
-        │   ├── ntm_lstm_forget_u_trainer.psl
-        │   ├── ntm_lstm_forget_v_trainer.psl
-        │   └── ntm_lstm_forget_w_trainer.psl
-        ├── input
-        │   ├── ntm_lstm_input_b_trainer.psl
-        │   ├── ntm_lstm_input_d_trainer.psl
-        │   ├── ntm_lstm_input_k_trainer.psl
-        │   ├── ntm_lstm_input_trainer.psl
-        │   ├── ntm_lstm_input_u_trainer.psl
-        │   ├── ntm_lstm_input_v_trainer.psl
-        │   └── ntm_lstm_input_w_trainer.psl
-        └── output
-            ├── ntm_lstm_output_b_trainer.psl
-            ├── ntm_lstm_output_d_trainer.psl
-            ├── ntm_lstm_output_k_trainer.psl
-            ├── ntm_lstm_output_trainer.psl
-            ├── ntm_lstm_output_u_trainer.psl
-            ├── ntm_lstm_output_v_trainer.psl
-            └── ntm_lstm_output_w_trainer.psl
+├── trainer
+│   ├── differentiation
+│   │   ├── ntm_matrix_controller_differentiation.psl
+│   │   └── ntm_vector_controller_differentiation.psl
+│   ├── FNN
+│   │   ├── ntm_fnn_b_trainer.psl
+│   │   ├── ntm_fnn_d_trainer.psl
+│   │   ├── ntm_fnn_k_trainer.psl
+│   │   ├── ntm_fnn_trainer.psl
+│   │   ├── ntm_fnn_u_trainer.psl
+│   │   ├── ntm_fnn_v_trainer.psl
+│   │   └── ntm_fnn_w_trainer.psl
+│   └── LSTM
+│       ├── activation
+│       │   ├── ntm_lstm_activation_b_trainer.psl
+│       │   ├── ntm_lstm_activation_d_trainer.psl
+│       │   ├── ntm_lstm_activation_k_trainer.psl
+│       │   ├── ntm_lstm_activation_trainer.psl
+│       │   ├── ntm_lstm_activation_u_trainer.psl
+│       │   ├── ntm_lstm_activation_v_trainer.psl
+│       │   └── ntm_lstm_activation_w_trainer.psl
+│       ├── forget
+│       │   ├── ntm_lstm_forget_b_trainer.psl
+│       │   ├── ntm_lstm_forget_d_trainer.psl
+│       │   ├── ntm_lstm_forget_k_trainer.psl
+│       │   ├── ntm_lstm_forget_trainer.psl
+│       │   ├── ntm_lstm_forget_u_trainer.psl
+│       │   ├── ntm_lstm_forget_v_trainer.psl
+│       │   └── ntm_lstm_forget_w_trainer.psl
+│       ├── input
+│       │   ├── ntm_lstm_input_b_trainer.psl
+│       │   ├── ntm_lstm_input_d_trainer.psl
+│       │   ├── ntm_lstm_input_k_trainer.psl
+│       │   ├── ntm_lstm_input_trainer.psl
+│       │   ├── ntm_lstm_input_u_trainer.psl
+│       │   ├── ntm_lstm_input_v_trainer.psl
+│       │   └── ntm_lstm_input_w_trainer.psl
+│       └── output
+│           ├── ntm_lstm_output_b_trainer.psl
+│           ├── ntm_lstm_output_d_trainer.psl
+│           ├── ntm_lstm_output_k_trainer.psl
+│           ├── ntm_lstm_output_trainer.psl
+│           ├── ntm_lstm_output_u_trainer.psl
+│           ├── ntm_lstm_output_v_trainer.psl
+│           └── ntm_lstm_output_w_trainer.psl
+└── transformer
+    ├── components
+    │   ├── ntm_masked_multi_head_attention.psl
+    │   ├── ntm_masked_scaled_dot_product_attention.psl
+    │   ├── ntm_multi_head_attention.psl
+    │   └── ntm_scaled_dot_product_attention.psl
+    ├── fnn
+    │   └── ntm_fnn.psl
+    ├── functions
+    │   ├── ntm_layer_norm.psl
+    │   └── ntm_positional_encoding.psl
+    ├── inputs
+    │   ├── ntm_inputs_vector.psl
+    │   ├── ntm_keys_vector.psl
+    │   ├── ntm_queries_vector.psl
+    │   └── ntm_values_vector.psl
+    ├── lstm
+    │   ├── ntm_activation_gate_vector.psl
+    │   ├── ntm_forget_gate_vector.psl
+    │   ├── ntm_hidden_gate_vector.psl
+    │   ├── ntm_input_gate_vector.psl
+    │   ├── ntm_lstm.psl
+    │   ├── ntm_output_gate_vector.psl
+    │   └── ntm_state_gate_vector.psl
+    └── top
+        ├── ntm_controller.psl
+        ├── ntm_decoder.psl
+        └── ntm_encoder.psl
 
 59 directories, 178 files

@@ -10,16 +10,9 @@ library
 │   ├── FNN
 │   │   ├── convolutional
 │   │   └── standard
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   └── standard
-│   └── transformer
-│       ├── components
-│       ├── fnn
-│       ├── functions
-│       ├── inputs
-│       ├── lstm
-│       └── top
+│   └── LSTM
+│       ├── convolutional
+│       └── standard
 ├── dnc
 │   ├── dnc.h
 │   ├── memory
@@ -59,14 +52,21 @@ library
 │   ├── feedback
 │   ├── outputs
 │   └── top
-└── trainer
-    ├── ntm_trainer.h
-    ├── differentiation
-    ├── FNN
-    └── LSTM
-        ├── activation
-        ├── forget
-        ├── input
-        └── output
+├── trainer
+│   ├── ntm_trainer.h
+│   ├── differentiation
+│   ├── FNN
+│   └── LSTM
+│       ├── activation
+│       ├── forget
+│       ├── input
+│       └── output
+└── transformer
+    ├── components
+    ├── fnn
+    ├── functions
+    ├── inputs
+    ├── lstm
+    └── top
 
 59 directories, 10 files
