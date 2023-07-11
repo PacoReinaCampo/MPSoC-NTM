@@ -59,4 +59,4 @@ Q_IN = rand(SIZE_N_IN, SIZE_K_IN);
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
 % DUT
-K_OUT = ntm_queries_vector(Q_IN, X_IN);
+Q_OUT = ntm_queries_vector(Q_IN, X_IN);

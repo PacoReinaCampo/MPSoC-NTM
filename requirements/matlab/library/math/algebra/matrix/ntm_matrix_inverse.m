@@ -51,7 +51,25 @@ function DATA_OUT = ntm_matrix_inverse(DATA_IN)
   % Body
   data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
 
+  data_vector_int = zeros(1, SIZE_J_IN);
+
   for i = 1:SIZE_I_IN
+    n = 1;
+
+    while data_int(i, i) == 0
+      data_vector_int = data_int(i, :);
+        
+      if i < SIZE_I_IN
+        data_int(i, :) = data_int(i + n, :);
+        data_int(i + n, :) = data_vector_int;
+      else
+        data_int(i, :) = data_int(i - n, :);
+        data_int(i - n, :) = data_vector_int;
+      end
+
+      n = n + 1;
+    end
+
     data_int(i, :) = data_int(i, :)/data_int(i, i);
 
     for m = i:SIZE_I_IN - 1
@@ -60,7 +78,7 @@ function DATA_OUT = ntm_matrix_inverse(DATA_IN)
   end
 
   for i = 2:SIZE_I_IN
-    for m = (i - 1): - 1:1
+    for m = 1:i - 1
       data_int(m, :) = data_int(m, :) - data_int(i, :)*data_int(m, i);
     end
   end
