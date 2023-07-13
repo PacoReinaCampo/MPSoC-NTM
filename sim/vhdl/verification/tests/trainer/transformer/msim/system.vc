@@ -82,13 +82,13 @@
 ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_input_trainer.vhd
 ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_output_trainer.vhd
 
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_controller.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_activation_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_forget_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_hidden_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_input_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_output_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/controller/transformer/convolutional/accelerator_state_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_controller.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_activation_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_forget_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_hidden_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_input_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_output_gate_vector.vhd
+../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_state_gate_vector.vhd
 
 ../../../../../../../bench/vhdl/code/tests/design/trainer/transformer/accelerator_trainer_transformer_pkg.vhd
 ../../../../../../../bench/vhdl/code/tests/design/trainer/transformer/accelerator_trainer_transformer_stimulus.vhd

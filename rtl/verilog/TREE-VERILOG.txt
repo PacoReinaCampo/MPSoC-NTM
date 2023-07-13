@@ -81,63 +81,23 @@ code
 │   │   │   └── accelerator_controller.sv
 │   │   └── standard
 │   │       └── accelerator_controller.sv
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector.sv
-│   │   │   ├── accelerator_controller.sv
-│   │   │   ├── accelerator_forget_gate_vector.sv
-│   │   │   ├── accelerator_hidden_gate_vector.sv
-│   │   │   ├── accelerator_input_gate_vector.sv
-│   │   │   ├── accelerator_output_gate_vector.sv
-│   │   │   └── accelerator_state_gate_vector.sv
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector.sv
-│   │       ├── accelerator_controller.sv
-│   │       ├── accelerator_forget_gate_vector.sv
-│   │       ├── accelerator_hidden_gate_vector.sv
-│   │       ├── accelerator_input_gate_vector.sv
-│   │       ├── accelerator_output_gate_vector.sv
-│   │       └── accelerator_state_gate_vector.sv
-│   └── transformer
-│       ├── components
-│       │   ├── accelerator_masked_multi_head_attention.sv
-│       │   ├── accelerator_masked_scaled_dot_product_attention.sv
-│       │   ├── accelerator_multi_head_attention.sv
-│       │   └── accelerator_scaled_dot_product_attention.sv
-│       ├── fnn
-│       │   ├── convolutional
-│       │   │   └── accelerator_fnn.sv
-│       │   └── standard
-│       │       └── accelerator_fnn.sv
-│       ├── functions
-│       │   ├── accelerator_layer_norm.sv
-│       │   └── accelerator_positional_encoding.sv
-│       ├── inputs
-│       │   ├── accelerator_inputs_vector.sv
-│       │   ├── accelerator_keys_vector.sv
-│       │   ├── accelerator_queries_vector.sv
-│       │   └── accelerator_values_vector.sv
-│       ├── lstm
-│       │   ├── convolutional
-│       │   │   ├── accelerator_activation_gate_vector.sv
-│       │   │   ├── accelerator_forget_gate_vector.sv
-│       │   │   ├── accelerator_hidden_gate_vector.sv
-│       │   │   ├── accelerator_input_gate_vector.sv
-│       │   │   ├── accelerator_lstm.sv
-│       │   │   ├── accelerator_output_gate_vector.sv
-│       │   │   └── accelerator_state_gate_vector.sv
-│       │   └── standard
-│       │       ├── accelerator_activation_gate_vector.sv
-│       │       ├── accelerator_forget_gate_vector.sv
-│       │       ├── accelerator_hidden_gate_vector.sv
-│       │       ├── accelerator_input_gate_vector.sv
-│       │       ├── accelerator_lstm.sv
-│       │       ├── accelerator_output_gate_vector.sv
-│       │       └── accelerator_state_gate_vector.sv
-│       └── top
+│   └── LSTM
+│       ├── convolutional
+│       │   ├── accelerator_activation_gate_vector.sv
+│       │   ├── accelerator_controller.sv
+│       │   ├── accelerator_forget_gate_vector.sv
+│       │   ├── accelerator_hidden_gate_vector.sv
+│       │   ├── accelerator_input_gate_vector.sv
+│       │   ├── accelerator_output_gate_vector.sv
+│       │   └── accelerator_state_gate_vector.sv
+│       └── standard
+│           ├── accelerator_activation_gate_vector.sv
 │           ├── accelerator_controller.sv
-│           ├── accelerator_decoder.sv
-│           └── accelerator_encoder.sv
+│           ├── accelerator_forget_gate_vector.sv
+│           ├── accelerator_hidden_gate_vector.sv
+│           ├── accelerator_input_gate_vector.sv
+│           ├── accelerator_output_gate_vector.sv
+│           └── accelerator_state_gate_vector.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -237,16 +197,56 @@ code
 │   │   └── accelerator_state_vector_state.sv
 │   └── top
 │       └── accelerator_state_top.sv
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_matrix_controller_differentiation.sv
-    │   └── accelerator_vector_controller_differentiation.sv
-    ├── FNN
-    │   └── accelerator_trainer.sv
-    └── LSTM
-        ├── accelerator_activation_trainer.sv
-        ├── accelerator_forget_trainer.sv
-        ├── accelerator_input_trainer.sv
-        └── accelerator_output_trainer.sv
+├── trainer
+│   ├── differentiation
+│   │   ├── accelerator_matrix_controller_differentiation.sv
+│   │   └── accelerator_vector_controller_differentiation.sv
+│   ├── FNN
+│   │   └── accelerator_trainer.sv
+│   └── LSTM
+│       ├── accelerator_activation_trainer.sv
+│       ├── accelerator_forget_trainer.sv
+│       ├── accelerator_input_trainer.sv
+│       └── accelerator_output_trainer.sv
+└── transformer
+    ├── components
+    │   ├── accelerator_masked_multi_head_attention.sv
+    │   ├── accelerator_masked_scaled_dot_product_attention.sv
+    │   ├── accelerator_multi_head_attention.sv
+    │   └── accelerator_scaled_dot_product_attention.sv
+    ├── fnn
+    │   ├── convolutional
+    │   │   └── accelerator_fnn.sv
+    │   └── standard
+    │       └── accelerator_fnn.sv
+    ├── functions
+    │   ├── accelerator_layer_norm.sv
+    │   └── accelerator_positional_encoding.sv
+    ├── inputs
+    │   ├── accelerator_inputs_vector.sv
+    │   ├── accelerator_keys_vector.sv
+    │   ├── accelerator_queries_vector.sv
+    │   └── accelerator_values_vector.sv
+    ├── lstm
+    │   ├── convolutional
+    │   │   ├── accelerator_activation_gate_vector.sv
+    │   │   ├── accelerator_forget_gate_vector.sv
+    │   │   ├── accelerator_hidden_gate_vector.sv
+    │   │   ├── accelerator_input_gate_vector.sv
+    │   │   ├── accelerator_lstm.sv
+    │   │   ├── accelerator_output_gate_vector.sv
+    │   │   └── accelerator_state_gate_vector.sv
+    │   └── standard
+    │       ├── accelerator_activation_gate_vector.sv
+    │       ├── accelerator_forget_gate_vector.sv
+    │       ├── accelerator_hidden_gate_vector.sv
+    │       ├── accelerator_input_gate_vector.sv
+    │       ├── accelerator_lstm.sv
+    │       ├── accelerator_output_gate_vector.sv
+    │       └── accelerator_state_gate_vector.sv
+    └── top
+        ├── accelerator_controller.sv
+        ├── accelerator_decoder.sv
+        └── accelerator_encoder.sv
 
 74 directories, 175 files

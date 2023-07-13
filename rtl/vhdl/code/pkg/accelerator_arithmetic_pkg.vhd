@@ -74,15 +74,19 @@ package accelerator_arithmetic_pkg is
   constant FOUR_SDATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(4, DATA_SIZE));
   constant FIVE_SDATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
 
-  constant ZERO_REAL : real := 0.0;
-  constant ONE_REAL  : real := 1.0;
+  constant ZERO_REAL  : real := 0.0;
+  constant ONE_REAL   : real := 1.0;
+  constant TWO_REAL   : real := 2.0;
+  constant THREE_REAL : real := 3.0;
+  constant FOUR_REAL  : real := 4.0;
+  constant FIVE_REAL  : real := 5.0;
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0, float64'high, -float64'low));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0, float64'high, -float64'low));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0, float64'high, -float64'low));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0, float64'high, -float64'low));
-  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(4.0, float64'high, -float64'low));
-  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(5.0, float64'high, -float64'low));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(ZERO_REAL, float64'high, -float64'low));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(ONE_REAL, float64'high, -float64'low));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(TWO_REAL, float64'high, -float64'low));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(THREE_REAL, float64'high, -float64'low));
+  constant FOUR_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(FOUR_REAL, float64'high, -float64'low));
+  constant FIVE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(FIVE_REAL, float64'high, -float64'low));
 
   ------------------------------------------------------------------------------
   -- Types
@@ -1242,5 +1246,191 @@ package accelerator_arithmetic_pkg is
       OVERFLOW_OUT : out std_logic
       );
   end component;
+
+  ------------------------------------------------------------------------------
+  -- Functions
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- MATH - RANDOM
+  ------------------------------------------------------------------------------
+
+  -- SCALAR
+  function scalar_randomness_generation (
+    seed1_in : integer;
+    seed2_in : integer
+  ) return std_logic_vector;
+
+  -- VECTOR
+  function vector_randomness_generation (
+    DATA_L_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return vector_buffer;
+
+  -- MATRIX
+  function matrix_randomness_generation (
+    DATA_I_IN : integer;
+    DATA_J_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return matrix_buffer;
+
+  -- TENSOR
+  function tensor_randomness_generation (
+    DATA_I_IN : integer;
+    DATA_J_IN : integer;
+    DATA_K_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return tensor_buffer;
+
+end accelerator_arithmetic_pkg;
+
+package body accelerator_arithmetic_pkg is
+
+  ------------------------------------------------------------------------------
+  -- Functions
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
+  -- MATH - RANDOM
+  ------------------------------------------------------------------------------
+
+  -- SCALAR
+  function scalar_randomness_generation (
+    seed1_in : integer;
+    seed2_in : integer
+    ) return std_logic_vector is
+
+    variable seed1 : integer;
+    variable seed2 : integer;
+
+    variable r : real;
+
+    variable random_sample : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  begin
+
+    seed1 := seed1_in;
+    seed2 := seed2_in;
+
+    -- randomness generation
+    for m in 0 to DATA_SIZE-1 loop
+      uniform(seed1, seed2, r);
+
+      random_sample(m) := '1' when r > 0.5 else '0';
+    end loop;
+
+    return random_sample;
+  end function scalar_randomness_generation;
+
+  -- VECTOR
+  function vector_randomness_generation (
+    DATA_L_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return vector_buffer is
+
+    variable seed1 : integer;
+    variable seed2 : integer;
+
+    variable r : real;
+
+    variable random_sample : vector_buffer;
+
+  begin
+
+    seed1 := seed1_in;
+    seed2 := seed2_in;
+
+    -- randomness generation
+    for l in 0 to DATA_L_IN-1 loop
+      for m in 0 to DATA_SIZE-1 loop
+        uniform(seed1, seed2, r);
+
+        random_sample(l)(m) := '1' when r > 0.5 else '0';
+      end loop;
+    end loop;
+
+    return random_sample;
+  end function vector_randomness_generation;
+
+  -- MATRIX
+  function matrix_randomness_generation (
+    DATA_I_IN : integer;
+    DATA_J_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return matrix_buffer is
+
+    variable seed1 : integer;
+    variable seed2 : integer;
+
+    variable r : real;
+
+    variable random_sample : matrix_buffer;
+
+  begin
+
+    seed1 := seed1_in;
+    seed2 := seed2_in;
+
+    -- randomness generation
+    for i in 0 to DATA_I_IN-1 loop
+      for j in 0 to DATA_J_IN-1 loop
+        for m in 0 to DATA_SIZE-1 loop
+          uniform(seed1, seed2, r);
+
+          random_sample(i, j)(m) := '1' when r > 0.5 else '0';
+        end loop;
+      end loop;
+    end loop;
+
+    return random_sample;
+  end function matrix_randomness_generation;
+
+  -- TENSOR
+  function tensor_randomness_generation (
+    DATA_I_IN : integer;
+    DATA_J_IN : integer;
+    DATA_K_IN : integer;
+
+    seed1_in : integer;
+    seed2_in : integer
+    ) return tensor_buffer is
+
+    variable seed1 : integer;
+    variable seed2 : integer;
+
+    variable r : real;
+
+    variable random_sample : tensor_buffer;
+
+  begin
+
+    seed1 := seed1_in;
+    seed2 := seed2_in;
+
+    -- randomness generation
+    for i in 0 to DATA_I_IN-1 loop
+      for j in 0 to DATA_J_IN-1 loop
+        for k in 0 to DATA_K_IN-1 loop
+          for m in 0 to DATA_SIZE-1 loop
+            uniform(seed1, seed2, r);
+
+            random_sample(i, j, k)(m) := '1' when r > 0.5 else '0';
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    return random_sample;
+  end function tensor_randomness_generation;
 
 end accelerator_arithmetic_pkg;

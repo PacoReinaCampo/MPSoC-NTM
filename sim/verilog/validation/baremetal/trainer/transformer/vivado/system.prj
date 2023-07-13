@@ -77,13 +77,13 @@ sv work ../../../../../../../model/verilog/code/trainer/transformer/model_forget
 sv work ../../../../../../../model/verilog/code/trainer/transformer/model_input_trainer.sv
 sv work ../../../../../../../model/verilog/code/trainer/transformer/model_output_trainer.sv
 
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_controller.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_activation_gate_vector.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_forget_gate_vector.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_hidden_gate_vector.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_input_gate_vector.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_output_gate_vector.sv
-sv work ../../../../../../../model/verilog/code/controller/transformer/convolutional/model_state_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_controller.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_activation_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_forget_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_hidden_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_input_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_output_gate_vector.sv
+sv work ../../../../../../../model/verilog/code/transformer/convolutional/model_state_gate_vector.sv
 
 sv work ../../../../../../../bench/verilog/code/baremetal/model/trainer/transformer/model_trainer_transformer_pkg.sv
 sv work ../../../../../../../bench/verilog/code/baremetal/model/trainer/transformer/model_trainer_transformer_stimulus.sv

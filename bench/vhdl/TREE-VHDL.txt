@@ -24,19 +24,15 @@ code
 │   │   │   │       ├── accelerator_standard_fnn_pkg.vhd
 │   │   │   │       ├── accelerator_standard_fnn_stimulus.vhd
 │   │   │   │       └── accelerator_standard_fnn_testbench.vhd
-│   │   │   ├── LSTM
-│   │   │   │   ├── convolutional
-│   │   │   │   │   ├── accelerator_convolutional_lstm_pkg.vhd
-│   │   │   │   │   ├── accelerator_convolutional_lstm_stimulus.vhd
-│   │   │   │   │   └── accelerator_convolutional_lstm_testbench.vhd
-│   │   │   │   └── standard
-│   │   │   │       ├── accelerator_standard_lstm_pkg.vhd
-│   │   │   │       ├── accelerator_standard_lstm_stimulus.vhd
-│   │   │   │       └── accelerator_standard_lstm_testbench.vhd
-│   │   │   └── transformer
-│   │   │       ├── accelerator_transformer_pkg.vhd
-│   │   │       ├── accelerator_transformer_stimulus.vhd
-│   │   │       └── accelerator_transformer_testbench.vhd
+│   │   │   └── LSTM
+│   │   │       ├── convolutional
+│   │   │       │   ├── accelerator_convolutional_lstm_pkg.vhd
+│   │   │       │   ├── accelerator_convolutional_lstm_stimulus.vhd
+│   │   │       │   └── accelerator_convolutional_lstm_testbench.vhd
+│   │   │       └── standard
+│   │   │           ├── accelerator_standard_lstm_pkg.vhd
+│   │   │           ├── accelerator_standard_lstm_stimulus.vhd
+│   │   │           └── accelerator_standard_lstm_testbench.vhd
 │   │   ├── math
 │   │   │   ├── algebra
 │   │   │   │   ├── accelerator_algebra_pkg.vhd
@@ -84,19 +80,23 @@ code
 │   │   │       ├── accelerator_state_top_pkg.vhd
 │   │   │       ├── accelerator_state_top_stimulus.vhd
 │   │   │       └── accelerator_state_top_testbench.vhd
-│   │   └── trainer
-│   │       ├── differentiation
-│   │       │   ├── accelerator_trainer_differentiation_pkg.vhd
-│   │       │   ├── accelerator_trainer_differentiation_stimulus.vhd
-│   │       │   └── accelerator_trainer_differentiation_testbench.vhd
-│   │       ├── FNN
-│   │       │   ├── accelerator_trainer_fnn_pkg.vhd
-│   │       │   ├── accelerator_trainer_fnn_stimulus.vhd
-│   │       │   └── accelerator_trainer_fnn_testbench.vhd
-│   │       └── LSTM
-│   │           ├── accelerator_trainer_lstm_pkg.vhd
-│   │           ├── accelerator_trainer_lstm_stimulus.vhd
-│   │           └── accelerator_trainer_lstm_testbench.vhd
+│   │   ├── trainer
+│   │   │   ├── differentiation
+│   │   │   │   ├── accelerator_trainer_differentiation_pkg.vhd
+│   │   │   │   ├── accelerator_trainer_differentiation_stimulus.vhd
+│   │   │   │   └── accelerator_trainer_differentiation_testbench.vhd
+│   │   │   ├── FNN
+│   │   │   │   ├── accelerator_trainer_fnn_pkg.vhd
+│   │   │   │   ├── accelerator_trainer_fnn_stimulus.vhd
+│   │   │   │   └── accelerator_trainer_fnn_testbench.vhd
+│   │   │   └── LSTM
+│   │   │       ├── accelerator_trainer_lstm_pkg.vhd
+│   │   │       ├── accelerator_trainer_lstm_stimulus.vhd
+│   │   │       └── accelerator_trainer_lstm_testbench.vhd
+│   │   └── transformer
+│   │       ├── accelerator_transformer_pkg.vhd
+│   │       ├── accelerator_transformer_stimulus.vhd
+│   │       └── accelerator_transformer_testbench.vhd
 │   └── model
 │       ├── arithmetic
 │       │   ├── fixed
@@ -121,19 +121,15 @@ code
 │       │   │       ├── model_standard_fnn_pkg.vhd
 │       │   │       ├── model_standard_fnn_stimulus.vhd
 │       │   │       └── model_standard_fnn_testbench.vhd
-│       │   ├── LSTM
-│       │   │   ├── convolutional
-│       │   │   │   ├── model_convolutional_lstm_pkg.vhd
-│       │   │   │   ├── model_convolutional_lstm_stimulus.vhd
-│       │   │   │   └── model_convolutional_lstm_testbench.vhd
-│       │   │   └── standard
-│       │   │       ├── model_standard_lstm_pkg.vhd
-│       │   │       ├── model_standard_lstm_stimulus.vhd
-│       │   │       └── model_standard_lstm_testbench.vhd
-│       │   └── transformer
-│       │       ├── model_transformer_pkg.vhd
-│       │       ├── model_transformer_stimulus.vhd
-│       │       └── model_transformer_testbench.vhd
+│       │   └── LSTM
+│       │       ├── convolutional
+│       │       │   ├── model_convolutional_lstm_pkg.vhd
+│       │       │   ├── model_convolutional_lstm_stimulus.vhd
+│       │       │   └── model_convolutional_lstm_testbench.vhd
+│       │       └── standard
+│       │           ├── model_standard_lstm_pkg.vhd
+│       │           ├── model_standard_lstm_stimulus.vhd
+│       │           └── model_standard_lstm_testbench.vhd
 │       ├── math
 │       │   ├── algebra
 │       │   │   ├── model_algebra_pkg.vhd
@@ -181,19 +177,23 @@ code
 │       │       ├── model_state_top_pkg.vhd
 │       │       ├── model_state_top_stimulus.vhd
 │       │       └── model_state_top_testbench.vhd
-│       └── trainer
-│           ├── differentiation
-│           │   ├── model_trainer_differentiation_pkg.vhd
-│           │   ├── model_trainer_differentiation_stimulus.vhd
-│           │   └── model_trainer_differentiation_testbench.vhd
-│           ├── FNN
-│           │   ├── model_trainer_fnn_pkg.vhd
-│           │   ├── model_trainer_fnn_stimulus.vhd
-│           │   └── model_trainer_fnn_testbench.vhd
-│           └── LSTM
-│               ├── model_trainer_lstm_pkg.vhd
-│               ├── model_trainer_lstm_stimulus.vhd
-│               └── model_trainer_lstm_testbench.vhd
+│       ├── trainer
+│       │   ├── differentiation
+│       │   │   ├── model_trainer_differentiation_pkg.vhd
+│       │   │   ├── model_trainer_differentiation_stimulus.vhd
+│       │   │   └── model_trainer_differentiation_testbench.vhd
+│       │   ├── FNN
+│       │   │   ├── model_trainer_fnn_pkg.vhd
+│       │   │   ├── model_trainer_fnn_stimulus.vhd
+│       │   │   └── model_trainer_fnn_testbench.vhd
+│       │   └── LSTM
+│       │       ├── model_trainer_lstm_pkg.vhd
+│       │       ├── model_trainer_lstm_stimulus.vhd
+│       │       └── model_trainer_lstm_testbench.vhd
+│       └── transformer
+│           ├── model_transformer_pkg.vhd
+│           ├── model_transformer_stimulus.vhd
+│           └── model_transformer_testbench.vhd
 └── tests
     ├── design
     │   ├── arithmetic
@@ -219,19 +219,15 @@ code
     │   │   │       ├── accelerator_standard_fnn_pkg.vhd
     │   │   │       ├── accelerator_standard_fnn_stimulus.vhd
     │   │   │       └── accelerator_standard_fnn_testbench.vhd
-    │   │   ├── LSTM
-    │   │   │   ├── convolutional
-    │   │   │   │   ├── accelerator_convolutional_lstm_pkg.vhd
-    │   │   │   │   ├── accelerator_convolutional_lstm_stimulus.vhd
-    │   │   │   │   └── accelerator_convolutional_lstm_testbench.vhd
-    │   │   │   └── standard
-    │   │   │       ├── accelerator_standard_lstm_pkg.vhd
-    │   │   │       ├── accelerator_standard_lstm_stimulus.vhd
-    │   │   │       └── accelerator_standard_lstm_testbench.vhd
-    │   │   └── transformer
-    │   │       ├── accelerator_transformer_pkg.vhd
-    │   │       ├── accelerator_transformer_stimulus.vhd
-    │   │       └── accelerator_transformer_testbench.vhd
+    │   │   └── LSTM
+    │   │       ├── convolutional
+    │   │       │   ├── accelerator_convolutional_lstm_pkg.vhd
+    │   │       │   ├── accelerator_convolutional_lstm_stimulus.vhd
+    │   │       │   └── accelerator_convolutional_lstm_testbench.vhd
+    │   │       └── standard
+    │   │           ├── accelerator_standard_lstm_pkg.vhd
+    │   │           ├── accelerator_standard_lstm_stimulus.vhd
+    │   │           └── accelerator_standard_lstm_testbench.vhd
     │   ├── math
     │   │   ├── algebra
     │   │   │   ├── accelerator_algebra_pkg.vhd
@@ -279,19 +275,23 @@ code
     │   │       ├── accelerator_state_top_pkg.vhd
     │   │       ├── accelerator_state_top_stimulus.vhd
     │   │       └── accelerator_state_top_testbench.vhd
-    │   └── trainer
-    │       ├── differentiation
-    │       │   ├── accelerator_trainer_differentiation_pkg.vhd
-    │       │   ├── accelerator_trainer_differentiation_stimulus.vhd
-    │       │   └── accelerator_trainer_differentiation_testbench.vhd
-    │       ├── FNN
-    │       │   ├── accelerator_trainer_fnn_pkg.vhd
-    │       │   ├── accelerator_trainer_fnn_stimulus.vhd
-    │       │   └── accelerator_trainer_fnn_testbench.vhd
-    │       └── LSTM
-    │           ├── accelerator_trainer_lstm_pkg.vhd
-    │           ├── accelerator_trainer_lstm_stimulus.vhd
-    │           └── accelerator_trainer_lstm_testbench.vhd
+    │   ├── trainer
+    │   │   ├── differentiation
+    │   │   │   ├── accelerator_trainer_differentiation_pkg.vhd
+    │   │   │   ├── accelerator_trainer_differentiation_stimulus.vhd
+    │   │   │   └── accelerator_trainer_differentiation_testbench.vhd
+    │   │   ├── FNN
+    │   │   │   ├── accelerator_trainer_fnn_pkg.vhd
+    │   │   │   ├── accelerator_trainer_fnn_stimulus.vhd
+    │   │   │   └── accelerator_trainer_fnn_testbench.vhd
+    │   │   └── LSTM
+    │   │       ├── accelerator_trainer_lstm_pkg.vhd
+    │   │       ├── accelerator_trainer_lstm_stimulus.vhd
+    │   │       └── accelerator_trainer_lstm_testbench.vhd
+    │   └── transformer
+    │       ├── accelerator_transformer_pkg.vhd
+    │       ├── accelerator_transformer_stimulus.vhd
+    │       └── accelerator_transformer_testbench.vhd
     └── model
         ├── arithmetic
         │   ├── fixed
@@ -316,19 +316,15 @@ code
         │   │       ├── model_standard_fnn_pkg.vhd
         │   │       ├── model_standard_fnn_stimulus.vhd
         │   │       └── model_standard_fnn_testbench.vhd
-        │   ├── LSTM
-        │   │   ├── convolutional
-        │   │   │   ├── model_convolutional_lstm_pkg.vhd
-        │   │   │   ├── model_convolutional_lstm_stimulus.vhd
-        │   │   │   └── model_convolutional_lstm_testbench.vhd
-        │   │   └── standard
-        │   │       ├── model_standard_lstm_pkg.vhd
-        │   │       ├── model_standard_lstm_stimulus.vhd
-        │   │       └── model_standard_lstm_testbench.vhd
-        │   └── transformer
-        │       ├── model_transformer_pkg.vhd
-        │       ├── model_transformer_stimulus.vhd
-        │       └── model_transformer_testbench.vhd
+        │   └── LSTM
+        │       ├── convolutional
+        │       │   ├── model_convolutional_lstm_pkg.vhd
+        │       │   ├── model_convolutional_lstm_stimulus.vhd
+        │       │   └── model_convolutional_lstm_testbench.vhd
+        │       └── standard
+        │           ├── model_standard_lstm_pkg.vhd
+        │           ├── model_standard_lstm_stimulus.vhd
+        │           └── model_standard_lstm_testbench.vhd
         ├── math
         │   ├── algebra
         │   │   ├── model_algebra_pkg.vhd
@@ -376,18 +372,22 @@ code
         │       ├── model_state_top_pkg.vhd
         │       ├── model_state_top_stimulus.vhd
         │       └── model_state_top_testbench.vhd
-        └── trainer
-            ├── differentiation
-            │   ├── model_trainer_differentiation_pkg.vhd
-            │   ├── model_trainer_differentiation_stimulus.vhd
-            │   └── model_trainer_differentiation_testbench.vhd
-            ├── FNN
-            │   ├── model_trainer_fnn_pkg.vhd
-            │   ├── model_trainer_fnn_stimulus.vhd
-            │   └── model_trainer_fnn_testbench.vhd
-            └── LSTM
-                ├── model_trainer_lstm_pkg.vhd
-                ├── model_trainer_lstm_stimulus.vhd
-                └── model_trainer_lstm_testbench.vhd
+        ├── trainer
+        │   ├── differentiation
+        │   │   ├── model_trainer_differentiation_pkg.vhd
+        │   │   ├── model_trainer_differentiation_stimulus.vhd
+        │   │   └── model_trainer_differentiation_testbench.vhd
+        │   ├── FNN
+        │   │   ├── model_trainer_fnn_pkg.vhd
+        │   │   ├── model_trainer_fnn_stimulus.vhd
+        │   │   └── model_trainer_fnn_testbench.vhd
+        │   └── LSTM
+        │       ├── model_trainer_lstm_pkg.vhd
+        │       ├── model_trainer_lstm_stimulus.vhd
+        │       └── model_trainer_lstm_testbench.vhd
+        └── transformer
+            ├── model_transformer_pkg.vhd
+            ├── model_transformer_stimulus.vhd
+            └── model_transformer_testbench.vhd
 
 126 directories, 264 files

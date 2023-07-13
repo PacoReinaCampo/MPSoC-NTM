@@ -64,63 +64,23 @@ code
 │   │   │   └── model_controller.vhd
 │   │   └── standard
 │   │       └── model_controller.vhd
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   │   ├── model_activation_gate_vector.vhd
-│   │   │   ├── model_controller.vhd
-│   │   │   ├── model_forget_gate_vector.vhd
-│   │   │   ├── model_hidden_gate_vector.vhd
-│   │   │   ├── model_input_gate_vector.vhd
-│   │   │   ├── model_output_gate_vector.vhd
-│   │   │   └── model_state_gate_vector.vhd
-│   │   └── standard
-│   │       ├── model_activation_gate_vector.vhd
-│   │       ├── model_controller.vhd
-│   │       ├── model_forget_gate_vector.vhd
-│   │       ├── model_hidden_gate_vector.vhd
-│   │       ├── model_input_gate_vector.vhd
-│   │       ├── model_output_gate_vector.vhd
-│   │       └── model_state_gate_vector.vhd
-│   └── transformer
-│       ├── components
-│       │   ├── model_masked_multi_head_attention.vhd
-│       │   ├── model_masked_scaled_dot_product_attention.vhd
-│       │   ├── model_multi_head_attention.vhd
-│       │   └── model_scaled_dot_product_attention.vhd
-│       ├── fnn
-│       │   ├── convolutional
-│       │   │   └── model_fnn.vhd
-│       │   └── standard
-│       │       └── model_fnn.vhd
-│       ├── functions
-│       │   ├── model_layer_norm.vhd
-│       │   └── model_positional_encoding.vhd
-│       ├── inputs
-│       │   ├── model_inputs_vector.vhd
-│       │   ├── model_keys_vector.vhd
-│       │   ├── model_queries_vector.vhd
-│       │   └── model_values_vector.vhd
-│       ├── lstm
-│       │   ├── convolutional
-│       │   │   ├── model_activation_gate_vector.vhd
-│       │   │   ├── model_forget_gate_vector.vhd
-│       │   │   ├── model_hidden_gate_vector.vhd
-│       │   │   ├── model_input_gate_vector.vhd
-│       │   │   ├── model_lstm.vhd
-│       │   │   ├── model_output_gate_vector.vhd
-│       │   │   └── model_state_gate_vector.vhd
-│       │   └── standard
-│       │       ├── model_activation_gate_vector.vhd
-│       │       ├── model_forget_gate_vector.vhd
-│       │       ├── model_hidden_gate_vector.vhd
-│       │       ├── model_input_gate_vector.vhd
-│       │       ├── model_lstm.vhd
-│       │       ├── model_output_gate_vector.vhd
-│       │       └── model_state_gate_vector.vhd
-│       └── top
+│   └── LSTM
+│       ├── convolutional
+│       │   ├── model_activation_gate_vector.vhd
+│       │   ├── model_controller.vhd
+│       │   ├── model_forget_gate_vector.vhd
+│       │   ├── model_hidden_gate_vector.vhd
+│       │   ├── model_input_gate_vector.vhd
+│       │   ├── model_output_gate_vector.vhd
+│       │   └── model_state_gate_vector.vhd
+│       └── standard
+│           ├── model_activation_gate_vector.vhd
 │           ├── model_controller.vhd
-│           ├── model_decoder.vhd
-│           └── model_encoder.vhd
+│           ├── model_forget_gate_vector.vhd
+│           ├── model_hidden_gate_vector.vhd
+│           ├── model_input_gate_vector.vhd
+│           ├── model_output_gate_vector.vhd
+│           └── model_state_gate_vector.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -222,16 +182,56 @@ code
 │   │   └── model_state_vector_state.vhd
 │   └── top
 │       └── model_state_top.vhd
-└── trainer
-    ├── differentiation
-    │   ├── model_matrix_controller_differentiation.vhd
-    │   └── model_vector_controller_differentiation.vhd
-    ├── FNN
-    │   └── model_trainer.vhd
-    └── LSTM
-        ├── model_activation_trainer.vhd
-        ├── model_forget_trainer.vhd
-        ├── model_input_trainer.vhd
-        └── model_output_trainer.vhd
+├── trainer
+│   ├── differentiation
+│   │   ├── model_matrix_controller_differentiation.vhd
+│   │   └── model_vector_controller_differentiation.vhd
+│   ├── FNN
+│   │   └── model_trainer.vhd
+│   └── LSTM
+│       ├── model_activation_trainer.vhd
+│       ├── model_forget_trainer.vhd
+│       ├── model_input_trainer.vhd
+│       └── model_output_trainer.vhd
+└── transformer
+    ├── components
+    │   ├── model_masked_multi_head_attention.vhd
+    │   ├── model_masked_scaled_dot_product_attention.vhd
+    │   ├── model_multi_head_attention.vhd
+    │   └── model_scaled_dot_product_attention.vhd
+    ├── fnn
+    │   ├── convolutional
+    │   │   └── model_fnn.vhd
+    │   └── standard
+    │       └── model_fnn.vhd
+    ├── functions
+    │   ├── model_layer_norm.vhd
+    │   └── model_positional_encoding.vhd
+    ├── inputs
+    │   ├── model_inputs_vector.vhd
+    │   ├── model_keys_vector.vhd
+    │   ├── model_queries_vector.vhd
+    │   └── model_values_vector.vhd
+    ├── lstm
+    │   ├── convolutional
+    │   │   ├── model_activation_gate_vector.vhd
+    │   │   ├── model_forget_gate_vector.vhd
+    │   │   ├── model_hidden_gate_vector.vhd
+    │   │   ├── model_input_gate_vector.vhd
+    │   │   ├── model_lstm.vhd
+    │   │   ├── model_output_gate_vector.vhd
+    │   │   └── model_state_gate_vector.vhd
+    │   └── standard
+    │       ├── model_activation_gate_vector.vhd
+    │       ├── model_forget_gate_vector.vhd
+    │       ├── model_hidden_gate_vector.vhd
+    │       ├── model_input_gate_vector.vhd
+    │       ├── model_lstm.vhd
+    │       ├── model_output_gate_vector.vhd
+    │       └── model_state_gate_vector.vhd
+    └── top
+        ├── model_controller.vhd
+        ├── model_decoder.vhd
+        └── model_encoder.vhd
 
 69 directories, 165 files

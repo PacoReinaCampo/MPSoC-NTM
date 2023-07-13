@@ -71,40 +71,43 @@ package model_integer_pkg is
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
-  -- INTEGERS
-  constant INT_P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant INT_P_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant INT_P_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant INT_P_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
-  constant INT_P_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(4, DATA_SIZE));
-  constant INT_P_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
-  constant INT_P_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(6, DATA_SIZE));
-  constant INT_P_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(7, DATA_SIZE));
-  constant INT_P_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(8, DATA_SIZE));
-  constant INT_P_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(9, DATA_SIZE));
+  -- Seeds
+  constant TENSOR_SAMPLE_A_SEED1 : integer := 1;
+  constant TENSOR_SAMPLE_A_SEED2 : integer := 2;
 
-  constant INT_N_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-1, DATA_SIZE));
-  constant INT_N_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-2, DATA_SIZE));
-  constant INT_N_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-3, DATA_SIZE));
-  constant INT_N_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-4, DATA_SIZE));
-  constant INT_N_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-5, DATA_SIZE));
-  constant INT_N_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-6, DATA_SIZE));
-  constant INT_N_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-7, DATA_SIZE));
-  constant INT_N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-8, DATA_SIZE));
-  constant INT_N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-9, DATA_SIZE));
+  constant TENSOR_SAMPLE_B_SEED1 : integer := 3;
+  constant TENSOR_SAMPLE_B_SEED2 : integer := 4;
 
-  -- Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((INT_P_TWO, INT_P_ONE, INT_P_THREE, INT_P_FOUR), (INT_P_TWO, INT_P_ONE, INT_P_ONE, INT_P_TWO), (INT_P_NINE, INT_P_ONE, INT_P_FOUR, INT_P_TWO), (INT_P_ONE, INT_P_SIX, INT_P_ONE, INT_P_TWO)), ((INT_P_FOUR, INT_P_NINE, INT_P_FOUR, INT_P_EIGHT), (INT_P_TWO, INT_P_TWO, INT_P_ONE, INT_P_ONE), (INT_P_THREE, INT_P_ONE, INT_P_SIX, INT_P_FIVE), (INT_P_FOUR, INT_P_FOUR, INT_P_FIVE, INT_P_EIGHT)), ((INT_P_EIGHT, INT_P_ONE, INT_P_SIX, INT_P_TWO), (INT_P_EIGHT, INT_P_FIVE, INT_P_SIX, INT_P_TWO), (INT_P_NINE, INT_P_ONE, INT_P_FIVE, INT_P_NINE), (INT_P_ONE, INT_P_FOUR, INT_P_ONE, INT_P_FOUR)), ((INT_P_ONE, INT_P_THREE, INT_P_ONE, INT_P_TWO), (INT_P_EIGHT, INT_P_FOUR, INT_P_ONE, INT_P_EIGHT), (INT_P_FIVE, INT_P_EIGHT, INT_P_THREE, INT_P_FOUR), (INT_P_ONE, INT_P_FOUR, INT_N_THREE, INT_P_EIGHT)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((INT_P_TWO, INT_P_FIVE, INT_P_THREE, INT_P_ONE), (INT_P_ONE, INT_P_FOUR, INT_P_ONE, INT_P_FOUR), (INT_P_TWO, INT_P_FOUR, INT_P_NINE, INT_P_EIGHT), (INT_P_FOUR, INT_P_TWO, INT_P_ONE, INT_P_TWO)),((INT_P_THREE, INT_P_ONE, INT_P_FIVE, INT_P_SIX), (INT_P_FIVE, INT_P_FOUR, INT_P_EIGHT, INT_P_FOUR), (INT_P_FOUR, INT_P_FIVE, INT_P_FOUR, INT_P_ONE), (INT_P_FIVE, INT_P_SIX, INT_P_EIGHT, INT_P_FIVE)), ((INT_P_EIGHT, INT_P_NINE, INT_P_ONE, INT_P_FIVE), (INT_P_ONE, INT_P_TWO, INT_P_SIX, INT_P_ONE), (INT_P_NINE, INT_P_FOUR, INT_P_EIGHT, INT_P_ONE), (INT_P_FIVE, INT_P_FOUR, INT_P_EIGHT, INT_P_FOUR)), ((INT_P_FIVE, INT_P_FOUR, INT_N_NINE, INT_P_ONE), (INT_P_THREE, INT_P_EIGHT, INT_P_FOUR, INT_P_FOUR), (INT_P_THREE, INT_P_six, INT_P_FOUR, INT_P_SIX), (INT_P_ONE, INT_P_EIGHT, INT_N_ONE, INT_P_EIGHT)));
+  constant MATRIX_SAMPLE_A_SEED1 : integer := 5;
+  constant MATRIX_SAMPLE_A_SEED2 : integer := 6;
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((INT_P_ONE, INT_N_ONE, INT_P_FOUR, INT_P_ONE), (INT_P_THREE, INT_P_SIX, INT_N_ONE, INT_N_NINE), (INT_P_SEVEN, INT_P_FOUR, INT_P_EIGHT, INT_P_FOUR), (INT_P_FIVE, INT_P_SIX, INT_P_THREE, INT_P_NINE));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((INT_P_ONE, INT_P_TWO, INT_P_SEVEN, INT_P_SIX), (INT_P_FOUR, INT_P_NINE, INT_P_TWO, INT_P_ONE), (INT_P_ONE, INT_P_FIVE, INT_P_THREE, INT_P_SIX), (INT_P_EIGHT, INT_P_FOUR, INT_N_ONE, INT_P_FOUR));
+  constant MATRIX_SAMPLE_B_SEED1 : integer := 7;
+  constant MATRIX_SAMPLE_B_SEED2 : integer := 8;
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (INT_P_FOUR, INT_N_ONE, INT_P_SEVEN, INT_N_THREE);
-  constant VECTOR_SAMPLE_B : vector_buffer := (INT_P_THREE, INT_P_SIX, INT_N_NINE, INT_N_ONE);
+  constant VECTOR_SAMPLE_A_SEED1 : integer := 9;
+  constant VECTOR_SAMPLE_A_SEED2 : integer := 10;
 
-  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
-  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
+  constant VECTOR_SAMPLE_B_SEED1 : integer := 11;
+  constant VECTOR_SAMPLE_B_SEED2 : integer := 12;
+
+  constant SCALAR_SAMPLE_A_SEED1 : integer := 13;
+  constant SCALAR_SAMPLE_A_SEED2 : integer := 14;
+
+  constant SCALAR_SAMPLE_B_SEED1 : integer := 15;
+  constant SCALAR_SAMPLE_B_SEED2 : integer := 16;
+
+  -- Integer Buffer
+  constant TENSOR_SAMPLE_A : tensor_buffer := tensor_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, CONTROL_SIZE, TENSOR_SAMPLE_A_SEED1, TENSOR_SAMPLE_A_SEED2);
+  constant TENSOR_SAMPLE_B : tensor_buffer := tensor_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, CONTROL_SIZE, TENSOR_SAMPLE_A_SEED1, TENSOR_SAMPLE_A_SEED2);
+
+  constant MATRIX_SAMPLE_A : matrix_buffer := matrix_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, MATRIX_SAMPLE_A_SEED1, MATRIX_SAMPLE_A_SEED2);
+  constant MATRIX_SAMPLE_B : matrix_buffer := matrix_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, MATRIX_SAMPLE_A_SEED1, MATRIX_SAMPLE_A_SEED2);
+
+  constant VECTOR_SAMPLE_A : vector_buffer := vector_randomness_generation(CONTROL_SIZE, VECTOR_SAMPLE_A_SEED1, VECTOR_SAMPLE_A_SEED2);
+  constant VECTOR_SAMPLE_B : vector_buffer := vector_randomness_generation(CONTROL_SIZE, VECTOR_SAMPLE_B_SEED1, VECTOR_SAMPLE_B_SEED2);
+
+  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := scalar_randomness_generation(SCALAR_SAMPLE_A_SEED1, SCALAR_SAMPLE_A_SEED2);
+  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := scalar_randomness_generation(SCALAR_SAMPLE_B_SEED1, SCALAR_SAMPLE_B_SEED2);
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;

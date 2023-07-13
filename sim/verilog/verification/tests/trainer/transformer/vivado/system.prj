@@ -77,13 +77,13 @@ sv work ../../../../../../../rtl/verilog/code/trainer/transformer/accelerator_fo
 sv work ../../../../../../../rtl/verilog/code/trainer/transformer/accelerator_input_trainer.sv
 sv work ../../../../../../../rtl/verilog/code/trainer/transformer/accelerator_output_trainer.sv
 
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_controller.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_activation_gate_vector.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_forget_gate_vector.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_hidden_gate_vector.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_input_gate_vector.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_output_gate_vector.sv
-sv work ../../../../../../../rtl/verilog/code/controller/transformer/convolutional/accelerator_state_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_controller.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_activation_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_forget_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_hidden_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_input_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_output_gate_vector.sv
+sv work ../../../../../../../rtl/verilog/code/transformer/convolutional/accelerator_state_gate_vector.sv
 
 sv work ../../../../../../../bench/verilog/code/tests/design/trainer/transformer/accelerator_trainer_transformer_pkg.sv
 sv work ../../../../../../../bench/verilog/code/tests/design/trainer/transformer/accelerator_trainer_transformer_stimulus.sv

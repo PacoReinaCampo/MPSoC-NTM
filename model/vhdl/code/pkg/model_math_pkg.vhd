@@ -2658,12 +2658,12 @@ package body model_math_pkg is
 
       while (matrix_input(i, i) = ZERO_DATA) loop
         for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
-          vector_in_int(j) :=  matrix_in_int(i, j);
+          vector_in_int(j) := matrix_in_int(i, j);
         end loop;
 
         if i < to_integer(unsigned(SIZE_I_IN))-1 then
           for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
-            matrix_in_int(i, j) :=  matrix_in_int(i+n, j);
+            matrix_in_int(i, j) := matrix_in_int(i+n, j);
           end loop;
 
           for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
@@ -2671,7 +2671,7 @@ package body model_math_pkg is
           end loop;
         else
           for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
-            matrix_in_int(i, j) :=  matrix_in_int(i-n, j);
+            matrix_in_int(i, j) := matrix_in_int(i-n, j);
           end loop;
 
           for j in 0 to 2*to_integer(unsigned(SIZE_J_IN))-1 loop
