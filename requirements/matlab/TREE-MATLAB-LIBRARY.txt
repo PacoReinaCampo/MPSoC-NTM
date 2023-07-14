@@ -229,16 +229,10 @@ library
     │   ├── ntm_queries_vector.m
     │   └── ntm_values_vector.m
     ├── lstm
-    │   ├── ntm_activation_gate_vector.m
-    │   ├── ntm_forget_gate_vector.m
-    │   ├── ntm_hidden_gate_vector.m
-    │   ├── ntm_input_gate_vector.m
-    │   ├── ntm_lstm.m
-    │   ├── ntm_output_gate_vector.m
-    │   └── ntm_state_gate_vector.m
+    │   └── ntm_lstm.m
     └── top
         ├── ntm_controller.m
         ├── ntm_decoder.m
         └── ntm_encoder.m
 
-59 directories, 182 files
+59 directories, 176 files

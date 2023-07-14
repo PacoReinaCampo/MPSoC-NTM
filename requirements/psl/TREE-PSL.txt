@@ -225,16 +225,10 @@ library
     │   ├── ntm_queries_vector.psl
     │   └── ntm_values_vector.psl
     ├── lstm
-    │   ├── ntm_activation_gate_vector.psl
-    │   ├── ntm_forget_gate_vector.psl
-    │   ├── ntm_hidden_gate_vector.psl
-    │   ├── ntm_input_gate_vector.psl
-    │   ├── ntm_lstm.psl
-    │   ├── ntm_output_gate_vector.psl
-    │   └── ntm_state_gate_vector.psl
+    │   └── ntm_lstm.psl
     └── top
         ├── ntm_controller.psl
         ├── ntm_decoder.psl
         └── ntm_encoder.psl
 
-59 directories, 178 files
+59 directories, 172 files

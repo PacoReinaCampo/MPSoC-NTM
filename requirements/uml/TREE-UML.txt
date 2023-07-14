@@ -2393,111 +2393,21 @@ library
     │       ├── ntm_values_vector_structural_package.dot
     │       └── ntm_values_vector_structural_profile.dot
     ├── lstm
-    │   ├── ntm_activation_gate_vector
-    │   │   ├── ntm_activation_gate_vector_behavioral_activity.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_communication.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_interaction.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_sequence.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_state.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_timing.dot
-    │   │   ├── ntm_activation_gate_vector_behavioral_use.dot
-    │   │   ├── ntm_activation_gate_vector_structural_class.dot
-    │   │   ├── ntm_activation_gate_vector_structural_component.dot
-    │   │   ├── ntm_activation_gate_vector_structural_composite.dot
-    │   │   ├── ntm_activation_gate_vector_structural_deployment.dot
-    │   │   ├── ntm_activation_gate_vector_structural_object.dot
-    │   │   ├── ntm_activation_gate_vector_structural_package.dot
-    │   │   └── ntm_activation_gate_vector_structural_profile.dot
-    │   ├── ntm_forget_gate_vector
-    │   │   ├── ntm_forget_gate_vector_behavioral_activity.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_communication.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_interaction.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_sequence.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_state.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_timing.dot
-    │   │   ├── ntm_forget_gate_vector_behavioral_use.dot
-    │   │   ├── ntm_forget_gate_vector_structural_class.dot
-    │   │   ├── ntm_forget_gate_vector_structural_component.dot
-    │   │   ├── ntm_forget_gate_vector_structural_composite.dot
-    │   │   ├── ntm_forget_gate_vector_structural_deployment.dot
-    │   │   ├── ntm_forget_gate_vector_structural_object.dot
-    │   │   ├── ntm_forget_gate_vector_structural_package.dot
-    │   │   └── ntm_forget_gate_vector_structural_profile.dot
-    │   ├── ntm_hidden_gate_vector
-    │   │   ├── ntm_hidden_gate_vector_behavioral_activity.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_communication.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_interaction.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_sequence.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_state.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_timing.dot
-    │   │   ├── ntm_hidden_gate_vector_behavioral_use.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_class.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_component.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_composite.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_deployment.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_object.dot
-    │   │   ├── ntm_hidden_gate_vector_structural_package.dot
-    │   │   └── ntm_hidden_gate_vector_structural_profile.dot
-    │   ├── ntm_input_gate_vector
-    │   │   ├── ntm_input_gate_vector_behavioral_activity.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_communication.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_interaction.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_sequence.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_state.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_timing.dot
-    │   │   ├── ntm_input_gate_vector_behavioral_use.dot
-    │   │   ├── ntm_input_gate_vector_structural_class.dot
-    │   │   ├── ntm_input_gate_vector_structural_component.dot
-    │   │   ├── ntm_input_gate_vector_structural_composite.dot
-    │   │   ├── ntm_input_gate_vector_structural_deployment.dot
-    │   │   ├── ntm_input_gate_vector_structural_object.dot
-    │   │   ├── ntm_input_gate_vector_structural_package.dot
-    │   │   └── ntm_input_gate_vector_structural_profile.dot
-    │   ├── ntm_lstm
-    │   │   ├── ntm_lstm_behavioral_activity.dot
-    │   │   ├── ntm_lstm_behavioral_communication.dot
-    │   │   ├── ntm_lstm_behavioral_interaction.dot
-    │   │   ├── ntm_lstm_behavioral_sequence.dot
-    │   │   ├── ntm_lstm_behavioral_state.dot
-    │   │   ├── ntm_lstm_behavioral_timing.dot
-    │   │   ├── ntm_lstm_behavioral_use.dot
-    │   │   ├── ntm_lstm_structural_class.dot
-    │   │   ├── ntm_lstm_structural_component.dot
-    │   │   ├── ntm_lstm_structural_composite.dot
-    │   │   ├── ntm_lstm_structural_deployment.dot
-    │   │   ├── ntm_lstm_structural_object.dot
-    │   │   ├── ntm_lstm_structural_package.dot
-    │   │   └── ntm_lstm_structural_profile.dot
-    │   ├── ntm_output_gate_vector
-    │   │   ├── ntm_output_gate_vector_behavioral_activity.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_communication.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_interaction.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_sequence.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_state.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_timing.dot
-    │   │   ├── ntm_output_gate_vector_behavioral_use.dot
-    │   │   ├── ntm_output_gate_vector_structural_class.dot
-    │   │   ├── ntm_output_gate_vector_structural_component.dot
-    │   │   ├── ntm_output_gate_vector_structural_composite.dot
-    │   │   ├── ntm_output_gate_vector_structural_deployment.dot
-    │   │   ├── ntm_output_gate_vector_structural_object.dot
-    │   │   ├── ntm_output_gate_vector_structural_package.dot
-    │   │   └── ntm_output_gate_vector_structural_profile.dot
-    │   └── ntm_state_gate_vector
-    │       ├── ntm_state_gate_vector_behavioral_activity.dot
-    │       ├── ntm_state_gate_vector_behavioral_communication.dot
-    │       ├── ntm_state_gate_vector_behavioral_interaction.dot
-    │       ├── ntm_state_gate_vector_behavioral_sequence.dot
-    │       ├── ntm_state_gate_vector_behavioral_state.dot
-    │       ├── ntm_state_gate_vector_behavioral_timing.dot
-    │       ├── ntm_state_gate_vector_behavioral_use.dot
-    │       ├── ntm_state_gate_vector_structural_class.dot
-    │       ├── ntm_state_gate_vector_structural_component.dot
-    │       ├── ntm_state_gate_vector_structural_composite.dot
-    │       ├── ntm_state_gate_vector_structural_deployment.dot
-    │       ├── ntm_state_gate_vector_structural_object.dot
-    │       ├── ntm_state_gate_vector_structural_package.dot
-    │       └── ntm_state_gate_vector_structural_profile.dot
+    │   └── ntm_lstm
+    │       ├── ntm_lstm_behavioral_activity.dot
+    │       ├── ntm_lstm_behavioral_communication.dot
+    │       ├── ntm_lstm_behavioral_interaction.dot
+    │       ├── ntm_lstm_behavioral_sequence.dot
+    │       ├── ntm_lstm_behavioral_state.dot
+    │       ├── ntm_lstm_behavioral_timing.dot
+    │       ├── ntm_lstm_behavioral_use.dot
+    │       ├── ntm_lstm_structural_class.dot
+    │       ├── ntm_lstm_structural_component.dot
+    │       ├── ntm_lstm_structural_composite.dot
+    │       ├── ntm_lstm_structural_deployment.dot
+    │       ├── ntm_lstm_structural_object.dot
+    │       ├── ntm_lstm_structural_package.dot
+    │       └── ntm_lstm_structural_profile.dot
     └── top
         ├── ntm_controller
         │   ├── ntm_controller_behavioral_activity.dot
@@ -2545,4 +2455,4 @@ library
             ├── ntm_encoder_structural_package.dot
             └── ntm_encoder_structural_profile.dot
 
-221 directories, 2324 files
+215 directories, 2240 files

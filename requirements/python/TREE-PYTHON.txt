@@ -266,17 +266,11 @@ library
     │   ├── ntm_queries_vector.py
     │   └── ntm_values_vector.py
     ├── lstm
-    │   ├── ntm_activation_gate_vector.py
-    │   ├── ntm_forget_gate_vector.py
-    │   ├── ntm_hidden_gate_vector.py
-    │   ├── ntm_input_gate_vector.py
-    │   ├── ntm_lstm.py
-    │   ├── ntm_output_gate_vector.py
-    │   └── ntm_state_gate_vector.py
+    │   └── ntm_lstm.py
     ├── ntm_transformer_controller.py
     └── top
         ├── ntm_controller.py
         ├── ntm_decoder.py
         └── ntm_encoder.py
 
-59 directories, 220 files
+59 directories, 214 files

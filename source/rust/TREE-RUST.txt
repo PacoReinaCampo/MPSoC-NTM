@@ -281,17 +281,11 @@ library
     │   ├── ntm_queries_vector.rs
     │   └── ntm_values_vector.rs
     ├── lstm
-    │   ├── ntm_activation_gate_vector.rs
-    │   ├── ntm_forget_gate_vector.rs
-    │   ├── ntm_hidden_gate_vector.rs
-    │   ├── ntm_input_gate_vector.rs
-    │   ├── ntm_lstm.rs
-    │   ├── ntm_output_gate_vector.rs
-    │   └── ntm_state_gate_vector.rs
+    │   └── ntm_lstm.rs
     ├── ntm_transformer_controller.rs
     └── top
         ├── ntm_controller.rs
         ├── ntm_decoder.rs
         └── ntm_encoder.rs
 
-65 directories, 229 files
+65 directories, 223 files

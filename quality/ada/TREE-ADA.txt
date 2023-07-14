@@ -176,16 +176,10 @@ library
     │   ├── ntm_queries_vector.adb
     │   └── ntm_values_vector.adb
     ├── lstm
-    │   ├── ntm_activation_gate_vector.adb
-    │   ├── ntm_forget_gate_vector.adb
-    │   ├── ntm_hidden_gate_vector.adb
-    │   ├── ntm_input_gate_vector.adb
-    │   ├── ntm_lstm.adb
-    │   ├── ntm_output_gate_vector.adb
-    │   └── ntm_state_gate_vector.adb
+    │   └── ntm_lstm.adb
     └── top
         ├── ntm_controller.adb
         ├── ntm_decoder.adb
         └── ntm_encoder.adb
 
-59 directories, 129 files
+59 directories, 123 files

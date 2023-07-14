@@ -87,13 +87,7 @@
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_keys_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_queries_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_values_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_activation_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_forget_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_hidden_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_input_gate_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_lstm.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_output_gate_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/standard/accelerator_state_gate_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_controller.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_decoder.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_encoder.vhd

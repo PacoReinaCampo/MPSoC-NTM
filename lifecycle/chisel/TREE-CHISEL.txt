@@ -177,16 +177,10 @@ library
     │   ├── ntm_queries_vector.scala
     │   └── ntm_values_vector.scala
     ├── lstm
-    │   ├── ntm_activation_gate_vector.scala
-    │   ├── ntm_forget_gate_vector.scala
-    │   ├── ntm_hidden_gate_vector.scala
-    │   ├── ntm_input_gate_vector.scala
-    │   ├── ntm_lstm.scala
-    │   ├── ntm_output_gate_vector.scala
-    │   └── ntm_state_gate_vector.scala
+    │   └── ntm_lstm.scala
     └── top
         ├── ntm_controller.scala
         ├── ntm_decoder.scala
         └── ntm_encoder.scala
 
-59 directories, 130 files
+59 directories, 124 files

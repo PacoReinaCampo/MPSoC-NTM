@@ -601,27 +601,9 @@ library
     │   ├── ntm_values_vector_design.cpp
     │   └── ntm_values_vector_testbench.cpp
     ├── lstm
-    │   ├── ntm_activation_gate_vector.cpp
-    │   ├── ntm_activation_gate_vector_design.cpp
-    │   ├── ntm_activation_gate_vector_testbench.cpp
-    │   ├── ntm_forget_gate_vector.cpp
-    │   ├── ntm_forget_gate_vector_design.cpp
-    │   ├── ntm_forget_gate_vector_testbench.cpp
-    │   ├── ntm_hidden_gate_vector.cpp
-    │   ├── ntm_hidden_gate_vector_design.cpp
-    │   ├── ntm_hidden_gate_vector_testbench.cpp
-    │   ├── ntm_input_gate_vector.cpp
-    │   ├── ntm_input_gate_vector_design.cpp
-    │   ├── ntm_input_gate_vector_testbench.cpp
     │   ├── ntm_lstm.cpp
     │   ├── ntm_lstm_design.cpp
-    │   ├── ntm_lstm_testbench.cpp
-    │   ├── ntm_output_gate_vector.cpp
-    │   ├── ntm_output_gate_vector_design.cpp
-    │   ├── ntm_output_gate_vector_testbench.cpp
-    │   ├── ntm_state_gate_vector.cpp
-    │   ├── ntm_state_gate_vector_design.cpp
-    │   └── ntm_state_gate_vector_testbench.cpp
+    │   └── ntm_lstm_testbench.cpp
     ├── ntm_transformer_controller.cpp
     └── top
         ├── ntm_controller.cpp
@@ -634,4 +616,4 @@ library
         ├── ntm_encoder_design.cpp
         └── ntm_encoder_testbench.cpp
 
-75 directories, 559 files
+75 directories, 541 files

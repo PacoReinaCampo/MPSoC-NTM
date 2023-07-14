@@ -225,16 +225,10 @@ application
     │   ├── ntm_queries_vector_test.m
     │   └── ntm_values_vector_test.m
     ├── lstm
-    │   ├── ntm_activation_gate_vector_test.m
-    │   ├── ntm_forget_gate_vector_test.m
-    │   ├── ntm_hidden_gate_vector_test.m
-    │   ├── ntm_input_gate_vector_test.m
-    │   ├── ntm_lstm_test.m
-    │   ├── ntm_output_gate_vector_test.m
-    │   └── ntm_state_gate_vector_test.m
+    │   └── ntm_lstm_test.m
     └── top
         ├── ntm_controller_test.m
         ├── ntm_decoder_test.m
         └── ntm_encoder_test.m
 
-59 directories, 178 files
+59 directories, 172 files

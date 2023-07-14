@@ -87,13 +87,7 @@
 ../../../../../../../model/vhdl/code/transformer/inputs/model_keys_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_queries_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_values_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_activation_gate_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_forget_gate_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_hidden_gate_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_input_gate_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/lstm/standard/model_lstm.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_output_gate_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_state_gate_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_controller.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_decoder.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_encoder.vhd
