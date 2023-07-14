@@ -183,10 +183,15 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
   -- OUTPUT_L_STATE, CLEAN_OUT_L_STATE
 
   ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  ------------------------------------------------------------------------------
   -- Types
   ------------------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   type controller_w_in_fsm is (
     STARTER_W_IN_STATE,                 -- STEP 0
     INPUT_W_IN_L_STATE,                 -- STEP 1
@@ -271,6 +276,60 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
     INPUT_H_IN_L_STATE                  -- STEP 2
     );
 
+  -- Ops
+  type controller_first_matrix_vector_convolution_fsm is (
+    STARTER_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 0
+    INPUT_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 1
+    INPUT_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 2
+    CLEAN_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 3
+    CLEAN_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE   -- STEP 4
+    );
+
+  type controller_tensor_matrix_convolution_fsm is (
+    STARTER_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 0
+    INPUT_I_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 1
+    INPUT_J_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 2
+    INPUT_K_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 3
+    CLEAN_I_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 4
+    CLEAN_J_TENSOR_MATRIX_CONVOLUTION_STATE,  -- STEP 5
+    CLEAN_K_TENSOR_MATRIX_CONVOLUTION_STATE   -- STEP 6
+    );
+
+  type controller_vector_summation_fsm is (
+    STARTER_VECTOR_SUMMATION_STATE,       -- STEP 0
+    INPUT_LENGTH_VECTOR_SUMMATION_STATE,  -- STEP 1
+    INPUT_VECTOR_SUMMATION_STATE,         -- STEP 2
+    CLEAN_LENGTH_VECTOR_SUMMATION_STATE,  -- STEP 3
+    CLEAN_VECTOR_SUMMATION_STATE          -- STEP 4
+    );
+
+  type controller_first_vector_float_adder_fsm is (
+    STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE,    -- STEP 1
+    CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE     -- STEP 2
+    );
+
+  type controller_second_matrix_vector_convolution_fsm is (
+    STARTER_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 0
+    INPUT_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 1
+    INPUT_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 2
+    CLEAN_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE,  -- STEP 3
+    CLEAN_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE   -- STEP 4
+    );
+
+  type controller_second_vector_float_adder_fsm is (
+    STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
+    INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE,    -- STEP 2
+    CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE     -- STEP 4
+    );
+
+  type controller_vector_logistic_fsm is (
+    STARTER_VECTOR_LOGISTIC_STATE,      -- STEP 0
+    INPUT_VECTOR_LOGISTIC_STATE,        -- STEP 2
+    CLEAN_VECTOR_LOGISTIC_STATE         -- STEP 4
+    );
+
+  -- Output
   type controller_h_out_fsm is (
     STARTER_H_OUT_STATE,                -- STEP 0
     CLEAN_H_OUT_L_STATE,                -- STEP 1
@@ -278,14 +337,11 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
     );
 
   ------------------------------------------------------------------------------
-  -- Constants
-  ------------------------------------------------------------------------------
-
-  ------------------------------------------------------------------------------
   -- Signals
   ------------------------------------------------------------------------------
 
   -- Finite State Machine
+  -- Input
   signal controller_w_in_fsm_int : controller_w_in_fsm;
   signal controller_k_in_fsm_int : controller_k_in_fsm;
   signal controller_u_in_fsm_int : controller_u_in_fsm;
@@ -299,9 +355,20 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
   signal controller_rho_in_fsm_int : controller_rho_in_fsm;
   signal controller_h_in_fsm_int   : controller_h_in_fsm;
 
+  -- Ops
+  signal controller_first_matrix_vector_convolution_fsm_int  : controller_first_matrix_vector_convolution_fsm;
+  signal controller_tensor_matrix_convolution_fsm_int        : controller_tensor_matrix_convolution_fsm;
+  signal controller_vector_summation_fsm_int                 : controller_vector_summation_fsm;
+  signal controller_first_vector_float_adder_fsm_int         : controller_first_vector_float_adder_fsm;
+  signal controller_second_matrix_vector_convolution_fsm_int : controller_second_matrix_vector_convolution_fsm;
+  signal controller_second_vector_float_adder_fsm_int        : controller_second_vector_float_adder_fsm;
+  signal controller_vector_logistic_fsm_int                  : controller_vector_logistic_fsm;
+
+  -- Output
   signal controller_h_out_fsm_int : controller_h_out_fsm;
 
   -- Buffer
+  -- Input
   signal matrix_w_in_int : matrix_buffer;
   signal tensor_k_in_int : tensor_buffer;
   signal matrix_u_in_int : matrix_buffer;
@@ -315,9 +382,16 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
   signal matrix_rho_in_int : matrix_buffer;
   signal vector_h_in_int   : vector_buffer;
 
+  -- Ops
+  signal tensor_operation_int : tensor_buffer;
+  signal matrix_operation_int : matrix_buffer;
+  signal vector_operation_int : vector_buffer;
+
+  -- Output
   signal vector_h_out_int : vector_buffer;
 
-  -- Control Internal
+  -- Control Internal - Index
+  -- Input
   signal index_l_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_x_w_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -349,8 +423,26 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
 
   signal index_l_h_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Ops
+  signal index_i_matrix_vector_convolution_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_matrix_vector_convolution_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_i_tensor_matrix_convolution_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_tensor_matrix_convolution_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_tensor_matrix_convolution_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_length_vector_summation_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_summation_loop        : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_vector_float_adder_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal index_vector_logistic_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- Output
   signal index_l_h_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- Control Internal - Enable
+  -- Input
   signal data_w_in_enable_int : std_logic;
   signal data_k_in_enable_int : std_logic;
   signal data_u_in_enable_int : std_logic;
@@ -364,437 +456,115 @@ architecture accelerator_lstm_architecture of accelerator_lstm is
   signal data_rho_in_enable_int : std_logic;
   signal data_h_in_enable_int   : std_logic;
 
-  -- ACTIVATION GATE VECTOR
+  -- Ops
+  signal data_first_matrix_vector_convolution_enable_int  : std_logic;
+  signal data_tensor_matrix_convolution_enable_int        : std_logic;
+  signal data_vector_summation_enable_int                 : std_logic;
+  signal data_first_vector_float_adder_enable_int         : std_logic;
+  signal data_second_matrix_vector_convolution_enable_int : std_logic;
+  signal data_second_vector_float_adder_enable_int        : std_logic;
+  signal data_vector_logistic_enable_int                  : std_logic;
+
+  -- VECTOR ADDER
   -- CONTROL
-  signal start_activation_gate_vector : std_logic;
-  signal ready_activation_gate_vector : std_logic;
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
 
-  signal w_in_l_enable_activation_gate_vector : std_logic;
-  signal w_in_x_enable_activation_gate_vector : std_logic;
+  signal operation_vector_float_adder : std_logic;
 
-  signal w_out_l_enable_activation_gate_vector : std_logic;
-  signal w_out_x_enable_activation_gate_vector : std_logic;
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
 
-  signal k_in_i_enable_activation_gate_vector : std_logic;
-  signal k_in_l_enable_activation_gate_vector : std_logic;
-  signal k_in_k_enable_activation_gate_vector : std_logic;
-
-  signal k_out_i_enable_activation_gate_vector : std_logic;
-  signal k_out_l_enable_activation_gate_vector : std_logic;
-  signal k_out_k_enable_activation_gate_vector : std_logic;
-
-  signal d_in_i_enable_activation_gate_vector : std_logic;
-  signal d_in_l_enable_activation_gate_vector : std_logic;
-  signal d_in_m_enable_activation_gate_vector : std_logic;
-
-  signal d_out_i_enable_activation_gate_vector : std_logic;
-  signal d_out_l_enable_activation_gate_vector : std_logic;
-  signal d_out_m_enable_activation_gate_vector : std_logic;
-
-  signal u_in_l_enable_activation_gate_vector : std_logic;
-  signal u_in_p_enable_activation_gate_vector : std_logic;
-
-  signal u_out_l_enable_activation_gate_vector : std_logic;
-  signal u_out_p_enable_activation_gate_vector : std_logic;
-
-  signal v_in_l_enable_activation_gate_vector : std_logic;
-  signal v_in_S_enable_activation_gate_vector : std_logic;
-
-  signal v_out_l_enable_activation_gate_vector : std_logic;
-  signal v_out_s_enable_activation_gate_vector : std_logic;
-
-  signal b_in_enable_activation_gate_vector : std_logic;
-
-  signal b_out_enable_activation_gate_vector : std_logic;
-
-  signal x_in_enable_activation_gate_vector : std_logic;
-
-  signal x_out_enable_activation_gate_vector : std_logic;
-
-  signal r_in_i_enable_activation_gate_vector : std_logic;
-  signal r_in_k_enable_activation_gate_vector : std_logic;
-
-  signal r_out_i_enable_activation_gate_vector : std_logic;
-  signal r_out_k_enable_activation_gate_vector : std_logic;
-
-  signal rho_in_i_enable_activation_gate_vector : std_logic;
-  signal rho_in_m_enable_activation_gate_vector : std_logic;
-
-  signal rho_out_i_enable_activation_gate_vector : std_logic;
-  signal rho_out_m_enable_activation_gate_vector : std_logic;
-
-  signal xi_in_enable_activation_gate_vector : std_logic;
-
-  signal xi_out_enable_activation_gate_vector : std_logic;
-
-  signal h_in_enable_activation_gate_vector : std_logic;
-
-  signal h_out_enable_activation_gate_vector : std_logic;
-
-  signal a_out_enable_activation_gate_vector : std_logic;
+  signal data_out_enable_vector_float_adder : std_logic;
 
   -- DATA
-  signal size_x_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_activation_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal d_in_activation_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal v_in_activation_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal b_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal a_out_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- INTPUT GATE VECTOR
+  -- VECTOR SUMMATION
   -- CONTROL
-  signal start_input_gate_vector : std_logic;
-  signal ready_input_gate_vector : std_logic;
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
 
-  signal w_in_l_enable_input_gate_vector : std_logic;
-  signal w_in_x_enable_input_gate_vector : std_logic;
+  signal data_in_length_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation        : std_logic;
 
-  signal w_out_l_enable_input_gate_vector : std_logic;
-  signal w_out_x_enable_input_gate_vector : std_logic;
+  signal data_enable_length_vector_summation : std_logic;
+  signal data_enable_vector_summation        : std_logic;
 
-  signal k_in_i_enable_input_gate_vector : std_logic;
-  signal k_in_l_enable_input_gate_vector : std_logic;
-  signal k_in_k_enable_input_gate_vector : std_logic;
-
-  signal k_out_i_enable_input_gate_vector : std_logic;
-  signal k_out_l_enable_input_gate_vector : std_logic;
-  signal k_out_k_enable_input_gate_vector : std_logic;
-
-  signal d_in_i_enable_input_gate_vector : std_logic;
-  signal d_in_l_enable_input_gate_vector : std_logic;
-  signal d_in_m_enable_input_gate_vector : std_logic;
-
-  signal d_out_i_enable_input_gate_vector : std_logic;
-  signal d_out_l_enable_input_gate_vector : std_logic;
-  signal d_out_m_enable_input_gate_vector : std_logic;
-
-  signal u_in_l_enable_input_gate_vector : std_logic;
-  signal u_in_p_enable_input_gate_vector : std_logic;
-
-  signal u_out_l_enable_input_gate_vector : std_logic;
-  signal u_out_p_enable_input_gate_vector : std_logic;
-
-  signal v_in_l_enable_input_gate_vector : std_logic;
-  signal v_in_s_enable_input_gate_vector : std_logic;
-
-  signal v_out_l_enable_input_gate_vector : std_logic;
-  signal v_out_s_enable_input_gate_vector : std_logic;
-
-  signal b_in_enable_input_gate_vector : std_logic;
-
-  signal b_out_enable_input_gate_vector : std_logic;
-
-  signal x_in_enable_input_gate_vector : std_logic;
-
-  signal x_out_enable_input_gate_vector : std_logic;
-
-  signal r_in_i_enable_input_gate_vector : std_logic;
-  signal r_in_k_enable_input_gate_vector : std_logic;
-
-  signal r_out_i_enable_input_gate_vector : std_logic;
-  signal r_out_k_enable_input_gate_vector : std_logic;
-
-  signal rho_in_i_enable_input_gate_vector : std_logic;
-  signal rho_in_m_enable_input_gate_vector : std_logic;
-
-  signal rho_out_i_enable_input_gate_vector : std_logic;
-  signal rho_out_m_enable_input_gate_vector : std_logic;
-
-  signal xi_in_enable_input_gate_vector : std_logic;
-
-  signal xi_out_enable_input_gate_vector : std_logic;
-
-  signal h_in_enable_input_gate_vector : std_logic;
-
-  signal h_out_enable_input_gate_vector : std_logic;
-
-  signal i_out_enable_input_gate_vector : std_logic;
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal size_x_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_input_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal d_in_input_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal v_in_input_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- OUTPUT GATE VECTOR
+  -- TENSOR MATRIX CONVOLUTION
   -- CONTROL
-  signal start_output_gate_vector : std_logic;
-  signal ready_output_gate_vector : std_logic;
+  signal start_tensor_matrix_convolution : std_logic;
+  signal ready_tensor_matrix_convolution : std_logic;
 
-  signal w_in_l_enable_output_gate_vector : std_logic;
-  signal w_in_x_enable_output_gate_vector : std_logic;
+  signal data_a_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_a_in_k_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_b_in_j_enable_tensor_matrix_convolution : std_logic;
 
-  signal w_out_l_enable_output_gate_vector : std_logic;
-  signal w_out_x_enable_output_gate_vector : std_logic;
+  signal data_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_j_enable_tensor_matrix_convolution : std_logic;
+  signal data_k_enable_tensor_matrix_convolution : std_logic;
 
-  signal k_in_i_enable_output_gate_vector : std_logic;
-  signal k_in_l_enable_output_gate_vector : std_logic;
-  signal k_in_k_enable_output_gate_vector : std_logic;
-
-  signal k_out_i_enable_output_gate_vector : std_logic;
-  signal k_out_l_enable_output_gate_vector : std_logic;
-  signal k_out_k_enable_output_gate_vector : std_logic;
-
-  signal d_in_i_enable_output_gate_vector : std_logic;
-  signal d_in_l_enable_output_gate_vector : std_logic;
-  signal d_in_m_enable_output_gate_vector : std_logic;
-
-  signal d_out_i_enable_output_gate_vector : std_logic;
-  signal d_out_l_enable_output_gate_vector : std_logic;
-  signal d_out_m_enable_output_gate_vector : std_logic;
-
-  signal u_in_l_enable_output_gate_vector : std_logic;
-  signal u_in_p_enable_output_gate_vector : std_logic;
-
-  signal u_out_l_enable_output_gate_vector : std_logic;
-  signal u_out_p_enable_output_gate_vector : std_logic;
-
-  signal v_in_l_enable_output_gate_vector : std_logic;
-  signal v_in_s_enable_output_gate_vector : std_logic;
-
-  signal v_out_l_enable_output_gate_vector : std_logic;
-  signal v_out_s_enable_output_gate_vector : std_logic;
-
-  signal b_in_enable_output_gate_vector : std_logic;
-
-  signal b_out_enable_output_gate_vector : std_logic;
-
-  signal x_in_enable_output_gate_vector : std_logic;
-
-  signal x_out_enable_output_gate_vector : std_logic;
-
-  signal r_in_i_enable_output_gate_vector : std_logic;
-  signal r_in_k_enable_output_gate_vector : std_logic;
-
-  signal r_out_i_enable_output_gate_vector : std_logic;
-  signal r_out_k_enable_output_gate_vector : std_logic;
-
-  signal rho_in_i_enable_output_gate_vector : std_logic;
-  signal rho_in_m_enable_output_gate_vector : std_logic;
-
-  signal rho_out_i_enable_output_gate_vector : std_logic;
-  signal rho_out_m_enable_output_gate_vector : std_logic;
-
-  signal xi_in_enable_output_gate_vector : std_logic;
-
-  signal xi_out_enable_output_gate_vector : std_logic;
-
-  signal h_in_enable_output_gate_vector : std_logic;
-
-  signal h_out_enable_output_gate_vector : std_logic;
-
-  signal o_out_enable_output_gate_vector : std_logic;
+  signal data_out_i_enable_tensor_matrix_convolution : std_logic;
+  signal data_out_j_enable_tensor_matrix_convolution : std_logic;
 
   -- DATA
-  signal size_x_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_output_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal d_in_output_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal v_in_output_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal b_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- FORGET GATE VECTOR
+  -- MATRIX VECTOR CONVOLUTION
   -- CONTROL
-  signal start_forget_gate_vector : std_logic;
-  signal ready_forget_gate_vector : std_logic;
+  signal start_matrix_vector_convolution : std_logic;
+  signal ready_matrix_vector_convolution : std_logic;
 
-  signal w_in_l_enable_forget_gate_vector : std_logic;
-  signal w_in_x_enable_forget_gate_vector : std_logic;
+  signal data_a_in_i_enable_matrix_vector_convolution : std_logic;
+  signal data_a_in_j_enable_matrix_vector_convolution : std_logic;
+  signal data_b_in_enable_matrix_vector_convolution   : std_logic;
 
-  signal w_out_l_enable_forget_gate_vector : std_logic;
-  signal w_out_x_enable_forget_gate_vector : std_logic;
+  signal data_i_enable_matrix_vector_convolution : std_logic;
+  signal data_j_enable_matrix_vector_convolution : std_logic;
 
-  signal k_in_i_enable_forget_gate_vector : std_logic;
-  signal k_in_l_enable_forget_gate_vector : std_logic;
-  signal k_in_k_enable_forget_gate_vector : std_logic;
-
-  signal k_out_i_enable_forget_gate_vector : std_logic;
-  signal k_out_l_enable_forget_gate_vector : std_logic;
-  signal k_out_k_enable_forget_gate_vector : std_logic;
-
-  signal d_in_i_enable_forget_gate_vector : std_logic;
-  signal d_in_l_enable_forget_gate_vector : std_logic;
-  signal d_in_m_enable_forget_gate_vector : std_logic;
-
-  signal d_out_i_enable_forget_gate_vector : std_logic;
-  signal d_out_l_enable_forget_gate_vector : std_logic;
-  signal d_out_m_enable_forget_gate_vector : std_logic;
-
-  signal u_in_l_enable_forget_gate_vector : std_logic;
-  signal u_in_p_enable_forget_gate_vector : std_logic;
-
-  signal u_out_l_enable_forget_gate_vector : std_logic;
-  signal u_out_p_enable_forget_gate_vector : std_logic;
-
-  signal v_in_l_enable_forget_gate_vector : std_logic;
-  signal v_in_s_enable_forget_gate_vector : std_logic;
-
-  signal v_out_l_enable_forget_gate_vector : std_logic;
-  signal v_out_s_enable_forget_gate_vector : std_logic;
-
-  signal b_in_enable_forget_gate_vector : std_logic;
-
-  signal b_out_enable_forget_gate_vector : std_logic;
-
-  signal x_in_enable_forget_gate_vector : std_logic;
-
-  signal x_out_enable_forget_gate_vector : std_logic;
-
-  signal r_in_i_enable_forget_gate_vector : std_logic;
-  signal r_in_k_enable_forget_gate_vector : std_logic;
-
-  signal r_out_i_enable_forget_gate_vector : std_logic;
-  signal r_out_k_enable_forget_gate_vector : std_logic;
-
-  signal rho_in_i_enable_forget_gate_vector : std_logic;
-  signal rho_in_m_enable_forget_gate_vector : std_logic;
-
-  signal rho_out_i_enable_forget_gate_vector : std_logic;
-  signal rho_out_m_enable_forget_gate_vector : std_logic;
-
-  signal xi_in_enable_forget_gate_vector : std_logic;
-
-  signal xi_out_enable_forget_gate_vector : std_logic;
-
-  signal h_in_enable_forget_gate_vector : std_logic;
-
-  signal h_out_enable_forget_gate_vector : std_logic;
-
-  signal f_out_enable_forget_gate_vector : std_logic;
+  signal data_out_enable_matrix_vector_convolution : std_logic;
 
   -- DATA
-  signal size_x_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_s_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_m_in_forget_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_matrix_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal d_in_forget_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rho_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal v_in_forget_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal xi_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- STATE GATE VECTOR
+  -- VECTOR LOGISTIC
   -- CONTROL
-  signal start_state_gate_vector : std_logic;
-  signal ready_state_gate_vector : std_logic;
+  signal start_vector_logistic : std_logic;
+  signal ready_vector_logistic : std_logic;
 
-  signal i_in_enable_state_gate_vector : std_logic;
-  signal f_in_enable_state_gate_vector : std_logic;
-  signal a_in_enable_state_gate_vector : std_logic;
+  signal data_in_enable_vector_logistic : std_logic;
 
-  signal i_out_enable_state_gate_vector : std_logic;
-  signal f_out_enable_state_gate_vector : std_logic;
-  signal a_out_enable_state_gate_vector : std_logic;
-
-  signal s_in_enable_state_gate_vector : std_logic;
-
-  signal s_out_enable_state_gate_vector : std_logic;
+  signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal size_l_in_state_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal a_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- HIDDEN GATE VECTOR
-  -- CONTROL
-  signal start_hidden_gate_vector : std_logic;
-  signal ready_hidden_gate_vector : std_logic;
-
-  signal s_in_enable_hidden_gate_vector : std_logic;
-  signal o_in_enable_hidden_gate_vector : std_logic;
-
-  signal s_out_enable_hidden_gate_vector : std_logic;
-  signal o_out_enable_hidden_gate_vector : std_logic;
-
-  signal h_out_enable_hidden_gate_vector : std_logic;
-
-  -- DATA
-  signal size_l_in_hidden_gate_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal s_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -802,7 +572,9 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
-  -- CONTROL
+  -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(l))
+
+  -- INPUT CONTROL
   w_in_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -1371,7 +1143,7 @@ begin
             tensor_d_in_int(to_integer(unsigned(index_i_d_in_loop)), to_integer(unsigned(index_l_d_in_loop)), to_integer(unsigned(index_m_d_in_loop))) <= D_IN;
 
             -- FSM Control
-            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_m_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
               controller_d_in_fsm_int <= CLEAN_D_IN_I_STATE;
             else
               controller_d_in_fsm_int <= CLEAN_D_IN_L_STATE;
@@ -1389,9 +1161,9 @@ begin
             tensor_d_in_int(to_integer(unsigned(index_i_d_in_loop)), to_integer(unsigned(index_l_d_in_loop)), to_integer(unsigned(index_m_d_in_loop))) <= D_IN;
 
             -- FSM Control
-            if ((unsigned(index_l_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_d_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            if ((unsigned(index_l_d_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL))) then
               controller_d_in_fsm_int <= CLEAN_D_IN_I_STATE;
-            elsif (unsigned(index_m_d_in_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            elsif (unsigned(index_m_d_in_loop) = unsigned(SIZE_M_IN)-unsigned(ONE_CONTROL)) then
               controller_d_in_fsm_int <= CLEAN_D_IN_L_STATE;
             else
               controller_d_in_fsm_int <= CLEAN_D_IN_M_STATE;
@@ -1998,6 +1770,858 @@ begin
     end if;
   end process;
 
+  -- OPS CONTROL
+  first_matrix_vector_convolution_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_matrix_vector_convolution <= '0';
+      data_a_in_j_enable_matrix_vector_convolution <= '0';
+      data_b_in_enable_matrix_vector_convolution   <= '0';
+
+      data_first_matrix_vector_convolution_enable_int <= '0';
+
+      index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+      index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_first_matrix_vector_convolution_fsm_int is
+        when STARTER_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_matrix_vector_convolution <= '0';
+          data_a_in_j_enable_matrix_vector_convolution <= '0';
+          data_b_in_enable_matrix_vector_convolution   <= '0';
+
+          data_first_matrix_vector_convolution_enable_int <= '0';
+
+          if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_a_i_in_matrix_vector_convolution <= SIZE_L_IN;
+            size_a_j_in_matrix_vector_convolution <= SIZE_X_IN;
+            size_b_in_matrix_vector_convolution   <= SIZE_L_IN;
+
+            -- Control Internal
+            index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+            index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_first_matrix_vector_convolution_fsm_int <= INPUT_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+          end if;
+
+        when INPUT_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_matrix_vector_convolution <= matrix_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop)), to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+          data_b_in_matrix_vector_convolution <= vector_operation_int(to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_vector_convolution_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_vector_convolution_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_vector_convolution <= '1';
+          end if;
+
+          data_a_in_i_enable_matrix_vector_convolution <= '1';
+          data_a_in_j_enable_matrix_vector_convolution <= '1';
+          data_b_in_enable_matrix_vector_convolution   <= '1';
+
+          -- FSM Control
+          controller_first_matrix_vector_convolution_fsm_int <= CLEAN_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+
+        when INPUT_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_a_in_matrix_vector_convolution <= matrix_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop)), to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+          data_b_in_matrix_vector_convolution <= vector_operation_int(to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+
+          -- Control Internal
+          data_a_in_j_enable_matrix_vector_convolution <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL)) then
+            controller_first_matrix_vector_convolution_fsm_int <= CLEAN_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+          else
+            controller_first_matrix_vector_convolution_fsm_int <= CLEAN_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+          end if;
+
+        when CLEAN_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 7
+
+          if (data_i_enable_matrix_vector_convolution = '1' and data_j_enable_matrix_vector_convolution = '1') then
+            if ((unsigned(index_i_matrix_vector_convolution_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop))) <= data_out_matrix_vector_convolution;
+
+              -- Control Internal
+              data_first_matrix_vector_convolution_enable_int <= '1';
+
+              index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+              index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_first_matrix_vector_convolution_fsm_int <= STARTER_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+            elsif ((unsigned(index_i_matrix_vector_convolution_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop))) <= data_out_matrix_vector_convolution;
+
+              -- Control Internal
+              index_i_matrix_vector_convolution_loop <= std_logic_vector(unsigned(index_i_matrix_vector_convolution_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_first_matrix_vector_convolution_fsm_int <= INPUT_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_vector_convolution <= '0';
+
+            data_a_in_i_enable_matrix_vector_convolution <= '0';
+            data_a_in_j_enable_matrix_vector_convolution <= '0';
+            data_b_in_enable_matrix_vector_convolution   <= '0';
+          end if;
+
+        when CLEAN_J_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 8
+
+          if (data_i_enable_matrix_vector_convolution = '1') then
+            if (unsigned(index_j_matrix_vector_convolution_loop) < unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Internal
+              index_j_matrix_vector_convolution_loop <= std_logic_vector(unsigned(index_j_matrix_vector_convolution_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_first_matrix_vector_convolution_fsm_int <= INPUT_I_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_vector_convolution <= '0';
+
+            data_a_in_i_enable_matrix_vector_convolution <= '0';
+            data_a_in_j_enable_matrix_vector_convolution <= '0';
+            data_b_in_enable_matrix_vector_convolution   <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_first_matrix_vector_convolution_fsm_int <= STARTER_FIRST_MATRIX_VECTOR_CONVOLUTION_STATE;
+      end case;
+    end if;
+  end process;
+
+  tensor_matrix_convolution_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_tensor_matrix_convolution <= '0';
+      data_a_in_j_enable_tensor_matrix_convolution <= '0';
+      data_a_in_k_enable_tensor_matrix_convolution <= '0';
+      data_b_in_i_enable_tensor_matrix_convolution <= '0';
+      data_b_in_j_enable_tensor_matrix_convolution <= '0';
+
+      data_tensor_matrix_convolution_enable_int <= '0';
+
+      index_i_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+      index_j_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+      index_k_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_tensor_matrix_convolution_fsm_int is
+        when STARTER_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_tensor_matrix_convolution <= '0';
+          data_a_in_j_enable_tensor_matrix_convolution <= '0';
+          data_a_in_k_enable_tensor_matrix_convolution <= '0';
+          data_b_in_i_enable_tensor_matrix_convolution <= '0';
+          data_b_in_j_enable_tensor_matrix_convolution <= '0';
+
+          data_tensor_matrix_convolution_enable_int <= '0';
+
+          if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_a_i_in_tensor_matrix_convolution <= SIZE_R_IN;
+            size_a_j_in_tensor_matrix_convolution <= SIZE_L_IN;
+            size_a_k_in_tensor_matrix_convolution <= SIZE_W_IN;
+            size_b_i_in_tensor_matrix_convolution <= SIZE_R_IN;
+            size_b_j_in_tensor_matrix_convolution <= SIZE_L_IN;
+
+            -- Control Internal
+            index_i_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+            index_j_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+            index_k_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_tensor_matrix_convolution_fsm_int <= INPUT_I_TENSOR_MATRIX_CONVOLUTION_STATE;
+          end if;
+
+        when INPUT_I_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_tensor_matrix_convolution <= tensor_d_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+          data_b_in_tensor_matrix_convolution <= tensor_k_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_tensor_matrix_convolution_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_tensor_matrix_convolution_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(ZERO_CONTROL)) then
+            start_tensor_matrix_convolution <= '1';
+          end if;
+
+          data_a_in_i_enable_tensor_matrix_convolution <= '1';
+          data_a_in_j_enable_tensor_matrix_convolution <= '1';
+          data_a_in_k_enable_tensor_matrix_convolution <= '1';
+          data_b_in_i_enable_tensor_matrix_convolution <= '1';
+          data_b_in_j_enable_tensor_matrix_convolution <= '1';
+
+          -- FSM Control
+          controller_tensor_matrix_convolution_fsm_int <= CLEAN_K_TENSOR_MATRIX_CONVOLUTION_STATE;
+
+        when INPUT_J_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_tensor_matrix_convolution <= tensor_d_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+          data_b_in_tensor_matrix_convolution <= tensor_k_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+
+          data_a_in_j_enable_tensor_matrix_convolution <= '1';
+          data_a_in_k_enable_tensor_matrix_convolution <= '1';
+          data_b_in_j_enable_tensor_matrix_convolution <= '1';
+
+          -- FSM Control
+          if (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_tensor_matrix_convolution_fsm_int <= CLEAN_J_TENSOR_MATRIX_CONVOLUTION_STATE;
+          else
+            controller_tensor_matrix_convolution_fsm_int <= CLEAN_K_TENSOR_MATRIX_CONVOLUTION_STATE;
+          end if;
+
+        when INPUT_K_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_a_in_tensor_matrix_convolution <= tensor_d_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+          data_b_in_tensor_matrix_convolution <= tensor_k_in_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop)));
+
+          -- Control Internal
+          data_a_in_k_enable_tensor_matrix_convolution <= '1';
+
+          -- FSM Control
+          if ((unsigned(index_j_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+            controller_tensor_matrix_convolution_fsm_int <= CLEAN_I_TENSOR_MATRIX_CONVOLUTION_STATE;
+          elsif (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+            controller_tensor_matrix_convolution_fsm_int <= CLEAN_J_TENSOR_MATRIX_CONVOLUTION_STATE;
+          else
+            controller_tensor_matrix_convolution_fsm_int <= CLEAN_K_TENSOR_MATRIX_CONVOLUTION_STATE;
+          end if;
+
+        when CLEAN_I_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 7
+
+          if (data_i_enable_tensor_matrix_convolution = '1' and data_j_enable_tensor_matrix_convolution = '1' and data_k_enable_tensor_matrix_convolution = '1') then
+            if ((unsigned(index_j_tensor_matrix_convolution_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop))) <= data_out_tensor_matrix_convolution;
+
+              -- Control Internal
+              data_tensor_matrix_convolution_enable_int <= '1';
+
+              index_i_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+              index_j_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+              index_k_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_tensor_matrix_convolution_fsm_int <= STARTER_TENSOR_MATRIX_CONVOLUTION_STATE;
+            elsif ((unsigned(index_j_tensor_matrix_convolution_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop))) <= data_out_tensor_matrix_convolution;
+
+              -- Control Internal
+              index_i_tensor_matrix_convolution_loop <= std_logic_vector(unsigned(index_i_tensor_matrix_convolution_loop) + unsigned(ONE_CONTROL));
+              index_j_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+              index_k_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_tensor_matrix_convolution_fsm_int <= INPUT_J_TENSOR_MATRIX_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_tensor_matrix_convolution <= '0';
+
+            data_a_in_i_enable_tensor_matrix_convolution <= '0';
+            data_a_in_j_enable_tensor_matrix_convolution <= '0';
+            data_a_in_k_enable_tensor_matrix_convolution <= '0';
+            data_b_in_i_enable_tensor_matrix_convolution <= '0';
+            data_b_in_j_enable_tensor_matrix_convolution <= '0';
+          end if;
+
+        when CLEAN_J_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 7
+
+          if (data_j_enable_tensor_matrix_convolution = '1' and data_k_enable_tensor_matrix_convolution = '1') then
+            if ((unsigned(index_j_tensor_matrix_convolution_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_tensor_matrix_convolution_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop))) <= data_out_tensor_matrix_convolution;
+
+              -- Control Internal
+              index_j_tensor_matrix_convolution_loop <= std_logic_vector(unsigned(index_j_tensor_matrix_convolution_loop) + unsigned(ONE_CONTROL));
+              index_k_tensor_matrix_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_tensor_matrix_convolution_fsm_int <= INPUT_J_TENSOR_MATRIX_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_tensor_matrix_convolution <= '0';
+
+            data_a_in_i_enable_tensor_matrix_convolution <= '0';
+            data_a_in_j_enable_tensor_matrix_convolution <= '0';
+            data_a_in_k_enable_tensor_matrix_convolution <= '0';
+            data_b_in_i_enable_tensor_matrix_convolution <= '0';
+            data_b_in_j_enable_tensor_matrix_convolution <= '0';
+          end if;
+
+        when CLEAN_K_TENSOR_MATRIX_CONVOLUTION_STATE =>  -- STEP 8
+
+          if (data_k_enable_tensor_matrix_convolution = '1') then
+            if (unsigned(index_k_tensor_matrix_convolution_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              tensor_operation_int(to_integer(unsigned(index_i_tensor_matrix_convolution_loop)), to_integer(unsigned(index_j_tensor_matrix_convolution_loop)), to_integer(unsigned(index_k_tensor_matrix_convolution_loop))) <= data_out_tensor_matrix_convolution;
+
+              -- Control Internal
+              index_k_tensor_matrix_convolution_loop <= std_logic_vector(unsigned(index_k_tensor_matrix_convolution_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_tensor_matrix_convolution_fsm_int <= INPUT_J_TENSOR_MATRIX_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_tensor_matrix_convolution <= '0';
+
+            data_a_in_i_enable_tensor_matrix_convolution <= '0';
+            data_a_in_j_enable_tensor_matrix_convolution <= '0';
+            data_a_in_k_enable_tensor_matrix_convolution <= '0';
+            data_b_in_i_enable_tensor_matrix_convolution <= '0';
+            data_b_in_j_enable_tensor_matrix_convolution <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_tensor_matrix_convolution_fsm_int <= STARTER_TENSOR_MATRIX_CONVOLUTION_STATE;
+      end case;
+    end if;
+  end process;
+
+  vector_summation_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_length_enable_vector_summation <= '0';
+      data_in_enable_vector_summation        <= '0';
+
+      data_vector_summation_enable_int <= '0';
+
+      index_length_vector_summation_loop <= ZERO_CONTROL;
+      index_vector_summation_loop        <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_summation_fsm_int is
+        when STARTER_VECTOR_SUMMATION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_length_enable_vector_summation <= '0';
+          data_in_enable_vector_summation        <= '0';
+
+          data_vector_summation_enable_int <= '0';
+
+          if (data_w_in_enable_int = '1' and data_r_in_enable_int = '1') then
+            -- Data Inputs
+            length_in_vector_summation <= SIZE_L_IN;
+            size_in_vector_summation   <= SIZE_R_IN;
+
+            -- Control Internal
+            index_length_vector_summation_loop <= ZERO_CONTROL;
+            index_vector_summation_loop        <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_summation_fsm_int <= INPUT_LENGTH_VECTOR_SUMMATION_STATE;
+          end if;
+
+        when INPUT_LENGTH_VECTOR_SUMMATION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_vector_summation <= matrix_operation_int(to_integer(unsigned(index_length_vector_summation_loop)), to_integer(unsigned(index_vector_summation_loop)));
+
+          -- Control Internal
+          if (unsigned(index_length_vector_summation_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_summation_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_summation <= '1';
+          end if;
+
+          data_in_length_enable_vector_summation <= '1';
+          data_in_enable_vector_summation        <= '1';
+
+          -- FSM Control
+          controller_vector_summation_fsm_int <= CLEAN_VECTOR_SUMMATION_STATE;
+
+        when INPUT_VECTOR_SUMMATION_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          data_in_vector_summation <= matrix_operation_int(to_integer(unsigned(index_length_vector_summation_loop)), to_integer(unsigned(index_vector_summation_loop)));
+
+          -- Control Internal
+          data_in_enable_vector_summation <= '1';
+
+          -- FSM Control
+          if (unsigned(index_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+            controller_vector_summation_fsm_int <= CLEAN_LENGTH_VECTOR_SUMMATION_STATE;
+          else
+            controller_vector_summation_fsm_int <= CLEAN_VECTOR_SUMMATION_STATE;
+          end if;
+
+        when CLEAN_LENGTH_VECTOR_SUMMATION_STATE =>  -- STEP 7
+
+          if (data_enable_length_vector_summation = '1' and data_enable_vector_summation = '1') then
+            if ((unsigned(index_length_vector_summation_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_length_vector_summation_loop))) <= data_out_vector_summation;
+
+              -- Control Internal
+              data_vector_summation_enable_int <= '1';
+
+              index_length_vector_summation_loop <= ZERO_CONTROL;
+              index_vector_summation_loop        <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
+            elsif ((unsigned(index_length_vector_summation_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_length_vector_summation_loop))) <= data_out_vector_summation;
+
+              -- Control Internal
+              index_length_vector_summation_loop <= std_logic_vector(unsigned(index_length_vector_summation_loop) + unsigned(ONE_CONTROL));
+              index_vector_summation_loop        <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= INPUT_LENGTH_VECTOR_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
+
+            data_in_length_enable_vector_summation <= '0';
+            data_in_enable_vector_summation        <= '0';
+          end if;
+
+        when CLEAN_VECTOR_SUMMATION_STATE =>  -- STEP 8
+
+          if (data_enable_length_vector_summation = '1') then
+            if (unsigned(index_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Internal
+              index_vector_summation_loop <= std_logic_vector(unsigned(index_vector_summation_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_summation_fsm_int <= INPUT_LENGTH_VECTOR_SUMMATION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
+
+            data_in_length_enable_vector_summation <= '0';
+            data_in_enable_vector_summation        <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_summation_fsm_int <= STARTER_VECTOR_SUMMATION_STATE;
+      end case;
+    end if;
+  end process;
+
+  first_vector_float_adder_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_enable_vector_float_adder <= '0';
+      data_b_in_enable_vector_float_adder <= '0';
+
+      data_first_vector_float_adder_enable_int <= '0';
+
+      index_vector_float_adder_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_first_vector_float_adder_fsm_int is
+        when STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_enable_vector_float_adder <= '0';
+          data_b_in_enable_vector_float_adder <= '0';
+
+          data_first_vector_float_adder_enable_int <= '0';
+
+          if (data_w_in_enable_int = '1' and data_x_in_enable_int = '1') then
+            -- Data Inputs
+            operation_vector_float_adder <= '0';
+
+            size_in_vector_float_adder <= SIZE_L_IN;
+
+            -- Control Internal
+            index_vector_float_adder_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_first_vector_float_adder_fsm_int <= INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE;
+          end if;
+
+        when INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
+          data_b_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_float_adder_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_float_adder_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_float_adder <= '1';
+          end if;
+
+          data_a_in_enable_vector_float_adder <= '1';
+          data_b_in_enable_vector_float_adder <= '1';
+
+          -- FSM Control
+          controller_first_vector_float_adder_fsm_int <= CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE;
+
+        when CLEAN_FIRST_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_float_adder = '1' and data_out_enable_vector_float_adder = '1') then
+            if (unsigned(index_vector_float_adder_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop))) <= data_out_vector_float_adder;
+
+              -- Control Internal
+              data_first_vector_float_adder_enable_int <= '1';
+
+              index_vector_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_first_vector_float_adder_fsm_int <= STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE;
+            elsif (unsigned(index_vector_float_adder_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop))) <= data_out_vector_float_adder;
+
+              -- Control Internal
+              index_vector_float_adder_loop <= std_logic_vector(unsigned(index_vector_float_adder_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_first_vector_float_adder_fsm_int <= INPUT_FIRST_VECTOR_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_float_adder <= '0';
+
+            data_a_in_enable_vector_float_adder <= '0';
+            data_b_in_enable_vector_float_adder <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_first_vector_float_adder_fsm_int <= STARTER_FIRST_VECTOR_FLOAT_ADDER_STATE;
+      end case;
+    end if;
+  end process;
+
+  second_matrix_vector_convolution_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_i_enable_matrix_vector_convolution <= '0';
+      data_a_in_j_enable_matrix_vector_convolution <= '0';
+      data_b_in_enable_matrix_vector_convolution   <= '0';
+
+      data_second_matrix_vector_convolution_enable_int <= '0';
+
+      index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+      index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_second_matrix_vector_convolution_fsm_int is
+        when STARTER_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_i_enable_matrix_vector_convolution <= '0';
+          data_a_in_j_enable_matrix_vector_convolution <= '0';
+          data_b_in_enable_matrix_vector_convolution   <= '0';
+
+          data_second_matrix_vector_convolution_enable_int <= '0';
+
+          if (data_d_in_enable_int = '1' and data_k_in_enable_int = '1') then
+            -- Data Inputs
+            size_a_i_in_matrix_vector_convolution <= SIZE_L_IN;
+            size_a_j_in_matrix_vector_convolution <= SIZE_X_IN;
+            size_b_in_matrix_vector_convolution   <= SIZE_L_IN;
+
+            -- Control Internal
+            index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+            index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_second_matrix_vector_convolution_fsm_int <= INPUT_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+          end if;
+
+        when INPUT_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 1
+
+          -- Data Inputs
+          data_a_in_matrix_vector_convolution <= matrix_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop)), to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+          data_b_in_matrix_vector_convolution <= vector_operation_int(to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+
+          -- Control Internal
+          if (unsigned(index_i_matrix_vector_convolution_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_matrix_vector_convolution_loop) = unsigned(ZERO_CONTROL)) then
+            start_matrix_vector_convolution <= '1';
+          end if;
+
+          data_a_in_i_enable_matrix_vector_convolution <= '1';
+          data_a_in_j_enable_matrix_vector_convolution <= '1';
+          data_b_in_enable_matrix_vector_convolution   <= '1';
+
+          -- FSM Control
+          controller_second_matrix_vector_convolution_fsm_int <= CLEAN_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+
+        when INPUT_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          data_a_in_matrix_vector_convolution <= matrix_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop)), to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+          data_b_in_matrix_vector_convolution <= vector_operation_int(to_integer(unsigned(index_j_matrix_vector_convolution_loop)));
+
+          -- Control Internal
+          data_a_in_j_enable_matrix_vector_convolution <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL)) then
+            controller_second_matrix_vector_convolution_fsm_int <= CLEAN_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+          else
+            controller_second_matrix_vector_convolution_fsm_int <= CLEAN_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+          end if;
+
+        when CLEAN_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 3
+
+          if (data_i_enable_matrix_vector_convolution = '1' and data_j_enable_matrix_vector_convolution = '1') then
+            if ((unsigned(index_i_matrix_vector_convolution_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop))) <= data_out_matrix_vector_convolution;
+
+              -- Control Internal
+              data_second_matrix_vector_convolution_enable_int <= '1';
+
+              index_i_matrix_vector_convolution_loop <= ZERO_CONTROL;
+              index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_second_matrix_vector_convolution_fsm_int <= STARTER_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+            elsif ((unsigned(index_i_matrix_vector_convolution_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_matrix_vector_convolution_loop) = unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_i_matrix_vector_convolution_loop))) <= data_out_matrix_vector_convolution;
+
+              -- Control Internal
+              index_i_matrix_vector_convolution_loop <= std_logic_vector(unsigned(index_i_matrix_vector_convolution_loop) + unsigned(ONE_CONTROL));
+              index_j_matrix_vector_convolution_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_second_matrix_vector_convolution_fsm_int <= INPUT_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_vector_convolution <= '0';
+
+            data_a_in_i_enable_matrix_vector_convolution <= '0';
+            data_a_in_j_enable_matrix_vector_convolution <= '0';
+            data_b_in_enable_matrix_vector_convolution   <= '0';
+          end if;
+
+        when CLEAN_J_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE =>  -- STEP 4
+
+          if (data_i_enable_matrix_vector_convolution = '1') then
+            if (unsigned(index_j_matrix_vector_convolution_loop) < unsigned(SIZE_X_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Internal
+              index_j_matrix_vector_convolution_loop <= std_logic_vector(unsigned(index_j_matrix_vector_convolution_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_second_matrix_vector_convolution_fsm_int <= INPUT_I_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_vector_convolution <= '0';
+
+            data_a_in_i_enable_matrix_vector_convolution <= '0';
+            data_a_in_j_enable_matrix_vector_convolution <= '0';
+            data_b_in_enable_matrix_vector_convolution   <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_second_matrix_vector_convolution_fsm_int <= STARTER_SECOND_MATRIX_VECTOR_CONVOLUTION_STATE;
+      end case;
+    end if;
+  end process;
+
+  second_vector_float_adder_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_a_in_enable_vector_float_adder <= '0';
+      data_b_in_enable_vector_float_adder <= '0';
+
+      data_second_vector_float_adder_enable_int <= '0';
+
+      index_vector_float_adder_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_second_vector_float_adder_fsm_int is
+        when STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 0
+          -- Control Internal
+          data_a_in_enable_vector_float_adder <= '0';
+          data_b_in_enable_vector_float_adder <= '0';
+
+          data_second_vector_float_adder_enable_int <= '0';
+
+          if (data_w_in_enable_int = '1' and data_x_in_enable_int = '1') then
+            -- Data Inputs
+            operation_vector_float_adder <= '0';
+
+            size_in_vector_float_adder <= SIZE_L_IN;
+
+            -- Control Internal
+            index_vector_float_adder_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_second_vector_float_adder_fsm_int <= INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE;
+          end if;
+
+        when INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_a_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
+          data_b_in_vector_float_adder <= vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_float_adder_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_float_adder_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_float_adder <= '1';
+          end if;
+
+          data_a_in_enable_vector_float_adder <= '1';
+          data_b_in_enable_vector_float_adder <= '1';
+
+          -- FSM Control
+          controller_second_vector_float_adder_fsm_int <= CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE;
+
+        when CLEAN_SECOND_VECTOR_FLOAT_ADDER_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_float_adder = '1' and data_out_enable_vector_float_adder = '1') then
+            if (unsigned(index_vector_float_adder_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop))) <= data_out_vector_float_adder;
+
+              -- Control Internal
+              data_second_vector_float_adder_enable_int <= '1';
+
+              index_vector_float_adder_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_second_vector_float_adder_fsm_int <= STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE;
+            elsif (unsigned(index_vector_float_adder_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_float_adder_loop))) <= data_out_vector_float_adder;
+
+              -- Control Internal
+              index_vector_float_adder_loop <= std_logic_vector(unsigned(index_vector_float_adder_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_second_vector_float_adder_fsm_int <= INPUT_SECOND_VECTOR_FLOAT_ADDER_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_float_adder <= '0';
+
+            data_a_in_enable_vector_float_adder <= '0';
+            data_b_in_enable_vector_float_adder <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_second_vector_float_adder_fsm_int <= STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE;
+      end case;
+    end if;
+  end process;
+
+  vector_logistic_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Control Internal
+      data_in_enable_vector_logistic <= '0';
+
+      data_vector_logistic_enable_int <= '0';
+
+      index_vector_logistic_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_vector_logistic_fsm_int is
+        when STARTER_VECTOR_LOGISTIC_STATE =>  -- STEP 0
+          -- Control Internal
+          data_in_enable_vector_logistic <= '0';
+
+          data_vector_logistic_enable_int <= '0';
+
+          if (data_w_in_enable_int = '1') then
+            -- Data Inputs
+            size_in_vector_logistic <= SIZE_L_IN;
+
+            -- Control Internal
+            index_vector_logistic_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_vector_logistic_fsm_int <= INPUT_VECTOR_LOGISTIC_STATE;
+          end if;
+
+        when INPUT_VECTOR_LOGISTIC_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          data_in_vector_logistic <= vector_operation_int(to_integer(unsigned(index_vector_logistic_loop)));
+
+          -- Control Internal
+          if (unsigned(index_vector_logistic_loop) = unsigned(ZERO_CONTROL) and unsigned(index_vector_logistic_loop) = unsigned(ZERO_CONTROL)) then
+            start_vector_logistic <= '1';
+          end if;
+
+          data_in_enable_vector_logistic <= '1';
+
+          -- FSM Control
+          controller_vector_logistic_fsm_int <= CLEAN_VECTOR_LOGISTIC_STATE;
+
+        when CLEAN_VECTOR_LOGISTIC_STATE =>  -- STEP 7
+
+          if (data_out_enable_vector_logistic = '1' and data_out_enable_vector_logistic = '1') then
+            if (unsigned(index_vector_logistic_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_logistic_loop))) <= data_out_vector_logistic;
+
+              -- Control Internal
+              data_vector_logistic_enable_int <= '1';
+
+              index_vector_logistic_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
+            elsif (unsigned(index_vector_logistic_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Internal
+              vector_operation_int(to_integer(unsigned(index_vector_logistic_loop))) <= data_out_vector_logistic;
+
+              -- Control Internal
+              index_vector_logistic_loop <= std_logic_vector(unsigned(index_vector_logistic_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_vector_logistic_fsm_int <= INPUT_VECTOR_LOGISTIC_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_logistic <= '0';
+
+            data_in_enable_vector_logistic <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- OUTPUT CONTROL
   h_out_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
@@ -2070,8 +2694,8 @@ begin
     end if;
   end process;
 
-  -- ACTIVATION GATE VECTOR
-  activation_gate_vector : accelerator_activation_gate_vector
+  -- VECTOR ADDER
+  vector_float_adder : accelerator_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -2082,103 +2706,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_activation_gate_vector,
-      READY => ready_activation_gate_vector,
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
 
-      W_IN_L_ENABLE => w_in_l_enable_activation_gate_vector,
-      W_IN_X_ENABLE => w_in_x_enable_activation_gate_vector,
+      OPERATION => operation_vector_float_adder,
 
-      W_OUT_L_ENABLE => w_out_l_enable_activation_gate_vector,
-      W_OUT_X_ENABLE => w_out_x_enable_activation_gate_vector,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
 
-      K_IN_I_ENABLE => k_in_i_enable_activation_gate_vector,
-      K_IN_L_ENABLE => k_in_l_enable_activation_gate_vector,
-      K_IN_K_ENABLE => k_in_k_enable_activation_gate_vector,
-
-      K_OUT_I_ENABLE => k_out_i_enable_activation_gate_vector,
-      K_OUT_L_ENABLE => k_out_l_enable_activation_gate_vector,
-      K_OUT_K_ENABLE => k_out_k_enable_activation_gate_vector,
-
-      D_IN_I_ENABLE => d_in_i_enable_activation_gate_vector,
-      D_IN_L_ENABLE => d_in_l_enable_activation_gate_vector,
-      D_IN_M_ENABLE => d_in_m_enable_activation_gate_vector,
-
-      D_OUT_I_ENABLE => d_out_i_enable_activation_gate_vector,
-      D_OUT_L_ENABLE => d_out_l_enable_activation_gate_vector,
-      D_OUT_M_ENABLE => d_out_m_enable_activation_gate_vector,
-
-      U_IN_L_ENABLE => u_in_l_enable_activation_gate_vector,
-      U_IN_P_ENABLE => u_in_p_enable_activation_gate_vector,
-
-      U_OUT_L_ENABLE => u_out_l_enable_activation_gate_vector,
-      U_OUT_P_ENABLE => u_out_p_enable_activation_gate_vector,
-
-      V_IN_L_ENABLE => v_in_l_enable_activation_gate_vector,
-      V_IN_S_ENABLE => v_in_s_enable_activation_gate_vector,
-
-      V_OUT_L_ENABLE => v_out_l_enable_activation_gate_vector,
-      V_OUT_S_ENABLE => v_out_s_enable_activation_gate_vector,
-
-      B_IN_ENABLE => b_in_enable_activation_gate_vector,
-
-      B_OUT_ENABLE => b_out_enable_activation_gate_vector,
-
-      X_IN_ENABLE => x_in_enable_activation_gate_vector,
-
-      X_OUT_ENABLE => x_out_enable_activation_gate_vector,
-
-      R_IN_I_ENABLE => r_in_i_enable_activation_gate_vector,
-      R_IN_K_ENABLE => r_in_k_enable_activation_gate_vector,
-
-      R_OUT_I_ENABLE => r_out_i_enable_activation_gate_vector,
-      R_OUT_K_ENABLE => r_out_k_enable_activation_gate_vector,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_activation_gate_vector,
-      RHO_IN_M_ENABLE => rho_in_m_enable_activation_gate_vector,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_activation_gate_vector,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_activation_gate_vector,
-
-      XI_IN_ENABLE => xi_in_enable_activation_gate_vector,
-
-      XI_OUT_ENABLE => xi_out_enable_activation_gate_vector,
-
-      H_IN_ENABLE => h_in_enable_activation_gate_vector,
-
-      H_OUT_ENABLE => h_out_enable_activation_gate_vector,
-
-      A_OUT_ENABLE => a_out_enable_activation_gate_vector,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      SIZE_X_IN => size_x_in_activation_gate_vector,
-      SIZE_W_IN => size_w_in_activation_gate_vector,
-      SIZE_L_IN => size_l_in_activation_gate_vector,
-      SIZE_R_IN => size_r_in_activation_gate_vector,
-      SIZE_S_IN => size_s_in_activation_gate_vector,
-      SIZE_M_IN => size_m_in_activation_gate_vector,
-
-      W_IN => w_in_activation_gate_vector,
-      X_IN => x_in_activation_gate_vector,
-
-      K_IN => k_in_activation_gate_vector,
-      R_IN => r_in_activation_gate_vector,
-
-      D_IN   => d_in_activation_gate_vector,
-      RHO_IN => rho_in_activation_gate_vector,
-
-      U_IN => u_in_activation_gate_vector,
-      H_IN => h_in_activation_gate_vector,
-
-      V_IN  => v_in_activation_gate_vector,
-      XI_IN => xi_in_activation_gate_vector,
-
-      B_IN => b_in_activation_gate_vector,
-
-      A_OUT => a_out_activation_gate_vector
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+      DATA_OUT  => data_out_vector_float_adder
       );
 
-  -- INTPUT GATE VECTOR
-  input_gate_vector : accelerator_input_gate_vector
+  -- VECTOR SUMMATION
+  vector_summation : accelerator_vector_summation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -2189,103 +2735,26 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_input_gate_vector,
-      READY => ready_input_gate_vector,
+      START => start_vector_summation,
+      READY => ready_vector_summation,
 
-      W_IN_L_ENABLE => w_in_l_enable_input_gate_vector,
-      W_IN_X_ENABLE => w_in_x_enable_input_gate_vector,
+      DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
+      DATA_IN_ENABLE        => data_in_enable_vector_summation,
 
-      W_OUT_L_ENABLE => w_out_l_enable_input_gate_vector,
-      W_OUT_X_ENABLE => w_out_x_enable_input_gate_vector,
+      DATA_LENGTH_ENABLE => data_enable_length_vector_summation,
+      DATA_ENABLE        => data_enable_vector_summation,
 
-      K_IN_I_ENABLE => k_in_i_enable_input_gate_vector,
-      K_IN_L_ENABLE => k_in_l_enable_input_gate_vector,
-      K_IN_K_ENABLE => k_in_k_enable_input_gate_vector,
-
-      K_OUT_I_ENABLE => k_out_i_enable_input_gate_vector,
-      K_OUT_L_ENABLE => k_out_l_enable_input_gate_vector,
-      K_OUT_K_ENABLE => k_out_k_enable_input_gate_vector,
-
-      D_IN_I_ENABLE => d_in_i_enable_input_gate_vector,
-      D_IN_L_ENABLE => d_in_l_enable_input_gate_vector,
-      D_IN_M_ENABLE => d_in_m_enable_input_gate_vector,
-
-      D_OUT_I_ENABLE => d_out_i_enable_input_gate_vector,
-      D_OUT_L_ENABLE => d_out_l_enable_input_gate_vector,
-      D_OUT_M_ENABLE => d_out_m_enable_input_gate_vector,
-
-      U_IN_L_ENABLE => u_in_l_enable_input_gate_vector,
-      U_IN_P_ENABLE => u_in_p_enable_input_gate_vector,
-
-      U_OUT_L_ENABLE => u_out_l_enable_input_gate_vector,
-      U_OUT_P_ENABLE => u_out_p_enable_input_gate_vector,
-
-      V_IN_L_ENABLE => v_in_l_enable_input_gate_vector,
-      V_IN_S_ENABLE => v_in_s_enable_input_gate_vector,
-
-      V_OUT_L_ENABLE => v_out_l_enable_input_gate_vector,
-      V_OUT_S_ENABLE => v_out_s_enable_input_gate_vector,
-
-      B_IN_ENABLE => b_in_enable_input_gate_vector,
-
-      B_OUT_ENABLE => b_out_enable_input_gate_vector,
-
-      X_IN_ENABLE => x_in_enable_input_gate_vector,
-
-      X_OUT_ENABLE => x_out_enable_input_gate_vector,
-
-      R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
-      R_IN_K_ENABLE => r_in_k_enable_input_gate_vector,
-
-      R_OUT_I_ENABLE => r_out_i_enable_input_gate_vector,
-      R_OUT_K_ENABLE => r_out_k_enable_input_gate_vector,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_input_gate_vector,
-      RHO_IN_M_ENABLE => rho_in_m_enable_input_gate_vector,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_input_gate_vector,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_input_gate_vector,
-
-      XI_IN_ENABLE => xi_in_enable_input_gate_vector,
-
-      XI_OUT_ENABLE => xi_out_enable_input_gate_vector,
-
-      H_IN_ENABLE => h_in_enable_input_gate_vector,
-
-      H_OUT_ENABLE => h_out_enable_input_gate_vector,
-
-      I_OUT_ENABLE => i_out_enable_input_gate_vector,
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      SIZE_X_IN => size_x_in_input_gate_vector,
-      SIZE_W_IN => size_w_in_input_gate_vector,
-      SIZE_L_IN => size_l_in_input_gate_vector,
-      SIZE_R_IN => size_r_in_input_gate_vector,
-      SIZE_S_IN => size_s_in_input_gate_vector,
-      SIZE_M_IN => size_m_in_input_gate_vector,
-
-      W_IN => w_in_input_gate_vector,
-      X_IN => x_in_input_gate_vector,
-
-      K_IN => k_in_input_gate_vector,
-      R_IN => r_in_input_gate_vector,
-
-      D_IN   => d_in_input_gate_vector,
-      RHO_IN => rho_in_input_gate_vector,
-
-      U_IN => u_in_input_gate_vector,
-      H_IN => h_in_input_gate_vector,
-
-      V_IN  => v_in_input_gate_vector,
-      XI_IN => xi_in_input_gate_vector,
-
-      B_IN => b_in_input_gate_vector,
-
-      I_OUT => i_out_input_gate_vector
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
-  -- OUTPUT GATE VECTOR
-  output_gate_vector : accelerator_output_gate_vector
+  -- TENSOR MATRIX CONVOLUTION
+  tensor_matrix_convolution : accelerator_tensor_matrix_convolution
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -2296,103 +2765,35 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_output_gate_vector,
-      READY => ready_output_gate_vector,
+      START => start_tensor_matrix_convolution,
+      READY => ready_tensor_matrix_convolution,
 
-      W_IN_L_ENABLE => w_in_l_enable_output_gate_vector,
-      W_IN_X_ENABLE => w_in_x_enable_output_gate_vector,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_matrix_convolution,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_matrix_convolution,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_matrix_convolution,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_matrix_convolution,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_matrix_convolution,
 
-      W_OUT_L_ENABLE => w_out_l_enable_output_gate_vector,
-      W_OUT_X_ENABLE => w_out_x_enable_output_gate_vector,
+      DATA_I_ENABLE => data_i_enable_tensor_matrix_convolution,
+      DATA_J_ENABLE => data_j_enable_tensor_matrix_convolution,
+      DATA_K_ENABLE => data_k_enable_tensor_matrix_convolution,
 
-      K_IN_I_ENABLE => k_in_i_enable_output_gate_vector,
-      K_IN_L_ENABLE => k_in_l_enable_output_gate_vector,
-      K_IN_K_ENABLE => k_in_k_enable_output_gate_vector,
-
-      K_OUT_I_ENABLE => k_out_i_enable_output_gate_vector,
-      K_OUT_L_ENABLE => k_out_l_enable_output_gate_vector,
-      K_OUT_K_ENABLE => k_out_k_enable_output_gate_vector,
-
-      D_IN_I_ENABLE => d_in_i_enable_output_gate_vector,
-      D_IN_L_ENABLE => d_in_l_enable_output_gate_vector,
-      D_IN_M_ENABLE => d_in_m_enable_output_gate_vector,
-
-      D_OUT_I_ENABLE => d_out_i_enable_output_gate_vector,
-      D_OUT_L_ENABLE => d_out_l_enable_output_gate_vector,
-      D_OUT_M_ENABLE => d_out_m_enable_output_gate_vector,
-
-      U_IN_L_ENABLE => u_in_l_enable_output_gate_vector,
-      U_IN_P_ENABLE => u_in_p_enable_output_gate_vector,
-
-      U_OUT_L_ENABLE => u_out_l_enable_output_gate_vector,
-      U_OUT_P_ENABLE => u_out_p_enable_output_gate_vector,
-
-      V_IN_L_ENABLE => v_in_l_enable_output_gate_vector,
-      V_IN_S_ENABLE => v_in_s_enable_output_gate_vector,
-
-      V_OUT_L_ENABLE => v_out_l_enable_output_gate_vector,
-      V_OUT_S_ENABLE => v_out_s_enable_output_gate_vector,
-
-      B_IN_ENABLE => b_in_enable_output_gate_vector,
-
-      B_OUT_ENABLE => b_out_enable_output_gate_vector,
-
-      X_IN_ENABLE => x_in_enable_output_gate_vector,
-
-      X_OUT_ENABLE => x_out_enable_output_gate_vector,
-
-      R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
-      R_IN_K_ENABLE => r_in_k_enable_output_gate_vector,
-
-      R_OUT_I_ENABLE => r_out_i_enable_output_gate_vector,
-      R_OUT_K_ENABLE => r_out_k_enable_output_gate_vector,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_output_gate_vector,
-      RHO_IN_M_ENABLE => rho_in_m_enable_output_gate_vector,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_output_gate_vector,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_output_gate_vector,
-
-      XI_IN_ENABLE => xi_in_enable_output_gate_vector,
-
-      XI_OUT_ENABLE => xi_out_enable_output_gate_vector,
-
-      H_IN_ENABLE => h_in_enable_output_gate_vector,
-
-      H_OUT_ENABLE => h_out_enable_output_gate_vector,
-
-      O_OUT_ENABLE => o_out_enable_output_gate_vector,
+      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_matrix_convolution,
+      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_matrix_convolution,
 
       -- DATA
-      SIZE_X_IN => size_x_in_output_gate_vector,
-      SIZE_W_IN => size_w_in_output_gate_vector,
-      SIZE_L_IN => size_l_in_output_gate_vector,
-      SIZE_R_IN => size_r_in_output_gate_vector,
-      SIZE_S_IN => size_s_in_output_gate_vector,
-      SIZE_M_IN => size_m_in_output_gate_vector,
-
-      W_IN => w_in_output_gate_vector,
-      X_IN => x_in_output_gate_vector,
-
-      K_IN => k_in_output_gate_vector,
-      R_IN => r_in_output_gate_vector,
-
-      D_IN   => d_in_output_gate_vector,
-      RHO_IN => rho_in_output_gate_vector,
-
-      U_IN => u_in_output_gate_vector,
-      H_IN => h_in_output_gate_vector,
-
-      V_IN  => v_in_output_gate_vector,
-      XI_IN => xi_in_output_gate_vector,
-
-      B_IN => b_in_output_gate_vector,
-
-      O_OUT => o_out_output_gate_vector
+      SIZE_A_I_IN => size_a_i_in_tensor_matrix_convolution,
+      SIZE_A_J_IN => size_a_j_in_tensor_matrix_convolution,
+      SIZE_A_K_IN => size_a_k_in_tensor_matrix_convolution,
+      SIZE_B_I_IN => size_b_i_in_tensor_matrix_convolution,
+      SIZE_B_J_IN => size_b_j_in_tensor_matrix_convolution,
+      DATA_A_IN   => data_a_in_tensor_matrix_convolution,
+      DATA_B_IN   => data_b_in_tensor_matrix_convolution,
+      DATA_OUT    => data_out_tensor_matrix_convolution
       );
 
-  -- FORGET GATE VECTOR
-  forget_gate_vector : accelerator_forget_gate_vector
+  -- MATRIX VECTOR CONVOLUTION
+  matrix_vector_convolution : accelerator_matrix_vector_convolution
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -2403,103 +2804,29 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_forget_gate_vector,
-      READY => ready_forget_gate_vector,
+      START => start_matrix_vector_convolution,
+      READY => ready_matrix_vector_convolution,
 
-      W_IN_L_ENABLE => w_in_l_enable_forget_gate_vector,
-      W_IN_X_ENABLE => w_in_x_enable_forget_gate_vector,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_vector_convolution,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_vector_convolution,
+      DATA_B_IN_ENABLE   => data_b_in_enable_matrix_vector_convolution,
 
-      W_OUT_L_ENABLE => w_out_l_enable_forget_gate_vector,
-      W_OUT_X_ENABLE => w_out_x_enable_forget_gate_vector,
+      DATA_I_ENABLE => data_i_enable_matrix_vector_convolution,
+      DATA_J_ENABLE => data_j_enable_matrix_vector_convolution,
 
-      K_IN_I_ENABLE => k_in_i_enable_forget_gate_vector,
-      K_IN_L_ENABLE => k_in_l_enable_forget_gate_vector,
-      K_IN_K_ENABLE => k_in_k_enable_forget_gate_vector,
-
-      K_OUT_I_ENABLE => k_out_i_enable_forget_gate_vector,
-      K_OUT_L_ENABLE => k_out_l_enable_forget_gate_vector,
-      K_OUT_K_ENABLE => k_out_k_enable_forget_gate_vector,
-
-      D_IN_I_ENABLE => d_in_i_enable_forget_gate_vector,
-      D_IN_L_ENABLE => d_in_l_enable_forget_gate_vector,
-      D_IN_M_ENABLE => d_in_m_enable_forget_gate_vector,
-
-      D_OUT_I_ENABLE => d_out_i_enable_forget_gate_vector,
-      D_OUT_L_ENABLE => d_out_l_enable_forget_gate_vector,
-      D_OUT_M_ENABLE => d_out_m_enable_forget_gate_vector,
-
-      U_IN_L_ENABLE => u_in_l_enable_forget_gate_vector,
-      U_IN_P_ENABLE => u_in_p_enable_forget_gate_vector,
-
-      U_OUT_L_ENABLE => u_out_l_enable_forget_gate_vector,
-      U_OUT_P_ENABLE => u_out_p_enable_forget_gate_vector,
-
-      V_IN_L_ENABLE => v_in_l_enable_forget_gate_vector,
-      V_IN_S_ENABLE => v_in_s_enable_forget_gate_vector,
-
-      V_OUT_L_ENABLE => v_out_l_enable_forget_gate_vector,
-      V_OUT_S_ENABLE => v_out_s_enable_forget_gate_vector,
-
-      B_IN_ENABLE => b_in_enable_forget_gate_vector,
-
-      B_OUT_ENABLE => b_out_enable_forget_gate_vector,
-
-      X_IN_ENABLE => x_in_enable_forget_gate_vector,
-
-      X_OUT_ENABLE => x_out_enable_forget_gate_vector,
-
-      R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
-      R_IN_K_ENABLE => r_in_k_enable_forget_gate_vector,
-
-      R_OUT_I_ENABLE => r_out_i_enable_forget_gate_vector,
-      R_OUT_K_ENABLE => r_out_k_enable_forget_gate_vector,
-
-      RHO_IN_I_ENABLE => rho_in_i_enable_forget_gate_vector,
-      RHO_IN_M_ENABLE => rho_in_m_enable_forget_gate_vector,
-
-      RHO_OUT_I_ENABLE => rho_out_i_enable_forget_gate_vector,
-      RHO_OUT_M_ENABLE => rho_out_m_enable_forget_gate_vector,
-
-      XI_IN_ENABLE => xi_in_enable_forget_gate_vector,
-
-      XI_OUT_ENABLE => xi_out_enable_forget_gate_vector,
-
-      H_IN_ENABLE => h_in_enable_forget_gate_vector,
-
-      H_OUT_ENABLE => h_out_enable_forget_gate_vector,
-
-      F_OUT_ENABLE => f_out_enable_forget_gate_vector,
+      DATA_OUT_ENABLE => data_out_enable_matrix_vector_convolution,
 
       -- DATA
-      SIZE_X_IN => size_x_in_forget_gate_vector,
-      SIZE_W_IN => size_w_in_forget_gate_vector,
-      SIZE_L_IN => size_l_in_forget_gate_vector,
-      SIZE_R_IN => size_r_in_forget_gate_vector,
-      SIZE_S_IN => size_s_in_forget_gate_vector,
-      SIZE_M_IN => size_m_in_forget_gate_vector,
-
-      W_IN => w_in_forget_gate_vector,
-      X_IN => x_in_forget_gate_vector,
-
-      K_IN => k_in_forget_gate_vector,
-      R_IN => r_in_forget_gate_vector,
-
-      D_IN   => d_in_forget_gate_vector,
-      RHO_IN => rho_in_forget_gate_vector,
-
-      U_IN => u_in_forget_gate_vector,
-      H_IN => h_in_forget_gate_vector,
-
-      V_IN  => v_in_forget_gate_vector,
-      XI_IN => xi_in_forget_gate_vector,
-
-      B_IN => b_in_forget_gate_vector,
-
-      F_OUT => f_out_forget_gate_vector
+      SIZE_A_I_IN => size_a_i_in_matrix_vector_convolution,
+      SIZE_A_J_IN => size_a_j_in_matrix_vector_convolution,
+      SIZE_B_IN   => size_b_in_matrix_vector_convolution,
+      DATA_A_IN   => data_a_in_matrix_vector_convolution,
+      DATA_B_IN   => data_b_in_matrix_vector_convolution,
+      DATA_OUT    => data_out_matrix_vector_convolution
       );
 
-  -- STATE GATE VECTOR
-  state_gate_vector : accelerator_state_gate_vector
+  -- VECTOR LOGISTIC
+  vector_logistic_function : accelerator_vector_logistic_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -2510,62 +2837,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_state_gate_vector,
-      READY => ready_state_gate_vector,
+      START => start_vector_logistic,
+      READY => ready_vector_logistic,
 
-      I_IN_ENABLE => i_in_enable_state_gate_vector,
-      F_IN_ENABLE => f_in_enable_state_gate_vector,
-      A_IN_ENABLE => a_in_enable_state_gate_vector,
+      DATA_IN_ENABLE => data_in_enable_vector_logistic,
 
-      I_OUT_ENABLE => i_out_enable_state_gate_vector,
-      F_OUT_ENABLE => f_out_enable_state_gate_vector,
-      A_OUT_ENABLE => a_out_enable_state_gate_vector,
-
-      S_IN_ENABLE => s_in_enable_state_gate_vector,
-
-      S_OUT_ENABLE => s_out_enable_state_gate_vector,
+      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      SIZE_L_IN => size_l_in_state_gate_vector,
-
-      S_IN => s_in_state_gate_vector,
-      I_IN => i_in_state_gate_vector,
-      F_IN => f_in_state_gate_vector,
-      A_IN => a_in_state_gate_vector,
-
-      S_OUT => s_out_state_gate_vector
-      );
-
-  -- HIDDEN GATE VECTOR
-  hidden_gate_vector : accelerator_hidden_gate_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_hidden_gate_vector,
-      READY => ready_hidden_gate_vector,
-
-      S_IN_ENABLE => s_in_enable_hidden_gate_vector,
-      O_IN_ENABLE => o_in_enable_hidden_gate_vector,
-
-      S_OUT_ENABLE => s_out_enable_hidden_gate_vector,
-      O_OUT_ENABLE => o_out_enable_hidden_gate_vector,
-
-      H_OUT_ENABLE => h_out_enable_hidden_gate_vector,
-
-      -- DATA
-      SIZE_L_IN => size_l_in_hidden_gate_vector,
-
-      S_IN => s_in_hidden_gate_vector,
-      O_IN => o_in_hidden_gate_vector,
-
-      H_OUT => h_out_hidden_gate_vector
+      SIZE_IN  => size_in_vector_logistic,
+      DATA_IN  => data_in_vector_logistic,
+      DATA_OUT => data_out_vector_logistic
       );
 
 end architecture;

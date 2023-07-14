@@ -212,24 +212,12 @@ code
     │   └── model_values_vector.sv
     ├── lstm
     │   ├── convolutional
-    │   │   ├── model_activation_gate_vector.sv
-    │   │   ├── model_forget_gate_vector.sv
-    │   │   ├── model_hidden_gate_vector.sv
-    │   │   ├── model_input_gate_vector.sv
-    │   │   ├── model_lstm.sv
-    │   │   ├── model_output_gate_vector.sv
-    │   │   └── model_state_gate_vector.sv
+    │   │   └── model_lstm.sv
     │   └── standard
-    │       ├── model_activation_gate_vector.sv
-    │       ├── model_forget_gate_vector.sv
-    │       ├── model_hidden_gate_vector.sv
-    │       ├── model_input_gate_vector.sv
-    │       ├── model_lstm.sv
-    │       ├── model_output_gate_vector.sv
-    │       └── model_state_gate_vector.sv
+    │       └── model_lstm.sv
     └── top
         ├── model_controller.sv
         ├── model_decoder.sv
         └── model_encoder.sv
 
-69 directories, 163 files
+69 directories, 151 files

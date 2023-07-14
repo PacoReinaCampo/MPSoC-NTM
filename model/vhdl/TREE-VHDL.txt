@@ -214,24 +214,12 @@ code
     │   └── model_values_vector.vhd
     ├── lstm
     │   ├── convolutional
-    │   │   ├── model_activation_gate_vector.vhd
-    │   │   ├── model_forget_gate_vector.vhd
-    │   │   ├── model_hidden_gate_vector.vhd
-    │   │   ├── model_input_gate_vector.vhd
-    │   │   ├── model_lstm.vhd
-    │   │   ├── model_output_gate_vector.vhd
-    │   │   └── model_state_gate_vector.vhd
+    │   │   └── model_lstm.vhd
     │   └── standard
-    │       ├── model_activation_gate_vector.vhd
-    │       ├── model_forget_gate_vector.vhd
-    │       ├── model_hidden_gate_vector.vhd
-    │       ├── model_input_gate_vector.vhd
-    │       ├── model_lstm.vhd
-    │       ├── model_output_gate_vector.vhd
-    │       └── model_state_gate_vector.vhd
+    │       └── model_lstm.vhd
     └── top
         ├── model_controller.vhd
         ├── model_decoder.vhd
         └── model_encoder.vhd
 
-69 directories, 165 files
+69 directories, 153 files

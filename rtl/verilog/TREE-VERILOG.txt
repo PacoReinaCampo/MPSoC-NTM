@@ -229,24 +229,12 @@ code
     │   └── accelerator_values_vector.sv
     ├── lstm
     │   ├── convolutional
-    │   │   ├── accelerator_activation_gate_vector.sv
-    │   │   ├── accelerator_forget_gate_vector.sv
-    │   │   ├── accelerator_hidden_gate_vector.sv
-    │   │   ├── accelerator_input_gate_vector.sv
-    │   │   ├── accelerator_lstm.sv
-    │   │   ├── accelerator_output_gate_vector.sv
-    │   │   └── accelerator_state_gate_vector.sv
+    │   │   └── accelerator_lstm.sv
     │   └── standard
-    │       ├── accelerator_activation_gate_vector.sv
-    │       ├── accelerator_forget_gate_vector.sv
-    │       ├── accelerator_hidden_gate_vector.sv
-    │       ├── accelerator_input_gate_vector.sv
-    │       ├── accelerator_lstm.sv
-    │       ├── accelerator_output_gate_vector.sv
-    │       └── accelerator_state_gate_vector.sv
+    │       └── accelerator_lstm.sv
     └── top
         ├── accelerator_controller.sv
         ├── accelerator_decoder.sv
         └── accelerator_encoder.sv
 
-74 directories, 175 files
+74 directories, 163 files
