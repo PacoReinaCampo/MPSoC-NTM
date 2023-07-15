@@ -433,26 +433,35 @@ begin
   end generate model_vector_oneplus_function_test;
 
   vector_assertion : process (CLK, RST)
+    variable i : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_vector_logistic = '1' and data_out_enable_vector_logistic = '1') then
         assert data_out_vector_logistic = function_scalar_logistic(data_in_vector_logistic)
           report "VECTOR LOGISTIC: CALCULATED = " & to_string(data_out_vector_logistic) & "; CORRECT = " & to_string(function_scalar_logistic(data_in_vector_logistic))
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_logistic = '1' and not data_out_vector_logistic = ZERO_DATA) then
         assert data_out_vector_logistic = function_scalar_logistic(data_in_vector_logistic)
           report "VECTOR LOGISTIC: CALCULATED = " & to_string(data_out_vector_logistic) & "; CORRECT = " & to_string(function_scalar_logistic(data_in_vector_logistic))
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_oneplus = '1' and data_out_enable_vector_oneplus = '1') then
         assert data_out_vector_oneplus = function_scalar_oneplus(data_in_vector_oneplus)
           report "VECTOR ONEPLUS: CALCULATED = " & to_string(data_out_vector_oneplus) & "; CORRECT = " & to_string(function_scalar_oneplus(data_in_vector_oneplus))
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_oneplus = '1' and not data_out_vector_oneplus = ZERO_DATA) then
         assert data_out_vector_oneplus = function_scalar_oneplus(data_in_vector_oneplus)
           report "VECTOR ONEPLUS: CALCULATED = " & to_string(data_out_vector_oneplus) & "; CORRECT = " & to_string(function_scalar_oneplus(data_in_vector_oneplus))
           severity error;
+
+        i := i + 1;
       end if;
     end if;
   end process vector_assertion;
@@ -522,34 +531,52 @@ begin
   end generate model_matrix_oneplus_function_test;
 
   matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_matrix_logistic = '1' and data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1') then
         assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(function_scalar_logistic(data_in_matrix_logistic))
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_logistic = '1' and data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = ZERO_DATA) then
         assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(function_scalar_logistic(data_in_matrix_logistic))
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_logistic = '1' and not data_out_matrix_logistic = ZERO_DATA) then
         assert data_out_matrix_logistic = function_scalar_logistic(data_in_matrix_logistic)
           report "MATRIX LOGISTIC: CALCULATED = " & to_string(data_out_matrix_logistic) & "; CORRECT = " & to_string(function_scalar_logistic(data_in_matrix_logistic))
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_oneplus = '1' and data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1') then
         assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(function_scalar_oneplus(data_in_matrix_oneplus))
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_oneplus = '1' and data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = ZERO_DATA) then
         assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(function_scalar_oneplus(data_in_matrix_oneplus))
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_oneplus = '1' and not data_out_matrix_oneplus = ZERO_DATA) then
         assert data_out_matrix_oneplus = function_scalar_oneplus(data_in_matrix_oneplus)
           report "MATRIX ONEPLUS: CALCULATED = " & to_string(data_out_matrix_oneplus) & "; CORRECT = " & to_string(function_scalar_oneplus(data_in_matrix_oneplus))
           severity error;
+
+        j := j + 1;
       end if;
     end if;
   end process matrix_assertion;

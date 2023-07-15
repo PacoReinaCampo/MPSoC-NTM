@@ -785,36 +785,49 @@ begin
   end generate accelerator_vector_softmax_test;
 
   vector_assertion : process (CLK, RST)
+    variable i : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_vector_differentiation = '1' and data_out_enable_vector_differentiation = '1') then
         assert data_out_vector_differentiation = data_out_vector_differentiation_model
           report "VECTOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_vector_differentiation) & "; CORRECT = " & to_string(data_out_vector_differentiation_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_differentiation = '1' and not data_out_vector_differentiation = EMPTY) then
         assert data_out_vector_differentiation = data_out_vector_differentiation_model
           report "VECTOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_vector_differentiation) & "; CORRECT = " & to_string(data_out_vector_differentiation_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_integration = '1' and data_out_enable_vector_integration = '1') then
         assert data_out_vector_integration = data_out_vector_integration_model
           report "VECTOR INTEGRATION: CALCULATED = " & to_string(data_out_vector_integration) & "; CORRECT = " & to_string(data_out_vector_integration_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_integration = '1' and not data_out_vector_integration = EMPTY) then
         assert data_out_vector_integration = data_out_vector_integration_model
           report "VECTOR INTEGRATION: CALCULATED = " & to_string(data_out_vector_integration) & "; CORRECT = " & to_string(data_out_vector_integration_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_softmax = '1' and data_out_enable_vector_softmax = '1') then
         assert data_out_vector_softmax = data_out_vector_softmax_model
           report "VECTOR SOFTMAX: CALCULATED = " & to_string(data_out_vector_softmax) & "; CORRECT = " & to_string(data_out_vector_softmax_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_softmax = '1' and not data_out_vector_softmax = EMPTY) then
         assert data_out_vector_softmax = data_out_vector_softmax_model
           report "VECTOR SOFTMAX: CALCULATED = " & to_string(data_out_vector_softmax) & "; CORRECT = " & to_string(data_out_vector_softmax_model)
           severity error;
+
+        i := i + 1;
       end if;
     end if;
   end process vector_assertion;
@@ -1019,48 +1032,74 @@ begin
   end generate accelerator_matrix_softmax_test;
 
   matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_matrix_differentiation = '1' and data_out_i_enable_matrix_differentiation = '1' and data_out_j_enable_matrix_differentiation = '1') then
         assert data_out_matrix_differentiation = data_out_matrix_differentiation_model
           report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(data_out_matrix_differentiation_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_differentiation = '1' and data_out_j_enable_matrix_differentiation = '1' and not data_out_matrix_differentiation = EMPTY) then
         assert data_out_matrix_differentiation = data_out_matrix_differentiation_model
           report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(data_out_matrix_differentiation_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_differentiation = '1' and not data_out_matrix_differentiation = EMPTY) then
         assert data_out_matrix_differentiation = data_out_matrix_differentiation_model
           report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(data_out_matrix_differentiation_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_integration = '1' and data_out_i_enable_matrix_integration = '1' and data_out_j_enable_matrix_integration = '1') then
         assert data_out_matrix_integration = data_out_matrix_integration_model
           report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(data_out_matrix_integration_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_integration = '1' and data_out_j_enable_matrix_integration = '1' and not data_out_matrix_integration = EMPTY) then
         assert data_out_matrix_integration = data_out_matrix_integration_model
           report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(data_out_matrix_integration_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_integration = '1' and not data_out_matrix_integration = EMPTY) then
         assert data_out_matrix_integration = data_out_matrix_integration_model
           report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(data_out_matrix_integration_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_softmax = '1' and data_out_i_enable_matrix_softmax = '1' and data_out_j_enable_matrix_softmax = '1') then
         assert data_out_matrix_softmax = data_out_matrix_softmax_model
           report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(data_out_matrix_softmax_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_softmax = '1' and data_out_j_enable_matrix_softmax = '1' and not data_out_matrix_softmax = EMPTY) then
         assert data_out_matrix_softmax = data_out_matrix_softmax_model
           report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(data_out_matrix_softmax_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_softmax = '1' and not data_out_matrix_softmax = EMPTY) then
         assert data_out_matrix_softmax = data_out_matrix_softmax_model
           report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(data_out_matrix_softmax_model)
           severity error;
+
+        j := j + 1;
       end if;
     end if;
   end process matrix_assertion;
@@ -1291,60 +1330,102 @@ begin
   end generate accelerator_tensor_softmax_test;
 
   tensor_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
+    variable k : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_tensor_differentiation = '1' and data_out_i_enable_tensor_differentiation = '1' and data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_differentiation = '1') then
         assert data_out_tensor_differentiation = data_out_tensor_differentiation_model
           report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(data_out_tensor_differentiation_model)
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_differentiation = '1' and data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
         assert data_out_tensor_differentiation = data_out_tensor_differentiation_model
           report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(data_out_tensor_differentiation_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
         assert data_out_tensor_differentiation = data_out_tensor_differentiation_model
           report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(data_out_tensor_differentiation_model)
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
         assert data_out_tensor_differentiation = data_out_tensor_differentiation_model
           report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(data_out_tensor_differentiation_model)
           severity error;
+
+        k := k + 1;
       end if;
 
       if (ready_tensor_integration = '1' and data_out_i_enable_tensor_integration = '1' and data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_integration = '1') then
         assert data_out_tensor_integration = data_out_tensor_integration_model
           report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(data_out_tensor_integration_model)
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_integration = '1' and data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
         assert data_out_tensor_integration = data_out_tensor_integration_model
           report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(data_out_tensor_integration_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
         assert data_out_tensor_integration = data_out_tensor_integration_model
           report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(data_out_tensor_integration_model)
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
         assert data_out_tensor_integration = data_out_tensor_integration_model
           report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(data_out_tensor_integration_model)
           severity error;
+
+        k := k + 1;
       end if;
 
       if (ready_tensor_softmax = '1' and data_out_i_enable_tensor_softmax = '1' and data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1') then
         assert data_out_tensor_softmax = data_out_tensor_softmax_model
           report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(data_out_tensor_softmax_model)
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_softmax = '1' and data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
         assert data_out_tensor_softmax = data_out_tensor_softmax_model
           report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(data_out_tensor_softmax_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
         assert data_out_tensor_softmax = data_out_tensor_softmax_model
           report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(data_out_tensor_softmax_model)
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
         assert data_out_tensor_softmax = data_out_tensor_softmax_model
           report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(data_out_tensor_softmax_model)
           severity error;
+
+        k := k + 1;
       end if;
     end if;
   end process tensor_assertion;

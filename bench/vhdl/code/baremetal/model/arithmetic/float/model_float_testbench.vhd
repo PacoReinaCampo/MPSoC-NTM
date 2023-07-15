@@ -913,30 +913,42 @@ begin
         assert data_out_vector_float_adder = VECTOR_ADDER_OUTPUT_0(i)
           report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_float_adder) & "; CORRECT = " & to_string(VECTOR_ADDER_OUTPUT_0(i))
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_float_adder = '1' and not data_out_vector_float_adder = ZERO_DATA) then
         assert data_out_vector_float_adder = VECTOR_ADDER_OUTPUT_0(i)
           report "VECTOR ADDER: CALCULATED = " & to_string(data_out_vector_float_adder) & "; CORRECT = " & to_string(VECTOR_ADDER_OUTPUT_0(i))
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_float_multiplier = '1' and data_out_enable_vector_float_multiplier = '1') then
         assert data_out_vector_float_multiplier = VECTOR_MULTIPLIER_OUTPUT_0(i)
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_float_multiplier) & "; CORRECT = " & to_string(VECTOR_MULTIPLIER_OUTPUT_0(i))
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_float_multiplier = '1' and not data_out_vector_float_multiplier = ZERO_DATA) then
         assert data_out_vector_float_multiplier = VECTOR_MULTIPLIER_OUTPUT_0(i)
           report "VECTOR MULTIPLIER: CALCULATED = " & to_string(data_out_vector_float_multiplier) & "; CORRECT = " & to_string(VECTOR_MULTIPLIER_OUTPUT_0(i))
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_float_divider = '1' and data_out_enable_vector_float_divider = '1') then
         assert data_out_vector_float_divider = VECTOR_DIVIDER_OUTPUT_0(i)
           report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_float_divider) & "; CORRECT = " & to_string(VECTOR_DIVIDER_OUTPUT_0(i))
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_float_divider = '1' and not data_out_vector_float_divider = ZERO_DATA) then
         assert data_out_vector_float_divider = VECTOR_DIVIDER_OUTPUT_0(i)
           report "VECTOR DIVIDER: CALCULATED = " & to_string(data_out_vector_float_divider) & "; CORRECT = " & to_string(VECTOR_DIVIDER_OUTPUT_0(i))
           severity error;
+
+        i := i + 1;
       end if;
     end if;
   end process vector_assertion;
@@ -1061,42 +1073,66 @@ begin
         assert data_out_matrix_float_adder = MATRIX_ADDER_OUTPUT_0(i, j)
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(MATRIX_ADDER_OUTPUT_0(i, j))
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_float_adder = '1' and data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = ZERO_DATA) then
         assert data_out_matrix_float_adder = MATRIX_ADDER_OUTPUT_0(i, j)
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(MATRIX_ADDER_OUTPUT_0(i, j))
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_float_adder = '1' and not data_out_matrix_float_adder = ZERO_DATA) then
         assert data_out_matrix_float_adder = MATRIX_ADDER_OUTPUT_0(i, j)
           report "MATRIX ADDER: CALCULATED = " & to_string(data_out_matrix_float_adder) & "; CORRECT = " & to_string(MATRIX_ADDER_OUTPUT_0(i, j))
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_float_multiplier = '1' and data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1') then
         assert data_out_matrix_float_multiplier = MATRIX_MULTIPLIER_OUTPUT_0(i, j)
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(MATRIX_MULTIPLIER_OUTPUT_0(i, j))
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = ZERO_DATA) then
         assert data_out_matrix_float_multiplier = MATRIX_MULTIPLIER_OUTPUT_0(i, j)
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(MATRIX_MULTIPLIER_OUTPUT_0(i, j))
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_float_multiplier = '1' and not data_out_matrix_float_multiplier = ZERO_DATA) then
         assert data_out_matrix_float_multiplier = MATRIX_MULTIPLIER_OUTPUT_0(i, j)
           report "MATRIX MULTIPLIER: CALCULATED = " & to_string(data_out_matrix_float_multiplier) & "; CORRECT = " & to_string(MATRIX_MULTIPLIER_OUTPUT_0(i, j))
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_float_divider = '1' and data_out_i_enable_matrix_float_divider = '1' and data_out_j_enable_matrix_float_divider = '1') then
         assert data_out_matrix_float_divider = MATRIX_DIVIDER_OUTPUT_0(i, j)
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(MATRIX_DIVIDER_OUTPUT_0(i, j))
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_float_divider = '1' and data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = ZERO_DATA) then
         assert data_out_matrix_float_divider = MATRIX_DIVIDER_OUTPUT_0(i, j)
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(MATRIX_DIVIDER_OUTPUT_0(i, j))
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_float_divider = '1' and not data_out_matrix_float_divider = ZERO_DATA) then
         assert data_out_matrix_float_divider = MATRIX_DIVIDER_OUTPUT_0(i, j)
           report "MATRIX DIVIDER: CALCULATED = " & to_string(data_out_matrix_float_divider) & "; CORRECT = " & to_string(MATRIX_DIVIDER_OUTPUT_0(i, j))
           severity error;
+
+        j := j + 1;
       end if;
     end if;
   end process matrix_assertion;
@@ -1234,54 +1270,93 @@ begin
         assert data_out_tensor_float_adder = TENSOR_ADDER_OUTPUT_0(i, j, k)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(TENSOR_ADDER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_float_adder = '1' and data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = TENSOR_ADDER_OUTPUT_0(i, j, k)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(TENSOR_ADDER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_float_adder = '1' and data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = TENSOR_ADDER_OUTPUT_0(i, j, k)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(TENSOR_ADDER_OUTPUT_0(i, j, k))
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_float_adder = '1' and not data_out_tensor_float_adder = ZERO_DATA) then
         assert data_out_tensor_float_adder = TENSOR_ADDER_OUTPUT_0(i, j, k)
           report "TENSOR ADDER: CALCULATED = " & to_string(data_out_tensor_float_adder) & "; CORRECT = " & to_string(TENSOR_ADDER_OUTPUT_0(i, j, k))
           severity error;
+
+        k := k + 1;
       end if;
 
       if (ready_tensor_float_multiplier = '1' and data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_multiplier = '1') then
         assert data_out_tensor_float_multiplier = TENSOR_MULTIPLIER_OUTPUT_0(i, j, k)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(TENSOR_MULTIPLIER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_float_multiplier = '1' and data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = TENSOR_MULTIPLIER_OUTPUT_0(i, j, k)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(TENSOR_MULTIPLIER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_float_multiplier = '1' and data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = TENSOR_MULTIPLIER_OUTPUT_0(i, j, k)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(TENSOR_MULTIPLIER_OUTPUT_0(i, j, k))
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_float_multiplier = '1' and not data_out_tensor_float_multiplier = ZERO_DATA) then
         assert data_out_tensor_float_multiplier = TENSOR_MULTIPLIER_OUTPUT_0(i, j, k)
           report "TENSOR MULTIPLIER: CALCULATED = " & to_string(data_out_tensor_float_multiplier) & "; CORRECT = " & to_string(TENSOR_MULTIPLIER_OUTPUT_0(i, j, k))
           severity error;
+
+        k := k + 1;
       end if;
 
       if (ready_tensor_float_divider = '1' and data_out_i_enable_tensor_float_divider = '1' and data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1') then
         assert data_out_tensor_float_divider = TENSOR_DIVIDER_OUTPUT_0(i, j, k)
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(TENSOR_DIVIDER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
       elsif (data_out_i_enable_tensor_float_divider = '1' and data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = ZERO_DATA) then
         assert data_out_tensor_float_divider = TENSOR_DIVIDER_OUTPUT_0(i, j, k)
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(TENSOR_DIVIDER_OUTPUT_0(i, j, k))
           severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
       elsif (data_out_j_enable_tensor_float_divider = '1' and data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = ZERO_DATA) then
         assert data_out_tensor_float_divider = TENSOR_DIVIDER_OUTPUT_0(i, j, k)
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(TENSOR_DIVIDER_OUTPUT_0(i, j, k))
           severity error;
+
+        j := j + 1;
+        k := 0;
       elsif (data_out_k_enable_tensor_float_divider = '1' and not data_out_tensor_float_divider = ZERO_DATA) then
         assert data_out_tensor_float_divider = TENSOR_DIVIDER_OUTPUT_0(i, j, k)
           report "TENSOR DIVIDER: CALCULATED = " & to_string(data_out_tensor_float_divider) & "; CORRECT = " & to_string(TENSOR_DIVIDER_OUTPUT_0(i, j, k))
           severity error;
+
+        k := k + 1;
       end if;
     end if;
   end process tensor_assertion;

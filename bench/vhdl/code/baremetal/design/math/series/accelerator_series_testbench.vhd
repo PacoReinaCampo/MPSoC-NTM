@@ -1172,56 +1172,77 @@ begin
   end generate accelerator_vector_tanh_function_test;
 
   vector_assertion : process (CLK, RST)
+    variable i : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_vector_cosh = '1' and data_out_enable_vector_cosh = '1') then
         assert data_out_vector_cosh = data_out_vector_cosh_model
           report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_cosh = '1' and not data_out_vector_cosh = EMPTY) then
         assert data_out_vector_cosh = data_out_vector_cosh_model
           report "VECTOR COSH: CALCULATED = " & to_string(data_out_vector_cosh) & "; CORRECT = " & to_string(data_out_vector_cosh_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_exponentiator = '1' and data_out_enable_vector_exponentiator = '1') then
         assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
           report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_exponentiator = '1' and not data_out_vector_exponentiator = EMPTY) then
         assert data_out_vector_exponentiator = data_out_vector_exponentiator_model
           report "VECTOR EXPONENTIATOR: CALCULATED = " & to_string(data_out_vector_exponentiator) & "; CORRECT = " & to_string(data_out_vector_exponentiator_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_logarithm = '1' and data_out_enable_vector_logarithm = '1') then
         assert data_out_vector_logarithm = data_out_vector_logarithm_model
           report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_logarithm = '1' and not data_out_vector_logarithm = EMPTY) then
         assert data_out_vector_logarithm = data_out_vector_logarithm_model
           report "VECTOR LOGARITHM: CALCULATED = " & to_string(data_out_vector_logarithm) & "; CORRECT = " & to_string(data_out_vector_logarithm_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_sinh = '1' and data_out_enable_vector_sinh = '1') then
         assert data_out_vector_sinh = data_out_vector_sinh_model
           report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_sinh = '1' and not data_out_vector_sinh = EMPTY) then
         assert data_out_vector_sinh = data_out_vector_sinh_model
           report "VECTOR SINH: CALCULATED = " & to_string(data_out_vector_sinh) & "; CORRECT = " & to_string(data_out_vector_sinh_model)
           severity error;
+
+        i := i + 1;
       end if;
 
       if (ready_vector_tanh = '1' and data_out_enable_vector_tanh = '1') then
         assert data_out_vector_tanh = data_out_vector_tanh_model
           report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
+
+        i := 0;
       elsif (data_out_enable_vector_tanh = '1' and not data_out_vector_tanh = EMPTY) then
         assert data_out_vector_tanh = data_out_vector_tanh_model
           report "VECTOR TANH: CALCULATED = " & to_string(data_out_vector_tanh) & "; CORRECT = " & to_string(data_out_vector_tanh_model)
           severity error;
+
+        i := i + 1;
       end if;
     end if;
   end process vector_assertion;
@@ -1516,76 +1537,118 @@ begin
   end generate accelerator_matrix_tanh_function_test;
 
   matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_matrix_cosh = '1' and data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1') then
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_cosh = '1' and data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_cosh = '1' and not data_out_matrix_cosh = EMPTY) then
         assert data_out_matrix_cosh = data_out_matrix_cosh_model
           report "MATRIX COSH: CALCULATED = " & to_string(data_out_matrix_cosh) & "; CORRECT = " & to_string(data_out_matrix_cosh_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_exponentiator = '1' and data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1') then
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_exponentiator = '1' and not data_out_matrix_exponentiator = EMPTY) then
         assert data_out_matrix_exponentiator = data_out_matrix_exponentiator_model
           report "MATRIX EXPONENTIATOR: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_logarithm = '1' and data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1') then
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_logarithm = '1' and data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_logarithm = '1' and not data_out_matrix_logarithm = EMPTY) then
         assert data_out_matrix_logarithm = data_out_matrix_logarithm_model
           report "MATRIX LOGARITHM: CALCULATED = " & to_string(data_out_matrix_logarithm) & "; CORRECT = " & to_string(data_out_matrix_logarithm_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_sinh = '1' and data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1') then
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_sinh = '1' and data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_sinh = '1' and not data_out_matrix_sinh = EMPTY) then
         assert data_out_matrix_sinh = data_out_matrix_sinh_model
           report "MATRIX SINH: CALCULATED = " & to_string(data_out_matrix_sinh) & "; CORRECT = " & to_string(data_out_matrix_sinh_model)
           severity error;
+
+        j := j + 1;
       end if;
 
       if (ready_matrix_tanh = '1' and data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1') then
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
+
+        i := 0;
+        j := 0;
       elsif (data_out_i_enable_matrix_tanh = '1' and data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
+
+        i := i + 1;
+        j := 0;
       elsif (data_out_j_enable_matrix_tanh = '1' and not data_out_matrix_tanh = EMPTY) then
         assert data_out_matrix_tanh = data_out_matrix_tanh_model
           report "MATRIX TANH: CALCULATED = " & to_string(data_out_matrix_tanh) & "; CORRECT = " & to_string(data_out_matrix_tanh_model)
           severity error;
+
+        j := j + 1;
       end if;
     end if;
   end process matrix_assertion;
