@@ -247,10 +247,10 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST) then
+    if (STIMULUS_CONVOLUTIONAL_FNN_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_TEST          ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST                           ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -261,10 +261,10 @@ begin
       CONVOLUTIONAL_FNN_SIZE_S_IN <= FOUR_CONTROL;
       CONVOLUTIONAL_FNN_SIZE_M_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0) then
+      if (STIMULUS_CONVOLUTIONAL_FNN_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_CASE 0        ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 0                         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -677,10 +677,10 @@ begin
         end loop CONVOLUTIONAL_FNN_FIRST_RUN;
       end if;
 
-      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1) then
+      if (STIMULUS_CONVOLUTIONAL_FNN_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_CONVOLUTIONAL_FNN_CASE 1        ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 1                         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

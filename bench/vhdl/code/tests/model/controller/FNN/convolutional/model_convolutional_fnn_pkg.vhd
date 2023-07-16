@@ -108,6 +108,13 @@ package model_convolutional_fnn_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
+  -- VECTOR-FUNCTIONALITY
+  signal STIMULUS_MODEL_CONVOLUTIONAL_FNN_TEST : boolean := false;
+
+  signal STIMULUS_MODEL_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
+
+  signal STIMULUS_MODEL_CONVOLUTIONAL_FNN_CASE_1 : boolean := false;
+
   ------------------------------------------------------------------------------
   -- Components
   ------------------------------------------------------------------------------
@@ -131,100 +138,100 @@ package model_convolutional_fnn_pkg is
       RST : out std_logic;
 
       -- CONTROL
-      NTM_CONVOLUTIONAL_FNN_START : out std_logic;
-      NTM_CONVOLUTIONAL_FNN_READY : in  std_logic;
+      CONVOLUTIONAL_FNN_START : out std_logic;
+      CONVOLUTIONAL_FNN_READY : in  std_logic;
 
-      NTM_CONVOLUTIONAL_FNN_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
+      CONVOLUTIONAL_FNN_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-      NTM_CONVOLUTIONAL_FNN_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
+      CONVOLUTIONAL_FNN_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-      NTM_CONVOLUTIONAL_FNN_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+      CONVOLUTIONAL_FNN_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-      NTM_CONVOLUTIONAL_FNN_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+      CONVOLUTIONAL_FNN_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-      NTM_CONVOLUTIONAL_FNN_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+      CONVOLUTIONAL_FNN_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-      NTM_CONVOLUTIONAL_FNN_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+      CONVOLUTIONAL_FNN_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-      NTM_CONVOLUTIONAL_FNN_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
+      CONVOLUTIONAL_FNN_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
 
-      NTM_CONVOLUTIONAL_FNN_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
+      CONVOLUTIONAL_FNN_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
 
-      NTM_CONVOLUTIONAL_FNN_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
+      CONVOLUTIONAL_FNN_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-      NTM_CONVOLUTIONAL_FNN_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_CONVOLUTIONAL_FNN_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
+      CONVOLUTIONAL_FNN_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-      NTM_CONVOLUTIONAL_FNN_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-      NTM_CONVOLUTIONAL_FNN_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-      NTM_CONVOLUTIONAL_FNN_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
+      CONVOLUTIONAL_FNN_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-      NTM_CONVOLUTIONAL_FNN_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
+      CONVOLUTIONAL_FNN_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-      NTM_CONVOLUTIONAL_FNN_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+      CONVOLUTIONAL_FNN_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-      NTM_CONVOLUTIONAL_FNN_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+      CONVOLUTIONAL_FNN_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-      NTM_CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+      CONVOLUTIONAL_FNN_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-      NTM_CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-      NTM_CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+      CONVOLUTIONAL_FNN_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+      CONVOLUTIONAL_FNN_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-      NTM_CONVOLUTIONAL_FNN_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
+      CONVOLUTIONAL_FNN_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-      NTM_CONVOLUTIONAL_FNN_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
+      CONVOLUTIONAL_FNN_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-      NTM_CONVOLUTIONAL_FNN_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-      NTM_CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+      CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
       -- DATA
-      NTM_CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_CONVOLUTIONAL_FNN_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_CONVOLUTIONAL_FNN_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_CONVOLUTIONAL_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      CONVOLUTIONAL_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_CONVOLUTIONAL_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      CONVOLUTIONAL_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

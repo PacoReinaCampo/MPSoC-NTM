@@ -109,11 +109,11 @@ package accelerator_convolutional_fnn_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST : boolean := false;
+  signal STIMULUS_CONVOLUTIONAL_FNN_TEST : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
+  signal STIMULUS_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1 : boolean := false;
+  signal STIMULUS_CONVOLUTIONAL_FNN_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
