@@ -387,13 +387,13 @@ begin
     if (STIMULUS_ACCELERATOR_SCALAR_COSH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_COSH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_SCALAR_COSH_TEST                                 ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_SCALAR_COSH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_COSH_CASE 0                               ";
         -------------------------------------------------------------------
 
         SCALAR_COSH_DATA_IN <= SCALAR_SAMPLE_A;
@@ -402,7 +402,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_COSH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_COSH_CASE 1                               ";
         -------------------------------------------------------------------
 
         SCALAR_COSH_DATA_IN <= SCALAR_SAMPLE_B;
@@ -415,13 +415,13 @@ begin
     if (STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST  ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST                        ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 0";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE 0                      ";
         -------------------------------------------------------------------
 
         SCALAR_EXPONENTIATOR_DATA_IN <= SCALAR_SAMPLE_A;
@@ -430,7 +430,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 1";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE 1                      ";
         -------------------------------------------------------------------
 
         SCALAR_EXPONENTIATOR_DATA_IN <= SCALAR_SAMPLE_B;
@@ -443,13 +443,13 @@ begin
     if (STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_LOGARITHM_TEST      ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_TEST                            ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 0    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE 0                          ";
         -------------------------------------------------------------------
 
         SCALAR_LOGARITHM_DATA_IN <= SCALAR_SAMPLE_A;
@@ -458,7 +458,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 1    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE 1                          ";
         -------------------------------------------------------------------
 
         SCALAR_LOGARITHM_DATA_IN <= SCALAR_SAMPLE_B;
@@ -471,13 +471,13 @@ begin
     if (STIMULUS_ACCELERATOR_SCALAR_SINH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_SINH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_SCALAR_SINH_TEST                                 ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_SCALAR_SINH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SINH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_SINH_CASE 0                               ";
         -------------------------------------------------------------------
 
         SCALAR_SINH_DATA_IN <= SCALAR_SAMPLE_A;
@@ -486,7 +486,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_SINH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SINH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_SINH_CASE 1                               ";
         -------------------------------------------------------------------
 
         SCALAR_SINH_DATA_IN <= SCALAR_SAMPLE_B;
@@ -499,13 +499,13 @@ begin
     if (STIMULUS_ACCELERATOR_SCALAR_TANH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_TANH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_SCALAR_TANH_TEST                                 ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_SCALAR_TANH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TANH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_TANH_CASE 0                               ";
         -------------------------------------------------------------------
 
         SCALAR_TANH_DATA_IN <= SCALAR_SAMPLE_A;
@@ -514,7 +514,7 @@ begin
       if (STIMULUS_ACCELERATOR_SCALAR_TANH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TANH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_SCALAR_TANH_CASE 1                               ";
         -------------------------------------------------------------------
 
         SCALAR_TANH_DATA_IN <= SCALAR_SAMPLE_B;
@@ -531,7 +531,7 @@ begin
     if (STIMULUS_ACCELERATOR_VECTOR_COSH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_COSH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_VECTOR_COSH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -540,7 +540,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_COSH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_COSH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -585,7 +585,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_COSH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_COSH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -634,7 +634,7 @@ begin
     if (STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST  ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST                        ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -643,7 +643,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 0";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE 0                      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -688,7 +688,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 1";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE 1                      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -737,7 +737,7 @@ begin
     if (STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_LOGARITHM_TEST      ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_TEST                            ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -746,7 +746,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGARITHM_CASE 0    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE 0                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -791,7 +791,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGARITHM_CASE 1    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE 1                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -840,7 +840,7 @@ begin
     if (STIMULUS_ACCELERATOR_VECTOR_SINH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_SINH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_VECTOR_SINH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -849,7 +849,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SINH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_SINH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -894,7 +894,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SINH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_SINH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -943,7 +943,7 @@ begin
     if (STIMULUS_ACCELERATOR_VECTOR_TANH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_TANH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_VECTOR_TANH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -952,7 +952,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TANH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_TANH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -997,7 +997,7 @@ begin
       if (STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TANH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_VECTOR_TANH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1050,7 +1050,7 @@ begin
     if (STIMULUS_ACCELERATOR_MATRIX_COSH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_COSH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_COSH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1060,7 +1060,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_COSH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_COSH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_COSH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1120,7 +1120,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_COSH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_COSH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_COSH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1184,7 +1184,7 @@ begin
     if (STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST  ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST                        ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1194,7 +1194,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 0";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE 0                      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1254,7 +1254,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 1";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE 1                      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1318,7 +1318,7 @@ begin
     if (STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_LOGARITHM_TEST      ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_TEST                            ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1328,7 +1328,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGARITHM_CASE 0    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE 0                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1388,7 +1388,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGARITHM_CASE 1    ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE 1                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1452,7 +1452,7 @@ begin
     if (STIMULUS_ACCELERATOR_MATRIX_SINH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_SINH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_SINH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1462,7 +1462,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_SINH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SINH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_SINH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1522,7 +1522,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_SINH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SINH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_SINH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1586,7 +1586,7 @@ begin
     if (STIMULUS_ACCELERATOR_MATRIX_TANH_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_TANH_TEST           ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_TANH_TEST                                 ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1596,7 +1596,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_TANH_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TANH_CASE 0         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_TANH_CASE 0                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1656,7 +1656,7 @@ begin
       if (STIMULUS_ACCELERATOR_MATRIX_TANH_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TANH_CASE 1         ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_TANH_CASE 1                               ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

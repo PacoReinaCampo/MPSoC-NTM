@@ -40,6 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_calculus_pkg.all;
 
@@ -98,6 +99,47 @@ entity model_calculus_testbench is
 end model_calculus_testbench;
 
 architecture model_calculus_testbench_architecture of model_calculus_testbench is
+
+  ------------------------------------------------------------------------------
+  -- Constants
+  ------------------------------------------------------------------------------
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant CONTROL_X : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_Y : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_Z : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+  constant CONTROL_L : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(CONTROL_SIZE, CONTROL_SIZE));
+
+  -- VECTOR
+  constant VECTOR_DIFFERENTIATION_OUTPUT_0 : vector_buffer := function_vector_differentiation(CONTROL_X, CONTROL_L, VECTOR_SAMPLE_A);
+  constant VECTOR_DIFFERENTIATION_OUTPUT_1 : vector_buffer := function_vector_differentiation(CONTROL_X, CONTROL_L, VECTOR_SAMPLE_B);
+
+  constant VECTOR_INTEGRATION_OUTPUT_0 : vector_buffer := function_vector_integration(CONTROL_X, CONTROL_L, VECTOR_SAMPLE_A);
+  constant VECTOR_INTEGRATION_OUTPUT_1 : vector_buffer := function_vector_integration(CONTROL_X, CONTROL_L, VECTOR_SAMPLE_B);
+
+  constant VECTOR_SOFTMAX_OUTPUT_0 : vector_buffer := function_vector_softmax(CONTROL_X, VECTOR_SAMPLE_A);
+  constant VECTOR_SOFTMAX_OUTPUT_1 : vector_buffer := function_vector_softmax(CONTROL_X, VECTOR_SAMPLE_B);
+
+  -- MATRIX
+  constant MATRIX_DIFFERENTIATION_OUTPUT_0 : matrix_buffer := function_matrix_differentiation('0', CONTROL_X, CONTROL_Y, CONTROL_L, CONTROL_L, MATRIX_SAMPLE_A);
+  constant MATRIX_DIFFERENTIATION_OUTPUT_1 : matrix_buffer := function_matrix_differentiation('0', CONTROL_X, CONTROL_Y, CONTROL_L, CONTROL_L, MATRIX_SAMPLE_B);
+
+  constant MATRIX_INTEGRATION_OUTPUT_0 : matrix_buffer := function_matrix_integration(CONTROL_X, CONTROL_Y, CONTROL_L, MATRIX_SAMPLE_A);
+  constant MATRIX_INTEGRATION_OUTPUT_1 : matrix_buffer := function_matrix_integration(CONTROL_X, CONTROL_Y, CONTROL_L, MATRIX_SAMPLE_B);
+
+  constant MATRIX_SOFTMAX_OUTPUT_0 : matrix_buffer := function_matrix_softmax(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_A);
+  constant MATRIX_SOFTMAX_OUTPUT_1 : matrix_buffer := function_matrix_softmax(CONTROL_X, CONTROL_Y, MATRIX_SAMPLE_B);
+
+  -- TENSOR
+  constant TENSOR_DIFFERENTIATION_OUTPUT_0 : tensor_buffer := function_tensor_differentiation("00", CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_L, CONTROL_L, CONTROL_L, TENSOR_SAMPLE_A);
+  constant TENSOR_DIFFERENTIATION_OUTPUT_1 : tensor_buffer := function_tensor_differentiation("00", CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_L, CONTROL_L, CONTROL_L, TENSOR_SAMPLE_B);
+
+  constant TENSOR_INTEGRATION_OUTPUT_0 : tensor_buffer := function_tensor_integration(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_L, TENSOR_SAMPLE_A);
+  constant TENSOR_INTEGRATION_OUTPUT_1 : tensor_buffer := function_tensor_integration(CONTROL_X, CONTROL_Y, CONTROL_Z, CONTROL_L, TENSOR_SAMPLE_B);
+
+  constant TENSOR_SOFTMAX_OUTPUT_0 : tensor_buffer := function_tensor_softmax(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_A);
+  constant TENSOR_SOFTMAX_OUTPUT_1 : tensor_buffer := function_tensor_softmax(CONTROL_X, CONTROL_Y, CONTROL_Z, TENSOR_SAMPLE_B);
 
   ------------------------------------------------------------------------------
   -- Signals
@@ -608,6 +650,54 @@ begin
         );
   end generate model_vector_softmax_test;
 
+  vector_assertion : process (CLK, RST)
+    variable i : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_vector_differentiation = '1' and data_out_enable_vector_differentiation = '1') then
+        assert data_out_vector_differentiation = VECTOR_DIFFERENTIATION_OUTPUT_0(i)
+          report "VECTOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_vector_differentiation) & "; CORRECT = " & to_string(VECTOR_DIFFERENTIATION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_differentiation = '1' and not data_out_vector_differentiation = EMPTY) then
+        assert data_out_vector_differentiation = VECTOR_DIFFERENTIATION_OUTPUT_0(i)
+          report "VECTOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_vector_differentiation) & "; CORRECT = " & to_string(VECTOR_DIFFERENTIATION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_integration = '1' and data_out_enable_vector_integration = '1') then
+        assert data_out_vector_integration = VECTOR_INTEGRATION_OUTPUT_0(i)
+          report "VECTOR INTEGRATION: CALCULATED = " & to_string(data_out_vector_integration) & "; CORRECT = " & to_string(VECTOR_INTEGRATION_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_integration = '1' and not data_out_vector_integration = EMPTY) then
+        assert data_out_vector_integration = VECTOR_INTEGRATION_OUTPUT_0(i)
+          report "VECTOR INTEGRATION: CALCULATED = " & to_string(data_out_vector_integration) & "; CORRECT = " & to_string(VECTOR_INTEGRATION_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+
+      if (ready_vector_softmax = '1' and data_out_enable_vector_softmax = '1') then
+        assert data_out_vector_softmax = VECTOR_SOFTMAX_OUTPUT_0(i)
+          report "VECTOR SOFTMAX: CALCULATED = " & to_string(data_out_vector_softmax) & "; CORRECT = " & to_string(VECTOR_SOFTMAX_OUTPUT_0(i))
+          severity error;
+
+        i := 0;
+      elsif (data_out_enable_vector_softmax = '1' and not data_out_vector_softmax = EMPTY) then
+        assert data_out_vector_softmax = VECTOR_SOFTMAX_OUTPUT_0(i)
+          report "VECTOR SOFTMAX: CALCULATED = " & to_string(data_out_vector_softmax) & "; CORRECT = " & to_string(VECTOR_SOFTMAX_OUTPUT_0(i))
+          severity error;
+
+        i := i + 1;
+      end if;
+    end if;
+  end process vector_assertion;
+
   -- MATRIX DIFFERENTIATION
   model_matrix_differentiation_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
     matrix_differentiation : model_matrix_differentiation
@@ -678,6 +768,79 @@ begin
         DATA_OUT  => data_out_matrix_integration
         );
   end generate model_matrix_integration_test;
+
+  matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_matrix_differentiation = '1' and data_out_i_enable_matrix_differentiation = '1' and data_out_j_enable_matrix_differentiation = '1') then
+        assert data_out_matrix_differentiation = MATRIX_DIFFERENTIATION_OUTPUT_0(i, j)
+          report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(MATRIX_DIFFERENTIATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_differentiation = '1' and data_out_j_enable_matrix_differentiation = '1' and not data_out_matrix_differentiation = EMPTY) then
+        assert data_out_matrix_differentiation = MATRIX_DIFFERENTIATION_OUTPUT_0(i, j)
+          report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(MATRIX_DIFFERENTIATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_differentiation = '1' and not data_out_matrix_differentiation = EMPTY) then
+        assert data_out_matrix_differentiation = MATRIX_DIFFERENTIATION_OUTPUT_0(i, j)
+          report "MATRIX DIFFERENTIATION: CALCULATED = " & to_string(data_out_matrix_differentiation) & "; CORRECT = " & to_string(MATRIX_DIFFERENTIATION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_integration = '1' and data_out_i_enable_matrix_integration = '1' and data_out_j_enable_matrix_integration = '1') then
+        assert data_out_matrix_integration = MATRIX_INTEGRATION_OUTPUT_0(i, j)
+          report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(MATRIX_INTEGRATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_integration = '1' and data_out_j_enable_matrix_integration = '1' and not data_out_matrix_integration = EMPTY) then
+        assert data_out_matrix_integration = MATRIX_INTEGRATION_OUTPUT_0(i, j)
+          report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(MATRIX_INTEGRATION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_integration = '1' and not data_out_matrix_integration = EMPTY) then
+        assert data_out_matrix_integration = MATRIX_INTEGRATION_OUTPUT_0(i, j)
+          report "MATRIX INTEGRATION: CALCULATED = " & to_string(data_out_matrix_integration) & "; CORRECT = " & to_string(MATRIX_INTEGRATION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_matrix_softmax = '1' and data_out_i_enable_matrix_softmax = '1' and data_out_j_enable_matrix_softmax = '1') then
+        assert data_out_matrix_softmax = MATRIX_SOFTMAX_OUTPUT_0(i, j)
+          report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(MATRIX_SOFTMAX_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_matrix_softmax = '1' and data_out_j_enable_matrix_softmax = '1' and not data_out_matrix_softmax = EMPTY) then
+        assert data_out_matrix_softmax = MATRIX_SOFTMAX_OUTPUT_0(i, j)
+          report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(MATRIX_SOFTMAX_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_matrix_softmax = '1' and not data_out_matrix_softmax = EMPTY) then
+        assert data_out_matrix_softmax = MATRIX_SOFTMAX_OUTPUT_0(i, j)
+          report "MATRIX SOFTMAX: CALCULATED = " & to_string(data_out_matrix_softmax) & "; CORRECT = " & to_string(MATRIX_SOFTMAX_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+    end if;
+  end process matrix_assertion;
 
   -- MATRIX SOFTMAX
   model_matrix_softmax_test : if (ENABLE_NTM_MATRIX_SOFTMAX_TEST) generate
@@ -828,5 +991,106 @@ begin
         DATA_OUT  => data_out_tensor_softmax
         );
   end generate model_tensor_softmax_test;
+
+  tensor_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
+    variable k : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_tensor_differentiation = '1' and data_out_i_enable_tensor_differentiation = '1' and data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_differentiation = '1') then
+        assert data_out_tensor_differentiation = TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k)
+          report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_differentiation = '1' and data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
+        assert data_out_tensor_differentiation = TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k)
+          report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_differentiation = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
+        assert data_out_tensor_differentiation = TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k)
+          report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_differentiation = EMPTY) then
+        assert data_out_tensor_differentiation = TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k)
+          report "TENSOR DIFFERENTIATION: CALCULATED = " & to_string(data_out_tensor_differentiation) & "; CORRECT = " & to_string(TENSOR_DIFFERENTIATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+
+      if (ready_tensor_integration = '1' and data_out_i_enable_tensor_integration = '1' and data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_integration = '1') then
+        assert data_out_tensor_integration = TENSOR_INTEGRATION_OUTPUT_0(i, j, k)
+          report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(TENSOR_INTEGRATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_integration = '1' and data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
+        assert data_out_tensor_integration = TENSOR_INTEGRATION_OUTPUT_0(i, j, k)
+          report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(TENSOR_INTEGRATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_integration = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
+        assert data_out_tensor_integration = TENSOR_INTEGRATION_OUTPUT_0(i, j, k)
+          report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(TENSOR_INTEGRATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_integration = EMPTY) then
+        assert data_out_tensor_integration = TENSOR_INTEGRATION_OUTPUT_0(i, j, k)
+          report "TENSOR INTEGRATION: CALCULATED = " & to_string(data_out_tensor_integration) & "; CORRECT = " & to_string(TENSOR_INTEGRATION_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+
+      if (ready_tensor_softmax = '1' and data_out_i_enable_tensor_softmax = '1' and data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1') then
+        assert data_out_tensor_softmax = TENSOR_SOFTMAX_OUTPUT_0(i, j, k)
+          report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(TENSOR_SOFTMAX_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_softmax = '1' and data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
+        assert data_out_tensor_softmax = TENSOR_SOFTMAX_OUTPUT_0(i, j, k)
+          report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(TENSOR_SOFTMAX_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_softmax = '1' and data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
+        assert data_out_tensor_softmax = TENSOR_SOFTMAX_OUTPUT_0(i, j, k)
+          report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(TENSOR_SOFTMAX_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_softmax = '1' and not data_out_tensor_softmax = EMPTY) then
+        assert data_out_tensor_softmax = TENSOR_SOFTMAX_OUTPUT_0(i, j, k)
+          report "TENSOR SOFTMAX: CALCULATED = " & to_string(data_out_tensor_softmax) & "; CORRECT = " & to_string(TENSOR_SOFTMAX_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+    end if;
+  end process tensor_assertion;
 
 end model_calculus_testbench_architecture;

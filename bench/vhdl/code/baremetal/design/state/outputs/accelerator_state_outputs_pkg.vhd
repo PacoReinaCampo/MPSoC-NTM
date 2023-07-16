@@ -55,8 +55,8 @@ package accelerator_state_outputs_pkg is
   -- Signals
   ------------------------------------------------------------------------------
 
-  signal MONITOR_TEST : string(40 downto 1) := "                                        ";
-  signal MONITOR_CASE : string(40 downto 1) := "                                        ";
+  signal MONITOR_TEST : string(70 downto 1) := "                                                                      ";
+  signal MONITOR_CASE : string(70 downto 1) := "                                                                      ";
 
   ------------------------------------------------------------------------------
   -- Constants

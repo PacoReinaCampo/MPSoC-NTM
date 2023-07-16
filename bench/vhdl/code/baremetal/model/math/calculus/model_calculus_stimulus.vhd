@@ -358,7 +358,7 @@ begin
     if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST";
+      MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_TEST                            ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -368,7 +368,7 @@ begin
       if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIFFERENTIATI_CASE 0";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_CASE 0                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -413,7 +413,7 @@ begin
       if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIFFERENTIATI_CASE 1";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_CASE 1                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -462,7 +462,7 @@ begin
     if (STIMULUS_NTM_VECTOR_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_INTEGRATION_TEST    ";
+      MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_INTEGRATION_TEST                                ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -472,7 +472,7 @@ begin
       if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 0  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_INTEGRATION_CASE 0                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -517,7 +517,7 @@ begin
       if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 1  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_INTEGRATION_CASE 1                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -566,7 +566,7 @@ begin
     if (STIMULUS_NTM_VECTOR_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_SOFTMAX_TEST        ";
+      MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_SOFTMAX_TEST                                    ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -575,7 +575,7 @@ begin
       if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SOFTMAX_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SOFTMAX_CASE 0                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -620,7 +620,7 @@ begin
       if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SOFTMAX_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SOFTMAX_CASE 1                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -669,7 +669,7 @@ begin
     if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST";
+      MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_TEST                            ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -682,7 +682,7 @@ begin
       if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIFFERENTIATI_CASE 0";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_CASE 0                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -745,7 +745,7 @@ begin
       if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIFFERENTIATI_CASE 1";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_CASE 1                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -809,7 +809,7 @@ begin
     if (STIMULUS_NTM_MATRIX_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INTEGRATION_TEST    ";
+      MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_INTEGRATION_TEST                                ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -821,7 +821,7 @@ begin
       if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 0  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INTEGRATION_CASE 0                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -881,7 +881,7 @@ begin
       if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 1  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INTEGRATION_CASE 1                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -945,7 +945,7 @@ begin
     if (STIMULUS_NTM_MATRIX_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_SOFTMAX_TEST        ";
+      MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_SOFTMAX_TEST                                    ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -955,7 +955,7 @@ begin
       if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SOFTMAX_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SOFTMAX_CASE 0                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1015,7 +1015,7 @@ begin
       if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SOFTMAX_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SOFTMAX_CASE 1                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1079,7 +1079,7 @@ begin
     if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST";
+      MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_TEST                            ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1094,7 +1094,7 @@ begin
       if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_DIFFERENTIATI_CASE 0";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_CASE 0                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1173,7 +1173,7 @@ begin
       if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_DIFFERENTIATI_CASE 1";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_CASE 1                          ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1253,7 +1253,7 @@ begin
     if (STIMULUS_NTM_TENSOR_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_INTEGRATION_TEST    ";
+      MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_INTEGRATION_TEST                                ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1266,7 +1266,7 @@ begin
       if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 0  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INTEGRATION_CASE 0                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1342,7 +1342,7 @@ begin
       if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 1  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INTEGRATION_CASE 1                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1422,7 +1422,7 @@ begin
     if (STIMULUS_NTM_TENSOR_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_SOFTMAX_TEST        ";
+      MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_SOFTMAX_TEST                                    ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1433,7 +1433,7 @@ begin
       if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SOFTMAX_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_SOFTMAX_CASE 0                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1509,7 +1509,7 @@ begin
       if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SOFTMAX_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_SOFTMAX_CASE 1                                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

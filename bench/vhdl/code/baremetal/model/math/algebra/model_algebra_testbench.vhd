@@ -2112,4 +2112,180 @@ begin
         );
   end generate model_tensor_transpose_test;
 
+  tensor_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
+    variable k : integer := 0;
+  begin
+    if rising_edge(CLK) then
+      if (ready_tensor_convolution = '1' and data_out_i_enable_tensor_convolution = '1' and data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1') then
+        assert data_out_tensor_convolution = TENSOR_CONVOLUTION_OUTPUT_0(i, j, k)
+          report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(TENSOR_CONVOLUTION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_convolution = '1' and data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+        assert data_out_tensor_convolution = TENSOR_CONVOLUTION_OUTPUT_0(i, j, k)
+          report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(TENSOR_CONVOLUTION_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_convolution = '1' and data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+        assert data_out_tensor_convolution = TENSOR_CONVOLUTION_OUTPUT_0(i, j, k)
+          report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(TENSOR_CONVOLUTION_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_convolution = '1' and not data_out_tensor_convolution = EMPTY) then
+        assert data_out_tensor_convolution = TENSOR_CONVOLUTION_OUTPUT_0(i, j, k)
+          report "TENSOR CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_convolution) & "; CORRECT = " & to_string(TENSOR_CONVOLUTION_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+
+      if (ready_tensor_matrix_convolution = '1' and data_out_i_enable_tensor_matrix_convolution = '1' and data_out_j_enable_tensor_matrix_convolution = '1') then
+        assert data_out_tensor_matrix_convolution = TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_tensor_matrix_convolution = '1' and data_out_j_enable_tensor_matrix_convolution = '1' and not data_out_tensor_matrix_convolution = EMPTY) then
+        assert data_out_tensor_matrix_convolution = TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_tensor_matrix_convolution = '1' and not data_out_tensor_matrix_convolution = EMPTY) then
+        assert data_out_tensor_matrix_convolution = TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j)
+          report "TENSOR MATRIX CONVOLUTION: CALCULATED = " & to_string(data_out_tensor_matrix_convolution) & "; CORRECT = " & to_string(TENSOR_MATRIX_CONVOLUTION_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_tensor_inverse = '1' and data_out_i_enable_tensor_inverse = '1' and data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1') then
+        assert data_out_tensor_inverse = TENSOR_INVERSE_OUTPUT_0(i, j, k)
+          report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(TENSOR_INVERSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_inverse = '1' and data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+        assert data_out_tensor_inverse = TENSOR_INVERSE_OUTPUT_0(i, j, k)
+          report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(TENSOR_INVERSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_inverse = '1' and data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+        assert data_out_tensor_inverse = TENSOR_INVERSE_OUTPUT_0(i, j, k)
+          report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(TENSOR_INVERSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_inverse = '1' and not data_out_tensor_inverse = EMPTY) then
+        assert data_out_tensor_inverse = TENSOR_INVERSE_OUTPUT_0(i, j, k)
+          report "TENSOR INVERSE: CALCULATED = " & to_string(data_out_tensor_inverse) & "; CORRECT = " & to_string(TENSOR_INVERSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+
+      if (ready_tensor_product = '1' and data_out_i_enable_tensor_product = '1' and data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1') then
+        assert data_out_tensor_product = TENSOR_PRODUCT_OUTPUT_0(i, j, k)
+          report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(TENSOR_PRODUCT_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_product = '1' and data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+        assert data_out_tensor_product = TENSOR_PRODUCT_OUTPUT_0(i, j, k)
+          report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(TENSOR_PRODUCT_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_product = '1' and data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+        assert data_out_tensor_product = TENSOR_PRODUCT_OUTPUT_0(i, j, k)
+          report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(TENSOR_PRODUCT_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_product = '1' and not data_out_tensor_product = EMPTY) then
+        assert data_out_tensor_product = TENSOR_PRODUCT_OUTPUT_0(i, j, k)
+          report "TENSOR PRODUCT: CALCULATED = " & to_string(data_out_tensor_product) & "; CORRECT = " & to_string(TENSOR_PRODUCT_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+
+      if (ready_tensor_matrix_product = '1' and data_out_i_enable_tensor_matrix_product = '1' and data_out_j_enable_tensor_matrix_product = '1') then
+        assert data_out_tensor_matrix_product = TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        i := 0;
+        j := 0;
+      elsif (data_out_i_enable_tensor_matrix_product = '1' and data_out_j_enable_tensor_matrix_product = '1' and not data_out_tensor_matrix_product = EMPTY) then
+        assert data_out_tensor_matrix_product = TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+      elsif (data_out_j_enable_tensor_matrix_product = '1' and not data_out_tensor_matrix_product = EMPTY) then
+        assert data_out_tensor_matrix_product = TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j)
+          report "TENSOR MATRIX PRODUCT: CALCULATED = " & to_string(data_out_tensor_matrix_product) & "; CORRECT = " & to_string(TENSOR_MATRIX_PRODUCT_OUTPUT_0(i, j))
+          severity error;
+
+        j := j + 1;
+      end if;
+
+      if (ready_tensor_transpose = '1' and data_out_i_enable_tensor_transpose = '1' and data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1') then
+        assert data_out_tensor_transpose = TENSOR_TRANSPOSE_OUTPUT_0(i, j, k)
+          report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(TENSOR_TRANSPOSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := 0;
+        j := 0;
+        k := 0;
+      elsif (data_out_i_enable_tensor_transpose = '1' and data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+        assert data_out_tensor_transpose = TENSOR_TRANSPOSE_OUTPUT_0(i, j, k)
+          report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(TENSOR_TRANSPOSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        i := i + 1;
+        j := 0;
+        k := 0;
+      elsif (data_out_j_enable_tensor_transpose = '1' and data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+        assert data_out_tensor_transpose = TENSOR_TRANSPOSE_OUTPUT_0(i, j, k)
+          report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(TENSOR_TRANSPOSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        j := j + 1;
+        k := 0;
+      elsif (data_out_k_enable_tensor_transpose = '1' and not data_out_tensor_transpose = EMPTY) then
+        assert data_out_tensor_transpose = TENSOR_TRANSPOSE_OUTPUT_0(i, j, k)
+          report "TENSOR TRANSPOSE: CALCULATED = " & to_string(data_out_tensor_transpose) & "; CORRECT = " & to_string(TENSOR_TRANSPOSE_OUTPUT_0(i, j, k))
+          severity error;
+
+        k := k + 1;
+      end if;
+    end if;
+  end process tensor_assertion;
+
 end model_algebra_testbench_architecture;
