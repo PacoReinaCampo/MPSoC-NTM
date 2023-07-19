@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.computing_pkg.all;
 
-entity yes_gate is
+entity not_a_and_b_gate is
   generic (
     DATA_SIZE : integer := 64
     );
@@ -54,13 +54,14 @@ entity yes_gate is
     RST : in std_logic;
 
     -- DATA
-    DATA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture yes_gate_architecture of yes_gate is
+architecture not_a_and_b_gate_architecture of not_a_and_b_gate is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -80,7 +81,7 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_IN
+  -- DATA_OUT = not DATA_A_IN and DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -90,7 +91,7 @@ begin
       DATA_OUT <= ZERO_DATA;
     elsif (rising_edge(CLK)) then
       -- Data Outputs
-      DATA_OUT <= DATA_IN;
+      DATA_OUT <= not DATA_A_IN and DATA_B_IN;
     end if;
   end process;
 

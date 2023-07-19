@@ -44,18 +44,14 @@ use ieee.numeric_std.all;
 
 use work.computing_pkg.all;
 
-entity logic_circuits is
+entity true_gate is
   generic (
-    DATA_SIZE    : integer := 64;
-    CONTROL_SIZE : integer := 64
+    DATA_SIZE : integer := 64
     );
   port (
     -- GLOBAL
     CLK : in std_logic;
     RST : in std_logic;
-
-    -- CONTROL
-    OPERATION : in std_logic_vector(3 downto 0);
 
     -- DATA
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -65,7 +61,7 @@ entity logic_circuits is
     );
 end entity;
 
-architecture logic_circuits_architecture of logic_circuits is
+architecture true_gate_architecture of true_gate is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -85,7 +81,7 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
-  -- DATA_OUT = function(DATA_A_IN, DATA_B_IN)
+  -- DATA_OUT = FULL_DATA
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -94,60 +90,8 @@ begin
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
     elsif (rising_edge(CLK)) then
-
-      case OPERATION is
-        when "0000" =>                  -- STEP 0
-          -- Control Outputs
-          DATA_OUT <= ZERO_DATA;
-        when "0001" =>                  -- STEP 1
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN and DATA_B_IN;
-        when "0010" =>                  -- STEP 2
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN and not DATA_B_IN;
-        when "0011" =>                  -- STEP 3
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN
-        when "0100" =>                  -- STEP 4
-          -- Data Outputs
-          DATA_OUT <= not DATA_A_IN and DATA_B_IN;
-        when "0101" =>                  -- STEP 5
-          -- Data Outputs
-          DATA_OUT <= DATA_B_IN;
-        when "0110" =>                  -- STEP 6
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN xor DATA_B_IN;
-        when "0111" =>                  -- STEP 7
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN or DATA_B_IN;
-        when "1000" =>                  -- STEP 8
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN nor DATA_B_IN;
-        when "1001" =>                  -- STEP 9
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN xnor DATA_B_IN;
-        when "1010" =>                  -- STEP 10
-          -- Data Outputs
-          DATA_OUT <= not DATA_B_IN;
-        when "1011" =>                  -- STEP 11
-          -- Data Outputs
-          DATA_OUT <= not DATA_B_IN or DATA_A_IN;
-        when "1100" =>                  -- STEP 12
-          -- Data Outputs
-          DATA_OUT <= not DATA_A_IN;
-        when "1101" =>                  -- STEP 13
-          -- Data Outputs
-          DATA_OUT <= not DATA_A_IN or DATA_B_IN;
-        when "1110" =>                  -- STEP 14
-          -- Data Outputs
-          DATA_OUT <= DATA_A_IN nand DATA_B_IN;
-        when "1111" =>                  -- STEP 15
-          -- Data Outputs
-          DATA_OUT <= FULL_DATA;
-        when others =>
-          -- FSM Control
-          DATA_OUT <= ZERO_DATA;
-      end case;
+      -- Data Outputs
+      DATA_OUT <= FULL_DATA;
     end if;
   end process;
 

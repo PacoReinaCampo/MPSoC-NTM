@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.computing_pkg.all;
 
-entity and_gate is
+entity nand_gate is
   generic (
     DATA_SIZE : integer := 64
     );
@@ -61,7 +61,7 @@ entity and_gate is
     );
 end entity;
 
-architecture and_gate_architecture of and_gate is
+architecture nand_gate_architecture of nand_gate is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -81,7 +81,7 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN and DATA_B_IN
+  -- DATA_OUT = DATA_A_IN nand DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -91,7 +91,7 @@ begin
       DATA_OUT <= ZERO_DATA;
     elsif (rising_edge(CLK)) then
       -- Data Outputs
-      DATA_OUT <= DATA_A_IN and DATA_B_IN;
+      DATA_OUT <= DATA_A_IN nand DATA_B_IN;
     end if;
   end process;
 

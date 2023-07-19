@@ -85,7 +85,7 @@ begin
   -- Body
   ------------------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN and DATA_B_IN
+  -- DATA_OUT = function(DATA_A_IN, DATA_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -98,44 +98,50 @@ begin
       case OPERATION is
         when "0000" =>                  -- STEP 0
           -- Control Outputs
-          DATA_OUT <= DATA_A_IN and DATA_B_IN;
+          DATA_OUT <= ZERO_DATA;
         when "0001" =>                  -- STEP 1
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN nand DATA_B_IN;
+          DATA_OUT <= DATA_A_IN and DATA_B_IN;
         when "0010" =>                  -- STEP 2
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN or DATA_B_IN;
+          DATA_OUT <= DATA_A_IN and not DATA_B_IN;
         when "0011" =>                  -- STEP 3
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN nor DATA_B_IN;
+          DATA_OUT <= DATA_A_IN
         when "0100" =>                  -- STEP 4
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN xor DATA_B_IN;
+          DATA_OUT <= not DATA_A_IN and DATA_B_IN;
         when "0101" =>                  -- STEP 5
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN xnor DATA_B_IN;
+          DATA_OUT <= DATA_B_IN;
         when "0110" =>                  -- STEP 6
           -- Data Outputs
-          DATA_OUT <= not DATA_A_IN;
-        when "0110" =>                  -- STEP 7
+          DATA_OUT <= DATA_A_IN xor DATA_B_IN;
+        when "0111" =>                  -- STEP 7
           -- Data Outputs
-          DATA_OUT <= not DATA_B_IN;
+          DATA_OUT <= DATA_A_IN or DATA_B_IN;
         when "1000" =>                  -- STEP 8
           -- Data Outputs
-          DATA_OUT <= DATA_A_IN;
+          DATA_OUT <= DATA_A_IN nor DATA_B_IN;
         when "1001" =>                  -- STEP 9
           -- Data Outputs
-          DATA_OUT <= DATA_B_IN;
+          DATA_OUT <= DATA_A_IN xnor DATA_B_IN;
         when "1010" =>                  -- STEP 10
           -- Data Outputs
-          DATA_OUT <= ZERO_DATA;
+          DATA_OUT <= not DATA_B_IN;
         when "1011" =>                  -- STEP 11
           -- Data Outputs
-          DATA_OUT <= FULL_DATA;
-        when "1110" =>                  -- STEP 10
+          DATA_OUT <= not DATA_B_IN or DATA_A_IN;
+        when "1100" =>                  -- STEP 12
           -- Data Outputs
-          DATA_OUT <= ZERO_DATA;
-        when "1111" =>                  -- STEP 11
+          DATA_OUT <= not DATA_A_IN;
+        when "1101" =>                  -- STEP 13
+          -- Data Outputs
+          DATA_OUT <= not DATA_A_IN or DATA_B_IN;
+        when "1110" =>                  -- STEP 14
+          -- Data Outputs
+          DATA_OUT <= DATA_A_IN nand DATA_B_IN;
+        when "1111" =>                  -- STEP 15
           -- Data Outputs
           DATA_OUT <= FULL_DATA;
         when others =>

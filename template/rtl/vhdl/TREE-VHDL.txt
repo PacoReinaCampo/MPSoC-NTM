@@ -34,14 +34,22 @@ code
 │   │   ├── finite_state_machine
 │   │   │   └── finite_state_machine.vhd
 │   │   ├── logic_gate
+│   │   │   ├── a_and_not_b_gate.vhd
+│   │   │   ├── a_gate.vhd
+│   │   │   ├── a_implies_b_gate.vhd
 │   │   │   ├── and_gate.vhd
+│   │   │   ├── b_gate.vhd
+│   │   │   ├── b_implies_a_gate.vhd
+│   │   │   ├── false_gate.vhd
 │   │   │   ├── nand_gate.vhd
 │   │   │   ├── nor_gate.vhd
-│   │   │   ├── not_gate.vhd
+│   │   │   ├── not_a_and_b_gate.vhd
+│   │   │   ├── not_a_gate.vhd
+│   │   │   ├── not_b_gate.vhd
 │   │   │   ├── or_gate.vhd
+│   │   │   ├── true_gate.vhd
 │   │   │   ├── xnor_gate.vhd
-│   │   │   ├── xor_gate.vhd
-│   │   │   └── yes_gate.vhd
+│   │   │   └── xor_gate.vhd
 │   │   └── pushdown_automaton
 │   │       └── pushdown_automaton.vhd
 │   ├── neural_network
@@ -73,4 +81,4 @@ code
         ├── math_real-body.vhd
         └── math_real.vhd
 
-29 directories, 44 files
+29 directories, 52 files

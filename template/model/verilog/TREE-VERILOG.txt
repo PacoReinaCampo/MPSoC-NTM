@@ -34,14 +34,22 @@ code
 │   │   ├── finite_state_machine
 │   │   │   └── finite_state_machine.sv
 │   │   ├── logic_gate
+│   │   │   ├── a_and_not_b_gate.sv
+│   │   │   ├── a_gate.sv
+│   │   │   ├── a_implies_b_gate.sv
 │   │   │   ├── and_gate.sv
+│   │   │   ├── b_gate.sv
+│   │   │   ├── b_implies_a_gate.sv
+│   │   │   ├── false_gate.sv
 │   │   │   ├── nand_gate.sv
 │   │   │   ├── nor_gate.sv
-│   │   │   ├── not_gate.sv
+│   │   │   ├── not_a_and_b_gate.sv
+│   │   │   ├── not_a_gate.sv
+│   │   │   ├── not_b_gate.sv
 │   │   │   ├── or_gate.sv
+│   │   │   ├── true_gate.sv
 │   │   │   ├── xnor_gate.sv
-│   │   │   ├── xor_gate.sv
-│   │   │   └── yes_gate.sv
+│   │   │   └── xor_gate.sv
 │   │   └── pushdown_automaton
 │   │       └── pushdown_automaton.sv
 │   ├── neural_network
@@ -68,4 +76,4 @@ code
     └── computing
         └── state_pkg.sv
 
-28 directories, 40 files
+28 directories, 48 files

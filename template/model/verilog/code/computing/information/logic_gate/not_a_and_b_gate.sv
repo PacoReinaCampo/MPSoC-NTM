@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module not_gate #(
+module not_a_and_b_gate #(
   parameter DATA_SIZE = 64
 ) (
   // GLOBAL
@@ -45,7 +45,8 @@ module not_gate #(
   input RST,
 
   // DATA
-  input [DATA_SIZE-1:0] DATA_IN,
+  input [DATA_SIZE-1:0] DATA_A_IN,
+  input [DATA_SIZE-1:0] DATA_B_IN,
 
   output reg [DATA_SIZE-1:0] DATA_OUT
 );
@@ -68,7 +69,7 @@ module not_gate #(
   // Body
   //////////////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = not DATA_IN
+  // DATA_OUT = not DATA_A_IN and DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -77,7 +78,7 @@ module not_gate #(
       DATA_OUT <= ZERO_DATA;
     end else begin
       // Data Outputs
-      DATA_OUT <= ~DATA_IN;
+      DATA_OUT <= ~DATA_A_IN & DATA_B_IN;
     end
   end
 

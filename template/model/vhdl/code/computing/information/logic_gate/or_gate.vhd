@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.state_pkg.all;
+use work.computing_pkg.all;
 
 entity or_gate is
   generic (
@@ -54,10 +54,10 @@ entity or_gate is
     RST : in std_logic;
 
     -- DATA
-    DATA_A_IN : in quantum_state_vector;
-    DATA_B_IN : in quantum_state_vector;
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out quantum_state_vector
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
