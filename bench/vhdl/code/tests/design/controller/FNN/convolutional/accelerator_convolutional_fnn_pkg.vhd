@@ -109,11 +109,11 @@ package accelerator_convolutional_fnn_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_CONVOLUTIONAL_FNN_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST : boolean := false;
 
-  signal STIMULUS_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
 
-  signal STIMULUS_CONVOLUTIONAL_FNN_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -223,13 +223,6 @@ package accelerator_convolutional_fnn_pkg is
       CONVOLUTIONAL_FNN_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       CONVOLUTIONAL_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       CONVOLUTIONAL_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      CONVOLUTIONAL_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       CONVOLUTIONAL_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );

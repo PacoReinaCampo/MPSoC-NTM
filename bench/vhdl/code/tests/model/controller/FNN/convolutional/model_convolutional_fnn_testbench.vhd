@@ -58,11 +58,11 @@ entity model_convolutional_fnn_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_MODEL_STANDARD_FNN_TEST : boolean := false;
+    ENABLE_MODEL_CONVOLUTIONAL_FNN_TEST : boolean := false;
 
-    ENABLE_MODEL_STANDARD_FNN_CASE_0 : boolean := false;
+    ENABLE_MODEL_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
 
-    ENABLE_MODEL_STANDARD_FNN_CASE_1 : boolean := false
+    ENABLE_MODEL_CONVOLUTIONAL_FNN_CASE_1 : boolean := false
     );
 end model_convolutional_fnn_testbench;
 
@@ -282,7 +282,8 @@ begin
       );
 
   -- CONTROLLER
-  model_controller_i : model_controller
+  model_convolutional_fnn_test : if (ENABLE_MODEL_CONVOLUTIONAL_FNN_TEST) generate
+  controller : model_controller
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -381,5 +382,6 @@ begin
 
       H_OUT => h_out_controller
       );
+  end generate model_convolutional_fnn_test;
 
 end model_convolutional_fnn_testbench_architecture;
