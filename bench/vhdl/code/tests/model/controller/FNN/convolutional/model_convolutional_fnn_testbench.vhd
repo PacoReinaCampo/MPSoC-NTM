@@ -40,9 +40,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
-use work.model_math_pkg.all;
 use work.model_fnn_controller_pkg.all;
+
 use work.model_convolutional_fnn_pkg.all;
 
 entity model_convolutional_fnn_testbench is
@@ -56,7 +55,14 @@ entity model_convolutional_fnn_testbench is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- VECTOR-FUNCTIONALITY
+    ENABLE_MODEL_STANDARD_FNN_TEST : boolean := false;
+
+    ENABLE_MODEL_STANDARD_FNN_CASE_0 : boolean := false;
+
+    ENABLE_MODEL_STANDARD_FNN_CASE_1 : boolean := false
     );
 end model_convolutional_fnn_testbench;
 
@@ -157,13 +163,6 @@ architecture model_convolutional_fnn_testbench_architecture of model_convolution
   signal rho_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal xi_in_controller  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -279,13 +278,6 @@ begin
       CONVOLUTIONAL_FNN_XI_IN  => xi_in_controller,
       CONVOLUTIONAL_FNN_H_IN   => h_in_controller,
 
-      CONVOLUTIONAL_FNN_W_OUT => w_out_controller,
-      CONVOLUTIONAL_FNN_D_OUT => d_out_controller,
-      CONVOLUTIONAL_FNN_K_OUT => k_out_controller,
-      CONVOLUTIONAL_FNN_U_OUT => u_out_controller,
-      CONVOLUTIONAL_FNN_V_OUT => v_out_controller,
-      CONVOLUTIONAL_FNN_B_OUT => b_out_controller,
-
       CONVOLUTIONAL_FNN_H_OUT => h_out_controller
       );
 
@@ -386,13 +378,6 @@ begin
       RHO_IN => rho_in_controller,
       XI_IN  => xi_in_controller,
       H_IN   => h_in_controller,
-
-      W_OUT => w_out_controller,
-      D_OUT => d_out_controller,
-      K_OUT => k_out_controller,
-      U_OUT => u_out_controller,
-      V_OUT => v_out_controller,
-      B_OUT => b_out_controller,
 
       H_OUT => h_out_controller
       );

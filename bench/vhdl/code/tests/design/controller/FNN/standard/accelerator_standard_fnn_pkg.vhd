@@ -224,13 +224,6 @@ package accelerator_standard_fnn_pkg is
       STANDARD_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       STANDARD_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      STANDARD_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       STANDARD_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

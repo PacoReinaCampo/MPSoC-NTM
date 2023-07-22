@@ -70,7 +70,7 @@ package model_series_pkg is
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
-   -- Seeds
+  -- Seeds
   constant TENSOR_SAMPLE_A_SEED1 : integer := 1;
   constant TENSOR_SAMPLE_A_SEED2 : integer := 2;
 
