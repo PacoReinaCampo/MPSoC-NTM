@@ -137,6 +137,8 @@ package model_fnn_controller_pkg is
 
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
+      H_ENABLE : out std_logic;         -- for l in 0 to L-1
+
       -- DATA
       SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);

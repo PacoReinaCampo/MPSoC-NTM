@@ -131,6 +131,8 @@ entity accelerator_convolutional_fnn_stimulus is
 
     CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
+    CONVOLUTIONAL_FNN_H_ENABLE : in std_logic;      -- for l out 0 to L-1
+
     -- DATA
     CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -270,7 +272,7 @@ begin
     if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST                                ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_TEST                           ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -284,7 +286,7 @@ begin
       if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 0                              ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 0                         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -721,7 +723,7 @@ begin
       if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 1                              ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_FNN_CASE 1                         ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

@@ -58,11 +58,11 @@ entity accelerator_convolutional_fnn_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_CONVOLUTIONAL_FNN_TEST : boolean := false;
+    ENABLE_ACCELERATOR_CONVOLUTIONAL_FNN_TEST : boolean := false;
 
-    ENABLE_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_0 : boolean := false;
 
-    ENABLE_CONVOLUTIONAL_FNN_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_CONVOLUTIONAL_FNN_CASE_1 : boolean := false
     );
 end accelerator_convolutional_fnn_testbench;
 
@@ -143,6 +143,8 @@ architecture accelerator_convolutional_fnn_testbench_architecture of accelerator
 
   signal h_out_enable_controller : std_logic;
 
+  signal h_enable_controller : std_logic;
+
   -- DATA
   signal size_x_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -164,13 +166,6 @@ architecture accelerator_convolutional_fnn_testbench_architecture of accelerator
   signal xi_in_controller  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -180,7 +175,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- STIMULUS
-  convolutional_fnn_stimulus : accelerator_convolutional_fnn_stimulus
+  accelerator_convolutional_fnn_stimulus_i : accelerator_convolutional_fnn_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -264,6 +259,8 @@ begin
 
       CONVOLUTIONAL_FNN_H_OUT_ENABLE => h_out_enable_controller,
 
+      CONVOLUTIONAL_FNN_H_ENABLE => h_enable_controller,
+
       -- DATA
       CONVOLUTIONAL_FNN_SIZE_X_IN => size_x_in_controller,
       CONVOLUTIONAL_FNN_SIZE_W_IN => size_w_in_controller,
@@ -285,18 +282,11 @@ begin
       CONVOLUTIONAL_FNN_XI_IN  => xi_in_controller,
       CONVOLUTIONAL_FNN_H_IN   => h_in_controller,
 
-      CONVOLUTIONAL_FNN_W_OUT => w_out_controller,
-      CONVOLUTIONAL_FNN_D_OUT => d_out_controller,
-      CONVOLUTIONAL_FNN_K_OUT => k_out_controller,
-      CONVOLUTIONAL_FNN_U_OUT => u_out_controller,
-      CONVOLUTIONAL_FNN_V_OUT => v_out_controller,
-      CONVOLUTIONAL_FNN_B_OUT => b_out_controller,
-
       CONVOLUTIONAL_FNN_H_OUT => h_out_controller
       );
 
   -- CONTROLLER
-  accelerator_convolutional_fnn_test : if (ENABLE_CONVOLUTIONAL_FNN_TEST) generate
+  accelerator_convolutional_fnn_test : if (ENABLE_ACCELERATOR_CONVOLUTIONAL_FNN_TEST) generate
     controller : accelerator_controller
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -373,6 +363,8 @@ begin
 
         H_OUT_ENABLE => h_out_enable_controller,
 
+        H_ENABLE => h_enable_controller,
+
         -- DATA
         SIZE_X_IN => size_x_in_controller,
         SIZE_W_IN => size_w_in_controller,
@@ -393,13 +385,6 @@ begin
         RHO_IN => rho_in_controller,
         XI_IN  => xi_in_controller,
         H_IN   => h_in_controller,
-
-        W_OUT => w_out_controller,
-        D_OUT => d_out_controller,
-        K_OUT => k_out_controller,
-        U_OUT => u_out_controller,
-        V_OUT => v_out_controller,
-        B_OUT => b_out_controller,
 
         H_OUT => h_out_controller
         );

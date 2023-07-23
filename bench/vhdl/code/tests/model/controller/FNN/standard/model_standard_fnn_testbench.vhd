@@ -143,6 +143,8 @@ architecture model_standard_fnn_testbench_architecture of model_standard_fnn_tes
 
   signal h_out_enable_controller : std_logic;
 
+  signal h_enable_controller : std_logic;
+
   -- DATA
   signal size_x_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -257,6 +259,8 @@ begin
 
       STANDARD_FNN_H_OUT_ENABLE => h_out_enable_controller,
 
+      STANDARD_FNN_H_ENABLE => h_enable_controller,
+
       -- DATA
       STANDARD_FNN_SIZE_X_IN => size_x_in_controller,
       STANDARD_FNN_SIZE_W_IN => size_w_in_controller,
@@ -358,6 +362,8 @@ begin
         H_IN_ENABLE => h_in_enable_controller,
 
         H_OUT_ENABLE => h_out_enable_controller,
+
+        H_ENABLE => h_enable_controller,
 
         -- DATA
         SIZE_X_IN => size_x_in_controller,

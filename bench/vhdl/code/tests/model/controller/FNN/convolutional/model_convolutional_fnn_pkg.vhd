@@ -203,6 +203,8 @@ package model_convolutional_fnn_pkg is
 
       CONVOLUTIONAL_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
+      CONVOLUTIONAL_FNN_H_ENABLE : in std_logic;      -- for l out 0 to L-1
+
       -- DATA
       CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

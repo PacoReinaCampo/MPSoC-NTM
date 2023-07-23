@@ -203,6 +203,8 @@ package model_standard_fnn_pkg is
 
       STANDARD_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
+      STANDARD_FNN_H_ENABLE : in std_logic;      -- for l out 0 to L-1
+
       -- DATA
       STANDARD_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       STANDARD_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -224,15 +226,12 @@ package model_standard_fnn_pkg is
       STANDARD_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       STANDARD_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      STANDARD_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      STANDARD_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       STANDARD_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
+
+  ------------------------------------------------------------------------------
+  -- Functions
+  ------------------------------------------------------------------------------
 
 end model_standard_fnn_pkg;

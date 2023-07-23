@@ -143,6 +143,8 @@ architecture accelerator_convolutional_fnn_testbench_architecture of accelerator
 
   signal h_out_enable_controller : std_logic;
 
+  signal h_enable_controller : std_logic;
+
   -- DATA
   signal size_x_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_w_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -173,7 +175,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- STIMULUS
-  convolutional_fnn_stimulus : accelerator_convolutional_fnn_stimulus
+  accelerator_convolutional_fnn_stimulus_i : accelerator_convolutional_fnn_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -256,6 +258,8 @@ begin
       CONVOLUTIONAL_FNN_H_IN_ENABLE => h_in_enable_controller,
 
       CONVOLUTIONAL_FNN_H_OUT_ENABLE => h_out_enable_controller,
+
+      CONVOLUTIONAL_FNN_H_ENABLE => h_enable_controller,
 
       -- DATA
       CONVOLUTIONAL_FNN_SIZE_X_IN => size_x_in_controller,
@@ -358,6 +362,8 @@ begin
         H_IN_ENABLE => h_in_enable_controller,
 
         H_OUT_ENABLE => h_out_enable_controller,
+
+        H_ENABLE => h_enable_controller,
 
         -- DATA
         SIZE_X_IN => size_x_in_controller,

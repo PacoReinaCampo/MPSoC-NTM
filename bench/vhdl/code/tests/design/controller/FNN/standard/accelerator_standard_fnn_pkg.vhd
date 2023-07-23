@@ -203,6 +203,8 @@ package accelerator_standard_fnn_pkg is
 
       STANDARD_FNN_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
+      STANDARD_FNN_H_ENABLE : in std_logic;      -- for l out 0 to L-1
+
       -- DATA
       STANDARD_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       STANDARD_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
