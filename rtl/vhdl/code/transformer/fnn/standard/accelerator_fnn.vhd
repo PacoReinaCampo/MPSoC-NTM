@@ -122,6 +122,8 @@ entity accelerator_fnn is
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
+    H_ENABLE : out std_logic;           -- for l in 0 to L-1
+
     -- DATA
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -2631,7 +2633,7 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      H_OUT_ENABLE <= '0';
+      H_ENABLE <= '0';
 
       -- Control Internal
       index_l_h_out_loop <= ZERO_CONTROL;
@@ -2640,7 +2642,7 @@ begin
 
       case controller_h_out_fsm_int is
         when STARTER_H_OUT_STATE =>     -- STEP 0
-          if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
+          if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_v_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_r_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
 
             -- Control Internal
@@ -2652,7 +2654,7 @@ begin
 
         when CLEAN_H_OUT_L_STATE =>     -- STEP 1
           -- Control Outputs
-          H_OUT_ENABLE <= '0';
+          H_ENABLE <= '0';
 
           -- FSM Control
           controller_h_out_fsm_int <= OUTPUT_H_OUT_L_STATE;
@@ -2666,7 +2668,7 @@ begin
             -- Control Outputs
             READY <= '1';
 
-            H_OUT_ENABLE <= '1';
+            H_ENABLE <= '1';
 
             -- Control Internal
             index_l_h_out_loop <= ZERO_CONTROL;
@@ -2678,7 +2680,7 @@ begin
             H_OUT <= vector_h_out_int(to_integer(unsigned(index_l_h_out_loop)));
 
             -- Control Outputs
-            H_OUT_ENABLE <= '1';
+            H_ENABLE <= '1';
 
             -- Control Internal
             index_l_h_out_loop <= std_logic_vector(unsigned(index_l_h_out_loop) + unsigned(ONE_CONTROL));
