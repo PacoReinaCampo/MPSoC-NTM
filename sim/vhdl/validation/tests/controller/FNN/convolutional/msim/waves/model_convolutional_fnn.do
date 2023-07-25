@@ -78,6 +78,22 @@ add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_te
 add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/H_ENABLE
 add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/H_OUT
 
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/controller_h_out_fsm_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/index_l_h_out_loop
+
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_w_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_k_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_u_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_v_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_d_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_b_in_enable_int
+
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_x_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_r_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_xi_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_rho_in_enable_int
+add wave -noupdate /model_convolutional_fnn_testbench/model_convolutional_fnn_test/controller/data_h_in_enable_int
+
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

@@ -553,9 +553,10 @@ package body model_fnn_controller_pkg is
     vector_h_input   : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_convolution : matrix_buffer;
-    variable matrix_convolution : vector_buffer;
-    variable vector_adder       : vector_buffer;
+    variable matrix_operation_int : matrix_buffer;
+
+    variable vector_one_operation_int : vector_buffer;
+    variable vector_two_operation_int : vector_buffer;
 
     variable vector_h_output : vector_buffer;
 
@@ -564,7 +565,7 @@ package body model_fnn_controller_pkg is
     -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
 
     -- K(i;l;k)*r(t;i;k)
-    tensor_convolution := function_tensor_matrix_convolution (
+    matrix_operation_int := function_tensor_matrix_convolution (
       SIZE_A_I_IN => SIZE_R_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_A_K_IN => SIZE_W_IN,
@@ -575,15 +576,15 @@ package body model_fnn_controller_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    vector_adder := function_vector_summation (
+    vector_one_operation_int := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,
       LENGTH_IN => SIZE_R_IN,
 
-      vector_input => tensor_convolution
+      vector_input => matrix_operation_int
       );
 
     -- W(l;x)*x(t;x)
-    matrix_convolution := function_matrix_vector_convolution (
+    vector_two_operation_int := function_matrix_vector_convolution (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_X_IN,
       SIZE_B_IN   => SIZE_X_IN,
@@ -592,17 +593,17 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_convolution
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- V(l;s)*xi(t;s)
-    matrix_convolution := function_matrix_vector_convolution (
+    vector_two_operation_int := function_matrix_vector_convolution (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_S_IN,
       SIZE_B_IN   => SIZE_S_IN,
@@ -611,17 +612,17 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_xi_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_convolution
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- D(i;l;m)*rho(t;i;m)
-    tensor_convolution := function_tensor_matrix_convolution (
+    matrix_operation_int := function_tensor_matrix_convolution (
       SIZE_A_I_IN => SIZE_R_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_A_K_IN => SIZE_M_IN,
@@ -632,15 +633,25 @@ package body model_fnn_controller_pkg is
       matrix_b_input => matrix_rho_input
       );
 
-    vector_adder := function_vector_summation (
+    vector_two_operation_int := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,
       LENGTH_IN => SIZE_R_IN,
 
-      vector_input => tensor_convolution
+      vector_input => matrix_operation_int
+      );
+
+    -- b(l)
+    vector_one_operation_int := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_b_input,
+      vector_b_input => vector_two_operation_int
       );
 
     -- U(l;l)*h(t-1;l)
-    matrix_convolution := function_matrix_vector_convolution (
+    vector_two_operation_int := function_matrix_vector_convolution (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_B_IN   => SIZE_L_IN,
@@ -649,20 +660,20 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_convolution
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- logistic(h(t;l))
     vector_h_output := function_vector_logistic (
       SIZE_IN => SIZE_L_IN,
 
-      vector_input => vector_adder
+      vector_input => vector_one_operation_int
       );
 
     return vector_h_output;
@@ -694,9 +705,10 @@ package body model_fnn_controller_pkg is
     vector_h_input   : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_product : matrix_buffer;
-    variable matrix_product : vector_buffer;
-    variable vector_adder   : vector_buffer;
+    variable matrix_operation_int : matrix_buffer;
+
+    variable vector_one_operation_int : vector_buffer;
+    variable vector_two_operation_int : vector_buffer;
 
     variable vector_h_output : vector_buffer;
 
@@ -705,7 +717,7 @@ package body model_fnn_controller_pkg is
     -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
     -- K(i;l;k)·r(t;i;k)
-    tensor_product := function_tensor_matrix_product (
+    matrix_operation_int := function_tensor_matrix_product (
       SIZE_A_I_IN => SIZE_R_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_A_K_IN => SIZE_W_IN,
@@ -716,15 +728,15 @@ package body model_fnn_controller_pkg is
       matrix_b_input => matrix_r_input
       );
 
-    vector_adder := function_vector_summation (
+    vector_one_operation_int := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,
       LENGTH_IN => SIZE_R_IN,
 
-      vector_input => tensor_product
+      vector_input => matrix_operation_int
       );
 
     -- W(l;x)·x(t;x)
-    matrix_product := function_matrix_vector_product (
+    vector_two_operation_int := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_X_IN,
       SIZE_B_IN   => SIZE_X_IN,
@@ -733,17 +745,17 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_x_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_product
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- V(l;s)·xi(t;s)
-    matrix_product := function_matrix_vector_product (
+    vector_two_operation_int := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_S_IN,
       SIZE_B_IN   => SIZE_S_IN,
@@ -752,17 +764,17 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_xi_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_product
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- D(i;l;m)·rho(t;i;m)
-    tensor_product := function_tensor_matrix_product (
+    matrix_operation_int := function_tensor_matrix_product (
       SIZE_A_I_IN => SIZE_R_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_A_K_IN => SIZE_M_IN,
@@ -773,15 +785,25 @@ package body model_fnn_controller_pkg is
       matrix_b_input => matrix_rho_input
       );
 
-    vector_adder := function_vector_summation (
+    vector_two_operation_int := function_vector_summation (
       SIZE_IN   => SIZE_L_IN,
       LENGTH_IN => SIZE_R_IN,
 
-      vector_input => tensor_product
+      vector_input => matrix_operation_int
+      );
+
+    -- b(l)
+    vector_one_operation_int := function_vector_float_adder (
+      OPERATION => '0',
+
+      SIZE_IN => SIZE_L_IN,
+
+      vector_a_input => vector_b_input,
+      vector_b_input => vector_two_operation_int
       );
 
     -- U(l;l)·h(t-1;l)
-    matrix_product := function_matrix_vector_product (
+    vector_two_operation_int := function_matrix_vector_product (
       SIZE_A_I_IN => SIZE_L_IN,
       SIZE_A_J_IN => SIZE_L_IN,
       SIZE_B_IN   => SIZE_L_IN,
@@ -790,20 +812,20 @@ package body model_fnn_controller_pkg is
       vector_b_input => vector_h_input
       );
 
-    vector_adder := function_vector_float_adder (
+    vector_one_operation_int := function_vector_float_adder (
       OPERATION => '0',
 
       SIZE_IN => SIZE_L_IN,
 
-      vector_a_input => vector_adder,
-      vector_b_input => matrix_product
+      vector_a_input => vector_one_operation_int,
+      vector_b_input => vector_two_operation_int
       );
 
     -- logistic(h(t;l))
     vector_h_output := function_vector_logistic (
       SIZE_IN => SIZE_L_IN,
 
-      vector_input => vector_adder
+      vector_input => vector_one_operation_int
       );
 
     return vector_h_output;
