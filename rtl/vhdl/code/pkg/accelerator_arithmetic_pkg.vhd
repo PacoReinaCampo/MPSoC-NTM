@@ -1259,7 +1259,7 @@ package accelerator_arithmetic_pkg is
   function scalar_randomness_generation (
     seed1_in : integer;
     seed2_in : integer
-  ) return std_logic_vector;
+    ) return std_logic_vector;
 
   -- VECTOR
   function vector_randomness_generation (
