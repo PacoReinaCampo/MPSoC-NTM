@@ -24,6 +24,15 @@ code
 │   │   │   │       ├── accelerator_standard_fnn_pkg.sv
 │   │   │   │       ├── accelerator_standard_fnn_stimulus.sv
 │   │   │   │       └── accelerator_standard_fnn_testbench.sv
+│   │   │   ├── linear
+│   │   │   │   ├── convolutional
+│   │   │   │   │   ├── accelerator_convolutional_linear_pkg.sv
+│   │   │   │   │   ├── accelerator_convolutional_linear_stimulus.sv
+│   │   │   │   │   └── accelerator_convolutional_linear_testbench.sv
+│   │   │   │   └── standard
+│   │   │   │       ├── accelerator_standard_linear_pkg.sv
+│   │   │   │       ├── accelerator_standard_linear_stimulus.sv
+│   │   │   │       └── accelerator_standard_linear_testbench.sv
 │   │   │   └── LSTM
 │   │   │       ├── convolutional
 │   │   │       │   ├── accelerator_convolutional_lstm_pkg.sv
@@ -89,6 +98,10 @@ code
 │   │   │   │   ├── accelerator_trainer_fnn_pkg.sv
 │   │   │   │   ├── accelerator_trainer_fnn_stimulus.sv
 │   │   │   │   └── accelerator_trainer_fnn_testbench.sv
+│   │   │   ├── linear
+│   │   │   │   ├── accelerator_trainer_linear_pkg.sv
+│   │   │   │   ├── accelerator_trainer_linear_stimulus.sv
+│   │   │   │   └── accelerator_trainer_linear_testbench.sv
 │   │   │   └── LSTM
 │   │   │       ├── accelerator_trainer_lstm_pkg.sv
 │   │   │       ├── accelerator_trainer_lstm_stimulus.sv
@@ -126,6 +139,15 @@ code
 │       │   │       ├── model_standard_fnn_pkg.sv
 │       │   │       ├── model_standard_fnn_stimulus.sv
 │       │   │       └── model_standard_fnn_testbench.sv
+│       │   ├── linear
+│       │   │   ├── convolutional
+│       │   │   │   ├── model_convolutional_linear_pkg.sv
+│       │   │   │   ├── model_convolutional_linear_stimulus.sv
+│       │   │   │   └── model_convolutional_linear_testbench.sv
+│       │   │   └── standard
+│       │   │       ├── model_standard_linear_pkg.sv
+│       │   │       ├── model_standard_linear_stimulus.sv
+│       │   │       └── model_standard_linear_testbench.sv
 │       │   └── LSTM
 │       │       ├── convolutional
 │       │       │   ├── model_convolutional_lstm_pkg.sv
@@ -191,6 +213,10 @@ code
 │       │   │   ├── model_trainer_fnn_pkg.sv
 │       │   │   ├── model_trainer_fnn_stimulus.sv
 │       │   │   └── model_trainer_fnn_testbench.sv
+│       │   ├── linear
+│       │   │   ├── model_trainer_linear_pkg.sv
+│       │   │   ├── model_trainer_linear_stimulus.sv
+│       │   │   └── model_trainer_linear_testbench.sv
 │       │   └── LSTM
 │       │       ├── model_trainer_lstm_pkg.sv
 │       │       ├── model_trainer_lstm_stimulus.sv
@@ -229,6 +255,15 @@ code
     │   │   │       ├── accelerator_standard_fnn_pkg.sv
     │   │   │       ├── accelerator_standard_fnn_stimulus.sv
     │   │   │       └── accelerator_standard_fnn_testbench.sv
+    │   │   ├── linear
+    │   │   │   ├── convolutional
+    │   │   │   │   ├── accelerator_convolutional_linear_pkg.sv
+    │   │   │   │   ├── accelerator_convolutional_linear_stimulus.sv
+    │   │   │   │   └── accelerator_convolutional_linear_testbench.sv
+    │   │   │   └── standard
+    │   │   │       ├── accelerator_standard_linear_pkg.sv
+    │   │   │       ├── accelerator_standard_linear_stimulus.sv
+    │   │   │       └── accelerator_standard_linear_testbench.sv
     │   │   └── LSTM
     │   │       ├── convolutional
     │   │       │   ├── accelerator_convolutional_lstm_pkg.sv
@@ -294,6 +329,10 @@ code
     │   │   │   ├── accelerator_trainer_fnn_pkg.sv
     │   │   │   ├── accelerator_trainer_fnn_stimulus.sv
     │   │   │   └── accelerator_trainer_fnn_testbench.sv
+    │   │   ├── linear
+    │   │   │   ├── accelerator_trainer_linear_pkg.sv
+    │   │   │   ├── accelerator_trainer_linear_stimulus.sv
+    │   │   │   └── accelerator_trainer_linear_testbench.sv
     │   │   └── LSTM
     │   │       ├── accelerator_trainer_lstm_pkg.sv
     │   │       ├── accelerator_trainer_lstm_stimulus.sv
@@ -331,6 +370,15 @@ code
         │   │       ├── model_standard_fnn_pkg.sv
         │   │       ├── model_standard_fnn_stimulus.sv
         │   │       └── model_standard_fnn_testbench.sv
+        │   ├── linear
+        │   │   ├── convolutional
+        │   │   │   ├── model_convolutional_linear_pkg.sv
+        │   │   │   ├── model_convolutional_linear_stimulus.sv
+        │   │   │   └── model_convolutional_linear_testbench.sv
+        │   │   └── standard
+        │   │       ├── model_standard_linear_pkg.sv
+        │   │       ├── model_standard_linear_stimulus.sv
+        │   │       └── model_standard_linear_testbench.sv
         │   └── LSTM
         │       ├── convolutional
         │       │   ├── model_convolutional_lstm_pkg.sv
@@ -396,6 +444,10 @@ code
         │   │   ├── model_trainer_fnn_pkg.sv
         │   │   ├── model_trainer_fnn_stimulus.sv
         │   │   └── model_trainer_fnn_testbench.sv
+        │   ├── linear
+        │   │   ├── model_trainer_linear_pkg.sv
+        │   │   ├── model_trainer_linear_stimulus.sv
+        │   │   └── model_trainer_linear_testbench.sv
         │   └── LSTM
         │       ├── model_trainer_lstm_pkg.sv
         │       ├── model_trainer_lstm_stimulus.sv
@@ -410,4 +462,4 @@ code
                 ├── model_standard_transformer_stimulus.sv
                 └── model_standard_transformer_testbench.sv
 
-134 directories, 276 files
+150 directories, 312 files

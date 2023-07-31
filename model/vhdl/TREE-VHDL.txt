@@ -64,6 +64,11 @@ code
 │   │   │   └── model_controller.vhd
 │   │   └── standard
 │   │       └── model_controller.vhd
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── model_controller.vhd
+│   │   └── standard
+│   │       └── model_controller.vhd
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── model_activation_gate_vector.vhd
@@ -166,6 +171,7 @@ code
 ├── pkg
 │   ├── model_arithmetic_pkg.vhd
 │   ├── model_fnn_controller_pkg.vhd
+│   ├── model_linear_controller_pkg.vhd
 │   ├── model_lstm_controller_pkg.vhd
 │   ├── model_math_pkg.vhd
 │   ├── model_ntm_core_pkg.vhd
@@ -187,6 +193,8 @@ code
 │   │   ├── model_matrix_controller_differentiation.vhd
 │   │   └── model_vector_controller_differentiation.vhd
 │   ├── FNN
+│   │   └── model_trainer.vhd
+│   ├── linear
 │   │   └── model_trainer.vhd
 │   └── LSTM
 │       ├── model_activation_trainer.vhd
@@ -222,4 +230,4 @@ code
         ├── model_decoder.vhd
         └── model_encoder.vhd
 
-69 directories, 153 files
+73 directories, 157 files

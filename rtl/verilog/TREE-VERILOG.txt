@@ -81,6 +81,11 @@ code
 │   │   │   └── accelerator_controller.sv
 │   │   └── standard
 │   │       └── accelerator_controller.sv
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── accelerator_controller.sv
+│   │   └── standard
+│   │       └── accelerator_controller.sv
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── accelerator_activation_gate_vector.sv
@@ -203,6 +208,8 @@ code
 │   │   └── accelerator_vector_controller_differentiation.sv
 │   ├── FNN
 │   │   └── accelerator_trainer.sv
+│   ├── linear
+│   │   └── accelerator_trainer.sv
 │   └── LSTM
 │       ├── accelerator_activation_trainer.sv
 │       ├── accelerator_forget_trainer.sv
@@ -227,6 +234,11 @@ code
     │   ├── accelerator_keys_vector.sv
     │   ├── accelerator_queries_vector.sv
     │   └── accelerator_values_vector.sv
+    ├── linear
+    │   ├── convolutional
+    │   │   └── accelerator_linear.sv
+    │   └── standard
+    │       └── accelerator_linear.sv
     ├── lstm
     │   ├── convolutional
     │   │   └── accelerator_lstm.sv
@@ -237,4 +249,4 @@ code
         ├── accelerator_decoder.sv
         └── accelerator_encoder.sv
 
-74 directories, 163 files
+81 directories, 168 files

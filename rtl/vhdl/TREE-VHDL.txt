@@ -81,6 +81,11 @@ code
 │   │   │   └── accelerator_controller.vhd
 │   │   └── standard
 │   │       └── accelerator_controller.vhd
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── accelerator_controller.vhd
+│   │   └── standard
+│   │       └── accelerator_controller.vhd
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── accelerator_activation_gate_vector.vhd
@@ -184,6 +189,7 @@ code
 │   ├── accelerator_arithmetic_pkg.vhd
 │   ├── accelerator_core_pkg.vhd
 │   ├── accelerator_fnn_controller_pkg.vhd
+│   ├── accelerator_linear_controller_pkg.vhd
 │   ├── accelerator_lstm_controller_pkg.vhd
 │   ├── accelerator_math_pkg.vhd
 │   ├── accelerator_state_pkg.vhd
@@ -204,6 +210,8 @@ code
 │   │   ├── accelerator_matrix_controller_differentiation.vhd
 │   │   └── accelerator_vector_controller_differentiation.vhd
 │   ├── FNN
+│   │   └── accelerator_trainer.vhd
+│   ├── linear
 │   │   └── accelerator_trainer.vhd
 │   └── LSTM
 │       ├── accelerator_activation_trainer.vhd
@@ -229,6 +237,11 @@ code
     │   ├── accelerator_keys_vector.vhd
     │   ├── accelerator_queries_vector.vhd
     │   └── accelerator_values_vector.vhd
+    ├── linear
+    │   ├── convolutional
+    │   │   └── accelerator_linear.vhd
+    │   └── standard
+    │       └── accelerator_linear.vhd
     ├── lstm
     │   ├── convolutional
     │   │   └── accelerator_lstm.vhd
@@ -239,4 +252,4 @@ code
         ├── accelerator_decoder.vhd
         └── accelerator_encoder.vhd
 
-74 directories, 165 files
+81 directories, 171 files

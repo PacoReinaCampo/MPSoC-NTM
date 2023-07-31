@@ -64,6 +64,11 @@ code
 │   │   │   └── model_controller.sv
 │   │   └── standard
 │   │       └── model_controller.sv
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── model_controller.sv
+│   │   └── standard
+│   │       └── model_controller.sv
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── model_activation_gate_vector.sv
@@ -186,6 +191,8 @@ code
 │   │   └── model_vector_controller_differentiation.sv
 │   ├── FNN
 │   │   └── model_trainer.sv
+│   ├── linear
+│   │   └── model_trainer.sv
 │   └── LSTM
 │       ├── model_activation_trainer.sv
 │       ├── model_forget_trainer.sv
@@ -220,4 +227,4 @@ code
         ├── model_decoder.sv
         └── model_encoder.sv
 
-69 directories, 151 files
+73 directories, 154 files
