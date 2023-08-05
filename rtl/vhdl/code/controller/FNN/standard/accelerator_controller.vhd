@@ -307,9 +307,9 @@ architecture accelerator_controller_architecture of accelerator_controller is
     );
 
   type controller_second_vector_float_adder_fsm is (
-    STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,  -- STEP 0
-    ENABLER_SECOND_VECTOR_FLOAT_ADDER_STATE,    -- STEP 1
-    OPERATION_SECOND_VECTOR_FLOAT_ADDER_STATE     -- STEP 2
+    STARTER_SECOND_VECTOR_FLOAT_ADDER_STATE,   -- STEP 0
+    ENABLER_SECOND_VECTOR_FLOAT_ADDER_STATE,   -- STEP 1
+    OPERATION_SECOND_VECTOR_FLOAT_ADDER_STATE  -- STEP 2
     );
 
   -- D(i;l;m)·rho(t;i;m)
@@ -353,16 +353,16 @@ architecture accelerator_controller_architecture of accelerator_controller is
 
   -- logistic(h(t;l))
   type controller_vector_logistic_fsm is (
-    STARTER_VECTOR_LOGISTIC_STATE,   -- STEP 0
-    ENABLER_VECTOR_LOGISTIC_STATE,   -- STEP 1
-    OPERATION_VECTOR_LOGISTIC_STATE  -- STEP 2
+    STARTER_VECTOR_LOGISTIC_STATE,      -- STEP 0
+    ENABLER_VECTOR_LOGISTIC_STATE,      -- STEP 1
+    OPERATION_VECTOR_LOGISTIC_STATE     -- STEP 2
     );
 
   -- Output
   type controller_h_out_fsm is (
-    STARTER_H_OUT_STATE,  -- STEP 0
-    CLEAN_H_OUT_L_STATE,  -- STEP 1
-    OUTPUT_H_OUT_L_STATE  -- STEP 2
+    STARTER_H_OUT_STATE,                -- STEP 0
+    CLEAN_H_OUT_L_STATE,                -- STEP 1
+    OUTPUT_H_OUT_L_STATE                -- STEP 2
     );
 
   ------------------------------------------------------------------------------
@@ -574,11 +574,11 @@ architecture accelerator_controller_architecture of accelerator_controller is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_length_enable_vector_summation : std_logic;
   signal data_in_enable_vector_summation        : std_logic;
+  signal data_in_length_enable_vector_summation : std_logic;
 
-  signal data_length_enable_vector_summation : std_logic;
   signal data_enable_vector_summation        : std_logic;
+  signal data_length_enable_vector_summation : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
@@ -2074,8 +2074,8 @@ begin
       -- Control Internal
       start_vector_summation <= '0';
 
-      data_in_length_enable_vector_summation <= '0';
       data_in_enable_vector_summation        <= '0';
+      data_in_length_enable_vector_summation <= '0';
 
       data_first_vector_summation_enable_int <= '0';
 
@@ -2097,8 +2097,8 @@ begin
           -- Control Internal
           start_vector_summation <= '0';
 
-          data_in_length_enable_vector_summation <= '0';
           data_in_enable_vector_summation        <= '0';
+          data_in_length_enable_vector_summation <= '0';
 
           -- Data Internal
           data_in_vector_summation <= ZERO_DATA;
@@ -2134,13 +2134,13 @@ begin
 
         when OPERATION_FIRST_VECTOR_SUMMATION_STATE =>  -- STEP 2
 
-          if (data_length_enable_vector_summation = '1' and data_enable_vector_summation = '1') then
+          if (data_enable_vector_summation = '1' and data_length_enable_vector_summation = '1') then
             -- Data Inputs
             data_in_vector_summation <= matrix_one_operation_int(to_integer(unsigned(index_first_length_vector_summation_loop)), to_integer(unsigned(index_first_vector_summation_loop)));
 
             -- Control Internal
-            data_in_length_enable_vector_summation <= '1';
             data_in_enable_vector_summation        <= '1';
+            data_in_length_enable_vector_summation <= '1';
 
             if ((unsigned(index_first_length_vector_summation_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_first_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
               index_first_length_vector_summation_loop <= ZERO_CONTROL;
@@ -2150,20 +2150,20 @@ begin
 
             index_first_vector_summation_loop <= ZERO_CONTROL;
 
-          elsif (data_enable_vector_summation = '1') then
+          elsif (data_length_enable_vector_summation = '1') then
             -- Data Inputs
             data_in_vector_summation <= matrix_one_operation_int(to_integer(unsigned(index_first_length_vector_summation_loop)), to_integer(unsigned(index_first_vector_summation_loop)));
 
             -- Control Internal
-            data_in_enable_vector_summation <= '1';
+            data_in_length_enable_vector_summation <= '1';
 
             if (unsigned(index_first_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
               index_first_vector_summation_loop <= std_logic_vector(unsigned(index_first_vector_summation_loop) + unsigned(ONE_CONTROL));
             end if;
           else
             -- Control Internal
-            data_in_length_enable_vector_summation <= '0';
             data_in_enable_vector_summation        <= '0';
+            data_in_length_enable_vector_summation <= '0';
           end if;
 
           if (data_out_enable_vector_summation = '1') then
@@ -2306,7 +2306,7 @@ begin
 
           if (data_out_enable_matrix_vector_product = '1') then
             -- Data Internal
-            vector_one_operation_int(to_integer(unsigned(index_i_first_out_matrix_vector_product_loop))) <= data_out_matrix_vector_product;
+            vector_two_operation_int(to_integer(unsigned(index_i_first_out_matrix_vector_product_loop))) <= data_out_matrix_vector_product;
 
             -- Control Internal
             if (unsigned(index_i_first_out_matrix_vector_product_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
@@ -2883,8 +2883,8 @@ begin
       -- Control Internal
       start_vector_summation <= '0';
 
-      data_in_length_enable_vector_summation <= '0';
       data_in_enable_vector_summation        <= '0';
+      data_in_length_enable_vector_summation <= '0';
 
       data_second_vector_summation_enable_int <= '0';
 
@@ -2906,8 +2906,8 @@ begin
           -- Control Internal
           start_vector_summation <= '0';
 
-          data_in_length_enable_vector_summation <= '0';
           data_in_enable_vector_summation        <= '0';
+          data_in_length_enable_vector_summation <= '0';
 
           -- Data Internal
           data_in_vector_summation <= ZERO_DATA;
@@ -2943,13 +2943,13 @@ begin
 
         when OPERATION_SECOND_VECTOR_SUMMATION_STATE =>  -- STEP 2
 
-          if (data_length_enable_vector_summation = '1' and data_enable_vector_summation = '1') then
+          if (data_enable_vector_summation = '1' and data_length_enable_vector_summation = '1') then
             -- Data Inputs
             data_in_vector_summation <= matrix_two_operation_int(to_integer(unsigned(index_second_length_vector_summation_loop)), to_integer(unsigned(index_second_vector_summation_loop)));
 
             -- Control Internal
-            data_in_length_enable_vector_summation <= '1';
             data_in_enable_vector_summation        <= '1';
+            data_in_length_enable_vector_summation <= '1';
 
             if ((unsigned(index_second_length_vector_summation_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_second_vector_summation_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
               index_second_length_vector_summation_loop <= ZERO_CONTROL;
@@ -2959,20 +2959,20 @@ begin
 
             index_second_vector_summation_loop <= ZERO_CONTROL;
 
-          elsif (data_enable_vector_summation = '1') then
+          elsif (data_length_enable_vector_summation = '1') then
             -- Data Inputs
             data_in_vector_summation <= matrix_two_operation_int(to_integer(unsigned(index_second_length_vector_summation_loop)), to_integer(unsigned(index_second_vector_summation_loop)));
 
             -- Control Internal
-            data_in_enable_vector_summation <= '1';
+            data_in_length_enable_vector_summation <= '1';
 
             if (unsigned(index_second_vector_summation_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) then
               index_second_vector_summation_loop <= std_logic_vector(unsigned(index_second_vector_summation_loop) + unsigned(ONE_CONTROL));
             end if;
           else
             -- Control Internal
-            data_in_length_enable_vector_summation <= '0';
             data_in_enable_vector_summation        <= '0';
+            data_in_length_enable_vector_summation <= '0';
           end if;
 
           if (data_out_enable_vector_summation = '1') then
@@ -3548,8 +3548,8 @@ begin
 
               index_vector_logistic_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
+              -- FSM Control
+              controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
             else
               -- Data Inputs
               data_in_vector_logistic <= vector_two_operation_int(to_integer(unsigned(index_vector_logistic_loop)));
@@ -3696,11 +3696,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
       DATA_IN_ENABLE        => data_in_enable_vector_summation,
+      DATA_IN_LENGTH_ENABLE => data_in_length_enable_vector_summation,
 
-      DATA_LENGTH_ENABLE => data_length_enable_vector_summation,
       DATA_ENABLE        => data_enable_vector_summation,
+      DATA_LENGTH_ENABLE => data_length_enable_vector_summation,
 
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
