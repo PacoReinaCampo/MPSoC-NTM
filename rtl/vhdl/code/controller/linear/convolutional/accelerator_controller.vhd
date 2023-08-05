@@ -182,8 +182,8 @@ architecture accelerator_controller_architecture of accelerator_controller is
 
   -- Ops
   signal controller_matrix_vector_convolution_fsm_int : controller_matrix_vector_convolution_fsm;
-  signal controller_vector_float_adder_fsm_int    : controller_vector_float_adder_fsm;
-  signal controller_vector_logistic_fsm_int       : controller_vector_logistic_fsm;
+  signal controller_vector_float_adder_fsm_int        : controller_vector_float_adder_fsm;
+  signal controller_vector_logistic_fsm_int           : controller_vector_logistic_fsm;
 
   -- Output
   signal controller_h_out_fsm_int : controller_h_out_fsm;
@@ -231,8 +231,8 @@ architecture accelerator_controller_architecture of accelerator_controller is
 
   -- Ops
   signal data_matrix_vector_convolution_enable_int : std_logic;
-  signal data_vector_float_adder_enable_int    : std_logic;
-  signal data_vector_logistic_enable_int       : std_logic;
+  signal data_vector_float_adder_enable_int        : std_logic;
+  signal data_vector_logistic_enable_int           : std_logic;
 
   -- VECTOR ADDER
   -- CONTROL
@@ -894,8 +894,8 @@ begin
 
               index_vector_logistic_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
+              -- FSM Control
+              controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
             else
               -- Data Inputs
               data_in_vector_logistic <= vector_two_operation_int(to_integer(unsigned(index_vector_logistic_loop)));

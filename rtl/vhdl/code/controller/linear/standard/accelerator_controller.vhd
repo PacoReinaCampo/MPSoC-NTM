@@ -894,8 +894,8 @@ begin
 
               index_vector_logistic_loop <= ZERO_CONTROL;
 
-            -- FSM Control
-            controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
+              -- FSM Control
+              controller_vector_logistic_fsm_int <= STARTER_VECTOR_LOGISTIC_STATE;
             else
               -- Data Inputs
               data_in_vector_logistic <= vector_two_operation_int(to_integer(unsigned(index_vector_logistic_loop)));

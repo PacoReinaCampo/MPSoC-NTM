@@ -46,7 +46,7 @@ use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
 use work.accelerator_fnn_controller_pkg.all;
 
-entity accelerator_controller is
+entity accelerator_fnn is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 4
@@ -149,7 +149,7 @@ entity accelerator_controller is
     );
 end entity;
 
-architecture accelerator_controller_architecture of accelerator_controller is
+architecture accelerator_fnn_architecture of accelerator_fnn is
 
   ------------------------------------------------------------------------------
   -- Functionality

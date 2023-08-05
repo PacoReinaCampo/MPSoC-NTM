@@ -224,11 +224,22 @@ code
     │   ├── accelerator_masked_scaled_dot_product_attention.vhd
     │   ├── accelerator_multi_head_attention.vhd
     │   └── accelerator_scaled_dot_product_attention.vhd
-    ├── fnn
-    │   ├── convolutional
-    │   │   └── accelerator_fnn.vhd
-    │   └── standard
-    │       └── accelerator_fnn.vhd
+    ├── controller
+    │   ├── fnn
+    │   │   ├── convolutional
+    │   │   │   └── accelerator_fnn.vhd
+    │   │   └── standard
+    │   │       └── accelerator_fnn.vhd
+    │   ├── linear
+    │   │   ├── convolutional
+    │   │   │   └── accelerator_linear.vhd
+    │   │   └── standard
+    │   │       └── accelerator_linear.vhd
+    │   └── lstm
+    │       ├── convolutional
+    │       │   └── accelerator_lstm.vhd
+    │       └── standard
+    │           └── accelerator_lstm.vhd
     ├── functions
     │   ├── accelerator_layer_norm.vhd
     │   └── accelerator_positional_encoding.vhd
@@ -237,19 +248,9 @@ code
     │   ├── accelerator_keys_vector.vhd
     │   ├── accelerator_queries_vector.vhd
     │   └── accelerator_values_vector.vhd
-    ├── linear
-    │   ├── convolutional
-    │   │   └── accelerator_linear.vhd
-    │   └── standard
-    │       └── accelerator_linear.vhd
-    ├── lstm
-    │   ├── convolutional
-    │   │   └── accelerator_lstm.vhd
-    │   └── standard
-    │       └── accelerator_lstm.vhd
     └── top
         ├── accelerator_controller.vhd
         ├── accelerator_decoder.vhd
         └── accelerator_encoder.vhd
 
-81 directories, 171 files
+82 directories, 171 files
