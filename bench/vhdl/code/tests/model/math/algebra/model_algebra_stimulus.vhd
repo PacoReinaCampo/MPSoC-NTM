@@ -983,7 +983,7 @@ begin
       if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATIO_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATION_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1043,7 +1043,7 @@ begin
       if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATIO_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATION_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1509,12 +1509,12 @@ begin
       -- DATA
       MATRIX_VECTOR_CONVOLUTION_SIZE_A_I_IN <= FOUR_CONTROL;
       MATRIX_VECTOR_CONVOLUTION_SIZE_A_J_IN <= FOUR_CONTROL;
-      MATRIX_VECTOR_CONVOLUTION_SIZE_B_IN   <= THREE_CONTROL;
+      MATRIX_VECTOR_CONVOLUTION_SIZE_B_IN   <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOL_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOLUTION_CASE 0                       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1581,7 +1581,7 @@ begin
       if (STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOL_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOLUTION_CASE 1                       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1798,7 +1798,7 @@ begin
       if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATIO_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATION_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1874,7 +1874,7 @@ begin
       if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATIO_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATION_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -2118,12 +2118,12 @@ begin
       -- DATA
       MATRIX_VECTOR_PRODUCT_SIZE_A_I_IN <= FOUR_CONTROL;
       MATRIX_VECTOR_PRODUCT_SIZE_A_J_IN <= FOUR_CONTROL;
-      MATRIX_VECTOR_PRODUCT_SIZE_B_IN   <= THREE_CONTROL;
+      MATRIX_VECTOR_PRODUCT_SIZE_B_IN   <= FOUR_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUC_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUCT_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -2190,7 +2190,7 @@ begin
       if (STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUC_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUCT_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -2780,7 +2780,7 @@ begin
       if (STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOL_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOLUTION_CASE 0                       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -2868,7 +2868,7 @@ begin
       if (STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOL_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOLUTION_CASE 1                       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -3344,7 +3344,7 @@ begin
       if (STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUC_CASE 0                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUCT_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -3432,7 +3432,7 @@ begin
       if (STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUC_CASE 1                            ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUCT_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

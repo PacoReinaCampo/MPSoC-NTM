@@ -64,11 +64,6 @@ code
 │   │   │   └── model_controller.vhd
 │   │   └── standard
 │   │       └── model_controller.vhd
-│   ├── linear
-│   │   ├── convolutional
-│   │   │   └── model_controller.vhd
-│   │   └── standard
-│   │       └── model_controller.vhd
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── model_activation_gate_vector.vhd
@@ -183,6 +178,11 @@ code
 │   │   ├── model_state_matrix_input.vhd
 │   │   ├── model_state_matrix_output.vhd
 │   │   └── model_state_matrix_state.vhd
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── model_controller.vhd
+│   │   └── standard
+│   │       └── model_controller.vhd
 │   ├── outputs
 │   │   ├── model_state_vector_output.vhd
 │   │   └── model_state_vector_state.vhd

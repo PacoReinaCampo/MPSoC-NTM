@@ -81,11 +81,6 @@ code
 │   │   │   └── accelerator_controller.sv
 │   │   └── standard
 │   │       └── accelerator_controller.sv
-│   ├── linear
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.sv
-│   │   └── standard
-│   │       └── accelerator_controller.sv
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── accelerator_activation_gate_vector.sv
@@ -197,6 +192,11 @@ code
 │   │   ├── accelerator_state_matrix_input.sv
 │   │   ├── accelerator_state_matrix_output.sv
 │   │   └── accelerator_state_matrix_state.sv
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── accelerator_controller.sv
+│   │   └── standard
+│   │       └── accelerator_controller.sv
 │   ├── outputs
 │   │   ├── accelerator_state_vector_output.sv
 │   │   └── accelerator_state_vector_state.sv
@@ -227,11 +227,6 @@ code
     │   │   │   └── accelerator_fnn.sv
     │   │   └── standard
     │   │       └── accelerator_fnn.sv
-    │   ├── linear
-    │   │   ├── convolutional
-    │   │   │   └── accelerator_linear.sv
-    │   │   └── standard
-    │   │       └── accelerator_linear.sv
     │   └── lstm
     │       ├── convolutional
     │       │   └── accelerator_lstm.sv
@@ -250,4 +245,4 @@ code
         ├── accelerator_decoder.sv
         └── accelerator_encoder.sv
 
-82 directories, 168 files
+79 directories, 166 files

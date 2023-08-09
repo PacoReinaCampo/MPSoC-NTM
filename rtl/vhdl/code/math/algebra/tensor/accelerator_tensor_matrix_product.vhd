@@ -127,7 +127,7 @@ architecture accelerator_tensor_matrix_product_architecture of accelerator_tenso
 
   -- Buffer
   signal tensor_a_int : tensor_buffer;
-  signal tensor_b_int : tensor_buffer;
+  signal matrix_b_int : matrix_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -266,7 +266,7 @@ begin
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_i_product_int <= '1';
@@ -303,7 +303,7 @@ begin
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_j_product_int <= '1';
@@ -348,22 +348,14 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 4
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-            -- Control Internal
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then  -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             product_ctrl_fsm_int <= CLEAN_I_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-            -- Control Outputs
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then  -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
@@ -379,11 +371,7 @@ begin
 
         when ENDER_J_STATE =>           -- STEP 5
 
-          if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-            -- Control Outputs
+          if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then  -- Control Outputs
             DATA_J_ENABLE <= '1';
             DATA_K_ENABLE <= '1';
 
@@ -397,11 +385,7 @@ begin
 
         when ENDER_K_STATE =>           -- STEP 6
 
-          if (unsigned(index_k_loop) < unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-
-            -- Control Outputs
+          if (unsigned(index_k_loop) < unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then  -- Control Outputs
             DATA_K_ENABLE <= '1';
 
             -- Control Internal
@@ -415,7 +399,7 @@ begin
 
           -- Data Inputs
           data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_float_multiplier <= matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
@@ -441,7 +425,7 @@ begin
 
           -- Data Inputs
           data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_float_multiplier <= matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
@@ -465,7 +449,6 @@ begin
 
           -- Data Inputs
           data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_K_ENABLE <= '0';

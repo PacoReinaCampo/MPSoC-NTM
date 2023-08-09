@@ -223,9 +223,6 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
             -- Control Internal
             index_loop   <= ZERO_CONTROL;
             index_l_loop <= ZERO_CONTROL;
@@ -233,9 +230,6 @@ begin
             -- FSM Control
             summation_ctrl_fsm_int <= CLEAN_STATE;
           elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
             -- Control Outputs
             DATA_ENABLE        <= '1';
             DATA_LENGTH_ENABLE <= '1';
@@ -251,9 +245,6 @@ begin
         when ENDER_LENGTH_STATE =>      -- STEP 4
 
           if (unsigned(index_l_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
             -- Control Outputs
             DATA_LENGTH_ENABLE <= '1';
 
@@ -293,13 +284,8 @@ begin
 
           if (ready_scalar_float_adder = '1') then
             if ((unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_float_adder;
-
               -- Control Outputs
               READY <= '1';
-
-              DATA_OUT_ENABLE <= '1';
 
               -- Control Internal
               index_loop <= ZERO_CONTROL;
@@ -307,18 +293,18 @@ begin
               -- FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_float_adder;
-
-              -- Control Outputs
-              DATA_OUT_ENABLE <= '1';
-
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
               summation_ctrl_fsm_int <= CLEAN_STATE;
             end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_float_adder;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
             start_scalar_float_adder <= '0';

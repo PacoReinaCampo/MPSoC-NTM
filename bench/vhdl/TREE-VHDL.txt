@@ -81,6 +81,15 @@ code
 │   │   │   │   ├── accelerator_state_feedback_pkg.vhd
 │   │   │   │   ├── accelerator_state_feedback_stimulus.vhd
 │   │   │   │   └── accelerator_state_feedback_testbench.vhd
+│   │   │   ├── linear
+│   │   │   │   ├── convolutional
+│   │   │   │   │   ├── accelerator_convolutional_linear_pkg.vhd
+│   │   │   │   │   ├── accelerator_convolutional_linear_stimulus.vhd
+│   │   │   │   │   └── accelerator_convolutional_linear_testbench.vhd
+│   │   │   │   └── standard
+│   │   │   │       ├── accelerator_standard_linear_pkg.vhd
+│   │   │   │       ├── accelerator_standard_linear_stimulus.vhd
+│   │   │   │       └── accelerator_standard_linear_testbench.vhd
 │   │   │   ├── outputs
 │   │   │   │   ├── accelerator_state_outputs_pkg.vhd
 │   │   │   │   ├── accelerator_state_outputs_stimulus.vhd
@@ -134,15 +143,6 @@ code
 │       │   │       ├── model_standard_fnn_pkg.vhd
 │       │   │       ├── model_standard_fnn_stimulus.vhd
 │       │   │       └── model_standard_fnn_testbench.vhd
-│       │   ├── linear
-│       │   │   ├── convolutional
-│       │   │   │   ├── model_convolutional_linear_pkg.vhd
-│       │   │   │   ├── model_convolutional_linear_stimulus.vhd
-│       │   │   │   └── model_convolutional_linear_testbench.vhd
-│       │   │   └── standard
-│       │   │       ├── model_standard_linear_pkg.vhd
-│       │   │       ├── model_standard_linear_stimulus.vhd
-│       │   │       └── model_standard_linear_testbench.vhd
 │       │   └── LSTM
 │       │       ├── convolutional
 │       │       │   ├── model_convolutional_lstm_pkg.vhd
@@ -191,6 +191,15 @@ code
 │       │   │   ├── model_state_feedback_pkg.vhd
 │       │   │   ├── model_state_feedback_stimulus.vhd
 │       │   │   └── model_state_feedback_testbench.vhd
+│       │   ├── linear
+│       │   │   ├── convolutional
+│       │   │   │   ├── model_convolutional_linear_pkg.vhd
+│       │   │   │   ├── model_convolutional_linear_stimulus.vhd
+│       │   │   │   └── model_convolutional_linear_testbench.vhd
+│       │   │   └── standard
+│       │   │       ├── model_standard_linear_pkg.vhd
+│       │   │       ├── model_standard_linear_stimulus.vhd
+│       │   │       └── model_standard_linear_testbench.vhd
 │       │   ├── outputs
 │       │   │   ├── model_state_outputs_pkg.vhd
 │       │   │   ├── model_state_outputs_stimulus.vhd
@@ -245,15 +254,6 @@ code
     │   │   │       ├── accelerator_standard_fnn_pkg.vhd
     │   │   │       ├── accelerator_standard_fnn_stimulus.vhd
     │   │   │       └── accelerator_standard_fnn_testbench.vhd
-    │   │   ├── linear
-    │   │   │   ├── convolutional
-    │   │   │   │   ├── accelerator_convolutional_linear_pkg.vhd
-    │   │   │   │   ├── accelerator_convolutional_linear_stimulus.vhd
-    │   │   │   │   └── accelerator_convolutional_linear_testbench.vhd
-    │   │   │   └── standard
-    │   │   │       ├── accelerator_standard_linear_pkg.vhd
-    │   │   │       ├── accelerator_standard_linear_stimulus.vhd
-    │   │   │       └── accelerator_standard_linear_testbench.vhd
     │   │   └── LSTM
     │   │       ├── convolutional
     │   │       │   ├── accelerator_convolutional_lstm_pkg.vhd
@@ -302,6 +302,15 @@ code
     │   │   │   ├── accelerator_state_feedback_pkg.vhd
     │   │   │   ├── accelerator_state_feedback_stimulus.vhd
     │   │   │   └── accelerator_state_feedback_testbench.vhd
+    │   │   ├── linear
+    │   │   │   ├── convolutional
+    │   │   │   │   ├── accelerator_convolutional_linear_pkg.vhd
+    │   │   │   │   ├── accelerator_convolutional_linear_stimulus.vhd
+    │   │   │   │   └── accelerator_convolutional_linear_testbench.vhd
+    │   │   │   └── standard
+    │   │   │       ├── accelerator_standard_linear_pkg.vhd
+    │   │   │       ├── accelerator_standard_linear_stimulus.vhd
+    │   │   │       └── accelerator_standard_linear_testbench.vhd
     │   │   ├── outputs
     │   │   │   ├── accelerator_state_outputs_pkg.vhd
     │   │   │   ├── accelerator_state_outputs_stimulus.vhd
@@ -355,15 +364,6 @@ code
         │   │       ├── model_standard_fnn_pkg.vhd
         │   │       ├── model_standard_fnn_stimulus.vhd
         │   │       └── model_standard_fnn_testbench.vhd
-        │   ├── linear
-        │   │   ├── convolutional
-        │   │   │   ├── model_convolutional_linear_pkg.vhd
-        │   │   │   ├── model_convolutional_linear_stimulus.vhd
-        │   │   │   └── model_convolutional_linear_testbench.vhd
-        │   │   └── standard
-        │   │       ├── model_standard_linear_pkg.vhd
-        │   │       ├── model_standard_linear_stimulus.vhd
-        │   │       └── model_standard_linear_testbench.vhd
         │   └── LSTM
         │       ├── convolutional
         │       │   ├── model_convolutional_lstm_pkg.vhd
@@ -412,6 +412,15 @@ code
         │   │   ├── model_state_feedback_pkg.vhd
         │   │   ├── model_state_feedback_stimulus.vhd
         │   │   └── model_state_feedback_testbench.vhd
+        │   ├── linear
+        │   │   ├── convolutional
+        │   │   │   ├── model_convolutional_linear_pkg.vhd
+        │   │   │   ├── model_convolutional_linear_stimulus.vhd
+        │   │   │   └── model_convolutional_linear_testbench.vhd
+        │   │   └── standard
+        │   │       ├── model_standard_linear_pkg.vhd
+        │   │       ├── model_standard_linear_stimulus.vhd
+        │   │       └── model_standard_linear_testbench.vhd
         │   ├── outputs
         │   │   ├── model_state_outputs_pkg.vhd
         │   │   ├── model_state_outputs_stimulus.vhd
@@ -442,4 +451,4 @@ code
             ├── model_transformer_stimulus.vhd
             └── model_transformer_testbench.vhd
 
-142 directories, 300 files
+145 directories, 306 files

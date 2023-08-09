@@ -148,13 +148,6 @@ package accelerator_lstm_controller_pkg is
       XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-
       A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -370,13 +363,6 @@ package accelerator_lstm_controller_pkg is
       RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       I_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -594,13 +580,6 @@ package accelerator_lstm_controller_pkg is
       XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-
       O_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -809,13 +788,6 @@ package accelerator_lstm_controller_pkg is
       RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1093,13 +1065,6 @@ package accelerator_lstm_controller_pkg is
       RHO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       XI_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

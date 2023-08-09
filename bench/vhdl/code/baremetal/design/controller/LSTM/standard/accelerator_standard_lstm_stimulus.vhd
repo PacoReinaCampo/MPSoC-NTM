@@ -152,13 +152,6 @@ entity accelerator_standard_lstm_stimulus is
     STANDARD_LSTM_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     STANDARD_LSTM_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    STANDARD_LSTM_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    STANDARD_LSTM_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    STANDARD_LSTM_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    STANDARD_LSTM_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    STANDARD_LSTM_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    STANDARD_LSTM_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
     STANDARD_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

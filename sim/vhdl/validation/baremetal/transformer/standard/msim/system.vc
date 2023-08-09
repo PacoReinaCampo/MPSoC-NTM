@@ -80,14 +80,14 @@
 ../../../../../../../model/vhdl/code/transformer/components/model_masked_scaled_dot_product_attention.vhd
 ../../../../../../../model/vhdl/code/transformer/components/model_multi_head_attention.vhd
 ../../../../../../../model/vhdl/code/transformer/components/model_scaled_dot_product_attention.vhd
-../../../../../../../model/vhdl/code/transformer/fnn/standard/model_fnn.vhd
+../../../../../../../model/vhdl/code/transformer/controller/fnn/standard/model_fnn.vhd
 ../../../../../../../model/vhdl/code/transformer/functions/model_layer_norm.vhd
 ../../../../../../../model/vhdl/code/transformer/functions/model_positional_encoding.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_inputs_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_keys_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_queries_vector.vhd
 ../../../../../../../model/vhdl/code/transformer/inputs/model_values_vector.vhd
-../../../../../../../model/vhdl/code/transformer/lstm/standard/model_lstm.vhd
+../../../../../../../model/vhdl/code/transformer/controller/lstm/standard/model_lstm.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_controller.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_decoder.vhd
 ../../../../../../../model/vhdl/code/transformer/top/model_encoder.vhd

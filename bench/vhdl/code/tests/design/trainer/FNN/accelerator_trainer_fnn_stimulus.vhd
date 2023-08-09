@@ -149,13 +149,6 @@ entity accelerator_trainer_fnn_stimulus is
     ACCELERATOR_TRAINER_FNN_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     ACCELERATOR_TRAINER_FNN_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    ACCELERATOR_TRAINER_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_TRAINER_FNN_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_TRAINER_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_TRAINER_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_TRAINER_FNN_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    ACCELERATOR_TRAINER_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
     ACCELERATOR_TRAINER_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

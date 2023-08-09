@@ -1,6 +1,0 @@
-cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/tests/controller/linear/standard/msim
-
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/tests/controller/linear/standard/msim/macros/design.do
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/tests/controller/linear/standard/msim/macros/verification.do
-
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/tests/controller/linear/standard/msim/list.do

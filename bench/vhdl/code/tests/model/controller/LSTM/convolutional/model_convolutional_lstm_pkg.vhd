@@ -224,13 +224,6 @@ package model_convolutional_lstm_pkg is
       CONVOLUTIONAL_LSTM_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       CONVOLUTIONAL_LSTM_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      CONVOLUTIONAL_LSTM_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_LSTM_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_LSTM_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_LSTM_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_LSTM_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      CONVOLUTIONAL_LSTM_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       CONVOLUTIONAL_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

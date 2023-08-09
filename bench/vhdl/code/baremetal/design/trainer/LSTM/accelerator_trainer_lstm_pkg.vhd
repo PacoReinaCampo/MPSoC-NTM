@@ -217,13 +217,6 @@ package accelerator_trainer_lstm_pkg is
       ACCELERATOR_TRAINER_LSTM_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       ACCELERATOR_TRAINER_LSTM_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      ACCELERATOR_TRAINER_LSTM_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LSTM_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LSTM_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LSTM_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LSTM_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LSTM_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       ACCELERATOR_TRAINER_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

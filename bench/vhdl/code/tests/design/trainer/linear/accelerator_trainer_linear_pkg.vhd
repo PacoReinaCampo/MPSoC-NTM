@@ -217,13 +217,6 @@ package accelerator_trainer_linear_pkg is
       ACCELERATOR_TRAINER_LINEAR_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       ACCELERATOR_TRAINER_LINEAR_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      ACCELERATOR_TRAINER_LINEAR_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LINEAR_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LINEAR_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LINEAR_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LINEAR_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      ACCELERATOR_TRAINER_LINEAR_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       ACCELERATOR_TRAINER_LINEAR_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

@@ -64,11 +64,6 @@ code
 │   │   │   └── model_controller.sv
 │   │   └── standard
 │   │       └── model_controller.sv
-│   ├── linear
-│   │   ├── convolutional
-│   │   │   └── model_controller.sv
-│   │   └── standard
-│   │       └── model_controller.sv
 │   └── LSTM
 │       ├── convolutional
 │       │   ├── model_activation_gate_vector.sv
@@ -180,6 +175,11 @@ code
 │   │   ├── model_state_matrix_input.sv
 │   │   ├── model_state_matrix_output.sv
 │   │   └── model_state_matrix_state.sv
+│   ├── linear
+│   │   ├── convolutional
+│   │   │   └── model_controller.sv
+│   │   └── standard
+│   │       └── model_controller.sv
 │   ├── outputs
 │   │   ├── model_state_vector_output.sv
 │   │   └── model_state_vector_state.sv
@@ -204,11 +204,17 @@ code
     │   ├── model_masked_scaled_dot_product_attention.sv
     │   ├── model_multi_head_attention.sv
     │   └── model_scaled_dot_product_attention.sv
-    ├── fnn
-    │   ├── convolutional
-    │   │   └── model_fnn.sv
-    │   └── standard
-    │       └── model_fnn.sv
+    ├── controller
+    │   ├── fnn
+    │   │   ├── convolutional
+    │   │   │   └── model_fnn.sv
+    │   │   └── standard
+    │   │       └── model_fnn.sv
+    │   └── lstm
+    │       ├── convolutional
+    │       │   └── model_lstm.sv
+    │       └── standard
+    │           └── model_lstm.sv
     ├── functions
     │   ├── model_layer_norm.sv
     │   └── model_positional_encoding.sv
@@ -217,14 +223,9 @@ code
     │   ├── model_keys_vector.sv
     │   ├── model_queries_vector.sv
     │   └── model_values_vector.sv
-    ├── lstm
-    │   ├── convolutional
-    │   │   └── model_lstm.sv
-    │   └── standard
-    │       └── model_lstm.sv
     └── top
         ├── model_controller.sv
         ├── model_decoder.sv
         └── model_encoder.sv
 
-73 directories, 154 files
+74 directories, 154 files

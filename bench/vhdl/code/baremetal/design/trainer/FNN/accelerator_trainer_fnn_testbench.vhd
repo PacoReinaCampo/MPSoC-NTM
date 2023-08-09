@@ -158,13 +158,6 @@ architecture accelerator_trainer_fnn_testbench_architecture of accelerator_train
   signal xi_in_controller  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal d_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TRAINER
@@ -359,13 +352,6 @@ begin
       ACCELERATOR_TRAINER_FNN_XI_IN  => xi_in_controller,
       ACCELERATOR_TRAINER_FNN_H_IN   => h_in_controller,
 
-      ACCELERATOR_TRAINER_FNN_W_OUT => w_out_controller,
-      ACCELERATOR_TRAINER_FNN_D_OUT => d_out_controller,
-      ACCELERATOR_TRAINER_FNN_K_OUT => k_out_controller,
-      ACCELERATOR_TRAINER_FNN_U_OUT => u_out_controller,
-      ACCELERATOR_TRAINER_FNN_V_OUT => v_out_controller,
-      ACCELERATOR_TRAINER_FNN_B_OUT => b_out_controller,
-
       ACCELERATOR_TRAINER_FNN_H_OUT => h_out_controller
       );
 
@@ -466,13 +452,6 @@ begin
       RHO_IN => rho_in_controller,
       XI_IN  => xi_in_controller,
       H_IN   => h_in_controller,
-
-      W_OUT => w_out_controller,
-      D_OUT => d_out_controller,
-      K_OUT => k_out_controller,
-      U_OUT => u_out_controller,
-      V_OUT => v_out_controller,
-      B_OUT => b_out_controller,
 
       H_OUT => h_out_controller
       );

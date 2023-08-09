@@ -186,9 +186,6 @@ begin
             module_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-          -- Data Outputs
-          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
         when CLEAN_STATE =>             -- STEP 5
 
           -- Control Outputs

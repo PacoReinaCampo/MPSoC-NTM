@@ -80,14 +80,14 @@
 ../../../../../../../rtl/vhdl/code/transformer/components/accelerator_masked_scaled_dot_product_attention.vhd
 ../../../../../../../rtl/vhdl/code/transformer/components/accelerator_multi_head_attention.vhd
 ../../../../../../../rtl/vhdl/code/transformer/components/accelerator_scaled_dot_product_attention.vhd
-../../../../../../../rtl/vhdl/code/transformer/fnn/convolutional/accelerator_fnn.vhd
+../../../../../../../rtl/vhdl/code/transformer/controller/fnn/convolutional/accelerator_fnn.vhd
 ../../../../../../../rtl/vhdl/code/transformer/functions/accelerator_layer_norm.vhd
 ../../../../../../../rtl/vhdl/code/transformer/functions/accelerator_positional_encoding.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_inputs_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_keys_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_queries_vector.vhd
 ../../../../../../../rtl/vhdl/code/transformer/inputs/accelerator_values_vector.vhd
-../../../../../../../rtl/vhdl/code/transformer/lstm/convolutional/accelerator_lstm.vhd
+../../../../../../../rtl/vhdl/code/transformer/controller/lstm/convolutional/accelerator_lstm.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_controller.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_decoder.vhd
 ../../../../../../../rtl/vhdl/code/transformer/top/accelerator_encoder.vhd
