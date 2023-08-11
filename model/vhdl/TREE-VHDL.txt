@@ -207,11 +207,17 @@ code
     │   ├── model_masked_scaled_dot_product_attention.vhd
     │   ├── model_multi_head_attention.vhd
     │   └── model_scaled_dot_product_attention.vhd
-    ├── fnn
-    │   ├── convolutional
-    │   │   └── model_fnn.vhd
-    │   └── standard
-    │       └── model_fnn.vhd
+    ├── controller
+    │   ├── fnn
+    │   │   ├── convolutional
+    │   │   │   └── model_fnn.vhd
+    │   │   └── standard
+    │   │       └── model_fnn.vhd
+    │   └── lstm
+    │       ├── convolutional
+    │       │   └── model_lstm.vhd
+    │       └── standard
+    │           └── model_lstm.vhd
     ├── functions
     │   ├── model_layer_norm.vhd
     │   └── model_positional_encoding.vhd
@@ -220,14 +226,9 @@ code
     │   ├── model_keys_vector.vhd
     │   ├── model_queries_vector.vhd
     │   └── model_values_vector.vhd
-    ├── lstm
-    │   ├── convolutional
-    │   │   └── model_lstm.vhd
-    │   └── standard
-    │       └── model_lstm.vhd
     └── top
         ├── model_controller.vhd
         ├── model_decoder.vhd
         └── model_encoder.vhd
 
-73 directories, 157 files
+74 directories, 157 files

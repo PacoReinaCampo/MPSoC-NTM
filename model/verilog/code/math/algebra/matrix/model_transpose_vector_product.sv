@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module model_vector_transpose #(
+module model_transpose_vector_product #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 4
 ) (
@@ -49,12 +49,16 @@ module model_vector_transpose #(
   input      START,
   output reg READY,
 
-  input      DATA_A_IN_ENABLE,
+  input      DATA_A_IN_I_ENABLE,
+  input      DATA_A_IN_J_ENABLE,
   input      DATA_B_IN_ENABLE,
-  output reg DATA_OUT_ENABLE,
+  output reg DATA_OUT_I_ENABLE,
+  output reg DATA_OUT_J_ENABLE,
 
   // DATA
-  input      [DATA_SIZE-1:0] LENGTH_IN,
+  input      [DATA_SIZE-1:0] SIZE_A_I_IN,
+  input      [DATA_SIZE-1:0] SIZE_A_J_IN,
+  input      [DATA_SIZE-1:0] SIZE_B_IN,
   input      [DATA_SIZE-1:0] DATA_A_IN,
   input      [DATA_SIZE-1:0] DATA_B_IN,
   output reg [DATA_SIZE-1:0] DATA_OUT
@@ -64,12 +68,15 @@ module model_vector_transpose #(
   // Types
   //////////////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] VECTOR_INITIAL_I_STATE = 1;
-  parameter [2:0] VECTOR_INPUT_I_STATE = 2;
-  parameter [2:0] VECTOR_MULTIPLIER_STATE = 3;
-  parameter [2:0] SCALAR_ADDER_STATE = 4;
-  parameter [2:0] VECTOR_UPDATE_I_STATE = 5;
+  parameter [3:0] STARTER_STATE = 0;
+  parameter [3:0] MATRIX_INITIAL_I_STATE = 1;
+  parameter [3:0] MATRIX_INITIAL_J_STATE = 2;
+  parameter [3:0] MATRIX_INPUT_I_STATE = 3;
+  parameter [3:0] MATRIX_INPUT_J_STATE = 4;
+  parameter [3:0] VECTOR_MULTIPLIER_STATE = 5;
+  parameter [3:0] SCALAR_ADDER_STATE = 6;
+  parameter [3:0] MATRIX_UPDATE_I_STATE = 7;
+  parameter [3:0] MATRIX_UPDATE_J_STATE = 8;
 
   //////////////////////////////////////////////////////////////////////////////
   // Constants
@@ -141,23 +148,28 @@ module model_vector_transpose #(
 
           if (START == 1'b1) begin
             // FSM Control
-            algebra_ctrl_fsm_int <= VECTOR_INITIAL_I_STATE;
+            algebra_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
           end
         end
 
-        VECTOR_INITIAL_I_STATE: begin  // STEP 1
+        MATRIX_INITIAL_I_STATE: begin  // STEP 1
+        end
+        MATRIX_INITIAL_J_STATE: begin  // STEP 2
         end
 
-        VECTOR_INPUT_I_STATE: begin  // STEP 2
+        MATRIX_INPUT_I_STATE: begin  // STEP 3
+        end
+        MATRIX_INPUT_J_STATE: begin  // STEP 4
         end
 
-        VECTOR_MULTIPLIER_STATE: begin  // STEP 3
+        VECTOR_MULTIPLIER_STATE: begin  // STEP 5
+        end
+        SCALAR_ADDER_STATE: begin  // STEP 6
         end
 
-        SCALAR_ADDER_STATE: begin  // STEP 4
+        MATRIX_UPDATE_I_STATE: begin  // STEP 7
         end
-
-        VECTOR_UPDATE_I_STATE: begin  // STEP 5
+        MATRIX_UPDATE_J_STATE: begin  // STEP 8
         end
 
         default: begin
@@ -189,6 +201,7 @@ module model_vector_transpose #(
     .DATA_OUT (data_out_scalar_float_adder)
   );
 
+  // SCALAR MULTIPLIER
   model_scalar_float_multiplier #(
     .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

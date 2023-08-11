@@ -85,21 +85,9 @@ architecture accelerator_trainer_linear_testbench_architecture of accelerator_tr
 
   signal b_out_enable_controller : std_logic;
 
-  signal x_in_t_enable_controller : std_logic;
-  signal x_in_x_enable_controller : std_logic;
-
-  signal x_out_t_enable_controller : std_logic;
-  signal x_out_x_enable_controller : std_logic;
-
   signal x_in_enable_controller : std_logic;
 
   signal x_out_enable_controller : std_logic;
-
-  signal h_in_t_enable_controller : std_logic;
-  signal h_in_l_enable_controller : std_logic;
-
-  signal h_out_t_enable_controller : std_logic;
-  signal h_out_x_enable_controller : std_logic;
 
   signal h_out_enable_controller : std_logic;
 
@@ -111,11 +99,8 @@ architecture accelerator_trainer_linear_testbench_architecture of accelerator_tr
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_controller   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -139,7 +124,7 @@ architecture accelerator_trainer_linear_testbench_architecture of accelerator_tr
   signal w_out_l_enable_trainer : std_logic;
   signal w_out_x_enable_trainer : std_logic;
 
-  signal b_out_l_enable_trainer : std_logic;
+  signal b_out_enable_trainer : std_logic;
 
   -- DATA
   signal size_t_in_trainer : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -178,36 +163,36 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_TRAINER_LINEAR_START => start_controller,
-      NTM_TRAINER_LINEAR_READY => ready_controller,
+      NTM_TRAINER_LINEAR_START => start_trainer,
+      NTM_TRAINER_LINEAR_READY => ready_trainer,
 
-      NTM_TRAINER_LINEAR_X_IN_T_ENABLE => x_in_t_enable_controller,
-      NTM_TRAINER_LINEAR_X_IN_X_ENABLE => x_in_x_enable_controller,
+      NTM_TRAINER_LINEAR_X_IN_T_ENABLE => x_in_t_enable_trainer,
+      NTM_TRAINER_LINEAR_X_IN_X_ENABLE => x_in_x_enable_trainer,
 
-      NTM_TRAINER_LINEAR_X_OUT_T_ENABLE => x_out_t_enable_controller,
-      NTM_TRAINER_LINEAR_X_OUT_X_ENABLE => x_out_x_enable_controller,
+      NTM_TRAINER_LINEAR_X_OUT_T_ENABLE => x_out_t_enable_trainer,
+      NTM_TRAINER_LINEAR_X_OUT_X_ENABLE => x_out_x_enable_trainer,
 
-      NTM_TRAINER_LINEAR_H_IN_T_ENABLE => h_in_t_enable_controller,
-      NTM_TRAINER_LINEAR_H_IN_L_ENABLE => h_in_l_enable_controller,
+      NTM_TRAINER_LINEAR_H_IN_T_ENABLE => h_in_t_enable_trainer,
+      NTM_TRAINER_LINEAR_H_IN_L_ENABLE => h_in_l_enable_trainer,
 
-      NTM_TRAINER_LINEAR_H_OUT_T_ENABLE => h_out_t_enable_controller,
-      NTM_TRAINER_LINEAR_H_OUT_L_ENABLE => h_out_x_enable_controller,
+      NTM_TRAINER_LINEAR_H_OUT_T_ENABLE => h_out_t_enable_trainer,
+      NTM_TRAINER_LINEAR_H_OUT_L_ENABLE => h_out_l_enable_trainer,
 
-      NTM_TRAINER_LINEAR_W_OUT_L_ENABLE => w_out_l_enable_controller,
-      NTM_TRAINER_LINEAR_W_OUT_X_ENABLE => w_out_x_enable_controller,
+      NTM_TRAINER_LINEAR_W_OUT_L_ENABLE => w_out_l_enable_trainer,
+      NTM_TRAINER_LINEAR_W_OUT_X_ENABLE => w_out_x_enable_trainer,
 
-      NTM_TRAINER_LINEAR_B_OUT_ENABLE => b_out_enable_controller,
+      NTM_TRAINER_LINEAR_B_OUT_ENABLE => b_out_enable_trainer,
 
       -- DATA
-      NTM_TRAINER_LINEAR_SIZE_T_IN => size_t_in_controller,
-      NTM_TRAINER_LINEAR_SIZE_X_IN => size_x_in_controller,
-      NTM_TRAINER_LINEAR_SIZE_L_IN => size_l_in_controller,
+      NTM_TRAINER_LINEAR_SIZE_T_IN => size_t_in_trainer,
+      NTM_TRAINER_LINEAR_SIZE_X_IN => size_x_in_trainer,
+      NTM_TRAINER_LINEAR_SIZE_L_IN => size_l_in_trainer,
 
-      NTM_TRAINER_LINEAR_X_IN => x_in_controller,
-      NTM_TRAINER_LINEAR_H_IN => h_in_controller,
+      NTM_TRAINER_LINEAR_X_IN => x_in_trainer,
+      NTM_TRAINER_LINEAR_H_IN => h_in_trainer,
 
-      NTM_TRAINER_LINEAR_W_OUT => w_out_controller,
-      NTM_TRAINER_LINEAR_B_OUT => b_out_controller
+      NTM_TRAINER_LINEAR_W_OUT => w_out_trainer,
+      NTM_TRAINER_LINEAR_B_OUT => b_out_trainer
       );
 
   -- CONTROLLER
@@ -248,7 +233,7 @@ begin
       W_IN => w_in_controller,
       B_IN => b_in_controller,
 
-      X_IN   => x_in_controller,
+      X_IN => x_in_controller,
 
       H_OUT => h_out_controller
       );
@@ -283,15 +268,15 @@ begin
       W_OUT_L_ENABLE => w_out_l_enable_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_trainer,
 
-      B_OUT_L_ENABLE => b_out_l_enable_trainer,
+      B_OUT_L_ENABLE => b_out_enable_trainer,
 
       -- DATA
       SIZE_T_IN => size_t_in_trainer,
       SIZE_X_IN => size_x_in_trainer,
       SIZE_L_IN => size_l_in_trainer,
 
-      X_IN   => x_in_trainer,
-      H_IN   => h_in_trainer,
+      X_IN => x_in_trainer,
+      H_IN => h_in_trainer,
 
       W_OUT => w_out_trainer,
       B_OUT => b_out_trainer

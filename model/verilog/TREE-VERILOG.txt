@@ -91,7 +91,8 @@ code
 │   │   │   ├── model_matrix_summation.sv
 │   │   │   ├── model_matrix_transpose.sv
 │   │   │   ├── model_matrix_vector_convolution.sv
-│   │   │   └── model_matrix_vector_product.sv
+│   │   │   ├── model_matrix_vector_product.sv
+│   │   │   └── model_transpose_vector_product.sv
 │   │   ├── tensor
 │   │   │   ├── model_tensor_convolution.sv
 │   │   │   ├── model_tensor_inverse.sv
@@ -105,8 +106,7 @@ code
 │   │       ├── model_vector_cosine_similarity.sv
 │   │       ├── model_vector_module.sv
 │   │       ├── model_vector_multiplication.sv
-│   │       ├── model_vector_summation.sv
-│   │       └── model_vector_transpose.sv
+│   │       └── model_vector_summation.sv
 │   ├── calculus
 │   │   ├── matrix
 │   │   │   ├── model_matrix_differentiation.sv
@@ -156,6 +156,7 @@ code
 │   ├── read_heads
 │   │   └── model_reading.sv
 │   ├── top
+│   │   ├── model_interface_matrix.sv
 │   │   ├── model_interface_vector.sv
 │   │   ├── model_output_vector.sv
 │   │   └── model_top.sv
@@ -165,10 +166,12 @@ code
 ├── pkg
 │   ├── model_arithmetic_pkg.sv
 │   ├── model_fnn_controller_pkg.sv
+│   ├── model_linear_controller_pkg.sv
 │   ├── model_lstm_controller_pkg.sv
 │   ├── model_math_pkg.sv
 │   ├── model_ntm_core_pkg.sv
-│   └── model_state_pkg.sv
+│   ├── model_state_pkg.sv
+│   └── model_transformer_controller_pkg.sv
 ├── state
 │   ├── feedback
 │   │   ├── model_state_matrix_feedforward.sv
@@ -228,4 +231,4 @@ code
         ├── model_decoder.sv
         └── model_encoder.sv
 
-74 directories, 154 files
+74 directories, 157 files
