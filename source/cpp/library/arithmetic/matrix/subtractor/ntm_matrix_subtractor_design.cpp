@@ -44,7 +44,7 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
+SC_MODULE(subtractor)
 {
   sc_in_clk clock;
   sc_in<int> A;
@@ -52,7 +52,7 @@ SC_MODULE(adder)
 
   sc_out<int> out;
 
-  SC_CTOR(adder)
+  SC_CTOR(subtractor)
   {
     // cout<<"Constructor called\n";
     SC_METHOD(add);
@@ -61,6 +61,6 @@ SC_MODULE(adder)
 
   void add()
   {
-    out.write(A.read() + B.read());
+    out.write(A.read() - B.read());
   }
 };

@@ -43,18 +43,18 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_scalar_multiplier_design.cpp"
 
 int sc_main(int argc, char *argv[])
 {
-  adder adder("ADDER");
+  multiplier multiplier("SCALAR MULTIPLIER");
 
   sc_signal<int> Ain;
   sc_signal<int> Bin;
   sc_signal<bool> clock;
   sc_signal<int> out;
 
-  adder(clock, Ain, Bin, out);
+  multiplier(clock, Ain, Bin, out);
 
   Ain = 1;
   Bin = 2;
@@ -63,7 +63,7 @@ int sc_main(int argc, char *argv[])
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  cout << "@" << sc_time_stamp() << ": A * B = " << out.read() << endl;
 
   Ain = 2;
   Bin = 2;
@@ -72,7 +72,7 @@ int sc_main(int argc, char *argv[])
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  cout << "@" << sc_time_stamp() << ": A * B = " << out.read() << endl;
 
   return 0;
 }

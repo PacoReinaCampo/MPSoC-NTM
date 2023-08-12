@@ -43,11 +43,11 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_matrix_adder_design.cpp"
 
 int sc_main(int argc, char *argv[])
 {
-  adder adder("ADDER");
+  adder adder("MATRIX ADDER");
 
   sc_signal<int> Ain;
   sc_signal<int> Bin;

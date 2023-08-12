@@ -43,11 +43,11 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_scalar_adder_design.cpp"
 
 int sc_main(int argc, char *argv[])
 {
-  adder adder("ADDER");
+  adder adder("SCALAR ADDER");
 
   sc_signal<int> Ain;
   sc_signal<int> Bin;
