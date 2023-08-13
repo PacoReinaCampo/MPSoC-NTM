@@ -55,15 +55,15 @@ double ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> dat
   double input_a_result = 0.0;
   double input_b_result = 0.0;
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     dot_result += data_a_in[i] * data_b_in[i];
   }
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     input_a_result += data_a_in[i] * data_a_in[i];
   }
 
-  for(int i=0; i<data_b_in.size(); i++) {
+  for (int i=0; i<data_b_in.size(); i++) {
     input_b_result += data_b_in[i] * data_b_in[i];
   }
 

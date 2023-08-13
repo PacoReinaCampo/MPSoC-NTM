@@ -50,7 +50,7 @@ using namespace std;
 double ntm_scalar_multiplication(vector<double> data_in) {
   double data_out = 1.0;
 
-  for(int i=0; i<data_in.size(); i++) {
+  for (int i=0; i<data_in.size(); i++) {
     data_out *= data_in[i];
   }
 

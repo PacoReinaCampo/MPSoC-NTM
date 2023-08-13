@@ -66,8 +66,8 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for(int i=0; i<4; i++) {
-    for(int j=0; j<4; j++) {
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
       for (int k=0; k<4; k++) {
         data_a_in[i][j][k] = i + j + k;
         data_b_in[i][j][k] = i - j + k;
@@ -80,8 +80,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for(int i=0; i<4; i++) {
-    for(int j=0; j<4; j++) {
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
       for (int k=0; k<4; k++) {
         cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << ", " << k << "] = " << data_out[i][j][k].read() << endl;
       }

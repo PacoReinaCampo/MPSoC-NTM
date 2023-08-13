@@ -43,36 +43,41 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_matrix_inverse_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  matrix_inverse matrix_inverse("MATRIX_INVERSE");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<4>> data_in[4][4];
+  sc_signal<sc_int<4>> data_out[4][4];
 
-  adder(clock, Ain, Bin, out);
+  matrix_inverse.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      matrix_inverse.data_in[i][j](data_in[i][j]);
+
+      matrix_inverse.data_out[i][j](data_out[i][j]);
+    }
+  }
+
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      data_in[i][j] = i + j;
+    }
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
+    }
+  }
 
   return 0;
 }

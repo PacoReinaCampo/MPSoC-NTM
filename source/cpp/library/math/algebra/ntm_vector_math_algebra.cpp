@@ -63,7 +63,7 @@ class VectorMathAlgebra {
 double VectorMathAlgebra::ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in) {
   double data_out = 0;
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     data_out += data_a_in[i] * data_b_in[i];
   }
 
@@ -76,15 +76,15 @@ double VectorMathAlgebra::ntm_vector_cosine_similarity(vector<double> data_a_in,
   double input_a_result = 0.0;
   double input_b_result = 0.0;
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     dot_result += data_a_in[i] * data_b_in[i];
   }
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     input_a_result += data_a_in[i] * data_a_in[i];
   }
 
-  for(int i=0; i<data_b_in.size(); i++) {
+  for (int i=0; i<data_b_in.size(); i++) {
     input_b_result += data_b_in[i] * data_b_in[i];
   }
 
@@ -94,7 +94,7 @@ double VectorMathAlgebra::ntm_vector_cosine_similarity(vector<double> data_a_in,
 double VectorMathAlgebra::ntm_vector_module(vector<double> data_in) {
   double data_out = 0.0;
 
-  for(int i=0; i<data_in.size(); i++) {
+  for (int i=0; i<data_in.size(); i++) {
     data_out += data_in[i] * data_in[i];
   }
 
@@ -104,10 +104,10 @@ double VectorMathAlgebra::ntm_vector_module(vector<double> data_in) {
 vector<double> VectorMathAlgebra::ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in) {
   vector<double> data_out;
 
-  for(int i=0; i<data_a_in.size(); i++) {
+  for (int i=0; i<data_a_in.size(); i++) {
     double temporal = 0.0;
 
-    for(int m=0; m<i+1; m++) {
+    for (int m=0; m<i+1; m++) {
       temporal += data_a_in[m] * data_b_in[i-m];
     }
     data_out.push_back(temporal);
@@ -119,10 +119,10 @@ vector<double> VectorMathAlgebra::ntm_vector_convolution(vector<double> data_a_i
 vector<double> VectorMathAlgebra::ntm_vector_summation(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for(int i=0; i<matrix.size(); i++) {
+  for (int i=0; i<matrix.size(); i++) {
     double temporal = 0.0;
 
-    for(int j=0; j<matrix[0].size(); j++) {
+    for (int j=0; j<matrix[0].size(); j++) {
       temporal += matrix[i][j];
     }
     data_out.push_back(temporal);
@@ -134,10 +134,10 @@ vector<double> VectorMathAlgebra::ntm_vector_summation(vector<vector<double>> ma
 vector<double> VectorMathAlgebra::ntm_vector_multiplication(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for(int i=0; i<matrix.size(); i++) {
+  for (int i=0; i<matrix.size(); i++) {
     double temporal = 1.0;
 
-    for(int j=0; j<matrix[0].size(); j++) {
+    for (int j=0; j<matrix[0].size(); j++) {
       temporal *= matrix[i][j];
     }
     data_out.push_back(temporal);

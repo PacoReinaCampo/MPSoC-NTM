@@ -51,10 +51,10 @@ using namespace std;
 vector<double> ntm_vector_multiplication(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for(int i=0; i<matrix.size(); i++) {
+  for (int i=0; i<matrix.size(); i++) {
     double temporal = 1.0;
 
-    for(int j=0; j<matrix[0].size(); j++) {
+    for (int j=0; j<matrix[0].size(); j++) {
       temporal *= matrix[i][j];
     }
     data_out.push_back(temporal);

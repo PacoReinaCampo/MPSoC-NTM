@@ -54,8 +54,8 @@ SC_MODULE(matrix_vector_product) {
   SC_CTOR(matrix_vector_product) {
     SC_METHOD(product);
     sensitive << clock.pos();
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<4; j++) {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
         sensitive << data_a_in[i][j];
       }
       sensitive << data_b_in[i];
@@ -63,10 +63,10 @@ SC_MODULE(matrix_vector_product) {
   }
 
   void product() {
-    for(int i=0; i<4; i++) {
+    for (int i=0; i<4; i++) {
       int temporal = 0;
 
-      for(int j=0; j<4; j++) {
+      for (int j=0; j<4; j++) {
         for (int m = 0; m < 4; m++) {
           temporal += data_a_in[i][m].read() * data_b_in[m].read();
         }

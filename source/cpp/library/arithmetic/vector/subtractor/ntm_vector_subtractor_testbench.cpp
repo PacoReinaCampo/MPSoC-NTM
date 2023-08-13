@@ -62,7 +62,7 @@ int sc_main(int argc, char *argv[]) {
     vector_subtractor.data_out[i](data_out[i]);
   }
 
-  for(int i=0; i<4; i++) {
+  for (int i=0; i<4; i++) {
     data_a_in[i] = i;
     data_b_in[i] = i + 1;
   }
@@ -72,7 +72,7 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for(int i=0; i<4; i++) {
+  for (int i=0; i<4; i++) {
     cout << "@" << sc_time_stamp() << ": data_out[" << i << "] = " << data_out[i].read() << endl;
   }
 

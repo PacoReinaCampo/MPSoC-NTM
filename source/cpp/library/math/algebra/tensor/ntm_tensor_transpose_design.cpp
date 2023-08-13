@@ -44,23 +44,31 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+SC_MODULE(tensor_transpose) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<4>> data_in[4][4][4];
 
-  sc_out<int> out;
+  sc_out<sc_int<4>> data_out[4][4][4];
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(tensor_transpose) {
+    SC_METHOD(transpose);
+    sensitive << clock.pos();
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
+        for (int k=0; k<4; k++) {
+          sensitive << data_in[i][j][k];
+        }
+      }
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void transpose() {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
+        for (int k=0; k<4; k++) {
+          data_out[i][j][k].write(data_in[i][k][j].read());
+        }
+      }
+    }
   }
 };

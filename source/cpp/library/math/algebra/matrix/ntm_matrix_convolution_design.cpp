@@ -54,16 +54,16 @@ SC_MODULE(matrix_convolution) {
   SC_CTOR(matrix_convolution) {
     SC_METHOD(convolution);
     sensitive << clock.pos();
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<4; j++) {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
         sensitive << data_a_in[i][j] << data_b_in[i][j];
       }
     }
   }
 
   void convolution() {
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<4; j++) {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
         int temporal = 0;
 
         for (int m=0; m<4; m++) {

@@ -54,8 +54,8 @@ SC_MODULE(tensor_subtractor) {
   SC_CTOR(tensor_subtractor) {
     SC_METHOD(subtractor);
     sensitive << clock.pos();
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<4; j++) {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
         for (int k=0; k<4; k++) {
           sensitive << data_a_in[i][j][k] << data_b_in[i][j][k];
         }
@@ -64,8 +64,8 @@ SC_MODULE(tensor_subtractor) {
   }
 
   void subtractor() {
-    for(int i=0; i<4; i++) {
-      for(int j=0; j<4; j++) {
+    for (int i=0; i<4; i++) {
+      for (int j=0; j<4; j++) {
         for (int k=0; k<4; k++) {
           data_out[i][j][k].write(data_a_in[i][j][k].read() - data_b_in[i][j][k].read());
         }

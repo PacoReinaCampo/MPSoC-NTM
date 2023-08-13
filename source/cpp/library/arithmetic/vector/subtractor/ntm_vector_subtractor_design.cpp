@@ -54,13 +54,13 @@ SC_MODULE(vector_subtractor) {
   SC_CTOR(vector_subtractor) {
     SC_METHOD(subtractor);
     sensitive << clock.pos();
-    for(int i=0; i<4; i++) {
+    for (int i=0; i<4; i++) {
       sensitive << data_a_in[i] << data_b_in[i];
     }
   }
 
   void subtractor() {
-    for(int i=0; i<4; i++) {
+    for (int i=0; i<4; i++) {
       data_out[i].write(data_a_in[i].read() - data_b_in[i].read());
     }
   }
