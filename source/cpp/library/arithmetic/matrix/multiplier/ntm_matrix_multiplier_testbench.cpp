@@ -45,34 +45,42 @@
 #include "systemc.h"
 #include "ntm_matrix_multiplier_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  multiplier multiplier("MATRIX MULTIPLIER");
+int sc_main(int argc, char *argv[]) {
+  matrix_multiplier matrix_multiplier("MATRIX_MULTIPLIER");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<4>> data_a_in[4][4];
+  sc_signal<sc_int<4>> data_b_in[4][4];
+  sc_signal<sc_int<4>> data_out[4][4];
 
-  multiplier(clock, Ain, Bin, out);
+  matrix_multiplier.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      matrix_multiplier.data_a_in[i][j](data_a_in[i][j]);
+      matrix_multiplier.data_b_in[i][j](data_b_in[i][j]);
+
+      matrix_multiplier.data_out[i][j](data_out[i][j]);
+    }
+  }
+
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      data_a_in[i][j] = i + j;
+      data_b_in[i][j] = i - j;
+    }
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A * B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A * B = " << out.read() << endl;
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
+    }
+  }
 
   return 0;
 }

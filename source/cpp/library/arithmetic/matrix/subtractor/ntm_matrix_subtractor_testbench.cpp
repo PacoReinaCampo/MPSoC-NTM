@@ -45,34 +45,42 @@
 #include "systemc.h"
 #include "ntm_matrix_subtractor_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  subtractor subtractor("MATRIX SUBTRACTOR");
+int sc_main(int argc, char *argv[]) {
+  matrix_subtractor matrix_subtractor("MATRIX_SUBTRACTOR");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<4>> data_a_in[4][4];
+  sc_signal<sc_int<4>> data_b_in[4][4];
+  sc_signal<sc_int<4>> data_out[4][4];
 
-  subtractor(clock, Ain, Bin, out);
+  matrix_subtractor.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      matrix_subtractor.data_a_in[i][j](data_a_in[i][j]);
+      matrix_subtractor.data_b_in[i][j](data_b_in[i][j]);
+
+      matrix_subtractor.data_out[i][j](data_out[i][j]);
+    }
+  }
+
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      data_a_in[i][j] = i + j;
+      data_b_in[i][j] = i - j;
+    }
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A - B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A - B = " << out.read() << endl;
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
+    }
+  }
 
   return 0;
 }

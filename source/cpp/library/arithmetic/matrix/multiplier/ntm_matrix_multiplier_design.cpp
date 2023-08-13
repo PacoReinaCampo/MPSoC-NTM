@@ -44,23 +44,28 @@
 
 #include "systemc.h"
 
-SC_MODULE(multiplier)
-{
+SC_MODULE(matrix_multiplier) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<4>> data_a_in[4][4];
+  sc_in<sc_int<4>> data_b_in[4][4];
 
-  sc_out<int> out;
+  sc_out<sc_int<4>> data_out[4][4];
 
-  SC_CTOR(multiplier)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(matrix_multiplier) {
+    SC_METHOD(multiplier);
+    sensitive << clock.pos();
+    for(int i=0; i<4; i++) {
+      for(int j=0; j<4; j++) {
+        sensitive << data_a_in[i][j] << data_b_in[i][j];
+      }
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() * B.read());
+  void multiplier() {
+    for(int i=0; i<4; i++) {
+      for(int j=0; j<4; j++) {
+        data_out[i][j].write(data_a_in[i][j].read() * data_b_in[i][j].read());
+      }
+    }
   }
 };

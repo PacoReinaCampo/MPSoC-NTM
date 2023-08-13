@@ -43,36 +43,50 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_tensor_multiplier_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  tensor_multiplier tensor_multiplier("TENSOR_ADDER");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<4>> data_a_in[4][4][4];
+  sc_signal<sc_int<4>> data_b_in[4][4][4];
+  sc_signal<sc_int<4>> data_out[4][4][4];
 
-  adder(clock, Ain, Bin, out);
+  tensor_multiplier.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      for (int k=0; k<4; k++) {
+        tensor_multiplier.data_a_in[i][j][k](data_a_in[i][j][k]);
+        tensor_multiplier.data_b_in[i][j][k](data_b_in[i][j][k]);
+
+        tensor_multiplier.data_out[i][j][k](data_out[i][j][k]);
+      }
+    }
+  }
+
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      for (int k=0; k<4; k++) {
+        data_a_in[i][j][k] = i + j + k;
+        data_b_in[i][j][k] = i - j + k;
+      }
+    }
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      for (int k=0; k<4; k++) {
+        cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << ", " << k << "] = " << data_out[i][j][k].read() << endl;
+      }
+    }
+  }
 
   return 0;
 }

@@ -43,36 +43,50 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_transpose_vector_product_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  transpose_vector_product transpose_vector_product("TRANSPOSE_VECTOR_PRODUCT");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<4>> data_a_in[4];
+  sc_signal<sc_int<4>> data_b_in[4];
+  sc_signal<sc_int<4>> data_out[4][4];
 
-  adder(clock, Ain, Bin, out);
+  transpose_vector_product.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<4; i++) {
+    transpose_vector_product.data_a_in[i](data_a_in[i]);
+  }
+
+  for (int j=0; j<4; j++) {
+    transpose_vector_product.data_b_in[j](data_b_in[j]);
+  }
+
+  for (int i=0; i<4; i++) {
+    for (int j=0; j<4; j++) {
+      transpose_vector_product.data_out[i][j](data_out[i][j]);
+    }
+  }
+
+  for(int i=0; i<4; i++) {
+    data_a_in[i] = i;
+  }
+
+  for(int j=0; j<4; j++) {
+    data_b_in[j] = j;
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  for(int i=0; i<4; i++) {
+    for(int j=0; j<4; j++) {
+      cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
+    }
+  }
 
   return 0;
 }

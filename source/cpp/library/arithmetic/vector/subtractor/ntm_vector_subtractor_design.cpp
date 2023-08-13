@@ -44,23 +44,24 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+SC_MODULE(vector_subtractor) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<4>> data_a_in[4];
+  sc_in<sc_int<4>> data_b_in[4];
 
-  sc_out<int> out;
+  sc_out<sc_int<4>> data_out[4];
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(vector_subtractor) {
+    SC_METHOD(subtractor);
+    sensitive << clock.pos();
+    for(int i=0; i<4; i++) {
+      sensitive << data_a_in[i] << data_b_in[i];
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void subtractor() {
+    for(int i=0; i<4; i++) {
+      data_out[i].write(data_a_in[i].read() - data_b_in[i].read());
+    }
   }
 };

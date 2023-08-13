@@ -44,23 +44,20 @@
 
 #include "systemc.h"
 
-SC_MODULE(multiplier)
-{
+SC_MODULE(scalar_multiplier) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<int> data_a_in;
+  sc_in<int> data_b_in;
 
-  sc_out<int> out;
+  sc_out<int> data_out;
 
-  SC_CTOR(multiplier)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(scalar_multiplier) {
+    SC_METHOD(multiplier);
+    sensitive << clock.pos();
+    sensitive << data_a_in << data_b_in;
   }
 
-  void add()
-  {
-    out.write(A.read() * B.read());
+  void multiplier() {
+    data_out.write(data_a_in.read() * data_b_in.read());
   }
 };

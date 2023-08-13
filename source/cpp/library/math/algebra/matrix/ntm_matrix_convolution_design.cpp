@@ -44,23 +44,36 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+SC_MODULE(matrix_convolution) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<4>> data_a_in[4][4];
+  sc_in<sc_int<4>> data_b_in[4][4];
 
-  sc_out<int> out;
+  sc_out<sc_int<4>> data_out[4][4];
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(matrix_convolution) {
+    SC_METHOD(convolution);
+    sensitive << clock.pos();
+    for(int i=0; i<4; i++) {
+      for(int j=0; j<4; j++) {
+        sensitive << data_a_in[i][j] << data_b_in[i][j];
+      }
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void convolution() {
+    for(int i=0; i<4; i++) {
+      for(int j=0; j<4; j++) {
+        int temporal = 0;
+
+        for (int m=0; m<4; m++) {
+          for (int n=0; n<4; n++) {
+            temporal += data_a_in[m][n].read() * data_b_in[i-m][j-n].read();
+          }
+        }
+
+        data_out[i][j] = temporal;
+      }
+    }
   }
 };
