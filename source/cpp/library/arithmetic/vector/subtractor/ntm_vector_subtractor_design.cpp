@@ -44,23 +44,25 @@
 
 #include "systemc.h"
 
+#define SIZE_I_IN 4
+
 SC_MODULE(vector_subtractor) {
   sc_in_clk clock;
-  sc_in<sc_int<4>> data_a_in[4];
-  sc_in<sc_int<4>> data_b_in[4];
+  sc_in<sc_int<64>> data_a_in[SIZE_I_IN];
+  sc_in<sc_int<64>> data_b_in[SIZE_I_IN];
 
-  sc_out<sc_int<4>> data_out[4];
+  sc_out<sc_int<64>> data_out[SIZE_I_IN];
 
   SC_CTOR(vector_subtractor) {
     SC_METHOD(subtractor);
     sensitive << clock.pos();
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
       sensitive << data_a_in[i] << data_b_in[i];
     }
   }
 
   void subtractor() {
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
       data_out[i].write(data_a_in[i].read() - data_b_in[i].read());
     }
   }

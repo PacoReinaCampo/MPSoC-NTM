@@ -272,7 +272,7 @@ g++ arithmetic/vector/subtractor/ntm_vector_subtractor_testbench.cpp arithmetic/
 #g++ dnc/top/dnc_top_testbench.cpp dnc/top/dnc_top_design.cpp -o dnc/top/dnc_top.run -lsystemc
 #g++ dnc/trained/dnc_trained_top_testbench.cpp dnc/trained/dnc_trained_top_design.cpp -o dnc/trained/dnc_trained_top.run -lsystemc
 g++ math/algebra/matrix/ntm_matrix_convolution_testbench.cpp math/algebra/matrix/ntm_matrix_convolution_design.cpp -o math/algebra/matrix/ntm_matrix_convolution.run -lsystemc
-#g++ math/algebra/matrix/ntm_matrix_inverse_testbench.cpp math/algebra/matrix/ntm_matrix_inverse_design.cpp -o math/algebra/matrix/ntm_matrix_inverse.run -lsystemc
+g++ math/algebra/matrix/ntm_matrix_inverse_testbench.cpp math/algebra/matrix/ntm_matrix_inverse_design.cpp -o math/algebra/matrix/ntm_matrix_inverse.run -lsystemc
 #g++ math/algebra/matrix/ntm_matrix_multiplication_testbench.cpp math/algebra/matrix/ntm_matrix_multiplication_design.cpp -o math/algebra/matrix/ntm_matrix_multiplication.run -lsystemc
 g++ math/algebra/matrix/ntm_matrix_product_testbench.cpp math/algebra/matrix/ntm_matrix_product_design.cpp -o math/algebra/matrix/ntm_matrix_product.run -lsystemc
 #g++ math/algebra/matrix/ntm_matrix_summation_testbench.cpp math/algebra/matrix/ntm_matrix_summation_design.cpp -o math/algebra/matrix/ntm_matrix_summation.run -lsystemc
@@ -290,10 +290,10 @@ g++ math/algebra/tensor/ntm_tensor_matrix_product_testbench.cpp math/algebra/ten
 g++ math/algebra/tensor/ntm_tensor_product_testbench.cpp math/algebra/tensor/ntm_tensor_product_design.cpp -o math/algebra/tensor/ntm_tensor_product.run -lsystemc
 #g++ math/algebra/tensor/ntm_tensor_summation_testbench.cpp math/algebra/tensor/ntm_tensor_summation_design.cpp -o math/algebra/tensor/ntm_tensor_summation.run -lsystemc
 g++ math/algebra/tensor/ntm_tensor_transpose_testbench.cpp math/algebra/tensor/ntm_tensor_transpose_design.cpp -o math/algebra/tensor/ntm_tensor_transpose.run -lsystemc
-#g++ math/algebra/vector/ntm_dot_product_testbench.cpp math/algebra/vector/ntm_dot_product_design.cpp -o math/algebra/vector/ntm_dot_product.run -lsystemc
-#g++ math/algebra/vector/ntm_vector_convolution_testbench.cpp math/algebra/vector/ntm_vector_convolution_design.cpp -o math/algebra/vector/ntm_vector_convolution.run -lsystemc
+g++ math/algebra/vector/ntm_dot_product_testbench.cpp math/algebra/vector/ntm_dot_product_design.cpp -o math/algebra/vector/ntm_dot_product.run -lsystemc
+g++ math/algebra/vector/ntm_vector_convolution_testbench.cpp math/algebra/vector/ntm_vector_convolution_design.cpp -o math/algebra/vector/ntm_vector_convolution.run -lsystemc
 #g++ math/algebra/vector/ntm_vector_cosine_similarity_testbench.cpp math/algebra/vector/ntm_vector_cosine_similarity_design.cpp -o math/algebra/vector/ntm_vector_cosine_similarity.run -lsystemc
-#g++ math/algebra/vector/ntm_vector_module_testbench.cpp math/algebra/vector/ntm_vector_module_design.cpp -o math/algebra/vector/ntm_vector_module.run -lsystemc
+g++ math/algebra/vector/ntm_vector_module_testbench.cpp math/algebra/vector/ntm_vector_module_design.cpp -o math/algebra/vector/ntm_vector_module.run -lsystemc
 #g++ math/algebra/vector/ntm_vector_multiplication_testbench.cpp math/algebra/vector/ntm_vector_multiplication_design.cpp -o math/algebra/vector/ntm_vector_multiplication.run -lsystemc
 #g++ math/algebra/vector/ntm_vector_summation_testbench.cpp math/algebra/vector/ntm_vector_summation_design.cpp -o math/algebra/vector/ntm_vector_summation.run -lsystemc
 #g++ math/calculus/matrix/ntm_matrix_differentiation_testbench.cpp math/calculus/matrix/ntm_matrix_differentiation_design.cpp -o math/calculus/matrix/ntm_matrix_differentiation.run -lsystemc

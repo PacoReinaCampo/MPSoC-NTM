@@ -44,25 +44,28 @@
 
 #include "systemc.h"
 
+#define SIZE_I_IN 4
+#define SIZE_J_IN 4
+
 SC_MODULE(matrix_transpose) {
   sc_in_clk clock;
-  sc_in<sc_int<4>> data_in[4][4];
+  sc_in<sc_int<64>> data_in[SIZE_I_IN][SIZE_J_IN];
 
-  sc_out<sc_int<4>> data_out[4][4];
+  sc_out<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
   SC_CTOR(matrix_transpose) {
     SC_METHOD(transpose);
     sensitive << clock.pos();
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
         sensitive << data_in[i][j];
       }
     }
   }
 
   void transpose() {
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
         data_out[i][j].write(data_in[j][i].read());
       }
     }

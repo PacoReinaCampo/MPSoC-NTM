@@ -49,14 +49,14 @@ int sc_main(int argc, char *argv[]) {
   matrix_multiplier matrix_multiplier("MATRIX_MULTIPLIER");
 
   sc_signal<bool> clock;
-  sc_signal<sc_int<4>> data_a_in[4][4];
-  sc_signal<sc_int<4>> data_b_in[4][4];
-  sc_signal<sc_int<4>> data_out[4][4];
+  sc_signal<sc_int<64>> data_a_in[SIZE_I_IN][SIZE_J_IN];
+  sc_signal<sc_int<64>> data_b_in[SIZE_I_IN][SIZE_J_IN];
+  sc_signal<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
   matrix_multiplier.clock(clock);
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
       matrix_multiplier.data_a_in[i][j](data_a_in[i][j]);
       matrix_multiplier.data_b_in[i][j](data_b_in[i][j]);
 
@@ -64,8 +64,8 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
       data_a_in[i][j] = i + j;
       data_b_in[i][j] = i - j;
     }
@@ -76,8 +76,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
       cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
     }
   }

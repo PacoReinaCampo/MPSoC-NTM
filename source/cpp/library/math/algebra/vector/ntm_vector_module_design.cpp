@@ -44,23 +44,30 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+#define SIZE_I_IN 4
+
+#include<math.h>
+
+SC_MODULE(vector_module) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<64>> data_in[SIZE_I_IN];
 
-  sc_out<int> out;
+  sc_out<int> data_out;
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(vector_module) {
+    SC_METHOD(operation);
+    sensitive << clock.pos();
+    for (int i=0; i<SIZE_I_IN; i++) {
+      sensitive << data_in[i];
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void operation() {
+    int temporal = 0;
+    for (int i=0; i<SIZE_I_IN; i++) {
+      temporal += data_in[i].read() * data_in[i].read();
+    }
+
+    data_out = sqrt(temporal);
   }
 };

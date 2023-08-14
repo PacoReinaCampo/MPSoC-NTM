@@ -44,26 +44,29 @@
 
 #include "systemc.h"
 
+#define SIZE_I_IN 4
+#define SIZE_J_IN 4
+
 SC_MODULE(matrix_divider) {
   sc_in_clk clock;
-  sc_in<sc_int<4>> data_a_in[4][4];
-  sc_in<sc_int<4>> data_b_in[4][4];
+  sc_in<sc_int<64>> data_a_in[SIZE_I_IN][SIZE_J_IN];
+  sc_in<sc_int<64>> data_b_in[SIZE_I_IN][SIZE_J_IN];
 
-  sc_out<sc_int<4>> data_out[4][4];
+  sc_out<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
   SC_CTOR(matrix_divider) {
     SC_METHOD(divider);
     sensitive << clock.pos();
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
         sensitive << data_a_in[i][j] << data_b_in[i][j];
       }
     }
   }
 
   void divider() {
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
         data_out[i][j].write(data_a_in[i][j].read() / data_b_in[i][j].read());
       }
     }

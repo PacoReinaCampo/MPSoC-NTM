@@ -43,36 +43,33 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_vector_module_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  vector_module vector_module("VECTOR_MODULE");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<64>> data_in[SIZE_I_IN];
+  sc_signal<int> data_out;
 
-  adder(clock, Ain, Bin, out);
+  vector_module.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<SIZE_I_IN; i++) {
+    vector_module.data_in[i](data_in[i]);
+  }
+
+  vector_module.data_out(data_out);
+
+  for (int i=0; i<SIZE_I_IN; i++) {
+    data_in[i] = i;
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  cout << "@" << sc_time_stamp() << ": data_out = " << data_out.read() << endl;
 
   return 0;
 }

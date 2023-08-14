@@ -49,15 +49,15 @@ int sc_main(int argc, char *argv[]) {
   tensor_convolution tensor_convolution("TENSOR_CONVOLUTION");
 
   sc_signal<bool> clock;
-  sc_signal<sc_int<4>> data_a_in[4][4][4];
-  sc_signal<sc_int<4>> data_b_in[4][4][4];
-  sc_signal<sc_int<4>> data_out[4][4][4];
+  sc_signal<sc_int<64>> data_a_in[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
+  sc_signal<sc_int<64>> data_b_in[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
+  sc_signal<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
 
   tensor_convolution.clock(clock);
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
-      for (int k=0; k<4; k++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      for (int k=0; k<SIZE_K_IN; k++) {
         tensor_convolution.data_a_in[i][j][k](data_a_in[i][j][k]);
         tensor_convolution.data_b_in[i][j][k](data_b_in[i][j][k]);
 
@@ -66,9 +66,9 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
-      for (int k=0; k<4; k++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      for (int k=0; k<SIZE_K_IN; k++) {
         data_a_in[i][j][k] = i + j + k;
         data_b_in[i][j][k] = i - j + k;
       }
@@ -80,9 +80,9 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
-      for (int k=0; k<4; k++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      for (int k=0; k<SIZE_K_IN; k++) {
         cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << ", " << k << "] = " << data_out[i][j][k].read() << endl;
       }
     }

@@ -44,19 +44,23 @@
 
 #include "systemc.h"
 
+#define SIZE_I_IN 4
+#define SIZE_J_IN 4
+#define SIZE_K_IN 4
+
 SC_MODULE(tensor_matrix_convolution) {
   sc_in_clk clock;
-  sc_in<sc_int<4>> data_a_in[4][4][4];
-  sc_in<sc_int<4>> data_b_in[4][4];
+  sc_in<sc_int<64>> data_a_in[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
+  sc_in<sc_int<64>> data_b_in[SIZE_I_IN][SIZE_J_IN];
 
-  sc_out<sc_int<4>> data_out[4][4];
+  sc_out<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
   SC_CTOR(tensor_matrix_convolution) {
     SC_METHOD(convolution);
     sensitive << clock.pos();
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
-        for (int k=0; k<4; k++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        for (int k=0; k<SIZE_K_IN; k++) {
           sensitive << data_a_in[i][j][k];
         }
         sensitive << data_b_in[i][j];
@@ -65,14 +69,14 @@ SC_MODULE(tensor_matrix_convolution) {
   }
 
   void convolution() {
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
-        for (int k=0; k<4; k++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        for (int k=0; k<SIZE_K_IN; k++) {
           int temporal = 0;
 
-          for (int m=0; m<4; m++) {
-            for (int n=0; n<4; n++) {
-              for (int p=0; p<4; p++) {
+          for (int m=0; m<i; m++) {
+            for (int n=0; n<j; n++) {
+              for (int p=0; p<k; p++) {
                 temporal += data_a_in[m][n][p].read() * data_b_in[i-m][j-n].read();
               }
             }

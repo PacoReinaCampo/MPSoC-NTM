@@ -44,18 +44,22 @@
 
 #include "systemc.h"
 
+#define SIZE_I_IN 4
+#define SIZE_J_IN 4
+#define SIZE_K_IN 4
+
 SC_MODULE(tensor_transpose) {
   sc_in_clk clock;
-  sc_in<sc_int<4>> data_in[4][4][4];
+  sc_in<sc_int<64>> data_in[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
 
-  sc_out<sc_int<4>> data_out[4][4][4];
+  sc_out<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN][SIZE_K_IN];
 
   SC_CTOR(tensor_transpose) {
     SC_METHOD(transpose);
     sensitive << clock.pos();
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
-        for (int k=0; k<4; k++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        for (int k=0; k<SIZE_K_IN; k++) {
           sensitive << data_in[i][j][k];
         }
       }
@@ -63,9 +67,9 @@ SC_MODULE(tensor_transpose) {
   }
 
   void transpose() {
-    for (int i=0; i<4; i++) {
-      for (int j=0; j<4; j++) {
-        for (int k=0; k<4; k++) {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        for (int k=0; k<SIZE_K_IN; k++) {
           data_out[i][j][k].write(data_in[i][k][j].read());
         }
       }

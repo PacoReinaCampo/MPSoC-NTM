@@ -49,14 +49,14 @@ int sc_main(int argc, char *argv[]) {
   matrix_vector_convolution matrix_vector_convolution("MATRIX_VECTOR_CONVOLUTION");
 
   sc_signal<bool> clock;
-  sc_signal<sc_int<4>> data_a_in[4][4];
-  sc_signal<sc_int<4>> data_b_in[4];
-  sc_signal<sc_int<4>> data_out[4];
+  sc_signal<sc_int<64>> data_a_in[SIZE_I_IN][SIZE_J_IN];
+  sc_signal<sc_int<64>> data_b_in[SIZE_I_IN];
+  sc_signal<sc_int<64>> data_out[SIZE_I_IN];
 
   matrix_vector_convolution.clock(clock);
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
       matrix_vector_convolution.data_a_in[i][j](data_a_in[i][j]);
     }
     matrix_vector_convolution.data_b_in[i](data_b_in[i]);
@@ -64,8 +64,8 @@ int sc_main(int argc, char *argv[]) {
     matrix_vector_convolution.data_out[i](data_out[i]);
   }
 
-  for (int i=0; i<4; i++) {
-    for (int j=0; j<4; j++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
       data_a_in[i][j] = i + j;
     }
     data_b_in[i] = i;
@@ -76,7 +76,7 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<4; i++) {
+  for (int i=0; i<SIZE_I_IN; i++) {
     cout << "@" << sc_time_stamp() << ": data_out[" << i << "] = " << data_out[i].read() << endl;
   }
 

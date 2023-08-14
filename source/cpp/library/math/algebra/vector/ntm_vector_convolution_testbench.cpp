@@ -43,36 +43,38 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_vector_convolution_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  vector_convolution vector_convolution("VECTOR_CONVOLUTION");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<64>> data_a_in[SIZE_I_IN];
+  sc_signal<sc_int<64>> data_b_in[SIZE_I_IN];
+  sc_signal<sc_int<64>> data_out[SIZE_I_IN];
 
-  adder(clock, Ain, Bin, out);
+  vector_convolution.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<SIZE_I_IN; i++) {
+    vector_convolution.data_a_in[i](data_a_in[i]);
+    vector_convolution.data_b_in[i](data_b_in[i]);
+
+    vector_convolution.data_out[i](data_out[i]);
+  }
+
+  for (int i=0; i<SIZE_I_IN; i++) {
+    data_a_in[i] = i;
+    data_b_in[i] = i;
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  for (int i=0; i<SIZE_I_IN; i++) {
+    cout << "@" << sc_time_stamp() << ": data_out[" << i << "] = " << data_out[i].read() << endl;
+  }
 
   return 0;
 }
