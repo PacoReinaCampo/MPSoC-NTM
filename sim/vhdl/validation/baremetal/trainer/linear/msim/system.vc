@@ -79,7 +79,7 @@
 
 ../../../../../../../model/vhdl/code/trainer/linear/model_trainer.vhd
 
-../../../../../../../model/vhdl/code/state/linear/convolutional/model_controller.vhd
+../../../../../../../model/vhdl/code/state/linear/standard/model_controller.vhd
 
 ../../../../../../../bench/vhdl/code/baremetal/model/trainer/linear/model_trainer_linear_pkg.vhd
 ../../../../../../../bench/vhdl/code/baremetal/model/trainer/linear/model_trainer_linear_stimulus.vhd

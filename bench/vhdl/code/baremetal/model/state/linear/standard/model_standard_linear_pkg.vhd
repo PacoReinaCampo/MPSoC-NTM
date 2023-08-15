@@ -109,11 +109,11 @@ package model_standard_linear_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_STANDARD_LINEAR_TEST : boolean := false;
+  signal STIMULUS_MODEL_STANDARD_LINEAR_TEST : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_STANDARD_LINEAR_CASE_0 : boolean := false;
+  signal STIMULUS_MODEL_STANDARD_LINEAR_CASE_0 : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_STANDARD_LINEAR_CASE_1 : boolean := false;
+  signal STIMULUS_MODEL_STANDARD_LINEAR_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

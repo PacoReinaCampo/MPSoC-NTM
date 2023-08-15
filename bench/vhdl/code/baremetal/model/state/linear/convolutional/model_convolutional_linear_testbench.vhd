@@ -58,11 +58,11 @@ entity model_convolutional_linear_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_ACCELERATOR_CONVOLUTIONAL_LINEAR_TEST : boolean := false;
+    ENABLE_MODEL_CONVOLUTIONAL_LINEAR_TEST : boolean := false;
 
-    ENABLE_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE_0 : boolean := false;
+    ENABLE_MODEL_CONVOLUTIONAL_LINEAR_CASE_0 : boolean := false;
 
-    ENABLE_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE_1 : boolean := false
+    ENABLE_MODEL_CONVOLUTIONAL_LINEAR_CASE_1 : boolean := false
     );
 end model_convolutional_linear_testbench;
 
@@ -166,7 +166,7 @@ begin
       );
 
   -- CONTROLLER
-  model_convolutional_linear_test : if (ENABLE_ACCELERATOR_CONVOLUTIONAL_LINEAR_TEST) generate
+  model_convolutional_linear_test : if (ENABLE_MODEL_CONVOLUTIONAL_LINEAR_TEST) generate
     controller : model_controller
       generic map (
         DATA_SIZE    => DATA_SIZE,

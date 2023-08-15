@@ -187,20 +187,20 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_TEST) then
+    if (STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_TEST                        ";
+      MONITOR_TEST <= "STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_TEST                              ";
       -------------------------------------------------------------------
 
       -- DATA
       CONVOLUTIONAL_LINEAR_SIZE_X_IN <= FOUR_CONTROL;
       CONVOLUTIONAL_LINEAR_SIZE_L_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE_0) then
+      if (STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE 0                      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_CASE 0                            ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -312,10 +312,10 @@ begin
         end loop CONVOLUTIONAL_LINEAR_FIRST_RUN;
       end if;
 
-      if (STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE_1) then
+      if (STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE 1                      ";
+        MONITOR_CASE <= "STIMULUS_MODEL_CONVOLUTIONAL_LINEAR_CASE 1                            ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

@@ -108,6 +108,13 @@ package model_trainer_linear_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
+  -- VECTOR-FUNCTIONALITY
+  signal STIMULUS_MODEL_TRAINER_LINEAR_TEST : boolean := false;
+
+  signal STIMULUS_MODEL_TRAINER_LINEAR_CASE_0 : boolean := false;
+
+  signal STIMULUS_MODEL_TRAINER_LINEAR_CASE_1 : boolean := false;
+
   ------------------------------------------------------------------------------
   -- Components
   ------------------------------------------------------------------------------
@@ -131,36 +138,36 @@ package model_trainer_linear_pkg is
       RST : out std_logic;
 
       -- CONTROL
-      NTM_TRAINER_LINEAR_START : out std_logic;
-      NTM_TRAINER_LINEAR_READY : in  std_logic;
+      TRAINER_LINEAR_START : out std_logic;
+      TRAINER_LINEAR_READY : in  std_logic;
 
-      NTM_TRAINER_LINEAR_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-      NTM_TRAINER_LINEAR_X_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
+      TRAINER_LINEAR_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+      TRAINER_LINEAR_X_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-      NTM_TRAINER_LINEAR_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-      NTM_TRAINER_LINEAR_X_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
+      TRAINER_LINEAR_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+      TRAINER_LINEAR_X_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-      NTM_TRAINER_LINEAR_H_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-      NTM_TRAINER_LINEAR_H_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      TRAINER_LINEAR_H_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+      TRAINER_LINEAR_H_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-      NTM_TRAINER_LINEAR_H_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-      NTM_TRAINER_LINEAR_H_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_LINEAR_H_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+      TRAINER_LINEAR_H_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-      NTM_TRAINER_LINEAR_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-      NTM_TRAINER_LINEAR_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
+      TRAINER_LINEAR_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_LINEAR_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-      NTM_TRAINER_LINEAR_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_LINEAR_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
       -- DATA
-      NTM_TRAINER_LINEAR_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TRAINER_LINEAR_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TRAINER_LINEAR_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_LINEAR_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_LINEAR_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_LINEAR_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_TRAINER_LINEAR_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TRAINER_LINEAR_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_LINEAR_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_LINEAR_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_TRAINER_LINEAR_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TRAINER_LINEAR_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      TRAINER_LINEAR_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_LINEAR_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
