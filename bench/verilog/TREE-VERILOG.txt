@@ -107,14 +107,9 @@ code
 │   │   │       ├── accelerator_trainer_lstm_stimulus.sv
 │   │   │       └── accelerator_trainer_lstm_testbench.sv
 │   │   └── transformer
-│   │       ├── convolutional
-│   │       │   ├── accelerator_convolutional_transformer_pkg.sv
-│   │       │   ├── accelerator_convolutional_transformer_stimulus.sv
-│   │       │   └── accelerator_convolutional_transformer_testbench.sv
-│   │       └── standard
-│   │           ├── accelerator_standard_transformer_pkg.sv
-│   │           ├── accelerator_standard_transformer_stimulus.sv
-│   │           └── accelerator_standard_transformer_testbench.sv
+│   │       ├── accelerator_transformer_pkg.sv
+│   │       ├── accelerator_transformer_stimulus.sv
+│   │       └── accelerator_transformer_testbench.sv
 │   └── model
 │       ├── arithmetic
 │       │   ├── fixed
@@ -222,14 +217,9 @@ code
 │       │       ├── model_trainer_lstm_stimulus.sv
 │       │       └── model_trainer_lstm_testbench.sv
 │       └── transformer
-│           ├── convolutional
-│           │   ├── model_convolutional_transformer_pkg.sv
-│           │   ├── model_convolutional_transformer_stimulus.sv
-│           │   └── model_convolutional_transformer_testbench.sv
-│           └── standard
-│               ├── model_standard_transformer_pkg.sv
-│               ├── model_standard_transformer_stimulus.sv
-│               └── model_standard_transformer_testbench.sv
+│           ├── model_transformer_pkg.sv
+│           ├── model_transformer_stimulus.sv
+│           └── model_transformer_testbench.sv
 └── tests
     ├── design
     │   ├── arithmetic
@@ -338,14 +328,9 @@ code
     │   │       ├── accelerator_trainer_lstm_stimulus.sv
     │   │       └── accelerator_trainer_lstm_testbench.sv
     │   └── transformer
-    │       ├── convolutional
-    │       │   ├── accelerator_convolutional_transformer_pkg.sv
-    │       │   ├── accelerator_convolutional_transformer_stimulus.sv
-    │       │   └── accelerator_convolutional_transformer_testbench.sv
-    │       └── standard
-    │           ├── accelerator_standard_transformer_pkg.sv
-    │           ├── accelerator_standard_transformer_stimulus.sv
-    │           └── accelerator_standard_transformer_testbench.sv
+    │       ├── accelerator_transformer_pkg.sv
+    │       ├── accelerator_transformer_stimulus.sv
+    │       └── accelerator_transformer_testbench.sv
     └── model
         ├── arithmetic
         │   ├── fixed
@@ -453,13 +438,8 @@ code
         │       ├── model_trainer_lstm_stimulus.sv
         │       └── model_trainer_lstm_testbench.sv
         └── transformer
-            ├── convolutional
-            │   ├── model_convolutional_transformer_pkg.sv
-            │   ├── model_convolutional_transformer_stimulus.sv
-            │   └── model_convolutional_transformer_testbench.sv
-            └── standard
-                ├── model_standard_transformer_pkg.sv
-                ├── model_standard_transformer_stimulus.sv
-                └── model_standard_transformer_testbench.sv
+            ├── model_transformer_pkg.sv
+            ├── model_transformer_stimulus.sv
+            └── model_transformer_testbench.sv
 
-150 directories, 312 files
+142 directories, 300 files
