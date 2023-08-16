@@ -1117,6 +1117,80 @@ package model_lstm_controller_pkg is
       );
   end component;
 
+  component model_vector_controller_differentiation is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 4
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      X_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      X_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      Y_OUT_T_ENABLE : out std_logic;   -- for l in 0 to T-1
+      Y_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      -- DATA
+      SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      LENGTH_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component model_matrix_controller_differentiation is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 4
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      X_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      X_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      X_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      X_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      Y_OUT_T_ENABLE : out std_logic;   -- for l in 0 to T-1
+      Y_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      Y_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      -- DATA
+      SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      LENGTH_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   ------------------------------------------------------------------------------
   -- Functions
   ------------------------------------------------------------------------------

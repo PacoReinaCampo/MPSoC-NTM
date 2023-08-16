@@ -1,0 +1,57 @@
+onerror {resume}
+
+quietly WaveActivateNextPane {} 0
+
+add wave -noupdate /accelerator_trainer_differentiation_pkg/MONITOR_TEST
+add wave -noupdate /accelerator_trainer_differentiation_pkg/MONITOR_CASE
+
+add wave -noupdate -divider {=========================================}
+add wave -noupdate -divider {NTM MATRIX TRAINER DIFFERENTIATION TEST}
+add wave -noupdate -divider {=========================================}
+
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/CLK
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/RST
+
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/START
+
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/SIZE_T_IN
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/SIZE_R_IN
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/SIZE_L_IN
+
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_IN_T_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_t_x_in_loop
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_IN_I_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_i_x_in_loop
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_IN_L_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_l_x_in_loop
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_IN
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/data_x_in_enable_int
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_OUT_T_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_OUT_I_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/X_OUT_L_ENABLE
+
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/READY
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/Y_OUT_T_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_t_y_out_loop
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/Y_OUT_I_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_i_y_out_loop
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/Y_OUT_L_ENABLE
+add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_matrix_trainer_differentiation_test/matrix_controller_differentiation/index_l_y_out_loop
+
+TreeUpdate [SetDefaultTree]
+WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
+configure wave -namecolwidth 305
+configure wave -valuecolwidth 100
+configure wave -justifyvalue left
+configure wave -signalnamewidth 1
+configure wave -snapdistance 10
+configure wave -datasetprefix 0
+configure wave -rowmargin 4
+configure wave -childrowmargin 2
+configure wave -gridoffset 0
+configure wave -gridperiod 1
+configure wave -griddelta 40
+configure wave -timeline 0
+configure wave -timelineunits ps
+update
+WaveRestoreZoom {1134027470 ps} {1150214364 ps}

@@ -924,6 +924,80 @@ package model_transformer_controller_pkg is
       );
   end component;
 
+  component model_vector_controller_differentiation is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 4
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      X_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      X_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      Y_OUT_T_ENABLE : out std_logic;   -- for l in 0 to T-1
+      Y_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      -- DATA
+      SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      LENGTH_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component model_matrix_controller_differentiation is
+    generic (
+      DATA_SIZE    : integer := 64;
+      CONTROL_SIZE : integer := 4
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      X_IN_T_ENABLE : in std_logic;     -- for t in 0 to T-1
+      X_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      X_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      X_OUT_T_ENABLE : out std_logic;   -- for t in 0 to T-1
+      X_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      X_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      Y_OUT_T_ENABLE : out std_logic;   -- for l in 0 to T-1
+      Y_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      Y_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      -- DATA
+      SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      LENGTH_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   ------------------------------------------------------------------------------
   -- Functions
   ------------------------------------------------------------------------------
@@ -1497,7 +1571,7 @@ package body model_transformer_controller_pkg is
           for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
             tensor_r_int(n, i, k) := array4_r_input(l, n, i, k);
           end loop;
-          
+
           for p in 0 to to_integer(unsigned(SIZE_P_IN))-1 loop
             tensor_rho_int(n, i, p) := array4_rho_input(l, n, i, p);
           end loop;
@@ -1518,7 +1592,7 @@ package body model_transformer_controller_pkg is
 
         -- D(i;d;p)·rho(l;n;i;p)
 
-        -- V(d;s)·xi(l;n;s)
+      -- V(d;s)·xi(l;n;s)
       end loop;
     end loop;
 
@@ -1649,8 +1723,8 @@ package body model_transformer_controller_pkg is
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
       for n in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
         for d in 0 to to_integer(unsigned(SIZE_D_IN))-1 loop
-          scalar_operation_one_int   := to_real(to_float(tensor_pe_input(l, n, d), float64'high, -float64'low));
-          scalar_operation_two_int   := to_real(to_float(tensor_x_input(l, n, d), float64'high, -float64'low));
+          scalar_operation_one_int := to_real(to_float(tensor_pe_input(l, n, d), float64'high, -float64'low));
+          scalar_operation_two_int := to_real(to_float(tensor_x_input(l, n, d), float64'high, -float64'low));
 
           if (tensor_x_input(l, n, d)(0) = '0') then
             tensor_y_output(l, n, d) := std_logic_vector(to_float(sin(scalar_operation_one_int/10000.0**(2.0*scalar_operation_two_int/scalar_operation_three_int)), float64'high, -float64'low));

@@ -5,7 +5,7 @@ build:
 	vcom -2008 -f system.vc
 
 simulate:
-	vsim -c -do run.do work.model_trainer_fnn_testbench
+	vsim -c -do run.do work.model_trainer_linear_testbench
 
 clean:
 	rm -rf work transcript *.vstf *.wlf

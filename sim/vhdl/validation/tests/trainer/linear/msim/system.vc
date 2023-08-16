@@ -77,6 +77,9 @@
 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_sinh_function.vhd
 ../../../../../../../model/vhdl/code/math/series/matrix/model_matrix_tanh_function.vhd
 
+../../../../../../../model/vhdl/code/trainer/differentiation/model_vector_controller_differentiation.vhd
+../../../../../../../model/vhdl/code/trainer/differentiation/model_matrix_controller_differentiation.vhd
+
 ../../../../../../../model/vhdl/code/trainer/linear/model_trainer.vhd
 
 ../../../../../../../model/vhdl/code/state/linear/standard/model_controller.vhd
