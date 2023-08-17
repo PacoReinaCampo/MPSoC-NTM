@@ -37,6 +37,7 @@ add wave -noupdate /model_trainer_differentiation_testbench/model_trainer_matrix
 add wave -noupdate /model_trainer_differentiation_testbench/model_trainer_matrix_differentiation_test/trainer_matrix_differentiation/index_i_y_out_loop
 add wave -noupdate /model_trainer_differentiation_testbench/model_trainer_matrix_differentiation_test/trainer_matrix_differentiation/Y_OUT_L_ENABLE
 add wave -noupdate /model_trainer_differentiation_testbench/model_trainer_matrix_differentiation_test/trainer_matrix_differentiation/index_l_y_out_loop
+add wave -noupdate /model_trainer_differentiation_testbench/model_trainer_matrix_differentiation_test/trainer_matrix_differentiation/Y_OUT
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

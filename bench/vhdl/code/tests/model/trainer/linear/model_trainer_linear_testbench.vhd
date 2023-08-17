@@ -92,55 +92,55 @@ architecture model_trainer_linear_testbench_architecture of model_trainer_linear
 
   -- VECTOR TRAINER DIFFERENTIATION
   -- CONTROL
-  signal start_TRAINER_VECTOR_differentiation : std_logic;
-  signal ready_TRAINER_VECTOR_differentiation : std_logic;
+  signal start_trainer_vector_differentiation : std_logic;
+  signal ready_trainer_vector_differentiation : std_logic;
 
-  signal x_in_t_enable_TRAINER_VECTOR_differentiation : std_logic;
-  signal x_in_l_enable_TRAINER_VECTOR_differentiation : std_logic;
+  signal x_in_t_enable_trainer_vector_differentiation : std_logic;
+  signal x_in_l_enable_trainer_vector_differentiation : std_logic;
 
-  signal x_out_t_enable_TRAINER_VECTOR_differentiation : std_logic;
-  signal x_out_l_enable_TRAINER_VECTOR_differentiation : std_logic;
+  signal x_out_t_enable_trainer_vector_differentiation : std_logic;
+  signal x_out_l_enable_trainer_vector_differentiation : std_logic;
 
-  signal y_out_t_enable_TRAINER_VECTOR_differentiation : std_logic;
-  signal y_out_l_enable_TRAINER_VECTOR_differentiation : std_logic;
+  signal y_out_t_enable_trainer_vector_differentiation : std_logic;
+  signal y_out_l_enable_trainer_vector_differentiation : std_logic;
 
   -- DATA
-  signal size_t_in_TRAINER_VECTOR_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_TRAINER_VECTOR_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_t_in_trainer_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_trainer_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal length_in_TRAINER_VECTOR_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_trainer_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_TRAINER_VECTOR_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_trainer_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal y_out_TRAINER_VECTOR_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal y_out_trainer_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX TRAINER DIFFERENTIATION
   -- CONTROL
-  signal start_TRAINER_MATRIX_differentiation : std_logic;
-  signal ready_TRAINER_MATRIX_differentiation : std_logic;
+  signal start_trainer_matrix_differentiation : std_logic;
+  signal ready_trainer_matrix_differentiation : std_logic;
 
-  signal x_in_t_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal x_in_i_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal x_in_l_enable_TRAINER_MATRIX_differentiation : std_logic;
+  signal x_in_t_enable_trainer_matrix_differentiation : std_logic;
+  signal x_in_i_enable_trainer_matrix_differentiation : std_logic;
+  signal x_in_l_enable_trainer_matrix_differentiation : std_logic;
 
-  signal x_out_t_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal x_out_i_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal x_out_l_enable_TRAINER_MATRIX_differentiation : std_logic;
+  signal x_out_t_enable_trainer_matrix_differentiation : std_logic;
+  signal x_out_i_enable_trainer_matrix_differentiation : std_logic;
+  signal x_out_l_enable_trainer_matrix_differentiation : std_logic;
 
-  signal y_out_t_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal y_out_i_enable_TRAINER_MATRIX_differentiation : std_logic;
-  signal y_out_l_enable_TRAINER_MATRIX_differentiation : std_logic;
+  signal y_out_t_enable_trainer_matrix_differentiation : std_logic;
+  signal y_out_i_enable_trainer_matrix_differentiation : std_logic;
+  signal y_out_l_enable_trainer_matrix_differentiation : std_logic;
 
   -- DATA
-  signal size_t_in_TRAINER_MATRIX_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_TRAINER_MATRIX_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_TRAINER_MATRIX_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_t_in_trainer_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_trainer_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_trainer_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal length_in_TRAINER_MATRIX_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_trainer_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_TRAINER_MATRIX_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_trainer_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal y_out_TRAINER_MATRIX_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal y_out_trainer_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- CONTROLLER
   -- CONTROL
@@ -236,55 +236,55 @@ begin
 
       -- VECTOR TRAINER DIFFERENTIATION
       -- CONTROL
-      TRAINER_VECTOR_DIFFERENTIATION_START => start_TRAINER_VECTOR_differentiation,
-      TRAINER_VECTOR_DIFFERENTIATION_READY => ready_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_START => start_trainer_vector_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_READY => ready_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE => x_in_t_enable_TRAINER_VECTOR_differentiation,
-      TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE => x_in_l_enable_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE => x_in_t_enable_trainer_vector_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE => x_in_l_enable_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE => x_out_t_enable_TRAINER_VECTOR_differentiation,
-      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE => x_out_l_enable_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE => x_out_t_enable_trainer_vector_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE => x_out_l_enable_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_T_ENABLE => y_out_t_enable_TRAINER_VECTOR_differentiation,
-      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_L_ENABLE => y_out_l_enable_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_T_ENABLE => y_out_t_enable_trainer_vector_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_L_ENABLE => y_out_l_enable_trainer_vector_differentiation,
 
       -- DATA
-      TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN => size_t_in_TRAINER_VECTOR_differentiation,
-      TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN => size_l_in_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN => size_t_in_trainer_vector_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN => size_l_in_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_X_IN => x_in_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN => x_in_trainer_vector_differentiation,
 
-      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT => y_out_TRAINER_VECTOR_differentiation,
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT => y_out_trainer_vector_differentiation,
 
       -- MATRIX TRAINER DIFFERENTIATION
       -- CONTROL
-      TRAINER_MATRIX_DIFFERENTIATION_START => start_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_READY => ready_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_START => start_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_READY => ready_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE => x_in_t_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE => x_in_i_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE => x_in_l_enable_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE => x_in_t_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE => x_in_i_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE => x_in_l_enable_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE => x_out_t_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE => x_out_i_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE => x_out_l_enable_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE => x_out_t_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE => x_out_i_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE => x_out_l_enable_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_T_ENABLE => y_out_t_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_I_ENABLE => y_out_i_enable_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_L_ENABLE => y_out_l_enable_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_T_ENABLE => y_out_t_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_I_ENABLE => y_out_i_enable_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_L_ENABLE => y_out_l_enable_trainer_matrix_differentiation,
 
       -- DATA
-      TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN => size_t_in_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN => size_r_in_TRAINER_MATRIX_differentiation,
-      TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN => size_l_in_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN => size_t_in_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN => size_r_in_trainer_matrix_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN => size_l_in_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_LENGTH_IN => length_in_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_LENGTH_IN => length_in_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_X_IN => x_in_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN => x_in_trainer_matrix_differentiation,
 
-      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT => y_out_TRAINER_MATRIX_differentiation,
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT => y_out_trainer_matrix_differentiation,
 
       -- TRAINER LINEAR
       -- CONTROL
@@ -321,7 +321,7 @@ begin
       );
 
   -- VECTOR TRAINER DIFFERENTIATION
-  model_TRAINER_VECTOR_differentiation_test : if (ENABLE_MODEL_TRAINER_VECTOR_DIFFERENTIATION_TEST) generate
+  model_trainer_vector_differentiation_test : if (ENABLE_MODEL_TRAINER_VECTOR_DIFFERENTIATION_TEST) generate
     trainer_vector_differentiation : model_trainer_vector_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -333,32 +333,32 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_TRAINER_VECTOR_differentiation,
-        READY => ready_TRAINER_VECTOR_differentiation,
+        START => start_trainer_vector_differentiation,
+        READY => ready_trainer_vector_differentiation,
 
-        X_IN_T_ENABLE => x_in_t_enable_TRAINER_VECTOR_differentiation,
-        X_IN_L_ENABLE => x_in_l_enable_TRAINER_VECTOR_differentiation,
+        X_IN_T_ENABLE => x_in_t_enable_trainer_vector_differentiation,
+        X_IN_L_ENABLE => x_in_l_enable_trainer_vector_differentiation,
 
-        X_OUT_T_ENABLE => x_out_t_enable_TRAINER_VECTOR_differentiation,
-        X_OUT_L_ENABLE => x_out_l_enable_TRAINER_VECTOR_differentiation,
+        X_OUT_T_ENABLE => x_out_t_enable_trainer_vector_differentiation,
+        X_OUT_L_ENABLE => x_out_l_enable_trainer_vector_differentiation,
 
-        Y_OUT_T_ENABLE => y_out_t_enable_TRAINER_VECTOR_differentiation,
-        Y_OUT_L_ENABLE => y_out_l_enable_TRAINER_VECTOR_differentiation,
+        Y_OUT_T_ENABLE => y_out_t_enable_trainer_vector_differentiation,
+        Y_OUT_L_ENABLE => y_out_l_enable_trainer_vector_differentiation,
 
         -- DATA
-        SIZE_T_IN => size_t_in_TRAINER_VECTOR_differentiation,
-        SIZE_L_IN => size_l_in_TRAINER_VECTOR_differentiation,
+        SIZE_T_IN => size_t_in_trainer_vector_differentiation,
+        SIZE_L_IN => size_l_in_trainer_vector_differentiation,
 
-        LENGTH_IN => length_in_TRAINER_VECTOR_differentiation,
+        LENGTH_IN => length_in_trainer_vector_differentiation,
 
-        X_IN => x_in_TRAINER_VECTOR_differentiation,
+        X_IN => x_in_trainer_vector_differentiation,
 
-        Y_OUT => y_out_TRAINER_VECTOR_differentiation
+        Y_OUT => y_out_trainer_vector_differentiation
         );
-  end generate model_TRAINER_VECTOR_differentiation_test;
+  end generate model_trainer_vector_differentiation_test;
 
   -- MATRIX TRAINER DIFFERENTIATION
-  model_TRAINER_MATRIX_differentiation_test : if (ENABLE_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST) generate
+  model_trainer_matrix_differentiation_test : if (ENABLE_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST) generate
     trainer_matrix_differentiation : model_trainer_matrix_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -370,33 +370,33 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_TRAINER_MATRIX_differentiation,
-        READY => ready_TRAINER_MATRIX_differentiation,
+        START => start_trainer_matrix_differentiation,
+        READY => ready_trainer_matrix_differentiation,
 
-        X_IN_T_ENABLE => x_in_t_enable_TRAINER_MATRIX_differentiation,
-        X_IN_I_ENABLE => x_in_i_enable_TRAINER_MATRIX_differentiation,
-        X_IN_L_ENABLE => x_in_l_enable_TRAINER_MATRIX_differentiation,
+        X_IN_T_ENABLE => x_in_t_enable_trainer_matrix_differentiation,
+        X_IN_I_ENABLE => x_in_i_enable_trainer_matrix_differentiation,
+        X_IN_L_ENABLE => x_in_l_enable_trainer_matrix_differentiation,
 
-        X_OUT_T_ENABLE => x_out_t_enable_TRAINER_MATRIX_differentiation,
-        X_OUT_I_ENABLE => x_out_i_enable_TRAINER_MATRIX_differentiation,
-        X_OUT_L_ENABLE => x_out_l_enable_TRAINER_MATRIX_differentiation,
+        X_OUT_T_ENABLE => x_out_t_enable_trainer_matrix_differentiation,
+        X_OUT_I_ENABLE => x_out_i_enable_trainer_matrix_differentiation,
+        X_OUT_L_ENABLE => x_out_l_enable_trainer_matrix_differentiation,
 
-        Y_OUT_T_ENABLE => y_out_t_enable_TRAINER_MATRIX_differentiation,
-        Y_OUT_I_ENABLE => y_out_i_enable_TRAINER_MATRIX_differentiation,
-        Y_OUT_L_ENABLE => y_out_l_enable_TRAINER_MATRIX_differentiation,
+        Y_OUT_T_ENABLE => y_out_t_enable_trainer_matrix_differentiation,
+        Y_OUT_I_ENABLE => y_out_i_enable_trainer_matrix_differentiation,
+        Y_OUT_L_ENABLE => y_out_l_enable_trainer_matrix_differentiation,
 
         -- DATA
-        SIZE_T_IN => size_t_in_TRAINER_MATRIX_differentiation,
-        SIZE_R_IN => size_r_in_TRAINER_MATRIX_differentiation,
-        SIZE_L_IN => size_l_in_TRAINER_MATRIX_differentiation,
+        SIZE_T_IN => size_t_in_trainer_matrix_differentiation,
+        SIZE_R_IN => size_r_in_trainer_matrix_differentiation,
+        SIZE_L_IN => size_l_in_trainer_matrix_differentiation,
 
-        LENGTH_IN => length_in_TRAINER_MATRIX_differentiation,
+        LENGTH_IN => length_in_trainer_matrix_differentiation,
 
-        X_IN => x_in_TRAINER_MATRIX_differentiation,
+        X_IN => x_in_trainer_matrix_differentiation,
 
-        Y_OUT => y_out_TRAINER_MATRIX_differentiation
+        Y_OUT => y_out_trainer_matrix_differentiation
         );
-  end generate model_TRAINER_MATRIX_differentiation_test;
+  end generate model_trainer_matrix_differentiation_test;
 
   model_trainer_linear_test : if (ENABLE_MODEL_TRAINER_LINEAR_TEST) generate
     -- CONTROLLER LINEAR

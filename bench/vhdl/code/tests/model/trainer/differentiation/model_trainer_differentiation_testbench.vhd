@@ -216,7 +216,7 @@ begin
 
   -- TRAINER VECTOR DIFFERENTIATION
   model_trainer_vector_differentiation_test : if (ENABLE_MODEL_TRAINER_VECTOR_DIFFERENTIATION_TEST) generate
-    vector_controller_differentiation : model_vector_controller_differentiation
+    trainer_vector_differentiation : model_trainer_vector_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -253,7 +253,7 @@ begin
 
   -- TRAINER MATRIX DIFFERENTIATION
   model_trainer_matrix_differentiation_test : if (ENABLE_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST) generate
-    matrix_controller_differentiation : model_matrix_controller_differentiation
+    trainer_matrix_differentiation : model_trainer_matrix_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE

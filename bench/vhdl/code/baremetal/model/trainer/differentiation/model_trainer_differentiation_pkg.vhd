@@ -115,7 +115,7 @@ package model_trainer_differentiation_pkg is
 
   signal STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
 
-  -- VECTOR-FUNCTIONALITY
+  -- MATRIX-FUNCTIONALITY
   signal STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST : boolean := false;
 
   signal STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
