@@ -924,7 +924,7 @@ package model_transformer_controller_pkg is
       );
   end component;
 
-  component model_vector_controller_differentiation is
+  component model_trainer_vector_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 4
@@ -959,7 +959,7 @@ package model_transformer_controller_pkg is
       );
   end component;
 
-  component model_matrix_controller_differentiation is
+  component model_trainer_matrix_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 4

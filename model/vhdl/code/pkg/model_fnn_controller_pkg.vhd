@@ -255,7 +255,7 @@ package model_fnn_controller_pkg is
       );
   end component;
 
-  component model_vector_controller_differentiation is
+  component model_trainer_vector_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 4
@@ -290,7 +290,7 @@ package model_fnn_controller_pkg is
       );
   end component;
 
-  component model_matrix_controller_differentiation is
+  component model_trainer_matrix_differentiation is
     generic (
       DATA_SIZE    : integer := 64;
       CONTROL_SIZE : integer := 4
@@ -333,7 +333,7 @@ package model_fnn_controller_pkg is
   -- Functions
   ------------------------------------------------------------------------------
 
-  function function_vector_controller_differentiation (
+  function function_trainer_vector_differentiation (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -342,7 +342,7 @@ package model_fnn_controller_pkg is
     vector_input : matrix_buffer
     ) return matrix_buffer;
 
-  function function_matrix_controller_differentiation (
+  function function_trainer_matrix_differentiation (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -520,7 +520,7 @@ package body model_fnn_controller_pkg is
   -- Functions
   ------------------------------------------------------------------------------
 
-  function function_vector_controller_differentiation (
+  function function_trainer_vector_differentiation (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -555,9 +555,9 @@ package body model_fnn_controller_pkg is
     end loop;
 
     return vector_output;
-  end function function_vector_controller_differentiation;
+  end function function_trainer_vector_differentiation;
 
-  function function_matrix_controller_differentiation (
+  function function_trainer_matrix_differentiation (
     SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -595,7 +595,7 @@ package body model_fnn_controller_pkg is
     end loop;
 
     return matrix_output;
-  end function function_matrix_controller_differentiation;
+  end function function_trainer_matrix_differentiation;
 
   ------------------------------------------------------------------------------
   -- Controller
@@ -930,7 +930,7 @@ package body model_fnn_controller_pkg is
 
     matrix_w_output := (others => (others => ZERO_DATA));
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -982,7 +982,7 @@ package body model_fnn_controller_pkg is
 
     tensor_k_output := (others => (others => (others => ZERO_DATA)));
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -1033,7 +1033,7 @@ package body model_fnn_controller_pkg is
 
     matrix_u_output := (others => (others => ZERO_DATA));
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -1084,7 +1084,7 @@ package body model_fnn_controller_pkg is
 
     matrix_v_output := (others => (others => ZERO_DATA));
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -1136,7 +1136,7 @@ package body model_fnn_controller_pkg is
 
     tensor_d_output := (others => (others => (others => ZERO_DATA)));
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 
@@ -1185,7 +1185,7 @@ package body model_fnn_controller_pkg is
 
     vector_b_output := (others => ZERO_DATA);
 
-    vector_dh_int := function_vector_controller_differentiation (
+    vector_dh_int := function_trainer_vector_differentiation (
       SIZE_T_IN => SIZE_T_IN,
       SIZE_L_IN => SIZE_L_IN,
 

@@ -207,8 +207,8 @@ code
 │       └── accelerator_state_top.vhd
 ├── trainer
 │   ├── differentiation
-│   │   ├── accelerator_matrix_controller_differentiation.vhd
-│   │   └── accelerator_vector_controller_differentiation.vhd
+│   │   ├── accelerator_trainer_matrix_differentiation.vhd
+│   │   └── accelerator_trainer_vector_differentiation.vhd
 │   ├── FNN
 │   │   └── accelerator_trainer.vhd
 │   ├── linear

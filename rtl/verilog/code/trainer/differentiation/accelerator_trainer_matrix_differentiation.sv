@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module model_matrix_controller_differentiation #(
+module accelerator_trainer_matrix_differentiation #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 4
 ) (
@@ -342,7 +342,7 @@ module model_matrix_controller_differentiation #(
   end
 
   // VECTOR SUMMATION
-  model_vector_summation #(
+  accelerator_vector_summation #(
     .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   ) vector_summation (
@@ -367,7 +367,7 @@ module model_matrix_controller_differentiation #(
   );
 
   // VECTOR DIFFERENTIATION
-  model_vector_differentiation #(
+  accelerator_vector_differentiation #(
     .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   ) vector_differentiation (
@@ -394,7 +394,7 @@ module model_matrix_controller_differentiation #(
   );
 
   // MATRIX PRODUCT
-  model_matrix_product #(
+  accelerator_matrix_product #(
     .DATA_SIZE   (DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   ) matrix_product (

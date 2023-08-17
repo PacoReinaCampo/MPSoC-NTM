@@ -190,8 +190,8 @@ code
 │       └── model_state_top.sv
 ├── trainer
 │   ├── differentiation
-│   │   ├── model_matrix_controller_differentiation.sv
-│   │   └── model_vector_controller_differentiation.sv
+│   │   ├── model_trainer_matrix_differentiation.sv
+│   │   └── model_trainer_vector_differentiation.sv
 │   ├── FNN
 │   │   └── model_trainer.sv
 │   ├── linear

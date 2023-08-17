@@ -190,8 +190,8 @@ code
 │       └── model_state_top.vhd
 ├── trainer
 │   ├── differentiation
-│   │   ├── model_matrix_controller_differentiation.vhd
-│   │   └── model_vector_controller_differentiation.vhd
+│   │   ├── model_trainer_matrix_differentiation.vhd
+│   │   └── model_trainer_vector_differentiation.vhd
 │   ├── FNN
 │   │   └── model_trainer.vhd
 │   ├── linear

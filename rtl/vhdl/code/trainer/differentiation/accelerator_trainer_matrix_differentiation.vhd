@@ -46,7 +46,7 @@ use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
 use work.accelerator_fnn_controller_pkg.all;
 
-entity accelerator_matrix_controller_differentiation is
+entity accelerator_trainer_matrix_differentiation is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 4
@@ -137,7 +137,7 @@ entity accelerator_matrix_controller_differentiation is
     );
 end entity;
 
-architecture accelerator_matrix_controller_differentiation_architecture of accelerator_matrix_controller_differentiation is
+architecture accelerator_trainer_matrix_differentiation_architecture of accelerator_trainer_matrix_differentiation is
 
   ------------------------------------------------------------------------------
   -- Constants

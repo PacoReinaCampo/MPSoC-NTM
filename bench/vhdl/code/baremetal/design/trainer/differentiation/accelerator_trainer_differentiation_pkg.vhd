@@ -109,18 +109,18 @@ package accelerator_trainer_differentiation_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_VECTOR_TRAINER_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_VECTOR_DIFFERENTIATION_TEST : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_VECTOR_TRAINER_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_VECTOR_TRAINER_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_ACCELERATOR_MATRIX_TRAINER_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_TEST : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_MATRIX_TRAINER_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
 
-  signal STIMULUS_ACCELERATOR_MATRIX_TRAINER_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -144,57 +144,57 @@ package accelerator_trainer_differentiation_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- VECTOR TRAINER DIFFERENTIATION
+      -- TRAINER VECTOR DIFFERENTIATION
       -- CONTROL
-      VECTOR_TRAINER_DIFFERENTIATION_START : out std_logic;
-      VECTOR_TRAINER_DIFFERENTIATION_READY : in  std_logic;
+      TRAINER_VECTOR_DIFFERENTIATION_START : out std_logic;
+      TRAINER_VECTOR_DIFFERENTIATION_READY : in  std_logic;
 
-      VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-      VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-      VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-      VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+      TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-      VECTOR_TRAINER_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to L-1
-      VECTOR_TRAINER_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to L-1
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
       -- DATA
-      VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      VECTOR_TRAINER_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_TRAINER_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_VECTOR_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_TRAINER_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_VECTOR_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX TRAINER DIFFERENTIATION
+      -- TRAINER MATRIX DIFFERENTIATION
       -- CONTROL
-      MATRIX_TRAINER_DIFFERENTIATION_START : out std_logic;
-      MATRIX_TRAINER_DIFFERENTIATION_READY : in  std_logic;
+      TRAINER_MATRIX_DIFFERENTIATION_START : out std_logic;
+      TRAINER_MATRIX_DIFFERENTIATION_READY : in  std_logic;
 
-      MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-      MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
-      MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-      MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-      MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-      MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
+      TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-      MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to L-1
-      MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-      MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to L-1
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
       -- DATA
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      MATRIX_TRAINER_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_TRAINER_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TRAINER_MATRIX_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_TRAINER_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      TRAINER_MATRIX_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

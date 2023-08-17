@@ -7,10 +7,10 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# accelerator_vector_trainer_differentiation_design_compilation ##################################
+# accelerator_trainer_vector_differentiation_design_compilation ##################################
 ##################################################################################################
 
-alias accelerator_vector_trainer_differentiation_design_compilation {
+alias accelerator_trainer_vector_differentiation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_linear_controller_pkg.vhd
@@ -89,14 +89,14 @@ alias accelerator_vector_trainer_differentiation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/accelerator_matrix_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/accelerator_matrix_tanh_function.vhd
 
-  vcom -2008 -reportprogress 300 -work work $design_path/trainer/differentiation/accelerator_vector_controller_differentiation.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/trainer/differentiation/accelerator_trainer_vector_differentiation.vhd
 }
 
 ##################################################################################################
-# accelerator_matrix_trainer_differentiation_design_compilation ##################################
+# accelerator_trainer_matrix_differentiation_design_compilation ##################################
 ##################################################################################################
 
-alias accelerator_matrix_trainer_differentiation_design_compilation {
+alias accelerator_trainer_matrix_differentiation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_linear_controller_pkg.vhd
@@ -175,17 +175,17 @@ alias accelerator_matrix_trainer_differentiation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/accelerator_matrix_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/accelerator_matrix_tanh_function.vhd
 
-  vcom -2008 -reportprogress 300 -work work $design_path/trainer/differentiation/accelerator_matrix_controller_differentiation.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/trainer/differentiation/accelerator_trainer_matrix_differentiation.vhd
 }
 
 ##################################################################################################
 
 alias d01 {
-  accelerator_vector_trainer_differentiation_design_compilation 
+  accelerator_trainer_vector_differentiation_design_compilation 
 }
 
 alias d02 {
-  accelerator_matrix_trainer_differentiation_design_compilation 
+  accelerator_trainer_matrix_differentiation_design_compilation 
 }
 
 echo "****************************************"

@@ -67,55 +67,55 @@ entity model_trainer_linear_stimulus is
 
     -- VECTOR TRAINER DIFFERENTIATION
     -- CONTROL
-    VECTOR_TRAINER_DIFFERENTIATION_START : out std_logic;
-    VECTOR_TRAINER_DIFFERENTIATION_READY : in  std_logic;
+    TRAINER_VECTOR_DIFFERENTIATION_START : out std_logic;
+    TRAINER_VECTOR_DIFFERENTIATION_READY : in  std_logic;
 
-    VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-    VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for x out 0 to L-1
+    TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+    TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for x out 0 to L-1
 
-    VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-    VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for x out 0 to L-1
+    TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+    TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for x out 0 to L-1
 
-    VECTOR_TRAINER_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-    VECTOR_TRAINER_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+    TRAINER_VECTOR_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
     -- DATA
-    VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    VECTOR_TRAINER_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_TRAINER_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_VECTOR_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_TRAINER_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_VECTOR_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX TRAINER DIFFERENTIATION
     -- CONTROL
-    MATRIX_TRAINER_DIFFERENTIATION_START : out std_logic;
-    MATRIX_TRAINER_DIFFERENTIATION_READY : in  std_logic;
+    TRAINER_MATRIX_DIFFERENTIATION_START : out std_logic;
+    TRAINER_MATRIX_DIFFERENTIATION_READY : in  std_logic;
 
-    MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
-    MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
-    MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE : out std_logic;  -- for t out 0 to T-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-    MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-    MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-    MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
+    TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-    MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
-    MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
-    MATRIX_TRAINER_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_T_ENABLE : in std_logic;  -- for t out 0 to T-1
+    TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1
+    TRAINER_MATRIX_DIFFERENTIATION_Y_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
 
     -- DATA
-    MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    MATRIX_TRAINER_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_TRAINER_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_TRAINER_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TRAINER_MATRIX_DIFFERENTIATION_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TRAINER LINEAR
     -- CONTROL
@@ -232,12 +232,12 @@ begin
   end process;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_TRAINER_DIFFERENTIATION_START <= start_int;
+  TRAINER_VECTOR_DIFFERENTIATION_START <= start_int;
 
   TRAINER_LINEAR_START <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_TRAINER_DIFFERENTIATION_START <= start_int;
+  TRAINER_MATRIX_DIFFERENTIATION_START <= start_int;
 
   ------------------------------------------------------------------------------
   -- STIMULUS
@@ -246,67 +246,67 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_TEST) then
+    if (STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_TEST                    ";
+      MONITOR_TEST <= "STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_TEST                    ";
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN <= FOUR_CONTROL;
-      VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN <= FOUR_CONTROL;
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN <= FOUR_CONTROL;
+      TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN <= FOUR_CONTROL;
 
-      VECTOR_TRAINER_DIFFERENTIATION_LENGTH_IN <= FOUR_UDATA;
+      TRAINER_VECTOR_DIFFERENTIATION_LENGTH_IN <= FOUR_UDATA;
 
-      if (STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_CASE_0) then
+      if (STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_CASE 0                  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_CASE 0                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        VECTOR_TRAINER_DIFFERENTIATION_X_IN <= ZERO_DATA;
+        TRAINER_VECTOR_DIFFERENTIATION_X_IN <= ZERO_DATA;
 
         -- LOOP
         index_x_t_loop <= ZERO_CONTROL;
         index_x_l_loop <= ZERO_CONTROL;
 
-        VECTOR_TRAINER_DIFFERENTIATION_FIRST_RUN : loop
-          if (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+        TRAINER_VECTOR_DIFFERENTIATION_FIRST_RUN : loop
+          if (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
           else
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= std_logic_vector(unsigned(index_x_t_loop) + unsigned(ONE_CONTROL));
             index_x_l_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or VECTOR_TRAINER_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or TRAINER_VECTOR_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_l_loop <= std_logic_vector(unsigned(index_x_l_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -314,59 +314,59 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit VECTOR_TRAINER_DIFFERENTIATION_FIRST_RUN when VECTOR_TRAINER_DIFFERENTIATION_READY = '1';
-        end loop VECTOR_TRAINER_DIFFERENTIATION_FIRST_RUN;
+          exit TRAINER_VECTOR_DIFFERENTIATION_FIRST_RUN when TRAINER_VECTOR_DIFFERENTIATION_READY = '1';
+        end loop TRAINER_VECTOR_DIFFERENTIATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_CASE_1) then
+      if (STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_TRAINER_DIFFERENTIATION_CASE 1                  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TRAINER_VECTOR_DIFFERENTIATION_CASE 1                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        VECTOR_TRAINER_DIFFERENTIATION_X_IN <= ZERO_DATA;
+        TRAINER_VECTOR_DIFFERENTIATION_X_IN <= ZERO_DATA;
 
         -- LOOP
         index_x_t_loop <= ZERO_CONTROL;
         index_x_l_loop <= ZERO_CONTROL;
 
-        VECTOR_TRAINER_DIFFERENTIATION_SECOND_RUN : loop
-          if (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+        TRAINER_VECTOR_DIFFERENTIATION_SECOND_RUN : loop
+          if (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
           else
             -- CONTROL
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
-            VECTOR_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
+            TRAINER_VECTOR_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= std_logic_vector(unsigned(index_x_t_loop) + unsigned(ONE_CONTROL));
             index_x_l_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or VECTOR_TRAINER_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(VECTOR_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TRAINER_VECTOR_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or TRAINER_VECTOR_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(TRAINER_VECTOR_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_l_loop <= std_logic_vector(unsigned(index_x_l_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -374,92 +374,92 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit VECTOR_TRAINER_DIFFERENTIATION_SECOND_RUN when VECTOR_TRAINER_DIFFERENTIATION_READY = '1';
-        end loop VECTOR_TRAINER_DIFFERENTIATION_SECOND_RUN;
+          exit TRAINER_VECTOR_DIFFERENTIATION_SECOND_RUN when TRAINER_VECTOR_DIFFERENTIATION_READY = '1';
+        end loop TRAINER_VECTOR_DIFFERENTIATION_SECOND_RUN;
       end if;
 
       wait for WORKING;
 
     end if;
 
-    if (STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_TEST) then
+    if (STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_TEST                    ";
+      MONITOR_TEST <= "STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_TEST                    ";
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN <= FOUR_CONTROL;
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN <= FOUR_CONTROL;
-      MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN <= FOUR_CONTROL;
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN <= FOUR_CONTROL;
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN <= FOUR_CONTROL;
+      TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN <= FOUR_CONTROL;
 
-      MATRIX_TRAINER_DIFFERENTIATION_LENGTH_IN <= FOUR_UDATA;
+      TRAINER_MATRIX_DIFFERENTIATION_LENGTH_IN <= FOUR_UDATA;
 
-      if (STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_CASE_0) then
+      if (STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_CASE 0                  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_CASE 0                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_TRAINER_DIFFERENTIATION_X_IN <= ZERO_DATA;
+        TRAINER_MATRIX_DIFFERENTIATION_X_IN <= ZERO_DATA;
 
         -- LOOP
         index_x_t_loop <= ZERO_CONTROL;
         index_x_i_loop <= ZERO_CONTROL;
         index_x_l_loop <= ZERO_CONTROL;
 
-        MATRIX_TRAINER_DIFFERENTIATION_FIRST_RUN : loop
-          if (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+        TRAINER_MATRIX_DIFFERENTIATION_FIRST_RUN : loop
+          if (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
           else
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '0';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= ZERO_CONTROL;
             index_x_i_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= std_logic_vector(unsigned(index_x_t_loop) + unsigned(ONE_CONTROL));
             index_x_i_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_i_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_i_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_i_loop <= std_logic_vector(unsigned(index_x_i_loop) + unsigned(ONE_CONTROL));
             index_x_l_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or MATRIX_TRAINER_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or TRAINER_MATRIX_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_l_loop <= std_logic_vector(unsigned(index_x_l_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -467,75 +467,75 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_TRAINER_DIFFERENTIATION_FIRST_RUN when MATRIX_TRAINER_DIFFERENTIATION_READY = '1';
-        end loop MATRIX_TRAINER_DIFFERENTIATION_FIRST_RUN;
+          exit TRAINER_MATRIX_DIFFERENTIATION_FIRST_RUN when TRAINER_MATRIX_DIFFERENTIATION_READY = '1';
+        end loop TRAINER_MATRIX_DIFFERENTIATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_CASE_1) then
+      if (STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_TRAINER_DIFFERENTIATION_CASE 1                  ";
+        MONITOR_CASE <= "STIMULUS_MODEL_TRAINER_MATRIX_DIFFERENTIATION_CASE 1                  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_TRAINER_DIFFERENTIATION_X_IN <= ZERO_DATA;
+        TRAINER_MATRIX_DIFFERENTIATION_X_IN <= ZERO_DATA;
 
         -- LOOP
         index_x_t_loop <= ZERO_CONTROL;
         index_x_i_loop <= ZERO_CONTROL;
         index_x_l_loop <= ZERO_CONTROL;
 
-        MATRIX_TRAINER_DIFFERENTIATION_SECOND_RUN : loop
-          if (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+        TRAINER_MATRIX_DIFFERENTIATION_SECOND_RUN : loop
+          if (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_t_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_T_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_I_ENABLE = '1' and TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and unsigned(index_x_l_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_x_t_loop)), to_integer(unsigned(index_x_i_loop)), to_integer(unsigned(index_x_l_loop)));
 
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '1';
           else
             -- CONTROL
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_I_ENABLE <= '0';
-            MATRIX_TRAINER_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_T_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_I_ENABLE <= '0';
+            TRAINER_MATRIX_DIFFERENTIATION_X_IN_L_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= ZERO_CONTROL;
             index_x_i_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_t_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_i_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_t_loop <= std_logic_vector(unsigned(index_x_t_loop) + unsigned(ONE_CONTROL));
             index_x_i_loop <= ZERO_CONTROL;
             index_x_l_loop <= ZERO_CONTROL;
-          elsif (MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_i_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' and (unsigned(index_x_i_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_x_l_loop) = unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_i_loop <= std_logic_vector(unsigned(index_x_i_loop) + unsigned(ONE_CONTROL));
             index_x_l_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRAINER_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or MATRIX_TRAINER_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(MATRIX_TRAINER_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TRAINER_MATRIX_DIFFERENTIATION_X_OUT_L_ENABLE = '1' or TRAINER_MATRIX_DIFFERENTIATION_START = '1') and (unsigned(index_x_l_loop) < unsigned(TRAINER_MATRIX_DIFFERENTIATION_SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             index_x_l_loop <= std_logic_vector(unsigned(index_x_l_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -543,8 +543,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_TRAINER_DIFFERENTIATION_SECOND_RUN when MATRIX_TRAINER_DIFFERENTIATION_READY = '1';
-        end loop MATRIX_TRAINER_DIFFERENTIATION_SECOND_RUN;
+          exit TRAINER_MATRIX_DIFFERENTIATION_SECOND_RUN when TRAINER_MATRIX_DIFFERENTIATION_READY = '1';
+        end loop TRAINER_MATRIX_DIFFERENTIATION_SECOND_RUN;
       end if;
 
       wait for WORKING;

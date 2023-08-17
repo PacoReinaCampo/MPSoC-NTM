@@ -204,8 +204,8 @@ code
 │       └── accelerator_state_top.sv
 ├── trainer
 │   ├── differentiation
-│   │   ├── accelerator_matrix_controller_differentiation.sv
-│   │   └── accelerator_vector_controller_differentiation.sv
+│   │   ├── accelerator_trainer_matrix_differentiation.sv
+│   │   └── accelerator_trainer_vector_differentiation.sv
 │   ├── FNN
 │   │   └── accelerator_trainer.sv
 │   ├── linear

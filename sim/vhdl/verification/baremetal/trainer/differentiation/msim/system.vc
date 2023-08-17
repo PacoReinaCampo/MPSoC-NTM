@@ -77,8 +77,8 @@
 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_sinh_function.vhd
 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_tanh_function.vhd
 
-../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_vector_controller_differentiation.vhd
-../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_matrix_controller_differentiation.vhd
+../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_trainer_vector_differentiation.vhd
+../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_trainer_matrix_differentiation.vhd
 
 ../../../../../../../bench/vhdl/code/baremetal/rtl/trainer/differentiation/accelerator_trainer_differentiation_pkg.vhd
 ../../../../../../../bench/vhdl/code/baremetal/rtl/trainer/differentiation/accelerator_trainer_differentiation_stimulus.vhd

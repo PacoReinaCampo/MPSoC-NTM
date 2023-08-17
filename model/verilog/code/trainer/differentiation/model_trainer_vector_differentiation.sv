@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module model_vector_controller_differentiation #(
+module model_trainer_vector_differentiation #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 4
 ) (

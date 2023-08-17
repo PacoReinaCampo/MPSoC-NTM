@@ -46,7 +46,7 @@ use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_linear_controller_pkg.all;
 
-entity model_vector_controller_differentiation is
+entity model_trainer_matrix_differentiation is
   generic (
     DATA_SIZE    : integer := 64;
     CONTROL_SIZE : integer := 4
@@ -61,16 +61,20 @@ entity model_vector_controller_differentiation is
     READY : out std_logic;
 
     X_IN_T_ENABLE : in std_logic;       -- for t in 0 to T-1
+    X_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     X_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
 
     X_OUT_T_ENABLE : out std_logic;     -- for t in 0 to T-1
+    X_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     X_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     Y_OUT_T_ENABLE : out std_logic;     -- for l in 0 to T-1
+    Y_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     Y_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
 
     -- DATA
     SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     LENGTH_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -81,7 +85,7 @@ entity model_vector_controller_differentiation is
     );
 end entity;
 
-architecture model_vector_controller_differentiation_architecture of model_vector_controller_differentiation is
+architecture model_trainer_matrix_differentiation_architecture of model_trainer_matrix_differentiation is
 
   ------------------------------------------------------------------------------
   -- Constants
@@ -95,17 +99,21 @@ architecture model_vector_controller_differentiation_architecture of model_vecto
   type controller_x_in_fsm is (
     STARTER_X_IN_STATE,                 -- STEP 0
     INPUT_X_IN_T_STATE,                 -- STEP 1
-    INPUT_X_IN_L_STATE,                 -- STEP 2
-    CLEAN_X_IN_T_STATE,                 -- STEP 3
-    CLEAN_X_IN_L_STATE                  -- STEP 4
+    INPUT_X_IN_I_STATE,                 -- STEP 2
+    INPUT_X_IN_L_STATE,                 -- STEP 3
+    CLEAN_X_IN_T_STATE,                 -- STEP 4
+    CLEAN_X_IN_I_STATE,                 -- STEP 5
+    CLEAN_X_IN_L_STATE                  -- STEP 6
     );
 
   type controller_y_out_fsm is (
     STARTER_Y_OUT_STATE,                -- STEP 0
     CLEAN_Y_OUT_T_STATE,                -- STEP 1
-    CLEAN_Y_OUT_L_STATE,                -- STEP 2
-    OUTPUT_Y_OUT_T_STATE,               -- STEP 3
-    OUTPUT_Y_OUT_L_STATE                -- STEP 4
+    CLEAN_Y_OUT_I_STATE,                -- STEP 2
+    CLEAN_Y_OUT_L_STATE,                -- STEP 3
+    OUTPUT_Y_OUT_T_STATE,               -- STEP 4
+    OUTPUT_Y_OUT_I_STATE,               -- STEP 5
+    OUTPUT_Y_OUT_L_STATE                -- STEP 6
     );
 
   ------------------------------------------------------------------------------
@@ -118,15 +126,17 @@ architecture model_vector_controller_differentiation_architecture of model_vecto
   signal controller_y_out_fsm_int : controller_y_out_fsm;
 
   -- Buffer
-  signal matrix_x_in_int : matrix_buffer;
+  signal tensor_x_in_int : tensor_buffer;
 
-  signal matrix_y_out_int : matrix_buffer;
+  signal tensor_y_out_int : tensor_buffer;
 
   -- Control Internal
   signal index_t_x_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_x_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_l_x_in_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal index_t_y_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_y_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_l_y_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_x_in_enable_int : std_logic;
@@ -145,10 +155,14 @@ begin
     if (RST = '0') then
       -- Control Outputs
       X_OUT_T_ENABLE <= '0';
+      X_OUT_I_ENABLE <= '0';
       X_OUT_L_ENABLE <= '0';
 
       -- Control Internal
+      READY <= '0';
+
       index_t_x_in_loop <= ZERO_CONTROL;
+      index_i_x_in_loop <= ZERO_CONTROL;
       index_l_x_in_loop <= ZERO_CONTROL;
 
       data_x_in_enable_int <= '0';
@@ -160,10 +174,12 @@ begin
           if (START = '1') then
             -- Control Outputs
             X_OUT_T_ENABLE <= '1';
+            X_OUT_I_ENABLE <= '1';
             X_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_t_x_in_loop <= ZERO_CONTROL;
+            index_i_x_in_loop <= ZERO_CONTROL;
             index_l_x_in_loop <= ZERO_CONTROL;
 
             data_x_in_enable_int <= '0';
@@ -172,15 +188,18 @@ begin
             controller_x_in_fsm_int <= INPUT_X_IN_T_STATE;
           else
             -- Control Outputs
+            READY <= '0';
+
             X_OUT_T_ENABLE <= '0';
+            X_OUT_I_ENABLE <= '0';
             X_OUT_L_ENABLE <= '0';
           end if;
 
         when INPUT_X_IN_T_STATE =>      -- STEP 1
 
-          if ((X_IN_T_ENABLE = '1') and (X_IN_L_ENABLE = '1')) then
+          if ((X_IN_T_ENABLE = '1') and (X_IN_I_ENABLE = '1') and (X_IN_L_ENABLE = '1')) then
             -- Data Inputs
-            matrix_x_in_int(to_integer(unsigned(index_t_x_in_loop)), to_integer(unsigned(index_l_x_in_loop))) <= X_IN;
+            tensor_x_in_int(to_integer(unsigned(index_t_x_in_loop)), to_integer(unsigned(index_i_x_in_loop)), to_integer(unsigned(index_l_x_in_loop))) <= X_IN;
 
             -- FSM Control
             controller_x_in_fsm_int <= CLEAN_X_IN_L_STATE;
@@ -188,13 +207,14 @@ begin
 
           -- Control Outputs
           X_OUT_T_ENABLE <= '0';
+          X_OUT_I_ENABLE <= '0';
           X_OUT_L_ENABLE <= '0';
 
-        when INPUT_X_IN_L_STATE =>      -- STEP 2
+        when INPUT_X_IN_I_STATE =>      -- STEP 2
 
-          if (X_IN_L_ENABLE = '1') then
+          if (X_IN_I_ENABLE = '1' and X_IN_L_ENABLE = '1') then
             -- Data Inputs
-            matrix_x_in_int(to_integer(unsigned(index_t_x_in_loop)), to_integer(unsigned(index_l_x_in_loop))) <= X_IN;
+            tensor_x_in_int(to_integer(unsigned(index_t_x_in_loop)), to_integer(unsigned(index_i_x_in_loop)), to_integer(unsigned(index_l_x_in_loop))) <= X_IN;
 
             -- FSM Control
             if (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
@@ -205,37 +225,78 @@ begin
           end if;
 
           -- Control Outputs
+          X_OUT_I_ENABLE <= '0';
           X_OUT_L_ENABLE <= '0';
 
-        when CLEAN_X_IN_T_STATE =>      -- STEP 3
+        when INPUT_X_IN_L_STATE =>      -- STEP 3
 
-          if ((unsigned(index_t_x_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if (X_IN_L_ENABLE = '1') then
+            -- Data Inputs
+            tensor_x_in_int(to_integer(unsigned(index_t_x_in_loop)), to_integer(unsigned(index_i_x_in_loop)), to_integer(unsigned(index_l_x_in_loop))) <= X_IN;
+
+            -- FSM Control
+            if ((unsigned(index_i_x_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+              controller_x_in_fsm_int <= CLEAN_X_IN_T_STATE;
+            elsif (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+              controller_x_in_fsm_int <= CLEAN_X_IN_I_STATE;
+            else
+              controller_x_in_fsm_int <= CLEAN_X_IN_L_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          X_OUT_L_ENABLE <= '0';
+
+        when CLEAN_X_IN_T_STATE =>      -- STEP 4
+
+          if ((unsigned(index_t_x_in_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_x_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
+            READY <= '1';
+
             X_OUT_T_ENABLE <= '1';
+            X_OUT_I_ENABLE <= '1';
             X_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_t_x_in_loop <= ZERO_CONTROL;
+            index_i_x_in_loop <= ZERO_CONTROL;
             index_l_x_in_loop <= ZERO_CONTROL;
 
             data_x_in_enable_int <= '1';
 
             -- FSM Control
             controller_x_in_fsm_int <= STARTER_X_IN_STATE;
-          elsif ((unsigned(index_t_x_in_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_t_x_in_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_x_in_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
             -- Control Outputs
             X_OUT_T_ENABLE <= '1';
+            X_OUT_I_ENABLE <= '1';
             X_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_t_x_in_loop <= std_logic_vector(unsigned(index_t_x_in_loop) + unsigned(ONE_CONTROL));
+            index_i_x_in_loop <= ZERO_CONTROL;
             index_l_x_in_loop <= ZERO_CONTROL;
 
             -- FSM Control
             controller_x_in_fsm_int <= INPUT_X_IN_T_STATE;
           end if;
 
-        when CLEAN_X_IN_L_STATE =>      -- STEP 4
+        when CLEAN_X_IN_I_STATE =>      -- STEP 5
+
+          if ((unsigned(index_i_x_in_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_x_in_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Control Outputs
+            X_OUT_I_ENABLE <= '1';
+            X_OUT_L_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_x_in_loop <= std_logic_vector(unsigned(index_i_x_in_loop) + unsigned(ONE_CONTROL));
+            index_l_x_in_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_x_in_fsm_int <= INPUT_X_IN_I_STATE;
+          end if;
+
+        when CLEAN_X_IN_L_STATE =>      -- STEP 6
 
           if (unsigned(index_l_x_in_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
@@ -262,8 +323,6 @@ begin
       Y_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY <= '0';
-
       Y_OUT_T_ENABLE <= '0';
       Y_OUT_L_ENABLE <= '0';
 
@@ -287,8 +346,6 @@ begin
           end if;
 
           -- Control Outputs
-          READY <= '0';
-
           Y_OUT_T_ENABLE <= '0';
           Y_OUT_L_ENABLE <= '0';
 
@@ -296,13 +353,14 @@ begin
           if (index_t_y_out_loop = ZERO_CONTROL and index_l_y_out_loop = ZERO_CONTROL) then
             if (data_x_in_enable_int = '1') then
               -- Data Internal
-              matrix_y_out_int <= function_vector_controller_differentiation (
+              tensor_y_out_int <= function_trainer_matrix_differentiation (
                 SIZE_T_IN => SIZE_T_IN,
+                SIZE_R_IN => SIZE_R_IN,
                 SIZE_L_IN => SIZE_L_IN,
 
                 LENGTH_IN => LENGTH_IN,
 
-                vector_input => matrix_x_in_int
+                matrix_input => tensor_x_in_int
                 );
 
               -- Control Internal
@@ -321,61 +379,97 @@ begin
 
           -- Control Outputs
           Y_OUT_T_ENABLE <= '0';
+          Y_OUT_I_ENABLE <= '0';
           Y_OUT_L_ENABLE <= '0';
 
-        when CLEAN_Y_OUT_L_STATE =>     -- STEP 2
+        when CLEAN_Y_OUT_I_STATE =>     -- STEP 2
+
+          -- Control Outputs
+          Y_OUT_I_ENABLE <= '0';
+          Y_OUT_L_ENABLE <= '0';
+
+          -- FSM Control
+          if (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            controller_y_out_fsm_int <= OUTPUT_Y_OUT_I_STATE;
+          else
+            controller_y_out_fsm_int <= OUTPUT_Y_OUT_L_STATE;
+          end if;
+
+        when CLEAN_Y_OUT_L_STATE =>     -- STEP 3
 
           -- Control Outputs
           Y_OUT_L_ENABLE <= '0';
 
           -- FSM Control
-          if (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_i_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
             controller_y_out_fsm_int <= OUTPUT_Y_OUT_T_STATE;
+          elsif (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
+            controller_y_out_fsm_int <= OUTPUT_Y_OUT_I_STATE;
           else
             controller_y_out_fsm_int <= OUTPUT_Y_OUT_L_STATE;
           end if;
 
-        when OUTPUT_Y_OUT_T_STATE =>    -- STEP 3
+        when OUTPUT_Y_OUT_T_STATE =>    -- STEP 4
 
-          if ((unsigned(index_t_y_out_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          if ((unsigned(index_t_y_out_loop) = unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_y_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            Y_OUT <= matrix_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
+            Y_OUT <= tensor_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_i_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
 
             -- Control Outputs
-            READY <= '1';
-
             Y_OUT_T_ENABLE <= '1';
+            Y_OUT_I_ENABLE <= '1';
             Y_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             data_y_out_enable_int <= '1';
 
             index_t_y_out_loop <= ZERO_CONTROL;
+            index_i_y_out_loop <= ZERO_CONTROL;
             index_l_y_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
             controller_y_out_fsm_int <= STARTER_Y_OUT_STATE;
-          elsif ((unsigned(index_t_y_out_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_t_y_out_loop) < unsigned(SIZE_T_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_i_y_out_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            Y_OUT <= matrix_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
+            Y_OUT <= tensor_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_i_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
 
             -- Control Outputs
             Y_OUT_T_ENABLE <= '1';
+            Y_OUT_I_ENABLE <= '1';
             Y_OUT_L_ENABLE <= '1';
 
             -- Control Internal
             index_t_y_out_loop <= std_logic_vector(unsigned(index_t_y_out_loop) + unsigned(ONE_CONTROL));
+            index_i_y_out_loop <= ZERO_CONTROL;
             index_l_y_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
             controller_y_out_fsm_int <= CLEAN_Y_OUT_T_STATE;
           end if;
 
-        when OUTPUT_Y_OUT_L_STATE =>    -- STEP 4
+        when OUTPUT_Y_OUT_I_STATE =>    -- STEP 5
+
+          if ((unsigned(index_i_y_out_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_l_y_out_loop) = unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            Y_OUT <= tensor_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_i_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
+
+            -- Control Outputs
+            Y_OUT_I_ENABLE <= '1';
+            Y_OUT_L_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_y_out_loop <= std_logic_vector(unsigned(index_i_y_out_loop) + unsigned(ONE_CONTROL));
+            index_l_y_out_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            controller_y_out_fsm_int <= CLEAN_Y_OUT_I_STATE;
+          end if;
+
+        when OUTPUT_Y_OUT_L_STATE =>    -- STEP 6
 
           if (unsigned(index_l_y_out_loop) < unsigned(SIZE_L_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            Y_OUT <= matrix_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
+            Y_OUT <= tensor_y_out_int(to_integer(unsigned(index_t_y_out_loop)), to_integer(unsigned(index_i_y_out_loop)), to_integer(unsigned(index_l_y_out_loop)));
 
             -- Control Outputs
             Y_OUT_L_ENABLE <= '1';
