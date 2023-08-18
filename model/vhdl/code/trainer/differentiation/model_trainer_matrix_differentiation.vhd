@@ -320,12 +320,14 @@ begin
       READY <= '0';
 
       Y_OUT_T_ENABLE <= '0';
+      Y_OUT_I_ENABLE <= '0';
       Y_OUT_L_ENABLE <= '0';
 
       -- Control Internal
       data_y_out_enable_int <= '0';
 
       index_t_y_out_loop <= ZERO_CONTROL;
+      index_i_y_out_loop <= ZERO_CONTROL;
       index_l_y_out_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
@@ -335,6 +337,7 @@ begin
           if (START = '1') then
             -- Control Internal
             index_t_y_out_loop <= ZERO_CONTROL;
+            index_i_y_out_loop <= ZERO_CONTROL;
             index_l_y_out_loop <= ZERO_CONTROL;
 
             -- FSM Control
@@ -366,6 +369,7 @@ begin
               data_y_out_enable_int <= '0';
 
               index_t_y_out_loop <= ZERO_CONTROL;
+              index_i_y_out_loop <= ZERO_CONTROL;
               index_l_y_out_loop <= ZERO_CONTROL;
 
               -- FSM Control

@@ -354,18 +354,18 @@ architecture model_input_gate_vector_architecture of model_input_gate_vector is
 
   signal index_l_i_out_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal dati_w_in_enable_int : std_logic;
-  signal dati_k_in_enable_int : std_logic;
-  signal dati_u_in_enable_int : std_logic;
-  signal dati_v_in_enable_int : std_logic;
-  signal dati_d_in_enable_int : std_logic;
-  signal dati_b_in_enable_int : std_logic;
+  signal data_w_in_enable_int : std_logic;
+  signal data_k_in_enable_int : std_logic;
+  signal data_u_in_enable_int : std_logic;
+  signal data_v_in_enable_int : std_logic;
+  signal data_d_in_enable_int : std_logic;
+  signal data_b_in_enable_int : std_logic;
 
-  signal dati_x_in_enable_int   : std_logic;
-  signal dati_r_in_enable_int   : std_logic;
-  signal dati_xi_in_enable_int  : std_logic;
-  signal dati_rho_in_enable_int : std_logic;
-  signal dati_h_in_enable_int   : std_logic;
+  signal data_x_in_enable_int   : std_logic;
+  signal data_r_in_enable_int   : std_logic;
+  signal data_xi_in_enable_int  : std_logic;
+  signal data_rho_in_enable_int : std_logic;
+  signal data_h_in_enable_int   : std_logic;
 
 begin
 
@@ -387,7 +387,7 @@ begin
       index_x_w_in_loop <= ZERO_CONTROL;
       index_l_w_in_loop <= ZERO_CONTROL;
 
-      dati_w_in_enable_int <= '0';
+      data_w_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -402,7 +402,7 @@ begin
             index_x_w_in_loop <= ZERO_CONTROL;
             index_l_w_in_loop <= ZERO_CONTROL;
 
-            dati_w_in_enable_int <= '0';
+            data_w_in_enable_int <= '0';
 
             -- FSM Control
             controller_w_in_fsm_int <= INPUT_W_IN_X_STATE;
@@ -454,7 +454,7 @@ begin
             index_x_w_in_loop <= ZERO_CONTROL;
             index_l_w_in_loop <= ZERO_CONTROL;
 
-            dati_w_in_enable_int <= '1';
+            data_w_in_enable_int <= '1';
 
             -- FSM Control
             controller_w_in_fsm_int <= STARTER_W_IN_STATE;
@@ -504,7 +504,7 @@ begin
       index_l_k_in_loop <= ZERO_CONTROL;
       index_k_k_in_loop <= ZERO_CONTROL;
 
-      dati_k_in_enable_int <= '0';
+      data_k_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -521,7 +521,7 @@ begin
             index_l_k_in_loop <= ZERO_CONTROL;
             index_k_k_in_loop <= ZERO_CONTROL;
 
-            dati_k_in_enable_int <= '0';
+            data_k_in_enable_int <= '0';
 
             -- FSM Control
             controller_k_in_fsm_int <= INPUT_K_IN_L_STATE;
@@ -597,7 +597,7 @@ begin
             index_l_k_in_loop <= ZERO_CONTROL;
             index_k_k_in_loop <= ZERO_CONTROL;
 
-            dati_k_in_enable_int <= '1';
+            data_k_in_enable_int <= '1';
 
             -- FSM Control
             controller_k_in_fsm_int <= STARTER_K_IN_STATE;
@@ -662,7 +662,7 @@ begin
       index_l_u_in_loop <= ZERO_CONTROL;
       index_p_u_in_loop <= ZERO_CONTROL;
 
-      dati_u_in_enable_int <= '0';
+      data_u_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -677,7 +677,7 @@ begin
             index_l_u_in_loop <= ZERO_CONTROL;
             index_p_u_in_loop <= ZERO_CONTROL;
 
-            dati_u_in_enable_int <= '0';
+            data_u_in_enable_int <= '0';
 
             -- FSM Control
             controller_u_in_fsm_int <= INPUT_U_IN_L_STATE;
@@ -729,7 +729,7 @@ begin
             index_l_u_in_loop <= ZERO_CONTROL;
             index_p_u_in_loop <= ZERO_CONTROL;
 
-            dati_u_in_enable_int <= '1';
+            data_u_in_enable_int <= '1';
 
             -- FSM Control
             controller_u_in_fsm_int <= STARTER_U_IN_STATE;
@@ -777,7 +777,7 @@ begin
       index_l_v_in_loop <= ZERO_CONTROL;
       index_s_v_in_loop <= ZERO_CONTROL;
 
-      dati_v_in_enable_int <= '0';
+      data_v_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -792,7 +792,7 @@ begin
             index_l_v_in_loop <= ZERO_CONTROL;
             index_s_v_in_loop <= ZERO_CONTROL;
 
-            dati_v_in_enable_int <= '0';
+            data_v_in_enable_int <= '0';
 
             -- FSM Control
             controller_v_in_fsm_int <= INPUT_V_IN_L_STATE;
@@ -844,7 +844,7 @@ begin
             index_l_v_in_loop <= ZERO_CONTROL;
             index_s_v_in_loop <= ZERO_CONTROL;
 
-            dati_v_in_enable_int <= '1';
+            data_v_in_enable_int <= '1';
 
             -- FSM Control
             controller_v_in_fsm_int <= STARTER_V_IN_STATE;
@@ -894,7 +894,7 @@ begin
       index_l_d_in_loop <= ZERO_CONTROL;
       index_m_d_in_loop <= ZERO_CONTROL;
 
-      dati_d_in_enable_int <= '0';
+      data_d_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -911,7 +911,7 @@ begin
             index_l_d_in_loop <= ZERO_CONTROL;
             index_m_d_in_loop <= ZERO_CONTROL;
 
-            dati_d_in_enable_int <= '0';
+            data_d_in_enable_int <= '0';
 
             -- FSM Control
             controller_d_in_fsm_int <= INPUT_D_IN_L_STATE;
@@ -987,7 +987,7 @@ begin
             index_l_d_in_loop <= ZERO_CONTROL;
             index_m_d_in_loop <= ZERO_CONTROL;
 
-            dati_d_in_enable_int <= '1';
+            data_d_in_enable_int <= '1';
 
             -- FSM Control
             controller_d_in_fsm_int <= STARTER_D_IN_STATE;
@@ -1050,7 +1050,7 @@ begin
       -- Control Internal
       index_l_b_in_loop <= ZERO_CONTROL;
 
-      dati_b_in_enable_int <= '0';
+      data_b_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1063,7 +1063,7 @@ begin
             -- Control Internal
             index_l_b_in_loop <= ZERO_CONTROL;
 
-            dati_b_in_enable_int <= '0';
+            data_b_in_enable_int <= '0';
 
             -- FSM Control
             controller_b_in_fsm_int <= INPUT_B_IN_L_STATE;
@@ -1094,7 +1094,7 @@ begin
             -- Control Internal
             index_l_b_in_loop <= ZERO_CONTROL;
 
-            dati_b_in_enable_int <= '1';
+            data_b_in_enable_int <= '1';
 
             -- FSM Control
             controller_b_in_fsm_int <= STARTER_B_IN_STATE;
@@ -1125,7 +1125,7 @@ begin
       -- Control Internal
       index_x_x_in_loop <= ZERO_CONTROL;
 
-      dati_x_in_enable_int <= '0';
+      data_x_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1138,7 +1138,7 @@ begin
             -- Control Internal
             index_x_x_in_loop <= ZERO_CONTROL;
 
-            dati_x_in_enable_int <= '0';
+            data_x_in_enable_int <= '0';
 
             -- FSM Control
             controller_x_in_fsm_int <= INPUT_X_IN_X_STATE;
@@ -1169,7 +1169,7 @@ begin
             -- Control Internal
             index_x_x_in_loop <= ZERO_CONTROL;
 
-            dati_x_in_enable_int <= '1';
+            data_x_in_enable_int <= '1';
 
             -- FSM Control
             controller_x_in_fsm_int <= STARTER_X_IN_STATE;
@@ -1202,7 +1202,7 @@ begin
       index_i_r_in_loop <= ZERO_CONTROL;
       index_k_r_in_loop <= ZERO_CONTROL;
 
-      dati_r_in_enable_int <= '0';
+      data_r_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1217,7 +1217,7 @@ begin
             index_i_r_in_loop <= ZERO_CONTROL;
             index_k_r_in_loop <= ZERO_CONTROL;
 
-            dati_r_in_enable_int <= '0';
+            data_r_in_enable_int <= '0';
 
             -- FSM Control
             controller_r_in_fsm_int <= INPUT_R_IN_I_STATE;
@@ -1269,7 +1269,7 @@ begin
             index_i_r_in_loop <= ZERO_CONTROL;
             index_k_r_in_loop <= ZERO_CONTROL;
 
-            dati_r_in_enable_int <= '1';
+            data_r_in_enable_int <= '1';
 
             -- FSM Control
             controller_r_in_fsm_int <= STARTER_R_IN_STATE;
@@ -1317,7 +1317,7 @@ begin
       index_i_rho_in_loop <= ZERO_CONTROL;
       index_m_rho_in_loop <= ZERO_CONTROL;
 
-      dati_rho_in_enable_int <= '0';
+      data_rho_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1332,7 +1332,7 @@ begin
             index_i_rho_in_loop <= ZERO_CONTROL;
             index_m_rho_in_loop <= ZERO_CONTROL;
 
-            dati_rho_in_enable_int <= '0';
+            data_rho_in_enable_int <= '0';
 
             -- FSM Control
             controller_rho_in_fsm_int <= INPUT_RHO_IN_I_STATE;
@@ -1384,7 +1384,7 @@ begin
             index_i_rho_in_loop <= ZERO_CONTROL;
             index_m_rho_in_loop <= ZERO_CONTROL;
 
-            dati_rho_in_enable_int <= '1';
+            data_rho_in_enable_int <= '1';
 
             -- FSM Control
             controller_rho_in_fsm_int <= STARTER_RHO_IN_STATE;
@@ -1430,7 +1430,7 @@ begin
       -- Control Internal
       index_s_xi_in_loop <= ZERO_CONTROL;
 
-      dati_xi_in_enable_int <= '0';
+      data_xi_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1443,7 +1443,7 @@ begin
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
 
-            dati_xi_in_enable_int <= '0';
+            data_xi_in_enable_int <= '0';
 
             -- FSM Control
             controller_xi_in_fsm_int <= INPUT_XI_IN_S_STATE;
@@ -1474,7 +1474,7 @@ begin
             -- Control Internal
             index_s_xi_in_loop <= ZERO_CONTROL;
 
-            dati_xi_in_enable_int <= '1';
+            data_xi_in_enable_int <= '1';
 
             -- FSM Control
             controller_xi_in_fsm_int <= STARTER_XI_IN_STATE;
@@ -1505,7 +1505,7 @@ begin
       -- Control Internal
       index_l_h_in_loop <= ZERO_CONTROL;
 
-      dati_h_in_enable_int <= '0';
+      data_h_in_enable_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -1518,7 +1518,7 @@ begin
             -- Control Internal
             index_l_h_in_loop <= ZERO_CONTROL;
 
-            dati_h_in_enable_int <= '0';
+            data_h_in_enable_int <= '0';
 
             -- FSM Control
             controller_h_in_fsm_int <= INPUT_H_IN_L_STATE;
@@ -1549,7 +1549,7 @@ begin
             -- Control Internal
             index_l_h_in_loop <= ZERO_CONTROL;
 
-            dati_h_in_enable_int <= '1';
+            data_h_in_enable_int <= '1';
 
             -- FSM Control
             controller_h_in_fsm_int <= STARTER_H_IN_STATE;
@@ -1589,7 +1589,7 @@ begin
 
       case controller_i_out_fsm_int is
         when STARTER_I_OUT_STATE =>     -- STEP 0
-          if (dati_w_in_enable_int = '1' and dati_k_in_enable_int = '1' and dati_u_in_enable_int = '1' and dati_d_in_enable_int = '1' and dati_b_in_enable_int = '1' and dati_x_in_enable_int = '1' and dati_xi_in_enable_int = '1' and dati_rho_in_enable_int = '1' and dati_h_in_enable_int = '1') then
+          if (data_w_in_enable_int = '1' and data_k_in_enable_int = '1' and data_u_in_enable_int = '1' and data_d_in_enable_int = '1' and data_b_in_enable_int = '1' and data_x_in_enable_int = '1' and data_xi_in_enable_int = '1' and data_rho_in_enable_int = '1' and data_h_in_enable_int = '1') then
             -- Data Internal
             vector_i_out_int <= function_model_input_convolutional_gate_vector (
               SIZE_X_IN => SIZE_X_IN,

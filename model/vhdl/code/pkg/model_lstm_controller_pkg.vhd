@@ -1894,7 +1894,7 @@ package body model_lstm_controller_pkg is
             scalar_b_input => vector_input(t-1, l)
             );
 
-          vector_output(t, l) := function_scalar_float_divider (
+          vector_output(t, l) := function_scalar_float_multiplier (
             scalar_a_input => scalar_operation_int,
             scalar_b_input => LENGTH_IN
             );
@@ -1933,7 +1933,7 @@ package body model_lstm_controller_pkg is
               scalar_b_input => matrix_input(t-1, i, l)
               );
 
-            matrix_output(t, i, l) := function_scalar_float_divider (
+            matrix_output(t, i, l) := function_scalar_float_multiplier (
               scalar_a_input => scalar_operation_int,
               scalar_b_input => LENGTH_IN
               );
