@@ -2284,22 +2284,39 @@ library
     │       ├── ntm_scaled_dot_product_attention_structural_object.dot
     │       ├── ntm_scaled_dot_product_attention_structural_package.dot
     │       └── ntm_scaled_dot_product_attention_structural_profile.dot
-    ├── fnn
-    │   └── ntm_fnn
-    │       ├── ntm_fnn_behavioral_activity.dot
-    │       ├── ntm_fnn_behavioral_communication.dot
-    │       ├── ntm_fnn_behavioral_interaction.dot
-    │       ├── ntm_fnn_behavioral_sequence.dot
-    │       ├── ntm_fnn_behavioral_state.dot
-    │       ├── ntm_fnn_behavioral_timing.dot
-    │       ├── ntm_fnn_behavioral_use.dot
-    │       ├── ntm_fnn_structural_class.dot
-    │       ├── ntm_fnn_structural_component.dot
-    │       ├── ntm_fnn_structural_composite.dot
-    │       ├── ntm_fnn_structural_deployment.dot
-    │       ├── ntm_fnn_structural_object.dot
-    │       ├── ntm_fnn_structural_package.dot
-    │       └── ntm_fnn_structural_profile.dot
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn
+    │   │       ├── ntm_fnn_behavioral_activity.dot
+    │   │       ├── ntm_fnn_behavioral_communication.dot
+    │   │       ├── ntm_fnn_behavioral_interaction.dot
+    │   │       ├── ntm_fnn_behavioral_sequence.dot
+    │   │       ├── ntm_fnn_behavioral_state.dot
+    │   │       ├── ntm_fnn_behavioral_timing.dot
+    │   │       ├── ntm_fnn_behavioral_use.dot
+    │   │       ├── ntm_fnn_structural_class.dot
+    │   │       ├── ntm_fnn_structural_component.dot
+    │   │       ├── ntm_fnn_structural_composite.dot
+    │   │       ├── ntm_fnn_structural_deployment.dot
+    │   │       ├── ntm_fnn_structural_object.dot
+    │   │       ├── ntm_fnn_structural_package.dot
+    │   │       └── ntm_fnn_structural_profile.dot
+    │   └── lstm
+    │       └── ntm_lstm
+    │           ├── ntm_lstm_behavioral_activity.dot
+    │           ├── ntm_lstm_behavioral_communication.dot
+    │           ├── ntm_lstm_behavioral_interaction.dot
+    │           ├── ntm_lstm_behavioral_sequence.dot
+    │           ├── ntm_lstm_behavioral_state.dot
+    │           ├── ntm_lstm_behavioral_timing.dot
+    │           ├── ntm_lstm_behavioral_use.dot
+    │           ├── ntm_lstm_structural_class.dot
+    │           ├── ntm_lstm_structural_component.dot
+    │           ├── ntm_lstm_structural_composite.dot
+    │           ├── ntm_lstm_structural_deployment.dot
+    │           ├── ntm_lstm_structural_object.dot
+    │           ├── ntm_lstm_structural_package.dot
+    │           └── ntm_lstm_structural_profile.dot
     ├── functions
     │   ├── ntm_layer_norm
     │   │   ├── ntm_layer_norm_behavioral_activity.dot
@@ -2392,22 +2409,6 @@ library
     │       ├── ntm_values_vector_structural_object.dot
     │       ├── ntm_values_vector_structural_package.dot
     │       └── ntm_values_vector_structural_profile.dot
-    ├── lstm
-    │   └── ntm_lstm
-    │       ├── ntm_lstm_behavioral_activity.dot
-    │       ├── ntm_lstm_behavioral_communication.dot
-    │       ├── ntm_lstm_behavioral_interaction.dot
-    │       ├── ntm_lstm_behavioral_sequence.dot
-    │       ├── ntm_lstm_behavioral_state.dot
-    │       ├── ntm_lstm_behavioral_timing.dot
-    │       ├── ntm_lstm_behavioral_use.dot
-    │       ├── ntm_lstm_structural_class.dot
-    │       ├── ntm_lstm_structural_component.dot
-    │       ├── ntm_lstm_structural_composite.dot
-    │       ├── ntm_lstm_structural_deployment.dot
-    │       ├── ntm_lstm_structural_object.dot
-    │       ├── ntm_lstm_structural_package.dot
-    │       └── ntm_lstm_structural_profile.dot
     └── top
         ├── ntm_controller
         │   ├── ntm_controller_behavioral_activity.dot
@@ -2455,4 +2456,4 @@ library
             ├── ntm_encoder_structural_package.dot
             └── ntm_encoder_structural_profile.dot
 
-215 directories, 2240 files
+216 directories, 2240 files

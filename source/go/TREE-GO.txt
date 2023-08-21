@@ -191,8 +191,11 @@ library
     │   ├── ntm_masked_scaled_dot_product_attention.go
     │   ├── ntm_multi_head_attention.go
     │   └── ntm_scaled_dot_product_attention.go
-    ├── fnn
-    │   └── ntm_fnn.go
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn.go
+    │   └── lstm
+    │       └── ntm_lstm.go
     ├── functions
     │   ├── ntm_layer_norm.go
     │   └── ntm_positional_encoding.go
@@ -201,11 +204,9 @@ library
     │   ├── ntm_keys_vector.go
     │   ├── ntm_queries_vector.go
     │   └── ntm_values_vector.go
-    ├── lstm
-    │   └── ntm_lstm.go
     └── top
         ├── ntm_controller.go
         ├── ntm_decoder.go
         └── ntm_encoder.go
 
-59 directories, 149 files
+60 directories, 149 files

@@ -80,10 +80,11 @@ library
 │       └── output
 └── transformer
     ├── components
-    ├── fnn
+    ├── controller
+    │   ├── fnn
+    │   └── lstm
     ├── functions
     ├── inputs
-    ├── lstm
     └── top
 
-75 directories, 11 files
+76 directories, 11 files

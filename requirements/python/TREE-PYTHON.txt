@@ -255,8 +255,11 @@ library
     │   ├── ntm_masked_scaled_dot_product_attention.py
     │   ├── ntm_multi_head_attention.py
     │   └── ntm_scaled_dot_product_attention.py
-    ├── fnn
-    │   └── ntm_fnn.py
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn.py
+    │   └── lstm
+    │       └── ntm_lstm.py
     ├── functions
     │   ├── ntm_layer_norm.py
     │   └── ntm_positional_encoding.py
@@ -265,12 +268,10 @@ library
     │   ├── ntm_keys_vector.py
     │   ├── ntm_queries_vector.py
     │   └── ntm_values_vector.py
-    ├── lstm
-    │   └── ntm_lstm.py
     ├── ntm_transformer_controller.py
     └── top
         ├── ntm_controller.py
         ├── ntm_decoder.py
         └── ntm_encoder.py
 
-59 directories, 214 files
+60 directories, 214 files

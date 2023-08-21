@@ -270,8 +270,11 @@ library
     │   ├── ntm_masked_scaled_dot_product_attention.rs
     │   ├── ntm_multi_head_attention.rs
     │   └── ntm_scaled_dot_product_attention.rs
-    ├── fnn
-    │   └── ntm_fnn.rs
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn.rs
+    │   └── lstm
+    │       └── ntm_lstm.rs
     ├── functions
     │   ├── ntm_layer_norm.rs
     │   └── ntm_positional_encoding.rs
@@ -280,12 +283,10 @@ library
     │   ├── ntm_keys_vector.rs
     │   ├── ntm_queries_vector.rs
     │   └── ntm_values_vector.rs
-    ├── lstm
-    │   └── ntm_lstm.rs
     ├── ntm_transformer_controller.rs
     └── top
         ├── ntm_controller.rs
         ├── ntm_decoder.rs
         └── ntm_encoder.rs
 
-65 directories, 223 files
+66 directories, 223 files

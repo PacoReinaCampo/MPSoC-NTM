@@ -53,10 +53,11 @@ library
 │       └── output
 └── transformer
     ├── components
-    ├── fnn
+    ├── controller
+    │   ├── fnn
+    │   └── lstm
     ├── functions
     ├── inputs
-    ├── lstm
     └── top
 
-59 directories, 0 files
+60 directories, 0 files

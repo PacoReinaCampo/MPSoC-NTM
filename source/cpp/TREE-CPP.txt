@@ -576,10 +576,15 @@ library
     │   ├── ntm_scaled_dot_product_attention.cpp
     │   ├── ntm_scaled_dot_product_attention_design.cpp
     │   └── ntm_scaled_dot_product_attention_testbench.cpp
-    ├── fnn
-    │   ├── ntm_fnn.cpp
-    │   ├── ntm_fnn_design.cpp
-    │   └── ntm_fnn_testbench.cpp
+    ├── controller
+    │   ├── fnn
+    │   │   ├── ntm_fnn.cpp
+    │   │   ├── ntm_fnn_design.cpp
+    │   │   └── ntm_fnn_testbench.cpp
+    │   └── lstm
+    │       ├── ntm_lstm.cpp
+    │       ├── ntm_lstm_design.cpp
+    │       └── ntm_lstm_testbench.cpp
     ├── functions
     │   ├── ntm_layer_norm.cpp
     │   ├── ntm_layer_norm_design.cpp
@@ -600,10 +605,6 @@ library
     │   ├── ntm_values_vector.cpp
     │   ├── ntm_values_vector_design.cpp
     │   └── ntm_values_vector_testbench.cpp
-    ├── lstm
-    │   ├── ntm_lstm.cpp
-    │   ├── ntm_lstm_design.cpp
-    │   └── ntm_lstm_testbench.cpp
     ├── ntm_transformer_controller.cpp
     └── top
         ├── ntm_controller.cpp
@@ -616,4 +617,4 @@ library
         ├── ntm_encoder_design.cpp
         └── ntm_encoder_testbench.cpp
 
-75 directories, 541 files
+76 directories, 541 files

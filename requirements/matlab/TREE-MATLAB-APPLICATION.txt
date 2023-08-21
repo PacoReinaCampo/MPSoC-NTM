@@ -214,8 +214,11 @@ application
     │   ├── ntm_masked_scaled_dot_product_attention_test.m
     │   ├── ntm_multi_head_attention_test.m
     │   └── ntm_scaled_dot_product_attention_test.m
-    ├── fnn
-    │   └── ntm_fnn_test.m
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn_test.m
+    │   └── lstm
+    │       └── ntm_lstm_test.m
     ├── functions
     │   ├── ntm_layer_norm_test.m
     │   └── ntm_positional_encoding_test.m
@@ -224,11 +227,9 @@ application
     │   ├── ntm_keys_vector_test.m
     │   ├── ntm_queries_vector_test.m
     │   └── ntm_values_vector_test.m
-    ├── lstm
-    │   └── ntm_lstm_test.m
     └── top
         ├── ntm_controller_test.m
         ├── ntm_decoder_test.m
         └── ntm_encoder_test.m
 
-59 directories, 172 files
+60 directories, 172 files

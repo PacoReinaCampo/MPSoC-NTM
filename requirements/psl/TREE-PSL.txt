@@ -214,8 +214,11 @@ library
     │   ├── ntm_masked_scaled_dot_product_attention.psl
     │   ├── ntm_multi_head_attention.psl
     │   └── ntm_scaled_dot_product_attention.psl
-    ├── fnn
-    │   └── ntm_fnn.psl
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn.psl
+    │   └── lstm
+    │       └── ntm_lstm.psl
     ├── functions
     │   ├── ntm_layer_norm.psl
     │   └── ntm_positional_encoding.psl
@@ -224,11 +227,9 @@ library
     │   ├── ntm_keys_vector.psl
     │   ├── ntm_queries_vector.psl
     │   └── ntm_values_vector.psl
-    ├── lstm
-    │   └── ntm_lstm.psl
     └── top
         ├── ntm_controller.psl
         ├── ntm_decoder.psl
         └── ntm_encoder.psl
 
-59 directories, 172 files
+60 directories, 172 files
