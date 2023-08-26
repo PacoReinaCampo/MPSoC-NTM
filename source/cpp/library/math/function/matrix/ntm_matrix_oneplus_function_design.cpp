@@ -44,23 +44,30 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+#define SIZE_I_IN 4
+#define SIZE_J_IN 4
+
+SC_MODULE(matrix_oneplus_function) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<sc_int<64>> data_in[SIZE_I_IN][SIZE_J_IN];
 
-  sc_out<int> out;
+  sc_out<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(matrix_oneplus_function) {
+    SC_METHOD(oneplus_function);
+    sensitive << clock.pos();
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        sensitive << data_in[i][j];
+      }
+    }
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void oneplus_function() {
+    for (int i=0; i<SIZE_I_IN; i++) {
+      for (int j=0; j<SIZE_J_IN; j++) {
+        data_out[i][j].write(data_in[j][i].read());
+      }
+    }
   }
 };

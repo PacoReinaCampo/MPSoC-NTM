@@ -61,7 +61,8 @@ SC_MODULE(tensor_adder) {
     for (int i=0; i<SIZE_I_IN; i++) {
       for (int j=0; j<SIZE_J_IN; j++) {
         for (int k=0; k<SIZE_K_IN; k++) {
-          sensitive << data_a_in[i][j][k] << data_b_in[i][j][k];
+          sensitive << data_a_in[i][j][k];
+          sensitive << data_b_in[i][j][k];
         }
       }
     }

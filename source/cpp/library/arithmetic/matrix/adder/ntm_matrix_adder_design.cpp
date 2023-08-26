@@ -59,7 +59,8 @@ SC_MODULE(matrix_adder) {
     sensitive << clock.pos();
     for (int i=0; i<SIZE_I_IN; i++) {
       for (int j=0; j<SIZE_J_IN; j++) {
-        sensitive << data_a_in[i][j] << data_b_in[i][j];
+        sensitive << data_a_in[i][j];
+        sensitive << data_b_in[i][j];
       }
     }
   }

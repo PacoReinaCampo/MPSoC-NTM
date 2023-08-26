@@ -58,7 +58,8 @@ SC_MODULE(vector_adder) {
     SC_METHOD(adder);
     sensitive << clock.pos();
     for (int i=0; i<SIZE_I_IN; i++) {
-      sensitive << data_a_in[i] << data_b_in[i];
+        sensitive << data_a_in[i];
+        sensitive << data_b_in[i];
     }
   }
 

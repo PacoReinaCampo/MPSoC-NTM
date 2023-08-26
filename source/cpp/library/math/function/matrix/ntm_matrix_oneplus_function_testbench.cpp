@@ -43,36 +43,41 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_matrix_oneplus_function_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  matrix_oneplus_function matrix_oneplus_function("MATRIX_ONEPLUS_FUNCTION");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<sc_int<64>> data_in[SIZE_I_IN][SIZE_J_IN];
+  sc_signal<sc_int<64>> data_out[SIZE_I_IN][SIZE_J_IN];
 
-  adder(clock, Ain, Bin, out);
+  matrix_oneplus_function.clock(clock);
 
-  Ain = 1;
-  Bin = 2;
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      matrix_oneplus_function.data_in[i][j](data_in[i][j]);
+
+      matrix_oneplus_function.data_out[i][j](data_out[i][j]);
+    }
+  }
+
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      data_in[i][j] = i + j;
+    }
+  }
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
 
-  Ain = 2;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  for (int i=0; i<SIZE_I_IN; i++) {
+    for (int j=0; j<SIZE_J_IN; j++) {
+      cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
+    }
+  }
 
   return 0;
 }

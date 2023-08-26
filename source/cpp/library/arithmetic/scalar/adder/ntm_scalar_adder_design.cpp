@@ -54,7 +54,8 @@ SC_MODULE(scalar_adder) {
   SC_CTOR(scalar_adder) {
     SC_METHOD(adder);
     sensitive << clock.pos();
-    sensitive << data_a_in << data_b_in;
+    sensitive << data_a_in;
+    sensitive << data_b_in;
   }
 
   void adder() {

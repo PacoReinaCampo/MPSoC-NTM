@@ -54,7 +54,8 @@ SC_MODULE(scalar_multiplier) {
   SC_CTOR(scalar_multiplier) {
     SC_METHOD(multiplier);
     sensitive << clock.pos();
-    sensitive << data_a_in << data_b_in;
+    sensitive << data_a_in;
+    sensitive << data_b_in;
   }
 
   void multiplier() {

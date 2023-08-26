@@ -54,7 +54,8 @@ SC_MODULE(scalar_subtractor) {
   SC_CTOR(scalar_subtractor) {
     SC_METHOD(subtractor);
     sensitive << clock.pos();
-    sensitive << data_a_in << data_b_in;
+    sensitive << data_a_in;
+    sensitive << data_b_in;
   }
 
   void subtractor() {

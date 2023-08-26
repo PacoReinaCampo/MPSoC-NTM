@@ -166,8 +166,11 @@ library
     │   ├── ntm_masked_scaled_dot_product_attention.scala
     │   ├── ntm_multi_head_attention.scala
     │   └── ntm_scaled_dot_product_attention.scala
-    ├── fnn
-    │   └── ntm_fnn.scala
+    ├── controller
+    │   ├── fnn
+    │   │   └── ntm_fnn.scala
+    │   └── lstm
+    │       └── ntm_lstm.scala
     ├── functions
     │   ├── ntm_layer_norm.scala
     │   └── ntm_positional_encoding.scala
@@ -176,11 +179,9 @@ library
     │   ├── ntm_keys_vector.scala
     │   ├── ntm_queries_vector.scala
     │   └── ntm_values_vector.scala
-    ├── lstm
-    │   └── ntm_lstm.scala
     └── top
         ├── ntm_controller.scala
         ├── ntm_decoder.scala
         └── ntm_encoder.scala
 
-59 directories, 124 files
+60 directories, 124 files

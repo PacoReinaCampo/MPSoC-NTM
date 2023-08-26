@@ -57,7 +57,8 @@ SC_MODULE(vector_subtractor) {
     SC_METHOD(subtractor);
     sensitive << clock.pos();
     for (int i=0; i<SIZE_I_IN; i++) {
-      sensitive << data_a_in[i] << data_b_in[i];
+      sensitive << data_a_in[i];
+      sensitive << data_b_in[i];
     }
   }
 

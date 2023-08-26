@@ -43,36 +43,24 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include "systemc.h"
-#include "design.cpp"
+#include "ntm_scalar_logistic_function_design.cpp"
 
-int sc_main(int argc, char *argv[])
-{
-  adder adder("ADDER");
+int sc_main(int argc, char *argv[]) {
+  scalar_logistic_function scalar_logistic_function("SCALAR_LOGISTIC_FUNCTION");
 
-  sc_signal<int> Ain;
-  sc_signal<int> Bin;
   sc_signal<bool> clock;
-  sc_signal<int> out;
+  sc_signal<int> data_in;
+  sc_signal<int> data_out;
 
-  adder(clock, Ain, Bin, out);
+  scalar_logistic_function(clock, data_in, data_out);
 
-  Ain = 1;
-  Bin = 2;
-
-  clock = 0;
-  sc_start(1, SC_NS);
-  clock = 1;
-  sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
-
-  Ain = 2;
-  Bin = 2;
+  data_in = 1;
 
   clock = 0;
   sc_start(1, SC_NS);
   clock = 1;
   sc_start(1, SC_NS);
-  cout << "@" << sc_time_stamp() << ": A + B = " << out.read() << endl;
+  cout << "@" << sc_time_stamp() << ": data_in = " << data_out.read() << endl;
 
   return 0;
 }

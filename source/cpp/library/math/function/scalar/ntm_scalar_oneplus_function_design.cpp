@@ -44,23 +44,19 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+SC_MODULE(scalar_oneplus_function) {
   sc_in_clk clock;
-  sc_in<int> A;
-  sc_in<int> B;
+  sc_in<int> data_in;
 
-  sc_out<int> out;
+  sc_out<int> data_out;
 
-  SC_CTOR(adder)
-  {
-    // cout<<"Constructor called\n";
-    SC_METHOD(add);
-    sensitive << A << B << clock.pos();
+  SC_CTOR(scalar_oneplus_function) {
+    SC_METHOD(oneplus_function);
+    sensitive << clock.pos();
+    sensitive << data_in;
   }
 
-  void add()
-  {
-    out.write(A.read() + B.read());
+  void oneplus_function() {
+    data_out.write(data_in.read());
   }
 };
