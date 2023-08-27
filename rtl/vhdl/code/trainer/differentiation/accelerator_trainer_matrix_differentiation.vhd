@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.accelerator_arithmetic_pkg.all;
 use work.accelerator_math_pkg.all;
-use work.accelerator_fnn_controller_pkg.all;
+use work.accelerator_linear_controller_pkg.all;
 
 entity accelerator_trainer_matrix_differentiation is
   generic (

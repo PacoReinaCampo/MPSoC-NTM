@@ -80,6 +80,6 @@
 ../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_trainer_vector_differentiation.vhd
 ../../../../../../../rtl/vhdl/code/trainer/differentiation/accelerator_trainer_matrix_differentiation.vhd
 
-../../../../../../../bench/vhdl/code/tests/rtl/trainer/differentiation/accelerator_trainer_differentiation_pkg.vhd
-../../../../../../../bench/vhdl/code/tests/rtl/trainer/differentiation/accelerator_trainer_differentiation_stimulus.vhd
-../../../../../../../bench/vhdl/code/tests/rtl/trainer/differentiation/accelerator_trainer_differentiation_testbench.vhd
+../../../../../../../bench/vhdl/code/tests/design/trainer/differentiation/accelerator_trainer_differentiation_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/design/trainer/differentiation/accelerator_trainer_differentiation_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/design/trainer/differentiation/accelerator_trainer_differentiation_testbench.vhd

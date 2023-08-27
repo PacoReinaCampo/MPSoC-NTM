@@ -345,7 +345,7 @@ begin
     if (STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_TEST                    ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_TEST              ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -358,7 +358,7 @@ begin
       if (STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE 0                  ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE 0            ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -434,7 +434,7 @@ begin
       if (STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE 1                  ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE 1            ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

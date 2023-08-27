@@ -304,13 +304,13 @@ begin
     if (STIMULUS_NTM_MATRIX_STATE_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_STATE_TEST          ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_STATE_TEST                                        ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_STATE_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_STATE_CASE_0        ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_STATE_CASE_0                                      ";
         -------------------------------------------------------------------
 
         NTM_MATRIX_STATE_SIZE_A_I_IN <= FOUR_CONTROL;
@@ -328,7 +328,7 @@ begin
       if (STIMULUS_NTM_MATRIX_STATE_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_STATE_CASE_1        ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_STATE_CASE_1                                      ";
         -------------------------------------------------------------------
 
         NTM_MATRIX_STATE_SIZE_A_I_IN <= FOUR_CONTROL;
