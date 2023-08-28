@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.model_arithmetic_pkg.all;
 use work.model_math_pkg.all;
 use work.model_state_outputs_pkg.all;
 

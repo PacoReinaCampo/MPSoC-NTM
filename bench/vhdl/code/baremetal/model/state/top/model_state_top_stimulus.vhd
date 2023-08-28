@@ -199,11 +199,12 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_STATE_TOP_TEST                                           ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_0                                           ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_STATE_TOP_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_0                                         ";
+        -------------------------------------------------------------------
+
         NTM_STATE_TOP_SIZE_A_I_IN <= FOUR_CONTROL;
         NTM_STATE_TOP_SIZE_A_J_IN <= FOUR_CONTROL;
         NTM_STATE_TOP_SIZE_B_I_IN <= FOUR_CONTROL;
@@ -216,11 +217,12 @@ begin
         NTM_STATE_TOP_DATA_K_IN <= ZERO_DATA;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_1                                           ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_STATE_TOP_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_1                                         ";
+        -------------------------------------------------------------------
+
         NTM_STATE_TOP_SIZE_A_I_IN <= FOUR_CONTROL;
         NTM_STATE_TOP_SIZE_A_J_IN <= FOUR_CONTROL;
         NTM_STATE_TOP_SIZE_B_I_IN <= FOUR_CONTROL;

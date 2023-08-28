@@ -467,13 +467,6 @@ begin
       XI_IN  => xi_in_controller,
       H_IN   => h_in_controller,
 
-      W_OUT => w_out_controller,
-      D_OUT => d_out_controller,
-      K_OUT => k_out_controller,
-      U_OUT => u_out_controller,
-      V_OUT => v_out_controller,
-      B_OUT => b_out_controller,
-
       H_OUT => h_out_controller
       );
 
