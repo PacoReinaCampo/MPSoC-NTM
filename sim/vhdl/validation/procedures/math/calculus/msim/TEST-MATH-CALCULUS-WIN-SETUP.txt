@@ -1,6 +1,6 @@
-cd D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/calculus/msim
+cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/procedures/math/calculus/msim
 
-do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/calculus/msim/macros/design.do
-do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/calculus/msim/macros/verification.do
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/procedures/math/calculus/msim/macros/design.do
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/procedures/math/calculus/msim/macros/verification.do
 
-do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/calculus/msim/list.do
+do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/procedures/math/calculus/msim/list.do
