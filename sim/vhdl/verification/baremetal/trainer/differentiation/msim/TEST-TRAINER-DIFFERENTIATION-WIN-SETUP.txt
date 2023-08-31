@@ -1,6 +1,0 @@
-cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/trainer/differentiation/msim
-
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/trainer/differentiation/msim/macros/design.do
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/trainer/differentiation/msim/macros/verification.do
-
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/trainer/differentiation/msim/list.do

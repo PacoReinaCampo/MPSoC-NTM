@@ -1,0 +1,6 @@
+cd D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/verification/procedures/controller/linear/standard/msim
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/verification/procedures/controller/linear/standard/msim/macros/design.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/verification/procedures/controller/linear/standard/msim/macros/verification.do
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/verification/procedures/controller/linear/standard/msim/list.do

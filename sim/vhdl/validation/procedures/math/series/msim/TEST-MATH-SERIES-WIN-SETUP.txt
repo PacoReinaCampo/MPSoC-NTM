@@ -1,0 +1,6 @@
+cd D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/series/msim
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/series/msim/macros/design.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/series/msim/macros/verification.do
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/math/series/msim/list.do

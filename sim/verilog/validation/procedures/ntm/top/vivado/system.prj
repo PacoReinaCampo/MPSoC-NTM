@@ -1,0 +1,103 @@
+ghdl -a --std=08 ../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/pkg/model_math_pkg.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/pkg/model_ntm_core_pkg.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/pkg/model_lstm_controller_pkg.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_adder.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_divider.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_adder.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_multiplier.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_divider.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_adder.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_divider.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_dot_product.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_convolution.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_cosine_similarity.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_multiplication.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_summation.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_module.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_convolution.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_inverse.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_multiplication.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_product.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_summation.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_transpose.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_convolution.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_inverse.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/vector/model_vector_differentiation.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/vector/model_vector_integration.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/vector/model_vector_softmax.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_differentiation.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_integration.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_softmax.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_differentiation.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_integration.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_softmax.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/scalar/model_scalar_logistic_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/scalar/model_scalar_oneplus_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/vector/model_vector_logistic_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/vector/model_vector_oneplus_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/matrix/model_matrix_logistic_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/function/matrix/model_matrix_oneplus_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/scalar/model_scalar_cosh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/scalar/model_scalar_exponentiator_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/scalar/model_scalar_logarithm_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/scalar/model_scalar_sinh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/scalar/model_scalar_tanh_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/vector/model_vector_cosh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/vector/model_vector_exponentiator_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/vector/model_vector_logarithm_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/vector/model_vector_sinh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/vector/model_vector_tanh_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_cosh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_exponentiator_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_logarithm_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_sinh_function.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/math/series/matrix/model_matrix_tanh_function.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/trainer/LSTM/model_activation_trainer.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/trainer/LSTM/model_forget_trainer.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/trainer/LSTM/model_input_trainer.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/trainer/LSTM/model_output_trainer.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_controller.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_activation_gate_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_forget_gate_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_hidden_gate_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_input_gate_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_output_gate_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/controller/LSTM/convolutional/model_state_gate_vector.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/read_heads/model_reading.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/write_heads/model_writing.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/write_heads/model_erasing.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/memory/model_addressing.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/memory/model_content_based_addressing.sv
+
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_interface_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_output_vector.sv
+ghdl -a --std=08 ../../../../../../../model/verilog/code/ntm/top/model_top.sv
+
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/procedures/model/ntm/top/model_top_pkg.sv
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/procedures/model/ntm/top/model_top_stimulus.sv
+ghdl -a --std=08 ../../../../../../../bench/verilog/code/procedures/model/ntm/top/model_top_testbench.sv

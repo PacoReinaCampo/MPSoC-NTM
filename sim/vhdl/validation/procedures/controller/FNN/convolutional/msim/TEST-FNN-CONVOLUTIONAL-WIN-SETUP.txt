@@ -1,0 +1,6 @@
+cd D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/controller/FNN/convolutional/msim
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/controller/FNN/convolutional/msim/macros/design.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/controller/FNN/convolutional/msim/macros/validation.do
+
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/procedures/controller/FNN/convolutional/msim/list.do

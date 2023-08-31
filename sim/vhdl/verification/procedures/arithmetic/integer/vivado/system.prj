@@ -1,0 +1,21 @@
+vhdl2008 work ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/vector/accelerator_vector_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/vector/accelerator_vector_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/vector/accelerator_vector_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/matrix/accelerator_matrix_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/matrix/accelerator_matrix_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/matrix/accelerator_matrix_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accelerator_tensor_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accelerator_tensor_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accelerator_tensor_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_testbench.vhd

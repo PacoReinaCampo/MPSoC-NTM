@@ -1,6 +1,6 @@
-cd D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim
+cd D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim
 
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/macros/design.do
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/macros/validation.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/macros/design.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/macros/validation.do
 
-do D:/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/list.do
+do D:/GitHub/code/Advanced/PU-NTM/sim/vhdl/validation/tests/controller/FNN/standard/msim/list.do

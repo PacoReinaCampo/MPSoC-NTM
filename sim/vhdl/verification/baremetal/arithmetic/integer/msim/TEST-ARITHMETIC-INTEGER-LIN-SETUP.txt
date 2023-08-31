@@ -1,6 +1,0 @@
-cd /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/arithmetic/integer/msim
-
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/arithmetic/integer/msim/macros/design.do
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/arithmetic/integer/msim/macros/verification.do
-
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/verification/baremetal/arithmetic/integer/msim/list.do

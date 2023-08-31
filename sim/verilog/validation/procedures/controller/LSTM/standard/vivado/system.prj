@@ -1,0 +1,90 @@
+verilog work ../../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+verilog work ../../../../../../../../model/verilog/code/pkg/model_math_pkg.sv
+verilog work ../../../../../../../../model/verilog/code/pkg/model_lstm_controller_pkg.sv
+
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_adder.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_divider.sv
+
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_adder.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_multiplier.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_divider.sv
+
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_adder.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_multiplier.sv
+verilog work ../../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_divider.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_dot_product.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_vector_convolution.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_vector_cosine_similarity.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_vector_multiplication.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_vector_summation.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/vector/model_vector_module.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_convolution.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_inverse.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_multiplication.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_product.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_summation.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_transpose.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_convolution.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_inverse.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
+verilog work ../../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/calculus/vector/model_vector_differentiation.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/vector/model_vector_integration.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/vector/model_vector_softmax.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_differentiation.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_integration.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/matrix/model_matrix_softmax.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_differentiation.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_integration.sv
+verilog work ../../../../../../../../model/verilog/code/math/calculus/tensor/model_tensor_softmax.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/function/scalar/model_scalar_logistic_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/function/scalar/model_scalar_oneplus_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/function/vector/model_vector_logistic_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/function/vector/model_vector_oneplus_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/function/matrix/model_matrix_logistic_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/function/matrix/model_matrix_oneplus_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/series/scalar/model_scalar_cosh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/scalar/model_scalar_exponentiator_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/scalar/model_scalar_logarithm_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/scalar/model_scalar_sinh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/scalar/model_scalar_tanh_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/series/vector/model_vector_cosh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/vector/model_vector_exponentiator_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/vector/model_vector_logarithm_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/vector/model_vector_sinh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/vector/model_vector_tanh_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/math/series/matrix/model_matrix_cosh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/matrix/model_matrix_exponentiator_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/matrix/model_matrix_logarithm_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/matrix/model_matrix_sinh_function.sv
+verilog work ../../../../../../../../model/verilog/code/math/series/matrix/model_matrix_tanh_function.sv
+
+verilog work ../../../../../../../../model/verilog/code/trainer/LSTM/model_activation_trainer.sv
+verilog work ../../../../../../../../model/verilog/code/trainer/LSTM/model_forget_trainer.sv
+verilog work ../../../../../../../../model/verilog/code/trainer/LSTM/model_input_trainer.sv
+verilog work ../../../../../../../../model/verilog/code/trainer/LSTM/model_output_trainer.sv
+
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_controller.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_activation_gate_vector.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_forget_gate_vector.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_hidden_gate_vector.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_input_gate_vector.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_output_gate_vector.sv
+verilog work ../../../../../../../../model/verilog/code/controller/LSTM/standard/model_state_gate_vector.sv
+
+verilog work ../../../../../../../../bench/verilog/code/procedures/model/controller/LSTM/standard/model_standard_lstm_pkg.sv
+verilog work ../../../../../../../../bench/verilog/code/procedures/model/controller/LSTM/standard/model_standard_lstm_stimulus.sv
+verilog work ../../../../../../../../bench/verilog/code/procedures/model/controller/LSTM/standard/model_standard_lstm_testbench.sv
