@@ -139,102 +139,6 @@ library
 │               ├── ntm_model_pkg.vhd
 │               ├── ntm_model.vhd
 │               └── ntm_testbench.vhd
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_allocation_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_backward_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_forward_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_matrix_content_based_addressing
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_memory_matrix
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_memory_retention_vector
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_precedence_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_read_content_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_read_vectors
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_read_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_sort_vector
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_temporal_link_matrix
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_usage_vector
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_vector_content_based_addressing
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_write_content_weighting
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   └── dnc_write_weighting
-│   │       ├── ntm_model_pkg.vhd
-│   │       ├── ntm_model.vhd
-│   │       └── ntm_testbench.vhd
-│   ├── top
-│   │   ├── dnc_interface_matrix
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_interface_top
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_interface_vector
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── dnc_output_vector
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   └── dnc_top
-│   │       ├── ntm_model_pkg.vhd
-│   │       ├── ntm_model.vhd
-│   │       └── ntm_testbench.vhd
-│   └── trained
-│       └── dnc_trained_top
-│           ├── ntm_model_pkg.vhd
-│           ├── ntm_model.vhd
-│           └── ntm_testbench.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -748,4 +652,4 @@ library
             ├── ntm_model.vhd
             └── ntm_testbench.vhd
 
-232 directories, 516 files
+205 directories, 447 files

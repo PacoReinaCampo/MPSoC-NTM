@@ -107,79 +107,6 @@ application
 │           └── ntm_state_gate_vector
 │               ├── ntm_design_pkg.vhd
 │               └── ntm_design.vhd
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_allocation_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_backward_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_forward_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_matrix_content_based_addressing
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_memory_matrix
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_memory_retention_vector
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_precedence_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_read_content_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_read_vectors
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_read_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_sort_vector
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_temporal_link_matrix
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_usage_vector
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_vector_content_based_addressing
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_write_content_weighting
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   └── dnc_write_weighting
-│   │       ├── ntm_design_pkg.vhd
-│   │       └── ntm_design.vhd
-│   ├── top
-│   │   ├── dnc_interface_matrix
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_interface_top
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_interface_vector
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   ├── dnc_output_vector
-│   │   │   ├── ntm_design_pkg.vhd
-│   │   │   └── ntm_design.vhd
-│   │   └── dnc_top
-│   │       ├── ntm_design_pkg.vhd
-│   │       └── ntm_design.vhd
-│   └── trained
-│       └── dnc_trained_top
-│           ├── ntm_design_pkg.vhd
-│           └── ntm_design.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -576,4 +503,4 @@ application
             ├── ntm_design_pkg.vhd
             └── ntm_design.vhd
 
-232 directories, 344 files
+205 directories, 298 files

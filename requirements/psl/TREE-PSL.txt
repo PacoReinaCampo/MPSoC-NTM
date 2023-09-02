@@ -43,33 +43,6 @@ library
 │           ├── ntm_input_gate_vector.psl
 │           ├── ntm_output_gate_vector.psl
 │           └── ntm_state_gate_vector.psl
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing.psl
-│   │   ├── dnc_allocation_weighting.psl
-│   │   ├── dnc_backward_weighting.psl
-│   │   ├── dnc_forward_weighting.psl
-│   │   ├── dnc_matrix_content_based_addressing.psl
-│   │   ├── dnc_memory_matrix.psl
-│   │   ├── dnc_memory_retention_vector.psl
-│   │   ├── dnc_precedence_weighting.psl
-│   │   ├── dnc_read_content_weighting.psl
-│   │   ├── dnc_read_vectors.psl
-│   │   ├── dnc_read_weighting.psl
-│   │   ├── dnc_sort_vector.psl
-│   │   ├── dnc_temporal_link_matrix.psl
-│   │   ├── dnc_usage_vector.psl
-│   │   ├── dnc_vector_content_based_addressing.psl
-│   │   ├── dnc_write_content_weighting.psl
-│   │   └── dnc_write_weighting.psl
-│   ├── top
-│   │   ├── dnc_interface_matrix.psl
-│   │   ├── dnc_interface_top.psl
-│   │   ├── dnc_interface_vector.psl
-│   │   ├── dnc_output_vector.psl
-│   │   └── dnc_top.psl
-│   └── trained
-│       └── dnc_trained_top.psl
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -232,4 +205,4 @@ library
         ├── ntm_decoder.psl
         └── ntm_encoder.psl
 
-60 directories, 172 files
+56 directories, 149 files

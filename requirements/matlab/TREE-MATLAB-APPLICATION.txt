@@ -43,33 +43,6 @@ application
 │           ├── ntm_input_gate_vector_test.m
 │           ├── ntm_output_gate_vector_test.m
 │           └── ntm_state_gate_vector_test.m
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing_test.m
-│   │   ├── dnc_allocation_weighting_test.m
-│   │   ├── dnc_backward_weighting_test.m
-│   │   ├── dnc_forward_weighting_test.m
-│   │   ├── dnc_matrix_content_based_addressing_test.m
-│   │   ├── dnc_memory_matrix_test.m
-│   │   ├── dnc_memory_retention_vector_test.m
-│   │   ├── dnc_precedence_weighting_test.m
-│   │   ├── dnc_read_content_weighting_test.m
-│   │   ├── dnc_read_vectors_test.m
-│   │   ├── dnc_read_weighting_test.m
-│   │   ├── dnc_sort_vector_test.m
-│   │   ├── dnc_temporal_link_matrix_test.m
-│   │   ├── dnc_usage_vector_test.m
-│   │   ├── dnc_vector_content_based_addressing_test.m
-│   │   ├── dnc_write_content_weighting_test.m
-│   │   └── dnc_write_weighting_test.m
-│   ├── top
-│   │   ├── dnc_interface_matrix_test.m
-│   │   ├── dnc_interface_top_test.m
-│   │   ├── dnc_interface_vector_test.m
-│   │   ├── dnc_output_vector_test.m
-│   │   └── dnc_top_test.m
-│   └── trained
-│       └── dnc_trained_top_test.m
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -232,4 +205,4 @@ application
         ├── ntm_decoder_test.m
         └── ntm_encoder_test.m
 
-60 directories, 172 files
+56 directories, 149 files

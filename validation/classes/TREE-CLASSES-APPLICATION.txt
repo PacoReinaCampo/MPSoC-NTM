@@ -107,79 +107,6 @@ application
 │           └── ntm_state_gate_vector
 │               ├── ntm_design.sv
 │               └── ntm_testbench.sv
-├── dnc
-│   ├── memory
-│   │   ├── dnc_addressing
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_allocation_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_backward_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_forward_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_matrix_content_based_addressing
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_memory_matrix
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_memory_retention_vector
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_precedence_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_read_content_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_read_vectors
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_read_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_sort_vector
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_temporal_link_matrix
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_usage_vector
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_vector_content_based_addressing
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_write_content_weighting
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   └── dnc_write_weighting
-│   │       ├── ntm_design.sv
-│   │       └── ntm_testbench.sv
-│   ├── top
-│   │   ├── dnc_interface_matrix
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_interface_top
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_interface_vector
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── dnc_output_vector
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   └── dnc_top
-│   │       ├── ntm_design.sv
-│   │       └── ntm_testbench.sv
-│   └── trained
-│       └── dnc_trained_top
-│           ├── ntm_design.sv
-│           └── ntm_testbench.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -576,4 +503,4 @@ application
             ├── ntm_design.sv
             └── ntm_testbench.sv
 
-232 directories, 344 files
+205 directories, 298 files

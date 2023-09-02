@@ -2194,6 +2194,8 @@ begin
   end generate accelerator_matrix_transpose_test;
 
   matrix_assertion : process (CLK, RST)
+    variable i : integer := 0;
+    variable j : integer := 0;
   begin
     if rising_edge(CLK) then
       if (ready_matrix_convolution = '1' and data_out_i_enable_matrix_convolution = '1' and data_out_j_enable_matrix_convolution = '1') then

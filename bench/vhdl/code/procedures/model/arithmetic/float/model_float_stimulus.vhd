@@ -1030,7 +1030,7 @@ begin
     if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTMMATRIX_FLOAT_MULTIPLIER_TEST                            ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST                             ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1040,7 +1040,7 @@ begin
       if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTMMATRIX_FLOAT_MULTIPLIER_CASE 0                          ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1111,7 +1111,7 @@ begin
       if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTMMATRIX_FLOAT_MULTIPLIER_CASE 1                          ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1186,7 +1186,7 @@ begin
     if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTMMATRIX_FLOAT_DIVIDER_TEST                               ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST                                ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -1196,7 +1196,7 @@ begin
       if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTMMATRIX_FLOAT_DIVIDER_CASE 0                             ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE 0                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1267,7 +1267,7 @@ begin
       if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTMMATRIX_FLOAT_DIVIDER_CASE 1                             ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE 1                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
