@@ -52,4 +52,4 @@ simulate:
 	xsim -R accelerator_write_heads_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

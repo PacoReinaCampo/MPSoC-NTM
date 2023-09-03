@@ -52,4 +52,4 @@ simulate:
 	xsim -R accelerator_trainer_fnn_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

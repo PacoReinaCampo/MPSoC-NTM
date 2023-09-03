@@ -51,4 +51,4 @@ simulate:
 	xsim -R accelerator_fixed_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
