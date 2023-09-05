@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab model_state_top_testbench
-	xsim -R model_state_top_testbench
+	xelab accelerator_state_top_testbench
+	xsim -R accelerator_state_top_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

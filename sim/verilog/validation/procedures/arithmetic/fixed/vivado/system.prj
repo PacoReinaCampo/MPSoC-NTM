@@ -1,21 +1,21 @@
-verilog work ../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/vector/model_vector_fixed_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/vector/model_vector_fixed_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/vector/model_vector_fixed_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/matrix/model_matrix_fixed_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/matrix/model_matrix_fixed_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/matrix/model_matrix_fixed_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/tensor/model_tensor_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/tensor/model_tensor_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/tensor/model_tensor_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/tensor/model_tensor_fixed_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/tensor/model_tensor_fixed_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/tensor/model_tensor_fixed_divider.vhd
 
-verilog work ../../../../../../../bench/verilog/code/procedures/model/arithmetic/float/model_float_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/procedures/model/arithmetic/float/model_float_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/procedures/model/arithmetic/float/model_float_testbench.sv
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/fixed/model_fixed_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/fixed/model_fixed_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/fixed/model_fixed_testbench.vhd

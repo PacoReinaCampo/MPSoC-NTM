@@ -1,36 +1,36 @@
-verilog work ../../../../../../../rtl/verilog/code/pkg/accelerator_arithmetic_pkg.sv
-verilog work ../../../../../../../rtl/verilog/code/pkg/accelerator_math_pkg.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/pkg/accelerator_math_pkg.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/vector/accelerator_vector_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/vector/accelerator_vector_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/vector/accelerator_vector_float_divider.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/vector/accelerator_vector_float_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/vector/accelerator_vector_float_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/vector/accelerator_vector_float_divider.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/matrix/accelerator_matrix_float_adder.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/matrix/accelerator_matrix_float_multiplier.sv
-verilog work ../../../../../../../rtl/verilog/code/arithmetic/float/matrix/accelerator_matrix_float_divider.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/accelerator_matrix_float_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/accelerator_matrix_float_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/matrix/accelerator_matrix_float_divider.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/math/series/scalar/accelerator_scalar_cosh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/scalar/accelerator_scalar_exponentiator_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/scalar/accelerator_scalar_logarithm_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/scalar/accelerator_scalar_sinh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/scalar/accelerator_scalar_tanh_function.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_exponentiator_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_logarithm_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/scalar/accelerator_scalar_tanh_function.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/math/series/vector/accelerator_vector_cosh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/vector/accelerator_vector_exponentiator_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/vector/accelerator_vector_logarithm_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/vector/accelerator_vector_sinh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/vector/accelerator_vector_tanh_function.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_exponentiator_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_logarithm_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/vector/accelerator_vector_tanh_function.vhd
 
-verilog work ../../../../../../../rtl/verilog/code/math/series/matrix/accelerator_matrix_cosh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/matrix/accelerator_matrix_exponentiator_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/matrix/accelerator_matrix_logarithm_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/matrix/accelerator_matrix_sinh_function.sv
-verilog work ../../../../../../../rtl/verilog/code/math/series/matrix/accelerator_matrix_tanh_function.sv
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_exponentiator_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_logarithm_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_tanh_function.vhd
 
-verilog work ../../../../../../../bench/verilog/code/procedures/design/math/series/accelerator_series_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/procedures/design/math/series/accelerator_series_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/procedures/design/math/series/accelerator_series_testbench.sv
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_testbench.vhd

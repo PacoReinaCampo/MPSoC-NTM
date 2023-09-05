@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab model_function_testbench
-	xsim -R model_function_testbench
+	xelab model_series_testbench
+	xsim -R model_series_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

@@ -1,43 +1,43 @@
-verilog work ../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
-verilog work ../../../../../../../model/verilog/code/pkg/model_math_pkg.sv
-verilog work ../../../../../../../model/verilog/code/pkg/model_state_pkg.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_state_pkg.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/vector/model_vector_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_adder.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_multiplier.sv
-verilog work ../../../../../../../model/verilog/code/arithmetic/float/matrix/model_matrix_float_divider.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_adder.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_divider.vhd
 
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_dot_product.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_convolution.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_cosine_similarity.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_multiplication.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_summation.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/vector/model_vector_module.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_dot_product.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_convolution.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_cosine_similarity.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_multiplication.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_summation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_module.vhd
 
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_convolution.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_inverse.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_multiplication.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_product.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_summation.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/matrix/model_matrix_transpose.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_convolution.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_inverse.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_multiplication.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_product.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_summation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/matrix/model_matrix_transpose.vhd
 
-verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_convolution.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_inverse.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_product.sv
-verilog work ../../../../../../../model/verilog/code/math/algebra/tensor/model_tensor_transpose.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_convolution.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_inverse.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_product.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_transpose.vhd
 
-verilog work ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_feedforward.sv
-verilog work ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_input.sv
-verilog work ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_output.sv
-verilog work ../../../../../../../model/verilog/code/state/feedback/model_state_matrix_state.sv
+vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_feedforward.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_input.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_output.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_state.vhd
 
-verilog work ../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_pkg.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_stimulus.sv
-verilog work ../../../../../../../bench/verilog/code/tests/model/state/feedback/model_state_feedback_testbench.sv
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/state/feedback/model_state_feedback_testbench.vhd

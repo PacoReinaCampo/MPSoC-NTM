@@ -1619,7 +1619,7 @@ begin
       if (STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_DIVIDER_CASE 0    ";
+        MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_DIVIDER_CASE 0                            ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS

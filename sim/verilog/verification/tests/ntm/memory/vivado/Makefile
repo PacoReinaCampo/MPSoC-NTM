@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab model_memory_testbench
-	xsim -R model_memory_testbench
+	xelab accelerator_memory_testbench
+	xsim -R accelerator_memory_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

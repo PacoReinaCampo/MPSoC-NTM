@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab model_convolutional_transformer_testbench
-	xsim -R model_convolutional_transformer_testbench
+	xelab accelerator_trainer_transformer_testbench
+	xsim -R accelerator_trainer_transformer_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil

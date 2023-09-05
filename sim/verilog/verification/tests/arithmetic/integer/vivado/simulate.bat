@@ -1,7 +1,7 @@
 @echo off
 call ../../../../../../../settings64_vivado.bat
 
-xvlog -prj system.prj
-xelab model_integer_testbench
-xsim -R model_integer_testbench
+xvhdl -prj system.prj
+xelab accelerator_integer_testbench
+xsim -R accelerator_integer_testbench
 pause

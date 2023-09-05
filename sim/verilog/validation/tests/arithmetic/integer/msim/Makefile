@@ -2,7 +2,7 @@ all: build simulate
 
 build:
 	if [ ! -e work ]; then vlib work; fi
-	vlog -sv -stats=none -f system.vc
+	vcom -2008 -f system.vc
 
 simulate:
 	vsim -c -do run.do work.model_integer_testbench

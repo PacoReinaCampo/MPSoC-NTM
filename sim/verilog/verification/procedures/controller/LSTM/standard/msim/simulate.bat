@@ -1,7 +1,7 @@
 @echo off
-call ../../../../../../../../settings64_msim.bat
+call ../../../../../../../settings64_msim.bat
 
 vlib work
-vlog -sv -stats=none -f system.vc
-vsim -c -do run.do work.model_standard_lstm_testbench
+vcom -2008 -f system.vc
+vsim -c -do run.do work.accelerator_standard_lstm_testbench
 pause

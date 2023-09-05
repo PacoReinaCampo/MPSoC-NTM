@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
 	xelab model_write_heads_testbench

@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab model_standard_fnn_testbench
-	xsim -R model_standard_fnn_testbench
+	xelab accelerator_standard_fnn_testbench
+	xsim -R accelerator_standard_fnn_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
