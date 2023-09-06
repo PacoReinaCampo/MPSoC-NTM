@@ -11,9 +11,9 @@ vlib work
 ##################################################################################################
 
 alias model_scalar_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.sv
 }
 
 ##################################################################################################
@@ -21,9 +21,9 @@ alias model_scalar_logistic_function_design_compilation {
 ##################################################################################################
 
 alias model_scalar_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.sv
 }
 
 ##################################################################################################
@@ -31,10 +31,10 @@ alias model_scalar_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_logistic_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/vector/model_vector_logistic_function.sv
 }
 
 ##################################################################################################
@@ -42,10 +42,10 @@ alias model_vector_logistic_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_oneplus_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/vector/model_vector_oneplus_function.sv
 }
 
 ##################################################################################################
@@ -53,11 +53,11 @@ alias model_vector_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_logistic_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/model_matrix_logistic_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_logistic_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/vector/model_vector_logistic_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/matrix/model_matrix_logistic_function.sv
 }
 
 ##################################################################################################
@@ -65,12 +65,12 @@ alias model_matrix_logistic_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/model_vector_oneplus_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/model_matrix_oneplus_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/scalar/model_scalar_oneplus_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/vector/model_vector_oneplus_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/function/matrix/model_matrix_oneplus_function.sv
 }
 
 ##################################################################################################

@@ -11,14 +11,14 @@ vlib work
 ##################################################################################################
 
 alias accelerator_dot_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_dot_product.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_dot_product.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_dot_product.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_dot_product.sv
 }
 
 ##################################################################################################
@@ -26,14 +26,14 @@ alias accelerator_dot_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_convolution.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_convolution.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_convolution.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_convolution.sv
 }
 
 ##################################################################################################
@@ -41,14 +41,14 @@ alias accelerator_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_cosine_similarity_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_cosine_similarity.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_cosine_similarity.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_cosine_similarity.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_cosine_similarity.sv
 }
 
 ##################################################################################################
@@ -56,13 +56,13 @@ alias accelerator_vector_cosine_similarity_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_multiplication_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_multiplication.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_multiplication.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_multiplication.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_multiplication.sv
 }
 
 ##################################################################################################
@@ -70,13 +70,13 @@ alias accelerator_vector_multiplication_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_summation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_summation.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_summation.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_summation.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_summation.sv
 }
 
 ##################################################################################################
@@ -84,12 +84,12 @@ alias accelerator_vector_summation_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_module_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_module.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_module.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/vector/model_vector_module.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/accelerator_vector_module.sv
 }
 
 ##################################################################################################
@@ -97,12 +97,12 @@ alias accelerator_vector_module_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_convolution.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_convolution.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_convolution.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_convolution.sv
 }
 
 ##################################################################################################
@@ -110,12 +110,12 @@ alias accelerator_matrix_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_vector_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_convolution.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_vector_convolution.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_convolution.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_vector_convolution.sv
 }
 
 ##################################################################################################
@@ -123,14 +123,14 @@ alias accelerator_matrix_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_inverse_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_inverse.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_inverse.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_inverse.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_inverse.sv
 }
 
 ##################################################################################################
@@ -138,12 +138,12 @@ alias accelerator_matrix_inverse_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_multiplication_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_multiplication.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_multiplication.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_multiplication.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_multiplication.sv
 }
 
 ##################################################################################################
@@ -151,14 +151,14 @@ alias accelerator_matrix_multiplication_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_product.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_product.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_product.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_product.sv
 }
 
 ##################################################################################################
@@ -166,14 +166,14 @@ alias accelerator_matrix_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_vector_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_product.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_vector_product.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_product.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_vector_product.sv
 }
 
 ##################################################################################################
@@ -181,13 +181,13 @@ alias accelerator_matrix_vector_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_summation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_summation.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_summation.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_summation.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_summation.sv
 }
 
 ##################################################################################################
@@ -195,12 +195,12 @@ alias accelerator_matrix_summation_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_transpose_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_transpose.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_transpose.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_transpose.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/accelerator_matrix_transpose.sv
 }
 
 ##################################################################################################
@@ -208,14 +208,14 @@ alias accelerator_matrix_transpose_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_convolution.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_convolution.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_convolution.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_convolution.sv
 }
 
 ##################################################################################################
@@ -223,14 +223,14 @@ alias accelerator_tensor_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_matrix_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_convolution.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_matrix_convolution.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_convolution.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_matrix_convolution.sv
 }
 
 ##################################################################################################
@@ -238,14 +238,14 @@ alias accelerator_tensor_matrix_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_inverse_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_inverse.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_inverse.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_inverse.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_inverse.sv
 }
 
 ##################################################################################################
@@ -253,14 +253,14 @@ alias accelerator_tensor_inverse_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_product.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_product.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_product.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_product.sv
 }
 
 ##################################################################################################
@@ -268,14 +268,14 @@ alias accelerator_tensor_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_matrix_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_product.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_matrix_product.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_product.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_matrix_product.sv
 }
 
 ##################################################################################################
@@ -283,12 +283,12 @@ alias accelerator_tensor_matrix_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_transpose_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_transpose.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_transpose.vhd
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/math/algebra/tensor/model_tensor_transpose.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/accelerator_tensor_transpose.sv
 }
 
 ##################################################################################################

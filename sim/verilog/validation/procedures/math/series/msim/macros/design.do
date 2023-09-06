@@ -11,9 +11,9 @@ vlib work
 ##################################################################################################
 
 alias model_scalar_cosh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.sv
 }
 
 ##################################################################################################
@@ -21,9 +21,9 @@ alias model_scalar_cosh_function_design_compilation {
 ##################################################################################################
 
 alias model_scalar_exponentiator_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.sv
 }
 
 ##################################################################################################
@@ -31,9 +31,9 @@ alias model_scalar_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias model_scalar_logarithm_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.sv
 }
 
 ##################################################################################################
@@ -41,9 +41,9 @@ alias model_scalar_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias model_scalar_sinh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.sv
 }
 
 ##################################################################################################
@@ -51,9 +51,9 @@ alias model_scalar_sinh_function_design_compilation {
 ##################################################################################################
 
 alias model_scalar_tanh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.sv
 }
 
 ##################################################################################################
@@ -61,10 +61,10 @@ alias model_scalar_tanh_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_cosh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_cosh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_cosh_function.sv
 }
 
 ##################################################################################################
@@ -72,10 +72,10 @@ alias model_vector_cosh_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_exponentiator_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_exponentiator_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_exponentiator_function.sv
 }
 
 ##################################################################################################
@@ -83,10 +83,10 @@ alias model_vector_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_logarithm_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_logarithm_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_logarithm_function.sv
 }
 
 ##################################################################################################
@@ -94,10 +94,10 @@ alias model_vector_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_sinh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_sinh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_sinh_function.sv
 }
 
 ##################################################################################################
@@ -105,10 +105,10 @@ alias model_vector_sinh_function_design_compilation {
 ##################################################################################################
 
 alias model_vector_tanh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_tanh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_tanh_function.sv
 }
 
 ##################################################################################################
@@ -116,11 +116,11 @@ alias model_vector_tanh_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_cosh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_cosh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_cosh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_cosh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_cosh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_cosh_function.sv
 }
 
 ##################################################################################################
@@ -128,11 +128,11 @@ alias model_matrix_cosh_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_exponentiator_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_exponentiator_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_exponentiator_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_exponentiator_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_exponentiator_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_exponentiator_function.sv
 }
 
 ##################################################################################################
@@ -140,11 +140,11 @@ alias model_matrix_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_logarithm_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_logarithm_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_logarithm_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_logarithm_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_logarithm_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_logarithm_function.sv
 }
 
 ##################################################################################################
@@ -152,11 +152,11 @@ alias model_matrix_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_sinh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_sinh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_sinh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_sinh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_sinh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_sinh_function.sv
 }
 
 ##################################################################################################
@@ -164,11 +164,11 @@ alias model_matrix_sinh_function_design_compilation {
 ##################################################################################################
 
 alias model_matrix_tanh_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/model_vector_tanh_function.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_tanh_function.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/scalar/model_scalar_tanh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/vector/model_vector_tanh_function.sv
+  vlog -sv -reportprogress 300 -work work $design_path/math/series/matrix/model_matrix_tanh_function.sv
 }
 
 ##################################################################################################

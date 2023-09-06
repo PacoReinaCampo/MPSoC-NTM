@@ -1,0 +1,5 @@
+../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+
+../../../../../../../bench/vhdl/code/tests/model/arithmetic/integer/model_integer_pkg.vhd
+../../../../../../../bench/vhdl/code/tests/model/arithmetic/integer/model_integer_stimulus.vhd
+../../../../../../../bench/vhdl/code/tests/model/arithmetic/integer/model_integer_testbench.vhd

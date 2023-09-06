@@ -11,8 +11,8 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.sv
 }
 
 ##################################################################################################
@@ -20,8 +20,8 @@ alias accelerator_scalar_integer_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.sv
 }
 
 ##################################################################################################
@@ -29,8 +29,8 @@ alias accelerator_scalar_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.sv
 }
 
 ##################################################################################################
@@ -38,9 +38,9 @@ alias accelerator_scalar_integer_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_adder.sv
 }
 
 ##################################################################################################
@@ -48,9 +48,9 @@ alias accelerator_vector_integer_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_multiplier.sv
 }
 
 ##################################################################################################
@@ -58,9 +58,9 @@ alias accelerator_vector_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/vector/accelerator_vector_integer_divider.sv
 }
 
 ##################################################################################################
@@ -68,9 +68,9 @@ alias accelerator_vector_integer_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_adder.sv
 }
 
 ##################################################################################################
@@ -78,9 +78,9 @@ alias accelerator_matrix_integer_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_multiplier.sv
 }
 
 ##################################################################################################
@@ -88,9 +88,9 @@ alias accelerator_matrix_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/accelerator_matrix_integer_divider.sv
 }
 
 ##################################################################################################
@@ -98,9 +98,9 @@ alias accelerator_matrix_integer_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_adder.sv
 }
 
 ##################################################################################################
@@ -108,9 +108,9 @@ alias accelerator_tensor_integer_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_multiplier.sv
 }
 
 ##################################################################################################
@@ -118,9 +118,9 @@ alias accelerator_tensor_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/accelerator_scalar_integer_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/accelerator_tensor_integer_divider.sv
 }
 
 ##################################################################################################

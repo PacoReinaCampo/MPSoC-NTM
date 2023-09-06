@@ -7,120 +7,120 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# model_scalar_float_adder_design_compilation ######################################################
+# model_scalar_float_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias model_scalar_float_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
 }
 
 ##################################################################################################
-# model_scalar_float_multiplier_design_compilation #################################################
+# model_scalar_float_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias model_scalar_float_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
 }
 
 ##################################################################################################
-# model_scalar_float_divider_design_compilation ####################################################
+# model_scalar_float_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias model_scalar_float_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.sv
 }
 
 ##################################################################################################
-# model_vector_float_adder_design_compilation ######################################################
+# model_vector_float_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias model_vector_float_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_adder.sv
 }
 
 ##################################################################################################
-# model_vector_float_multiplier_design_compilation #################################################
+# model_vector_float_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias model_vector_float_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_multiplier.sv
 }
 
 ##################################################################################################
-# model_vector_float_divider_design_compilation ####################################################
+# model_vector_float_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias model_vector_float_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/vector/model_vector_float_divider.sv
 }
 
 ##################################################################################################
-# model_matrix_float_adder_design_compilation ######################################################
+# model_matrix_float_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias model_matrix_float_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_adder.sv
 }
 
 ##################################################################################################
-# model_matrix_float_multiplier_design_compilation #################################################
+# model_matrix_float_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias model_matrix_float_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_multiplier.sv
 }
 
 ##################################################################################################
-# model_matrix_float_divider_design_compilation ####################################################
+# model_matrix_float_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias model_matrix_float_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/matrix/model_matrix_float_divider.sv
 }
 
 ##################################################################################################
-# model_tensor_float_adder_design_compilation ######################################################
+# model_tensor_float_adder_design_compilation ####################################################
 ##################################################################################################
 
 alias model_tensor_float_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_adder.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_adder.sv
 }
 
 ##################################################################################################
-# model_tensor_float_multiplier_design_compilation #################################################
+# model_tensor_float_multiplier_design_compilation ###############################################
 ##################################################################################################
 
 alias model_tensor_float_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_multiplier.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_multiplier.sv
 }
 
 ##################################################################################################
-# model_tensor_float_divider_design_compilation ####################################################
+# model_tensor_float_divider_design_compilation ##################################################
 ##################################################################################################
 
 alias model_tensor_float_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_divider.vhd
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_divider.sv
+  vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/tensor/model_tensor_float_divider.sv
 }
 
 ##################################################################################################

@@ -125,7 +125,7 @@ module model_scalar_integer_adder #(
           // Data Outputs
           if (OPERATION == 1'b1) begin
             DATA_OUT         <= data_a_int - data_b_int;
-          else
+          end else begin
             DATA_OUT         <= data_a_int + data_b_int;
           end
 
