@@ -1,4 +1,4 @@
-../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+../../../../../../../model/verilog/code/pkg/model_arithmetic_verilog_pkg.sv
 
 ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_adder.sv
 ../../../../../../../model/verilog/code/arithmetic/float/scalar/model_scalar_float_multiplier.sv

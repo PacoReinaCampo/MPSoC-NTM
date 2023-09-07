@@ -44,7 +44,7 @@ use ieee.math_real.all;
 use ieee.fixed_pkg.all;
 use ieee.float_pkg.all;
 
-package model_arithmetic_pkg is
+package model_arithmetic_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Constants
@@ -1598,9 +1598,9 @@ package model_arithmetic_pkg is
     seed2_in : integer
     ) return tensor_buffer;
 
-end model_arithmetic_pkg;
+end model_arithmetic_vhdl_pkg;
 
-package body model_arithmetic_pkg is
+package body model_arithmetic_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Functions
@@ -2496,4 +2496,4 @@ package body model_arithmetic_pkg is
     return random_sample;
   end function tensor_randomness_generation;
 
-end model_arithmetic_pkg;
+end model_arithmetic_vhdl_pkg;

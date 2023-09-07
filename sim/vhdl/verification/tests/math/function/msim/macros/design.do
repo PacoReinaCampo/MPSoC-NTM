@@ -11,8 +11,8 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -25,8 +25,8 @@ alias accelerator_scalar_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_logarithm_function.vhd
@@ -38,8 +38,8 @@ alias accelerator_scalar_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -52,8 +52,8 @@ alias accelerator_vector_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_logarithm_function.vhd
@@ -66,8 +66,8 @@ alias accelerator_vector_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
@@ -81,8 +81,8 @@ alias accelerator_matrix_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/accelerator_scalar_logarithm_function.vhd

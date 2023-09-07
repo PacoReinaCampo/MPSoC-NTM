@@ -1,4 +1,4 @@
-vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_verilog_pkg.vhd
 
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package accelerator_math_pkg;
+package accelerator_math_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

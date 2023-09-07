@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_lstm_controller_pkg;
+package accelerator_lstm_controller_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

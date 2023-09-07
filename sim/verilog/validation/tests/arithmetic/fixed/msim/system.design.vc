@@ -1,4 +1,4 @@
-../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+../../../../../../../model/verilog/code/pkg/model_arithmetic_verilog_pkg.sv
 
 ../../../../../../../model/verilog/code/arithmetic/fixed/scalar/model_scalar_fixed_adder.sv
 ../../../../../../../model/verilog/code/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.sv

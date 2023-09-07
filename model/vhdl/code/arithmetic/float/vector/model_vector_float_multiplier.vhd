@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
 
 entity model_vector_float_multiplier is
   generic (

@@ -1,8 +1,8 @@
 all: build simulate
 
 build:
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/pkg/model_fnn_controller_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../model/vhdl/code/pkg/model_math_verilog_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../model/vhdl/code/pkg/model_fnn_controller_verilog_pkg.vhd
 
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/float/scalar/model_scalar_float_adder.vhd
 	ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/float/scalar/model_scalar_float_multiplier.vhd

@@ -1,4 +1,4 @@
-../../../../../../../model/verilog/code/pkg/model_arithmetic_pkg.sv
+../../../../../../../model/verilog/code/pkg/model_arithmetic_verilog_pkg.sv
 
 ../../../../../../../model/verilog/code/arithmetic/integer/scalar/model_scalar_integer_adder.sv
 ../../../../../../../model/verilog/code/arithmetic/integer/scalar/model_scalar_integer_multiplier.sv
@@ -8,7 +8,7 @@
 ../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_multiplier.sv
 ../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_divider.sv
 
-../../../../../../../model/verilog/code/arithmetic/integer/vector/model_vector_integer_divider.sv
+../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_adder.sv
 ../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_multiplier.sv
 ../../../../../../../model/verilog/code/arithmetic/integer/matrix/model_matrix_integer_divider.sv
 

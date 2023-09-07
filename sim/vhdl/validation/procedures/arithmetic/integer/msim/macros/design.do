@@ -11,7 +11,7 @@ vlib work
 ##################################################################################################
 
 alias model_scalar_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_adder.vhd
 }
 
@@ -20,7 +20,7 @@ alias model_scalar_integer_adder_design_compilation {
 ##################################################################################################
 
 alias model_scalar_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd
 }
 
@@ -29,7 +29,7 @@ alias model_scalar_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias model_scalar_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_divider.vhd
 }
 
@@ -38,7 +38,7 @@ alias model_scalar_integer_divider_design_compilation {
 ##################################################################################################
 
 alias model_vector_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/model_vector_integer_adder.vhd
 }
@@ -48,7 +48,7 @@ alias model_vector_integer_adder_design_compilation {
 ##################################################################################################
 
 alias model_vector_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/model_vector_integer_multiplier.vhd
 }
@@ -58,7 +58,7 @@ alias model_vector_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias model_vector_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/model_vector_integer_divider.vhd
 }
@@ -68,7 +68,7 @@ alias model_vector_integer_divider_design_compilation {
 ##################################################################################################
 
 alias model_matrix_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/model_matrix_integer_adder.vhd
 }
@@ -78,7 +78,7 @@ alias model_matrix_integer_adder_design_compilation {
 ##################################################################################################
 
 alias model_matrix_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/model_matrix_integer_multiplier.vhd
 }
@@ -88,7 +88,7 @@ alias model_matrix_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias model_matrix_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/model_matrix_integer_divider.vhd
 }
@@ -98,7 +98,7 @@ alias model_matrix_integer_divider_design_compilation {
 ##################################################################################################
 
 alias model_tensor_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/model_tensor_integer_adder.vhd
 }
@@ -108,7 +108,7 @@ alias model_tensor_integer_adder_design_compilation {
 ##################################################################################################
 
 alias model_tensor_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/model_tensor_integer_multiplier.vhd
 }
@@ -118,7 +118,7 @@ alias model_tensor_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias model_tensor_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/model_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/model_tensor_integer_divider.vhd
 }

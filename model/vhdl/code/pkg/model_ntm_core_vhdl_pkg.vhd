@@ -40,11 +40,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
-use work.model_math_pkg.all;
-use work.model_fnn_controller_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.model_math_vhdl_pkg.all;
+use work.model_fnn_controller_vhdl_pkg.all;
 
-package model_ntm_core_pkg is
+package model_ntm_core_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Components
@@ -686,9 +686,9 @@ package model_ntm_core_pkg is
     matrix_q_input : matrix_buffer
     ) return vector_buffer;
 
-end model_ntm_core_pkg;
+end model_ntm_core_vhdl_pkg;
 
-package body model_ntm_core_pkg is
+package body model_ntm_core_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- READ HEADS
@@ -1500,4 +1500,4 @@ package body model_ntm_core_pkg is
     end loop;
   end function function_model_top;
 
-end model_ntm_core_pkg;
+end model_ntm_core_vhdl_pkg;

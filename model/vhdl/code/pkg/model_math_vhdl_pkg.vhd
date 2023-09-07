@@ -44,9 +44,9 @@ use ieee.math_real.all;
 use ieee.fixed_pkg.all;
 use ieee.float_pkg.all;
 
-use work.model_arithmetic_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
 
-package model_math_pkg is
+package model_math_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Components
@@ -2289,9 +2289,9 @@ package model_math_pkg is
     matrix_mean  : matrix_buffer
     ) return matrix_buffer;
 
-end model_math_pkg;
+end model_math_vhdl_pkg;
 
-package body model_math_pkg is
+package body model_math_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Functions
@@ -4462,4 +4462,4 @@ package body model_math_pkg is
     return matrix_output;
   end function function_model_matrix_deviation;
 
-end model_math_pkg;
+end model_math_vhdl_pkg;

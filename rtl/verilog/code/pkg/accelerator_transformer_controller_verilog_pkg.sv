@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_ntm_core_pkg;
+package accelerator_transformer_controller_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

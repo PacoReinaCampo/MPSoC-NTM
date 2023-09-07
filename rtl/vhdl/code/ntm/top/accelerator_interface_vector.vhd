@@ -42,11 +42,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
+use work.accelerator_math_vhdl_pkg.all;
 
-use work.accelerator_lstm_controller_pkg.all;
-use work.accelerator_core_pkg.all;
+use work.accelerator_lstm_controller_vhdl_pkg.all;
+use work.accelerator_core_vhdl_pkg.all;
 
 entity accelerator_interface_vector is
   generic (

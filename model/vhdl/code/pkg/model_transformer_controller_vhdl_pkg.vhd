@@ -43,10 +43,10 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 use ieee.float_pkg.all;
 
-use work.model_arithmetic_pkg.all;
-use work.model_math_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.model_math_vhdl_pkg.all;
 
-package model_transformer_controller_pkg is
+package model_transformer_controller_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Components
@@ -1327,9 +1327,9 @@ package model_transformer_controller_pkg is
     tensor_pe_input : tensor_buffer
     ) return tensor_buffer;
 
-end model_transformer_controller_pkg;
+end model_transformer_controller_vhdl_pkg;
 
-package body model_transformer_controller_pkg is
+package body model_transformer_controller_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Functions
@@ -2538,4 +2538,4 @@ package body model_transformer_controller_pkg is
     return tensor_z_output;
   end function function_model_controller;
 
-end model_transformer_controller_pkg;
+end model_transformer_controller_vhdl_pkg;

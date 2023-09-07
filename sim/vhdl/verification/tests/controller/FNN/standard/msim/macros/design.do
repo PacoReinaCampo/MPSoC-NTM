@@ -11,9 +11,9 @@ vlib work
 ##################################################################################################
 
 alias accelerator_standard_fnn_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_fnn_controller_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_fnn_controller_vhdl_pkg.vhd
 
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd

@@ -15,7 +15,7 @@ do ./variables.do
 alias model_scalar_float_adder_verification_compilation {
   echo "TEST: NTM_SCALAR_FLOAT_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -45,7 +45,7 @@ alias model_scalar_float_adder_verification_compilation {
 alias model_scalar_float_multiplier_verification_compilation {
   echo "TEST: NTM_SCALAR_FLOAT_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -75,7 +75,7 @@ alias model_scalar_float_multiplier_verification_compilation {
 alias model_scalar_float_divider_verification_compilation {
   echo "TEST: NTM_SCALAR_FLOAT_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -105,7 +105,7 @@ alias model_scalar_float_divider_verification_compilation {
 alias model_vector_float_adder_verification_compilation {
   echo "TEST: NTM_VECTOR_FLOAT_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -135,7 +135,7 @@ alias model_vector_float_adder_verification_compilation {
 alias model_vector_float_multiplier_verification_compilation {
   echo "TEST: NTM_VECTOR_FLOAT_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -165,7 +165,7 @@ alias model_vector_float_multiplier_verification_compilation {
 alias model_vector_float_divider_verification_compilation {
   echo "TEST: NTM_VECTOR_FLOAT_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -195,7 +195,7 @@ alias model_vector_float_divider_verification_compilation {
 alias model_matrix_float_adder_verification_compilation {
   echo "TEST: NTM_MATRIX_FLOAT_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -225,7 +225,7 @@ alias model_matrix_float_adder_verification_compilation {
 alias model_matrix_float_multiplier_verification_compilation {
   echo "TEST: NTM_MATRIX_FLOAT_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -255,7 +255,7 @@ alias model_matrix_float_multiplier_verification_compilation {
 alias model_matrix_float_divider_verification_compilation {
   echo "TEST: NTM_MATRIX_FLOAT_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -285,7 +285,7 @@ alias model_matrix_float_divider_verification_compilation {
 alias model_tensor_float_adder_verification_compilation {
   echo "TEST: NTM_TENSOR_FLOAT_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -315,7 +315,7 @@ alias model_tensor_float_adder_verification_compilation {
 alias model_tensor_float_multiplier_verification_compilation {
   echo "TEST: NTM_TENSOR_FLOAT_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd
@@ -345,7 +345,7 @@ alias model_tensor_float_multiplier_verification_compilation {
 alias model_tensor_float_divider_verification_compilation {
   echo "TEST: NTM_TENSOR_FLOAT_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/model_float_testbench.vhd

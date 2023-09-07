@@ -40,9 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
 
-package accelerator_math_pkg is
+package accelerator_math_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Components
@@ -1733,4 +1733,4 @@ package accelerator_math_pkg is
       );
   end component;
 
-end accelerator_math_pkg;
+end accelerator_math_vhdl_pkg;

@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 use ieee.float_pkg.all;
 
-use work.accelerator_arithmetic_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
 
 entity accelerator_scalar_float_adder is
   generic (

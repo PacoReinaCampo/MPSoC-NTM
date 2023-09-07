@@ -44,8 +44,8 @@ use ieee.numeric_std.all;
 
 use ieee.float_pkg.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
+use work.accelerator_math_vhdl_pkg.all;
 
 entity accelerator_scalar_exponentiator_function is
   generic (

@@ -1,6 +1,6 @@
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_math_pkg.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_linear_controller_pkg.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_math_vhdl_pkg.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/pkg/accelerator_linear_controller_vhdl_pkg.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd

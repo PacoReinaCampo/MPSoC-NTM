@@ -42,8 +42,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
+use work.accelerator_math_vhdl_pkg.all;
 use work.accelerator_state_outputs_pkg.all;
 
 entity accelerator_state_outputs_stimulus is

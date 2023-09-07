@@ -1,4 +1,4 @@
-vhdl2008 work ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd

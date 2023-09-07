@@ -44,8 +44,8 @@ use ieee.numeric_std.all;
 
 use ieee.float_pkg.all;
 
-use work.model_arithmetic_pkg.all;
-use work.accelerator_arithmetic_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
 use work.accelerator_float_pkg.all;
 
 entity accelerator_float_testbench is

@@ -1,4 +1,4 @@
-../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
+../../../../../../../model/vhdl/code/pkg/model_arithmetic_verilog_pkg.vhd
 
 ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_adder.vhd
 ../../../../../../../model/vhdl/code/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.vhd

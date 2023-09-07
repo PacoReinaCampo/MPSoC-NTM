@@ -1,6 +1,6 @@
-../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
-../../../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
-../../../../../../../model/vhdl/code/pkg/model_fnn_controller_pkg.vhd
+../../../../../../../model/vhdl/code/pkg/model_arithmetic_verilog_pkg.vhd
+../../../../../../../model/vhdl/code/pkg/model_math_verilog_pkg.vhd
+../../../../../../../model/vhdl/code/pkg/model_fnn_controller_verilog_pkg.vhd
 
 ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_adder.vhd
 ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_multiplier.vhd

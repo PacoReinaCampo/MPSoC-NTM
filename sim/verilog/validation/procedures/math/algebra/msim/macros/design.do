@@ -11,8 +11,8 @@ vlib work
 ##################################################################################################
 
 alias model_dot_product_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_dot_product.sv
@@ -23,8 +23,8 @@ alias model_dot_product_design_compilation {
 ##################################################################################################
 
 alias model_vector_convolution_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_vector_convolution.sv
@@ -35,8 +35,8 @@ alias model_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias model_vector_cosine_similarity_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_vector_cosine_similarity.sv
@@ -47,8 +47,8 @@ alias model_vector_cosine_similarity_design_compilation {
 ##################################################################################################
 
 alias model_vector_multiplication_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_vector_multiplication.sv
 }
@@ -58,8 +58,8 @@ alias model_vector_multiplication_design_compilation {
 ##################################################################################################
 
 alias model_vector_summation_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_vector_summation.sv
 }
@@ -69,8 +69,8 @@ alias model_vector_summation_design_compilation {
 ##################################################################################################
 
 alias model_vector_module_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/vector/model_vector_module.sv
 }
 
@@ -79,8 +79,8 @@ alias model_vector_module_design_compilation {
 ##################################################################################################
 
 alias model_matrix_convolution_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_convolution.sv
@@ -91,8 +91,8 @@ alias model_matrix_convolution_design_compilation {
 ##################################################################################################
 
 alias model_matrix_vector_convolution_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_vector_convolution.sv
@@ -103,8 +103,8 @@ alias model_matrix_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias model_matrix_inverse_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_inverse.sv
@@ -115,8 +115,8 @@ alias model_matrix_inverse_design_compilation {
 ##################################################################################################
 
 alias model_matrix_multiplication_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_multiplication.sv
@@ -127,8 +127,8 @@ alias model_matrix_multiplication_design_compilation {
 ##################################################################################################
 
 alias model_matrix_product_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_product.sv
@@ -139,8 +139,8 @@ alias model_matrix_product_design_compilation {
 ##################################################################################################
 
 alias model_matrix_vector_product_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_vector_product.sv
@@ -151,8 +151,8 @@ alias model_matrix_vector_product_design_compilation {
 ##################################################################################################
 
 alias model_matrix_summation_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_summation.sv
 }
@@ -162,8 +162,8 @@ alias model_matrix_summation_design_compilation {
 ##################################################################################################
 
 alias model_matrix_transpose_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/matrix/model_matrix_transpose.sv
 }
 
@@ -172,8 +172,8 @@ alias model_matrix_transpose_design_compilation {
 ##################################################################################################
 
 alias model_tensor_convolution_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_convolution.sv
@@ -184,8 +184,8 @@ alias model_tensor_convolution_design_compilation {
 ##################################################################################################
 
 alias model_tensor_matrix_convolution_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_matrix_convolution.sv
@@ -196,8 +196,8 @@ alias model_tensor_matrix_convolution_design_compilation {
 ##################################################################################################
 
 alias model_tensor_inverse_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_inverse.sv
@@ -208,8 +208,8 @@ alias model_tensor_inverse_design_compilation {
 ##################################################################################################
 
 alias model_tensor_product_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_product.sv
@@ -220,8 +220,8 @@ alias model_tensor_product_design_compilation {
 ##################################################################################################
 
 alias model_tensor_matrix_product_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/model_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_matrix_product.sv
@@ -232,8 +232,8 @@ alias model_tensor_matrix_product_design_compilation {
 ##################################################################################################
 
 alias model_tensor_transpose_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/model_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/math/algebra/tensor/model_tensor_transpose.sv
 }
 

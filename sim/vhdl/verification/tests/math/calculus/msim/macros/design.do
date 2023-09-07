@@ -11,8 +11,8 @@ vlib work
 ##################################################################################################
 
 alias accelerator_vector_differentiation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/vector/accelerator_vector_differentiation.vhd
@@ -23,8 +23,8 @@ alias accelerator_vector_differentiation_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_integration_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/vector/accelerator_vector_integration.vhd
@@ -35,8 +35,8 @@ alias accelerator_vector_integration_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_softmax_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/vector/accelerator_vector_softmax.vhd
@@ -47,8 +47,8 @@ alias accelerator_vector_softmax_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_differentiation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/matrix/accelerator_matrix_differentiation.vhd
@@ -59,8 +59,8 @@ alias accelerator_matrix_differentiation_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_integration_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/matrix/accelerator_matrix_integration.vhd
@@ -71,8 +71,8 @@ alias accelerator_matrix_integration_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_softmax_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/matrix/accelerator_matrix_softmax.vhd
@@ -83,8 +83,8 @@ alias accelerator_matrix_softmax_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_differentiation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/tensor/accelerator_tensor_differentiation.vhd
@@ -95,8 +95,8 @@ alias accelerator_tensor_differentiation_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_integration_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/tensor/accelerator_tensor_integration.vhd
@@ -107,8 +107,8 @@ alias accelerator_tensor_integration_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_softmax_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/calculus/tensor/accelerator_tensor_softmax.vhd

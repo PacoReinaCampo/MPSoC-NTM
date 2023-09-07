@@ -40,10 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_arithmetic_pkg.all;
-use work.accelerator_math_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
+use work.accelerator_math_vhdl_pkg.all;
 
-package accelerator_fnn_controller_pkg is
+package accelerator_fnn_controller_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Components
@@ -243,4 +243,4 @@ package accelerator_fnn_controller_pkg is
       );
   end component;
 
-end accelerator_fnn_controller_pkg;
+end accelerator_fnn_controller_vhdl_pkg;

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package accelerator_fnn_controller_pkg;
+package model_linear_controller_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

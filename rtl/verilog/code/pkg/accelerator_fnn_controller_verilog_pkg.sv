@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_arithmetic_pkg;
+package accelerator_fnn_controller_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

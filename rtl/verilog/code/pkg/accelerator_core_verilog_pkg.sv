@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_state_pkg;
+package accelerator_core_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

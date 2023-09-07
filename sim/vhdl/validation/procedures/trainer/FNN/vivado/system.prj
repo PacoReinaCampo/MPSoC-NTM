@@ -1,6 +1,6 @@
-vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_fnn_controller_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_arithmetic_vhdl_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_math_vhdl_pkg.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/pkg/model_fnn_controller_vhdl_pkg.vhd
 
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_adder.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_multiplier.vhd

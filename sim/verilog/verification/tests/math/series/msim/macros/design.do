@@ -11,8 +11,8 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_cosh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -24,8 +24,8 @@ alias accelerator_scalar_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_exponentiator_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -37,8 +37,8 @@ alias accelerator_scalar_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_logarithm_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -50,8 +50,8 @@ alias accelerator_scalar_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_sinh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -63,8 +63,8 @@ alias accelerator_scalar_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_tanh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -76,8 +76,8 @@ alias accelerator_scalar_tanh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_cosh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -90,8 +90,8 @@ alias accelerator_vector_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_exponentiator_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -104,8 +104,8 @@ alias accelerator_vector_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_logarithm_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -118,8 +118,8 @@ alias accelerator_vector_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_sinh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -132,8 +132,8 @@ alias accelerator_vector_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_tanh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -146,8 +146,8 @@ alias accelerator_vector_tanh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_cosh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -161,8 +161,8 @@ alias accelerator_matrix_cosh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_exponentiator_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -176,8 +176,8 @@ alias accelerator_matrix_exponentiator_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_logarithm_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -191,8 +191,8 @@ alias accelerator_matrix_logarithm_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_sinh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv
@@ -206,8 +206,8 @@ alias accelerator_matrix_sinh_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_tanh_function_design_compilation {
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_pkg.sv
-  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
+  vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_math_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/float/scalar/accelerator_scalar_float_divider.sv

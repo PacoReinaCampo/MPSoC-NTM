@@ -1,7 +1,7 @@
 all: build simulate
 
 build:
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/fixed/scalar/accelerator_scalar_fixed_adder.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/fixed/scalar/accelerator_scalar_fixed_multiplier.vhd

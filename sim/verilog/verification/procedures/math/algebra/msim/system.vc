@@ -1,7 +1,7 @@
 ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
 ../../../../../../../model/vhdl/code/pkg/model_math_pkg.vhd
-../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
-../../../../../../../rtl/vhdl/code/pkg/accelerator_math_pkg.vhd
+../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_verilog_pkg.vhd
+../../../../../../../rtl/vhdl/code/pkg/accelerator_math_verilog_pkg.vhd
 
 ../../../../../../../model/vhdl/code/math/algebra/vector/model_dot_product.vhd
 ../../../../../../../model/vhdl/code/math/algebra/vector/model_vector_convolution.vhd

@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 use ieee.float_pkg.all;
 
-use work.model_arithmetic_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
 
 entity model_scalar_float_multiplier is
   generic (

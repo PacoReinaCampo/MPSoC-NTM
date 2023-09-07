@@ -42,8 +42,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
-use work.accelerator_arithmetic_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.accelerator_arithmetic_vhdl_pkg.all;
 use work.accelerator_integer_pkg.all;
 
 entity accelerator_integer_testbench is

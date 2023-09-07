@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-import model_arithmetic_pkg::*;
+import model_arithmetic_verilog_pkg::*;
 
 module model_scalar_float_divider #(
   parameter DATA_SIZE    = 64,

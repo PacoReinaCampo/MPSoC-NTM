@@ -1,5 +1,5 @@
 ../../../../../../../model/vhdl/code/pkg/model_arithmetic_pkg.vhd
-../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_verilog_pkg.vhd
 
 ../../../../../../../model/vhdl/code/arithmetic/integer/scalar/model_scalar_integer_adder.vhd
 ../../../../../../../model/vhdl/code/arithmetic/integer/scalar/model_scalar_integer_multiplier.vhd

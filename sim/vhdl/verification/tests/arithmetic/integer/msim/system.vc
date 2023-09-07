@@ -1,4 +1,4 @@
-../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
+../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
 
 ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_adder.vhd
 ../../../../../../../rtl/vhdl/code/arithmetic/integer/scalar/accelerator_scalar_integer_multiplier.vhd

@@ -180,12 +180,14 @@ code
 │       ├── accelerator_erasing.sv
 │       └── accelerator_writing.sv
 ├── pkg
-│   ├── accelerator_arithmetic_pkg.sv
-│   ├── accelerator_core_pkg.sv
-│   ├── accelerator_fnn_controller_pkg.sv
-│   ├── accelerator_lstm_controller_pkg.sv
-│   ├── accelerator_math_pkg.sv
-│   └── accelerator_state_pkg.sv
+│   ├── accelerator_arithmetic_verilog_pkg.sv
+│   ├── accelerator_core_verilog_pkg.sv
+│   ├── accelerator_fnn_controller_verilog_pkg.sv
+│   ├── accelerator_linear_controller_verilog_pkg.sv
+│   ├── accelerator_lstm_controller_verilog_pkg.sv
+│   ├── accelerator_math_verilog_pkg.sv
+│   ├── accelerator_state_verilog_pkg.sv
+│   └── accelerator_transformer_controller_verilog_pkg.sv
 ├── state
 │   ├── feedback
 │   │   ├── accelerator_state_matrix_feedforward.sv
@@ -245,4 +247,4 @@ code
         ├── accelerator_decoder.sv
         └── accelerator_encoder.sv
 
-79 directories, 166 files
+79 directories, 168 files

@@ -40,9 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_math_pkg.all;
-use work.model_lstm_controller_pkg.all;
-use work.model_ntm_core_pkg.all;
+use work.model_math_vhdl_pkg.all;
+use work.model_lstm_controller_vhdl_pkg.all;
+use work.model_ntm_core_vhdl_pkg.all;
 use work.model_top_pkg.all;
 
 entity model_top_testbench is

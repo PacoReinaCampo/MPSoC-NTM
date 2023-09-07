@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.accelerator_linear_controller_pkg.all;
+use work.accelerator_linear_controller_vhdl_pkg.all;
 
 use work.accelerator_convolutional_linear_pkg.all;
 

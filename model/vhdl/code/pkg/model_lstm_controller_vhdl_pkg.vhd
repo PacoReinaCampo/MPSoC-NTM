@@ -40,10 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
-use work.model_math_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.model_math_vhdl_pkg.all;
 
-package model_lstm_controller_pkg is
+package model_lstm_controller_vhdl_pkg is
   ------------------------------------------------------------------------------
   -- Types
   ------------------------------------------------------------------------------
@@ -1860,9 +1860,9 @@ package model_lstm_controller_pkg is
     vector_o_input : matrix_buffer
     ) return trainer_output;
 
-end model_lstm_controller_pkg;
+end model_lstm_controller_vhdl_pkg;
 
-package body model_lstm_controller_pkg is
+package body model_lstm_controller_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Functions
@@ -6003,4 +6003,4 @@ package body model_lstm_controller_pkg is
 
   end function function_model_lstm_output_trainer;
 
-end model_lstm_controller_pkg;
+end model_lstm_controller_vhdl_pkg;

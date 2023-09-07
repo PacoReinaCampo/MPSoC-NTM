@@ -1,6 +1,6 @@
-../../../../../../../accelerator/vhdl/code/pkg/accelerator_arithmetic_pkg.vhd
-../../../../../../../accelerator/vhdl/code/pkg/accelerator_math_pkg.vhd
-../../../../../../../accelerator/vhdl/code/pkg/accelerator_linear_controller_pkg.vhd
+../../../../../../../accelerator/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
+../../../../../../../accelerator/vhdl/code/pkg/accelerator_math_vhdl_pkg.vhd
+../../../../../../../accelerator/vhdl/code/pkg/accelerator_linear_controller_vhdl_pkg.vhd
 
 ../../../../../../../accelerator/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_adder.vhd
 ../../../../../../../accelerator/vhdl/code/arithmetic/float/scalar/accelerator_scalar_float_multiplier.vhd

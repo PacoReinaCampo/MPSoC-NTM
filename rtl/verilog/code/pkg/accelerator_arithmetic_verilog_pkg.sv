@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_transformer_controller_pkg;
+package accelerator_arithmetic_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types

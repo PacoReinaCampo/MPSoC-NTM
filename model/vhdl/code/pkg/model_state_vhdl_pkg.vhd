@@ -40,10 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.model_arithmetic_pkg.all;
-use work.model_math_pkg.all;
+use work.model_arithmetic_vhdl_pkg.all;
+use work.model_math_vhdl_pkg.all;
 
-package model_state_pkg is
+package model_state_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Types
@@ -623,9 +623,9 @@ package model_state_pkg is
     vector_data_u_input : in vector_buffer
     ) return vector_buffer;
 
-end model_state_pkg;
+end model_state_vhdl_pkg;
 
-package body model_state_pkg is
+package body model_state_vhdl_pkg is
 
   ------------------------------------------------------------------------------
   -- Functions
@@ -1470,4 +1470,4 @@ package body model_state_pkg is
     return vector_y_output;
   end function function_state_top;
 
-end model_state_pkg;
+end model_state_vhdl_pkg;

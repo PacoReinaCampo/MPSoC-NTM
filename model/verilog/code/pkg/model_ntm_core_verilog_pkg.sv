@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package model_linear_controller_pkg;
+package model_ntm_core_verilog_pkg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Types
