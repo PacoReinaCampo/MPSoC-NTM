@@ -15,6 +15,10 @@ do ./variables.do
 alias accelerator_scalar_logistic_function_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd
@@ -44,6 +48,10 @@ alias accelerator_scalar_logistic_function_verification_compilation {
 alias accelerator_scalar_oneplus_function_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd
@@ -73,6 +81,10 @@ alias accelerator_scalar_oneplus_function_verification_compilation {
 alias accelerator_vector_logistic_function_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd
@@ -102,6 +114,10 @@ alias accelerator_vector_logistic_function_verification_compilation {
 alias accelerator_vector_oneplus_function_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd
@@ -131,6 +147,10 @@ alias accelerator_vector_oneplus_function_verification_compilation {
 alias accelerator_matrix_logistic_function_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd
@@ -160,6 +180,10 @@ alias accelerator_matrix_logistic_function_verification_compilation {
 alias accelerator_matrix_oneplus_function_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/accelerator_function_testbench.vhd

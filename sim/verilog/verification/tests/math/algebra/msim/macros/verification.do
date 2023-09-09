@@ -16,6 +16,8 @@ alias accelerator_dot_product_verification_compilation {
   echo "TEST: ACCELERATOR_DOT_PRODUCT_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -46,6 +48,7 @@ alias accelerator_vector_convolution_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_CONVOLUTION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -76,6 +79,7 @@ alias accelerator_vector_cosine_similarity_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_COSINE_SIMILARITY_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -106,6 +110,7 @@ alias accelerator_vector_multiplication_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_MULTIPLICATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -136,6 +141,7 @@ alias accelerator_vector_summation_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_SUMMATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -166,6 +172,7 @@ alias accelerator_vector_module_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_MODULE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -196,6 +203,7 @@ alias accelerator_matrix_convolution_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_CONVOLUTION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -226,6 +234,7 @@ alias accelerator_matrix_vector_convolution_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -256,6 +265,7 @@ alias accelerator_matrix_inverse_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_INVERSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -286,6 +296,7 @@ alias accelerator_matrix_multiplication_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_MULTIPLICATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -316,6 +327,7 @@ alias accelerator_matrix_product_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_PRODUCT_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -346,6 +358,7 @@ alias accelerator_matrix_vector_product_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -376,6 +389,7 @@ alias accelerator_matrix_summation_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_SUMMATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -406,6 +420,7 @@ alias accelerator_matrix_transpose_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_TRANSPOSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -436,6 +451,7 @@ alias accelerator_tensor_convolution_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_CONVOLUTION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -466,6 +482,7 @@ alias accelerator_tensor_matrix_convolution_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -496,6 +513,7 @@ alias accelerator_tensor_inverse_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_INVERSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -526,6 +544,7 @@ alias accelerator_tensor_product_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_PRODUCT_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -556,6 +575,7 @@ alias accelerator_tensor_matrix_product_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd
@@ -586,6 +606,7 @@ alias accelerator_tensor_transpose_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_TRANSPOSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/accelerator_algebra_testbench.vhd

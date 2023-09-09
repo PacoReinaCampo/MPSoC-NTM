@@ -15,6 +15,10 @@ do ./variables.do
 alias accelerator_vector_differentiation_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -44,6 +48,10 @@ alias accelerator_vector_differentiation_verification_compilation {
 alias accelerator_vector_integration_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -73,6 +81,10 @@ alias accelerator_vector_integration_verification_compilation {
 alias accelerator_vector_softmax_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -102,6 +114,10 @@ alias accelerator_vector_softmax_verification_compilation {
 alias accelerator_matrix_differentiation_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -131,6 +147,10 @@ alias accelerator_matrix_differentiation_verification_compilation {
 alias accelerator_matrix_integration_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -160,6 +180,10 @@ alias accelerator_matrix_integration_verification_compilation {
 alias accelerator_matrix_softmax_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -189,6 +213,10 @@ alias accelerator_matrix_softmax_verification_compilation {
 alias accelerator_tensor_differentiation_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -218,6 +246,10 @@ alias accelerator_tensor_differentiation_verification_compilation {
 alias accelerator_tensor_integration_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
@@ -247,6 +279,10 @@ alias accelerator_tensor_integration_verification_compilation {
 alias accelerator_tensor_softmax_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_math_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_math_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/accelerator_calculus_testbench.vhd
