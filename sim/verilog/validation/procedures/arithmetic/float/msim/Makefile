@@ -2,7 +2,8 @@ all: build simulate
 
 build:
 	if [ ! -e work ]; then vlib work; fi
-	vcom -2008 -f system.vc
+	vlog -sv -f system.design.vc
+	vcom -2008 -f system.validation.vc
 
 simulate:
 	vsim -c -do run.do work.model_float_testbench

@@ -15,6 +15,7 @@ do ./variables.do
 alias model_vector_differentiation_verification_compilation {
   echo "TEST: NTM_VECTOR_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -44,6 +45,7 @@ alias model_vector_differentiation_verification_compilation {
 alias model_vector_integration_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -73,6 +75,7 @@ alias model_vector_integration_verification_compilation {
 alias model_vector_softmax_verification_compilation {
   echo "TEST: NTM_VECTOR_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -102,6 +105,7 @@ alias model_vector_softmax_verification_compilation {
 alias model_matrix_differentiation_verification_compilation {
   echo "TEST: NTM_MATRIX_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -131,6 +135,7 @@ alias model_matrix_differentiation_verification_compilation {
 alias model_matrix_integration_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -160,6 +165,7 @@ alias model_matrix_integration_verification_compilation {
 alias model_matrix_softmax_verification_compilation {
   echo "TEST: NTM_MATRIX_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -189,6 +195,7 @@ alias model_matrix_softmax_verification_compilation {
 alias model_tensor_differentiation_verification_compilation {
   echo "TEST: NTM_TENSOR_DIFFERENTIATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -218,6 +225,7 @@ alias model_tensor_differentiation_verification_compilation {
 alias model_tensor_integration_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGRATION_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
@@ -247,6 +255,7 @@ alias model_tensor_integration_verification_compilation {
 alias model_tensor_softmax_verification_compilation {
   echo "TEST: NTM_TENSOR_SOFTMAX_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd

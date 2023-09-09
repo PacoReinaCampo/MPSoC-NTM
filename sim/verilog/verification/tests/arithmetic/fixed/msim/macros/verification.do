@@ -15,6 +15,7 @@ do ./variables.do
 alias accelerator_scalar_fixed_adder_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FIXED_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -44,6 +45,7 @@ alias accelerator_scalar_fixed_adder_verification_compilation {
 alias accelerator_scalar_fixed_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -73,6 +75,7 @@ alias accelerator_scalar_fixed_multiplier_verification_compilation {
 alias accelerator_scalar_fixed_divider_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -102,6 +105,7 @@ alias accelerator_scalar_fixed_divider_verification_compilation {
 alias accelerator_vector_fixed_adder_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FIXED_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -131,6 +135,7 @@ alias accelerator_vector_fixed_adder_verification_compilation {
 alias accelerator_vector_fixed_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -160,6 +165,7 @@ alias accelerator_vector_fixed_multiplier_verification_compilation {
 alias accelerator_vector_fixed_divider_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -189,6 +195,7 @@ alias accelerator_vector_fixed_divider_verification_compilation {
 alias accelerator_matrix_fixed_adder_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FIXED_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -218,6 +225,7 @@ alias accelerator_matrix_fixed_adder_verification_compilation {
 alias accelerator_matrix_fixed_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -247,6 +255,7 @@ alias accelerator_matrix_fixed_multiplier_verification_compilation {
 alias accelerator_matrix_fixed_divider_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -276,6 +285,7 @@ alias accelerator_matrix_fixed_divider_verification_compilation {
 alias accelerator_tensor_fixed_adder_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FIXED_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -305,6 +315,7 @@ alias accelerator_tensor_fixed_adder_verification_compilation {
 alias accelerator_tensor_fixed_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd
@@ -334,6 +345,7 @@ alias accelerator_tensor_fixed_multiplier_verification_compilation {
 alias accelerator_tensor_fixed_divider_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/accelerator_fixed_testbench.vhd

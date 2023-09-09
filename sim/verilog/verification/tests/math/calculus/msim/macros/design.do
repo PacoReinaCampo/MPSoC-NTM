@@ -7,7 +7,7 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# accelerator_vector_differentiation_design_compilation ##################################################
+# accelerator_vector_differentiation_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_vector_differentiation_design_compilation {
@@ -19,7 +19,7 @@ alias accelerator_vector_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_integration_design_compilation ######################################################
+# accelerator_vector_integration_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_vector_integration_design_compilation {
@@ -31,7 +31,7 @@ alias accelerator_vector_integration_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_softmax_design_compilation ##########################################################
+# accelerator_vector_softmax_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_vector_softmax_design_compilation {
@@ -43,7 +43,7 @@ alias accelerator_vector_softmax_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_differentiation_design_compilation ##################################################
+# accelerator_matrix_differentiation_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_matrix_differentiation_design_compilation {
@@ -55,7 +55,7 @@ alias accelerator_matrix_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_integration_design_compilation ######################################################
+# accelerator_matrix_integration_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_matrix_integration_design_compilation {
@@ -67,7 +67,7 @@ alias accelerator_matrix_integration_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_softmax_design_compilation ##########################################################
+# accelerator_matrix_softmax_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_matrix_softmax_design_compilation {
@@ -79,7 +79,7 @@ alias accelerator_matrix_softmax_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_differentiation_design_compilation ##################################################
+# accelerator_tensor_differentiation_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_tensor_differentiation_design_compilation {
@@ -91,7 +91,7 @@ alias accelerator_tensor_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_integration_design_compilation ######################################################
+# accelerator_tensor_integration_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_tensor_integration_design_compilation {
@@ -103,7 +103,7 @@ alias accelerator_tensor_integration_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_softmax_design_compilation ##########################################################
+# accelerator_tensor_softmax_design_compilation ##################################################
 ##################################################################################################
 
 alias accelerator_tensor_softmax_design_compilation {

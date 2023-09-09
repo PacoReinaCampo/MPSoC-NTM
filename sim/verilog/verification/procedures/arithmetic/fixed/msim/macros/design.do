@@ -7,7 +7,7 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# accelerator_scalar_fixed_adder_design_compilation ####################################################
+# accelerator_scalar_fixed_adder_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_adder_design_compilation {
@@ -18,7 +18,7 @@ alias accelerator_scalar_fixed_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_scalar_fixed_multiplier_design_compilation ###############################################
+# accelerator_scalar_fixed_multiplier_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_multiplier_design_compilation {
@@ -29,7 +29,7 @@ alias accelerator_scalar_fixed_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_scalar_fixed_divider_design_compilation ##################################################
+# accelerator_scalar_fixed_divider_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_scalar_fixed_divider_design_compilation {
@@ -40,7 +40,7 @@ alias accelerator_scalar_fixed_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_adder_design_compilation ####################################################
+# accelerator_vector_fixed_adder_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_adder_design_compilation {
@@ -53,7 +53,7 @@ alias accelerator_vector_fixed_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_multiplier_design_compilation ###############################################
+# accelerator_vector_fixed_multiplier_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_multiplier_design_compilation {
@@ -66,7 +66,7 @@ alias accelerator_vector_fixed_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_fixed_divider_design_compilation ##################################################
+# accelerator_vector_fixed_divider_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_vector_fixed_divider_design_compilation {
@@ -79,7 +79,7 @@ alias accelerator_vector_fixed_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_adder_design_compilation ####################################################
+# accelerator_matrix_fixed_adder_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_adder_design_compilation {
@@ -92,7 +92,7 @@ alias accelerator_matrix_fixed_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_multiplier_design_compilation ###############################################
+# accelerator_matrix_fixed_multiplier_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_multiplier_design_compilation {
@@ -105,7 +105,7 @@ alias accelerator_matrix_fixed_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_fixed_divider_design_compilation ##################################################
+# accelerator_matrix_fixed_divider_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_matrix_fixed_divider_design_compilation {
@@ -118,7 +118,7 @@ alias accelerator_matrix_fixed_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_adder_design_compilation ####################################################
+# accelerator_tensor_fixed_adder_design_compilation ##############################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_adder_design_compilation {
@@ -131,7 +131,7 @@ alias accelerator_tensor_fixed_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_multiplier_design_compilation ###############################################
+# accelerator_tensor_fixed_multiplier_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_multiplier_design_compilation {
@@ -144,7 +144,7 @@ alias accelerator_tensor_fixed_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_fixed_divider_design_compilation ##################################################
+# accelerator_tensor_fixed_divider_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_tensor_fixed_divider_design_compilation {

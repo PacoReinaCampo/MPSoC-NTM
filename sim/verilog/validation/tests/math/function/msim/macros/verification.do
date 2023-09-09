@@ -15,6 +15,7 @@ do ./variables.do
 alias model_scalar_logistic_function_verification_compilation {
   echo "TEST: NTM_SCALAR_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd
@@ -44,6 +45,7 @@ alias model_scalar_logistic_function_verification_compilation {
 alias model_scalar_oneplus_function_verification_compilation {
   echo "TEST: NTM_SCALAR_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd
@@ -73,6 +75,7 @@ alias model_scalar_oneplus_function_verification_compilation {
 alias model_vector_logistic_function_verification_compilation {
   echo "TEST: NTM_VECTOR_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd
@@ -102,6 +105,7 @@ alias model_vector_logistic_function_verification_compilation {
 alias model_vector_oneplus_function_verification_compilation {
   echo "TEST: NTM_VECTOR_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd
@@ -131,6 +135,7 @@ alias model_vector_oneplus_function_verification_compilation {
 alias model_matrix_logistic_function_verification_compilation {
   echo "TEST: NTM_MATRIX_LOGISTIC_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd
@@ -160,6 +165,7 @@ alias model_matrix_logistic_function_verification_compilation {
 alias model_matrix_oneplus_function_verification_compilation {
   echo "TEST: NTM_MATRIX_ONEPLUS_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/model_function_testbench.vhd

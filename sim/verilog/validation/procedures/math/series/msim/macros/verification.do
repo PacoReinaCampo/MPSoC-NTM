@@ -15,6 +15,7 @@ do ./variables.do
 alias model_scalar_cosh_function_verification_compilation {
   echo "TEST: NTM_SCALAR_COSH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -44,6 +45,7 @@ alias model_scalar_cosh_function_verification_compilation {
 alias model_scalar_exponentiator_function_verification_compilation {
   echo "TEST: NTM_SCALAR_EXPONENTIATOR_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -73,6 +75,7 @@ alias model_scalar_exponentiator_function_verification_compilation {
 alias model_scalar_logarithm_function_verification_compilation {
   echo "TEST: NTM_SCALAR_LOGARITHM_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -102,6 +105,7 @@ alias model_scalar_logarithm_function_verification_compilation {
 alias model_scalar_sinh_function_verification_compilation {
   echo "TEST: NTM_SCALAR_SINH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -131,6 +135,7 @@ alias model_scalar_sinh_function_verification_compilation {
 alias model_scalar_tanh_function_verification_compilation {
   echo "TEST: NTM_SCALAR_TANH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -160,6 +165,7 @@ alias model_scalar_tanh_function_verification_compilation {
 alias model_vector_cosh_function_verification_compilation {
   echo "TEST: NTM_VECTOR_COSH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -189,6 +195,7 @@ alias model_vector_cosh_function_verification_compilation {
 alias model_vector_exponentiator_function_verification_compilation {
   echo "TEST: NTM_VECTOR_EXPONENTIATOR_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -218,6 +225,7 @@ alias model_vector_exponentiator_function_verification_compilation {
 alias model_vector_logarithm_function_verification_compilation {
   echo "TEST: NTM_VECTOR_LOGARITHM_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -247,6 +255,7 @@ alias model_vector_logarithm_function_verification_compilation {
 alias model_vector_sinh_function_verification_compilation {
   echo "TEST: NTM_VECTOR_SINH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -276,6 +285,7 @@ alias model_vector_sinh_function_verification_compilation {
 alias model_vector_tanh_function_verification_compilation {
   echo "TEST: NTM_VECTOR_TANH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -305,6 +315,7 @@ alias model_vector_tanh_function_verification_compilation {
 alias model_matrix_cosh_function_verification_compilation {
   echo "TEST: NTM_MATRIX_COSH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -334,6 +345,7 @@ alias model_matrix_cosh_function_verification_compilation {
 alias model_matrix_exponentiator_function_verification_compilation {
   echo "TEST: NTM_MATRIX_EXPONENTIATOR_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -363,6 +375,7 @@ alias model_matrix_exponentiator_function_verification_compilation {
 alias model_matrix_logarithm_function_verification_compilation {
   echo "TEST: NTM_MATRIX_LOGARITHM_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -392,6 +405,7 @@ alias model_matrix_logarithm_function_verification_compilation {
 alias model_matrix_sinh_function_verification_compilation {
   echo "TEST: NTM_MATRIX_SINH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd
@@ -421,6 +435,7 @@ alias model_matrix_sinh_function_verification_compilation {
 alias model_matrix_tanh_function_verification_compilation {
   echo "TEST: NTM_MATRIX_TANH_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/series/model_series_testbench.vhd

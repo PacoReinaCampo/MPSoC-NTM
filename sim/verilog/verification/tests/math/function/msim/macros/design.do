@@ -7,7 +7,7 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# accelerator_scalar_logistic_function_design_compilation ################################################
+# accelerator_scalar_logistic_function_design_compilation ########################################
 ##################################################################################################
 
 alias accelerator_scalar_logistic_function_design_compilation {
@@ -21,7 +21,7 @@ alias accelerator_scalar_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_scalar_oneplus_function_design_compilation #################################################
+# accelerator_scalar_oneplus_function_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_scalar_oneplus_function_design_compilation {
@@ -34,7 +34,7 @@ alias accelerator_scalar_oneplus_function_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_logistic_function_design_compilation ################################################
+# accelerator_vector_logistic_function_design_compilation ########################################
 ##################################################################################################
 
 alias accelerator_vector_logistic_function_design_compilation {
@@ -48,7 +48,7 @@ alias accelerator_vector_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_oneplus_function_design_compilation #################################################
+# accelerator_vector_oneplus_function_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_vector_oneplus_function_design_compilation {
@@ -62,7 +62,7 @@ alias accelerator_vector_oneplus_function_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_logistic_function_design_compilation ################################################
+# accelerator_matrix_logistic_function_design_compilation ########################################
 ##################################################################################################
 
 alias accelerator_matrix_logistic_function_design_compilation {
@@ -77,7 +77,7 @@ alias accelerator_matrix_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_oneplus_function_design_compilation #################################################
+# accelerator_matrix_oneplus_function_design_compilation #########################################
 ##################################################################################################
 
 alias accelerator_matrix_oneplus_function_design_compilation {

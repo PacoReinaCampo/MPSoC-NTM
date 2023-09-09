@@ -7,7 +7,7 @@ do ./variables.do
 vlib work
 
 ##################################################################################################
-# accelerator_scalar_integer_adder_design_compilation ####################################################
+# accelerator_scalar_integer_adder_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_scalar_integer_adder_design_compilation {
@@ -16,7 +16,7 @@ alias accelerator_scalar_integer_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_scalar_integer_multiplier_design_compilation ###############################################
+# accelerator_scalar_integer_multiplier_design_compilation #######################################
 ##################################################################################################
 
 alias accelerator_scalar_integer_multiplier_design_compilation {
@@ -25,7 +25,7 @@ alias accelerator_scalar_integer_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_scalar_integer_divider_design_compilation ##################################################
+# accelerator_scalar_integer_divider_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_scalar_integer_divider_design_compilation {
@@ -34,7 +34,7 @@ alias accelerator_scalar_integer_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_integer_adder_design_compilation ####################################################
+# accelerator_vector_integer_adder_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_vector_integer_adder_design_compilation {
@@ -44,7 +44,7 @@ alias accelerator_vector_integer_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_integer_multiplier_design_compilation ###############################################
+# accelerator_vector_integer_multiplier_design_compilation #######################################
 ##################################################################################################
 
 alias accelerator_vector_integer_multiplier_design_compilation {
@@ -54,7 +54,7 @@ alias accelerator_vector_integer_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_integer_divider_design_compilation ##################################################
+# accelerator_vector_integer_divider_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_vector_integer_divider_design_compilation {
@@ -64,7 +64,7 @@ alias accelerator_vector_integer_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_integer_adder_design_compilation ####################################################
+# accelerator_matrix_integer_adder_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_matrix_integer_adder_design_compilation {
@@ -74,7 +74,7 @@ alias accelerator_matrix_integer_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_integer_multiplier_design_compilation ###############################################
+# accelerator_matrix_integer_multiplier_design_compilation #######################################
 ##################################################################################################
 
 alias accelerator_matrix_integer_multiplier_design_compilation {
@@ -84,7 +84,7 @@ alias accelerator_matrix_integer_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_integer_divider_design_compilation ##################################################
+# accelerator_matrix_integer_divider_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_matrix_integer_divider_design_compilation {
@@ -94,7 +94,7 @@ alias accelerator_matrix_integer_divider_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_integer_adder_design_compilation ####################################################
+# accelerator_tensor_integer_adder_design_compilation ############################################
 ##################################################################################################
 
 alias accelerator_tensor_integer_adder_design_compilation {
@@ -104,7 +104,7 @@ alias accelerator_tensor_integer_adder_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_integer_multiplier_design_compilation ###############################################
+# accelerator_tensor_integer_multiplier_design_compilation #######################################
 ##################################################################################################
 
 alias accelerator_tensor_integer_multiplier_design_compilation {
@@ -114,7 +114,7 @@ alias accelerator_tensor_integer_multiplier_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_integer_divider_design_compilation ##################################################
+# accelerator_tensor_integer_divider_design_compilation ##########################################
 ##################################################################################################
 
 alias accelerator_tensor_integer_divider_design_compilation {

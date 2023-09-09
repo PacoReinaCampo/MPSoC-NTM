@@ -1,0 +1,5 @@
+../../../../../../../model/vhdl/code/pkg/model_arithmetic_vhdl_pkg.vhd
+
+../../../../../../../bench/vhdl/code/procedures/model/arithmetic/float/model_float_pkg.vhd
+../../../../../../../bench/vhdl/code/procedures/model/arithmetic/float/model_float_stimulus.vhd
+../../../../../../../bench/vhdl/code/procedures/model/arithmetic/float/model_float_testbench.vhd

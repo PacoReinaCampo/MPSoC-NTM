@@ -15,6 +15,8 @@ do ./variables.do
 alias accelerator_scalar_float_adder_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FLOAT_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -44,6 +46,8 @@ alias accelerator_scalar_float_adder_verification_compilation {
 alias accelerator_scalar_float_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -73,6 +77,8 @@ alias accelerator_scalar_float_multiplier_verification_compilation {
 alias accelerator_scalar_float_divider_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_FLOAT_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -102,6 +108,8 @@ alias accelerator_scalar_float_divider_verification_compilation {
 alias accelerator_vector_float_adder_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FLOAT_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -131,6 +139,8 @@ alias accelerator_vector_float_adder_verification_compilation {
 alias accelerator_vector_float_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -160,6 +170,8 @@ alias accelerator_vector_float_multiplier_verification_compilation {
 alias accelerator_vector_float_divider_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_FLOAT_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -189,6 +201,8 @@ alias accelerator_vector_float_divider_verification_compilation {
 alias accelerator_matrix_float_adder_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FLOAT_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -218,6 +232,8 @@ alias accelerator_matrix_float_adder_verification_compilation {
 alias accelerator_matrix_float_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -247,6 +263,8 @@ alias accelerator_matrix_float_multiplier_verification_compilation {
 alias accelerator_matrix_float_divider_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -276,6 +294,8 @@ alias accelerator_matrix_float_divider_verification_compilation {
 alias accelerator_tensor_float_adder_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FLOAT_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -305,6 +325,8 @@ alias accelerator_tensor_float_adder_verification_compilation {
 alias accelerator_tensor_float_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd
@@ -334,6 +356,8 @@ alias accelerator_tensor_float_multiplier_verification_compilation {
 alias accelerator_tensor_float_divider_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_FLOAT_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $model_pkg_path/model_arithmetic_vhdl_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/accelerator_float_testbench.vhd

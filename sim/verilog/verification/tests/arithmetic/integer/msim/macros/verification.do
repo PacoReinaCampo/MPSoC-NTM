@@ -15,6 +15,7 @@ do ./variables.do
 alias accelerator_scalar_integer_adder_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_INTEGER_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -44,6 +45,7 @@ alias accelerator_scalar_integer_adder_verification_compilation {
 alias accelerator_scalar_integer_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -73,6 +75,7 @@ alias accelerator_scalar_integer_multiplier_verification_compilation {
 alias accelerator_scalar_integer_divider_verification_compilation {
   echo "TEST: ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -102,6 +105,7 @@ alias accelerator_scalar_integer_divider_verification_compilation {
 alias accelerator_vector_integer_adder_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_INTEGER_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -131,6 +135,7 @@ alias accelerator_vector_integer_adder_verification_compilation {
 alias accelerator_vector_integer_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -160,6 +165,7 @@ alias accelerator_vector_integer_multiplier_verification_compilation {
 alias accelerator_vector_integer_divider_verification_compilation {
   echo "TEST: ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -189,6 +195,7 @@ alias accelerator_vector_integer_divider_verification_compilation {
 alias accelerator_matrix_integer_adder_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_INTEGER_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -218,6 +225,7 @@ alias accelerator_matrix_integer_adder_verification_compilation {
 alias accelerator_matrix_integer_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -247,6 +255,7 @@ alias accelerator_matrix_integer_multiplier_verification_compilation {
 alias accelerator_matrix_integer_divider_verification_compilation {
   echo "TEST: ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -276,6 +285,7 @@ alias accelerator_matrix_integer_divider_verification_compilation {
 alias accelerator_tensor_integer_adder_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_INTEGER_ADDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -305,6 +315,7 @@ alias accelerator_tensor_integer_adder_verification_compilation {
 alias accelerator_tensor_integer_multiplier_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
@@ -334,6 +345,7 @@ alias accelerator_tensor_integer_multiplier_verification_compilation {
 alias accelerator_tensor_integer_divider_verification_compilation {
   echo "TEST: ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST"
 
+  vcom -2008 -reportprogress 300 -work work $design_pkg_path/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/accelerator_integer_testbench.vhd
