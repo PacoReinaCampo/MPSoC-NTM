@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.scala' library > TREE-CHISEL.txt
+
+tree -f -i -P '*.scala' library > CREATE-CHISEL.sh
+sed -i '/.scala/!d' CREATE-CHISEL.sh
+sed -i 's/^/touch /g' CREATE-CHISEL.sh

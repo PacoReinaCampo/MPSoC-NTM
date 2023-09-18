@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.psl' code > TREE-PSL.txt
+
+tree -f -i -P '*.psl' code > CREATE-PSL.sh
+sed -i '/.psl/!d' CREATE-PSL.sh
+sed -i 's/^/touch /g' CREATE-PSL.sh

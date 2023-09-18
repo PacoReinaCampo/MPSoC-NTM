@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.c' code > TREE-C.txt
+
+tree -f -i -P '*.c' code > CREATE-C.sh
+sed -i '/.c/!d' CREATE-C.sh
+sed -i 's/^/touch /g' CREATE-C.sh

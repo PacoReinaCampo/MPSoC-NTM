@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.vhd' code > TREE-VHDL.txt
+
+tree -f -i -P '*.vhd' code > CREATE-VHDL.sh
+sed -i '/.vhd/!d' CREATE-VHDL.sh
+sed -i 's/^/touch /g' CREATE-VHDL.sh

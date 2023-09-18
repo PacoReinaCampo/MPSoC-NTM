@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.sv' code > TREE-VERILOG.txt
+
+tree -f -i -P '*.sv' code > CREATE-VERILOG.sh
+sed -i '/.sv/!d' CREATE-VERILOG.sh
+sed -i 's/^/touch /g' CREATE-VERILOG.sh

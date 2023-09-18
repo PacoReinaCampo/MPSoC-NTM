@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.dot' library > TREE-UML.txt
+
+tree -f -i -P '*.dot' library > CREATE-UML.sh
+sed -i '/.dot/!d' CREATE-UML.sh
+sed -i 's/^/touch /g' CREATE-UML.sh

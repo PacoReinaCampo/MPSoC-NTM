@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.scala' code > TREE-SCALA.txt
+
+tree -f -i -P '*.scala' code > CREATE-SCALA.sh
+sed -i '/.scala/!d' CREATE-SCALA.sh
+sed -i 's/^/touch /g' CREATE-SCALA.sh

@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.go' code > TREE-GO.txt
+
+tree -f -i -P '*.go' code > CREATE-GO.sh
+sed -i '/.go/!d' CREATE-GO.sh
+sed -i 's/^/touch /g' CREATE-GO.sh

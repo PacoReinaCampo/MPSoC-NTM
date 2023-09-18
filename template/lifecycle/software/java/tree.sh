@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.java' code > TREE-JAVA.txt
+
+tree -f -i -P '*.java' code > CREATE-JAVA.sh
+sed -i '/.java/!d' CREATE-JAVA.sh
+sed -i 's/^/touch /g' CREATE-JAVA.sh

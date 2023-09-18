@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.rs' code > TREE-RUST.txt
+
+tree -f -i -P '*.rs' code > CREATE-RUST.sh
+sed -i '/.rs/!d' CREATE-RUST.sh
+sed -i 's/^/touch /g' CREATE-RUST.sh

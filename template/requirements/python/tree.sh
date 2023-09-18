@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.py' code > TREE-PYTHON.txt
+
+tree -f -i -P '*.py' code > CREATE-PYTHON.sh
+sed -i '/.py/!d' CREATE-PYTHON.sh
+sed -i 's/^/touch /g' CREATE-PYTHON.sh

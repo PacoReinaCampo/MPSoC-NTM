@@ -43,3 +43,7 @@
 ###################################################################################
 
 tree -P '*.cpp' code > TREE-CPP.txt
+
+tree -f -i -P '*.cpp' code > CREATE-CPP.sh
+sed -i '/.cpp/!d' CREATE-CPP.sh
+sed -i 's/^/touch /g' CREATE-CPP.sh
