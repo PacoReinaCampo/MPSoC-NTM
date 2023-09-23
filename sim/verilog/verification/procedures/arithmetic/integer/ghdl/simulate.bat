@@ -22,6 +22,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/integer/tensor/accelera
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/integer/accelerator_integer_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/integer/accelerator_integer_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/integer/accelerator_integer_testbench.vhd
-ghdl -m --std=08 accelerator_integer_testbench
-ghdl -r --std=08 accelerator_integer_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_integer_testbench.tree
+ghdl -e --std=08 accelerator_integer_testbench
+ghdl -r --std=08 accelerator_integer_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_integer_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

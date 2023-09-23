@@ -46,8 +46,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/procedures/design/state/feedback/accelerator_state_feedback_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 accelerator_state_feedback_testbench
-	ghdl -r --std=08 accelerator_state_feedback_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_state_feedback_testbench.tree
+	ghdl -e --std=08 accelerator_state_feedback_testbench
+	ghdl -r --std=08 accelerator_state_feedback_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_state_feedback_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 clean:
-	rm -f *.cf *.tree
+	rm -f *.cf *.vcd *.ghw

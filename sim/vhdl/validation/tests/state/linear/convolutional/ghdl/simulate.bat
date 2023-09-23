@@ -83,6 +83,6 @@ ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller
 ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/linear/convolutional/accelerator_convolutional_linear_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/design/controller/linear/convolutional/accelerator_convolutional_linear_testbench.vhd
 
-ghdl -m --std=08 accelerator_convolutional_linear_testbench
-ghdl -r --std=08 accelerator_convolutional_linear_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_convolutional_linear_testbench.tree
+ghdl -e --std=08 accelerator_convolutional_linear_testbench
+ghdl -r --std=08 accelerator_convolutional_linear_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_convolutional_linear_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

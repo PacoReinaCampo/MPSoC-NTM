@@ -83,6 +83,6 @@ ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/baremetal/design/contro
 ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/baremetal/design/controller/linear/standard/accelerator_standard_linear_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/baremetal/design/controller/linear/standard/accelerator_standard_linear_testbench.vhd
 
-ghdl -m --std=08 accelerator_standard_linear_testbench
-ghdl -r --std=08 accelerator_standard_linear_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_standard_linear_testbench.tree
+ghdl -e --std=08 accelerator_standard_linear_testbench
+ghdl -r --std=08 accelerator_standard_linear_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_standard_linear_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

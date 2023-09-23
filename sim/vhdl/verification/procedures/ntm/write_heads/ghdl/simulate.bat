@@ -42,6 +42,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/ntm/write_heads/accelerator_
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/write_heads/accelerator_write_heads_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/write_heads/accelerator_write_heads_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/write_heads/accelerator_write_heads_testbench.vhd
-ghdl -m --std=08 accelerator_write_heads_testbench
-ghdl -r --std=08 accelerator_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_write_heads_testbench.tree
+ghdl -e --std=08 accelerator_write_heads_testbench
+ghdl -r --std=08 accelerator_write_heads_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_write_heads_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

@@ -28,6 +28,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/function/matrix/acceler
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_testbench.vhd
-ghdl -m --std=08 accelerator_function_testbench
-ghdl -r --std=08 accelerator_function_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_function_testbench.tree
+ghdl -e --std=08 accelerator_function_testbench
+ghdl -r --std=08 accelerator_function_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_function_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

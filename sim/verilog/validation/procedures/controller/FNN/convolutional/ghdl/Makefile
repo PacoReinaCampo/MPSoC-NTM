@@ -86,4 +86,4 @@ build:
 simulate:
 
 clean:
-	rm -f *.cf *.tree
+	rm -f *.cf *.vcd *.ghw

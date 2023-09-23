@@ -38,6 +38,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/algebra/tensor/accelera
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/algebra/accelerator_algebra_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/algebra/accelerator_algebra_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/math/algebra/accelerator_algebra_testbench.vhd
-ghdl -m --std=08 accelerator_algebra_testbench
-ghdl -r --std=08 accelerator_algebra_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_algebra_testbench.tree
+ghdl -e --std=08 accelerator_algebra_testbench
+ghdl -r --std=08 accelerator_algebra_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_algebra_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

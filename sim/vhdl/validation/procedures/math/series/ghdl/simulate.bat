@@ -37,6 +37,6 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/math/series/matrix/model_m
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/model/math/series/model_series_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/model/math/series/model_series_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/model/math/series/model_series_testbench.vhd
-ghdl -m --std=08 model_series_testbench
-ghdl -r --std=08 model_series_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_series_testbench.tree
+ghdl -e --std=08 model_series_testbench
+ghdl -r --std=08 model_series_testbench --ieee-asserts=disable-at-0 --vcd=model_series_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

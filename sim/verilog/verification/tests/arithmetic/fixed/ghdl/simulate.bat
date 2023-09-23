@@ -22,6 +22,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/fixed/tensor/accelerato
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/fixed/accelerator_fixed_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/fixed/accelerator_fixed_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/math/fixed/accelerator_fixed_testbench.vhd
-ghdl -m --std=08 accelerator_fixed_testbench
-ghdl -r --std=08 accelerator_fixed_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_fixed_testbench.tree
+ghdl -e --std=08 accelerator_fixed_testbench
+ghdl -r --std=08 accelerator_fixed_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_fixed_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

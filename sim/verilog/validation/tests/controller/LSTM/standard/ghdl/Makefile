@@ -80,8 +80,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../../bench/vhdl/code/tests/model/controller/LSTM/standard/model_standard_lstm_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_standard_lstm_testbench
-	ghdl -r --std=08 model_standard_lstm_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_standard_lstm_testbench.tree
+	ghdl -e --std=08 model_standard_lstm_testbench
+	ghdl -r --std=08 model_standard_lstm_testbench --ieee-asserts=disable-at-0 --vcd=model_standard_lstm_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 clean:
-	rm -f *.cf *.tree
+	rm -f *.cf *.vcd *.ghw

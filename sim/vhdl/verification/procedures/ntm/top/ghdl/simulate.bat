@@ -105,6 +105,6 @@ ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/top/a
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/top/accelerator_top_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/code/baremetal/design/ntm/top/accelerator_top_testbench.vhd
 
-ghdl -m --std=08 accelerator_top_testbench
-ghdl -r --std=08 accelerator_top_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_top_testbench.tree
+ghdl -e --std=08 accelerator_top_testbench
+ghdl -r --std=08 accelerator_top_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_top_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause

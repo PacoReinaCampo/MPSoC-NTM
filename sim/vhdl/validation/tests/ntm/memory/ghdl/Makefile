@@ -83,8 +83,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/ntm/memory/model_memory_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 model_memory_testbench
-	ghdl -r --std=08 model_memory_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > model_memory_testbench.tree
+	ghdl -e --std=08 model_memory_testbench
+	ghdl -r --std=08 model_memory_testbench --ieee-asserts=disable-at-0 --vcd=model_memory_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 clean:
-	rm -f *.cf *.tree
+	rm -f *.cf *.vcd *.ghw

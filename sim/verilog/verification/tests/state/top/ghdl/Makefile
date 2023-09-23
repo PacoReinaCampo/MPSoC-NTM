@@ -51,8 +51,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/state/top/accelerator_state_top_testbench.vhd
 
 simulate:
-	ghdl -m --std=08 accelerator_state_top_testbench
-	ghdl -r --std=08 accelerator_state_top_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > accelerator_state_top_testbench.tree
+	ghdl -e --std=08 accelerator_state_top_testbench
+	ghdl -r --std=08 accelerator_state_top_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_state_top_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 clean:
-	rm -f *.cf *.tree
+	rm -f *.cf *.vcd *.ghw
