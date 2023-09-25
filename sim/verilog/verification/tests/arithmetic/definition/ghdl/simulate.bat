@@ -19,9 +19,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/arithmetic/definition/tensor
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/arithmetic/definition/tensor/accelerator_tensor_float_multiplier.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/arithmetic/definition/tensor/accelerator_tensor_float_divider.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/definition/accelerator_float_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/definition/accelerator_float_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/definition/accelerator_float_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/float/accelerator_float_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/float/accelerator_float_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/arithmetic/float/accelerator_float_testbench.vhd
 ghdl -e --std=08 accelerator_float_testbench
 ghdl -r --std=08 accelerator_float_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_float_testbench.vcd --wave=system.ghw --stop-time=1ms
 pause
