@@ -1,6 +1,0 @@
-../../../../../../../model/vhdl/code/pkg/model_arithmetic_vhdl_pkg.vhd
-../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
-
-../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_pkg.vhd
-../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_stimulus.vhd
-../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_testbench.vhd

@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -28,17 +30,13 @@ alias accelerator_scalar_logistic_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_logistic_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_scalar_logistic_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_logistic_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_logistic_function_test.wlf
 }
 
 ##################################################################################################
@@ -61,17 +59,13 @@ alias accelerator_scalar_oneplus_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_oneplus_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_scalar_oneplus_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_oneplus_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_oneplus_function_test.wlf
 }
 
 ##################################################################################################
@@ -94,17 +88,13 @@ alias accelerator_vector_logistic_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_logistic_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_vector_logistic_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_logistic_function_test.wlf
+  dataset save sim wlf/accelerator_vector_logistic_function_test.wlf
 }
 
 ##################################################################################################
@@ -127,17 +117,13 @@ alias accelerator_vector_oneplus_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_oneplus_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_vector_oneplus_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_oneplus_function_test.wlf
+  dataset save sim wlf/accelerator_vector_oneplus_function_test.wlf
 }
 
 ##################################################################################################
@@ -160,17 +146,13 @@ alias accelerator_matrix_logistic_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_logistic_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_matrix_logistic_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_logistic_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_logistic_function_test.wlf
 }
 
 ##################################################################################################
@@ -193,17 +175,13 @@ alias accelerator_matrix_oneplus_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_function_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_oneplus_function wave
-  do $simulation_path/math/function/msim/waves/accelerator_matrix_oneplus_function.do
-
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_TEST true 0
   force -freeze sim:/accelerator_function_pkg/STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_oneplus_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_oneplus_function_test.wlf
 }
 
 ##################################################################################################

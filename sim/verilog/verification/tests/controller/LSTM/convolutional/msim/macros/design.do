@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# accelerator_convolutional_lstm_design_compilation ##############################################
+# accelerator_convolutional_lstm_design_compilation
 ##################################################################################################
 
 alias accelerator_convolutional_lstm_design_compilation {
@@ -103,7 +103,7 @@ alias accelerator_convolutional_lstm_design_compilation {
 ##################################################################################################
 
 alias d01 {
-  accelerator_convolutional_lstm_design_compilation 
+  accelerator_convolutional_lstm_design_compilation
 }
 
 echo "****************************************"

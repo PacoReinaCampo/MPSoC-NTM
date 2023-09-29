@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# accelerator_dot_product_design_compilation #####################################################
+# accelerator_dot_product_design_compilation
 ##################################################################################################
 
 alias accelerator_dot_product_design_compilation {
@@ -22,7 +22,7 @@ alias accelerator_dot_product_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_convolution_design_compilation ##############################################
+# accelerator_vector_convolution_design_compilation
 ##################################################################################################
 
 alias accelerator_vector_convolution_design_compilation {
@@ -37,7 +37,7 @@ alias accelerator_vector_convolution_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_cosine_similarity_design_compilation ########################################
+# accelerator_vector_cosine_similarity_design_compilation
 ##################################################################################################
 
 alias accelerator_vector_cosine_similarity_design_compilation {
@@ -52,7 +52,7 @@ alias accelerator_vector_cosine_similarity_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_multiplication_design_compilation ###########################################
+# accelerator_vector_multiplication_design_compilation
 ##################################################################################################
 
 alias accelerator_vector_multiplication_design_compilation {
@@ -66,7 +66,7 @@ alias accelerator_vector_multiplication_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_summation_design_compilation ################################################
+# accelerator_vector_summation_design_compilation
 ##################################################################################################
 
 alias accelerator_vector_summation_design_compilation {
@@ -80,7 +80,7 @@ alias accelerator_vector_summation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_vector_module_design_compilation ###################################################
+# accelerator_vector_module_design_compilation
 ##################################################################################################
 
 alias accelerator_vector_module_design_compilation {
@@ -93,7 +93,7 @@ alias accelerator_vector_module_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_convolution_design_compilation ##############################################
+# accelerator_matrix_convolution_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_convolution_design_compilation {
@@ -106,7 +106,7 @@ alias accelerator_matrix_convolution_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_vector_convolution_design_compilation #######################################
+# accelerator_matrix_vector_convolution_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_vector_convolution_design_compilation {
@@ -119,7 +119,7 @@ alias accelerator_matrix_vector_convolution_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_inverse_design_compilation ##################################################
+# accelerator_matrix_inverse_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_inverse_design_compilation {
@@ -134,7 +134,7 @@ alias accelerator_matrix_inverse_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_multiplication_design_compilation ###########################################
+# accelerator_matrix_multiplication_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_multiplication_design_compilation {
@@ -147,7 +147,7 @@ alias accelerator_matrix_multiplication_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_product_design_compilation ##################################################
+# accelerator_matrix_product_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_product_design_compilation {
@@ -162,7 +162,7 @@ alias accelerator_matrix_product_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_vector_product_design_compilation ###########################################
+# accelerator_matrix_vector_product_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_vector_product_design_compilation {
@@ -177,7 +177,7 @@ alias accelerator_matrix_vector_product_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_summation_design_compilation ################################################
+# accelerator_matrix_summation_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_summation_design_compilation {
@@ -191,7 +191,7 @@ alias accelerator_matrix_summation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_matrix_transpose_design_compilation ################################################
+# accelerator_matrix_transpose_design_compilation
 ##################################################################################################
 
 alias accelerator_matrix_transpose_design_compilation {
@@ -204,7 +204,7 @@ alias accelerator_matrix_transpose_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_convolution_design_compilation ##############################################
+# accelerator_tensor_convolution_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_convolution_design_compilation {
@@ -219,7 +219,7 @@ alias accelerator_tensor_convolution_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_matrix_convolution_design_compilation #######################################
+# accelerator_tensor_matrix_convolution_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_matrix_convolution_design_compilation {
@@ -234,7 +234,7 @@ alias accelerator_tensor_matrix_convolution_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_inverse_design_compilation ##################################################
+# accelerator_tensor_inverse_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_inverse_design_compilation {
@@ -249,7 +249,7 @@ alias accelerator_tensor_inverse_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_product_design_compilation ##################################################
+# accelerator_tensor_product_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_product_design_compilation {
@@ -264,7 +264,7 @@ alias accelerator_tensor_product_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_matrix_product_design_compilation ###########################################
+# accelerator_tensor_matrix_product_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_matrix_product_design_compilation {
@@ -279,7 +279,7 @@ alias accelerator_tensor_matrix_product_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_tensor_transpose_design_compilation ################################################
+# accelerator_tensor_transpose_design_compilation
 ##################################################################################################
 
 alias accelerator_tensor_transpose_design_compilation {

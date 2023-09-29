@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias model_scalar_fixed_adder_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_scalar_fixed_adder wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_scalar_fixed_adder.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_ADDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_scalar_fixed_adder_test.wlf
+  dataset save sim wlf/model_scalar_fixed_adder_test.wlf
 }
 
 ##################################################################################################
@@ -53,17 +51,13 @@ alias model_scalar_fixed_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_scalar_fixed_multiplier wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_scalar_fixed_multiplier.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_scalar_fixed_multiplier_test.wlf
+  dataset save sim wlf/model_scalar_fixed_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -82,17 +76,13 @@ alias model_scalar_fixed_divider_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_scalar_fixed_divider wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_scalar_fixed_divider.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_DIVIDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_scalar_fixed_divider_test.wlf
+  dataset save sim wlf/model_scalar_fixed_divider_test.wlf
 }
 
 ##################################################################################################
@@ -111,17 +101,13 @@ alias model_vector_fixed_adder_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_vector_fixed_adder wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_vector_fixed_adder.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_ADDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_fixed_adder_test.wlf
+  dataset save sim wlf/model_vector_fixed_adder_test.wlf
 }
 
 ##################################################################################################
@@ -140,17 +126,13 @@ alias model_vector_fixed_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_vector_fixed_multiplier wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_vector_fixed_multiplier.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_fixed_multiplier_test.wlf
+  dataset save sim wlf/model_vector_fixed_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -169,17 +151,13 @@ alias model_vector_fixed_divider_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_vector_fixed_divider wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_vector_fixed_divider.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_DIVIDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_fixed_divider_test.wlf
+  dataset save sim wlf/model_vector_fixed_divider_test.wlf
 }
 
 ##################################################################################################
@@ -198,17 +176,13 @@ alias model_matrix_fixed_adder_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_matrix_fixed_adder wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_matrix_fixed_adder.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_ADDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_fixed_adder_test.wlf
+  dataset save sim wlf/model_matrix_fixed_adder_test.wlf
 }
 
 ##################################################################################################
@@ -227,17 +201,13 @@ alias model_matrix_fixed_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_matrix_fixed_multiplier wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_matrix_fixed_multiplier.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_fixed_multiplier_test.wlf
+  dataset save sim wlf/model_matrix_fixed_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -256,17 +226,13 @@ alias model_matrix_fixed_divider_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_matrix_fixed_divider wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_matrix_fixed_divider.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_DIVIDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_fixed_divider_test.wlf
+  dataset save sim wlf/model_matrix_fixed_divider_test.wlf
 }
 
 ##################################################################################################
@@ -285,17 +251,13 @@ alias model_tensor_fixed_adder_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_tensor_fixed_adder wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_tensor_fixed_adder.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_ADDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_fixed_adder_test.wlf
+  dataset save sim wlf/model_tensor_fixed_adder_test.wlf
 }
 
 ##################################################################################################
@@ -314,17 +276,13 @@ alias model_tensor_fixed_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_tensor_fixed_multiplier wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_tensor_fixed_multiplier.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_fixed_multiplier_test.wlf
+  dataset save sim wlf/model_tensor_fixed_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -343,17 +301,13 @@ alias model_tensor_fixed_divider_verification_compilation {
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  #WAVES
-  view -title model_tensor_fixed_divider wave
-  do $simulation_path/arithmetic/fixed/msim/waves/model_tensor_fixed_divider.do
-
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_DIVIDER_TEST true 0
   force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_fixed_divider_test.wlf
+  dataset save sim wlf/model_tensor_fixed_divider_test.wlf
 }
 
 ##################################################################################################

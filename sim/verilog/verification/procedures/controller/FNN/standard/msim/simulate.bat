@@ -1,7 +1,7 @@
 @echo off
-call ../../../../../../../../settings64_msim.bat
+call ../../../../../../../settings64_msim.bat
 
-vlib work
-vcom -2008 -f system.vc
-vsim -c -do run.do work.accelerator_standard_fnn_testbench
+vsim -c -do macros/run.do
+
+REM vsim -view wlf/TARGET.wlf -do waves/TARGET.do
 pause

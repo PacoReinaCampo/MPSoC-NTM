@@ -1,4 +1,6 @@
-source ../../../../../../../../settings64_msim.sh
+source ../../../../../../../settings64_msim.sh
 
 make clean
-make
+make build
+
+# make simulate TARGET=target

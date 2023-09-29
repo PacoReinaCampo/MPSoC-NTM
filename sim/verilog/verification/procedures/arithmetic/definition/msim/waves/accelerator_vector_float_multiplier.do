@@ -2,9 +2,6 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /accelerator_float_pkg/MONITOR_TEST
-add wave -noupdate /accelerator_float_pkg/MONITOR_CASE
-
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM VECTOR FLOAT MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}

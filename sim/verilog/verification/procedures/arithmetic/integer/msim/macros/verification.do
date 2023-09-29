@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -26,17 +28,13 @@ alias accelerator_scalar_integer_adder_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_integer_adder wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_scalar_integer_adder.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_integer_adder_test.wlf
+  dataset save sim wlf/accelerator_scalar_integer_adder_test.wlf
 }
 
 ##################################################################################################
@@ -57,17 +55,13 @@ alias accelerator_scalar_integer_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_integer_multiplier wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_scalar_integer_multiplier.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_integer_multiplier_test.wlf
+  dataset save sim wlf/accelerator_scalar_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -88,17 +82,13 @@ alias accelerator_scalar_integer_divider_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_integer_divider wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_scalar_integer_divider.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_integer_divider_test.wlf
+  dataset save sim wlf/accelerator_scalar_integer_divider_test.wlf
 }
 
 ##################################################################################################
@@ -119,17 +109,13 @@ alias accelerator_vector_integer_adder_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_integer_adder wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_vector_integer_adder.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_integer_adder_test.wlf
+  dataset save sim wlf/accelerator_vector_integer_adder_test.wlf
 }
 
 ##################################################################################################
@@ -150,17 +136,13 @@ alias accelerator_vector_integer_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_integer_multiplier wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_vector_integer_multiplier.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_integer_multiplier_test.wlf
+  dataset save sim wlf/accelerator_vector_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -181,17 +163,13 @@ alias accelerator_vector_integer_divider_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_integer_divider wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_vector_integer_divider.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_integer_divider_test.wlf
+  dataset save sim wlf/accelerator_vector_integer_divider_test.wlf
 }
 
 ##################################################################################################
@@ -212,17 +190,13 @@ alias accelerator_matrix_integer_adder_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_integer_adder wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_matrix_integer_adder.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_integer_adder_test.wlf
+  dataset save sim wlf/accelerator_matrix_integer_adder_test.wlf
 }
 
 ##################################################################################################
@@ -243,17 +217,13 @@ alias accelerator_matrix_integer_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_integer_multiplier wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_matrix_integer_multiplier.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_integer_multiplier_test.wlf
+  dataset save sim wlf/accelerator_matrix_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -274,17 +244,13 @@ alias accelerator_matrix_integer_divider_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_integer_divider wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_matrix_integer_divider.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_integer_divider_test.wlf
+  dataset save sim wlf/accelerator_matrix_integer_divider_test.wlf
 }
 
 ##################################################################################################
@@ -305,17 +271,13 @@ alias accelerator_tensor_integer_adder_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_tensor_integer_adder wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_tensor_integer_adder.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_tensor_integer_adder_test.wlf
+  dataset save sim wlf/accelerator_tensor_integer_adder_test.wlf
 }
 
 ##################################################################################################
@@ -336,17 +298,13 @@ alias accelerator_tensor_integer_multiplier_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_tensor_integer_multiplier wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_tensor_integer_multiplier.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_tensor_integer_multiplier_test.wlf
+  dataset save sim wlf/accelerator_tensor_integer_multiplier_test.wlf
 }
 
 ##################################################################################################
@@ -367,17 +325,13 @@ alias accelerator_tensor_integer_divider_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_integer_testbench/*
 
-  #WAVES
-  view -title accelerator_tensor_integer_divider wave
-  do $simulation_path/arithmetic/integer/msim/waves/accelerator_tensor_integer_divider.do
-
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/accelerator_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_tensor_integer_divider_test.wlf
+  dataset save sim wlf/accelerator_tensor_integer_divider_test.wlf
 }
 
 ##################################################################################################

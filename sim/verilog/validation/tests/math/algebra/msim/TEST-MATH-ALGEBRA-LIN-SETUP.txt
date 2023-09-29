@@ -1,6 +1,0 @@
-cd /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/math/algebra/msim
-
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/math/algebra/msim/macros/design.do
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/math/algebra/msim/macros/verification.do
-
-do /home/user/GitHub/code/Advanced/MPSoC-NTM/sim/vhdl/validation/tests/math/algebra/msim/list.do

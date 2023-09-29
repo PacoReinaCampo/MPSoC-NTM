@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -26,17 +28,13 @@ alias accelerator_scalar_cosh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_cosh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_scalar_cosh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_COSH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_COSH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_cosh_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_cosh_function_test.wlf
 }
 
 ##################################################################################################
@@ -57,17 +55,13 @@ alias accelerator_scalar_exponentiator_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_exponentiator_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_scalar_exponentiator_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_exponentiator_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_exponentiator_function_test.wlf
 }
 
 ##################################################################################################
@@ -88,17 +82,13 @@ alias accelerator_scalar_logarithm_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_logarithm_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_scalar_logarithm_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_logarithm_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_logarithm_function_test.wlf
 }
 
 ##################################################################################################
@@ -119,17 +109,13 @@ alias accelerator_scalar_sinh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_sinh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_scalar_sinh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_SINH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_SINH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_sinh_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_sinh_function_test.wlf
 }
 
 ##################################################################################################
@@ -150,17 +136,13 @@ alias accelerator_scalar_tanh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_scalar_tanh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_scalar_tanh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_TANH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_SCALAR_TANH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_scalar_tanh_function_test.wlf
+  dataset save sim wlf/accelerator_scalar_tanh_function_test.wlf
 }
 
 ##################################################################################################
@@ -181,17 +163,13 @@ alias accelerator_vector_cosh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_cosh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_vector_cosh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_COSH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_cosh_function_test.wlf
+  dataset save sim wlf/accelerator_vector_cosh_function_test.wlf
 }
 
 ##################################################################################################
@@ -212,17 +190,13 @@ alias accelerator_vector_exponentiator_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_exponentiator_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_vector_exponentiator_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_exponentiator_function_test.wlf
+  dataset save sim wlf/accelerator_vector_exponentiator_function_test.wlf
 }
 
 ##################################################################################################
@@ -243,17 +217,13 @@ alias accelerator_vector_logarithm_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_logarithm_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_vector_logarithm_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_logarithm_function_test.wlf
+  dataset save sim wlf/accelerator_vector_logarithm_function_test.wlf
 }
 
 ##################################################################################################
@@ -274,17 +244,13 @@ alias accelerator_vector_sinh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_sinh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_vector_sinh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_SINH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_sinh_function_test.wlf
+  dataset save sim wlf/accelerator_vector_sinh_function_test.wlf
 }
 
 ##################################################################################################
@@ -305,17 +271,13 @@ alias accelerator_vector_tanh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_vector_tanh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_vector_tanh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_TANH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_vector_tanh_function_test.wlf
+  dataset save sim wlf/accelerator_vector_tanh_function_test.wlf
 }
 
 ##################################################################################################
@@ -336,17 +298,13 @@ alias accelerator_matrix_cosh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_cosh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_matrix_cosh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_COSH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_COSH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_cosh_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_cosh_function_test.wlf
 }
 
 ##################################################################################################
@@ -367,17 +325,13 @@ alias accelerator_matrix_exponentiator_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_exponentiator_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_matrix_exponentiator_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_exponentiator_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_exponentiator_function_test.wlf
 }
 
 ##################################################################################################
@@ -398,17 +352,13 @@ alias accelerator_matrix_logarithm_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_logarithm_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_matrix_logarithm_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_logarithm_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_logarithm_function_test.wlf
 }
 
 ##################################################################################################
@@ -429,17 +379,13 @@ alias accelerator_matrix_sinh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_sinh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_matrix_sinh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_SINH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_SINH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_sinh_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_sinh_function_test.wlf
 }
 
 ##################################################################################################
@@ -460,17 +406,13 @@ alias accelerator_matrix_tanh_function_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_series_testbench/*
 
-  #WAVES
-  view -title accelerator_matrix_tanh_function wave
-  do $simulation_path/math/series/msim/waves/accelerator_matrix_tanh_function.do
-
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_TANH_TEST true 0
   force -freeze sim:/accelerator_series_pkg/STIMULUS_ACCELERATOR_MATRIX_TANH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_matrix_tanh_function_test.wlf
+  dataset save sim wlf/accelerator_matrix_tanh_function_test.wlf
 }
 
 ##################################################################################################

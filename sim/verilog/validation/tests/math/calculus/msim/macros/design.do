@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# model_vector_differentiation_design_compilation ################################################
+# model_vector_differentiation_design_compilation
 ##################################################################################################
 
 alias model_vector_differentiation_design_compilation {
@@ -19,7 +19,7 @@ alias model_vector_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_integration_design_compilation ####################################################
+# model_vector_integration_design_compilation
 ##################################################################################################
 
 alias model_vector_integration_design_compilation {
@@ -31,7 +31,7 @@ alias model_vector_integration_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_softmax_design_compilation ########################################################
+# model_vector_softmax_design_compilation
 ##################################################################################################
 
 alias model_vector_softmax_design_compilation {
@@ -43,7 +43,7 @@ alias model_vector_softmax_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_differentiation_design_compilation ################################################
+# model_matrix_differentiation_design_compilation
 ##################################################################################################
 
 alias model_matrix_differentiation_design_compilation {
@@ -55,7 +55,7 @@ alias model_matrix_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_integration_design_compilation ####################################################
+# model_matrix_integration_design_compilation
 ##################################################################################################
 
 alias model_matrix_integration_design_compilation {
@@ -67,7 +67,7 @@ alias model_matrix_integration_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_softmax_design_compilation ########################################################
+# model_matrix_softmax_design_compilation
 ##################################################################################################
 
 alias model_matrix_softmax_design_compilation {
@@ -79,7 +79,7 @@ alias model_matrix_softmax_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_differentiation_design_compilation ################################################
+# model_tensor_differentiation_design_compilation
 ##################################################################################################
 
 alias model_tensor_differentiation_design_compilation {
@@ -91,7 +91,7 @@ alias model_tensor_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_integration_design_compilation ####################################################
+# model_tensor_integration_design_compilation
 ##################################################################################################
 
 alias model_tensor_integration_design_compilation {
@@ -103,7 +103,7 @@ alias model_tensor_integration_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_softmax_design_compilation ########################################################
+# model_tensor_softmax_design_compilation
 ##################################################################################################
 
 alias model_tensor_softmax_design_compilation {

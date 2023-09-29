@@ -1,11 +1,12 @@
-all: build simulate
+TARGET = accelerator
+
+all: build
 
 build:
-	if [ ! -e work ]; then vlib work; fi
-	vcom -2008 -f system.vc
-
+	vsim -c -do macros/run.do
+	
 simulate:
-	vsim -c -do run.do work.accelerator_trainer_linear_testbench
+	vsim -view wlf/$(TARGET)_test.wlf -do waves/$(TARGET).do
 
 clean:
-	rm -rf work transcript *.vstf *.wlf
+	rm -rf work wlf transcript *.vstf *.wlf

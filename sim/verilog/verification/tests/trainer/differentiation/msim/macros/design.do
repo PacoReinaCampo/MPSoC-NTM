@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# accelerator_trainer_vector_differentiation_design_compilation ##################################
+# accelerator_trainer_vector_differentiation_design_compilation
 ##################################################################################################
 
 alias accelerator_trainer_vector_differentiation_design_compilation {
@@ -93,7 +93,7 @@ alias accelerator_trainer_vector_differentiation_design_compilation {
 }
 
 ##################################################################################################
-# accelerator_trainer_matrix_differentiation_design_compilation ##################################
+# accelerator_trainer_matrix_differentiation_design_compilation
 ##################################################################################################
 
 alias accelerator_trainer_matrix_differentiation_design_compilation {
@@ -181,11 +181,11 @@ alias accelerator_trainer_matrix_differentiation_design_compilation {
 ##################################################################################################
 
 alias d01 {
-  accelerator_trainer_vector_differentiation_design_compilation 
+  accelerator_trainer_vector_differentiation_design_compilation
 }
 
 alias d02 {
-  accelerator_trainer_matrix_differentiation_design_compilation 
+  accelerator_trainer_matrix_differentiation_design_compilation
 }
 
 echo "****************************************"

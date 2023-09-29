@@ -1,6 +1,0 @@
-../../../../../../../rtl/vhdl/code/pkg/accelerator_arithmetic_vhdl_pkg.vhd
-../../../../../../../rtl/vhdl/code/pkg/accelerator_math_vhdl_pkg.vhd
-
-../../../../../../../bench/vhdl/code/tests/design/math/algebra/accelerator_algebra_pkg.vhd
-../../../../../../../bench/vhdl/code/tests/design/math/algebra/accelerator_algebra_stimulus.vhd
-../../../../../../../bench/vhdl/code/tests/design/math/algebra/accelerator_algebra_testbench.vhd

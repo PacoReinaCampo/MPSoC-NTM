@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias accelerator_standard_linear_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_standard_linear_testbench/*
 
-  #WAVES
-  view -title accelerator_standard_linear wave
-  do $simulation_path/controller/linear/standard/msim/waves/accelerator_standard_linear.do
-
   force -freeze sim:/accelerator_standard_linear_pkg/STIMULUS_ACCELERATOR_STANDARD_LINEAR_TEST true 0
   force -freeze sim:/accelerator_standard_linear_pkg/STIMULUS_ACCELERATOR_STANDARD_LINEAR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_standard_linear_test.wlf
+  dataset save sim wlf/accelerator_standard_linear_test.wlf
 }
 
 ##################################################################################################

@@ -2,9 +2,6 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /accelerator_function_pkg/MONITOR_TEST
-add wave -noupdate /accelerator_function_pkg/MONITOR_CASE
-
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR LOGISTIC TEST}
 add wave -noupdate -divider {=========================================}
@@ -35,7 +32,6 @@ add wave -noupdate /accelerator_function_testbench/accelerator_scalar_logistic_f
 add wave -noupdate /accelerator_function_testbench/accelerator_scalar_logistic_function_test/scalar_logistic_function/data_in_scalar_exponentiator_function
 add wave -noupdate /accelerator_function_testbench/accelerator_scalar_logistic_function_test/scalar_logistic_function/ready_scalar_exponentiator_function
 add wave -noupdate /accelerator_function_testbench/accelerator_scalar_logistic_function_test/scalar_logistic_function/data_out_scalar_exponentiator_function
-
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

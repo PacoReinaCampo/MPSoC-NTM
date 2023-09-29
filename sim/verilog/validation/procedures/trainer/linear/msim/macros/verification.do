@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias model_trainer_linear_verification_compilation {
   #MACROS
   add log -r sim:/model_trainer_linear_testbench/*
 
-  #WAVES
-  view -title model_trainer_linear wave
-  do $simulation_path/trainer/linear/msim/waves/model_trainer_linear.do
-
   force -freeze sim:/model_trainer_linear_pkg/STIMULUS_MODEL_TRAINER_LINEAR_TEST true 0
   force -freeze sim:/model_trainer_linear_pkg/STIMULUS_MODEL_TRAINER_LINEAR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_trainer_linear_test.wlf
+  dataset save sim wlf/model_trainer_linear_test.wlf
 }
 
 ##################################################################################################

@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# model_scalar_logistic_function_design_compilation ################################################
+# model_scalar_logistic_function_design_compilation
 ##################################################################################################
 
 alias model_scalar_logistic_function_design_compilation {
@@ -17,7 +17,7 @@ alias model_scalar_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# model_scalar_oneplus_function_design_compilation #################################################
+# model_scalar_oneplus_function_design_compilation
 ##################################################################################################
 
 alias model_scalar_oneplus_function_design_compilation {
@@ -27,7 +27,7 @@ alias model_scalar_oneplus_function_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_logistic_function_design_compilation ################################################
+# model_vector_logistic_function_design_compilation
 ##################################################################################################
 
 alias model_vector_logistic_function_design_compilation {
@@ -38,7 +38,7 @@ alias model_vector_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_oneplus_function_design_compilation #################################################
+# model_vector_oneplus_function_design_compilation
 ##################################################################################################
 
 alias model_vector_oneplus_function_design_compilation {
@@ -49,7 +49,7 @@ alias model_vector_oneplus_function_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_logistic_function_design_compilation ################################################
+# model_matrix_logistic_function_design_compilation
 ##################################################################################################
 
 alias model_matrix_logistic_function_design_compilation {
@@ -61,7 +61,7 @@ alias model_matrix_logistic_function_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_oneplus_function_design_compilation #################################################
+# model_matrix_oneplus_function_design_compilation
 ##################################################################################################
 
 alias model_matrix_oneplus_function_design_compilation {
@@ -76,27 +76,27 @@ alias model_matrix_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias d01 {
-  model_scalar_logistic_function_design_compilation 
+  model_scalar_logistic_function_design_compilation
 }
 
 alias d02 {
-  model_scalar_oneplus_function_design_compilation 
+  model_scalar_oneplus_function_design_compilation
 }
 
 alias d03 {
-  model_vector_logistic_function_design_compilation 
+  model_vector_logistic_function_design_compilation
 }
 
 alias d04 {
-  model_vector_oneplus_function_design_compilation 
+  model_vector_oneplus_function_design_compilation
 }
 
 alias d05 {
-  model_matrix_logistic_function_design_compilation 
+  model_matrix_logistic_function_design_compilation
 }
 
 alias d06 {
-  model_matrix_oneplus_function_design_compilation 
+  model_matrix_oneplus_function_design_compilation
 }
 
 echo "****************************************"

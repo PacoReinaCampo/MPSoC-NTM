@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias model_vector_differentiation_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_vector_differentiation wave
-  do $simulation_path/math/calculus/msim/waves/model_vector_differentiation.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_differentiation_test.wlf
+  dataset save sim wlf/model_vector_differentiation_test.wlf
 }
 
 ##################################################################################################
@@ -53,17 +51,13 @@ alias model_vector_integration_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_vector_integration wave
-  do $simulation_path/math/calculus/msim/waves/model_vector_integration.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_INTEGRATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_integration_test.wlf
+  dataset save sim wlf/model_vector_integration_test.wlf
 }
 
 ##################################################################################################
@@ -82,17 +76,13 @@ alias model_vector_softmax_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_vector_softmax wave
-  do $simulation_path/math/calculus/msim/waves/model_vector_softmax.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_SOFTMAX_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_vector_softmax_test.wlf
+  dataset save sim wlf/model_vector_softmax_test.wlf
 }
 
 ##################################################################################################
@@ -111,17 +101,13 @@ alias model_matrix_differentiation_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_matrix_differentiation wave
-  do $simulation_path/math/calculus/msim/waves/model_matrix_differentiation.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_differentiation_test.wlf
+  dataset save sim wlf/model_matrix_differentiation_test.wlf
 }
 
 ##################################################################################################
@@ -140,17 +126,13 @@ alias model_matrix_integration_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_matrix_integration wave
-  do $simulation_path/math/calculus/msim/waves/model_matrix_integration.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_INTEGRATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_integration_test.wlf
+  dataset save sim wlf/model_matrix_integration_test.wlf
 }
 
 ##################################################################################################
@@ -169,17 +151,13 @@ alias model_matrix_softmax_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_matrix_softmax wave
-  do $simulation_path/math/calculus/msim/waves/model_matrix_softmax.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_SOFTMAX_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_matrix_softmax_test.wlf
+  dataset save sim wlf/model_matrix_softmax_test.wlf
 }
 
 ##################################################################################################
@@ -198,17 +176,13 @@ alias model_tensor_differentiation_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_tensor_differentiation wave
-  do $simulation_path/math/calculus/msim/waves/model_tensor_differentiation.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_differentiation_test.wlf
+  dataset save sim wlf/model_tensor_differentiation_test.wlf
 }
 
 ##################################################################################################
@@ -227,17 +201,13 @@ alias model_tensor_integration_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_tensor_integration wave
-  do $simulation_path/math/calculus/msim/waves/model_tensor_integration.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_INTEGRATION_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_integration_test.wlf
+  dataset save sim wlf/model_tensor_integration_test.wlf
 }
 
 ##################################################################################################
@@ -256,17 +226,13 @@ alias model_tensor_softmax_verification_compilation {
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  #WAVES
-  view -title model_tensor_softmax wave
-  do $simulation_path/math/calculus/msim/waves/model_tensor_softmax.do
-
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_SOFTMAX_TEST true 0
   force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_tensor_softmax_test.wlf
+  dataset save sim wlf/model_tensor_softmax_test.wlf
 }
 
 ##################################################################################################

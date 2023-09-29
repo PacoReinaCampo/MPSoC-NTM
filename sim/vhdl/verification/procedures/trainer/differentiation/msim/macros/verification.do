@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias model_trainer_vector_differentiation_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_trainer_differentiation_testbench/*
 
-  #WAVES
-  view -title model_trainer_vector_differentiation wave
-  do $simulation_path/trainer/differentiation/msim/waves/accelerator_trainer_vector_differentiation.do
-
   force -freeze sim:/accelerator_trainer_differentiation_pkg/STIMULUS_ACCELERATOR_TRAINER_VECTOR_DIFFERENTIATION_TEST true 0
   force -freeze sim:/accelerator_trainer_differentiation_pkg/STIMULUS_ACCELERATOR_TRAINER_VECTOR_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_trainer_vector_differentiation_test.wlf
+  dataset save sim wlf/model_trainer_vector_differentiation_test.wlf
 }
 
 ##################################################################################################
@@ -53,17 +51,13 @@ alias model_trainer_matrix_differentiation_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_trainer_differentiation_testbench/*
 
-  #WAVES
-  view -title model_trainer_matrix_differentiation wave
-  do $simulation_path/trainer/differentiation/msim/waves/accelerator_trainer_matrix_differentiation.do
-
   force -freeze sim:/accelerator_trainer_differentiation_pkg/STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_TEST true 0
   force -freeze sim:/accelerator_trainer_differentiation_pkg/STIMULUS_ACCELERATOR_TRAINER_MATRIX_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim model_trainer_matrix_differentiation_test.wlf
+  dataset save sim wlf/model_trainer_matrix_differentiation_test.wlf
 }
 
 ##################################################################################################

@@ -2,9 +2,6 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /model_integer_pkg/MONITOR_TEST
-add wave -noupdate /model_integer_pkg/MONITOR_CASE
-
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR INTEGER MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}

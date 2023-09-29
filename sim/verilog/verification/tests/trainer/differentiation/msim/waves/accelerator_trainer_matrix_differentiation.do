@@ -2,9 +2,6 @@ onerror {resume}
 
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /accelerator_trainer_differentiation_pkg/MONITOR_TEST
-add wave -noupdate /accelerator_trainer_differentiation_pkg/MONITOR_CASE
-
 add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM MATRIX TRAINER DIFFERENTIATION TEST}
 add wave -noupdate -divider {=========================================}

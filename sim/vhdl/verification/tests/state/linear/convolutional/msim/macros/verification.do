@@ -2,7 +2,9 @@
 # VERIFICATION
 #*************************
 
-do ./variables.do
+do variables.do
+
+mkdir wlf
 
 ##################################################################################################
 # TEST SOURCES ###################################################################################
@@ -24,17 +26,13 @@ alias accelerator_convolutional_linear_verification_compilation {
   #MACROS
   add log -r sim:/accelerator_convolutional_linear_testbench/*
 
-  #WAVES
-  view -title accelerator_convolutional_linear wave
-  do $simulation_path/state/linear/convolutional/msim/waves/accelerator_convolutional_linear.do
-
   force -freeze sim:/accelerator_convolutional_linear_pkg/STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_TEST true 0
   force -freeze sim:/accelerator_convolutional_linear_pkg/STIMULUS_ACCELERATOR_CONVOLUTIONAL_LINEAR_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim accelerator_convolutional_linear_test.wlf
+  dataset save sim wlf/accelerator_convolutional_linear_test.wlf
 }
 
 ##################################################################################################

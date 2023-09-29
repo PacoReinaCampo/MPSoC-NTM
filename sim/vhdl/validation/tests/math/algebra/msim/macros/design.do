@@ -2,12 +2,12 @@
 # DESIGN COMPILATION
 #*******************
 
-do ./variables.do
+do variables.do
 
 vlib work
 
 ##################################################################################################
-# model_dot_product_design_compilation ###########################################################
+# model_dot_product_design_compilation
 ##################################################################################################
 
 alias model_dot_product_design_compilation {
@@ -19,7 +19,7 @@ alias model_dot_product_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_convolution_design_compilation ####################################################
+# model_vector_convolution_design_compilation
 ##################################################################################################
 
 alias model_vector_convolution_design_compilation {
@@ -31,7 +31,7 @@ alias model_vector_convolution_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_cosine_similarity_design_compilation ##############################################
+# model_vector_cosine_similarity_design_compilation
 ##################################################################################################
 
 alias model_vector_cosine_similarity_design_compilation {
@@ -43,7 +43,7 @@ alias model_vector_cosine_similarity_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_multiplication_design_compilation #################################################
+# model_vector_multiplication_design_compilation
 ##################################################################################################
 
 alias model_vector_multiplication_design_compilation {
@@ -54,7 +54,7 @@ alias model_vector_multiplication_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_summation_design_compilation ######################################################
+# model_vector_summation_design_compilation
 ##################################################################################################
 
 alias model_vector_summation_design_compilation {
@@ -65,7 +65,7 @@ alias model_vector_summation_design_compilation {
 }
 
 ##################################################################################################
-# model_vector_module_design_compilation #########################################################
+# model_vector_module_design_compilation
 ##################################################################################################
 
 alias model_vector_module_design_compilation {
@@ -75,7 +75,7 @@ alias model_vector_module_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_convolution_design_compilation ####################################################
+# model_matrix_convolution_design_compilation
 ##################################################################################################
 
 alias model_matrix_convolution_design_compilation {
@@ -87,7 +87,7 @@ alias model_matrix_convolution_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_vector_convolution_design_compilation #############################################
+# model_matrix_vector_convolution_design_compilation
 ##################################################################################################
 
 alias model_matrix_vector_convolution_design_compilation {
@@ -99,7 +99,7 @@ alias model_matrix_vector_convolution_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_inverse_design_compilation ########################################################
+# model_matrix_inverse_design_compilation
 ##################################################################################################
 
 alias model_matrix_inverse_design_compilation {
@@ -111,7 +111,7 @@ alias model_matrix_inverse_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_multiplication_design_compilation #################################################
+# model_matrix_multiplication_design_compilation
 ##################################################################################################
 
 alias model_matrix_multiplication_design_compilation {
@@ -123,7 +123,7 @@ alias model_matrix_multiplication_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_product_design_compilation ########################################################
+# model_matrix_product_design_compilation
 ##################################################################################################
 
 alias model_matrix_product_design_compilation {
@@ -135,7 +135,7 @@ alias model_matrix_product_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_vector_product_design_compilation #################################################
+# model_matrix_vector_product_design_compilation
 ##################################################################################################
 
 alias model_matrix_vector_product_design_compilation {
@@ -147,7 +147,7 @@ alias model_matrix_vector_product_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_summation_design_compilation ######################################################
+# model_matrix_summation_design_compilation
 ##################################################################################################
 
 alias model_matrix_summation_design_compilation {
@@ -158,7 +158,7 @@ alias model_matrix_summation_design_compilation {
 }
 
 ##################################################################################################
-# model_matrix_transpose_design_compilation ######################################################
+# model_matrix_transpose_design_compilation
 ##################################################################################################
 
 alias model_matrix_transpose_design_compilation {
@@ -168,7 +168,7 @@ alias model_matrix_transpose_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_convolution_design_compilation ####################################################
+# model_tensor_convolution_design_compilation
 ##################################################################################################
 
 alias model_tensor_convolution_design_compilation {
@@ -180,7 +180,7 @@ alias model_tensor_convolution_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_matrix_convolution_design_compilation #############################################
+# model_tensor_matrix_convolution_design_compilation
 ##################################################################################################
 
 alias model_tensor_matrix_convolution_design_compilation {
@@ -192,7 +192,7 @@ alias model_tensor_matrix_convolution_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_inverse_design_compilation ########################################################
+# model_tensor_inverse_design_compilation
 ##################################################################################################
 
 alias model_tensor_inverse_design_compilation {
@@ -204,7 +204,7 @@ alias model_tensor_inverse_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_product_design_compilation ########################################################
+# model_tensor_product_design_compilation
 ##################################################################################################
 
 alias model_tensor_product_design_compilation {
@@ -216,7 +216,7 @@ alias model_tensor_product_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_matrix_product_design_compilation #################################################
+# model_tensor_matrix_product_design_compilation
 ##################################################################################################
 
 alias model_tensor_matrix_product_design_compilation {
@@ -228,7 +228,7 @@ alias model_tensor_matrix_product_design_compilation {
 }
 
 ##################################################################################################
-# model_tensor_transpose_design_compilation ######################################################
+# model_tensor_transpose_design_compilation
 ##################################################################################################
 
 alias model_tensor_transpose_design_compilation {
