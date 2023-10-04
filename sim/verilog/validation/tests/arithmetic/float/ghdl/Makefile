@@ -1,27 +1,7 @@
 all: build simulate
 
 build:
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/pkg/model_arithmetic_verilog_pkg.vhd
-
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_adder.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/scalar/model_scalar_float_divider.vhd
-
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_adder.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/vector/model_vector_float_divider.vhd
-
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_adder.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_divider.vhd
-
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model_tensor_float_adder.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model_tensor_float_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model_tensor_float_divider.vhd
-
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_testbench.vhd
+	sh system.s
 
 simulate:
 	ghdl -e --std=08 model_float_testbench
