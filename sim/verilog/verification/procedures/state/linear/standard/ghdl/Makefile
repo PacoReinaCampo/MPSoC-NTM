@@ -1,9 +1,12 @@
 all: build simulate
 
 build:
-	sh system.s
+	sh system.g
 
 simulate:
+
+test:
+	gtkwave system.ghw
 
 clean:
 	rm -f *.cf *.vcd *.ghw

@@ -1,1 +1,1 @@
-gtkwave system.ghw
+make test
