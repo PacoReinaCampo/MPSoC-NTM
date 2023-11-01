@@ -11,7 +11,7 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_fixed_adder_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_adder.sv
@@ -22,7 +22,7 @@ alias accelerator_scalar_fixed_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_fixed_multiplier_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_multiplier.sv
@@ -33,7 +33,7 @@ alias accelerator_scalar_fixed_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_fixed_divider_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.sv
   vlog -sv -reportprogress 300 -work work $design_path/arithmetic/fixed/scalar/accelerator_scalar_fixed_divider.sv
@@ -44,7 +44,7 @@ alias accelerator_scalar_fixed_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_fixed_adder_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_adder.sv
@@ -57,7 +57,7 @@ alias accelerator_vector_fixed_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_fixed_multiplier_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_multiplier.sv
@@ -70,7 +70,7 @@ alias accelerator_vector_fixed_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_fixed_divider_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/vector/model_vector_fixed_divider.sv
@@ -83,7 +83,7 @@ alias accelerator_vector_fixed_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_fixed_adder_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_adder.sv
@@ -96,7 +96,7 @@ alias accelerator_matrix_fixed_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_fixed_multiplier_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_multiplier.sv
@@ -109,7 +109,7 @@ alias accelerator_matrix_fixed_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_fixed_divider_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/matrix/model_matrix_fixed_divider.sv
@@ -122,7 +122,7 @@ alias accelerator_matrix_fixed_divider_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_fixed_adder_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_adder.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_adder.sv
@@ -135,7 +135,7 @@ alias accelerator_tensor_fixed_adder_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_fixed_multiplier_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_multiplier.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_multiplier.sv
@@ -148,7 +148,7 @@ alias accelerator_tensor_fixed_multiplier_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_fixed_divider_design_compilation {
-  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.sv
+  vlog -sv -reportprogress 300 -work work $model_path/pkg/model_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_verilog_pkg.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/scalar/model_scalar_fixed_divider.sv
   vlog -sv -reportprogress 300 -work work $model_path/arithmetic/fixed/tensor/model_tensor_fixed_divider.sv
