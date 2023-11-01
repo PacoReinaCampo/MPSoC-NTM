@@ -11,7 +11,7 @@ vlib work
 ##################################################################################################
 
 alias accelerator_dot_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -26,7 +26,7 @@ alias accelerator_dot_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -41,7 +41,7 @@ alias accelerator_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_cosine_similarity_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -56,7 +56,7 @@ alias accelerator_vector_cosine_similarity_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_multiplication_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -70,7 +70,7 @@ alias accelerator_vector_multiplication_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_summation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -84,7 +84,7 @@ alias accelerator_vector_summation_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_module_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -123,7 +123,7 @@ alias accelerator_matrix_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_inverse_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -151,7 +151,7 @@ alias accelerator_matrix_multiplication_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -166,7 +166,7 @@ alias accelerator_matrix_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_vector_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -181,7 +181,7 @@ alias accelerator_matrix_vector_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_summation_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -195,7 +195,7 @@ alias accelerator_matrix_summation_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_transpose_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/math/algebra/matrix/model_matrix_transpose.vhd
@@ -208,7 +208,7 @@ alias accelerator_matrix_transpose_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -223,7 +223,7 @@ alias accelerator_tensor_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_matrix_convolution_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -238,7 +238,7 @@ alias accelerator_tensor_matrix_convolution_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_inverse_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -253,7 +253,7 @@ alias accelerator_tensor_inverse_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -268,7 +268,7 @@ alias accelerator_tensor_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_matrix_product_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -283,7 +283,7 @@ alias accelerator_tensor_matrix_product_design_compilation {
 ##################################################################################################
 
 alias accelerator_tensor_transpose_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd

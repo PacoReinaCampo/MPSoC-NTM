@@ -11,7 +11,7 @@ vlib work
 ##################################################################################################
 
 alias accelerator_scalar_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -28,7 +28,7 @@ alias accelerator_scalar_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_scalar_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -46,7 +46,7 @@ alias accelerator_scalar_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -65,7 +65,7 @@ alias accelerator_vector_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_vector_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -85,7 +85,7 @@ alias accelerator_vector_oneplus_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_logistic_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
@@ -106,7 +106,7 @@ alias accelerator_matrix_logistic_function_design_compilation {
 ##################################################################################################
 
 alias accelerator_matrix_oneplus_function_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $model_path/pkg/model_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/accelerator_math_vhdl_pkg.vhd
