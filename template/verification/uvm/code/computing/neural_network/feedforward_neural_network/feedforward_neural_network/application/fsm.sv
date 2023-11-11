@@ -29,7 +29,7 @@ module fsm (
       IDLE: begin
         if (in) begin
           next_state = S0001;
-        else
+        end else begin
           next_state = IDLE;
         end
       end
