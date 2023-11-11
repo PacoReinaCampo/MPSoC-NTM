@@ -17,30 +17,45 @@ module fsm (
   assign out = current_state == S1011 ? 1 : 0;
 
   always @(posedge clk) begin
-    if (!rst) current_state <= IDLE;
-    else current_state <= next_state;
+    if (!rst) begin
+      current_state <= IDLE;
+    end else begin
+      current_state <= next_state;
+    end
   end
 
   always @(current_state or in) begin
     case (current_state)
       IDLE: begin
-        if (in) next_state = S0001;
-        else next_state = IDLE;
+        if (in) begin
+          next_state = S0001;
+        else
+          next_state = IDLE;
+        end
       end
 
       S0001: begin
-        if (in) next_state = IDLE;
-        else next_state = S0010;
+        if (in) begin
+          next_state = IDLE;
+        end else begin
+          next_state = S0010;
+        end
       end
 
       S0010: begin
-        if (in) next_state = S0101;
-        else next_state = IDLE;
+        if (in) begin
+          next_state = S0101;
+        end else begin
+          next_state = IDLE;
+        end
       end
 
       S0101: begin
-        if (in) next_state = S1011;
-        else next_state = IDLE;
+        if (in) begin
+          next_state = S1011;
+        end else begin
+          next_state = IDLE;
+        end
       end
 
       S1011: begin
