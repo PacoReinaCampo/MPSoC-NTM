@@ -96,7 +96,7 @@ package accelerator_integer_pkg is
   constant SCALAR_SAMPLE_B_SEED1 : integer := 15;
   constant SCALAR_SAMPLE_B_SEED2 : integer := 16;
 
-  --Integer Buffer
+  -- Integer Buffer
   constant TENSOR_SAMPLE_A : tensor_buffer := tensor_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, CONTROL_SIZE, TENSOR_SAMPLE_A_SEED1, TENSOR_SAMPLE_A_SEED2);
   constant TENSOR_SAMPLE_B : tensor_buffer := tensor_randomness_generation(CONTROL_SIZE, CONTROL_SIZE, CONTROL_SIZE, TENSOR_SAMPLE_A_SEED1, TENSOR_SAMPLE_A_SEED2);
 
