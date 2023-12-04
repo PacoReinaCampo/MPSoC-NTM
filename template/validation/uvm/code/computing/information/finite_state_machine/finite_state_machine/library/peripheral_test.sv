@@ -25,7 +25,10 @@ class peripheral_test extends uvm_test;
 
     // Get virtual IF handle from top level and pass it to everything
     // in peripheral_environment level
-    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif)) `uvm_fatal("TEST", "Did not get vif")
+    if (!uvm_config_db#(virtual design_if)::get(this, "", "des_vif", vif)) begin
+      `uvm_fatal("TEST", "Did not get vif")
+    end
+
     uvm_config_db#(virtual design_if)::set(this, "environment.agent.*", "des_vif", vif);
 
     // Setup pattern queue and place into config db

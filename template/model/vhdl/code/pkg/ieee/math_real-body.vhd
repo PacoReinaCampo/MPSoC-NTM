@@ -55,7 +55,7 @@ package body MATH_REAL is
     --
     constant  MATH_E_P2 :  REAL := 7.38905_60989_30650;   -- e**2
     constant  MATH_E_P10 :  REAL := 22026.46579_48067_17; -- e**10
-    constant  MATH_EIGHT_PI : REAL := 25.13274_12287_18345_90770_115; -- 8*pi
+    constant  MATH_EIGHT_PI : REAL := 25.13274_12287_18345_90770_115; --8*pi
     constant  MAX_ITER:  INTEGER := 27;  -- Maximum precision factor for cordic
     constant  MAX_COUNT: INTEGER := 150; -- Maximum count for number of tries
     constant  BASE_EPS: REAL := 0.00001;  -- Factor for convergence criteria
@@ -1128,7 +1128,7 @@ package body MATH_REAL is
         M := ILOGB(X);
         G := LDEXP(X, -M);
         J := INTEGER(REAL(N)*(G-1.0)); -- C code adds 0.5 for rounding
-        F1 := (1.0/REAL(N)) * REAL(J) + 1.0; -- F1*128 is an INTEGER in [128,512]
+        F1 := (1.0/REAL(N)) * REAL(J) + 1.0; --F1*128 is an INTEGER in [128,512]
         F2 := G - F1;
 
         -- Approximate expansion for log(1+f2/F1) ~= u + q
@@ -1150,7 +1150,7 @@ package body MATH_REAL is
                 --
         else
                 U1 := U;
-                -- TRUNC(U1); -- In c this is u1 = (double) (float) (u1)
+                --TRUNC(U1); --In c this is u1 = (double) (float) (u1)
         end if;
 
         U2 := (2.0*(F2 - F1*U1) - U1*F2) * G;
