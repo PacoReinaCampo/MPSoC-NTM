@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/classes/application/arithmetic/matrix/divider/ntm_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../../../validation/classes/library/arithmetic/matrix/divider/ntm_testbench.sv

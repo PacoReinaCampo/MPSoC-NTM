@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/uvm/application/math/statitics/scalar/ntm_scalar_mean/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/arithmetic/scalar/adder/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/math/statitics/scalar/ntm_scalar_mean/ntm_uvm_testbench.sv

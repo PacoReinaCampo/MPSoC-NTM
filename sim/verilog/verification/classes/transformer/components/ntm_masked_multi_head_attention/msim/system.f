@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/classes/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../verification/classes/application/transformer/components/ntm_masked_multi_head_attention/ntm_design.sv
 
-../../../../../../../verification/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../../verification/classes/library/transformer/components/ntm_masked_multi_head_attention/ntm_testbench.sv

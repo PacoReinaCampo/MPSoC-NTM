@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/classes/application/state/feedback/ntm_state_matrix_feedforward/ntm_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../../../validation/classes/library/state/feedback/ntm_state_matrix_feedforward/ntm_testbench.sv

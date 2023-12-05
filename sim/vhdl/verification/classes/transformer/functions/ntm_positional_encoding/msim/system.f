@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/classes/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../verification/classes/application/transformer/functions/ntm_positional_encoding/ntm_design.sv
 
-../../../../../../../verification/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../../verification/classes/library/transformer/functions/ntm_positional_encoding/ntm_testbench.sv

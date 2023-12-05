@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/classes/application/trainer/FNN/ntm_fnn_u_trainer/ntm_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../../../validation/classes/library/trainer/FNN/ntm_fnn_u_trainer/ntm_testbench.sv

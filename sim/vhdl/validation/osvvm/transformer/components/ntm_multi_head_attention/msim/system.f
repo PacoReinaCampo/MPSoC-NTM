@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/osvvm/application/arithmetic/scalar/adder/ntm_design.vhd
-../../../../../../../validation/osvvm/application/arithmetic/scalar/adder/ntm_design_pkg.vhd
+../../../../../../../validation/osvvm/application/transformer/components/ntm_multi_head_attention/ntm_design.vhd
+../../../../../../../validation/osvvm/application/transformer/components/ntm_multi_head_attention/ntm_design_pkg.vhd
 
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_model.vhd
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_model_pkg.vhd
+../../../../../../../validation/osvvm/library/transformer/components/ntm_multi_head_attention/ntm_model.vhd
+../../../../../../../validation/osvvm/library/transformer/components/ntm_multi_head_attention/ntm_model_pkg.vhd
 
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_testbench.vhd
+../../../../../../../validation/osvvm/library/transformer/components/ntm_multi_head_attention/ntm_testbench.vhd

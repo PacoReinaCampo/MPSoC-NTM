@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/uvm/application/controller/LSTM/standard/ntm_input_gate_vector/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/arithmetic/scalar/adder/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/controller/LSTM/standard/ntm_input_gate_vector/ntm_uvm_testbench.sv

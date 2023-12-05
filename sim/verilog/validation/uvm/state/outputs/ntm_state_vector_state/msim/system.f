@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../../validation/uvm/application/state/outputs/ntm_state_vector_state/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/arithmetic/scalar/adder/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/state/outputs/ntm_state_vector_state/ntm_uvm_testbench.sv

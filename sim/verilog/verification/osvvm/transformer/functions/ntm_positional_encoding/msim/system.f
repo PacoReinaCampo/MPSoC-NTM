@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/osvvm/application/arithmetic/scalar/adder/ntm_design.vhd
-../../../../../../../validation/osvvm/application/arithmetic/scalar/adder/ntm_design_pkg.vhd
+../../../../../../../validation/osvvm/application/transformer/functions/ntm_positional_encoding/ntm_design.vhd
+../../../../../../../validation/osvvm/application/transformer/functions/ntm_positional_encoding/ntm_design_pkg.vhd
 
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_model.vhd
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_model_pkg.vhd
+../../../../../../../validation/osvvm/library/transformer/functions/ntm_positional_encoding/ntm_model.vhd
+../../../../../../../validation/osvvm/library/transformer/functions/ntm_positional_encoding/ntm_model_pkg.vhd
 
-../../../../../../../validation/osvvm/library/arithmetic/scalar/adder/ntm_testbench.vhd
+../../../../../../../validation/osvvm/library/transformer/functions/ntm_positional_encoding/ntm_testbench.vhd

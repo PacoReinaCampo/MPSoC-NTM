@@ -42,6 +42,6 @@
 //                                                                               //
 ../../../../../../../../../../../../../../../../../../../../..////////////
 
-sv work ../../../../../../../validation/classes/application/arithmetic/scalar/adder/ntm_design.sv
+sv work ../../../../../../../validation/classes/application/transformer/components/ntm_multi_head_attention/ntm_design.sv
 
-sv work ../../../../../../../validation/classes/library/arithmetic/scalar/adder/ntm_testbench.sv
+sv work ../../../../../../../validation/classes/library/transformer/components/ntm_multi_head_attention/ntm_testbench.sv

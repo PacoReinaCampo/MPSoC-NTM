@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../validation/uvm/src
 
-../../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../../validation/uvm/application/transformer/top/ntm_decoder/ntm_design.sv
 
-../../../../../../../validation/uvm/library/arithmetic/scalar/adder/ntm_uvm_testbench.sv
+../../../../../../../validation/uvm/library/transformer/top/ntm_decoder/ntm_uvm_testbench.sv
