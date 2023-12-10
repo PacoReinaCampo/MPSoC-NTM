@@ -51,7 +51,7 @@ simulate:
 	vvp system.vvp
 
 test:
-	gtkwave system.vcd
+	gtkwave system.vcd *.wdb
 
 clean:
-	rm -rf *.vcd *.vvp
+	rm -rf *.vcd *.wdb *.vvp

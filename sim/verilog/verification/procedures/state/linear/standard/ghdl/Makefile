@@ -9,4 +9,4 @@ test:
 	gtkwave system.ghw
 
 clean:
-	rm -f *.cf *.vcd *.ghw
+	rm -f *.cf *.vcd *.wdb *.ghw

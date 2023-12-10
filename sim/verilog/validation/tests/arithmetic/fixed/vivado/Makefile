@@ -51,4 +51,4 @@ simulate:
 	xsim -R model_FIXED_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd *.wdb .Xil

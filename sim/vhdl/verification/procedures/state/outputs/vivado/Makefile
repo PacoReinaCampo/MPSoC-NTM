@@ -52,4 +52,4 @@ simulate:
 	xsim -R accelerator_state_outputs_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd *.wdb .Xil

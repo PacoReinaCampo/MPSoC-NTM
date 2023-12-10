@@ -52,4 +52,4 @@ simulate:
 	xsim -R model_state_top_testbench
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd *.wdb .Xil
