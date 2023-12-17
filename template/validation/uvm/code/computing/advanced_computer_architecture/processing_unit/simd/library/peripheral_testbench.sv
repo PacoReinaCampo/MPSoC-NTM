@@ -5,11 +5,16 @@ import uvm_pkg::*;
 `include "peripheral_test.sv"
 
 module peripheral_testbench;
+  // Clock declaration
   reg clk;
 
+  // Clock Generation
   always #10 clk = ~clk;
+
+  // Virtual interface
   design_if _if (clk);
 
+  // DUT instantiation
   fsm dut (
     .clk(clk),
     .rst(_if.rst),
@@ -20,7 +25,11 @@ module peripheral_testbench;
 
   initial begin
     clk <= 0;
-    uvm_config_db#(virtual design_if)::set(null, "uvm_test_top", "des_vif", _if);
+
+    // Passing the interface handle to lower heirarchy using set method
+    uvm_config_db#(virtual design_if)::set(null, "uvm_test_top", "design_if", _if);
+
+    // Calling TestCase
     run_test("peripheral_sample");
   end
 endmodule
