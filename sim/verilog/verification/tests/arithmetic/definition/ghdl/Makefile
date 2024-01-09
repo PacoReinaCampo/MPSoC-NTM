@@ -5,7 +5,7 @@ build:
 
 simulate:
 	ghdl -e --std=08 accelerator_float_testbench
-	ghdl -r --std=08 accelerator_float_testbench --ieee-asserts=disable-at-0 -.vcd *.wdb=accelerator_float_testbench.vcd *.wdb --wave=system.ghw --stop-time=1ms
+	ghdl -r --std=08 accelerator_float_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_float_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 test:
 	gtkwave system.ghw

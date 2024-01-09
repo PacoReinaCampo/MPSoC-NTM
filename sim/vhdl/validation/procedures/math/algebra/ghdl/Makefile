@@ -5,7 +5,7 @@ build:
 
 simulate:
 	ghdl -e --std=08 model_algebra_testbench
-	ghdl -r --std=08 model_algebra_testbench --ieee-asserts=disable-at-0 -.vcd *.wdb=model_algebra_testbench.vcd *.wdb --wave=system.ghw --stop-time=1ms
+	ghdl -r --std=08 model_algebra_testbench --ieee-asserts=disable-at-0 --vcd=model_algebra_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 test:
 	gtkwave system.ghw

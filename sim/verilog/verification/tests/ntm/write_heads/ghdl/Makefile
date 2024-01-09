@@ -5,7 +5,7 @@ build:
 
 simulate:
 	ghdl -e --std=08 accelerator_write_heads_testbench
-	ghdl -r --std=08 accelerator_write_heads_testbench --ieee-asserts=disable-at-0 -.vcd *.wdb=accelerator_write_heads_testbench.vcd *.wdb --wave=system.ghw --stop-time=1ms
+	ghdl -r --std=08 accelerator_write_heads_testbench --ieee-asserts=disable-at-0 --vcd=accelerator_write_heads_testbench.vcd --wave=system.ghw --stop-time=1ms
 
 test:
 	gtkwave system.ghw
