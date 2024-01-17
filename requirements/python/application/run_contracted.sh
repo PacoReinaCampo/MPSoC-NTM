@@ -42,6 +42,11 @@
 ##                                                                               ##
 ###################################################################################
 
+python3 arithmetic/scalar/adder/test_scalar_adder.py
+python3 arithmetic/scalar/subtractor/test_scalar_subtractor.py
+python3 arithmetic/scalar/multiplier/test_scalar_multiplier.py
+python3 arithmetic/scalar/divider/test_scalar_divider.py
+
 python3 arithmetic/test_matrix_arithmetic.py
 python3 arithmetic/test_scalar_arithmetic.py
 python3 arithmetic/test_tensor_arithmetic.py
