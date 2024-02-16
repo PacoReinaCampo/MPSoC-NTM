@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/combinational_logic/arithmetic_circuits/application/switch.sv
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/combinational_logic/arithmetic_circuits/library/testbench.sv

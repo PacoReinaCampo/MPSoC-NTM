@@ -16,6 +16,10 @@ library
 │   └── LSTM
 │       ├── convolutional
 │       └── standard
+├── dnc
+│   ├── memory
+│   ├── top
+│   └── trained
 ├── math
 │   ├── algebra
 │   │   └── src
@@ -82,4 +86,4 @@ library
     ├── inputs
     └── top
 
-62 directories, 20 files
+66 directories, 20 files

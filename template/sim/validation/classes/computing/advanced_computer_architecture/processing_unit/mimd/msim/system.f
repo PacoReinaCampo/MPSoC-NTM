@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/advanced_computer_architecture/processing_unit/mimd/application/switch.sv
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/advanced_computer_architecture/processing_unit/mimd/library/testbench.sv

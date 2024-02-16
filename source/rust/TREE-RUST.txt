@@ -55,6 +55,34 @@ library
 │   │       └── ntm_state_gate_vector.rs
 │   ├── ntm_fnn_controller.rs
 │   └── ntm_lstm_controller.rs
+├── dnc
+│   ├── dnc.rs
+│   ├── memory
+│   │   ├── dnc_addressing.rs
+│   │   ├── dnc_allocation_weighting.rs
+│   │   ├── dnc_backward_weighting.rs
+│   │   ├── dnc_forward_weighting.rs
+│   │   ├── dnc_matrix_content_based_addressing.rs
+│   │   ├── dnc_memory_matrix.rs
+│   │   ├── dnc_memory_retention_vector.rs
+│   │   ├── dnc_precedence_weighting.rs
+│   │   ├── dnc_read_content_weighting.rs
+│   │   ├── dnc_read_vectors.rs
+│   │   ├── dnc_read_weighting.rs
+│   │   ├── dnc_sort_vector.rs
+│   │   ├── dnc_temporal_link_matrix.rs
+│   │   ├── dnc_usage_vector.rs
+│   │   ├── dnc_vector_content_based_addressing.rs
+│   │   ├── dnc_write_content_weighting.rs
+│   │   └── dnc_write_weighting.rs
+│   ├── top
+│   │   ├── dnc_interface_matrix.rs
+│   │   ├── dnc_interface_top.rs
+│   │   ├── dnc_interface_vector.rs
+│   │   ├── dnc_output_vector.rs
+│   │   └── dnc_top.rs
+│   └── trained
+│       └── dnc_trained_top.rs
 ├── math
 │   ├── algebra
 │   │   └── src
@@ -261,4 +289,4 @@ library
         ├── ntm_decoder.rs
         └── ntm_encoder.rs
 
-62 directories, 199 files
+66 directories, 223 files

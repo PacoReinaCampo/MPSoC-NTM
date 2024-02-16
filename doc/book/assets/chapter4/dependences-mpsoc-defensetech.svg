@@ -756,60 +756,60 @@
 <path fill="none" stroke="black" d="M462.32,-66.15C475.62,-63.62 489.81,-60.92 502.99,-58.41"/>
 <polygon fill="black" stroke="black" points="503.68,-61.84 512.85,-56.53 502.37,-54.96 503.68,-61.84"/>
 </g>
-<!-- MPSoC_LifeTech -->
+<!-- MPSoC_DefenseTech -->
 <g id="node28" class="node">
-<title>MPSoC_LifeTech</title>
+<title>MPSoC_DefenseTech</title>
 <polygon fill="none" stroke="black" points="650,-229.5 650,-267.5 790,-267.5 790,-229.5 650,-229.5"/>
-<text text-anchor="middle" x="720" y="-252.3" font-family="Times,serif" font-size="14.00">MPSoC_LifeTech </text>
+<text text-anchor="middle" x="720" y="-252.3" font-family="Times,serif" font-size="14.00">MPSoC_DefenseTech </text>
 <text text-anchor="middle" x="720" y="-237.3" font-family="Times,serif" font-size="14.00">Advanced</text>
 </g>
-<!-- MPSoC_NTM&#45;&gt;MPSoC_LifeTech -->
+<!-- MPSoC_NTM&#45;&gt;MPSoC_DefenseTech -->
 <g id="edge98" class="edge">
-<title>MPSoC_NTM&#45;&gt;MPSoC_LifeTech</title>
+<title>MPSoC_NTM&#45;&gt;MPSoC_DefenseTech</title>
 <path fill="none" stroke="black" d="M614.12,-266.63C622.43,-265.19 631.11,-263.69 639.77,-262.19"/>
 <polygon fill="black" stroke="black" points="640.64,-265.6 649.9,-260.44 639.45,-258.7 640.64,-265.6"/>
 </g>
-<!-- SoC_LifeTech -->
+<!-- SoC_DefenseTech -->
 <g id="node29" class="node">
-<title>SoC_LifeTech</title>
+<title>SoC_DefenseTech</title>
 <polygon fill="none" stroke="black" points="662,-399.5 662,-437.5 778,-437.5 778,-399.5 662,-399.5"/>
-<text text-anchor="middle" x="720" y="-422.3" font-family="Times,serif" font-size="14.00">SoC_LifeTech </text>
+<text text-anchor="middle" x="720" y="-422.3" font-family="Times,serif" font-size="14.00">SoC_DefenseTech </text>
 <text text-anchor="middle" x="720" y="-407.3" font-family="Times,serif" font-size="14.00">Advanced</text>
 </g>
-<!-- SoC_NTM&#45;&gt;SoC_LifeTech -->
+<!-- SoC_NTM&#45;&gt;SoC_DefenseTech -->
 <g id="edge96" class="edge">
-<title>SoC_NTM&#45;&gt;SoC_LifeTech</title>
+<title>SoC_NTM&#45;&gt;SoC_DefenseTech</title>
 <path fill="none" stroke="black" d="M602.13,-439.42C617.48,-436.67 634.98,-433.54 651.69,-430.55"/>
 <polygon fill="black" stroke="black" points="652.73,-433.92 661.96,-428.71 651.5,-427.03 652.73,-433.92"/>
 </g>
-<!-- PU_LifeTech -->
+<!-- PU_DefenseTech -->
 <g id="node30" class="node">
-<title>PU_LifeTech</title>
+<title>PU_DefenseTech</title>
 <polygon fill="none" stroke="black" points="665.5,-58.5 665.5,-96.5 774.5,-96.5 774.5,-58.5 665.5,-58.5"/>
-<text text-anchor="middle" x="720" y="-81.3" font-family="Times,serif" font-size="14.00">PU_LifeTech </text>
+<text text-anchor="middle" x="720" y="-81.3" font-family="Times,serif" font-size="14.00">PU_DefenseTech </text>
 <text text-anchor="middle" x="720" y="-66.3" font-family="Times,serif" font-size="14.00">Advanced</text>
 </g>
-<!-- PU_NTM&#45;&gt;PU_LifeTech -->
+<!-- PU_NTM&#45;&gt;PU_DefenseTech -->
 <g id="edge94" class="edge">
-<title>PU_NTM&#45;&gt;PU_LifeTech</title>
+<title>PU_NTM&#45;&gt;PU_DefenseTech</title>
 <path fill="none" stroke="black" d="M599.14,-98.22C616.31,-95.25 636.52,-91.76 655.41,-88.49"/>
 <polygon fill="black" stroke="black" points="656.19,-91.91 665.44,-86.76 654.99,-85.01 656.19,-91.91"/>
 </g>
-<!-- MPSoC_DNC&#45;&gt;MPSoC_LifeTech -->
+<!-- MPSoC_DNC&#45;&gt;MPSoC_DefenseTech -->
 <g id="edge99" class="edge">
-<title>MPSoC_DNC&#45;&gt;MPSoC_LifeTech</title>
+<title>MPSoC_DNC&#45;&gt;MPSoC_DefenseTech</title>
 <path fill="none" stroke="black" d="M613.21,-229.56C621.77,-231.09 630.74,-232.7 639.69,-234.3"/>
 <polygon fill="black" stroke="black" points="639.3,-237.79 649.76,-236.1 640.53,-230.9 639.3,-237.79"/>
 </g>
-<!-- SoC_DNC&#45;&gt;SoC_LifeTech -->
+<!-- SoC_DNC&#45;&gt;SoC_DefenseTech -->
 <g id="edge97" class="edge">
-<title>SoC_DNC&#45;&gt;SoC_LifeTech</title>
+<title>SoC_DNC&#45;&gt;SoC_DefenseTech</title>
 <path fill="none" stroke="black" d="M601.27,-398.15C616.93,-400.86 634.92,-403.97 652.04,-406.93"/>
 <polygon fill="black" stroke="black" points="651.55,-410.39 662,-408.65 652.74,-403.5 651.55,-410.39"/>
 </g>
-<!-- PU_DNC&#45;&gt;PU_LifeTech -->
+<!-- PU_DNC&#45;&gt;PU_DefenseTech -->
 <g id="edge95" class="edge">
-<title>PU_DNC&#45;&gt;PU_LifeTech</title>
+<title>PU_DNC&#45;&gt;PU_DefenseTech</title>
 <path fill="none" stroke="black" d="M599.14,-56.04C616.31,-59.12 636.52,-62.74 655.41,-66.12"/>
 <polygon fill="black" stroke="black" points="654.98,-69.6 665.44,-67.91 656.22,-62.71 654.98,-69.6"/>
 </g>

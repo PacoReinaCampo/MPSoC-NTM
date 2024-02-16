@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/fsm.sv
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/peripheral_testbench.sv

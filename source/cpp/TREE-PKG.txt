@@ -29,6 +29,11 @@ library
 │   └── LSTM
 │       ├── convolutional
 │       └── standard
+├── dnc
+│   ├── dnc.hpp
+│   ├── memory
+│   ├── top
+│   └── trained
 ├── math
 │   ├── algebra
 │   │   ├── ntm_math_algebra.hpp
@@ -82,4 +87,4 @@ library
     ├── inputs
     └── top
 
-72 directories, 10 files
+76 directories, 11 files

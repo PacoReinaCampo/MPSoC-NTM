@@ -43,8 +43,8 @@ digraph Project {
 
   // Advanced Blocks
   subgraph "cluster AdvancedBlocks" { label = "Advanced Blocks";
-    SoC_LifeTech[label="SoC_LifeTech \nAdvanced"];
-    PU_LifeTech[label="PU_LifeTech \nAdvanced"];
+    SoC_DefenseTech[label="SoC_DefenseTech \nAdvanced"];
+    PU_DefenseTech[label="PU_DefenseTech \nAdvanced"];
   }
 
   // Peripheral -> Architecture
@@ -124,9 +124,9 @@ digraph Project {
   SoC_DV -> SoC_DNC;
 
   // Accelerator -> Advanced
-  PU_NTM -> PU_LifeTech;
-  PU_DNC -> PU_LifeTech;
+  PU_NTM -> PU_DefenseTech;
+  PU_DNC -> PU_DefenseTech;
 
-  SoC_NTM -> SoC_LifeTech;
-  SoC_DNC -> SoC_LifeTech;
+  SoC_NTM -> SoC_DefenseTech;
+  SoC_DNC -> SoC_DefenseTech;
 }

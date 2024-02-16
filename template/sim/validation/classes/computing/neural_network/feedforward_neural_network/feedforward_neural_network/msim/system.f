@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/switch.sv
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/testbench.sv

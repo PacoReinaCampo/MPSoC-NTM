@@ -31,6 +31,33 @@ library
 │           ├── ntm_input_gate_vector.adb
 │           ├── ntm_output_gate_vector.adb
 │           └── ntm_state_gate_vector.adb
+├── dnc
+│   ├── memory
+│   │   ├── dnc_addressing.adb
+│   │   ├── dnc_allocation_weighting.adb
+│   │   ├── dnc_backward_weighting.adb
+│   │   ├── dnc_forward_weighting.adb
+│   │   ├── dnc_matrix_content_based_addressing.adb
+│   │   ├── dnc_memory_matrix.adb
+│   │   ├── dnc_memory_retention_vector.adb
+│   │   ├── dnc_precedence_weighting.adb
+│   │   ├── dnc_read_content_weighting.adb
+│   │   ├── dnc_read_vectors.adb
+│   │   ├── dnc_read_weighting.adb
+│   │   ├── dnc_sort_vector.adb
+│   │   ├── dnc_temporal_link_matrix.adb
+│   │   ├── dnc_usage_vector.adb
+│   │   ├── dnc_vector_content_based_addressing.adb
+│   │   ├── dnc_write_content_weighting.adb
+│   │   └── dnc_write_weighting.adb
+│   ├── top
+│   │   ├── dnc_interface_matrix.adb
+│   │   ├── dnc_interface_top.adb
+│   │   ├── dnc_interface_vector.adb
+│   │   ├── dnc_output_vector.adb
+│   │   └── dnc_top.adb
+│   └── trained
+│       └── dnc_trained_top.adb
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -156,4 +183,4 @@ library
         ├── ntm_decoder.adb
         └── ntm_encoder.adb
 
-56 directories, 100 files
+60 directories, 123 files

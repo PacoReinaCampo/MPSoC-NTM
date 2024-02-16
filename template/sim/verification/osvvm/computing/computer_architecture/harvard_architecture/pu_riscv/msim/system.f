@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/harvard_architecture/pu_riscv/application/ntm_design.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/harvard_architecture/pu_riscv/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/harvard_architecture/pu_riscv/library/ntm_model.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/harvard_architecture/pu_riscv/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/harvard_architecture/pu_riscv/library/ntm_testbench.vhd

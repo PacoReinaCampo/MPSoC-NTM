@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-vhdl2008 work ../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/or_gate/application/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/or_gate/application/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-vhdl2008 work ../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/or_gate/library/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/or_gate/library/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/or_gate/library/ntm_testbench.vhd

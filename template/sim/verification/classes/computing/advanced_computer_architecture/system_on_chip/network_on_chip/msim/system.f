@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/network_on_chip/application/switch.sv
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/network_on_chip/library/testbench.sv

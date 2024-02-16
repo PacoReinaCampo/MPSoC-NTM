@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/quantum/verification/uvm/code/computing/information/bit/bit/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/or_gate/application/fsm.sv
 
-../../../../../../../../../../template/quantum/verification/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/or_gate/library/peripheral_testbench.sv

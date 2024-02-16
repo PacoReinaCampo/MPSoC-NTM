@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/application/switch.sv
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/library/testbench.sv

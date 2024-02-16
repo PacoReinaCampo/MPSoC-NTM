@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/switch.sv
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/testbench.sv

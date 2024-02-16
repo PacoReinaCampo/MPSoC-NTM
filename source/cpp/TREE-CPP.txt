@@ -129,6 +129,80 @@ library
 │   │       └── ntm_state_gate_vector_testbench.cpp
 │   ├── ntm_fnn_controller.cpp
 │   └── ntm_lstm_controller.cpp
+├── dnc
+│   ├── dnc.cpp
+│   ├── memory
+│   │   ├── dnc_addressing.cpp
+│   │   ├── dnc_addressing_design.cpp
+│   │   ├── dnc_addressing_testbench.cpp
+│   │   ├── dnc_allocation_weighting.cpp
+│   │   ├── dnc_allocation_weighting_design.cpp
+│   │   ├── dnc_allocation_weighting_testbench.cpp
+│   │   ├── dnc_backward_weighting.cpp
+│   │   ├── dnc_backward_weighting_design.cpp
+│   │   ├── dnc_backward_weighting_testbench.cpp
+│   │   ├── dnc_forward_weighting.cpp
+│   │   ├── dnc_forward_weighting_design.cpp
+│   │   ├── dnc_forward_weighting_testbench.cpp
+│   │   ├── dnc_matrix_content_based_addressing.cpp
+│   │   ├── dnc_matrix_content_based_addressing_design.cpp
+│   │   ├── dnc_matrix_content_based_addressing_testbench.cpp
+│   │   ├── dnc_memory_matrix.cpp
+│   │   ├── dnc_memory_matrix_design.cpp
+│   │   ├── dnc_memory_matrix_testbench.cpp
+│   │   ├── dnc_memory_retention_vector.cpp
+│   │   ├── dnc_memory_retention_vector_design.cpp
+│   │   ├── dnc_memory_retention_vector_testbench.cpp
+│   │   ├── dnc_precedence_weighting.cpp
+│   │   ├── dnc_precedence_weighting_design.cpp
+│   │   ├── dnc_precedence_weighting_testbench.cpp
+│   │   ├── dnc_read_content_weighting.cpp
+│   │   ├── dnc_read_content_weighting_design.cpp
+│   │   ├── dnc_read_content_weighting_testbench.cpp
+│   │   ├── dnc_read_vectors.cpp
+│   │   ├── dnc_read_vectors_design.cpp
+│   │   ├── dnc_read_vectors_testbench.cpp
+│   │   ├── dnc_read_weighting.cpp
+│   │   ├── dnc_read_weighting_design.cpp
+│   │   ├── dnc_read_weighting_testbench.cpp
+│   │   ├── dnc_sort_vector.cpp
+│   │   ├── dnc_sort_vector_design.cpp
+│   │   ├── dnc_sort_vector_testbench.cpp
+│   │   ├── dnc_temporal_link_matrix.cpp
+│   │   ├── dnc_temporal_link_matrix_design.cpp
+│   │   ├── dnc_temporal_link_matrix_testbench.cpp
+│   │   ├── dnc_usage_vector.cpp
+│   │   ├── dnc_usage_vector_design.cpp
+│   │   ├── dnc_usage_vector_testbench.cpp
+│   │   ├── dnc_vector_content_based_addressing.cpp
+│   │   ├── dnc_vector_content_based_addressing_design.cpp
+│   │   ├── dnc_vector_content_based_addressing_testbench.cpp
+│   │   ├── dnc_write_content_weighting.cpp
+│   │   ├── dnc_write_content_weighting_design.cpp
+│   │   ├── dnc_write_content_weighting_testbench.cpp
+│   │   ├── dnc_write_weighting.cpp
+│   │   ├── dnc_write_weighting_design.cpp
+│   │   └── dnc_write_weighting_testbench.cpp
+│   ├── top
+│   │   ├── dnc_interface_matrix.cpp
+│   │   ├── dnc_interface_matrix_design.cpp
+│   │   ├── dnc_interface_matrix_testbench.cpp
+│   │   ├── dnc_interface_top.cpp
+│   │   ├── dnc_interface_top_design.cpp
+│   │   ├── dnc_interface_top_testbench.cpp
+│   │   ├── dnc_interface_vector.cpp
+│   │   ├── dnc_interface_vector_design.cpp
+│   │   ├── dnc_interface_vector_testbench.cpp
+│   │   ├── dnc_output_vector.cpp
+│   │   ├── dnc_output_vector_design.cpp
+│   │   ├── dnc_output_vector_testbench.cpp
+│   │   ├── dnc_top.cpp
+│   │   ├── dnc_top_design.cpp
+│   │   └── dnc_top_testbench.cpp
+│   └── trained
+│       ├── dnc_trained_top.cpp
+│       ├── dnc_trained_top_design.cpp
+│       └── dnc_trained_top_testbench.cpp
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -543,4 +617,4 @@ library
         ├── ntm_encoder_design.cpp
         └── ntm_encoder_testbench.cpp
 
-72 directories, 471 files
+76 directories, 541 files

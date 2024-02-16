@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/application/ntm_design.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/ntm_model.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/ntm_testbench.vhd

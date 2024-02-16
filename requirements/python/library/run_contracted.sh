@@ -76,6 +76,10 @@ python3 ntm/test_ntm_top.py
 python3 ntm/test_ntm_trained.py
 python3 ntm/test_ntm_write_heads.py
 
+python3 dnc/test_dnc_memory.py
+python3 dnc/test_dnc_top.py
+python3 dnc/test_dnc_trained.py
+
 python3 transformer/test_transformer_components.py
 python3 transformer/test_transformer_controller.py
 python3 transformer/test_transformer_functions.py

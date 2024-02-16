@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/fsm.sv
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/peripheral_testbench.sv

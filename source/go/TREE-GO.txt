@@ -31,6 +31,33 @@ library
 │           ├── ntm_input_gate_vector.go
 │           ├── ntm_output_gate_vector.go
 │           └── ntm_state_gate_vector.go
+├── dnc
+│   ├── memory
+│   │   ├── dnc_addressing.go
+│   │   ├── dnc_allocation_weighting.go
+│   │   ├── dnc_backward_weighting.go
+│   │   ├── dnc_forward_weighting.go
+│   │   ├── dnc_matrix_content_based_addressing.go
+│   │   ├── dnc_memory_matrix.go
+│   │   ├── dnc_memory_retention_vector.go
+│   │   ├── dnc_precedence_weighting.go
+│   │   ├── dnc_read_content_weighting.go
+│   │   ├── dnc_read_vectors.go
+│   │   ├── dnc_read_weighting.go
+│   │   ├── dnc_sort_vector.go
+│   │   ├── dnc_temporal_link_matrix.go
+│   │   ├── dnc_usage_vector.go
+│   │   ├── dnc_vector_content_based_addressing.go
+│   │   ├── dnc_write_content_weighting.go
+│   │   └── dnc_write_weighting.go
+│   ├── top
+│   │   ├── dnc_interface_matrix.go
+│   │   ├── dnc_interface_top.go
+│   │   ├── dnc_interface_vector.go
+│   │   ├── dnc_output_vector.go
+│   │   └── dnc_top.go
+│   └── trained
+│       └── dnc_trained_top.go
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -182,4 +209,4 @@ library
         ├── ntm_decoder.go
         └── ntm_encoder.go
 
-56 directories, 126 files
+60 directories, 149 files

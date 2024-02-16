@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/validation/uvm/code/computing/information/bit/bit/application/fsm.sv
+sv work ../../../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/application/fsm.sv
 
-sv work ../../../../../../../../../../template/traditional/validation/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+sv work ../../../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/library/peripheral_testbench.sv

@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/application/switch.sv
 
-sv work ../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/turing_machine/differentiable_neural_computer/feedforward_differentiable_neural_computer/library/testbench.sv

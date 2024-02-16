@@ -71,6 +71,36 @@ library
 │       │   └── ntm_state_gate_vector.py
 │       ├── test_convolutional_lstm_controller.py
 │       └── test_standard_lstm_controller.py
+├── dnc
+│   ├── memory
+│   │   ├── dnc_addressing.py
+│   │   ├── dnc_allocation_weighting.py
+│   │   ├── dnc_backward_weighting.py
+│   │   ├── dnc_forward_weighting.py
+│   │   ├── dnc_matrix_content_based_addressing.py
+│   │   ├── dnc_memory_matrix.py
+│   │   ├── dnc_memory_retention_vector.py
+│   │   ├── dnc_precedence_weighting.py
+│   │   ├── dnc_read_content_weighting.py
+│   │   ├── dnc_read_vectors.py
+│   │   ├── dnc_read_weighting.py
+│   │   ├── dnc_sort_vector.py
+│   │   ├── dnc_temporal_link_matrix.py
+│   │   ├── dnc_usage_vector.py
+│   │   ├── dnc_vector_content_based_addressing.py
+│   │   ├── dnc_write_content_weighting.py
+│   │   └── dnc_write_weighting.py
+│   ├── test_dnc_memory.py
+│   ├── test_dnc_top.py
+│   ├── test_dnc_trained.py
+│   ├── top
+│   │   ├── dnc_interface_matrix.py
+│   │   ├── dnc_interface_top.py
+│   │   ├── dnc_interface_vector.py
+│   │   ├── dnc_output_vector.py
+│   │   └── dnc_top.py
+│   └── trained
+│       └── dnc_trained_top.py
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -275,4 +305,4 @@ library
         ├── ntm_decoder.py
         └── ntm_encoder.py
 
-72 directories, 203 files
+76 directories, 229 files

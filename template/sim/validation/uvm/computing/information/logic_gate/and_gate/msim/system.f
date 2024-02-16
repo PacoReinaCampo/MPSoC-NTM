@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/and_gate/application/fsm.sv
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/and_gate/library/peripheral_testbench.sv

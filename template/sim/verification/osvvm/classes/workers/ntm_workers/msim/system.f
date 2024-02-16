@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/workers/ntm_workers/application/ntm_design.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/workers/ntm_workers/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/workers/ntm_workers/library/ntm_model.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/workers/ntm_workers/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/quantum/verification/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/workers/ntm_workers/library/ntm_testbench.vhd

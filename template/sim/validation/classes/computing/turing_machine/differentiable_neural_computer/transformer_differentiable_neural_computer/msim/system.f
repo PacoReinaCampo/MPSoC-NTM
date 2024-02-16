@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/application/switch.sv
 
-../../../../../../../../../../template/quantum/validation/classes/code/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/classes/computing/turing_machine/differentiable_neural_computer/transformer_differentiable_neural_computer/library/testbench.sv

@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/application/fsm.sv
 
-../../../../../../../../../../template/quantum/validation/uvm/code/computing/information/bit/bit/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/validation/uvm/computing/turing_machine/differentiable_neural_computer/lstm_differentiable_neural_computer/library/peripheral_testbench.sv

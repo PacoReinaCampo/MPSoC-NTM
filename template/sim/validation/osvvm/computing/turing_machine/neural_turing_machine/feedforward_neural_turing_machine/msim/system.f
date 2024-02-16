@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/application/ntm_design.vhd
+../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/ntm_model.vhd
+../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/quantum/validation/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/turing_machine/neural_turing_machine/feedforward_neural_turing_machine/library/ntm_testbench.vhd
