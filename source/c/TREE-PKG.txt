@@ -13,11 +13,6 @@ library
 │   └── LSTM
 │       ├── convolutional
 │       └── standard
-├── dnc
-│   ├── dnc.h
-│   ├── memory
-│   ├── top
-│   └── trained
 ├── math
 │   ├── algebra
 │   │   ├── ntm_math_algebra.h
@@ -70,4 +65,4 @@ library
     ├── inputs
     └── top
 
-60 directories, 10 files
+56 directories, 9 files
