@@ -22,6 +22,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/function/vector/accelerato
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/function/matrix/accelerator_matrix_logistic_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/function/matrix/accelerator_matrix_oneplus_function.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/math/function/accelerator_function_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/function/accelerator_function_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/function/accelerator_function_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/function/accelerator_function_testbench.vhd

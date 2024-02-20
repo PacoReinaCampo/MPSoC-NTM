@@ -24,6 +24,6 @@
     ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_logarithm_function.vhd
     ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_sinh_function.vhd
     ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/math/series/matrix/accelerator_matrix_tanh_function.vhd
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_pkg.vhd
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_stimulus.vhd
-    ghdl -a --std=08 ../../../../../../../bench/vhdl/code/procedures/design/math/series/accelerator_series_testbench.vhd
+    ghdl -a --std=08 ../../../../../../../verification/procedures/vhdl/library/math/series/accelerator_series_pkg.vhd
+    ghdl -a --std=08 ../../../../../../../verification/procedures/vhdl/library/math/series/accelerator_series_stimulus.vhd
+    ghdl -a --std=08 ../../../../../../../verification/procedures/vhdl/library/math/series/accelerator_series_testbench.vhd

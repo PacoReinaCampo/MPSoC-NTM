@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/integer/tensor/mod
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/integer/tensor/model_tensor_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/integer/tensor/model_tensor_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/integer/model_integer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/integer/model_integer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/arithmetic/integer/model_integer_testbench.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/integer/model_integer_pkg.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/integer/model_integer_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/integer/model_integer_testbench.vhd

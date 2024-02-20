@@ -43,6 +43,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/state/outputs/accelerator_state
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/state/top/accelerator_state_top.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/top/accelerator_state_top_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/top/accelerator_state_top_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/state/top/accelerator_state_top_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/accelerator_state_top_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/accelerator_state_top_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/accelerator_state_top_testbench.vhd

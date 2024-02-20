@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model_tensor_float_multiplier.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/tensor/model_tensor_float_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/arithmetic/float/model_float_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/float/model_float_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/float/model_float_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/float/model_float_testbench.vhd

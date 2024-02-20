@@ -37,6 +37,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/calculus/tensor/accelerato
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/calculus/tensor/accelerator_tensor_integration.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/calculus/tensor/accelerator_tensor_softmax.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/calculus/accelerator_calculus_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/calculus/accelerator_calculus_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/math/calculus/accelerator_calculus_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/math/calculus/accelerator_calculus_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/math/calculus/accelerator_calculus_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/math/calculus/accelerator_calculus_testbench.vhd

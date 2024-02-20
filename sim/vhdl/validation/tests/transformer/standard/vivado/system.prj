@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/transformer/standard/model_in
 vhdl2008 work ../../../../../../../model/vhdl/code/transformer/standard/model_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/transformer/standard/model_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/standard/model_standard_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/standard/model_standard_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/standard/model_standard_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/standard/model_standard_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/standard/model_standard_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/standard/model_standard_transformer_testbench.vhd

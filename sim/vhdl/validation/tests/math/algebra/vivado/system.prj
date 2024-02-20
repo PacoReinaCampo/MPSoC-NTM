@@ -32,6 +32,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_ten
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_product.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_tensor_transpose.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/math/algebra/model_algebra_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/math/algebra/model_algebra_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/math/algebra/model_algebra_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/algebra/model_algebra_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/algebra/model_algebra_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/algebra/model_algebra_testbench.vhd

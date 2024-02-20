@@ -76,6 +76,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/trainer/linear/accelerator_t
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/linear/standard/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/linear/standard/accelerator_standard_linear_pkg.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/linear/standard/accelerator_standard_linear_stimulus.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/linear/standard/accelerator_standard_linear_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/linear/standard/accelerator_standard_linear_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/linear/standard/accelerator_standard_linear_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/linear/standard/accelerator_standard_linear_testbench.vhd

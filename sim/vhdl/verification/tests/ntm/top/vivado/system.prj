@@ -98,6 +98,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/ntm/top/accelerator_interfac
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/ntm/top/accelerator_output_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/code/ntm/top/accelerator_top.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/ntm/top/accelerator_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/ntm/top/accelerator_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/code/tests/design/ntm/top/accelerator_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/ntm/top/accelerator_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/ntm/top/accelerator_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/ntm/top/accelerator_top_testbench.vhd

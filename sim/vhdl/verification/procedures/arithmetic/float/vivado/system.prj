@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/acceler
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/accelerator_tensor_float_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/float/tensor/accelerator_tensor_float_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/float/accelerator_float_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/float/accelerator_float_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/float/accelerator_float_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/float/accelerator_float_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/float/accelerator_float_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/float/accelerator_float_testbench.vhd

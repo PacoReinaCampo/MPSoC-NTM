@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/standard/acc
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/standard/accelerator_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/standard/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/accelerator_standard_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/accelerator_standard_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/standard/accelerator_standard_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/standard/accelerator_standard_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/standard/accelerator_standard_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/standard/accelerator_standard_lstm_testbench.vhd

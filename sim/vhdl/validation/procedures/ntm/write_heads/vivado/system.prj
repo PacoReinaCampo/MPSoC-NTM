@@ -36,6 +36,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/math/algebra/tensor/model_ten
 vhdl2008 work ../../../../../../../model/vhdl/code/ntm/write_heads/model_writing.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/ntm/write_heads/model_erasing.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/ntm/write_heads/model_write_heads_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/ntm/write_heads/model_write_heads_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/model/ntm/write_heads/model_write_heads_testbench.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/ntm/write_heads/model_write_heads_pkg.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/ntm/write_heads/model_write_heads_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/ntm/write_heads/model_write_heads_testbench.vhd

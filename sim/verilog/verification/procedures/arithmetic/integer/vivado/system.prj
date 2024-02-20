@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accel
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accelerator_tensor_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/integer/tensor/accelerator_tensor_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/arithmetic/integer/accelerator_integer_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/integer/accelerator_integer_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/integer/accelerator_integer_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/arithmetic/integer/accelerator_integer_testbench.vhd

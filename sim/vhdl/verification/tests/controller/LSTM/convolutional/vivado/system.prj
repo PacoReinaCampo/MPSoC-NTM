@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/convolutiona
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/accelerator_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/controller/LSTM/convolutional/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/convolutional/accelerator_convolutional_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/convolutional/accelerator_convolutional_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/code/tests/design/controller/LSTM/convolutional/accelerator_convolutional_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/convolutional/accelerator_convolutional_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/convolutional/accelerator_convolutional_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/controller/LSTM/convolutional/accelerator_convolutional_lstm_testbench.vhd

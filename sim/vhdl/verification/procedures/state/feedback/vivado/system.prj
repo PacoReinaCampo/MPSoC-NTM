@@ -42,6 +42,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/state/feedback/accelerator_stat
 vhdl2008 work ../../../../../../../rtl/vhdl/code/state/feedback/accelerator_state_matrix_output.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/state/feedback/accelerator_state_matrix_state.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/state/feedback/accelerator_state_feedback_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/state/feedback/accelerator_state_feedback_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/state/feedback/accelerator_state_feedback_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/state/feedback/accelerator_state_feedback_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/state/feedback/accelerator_state_feedback_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/state/feedback/accelerator_state_feedback_testbench.vhd

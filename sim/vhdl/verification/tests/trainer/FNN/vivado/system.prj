@@ -80,6 +80,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/FNN/accelerator_trainer
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/controller/FNN/convolutional/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/trainer/FNN/accelerator_trainer_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/trainer/FNN/accelerator_trainer_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/design/trainer/FNN/accelerator_trainer_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/FNN/accelerator_trainer_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/FNN/accelerator_trainer_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/FNN/accelerator_trainer_fnn_testbench.vhd

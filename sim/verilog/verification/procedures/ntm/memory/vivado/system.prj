@@ -79,6 +79,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/calculus/tensor/accelerato
 vhdl2008 work ../../../../../../../rtl/vhdl/code/ntm/memory/accelerator_addressing.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/ntm/memory/accelerator_content_based_addressing.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/ntm/memory/accelerator_memory_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/ntm/memory/accelerator_memory_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/procedures/design/ntm/memory/accelerator_memory_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/ntm/memory/accelerator_memory_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/ntm/memory/accelerator_memory_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/ntm/memory/accelerator_memory_testbench.vhd

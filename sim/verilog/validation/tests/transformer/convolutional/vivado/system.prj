@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/transformer/convolutional/mod
 vhdl2008 work ../../../../../../../model/vhdl/code/transformer/convolutional/model_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/transformer/convolutional/model_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/convolutional/model_convolutional_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/convolutional/model_convolutional_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/code/tests/model/transformer/convolutional/model_convolutional_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/convolutional/model_convolutional_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/convolutional/model_convolutional_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/transformer/convolutional/model_convolutional_transformer_testbench.vhd
