@@ -1,0 +1,886 @@
+# format of a line in this file:
+# <instruction name> "<instruction description>"
+
+Format: l.add rD,rA,rB
+Description: The contents of general-purpose register rA are added to the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD; The instruction will set the carry flag on unsigned overflow, and the overflow flag on signed overflow.
+Exceptions: Range Exception on overflow if SR[OVE] and AECR[OVADDE] are set; Range Exception on carry if SR[OVE] and AECR[CYADDE] are set.
+
+Format: l.addc rD,rA,rB
+Description: The contents of general-purpose register rA are added to the contents of general-purpose register rB and carry SR[CY] to form the result. The result is placed into general-purpose register rD; The instruction will set the carry flag on unsigned overflow, and the overflow flag on signed overflow.
+Exceptions: Range Exception on overflow if SR[OVE] and AECR[OVADDE] are set; Range Exception on carry if SR[OVE] and AECR[CYADDE] are set.
+
+Format: l.addi rD,rA,I
+Description: The immediate value is sign-extended and added to the contents of general-purpose register rA to form the result. The result is placed into general-purpose register rD; The instruction will set the carry flag on unsigned overflow, and the overflow flag on signed overflow.
+Exceptions: Range Exception on overflow if SR[OVE] and AECR[OVADDE] are set; Range Exception on carry if SR[OVE] and AECR[CYADDE] are set.
+
+Format: l.addic rD,rA,I
+Description: The immediate value is sign-extended and added to the contents of general-purpose register rA and carry SR[CY] to form the result. The result is placed into general-purpose register rD; The instruction will set the carry flag on unsigned overflow, and the overflow flag on signed overflow.
+Exceptions: Range Exception on overflow if SR[OVE] and AECR[OVADDE] are set; Range Exception on carry if SR[OVE] and AECR[CYADDE] are set.
+
+Format: l.and rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical AND operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.andi rD,rA,K
+Description: The immediate value is zero-extended and combined with the contents of general-purpose register rA in a bit-wise logical AND operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.bf N
+Description: The immediate value is shifted left two bits, sign-extended to program counter width, and then added to the address of the branch instruction. The result is the effective address of the branch. If the flag is set, the program branches to EA. If CPUCFGR[ND] is not set, the branch occurs with a delay of one instruction.
+Exceptions: None
+
+Format: l.bnf N
+Description: The immediate value is shifted left two bits, sign-extended to program counter width, and then added to the address of the branch instruction. The result is the effective address of the branch. If the flag is cleared, the program branches to EA. If CPUCFGR[ND] is not set, the branch occurs with a delay of one instruction.
+Exceptions: None
+
+Format: l.cmov rD,rA,rB
+Description: If SR[F] is set, general-purpose register rA is placed in general-purpose register rD. If SR[F] is cleared, general-purpose register rB is placed in general-purpose register rD.
+Exceptions: None
+
+Format: l.csync 
+Description: Execution of context synchronization instruction results in completion of all operations inside the processor and a flush of the instruction pipelines. When all operations are complete, the RISC core resumes with an empty instruction pipeline and fresh context in all units (MMU for example).
+Exceptions: None
+
+Format: l.cust1 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust2 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust3 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust4 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust5 rD,rA,rB,L,K
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust6 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust7 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.cust8 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but rather by the implementation itself.
+Exceptions: N/A
+
+Format: l.div rD,rA,rB
+Description: The content of general-purpose register rA are divided by the content of general-purpose register rB, and the result is placed into general-purpose register rD. Both operands are treated as signed integers; On divide-by zero, rD will be undefined, and the overflow flag will be set. Note that prior revisions of the manual (pre-2011) stored the divide by zero flag in SR[CY].
+Exceptions: Range Exception when divisor is zero if SR[OVE] and AECR[DBZE] are set.
+
+Format: l.divu rD,rA,rB
+Description: The content of general-purpose register rA are divided by the content of general-purpose register rB, and the result is placed into general-purpose register rD. Both operands are treated as unsigned integers; On divide-by zero, rD will be undefined, and the overflow flag will be set.
+Exceptions: Range Exception when divisor is zero if SR[OVE] and AECR[DBZE] are set.
+
+Format: l.extbs rD,rA
+Description: Bit 7 of general-purpose register rA is placed in high-order bits of general-purpose register rD. The low-order eight bits of general-purpose register rA are copied into the low-order eight bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.extbz rD,rA
+Description: Zero is placed in high-order bits of general-purpose register rD. The low-order eight bits of general-purpose register rA are copied into the low-order eight bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.exths rD,rA
+Description: Bit 15 of general-purpose register rA is placed in high-order bits of general-purpose register rD. The low-order 16 bits of general-purpose register rA are copied into the low-order 16 bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.exthz rD,rA
+Description: Zero is placed in high-order bits of general-purpose register rD. The low-order 16 bits of general-purpose register rA are copied into the low-order 16 bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.extws rD,rA
+Description: Bit 31 of general-purpose register rA is placed in high-order bits of general-purpose register rD. The low-order 32 bits of general-purpose register rA are copied from low-order 32 bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.extwz rD,rA
+Description: Zero is placed in high-order bits of general-purpose register rD. The low-order 32 bits of general-purpose register rA are copied into the low-order 32 bits of general-purpose register rD.
+Exceptions: None
+
+Format: l.ff1 rD,rA,rB
+Description: Position of the lowest order '1' bit is written into general-purpose register rD. Checking for bit '1' starts with bit 0 (LSB), and counting is incremented for every zero bit. If first '1' bit is discovered in LSB, one is written into rD, if first '1' bit is discovered in MSB, 32 (64) is written into rD. If there is no '1' bit, zero is written in rD.
+Exceptions: None
+
+Format: l.fl1 rD,rA,rB
+Description: Position of the highest order '1' bit is written into general-purpose register rD. Checking for bit '1' starts with bit 31/63 (MSB), and counting is decremented for every zero bit until the last ‘1’ bit is found nearing the LSB. If highest order '1' bit is discovered in MSB, 32 (64) is written into rD, if highest order '1' bit is discovered in LSB, one is written into rD. If there is no '1' bit, zero is written in rD.
+Exceptions: None
+
+Format: l.j N
+Description: The immediate value is shifted left two bits, sign-extended to program counter width, and then added to the address of the jump instruction. The result is the effective address of the jump. The program unconditionally jumps to EA. If CPUCFGR[ND] is not set, the jump occurs with a delay of one instruction; Note that l.sys should not be placed in the delay slot after a jump.
+Exceptions: TLB miss; Page fault; Bus error.
+
+Format: l.jal N
+Description: The immediate value is shifted left two bits, sign-extended to program counter width, and then added to the address of the jump instruction. The result is the effective address of the jump. The program unconditionally jumps to EA. If CPUCFGR[ND] is not set, the jump occurs with a delay of one instruction. The address of the instruction after the delay slot is placed in the link register r9 (see Register Usage on page 335); The value of the link register, if read as an operand in the delay slot will be the new value, not the old value. If the link register is written in the delay slot, the value written will replace the value stored by the l.jal instruction; Note that l.sys should not be placed in the delay slot after a jump.
+Exceptions: TLB miss; Page fault; Bus error.
+
+Format: l.jalr rB
+Description: The contents of general-purpose register rB is the effective address of the jump. The program unconditionally jumps to EA. If CPUCFGR[ND] is not set, the jump occurs with a delay of one instruction. The address of the instruction after the delay slot is placed in the link register; It is not allowed to specify link register r9 (see Register Usage on page 335) as rB. This is because an exception in the delay slot (including external interrupts) may cause l.jalr to be reexecuted; The value of the link register, if read as an operand in the delay slot will be the new value, not the old value. If the link register is written in the delay slot, the value written will replace the value stored by the l.jalr instruction; Note that l.sys should not be placed in the delay slot after a jump.
+Exceptions: Alignment; TLB miss; Page fault; Bus error.
+
+Format: l.jr rB
+Description: The contents of general-purpose register rB is the effective address of the jump. The program unconditionally jumps to EA. If CPUCFGR[ND] is not set, the jump occurs with a delay of one instruction; Note that l.sys should not be placed in the delay slot after a jump.
+Exceptions: Alignment; TLB miss; Page fault; Bus error.
+
+Format: l.lbs rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The byte in memory addressed by EA is loaded into the low-order eight bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with bit 7 of the loaded value.
+Exceptions: TLB miss; Page fault; Bus error.
+
+Format: l.lbz rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The byte in memory addressed by EA is loaded into the low-order eight bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with zero.
+Exceptions: TLB miss; Page fault; Bus error.
+
+Format: l.ld rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The double word in memory addressed by EA is loaded into general-purpose register rD.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.lhs rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The half word in memory addressed by EA is loaded into the low-order 16 bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with bit 15 of the loaded value.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.lhz rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The half word in memory addressed by EA is loaded into the low-order 16 bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with zero.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.lwa rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The single word in memory addressed by EA is loaded into the low-order 32 bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with zero; An atomic reservation is placed on the address formed from EA. In case an MMU is enabled, the physical translation of EA is used.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.lws rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The single word in memory addressed by EA is lloaded into the low-order 32 bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with bit 31 of the loaded value.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.lwz rD,I(rA)
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The single word in memory addressed by EA is loaded into the low-order 32 bits of general-purpose register rD. High-order bits of general-purpose register rD are replaced with zero.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.mac rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the 64 bit result is added to the special-purpose registers MACHI and MACLO. All operands are treated as signed integers; The instruction will set the overflow flag if signed overflow is detecting during the addition stage.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMACADDE] are set.
+
+Format: l.maci rA,I
+Description: The immediate value and the contents of general-purpose register rA are multiplied, and the 64 bit result is added to the special-purpose registers MACHI and MACLO. All operands are treated as signed integers; The instruction will set the overflow flag if signed overflow is detecting during the addition stage.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMACADDE] are set.
+
+Format: l.macrc rD
+Description: Once all instructions in MAC pipeline are completed, the contents of MAC is placed into general-purpose register rD and MAC accumulator is cleared; The MAC pipeline also synchronizes with the instruction pipeline on any access to MACLO or MACHI SPRs, so that l.mfspr can be used to read MACHI before executing l.macrc.
+Exceptions: None
+
+Format: l.macu rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the 64 bit result is added to the special-purpose registers MACHI and MACLO. All operands are treated as unsigned integers; The instruction will set the overflow flag if unsigned overflow is detecting during the addition stage.
+Exceptions: Range Exception on unsigned overflow if SR[OVE] and AECR[CYMACADDE] are set.
+
+Format: l.mfspr rD,rA,K
+Description: The contents of the special register, defined by contents of general-purpose rA logically ORed with immediate value, are moved into general-purpose register rD.
+Exceptions: None
+
+Format: l.movhi rD,K
+Description: The 16-bit immediate value is zero-extended, shifted left by 16 bits, and placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.msb rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the 64 bit result is subtracted from the special-purpose registers MACHI and MACLO. Result of the subtraction is placed into MACHI and MACLO registers. All operands are treated as signed integers; The instruction will set the overflow flag if signed overflow is detecting during the subtraction stage.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMACADDE] are set.
+
+Format: l.msbu rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the 64 bit result is subtracted from the special-purpose registers MACHI and MACLO. Result of the subtraction is placed into MACHI and MACLO registers. All operands are treated as unsigned integers; The instruction will set the overflow flag if unsigned overflow is detecting during the subtraction stage.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[CYMACADDE] are set.
+
+Format: l.msync 
+Description: Execution of the memory synchronization instruction results in completion of all load/store operations before the RISC core continues.
+Exceptions: None
+
+Format: l.mtspr rA,rB,K
+Description: The contents of general-purpose register rB are moved into the special register defined by contents of general-purpose register rA logically ORed with the immediate value.
+Exceptions: None
+
+Format: l.mul rD,rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the result is truncated to destination register width and placed into general-purpose register rD. Both operands are treated as signed integers; The instruction will set the overflow flag on signed overflow.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMULE] are set.
+
+Format: l.muld rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the result is stored in the MACHI and MACLO registers. Both operands are treated as signed integers; The instruction will set the overflow flag on signed overflow.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMULE] are set.
+
+Format: l.muldu rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the result is stored in the MACHI and MACLO registers. Both operands are treated as unsigned integers; The instruction will set the overflow flag on unsigned overflow.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[CYMULE] are set.
+
+Format: l.muli rD,rA,I
+Description: The immediate value and the contents of general-purpose register rA are multiplied, and the result is truncated to destination register width and placed into general-purpose register rD; The instruction will set the overflow flag on signed overflow.
+Exceptions: Range Exception on signed overflow if SR[OVE] and AECR[OVMULE] are set.
+
+Format: l.mulu rD,rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are multiplied, and the result is truncated to destination register width and placed into general-purpose register rD. Both operands are treated as unsigned integers; The instruction will set the carry flag on unsigned overflow.
+Exceptions: Range Exception on unsigned overflow if SR[OVE] and AECR[CYMULE] are set.
+
+Format: l.nop K
+Description: This instruction does not do anything except that it takes at least one clock cycle to complete. It is often used to fill delay slot gaps. Immediate value can be used for simulation purposes.
+Exceptions: None
+
+Format: l.or rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical OR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.ori rD,rA,K
+Description: The immediate value is zero-extended and combined with the contents of general-purpose register rA in a bit-wise logical OR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.psync 
+Description: Execution of pipeline synchronization instruction results in completion of all instructions that were fetched before l.psync instruction. Once all instructions are completed, instructions fetched after l.psync are flushed from the pipeline and fetched again.
+Exceptions: None
+
+Format: l.rfe 
+Description: Execution of this instruction partially restores the state of the processor prior to the exception. This instruction does not have a delay slot.
+Exceptions: None
+
+Format: l.ror rD,rA,rB
+Description: General-purpose register rB specifies the number of bit positions; the contents of general-purpose register rA are rotated right. The result is written into general-purpose register rD.
+Exceptions: None
+
+Format: l.rori rD,rA,L
+Description: The 6-bit immediate value specifies the number of bit positions; the contents of general-purpose register rA are rotated right. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of immediate is ignored.
+Exceptions: None
+
+Format: l.sb I(rA),rB
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The low-order 8 bits of general-purpose register rB are stored to memory location addressed by EA.
+Exceptions: TLB miss; Page fault; Bus error.
+
+Format: l.sd I(rA),rB
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The double word in general-purpose register rB is stored to memory location addressed by EA.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.sfeq rA,rB
+Description: The contents of general-purpose registers rA and rB are compared. If the contents are equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfeqi rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared. If the two values are equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfges rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as signed integers. If the contents of the first register are greater than or equal to the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgesi rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as signed integers. If the contents of the first register are greater than or equal to the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgeu rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as unsigned integers. If the contents of the first register are greater than or equal to the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgeui rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as unsigned integers. If the contents of the first register are greater than or equal to the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgts rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as signed integers. If the contents of the first register are greater than the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgtsi rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as signed integers. If the contents of the first register are greater than the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgtu rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as unsigned integers. If the contents of the first register are greater than the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfgtui rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as unsigned integers. If the contents of the first register are greater than the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfles rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as signed integers. If the contents of the first register are less than or equal to the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sflesi rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as signed integers. If the contents of the first register are less than or equal to the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfleu rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as unsigned integers. If the contents of the first register are less than or equal to the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfleui rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as unsigned integers. If the contents of the first register are less than or equal to the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sflts rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as signed integers. If the contents of the first register are less than the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfltsi rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as signed integers. If the contents of the first register are less than the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfltu rA,rB
+Description: The contents of general-purpose registers rA and rB are compared as unsigned integers. If the contents of the first register are less than the contents of the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfltui rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared as unsigned integers. If the contents of the first register are less than the immediate value the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfne rA,rB
+Description: The contents of general-purpose registers rA and rB are compared. If the contents are not equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sfnei rA,I
+Description: The contents of general-purpose register rA and the sign-extended immediate value are compared. If the two values are not equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: l.sh I(rA),rB
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The low-order 16 bits of general-purpose register rB are stored to memory location addressed by EA.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.sll rD,rA,rB
+Description: General-purpose register rB specifies the number of bit positions; the contents of general-purpose register rA are shifted left, inserting zeros into the low-order bits. The result is written into general-purpose rD. In 32-bit implementations bit 5 of rB is ignored.
+Exceptions: None
+
+Format: l.slli rD,rA,L
+Description: The immediate value specifies the number of bit positions; the contents of general-purpose register rA are shifted left, inserting zeros into the low-order bits. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of immediate is ignored.
+Exceptions: None
+
+Format: l.sra rD,rA,rB
+Description: General-purpose register rB specifies the number of bit positions; the contents of general-purpose register rA are shifted right, sign-extending the high-order bits. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of rB is ignored.
+Exceptions: None
+
+Format: l.srai rD,rA,L
+Description: The 6-bit immediate value specifies the number of bit positions; the contents of general-purpose register rA are shifted right, sign-extending the high-order bits. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of immediate is ignored.
+Exceptions: None
+
+Format: l.srl rD,rA,rB
+Description: General-purpose register rB specifies the number of bit positions; the contents of general-purpose register rA are shifted right, inserting zeros into the high-order bits. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of rB is ignored.
+Exceptions: None
+
+Format: l.srli rD,rA,L
+Description: The 6-bit immediate value specifies the number of bit positions; the contents of general-purpose register rA are shifted right, inserting zeros into the high-order bits. The result is written into general-purpose register rD. In 32-bit implementations bit 5 of immediate is ignored.
+Exceptions: None
+
+Format: l.sub rD,rA,rB
+Description: The contents of general-purpose register rB are subtracted from the contents of general-purpose register rA to form the result. The result is placed into general-purpose register rD; The instruction will set the carry flag on unsigned overflow, and the overflow flag on signed overflow.
+Exceptions: Range Exception on overflow if SR[OVE] and AECR[OVADDE] are set; Range Exception on carry if SR[OVE] and AECR[CYADDE] are set.
+
+Format: l.sw I(rA),rB
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The low-order 32 bits of general-purpose register rB are stored to memory location addressed by EA.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.swa I(rA),rB
+Description: The offset is sign-extended and added to the contents of general-purpose register rA. The sum represents an effective address. The low-order 32 bits of general-purpose register rB are conditionally stored to memory location addressed by EA. The 'atomic' condition relies on that an atomic reserve to EA is still intact. When the MMU is enabled, the physical translation of EA is used to do the address comparison.
+Exceptions: TLB miss; Page fault; Bus error; Alignment
+
+Format: l.sys K
+Description: Execution of the system call instruction results in the system call exception. The system calls exception is a request to the operating system to provide operating system services. The immediate value can be used to specify which system service is requested, alternatively a GPR defined by the ABI can be used to specify system service; Because an l.sys causes an intentional exception, rather than an interruption of normal processing, the matching l.rfe returns to the next instruction. As this is considered to be the jump itself for exceptions occurring in a delay slot, l.sys should not be placed in a delay slot.
+Exceptions: System Call
+
+Format: l.trap K
+Description: Trap exception is a request to the operating system or to the debug facility to execute certain debug services. Immediate value is used to select which SR bit is tested by trap instruction.
+Exceptions: Trap exception
+
+Format: l.xor rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical XOR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: l.xori rD,rA,I
+Description: The immediate value is sign-extended and combined with the contents of general-purpose register rA in a bit-wise logical XOR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: lf.add.d rD,rA,rB
+Description: The contents of general-purpose register rA are added to the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.add.s rD,rA,rB
+Description: The contents of general-purpose register rA are added to the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.cust1.d rA,rB
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lf.cust1.s rA,rB
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lf.div.d rD,rA,rB
+Description: The contents of general-purpose register rA are divided by the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.div.s rD,rA,rB
+Description: The contents of general-purpose register rA are divided by the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.ftoi.d rD,rA
+Description: The contents of general-purpose register rA are converted to an integer and stored in general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.ftoi.s rD,rA
+Description: The contents of general-purpose register rA are converted to an integer and stored into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.itof.d rD,rA
+Description: The contents of general-purpose register rA are converted to a double-precision floating-point number and stored in general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.itof.s rD,rA
+Description: The contents of general-purpose register rA are converted to a single-precision floating-point number and stored into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.madd.d rD,rA,rB
+Description: The contents of general-purpose register rA are multiplied by the contents of general-purpose register rB, and added to special-purpose register FPMADDLO/FPMADDHI.
+Exceptions: Floating Point
+
+Format: lf.madd.s rD,rA,rB
+Description: The contents of general-purpose register rA are multiplied by the contents of general-purpose register rB, and added to special-purpose register FPMADDLO/FPMADDHI.
+Exceptions: Floating Point
+
+Format: lf.mul.d rD,rA,rB
+Description: The contents of general-purpose register rA are multiplied by the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.mul.s rD,rA,rB
+Description: The contents of general-purpose register rA are multiplied by the contents of general-purpose register rB to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.rem.d rD,rA,rB
+Description: The contents of general-purpose register rA are divided by the contents of general-purpose register rB, and remainder is used as the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.rem.s rD,rA,rB
+Description: The contents of general-purpose register rA are divided by the contents of general-purpose register rB, and remainder is used as the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.sfeq.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the two registers are equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfeq.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the two registers are equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfge.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is greater than or equal to the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfge.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is greater than or equal to the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfgt.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is greater than the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfgt.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is greater than the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfle.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is less than or equal to the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfle.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is less than or equal to the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sflt.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is less than the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sflt.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the first register is less than the second register, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfne.d rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the two registers are not equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sfne.s rA,rB
+Description: The contents of general-purpose register rA and the contents of general-purpose register rB are compared. If the two registers are not equal, the compare flag is set; otherwise the compare flag is cleared.
+Exceptions: None
+
+Format: lf.sub.d rD,rA,rB
+Description: The contents of general-purpose register rB are subtracted from the contents of general-purpose register rA to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lf.sub.s rD,rA,rB
+Description: The contents of general-purpose register rB are subtracted from the contents of general-purpose register rA to form the result. The result is placed into general-purpose register rD.
+Exceptions: Floating Point
+
+Format: lv.add.b rD,rA,rB
+Description: The byte elements of general-purpose register rA are added to the byte elements of general-purpose register rB to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.add.h rD,rA,rB
+Description: The half-word elements of general-purpose register rA are added to the half-word elements of general-purpose register rB to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.adds.b rD,rA,rB
+Description: The byte elements of general-purpose register rA are added to the byte elements of general-purpose register rB to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.adds.h rD,rA,rB
+Description: The half-word elements of general-purpose register rA are added to the half-word elements of general-purpose register rB to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.addu.b rD,rA,rB
+Description: The unsigned byte elements of general-purpose register rA are added to the unsigned byte elements of general-purpose register rB to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.addu.h rD,rA,rB
+Description: The unsigned half-word elements of general-purpose register rA are added to the unsigned half-word elements of general-purpose register rB to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.addus.b rD,rA,rB
+Description: The unsigned byte elements of general-purpose register rA are added to the unsigned byte elements of general-purpose register rB to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.addus.h rD,rA,rB
+Description: The unsigned half-word elements of general-purpose register rA are added to the unsigned half-word elements of general-purpose register rB to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_eq.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all corresponding elements are equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_eq.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all corresponding elements are equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_ge.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all elements of rA are greater than or equal to the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_ge.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all elements of rA are greater than or equal to the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_gt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all elements of rA are greater than the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_gt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all elements of rA are greater than the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_le.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all elements of rA are less than or equal to the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_le.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all elements of rA are less than or equal to the elements of rB; otherwise the compare flag is cleared; The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_lt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all elements of rA are less than the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_lt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all elements of rA are less than the elements of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_ne.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if all corresponding elements are not equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.all_ne.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if all corresponding elements are not equal; otherwise the compare flag is cleared; The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.and rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical AND operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_eq.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any two corresponding elements are equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_eq.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any two corresponding elements are equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_ge.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any element of rA is greater than or equal to the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_ge.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any element of rA is greater than or equal to the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_gt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any element of rA is greater than the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_gt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any element of rA is greater than the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_le.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any element of rA is less than or equal to the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_le.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any element of rA is less than or equal to the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_lt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any element of rA is less than the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_lt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any element of rA is less than the corresponding element of rB; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_ne.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. The compare flag is set if any two corresponding elements are not equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.any_ne.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. The compare flag is set if any two corresponding elements are not equal; otherwise the compare flag is cleared. The compare flag is replicated into all bit positions of general-purpose register rD.
+Exceptions: None
+
+Format: lv.avg.b rD,rA,rB
+Description: The byte elements of general-purpose register rA are added to the byte elements of general-purpose register rB, and the sum is shifted right by one to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.avg.h rD,rA,rB
+Description: The half-word elements of general-purpose register rA are added to the half-word elements of general-purpose register rB, and the sum is shifted right by one to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.cmp_eq.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the two corresponding compared elements are equal; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_eq.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the two corresponding compared elements are equal; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_ge.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is greater than or equal to the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_ge.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is greater than or equal to the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_gt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is greater than the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_gt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is greater than the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_le.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is less than or equal to the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_le.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is less than or equal to the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_lt.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is less than the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_lt.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the element in rA is less than the element in rB; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_ne.b rD,rA,rB
+Description: All byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the two corresponding compared elements are not equal; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cmp_ne.h rD,rA,rB
+Description: All half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB. Bits of the element in general-purpose register rD are set if the two corresponding compared elements are not equal; otherwise the element bits are cleared.
+Exceptions: None
+
+Format: lv.cust1 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lv.cust2 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lv.cust3 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lv.cust4 
+Description: This fake instruction only allocates instruction set space for custom instructions. Custom instructions are those that are not defined by the architecture but instead by the implementation itself.
+Exceptions: N/A
+
+Format: lv.madds.h rD,rA,rB
+Description: The signed half-word elements of general-purpose register rA are multiplied by the signed half-word elements of general-purpose register rB to form intermediate results. They are then added to the signed half-word VMAC elements to form the final results that are placed again in the VMAC registers. The intermediate result is placed into general-purpose register rD. If any of the final results exceeds the min/max value, it is saturated.
+
+Note: The ORVDX instruction set is not completely specified. This instruction is incorrectly specified in that VMAC is not defined and implementation below does not match description.
+Exceptions: None
+
+Format: lv.max.b rD,rA,rB
+Description: The byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB, and the larger elements are selected to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.max.h rD,rA,rB
+Description: The half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB, and the larger elements are selected to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.merge.b rD,rA,rB
+Description: The byte elements of the lower half of the general-purpose register rA are combined with the byte elements of the lower half of general-purpose register rB in such a way that the lowest element is from rB, the second element from rA, the third again from rB etc. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.merge.h rD,rA,rB
+Description: The half-word elements of the lower half of the general-purpose register rA are combined with the half-word elements of the lower half of general-purpose register rB in such a way that the lowest element is from rB, the second element from rA, the third again from rB etc. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.min.b rD,rA,rB
+Description: The byte elements of general-purpose register rA are compared to the byte elements of general-purpose register rB, and the smaller elements are selected to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.min.h rD,rA,rB
+Description: The half-word elements of general-purpose register rA are compared to the half-word elements of general-purpose register rB, and the smaller elements are selected to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.msubs.h rD,rA,rB
+Description: The signed half-word elements of general-purpose register rA are multiplied by the signed half-word elements of general-purpose register rB to form intermediate results. They are then subtracted from the signed half-word VMAC elements to form the final results that are placed again in the VMAC registers. The intermediate result is placed into general-purpose register rD. If any of the final results exceeds the min/max value, it is saturated.
+
+Note: The ORVDX instruction set is not completely specified. This instruction is incorrectly specified in that VMAC is not defined and implementation below does not match description.
+Exceptions: None
+
+Format: lv.muls.h rD,rA,rB
+Description: The signed half-word elements of general-purpose register rA are multiplied by the signed half-word elements of general-purpose register rB to form the results. The result is placed into general-purpose register rD. If any of the final results exceeds the min/max value, it is saturated.
+Exceptions: None
+
+Format: lv.nand rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical NAND operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.nor rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical NOR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.or rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical OR operation. The result is placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.pack.b rD,rA,rB
+Description: The lower half of the byte elements of the general-purpose register rA are truncated and combined with the lower half of the byte truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.pack.h rD,rA,rB
+Description: The lower half of the half-word elements of the general-purpose register rA are truncated and combined with the lower half of the half-word truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.packs.b rD,rA,rB
+Description: The lower half of the signed byte elements of the general-purpose register rA are truncated and combined with the lower half of the signed byte truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. If any truncated element exceeds a signed 4-bit value, it is saturated. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.packs.h rD,rA,rB
+Description: The lower half of the signed halfword elements of the general-purpose register rA are truncated and combined with the lower half of the signed half-word truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. If any truncated element exceeds a signed 8-bit value, it is saturated. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.packus.b rD,rA,rB
+Description: The lower half of the unsigned byte elements of the general-purpose register rA are truncated and combined with the lower half of the unsigned byte truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. If any truncated element exceeds an unsigned 4-bit value, it is saturated. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.packus.h rD,rA,rB
+Description: The lower half of the unsigned halfword elements of the general-purpose register rA are truncated and combined with the lower half of the unsigned half-word truncated elements of the general-purpose register rB in such a way that the lowest elements are from rB, and the highest elements from rA. If any truncated element exceeds an unsigned 8-bit value, it is saturated. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.perm.n rD,rA,rB
+Description: The 4-bit elements of general-purpose register rA are permuted according to the corresponding 4-bit values in general-purpose register rB. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.rl.b rD,rA,rB
+Description: The contents of byte elements of general-purpose register rA are rotated left by the number of bits specified in the lower 3 bits in each byte element of general-purpose register rB. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.rl.h rD,rA,rB
+Description: The contents of half-word elements of general-purpose register rA are rotated left by the number of bits specified in the lower 4 bits in each half-word element of general-purpose register rB. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sll rD,rA,rB
+Description: The contents of general-purpose register rA are shifted left by the number of bits specified in the lower 4 bits in each byte element of general-purpose register rB, inserting zeros into the low-order bits of rD. The result elements are placed into general-purpose register rD.
+
+Note: The ORVDX instruction set is not completely specified. This instruction is incorrectly specified in that implementation below does not operate in a vector fashion and no element size is specified in the mnemonic. It may be a remnant of a template or lv.sll.b.
+Exceptions: None
+
+Format: lv.sll.b rD,rA,rB
+Description: The contents of byte elements of general-purpose register rA are shifted left by the number of bits specified in the lower 3 bits in each byte element of general-purpose register rB, inserting zeros into the low-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sll.h rD,rA,rB
+Description: The contents of half-word elements of general-purpose register rA are shifted left by the number of bits specified in the lower 4 bits in each half-word element of general-purpose register rB, inserting zeros into the low-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sra.b rD,rA,rB
+Description: The contents of byte elements of general-purpose register rA are shifted right by the number of bits specified in the lower 3 bits in each byte element of general-purpose register rB, inserting the most significant bit of each element into the high-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sra.h rD,rA,rB
+Description: The contents of half-word elements of general-purpose register rA are shifted right by the number of bits specified in the lower 4 bits in each half-word element of general-purpose register rB, inserting the most significant bit of each element into the high-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.srl rD,rA,rB
+Description: The contents of general-purpose register rA are shifted right by the number of bits specified in the lower 4 bits in each byte element of general-purpose register rB, inserting zeros into the high-order bits of rD. The result elements are placed into general-purpose register rD.
+
+Note: The ORVDX instruction set is not completely specified. This instruction is incorrectly specified in that implementation below does not operate in a vector fashion and no element size is specified in the mnemonic. It may be a remnant of a template or lv.srl.b.
+Exceptions: None
+
+Format: lv.srl.b rD,rA,rB
+Description: The contents of byte elements of general-purpose register rA are shifted right by the number of bits specified in the lower 3 bits in each byte element of general-purpose register rB, inserting zeros into the high-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.srl.h rD,rA,rB
+Description: The contents of half-word elements of general-purpose register rA are shifted right by the number of bits specified in the lower 4 bits in each half-word element of general-purpose register rB, inserting zeros into the high-order bits. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sub.b rD,rA,rB
+Description: The byte elements of general-purpose register rB are subtracted from the byte elements of general-purpose register rA to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.sub.h rD,rA,rB
+Description: The half-word elements of general-purpose register rB are subtracted from the half-word elements of general-purpose register rA to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subs.b rD,rA,rB
+Description: The byte elements of general-purpose register rB are subtracted from the byte elements of general-purpose register rA to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subs.h rD,rA,rB
+Description: The half-word elements of general-purpose register rB are subtracted from the half-word elements of general-purpose register rA to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subu.b rD,rA,rB
+Description: The unsigned byte elements of general-purpose register rB are subtracted from the unsigned byte elements of general-purpose register rA to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subu.h rD,rA,rB
+Description: The unsigned half-word elements of general-purpose register rB are subtracted from the unsigned half-word elements of general-purpose register rA to form the result elements. The result elements are placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subus.b rD,rA,rB
+Description: The unsigned byte elements of general-purpose register rB are subtracted from the unsigned byte elements of general-purpose register rA to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.subus.h rD,rA,rB
+Description: The unsigned half-word elements of general-purpose register rB are subtracted from the unsigned half-word elements of general-purpose register rA to form the result elements. If the result exceeds the min/max value for the destination data type, it is saturated to the min/max value and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.unpack.b rD,rA,rB
+Description: The lower half of the 4-bit elements in general-purpose register rA are sign-extended and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.unpack.h rD,rA,rB
+Description: The lower half of the 8-bit elements in general-purpose register rA are sign-extended and placed into general-purpose register rD.
+Exceptions: None
+
+Format: lv.xor rD,rA,rB
+Description: The contents of general-purpose register rA are combined with the contents of general-purpose register rB in a bit-wise logical XOR operation. The result is placed into general-purpose register rD.
+Exceptions: None
