@@ -38,7 +38,7 @@ Format: l.cmov rD,rA,rB
 Exceptions: None
 
 Format: l.csync 
-32-bit: implementation: N/Acontext-synchronization
+32-bit: implementation: context-synchronization
 Exceptions: None
 
 Format: l.cust1 
@@ -234,7 +234,7 @@ Format: l.ori rD,rA,K
 Exceptions: None
 
 Format: l.psync 
-32-bit: implementation: N/Apipeline-synchronization
+32-bit: implementation: pipeline-synchronization
 Exceptions: None
 
 Format: l.rfe 
@@ -438,7 +438,7 @@ Format: lf.madd.d rD,rA,rB
 Exceptions: Floating Point
 
 Format: lf.madd.s rD,rA,rB
-32-bit: implementation: N/AFPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]
+32-bit: implementation: FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]
 Exceptions: Floating Point
 
 Format: lf.mul.d rD,rA,rB
@@ -919,7 +919,7 @@ Format: l.cmov rD,rA,rB
 Exceptions: None
 
 Format: l.csync 
-64-bit:: implementation: N/Acontext-synchronization
+64-bit:: implementation: context-synchronization
 Exceptions: None
 
 Format: l.cust1 
@@ -1114,7 +1114,7 @@ Format: l.ori rD,rA,K
 Exceptions: None
 
 Format: l.psync 
-64-bit:: implementation: N/Apipeline-synchronization
+64-bit:: implementation: pipeline-synchronization
 Exceptions: None
 
 Format: l.rfe 
@@ -1312,11 +1312,11 @@ Format: lf.itof.s rD,rA
 Exceptions: Floating Point
 
 Format: lf.madd.d rD,rA,rB
-64-bit:: implementation: N/AFPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]
+64-bit:: implementation: FPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]
 Exceptions: Floating Point
 
 Format: lf.madd.s rD,rA,rB
-64-bit:: implementation: N/AFPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]; FPMADDHI <- 0; FPMADDLO <- 0
+64-bit:: implementation: FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]; FPMADDHI <- 0; FPMADDLO <- 0
 Exceptions: Floating Point
 
 Format: lf.mul.d rD,rA,rB
