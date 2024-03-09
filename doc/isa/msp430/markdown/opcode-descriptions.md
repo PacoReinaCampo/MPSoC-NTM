@@ -243,7 +243,7 @@ Format of a line in the table:
 | `fcvt.q.w`   | `Convert the 64-bit signed integer in rs1 to a quadruple-precision value, then write the result to frd`                          |
 | `fcvt.q.wu`  | `Convert the 64-bit unsigned integer in rs1 to a quadruple-precision value, then write the result to frd`                        |
 | `fclass.q`   | `Set rd to a 10-bit mask indicating the class of the quadruple-precision value in frs1`                                          |
-: RV32Q - "RV32D Standard Extension for Quadruple-Precision Floating-Point"
+: RV32Q - "RV32Q Standard Extension for Quadruple-Precision Floating-Point"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -258,6 +258,30 @@ Format of a line in the table:
 | `fmv.x.q`    | `Write the sign extended quadruple-precision value in frs1 into integer register rd`                                             |
 | `fmv.q.x`    | `Write the 64-bit integer register rs1 into the quadruple-precision register frd`                                                |
 : RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
+
+| ins name        | instruction description                                                                                                       |
+|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
+| `fnn.w`         | `FNN`                                                                                                                         |
+| `lstm.w`        | `LSTM`                                                                                                                        |
+| `transformer.w` | `Transformer`                                                                                                                 |
+| `ntm.w`         | `Neural Turing Machine`                                                                                                       |
+: RV32DNC - "RV32DNC Standard Extension for Neural Turing Machine"
+
+| ins name        | instruction description                                                                                                       |
+|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
+| `fnn .d`        | `FNN`                                                                                                                         |
+| `lstm.d`        | `LSTM`                                                                                                                        |
+| `transformer.d` | `Transformer`                                                                                                                 |
+| `ntm.d`         | `Neural Turing Machine`                                                                                                       |
+: RV64DNC - "RV64DNC Standard Extension for Neural Turing Machine (+ RV32DNC)"
+
+| ins name        | instruction description                                                                                                       |
+|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
+| `fnn.q`         | `FNN`                                                                                                                         |
+| `lstm.q`        | `LSTM`                                                                                                                        |
+| `transformer.q` | `Transformer`                                                                                                                 |
+| `ntm.q`         | `Neural Turing Machine`                                                                                                       |
+: RV128DNC - "RV128DNC Standard Extension for Neural Turing Machine (+ RV64DNC)"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
