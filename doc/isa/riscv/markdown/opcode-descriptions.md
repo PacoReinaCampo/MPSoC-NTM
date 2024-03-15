@@ -259,28 +259,28 @@ Format of a line in the table:
 | `fmv.q.x`    | `Write the 64-bit integer register rs1 into the quadruple-precision register frd`                                                |
 : RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
 
-| ins name        | instruction description                                                                                                       |
-|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
-| `fnn.w`         | `FNN`                                                                                                                         |
-| `lstm.w`        | `LSTM`                                                                                                                        |
-| `transformer.w` | `Transformer`                                                                                                                 |
-| `dnc.w`         | `Neural Turing Machine`                                                                                                       |
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `fnn .w`     | `Feed-Forward Neural Network`                                                                                                    |
+| `lstm.w`     | `Long-Short Term Memory Neural Network`                                                                                          |
+| `ann.w`      | `Attention Neural Network`                                                                                                       |
+| `ntm.w`      | `Neural Turing Machine`                                                                                                          |
 : RV32NTM - "RV32NTM Standard Extension for Neural Turing Machine"
 
-| ins name        | instruction description                                                                                                       |
-|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
-| `fnn.d`         | `FNN`                                                                                                                         |
-| `lstm.d`        | `LSTM`                                                                                                                        |
-| `transformer.d` | `Transformer`                                                                                                                 |
-| `dnc.d`         | `Neural Turing Machine`                                                                                                       |
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `fnn .d`     | `Feed-Forward Neural Network`                                                                                                    |
+| `lstm.d`     | `Long-Short Term Memory Neural Network`                                                                                          |
+| `ann.d`      | `Attention Neural Network`                                                                                                       |
+| `ntm.d`      | `Neural Turing Machine`                                                                                                          |
 : RV64NTM - "RV64NTM Standard Extension for Neural Turing Machine (+ RV32NTM)"
 
-| ins name        | instruction description                                                                                                       |
-|-----------------|:------------------------------------------------------------------------------------------------------------------------------|
-| `fnn.q`         | `FNN`                                                                                                                         |
-| `lstm.q`        | `LSTM`                                                                                                                        |
-| `transformer.q` | `Transformer`                                                                                                                 |
-| `dnc.q`         | `Neural Turing Machine`                                                                                                       |
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `fnn .q`     | `Feed-Forward Neural Network`                                                                                                    |
+| `lstm.q`     | `Long-Short Term Memory Neural Network`                                                                                          |
+| `ann.q`      | `Attention Neural Network`                                                                                                       |
+| `ntm.q`      | `Neural Turing Machine`                                                                                                          |
 : RV128NTM - "RV128NTM Standard Extension for Neural Turing Machine (+ RV64NTM)"
 
 | ins name     | instruction description                                                                                                          |
