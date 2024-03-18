@@ -1,0 +1,283 @@
+linear algebra operators
+"*"
+  -> purpose: matrix multiply, overloaded for the following:
+  -> description: real_matrix * real_matrix
+  -> input: real_matrix, real_matrix
+  -> output: real_matrix
+  -> requirement: number of columns in left matrix must match number of rows in right matrix. returns a matrix which is (left row length by right column length).
+
+  -> description: real_matrix * real_vector
+  -> input: real_matrix, real_vector
+  -> output: real_matrix
+  -> requirement: matrix must have one column, number of rows must match length of vector. returns a matrix which is square (vector length by vector length).
+
+  -> description: real_vector * real_matrix
+  -> input: real_vector, real_matrix
+  -> output: real_vector
+  -> requirement: matrix must have same number of rows as length of vector. returned vector will be number of columns in matrix.
+
+  -> description: real_matrix * real
+  -> input: real_matrix, real
+  -> output: real_matrix
+
+  -> description: real * real_matrix
+  -> input: real, real_matrix
+  -> output: real_matrix
+
+  -> description: real_vector * real
+  -> input: real_vector, real
+  -> output: real_vector
+
+  -> description: real * real_vector
+  -> input: real, real_vector
+  -> output: real_vector
+
+"+"
+  -> purpose: matrix addition, overloaded for the following:
+  -> description: real_matrix + real_matrix
+  -> input: real_matrix + real_matrix
+  -> output: real_matrix
+  -> requirement: dimensions must match.
+
+  -> description: real_vector + real_vector
+  -> input: real_vector + real_vector
+  -> output: real_vector
+  -> requirement: dimensions must match.
+
+"-"
+  -> purpose: matrix subtraction, overloaded as follows:
+  -> description: real_matrix - real_matrix
+  -> input: real_matrix - real_matrix
+  -> output: real_matrix
+  -> requirement: dimensions must match
+
+  -> description: real_vector - real_vector
+  -> input: real_vector, real_vector
+  -> output: real_vector
+  -> requirement: dimensions must match unary minus (real_matrix).
+
+"/"
+  -> purpose: matrix division
+  -> description: real_matrix / real_matrix (real_matrix * inv(real_matrix))
+  -> input: real_matrix, real_matrix
+  -> output: real_matrix
+  -> requirement: matrix must be square for this function to work.
+
+  -> description: real_matrix / real
+  -> input: real_matrix, real
+  -> output: real_matrix
+
+  -> description: real_vector / real
+  -> input: real_vector, real
+  -> output: real_vector
+
+"**"
+  -> description: real_matrix ** integer
+  -> input: real_matrix, integer
+  -> output: real_matrix
+  -> requirement: matrix must be square for this function to work.
+
+"="
+  -> description: real_vector = real_matrix
+  -> input: real_vector, real_matrix
+  -> requirement: true if the matrix has one row and equal to the vector.
+
+  -> description: real_matrix = real_vector
+  -> input: real_matrix, real_vector
+
+  -> description: real_vector /= real_matrix
+  -> input: real_vector, real_matrix
+
+  -> description: real_matrix /= real_vector
+  -> input: real_matrix, real_vector
+
+"abs"
+  -> purpose: the absolute value
+  -> input: real_matrix, real_vector
+
+
+linear algebra functions
+times
+  -> purpose: .*
+  -> requirement: element by element multiply
+
+rdivide
+  -> purpose: ./
+  -> requirement: element by element divide
+
+mrdivide
+  -> purpose: l * inv(r)
+
+mldivide
+  -> purpose: inv(l) * r
+
+pow
+  -> purpose: .^
+  -> requirement: element by element l**r
+
+sqrt
+  -> purpose: square root function
+  -> requirement: element by element
+
+exp
+  -> purpose: exponential function
+  -> requirement: element by element
+
+log
+  -> purpose: natural logarithm function
+  -> requirement: element by element
+
+trace
+  -> purpose: sum the diagonal of a matrix
+
+sum(vector)
+  -> purpose: returns the arithmetic sum of the input vector
+
+sum(matrix, dim)
+  -> purpose: returns the sum of a matrix along a given dimension
+  -> input: dim = 1, sum along the y axis; dim = 2, sum along the x axis
+
+prod(vector)
+  -> purpose: returns the arithmetic multiplication of the input vector
+
+prod(matrix,dim)
+  -> purpose: returns the arithmetic multiplication of the input along a given dimension
+  -> input: dim = 1, multiply along the y axis; dim = 2, multiply along the x axis
+
+dot
+  -> purpose: returns the dot product of two vectors
+
+cross
+  -> purpose: returns the cross product of two vectors (or matrices)
+
+kron
+  -> purpose: returns the kronecker product of two matrices
+
+det
+  -> purpose: returns the determinant of a matrix
+
+inv
+  -> purpose: inverts a matrix
+
+linsolve(matrix, vector)
+  -> purpose: solves a linear equation
+
+normalize(matrix, rval)
+  -> purpose: normalizes a matrix to the value "rval" (which defaults to 1.0)
+
+polyval
+  -> purpose: evaluates a polynomial
+
+
+matrix manipulation functions
+isempty
+  -> purpose: returns true if the matrix or vector is null
+
+transpose
+  -> purpose: transposes a matrix
+
+repmat(val, rows, columns)
+  -> purpose: creates a matrix by replicating a single value
+
+zeros(rows, columns)
+  -> purpose: returns a matrix of zeros
+
+ones(rows, columns)
+  -> purpose: returns a matrix of ones.
+
+eye(rows, columns)
+  -> purpose: returns an identity matrix
+
+rand(rows, columns)
+  -> purpose: returns a matrix of random numbers
+
+cat(dim, l, r)
+  -> purpose: concatenates two matrices along dimension "dim"
+
+horzcat(l, r)
+  -> purpose: concatenates two matrices horizontally
+
+vertcat(l, r)
+  -> purpose: concatenates two matrices vertically
+
+flipdim(arg, dim)
+  -> purpose: flips a matrix along a given dimension
+
+fliplr
+  -> purpose: flip a matrix left to right
+
+flipup
+  -> purpose: flip a matrix top to bottom
+
+rot90(arg, dim)
+  -> purpose: rotates a matrix 90 degrees (or more depending on "dim")
+
+reshape(arg, rows, columns)
+  -> purpose: reads a matrix and creates a new one of a different dimensions, can read in a matrix or a vector and return a matrix or a vector.
+
+size
+  -> purpose: returns the size of a matrix
+
+isvector
+  -> purpose: returns true if the matrix has only one dimension
+
+isscalar
+  -> purpose: returns true if there is only one element in this matrix
+
+numel
+  -> purpose: returns the number of elements in a matrix
+
+diag(arg: real_matrix)
+  -> purpose: returns a vector which is the diagonal of a matrix
+
+diag(arg: real_vector)
+  -> purpose: returns a matrix which as the argument as its diag
+
+blkdiag(arg: real_vector)
+  -> purpose: returns the block diagonal of a vector.
+
+blockdiag(arg: real_matrix, rep : positive)
+  -> purpose: replicates matrix "arg" along the diagonal of the resultant matrix "rep" times.
+
+repmat(arg, rows, columns)
+  -> purpose: replicates the "arg" matrix rows*columns times
+
+tril
+  -> purpose: returns the lower triangle of a matrix
+
+triu
+  -> purpose: returns the upper triangle of a matrix
+
+submatrix(arg, row, column, rows, columns)
+  -> purpose: returns real_matrix please see above for details
+
+submatrix(arg, row, column, rows, columns)
+  -> purpose: returns a real_vector
+
+buildmatrix(arg, result, row, column)
+  -> purpose: returns a submatrix from the input matrix, starting at location x, y.
+
+buildmatrix(arg, result, row, column)
+  -> purpose: builds a matrix
+  -> requeriment: "arg" is a vector
+
+insertcolumn(arg, result, row, column)
+  -> purpose: inserts a column
+  -> requeriment: "arg" is a vector
+
+exclude(arg, row, column)
+  -> purpose: returns a matrix with the designated row and column removed.
+
+
+conversion functions
+to_integer(real_matrix)
+  -> purpose: converts a real_matrix into an integer_matrix with the same dimensions.
+
+to_integer(real_vector)
+  -> purpose: converts a real_vector into an integer_vector with the same dimensions
+
+to_real(integer_matrix)
+  -> purpose: converts an integer_matrix into a real_matrix with the same dimensions.
+
+to_real(integer_vector)
+  -> purpose: converts an integer_vector into a real_vector with the same dimensions..

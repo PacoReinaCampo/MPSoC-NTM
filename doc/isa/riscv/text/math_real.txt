@@ -1,0 +1,153 @@
+  -- real functions
+  function sign
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns 1.0 if x > 0.0; 0.0 if x = 0.0; -1.0 if x < 0.0
+
+  function ceil
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns smallest integer value (as real) not less than x
+
+  function floor
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns largest integer value (as real) not greater than x
+
+  function round
+  -> input: x : real;
+  -> output: real;
+  -> purpose: rounds x to the nearest integer value (as real). if x is halfway between two integers, rounding is away from 0.0
+
+  function trunc
+  -> input: x : real;
+  -> output: real;
+  -> purpose: truncates x towards 0.0 and returns truncated value
+
+  function "mod"
+  -> input: x, y : real;
+  -> output: real;
+  -> purpose: returns floating point modulus of x/y, with the same sign as y, and absolute value less than the absolute value of y, and for some integer value n the result satisfies the relation x = y*n + mod
+  -> input: x,y)
+
+  function realmax
+  -> input: x, y : real;
+  -> output: real;
+  -> purpose: returns the algebraically larger of x and y
+
+  function realmin
+  -> input: x, y : real;
+  -> output: real;
+  -> purpose: returns the algebraically smaller of x and y
+
+  procedure uniform(variable seed1, seed2 : inout positive; variable x : out real);
+  -> purpose: returns, : x, a pseudo-random number with uniform distribution : the open interval (0.0, 1.0).
+
+  function sqrt
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns square root of x
+
+  function cbrt
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns cube root of x
+
+  function "**"
+  -> input: x : integer; y : real;
+  -> output: real;
+  -> purpose: returns y power of x ==>  x**y
+
+  function "**"
+  -> input: x : real; y : real;
+  -> output: real;
+  -> purpose: returns y power of x ==>  x**y
+
+  function exp
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns e**x; where e = math_e
+
+  function log
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns natural logarithm of x
+
+  function log2
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns logarithm base 2 of x
+
+  function log10
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns logarithm base 10 of x
+
+  function log
+  -> input: x : real; base : real;
+  -> output: real;
+  -> purpose: returns logarithm base base of x
+
+  function sin
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns sine of x; x : radians
+
+  function cos
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns cosine of x; x : radians
+
+  function tan
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns tangent of x; x : radians
+
+  function arcsin
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns inverse sine of x
+
+  function arccos
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns inverse cosine of x
+
+  function arctan (y : real;
+  -> output: real;
+  -> purpose: returns the value of the angle : radians of the point (1.0, y), which is : rectangular coordinates
+
+  function arctan (y : real; x : real;
+  -> output: real;
+  -> purpose: returns the principal value of the angle : radians of the point
+  -> input: x, y), which is : rectangular coordinates
+
+  function sinh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns hyperbolic sine of x
+
+  function cosh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns hyperbolic cosine of x
+
+  function tanh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns hyperbolic tangent of x
+
+  function arcsinh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns inverse hyperbolic sine of x
+
+  function arccosh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns inverse hyperbolic cosine of x
+
+  function arctanh
+  -> input: x : real;
+  -> output: real;
+  -> purpose: returns inverse hyperbolic tangent of x
