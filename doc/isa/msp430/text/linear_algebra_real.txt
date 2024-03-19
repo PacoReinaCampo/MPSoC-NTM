@@ -105,13 +105,13 @@ rdivide
   -> purpose: ./
   -> requirement: element by element divide
 
-mrdivide
+mrdivide(l, r)
   -> purpose: l * inv(r)
 
-mldivide
+mldivide(l, r)
   -> purpose: inv(l) * r
 
-pow
+pow(l, r)
   -> purpose: .^
   -> requirement: element by element l**r
 
@@ -140,7 +140,7 @@ sum(matrix, dim)
 prod(vector)
   -> purpose: returns the arithmetic multiplication of the input vector
 
-prod(matrix,dim)
+prod(matrix, dim)
   -> purpose: returns the arithmetic multiplication of the input along a given dimension
   -> input: dim = 1, multiply along the y axis; dim = 2, multiply along the x axis
 

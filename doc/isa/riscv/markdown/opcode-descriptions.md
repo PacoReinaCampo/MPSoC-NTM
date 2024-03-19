@@ -266,8 +266,8 @@ Format of a line in the table:
 | `fnn.w`      | `Feed-Forward Neural Network`                                                                                                    |
 | `lstm.w`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.w`      | `Attention Neural Network`                                                                                                       |
-| `ntm.w`      | `Neural Turing Machine`                                                                                                          |
-: RV32NTM - "RV32NTM Standard Extension for Neural Turing Machine"
+| `dnc.w`      | `Differentiable Neural Computer`                                                                                                 |
+: RV32NN - "RV32NN Standard Extension for Neural Network"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -276,8 +276,8 @@ Format of a line in the table:
 | `fnn.d`      | `Feed-Forward Neural Network`                                                                                                    |
 | `lstm.d`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.d`      | `Attention Neural Network`                                                                                                       |
-| `ntm.d`      | `Neural Turing Machine`                                                                                                          |
-: RV64NTM - "RV64NTM Standard Extension for Neural Turing Machine (+ RV32NTM)"
+| `dnc.d`      | `Differentiable Neural Computer`                                                                                                 |
+: RV64NN - "RV64NN Standard Extension for Neural Network (+ RV32NN)"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -286,8 +286,8 @@ Format of a line in the table:
 | `fnn.q`      | `Feed-Forward Neural Network`                                                                                                    |
 | `lstm.q`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.q`      | `Attention Neural Network`                                                                                                       |
-| `ntm.q`      | `Neural Turing Machine`                                                                                                          |
-: RV128NTM - "RV128NTM Standard Extension for Neural Turing Machine (+ RV64NTM)"
+| `dnc.q`      | `Differentiable Neural Computer`                                                                                                 |
+: RV128NN - "RV128NN Standard Extension for Neural Network (+ RV64NN)"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
