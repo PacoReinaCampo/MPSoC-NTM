@@ -91,17 +91,17 @@
   function sin
   -> input: x : real;
   -> output: real;
-  -> purpose: returns sine of x; x : radians
+  -> purpose: returns sine of x; x in radians
 
   function cos
   -> input: x : real;
   -> output: real;
-  -> purpose: returns cosine of x; x : radians
+  -> purpose: returns cosine of x; x in radians
 
   function tan
   -> input: x : real;
   -> output: real;
-  -> purpose: returns tangent of x; x : radians
+  -> purpose: returns tangent of x; x in radians
 
   function arcsin
   -> input: x : real;
@@ -113,14 +113,15 @@
   -> output: real;
   -> purpose: returns inverse cosine of x
 
-  function arctan (y : real;
+  function arctan
+  -> input : y : real;
   -> output: real;
-  -> purpose: returns the value of the angle : radians of the point (1.0, y), which is : rectangular coordinates
+  -> purpose: returns the value of the angle in radians of the point (1.0, y), which is in rectangular coordinates
 
-  function arctan (y : real; x : real;
+  function arctan
+  -> input: y : real; x : real;
   -> output: real;
-  -> purpose: returns the principal value of the angle : radians of the point
-  -> input: x, y), which is : rectangular coordinates
+  -> purpose: returns the principal value of the angle in radians of the point (x, y), which is in rectangular coordinates
 
   function sinh
   -> input: x : real;

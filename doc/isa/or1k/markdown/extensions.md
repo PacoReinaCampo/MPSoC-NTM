@@ -30,4 +30,37 @@ Format of a line in the table:
 | `rv`   | `32`      | `s`        | `32`              | `RV32S Standard Extension for Supervisor-level Instructions`                 |
 | `rv`   | `64`      | `s`        | `32`              | `RV64S Standard Extension for Supervisor-level Instructions (+ RV32S)`       |
 | `rv`   | `128`     | `s`        | `32`              | `RV128S Standard Extension for Supervisor-level Instructions (+ RV64S)`      |
+| `rv`   | `32`      | `h`        | `32`              | `RV32H Standard Extension for Hypervisor-level Instructions`                 |
+| `rv`   | `64`      | `h`        | `32`              | `RV64H Standard Extension for Hypervisor-level Instructions (+ RV32H)`       |
+| `rv`   | `128`     | `h`        | `32`              | `RV128H Standard Extension for Hypervisor-level Instructions (+ RV64H)`      |
+| `rv`   | `32`      | `m`        | `32`              | `RV32M Standard Extension for Machine-level Instructions`                    |
+| `rv`   | `64`      | `m`        | `32`              | `RV64M Standard Extension for Machine-level Instructions (+ RV32M)`          |
+| `rv`   | `128`     | `m`        | `32`              | `RV128M Standard Extension for Machine-level Instructions (+ RV64M)`         |
+| `rv`   | `32`      | `p`        | `32`              | `RV32P Standard Extension for Packed SIMD Instructions`                      |
+| `rv`   | `64`      | `p`        | `32`              | `RV64P Standard Extension for Packed SIMD Instructions (+ RV32P)`            |
+| `rv`   | `128`     | `p`        | `32`              | `RV128P Standard Extension for Packed SIMD Instructions (+ RV64P)`           |
+| `rv`   | `32`      | `v`        | `32`              | `RV32V Standard Extension for Vector Operations`                             |
+| `rv`   | `64`      | `v`        | `32`              | `RV64V Standard Extension for Vector Operations (+ RV32V)`                   |
+| `rv`   | `128`     | `v`        | `32`              | `RV128V Standard Extension for Vector Operations (+ RV64V)`                  |
+| `rv`   | `32`      | `t`        | `32`              | `RV32T Standard Extension for Transactional Memory`                          |
+| `rv`   | `64`      | `t`        | `32`              | `RV64T Standard Extension for Transactional Memory (+ RV32T)`                |
+| `rv`   | `128`     | `t`        | `32`              | `RV128T Standard Extension for Transactional Memory (+ RV64T)`               |
+| `rv`   | `32`      | `rmath`    | `32`              | `RV32RMATH Standard Extension for Real Math`                                 |
+| `rv`   | `64`      | `rmath`    | `32`              | `RV64RMATH Standard Extension for Real Math (+ RV32RMATH)`                   |
+| `rv`   | `128`     | `rmath`    | `32`              | `RV128RMATH Standard Extension for Real Math (+ RV64RMATH)`                  |
+| `rv`   | `32`      | `cmath`    | `32`              | `RV32CMATH Standard Extension Complex Math`                                  |
+| `rv`   | `64`      | `cmath`    | `32`              | `RV64CMATH Standard Extension Complex Math (+ RV32CMATH)`                    |
+| `rv`   | `128`     | `cmath`    | `32`              | `RV128CMATH Standard Extension Complex Math (+ RV64CMATH)`                   |
+| `rv`   | `32`      | `ralg`     | `32`              | `RV32RALG Standard Extension Real Linear Algebra`                            |
+| `rv`   | `64`      | `ralg`     | `32`              | `RV64RALG Standard Extension Real Linear Algebraa (+ RV32RALG)`              |
+| `rv`   | `128`     | `ralg`     | `32`              | `RV128RALG Standard Extension Real Linear Algebra (+ RV64RALG)`              |
+| `rv`   | `32`      | `calg`     | `32`              | `RV32CALG Standard Extension Complex Linear Algebra`                         |
+| `rv`   | `64`      | `calg`     | `32`              | `RV64CALG Standard Extension Complex Linear Algebra (+ RV32CALG)`            |
+| `rv`   | `128`     | `calg`     | `32`              | `RV128CALG Standard Extension Complex Linear Algebra (+ RV64CALG)`           |
+| `rv`   | `32`      | `rnn`      | `32`              | `RV32RNN Standard Extension Real Neural Network`                             |
+| `rv`   | `64`      | `rnn`      | `32`              | `RV64RNN Standard Extension Real Neural Network (+ RV32RNN)`                 |
+| `rv`   | `128`     | `rnn`      | `32`              | `RV128RNN Standard Extension Real Neural Network (+ RV64RNN)`                |
+| `rv`   | `32`      | `cnn`      | `32`              | `RV32CNN Standard Extension Complex Neural Network`                          |
+| `rv`   | `64`      | `cnn`      | `32`              | `RV64CNN Standard Extension Complex Neural Network (+ RV32CNN)`              |
+| `rv`   | `128`     | `cnn`      | `32`              | `RV128CNN Standard Extension Complex Neural Network (+ RV64CNN)`             |
 : Instruction Set Extensions

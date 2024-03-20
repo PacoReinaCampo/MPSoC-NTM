@@ -261,6 +261,102 @@ Format of a line in the table:
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `sign.w`     | `returns 1.0 if x > 0.0; 0.0 if x = 0.0; -1.0 if x < 0.0`                                                                        |
+| `ceil.w`     | `returns smallest integer value (as real) not less than x`                                                                       |
+| `floor.w`    | `returns largest integer value (as real) not greater than x`                                                                     |
+| `round.w`    | `rounds x to the nearest integer value (as real)`                                                                                |
+| `trunc.w`    | `truncates x towards 0.0 and returns truncated value`                                                                            |
+| `mod.w`      | `returns floating point modulus of x and y`                                                                                      |
+| `realmax.w`  | `returns the algebraically larger of x and y`                                                                                    |
+| `realmin.w`  | `returns the algebraically smaller of x and y`                                                                                   |
+| `sqrt.w`     | `returns square root of x`                                                                                                       |
+| `cbrt.w`     | `returns cube root of x`                                                                                                         |
+| `pow.w`      | `returns y power of x`                                                                                                           |
+| `exp.w`      | `returns e**x; where e = math_e`                                                                                                 |
+| `log.w`      | `returns natural logarithm of x`                                                                                                 |
+| `log2.w`     | `returns logarithm base 2 of x`                                                                                                  |
+| `log10.w`    | `returns logarithm base 10 of x`                                                                                                 |
+| `log.w`      | `returns logarithm base base of x`                                                                                               |
+| `sin.w`      | `returns sine of x; x in radians`                                                                                                |
+| `cos.w`      | `returns cosine of x; x in radians`                                                                                              |
+| `tan.w`      | `returns tangent of x; x in radians`                                                                                             |
+| `arcsin.w`   | `returns inverse sine of x`                                                                                                      |
+| `arccos.w`   | `returns inverse cosine of x`                                                                                                    |
+| `arctan.w`   | `rreturns inverse tangent of x`                                                                                                  |
+| `sinh.w`     | `returns hyperbolic sine of x`                                                                                                   |
+| `cosh.w`     | `returns hyperbolic cosine of x`                                                                                                 |
+| `tanh.w`     | `returns hyperbolic tangent of x`                                                                                                |
+| `arcsinh.w`  | `returns inverse hyperbolic sine of x`                                                                                           |
+| `arccosh.w`  | `returns inverse hyperbolic cosine of x`                                                                                         |
+| `arctanh.w`  | `returns inverse hyperbolic tangent of x`                                                                                        |
+: RV32RMATH - "RV32RMATH Standard Extension for Real Math"
+
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `sign.d`     | `returns 1.0 if x > 0.0; 0.0 if x = 0.0; -1.0 if x < 0.0`                                                                        |
+| `ceil.d`     | `returns smallest integer value (as real) not less than x`                                                                       |
+| `floor.d`    | `returns largest integer value (as real) not greater than x`                                                                     |
+| `round.d`    | `rounds x to the nearest integer value (as real)`                                                                                |
+| `trunc.d`    | `truncates x towards 0.0 and returns truncated value`                                                                            |
+| `mod.d`      | `returns floating point modulus of x and y`                                                                                      |
+| `realmax.d`  | `returns the algebraically larger of x and y`                                                                                    |
+| `realmin.d`  | `returns the algebraically smaller of x and y`                                                                                   |
+| `sqrt.d`     | `returns square root of x`                                                                                                       |
+| `cbrt.d`     | `returns cube root of x`                                                                                                         |
+| `pow.d`      | `returns y power of x`                                                                                                           |
+| `exp.d`      | `returns e**x; where e = math_e`                                                                                                 |
+| `log.d`      | `returns natural logarithm of x`                                                                                                 |
+| `log2.d`     | `returns logarithm base 2 of x`                                                                                                  |
+| `log10.d`    | `returns logarithm base 10 of x`                                                                                                 |
+| `log.d`      | `returns logarithm base base of x`                                                                                               |
+| `sin.d`      | `returns sine of x; x in radians`                                                                                                |
+| `cos.d`      | `returns cosine of x; x in radians`                                                                                              |
+| `tan.d`      | `returns tangent of x; x in radians`                                                                                             |
+| `arcsin.d`   | `returns inverse sine of x`                                                                                                      |
+| `arccos.d`   | `returns inverse cosine of x`                                                                                                    |
+| `arctan.d`   | `rreturns inverse tangent of x`                                                                                                  |
+| `sinh.d`     | `returns hyperbolic sine of x`                                                                                                   |
+| `cosh.d`     | `returns hyperbolic cosine of x`                                                                                                 |
+| `tanh.d`     | `returns hyperbolic tangent of x`                                                                                                |
+| `arcsinh.d`  | `returns inverse hyperbolic sine of x`                                                                                           |
+| `arccosh.d`  | `returns inverse hyperbolic cosine of x`                                                                                         |
+| `arctanh.d`  | `returns inverse hyperbolic tangent of x`                                                                                        |
+: RV64RMATH - "RV64RMATH Standard Extension for Real Math (+ RV32RMATH)"
+
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `sign.q`     | `returns 1.0 if x > 0.0; 0.0 if x = 0.0; -1.0 if x < 0.0`                                                                        |
+| `ceil.q`     | `returns smallest integer value (as real) not less than x`                                                                       |
+| `floor.q`    | `returns largest integer value (as real) not greater than x`                                                                     |
+| `round.q`    | `rounds x to the nearest integer value (as real)`                                                                                |
+| `trunc.q`    | `truncates x towards 0.0 and returns truncated value`                                                                            |
+| `mod.q`      | `returns floating point modulus of x and y`                                                                                      |
+| `realmax.q`  | `returns the algebraically larger of x and y`                                                                                    |
+| `realmin.q`  | `returns the algebraically smaller of x and y`                                                                                   |
+| `sqrt.q`     | `returns square root of x`                                                                                                       |
+| `cbrt.q`     | `returns cube root of x`                                                                                                         |
+| `pow.q`      | `returns y power of x`                                                                                                           |
+| `exp.q`      | `returns e**x; where e = math_e`                                                                                                 |
+| `log.q`      | `returns natural logarithm of x`                                                                                                 |
+| `log2.q`     | `returns logarithm base 2 of x`                                                                                                  |
+| `log10.q`    | `returns logarithm base 10 of x`                                                                                                 |
+| `log.q`      | `returns logarithm base base of x`                                                                                               |
+| `sin.q`      | `returns sine of x; x in radians`                                                                                                |
+| `cos.q`      | `returns cosine of x; x in radians`                                                                                              |
+| `tan.q`      | `returns tangent of x; x in radians`                                                                                             |
+| `arcsin.q`   | `returns inverse sine of x`                                                                                                      |
+| `arccos.q`   | `returns inverse cosine of x`                                                                                                    |
+| `arctan.q`   | `rreturns inverse tangent of x`                                                                                                  |
+| `sinh.q`     | `returns hyperbolic sine of x`                                                                                                   |
+| `cosh.q`     | `returns hyperbolic cosine of x`                                                                                                 |
+| `tanh.q`     | `returns hyperbolic tangent of x`                                                                                                |
+| `arcsinh.q`  | `returns inverse hyperbolic sine of x`                                                                                           |
+| `arccosh.q`  | `returns inverse hyperbolic cosine of x`                                                                                         |
+| `arctanh.q`  | `returns inverse hyperbolic tangent of x`                                                                                        |
+: RV128RMATH - "RV128MATH Standard Extension for Quadruple-Precision Real Math (+ RV64RMATH)"
+
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
 | `pnn.w`      | `Perceptron Neural Network`                                                                                                      |
 | `cnn.w`      | `Convolutional Neural Network`                                                                                                   |
 | `fnn.w`      | `Feed-Forward Neural Network`                                                                                                    |
