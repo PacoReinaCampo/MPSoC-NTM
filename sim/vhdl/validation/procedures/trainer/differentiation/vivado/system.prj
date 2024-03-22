@@ -81,13 +81,13 @@ vhdl2008 work ../../../../../../../model/vhdl/code/trainer/LSTM/model_forget_tra
 vhdl2008 work ../../../../../../../model/vhdl/code/trainer/LSTM/model_input_trainer.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/trainer/LSTM/model_output_trainer.vhd
 
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_controller.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_activation_gate_vector.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_forget_gate_vector.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_hidden_gate_vector.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_input_gate_vector.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_output_gate_vector.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/controller/LSTM/convolutional/model_state_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_controller.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_activation_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_forget_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_hidden_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_input_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_output_gate_vector.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_state_gate_vector.vhd
 
 vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_pkg.vhd
 vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_stimulus.vhd

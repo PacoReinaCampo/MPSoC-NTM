@@ -111,29 +111,29 @@ read_verilog -sv ../../../../rtl/verilog/math/function/matrix/ntm_matrix_softmax
 read_verilog -sv ../../../../rtl/verilog/math/function/matrix/ntm_matrix_summation_function.sv
 read_verilog -sv ../../../../rtl/verilog/math/function/matrix/ntm_matrix_tanh_function.sv
 
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_controller.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_activation_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_activation_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_forget_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_forget_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_hidden_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_input_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_input_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_output_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_output_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_state_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_controller.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_activation_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_activation_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_forget_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_forget_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_hidden_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_input_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_input_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_output_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_output_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/nn/LSTM/convolutional/ntm_state_gate_vector.sv
 
-read_verilog -sv ../../../../rtl/verilog/ntm/read_heads/ntm_reading.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/read_heads/ntm_reading.sv
 
-read_verilog -sv ../../../../rtl/verilog/ntm/write_heads/ntm_writing.sv
-read_verilog -sv ../../../../rtl/verilog/ntm/write_heads/ntm_erasing.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/write_heads/ntm_writing.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/write_heads/ntm_erasing.sv
 
-read_verilog -sv ../../../../rtl/verilog/ntm/memory/ntm_addressing.sv
-read_verilog -sv ../../../../rtl/verilog/ntm/memory/ntm_content_based_addressing.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/memory/ntm_addressing.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/memory/ntm_content_based_addressing.sv
 
-read_verilog -sv ../../../../rtl/verilog/ntm/top/ntm_interface_vector.sv
-read_verilog -sv ../../../../rtl/verilog/ntm/top/ntm_output_vector.sv
-read_verilog -sv ../../../../rtl/verilog/ntm/top/ntm_top.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/top/ntm_interface_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/top/ntm_output_vector.sv
+read_verilog -sv ../../../../rtl/verilog/nn/NTM/top/ntm_top.sv
 
 read_verilog -sv ntm_top_synthesis.sv
 
