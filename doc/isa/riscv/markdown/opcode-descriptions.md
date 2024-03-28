@@ -215,6 +215,18 @@ Format of a line in the table:
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `frcsr`      | `Read FP Control and Status Register`                                                                                            |
+| `frrm`       | `Read FP Rounding Mode (Bits 7:5 of fcsr Control and Status Register)`                                                           |
+| `frflags`    | `Read FP Accrued Exception Flags (Bits 4:0 of fcsr Control and Status Register)`                                                 |
+| `fscsr`      | `Read FP Control and Status Register`                                                                                            |
+| `fsrm`       | `Set FP Rounding Mode (Bits 7:5 of fcsr Control and Status Register)`                                                            |
+| `fsflags`    | `Set FP Accrued Exception Flags (Bits 4:0 of fcsr Control and Status Register)`                                                  |
+| `fsrmi`      | `Set FP Rounding Mode Immediate (Bits 7:5 of fcsr Control and Status Register)`                                                  |
+| `fsflagsi`   | `Set FP Accrued Exception Flags Immediate (Bits 4:0 of fcsr Control and Status Register)`                                        |
+: RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
+
+| ins name     | instruction description                                                                                                          |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
 | `flq`        | `Loads a quadruple-precision foating-point value from memory into foating-point register frd`                                    |
 | `fsq`        | `Stores a quadruple-precision foating-point value from foating-point register frs2 to memory`                                    |
 | `fmadd.q`    | `Multiply the quadruple-precision values in frs1 and frs2, then add rs3 and write the result to frd`                             |
@@ -282,7 +294,7 @@ Format of a line in the table:
 | `tan.w`      | `returns tangent of x; x in radians`                                                                                             |
 | `arcsin.w`   | `returns inverse sine of x`                                                                                                      |
 | `arccos.w`   | `returns inverse cosine of x`                                                                                                    |
-| `arctan.w`   | `rreturns inverse tangent of x`                                                                                                  |
+| `arctan.w`   | `returns inverse tangent of x`                                                                                                   |
 | `sinh.w`     | `returns hyperbolic sine of x`                                                                                                   |
 | `cosh.w`     | `returns hyperbolic cosine of x`                                                                                                 |
 | `tanh.w`     | `returns hyperbolic tangent of x`                                                                                                |
@@ -314,7 +326,7 @@ Format of a line in the table:
 | `tan.d`      | `returns tangent of x; x in radians`                                                                                             |
 | `arcsin.d`   | `returns inverse sine of x`                                                                                                      |
 | `arccos.d`   | `returns inverse cosine of x`                                                                                                    |
-| `arctan.d`   | `rreturns inverse tangent of x`                                                                                                  |
+| `arctan.d`   | `returns inverse tangent of x`                                                                                                   |
 | `sinh.d`     | `returns hyperbolic sine of x`                                                                                                   |
 | `cosh.d`     | `returns hyperbolic cosine of x`                                                                                                 |
 | `tanh.d`     | `returns hyperbolic tangent of x`                                                                                                |
@@ -346,7 +358,7 @@ Format of a line in the table:
 | `tan.q`      | `returns tangent of x; x in radians`                                                                                             |
 | `arcsin.q`   | `returns inverse sine of x`                                                                                                      |
 | `arccos.q`   | `returns inverse cosine of x`                                                                                                    |
-| `arctan.q`   | `rreturns inverse tangent of x`                                                                                                  |
+| `arctan.q`   | `returns inverse tangent of x`                                                                                                   |
 | `sinh.q`     | `returns hyperbolic sine of x`                                                                                                   |
 | `cosh.q`     | `returns hyperbolic cosine of x`                                                                                                 |
 | `tanh.q`     | `returns hyperbolic tangent of x`                                                                                                |
@@ -363,7 +375,7 @@ Format of a line in the table:
 | `lstm.w`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.w`      | `Attention Neural Network`                                                                                                       |
 | `dnc.w`      | `Differentiable Neural Computer`                                                                                                 |
-: RV32NN - "RV32NN Standard Extension for Neural Network"
+: RV32RNN - "RV32RNN Standard Extension for Neural Network"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -373,7 +385,7 @@ Format of a line in the table:
 | `lstm.d`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.d`      | `Attention Neural Network`                                                                                                       |
 | `dnc.d`      | `Differentiable Neural Computer`                                                                                                 |
-: RV64NN - "RV64NN Standard Extension for Neural Network (+ RV32NN)"
+: RV64RNN - "RV64RNN Standard Extension for Neural Network (+ RV32RNN)"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -383,19 +395,7 @@ Format of a line in the table:
 | `lstm.q`     | `Long-Short Term Memory Neural Network`                                                                                          |
 | `ann.q`      | `Attention Neural Network`                                                                                                       |
 | `dnc.q`      | `Differentiable Neural Computer`                                                                                                 |
-: RV128NN - "RV128NN Standard Extension for Neural Network (+ RV64NN)"
-
-| ins name     | instruction description                                                                                                          |
-|--------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `frcsr`      | `Read FP Control and Status Register`                                                                                            |
-| `frrm`       | `Read FP Rounding Mode (Bits 7:5 of fcsr Control and Status Register)`                                                           |
-| `frflags`    | `Read FP Accrued Exception Flags (Bits 4:0 of fcsr Control and Status Register)`                                                 |
-| `fscsr`      | `Read FP Control and Status Register`                                                                                            |
-| `fsrm`       | `Set FP Rounding Mode (Bits 7:5 of fcsr Control and Status Register)`                                                            |
-| `fsflags`    | `Set FP Accrued Exception Flags (Bits 4:0 of fcsr Control and Status Register)`                                                  |
-| `fsrmi`      | `Set FP Rounding Mode Immediate (Bits 7:5 of fcsr Control and Status Register)`                                                  |
-| `fsflagsi`   | `Set FP Accrued Exception Flags Immediate (Bits 4:0 of fcsr Control and Status Register)`                                        |
-: RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
+: RV128RNN - "RV128RNN Standard Extension for Neural Network (+ RV64RNN)"
 
 | ins name     | instruction description                                                                                                          |
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------|

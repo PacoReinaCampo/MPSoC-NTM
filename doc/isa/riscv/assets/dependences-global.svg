@@ -47,7 +47,7 @@
 <polygon fill="none" stroke="black" points="195,-165.5 195,-218.5 317,-218.5 317,-165.5 195,-165.5"/>
 <text text-anchor="middle" x="256" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC_RISCV</text>
 <text text-anchor="middle" x="256" y="-188.3" font-family="Times,serif" font-size="14.00">Architecture</text>
-<text text-anchor="middle" x="256" y="-173.3" font-family="Times,serif" font-size="14.00">rv64&#45;pvt&#45;gc</text>
+<text text-anchor="middle" x="256" y="-173.3" font-family="Times,serif" font-size="14.00">rv64&#45;pvt&#45;gcfdq</text>
 </g>
 <!-- MPSoC_DBG&#45;&gt;MPSoC_RISCV -->
 <g id="edge1" class="edge">
@@ -58,30 +58,30 @@
 <!-- SoC_RISCV -->
 <g id="node11" class="node">
 <title>SoC_RISCV</title>
-<polygon fill="none" stroke="black" points="203,-237.5 203,-290.5 309,-290.5 309,-237.5 203,-237.5"/>
+<polygon fill="none" stroke="black" points="198,-237.5 198,-290.5 314,-290.5 314,-237.5 198,-237.5"/>
 <text text-anchor="middle" x="256" y="-275.3" font-family="Times,serif" font-size="14.00">SoC_RISCV</text>
 <text text-anchor="middle" x="256" y="-260.3" font-family="Times,serif" font-size="14.00">Architecture</text>
-<text text-anchor="middle" x="256" y="-245.3" font-family="Times,serif" font-size="14.00">rv64&#45;pv&#45;gc</text>
+<text text-anchor="middle" x="256" y="-245.3" font-family="Times,serif" font-size="14.00">rv64&#45;pv&#45;gcfdq</text>
 </g>
 <!-- MPSoC_DBG&#45;&gt;SoC_RISCV -->
 <g id="edge10" class="edge">
 <title>MPSoC_DBG&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M137.72,-164.93C145.15,-168.66 152.2,-173.28 158,-179 174.75,-195.52 161.79,-210.96 178,-228 182.65,-232.88 188.09,-237.17 193.89,-240.92"/>
-<polygon fill="black" stroke="black" points="192.21,-243.99 202.6,-246.03 195.75,-237.95 192.21,-243.99"/>
+<path fill="none" stroke="black" d="M137.72,-164.93C145.15,-168.66 152.2,-173.28 158,-179 174.75,-195.52 161.79,-210.96 178,-228 181.38,-231.55 185.18,-234.79 189.24,-237.74"/>
+<polygon fill="black" stroke="black" points="187.59,-240.84 197.87,-243.38 191.41,-234.98 187.59,-240.84"/>
 </g>
 <!-- PU_RISCV -->
 <g id="node12" class="node">
 <title>PU_RISCV</title>
-<polygon fill="none" stroke="black" points="203,-309.5 203,-362.5 309,-362.5 309,-309.5 203,-309.5"/>
+<polygon fill="none" stroke="black" points="202.5,-309.5 202.5,-362.5 309.5,-362.5 309.5,-309.5 202.5,-309.5"/>
 <text text-anchor="middle" x="256" y="-347.3" font-family="Times,serif" font-size="14.00">PU_RISCV</text>
 <text text-anchor="middle" x="256" y="-332.3" font-family="Times,serif" font-size="14.00">Architecture</text>
-<text text-anchor="middle" x="256" y="-317.3" font-family="Times,serif" font-size="14.00">rv64&#45;p&#45;gc</text>
+<text text-anchor="middle" x="256" y="-317.3" font-family="Times,serif" font-size="14.00">rv64&#45;p&#45;gcfdq</text>
 </g>
 <!-- MPSoC_DBG&#45;&gt;PU_RISCV -->
 <g id="edge19" class="edge">
 <title>MPSoC_DBG&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M137.81,-163.27C145.5,-167.22 152.62,-172.35 158,-179 192.3,-221.36 145.07,-256.56 178,-300 182.41,-305.82 188,-310.74 194.14,-314.88"/>
-<polygon fill="black" stroke="black" points="192.42,-317.93 202.79,-320.06 196.01,-311.92 192.42,-317.93"/>
+<path fill="none" stroke="black" d="M137.81,-163.27C145.5,-167.22 152.62,-172.35 158,-179 192.3,-221.36 145.07,-256.56 178,-300 182.25,-305.61 187.59,-310.38 193.47,-314.43"/>
+<polygon fill="black" stroke="black" points="192.04,-317.65 202.4,-319.85 195.67,-311.67 192.04,-317.65"/>
 </g>
 <!-- MPSoC_DMA -->
 <g id="node2" class="node">
@@ -99,14 +99,14 @@
 <!-- MPSoC_DMA&#45;&gt;SoC_RISCV -->
 <g id="edge11" class="edge">
 <title>MPSoC_DMA&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M138.79,-106.95C146.08,-110.81 152.81,-115.73 158,-122 188.59,-158.92 148.61,-190.13 178,-228 182.48,-233.77 188.1,-238.66 194.27,-242.78"/>
-<polygon fill="black" stroke="black" points="192.56,-245.84 202.94,-247.95 196.14,-239.83 192.56,-245.84"/>
+<path fill="none" stroke="black" d="M138.79,-106.95C146.08,-110.81 152.81,-115.73 158,-122 188.59,-158.92 148.61,-190.13 178,-228 181.25,-232.19 185.11,-235.92 189.34,-239.22"/>
+<polygon fill="black" stroke="black" points="187.64,-242.3 197.87,-245.07 191.6,-236.53 187.64,-242.3"/>
 </g>
 <!-- MPSoC_DMA&#45;&gt;PU_RISCV -->
 <g id="edge20" class="edge">
 <title>MPSoC_DMA&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M138.85,-106.42C146.22,-110.35 152.96,-115.43 158,-122 206.47,-185.15 131.57,-235.33 178,-300 182.32,-306.02 187.9,-311.06 194.09,-315.27"/>
-<polygon fill="black" stroke="black" points="192.47,-318.38 202.84,-320.53 196.07,-312.38 192.47,-318.38"/>
+<path fill="none" stroke="black" d="M138.85,-106.42C146.22,-110.35 152.96,-115.43 158,-122 206.47,-185.15 131.57,-235.33 178,-300 182.26,-305.93 187.75,-310.92 193.84,-315.1"/>
+<polygon fill="black" stroke="black" points="192.08,-318.13 202.45,-320.32 195.71,-312.14 192.08,-318.13"/>
 </g>
 <!-- MPSoC_GPIO -->
 <g id="node3" class="node">
@@ -124,8 +124,8 @@
 <!-- MPSoC_GPIO&#45;&gt;SoC_RISCV -->
 <g id="edge12" class="edge">
 <title>MPSoC_GPIO&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M139.5,-478.91C146.59,-475.13 153.08,-470.27 158,-464 203.32,-406.23 134.89,-359.44 178,-300 182.35,-294 187.95,-288.98 194.15,-284.77"/>
-<polygon fill="black" stroke="black" points="196.13,-287.66 202.91,-279.52 192.53,-281.66 196.13,-287.66"/>
+<path fill="none" stroke="black" d="M139.5,-478.91C146.59,-475.13 153.08,-470.27 158,-464 203.32,-406.23 134.89,-359.44 178,-300 181.25,-295.52 185.2,-291.58 189.57,-288.12"/>
+<polygon fill="black" stroke="black" points="191.62,-290.96 197.85,-282.39 187.63,-285.2 191.62,-290.96"/>
 </g>
 <!-- MPSoC_GPIO&#45;&gt;PU_RISCV -->
 <g id="edge21" class="edge">
@@ -149,8 +149,8 @@
 <!-- MPSoC_MPI&#45;&gt;SoC_RISCV -->
 <g id="edge13" class="edge">
 <title>MPSoC_MPI&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M135.79,-423.29C144.21,-419.34 152.09,-414.06 158,-407 189.05,-369.9 148.37,-338.25 178,-300 182.47,-294.23 188.1,-289.34 194.26,-285.21"/>
-<polygon fill="black" stroke="black" points="196.13,-288.17 202.93,-280.04 192.55,-282.15 196.13,-288.17"/>
+<path fill="none" stroke="black" d="M135.79,-423.29C144.21,-419.34 152.09,-414.06 158,-407 189.05,-369.9 148.37,-338.25 178,-300 181.25,-295.81 185.1,-292.08 189.33,-288.77"/>
+<polygon fill="black" stroke="black" points="191.6,-291.46 197.86,-282.92 187.63,-285.69 191.6,-291.46"/>
 </g>
 <!-- MPSoC_MPI&#45;&gt;PU_RISCV -->
 <g id="edge22" class="edge">
@@ -174,14 +174,14 @@
 <!-- MPSoC_MPRAM&#45;&gt;SoC_RISCV -->
 <g id="edge14" class="edge">
 <title>MPSoC_MPRAM&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M146.56,-358.96C150.69,-356.34 154.57,-353.37 158,-350 175.08,-333.24 161.56,-317.4 178,-300 182.7,-295.03 188.22,-290.67 194.11,-286.88"/>
-<polygon fill="black" stroke="black" points="196.09,-289.78 202.96,-281.72 192.56,-283.74 196.09,-289.78"/>
+<path fill="none" stroke="black" d="M146.56,-358.96C150.69,-356.34 154.57,-353.37 158,-350 175.08,-333.24 161.56,-317.4 178,-300 181.37,-296.43 185.16,-293.19 189.21,-290.23"/>
+<polygon fill="black" stroke="black" points="191.39,-292.99 197.83,-284.59 187.55,-287.14 191.39,-292.99"/>
 </g>
 <!-- MPSoC_MPRAM&#45;&gt;PU_RISCV -->
 <g id="edge23" class="edge">
 <title>MPSoC_MPRAM&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M150.11,-361.76C164.18,-358.31 178.99,-354.67 192.9,-351.25"/>
-<polygon fill="black" stroke="black" points="193.97,-354.59 202.84,-348.81 192.3,-347.8 193.97,-354.59"/>
+<path fill="none" stroke="black" d="M150.11,-361.76C164.03,-358.34 178.67,-354.75 192.45,-351.36"/>
+<polygon fill="black" stroke="black" points="193.43,-354.73 202.31,-348.94 191.76,-347.93 193.43,-354.73"/>
 </g>
 <!-- MPSoC_MSI -->
 <g id="node6" class="node">
@@ -199,14 +199,14 @@
 <!-- MPSoC_MSI&#45;&gt;SoC_RISCV -->
 <g id="edge15" class="edge">
 <title>MPSoC_MSI&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M135.77,-303.74C153.85,-297.72 174.33,-290.89 193.15,-284.62"/>
-<polygon fill="black" stroke="black" points="194.44,-287.88 202.82,-281.39 192.22,-281.24 194.44,-287.88"/>
+<path fill="none" stroke="black" d="M135.77,-303.74C152.27,-298.24 170.78,-292.07 188.19,-286.27"/>
+<polygon fill="black" stroke="black" points="189.36,-289.57 197.74,-283.09 187.14,-282.93 189.36,-289.57"/>
 </g>
 <!-- MPSoC_MSI&#45;&gt;PU_RISCV -->
 <g id="edge24" class="edge">
 <title>MPSoC_MSI&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M135.77,-325.54C153.68,-327.11 173.95,-328.89 192.63,-330.53"/>
-<polygon fill="black" stroke="black" points="192.55,-334.04 202.82,-331.42 193.16,-327.06 192.55,-334.04"/>
+<path fill="none" stroke="black" d="M135.77,-325.54C153.52,-327.1 173.58,-328.86 192.11,-330.48"/>
+<polygon fill="black" stroke="black" points="191.96,-333.98 202.22,-331.37 192.57,-327.01 191.96,-333.98"/>
 </g>
 <!-- MPSoC_NoC -->
 <g id="node7" class="node">
@@ -224,8 +224,8 @@
 <!-- MPSoC_NoC&#45;&gt;SoC_RISCV -->
 <g id="edge16" class="edge">
 <title>MPSoC_NoC&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M136.53,-47.59C144.78,-51.55 152.4,-56.87 158,-64 203.32,-121.77 134.89,-168.56 178,-228 182.35,-234 187.95,-239.02 194.15,-243.23"/>
-<polygon fill="black" stroke="black" points="192.53,-246.34 202.91,-248.48 196.13,-240.34 192.53,-246.34"/>
+<path fill="none" stroke="black" d="M136.53,-47.59C144.78,-51.55 152.4,-56.87 158,-64 203.32,-121.77 134.89,-168.56 178,-228 181.25,-232.48 185.2,-236.42 189.57,-239.88"/>
+<polygon fill="black" stroke="black" points="187.63,-242.8 197.85,-245.61 191.62,-237.04 187.63,-242.8"/>
 </g>
 <!-- MPSoC_SPRAM -->
 <g id="node8" class="node">
@@ -243,14 +243,14 @@
 <!-- MPSoC_SPRAM&#45;&gt;SoC_RISCV -->
 <g id="edge17" class="edge">
 <title>MPSoC_SPRAM&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M148.16,-264C162.65,-264 178.01,-264 192.44,-264"/>
-<polygon fill="black" stroke="black" points="192.75,-267.5 202.75,-264 192.75,-260.5 192.75,-267.5"/>
+<path fill="none" stroke="black" d="M148.16,-264C161.02,-264 174.57,-264 187.54,-264"/>
+<polygon fill="black" stroke="black" points="187.8,-267.5 197.8,-264 187.8,-260.5 187.8,-267.5"/>
 </g>
 <!-- MPSoC_SPRAM&#45;&gt;PU_RISCV -->
 <g id="edge25" class="edge">
 <title>MPSoC_SPRAM&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M133.48,-283.04C141.69,-286.3 150.1,-289.7 158,-293 169.54,-297.81 181.77,-303.1 193.53,-308.26"/>
-<polygon fill="black" stroke="black" points="192.26,-311.53 202.83,-312.37 195.09,-305.13 192.26,-311.53"/>
+<path fill="none" stroke="black" d="M133.48,-283.04C141.69,-286.3 150.1,-289.7 158,-293 169.4,-297.76 181.49,-302.98 193.12,-308.08"/>
+<polygon fill="black" stroke="black" points="191.76,-311.31 202.32,-312.15 194.59,-304.91 191.76,-311.31"/>
 </g>
 <!-- MPSoC_UART -->
 <g id="node9" class="node">
@@ -268,42 +268,42 @@
 <!-- MPSoC_UART&#45;&gt;SoC_RISCV -->
 <g id="edge18" class="edge">
 <title>MPSoC_UART&#45;&gt;SoC_RISCV</title>
-<path fill="none" stroke="black" d="M141.42,-226.14C158.04,-231.68 176.26,-237.75 193.15,-243.38"/>
-<polygon fill="black" stroke="black" points="192.32,-246.8 202.92,-246.64 194.54,-240.16 192.32,-246.8"/>
+<path fill="none" stroke="black" d="M141.42,-226.14C156.44,-231.15 172.77,-236.59 188.24,-241.75"/>
+<polygon fill="black" stroke="black" points="187.14,-245.07 197.74,-244.91 189.36,-238.43 187.14,-245.07"/>
 </g>
 <!-- MPSoC_UART&#45;&gt;PU_RISCV -->
 <g id="edge26" class="edge">
 <title>MPSoC_UART&#45;&gt;PU_RISCV</title>
-<path fill="none" stroke="black" d="M141.13,-223.1C147.38,-226.6 153.2,-230.85 158,-236 178.32,-257.8 158.39,-277.56 178,-300 182.57,-305.23 188.05,-309.75 193.97,-313.65"/>
-<polygon fill="black" stroke="black" points="192.5,-316.84 202.89,-318.92 196.06,-310.82 192.5,-316.84"/>
+<path fill="none" stroke="black" d="M141.13,-223.1C147.38,-226.6 153.2,-230.85 158,-236 178.32,-257.8 158.39,-277.56 178,-300 182.5,-305.15 187.9,-309.62 193.72,-313.48"/>
+<polygon fill="black" stroke="black" points="192.11,-316.59 202.49,-318.71 195.69,-310.58 192.11,-316.59"/>
 </g>
 <!-- MPSoC_DV -->
 <g id="node13" class="node">
 <title>MPSoC_DV</title>
-<polygon fill="none" stroke="black" points="380,-165.5 380,-218.5 490,-218.5 490,-165.5 380,-165.5"/>
+<polygon fill="none" stroke="black" points="374,-165.5 374,-218.5 496,-218.5 496,-165.5 374,-165.5"/>
 <text text-anchor="middle" x="435" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC_DV</text>
 <text text-anchor="middle" x="435" y="-188.3" font-family="Times,serif" font-size="14.00">Environment</text>
-<text text-anchor="middle" x="435" y="-173.3" font-family="Times,serif" font-size="14.00">rv64&#45;pvt&#45;gc</text>
+<text text-anchor="middle" x="435" y="-173.3" font-family="Times,serif" font-size="14.00">rv64&#45;pvt&#45;gcfdq</text>
 </g>
 <!-- MPSoC_RISCV&#45;&gt;MPSoC_DV -->
 <g id="edge29" class="edge">
 <title>MPSoC_RISCV&#45;&gt;MPSoC_DV</title>
-<path fill="none" stroke="black" d="M317.42,-192C334.17,-192 352.42,-192 369.4,-192"/>
-<polygon fill="black" stroke="black" points="369.79,-195.5 379.79,-192 369.79,-188.5 369.79,-195.5"/>
+<path fill="none" stroke="black" d="M317.42,-192C332.23,-192 348.21,-192 363.45,-192"/>
+<polygon fill="black" stroke="black" points="363.85,-195.5 373.85,-192 363.85,-188.5 363.85,-195.5"/>
 </g>
 <!-- SoC_DV -->
 <g id="node14" class="node">
 <title>SoC_DV</title>
-<polygon fill="none" stroke="black" points="380,-237.5 380,-290.5 490,-290.5 490,-237.5 380,-237.5"/>
+<polygon fill="none" stroke="black" points="377,-237.5 377,-290.5 493,-290.5 493,-237.5 377,-237.5"/>
 <text text-anchor="middle" x="435" y="-275.3" font-family="Times,serif" font-size="14.00">SoC_DV</text>
 <text text-anchor="middle" x="435" y="-260.3" font-family="Times,serif" font-size="14.00">Environment</text>
-<text text-anchor="middle" x="435" y="-245.3" font-family="Times,serif" font-size="14.00">rv64&#45;pv&#45;gc</text>
+<text text-anchor="middle" x="435" y="-245.3" font-family="Times,serif" font-size="14.00">rv64&#45;pv&#45;gcfdq</text>
 </g>
 <!-- SoC_RISCV&#45;&gt;SoC_DV -->
 <g id="edge28" class="edge">
 <title>SoC_RISCV&#45;&gt;SoC_DV</title>
-<path fill="none" stroke="black" d="M309.15,-264C328.08,-264 349.7,-264 369.56,-264"/>
-<polygon fill="black" stroke="black" points="369.77,-267.5 379.77,-264 369.77,-260.5 369.77,-267.5"/>
+<path fill="none" stroke="black" d="M314.47,-264C331.17,-264 349.57,-264 366.82,-264"/>
+<polygon fill="black" stroke="black" points="366.82,-267.5 376.82,-264 366.82,-260.5 366.82,-267.5"/>
 </g>
 <!-- PU_DV -->
 <g id="node15" class="node">
@@ -311,13 +311,13 @@
 <polygon fill="none" stroke="black" points="380,-309.5 380,-362.5 490,-362.5 490,-309.5 380,-309.5"/>
 <text text-anchor="middle" x="435" y="-347.3" font-family="Times,serif" font-size="14.00">PU_DV</text>
 <text text-anchor="middle" x="435" y="-332.3" font-family="Times,serif" font-size="14.00">Environment</text>
-<text text-anchor="middle" x="435" y="-317.3" font-family="Times,serif" font-size="14.00">rv64&#45;p&#45;gc</text>
+<text text-anchor="middle" x="435" y="-317.3" font-family="Times,serif" font-size="14.00">rv64&#45;p&#45;gcfdq</text>
 </g>
 <!-- PU_RISCV&#45;&gt;PU_DV -->
 <g id="edge27" class="edge">
 <title>PU_RISCV&#45;&gt;PU_DV</title>
-<path fill="none" stroke="black" d="M309.15,-336C328.08,-336 349.7,-336 369.56,-336"/>
-<polygon fill="black" stroke="black" points="369.77,-339.5 379.77,-336 369.77,-332.5 369.77,-339.5"/>
+<path fill="none" stroke="black" d="M309.63,-336C328.46,-336 349.9,-336 369.61,-336"/>
+<polygon fill="black" stroke="black" points="369.74,-339.5 379.74,-336 369.74,-332.5 369.74,-339.5"/>
 </g>
 <!-- MPSoC_NTM -->
 <g id="node16" class="node">
@@ -330,8 +330,8 @@
 <!-- MPSoC_DV&#45;&gt;MPSoC_NTM -->
 <g id="edge32" class="edge">
 <title>MPSoC_DV&#45;&gt;MPSoC_NTM</title>
-<path fill="none" stroke="black" d="M490.42,-192C507.7,-192 526.97,-192 544.89,-192"/>
-<polygon fill="black" stroke="black" points="544.97,-195.5 554.97,-192 544.97,-188.5 544.97,-195.5"/>
+<path fill="none" stroke="black" d="M496.19,-192C511.85,-192 528.78,-192 544.67,-192"/>
+<polygon fill="black" stroke="black" points="544.93,-195.5 554.93,-192 544.93,-188.5 544.93,-195.5"/>
 </g>
 <!-- SoC_NTM -->
 <g id="node17" class="node">
@@ -344,8 +344,8 @@
 <!-- SoC_DV&#45;&gt;SoC_NTM -->
 <g id="edge31" class="edge">
 <title>SoC_DV&#45;&gt;SoC_NTM</title>
-<path fill="none" stroke="black" d="M490.42,-264C509.29,-264 530.54,-264 549.81,-264"/>
-<polygon fill="black" stroke="black" points="549.99,-267.5 559.99,-264 549.99,-260.5 549.99,-267.5"/>
+<path fill="none" stroke="black" d="M493.29,-264C511.36,-264 531.37,-264 549.62,-264"/>
+<polygon fill="black" stroke="black" points="549.84,-267.5 559.84,-264 549.84,-260.5 549.84,-267.5"/>
 </g>
 <!-- PU_NTM -->
 <g id="node18" class="node">
