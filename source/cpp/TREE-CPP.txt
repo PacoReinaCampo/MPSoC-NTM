@@ -72,63 +72,6 @@ library
 │           ├── ntm_vector_subtractor.cpp
 │           ├── ntm_vector_subtractor_design.cpp
 │           └── ntm_vector_subtractor_testbench.cpp
-├── controller
-│   ├── FNN
-│   │   ├── convolutional
-│   │   │   ├── ntm_controller.cpp
-│   │   │   ├── ntm_controller_design.cpp
-│   │   │   └── ntm_controller_testbench.cpp
-│   │   └── standard
-│   │       ├── ntm_controller.cpp
-│   │       ├── ntm_controller_design.cpp
-│   │       └── ntm_controller_testbench.cpp
-│   ├── LSTM
-│   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.cpp
-│   │   │   ├── ntm_activation_gate_vector_design.cpp
-│   │   │   ├── ntm_activation_gate_vector_testbench.cpp
-│   │   │   ├── ntm_controller.cpp
-│   │   │   ├── ntm_controller_design.cpp
-│   │   │   ├── ntm_controller_testbench.cpp
-│   │   │   ├── ntm_forget_gate_vector.cpp
-│   │   │   ├── ntm_forget_gate_vector_design.cpp
-│   │   │   ├── ntm_forget_gate_vector_testbench.cpp
-│   │   │   ├── ntm_hidden_gate_vector.cpp
-│   │   │   ├── ntm_hidden_gate_vector_design.cpp
-│   │   │   ├── ntm_hidden_gate_vector_testbench.cpp
-│   │   │   ├── ntm_input_gate_vector.cpp
-│   │   │   ├── ntm_input_gate_vector_design.cpp
-│   │   │   ├── ntm_input_gate_vector_testbench.cpp
-│   │   │   ├── ntm_output_gate_vector.cpp
-│   │   │   ├── ntm_output_gate_vector_design.cpp
-│   │   │   ├── ntm_output_gate_vector_testbench.cpp
-│   │   │   ├── ntm_state_gate_vector.cpp
-│   │   │   ├── ntm_state_gate_vector_design.cpp
-│   │   │   └── ntm_state_gate_vector_testbench.cpp
-│   │   └── standard
-│   │       ├── ntm_activation_gate_vector.cpp
-│   │       ├── ntm_activation_gate_vector_design.cpp
-│   │       ├── ntm_activation_gate_vector_testbench.cpp
-│   │       ├── ntm_controller.cpp
-│   │       ├── ntm_controller_design.cpp
-│   │       ├── ntm_controller_testbench.cpp
-│   │       ├── ntm_forget_gate_vector.cpp
-│   │       ├── ntm_forget_gate_vector_design.cpp
-│   │       ├── ntm_forget_gate_vector_testbench.cpp
-│   │       ├── ntm_hidden_gate_vector.cpp
-│   │       ├── ntm_hidden_gate_vector_design.cpp
-│   │       ├── ntm_hidden_gate_vector_testbench.cpp
-│   │       ├── ntm_input_gate_vector.cpp
-│   │       ├── ntm_input_gate_vector_design.cpp
-│   │       ├── ntm_input_gate_vector_testbench.cpp
-│   │       ├── ntm_output_gate_vector.cpp
-│   │       ├── ntm_output_gate_vector_design.cpp
-│   │       ├── ntm_output_gate_vector_testbench.cpp
-│   │       ├── ntm_state_gate_vector.cpp
-│   │       ├── ntm_state_gate_vector_design.cpp
-│   │       └── ntm_state_gate_vector_testbench.cpp
-│   ├── ntm_fnn_controller.cpp
-│   └── ntm_lstm_controller.cpp
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -298,49 +241,160 @@ library
 │           ├── ntm_vector_mean.cpp
 │           ├── ntm_vector_mean_design.cpp
 │           └── ntm_vector_mean_testbench.cpp
-├── ntm
-│   ├── memory
-│   │   ├── ntm_addressing.cpp
-│   │   ├── ntm_addressing_design.cpp
-│   │   ├── ntm_addressing_testbench.cpp
-│   │   ├── ntm_matrix_content_based_addressing.cpp
-│   │   ├── ntm_matrix_content_based_addressing_design.cpp
-│   │   ├── ntm_matrix_content_based_addressing_testbench.cpp
-│   │   ├── ntm_vector_content_based_addressing.cpp
-│   │   ├── ntm_vector_content_based_addressing_design.cpp
-│   │   └── ntm_vector_content_based_addressing_testbench.cpp
-│   ├── ntm.cpp
-│   ├── read_heads
-│   │   ├── ntm_reading.cpp
-│   │   ├── ntm_reading_design.cpp
-│   │   └── ntm_reading_testbench.cpp
-│   ├── top
-│   │   ├── ntm_interface_matrix.cpp
-│   │   ├── ntm_interface_matrix_design.cpp
-│   │   ├── ntm_interface_matrix_testbench.cpp
-│   │   ├── ntm_interface_top.cpp
-│   │   ├── ntm_interface_top_design.cpp
-│   │   ├── ntm_interface_top_testbench.cpp
-│   │   ├── ntm_interface_vector.cpp
-│   │   ├── ntm_interface_vector_design.cpp
-│   │   ├── ntm_interface_vector_testbench.cpp
-│   │   ├── ntm_output_vector.cpp
-│   │   ├── ntm_output_vector_design.cpp
-│   │   ├── ntm_output_vector_testbench.cpp
-│   │   ├── ntm_top.cpp
-│   │   ├── ntm_top_design.cpp
-│   │   └── ntm_top_testbench.cpp
-│   ├── trained
-│   │   ├── ntm_trained_top.cpp
-│   │   ├── ntm_trained_top_design.cpp
-│   │   └── ntm_trained_top_testbench.cpp
-│   └── write_heads
-│       ├── ntm_erasing.cpp
-│       ├── ntm_erasing_design.cpp
-│       ├── ntm_erasing_testbench.cpp
-│       ├── ntm_writing.cpp
-│       ├── ntm_writing_design.cpp
-│       └── ntm_writing_testbench.cpp
+├── nn
+│   ├── ANN
+│   │   ├── components
+│   │   │   ├── ntm_masked_multi_head_attention.cpp
+│   │   │   ├── ntm_masked_multi_head_attention_design.cpp
+│   │   │   ├── ntm_masked_multi_head_attention_testbench.cpp
+│   │   │   ├── ntm_masked_scaled_dot_product_attention.cpp
+│   │   │   ├── ntm_masked_scaled_dot_product_attention_design.cpp
+│   │   │   ├── ntm_masked_scaled_dot_product_attention_testbench.cpp
+│   │   │   ├── ntm_multi_head_attention.cpp
+│   │   │   ├── ntm_multi_head_attention_design.cpp
+│   │   │   ├── ntm_multi_head_attention_testbench.cpp
+│   │   │   ├── ntm_scaled_dot_product_attention.cpp
+│   │   │   ├── ntm_scaled_dot_product_attention_design.cpp
+│   │   │   └── ntm_scaled_dot_product_attention_testbench.cpp
+│   │   ├── controller
+│   │   │   ├── fnn
+│   │   │   │   ├── ntm_fnn.cpp
+│   │   │   │   ├── ntm_fnn_design.cpp
+│   │   │   │   └── ntm_fnn_testbench.cpp
+│   │   │   └── lstm
+│   │   │       ├── ntm_lstm.cpp
+│   │   │       ├── ntm_lstm_design.cpp
+│   │   │       └── ntm_lstm_testbench.cpp
+│   │   ├── functions
+│   │   │   ├── ntm_layer_norm.cpp
+│   │   │   ├── ntm_layer_norm_design.cpp
+│   │   │   ├── ntm_layer_norm_testbench.cpp
+│   │   │   ├── ntm_positional_encoding.cpp
+│   │   │   ├── ntm_positional_encoding_design.cpp
+│   │   │   └── ntm_positional_encoding_testbench.cpp
+│   │   ├── inputs
+│   │   │   ├── ntm_inputs_vector.cpp
+│   │   │   ├── ntm_inputs_vector_design.cpp
+│   │   │   ├── ntm_inputs_vector_testbench.cpp
+│   │   │   ├── ntm_keys_vector.cpp
+│   │   │   ├── ntm_keys_vector_design.cpp
+│   │   │   ├── ntm_keys_vector_testbench.cpp
+│   │   │   ├── ntm_queries_vector.cpp
+│   │   │   ├── ntm_queries_vector_design.cpp
+│   │   │   ├── ntm_queries_vector_testbench.cpp
+│   │   │   ├── ntm_values_vector.cpp
+│   │   │   ├── ntm_values_vector_design.cpp
+│   │   │   └── ntm_values_vector_testbench.cpp
+│   │   ├── ntm_transformer_controller.cpp
+│   │   └── top
+│   │       ├── ntm_controller.cpp
+│   │       ├── ntm_controller_design.cpp
+│   │       ├── ntm_controller_testbench.cpp
+│   │       ├── ntm_decoder.cpp
+│   │       ├── ntm_decoder_design.cpp
+│   │       ├── ntm_decoder_testbench.cpp
+│   │       ├── ntm_encoder.cpp
+│   │       ├── ntm_encoder_design.cpp
+│   │       └── ntm_encoder_testbench.cpp
+│   ├── FNN
+│   │   ├── convolutional
+│   │   │   ├── ntm_controller.cpp
+│   │   │   ├── ntm_controller_design.cpp
+│   │   │   └── ntm_controller_testbench.cpp
+│   │   └── standard
+│   │       ├── ntm_controller.cpp
+│   │       ├── ntm_controller_design.cpp
+│   │       └── ntm_controller_testbench.cpp
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   │   ├── ntm_activation_gate_vector.cpp
+│   │   │   ├── ntm_activation_gate_vector_design.cpp
+│   │   │   ├── ntm_activation_gate_vector_testbench.cpp
+│   │   │   ├── ntm_controller.cpp
+│   │   │   ├── ntm_controller_design.cpp
+│   │   │   ├── ntm_controller_testbench.cpp
+│   │   │   ├── ntm_forget_gate_vector.cpp
+│   │   │   ├── ntm_forget_gate_vector_design.cpp
+│   │   │   ├── ntm_forget_gate_vector_testbench.cpp
+│   │   │   ├── ntm_hidden_gate_vector.cpp
+│   │   │   ├── ntm_hidden_gate_vector_design.cpp
+│   │   │   ├── ntm_hidden_gate_vector_testbench.cpp
+│   │   │   ├── ntm_input_gate_vector.cpp
+│   │   │   ├── ntm_input_gate_vector_design.cpp
+│   │   │   ├── ntm_input_gate_vector_testbench.cpp
+│   │   │   ├── ntm_output_gate_vector.cpp
+│   │   │   ├── ntm_output_gate_vector_design.cpp
+│   │   │   ├── ntm_output_gate_vector_testbench.cpp
+│   │   │   ├── ntm_state_gate_vector.cpp
+│   │   │   ├── ntm_state_gate_vector_design.cpp
+│   │   │   └── ntm_state_gate_vector_testbench.cpp
+│   │   └── standard
+│   │       ├── ntm_activation_gate_vector.cpp
+│   │       ├── ntm_activation_gate_vector_design.cpp
+│   │       ├── ntm_activation_gate_vector_testbench.cpp
+│   │       ├── ntm_controller.cpp
+│   │       ├── ntm_controller_design.cpp
+│   │       ├── ntm_controller_testbench.cpp
+│   │       ├── ntm_forget_gate_vector.cpp
+│   │       ├── ntm_forget_gate_vector_design.cpp
+│   │       ├── ntm_forget_gate_vector_testbench.cpp
+│   │       ├── ntm_hidden_gate_vector.cpp
+│   │       ├── ntm_hidden_gate_vector_design.cpp
+│   │       ├── ntm_hidden_gate_vector_testbench.cpp
+│   │       ├── ntm_input_gate_vector.cpp
+│   │       ├── ntm_input_gate_vector_design.cpp
+│   │       ├── ntm_input_gate_vector_testbench.cpp
+│   │       ├── ntm_output_gate_vector.cpp
+│   │       ├── ntm_output_gate_vector_design.cpp
+│   │       ├── ntm_output_gate_vector_testbench.cpp
+│   │       ├── ntm_state_gate_vector.cpp
+│   │       ├── ntm_state_gate_vector_design.cpp
+│   │       └── ntm_state_gate_vector_testbench.cpp
+│   ├── NTM
+│   │   ├── memory
+│   │   │   ├── ntm_addressing.cpp
+│   │   │   ├── ntm_addressing_design.cpp
+│   │   │   ├── ntm_addressing_testbench.cpp
+│   │   │   ├── ntm_matrix_content_based_addressing.cpp
+│   │   │   ├── ntm_matrix_content_based_addressing_design.cpp
+│   │   │   ├── ntm_matrix_content_based_addressing_testbench.cpp
+│   │   │   ├── ntm_vector_content_based_addressing.cpp
+│   │   │   ├── ntm_vector_content_based_addressing_design.cpp
+│   │   │   └── ntm_vector_content_based_addressing_testbench.cpp
+│   │   ├── ntm.cpp
+│   │   ├── read_heads
+│   │   │   ├── ntm_reading.cpp
+│   │   │   ├── ntm_reading_design.cpp
+│   │   │   └── ntm_reading_testbench.cpp
+│   │   ├── top
+│   │   │   ├── ntm_interface_matrix.cpp
+│   │   │   ├── ntm_interface_matrix_design.cpp
+│   │   │   ├── ntm_interface_matrix_testbench.cpp
+│   │   │   ├── ntm_interface_top.cpp
+│   │   │   ├── ntm_interface_top_design.cpp
+│   │   │   ├── ntm_interface_top_testbench.cpp
+│   │   │   ├── ntm_interface_vector.cpp
+│   │   │   ├── ntm_interface_vector_design.cpp
+│   │   │   ├── ntm_interface_vector_testbench.cpp
+│   │   │   ├── ntm_output_vector.cpp
+│   │   │   ├── ntm_output_vector_design.cpp
+│   │   │   ├── ntm_output_vector_testbench.cpp
+│   │   │   ├── ntm_top.cpp
+│   │   │   ├── ntm_top_design.cpp
+│   │   │   └── ntm_top_testbench.cpp
+│   │   ├── trained
+│   │   │   ├── ntm_trained_top.cpp
+│   │   │   ├── ntm_trained_top_design.cpp
+│   │   │   └── ntm_trained_top_testbench.cpp
+│   │   └── write_heads
+│   │       ├── ntm_erasing.cpp
+│   │       ├── ntm_erasing_design.cpp
+│   │       ├── ntm_erasing_testbench.cpp
+│   │       ├── ntm_writing.cpp
+│   │       ├── ntm_writing_design.cpp
+│   │       └── ntm_writing_testbench.cpp
+│   ├── ntm_fnn_controller.cpp
+│   └── ntm_lstm_controller.cpp
 ├── state
 │   ├── feedback
 │   │   ├── ntm_state_matrix_feedforward.cpp
@@ -367,180 +421,126 @@ library
 │       ├── ntm_state_top.cpp
 │       ├── ntm_state_top_design.cpp
 │       └── ntm_state_top_testbench.cpp
-├── trainer
-│   ├── differentiation
-│   │   ├── ntm_matrix_controller_differentiation.cpp
-│   │   ├── ntm_matrix_controller_differentiation_design.cpp
-│   │   ├── ntm_matrix_controller_differentiation_testbench.cpp
-│   │   ├── ntm_vector_controller_differentiation.cpp
-│   │   ├── ntm_vector_controller_differentiation_design.cpp
-│   │   └── ntm_vector_controller_differentiation_testbench.cpp
-│   ├── FNN
-│   │   ├── ntm_fnn_b_trainer.cpp
-│   │   ├── ntm_fnn_b_trainer_design.cpp
-│   │   ├── ntm_fnn_b_trainer_testbench.cpp
-│   │   ├── ntm_fnn_d_trainer.cpp
-│   │   ├── ntm_fnn_d_trainer_design.cpp
-│   │   ├── ntm_fnn_d_trainer_testbench.cpp
-│   │   ├── ntm_fnn_k_trainer.cpp
-│   │   ├── ntm_fnn_k_trainer_design.cpp
-│   │   ├── ntm_fnn_k_trainer_testbench.cpp
-│   │   ├── ntm_fnn_trainer.cpp
-│   │   ├── ntm_fnn_trainer_design.cpp
-│   │   ├── ntm_fnn_trainer_testbench.cpp
-│   │   ├── ntm_fnn_u_trainer.cpp
-│   │   ├── ntm_fnn_u_trainer_design.cpp
-│   │   ├── ntm_fnn_u_trainer_testbench.cpp
-│   │   ├── ntm_fnn_v_trainer.cpp
-│   │   ├── ntm_fnn_v_trainer_design.cpp
-│   │   ├── ntm_fnn_v_trainer_testbench.cpp
-│   │   ├── ntm_fnn_w_trainer.cpp
-│   │   ├── ntm_fnn_w_trainer_design.cpp
-│   │   └── ntm_fnn_w_trainer_testbench.cpp
-│   ├── LSTM
-│   │   ├── activation
-│   │   │   ├── ntm_lstm_activation_b_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_b_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_b_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_d_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_d_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_d_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_k_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_k_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_k_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_u_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_u_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_u_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_v_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_v_trainer_design.cpp
-│   │   │   ├── ntm_lstm_activation_v_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_activation_w_trainer.cpp
-│   │   │   ├── ntm_lstm_activation_w_trainer_design.cpp
-│   │   │   └── ntm_lstm_activation_w_trainer_testbench.cpp
-│   │   ├── forget
-│   │   │   ├── ntm_lstm_forget_b_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_b_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_b_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_d_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_d_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_d_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_k_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_k_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_k_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_u_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_u_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_u_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_v_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_v_trainer_design.cpp
-│   │   │   ├── ntm_lstm_forget_v_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_forget_w_trainer.cpp
-│   │   │   ├── ntm_lstm_forget_w_trainer_design.cpp
-│   │   │   └── ntm_lstm_forget_w_trainer_testbench.cpp
-│   │   ├── input
-│   │   │   ├── ntm_lstm_input_b_trainer.cpp
-│   │   │   ├── ntm_lstm_input_b_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_b_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_d_trainer.cpp
-│   │   │   ├── ntm_lstm_input_d_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_d_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_k_trainer.cpp
-│   │   │   ├── ntm_lstm_input_k_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_k_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_trainer.cpp
-│   │   │   ├── ntm_lstm_input_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_u_trainer.cpp
-│   │   │   ├── ntm_lstm_input_u_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_u_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_v_trainer.cpp
-│   │   │   ├── ntm_lstm_input_v_trainer_design.cpp
-│   │   │   ├── ntm_lstm_input_v_trainer_testbench.cpp
-│   │   │   ├── ntm_lstm_input_w_trainer.cpp
-│   │   │   ├── ntm_lstm_input_w_trainer_design.cpp
-│   │   │   └── ntm_lstm_input_w_trainer_testbench.cpp
-│   │   └── output
-│   │       ├── ntm_lstm_output_b_trainer.cpp
-│   │       ├── ntm_lstm_output_b_trainer_design.cpp
-│   │       ├── ntm_lstm_output_b_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_d_trainer.cpp
-│   │       ├── ntm_lstm_output_d_trainer_design.cpp
-│   │       ├── ntm_lstm_output_d_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_k_trainer.cpp
-│   │       ├── ntm_lstm_output_k_trainer_design.cpp
-│   │       ├── ntm_lstm_output_k_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_trainer.cpp
-│   │       ├── ntm_lstm_output_trainer_design.cpp
-│   │       ├── ntm_lstm_output_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_u_trainer.cpp
-│   │       ├── ntm_lstm_output_u_trainer_design.cpp
-│   │       ├── ntm_lstm_output_u_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_v_trainer.cpp
-│   │       ├── ntm_lstm_output_v_trainer_design.cpp
-│   │       ├── ntm_lstm_output_v_trainer_testbench.cpp
-│   │       ├── ntm_lstm_output_w_trainer.cpp
-│   │       ├── ntm_lstm_output_w_trainer_design.cpp
-│   │       └── ntm_lstm_output_w_trainer_testbench.cpp
-│   ├── ntm_fnn.cpp
-│   └── ntm_lstm.cpp
-└── transformer
-    ├── components
-    │   ├── ntm_masked_multi_head_attention.cpp
-    │   ├── ntm_masked_multi_head_attention_design.cpp
-    │   ├── ntm_masked_multi_head_attention_testbench.cpp
-    │   ├── ntm_masked_scaled_dot_product_attention.cpp
-    │   ├── ntm_masked_scaled_dot_product_attention_design.cpp
-    │   ├── ntm_masked_scaled_dot_product_attention_testbench.cpp
-    │   ├── ntm_multi_head_attention.cpp
-    │   ├── ntm_multi_head_attention_design.cpp
-    │   ├── ntm_multi_head_attention_testbench.cpp
-    │   ├── ntm_scaled_dot_product_attention.cpp
-    │   ├── ntm_scaled_dot_product_attention_design.cpp
-    │   └── ntm_scaled_dot_product_attention_testbench.cpp
-    ├── controller
-    │   ├── fnn
-    │   │   ├── ntm_fnn.cpp
-    │   │   ├── ntm_fnn_design.cpp
-    │   │   └── ntm_fnn_testbench.cpp
-    │   └── lstm
-    │       ├── ntm_lstm.cpp
-    │       ├── ntm_lstm_design.cpp
-    │       └── ntm_lstm_testbench.cpp
-    ├── functions
-    │   ├── ntm_layer_norm.cpp
-    │   ├── ntm_layer_norm_design.cpp
-    │   ├── ntm_layer_norm_testbench.cpp
-    │   ├── ntm_positional_encoding.cpp
-    │   ├── ntm_positional_encoding_design.cpp
-    │   └── ntm_positional_encoding_testbench.cpp
-    ├── inputs
-    │   ├── ntm_inputs_vector.cpp
-    │   ├── ntm_inputs_vector_design.cpp
-    │   ├── ntm_inputs_vector_testbench.cpp
-    │   ├── ntm_keys_vector.cpp
-    │   ├── ntm_keys_vector_design.cpp
-    │   ├── ntm_keys_vector_testbench.cpp
-    │   ├── ntm_queries_vector.cpp
-    │   ├── ntm_queries_vector_design.cpp
-    │   ├── ntm_queries_vector_testbench.cpp
-    │   ├── ntm_values_vector.cpp
-    │   ├── ntm_values_vector_design.cpp
-    │   └── ntm_values_vector_testbench.cpp
-    ├── ntm_transformer_controller.cpp
-    └── top
-        ├── ntm_controller.cpp
-        ├── ntm_controller_design.cpp
-        ├── ntm_controller_testbench.cpp
-        ├── ntm_decoder.cpp
-        ├── ntm_decoder_design.cpp
-        ├── ntm_decoder_testbench.cpp
-        ├── ntm_encoder.cpp
-        ├── ntm_encoder_design.cpp
-        └── ntm_encoder_testbench.cpp
+└── trainer
+    ├── differentiation
+    │   ├── ntm_matrix_controller_differentiation.cpp
+    │   ├── ntm_matrix_controller_differentiation_design.cpp
+    │   ├── ntm_matrix_controller_differentiation_testbench.cpp
+    │   ├── ntm_vector_controller_differentiation.cpp
+    │   ├── ntm_vector_controller_differentiation_design.cpp
+    │   └── ntm_vector_controller_differentiation_testbench.cpp
+    ├── FNN
+    │   ├── ntm_fnn_b_trainer.cpp
+    │   ├── ntm_fnn_b_trainer_design.cpp
+    │   ├── ntm_fnn_b_trainer_testbench.cpp
+    │   ├── ntm_fnn_d_trainer.cpp
+    │   ├── ntm_fnn_d_trainer_design.cpp
+    │   ├── ntm_fnn_d_trainer_testbench.cpp
+    │   ├── ntm_fnn_k_trainer.cpp
+    │   ├── ntm_fnn_k_trainer_design.cpp
+    │   ├── ntm_fnn_k_trainer_testbench.cpp
+    │   ├── ntm_fnn_trainer.cpp
+    │   ├── ntm_fnn_trainer_design.cpp
+    │   ├── ntm_fnn_trainer_testbench.cpp
+    │   ├── ntm_fnn_u_trainer.cpp
+    │   ├── ntm_fnn_u_trainer_design.cpp
+    │   ├── ntm_fnn_u_trainer_testbench.cpp
+    │   ├── ntm_fnn_v_trainer.cpp
+    │   ├── ntm_fnn_v_trainer_design.cpp
+    │   ├── ntm_fnn_v_trainer_testbench.cpp
+    │   ├── ntm_fnn_w_trainer.cpp
+    │   ├── ntm_fnn_w_trainer_design.cpp
+    │   └── ntm_fnn_w_trainer_testbench.cpp
+    ├── LSTM
+    │   ├── activation
+    │   │   ├── ntm_lstm_activation_b_trainer.cpp
+    │   │   ├── ntm_lstm_activation_b_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_b_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_d_trainer.cpp
+    │   │   ├── ntm_lstm_activation_d_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_d_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_k_trainer.cpp
+    │   │   ├── ntm_lstm_activation_k_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_k_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_trainer.cpp
+    │   │   ├── ntm_lstm_activation_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_u_trainer.cpp
+    │   │   ├── ntm_lstm_activation_u_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_u_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_v_trainer.cpp
+    │   │   ├── ntm_lstm_activation_v_trainer_design.cpp
+    │   │   ├── ntm_lstm_activation_v_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_activation_w_trainer.cpp
+    │   │   ├── ntm_lstm_activation_w_trainer_design.cpp
+    │   │   └── ntm_lstm_activation_w_trainer_testbench.cpp
+    │   ├── forget
+    │   │   ├── ntm_lstm_forget_b_trainer.cpp
+    │   │   ├── ntm_lstm_forget_b_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_b_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_d_trainer.cpp
+    │   │   ├── ntm_lstm_forget_d_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_d_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_k_trainer.cpp
+    │   │   ├── ntm_lstm_forget_k_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_k_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_trainer.cpp
+    │   │   ├── ntm_lstm_forget_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_u_trainer.cpp
+    │   │   ├── ntm_lstm_forget_u_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_u_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_v_trainer.cpp
+    │   │   ├── ntm_lstm_forget_v_trainer_design.cpp
+    │   │   ├── ntm_lstm_forget_v_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_forget_w_trainer.cpp
+    │   │   ├── ntm_lstm_forget_w_trainer_design.cpp
+    │   │   └── ntm_lstm_forget_w_trainer_testbench.cpp
+    │   ├── input
+    │   │   ├── ntm_lstm_input_b_trainer.cpp
+    │   │   ├── ntm_lstm_input_b_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_b_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_d_trainer.cpp
+    │   │   ├── ntm_lstm_input_d_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_d_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_k_trainer.cpp
+    │   │   ├── ntm_lstm_input_k_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_k_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_trainer.cpp
+    │   │   ├── ntm_lstm_input_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_u_trainer.cpp
+    │   │   ├── ntm_lstm_input_u_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_u_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_v_trainer.cpp
+    │   │   ├── ntm_lstm_input_v_trainer_design.cpp
+    │   │   ├── ntm_lstm_input_v_trainer_testbench.cpp
+    │   │   ├── ntm_lstm_input_w_trainer.cpp
+    │   │   ├── ntm_lstm_input_w_trainer_design.cpp
+    │   │   └── ntm_lstm_input_w_trainer_testbench.cpp
+    │   └── output
+    │       ├── ntm_lstm_output_b_trainer.cpp
+    │       ├── ntm_lstm_output_b_trainer_design.cpp
+    │       ├── ntm_lstm_output_b_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_d_trainer.cpp
+    │       ├── ntm_lstm_output_d_trainer_design.cpp
+    │       ├── ntm_lstm_output_d_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_k_trainer.cpp
+    │       ├── ntm_lstm_output_k_trainer_design.cpp
+    │       ├── ntm_lstm_output_k_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_trainer.cpp
+    │       ├── ntm_lstm_output_trainer_design.cpp
+    │       ├── ntm_lstm_output_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_u_trainer.cpp
+    │       ├── ntm_lstm_output_u_trainer_design.cpp
+    │       ├── ntm_lstm_output_u_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_v_trainer.cpp
+    │       ├── ntm_lstm_output_v_trainer_design.cpp
+    │       ├── ntm_lstm_output_v_trainer_testbench.cpp
+    │       ├── ntm_lstm_output_w_trainer.cpp
+    │       ├── ntm_lstm_output_w_trainer_design.cpp
+    │       └── ntm_lstm_output_w_trainer_testbench.cpp
+    ├── ntm_fnn.cpp
+    └── ntm_lstm.cpp
 
 72 directories, 471 files

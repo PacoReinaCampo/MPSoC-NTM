@@ -6,9 +6,7 @@ Format of a line in the table:
 
 `<arguments> is one of rd, rs1, rs2, frd, frs1, frs2, frs3, imm20, imm12, sbimm12, simm12, shamt5, shamt6, rm, aq, rl, pred, succ`
 
-`<opcode> is given by specifying one or more range/value pairs:`
-
-`hi..lo=value or bit=value or argument=value (e.g. 6..2=0x45 10=1)`
+`<opcode> is given by specifying one or more range/value pairs: hi..lo=value or bit=value or argument=value (e.g. 6..2=0x45 10=1)`
 
 `<codec> is one of r, i, s, sb, u, uj, ...`
 
@@ -276,6 +274,18 @@ Format of a line in the table:
 
 | ins name     | argument              | opcode                                                                             | codec        | extension            |
 |--------------|:----------------------|:-----------------------------------------------------------------------------------|:-------------|:---------------------|
+| `#frcsr`     | `rd       19..15=0`   | `31..20=0x003 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#frrm`      | `rd       19..15=0`   | `31..20=0x002 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#frflags`   | `rd       19..15=0`   | `31..20=0x001 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#fscsr`     | `rd       rs1`        | `31..20=0x003 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#fsrm`      | `rd       rs1`        | `31..20=0x002 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#fsflags`   | `rd       rs1`        | `31..20=0x001 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
+| `#fsrmi`     | `rd       zimm`       | `31..20=0x002 14..12=5 6..2=0x1C 1..0=3`                                           | `i·csri`     | `rv32f rv64f rv128f` |
+| `#fsflagsi`  | `rd       zimm`       | `31..20=0x001 14..12=5 6..2=0x1C 1..0=3`                                           | `i·csri`     | `rv32f rv64f rv128f` |
+: RV32FD - "RV32F and RV32D common Floating-Point Instructions"
+
+| ins name     | argument              | opcode                                                                             | codec        | extension            |
+|--------------|:----------------------|:-----------------------------------------------------------------------------------|:-------------|:---------------------|
 | `flq`        | `frd rs1`             | `oimm12      14..12=4          6..2=0x01 1..0=3`                                   | `i+lf`       | `rv32q rv64q rv128q` |
 | `fsq`        | `rs1 frs2`            | `simm12      14..12=4          6..2=0x09 1..0=3`                                   | `s+f`        | `rv32q rv64q rv128q` |
 | `fmadd.q`    | `frd frs1 frs2 frs3`  |             `rm       26..25=3 6..2=0x10 1..0=3`                                   | `r4·m`       | `rv32q rv64q rv128q` |
@@ -319,18 +329,6 @@ Format of a line in the table:
 | `fmv.x.q`    | `rd frs124..20=0`     | `31..27=0x1C 14..12=0 26..25=3 6..2=0x14 1..0=3`                                   | `r+rf`       |       `rv64q rv128q` |
 | `fmv.q.x`    | `frd rs124..20=0`     | `31..27=0x1E 14..12=0 26..25=3 6..2=0x14 1..0=3`                                   | `r+fr`       |       `rv64q rv128q` |
 : RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
-
-| ins name     | argument              | opcode                                                                             | codec        | extension            |
-|--------------|:----------------------|:-----------------------------------------------------------------------------------|:-------------|:---------------------|
-| `#frcsr`     | `rd       19..15=0`   | `31..20=0x003 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#frrm`      | `rd       19..15=0`   | `31..20=0x002 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#frflags`   | `rd       19..15=0`   | `31..20=0x001 14..12=2 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#fscsr`     | `rd       rs1`        | `31..20=0x003 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#fsrm`      | `rd       rs1`        | `31..20=0x002 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#fsflags`   | `rd       rs1`        | `31..20=0x001 14..12=1 6..2=0x1C 1..0=3`                                           | `i·csr`      | `rv32f rv64f rv128f` |
-| `#fsrmi`     | `rd       zimm`       | `31..20=0x002 14..12=5 6..2=0x1C 1..0=3`                                           | `i·csri`     | `rv32f rv64f rv128f` |
-| `#fsflagsi`  | `rd       zimm`       | `31..20=0x001 14..12=5 6..2=0x1C 1..0=3`                                           | `i·csri`     | `rv32f rv64f rv128f` |
-: RV32FD - "RV32F and RV32D žommon Floating-Point Instructions"
 
 | ins name     | argument              | opcode                                                                             | codec        | extension            |
 |--------------|:----------------------|:-----------------------------------------------------------------------------------|:-------------|:---------------------|

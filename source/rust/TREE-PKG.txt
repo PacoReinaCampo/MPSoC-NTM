@@ -9,13 +9,6 @@ library
 │       │   └── mod.rs
 │       └── vector
 │           └── mod.rs
-├── controller
-│   ├── FNN
-│   │   ├── convolutional
-│   │   └── standard
-│   └── LSTM
-│       ├── convolutional
-│       └── standard
 ├── math
 │   ├── algebra
 │   │   └── src
@@ -51,12 +44,27 @@ library
 │           │   └── mod.rs
 │           └── vector
 │               └── mod.rs
-├── ntm
-│   ├── memory
-│   ├── read_heads
-│   ├── top
-│   ├── trained
-│   └── write_heads
+├── nn
+│   ├── ANN
+│   │   ├── components
+│   │   ├── controller
+│   │   │   ├── fnn
+│   │   │   └── lstm
+│   │   ├── functions
+│   │   ├── inputs
+│   │   └── top
+│   ├── FNN
+│   │   ├── convolutional
+│   │   └── standard
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   └── standard
+│   └── NTM
+│       ├── memory
+│       ├── read_heads
+│       ├── top
+│       ├── trained
+│       └── write_heads
 ├── state
 │   └── src
 │       ├── feedback
@@ -65,21 +73,13 @@ library
 │       │   └── mod.rs
 │       └── top
 │           └── mod.rs
-├── trainer
-│   ├── differentiation
-│   ├── FNN
-│   └── LSTM
-│       ├── activation
-│       ├── forget
-│       ├── input
-│       └── output
-└── transformer
-    ├── components
-    ├── controller
-    │   ├── fnn
-    │   └── lstm
-    ├── functions
-    ├── inputs
-    └── top
+└── trainer
+    ├── differentiation
+    ├── FNN
+    └── LSTM
+        ├── activation
+        ├── forget
+        ├── input
+        └── output
 
 62 directories, 20 files

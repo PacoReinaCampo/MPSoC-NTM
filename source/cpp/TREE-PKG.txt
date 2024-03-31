@@ -21,14 +21,6 @@ library
 │       ├── divider
 │       ├── multiplier
 │       └── subtractor
-├── controller
-│   ├── ntm_controller.hpp
-│   ├── FNN
-│   │   ├── convolutional
-│   │   └── standard
-│   └── LSTM
-│       ├── convolutional
-│       └── standard
 ├── math
 │   ├── algebra
 │   │   ├── ntm_math_algebra.hpp
@@ -51,35 +43,43 @@ library
 │       ├── matrix
 │       ├── scalar
 │       └── vector
-├── ntm
-│   ├── ntm.hpp
-│   ├── memory
-│   ├── read_heads
-│   ├── top
-│   ├── trained
-│   └── write_heads
+├── nn
+│   ├── ntm_controller.hpp
+│   ├── ANN
+│   │   ├── components
+│   │   ├── controller
+│   │   │   ├── fnn
+│   │   │   └── lstm
+│   │   ├── functions
+│   │   ├── inputs
+│   │   └── top
+│   ├── FNN
+│   │   ├── convolutional
+│   │   └── standard
+│   ├── LSTM
+│   │   ├── convolutional
+│   │   └── standard
+│   └── NTM
+│       ├── ntm.hpp
+│       ├── memory
+│       ├── read_heads
+│       ├── top
+│       ├── trained
+│       └── write_heads
 ├── state
 │   ├── ntm_state.hpp
 │   ├── feedback
 │   ├── outputs
 │   └── top
-├── trainer
-│   ├── ntm_fnn.hpp
-│   ├── ntm_lstm.hpp
-│   ├── differentiation
-│   ├── FNN
-│   └── LSTM
-│       ├── activation
-│       ├── forget
-│       ├── input
-│       └── output
-└── transformer
-    ├── components
-    ├── controller
-    │   ├── fnn
-    │   └── lstm
-    ├── functions
-    ├── inputs
-    └── top
+└── trainer
+    ├── ntm_fnn.hpp
+    ├── ntm_lstm.hpp
+    ├── differentiation
+    ├── FNN
+    └── LSTM
+        ├── activation
+        ├── forget
+        ├── input
+        └── output
 
 72 directories, 10 files
