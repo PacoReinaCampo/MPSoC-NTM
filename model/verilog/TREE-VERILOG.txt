@@ -11,53 +11,65 @@ code
 │   │   ├── matrix
 │   │   │   ├── model_matrix_fixed_adder.sv
 │   │   │   ├── model_matrix_fixed_divider.sv
-│   │   │   └── model_matrix_fixed_multiplier.sv
+│   │   │   ├── model_matrix_fixed_multiplier.sv
+│   │   │   └── model_matrix_fixed_subtractor.sv
 │   │   ├── scalar
 │   │   │   ├── model_scalar_fixed_adder.sv
 │   │   │   ├── model_scalar_fixed_divider.sv
-│   │   │   └── model_scalar_fixed_multiplier.sv
+│   │   │   ├── model_scalar_fixed_multiplier.sv
+│   │   │   └── model_scalar_fixed_subtractor.sv
 │   │   ├── tensor
 │   │   │   ├── model_tensor_fixed_adder.sv
 │   │   │   ├── model_tensor_fixed_divider.sv
-│   │   │   └── model_tensor_fixed_multiplier.sv
+│   │   │   ├── model_tensor_fixed_multiplier.sv
+│   │   │   └── model_tensor_fixed_subtractor.sv
 │   │   └── vector
 │   │       ├── model_vector_fixed_adder.sv
 │   │       ├── model_vector_fixed_divider.sv
-│   │       └── model_vector_fixed_multiplier.sv
+│   │       ├── model_vector_fixed_multiplier.sv
+│   │       └── model_vector_fixed_subtractor.sv
 │   ├── float
 │   │   ├── matrix
 │   │   │   ├── model_matrix_float_adder.sv
 │   │   │   ├── model_matrix_float_divider.sv
-│   │   │   └── model_matrix_float_multiplier.sv
+│   │   │   ├── model_matrix_float_multiplier.sv
+│   │   │   └── model_matrix_float_subtractor.sv
 │   │   ├── scalar
 │   │   │   ├── model_scalar_float_adder.sv
 │   │   │   ├── model_scalar_float_divider.sv
-│   │   │   └── model_scalar_float_multiplier.sv
+│   │   │   ├── model_scalar_float_multiplier.sv
+│   │   │   └── model_scalar_float_subtractor.sv
 │   │   ├── tensor
 │   │   │   ├── model_tensor_float_adder.sv
 │   │   │   ├── model_tensor_float_divider.sv
-│   │   │   └── model_tensor_float_multiplier.sv
+│   │   │   ├── model_tensor_float_multiplier.sv
+│   │   │   └── model_tensor_float_subtractor.sv
 │   │   └── vector
 │   │       ├── model_vector_float_adder.sv
 │   │       ├── model_vector_float_divider.sv
-│   │       └── model_vector_float_multiplier.sv
+│   │       ├── model_vector_float_multiplier.sv
+│   │       └── model_vector_float_subtractor.sv
 │   └── integer
 │       ├── matrix
 │       │   ├── model_matrix_integer_adder.sv
 │       │   ├── model_matrix_integer_divider.sv
-│       │   └── model_matrix_integer_multiplier.sv
+│       │   ├── model_matrix_integer_multiplier.sv
+│       │   └── model_matrix_integer_subtractor.sv
 │       ├── scalar
 │       │   ├── model_scalar_integer_adder.sv
 │       │   ├── model_scalar_integer_divider.sv
-│       │   └── model_scalar_integer_multiplier.sv
+│       │   ├── model_scalar_integer_multiplier.sv
+│       │   └── model_scalar_integer_subtractor.sv
 │       ├── tensor
 │       │   ├── model_tensor_integer_adder.sv
 │       │   ├── model_tensor_integer_divider.sv
-│       │   └── model_tensor_integer_multiplier.sv
+│       │   ├── model_tensor_integer_multiplier.sv
+│       │   └── model_tensor_integer_subtractor.sv
 │       └── vector
 │           ├── model_vector_integer_adder.sv
 │           ├── model_vector_integer_divider.sv
-│           └── model_vector_integer_multiplier.sv
+│           ├── model_vector_integer_multiplier.sv
+│           └── model_vector_integer_subtractor.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -231,4 +243,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-74 directories, 157 files
+74 directories, 169 files

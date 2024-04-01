@@ -11,70 +11,86 @@ code
 │   │   ├── matrix
 │   │   │   ├── accelerator_matrix_float_adder.sv
 │   │   │   ├── accelerator_matrix_float_divider.sv
-│   │   │   └── accelerator_matrix_float_multiplier.sv
+│   │   │   ├── accelerator_matrix_float_multiplier.sv
+│   │   │   └── accelerator_matrix_float_subtractor.sv
 │   │   ├── scalar
 │   │   │   ├── accelerator_scalar_float_adder.sv
 │   │   │   ├── accelerator_scalar_float_divider.sv
-│   │   │   └── accelerator_scalar_float_multiplier.sv
+│   │   │   ├── accelerator_scalar_float_multiplier.sv
+│   │   │   └── accelerator_scalar_float_subtractor.sv
 │   │   ├── tensor
 │   │   │   ├── accelerator_tensor_float_adder.sv
 │   │   │   ├── accelerator_tensor_float_divider.sv
-│   │   │   └── accelerator_tensor_float_multiplier.sv
+│   │   │   ├── accelerator_tensor_float_multiplier.sv
+│   │   │   └── accelerator_tensor_float_subtractor.sv
 │   │   └── vector
 │   │       ├── accelerator_vector_float_adder.sv
 │   │       ├── accelerator_vector_float_divider.sv
-│   │       └── accelerator_vector_float_multiplier.sv
+│   │       ├── accelerator_vector_float_multiplier.sv
+│   │       └── accelerator_vector_float_subtractor.sv
 │   ├── fixed
 │   │   ├── matrix
 │   │   │   ├── accelerator_matrix_fixed_adder.sv
 │   │   │   ├── accelerator_matrix_fixed_divider.sv
-│   │   │   └── accelerator_matrix_fixed_multiplier.sv
+│   │   │   ├── accelerator_matrix_fixed_multiplier.sv
+│   │   │   └── accelerator_matrix_fixed_subtractor.sv
 │   │   ├── scalar
 │   │   │   ├── accelerator_scalar_fixed_adder.sv
 │   │   │   ├── accelerator_scalar_fixed_divider.sv
-│   │   │   └── accelerator_scalar_fixed_multiplier.sv
+│   │   │   ├── accelerator_scalar_fixed_multiplier.sv
+│   │   │   └── accelerator_scalar_fixed_subtractor.sv
 │   │   ├── tensor
 │   │   │   ├── accelerator_tensor_fixed_adder.sv
 │   │   │   ├── accelerator_tensor_fixed_divider.sv
-│   │   │   └── accelerator_tensor_fixed_multiplier.sv
+│   │   │   ├── accelerator_tensor_fixed_multiplier.sv
+│   │   │   └── accelerator_tensor_fixed_subtractor.sv
 │   │   └── vector
 │   │       ├── accelerator_vector_fixed_adder.sv
 │   │       ├── accelerator_vector_fixed_divider.sv
-│   │       └── accelerator_vector_fixed_multiplier.sv
+│   │       ├── accelerator_vector_fixed_multiplier.sv
+│   │       └── accelerator_vector_fixed_subtractor.sv
 │   ├── float
 │   │   ├── matrix
 │   │   │   ├── accelerator_matrix_float_adder.sv
 │   │   │   ├── accelerator_matrix_float_divider.sv
-│   │   │   └── accelerator_matrix_float_multiplier.sv
+│   │   │   ├── accelerator_matrix_float_multiplier.sv
+│   │   │   └── accelerator_matrix_float_subtractor.sv
 │   │   ├── scalar
 │   │   │   ├── accelerator_scalar_float_adder.sv
 │   │   │   ├── accelerator_scalar_float_divider.sv
-│   │   │   └── accelerator_scalar_float_multiplier.sv
+│   │   │   ├── accelerator_scalar_float_multiplier.sv
+│   │   │   └── accelerator_scalar_float_subtractor.sv
 │   │   ├── tensor
 │   │   │   ├── accelerator_tensor_float_adder.sv
 │   │   │   ├── accelerator_tensor_float_divider.sv
-│   │   │   └── accelerator_tensor_float_multiplier.sv
+│   │   │   ├── accelerator_tensor_float_multiplier.sv
+│   │   │   └── accelerator_tensor_float_subtractor.sv
 │   │   └── vector
 │   │       ├── accelerator_vector_float_adder.sv
 │   │       ├── accelerator_vector_float_divider.sv
-│   │       └── accelerator_vector_float_multiplier.sv
+│   │       ├── accelerator_vector_float_multiplier.sv
+│   │       └── accelerator_vector_float_subtractor.sv
 │   └── integer
 │       ├── matrix
 │       │   ├── accelerator_matrix_integer_adder.sv
 │       │   ├── accelerator_matrix_integer_divider.sv
-│       │   └── accelerator_matrix_integer_multiplier.sv
+│       │   ├── accelerator_matrix_integer_multiplier.sv
+│       │   └── accelerator_matrix_integer_subtractor.sv
 │       ├── scalar
 │       │   ├── accelerator_scalar_integer_adder.sv
 │       │   ├── accelerator_scalar_integer_divider.sv
-│       │   └── accelerator_scalar_integer_multiplier.sv
+│       │   ├── accelerator_scalar_integer_multiplier.sv
+│       │   └── accelerator_scalar_integer_subtractor.sv
 │       ├── tensor
 │       │   ├── accelerator_tensor_integer_adder.sv
 │       │   ├── accelerator_tensor_integer_divider.sv
-│       │   └── accelerator_tensor_integer_multiplier.sv
+│       │   ├── accelerator_tensor_integer_multiplier.sv
+│       │   └── accelerator_tensor_integer_subtractor.sv
 │       └── vector
 │           ├── accelerator_vector_integer_adder.sv
 │           ├── accelerator_vector_integer_divider.sv
-│           └── accelerator_vector_integer_multiplier.sv
+│           ├── accelerator_vector_integer_multiplier.sv
+│           └── accelerator_vector_integer_subtractor.sv
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -247,4 +263,4 @@ code
         ├── accelerator_input_trainer.sv
         └── accelerator_output_trainer.sv
 
-79 directories, 168 files
+79 directories, 184 files

@@ -11,53 +11,65 @@ code
 │   │   ├── matrix
 │   │   │   ├── model_matrix_fixed_adder.vhd
 │   │   │   ├── model_matrix_fixed_divider.vhd
-│   │   │   └── model_matrix_fixed_multiplier.vhd
+│   │   │   ├── model_matrix_fixed_multiplier.vhd
+│   │   │   └── model_matrix_fixed_subtractor.vhd
 │   │   ├── scalar
 │   │   │   ├── model_scalar_fixed_adder.vhd
 │   │   │   ├── model_scalar_fixed_divider.vhd
-│   │   │   └── model_scalar_fixed_multiplier.vhd
+│   │   │   ├── model_scalar_fixed_multiplier.vhd
+│   │   │   └── model_scalar_fixed_subtractor.vhd
 │   │   ├── tensor
 │   │   │   ├── model_tensor_fixed_adder.vhd
 │   │   │   ├── model_tensor_fixed_divider.vhd
-│   │   │   └── model_tensor_fixed_multiplier.vhd
+│   │   │   ├── model_tensor_fixed_multiplier.vhd
+│   │   │   └── model_tensor_fixed_subtractor.vhd
 │   │   └── vector
 │   │       ├── model_vector_fixed_adder.vhd
 │   │       ├── model_vector_fixed_divider.vhd
-│   │       └── model_vector_fixed_multiplier.vhd
+│   │       ├── model_vector_fixed_multiplier.vhd
+│   │       └── model_vector_fixed_subtractor.vhd
 │   ├── float
 │   │   ├── matrix
 │   │   │   ├── model_matrix_float_adder.vhd
 │   │   │   ├── model_matrix_float_divider.vhd
-│   │   │   └── model_matrix_float_multiplier.vhd
+│   │   │   ├── model_matrix_float_multiplier.vhd
+│   │   │   └── model_matrix_float_subtractor.vhd
 │   │   ├── scalar
 │   │   │   ├── model_scalar_float_adder.vhd
 │   │   │   ├── model_scalar_float_divider.vhd
-│   │   │   └── model_scalar_float_multiplier.vhd
+│   │   │   ├── model_scalar_float_multiplier.vhd
+│   │   │   └── model_scalar_float_subtractor.vhd
 │   │   ├── tensor
 │   │   │   ├── model_tensor_float_adder.vhd
 │   │   │   ├── model_tensor_float_divider.vhd
-│   │   │   └── model_tensor_float_multiplier.vhd
+│   │   │   ├── model_tensor_float_multiplier.vhd
+│   │   │   └── model_tensor_float_subtractor.vhd
 │   │   └── vector
 │   │       ├── model_vector_float_adder.vhd
 │   │       ├── model_vector_float_divider.vhd
-│   │       └── model_vector_float_multiplier.vhd
+│   │       ├── model_vector_float_multiplier.vhd
+│   │       └── model_vector_float_subtractor.vhd
 │   └── integer
 │       ├── matrix
 │       │   ├── model_matrix_integer_adder.vhd
 │       │   ├── model_matrix_integer_divider.vhd
-│       │   └── model_matrix_integer_multiplier.vhd
+│       │   ├── model_matrix_integer_multiplier.vhd
+│       │   └── model_matrix_integer_subtractor.vhd
 │       ├── scalar
 │       │   ├── model_scalar_integer_adder.vhd
 │       │   ├── model_scalar_integer_divider.vhd
-│       │   └── model_scalar_integer_multiplier.vhd
+│       │   ├── model_scalar_integer_multiplier.vhd
+│       │   └── model_scalar_integer_subtractor.vhd
 │       ├── tensor
 │       │   ├── model_tensor_integer_adder.vhd
 │       │   ├── model_tensor_integer_divider.vhd
-│       │   └── model_tensor_integer_multiplier.vhd
+│       │   ├── model_tensor_integer_multiplier.vhd
+│       │   └── model_tensor_integer_subtractor.vhd
 │       └── vector
 │           ├── model_vector_integer_adder.vhd
 │           ├── model_vector_integer_divider.vhd
-│           └── model_vector_integer_multiplier.vhd
+│           ├── model_vector_integer_multiplier.vhd
+│           └── model_vector_integer_subtractor.vhd
 ├── math
 │   ├── algebra
 │   │   ├── matrix
@@ -231,4 +243,4 @@ code
         ├── model_input_trainer.vhd
         └── model_output_trainer.vhd
 
-74 directories, 157 files
+74 directories, 169 files
