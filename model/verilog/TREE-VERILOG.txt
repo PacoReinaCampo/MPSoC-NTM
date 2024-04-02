@@ -1,11 +1,44 @@
 code
 ├── architecture
 │   ├── mpsoc
-│   │   └── model_mpsoc.sv
+│   │   ├── ahb3
+│   │   │   └── model_mpsoc_ahb3.sv
+│   │   ├── apb4
+│   │   │   └── model_mpsoc_apb4.sv
+│   │   ├── axi4
+│   │   │   └── model_mpsoc_axi4.sv
+│   │   ├── bb
+│   │   │   └── model_mpsoc_bb.sv
+│   │   ├── biu
+│   │   │   └── model_mpsoc_biu.sv
+│   │   └── wb
+│   │       └── model_mpsoc_wb.sv
 │   ├── pu
-│   │   └── model_pu.sv
+│   │   ├── ahb3
+│   │   │   └── model_pu_ahb3.sv
+│   │   ├── apb4
+│   │   │   └── model_pu_apb4.sv
+│   │   ├── axi4
+│   │   │   └── model_pu_axi4.sv
+│   │   ├── bb
+│   │   │   └── model_pu_bb.sv
+│   │   ├── biu
+│   │   │   └── model_pu_biu.sv
+│   │   └── wb
+│   │       └── model_pu_wb.sv
 │   └── soc
-│       └── model_soc.sv
+│       ├── ahb3
+│       │   └── model_soc_ahb3.sv
+│       ├── apb4
+│       │   └── model_soc_apb4.sv
+│       ├── axi4
+│       │   └── model_soc_axi4.sv
+│       ├── bb
+│       │   └── model_soc_bb.sv
+│       ├── biu
+│       │   └── model_soc_biu.sv
+│       └── wb
+│           └── model_soc_wb.sv
 ├── arithmetic
 │   ├── fixed
 │   │   ├── matrix
@@ -243,4 +276,4 @@ code
         ├── model_input_trainer.sv
         └── model_output_trainer.sv
 
-74 directories, 169 files
+92 directories, 184 files

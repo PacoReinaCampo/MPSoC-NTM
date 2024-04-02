@@ -1,11 +1,44 @@
 code
 ├── architecture
 │   ├── mpsoc
-│   │   └── accelerator_mpsoc.vhd
+│   │   ├── ahb3
+│   │   │   └── accelerator_mpsoc_ahb3.vhd
+│   │   ├── apb4
+│   │   │   └── accelerator_mpsoc_apb4.vhd
+│   │   ├── axi4
+│   │   │   └── accelerator_mpsoc_axi4.vhd
+│   │   ├── bb
+│   │   │   └── accelerator_mpsoc_bb.vhd
+│   │   ├── biu
+│   │   │   └── accelerator_mpsoc_biu.vhd
+│   │   └── wb
+│   │       └── accelerator_mpsoc_wb.vhd
 │   ├── pu
-│   │   └── accelerator_pu.vhd
+│   │   ├── ahb3
+│   │   │   └── accelerator_pu_ahb3.vhd
+│   │   ├── apb4
+│   │   │   └── accelerator_pu_apb4.vhd
+│   │   ├── axi4
+│   │   │   └── accelerator_pu_axi4.vhd
+│   │   ├── bb
+│   │   │   └── accelerator_pu_bb.vhd
+│   │   ├── biu
+│   │   │   └── accelerator_pu_biu.vhd
+│   │   └── wb
+│   │       └── accelerator_pu_wb.vhd
 │   └── soc
-│       └── accelerator_soc.vhd
+│       ├── ahb3
+│       │   └── accelerator_soc_ahb3.vhd
+│       ├── apb4
+│       │   └── accelerator_soc_apb4.vhd
+│       ├── axi4
+│       │   └── accelerator_soc_axi4.vhd
+│       ├── bb
+│       │   └── accelerator_soc_bb.vhd
+│       ├── biu
+│       │   └── accelerator_soc_biu.vhd
+│       └── wb
+│           └── accelerator_soc_wb.vhd
 ├── arithmetic
 │   ├── definition
 │   │   ├── matrix
@@ -264,4 +297,4 @@ code
         ├── accelerator_input_trainer.vhd
         └── accelerator_output_trainer.vhd
 
-79 directories, 185 files
+97 directories, 200 files

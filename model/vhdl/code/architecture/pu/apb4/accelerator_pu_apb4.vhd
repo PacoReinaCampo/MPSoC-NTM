@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity model_mpsoc is
+entity accelerator_pu is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 64;
@@ -62,7 +62,7 @@ entity model_mpsoc is
     );
 end entity;
 
-architecture model_mpsoc_architecture of model_mpsoc is
+architecture accelerator_pu_architecture of accelerator_pu is
 
   ------------------------------------------------------------------------------
   -- Functionality

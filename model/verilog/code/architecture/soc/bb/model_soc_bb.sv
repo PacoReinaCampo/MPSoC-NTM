@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module accelerator_soc #(
+module model_soc #(
   parameter DATA_SIZE    = 64,
   parameter CONTROL_SIZE = 4
 ) (
