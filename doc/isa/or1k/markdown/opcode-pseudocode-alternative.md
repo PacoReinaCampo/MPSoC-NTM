@@ -25,15 +25,15 @@ Format of a line in the table:
 | `l.bnf N`              | `EA <- exts(Immediate << 2) + BranchInsnAddr`                                           |
 |                        | `PC <- EA if SR[F] cleared`                                                             |
 | `l.cmov rD,rA,rB`      | `rD[31:0] <- SR[F] ? rA[31:0] : rB[31:0]`                                               |
-| `l.csync `             | `context-synchronization`                                                            |
-| `l.cust1 `             | `N/A`                                                                                   |
-| `l.cust2 `             | `N/A`                                                                                   |
-| `l.cust3 `             | `N/A`                                                                                   |
-| `l.cust4 `             | `N/A`                                                                                   |
+| `l.csync`              | `context-synchronization`                                                               |
+| `l.cust1`              | `N/A`                                                                                   |
+| `l.cust2`              | `N/A`                                                                                   |
+| `l.cust3`              | `N/A`                                                                                   |
+| `l.cust4`              | `N/A`                                                                                   |
 | `l.cust5 rD,rA,rB,L,K` | `N/A`                                                                                   |
-| `l.cust6 `             | `N/A`                                                                                   |
-| `l.cust7 `             | `N/A`                                                                                   |
-| `l.cust8 `             | `N/A`                                                                                   |
+| `l.cust6`              | `N/A`                                                                                   |
+| `l.cust7`              | `N/A`                                                                                   |
+| `l.cust8`              | `N/A`                                                                                   |
 | `l.div rD,rA,rB`       | `rD[31:0] <- rA[31:0] / rB[31:0]`                                                       |
 |                        | `SR[OV] <- rB[31:0] == 0`                                                               |
 | `l.divu rD,rA,rB`      | `rD[31:0] <- rA[31:0] / rB[31:0]`                                                       |
@@ -91,7 +91,7 @@ Format of a line in the table:
 |                        | `SR[OV] <- signed overflow during subtraction stage`                                    |
 | `l.msbu rA,rB`         | `MACHI[31:0]MACLO[31:0] <- MACHI[31:0]MACLO[31:0] - rA[31:0] * rB[31:0]`                |
 |                        | `SR[CY] <- unsigned overflow during subtraction stage`                                  |
-| `l.msync `             | `Memory-synchronization`                                                                |
+| `l.msync`              | `Memory-synchronization`                                                                |
 | `l.mtspr rA,rB,K`      | `spr(rA OR Immediate) <- rB[31:0]`                                                      |
 | `l.mul rD,rA,rB`       | `rD[31:0] <- rA[31:0] * rB[31:0]`                                                       |
 |                        | `SR[OV] <- signed overflow`                                                             |
@@ -104,8 +104,8 @@ Format of a line in the table:
 | `l.nop K`              | `N/A`                                                                                   |
 | `l.or rD,rA,rB`        | `rD[31:0] <- rA[31:0] OR rB[31:0]`                                                      |
 | `l.ori rD,rA,K`        | `rD[31:0] <- rA[31:0] OR extz(Immediate)`                                               |
-| `l.psync `             | `pipeline-synchronization`                                                           |
-| `l.rfe `               | `PC <- EPCR`                                                                            |
+| `l.psync`              | `pipeline-synchronization`                                                              |
+| `l.rfe`                | `PC <- EPCR`                                                                            |
 |                        | `SR <- ESR`                                                                             |
 | `l.ror rD,rA,rB`       | `rD[31-rB[4:0]:0] <- rA[31:rB[4:0]]`                                                    |
 |                        | `rD[31:32-rB[4:0]] <- rA[rB[4:0]-1:0]`                                                  |
@@ -171,7 +171,7 @@ Format of a line in the table:
 | `lf.itof.d rD,rA`      | `N/A`                                                                                   |
 | `lf.itof.s rD,rA`      | `rD[31:0] <- itof(rA[31:0])`                                                            |
 | `lf.madd.d rD,rA,rB`   | `N/A`                                                                                   |
-| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
+| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
 | `lf.mul.d rD,rA,rB`    | `N/A`                                                                                   |
 | `lf.mul.s rD,rA,rB`    | `rD[31:0] <- rA[31:0] * rB[31:0]`                                                       |
 | `lf.rem.d rD,rA,rB`    | `N/A`                                                                                   |
@@ -237,10 +237,10 @@ Format of a line in the table:
 | `lv.cmp_lt.h rD,rA,rB` | `N/A`                                                                                   |
 | `lv.cmp_ne.b rD,rA,rB` | `N/A`                                                                                   |
 | `lv.cmp_ne.h rD,rA,rB` | `N/A`                                                                                   |
-| `lv.cust1 `            | `N/A`                                                                                   |
-| `lv.cust2 `            | `N/A`                                                                                   |
-| `lv.cust3 `            | `N/A`                                                                                   |
-| `lv.cust4 `            | `N/A`                                                                                   |
+| `lv.cust1`             | `N/A`                                                                                   |
+| `lv.cust2`             | `N/A`                                                                                   |
+| `lv.cust3`             | `N/A`                                                                                   |
+| `lv.cust4`             | `N/A`                                                                                   |
 | `lv.madds.h rD,rA,rB`  | `N/A`                                                                                   |
 | `lv.max.b rD,rA,rB`    | `N/A`                                                                                   |
 | `lv.max.h rD,rA,rB`    | `N/A`                                                                                   |
@@ -305,15 +305,15 @@ Format of a line in the table:
 | `l.bnf N`              | `EA <- exts(Immediate << 2) + BranchInsnAddr`                                           |
 |                        | `PC <- EA if SR[F] cleared`                                                             |
 | `l.cmov rD,rA,rB`      | `rD[63:0] <- SR[F] ? rA[63:0] : rB[63:0]`                                               |
-| `l.csync `             | `context-synchronization`                                                            |
-| `l.cust1 `             | `N/A`                                                                                   |
-| `l.cust2 `             | `N/A`                                                                                   |
-| `l.cust3 `             | `N/A`                                                                                   |
-| `l.cust4 `             | `N/A`                                                                                   |
+| `l.csync`              | `context-synchronization`                                                               |
+| `l.cust1`              | `N/A`                                                                                   |
+| `l.cust2`              | `N/A`                                                                                   |
+| `l.cust3`              | `N/A`                                                                                   |
+| `l.cust4`              | `N/A`                                                                                   |
 | `l.cust5 rD,rA,rB,L,K` | `N/A`                                                                                   |
-| `l.cust6 `             | `N/A`                                                                                   |
-| `l.cust7 `             | `N/A`                                                                                   |
-| `l.cust8 `             | `N/A`                                                                                   |
+| `l.cust6`              | `N/A`                                                                                   |
+| `l.cust7`              | `N/A`                                                                                   |
+| `l.cust8`              | `N/A`                                                                                   |
 | `l.div rD,rA,rB`       | `rD[63:0] <- rA[63:0] / rB[63:0]`                                                       |
 |                        | `SR[OV] <- rB[63:0] == 0`                                                               |
 | `l.divu rD,rA,rB`      | `rD[63:0] <- rA[63:0] / rB[63:0]`                                                       |
@@ -377,7 +377,7 @@ Format of a line in the table:
 |                        | `SR[OV] <- signed overflow during subtraction stage`                                    |
 | `l.msbu rA,rB`         | `MACHI[31:0]MACLO[31:0] <- MACHI[31:0]MACLO[31:0] - rA[63:0] * rB[63:0]`                |
 |                        | `SR[CY] <- unsigned overflow during subtraction stage`                                  |
-| `l.msync `             | `Memory-synchronization`                                                                |
+| `l.msync`              | `Memory-synchronization`                                                                |
 | `l.mtspr rA,rB,K`      | `spr(rA OR Immediate) <- rB[31:0]`                                                      |
 | `l.mul rD,rA,rB`       | `rD[63:0] <- rA[63:0] * rB[63:0]`                                                       |
 |                        | `SR[OV] <- signed overflow`                                                             |
@@ -392,8 +392,8 @@ Format of a line in the table:
 | `l.nop K`              | `N/A`                                                                                   |
 | `l.or rD,rA,rB`        | `rD[63:0] <- rA[63:0] OR rB[63:0]`                                                      |
 | `l.ori rD,rA,K`        | `rD[63:0] <- rA[63:0] OR extz(Immediate)`                                               |
-| `l.psync `             | `pipeline-synchronization`                                                           |
-| `l.rfe `               | `PC <- EPCR`                                                                            |
+| `l.psync`              | `pipeline-synchronization`                                                              |
+| `l.rfe`                | `PC <- EPCR`                                                                            |
 |                        | `SR <- ESR`                                                                             |
 | `l.ror rD,rA,rB`       | `rD[63-rB[5:0]:0] <- rA[63:rB[5:0]]`                                                    |
 |                        | `rD[63:64-rB[5:0]] <- rA[rB[5:0]-1:0]`                                                  |
@@ -463,8 +463,8 @@ Format of a line in the table:
 | `lf.itof.d rD,rA`      | `rD[63:0] <- itof(rA[63:0])`                                                            |
 | `lf.itof.s rD,rA`      | `rD[31:0] <- itof(rA[31:0])`                                                            |
 |                        | `rD[63:32] <- 0`                                                                        |
-| `lf.madd.d rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
-| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
+| `lf.madd.d rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
+| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
 |                        | `FPMADDHI <- 0`                                                                         |
 |                        | `FPMADDLO <- 0`                                                                         |
 | `lf.mul.d rD,rA,rB`    | `rD[63:0] <- rA[63:0] * rB[63:0]`                                                       |
@@ -789,10 +789,10 @@ Format of a line in the table:
 |                        | `rD[31:16] <- repl(rA[31:16] != rB[31:16])`                                             |
 |                        | `rD[47:32] <- repl(rA[47:32] != rB[47:32])`                                             |
 |                        | `rD[63:48] <- repl(rA[63:48] != rB[63:48])`                                             |
-| `lv.cust1 `            | `N/A`                                                                                   |
-| `lv.cust2 `            | `N/A`                                                                                   |
-| `lv.cust3 `            | `N/A`                                                                                   |
-| `lv.cust4 `            | `N/A`                                                                                   |
+| `lv.cust1`             | `N/A`                                                                                   |
+| `lv.cust2`             | `N/A`                                                                                   |
+| `lv.cust3`             | `N/A`                                                                                   |
+| `lv.cust4`             | `N/A`                                                                                   |
 | `lv.madds.h rD,rA,rB`  | `rD[15:0] <- sat32s(rA[15:0] * rB[15:0] + VMACLO[31:0])`                                |
 |                        | `rD[31:16] <- sat32s(rA[31:16] * rB[31:16] + VMACLO[63:32])`                            |
 |                        | `rD[47:32] <- sat32s(rA[47:32] * rB[47:32] + VMACHI[31:0])`                             |

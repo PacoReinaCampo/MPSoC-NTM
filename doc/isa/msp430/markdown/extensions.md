@@ -64,3 +64,5 @@ Format of a line in the table:
 | `rv`   | `64`      | `cnn`      | `32`              | `RV64CNN Standard Extension Complex Neural Network (+ RV32CNN)`              |
 | `rv`   | `128`     | `cnn`      | `32`              | `RV128CNN Standard Extension Complex Neural Network (+ RV64CNN)`             |
 : Instruction Set Extensions
+
+![Extensions](assets/extensions.svg){width=10cm}

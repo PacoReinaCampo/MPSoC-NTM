@@ -273,126 +273,14 @@ Format of a line in the table:
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `fmod.s`           | `Calculate the modulus of the single-precision values in frs1 and frs2, then write the result to frd`                            |
-| `fcbrt.s`          | `Calculate the cube root of the single-precision value in frs1, then write the result to frd`                                    |
-| `fpow.s`           | `Calculate the pow of the single-precision values in frs1 and frs2, then write the result to frd`                                |
-| `fexp.s`           | `Calculate the exp of the single-precision values in frs1 and frs2, then write the result to frd`                                |
-| `flog.s`           | `Calculate the natural logarithm of the single-precision value in frs1, then write the result to frd`                            |
-| `flog2.s`          | `Calculate the logarithm base 2 of the single-precision value in frs1, then write the result to frd`                             |
-| `flog10.s`         | `Calculate the logarithm base 10 of the single-precision value in frs1, then write the result to frd`                            |
-| `flog.s`           | `Calculate the logarithm base of the single-precision values in frs1 and frs2, then write the result to frd`                     |
-| `fsin.s`           | `Calculate the sine in radians of the single-precision value in frs1, then write the result to frd`                              |
-| `fcos.s`           | `Calculate the cosine in radians of the single-precision value in frs1, then write the result to frd`                            |
-| `ftan.s`           | `Calculate the tangent in radians of the single-precision value in frs1, then write the result to frd`                           |
-| `farcsin.s`        | `Calculate the inverse sine of the single-precision value in frs1, then write the result to frd`                                 |
-| `farccos.s`        | `Calculate the inverse cosine of the single-precision value in frs1, then write the result to frd`                               |
-| `farctan.s`        | `Calculate the inverse tangent of the single-precision value in frs1, then write the result to frd`                              |
-| `fsinh.s`          | `Calculate the hyperbolic sine of the single-precision value in frs1, then write the result to frd`                              |
-| `fcosh.s`          | `Calculate the hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                            |
-| `ftanh.s`          | `Calculate the hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                           |
-| `farcsinh.s`       | `Calculate the inverse hyperbolic sine of the single-precision value in frs1, then write the result to frd`                      |
-| `farccosh.s`       | `Calculate the inverse hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                    |
-| `farctanh.s`       | `Calculate the inverse hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                   |
-: RV32RMATH - "RV32RMATH Standard Extension for Real Math"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `fmod.d`           | `Calculate the modulus of the double-precision values in frs1 and frs2, then write the result to frd`                            |
-| `fcbrt.d`          | `Calculate the cube root of the double-precision value in frs1, then write the result to frd`                                    |
-| `fpow.d`           | `Calculate the pow of the double-precision values in frs1 and frs2, then write the result to frd`                                |
-| `fexp.d`           | `Calculate the exp of the double-precision values in frs1 and frs2, then write the result to frd`                                |
-| `flog.d`           | `Calculate the natural logarithm of the double-precision value in frs1, then write the result to frd`                            |
-| `flog2.d`          | `Calculate the logarithm base 2 of the double-precision value in frs1, then write the result to frd`                             |
-| `flog10.d`         | `Calculate the logarithm base 10 of the double-precision value in frs1, then write the result to frd`                            |
-| `flog.d`           | `Calculate the logarithm base of the double-precision values in frs1 and frs2, then write the result to frd`                     |
-| `fsin.d`           | `Calculate the sine in radians of the double-precision value in frs1, then write the result to frd`                              |
-| `fcos.d`           | `Calculate the cosine in radians of the double-precision value in frs1, then write the result to frd`                            |
-| `ftan.d`           | `Calculate the tangent in radians of the double-precision value in frs1, then write the result to frd`                           |
-| `farcsin.d`        | `Calculate the inverse sine of the double-precision value in frs1, then write the result to frd`                                 |
-| `farccos.d`        | `Calculate the inverse cosine of the double-precision value in frs1, then write the result to frd`                               |
-| `farctan.d`        | `Calculate the inverse tangent of the double-precision value in frs1, then write the result to frd`                              |
-| `fsinh.d`          | `Calculate the hyperbolic sine of the double-precision value in frs1, then write the result to frd`                              |
-| `fcosh.d`          | `Calculate the hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                            |
-| `ftanh.d`          | `Calculate the hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                           |
-| `farcsinh.d`       | `Calculate the inverse hyperbolic sine of the double-precision value in frs1, then write the result to frd`                      |
-| `farccosh.d`       | `Calculate the inverse hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                    |
-| `farctanh.d`       | `Calculate the inverse hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                   |
-: RV64RMATH - "RV64RMATH Standard Extension for Real Math (+ RV32RMATH)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `fmod.q`           | `Calculate the modulus of the quadruple-precision values in frs1 and frs2, then write the result to frd`                         |
-| `fcbrt.q`          | `Calculate the cube root of the quadruple-precision value in frs1, then write the result to frd`                                 |
-| `fpow.q`           | `Calculate the pow of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
-| `fexp.q`           | `Calculate the exp of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
-| `flog.q`           | `Calculate the natural logarithm of the quadruple-precision value in frs1, then write the result to frd`                         |
-| `flog2.q`          | `Calculate the logarithm base 2 of the quadruple-precision value in frs1, then write the result to frd`                          |
-| `flog10.q`         | `Calculate the logarithm base 10 of the quadruple-precision value in frs1, then write the result to frd`                         |
-| `flog.q`           | `Calculate the logarithm base of the quadruple-precision values in frs1 and frs2, then write the result to frd`                  |
-| `fsin.q`           | `Calculate the sine in radians of the quadruple-precision value in frs1, then write the result to frd`                           |
-| `fcos.q`           | `Calculate the cosine in radians of the quadruple-precision value in frs1, then write the result to frd`                         |
-| `ftan.q`           | `Calculate the tangent in radians of the quadruple-precision value in frs1, then write the result to frd`                        |
-| `farcsin.q`        | `Calculate the inverse sine of the quadruple-precision value in frs1, then write the result to frd`                              |
-| `farccos.q`        | `Calculate the inverse cosine of the quadruple-precision value in frs1, then write the result to frd`                            |
-| `farctan.q`        | `Calculate the inverse tangent of the quadruple-precision value in frs1, then write the result to frd`                           |
-| `fsinh.q`          | `Calculate the hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                           |
-| `fcosh.q`          | `Calculate the hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                         |
-| `ftanh.q`          | `Calculate the hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                        |
-| `farcsinh.q`       | `Calculate the inverse hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                   |
-| `farccosh.q`       | `Calculate the inverse hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                 |
-| `farctanh.q`       | `Calculate the inverse hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                |
-: RV128RMATH - "RV128MATH Standard Extension for Quadruple-Precision Real Math (+ RV64RMATH)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.cartesian.w` | `Add the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                       |
-| `csub.cartesian.w` | `Subtract the double-precision cartesian values in frs1 from frs2, then write the result to frd`                                 |
-| `cmul.cartesian.w` | `Multiply the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                  |
-| `cdiv.cartesian.w` | `Divide the double-precision cartesian value in frs1 into frs2, then write the result to frd`                                    |
-| `cadd.polar.w`     | `Add the double-precision polar values in frs1 and frs2, then write the result to frd`                                           |
-| `csub.polar.w`     | `Subtract the double-precision polar values in frs1 from frs2, then write the result to frd`                                     |
-| `cmul.polar.w`     | `Multiply the double-precision polar values in frs1 and frs2, then write the result to frd`                                      |
-| `cdiv.polar.w`     | `Divide the double-precision polar value in frs1 into frs2, then write the result to frd`                                        |
-: RV32CMATH - "RV32CMATH Standard Extension for Double-Precision Floating-Point"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.cartesian.d` | `Add the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                       |
-| `csub.cartesian.d` | `Subtract the double-precision cartesian values in frs1 from frs2, then write the result to frd`                                 |
-| `cmul.cartesian.d` | `Multiply the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                  |
-| `cdiv.cartesian.d` | `Divide the double-precision cartesian value in frs1 into frs2, then write the result to frd`                                    |
-| `cadd.polar.d`     | `Add the double-precision polar values in frs1 and frs2, then write the result to frd`                                           |
-| `csub.polar.d`     | `Subtract the double-precision polar values in frs1 from frs2, then write the result to frd`                                     |
-| `cmul.polar.d`     | `Multiply the double-precision polar values in frs1 and frs2, then write the result to frd`                                      |
-| `cdiv.polar.d`     | `Divide the double-precision polar value in frs1 into frs2, then write the result to frd`                                        |
-: RV64CMATH - "RV64CMATH Standard Extension for Double-Precision Floating-Point (+ RV32CMATH)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.cartesian.q` | `Add the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                       |
-| `csub.cartesian.q` | `Subtract the double-precision cartesian values in frs1 from frs2, then write the result to frd`                                 |
-| `cmul.cartesian.q` | `Multiply the double-precision cartesian values in frs1 and frs2, then write the result to frd`                                  |
-| `cdiv.cartesian.q` | `Divide the double-precision cartesian value in frs1 into frs2, then write the result to frd`                                    |
-| `cadd.polar.q`     | `Add the double-precision polar values in frs1 and frs2, then write the result to frd`                                           |
-| `csub.polar.q`     | `Subtract the double-precision polar values in frs1 from frs2, then write the result to frd`                                     |
-| `cmul.polar.q`     | `Multiply the double-precision polar values in frs1 and frs2, then write the result to frd`                                      |
-| `cdiv.polar.q`     | `Divide the double-precision polar value in frs1 into frs2, then write the result to frd`                                        |
-: RV128CMATH - "RV128CMATH Standard Extension for Double-Precision Floating-Point (+ RV64CMATH)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `radd.scalar.w`    | `Add the double-precision scalar values in frs1 and frs2, then write the result to frd`                                          |
+| `rsub.scalar.w`    | `Subtract the double-precision scalar values in frs1 from frs2, then write the result to frd`                                    |
+| `rmul.scalar.w`    | `Multiply the double-precision scalar values in frs1 and frs2, then write the result to frd`                                     |
+| `rdiv.scalar.w`    | `Divide the double-precision scalar value in frs1 into frs2, then write the result to frd`                                       |
 | `radd.vector.w`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
 | `rsub.vector.w`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.vector.w`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.vector.w`    | `Divide the double-precision vector value in frs1 into frs2, then write the result to frd`                                       |
-| `rconv.vector.w`   |                                                                                                                                  |
-| `rinv.vector.w`    |                                                                                                                                  |
-| `rmult.vector.w`   |                                                                                                                                  |
-| `rprod.vector.w`   |                                                                                                                                  |
-| `rsum.vector.w`    |                                                                                                                                  |
-| `rtrans.vector.w`  |                                                                                                                                  |
-| `rdiff.vector.w`   |                                                                                                                                  |
-| `rint.vector.w`    |                                                                                                                                  |
 | `radd.matrix.w`    | `Add the double-precision matrix values in frs1 and frs2, then write the result to frd`                                          |
 | `rsub.matrix.w`    | `Subtract the double-precision matrix values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.matrix.w`    | `Multiply the double-precision matrix values in frs1 and frs2, then write the result to frd`                                     |
@@ -401,10 +289,14 @@ Format of a line in the table:
 | `rsub.tensor.w`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.w`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.w`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV32RALG - "RV32RALG Standard Extension for Double-Precision Floating-Point"
+: RV32RARITH - "RV32RARITH Standard Extension for Double-Precision Floating-Point"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `radd.scalar.d`    | `Add the double-precision scalar values in frs1 and frs2, then write the result to frd`                                          |
+| `rsub.scalar.d`    | `Subtract the double-precision scalar values in frs1 from frs2, then write the result to frd`                                    |
+| `rmul.scalar.d`    | `Multiply the double-precision scalar values in frs1 and frs2, then write the result to frd`                                     |
+| `rdiv.scalar.d`    | `Divide the double-precision scalar value in frs1 into frs2, then write the result to frd`                                       |
 | `radd.vector.d`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
 | `rsub.vector.d`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.vector.d`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
@@ -417,10 +309,14 @@ Format of a line in the table:
 | `rsub.tensor.d`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.d`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.d`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV64RALG - "RV64RALG Standard Extension for Double-Precision Floating-Point (+ RV32RALG)"
+: RV64RARITH - "RV64RARITH Standard Extension for Double-Precision Floating-Point (+ RV32RARITH)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `radd.scalar.q`    | `Add the double-precision scalar values in frs1 and frs2, then write the result to frd`                                          |
+| `rsub.scalar.q`    | `Subtract the double-precision scalar values in frs1 from frs2, then write the result to frd`                                    |
+| `rmul.scalar.q`    | `Multiply the double-precision scalar values in frs1 and frs2, then write the result to frd`                                     |
+| `rdiv.scalar.q`    | `Divide the double-precision scalar value in frs1 into frs2, then write the result to frd`                                       |
 | `radd.vector.q`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
 | `rsub.vector.q`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.vector.q`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
@@ -433,55 +329,343 @@ Format of a line in the table:
 | `rsub.tensor.q`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.q`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.q`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV128RALG - "RV128RALG Standard Extension for Double-Precision Floating-Point (+ RV64RMATH)"
+: RV128RARITH - "RV128RARITH Standard Extension for Double-Precision Floating-Point (+ RV64RARITH)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.vector.w`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.vector.w`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.vector.w`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.vector.w`    | `Divide the double-precision vector value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.matrix.w`    | `Add the double-precision matrix values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.matrix.w`    | `Subtract the double-precision matrix values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.matrix.w`    | `Multiply the double-precision matrix values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.matrix.w`    | `Divide the double-precision matrix value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.tensor.w`    | `Add the double-precision tensor values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.tensor.w`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.tensor.w`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.tensor.w`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV32CALG - "RV32CALG Standard Extension for Double-Precision Floating-Point"
+| `fmod.scalar.s`    | `Calculate the modulus of the single-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.scalar.s`   | `Calculate the cube root of the single-precision value in frs1, then write the result to frd`                                    |
+| `fpow.scalar.s`    | `Calculate the pow of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.scalar.s`    | `Calculate the exp of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.scalar.s`    | `Calculate the natural logarithm of the single-precision value in frs1, then write the result to frd`                            |
+| `flog2.scalar.s`   | `Calculate the logarithm base 2 of the single-precision value in frs1, then write the result to frd`                             |
+| `flog10.scalar.s`  | `Calculate the logarithm base 10 of the single-precision value in frs1, then write the result to frd`                            |
+| `flog.scalar.s`    | `Calculate the logarithm base of the single-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.scalar.s`    | `Calculate the sine in radians of the single-precision value in frs1, then write the result to frd`                              |
+| `fcos.scalar.s`    | `Calculate the cosine in radians of the single-precision value in frs1, then write the result to frd`                            |
+| `ftan.scalar.s`    | `Calculate the tangent in radians of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsin.scalar.s` | `Calculate the inverse sine of the single-precision value in frs1, then write the result to frd`                                 |
+| `farccos.scalar.s` | `Calculate the inverse cosine of the single-precision value in frs1, then write the result to frd`                               |
+| `farctan.scalar.s` | `Calculate the inverse tangent of the single-precision value in frs1, then write the result to frd`                              |
+| `fsinh.scalar.s`   | `Calculate the hyperbolic sine of the single-precision value in frs1, then write the result to frd`                              |
+| `fcosh.scalar.s`   | `Calculate the hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                            |
+| `ftanh.scalar.s`   | `Calculate the hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.scalar.s`| `Calculate the inverse hyperbolic sine of the single-precision value in frs1, then write the result to frd`                      |
+| `farccosh.scalar.s`| `Calculate the inverse hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                    |
+| `farctanh.scalar.s`| `Calculate the inverse hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                   |
+| `fmod.vector.s`    | `Calculate the modulus of the single-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.vector.s`   | `Calculate the cube root of the single-precision value in frs1, then write the result to frd`                                    |
+| `fpow.vector.s`    | `Calculate the pow of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.vector.s`    | `Calculate the exp of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.vector.s`    | `Calculate the natural logarithm of the single-precision value in frs1, then write the result to frd`                            |
+| `flog2.vector.s`   | `Calculate the logarithm base 2 of the single-precision value in frs1, then write the result to frd`                             |
+| `flog10.vector.s`  | `Calculate the logarithm base 10 of the single-precision value in frs1, then write the result to frd`                            |
+| `flog.vector.s`    | `Calculate the logarithm base of the single-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.vector.s`    | `Calculate the sine in radians of the single-precision value in frs1, then write the result to frd`                              |
+| `fcos.vector.s`    | `Calculate the cosine in radians of the single-precision value in frs1, then write the result to frd`                            |
+| `ftan.vector.s`    | `Calculate the tangent in radians of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsin.vector.s` | `Calculate the inverse sine of the single-precision value in frs1, then write the result to frd`                                 |
+| `farccos.vector.s` | `Calculate the inverse cosine of the single-precision value in frs1, then write the result to frd`                               |
+| `farctan.vector.s` | `Calculate the inverse tangent of the single-precision value in frs1, then write the result to frd`                              |
+| `fsinh.vector.s`   | `Calculate the hyperbolic sine of the single-precision value in frs1, then write the result to frd`                              |
+| `fcosh.vector.s`   | `Calculate the hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                            |
+| `ftanh.vector.s`   | `Calculate the hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.vector.s`| `Calculate the inverse hyperbolic sine of the single-precision value in frs1, then write the result to frd`                      |
+| `farccosh.vector.s`| `Calculate the inverse hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                    |
+| `farctanh.vector.s`| `Calculate the inverse hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                   |
+| `fmod.matrix.s`    | `Calculate the modulus of the single-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.matrix.s`   | `Calculate the cube root of the single-precision value in frs1, then write the result to frd`                                    |
+| `fpow.matrix.s`    | `Calculate the pow of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.matrix.s`    | `Calculate the exp of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.matrix.s`    | `Calculate the natural logarithm of the single-precision value in frs1, then write the result to frd`                            |
+| `flog2.matrix.s`   | `Calculate the logarithm base 2 of the single-precision value in frs1, then write the result to frd`                             |
+| `flog10.matrix.s`  | `Calculate the logarithm base 10 of the single-precision value in frs1, then write the result to frd`                            |
+| `flog.matrix.s`    | `Calculate the logarithm base of the single-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.matrix.s`    | `Calculate the sine in radians of the single-precision value in frs1, then write the result to frd`                              |
+| `fcos.matrix.s`    | `Calculate the cosine in radians of the single-precision value in frs1, then write the result to frd`                            |
+| `ftan.matrix.s`    | `Calculate the tangent in radians of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsin.matrix.s` | `Calculate the inverse sine of the single-precision value in frs1, then write the result to frd`                                 |
+| `farccos.matrix.s` | `Calculate the inverse cosine of the single-precision value in frs1, then write the result to frd`                               |
+| `farctan.matrix.s` | `Calculate the inverse tangent of the single-precision value in frs1, then write the result to frd`                              |
+| `fsinh.matrix.s`   | `Calculate the hyperbolic sine of the single-precision value in frs1, then write the result to frd`                              |
+| `fcosh.matrix.s`   | `Calculate the hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                            |
+| `ftanh.matrix.s`   | `Calculate the hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.matrix.s`| `Calculate the inverse hyperbolic sine of the single-precision value in frs1, then write the result to frd`                      |
+| `farccosh.matrix.s`| `Calculate the inverse hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                    |
+| `farctanh.matrix.s`| `Calculate the inverse hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                   |
+| `fmod.tensor.s`    | `Calculate the modulus of the single-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.tensor.s`   | `Calculate the cube root of the single-precision value in frs1, then write the result to frd`                                    |
+| `fpow.tensor.s`    | `Calculate the pow of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.tensor.s`    | `Calculate the exp of the single-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.tensor.s`    | `Calculate the natural logarithm of the single-precision value in frs1, then write the result to frd`                            |
+| `flog2.tensor.s`   | `Calculate the logarithm base 2 of the single-precision value in frs1, then write the result to frd`                             |
+| `flog10.tensor.s`  | `Calculate the logarithm base 10 of the single-precision value in frs1, then write the result to frd`                            |
+| `flog.tensor.s`    | `Calculate the logarithm base of the single-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.tensor.s`    | `Calculate the sine in radians of the single-precision value in frs1, then write the result to frd`                              |
+| `fcos.tensor.s`    | `Calculate the cosine in radians of the single-precision value in frs1, then write the result to frd`                            |
+| `ftan.tensor.s`    | `Calculate the tangent in radians of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsin.tensor.s` | `Calculate the inverse sine of the single-precision value in frs1, then write the result to frd`                                 |
+| `farccos.tensor.s` | `Calculate the inverse cosine of the single-precision value in frs1, then write the result to frd`                               |
+| `farctan.tensor.s` | `Calculate the inverse tangent of the single-precision value in frs1, then write the result to frd`                              |
+| `fsinh.tensor.s`   | `Calculate the hyperbolic sine of the single-precision value in frs1, then write the result to frd`                              |
+| `fcosh.tensor.s`   | `Calculate the hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                            |
+| `ftanh.tensor.s`   | `Calculate the hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.tensor.s`| `Calculate the inverse hyperbolic sine of the single-precision value in frs1, then write the result to frd`                      |
+| `farccosh.tensor.s`| `Calculate the inverse hyperbolic cosine of the single-precision value in frs1, then write the result to frd`                    |
+| `farctanh.tensor.s`| `Calculate the inverse hyperbolic tangent of the single-precision value in frs1, then write the result to frd`                   |
+: RV32RMATH - "RV32RMATH Standard Extension for Real Math"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.vector.d`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.vector.d`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.vector.d`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.vector.d`    | `Divide the double-precision vector value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.matrix.d`    | `Add the double-precision matrix values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.matrix.d`    | `Subtract the double-precision matrix values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.matrix.d`    | `Multiply the double-precision matrix values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.matrix.d`    | `Divide the double-precision matrix value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.tensor.d`    | `Add the double-precision tensor values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.tensor.d`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.tensor.d`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.tensor.d`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV64CALG - "RV64CALG Standard Extension for Double-Precision Floating-Point (+ RV32CALG)"
+| `fmod.scalar.d`    | `Calculate the modulus of the double-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.scalar.d`   | `Calculate the cube root of the double-precision value in frs1, then write the result to frd`                                    |
+| `fpow.scalar.d`    | `Calculate the pow of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.scalar.d`    | `Calculate the exp of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.scalar.d`    | `Calculate the natural logarithm of the double-precision value in frs1, then write the result to frd`                            |
+| `flog2.scalar.d`   | `Calculate the logarithm base 2 of the double-precision value in frs1, then write the result to frd`                             |
+| `flog10.scalar.d`  | `Calculate the logarithm base 10 of the double-precision value in frs1, then write the result to frd`                            |
+| `flog.scalar.d`    | `Calculate the logarithm base of the double-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.scalar.d`    | `Calculate the sine in radians of the double-precision value in frs1, then write the result to frd`                              |
+| `fcos.scalar.d`    | `Calculate the cosine in radians of the double-precision value in frs1, then write the result to frd`                            |
+| `ftan.scalar.d`    | `Calculate the tangent in radians of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsin.scalar.d` | `Calculate the inverse sine of the double-precision value in frs1, then write the result to frd`                                 |
+| `farccos.scalar.d` | `Calculate the inverse cosine of the double-precision value in frs1, then write the result to frd`                               |
+| `farctan.scalar.d` | `Calculate the inverse tangent of the double-precision value in frs1, then write the result to frd`                              |
+| `fsinh.scalar.d`   | `Calculate the hyperbolic sine of the double-precision value in frs1, then write the result to frd`                              |
+| `fcosh.scalar.d`   | `Calculate the hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                            |
+| `ftanh.scalar.d`   | `Calculate the hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.scalar.d`| `Calculate the inverse hyperbolic sine of the double-precision value in frs1, then write the result to frd`                      |
+| `farccosh.scalar.d`| `Calculate the inverse hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                    |
+| `farctanh.scalar.d`| `Calculate the inverse hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                   |
+| `fmod.vector.d`    | `Calculate the modulus of the double-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.vector.d`   | `Calculate the cube root of the double-precision value in frs1, then write the result to frd`                                    |
+| `fpow.vector.d`    | `Calculate the pow of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.vector.d`    | `Calculate the exp of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.vector.d`    | `Calculate the natural logarithm of the double-precision value in frs1, then write the result to frd`                            |
+| `flog2.vector.d`   | `Calculate the logarithm base 2 of the double-precision value in frs1, then write the result to frd`                             |
+| `flog10.vector.d`  | `Calculate the logarithm base 10 of the double-precision value in frs1, then write the result to frd`                            |
+| `flog.vector.d`    | `Calculate the logarithm base of the double-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.vector.d`    | `Calculate the sine in radians of the double-precision value in frs1, then write the result to frd`                              |
+| `fcos.vector.d`    | `Calculate the cosine in radians of the double-precision value in frs1, then write the result to frd`                            |
+| `ftan.vector.d`    | `Calculate the tangent in radians of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsin.vector.d` | `Calculate the inverse sine of the double-precision value in frs1, then write the result to frd`                                 |
+| `farccos.vector.d` | `Calculate the inverse cosine of the double-precision value in frs1, then write the result to frd`                               |
+| `farctan.vector.d` | `Calculate the inverse tangent of the double-precision value in frs1, then write the result to frd`                              |
+| `fsinh.vector.d`   | `Calculate the hyperbolic sine of the double-precision value in frs1, then write the result to frd`                              |
+| `fcosh.vector.d`   | `Calculate the hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                            |
+| `ftanh.vector.d`   | `Calculate the hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.vector.d`| `Calculate the inverse hyperbolic sine of the double-precision value in frs1, then write the result to frd`                      |
+| `farccosh.vector.d`| `Calculate the inverse hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                    |
+| `farctanh.vector.d`| `Calculate the inverse hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                   |
+| `fmod.matrix.d`    | `Calculate the modulus of the double-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.matrix.d`   | `Calculate the cube root of the double-precision value in frs1, then write the result to frd`                                    |
+| `fpow.matrix.d`    | `Calculate the pow of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.matrix.d`    | `Calculate the exp of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.matrix.d`    | `Calculate the natural logarithm of the double-precision value in frs1, then write the result to frd`                            |
+| `flog2.matrix.d`   | `Calculate the logarithm base 2 of the double-precision value in frs1, then write the result to frd`                             |
+| `flog10.matrix.d`  | `Calculate the logarithm base 10 of the double-precision value in frs1, then write the result to frd`                            |
+| `flog.matrix.d`    | `Calculate the logarithm base of the double-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.matrix.d`    | `Calculate the sine in radians of the double-precision value in frs1, then write the result to frd`                              |
+| `fcos.matrix.d`    | `Calculate the cosine in radians of the double-precision value in frs1, then write the result to frd`                            |
+| `ftan.matrix.d`    | `Calculate the tangent in radians of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsin.matrix.d` | `Calculate the inverse sine of the double-precision value in frs1, then write the result to frd`                                 |
+| `farccos.matrix.d` | `Calculate the inverse cosine of the double-precision value in frs1, then write the result to frd`                               |
+| `farctan.matrix.d` | `Calculate the inverse tangent of the double-precision value in frs1, then write the result to frd`                              |
+| `fsinh.matrix.d`   | `Calculate the hyperbolic sine of the double-precision value in frs1, then write the result to frd`                              |
+| `fcosh.matrix.d`   | `Calculate the hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                            |
+| `ftanh.matrix.d`   | `Calculate the hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.matrix.d`| `Calculate the inverse hyperbolic sine of the double-precision value in frs1, then write the result to frd`                      |
+| `farccosh.matrix.d`| `Calculate the inverse hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                    |
+| `farctanh.matrix.d`| `Calculate the inverse hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                   |
+| `fmod.tensor.d`    | `Calculate the modulus of the double-precision values in frs1 and frs2, then write the result to frd`                            |
+| `fcbrt.tensor.d`   | `Calculate the cube root of the double-precision value in frs1, then write the result to frd`                                    |
+| `fpow.tensor.d`    | `Calculate the pow of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `fexp.tensor.d`    | `Calculate the exp of the double-precision values in frs1 and frs2, then write the result to frd`                                |
+| `flog.tensor.d`    | `Calculate the natural logarithm of the double-precision value in frs1, then write the result to frd`                            |
+| `flog2.tensor.d`   | `Calculate the logarithm base 2 of the double-precision value in frs1, then write the result to frd`                             |
+| `flog10.tensor.d`  | `Calculate the logarithm base 10 of the double-precision value in frs1, then write the result to frd`                            |
+| `flog.tensor.d`    | `Calculate the logarithm base of the double-precision values in frs1 and frs2, then write the result to frd`                     |
+| `fsin.tensor.d`    | `Calculate the sine in radians of the double-precision value in frs1, then write the result to frd`                              |
+| `fcos.tensor.d`    | `Calculate the cosine in radians of the double-precision value in frs1, then write the result to frd`                            |
+| `ftan.tensor.d`    | `Calculate the tangent in radians of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsin.tensor.d` | `Calculate the inverse sine of the double-precision value in frs1, then write the result to frd`                                 |
+| `farccos.tensor.d` | `Calculate the inverse cosine of the double-precision value in frs1, then write the result to frd`                               |
+| `farctan.tensor.d` | `Calculate the inverse tangent of the double-precision value in frs1, then write the result to frd`                              |
+| `fsinh.tensor.d`   | `Calculate the hyperbolic sine of the double-precision value in frs1, then write the result to frd`                              |
+| `fcosh.tensor.d`   | `Calculate the hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                            |
+| `ftanh.tensor.d`   | `Calculate the hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                           |
+| `farcsinh.tensor.d`| `Calculate the inverse hyperbolic sine of the double-precision value in frs1, then write the result to frd`                      |
+| `farccosh.tensor.d`| `Calculate the inverse hyperbolic cosine of the double-precision value in frs1, then write the result to frd`                    |
+| `farctanh.tensor.d`| `Calculate the inverse hyperbolic tangent of the double-precision value in frs1, then write the result to frd`                   |
+: RV64RMATH - "RV64RMATH Standard Extension for Real Math (+ RV32RMATH)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `cadd.vector.q`    | `Add the double-precision vector values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.vector.q`    | `Subtract the double-precision vector values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.vector.q`    | `Multiply the double-precision vector values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.vector.q`    | `Divide the double-precision vector value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.matrix.q`    | `Add the double-precision matrix values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.matrix.q`    | `Subtract the double-precision matrix values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.matrix.q`    | `Multiply the double-precision matrix values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.matrix.q`    | `Divide the double-precision matrix value in frs1 into frs2, then write the result to frd`                                       |
-| `cadd.tensor.q`    | `Add the double-precision tensor values in frs1 and frs2, then write the result to frd`                                          |
-| `csub.tensor.q`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
-| `cmul.tensor.q`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
-| `cdiv.tensor.q`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
-: RV128CALG - "RV128CALG Standard Extension for Double-Precision Floating-Point (+ RV64CALG)"
+| `fmod.scalar.q`    | `Calculate the modulus of the quadruple-precision values in frs1 and frs2, then write the result to frd`                         |
+| `fcbrt.scalar.q`   | `Calculate the cube root of the quadruple-precision value in frs1, then write the result to frd`                                 |
+| `fpow.scalar.q`    | `Calculate the pow of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `fexp.scalar.q`    | `Calculate the exp of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `flog.scalar.q`    | `Calculate the natural logarithm of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog2.scalar.q`   | `Calculate the logarithm base 2 of the quadruple-precision value in frs1, then write the result to frd`                          |
+| `flog10.scalar.q`  | `Calculate the logarithm base 10 of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog.scalar.q`    | `Calculate the logarithm base of the quadruple-precision values in frs1 and frs2, then write the result to frd`                  |
+| `fsin.scalar.q`    | `Calculate the sine in radians of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcos.scalar.q`    | `Calculate the cosine in radians of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftan.scalar.q`    | `Calculate the tangent in radians of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsin.scalar.q` | `Calculate the inverse sine of the quadruple-precision value in frs1, then write the result to frd`                              |
+| `farccos.scalar.q` | `Calculate the inverse cosine of the quadruple-precision value in frs1, then write the result to frd`                            |
+| `farctan.scalar.q` | `Calculate the inverse tangent of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fsinh.scalar.q`   | `Calculate the hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcosh.scalar.q`   | `Calculate the hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftanh.scalar.q`   | `Calculate the hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsinh.scalar.q`| `Calculate the inverse hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                   |
+| `farccosh.scalar.q`| `Calculate the inverse hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                 |
+| `farctanh.scalar.q`| `Calculate the inverse hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                |
+| `fmod.vector.q`    | `Calculate the modulus of the quadruple-precision values in frs1 and frs2, then write the result to frd`                         |
+| `fcbrt.vector.q`   | `Calculate the cube root of the quadruple-precision value in frs1, then write the result to frd`                                 |
+| `fpow.vector.q`    | `Calculate the pow of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `fexp.vector.q`    | `Calculate the exp of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `flog.vector.q`    | `Calculate the natural logarithm of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog2.vector.q`   | `Calculate the logarithm base 2 of the quadruple-precision value in frs1, then write the result to frd`                          |
+| `flog10.vector.q`  | `Calculate the logarithm base 10 of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog.vector.q`    | `Calculate the logarithm base of the quadruple-precision values in frs1 and frs2, then write the result to frd`                  |
+| `fsin.vector.q`    | `Calculate the sine in radians of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcos.vector.q`    | `Calculate the cosine in radians of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftan.vector.q`    | `Calculate the tangent in radians of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsin.vector.q` | `Calculate the inverse sine of the quadruple-precision value in frs1, then write the result to frd`                              |
+| `farccos.vector.q` | `Calculate the inverse cosine of the quadruple-precision value in frs1, then write the result to frd`                            |
+| `farctan.vector.q` | `Calculate the inverse tangent of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fsinh.vector.q`   | `Calculate the hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcosh.vector.q`   | `Calculate the hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftanh.vector.q`   | `Calculate the hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsinh.vector.q`| `Calculate the inverse hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                   |
+| `farccosh.vector.q`| `Calculate the inverse hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                 |
+| `farctanh.vector.q`| `Calculate the inverse hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                |
+| `fmod.matrix.q`    | `Calculate the modulus of the quadruple-precision values in frs1 and frs2, then write the result to frd`                         |
+| `fcbrt.matrix.q`   | `Calculate the cube root of the quadruple-precision value in frs1, then write the result to frd`                                 |
+| `fpow.matrix.q`    | `Calculate the pow of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `fexp.matrix.q`    | `Calculate the exp of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `flog.matrix.q`    | `Calculate the natural logarithm of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog2.matrix.q`   | `Calculate the logarithm base 2 of the quadruple-precision value in frs1, then write the result to frd`                          |
+| `flog10.matrix.q`  | `Calculate the logarithm base 10 of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog.matrix.q`    | `Calculate the logarithm base of the quadruple-precision values in frs1 and frs2, then write the result to frd`                  |
+| `fsin.matrix.q`    | `Calculate the sine in radians of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcos.matrix.q`    | `Calculate the cosine in radians of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftan.matrix.q`    | `Calculate the tangent in radians of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsin.matrix.q` | `Calculate the inverse sine of the quadruple-precision value in frs1, then write the result to frd`                              |
+| `farccos.matrix.q` | `Calculate the inverse cosine of the quadruple-precision value in frs1, then write the result to frd`                            |
+| `farctan.matrix.q` | `Calculate the inverse tangent of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fsinh.matrix.q`   | `Calculate the hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcosh.matrix.q`   | `Calculate the hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftanh.matrix.q`   | `Calculate the hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsinh.matrix.q`| `Calculate the inverse hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                   |
+| `farccosh.matrix.q`| `Calculate the inverse hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                 |
+| `farctanh.matrix.q`| `Calculate the inverse hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                |
+| `fmod.tensor.q`    | `Calculate the modulus of the quadruple-precision values in frs1 and frs2, then write the result to frd`                         |
+| `fcbrt.tensor.q`   | `Calculate the cube root of the quadruple-precision value in frs1, then write the result to frd`                                 |
+| `fpow.tensor.q`    | `Calculate the pow of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `fexp.tensor.q`    | `Calculate the exp of the quadruple-precision values in frs1 and frs2, then write the result to frd`                             |
+| `flog.tensor.q`    | `Calculate the natural logarithm of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog2.tensor.q`   | `Calculate the logarithm base 2 of the quadruple-precision value in frs1, then write the result to frd`                          |
+| `flog10.tensor.q`  | `Calculate the logarithm base 10 of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `flog.tensor.q`    | `Calculate the logarithm base of the quadruple-precision values in frs1 and frs2, then write the result to frd`                  |
+| `fsin.tensor.q`    | `Calculate the sine in radians of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcos.tensor.q`    | `Calculate the cosine in radians of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftan.tensor.q`    | `Calculate the tangent in radians of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsin.tensor.q` | `Calculate the inverse sine of the quadruple-precision value in frs1, then write the result to frd`                              |
+| `farccos.tensor.q` | `Calculate the inverse cosine of the quadruple-precision value in frs1, then write the result to frd`                            |
+| `farctan.tensor.q` | `Calculate the inverse tangent of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fsinh.tensor.q`   | `Calculate the hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                           |
+| `fcosh.tensor.q`   | `Calculate the hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                         |
+| `ftanh.tensor.q`   | `Calculate the hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                        |
+| `farcsinh.tensor.q`| `Calculate the inverse hyperbolic sine of the quadruple-precision value in frs1, then write the result to frd`                   |
+| `farccosh.tensor.q`| `Calculate the inverse hyperbolic cosine of the quadruple-precision value in frs1, then write the result to frd`                 |
+| `farctanh.tensor.q`| `Calculate the inverse hyperbolic tangent of the quadruple-precision value in frs1, then write the result to frd`                |
+: RV128RMATH - "RV128MATH Standard Extension for Quadruple-Precision Real Math (+ RV64RMATH)"
+
+| instruction name   | instruction description                                                                                                          |
+|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `rconv.vector.w`   |                                                                                                                                  |
+| `rinv.vector.w`    |                                                                                                                                  |
+| `rmult.vector.w`   |                                                                                                                                  |
+| `rprod.vector.w`   |                                                                                                                                  |
+| `rsum.vector.w`    |                                                                                                                                  |
+| `rtrans.vector.w`  |                                                                                                                                  |
+| `rdiff.vector.w`   |                                                                                                                                  |
+| `rint.vector.w`    |                                                                                                                                  |
+| `rconv.matrix.w`   |                                                                                                                                  |
+| `rinv.matrix.w`    |                                                                                                                                  |
+| `rmult.matrix.w`   |                                                                                                                                  |
+| `rprod.matrix.w`   |                                                                                                                                  |
+| `rsum.matrix.w`    |                                                                                                                                  |
+| `rtrans.matrix.w`  |                                                                                                                                  |
+| `rdiff.matrix.w`   |                                                                                                                                  |
+| `rint.matrix.w`    |                                                                                                                                  |
+| `rconv.tensor.w`   |                                                                                                                                  |
+| `rinv.tensor.w`    |                                                                                                                                  |
+| `rmult.tensor.w`   |                                                                                                                                  |
+| `rprod.tensor.w`   |                                                                                                                                  |
+| `rsum.tensor.w`    |                                                                                                                                  |
+| `rtrans.tensor.w`  |                                                                                                                                  |
+| `rdiff.tensor.w`   |                                                                                                                                  |
+| `rint.tensor.w`    |                                                                                                                                  |
+: RV32RALG - "RV32RALG Standard Extension for Double-Precision Floating-Point"
+
+| instruction name   | instruction description                                                                                                          |
+|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `rconv.vector.d`   |                                                                                                                                  |
+| `rinv.vector.d`    |                                                                                                                                  |
+| `rmult.vector.d`   |                                                                                                                                  |
+| `rprod.vector.d`   |                                                                                                                                  |
+| `rsum.vector.d`    |                                                                                                                                  |
+| `rtrans.vector.d`  |                                                                                                                                  |
+| `rdiff.vector.d`   |                                                                                                                                  |
+| `rint.vector.d`    |                                                                                                                                  |
+| `rconv.matrix.d`   |                                                                                                                                  |
+| `rinv.matrix.d`    |                                                                                                                                  |
+| `rmult.matrix.d`   |                                                                                                                                  |
+| `rprod.matrix.d`   |                                                                                                                                  |
+| `rsum.matrix.d`    |                                                                                                                                  |
+| `rtrans.matrix.d`  |                                                                                                                                  |
+| `rdiff.matrix.d`   |                                                                                                                                  |
+| `rint.matrix.d`    |                                                                                                                                  |
+| `rconv.tensor.d`   |                                                                                                                                  |
+| `rinv.tensor.d`    |                                                                                                                                  |
+| `rmult.tensor.d`   |                                                                                                                                  |
+| `rprod.tensor.d`   |                                                                                                                                  |
+| `rsum.tensor.d`    |                                                                                                                                  |
+| `rtrans.tensor.d`  |                                                                                                                                  |
+| `rdiff.tensor.d`   |                                                                                                                                  |
+| `rint.tensor.d`    |                                                                                                                                  |
+: RV64RALG - "RV64RALG Standard Extension for Double-Precision Floating-Point (+ RV32RALG)"
+
+| instruction name   | instruction description                                                                                                          |
+|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+| `rconv.vector.q`   |                                                                                                                                  |
+| `rinv.vector.q`    |                                                                                                                                  |
+| `rmult.vector.q`   |                                                                                                                                  |
+| `rprod.vector.q`   |                                                                                                                                  |
+| `rsum.vector.q`    |                                                                                                                                  |
+| `rtrans.vector.q`  |                                                                                                                                  |
+| `rdiff.vector.q`   |                                                                                                                                  |
+| `rint.vector.q`    |                                                                                                                                  |
+| `rconv.matrix.q`   |                                                                                                                                  |
+| `rinv.matrix.q`    |                                                                                                                                  |
+| `rmult.matrix.q`   |                                                                                                                                  |
+| `rprod.matrix.q`   |                                                                                                                                  |
+| `rsum.matrix.q`    |                                                                                                                                  |
+| `rtrans.matrix.q`  |                                                                                                                                  |
+| `rdiff.matrix.q`   |                                                                                                                                  |
+| `rint.matrix.q`    |                                                                                                                                  |
+| `rconv.tensor.q`   |                                                                                                                                  |
+| `rinv.tensor.q`    |                                                                                                                                  |
+| `rmult.tensor.q`   |                                                                                                                                  |
+| `rprod.tensor.q`   |                                                                                                                                  |
+| `rsum.tensor.q`    |                                                                                                                                  |
+| `rtrans.tensor.q`  |                                                                                                                                  |
+| `rdiff.tensor.q`   |                                                                                                                                  |
+| `rint.tensor.q`    |                                                                                                                                  |
+: RV128RALG - "RV128RALG Standard Extension for Double-Precision Floating-Point (+ RV64RALG)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
@@ -512,36 +696,6 @@ Format of a line in the table:
 | `ann.q`            | `Real Attention Neural Network`                                                                                                  |
 | `dnc.q`            | `Real Differentiable Neural Computer`                                                                                            |
 : RV128RNN - "RV128RNN Standard Extension for Neural Network (+ RV64RNN)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `pnn.w`            | `Complex Perceptron Neural Network`                                                                                              |
-| `cnn.w`            | `Complex Convolutional Neural Network`                                                                                           |
-| `fnn.w`            | `Complex Feed-Forward Neural Network`                                                                                            |
-| `lstm.w`           | `Complex Long-Short Term Memory Neural Network`                                                                                  |
-| `ann.w`            | `Complex Attention Neural Network`                                                                                               |
-| `dnc.w`            | `Complex Differentiable Neural Computer`                                                                                         |
-: RV32CNN - "RV32CNN Standard Extension for Neural Network"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `pnn.d`            | `Complex Perceptron Neural Network`                                                                                              |
-| `cnn.d`            | `Complex Convolutional Neural Network`                                                                                           |
-| `fnn.d`            | `Complex Feed-Forward Neural Network`                                                                                            |
-| `lstm.d`           | `Complex Long-Short Term Memory Neural Network`                                                                                  |
-| `ann.d`            | `Complex Attention Neural Network`                                                                                               |
-| `dnc.d`            | `Complex Differentiable Neural Computer`                                                                                         |
-: RV64CNN - "RV64CNN Standard Extension for Neural Network (+ RV32CNN)"
-
-| instruction name   | instruction description                                                                                                          |
-|--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `pnn.q`            | `Complex Perceptron Neural Network`                                                                                              |
-| `cnn.q`            | `Complex Convolutional Neural Network`                                                                                           |
-| `fnn.q`            | `Complex Feed-Forward Neural Network`                                                                                            |
-| `lstm.q`           | `Complex Long-Short Term Memory Neural Network`                                                                                  |
-| `ann.q`            | `Complex Attention Neural Network`                                                                                               |
-| `dnc.q`            | `Complex Differentiable Neural Computer`                                                                                         |
-: RV128CNN - "RV128CNN Standard Extension for Neural Network (+ RV64CNN)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
