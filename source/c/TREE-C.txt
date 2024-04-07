@@ -1,4 +1,43 @@
 library
+├── algebra
+│   ├── matrix
+│   │   ├── ntm_matrix_convolution.c
+│   │   ├── ntm_matrix_differentiation.c
+│   │   ├── ntm_matrix_integration.c
+│   │   ├── ntm_matrix_inverse.c
+│   │   ├── ntm_matrix_multiplication.c
+│   │   ├── ntm_matrix_product.c
+│   │   ├── ntm_matrix_softmax.c
+│   │   ├── ntm_matrix_summation.c
+│   │   ├── ntm_matrix_transpose.c
+│   │   ├── ntm_matrix_vector_convolution.c
+│   │   ├── ntm_matrix_vector_product.c
+│   │   └── ntm_transpose_vector_product.c
+│   ├── scalar
+│   │   ├── ntm_scalar_multiplication.c
+│   │   └── ntm_scalar_summation.c
+│   ├── tensor
+│   │   ├── ntm_tensor_convolution.c
+│   │   ├── ntm_tensor_differentiation.c
+│   │   ├── ntm_tensor_integration.c
+│   │   ├── ntm_tensor_inverse.c
+│   │   ├── ntm_tensor_matrix_convolution.c
+│   │   ├── ntm_tensor_matrix_product.c
+│   │   ├── ntm_tensor_multiplication.c
+│   │   ├── ntm_tensor_product.c
+│   │   ├── ntm_tensor_softmax.c
+│   │   ├── ntm_tensor_summation.c
+│   │   └── ntm_tensor_transpose.c
+│   └── vector
+│       ├── ntm_dot_product.c
+│       ├── ntm_vector_convolution.c
+│       ├── ntm_vector_cosine_similarity.c
+│       ├── ntm_vector_differentiation.c
+│       ├── ntm_vector_integration.c
+│       ├── ntm_vector_module.c
+│       ├── ntm_vector_multiplication.c
+│       ├── ntm_vector_softmax.c
+│       └── ntm_vector_summation.c
 ├── arithmetic
 │   ├── matrix
 │   │   ├── ntm_matrix_adder.c
@@ -21,69 +60,21 @@ library
 │       ├── ntm_vector_multiplier.c
 │       └── ntm_vector_subtractor.c
 ├── math
-│   ├── algebra
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.c
-│   │   │   ├── ntm_matrix_inverse.c
-│   │   │   ├── ntm_matrix_multiplication.c
-│   │   │   ├── ntm_matrix_product.c
-│   │   │   ├── ntm_matrix_summation.c
-│   │   │   ├── ntm_matrix_transpose.c
-│   │   │   ├── ntm_matrix_vector_convolution.c
-│   │   │   ├── ntm_matrix_vector_product.c
-│   │   │   └── ntm_transpose_vector_product.c
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication.c
-│   │   │   └── ntm_scalar_summation.c
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution.c
-│   │   │   ├── ntm_tensor_inverse.c
-│   │   │   ├── ntm_tensor_matrix_convolution.c
-│   │   │   ├── ntm_tensor_matrix_product.c
-│   │   │   ├── ntm_tensor_multiplication.c
-│   │   │   ├── ntm_tensor_product.c
-│   │   │   ├── ntm_tensor_summation.c
-│   │   │   └── ntm_tensor_transpose.c
-│   │   └── vector
-│   │       ├── ntm_dot_product.c
-│   │       ├── ntm_vector_convolution.c
-│   │       ├── ntm_vector_cosine_similarity.c
-│   │       ├── ntm_vector_module.c
-│   │       ├── ntm_vector_multiplication.c
-│   │       └── ntm_vector_summation.c
-│   ├── calculus
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.c
-│   │   │   ├── ntm_matrix_integration.c
-│   │   │   └── ntm_matrix_softmax.c
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.c
-│   │   │   ├── ntm_tensor_integration.c
-│   │   │   └── ntm_tensor_softmax.c
-│   │   └── vector
-│   │       ├── ntm_vector_differentiation.c
-│   │       ├── ntm_vector_integration.c
-│   │       └── ntm_vector_softmax.c
-│   ├── function
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.c
-│   │   │   └── ntm_matrix_oneplus_function.c
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.c
-│   │   │   └── ntm_scalar_oneplus_function.c
-│   │   └── vector
-│   │       ├── ntm_vector_logistic_function.c
-│   │       └── ntm_vector_oneplus_function.c
-│   └── statitics
-│       ├── matrix
-│       │   ├── ntm_matrix_deviation.c
-│       │   └── ntm_matrix_mean.c
-│       ├── scalar
-│       │   ├── ntm_scalar_deviation.c
-│       │   └── ntm_scalar_mean.c
-│       └── vector
-│           ├── ntm_vector_deviation.c
-│           └── ntm_vector_mean.c
+│   ├── matrix
+│   │   ├── ntm_matrix_deviation.c
+│   │   ├── ntm_matrix_logistic_function.c
+│   │   ├── ntm_matrix_mean.c
+│   │   └── ntm_matrix_oneplus_function.c
+│   ├── scalar
+│   │   ├── ntm_scalar_deviation.c
+│   │   ├── ntm_scalar_logistic_function.c
+│   │   ├── ntm_scalar_mean.c
+│   │   └── ntm_scalar_oneplus_function.c
+│   └── vector
+│       ├── ntm_vector_deviation.c
+│       ├── ntm_vector_logistic_function.c
+│       ├── ntm_vector_mean.c
+│       └── ntm_vector_oneplus_function.c
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -205,4 +196,4 @@ library
             ├── ntm_lstm_output_v_trainer.c
             └── ntm_lstm_output_w_trainer.c
 
-56 directories, 149 files
+47 directories, 149 files

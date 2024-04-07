@@ -53,22 +53,22 @@ rm -rf controller/ntm_transformer_controller.run
 
 rm -rf dnc/dnc.run
 
-rm -rf math/algebra/ntm_matrix_math_algebra.run
-rm -rf math/algebra/ntm_scalar_math_algebra.run
-rm -rf math/algebra/ntm_tensor_math_algebra.run
-rm -rf math/algebra/ntm_vector_math_algebra.run
+rm -rf algebra/ntm_matrix_math_algebra.run
+rm -rf algebra/ntm_scalar_math_algebra.run
+rm -rf algebra/ntm_tensor_math_algebra.run
+rm -rf algebra/ntm_vector_math_algebra.run
 
-rm -rf math/calculus/ntm_matrix_math_calculus.run
-rm -rf math/calculus/ntm_tensor_math_calculus.run
-rm -rf math/calculus/ntm_vector_math_calculus.run
+rm -rf algebra/ntm_matrix_math_calculus.run
+rm -rf algebra/ntm_tensor_math_calculus.run
+rm -rf algebra/ntm_vector_math_calculus.run
 
-rm -rf math/function/ntm_matrix_math_function.run
-rm -rf math/function/ntm_scalar_math_function.run
-rm -rf math/function/ntm_vector_math_function.run
+rm -rf math/ntm_matrix_math_function.run
+rm -rf math/ntm_scalar_math_function.run
+rm -rf math/ntm_vector_math_function.run
 
-rm -rf math/statitics/ntm_matrix_math_statitics.run
-rm -rf math/statitics/ntm_scalar_math_statitics.run
-rm -rf math/statitics/ntm_vector_math_statitics.run
+rm -rf math/ntm_matrix_math_statitics.run
+rm -rf math/ntm_scalar_math_statitics.run
+rm -rf math/ntm_vector_math_statitics.run
 
 rm -rf ntm/ntm.run
 
@@ -89,22 +89,22 @@ g++ controller/ntm_transformer_controller.cpp -o controller/ntm_transformer_cont
 	
 g++ dnc/dnc.cpp -o dnc/dnc.run
 	
-g++ math/algebra/ntm_matrix_math_algebra.cpp -o math/algebra/ntm_matrix_math_algebra.run
-g++ math/algebra/ntm_scalar_math_algebra.cpp -o math/algebra/ntm_scalar_math_algebra.run
-g++ math/algebra/ntm_tensor_math_algebra.cpp -o math/algebra/ntm_tensor_math_algebra.run
-g++ math/algebra/ntm_vector_math_algebra.cpp -o math/algebra/ntm_vector_math_algebra.run
+g++ algebra/ntm_matrix_math_algebra.cpp -o algebra/ntm_matrix_math_algebra.run
+g++ algebra/ntm_scalar_math_algebra.cpp -o algebra/ntm_scalar_math_algebra.run
+g++ algebra/ntm_tensor_math_algebra.cpp -o algebra/ntm_tensor_math_algebra.run
+g++ algebra/ntm_vector_math_algebra.cpp -o algebra/ntm_vector_math_algebra.run
 	
-g++ math/calculus/ntm_matrix_math_calculus.cpp -o math/calculus/ntm_matrix_math_calculus.run
-g++ math/calculus/ntm_tensor_math_calculus.cpp -o math/calculus/ntm_tensor_math_calculus.run
-g++ math/calculus/ntm_vector_math_calculus.cpp -o math/calculus/ntm_vector_math_calculus.run
+g++ algebra/ntm_matrix_math_calculus.cpp -o algebra/ntm_matrix_math_calculus.run
+g++ algebra/ntm_tensor_math_calculus.cpp -o algebra/ntm_tensor_math_calculus.run
+g++ algebra/ntm_vector_math_calculus.cpp -o algebra/ntm_vector_math_calculus.run
 	
-g++ math/function/ntm_matrix_math_function.cpp -o math/function/ntm_matrix_math_function.run
-g++ math/function/ntm_scalar_math_function.cpp -o math/function/ntm_scalar_math_function.run
-g++ math/function/ntm_vector_math_function.cpp -o math/function/ntm_vector_math_function.run
+g++ math/ntm_matrix_math_function.cpp -o math/ntm_matrix_math_function.run
+g++ math/ntm_scalar_math_function.cpp -o math/ntm_scalar_math_function.run
+g++ math/ntm_vector_math_function.cpp -o math/ntm_vector_math_function.run
 	
-g++ math/statitics/ntm_matrix_math_statitics.cpp -o math/statitics/ntm_matrix_math_statitics.run
-g++ math/statitics/ntm_scalar_math_statitics.cpp -o math/statitics/ntm_scalar_math_statitics.run
-g++ math/statitics/ntm_vector_math_statitics.cpp -o math/statitics/ntm_vector_math_statitics.run
+g++ math/ntm_matrix_math_statitics.cpp -o math/ntm_matrix_math_statitics.run
+g++ math/ntm_scalar_math_statitics.cpp -o math/ntm_scalar_math_statitics.run
+g++ math/ntm_vector_math_statitics.cpp -o math/ntm_vector_math_statitics.run
 	
 g++ ntm/ntm.cpp -o ntm/ntm.run
 	

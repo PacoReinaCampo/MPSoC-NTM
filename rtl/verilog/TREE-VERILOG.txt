@@ -1,4 +1,38 @@
 code
+├── algebra
+│   ├── matrix
+│   │   ├── accelerator_matrix_convolution.sv
+│   │   ├── accelerator_matrix_differentiation.sv
+│   │   ├── accelerator_matrix_integration.sv
+│   │   ├── accelerator_matrix_inverse.sv
+│   │   ├── accelerator_matrix_multiplication.sv
+│   │   ├── accelerator_matrix_product.sv
+│   │   ├── accelerator_matrix_softmax.sv
+│   │   ├── accelerator_matrix_summation.sv
+│   │   ├── accelerator_matrix_transpose.sv
+│   │   ├── accelerator_matrix_vector_convolution.sv
+│   │   └── accelerator_matrix_vector_product.sv
+│   ├── tensor
+│   │   ├── accelerator_tensor_convolution.sv
+│   │   ├── accelerator_tensor_differentiation.sv
+│   │   ├── accelerator_tensor_integration.sv
+│   │   ├── accelerator_tensor_inverse.sv
+│   │   ├── accelerator_tensor_matrix_convolution.sv
+│   │   ├── accelerator_tensor_matrix_product.sv
+│   │   ├── accelerator_tensor_product.sv
+│   │   ├── accelerator_tensor_softmax.sv
+│   │   └── accelerator_tensor_transpose.sv
+│   └── vector
+│       ├── accelerator_dot_product.sv
+│       ├── accelerator_vector_convolution.sv
+│       ├── accelerator_vector_cosine_similarity.sv
+│       ├── accelerator_vector_differentiation.sv
+│       ├── accelerator_vector_integration.sv
+│       ├── accelerator_vector_module.sv
+│       ├── accelerator_vector_multiplication.sv
+│       ├── accelerator_vector_softmax.sv
+│       ├── accelerator_vector_summation.sv
+│       └── accelerator_vector_transpose.sv
 ├── architecture
 │   ├── mpsoc
 │   │   ├── ahb3
@@ -125,73 +159,30 @@ code
 │           ├── accelerator_vector_integer_multiplier.sv
 │           └── accelerator_vector_integer_subtractor.sv
 ├── math
-│   ├── algebra
-│   │   ├── matrix
-│   │   │   ├── accelerator_matrix_convolution.sv
-│   │   │   ├── accelerator_matrix_inverse.sv
-│   │   │   ├── accelerator_matrix_multiplication.sv
-│   │   │   ├── accelerator_matrix_product.sv
-│   │   │   ├── accelerator_matrix_summation.sv
-│   │   │   ├── accelerator_matrix_transpose.sv
-│   │   │   ├── accelerator_matrix_vector_convolution.sv
-│   │   │   └── accelerator_matrix_vector_product.sv
-│   │   ├── tensor
-│   │   │   ├── accelerator_tensor_convolution.sv
-│   │   │   ├── accelerator_tensor_inverse.sv
-│   │   │   ├── accelerator_tensor_matrix_convolution.sv
-│   │   │   ├── accelerator_tensor_matrix_product.sv
-│   │   │   ├── accelerator_tensor_product.sv
-│   │   │   └── accelerator_tensor_transpose.sv
-│   │   └── vector
-│   │       ├── accelerator_dot_product.sv
-│   │       ├── accelerator_vector_convolution.sv
-│   │       ├── accelerator_vector_cosine_similarity.sv
-│   │       ├── accelerator_vector_module.sv
-│   │       ├── accelerator_vector_multiplication.sv
-│   │       ├── accelerator_vector_summation.sv
-│   │       └── accelerator_vector_transpose.sv
-│   ├── calculus
-│   │   ├── matrix
-│   │   │   ├── accelerator_matrix_differentiation.sv
-│   │   │   ├── accelerator_matrix_integration.sv
-│   │   │   └── accelerator_matrix_softmax.sv
-│   │   ├── tensor
-│   │   │   ├── accelerator_tensor_differentiation.sv
-│   │   │   ├── accelerator_tensor_integration.sv
-│   │   │   └── accelerator_tensor_softmax.sv
-│   │   └── vector
-│   │       ├── accelerator_vector_differentiation.sv
-│   │       ├── accelerator_vector_integration.sv
-│   │       └── accelerator_vector_softmax.sv
-│   ├── function
-│   │   ├── matrix
-│   │   │   ├── accelerator_matrix_logistic_function.sv
-│   │   │   └── accelerator_matrix_oneplus_function.sv
-│   │   ├── scalar
-│   │   │   ├── accelerator_scalar_logistic_function.sv
-│   │   │   └── accelerator_scalar_oneplus_function.sv
-│   │   └── vector
-│   │       ├── accelerator_vector_logistic_function.sv
-│   │       └── accelerator_vector_oneplus_function.sv
-│   └── series
-│       ├── matrix
-│       │   ├── accelerator_matrix_cosh_function.sv
-│       │   ├── accelerator_matrix_exponentiator_function.sv
-│       │   ├── accelerator_matrix_logarithm_function.sv
-│       │   ├── accelerator_matrix_sinh_function.sv
-│       │   └── accelerator_matrix_tanh_function.sv
-│       ├── scalar
-│       │   ├── accelerator_scalar_cosh_function.sv
-│       │   ├── accelerator_scalar_exponentiator_function.sv
-│       │   ├── accelerator_scalar_logarithm_function.sv
-│       │   ├── accelerator_scalar_sinh_function.sv
-│       │   └── accelerator_scalar_tanh_function.sv
-│       └── vector
-│           ├── accelerator_vector_cosh_function.sv
-│           ├── accelerator_vector_exponentiator_function.sv
-│           ├── accelerator_vector_logarithm_function.sv
-│           ├── accelerator_vector_sinh_function.sv
-│           └── accelerator_vector_tanh_function.sv
+│   ├── matrix
+│   │   ├── accelerator_matrix_cosh_function.sv
+│   │   ├── accelerator_matrix_exponentiator_function.sv
+│   │   ├── accelerator_matrix_logarithm_function.sv
+│   │   ├── accelerator_matrix_logistic_function.sv
+│   │   ├── accelerator_matrix_oneplus_function.sv
+│   │   ├── accelerator_matrix_sinh_function.sv
+│   │   └── accelerator_matrix_tanh_function.sv
+│   ├── scalar
+│   │   ├── accelerator_scalar_cosh_function.sv
+│   │   ├── accelerator_scalar_exponentiator_function.sv
+│   │   ├── accelerator_scalar_logarithm_function.sv
+│   │   ├── accelerator_scalar_logistic_function.sv
+│   │   ├── accelerator_scalar_oneplus_function.sv
+│   │   ├── accelerator_scalar_sinh_function.sv
+│   │   └── accelerator_scalar_tanh_function.sv
+│   └── vector
+│       ├── accelerator_vector_cosh_function.sv
+│       ├── accelerator_vector_exponentiator_function.sv
+│       ├── accelerator_vector_logarithm_function.sv
+│       ├── accelerator_vector_logistic_function.sv
+│       ├── accelerator_vector_oneplus_function.sv
+│       ├── accelerator_vector_sinh_function.sv
+│       └── accelerator_vector_tanh_function.sv
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -296,4 +287,4 @@ code
         ├── accelerator_input_trainer.sv
         └── accelerator_output_trainer.sv
 
-97 directories, 199 files
+88 directories, 199 files

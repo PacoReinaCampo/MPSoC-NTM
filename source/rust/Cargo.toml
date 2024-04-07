@@ -2,10 +2,8 @@
 members = [
 "library/arithmetic",
 
-"library/math/algebra",
-"library/math/calculus",
-"library/math/function",
-"library/math/statitics",
+"library/algebra",
+"library/math",
 
 #"library/state",
 
@@ -14,17 +12,11 @@ members = [
 "application/arithmetic/matrix",
 "application/arithmetic/tensor",
 
-"application/math/algebra/scalar",
-"application/math/algebra/vector",
-"application/math/algebra/matrix",
-"application/math/algebra/tensor",
-"application/math/calculus/vector",
-"application/math/calculus/matrix",
-"application/math/calculus/tensor",
-"application/math/function/scalar",
-"application/math/function/vector",
-"application/math/function/matrix",
-"application/math/statitics/scalar",
-"application/math/statitics/vector",
-"application/math/statitics/matrix"
+"application/algebra/scalar",
+"application/algebra/vector",
+"application/algebra/matrix",
+"application/algebra/tensor",
+"application/math/scalar",
+"application/math/vector",
+"application/math/matrix"
 ]

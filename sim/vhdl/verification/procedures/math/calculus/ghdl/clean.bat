@@ -1,1 +1,0 @@
-del *.cf *.tree

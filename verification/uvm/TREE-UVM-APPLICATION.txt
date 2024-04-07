@@ -1,4 +1,111 @@
 application
+├── algebra
+│   ├── matrix
+│   │   ├── ntm_matrix_convolution
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_differentiation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_integration
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_inverse
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_multiplication
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_product
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_softmax
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_summation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_transpose
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_vector_convolution
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_vector_product
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   └── ntm_transpose_vector_product
+│   │       ├── ntm_design.sv
+│   │       └── ntm_testbench.sv
+│   ├── scalar
+│   │   ├── ntm_scalar_multiplication
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   └── ntm_scalar_summation
+│   │       ├── ntm_design.sv
+│   │       └── ntm_testbench.sv
+│   ├── tensor
+│   │   ├── ntm_tensor_convolution
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_differentiation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_integration
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_inverse
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_matrix_convolution
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_matrix_product
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_multiplication
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_product
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_softmax
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_tensor_summation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   └── ntm_tensor_transpose
+│   │       ├── ntm_design.sv
+│   │       └── ntm_testbench.sv
+│   └── vector
+│       ├── ntm_dot_product
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_convolution
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_cosine_similarity
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_differentiation
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_integration
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_module
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_multiplication
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_softmax
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       └── ntm_vector_summation
+│           ├── ntm_design.sv
+│           └── ntm_testbench.sv
 ├── arithmetic
 │   ├── matrix
 │   │   ├── adder
@@ -53,161 +160,45 @@ application
 │           ├── ntm_design.sv
 │           └── ntm_testbench.sv
 ├── math
-│   ├── algebra
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_inverse
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_multiplication
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_product
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_summation
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_transpose
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_vector_convolution
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_vector_product
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_transpose_vector_product
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_scalar_summation
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_inverse
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_matrix_convolution
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_matrix_product
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_multiplication
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_product
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_summation
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_tensor_transpose
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   └── vector
-│   │       ├── ntm_dot_product
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       ├── ntm_vector_convolution
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       ├── ntm_vector_cosine_similarity
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       ├── ntm_vector_module
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       ├── ntm_vector_multiplication
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       └── ntm_vector_summation
-│   │           ├── ntm_design.sv
-│   │           └── ntm_testbench.sv
-│   ├── calculus
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_matrix_integration
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_matrix_softmax
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   ├── ntm_tensor_integration
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_tensor_softmax
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   └── vector
-│   │       ├── ntm_vector_differentiation
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       ├── ntm_vector_integration
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       └── ntm_vector_softmax
-│   │           ├── ntm_design.sv
-│   │           └── ntm_testbench.sv
-│   ├── function
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_matrix_oneplus_function
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function
-│   │   │   │   ├── ntm_design.sv
-│   │   │   │   └── ntm_testbench.sv
-│   │   │   └── ntm_scalar_oneplus_function
-│   │   │       ├── ntm_design.sv
-│   │   │       └── ntm_testbench.sv
-│   │   └── vector
-│   │       ├── ntm_vector_logistic_function
-│   │       │   ├── ntm_design.sv
-│   │       │   └── ntm_testbench.sv
-│   │       └── ntm_vector_oneplus_function
-│   │           ├── ntm_design.sv
-│   │           └── ntm_testbench.sv
-│   └── statitics
-│       ├── matrix
-│       │   ├── ntm_matrix_deviation
-│       │   │   ├── ntm_design.sv
-│       │   │   └── ntm_testbench.sv
-│       │   └── ntm_matrix_mean
-│       │       ├── ntm_design.sv
-│       │       └── ntm_testbench.sv
-│       ├── scalar
-│       │   ├── ntm_scalar_deviation
-│       │   │   ├── ntm_design.sv
-│       │   │   └── ntm_testbench.sv
-│       │   └── ntm_scalar_mean
-│       │       ├── ntm_design.sv
-│       │       └── ntm_testbench.sv
-│       └── vector
-│           ├── ntm_vector_deviation
-│           │   ├── ntm_design.sv
-│           │   └── ntm_testbench.sv
-│           └── ntm_vector_mean
-│               ├── ntm_design.sv
-│               └── ntm_testbench.sv
+│   ├── matrix
+│   │   ├── ntm_matrix_deviation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_logistic_function
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_matrix_mean
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   └── ntm_matrix_oneplus_function
+│   │       ├── ntm_design.sv
+│   │       └── ntm_testbench.sv
+│   ├── scalar
+│   │   ├── ntm_scalar_deviation
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_scalar_logistic_function
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   ├── ntm_scalar_mean
+│   │   │   ├── ntm_design.sv
+│   │   │   └── ntm_testbench.sv
+│   │   └── ntm_scalar_oneplus_function
+│   │       ├── ntm_design.sv
+│   │       └── ntm_testbench.sv
+│   └── vector
+│       ├── ntm_vector_deviation
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_logistic_function
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       ├── ntm_vector_mean
+│       │   ├── ntm_design.sv
+│       │   └── ntm_testbench.sv
+│       └── ntm_vector_oneplus_function
+│           ├── ntm_design.sv
+│           └── ntm_testbench.sv
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -503,4 +494,4 @@ application
                 ├── ntm_design.sv
                 └── ntm_testbench.sv
 
-205 directories, 298 files
+196 directories, 298 files

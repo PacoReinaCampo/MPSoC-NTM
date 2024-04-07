@@ -1,8 +1,0 @@
-[package]
-name = "math-algebra-vector"
-version = "0.0.0"
-authors = []
-edition = "2021"
-
-[dependencies]
-math_algebra = { path = "../../../../library/math/algebra" }

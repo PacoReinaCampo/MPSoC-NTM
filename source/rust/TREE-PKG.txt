@@ -1,4 +1,14 @@
 library
+├── algebra
+│   └── src
+│       ├── matrix
+│       │   └── mod.rs
+│       ├── scalar
+│       │   └── mod.rs
+│       ├── tensor
+│       │   └── mod.rs
+│       └── vector
+│           └── mod.rs
 ├── arithmetic
 │   └── src
 │       ├── matrix
@@ -10,40 +20,13 @@ library
 │       └── vector
 │           └── mod.rs
 ├── math
-│   ├── algebra
-│   │   └── src
-│   │       ├── matrix
-│   │       │   └── mod.rs
-│   │       ├── scalar
-│   │       │   └── mod.rs
-│   │       ├── tensor
-│   │       │   └── mod.rs
-│   │       └── vector
-│   │           └── mod.rs
-│   ├── calculus
-│   │   └── src
-│   │       ├── matrix
-│   │       │   └── mod.rs
-│   │       ├── tensor
-│   │       │   └── mod.rs
-│   │       └── vector
-│   │           └── mod.rs
-│   ├── function
-│   │   └── src
-│   │       ├── matrix
-│   │       │   └── mod.rs
-│   │       ├── scalar
-│   │       │   └── mod.rs
-│   │       └── vector
-│   │           └── mod.rs
-│   └── statitics
-│       └── src
-│           ├── matrix
-│           │   └── mod.rs
-│           ├── scalar
-│           │   └── mod.rs
-│           └── vector
-│               └── mod.rs
+│   └── src
+│       ├── matrix
+│       │   └── mod.rs
+│       ├── scalar
+│       │   └── mod.rs
+│       └── vector
+│           └── mod.rs
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -82,4 +65,4 @@ library
         ├── input
         └── output
 
-62 directories, 20 files
+51 directories, 14 files

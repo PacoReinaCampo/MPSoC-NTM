@@ -1,4 +1,43 @@
 library
+├── algebra
+│   ├── matrix
+│   │   ├── ntm_matrix_convolution.psl
+│   │   ├── ntm_matrix_differentiation.psl
+│   │   ├── ntm_matrix_integration.psl
+│   │   ├── ntm_matrix_inverse.psl
+│   │   ├── ntm_matrix_multiplication.psl
+│   │   ├── ntm_matrix_product.psl
+│   │   ├── ntm_matrix_softmax.psl
+│   │   ├── ntm_matrix_summation.psl
+│   │   ├── ntm_matrix_transpose.psl
+│   │   ├── ntm_matrix_vector_convolution.psl
+│   │   ├── ntm_matrix_vector_product.psl
+│   │   └── ntm_transpose_vector_product.psl
+│   ├── scalar
+│   │   ├── ntm_scalar_multiplication.psl
+│   │   └── ntm_scalar_summation.psl
+│   ├── tensor
+│   │   ├── ntm_tensor_convolution.psl
+│   │   ├── ntm_tensor_differentiation.psl
+│   │   ├── ntm_tensor_integration.psl
+│   │   ├── ntm_tensor_inverse.psl
+│   │   ├── ntm_tensor_matrix_convolution.psl
+│   │   ├── ntm_tensor_matrix_product.psl
+│   │   ├── ntm_tensor_multiplication.psl
+│   │   ├── ntm_tensor_product.psl
+│   │   ├── ntm_tensor_softmax.psl
+│   │   ├── ntm_tensor_summation.psl
+│   │   └── ntm_tensor_transpose.psl
+│   └── vector
+│       ├── ntm_dot_product.psl
+│       ├── ntm_vector_convolution.psl
+│       ├── ntm_vector_cosine_similarity.psl
+│       ├── ntm_vector_differentiation.psl
+│       ├── ntm_vector_integration.psl
+│       ├── ntm_vector_module.psl
+│       ├── ntm_vector_multiplication.psl
+│       ├── ntm_vector_softmax.psl
+│       └── ntm_vector_summation.psl
 ├── arithmetic
 │   ├── matrix
 │   │   ├── ntm_matrix_adder.psl
@@ -21,69 +60,21 @@ library
 │       ├── ntm_vector_multiplier.psl
 │       └── ntm_vector_subtract.psl
 ├── math
-│   ├── algebra
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_convolution.psl
-│   │   │   ├── ntm_matrix_inverse.psl
-│   │   │   ├── ntm_matrix_multiplication.psl
-│   │   │   ├── ntm_matrix_product.psl
-│   │   │   ├── ntm_matrix_summation.psl
-│   │   │   ├── ntm_matrix_transpose.psl
-│   │   │   ├── ntm_matrix_vector_convolution.psl
-│   │   │   ├── ntm_matrix_vector_product.psl
-│   │   │   └── ntm_transpose_vector_product.psl
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_multiplication.psl
-│   │   │   └── ntm_scalar_summation.psl
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_convolution.psl
-│   │   │   ├── ntm_tensor_inverse.psl
-│   │   │   ├── ntm_tensor_matrix_convolution.psl
-│   │   │   ├── ntm_tensor_matrix_product.psl
-│   │   │   ├── ntm_tensor_multiplication.psl
-│   │   │   ├── ntm_tensor_product.psl
-│   │   │   ├── ntm_tensor_summation.psl
-│   │   │   └── ntm_tensor_transpose.psl
-│   │   └── vector
-│   │       ├── ntm_dot_product.psl
-│   │       ├── ntm_vector_convolution.psl
-│   │       ├── ntm_vector_cosine_similarity.psl
-│   │       ├── ntm_vector_module.psl
-│   │       ├── ntm_vector_multiplication.psl
-│   │       └── ntm_vector_summation.psl
-│   ├── calculus
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_differentiation.psl
-│   │   │   ├── ntm_matrix_integration.psl
-│   │   │   └── ntm_matrix_softmax.psl
-│   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.psl
-│   │   │   ├── ntm_tensor_integration.psl
-│   │   │   └── ntm_tensor_softmax.psl
-│   │   └── vector
-│   │       ├── ntm_vector_differentiation.psl
-│   │       ├── ntm_vector_integration.psl
-│   │       └── ntm_vector_softmax.psl
-│   ├── function
-│   │   ├── matrix
-│   │   │   ├── ntm_matrix_logistic_function.psl
-│   │   │   └── ntm_matrix_oneplus_function.psl
-│   │   ├── scalar
-│   │   │   ├── ntm_scalar_logistic_function.psl
-│   │   │   └── ntm_scalar_oneplus_function.psl
-│   │   └── vector
-│   │       ├── ntm_vector_logistic_function.psl
-│   │       └── ntm_vector_oneplus_function.psl
-│   └── statitics
-│       ├── matrix
-│       │   ├── ntm_matrix_deviation.psl
-│       │   └── ntm_matrix_mean.psl
-│       ├── scalar
-│       │   ├── ntm_scalar_deviation.psl
-│       │   └── ntm_scalar_mean.psl
-│       └── vector
-│           ├── ntm_vector_deviation.psl
-│           └── ntm_vector_mean.psl
+│   ├── matrix
+│   │   ├── ntm_matrix_deviation.psl
+│   │   ├── ntm_matrix_logistic_function.psl
+│   │   ├── ntm_matrix_mean.psl
+│   │   └── ntm_matrix_oneplus_function.psl
+│   ├── scalar
+│   │   ├── ntm_scalar_deviation.psl
+│   │   ├── ntm_scalar_logistic_function.psl
+│   │   ├── ntm_scalar_mean.psl
+│   │   └── ntm_scalar_oneplus_function.psl
+│   └── vector
+│       ├── ntm_vector_deviation.psl
+│       ├── ntm_vector_logistic_function.psl
+│       ├── ntm_vector_mean.psl
+│       └── ntm_vector_oneplus_function.psl
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -205,4 +196,4 @@ library
             ├── ntm_lstm_output_v_trainer.psl
             └── ntm_lstm_output_w_trainer.psl
 
-56 directories, 149 files
+47 directories, 149 files

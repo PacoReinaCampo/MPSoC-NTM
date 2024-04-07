@@ -1,7 +1,0 @@
-[package]
-name = "math_algebra"
-version = "0.0.0"
-authors = []
-edition = "2021"
-
-[dependencies]

@@ -1,4 +1,13 @@
 library
+├── algebra
+│   ├── matrix
+│   │   └── ntm_matrix_algebra.adb
+│   ├── scalar
+│   │   └── ntm_scalar_algebra.adb
+│   ├── tensor
+│   │   └── ntm_tensor_algebra.adb
+│   └── vector
+│       └── ntm_vector_algebra.adb
 ├── arithmetic
 │   ├── matrix
 │   │   └── ntm_matrix_arithmetic.adb
@@ -9,36 +18,12 @@ library
 │   └── vector
 │       └── ntm_vector_arithmetic.adb
 ├── math
-│   ├── algebra
-│   │   ├── matrix
-│   │   │   └── ntm_matrix_algebra.adb
-│   │   ├── scalar
-│   │   │   └── ntm_scalar_algebra.adb
-│   │   ├── tensor
-│   │   │   └── ntm_tensor_algebra.adb
-│   │   └── vector
-│   │       └── ntm_vector_algebra.adb
-│   ├── calculus
-│   │   ├── matrix
-│   │   │   └── ntm_matrix_calculus.adb
-│   │   ├── tensor
-│   │   │   └── ntm_tensor_calculus.adb
-│   │   └── vector
-│   │       └── ntm_vector_calculus.adb
-│   ├── function
-│   │   ├── matrix
-│   │   │   └── ntm_matrix_function.adb
-│   │   ├── scalar
-│   │   │   └── ntm_scalar_function.adb
-│   │   └── vector
-│   │       └── ntm_vector_function.adb
-│   └── statitics
-│       ├── matrix
-│       │   └── ntm_matrix_statitics.adb
-│       ├── scalar
-│       │   └── ntm_scalar_statitics.adb
-│       └── vector
-│           └── ntm_vector_statitics.adb
+│   ├── matrix
+│   │   └── ntm_matrix_math.adb
+│   ├── scalar
+│   │   └── ntm_scalar_math.adb
+│   └── vector
+│       └── ntm_vector_math.adb
 ├── nn
 │   ├── ANN
 │   │   ├── components
@@ -156,4 +141,4 @@ library
             ├── ntm_lstm_output_v_trainer.adb
             └── ntm_lstm_output_w_trainer.adb
 
-56 directories, 100 files
+47 directories, 94 files

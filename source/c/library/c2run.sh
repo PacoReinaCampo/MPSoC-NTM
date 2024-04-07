@@ -114,52 +114,52 @@ rm -rf dnc/top/dnc_interface_vector.run
 rm -rf dnc/top/dnc_output_vector.run
 rm -rf dnc/top/dnc_top.run
 rm -rf dnc/trained/dnc_trained_top.run
-rm -rf math/algebra/matrix/ntm_matrix_convolution.run
-rm -rf math/algebra/matrix/ntm_matrix_inverse.run
-rm -rf math/algebra/matrix/ntm_matrix_multiplication.run
-rm -rf math/algebra/matrix/ntm_matrix_product.run
-rm -rf math/algebra/matrix/ntm_matrix_summation.run
-rm -rf math/algebra/matrix/ntm_matrix_transpose.run
-rm -rf math/algebra/matrix/ntm_matrix_vector_convolution.run
-rm -rf math/algebra/matrix/ntm_matrix_vector_product.run
-rm -rf math/algebra/matrix/ntm_transpose_vector_product.run
-rm -rf math/algebra/scalar/ntm_scalar_multiplication.run
-rm -rf math/algebra/scalar/ntm_scalar_summation.run
-rm -rf math/algebra/tensor/ntm_tensor_convolution.run
-rm -rf math/algebra/tensor/ntm_tensor_inverse.run
-rm -rf math/algebra/tensor/ntm_tensor_matrix_convolution.run
-rm -rf math/algebra/tensor/ntm_tensor_matrix_product.run
-rm -rf math/algebra/tensor/ntm_tensor_multiplication.run
-rm -rf math/algebra/tensor/ntm_tensor_product.run
-rm -rf math/algebra/tensor/ntm_tensor_summation.run
-rm -rf math/algebra/tensor/ntm_tensor_transpose.run
-rm -rf math/algebra/vector/ntm_dot_product.run
-rm -rf math/algebra/vector/ntm_vector_convolution.run
-rm -rf math/algebra/vector/ntm_vector_cosine_similarity.run
-rm -rf math/algebra/vector/ntm_vector_module.run
-rm -rf math/algebra/vector/ntm_vector_multiplication.run
-rm -rf math/algebra/vector/ntm_vector_summation.run
-rm -rf math/calculus/matrix/ntm_matrix_differentiation.run
-rm -rf math/calculus/matrix/ntm_matrix_integration.run
-rm -rf math/calculus/matrix/ntm_matrix_softmax.run
-rm -rf math/calculus/tensor/ntm_tensor_differentiation.run
-rm -rf math/calculus/tensor/ntm_tensor_integration.run
-rm -rf math/calculus/tensor/ntm_tensor_softmax.run
-rm -rf math/calculus/vector/ntm_vector_differentiation.run
-rm -rf math/calculus/vector/ntm_vector_integration.run
-rm -rf math/calculus/vector/ntm_vector_softmax.run
-rm -rf math/function/matrix/ntm_matrix_logistic_function.run
-rm -rf math/function/matrix/ntm_matrix_oneplus_function.run
-rm -rf math/function/scalar/ntm_scalar_logistic_function.run
-rm -rf math/function/scalar/ntm_scalar_oneplus_function.run
-rm -rf math/function/vector/ntm_vector_logistic_function.run
-rm -rf math/function/vector/ntm_vector_oneplus_function.run
-rm -rf math/statitics/matrix/ntm_matrix_deviation.run
-rm -rf math/statitics/matrix/ntm_matrix_mean.run
-rm -rf math/statitics/scalar/ntm_scalar_deviation.run
-rm -rf math/statitics/scalar/ntm_scalar_mean.run
-rm -rf math/statitics/vector/ntm_vector_deviation.run
-rm -rf math/statitics/vector/ntm_vector_mean.run
+rm -rf algebra/matrix/ntm_matrix_convolution.run
+rm -rf algebra/matrix/ntm_matrix_inverse.run
+rm -rf algebra/matrix/ntm_matrix_multiplication.run
+rm -rf algebra/matrix/ntm_matrix_product.run
+rm -rf algebra/matrix/ntm_matrix_summation.run
+rm -rf algebra/matrix/ntm_matrix_transpose.run
+rm -rf algebra/matrix/ntm_matrix_vector_convolution.run
+rm -rf algebra/matrix/ntm_matrix_vector_product.run
+rm -rf algebra/matrix/ntm_transpose_vector_product.run
+rm -rf algebra/scalar/ntm_scalar_multiplication.run
+rm -rf algebra/scalar/ntm_scalar_summation.run
+rm -rf algebra/tensor/ntm_tensor_convolution.run
+rm -rf algebra/tensor/ntm_tensor_inverse.run
+rm -rf algebra/tensor/ntm_tensor_matrix_convolution.run
+rm -rf algebra/tensor/ntm_tensor_matrix_product.run
+rm -rf algebra/tensor/ntm_tensor_multiplication.run
+rm -rf algebra/tensor/ntm_tensor_product.run
+rm -rf algebra/tensor/ntm_tensor_summation.run
+rm -rf algebra/tensor/ntm_tensor_transpose.run
+rm -rf algebra/vector/ntm_dot_product.run
+rm -rf algebra/vector/ntm_vector_convolution.run
+rm -rf algebra/vector/ntm_vector_cosine_similarity.run
+rm -rf algebra/vector/ntm_vector_module.run
+rm -rf algebra/vector/ntm_vector_multiplication.run
+rm -rf algebra/vector/ntm_vector_summation.run
+rm -rf algebra/matrix/ntm_matrix_differentiation.run
+rm -rf algebra/matrix/ntm_matrix_integration.run
+rm -rf algebra/matrix/ntm_matrix_softmax.run
+rm -rf algebra/tensor/ntm_tensor_differentiation.run
+rm -rf algebra/tensor/ntm_tensor_integration.run
+rm -rf algebra/tensor/ntm_tensor_softmax.run
+rm -rf algebra/vector/ntm_vector_differentiation.run
+rm -rf algebra/vector/ntm_vector_integration.run
+rm -rf algebra/vector/ntm_vector_softmax.run
+rm -rf math/matrix/ntm_matrix_logistic_function.run
+rm -rf math/matrix/ntm_matrix_oneplus_function.run
+rm -rf math/scalar/ntm_scalar_logistic_function.run
+rm -rf math/scalar/ntm_scalar_oneplus_function.run
+rm -rf math/vector/ntm_vector_logistic_function.run
+rm -rf math/vector/ntm_vector_oneplus_function.run
+rm -rf math/matrix/ntm_matrix_deviation.run
+rm -rf math/matrix/ntm_matrix_mean.run
+rm -rf math/scalar/ntm_scalar_deviation.run
+rm -rf math/scalar/ntm_scalar_mean.run
+rm -rf math/vector/ntm_vector_deviation.run
+rm -rf math/vector/ntm_vector_mean.run
 rm -rf ntm/memory/ntm_addressing.run
 rm -rf ntm/memory/ntm_matrix_content_based_addressing.run
 rm -rf ntm/memory/ntm_vector_content_based_addressing.run
@@ -290,52 +290,52 @@ gcc dnc/top/dnc_interface_vector.c -o dnc/top/dnc_interface_vector.run
 gcc dnc/top/dnc_output_vector.c -o dnc/top/dnc_output_vector.run
 gcc dnc/top/dnc_top.c -o dnc/top/dnc_top.run
 gcc dnc/trained/dnc_trained_top.c -o dnc/trained/dnc_trained_top.run
-gcc math/algebra/matrix/ntm_matrix_convolution.c -o math/algebra/matrix/ntm_matrix_convolution.run
-gcc math/algebra/matrix/ntm_matrix_inverse.c -o math/algebra/matrix/ntm_matrix_inverse.run
-gcc math/algebra/matrix/ntm_matrix_multiplication.c -o math/algebra/matrix/ntm_matrix_multiplication.run
-gcc math/algebra/matrix/ntm_matrix_product.c -o math/algebra/matrix/ntm_matrix_product.run
-gcc math/algebra/matrix/ntm_matrix_summation.c -o math/algebra/matrix/ntm_matrix_summation.run
-gcc math/algebra/matrix/ntm_matrix_transpose.c -o math/algebra/matrix/ntm_matrix_transpose.run
-gcc math/algebra/matrix/ntm_matrix_vector_convolution.c -o math/algebra/matrix/ntm_matrix_vector_convolution.run
-gcc math/algebra/matrix/ntm_matrix_vector_product.c -o math/algebra/matrix/ntm_matrix_vector_product.run
-gcc math/algebra/matrix/ntm_transpose_vector_product.c -o math/algebra/matrix/ntm_transpose_vector_product.run
-gcc math/algebra/scalar/ntm_scalar_multiplication.c -o math/algebra/scalar/ntm_scalar_multiplication.run
-gcc math/algebra/scalar/ntm_scalar_summation.c -o math/algebra/scalar/ntm_scalar_summation.run
-gcc math/algebra/tensor/ntm_tensor_convolution.c -o math/algebra/tensor/ntm_tensor_convolution.run
-gcc math/algebra/tensor/ntm_tensor_inverse.c -o math/algebra/tensor/ntm_tensor_inverse.run
-gcc math/algebra/tensor/ntm_tensor_matrix_convolution.c -o math/algebra/tensor/ntm_tensor_matrix_convolution.run
-gcc math/algebra/tensor/ntm_tensor_matrix_product.c -o math/algebra/tensor/ntm_tensor_matrix_product.run
-gcc math/algebra/tensor/ntm_tensor_multiplication.c -o math/algebra/tensor/ntm_tensor_multiplication.run
-gcc math/algebra/tensor/ntm_tensor_product.c -o math/algebra/tensor/ntm_tensor_product.run
-gcc math/algebra/tensor/ntm_tensor_summation.c -o math/algebra/tensor/ntm_tensor_summation.run
-gcc math/algebra/tensor/ntm_tensor_transpose.c -o math/algebra/tensor/ntm_tensor_transpose.run
-gcc math/algebra/vector/ntm_dot_product.c -o math/algebra/vector/ntm_dot_product.run
-gcc math/algebra/vector/ntm_vector_convolution.c -o math/algebra/vector/ntm_vector_convolution.run
-gcc math/algebra/vector/ntm_vector_cosine_similarity.c -o math/algebra/vector/ntm_vector_cosine_similarity.run
-gcc math/algebra/vector/ntm_vector_module.c -o math/algebra/vector/ntm_vector_module.run
-gcc math/algebra/vector/ntm_vector_multiplication.c -o math/algebra/vector/ntm_vector_multiplication.run
-gcc math/algebra/vector/ntm_vector_summation.c -o math/algebra/vector/ntm_vector_summation.run
-gcc math/calculus/matrix/ntm_matrix_differentiation.c -o math/calculus/matrix/ntm_matrix_differentiation.run
-gcc math/calculus/matrix/ntm_matrix_integration.c -o math/calculus/matrix/ntm_matrix_integration.run
-gcc math/calculus/matrix/ntm_matrix_softmax.c -o math/calculus/matrix/ntm_matrix_softmax.run
-gcc math/calculus/tensor/ntm_tensor_differentiation.c -o math/calculus/tensor/ntm_tensor_differentiation.run
-gcc math/calculus/tensor/ntm_tensor_integration.c -o math/calculus/tensor/ntm_tensor_integration.run
-gcc math/calculus/tensor/ntm_tensor_softmax.c -o math/calculus/tensor/ntm_tensor_softmax.run
-gcc math/calculus/vector/ntm_vector_differentiation.c -o math/calculus/vector/ntm_vector_differentiation.run
-gcc math/calculus/vector/ntm_vector_integration.c -o math/calculus/vector/ntm_vector_integration.run
-gcc math/calculus/vector/ntm_vector_softmax.c -o math/calculus/vector/ntm_vector_softmax.run
-gcc math/function/matrix/ntm_matrix_logistic_function.c -lm -o math/function/matrix/ntm_matrix_logistic_function.run
-gcc math/function/matrix/ntm_matrix_oneplus_function.c -lm -o math/function/matrix/ntm_matrix_oneplus_function.run
-gcc math/function/scalar/ntm_scalar_logistic_function.c -lm -o math/function/scalar/ntm_scalar_logistic_function.run
-gcc math/function/scalar/ntm_scalar_oneplus_function.c -lm -o math/function/scalar/ntm_scalar_oneplus_function.run
-gcc math/function/vector/ntm_vector_logistic_function.c -lm -o math/function/vector/ntm_vector_logistic_function.run
-gcc math/function/vector/ntm_vector_oneplus_function.c -lm -o math/function/vector/ntm_vector_oneplus_function.run
-gcc math/statitics/matrix/ntm_matrix_deviation.c -o math/statitics/matrix/ntm_matrix_deviation.run
-gcc math/statitics/matrix/ntm_matrix_mean.c -o math/statitics/matrix/ntm_matrix_mean.run
-gcc math/statitics/scalar/ntm_scalar_deviation.c -o math/statitics/scalar/ntm_scalar_deviation.run
-gcc math/statitics/scalar/ntm_scalar_mean.c -o math/statitics/scalar/ntm_scalar_mean.run
-gcc math/statitics/vector/ntm_vector_deviation.c -o math/statitics/vector/ntm_vector_deviation.run
-gcc math/statitics/vector/ntm_vector_mean.c -o math/statitics/vector/ntm_vector_mean.run
+gcc algebra/matrix/ntm_matrix_convolution.c -o algebra/matrix/ntm_matrix_convolution.run
+gcc algebra/matrix/ntm_matrix_inverse.c -o algebra/matrix/ntm_matrix_inverse.run
+gcc algebra/matrix/ntm_matrix_multiplication.c -o algebra/matrix/ntm_matrix_multiplication.run
+gcc algebra/matrix/ntm_matrix_product.c -o algebra/matrix/ntm_matrix_product.run
+gcc algebra/matrix/ntm_matrix_summation.c -o algebra/matrix/ntm_matrix_summation.run
+gcc algebra/matrix/ntm_matrix_transpose.c -o algebra/matrix/ntm_matrix_transpose.run
+gcc algebra/matrix/ntm_matrix_vector_convolution.c -o algebra/matrix/ntm_matrix_vector_convolution.run
+gcc algebra/matrix/ntm_matrix_vector_product.c -o algebra/matrix/ntm_matrix_vector_product.run
+gcc algebra/matrix/ntm_transpose_vector_product.c -o algebra/matrix/ntm_transpose_vector_product.run
+gcc algebra/scalar/ntm_scalar_multiplication.c -o algebra/scalar/ntm_scalar_multiplication.run
+gcc algebra/scalar/ntm_scalar_summation.c -o algebra/scalar/ntm_scalar_summation.run
+gcc algebra/tensor/ntm_tensor_convolution.c -o algebra/tensor/ntm_tensor_convolution.run
+gcc algebra/tensor/ntm_tensor_inverse.c -o algebra/tensor/ntm_tensor_inverse.run
+gcc algebra/tensor/ntm_tensor_matrix_convolution.c -o algebra/tensor/ntm_tensor_matrix_convolution.run
+gcc algebra/tensor/ntm_tensor_matrix_product.c -o algebra/tensor/ntm_tensor_matrix_product.run
+gcc algebra/tensor/ntm_tensor_multiplication.c -o algebra/tensor/ntm_tensor_multiplication.run
+gcc algebra/tensor/ntm_tensor_product.c -o algebra/tensor/ntm_tensor_product.run
+gcc algebra/tensor/ntm_tensor_summation.c -o algebra/tensor/ntm_tensor_summation.run
+gcc algebra/tensor/ntm_tensor_transpose.c -o algebra/tensor/ntm_tensor_transpose.run
+gcc algebra/vector/ntm_dot_product.c -o algebra/vector/ntm_dot_product.run
+gcc algebra/vector/ntm_vector_convolution.c -o algebra/vector/ntm_vector_convolution.run
+gcc algebra/vector/ntm_vector_cosine_similarity.c -o algebra/vector/ntm_vector_cosine_similarity.run
+gcc algebra/vector/ntm_vector_module.c -o algebra/vector/ntm_vector_module.run
+gcc algebra/vector/ntm_vector_multiplication.c -o algebra/vector/ntm_vector_multiplication.run
+gcc algebra/vector/ntm_vector_summation.c -o algebra/vector/ntm_vector_summation.run
+gcc algebra/matrix/ntm_matrix_differentiation.c -o algebra/matrix/ntm_matrix_differentiation.run
+gcc algebra/matrix/ntm_matrix_integration.c -o algebra/matrix/ntm_matrix_integration.run
+gcc algebra/matrix/ntm_matrix_softmax.c -o algebra/matrix/ntm_matrix_softmax.run
+gcc algebra/tensor/ntm_tensor_differentiation.c -o algebra/tensor/ntm_tensor_differentiation.run
+gcc algebra/tensor/ntm_tensor_integration.c -o algebra/tensor/ntm_tensor_integration.run
+gcc algebra/tensor/ntm_tensor_softmax.c -o algebra/tensor/ntm_tensor_softmax.run
+gcc algebra/vector/ntm_vector_differentiation.c -o algebra/vector/ntm_vector_differentiation.run
+gcc algebra/vector/ntm_vector_integration.c -o algebra/vector/ntm_vector_integration.run
+gcc algebra/vector/ntm_vector_softmax.c -o algebra/vector/ntm_vector_softmax.run
+gcc math/matrix/ntm_matrix_logistic_function.c -lm -o math/matrix/ntm_matrix_logistic_function.run
+gcc math/matrix/ntm_matrix_oneplus_function.c -lm -o math/matrix/ntm_matrix_oneplus_function.run
+gcc math/scalar/ntm_scalar_logistic_function.c -lm -o math/scalar/ntm_scalar_logistic_function.run
+gcc math/scalar/ntm_scalar_oneplus_function.c -lm -o math/scalar/ntm_scalar_oneplus_function.run
+gcc math/vector/ntm_vector_logistic_function.c -lm -o math/vector/ntm_vector_logistic_function.run
+gcc math/vector/ntm_vector_oneplus_function.c -lm -o math/vector/ntm_vector_oneplus_function.run
+gcc math/matrix/ntm_matrix_deviation.c -o math/matrix/ntm_matrix_deviation.run
+gcc math/matrix/ntm_matrix_mean.c -o math/matrix/ntm_matrix_mean.run
+gcc math/scalar/ntm_scalar_deviation.c -o math/scalar/ntm_scalar_deviation.run
+gcc math/scalar/ntm_scalar_mean.c -o math/scalar/ntm_scalar_mean.run
+gcc math/vector/ntm_vector_deviation.c -o math/vector/ntm_vector_deviation.run
+gcc math/vector/ntm_vector_mean.c -o math/vector/ntm_vector_mean.run
 gcc ntm/memory/ntm_addressing.c -o ntm/memory/ntm_addressing.run
 gcc ntm/memory/ntm_matrix_content_based_addressing.c -o ntm/memory/ntm_matrix_content_based_addressing.run
 gcc ntm/memory/ntm_vector_content_based_addressing.c -o ntm/memory/ntm_vector_content_based_addressing.run

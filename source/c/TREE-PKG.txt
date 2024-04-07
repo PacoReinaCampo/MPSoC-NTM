@@ -1,4 +1,10 @@
 library
+├── algebra
+│   ├── ntm_algebra.h
+│   ├── matrix
+│   ├── scalar
+│   ├── tensor
+│   └── vector
 ├── arithmetic
 │   ├── ntm_arithmetic.h
 │   ├── matrix
@@ -6,27 +12,10 @@ library
 │   ├── tensor
 │   └── vector
 ├── math
-│   ├── algebra
-│   │   ├── ntm_math_algebra.h
-│   │   ├── matrix
-│   │   ├── scalar
-│   │   ├── tensor
-│   │   └── vector
-│   ├── calculus
-│   │   ├── ntm_math_calculus.h
-│   │   ├── matrix
-│   │   ├── tensor
-│   │   └── vector
-│   ├── function
-│   │   ├── ntm_math_function.h
-│   │   ├── matrix
-│   │   ├── scalar
-│   │   └── vector
-│   └── statitics
-│       ├── ntm_math_statitics.h
-│       ├── matrix
-│       ├── scalar
-│       └── vector
+│   ├── ntm_math.h
+│   ├── matrix
+│   ├── scalar
+│   └── vector
 ├── nn
 │   ├── ntm_controller.h
 │   ├── ANN
@@ -65,4 +54,4 @@ library
         ├── input
         └── output
 
-56 directories, 9 files
+47 directories, 7 files

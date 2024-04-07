@@ -97,52 +97,52 @@ rm -rf dnc/top/dnc_interface_vector.run
 rm -rf dnc/top/dnc_output_vector.run
 rm -rf dnc/top/dnc_top.run
 rm -rf dnc/trained/dnc_trained_top.run
-rm -rf math/algebra/matrix/ntm_matrix_convolution.run
-rm -rf math/algebra/matrix/ntm_matrix_inverse.run
-rm -rf math/algebra/matrix/ntm_matrix_multiplication.run
-rm -rf math/algebra/matrix/ntm_matrix_product.run
-rm -rf math/algebra/matrix/ntm_matrix_summation.run
-rm -rf math/algebra/matrix/ntm_matrix_transpose.run
-rm -rf math/algebra/matrix/ntm_matrix_vector_convolution.run
-rm -rf math/algebra/matrix/ntm_matrix_vector_product.run
-rm -rf math/algebra/matrix/ntm_transpose_vector_product.run
-rm -rf math/algebra/scalar/ntm_scalar_multiplication.run
-rm -rf math/algebra/scalar/ntm_scalar_summation.run
-rm -rf math/algebra/tensor/ntm_tensor_convolution.run
-rm -rf math/algebra/tensor/ntm_tensor_inverse.run
-rm -rf math/algebra/tensor/ntm_tensor_matrix_convolution.run
-rm -rf math/algebra/tensor/ntm_tensor_matrix_product.run
-rm -rf math/algebra/tensor/ntm_tensor_multiplication.run
-rm -rf math/algebra/tensor/ntm_tensor_product.run
-rm -rf math/algebra/tensor/ntm_tensor_summation.run
-rm -rf math/algebra/tensor/ntm_tensor_transpose.run
-rm -rf math/algebra/vector/ntm_dot_product.run
-rm -rf math/algebra/vector/ntm_vector_convolution.run
-rm -rf math/algebra/vector/ntm_vector_cosine_similarity.run
-rm -rf math/algebra/vector/ntm_vector_module.run
-rm -rf math/algebra/vector/ntm_vector_multiplication.run
-rm -rf math/algebra/vector/ntm_vector_summation.run
-rm -rf math/calculus/matrix/ntm_matrix_differentiation.run
-rm -rf math/calculus/matrix/ntm_matrix_integration.run
-rm -rf math/calculus/matrix/ntm_matrix_softmax.run
-rm -rf math/calculus/tensor/ntm_tensor_differentiation.run
-rm -rf math/calculus/tensor/ntm_tensor_integration.run
-rm -rf math/calculus/tensor/ntm_tensor_softmax.run
-rm -rf math/calculus/vector/ntm_vector_differentiation.run
-rm -rf math/calculus/vector/ntm_vector_integration.run
-rm -rf math/calculus/vector/ntm_vector_softmax.run
-rm -rf math/function/matrix/ntm_matrix_logistic_function.run
-rm -rf math/function/matrix/ntm_matrix_oneplus_function.run
-rm -rf math/function/scalar/ntm_scalar_logistic_function.run
-rm -rf math/function/scalar/ntm_scalar_oneplus_function.run
-rm -rf math/function/vector/ntm_vector_logistic_function.run
-rm -rf math/function/vector/ntm_vector_oneplus_function.run
-rm -rf math/statitics/matrix/ntm_matrix_deviation.run
-rm -rf math/statitics/matrix/ntm_matrix_mean.run
-rm -rf math/statitics/scalar/ntm_scalar_deviation.run
-rm -rf math/statitics/scalar/ntm_scalar_mean.run
-rm -rf math/statitics/vector/ntm_vector_deviation.run
-rm -rf math/statitics/vector/ntm_vector_mean.run
+rm -rf algebra/matrix/ntm_matrix_convolution.run
+rm -rf algebra/matrix/ntm_matrix_inverse.run
+rm -rf algebra/matrix/ntm_matrix_multiplication.run
+rm -rf algebra/matrix/ntm_matrix_product.run
+rm -rf algebra/matrix/ntm_matrix_summation.run
+rm -rf algebra/matrix/ntm_matrix_transpose.run
+rm -rf algebra/matrix/ntm_matrix_vector_convolution.run
+rm -rf algebra/matrix/ntm_matrix_vector_product.run
+rm -rf algebra/matrix/ntm_transpose_vector_product.run
+rm -rf algebra/scalar/ntm_scalar_multiplication.run
+rm -rf algebra/scalar/ntm_scalar_summation.run
+rm -rf algebra/tensor/ntm_tensor_convolution.run
+rm -rf algebra/tensor/ntm_tensor_inverse.run
+rm -rf algebra/tensor/ntm_tensor_matrix_convolution.run
+rm -rf algebra/tensor/ntm_tensor_matrix_product.run
+rm -rf algebra/tensor/ntm_tensor_multiplication.run
+rm -rf algebra/tensor/ntm_tensor_product.run
+rm -rf algebra/tensor/ntm_tensor_summation.run
+rm -rf algebra/tensor/ntm_tensor_transpose.run
+rm -rf algebra/vector/ntm_dot_product.run
+rm -rf algebra/vector/ntm_vector_convolution.run
+rm -rf algebra/vector/ntm_vector_cosine_similarity.run
+rm -rf algebra/vector/ntm_vector_module.run
+rm -rf algebra/vector/ntm_vector_multiplication.run
+rm -rf algebra/vector/ntm_vector_summation.run
+rm -rf algebra/matrix/ntm_matrix_differentiation.run
+rm -rf algebra/matrix/ntm_matrix_integration.run
+rm -rf algebra/matrix/ntm_matrix_softmax.run
+rm -rf algebra/tensor/ntm_tensor_differentiation.run
+rm -rf algebra/tensor/ntm_tensor_integration.run
+rm -rf algebra/tensor/ntm_tensor_softmax.run
+rm -rf algebra/vector/ntm_vector_differentiation.run
+rm -rf algebra/vector/ntm_vector_integration.run
+rm -rf algebra/vector/ntm_vector_softmax.run
+rm -rf math/matrix/ntm_matrix_logistic_function.run
+rm -rf math/matrix/ntm_matrix_oneplus_function.run
+rm -rf math/scalar/ntm_scalar_logistic_function.run
+rm -rf math/scalar/ntm_scalar_oneplus_function.run
+rm -rf math/vector/ntm_vector_logistic_function.run
+rm -rf math/vector/ntm_vector_oneplus_function.run
+rm -rf math/matrix/ntm_matrix_deviation.run
+rm -rf math/matrix/ntm_matrix_mean.run
+rm -rf math/scalar/ntm_scalar_deviation.run
+rm -rf math/scalar/ntm_scalar_mean.run
+rm -rf math/vector/ntm_vector_deviation.run
+rm -rf math/vector/ntm_vector_mean.run
 rm -rf ntm/memory/ntm_addressing.run
 rm -rf ntm/memory/ntm_matrix_content_based_addressing.run
 rm -rf ntm/memory/ntm_vector_content_based_addressing.run
@@ -271,52 +271,52 @@ g++ arithmetic/vector/subtractor/ntm_vector_subtractor_testbench.cpp arithmetic/
 #g++ dnc/top/dnc_output_vector_testbench.cpp dnc/top/dnc_output_vector_design.cpp -o dnc/top/dnc_output_vector.run -lsystemc
 #g++ dnc/top/dnc_top_testbench.cpp dnc/top/dnc_top_design.cpp -o dnc/top/dnc_top.run -lsystemc
 #g++ dnc/trained/dnc_trained_top_testbench.cpp dnc/trained/dnc_trained_top_design.cpp -o dnc/trained/dnc_trained_top.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_convolution_testbench.cpp math/algebra/matrix/ntm_matrix_convolution_design.cpp -o math/algebra/matrix/ntm_matrix_convolution.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_inverse_testbench.cpp math/algebra/matrix/ntm_matrix_inverse_design.cpp -o math/algebra/matrix/ntm_matrix_inverse.run -lsystemc
-#g++ math/algebra/matrix/ntm_matrix_multiplication_testbench.cpp math/algebra/matrix/ntm_matrix_multiplication_design.cpp -o math/algebra/matrix/ntm_matrix_multiplication.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_product_testbench.cpp math/algebra/matrix/ntm_matrix_product_design.cpp -o math/algebra/matrix/ntm_matrix_product.run -lsystemc
-#g++ math/algebra/matrix/ntm_matrix_summation_testbench.cpp math/algebra/matrix/ntm_matrix_summation_design.cpp -o math/algebra/matrix/ntm_matrix_summation.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_transpose_testbench.cpp math/algebra/matrix/ntm_matrix_transpose_design.cpp -o math/algebra/matrix/ntm_matrix_transpose.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_vector_convolution_testbench.cpp math/algebra/matrix/ntm_matrix_vector_convolution_design.cpp -o math/algebra/matrix/ntm_matrix_vector_convolution.run -lsystemc
-g++ math/algebra/matrix/ntm_matrix_vector_product_testbench.cpp math/algebra/matrix/ntm_matrix_vector_product_design.cpp -o math/algebra/matrix/ntm_matrix_vector_product.run -lsystemc
-g++ math/algebra/matrix/ntm_transpose_vector_product_testbench.cpp math/algebra/matrix/ntm_transpose_vector_product_design.cpp -o math/algebra/matrix/ntm_transpose_vector_product.run -lsystemc
-#g++ math/algebra/scalar/ntm_scalar_multiplication_testbench.cpp math/algebra/scalar/ntm_scalar_multiplication_design.cpp -o math/algebra/scalar/ntm_scalar_multiplication.run -lsystemc
-#g++ math/algebra/scalar/ntm_scalar_summation_testbench.cpp math/algebra/scalar/ntm_scalar_summation_design.cpp -o math/algebra/scalar/ntm_scalar_summation.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_convolution_testbench.cpp math/algebra/tensor/ntm_tensor_convolution_design.cpp -o math/algebra/tensor/ntm_tensor_convolution.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_inverse_testbench.cpp math/algebra/tensor/ntm_tensor_inverse_design.cpp -o math/algebra/tensor/ntm_tensor_inverse.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_matrix_convolution_testbench.cpp math/algebra/tensor/ntm_tensor_matrix_convolution_design.cpp -o math/algebra/tensor/ntm_tensor_matrix_convolution.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_matrix_product_testbench.cpp math/algebra/tensor/ntm_tensor_matrix_product_design.cpp -o math/algebra/tensor/ntm_tensor_matrix_product.run -lsystemc
-#g++ math/algebra/tensor/ntm_tensor_multiplication_testbench.cpp math/algebra/tensor/ntm_tensor_multiplication_design.cpp -o math/algebra/tensor/ntm_tensor_multiplication.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_product_testbench.cpp math/algebra/tensor/ntm_tensor_product_design.cpp -o math/algebra/tensor/ntm_tensor_product.run -lsystemc
-#g++ math/algebra/tensor/ntm_tensor_summation_testbench.cpp math/algebra/tensor/ntm_tensor_summation_design.cpp -o math/algebra/tensor/ntm_tensor_summation.run -lsystemc
-g++ math/algebra/tensor/ntm_tensor_transpose_testbench.cpp math/algebra/tensor/ntm_tensor_transpose_design.cpp -o math/algebra/tensor/ntm_tensor_transpose.run -lsystemc
-g++ math/algebra/vector/ntm_dot_product_testbench.cpp math/algebra/vector/ntm_dot_product_design.cpp -o math/algebra/vector/ntm_dot_product.run -lsystemc
-g++ math/algebra/vector/ntm_vector_convolution_testbench.cpp math/algebra/vector/ntm_vector_convolution_design.cpp -o math/algebra/vector/ntm_vector_convolution.run -lsystemc
-#g++ math/algebra/vector/ntm_vector_cosine_similarity_testbench.cpp math/algebra/vector/ntm_vector_cosine_similarity_design.cpp -o math/algebra/vector/ntm_vector_cosine_similarity.run -lsystemc
-g++ math/algebra/vector/ntm_vector_module_testbench.cpp math/algebra/vector/ntm_vector_module_design.cpp -o math/algebra/vector/ntm_vector_module.run -lsystemc
-#g++ math/algebra/vector/ntm_vector_multiplication_testbench.cpp math/algebra/vector/ntm_vector_multiplication_design.cpp -o math/algebra/vector/ntm_vector_multiplication.run -lsystemc
-#g++ math/algebra/vector/ntm_vector_summation_testbench.cpp math/algebra/vector/ntm_vector_summation_design.cpp -o math/algebra/vector/ntm_vector_summation.run -lsystemc
-#g++ math/calculus/matrix/ntm_matrix_differentiation_testbench.cpp math/calculus/matrix/ntm_matrix_differentiation_design.cpp -o math/calculus/matrix/ntm_matrix_differentiation.run -lsystemc
-#g++ math/calculus/matrix/ntm_matrix_integration_testbench.cpp math/calculus/matrix/ntm_matrix_integration_design.cpp -o math/calculus/matrix/ntm_matrix_integration.run -lsystemc
-#g++ math/calculus/matrix/ntm_matrix_softmax_testbench.cpp math/calculus/matrix/ntm_matrix_softmax_design.cpp -o math/calculus/matrix/ntm_matrix_softmax.run -lsystemc
-#g++ math/calculus/tensor/ntm_tensor_differentiation_testbench.cpp math/calculus/tensor/ntm_tensor_differentiation_design.cpp -o math/calculus/tensor/ntm_tensor_differentiation.run -lsystemc
-#g++ math/calculus/tensor/ntm_tensor_integration_testbench.cpp math/calculus/tensor/ntm_tensor_integration_design.cpp -o math/calculus/tensor/ntm_tensor_integration.run -lsystemc
-#g++ math/calculus/tensor/ntm_tensor_softmax_testbench.cpp math/calculus/tensor/ntm_tensor_softmax_design.cpp -o math/calculus/tensor/ntm_tensor_softmax.run -lsystemc
-#g++ math/calculus/vector/ntm_vector_differentiation_testbench.cpp math/calculus/vector/ntm_vector_differentiation_design.cpp -o math/calculus/vector/ntm_vector_differentiation.run -lsystemc
-#g++ math/calculus/vector/ntm_vector_integration_testbench.cpp math/calculus/vector/ntm_vector_integration_design.cpp -o math/calculus/vector/ntm_vector_integration.run -lsystemc
-#g++ math/calculus/vector/ntm_vector_softmax_testbench.cpp math/calculus/vector/ntm_vector_softmax_design.cpp -o math/calculus/vector/ntm_vector_softmax.run -lsystemc
-#g++ math/function/matrix/ntm_matrix_logistic_function_testbench.cpp math/function/matrix/ntm_matrix_logistic_function_design.cpp -o math/function/matrix/ntm_matrix_logistic_function.run -lsystemc
-#g++ math/function/matrix/ntm_matrix_oneplus_function_testbench.cpp math/function/matrix/ntm_matrix_oneplus_function_design.cpp -o math/function/matrix/ntm_matrix_oneplus_function.run -lsystemc
-#g++ math/function/scalar/ntm_scalar_logistic_function_testbench.cpp math/function/scalar/ntm_scalar_logistic_function_design.cpp -o math/function/scalar/ntm_scalar_logistic_function.run -lsystemc
-#g++ math/function/scalar/ntm_scalar_oneplus_function_testbench.cpp math/function/scalar/ntm_scalar_oneplus_function_design.cpp -o math/function/scalar/ntm_scalar_oneplus_function.run -lsystemc
-#g++ math/function/vector/ntm_vector_logistic_function_testbench.cpp math/function/vector/ntm_vector_logistic_function_design.cpp -o math/function/vector/ntm_vector_logistic_function.run -lsystemc
-#g++ math/function/vector/ntm_vector_oneplus_function_testbench.cpp math/function/vector/ntm_vector_oneplus_function_design.cpp -o math/function/vector/ntm_vector_oneplus_function.run -lsystemc
-#g++ math/statitics/matrix/ntm_matrix_deviation_testbench.cpp math/statitics/matrix/ntm_matrix_deviation_design.cpp -o math/statitics/matrix/ntm_matrix_deviation.run -lsystemc
-#g++ math/statitics/matrix/ntm_matrix_mean_testbench.cpp math/statitics/matrix/ntm_matrix_mean_design.cpp -o math/statitics/matrix/ntm_matrix_mean.run -lsystemc
-#g++ math/statitics/scalar/ntm_scalar_deviation_testbench.cpp math/statitics/scalar/ntm_scalar_deviation_design.cpp -o math/statitics/scalar/ntm_scalar_deviation.run -lsystemc
-#g++ math/statitics/scalar/ntm_scalar_mean_testbench.cpp math/statitics/scalar/ntm_scalar_mean_design.cpp -o math/statitics/scalar/ntm_scalar_mean.run -lsystemc
-#g++ math/statitics/vector/ntm_vector_deviation_testbench.cpp math/statitics/vector/ntm_vector_deviation_design.cpp -o math/statitics/vector/ntm_vector_deviation.run -lsystemc
-#g++ math/statitics/vector/ntm_vector_mean_testbench.cpp math/statitics/vector/ntm_vector_mean_design.cpp -o math/statitics/vector/ntm_vector_mean.run -lsystemc
+g++ algebra/matrix/ntm_matrix_convolution_testbench.cpp algebra/matrix/ntm_matrix_convolution_design.cpp -o algebra/matrix/ntm_matrix_convolution.run -lsystemc
+g++ algebra/matrix/ntm_matrix_inverse_testbench.cpp algebra/matrix/ntm_matrix_inverse_design.cpp -o algebra/matrix/ntm_matrix_inverse.run -lsystemc
+#g++ algebra/matrix/ntm_matrix_multiplication_testbench.cpp algebra/matrix/ntm_matrix_multiplication_design.cpp -o algebra/matrix/ntm_matrix_multiplication.run -lsystemc
+g++ algebra/matrix/ntm_matrix_product_testbench.cpp algebra/matrix/ntm_matrix_product_design.cpp -o algebra/matrix/ntm_matrix_product.run -lsystemc
+#g++ algebra/matrix/ntm_matrix_summation_testbench.cpp algebra/matrix/ntm_matrix_summation_design.cpp -o algebra/matrix/ntm_matrix_summation.run -lsystemc
+g++ algebra/matrix/ntm_matrix_transpose_testbench.cpp algebra/matrix/ntm_matrix_transpose_design.cpp -o algebra/matrix/ntm_matrix_transpose.run -lsystemc
+g++ algebra/matrix/ntm_matrix_vector_convolution_testbench.cpp algebra/matrix/ntm_matrix_vector_convolution_design.cpp -o algebra/matrix/ntm_matrix_vector_convolution.run -lsystemc
+g++ algebra/matrix/ntm_matrix_vector_product_testbench.cpp algebra/matrix/ntm_matrix_vector_product_design.cpp -o algebra/matrix/ntm_matrix_vector_product.run -lsystemc
+g++ algebra/matrix/ntm_transpose_vector_product_testbench.cpp algebra/matrix/ntm_transpose_vector_product_design.cpp -o algebra/matrix/ntm_transpose_vector_product.run -lsystemc
+#g++ algebra/scalar/ntm_scalar_multiplication_testbench.cpp algebra/scalar/ntm_scalar_multiplication_design.cpp -o algebra/scalar/ntm_scalar_multiplication.run -lsystemc
+#g++ algebra/scalar/ntm_scalar_summation_testbench.cpp algebra/scalar/ntm_scalar_summation_design.cpp -o algebra/scalar/ntm_scalar_summation.run -lsystemc
+g++ algebra/tensor/ntm_tensor_convolution_testbench.cpp algebra/tensor/ntm_tensor_convolution_design.cpp -o algebra/tensor/ntm_tensor_convolution.run -lsystemc
+g++ algebra/tensor/ntm_tensor_inverse_testbench.cpp algebra/tensor/ntm_tensor_inverse_design.cpp -o algebra/tensor/ntm_tensor_inverse.run -lsystemc
+g++ algebra/tensor/ntm_tensor_matrix_convolution_testbench.cpp algebra/tensor/ntm_tensor_matrix_convolution_design.cpp -o algebra/tensor/ntm_tensor_matrix_convolution.run -lsystemc
+g++ algebra/tensor/ntm_tensor_matrix_product_testbench.cpp algebra/tensor/ntm_tensor_matrix_product_design.cpp -o algebra/tensor/ntm_tensor_matrix_product.run -lsystemc
+#g++ algebra/tensor/ntm_tensor_multiplication_testbench.cpp algebra/tensor/ntm_tensor_multiplication_design.cpp -o algebra/tensor/ntm_tensor_multiplication.run -lsystemc
+g++ algebra/tensor/ntm_tensor_product_testbench.cpp algebra/tensor/ntm_tensor_product_design.cpp -o algebra/tensor/ntm_tensor_product.run -lsystemc
+#g++ algebra/tensor/ntm_tensor_summation_testbench.cpp algebra/tensor/ntm_tensor_summation_design.cpp -o algebra/tensor/ntm_tensor_summation.run -lsystemc
+g++ algebra/tensor/ntm_tensor_transpose_testbench.cpp algebra/tensor/ntm_tensor_transpose_design.cpp -o algebra/tensor/ntm_tensor_transpose.run -lsystemc
+g++ algebra/vector/ntm_dot_product_testbench.cpp algebra/vector/ntm_dot_product_design.cpp -o algebra/vector/ntm_dot_product.run -lsystemc
+g++ algebra/vector/ntm_vector_convolution_testbench.cpp algebra/vector/ntm_vector_convolution_design.cpp -o algebra/vector/ntm_vector_convolution.run -lsystemc
+#g++ algebra/vector/ntm_vector_cosine_similarity_testbench.cpp algebra/vector/ntm_vector_cosine_similarity_design.cpp -o algebra/vector/ntm_vector_cosine_similarity.run -lsystemc
+g++ algebra/vector/ntm_vector_module_testbench.cpp algebra/vector/ntm_vector_module_design.cpp -o algebra/vector/ntm_vector_module.run -lsystemc
+#g++ algebra/vector/ntm_vector_multiplication_testbench.cpp algebra/vector/ntm_vector_multiplication_design.cpp -o algebra/vector/ntm_vector_multiplication.run -lsystemc
+#g++ algebra/vector/ntm_vector_summation_testbench.cpp algebra/vector/ntm_vector_summation_design.cpp -o algebra/vector/ntm_vector_summation.run -lsystemc
+#g++ algebra/matrix/ntm_matrix_differentiation_testbench.cpp algebra/matrix/ntm_matrix_differentiation_design.cpp -o algebra/matrix/ntm_matrix_differentiation.run -lsystemc
+#g++ algebra/matrix/ntm_matrix_integration_testbench.cpp algebra/matrix/ntm_matrix_integration_design.cpp -o algebra/matrix/ntm_matrix_integration.run -lsystemc
+#g++ algebra/matrix/ntm_matrix_softmax_testbench.cpp algebra/matrix/ntm_matrix_softmax_design.cpp -o algebra/matrix/ntm_matrix_softmax.run -lsystemc
+#g++ algebra/tensor/ntm_tensor_differentiation_testbench.cpp algebra/tensor/ntm_tensor_differentiation_design.cpp -o algebra/tensor/ntm_tensor_differentiation.run -lsystemc
+#g++ algebra/tensor/ntm_tensor_integration_testbench.cpp algebra/tensor/ntm_tensor_integration_design.cpp -o algebra/tensor/ntm_tensor_integration.run -lsystemc
+#g++ algebra/tensor/ntm_tensor_softmax_testbench.cpp algebra/tensor/ntm_tensor_softmax_design.cpp -o algebra/tensor/ntm_tensor_softmax.run -lsystemc
+#g++ algebra/vector/ntm_vector_differentiation_testbench.cpp algebra/vector/ntm_vector_differentiation_design.cpp -o algebra/vector/ntm_vector_differentiation.run -lsystemc
+#g++ algebra/vector/ntm_vector_integration_testbench.cpp algebra/vector/ntm_vector_integration_design.cpp -o algebra/vector/ntm_vector_integration.run -lsystemc
+#g++ algebra/vector/ntm_vector_softmax_testbench.cpp algebra/vector/ntm_vector_softmax_design.cpp -o algebra/vector/ntm_vector_softmax.run -lsystemc
+#g++ math/matrix/ntm_matrix_logistic_function_testbench.cpp math/matrix/ntm_matrix_logistic_function_design.cpp -o math/matrix/ntm_matrix_logistic_function.run -lsystemc
+#g++ math/matrix/ntm_matrix_oneplus_function_testbench.cpp math/matrix/ntm_matrix_oneplus_function_design.cpp -o math/matrix/ntm_matrix_oneplus_function.run -lsystemc
+#g++ math/scalar/ntm_scalar_logistic_function_testbench.cpp math/scalar/ntm_scalar_logistic_function_design.cpp -o math/scalar/ntm_scalar_logistic_function.run -lsystemc
+#g++ math/scalar/ntm_scalar_oneplus_function_testbench.cpp math/scalar/ntm_scalar_oneplus_function_design.cpp -o math/scalar/ntm_scalar_oneplus_function.run -lsystemc
+#g++ math/vector/ntm_vector_logistic_function_testbench.cpp math/vector/ntm_vector_logistic_function_design.cpp -o math/vector/ntm_vector_logistic_function.run -lsystemc
+#g++ math/vector/ntm_vector_oneplus_function_testbench.cpp math/vector/ntm_vector_oneplus_function_design.cpp -o math/vector/ntm_vector_oneplus_function.run -lsystemc
+#g++ math/matrix/ntm_matrix_deviation_testbench.cpp math/matrix/ntm_matrix_deviation_design.cpp -o math/matrix/ntm_matrix_deviation.run -lsystemc
+#g++ math/matrix/ntm_matrix_mean_testbench.cpp math/matrix/ntm_matrix_mean_design.cpp -o math/matrix/ntm_matrix_mean.run -lsystemc
+#g++ math/scalar/ntm_scalar_deviation_testbench.cpp math/scalar/ntm_scalar_deviation_design.cpp -o math/scalar/ntm_scalar_deviation.run -lsystemc
+#g++ math/scalar/ntm_scalar_mean_testbench.cpp math/scalar/ntm_scalar_mean_design.cpp -o math/scalar/ntm_scalar_mean.run -lsystemc
+#g++ math/vector/ntm_vector_deviation_testbench.cpp math/vector/ntm_vector_deviation_design.cpp -o math/vector/ntm_vector_deviation.run -lsystemc
+#g++ math/vector/ntm_vector_mean_testbench.cpp math/vector/ntm_vector_mean_design.cpp -o math/vector/ntm_vector_mean.run -lsystemc
 #g++ ntm/memory/ntm_addressing_testbench.cpp ntm/memory/ntm_addressing_design.cpp -o ntm/memory/ntm_addressing.run -lsystemc
 #g++ ntm/memory/ntm_matrix_content_based_addressing_testbench.cpp ntm/memory/ntm_matrix_content_based_addressing_design.cpp -o ntm/memory/ntm_matrix_content_based_addressing.run -lsystemc
 #g++ ntm/memory/ntm_vector_content_based_addressing_testbench.cpp ntm/memory/ntm_vector_content_based_addressing_design.cpp -o ntm/memory/ntm_vector_content_based_addressing.run -lsystemc
