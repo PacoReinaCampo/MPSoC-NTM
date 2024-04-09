@@ -44,11 +44,10 @@
 
 import numpy as np
 
-from tensor import ntm_tensor_adder as tensor_adder
-from tensor import ntm_tensor_multiplier as tensor_multiplier
-from tensor import ntm_tensor_divider as tensor_divider
-
-from tensor import ntm_tensor_arithmetic as tensor_arithmetic
+from tensor.adder import ntm_tensor_adder as tensor_adder
+from tensor.subtractor import ntm_tensor_subtractor as tensor_subtractor
+from tensor.multiplier import ntm_tensor_multiplier as tensor_multiplier
+from tensor.divider import ntm_tensor_divider as tensor_divider
 
 def test_tensor_adder():
 
@@ -56,6 +55,13 @@ def test_tensor_adder():
   data_b_in = np.random.rand(3,3,3)
 
   np.testing.assert_array_equal(tensor_adder.ntm_tensor_adder(data_a_in, data_b_in), data_a_in + data_b_in)
+
+def test_tensor_subtractor():
+
+  data_a_in = np.random.rand(3,3,3)
+  data_b_in = np.random.rand(3,3,3)
+
+  np.testing.assert_array_equal(tensor_subtractor.ntm_tensor_subtractor(data_a_in, data_b_in), data_a_in - data_b_in)
 
 def test_tensor_multiplier():
 
@@ -71,22 +77,8 @@ def test_tensor_divider():
 
   np.testing.assert_array_equal(tensor_divider.ntm_tensor_divider(data_a_in, data_b_in), data_a_in / data_b_in)
 
-def test_tensor_arithmetic():
-
-  data_a_in = np.random.rand(3,3,3)
-  data_b_in = np.random.rand(3,3,3)
-
-  arithmetic = tensor_arithmetic.TensorArithmetic(data_a_in, data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_adder(), data_a_in + data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_multiplier(), data_a_in * data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_divider(), data_a_in / data_b_in)
-
 
 test_tensor_adder()
+test_tensor_subtractor()
 test_tensor_multiplier()
 test_tensor_divider()
-
-test_tensor_arithmetic()

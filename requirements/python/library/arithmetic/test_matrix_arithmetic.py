@@ -44,11 +44,10 @@
 
 import numpy as np
 
-from matrix import ntm_matrix_adder as matrix_adder
-from matrix import ntm_matrix_multiplier as matrix_multiplier
-from matrix import ntm_matrix_divider as matrix_divider
-
-from matrix import ntm_matrix_arithmetic as matrix_arithmetic
+from matrix.adder import ntm_matrix_adder as matrix_adder
+from matrix.subtractor import ntm_matrix_subtractor as matrix_subtractor
+from matrix.multiplier import ntm_matrix_multiplier as matrix_multiplier
+from matrix.divider import ntm_matrix_divider as matrix_divider
 
 def test_matrix_adder():
 
@@ -56,6 +55,13 @@ def test_matrix_adder():
   data_b_in = np.random.rand(3,3)
 
   np.testing.assert_array_equal(matrix_adder.ntm_matrix_adder(data_a_in, data_b_in), data_a_in + data_b_in)
+
+def test_matrix_subtractor():
+
+  data_a_in = np.random.rand(3,3)
+  data_b_in = np.random.rand(3,3)
+
+  np.testing.assert_array_equal(matrix_subtractor.ntm_matrix_subtractor(data_a_in, data_b_in), data_a_in - data_b_in)
 
 def test_matrix_multiplier():
 
@@ -71,22 +77,8 @@ def test_matrix_divider():
 
   np.testing.assert_array_equal(matrix_divider.ntm_matrix_divider(data_a_in, data_b_in), data_a_in / data_b_in)
 
-def test_matrix_arithmetic():
-
-  data_a_in = np.random.rand(3,3)
-  data_b_in = np.random.rand(3,3)
-
-  arithmetic = matrix_arithmetic.MatrixArithmetic(data_a_in, data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_adder(), data_a_in + data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_multiplier(), data_a_in * data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_divider(), data_a_in / data_b_in)
-
 
 test_matrix_adder()
+test_matrix_subtractor()
 test_matrix_multiplier()
 test_matrix_divider()
-
-test_matrix_arithmetic()

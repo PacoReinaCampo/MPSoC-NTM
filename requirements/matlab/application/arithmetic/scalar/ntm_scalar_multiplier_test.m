@@ -44,6 +44,8 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
 addpath(genpath('../../../library/arithmetic/scalar'));
 

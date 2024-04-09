@@ -44,10 +44,12 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../../library/math/statitics/vector'));
+warning('off','all');
 
-addpath(genpath('../../../../library/transformer/functions'));
+% Package
+addpath(genpath('../../../../library/math/vector'));
+
+addpath(genpath('../../../../library/nn/ANN/functions'));
 
 % Constants
 SIZE_N_IN = 3;

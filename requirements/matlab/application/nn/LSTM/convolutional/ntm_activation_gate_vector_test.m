@@ -44,11 +44,13 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../../library/math/algebra/matrix'));
-addpath(genpath('../../../../library/math/algebra/tensor'));
+warning('off','all');
 
-addpath(genpath('../../../../library/controller/LSTM/convolutional'));
+% Package
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+
+addpath(genpath('../../../../library/nn/LSTM/convolutional'));
 
 % Constants
 SIZE_X_IN = 3;

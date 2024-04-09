@@ -44,11 +44,13 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../library/math/algebra/vector'));
-addpath(genpath('../../../library/math/calculus/vector'));
+warning('off','all');
 
-addpath(genpath('../../../library/ntm/memory'));
+% Package
+addpath(genpath('../../../../library/algebra/vector'));
+addpath(genpath('../../../../library/math/vector'));
+
+addpath(genpath('../../../../library/nn/NTM/memory'));
 
 % Constants
 SIZE_N_IN = 3;

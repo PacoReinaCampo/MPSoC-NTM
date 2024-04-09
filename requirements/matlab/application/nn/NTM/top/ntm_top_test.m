@@ -44,19 +44,21 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../library/math/algebra/vector'));
-addpath(genpath('../../../library/math/algebra/matrix'));
-addpath(genpath('../../../library/math/algebra/tensor'));
-addpath(genpath('../../../library/math/calculus/matrix'));
-addpath(genpath('../../../library/math/function/vector'));
+addpath(genpath('../../../../library/algebra/vector'));
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+addpath(genpath('../../../../library/math/matrix'));
+addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../library/controller/FNN/standard'));
+addpath(genpath('../../../../library/nn/FNN/standard'));
 
-addpath(genpath('../../../library/ntm/memory'));
-addpath(genpath('../../../library/ntm/read_heads'));
-addpath(genpath('../../../library/ntm/write_heads'));
-addpath(genpath('../../../library/ntm/top'));
+addpath(genpath('../../../../library/nn/NTM/memory'));
+addpath(genpath('../../../../library/nn/NTM/read_heads'));
+addpath(genpath('../../../../library/nn/NTM/write_heads'));
+addpath(genpath('../../../../library/nn/NTM/top'));
 
 % Constants
 SIZE_T_IN = 3;

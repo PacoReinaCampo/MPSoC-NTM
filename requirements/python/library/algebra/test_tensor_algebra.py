@@ -52,8 +52,9 @@ from tensor import ntm_tensor_multiplication as tensor_multiplication
 from tensor import ntm_tensor_product as tensor_product
 from tensor import ntm_tensor_summation as tensor_summation
 from tensor import ntm_tensor_transpose as tensor_transpose
-
-from tensor import ntm_tensor_math_algebra as tensor_math_algebra
+from tensor import ntm_tensor_differentiation as tensor_differentiation
+from tensor import ntm_tensor_integration as tensor_integration
+from tensor import ntm_tensor_softmax as tensor_softmax
 
 def test_tensor_convolution():
 
@@ -107,35 +108,31 @@ def test_tensor_transpose():
 
   np.testing.assert_array_equal(tensor_transpose.ntm_tensor_transpose(data_in), tensor_transpose.ntm_tensor_transpose(data_in))
 
-def test_tensor_math_algebra():
+def test_tensor_differentiation():
 
-  tensor_data_a_in = np.random.rand(3,3,3)
-  tensor_data_b_in = np.random.rand(3,3,3)
+  control = 0
 
-  matrix_data_a_in = np.random.rand(3,3)
-  matrix_data_b_in = np.random.rand(3,3)
+  length_i_in = 1.0
+  length_j_in = 1.0
+  length_k_in = 1.0
 
-  tensor_data_in = np.random.rand(3,3,3)
-  array4_data_in = np.random.rand(3,3,3,3)
+  data_in = np.random.rand(3,3,3)
 
-  math_algebra = tensor_math_algebra.TensorMathAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in)
-  test_algebra = tensor_math_algebra.TensorMathAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in)
+  np.testing.assert_array_equal(tensor_differentiation.ntm_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control), tensor_differentiation.ntm_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control))
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_convolution(), test_algebra.ntm_tensor_convolution())
+def test_tensor_integration():
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_inverse(), test_algebra.ntm_tensor_inverse())
+  length_in = 1.0
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_matrix_convolution(), test_algebra.ntm_tensor_matrix_convolution())
+  data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_matrix_product(), test_algebra.ntm_tensor_matrix_product())
+  np.testing.assert_array_equal(tensor_integration.ntm_tensor_integration(data_in, length_in), tensor_integration.ntm_tensor_integration(data_in, length_in))
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_multiplication(), test_algebra.ntm_tensor_multiplication())
+def test_tensor_softmax():
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_product(), test_algebra.ntm_tensor_product())
+  data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_summation(), test_algebra.ntm_tensor_summation())
-
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_transpose(), test_algebra.ntm_tensor_transpose())
+  np.testing.assert_array_equal(tensor_softmax.ntm_tensor_softmax(data_in), tensor_softmax.ntm_tensor_softmax(data_in))
 
 
 test_tensor_convolution()
@@ -146,5 +143,6 @@ test_tensor_multiplication()
 test_tensor_product()
 test_tensor_summation()
 test_tensor_transpose()
-
-test_tensor_math_algebra()
+test_tensor_differentiation()
+test_tensor_integration()
+test_tensor_softmax()

@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/transformer/functions'));
+addpath(genpath('../../../../library/nn/ANN/functions'));
 
 % Constants
 SIZE_L_IN = 3;

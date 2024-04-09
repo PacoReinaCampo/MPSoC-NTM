@@ -44,11 +44,13 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../library/math/algebra/matrix'));
-addpath(genpath('../../../library/math/algebra/tensor'));
+warning('off','all');
 
-addpath(genpath('../../../library/ntm/top'));
+% Package
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+
+addpath(genpath('../../../../library/nn/NTM/top'));
 
 % Constants
 SIZE_X_IN = 3;

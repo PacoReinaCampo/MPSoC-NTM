@@ -53,6 +53,10 @@ class ScalarArithmetic:
     # calculating addition
     return (self.data_a_in + self.data_b_in)
 
+  def ntm_scalar_subtractor(self):
+    # calculating subtraction
+    return (self.data_a_in - self.data_b_in)
+
   def ntm_scalar_multiplier(self):
     # calculating multiplication
     return (self.data_a_in * self.data_b_in)

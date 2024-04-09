@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/calculus/matrix'));
+addpath(genpath('../../../library/algebra/matrix'));
 
 % Constants
 SIZE_I_IN = 3;

@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/algebra/tensor'));
+addpath(genpath('../../../library/algebra/tensor'));
 
 % Constants
 SIZE_I_IN = 3;

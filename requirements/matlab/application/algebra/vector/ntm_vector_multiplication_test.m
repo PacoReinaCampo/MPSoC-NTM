@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/algebra/vector'));
+addpath(genpath('../../../library/algebra/vector'));
 
 % Constants
 SIZE_IN = 3;

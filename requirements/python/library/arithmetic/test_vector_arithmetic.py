@@ -44,11 +44,10 @@
 
 import numpy as np
 
-from vector import ntm_vector_adder as vector_adder
-from vector import ntm_vector_multiplier as vector_multiplier
-from vector import ntm_vector_divider as vector_divider
-
-from vector import ntm_vector_arithmetic as vector_arithmetic
+from vector.adder import ntm_vector_adder as vector_adder
+from vector.subtractor import ntm_vector_subtractor as vector_subtractor
+from vector.multiplier import ntm_vector_multiplier as vector_multiplier
+from vector.divider import ntm_vector_divider as vector_divider
 
 def test_vector_adder():
   
@@ -56,6 +55,13 @@ def test_vector_adder():
   data_b_in = np.random.rand(3,1)
 
   np.testing.assert_array_equal(vector_adder.ntm_vector_adder(data_a_in, data_b_in), data_a_in + data_b_in)
+
+def test_vector_subtractor():
+  
+  data_a_in = np.random.rand(3,1)
+  data_b_in = np.random.rand(3,1)
+
+  np.testing.assert_array_equal(vector_subtractor.ntm_vector_subtractor(data_a_in, data_b_in), data_a_in - data_b_in)
 
 def test_vector_multiplier():
   
@@ -71,22 +77,8 @@ def test_vector_divider():
 
   np.testing.assert_array_equal(vector_divider.ntm_vector_divider(data_a_in, data_b_in), data_a_in / data_b_in)
 
-def test_vector_arithmetic():
-
-  data_a_in = np.random.rand(3,1)
-  data_b_in = np.random.rand(3,1)
-
-  arithmetic = vector_arithmetic.VectorArithmetic(data_a_in, data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_vector_adder(), data_a_in + data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_vector_multiplier(), data_a_in * data_b_in)
-
-  np.testing.assert_array_equal(arithmetic.ntm_vector_divider(), data_a_in / data_b_in)
-
 
 test_vector_adder()
+test_vector_subtractor()
 test_vector_multiplier()
 test_vector_divider()
-
-test_vector_arithmetic()

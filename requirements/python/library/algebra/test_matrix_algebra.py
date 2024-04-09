@@ -53,8 +53,9 @@ from matrix import ntm_matrix_transpose as matrix_transpose
 from matrix import ntm_matrix_vector_convolution as matrix_vector_convolution
 from matrix import ntm_matrix_vector_product as matrix_vector_product
 from matrix import ntm_transpose_vector_product as transpose_vector_product
-
-from matrix import ntm_matrix_math_algebra as matrix_math_algebra
+from matrix import ntm_matrix_differentiation as matrix_differentiation
+from matrix import ntm_matrix_integration as matrix_integration
+from matrix import ntm_matrix_softmax as matrix_softmax
 
 def test_matrix_convolution():
 
@@ -115,37 +116,30 @@ def test_transpose_vector_product():
 
   np.testing.assert_array_equal(transpose_vector_product.ntm_transpose_vector_product(data_a_in, data_b_in), transpose_vector_product.ntm_transpose_vector_product(data_a_in, data_b_in))
 
-def test_matrix_math_algebra():
+def test_matrix_differentiation():
 
-  matrix_data_a_in = np.random.rand(3,3)
-  matrix_data_b_in = np.random.rand(3,3)
+  control = 0
 
-  vector_data_a_in = np.random.rand(3)
-  vector_data_b_in = np.random.rand(3)
+  length_i_in = 1.0
+  length_j_in = 1.0
 
-  matrix_data_in = np.random.rand(3,3)
-  tensor_data_in = np.random.rand(3,3,3)
+  data_in = np.random.rand(3,3)
 
-  math_algebra = matrix_math_algebra.MatrixMathAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in)
-  test_algebra = matrix_math_algebra.MatrixMathAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in)
+  np.testing.assert_array_equal(matrix_differentiation.ntm_matrix_differentiation(data_in, length_i_in, length_j_in, control), matrix_differentiation.ntm_matrix_differentiation(data_in, length_i_in, length_j_in, control))
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_convolution(), test_algebra.ntm_matrix_convolution())
+def test_matrix_integration():
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_inverse(), test_algebra.ntm_matrix_inverse())
+  length_in = 1.0
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_multiplication(), test_algebra.ntm_matrix_multiplication())
+  data_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_product(), test_algebra.ntm_matrix_product())
+  np.testing.assert_array_equal(matrix_integration.ntm_matrix_integration(data_in, length_in), matrix_integration.ntm_matrix_integration(data_in, length_in))
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_summation(), test_algebra.ntm_matrix_summation())
+def test_matrix_softmax():
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_transpose(), test_algebra.ntm_matrix_transpose())
+  data_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_vector_convolution(), test_algebra.ntm_matrix_vector_convolution())
-
-  np.testing.assert_array_equal(math_algebra.ntm_matrix_vector_product(), test_algebra.ntm_matrix_vector_product())
-
-  np.testing.assert_array_equal(math_algebra.ntm_transpose_vector_product(), test_algebra.ntm_transpose_vector_product())
+  np.testing.assert_array_equal(matrix_softmax.ntm_matrix_softmax(data_in), matrix_softmax.ntm_matrix_softmax(data_in))
 
 
 test_matrix_convolution()
@@ -157,5 +151,6 @@ test_matrix_transpose()
 test_matrix_vector_convolution()
 test_matrix_vector_product()
 test_transpose_vector_product()
-
-test_matrix_math_algebra()
+test_matrix_differentiation()
+test_matrix_integration()
+test_matrix_softmax()

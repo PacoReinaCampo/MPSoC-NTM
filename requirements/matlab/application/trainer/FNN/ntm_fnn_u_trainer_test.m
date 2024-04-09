@@ -44,6 +44,8 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
 addpath(genpath('../../../library/trainer/differentiation'));
 addpath(genpath('../../../library/trainer/FNN'));

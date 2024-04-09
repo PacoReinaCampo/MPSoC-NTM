@@ -1,36 +1,71 @@
-import random
+###################################################################################
+##                                            __ _      _     _                  ##
+##                                           / _(_)    | |   | |                 ##
+##                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 ##
+##               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 ##
+##              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 ##
+##               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 ##
+##                  | |                                                          ##
+##                  |_|                                                          ##
+##                                                                               ##
+##                                                                               ##
+##              Peripheral-NTM for MPSoC                                         ##
+##              Neural Turing Machine for MPSoC                                  ##
+##                                                                               ##
+###################################################################################
 
-from adder_model import adder_model
+###################################################################################
+##                                                                               ##
+## Copyright (c) 2022-2023 by the author(s)                                      ##
+##                                                                               ##
+## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
+## of this software and associated documentation files (the "Software"), to deal ##
+## in the Software without restriction, including without limitation the rights  ##
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     ##
+## copies of the Software, and to permit persons to whom the Software is         ##
+## furnished to do so, subject to the following conditions:                      ##
+##                                                                               ##
+## The above copyright notice and this permission notice shall be included in    ##
+## all copies or substantial portions of the Software.                           ##
+##                                                                               ##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    ##
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      ##
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   ##
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        ##
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, ##
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     ##
+## THE SOFTWARE.                                                                 ##
+##                                                                               ##
+## ============================================================================= ##
+## Author(s):                                                                    ##
+##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
+##                                                                               ##
+###################################################################################
 
-import cocotb
-from cocotb.triggers import Timer
+import numpy as np
 
-@cocotb.test()
-async def adder_basic_test(dut):
-  """Test for 5 + 10"""
+from vector import ntm_vector_math as vector_math
 
-  A = 5
-  B = 10
+def test_vector_math():
 
-  dut.A.value = A
-  dut.B.value = B
+  data_in_function = np.random.rand(3,1)
 
-  await Timer(2, units="ns")
+  math_function = vector_math.VectorMathFunction(data_in_function)
+  test_function = vector_math.VectorMathFunction(data_in_function)
 
-  assert dut.X.value == adder_model(A, B), f"Adder result is incorrect: {dut.X.value} != 15"
+  np.testing.assert_array_equal(math_function.ntm_vector_logistic_function(), test_function.ntm_vector_logistic_function())
 
-@cocotb.test()
-async def adder_randomised_test(dut):
-  """Test for adding 2 random numbers multiple times"""
+  np.testing.assert_array_equal(math_function.ntm_vector_oneplus_function(), test_function.ntm_vector_oneplus_function())
 
-  for i in range(10):
+  data_in_statitic = np.random.rand(3,3)
+  mean_in_statitics = np.zeros(3)
 
-    A = random.randint(0, 15)
-    B = random.randint(0, 15)
+  math_statitics = vector_math_statitics.VectorMathStatitics(data_in_statitic, mean_in_statitics)
+  test_statitics = vector_math_statitics.VectorMathStatitics(data_in_statitic, mean_in_statitics)
 
-    dut.A.value = A
-    dut.B.value = B
+  np.testing.assert_array_equal(math_statitics.ntm_vector_mean(), test_statitics.ntm_vector_mean())
 
-    await Timer(2, units="ns")
+  np.testing.assert_array_equal(math_statitics.ntm_vector_deviation(), test_statitics.ntm_vector_deviation())
 
-    assert dut.X.value == adder_model(A, B), "Randomised test failed with: {A} + {B} = {X}".format(A=dut.A.value, B=dut.B.value, X=dut.X.value)
+
+test_vector_math()

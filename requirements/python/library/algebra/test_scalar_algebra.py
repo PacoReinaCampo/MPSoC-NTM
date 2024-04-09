@@ -47,8 +47,6 @@ import numpy as np
 from scalar import ntm_scalar_multiplication as scalar_multiplication
 from scalar import ntm_scalar_summation as scalar_summation
 
-from scalar import ntm_scalar_math_algebra as scalar_math_algebra
-
 def test_scalar_multiplication():
 
   data_in = np.random.rand(3,1)
@@ -61,19 +59,6 @@ def test_scalar_summation():
 
   np.testing.assert_array_equal(scalar_summation.ntm_scalar_summation(data_in), scalar_summation.ntm_scalar_summation(data_in))
 
-def test_scalar_math_algebra():
-
-  data_in = np.random.rand(3,1)
-
-  math_algebra = scalar_math_algebra.ScalarMathAlgebra(data_in)
-  test_algebra = scalar_math_algebra.ScalarMathAlgebra(data_in)
-
-  np.testing.assert_array_equal(math_algebra.ntm_scalar_multiplication(), test_algebra.ntm_scalar_multiplication())
-
-  np.testing.assert_array_equal(math_algebra.ntm_scalar_summation(), test_algebra.ntm_scalar_summation())
-
 
 test_scalar_multiplication()
 test_scalar_summation()
-
-test_scalar_math_algebra()

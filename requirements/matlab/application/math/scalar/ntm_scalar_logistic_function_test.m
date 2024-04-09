@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/function/scalar'));
+addpath(genpath('../../../library/math/scalar'));
 
 % Signals
 DATA_IN = rand(1);

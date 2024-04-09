@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/statitics/matrix'));
+addpath(genpath('../../../library/math/matrix'));
 
 % Constants
 SIZE_I_IN = 3;

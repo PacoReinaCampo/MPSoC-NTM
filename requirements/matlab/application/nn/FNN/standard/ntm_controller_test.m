@@ -44,12 +44,14 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../../library/math/algebra/matrix'));
-addpath(genpath('../../../../library/math/algebra/tensor'));
-addpath(genpath('../../../../library/math/function/vector'));
+warning('off','all');
 
-addpath(genpath('../../../../library/controller/FNN/standard'));
+% Package
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+addpath(genpath('../../../../library/math/vector'));
+
+addpath(genpath('../../../../library/nn/FNN/standard'));
 
 % Constants
 SIZE_X_IN = 3;

@@ -44,11 +44,10 @@
 
 import random
 
-from scalar import ntm_scalar_adder as scalar_adder
-from scalar import ntm_scalar_multiplier as scalar_multiplier
-from scalar import ntm_scalar_divider as scalar_divider
-
-from scalar import ntm_scalar_arithmetic as scalar_arithmetic
+from scalar.adder import ntm_scalar_adder as scalar_adder
+from scalar.subtractor import ntm_scalar_subtractor as scalar_subtractor
+from scalar.multiplier import ntm_scalar_multiplier as scalar_multiplier
+from scalar.divider import ntm_scalar_divider as scalar_divider
 
 def test_scalar_adder():
 
@@ -56,6 +55,13 @@ def test_scalar_adder():
   data_b_in = random.random()
 
   assert scalar_adder.ntm_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in
+
+def test_scalar_subtractor():
+
+  data_a_in = random.random()
+  data_b_in = random.random()
+
+  assert scalar_subtractor.ntm_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in
 
 def test_scalar_multiplier():
   
@@ -71,22 +77,8 @@ def test_scalar_divider():
 
   assert scalar_divider.ntm_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in
 
-def test_scalar_arithmetic():
-
-  data_a_in = random.random()
-  data_b_in = random.random()
-
-  arithmetic = scalar_arithmetic.ScalarArithmetic(data_a_in, data_b_in)
-
-  assert arithmetic.ntm_scalar_adder() == data_a_in + data_b_in
-
-  assert arithmetic.ntm_scalar_multiplier() == data_a_in * data_b_in
-
-  assert arithmetic.ntm_scalar_divider() == data_a_in / data_b_in
-
 
 test_scalar_adder()
+test_scalar_subtractor()
 test_scalar_multiplier()
 test_scalar_divider()
-
-test_scalar_arithmetic()

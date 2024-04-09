@@ -44,9 +44,11 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
 addpath(genpath('../../../library/arithmetic/matrix'));
-addpath(genpath('../../../library/math/algebra/matrix'));
+addpath(genpath('../../../library/algebra/matrix'));
 
 addpath(genpath('../../../library/state/feedback'));
 addpath(genpath('../../../library/state/outputs'));

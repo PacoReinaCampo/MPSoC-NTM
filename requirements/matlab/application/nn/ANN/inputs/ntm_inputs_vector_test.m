@@ -44,11 +44,13 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../../library/math/algebra/matrix'));
-addpath(genpath('../../../../library/math/algebra/tensor'));
+warning('off','all');
 
-addpath(genpath('../../../../library/transformer/inputs'));
+% Package
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+
+addpath(genpath('../../../../library/nn/ANN/inputs'));
 
 % Constants
 SIZE_L_IN = 3;

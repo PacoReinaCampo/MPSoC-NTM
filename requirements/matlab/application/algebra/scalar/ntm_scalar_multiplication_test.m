@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/math/algebra/scalar'));
+addpath(genpath('../../../library/algebra/scalar'));
 
 % Constants
 LENGTH_IN = 3;

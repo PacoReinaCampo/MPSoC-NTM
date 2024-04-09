@@ -44,12 +44,14 @@
 ###################################################################################
 %}
 
-% Package
-addpath(genpath('../../../../library/math/algebra/matrix'));
-addpath(genpath('../../../../library/math/algebra/tensor'));
-addpath(genpath('../../../../library/math/function/vector'));
+warning('off','all');
 
-addpath(genpath('../../../../library/controller/LSTM/standard'));
+% Package
+addpath(genpath('../../../../library/algebra/matrix'));
+addpath(genpath('../../../../library/algebra/tensor'));
+addpath(genpath('../../../../library/math/vector'));
+
+addpath(genpath('../../../../library/nn/LSTM/standard'));
 
 % Constants
 SIZE_T_IN = 3;

@@ -44,8 +44,10 @@
 ###################################################################################
 %}
 
+warning('off','all');
+
 % Package
-addpath(genpath('../../../../library/controller/LSTM/convolutional'));
+addpath(genpath('../../../../library/nn/LSTM/convolutional'));
 
 % Constants
 SIZE_L_IN = 3;
