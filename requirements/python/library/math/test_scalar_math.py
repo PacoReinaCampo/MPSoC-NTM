@@ -51,13 +51,13 @@ from scalar import ntm_scalar_deviation as scalar_deviation
 
 def test_scalar_logistic_function():
   
-  data_in = random.random()
+  data_in = np.random.rand(1)
 
   np.testing.assert_array_equal(scalar_logistic_function.ntm_scalar_logistic_function(data_in), 1/(1 + 1/np.exp(data_in)))
 
 def test_scalar_oneplus_function():  
 
-  data_in = random.random()
+  data_in = np.random.rand(1)
 
   np.testing.assert_array_equal(scalar_oneplus_function.ntm_scalar_oneplus_function(data_in), 1 + np.log(1 + np.exp(data_in)))
 

@@ -48,7 +48,7 @@ from scalar import ntm_scalar_math as scalar_math
 
 def test_scalar_math():
 
-  data_in_function = random.random()
+  data_in_function = np.random.rand(1)
 
   math_function = scalar_math.ScalarMathFunction(data_in)
   test_function = scalar_math.ScalarMathFunction(data_in)
