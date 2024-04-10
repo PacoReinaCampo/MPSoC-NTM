@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Y_OUT = ntm_positional_encoding(X_IN, PE_IN)
-  % Constants
+  # Constants
   [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
 
-  % Output Signals
+  # Output Signals
   Y_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 
-  % Body
+  # Body
   for l = 1:SIZE_L_IN
     for n = 1:SIZE_N_IN
       for d = 1:SIZE_D_IN

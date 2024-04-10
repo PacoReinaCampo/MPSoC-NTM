@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,20 +41,19 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/math/matrix'));
 
-% Constants
+# Constants
 SIZE_I_IN = 3;
 SIZE_J_IN = 3;
 LENGTH_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, LENGTH_IN);
 
-% DUT
-%assert(ntm_matrix_deviation(DATA_IN, mean(DATA_IN')'), std(DATA_IN')');
+# DUT
+#assert(ntm_matrix_deviation(DATA_IN, mean(DATA_IN')'), std(DATA_IN')');

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function V_OUT = ntm_fnn_v_trainer(XI_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_S_IN] = size(XI_IN);
 
   [~, SIZE_L_IN] = size(H_IN);
 
-  % Output Signals
+  # Output Signals
   V_OUT = zeros(SIZE_L_IN, SIZE_S_IN);
 
-  % Body
-  % dV(l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
+  # Body
+  # dV(l;s) = summation(d*(t;l) · xi(t;s))[t in 0 to T-1]
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
   for t = 1:SIZE_T_IN

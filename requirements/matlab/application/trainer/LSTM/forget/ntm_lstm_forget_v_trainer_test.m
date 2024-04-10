@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,20 +41,19 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/trainer/differentiation'));
 addpath(genpath('../../../../library/trainer/LSTM/forget'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 SIZE_S_IN = 3;
 
-% Signals
+# Signals
 XI_IN = rand(SIZE_T_IN, SIZE_S_IN);
 
 A_IN = rand(SIZE_T_IN, SIZE_L_IN);
@@ -67,5 +65,5 @@ H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
-% DUT
+# DUT
 V_OUT = ntm_lstm_forget_v_trainer(XI_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

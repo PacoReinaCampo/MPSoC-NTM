@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/nn/LSTM/standard'));
 
-% Constants
+# Constants
 SIZE_L_IN = 3;
 
-% Signals
+# Signals
 S_IN = rand(SIZE_L_IN, 1);
 O_IN = rand(SIZE_L_IN, 1);
 
-% DUT
+# DUT
 H_OUT = ntm_hidden_gate_vector(S_IN, O_IN);

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/vector'));
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/math/matrix'));
 
 addpath(genpath('../../../../library/nn/NTM/memory'));
 
-% Constants
+# Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
-% Signals
+# Signals
 K_IN = rand(SIZE_R_IN, SIZE_W_IN);
 BETA_IN = rand(SIZE_R_IN, 1);
 G_IN = rand(SIZE_R_IN, 1);
@@ -68,5 +66,5 @@ GAMMA_IN = rand(SIZE_R_IN, 1);
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 
-% DUT
+# DUT
 W_OUT = ntm_addressing(K_IN, BETA_IN, G_IN, S_IN, GAMMA_IN, M_IN, W_IN);

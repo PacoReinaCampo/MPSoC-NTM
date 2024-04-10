@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,15 +41,14 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/math/scalar'));
 
-% Signals
+# Signals
 DATA_IN = rand(1);
 
-% DUT
+# DUT
 DATA_OUT = ntm_scalar_oneplus_function(DATA_IN);

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/arithmetic/scalar'));
 
-% Objects
-arithmetic = ScalarArithmetic;
-
-% Signals
+# Signals
 DATA_A_IN = 48.0;
 DATA_B_IN = 16.0;
 
-% DUT
+# DUT
 assert(ntm_scalar_divider(DATA_A_IN, DATA_B_IN), DATA_A_IN / DATA_B_IN);

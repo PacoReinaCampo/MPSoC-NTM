@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -41,12 +40,11 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function S_OUT = ntm_state_gate_vector(S_IN, I_IN, F_IN, A_IN)
-  % Body
-  % s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
-  % s(t=0;l) = 0
+  # Body
+  # s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
+  # s(t=0;l) = 0
   vector_first_operation_int = F_IN.*S_IN;
 
   vector_second_operation_int = I_IN.*A_IN;

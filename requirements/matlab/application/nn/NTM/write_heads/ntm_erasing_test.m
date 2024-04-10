@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,24 +41,23 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 
 addpath(genpath('../../../../library/nn/NTM/write_heads'));
 
-% Constants
+# Constants
 SIZE_R_IN = 3;
 SIZE_N_IN = 3;
 SIZE_W_IN = 3;
 
-% Signals
+# Signals
 M_IN = rand(SIZE_N_IN, SIZE_W_IN);
 W_IN = rand(SIZE_R_IN, SIZE_N_IN);
 E_IN = rand(1, SIZE_W_IN);
 
-% DUT
+# DUT
 M_OUT = ntm_erasing(M_IN, W_IN, E_IN);

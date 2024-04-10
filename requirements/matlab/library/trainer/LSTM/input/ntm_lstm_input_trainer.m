@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,10 +41,9 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function [W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT] = ntm_lstm_input_trainer(X_IN, R_IN, XI_IN, RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Body
+  # Body
   W_OUT = ntm_lstm_input_w_trainer(X_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);
   K_OUT = ntm_lstm_input_k_trainer(R_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);
   V_OUT = ntm_lstm_input_v_trainer(XI_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

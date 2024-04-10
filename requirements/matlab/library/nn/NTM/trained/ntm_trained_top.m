@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,10 +41,9 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Y_OUT = ntm_trained_top(X_IN)
-  % Constants
+  # Constants
   LENGTH_IN = 3;
 
   SIZE_T_IN = 3;
@@ -59,7 +57,7 @@ function Y_OUT = ntm_trained_top(X_IN)
   SIZE_S_IN = 2*SIZE_W_IN;
   SIZE_M_IN = SIZE_N_IN + SIZE_W_IN + 3;
 
-  % Signals
+  # Signals
   P_IN = rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN);
   Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 
@@ -70,7 +68,7 @@ function Y_OUT = ntm_trained_top(X_IN)
   u_int = rand(SIZE_L_IN, SIZE_L_IN);
   b_int = rand(SIZE_L_IN, 1);
 
-  % Body
+  # Body
   [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
 
   [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN);

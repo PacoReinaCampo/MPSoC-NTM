@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,9 +41,8 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_scalar_oneplus_function(DATA_IN)
-  % Body
+  # Body
   DATA_OUT = 1 + log(1 + exp(DATA_IN));
 end

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,20 +41,19 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/trainer/differentiation'));
 addpath(genpath('../../../../library/trainer/LSTM/output'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_X_IN = 3;
 SIZE_L_IN = 3;
 
-% Signals
+# Signals
 X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
 S_IN = rand(SIZE_T_IN, SIZE_L_IN);
@@ -64,5 +62,5 @@ H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
-% DUT
+# DUT
 W_OUT = ntm_lstm_output_w_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN);

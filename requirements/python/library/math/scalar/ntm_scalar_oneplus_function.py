@@ -42,9 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-import math
-import random
+import numpy as np 
 
 def ntm_scalar_oneplus_function(data_in):
   # calculating result
-  return (1 + math.log(1 + math.exp(data_in)))
+  return (1 + np.log(1 + np.exp(data_in)))

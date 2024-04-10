@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,17 +41,16 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function RHO_OUT = ntm_interface_matrix(U_IN, H_IN)
-  % Constants
+  # Constants
   [SIZE_R_IN, ~, SIZE_L_IN] = size(U_IN);
 
-  % Internal Signals
+  # Internal Signals
   matrix_h_int = zeros(SIZE_R_IN, SIZE_L_IN);
 
-  % Body
-  % rho(t;i;m) = U(i;m;l)·h(t;i;l)
+  # Body
+  # rho(t;i;m) = U(i;m;l)·h(t;i;l)
   for i = 1:SIZE_R_IN
     for l = 1:SIZE_L_IN
       matrix_h_int(i, l) = H_IN(l);

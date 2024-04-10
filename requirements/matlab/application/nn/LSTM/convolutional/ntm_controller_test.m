@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,18 +41,17 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
 addpath(genpath('../../../../library/math/vector'));
 
 addpath(genpath('../../../../library/nn/LSTM/convolutional'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
@@ -64,7 +62,7 @@ SIZE_R_IN = 3;
 SIZE_M_IN = 3;
 SIZE_S_IN = 3;
 
-% Signals
+# Signals
 W_IN = rand(SIZE_L_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_W_IN);
 V_IN = rand(SIZE_L_IN, SIZE_S_IN);
@@ -78,5 +76,5 @@ S_IN = rand(SIZE_L_IN, 1);
 H_IN = rand(SIZE_L_IN, 1);
 X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
-% DUT
+# DUT
 H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN, X_IN);

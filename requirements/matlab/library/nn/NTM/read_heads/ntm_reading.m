@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function R_OUT = ntm_reading(W_IN, M_IN)
-  % Constants
+  # Constants
   [SIZE_R_IN, SIZE_N_IN] = size(W_IN);
   [~, SIZE_W_IN] = size(M_IN);
 
-  % Internal Signals
+  # Internal Signals
   matrix_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
   vector_summation_int = zeros(1, SIZE_W_IN);
 
-  % Output Signals
+  # Output Signals
   R_OUT = zeros(SIZE_R_IN, SIZE_W_IN);
 
-  % Body
-  % r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
+  # Body
+  # r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN

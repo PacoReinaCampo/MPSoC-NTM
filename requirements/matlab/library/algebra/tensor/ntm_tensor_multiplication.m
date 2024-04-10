@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_tensor_multiplication(DATA_IN)
-  % Constants
+  # Constants
   [LENGTH_IN, SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
-  % Body
+  # Body
   DATA_OUT = ones(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
   for t = 1:LENGTH_IN

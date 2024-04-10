@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,24 +41,23 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Y_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
-  % Body
-  % y(n;d) = W2(d;m)·(sigmoid(W1(m;d)·x(n;d) + b1(m))) + b2(d)
+  # Body
+  # y(n;d) = W2(d;m)·(sigmoid(W1(m;d)·x(n;d) + b1(m))) + b2(d)
 
-  % W1(m;d)·x(n;d)
+  # W1(m;d)·x(n;d)
   vector_operation_int = ntm_matrix_vector_product(W1_IN, X_IN);
 
-  % b1(m)
+  # b1(m)
   vector_operation_int = vector_operation_int + B1_IN;
 
-  % sigmoid(.)
+  # sigmoid(.)
   vector_operation_int = ntm_vector_logistic_function(vector_operation_int);
 
-  % W2(d;m)·sigmoid(.)
+  # W2(d;m)·sigmoid(.)
   vector_operation_int = ntm_matrix_vector_product(W2_IN, vector_operation_int);
 
-  % b2(d)
+  # b2(d)
   Y_OUT = vector_operation_int + B2_IN;
 end

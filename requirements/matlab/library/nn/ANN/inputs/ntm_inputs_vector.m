@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,26 +41,25 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
-  % Constants
+  # Constants
   [SIZE_D_IN, SIZE_X_IN] = size(W_IN);
   [SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);
   [~, ~, SIZE_S_IN] = size(XI_IN);
   [~, ~, ~, SIZE_P_IN] = size(RHO_IN);
 
-  % Internal Signals
+  # Internal Signals
   x_int = zeros(SIZE_N_IN, SIZE_X_IN);
   r_int = zeros(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
   rho_int = zeros(SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
   xi_int = zeros(SIZE_N_IN, SIZE_S_IN);
 
-  % Output Signals
+  # Output Signals
   X_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 
-  % Body
-  % X(l;n;d) = W(d;x)·x(l;n;x) + K(i;d;k)·r(l;n;i;k) + D(i;d;p)·rho(l;n;i;p) + V(d;s)·xi(l;n;s)
+  # Body
+  # X(l;n;d) = W(d;x)·x(l;n;x) + K(i;d;k)·r(l;n;i;k) + D(i;d;p)·rho(l;n;i;p) + V(d;s)·xi(l;n;s)
 
   for l = 1:SIZE_L_IN
     for n = 1:SIZE_N_IN
@@ -83,10 +81,10 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
         xi_int(n, s) = XI_IN(l, n, s);
       end
 
-      % W(d;x)·x(l;n;x)
+      # W(d;x)·x(l;n;x)
       vector_first_operation_int = ntm_matrix_vector_product(W_IN, x_int);
 
-      % K(i;d;k)·r(l;n;i;k)
+      # K(i;d;k)·r(l;n;i;k)
       matrix_operation_int = ntm_tensor_matrix_product(K_IN, r_int);
 
       for d = 1:SIZE_D_IN
@@ -95,7 +93,7 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
         end
       end
 
-      % D(i;d;p)·rho(l;n;i;p)
+      # D(i;d;p)·rho(l;n;i;p)
       matrix_operation_int = ntm_tensor_matrix_product(D_IN, rho_int);
 
       for d = 1:SIZE_D_IN
@@ -104,7 +102,7 @@ function X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RH
         end
       end
 
-      % V(d;s)·xi(l;n;s)
+      # V(d;s)·xi(l;n;s)
       vector_second_operation_int = ntm_matrix_vector_product(V_IN, xi_int);
 
       X_OUT(l, n, :) = vector_first_operation_int + vector_second_operation_int;

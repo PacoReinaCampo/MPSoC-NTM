@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,18 +41,17 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/math/scalar'));
 
-% Constants
+# Constants
 LENGTH_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(LENGTH_IN, 1);
 
-% DUT
+# DUT
 assert(ntm_scalar_deviation(DATA_IN, mean(DATA_IN)), std(DATA_IN));

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,17 +41,16 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_C_OUT = ntm_state_matrix_output(DATA_K_IN, DATA_C_IN, DATA_D_IN)
-  % Constants
-  % SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
-  % SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+  # Constants
+  # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 
   [SIZE_D_I_IN, SIZE_D_J_IN] = size(DATA_D_IN);
 
-  % Body
-  % c = inv(I + D·K)·C
+  # Body
+  # c = inv(I + D·K)·C
   matrix_operation_int = ntm_matrix_product(DATA_D_IN, DATA_K_IN);
 
   matrix_operation_int = ntm_matrix_adder(eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);

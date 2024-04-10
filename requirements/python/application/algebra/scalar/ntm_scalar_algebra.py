@@ -42,8 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-import random
-
 class ScalarAlgebra:
   def __init__(self, data_in):
     self.data_in = data_in

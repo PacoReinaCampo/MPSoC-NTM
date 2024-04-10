@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,12 +41,11 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function H_OUT = ntm_hidden_gate_vector(S_IN, O_IN)
-  % Body
-  % h(t;l) = o(t;l) o tanh(s(t;l))
-  % h(t=0;l) = 0; h(t;l=0) = 0
+  # Body
+  # h(t;l) = o(t;l) o tanh(s(t;l))
+  # h(t=0;l) = 0; h(t;l=0) = 0
   vector_operation_int = tanh(S_IN);
 
   H_OUT = O_IN.*vector_operation_int;

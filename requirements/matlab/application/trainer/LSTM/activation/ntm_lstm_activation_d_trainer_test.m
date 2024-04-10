@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/trainer/differentiation'));
 addpath(genpath('../../../../library/trainer/LSTM/activation'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 SIZE_R_IN = 3;
 SIZE_M_IN = 3;
 
-% Signals
+# Signals
 RHO_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_M_IN);
 
 A_IN = rand(SIZE_T_IN, SIZE_L_IN);
@@ -68,5 +66,5 @@ H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
-% DUT
+# DUT
 D_OUT = ntm_lstm_activation_d_trainer(RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN);

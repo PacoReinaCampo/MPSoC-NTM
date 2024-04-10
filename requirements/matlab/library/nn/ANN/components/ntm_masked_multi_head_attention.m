@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Y_OUT = ntm_masked_multi_head_attention(K_IN, Q_IN, V_IN, M_IN, W_OH_IN, X_IN)
-  % Constants
+  # Constants
   [SIZE_N_IN, ~] = size(X_IN);
 
   [~, ~, SIZE_K_IN] = size(K_IN);
   [SIZE_H_IN, SIZE_D_IN, SIZE_V_IN] = size(V_IN);
 
-  % Internal Signals
+  # Internal Signals
   k_int = zeros(SIZE_D_IN, SIZE_K_IN);
   q_int = zeros(SIZE_D_IN, SIZE_K_IN);
   v_int = zeros(SIZE_D_IN, SIZE_V_IN);
 
   multi_head_int = zeros(SIZE_N_IN, SIZE_H_IN*SIZE_V_IN);
 
-  % Body
+  # Body
   for h = 1:SIZE_H_IN
     for d = 1:SIZE_D_IN
       k_int(d, :) = K_IN(h, d, :);

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function K_OUT = ntm_fnn_k_trainer(R_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_R_IN, SIZE_W_IN] = size(R_IN);
 
   [~, SIZE_L_IN] = size(H_IN);
 
-  % Output Signals
+  # Output Signals
   K_OUT = zeros(SIZE_L_IN, SIZE_R_IN, SIZE_W_IN);
 
-  % Body
-  % dK(l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+  # Body
+  # dK(l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
   for t = 1:SIZE_T_IN

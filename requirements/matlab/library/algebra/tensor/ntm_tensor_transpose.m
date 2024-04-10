@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_tensor_transpose(DATA_IN)
-  % Constants
+  # Constants
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
-  % Signals
+  # Signals
   DATA_OUT = zeros(SIZE_I_IN, SIZE_K_IN, SIZE_J_IN);
 
-  % Body
+  # Body
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_K_IN
       for k = 1:SIZE_J_IN

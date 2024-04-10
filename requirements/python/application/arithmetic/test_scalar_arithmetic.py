@@ -42,24 +42,24 @@
 ##                                                                               ##
 ###################################################################################
 
-import random
+import numpy as np
 
 from scalar import ntm_scalar_arithmetic as scalar_arithmetic
 
 def test_scalar_arithmetic():
 
-  data_a_in = random.random()
-  data_b_in = random.random()
+  data_a_in = np.random.rand(1)
+  data_b_in = np.random.rand(1)
 
   arithmetic = scalar_arithmetic.ScalarArithmetic(data_a_in, data_b_in)
 
-  assert arithmetic.ntm_scalar_adder() == data_a_in + data_b_in
+  np.testing.assert_array_equal(arithmetic.ntm_scalar_adder(), data_a_in + data_b_in)
 
-  assert arithmetic.ntm_scalar_subtractor() == data_a_in - data_b_in
+  np.testing.assert_array_equal(arithmetic.ntm_scalar_subtractor(), data_a_in - data_b_in)
 
-  assert arithmetic.ntm_scalar_multiplier() == data_a_in * data_b_in
+  np.testing.assert_array_equal(arithmetic.ntm_scalar_multiplier(), data_a_in * data_b_in)
 
-  assert arithmetic.ntm_scalar_divider() == data_a_in / data_b_in
+  np.testing.assert_array_equal(arithmetic.ntm_scalar_divider(), data_a_in / data_b_in)
 
 
 test_scalar_arithmetic()

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_softmax(DATA_IN)
-  % Package
+  # Package
   addpath(genpath('../../math/algebra/vector'));
 
-  % Constants
+  # Constants
   SIZE_IN = length(DATA_IN);
 
-  % Signals
+  # Signals
   data_summation_int = 0;
 
   DATA_OUT = zeros(SIZE_IN, 1);
 
-  % Body
+  # Body
   for i = 1:SIZE_IN
     scalar_operation_int = exp(DATA_IN(i));
 

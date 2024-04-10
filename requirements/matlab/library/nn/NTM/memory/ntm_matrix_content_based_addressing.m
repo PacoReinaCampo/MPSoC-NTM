@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function C_OUT = ntm_matrix_content_based_addressing(K_IN, BETA_IN, M_IN)
-  % Constants
+  # Constants
   SIZE_R_IN = length(BETA_IN);
 
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
-  % Internal Signals
+  # Internal Signals
   matrix_beta_int = zeros(SIZE_R_IN, SIZE_N_IN);
 
   matrix_j_operation_int = zeros(SIZE_R_IN, SIZE_N_IN);
   vector_j_operation_int = zeros(SIZE_N_IN, 1);
   vector_k_operation_int = zeros(SIZE_W_IN, 1);
 
-  % Body
-  % C(M[j,·],k,beta)[i;j] = softmax(cosine_similarity(k,M[j,·])·beta)[i;j]
+  # Body
+  # C(M[j,·],k,beta)[i;j] = softmax(cosine_similarity(k,M[j,·])·beta)[i;j]
 
   for i = 1:SIZE_R_IN
     for j = 1:SIZE_N_IN

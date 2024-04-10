@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 classdef TensorArithmetic
   methods
     function DATA_OUT = ntm_tensor_adder(DATA_A_IN, DATA_B_IN)
-      % Constants
+      # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
 
-      % Signals
+      # Signals
       DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN);
 
-      % Body
+      # Body
       for i = 1:SIZE_A_I_IN
         for j = 1:SIZE_A_J_IN
           for k = 1:SIZE_A_K_IN
@@ -65,14 +63,14 @@ classdef TensorArithmetic
     end
 
     function DATA_OUT = ntm_tensor_subtractor(DATA_A_IN, DATA_B_IN)
-      % Constants
+      # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
 
-      % Signals
+      # Signals
       DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN);
 
-      % Body
+      # Body
       for i = 1:SIZE_A_I_IN
         for j = 1:SIZE_A_J_IN
           for k = 1:SIZE_A_K_IN
@@ -83,14 +81,14 @@ classdef TensorArithmetic
     end
 
     function DATA_OUT = ntm_tensor_multiplier(DATA_A_IN, DATA_B_IN)
-      % Constants
+      # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
 
-      % Signals
+      # Signals
       DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN);
 
-      % Body
+      # Body
       for i = 1:SIZE_A_I_IN
         for j = 1:SIZE_A_J_IN
           for k = 1:SIZE_A_K_IN
@@ -101,14 +99,14 @@ classdef TensorArithmetic
     end
 
     function DATA_OUT = ntm_tensor_divider(DATA_A_IN, DATA_B_IN)
-      % Constants
+      # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
 
-      % Signals
+      # Signals
       DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN);
 
-      % Body
+      # Body
       for i = 1:SIZE_A_I_IN
         for j = 1:SIZE_A_J_IN
           for k = 1:SIZE_A_K_IN

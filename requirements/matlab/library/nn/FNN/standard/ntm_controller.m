@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
-  % Constants
+  # Constants
   SIZE_L_IN = length(H_IN);
 
   [SIZE_R_IN, ~] = size(RHO_IN);
 
-  % Body
-  % h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+  # Body
+  # h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
 
-  % W(l;x)·x(t;x)
+  # W(l;x)·x(t;x)
   vector_first_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
 
-  % K(i;l;k)·r(t;i;k)
+  # K(i;l;k)·r(t;i;k)
   r_int = ntm_tensor_matrix_product(K_IN, R_IN);
 
   for l = 1:SIZE_L_IN
@@ -65,7 +63,7 @@ function H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN,
     end
   end
 
-  % D(i;l;m)·rho(t;i;m)
+  # D(i;l;m)·rho(t;i;m)
   rho_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
 
   for l = 1:SIZE_L_IN
@@ -74,17 +72,17 @@ function H_OUT = ntm_controller(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN,
     end
   end
 
-  % V(l;s)·xi(t;s)
+  # V(l;s)·xi(t;s)
   vector_second_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
   vector_second_operation_int = vector_second_operation_int + vector_first_operation_int;
 
-  % U(l;l)·h(t-1;l)
+  # U(l;l)·h(t-1;l)
   vector_first_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
   vector_first_operation_int = vector_first_operation_int + vector_second_operation_int;
 
-  % b(l)
+  # b(l)
   vector_second_operation_int = vector_first_operation_int + B_IN;
 
-  % sigmoid(.)
+  # sigmoid(.)
   H_OUT = ntm_vector_logistic_function(vector_second_operation_int);
 end

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/math/vector'));
 
-% Constants
+# Constants
 SIZE_IN = 3;
 LENGTH_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(SIZE_IN, LENGTH_IN);
 
-% DUT
+# DUT
 assert(ntm_vector_deviation(DATA_IN, mean(DATA_IN')'), std(DATA_IN')');

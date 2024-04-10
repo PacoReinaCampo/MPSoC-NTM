@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,25 +41,24 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/arithmetic/matrix'));
 addpath(genpath('../../../library/algebra/matrix'));
 
 addpath(genpath('../../../library/state/feedback'));
 addpath(genpath('../../../library/state/outputs'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_P_IN = 3;
 SIZE_Q_IN = 3;
 
 k = 4;
 
-% Signals
+# Signals
 DATA_K_IN = [0.8334, 0.8499, 0.4069; 0.3961, 0.6429, 0.1376; 0.5145, 0.1792, 0.5457];
 DATA_A_IN = [0.8883, 0.7614, 0.9901; 0.1910, 0.5176, 0.5156; 0.1396, 0.7185, 0.2810];
 DATA_B_IN = [0.1786, 0.1327, 0.2872; 0.6814, 0.1739, 0.4270; 0.8388, 0.4361, 0.1429];
@@ -75,5 +73,5 @@ DATA_X_OUT = [ 5.748798576201760e+01;
                4.844263317870473e+01;
                4.779442403878640e+01];
 
-% DUT
+# DUT
 assert(ntm_state_vector_state(DATA_K_IN, DATA_A_IN, DATA_B_IN, DATA_C_IN, DATA_D_IN, DATA_U_IN, INITIAL_X, k), DATA_X_OUT, 1e-6);

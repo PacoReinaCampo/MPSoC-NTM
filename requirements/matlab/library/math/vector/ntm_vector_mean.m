@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_mean(DATA_IN)
-  % Constants
+  # Constants
   [SIZE_IN, LENGTH_IN] = size(DATA_IN);
 
-  % Signals
+  # Signals
   DATA_OUT = zeros(SIZE_IN, 1);
 
-  % Body
+  # Body
   for i = 1:SIZE_IN
     for m = 1:LENGTH_IN
       DATA_OUT(i) = DATA_OUT(i) + DATA_IN(i, m);

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,10 +41,9 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Q_OUT = ntm_queries_vector(Q_IN, X_IN)
-  % Body
-  % Q(n;k) = X(n;d)·Q(d;k)
+  # Body
+  # Q(n;k) = X(n;d)·Q(d;k)
   Q_OUT = ntm_matrix_product(X_IN, Q_IN);
 end

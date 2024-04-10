@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function U_OUT = ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN)
-  % Constants
+  # Constants
   [~, SIZE_K_IN] = size(K_IN);
 
-  % Body
+  # Body
   k_int = ntm_keys_vector(K_IN, X_IN);
   q_int = ntm_queries_vector(Q_IN, X_IN);
 

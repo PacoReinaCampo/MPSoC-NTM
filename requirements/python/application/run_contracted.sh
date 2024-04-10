@@ -42,39 +42,39 @@
 ##                                                                               ##
 ###################################################################################
 
-python3 arithmetic/test_matrix_arithmetic.py
-python3 arithmetic/test_scalar_arithmetic.py
-python3 arithmetic/test_tensor_arithmetic.py
-python3 arithmetic/test_vector_arithmetic.py
+python3 -B arithmetic/test_matrix_arithmetic.py
+python3 -B arithmetic/test_scalar_arithmetic.py
+python3 -B arithmetic/test_tensor_arithmetic.py
+python3 -B arithmetic/test_vector_arithmetic.py
 
-python3 algebra/test_matrix_algebra.py
-python3 algebra/test_scalar_algebra.py
-python3 algebra/test_tensor_algebra.py
-python3 algebra/test_vector_algebra.py
+python3 -B algebra/test_matrix_algebra.py
+python3 -B algebra/test_scalar_algebra.py
+python3 -B algebra/test_tensor_algebra.py
+python3 -B algebra/test_vector_algebra.py
 
-python3 math/test_matrix_math.py
-python3 math/test_scalar_math.py
-python3 math/test_vector_math.py
+python3 -B math/test_matrix_math.py
+python3 -B math/test_scalar_math.py
+python3 -B math/test_vector_math.py
 
-python3 state/test_state_feedback.py
-python3 state/test_state_outputs.py
-python3 state/test_state_top.py
+python3 -B state/test_state_feedback.py
+python3 -B state/test_state_outputs.py
+python3 -B state/test_state_top.py
 
-python3 nn/ANN/test_ann_components.py
-python3 nn/ANN/test_ann_controller.py
-python3 nn/ANN/test_ann_functions.py
-python3 nn/ANN/test_ann_inputs.py
-python3 nn/ANN/test_ann_top.py
-python3 nn/FNN/test_convolutional_fnn_controller.py
-python3 nn/FNN/test_standard_fnn_controller.py
-python3 nn/LSTM/test_convolutional_lstm_controller.py
-python3 nn/LSTM/test_standard_lstm_controller.py
-python3 nn/NTM/test_ntm_memory.py
-python3 nn/NTM/test_ntm_read_heads.py
-python3 nn/NTM/test_ntm_top.py
-python3 nn/NTM/test_ntm_trained.py
-python3 nn/NTM/test_ntm_write_heads.py
+python3 -B nn/ANN/test_ann_components.py
+python3 -B nn/ANN/test_ann_controller.py
+python3 -B nn/ANN/test_ann_functions.py
+python3 -B nn/ANN/test_ann_inputs.py
+python3 -B nn/ANN/test_ann_top.py
+python3 -B nn/FNN/test_convolutional_fnn_controller.py
+python3 -B nn/FNN/test_standard_fnn_controller.py
+python3 -B nn/LSTM/test_convolutional_lstm_controller.py
+python3 -B nn/LSTM/test_standard_lstm_controller.py
+python3 -B nn/NTM/test_ntm_memory.py
+python3 -B nn/NTM/test_ntm_read_heads.py
+python3 -B nn/NTM/test_ntm_top.py
+python3 -B nn/NTM/test_ntm_trained.py
+python3 -B nn/NTM/test_ntm_write_heads.py
 
-python3 trainer/test_trainer_differentiation.py
-python3 trainer/test_trainer_fnn.py
-python3 trainer/test_trainer_lstm.py
+python3 -B trainer/test_trainer_differentiation.py
+python3 -B trainer/test_trainer_fnn.py
+python3 -B trainer/test_trainer_lstm.py

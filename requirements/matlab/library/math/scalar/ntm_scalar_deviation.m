@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_scalar_deviation(DATA_IN, MEAN_IN)
-  % Constants
+  # Constants
   LENGTH_IN = length(DATA_IN);
 
-  % Signals
+  # Signals
   DATA_OUT = 0;
 
-  % Body
+  # Body
   for m = 1:LENGTH_IN
     DATA_OUT = DATA_OUT + (DATA_IN(m) - MEAN_IN)^2/(LENGTH_IN-1);
   end

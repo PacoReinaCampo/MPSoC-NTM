@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/algebra/tensor'));
 
-% Constants
+# Constants
 SIZE_I_IN = 3;
 SIZE_J_IN = 3;
 SIZE_K_IN = 3;
 LENGTH_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
-% DUT
+# DUT
 DATA_OUT = ntm_tensor_integration(DATA_IN, LENGTH_IN);

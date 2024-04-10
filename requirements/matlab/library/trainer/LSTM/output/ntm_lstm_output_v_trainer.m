@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,24 +41,23 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function V_OUT = ntm_lstm_output_v_trainer(XI_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_S_IN] = size(XI_IN);
 
   [~, SIZE_L_IN] = size(S_IN);
 
-  % Output Signals
+  # Output Signals
   V_OUT = zeros(SIZE_L_IN, SIZE_S_IN);
 
-  % Body
-  % do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
+  # Body
+  # do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
   vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
 
-  % dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T-1]
+  # dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T-1]
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for s = 1:SIZE_S_IN

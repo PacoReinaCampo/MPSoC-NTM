@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,10 +41,9 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function V_OUT = ntm_values_vector(V_IN, X_IN)
-  % Body
-  % V(n;v) = X(n;d)·V(d;v)
+  # Body
+  # V(n;v) = X(n;d)·V(d;v)
   V_OUT = ntm_matrix_product(X_IN, V_IN);
 end

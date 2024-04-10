@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_matrix_inverse(DATA_IN)
-  % Constants
+  # Constants
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 
-  % Body
+  # Body
   data_int = [DATA_IN eye(SIZE_I_IN, SIZE_J_IN)];
 
   data_vector_int = zeros(1, SIZE_J_IN);

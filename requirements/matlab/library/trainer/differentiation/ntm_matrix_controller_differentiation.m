@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_matrix_controller_differentiation(DATA_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_R_IN, SIZE_L_IN] = size(DATA_IN);
 
-  % Output Signals
+  # Output Signals
   DATA_OUT = zeros(SIZE_T_IN, SIZE_R_IN, SIZE_L_IN);
 
-  % Body
+  # Body
   for t = 1:SIZE_T_IN
     for i = 1:SIZE_R_IN
       for l = 1:SIZE_L_IN

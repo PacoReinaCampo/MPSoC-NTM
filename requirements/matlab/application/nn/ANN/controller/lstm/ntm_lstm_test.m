@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,11 +41,10 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../../library/algebra/matrix'));
 addpath(genpath('../../../../../library/algebra/tensor'));
 addpath(genpath('../../../../../library/math/vector'));
@@ -55,7 +53,7 @@ addpath(genpath('../../../../../library/nn/LSTM/standard'));
 
 addpath(genpath('../../../../../library/nn/ANN/controller/lstm'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
@@ -66,7 +64,7 @@ SIZE_R_IN = 3;
 SIZE_M_IN = 3;
 SIZE_S_IN = 3;
 
-% Signals
+# Signals
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
 V_IN = rand(SIZE_D_IN, SIZE_S_IN);
@@ -82,5 +80,5 @@ RHO_IN = rand(SIZE_N_IN, SIZE_R_IN, SIZE_M_IN);
 S_IN = rand(SIZE_D_IN, 1);
 H_IN = rand(SIZE_D_IN, 1);
 
-% DUT
+# DUT
 H_OUT = ntm_lstm(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN, X_IN);

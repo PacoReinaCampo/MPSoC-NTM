@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function W_OUT = ntm_fnn_w_trainer(X_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
 
   [~, SIZE_L_IN] = size(H_IN);
 
-  % Output Signals
+  # Output Signals
   W_OUT = zeros(SIZE_L_IN, SIZE_X_IN);
 
-  % Body
-  % dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+  # Body
+  # dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
   for t = 1:SIZE_T_IN

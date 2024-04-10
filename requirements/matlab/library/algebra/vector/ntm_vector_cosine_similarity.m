@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,10 +41,9 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_cosine_similarity(DATA_A_IN, DATA_B_IN)
-  % Body
+  # Body
   scalar_first_operation_int = ntm_dot_product(DATA_A_IN, DATA_B_IN);
 
   scalar_a_int = ntm_vector_module(DATA_A_IN);

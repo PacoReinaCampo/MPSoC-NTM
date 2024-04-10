@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-import numpy as np 
+import numpy as np
 
 class ScalarMath:
   def __init__(self, data_in, mean_in):
@@ -51,11 +51,11 @@ class ScalarMath:
 
   def ntm_scalar_logistic_function(self):
     # calculating addition
-    return (1/(1 + 1/math.exp(self.data_in)))
+    return (1/(1 + 1/np.exp(self.data_in)))
 
   def ntm_scalar_oneplus_function(self):
     # calculating oneplus
-    return (1 + math.log(1 + math.exp(self.data_in)))
+    return (1 + np.log(1 + np.exp(self.data_in)))
 
   def ntm_scalar_mean(self):
     data_out = 0.0

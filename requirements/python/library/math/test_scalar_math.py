@@ -42,9 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-import math
-import random
-
 import numpy as np
 
 from scalar import ntm_scalar_logistic_function as scalar_logistic_function
@@ -56,13 +53,13 @@ def test_scalar_logistic_function():
   
   data_in = random.random()
 
-  assert scalar_logistic_function.ntm_scalar_logistic_function(data_in) == 1/(1 + 1/math.exp(data_in))
+  np.testing.assert_array_equal(scalar_logistic_function.ntm_scalar_logistic_function(data_in), 1/(1 + 1/np.exp(data_in)))
 
 def test_scalar_oneplus_function():  
 
   data_in = random.random()
 
-  assert scalar_oneplus_function.ntm_scalar_oneplus_function(data_in) == 1 + math.log(1 + math.exp(data_in))
+  np.testing.assert_array_equal(scalar_oneplus_function.ntm_scalar_oneplus_function(data_in), 1 + np.log(1 + np.exp(data_in)))
 
 def test_scalar_mean():
 

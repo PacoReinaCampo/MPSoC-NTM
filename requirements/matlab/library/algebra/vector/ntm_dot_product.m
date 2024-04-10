@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_dot_product(DATA_A_IN, DATA_B_IN)
-  % Constants
+  # Constants
   SIZE_A_IN = length(DATA_A_IN);
 
-  % Body
+  # Body
   DATA_OUT = 0;
 
   for i = 1:SIZE_A_IN

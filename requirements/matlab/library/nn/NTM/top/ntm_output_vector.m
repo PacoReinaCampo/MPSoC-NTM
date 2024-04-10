@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Y_OUT = ntm_output_vector(P_IN, R_IN, Q_IN, H_IN)
-  % Constants
+  # Constants
   [SIZE_R_IN, SIZE_Y_IN, ~] = size(P_IN);
 
-  % Body
-  % y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
+  # Body
+  # y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
 
-  % Q(y;l)·h(t;l)
+  # Q(y;l)·h(t;l)
   Y_OUT = ntm_matrix_vector_product(Q_IN, H_IN);
 
-  % P(i;y;k)·r(t;i;k)
+  # P(i;y;k)·r(t;i;k)
   matrix_operation_int = ntm_tensor_matrix_product(P_IN, R_IN);
   
   for y = 1:SIZE_Y_IN

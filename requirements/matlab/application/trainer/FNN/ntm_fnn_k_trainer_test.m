@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,26 +41,25 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/trainer/differentiation'));
 addpath(genpath('../../../library/trainer/FNN'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 SIZE_R_IN = 3;
 SIZE_W_IN = 3;
 
-% Signals
+# Signals
 R_IN = rand(SIZE_T_IN, SIZE_R_IN, SIZE_W_IN);
 
 H_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
-% DUT
+# DUT
 K_OUT = ntm_fnn_k_trainer(R_IN, H_IN, LENGTH_IN);

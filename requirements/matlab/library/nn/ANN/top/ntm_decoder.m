@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN, Z_IN)
-  % Constants
+  # Constants
   [SIZE_L_IN, SIZE_N_IN, SIZE_D_IN] = size(X_IN);
 
-  % Internal Signals
+  # Internal Signals
   GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
   BETA_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
@@ -56,10 +54,10 @@ function Z_OUT = ntm_decoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_
 
   x_int = zeros(SIZE_N_IN, SIZE_D_IN);
 
-  % Output Signals
+  # Output Signals
   Z_OUT = zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN); 
 
-  % Body
+  # Body
   for l = 1:SIZE_L_IN
     for n = 1:SIZE_N_IN
       for d = 1:SIZE_D_IN

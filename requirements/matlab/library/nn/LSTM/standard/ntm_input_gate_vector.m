@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function I_OUT = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
-  % Constants
+  # Constants
   [SIZE_R_IN, SIZE_L_IN, ~] = size(K_IN);
 
-  % Body
-  % i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
+  # Body
+  # i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + D(i;l;m)·rho(t;i;m) + V(l;s)·xi(t;s) + U(l;l)·h(t-1;l) + b(l))
   
-  % W(l;x)·x(t;x)
+  # W(l;x)·x(t;x)
   vector_operation_int = ntm_matrix_vector_product(W_IN, X_IN);
 
-  % K(i;l;k)·r(t;i;k)
+  # K(i;l;k)·r(t;i;k)
   matrix_operation_int = ntm_tensor_matrix_product(K_IN, R_IN);
 
   for l = 1:SIZE_L_IN
@@ -63,7 +61,7 @@ function I_OUT = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN,
     end
   end
 
-  % D(i;l;m)·rho(t;i;m)
+  # D(i;l;m)·rho(t;i;m)
   matrix_operation_int = ntm_tensor_matrix_product(D_IN, RHO_IN);
 
   for l = 1:SIZE_L_IN
@@ -72,19 +70,19 @@ function I_OUT = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN,
     end
   end
 
-  % b(l)
+  # b(l)
   I_OUT = vector_operation_int + B_IN;
 
-  % V(l;s)·xi(t;s)
+  # V(l;s)·xi(t;s)
   vector_operation_int = ntm_matrix_vector_product(V_IN, XI_IN);
 
   I_OUT = I_OUT + vector_operation_int;
 
-  % U(l;l)·h(t-1;l)
+  # U(l;l)·h(t-1;l)
   vector_operation_int = ntm_matrix_vector_product(U_IN, H_IN);
 
   I_OUT = I_OUT + vector_operation_int;
 
-  % sigmoid(.)
+  # sigmoid(.)
   I_OUT = ntm_vector_logistic_function(I_OUT);
 end

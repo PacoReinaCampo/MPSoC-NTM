@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,28 +41,24 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
-classdef ScalarArithmetic
-  methods
-    function DATA_OUT = ntm_scalar_adder(DATA_A_IN, DATA_B_IN)
-      % Body
-      DATA_OUT = DATA_A_IN + DATA_B_IN;
-    end
+warning('off','all');
 
-    function DATA_OUT = ntm_scalar_subtractor(DATA_A_IN, DATA_B_IN)
-      % Body
-      DATA_OUT = DATA_A_IN - DATA_B_IN;
-    end
+# Package
+addpath(genpath('../../library/arithmetic'));
 
-    function DATA_OUT = ntm_scalar_multiplier(DATA_A_IN, DATA_B_IN)
-      % Body
-      DATA_OUT = DATA_A_IN * DATA_B_IN;
-    end
+# Objects
+arithmetic = VectorArithmetic();
 
-    function DATA_OUT = ntm_scalar_divider(DATA_A_IN, DATA_B_IN)
-      % Body
-      DATA_OUT = DATA_A_IN / DATA_B_IN;
-    end
-  end
-end
+# Constants
+SIZE_IN = 3;
+
+# Signals
+DATA_A_IN = rand(SIZE_IN, 1);
+DATA_B_IN = rand(SIZE_IN, 1);
+
+# DUT
+assert(ntm_vector_adder(DATA_A_IN, DATA_B_IN), DATA_A_IN + DATA_B_IN);
+assert(ntm_vector_subtractor(DATA_A_IN, DATA_B_IN), DATA_A_IN - DATA_B_IN);
+assert(ntm_vector_multiplier(DATA_A_IN, DATA_B_IN), DATA_A_IN .* DATA_B_IN);
+assert(ntm_vector_divider(DATA_A_IN, DATA_B_IN), DATA_A_IN ./ DATA_B_IN);

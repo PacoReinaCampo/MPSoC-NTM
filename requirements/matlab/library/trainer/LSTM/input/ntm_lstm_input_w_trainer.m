@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,28 +41,27 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function W_OUT = ntm_lstm_input_w_trainer(X_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_X_IN] = size(X_IN);
 
   [~, SIZE_L_IN] = size(A_IN);
 
-  % Output Signals
+  # Output Signals
   W_OUT = zeros(SIZE_L_IN, SIZE_X_IN);
 
-  % Body
-  % ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
+  # Body
+  # ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
   vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN);
 
   vector_ds_int = vector_dh_int.*O_IN.*(1-tanh(S_IN).^2) + vector_ds_int + F_IN;
   
-  % di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
+  # di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
   vector_di_int = vector_ds_int.*A_IN.*I_IN.*(1-I_IN);
 
-  % dW(l;x) = summation(di(t;l) · x(t;x))[t in 0 to T]
+  # dW(l;x) = summation(di(t;l) · x(t;x))[t in 0 to T]
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       for x = 1:SIZE_X_IN

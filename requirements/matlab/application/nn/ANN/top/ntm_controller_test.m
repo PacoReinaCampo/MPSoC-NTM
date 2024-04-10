@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,11 +41,10 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
 addpath(genpath('../../../../library/math/matrix'));
@@ -59,7 +57,7 @@ addpath(genpath('../../../../library/nn/ANN/functions'));
 addpath(genpath('../../../../library/nn/ANN/controller/fnn'));
 addpath(genpath('../../../../library/nn/ANN/top'));
 
-% Constants
+# Constants
 SIZE_L_IN = 3;
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
@@ -73,7 +71,7 @@ SIZE_R_IN = 3;
 SIZE_P_IN = 3;
 SIZE_S_IN = 3;
 
-% Signals
+# Signals
 K_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 Q_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 V_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
@@ -108,5 +106,5 @@ RHO_O_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
 
 PE_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 
-% DUT
+# DUT
 Z_OUT = ntm_controller(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, W_I_IN, K_I_IN, V_I_IN, D_I_IN, X_I_IN, R_I_IN, XI_I_IN, RHO_I_IN, W_O_IN, K_O_IN, V_O_IN, D_O_IN, X_O_IN, R_O_IN, XI_O_IN, RHO_O_IN, PE_IN);

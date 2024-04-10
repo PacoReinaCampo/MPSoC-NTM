@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,14 +41,13 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_convolution(DATA_A_IN, DATA_B_IN)
-  % Constants
+  # Constants
   SIZE_A_IN = length(DATA_A_IN);
   SIZE_B_IN = length(DATA_B_IN);
 
-  % Body
+  # Body
   DATA_OUT = zeros(SIZE_A_IN, 1);
 
   for i = 1:SIZE_A_IN

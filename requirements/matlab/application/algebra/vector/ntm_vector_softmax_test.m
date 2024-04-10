@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,18 +41,17 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/algebra/vector'));
 
-% Constants
+# Constants
 SIZE_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(SIZE_IN, 1);
 
-% DUT
+# DUT
 DATA_OUT = ntm_vector_softmax(DATA_IN);

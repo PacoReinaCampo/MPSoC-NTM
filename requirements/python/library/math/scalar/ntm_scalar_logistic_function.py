@@ -42,9 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-import math
-import random
+import numpy as np 
 
 def ntm_scalar_logistic_function(data_in):
   # calculating result
-  return (1/(1 + 1/math.exp(data_in)))
+  return (1/(1 + 1/np.exp(data_in)))

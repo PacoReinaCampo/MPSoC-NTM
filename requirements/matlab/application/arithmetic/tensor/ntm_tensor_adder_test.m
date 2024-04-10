@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,24 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/arithmetic/tensor'));
 
-% Objects
-arithmetic = TensorArithmetic;
-
-% Constants
+# Constants
 SIZE_I_IN = 3;
 SIZE_J_IN = 3;
 SIZE_K_IN = 3;
 
-% Signals
+# Signals
 DATA_A_IN = rand(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 DATA_B_IN = rand(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
-% DUT
+# DUT
 assert(ntm_tensor_adder(DATA_A_IN, DATA_B_IN), DATA_A_IN + DATA_B_IN);

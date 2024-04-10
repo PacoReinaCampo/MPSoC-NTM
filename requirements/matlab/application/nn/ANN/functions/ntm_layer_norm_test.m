@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/math/vector'));
 
 addpath(genpath('../../../../library/nn/ANN/functions'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 
-% Signals
+# Signals
 Z_IN = rand(SIZE_N_IN, SIZE_D_IN);
 GAMMA_IN = rand(SIZE_N_IN, SIZE_D_IN);
 BETA_IN = rand(SIZE_N_IN, SIZE_D_IN); 
 
-% DUT
+# DUT
 N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN);

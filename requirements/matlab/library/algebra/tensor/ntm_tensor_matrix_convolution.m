@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,15 +41,14 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_tensor_matrix_convolution(DATA_A_IN, DATA_B_IN)
-  % Constants
+  # Constants
   [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
 
   DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN);
 
-  % Body
+  # Body
   for i = 1:SIZE_A_I_IN
     for j = 1:SIZE_A_J_IN
       for k = 1:SIZE_A_K_IN

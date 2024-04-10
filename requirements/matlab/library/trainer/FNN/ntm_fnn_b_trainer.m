@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,17 +41,16 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function B_OUT = ntm_fnn_b_trainer(H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_L_IN] = size(H_IN);
 
-  % Output Signals
+  # Output Signals
   B_OUT = zeros(SIZE_L_IN);
 
-  % Body
-  % db(l) = summation(d*(t+1+;l))[t in 0 to T]
+  # Body
+  # db(l) = summation(d*(t+1+;l))[t in 0 to T]
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
 
   for t = 1:SIZE_T_IN

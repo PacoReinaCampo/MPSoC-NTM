@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/nn/ANN/functions'));
 
-% Constants
+# Constants
 SIZE_L_IN = 3;
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 
-% Signals
+# Signals
 X_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 PE_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN);
 
-% DUT
+# DUT
 Y_OUT = ntm_positional_encoding(X_IN, PE_IN);

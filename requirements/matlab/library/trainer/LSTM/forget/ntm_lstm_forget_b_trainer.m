@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,26 +41,25 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function B_OUT = ntm_lstm_forget_b_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN)
-  % Constants
+  # Constants
   [SIZE_T_IN, SIZE_L_IN] = size(F_IN);
 
-  % Output Signals
+  # Output Signals
   B_OUT = zeros(SIZE_L_IN);
 
-  % Body
-  % ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
+  # Body
+  # ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN);
   vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN);
 
   vector_ds_int = vector_dh_int.*O_IN.*(1-tanh(S_IN).^2) + vector_ds_int + F_IN;
 
-  % df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
+  # df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
   vector_df_int = vector_ds_int.*S_IN.*F_IN.*(1-F_IN);
 
-  % db(l) = summation(df(t+1+;l))[t in 0 to T]
+  # db(l) = summation(df(t+1+;l))[t in 0 to T]
   for t = 1:SIZE_T_IN
     for l = 1:SIZE_L_IN
       scalar_operation_int = vector_df_int(t, l);

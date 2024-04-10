@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,13 +41,12 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_tensor_inverse(DATA_IN)
-  % Constants
+  # Constants
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
-  % Body
+  # Body
   eye_3d = zeros(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
   for i = 1:SIZE_I_IN

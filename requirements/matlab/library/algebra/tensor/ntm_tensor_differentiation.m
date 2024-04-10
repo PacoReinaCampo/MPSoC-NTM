@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,18 +41,17 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_tensor_differentiation(DATA_IN, LENGTH_I_IN, LENGTH_J_IN, LENGTH_K_IN, CONTROL)
-  % Constants
+  # Constants
   [SIZE_I_IN, SIZE_J_IN, SIZE_K_IN] = size(DATA_IN);
 
-  % Signals
+  # Signals
   scalar_operation_int = 0;
 
   DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN, SIZE_K_IN);
 
-  % Body
+  # Body
   for i = 1:SIZE_I_IN
     for j = 1:SIZE_J_IN
       for k = 1:SIZE_K_IN

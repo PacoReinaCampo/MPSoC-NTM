@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,21 +41,20 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/trainer/differentiation'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_L_IN = 3;
 
-% Signals
+# Signals
 DATA_IN = rand(SIZE_T_IN, SIZE_L_IN);
 
 LENGTH_IN = 3;
 
-% DUT
+# DUT
 DATA_OUT = ntm_vector_controller_differentiation(DATA_IN, LENGTH_IN);

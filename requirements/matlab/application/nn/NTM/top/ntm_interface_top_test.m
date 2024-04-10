@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,11 +41,10 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/vector'));
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
@@ -60,7 +58,7 @@ addpath(genpath('../../../../library/nn/NTM/read_heads'));
 addpath(genpath('../../../../library/nn/NTM/write_heads'));
 addpath(genpath('../../../../library/nn/NTM/top'));
 
-% Constants
+# Constants
 SIZE_T_IN = 3;
 SIZE_X_IN = 3;
 SIZE_Y_IN = 3;
@@ -72,7 +70,7 @@ SIZE_R_IN = 3;
 SIZE_M_IN = SIZE_N_IN + SIZE_W_IN + 3;
 SIZE_S_IN = 2*SIZE_W_IN;
 
-% Signals
+# Signals
 W_IN = rand(SIZE_L_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_L_IN, SIZE_W_IN);
 V_IN = rand(SIZE_L_IN, SIZE_S_IN);
@@ -84,5 +82,5 @@ Q_IN = rand(SIZE_Y_IN, SIZE_L_IN);
 
 X_IN = rand(SIZE_T_IN, SIZE_X_IN);
 
-% DUT
+# DUT
 [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, P_IN, Q_IN, X_IN);

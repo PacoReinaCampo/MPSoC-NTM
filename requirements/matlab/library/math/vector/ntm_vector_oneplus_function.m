@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,16 +41,15 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_oneplus_function(DATA_IN)
-  % Constants
+  # Constants
   SIZE_IN = length(DATA_IN);
 
-  % Signals
+  # Signals
   DATA_OUT = zeros(SIZE_IN, 1);
 
-  % Body
+  # Body
   for i = 1:SIZE_IN
     DATA_OUT(i) = 1 + log(1 + exp(DATA_IN(i)));
   end

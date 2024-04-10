@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,27 +41,26 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../../library/algebra/matrix'));
 addpath(genpath('../../../../../library/math/vector'));
 
 addpath(genpath('../../../../../library/nn/ANN/controller/fnn'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_M_IN = 3;
 
-% Signals
+# Signals
 W1_IN = rand(SIZE_M_IN, SIZE_D_IN);
 B1_IN = rand(SIZE_M_IN, 1);
 W2_IN = rand(SIZE_D_IN, SIZE_M_IN);
 B2_IN = rand(SIZE_D_IN, 1);
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
-% DUT
+# DUT
 Y_OUT = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN);

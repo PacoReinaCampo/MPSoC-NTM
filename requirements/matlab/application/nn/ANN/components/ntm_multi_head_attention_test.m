@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,25 +41,24 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/math/matrix'));
 
 addpath(genpath('../../../../library/nn/ANN/inputs'));
 addpath(genpath('../../../../library/nn/ANN/components'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_K_IN = 3;
 SIZE_V_IN = 3;
 SIZE_H_IN = 3;
 
-% Signals
+# Signals
 K_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 Q_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_K_IN);
 V_IN = rand(SIZE_H_IN, SIZE_D_IN, SIZE_V_IN);
@@ -69,5 +67,5 @@ W_OH_IN = rand(SIZE_H_IN*SIZE_V_IN, SIZE_D_IN);
 
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
-% DUT
+# DUT
 Y_OUT = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN);

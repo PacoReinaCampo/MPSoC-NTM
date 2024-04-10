@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/tensor'));
 
 addpath(genpath('../../../../library/nn/NTM/top'));
 
-% Constants
+# Constants
 SIZE_R_IN = 3;
 SIZE_M_IN = 3;
 SIZE_L_IN = 3;
 
-% Signals
+# Signals
 U_IN = rand(SIZE_R_IN, SIZE_M_IN, SIZE_L_IN);
 H_IN = rand(SIZE_L_IN, 1);
 
-% DUT
+# DUT
 RHO_OUT = ntm_interface_matrix(U_IN, H_IN);

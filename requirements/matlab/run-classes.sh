@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -10,14 +9,14 @@
 ##                  |_|                                                          ##
 ##                                                                               ##
 ##                                                                               ##
-##              Peripheral-NTM for MPSoC                                         ##
-##              Neural Turing Machine for MPSoC                                  ##
+##              QueenField                                                       ##
+##              Multi-Processor System on Chip                                   ##
 ##                                                                               ##
 ###################################################################################
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2020-2024 by the author(s)                                      ##
+## Copyright (c) 2022-2025 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,72 +41,8 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
-classdef MatrixArithmetic
-  methods
-    function DATA_OUT = ntm_matrix_adder(DATA_A_IN, DATA_B_IN)
-      % Constants
-      [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-      [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
-
-      % Signals
-      DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN);
-
-      % Body
-      for i = 1:SIZE_A_I_IN
-        for j = 1:SIZE_A_J_IN
-          DATA_OUT(i, j) = DATA_A_IN(i, j) + DATA_B_IN(i, j);
-        end
-      end
-    end
-
-    function DATA_OUT = ntm_matrix_subtractor(DATA_A_IN, DATA_B_IN)
-      % Constants
-      [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-      [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
-
-      % Signals
-      DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN);
-
-      % Body
-      for i = 1:SIZE_A_I_IN
-        for j = 1:SIZE_A_J_IN
-          DATA_OUT(i, j) = DATA_A_IN(i, j) - DATA_B_IN(i, j);
-        end
-      end
-    end
-
-    function DATA_OUT = ntm_matrix_multiplier(DATA_A_IN, DATA_B_IN)
-      % Constants
-      [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-      [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
-
-      % Signals
-      DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN);
-
-      % Body
-      for i = 1:SIZE_A_I_IN
-        for j = 1:SIZE_A_J_IN
-          DATA_OUT(i, j) = DATA_A_IN(i, j) * DATA_B_IN(i, j);
-        end
-      end
-    end
-
-    function DATA_OUT = ntm_matrix_divider(DATA_A_IN, DATA_B_IN)
-      % Constants
-      [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
-      [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
-
-      % Signals
-      DATA_OUT = zeros(SIZE_A_I_IN, SIZE_A_J_IN);
-
-      % Body
-      for i = 1:SIZE_A_I_IN
-        for j = 1:SIZE_A_J_IN
-          DATA_OUT(i, j) = DATA_A_IN(i, j) / DATA_B_IN(i, j);
-        end
-      end
-    end
-  end
-end
+cd application/arithmetic; octave ntm_scalar_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave ntm_vector_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave ntm_matrix_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave ntm_tensor_arithmetic_test.m; cd ../..

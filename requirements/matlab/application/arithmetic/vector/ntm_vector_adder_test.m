@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,22 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../library/arithmetic/vector'));
 
-% Objects
-arithmetic = VectorArithmetic;
-
-% Constants
+# Constants
 SIZE_IN = 3;
 
-% Signals
+# Signals
 DATA_A_IN = rand(SIZE_IN, 1);
 DATA_B_IN = rand(SIZE_IN, 1);
 
-% DUT
+# DUT
 assert(ntm_vector_adder(DATA_A_IN, DATA_B_IN), DATA_A_IN + DATA_B_IN);

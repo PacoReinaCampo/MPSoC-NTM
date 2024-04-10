@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,18 +41,17 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function DATA_OUT = ntm_vector_differentiation(DATA_IN, LENGTH_IN)
-  % Constants
+  # Constants
   SIZE_IN = length(DATA_IN);
 
-  % Signals
+  # Signals
   scalar_operation_int = 0;
 
   DATA_OUT = zeros(SIZE_IN, 1);
 
-  % Body
+  # Body
   for i = 1:SIZE_IN
     if (i == 1)
       DATA_OUT(i) = 0;

@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,23 +41,22 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 
 addpath(genpath('../../../../library/nn/ANN/inputs'));
 
-% Constants
+# Constants
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
 SIZE_V_IN = 3;
 
-% Signals
+# Signals
 V_IN = rand(SIZE_D_IN, SIZE_V_IN);
 X_IN = rand(SIZE_N_IN, SIZE_D_IN);
 
-% DUT
+# DUT
 V_OUT = ntm_values_vector(V_IN, X_IN);

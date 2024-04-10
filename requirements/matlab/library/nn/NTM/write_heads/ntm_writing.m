@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function M_OUT = ntm_writing(M_IN, W_IN, A_IN)
-  % Constants
+  # Constants
   [SIZE_N_IN, SIZE_W_IN] = size(M_IN);
 
   [SIZE_R_IN, ~] = size(W_IN);
 
-  % Internal Signals
+  # Internal Signals
   matrix_first_operation_int = zeros(SIZE_N_IN, SIZE_W_IN);
 
-  % Body
-  % M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
+  # Body
+  # M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
   for i = 1:SIZE_R_IN
     matrix_second_operation_int = ntm_transpose_vector_product(W_IN(i, :), A_IN);
 

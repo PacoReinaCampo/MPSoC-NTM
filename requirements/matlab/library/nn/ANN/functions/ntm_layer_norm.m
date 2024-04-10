@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,19 +41,18 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
-  % Package
+  # Package
   addpath(genpath('../../../math/statitics/vector'));
 
-  % Constants
+  # Constants
   [SIZE_N_IN, SIZE_D_IN] = size(Z_IN);
 
-  % Output Signals
+  # Output Signals
   N_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
 
-  % Body
+  # Body
   vector_operation_int = ntm_vector_mean(Z_IN);
 
   for n = 1:SIZE_N_IN

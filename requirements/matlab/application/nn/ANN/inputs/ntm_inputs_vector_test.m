@@ -1,4 +1,3 @@
-%{
 ###################################################################################
 ##                                            __ _      _     _                  ##
 ##                                           / _(_)    | |   | |                 ##
@@ -42,17 +41,16 @@
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
-%}
 
 warning('off','all');
 
-% Package
+# Package
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
 
 addpath(genpath('../../../../library/nn/ANN/inputs'));
 
-% Constants
+# Constants
 SIZE_L_IN = 3;
 SIZE_N_IN = 3;
 SIZE_D_IN = 3;
@@ -65,7 +63,7 @@ SIZE_R_IN = 3;
 SIZE_P_IN = 3;
 SIZE_S_IN = 3;
 
-% Signals
+# Signals
 W_IN = rand(SIZE_D_IN, SIZE_X_IN);
 K_IN = rand(SIZE_R_IN, SIZE_D_IN, SIZE_W_IN);
 V_IN = rand(SIZE_D_IN, SIZE_S_IN);
@@ -76,5 +74,5 @@ R_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN);
 XI_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_S_IN);
 RHO_IN = rand(SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_P_IN);
 
-% DUT
+# DUT
 X_OUT = ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN);
