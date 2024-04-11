@@ -40,29 +40,29 @@ library
 │       └── ntm_vector_summation.m
 ├── arithmetic
 │   ├── matrix
-│   │   ├── MatrixArithmetic.m
 │   │   ├── ntm_matrix_adder.m
 │   │   ├── ntm_matrix_divider.m
 │   │   ├── ntm_matrix_multiplier.m
 │   │   └── ntm_matrix_subtractor.m
+│   ├── MatrixArithmetic.m
 │   ├── scalar
 │   │   ├── ntm_scalar_adder.m
 │   │   ├── ntm_scalar_divider.m
 │   │   ├── ntm_scalar_multiplier.m
-│   │   ├── ntm_scalar_subtractor.m
-│   │   └── ScalarArithmetic.m
+│   │   └── ntm_scalar_subtractor.m
+│   ├── ScalarArithmetic.m
 │   ├── tensor
 │   │   ├── ntm_tensor_adder.m
 │   │   ├── ntm_tensor_divider.m
 │   │   ├── ntm_tensor_multiplier.m
-│   │   ├── ntm_tensor_subtractor.m
-│   │   └── TensorArithmetic.m
-│   └── vector
-│       ├── ntm_vector_adder.m
-│       ├── ntm_vector_divider.m
-│       ├── ntm_vector_multiplier.m
-│       ├── ntm_vector_subtractor.m
-│       └── VectorArithmetic.m
+│   │   └── ntm_tensor_subtractor.m
+│   ├── TensorArithmetic.m
+│   ├── vector
+│   │   ├── ntm_vector_adder.m
+│   │   ├── ntm_vector_divider.m
+│   │   ├── ntm_vector_multiplier.m
+│   │   └── ntm_vector_subtractor.m
+│   └── VectorArithmetic.m
 ├── math
 │   ├── matrix
 │   │   ├── ntm_matrix_deviation.m

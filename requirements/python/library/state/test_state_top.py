@@ -42,4 +42,24 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+from feedback import ntm_state_top as state_top
+
+def test_state_top():
+
+  data_k_in = np.random.rand(3,3)
+  data_a_in = np.random.rand(3,3)
+  data_b_in = np.random.rand(3,3)
+  data_c_in = np.random.rand(3,3)
+  data_d_in = np.random.rand(3,3)
+  data_u_in = np.random.rand(3,3)
+
+  initial_x = np.random.rand(3,1)
+
+  k = 4
+
+  np.testing.assert_array_equal(state_top.ntm_state_top(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k), state_top.ntm_state_top(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k))
+
+
+test_state_top()

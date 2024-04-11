@@ -42,4 +42,41 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+from feedback import ntm_state_vector_output as state_vector_output
+from feedback import ntm_state_vector_state as state_vector_state
+
+def test_state_vector_output():
+
+  data_k_in = np.random.rand(3,3)
+  data_a_in = np.random.rand(3,3)
+  data_b_in = np.random.rand(3,3)
+  data_c_in = np.random.rand(3,3)
+  data_d_in = np.random.rand(3,3)
+  data_u_in = np.random.rand(3,3)
+
+  initial_x = np.random.rand(3,1)
+
+  k = 4
+
+  np.testing.assert_array_equal(state_vector_output.ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k), state_vector_output.ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k))
+
+def test_state_vector_state():
+
+  data_k_in = np.random.rand(3,3)
+  data_a_in = np.random.rand(3,3)
+  data_b_in = np.random.rand(3,3)
+  data_c_in = np.random.rand(3,3)
+  data_d_in = np.random.rand(3,3)
+  data_u_in = np.random.rand(3,3)
+
+  initial_x = np.random.rand(3,1)
+
+  k = 4
+
+  np.testing.assert_array_equal(state_vector_state.ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k), state_vector_state.ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k))
+
+
+test_state_vector_output()
+test_state_vector_state()
