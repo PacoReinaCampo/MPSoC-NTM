@@ -45,6 +45,12 @@
 with Ada.Text_IO;
 use Ada.Text_IO;
 
+with Ada.Numerics;
+use Ada.Numerics;
+
+with Ada.Numerics.Elementary_Functions;
+use Ada.Numerics.Elementary_Functions;
+
 package body ntm_tensor_algebra is
 
   procedure ntm_tensor_convolution (
@@ -130,6 +136,8 @@ package body ntm_tensor_algebra is
     for i in data_a_in'Range(1) loop
       for j in data_a_in'Range(2) loop
         for k in data_a_in'Range(3) loop
+          temporal := 0.0;
+
           for m in data_a_in'Range(3) loop
             temporal := temporal + data_a_in(i, j, m) * data_b_in(i, m);
 
@@ -172,6 +180,8 @@ package body ntm_tensor_algebra is
     for i in data_out'Range(1) loop
       for j in data_out'Range(2) loop
         for k in data_out'Range(3) loop
+          temporal := 0.0;
+
           for m in data_a_in'Range(3) loop
             temporal := temporal + data_a_in(i, j, m) * data_b_in(i, m, k);
 

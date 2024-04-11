@@ -55,21 +55,15 @@ use ntm_matrix_math;
 
 procedure test_matrix_math is
 
-  data_in : matrix := (
+  data_matrix_in : matrix := (
     ( 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 ),
     ( 4.3132651822261687, 5.3132616875182226, 6.6931471805599454 ),
     ( 9.9982079678583020, 7.9581688450893644, 2.9997639589554603 )
   );
 
-  data_out : matrix := (
-    ( 0.0, 0.0, 0.0 ),
-    ( 0.0, 0.0, 0.0 ),
-    ( 0.0, 0.0, 0.0 )
-  );
-
-  data_in : tensor := ( ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
-                        ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
-                        ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)) );
+  data_tensor_in : tensor := ( ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
+                               ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
+                               ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)) );
 
   mean_in : matrix := ((3.0, 3.0, 3.0), (3.0, 3.0, 3.0), (3.0, 3.0, 3.0));
 
@@ -78,7 +72,7 @@ procedure test_matrix_math is
 begin
 
   ntm_matrix_math.ntm_matrix_logistic_function (
-    data_in => data_in,
+    data_in => data_matrix_in,
 
     data_out  => data_out
   );
@@ -94,7 +88,7 @@ begin
   end loop;
 
   ntm_matrix_math.ntm_matrix_oneplus_function (
-    data_in => data_in,
+    data_in => data_matrix_in,
 
     data_out  => data_out
   );
@@ -110,7 +104,7 @@ begin
   end loop;
 
   ntm_matrix_math.ntm_matrix_mean (
-    data_in => data_in,
+    data_in => data_tensor_in,
 
     data_out => data_out
   );
@@ -126,7 +120,7 @@ begin
   end loop;
 
   ntm_matrix_math.ntm_matrix_deviation (
-    data_in => data_in,
+    data_in => data_tensor_in,
 
     mean_in => mean_in,
 

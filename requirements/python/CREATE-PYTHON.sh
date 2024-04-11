@@ -83,11 +83,11 @@ touch library/nn/ANN/inputs/ntm_inputs_vector.py
 touch library/nn/ANN/inputs/ntm_keys_vector.py
 touch library/nn/ANN/inputs/ntm_queries_vector.py
 touch library/nn/ANN/inputs/ntm_values_vector.py
-touch library/nn/ANN/test_transformer_components.py
-touch library/nn/ANN/test_transformer_controller.py
-touch library/nn/ANN/test_transformer_functions.py
-touch library/nn/ANN/test_transformer_inputs.py
-touch library/nn/ANN/test_transformer_top.py
+touch library/nn/ANN/test_ann_components.py
+touch library/nn/ANN/test_ann_controller.py
+touch library/nn/ANN/test_ann_functions.py
+touch library/nn/ANN/test_ann_inputs.py
+touch library/nn/ANN/test_ann_top.py
 touch library/nn/ANN/top/ntm_controller.py
 touch library/nn/ANN/top/ntm_decoder.py
 touch library/nn/ANN/top/ntm_encoder.py

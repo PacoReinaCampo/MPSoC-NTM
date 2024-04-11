@@ -87,13 +87,65 @@ class MatrixMathAlgebra:
 
   def ntm_matrix_inverse(self):
 
-    data_out = []
+    m, n = data_in.shape
 
-    # calculating inverse
-    for i in range(len(self.matrix_data_in)):
-      data_out.append([])
-      for j in range(len(self.matrix_data_in[i])):
-        data_out[i].append(self.matrix_data_in[j][i])
+    vector_in_int = np.zeros(n)
+    matrix_in_int = np.zeros((m, 2*n))
+
+    data_out = np.zeros((m, n))
+
+    # Augmenting Identity Matrix of Order SIZE_IN
+    for i in range(m):
+      for j in range(n):
+        matrix_in_int[i][j] = data_in[i][j]
+
+        if i == j:
+          matrix_in_int[i][j + n] = 1
+        else:
+          matrix_in_int[i][j + n] = 0
+
+    for i in range(m):
+      # Row swapping
+      u = 1
+
+      while  data_in[i][i] == 0:
+        for j in range(n):
+          vector_in_int[j] = matrix_in_int[i][j]
+
+        if i < m - 1:
+          for j in range(n):
+            matrix_in_int[i][j] = matrix_in_int[i + u][j]
+
+          for j in range(n):
+            matrix_in_int[i + u][j] = vector_in_int[j]
+        else:
+          for j in range(n):
+            matrix_in_int[i][j] = matrix_in_int[i - u][j]
+
+          for j in range(n):
+            matrix_in_int[i - u][j] = vector_in_int[j]
+
+        u += 1
+
+      # Applying Gauss Jordan Elimination
+      for j in range(n):
+        if i != j:
+          scalar_ratio_int = matrix_in_int[j][i] / matrix_in_int[i][i]
+
+          for v in range(2*n):
+            scalar_sum_int = scalar_ratio_int*matrix_in_int[i][v]
+
+            matrix_in_int[j][v] -= scalar_sum_int
+
+    # Row Operation to Make Principal Diagonal to 1
+    for i in range(m):
+      for j in range(n, 2*n):
+        matrix_in_int[i][j] = matrix_in_int[i][j] / matrix_in_int[i][i]
+
+    # Output
+    for i in range(m):
+      for j in range(n):
+        data_out[i][j] = matrix_in_int[i][j + n]
 
     return data_out
 

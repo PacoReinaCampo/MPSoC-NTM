@@ -55,11 +55,9 @@ use ntm_scalar_math;
 
 procedure test_scalar_math is
 
-  data_in : float := 3.2155195231797550;
- 
-  data_out : float;
+  data_scalar_in : float := 3.2155195231797550;
 
-  data_in : vector := (3.0, 2.0, 2.0);
+  data_vector_in : vector := (3.0, 2.0, 2.0);
 
   mean_in : float := 3.5;
 
@@ -68,7 +66,7 @@ procedure test_scalar_math is
 begin
 
   ntm_scalar_math.ntm_scalar_logistic_function (
-    data_in => data_in,
+    data_in => data_scalar_in,
 
     data_out  => data_out
   );
@@ -80,7 +78,7 @@ begin
   New_Line;
 
   ntm_scalar_math.ntm_scalar_oneplus_function (
-    data_in => data_in,
+    data_in => data_scalar_in,
 
     data_out  => data_out
   );
@@ -92,7 +90,7 @@ begin
   New_Line;
 
   ntm_scalar_math.ntm_scalar_mean (
-    data_in => data_in,
+    data_in => data_vector_in,
 
     data_out => data_out
   );
@@ -104,7 +102,7 @@ begin
   New_Line;
 
   ntm_scalar_math.ntm_scalar_deviation (
-    data_in => data_in,
+    data_in => data_vector_in,
     mean_in => mean_in,
 
     data_out => data_out

@@ -55,11 +55,9 @@ use ntm_vector_math;
 
 procedure test_vector_math is
 
-  data_in : vector := (6.3226113886226751, 3.1313826152262876, 8.3512687816132226);
- 
-  data_out : vector := (0.0, 0.0, 0.0);
+  data_vector_in : vector := (6.3226113886226751, 3.1313826152262876, 8.3512687816132226);
 
-  data_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
+  data_matrix_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
   mean_in : vector := (3.0, 3.0, 3.0);
  
@@ -68,7 +66,7 @@ procedure test_vector_math is
 begin
 
   ntm_vector_math.ntm_vector_logistic_function (
-    data_in => data_in,
+    data_in => data_vector_in,
 
     data_out  => data_out
   );
@@ -82,7 +80,7 @@ begin
   New_Line;
 
   ntm_vector_math.ntm_vector_oneplus_function (
-    data_in => data_in,
+    data_in => data_vector_in,
 
     data_out  => data_out
   );
@@ -96,7 +94,7 @@ begin
   New_Line;
 
   ntm_vector_math.ntm_vector_mean (
-    data_in => data_in,
+    data_in => data_matrix_in,
 
     data_out => data_out
   );
@@ -110,7 +108,7 @@ begin
   New_Line;
 
   ntm_vector_math.ntm_vector_deviation (
-    data_in => data_in,
+    data_in => data_matrix_in,
 
     mean_in => mean_in,
 
