@@ -43,9 +43,6 @@
 ###################################################################################
 
 function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
-  # Package
-  addpath(genpath('../../../math/statitics/vector'));
-
   # Constants
   [SIZE_N_IN, SIZE_D_IN] = size(Z_IN);
 

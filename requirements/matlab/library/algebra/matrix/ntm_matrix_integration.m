@@ -43,9 +43,6 @@
 ###################################################################################
 
 function DATA_OUT = ntm_matrix_integration(DATA_IN, LENGTH_IN)
-  # Package
-  addpath(genpath('../../math/algebra/vector'));
-
   # Constants
   [SIZE_I_IN, SIZE_J_IN] = size(DATA_IN);
 

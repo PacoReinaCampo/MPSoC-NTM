@@ -91,15 +91,74 @@ class TensorMathAlgebra:
 
   def ntm_tensor_inverse(self):
 
-    data_out = []
+    m, n, p = data_in.shape
 
-    # calculating inverse
-    for i in range(len(self.tensor_data_in)):
-      data_out.append([])
-      for j in range(len(self.tensor_data_in[i])):
-        data_out[i].append([])
-        for k in range(len(self.tensor_data_in[i][j])):
-          data_out[i][j].append(self.tensor_data_in[i][k][j])
+    matrix_in_int = np.zeros((n, p))
+    tensor_in_int = np.zeros((m, n, 2*p))
+
+    data_out = np.zeros((m, n, p))
+
+    # Augmenting Identity Matrix of Order SIZE_IN
+    for i in range(m):
+      for j in range(n):
+        for k in range(p):
+          tensor_in_int[i][j][k] = data_in[i][j][k]
+
+          if i == j and j == k and k == i:
+            tensor_in_int[i][j][k + p] = 1
+          else:
+            tensor_in_int[i][j][k + p] = 0
+
+    for i in range(m):
+      # Row swapping
+      u = 1
+
+      while  data_in[i][i][i] == 0:
+        for j in range(n):
+          for k in range(p):
+            matrix_in_int[j][k] = tensor_in_int[i][j][k]
+
+        if i < m - 1:
+          for j in range(n):
+            for k in range(p):
+              tensor_in_int[i][j][k] = tensor_in_int[i + u][j][k]
+
+          for j in range(n):
+            for k in range(p):
+              tensor_in_int[i + u][j][k] = matrix_in_int[j][k]
+        else:
+          for j in range(n):
+            for k in range(p):
+              tensor_in_int[i][j][k] = tensor_in_int[i - u][j][k]
+
+          for j in range(n):
+            for k in range(p):
+              tensor_in_int[i - u][j][k] = matrix_in_int[j][k]
+
+        u += 1
+
+      # Applying Gauss Jordan Elimination
+      for j in range(n):
+        for k in range(p):
+          if j != k:
+            scalar_ratio_int = tensor_in_int[i][k][j] / tensor_in_int[i][j][j]
+
+            for v in range(2*p):
+              scalar_sum_int = scalar_ratio_int*tensor_in_int[i][j][v]
+
+              tensor_in_int[i][j][v] -= scalar_sum_int
+
+    # Row Operation to Make Principal Diagonal to 1
+    for i in range(m):
+      for j in range(n):
+        for k in range(p, 2*p):
+          tensor_in_int[i][j][k] = tensor_in_int[i][j][k] / tensor_in_int[i][i][i]
+
+    # Output
+    for i in range(m):
+      for j in range(n):
+        for k in range(p):
+          data_out[i][j][k] = tensor_in_int[i][j][k + p]
 
     return data_out
 

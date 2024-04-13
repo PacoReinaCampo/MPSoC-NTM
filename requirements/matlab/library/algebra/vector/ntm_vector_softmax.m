@@ -43,9 +43,6 @@
 ###################################################################################
 
 function DATA_OUT = ntm_vector_softmax(DATA_IN)
-  # Package
-  addpath(genpath('../../math/algebra/vector'));
-
   # Constants
   SIZE_IN = length(DATA_IN);
 
