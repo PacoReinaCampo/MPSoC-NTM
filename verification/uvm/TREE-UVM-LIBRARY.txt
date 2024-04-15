@@ -758,7 +758,7 @@ library
 │           ├── ntm_uvm_testbench.sv
 │           └── ntm_uvm_test.sv
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention
 │   │   │   │   ├── ntm_uvm_agent.sv
@@ -946,7 +946,7 @@ library
 │   │           ├── ntm_uvm_sequence.sv
 │   │           ├── ntm_uvm_testbench.sv
 │   │           └── ntm_uvm_test.sv
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
 │   │   │       ├── ntm_uvm_agent.sv
@@ -973,7 +973,7 @@ library
 │   │           ├── ntm_uvm_sequence.sv
 │   │           ├── ntm_uvm_testbench.sv
 │   │           └── ntm_uvm_test.sv
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector
 │   │   │   │   ├── ntm_uvm_agent.sv
@@ -1408,7 +1408,7 @@ library
     │       ├── ntm_uvm_sequence.sv
     │       ├── ntm_uvm_testbench.sv
     │       └── ntm_uvm_test.sv
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer
     │   │   ├── ntm_uvm_agent.sv
     │   │   ├── ntm_uvm_driver.sv
@@ -1493,7 +1493,7 @@ library
     │       ├── ntm_uvm_sequence.sv
     │       ├── ntm_uvm_testbench.sv
     │       └── ntm_uvm_test.sv
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer
         │   │   ├── ntm_uvm_agent.sv

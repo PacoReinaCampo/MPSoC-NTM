@@ -184,7 +184,7 @@ code
 │       ├── accelerator_vector_sinh_function.vhd
 │       └── accelerator_vector_tanh_function.vhd
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── accelerator_masked_multi_head_attention.vhd
 │   │   │   ├── accelerator_masked_scaled_dot_product_attention.vhd
@@ -213,12 +213,12 @@ code
 │   │       ├── accelerator_controller.vhd
 │   │       ├── accelerator_decoder.vhd
 │   │       └── accelerator_encoder.vhd
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.vhd
 │   │   └── standard
 │   │       └── accelerator_controller.vhd
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── accelerator_activation_gate_vector.vhd
 │   │   │   ├── accelerator_controller.vhd
@@ -250,42 +250,42 @@ code
 │           ├── accelerator_erasing.vhd
 │           └── accelerator_writing.vhd
 ├── pkg
+│   ├── accelerator_ann_controller_vhdl_pkg.vhd
 │   ├── accelerator_arithmetic_vhdl_pkg.vhd
 │   ├── accelerator_core_vhdl_pkg.vhd
 │   ├── accelerator_fnn_controller_vhdl_pkg.vhd
-│   ├── accelerator_linear_controller_vhdl_pkg.vhd
 │   ├── accelerator_lstm_controller_vhdl_pkg.vhd
 │   ├── accelerator_math_vhdl_pkg.vhd
-│   ├── accelerator_state_vhdl_pkg.vhd
-│   └── accelerator_transformer_controller_vhdl_pkg.vhd
+│   ├── accelerator_pnn_controller_vhdl_pkg.vhd
+│   └── accelerator_state_vhdl_pkg.vhd
 ├── state
 │   ├── feedback
 │   │   ├── accelerator_state_matrix_feedforward.vhd
 │   │   ├── accelerator_state_matrix_input.vhd
 │   │   ├── accelerator_state_matrix_output.vhd
 │   │   └── accelerator_state_matrix_state.vhd
-│   ├── linear
+│   ├── outputs
+│   │   ├── accelerator_state_vector_output.vhd
+│   │   └── accelerator_state_vector_state.vhd
+│   ├── pnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.vhd
 │   │   └── standard
 │   │       └── accelerator_controller.vhd
-│   ├── outputs
-│   │   ├── accelerator_state_vector_output.vhd
-│   │   └── accelerator_state_vector_state.vhd
 │   └── top
 │       └── accelerator_state_top.vhd
 └── trainer
     ├── differentiation
     │   ├── accelerator_trainer_matrix_differentiation.vhd
     │   └── accelerator_trainer_vector_differentiation.vhd
-    ├── FNN
+    ├── fnn
     │   └── accelerator_trainer.vhd
-    ├── linear
-    │   └── accelerator_trainer.vhd
-    └── LSTM
-        ├── accelerator_activation_trainer.vhd
-        ├── accelerator_forget_trainer.vhd
-        ├── accelerator_input_trainer.vhd
-        └── accelerator_output_trainer.vhd
+    ├── lstm
+    │   ├── accelerator_activation_trainer.vhd
+    │   ├── accelerator_forget_trainer.vhd
+    │   ├── accelerator_input_trainer.vhd
+    │   └── accelerator_output_trainer.vhd
+    └── pnn
+        └── accelerator_trainer.vhd
 
 88 directories, 200 files

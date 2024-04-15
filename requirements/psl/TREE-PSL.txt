@@ -76,7 +76,7 @@ library
 │       ├── ntm_vector_mean.psl
 │       └── ntm_vector_oneplus_function.psl
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.psl
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.psl
@@ -99,12 +99,12 @@ library
 │   │       ├── ntm_controller.psl
 │   │       ├── ntm_decoder.psl
 │   │       └── ntm_encoder.psl
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.psl
 │   │   └── standard
 │   │       └── ntm_controller.psl
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.psl
 │   │   │   ├── ntm_controller.psl
@@ -121,7 +121,7 @@ library
 │   │       ├── ntm_input_gate_vector.psl
 │   │       ├── ntm_output_gate_vector.psl
 │   │       └── ntm_state_gate_vector.psl
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing.psl
 │       │   ├── ntm_matrix_content_based_addressing.psl
@@ -154,7 +154,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.psl
     │   └── ntm_vector_controller_differentiation.psl
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.psl
     │   ├── ntm_fnn_d_trainer.psl
     │   ├── ntm_fnn_k_trainer.psl
@@ -162,7 +162,7 @@ library
     │   ├── ntm_fnn_u_trainer.psl
     │   ├── ntm_fnn_v_trainer.psl
     │   └── ntm_fnn_w_trainer.psl
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer.psl
         │   ├── ntm_lstm_activation_d_trainer.psl

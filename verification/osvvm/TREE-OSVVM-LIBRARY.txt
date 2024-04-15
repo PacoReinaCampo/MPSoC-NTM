@@ -262,7 +262,7 @@ library
 │           ├── ntm_model.vhd
 │           └── ntm_testbench.vhd
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention
 │   │   │   │   ├── ntm_model_pkg.vhd
@@ -330,7 +330,7 @@ library
 │   │           ├── ntm_model_pkg.vhd
 │   │           ├── ntm_model.vhd
 │   │           └── ntm_testbench.vhd
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
 │   │   │       ├── ntm_model_pkg.vhd
@@ -341,7 +341,7 @@ library
 │   │           ├── ntm_model_pkg.vhd
 │   │           ├── ntm_model.vhd
 │   │           └── ntm_testbench.vhd
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector
 │   │   │   │   ├── ntm_model_pkg.vhd
@@ -496,7 +496,7 @@ library
     │       ├── ntm_model_pkg.vhd
     │       ├── ntm_model.vhd
     │       └── ntm_testbench.vhd
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer
     │   │   ├── ntm_model_pkg.vhd
     │   │   ├── ntm_model.vhd
@@ -525,7 +525,7 @@ library
     │       ├── ntm_model_pkg.vhd
     │       ├── ntm_model.vhd
     │       └── ntm_testbench.vhd
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer
         │   │   ├── ntm_model_pkg.vhd

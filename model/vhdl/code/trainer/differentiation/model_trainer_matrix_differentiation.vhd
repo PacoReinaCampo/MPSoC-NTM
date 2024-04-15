@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.model_arithmetic_vhdl_pkg.all;
 use work.model_math_vhdl_pkg.all;
-use work.model_linear_controller_vhdl_pkg.all;
+use work.model_pnn_controller_vhdl_pkg.all;
 
 entity model_trainer_matrix_differentiation is
   generic (

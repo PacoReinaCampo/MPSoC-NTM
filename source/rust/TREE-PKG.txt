@@ -28,7 +28,7 @@ library
 │       └── vector
 │           └── mod.rs
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   ├── controller
 │   │   │   ├── fnn
@@ -36,13 +36,13 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   └── standard
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       ├── read_heads
 │       ├── top
@@ -58,8 +58,8 @@ library
 │           └── mod.rs
 └── trainer
     ├── differentiation
-    ├── FNN
-    └── LSTM
+    ├── fnn
+    └── lstm
         ├── activation
         ├── forget
         ├── input

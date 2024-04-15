@@ -760,7 +760,7 @@ library
 │           ├── ntm_vector_oneplus_function_structural_package.dot
 │           └── ntm_vector_oneplus_function_structural_profile.dot
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention
 │   │   │   │   ├── ntm_masked_multi_head_attention_behavioral_activity.dot
@@ -993,7 +993,7 @@ library
 │   │           ├── ntm_encoder_structural_object.dot
 │   │           ├── ntm_encoder_structural_package.dot
 │   │           └── ntm_encoder_structural_profile.dot
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
 │   │   │       ├── ntm_controller_behavioral_activity.dot
@@ -1026,7 +1026,7 @@ library
 │   │           ├── ntm_controller_structural_object.dot
 │   │           ├── ntm_controller_structural_package.dot
 │   │           └── ntm_controller_structural_profile.dot
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector
 │   │   │   │   ├── ntm_activation_gate_vector_behavioral_activity.dot
@@ -1239,7 +1239,7 @@ library
 │   │           ├── ntm_state_gate_vector_structural_object.dot
 │   │           ├── ntm_state_gate_vector_structural_package.dot
 │   │           └── ntm_state_gate_vector_structural_profile.dot
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_addressing_behavioral_activity.dot
@@ -1566,7 +1566,7 @@ library
     │       ├── ntm_vector_controller_differentiation_structural_object.dot
     │       ├── ntm_vector_controller_differentiation_structural_package.dot
     │       └── ntm_vector_controller_differentiation_structural_profile.dot
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer
     │   │   ├── ntm_fnn_b_trainer_behavioral_activity.dot
     │   │   ├── ntm_fnn_b_trainer_behavioral_communication.dot
@@ -1672,7 +1672,7 @@ library
     │       ├── ntm_fnn_w_trainer_structural_object.dot
     │       ├── ntm_fnn_w_trainer_structural_package.dot
     │       └── ntm_fnn_w_trainer_structural_profile.dot
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer
         │   │   ├── ntm_lstm_activation_b_trainer_behavioral_activity.dot

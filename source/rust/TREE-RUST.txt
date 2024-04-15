@@ -110,7 +110,7 @@ library
 │           ├── ntm_vector_mean.rs
 │           └── ntm_vector_oneplus_function.rs
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.rs
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.rs
@@ -129,17 +129,17 @@ library
 │   │   │   ├── ntm_keys_vector.rs
 │   │   │   ├── ntm_queries_vector.rs
 │   │   │   └── ntm_values_vector.rs
-│   │   ├── ntm_transformer_controller.rs
+│   │   ├── ntm_ann_controller.rs
 │   │   └── top
 │   │       ├── ntm_controller.rs
 │   │       ├── ntm_decoder.rs
 │   │       └── ntm_encoder.rs
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.rs
 │   │   └── standard
 │   │       └── ntm_controller.rs
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.rs
 │   │   │   ├── ntm_controller.rs
@@ -156,7 +156,7 @@ library
 │   │       ├── ntm_input_gate_vector.rs
 │   │       ├── ntm_output_gate_vector.rs
 │   │       └── ntm_state_gate_vector.rs
-│   ├── NTM
+│   ├── ntm
 │   │   ├── memory
 │   │   │   ├── ntm_addressing.rs
 │   │   │   ├── ntm_matrix_content_based_addressing.rs
@@ -198,7 +198,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.rs
     │   └── ntm_vector_controller_differentiation.rs
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.rs
     │   ├── ntm_fnn_d_trainer.rs
     │   ├── ntm_fnn_k_trainer.rs
@@ -206,7 +206,7 @@ library
     │   ├── ntm_fnn_u_trainer.rs
     │   ├── ntm_fnn_v_trainer.rs
     │   └── ntm_fnn_w_trainer.rs
-    ├── LSTM
+    ├── lstm
     │   ├── activation
     │   │   ├── ntm_lstm_activation_b_trainer.rs
     │   │   ├── ntm_lstm_activation_d_trainer.rs

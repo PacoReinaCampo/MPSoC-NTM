@@ -18,7 +18,7 @@ library
 │   └── vector
 ├── nn
 │   ├── ntm_controller.h
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   ├── controller
 │   │   │   ├── fnn
@@ -26,13 +26,13 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   └── standard
-│   └── NTM
+│   └── ntm
 │       ├── ntm.h
 │       ├── memory
 │       ├── read_heads
@@ -47,8 +47,8 @@ library
 └── trainer
     ├── ntm_trainer.h
     ├── differentiation
-    ├── FNN
-    └── LSTM
+    ├── fnn
+    └── lstm
         ├── activation
         ├── forget
         ├── input

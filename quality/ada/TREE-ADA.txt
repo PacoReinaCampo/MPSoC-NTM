@@ -25,7 +25,7 @@ library
 │   └── vector
 │       └── ntm_vector_math.adb
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.adb
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.adb
@@ -48,12 +48,12 @@ library
 │   │       ├── ntm_controller.adb
 │   │       ├── ntm_decoder.adb
 │   │       └── ntm_encoder.adb
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.adb
 │   │   └── standard
 │   │       └── ntm_controller.adb
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.adb
 │   │   │   ├── ntm_controller.adb
@@ -70,7 +70,7 @@ library
 │   │       ├── ntm_input_gate_vector.adb
 │   │       ├── ntm_output_gate_vector.adb
 │   │       └── ntm_state_gate_vector.adb
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing.adb
 │       │   ├── ntm_matrix_content_based_addressing.adb
@@ -99,7 +99,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.adb
     │   └── ntm_vector_controller_differentiation.adb
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.adb
     │   ├── ntm_fnn_d_trainer.adb
     │   ├── ntm_fnn_k_trainer.adb
@@ -107,7 +107,7 @@ library
     │   ├── ntm_fnn_u_trainer.adb
     │   ├── ntm_fnn_v_trainer.adb
     │   └── ntm_fnn_w_trainer.adb
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer.adb
         │   ├── ntm_lstm_activation_d_trainer.adb

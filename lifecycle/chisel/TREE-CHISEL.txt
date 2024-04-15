@@ -26,7 +26,7 @@ library
 │   └── vector
 │       └── ntm_vector_math.scala
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.scala
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.scala
@@ -49,12 +49,12 @@ library
 │   │       ├── ntm_controller.scala
 │   │       ├── ntm_decoder.scala
 │   │       └── ntm_encoder.scala
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.scala
 │   │   └── standard
 │   │       └── ntm_controller.scala
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.scala
 │   │   │   ├── ntm_controller.scala
@@ -71,7 +71,7 @@ library
 │   │       ├── ntm_input_gate_vector.scala
 │   │       ├── ntm_output_gate_vector.scala
 │   │       └── ntm_state_gate_vector.scala
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing.scala
 │       │   ├── ntm_matrix_content_based_addressing.scala
@@ -100,7 +100,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.scala
     │   └── ntm_vector_controller_differentiation.scala
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.scala
     │   ├── ntm_fnn_d_trainer.scala
     │   ├── ntm_fnn_k_trainer.scala
@@ -108,7 +108,7 @@ library
     │   ├── ntm_fnn_u_trainer.scala
     │   ├── ntm_fnn_v_trainer.scala
     │   └── ntm_fnn_w_trainer.scala
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer.scala
         │   ├── ntm_lstm_activation_d_trainer.scala

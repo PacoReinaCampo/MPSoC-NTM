@@ -25,7 +25,7 @@ library
 │   └── VectorMath
 │       └── VectorMath.go
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.go
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.go
@@ -48,12 +48,12 @@ library
 │   │       ├── ntm_controller.go
 │   │       ├── ntm_decoder.go
 │   │       └── ntm_encoder.go
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.go
 │   │   └── standard
 │   │       └── ntm_controller.go
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.go
 │   │   │   ├── ntm_controller.go
@@ -70,7 +70,7 @@ library
 │   │       ├── ntm_input_gate_vector.go
 │   │       ├── ntm_output_gate_vector.go
 │   │       └── ntm_state_gate_vector.go
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing.go
 │       │   ├── ntm_matrix_content_based_addressing.go
@@ -104,7 +104,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.go
     │   └── ntm_vector_controller_differentiation.go
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.go
     │   ├── ntm_fnn_d_trainer.go
     │   ├── ntm_fnn_k_trainer.go
@@ -112,7 +112,7 @@ library
     │   ├── ntm_fnn_u_trainer.go
     │   ├── ntm_fnn_v_trainer.go
     │   └── ntm_fnn_w_trainer.go
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer.go
         │   ├── ntm_lstm_activation_d_trainer.go

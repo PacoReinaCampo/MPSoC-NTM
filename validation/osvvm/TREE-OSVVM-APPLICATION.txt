@@ -200,7 +200,7 @@ application
 │           ├── ntm_design_pkg.vhd
 │           └── ntm_design.vhd
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention
 │   │   │   │   ├── ntm_design_pkg.vhd
@@ -253,7 +253,7 @@ application
 │   │       └── ntm_encoder
 │   │           ├── ntm_design_pkg.vhd
 │   │           └── ntm_design.vhd
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
 │   │   │       ├── ntm_design_pkg.vhd
@@ -262,7 +262,7 @@ application
 │   │       └── ntm_controller
 │   │           ├── ntm_design_pkg.vhd
 │   │           └── ntm_design.vhd
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector
 │   │   │   │   ├── ntm_design_pkg.vhd
@@ -382,7 +382,7 @@ application
     │   └── ntm_vector_controller_differentiation
     │       ├── ntm_design_pkg.vhd
     │       └── ntm_design.vhd
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer
     │   │   ├── ntm_design_pkg.vhd
     │   │   └── ntm_design.vhd
@@ -404,7 +404,7 @@ application
     │   └── ntm_fnn_w_trainer
     │       ├── ntm_design_pkg.vhd
     │       └── ntm_design.vhd
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer
         │   │   ├── ntm_design_pkg.vhd

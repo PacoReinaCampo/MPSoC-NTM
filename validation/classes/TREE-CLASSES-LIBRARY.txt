@@ -758,7 +758,7 @@ library
 │           ├── ntm_test.sv
 │           └── ntm_transaction.sv
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention
 │   │   │   │   ├── ntm_agent.sv
@@ -946,7 +946,7 @@ library
 │   │           ├── ntm_testbench.sv
 │   │           ├── ntm_test.sv
 │   │           └── ntm_transaction.sv
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
 │   │   │       ├── ntm_agent.sv
@@ -973,7 +973,7 @@ library
 │   │           ├── ntm_testbench.sv
 │   │           ├── ntm_test.sv
 │   │           └── ntm_transaction.sv
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector
 │   │   │   │   ├── ntm_agent.sv
@@ -1408,7 +1408,7 @@ library
     │       ├── ntm_testbench.sv
     │       ├── ntm_test.sv
     │       └── ntm_transaction.sv
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer
     │   │   ├── ntm_agent.sv
     │   │   ├── ntm_driver.sv
@@ -1493,7 +1493,7 @@ library
     │       ├── ntm_testbench.sv
     │       ├── ntm_test.sv
     │       └── ntm_transaction.sv
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer
         │   │   ├── ntm_agent.sv

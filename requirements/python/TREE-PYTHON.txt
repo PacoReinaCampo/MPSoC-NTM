@@ -92,7 +92,7 @@ library
 │       ├── ntm_vector_mean.py
 │       └── ntm_vector_oneplus_function.py
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.py
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.py
@@ -115,12 +115,12 @@ library
 │   │       ├── ntm_controller.py
 │   │       ├── ntm_decoder.py
 │   │       └── ntm_encoder.py
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.py
 │   │   └── standard
 │   │       └── ntm_controller.py
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.py
 │   │   │   ├── ntm_controller.py
@@ -137,7 +137,7 @@ library
 │   │       ├── ntm_input_gate_vector.py
 │   │       ├── ntm_output_gate_vector.py
 │   │       └── ntm_state_gate_vector.py
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing.py
 │       │   ├── ntm_matrix_content_based_addressing.py
@@ -170,7 +170,7 @@ library
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.py
     │   └── ntm_vector_controller_differentiation.py
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.py
     │   ├── ntm_fnn_d_trainer.py
     │   ├── ntm_fnn_k_trainer.py
@@ -178,7 +178,7 @@ library
     │   ├── ntm_fnn_u_trainer.py
     │   ├── ntm_fnn_v_trainer.py
     │   └── ntm_fnn_w_trainer.py
-    └── LSTM
+    └── lstm
         ├── activation
         │   ├── ntm_lstm_activation_b_trainer.py
         │   ├── ntm_lstm_activation_d_trainer.py

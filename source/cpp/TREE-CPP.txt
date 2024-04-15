@@ -227,7 +227,7 @@ library
 │       ├── ntm_vector_oneplus_function_design.cpp
 │       └── ntm_vector_oneplus_function_testbench.cpp
 ├── nn
-│   ├── ANN
+│   ├── ann
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.cpp
 │   │   │   ├── ntm_masked_multi_head_attention_design.cpp
@@ -270,7 +270,7 @@ library
 │   │   │   ├── ntm_values_vector.cpp
 │   │   │   ├── ntm_values_vector_design.cpp
 │   │   │   └── ntm_values_vector_testbench.cpp
-│   │   ├── ntm_transformer_controller.cpp
+│   │   ├── ntm_ann_controller.cpp
 │   │   └── top
 │   │       ├── ntm_controller.cpp
 │   │       ├── ntm_controller_design.cpp
@@ -281,7 +281,7 @@ library
 │   │       ├── ntm_encoder.cpp
 │   │       ├── ntm_encoder_design.cpp
 │   │       └── ntm_encoder_testbench.cpp
-│   ├── FNN
+│   ├── fnn
 │   │   ├── convolutional
 │   │   │   ├── ntm_controller.cpp
 │   │   │   ├── ntm_controller_design.cpp
@@ -290,7 +290,7 @@ library
 │   │       ├── ntm_controller.cpp
 │   │       ├── ntm_controller_design.cpp
 │   │       └── ntm_controller_testbench.cpp
-│   ├── LSTM
+│   ├── lstm
 │   │   ├── convolutional
 │   │   │   ├── ntm_activation_gate_vector.cpp
 │   │   │   ├── ntm_activation_gate_vector_design.cpp
@@ -335,7 +335,7 @@ library
 │   │       ├── ntm_state_gate_vector.cpp
 │   │       ├── ntm_state_gate_vector_design.cpp
 │   │       └── ntm_state_gate_vector_testbench.cpp
-│   ├── NTM
+│   ├── ntm
 │   │   ├── memory
 │   │   │   ├── ntm_addressing.cpp
 │   │   │   ├── ntm_addressing_design.cpp
@@ -414,7 +414,7 @@ library
     │   ├── ntm_vector_controller_differentiation.cpp
     │   ├── ntm_vector_controller_differentiation_design.cpp
     │   └── ntm_vector_controller_differentiation_testbench.cpp
-    ├── FNN
+    ├── fnn
     │   ├── ntm_fnn_b_trainer.cpp
     │   ├── ntm_fnn_b_trainer_design.cpp
     │   ├── ntm_fnn_b_trainer_testbench.cpp
@@ -436,7 +436,7 @@ library
     │   ├── ntm_fnn_w_trainer.cpp
     │   ├── ntm_fnn_w_trainer_design.cpp
     │   └── ntm_fnn_w_trainer_testbench.cpp
-    ├── LSTM
+    ├── lstm
     │   ├── activation
     │   │   ├── ntm_lstm_activation_b_trainer.cpp
     │   │   ├── ntm_lstm_activation_b_trainer_design.cpp
