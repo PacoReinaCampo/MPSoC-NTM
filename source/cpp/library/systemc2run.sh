@@ -58,22 +58,22 @@ rm -rf arithmetic/vector/adder/ntm_vector_adder.run
 rm -rf arithmetic/vector/divider/ntm_vector_divider.run
 rm -rf arithmetic/vector/multiplier/ntm_vector_multiplier.run
 rm -rf arithmetic/vector/subtractor/ntm_vector_subtractor.run
-rm -rf controller/FNN/convolutional/ntm_controller.run
-rm -rf controller/FNN/standard/ntm_controller.run
-rm -rf controller/LSTM/convolutional/ntm_activation_gate_vector.run
-rm -rf controller/LSTM/convolutional/ntm_controller.run
-rm -rf controller/LSTM/convolutional/ntm_forget_gate_vector.run
-rm -rf controller/LSTM/convolutional/ntm_hidden_gate_vector.run
-rm -rf controller/LSTM/convolutional/ntm_input_gate_vector.run
-rm -rf controller/LSTM/convolutional/ntm_output_gate_vector.run
-rm -rf controller/LSTM/convolutional/ntm_state_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_activation_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_controller.run
-rm -rf controller/LSTM/standard/ntm_forget_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_hidden_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_input_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_output_gate_vector.run
-rm -rf controller/LSTM/standard/ntm_state_gate_vector.run
+rm -rf controller/fnn/convolutional/ntm_controller.run
+rm -rf controller/fnn/standard/ntm_controller.run
+rm -rf controller/lstm/convolutional/ntm_activation_gate_vector.run
+rm -rf controller/lstm/convolutional/ntm_controller.run
+rm -rf controller/lstm/convolutional/ntm_forget_gate_vector.run
+rm -rf controller/lstm/convolutional/ntm_hidden_gate_vector.run
+rm -rf controller/lstm/convolutional/ntm_input_gate_vector.run
+rm -rf controller/lstm/convolutional/ntm_output_gate_vector.run
+rm -rf controller/lstm/convolutional/ntm_state_gate_vector.run
+rm -rf controller/lstm/standard/ntm_activation_gate_vector.run
+rm -rf controller/lstm/standard/ntm_controller.run
+rm -rf controller/lstm/standard/ntm_forget_gate_vector.run
+rm -rf controller/lstm/standard/ntm_hidden_gate_vector.run
+rm -rf controller/lstm/standard/ntm_input_gate_vector.run
+rm -rf controller/lstm/standard/ntm_output_gate_vector.run
+rm -rf controller/lstm/standard/ntm_state_gate_vector.run
 rm -rf dnc/memory/dnc_addressing.run
 rm -rf dnc/memory/dnc_allocation_weighting.run
 rm -rf dnc/memory/dnc_backward_weighting.run
@@ -164,41 +164,41 @@ rm -rf state/outputs/ntm_state_vector_state.run
 rm -rf state/top/ntm_state_top.run
 rm -rf trainer/differentiation/ntm_matrix_controller_differentiation.run
 rm -rf trainer/differentiation/ntm_vector_controller_differentiation.run
-rm -rf trainer/FNN/ntm_fnn_b_trainer.run
-rm -rf trainer/FNN/ntm_fnn_d_trainer.run
-rm -rf trainer/FNN/ntm_fnn_k_trainer.run
-rm -rf trainer/FNN/ntm_fnn_trainer.run
-rm -rf trainer/FNN/ntm_fnn_u_trainer.run
-rm -rf trainer/FNN/ntm_fnn_v_trainer.run
-rm -rf trainer/FNN/ntm_fnn_w_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_b_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_d_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_k_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_u_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_v_trainer.run
-rm -rf trainer/LSTM/activation/ntm_lstm_activation_w_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_b_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_d_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_k_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_u_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_v_trainer.run
-rm -rf trainer/LSTM/forget/ntm_lstm_forget_w_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_b_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_d_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_k_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_u_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_v_trainer.run
-rm -rf trainer/LSTM/input/ntm_lstm_input_w_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_b_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_d_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_k_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_u_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_v_trainer.run
-rm -rf trainer/LSTM/output/ntm_lstm_output_w_trainer.run
+rm -rf trainer/fnn/ntm_fnn_b_trainer.run
+rm -rf trainer/fnn/ntm_fnn_d_trainer.run
+rm -rf trainer/fnn/ntm_fnn_k_trainer.run
+rm -rf trainer/fnn/ntm_fnn_trainer.run
+rm -rf trainer/fnn/ntm_fnn_u_trainer.run
+rm -rf trainer/fnn/ntm_fnn_v_trainer.run
+rm -rf trainer/fnn/ntm_fnn_w_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_b_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_d_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_k_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_u_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_v_trainer.run
+rm -rf trainer/lstm/activation/ntm_lstm_activation_w_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_b_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_d_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_k_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_u_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_v_trainer.run
+rm -rf trainer/lstm/forget/ntm_lstm_forget_w_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_b_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_d_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_k_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_u_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_v_trainer.run
+rm -rf trainer/lstm/input/ntm_lstm_input_w_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_b_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_d_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_k_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_u_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_v_trainer.run
+rm -rf trainer/lstm/output/ntm_lstm_output_w_trainer.run
 rm -rf transformer/components/ntm_masked_multi_head_attention.run
 rm -rf transformer/components/ntm_masked_scaled_dot_product_attention.run
 rm -rf transformer/components/ntm_multi_head_attention.run
@@ -232,22 +232,22 @@ g++ arithmetic/vector/adder/ntm_vector_adder_testbench.cpp arithmetic/vector/add
 g++ arithmetic/vector/divider/ntm_vector_divider_testbench.cpp arithmetic/vector/divider/ntm_vector_divider_design.cpp -o arithmetic/vector/divider/ntm_vector_divider.run -lsystemc
 g++ arithmetic/vector/multiplier/ntm_vector_multiplier_testbench.cpp arithmetic/vector/multiplier/ntm_vector_multiplier_design.cpp -o arithmetic/vector/multiplier/ntm_vector_multiplier.run -lsystemc
 g++ arithmetic/vector/subtractor/ntm_vector_subtractor_testbench.cpp arithmetic/vector/subtractor/ntm_vector_subtractor_design.cpp -o arithmetic/vector/subtractor/ntm_vector_subtractor.run -lsystemc
-#g++ controller/FNN/convolutional/ntm_controller_testbench.cpp controller/FNN/convolutional/ntm_controller_design.cpp -o controller/FNN/convolutional/ntm_controller.run -lsystemc
-#g++ controller/FNN/standard/ntm_controller_testbench.cpp controller/FNN/standard/ntm_controller_design.cpp -o controller/FNN/standard/ntm_controller.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_activation_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_activation_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_activation_gate_vector.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_controller_testbench.cpp controller/LSTM/convolutional/ntm_controller_design.cpp -o controller/LSTM/convolutional/ntm_controller.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_forget_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_forget_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_forget_gate_vector.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_hidden_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_hidden_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_hidden_gate_vector.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_input_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_input_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_input_gate_vector.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_output_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_output_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_output_gate_vector.run -lsystemc
-#g++ controller/LSTM/convolutional/ntm_state_gate_vector_testbench.cpp controller/LSTM/convolutional/ntm_state_gate_vector_design.cpp -o controller/LSTM/convolutional/ntm_state_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_activation_gate_vector_testbench.cpp controller/LSTM/standard/ntm_activation_gate_vector_design.cpp -o controller/LSTM/standard/ntm_activation_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_controller_testbench.cpp controller/LSTM/standard/ntm_controller_design.cpp -o controller/LSTM/standard/ntm_controller.run -lsystemc
-#g++ controller/LSTM/standard/ntm_forget_gate_vector_testbench.cpp controller/LSTM/standard/ntm_forget_gate_vector_design.cpp -o controller/LSTM/standard/ntm_forget_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_hidden_gate_vector_testbench.cpp controller/LSTM/standard/ntm_hidden_gate_vector_design.cpp -o controller/LSTM/standard/ntm_hidden_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_input_gate_vector_testbench.cpp controller/LSTM/standard/ntm_input_gate_vector_design.cpp -o controller/LSTM/standard/ntm_input_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_output_gate_vector_testbench.cpp controller/LSTM/standard/ntm_output_gate_vector_design.cpp -o controller/LSTM/standard/ntm_output_gate_vector.run -lsystemc
-#g++ controller/LSTM/standard/ntm_state_gate_vector_testbench.cpp controller/LSTM/standard/ntm_state_gate_vector_design.cpp -o controller/LSTM/standard/ntm_state_gate_vector.run -lsystemc
+#g++ controller/fnn/convolutional/ntm_controller_testbench.cpp controller/fnn/convolutional/ntm_controller_design.cpp -o controller/fnn/convolutional/ntm_controller.run -lsystemc
+#g++ controller/fnn/standard/ntm_controller_testbench.cpp controller/fnn/standard/ntm_controller_design.cpp -o controller/fnn/standard/ntm_controller.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_activation_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_activation_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_activation_gate_vector.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_controller_testbench.cpp controller/lstm/convolutional/ntm_controller_design.cpp -o controller/lstm/convolutional/ntm_controller.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_forget_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_forget_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_forget_gate_vector.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_hidden_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_hidden_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_hidden_gate_vector.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_input_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_input_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_input_gate_vector.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_output_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_output_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_output_gate_vector.run -lsystemc
+#g++ controller/lstm/convolutional/ntm_state_gate_vector_testbench.cpp controller/lstm/convolutional/ntm_state_gate_vector_design.cpp -o controller/lstm/convolutional/ntm_state_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_activation_gate_vector_testbench.cpp controller/lstm/standard/ntm_activation_gate_vector_design.cpp -o controller/lstm/standard/ntm_activation_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_controller_testbench.cpp controller/lstm/standard/ntm_controller_design.cpp -o controller/lstm/standard/ntm_controller.run -lsystemc
+#g++ controller/lstm/standard/ntm_forget_gate_vector_testbench.cpp controller/lstm/standard/ntm_forget_gate_vector_design.cpp -o controller/lstm/standard/ntm_forget_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_hidden_gate_vector_testbench.cpp controller/lstm/standard/ntm_hidden_gate_vector_design.cpp -o controller/lstm/standard/ntm_hidden_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_input_gate_vector_testbench.cpp controller/lstm/standard/ntm_input_gate_vector_design.cpp -o controller/lstm/standard/ntm_input_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_output_gate_vector_testbench.cpp controller/lstm/standard/ntm_output_gate_vector_design.cpp -o controller/lstm/standard/ntm_output_gate_vector.run -lsystemc
+#g++ controller/lstm/standard/ntm_state_gate_vector_testbench.cpp controller/lstm/standard/ntm_state_gate_vector_design.cpp -o controller/lstm/standard/ntm_state_gate_vector.run -lsystemc
 #g++ dnc/memory/dnc_addressing_testbench.cpp dnc/memory/dnc_addressing_design.cpp -o dnc/memory/dnc_addressing.run -lsystemc
 #g++ dnc/memory/dnc_allocation_weighting_testbench.cpp dnc/memory/dnc_allocation_weighting_design.cpp -o dnc/memory/dnc_allocation_weighting.run -lsystemc
 #g++ dnc/memory/dnc_backward_weighting_testbench.cpp dnc/memory/dnc_backward_weighting_design.cpp -o dnc/memory/dnc_backward_weighting.run -lsystemc
@@ -338,41 +338,41 @@ g++ algebra/vector/ntm_vector_module_testbench.cpp algebra/vector/ntm_vector_mod
 #g++ state/top/ntm_state_top_testbench.cpp state/top/ntm_state_top_design.cpp -o state/top/ntm_state_top.run -lsystemc
 #g++ trainer/differentiation/ntm_matrix_controller_differentiation_testbench.cpp trainer/differentiation/ntm_matrix_controller_differentiation_design.cpp -o trainer/differentiation/ntm_matrix_controller_differentiation.run -lsystemc
 #g++ trainer/differentiation/ntm_vector_controller_differentiation_testbench.cpp trainer/differentiation/ntm_vector_controller_differentiation_design.cpp -o trainer/differentiation/ntm_vector_controller_differentiation.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_b_trainer_testbench.cpp trainer/FNN/ntm_fnn_b_trainer_design.cpp -o trainer/FNN/ntm_fnn_b_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_d_trainer_testbench.cpp trainer/FNN/ntm_fnn_d_trainer_design.cpp -o trainer/FNN/ntm_fnn_d_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_k_trainer_testbench.cpp trainer/FNN/ntm_fnn_k_trainer_design.cpp -o trainer/FNN/ntm_fnn_k_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_trainer_testbench.cpp trainer/FNN/ntm_fnn_trainer_design.cpp -o trainer/FNN/ntm_fnn_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_u_trainer_testbench.cpp trainer/FNN/ntm_fnn_u_trainer_design.cpp -o trainer/FNN/ntm_fnn_u_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_v_trainer_testbench.cpp trainer/FNN/ntm_fnn_v_trainer_design.cpp -o trainer/FNN/ntm_fnn_v_trainer.run -lsystemc
-#g++ trainer/FNN/ntm_fnn_w_trainer_testbench.cpp trainer/FNN/ntm_fnn_w_trainer_design.cpp -o trainer/FNN/ntm_fnn_w_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_b_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_b_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_b_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_d_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_d_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_d_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_k_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_k_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_k_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_u_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_u_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_u_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_v_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_v_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_v_trainer.run -lsystemc
-#g++ trainer/LSTM/activation/ntm_lstm_activation_w_trainer_testbench.cpp trainer/LSTM/activation/ntm_lstm_activation_w_trainer_design.cpp -o trainer/LSTM/activation/ntm_lstm_activation_w_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_b_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_b_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_b_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_d_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_d_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_d_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_k_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_k_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_k_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_u_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_u_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_u_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_v_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_v_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_v_trainer.run -lsystemc
-#g++ trainer/LSTM/forget/ntm_lstm_forget_w_trainer_testbench.cpp trainer/LSTM/forget/ntm_lstm_forget_w_trainer_design.cpp -o trainer/LSTM/forget/ntm_lstm_forget_w_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_b_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_b_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_b_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_d_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_d_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_d_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_k_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_k_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_k_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_u_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_u_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_u_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_v_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_v_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_v_trainer.run -lsystemc
-#g++ trainer/LSTM/input/ntm_lstm_input_w_trainer_testbench.cpp trainer/LSTM/input/ntm_lstm_input_w_trainer_design.cpp -o trainer/LSTM/input/ntm_lstm_input_w_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_b_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_b_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_b_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_d_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_d_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_d_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_k_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_k_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_k_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_u_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_u_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_u_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_v_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_v_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_v_trainer.run -lsystemc
-#g++ trainer/LSTM/output/ntm_lstm_output_w_trainer_testbench.cpp trainer/LSTM/output/ntm_lstm_output_w_trainer_design.cpp -o trainer/LSTM/output/ntm_lstm_output_w_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_b_trainer_testbench.cpp trainer/fnn/ntm_fnn_b_trainer_design.cpp -o trainer/fnn/ntm_fnn_b_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_d_trainer_testbench.cpp trainer/fnn/ntm_fnn_d_trainer_design.cpp -o trainer/fnn/ntm_fnn_d_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_k_trainer_testbench.cpp trainer/fnn/ntm_fnn_k_trainer_design.cpp -o trainer/fnn/ntm_fnn_k_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_trainer_testbench.cpp trainer/fnn/ntm_fnn_trainer_design.cpp -o trainer/fnn/ntm_fnn_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_u_trainer_testbench.cpp trainer/fnn/ntm_fnn_u_trainer_design.cpp -o trainer/fnn/ntm_fnn_u_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_v_trainer_testbench.cpp trainer/fnn/ntm_fnn_v_trainer_design.cpp -o trainer/fnn/ntm_fnn_v_trainer.run -lsystemc
+#g++ trainer/fnn/ntm_fnn_w_trainer_testbench.cpp trainer/fnn/ntm_fnn_w_trainer_design.cpp -o trainer/fnn/ntm_fnn_w_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_b_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_b_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_b_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_d_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_d_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_d_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_k_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_k_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_k_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_u_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_u_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_u_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_v_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_v_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_v_trainer.run -lsystemc
+#g++ trainer/lstm/activation/ntm_lstm_activation_w_trainer_testbench.cpp trainer/lstm/activation/ntm_lstm_activation_w_trainer_design.cpp -o trainer/lstm/activation/ntm_lstm_activation_w_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_b_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_b_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_b_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_d_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_d_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_d_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_k_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_k_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_k_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_u_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_u_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_u_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_v_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_v_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_v_trainer.run -lsystemc
+#g++ trainer/lstm/forget/ntm_lstm_forget_w_trainer_testbench.cpp trainer/lstm/forget/ntm_lstm_forget_w_trainer_design.cpp -o trainer/lstm/forget/ntm_lstm_forget_w_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_b_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_b_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_b_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_d_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_d_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_d_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_k_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_k_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_k_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_u_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_u_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_u_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_v_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_v_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_v_trainer.run -lsystemc
+#g++ trainer/lstm/input/ntm_lstm_input_w_trainer_testbench.cpp trainer/lstm/input/ntm_lstm_input_w_trainer_design.cpp -o trainer/lstm/input/ntm_lstm_input_w_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_b_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_b_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_b_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_d_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_d_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_d_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_k_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_k_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_k_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_u_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_u_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_u_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_v_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_v_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_v_trainer.run -lsystemc
+#g++ trainer/lstm/output/ntm_lstm_output_w_trainer_testbench.cpp trainer/lstm/output/ntm_lstm_output_w_trainer_design.cpp -o trainer/lstm/output/ntm_lstm_output_w_trainer.run -lsystemc
 #g++ transformer/components/ntm_masked_multi_head_attention_testbench.cpp transformer/components/ntm_masked_multi_head_attention_design.cpp -o transformer/components/ntm_masked_multi_head_attention.run -lsystemc
 #g++ transformer/components/ntm_masked_scaled_dot_product_attention_testbench.cpp transformer/components/ntm_masked_scaled_dot_product_attention_design.cpp -o transformer/components/ntm_masked_scaled_dot_product_attention.run -lsystemc
 #g++ transformer/components/ntm_multi_head_attention_testbench.cpp transformer/components/ntm_multi_head_attention_design.cpp -o transformer/components/ntm_multi_head_attention.run -lsystemc
