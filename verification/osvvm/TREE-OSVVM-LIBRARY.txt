@@ -400,7 +400,7 @@ library
 │   │           ├── ntm_model_pkg.vhd
 │   │           ├── ntm_model.vhd
 │   │           └── ntm_testbench.vhd
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_model_pkg.vhd

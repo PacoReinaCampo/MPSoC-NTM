@@ -307,7 +307,7 @@ application
 │   │       └── ntm_state_gate_vector
 │   │           ├── ntm_design_pkg.vhd
 │   │           └── ntm_design.vhd
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_design_pkg.vhd

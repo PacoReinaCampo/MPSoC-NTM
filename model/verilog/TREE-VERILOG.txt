@@ -214,7 +214,7 @@ code
 │   │       ├── model_input_gate_vector.sv
 │   │       ├── model_output_gate_vector.sv
 │   │       └── model_state_gate_vector.sv
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── model_addressing.sv
 │       │   └── model_content_based_addressing.sv

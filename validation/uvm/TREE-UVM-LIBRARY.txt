@@ -1144,7 +1144,7 @@ library
 │   │           ├── ntm_uvm_sequence.sv
 │   │           ├── ntm_uvm_testbench.sv
 │   │           └── ntm_uvm_test.sv
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_uvm_agent.sv

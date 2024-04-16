@@ -235,7 +235,7 @@ code
 │   │       ├── accelerator_input_gate_vector.vhd
 │   │       ├── accelerator_output_gate_vector.vhd
 │   │       └── accelerator_state_gate_vector.vhd
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── accelerator_addressing.vhd
 │       │   └── accelerator_content_based_addressing.vhd

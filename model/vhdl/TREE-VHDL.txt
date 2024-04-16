@@ -214,7 +214,7 @@ code
 │   │       ├── model_input_gate_vector.vhd
 │   │       ├── model_output_gate_vector.vhd
 │   │       └── model_state_gate_vector.vhd
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── model_addressing.vhd
 │       │   └── model_content_based_addressing.vhd

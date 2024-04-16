@@ -307,7 +307,7 @@ application
 │   │       └── ntm_state_gate_vector
 │   │           ├── ntm_design.sv
 │   │           └── ntm_testbench.sv
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_design.sv

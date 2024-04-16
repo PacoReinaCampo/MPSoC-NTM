@@ -1144,7 +1144,7 @@ library
 │   │           ├── ntm_testbench.sv
 │   │           ├── ntm_test.sv
 │   │           └── ntm_transaction.sv
-│   └── NTM
+│   └── ntm
 │       ├── memory
 │       │   ├── ntm_addressing
 │       │   │   ├── ntm_agent.sv
