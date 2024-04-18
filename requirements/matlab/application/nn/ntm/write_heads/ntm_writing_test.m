@@ -47,7 +47,7 @@ warning('off','all');
 # Package
 addpath(genpath('../../../../library/algebra/matrix'));
 
-addpath(genpath('../../../../library/nn/NTM/write_heads'));
+addpath(genpath('../../../../library/nn/ntm/write_heads'));
 
 # Constants
 SIZE_R_IN = 3;

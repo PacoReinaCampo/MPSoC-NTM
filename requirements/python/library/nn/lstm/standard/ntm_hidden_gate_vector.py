@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,14 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_hidden_gate_vector(S_IN, O_IN):
+  # Body
+  # h(t;l) = o(t;l) o tanh(s(t;l))
+  # h(t=0;l) = 0; h(t;l=0) = 0
+  vector_operation_int = tanh(S_IN)
+
+  h_out = ntm_vector_multiplier(O_IN, vector_operation_int)
+
+  return h_out

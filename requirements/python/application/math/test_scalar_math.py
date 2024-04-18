@@ -50,8 +50,8 @@ def test_scalar_math():
 
   data_in_function = np.random.rand(1)
 
-  math_function = scalar_math.ScalarMathFunction(data_in)
-  test_function = scalar_math.ScalarMathFunction(data_in)
+  math_function = scalar_math.ScalarMath(data_in_function, 0)
+  test_function = scalar_math.ScalarMath(data_in_function, 0)
 
   np.testing.assert_array_equal(math_function.ntm_scalar_logistic_function(), test_function.ntm_scalar_logistic_function())
 
@@ -59,8 +59,8 @@ def test_scalar_math():
 
   data_in_statitic = np.random.rand(3,1)
 
-  math_statitics = scalar_math_statitics.ScalarMathStatitics(data_in, 0)
-  test_statitics = scalar_math_statitics.ScalarMathStatitics(data_in, 0)
+  math_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
+  test_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
 
   np.testing.assert_array_equal(math_statitics.ntm_scalar_mean(), test_statitics.ntm_scalar_mean())
 

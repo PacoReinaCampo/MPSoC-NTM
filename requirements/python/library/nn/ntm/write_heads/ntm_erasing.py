@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,23 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_erasing(M_IN, W_IN, E_IN):
+  # Constants
+  SIZE_N_IN, SIZE_W_IN = M_IN.shape
+
+  SIZE_R_IN, _ = W_IN.shape
+
+  # Body
+  # M(t;j;k) = M(t;j;k)·(1 - w(t;i;j)·e(t;k))
+  matrix_first_operation_int = ones(SIZE_N_IN, SIZE_W_IN)
+
+  for i in range(len(SIZE_R_IN)):
+    matrix_second_operation_int = ntm_transpose_vector_product(W_IN[i, :], E_IN)
+
+    matrix_first_operation_int = matrix_first_operation_int - matrix_second_operation_int
+  
+  M_OUT = ntm_matrix_multiplier(M_IN, matrix_first_operation_int)
+
+  return M_OUT

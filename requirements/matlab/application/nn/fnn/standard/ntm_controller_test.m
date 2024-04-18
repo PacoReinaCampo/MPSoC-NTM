@@ -49,7 +49,7 @@ addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
 addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../../library/nn/FNN/standard'));
+addpath(genpath('../../../../library/nn/fnn/standard'));
 
 # Constants
 SIZE_X_IN = 3;

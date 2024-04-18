@@ -47,17 +47,16 @@ def ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_i
 
   # Body
   # y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
-  data_a_out = ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in);
-  data_b_out = ntm_state_matrix_input(data_k_in, data_b_in, data_d_in);
-  data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in);
-  data_d_out = ntm_state_matrix_feedforward(data_k_in, data_d_in);
+  data_a_out = ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in)
+  data_b_out = ntm_state_matrix_input(data_k_in, data_b_in, data_d_in)
+  data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in)
+  data_d_out = ntm_state_matrix_feedforward(data_k_in, data_d_in)
 
-  data_y_out = data_c_out*(data_a_out^k)*initial_x;
+  data_y_out = data_c_out*(data_a_out^k)*initial_x
 
-  for j = 1:k
-    data_y_out = data_y_out + data_c_out*(data_a_out^(k-j))*data_b_out*data_u_in(:, k);
-  end
+  for j in range(len(k)):
+    data_y_out = data_y_out + data_c_out*(data_a_out^(k-j))*data_b_out*data_u_in[:, k]
 
-  data_y_out = data_y_out + data_d_out*data_u_in(:, k);
+  data_y_out = data_y_out + data_d_out*data_u_in[:, k]
 
-  return data_y_out;
+  return data_y_out

@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,26 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, S_IN, H_IN, X_IN)
+  # Body
+  # a(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b[d])
+  vector_a_int = ntm_activation_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
+
+  # f(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b[d])
+  vector_f_int = ntm_forget_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
+
+  # i(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b[d])
+  vector_i_int = ntm_input_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
+
+  # s(n;d) = f(n;d) o s(n-1,d) + i(n;d) o a(n;d)
+  vector_s_int = ntm_state_gate_vector(S_IN, vector_i_int, vector_f_int, vector_a_int)
+
+  # o(n;d) = sigmoid(W(d;x)*x(n;x) + K(i;d;k)*r(n;i;k) + D(i;d;m)*rho(n;i;m) + V(d;s)*xi(n;s) + U(d;d)*h(n-1,d) + b[d])
+  vector_o_int = ntm_output_gate_vector(W_IN, K_IN, V_IN, D_IN, U_IN, B_IN, R_IN, XI_IN, RHO_IN, H_IN, X_IN)
+
+  # h(n;d) = o(n;d) o tanh(s(n;d))
+  H_OUT = ntm_hidden_gate_vector(vector_s_int, vector_o_int)
+
+  return H_OUT

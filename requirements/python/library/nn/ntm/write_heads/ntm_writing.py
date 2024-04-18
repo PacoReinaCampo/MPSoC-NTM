@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,24 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_writing(M_IN, W_IN, A_IN):
+  # Constants
+  SIZE_N_IN, SIZE_W_IN = M_IN.shape
+
+  SIZE_R_IN, _ = W_IN.shaoe
+
+  # Internal Signals
+  matrix_first_operation_int = np.zeros((SIZE_N_IN, SIZE_W_IN))
+
+  # Body
+  # M(t;j;k) = M(t;j;k) + w(t;i;j)·a(t;k)
+  for i in range(len(SIZE_R_IN)):
+    matrix_second_operation_int = ntm_transpose_vector_product(W_IN[i, :], A_IN)
+
+    matrix_first_operation_int = matrix_first_operation_int + matrix_second_operation_int
+    
+  M_OUT = M_IN + matrix_first_operation_int
+
+  return M_OUT

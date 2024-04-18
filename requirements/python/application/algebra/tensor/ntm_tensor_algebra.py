@@ -44,7 +44,7 @@
 
 import numpy as np 
 
-class TensorMathAlgebra:
+class TensorAlgebra:
   def __init__(self, tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control):
     self.tensor_data_a_in = tensor_data_a_in
     self.tensor_data_b_in = tensor_data_b_in
@@ -91,7 +91,7 @@ class TensorMathAlgebra:
 
   def ntm_tensor_inverse(self):
 
-    m, n, p = data_in.shape
+    m, n, p = self.data_in.shape
 
     matrix_in_int = np.zeros((n, p))
     tensor_in_int = np.zeros((m, n, 2*p))
@@ -102,7 +102,7 @@ class TensorMathAlgebra:
     for i in range(m):
       for j in range(n):
         for k in range(p):
-          tensor_in_int[i][j][k] = data_in[i][j][k]
+          tensor_in_int[i][j][k] = self.data_in[i][j][k]
 
           if i == j and j == k and k == i:
             tensor_in_int[i][j][k + p] = 1
@@ -113,7 +113,7 @@ class TensorMathAlgebra:
       # Row swapping
       u = 1
 
-      while  data_in[i][i][i] == 0:
+      while self.data_in[i][i][i] == 0:
         for j in range(n):
           for k in range(p):
             matrix_in_int[j][k] = tensor_in_int[i][j][k]
@@ -343,9 +343,9 @@ class TensorMathAlgebra:
         data_int[i].append([])
         data_out[i].append([])
         for k in range(len(self.data_in[i][j])):
-          temporal0 += math.exp(self.data_in[i][j][k])
+          temporal0 += np.exp(self.data_in[i][j][k])
 
-          temporal1 = math.exp(self.data_in[i][j][k])
+          temporal1 = np.exp(self.data_in[i][j][k])
 
           data_int[i][j].append(temporal1)
 

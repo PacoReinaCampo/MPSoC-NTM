@@ -42,40 +42,33 @@
 ##                                                                               ##
 ###################################################################################
 
-class ScalarArithmetic:
-  def __init__(self, data_a_in, data_b_in):
-    self.data_a_in = data_a_in
-    self.data_b_in = data_b_in
+from lstm.activation import ntm_lstm_activation_b_trainer as lstm_activation_b_trainer
+from lstm.activation import ntm_lstm_activation_d_trainer as lstm_activation_d_trainer
+from lstm.activation import ntm_lstm_activation_k_trainer as lstm_activation_k_trainer
+from lstm.activation import ntm_lstm_activation_u_trainer as lstm_activation_u_trainer
+from lstm.activation import ntm_lstm_activation_v_trainer as lstm_activation_v_trainer
+from lstm.activation import ntm_lstm_activation_w_trainer as lstm_activation_w_trainer
+from lstm.activation import ntm_lstm_activation_trainer as lstm_activation_trainer
+from lstm.forget import ntm_lstm_forget_b_trainer as lstm_forget_b_trainer
+from lstm.forget import ntm_lstm_forget_d_trainer as lstm_forget_d_trainer
+from lstm.forget import ntm_lstm_forget_k_trainer as lstm_forget_k_trainer
+from lstm.forget import ntm_lstm_forget_u_trainer as lstm_forget_u_trainer
+from lstm.forget import ntm_lstm_forget_v_trainer as lstm_forget_v_trainer
+from lstm.forget import ntm_lstm_forget_w_trainer as lstm_forget_w_trainer
+from lstm.forget import ntm_lstm_forget_trainer as lstm_forget_trainer
+from lstm.input import ntm_lstm_input_b_trainer as lstm_input_b_trainer
+from lstm.input import ntm_lstm_input_d_trainer as lstm_input_d_trainer
+from lstm.input import ntm_lstm_input_k_trainer as lstm_input_k_trainer
+from lstm.input import ntm_lstm_input_u_trainer as lstm_input_u_trainer
+from lstm.input import ntm_lstm_input_v_trainer as lstm_input_v_trainer
+from lstm.input import ntm_lstm_input_w_trainer as lstm_input_w_trainer
+from lstm.input import ntm_lstm_input_trainer as lstm_input_trainer
+from lstm.output import ntm_lstm_output_b_trainer as lstm_output_b_trainer
+from lstm.output import ntm_lstm_output_d_trainer as lstm_output_d_trainer
+from lstm.output import ntm_lstm_output_k_trainer as lstm_output_k_trainer
+from lstm.output import ntm_lstm_output_u_trainer as lstm_output_u_trainer
+from lstm.output import ntm_lstm_output_v_trainer as lstm_output_v_trainer
+from lstm.output import ntm_lstm_output_w_trainer as lstm_output_w_trainer
+from lstm.output import ntm_lstm_output_trainer as lstm_output_trainer
 
-  def ntm_scalar_adder(self):
-    # calculating addition
-    return (self.data_a_in + self.data_b_in)
-
-  def ntm_scalar_multiplier(self):
-    # calculating multiplication
-    return (self.data_a_in * self.data_b_in)
-
-  def ntm_scalar_divider(self):
-    # calculating division
-    return (self.data_a_in / self.data_b_in)
-
-
-data_a_in = 48.0
-data_b_in = 16.0
-
-
-arithmetic = ScalarArithmetic(data_a_in, data_b_in)
-
-
-addition_data_out = 64.0
-
-multiplication_data_out = 768.0
-
-division_data_out = 3.0
-
-
-assert arithmetic.ntm_scalar_adder() == addition_data_out
-
-assert arithmetic.ntm_scalar_multiplier() == multiplication_data_out
-
-assert arithmetic.ntm_scalar_divider() == division_data_out
+print('Hello, world!')

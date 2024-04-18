@@ -51,7 +51,7 @@ addpath(genpath('../../../../../library/math/vector'));
 
 addpath(genpath('../../../../../library/nn/LSTM/standard'));
 
-addpath(genpath('../../../../../library/nn/ANN/controller/lstm'));
+addpath(genpath('../../../../../library/nn/ann/controller/lstm'));
 
 # Constants
 SIZE_N_IN = 3;

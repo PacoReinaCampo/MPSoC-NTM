@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,15 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_output_trainer(X_IN, R_IN, XI_IN, RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN):
+  # Body
+  W_OUT = ntm_lstm_output_w_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN)
+  K_OUT = ntm_lstm_output_k_trainer(R_IN, O_IN, S_IN, H_IN, LENGTH_IN)
+  V_OUT = ntm_lstm_output_v_trainer(XI_IN, O_IN, S_IN, H_IN, LENGTH_IN)
+  D_OUT = ntm_lstm_output_d_trainer(RHO_IN, O_IN, S_IN, H_IN, LENGTH_IN)
+  U_OUT = ntm_lstm_output_u_trainer(O_IN, S_IN, H_IN, LENGTH_IN)
+  B_OUT = ntm_lstm_output_b_trainer(O_IN, S_IN, H_IN, LENGTH_IN)
+
+  return W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT

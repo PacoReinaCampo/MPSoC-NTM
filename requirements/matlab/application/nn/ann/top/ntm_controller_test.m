@@ -51,11 +51,11 @@ addpath(genpath('../../../../library/math/matrix'));
 addpath(genpath('../../../../library/math/vector'));
 addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../../library/nn/ANN/inputs'));
-addpath(genpath('../../../../library/nn/ANN/components'));
-addpath(genpath('../../../../library/nn/ANN/functions'));
-addpath(genpath('../../../../library/nn/ANN/controller/fnn'));
-addpath(genpath('../../../../library/nn/ANN/top'));
+addpath(genpath('../../../../library/nn/ann/inputs'));
+addpath(genpath('../../../../library/nn/ann/components'));
+addpath(genpath('../../../../library/nn/ann/functions'));
+addpath(genpath('../../../../library/nn/ann/controller/fnn'));
+addpath(genpath('../../../../library/nn/ann/top'));
 
 # Constants
 SIZE_L_IN = 3;

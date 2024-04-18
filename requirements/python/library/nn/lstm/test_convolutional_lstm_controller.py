@@ -42,4 +42,12 @@
 ##                                                                               ##
 ###################################################################################
 
+from convolutional import ntm_activation_gate_vector as activation_gate_vector
+from convolutional import ntm_forget_gate_vector as forget_gate_vector
+from convolutional import ntm_hidden_gate_vector as hidden_gate_vector
+from convolutional import ntm_input_gate_vector as input_gate_vector
+from convolutional import ntm_output_gate_vector as output_gate_vector
+from convolutional import ntm_state_gate_vector as state_gate_vector
+from convolutional import ntm_controller as controller
+
 print('Hello, world!')

@@ -47,7 +47,7 @@ warning('off','all');
 # Package
 addpath(genpath('../../../../library/algebra/matrix'));
 
-addpath(genpath('../../../../library/nn/ANN/inputs'));
+addpath(genpath('../../../../library/nn/ann/inputs'));
 
 # Constants
 SIZE_N_IN = 3;

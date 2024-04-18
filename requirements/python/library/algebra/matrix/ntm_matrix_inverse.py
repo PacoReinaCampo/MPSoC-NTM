@@ -67,7 +67,7 @@ def ntm_matrix_inverse(data_in):
     # Row swapping
     u = 1
 
-    while  data_in[i][i] == 0:
+    while data_in[i][i] == 0:
       for j in range(n):
         vector_in_int[j] = matrix_in_int[i][j]
 

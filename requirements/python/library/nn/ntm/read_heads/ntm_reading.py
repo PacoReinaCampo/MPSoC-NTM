@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,34 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_reading(W_IN, M_IN):
+  # Constants
+  SIZE_R_IN, SIZE_N_IN = W_IN.shape
+  _, SIZE_W_IN = M_IN.shape
+
+  # Internal Signals
+  matrix_operation_int = np.zeros((SIZE_N_IN, SIZE_W_IN))
+
+  vector_summation_int = np.zeros(SIZE_W_IN)
+
+  # Output Signals
+  R_OUT = np.zeros(SIZE_R_IN, SIZE_W_IN)
+
+  # Body
+  # r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
+
+  for i in range(len(SIZE_R_IN)):
+    for j in range(len(SIZE_N_IN)):
+      for k in range(len(SIZE_W_IN)):
+        matrix_operation_int[j][k] = W_IN[i][j]
+
+    matrix_operation_int = ntm_matrix_multiplier(matrix_operation_int, M_IN)
+
+    for j in range(len(SIZE_N_IN)):
+      vector_summation_int = vector_summation_int + matrix_operation_int[j, :]
+    
+    R_OUT[i, :] = vector_summation_int
+
+  return R_OUT

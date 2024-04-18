@@ -47,7 +47,7 @@ warning('off','all');
 # Package
 addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../../library/nn/ANN/functions'));
+addpath(genpath('../../../../library/nn/ann/functions'));
 
 # Constants
 SIZE_N_IN = 3;

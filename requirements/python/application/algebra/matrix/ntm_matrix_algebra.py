@@ -44,7 +44,7 @@
 
 import numpy as np 
 
-class MatrixMathAlgebra:
+class MatrixAlgebra:
   def __init__(self, matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in, data_in, length_in, length_i_in, length_j_in, control):
     self.matrix_data_a_in = matrix_data_a_in
     self.matrix_data_b_in = matrix_data_b_in
@@ -87,7 +87,7 @@ class MatrixMathAlgebra:
 
   def ntm_matrix_inverse(self):
 
-    m, n = data_in.shape
+    m, n = self.data_in.shape
 
     vector_in_int = np.zeros(n)
     matrix_in_int = np.zeros((m, 2*n))
@@ -97,7 +97,7 @@ class MatrixMathAlgebra:
     # Augmenting Identity Matrix of Order SIZE_IN
     for i in range(m):
       for j in range(n):
-        matrix_in_int[i][j] = data_in[i][j]
+        matrix_in_int[i][j] = self.data_in[i][j]
 
         if i == j:
           matrix_in_int[i][j + n] = 1
@@ -108,7 +108,7 @@ class MatrixMathAlgebra:
       # Row swapping
       u = 1
 
-      while  data_in[i][i] == 0:
+      while self.data_in[i][i] == 0:
         for j in range(n):
           vector_in_int[j] = matrix_in_int[i][j]
 
@@ -323,9 +323,9 @@ class MatrixMathAlgebra:
       data_int.append([])
       data_out.append([])
       for j in range(len(self.data_in[i])):
-        temporal0 += math.exp(self.data_in[i][j])
+        temporal0 += np.exp(self.data_in[i][j])
 
-        temporal1 = math.exp(self.data_in[i][j])
+        temporal1 = np.exp(self.data_in[i][j])
 
         data_int[i].append(temporal1)
 

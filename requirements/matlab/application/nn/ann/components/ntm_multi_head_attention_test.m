@@ -48,8 +48,8 @@ warning('off','all');
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/math/matrix'));
 
-addpath(genpath('../../../../library/nn/ANN/inputs'));
-addpath(genpath('../../../../library/nn/ANN/components'));
+addpath(genpath('../../../../library/nn/ann/inputs'));
+addpath(genpath('../../../../library/nn/ann/components'));
 
 # Constants
 SIZE_N_IN = 3;

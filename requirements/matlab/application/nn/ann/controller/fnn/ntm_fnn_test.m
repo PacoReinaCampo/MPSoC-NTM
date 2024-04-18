@@ -48,7 +48,7 @@ warning('off','all');
 addpath(genpath('../../../../../library/algebra/matrix'));
 addpath(genpath('../../../../../library/math/vector'));
 
-addpath(genpath('../../../../../library/nn/ANN/controller/fnn'));
+addpath(genpath('../../../../../library/nn/ann/controller/fnn'));
 
 # Constants
 SIZE_N_IN = 3;

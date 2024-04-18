@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,21 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_interface_matrix(U_IN, H_IN):
+  # Constants
+  SIZE_R_IN, _, SIZE_L_IN = U_IN.shape
+
+  # Internal Signals
+  matrix_h_int = np.zeros((SIZE_R_IN, SIZE_L_IN))
+
+  # Body
+  # rho(t;i;m) = U(i;m;l)·h(t;i;l)
+  for i in range(len(SIZE_R_IN)):
+    for l in range(len(SIZE_L_IN)):
+      matrix_h_int[i][l] = H_IN[l]
+      
+  RHO_OUT = ntm_tensor_matrix_product(U_IN, matrix_h_int)
+
+  return RHO_OUT

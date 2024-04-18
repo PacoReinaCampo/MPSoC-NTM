@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,23 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_vector_controller_differentiation(DATA_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_L_IN = size(DATA_IN)
+
+  # Output Signals
+  DATA_OUT = zeros(SIZE_T_IN, SIZE_L_IN)
+
+  # Body
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      if (t == 1):
+        DATA_OUT[t][l] = 0
+      else:
+        scalar_operation_int = DATA_IN[t][l] - DATA_IN[t-1][l]
+
+        DATA_OUT[t][l] = scalar_operation_int/LENGTH_IN
+
+  return DATA_OUT

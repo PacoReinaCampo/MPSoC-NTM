@@ -69,4 +69,4 @@ def ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in
 
   data_a_out = ntm_matrix_adder(data_a_in, matrix_operation_int)
 
-  return data_a_out;
+  return data_a_out

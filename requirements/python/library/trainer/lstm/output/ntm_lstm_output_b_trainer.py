@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,26 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_output_b_trainer(O_IN, S_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_L_IN = S_IN.shape
+
+  # Output Signals
+  B_OUT = np.zeros(SIZE_L_IN)
+
+  # Body
+  # do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+
+  vector_do_int = vector_dh_int.*np.tanh(S_IN).*O_IN.*(1-O_IN).^2;
+
+  # db(l) = summation(do(t+1+;l))[t in 0 to T]
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      scalar_operation_int = vector_do_int[t][l]
+
+      B_OUT(l) = B_OUT(l) + scalar_operation_int
+
+  return B_OUT

@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,29 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_output_v_trainer(XI_IN, O_IN, S_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_S_IN = XI_IN.shape
+
+  _, SIZE_L_IN = S_IN.shape
+
+  # Output Signals
+  V_OUT = np.zeros((SIZE_L_IN, SIZE_S_IN))
+
+  # Body
+  # do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+
+  vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
+
+  # dV(l;s) = summation(do(t;l) · xi(t;s))[t in 0 to T-1]
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for s in range(len(SIZE_S_IN)):
+        scalar_operation_int = vector_do_int[t][l]*XI_IN[t][s]
+
+        V_OUT[l][s] = V_OUT[l][s] + scalar_operation_int
+
+  return V_OUT

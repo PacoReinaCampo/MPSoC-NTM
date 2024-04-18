@@ -42,4 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
+from read_heads import ntm_reading as reading
+
 print('Hello, world!')

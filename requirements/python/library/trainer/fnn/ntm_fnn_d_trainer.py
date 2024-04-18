@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,27 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_fnn_d_trainer(RHO_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_R_IN, SIZE_M_IN = RHO_IN.shape
+
+  _, SIZE_L_IN = H_IN.shape
+
+  # Output Signals
+  D_OUT = np.zeros((SIZE_L_IN, SIZE_R_IN, SIZE_M_IN))
+
+  # Body
+  # dD(l;i;m) = summation(d*(t;l) · rho(t;i;m))[t in 0 to T-1]
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for i in range(len(SIZE_R_IN)):
+        for m in range(len(SIZE_M_IN)):
+          scalar_operation_int = vector_dh_int[t][l]*RHO_IN[t][i][m]
+
+          D_OUT[l][i][m] = D_OUT[l][i][m] + scalar_operation_int
+
+  return D_OUT

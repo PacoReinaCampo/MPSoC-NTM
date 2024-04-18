@@ -48,10 +48,11 @@ from vector import ntm_vector_math as vector_math
 
 def test_vector_math():
 
-  data_in_function = np.random.rand(3,1)
+  data_in_function = np.random.rand(3)
+  mean_in_function = np.zeros(3)
 
-  math_function = vector_math.VectorMathFunction(data_in_function)
-  test_function = vector_math.VectorMathFunction(data_in_function)
+  math_function = vector_math.VectorMath(data_in_function, mean_in_function)
+  test_function = vector_math.VectorMath(data_in_function, mean_in_function)
 
   np.testing.assert_array_equal(math_function.ntm_vector_logistic_function(), test_function.ntm_vector_logistic_function())
 
@@ -60,8 +61,8 @@ def test_vector_math():
   data_in_statitic = np.random.rand(3,3)
   mean_in_statitics = np.zeros(3)
 
-  math_statitics = vector_math_statitics.VectorMathStatitics(data_in_statitic, mean_in_statitics)
-  test_statitics = vector_math_statitics.VectorMathStatitics(data_in_statitic, mean_in_statitics)
+  math_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
+  test_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
 
   np.testing.assert_array_equal(math_statitics.ntm_vector_mean(), test_statitics.ntm_vector_mean())
 

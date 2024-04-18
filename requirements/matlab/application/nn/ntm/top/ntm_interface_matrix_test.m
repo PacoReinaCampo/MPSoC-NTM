@@ -47,7 +47,7 @@ warning('off','all');
 # Package
 addpath(genpath('../../../../library/algebra/tensor'));
 
-addpath(genpath('../../../../library/nn/NTM/top'));
+addpath(genpath('../../../../library/nn/ntm/top'));
 
 # Constants
 SIZE_R_IN = 3;

@@ -68,7 +68,7 @@ def ntm_tensor_inverse(data_in):
     # Row swapping
     u = 1
 
-    while  data_in[i][i][i] == 0:
+    while data_in[i][i][i] == 0:
       for j in range(n):
         for k in range(p):
           matrix_in_int[j][k] = tensor_in_int[i][j][k]

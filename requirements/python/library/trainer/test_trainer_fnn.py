@@ -42,51 +42,12 @@
 ##                                                                               ##
 ###################################################################################
 
-import numpy as np 
+from fnn import ntm_fnn_b_trainer as fnn_b_trainer
+from fnn import ntm_fnn_d_trainer as fnn_d_trainer
+from fnn import ntm_fnn_k_trainer as fnn_k_trainer
+from fnn import ntm_fnn_u_trainer as fnn_u_trainer
+from fnn import ntm_fnn_v_trainer as fnn_v_trainer
+from fnn import ntm_fnn_w_trainer as fnn_w_trainer
+from fnn import ntm_fnn_trainer as fnn_trainer
 
-class MatrixArithmetic:
-  def __init__(self, data_a_in, data_b_in):
-    self.data_a_in = data_a_in
-    self.data_b_in = data_b_in
-
-  def ntm_matrix_adder(self):
-    a_in = np.array(self.data_a_in)
-    b_in = np.array(self.data_b_in)
-
-    # calculating addition
-    return (a_in + b_in)
-
-  def ntm_matrix_multiplier(self):
-    a_in = np.array(self.data_a_in)
-    b_in = np.array(self.data_b_in)
-
-    # calculating multiplication
-    return (a_in * b_in)
-
-  def ntm_matrix_divider(self):
-    a_in = np.array(self.data_a_in)
-    b_in = np.array(self.data_b_in)
-
-    # calculating division
-    return (a_in / b_in)
-
-
-data_a_in = [[2.0, 0.0, 4.0], [2.0, 0.0, 4.0], [2.0, 0.0, 4.0]]
-data_b_in = [[1.0, 1.0, 2.0], [1.0, 1.0, 2.0], [1.0, 1.0, 2.0]]
-
-
-arithmetic = MatrixArithmetic(data_a_in, data_b_in)
-
-
-addition_data_out = [[3.0, 1.0, 6.0], [3.0, 1.0, 6.0], [3.0, 1.0, 6.0]]
-
-multiplication_data_out = [[2.0, 0.0, 8.0], [2.0, 0.0, 8.0], [2.0, 0.0, 8.0]]
-
-division_data_out = [[2.0, 0.0, 2.0], [2.0, 0.0, 2.0], [2.0, 0.0, 2.0]]
-
-
-np.testing.assert_array_equal(arithmetic.ntm_matrix_adder(), addition_data_out)
-
-np.testing.assert_array_equal(arithmetic.ntm_matrix_multiplier(), multiplication_data_out)
-
-np.testing.assert_array_equal(arithmetic.ntm_matrix_divider(), division_data_out)
+print('Hello, world!')

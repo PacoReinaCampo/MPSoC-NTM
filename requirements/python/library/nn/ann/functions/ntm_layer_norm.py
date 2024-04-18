@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,30 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
+  # Constants
+  SIZE_N_IN, SIZE_D_IN = Z_IN.shape
+
+  # Output Signals
+  N_OUT = np.zeros(SIZE_N_IN, SIZE_D_IN)
+
+  # Body
+  vector_operation_int = ntm_vector_mean(Z_IN)
+
+  for n in range(len(SIZE_N_IN)):
+    for d in range(len(SIZE_D_IN)):
+      N_OUT([n][d]) = Z_IN([n][d]) - vector_operation_int[n]
+      
+  vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int)
+
+  for n in range(len(SIZE_N_IN)):
+    for d in range(len(SIZE_D_IN)):
+      N_OUT([n][d]) = N_OUT([n][d])/vector_operation_int[n]
+      
+  N_OUT = ntm_matrix_multiplier(GAMMA_IN, N_OUT)
+
+  N_OUT = N_OUT + BETA_IN;
+
+  return N_OUT

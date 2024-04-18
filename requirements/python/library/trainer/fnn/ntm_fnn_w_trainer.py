@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(k)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -37,9 +37,31 @@
 ## THE SOFTWARE.                                                                 ##
 ##                                                                               ##
 ## ============================================================================= ##
-## Author(s):                                                                    ##
+## Author(k):                                                                    ##
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_fnn_w_trainer(X_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_X_IN = X_IN.shape
+
+  _, SIZE_L_IN = H_IN.shape
+
+  # Output Signals
+  W_OUT = np.zeros((SIZE_L_IN, SIZE_X_IN))
+
+  # Body
+  # dW(l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for x in range(len(SIZE_X_IN)):
+        scalar_operation_int = vector_dh_int(t, l)*X_IN[t][x]
+
+        W_OUT[l][x] = W_OUT[l][x] + scalar_operation_int
+
+  return W_OUT

@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,13 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+def ntm_fnn_trainer(X_IN, R_IN, XI_IN, RHO_IN, H_IN, LENGTH_IN):
+  # Body
+  W_OUT = ntm_fnn_w_trainer(X_IN, H_IN, LENGTH_IN)
+  K_OUT = ntm_fnn_k_trainer(R_IN, H_IN, LENGTH_IN)
+  V_OUT = ntm_fnn_v_trainer(XI_IN, H_IN, LENGTH_IN)
+  D_OUT = ntm_fnn_d_trainer(RHO_IN, H_IN, LENGTH_IN)
+  U_OUT = ntm_fnn_u_trainer(H_IN, LENGTH_IN)
+  B_OUT = ntm_fnn_b_trainer(H_IN, LENGTH_IN)
+
+  return W_OUT, K_OUT, V_OUT, D_OUT, U_OUT, B_OUT

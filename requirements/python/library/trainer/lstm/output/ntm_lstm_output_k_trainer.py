@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,30 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_output_k_trainer(R_IN, O_IN, S_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_R_IN, SIZE_W_IN = R_IN.shape
+
+  _, SIZE_L_IN = S_IN.shape
+
+  # Output Signals
+  K_OUT = np.zeros((SIZE_L_IN, SIZE_R_IN, SIZE_W_IN))
+
+  # Body
+  # do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+
+  vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
+
+  # dK(l;i;k) = summation(do(t;l) · r(t;i;k))[t in 0 to T-1]
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for i in range(len(SIZE_R_IN)):
+        for k in range(len(SIZE_W_IN)):
+          scalar_operation_int = vector_do_int(t, l)*R_IN[t][i][k]
+
+          K_OUT[l][i][k] = K_OUT[l][i][k] + scalar_operation_int
+
+  return K_OUT

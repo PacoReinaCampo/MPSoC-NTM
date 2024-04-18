@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,37 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_encoder(K_IN, Q_IN, V_IN, W_OH_IN, W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
+  # Constants
+  SIZE_L_IN, SIZE_N_IN, SIZE_D_IN = X_IN.shape
+
+  # Internal Signals
+  GAMMA_IN = np.rand(SIZE_N_IN, SIZE_D_IN)
+  BETA_IN = np.rand(SIZE_N_IN, SIZE_D_IN)
+
+  x_int = np.zeros(SIZE_N_IN, SIZE_D_IN)
+
+  # Output Signals
+  Z_OUT = np.zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN) 
+
+  # Body
+  for l in range(len(SIZE_L_IN)):
+    for n in range(len(SIZE_N_IN)):
+      for d in range(len(SIZE_D_IN)):
+        x_int([n][d]) = X_IN([l][n][d])
+          
+    y_int = ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, x_int)
+
+    z_int = x_int + y_int
+
+    x_int = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN)
+
+    y_int = ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, y_int)
+
+    z_int = x_int + y_int
+
+    Z_OUT[l, :, :] = ntm_layer_norm(z_int, GAMMA_IN, BETA_IN)
+
+  return Z_OUT

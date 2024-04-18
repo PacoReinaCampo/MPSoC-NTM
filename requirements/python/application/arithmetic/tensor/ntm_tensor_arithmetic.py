@@ -77,7 +77,7 @@ class TensorArithmetic:
       for j in range(len(self.data_a_in[i])):
         data_out[i].append([])
         for k in range(len(self.data_a_in[i][j])):
-          data_out[i][j].append(a_in[i][j][k] + b_in[i][j][k])
+          data_out[i][j].append(a_in[i][j][k] - b_in[i][j][k])
 
     return data_out
 

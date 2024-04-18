@@ -42,4 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
+from standard import ntm_controller as controller
+
 print('Hello, world!')

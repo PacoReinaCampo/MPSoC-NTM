@@ -49,7 +49,7 @@ addpath(genpath('../../../../library/algebra/vector'));
 addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/math/matrix'));
 
-addpath(genpath('../../../../library/nn/NTM/memory'));
+addpath(genpath('../../../../library/nn/ntm/memory'));
 
 # Constants
 SIZE_R_IN = 3;

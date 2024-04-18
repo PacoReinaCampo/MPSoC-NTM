@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,31 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_forget_u_trainer(A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_L_IN = size(F_IN)
+
+  # Output Signals
+  U_OUT = np.zeros((SIZE_L_IN, SIZE_L_IN))
+
+  # Body
+  # ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+  vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN)
+
+  vector_ds_int = vector_dh_int.*O_IN.*(1-tanh(S_IN).^2) + vector_ds_int + F_IN
+
+  # df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
+  vector_df_int = vector_ds_int.*S_IN.*F_IN.*(1-F_IN)
+
+  # dU(l;m) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for m in range(len(SIZE_L_IN)):
+        scalar_operation_int = vector_df_int[t][l]*H_IN[t][m]
+
+        U_OUT[l][m] = U_OUT[l][m] + scalar_operation_int
+
+  return U_OUT

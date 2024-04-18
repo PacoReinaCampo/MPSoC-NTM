@@ -42,4 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
+from functions import ntm_layer_norm as layer_norm
+from functions import ntm_positional_encoding as positional_encoding
+
 print('Hello, world!')

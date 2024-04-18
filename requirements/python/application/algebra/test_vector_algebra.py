@@ -53,8 +53,10 @@ def test_vector_algebra():
 
   data_in = np.random.rand(3,1)
 
-  math_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in)
-  test_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in)
+  length_in = 1.0
+
+  math_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
+  test_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
 
   np.testing.assert_array_equal(math_algebra.ntm_dot_product(), test_algebra.ntm_dot_product())
 
@@ -68,12 +70,8 @@ def test_vector_algebra():
 
   np.testing.assert_array_equal(math_algebra.ntm_vector_summation(), test_algebra.ntm_vector_summation())
 
-  length_in = 1.0
-
-  data_in = np.random.rand(3,1)
-
-  math_calculus = vector_math_calculus.VectorAlgebra(data_in, length_in)
-  test_calculus = vector_math_calculus.VectorAlgebra(data_in, length_in)
+  math_calculus = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
+  test_calculus = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
 
   np.testing.assert_array_equal(math_calculus.ntm_vector_differentiation(), test_calculus.ntm_vector_differentiation())
 

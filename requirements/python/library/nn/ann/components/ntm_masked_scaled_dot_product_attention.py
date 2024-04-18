@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,25 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN)
+  # Constants
+  _, SIZE_K_IN = K_IN.shape
+
+  # Body
+  k_int = ntm_keys_vector(K_IN, X_IN)
+  q_int = ntm_queries_vector(Q_IN, X_IN)
+
+  matrix_operation_int = ntm_matrix_transpose(k_int)
+  matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int)
+  matrix_operation_int = matrix_operation_int + M_IN;
+  scalar_operation_int = np.sqrt(SIZE_K_IN)
+  matrix_operation_int = matrix_operation_int/scalar_operation_int;
+  matrix_operation_int = ntm_matrix_softmax(matrix_operation_int)
+
+  v_int = ntm_values_vector(V_IN, X_IN)
+
+  U_OUT = ntm_matrix_product(matrix_operation_int, v_int)
+
+  return U_OUT

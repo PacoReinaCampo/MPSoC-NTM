@@ -48,7 +48,7 @@ warning('off','all');
 addpath(genpath('../../../../library/algebra/vector'));
 addpath(genpath('../../../../library/algebra/matrix'));
 
-addpath(genpath('../../../../library/nn/NTM/read_heads'));
+addpath(genpath('../../../../library/nn/ntm/read_heads'));
 
 # Constants
 SIZE_R_IN = 3;

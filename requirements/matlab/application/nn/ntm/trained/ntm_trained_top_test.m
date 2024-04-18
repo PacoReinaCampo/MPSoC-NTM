@@ -51,16 +51,16 @@ addpath(genpath('../../../../library/algebra/tensor'));
 addpath(genpath('../../../../library/math/matrix'));
 addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../../library/nn/FNN/standard'));
+addpath(genpath('../../../../library/nn/fnn/standard'));
 
-addpath(genpath('../../../../library/nn/NTM/memory'));
-addpath(genpath('../../../../library/nn/NTM/read_heads'));
-addpath(genpath('../../../../library/nn/NTM/write_heads'));
-addpath(genpath('../../../../library/nn/NTM/top'));
-addpath(genpath('../../../../library/nn/NTM/trained'));
+addpath(genpath('../../../../library/nn/ntm/memory'));
+addpath(genpath('../../../../library/nn/ntm/read_heads'));
+addpath(genpath('../../../../library/nn/ntm/write_heads'));
+addpath(genpath('../../../../library/nn/ntm/top'));
+addpath(genpath('../../../../library/nn/ntm/trained'));
 
 addpath(genpath('../../../../library/trainer/differentiation'));
-addpath(genpath('../../../../library/trainer/FNN'));
+addpath(genpath('../../../../library/trainer/fnn'));
 
 # Constants
 SIZE_T_IN = 3;

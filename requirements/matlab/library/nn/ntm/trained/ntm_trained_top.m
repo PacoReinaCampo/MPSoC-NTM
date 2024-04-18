@@ -73,5 +73,5 @@ function Y_OUT = ntm_trained_top(X_IN)
 
   [w_int, k_int, v_int, d_int, u_int, b_int] = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN);
 
-  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT]= ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
+  [Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT] = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN);
 end

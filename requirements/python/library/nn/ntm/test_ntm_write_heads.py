@@ -42,4 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
+from write_heads import ntm_erasing as erasing
+from write_heads import ntm_writing as writing
+
 print('Hello, world!')

@@ -57,8 +57,18 @@ def test_tensor_algebra():
   tensor_data_in = np.random.rand(3,3,3)
   array4_data_in = np.random.rand(3,3,3,3)
 
-  math_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in)
-  test_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in)
+  data_in = np.random.rand(3,3,3)
+
+  length_in = 1.0
+
+  length_i_in = 1.0
+  length_j_in = 1.0
+  length_k_in = 1.0
+
+  control = 0
+
+  math_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
+  test_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
 
   np.testing.assert_array_equal(math_algebra.ntm_tensor_convolution(), test_algebra.ntm_tensor_convolution())
 
@@ -76,18 +86,8 @@ def test_tensor_algebra():
 
   np.testing.assert_array_equal(math_algebra.ntm_tensor_transpose(), test_algebra.ntm_tensor_transpose())
 
-  control = 0
-
-  length_in = 1.0
-
-  length_i_in = 1.0
-  length_j_in = 1.0
-  length_k_in = 1.0
-
-  data_in = np.random.rand(3,3,3)
-
-  math_calculus = tensor_math_calculus.TensorMath(data_in, length_in, length_i_in, length_j_in, length_k_in, control)
-  test_calculus = tensor_math_calculus.TensorMath(data_in, length_in, length_i_in, length_j_in, length_k_in, control)
+  math_calculus = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
+  test_calculus = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
 
   np.testing.assert_array_equal(math_calculus.ntm_tensor_differentiation(), test_calculus.ntm_tensor_differentiation())
 

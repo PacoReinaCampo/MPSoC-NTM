@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,39 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_trained_top(X_IN):
+  # Constants
+  LENGTH_IN = 3
+
+  SIZE_T_IN = 3
+  SIZE_X_IN = 3
+  SIZE_Y_IN = 3
+  SIZE_N_IN = 3
+  SIZE_W_IN = 3
+  SIZE_L_IN = 3
+  SIZE_R_IN = 3
+
+  SIZE_S_IN = 2*SIZE_W_IN
+  SIZE_M_IN = SIZE_N_IN + SIZE_W_IN + 3
+
+  # Signals
+  P_IN = np.rand(SIZE_R_IN, SIZE_Y_IN, SIZE_W_IN)
+  Q_IN = np.rand(SIZE_Y_IN, SIZE_L_IN)
+
+  w_int = np.rand(SIZE_L_IN, SIZE_X_IN)
+  k_int = np.rand(SIZE_R_IN, SIZE_L_IN, SIZE_X_IN)
+  v_int = np.rand(SIZE_L_IN, SIZE_S_IN)
+  d_int = np.rand(SIZE_R_IN, SIZE_L_IN, SIZE_M_IN)
+  u_int = np.rand(SIZE_L_IN, SIZE_L_IN)
+  b_int = np.rand(SIZE_L_IN)
+
+  # Body
+  Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN)
+
+  w_int, k_int, v_int, d_int, u_int, b_int = ntm_fnn_trainer(X_IN, R_OUT, XI_OUT, RHO_OUT, H_OUT, LENGTH_IN)
+
+  Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT = ntm_interface_top(w_int, k_int, v_int, d_int, u_int, b_int, P_IN, Q_IN, X_IN)
+
+  return Y_OUT, R_OUT, XI_OUT, RHO_OUT, H_OUT

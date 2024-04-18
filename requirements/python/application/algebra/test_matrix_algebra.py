@@ -57,8 +57,17 @@ def test_matrix_algebra():
   matrix_data_in = np.random.rand(3,3)
   tensor_data_in = np.random.rand(3,3,3)
 
-  math_algebra = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in)
-  test_algebra = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in)
+  data_in = np.random.rand(3,3)
+
+  length_in = 1.0
+
+  length_i_in = 1.0
+  length_j_in = 1.0
+
+  control = 0
+
+  math_algebra = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in, data_in, length_in, length_i_in, length_j_in, control)
+  test_algebra = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in, data_in, length_in, length_i_in, length_j_in, control)
 
   np.testing.assert_array_equal(math_algebra.ntm_matrix_convolution(), test_algebra.ntm_matrix_convolution())
 
@@ -78,17 +87,8 @@ def test_matrix_algebra():
 
   np.testing.assert_array_equal(math_algebra.ntm_transpose_vector_product(), test_algebra.ntm_transpose_vector_product())
 
-  control = 0
-
-  length_in = 1.0
-
-  length_i_in = 1.0
-  length_j_in = 1.0
-
-  data_in = np.random.rand(3,3)
-
-  math_calculus = matrix_math_calculus.MatrixAlgebra(data_in, length_in, length_i_in, length_j_in, control)
-  test_calculus = matrix_math_calculus.MatrixAlgebra(data_in, length_in, length_i_in, length_j_in, control)
+  math_calculus = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in, data_in, length_in, length_i_in, length_j_in, control)
+  test_calculus = matrix_algebra.MatrixAlgebra(matrix_data_a_in, matrix_data_b_in, vector_data_a_in, vector_data_b_in, matrix_data_in, tensor_data_in, data_in, length_in, length_i_in, length_j_in, control)
 
   np.testing.assert_array_equal(math_calculus.ntm_matrix_differentiation(), test_calculus.ntm_matrix_differentiation())
 

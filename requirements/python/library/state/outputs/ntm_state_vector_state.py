@@ -47,14 +47,13 @@ def ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in
 
   # Body
   # x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
-  data_a_out = ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in);
-  data_b_out = ntm_state_matrix_input(data_k_in, data_b_in, data_d_in);
-  data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in);
+  data_a_out = ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in)
+  data_b_out = ntm_state_matrix_input(data_k_in, data_b_in, data_d_in)
+  data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in)
 
-  data_x_out = (data_a_out^k)*initial_x;
+  data_x_out = (data_a_out^k)*initial_x
 
-  for j = 1:k
-    data_x_out = data_x_out + data_c_out*(data_a_out^(k-j-1))*data_b_out*data_u_in(:, k);
-  end
+  for j in range(len(k)):
+    data_x_out = data_x_out + data_c_out*(data_a_out^(k-j-1))*data_b_out*data_u_in[:, k]
 
-  return data_x_out;
+  return data_x_out

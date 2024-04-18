@@ -49,7 +49,7 @@ addpath(genpath('../../../../library/algebra/matrix'));
 addpath(genpath('../../../../library/algebra/tensor'));
 addpath(genpath('../../../../library/math/vector'));
 
-addpath(genpath('../../../../library/nn/FNN/convolutional'));
+addpath(genpath('../../../../library/nn/fnn/convolutional'));
 
 # Constants
 SIZE_X_IN = 3;

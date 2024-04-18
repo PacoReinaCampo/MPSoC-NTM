@@ -42,4 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
+from trained import ntm_trained_top as trained_top
+
 print('Hello, world!')

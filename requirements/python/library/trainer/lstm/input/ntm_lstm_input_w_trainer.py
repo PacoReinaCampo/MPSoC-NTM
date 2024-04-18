@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(k)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -37,9 +37,38 @@
 ## THE SOFTWARE.                                                                 ##
 ##                                                                               ##
 ## ============================================================================= ##
-## Author(s):                                                                    ##
+## Author(k):                                                                    ##
 ##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_lstm_input_w_trainer(X_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN):
+  # Constants
+  SIZE_T_IN, SIZE_X_IN = X_IN.shape
+
+  _, SIZE_L_IN = A_IN.shape
+
+  # Output Signals
+  W_OUT = np.zeros((SIZE_L_IN, SIZE_X_IN))
+
+  # Body
+  # ds(t;l) = dh(t;l) o o(t;l) o (1 - (tanh(s(t;l)))^2) + ds(t+1;l) + f(t+1;l)
+  vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
+  vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN)
+
+  vector_ds_int = vector_dh_int.*O_IN.*(1-tanh(S_IN).^2) + vector_ds_int + F_IN
+  
+  # di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
+  vector_di_int = vector_ds_int.*A_IN.*I_IN.*(1-I_IN)
+
+  # dW(l;x) = summation(di(t;l) · x(t;x))[t in 0 to T]
+  for t in range(len(SIZE_T_IN)):
+    for l in range(len(SIZE_L_IN)):
+      for x in range(len(SIZE_X_IN)):
+        scalar_operation_int = vector_di_int[t][l]*X_IN[t][x]
+
+        W_OUT[l][x] = W_OUT[l][x] + scalar_operation_int
+
+  return W_OUT

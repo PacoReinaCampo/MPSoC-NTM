@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,31 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_vector_content_based_addressing(K_IN, BETA_IN, M_IN):
+  # Constants
+  SIZE_N_IN, SIZE_W_IN = M_IN.shape
+
+  # Internal Signals
+  vector_beta_int = np.zeros(SIZE_N_IN)
+
+  vector_j_operation_int = np.zeros(SIZE_N_IN)
+  vector_k_operation_int = np.zeros(SIZE_W_IN)
+
+  # Body
+  # C(M[j,·],k,beta)[j] = softmax(cosine_similarity(k,M[j,·])·beta)[j]
+
+  for j in range(len(SIZE_N_IN)):
+    vector_beta_int[j] = BETA_IN
+
+    for k in range(len(SIZE_W_IN)):
+      vector_k_operation_int[k] = M_IN[j][k]
+    
+    vector_j_operation_int[j] = ntm_vector_cosine_similarity(K_IN, vector_k_operation_int)
+  
+  vector_j_operation_int = ntm_vector_multiplier(vector_j_operation_int, vector_beta_int)
+
+  C_OUT = ntm_vector_softmax(vector_j_operation_int)
+
+  return C_OUT

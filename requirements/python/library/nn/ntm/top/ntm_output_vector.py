@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,23 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_output_vector(P_IN, R_IN, Q_IN, H_IN):
+  # Constants
+  SIZE_R_IN, SIZE_Y_IN, _ = P_IN.shape
+
+  # Body
+  # y(t;y) = P(i;y;k)·r(t;i;k) + Q(y;l)·h(t;l)
+
+  # Q(y;l)·h(t;l)
+  Y_OUT = ntm_matrix_vector_product(Q_IN, H_IN)
+
+  # P(i;y;k)·r(t;i;k)
+  matrix_operation_int = ntm_tensor_matrix_product(P_IN, R_IN)
+  
+  for y in range(len(SIZE_Y_IN)):
+    for i in range(len(SIZE_R_IN)):
+      Y_OUT[y] = Y_OUT[y] + matrix_operation_int[i][y]
+
+  return Y_OUT

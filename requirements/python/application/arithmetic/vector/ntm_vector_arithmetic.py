@@ -59,6 +59,8 @@ class VectorArithmetic:
     for i in range(len(self.data_a_in)):
       data_out.append(a_in[i] + b_in[i])
 
+    return data_out
+
   def ntm_vector_subtractor(self):
     a_in = np.array(self.data_a_in)
     b_in = np.array(self.data_b_in)
@@ -67,7 +69,7 @@ class VectorArithmetic:
 
     # calculating subtraction
     for i in range(len(self.data_a_in)):
-      data_out.append(a_in[i] + b_in[i])
+      data_out.append(a_in[i] - b_in[i])
 
     return data_out
 
