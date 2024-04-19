@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN)
+def ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN):
   # Constants
   SIZE_N_IN, _ = X_IN.shape
 
@@ -52,22 +52,22 @@ def ntm_multi_head_attention(K_IN, Q_IN, V_IN, W_OH_IN, X_IN)
   SIZE_H_IN, SIZE_D_IN, SIZE_V_IN = V_IN.shape
 
   # Internal Signals
-  k_int = np.zeros(SIZE_D_IN, SIZE_K_IN)
-  q_int = np.zeros(SIZE_D_IN, SIZE_K_IN)
-  v_int = np.zeros(SIZE_D_IN, SIZE_V_IN)
+  k_int = np.zeros((SIZE_D_IN, SIZE_K_IN))
+  q_int = np.zeros((SIZE_D_IN, SIZE_K_IN))
+  v_int = np.zeros((SIZE_D_IN, SIZE_V_IN))
 
   multi_head_int = np.zeros(SIZE_N_IN, SIZE_H_IN*SIZE_V_IN)
 
   # Body
   for h in range(len(SIZE_H_IN)):
     for d in range(len(SIZE_D_IN)):
-      k_int[d, :] = K_IN[h][d, :]
-      q_int[d, :] = Q_IN[h][d, :]
-      v_int[d, :] = V_IN[h][d, :]
+      k_int[d] = K_IN[h][d]
+      q_int[d] = Q_IN[h][d]
+      v_int[d] = V_IN[h][d]
 
     head_int = ntm_scaled_dot_product_attention(k_int, q_int, v_int, X_IN)
 
-    multi_head_int(:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h) = head_int;
+    multi_head_int[:, 1+SIZE_V_IN*(h-1):SIZE_V_IN*h] = head_int;
 
   Y_OUT = ntm_matrix_product(multi_head_int, W_OH_IN)
 

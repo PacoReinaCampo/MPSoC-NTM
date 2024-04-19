@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN)
+def ntm_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN):
   # Constants
   _, SIZE_K_IN = K_IN.shape
 
@@ -54,7 +54,7 @@ def ntm_scaled_dot_product_attention(K_IN, Q_IN, V_IN, X_IN)
 
   matrix_operation_int = ntm_matrix_transpose(k_int)
   matrix_operation_int = ntm_matrix_product(q_int, matrix_operation_int)
-  scalar_operation_int = sqrt(SIZE_K_IN)
+  scalar_operation_int = np.sqrt(SIZE_K_IN)
   matrix_operation_int = matrix_operation_int/scalar_operation_int;
   matrix_operation_int = ntm_matrix_softmax(matrix_operation_int)
 

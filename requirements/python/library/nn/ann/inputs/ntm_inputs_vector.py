@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
+def ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN):
   # Constants
   SIZE_D_IN, SIZE_X_IN = W_IN.shape
   SIZE_L_IN, SIZE_N_IN, SIZE_R_IN, SIZE_W_IN = R_IN.shape
@@ -52,13 +52,13 @@ def ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
   _, _, _, SIZE_P_IN = RHO_IN.shape
 
   # Internal Signals
-  x_int = np.zeros(SIZE_N_IN, SIZE_X_IN)
-  r_int = np.zeros(SIZE_N_IN, SIZE_R_IN, SIZE_W_IN)
-  rho_int = np.zeros(SIZE_N_IN, SIZE_R_IN, SIZE_P_IN)
-  xi_int = np.zeros(SIZE_N_IN, SIZE_S_IN)
+  x_int = np.zeros((SIZE_N_IN, SIZE_X_IN))
+  r_int = np.zeros((SIZE_N_IN, SIZE_R_IN, SIZE_W_IN))
+  rho_int = np.zeros((SIZE_N_IN, SIZE_R_IN, SIZE_P_IN))
+  xi_int = np.zeros((SIZE_N_IN, SIZE_S_IN))
 
   # Output Signals
-  X_OUT = np.zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN)
+  X_OUT = np.zeros((SIZE_L_IN, SIZE_N_IN, SIZE_D_IN))
 
   # Body
   # X(l;n;d) = W(d;x)·x(l;n;x) + K(i;d;k)·r(l;n;i;k) + D(i;d;p)·rho(l;n;i;p) + V(d;s)·xi(l;n;s)
@@ -66,17 +66,17 @@ def ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
   for l in range(len(SIZE_L_IN)):
     for n in range(len(SIZE_N_IN)):
       for x in range(len(SIZE_X_IN)):
-        x_int[n][x] = X_IN(l, n, x)
-      
+        x_int[n][x] = X_IN[l][n][x]
+
       for i in range(len(SIZE_R_IN)):
         for k in range(len(SIZE_W_IN)):
-          r_int(n, i, k) = R_IN(l, n, i, k)
+          r_int[n][i][k] = R_IN[l][n][i][k]
         
         for p in range(len(SIZE_P_IN)):
-          rho_int(n, i, p) = RHO_IN(l, n, i, p)
-              
+          rho_int[n][i][p] = RHO_IN[l][n][i][p]
+
       for s in range(len(SIZE_S_IN)):
-        xi_int(n, s) = XI_IN(l, n, s)
+        xi_int[n][s] = XI_IN[l][n][s]
 
       # W(d;x)·x(l;n;x)
       vector_first_operation_int = ntm_matrix_vector_product(W_IN, x_int)
@@ -94,10 +94,10 @@ def ntm_inputs_vector(W_IN, K_IN, V_IN, D_IN, X_IN, R_IN, XI_IN, RHO_IN)
       for d in range(len(SIZE_D_IN)):
         for i in range(len(SIZE_R_IN)):
           vector_first_operation_int[d] = vector_first_operation_int[d] + matrix_operation_int[i][d]
-              
+
       # V(d;s)·xi(l;n;s)
       vector_second_operation_int = ntm_matrix_vector_product(V_IN, xi_int)
 
-      X_OUT(l, n, :) = vector_first_operation_int + vector_second_operation_int;
+      X_OUT[l][n] = vector_first_operation_int + vector_second_operation_int;
 
   return X_OUT

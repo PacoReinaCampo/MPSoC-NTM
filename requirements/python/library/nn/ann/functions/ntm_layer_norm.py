@@ -44,25 +44,25 @@
 
 import numpy as np
 
-def ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
+def ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN):
   # Constants
   SIZE_N_IN, SIZE_D_IN = Z_IN.shape
 
   # Output Signals
-  N_OUT = np.zeros(SIZE_N_IN, SIZE_D_IN)
+  N_OUT = np.zeros((SIZE_N_IN, SIZE_D_IN))
 
   # Body
   vector_operation_int = ntm_vector_mean(Z_IN)
 
   for n in range(len(SIZE_N_IN)):
     for d in range(len(SIZE_D_IN)):
-      N_OUT([n][d]) = Z_IN([n][d]) - vector_operation_int[n]
+      N_OUT[n][d] = Z_IN[n][d] - vector_operation_int[n]
       
   vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int)
 
   for n in range(len(SIZE_N_IN)):
     for d in range(len(SIZE_D_IN)):
-      N_OUT([n][d]) = N_OUT([n][d])/vector_operation_int[n]
+      N_OUT[n][d] = N_OUT[n][d]/vector_operation_int[n]
       
   N_OUT = ntm_matrix_multiplier(GAMMA_IN, N_OUT)
 

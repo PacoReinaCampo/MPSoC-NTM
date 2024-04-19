@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_keys_vector(K_IN, X_IN)
+def ntm_keys_vector(K_IN, X_IN):
   # Body
   # K(n;k) = X(n;d)·K(d;k)
   K_OUT = ntm_matrix_product(X_IN, K_IN)

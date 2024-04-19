@@ -50,6 +50,8 @@ def ntm_lstm_activation_d_trainer(RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LE
 
   _, SIZE_L_IN = A_IN.shape
 
+  vector_ones_int = np.ones(SIZE_L_IN)
+
   # Output Signals
   D_OUT = np.zeros((SIZE_L_IN, SIZE_R_IN, SIZE_M_IN))
 
@@ -58,10 +60,10 @@ def ntm_lstm_activation_d_trainer(RHO_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LE
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
   vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN)
 
-  vector_ds_int = vector_dh_int.*O_IN.*(1-np.tanh(S_IN).^2) + vector_ds_int + F_IN
+  vector_ds_int = vector_dh_int*O_IN*(vector_ones_int - np.tanh(S_IN)^2) + vector_ds_int + F_IN
 
   # da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
-  vector_da_int = vector_ds_int.*I_IN.*(1-A_IN).^2;
+  vector_da_int = vector_ds_int*I_IN*(vector_ones_int - A_IN)^2;
 
   # dD(l;i;m) = summation(da(t;l) · rho(t;i;m))[t in 0 to T-1]
   for t in range(len(SIZE_T_IN)):

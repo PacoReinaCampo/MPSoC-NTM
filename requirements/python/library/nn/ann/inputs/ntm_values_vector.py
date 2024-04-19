@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_values_vector(V_IN, X_IN)
+def ntm_values_vector(V_IN, X_IN):
   # Body
   # V(n;v) = X(n;d)·V(d;v)
   V_OUT = ntm_matrix_product(X_IN, V_IN)

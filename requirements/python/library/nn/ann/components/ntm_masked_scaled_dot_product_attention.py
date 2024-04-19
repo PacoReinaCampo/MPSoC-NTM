@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN)
+def ntm_masked_scaled_dot_product_attention(K_IN, Q_IN, V_IN, M_IN, X_IN):
   # Constants
   _, SIZE_K_IN = K_IN.shape
 

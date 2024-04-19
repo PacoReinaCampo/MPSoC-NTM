@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN)
+def ntm_fnn(W1_IN, B1_IN, W2_IN, B2_IN, X_IN):
   # Body
   # y(n;d) = W2(d;m)·(sigmoid(W1(m;d)·x(n;d) + b1(m))) + b2[d]
 

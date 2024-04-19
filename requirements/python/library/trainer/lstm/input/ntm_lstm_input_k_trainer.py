@@ -46,9 +46,11 @@ import numpy as np
 
 def ntm_lstm_input_k_trainer(R_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN):
   # Constants
-  SIZE_T_IN, SIZE_R_IN, SIZE_W_IN = size(R_IN)
+  SIZE_T_IN, SIZE_R_IN, SIZE_W_IN = R_IN.shape
 
   _, SIZE_L_IN = A_IN.shape
+
+  vector_ones_int = np.ones(SIZE_L_IN)
 
   # Output Signals
   K_OUT = np.zeros((SIZE_L_IN, SIZE_R_IN, SIZE_W_IN))
@@ -58,10 +60,10 @@ def ntm_lstm_input_k_trainer(R_IN, A_IN, I_IN, F_IN, O_IN, S_IN, H_IN, LENGTH_IN
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
   vector_ds_int = ntm_vector_controller_differentiation(S_IN, LENGTH_IN)
 
-  vector_ds_int = vector_dh_int.*O_IN.*(1-np.tanh(S_IN).^2) + vector_ds_int + F_IN
+  vector_ds_int = vector_dh_int*O_IN*(vector_ones_int - np.tanh(S_IN)^2) + vector_ds_int + F_IN
   
   # di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
-  vector_di_int = vector_ds_int.*A_IN.*I_IN.*(1-I_IN)
+  vector_di_int = vector_ds_int*A_IN*I_IN*(vector_ones_int - I_IN)
 
   # dK(l;i;k) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
   for t in range(len(SIZE_T_IN)):

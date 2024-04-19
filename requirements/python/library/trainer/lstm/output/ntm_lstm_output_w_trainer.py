@@ -50,6 +50,8 @@ def ntm_lstm_output_w_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN):
 
   _, SIZE_L_IN = S_IN.shape
 
+  vector_ones_int = np.ones(SIZE_L_IN)
+
   # Output Signals
   W_OUT = np.zeros((SIZE_L_IN, SIZE_X_IN))
 
@@ -57,7 +59,7 @@ def ntm_lstm_output_w_trainer(X_IN, O_IN, S_IN, H_IN, LENGTH_IN):
   # do(t;l) = dh(t;l) o tanh(s(t;l)) o o(t;l) o (1 - o(t;l))
   vector_dh_int = ntm_vector_controller_differentiation(H_IN, LENGTH_IN)
 
-  vector_do_int = vector_dh_int.*tanh(S_IN).*O_IN.*(1-O_IN).^2;
+  vector_do_int = vector_dh_int*np.tanh(S_IN)*O_IN*(vector_ones_int - O_IN)^2;
 
   # dW(l;x) = summation(do(t;l) · x(t;x))[t in 0 to T]
   for t in range(len(SIZE_T_IN)):

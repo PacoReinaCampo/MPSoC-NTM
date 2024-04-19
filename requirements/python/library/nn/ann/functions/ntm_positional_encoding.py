@@ -44,20 +44,20 @@
 
 import numpy as np
 
-def ntm_positional_encoding(X_IN, PE_IN)
+def ntm_positional_encoding(X_IN, PE_IN):
   # Constants
   SIZE_L_IN, SIZE_N_IN, SIZE_D_IN = X_IN.shape
 
   # Output Signals
-  Y_OUT = np.zeros(SIZE_L_IN, SIZE_N_IN, SIZE_D_IN)
+  Y_OUT = np.zeros((SIZE_L_IN, SIZE_N_IN, SIZE_D_IN))
 
   # Body
   for l in range(len(SIZE_L_IN)):
     for n in range(len(SIZE_N_IN)):
       for d in range(len(SIZE_D_IN)):
         if ((-1)^X_IN([l][n][d]) == 0):
-          Y_OUT([l][n][d]) = sin(PE_IN([l][n][d])/10000^(2*X_IN([l][n][d])/SIZE_D_IN))
+          Y_OUT[l][n][d] = sin(PE_IN([l][n][d])/10000^(2*X_IN([l][n][d])/SIZE_D_IN))
         else:
-          Y_OUT([l][n][d]) = cos(PE_IN([l][n][d])/10000^(2*X_IN([l][n][d])/SIZE_D_IN))
+          Y_OUT[l][n][d] = cos(PE_IN([l][n][d])/10000^(2*X_IN([l][n][d])/SIZE_D_IN))
 
   return Y_OUT
