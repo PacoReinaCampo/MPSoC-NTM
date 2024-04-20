@@ -81,7 +81,7 @@ package body ntm_vector_algebra is
       temporal := 0.0;
 
       for m in 1 .. i loop
-        temporal := temporal + data_a_in(m) * data_b_in(i-m);
+        temporal := temporal + data_a_in(m) * data_b_in(i-m+1);
         
         data_out(i) := temporal;
       end loop;

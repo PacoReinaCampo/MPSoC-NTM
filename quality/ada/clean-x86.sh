@@ -9,14 +9,14 @@
 ##                  |_|                                                          ##
 ##                                                                               ##
 ##                                                                               ##
-##              Peripheral-NTM for MPSoC                                         ##
-##              Neural Turing Machine for MPSoC                                  ##
+##              QueenField                                                       ##
+##              Multi-Processor System on Chip                                   ##
 ##                                                                               ##
 ###################################################################################
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2022-2025 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,24 +42,37 @@
 ##                                                                               ##
 ###################################################################################
 
-import numpy as np
+cd application/arithmetic/scalar
+make clean
 
-from top import ntm_state_top as state_top
+cd ../../../application/arithmetic/vector
+make clean
 
-def test_state_top():
+cd ../../../application/arithmetic/matrix
+make clean
 
-  data_k_in = np.random.rand(3,3)
-  data_a_in = np.random.rand(3,3)
-  data_b_in = np.random.rand(3,3)
-  data_c_in = np.random.rand(3,3)
-  data_d_in = np.random.rand(3,3)
-  data_u_in = np.random.rand(3,3)
-
-  initial_x = np.random.rand(3,1)
-
-  k = 4
-
-  np.testing.assert_array_equal(state_top.ntm_state_top(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k), state_top.ntm_state_top(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k))
+cd ../../../application/arithmetic/tensor
+make clean
 
 
-#test_state_top()
+cd ../../../application/algebra/scalar
+make clean
+
+cd ../../../application/algebra/vector
+make clean
+
+cd ../../../application/algebra/matrix
+make clean
+
+cd ../../../application/algebra/tensor
+make clean
+
+
+cd ../../../application/math/scalar
+make clean
+
+cd ../../../application/math/vector
+make clean
+
+cd ../../../application/math/matrix
+make clean

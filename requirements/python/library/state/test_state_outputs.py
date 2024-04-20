@@ -44,8 +44,8 @@
 
 import numpy as np
 
-from feedback import ntm_state_vector_output as state_vector_output
-from feedback import ntm_state_vector_state as state_vector_state
+from outputs import ntm_state_vector_output as state_vector_output
+from outputs import ntm_state_vector_state as state_vector_state
 
 def test_state_vector_output():
 
@@ -78,5 +78,5 @@ def test_state_vector_state():
   np.testing.assert_array_equal(state_vector_state.ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k), state_vector_state.ntm_state_vector_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k))
 
 
-test_state_vector_output()
-test_state_vector_state()
+#test_state_vector_output()
+#test_state_vector_state()

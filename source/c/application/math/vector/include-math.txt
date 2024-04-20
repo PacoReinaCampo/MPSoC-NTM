@@ -46,25 +46,16 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_MATH =		../../../library/math/ntm_math.hpp \
-			../../../library/math/calculus/matrix/ntm_matrix_differentiation.cpp \
-			../../../library/math/calculus/matrix/ntm_matrix_integration.cpp \
-			../../../library/math/calculus/matrix/ntm_matrix_softmax.cpp \
-			../../../library/math/calculus/tensor/ntm_tensor_differentiation.cpp \
-			../../../library/math/calculus/tensor/ntm_tensor_integration.cpp \
-			../../../library/math/calculus/tensor/ntm_tensor_softmax.cpp \
-			../../../library/math/calculus/vector/ntm_vector_differentiation.cpp \
-			../../../library/math/calculus/vector/ntm_vector_integration.cpp \
-			../../../library/math/calculus/vector/ntm_vector_softmax.cpp \
-			../../../library/math/matrix/ntm_matrix_logistic_function.cpp \
-			../../../library/math/matrix/ntm_matrix_oneplus_function.cpp \
-			../../../library/math/scalar/ntm_scalar_logistic_function.cpp \
-			../../../library/math/scalar/ntm_scalar_oneplus_function.cpp \
-			../../../library/math/vector/ntm_vector_logistic_function.cpp \
-			../../../library/math/vector/ntm_vector_oneplus_function.cpp \
-			../../../library/math/matrix/ntm_matrix_deviation.cpp \
-			../../../library/math/matrix/ntm_matrix_mean.cpp \
-			../../../library/math/scalar/ntm_scalar_deviation.cpp \
-			../../../library/math/scalar/ntm_scalar_mean.cpp \
-			../../../library/math/vector/ntm_vector_deviation.cpp \
-			../../../library/math/vector/ntm_vector_mean.cpp
+SOURCES_MATH =		../../../library/math/ntm_math.h \
+			../../../library/math/matrix/ntm_matrix_deviation.c \
+			../../../library/math/matrix/ntm_matrix_logistic_function.c \
+			../../../library/math/matrix/ntm_matrix_mean.c \
+			../../../library/math/matrix/ntm_matrix_oneplus_function.c \
+			../../../library/math/scalar/ntm_scalar_deviation.c \
+			../../../library/math/scalar/ntm_scalar_logistic_function.c \
+			../../../library/math/scalar/ntm_scalar_mean.c \
+			../../../library/math/scalar/ntm_scalar_oneplus_function.c \
+			../../../library/math/vector/ntm_vector_deviation.c \
+			../../../library/math/vector/ntm_vector_logistic_function.c \
+			../../../library/math/vector/ntm_vector_mean.c \
+			../../../library/math/vector/ntm_vector_oneplus_function.c

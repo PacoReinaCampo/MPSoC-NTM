@@ -48,14 +48,18 @@
 
 SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_arithmetic.h \
 			../../../library/arithmetic/matrix/ntm_matrix_adder.c \
+			../../../library/arithmetic/matrix/ntm_matrix_subtractor.c \
 			../../../library/arithmetic/matrix/ntm_matrix_divider.c \
 			../../../library/arithmetic/matrix/ntm_matrix_multiplier.c \
 			../../../library/arithmetic/scalar/ntm_scalar_adder.c \
+			../../../library/arithmetic/scalar/ntm_scalar_subtractor.c \
 			../../../library/arithmetic/scalar/ntm_scalar_divider.c \
 			../../../library/arithmetic/scalar/ntm_scalar_multiplier.c \
 			../../../library/arithmetic/tensor/ntm_tensor_adder.c \
+			../../../library/arithmetic/tensor/ntm_tensor_subtractor.c \
 			../../../library/arithmetic/tensor/ntm_tensor_divider.c \
 			../../../library/arithmetic/tensor/ntm_tensor_multiplier.c \
 			../../../library/arithmetic/vector/ntm_vector_adder.c \
+			../../../library/arithmetic/vector/ntm_vector_subtractor.c \
 			../../../library/arithmetic/vector/ntm_vector_divider.c \
 			../../../library/arithmetic/vector/ntm_vector_multiplier.c

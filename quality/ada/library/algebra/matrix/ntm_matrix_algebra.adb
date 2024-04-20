@@ -67,7 +67,7 @@ package body ntm_matrix_algebra is
 
         for m in 1 .. i loop
           for n in 1 .. j loop
-            temporal := temporal + data_a_in(m, n) * data_b_in(i-m, j-n);
+            temporal := temporal + data_a_in(m, n) * data_b_in(i-m+1, j-n+1);
 
             data_out(i, j) := temporal;
           end loop;

@@ -57,7 +57,7 @@ def ntm_state_matrix_input(data_k_in, data_b_in, data_d_in):
   # b = B·(I-K·inv(I + D·K)·D)
   matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
 
-  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int)
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
 
   matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
 
@@ -65,7 +65,7 @@ def ntm_state_matrix_input(data_k_in, data_b_in, data_d_in):
 
   matrix_operation_int = ntm_matrix_product(data_k_in, matrix_operation_int)
 
-  matrix_operation_int = ntm_matrix_substractor(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int)
+  matrix_operation_int = ntm_matrix_substractor(ntm_matrix_eye, matrix_operation_int)
 
   data_b_out = ntm_matrix_product(data_b_in, matrix_operation_int)
 

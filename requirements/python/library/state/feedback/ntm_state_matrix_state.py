@@ -57,7 +57,7 @@ def ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in
   # a = A-B·K·inv(I + D·K)·C
   matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
 
-  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int)
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
 
   matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
 

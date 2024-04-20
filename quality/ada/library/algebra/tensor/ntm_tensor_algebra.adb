@@ -69,7 +69,7 @@ package body ntm_tensor_algebra is
           for m in 1 .. i loop
             for n in 1 .. j loop
               for p in 1 .. k loop
-                temporal := temporal + data_a_in(m, n, p) * data_b_in(i-m, j-n, k-p);
+                temporal := temporal + data_a_in(m, n, p) * data_b_in(i-m+1, j-n+1, k-p+1);
 
                 data_out(i, j, k) := temporal;
               end loop;
@@ -113,7 +113,7 @@ package body ntm_tensor_algebra is
           for m in 1 .. i loop
             for n in 1 .. j loop
               for p in 1 .. k loop
-                temporal := temporal + data_a_in(m, n, p) * data_b_in(i-m, j-n);
+                temporal := temporal + data_a_in(m, n, p) * data_b_in(i-m+1, j-n+1);
 
                 data_out(i, j) := temporal;
               end loop;
