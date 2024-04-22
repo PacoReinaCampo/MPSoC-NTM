@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.scala
     │   └── pushdown_automaton
     │       └── pushdown_automaton.scala
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.scala
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.scala
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.scala
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.scala
-        │   ├── lstm_differentiable_neural_computer.scala
-        │   └── transformer_differentiable_neural_computer.scala
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.scala
-            ├── lstm_neural_turing_machine.scala
-            └── transformer_neural_turing_machine.scala
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.scala
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.scala
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.scala
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.scala
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.scala
+        └── perceptron_neural_network
+            └── perceptron_neural_network.scala
 
-25 directories, 36 files
+25 directories, 33 files

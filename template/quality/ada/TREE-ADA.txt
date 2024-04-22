@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.adb
     │   └── pushdown_automaton
     │       └── pushdown_automaton.adb
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.adb
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.adb
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.adb
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.adb
-        │   ├── lstm_differentiable_neural_computer.adb
-        │   └── transformer_differentiable_neural_computer.adb
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.adb
-            ├── lstm_neural_turing_machine.adb
-            └── transformer_neural_turing_machine.adb
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.adb
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.adb
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.adb
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.adb
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.adb
+        └── perceptron_neural_network
+            └── perceptron_neural_network.adb
 
-25 directories, 36 files
+25 directories, 33 files

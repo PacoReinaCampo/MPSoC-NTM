@@ -45,6 +45,12 @@
 with Ada.Text_IO;
 use Ada.Text_IO;
 
+with Ada.Numerics;
+use Ada.Numerics;
+
+with Ada.Numerics.Elementary_Functions;
+use Ada.Numerics.Elementary_Functions;
+
 package body ntm_state_top is
 
   procedure ntm_state_matrix (

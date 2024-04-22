@@ -52,22 +52,19 @@ code
 │   │   │   └── xor_gate.vhd
 │   │   └── pushdown_automaton
 │   │       └── pushdown_automaton.vhd
-│   ├── neural_network
-│   │   ├── feedforward_neural_network
-│   │   │   └── feedforward_neural_network.vhd
-│   │   ├── long_short_term_memory_neural_network
-│   │   │   └── long_short_term_memory_neural_network.vhd
-│   │   └── transformer_neural_network
-│   │       └── transformer_neural_network.vhd
-│   └── turing_machine
-│       ├── differentiable_neural_computer
-│       │   ├── feedforward_differentiable_neural_computer.vhd
-│       │   ├── lstm_differentiable_neural_computer.vhd
-│       │   └── transformer_differentiable_neural_computer.vhd
-│       └── neural_turing_machine
-│           ├── feedforward_neural_turing_machine.vhd
-│           ├── lstm_neural_turing_machine.vhd
-│           └── transformer_neural_turing_machine.vhd
+│   └── neural_network
+│       ├── attention_neural_network
+│       │   └── attention_neural_network.vhd
+│       ├── differentiable_neural_computer_neural_network
+│       │   └── differentiable_neural_computer_neural_network.vhd
+│       ├── feedforward_neural_network
+│       │   └── feedforward_neural_network.vhd
+│       ├── long_short_term_memory_neural_network
+│       │   └── long_short_term_memory_neural_network.vhd
+│       ├── neural_turing_machine_neural_network
+│       │   └── neural_turing_machine_neural_network.vhd
+│       └── perceptron_neural_network
+│           └── perceptron_neural_network.vhd
 └── pkg
     ├── classes
     │   ├── ntm_philosophers_pkg.vhd
@@ -81,4 +78,4 @@ code
         ├── math_real-body.vhd
         └── math_real.vhd
 
-29 directories, 52 files
+29 directories, 49 files

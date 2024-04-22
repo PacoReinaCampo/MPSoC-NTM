@@ -368,78 +368,9 @@ code
     │               ├── switch_item.sv
     │               ├── testbench.sv
     │               └── test.sv
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network
-    │   │       ├── application
-    │   │       │   └── switch.sv
-    │   │       └── library
-    │   │           ├── driver.sv
-    │   │           ├── environment.sv
-    │   │           ├── generator.sv
-    │   │           ├── monitor.sv
-    │   │           ├── scoreboard.sv
-    │   │           ├── switch_if.sv
-    │   │           ├── switch_item.sv
-    │   │           ├── testbench.sv
-    │   │           └── test.sv
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network
-    │   │       ├── application
-    │   │       │   └── switch.sv
-    │   │       └── library
-    │   │           ├── driver.sv
-    │   │           ├── environment.sv
-    │   │           ├── generator.sv
-    │   │           ├── monitor.sv
-    │   │           ├── scoreboard.sv
-    │   │           ├── switch_if.sv
-    │   │           ├── switch_item.sv
-    │   │           ├── testbench.sv
-    │   │           └── test.sv
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network
-    │           ├── application
-    │           │   └── switch.sv
-    │           └── library
-    │               ├── driver.sv
-    │               ├── environment.sv
-    │               ├── generator.sv
-    │               ├── monitor.sv
-    │               ├── scoreboard.sv
-    │               ├── switch_if.sv
-    │               ├── switch_item.sv
-    │               ├── testbench.sv
-    │               └── test.sv
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   └── switch.sv
-        │   │   └── library
-        │   │       ├── driver.sv
-        │   │       ├── environment.sv
-        │   │       ├── generator.sv
-        │   │       ├── monitor.sv
-        │   │       ├── scoreboard.sv
-        │   │       ├── switch_if.sv
-        │   │       ├── switch_item.sv
-        │   │       ├── testbench.sv
-        │   │       └── test.sv
-        │   ├── lstm_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   └── switch.sv
-        │   │   └── library
-        │   │       ├── driver.sv
-        │   │       ├── environment.sv
-        │   │       ├── generator.sv
-        │   │       ├── monitor.sv
-        │   │       ├── scoreboard.sv
-        │   │       ├── switch_if.sv
-        │   │       ├── switch_item.sv
-        │   │       ├── testbench.sv
-        │   │       └── test.sv
-        │   └── transformer_differentiable_neural_computer
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network
         │       ├── application
         │       │   └── switch.sv
         │       └── library
@@ -452,34 +383,64 @@ code
         │           ├── switch_item.sv
         │           ├── testbench.sv
         │           └── test.sv
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine
-            │   ├── application
-            │   │   └── switch.sv
-            │   └── library
-            │       ├── driver.sv
-            │       ├── environment.sv
-            │       ├── generator.sv
-            │       ├── monitor.sv
-            │       ├── scoreboard.sv
-            │       ├── switch_if.sv
-            │       ├── switch_item.sv
-            │       ├── testbench.sv
-            │       └── test.sv
-            ├── lstm_neural_turing_machine
-            │   ├── application
-            │   │   └── switch.sv
-            │   └── library
-            │       ├── driver.sv
-            │       ├── environment.sv
-            │       ├── generator.sv
-            │       ├── monitor.sv
-            │       ├── scoreboard.sv
-            │       ├── switch_if.sv
-            │       ├── switch_item.sv
-            │       ├── testbench.sv
-            │       └── test.sv
-            └── transformer_neural_turing_machine
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network
+        │       ├── application
+        │       │   └── switch.sv
+        │       └── library
+        │           ├── driver.sv
+        │           ├── environment.sv
+        │           ├── generator.sv
+        │           ├── monitor.sv
+        │           ├── scoreboard.sv
+        │           ├── switch_if.sv
+        │           ├── switch_item.sv
+        │           ├── testbench.sv
+        │           └── test.sv
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network
+        │       ├── application
+        │       │   └── switch.sv
+        │       └── library
+        │           ├── driver.sv
+        │           ├── environment.sv
+        │           ├── generator.sv
+        │           ├── monitor.sv
+        │           ├── scoreboard.sv
+        │           ├── switch_if.sv
+        │           ├── switch_item.sv
+        │           ├── testbench.sv
+        │           └── test.sv
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network
+        │       ├── application
+        │       │   └── switch.sv
+        │       └── library
+        │           ├── driver.sv
+        │           ├── environment.sv
+        │           ├── generator.sv
+        │           ├── monitor.sv
+        │           ├── scoreboard.sv
+        │           ├── switch_if.sv
+        │           ├── switch_item.sv
+        │           ├── testbench.sv
+        │           └── test.sv
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network
+        │       ├── application
+        │       │   └── switch.sv
+        │       └── library
+        │           ├── driver.sv
+        │           ├── environment.sv
+        │           ├── generator.sv
+        │           ├── monitor.sv
+        │           ├── scoreboard.sv
+        │           ├── switch_if.sv
+        │           ├── switch_item.sv
+        │           ├── testbench.sv
+        │           └── test.sv
+        └── perceptron_neural_network
+            └── perceptron_neural_network
                 ├── application
                 │   └── switch.sv
                 └── library
@@ -493,4 +454,4 @@ code
                     ├── testbench.sv
                     └── test.sv
 
-133 directories, 360 files
+124 directories, 330 files

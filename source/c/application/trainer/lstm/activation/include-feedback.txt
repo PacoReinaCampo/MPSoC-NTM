@@ -46,8 +46,8 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.hpp
-			../../../library/state/feedback/ntm_state_matrix_feedforward.cpp \
-			../../../library/state/feedback/ntm_state_matrix_input.cpp \
-			../../../library/state/feedback/ntm_state_matrix_output.cpp \
-			../../../library/state/feedback/ntm_state_matrix_state.cpp
+SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
+			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
+			../../../library/state/feedback/ntm_state_matrix_input.c \
+			../../../library/state/feedback/ntm_state_matrix_output.c \
+			../../../library/state/feedback/ntm_state_matrix_state.c

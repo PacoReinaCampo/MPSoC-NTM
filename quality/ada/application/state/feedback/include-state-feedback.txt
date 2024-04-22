@@ -48,5 +48,5 @@
 
 SOURCES_STATE =	-I../../../library \
 		-I../../../library/arithmetic/matrix \
-		-I../../../library/math/algebra/matrix \
+		-I../../../library/algebra/matrix \
 		-I../../../library/state/feedback

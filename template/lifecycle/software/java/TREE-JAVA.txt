@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.java
     │   └── pushdown_automaton
     │       └── pushdown_automaton.java
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.java
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.java
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.java
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.java
-        │   ├── lstm_differentiable_neural_computer.java
-        │   └── transformer_differentiable_neural_computer.java
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.java
-            ├── lstm_neural_turing_machine.java
-            └── transformer_neural_turing_machine.java
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.java
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.java
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.java
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.java
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.java
+        └── perceptron_neural_network
+            └── perceptron_neural_network.java
 
-25 directories, 36 files
+25 directories, 33 files

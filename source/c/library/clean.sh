@@ -45,13 +45,16 @@
 rm -rf arithmetic/matrix/ntm_matrix_adder.run
 rm -rf arithmetic/matrix/ntm_matrix_divider.run
 rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
+rm -rf arithmetic/scalar/ntm_scalar_subtractor.run
 rm -rf arithmetic/scalar/ntm_scalar_adder.run
 rm -rf arithmetic/scalar/ntm_scalar_divider.run
 rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
 rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_subtractor.run
 rm -rf arithmetic/tensor/ntm_tensor_divider.run
 rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
 rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_subtractor.run
 rm -rf arithmetic/vector/ntm_vector_divider.run
 rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf controller/fnn/convolutional/ntm_controller.run
@@ -139,7 +142,7 @@ rm -rf algebra/vector/ntm_vector_cosine_similarity.run
 rm -rf algebra/vector/ntm_vector_module.run
 rm -rf algebra/vector/ntm_vector_multiplication.run
 rm -rf algebra/vector/ntm_vector_summation.run
-rm -rf algebra/Zmatrix/ntm_matrix_differentiation.run
+rm -rf algebra/matrix/ntm_matrix_differentiation.run
 rm -rf algebra/matrix/ntm_matrix_integration.run
 rm -rf algebra/matrix/ntm_matrix_softmax.run
 rm -rf algebra/tensor/ntm_tensor_differentiation.run

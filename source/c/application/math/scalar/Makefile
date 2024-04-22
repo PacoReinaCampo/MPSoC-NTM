@@ -61,17 +61,17 @@ TARGET=state_feedback
 all: x86 riscv or1k
 
 x86:
-	g++ main.cpp ${SOURCES_MATH} -o ${TARGET}-x86.run
+	gcc main.cpp ${SOURCES_MATH} -o ${TARGET}-x86.run
 
 riscv:
 	# Compilation. From State-Feedback source code to ELF
-	riscv64-unknown-elf-g++ -std=c++11 -o ${TARGET}-riscv.elf main.cpp ${SOURCES_MATH}
+	riscv64-unknown-elf-gcc -std=c++11 -o ${TARGET}-riscv.elf main.cpp ${SOURCES_MATH}
 	# Conversion. From ELF to HEX
 	riscv64-unknown-elf-objcopy -O ihex ${TARGET}-riscv.elf ${TARGET}-riscv.hex
 
 or1k:
 	# Compilation. From State-Feedback source code to ELF
-	or1k-elf-g++ -std=c++11 -o ${TARGET}-or1k.elf main.cpp ${SOURCES_MATH}
+	or1k-elf-gcc -std=c++11 -o ${TARGET}-or1k.elf main.cpp ${SOURCES_MATH}
 	# Conversion. From ELF to HEX
 	or1k-elf-objcopy -O ihex ${TARGET}-or1k.elf ${TARGET}-or1k.hex
 

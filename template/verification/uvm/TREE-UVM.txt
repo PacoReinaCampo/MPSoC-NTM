@@ -422,88 +422,9 @@ code
     │               ├── peripheral_sequence.sv
     │               ├── peripheral_testbench.sv
     │               └── peripheral_test.sv
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network
-    │   │       ├── application
-    │   │       │   └── fsm.sv
-    │   │       └── library
-    │   │           ├── design_if.sv
-    │   │           ├── peripheral_agent.sv
-    │   │           ├── peripheral_driver.sv
-    │   │           ├── peripheral_environment.sv
-    │   │           ├── peripheral_monitor.sv
-    │   │           ├── peripheral_sample.sv
-    │   │           ├── peripheral_scoreboard.sv
-    │   │           ├── peripheral_sequence_item.sv
-    │   │           ├── peripheral_sequence.sv
-    │   │           ├── peripheral_testbench.sv
-    │   │           └── peripheral_test.sv
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network
-    │   │       ├── application
-    │   │       │   └── fsm.sv
-    │   │       └── library
-    │   │           ├── design_if.sv
-    │   │           ├── peripheral_agent.sv
-    │   │           ├── peripheral_driver.sv
-    │   │           ├── peripheral_environment.sv
-    │   │           ├── peripheral_monitor.sv
-    │   │           ├── peripheral_sample.sv
-    │   │           ├── peripheral_scoreboard.sv
-    │   │           ├── peripheral_sequence_item.sv
-    │   │           ├── peripheral_sequence.sv
-    │   │           ├── peripheral_testbench.sv
-    │   │           └── peripheral_test.sv
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network
-    │           ├── application
-    │           │   └── fsm.sv
-    │           └── library
-    │               ├── design_if.sv
-    │               ├── peripheral_agent.sv
-    │               ├── peripheral_driver.sv
-    │               ├── peripheral_environment.sv
-    │               ├── peripheral_monitor.sv
-    │               ├── peripheral_sample.sv
-    │               ├── peripheral_scoreboard.sv
-    │               ├── peripheral_sequence_item.sv
-    │               ├── peripheral_sequence.sv
-    │               ├── peripheral_testbench.sv
-    │               └── peripheral_test.sv
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   └── fsm.sv
-        │   │   └── library
-        │   │       ├── design_if.sv
-        │   │       ├── peripheral_agent.sv
-        │   │       ├── peripheral_driver.sv
-        │   │       ├── peripheral_environment.sv
-        │   │       ├── peripheral_monitor.sv
-        │   │       ├── peripheral_sample.sv
-        │   │       ├── peripheral_scoreboard.sv
-        │   │       ├── peripheral_sequence_item.sv
-        │   │       ├── peripheral_sequence.sv
-        │   │       ├── peripheral_testbench.sv
-        │   │       └── peripheral_test.sv
-        │   ├── lstm_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   └── fsm.sv
-        │   │   └── library
-        │   │       ├── design_if.sv
-        │   │       ├── peripheral_agent.sv
-        │   │       ├── peripheral_driver.sv
-        │   │       ├── peripheral_environment.sv
-        │   │       ├── peripheral_monitor.sv
-        │   │       ├── peripheral_sample.sv
-        │   │       ├── peripheral_scoreboard.sv
-        │   │       ├── peripheral_sequence_item.sv
-        │   │       ├── peripheral_sequence.sv
-        │   │       ├── peripheral_testbench.sv
-        │   │       └── peripheral_test.sv
-        │   └── transformer_differentiable_neural_computer
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network
         │       ├── application
         │       │   └── fsm.sv
         │       └── library
@@ -518,38 +439,72 @@ code
         │           ├── peripheral_sequence.sv
         │           ├── peripheral_testbench.sv
         │           └── peripheral_test.sv
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine
-            │   ├── application
-            │   │   └── fsm.sv
-            │   └── library
-            │       ├── design_if.sv
-            │       ├── peripheral_agent.sv
-            │       ├── peripheral_driver.sv
-            │       ├── peripheral_environment.sv
-            │       ├── peripheral_monitor.sv
-            │       ├── peripheral_sample.sv
-            │       ├── peripheral_scoreboard.sv
-            │       ├── peripheral_sequence_item.sv
-            │       ├── peripheral_sequence.sv
-            │       ├── peripheral_testbench.sv
-            │       └── peripheral_test.sv
-            ├── lstm_neural_turing_machine
-            │   ├── application
-            │   │   └── fsm.sv
-            │   └── library
-            │       ├── design_if.sv
-            │       ├── peripheral_agent.sv
-            │       ├── peripheral_driver.sv
-            │       ├── peripheral_environment.sv
-            │       ├── peripheral_monitor.sv
-            │       ├── peripheral_sample.sv
-            │       ├── peripheral_scoreboard.sv
-            │       ├── peripheral_sequence_item.sv
-            │       ├── peripheral_sequence.sv
-            │       ├── peripheral_testbench.sv
-            │       └── peripheral_test.sv
-            └── transformer_neural_turing_machine
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network
+        │       ├── application
+        │       │   └── fsm.sv
+        │       └── library
+        │           ├── design_if.sv
+        │           ├── peripheral_agent.sv
+        │           ├── peripheral_driver.sv
+        │           ├── peripheral_environment.sv
+        │           ├── peripheral_monitor.sv
+        │           ├── peripheral_sample.sv
+        │           ├── peripheral_scoreboard.sv
+        │           ├── peripheral_sequence_item.sv
+        │           ├── peripheral_sequence.sv
+        │           ├── peripheral_testbench.sv
+        │           └── peripheral_test.sv
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network
+        │       ├── application
+        │       │   └── fsm.sv
+        │       └── library
+        │           ├── design_if.sv
+        │           ├── peripheral_agent.sv
+        │           ├── peripheral_driver.sv
+        │           ├── peripheral_environment.sv
+        │           ├── peripheral_monitor.sv
+        │           ├── peripheral_sample.sv
+        │           ├── peripheral_scoreboard.sv
+        │           ├── peripheral_sequence_item.sv
+        │           ├── peripheral_sequence.sv
+        │           ├── peripheral_testbench.sv
+        │           └── peripheral_test.sv
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network
+        │       ├── application
+        │       │   └── fsm.sv
+        │       └── library
+        │           ├── design_if.sv
+        │           ├── peripheral_agent.sv
+        │           ├── peripheral_driver.sv
+        │           ├── peripheral_environment.sv
+        │           ├── peripheral_monitor.sv
+        │           ├── peripheral_sample.sv
+        │           ├── peripheral_scoreboard.sv
+        │           ├── peripheral_sequence_item.sv
+        │           ├── peripheral_sequence.sv
+        │           ├── peripheral_testbench.sv
+        │           └── peripheral_test.sv
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network
+        │       ├── application
+        │       │   └── fsm.sv
+        │       └── library
+        │           ├── design_if.sv
+        │           ├── peripheral_agent.sv
+        │           ├── peripheral_driver.sv
+        │           ├── peripheral_environment.sv
+        │           ├── peripheral_monitor.sv
+        │           ├── peripheral_sample.sv
+        │           ├── peripheral_scoreboard.sv
+        │           ├── peripheral_sequence_item.sv
+        │           ├── peripheral_sequence.sv
+        │           ├── peripheral_testbench.sv
+        │           └── peripheral_test.sv
+        └── perceptron_neural_network
+            └── perceptron_neural_network
                 ├── application
                 │   └── fsm.sv
                 └── library
@@ -565,4 +520,4 @@ code
                     ├── peripheral_testbench.sv
                     └── peripheral_test.sv
 
-133 directories, 432 files
+124 directories, 396 files

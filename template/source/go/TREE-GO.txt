@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.go
     │   └── pushdown_automaton
     │       └── pushdown_automaton.go
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.go
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.go
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.go
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.go
-        │   ├── lstm_differentiable_neural_computer.go
-        │   └── transformer_differentiable_neural_computer.go
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.go
-            ├── lstm_neural_turing_machine.go
-            └── transformer_neural_turing_machine.go
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.go
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.go
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.go
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.go
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.go
+        └── perceptron_neural_network
+            └── perceptron_neural_network.go
 
-25 directories, 36 files
+25 directories, 33 files

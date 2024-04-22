@@ -45,21 +45,18 @@ src/test
         │   │   └── yes_gate_test.scala
         │   └── pushdown_automaton
         │       └── pushdown_automaton_test.scala
-        ├── neural_network
-        │   ├── feedforward_neural_network
-        │   │   └── feedforward_neural_network_test.scala
-        │   ├── long_short_term_memory_neural_network
-        │   │   └── long_short_term_memory_neural_network_test.scala
-        │   └── transformer_neural_network
-        │       └── transformer_neural_network_test.scala
-        └── turing_machine
-            ├── differentiable_neural_computer
-            │   ├── feedforward_differentiable_neural_computer_test.scala
-            │   ├── lstm_differentiable_neural_computer_test.scala
-            │   └── transformer_differentiable_neural_computer_test.scala
-            └── neural_turing_machine
-                ├── feedforward_neural_turing_machine_test.scala
-                ├── lstm_neural_turing_machine_test.scala
-                └── transformer_neural_turing_machine_test.scala
+        └── neural_network
+            ├── attention_neural_network
+            │   └── attention_neural_network_test.scala
+            ├── differentiable_neural_computer_neural_network
+            │   └── differentiable_neural_computer_neural_network_test.scala
+            ├── feedforward_neural_network
+            │   └── feedforward_neural_network_test.scala
+            ├── long_short_term_memory_neural_network
+            │   └── long_short_term_memory_neural_network_test.scala
+            ├── neural_turing_machine_neural_network
+            │   └── neural_turing_machine_neural_network_test.scala
+            └── perceptron_neural_network
+                └── perceptron_neural_network_test.scala
 
-26 directories, 36 files
+26 directories, 33 files

@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.rs
     │   └── pushdown_automaton
     │       └── pushdown_automaton.rs
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.rs
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.rs
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.rs
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.rs
-        │   ├── lstm_differentiable_neural_computer.rs
-        │   └── transformer_differentiable_neural_computer.rs
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.rs
-            ├── lstm_neural_turing_machine.rs
-            └── transformer_neural_turing_machine.rs
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.rs
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.rs
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.rs
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.rs
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.rs
+        └── perceptron_neural_network
+            └── perceptron_neural_network.rs
 
-25 directories, 36 files
+25 directories, 33 files

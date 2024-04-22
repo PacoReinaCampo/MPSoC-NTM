@@ -44,21 +44,18 @@ code
     │   │   └── yes_gate.psl
     │   └── pushdown_automaton
     │       └── pushdown_automaton.psl
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network.psl
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network.psl
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network.psl
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer.psl
-        │   ├── lstm_differentiable_neural_computer.psl
-        │   └── transformer_differentiable_neural_computer.psl
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine.psl
-            ├── lstm_neural_turing_machine.psl
-            └── transformer_neural_turing_machine.psl
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network.psl
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network.psl
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network.psl
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network.psl
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network.psl
+        └── perceptron_neural_network
+            └── perceptron_neural_network.psl
 
-25 directories, 36 files
+25 directories, 33 files

@@ -77,15 +77,19 @@ rm -rf algebra/vector/ntm_vector_multiplication.run
 rm -rf algebra/vector/ntm_vector_softmax.run
 rm -rf algebra/vector/ntm_vector_summation.run
 rm -rf arithmetic/matrix/ntm_matrix_adder.run
+rm -rf arithmetic/matrix/ntm_matrix_subtractor.run
 rm -rf arithmetic/matrix/ntm_matrix_divider.run
 rm -rf arithmetic/matrix/ntm_matrix_multiplier.run
 rm -rf arithmetic/scalar/ntm_scalar_adder.run
+rm -rf arithmetic/scalar/ntm_scalar_subtractor.run
 rm -rf arithmetic/scalar/ntm_scalar_divider.run
 rm -rf arithmetic/scalar/ntm_scalar_multiplier.run
 rm -rf arithmetic/tensor/ntm_tensor_adder.run
+rm -rf arithmetic/tensor/ntm_tensor_subtractor.run
 rm -rf arithmetic/tensor/ntm_tensor_divider.run
 rm -rf arithmetic/tensor/ntm_tensor_multiplier.run
 rm -rf arithmetic/vector/ntm_vector_adder.run
+rm -rf arithmetic/vector/ntm_vector_subtractor.run
 rm -rf arithmetic/vector/ntm_vector_divider.run
 rm -rf arithmetic/vector/ntm_vector_multiplier.run
 rm -rf math/matrix/ntm_matrix_deviation.run
@@ -253,15 +257,19 @@ gcc algebra/vector/ntm_vector_multiplication.c -o algebra/vector/ntm_vector_mult
 gcc algebra/vector/ntm_vector_softmax.c -o algebra/vector/ntm_vector_softmax.run
 gcc algebra/vector/ntm_vector_summation.c -o algebra/vector/ntm_vector_summation.run
 gcc arithmetic/matrix/ntm_matrix_adder.c -o arithmetic/matrix/ntm_matrix_adder.run
+gcc arithmetic/matrix/ntm_matrix_subtractor.c -o arithmetic/matrix/ntm_matrix_subtractor.run
 gcc arithmetic/matrix/ntm_matrix_divider.c -o arithmetic/matrix/ntm_matrix_divider.run
 gcc arithmetic/matrix/ntm_matrix_multiplier.c -o arithmetic/matrix/ntm_matrix_multiplier.run
 gcc arithmetic/scalar/ntm_scalar_adder.c -o arithmetic/scalar/ntm_scalar_adder.run
+gcc arithmetic/scalar/ntm_scalar_subtractor.c -o arithmetic/scalar/ntm_scalar_subtractor.run
 gcc arithmetic/scalar/ntm_scalar_divider.c -o arithmetic/scalar/ntm_scalar_divider.run
 gcc arithmetic/scalar/ntm_scalar_multiplier.c -o arithmetic/scalar/ntm_scalar_multiplier.run
 gcc arithmetic/tensor/ntm_tensor_adder.c -o arithmetic/tensor/ntm_tensor_adder.run
+gcc arithmetic/tensor/ntm_tensor_subtractor.c -o arithmetic/tensor/ntm_tensor_subtractor.run
 gcc arithmetic/tensor/ntm_tensor_divider.c -o arithmetic/tensor/ntm_tensor_divider.run
 gcc arithmetic/tensor/ntm_tensor_multiplier.c -o arithmetic/tensor/ntm_tensor_multiplier.run
 gcc arithmetic/vector/ntm_vector_adder.c -o arithmetic/vector/ntm_vector_adder.run
+gcc arithmetic/vector/ntm_vector_subtractor.c -o arithmetic/vector/ntm_vector_subtractor.run
 gcc arithmetic/vector/ntm_vector_divider.c -o arithmetic/vector/ntm_vector_divider.run
 gcc arithmetic/vector/ntm_vector_multiplier.c -o arithmetic/vector/ntm_vector_multiplier.run
 gcc math/matrix/ntm_matrix_deviation.c -o math/matrix/ntm_matrix_deviation.run

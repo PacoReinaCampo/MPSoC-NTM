@@ -233,53 +233,9 @@ code
     │               ├── ntm_model_pkg.vhd
     │               ├── ntm_model.vhd
     │               └── ntm_testbench.vhd
-    ├── neural_network
-    │   ├── feedforward_neural_network
-    │   │   └── feedforward_neural_network
-    │   │       ├── application
-    │   │       │   ├── ntm_design_pkg.vhd
-    │   │       │   └── ntm_design.vhd
-    │   │       └── library
-    │   │           ├── ntm_model_pkg.vhd
-    │   │           ├── ntm_model.vhd
-    │   │           └── ntm_testbench.vhd
-    │   ├── long_short_term_memory_neural_network
-    │   │   └── long_short_term_memory_neural_network
-    │   │       ├── application
-    │   │       │   ├── ntm_design_pkg.vhd
-    │   │       │   └── ntm_design.vhd
-    │   │       └── library
-    │   │           ├── ntm_model_pkg.vhd
-    │   │           ├── ntm_model.vhd
-    │   │           └── ntm_testbench.vhd
-    │   └── transformer_neural_network
-    │       └── transformer_neural_network
-    │           ├── application
-    │           │   ├── ntm_design_pkg.vhd
-    │           │   └── ntm_design.vhd
-    │           └── library
-    │               ├── ntm_model_pkg.vhd
-    │               ├── ntm_model.vhd
-    │               └── ntm_testbench.vhd
-    └── turing_machine
-        ├── differentiable_neural_computer
-        │   ├── feedforward_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   ├── ntm_design_pkg.vhd
-        │   │   │   └── ntm_design.vhd
-        │   │   └── library
-        │   │       ├── ntm_model_pkg.vhd
-        │   │       ├── ntm_model.vhd
-        │   │       └── ntm_testbench.vhd
-        │   ├── lstm_differentiable_neural_computer
-        │   │   ├── application
-        │   │   │   ├── ntm_design_pkg.vhd
-        │   │   │   └── ntm_design.vhd
-        │   │   └── library
-        │   │       ├── ntm_model_pkg.vhd
-        │   │       ├── ntm_model.vhd
-        │   │       └── ntm_testbench.vhd
-        │   └── transformer_differentiable_neural_computer
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network
         │       ├── application
         │       │   ├── ntm_design_pkg.vhd
         │       │   └── ntm_design.vhd
@@ -287,24 +243,44 @@ code
         │           ├── ntm_model_pkg.vhd
         │           ├── ntm_model.vhd
         │           └── ntm_testbench.vhd
-        └── neural_turing_machine
-            ├── feedforward_neural_turing_machine
-            │   ├── application
-            │   │   ├── ntm_design_pkg.vhd
-            │   │   └── ntm_design.vhd
-            │   └── library
-            │       ├── ntm_model_pkg.vhd
-            │       ├── ntm_model.vhd
-            │       └── ntm_testbench.vhd
-            ├── lstm_neural_turing_machine
-            │   ├── application
-            │   │   ├── ntm_design_pkg.vhd
-            │   │   └── ntm_design.vhd
-            │   └── library
-            │       ├── ntm_model_pkg.vhd
-            │       ├── ntm_model.vhd
-            │       └── ntm_testbench.vhd
-            └── transformer_neural_turing_machine
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network
+        │       ├── application
+        │       │   ├── ntm_design_pkg.vhd
+        │       │   └── ntm_design.vhd
+        │       └── library
+        │           ├── ntm_model_pkg.vhd
+        │           ├── ntm_model.vhd
+        │           └── ntm_testbench.vhd
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network
+        │       ├── application
+        │       │   ├── ntm_design_pkg.vhd
+        │       │   └── ntm_design.vhd
+        │       └── library
+        │           ├── ntm_model_pkg.vhd
+        │           ├── ntm_model.vhd
+        │           └── ntm_testbench.vhd
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network
+        │       ├── application
+        │       │   ├── ntm_design_pkg.vhd
+        │       │   └── ntm_design.vhd
+        │       └── library
+        │           ├── ntm_model_pkg.vhd
+        │           ├── ntm_model.vhd
+        │           └── ntm_testbench.vhd
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network
+        │       ├── application
+        │       │   ├── ntm_design_pkg.vhd
+        │       │   └── ntm_design.vhd
+        │       └── library
+        │           ├── ntm_model_pkg.vhd
+        │           ├── ntm_model.vhd
+        │           └── ntm_testbench.vhd
+        └── perceptron_neural_network
+            └── perceptron_neural_network
                 ├── application
                 │   ├── ntm_design_pkg.vhd
                 │   └── ntm_design.vhd
@@ -313,4 +289,4 @@ code
                     ├── ntm_model.vhd
                     └── ntm_testbench.vhd
 
-133 directories, 180 files
+124 directories, 165 files
