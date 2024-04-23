@@ -61,19 +61,19 @@ library
 │       └── ntm_vector_subtractor.c
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation.c
+│   │   ├── ntm_matrix_deviation_function.c
 │   │   ├── ntm_matrix_logistic_function.c
-│   │   ├── ntm_matrix_mean.c
+│   │   ├── ntm_matrix_mean_function.c
 │   │   └── ntm_matrix_oneplus_function.c
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation.c
+│   │   ├── ntm_scalar_deviation_function.c
 │   │   ├── ntm_scalar_logistic_function.c
-│   │   ├── ntm_scalar_mean.c
+│   │   ├── ntm_scalar_mean_function.c
 │   │   └── ntm_scalar_oneplus_function.c
 │   └── vector
-│       ├── ntm_vector_deviation.c
+│       ├── ntm_vector_deviation_function.c
 │       ├── ntm_vector_logistic_function.c
-│       ├── ntm_vector_mean.c
+│       ├── ntm_vector_mean_function.c
 │       └── ntm_vector_oneplus_function.c
 ├── nn
 │   ├── ann

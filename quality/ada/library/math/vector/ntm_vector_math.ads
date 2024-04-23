@@ -62,13 +62,13 @@ package ntm_vector_math is
     data_out : out vector
   );
 
-  procedure ntm_vector_mean (
+  procedure ntm_vector_mean_function (
     data_in : in matrix;
 
     data_out : out vector
   );
 
-  procedure ntm_vector_deviation (
+  procedure ntm_vector_deviation_function (
     data_in : in matrix;
 
     mean_in : in vector;

@@ -71,11 +71,11 @@ int main() {
 
   data_out = 2.0;
 
-  assert(ntm_scalar_mean(data_in) == data_out);
+  assert(ntm_scalar_mean_function(data_in) == data_out);
 
   data_out = 7.681145747868608;
 
-  assert(ntm_scalar_deviation(data_in, mean) == data_out);
+  assert(ntm_scalar_deviation_function(data_in, mean) == data_out);
 
   return 0;
 }

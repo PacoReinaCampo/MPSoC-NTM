@@ -57,7 +57,7 @@ class ScalarMath:
     # calculating oneplus
     return (1 + np.log(1 + np.exp(self.data_in)))
 
-  def ntm_scalar_mean(self):
+  def ntm_scalar_mean_function(self):
     data_out = 0.0
 
     # calculating mean
@@ -66,7 +66,7 @@ class ScalarMath:
 
     return data_out
 
-  def ntm_scalar_deviation(self):
+  def ntm_scalar_deviation_function(self):
     data_out = 0.0
 
     # calculating deviation

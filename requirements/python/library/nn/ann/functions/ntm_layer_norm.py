@@ -52,13 +52,13 @@ def ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN):
   N_OUT = np.zeros((SIZE_N_IN, SIZE_D_IN))
 
   # Body
-  vector_operation_int = ntm_vector_mean(Z_IN)
+  vector_operation_int = ntm_vector_mean_function(Z_IN)
 
   for n in range(len(SIZE_N_IN)):
     for d in range(len(SIZE_D_IN)):
       N_OUT[n][d] = Z_IN[n][d] - vector_operation_int[n]
       
-  vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int)
+  vector_operation_int = ntm_vector_deviation_function(Z_IN, vector_operation_int)
 
   for n in range(len(SIZE_N_IN)):
     for d in range(len(SIZE_D_IN)):

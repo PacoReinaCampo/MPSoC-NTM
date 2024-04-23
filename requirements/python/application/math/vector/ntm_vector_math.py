@@ -65,7 +65,7 @@ class VectorMath:
     # calculating oneplus
     return (ones + np.log(ones + np.exp(inputs)))
 
-  def ntm_vector_mean(self):
+  def ntm_vector_mean_function(self):
     data_out = []
 
     # calculating mean
@@ -79,7 +79,7 @@ class VectorMath:
 
     return data_out
 
-  def ntm_vector_deviation(self):
+  def ntm_vector_deviation_function(self):
     data_out = []
 
     # calculating deviation

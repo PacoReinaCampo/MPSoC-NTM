@@ -67,6 +67,6 @@ func main() {
 
   fmt.Println("data_in:", data_in)
 
-  fmt.Println("mean: ", VectorMath.VectorMean(data_in))
-  fmt.Println("deviation: ", VectorMath.VectorDeviation(data_in))
+  fmt.Println("mean: ", VectorMath.VectorMeanFunction(data_in))
+  fmt.Println("deviation: ", VectorMath.VectorDeviationFunction(data_in))
 }

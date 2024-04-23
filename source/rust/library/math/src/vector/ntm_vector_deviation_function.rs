@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_vector_deviation(data_in: Vec<Vec<f64>>, mean_in: Vec<f64>) -> Vec<f64> {
+pub fn ntm_vector_deviation_function(data_in: Vec<Vec<f64>>, mean_in: Vec<f64>) -> Vec<f64> {
     let mut data_out: Vec<f64> = vec![];
 
     for i in 0..data_in.len() {

@@ -42,21 +42,29 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_mean(data_in: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
-    let mut data_out: Vec<Vec<f64>> = vec![];
+#include<iostream>
+#include<vector>
 
-    for i in 0..data_in.len() {
-        let mut vector: Vec<f64> = vec![];
+using namespace std;
 
-        for j in 0..data_in[i].len() {
-            let mut temporal: f64 = 0.0;
+vector<vector<double>> ntm_matrix_mean_function(vector<vector<vector<double>>> tensor) {
 
-            for k in 0..data_in[i][j].len() {
-                temporal += data_in[i][j][k]/data_in[0][0].len() as f64;
-            }
-            vector.push(temporal);
-        }
-        data_out.push(vector);
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < tensor.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < tensor[0].size(); j++) {
+      double temporal = 0.0;
+
+      for (int k = 0; k < tensor[0][0].size(); k++) {
+        temporal += tensor[i][j][k]/(double)tensor[0][0].size();
+
+      }
+      vector.push_back(temporal);
     }
-    data_out
+    data_out.push_back(vector);
+  }
+
+  return data_out;
 }

@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,22 +42,17 @@
 ##                                                                               ##
 ###################################################################################
 
-import numpy as np
+function DATA_OUT = ntm_scalar_mean_function(DATA_IN)
+  # Constants
+  LENGTH_IN = length(DATA_IN);
 
-def ntm_matrix_mean(data_in):
+  # Signals
+  DATA_OUT = 0;
 
-  data_out = []
+  # Body
+  for m = 1:LENGTH_IN
+    DATA_OUT = DATA_OUT + DATA_IN(m);
+  end
 
-  # calculating mean
-  for i in range(len(data_in)):
-    data_out.append([])
-
-    for j in range(len(data_in[i])):
-      temporal = 0.0
-
-      for k in range(len(data_in[i][j])):
-        temporal += data_in[i][j][k]/len(data_in[i][j])
-
-      data_out[i].append(temporal)
-
-  return data_out
+  DATA_OUT = DATA_OUT/LENGTH_IN;
+end

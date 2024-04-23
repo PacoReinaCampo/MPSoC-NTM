@@ -92,17 +92,17 @@ rm -rf arithmetic/vector/ntm_vector_adder.run
 rm -rf arithmetic/vector/ntm_vector_subtractor.run
 rm -rf arithmetic/vector/ntm_vector_divider.run
 rm -rf arithmetic/vector/ntm_vector_multiplier.run
-rm -rf math/matrix/ntm_matrix_deviation.run
+rm -rf math/matrix/ntm_matrix_deviation_function.run
 rm -rf math/matrix/ntm_matrix_logistic_function.run
-rm -rf math/matrix/ntm_matrix_mean.run
+rm -rf math/matrix/ntm_matrix_mean_function.run
 rm -rf math/matrix/ntm_matrix_oneplus_function.run
-rm -rf math/scalar/ntm_scalar_deviation.run
+rm -rf math/scalar/ntm_scalar_deviation_function.run
 rm -rf math/scalar/ntm_scalar_logistic_function.run
-rm -rf math/scalar/ntm_scalar_mean.run
+rm -rf math/scalar/ntm_scalar_mean_function.run
 rm -rf math/scalar/ntm_scalar_oneplus_function.run
-rm -rf math/vector/ntm_vector_deviation.run
+rm -rf math/vector/ntm_vector_deviation_function.run
 rm -rf math/vector/ntm_vector_logistic_function.run
-rm -rf math/vector/ntm_vector_mean.run
+rm -rf math/vector/ntm_vector_mean_function.run
 rm -rf math/vector/ntm_vector_oneplus_function.run
 rm -rf nn/ann/components/ntm_masked_multi_head_attention.run
 rm -rf nn/ann/components/ntm_masked_scaled_dot_product_attention.run
@@ -272,17 +272,17 @@ gcc arithmetic/vector/ntm_vector_adder.c -o arithmetic/vector/ntm_vector_adder.r
 gcc arithmetic/vector/ntm_vector_subtractor.c -o arithmetic/vector/ntm_vector_subtractor.run
 gcc arithmetic/vector/ntm_vector_divider.c -o arithmetic/vector/ntm_vector_divider.run
 gcc arithmetic/vector/ntm_vector_multiplier.c -o arithmetic/vector/ntm_vector_multiplier.run
-gcc math/matrix/ntm_matrix_deviation.c -o math/matrix/ntm_matrix_deviation.run
+gcc math/matrix/ntm_matrix_deviation_function.c -o math/matrix/ntm_matrix_deviation_function.run
 gcc math/matrix/ntm_matrix_logistic_function.c -lm -o math/matrix/ntm_matrix_logistic_function.run
-gcc math/matrix/ntm_matrix_mean.c -o math/matrix/ntm_matrix_mean.run
+gcc math/matrix/ntm_matrix_mean_function.c -o math/matrix/ntm_matrix_mean_function.run
 gcc math/matrix/ntm_matrix_oneplus_function.c -lm -o math/matrix/ntm_matrix_oneplus_function.run
-gcc math/scalar/ntm_scalar_deviation.c -o math/scalar/ntm_scalar_deviation.run
+gcc math/scalar/ntm_scalar_deviation_function.c -o math/scalar/ntm_scalar_deviation_function.run
 gcc math/scalar/ntm_scalar_logistic_function.c -lm -o math/scalar/ntm_scalar_logistic_function.run
-gcc math/scalar/ntm_scalar_mean.c -o math/scalar/ntm_scalar_mean.run
+gcc math/scalar/ntm_scalar_mean_function.c -o math/scalar/ntm_scalar_mean_function.run
 gcc math/scalar/ntm_scalar_oneplus_function.c -lm -o math/scalar/ntm_scalar_oneplus_function.run
-gcc math/vector/ntm_vector_deviation.c -o math/vector/ntm_vector_deviation.run
+gcc math/vector/ntm_vector_deviation_function.c -o math/vector/ntm_vector_deviation_function.run
 gcc math/vector/ntm_vector_logistic_function.c -lm -o math/vector/ntm_vector_logistic_function.run
-gcc math/vector/ntm_vector_mean.c -o math/vector/ntm_vector_mean.run
+gcc math/vector/ntm_vector_mean_function.c -o math/vector/ntm_vector_mean_function.run
 gcc math/vector/ntm_vector_oneplus_function.c -lm -o math/vector/ntm_vector_oneplus_function.run
 gcc nn/ann/components/ntm_masked_multi_head_attention.c -o nn/ann/components/ntm_masked_multi_head_attention.run
 gcc nn/ann/components/ntm_masked_scaled_dot_product_attention.c -o nn/ann/components/ntm_masked_scaled_dot_product_attention.run

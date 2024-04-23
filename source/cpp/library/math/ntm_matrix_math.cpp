@@ -53,8 +53,8 @@ class MatrixMath {
   public:
     vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_in);
     vector<vector<double>> ntm_matrix_oneplus_function(vector<vector<double>> data_in);
-    vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>> data_in);
-    vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean);
+    vector<vector<double>> ntm_matrix_mean_function(vector<vector<vector<double>>> data_in);
+    vector<vector<double>> ntm_matrix_deviation_function(vector<vector<vector<double>>> data_in, vector<vector<double>> mean);
 };
 
 vector<vector<double>> MatrixMath::ntm_matrix_logistic_function(vector<vector<double>> data_in) {
@@ -98,7 +98,7 @@ vector<vector<double>> MatrixMath::ntm_matrix_oneplus_function(vector<vector<dou
   return data_out;
 }
 
-vector<vector<double>> MatrixMath::ntm_matrix_mean(vector<vector<vector<double>>> data_in) {
+vector<vector<double>> MatrixMath::ntm_matrix_mean_function(vector<vector<vector<double>>> data_in) {
 
   vector<vector<double>> data_out;
 
@@ -120,7 +120,7 @@ vector<vector<double>> MatrixMath::ntm_matrix_mean(vector<vector<vector<double>>
   return data_out;
 }
 
-vector<vector<double>> MatrixMath::ntm_matrix_deviation(vector<vector<vector<double>>> data_in, vector<vector<double>> mean) {
+vector<vector<double>> MatrixMath::ntm_matrix_deviation_function(vector<vector<vector<double>>> data_in, vector<vector<double>> mean) {
 
   vector<vector<double>> data_out;
 
@@ -236,11 +236,11 @@ int main() {
     { 11.67618659209133, 9.678154093971983, 10.677078252031311 }
   };
 
-  assert(Math.ntm_matrix_mean(data_in_0) == mean_data_out_0);
-  assert(Math.ntm_matrix_mean(data_in_1) == mean_data_out_1);
+  assert(Math.ntm_matrix_mean_function(data_in_0) == mean_data_out_0);
+  assert(Math.ntm_matrix_mean_function(data_in_1) == mean_data_out_1);
 
-  assert(Math.ntm_matrix_deviation(data_in_0, mean_0) == deviation_data_out_0);
-  assert(Math.ntm_matrix_deviation(data_in_1, mean_1) == deviation_data_out_1);
+  assert(Math.ntm_matrix_deviation_function(data_in_0, mean_0) == deviation_data_out_0);
+  assert(Math.ntm_matrix_deviation_function(data_in_1, mean_1) == deviation_data_out_1);
 
   return 0;
 }

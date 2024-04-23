@@ -83,7 +83,7 @@ package body ntm_matrix_math is
 
   end ntm_matrix_oneplus_function;
 
-  procedure ntm_matrix_mean (
+  procedure ntm_matrix_mean_function (
     data_in : in tensor;
 
     data_out : out matrix
@@ -99,9 +99,9 @@ package body ntm_matrix_math is
       end loop;
     end loop;
 
-  end ntm_matrix_mean;
+  end ntm_matrix_mean_function;
 
-  procedure ntm_matrix_deviation (
+  procedure ntm_matrix_deviation_function (
     data_in : in tensor;
 
     mean_in : in matrix;
@@ -119,6 +119,6 @@ package body ntm_matrix_math is
       end loop;
     end loop;
 
-  end ntm_matrix_deviation;
+  end ntm_matrix_deviation_function;
 
 end ntm_matrix_math;

@@ -56,4 +56,4 @@ LENGTH_IN = 3;
 DATA_IN = rand(SIZE_I_IN, SIZE_J_IN, LENGTH_IN);
 
 # DUT
-#assert(ntm_matrix_deviation(DATA_IN, mean(DATA_IN')'), std(DATA_IN')');
+#assert(ntm_matrix_deviation_function(DATA_IN, mean(DATA_IN')'), std(DATA_IN')');

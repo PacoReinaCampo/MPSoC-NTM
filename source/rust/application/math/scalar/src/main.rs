@@ -46,8 +46,8 @@ extern crate math;
 
 use math::scalar::ntm_scalar_logistic_function::*;
 use math::scalar::ntm_scalar_oneplus_function::*;
-use math::scalar::ntm_scalar_mean::*;
-use math::scalar::ntm_scalar_deviation::*;
+use math::scalar::ntm_scalar_mean_function::*;
+use math::scalar::ntm_scalar_deviation_function::*;
 
 fn main() {
     let mut data_in_0: f64;
@@ -86,8 +86,8 @@ fn main() {
     data_out_0 = 2.0;
     data_out_1 = 2.0;
 
-    assert_eq!(ntm_scalar_mean(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_mean(data_in_1), data_out_1);
+    assert_eq!(ntm_scalar_mean_function(data_in_0), data_out_0);
+    assert_eq!(ntm_scalar_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![3.0, 2.0, 2.0];
     data_in_1 = vec![1.0, 2.0, 1.0];
@@ -98,6 +98,6 @@ fn main() {
     data_out_0 = 7.681145747868608;
     data_out_1 = 8.679477710861024;
 
-    assert_eq!(ntm_scalar_deviation(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_scalar_deviation(data_in_1, mean_1), data_out_1);
+    assert_eq!(ntm_scalar_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(ntm_scalar_deviation_function(data_in_1, mean_1), data_out_1);
 }

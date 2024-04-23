@@ -79,7 +79,7 @@ package body ntm_vector_math is
 
   end ntm_vector_oneplus_function;
 
-  procedure ntm_vector_mean (
+  procedure ntm_vector_mean_function (
     data_in : in matrix;
 
     data_out : out vector
@@ -93,9 +93,9 @@ package body ntm_vector_math is
       end loop;
     end loop;
 
-  end ntm_vector_mean;
+  end ntm_vector_mean_function;
 
-  procedure ntm_vector_deviation (
+  procedure ntm_vector_deviation_function (
     data_in : in matrix;
 
     mean_in : in vector;
@@ -111,6 +111,6 @@ package body ntm_vector_math is
       end loop;
     end loop;
 
-  end ntm_vector_deviation;
+  end ntm_vector_deviation_function;
 
 end ntm_vector_math;

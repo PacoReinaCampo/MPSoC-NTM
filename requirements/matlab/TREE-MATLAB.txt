@@ -65,19 +65,19 @@ library
 │   └── VectorArithmetic.m
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation.m
+│   │   ├── ntm_matrix_deviation_function.m
 │   │   ├── ntm_matrix_logistic_function.m
-│   │   ├── ntm_matrix_mean.m
+│   │   ├── ntm_matrix_mean_function.m
 │   │   └── ntm_matrix_oneplus_function.m
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation.m
+│   │   ├── ntm_scalar_deviation_function.m
 │   │   ├── ntm_scalar_logistic_function.m
-│   │   ├── ntm_scalar_mean.m
+│   │   ├── ntm_scalar_mean_function.m
 │   │   └── ntm_scalar_oneplus_function.m
 │   └── vector
-│       ├── ntm_vector_deviation.m
+│       ├── ntm_vector_deviation_function.m
 │       ├── ntm_vector_logistic_function.m
-│       ├── ntm_vector_mean.m
+│       ├── ntm_vector_mean_function.m
 │       └── ntm_vector_oneplus_function.m
 ├── nn
 │   ├── ann

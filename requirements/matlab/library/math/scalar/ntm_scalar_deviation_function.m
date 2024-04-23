@@ -42,18 +42,16 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_vector_deviation(DATA_IN, MEAN_IN)
+function DATA_OUT = ntm_scalar_deviation_function(DATA_IN, MEAN_IN)
   # Constants
-  [SIZE_IN, LENGTH_IN] = size(DATA_IN);
+  LENGTH_IN = length(DATA_IN);
 
   # Signals
-  DATA_OUT = zeros(SIZE_IN, 1);
+  DATA_OUT = 0;
 
   # Body
-  for i = 1:SIZE_IN
-    for m = 1:LENGTH_IN
-      DATA_OUT(i) = DATA_OUT(i) + (DATA_IN(i, m) - MEAN_IN(i))^2/(LENGTH_IN-1);
-    end
+  for m = 1:LENGTH_IN
+    DATA_OUT = DATA_OUT + (DATA_IN(m) - MEAN_IN)^2/(LENGTH_IN-1);
   end
 
   DATA_OUT = sqrt(DATA_OUT);

@@ -96,12 +96,12 @@ cd application/math/scalar; octave ntm_scalar_logistic_function_test.m; cd ../..
 cd application/math/scalar; octave ntm_scalar_oneplus_function_test.m; cd ../../..
 cd application/math/vector; octave ntm_vector_logistic_function_test.m; cd ../../..
 cd application/math/vector; octave ntm_vector_oneplus_function_test.m; cd ../../..
-cd application/math/matrix; octave ntm_matrix_deviation_test.m; cd ../../..
-cd application/math/matrix; octave ntm_matrix_mean_test.m; cd ../../..
-cd application/math/scalar; octave ntm_scalar_deviation_test.m; cd ../../..
-cd application/math/scalar; octave ntm_scalar_mean_test.m; cd ../../..
-cd application/math/vector; octave ntm_vector_deviation_test.m; cd ../../..
-cd application/math/vector; octave ntm_vector_mean_test.m; cd ../../..
+cd application/math/matrix; octave ntm_matrix_deviation_function_test.m; cd ../../..
+cd application/math/matrix; octave ntm_matrix_mean_function_test.m; cd ../../..
+cd application/math/scalar; octave ntm_scalar_deviation_function_test.m; cd ../../..
+cd application/math/scalar; octave ntm_scalar_mean_function_test.m; cd ../../..
+cd application/math/vector; octave ntm_vector_deviation_function_test.m; cd ../../..
+cd application/math/vector; octave ntm_vector_mean_function_test.m; cd ../../..
 
 cd application/state/feedback; octave ntm_state_matrix_feedforward_test.m; cd ../../..
 cd application/state/feedback; octave ntm_state_matrix_input_test.m; cd ../../..

@@ -42,11 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_deviation(data_in: Vec<f64>, mean_in: f64) -> f64 {
+pub fn ntm_scalar_mean_function(data_in: Vec<f64>) -> f64 {
     let mut data_out: f64 = 0.0;
 
     for i in 0..data_in.len() {
-        data_out += (data_in[i] - mean_in)*(data_in[i] - mean_in)/data_in.len() as f64;
+        data_out += data_in[i]/data_in.len() as f64;
     }
-    data_out.sqrt()
+    data_out
 }

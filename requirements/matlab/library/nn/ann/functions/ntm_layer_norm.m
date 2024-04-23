@@ -50,7 +50,7 @@ function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
   N_OUT = zeros(SIZE_N_IN, SIZE_D_IN);
 
   # Body
-  vector_operation_int = ntm_vector_mean(Z_IN);
+  vector_operation_int = ntm_vector_mean_function(Z_IN);
 
   for n = 1:SIZE_N_IN
     for d = 1:SIZE_D_IN
@@ -58,7 +58,7 @@ function N_OUT = ntm_layer_norm(Z_IN, GAMMA_IN, BETA_IN)
     end
   end
 
-  vector_operation_int = ntm_vector_deviation(Z_IN, vector_operation_int);
+  vector_operation_int = ntm_vector_deviation_function(Z_IN, vector_operation_int);
 
   for n = 1:SIZE_N_IN
     for d = 1:SIZE_D_IN

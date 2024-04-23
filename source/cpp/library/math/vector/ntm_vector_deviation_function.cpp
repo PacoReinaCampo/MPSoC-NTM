@@ -43,27 +43,21 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
+#include<math.h>
 #include<vector>
 
 using namespace std;
 
-vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>> tensor) {
+vector<double> ntm_vector_deviation_function(vector<vector<double>> matrix, vector<double> mean) {
+  vector<double> data_out;
 
-  vector<vector<double>> data_out;
+  for(int i=0; i<matrix.size(); i++) {
+    double temporal = 0.0;
 
-  for (int i = 0; i < tensor.size(); i++) {
-    vector<double> vector;
-
-    for (int j = 0; j < tensor[0].size(); j++) {
-      double temporal = 0.0;
-
-      for (int k = 0; k < tensor[0][0].size(); k++) {
-        temporal += tensor[i][j][k]/(double)tensor[0][0].size();
-
-      }
-      vector.push_back(temporal);
+    for(int j=0; j<matrix[0].size(); j++) {
+      temporal += (matrix[i][j] - mean[i])*(matrix[i][j] - mean[i])/(double)matrix[0].size();
     }
-    data_out.push_back(vector);
+    data_out.push_back(sqrt(temporal));
   }
 
   return data_out;

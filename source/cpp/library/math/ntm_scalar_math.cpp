@@ -52,8 +52,8 @@ class ScalarMath {
   public:
     double ntm_scalar_logistic_function(double data_in);
     double ntm_scalar_oneplus_function(double data_in);
-    double ntm_scalar_mean(vector<double> data_in);
-    double ntm_scalar_deviation(vector<double> data_in, double mean);
+    double ntm_scalar_mean_function(vector<double> data_in);
+    double ntm_scalar_deviation_function(vector<double> data_in, double mean);
 };
 
 double ScalarMath::ntm_scalar_logistic_function(double data_in) {
@@ -72,7 +72,7 @@ double ScalarMath::ntm_scalar_oneplus_function(double data_in) {
   return ONE + log(temporal);
 }
 
-double ScalarMath::ntm_scalar_mean(vector<double> data_in) {
+double ScalarMath::ntm_scalar_mean_function(vector<double> data_in) {
   double data_out = 0.0;
 
   for(int i=0; i<data_in.size(); i++) {
@@ -82,7 +82,7 @@ double ScalarMath::ntm_scalar_mean(vector<double> data_in) {
   return data_out;
 }
 
-double ScalarMath::ntm_scalar_deviation(vector<double> data_in, double mean) {
+double ScalarMath::ntm_scalar_deviation_function(vector<double> data_in, double mean) {
   double data_out = 0.0;
 
   for(int i=0; i<data_in.size(); i++) {
@@ -123,11 +123,11 @@ int main() {
   double deviation_data_out_0 = 7.681145747868608;
   double deviation_data_out_1 = 8.679477710861024;
 
-  assert(Math.ntm_scalar_mean(mean_data_in_0) == mean_data_out_0);
-  assert(Math.ntm_scalar_mean(mean_data_in_1) == mean_data_out_1);
+  assert(Math.ntm_scalar_mean_function(mean_data_in_0) == mean_data_out_0);
+  assert(Math.ntm_scalar_mean_function(mean_data_in_1) == mean_data_out_1);
 
-  assert(Math.ntm_scalar_deviation(deviation_data_in_0, 10.0) == deviation_data_out_0);
-  assert(Math.ntm_scalar_deviation(deviation_data_in_1, 10.0) == deviation_data_out_1);
+  assert(Math.ntm_scalar_deviation_function(deviation_data_in_0, 10.0) == deviation_data_out_0);
+  assert(Math.ntm_scalar_deviation_function(deviation_data_in_1, 10.0) == deviation_data_out_1);
 
   return 0;
 }

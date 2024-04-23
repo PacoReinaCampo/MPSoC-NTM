@@ -53,9 +53,9 @@ SOURCES_MATH =	../../../library/math/ntm_math.hpp \
 		../../../library/math/scalar/ntm_scalar_oneplus_function.cpp \
 		../../../library/math/vector/ntm_vector_logistic_function.cpp \
 		../../../library/math/vector/ntm_vector_oneplus_function.cpp \
-		../../../library/math/matrix/ntm_matrix_deviation.cpp \
-		../../../library/math/matrix/ntm_matrix_mean.cpp \
-		../../../library/math/scalar/ntm_scalar_deviation.cpp \
-		../../../library/math/scalar/ntm_scalar_mean.cpp \
-		../../../library/math/vector/ntm_vector_deviation.cpp \
-		../../../library/math/vector/ntm_vector_mean.cpp
+		../../../library/math/matrix/ntm_matrix_deviation_function.cpp \
+		../../../library/math/matrix/ntm_matrix_mean_function.cpp \
+		../../../library/math/scalar/ntm_scalar_deviation_function.cpp \
+		../../../library/math/scalar/ntm_scalar_mean_function.cpp \
+		../../../library/math/vector/ntm_vector_deviation_function.cpp \
+		../../../library/math/vector/ntm_vector_mean_function.cpp

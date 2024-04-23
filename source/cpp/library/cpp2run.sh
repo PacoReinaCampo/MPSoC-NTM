@@ -154,12 +154,12 @@ rm -rf math/scalar/ntm_scalar_logistic_function.run
 rm -rf math/scalar/ntm_scalar_oneplus_function.run
 rm -rf math/vector/ntm_vector_logistic_function.run
 rm -rf math/vector/ntm_vector_oneplus_function.run
-rm -rf math/matrix/ntm_matrix_deviation.run
-rm -rf math/matrix/ntm_matrix_mean.run
-rm -rf math/scalar/ntm_scalar_deviation.run
-rm -rf math/scalar/ntm_scalar_mean.run
-rm -rf math/vector/ntm_vector_deviation.run
-rm -rf math/vector/ntm_vector_mean.run
+rm -rf math/matrix/ntm_matrix_deviation_function.run
+rm -rf math/matrix/ntm_matrix_mean_function.run
+rm -rf math/scalar/ntm_scalar_deviation_function.run
+rm -rf math/scalar/ntm_scalar_mean_function.run
+rm -rf math/vector/ntm_vector_deviation_function.run
+rm -rf math/vector/ntm_vector_mean_function.run
 rm -rf ntm/memory/ntm_addressing.run
 rm -rf ntm/memory/ntm_matrix_content_based_addressing.run
 rm -rf ntm/memory/ntm_vector_content_based_addressing.run
@@ -330,12 +330,12 @@ g++ math/scalar/ntm_scalar_logistic_function.cpp -o math/scalar/ntm_scalar_logis
 g++ math/scalar/ntm_scalar_oneplus_function.cpp -o math/scalar/ntm_scalar_oneplus_function.run
 g++ math/vector/ntm_vector_logistic_function.cpp -o math/vector/ntm_vector_logistic_function.run
 g++ math/vector/ntm_vector_oneplus_function.cpp -o math/vector/ntm_vector_oneplus_function.run
-g++ math/matrix/ntm_matrix_deviation.cpp -o math/matrix/ntm_matrix_deviation.run
-g++ math/matrix/ntm_matrix_mean.cpp -o math/matrix/ntm_matrix_mean.run
-g++ math/scalar/ntm_scalar_deviation.cpp -o math/scalar/ntm_scalar_deviation.run
-g++ math/scalar/ntm_scalar_mean.cpp -o math/scalar/ntm_scalar_mean.run
-g++ math/vector/ntm_vector_deviation.cpp -o math/vector/ntm_vector_deviation.run
-g++ math/vector/ntm_vector_mean.cpp -o math/vector/ntm_vector_mean.run
+g++ math/matrix/ntm_matrix_deviation_function.cpp -o math/matrix/ntm_matrix_deviation_function.run
+g++ math/matrix/ntm_matrix_mean_function.cpp -o math/matrix/ntm_matrix_mean_function.run
+g++ math/scalar/ntm_scalar_deviation_function.cpp -o math/scalar/ntm_scalar_deviation_function.run
+g++ math/scalar/ntm_scalar_mean_function.cpp -o math/scalar/ntm_scalar_mean_function.run
+g++ math/vector/ntm_vector_deviation_function.cpp -o math/vector/ntm_vector_deviation_function.run
+g++ math/vector/ntm_vector_mean_function.cpp -o math/vector/ntm_vector_mean_function.run
 g++ ntm/memory/ntm_addressing.cpp -o ntm/memory/ntm_addressing.run
 g++ ntm/memory/ntm_matrix_content_based_addressing.cpp -o ntm/memory/ntm_matrix_content_based_addressing.run
 g++ ntm/memory/ntm_vector_content_based_addressing.cpp -o ntm/memory/ntm_vector_content_based_addressing.run

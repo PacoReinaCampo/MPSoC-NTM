@@ -77,19 +77,19 @@ library
 │           └── ntm_vector_subtractor.py
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation.py
+│   │   ├── ntm_matrix_deviation_function.py
 │   │   ├── ntm_matrix_logistic_function.py
-│   │   ├── ntm_matrix_mean.py
+│   │   ├── ntm_matrix_mean_function.py
 │   │   └── ntm_matrix_oneplus_function.py
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation.py
+│   │   ├── ntm_scalar_deviation_function.py
 │   │   ├── ntm_scalar_logistic_function.py
-│   │   ├── ntm_scalar_mean.py
+│   │   ├── ntm_scalar_mean_function.py
 │   │   └── ntm_scalar_oneplus_function.py
 │   └── vector
-│       ├── ntm_vector_deviation.py
+│       ├── ntm_vector_deviation_function.py
 │       ├── ntm_vector_logistic_function.py
-│       ├── ntm_vector_mean.py
+│       ├── ntm_vector_mean_function.py
 │       └── ntm_vector_oneplus_function.py
 ├── nn
 │   ├── ann

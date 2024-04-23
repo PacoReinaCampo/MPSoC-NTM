@@ -64,9 +64,9 @@ def test_vector_math():
   math_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
   test_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
 
-  np.testing.assert_array_equal(math_statitics.ntm_vector_mean(), test_statitics.ntm_vector_mean())
+  np.testing.assert_array_equal(math_statitics.ntm_vector_mean_function(), test_statitics.ntm_vector_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_vector_deviation(), test_statitics.ntm_vector_deviation())
+  np.testing.assert_array_equal(math_statitics.ntm_vector_deviation_function(), test_statitics.ntm_vector_deviation_function())
 
 
 test_vector_math()

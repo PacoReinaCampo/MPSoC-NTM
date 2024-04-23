@@ -48,12 +48,24 @@
 
 using namespace std;
 
-double ntm_scalar_deviation(vector<double> vector, double mean) {
-  double data_out = 0.0;
+vector<vector<double>> ntm_matrix_deviation_function(vector<vector<vector<double>>> tensor, vector<vector<double>> mean) {
 
-  for(int i=0; i<vector.size(); i++) {
-    data_out += (vector[i] - mean)*(vector[i] - mean)/(double)vector.size();
+  vector<vector<double>> data_out;
+
+  for (int i = 0; i < tensor.size(); i++) {
+    vector<double> vector;
+
+    for (int j = 0; j < tensor[0].size(); j++) {
+      double temporal = 0.0;
+
+      for (int k = 0; k < tensor[0][0].size(); k++) {
+        temporal += (tensor[i][j][k] - mean[i][j])*(tensor[i][j][k] - mean[i][j])/tensor[0][0].size();
+
+      }
+      vector.push_back(sqrt(temporal));
+    }
+    data_out.push_back(vector);
   }
 
-  return sqrt(data_out);
+  return data_out;
 }

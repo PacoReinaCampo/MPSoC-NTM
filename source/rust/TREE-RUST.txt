@@ -87,27 +87,27 @@ library
 │       ├── lib.rs
 │       ├── matrix
 │       │   ├── mod.rs
-│       │   ├── ntm_matrix_deviation.rs
+│       │   ├── ntm_matrix_deviation_function.rs
 │       │   ├── ntm_matrix_logistic_function.rs
 │       │   ├── ntm_matrix_math_function.rs
 │       │   ├── ntm_matrix_math_statitics.rs
-│       │   ├── ntm_matrix_mean.rs
+│       │   ├── ntm_matrix_mean_function.rs
 │       │   └── ntm_matrix_oneplus_function.rs
 │       ├── scalar
 │       │   ├── mod.rs
-│       │   ├── ntm_scalar_deviation.rs
+│       │   ├── ntm_scalar_deviation_function.rs
 │       │   ├── ntm_scalar_logistic_function.rs
 │       │   ├── ntm_scalar_math_function.rs
 │       │   ├── ntm_scalar_math_statitics.rs
-│       │   ├── ntm_scalar_mean.rs
+│       │   ├── ntm_scalar_mean_function.rs
 │       │   └── ntm_scalar_oneplus_function.rs
 │       └── vector
 │           ├── mod.rs
-│           ├── ntm_vector_deviation.rs
+│           ├── ntm_vector_deviation_function.rs
 │           ├── ntm_vector_logistic_function.rs
 │           ├── ntm_vector_math_function.rs
 │           ├── ntm_vector_math_statitics.rs
-│           ├── ntm_vector_mean.rs
+│           ├── ntm_vector_mean_function.rs
 │           └── ntm_vector_oneplus_function.rs
 ├── nn
 │   ├── ann

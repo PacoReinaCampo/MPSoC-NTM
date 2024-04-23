@@ -64,7 +64,7 @@ func MatrixOneplusFunction(data_in [][]float64) [][]float64 {
   return data_out
 }
 
-func MatrixMean(data_in [][][]float64) [][][]float64 {
+func MatrixMeanFunction(data_in [][][]float64) [][][]float64 {
   data_out := make([][][]float64, len(data_in))
   for i, x := range data_in {
     for j, y := range x {
@@ -76,7 +76,7 @@ func MatrixMean(data_in [][][]float64) [][][]float64 {
   return data_out
 }
 
-func MatrixDeviation(data_in [][][]float64) [][][]float64 {
+func MatrixDeviationFunction(data_in [][][]float64) [][][]float64 {
   data_out := make([][][]float64, len(data_in))
   for i, x := range data_in {
     for j, y := range x {

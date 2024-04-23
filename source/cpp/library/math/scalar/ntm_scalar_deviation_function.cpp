@@ -43,21 +43,17 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
+#include<math.h>
 #include<vector>
 
 using namespace std;
 
-vector<double> ntm_vector_mean(vector<vector<double>> matrix) {
-  vector<double> data_out;
+double ntm_scalar_deviation_function(vector<double> vector, double mean) {
+  double data_out = 0.0;
 
-  for(int i=0; i<matrix.size(); i++) {
-    double temporal = 0.0;
-
-    for(int j=0; j<matrix[0].size(); j++) {
-      temporal += matrix[i][j]/(double)matrix[0].size();
-    }
-    data_out.push_back(temporal);
+  for(int i=0; i<vector.size(); i++) {
+    data_out += (vector[i] - mean)*(vector[i] - mean)/(double)vector.size();
   }
 
-  return data_out;
+  return sqrt(data_out);
 }

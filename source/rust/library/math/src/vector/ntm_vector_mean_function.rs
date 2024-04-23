@@ -42,30 +42,16 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+pub fn ntm_vector_mean_function(data_in: Vec<Vec<f64>>) -> Vec<f64> {
+    let mut data_out: Vec<f64> = vec![];
 
-using namespace std;
+    for i in 0..data_in.len() {
+        let mut temporal: f64 = 0.0;
 
-vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>> tensor, vector<vector<double>> mean) {
-
-  vector<vector<double>> data_out;
-
-  for (int i = 0; i < tensor.size(); i++) {
-    vector<double> vector;
-
-    for (int j = 0; j < tensor[0].size(); j++) {
-      double temporal = 0.0;
-
-      for (int k = 0; k < tensor[0][0].size(); k++) {
-        temporal += (tensor[i][j][k] - mean[i][j])*(tensor[i][j][k] - mean[i][j])/tensor[0][0].size();
-
-      }
-      vector.push_back(sqrt(temporal));
+        for j in 0..data_in[i].len() {
+            temporal += data_in[i][j]/data_in[0].len() as f64;
+        }
+        data_out.push(temporal);
     }
-    data_out.push_back(vector);
-  }
-
-  return data_out;
+    data_out
 }

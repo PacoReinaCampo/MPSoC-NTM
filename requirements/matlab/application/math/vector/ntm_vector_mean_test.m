@@ -55,4 +55,4 @@ LENGTH_IN = 3;
 DATA_IN = rand(SIZE_IN, LENGTH_IN);
 
 # DUT
-assert(ntm_vector_mean(DATA_IN), mean(DATA_IN')');
+assert(ntm_vector_mean_function(DATA_IN), mean(DATA_IN')');

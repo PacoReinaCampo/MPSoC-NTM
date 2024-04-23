@@ -61,19 +61,19 @@ library
 │       └── ntm_vector_subtract.psl
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation.psl
+│   │   ├── ntm_matrix_deviation_function.psl
 │   │   ├── ntm_matrix_logistic_function.psl
-│   │   ├── ntm_matrix_mean.psl
+│   │   ├── ntm_matrix_mean_function.psl
 │   │   └── ntm_matrix_oneplus_function.psl
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation.psl
+│   │   ├── ntm_scalar_deviation_function.psl
 │   │   ├── ntm_scalar_logistic_function.psl
-│   │   ├── ntm_scalar_mean.psl
+│   │   ├── ntm_scalar_mean_function.psl
 │   │   └── ntm_scalar_oneplus_function.psl
 │   └── vector
-│       ├── ntm_vector_deviation.psl
+│       ├── ntm_vector_deviation_function.psl
 │       ├── ntm_vector_logistic_function.psl
-│       ├── ntm_vector_mean.psl
+│       ├── ntm_vector_mean_function.psl
 │       └── ntm_vector_oneplus_function.psl
 ├── nn
 │   ├── ann

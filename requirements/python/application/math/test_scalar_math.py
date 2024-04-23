@@ -62,9 +62,9 @@ def test_scalar_math():
   math_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
   test_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
 
-  np.testing.assert_array_equal(math_statitics.ntm_scalar_mean(), test_statitics.ntm_scalar_mean())
+  np.testing.assert_array_equal(math_statitics.ntm_scalar_mean_function(), test_statitics.ntm_scalar_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_scalar_deviation(), test_statitics.ntm_scalar_deviation())
+  np.testing.assert_array_equal(math_statitics.ntm_scalar_deviation_function(), test_statitics.ntm_scalar_deviation_function())
 
 
 test_scalar_math()

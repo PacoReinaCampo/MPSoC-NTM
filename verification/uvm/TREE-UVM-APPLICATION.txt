@@ -161,39 +161,39 @@ application
 │           └── ntm_testbench.sv
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation
+│   │   ├── ntm_matrix_deviation_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
 │   │   ├── ntm_matrix_logistic_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
-│   │   ├── ntm_matrix_mean
+│   │   ├── ntm_matrix_mean_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
 │   │   └── ntm_matrix_oneplus_function
 │   │       ├── ntm_design.sv
 │   │       └── ntm_testbench.sv
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation
+│   │   ├── ntm_scalar_deviation_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
 │   │   ├── ntm_scalar_logistic_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
-│   │   ├── ntm_scalar_mean
+│   │   ├── ntm_scalar_mean_function
 │   │   │   ├── ntm_design.sv
 │   │   │   └── ntm_testbench.sv
 │   │   └── ntm_scalar_oneplus_function
 │   │       ├── ntm_design.sv
 │   │       └── ntm_testbench.sv
 │   └── vector
-│       ├── ntm_vector_deviation
+│       ├── ntm_vector_deviation_function
 │       │   ├── ntm_design.sv
 │       │   └── ntm_testbench.sv
 │       ├── ntm_vector_logistic_function
 │       │   ├── ntm_design.sv
 │       │   └── ntm_testbench.sv
-│       ├── ntm_vector_mean
+│       ├── ntm_vector_mean_function
 │       │   ├── ntm_design.sv
 │       │   └── ntm_testbench.sv
 │       └── ntm_vector_oneplus_function

@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2020-2024 by the author(s)                                      ##
+## Copyright (c) 2022-2023 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,21 +42,13 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_matrix_deviation(DATA_IN, MEAN_IN)
-  # Constants
-  [SIZE_I_IN, SIZE_J_IN, LENGTH_IN] = size(DATA_IN);
+import numpy as np
 
-  # Signals
-  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
+def ntm_scalar_deviation_function(data_in, mean_in):
+  data_out = 0.0
 
-  # Body
-  for i = 1:SIZE_I_IN
-    for j = 1:SIZE_J_IN
-      for m = 1:LENGTH_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + (DATA_IN(i, j, m) - MEAN_IN(i, j))^2/(LENGTH_IN-1);
-      end
-    end
-  end
+  # calculating deviation
+  for i in range(len(data_in)):
+    data_out += (data_in[i] - mean_in) * (data_in[i] - mean_in) / len(data_in)
 
-  DATA_OUT = sqrt(DATA_OUT);
-end
+  return data_out

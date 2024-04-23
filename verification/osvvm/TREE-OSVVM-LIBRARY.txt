@@ -211,7 +211,7 @@ library
 │           └── ntm_testbench.vhd
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation
+│   │   ├── ntm_matrix_deviation_function
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
@@ -219,7 +219,7 @@ library
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
-│   │   ├── ntm_matrix_mean
+│   │   ├── ntm_matrix_mean_function
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
@@ -228,7 +228,7 @@ library
 │   │       ├── ntm_model.vhd
 │   │       └── ntm_testbench.vhd
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation
+│   │   ├── ntm_scalar_deviation_function
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
@@ -236,7 +236,7 @@ library
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
-│   │   ├── ntm_scalar_mean
+│   │   ├── ntm_scalar_mean_function
 │   │   │   ├── ntm_model_pkg.vhd
 │   │   │   ├── ntm_model.vhd
 │   │   │   └── ntm_testbench.vhd
@@ -245,7 +245,7 @@ library
 │   │       ├── ntm_model.vhd
 │   │       └── ntm_testbench.vhd
 │   └── vector
-│       ├── ntm_vector_deviation
+│       ├── ntm_vector_deviation_function
 │       │   ├── ntm_model_pkg.vhd
 │       │   ├── ntm_model.vhd
 │       │   └── ntm_testbench.vhd
@@ -253,7 +253,7 @@ library
 │       │   ├── ntm_model_pkg.vhd
 │       │   ├── ntm_model.vhd
 │       │   └── ntm_testbench.vhd
-│       ├── ntm_vector_mean
+│       ├── ntm_vector_mean_function
 │       │   ├── ntm_model_pkg.vhd
 │       │   ├── ntm_model.vhd
 │       │   └── ntm_testbench.vhd

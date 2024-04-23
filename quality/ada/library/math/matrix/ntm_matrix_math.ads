@@ -62,13 +62,13 @@ package ntm_matrix_math is
     data_out : out matrix
   );
 
-  procedure ntm_matrix_mean (
+  procedure ntm_matrix_mean_function (
     data_in : in tensor;
 
     data_out : out matrix
   );
 
-  procedure ntm_matrix_deviation (
+  procedure ntm_matrix_deviation_function (
     data_in : in tensor;
 
     mean_in : in matrix;

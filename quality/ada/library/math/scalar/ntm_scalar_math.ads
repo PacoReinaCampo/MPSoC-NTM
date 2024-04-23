@@ -62,13 +62,13 @@ package ntm_scalar_math is
     data_out : out float
   );
 
-  procedure ntm_scalar_mean (
+  procedure ntm_scalar_mean_function (
     data_in : in vector;
     
     data_out : out float
   );
 
-  procedure ntm_scalar_deviation (
+  procedure ntm_scalar_deviation_function (
     data_in : in vector;
     mean_in : in float;
     

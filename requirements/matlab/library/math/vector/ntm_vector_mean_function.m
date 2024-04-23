@@ -42,19 +42,17 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_matrix_mean(DATA_IN)
+function DATA_OUT = ntm_vector_mean_function(DATA_IN)
   # Constants
-  [SIZE_I_IN, SIZE_J_IN, LENGTH_IN] = size(DATA_IN);
+  [SIZE_IN, LENGTH_IN] = size(DATA_IN);
 
   # Signals
-  DATA_OUT = zeros(SIZE_I_IN, SIZE_J_IN);
+  DATA_OUT = zeros(SIZE_IN, 1);
 
   # Body
-  for i = 1:SIZE_I_IN
-    for j = 1:SIZE_J_IN
-      for m = 1:LENGTH_IN
-        DATA_OUT(i, j) = DATA_OUT(i, j) + DATA_IN(i, j, m);
-      end
+  for i = 1:SIZE_IN
+    for m = 1:LENGTH_IN
+      DATA_OUT(i) = DATA_OUT(i) + DATA_IN(i, m);
     end
   end
 

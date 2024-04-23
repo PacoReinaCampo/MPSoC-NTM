@@ -46,8 +46,8 @@ import numpy as np
 
 from scalar import ntm_scalar_logistic_function as scalar_logistic_function
 from scalar import ntm_scalar_oneplus_function as scalar_oneplus_function
-from scalar import ntm_scalar_mean as scalar_mean
-from scalar import ntm_scalar_deviation as scalar_deviation
+from scalar import ntm_scalar_mean_function as scalar_mean
+from scalar import ntm_scalar_deviation_function as scalar_deviation
 
 def test_scalar_logistic_function():
   
@@ -65,13 +65,13 @@ def test_scalar_mean():
 
   data_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(scalar_mean.ntm_scalar_mean(data_in), np.mean(data_in))
+  np.testing.assert_array_equal(scalar_mean.ntm_scalar_mean_function(data_in), np.mean(data_in))
 
 def test_scalar_deviation():
 
   data_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(scalar_deviation.ntm_scalar_deviation(data_in, 0), scalar_deviation.ntm_scalar_deviation(data_in, 0))
+  np.testing.assert_array_equal(scalar_deviation.ntm_scalar_deviation_function(data_in, 0), scalar_deviation.ntm_scalar_deviation_function(data_in, 0))
 
 test_scalar_logistic_function()
 test_scalar_oneplus_function()

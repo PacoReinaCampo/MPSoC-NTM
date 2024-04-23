@@ -64,9 +64,9 @@ def test_matrix_math():
   math_statitics = matrix_math.MatrixMath(data_in_statitics, mean_in_statitics)
   test_statitics = matrix_math.MatrixMath(data_in_statitics, mean_in_statitics)
 
-  np.testing.assert_array_equal(math_statitics.ntm_matrix_mean(), test_statitics.ntm_matrix_mean())
+  np.testing.assert_array_equal(math_statitics.ntm_matrix_mean_function(), test_statitics.ntm_matrix_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_matrix_deviation(), test_statitics.ntm_matrix_deviation())
+  np.testing.assert_array_equal(math_statitics.ntm_matrix_deviation_function(), test_statitics.ntm_matrix_deviation_function())
 
 
 test_matrix_math()

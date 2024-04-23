@@ -577,21 +577,21 @@ library
 │       └── ntm_vector_arithmetic_structural_profile.dot
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation
-│   │   │   ├── ntm_matrix_deviation_behavioral_activity.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_communication.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_interaction.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_sequence.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_state.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_timing.dot
-│   │   │   ├── ntm_matrix_deviation_behavioral_use.dot
-│   │   │   ├── ntm_matrix_deviation_structural_class.dot
-│   │   │   ├── ntm_matrix_deviation_structural_component.dot
-│   │   │   ├── ntm_matrix_deviation_structural_composite.dot
-│   │   │   ├── ntm_matrix_deviation_structural_deployment.dot
-│   │   │   ├── ntm_matrix_deviation_structural_object.dot
-│   │   │   ├── ntm_matrix_deviation_structural_package.dot
-│   │   │   └── ntm_matrix_deviation_structural_profile.dot
+│   │   ├── ntm_matrix_deviation_function
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_activity.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_communication.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_interaction.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_sequence.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_state.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_timing.dot
+│   │   │   ├── ntm_matrix_deviation_function_behavioral_use.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_class.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_component.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_composite.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_deployment.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_object.dot
+│   │   │   ├── ntm_matrix_deviation_function_structural_package.dot
+│   │   │   └── ntm_matrix_deviation_function_structural_profile.dot
 │   │   ├── ntm_matrix_logistic_function
 │   │   │   ├── ntm_matrix_logistic_function_behavioral_activity.dot
 │   │   │   ├── ntm_matrix_logistic_function_behavioral_communication.dot
@@ -607,21 +607,21 @@ library
 │   │   │   ├── ntm_matrix_logistic_function_structural_object.dot
 │   │   │   ├── ntm_matrix_logistic_function_structural_package.dot
 │   │   │   └── ntm_matrix_logistic_function_structural_profile.dot
-│   │   ├── ntm_matrix_mean
-│   │   │   ├── ntm_matrix_mean_behavioral_activity.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_communication.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_interaction.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_sequence.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_state.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_timing.dot
-│   │   │   ├── ntm_matrix_mean_behavioral_use.dot
-│   │   │   ├── ntm_matrix_mean_structural_class.dot
-│   │   │   ├── ntm_matrix_mean_structural_component.dot
-│   │   │   ├── ntm_matrix_mean_structural_composite.dot
-│   │   │   ├── ntm_matrix_mean_structural_deployment.dot
-│   │   │   ├── ntm_matrix_mean_structural_object.dot
-│   │   │   ├── ntm_matrix_mean_structural_package.dot
-│   │   │   └── ntm_matrix_mean_structural_profile.dot
+│   │   ├── ntm_matrix_mean_function
+│   │   │   ├── ntm_matrix_mean_function_behavioral_activity.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_communication.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_interaction.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_sequence.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_state.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_timing.dot
+│   │   │   ├── ntm_matrix_mean_function_behavioral_use.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_class.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_component.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_composite.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_deployment.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_object.dot
+│   │   │   ├── ntm_matrix_mean_function_structural_package.dot
+│   │   │   └── ntm_matrix_mean_function_structural_profile.dot
 │   │   └── ntm_matrix_oneplus_function
 │   │       ├── ntm_matrix_oneplus_function_behavioral_activity.dot
 │   │       ├── ntm_matrix_oneplus_function_behavioral_communication.dot
@@ -638,21 +638,21 @@ library
 │   │       ├── ntm_matrix_oneplus_function_structural_package.dot
 │   │       └── ntm_matrix_oneplus_function_structural_profile.dot
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation
-│   │   │   ├── ntm_scalar_deviation_behavioral_activity.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_communication.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_interaction.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_sequence.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_state.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_timing.dot
-│   │   │   ├── ntm_scalar_deviation_behavioral_use.dot
-│   │   │   ├── ntm_scalar_deviation_structural_class.dot
-│   │   │   ├── ntm_scalar_deviation_structural_component.dot
-│   │   │   ├── ntm_scalar_deviation_structural_composite.dot
-│   │   │   ├── ntm_scalar_deviation_structural_deployment.dot
-│   │   │   ├── ntm_scalar_deviation_structural_object.dot
-│   │   │   ├── ntm_scalar_deviation_structural_package.dot
-│   │   │   └── ntm_scalar_deviation_structural_profile.dot
+│   │   ├── ntm_scalar_deviation_function
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_activity.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_communication.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_interaction.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_sequence.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_state.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_timing.dot
+│   │   │   ├── ntm_scalar_deviation_function_behavioral_use.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_class.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_component.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_composite.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_deployment.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_object.dot
+│   │   │   ├── ntm_scalar_deviation_function_structural_package.dot
+│   │   │   └── ntm_scalar_deviation_function_structural_profile.dot
 │   │   ├── ntm_scalar_logistic_function
 │   │   │   ├── ntm_scalar_logistic_function_behavioral_activity.dot
 │   │   │   ├── ntm_scalar_logistic_function_behavioral_communication.dot
@@ -668,21 +668,21 @@ library
 │   │   │   ├── ntm_scalar_logistic_function_structural_object.dot
 │   │   │   ├── ntm_scalar_logistic_function_structural_package.dot
 │   │   │   └── ntm_scalar_logistic_function_structural_profile.dot
-│   │   ├── ntm_scalar_mean
-│   │   │   ├── ntm_scalar_mean_behavioral_activity.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_communication.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_interaction.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_sequence.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_state.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_timing.dot
-│   │   │   ├── ntm_scalar_mean_behavioral_use.dot
-│   │   │   ├── ntm_scalar_mean_structural_class.dot
-│   │   │   ├── ntm_scalar_mean_structural_component.dot
-│   │   │   ├── ntm_scalar_mean_structural_composite.dot
-│   │   │   ├── ntm_scalar_mean_structural_deployment.dot
-│   │   │   ├── ntm_scalar_mean_structural_object.dot
-│   │   │   ├── ntm_scalar_mean_structural_package.dot
-│   │   │   └── ntm_scalar_mean_structural_profile.dot
+│   │   ├── ntm_scalar_mean_function
+│   │   │   ├── ntm_scalar_mean_function_behavioral_activity.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_communication.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_interaction.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_sequence.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_state.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_timing.dot
+│   │   │   ├── ntm_scalar_mean_function_behavioral_use.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_class.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_component.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_composite.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_deployment.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_object.dot
+│   │   │   ├── ntm_scalar_mean_function_structural_package.dot
+│   │   │   └── ntm_scalar_mean_function_structural_profile.dot
 │   │   └── ntm_scalar_oneplus_function
 │   │       ├── ntm_scalar_oneplus_function_behavioral_activity.dot
 │   │       ├── ntm_scalar_oneplus_function_behavioral_communication.dot
@@ -699,21 +699,21 @@ library
 │   │       ├── ntm_scalar_oneplus_function_structural_package.dot
 │   │       └── ntm_scalar_oneplus_function_structural_profile.dot
 │   └── vector
-│       ├── ntm_vector_deviation
-│       │   ├── ntm_vector_deviation_behavioral_activity.dot
-│       │   ├── ntm_vector_deviation_behavioral_communication.dot
-│       │   ├── ntm_vector_deviation_behavioral_interaction.dot
-│       │   ├── ntm_vector_deviation_behavioral_sequence.dot
-│       │   ├── ntm_vector_deviation_behavioral_state.dot
-│       │   ├── ntm_vector_deviation_behavioral_timing.dot
-│       │   ├── ntm_vector_deviation_behavioral_use.dot
-│       │   ├── ntm_vector_deviation_structural_class.dot
-│       │   ├── ntm_vector_deviation_structural_component.dot
-│       │   ├── ntm_vector_deviation_structural_composite.dot
-│       │   ├── ntm_vector_deviation_structural_deployment.dot
-│       │   ├── ntm_vector_deviation_structural_object.dot
-│       │   ├── ntm_vector_deviation_structural_package.dot
-│       │   └── ntm_vector_deviation_structural_profile.dot
+│       ├── ntm_vector_deviation_function
+│       │   ├── ntm_vector_deviation_function_behavioral_activity.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_communication.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_interaction.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_sequence.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_state.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_timing.dot
+│       │   ├── ntm_vector_deviation_function_behavioral_use.dot
+│       │   ├── ntm_vector_deviation_function_structural_class.dot
+│       │   ├── ntm_vector_deviation_function_structural_component.dot
+│       │   ├── ntm_vector_deviation_function_structural_composite.dot
+│       │   ├── ntm_vector_deviation_function_structural_deployment.dot
+│       │   ├── ntm_vector_deviation_function_structural_object.dot
+│       │   ├── ntm_vector_deviation_function_structural_package.dot
+│       │   └── ntm_vector_deviation_function_structural_profile.dot
 │       ├── ntm_vector_logistic_function
 │       │   ├── ntm_vector_logistic_function_behavioral_activity.dot
 │       │   ├── ntm_vector_logistic_function_behavioral_communication.dot
@@ -729,21 +729,21 @@ library
 │       │   ├── ntm_vector_logistic_function_structural_object.dot
 │       │   ├── ntm_vector_logistic_function_structural_package.dot
 │       │   └── ntm_vector_logistic_function_structural_profile.dot
-│       ├── ntm_vector_mean
-│       │   ├── ntm_vector_mean_behavioral_activity.dot
-│       │   ├── ntm_vector_mean_behavioral_communication.dot
-│       │   ├── ntm_vector_mean_behavioral_interaction.dot
-│       │   ├── ntm_vector_mean_behavioral_sequence.dot
-│       │   ├── ntm_vector_mean_behavioral_state.dot
-│       │   ├── ntm_vector_mean_behavioral_timing.dot
-│       │   ├── ntm_vector_mean_behavioral_use.dot
-│       │   ├── ntm_vector_mean_structural_class.dot
-│       │   ├── ntm_vector_mean_structural_component.dot
-│       │   ├── ntm_vector_mean_structural_composite.dot
-│       │   ├── ntm_vector_mean_structural_deployment.dot
-│       │   ├── ntm_vector_mean_structural_object.dot
-│       │   ├── ntm_vector_mean_structural_package.dot
-│       │   └── ntm_vector_mean_structural_profile.dot
+│       ├── ntm_vector_mean_function
+│       │   ├── ntm_vector_mean_function_behavioral_activity.dot
+│       │   ├── ntm_vector_mean_function_behavioral_communication.dot
+│       │   ├── ntm_vector_mean_function_behavioral_interaction.dot
+│       │   ├── ntm_vector_mean_function_behavioral_sequence.dot
+│       │   ├── ntm_vector_mean_function_behavioral_state.dot
+│       │   ├── ntm_vector_mean_function_behavioral_timing.dot
+│       │   ├── ntm_vector_mean_function_behavioral_use.dot
+│       │   ├── ntm_vector_mean_function_structural_class.dot
+│       │   ├── ntm_vector_mean_function_structural_component.dot
+│       │   ├── ntm_vector_mean_function_structural_composite.dot
+│       │   ├── ntm_vector_mean_function_structural_deployment.dot
+│       │   ├── ntm_vector_mean_function_structural_object.dot
+│       │   ├── ntm_vector_mean_function_structural_package.dot
+│       │   └── ntm_vector_mean_function_structural_profile.dot
 │       └── ntm_vector_oneplus_function
 │           ├── ntm_vector_oneplus_function_behavioral_activity.dot
 │           ├── ntm_vector_oneplus_function_behavioral_communication.dot

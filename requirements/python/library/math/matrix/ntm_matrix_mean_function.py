@@ -44,11 +44,20 @@
 
 import numpy as np
 
-def ntm_scalar_mean(data_in):
-  data_out = 0.0
+def ntm_matrix_mean_function(data_in):
+
+  data_out = []
 
   # calculating mean
   for i in range(len(data_in)):
-    data_out += data_in[i]/len(data_in)
+    data_out.append([])
+
+    for j in range(len(data_in[i])):
+      temporal = 0.0
+
+      for k in range(len(data_in[i][j])):
+        temporal += data_in[i][j][k]/len(data_in[i][j])
+
+      data_out[i].append(temporal)
 
   return data_out

@@ -49,15 +49,15 @@ using namespace std;
 
 double ntm_scalar_logistic_function(double);
 double ntm_scalar_oneplus_function(double);
-double ntm_scalar_mean(vector<vector<double>>);
-double ntm_scalar_deviation(vector<vector<double>>, double);
+double ntm_scalar_mean_function(vector<vector<double>>);
+double ntm_scalar_deviation_function(vector<vector<double>>, double);
 
 vector<double> ntm_vector_logistic_function(vector<double>);
 vector<double> ntm_vector_oneplus_function(vector<double>);
-vector<double> ntm_vector_mean(vector<vector<double>>);
-vector<double> ntm_vector_deviation(vector<vector<double>>, vector<double>);
+vector<double> ntm_vector_mean_function(vector<vector<double>>);
+vector<double> ntm_vector_deviation_function(vector<vector<double>>, vector<double>);
 
 vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>>);
 vector<vector<double>> ntm_matrix_oneplus_function(vector<vector<double>>);
-vector<vector<double>> ntm_matrix_mean(vector<vector<vector<double>>>);
-vector<vector<double>> ntm_matrix_deviation(vector<vector<vector<double>>>, vector<vector<double>>);
+vector<vector<double>> ntm_matrix_mean_function(vector<vector<vector<double>>>);
+vector<vector<double>> ntm_matrix_deviation_function(vector<vector<vector<double>>>, vector<vector<double>>);

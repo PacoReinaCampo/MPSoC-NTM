@@ -68,6 +68,6 @@ func main() {
 
   fmt.Println("data_in:", data_in)
 
-  fmt.Println("mean: ", ScalarMath.ScalarMean(data_in))
-  fmt.Println("deviation: ", ScalarMath.ScalarDeviation(data_in))
+  fmt.Println("mean: ", ScalarMath.ScalarMeanFunction(data_in))
+  fmt.Println("deviation: ", ScalarMath.ScalarDeviationFunction(data_in))
   }

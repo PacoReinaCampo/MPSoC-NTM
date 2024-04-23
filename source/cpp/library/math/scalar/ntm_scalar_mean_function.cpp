@@ -42,21 +42,17 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_matrix_deviation(data_in: Vec<Vec<Vec<f64>>>, mean_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
-    let mut data_out: Vec<Vec<f64>> = vec![];
+#include<iostream>
+#include<vector>
 
-    for i in 0..data_in.len() {
-        let mut vector: Vec<f64> = vec![];
+using namespace std;
 
-        for j in 0..data_in[i].len() {
-            let mut temporal: f64 = 0.0;
+double ntm_scalar_mean_function(vector<double> data_in) {
+  double data_out = 0.0;
 
-            for k in 0..data_in[i][j].len() {
-                temporal += (data_in[i][j][k] - mean_in[i][j])*(data_in[i][j][k] - mean_in[i][j])/data_in[0][0].len() as f64;
-            }
-            vector.push(temporal.sqrt());
-        }
-        data_out.push(vector);
-    }
-    data_out
+  for(int i=0; i<data_in.size(); i++) {
+    data_out += data_in[i]/(double)data_in.size();
+  }
+
+  return data_out;
 }

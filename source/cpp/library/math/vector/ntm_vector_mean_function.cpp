@@ -42,11 +42,22 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub fn ntm_scalar_mean(data_in: Vec<f64>) -> f64 {
-    let mut data_out: f64 = 0.0;
+#include<iostream>
+#include<vector>
 
-    for i in 0..data_in.len() {
-        data_out += data_in[i]/data_in.len() as f64;
+using namespace std;
+
+vector<double> ntm_vector_mean_function(vector<vector<double>> matrix) {
+  vector<double> data_out;
+
+  for(int i=0; i<matrix.size(); i++) {
+    double temporal = 0.0;
+
+    for(int j=0; j<matrix[0].size(); j++) {
+      temporal += matrix[i][j]/(double)matrix[0].size();
     }
-    data_out
+    data_out.push_back(temporal);
+  }
+
+  return data_out;
 }

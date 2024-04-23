@@ -103,7 +103,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_math.ntm_matrix_mean (
+  ntm_matrix_math.ntm_matrix_mean_function (
     data_in => data_tensor_in,
 
     data_out => data_out
@@ -119,7 +119,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_math.ntm_matrix_deviation (
+  ntm_matrix_math.ntm_matrix_deviation_function (
     data_in => data_tensor_in,
 
     mean_in => mean_in,

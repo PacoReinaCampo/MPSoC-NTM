@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/transformer_neural_network/transformer_neural_network/application/fsm.sv
+../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/perceptron_neural_network/perceptron_neural_network/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/transformer_neural_network/transformer_neural_network/library/peripheral_testbench.sv
+../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/perceptron_neural_network/perceptron_neural_network/library/peripheral_testbench.sv

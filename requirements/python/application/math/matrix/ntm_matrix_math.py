@@ -65,7 +65,7 @@ class MatrixMath:
     # calculating oneplus
     return (ones + np.log(ones + np.exp(inputs)))
 
-  def ntm_matrix_mean(self):
+  def ntm_matrix_mean_function(self):
 
     data_out = []
 
@@ -83,7 +83,7 @@ class MatrixMath:
 
     return data_out
 
-  def ntm_matrix_deviation(self):
+  def ntm_matrix_deviation_function(self):
 
     data_out = []
 

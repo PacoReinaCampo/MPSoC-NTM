@@ -93,7 +93,7 @@ begin
 
   New_Line;
 
-  ntm_vector_math.ntm_vector_mean (
+  ntm_vector_math.ntm_vector_mean_function (
     data_in => data_matrix_in,
 
     data_out => data_out
@@ -107,7 +107,7 @@ begin
 
   New_Line;
 
-  ntm_vector_math.ntm_vector_deviation (
+  ntm_vector_math.ntm_vector_deviation_function (
     data_in => data_matrix_in,
 
     mean_in => mean_in,

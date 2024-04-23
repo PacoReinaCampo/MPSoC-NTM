@@ -46,8 +46,8 @@ import numpy as np
 
 from matrix import ntm_matrix_logistic_function as matrix_logistic_function
 from matrix import ntm_matrix_oneplus_function as matrix_oneplus_function
-from matrix import ntm_matrix_mean as matrix_mean
-from matrix import ntm_matrix_deviation as matrix_deviation
+from matrix import ntm_matrix_mean_function as matrix_mean
+from matrix import ntm_matrix_deviation_function as matrix_deviation
 
 def test_matrix_logistic_function():
 
@@ -69,14 +69,14 @@ def test_matrix_mean():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(matrix_mean.ntm_matrix_mean(data_in), matrix_mean.ntm_matrix_mean(data_in))
+  np.testing.assert_array_equal(matrix_mean.ntm_matrix_mean_function(data_in), matrix_mean.ntm_matrix_mean_function(data_in))
 
 def test_matrix_deviation():
 
   data_in = np.random.rand(3,3,3)
   mean_in = np.zeros((3,3))
 
-  np.testing.assert_array_equal(matrix_deviation.ntm_matrix_deviation(data_in, mean_in), matrix_deviation.ntm_matrix_deviation(data_in, mean_in))
+  np.testing.assert_array_equal(matrix_deviation.ntm_matrix_deviation_function(data_in, mean_in), matrix_deviation.ntm_matrix_deviation_function(data_in, mean_in))
 
 
 test_matrix_logistic_function()

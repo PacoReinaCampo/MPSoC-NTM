@@ -54,4 +54,4 @@ LENGTH_IN = 3;
 DATA_IN = rand(LENGTH_IN, 1);
 
 # DUT
-assert(ntm_scalar_deviation(DATA_IN, mean(DATA_IN)), std(DATA_IN));
+assert(ntm_scalar_deviation_function(DATA_IN, mean(DATA_IN)), std(DATA_IN));

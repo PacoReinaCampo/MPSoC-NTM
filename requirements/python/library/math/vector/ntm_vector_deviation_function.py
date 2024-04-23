@@ -44,7 +44,7 @@
 
 import numpy as np
 
-def ntm_vector_deviation(data_in, mean_in):
+def ntm_vector_deviation_function(data_in, mean_in):
   data_out = []
 
   # calculating deviation

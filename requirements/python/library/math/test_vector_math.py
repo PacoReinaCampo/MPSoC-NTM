@@ -46,8 +46,8 @@ import numpy as np
 
 from vector import ntm_vector_logistic_function as vector_logistic_function
 from vector import ntm_vector_oneplus_function as vector_oneplus_function
-from vector import ntm_vector_mean as vector_mean
-from vector import ntm_vector_deviation as vector_deviation
+from vector import ntm_vector_mean_function as vector_mean
+from vector import ntm_vector_deviation_function as vector_deviation
 
 def test_vector_logistic_function():
 
@@ -69,14 +69,14 @@ def test_vector_mean():
 
   data_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(vector_mean.ntm_vector_mean(data_in), vector_mean.ntm_vector_mean(data_in))
+  np.testing.assert_array_equal(vector_mean.ntm_vector_mean_function(data_in), vector_mean.ntm_vector_mean_function(data_in))
 
 def test_vector_deviation():
 
   data_in = np.random.rand(3,3)
   mean_in = np.zeros(3)
 
-  np.testing.assert_array_equal(vector_deviation.ntm_vector_deviation(data_in, mean_in), vector_deviation.ntm_vector_deviation(data_in, mean_in))
+  np.testing.assert_array_equal(vector_deviation.ntm_vector_deviation_function(data_in, mean_in), vector_deviation.ntm_vector_deviation_function(data_in, mean_in))
 
 
 test_vector_logistic_function()

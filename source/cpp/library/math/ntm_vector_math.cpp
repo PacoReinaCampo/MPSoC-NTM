@@ -53,8 +53,8 @@ class VectorMath {
   public:
     vector<double> ntm_vector_logistic_function(vector<double> data_in);
     vector<double> ntm_vector_oneplus_function(vector<double> data_in);
-    vector<double> ntm_vector_mean(vector<vector<double>> data_in);
-    vector<double> ntm_vector_deviation(vector<vector<double>> data_in, vector<double> mean);
+    vector<double> ntm_vector_mean_function(vector<vector<double>> data_in);
+    vector<double> ntm_vector_deviation_function(vector<vector<double>> data_in, vector<double> mean);
 };
 
 vector<double> VectorMath::ntm_vector_logistic_function(vector<double> data_in) {
@@ -89,7 +89,7 @@ vector<double> VectorMath::ntm_vector_oneplus_function(vector<double> data_in) {
   return data_out;
 }
 
-vector<double> VectorMath::ntm_vector_mean(vector<vector<double>> data_in) {
+vector<double> VectorMath::ntm_vector_mean_function(vector<vector<double>> data_in) {
   vector<double> data_out;
 
   for(int i=0; i<data_in.size(); i++) {
@@ -104,7 +104,7 @@ vector<double> VectorMath::ntm_vector_mean(vector<vector<double>> data_in) {
   return data_out;
 }
 
-vector<double> VectorMath::ntm_vector_deviation(vector<vector<double>> data_in, vector<double> mean) {
+vector<double> VectorMath::ntm_vector_deviation_function(vector<vector<double>> data_in, vector<double> mean) {
   vector<double> data_out;
 
   for(int i=0; i<data_in.size(); i++) {
@@ -164,11 +164,11 @@ int main() {
   vector<double> deviation_data_out_0{8.679477710861024, 11.372481406154654, 6.879922480183431};
   vector<double> deviation_data_out_1{9.678154093971983, 10.677078252031311, 11.67618659209133};
 
-  assert(Math.ntm_vector_mean(mean_data_in_0) == mean_data_out_0);
-  assert(Math.ntm_vector_mean(mean_data_in_1) == mean_data_out_1);
+  assert(Math.ntm_vector_mean_function(mean_data_in_0) == mean_data_out_0);
+  assert(Math.ntm_vector_mean_function(mean_data_in_1) == mean_data_out_1);
 
-  assert(Math.ntm_vector_deviation(deviation_data_in_0, mean_0) == deviation_data_out_0);
-  assert(Math.ntm_vector_deviation(deviation_data_in_1, mean_1) == deviation_data_out_1);
+  assert(Math.ntm_vector_deviation_function(deviation_data_in_0, mean_0) == deviation_data_out_0);
+  assert(Math.ntm_vector_deviation_function(deviation_data_in_1, mean_1) == deviation_data_out_1);
 
   return 0;
 }

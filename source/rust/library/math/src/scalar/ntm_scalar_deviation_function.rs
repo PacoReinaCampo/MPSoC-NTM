@@ -42,17 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+pub fn ntm_scalar_deviation_function(data_in: Vec<f64>, mean_in: f64) -> f64 {
+    let mut data_out: f64 = 0.0;
 
-using namespace std;
-
-double ntm_scalar_mean(vector<double> data_in) {
-  double data_out = 0.0;
-
-  for(int i=0; i<data_in.size(); i++) {
-    data_out += data_in[i]/(double)data_in.size();
-  }
-
-  return data_out;
+    for i in 0..data_in.len() {
+        data_out += (data_in[i] - mean_in)*(data_in[i] - mean_in)/data_in.len() as f64;
+    }
+    data_out.sqrt()
 }

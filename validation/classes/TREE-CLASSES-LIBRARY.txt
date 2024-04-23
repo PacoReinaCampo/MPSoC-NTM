@@ -611,7 +611,7 @@ library
 │           └── ntm_transaction.sv
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation
+│   │   ├── ntm_matrix_deviation_function
 │   │   │   ├── ntm_agent.sv
 │   │   │   ├── ntm_driver.sv
 │   │   │   ├── ntm_environment.sv
@@ -635,7 +635,7 @@ library
 │   │   │   ├── ntm_testbench.sv
 │   │   │   ├── ntm_test.sv
 │   │   │   └── ntm_transaction.sv
-│   │   ├── ntm_matrix_mean
+│   │   ├── ntm_matrix_mean_function
 │   │   │   ├── ntm_agent.sv
 │   │   │   ├── ntm_driver.sv
 │   │   │   ├── ntm_environment.sv
@@ -660,7 +660,7 @@ library
 │   │       ├── ntm_test.sv
 │   │       └── ntm_transaction.sv
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation
+│   │   ├── ntm_scalar_deviation_function
 │   │   │   ├── ntm_agent.sv
 │   │   │   ├── ntm_driver.sv
 │   │   │   ├── ntm_environment.sv
@@ -684,7 +684,7 @@ library
 │   │   │   ├── ntm_testbench.sv
 │   │   │   ├── ntm_test.sv
 │   │   │   └── ntm_transaction.sv
-│   │   ├── ntm_scalar_mean
+│   │   ├── ntm_scalar_mean_function
 │   │   │   ├── ntm_agent.sv
 │   │   │   ├── ntm_driver.sv
 │   │   │   ├── ntm_environment.sv
@@ -709,7 +709,7 @@ library
 │   │       ├── ntm_test.sv
 │   │       └── ntm_transaction.sv
 │   └── vector
-│       ├── ntm_vector_deviation
+│       ├── ntm_vector_deviation_function
 │       │   ├── ntm_agent.sv
 │       │   ├── ntm_driver.sv
 │       │   ├── ntm_environment.sv
@@ -733,7 +733,7 @@ library
 │       │   ├── ntm_testbench.sv
 │       │   ├── ntm_test.sv
 │       │   └── ntm_transaction.sv
-│       ├── ntm_vector_mean
+│       ├── ntm_vector_mean_function
 │       │   ├── ntm_agent.sv
 │       │   ├── ntm_driver.sv
 │       │   ├── ntm_environment.sv

@@ -185,15 +185,15 @@ library
 │           └── ntm_vector_subtractor_testbench.cpp
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation.cpp
-│   │   ├── ntm_matrix_deviation_design.cpp
-│   │   ├── ntm_matrix_deviation_testbench.cpp
+│   │   ├── ntm_matrix_deviation_function.cpp
+│   │   ├── ntm_matrix_deviation_function_design.cpp
+│   │   ├── ntm_matrix_deviation_function_testbench.cpp
 │   │   ├── ntm_matrix_logistic_function.cpp
 │   │   ├── ntm_matrix_logistic_function_design.cpp
 │   │   ├── ntm_matrix_logistic_function_testbench.cpp
-│   │   ├── ntm_matrix_mean.cpp
-│   │   ├── ntm_matrix_mean_design.cpp
-│   │   ├── ntm_matrix_mean_testbench.cpp
+│   │   ├── ntm_matrix_mean_function.cpp
+│   │   ├── ntm_matrix_mean_function_design.cpp
+│   │   ├── ntm_matrix_mean_function_testbench.cpp
 │   │   ├── ntm_matrix_oneplus_function.cpp
 │   │   ├── ntm_matrix_oneplus_function_design.cpp
 │   │   └── ntm_matrix_oneplus_function_testbench.cpp
@@ -201,28 +201,28 @@ library
 │   ├── ntm_scalar_math.cpp
 │   ├── ntm_vector_math.cpp
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation.cpp
-│   │   ├── ntm_scalar_deviation_design.cpp
-│   │   ├── ntm_scalar_deviation_testbench.cpp
+│   │   ├── ntm_scalar_deviation_function.cpp
+│   │   ├── ntm_scalar_deviation_function_design.cpp
+│   │   ├── ntm_scalar_deviation_function_testbench.cpp
 │   │   ├── ntm_scalar_logistic_function.cpp
 │   │   ├── ntm_scalar_logistic_function_design.cpp
 │   │   ├── ntm_scalar_logistic_function_testbench.cpp
-│   │   ├── ntm_scalar_mean.cpp
-│   │   ├── ntm_scalar_mean_design.cpp
-│   │   ├── ntm_scalar_mean_testbench.cpp
+│   │   ├── ntm_scalar_mean_function.cpp
+│   │   ├── ntm_scalar_mean_function_design.cpp
+│   │   ├── ntm_scalar_mean_function_testbench.cpp
 │   │   ├── ntm_scalar_oneplus_function.cpp
 │   │   ├── ntm_scalar_oneplus_function_design.cpp
 │   │   └── ntm_scalar_oneplus_function_testbench.cpp
 │   └── vector
-│       ├── ntm_vector_deviation.cpp
-│       ├── ntm_vector_deviation_design.cpp
-│       ├── ntm_vector_deviation_testbench.cpp
+│       ├── ntm_vector_deviation_function.cpp
+│       ├── ntm_vector_deviation_function_design.cpp
+│       ├── ntm_vector_deviation_function_testbench.cpp
 │       ├── ntm_vector_logistic_function.cpp
 │       ├── ntm_vector_logistic_function_design.cpp
 │       ├── ntm_vector_logistic_function_testbench.cpp
-│       ├── ntm_vector_mean.cpp
-│       ├── ntm_vector_mean_design.cpp
-│       ├── ntm_vector_mean_testbench.cpp
+│       ├── ntm_vector_mean_function.cpp
+│       ├── ntm_vector_mean_function_design.cpp
+│       ├── ntm_vector_mean_function_testbench.cpp
 │       ├── ntm_vector_oneplus_function.cpp
 │       ├── ntm_vector_oneplus_function_design.cpp
 │       └── ntm_vector_oneplus_function_testbench.cpp

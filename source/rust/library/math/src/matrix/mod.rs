@@ -44,5 +44,5 @@
 
 pub mod ntm_matrix_logistic_function;
 pub mod ntm_matrix_oneplus_function;
-pub mod ntm_matrix_mean;
-pub mod ntm_matrix_deviation;
+pub mod ntm_matrix_mean_function;
+pub mod ntm_matrix_deviation_function;

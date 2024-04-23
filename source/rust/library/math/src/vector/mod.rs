@@ -44,5 +44,5 @@
 
 pub mod ntm_vector_logistic_function;
 pub mod ntm_vector_oneplus_function;
-pub mod ntm_vector_mean;
-pub mod ntm_vector_deviation;
+pub mod ntm_vector_mean_function;
+pub mod ntm_vector_deviation_function;

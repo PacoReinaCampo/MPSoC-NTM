@@ -90,9 +90,9 @@ SOURCES_MATH =		../../../library/math/algebra/ntm_math_algebra.hpp \
 			../../../library/math/function/scalar/ntm_scalar_oneplus_function.cpp \
 			../../../library/math/function/vector/ntm_vector_logistic_function.cpp \
 			../../../library/math/function/vector/ntm_vector_oneplus_function.cpp \
-			../../../library/math/statitics/matrix/ntm_matrix_deviation.cpp \
-			../../../library/math/statitics/matrix/ntm_matrix_mean.cpp \
-			../../../library/math/statitics/scalar/ntm_scalar_deviation.cpp \
-			../../../library/math/statitics/scalar/ntm_scalar_mean.cpp \
-			../../../library/math/statitics/vector/ntm_vector_deviation.cpp \
-			../../../library/math/statitics/vector/ntm_vector_mean.cpp
+			../../../library/math/statitics/matrix/ntm_matrix_deviation_function.cpp \
+			../../../library/math/statitics/matrix/ntm_matrix_mean_function.cpp \
+			../../../library/math/statitics/scalar/ntm_scalar_deviation_function.cpp \
+			../../../library/math/statitics/scalar/ntm_scalar_mean_function.cpp \
+			../../../library/math/statitics/vector/ntm_vector_deviation_function.cpp \
+			../../../library/math/statitics/vector/ntm_vector_mean_function.cpp

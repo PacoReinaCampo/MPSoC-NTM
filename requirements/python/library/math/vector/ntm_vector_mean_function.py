@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2020-2024 by the author(s)                                      ##
+## Copyright (c) 2022-2023 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,19 +42,18 @@
 ##                                                                               ##
 ###################################################################################
 
-function DATA_OUT = ntm_vector_mean(DATA_IN)
-  # Constants
-  [SIZE_IN, LENGTH_IN] = size(DATA_IN);
+import numpy as np
 
-  # Signals
-  DATA_OUT = zeros(SIZE_IN, 1);
+def ntm_vector_mean_function(data_in):
+  data_out = []
 
-  # Body
-  for i = 1:SIZE_IN
-    for m = 1:LENGTH_IN
-      DATA_OUT(i) = DATA_OUT(i) + DATA_IN(i, m);
-    end
-  end
+  # calculating mean
+  for i in range(len(data_in)):
+    temporal = 0.0
 
-  DATA_OUT = DATA_OUT/LENGTH_IN;
-end
+    for j in range(len(data_in[i])):
+      temporal += data_in[i][j]/len(data_in[i])
+
+    data_out.append(temporal)
+
+  return data_out

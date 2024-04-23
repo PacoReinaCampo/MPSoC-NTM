@@ -73,7 +73,7 @@ package body ntm_scalar_math is
     data_out := ONE + log(ONE + exp(data_in));
   end ntm_scalar_oneplus_function;
 
-  procedure ntm_scalar_mean (
+  procedure ntm_scalar_mean_function (
     data_in : in vector;
     
     data_out : out float
@@ -86,9 +86,9 @@ package body ntm_scalar_math is
       data_out := data_out + data_in(i) / float(data_in'Length);
     end loop;
 
-  end ntm_scalar_mean;
+  end ntm_scalar_mean_function;
 
-  procedure ntm_scalar_deviation (
+  procedure ntm_scalar_deviation_function (
     data_in : in vector;
     mean_in : in float;
     
@@ -102,6 +102,6 @@ package body ntm_scalar_math is
       data_out := data_out + (data_in(i) - mean_in) * (data_in(i) - mean_in) / float(data_in'Length-1);
     end loop;
 
-  end ntm_scalar_deviation;
+  end ntm_scalar_deviation_function;
 
 end ntm_scalar_math;

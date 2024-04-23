@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,22 +42,19 @@
 ##                                                                               ##
 ###################################################################################
 
-import numpy as np
+function DATA_OUT = ntm_vector_deviation_function(DATA_IN, MEAN_IN)
+  # Constants
+  [SIZE_IN, LENGTH_IN] = size(DATA_IN);
 
-def ntm_matrix_deviation(data_in, mean_in):
+  # Signals
+  DATA_OUT = zeros(SIZE_IN, 1);
 
-  data_out = []
+  # Body
+  for i = 1:SIZE_IN
+    for m = 1:LENGTH_IN
+      DATA_OUT(i) = DATA_OUT(i) + (DATA_IN(i, m) - MEAN_IN(i))^2/(LENGTH_IN-1);
+    end
+  end
 
-  # calculating deviation
-  for i in range(len(data_in)):
-    data_out.append([])
-
-    for j in range(len(data_in[i])):
-      temporal = 0.0
-
-      for k in range(len(data_in[i][j])):
-        temporal += (data_in[i][j][k] - mean_in[i][j]) * (data_in[i][j][k] - mean_in[i][j]) / len(data_in[i][j])
-
-      data_out[i].append(temporal)
-
-  return data_out
+  DATA_OUT = sqrt(DATA_OUT);
+end

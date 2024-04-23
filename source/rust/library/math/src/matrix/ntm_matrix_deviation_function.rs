@@ -42,23 +42,21 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+pub fn ntm_matrix_deviation_function(data_in: Vec<Vec<Vec<f64>>>, mean_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+    let mut data_out: Vec<Vec<f64>> = vec![];
 
-using namespace std;
+    for i in 0..data_in.len() {
+        let mut vector: Vec<f64> = vec![];
 
-vector<double> ntm_vector_deviation(vector<vector<double>> matrix, vector<double> mean) {
-  vector<double> data_out;
+        for j in 0..data_in[i].len() {
+            let mut temporal: f64 = 0.0;
 
-  for(int i=0; i<matrix.size(); i++) {
-    double temporal = 0.0;
-
-    for(int j=0; j<matrix[0].size(); j++) {
-      temporal += (matrix[i][j] - mean[i])*(matrix[i][j] - mean[i])/(double)matrix[0].size();
+            for k in 0..data_in[i][j].len() {
+                temporal += (data_in[i][j][k] - mean_in[i][j])*(data_in[i][j][k] - mean_in[i][j])/data_in[0][0].len() as f64;
+            }
+            vector.push(temporal.sqrt());
+        }
+        data_out.push(vector);
     }
-    data_out.push_back(sqrt(temporal));
-  }
-
-  return data_out;
+    data_out
 }

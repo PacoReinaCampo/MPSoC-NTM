@@ -46,8 +46,8 @@ extern crate math;
 
 use math::matrix::ntm_matrix_logistic_function::*;
 use math::matrix::ntm_matrix_oneplus_function::*;
-use math::matrix::ntm_matrix_mean::*;
-use math::matrix::ntm_matrix_deviation::*;
+use math::matrix::ntm_matrix_mean_function::*;
+use math::matrix::ntm_matrix_deviation_function::*;
 
 fn main() {
     let mut data_in: Vec<Vec<f64>>;
@@ -134,8 +134,8 @@ fn main() {
         vec![0.6666666666666666, 2.333333333333333, 3.3333333333333335]
     ];
 
-    assert_eq!(ntm_matrix_mean(data_in_0), data_out_0);
-    assert_eq!(ntm_matrix_mean(data_in_1), data_out_1);
+    assert_eq!(ntm_matrix_mean_function(data_in_0), data_out_0);
+    assert_eq!(ntm_matrix_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![
         vec![
@@ -194,6 +194,6 @@ fn main() {
         vec![11.67618659209133, 9.678154093971983, 10.677078252031311]
     ];
 
-    assert_eq!(ntm_matrix_deviation(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_matrix_deviation(data_in_1, mean_1), data_out_1);
+    assert_eq!(ntm_matrix_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(ntm_matrix_deviation_function(data_in_1, mean_1), data_out_1);
 }

@@ -107,7 +107,7 @@ int main() {
     { 2.333333333333333, 0.6666666666666666, 3.3333333333333335 }
   };
 
-  assert(ntm_matrix_mean(data_in) == data_out);
+  assert(ntm_matrix_mean_function(data_in) == data_out);
 
   data_out = {
     { 8.679477710861024, 11.372481406154654, 6.879922480183431 },
@@ -115,7 +115,7 @@ int main() {
     { 8.679477710861024, 11.372481406154654, 6.879922480183431 }
   };
 
-  assert(ntm_matrix_deviation(data_in, mean) == data_out);
+  assert(ntm_matrix_deviation_function(data_in, mean) == data_out);
 
   return 0;
 }

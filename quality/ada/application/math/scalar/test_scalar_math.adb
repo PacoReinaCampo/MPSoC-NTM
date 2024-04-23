@@ -89,7 +89,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_math.ntm_scalar_mean (
+  ntm_scalar_math.ntm_scalar_mean_function (
     data_in => data_vector_in,
 
     data_out => data_out
@@ -101,7 +101,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_math.ntm_scalar_deviation (
+  ntm_scalar_math.ntm_scalar_deviation_function (
     data_in => data_vector_in,
     mean_in => mean_in,
 

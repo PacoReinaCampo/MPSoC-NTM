@@ -73,11 +73,11 @@ int main() {
 
   data_out = {2.0, 1.0, 4.0};
 
-  assert(ntm_vector_mean(data_in) == data_out);
+  assert(ntm_vector_mean_function(data_in) == data_out);
 
   data_out = {8.679477710861024, 11.372481406154654, 6.879922480183431};
 
-  assert(ntm_vector_deviation(data_in, mean) == data_out);
+  assert(ntm_vector_deviation_function(data_in, mean) == data_out);
 
   return 0;
 }

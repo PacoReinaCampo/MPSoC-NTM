@@ -46,8 +46,8 @@ extern crate math;
 
 use math::vector::ntm_vector_logistic_function::*;
 use math::vector::ntm_vector_oneplus_function::*;
-use math::vector::ntm_vector_mean::*;
-use math::vector::ntm_vector_deviation::*;
+use math::vector::ntm_vector_mean_function::*;
+use math::vector::ntm_vector_deviation_function::*;
 
 fn main() {
     let mut data_in_0: Vec<f64>;
@@ -94,8 +94,8 @@ fn main() {
     data_out_0 = vec![2.0, 1.0, 4.0];
     data_out_1 = vec![1.0, 1.0, 1.0];
 
-    assert_eq!(ntm_vector_mean(data_in_0), data_out_0);
-    assert_eq!(ntm_vector_mean(data_in_1), data_out_1);
+    assert_eq!(ntm_vector_mean_function(data_in_0), data_out_0);
+    assert_eq!(ntm_vector_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![
         vec![3.0, 2.0, 2.0],
@@ -114,6 +114,6 @@ fn main() {
     data_out_0 = vec![8.679477710861024, 11.372481406154654, 6.879922480183431];
     data_out_1 = vec![9.678154093971983, 10.677078252031311, 11.67618659209133];
 
-    assert_eq!(ntm_vector_deviation(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_vector_deviation(data_in_1, mean_1), data_out_1);
+    assert_eq!(ntm_vector_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(ntm_vector_deviation_function(data_in_1, mean_1), data_out_1);
 }
