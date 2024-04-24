@@ -16,7 +16,7 @@
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2022-2023 by the author(s)                                      ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -42,4 +42,41 @@
 ##                                                                               ##
 ###################################################################################
 
-print('Hello, world!')
+import numpy as np
+
+def ntm_controller(w_in, k_in, v_in, d_in, u_in, b_in, r_in, xi_in, rho_in, h_in, x_in):
+  # Body
+  # h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + D(i;l;m)*rho(t;i;m) + V(l;s)*xi(t;s) + U(l;l)*h(t-1;l) + b(l))
+
+  # W(l;x)*x(t;x)
+  vector_first_operation_int = ntm_matrix_vector_convolution(w_in, x_in)
+
+  # K(i;l;k)*r(t;i;k)
+  r_int = ntm_tensor_matrix_convolution(k_in, r_in)
+
+  for l in range(len(h_in)):
+    for i in range(len(rho_in)):
+      vector_first_operation_int[l] = vector_first_operation_int[l] + r_int[i][l]
+
+  # D(i;l;m)*rho(t;i;m)
+  rho_int = ntm_tensor_matrix_convolution(d_in, rho_in)
+
+  for l in range(len(h_in)):
+    for i in range(len(rho_in)):
+      vector_first_operation_int[l] = vector_first_operation_int[l] + rho_int[i][l]
+
+  # V(l;s)*xi(t;s)
+  vector_second_operation_int = ntm_matrix_vector_convolution(v_in, xi_in)
+  vector_second_operation_int = vector_second_operation_int + vector_first_operation_int
+
+  # U(l;l)*h(t-1;l)
+  vector_first_operation_int = ntm_matrix_vector_convolution(u_in, h_in)
+  vector_first_operation_int = vector_first_operation_int + vector_second_operation_int
+
+  # b(l)
+  vector_second_operation_int = vector_first_operation_int + b_in
+
+  # sigmoid(.)
+  h_out = ntm_vector_logistic_function(vector_second_operation_int)
+
+  return h_out

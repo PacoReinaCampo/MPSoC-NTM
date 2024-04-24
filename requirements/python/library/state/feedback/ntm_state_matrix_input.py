@@ -42,6 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
+import numpy as np
+
 def ntm_state_matrix_input(data_k_in, data_b_in, data_d_in):
   # Package
 

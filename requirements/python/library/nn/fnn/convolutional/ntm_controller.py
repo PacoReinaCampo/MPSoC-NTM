@@ -77,6 +77,6 @@ def ntm_controller(w_in, k_in, v_in, d_in, u_in, b_in, r_in, xi_in, rho_in, h_in
   vector_second_operation_int = vector_first_operation_int + b_in
 
   # sigmoid(.)
-  h_OUT = ntm_vector_logistic_function(vector_second_operation_int)
+  h_out = ntm_vector_logistic_function(vector_second_operation_int)
 
-  return h_OUT
+  return h_out

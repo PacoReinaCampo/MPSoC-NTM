@@ -42,6 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
+import numpy as np
+
 def ntm_state_matrix_output(data_k_in, data_c_in, data_d_in):
   # Package
 
@@ -63,4 +65,4 @@ def ntm_state_matrix_output(data_k_in, data_c_in, data_d_in):
 
   data_c_out = ntm_matrix_product(matrix_operation_int, data_c_in)
 
-  return data_c_out;
+  return data_c_out

@@ -42,6 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
+import numpy as np
+
 def ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k):
   # Package
 

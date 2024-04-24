@@ -42,23 +42,108 @@
 ##                                                                               ##
 ###################################################################################
 
-def data_d_out = ntm_state_matrix_feedforward(data_k_in, data_d_in)
+import numpy as np
+
+def ntm_state_matrix_feedforward(data_k_in, data_d_in):
   # Package
 
   # Constants
   # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
   # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
 
-  [SIZE_D_I_IN, SIZE_D_J_IN] = size(data_d_in);
+  SIZE_D_I_IN, SIZE_D_J_IN = data_d_in.shape
+
+  ntm_matrix_eye = np.eye(SIZE_D_I_IN)
 
   # Body
   # d = inv(I + D·K)·D
-  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in);
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
 
-  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye(SIZE_D_I_IN, SIZE_D_J_IN), matrix_operation_int);
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
 
-  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int);
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
 
-  data_d_out = ntm_matrix_product(matrix_operation_int, data_d_in);
+  data_d_out = ntm_matrix_product(matrix_operation_int, data_d_in)
 
-  return data_d_out;
+  return data_d_out
+
+def ntm_state_matrix_input(data_k_in, data_b_in, data_d_in):
+  # Package
+
+  # Constants
+  # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
+  SIZE_D_I_IN, SIZE_D_J_IN = data_d_in.shape
+
+  ntm_matrix_eye = np.eye(SIZE_D_I_IN)
+
+  # Body
+  # b = B·(I-K·inv(I + D·K)·D)
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
+
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_product(matrix_operation_int, data_d_in)
+
+  matrix_operation_int = ntm_matrix_product(data_k_in, matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_substractor(ntm_matrix_eye, matrix_operation_int)
+
+  data_b_out = ntm_matrix_product(data_b_in, matrix_operation_int)
+
+  return data_b_out
+
+def ntm_state_matrix_output(data_k_in, data_c_in, data_d_in):
+  # Package
+
+  # Constants
+  # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
+  SIZE_D_I_IN, SIZE_D_J_IN = data_d_in.shape
+
+  ntm_matrix_eye = np.eye(SIZE_D_I_IN)
+
+  # Body
+  # c = inv(I + D·K)·C
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
+
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
+
+  data_c_out = ntm_matrix_product(matrix_operation_int, data_c_in)
+
+  return data_c_out
+
+def ntm_state_matrix_state(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in):
+  # Package
+
+  # Constants
+  # SIZE: A[N,N]; B[N,P]; C[Q,N]; D[Q,P];
+  # SIZE: K[P,P]; x[N,1]; y[Q,1]; u[P,1];
+
+  SIZE_D_I_IN, SIZE_D_J_IN = data_d_in.shape
+
+  ntm_matrix_eye = np.eye(SIZE_D_I_IN)
+
+  # Body
+  # a = A-B·K·inv(I + D·K)·C
+  matrix_operation_int = ntm_matrix_product(data_d_in, data_k_in)
+
+  matrix_operation_int = ntm_matrix_adder(ntm_matrix_eye, matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_inverse(matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_product(matrix_operation_int, data_c_in)
+
+  matrix_operation_int = ntm_matrix_product(data_k_in, matrix_operation_int)
+
+  matrix_operation_int = ntm_matrix_product(data_b_in, matrix_operation_int)
+
+  data_a_out = ntm_matrix_adder(data_a_in, matrix_operation_int)
+
+  return data_a_out
