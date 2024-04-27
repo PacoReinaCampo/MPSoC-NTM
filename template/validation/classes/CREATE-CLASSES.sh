@@ -268,6 +268,16 @@ touch code/computing/information/pushdown_automaton/pushdown_automaton/library/s
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/switch_item.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/testbench.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/test.sv
+touch code/computing/information/turing_machine/turing_machine/application/switch.sv
+touch code/computing/information/turing_machine/turing_machine/library/driver.sv
+touch code/computing/information/turing_machine/turing_machine/library/environment.sv
+touch code/computing/information/turing_machine/turing_machine/library/generator.sv
+touch code/computing/information/turing_machine/turing_machine/library/monitor.sv
+touch code/computing/information/turing_machine/turing_machine/library/scoreboard.sv
+touch code/computing/information/turing_machine/turing_machine/library/switch_if.sv
+touch code/computing/information/turing_machine/turing_machine/library/switch_item.sv
+touch code/computing/information/turing_machine/turing_machine/library/testbench.sv
+touch code/computing/information/turing_machine/turing_machine/library/test.sv
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/application/switch.sv
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/library/driver.sv
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/library/environment.sv

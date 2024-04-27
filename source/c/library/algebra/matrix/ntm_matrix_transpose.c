@@ -44,12 +44,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+
+#include "../ntm_algebra.h"
 
 #define SIZE_I_IN 3
 #define SIZE_J_IN 3
 
-double ntm_matrix_inverse(double **data_in) {
+double ntm_matrix_transpose(double **data_in) {
   double **data_out;
 
   int i, j;

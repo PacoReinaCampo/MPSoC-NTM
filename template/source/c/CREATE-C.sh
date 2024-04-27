@@ -43,6 +43,8 @@ touch code/computing/information/logic_gate/xor_gate.c
 touch code/computing/information/logic_gate/yes_gate.c
 touch code/computing/information/pushdown_automaton
 touch code/computing/information/pushdown_automaton/pushdown_automaton.c
+touch code/computing/information/turing_machine
+touch code/computing/information/turing_machine/turing_machine.c
 touch code/computing/neural_network
 touch code/computing/neural_network/attention_neural_network
 touch code/computing/neural_network/attention_neural_network/attention_neural_network.c
@@ -56,4 +58,4 @@ touch code/computing/neural_network/neural_turing_machine_neural_network
 touch code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network.c
 touch code/computing/neural_network/perceptron_neural_network
 touch code/computing/neural_network/perceptron_neural_network/perceptron_neural_network.c
-touch 25 directories, 33 files
+touch 26 directories, 34 files

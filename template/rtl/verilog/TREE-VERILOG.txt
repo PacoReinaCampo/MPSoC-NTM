@@ -50,8 +50,10 @@ code
 │   │   │   ├── true_gate.sv
 │   │   │   ├── xnor_gate.sv
 │   │   │   └── xor_gate.sv
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.sv
+│   │   ├── pushdown_automaton
+│   │   │   └── pushdown_automaton.sv
+│   │   └── turing_machine
+│   │       └── turing_machine.sv
 │   └── neural_network
 │       ├── attention_neural_network
 │       │   └── attention_neural_network.sv
@@ -73,4 +75,4 @@ code
     └── computing
         └── state_pkg.sv
 
-28 directories, 45 files
+29 directories, 46 files

@@ -50,8 +50,10 @@ code
 │   │   │   ├── true_gate.vhd
 │   │   │   ├── xnor_gate.vhd
 │   │   │   └── xor_gate.vhd
-│   │   └── pushdown_automaton
-│   │       └── pushdown_automaton.vhd
+│   │   ├── pushdown_automaton
+│   │   │   └── pushdown_automaton.vhd
+│   │   └── turing_machine
+│   │       └── turing_machine.vhd
 │   └── neural_network
 │       ├── attention_neural_network
 │       │   └── attention_neural_network.vhd
@@ -78,4 +80,4 @@ code
         ├── math_real-body.vhd
         └── math_real.vhd
 
-29 directories, 49 files
+30 directories, 50 files

@@ -224,8 +224,17 @@ code
     │   │           ├── ntm_model_pkg.vhd
     │   │           ├── ntm_model.vhd
     │   │           └── ntm_testbench.vhd
-    │   └── pushdown_automaton
-    │       └── pushdown_automaton
+    │   ├── pushdown_automaton
+    │   │   └── pushdown_automaton
+    │   │       ├── application
+    │   │       │   ├── ntm_design_pkg.vhd
+    │   │       │   └── ntm_design.vhd
+    │   │       └── library
+    │   │           ├── ntm_model_pkg.vhd
+    │   │           ├── ntm_model.vhd
+    │   │           └── ntm_testbench.vhd
+    │   └── turing_machine
+    │       └── turing_machine
     │           ├── application
     │           │   ├── ntm_design_pkg.vhd
     │           │   └── ntm_design.vhd
@@ -289,4 +298,4 @@ code
                     ├── ntm_model.vhd
                     └── ntm_testbench.vhd
 
-124 directories, 165 files
+128 directories, 170 files

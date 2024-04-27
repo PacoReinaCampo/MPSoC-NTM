@@ -44,7 +44,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+
+#include "../ntm_algebra.h"
 
 #define SIZE_I_A_IN 4
 #define SIZE_J_A_IN 3

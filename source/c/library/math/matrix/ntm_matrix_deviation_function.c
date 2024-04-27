@@ -43,8 +43,31 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#define SIZE_I_IN 3
+#define SIZE_J_IN 3
+
+double ntm_matrix_deviation_function(double **data_in) {
+  double ONE = 1.0;
+
+  double **data_out;
+
+  int i, j;
+
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i=0;i<SIZE_I_IN;i++) {
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int)); 
+  }
+
+  // calculating result
+  for (i = 0; i < SIZE_I_IN; i++) {
+    for (j = 0; j < SIZE_J_IN; j++) {
+      data_out[i][j] = ONE/(ONE + ONE/exp(data_in[i][j]));
+    }
+  }
+
+  return **data_out;
 }

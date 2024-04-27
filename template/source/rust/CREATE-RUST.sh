@@ -28,6 +28,7 @@ touch code/computing/information/logic_gate/xnor_gate.rs
 touch code/computing/information/logic_gate/xor_gate.rs
 touch code/computing/information/logic_gate/yes_gate.rs
 touch code/computing/information/pushdown_automaton/pushdown_automaton.rs
+touch code/computing/information/turing_machine/turing_machine.rs
 touch code/computing/neural_network/attention_neural_network/attention_neural_network.rs
 touch code/computing/neural_network/differentiable_neural_computer_neural_network/differentiable_neural_computer_neural_network.rs
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network.rs

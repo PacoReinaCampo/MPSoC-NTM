@@ -16,7 +16,8 @@ code
     │   ├── combinational_logic
     │   ├── finite_state_machine
     │   ├── logic_gate
-    │   └── pushdown_automaton
+    │   ├── pushdown_automaton
+    │   └── turing_machine
     └── neural_network
         ├── attention_neural_network
         ├── differentiable_neural_computer_neural_network
@@ -25,4 +26,4 @@ code
         ├── neural_turing_machine_neural_network
         └── perceptron_neural_network
 
-25 directories, 0 files
+26 directories, 0 files

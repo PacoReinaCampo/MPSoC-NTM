@@ -33,6 +33,7 @@ touch code/computing/information/logic_gate/true_gate.sv
 touch code/computing/information/logic_gate/xnor_gate.sv
 touch code/computing/information/logic_gate/xor_gate.sv
 touch code/computing/information/pushdown_automaton/pushdown_automaton.sv
+touch code/computing/information/turing_machine/turing_machine.sv
 touch code/computing/neural_network/attention_neural_network/attention_neural_network.sv
 touch code/computing/neural_network/differentiable_neural_computer_neural_network/differentiable_neural_computer_neural_network.sv
 touch code/computing/neural_network/feedforward_neural_network/feedforward_neural_network.sv

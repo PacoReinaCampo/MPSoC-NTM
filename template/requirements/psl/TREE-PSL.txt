@@ -42,8 +42,10 @@ code
     │   │   ├── xnor_gate.psl
     │   │   ├── xor_gate.psl
     │   │   └── yes_gate.psl
-    │   └── pushdown_automaton
-    │       └── pushdown_automaton.psl
+    │   ├── pushdown_automaton
+    │   │   └── pushdown_automaton.psl
+    │   └── turing_machine
+    │       └── turing_machine.psl
     └── neural_network
         ├── attention_neural_network
         │   └── attention_neural_network.psl
@@ -58,4 +60,4 @@ code
         └── perceptron_neural_network
             └── perceptron_neural_network.psl
 
-25 directories, 33 files
+26 directories, 34 files

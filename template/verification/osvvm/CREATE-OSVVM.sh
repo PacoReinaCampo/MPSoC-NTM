@@ -133,6 +133,11 @@ touch code/computing/information/pushdown_automaton/pushdown_automaton/applicati
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model_pkg.vhd
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model.vhd
 touch code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_testbench.vhd
+touch code/computing/information/turing_machine/turing_machine/application/ntm_design_pkg.vhd
+touch code/computing/information/turing_machine/turing_machine/application/ntm_design.vhd
+touch code/computing/information/turing_machine/turing_machine/library/ntm_model_pkg.vhd
+touch code/computing/information/turing_machine/turing_machine/library/ntm_model.vhd
+touch code/computing/information/turing_machine/turing_machine/library/ntm_testbench.vhd
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design_pkg.vhd
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design.vhd
 touch code/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_model_pkg.vhd

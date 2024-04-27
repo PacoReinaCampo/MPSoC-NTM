@@ -43,8 +43,11 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <math.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+double ntm_scalar_deviation_function(double data_in) {
+  double ONE = 1.0;
+
+  // calculating result
+  return ONE/(ONE + ONE/exp(data_in));
 }

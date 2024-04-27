@@ -39,6 +39,8 @@ touch code/computing/information/logic_gate/xor_gate.m
 touch code/computing/information/logic_gate/yes_gate.m
 touch code/computing/information/pushdown_automaton
 touch code/computing/information/pushdown_automaton/pushdown_automaton.m
+touch code/computing/information/turing_machine
+touch code/computing/information/turing_machine/turing_machine.m
 touch code/computing/neural_network
 touch code/computing/neural_network/attention_neural_network
 touch code/computing/neural_network/attention_neural_network/attention_neural_network.m

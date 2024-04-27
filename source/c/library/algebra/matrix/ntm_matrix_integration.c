@@ -43,8 +43,30 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include "../ntm_algebra.h"
+
+#define SIZE_I_IN 3
+#define SIZE_J_IN 3
+
+double ntm_matrix_integration(double **data_in) {
+  double **data_out;
+
+  int i, j;
+
+  data_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+
+  for (i = 0; i < SIZE_I_IN; i++) {
+    data_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  }
+
+  // Output
+  for (i = 0; i < SIZE_I_IN; i++) {
+    for (j = 0; j < SIZE_J_IN; j++) {
+      data_out[i][j] = data_in[j][i];
+    }
+  }
+
+  return **data_out;
 }

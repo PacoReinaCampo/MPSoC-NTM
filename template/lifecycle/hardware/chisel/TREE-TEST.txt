@@ -43,8 +43,10 @@ src/test
         │   │   ├── xnor_gate_test.scala
         │   │   ├── xor_gate_test.scala
         │   │   └── yes_gate_test.scala
-        │   └── pushdown_automaton
-        │       └── pushdown_automaton_test.scala
+        │   ├── pushdown_automaton
+        │   │   └── pushdown_automaton_test.scala
+        │   └── turing_machine
+        │       └── turing_machine_test.scala
         └── neural_network
             ├── attention_neural_network
             │   └── attention_neural_network_test.scala
@@ -59,4 +61,4 @@ src/test
             └── perceptron_neural_network
                 └── perceptron_neural_network_test.scala
 
-26 directories, 33 files
+27 directories, 34 files

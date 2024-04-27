@@ -42,8 +42,10 @@ code
     │   │   ├── xnor_gate.cpp
     │   │   ├── xor_gate.cpp
     │   │   └── yes_gate.cpp
-    │   └── pushdown_automaton
-    │       └── pushdown_automaton.cpp
+    │   ├── pushdown_automaton
+    │   │   └── pushdown_automaton.cpp
+    │   └── turing_machine
+    │       └── turing_machine.cpp
     └── neural_network
         ├── attention_neural_network
         │   └── attention_neural_network.cpp
@@ -58,4 +60,4 @@ code
         └── perceptron_neural_network
             └── perceptron_neural_network.cpp
 
-25 directories, 33 files
+26 directories, 34 files
