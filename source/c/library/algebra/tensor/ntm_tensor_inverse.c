@@ -43,8 +43,70 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include "../ntm_algebra.h"
+
+#define SIZE 10
+
+#define SIZE_IN 3
+
+double ntm_tensor_inverse(double **data_in) {
+  double tensor[SIZE][SIZE];
+
+  double **data_out;
+
+  double ratio;
+
+  int i, j, m;
+
+  data_out = (double **) malloc(SIZE_IN*sizeof(int*));
+
+  for (i = 0; i < SIZE_IN; i++) {
+    data_out[i] = (double *)malloc(SIZE_IN*sizeof(int));
+  }
+
+  // Augmenting Identity Matrix of Order SIZE_IN
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = 0; j < SIZE_IN; j++) {
+      tensor[i][j] = data_in[i][j];
+
+      if (i == j) {
+        tensor[i][j + SIZE_IN] = 1.0;
+      } else {
+        tensor[i][j + SIZE_IN] = 0.0;
+      }
+    }
+  }
+
+  // Applying Gauss Jordan Elimination
+  for (i = 0; i < SIZE_IN; i++) {
+    if (tensor[i][i] == 0.0) {
+      printf("Mathematical Error!");
+    }
+    for (j = 0; j < SIZE_IN; j++) {
+      if (i != j) {
+        ratio = tensor[j][i]/tensor[i][i];
+        for (m = 0; m < 2*SIZE_IN; m++) {
+          tensor[j][m] = tensor[j][m] - ratio*tensor[i][m];
+        }
+      }
+    }
+  }
+
+  // Row Operation to Make Principal Diagonal to 1
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = SIZE_IN; j < 2*SIZE_IN; j++) {
+      tensor[i][j] = tensor[i][j]/tensor[i][i];
+    }
+  }
+
+  // Output
+  for (i = 0; i < SIZE_IN; i++) {
+    for (j = 0; j < SIZE_IN; j++) {
+      data_out[i][j] = tensor[i][j + SIZE_IN];
+    }
+  }
+
+  return **data_out;
 }

@@ -43,8 +43,41 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include "../ntm_algebra.h"
+
+#define SIZE_I_A_IN 4
+#define SIZE_J_A_IN 3
+
+#define SIZE_I_B_IN 3
+#define SIZE_J_B_IN 4
+
+double ntm_tensor_product(double **data_a_in, double **data_b_in) {
+  double **data_out;
+
+  double temporal;
+
+  int i, j, m;
+
+  data_out = (double **) malloc(SIZE_I_A_IN*sizeof(int*));
+
+  for (i = 0; i < SIZE_I_A_IN; i++) {
+    data_out[i] = (double *)malloc(SIZE_J_B_IN*sizeof(int));
+  }
+
+  // Output
+  for (i = 0; i < SIZE_I_A_IN; i++) {
+    for (j = 0; j < SIZE_J_B_IN; j++) {
+      temporal = 0.0;
+
+      for (m = 0; j < SIZE_J_A_IN; j++) {
+        temporal += data_a_in[i][m] * data_b_in[m][j];
+
+        data_out[i][j] = temporal;
+      }
+    }
+  }
+
+  return **data_out;
 }
