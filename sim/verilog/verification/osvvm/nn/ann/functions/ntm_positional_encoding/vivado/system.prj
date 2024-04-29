@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../validation/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design.vhd
-vhdl2008 work ../../../../../../../validation/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design.vhd
+vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model.vhd
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model.vhd
+vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_testbench.vhd

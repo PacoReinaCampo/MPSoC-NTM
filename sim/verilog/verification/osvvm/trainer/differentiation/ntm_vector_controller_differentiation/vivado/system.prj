@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../validation/osvvm/application/trainer/differentiation/ntm_vector_controller_differentiation/ntm_design.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/application/trainer/differentiation/ntm_vector_controller_differentiation/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/trainer/differentiation/ntm_vector_controller_differentiation/ntm_design.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/trainer/differentiation/ntm_vector_controller_differentiation/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_model.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_model.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_vector_controller_differentiation/ntm_testbench.vhd

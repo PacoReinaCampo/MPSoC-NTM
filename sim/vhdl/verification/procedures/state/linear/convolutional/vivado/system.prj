@@ -76,6 +76,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/trainer/linear/accelerator_t
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/linear/convolutional/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_pkg.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_stimulus.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_testbench.vhd

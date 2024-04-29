@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../validation/osvvm/application/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_design.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/application/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_design.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_model.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_model.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_testbench.vhd

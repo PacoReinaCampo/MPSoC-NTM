@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/state/outputs/ntm_state_vector_state/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/state/outputs/ntm_state_vector_state/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/state/outputs/ntm_state_vector_state/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/state/outputs/ntm_state_vector_state/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/state/outputs/ntm_state_vector_state/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/state/outputs/ntm_state_vector_state/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/state/outputs/ntm_state_vector_state/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/state/outputs/ntm_state_vector_state/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/state/outputs/ntm_state_vector_state/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/state/outputs/ntm_state_vector_state/ntm_testbench.vhd

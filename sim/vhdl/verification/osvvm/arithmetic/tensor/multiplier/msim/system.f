@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/arithmetic/tensor/multiplier/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/arithmetic/tensor/multiplier/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/tensor/multiplier/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/tensor/multiplier/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/arithmetic/tensor/multiplier/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/arithmetic/tensor/multiplier/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/tensor/multiplier/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/tensor/multiplier/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/arithmetic/tensor/multiplier/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/tensor/multiplier/ntm_testbench.vhd

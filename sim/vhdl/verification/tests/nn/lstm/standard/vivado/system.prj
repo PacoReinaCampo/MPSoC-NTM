@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/LSTM/standard/accelerator
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/LSTM/standard/accelerator_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/LSTM/standard/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/LSTM/standard/accelerator_standard_lstm_testbench.vhd

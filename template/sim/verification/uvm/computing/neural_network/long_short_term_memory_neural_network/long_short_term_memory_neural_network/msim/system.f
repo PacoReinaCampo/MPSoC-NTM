@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../../verification/uvm/src
 
 ../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/application/fsm.sv
 

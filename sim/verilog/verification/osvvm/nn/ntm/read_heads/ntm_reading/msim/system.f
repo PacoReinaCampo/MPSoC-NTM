@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/nn/NTM/read_heads/ntm_reading/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/nn/NTM/read_heads/ntm_reading/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/nn/NTM/read_heads/ntm_reading/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/nn/NTM/read_heads/ntm_reading/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/nn/NTM/read_heads/ntm_reading/ntm_testbench.vhd

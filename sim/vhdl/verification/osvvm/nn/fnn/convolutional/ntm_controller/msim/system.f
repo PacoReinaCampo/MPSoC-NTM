@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../validation/osvvm/application/nn/FNN/convolutional/ntm_controller/ntm_design.vhd
-../../../../../../../../../../validation/osvvm/application/nn/FNN/convolutional/ntm_controller/ntm_design_pkg.vhd
+../../../../../../../../../../verification/osvvm/application/nn/FNN/convolutional/ntm_controller/ntm_design.vhd
+../../../../../../../../../../verification/osvvm/application/nn/FNN/convolutional/ntm_controller/ntm_design_pkg.vhd
 
-../../../../../../../../../../validation/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_model.vhd
-../../../../../../../../../../validation/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_model_pkg.vhd
+../../../../../../../../../../verification/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_model.vhd
+../../../../../../../../../../verification/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_model_pkg.vhd
 
-../../../../../../../../../../validation/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_testbench.vhd
+../../../../../../../../../../verification/osvvm/library/nn/FNN/convolutional/ntm_controller/ntm_testbench.vhd

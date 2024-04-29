@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../../verification/uvm/src
 
 ../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/finite_state_machine/finite_state_machine/application/fsm.sv
 

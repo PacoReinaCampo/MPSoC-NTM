@@ -98,6 +98,6 @@ ghdl -a --std=08 ../../../../../../../model/vhdl/code/nn/NTM/top/model_interface
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/nn/NTM/top/model_output_vector.vhd
 ghdl -a --std=08 ../../../../../../../model/vhdl/code/nn/NTM/top/model_top.vhd
 
-ghdl -a --std=08 ../../../../../../../verification/tasks/vhdl/library/nn/NTM/top/model_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../verification/tasks/vhdl/library/nn/NTM/top/model_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../verification/tasks/vhdl/library/nn/NTM/top/model_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/nn/NTM/top/model_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/nn/NTM/top/model_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../validation/tasks/vhdl/library/nn/NTM/top/model_top_testbench.vhd

@@ -76,6 +76,6 @@ vhdl2008 work ../../../../../../../../model/vhdl/code/trainer/FNN/model_trainer.
 
 vhdl2008 work ../../../../../../../../model/vhdl/code/nn/FNN/convolutional/model_controller.vhd
 
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/convolutional/model_convolutional_fnn_testbench.vhd

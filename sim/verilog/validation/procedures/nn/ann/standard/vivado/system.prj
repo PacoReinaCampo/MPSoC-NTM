@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/nn/ANN/standard/model_input_g
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/ANN/standard/model_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/ANN/standard/model_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/model_standard_transformer_testbench.vhd

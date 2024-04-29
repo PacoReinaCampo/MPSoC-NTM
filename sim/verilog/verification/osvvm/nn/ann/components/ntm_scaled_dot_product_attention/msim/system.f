@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_design.vhd
-../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_design_pkg.vhd
+../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_design.vhd
+../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_design_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_model.vhd
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_model_pkg.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_model.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_model_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_testbench.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_scaled_dot_product_attention/ntm_testbench.vhd

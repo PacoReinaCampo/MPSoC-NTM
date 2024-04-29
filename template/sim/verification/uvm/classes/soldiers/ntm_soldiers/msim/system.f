@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../../verification/uvm/src
 
 ../../../../../../../../../../template/traditional/sim/verification/uvm/classes/soldiers/ntm_soldiers/application/fsm.sv
 

@@ -89,6 +89,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_i
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/LSTM/convolutional/model_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/trainer/LSTM/model_trainer_lstm_testbench.vhd

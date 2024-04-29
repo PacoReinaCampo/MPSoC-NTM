@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/osvvm/application/nn/ANN/lstm/ntm_lstm/ntm_design.vhd
-../../../../../../../validation/osvvm/application/nn/ANN/lstm/ntm_lstm/ntm_design_pkg.vhd
+../../../../../../../verification/osvvm/application/nn/ANN/lstm/ntm_lstm/ntm_design.vhd
+../../../../../../../verification/osvvm/application/nn/ANN/lstm/ntm_lstm/ntm_design_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_model.vhd
-../../../../../../../validation/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_model_pkg.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_model.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_model_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_testbench.vhd
+../../../../../../../verification/osvvm/library/nn/ANN/lstm/ntm_lstm/ntm_testbench.vhd

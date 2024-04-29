@@ -16,6 +16,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/fixed/tensor/acceler
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/fixed/tensor/accelerator_tensor_fixed_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/arithmetic/fixed/tensor/accelerator_tensor_fixed_divider.vhd
 
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_pkg.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_stimulus.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_testbench.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_pkg.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/arithmetic/fixed/accelerator_fixed_testbench.vhd

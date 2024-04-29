@@ -38,6 +38,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_ma
 vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_output.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/state/feedback/model_state_matrix_state.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/feedback/model_state_feedback_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/feedback/model_state_feedback_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/feedback/model_state_feedback_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/feedback/model_state_feedback_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/feedback/model_state_feedback_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/feedback/model_state_feedback_testbench.vhd

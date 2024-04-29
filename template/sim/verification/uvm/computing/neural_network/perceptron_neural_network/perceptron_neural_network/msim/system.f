@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../../verification/uvm/src
 
 ../../../../../../../../../../template/traditional/sim/verification/uvm/computing/neural_network/perceptron_neural_network/perceptron_neural_network/application/fsm.sv
 

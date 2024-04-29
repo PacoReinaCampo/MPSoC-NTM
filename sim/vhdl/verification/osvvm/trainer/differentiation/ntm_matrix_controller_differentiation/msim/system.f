@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/trainer/differentiation/ntm_matrix_controller_differentiation/ntm_testbench.vhd

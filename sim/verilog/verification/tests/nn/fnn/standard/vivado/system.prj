@@ -76,6 +76,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/trainer/FNN/accelerator_trai
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/FNN/standard/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/FNN/standard/accelerator_standard_fnn_testbench.vhd

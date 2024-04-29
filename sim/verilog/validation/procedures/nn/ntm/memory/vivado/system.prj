@@ -75,6 +75,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/tensor/model_te
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/NTM/memory/model_addressing.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/nn/NTM/memory/model_content_based_addressing.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/NTM/memory/model_memory_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/NTM/memory/model_memory_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/NTM/memory/model_memory_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/NTM/memory/model_memory_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/NTM/memory/model_memory_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/NTM/memory/model_memory_testbench.vhd

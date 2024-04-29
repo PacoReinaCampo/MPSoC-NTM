@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/state/feedback/ntm_state_matrix_input/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/state/feedback/ntm_state_matrix_input/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/state/feedback/ntm_state_matrix_input/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/state/feedback/ntm_state_matrix_input/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/state/feedback/ntm_state_matrix_input/ntm_testbench.vhd

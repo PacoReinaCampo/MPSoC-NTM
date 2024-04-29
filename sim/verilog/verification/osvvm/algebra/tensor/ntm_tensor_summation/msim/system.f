@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/math/algebra/tensor/ntm_tensor_summation/ntm_design.vhd
-../../../../../../../../../validation/osvvm/application/math/algebra/tensor/ntm_tensor_summation/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/math/algebra/tensor/ntm_tensor_summation/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/math/algebra/tensor/ntm_tensor_summation/ntm_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_model.vhd
-../../../../../../../../../validation/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/tensor/ntm_tensor_summation/ntm_testbench.vhd

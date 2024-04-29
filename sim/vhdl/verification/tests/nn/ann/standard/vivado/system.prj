@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/ANN/standard/accelerator_inp
 vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/ANN/standard/accelerator_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/ANN/standard/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/nn/ANN/standard/accelerator_standard_transformer_testbench.vhd

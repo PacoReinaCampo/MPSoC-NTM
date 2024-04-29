@@ -43,6 +43,6 @@ vhdl2008 work ../../../../../../../model/vhdl/code/state/outputs/model_state_vec
 
 vhdl2008 work ../../../../../../../model/vhdl/code/state/top/model_state_top.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/top/model_state_top_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/top/model_state_top_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/state/top/model_state_top_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/model_state_top_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/model_state_top_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/state/top/model_state_top_testbench.vhd

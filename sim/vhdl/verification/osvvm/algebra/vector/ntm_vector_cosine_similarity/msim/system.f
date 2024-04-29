@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/math/algebra/vector/ntm_vector_cosine_similarity/ntm_design.vhd
-../../../../../../../../../validation/osvvm/application/math/algebra/vector/ntm_vector_cosine_similarity/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/math/algebra/vector/ntm_vector_cosine_similarity/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/math/algebra/vector/ntm_vector_cosine_similarity/ntm_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_model.vhd
-../../../../../../../../../validation/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_cosine_similarity/ntm_testbench.vhd
