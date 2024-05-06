@@ -113,6 +113,26 @@ make x86
 #make clean
 #make x86
 
+#cd ../../../application/nn/dnc/memory
+#make clean
+#make x86
+
+#cd ../../../application/nn/dnc/read_heads
+#make clean
+#make x86
+
+#cd ../../../application/nn/dnc/top
+#make clean
+#make x86
+
+#cd ../../../application/nn/dnc/trained
+#make clean
+#make x86
+
+#cd ../../../application/nn/dnc/write_heads
+#make clean
+#make x86
+
 #cd ../../../application/nn/fnn/convolutional
 #make clean
 #make x86

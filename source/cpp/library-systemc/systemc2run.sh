@@ -119,6 +119,29 @@ rm -rf nn/ann/inputs/ntm_values_vector.run
 rm -rf nn/ann/top/ntm_controller.run
 rm -rf nn/ann/top/ntm_decoder.run
 rm -rf nn/ann/top/ntm_encoder.run
+rm -rf nn/dnc/memory/dnc_addressing.run
+rm -rf nn/dnc/memory/dnc_allocation_weighting.run
+rm -rf nn/dnc/memory/dnc_backward_weighting.run
+rm -rf nn/dnc/memory/dnc_forward_weighting.run
+rm -rf nn/dnc/memory/dnc_matrix_content_based_addressing.run
+rm -rf nn/dnc/memory/dnc_memory_matrix.run
+rm -rf nn/dnc/memory/dnc_memory_retention_vector.run
+rm -rf nn/dnc/memory/dnc_precedence_weighting.run
+rm -rf nn/dnc/memory/dnc_read_content_weighting.run
+rm -rf nn/dnc/memory/dnc_read_vectors.run
+rm -rf nn/dnc/memory/dnc_read_weighting.run
+rm -rf nn/dnc/memory/dnc_sort_vector.run
+rm -rf nn/dnc/memory/dnc_temporal_link_matrix.run
+rm -rf nn/dnc/memory/dnc_usage_vector.run
+rm -rf nn/dnc/memory/dnc_vector_content_based_addressing.run
+rm -rf nn/dnc/memory/dnc_write_content_weighting.run
+rm -rf nn/dnc/memory/dnc_write_weighting.run
+rm -rf nn/dnc/top/dnc_interface_matrix.run
+rm -rf nn/dnc/top/dnc_interface_top.run
+rm -rf nn/dnc/top/dnc_interface_vector.run
+rm -rf nn/dnc/top/dnc_output_vector.run
+rm -rf nn/dnc/top/dnc_top.run
+rm -rf nn/dnc/trained/dnc_trained_top.run
 rm -rf nn/fnn/convolutional/ntm_controller.run
 rm -rf nn/fnn/standard/ntm_controller.run
 rm -rf nn/lstm/convolutional/ntm_activation_gate_vector.run
@@ -270,6 +293,29 @@ g++ nn/ann/inputs/ntm_values_vector_testbench.cpp nn/ann/inputs/ntm_values_vecto
 g++ nn/ann/top/ntm_controller_testbench.cpp nn/ann/top/ntm_controller_design.cpp -o nn/ann/top/ntm_controller.run -lsystemc
 g++ nn/ann/top/ntm_decoder_testbench.cpp nn/ann/top/ntm_decoder_design.cpp -o nn/ann/top/ntm_decoder.run -lsystemc
 g++ nn/ann/top/ntm_encoder_testbench.cpp nn/ann/top/ntm_encoder_design.cpp -o nn/ann/top/ntm_encoder.run -lsystemc
+g++ nn/dnc/memory/dnc_addressing_testbench.cpp nn/dnc/memory/dnc_addressing_design.cpp -o nn/dnc/memory/dnc_addressing.run -lsystemc
+g++ nn/dnc/memory/dnc_allocation_weighting_testbench.cpp nn/dnc/memory/dnc_allocation_weighting_design.cpp -o nn/dnc/memory/dnc_allocation_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_backward_weighting_testbench.cpp nn/dnc/memory/dnc_backward_weighting_design.cpp -o nn/dnc/memory/dnc_backward_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_forward_weighting_testbench.cpp nn/dnc/memory/dnc_forward_weighting_design.cpp -o nn/dnc/memory/dnc_forward_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_matrix_content_based_addressing_testbench.cpp nn/dnc/memory/dnc_matrix_content_based_addressing_design.cpp -o nn/dnc/memory/dnc_matrix_content_based_addressing.run -lsystemc
+g++ nn/dnc/memory/dnc_memory_matrix_testbench.cpp nn/dnc/memory/dnc_memory_matrix_design.cpp -o nn/dnc/memory/dnc_memory_matrix.run -lsystemc
+g++ nn/dnc/memory/dnc_memory_retention_vector_testbench.cpp nn/dnc/memory/dnc_memory_retention_vector_design.cpp -o nn/dnc/memory/dnc_memory_retention_vector.run -lsystemc
+g++ nn/dnc/memory/dnc_precedence_weighting_testbench.cpp nn/dnc/memory/dnc_precedence_weighting_design.cpp -o nn/dnc/memory/dnc_precedence_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_read_content_weighting_testbench.cpp nn/dnc/memory/dnc_read_content_weighting_design.cpp -o nn/dnc/memory/dnc_read_content_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_read_vectors_testbench.cpp nn/dnc/memory/dnc_read_vectors_design.cpp -o nn/dnc/memory/dnc_read_vectors.run -lsystemc
+g++ nn/dnc/memory/dnc_read_weighting_testbench.cpp nn/dnc/memory/dnc_read_weighting_design.cpp -o nn/dnc/memory/dnc_read_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_sort_vector_testbench.cpp nn/dnc/memory/dnc_sort_vector_design.cpp -o nn/dnc/memory/dnc_sort_vector.run -lsystemc
+g++ nn/dnc/memory/dnc_temporal_link_matrix_testbench.cpp nn/dnc/memory/dnc_temporal_link_matrix_design.cpp -o nn/dnc/memory/dnc_temporal_link_matrix.run -lsystemc
+g++ nn/dnc/memory/dnc_usage_vector_testbench.cpp nn/dnc/memory/dnc_usage_vector_design.cpp -o nn/dnc/memory/dnc_usage_vector.run -lsystemc
+g++ nn/dnc/memory/dnc_vector_content_based_addressing_testbench.cpp nn/dnc/memory/dnc_vector_content_based_addressing_design.cpp -o nn/dnc/memory/dnc_vector_content_based_addressing.run -lsystemc
+g++ nn/dnc/memory/dnc_write_content_weighting_testbench.cpp nn/dnc/memory/dnc_write_content_weighting_design.cpp -o nn/dnc/memory/dnc_write_content_weighting.run -lsystemc
+g++ nn/dnc/memory/dnc_write_weighting_testbench.cpp nn/dnc/memory/dnc_write_weighting_design.cpp -o nn/dnc/memory/dnc_write_weighting.run -lsystemc
+g++ nn/dnc/top/dnc_interface_matrix_testbench.cpp nn/dnc/top/dnc_interface_matrix_design.cpp -o nn/dnc/top/dnc_interface_matrix.run -lsystemc
+g++ nn/dnc/top/dnc_interface_top_testbench.cpp nn/dnc/top/dnc_interface_top_design.cpp -o nn/dnc/top/dnc_interface_top.run -lsystemc
+g++ nn/dnc/top/dnc_interface_vector_testbench.cpp nn/dnc/top/dnc_interface_vector_design.cpp -o nn/dnc/top/dnc_interface_vector.run -lsystemc
+g++ nn/dnc/top/dnc_output_vector_testbench.cpp nn/dnc/top/dnc_output_vector_design.cpp -o nn/dnc/top/dnc_output_vector.run -lsystemc
+g++ nn/dnc/top/dnc_top_testbench.cpp nn/dnc/top/dnc_top_design.cpp -o nn/dnc/top/dnc_top.run -lsystemc
+g++ nn/dnc/trained/dnc_trained_top_testbench.cpp nn/dnc/trained/dnc_trained_top_design.cpp -o nn/dnc/trained/dnc_trained_top.run -lsystemc
 g++ nn/fnn/convolutional/ntm_controller_testbench.cpp nn/fnn/convolutional/ntm_controller_design.cpp -o nn/fnn/convolutional/ntm_controller.run -lsystemc
 g++ nn/fnn/standard/ntm_controller_testbench.cpp nn/fnn/standard/ntm_controller_design.cpp -o nn/fnn/standard/ntm_controller.run -lsystemc
 g++ nn/lstm/convolutional/ntm_activation_gate_vector_testbench.cpp nn/lstm/convolutional/ntm_activation_gate_vector_design.cpp -o nn/lstm/convolutional/ntm_activation_gate_vector.run -lsystemc

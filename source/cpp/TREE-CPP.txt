@@ -127,6 +127,36 @@ library
 │   │       ├── ntm_controller.cpp
 │   │       ├── ntm_decoder.cpp
 │   │       └── ntm_encoder.cpp
+│   ├── dnc
+│   │   ├── dnc.cpp
+│   │   ├── memory
+│   │   │   ├── dnc_addressing.cpp
+│   │   │   ├── dnc_allocation_weighting.cpp
+│   │   │   ├── dnc_backward_weighting.cpp
+│   │   │   ├── dnc_forward_weighting.cpp
+│   │   │   ├── dnc_matrix_content_based_addressing.cpp
+│   │   │   ├── dnc_memory_matrix.cpp
+│   │   │   ├── dnc_memory_retention_vector.cpp
+│   │   │   ├── dnc_precedence_weighting.cpp
+│   │   │   ├── dnc_sort_vector.cpp
+│   │   │   ├── dnc_temporal_link_matrix.cpp
+│   │   │   ├── dnc_usage_vector.cpp
+│   │   │   └── dnc_vector_content_based_addressing.cpp
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting.cpp
+│   │   │   ├── dnc_read_vectors.cpp
+│   │   │   └── dnc_read_weighting.cpp
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix.cpp
+│   │   │   ├── dnc_interface_top.cpp
+│   │   │   ├── dnc_interface_vector.cpp
+│   │   │   ├── dnc_output_vector.cpp
+│   │   │   └── dnc_top.cpp
+│   │   ├── trained
+│   │   │   └── dnc_trained_top.cpp
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting.cpp
+│   │       └── dnc_write_weighting.cpp
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.cpp
@@ -230,4 +260,4 @@ library
     ├── ntm_fnn.cpp
     └── ntm_lstm.cpp
 
-63 directories, 167 files
+69 directories, 191 files

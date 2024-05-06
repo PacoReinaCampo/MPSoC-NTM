@@ -45,5 +45,5 @@
 tree -P '*.m' code > TREE-MATLAB.txt
 
 tree -f -i -P '*.m' code > CREATE-MATLAB.sh
-sed -i '/.m/!d' CREATE-MATLAB.sh
+sed -i '/\.m/!d' CREATE-MATLAB.sh
 sed -i 's/^/touch /g' CREATE-MATLAB.sh

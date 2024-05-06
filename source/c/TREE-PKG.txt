@@ -26,6 +26,13 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
+│   ├── dnc
+│   │   ├── dnc.h
+│   │   ├── memory
+│   │   ├── read_heads
+│   │   ├── top
+│   │   ├── trained
+│   │   └── write_heads
 │   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
@@ -54,4 +61,4 @@ library
         ├── input
         └── output
 
-47 directories, 7 files
+53 directories, 8 files

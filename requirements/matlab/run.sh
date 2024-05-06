@@ -156,6 +156,30 @@ cd application/nn/ntm/write_heads; octave ntm_erasing_test.m; cd ../../../..
 cd application/nn/ntm/write_heads; octave ntm_writing_test.m; cd ../../../..
 #cd application/nn/ntm/trained; octave ntm_trained_top_test.m; cd ../../../..
 
+cd application/nn/dnc/memory; octave dnc_addressing_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_allocation_weighting_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_backward_weighting_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_forward_weighting_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_matrix_content_based_addressing_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_memory_matrix_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_memory_retention_vector_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_precedence_weighting_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_sort_vector_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_temporal_link_matrix_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_usage_vector_test.m; cd ../../../..
+cd application/nn/dnc/memory; octave dnc_vector_content_based_addressing_test.m; cd ../../../..
+cd application/nn/dnc/read_heads; octave dnc_read_content_weighting_test.m; cd ../../../..
+cd application/nn/dnc/read_heads; octave dnc_read_vectors_test.m; cd ../../../..
+cd application/nn/dnc/read_heads; octave dnc_read_weighting_test.m; cd ../../../..
+cd application/nn/dnc/top; octave dnc_interface_matrix_test.m; cd ../../../..
+cd application/nn/dnc/top; octave dnc_interface_top_test.m; cd ../../../..
+cd application/nn/dnc/top; octave dnc_interface_vector_test.m; cd ../../../..
+cd application/nn/dnc/top; octave dnc_output_vector_test.m; cd ../../../..
+cd application/nn/dnc/top; octave dnc_top_test.m; cd ../../../..
+cd application/nn/dnc/write_heads; octave dnc_write_content_weighting_test.m; cd ../../../..
+cd application/nn/dnc/write_heads; octave dnc_write_weighting_test.m; cd ../../../..
+#cd application/nn/dnc/trained; octave dnc_trained_top_test.m; cd ../../../..
+
 cd application/trainer/differentiation; octave ntm_matrix_controller_differentiation_test.m; cd ../../..
 cd application/trainer/differentiation; octave ntm_vector_controller_differentiation_test.m; cd ../../..
 cd application/trainer/fnn; octave ntm_fnn_b_trainer_test.m; cd ../../..

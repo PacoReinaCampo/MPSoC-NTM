@@ -49,6 +49,35 @@ library
 │   │       ├── ntm_controller.scala
 │   │       ├── ntm_decoder.scala
 │   │       └── ntm_encoder.scala
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_addressing.scala
+│   │   │   ├── dnc_allocation_weighting.scala
+│   │   │   ├── dnc_backward_weighting.scala
+│   │   │   ├── dnc_forward_weighting.scala
+│   │   │   ├── dnc_matrix_content_based_addressing.scala
+│   │   │   ├── dnc_memory_matrix.scala
+│   │   │   ├── dnc_memory_retention_vector.scala
+│   │   │   ├── dnc_precedence_weighting.scala
+│   │   │   ├── dnc_sort_vector.scala
+│   │   │   ├── dnc_temporal_link_matrix.scala
+│   │   │   ├── dnc_usage_vector.scala
+│   │   │   └── dnc_vector_content_based_addressing.scala
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting.scala
+│   │   │   ├── dnc_read_vectors.scala
+│   │   │   └── dnc_read_weighting.scala
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix.scala
+│   │   │   ├── dnc_interface_top.scala
+│   │   │   ├── dnc_interface_vector.scala
+│   │   │   ├── dnc_output_vector.scala
+│   │   │   └── dnc_top.scala
+│   │   ├── trained
+│   │   │   └── dnc_trained_top.scala
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting.scala
+│   │       └── dnc_write_weighting.scala
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.scala
@@ -142,4 +171,4 @@ library
             ├── ntm_lstm_output_v_trainer.scala
             └── ntm_lstm_output_w_trainer.scala
 
-47 directories, 95 files
+53 directories, 118 files

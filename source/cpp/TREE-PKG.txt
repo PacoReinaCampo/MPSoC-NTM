@@ -42,6 +42,13 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
+│   ├── dnc
+│   │   ├── dnc.hpp
+│   │   ├── memory
+│   │   ├── read_heads
+│   │   ├── top
+│   │   ├── trained
+│   │   └── write_heads
 │   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
@@ -71,4 +78,4 @@ library
         ├── input
         └── output
 
-63 directories, 8 files
+69 directories, 9 files

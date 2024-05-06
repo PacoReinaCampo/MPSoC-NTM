@@ -36,6 +36,12 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
+│   ├── dnc
+│   │   ├── memory
+│   │   ├── read_heads
+│   │   ├── top
+│   │   ├── trained
+│   │   └── write_heads
 │   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
@@ -65,4 +71,4 @@ library
         ├── input
         └── output
 
-51 directories, 14 files
+57 directories, 14 files

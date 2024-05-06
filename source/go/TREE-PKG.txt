@@ -22,6 +22,12 @@ library
 │   │   ├── functions
 │   │   ├── inputs
 │   │   └── top
+│   ├── dnc
+│   │   ├── memory
+│   │   ├── read_heads
+│   │   ├── top
+│   │   ├── trained
+│   │   └── write_heads
 │   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
@@ -47,4 +53,4 @@ library
         ├── input
         └── output
 
-47 directories, 0 files
+53 directories, 0 files

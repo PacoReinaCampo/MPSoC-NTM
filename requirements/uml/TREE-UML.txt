@@ -993,6 +993,357 @@ library
 │   │           ├── ntm_encoder_structural_object.dot
 │   │           ├── ntm_encoder_structural_package.dot
 │   │           └── ntm_encoder_structural_profile.dot
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_addressing
+│   │   │   │   ├── dnc_addressing_behavioral_activity.dot
+│   │   │   │   ├── dnc_addressing_behavioral_communication.dot
+│   │   │   │   ├── dnc_addressing_behavioral_interaction.dot
+│   │   │   │   ├── dnc_addressing_behavioral_sequence.dot
+│   │   │   │   ├── dnc_addressing_behavioral_state.dot
+│   │   │   │   ├── dnc_addressing_behavioral_timing.dot
+│   │   │   │   ├── dnc_addressing_behavioral_use.dot
+│   │   │   │   ├── dnc_addressing_structural_class.dot
+│   │   │   │   ├── dnc_addressing_structural_component.dot
+│   │   │   │   ├── dnc_addressing_structural_composite.dot
+│   │   │   │   ├── dnc_addressing_structural_deployment.dot
+│   │   │   │   ├── dnc_addressing_structural_object.dot
+│   │   │   │   ├── dnc_addressing_structural_package.dot
+│   │   │   │   └── dnc_addressing_structural_profile.dot
+│   │   │   ├── dnc_allocation_weighting
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_activity.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_communication.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_interaction.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_sequence.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_state.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_timing.dot
+│   │   │   │   ├── dnc_allocation_weighting_behavioral_use.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_class.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_component.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_composite.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_deployment.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_object.dot
+│   │   │   │   ├── dnc_allocation_weighting_structural_package.dot
+│   │   │   │   └── dnc_allocation_weighting_structural_profile.dot
+│   │   │   ├── dnc_backward_weighting
+│   │   │   │   ├── dnc_backward_weighting_behavioral_activity.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_communication.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_interaction.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_sequence.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_state.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_timing.dot
+│   │   │   │   ├── dnc_backward_weighting_behavioral_use.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_class.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_component.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_composite.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_deployment.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_object.dot
+│   │   │   │   ├── dnc_backward_weighting_structural_package.dot
+│   │   │   │   └── dnc_backward_weighting_structural_profile.dot
+│   │   │   ├── dnc_forward_weighting
+│   │   │   │   ├── dnc_forward_weighting_behavioral_activity.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_communication.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_interaction.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_sequence.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_state.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_timing.dot
+│   │   │   │   ├── dnc_forward_weighting_behavioral_use.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_class.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_component.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_composite.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_deployment.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_object.dot
+│   │   │   │   ├── dnc_forward_weighting_structural_package.dot
+│   │   │   │   └── dnc_forward_weighting_structural_profile.dot
+│   │   │   ├── dnc_matrix_content_based_addressing
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_activity.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_communication.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_interaction.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_sequence.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_state.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_timing.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_use.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_class.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_component.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_composite.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_deployment.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_object.dot
+│   │   │   │   ├── dnc_matrix_content_based_addressing_structural_package.dot
+│   │   │   │   └── dnc_matrix_content_based_addressing_structural_profile.dot
+│   │   │   ├── dnc_memory_matrix
+│   │   │   │   ├── dnc_memory_matrix_behavioral_activity.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_communication.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_interaction.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_sequence.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_state.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_timing.dot
+│   │   │   │   ├── dnc_memory_matrix_behavioral_use.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_class.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_component.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_composite.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_deployment.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_object.dot
+│   │   │   │   ├── dnc_memory_matrix_structural_package.dot
+│   │   │   │   └── dnc_memory_matrix_structural_profile.dot
+│   │   │   ├── dnc_memory_retention_vector
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_activity.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_communication.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_interaction.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_sequence.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_state.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_timing.dot
+│   │   │   │   ├── dnc_memory_retention_vector_behavioral_use.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_class.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_component.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_composite.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_deployment.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_object.dot
+│   │   │   │   ├── dnc_memory_retention_vector_structural_package.dot
+│   │   │   │   └── dnc_memory_retention_vector_structural_profile.dot
+│   │   │   ├── dnc_precedence_weighting
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_activity.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_communication.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_interaction.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_sequence.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_state.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_timing.dot
+│   │   │   │   ├── dnc_precedence_weighting_behavioral_use.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_class.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_component.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_composite.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_deployment.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_object.dot
+│   │   │   │   ├── dnc_precedence_weighting_structural_package.dot
+│   │   │   │   └── dnc_precedence_weighting_structural_profile.dot
+│   │   │   ├── dnc_sort_vector
+│   │   │   │   ├── dnc_sort_vector_behavioral_activity.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_communication.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_interaction.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_sequence.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_state.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_timing.dot
+│   │   │   │   ├── dnc_sort_vector_behavioral_use.dot
+│   │   │   │   ├── dnc_sort_vector_structural_class.dot
+│   │   │   │   ├── dnc_sort_vector_structural_component.dot
+│   │   │   │   ├── dnc_sort_vector_structural_composite.dot
+│   │   │   │   ├── dnc_sort_vector_structural_deployment.dot
+│   │   │   │   ├── dnc_sort_vector_structural_object.dot
+│   │   │   │   ├── dnc_sort_vector_structural_package.dot
+│   │   │   │   └── dnc_sort_vector_structural_profile.dot
+│   │   │   ├── dnc_temporal_link_matrix
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_activity.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_communication.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_interaction.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_sequence.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_state.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_timing.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_behavioral_use.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_class.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_component.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_composite.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_deployment.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_object.dot
+│   │   │   │   ├── dnc_temporal_link_matrix_structural_package.dot
+│   │   │   │   └── dnc_temporal_link_matrix_structural_profile.dot
+│   │   │   ├── dnc_usage_vector
+│   │   │   │   ├── dnc_usage_vector_behavioral_activity.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_communication.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_interaction.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_sequence.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_state.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_timing.dot
+│   │   │   │   ├── dnc_usage_vector_behavioral_use.dot
+│   │   │   │   ├── dnc_usage_vector_structural_class.dot
+│   │   │   │   ├── dnc_usage_vector_structural_component.dot
+│   │   │   │   ├── dnc_usage_vector_structural_composite.dot
+│   │   │   │   ├── dnc_usage_vector_structural_deployment.dot
+│   │   │   │   ├── dnc_usage_vector_structural_object.dot
+│   │   │   │   ├── dnc_usage_vector_structural_package.dot
+│   │   │   │   └── dnc_usage_vector_structural_profile.dot
+│   │   │   └── dnc_vector_content_based_addressing
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_activity.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_communication.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_interaction.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_sequence.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_state.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_timing.dot
+│   │   │       ├── dnc_vector_content_based_addressing_behavioral_use.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_class.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_component.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_composite.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_deployment.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_object.dot
+│   │   │       ├── dnc_vector_content_based_addressing_structural_package.dot
+│   │   │       └── dnc_vector_content_based_addressing_structural_profile.dot
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_activity.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_communication.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_interaction.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_sequence.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_state.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_timing.dot
+│   │   │   │   ├── dnc_read_content_weighting_behavioral_use.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_class.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_component.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_composite.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_deployment.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_object.dot
+│   │   │   │   ├── dnc_read_content_weighting_structural_package.dot
+│   │   │   │   └── dnc_read_content_weighting_structural_profile.dot
+│   │   │   ├── dnc_read_vectors
+│   │   │   │   ├── dnc_read_vectors_behavioral_activity.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_communication.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_interaction.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_sequence.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_state.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_timing.dot
+│   │   │   │   ├── dnc_read_vectors_behavioral_use.dot
+│   │   │   │   ├── dnc_read_vectors_structural_class.dot
+│   │   │   │   ├── dnc_read_vectors_structural_component.dot
+│   │   │   │   ├── dnc_read_vectors_structural_composite.dot
+│   │   │   │   ├── dnc_read_vectors_structural_deployment.dot
+│   │   │   │   ├── dnc_read_vectors_structural_object.dot
+│   │   │   │   ├── dnc_read_vectors_structural_package.dot
+│   │   │   │   └── dnc_read_vectors_structural_profile.dot
+│   │   │   └── dnc_read_weighting
+│   │   │       ├── dnc_read_weighting_behavioral_activity.dot
+│   │   │       ├── dnc_read_weighting_behavioral_communication.dot
+│   │   │       ├── dnc_read_weighting_behavioral_interaction.dot
+│   │   │       ├── dnc_read_weighting_behavioral_sequence.dot
+│   │   │       ├── dnc_read_weighting_behavioral_state.dot
+│   │   │       ├── dnc_read_weighting_behavioral_timing.dot
+│   │   │       ├── dnc_read_weighting_behavioral_use.dot
+│   │   │       ├── dnc_read_weighting_structural_class.dot
+│   │   │       ├── dnc_read_weighting_structural_component.dot
+│   │   │       ├── dnc_read_weighting_structural_composite.dot
+│   │   │       ├── dnc_read_weighting_structural_deployment.dot
+│   │   │       ├── dnc_read_weighting_structural_object.dot
+│   │   │       ├── dnc_read_weighting_structural_package.dot
+│   │   │       └── dnc_read_weighting_structural_profile.dot
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix
+│   │   │   │   ├── dnc_interface_matrix_behavioral_activity.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_communication.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_interaction.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_sequence.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_state.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_timing.dot
+│   │   │   │   ├── dnc_interface_matrix_behavioral_use.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_class.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_component.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_composite.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_deployment.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_object.dot
+│   │   │   │   ├── dnc_interface_matrix_structural_package.dot
+│   │   │   │   └── dnc_interface_matrix_structural_profile.dot
+│   │   │   ├── dnc_interface_top
+│   │   │   │   ├── dnc_interface_top_behavioral_activity.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_communication.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_interaction.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_sequence.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_state.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_timing.dot
+│   │   │   │   ├── dnc_interface_top_behavioral_use.dot
+│   │   │   │   ├── dnc_interface_top_structural_class.dot
+│   │   │   │   ├── dnc_interface_top_structural_component.dot
+│   │   │   │   ├── dnc_interface_top_structural_composite.dot
+│   │   │   │   ├── dnc_interface_top_structural_deployment.dot
+│   │   │   │   ├── dnc_interface_top_structural_object.dot
+│   │   │   │   ├── dnc_interface_top_structural_package.dot
+│   │   │   │   └── dnc_interface_top_structural_profile.dot
+│   │   │   ├── dnc_interface_vector
+│   │   │   │   ├── dnc_interface_vector_behavioral_activity.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_communication.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_interaction.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_sequence.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_state.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_timing.dot
+│   │   │   │   ├── dnc_interface_vector_behavioral_use.dot
+│   │   │   │   ├── dnc_interface_vector_structural_class.dot
+│   │   │   │   ├── dnc_interface_vector_structural_component.dot
+│   │   │   │   ├── dnc_interface_vector_structural_composite.dot
+│   │   │   │   ├── dnc_interface_vector_structural_deployment.dot
+│   │   │   │   ├── dnc_interface_vector_structural_object.dot
+│   │   │   │   ├── dnc_interface_vector_structural_package.dot
+│   │   │   │   └── dnc_interface_vector_structural_profile.dot
+│   │   │   ├── dnc_output_vector
+│   │   │   │   ├── dnc_output_vector_behavioral_activity.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_communication.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_interaction.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_sequence.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_state.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_timing.dot
+│   │   │   │   ├── dnc_output_vector_behavioral_use.dot
+│   │   │   │   ├── dnc_output_vector_structural_class.dot
+│   │   │   │   ├── dnc_output_vector_structural_component.dot
+│   │   │   │   ├── dnc_output_vector_structural_composite.dot
+│   │   │   │   ├── dnc_output_vector_structural_deployment.dot
+│   │   │   │   ├── dnc_output_vector_structural_object.dot
+│   │   │   │   ├── dnc_output_vector_structural_package.dot
+│   │   │   │   └── dnc_output_vector_structural_profile.dot
+│   │   │   └── dnc_top
+│   │   │       ├── dnc_top_behavioral_activity.dot
+│   │   │       ├── dnc_top_behavioral_communication.dot
+│   │   │       ├── dnc_top_behavioral_interaction.dot
+│   │   │       ├── dnc_top_behavioral_sequence.dot
+│   │   │       ├── dnc_top_behavioral_state.dot
+│   │   │       ├── dnc_top_behavioral_timing.dot
+│   │   │       ├── dnc_top_behavioral_use.dot
+│   │   │       ├── dnc_top_structural_class.dot
+│   │   │       ├── dnc_top_structural_component.dot
+│   │   │       ├── dnc_top_structural_composite.dot
+│   │   │       ├── dnc_top_structural_deployment.dot
+│   │   │       ├── dnc_top_structural_object.dot
+│   │   │       ├── dnc_top_structural_package.dot
+│   │   │       └── dnc_top_structural_profile.dot
+│   │   ├── trained
+│   │   │   └── dnc_trained_top
+│   │   │       ├── dnc_trained_top_behavioral_activity.dot
+│   │   │       ├── dnc_trained_top_behavioral_communication.dot
+│   │   │       ├── dnc_trained_top_behavioral_interaction.dot
+│   │   │       ├── dnc_trained_top_behavioral_sequence.dot
+│   │   │       ├── dnc_trained_top_behavioral_state.dot
+│   │   │       ├── dnc_trained_top_behavioral_timing.dot
+│   │   │       ├── dnc_trained_top_behavioral_use.dot
+│   │   │       ├── dnc_trained_top_structural_class.dot
+│   │   │       ├── dnc_trained_top_structural_component.dot
+│   │   │       ├── dnc_trained_top_structural_composite.dot
+│   │   │       ├── dnc_trained_top_structural_deployment.dot
+│   │   │       ├── dnc_trained_top_structural_object.dot
+│   │   │       ├── dnc_trained_top_structural_package.dot
+│   │   │       └── dnc_trained_top_structural_profile.dot
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting
+│   │       │   ├── dnc_write_content_weighting_behavioral_activity.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_communication.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_interaction.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_sequence.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_state.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_timing.dot
+│   │       │   ├── dnc_write_content_weighting_behavioral_use.dot
+│   │       │   ├── dnc_write_content_weighting_structural_class.dot
+│   │       │   ├── dnc_write_content_weighting_structural_component.dot
+│   │       │   ├── dnc_write_content_weighting_structural_composite.dot
+│   │       │   ├── dnc_write_content_weighting_structural_deployment.dot
+│   │       │   ├── dnc_write_content_weighting_structural_object.dot
+│   │       │   ├── dnc_write_content_weighting_structural_package.dot
+│   │       │   └── dnc_write_content_weighting_structural_profile.dot
+│   │       └── dnc_write_weighting
+│   │           ├── dnc_write_weighting_behavioral_activity.dot
+│   │           ├── dnc_write_weighting_behavioral_communication.dot
+│   │           ├── dnc_write_weighting_behavioral_interaction.dot
+│   │           ├── dnc_write_weighting_behavioral_sequence.dot
+│   │           ├── dnc_write_weighting_behavioral_state.dot
+│   │           ├── dnc_write_weighting_behavioral_timing.dot
+│   │           ├── dnc_write_weighting_behavioral_use.dot
+│   │           ├── dnc_write_weighting_structural_class.dot
+│   │           ├── dnc_write_weighting_structural_component.dot
+│   │           ├── dnc_write_weighting_structural_composite.dot
+│   │           ├── dnc_write_weighting_structural_deployment.dot
+│   │           ├── dnc_write_weighting_structural_object.dot
+│   │           ├── dnc_write_weighting_structural_package.dot
+│   │           └── dnc_write_weighting_structural_profile.dot
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
@@ -2098,4 +2449,4 @@ library
                 ├── ntm_lstm_output_w_trainer_structural_package.dot
                 └── ntm_lstm_output_w_trainer_structural_profile.dot
 
-180 directories, 1918 files
+209 directories, 2240 files

@@ -96,6 +96,21 @@ make clean
 #cd ../../../application/nn/ann/top
 #make clean
 
+#cd ../../../application/nn/dnc/memory
+#make clean
+
+#cd ../../../application/nn/dnc/read_heads
+#make clean
+
+#cd ../../../application/nn/dnc/top
+#make clean
+
+#cd ../../../application/nn/dnc/trained
+#make clean
+
+#cd ../../../application/nn/dnc/write_heads
+#make clean
+
 #cd ../../../application/nn/fnn/convolutional
 #make clean
 

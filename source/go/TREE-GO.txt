@@ -48,6 +48,35 @@ library
 │   │       ├── ntm_controller.go
 │   │       ├── ntm_decoder.go
 │   │       └── ntm_encoder.go
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_addressing.go
+│   │   │   ├── dnc_allocation_weighting.go
+│   │   │   ├── dnc_backward_weighting.go
+│   │   │   ├── dnc_forward_weighting.go
+│   │   │   ├── dnc_matrix_content_based_addressing.go
+│   │   │   ├── dnc_memory_matrix.go
+│   │   │   ├── dnc_memory_retention_vector.go
+│   │   │   ├── dnc_precedence_weighting.go
+│   │   │   ├── dnc_sort_vector.go
+│   │   │   ├── dnc_temporal_link_matrix.go
+│   │   │   ├── dnc_usage_vector.go
+│   │   │   └── dnc_vector_content_based_addressing.go
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting.go
+│   │   │   ├── dnc_read_vectors.go
+│   │   │   └── dnc_read_weighting.go
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix.go
+│   │   │   ├── dnc_interface_top.go
+│   │   │   ├── dnc_interface_vector.go
+│   │   │   ├── dnc_output_vector.go
+│   │   │   └── dnc_top.go
+│   │   ├── trained
+│   │   │   └── dnc_trained_top.go
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting.go
+│   │       └── dnc_write_weighting.go
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.go
@@ -146,4 +175,4 @@ library
             ├── ntm_lstm_output_v_trainer.go
             └── ntm_lstm_output_w_trainer.go
 
-47 directories, 99 files
+53 directories, 122 files
