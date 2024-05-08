@@ -4,12 +4,11 @@ library
 │       ├── lib.rs
 │       ├── matrix
 │       │   ├── mod.rs
+│       │   ├── ntm_matrix_algebra.rs
 │       │   ├── ntm_matrix_convolution.rs
 │       │   ├── ntm_matrix_differentiation.rs
 │       │   ├── ntm_matrix_integration.rs
 │       │   ├── ntm_matrix_inverse.rs
-│       │   ├── ntm_matrix_math_algebra.rs
-│       │   ├── ntm_matrix_math_calculus.rs
 │       │   ├── ntm_matrix_multiplication.rs
 │       │   ├── ntm_matrix_product.rs
 │       │   ├── ntm_matrix_softmax.rs
@@ -20,17 +19,16 @@ library
 │       │   └── ntm_transpose_vector_product.rs
 │       ├── scalar
 │       │   ├── mod.rs
-│       │   ├── ntm_scalar_math_algebra.rs
+│       │   ├── ntm_scalar_algebra.rs
 │       │   ├── ntm_scalar_multiplication.rs
 │       │   └── ntm_scalar_summation.rs
 │       ├── tensor
 │       │   ├── mod.rs
+│       │   ├── ntm_tensor_algebra.rs
 │       │   ├── ntm_tensor_convolution.rs
 │       │   ├── ntm_tensor_differentiation.rs
 │       │   ├── ntm_tensor_integration.rs
 │       │   ├── ntm_tensor_inverse.rs
-│       │   ├── ntm_tensor_math_algebra.rs
-│       │   ├── ntm_tensor_math_calculus.rs
 │       │   ├── ntm_tensor_matrix_convolution.rs
 │       │   ├── ntm_tensor_matrix_product.rs
 │       │   ├── ntm_tensor_multiplication.rs
@@ -41,12 +39,11 @@ library
 │       └── vector
 │           ├── mod.rs
 │           ├── ntm_dot_product.rs
+│           ├── ntm_vector_algebra.rs
 │           ├── ntm_vector_convolution.rs
 │           ├── ntm_vector_cosine_similarity.rs
 │           ├── ntm_vector_differentiation.rs
 │           ├── ntm_vector_integration.rs
-│           ├── ntm_vector_math_algebra.rs
-│           ├── ntm_vector_math_calculus.rs
 │           ├── ntm_vector_module.rs
 │           ├── ntm_vector_multiplication.rs
 │           ├── ntm_vector_softmax.rs
@@ -89,24 +86,21 @@ library
 │       │   ├── mod.rs
 │       │   ├── ntm_matrix_deviation_function.rs
 │       │   ├── ntm_matrix_logistic_function.rs
-│       │   ├── ntm_matrix_math_function.rs
-│       │   ├── ntm_matrix_math_statitics.rs
+│       │   ├── ntm_matrix_math.rs
 │       │   ├── ntm_matrix_mean_function.rs
 │       │   └── ntm_matrix_oneplus_function.rs
 │       ├── scalar
 │       │   ├── mod.rs
 │       │   ├── ntm_scalar_deviation_function.rs
 │       │   ├── ntm_scalar_logistic_function.rs
-│       │   ├── ntm_scalar_math_function.rs
-│       │   ├── ntm_scalar_math_statitics.rs
+│       │   ├── ntm_scalar_math.rs
 │       │   ├── ntm_scalar_mean_function.rs
 │       │   └── ntm_scalar_oneplus_function.rs
 │       └── vector
 │           ├── mod.rs
 │           ├── ntm_vector_deviation_function.rs
 │           ├── ntm_vector_logistic_function.rs
-│           ├── ntm_vector_math_function.rs
-│           ├── ntm_vector_math_statitics.rs
+│           ├── ntm_vector_math.rs
 │           ├── ntm_vector_mean_function.rs
 │           └── ntm_vector_oneplus_function.rs
 ├── nn
@@ -272,4 +266,4 @@ library
     ├── ntm_fnn.rs
     └── ntm_lstm.rs
 
-57 directories, 215 files
+57 directories, 209 files

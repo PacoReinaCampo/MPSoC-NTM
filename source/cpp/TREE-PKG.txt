@@ -1,6 +1,6 @@
 library
 ├── algebra
-│   ├── ntm_math_algebra.hpp
+│   ├── ntm_algebra.hpp
 │   ├── matrix
 │   ├── scalar
 │   ├── tensor

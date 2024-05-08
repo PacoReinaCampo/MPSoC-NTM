@@ -1,16 +1,13 @@
 touch library/algebra/matrix/ntm_matrix_algebra.scala
-touch library/algebra/scalar
 touch library/algebra/scalar/ntm_scalar_algebra.scala
 touch library/algebra/tensor/ntm_tensor_algebra.scala
 touch library/algebra/vector/ntm_vector_algebra.scala
 touch library/arithmetic/matrix/ntm_matrix_arithmetic.scala
-touch library/arithmetic/scalar
 touch library/arithmetic/scalar/ntm_scalar_arithmetic.scala
 touch library/arithmetic/tensor/ntm_tensor_arithmetic.scala
 touch library/arithmetic/test_scalar_arithmetic.scala
 touch library/arithmetic/vector/ntm_vector_arithmetic.scala
 touch library/math/matrix/ntm_matrix_math.scala
-touch library/math/scalar
 touch library/math/scalar/ntm_scalar_math.scala
 touch library/math/vector/ntm_vector_math.scala
 touch library/nn/ann/components/ntm_masked_multi_head_attention.scala

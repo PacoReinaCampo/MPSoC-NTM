@@ -46,7 +46,7 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_ALGEBRA =	../../../library/algebra/ntm_math_algebra.hpp \
+SOURCES_ALGEBRA =	../../../library/algebra/ntm_algebra.hpp \
 			../../../library/algebra/matrix/ntm_matrix_convolution.cpp \
 			../../../library/algebra/matrix/ntm_matrix_inverse.cpp \
 			../../../library/algebra/matrix/ntm_matrix_multiplication.cpp \

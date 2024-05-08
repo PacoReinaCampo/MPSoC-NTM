@@ -46,7 +46,7 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_MATH =	../../../library/math/ntm_math_statitics.hpp \
+SOURCES_MATH =	../../../library/math/ntm_math.hpp \
 		../../../library/math/matrix/ntm_matrix_logistic_function.cpp \
 		../../../library/math/matrix/ntm_matrix_oneplus_function.cpp \
 		../../../library/math/scalar/ntm_scalar_logistic_function.cpp \
