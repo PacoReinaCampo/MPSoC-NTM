@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<cassert>
+#include <cassert>
+#include <iostream>
 
-#include"../../../library/arithmetic/ntm_arithmetic.hpp"
+#include "../../../library/arithmetic/ntm_arithmetic.hpp"
 
 using namespace std;
 
@@ -58,20 +58,20 @@ int main() {
   ScalarArithmetic Arithmetic;
 
   data_out = 64.0;
-  
-  assert(ntm_scalar_adder(data_a_in, data_b_in)==data_out);
+
+  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
 
   assert(Arithmetic.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = 768.0;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in)==data_out);
+  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   assert(Arithmetic.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = 3.0;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in)==data_out);
+  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
 
   assert(Arithmetic.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
 

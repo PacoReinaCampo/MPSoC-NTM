@@ -46,8 +46,7 @@
 
 // Package
 
-double ** ntm_state_vector_output(double **data_k_in, double **data_a_in, double **data_b_in, double **data_c_in, double **data_d_in, double **data_u_in, double *initial_x, int k) {
-
+double **ntm_state_vector_output(double **data_k_in, double **data_a_in, double **data_b_in, double **data_c_in, double **data_d_in, double **data_u_in, double *initial_x, int k) {
   // Variables
   double **data_a_out;
   double **data_b_out;
@@ -58,20 +57,20 @@ double ** ntm_state_vector_output(double **data_k_in, double **data_a_in, double
 
   int i;
 
-  data_a_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
-  data_b_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
-  data_c_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
-  data_d_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+  data_a_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
+  data_b_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
+  data_c_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
+  data_d_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
 
-  data_y_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+  data_y_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
 
-  for (i=0;i<SIZE_I_IN;i++) {
-    data_a_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
-    data_b_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
-    data_c_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
-    data_d_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  for (i = 0; i < SIZE_I_IN; i++) {
+    data_a_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
+    data_b_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
+    data_c_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
+    data_d_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
 
-    data_y_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+    data_y_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
   }
 
   // Body
@@ -81,13 +80,16 @@ double ** ntm_state_vector_output(double **data_k_in, double **data_a_in, double
   data_c_out = ntm_state_matrix_output(data_k_in, data_c_in, data_d_in);
   data_d_out = ntm_state_matrix_feedforward(data_k_in, data_d_in);
 
-  data_y_out = data_c_out*(data_a_out^k)*initial_x;
+  data_y_out = data_c_out * (data_a_out ^ k) * initial_x;
 
-  for j = 1:k
-    data_y_out = data_y_out + data_c_out*(data_a_out^(k-j))*data_b_out*data_u_in(:, k);
-  }
+  for
+    j = 1 : k
+                data_y_out = data_y_out + data_c_out * (data_a_out ^ (k - j)) * data_b_out * data_u_in(
+                                                                                                 :, k);
+}
 
-  data_y_out = data_y_out + data_d_out*data_u_in(:, k);
+data_y_out = data_y_out + data_d_out * data_u_in(
+                                           :, k);
 
-  return data_y_out;
+return data_y_out;
 }

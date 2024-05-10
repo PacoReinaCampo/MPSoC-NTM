@@ -58,9 +58,9 @@ SC_MODULE(tensor_product) {
   SC_CTOR(tensor_product) {
     SC_METHOD(product);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           sensitive << data_a_in[i][j][k];
           sensitive << data_b_in[i][j][k];
         }
@@ -69,9 +69,9 @@ SC_MODULE(tensor_product) {
   }
 
   void product() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           int temporal = 0;
 
           for (int m = 0; m < 4; m++) {

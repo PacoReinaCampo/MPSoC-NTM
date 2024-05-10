@@ -56,18 +56,18 @@ SC_MODULE(vector_convolution) {
   SC_CTOR(vector_convolution) {
     SC_METHOD(convolution);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       sensitive << data_a_in[i];
       sensitive << data_b_in[i];
     }
   }
 
   void convolution() {
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       int temporal = 0;
 
-      for (int m=0; m<i; m++) {
-        temporal += data_a_in[m].read() * data_b_in[i-m].read();
+      for (int m = 0; m < i; m++) {
+        temporal += data_a_in[m].read() * data_b_in[i - m].read();
       }
 
       data_out[i] = temporal;

@@ -56,23 +56,23 @@ SC_MODULE(matrix_inverse) {
   SC_CTOR(matrix_inverse) {
     SC_METHOD(inverse);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         sensitive << data_in[i][j];
       }
     }
   }
 
   void inverse() {
-    sc_signal<sc_int<64>> vector_in_int [8];
-    sc_signal<sc_int<64>> matrix_in_int [8][8];
+    sc_signal<sc_int<64>> vector_in_int[8];
+    sc_signal<sc_int<64>> matrix_in_int[8][8];
 
     sc_signal<int> scalar_ratio_int;
     sc_signal<int> scalar_sum_int;
 
     // Augmenting Identity Matrix of Order SIZE_IN
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         matrix_in_int[i][j].write(data_in[i][j].read());
 
         if (i = j) {
@@ -83,30 +83,30 @@ SC_MODULE(matrix_inverse) {
       }
     }
 
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       // Row swapping
       int n = 1;
 
       while (data_in[i][i].read() == 0) {
-        for (int j=0; j<8; j++) {
+        for (int j = 0; j < 8; j++) {
           vector_in_int[j].write(matrix_in_int[i][j].read());
         }
 
         if (i < 8) {
-          for (int j=0; j<8; j++) {
-            matrix_in_int[i][j].write(matrix_in_int[i+n][j].read());
+          for (int j = 0; j < 8; j++) {
+            matrix_in_int[i][j].write(matrix_in_int[i + n][j].read());
           }
 
-          for (int j=0; j<8; j++) {
-            matrix_in_int[i+n][j].write(vector_in_int[j].read());
+          for (int j = 0; j < 8; j++) {
+            matrix_in_int[i + n][j].write(vector_in_int[j].read());
           }
         } else {
-          for (int j=0; j<8; j++) {
-            matrix_in_int[i][j].write(matrix_in_int[i-n][j].read());
+          for (int j = 0; j < 8; j++) {
+            matrix_in_int[i][j].write(matrix_in_int[i - n][j].read());
           }
 
-          for (int j=0; j<8; j++) {
-            matrix_in_int[i-n][j].write(vector_in_int[j].read());
+          for (int j = 0; j < 8; j++) {
+            matrix_in_int[i - n][j].write(vector_in_int[j].read());
           }
         }
 
@@ -114,11 +114,11 @@ SC_MODULE(matrix_inverse) {
       }
 
       // Applying Gauss Jordan Elimination
-      for (int j=0; j<SIZE_J_IN; j++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         if (i != j) {
           scalar_ratio_int.write(matrix_in_int[j][i].read() / matrix_in_int[i][i].read());
 
-          for (int m=0; m<8; m++) {
+          for (int m = 0; m < 8; m++) {
             scalar_sum_int.write(scalar_ratio_int.read() * matrix_in_int[i][m].read());
 
             matrix_in_int[j][m].write(matrix_in_int[j][m].read() - scalar_sum_int.read());
@@ -128,15 +128,15 @@ SC_MODULE(matrix_inverse) {
     }
 
     // Row Operation to Make Principal Diagonal to 1
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         matrix_in_int[i][j].write(matrix_in_int[i][j].read() / matrix_in_int[i][i].read());
       }
     }
- 
+
     // Output
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         data_out[i][j].write(matrix_in_int[i][j + 4].read());
       }
     }

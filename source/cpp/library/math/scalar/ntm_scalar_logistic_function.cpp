@@ -42,8 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
+#include <math.h>
+
+#include <iostream>
 
 using namespace std;
 
@@ -51,5 +52,5 @@ double ntm_scalar_logistic_function(double data_in) {
   double ONE = 1.0;
 
   // calculating data_out
-  return ONE/(ONE + ONE/exp(data_in));
+  return ONE / (ONE + ONE / exp(data_in));
 }

@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_vector_divider_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   vector_divider vector_divider("VECTOR_DIVIDER");
@@ -55,14 +55,14 @@ int sc_main(int argc, char *argv[]) {
 
   vector_divider.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     vector_divider.data_a_in[i](data_a_in[i]);
     vector_divider.data_b_in[i](data_b_in[i]);
 
     vector_divider.data_out[i](data_out[i]);
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     data_a_in[i] = i;
     data_b_in[i] = i + 1;
   }
@@ -72,7 +72,7 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     cout << "@" << sc_time_stamp() << ": data_out[" << i << "] = " << data_out[i].read() << endl;
   }
 

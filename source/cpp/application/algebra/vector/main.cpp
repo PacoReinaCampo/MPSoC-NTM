@@ -42,32 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
-#include"../../../library/math/ntm_math.hpp"
+#include "../../../library/math/ntm_math.hpp"
 
 using namespace std;
 
 int main() {
-  vector<double> data_in{ 6.0, 3.0, 8.0 };
+  vector<double> data_in{6.0, 3.0, 8.0};
 
   double length_in = 1.0;
 
   vector<double> data_out;
 
-  data_out = { 0.0, -3.0, 5.0 };
+  data_out = {0.0, -3.0, 5.0};
 
   assert(ntm_vector_differentiation(data_in, length_in) == data_out);
 
-  data_out = { 6.0, 9.0, 17.0 };
+  data_out = {6.0, 9.0, 17.0};
 
   double length_in = 1.0;
 
   assert(ntm_vector_integration(data_in, length_in) == data_out);
 
-  data_out = { 0.11567390955504045, 0.004756662822010267, 0.8795694276229492 };
+  data_out = {0.11567390955504045, 0.004756662822010267, 0.8795694276229492};
 
   assert(ntm_vector_softmax(data_in_0) == data_out_0);
 

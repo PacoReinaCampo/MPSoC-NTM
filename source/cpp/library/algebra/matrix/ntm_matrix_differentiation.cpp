@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_differentiation(vector<vector<double>> data_in, double length_i_in, double length_j_in, int control) {
-
   double temporal;
 
   vector<vector<double>> data_out;
@@ -60,17 +59,14 @@ vector<vector<double>> ntm_matrix_differentiation(vector<vector<double>> data_in
       if (control == 0) {
         if (i == 0) {
           temporal = 0.0;
+        } else {
+          temporal = (data_in[i][j] - data_in[i - 1][j]) / length_i_in;
         }
-        else {
-          temporal = (data_in[i][j] - data_in[i-1][j])/length_i_in;
-        }
-      }
-      else {
+      } else {
         if (j == 0) {
           temporal = 0.0;
-        }
-        else {
-          temporal = (data_in[i][j] - data_in[i][j-1])/length_j_in;
+        } else {
+          temporal = (data_in[i][j] - data_in[i][j - 1]) / length_j_in;
         }
       }
       vector.push_back(temporal);

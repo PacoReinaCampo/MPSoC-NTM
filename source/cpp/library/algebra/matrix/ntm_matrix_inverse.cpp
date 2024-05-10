@@ -42,15 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
-
   double ratio;
 
   vector<vector<double>> matrix;
@@ -81,9 +81,9 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
     }
     for (int j = 0; j < data_in.size(); j++) {
       if (i != j) {
-        ratio = matrix[j][i]/matrix[i][i];
-        for (int m = 0; m < 2*data_in.size(); m++) {
-          matrix[j][m] = matrix[j][m] - ratio*matrix[i][m];
+        ratio = matrix[j][i] / matrix[i][i];
+        for (int m = 0; m < 2 * data_in.size(); m++) {
+          matrix[j][m] = matrix[j][m] - ratio * matrix[i][m];
         }
       }
     }
@@ -91,8 +91,8 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
 
   // Row Operation to Make Principal Diagonal to 1
   for (int i = 0; i < data_in.size(); i++) {
-    for (int j = data_in.size(); j < 2*data_in.size(); j++) {
-      matrix[i][j] = matrix[i][j]/matrix[i][i];
+    for (int j = data_in.size(); j < 2 * data_in.size(); j++) {
+      matrix[i][j] = matrix[i][j] / matrix[i][i];
     }
   }
 
@@ -114,19 +114,17 @@ vector<vector<double>> ntm_matrix_inverse(vector<vector<double>> data_in) {
 }
 
 int main() {
-  vector<vector<double>> data_in {
-    { -1.0,  1.0, -2.0 },
-    {  1.0,  3.0, -3.0 },
-    { -2.0, -4.0, -4.0 }
-  };
+  vector<vector<double>> data_in{
+      {-1.0, 1.0, -2.0},
+      {1.0, 3.0, -3.0},
+      {-2.0, -4.0, -4.0}};
 
-  vector<vector<double>> data_out {
-    {  3.00,  1.00,  1.50 },
-    { -1.25, -0.25, -0.75 },
-    { -0.25, -0.25, -0.25 }
-  };
+  vector<vector<double>> data_out{
+      {3.00, 1.00, 1.50},
+      {-1.25, -0.25, -0.75},
+      {-0.25, -0.25, -0.25}};
 
-  assert(ntm_matrix_inverse(data_in)==data_out);
+  assert(ntm_matrix_inverse(data_in) == data_out);
 
   return 0;
 }

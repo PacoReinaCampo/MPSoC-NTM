@@ -42,12 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 double ntm_scalar_mean_function(double data_in) {
   double ONE = 1.0;
 
   // calculating result
-  return ONE/(ONE + ONE/exp(data_in));
+  return ONE / (ONE + ONE / exp(data_in));
 }

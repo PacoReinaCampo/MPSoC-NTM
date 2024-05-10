@@ -42,17 +42,18 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 double ntm_scalar_deviation_function(vector<double> vector, double mean) {
   double data_out = 0.0;
 
-  for(int i=0; i<vector.size(); i++) {
-    data_out += (vector[i] - mean)*(vector[i] - mean)/(double)vector.size();
+  for (int i = 0; i < vector.size(); i++) {
+    data_out += (vector[i] - mean) * (vector[i] - mean) / (double)vector.size();
   }
 
   return sqrt(data_out);

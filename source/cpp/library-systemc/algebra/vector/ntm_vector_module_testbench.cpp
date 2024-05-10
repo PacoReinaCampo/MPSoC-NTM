@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_vector_module_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   vector_module vector_module("VECTOR_MODULE");
@@ -54,13 +54,13 @@ int sc_main(int argc, char *argv[]) {
 
   vector_module.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     vector_module.data_in[i](data_in[i]);
   }
 
   vector_module.data_out(data_out);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     data_in[i] = i;
   }
 

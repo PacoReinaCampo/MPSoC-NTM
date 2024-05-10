@@ -42,19 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_summation(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for (int i=0; i<matrix.size(); i++) {
+  for (int i = 0; i < matrix.size(); i++) {
     double temporal = 0.0;
 
-    for (int j=0; j<matrix[0].size(); j++) {
+    for (int j = 0; j < matrix[0].size(); j++) {
       temporal += matrix[i][j];
     }
     data_out.push_back(temporal);
@@ -64,22 +64,20 @@ vector<double> ntm_vector_summation(vector<vector<double>> matrix) {
 }
 
 int main() {
-  vector<vector<double>> data_in_0 {
-    {3.0, 2.0, 2.0},
-    {0.0, 2.0, 0.0},
-    {5.0, 4.0, 1.0}
-  };
-  vector<vector<double>> data_in_1 {
-    {1.0, 0.0, 0.0},
-    {0.0, 1.0, 0.0},
-    {0.0, 0.0, 1.0}
-  };
+  vector<vector<double>> data_in_0{
+      {3.0, 2.0, 2.0},
+      {0.0, 2.0, 0.0},
+      {5.0, 4.0, 1.0}};
+  vector<vector<double>> data_in_1{
+      {1.0, 0.0, 0.0},
+      {0.0, 1.0, 0.0},
+      {0.0, 0.0, 1.0}};
 
   vector<double> data_out_0{7.0, 2.0, 10.0};
-  vector<double> data_out_1{1.0, 1.0,  1.0};
+  vector<double> data_out_1{1.0, 1.0, 1.0};
 
-  assert(ntm_vector_summation(data_in_0)==data_out_0);
-  assert(ntm_vector_summation(data_in_1)==data_out_1);
+  assert(ntm_vector_summation(data_in_0) == data_out_0);
+  assert(ntm_vector_summation(data_in_1) == data_out_1);
 
   return 0;
 }

@@ -60,10 +60,10 @@ double ntm_tensor_inverse(double **data_in) {
 
   int i, j, m;
 
-  data_out = (double **) malloc(SIZE_IN*sizeof(int*));
+  data_out = (double **)malloc(SIZE_IN * sizeof(int *));
 
   for (i = 0; i < SIZE_IN; i++) {
-    data_out[i] = (double *)malloc(SIZE_IN*sizeof(int));
+    data_out[i] = (double *)malloc(SIZE_IN * sizeof(int));
   }
 
   // Augmenting Identity Matrix of Order SIZE_IN
@@ -86,9 +86,9 @@ double ntm_tensor_inverse(double **data_in) {
     }
     for (j = 0; j < SIZE_IN; j++) {
       if (i != j) {
-        ratio = tensor[j][i]/tensor[i][i];
-        for (m = 0; m < 2*SIZE_IN; m++) {
-          tensor[j][m] = tensor[j][m] - ratio*tensor[i][m];
+        ratio = tensor[j][i] / tensor[i][i];
+        for (m = 0; m < 2 * SIZE_IN; m++) {
+          tensor[j][m] = tensor[j][m] - ratio * tensor[i][m];
         }
       }
     }
@@ -96,8 +96,8 @@ double ntm_tensor_inverse(double **data_in) {
 
   // Row Operation to Make Principal Diagonal to 1
   for (i = 0; i < SIZE_IN; i++) {
-    for (j = SIZE_IN; j < 2*SIZE_IN; j++) {
-      tensor[i][j] = tensor[i][j]/tensor[i][i];
+    for (j = SIZE_IN; j < 2 * SIZE_IN; j++) {
+      tensor[i][j] = tensor[i][j] / tensor[i][i];
     }
   }
 

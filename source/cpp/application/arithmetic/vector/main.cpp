@@ -42,11 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
-#include"../../../library/arithmetic/ntm_arithmetic.hpp"
+#include "../../../library/arithmetic/ntm_arithmetic.hpp"
 
 using namespace std;
 

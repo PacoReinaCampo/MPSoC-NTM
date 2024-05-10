@@ -42,11 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
-#include"../../../library/math/ntm_math.hpp"
+#include "../../../library/math/ntm_math.hpp"
 
 using namespace std;
 

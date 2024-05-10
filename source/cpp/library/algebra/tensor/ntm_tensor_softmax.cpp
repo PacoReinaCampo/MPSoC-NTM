@@ -42,9 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -58,11 +59,9 @@ vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>>
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_in[0].size(); i++) {
-
     vector<vector<double>> matrix0;
 
     for (int j = 0; j < data_in[0].size(); j++) {
-
       vector<double> vector0;
 
       for (int k = 0; k < data_in[0][0].size(); k++) {
@@ -79,11 +78,10 @@ vector<vector<vector<double>>> ntm_tensor_softmax(vector<vector<vector<double>>>
     vector<vector<double>> matrix1;
 
     for (int j = 0; j < data_in[0].size(); j++) {
-    
       vector<double> vector1;
 
       for (int k = 0; k < data_in[0][0].size(); k++) {
-        vector1.push_back(data_tensor_int[i][j][k]/temporal0);
+        vector1.push_back(data_tensor_int[i][j][k] / temporal0);
       }
       matrix1.push_back(vector1);
     }

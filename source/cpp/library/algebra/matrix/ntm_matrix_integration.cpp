@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_integration(vector<vector<double>> data_in, double length_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
@@ -59,7 +58,7 @@ vector<vector<double>> ntm_matrix_integration(vector<vector<double>> data_in, do
     for (int j = 0; j < data_in[0].size(); j++) {
       temporal += data_in[i][j];
 
-      vector.push_back(temporal*length_in);
+      vector.push_back(temporal * length_in);
     }
     data_out.push_back(vector);
   }

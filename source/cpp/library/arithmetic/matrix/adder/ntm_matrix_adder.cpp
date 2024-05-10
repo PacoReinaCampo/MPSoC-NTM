@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {

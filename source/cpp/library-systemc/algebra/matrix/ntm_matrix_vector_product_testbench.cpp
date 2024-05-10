@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_matrix_vector_product_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   matrix_vector_product matrix_vector_product("MATRIX_VECTOR_PRODUCT");
@@ -55,8 +55,8 @@ int sc_main(int argc, char *argv[]) {
 
   matrix_vector_product.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       matrix_vector_product.data_a_in[i][j](data_a_in[i][j]);
     }
     matrix_vector_product.data_b_in[i](data_b_in[i]);
@@ -64,8 +64,8 @@ int sc_main(int argc, char *argv[]) {
     matrix_vector_product.data_out[i](data_out[i]);
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       data_a_in[i][j] = i + j;
     }
     data_b_in[i] = i;
@@ -76,7 +76,7 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     cout << "@" << sc_time_stamp() << ": data_out[" << i << "] = " << data_out[i].read() << endl;
   }
 

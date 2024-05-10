@@ -50,19 +50,18 @@ struct out {
   double y_out;
 };
 
-double ** ntm_state_top(double **data_k_in, double **data_a_in, double **data_b_in, double **data_c_in, double **data_d_in, double **data_u_in, double *initial_x, int k) {
-
+double **ntm_state_top(double **data_k_in, double **data_a_in, double **data_b_in, double **data_c_in, double **data_d_in, double **data_u_in, double *initial_x, int k) {
   // Variables
   out **data_out;
 
   int i;
 
-  data_out.x_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
-  data_out.y_out = (double **) malloc(SIZE_I_IN*sizeof(int*));
+  data_out.x_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
+  data_out.y_out = (double **)malloc(SIZE_I_IN * sizeof(int *));
 
-  for (i=0;i<SIZE_I_IN;i++) {
-    data_out.x_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
-    data_out.y_out[i] = (double *)malloc(SIZE_J_IN*sizeof(int));
+  for (i = 0; i < SIZE_I_IN; i++) {
+    data_out.x_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
+    data_out.y_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
   }
 
   // Body
@@ -71,6 +70,6 @@ double ** ntm_state_top(double **data_k_in, double **data_a_in, double **data_b_
 
   // y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
   data_out.y_out = ntm_state_vector_output(data_k_in, data_a_in, data_b_in, data_c_in, data_d_in, data_u_in, initial_x, k);
-  
+
   return data_out;
 }

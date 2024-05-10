@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_matrix_subtractor_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   matrix_subtractor matrix_subtractor("MATRIX_SUBTRACTOR");
@@ -55,8 +55,8 @@ int sc_main(int argc, char *argv[]) {
 
   matrix_subtractor.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       matrix_subtractor.data_a_in[i][j](data_a_in[i][j]);
       matrix_subtractor.data_b_in[i][j](data_b_in[i][j]);
 
@@ -64,8 +64,8 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       data_a_in[i][j] = i + j;
       data_b_in[i][j] = i - j;
     }
@@ -76,8 +76,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
     }
   }

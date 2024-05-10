@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<vector<double>>> ntm_tensor_differentiation(vector<vector<vector<double>>> data_in, double length_i_in, double length_j_in, double length_k_in, int control) {
-
   double temporal;
 
   vector<vector<vector<double>>> data_out;
@@ -63,25 +62,20 @@ vector<vector<vector<double>>> ntm_tensor_differentiation(vector<vector<vector<d
         if (control == 0) {
           if (i == 0) {
             temporal = 0.0;
+          } else {
+            temporal = (data_in[i][j][k] - data_in[i - 1][j][k]) / length_i_in;
           }
-          else {
-            temporal = (data_in[i][j][k] - data_in[i-1][j][k])/length_i_in;
-          }
-        }
-        else if (control == 1) {
+        } else if (control == 1) {
           if (j == 0) {
             temporal = 0.0;
+          } else {
+            temporal = (data_in[i][j][k] - data_in[i][j - 1][k]) / length_j_in;
           }
-          else {
-            temporal = (data_in[i][j][k] - data_in[i][j-1][k])/length_j_in;
-          }
-        }
-        else {
+        } else {
           if (k == 0) {
             temporal = 0.0;
-          }
-          else {
-            temporal = (data_in[i][j][k] - data_in[i][j][k-1])/length_k_in;
+          } else {
+            temporal = (data_in[i][j][k] - data_in[i][j][k - 1]) / length_k_in;
           }
         }
         vector.push_back(temporal);

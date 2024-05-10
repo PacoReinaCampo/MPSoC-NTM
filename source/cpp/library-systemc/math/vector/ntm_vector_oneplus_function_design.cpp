@@ -46,7 +46,7 @@
 
 #define SIZE_I_IN 4
 
-#include<math.h>
+#include <math.h>
 
 SC_MODULE(vector_oneplus_function) {
   sc_in_clk clock;
@@ -57,14 +57,14 @@ SC_MODULE(vector_oneplus_function) {
   SC_CTOR(vector_oneplus_function) {
     SC_METHOD(operation);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       sensitive << data_in[i];
     }
   }
 
   void operation() {
     int temporal = 0;
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       temporal += data_in[i].read() * data_in[i].read();
     }
 

@@ -44,23 +44,20 @@
 
 #include "systemc.h"
 
-SC_MODULE(adder)
-{
+SC_MODULE(adder) {
   sc_in_clk clock;
   sc_in<int> A;
   sc_in<int> B;
 
   sc_out<int> out;
 
-  SC_CTOR(adder)
-  {
+  SC_CTOR(adder) {
     // cout<<"Constructor called\n";
     SC_METHOD(add);
     sensitive << A << B << clock.pos();
   }
 
-  void add()
-  {
+  void add() {
     out.write(A.read() + B.read());
   }
 };

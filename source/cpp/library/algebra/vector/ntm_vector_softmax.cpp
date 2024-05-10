@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_softmax(vector<double> data_in) {
-
   double temporal0 = 0.0;
 
   vector<double> data_int;
@@ -65,7 +65,7 @@ vector<double> ntm_vector_softmax(vector<double> data_in) {
   }
 
   for (int i = 0; i < data_in.size(); i++) {
-    data_out.push_back(data_int[i]/temporal0);
+    data_out.push_back(data_int[i] / temporal0);
   }
 
   return data_out;

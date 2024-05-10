@@ -56,7 +56,7 @@ SC_MODULE(dot_product) {
   SC_CTOR(dot_product) {
     SC_METHOD(product);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       sensitive << data_a_in[i];
       sensitive << data_b_in[i];
     }
@@ -64,7 +64,7 @@ SC_MODULE(dot_product) {
 
   void product() {
     int temporal = 0;
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       temporal += data_a_in[i].read() * data_b_in[i].read();
     }
 

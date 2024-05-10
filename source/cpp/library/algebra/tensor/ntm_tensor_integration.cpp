@@ -42,17 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<vector<double>>> ntm_tensor_integration(vector<vector<vector<double>>> data_in, double length_in) {
-
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
-
     vector<vector<double>> matrix;
 
     for (int j = 0; j < data_in[0].size(); j++) {
@@ -63,7 +61,7 @@ vector<vector<vector<double>>> ntm_tensor_integration(vector<vector<vector<doubl
       for (int k = 0; k < data_in[0][0].size(); k++) {
         temporal += data_in[i][j][k];
 
-        vector.push_back(temporal*length_in);
+        vector.push_back(temporal * length_in);
       }
       matrix.push_back(vector);
     }

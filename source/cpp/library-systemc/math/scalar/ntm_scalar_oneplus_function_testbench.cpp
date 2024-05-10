@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_scalar_oneplus_function_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   scalar_oneplus_function scalar_oneplus_function("SCALAR_ONEPLUS_FUNCTION");

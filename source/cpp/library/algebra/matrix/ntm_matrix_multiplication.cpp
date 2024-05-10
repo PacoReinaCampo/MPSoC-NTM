@@ -42,15 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_multiplication(vector<vector<vector<double>>> tensor) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < tensor.size(); i++) {
@@ -61,7 +61,6 @@ vector<vector<double>> ntm_matrix_multiplication(vector<vector<vector<double>>> 
 
       for (int k = 0; k < tensor[0][0].size(); k++) {
         temporal *= tensor[i][j][k];
-
       }
       vector.push_back(temporal);
     }
@@ -72,54 +71,38 @@ vector<vector<double>> ntm_matrix_multiplication(vector<vector<vector<double>>> 
 }
 
 int main() {
-  vector<vector<vector<double>>> data_in_0 {
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    },
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    },
-    {
-      { 3.0, 2.0, 2.0 },
-      { 0.0, 2.0, 0.0 },
-      { 5.0, 4.0, 1.0 }
-    }
-  };
-  vector<vector<vector<double>>> data_in_1 {
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    },
-    {
-      { 1.0, 0.0, 0.0 },
-      { 0.0, 1.0, 0.0 },
-      { 0.0, 0.0, 1.0 }
-    }
-  };
+  vector<vector<vector<double>>> data_in_0{
+      {{3.0, 2.0, 2.0},
+       {0.0, 2.0, 0.0},
+       {5.0, 4.0, 1.0}},
+      {{3.0, 2.0, 2.0},
+       {0.0, 2.0, 0.0},
+       {5.0, 4.0, 1.0}},
+      {{3.0, 2.0, 2.0},
+       {0.0, 2.0, 0.0},
+       {5.0, 4.0, 1.0}}};
+  vector<vector<vector<double>>> data_in_1{
+      {{1.0, 0.0, 0.0},
+       {0.0, 1.0, 0.0},
+       {0.0, 0.0, 1.0}},
+      {{1.0, 0.0, 0.0},
+       {0.0, 1.0, 0.0},
+       {0.0, 0.0, 1.0}},
+      {{1.0, 0.0, 0.0},
+       {0.0, 1.0, 0.0},
+       {0.0, 0.0, 1.0}}};
 
-  vector<vector<double>> data_out_0 {
-    { 12.0, 0.0, 20.0 },
-    { 12.0, 0.0, 20.0 },
-    { 12.0, 0.0, 20.0 }
-  };
-  vector<vector<double>> data_out_1 {
-    { 0.0, 0.0, 0.0 },
-    { 0.0, 0.0, 0.0 },
-    { 0.0, 0.0, 0.0 }
-  };
+  vector<vector<double>> data_out_0{
+      {12.0, 0.0, 20.0},
+      {12.0, 0.0, 20.0},
+      {12.0, 0.0, 20.0}};
+  vector<vector<double>> data_out_1{
+      {0.0, 0.0, 0.0},
+      {0.0, 0.0, 0.0},
+      {0.0, 0.0, 0.0}};
 
-  assert(ntm_matrix_multiplication(data_in_0)==data_out_0);
-  assert(ntm_matrix_multiplication(data_in_1)==data_out_1);
+  assert(ntm_matrix_multiplication(data_in_0) == data_out_0);
+  assert(ntm_matrix_multiplication(data_in_1) == data_out_1);
 
   return 0;
 }

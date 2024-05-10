@@ -42,15 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_transpose(vector<vector<double>> data_in) {
-
   double ONE = 1.0;
 
   vector<vector<double>> data_out;
@@ -70,19 +70,17 @@ vector<vector<double>> ntm_matrix_transpose(vector<vector<double>> data_in) {
 }
 
 int main() {
-  vector<vector<double>> data_in {
-    { 1.0,  1.0, -2.0 },
-    { 1.0,  3.0, -2.0 },
-    { 1.0, -3.0, -4.0 }
-  };
+  vector<vector<double>> data_in{
+      {1.0, 1.0, -2.0},
+      {1.0, 3.0, -2.0},
+      {1.0, -3.0, -4.0}};
 
-  vector<vector<double>> data_out {
-    {  1.0,  1.0,  1.0 },
-    {  1.0,  3.0, -3.0 },
-    { -2.0, -2.0, -4.0 }
-  };
+  vector<vector<double>> data_out{
+      {1.0, 1.0, 1.0},
+      {1.0, 3.0, -3.0},
+      {-2.0, -2.0, -4.0}};
 
-  assert(ntm_matrix_transpose(data_in)==data_out);
+  assert(ntm_matrix_transpose(data_in) == data_out);
 
   return 0;
 }

@@ -42,20 +42,21 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_deviation_function(vector<vector<double>> matrix, vector<double> mean) {
   vector<double> data_out;
 
-  for(int i=0; i<matrix.size(); i++) {
+  for (int i = 0; i < matrix.size(); i++) {
     double temporal = 0.0;
 
-    for(int j=0; j<matrix[0].size(); j++) {
-      temporal += (matrix[i][j] - mean[i])*(matrix[i][j] - mean[i])/(double)matrix[0].size();
+    for (int j = 0; j < matrix[0].size(); j++) {
+      temporal += (matrix[i][j] - mean[i]) * (matrix[i][j] - mean[i]) / (double)matrix[0].size();
     }
     data_out.push_back(sqrt(temporal));
   }

@@ -42,14 +42,13 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_product(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -70,26 +69,23 @@ vector<vector<double>> ntm_matrix_product(vector<vector<double>> data_a_in, vect
 }
 
 int main() {
-  vector<vector<double>> data_a_in {
-    { 1.0, 2.0, 3.0 },
-    { 4.0, 2.0, 6.0 },
-    { 3.0, 4.0, 1.0 },
-    { 2.0, 4.0, 8.0 }
-  };
-  vector<vector<double>> data_b_in {
-    { 1.0, 3.0, 3.0, 2.0 },
-    { 7.0, 6.0, 2.0, 1.0 },
-    { 3.0, 4.0, 2.0, 1.0 }
-  };
+  vector<vector<double>> data_a_in{
+      {1.0, 2.0, 3.0},
+      {4.0, 2.0, 6.0},
+      {3.0, 4.0, 1.0},
+      {2.0, 4.0, 8.0}};
+  vector<vector<double>> data_b_in{
+      {1.0, 3.0, 3.0, 2.0},
+      {7.0, 6.0, 2.0, 1.0},
+      {3.0, 4.0, 2.0, 1.0}};
 
-  vector<vector<double>> data_out {
-    { 24.0, 27.0, 13.0,  7.0 },
-    { 36.0, 48.0, 28.0, 16.0 },
-    { 34.0, 37.0, 19.0, 11.0 },
-    { 54.0, 62.0, 30.0, 16.0 }
-  };
+  vector<vector<double>> data_out{
+      {24.0, 27.0, 13.0, 7.0},
+      {36.0, 48.0, 28.0, 16.0},
+      {34.0, 37.0, 19.0, 11.0},
+      {54.0, 62.0, 30.0, 16.0}};
 
-  assert(ntm_matrix_product(data_a_in, data_b_in)==data_out);
+  assert(ntm_matrix_product(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

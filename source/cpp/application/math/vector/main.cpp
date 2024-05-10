@@ -42,30 +42,29 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
-#include"../../../library/math/ntm_math.hpp"
+#include "../../../library/math/ntm_math.hpp"
 
 int main() {
-  vector<double> data_in{ 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 };
+  vector<double> data_in{6.3226113886226751, 3.1313826152262876, 8.3512687816132226};
 
   vector<double> data_out;
 
-  data_out = { 0.9982079678583020, 0.9581688450893644, 0.9997639589554603 };
+  data_out = {0.9982079678583020, 0.9581688450893644, 0.9997639589554603};
 
   assert(ntm_vector_logistic_function(data_in) == data_out);
 
-  data_out = { 7.324405028374851, 4.174113884283648, 9.351504850519834 };
+  data_out = {7.324405028374851, 4.174113884283648, 9.351504850519834};
 
   assert(ntm_vector_oneplus_function(data_in) == data_out);
 
-  vector<vector<double>> data_in {
-    {3.0, 1.0, 2.0},
-    {1.0, 2.0, 0.0},
-    {5.0, 3.0, 4.0}
-  };
+  vector<vector<double>> data_in{
+      {3.0, 1.0, 2.0},
+      {1.0, 2.0, 0.0},
+      {5.0, 3.0, 4.0}};
 
   vector<double> mean{11.0, 12.0, 10.0};
 

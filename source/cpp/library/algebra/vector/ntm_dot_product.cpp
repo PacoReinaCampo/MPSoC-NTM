@@ -42,16 +42,16 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 double ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in) {
   double data_out = 0;
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     data_out += data_a_in[i] * data_b_in[i];
   }
 
@@ -64,7 +64,7 @@ int main() {
 
   double data_out = 16.0;
 
-  assert(ntm_dot_product(data_a_in, data_b_in)==data_out);
+  assert(ntm_dot_product(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

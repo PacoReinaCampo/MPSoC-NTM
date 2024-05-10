@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_tensor_matrix_convolution_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   tensor_matrix_convolution tensor_matrix_convolution("TENSOR_MATRIX_CONVOLUTION");
@@ -55,9 +55,9 @@ int sc_main(int argc, char *argv[]) {
 
   tensor_matrix_convolution.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
-      for (int k=0; k<SIZE_K_IN; k++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
+      for (int k = 0; k < SIZE_K_IN; k++) {
         tensor_matrix_convolution.data_a_in[i][j][k](data_a_in[i][j][k]);
       }
       tensor_matrix_convolution.data_b_in[i][j](data_b_in[i][j]);
@@ -66,9 +66,9 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
-      for (int k=0; k<SIZE_K_IN; k++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
+      for (int k = 0; k < SIZE_K_IN; k++) {
         data_a_in[i][j][k] = i + j + k;
       }
       data_b_in[i][j] = i - j;
@@ -80,8 +80,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
     }
   }

@@ -42,17 +42,18 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 double ntm_vector_module(vector<double> data_in) {
   double data_out = 0.0;
 
-  for (int i=0; i<data_in.size(); i++) {
+  for (int i = 0; i < data_in.size(); i++) {
     data_out += data_in[i] * data_in[i];
   }
 
@@ -64,7 +65,7 @@ int main() {
 
   double data_out = 5.0;
 
-  assert(ntm_vector_module(data_in)==data_out);
+  assert(ntm_vector_module(data_in) == data_out);
 
   return 0;
 }

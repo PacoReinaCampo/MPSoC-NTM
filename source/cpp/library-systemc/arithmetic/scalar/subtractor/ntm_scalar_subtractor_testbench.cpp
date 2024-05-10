@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_scalar_subtractor_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   scalar_subtractor scalar_subtractor("SCALAR_SUBTRACTOR");

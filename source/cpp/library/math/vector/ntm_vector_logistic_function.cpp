@@ -42,20 +42,20 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_logistic_function(vector<double> data_in) {
-
   double ONE = 1.0;
 
   vector<double> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
-    double temporal = ONE/(ONE + ONE/exp(data_in[i]));
+    double temporal = ONE / (ONE + ONE / exp(data_in[i]));
 
     data_out.push_back(temporal);
   }

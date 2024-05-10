@@ -42,25 +42,26 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
 
 using namespace std;
 
 class ScalarMath {
-  public:
-    double ntm_scalar_logistic_function(double data_in);
-    double ntm_scalar_oneplus_function(double data_in);
-    double ntm_scalar_mean_function(vector<double> data_in);
-    double ntm_scalar_deviation_function(vector<double> data_in, double mean);
+ public:
+  double ntm_scalar_logistic_function(double data_in);
+  double ntm_scalar_oneplus_function(double data_in);
+  double ntm_scalar_mean_function(vector<double> data_in);
+  double ntm_scalar_deviation_function(vector<double> data_in, double mean);
 };
 
 double ScalarMath::ntm_scalar_logistic_function(double data_in) {
   double ONE = 1.0;
 
   // calculating data_out
-  return ONE/(ONE + ONE/exp(data_in));
+  return ONE / (ONE + ONE / exp(data_in));
 }
 
 double ScalarMath::ntm_scalar_oneplus_function(double data_in) {
@@ -75,8 +76,8 @@ double ScalarMath::ntm_scalar_oneplus_function(double data_in) {
 double ScalarMath::ntm_scalar_mean_function(vector<double> data_in) {
   double data_out = 0.0;
 
-  for(int i=0; i<data_in.size(); i++) {
-    data_out += data_in[i]/(double)data_in.size();
+  for (int i = 0; i < data_in.size(); i++) {
+    data_out += data_in[i] / (double)data_in.size();
   }
 
   return data_out;
@@ -85,15 +86,14 @@ double ScalarMath::ntm_scalar_mean_function(vector<double> data_in) {
 double ScalarMath::ntm_scalar_deviation_function(vector<double> data_in, double mean) {
   double data_out = 0.0;
 
-  for(int i=0; i<data_in.size(); i++) {
-    data_out += (data_in[i] - mean)*(data_in[i] - mean)/(double)data_in.size();
+  for (int i = 0; i < data_in.size(); i++) {
+    data_out += (data_in[i] - mean) * (data_in[i] - mean) / (double)data_in.size();
   }
 
   return sqrt(data_out);
 }
 
 int main() {
-
   ScalarMath Math;
 
   double data_in_0 = 0.8909031788043871;

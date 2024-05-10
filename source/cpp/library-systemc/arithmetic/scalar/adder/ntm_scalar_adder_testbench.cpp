@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_scalar_adder_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   scalar_adder scalar_adder("SCALAR_ADDER");

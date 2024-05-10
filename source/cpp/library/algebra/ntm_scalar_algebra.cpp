@@ -42,23 +42,24 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 class ScalarAlgebra {
-  public:
-    double ntm_scalar_summation(vector<double> data_in);
-    double ntm_scalar_multiplication(vector<double> data_in);
+ public:
+  double ntm_scalar_summation(vector<double> data_in);
+  double ntm_scalar_multiplication(vector<double> data_in);
 };
 
 double ScalarAlgebra::ntm_scalar_summation(vector<double> data_in) {
   double data_out = 0.0;
 
-  for (int i=0; i<data_in.size(); i++) {
+  for (int i = 0; i < data_in.size(); i++) {
     data_out += data_in[i];
   }
 
@@ -68,7 +69,7 @@ double ScalarAlgebra::ntm_scalar_summation(vector<double> data_in) {
 double ScalarAlgebra::ntm_scalar_multiplication(vector<double> data_in) {
   double data_out = 1.0;
 
-  for (int i=0; i<data_in.size(); i++) {
+  for (int i = 0; i < data_in.size(); i++) {
     data_out *= data_in[i];
   }
 
@@ -76,7 +77,6 @@ double ScalarAlgebra::ntm_scalar_multiplication(vector<double> data_in) {
 }
 
 int main() {
-
   ScalarAlgebra Algebra;
 
   vector<double> data_in_0{3.0, 2.0, 2.0};
@@ -86,7 +86,7 @@ int main() {
   double summation_data_out_1 = 1.0;
 
   double multiplication_data_out_0 = 12.0;
-  double multiplication_data_out_1 =  0.0;
+  double multiplication_data_out_1 = 0.0;
 
   assert(Algebra.ntm_scalar_summation(data_in_0) == summation_data_out_0);
   assert(Algebra.ntm_scalar_summation(data_in_1) == summation_data_out_1);

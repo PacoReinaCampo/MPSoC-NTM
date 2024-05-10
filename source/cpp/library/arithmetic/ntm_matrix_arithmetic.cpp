@@ -42,15 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
-#include"ntm_arithmetic.hpp"
+#include "ntm_arithmetic.hpp"
 
 using namespace std;
 
 vector<vector<double>> MatrixArithmetic::ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -68,7 +67,6 @@ vector<vector<double>> MatrixArithmetic::ntm_matrix_adder(vector<vector<double>>
 }
 
 vector<vector<double>> MatrixArithmetic::ntm_matrix_subtract(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -86,7 +84,6 @@ vector<vector<double>> MatrixArithmetic::ntm_matrix_subtract(vector<vector<doubl
 }
 
 vector<vector<double>> MatrixArithmetic::ntm_matrix_multiplier(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -104,7 +101,6 @@ vector<vector<double>> MatrixArithmetic::ntm_matrix_multiplier(vector<vector<dou
 }
 
 vector<vector<double>> MatrixArithmetic::ntm_matrix_divider(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {

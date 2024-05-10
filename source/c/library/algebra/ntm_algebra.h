@@ -42,40 +42,40 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-double ntm_scalar_multiplication(double *)
-double ntm_scalar_summation(double *)
+double ntm_scalar_multiplication(double *);
+double ntm_scalar_summation(double *);
 
-double ntm_dot_product(double *, double *)
-double * ntm_vector_convolution(double *, double *)
-double ntm_vector_cosine_similarity(double *, double *)
-double ntm_vector_module(double *)
-double * ntm_vector_multiplication(double **)
-double * ntm_vector_summation(double **)
-double * ntm_vector_differentiation(double *, double)
-double * ntm_vector_integration(double *, double)
-double * ntm_vector_softmax(double *)
+double ntm_dot_product(double *, double *);
+double *ntm_vector_convolution(double *, double *);
+double ntm_vector_cosine_similarity(double *, double *);
+double ntm_vector_module(double *);
+double *ntm_vector_multiplication(double **);
+double *ntm_vector_summation(double **);
+double *ntm_vector_differentiation(double *, double);
+double *ntm_vector_integration(double *, double);
+double *ntm_vector_softmax(double *);
 
-double ** ntm_matrix_convolution(double **, double **)
-double ** ntm_matrix_inverse(double **)
-double ** ntm_matrix_multiplication(double ***)
-double ** ntm_matrix_product(double **, double **)
-double ** ntm_matrix_summation(double ***)
-double ** ntm_matrix_transpose(double **)
-double ** ntm_matrix_vector_convolution(double **, double *)
-double ** ntm_matrix_vector_product(double **, double *)
-double ** ntm_transpose_vector_product(double *, double *)
-double ** ntm_matrix_differentiation(double **, double, double, int)
-double ** ntm_matrix_integration(double **, double)
-double ** ntm_matrix_softmax(double **)
+double **ntm_matrix_convolution(double **, double **);
+double **ntm_matrix_inverse(double **);
+double **ntm_matrix_multiplication(double ***);
+double **ntm_matrix_product(double **, double **);
+double **ntm_matrix_summation(double ***);
+double **ntm_matrix_transpose(double **);
+double **ntm_matrix_vector_convolution(double **, double *);
+double **ntm_matrix_vector_product(double **, double *);
+double **ntm_transpose_vector_product(double *, double *);
+double **ntm_matrix_differentiation(double **, double, double, int);
+double **ntm_matrix_integration(double **, double);
+double **ntm_matrix_softmax(double **);
 
-double *** ntm_tensor_convolution(double ***, double ***)
-double *** ntm_tensor_inverse(double ***)
-double *** ntm_tensor_matrix_convolution(double ***, double **)
-double *** ntm_tensor_matrix_product(double ***, double **)
-double *** ntm_tensor_multiplication(double ***)
-double *** ntm_tensor_product(double ***, double ***)
-double *** ntm_tensor_summation(double ***)
-double *** ntm_tensor_transpose(double ***)
-double *** ntm_tensor_differentiation(double ***, double, double, double, int)
-double *** ntm_tensor_integration(double ***, double)
-double *** ntm_tensor_softmax(double ***)
+double ***ntm_tensor_convolution(double ***, double ***);
+double ***ntm_tensor_inverse(double ***);
+double ***ntm_tensor_matrix_convolution(double ***, double **);
+double ***ntm_tensor_matrix_product(double ***, double **);
+double ***ntm_tensor_multiplication(double ***);
+double ***ntm_tensor_product(double ***, double ***);
+double ***ntm_tensor_summation(double ***);
+double ***ntm_tensor_transpose(double ***);
+double ***ntm_tensor_differentiation(double ***, double, double, double, int);
+double ***ntm_tensor_integration(double ***, double);
+double ***ntm_tensor_softmax(double ***);

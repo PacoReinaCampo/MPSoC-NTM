@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
 #include "../ntm_algebra.h"
 
@@ -61,10 +61,10 @@ double ntm_matrix_vector_convolution(double **data_a_in, double **data_b_in) {
 
   int i, j, m;
 
-  data_out = (double **) malloc(SIZE_I_A_IN*sizeof(int*));
+  data_out = (double **)malloc(SIZE_I_A_IN * sizeof(int *));
 
   for (i = 0; i < SIZE_I_A_IN; i++) {
-    data_out[i] = (double *)malloc(SIZE_J_B_IN*sizeof(int));
+    data_out[i] = (double *)malloc(SIZE_J_B_IN * sizeof(int));
   }
 
   // Output

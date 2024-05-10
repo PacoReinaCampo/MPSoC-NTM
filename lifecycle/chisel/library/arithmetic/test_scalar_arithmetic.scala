@@ -1,59 +1,36 @@
-// An ALU is a minimal start for a processor.
 package simple
 
 import chisel3._
-import chisel3.util._
+import chiseltest._
+import org.scalatest.flatspec.AnyFlatSpec
 
-// This is a very basic ALU example.
-class Bit extends Module {
-  val io = IO(new Bundle {
-    val fn = Input(UInt(2.W))
-    val a = Input(UInt(4.W))
-    val b = Input(UInt(4.W))
-    val result = Output(UInt(4.W))
-  })
+// Test the ALU design
+class BitTester extends AnyFlatSpec with ChiselScalatestTester {
 
-  // Use shorter variable names
-  val fn = io.fn
-  val a = io.a
-  val b = io.b
+  "BitTester test" should "pass" in {
+    test(new Bit) { dut =>
 
-  val result = Wire(UInt(4.W))
-  // some default value is needed
-  result := 0.U
+      // This is exhaustive testing, which usually is not possible
+      for (a <- 0 to 15) {
+        for (b <- 0 to 15) {
+          for (op <- 0 to 3) {
+            val result =
+              op match {
+                case 0 => a + b
+                case 1 => a - b
+                case 2 => a | b
+                case 3 => a & b
+              }
+            val resMask = result & 0x0f
 
-  // The ALU selection
-  switch(fn) {
-    is(0.U) { result := a + b }
-    is(1.U) { result := a - b }
-    is(2.U) { result := a | b }
-    is(3.U) { result := a & b }
+            dut.io.fn.poke(op.U)
+            dut.io.a.poke(a.U)
+            dut.io.b.poke(b.U)
+            dut.clock.step(1)
+            dut.io.result.expect(resMask.U)
+          }
+        }
+      }
+    }
   }
-
-  // Output on the LEDs
-  io.result := result
-}
-
-// A top level to wire FPGA buttons and LEDs to the ALU input and output.
-class BitTop extends Module {
-  val io = IO(new Bundle {
-    val sw = Input(UInt(10.W))
-    val led = Output(UInt(10.W))
-  })
-
-  val alu = Module(new Bit())
-
-  // Map switches to the ALU input ports
-  alu.io.fn := io.sw(1, 0)
-  alu.io.a := io.sw(5, 2)
-  alu.io.b := io.sw(9, 6)
-
-  // And the result to the LEDs (with 0 extension)
-  io.led := alu.io.result
-}
-
-// Generate the Verilog code
-object BitMain extends App {
-  println("Generating the ALU hardware")
-  (new chisel3.stage.ChiselStage).emitVerilog(new BitTop(), Array("--target-dir", "generated"))
 }

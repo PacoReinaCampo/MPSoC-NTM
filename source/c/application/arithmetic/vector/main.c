@@ -42,23 +42,22 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 
 #include "../../../library/arithmetic/ntm_arithmetic.h"
 
 int main() {
-
   double *data_a_in;
   double *data_b_in;
 
   double *data_out;
 
-  data_a_in = (double *) malloc(sizeof(int)*SIZE_IN);
-  data_b_in = (double *) malloc(sizeof(int)*SIZE_IN);
+  data_a_in = (double *)malloc(sizeof(int) * SIZE_IN);
+  data_b_in = (double *)malloc(sizeof(int) * SIZE_IN);
 
-  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
+  data_out = (double *)malloc(sizeof(int) * SIZE_IN);
 
   data_a_in[0] = 2.0;
   data_a_in[1] = 0.0;
@@ -74,9 +73,9 @@ int main() {
 
   assert(ntm_vector_adder(data_a_in, data_b_in) == *data_out);
 
-  data_out[0] =  1.0;
+  data_out[0] = 1.0;
   data_out[1] = -1.0;
-  data_out[2] =  2.0;
+  data_out[2] = 2.0;
 
   assert(ntm_vector_subtractor(data_a_in, data_b_in) == *data_out);
 

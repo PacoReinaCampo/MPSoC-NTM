@@ -42,14 +42,13 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_convolution(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in) {
-
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -58,9 +57,9 @@ vector<vector<double>> ntm_matrix_convolution(vector<vector<double>> data_a_in, 
     for (int j = 0; j < data_b_in[0].size(); j++) {
       double temporal = 0.0;
 
-      for (int m = 0; m < i+1; m++) {
-        for (int n = 0; n < j+1; n++) {
-          temporal += data_a_in[m][n] * data_b_in[i-m][j-n];
+      for (int m = 0; m < i + 1; m++) {
+        for (int n = 0; n < j + 1; n++) {
+          temporal += data_a_in[m][n] * data_b_in[i - m][j - n];
         }
       }
       vector.push_back(temporal);
@@ -72,24 +71,21 @@ vector<vector<double>> ntm_matrix_convolution(vector<vector<double>> data_a_in, 
 }
 
 int main() {
-  vector<vector<double>> data_a_in {
-    { 1.0, 2.0, 3.0 },
-    { 4.0, 2.0, 6.0 },
-    { 3.0, 4.0, 1.0 }
-  };
-  vector<vector<double>> data_b_in {
-    { 1.0 },
-    { 7.0 },
-    { 3.0 }
-  };
+  vector<vector<double>> data_a_in{
+      {1.0, 2.0, 3.0},
+      {4.0, 2.0, 6.0},
+      {3.0, 4.0, 1.0}};
+  vector<vector<double>> data_b_in{
+      {1.0},
+      {7.0},
+      {3.0}};
 
-  vector<vector<double>> data_out {
-    {  1.0 },
-    { 11.0 },
-    { 34.0 }
-  };
+  vector<vector<double>> data_out{
+      {1.0},
+      {11.0},
+      {34.0}};
 
-  assert(ntm_matrix_convolution(data_a_in, data_b_in)==data_out);
+  assert(ntm_matrix_convolution(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

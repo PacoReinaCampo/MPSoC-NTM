@@ -56,14 +56,14 @@ SC_MODULE(vector_divider) {
   SC_CTOR(vector_divider) {
     SC_METHOD(divide);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       sensitive << data_a_in[i];
       sensitive << data_b_in[i];
     }
   }
 
   void divide() {
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       data_out[i].write(data_a_in[i].read() / data_b_in[i].read());
     }
   }

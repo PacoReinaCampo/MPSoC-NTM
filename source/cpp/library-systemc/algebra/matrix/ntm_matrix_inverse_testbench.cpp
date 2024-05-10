@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_matrix_inverse_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   matrix_inverse matrix_inverse("MATRIX_INVERSE");
@@ -54,16 +54,16 @@ int sc_main(int argc, char *argv[]) {
 
   matrix_inverse.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       matrix_inverse.data_in[i][j](data_in[i][j]);
 
       matrix_inverse.data_out[i][j](data_out[i][j]);
     }
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       data_in[i][j] = i + j;
     }
   }
@@ -73,8 +73,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
     }
   }

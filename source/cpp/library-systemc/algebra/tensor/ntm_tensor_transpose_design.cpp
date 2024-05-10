@@ -57,9 +57,9 @@ SC_MODULE(tensor_transpose) {
   SC_CTOR(tensor_transpose) {
     SC_METHOD(transpose);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           sensitive << data_in[i][j][k];
         }
       }
@@ -67,9 +67,9 @@ SC_MODULE(tensor_transpose) {
   }
 
   void transpose() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           data_out[i][j][k].write(data_in[i][k][j].read());
         }
       }

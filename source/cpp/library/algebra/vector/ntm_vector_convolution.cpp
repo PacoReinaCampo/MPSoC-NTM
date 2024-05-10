@@ -42,20 +42,20 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in) {
   vector<double> data_out;
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     double temporal = 0.0;
 
-    for (int m=0; m<i+1; m++) {
-      temporal += data_a_in[m] * data_b_in[i-m];
+    for (int m = 0; m < i + 1; m++) {
+      temporal += data_a_in[m] * data_b_in[i - m];
     }
     data_out.push_back(temporal);
   }
@@ -69,7 +69,7 @@ int main() {
 
   vector<double> data_out{1.0, 5.0, 12.0};
 
-  assert(ntm_vector_convolution(data_a_in, data_b_in)==data_out);
+  assert(ntm_vector_convolution(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

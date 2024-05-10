@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_oneplus_function(vector<vector<double>> data_in) {
-
   double ONE = 1.0;
 
   vector<vector<double>> data_out;

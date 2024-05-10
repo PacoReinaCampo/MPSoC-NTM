@@ -57,8 +57,8 @@ SC_MODULE(matrix_adder) {
   SC_CTOR(matrix_adder) {
     SC_METHOD(adder);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         sensitive << data_a_in[i][j];
         sensitive << data_b_in[i][j];
       }
@@ -66,8 +66,8 @@ SC_MODULE(matrix_adder) {
   }
 
   void adder() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         data_out[i][j].write(data_a_in[i][j].read() + data_b_in[i][j].read());
       }
     }

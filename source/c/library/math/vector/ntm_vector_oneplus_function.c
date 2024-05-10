@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #define SIZE_IN 3
 
@@ -57,7 +57,7 @@ double ntm_vector_oneplus_function(double *data_in) {
 
   int i;
 
-  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
+  data_out = (double *)malloc(sizeof(int) * SIZE_IN);
 
   // calculating result
   for (i = 0; i < SIZE_IN; i++) {

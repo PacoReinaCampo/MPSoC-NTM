@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_transpose_vector_product_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   transpose_vector_product transpose_vector_product("TRANSPOSE_VECTOR_PRODUCT");
@@ -55,25 +55,25 @@ int sc_main(int argc, char *argv[]) {
 
   transpose_vector_product.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     transpose_vector_product.data_a_in[i](data_a_in[i]);
   }
 
-  for (int j=0; j<SIZE_J_IN; j++) {
+  for (int j = 0; j < SIZE_J_IN; j++) {
     transpose_vector_product.data_b_in[j](data_b_in[j]);
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       transpose_vector_product.data_out[i][j](data_out[i][j]);
     }
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     data_a_in[i] = i;
   }
 
-  for (int j=0; j<SIZE_J_IN; j++) {
+  for (int j = 0; j < SIZE_J_IN; j++) {
     data_b_in[j] = j;
   }
 
@@ -82,8 +82,8 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << "] = " << data_out[i][j].read() << endl;
     }
   }

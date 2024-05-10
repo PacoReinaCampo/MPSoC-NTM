@@ -47,7 +47,6 @@
 #define SIZE_I_IN 4
 
 SC_MODULE(vector_adder) {
-
   sc_in_clk clock;
   sc_in<sc_int<64>> data_a_in[SIZE_I_IN];
   sc_in<sc_int<64>> data_b_in[SIZE_I_IN];
@@ -57,14 +56,14 @@ SC_MODULE(vector_adder) {
   SC_CTOR(vector_adder) {
     SC_METHOD(adder);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-        sensitive << data_a_in[i];
-        sensitive << data_b_in[i];
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      sensitive << data_a_in[i];
+      sensitive << data_b_in[i];
     }
   }
 
   void adder() {
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       data_out[i].write(data_a_in[i].read() + data_b_in[i].read());
     }
   }

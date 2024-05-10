@@ -42,9 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -56,7 +57,6 @@ vector<vector<double>> ntm_matrix_softmax(vector<vector<double>> data_in) {
   vector<vector<double>> data_out;
 
   for (int i = 0; i < data_in.size(); i++) {
-
     vector<double> vector0;
 
     for (int j = 0; j < data_in[0].size(); j++) {
@@ -71,7 +71,7 @@ vector<vector<double>> ntm_matrix_softmax(vector<vector<double>> data_in) {
     vector<double> vector1;
 
     for (int j = 0; j < data_in[0].size(); j++) {
-      vector1.push_back(data_int[i][j]/temporal0);
+      vector1.push_back(data_int[i][j] / temporal0);
     }
     data_out.push_back(vector1);
   }

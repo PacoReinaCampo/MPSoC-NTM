@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_tensor_inverse_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   tensor_inverse tensor_inverse("TENSOR_INVERSE");
@@ -54,9 +54,9 @@ int sc_main(int argc, char *argv[]) {
 
   tensor_inverse.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
-      for (int k=0; k<SIZE_K_IN; k++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
+      for (int k = 0; k < SIZE_K_IN; k++) {
         tensor_inverse.data_in[i][j][k](data_in[i][j][k]);
 
         tensor_inverse.data_out[i][j][k](data_out[i][j][k]);
@@ -64,9 +64,9 @@ int sc_main(int argc, char *argv[]) {
     }
   }
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
-      for (int k=0; k<SIZE_K_IN; k++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
+      for (int k = 0; k < SIZE_K_IN; k++) {
         data_in[i][j][k] = i + j + k;
       }
     }
@@ -77,9 +77,9 @@ int sc_main(int argc, char *argv[]) {
   clock = 1;
   sc_start(1, SC_NS);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
-    for (int j=0; j<SIZE_J_IN; j++) {
-      for (int k=0; k<SIZE_K_IN; k++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
+      for (int k = 0; k < SIZE_K_IN; k++) {
         cout << "@" << sc_time_stamp() << ": data_out[" << i << ", " << j << ", " << k << "] = " << data_out[i][j][k].read() << endl;
       }
     }

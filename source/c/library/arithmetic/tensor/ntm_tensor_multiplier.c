@@ -48,18 +48,17 @@
 #include "../ntm_arithmetic.h"
 
 double ntm_tensor_multiplier(double ***data_a_in, double ***data_b_in) {
-
   double ***data_out;
 
   int i, j, k;
 
-  data_out = (double ***) malloc(SIZE_I_IN*sizeof(int**));
+  data_out = (double ***)malloc(SIZE_I_IN * sizeof(int **));
 
-  for (i=0;i<SIZE_I_IN;i++) {
-    data_out[i] = (double **)malloc(SIZE_J_IN*sizeof(int*));
+  for (i = 0; i < SIZE_I_IN; i++) {
+    data_out[i] = (double **)malloc(SIZE_J_IN * sizeof(int *));
 
-    for (j=0;j<SIZE_J_IN;j++) {
-      data_out[i][j] = (double *)malloc(SIZE_K_IN*sizeof(int*));
+    for (j = 0; j < SIZE_J_IN; j++) {
+      data_out[i][j] = (double *)malloc(SIZE_K_IN * sizeof(int *));
     }
   }
 

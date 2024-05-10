@@ -42,11 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_lstm_output_u_trainer_design.cpp"
+#include "systemc.h"
 
-int sc_main(int argc, char *argv[])
-{
+int sc_main(int argc, char *argv[]) {
   adder adder("ADDER");
 
   sc_signal<int> Ain;

@@ -57,18 +57,18 @@ SC_MODULE(transpose_vector_product) {
   SC_CTOR(transpose_vector_product) {
     SC_METHOD(product);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
       sensitive << data_a_in[i];
     }
 
-    for (int j=0; j<SIZE_J_IN; j++) {
+    for (int j = 0; j < SIZE_J_IN; j++) {
       sensitive << data_b_in[j];
     }
   }
 
   void product() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         data_out[i][j].write(data_a_in[i].read() * data_b_in[j].read());
       }
     }

@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_vector_oneplus_function_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   vector_oneplus_function vector_oneplus_function("VECTOR_LOGISTIC_FUNCTION");
@@ -54,13 +54,13 @@ int sc_main(int argc, char *argv[]) {
 
   vector_oneplus_function.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     vector_oneplus_function.data_in[i](data_in[i]);
   }
 
   vector_oneplus_function.data_out(data_out);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     data_in[i] = i;
   }
 

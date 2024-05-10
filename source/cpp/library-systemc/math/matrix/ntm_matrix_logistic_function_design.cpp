@@ -56,16 +56,16 @@ SC_MODULE(matrix_logistic_function) {
   SC_CTOR(matrix_logistic_function) {
     SC_METHOD(logistic_function);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         sensitive << data_in[i][j];
       }
     }
   }
 
   void logistic_function() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
         data_out[i][j].write(data_in[j][i].read());
       }
     }

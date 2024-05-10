@@ -42,15 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
-#include"ntm_arithmetic.hpp"
+#include "ntm_arithmetic.hpp"
 
 using namespace std;
 
 vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -73,7 +72,6 @@ vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_adder(vector<vector<
 }
 
 vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_subtract(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -96,7 +94,6 @@ vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_subtract(vector<vect
 }
 
 vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_multiplier(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {
@@ -119,7 +116,6 @@ vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_multiplier(vector<ve
 }
 
 vector<vector<vector<double>>> TensorArithmetic::ntm_tensor_divider(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in) {
-
   vector<vector<vector<double>>> data_out;
 
   for (int i = 0; i < data_a_in.size(); i++) {

@@ -48,12 +48,11 @@
 #include "../ntm_arithmetic.h"
 
 double ntm_vector_subtractor(double *data_a_in, double *data_b_in) {
-
   double *data_out;
 
   int i;
 
-  data_out = (double *) malloc(sizeof(int)*SIZE_IN);
+  data_out = (double *)malloc(sizeof(int) * SIZE_IN);
 
   // calculating subtraction
   for (i = 0; i < SIZE_IN; i++) {

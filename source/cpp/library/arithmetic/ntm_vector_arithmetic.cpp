@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
-#include"ntm_arithmetic.hpp"
+#include "ntm_arithmetic.hpp"
 
 using namespace std;
 

@@ -3,18 +3,6 @@
 ### impl: scalar, vector, matrix, tensor
 #### fn: adder, divider, multiplier
 
-# lib: controller
-## mod: FNN, LSTM, transformer
-### impl: standard
-#### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
-### impl: convolutional
-#### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
-
-# lib: dnc
-## mod:
-### impl:
-#### fn:
-
 # lib: math_algebra
 ## mod: scalar
 ### impl: scalar
@@ -29,25 +17,17 @@
 ### impl: tensor
 #### fn: convolution, inverse, multiplication, product, summation, transpose
 
-# lib: math_calculus
+# lib: math
 ## mod:
 ### impl:
 #### fn:
 
-# lib: math_function
-## mod:
-### impl:
-#### fn:
-
-# lib: math_statitics
-## mod:
-### impl:
-#### fn:
-
-# lib: ntm
-## mod:
-### impl:
-#### fn:
+# lib: nn
+## mod: pnn, fnn, lstm, ntm, dnc, ann
+### impl: standard
+#### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
+### impl: convolutional
+#### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
 
 # lib: state
 ## mod:

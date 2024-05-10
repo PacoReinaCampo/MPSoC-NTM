@@ -42,11 +42,11 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iostream>
+#include <vector>
 
-#include"../../../library/algebra/ntm_algebra.hpp"
+#include "../../../library/algebra/ntm_algebra.hpp"
 
 using namespace std;
 

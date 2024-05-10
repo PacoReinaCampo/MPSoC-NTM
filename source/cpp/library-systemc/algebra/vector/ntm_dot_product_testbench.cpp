@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_dot_product_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   dot_product dot_product("DOT_PRODUCT");
@@ -55,14 +55,14 @@ int sc_main(int argc, char *argv[]) {
 
   dot_product.clock(clock);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     dot_product.data_a_in[i](data_a_in[i]);
     dot_product.data_b_in[i](data_b_in[i]);
   }
 
   dot_product.data_out(data_out);
 
-  for (int i=0; i<SIZE_I_IN; i++) {
+  for (int i = 0; i < SIZE_I_IN; i++) {
     data_a_in[i] = i;
     data_b_in[i] = i;
   }

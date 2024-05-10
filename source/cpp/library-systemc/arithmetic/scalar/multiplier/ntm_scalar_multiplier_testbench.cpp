@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_scalar_multiplier_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   scalar_multiplier scalar_multiplier("SCALAR_MULTIPLIER");

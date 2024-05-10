@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
+#include <math.h>
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_in) {
-
   double ONE = 1.0;
 
   vector<vector<double>> data_out;
@@ -58,7 +58,7 @@ vector<vector<double>> ntm_matrix_logistic_function(vector<vector<double>> data_
     vector<double> vector;
 
     for (int j = 0; j < data_in[0].size(); j++) {
-      double temporal = ONE/(ONE + ONE/exp(data_in[i][j]));
+      double temporal = ONE / (ONE + ONE / exp(data_in[i][j]));
 
       vector.push_back(temporal);
     }

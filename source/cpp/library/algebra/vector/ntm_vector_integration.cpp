@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_integration(vector<double> data_in, double length_in) {
-
   double temporal = 0.0;
 
   vector<double> data_out;
@@ -56,7 +55,7 @@ vector<double> ntm_vector_integration(vector<double> data_in, double length_in) 
   for (int i = 0; i < data_in.size(); i++) {
     temporal += data_in[i];
 
-    data_out.push_back(temporal*length_in);
+    data_out.push_back(temporal * length_in);
   }
 
   return data_out;

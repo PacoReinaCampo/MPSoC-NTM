@@ -58,9 +58,9 @@ SC_MODULE(tensor_convolution) {
   SC_CTOR(tensor_convolution) {
     SC_METHOD(convolution);
     sensitive << clock.pos();
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           sensitive << data_a_in[i][j][k];
           sensitive << data_b_in[i][j][k];
         }
@@ -69,15 +69,15 @@ SC_MODULE(tensor_convolution) {
   }
 
   void convolution() {
-    for (int i=0; i<SIZE_I_IN; i++) {
-      for (int j=0; j<SIZE_J_IN; j++) {
-        for (int k=0; k<SIZE_K_IN; k++) {
+    for (int i = 0; i < SIZE_I_IN; i++) {
+      for (int j = 0; j < SIZE_J_IN; j++) {
+        for (int k = 0; k < SIZE_K_IN; k++) {
           int temporal = 0;
 
-          for (int m=0; m<i; m++) {
-            for (int n=0; n<j; n++) {
-              for (int p=0; p<k; p++) {
-                temporal += data_a_in[m][n][p].read() * data_b_in[i-m][j-n][k-p].read();
+          for (int m = 0; m < i; m++) {
+            for (int n = 0; n < j; n++) {
+              for (int p = 0; p < k; p++) {
+                temporal += data_a_in[m][n][p].read() * data_b_in[i - m][j - n][k - p].read();
               }
             }
           }

@@ -42,13 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_differentiation(vector<double> data_in, double length_in) {
-
   double temporal = 0.0;
 
   vector<double> data_out;
@@ -56,9 +55,8 @@ vector<double> ntm_vector_differentiation(vector<double> data_in, double length_
   for (int i = 0; i < data_in.size(); i++) {
     if (i == 0) {
       temporal = 0.0;
-    }
-    else {
-      temporal = (data_in[i] - data_in[i-1])/length_in;
+    } else {
+      temporal = (data_in[i] - data_in[i - 1]) / length_in;
     }
 
     data_out.push_back(temporal);

@@ -42,31 +42,32 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<math.h>
-#include<vector>
-#include<cassert>
+#include <math.h>
+
+#include <cassert>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 class VectorAlgebra {
-  public:
-    double ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in);
-    double ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> data_b_in);
-    double ntm_vector_module(vector<double> data_in);
+ public:
+  double ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in);
+  double ntm_vector_cosine_similarity(vector<double> data_a_in, vector<double> data_b_in);
+  double ntm_vector_module(vector<double> data_in);
 
-    vector<double> ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_summation(vector<vector<double>> matrix);
-    vector<double> ntm_vector_multiplication(vector<vector<double>> matrix);
-    vector<double> ntm_vector_differentiation(vector<double> data_in, double length_in);
-    vector<double> ntm_vector_integration(vector<double> data_in, double length_in);
-    vector<double> ntm_vector_softmax(vector<double> data_in);
+  vector<double> ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in);
+  vector<double> ntm_vector_summation(vector<vector<double>> matrix);
+  vector<double> ntm_vector_multiplication(vector<vector<double>> matrix);
+  vector<double> ntm_vector_differentiation(vector<double> data_in, double length_in);
+  vector<double> ntm_vector_integration(vector<double> data_in, double length_in);
+  vector<double> ntm_vector_softmax(vector<double> data_in);
 };
 
 double VectorAlgebra::ntm_dot_product(vector<double> data_a_in, vector<double> data_b_in) {
   double data_out = 0;
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     data_out += data_a_in[i] * data_b_in[i];
   }
 
@@ -79,25 +80,25 @@ double VectorAlgebra::ntm_vector_cosine_similarity(vector<double> data_a_in, vec
   double input_a_result = 0.0;
   double input_b_result = 0.0;
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     dot_result += data_a_in[i] * data_b_in[i];
   }
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     input_a_result += data_a_in[i] * data_a_in[i];
   }
 
-  for (int i=0; i<data_b_in.size(); i++) {
+  for (int i = 0; i < data_b_in.size(); i++) {
     input_b_result += data_b_in[i] * data_b_in[i];
   }
 
-  return dot_result/(sqrt(input_a_result)*sqrt(input_b_result));
+  return dot_result / (sqrt(input_a_result) * sqrt(input_b_result));
 }
 
 double VectorAlgebra::ntm_vector_module(vector<double> data_in) {
   double data_out = 0.0;
 
-  for (int i=0; i<data_in.size(); i++) {
+  for (int i = 0; i < data_in.size(); i++) {
     data_out += data_in[i] * data_in[i];
   }
 
@@ -107,11 +108,11 @@ double VectorAlgebra::ntm_vector_module(vector<double> data_in) {
 vector<double> VectorAlgebra::ntm_vector_convolution(vector<double> data_a_in, vector<double> data_b_in) {
   vector<double> data_out;
 
-  for (int i=0; i<data_a_in.size(); i++) {
+  for (int i = 0; i < data_a_in.size(); i++) {
     double temporal = 0.0;
 
-    for (int m=0; m<i+1; m++) {
-      temporal += data_a_in[m] * data_b_in[i-m];
+    for (int m = 0; m < i + 1; m++) {
+      temporal += data_a_in[m] * data_b_in[i - m];
     }
     data_out.push_back(temporal);
   }
@@ -122,10 +123,10 @@ vector<double> VectorAlgebra::ntm_vector_convolution(vector<double> data_a_in, v
 vector<double> VectorAlgebra::ntm_vector_summation(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for (int i=0; i<matrix.size(); i++) {
+  for (int i = 0; i < matrix.size(); i++) {
     double temporal = 0.0;
 
-    for (int j=0; j<matrix[0].size(); j++) {
+    for (int j = 0; j < matrix[0].size(); j++) {
       temporal += matrix[i][j];
     }
     data_out.push_back(temporal);
@@ -137,10 +138,10 @@ vector<double> VectorAlgebra::ntm_vector_summation(vector<vector<double>> matrix
 vector<double> VectorAlgebra::ntm_vector_multiplication(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for (int i=0; i<matrix.size(); i++) {
+  for (int i = 0; i < matrix.size(); i++) {
     double temporal = 1.0;
 
-    for (int j=0; j<matrix[0].size(); j++) {
+    for (int j = 0; j < matrix[0].size(); j++) {
       temporal *= matrix[i][j];
     }
     data_out.push_back(temporal);
@@ -150,7 +151,6 @@ vector<double> VectorAlgebra::ntm_vector_multiplication(vector<vector<double>> m
 }
 
 vector<double> VectorAlgebra::ntm_vector_differentiation(vector<double> data_in, double length_in) {
-
   double temporal = 0.0;
 
   vector<double> data_out;
@@ -158,9 +158,8 @@ vector<double> VectorAlgebra::ntm_vector_differentiation(vector<double> data_in,
   for (int i = 0; i < data_in.size(); i++) {
     if (i == 0) {
       temporal = 0.0;
-    }
-    else {
-      temporal = (data_in[i] - data_in[i-1])/length_in;
+    } else {
+      temporal = (data_in[i] - data_in[i - 1]) / length_in;
     }
 
     data_out.push_back(temporal);
@@ -170,7 +169,6 @@ vector<double> VectorAlgebra::ntm_vector_differentiation(vector<double> data_in,
 }
 
 vector<double> VectorAlgebra::ntm_vector_integration(vector<double> data_in, double length_in) {
-
   double temporal = 0.0;
 
   vector<double> data_out;
@@ -178,14 +176,13 @@ vector<double> VectorAlgebra::ntm_vector_integration(vector<double> data_in, dou
   for (int i = 0; i < data_in.size(); i++) {
     temporal += data_in[i];
 
-    data_out.push_back(temporal*length_in);
+    data_out.push_back(temporal * length_in);
   }
 
   return data_out;
 }
 
 vector<double> VectorAlgebra::ntm_vector_softmax(vector<double> data_in) {
-
   double temporal0 = 0.0;
 
   vector<double> data_int;
@@ -201,14 +198,13 @@ vector<double> VectorAlgebra::ntm_vector_softmax(vector<double> data_in) {
   }
 
   for (int i = 0; i < data_in.size(); i++) {
-    data_out.push_back(data_int[i]/temporal0);
+    data_out.push_back(data_int[i] / temporal0);
   }
 
   return data_out;
 }
 
 int main() {
-
   VectorAlgebra Algebra;
 
   vector<double> dot_product_data_a_in{1.0, 2.0, 3.0};
@@ -219,23 +215,18 @@ int main() {
 
   vector<double> module_data_in{4.0, 0.0, 3.0};
 
-
   vector<double> convolution_data_a_in{1.0, 2.0, 3.0};
   vector<double> convolution_data_b_in{1.0, 3.0, 3.0};
 
+  vector<vector<double>> summation_data_in{
+      {3.0, 2.0, 2.0},
+      {0.0, 2.0, 0.0},
+      {5.0, 4.0, 1.0}};
 
-  vector<vector<double>> summation_data_in {
-    {3.0, 2.0, 2.0},
-    {0.0, 2.0, 0.0},
-    {5.0, 4.0, 1.0}
-  };
-
-  vector<vector<double>> multiplication_data_in {
-    {3.0, 2.0, 2.0},
-    {0.0, 2.0, 0.0},
-    {5.0, 4.0, 1.0}
-  };
-
+  vector<vector<double>> multiplication_data_in{
+      {3.0, 2.0, 2.0},
+      {0.0, 2.0, 0.0},
+      {5.0, 4.0, 1.0}};
 
   double dot_product_data_out = 16.0;
 
@@ -243,20 +234,17 @@ int main() {
 
   double module_data_out = 5.0;
 
-
   vector<double> convolution_data_out{1.0, 5.0, 12.0};
 
   vector<double> summation_data_out{7.0, 2.0, 10.0};
 
   vector<double> multiplication_data_out{12.0, 0.0, 20.0};
 
-
   assert(Algebra.ntm_dot_product(dot_product_data_a_in, dot_product_data_b_in) == dot_product_data_out);
 
   assert(Algebra.ntm_vector_cosine_similarity(cosine_similarity_data_a_in, cosine_similarity_data_b_in) == cosine_similarity_data_out);
 
   assert(Algebra.ntm_vector_module(module_data_in) == module_data_out);
-
 
   assert(Algebra.ntm_vector_convolution(convolution_data_a_in, convolution_data_b_in) == convolution_data_out);
 
@@ -266,22 +254,19 @@ int main() {
 
   VectorAlgebra Algebra;
 
-  vector<double> differentiation_data_in{ 6.0, 3.0, 8.0 };
+  vector<double> differentiation_data_in{6.0, 3.0, 8.0};
 
-  vector<double> integration_data_in{ 6.0, 3.0, 8.0 };
+  vector<double> integration_data_in{6.0, 3.0, 8.0};
 
-  vector<double> softmax_data_in{ 6.3226113886226751, 3.1313826152262876, 8.3512687816132226 };
+  vector<double> softmax_data_in{6.3226113886226751, 3.1313826152262876, 8.3512687816132226};
 
+  vector<double> differentiation_data_out{0.0, -3.0, 5.0};
 
-  vector<double> differentiation_data_out{ 0.0, -3.0, 5.0 };
+  vector<double> integration_data_out{6.0, 9.0, 17.0};
 
-  vector<double> integration_data_out{ 6.0, 9.0, 17.0 };
-
-  vector<double> softmax_data_out{ 0.11567390955504045, 0.004756662822010267, 0.8795694276229492 };
-
+  vector<double> softmax_data_out{0.11567390955504045, 0.004756662822010267, 0.8795694276229492};
 
   double length_in = 1.0;
-
 
   assert(Algebra.ntm_vector_differentiation(differentiation_data_in, length_in) == differentiation_data_out);
 

@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
+#include <iostream>
 
-#include"ntm_arithmetic.hpp"
+#include "ntm_arithmetic.hpp"
 
 using namespace std;
 

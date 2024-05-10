@@ -42,19 +42,19 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 vector<double> ntm_vector_mean_function(vector<vector<double>> matrix) {
   vector<double> data_out;
 
-  for(int i=0; i<matrix.size(); i++) {
+  for (int i = 0; i < matrix.size(); i++) {
     double temporal = 0.0;
 
-    for(int j=0; j<matrix[0].size(); j++) {
-      temporal += matrix[i][j]/(double)matrix[0].size();
+    for (int j = 0; j < matrix[0].size(); j++) {
+      temporal += matrix[i][j] / (double)matrix[0].size();
     }
     data_out.push_back(temporal);
   }

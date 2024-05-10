@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -67,35 +67,34 @@ vector<vector<vector<double>>> ntm_tensor_subtract(vector<vector<vector<double>>
 vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
 vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
 
-
 class ScalarArithmetic {
-  public:
-    double ntm_scalar_adder(double data_a_in, double data_b_in);
-    double ntm_scalar_subtract(double data_a_in, double data_b_in);
-    double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-    double ntm_scalar_divider(double data_a_in, double data_b_in);
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
 };
 
 class VectorArithmetic {
-  public:
-    vector<double> ntm_vector_adder(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_subtract(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_multiplier(vector<double> data_a_in, vector<double> data_b_in);
-    vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_b_in);
+ public:
+  vector<double> ntm_vector_adder(vector<double> data_a_in, vector<double> data_b_in);
+  vector<double> ntm_vector_subtract(vector<double> data_a_in, vector<double> data_b_in);
+  vector<double> ntm_vector_multiplier(vector<double> data_a_in, vector<double> data_b_in);
+  vector<double> ntm_vector_divider(vector<double> data_a_in, vector<double> data_b_in);
 };
 
 class MatrixArithmetic {
-  public:
-    vector<vector<double>> ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-    vector<vector<double>> ntm_matrix_subtract(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-    vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
-    vector<vector<double>> ntm_matrix_divider(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
+ public:
+  vector<vector<double>> ntm_matrix_adder(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
+  vector<vector<double>> ntm_matrix_subtract(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
+  vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
+  vector<vector<double>> ntm_matrix_divider(vector<vector<double>> data_a_in, vector<vector<double>> data_b_in);
 };
 
 class TensorArithmetic {
-  public:
-    vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-    vector<vector<vector<double>>> ntm_tensor_subtract(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-    vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
-    vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
+ public:
+  vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
+  vector<vector<vector<double>>> ntm_tensor_subtract(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
+  vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
+  vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>> data_a_in, vector<vector<vector<double>>> data_b_in);
 };

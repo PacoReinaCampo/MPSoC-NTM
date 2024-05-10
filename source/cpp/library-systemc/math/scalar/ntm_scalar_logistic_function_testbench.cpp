@@ -42,8 +42,8 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include "systemc.h"
 #include "ntm_scalar_logistic_function_design.cpp"
+#include "systemc.h"
 
 int sc_main(int argc, char *argv[]) {
   scalar_logistic_function scalar_logistic_function("SCALAR_LOGISTIC_FUNCTION");
