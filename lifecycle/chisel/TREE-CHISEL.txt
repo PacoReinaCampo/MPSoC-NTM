@@ -1,5 +1,9 @@
 library
 ├── algebra
+│   ├── test_matrix_algebra.scala
+│   ├── test_scalar_algebra.scala
+│   ├── test_tensor_algebra.scala
+│   ├── test_vector_algebra.scala
 │   ├── matrix
 │   │   └── ntm_matrix_algebra.scala
 │   ├── scalar
@@ -9,16 +13,22 @@ library
 │   └── vector
 │       └── ntm_vector_algebra.scala
 ├── arithmetic
+│   ├── test_matrix_arithmetic.scala
+│   ├── test_scalar_arithmetic.scala
+│   ├── test_tensor_arithmetic.scala
+│   ├── test_vector_arithmetic.scala
 │   ├── matrix
 │   │   └── ntm_matrix_arithmetic.scala
 │   ├── scalar
 │   │   └── ntm_scalar_arithmetic.scala
 │   ├── tensor
 │   │   └── ntm_tensor_arithmetic.scala
-│   ├── test_scalar_arithmetic.scala
 │   └── vector
 │       └── ntm_vector_arithmetic.scala
 ├── math
+│   ├── test_matrix_math.scala
+│   ├── test_scalar_math.scala
+│   ├── test_vector_math.scala
 │   ├── matrix
 │   │   └── ntm_matrix_math.scala
 │   ├── scalar
@@ -171,4 +181,4 @@ library
             ├── ntm_lstm_output_v_trainer.scala
             └── ntm_lstm_output_w_trainer.scala
 
-53 directories, 118 files
+53 directories, 128 files

@@ -42,15 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-dot -Tsvg extended-architecture.dot > extended-architecture.svg
-dot -Tsvg reduced-architecture.dot > reduced-architecture.svg
-
-dot -Tsvg dependences-global.dot > dependences-global.svg
-
-dot -Tsvg hardware-project.dot > hardware-project.svg
-dot -Tsvg software-project.dot > software-project.svg
-
-dot -Tpng hardware-project.dot > hardware-project.png
-dot -Tpng software-project.dot > software-project.png
-
-dot -Tsvg prototype.dot > prototype.svg
+javac scalar/ntm_scalar_algebra.scala; javac test_scalar_algebra.scala; java test_scalar_algebra
+javac vector/ntm_vector_algebra.scala; javac test_vector_algebra.scala; java test_vector_algebra
+javac matrix/ntm_matrix_algebra.scala; javac test_matrix_algebra.scala; java test_matrix_algebra
+javac tensor/ntm_tensor_algebra.scala; javac test_tensor_algebra.scala; java test_tensor_algebra

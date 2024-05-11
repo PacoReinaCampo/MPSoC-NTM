@@ -42,15 +42,4 @@
 ##                                                                               ##
 ###################################################################################
 
-dot -Tsvg extended-architecture.dot > extended-architecture.svg
-dot -Tsvg reduced-architecture.dot > reduced-architecture.svg
-
-dot -Tsvg dependences-global.dot > dependences-global.svg
-
-dot -Tsvg hardware-project.dot > hardware-project.svg
-dot -Tsvg software-project.dot > software-project.svg
-
-dot -Tpng hardware-project.dot > hardware-project.png
-dot -Tpng software-project.dot > software-project.png
-
-dot -Tsvg prototype.dot > prototype.svg
+find . -type f -name '*.class' -exec rm -rf *.class {} \;
