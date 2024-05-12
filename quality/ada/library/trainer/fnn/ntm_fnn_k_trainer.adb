@@ -45,7 +45,46 @@
 with Ada.Text_IO;
 use Ada.Text_IO;
 
-procedure ntm_fnn_k_trainer is
-begin
-  Put_Line ("Hello QueenField!");
-end Hello;
+package body ntm_fnn_k_trainer is
+
+  procedure ntm_scalar_adder (
+    data_a_in : in float;
+    data_b_in : in float;
+    
+    data_out : out float
+  ) is
+  begin
+    data_out := data_a_in + data_b_in;
+  end ntm_scalar_adder;
+
+  procedure ntm_scalar_substractor (
+    data_a_in : in float;
+    data_b_in : in float;
+    
+    data_out : out float
+  ) is
+  begin
+    data_out := data_a_in - data_b_in;
+  end ntm_scalar_substractor;
+
+  procedure ntm_scalar_multiplier (
+    data_a_in : in float;
+    data_b_in : in float;
+    
+    data_out : out float
+  ) is
+  begin
+    data_out := data_a_in * data_b_in;
+  end ntm_scalar_multiplier;
+
+  procedure ntm_scalar_divider (
+    data_a_in : in float;
+    data_b_in : in float;
+    
+    data_out : out float
+  ) is
+  begin
+    data_out := data_a_in / data_b_in;
+  end ntm_scalar_divider;
+
+end ntm_fnn_k_trainer;
