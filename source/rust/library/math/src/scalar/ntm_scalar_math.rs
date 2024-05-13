@@ -42,6 +42,42 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-    println!("Hello QueenField!");
+pub struct ScalarMath {
+    pub data_in: Vec<f64>,
+    pub mean_in: f64,
+
+    pub data_out: f64
+}
+
+impl ScalarMath {
+    pub fn ntm_scalar_deviation_function(data_in: Vec<f64>, mean_in: f64) -> f64 {
+        let mut data_out: f64 = 0.0;
+
+        for i in 0..data_in.len() {
+            data_out += (data_in[i] - mean_in)*(data_in[i] - mean_in)/data_in.len() as f64;
+        }
+        data_out.sqrt()
+    }
+    pub fn ntm_scalar_logistic_function(data_in: f64) -> f64 {
+
+        const ONE: f64 = 1.0;
+
+        return ONE/(ONE + ONE/data_in.exp());
+    }
+    pub fn ntm_scalar_mean_function(data_in: Vec<f64>) -> f64 {
+        let mut data_out: f64 = 0.0;
+
+        for i in 0..data_in.len() {
+            data_out += data_in[i]/data_in.len() as f64;
+        }
+        data_out
+    }
+    pub fn ntm_scalar_oneplus_function(data_in: f64) -> f64 {
+
+        const ONE: f64 = 1.0;
+
+        let temporal: f64 = ONE + data_in.exp();
+
+        return ONE + temporal.ln();
+    }
 }

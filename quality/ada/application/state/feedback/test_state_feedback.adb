@@ -60,7 +60,6 @@ procedure test_state_feedback is
   data_c_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   data_d_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
   data_k_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
-  
 
   data_a_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   data_b_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
@@ -76,7 +75,7 @@ begin
     data_d_out => data_d_out
   );
 
-  pragma Assert (data_d_out = data_d_out, "Matrix Adder");
+  pragma Assert (data_d_out = data_d_out, "Matrix FeedForward");
 
   for i in data_d_out'Range(1) loop
     for j in data_d_out'Range(2) loop
@@ -94,7 +93,7 @@ begin
     data_b_out => data_b_out
   );
 
-  pragma Assert (data_b_out = data_b_out, "Matrix Multiplier");
+  pragma Assert (data_b_out = data_b_out, "Matrix Input");
 
   for i in data_b_out'Range(1) loop
     for j in data_b_out'Range(2) loop
@@ -114,7 +113,7 @@ begin
     data_c_out  => data_c_out
   );
 
-  pragma Assert (data_c_out = data_c_out, "Matrix Divider");
+  pragma Assert (data_c_out = data_c_out, "Matrix Output");
 
   for i in data_c_out'Range(1) loop
     for j in data_c_out'Range(2) loop
@@ -134,7 +133,7 @@ begin
     data_a_out => data_a_out
   );
 
-  pragma Assert (data_a_out = data_a_out, "Matrix Divider");
+  pragma Assert (data_a_out = data_a_out, "Matrix State");
 
   for i in data_a_out'Range(1) loop
     for j in data_a_out'Range(2) loop

@@ -50,6 +50,12 @@ with System.Assertions;
 with ntm_addressing;
 use ntm_addressing;
 
+with ntm_matrix_content_based_addressing;
+use ntm_matrix_content_based_addressing;
+
+with ntm_vector_content_based_addressing;
+use ntm_vector_content_based_addressing;
+
 procedure ntm_addressing_test is
 
   data_a_in : float := 48.0;
@@ -96,6 +102,102 @@ begin
   New_Line;
 
   ntm_addressing.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_matrix_content_based_addressing.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_matrix_content_based_addressing.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_matrix_content_based_addressing.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_matrix_content_based_addressing.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_vector_content_based_addressing.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_vector_content_based_addressing.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_vector_content_based_addressing.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_vector_content_based_addressing.ntm_scalar_divider(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out

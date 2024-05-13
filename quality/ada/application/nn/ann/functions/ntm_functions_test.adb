@@ -47,8 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_functions;
-use ntm_functions;
+with ntm_layer_norm;
+use ntm_layer_norm;
+
+with ntm_positional_encoding;
+use ntm_positional_encoding;
 
 procedure ntm_functions_test is
 
@@ -59,7 +62,7 @@ procedure ntm_functions_test is
 
 begin
 
-  ntm_functions.ntm_scalar_adder(
+  ntm_layer_norm.ntm_scalar_adder(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -71,7 +74,7 @@ begin
 
   New_Line;
 
-  ntm_functions.ntm_scalar_substractor(
+  ntm_layer_norm.ntm_scalar_substractor(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -83,7 +86,7 @@ begin
 
   New_Line;
 
-  ntm_functions.ntm_scalar_multiplier(
+  ntm_layer_norm.ntm_scalar_multiplier(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -95,7 +98,55 @@ begin
 
   New_Line;
 
-  ntm_functions.ntm_scalar_divider(
+  ntm_layer_norm.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_positional_encoding.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_positional_encoding.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_positional_encoding.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_positional_encoding.ntm_scalar_divider(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out

@@ -46,4 +46,4 @@
 # State-Feedback Sources
 #####################################################################
 
-PERIPHERAL_SOURCES =	-I../../../../library/nn/ann/controller/fnn
+PERIPHERAL_SOURCES =	-I../../../../../library/nn/ann/controller/fnn

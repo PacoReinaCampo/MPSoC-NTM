@@ -42,6 +42,85 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-    println!("Hello QueenField!");
+pub struct MatrixMath {
+    pub data_in: Vec<Vec<Vec<f64>>>,
+    pub mean_in: Vec<Vec<f64>>,
+
+    pub data_out: Vec<Vec<f64>>
+}
+
+impl MatrixMath {
+    pub fn ntm_matrix_deviation_function(data_in: Vec<Vec<Vec<f64>>>, mean_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+        let mut data_out: Vec<Vec<f64>> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut vector: Vec<f64> = vec![];
+
+            for j in 0..data_in[i].len() {
+                let mut temporal: f64 = 0.0;
+
+                for k in 0..data_in[i][j].len() {
+                    temporal += (data_in[i][j][k] - mean_in[i][j])*(data_in[i][j][k] - mean_in[i][j])/data_in[0][0].len() as f64;
+                }
+                vector.push(temporal.sqrt());
+            }
+            data_out.push(vector);
+        }
+        data_out
+    }
+    pub fn ntm_matrix_logistic_function(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+
+        const ONE: f64 = 1.0;
+
+        let mut data_out: Vec<Vec<f64>> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut vector: Vec<f64> = vec![];
+
+            for j in 0..data_in[0].len() {
+                let temporal = ONE/(ONE + ONE/data_in[i][j].exp());
+
+                vector.push(temporal);
+            }
+            data_out.push(vector);
+        }
+        data_out
+    }
+    pub fn ntm_matrix_mean_function(data_in: Vec<Vec<Vec<f64>>>) -> Vec<Vec<f64>> {
+        let mut data_out: Vec<Vec<f64>> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut vector: Vec<f64> = vec![];
+
+            for j in 0..data_in[i].len() {
+                let mut temporal: f64 = 0.0;
+
+                for k in 0..data_in[i][j].len() {
+                    temporal += data_in[i][j][k]/data_in[0][0].len() as f64;
+                }
+                vector.push(temporal);
+            }
+            data_out.push(vector);
+        }
+        data_out
+    }
+    pub fn ntm_matrix_oneplus_function(data_in: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+
+        const ONE: f64 = 1.0;
+
+        let mut data_out: Vec<Vec<f64>> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut vector: Vec<f64> = vec![];
+
+            for j in 0..data_in[0].len() {
+                let temporal0 = ONE + data_in[i][j].exp();
+                let temporal1 = ONE + temporal0.ln();
+
+                vector.push(temporal1);
+            }
+            data_out.push(vector);
+        }
+        data_out
+    }
 }

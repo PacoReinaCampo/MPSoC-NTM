@@ -47,6 +47,18 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
+with ntm_interface_matrix;
+use ntm_interface_matrix;
+
+with ntm_interface_top;
+use ntm_interface_top;
+
+with ntm_interface_vector;
+use ntm_interface_vector;
+
+with ntm_output_vector;
+use ntm_output_vector;
+
 with ntm_top;
 use ntm_top;
 
@@ -58,6 +70,198 @@ procedure ntm_top_test is
   data_out : float;
 
 begin
+
+  ntm_interface_matrix.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_matrix.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_matrix.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_matrix.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_top.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_top.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_top.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_top.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_vector.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_vector.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_vector.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_interface_vector.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_output_vector.ntm_scalar_adder(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in + data_b_in = data_out, "Scalar Adder");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_output_vector.ntm_scalar_substractor(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in - data_b_in = data_out, "Scalar Substractor");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_output_vector.ntm_scalar_multiplier(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in * data_b_in = data_out, "Scalar Multiplier");
+
+  Put(float'Image(data_out));
+
+  New_Line;
+
+  ntm_output_vector.ntm_scalar_divider(
+    data_a_in => data_a_in,
+    data_b_in => data_b_in,
+    data_out  => data_out
+  );
+
+  pragma Assert (data_a_in / data_b_in = data_out, "Scalar Divider");
+
+  Put(float'Image(data_out));
+
+  New_Line;
 
   ntm_top.ntm_scalar_adder(
     data_a_in => data_a_in,

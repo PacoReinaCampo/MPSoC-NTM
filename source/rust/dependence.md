@@ -1,9 +1,9 @@
 # lib: arithmetic
 ## mod: scalar, vector, matrix, tensor
 ### impl: scalar, vector, matrix, tensor
-#### fn: adder, divider, multiplier
+#### fn: adder, subtractor, divider, multiplier
 
-# lib: math_algebra
+# lib: algebra
 ## mod: scalar
 ### impl: scalar
 #### fn: convolution, inverse, multiplication, product, summation, transpose

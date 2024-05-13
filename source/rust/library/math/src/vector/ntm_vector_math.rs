@@ -42,6 +42,65 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-fn main() {
-    println!("Hello QueenField!");
+pub struct ScalarMath {
+    pub data_in: Vec<Vec<f64>>,
+    pub mean_in: Vec<f64>,
+
+    pub Vec<f64>
+}
+
+impl ScalarMath {
+    pub fn ntm_vector_deviation_function(data_in: Vec<Vec<f64>>, mean_in: Vec<f64>) -> Vec<f64> {
+        let mut data_out: Vec<f64> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut temporal: f64 = 0.0;
+
+            for j in 0..data_in[i].len() {
+                temporal += (data_in[i][j] - mean_in[i])*(data_in[i][j] - mean_in[i])/data_in[0].len() as f64;
+            }
+            data_out.push(temporal.sqrt());
+        }
+        data_out
+    }
+    pub fn ntm_vector_logistic_function(data_in: Vec<f64>) -> Vec<f64> {
+
+        const ONE: f64 = 1.0;
+
+        let mut data_out: Vec<f64> = vec![];
+
+        for i in 0..data_in.len() {
+            let temporal = ONE/(ONE + ONE/data_in[i].exp());
+
+            data_out.push(temporal);
+        }
+        data_out
+    }
+    pub fn ntm_vector_mean_function(data_in: Vec<Vec<f64>>) -> Vec<f64> {
+        let mut data_out: Vec<f64> = vec![];
+
+        for i in 0..data_in.len() {
+            let mut temporal: f64 = 0.0;
+
+            for j in 0..data_in[i].len() {
+                temporal += data_in[i][j]/data_in[0].len() as f64;
+            }
+            data_out.push(temporal);
+        }
+        data_out
+    }
+    pub fn ntm_vector_oneplus_function(data_in: Vec<f64>) -> Vec<f64> {
+
+        const ONE: f64 = 1.0;
+
+        let mut data_out: Vec<f64> = vec![];
+
+        for i in 0..data_in.len() {
+            let temporal0: f64 = ONE + data_in[i].exp();
+            let temporal1: f64 = ONE + temporal0.ln();
+
+            data_out.push(temporal1);
+        }
+        data_out
+    }
 }
