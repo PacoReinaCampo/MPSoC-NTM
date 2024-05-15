@@ -61,6 +61,9 @@ procedure test_state_feedback is
   data_d_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
   data_k_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
+  matrix_operation_int : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  matrix_eye_int       : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+
   data_a_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   data_b_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   data_c_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
@@ -71,6 +74,9 @@ begin
   ntm_state_feedback.ntm_state_matrix_feedforward (
     data_d_in => data_d_in,
     data_k_in => data_k_in,
+
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
 
     data_d_out => data_d_out
   );
@@ -89,6 +95,9 @@ begin
     data_b_in => data_b_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
+
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
 
     data_b_out => data_b_out
   );
@@ -110,6 +119,9 @@ begin
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
     data_c_out  => data_c_out
   );
 
@@ -129,6 +141,9 @@ begin
     data_c_in => data_c_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
+
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
 
     data_a_out => data_a_out
   );

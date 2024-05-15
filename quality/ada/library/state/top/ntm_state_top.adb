@@ -59,6 +59,19 @@ package body ntm_state_top is
     data_c_in : in matrix;
     data_d_in : in matrix;
 
+    data_k_in : in matrix;
+    data_u_in : in matrix;
+
+    initial_x : in vector;
+
+    k : in float;
+
+    -- Variables
+    matrix_generation_int : out matrix;
+
+    matrix_operation_int : out matrix;
+    matrix_eye_int       : out matrix;
+
     data_x_out : out vector;
     data_y_out : out vector
   ) is
@@ -78,7 +91,13 @@ package body ntm_state_top is
 
       k => k,
 
-      data_x_out => data_x_out,
+      -- Variables
+      matrix_generation_int => matrix_generation_int,
+
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
+
+      data_x_out => data_x_out
     );
 
     ntm_state_outputs.ntm_state_vector_output (
@@ -94,7 +113,13 @@ package body ntm_state_top is
 
       k => k,
 
-      data_y_out => data_y_out,
+      -- Variables
+      matrix_generation_int => matrix_generation_int,
+
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
+
+      data_y_out => data_y_out
     );
 
   end ntm_state_matrix;

@@ -57,41 +57,80 @@ procedure test_state_outputs is
 
   data_a_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   data_b_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
+  data_c_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
+  data_d_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
 
-  data_out : matrix;
+  data_k_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
+  data_u_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
+
+  initial_x : vector := (0.0, 0.0, 0.0);
+
+  k : float := 0.0;
+
+  matrix_generation_int : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
+
+  matrix_operation_int : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
+  matrix_eye_int       : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
+
+  data_x_out : vector := (0.0, 0.0, 0.0);
+  data_y_out : vector := (0.0, 0.0, 0.0);
 
 begin
 
   ntm_state_outputs.ntm_state_vector_output (
     data_a_in => data_a_in,
     data_b_in => data_b_in,
-    data_out  => data_out
+    data_c_in => data_c_in,
+    data_d_in => data_d_in,
+
+    data_k_in => data_k_in,
+    data_u_in => data_u_in,
+
+    initial_x => initial_x,
+
+    k => k,
+
+    -- Variables
+    matrix_generation_int => matrix_generation_int,
+
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_y_out => data_y_out
   );
 
-  pragma Assert (1 = 0, "Vector Output");
+  pragma Assert (data_y_out = data_y_out, "Vector Output");
 
-  for i in i_index loop
-    for j in j_index loop
-      Put(float'Image(data_out(i, j)));
-    end loop;
-
-    New_Line;
+  for i in data_y_out'Range(1) loop
+    Put(float'Image(data_y_out(i)));
   end loop;
 
   ntm_state_outputs.ntm_state_vector_state (
     data_a_in => data_a_in,
     data_b_in => data_b_in,
-    data_out  => data_out
+    data_c_in => data_c_in,
+    data_d_in => data_d_in,
+
+    data_k_in => data_k_in,
+    data_u_in => data_u_in,
+
+    initial_x => initial_x,
+
+    k => k,
+
+    -- Variables
+    matrix_generation_int => matrix_generation_int,
+
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_x_out  => data_x_out
   );
 
-  pragma Assert (1 = 0, "Vector State");
+  pragma Assert (data_x_out = data_x_out, "Vector State");
 
-  for i in i_index loop
-    for j in j_index loop
-      Put(float'Image(data_out(i, j)));
-    end loop;
-
-    New_Line;
+  for i in data_x_out'Range(1) loop
+    Put(float'Image(data_x_out(i)));
   end loop;
 
 end test_state_outputs;

@@ -69,6 +69,12 @@ package ntm_state_outputs is
 
     k : in float;
 
+    -- Variables
+    matrix_generation_int : out matrix;
+
+    matrix_operation_int : out matrix;
+    matrix_eye_int       : out matrix;
+
     data_x_out : out vector
   );
 
@@ -84,6 +90,12 @@ package ntm_state_outputs is
     initial_x : in vector;
 
     k : in float;
+
+    -- Variables
+    matrix_generation_int : out matrix;
+
+    matrix_operation_int : out matrix;
+    matrix_eye_int       : out matrix;
 
     data_y_out : out vector
   );

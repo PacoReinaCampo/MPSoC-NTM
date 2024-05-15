@@ -66,11 +66,14 @@ package body ntm_state_outputs is
 
     k : in float;
 
+    -- Variables
+    matrix_generation_int : out matrix;
+
+    matrix_operation_int : out matrix;
+    matrix_eye_int       : out matrix;
+
     data_x_out : out vector
   ) is
-
-    -- Variables
-    matrix_operation_int : matrix;
 
   begin
 
@@ -81,7 +84,10 @@ package body ntm_state_outputs is
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
-    data_d_out => matrix_operation_int
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_d_out => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_input (
@@ -89,7 +95,10 @@ package body ntm_state_outputs is
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
-    data_b_out => matrix_operation_int
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_b_out => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_output (
@@ -99,7 +108,10 @@ package body ntm_state_outputs is
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
-    data_c_out  => matrix_operation_int
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_c_out  => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_state (
@@ -109,7 +121,10 @@ package body ntm_state_outputs is
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
-    data_a_out => matrix_operation_int
+    matrix_operation_int => matrix_operation_int,
+    matrix_eye_int       => matrix_eye_int,
+
+    data_a_out => matrix_generation_int
   );
 
   end ntm_state_vector_state;
@@ -127,51 +142,66 @@ package body ntm_state_outputs is
 
     k : in float;
 
+    -- Variables
+    matrix_generation_int : out matrix;
+
+    matrix_operation_int : out matrix;
+    matrix_eye_int       : out matrix;
+
     data_y_out : out vector
   ) is
 
-    -- Variables
-    matrix_operation_int : matrix;
-
   begin
 
-  -- Body
-  -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+    -- Body
+    -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
-  ntm_state_feedback.ntm_state_matrix_feedforward (
-    data_d_in => data_d_in,
-    data_k_in => data_k_in,
+    ntm_state_feedback.ntm_state_matrix_feedforward (
+      data_d_in => data_d_in,
+      data_k_in => data_k_in,
 
-    data_d_out => matrix_operation_int
-  );
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
 
-  ntm_state_feedback.ntm_state_matrix_input (
-    data_b_in => data_b_in,
-    data_d_in => data_d_in,
-    data_k_in => data_k_in,
+      data_d_out => matrix_generation_int
+    );
 
-    data_b_out => matrix_operation_int
-  );
+    ntm_state_feedback.ntm_state_matrix_input (
+      data_b_in => data_b_in,
+      data_d_in => data_d_in,
+      data_k_in => data_k_in,
 
-  ntm_state_feedback.ntm_state_matrix_output (
-    data_a_in => data_a_in,
-    data_b_in => data_b_in,
-    data_c_in => data_c_in,
-    data_d_in => data_d_in,
-    data_k_in => data_k_in,
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
 
-    data_c_out  => matrix_operation_int
-  );
+      data_b_out => matrix_generation_int
+    );
 
-  ntm_state_feedback.ntm_state_matrix_state (
-    data_a_in => data_a_in,
-    data_b_in => data_b_in,
-    data_c_in => data_c_in,
-    data_d_in => data_d_in,
-    data_k_in => data_k_in,
+    ntm_state_feedback.ntm_state_matrix_output (
+      data_a_in => data_a_in,
+      data_b_in => data_b_in,
+      data_c_in => data_c_in,
+      data_d_in => data_d_in,
+      data_k_in => data_k_in,
 
-    data_a_out => matrix_operation_int
-  );
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
+
+      data_c_out  => matrix_generation_int
+    );
+
+    ntm_state_feedback.ntm_state_matrix_state (
+      data_a_in => data_a_in,
+      data_b_in => data_b_in,
+      data_c_in => data_c_in,
+      data_d_in => data_d_in,
+      data_k_in => data_k_in,
+
+      matrix_operation_int => matrix_operation_int,
+      matrix_eye_int       => matrix_eye_int,
+
+      data_a_out => matrix_generation_int
+    );
 
   end ntm_state_vector_output;
 
