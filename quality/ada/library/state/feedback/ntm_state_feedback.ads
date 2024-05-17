@@ -57,13 +57,16 @@ use ntm_matrix_algebra;
 package ntm_state_feedback is
 
   procedure ntm_eye_matrix (
+    -- Inputs
     SIZE_I_IN : in integer;
     SIZE_J_IN : in integer;
 
+    -- Outputs
     data_out : out matrix
   );
 
   procedure ntm_state_matrix_feedforward (
+    -- Inputs
     data_d_in : in matrix;
     data_k_in : in matrix;
 
@@ -71,10 +74,12 @@ package ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_d_out : out matrix
   );
 
   procedure ntm_state_matrix_input (
+    -- Inputs
     data_b_in : in matrix;
     data_d_in : in matrix;
     data_k_in : in matrix;
@@ -83,10 +88,12 @@ package ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_b_out : out matrix
   );
 
   procedure ntm_state_matrix_output (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -97,10 +104,12 @@ package ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_c_out : out matrix
   );
 
   procedure ntm_state_matrix_state (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -111,6 +120,7 @@ package ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_a_out : out matrix
   );
 

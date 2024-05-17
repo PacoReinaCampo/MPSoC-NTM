@@ -1,29 +1,63 @@
 code
 ├── classes
 │   ├── philosophers
+│   │   └── ntm_philosophers_uml.dot
 │   ├── soldiers
+│   │   └── ntm_soldiers_uml.dot
 │   └── workers
+│       └── ntm_workers_uml.dot
 └── computing
     ├── advanced_computer_architecture
     │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip_uml.dot
     │   ├── processing_unit
+    │   │   ├── mimd_uml.dot
+    │   │   ├── misd_uml.dot
+    │   │   ├── simd_uml.dot
+    │   │   └── sisd_uml.dot
     │   └── system_on_chip
+    │       ├── bus_on_chip_uml.dot
+    │       └── network_on_chip_uml.dot
     ├── computer_architecture
     │   ├── harvard_architecture
+    │   │   ├── pu_or1k_uml.dot
+    │   │   └── pu_riscv_uml.dot
     │   └── von_neumann_architecture
+    │       ├── pu_msp430_uml.dot
+    │       └── pu_riscv_uml.dot
     ├── information
     │   ├── bit
+    │   │   └── bit_uml.dot
     │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits_uml.dot
+    │   │   └── logic_circuits_uml.dot
     │   ├── finite_state_machine
+    │   │   └── finite_state_machine_uml.dot
     │   ├── logic_gate
+    │   │   ├── and_gate_uml.dot
+    │   │   ├── nand_gate_uml.dot
+    │   │   ├── nor_gate_uml.dot
+    │   │   ├── not_gate_uml.dot
+    │   │   ├── or_gate_uml.dot
+    │   │   ├── xnor_gate_uml.dot
+    │   │   ├── xor_gate_uml.dot
+    │   │   └── yes_gate_uml.dot
     │   ├── pushdown_automaton
+    │   │   └── pushdown_automaton_uml.dot
     │   └── turing_machine
+    │       └── turing_machine_uml.dot
     └── neural_network
         ├── attention_neural_network
+        │   └── attention_neural_network_uml.dot
         ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network_uml.dot
         ├── feedforward_neural_network
+        │   └── feedforward_neural_network_uml.dot
         ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network_uml.dot
         ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network_uml.dot
         └── perceptron_neural_network
+            └── perceptron_neural_network_uml.dot
 
-26 directories, 0 files
+26 directories, 34 files

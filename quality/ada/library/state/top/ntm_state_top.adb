@@ -54,6 +54,7 @@ use Ada.Numerics.Elementary_Functions;
 package body ntm_state_top is
 
   procedure ntm_state_matrix (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -72,6 +73,7 @@ package body ntm_state_top is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_x_out : out vector;
     data_y_out : out vector
   ) is
@@ -79,6 +81,7 @@ package body ntm_state_top is
   begin
 
     ntm_state_outputs.ntm_state_vector_state (
+      -- Inputs
       data_a_in => data_a_in,
       data_b_in => data_b_in,
       data_c_in => data_c_in,
@@ -97,10 +100,12 @@ package body ntm_state_top is
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_x_out => data_x_out
     );
 
     ntm_state_outputs.ntm_state_vector_output (
+      -- Inputs
       data_a_in => data_a_in,
       data_b_in => data_b_in,
       data_c_in => data_c_in,
@@ -119,6 +124,7 @@ package body ntm_state_top is
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_y_out => data_y_out
     );
 

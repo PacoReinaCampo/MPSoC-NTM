@@ -55,6 +55,7 @@ use ntm_state_outputs;
 
 procedure test_state_outputs is
 
+  -- Inputs
   data_a_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   data_b_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
   data_c_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
@@ -67,17 +68,20 @@ procedure test_state_outputs is
 
   k : float := 0.0;
 
+  -- Variables
   matrix_generation_int : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
   matrix_operation_int : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   matrix_eye_int       : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
 
+  -- Outputs
   data_x_out : vector := (0.0, 0.0, 0.0);
   data_y_out : vector := (0.0, 0.0, 0.0);
 
 begin
 
   ntm_state_outputs.ntm_state_vector_output (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
@@ -96,6 +100,7 @@ begin
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_y_out => data_y_out
   );
 
@@ -106,6 +111,7 @@ begin
   end loop;
 
   ntm_state_outputs.ntm_state_vector_state (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
@@ -124,6 +130,7 @@ begin
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_x_out  => data_x_out
   );
 

@@ -55,15 +55,18 @@ use ntm_state_feedback;
 
 procedure test_state_feedback is
 
+  -- Inputs
   data_a_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   data_b_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
   data_c_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
   data_d_in : matrix := ((1.0, 1.0, 2.0), (1.0, 1.0, 2.0), (1.0, 1.0, 2.0));
   data_k_in : matrix := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
+  -- Variables
   matrix_operation_int : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   matrix_eye_int       : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
 
+  -- Outputs
   data_a_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   data_b_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   data_c_out : matrix := ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
@@ -72,12 +75,15 @@ procedure test_state_feedback is
 begin
 
   ntm_state_feedback.ntm_state_matrix_feedforward (
+  -- Inputs
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_d_out => data_d_out
   );
 
@@ -92,13 +98,16 @@ begin
   end loop;
 
   ntm_state_feedback.ntm_state_matrix_input (
+    -- Inputs
     data_b_in => data_b_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_b_out => data_b_out
   );
 
@@ -113,15 +122,18 @@ begin
   end loop;
 
   ntm_state_feedback.ntm_state_matrix_output (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_c_out  => data_c_out
   );
 
@@ -136,15 +148,18 @@ begin
   end loop;
 
   ntm_state_feedback.ntm_state_matrix_state (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_a_out => data_a_out
   );
 

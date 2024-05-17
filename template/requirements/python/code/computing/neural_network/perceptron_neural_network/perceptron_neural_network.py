@@ -42,8 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-import random
-
 class ScalarArithmetic:
   def __init__(self, data_a_in, data_b_in):
     self.data_a_in = data_a_in

@@ -54,6 +54,7 @@ use ntm_state_outputs;
 package ntm_state_top is
 
   procedure ntm_state_matrix (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -72,6 +73,7 @@ package ntm_state_top is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_x_out : out vector;
     data_y_out : out vector
   );

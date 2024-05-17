@@ -57,6 +57,7 @@ use ntm_state_feedback;
 package ntm_state_outputs is
 
   procedure ntm_state_vector_state (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -75,10 +76,12 @@ package ntm_state_outputs is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_x_out : out vector
   );
 
   procedure ntm_state_vector_output (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -97,6 +100,7 @@ package ntm_state_outputs is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_y_out : out vector
   );
 

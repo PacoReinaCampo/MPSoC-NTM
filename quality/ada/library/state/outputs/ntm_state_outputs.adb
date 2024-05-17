@@ -54,6 +54,7 @@ use Ada.Numerics.Elementary_Functions;
 package body ntm_state_outputs is
 
   procedure ntm_state_vector_state (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -72,6 +73,7 @@ package body ntm_state_outputs is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_x_out : out vector
   ) is
 
@@ -81,55 +83,68 @@ package body ntm_state_outputs is
   -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
 
   ntm_state_feedback.ntm_state_matrix_feedforward (
+    -- Inputs
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_d_out => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_input (
+    -- Inputs
     data_b_in => data_b_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_b_out => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_output (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_c_out  => matrix_generation_int
   );
 
   ntm_state_feedback.ntm_state_matrix_state (
+    -- Inputs
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_c_in => data_c_in,
     data_d_in => data_d_in,
     data_k_in => data_k_in,
 
+    -- Variables
     matrix_operation_int => matrix_operation_int,
     matrix_eye_int       => matrix_eye_int,
 
+    -- Outputs
     data_a_out => matrix_generation_int
   );
 
   end ntm_state_vector_state;
 
   procedure ntm_state_vector_output (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -148,6 +163,7 @@ package body ntm_state_outputs is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_y_out : out vector
   ) is
 
@@ -157,49 +173,61 @@ package body ntm_state_outputs is
     -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
     ntm_state_feedback.ntm_state_matrix_feedforward (
+      -- Inputs
       data_d_in => data_d_in,
       data_k_in => data_k_in,
 
+      -- Variables
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_d_out => matrix_generation_int
     );
 
     ntm_state_feedback.ntm_state_matrix_input (
+      -- Inputs
       data_b_in => data_b_in,
       data_d_in => data_d_in,
       data_k_in => data_k_in,
 
+      -- Variables
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_b_out => matrix_generation_int
     );
 
     ntm_state_feedback.ntm_state_matrix_output (
+      -- Inputs
       data_a_in => data_a_in,
       data_b_in => data_b_in,
       data_c_in => data_c_in,
       data_d_in => data_d_in,
       data_k_in => data_k_in,
 
+      -- Variables
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_c_out  => matrix_generation_int
     );
 
     ntm_state_feedback.ntm_state_matrix_state (
+    -- Inputs
       data_a_in => data_a_in,
       data_b_in => data_b_in,
       data_c_in => data_c_in,
       data_d_in => data_d_in,
       data_k_in => data_k_in,
 
+      -- Variables
       matrix_operation_int => matrix_operation_int,
       matrix_eye_int       => matrix_eye_int,
 
+      -- Outputs
       data_a_out => matrix_generation_int
     );
 

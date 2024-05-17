@@ -54,9 +54,11 @@ use Ada.Numerics.Elementary_Functions;
 package body ntm_state_feedback is
 
   procedure ntm_eye_matrix (
+    -- Inputs
     SIZE_I_IN : in integer;
     SIZE_J_IN : in integer;
 
+    -- Outputs
     data_out : out matrix
   ) is
     ZERO : constant float := 0.0;
@@ -76,6 +78,7 @@ package body ntm_state_feedback is
   end ntm_eye_matrix;
 
   procedure ntm_state_matrix_feedforward (
+    -- Inputs
     data_d_in : in matrix;
     data_k_in : in matrix;
 
@@ -83,6 +86,7 @@ package body ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_d_out : out matrix
   ) is
     -- Constants
@@ -96,44 +100,55 @@ package body ntm_state_feedback is
   begin
 
     ntm_eye_matrix (
+      -- Inputs
       SIZE_I_IN => SIZE_D_I_IN,
       SIZE_J_IN => SIZE_D_J_IN,
 
+      -- Outputs
       data_out => matrix_eye_int
     );
 
     -- Body
     -- d = inv(I + D·K)·D
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_d_in,
       data_b_in => data_k_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_arithmetic.ntm_matrix_adder (
+      -- Inputs
       data_a_in => matrix_eye_int,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_inverse (
+      -- Inputs
       data_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => matrix_operation_int,
       data_b_in => data_d_in,
 
+      -- Outputs
       data_out => data_d_out
     );
 
   end ntm_state_matrix_feedforward;
 
   procedure ntm_state_matrix_input (
+    -- Inputs
     data_b_in : in matrix;
     data_d_in : in matrix;
     data_k_in : in matrix;
@@ -142,6 +157,7 @@ package body ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_b_out : out matrix
   ) is
     -- Constants
@@ -155,65 +171,82 @@ package body ntm_state_feedback is
   begin
 
     ntm_eye_matrix (
+      -- Inputs
       SIZE_I_IN => SIZE_D_I_IN,
       SIZE_J_IN => SIZE_D_J_IN,
 
+      -- Outputs
       data_out => matrix_eye_int
     );
 
     -- Body
     -- b = B·(I-K·inv(I + D·K)·D)
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_d_in,
       data_b_in => data_k_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_arithmetic.ntm_matrix_adder (
+      -- Inputs
       data_a_in => matrix_eye_int,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_inverse (
+      -- Inputs
       data_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => matrix_operation_int,
       data_b_in => data_d_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_k_in,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_substractor (
+      -- Inputs
       data_a_in => matrix_eye_int,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_b_in,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => data_b_out
     );
 
   end ntm_state_matrix_input;
 
   procedure ntm_state_matrix_output (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -224,6 +257,7 @@ package body ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_c_out : out matrix
   ) is
     -- Constants
@@ -237,44 +271,55 @@ package body ntm_state_feedback is
   begin
 
     ntm_eye_matrix (
+      -- Inputs
       SIZE_I_IN => SIZE_D_I_IN,
       SIZE_J_IN => SIZE_D_J_IN,
 
+      -- Outputs
       data_out => matrix_eye_int
     );
 
     -- Body
     -- c = inv(I + D·K)·C
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_d_in,
       data_b_in => data_k_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_arithmetic.ntm_matrix_adder (
+      -- Inputs
       data_a_in => matrix_eye_int,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_inverse (
+      -- Inputs
       data_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => matrix_operation_int,
       data_b_in => data_c_in,
 
+      -- Outputs
       data_out => data_c_out
     );
 
   end ntm_state_matrix_output;
 
   procedure ntm_state_matrix_state (
+    -- Inputs
     data_a_in : in matrix;
     data_b_in : in matrix;
     data_c_in : in matrix;
@@ -285,6 +330,7 @@ package body ntm_state_feedback is
     matrix_operation_int : out matrix;
     matrix_eye_int       : out matrix;
 
+    -- Outputs
     data_a_out : out matrix
   ) is
     -- Constants
@@ -298,59 +344,75 @@ package body ntm_state_feedback is
   begin
 
     ntm_eye_matrix (
+      -- Inputs
       SIZE_I_IN => SIZE_D_I_IN,
       SIZE_J_IN => SIZE_D_J_IN,
 
+      -- Outputs
       data_out => matrix_eye_int
     );
 
     -- Body
     -- a = A-B·K·inv(I + D·K)·C
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_d_in,
       data_b_in => data_k_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_arithmetic.ntm_matrix_adder (
+      -- Inputs
       data_a_in => matrix_eye_int,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_inverse (
+      -- Inputs
       data_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => matrix_operation_int,
       data_b_in => data_c_in,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_k_in,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_algebra.ntm_matrix_product (
+      -- Inputs
       data_a_in => data_b_in,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => matrix_operation_int
     );
 
     ntm_matrix_arithmetic.ntm_matrix_adder (
+      -- Inputs
       data_a_in => data_a_in,
       data_b_in => matrix_operation_int,
 
+      -- Outputs
       data_out => data_a_out
     );
 

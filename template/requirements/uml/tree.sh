@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-tree -P '*.uml' code > TREE-UML.txt
+tree -P '*.dot' code > TREE-UML.txt
 
-tree -f -i -P '*.uml' code > CREATE-UML.sh
-sed -i '/.uml/!d' CREATE-UML.sh
+tree -f -i -P '*.dot' code > CREATE-UML.sh
+sed -i '/.dot/!d' CREATE-UML.sh
 sed -i 's/^/touch /g' CREATE-UML.sh
