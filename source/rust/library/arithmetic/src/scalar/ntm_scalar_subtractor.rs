@@ -43,6 +43,6 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 pub fn ntm_scalar_subtractor(data_a_in: f64, data_b_in: f64) -> f64 {
-    // calculating addition
+    // calculating subtraction
     return data_a_in - data_b_in;
 }
