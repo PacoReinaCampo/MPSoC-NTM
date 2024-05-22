@@ -42,9 +42,38 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/ntm/memory/main.c"
 
 int main() {
-  printf("Hello QueenField!\n");
+  srand(time(NULL));
+
+  int random_integer = rand();
+    
+  double data_a_in = (double)random_integer / RAND_MAX;
+  double data_b_in = (double)random_integer / RAND_MAX;
+
+  double data_out;
+
+  data_out = data_a_in + data_b_in;
+
+  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+
   return 0;
 }

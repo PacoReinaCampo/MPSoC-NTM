@@ -59,113 +59,32 @@ make clean
 make x86
 
 
-cd ../../../application/algebra/scalar
-make clean
-make x86
-
-cd ../../../application/algebra/vector
-make clean
-make x86
-
-cd ../../../application/algebra/matrix
-make clean
-make x86
-
-cd ../../../application/algebra/tensor
-make clean
-make x86
-
-
-cd ../../../application/math/scalar
-make clean
-make x86
-
-cd ../../../application/math/matrix
-make clean
-make x86
-
-cd ../../../application/math/vector
-make clean
-make x86
-
-
-#cd ../../../application/nn/ann/components
+#cd ../../../application/algebra/scalar
 #make clean
 #make x86
 
-#cd ../../../application/nn/ann/controller/fnn
+#cd ../../../application/algebra/vector
 #make clean
 #make x86
 
-#cd ../../../application/nn/ann/controller/lstm
+#cd ../../../application/algebra/matrix
 #make clean
 #make x86
 
-#cd ../../../application/nn/ann/functions
+#cd ../../../application/algebra/tensor
 #make clean
 #make x86
 
-#cd ../../../application/nn/ann/inputs
+
+#cd ../../../application/math/scalar
 #make clean
 #make x86
 
-#cd ../../../application/nn/ann/top
+#cd ../../../application/math/matrix
 #make clean
 #make x86
 
-#cd ../../../application/nn/dnc/memory
-#make clean
-#make x86
-
-#cd ../../../application/nn/dnc/read_heads
-#make clean
-#make x86
-
-#cd ../../../application/nn/dnc/top
-#make clean
-#make x86
-
-#cd ../../../application/nn/dnc/trained
-#make clean
-#make x86
-
-#cd ../../../application/nn/dnc/write_heads
-#make clean
-#make x86
-
-#cd ../../../application/nn/fnn/convolutional
-#make clean
-#make x86
-
-#cd ../../../application/nn/fnn/standard
-#make clean
-#make x86
-
-#cd ../../../application/nn/lstm/convolutional
-#make clean
-#make x86
-
-#cd ../../../application/nn/lstm/standard
-#make clean
-#make x86
-
-#cd ../../../application/nn/ntm/memory
-#make clean
-#make x86
-
-#cd ../../../application/nn/ntm/read_heads
-#make clean
-#make x86
-
-#cd ../../../application/nn/ntm/top
-#make clean
-#make x86
-
-#cd ../../../application/nn/ntm/trained
-#make clean
-#make x86
-
-#cd ../../../application/nn/ntm/write_heads
+#cd ../../../application/math/vector
 #make clean
 #make x86
 
@@ -183,26 +102,107 @@ make x86
 #make x86
 
 
-#cd ../../../application/trainer/differentiation
+#cd ../../../application/nn/ann/components
 #make clean
 #make x86
 
-#cd ../../../application/trainer/fnn
+#cd ../../../../application/nn/ann/functions
 #make clean
 #make x86
 
-#cd ../../../application/trainer/lstm/activation
+#cd ../../../../application/nn/ann/inputs
 #make clean
 #make x86
 
-#cd ../../../application/trainer/lstm/forget
+#cd ../../../../application/nn/ann/top
 #make clean
 #make x86
 
-#cd ../../../application/trainer/lstm/input
+#cd ../../../../application/nn/dnc/memory
 #make clean
 #make x86
 
-#cd ../../../application/trainer/lstm/output
+#cd ../../../../application/nn/dnc/read_heads
 #make clean
-#make
+#make x86
+
+#cd ../../../../application/nn/dnc/top
+#make clean
+#make x86
+
+#cd ../../../../application/nn/dnc/trained
+#make clean
+#make x86
+
+#cd ../../../../application/nn/dnc/write_heads
+#make clean
+#make x86
+
+#cd ../../../../application/nn/fnn/convolutional
+#make clean
+#make x86
+
+#cd ../../../../application/nn/fnn/standard
+#make clean
+#make x86
+
+#cd ../../../../application/nn/lstm/convolutional
+#make clean
+#make x86
+
+#cd ../../../../application/nn/lstm/standard
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ntm/memory
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ntm/read_heads
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ntm/top
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ntm/trained
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ntm/write_heads
+#make clean
+#make x86
+
+#cd ../../../../application/nn/ann/controller/fnn
+#make clean
+#make x86
+
+#cd ../../../../../application/nn/ann/controller/lstm
+#make clean
+#make x86
+
+
+cd ../../../../../application/trainer/differentiation
+make clean
+make x86
+
+cd ../../../application/trainer/fnn
+make clean
+make x86
+
+cd ../../../application/trainer/lstm/activation
+make clean
+make x86
+
+cd ../../../../application/trainer/lstm/forget
+make clean
+make x86
+
+cd ../../../../application/trainer/lstm/input
+make clean
+make x86
+
+cd ../../../../application/trainer/lstm/output
+make clean
+make x86

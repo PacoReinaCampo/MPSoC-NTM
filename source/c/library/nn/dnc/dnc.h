@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-double ntm_scalar_adder(double, double);
-double ntm_scalar_multiplier(double, double);
-double ntm_scalar_divider(double, double);
+double dnc_adder(double, double);
+double dnc_multiplier(double, double);
+double dnc_divider(double, double);
 
 double *ntm_vector_adder(double *, double *);
 double *ntm_vector_multiplier(double *, double *);

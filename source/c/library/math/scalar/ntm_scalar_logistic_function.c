@@ -45,6 +45,8 @@
 #include <math.h>
 #include <stdio.h>
 
+#include "../ntm_math.h"
+
 double ntm_scalar_logistic_function(double data_in) {
   double ONE = 1.0;
 

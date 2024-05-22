@@ -42,9 +42,38 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#include "../../../../library/trainer/lstm/output/ntm_lstm_output_trainer.h"
 
 int main() {
-  printf("Hello QueenField!\n");
+  srand(time(NULL));
+
+  int random_integer = rand();
+    
+  double data_a_in = (double)random_integer / RAND_MAX;
+  double data_b_in = (double)random_integer / RAND_MAX;
+
+  double data_out;
+
+  data_out = data_a_in + data_b_in;
+
+  assert(ntm_lstm_output_trainer_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(ntm_lstm_output_trainer_subtractor(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(ntm_lstm_output_trainer_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(ntm_lstm_output_trainer_divider(data_a_in, data_b_in) == data_out);
+
   return 0;
 }

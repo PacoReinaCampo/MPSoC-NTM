@@ -45,9 +45,11 @@
 #include <math.h>
 #include <stdio.h>
 
-double ntm_scalar_deviation_function(double data_in) {
-  double ONE = 1.0;
+#include "../ntm_math.h"
+
+double ntm_scalar_deviation_function(double *data_in, double mean_in) {
+  double data_out = 0.0;
 
   // calculating result
-  return ONE / (ONE + ONE / exp(data_in));
+  return data_out;
 }

@@ -71,98 +71,98 @@ make clean
 cd ../../../application/math/scalar
 make clean
 
-cd ../../../application/math/matrix
-make clean
-
 cd ../../../application/math/vector
 make clean
 
-
-#cd ../../../application/nn/ann/components
-#make clean
-
-#cd ../../../application/nn/ann/controller/fnn
-#make clean
-
-#cd ../../../application/nn/ann/controller/lstm
-#make clean
-
-#cd ../../../application/nn/ann/functions
-#make clean
-
-#cd ../../../application/nn/ann/inputs
-#make clean
-
-#cd ../../../application/nn/ann/top
-#make clean
-
-#cd ../../../application/nn/dnc/memory
-#make clean
-
-#cd ../../../application/nn/dnc/read_heads
-#make clean
-
-#cd ../../../application/nn/dnc/top
-#make clean
-
-#cd ../../../application/nn/dnc/trained
-#make clean
-
-#cd ../../../application/nn/dnc/write_heads
-#make clean
-
-#cd ../../../application/nn/fnn/convolutional
-#make clean
-
-#cd ../../../application/nn/fnn/standard
-#make clean
-
-#cd ../../../application/nn/lstm/convolutional
-#make clean
-
-#cd ../../../application/nn/lstm/standard
-#make clean
-
-#cd ../../../application/nn/ntm/memory
-#make clean
-
-#cd ../../../application/nn/ntm/read_heads
-#make clean
-
-#cd ../../../application/nn/ntm/top
-#make clean
-
-#cd ../../../application/nn/ntm/trained
-#make clean
-
-#cd ../../../application/nn/ntm/write_heads
-#make clean
+cd ../../../application/math/matrix
+make clean
 
 
-#cd ../../../application/state/feedback
-#make clean
+cd ../../../application/state/feedback
+make clean
 
-#cd ../../../application/state/outputs
-#make clean
+cd ../../../application/state/outputs
+make clean
 
-#cd ../../../application/state/top
-#make clean
+cd ../../../application/state/top
+make clean
 
 
-#cd ../../../application/trainer/differentiation
-#make clean
+cd ../../../application/nn/ann/components
+make clean
 
-#cd ../../../application/trainer/fnn
-#make clean
+cd ../../../../application/nn/ann/functions
+make clean
 
-#cd ../../../application/trainer/lstm/activation
-#make clean
+cd ../../../../application/nn/ann/inputs
+make clean
 
-#cd ../../../application/trainer/lstm/forget
-#make clean
+cd ../../../../application/nn/ann/top
+make clean
 
-#cd ../../../application/trainer/lstm/input
-#make clean
+cd ../../../../application/nn/dnc/memory
+make clean
 
-#cd ../../../application/trainer/lstm/output
-#make clean
+cd ../../../../application/nn/dnc/read_heads
+make clean
+
+cd ../../../../application/nn/dnc/top
+make clean
+
+cd ../../../../application/nn/dnc/trained
+make clean
+
+cd ../../../../application/nn/dnc/write_heads
+make clean
+
+cd ../../../../application/nn/fnn/convolutional
+make clean
+
+cd ../../../../application/nn/fnn/standard
+make clean
+
+cd ../../../../application/nn/lstm/convolutional
+make clean
+
+cd ../../../../application/nn/lstm/standard
+make clean
+
+cd ../../../../application/nn/ntm/memory
+make clean
+
+cd ../../../../application/nn/ntm/read_heads
+make clean
+
+cd ../../../../application/nn/ntm/top
+make clean
+
+cd ../../../../application/nn/ntm/trained
+make clean
+
+cd ../../../../application/nn/ntm/write_heads
+make clean
+
+cd ../../../../application/nn/ann/controller/fnn
+make clean
+
+cd ../../../../../application/nn/ann/controller/lstm
+make clean
+
+
+cd ../../../../../application/trainer/differentiation
+make clean
+
+cd ../../../application/trainer/fnn
+make clean
+
+cd ../../../application/trainer/lstm/activation
+make clean
+
+cd ../../../../application/trainer/lstm/forget
+make clean
+
+cd ../../../../application/trainer/lstm/input
+make clean
+
+cd ../../../../application/trainer/lstm/output
+make clean

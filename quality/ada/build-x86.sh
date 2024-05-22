@@ -87,3 +87,122 @@ make
 cd ../../../application/math/matrix
 make clean
 make
+
+
+cd ../../../application/state/feedback
+make clean
+make
+
+cd ../../../application/state/outputs
+make clean
+make
+
+cd ../../../application/state/top
+make clean
+make
+
+
+cd ../../../application/nn/ann/components
+make clean
+make
+
+cd ../../../../application/nn/ann/functions
+make clean
+make
+
+cd ../../../../application/nn/ann/inputs
+make clean
+make
+
+cd ../../../../application/nn/ann/top
+make clean
+make
+
+cd ../../../../application/nn/dnc/memory
+make clean
+make
+
+cd ../../../../application/nn/dnc/read_heads
+make clean
+make
+
+cd ../../../../application/nn/dnc/top
+make clean
+make
+
+cd ../../../../application/nn/dnc/trained
+make clean
+make
+
+cd ../../../../application/nn/dnc/write_heads
+make clean
+make
+
+cd ../../../../application/nn/fnn/convolutional
+make clean
+make
+
+cd ../../../../application/nn/fnn/standard
+make clean
+make
+
+cd ../../../../application/nn/lstm/convolutional
+make clean
+make
+
+cd ../../../../application/nn/lstm/standard
+make clean
+make
+
+cd ../../../../application/nn/ntm/memory
+make clean
+make
+
+cd ../../../../application/nn/ntm/read_heads
+make clean
+make
+
+cd ../../../../application/nn/ntm/top
+make clean
+make
+
+cd ../../../../application/nn/ntm/trained
+make clean
+make
+
+cd ../../../../application/nn/ntm/write_heads
+make clean
+make
+
+cd ../../../../application/nn/ann/controller/fnn
+make clean
+make
+
+cd ../../../../../application/nn/ann/controller/lstm
+make clean
+make
+
+
+cd ../../../../../application/trainer/differentiation
+make clean
+make
+
+cd ../../../application/trainer/fnn
+make clean
+make
+
+cd ../../../application/trainer/lstm/activation
+make clean
+make
+
+cd ../../../../application/trainer/lstm/forget
+make clean
+make
+
+cd ../../../../application/trainer/lstm/input
+make clean
+make
+
+cd ../../../../application/trainer/lstm/output
+make clean
+make

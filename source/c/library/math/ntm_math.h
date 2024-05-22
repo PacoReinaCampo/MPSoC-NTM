@@ -50,7 +50,7 @@ double ntm_scalar_deviation_function(double **, double);
 double *ntm_vector_logistic_function(double *);
 double *ntm_vector_oneplus_function(double *);
 double *ntm_vector_mean_function(double **);
-double *ntm_vector_deviation_function(double **, double *mean);
+double *ntm_vector_deviation_function(double **, double *);
 
 double **ntm_matrix_logistic_function(double **);
 double **ntm_matrix_oneplus_function(double **);

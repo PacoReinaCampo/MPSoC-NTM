@@ -42,9 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
+#include "dnc_matrix_content_based_addressing.h"
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include <stdio.h>
+#include <stdlib.h>
+
+double dnc_matrix_content_based_addressing_adder(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in + data_b_in;
+}
+
+double dnc_matrix_content_based_addressing_subtractor(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in - data_b_in;
+}
+
+double dnc_matrix_content_based_addressing_multiplier(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in * data_b_in;
+}
+
+double dnc_matrix_content_based_addressing_divider(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in / data_b_in;
 }

@@ -42,9 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
+#include "dnc_memory_matrix.h"
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include <stdio.h>
+#include <stdlib.h>
+
+double dnc_memory_matrix_adder(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in + data_b_in;
+}
+
+double dnc_memory_matrix_subtractor(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in - data_b_in;
+}
+
+double dnc_memory_matrix_multiplier(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in * data_b_in;
+}
+
+double dnc_memory_matrix_divider(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in / data_b_in;
 }

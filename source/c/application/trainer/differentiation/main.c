@@ -42,9 +42,55 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#include "../../../library/trainer/differentiation/ntm_vector_controller_differentiation.h"
+#include "../../../library/trainer/differentiation/ntm_matrix_controller_differentiation.h"
 
 int main() {
-  printf("Hello QueenField!\n");
+  srand(time(NULL));
+
+  int random_integer = rand();
+    
+  double data_a_in = (double)random_integer / RAND_MAX;
+  double data_b_in = (double)random_integer / RAND_MAX;
+
+  double data_out;
+
+  data_out = data_a_in + data_b_in;
+
+  assert(ntm_vector_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(ntm_vector_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(ntm_vector_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(ntm_vector_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in + data_b_in;
+
+  assert(ntm_matrix_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(ntm_matrix_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(ntm_matrix_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(ntm_matrix_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
+
   return 0;
 }

@@ -42,9 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
+#include "ntm_lstm.h"
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include <stdio.h>
+#include <stdlib.h>
+
+double ntm_lstm_adder(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in + data_b_in;
+}
+
+double ntm_lstm_subtractor(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in - data_b_in;
+}
+
+double ntm_lstm_multiplier(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in * data_b_in;
+}
+
+double ntm_lstm_divider(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in / data_b_in;
 }

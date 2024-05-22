@@ -46,6 +46,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../ntm_math.h"
+
 #define SIZE_I_IN 3
 #define SIZE_J_IN 3
 

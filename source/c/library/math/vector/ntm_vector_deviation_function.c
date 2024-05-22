@@ -46,6 +46,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../ntm_math.h"
+
 #define SIZE_IN 3
 
 double ntm_vector_deviation_function(double *data_in) {

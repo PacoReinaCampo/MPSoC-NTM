@@ -42,9 +42,27 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
+#include "ntm_vector_controller_differentiation.h"
 
-int main() {
-  printf("Hello QueenField!\n");
-  return 0;
+#include <stdio.h>
+#include <stdlib.h>
+
+double ntm_vector_controller_differentiation_adder(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in + data_b_in;
+}
+
+double ntm_vector_controller_differentiation_subtractor(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in - data_b_in;
+}
+
+double ntm_vector_controller_differentiation_multiplier(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in * data_b_in;
+}
+
+double ntm_vector_controller_differentiation_divider(double data_a_in, double data_b_in) {
+  // calculating addition
+  return data_a_in / data_b_in;
 }
