@@ -43,23 +43,11 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# Arithmetic-Vector Sources
 #####################################################################
 
-SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_arithmetic.hpp \
-			../../../library/arithmetic/ntm_matrix_arithmetic.cpp \
-			../../../library/arithmetic/ntm_scalar_arithmetic.cpp \
-			../../../library/arithmetic/ntm_tensor_arithmetic.cpp \
-			../../../library/arithmetic/ntm_vector_arithmetic.cpp \
-			../../../library/arithmetic/matrix/ntm_matrix_adder.cpp \
-			../../../library/arithmetic/matrix/ntm_matrix_divider.cpp \
-			../../../library/arithmetic/matrix/ntm_matrix_multiplier.cpp \
-			../../../library/arithmetic/scalar/ntm_scalar_adder.cpp \
-			../../../library/arithmetic/scalar/ntm_scalar_divider.cpp \
-			../../../library/arithmetic/scalar/ntm_scalar_multiplier.cpp \
-			../../../library/arithmetic/tensor/ntm_tensor_adder.cpp \
-			../../../library/arithmetic/tensor/ntm_tensor_divider.cpp \
-			../../../library/arithmetic/tensor/ntm_tensor_multiplier.cpp \
-			../../../library/arithmetic/vector/ntm_vector_adder.cpp \
-			../../../library/arithmetic/vector/ntm_vector_divider.cpp \
-			../../../library/arithmetic/vector/ntm_vector_multiplier.cpp
+SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_vector_arithmetic.cpp \
+			../../../library/arithmetic/vector/adder/ntm_vector_adder.cpp \
+			../../../library/arithmetic/vector/subtractor/ntm_vector_subtractor.cpp \
+			../../../library/arithmetic/vector/multiplier/ntm_vector_multiplier.cpp \
+			../../../library/arithmetic/vector/divider/ntm_vector_divider.cpp

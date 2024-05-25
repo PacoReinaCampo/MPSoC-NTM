@@ -42,14 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../ntm_math.h"
 
-double ntm_scalar_deviation_function(double *data_in, double mean_in) {
-  double data_out = 0.0;
-
-  // calculating result
-  return data_out;
+double ntm_scalar_deviation_function(double data_a_in, double data_b_in) {
+  // calculating division
+  return data_a_in / data_b_in;
 }

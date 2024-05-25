@@ -43,11 +43,10 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# ANN-Functions Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_FUNCTIONS =	../../../../library/nn/ann/functions/ntm_layer_norm.h \
+			../../../../library/nn/ann/functions/ntm_layer_norm.c \
+			../../../../library/nn/ann/functions/ntm_positional_encoding.h \
+			../../../../library/nn/ann/functions/ntm_positional_encoding.c

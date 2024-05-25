@@ -43,11 +43,16 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# DNC-Top Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_TOP =	../../../../library/nn/dnc/top/dnc_interface_matrix.h \
+		../../../../library/nn/dnc/top/dnc_interface_matrix.c \
+		../../../../library/nn/dnc/top/dnc_interface_top.h \
+		../../../../library/nn/dnc/top/dnc_interface_top.c \
+		../../../../library/nn/dnc/top/dnc_interface_vector.h \
+		../../../../library/nn/dnc/top/dnc_interface_vector.c \
+		../../../../library/nn/dnc/top/dnc_output_vector.h \
+		../../../../library/nn/dnc/top/dnc_output_vector.c \
+		../../../../library/nn/dnc/top/dnc_top.h \
+		../../../../library/nn/dnc/top/dnc_top.c

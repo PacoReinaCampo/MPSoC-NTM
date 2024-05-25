@@ -47,18 +47,58 @@
 
 using namespace std;
 
-double ntm_scalar_adder(double, double);
-double ntm_scalar_multiplier(double, double);
-double ntm_scalar_divider(double, double);
+class ntm_state_matrix_feedforward {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
 
-vector<double> ntm_vector_adder(vector<double>, vector<double>);
-vector<double> ntm_vector_multiplier(vector<double>, vector<double>);
-vector<double> ntm_vector_divider(vector<double>, vector<double>);
+class ntm_state_matrix_input {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
 
-vector<vector<double>> ntm_matrix_adder(vector<vector<double>>, vector<vector<double>>);
-vector<vector<double>> ntm_matrix_multiplier(vector<vector<double>>, vector<vector<double>>);
-vector<vector<double>> ntm_matrix_divider(vector<vector<double>>, vector<vector<double>>);
+class ntm_state_matrix_output {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
 
-vector<vector<vector<double>>> ntm_tensor_adder(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
-vector<vector<vector<double>>> ntm_tensor_multiplier(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
-vector<vector<vector<double>>> ntm_tensor_divider(vector<vector<vector<double>>>, vector<vector<vector<double>>>);
+class ntm_state_matrix_state {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
+
+class ntm_state_vector_output {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
+
+class ntm_state_vector_state {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};
+
+class ntm_state_top {
+ public:
+  double ntm_scalar_adder(double data_a_in, double data_b_in);
+  double ntm_scalar_subtract(double data_a_in, double data_b_in);
+  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
+  double ntm_scalar_divider(double data_a_in, double data_b_in);
+};

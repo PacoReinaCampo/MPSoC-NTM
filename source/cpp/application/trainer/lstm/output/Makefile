@@ -46,11 +46,11 @@
 # Includes
 ##########################################################################
 
--include include-arithmetic.txt
--include include-math.txt
--include include-feedback.txt
+#-include include-arithmetic.txt
+#-include include-math.txt
+-include include-output.txt
 
-TARGET=state_feedback
+TARGET=trainer-output
 
 ##########################################################################
 # Targets
@@ -59,17 +59,17 @@ TARGET=state_feedback
 all: x86 riscv or1k
 
 x86:
-	g++ main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK} -o ${TARGET}-x86.run
+	g++ main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_OUTPUT} -o ${TARGET}-x86.run
 
 riscv:
-	# Compilation. From State-Feedback source code to ELF
-	riscv64-unknown-elf-g++ -std=c++11 -o ${TARGET}-riscv.elf main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK}
+	# Compilation. From Trainer-Output source code to ELF
+	riscv64-unknown-elf-g++ -std=c++11 -o ${TARGET}-riscv.elf main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_OUTPUT}
 	# Conversion. From ELF to HEX
 	riscv64-unknown-elf-objcopy -O ihex ${TARGET}-riscv.elf ${TARGET}-riscv.hex
 
 or1k:
-	# Compilation. From State-Feedback source code to ELF
-	or1k-elf-g++ -std=c++11 -o ${TARGET}-or1k.elf main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK}
+	# Compilation. From Trainer-Output source code to ELF
+	or1k-elf-g++ -std=c++11 -o ${TARGET}-or1k.elf main.cpp ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_OUTPUT}
 	# Conversion. From ELF to HEX
 	or1k-elf-objcopy -O ihex ${TARGET}-or1k.elf ${TARGET}-or1k.hex
 

@@ -47,7 +47,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/ann/functions/main.c"
+#include "../../../../library/nn/ann/functions/ntm_layer_norm.h"
+#include "../../../../library/nn/ann/functions/ntm_positional_encoding.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +62,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(ntm_layer_norm_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+  assert(ntm_layer_norm_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(ntm_layer_norm_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(ntm_layer_norm_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

@@ -42,16 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../ntm_math.h"
 
-double ntm_scalar_oneplus_function(double data_in) {
-  double ONE = 1.0;
-
-  // calculating result
-  double temporal = ONE + exp(data_in);
-
-  return ONE + log(temporal);
+double ntm_scalar_oneplus_function(double data_a_in, double data_b_in) {
+  // calculating subtraction
+  return data_a_in - data_b_in;
 }

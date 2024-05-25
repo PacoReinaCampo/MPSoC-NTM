@@ -76,22 +76,22 @@ make x86
 #make x86
 
 
-#cd ../../../application/math/scalar
-#make clean
-#make x86
+cd ../../../application/math/scalar
+make clean
+make x86
 
-#cd ../../../application/math/matrix
-#make clean
-#make x86
+cd ../../../application/math/matrix
+make clean
+make x86
 
-#cd ../../../application/math/vector
-#make clean
-#make x86
+cd ../../../application/math/vector
+make clean
+make x86
 
 
-#cd ../../../application/state/feedback
-#make clean
-#make x86
+cd ../../../application/state/feedback
+make clean
+make x86
 
 #cd ../../../application/state/outputs
 #make clean
@@ -102,88 +102,88 @@ make x86
 #make x86
 
 
-#cd ../../../application/nn/ann/components
-#make clean
-#make x86
+cd ../../../application/nn/ann/components
+make clean
+make x86
 
-#cd ../../../../application/nn/ann/functions
-#make clean
-#make x86
+cd ../../../../application/nn/ann/functions
+make clean
+make x86
 
-#cd ../../../../application/nn/ann/inputs
-#make clean
-#make x86
+cd ../../../../application/nn/ann/inputs
+make clean
+make x86
 
-#cd ../../../../application/nn/ann/top
-#make clean
-#make x86
+cd ../../../../application/nn/ann/top
+make clean
+make x86
 
-#cd ../../../../application/nn/dnc/memory
-#make clean
-#make x86
+cd ../../../../../application/nn/ann/controller/fnn
+make clean
+make x86
 
-#cd ../../../../application/nn/dnc/read_heads
-#make clean
-#make x86
+cd ../../../../../application/nn/ann/controller/lstm
+make clean
+make x86
 
-#cd ../../../../application/nn/dnc/top
-#make clean
-#make x86
+cd ../../../../application/nn/dnc/memory
+make clean
+make x86
 
-#cd ../../../../application/nn/dnc/trained
-#make clean
-#make x86
+cd ../../../../application/nn/dnc/read_heads
+make clean
+make x86
 
-#cd ../../../../application/nn/dnc/write_heads
-#make clean
-#make x86
+cd ../../../../application/nn/dnc/top
+make clean
+make x86
 
-#cd ../../../../application/nn/fnn/convolutional
-#make clean
-#make x86
+cd ../../../../application/nn/dnc/trained
+make clean
+make x86
 
-#cd ../../../../application/nn/fnn/standard
-#make clean
-#make x86
+cd ../../../../application/nn/dnc/write_heads
+make clean
+make x86
 
-#cd ../../../../application/nn/lstm/convolutional
-#make clean
-#make x86
+cd ../../../../application/nn/fnn/convolutional
+make clean
+make x86
 
-#cd ../../../../application/nn/lstm/standard
-#make clean
-#make x86
+cd ../../../../application/nn/fnn/standard
+make clean
+make x86
 
-#cd ../../../../application/nn/ntm/memory
-#make clean
-#make x86
+cd ../../../../application/nn/lstm/convolutional
+make clean
+make x86
 
-#cd ../../../../application/nn/ntm/read_heads
-#make clean
-#make x86
+cd ../../../../application/nn/lstm/standard
+make clean
+make x86
 
-#cd ../../../../application/nn/ntm/top
-#make clean
-#make x86
+cd ../../../../application/nn/ntm/memory
+make clean
+make x86
 
-#cd ../../../../application/nn/ntm/trained
-#make clean
-#make x86
+cd ../../../../application/nn/ntm/read_heads
+make clean
+make x86
 
-#cd ../../../../application/nn/ntm/write_heads
-#make clean
-#make x86
+cd ../../../../application/nn/ntm/top
+make clean
+make x86
 
-#cd ../../../../application/nn/ann/controller/fnn
-#make clean
-#make x86
+cd ../../../../application/nn/ntm/trained
+make clean
+make x86
 
-#cd ../../../../../application/nn/ann/controller/lstm
-#make clean
-#make x86
+cd ../../../../application/nn/ntm/write_heads
+make clean
+make x86
 
 
-cd ../../../../../application/trainer/differentiation
+cd ../../../../application/trainer/differentiation
 make clean
 make x86
 

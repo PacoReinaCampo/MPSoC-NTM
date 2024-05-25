@@ -47,7 +47,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/ntm/memory/main.c"
+#include "../../../../library/nn/ntm/memory/ntm_addressing.h"
+#include "../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.h"
+#include "../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +63,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(ntm_addressing_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+  assert(ntm_addressing_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(ntm_addressing_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(ntm_addressing_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

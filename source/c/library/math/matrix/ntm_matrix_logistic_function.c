@@ -42,18 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "../ntm_math.h"
 
-#define SIZE_I_IN 3
-#define SIZE_J_IN 3
-
-double ntm_matrix_logistic_function(double **data_in) {
-  double ONE = 1.0;
-
+double ntm_matrix_logistic_function(double **data_a_in, double **data_b_in) {
   double **data_out;
 
   int i, j;
@@ -64,10 +58,10 @@ double ntm_matrix_logistic_function(double **data_in) {
     data_out[i] = (double *)malloc(SIZE_J_IN * sizeof(int));
   }
 
-  // calculating result
+  // calculating addition
   for (i = 0; i < SIZE_I_IN; i++) {
     for (j = 0; j < SIZE_J_IN; j++) {
-      data_out[i][j] = ONE / (ONE + ONE / exp(data_in[i][j]));
+      data_out[i][j] = data_a_in[i][j] + data_b_in[i][j];
     }
   }
 

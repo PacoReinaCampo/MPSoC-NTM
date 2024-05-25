@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/dnc/trained/main.c"
+#include "../../../../library/nn/dnc/trained/dnc_trained_top.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(dnc_trained_top_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+  assert(dnc_trained_top_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(dnc_trained_top_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(dnc_trained_top_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

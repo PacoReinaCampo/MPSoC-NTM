@@ -47,7 +47,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/lstm/standard/main.c"
+#include "../../../../library/nn/lstm/standard/ntm_controller.h"
+#include "../../../../library/nn/lstm/standard/ntm_forget_gate_vector.h"
+#include "../../../../library/nn/lstm/standard/ntm_hidden_gate_vector.h"
+#include "../../../../library/nn/lstm/standard/ntm_input_gate_vector.h"
+#include "../../../../library/nn/lstm/standard/ntm_output_gate_vector.h"
+#include "../../../../library/nn/lstm/standard/ntm_state_gate_vector.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +66,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(ntm_controller_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+  assert(ntm_controller_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(ntm_controller_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(ntm_controller_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

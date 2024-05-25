@@ -46,11 +46,11 @@
 # Includes
 ##########################################################################
 
--include include-arithmetic.txt
--include include-math.txt
--include include-feedback.txt
+#-include include-arithmetic.txt
+#-include include-math.txt
+-include include-top.txt
 
-TARGET=state_feedback
+TARGET=ann-top
 
 ##########################################################################
 # Targets
@@ -59,17 +59,17 @@ TARGET=state_feedback
 all: x86 riscv or1k
 
 x86:
-	gcc main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK} -o ${TARGET}-x86.run
+	gcc main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_TOP} -o ${TARGET}-x86.run
 
 riscv:
-	# Compilation. From State-Feedback source code to ELF
-	riscv64-unknown-elf-gcc -o ${TARGET}-riscv.elf main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK}
+	# Compilation. From ANN-Top source code to ELF
+	riscv64-unknown-elf-gcc -o ${TARGET}-riscv.elf main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_TOP}
 	# Conversion. From ELF to HEX
 	riscv64-unknown-elf-objcopy -O ihex ${TARGET}-riscv.elf ${TARGET}-riscv.hex
 
 or1k:
-	# Compilation. From State-Feedback source code to ELF
-	or1k-elf-gcc -o ${TARGET}-or1k.elf main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_FEEDBACK}
+	# Compilation. From ANN-Top source code to ELF
+	or1k-elf-gcc -o ${TARGET}-or1k.elf main.c ${SOURCES_ARITHMETIC} ${SOURCES_MATH} ${SOURCES_TOP}
 	# Conversion. From ELF to HEX
 	or1k-elf-objcopy -O ihex ${TARGET}-or1k.elf ${TARGET}-or1k.hex
 

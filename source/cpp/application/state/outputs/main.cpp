@@ -42,9 +42,60 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <cassert>
 #include <iostream>
+#include <random>
+
+#include "../../../library/state/ntm_state.hpp"
+
+using namespace std;
 
 int main() {
-  std::cout << "Hello QueenField!\n";
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<double> dis(0.0, 1.0);
+
+  double data_a_in = dis(gen);
+  double data_b_in = dis(gen);
+
+  double data_out;
+
+  ntm_state_vector_output state_vector_output;
+
+  data_out = data_a_in + data_b_in;
+
+  assert(state_vector_output.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(state_vector_output.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(state_vector_output.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(state_vector_output.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+
+  ntm_state_vector_state state_vector_state;
+
+  data_out = data_a_in + data_b_in;
+
+  assert(state_vector_state.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in - data_b_in;
+
+  assert(state_vector_state.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in * data_b_in;
+
+  assert(state_vector_state.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+
+  data_out = data_a_in / data_b_in;
+
+  assert(state_vector_state.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+
   return 0;
 }

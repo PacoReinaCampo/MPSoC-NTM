@@ -43,11 +43,14 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# ANN-Inputs Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_INPUTS =	../../../../library/nn/ann/inputs/ntm_inputs_vector.h \
+			../../../../library/nn/ann/inputs/ntm_inputs_vector.c \
+			../../../../library/nn/ann/inputs/ntm_keys_vector.h \
+			../../../../library/nn/ann/inputs/ntm_keys_vector.c \
+			../../../../library/nn/ann/inputs/ntm_queries_vector.h \
+			../../../../library/nn/ann/inputs/ntm_queries_vector.c \
+			../../../../library/nn/ann/inputs/ntm_values_vector.h \
+			../../../../library/nn/ann/inputs/ntm_values_vector.c

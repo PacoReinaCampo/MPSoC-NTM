@@ -43,11 +43,8 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# FNN-Standard Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_STANDARD =	../../../../library/nn/fnn/standard/ntm_controller.h \
+ 			../../../../library/nn/fnn/standard/ntm_controller.c

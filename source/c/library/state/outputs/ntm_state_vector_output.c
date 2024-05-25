@@ -82,14 +82,11 @@ double **ntm_state_vector_output(double **data_k_in, double **data_a_in, double 
 
   data_y_out = data_c_out * (data_a_out ^ k) * initial_x;
 
-  for
-    j = 1 : k
-                data_y_out = data_y_out + data_c_out * (data_a_out ^ (k - j)) * data_b_out * data_u_in(
-                                                                                                 :, k);
-}
+  for (j = 0; j < k; j++) {
+    data_y_out = data_y_out + data_c_out * (data_a_out ^ (k - j)) * data_b_out * data_u_in(k);
 
-data_y_out = data_y_out + data_d_out * data_u_in(
-                                           :, k);
+    data_y_out = data_y_out + data_d_out * data_u_in(k);
+  }
 
 return data_y_out;
 }

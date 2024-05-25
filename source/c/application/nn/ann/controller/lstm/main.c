@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "/home/user/GitHub/PacoReinaCampo/code/Repository/HomeWork/source/complex/c/application/nn/ann/controller/lstm/main.c"
+#include "../../../../../library/nn/ann/controller/lstm/ntm_lstm.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(ntm_lstm_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_scalar_subtractor(data_a_in, data_b_in) == data_out);
+  assert(ntm_lstm_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(ntm_lstm_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(ntm_lstm_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

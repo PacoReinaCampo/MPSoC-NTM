@@ -43,11 +43,20 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# LSTM-Standard Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_STANDARD =	../../../../library/nn/lstm/standard/ntm_activation_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_activation_gate_vector.c \
+			../../../../library/nn/lstm/standard/ntm_controller.h \
+			../../../../library/nn/lstm/standard/ntm_controller.c \
+			../../../../library/nn/lstm/standard/ntm_forget_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_forget_gate_vector.c \
+			../../../../library/nn/lstm/standard/ntm_hidden_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_hidden_gate_vector.c \
+			../../../../library/nn/lstm/standard/ntm_input_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_input_gate_vector.c \
+			../../../../library/nn/lstm/standard/ntm_output_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_output_gate_vector.c \
+			../../../../library/nn/lstm/standard/ntm_state_gate_vector.h \
+			../../../../library/nn/lstm/standard/ntm_state_gate_vector.c

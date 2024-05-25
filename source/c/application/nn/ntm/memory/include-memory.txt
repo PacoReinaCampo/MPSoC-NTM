@@ -43,11 +43,12 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# NTM-Menory Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_MEMORY =	../../../../library/nn/ntm/memory/ntm_addressing.h \
+			../../../../library/nn/ntm/memory/ntm_addressing.c \
+			../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.h \
+			../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.c \
+			../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.h \
+			../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.c

@@ -43,11 +43,8 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# ANN-LSTM Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_LSTM =	../../../../../library/nn/ann/controller/lstm/ntm_lstm.h \
+		../../../../../library/nn/ann/controller/lstm/ntm_lstm.c

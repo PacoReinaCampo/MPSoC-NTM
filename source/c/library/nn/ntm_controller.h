@@ -43,17 +43,21 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 double ntm_controller_adder(double, double);
+double ntm_controller_subtractor(double, double);
 double ntm_controller_multiplier(double, double);
 double ntm_controller_divider(double, double);
 
-double *ntm_vector_adder(double *, double *);
-double *ntm_vector_multiplier(double *, double *);
-double *ntm_vector_divider(double *, double *);
+double ntm_vector_adder(double *, double *);
+double ntm_vector_subtractor(double *, double *);
+double ntm_vector_multiplier(double *, double *);
+double ntm_vector_divider(double *, double *);
 
-double **ntm_matrix_adder(double **, double **);
-double **ntm_matrix_multiplier(double **, double **);
-double **ntm_matrix_divider(double **, double **);
+double ntm_matrix_adder(double **, double **);
+double ntm_matrix_subtractor(double **, double **);
+double ntm_matrix_multiplier(double **, double **);
+double ntm_matrix_divider(double **, double **);
 
-double ***ntm_tensor_adder(double ***, double ***);
-double ***ntm_tensor_multiplier(double ***, double ***);
-double ***ntm_tensor_divider(double ***, double ***);
+double ntm_tensor_adder(double ***, double ***);
+double ntm_tensor_subtractor(double ***, double ***);
+double ntm_tensor_multiplier(double ***, double ***);
+double ntm_tensor_divider(double ***, double ***);

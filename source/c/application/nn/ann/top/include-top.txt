@@ -43,11 +43,12 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# ANN-Top Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_TOP =	../../../../library/nn/ann/top/ntm_controller.h \
+		../../../../library/nn/ann/top/ntm_controller.c \
+		../../../../library/nn/ann/top/ntm_decoder.h \
+		../../../../library/nn/ann/top/ntm_decoder.c \
+		../../../../library/nn/ann/top/ntm_encoder.h \
+		../../../../library/nn/ann/top/ntm_encoder.c

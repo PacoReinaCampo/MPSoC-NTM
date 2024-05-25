@@ -43,11 +43,14 @@
 ###################################################################################
 
 #####################################################################
-# State-Feedback Sources
+# ANN-Components Sources
 #####################################################################
 
-SOURCES_FEEDBACK =	../../../library/state/ntm_state.h
-			../../../library/state/feedback/ntm_state_matrix_feedforward.c \
-			../../../library/state/feedback/ntm_state_matrix_input.c \
-			../../../library/state/feedback/ntm_state_matrix_output.c \
-			../../../library/state/feedback/ntm_state_matrix_state.c
+SOURCES_COMPONENTS =	../../../../library/nn/ann/components/ntm_masked_multi_head_attention.h \
+			../../../../library/nn/ann/components/ntm_masked_multi_head_attention.c \
+			../../../../library/nn/ann/components/ntm_masked_scaled_dot_product_attention.h \
+			../../../../library/nn/ann/components/ntm_masked_scaled_dot_product_attention.c \
+			../../../../library/nn/ann/components/ntm_multi_head_attention.h \
+			../../../../library/nn/ann/components/ntm_multi_head_attention.c \
+			../../../../library/nn/ann/components/ntm_scaled_dot_product_attention.h \
+			../../../../library/nn/ann/components/ntm_scaled_dot_product_attention.c

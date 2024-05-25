@@ -42,26 +42,21 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "../ntm_math.h"
 
-#define SIZE_IN 3
-
-double ntm_vector_deviation_function(double *data_in) {
-  double ONE = 1.0;
-
+double ntm_vector_deviation_function(double *data_a_in, double *data_b_in) {
   double *data_out;
 
   int i;
 
   data_out = (double *)malloc(sizeof(int) * SIZE_IN);
 
-  // calculating result
+  // calculating division
   for (i = 0; i < SIZE_IN; i++) {
-    data_out[i] = ONE / (ONE + ONE / exp(data_in[i]));
+    data_out[i] = data_a_in[i] / data_b_in[i];
   }
 
   return *data_out;

@@ -42,30 +42,21 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "../ntm_math.h"
 
-#define SIZE_IN 3
-
-double ntm_vector_oneplus_function(double *data_in) {
-  double ONE = 1.0;
-
-  double temporal;
-
+double ntm_vector_oneplus_function(double *data_a_in, double *data_b_in) {
   double *data_out;
 
   int i;
 
   data_out = (double *)malloc(sizeof(int) * SIZE_IN);
 
-  // calculating result
+  // calculating subtraction
   for (i = 0; i < SIZE_IN; i++) {
-    temporal = ONE + exp(data_in[i]);
-
-    data_out[i] = ONE + log(temporal);
+    data_out[i] = data_a_in[i] - data_b_in[i];
   }
 
   return *data_out;
