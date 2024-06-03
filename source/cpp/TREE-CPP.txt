@@ -104,6 +104,7 @@ library
 │       └── ntm_vector_oneplus_function.cpp
 ├── nn
 │   ├── ann
+│   │   ├── ann_controller.cpp
 │   │   ├── components
 │   │   │   ├── ntm_masked_multi_head_attention.cpp
 │   │   │   ├── ntm_masked_scaled_dot_product_attention.cpp
@@ -122,13 +123,12 @@ library
 │   │   │   ├── ntm_keys_vector.cpp
 │   │   │   ├── ntm_queries_vector.cpp
 │   │   │   └── ntm_values_vector.cpp
-│   │   ├── ntm_ann_controller.cpp
 │   │   └── top
 │   │       ├── ntm_controller.cpp
 │   │       ├── ntm_decoder.cpp
 │   │       └── ntm_encoder.cpp
 │   ├── dnc
-│   │   ├── dnc.cpp
+│   │   ├── dnc_controller.cpp
 │   │   ├── memory
 │   │   │   ├── dnc_addressing.cpp
 │   │   │   ├── dnc_allocation_weighting.cpp
@@ -160,6 +160,7 @@ library
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.cpp
+│   │   ├── ntm_fnn_controller.cpp
 │   │   └── standard
 │   │       └── ntm_controller.cpp
 │   ├── lstm
@@ -171,6 +172,7 @@ library
 │   │   │   ├── ntm_input_gate_vector.cpp
 │   │   │   ├── ntm_output_gate_vector.cpp
 │   │   │   └── ntm_state_gate_vector.cpp
+│   │   ├── ntm_lstm_controller.cpp
 │   │   └── standard
 │   │       ├── ntm_activation_gate_vector.cpp
 │   │       ├── ntm_controller.cpp
@@ -179,27 +181,25 @@ library
 │   │       ├── ntm_input_gate_vector.cpp
 │   │       ├── ntm_output_gate_vector.cpp
 │   │       └── ntm_state_gate_vector.cpp
-│   ├── ntm
-│   │   ├── memory
-│   │   │   ├── ntm_addressing.cpp
-│   │   │   ├── ntm_matrix_content_based_addressing.cpp
-│   │   │   └── ntm_vector_content_based_addressing.cpp
-│   │   ├── ntm.cpp
-│   │   ├── read_heads
-│   │   │   └── ntm_reading.cpp
-│   │   ├── top
-│   │   │   ├── ntm_interface_matrix.cpp
-│   │   │   ├── ntm_interface_top.cpp
-│   │   │   ├── ntm_interface_vector.cpp
-│   │   │   ├── ntm_output_vector.cpp
-│   │   │   └── ntm_top.cpp
-│   │   ├── trained
-│   │   │   └── ntm_trained_top.cpp
-│   │   └── write_heads
-│   │       ├── ntm_erasing.cpp
-│   │       └── ntm_writing.cpp
-│   ├── ntm_fnn_controller.cpp
-│   └── ntm_lstm_controller.cpp
+│   └── ntm
+│       ├── memory
+│       │   ├── ntm_addressing.cpp
+│       │   ├── ntm_matrix_content_based_addressing.cpp
+│       │   └── ntm_vector_content_based_addressing.cpp
+│       ├── ntm_controller.cpp
+│       ├── read_heads
+│       │   └── ntm_reading.cpp
+│       ├── top
+│       │   ├── ntm_interface_matrix.cpp
+│       │   ├── ntm_interface_top.cpp
+│       │   ├── ntm_interface_vector.cpp
+│       │   ├── ntm_output_vector.cpp
+│       │   └── ntm_top.cpp
+│       ├── trained
+│       │   └── ntm_trained_top.cpp
+│       └── write_heads
+│           ├── ntm_erasing.cpp
+│           └── ntm_writing.cpp
 ├── state
 │   ├── feedback
 │   │   ├── ntm_state_matrix_feedforward.cpp
@@ -257,7 +257,8 @@ library
     │       ├── ntm_lstm_output_u_trainer.cpp
     │       ├── ntm_lstm_output_v_trainer.cpp
     │       └── ntm_lstm_output_w_trainer.cpp
+    ├── ntm_differentiation.cpp
     ├── ntm_fnn.cpp
     └── ntm_lstm.cpp
 
-69 directories, 191 files
+69 directories, 192 files

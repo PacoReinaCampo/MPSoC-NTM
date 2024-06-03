@@ -33,8 +33,8 @@ library
 │   ├── scalar
 │   └── vector
 ├── nn
-│   ├── ntm_controller.hpp
 │   ├── ann
+│   │   ├── ann_controller.hpp
 │   │   ├── components
 │   │   ├── controller
 │   │   │   ├── fnn
@@ -43,20 +43,22 @@ library
 │   │   ├── inputs
 │   │   └── top
 │   ├── dnc
-│   │   ├── dnc.hpp
+│   │   ├── dnc_controller.hpp
 │   │   ├── memory
 │   │   ├── read_heads
 │   │   ├── top
 │   │   ├── trained
 │   │   └── write_heads
 │   ├── fnn
+│   │   ├── ntm_fnn_controller.hpp
 │   │   ├── convolutional
 │   │   └── standard
 │   ├── lstm
+│   │   ├── ntm_lstm_controller.hpp
 │   │   ├── convolutional
 │   │   └── standard
 │   └── ntm
-│       ├── ntm.hpp
+│       ├── ntm_controller.hpp
 │       ├── memory
 │       ├── read_heads
 │       ├── top
@@ -68,6 +70,7 @@ library
 │   ├── outputs
 │   └── top
 └── trainer
+    ├── ntm_differentiation.hpp
     ├── ntm_fnn.hpp
     ├── ntm_lstm.hpp
     ├── differentiation
@@ -78,4 +81,4 @@ library
         ├── input
         └── output
 
-69 directories, 9 files
+69 directories, 12 files
