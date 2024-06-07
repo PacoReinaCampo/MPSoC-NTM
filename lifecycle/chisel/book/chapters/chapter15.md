@@ -1,7 +1,11 @@
-# Smart Pointers
-## Using Box<T> to Point to Data on the Heap
-## Treating Smart Pointers Like Regular References with the Deref Trait
-## Running Code on Cleanup with the Drop Trait
-## Rc<T>, the Reference Counted Smart Pointer
-## RefCell<T> and the Interior Mutability Pattern
-## Reference Cycles Can Leak Memory
+# Contributing to Chisel
+## Publishing a Chisel Library
+### Using a Library
+### Prerequisite
+### Library Setup
+### Regular Publishing
+## Contributing to Chisel
+### Setup the Development Environment
+### Testing
+### Contribute with a Pull Request
+## Exercise

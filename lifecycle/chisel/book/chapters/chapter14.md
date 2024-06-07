@@ -1,6 +1,10 @@
-# More about Cargo and Crates.io
-## Customizing Builds with Release Profiles
-## Publishing a Crate to Crates.io
-## Cargo Workspaces
-## Installing Binaries from Crates.io with cargo install
-## Extending Cargo with Custom Commands
+# Design of a Processor
+## The Instruction Set Architecture
+## The Datapath
+## Start with an ALU
+## Decoding Instructions
+## Assembling Instructions
+## The Instruction Memory
+## A State Machine with Data Path Implementation
+## Implementation Variations
+## Exercise

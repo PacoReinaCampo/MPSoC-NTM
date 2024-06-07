@@ -1,4 +1,6 @@
-# Understanding Ownership
-## What is Ownership?
-## References and Borrowing
-## The Slice Type
+# Components
+## Components in Chisel are Modules
+## Nested Components
+## An Arithmetic Logic Unit
+## Bulk Connections
+## External Modules

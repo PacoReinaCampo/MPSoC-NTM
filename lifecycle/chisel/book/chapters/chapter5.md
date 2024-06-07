@@ -1,4 +1,8 @@
-# Using Structs to Structure Related Data
-## Defining and Instantiating Structs
-## An Example Program Using Structs
-## Method Syntax
+# Combinational Building Blocks
+## Combinational Circuits
+## Decoder
+## Encoder
+## Arbiter
+## Priority Encoder
+## Comparator
+## Exercise
