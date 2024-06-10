@@ -108,7 +108,9 @@ Top management must review the organization’s QMS at planned intervals to ensu
 Inputs to the management review must include:
 
 1. **Status of actions from previous management reviews**.
+
 2. **Changes in external and internal issues relevant to the QMS**.
+
 3. **Information on QMS performance and effectiveness**, including:
 
    - Trends in customer satisfaction and feedback.
@@ -119,7 +121,9 @@ Inputs to the management review must include:
    - Performance of external providers.
 
 4. **Adequacy of resources**.
+
 5. **Effectiveness of actions taken to address risks and opportunities**.
+
 6. **Opportunities for improvement**.
 
 ### Management Review Outputs
