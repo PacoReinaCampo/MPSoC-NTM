@@ -1,8 +1,8 @@
-# Combinational Building Blocks
-## Combinational Circuits
-## Decoder
-## Encoder
-## Arbiter
-## Priority Encoder
-## Comparator
-## Exercise
+# COMBINATIONAL BUILDING BLOCKS
+## COMBINATIONAL CIRCUITS
+## DECODER
+## ENCODER
+## ARBITER
+## PRIORITY ENCODER
+## COMPARATOR
+## EXERCISE

@@ -1,4 +1,4 @@
-# Validation Process
+# VALIDATION PROCESS
 
 **Objective**: To confirm that the hardware performs correctly in its intended operational environment and meets the needs and expectations of the end users.
 

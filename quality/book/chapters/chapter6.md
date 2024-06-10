@@ -2,7 +2,7 @@
 
 The **Planning** section of ISO 9001:2015 focuses on how an organization should approach planning to ensure that its quality management system (QMS) is effective and can achieve its intended outcomes. This involves proactive measures to address risks and opportunities, set and achieve quality objectives, and plan for changes in a controlled manner.
 
-## Actions to Address Risks and Opportunities
+## ACTIONS TO ADDRESS RISKS AND OPPORTUNITIES
 
 **Purpose**:
 
@@ -31,7 +31,7 @@ The **Planning** section of ISO 9001:2015 focuses on how an organization should 
 - **Risk Mitigation**: Implementing quality control measures to reduce the risk of product defects.
 - **Opportunity Exploitation**: Investing in new technology to improve product quality and operational efficiency.
 
-## Quality Objectives and Planning to Achieve Them
+## QUALITY OBJECTIVES AND PLANNING TO ACHIEVE THEM
 
 **Purpose**:
 
@@ -56,7 +56,7 @@ The **Planning** section of ISO 9001:2015 focuses on how an organization should 
 - **Objective**: Reduce the defect rate by 10% within the next year.
 - **Plan**: Implement additional quality checks at key stages of the production process, provide training for quality inspectors, and monitor defect rates monthly.
 
-## Planning of Changes
+## PLANNING OF CHANGES
 
 **Purpose**:
 

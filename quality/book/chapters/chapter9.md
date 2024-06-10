@@ -2,7 +2,7 @@
 
 The **Performance Evaluation** section of ISO 9001:2015 focuses on the methods and processes that an organization uses to monitor, measure, analyze, and evaluate the effectiveness and efficiency of its Quality Management System (QMS). This ensures that the organization can assess its performance, identify areas for improvement, and make informed decisions.
 
-## Monitoring, Measurement, Analysis, and Evaluation
+## MONITORING, MEASUREMENT, ANALYSIS, AND EVALUATION
 
 ### General
 
@@ -68,7 +68,7 @@ The organization must analyze and evaluate data and information arising from mon
 
    - Highlight areas where performance can be enhanced and risks mitigated.
 
-## Internal Audit
+## INTERNAL AUDIT
 
 The organization must conduct internal audits at planned intervals to provide information on whether the QMS:
 
@@ -97,7 +97,7 @@ The organization must conduct internal audits at planned intervals to provide in
    - Address nonconformities and their causes.
    - Verify the effectiveness of corrective actions.
 
-## Management Review
+## MANAGEMENT REVIEW
 
 ### General
 

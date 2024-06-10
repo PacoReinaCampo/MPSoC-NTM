@@ -1,6 +1,6 @@
-# Debugging, Testing, and Verification
-## Debugging
-## Testing in Chisel
-## Multithreaded Testing
-## Simulator Backends
-## Exercise
+# DEBUGGING, TESTING, AND VERIFICATION
+## DEBUGGING
+## TESTING IN CHISEL
+## MULTITHREADED TESTING
+## SIMULATOR BACKENDS
+## EXERCISE

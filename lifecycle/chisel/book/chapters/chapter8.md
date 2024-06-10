@@ -1,5 +1,5 @@
-# Finite-State Machines
-## Basic Finite-State Machine
-## Faster Output with a Mealy FSM
-## Moore versus Mealy
-## Exercise
+# FINITE-STATE MACHINES
+## BASIC FINITE-STATE MACHINE
+## FASTER OUTPUT WITH A MEALY FSM
+## MOORE VERSUS MEALY
+## EXERCISE

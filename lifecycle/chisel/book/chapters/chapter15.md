@@ -1,11 +1,11 @@
-# Contributing to Chisel
-## Publishing a Chisel Library
+# CONTRIBUTING TO CHISEL
+## PUBLISHING A CHISEL LIBRARY
 ### Using a Library
 ### Prerequisite
 ### Library Setup
 ### Regular Publishing
-## Contributing to Chisel
+## CONTRIBUTING TO CHISEL
 ### Setup the Development Environment
 ### Testing
 ### Contribute with a Pull Request
-## Exercise
+## EXERCISE

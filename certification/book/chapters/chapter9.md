@@ -24,7 +24,7 @@ The certification liaison process is essential for ensuring that airborne electr
 | Hardware Accomplishment Summary                           |
 :Data Required for the Final Certification Hardware Object
 
-## Means of Compliance and Planning
+## MEANS OF COMPLIANCE AND PLANNING
 
 **Objective**: Define and plan the methods by which compliance with regulatory requirements will be demonstrated throughout the hardware development lifecycle.
 
@@ -55,7 +55,7 @@ Key Activities:
    - **Objective**: Ensure that all compliance strategies and plans are thoroughly documented and approved.
    - **Activity**: Create and maintain documentation that outlines compliance methods, schedules, and resource allocations.
 
-## Compliance Substantiation
+## COMPLIANCE SUBSTANTIATION
 
 **Objective**: Provide evidence and documentation to demonstrate that the hardware design and development processes meet all regulatory requirements and standards.
 

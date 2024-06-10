@@ -1,11 +1,11 @@
-# Interconnect
-## A Classic Microprocessor Bus
-## An On-Chip Bus
+# INTERCONNECT
+## A CLASSIC MICROPROCESSOR BUS
+## AN ON-CHIP BUS
 ### Combinational Handshake
 ### Pipelined Handshake
 ### Example IO Device
 ### Memory Mapped Devices
-## Bus and Interface Standards
+## BUS AND INTERFACE STANDARDS
 ### Wishbone
 ### AXI
 ### Open Core Protocol

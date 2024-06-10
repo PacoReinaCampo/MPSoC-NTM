@@ -1,12 +1,12 @@
-# Introduction
-## Installing Chisel and FPGA Tools
+# INTRODUCTION
+## INSTALLING CHISEL AND FPGA TOOLS
 ### macOS
 ### Linux/Ubuntu
 ### Windows
 ### FPGA Tools
-## Hello World
-## Chisel Hello World
-## An IDE for Chisel
-## Source Access and eBook Features
-## Further Reading
-## Exercises
+## HELLO WORLD
+## CHISEL HELLO WORLD
+## AN IDE FOR CHISEL
+## SOURCE ACCESS AND EBOOK FEATURES
+## FURTHER READING
+## EXERCISES

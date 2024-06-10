@@ -1,4 +1,4 @@
-# Verification Process
+# VERIFICATION PROCESS
 
 **Objective**: To ensure that the hardware design and implementation meet all specified requirements and are free from defects.
 

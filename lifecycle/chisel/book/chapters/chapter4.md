@@ -1,6 +1,6 @@
-# Components
-## Components in Chisel are Modules
-## Nested Components
-## An Arithmetic Logic Unit
-## Bulk Connections
-## External Modules
+# COMPONENTS
+## COMPONENTS IN CHISEL ARE MODULES
+## NESTED COMPONENTS
+## AN ARITHMETIC LOGIC UNIT
+## BULK CONNECTIONS
+## EXTERNAL MODULES

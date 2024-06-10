@@ -1,10 +1,10 @@
-# Design of a Processor
-## The Instruction Set Architecture
-## The Datapath
-## Start with an ALU
-## Decoding Instructions
-## Assembling Instructions
-## The Instruction Memory
-## A State Machine with Data Path Implementation
-## Implementation Variations
-## Exercise
+# DESIGN OF A PROCESSOR
+## THE INSTRUCTION SET ARCHITECTURE
+## THE DATAPATH
+## START WITH AN ALU
+## DECODING INSTRUCTIONS
+## ASSEMBLING INSTRUCTIONS
+## THE INSTRUCTION MEMORY
+## A STATE MACHINE WITH DATA PATH IMPLEMENTATION
+## IMPLEMENTATION VARIATIONS
+## EXERCISE

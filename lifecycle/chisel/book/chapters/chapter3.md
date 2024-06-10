@@ -1,15 +1,15 @@
-# Build Process and Testing
-## Building your Project with sbt
+# BUILD PROCESS AND TESTING
+## BUILDING YOUR PROJECT WITH SBT
 ### Source Organization
 ### Running sbt
 ### Generating Verilog
 ### Tool Flow
-## Testing with Chisel
+## TESTING WITH CHISEL
 ### ScalaTest
 ### ChiselTest
 ### Waveforms
 ### printf Debugging
-## Exercises
+## EXERCISES
 ### A Minimal Project
 ### Using a GitHub Template
 ### A Testing Exercise

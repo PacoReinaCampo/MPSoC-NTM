@@ -2,7 +2,7 @@
 
 Configuration management (CM) in the context of DO-254 involves a systematic process to ensure the consistency, accuracy, and control of all hardware design data throughout the development lifecycle. This process is critical for maintaining traceability, managing changes, and supporting certification efforts.
 
-## Configuration Management Objectives
+## CONFIGURATION MANAGEMENT OBJECTIVES
 
 The main objectives of the configuration management process are:
 
@@ -13,7 +13,7 @@ The main objectives of the configuration management process are:
 5. **Facilitate Communication**: Improve communication among team members and stakeholders by providing a clear and organized record of design data and changes.
 6. **Preserve History**: Maintain a historical record of changes and configurations to support future reference, maintenance, and troubleshooting.
 
-## Configuration Management Activities
+## CONFIGURATION MANAGEMENT ACTIVITIES
 
 Configuration management involves several key activities to achieve its objectives:
 
@@ -68,7 +68,7 @@ Configuration management involves several key activities to achieve its objectiv
    - Document configuration identification, control processes, status accounting, and audit results.
    - Maintain accurate and up-to-date configuration records and documentation.
 
-## Data Control Categories
+## DATA CONTROL CATEGORIES
 
 Data control categories are classifications of data that help manage and control the various types of information involved in hardware design and development. These categories help ensure that each type of data is handled appropriately according to its importance and sensitivity.
 

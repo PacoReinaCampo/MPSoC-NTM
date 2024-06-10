@@ -1,4 +1,4 @@
-# Data Control Categories
+# DATA CONTROL CATEGORIES
 
 Data control categories are classifications of data that help manage and control the various types of information involved in hardware design and development. These categories help ensure that each type of data is handled appropriately according to its importance and sensitivity.
 

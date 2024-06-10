@@ -1,12 +1,12 @@
-# Basic Components
-## Chisel Types and Constants 
-## Combinational Circuits
+# BASIC COMPONENTS
+## CHISEL TYPES AND CONSTANTS 
+## COMBINATIONAL CIRCUITS
 ### Multiplexer 
-## Registers
+## REGISTERS
 ### Counting
-## Structure with Bundle and Vec
+## STRUCTURE WITH BUNDLE AND VEC
 ### Bundle
 ### Vec 
-## Wire, Reg, and IO
-## Chisel Generates Hardware 
-## Exercises
+## WIRE, REG, AND IO
+## CHISEL GENERATES HARDWARE 
+## EXERCISES

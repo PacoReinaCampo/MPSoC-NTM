@@ -31,7 +31,7 @@ Validation and verification are critical processes in the development of airborn
 | Hardware Tool Qualification Data                    |
 :Data Required for the Hardware Verification Object
 
-## Validation Process
+## VALIDATION PROCESS
 
 **Objective**: To confirm that the hardware performs correctly in its intended operational environment and meets the needs and expectations of the end users.
 
@@ -61,7 +61,7 @@ Key Activities:
    - Compile validation test reports.
    - Document validation outcomes and lessons learned.
 
-## Verification Process
+## VERIFICATION PROCESS
 
 **Objective**: To ensure that the hardware design and implementation meet all specified requirements and are free from defects.
 
@@ -97,7 +97,7 @@ Key Activities:
    - Compile verification test reports.
    - Document verification outcomes and ensure traceability to requirements.
 
-## Validation and Verification Methods
+## VALIDATION AND VERIFICATION METHODS
 
 Key Methods:
 

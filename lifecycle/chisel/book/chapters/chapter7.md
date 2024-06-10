@@ -1,7 +1,7 @@
-# Input Processing
-## Asynchronous Input
-## Debouncing
-## Filtering of the Input Signal
-## Combining the Input Processing with Functions
-## Synchronizing Reset
-## Exercise
+# INPUT PROCESSING
+## ASYNCHRONOUS INPUT
+## DEBOUNCING
+## FILTERING OF THE INPUT SIGNAL
+## COMBINING THE INPUT PROCESSING WITH FUNCTIONS
+## SYNCHRONIZING RESET
+## EXERCISE
