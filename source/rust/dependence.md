@@ -1,40 +1,40 @@
-# lib: arithmetic
-## mod: scalar, vector, matrix, tensor
+# LIB: ARITHMETIC
+## MOD: SCALAR, VECTOR, MATRIX, TENSOR
 ### impl: scalar, vector, matrix, tensor
 #### fn: adder, subtractor, divider, multiplier
 
-# lib: algebra
-## mod: scalar
+# LIB: ALGEBRA
+## MOD: SCALAR
 ### impl: scalar
 #### fn: convolution, inverse, multiplication, product, summation, transpose
-## mod: vector
+## MOD: VECTOR
 ### impl: vector
 #### fn: convolution, inverse, multiplication, product, summation, transpose
-## mod: matrix
+## MOD: MATRIX
 ### impl: matrix
 #### fn: convolution, inverse, multiplication, product, summation, transpose
-## mod: tensor
+## MOD: TENSOR
 ### impl: tensor
 #### fn: convolution, inverse, multiplication, product, summation, transpose
 
-# lib: math
-## mod:
+# LIB: MATH
+## MOD:
 ### impl:
 #### fn:
 
-# lib: nn
-## mod: pnn, fnn, lstm, ntm, dnc, ann
+# LIB: NN
+## MOD: PNN, FNN, LSTM, NTM, DNC, ANN
 ### impl: standard
 #### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
 ### impl: convolutional
 #### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
 
-# lib: state
-## mod:
+# LIB: STATE
+## MOD:
 ### impl:
 #### fn:
 
-# lib: trainer
-## mod:
+# LIB: TRAINER
+## MOD:
 ### impl:
 #### fn:
