@@ -1,5 +1,7 @@
 ## CONTROL AND STATUS REGISTER FIELDS
 
+Control and Status Register Fields (CSRFs) define specific bit-fields within CSRs, encoding various control and status information. These fields are used to enable or disable features, set mode flags, and report processor status to software. CSRFs are carefully defined to provide fine-grained control over processor behavior while maintaining compatibility across different RISC-V implementations. They are essential for implementing features such as virtual memory management, interrupt handling, and power management within the processor architecture.
+
 Format of a line in the table:
 
 `<csr> <field> <bitspec> <modes> "<field description>" <version>`

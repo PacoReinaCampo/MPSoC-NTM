@@ -1,5 +1,7 @@
 ## OPCODE ENCODING MACHINE INFORMATION
 
+Machine-level information specifies how opcodes and their associated fields are encoded into binary machine code. This information dictates the exact bit patterns used for instructions, ensuring uniformity and predictability in instruction decoding and execution across various RISC-V processor implementations. It forms the foundation for assembler and compiler toolchains to generate executable code targeting RISC-V architectures.
+
 Format of a line in the table:
 
 | `RV32I`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |

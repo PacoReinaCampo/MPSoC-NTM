@@ -1,5 +1,7 @@
 ## INSTRUCTION FULL NAMES
 
+The RISC-V ISA defines a comprehensive set of instructions, each identified by an opcode that denotes its operation. Full names for instructions typically include a mnemonic followed by suffixes indicating specific variants or extensions. For instance, "ADD" denotes addition, while "ADDI" specifies addition with an immediate operand.
+
 Format of a line in the table:
 
 `<instruction name> "<instruction full name>"`

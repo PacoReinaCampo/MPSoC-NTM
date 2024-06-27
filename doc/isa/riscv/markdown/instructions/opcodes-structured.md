@@ -1,5 +1,7 @@
 ## OPCODE ENCODING STRUCTURED INFORMATION
 
+Opcodes in RISC-V are structured within instruction encoding formats, defining fields such as opcode itself, function codes (`funct3`, `funct7`), immediate values, and register specifiers (`rd`, `rs1`, `rs2`). Structured information ensures consistent interpretation and execution across different implementations and extensions of the RISC-V ISA, supporting modularity and compatibility.
+
 Format of a line in the table:
 
 `<instruction name> [<arguments> ...] <opcode> <codec> <extension>`

@@ -1,5 +1,7 @@
 ## COMPRESSED INSTRUCTION
 
+RISC-V also includes a compressed instruction set (RVC) to further enhance code density without sacrificing performance. Compressed instructions are 16 bits long and provide a subset of frequently used operations from the base ISA. They are seamlessly integrated with the standard instruction set, allowing compilers and assemblers to automatically select between compressed and uncompressed instructions based on optimization goals and target architecture support.
+
 Format of a line in the table:
 
 `<compressed opcode> <decompressed opcode> [<constraint name> ...]`

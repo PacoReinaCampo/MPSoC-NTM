@@ -1,5 +1,7 @@
 ## INSTRUCTION ENCODINGS
 
+RISC-V instructions are encoded using fixed-length formats (32 or 64 bits) to simplify decoding and execution. The encoding specifies fields such as opcode, register specifiers (`rs1`, `rs2`, `rd`), immediate values, and function codes (`funct3`, `funct7`) where applicable. This structured approach enables straightforward instruction fetch and decode stages in the processor pipeline, contributing to overall performance efficiency.
+
 Format of a line in the table:
 
 `<codec> <format> [<argument> ... ]`

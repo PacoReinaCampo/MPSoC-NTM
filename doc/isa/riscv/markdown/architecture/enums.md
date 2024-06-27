@@ -1,5 +1,12 @@
 ## ENUMERATED TYPES
 
+RISC-V defines several enumerated types that categorize instructions and fields within instructions:
+
+- **Opcode (OP)**: Specifies the general operation of an instruction (e.g., arithmetic, load, store).
+- **Funct3**: A 3-bit field within instructions that further specifies the operation or variant.
+- **Funct7**: A 7-bit field used in some instructions to extend the opcode space.
+- **Register (REG)**: Specifies a register number or type (e.g., integer register, floating-point register).
+
 Format of a line in the table:
 
 `<group> <name> <value> "<description>" <version>`
@@ -163,3 +170,5 @@ Format of a line in the table:
 | `intr`    | `h_external`           | `10`      | `Hypervisor external interrupt`                      | `1.7-1.9.1`   |
 | `intr`    | `m_external`           | `11`      | `Machine external interrupt`                         | `1.7-1.9.1`   |
 : Machine Cause Register Interrupts (mcause) Interrupt Bit Set
+
+These types help in decoding and executing instructions correctly across different implementations and extensions of the RISC-V ISA.

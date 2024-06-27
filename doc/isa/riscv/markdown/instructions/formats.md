@@ -1,5 +1,7 @@
 ## DISASSEMBLY FORMATS
 
+Disassembly formats specify how machine code instructions are translated back into human-readable mnemonic representations during program analysis or debugging. Formats include opcode mnemonics, operand values, and additional contextual information such as memory addresses and control flow targets. Disassembly aids in reverse engineering, performance profiling, and software optimization for RISC-V-based systems.
+
 Format of a line in the table:
 
 `<format> <format description>`

@@ -1,5 +1,7 @@
 ## MAJOR OPCODES
 
+Major opcodes in RISC-V encompass essential instruction categories such as arithmetic, logical operations, memory access, and control flow. Each major opcode represents a group of related instructions that share common functionalities and operand types, contributing to the versatility and efficiency of the RISC-V ISA across diverse computing applications.
+
 | 6..5     | 4..2     | name             |
 |----------|:---------|:-----------------|
 | `6..5=0` | `4..2=0` | `LOAD`           |

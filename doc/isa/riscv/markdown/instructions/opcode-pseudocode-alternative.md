@@ -1,5 +1,7 @@
 ## INSTRUCTION PSEUDO CODE (ALTERNATIVE)
 
+Alternative Pseudo Code representations may also be used to describe RISC-V instructions, catering to different programming paradigms or abstraction levels. These representations vary in style and detail but aim to convey the fundamental operations and control flow logic inherent in each instruction type.
+
 Format of a line in the table:
 
 `<instruction name> "<instruction pseudo code>"`
@@ -29,7 +31,7 @@ Format of a line in the table:
 | `slti`       | `rd = sx(rs1) < sx(imm)`                                            |
 | `sltiu`      | `rd = ux(rs1) < ux(imm)`                                            |
 | `xori`       | `rd = ux(rs1) ^ ux(imm)`                                            |
-| `ori`        | `rd = ux(rs1) | ux(imm)`                                            |
+| `ori`        | `rd = ux(rs1) \| ux(imm)`                                           |
 | `andi`       | `rd = ux(rs1) & ux(imm)`                                            |
 | `slli`       | `rd = ux(rs1) << ux(imm)`                                           |
 | `srli`       | `rd = ux(rs1) >> ux(imm)`                                           |
@@ -42,7 +44,7 @@ Format of a line in the table:
 | `xor`        | `rd = ux(rs1) ^ ux(rs2)`                                            |
 | `srl`        | `rd = ux(rs1) >> rs2`                                               |
 | `sra`        | `rd = sx(rs1) >> rs2`                                               |
-| `or`         | `rd = ux(rs1) | ux(rs2)`                                            |
+| `or`         | `rd = ux(rs1) \| ux(rs2)`                                           |
 | `and`        | `rd = ux(rs1) & ux(rs2)`                                            |
 | `fence`      |                                                                     |
 | `fence.i`    |                                                                     |
@@ -91,7 +93,7 @@ Format of a line in the table:
 | `amoswap.w`  | `rd = s32[rs1] , u32[rs1] = s32(rs2)`                               |
 | `amoadd.w`   | `rd = s32[rs1] , u32[rs1] = s32(rs2) + s32[rs1]`                    |
 | `amoxor.w`   | `rd = s32[rs1] , u32[rs1] = s32(rs2) ^ s32[rs1]`                    |
-| `amoor.w`    | `rd = s32[rs1] , u32[rs1] = s32(rs2) | s32[rs1]`                    |
+| `amoor.w`    | `rd = s32[rs1] , u32[rs1] = s32(rs2) \| s32[rs1]`                   |
 | `amoand.w`   | `rd = s32[rs1] , u32[rs1] = s32(rs2) & s32[rs1]`                    |
 | `amomin.w`   | `rd = s32[rs1] , u32[rs1] = s32_min(s32(rs2), s32[rs1])`            |
 | `amomax.w`   | `rd = s32[rs1] , u32[rs1] = s32_max(s32(rs2), s32[rs1])`            |
@@ -106,7 +108,7 @@ Format of a line in the table:
 | `amoswap.d`  | `rd = s64[rs1] , u64[rs1] = s64(rs2)`                               |
 | `amoadd.d`   | `rd = s64[rs1] , u64[rs1] = s64(rs2) + s64[rs1]`                    |
 | `amoxor.d`   | `rd = s64[rs1] , u64[rs1] = s64(rs2) ^ s64[rs1]`                    |
-| `amoor.d`    | `rd = s64[rs1] , u64[rs1] = s64(rs2) | s64[rs1]`                    |
+| `amoor.d`    | `rd = s64[rs1] , u64[rs1] = s64(rs2) \| s64[rs1]`                   |
 | `amoand.d`   | `rd = s64[rs1] , u64[rs1] = s64(rs2) & s64[rs1]`                    |
 | `amomin.d`   | `rd = s64[rs1] , u64[rs1] = s64_min(s64(rs2), s64[rs1])`            |
 | `amomax.d`   | `rd = s64[rs1] , u64[rs1] = s64_max(s64(rs2), s64[rs1])`            |

@@ -1,5 +1,7 @@
 ## INSTRUCTION PSEUDO CODE (C)
 
+Pseudo Code in C-like syntax provides a high-level representation of RISC-V instructions, illustrating their behavior and operational flow without delving into specific machine-level details. This abstraction aids in software development, algorithm design, and understanding of instruction semantics across different implementations and extensions of the RISC-V ISA.
+
 Format of a line in the table:
 
 `<instruction name> "<instruction pseudo code>"`
@@ -29,7 +31,7 @@ Format of a line in the table:
 | `slti`       | `rd = sx(rs1) < sx(imm)`                                                                                    |                                     |
 | `sltiu`      | `rd = ux(rs1) < ux(imm)`                                                                                    |                                     |
 | `xori`       | `rd = ux(rs1) ^ ux(imm)`                                                                                    |                                     |
-| `ori`        | `rd = ux(rs1) | ux(imm)`                                                                                    |                                     |
+| `ori`        | `rd = ux(rs1) \| ux(imm)`                                                                                   |                                     |
 | `andi`       | `rd = ux(rs1) & ux(imm)`                                                                                    |                                     |
 | `slli`       | `rd = ux(rs1) << imm`                                                                                       |                                     |
 | `srli`       | `rd = ux(rs1) >> imm`                                                                                       |                                     |
@@ -42,7 +44,7 @@ Format of a line in the table:
 | `xor`        | `rd = ux(rs1) ^ ux(rs2)`                                                                                    |                                     |
 | `srl`        | `rd = ux(rs1) >> (rs2 & 0b1111111)`                                                                         | `7-bit mask for RV128I`             |
 | `sra`        | `rd = sx(rs1) >> (rs2 & 0b1111111)`                                                                         | `7-bit mask for RV128I`             |
-| `or`         | `rd = ux(rs1) | ux(rs2)`                                                                                    |                                     |
+| `or`         | `rd = ux(rs1) \| ux(rs2)`                                                                                   |                                     |
 | `and`        | `rd = ux(rs1) & ux(rs2)`                                                                                    |                                     |
 | `fence`      |                                                                                                             |                                     |
 | `fence.i`    |                                                                                                             |                                     |
@@ -151,11 +153,11 @@ Format of a line in the table:
 | `fsub.s`     | `fenv_setrm(rm); f32(frd) = f32(frs1) - f32(frs2)`                                                          |                                     |
 | `fmul.s`     | `fenv_setrm(rm); f32(frd) = f32(frs1) * f32(frs2)`                                                          |                                     |
 | `fdiv.s`     | `fenv_setrm(rm); f32(frd) = f32(frs1) / f32(frs2)`                                                          |                                     |
-| `fsgnj.s`    | `u32(frd) = (u32(frs1) & u32(~(1U<<31))) | (u32(frs2) & u32(1U<<31))`                                       |                                     |
-| `fsgnjn.s`   | `u32(frd) = (u32(frs1) & u32(~(1U<<31))) | (~u32(frs2) & u32(1U<<31))`                                      |                                     |
+| `fsgnj.s`    | `u32(frd) = (u32(frs1) & u32(~(1U<<31))) \| (u32(frs2) & u32(1U<<31))`                                      |                                     |
+| `fsgnjn.s`   | `u32(frd) = (u32(frs1) & u32(~(1U<<31))) \| (~u32(frs2) & u32(1U<<31))`                                     |                                     |
 | `fsgnjx.s`   | `u32(frd) = u32(frs1) ^ (u32(frs2) & u32(1U<<31))`                                                          |                                     |
-| `fmin.s`     | `f32(frd) = (f32(frs1) < f32(frs2)) || isnan(f32(frs2)) ? f32(frs1) : f32(frs2)`                            |                                     |
-| `fmax.s`     | `f32(frd) = (f32(frs1) > f32(frs2)) || isnan(f32(frs2)) ? f32(frs1) : f32(frs2)`                            |                                     |
+| `fmin.s`     | `f32(frd) = (f32(frs1) < f32(frs2)) \|\| isnan(f32(frs2)) ? f32(frs1) : f32(frs2)`                          |                                     |
+| `fmax.s`     | `f32(frd) = (f32(frs1) > f32(frs2)) \|\| isnan(f32(frs2)) ? f32(frs1) : f32(frs2)`                          |                                     |
 | `fsqrt.s`    | `fenv_setrm(rm); f32(frd) = riscv::f32_sqrt(f32(frs1))`                                                     |                                     |
 | `fle.s`      | `rd = f32(frs1) <= f32(frs2)`                                                                               |                                     |
 | `flt.s`      | `rd = f32(frs1) < f32(frs2)`                                                                                |                                     |
@@ -189,11 +191,11 @@ Format of a line in the table:
 | `fsub.d`     | `fenv_setrm(rm); f64(frd) = f64(frs1) - f64(frs2)`                                                          |                                     |
 | `fmul.d`     | `fenv_setrm(rm); f64(frd) = f64(frs1) * f64(frs2)`                                                          |                                     |
 | `fdiv.d`     | `fenv_setrm(rm); f64(frd) = f64(frs1) / f64(frs2)`                                                          |                                     |
-| `fsgnj.d`    | `u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) | (u64(frs2) & u64(1ULL<<63))`                                   |                                     |
-| `fsgnjn.d`   | `u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) | (~u64(frs2) & u64(1ULL<<63))`                                  |                                     |
+| `fsgnj.d`    | `u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) \| (u64(frs2) & u64(1ULL<<63))`                                  |                                     |
+| `fsgnjn.d`   | `u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) \| (~u64(frs2) & u64(1ULL<<63))`                                 |                                     |
 | `fsgnjx.d`   | `u64(frd) = u64(frs1) ^ (u64(frs2) & u64(1ULL<<63))`                                                        |                                     |
-| `fmin.d`     | `f64(frd) = (f64(frs1) < f64(frs2)) || isnan(f64(frs2)) ? f64(frs1) : f64(frs2)`                            |                                     |
-| `fmax.d`     | `f64(frd) = (f64(frs1) > f64(frs2)) || isnan(f64(frs2)) ? f64(frs1) : f64(frs2)`                            |                                     |
+| `fmin.d`     | `f64(frd) = (f64(frs1) < f64(frs2)) \|\| isnan(f64(frs2)) ? f64(frs1) : f64(frs2)`                          |                                     |
+| `fmax.d`     | `f64(frd) = (f64(frs1) > f64(frs2)) \|\| isnan(f64(frs2)) ? f64(frs1) : f64(frs2)`                          |                                     |
 | `fcvt.s.d`   | `fenv_setrm(rm); f32(frd) = f32(f64(frs1))`                                                                 |                                     |
 | `fcvt.d.s`   | `fenv_setrm(rm); f64(frd) = f64(f32(frs1))`                                                                 |                                     |
 | `fsqrt.d`    | `fenv_setrm(rm); f64(frd) = riscv::f64_sqrt(f64(frs1))`                                                     |                                     |

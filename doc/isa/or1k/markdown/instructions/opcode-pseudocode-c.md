@@ -25,7 +25,7 @@ Format of a line in the table:
 | `l.bnf N`              | `EA <- exts(Immediate << 2) + BranchInsnAddr`                                           |
 |                        | `PC <- EA if SR[F] cleared`                                                             |
 | `l.cmov rD,rA,rB`      | `rD[31:0] <- SR[F] ? rA[31:0] : rB[31:0]`                                               |
-| `l.csync `             | `context-synchronization`                                                            |
+| `l.csync `             | `context-synchronization`                                                               |
 | `l.cust1 `             | `N/A`                                                                                   |
 | `l.cust2 `             | `N/A`                                                                                   |
 | `l.cust3 `             | `N/A`                                                                                   |
@@ -104,7 +104,7 @@ Format of a line in the table:
 | `l.nop K`              | `N/A`                                                                                   |
 | `l.or rD,rA,rB`        | `rD[31:0] <- rA[31:0] OR rB[31:0]`                                                      |
 | `l.ori rD,rA,K`        | `rD[31:0] <- rA[31:0] OR extz(Immediate)`                                               |
-| `l.psync `             | `pipeline-synchronization`                                                           |
+| `l.psync `             | `pipeline-synchronization`                                                              |
 | `l.rfe `               | `PC <- EPCR`                                                                            |
 |                        | `SR <- ESR`                                                                             |
 | `l.ror rD,rA,rB`       | `rD[31-rB[4:0]:0] <- rA[31:rB[4:0]]`                                                    |
@@ -171,7 +171,7 @@ Format of a line in the table:
 | `lf.itof.d rD,rA`      | `N/A`                                                                                   |
 | `lf.itof.s rD,rA`      | `rD[31:0] <- itof(rA[31:0])`                                                            |
 | `lf.madd.d rD,rA,rB`   | `N/A`                                                                                   |
-| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
+| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
 | `lf.mul.d rD,rA,rB`    | `N/A`                                                                                   |
 | `lf.mul.s rD,rA,rB`    | `rD[31:0] <- rA[31:0] * rB[31:0]`                                                       |
 | `lf.rem.d rD,rA,rB`    | `N/A`                                                                                   |
@@ -283,7 +283,6 @@ Format of a line in the table:
 | `lv.xor rD,rA,rB`      | `N/A`                                                                                   |
 : OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
 
-
 | instruction name       | instruction pseudo code                                                                 |
 |------------------------|:----------------------------------------------------------------------------------------|
 | `l.add rD,rA,rB`       | `rD[63:0] <- rA[63:0] + rB[63:0]`                                                       |
@@ -392,7 +391,7 @@ Format of a line in the table:
 | `l.nop K`              | `N/A`                                                                                   |
 | `l.or rD,rA,rB`        | `rD[63:0] <- rA[63:0] OR rB[63:0]`                                                      |
 | `l.ori rD,rA,K`        | `rD[63:0] <- rA[63:0] OR extz(Immediate)`                                               |
-| `l.psync `             | `pipeline-synchronization`                                                           |
+| `l.psync `             | `pipeline-synchronization`                                                              |
 | `l.rfe `               | `PC <- EPCR`                                                                            |
 |                        | `SR <- ESR`                                                                             |
 | `l.ror rD,rA,rB`       | `rD[63-rB[5:0]:0] <- rA[63:rB[5:0]]`                                                    |
@@ -463,8 +462,8 @@ Format of a line in the table:
 | `lf.itof.d rD,rA`      | `rD[63:0] <- itof(rA[63:0])`                                                            |
 | `lf.itof.s rD,rA`      | `rD[31:0] <- itof(rA[31:0])`                                                            |
 |                        | `rD[63:32] <- 0`                                                                        |
-| `lf.madd.d rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
-| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]` |
+| `lf.madd.d rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[63:0] * rB[63:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
+| `lf.madd.s rD,rA,rB`   | `FPMADDHI[31:0]FPMADDLO[31:0] <- rA[31:0] * rB[31:0] + FPMADDHI[31:0]FPMADDLO[31:0]`    |
 |                        | `FPMADDHI <- 0`                                                                         |
 |                        | `FPMADDLO <- 0`                                                                         |
 | `lf.mul.d rD,rA,rB`    | `rD[63:0] <- rA[63:0] * rB[63:0]`                                                       |
@@ -621,88 +620,88 @@ Format of a line in the table:
 |                        | `rA[63:48] != rB[63:48]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
 | `lv.and rD,rA,rB`      | `rD[63:0] <- rA[63:0] AND rB[63:0]`                                                     |
-| `lv.any_eq.b rD,rA,rB` | `flag <- rA[7:0] == rB[7:0] ||`                                                         |
-|                        | `rA[15:8] == rB[15:8] ||`                                                               |
-|                        | `rA[23:16] == rB[23:16] ||`                                                             |
-|                        | `rA[31:24] == rB[31:24] ||`                                                             |
-|                        | `rA[39:32] == rB[39:32] ||`                                                             |
-|                        | `rA[47:40] == rB[47:40] ||`                                                             |
-|                        | `rA[55:48] == rB[55:48] ||`                                                             |
+| `lv.any_eq.b rD,rA,rB` | `flag <- rA[7:0] == rB[7:0]\|\|`                                                        |
+|                        | `rA[15:8] == rB[15:8]\|\|`                                                              |
+|                        | `rA[23:16] == rB[23:16]\|\|`                                                            |
+|                        | `rA[31:24] == rB[31:24]\|\|`                                                            |
+|                        | `rA[39:32] == rB[39:32]\|\|`                                                            |
+|                        | `rA[47:40] == rB[47:40]\|\|`                                                            |
+|                        | `rA[55:48] == rB[55:48]\|\|`                                                            |
 |                        | `rA[63:56] == rB[63:56]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_eq.h rD,rA,rB` | `flag <- rA[15:0] == rB[15:0] ||`                                                       |
-|                        | `rA[31:16] == rB[31:16] ||`                                                             |
-|                        | `rA[47:32] == rB[47:32] ||`                                                             |
+| `lv.any_eq.h rD,rA,rB` | `flag <- rA[15:0] == rB[15:0]\|\|`                                                      |
+|                        | `rA[31:16] == rB[31:16]\|\|`                                                            |
+|                        | `rA[47:32] == rB[47:32]\|\|`                                                            |
 |                        | `rA[63:48] == rB[63:48]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_ge.b rD,rA,rB` | `flag <- rA[7:0] >= rB[7:0] ||`                                                         |
-|                        | `rA[15:8] >= rB[15:8] ||`                                                               |
-|                        | `rA[23:16] >= rB[23:16] ||`                                                             |
-|                        | `rA[31:24] >= rB[31:24] ||`                                                             |
-|                        | `rA[39:32] >= rB[39:32] ||`                                                             |
-|                        | `rA[47:40] >= rB[47:40] ||`                                                             |
-|                        | `rA[55:48] >= rB[55:48] ||`                                                             |
+| `lv.any_ge.b rD,rA,rB` | `flag <- rA[7:0] >= rB[7:0]\|\|`                                                        |
+|                        | `rA[15:8] >= rB[15:8]\|\|`                                                              |
+|                        | `rA[23:16] >= rB[23:16]\|\|`                                                            |
+|                        | `rA[31:24] >= rB[31:24]\|\|`                                                            |
+|                        | `rA[39:32] >= rB[39:32]\|\|`                                                            |
+|                        | `rA[47:40] >= rB[47:40]\|\|`                                                            |
+|                        | `rA[55:48] >= rB[55:48]\|\|`                                                            |
 |                        | `rA[63:56] >= rB[63:56]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_ge.h rD,rA,rB` | `flag <- rA[15:0] >= rB[15:0] ||`                                                       |
-|                        | `rA[31:16] >= rB[31:16] ||`                                                             |
-|                        | `rA[47:32] >= rB[47:32] ||`                                                             |
+| `lv.any_ge.h rD,rA,rB` | `flag <- rA[15:0] >= rB[15:0]\|\|`                                                      |
+|                        | `rA[31:16] >= rB[31:16]\|\|`                                                            |
+|                        | `rA[47:32] >= rB[47:32]\|\|`                                                            |
 |                        | `rA[63:48] >= rB[63:48]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_gt.b rD,rA,rB` | `flag <- rA[7:0] > rB[7:0] ||`                                                          |
-|                        | `rA[15:8] > rB[15:8] ||`                                                                |
-|                        | `rA[23:16] > rB[23:16] ||`                                                              |
-|                        | `rA[31:24] > rB[31:24] ||`                                                              |
-|                        | `rA[39:32] > rB[39:32] ||`                                                              |
-|                        | `rA[47:40] > rB[47:40] ||`                                                              |
-|                        | `rA[55:48] > rB[55:48] ||`                                                              |
+| `lv.any_gt.b rD,rA,rB` | `flag <- rA[7:0] > rB[7:0]\|\|`                                                         |
+|                        | `rA[15:8] > rB[15:8]\|\|`                                                               |
+|                        | `rA[23:16] > rB[23:16]\|\|`                                                             |
+|                        | `rA[31:24] > rB[31:24]\|\|`                                                             |
+|                        | `rA[39:32] > rB[39:32]\|\|`                                                             |
+|                        | `rA[47:40] > rB[47:40]\|\|`                                                             |
+|                        | `rA[55:48] > rB[55:48]\|\|`                                                             |
 |                        | `rA[63:56] > rB[63:56]`                                                                 |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_gt.h rD,rA,rB` | `flag <- rA[15:0] > rB[15:0] ||`                                                        |
-|                        | `rA[31:16] > rB[31:16] ||`                                                              |
-|                        | `rA[47:32] > rB[47:32] ||`                                                              |
+| `lv.any_gt.h rD,rA,rB` | `flag <- rA[15:0] > rB[15:0]\|\|`                                                       |
+|                        | `rA[31:16] > rB[31:16]\|\|`                                                             |
+|                        | `rA[47:32] > rB[47:32]\|\|`                                                             |
 |                        | `rA[63:48] > rB[63:48]`                                                                 |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_le.b rD,rA,rB` | `flag <- rA[7:0] <= rB[7:0] ||`                                                         |
-|                        | `rA[15:8] <= rB[15:8] ||`                                                               |
-|                        | `rA[23:16] <= rB[23:16] ||`                                                             |
-|                        | `rA[31:24] <= rB[31:24] ||`                                                             |
-|                        | `rA[39:32] <= rB[39:32] ||`                                                             |
-|                        | `rA[47:40] <= rB[47:40] ||`                                                             |
-|                        | `rA[55:48] <= rB[55:48] ||`                                                             |
+| `lv.any_le.b rD,rA,rB` | `flag <- rA[7:0] <= rB[7:0]\|\|`                                                        |
+|                        | `rA[15:8] <= rB[15:8]\|\|`                                                              |
+|                        | `rA[23:16] <= rB[23:16]\|\|`                                                            |
+|                        | `rA[31:24] <= rB[31:24]\|\|`                                                            |
+|                        | `rA[39:32] <= rB[39:32]\|\|`                                                            |
+|                        | `rA[47:40] <= rB[47:40]\|\|`                                                            |
+|                        | `rA[55:48] <= rB[55:48]\|\|`                                                            |
 |                        | `rA[63:56] <= rB[63:56]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_le.h rD,rA,rB` | `flag <- rA[15:0] <= rB[15:0] ||`                                                       |
-|                        | `rA[31:16] <= rB[31:16] ||`                                                             |
-|                        | `rA[47:32] <= rB[47:32] ||`                                                             |
+| `lv.any_le.h rD,rA,rB` | `flag <- rA[15:0] <= rB[15:0]\|\|`                                                      |
+|                        | `rA[31:16] <= rB[31:16]\|\|`                                                            |
+|                        | `rA[47:32] <= rB[47:32]\|\|`                                                            |
 |                        | `rA[63:48] <= rB[63:48]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_lt.b rD,rA,rB` | `flag <- rA[7:0] < rB[7:0] ||`                                                          |
-|                        | `rA[15:8] < rB[15:8] ||`                                                                |
-|                        | `rA[23:16] < rB[23:16] ||`                                                              |
-|                        | `rA[31:24] < rB[31:24] ||`                                                              |
-|                        | `rA[39:32] < rB[39:32] ||`                                                              |
-|                        | `rA[47:40] < rB[47:40] ||`                                                              |
-|                        | `rA[55:48] < rB[55:48] ||`                                                              |
+| `lv.any_lt.b rD,rA,rB` | `flag <- rA[7:0] < rB[7:0]\|\|`                                                         |
+|                        | `rA[15:8] < rB[15:8]\|\|`                                                               |
+|                        | `rA[23:16] < rB[23:16]\|\|`                                                             |
+|                        | `rA[31:24] < rB[31:24]\|\|`                                                             |
+|                        | `rA[39:32] < rB[39:32]\|\|`                                                             |
+|                        | `rA[47:40] < rB[47:40]\|\|`                                                             |
+|                        | `rA[55:48] < rB[55:48]\|\|`                                                             |
 |                        | `rA[63:56] < rB[63:56]`                                                                 |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_lt.h rD,rA,rB` | `flag <- rA[15:0] < rB[15:0] ||`                                                        |
-|                        | `rA[31:16] < rB[31:16] ||`                                                              |
-|                        | `rA[47:32] < rB[47:32] ||`                                                              |
+| `lv.any_lt.h rD,rA,rB` | `flag <- rA[15:0] < rB[15:0]\|\|`                                                       |
+|                        | `rA[31:16] < rB[31:16]\|\|`                                                             |
+|                        | `rA[47:32] < rB[47:32]\|\|`                                                             |
 |                        | `rA[63:48] < rB[63:48]`                                                                 |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_ne.b rD,rA,rB` | `flag <- rA[7:0] != rB[7:0] ||`                                                         |
-|                        | `rA[15:8] != rB[15:8] ||`                                                               |
-|                        | `rA[23:16] != rB[23:16] ||`                                                             |
-|                        | `rA[31:24] != rB[31:24] ||`                                                             |
-|                        | `rA[39:32] != rB[39:32] ||`                                                             |
-|                        | `rA[47:40] != rB[47:40] ||`                                                             |
-|                        | `rA[55:48] != rB[55:48] ||`                                                             |
+| `lv.any_ne.b rD,rA,rB` | `flag <- rA[7:0] != rB[7:0]\|\|`                                                        |
+|                        | `rA[15:8] != rB[15:8]\|\|`                                                              |
+|                        | `rA[23:16] != rB[23:16]\|\|`                                                            |
+|                        | `rA[31:24] != rB[31:24]\|\|`                                                            |
+|                        | `rA[39:32] != rB[39:32]\|\|`                                                            |
+|                        | `rA[47:40] != rB[47:40]\|\|`                                                            |
+|                        | `rA[55:48] != rB[55:48]\|\|`                                                            |
 |                        | `rA[63:56] != rB[63:56]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
-| `lv.any_ne.h rD,rA,rB` | `flag <- rA[15:0] != rB[15:0] ||`                                                       |
-|                        | `rA[31:16] != rB[31:16] ||`                                                             |
-|                        | `rA[47:32] != rB[47:32] ||`                                                             |
+| `lv.any_ne.h rD,rA,rB` | `flag <- rA[15:0] != rB[15:0]\|\|`                                                      |
+|                        | `rA[31:16] != rB[31:16]\|\|`                                                            |
+|                        | `rA[47:32] != rB[47:32]\|\|`                                                            |
 |                        | `rA[63:48] != rB[63:48]`                                                                |
 |                        | `rD[63:0] <- repl(flag)`                                                                |
 | `lv.avg.b rD,rA,rB`    | `rD[7:0] <- (rA[7:0] + rB[7:0]) >> 1`                                                   |

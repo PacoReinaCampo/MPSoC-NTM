@@ -1,5 +1,7 @@
 ## CONTROL AND STATUS REGISTERS
 
+Control and Status Registers (CSRs) in RISC-V provide mechanisms for managing processor state and control. These registers typically include machine-level and supervisor-level CSRs, which control privileged operations and system-level functions. CSRs are accessed through dedicated instructions, allowing software to read and modify processor state safely and efficiently. They play a critical role in system management, exception handling, and performance monitoring.
+
 Format of a line in the table:
 `<csr number> <csr access> <csr name> "<csr description>" <version>`
 
