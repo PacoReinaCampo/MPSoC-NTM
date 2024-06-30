@@ -1,83 +1,174 @@
-# HARDWARE CONFIGURATION MANAGEMENT RECORDS
+# INPUT PROCESSING
 
-Hardware Configuration Management (CM) Records are essential documents that capture the detailed information and history of all configuration items (CIs) within a hardware project. These records ensure that the hardware development and maintenance processes are controlled, tracked, and documented, enabling effective management of changes, versions, and statuses throughout the hardware lifecycle.
+## ASYNCHRONOUS INPUT
 
-## PURPOSE OF HARDWARE CONFIGURATION MANAGEMENT RECORDS
+Asynchronous inputs in Chisel refer to inputs that are not synchronized to the clock edge. Handling asynchronous inputs requires careful consideration of timing hazards and metastability.
 
-**Description**: The primary purpose of hardware CM records is to maintain comprehensive documentation of the configuration items, their versions, changes, and the status of each item throughout the hardware lifecycle.
+```scala
+import chisel3._
 
-**Importance**:
+class AsyncInputHandling extends Module {
+  val io = IO(new Bundle {
+    val asyncInput = Input(Bool())
+    val synchronizedInput = Output(Bool())
+  })
 
-- **Change Control**: Facilitates the management and control of changes to the hardware.
-- **Traceability**: Ensures that every change and version of the hardware can be traced back to its source.
-- **Consistency**: Maintains consistency in hardware design and documentation.
-- **Compliance**: Helps meet regulatory and industry standards for configuration management.
-- **Historical Record**: Provides a historical record of the hardware's development and changes for future reference and analysis.
+  val syncReg = RegNext(io.asyncInput)
 
-## KEY ELEMENTS OF HARDWARE CONFIGURATION MANAGEMENT RECORDS
+  io.synchronizedInput := syncReg
+}
+```
 
-### Configuration Item Identification
+## DEBOUNCING
 
-**Description**: Information that uniquely identifies each configuration item within the hardware project.
+Debouncing is necessary when dealing with mechanical switches or buttons to eliminate noise and ensure stable input signals.
 
-**Key Elements**:
+```scala
+import chisel3._
+import chisel3.util._
 
-- **CI Identifier**: A unique identifier for each configuration item.
-- **CI Description**: A brief description of the configuration item and its purpose.
-- **Version Number**: The version or revision number of the configuration item.
-- **Baseline Identification**: The baseline to which the configuration item belongs.
+class Debouncer extends Module {
+  val io = IO(new Bundle {
+    val input = Input(Bool())
+    val debouncedOutput = Output(Bool())
+  })
 
-### Change Management
+  val debouncedReg = RegInit(false.B)
+  val debounceLogic = RegNext(io.input) && !debouncedReg
 
-**Description**: Documentation of changes made to configuration items, including the rationale, impact, and approval process.
+  when(debounceLogic) {
+    debouncedReg := true.B
+  }.elsewhen(!io.input) {
+    debouncedReg := false.B
+  }
 
-**Key Elements**:
+  io.debouncedOutput := debouncedReg
+}
+```
 
-- **Change Request**: Detailed information about the change request, including the requestor, description, and justification for the change.
-- **Impact Analysis**: Assessment of the potential impact of the change on other configuration items and the overall hardware system.
-- **Approval Records**: Documentation of the approval process, including sign-offs from relevant stakeholders.
-- **Change Implementation**: Details of how the change was implemented, including any modifications to the hardware, documentation, or processes.
+## FILTERING OF THE INPUT SIGNAL
 
-### Version Control
+Filtering input signals involves implementing logic to smooth out noisy or erratic input transitions.
 
-**Description**: Records that track the versions and revisions of each configuration item over time.
+```scala
+import chisel3._
+import chisel3.util._
 
-**Key Elements**:
+class InputFilter extends Module {
+  val io = IO(new Bundle {
+    val input = Input(Bool())
+    val filteredOutput = Output(Bool())
+  })
 
-- **Version History**: A log of all versions and revisions of the configuration item, including dates, changes made, and reasons for changes.
-- **Release Notes**: Documentation of new features, fixes, or changes included in each version.
-- **Archival Information**: Details about where and how previous versions are archived for future reference.
+  val filterReg = RegInit(false.B)
 
-### Status Accounting
+  when(io.input) {
+    filterReg := true.B
+  }.otherwise {
+    filterReg := false.B
+  }
 
-**Description**: Information about the current status of each configuration item, including its state in the lifecycle.
+  io.filteredOutput := filterReg
+}
+```
 
-**Key Elements**:
+## COMBINING THE INPUT PROCESSING WITH FUNCTIONS
 
-- **Current Status**: The current status of the configuration item (e.g., in development, under review, approved, released, retired).
-- **Status Changes**: Records of any status changes, including the date and reason for the change.
-- **Lifecycle Stage**: The lifecycle stage of the configuration item (e.g., design, testing, production).
+Combining input processing functions into a single module for integrated functionality:
 
-### Configuration Audits
+```scala
+import chisel3._
+import chisel3.util._
 
-**Description**: Records of audits conducted to ensure that configuration items comply with specified requirements and standards.
+class InputProcessor extends Module {
+  val io = IO(new Bundle {
+    val input = Input(Bool())
+    val debouncedOutput = Output(Bool())
+    val filteredOutput = Output(Bool())
+  })
 
-**Key Elements**:
+  // Debouncer
+  val debouncedReg = RegInit(false.B)
+  val debounceLogic = RegNext(io.input) && !debouncedReg
 
-- **Audit Plan**: The plan for conducting configuration audits, including objectives, scope, and schedule.
-- **Audit Findings**: Results of the configuration audits, including any discrepancies, non-conformances, and corrective actions.
-- **Audit Reports**: Comprehensive reports documenting the audit process, findings, and resolutions.
+  when(debounceLogic) {
+    debouncedReg := true.B
+  }.elsewhen(!io.input) {
+    debouncedReg := false.B
+  }
 
-### Documentation and Reporting
+  io.debouncedOutput := debouncedReg
 
-**Description**: Comprehensive documentation and reporting related to the configuration management of hardware.
+  // Filter
+  val filterReg = RegInit(false.B)
 
-**Key Elements**:
+  when(io.input) {
+    filterReg := true.B
+  }.otherwise {
+    filterReg := false.B
+  }
 
-- **Configuration Management Plan**: The plan outlining the processes, procedures, and tools used for configuration management.
-- **CM Records**: Detailed records of all configuration items, changes, versions, and statuses.
-- **Reporting Tools**: Tools and systems used to generate reports and track configuration management activities.
+  io.filteredOutput := filterReg
+}
+```
 
-## CONCLUSION
+## SYNCHRONIZING RESET
 
-Hardware Configuration Management Records are vital for maintaining control and traceability over the hardware development and maintenance processes. By meticulously documenting and managing configuration items, changes, versions, and statuses, organizations can ensure that their hardware products are developed consistently, meet quality standards, and comply with regulatory requirements. These records provide a clear and comprehensive history of the hardware's evolution, supporting effective management and continuous improvement.
+Synchronizing reset signals ensures proper initialization of registers across clock domains:
+
+```scala
+import chisel3._
+
+class SynchronizedReset extends Module {
+  val io = IO(new Bundle {
+    val resetInput = Input(Bool())
+    val synchronizedReset = Output(Bool())
+  })
+
+  val syncReg = RegNext(io.resetInput)
+
+  io.synchronizedReset := syncReg
+}
+```
+
+## EXERCISE
+
+Implement a module that combines debouncing and filtering for a push-button input signal. Ensure that the output signals (`debouncedOutput` and `filteredOutput`) are properly synchronized to the clock edge and are stable under noisy input conditions.
+
+```scala
+import chisel3._
+import chisel3.util._
+
+class ButtonInputProcessor extends Module {
+  val io = IO(new Bundle {
+    val buttonInput = Input(Bool())
+    val debouncedOutput = Output(Bool())
+    val filteredOutput = Output(Bool())
+  })
+
+  // Debouncer
+  val debouncedReg = RegInit(false.B)
+  val debounceLogic = RegNext(io.buttonInput) && !debouncedReg
+
+  when(debounceLogic) {
+    debouncedReg := true.B
+  }.elsewhen(!io.buttonInput) {
+    debouncedReg := false.B
+  }
+
+  io.debouncedOutput := debouncedReg
+
+  // Filter
+  val filterReg = RegInit(false.B)
+
+  when(io.buttonInput) {
+    filterReg := true.B
+  }.otherwise {
+    filterReg := false.B
+  }
+
+  io.filteredOutput := filterReg
+}
+```
+
+This manual provides comprehensive examples and explanations of input processing techniques in Chisel, including handling asynchronous inputs, debouncing, signal filtering, synchronization of reset signals, and combining functionalities into modular components. An exercise is included to reinforce understanding and encourage practical application of Chisel concepts. Adjust examples based on specific design requirements and expand functionality as needed.

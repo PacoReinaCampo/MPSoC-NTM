@@ -1,87 +1,99 @@
-# HARDWARE PLANS
+# INTRODUCTION
 
-In DO-254, hardware plans are critical documents that outline the strategies, methodologies, resources, and schedules for various aspects of the hardware development lifecycle. These plans ensure that all activities are carried out systematically and in compliance with regulatory requirements.
+Chisel is a hardware description language embedded in Scala, designed to support digital circuit design and FPGA programming.
 
-## PLAN FOR HARDWARE ASPECTS OF CERTIFICATION (PHAC)
+## INSTALLING CHISEL AND FPGA TOOLS
 
-**Description**: The PHAC is a comprehensive document that outlines the approach to achieving certification for airborne electronic hardware.
+### macOS
 
-**Key Elements**:
+1. **Install Scala:**
+   - Download Scala from https://www.scala-lang.org/download/
+   - Follow installation instructions.
 
-- **Certification Basis**: Identify applicable regulations, standards, and guidelines.
-- **Compliance Strategy**: Describe the methods and activities to demonstrate compliance with certification requirements.
-- **Roles and Responsibilities**: Define the roles of personnel and their responsibilities in the certification process.
-- **Schedule and Milestones**: Provide a timeline of certification activities and key milestones.
-- **Communication Plan**: Establish communication protocols with certification authorities.
+2. **Install SBT (Scala Build Tool):**
+   - Download SBT from https://www.scala-sbt.org/download.html
+   - Follow installation instructions.
 
-**Importance**: The PHAC ensures a clear and structured approach to certification, aligning all stakeholders on objectives and processes to achieve regulatory approval.
+3. **Install Verilator (for Verilog simulation):**
+   ```bash
+   brew install verilator
+   ```
 
-## HARDWARE DESIGN PLAN (HDP)
+4. **Install Chisel:**
+   - Chisel can be added as a dependency to your SBT project:
+     ```scala
+     libraryDependencies += "edu.berkeley.cs" %% "chisel3" % "3.5.1"
+     ```
 
-**Description**: The HDP details the approach to designing the hardware, including methodologies, tools, and techniques.
+### Linux/Ubuntu
 
-**Key Elements**:
+1. **Install Scala:**
+   ```bash
+   sudo apt-get update
+   sudo apt-get install scala
+   ```
 
-- **Design Objectives**: Outline the goals and requirements of the hardware design.
-- **Design Methodology**: Describe the processes and techniques used in the design, including modeling, simulation, and analysis.
-- **Tools and Environment**: Identify the design tools, software, and hardware used in the design process.
-- **Design Reviews**: Schedule for design reviews and checkpoints to ensure design quality and progress.
+2. **Install SBT:**
+   ```bash
+   sudo apt-get install sbt
+   ```
 
-**Importance**: The HDP provides a roadmap for the design phase, ensuring that all design activities are planned and executed systematically.
+3. **Install Verilator:**
+   ```bash
+   sudo apt-get install verilator
+   ```
 
-## HARDWARE VALIDATION PLAN (HVALP)
+4. **Install Chisel:**
+   - Add Chisel as a dependency in your SBT project (similar to macOS).
 
-**Description**: The HValP outlines the strategy for validating that the hardware meets its intended requirements and functions correctly in its operational environment.
+### Windows
 
-**Key Elements**:
+Chisel and its associated tools are primarily supported on Unix-based systems. Consider using a virtual machine or WSL (Windows Subsystem for Linux) for development.
 
-- **Validation Objectives**: Define the goals and criteria for validation.
-- **Validation Methods**: Specify the methods and techniques used for validation, including testing, analysis, and inspection.
-- **Validation Environment**: Describe the environment and conditions under which validation will be conducted.
-- **Validation Schedule**: Provide a timeline for validation activities and milestones.
-- **Data Collection and Analysis**: Outline procedures for collecting and analyzing validation data.
+### FPGA Tools
 
-**Importance**: The HValP ensures that the hardware is thoroughly validated against its requirements, confirming its suitability for the intended operational environment.
+For FPGA development with Chisel, tools like Vivado or Quartus are commonly used. Install and configure these tools as per their respective documentation.
 
-## HARDWARE VERIFICATION PLAN (HVERP)
+## HELLO WORLD
 
-**Description**: The HVerP details the approach to verifying that the hardware design meets its specified requirements and design criteria.
+The traditional "Hello, World!" program introduces basic concepts in a simple context.
 
-**Key Elements**:
+## CHISEL HELLO WORLD
 
-- **Verification Objectives**: Define the goals and criteria for verification.
-- **Verification Methods**: Specify the methods and techniques used for verification, such as inspections, tests, and reviews.
-- **Verification Tools**: Identify the tools and equipment used in verification activities.
-- **Verification Schedule**: Provide a timeline for verification activities and milestones.
-- **Documentation**: Outline the documentation required to support verification activities and results.
+Here’s a basic Chisel program to get started:
 
-**Importance**: The HVerP ensures that the hardware design is verified to meet all specified requirements, thereby ensuring the quality and reliability of the hardware.
+```scala
+import chisel3._
 
-## HARDWARE CONFIGURATION MANAGEMENT PLAN (HCMP)
+class HelloWorld extends Module {
+  val io = IO(new Bundle {
+    val out = Output(UInt(8.W))
+  })
 
-**Description**: The HCMP outlines the processes and procedures for managing the configuration of hardware throughout its lifecycle.
+  io.out := 42.U
+}
 
-**Key Elements**:
+object HelloWorld extends App {
+  chisel3.Driver.execute(args, () => new HelloWorld)
+}
+```
 
-- **Configuration Identification**: Define and document all configuration items and their relationships.
-- **Configuration Control**: Establish procedures for managing changes to configuration items, including approval and documentation processes.
-- **Configuration Status Accounting**: Track and report the status of configuration items and changes.
-- **Configuration Audits**: Plan and conduct audits to ensure compliance with configuration management procedures.
+## AN IDE FOR CHISEL
 
-**Importance**: The HCMP ensures that all changes to the hardware are systematically managed and documented, maintaining the integrity and traceability of the hardware configuration.
+IDEs like IntelliJ IDEA with Scala plugin or VS Code with Scala Metals are suitable for Chisel development. Install Scala plugins and configure them for optimal usage.
 
-## HARDWARE PROCESS ASSURANCE PLAN (HPAP)
+## SOURCE ACCESS AND EBOOK FEATURES
 
-**Description**: The HPAP outlines the processes and activities to ensure that all hardware development processes meet quality standards and regulatory requirements.
+Chisel’s source code is available on GitHub (https://github.com/freechipsproject/chisel3). Additional resources such as ebooks and tutorials are available on educational platforms.
 
-**Key Elements**:
+## FURTHER READING
 
-- **Process Assurance Objectives**: Define the goals and criteria for process assurance.
-- **Process Monitoring**: Establish procedures for monitoring and controlling development processes.
-- **Process Audits and Reviews**: Plan and conduct audits and reviews to ensure process compliance and effectiveness.
-- **Corrective Actions**: Define procedures for identifying and addressing process deficiencies.
-- **Documentation and Reporting**: Outline the documentation required to support process assurance activities and results.
+- Chisel Documentation: https://chisel-lang.org/documentation.html
+- Chisel Bootcamp: https://github.com/freechipsproject/chisel-bootcamp
 
-**Importance**: The HPAP ensures that all hardware development processes are performed correctly and consistently, supporting the quality and reliability of the hardware.
+## EXERCISES
 
-By developing and implementing these hardware plans, organizations can ensure a structured, systematic, and compliant approach to hardware development, verification, validation, configuration management, and certification.
+1. Write a Chisel module to implement a 4-bit counter.
+2. Design a simple arithmetic logic unit (ALU) in Chisel.
+
+This manual provides a comprehensive overview of Chisel, covering installation, basic usage, tools, and further resources for deeper learning. Adjust installation steps based on specific system configurations and ensure compatibility with chosen FPGA tools.

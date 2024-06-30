@@ -1,89 +1,133 @@
-# HARDWARE DESIGN DATA
+# BUILD PROCESS AND TESTING
 
-Hardware design data encompasses all the information generated and used during the hardware development lifecycle. This data ensures that hardware is designed, verified, validated, and documented according to requirements and standards, facilitating effective communication, traceability, and compliance.
+## BUILDING YOUR PROJECT WITH SBT
 
-## HARDWARE REQUIREMENTS
+### Source Organization
 
-**Description**: Hardware requirements are the documented specifications that the hardware must meet. These requirements cover functional, performance, environmental, and regulatory aspects.
+Typically, Chisel projects are organized with the following structure:
 
-**Key Elements**:
+```
+project/
+  build.sbt        // SBT build configuration
+src/
+  main/
+    scala/         // Main Chisel source files
+  test/
+    scala/         // Test files (ChiselTest or ScalaTest)
+```
 
-- **Functional Requirements**: Define what the hardware must do, including specific functions, features, and behaviors.
-- **Performance Requirements**: Specify the performance criteria the hardware must achieve, such as speed, efficiency, and accuracy.
-- **Environmental Requirements**: Outline the environmental conditions the hardware must withstand, such as temperature, humidity, and vibration.
-- **Regulatory Requirements**: Include compliance with industry standards, safety regulations, and certification requirements.
-- **Traceability**: Requirements must be traceable throughout the design, verification, and validation processes to ensure all are addressed.
+### Running sbt
 
-**Importance**: Accurate and comprehensive hardware requirements are essential for guiding the design process and ensuring that the final product meets all necessary specifications.
+To run SBT for your Chisel project:
 
-## HARDWARE DESIGN REPRESENTATION DATA
+1. Navigate to your project directory containing `build.sbt`.
+2. Open a terminal and run:
+   ```bash
+   sbt
+   ```
+   This starts the SBT shell.
 
-### Conceptual Design Data
+### Generating Verilog
 
-**Description**: Conceptual design data provide an initial representation of the hardware, focusing on high-level architecture and major components.
+To generate Verilog from Chisel code using SBT:
 
-**Key Elements**:
+1. Inside the SBT shell, use the `run` command followed by your main Chisel module:
+   ```bash
+   run MainModuleName
+   ```
+   Replace `MainModuleName` with the name of your Chisel module.
 
-- **Block Diagrams**: High-level diagrams showing the main components and their interactions.
-- **Functional Allocation**: Mapping of functional requirements to specific hardware components or subsystems.
-- **Preliminary Design Specifications**: Initial specifications for major components, interfaces, and systems.
-- **Feasibility Studies**: Analysis to determine the feasibility of the proposed design concepts.
+2. Verilog files will be generated in the `target/` directory.
 
-**Importance**: Conceptual design data help stakeholders understand the overall design approach and identify potential issues early in the development process.
+### Tool Flow
 
-### Detailed Design Data
+The typical tool flow for a Chisel project involves:
+- Editing Chisel source files (`*.scala`).
+- Running SBT to compile and generate Verilog.
+- Using Verilator or other tools for simulation or synthesis.
 
-**Description**: Detailed design data provide a comprehensive and precise representation of the hardware design, including all necessary details for fabrication, assembly, and testing.
+## TESTING WITH CHISEL
 
-#### Top-Level Drawing
+### ScalaTest
 
-**Description**: The top-level drawing is a comprehensive schematic that shows the overall layout of the hardware, including all major components and their interconnections.
+ScalaTest can be used for unit testing Chisel components. Example:
 
-**Key Elements**:
+```scala
+import org.scalatest._
 
-- **System Layout**: Overall arrangement of the hardware components and subsystems.
-- **Interconnections**: Detailed depiction of how components are interconnected, including wiring and signal paths.
-- **Interfaces**: Definition of interfaces between hardware components and other systems.
+class MyModuleSpec extends FlatSpec with Matchers {
+  behavior of "MyModule"
 
-**Importance**: The top-level drawing provides a complete overview of the hardware design, facilitating understanding and communication among engineering teams.
+  it should "perform addition correctly" in {
+    assertTesterPasses { new MyModule } { c =>
+      c.io.in.poke(5.U)
+      c.clock.step()
+      c.io.out.expect(10.U)
+    }
+  }
+}
+```
 
-#### Assembly Drawings
+### ChiselTest
 
-**Description**: Assembly drawings provide detailed instructions on how to assemble the hardware, including the placement and connection of components.
+ChiselTest provides specific utilities for testing Chisel designs:
 
-**Key Elements**:
+```scala
+import chisel3._
+import chiseltest._
 
-- **Component Placement**: Precise locations where each component should be placed.
-- **Assembly Sequence**: Step-by-step instructions for assembling the hardware.
-- **Connection Details**: Specifics on how components are connected, including soldering, bolting, and wiring.
-- **Tools and Equipment**: Identification of tools and equipment required for assembly.
+class MyModuleTest extends FlatSpec with ChiselScalatestTester with Matchers {
+  behavior of "MyModule"
 
-**Importance**: Assembly drawings ensure that the hardware is assembled correctly and consistently, reducing errors and improving quality.
+  it should "perform addition correctly" in {
+    test(new MyModule) { c =>
+      c.io.in.poke(5.U)
+      c.clock.step()
+      c.io.out.expect(10.U)
+    }
+  }
+}
+```
 
-#### Installation Control Drawings
+### Waveforms
 
-**Description**: Installation control drawings provide detailed instructions for installing the hardware in its intended operational environment.
+To generate waveforms for debugging:
 
-**Key Elements**:
+1. Use `--generate-vcd-output on` with SBT to enable waveform generation.
 
-- **Mounting Instructions**: Directions for mounting the hardware, including alignment and securing methods.
-- **Environmental Integration**: Details on integrating the hardware with environmental systems, such as cooling and ventilation.
-- **Clearance Requirements**: Specifications for required clearances around the hardware for operation and maintenance.
-- **Cabling and Routing**: Instructions for routing cables and connections during installation.
+2. View waveforms using GTKWave or a compatible viewer.
 
-**Importance**: Installation control drawings ensure that the hardware is installed correctly and safely, facilitating proper operation and maintenance.
+### printf Debugging
 
-#### Hardware/Software Interface Data
+Chisel supports printf-style debugging for quick checks:
 
-**Description**: Hardware/software interface data define the interactions between the hardware and software components, ensuring compatibility and proper integration.
+```scala
+import chisel3._
 
-**Key Elements**:
+class MyModule extends Module {
+  val io = IO(new Bundle {
+    val in = Input(UInt(8.W))
+    val out = Output(UInt(8.W))
+  })
 
-- **Interface Specifications**: Detailed descriptions of the interfaces, including data formats, protocols, and timing.
-- **Communication Requirements**: Requirements for communication between hardware and software, including bandwidth and latency.
-- **Control Signals**: Definition of control signals used for hardware/software interactions.
-- **Error Handling**: Specifications for error detection and handling mechanisms.
+  printf("Input: %d\n", io.in)
 
-**Importance**: Hardware/software interface data ensure seamless integration between hardware and software, enabling reliable and efficient operation.
+  io.out := io.in + 1.U
+}
+```
 
-By thoroughly documenting and managing hardware design data, organizations can ensure that all design aspects are clearly defined, properly executed, and fully traceable, leading to high-quality, compliant, and reliable hardware products.
+## EXERCISES
+
+### A Minimal Project
+
+Create a minimal Chisel project that implements a simple counter.
+
+### Using a GitHub Template
+
+Explore a Chisel project template on GitHub, clone it, and modify it to add a new functionality.
+
+### A Testing Exercise
+
+Write tests using both ScalaTest and ChiselTest for a small Chisel module, ensuring correctness and functionality.
+
+This manual provides comprehensive guidance on building Chisel projects using SBT, testing methodologies with ScalaTest and ChiselTest, waveform generation, printf debugging, and practical exercises to reinforce learning. Adjust examples and exercises based on specific project requirements and learning objectives.

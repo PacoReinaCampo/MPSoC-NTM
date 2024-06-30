@@ -1,84 +1,129 @@
-# HARDWARE ACCEPTANCE TEST CRITERIA
+# COMBINATIONAL BUILDING BLOCKS
 
-Hardware Acceptance Test Criteria are the predefined conditions, benchmarks, and requirements that hardware must meet to be deemed acceptable for delivery, deployment, or further development stages. These criteria ensure that the hardware meets all specified requirements and performs correctly in its intended operational environment.
+## COMBINATIONAL CIRCUITS
 
-## PURPOSE OF ACCEPTANCE TEST CRITERIA
+Combinational circuits in Chisel are circuits where outputs depend only on current inputs, with no memory or feedback.
 
-**Description**: Acceptance test criteria serve to verify that the hardware meets all specified performance, functional, and regulatory requirements before it is accepted for use or further development.
+## DECODER
 
-**Importance**: These criteria are essential for ensuring the quality, reliability, and safety of the hardware. They provide a standardized way to evaluate whether the hardware is fit for its intended purpose and ready for deployment or further development.
+A decoder converts an n-bit input into 2^n output lines. Here's an example of a 3-to-8 decoder in Chisel:
 
-## KEY ELEMENTS OF HARDWARE ACCEPTANCE TEST CRITERIA
+```scala
+import chisel3._
 
-### Functional Requirements
+class Decoder3to8 extends Module {
+  val io = IO(new Bundle {
+    val in = Input(UInt(3.W))
+    val out = Output(Vec(8, Bool()))
+  })
 
-**Description**: Functional requirements define the specific functions that the hardware must perform. Acceptance test criteria should include tests that verify these functions.
+  for (i <- 0 until 8) {
+    io.out(i) := (io.in === i.U)
+  }
+}
+```
 
-**Example Criteria**:
+## ENCODER
 
-- **Operation Verification**: The hardware must correctly perform all specified operations under normal and boundary conditions.
-- **Feature Implementation**: All features specified in the requirements must be present and operate as intended.
+An encoder performs the reverse of a decoder, converting multiple inputs into a smaller set of outputs. Here's a 4-to-2 encoder example:
 
-### Performance Requirements
+```scala
+import chisel3._
 
-**Description**: Performance requirements specify how well the hardware must perform certain functions. Acceptance test criteria should measure performance parameters such as speed, efficiency, and capacity.
+class Encoder4to2 extends Module {
+  val io = IO(new Bundle {
+    val in = Input(Vec(4, Bool()))
+    val out = Output(UInt(2.W))
+  })
 
-**Example Criteria**:
+  io.out := PriorityEncoder(io.in)
+}
+```
 
-- **Speed and Throughput**: The hardware must meet specified speed and throughput benchmarks.
-- **Latency**: The hardware must perform operations within acceptable latency limits.
-- **Resource Usage**: The hardware must operate within specified limits for power consumption, memory usage, and other resources.
+## ARBITER
 
-### Environmental Requirements
+An arbiter selects one of several inputs based on a priority scheme. Here’s a simple round-robin arbiter example:
 
-**Description**: Environmental requirements ensure that the hardware can operate under expected environmental conditions. Acceptance test criteria should verify the hardware's resilience to these conditions.
+```scala
+import chisel3._
 
-**Example Criteria**:
+class RoundRobinArbiter extends Module {
+  val io = IO(new Bundle {
+    val in = Input(Vec(2, UInt(8.W)))
+    val out = Output(UInt(8.W))
+  })
 
-- **Temperature**: The hardware must operate correctly within the specified temperature range.
-- **Humidity**: The hardware must function properly under specified humidity levels.
-- **Vibration and Shock**: The hardware must withstand specified levels of vibration and shock without degradation in performance.
+  val arbiter = RegInit(0.U(1.W))
 
-### Reliability and Durability
+  io.out := io.in(arbiter)
 
-**Description**: Reliability and durability requirements ensure that the hardware will perform reliably over its expected lifespan. Acceptance test criteria should include stress tests and reliability assessments.
+  when(io.out === io.in(0)) {
+    arbiter := 1.U
+  }.otherwise {
+    arbiter := 0.U
+  }
+}
+```
 
-**Example Criteria**:
+## PRIORITY ENCODER
 
-- **Mean Time Between Failures (MTBF)**: The hardware must meet or exceed the specified MTBF.
-- **Stress Testing**: The hardware must pass stress tests that simulate prolonged and intensive usage.
-- **Endurance Testing**: The hardware must demonstrate durability over extended operational periods.
+A priority encoder outputs the highest-priority active input. Here's an example of a 4-to-2 priority encoder:
 
-### Safety and Regulatory Compliance
+```scala
+import chisel3._
 
-**Description**: Safety and regulatory requirements ensure that the hardware complies with relevant safety standards and regulations. Acceptance test criteria should include safety checks and regulatory compliance verifications.
+class PriorityEncoder4to2 extends Module {
+  val io = IO(new Bundle {
+    val in = Input(Vec(4, Bool()))
+    val out = Output(UInt(2.W))
+  })
 
-**Example Criteria**:
+  io.out := PriorityEncoder(io.in)
+}
+```
 
-- **Safety Features**: All specified safety features must be present and functional.
-- **Regulatory Standards**: The hardware must comply with all relevant regulatory standards (e.g., FCC, CE, DO-254).
-- **Hazard Analysis**: The hardware must pass hazard analysis and risk assessment checks.
+## COMPARATOR
 
-### Interface and Integration
+A comparator checks if two values are equal or their relationship (greater than, less than). Here’s an example of an 8-bit comparator:
 
-**Description**: Interface and integration requirements ensure that the hardware can interface correctly with other systems and components. Acceptance test criteria should include interface compatibility and integration tests.
+```scala
+import chisel3._
 
-**Example Criteria**:
+class Comparator8bit extends Module {
+  val io = IO(new Bundle {
+    val a = Input(UInt(8.W))
+    val b = Input(UInt(8.W))
+    val eq = Output(Bool())
+    val gt = Output(Bool())
+    val lt = Output(Bool())
+  })
 
-- **Interface Compatibility**: The hardware must correctly interface with specified systems and components.
-- **Integration Testing**: The hardware must integrate seamlessly with other systems in the operational environment.
-- **Interoperability**: The hardware must demonstrate interoperability with other systems and devices.
+  io.eq := (io.a === io.b)
+  io.gt := (io.a > io.b)
+  io.lt := (io.a < io.b)
+}
+```
 
-## DOCUMENTATION AND REPORTING
+## EXERCISE
 
-**Description**: Comprehensive documentation and reporting are essential for tracking and verifying acceptance test results. Acceptance test criteria should include requirements for documentation.
+Implement a 4-bit magnitude comparator in Chisel that outputs three signals: `eq` (equal), `gt` (greater than), and `lt` (less than), based on comparing two 4-bit inputs.
 
-**Example Criteria**:
+```scala
+import chisel3._
 
-- **Test Reports**: Detailed test reports documenting test procedures, results, and conclusions.
-- **Issue Tracking**: Documentation of any issues or defects discovered during testing, including resolution status.
-- **Compliance Records**: Records demonstrating compliance with all specified acceptance test criteria.
+class Comparator4bit extends Module {
+  val io = IO(new Bundle {
+    val a = Input(UInt(4.W))
+    val b = Input(UInt(4.W))
+    val eq = Output(Bool())
+    val gt = Output(Bool())
+    val lt = Output(Bool())
+  })
 
-## CONCLUSION
+  io.eq := (io.a === io.b)
+  io.gt := (io.a > io.b)
+  io.lt := (io.a < io.b)
+}
+```
 
-By defining clear and comprehensive hardware acceptance test criteria, organizations can ensure that their hardware meets all necessary requirements for functionality, performance, reliability, safety, and compliance. These criteria provide a structured approach to evaluating hardware, facilitating high-quality, reliable, and safe products ready for deployment and use.
+This manual provides comprehensive examples and explanations of various combinational building blocks in Chisel, including decoders, encoders, arbiters, priority encoders, and comparators. Exercises are included to reinforce understanding and encourage practical application of Chisel concepts. Adjust examples based on specific design requirements and expand functionality as needed.

@@ -1,99 +1,137 @@
-# HARDWARE ACCOMPLISHMENT SUMMARY
+# COMMUNICATING STATE MACHINES
 
-The Hardware Accomplishment Summary (HAS) is a comprehensive document that provides an overview of the hardware development lifecycle, summarizing all significant activities, processes, and results. It serves as a key deliverable to demonstrate that the hardware has been developed in accordance with applicable standards, requirements, and regulatory guidelines, such as DO-254.
+## A LIGHT FLASHER EXAMPLE
 
-## PURPOSE OF THE HARDWARE ACCOMPLISHMENT SUMMARY
+A simple example of a light flasher using a state machine in Chisel:
 
-**Description**: The primary purpose of the HAS is to provide a clear and concise summary of the hardware development process, ensuring that all necessary steps were followed and that the hardware meets its intended requirements and regulatory standards.
+```scala
+import chisel3._
 
-**Importance**:
+class LightFlasher extends Module {
+  val io = IO(new Bundle {
+    val start = Input(Bool())
+    val blink = Output(Bool())
+  })
 
-- **Compliance Verification**: Demonstrates compliance with industry standards, such as DO-254, and regulatory requirements.
-- **Quality Assurance**: Provides evidence that quality assurance processes were followed throughout the hardware development lifecycle.
-- **Stakeholder Communication**: Communicates the development process and outcomes to stakeholders, including regulatory authorities, customers, and internal teams.
-- **Project Documentation**: Serves as a comprehensive record of the hardware development project for future reference and audits.
+  // Define states
+  val stateOff :: stateOn :: Nil = Enum(2)
+  val currentState = RegInit(stateOff)
 
-## KEY ELEMENTS OF THE HARDWARE ACCOMPLISHMENT SUMMARY
+  // State transition and output logic
+  switch(currentState) {
+    is(stateOff) {
+      when(io.start) {
+        currentState := stateOn
+      }
+      io.blink := false.B
+    }
+    is(stateOn) {
+      when(!io.start) {
+        currentState := stateOff
+      }
+      io.blink := true.B
+    }
+  }
+}
+```
 
-### Project Overview
+## STATE MACHINE WITH DATAPATH
 
-**Description**: A brief overview of the hardware development project.
+An example of a state machine with a datapath to compute Fibonacci numbers:
 
-**Key Elements**:
+```scala
+import chisel3._
 
-- **Project Objectives**: Description of the project's goals and objectives.
-- **Scope**: Outline of the project's scope, including key deliverables and milestones.
-- **Project Team**: Identification of the project team members and their roles.
+class FibonacciMachine extends Module {
+  val io = IO(new Bundle {
+    val start = Input(Bool())
+    val fibonacciNumber = Output(UInt(8.W))
+  })
 
-### Compliance with Plans and Standards
+  // Define states
+  val stateInit :: stateCompute :: Nil = Enum(2)
+  val currentState = RegInit(stateInit)
 
-**Description**: Summary of how the project adhered to predefined plans and standards.
+  // Datapath registers
+  val fib0 = RegInit(0.U(8.W))
+  val fib1 = RegInit(1.U(8.W))
+  val count = RegInit(0.U(8.W))
 
-**Key Elements**:
+  // State machine and datapath logic
+  switch(currentState) {
+    is(stateInit) {
+      when(io.start) {
+        currentState := stateCompute
+      }
+    }
+    is(stateCompute) {
+      count := count + 1.U
+      fib0 := fib1
+      fib1 := fib0 + fib1
 
-- **Adherence to Plans**: Verification that the project followed the hardware development plan, validation plan, verification plan, and other relevant plans.
-- **Standards Compliance**: Evidence of compliance with applicable standards, such as DO-254 and other regulatory guidelines.
+      when(count === 7.U) {  // Compute Fibonacci number 7
+        currentState := stateInit
+      }
+    }
+  }
 
-### Hardware Requirements and Design
+  // Output the computed Fibonacci number
+  io.fibonacciNumber := fib1
+}
+```
 
-**Description**: Summary of the hardware requirements and design process.
+## READY/VALID INTERFACE
 
-**Key Elements**:
+Implementing a ready/valid interface for communication between modules:
 
-- **Requirements Capture**: Overview of the requirements capture process and the final hardware requirements.
-- **Design Process**: Description of the design process, including conceptual and detailed design phases.
-- **Design Outputs**: Summary of the key design outputs, such as design documents, schematics, and models.
+```scala
+import chisel3._
+import chisel3.util._
 
-### Validation and Verification Activities
+class ReadyValidInterface extends Module {
+  val io = IO(new Bundle {
+    val input = Flipped(Decoupled(UInt(8.W)))
+    val output = Decoupled(UInt(8.W))
+  })
 
-**Description**: Summary of the validation and verification (V&V) activities conducted during the hardware development lifecycle.
+  // Define states
+  val stateIdle :: stateProcess :: stateDone :: Nil = Enum(3)
+  val currentState = RegInit(stateIdle)
 
-**Key Elements**:
+  // Ready/valid interface logic
+  val readyReg = RegInit(false.B)
+  val validReg = RegInit(false.B)
+  val dataReg = Reg(UInt(8.W))
 
-- **Validation Activities**: Overview of validation activities to ensure the hardware meets user needs and requirements.
-- **Verification Activities**: Description of verification activities to ensure the hardware design meets specified requirements.
-- **V&V Results**: Summary of the results from validation and verification activities, including test results and analysis findings.
+  // State machine for processing
+  switch(currentState) {
+    is(stateIdle) {
+      when(io.input.valid) {
+        dataReg := io.input.bits
+        readyReg := true.B
+        currentState := stateProcess
+      }
+    }
+    is(stateProcess) {
+      when(readyReg && io.output.ready) {
+        validReg := true.B
+        currentState := stateDone
+      }
+    }
+    is(stateDone) {
+      when(io.output.valid) {
+        readyReg := false.B
+        validReg := false.B
+        currentState := stateIdle
+      }
+    }
+  }
 
-### Configuration Management
+  // Connect ready/valid signals
+  io.input.ready := currentState === stateIdle
+  io.output.valid := currentState === stateDone
+  io.output.bits := dataReg
+}
+```
 
-**Description**: Summary of configuration management activities to ensure the integrity and traceability of the hardware development.
-
-**Key Elements**:
-
-- **Configuration Items**: List and description of configuration items managed during the project.
-- **Change Control**: Overview of the change control process and significant changes made.
-- **Configuration Audits**: Summary of configuration audits conducted and their outcomes.
-
-### Process Assurance
-
-**Description**: Summary of process assurance activities to ensure that all processes were conducted according to standards and requirements.
-
-**Key Elements**:
-
-- **Process Audits**: Overview of process audits conducted to verify adherence to defined processes.
-- **Issue Resolution**: Summary of issues identified and resolved during the project.
-- **Quality Metrics**: Presentation of quality metrics and their analysis.
-
-### Problem Reports and Resolutions
-
-**Description**: Summary of problem reports generated during the project and their resolutions.
-
-**Key Elements**:
-
-- **Problem Identification**: Overview of the problem reporting process and significant issues identified.
-- **Resolution Actions**: Description of actions taken to resolve reported problems.
-- **Impact Assessment**: Analysis of the impact of problems and their resolutions on the project.
-
-### Final Assessment and Approval
-
-**Description**: Final assessment of the hardware development project and its readiness for deployment or certification.
-
-**Key Elements**:
-
-- **Final Review**: Summary of the final review and assessment process.
-- **Approval**: Documentation of approvals from relevant stakeholders, including project managers, quality assurance, and regulatory authorities.
-- **Certification**: Evidence of certification or compliance with regulatory requirements.
-
-## CONCLUSION
-
-The Hardware Accomplishment Summary (HAS) is a vital document that encapsulates the entire hardware development lifecycle, demonstrating that all necessary steps and standards have been adhered to. It provides a clear and concise record of the project's objectives, processes, and outcomes, ensuring transparency, traceability, and compliance. By maintaining a comprehensive HAS, organizations can effectively communicate the success and quality of their hardware development projects to stakeholders and regulatory bodies.
+This manual provides comprehensive examples and explanations of communicating state machines in Chisel, including basic state machine examples, state machines with datapaths for computations, and implementation of a ready/valid interface for inter-module communication. Adjust examples based on specific design requirements and expand functionality as needed.

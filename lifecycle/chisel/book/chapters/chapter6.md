@@ -1,85 +1,225 @@
-# PROBLEM REPORTS
+# SEQUENTIAL BUILDING BLOCKS
 
-Problem reports are crucial documents in the hardware development and maintenance lifecycle. They record any issues, defects, or anomalies discovered during the design, testing, production, or operational phases of hardware. Effective problem reporting is essential for identifying, tracking, resolving, and preventing issues, ensuring the reliability and quality of the hardware.
+## REGISTERS
 
-## PURPOSE OF PROBLEM REPORTS
+Registers in Chisel are used for storing state between clock cycles. Here’s an example of a simple 8-bit register:
 
-**Description**: The primary purpose of problem reports is to systematically document issues encountered with the hardware, facilitate their resolution, and prevent recurrence. They serve as a tool for continuous improvement and quality assurance.
+```scala
+import chisel3._
 
-**Importance**:
+class MyRegister extends Module {
+  val io = IO(new Bundle {
+    val in = Input(UInt(8.W))
+    val out = Output(UInt(8.W))
+    val load = Input(Bool())
+  })
 
-- **Issue Identification**: Allows for the clear identification and documentation of problems.
-- **Resolution Tracking**: Tracks the progress of issue resolution, ensuring accountability and timely fixes.
-- **Root Cause Analysis**: Facilitates analysis to identify the underlying causes of problems.
-- **Quality Assurance**: Helps maintain the quality and reliability of the hardware by addressing defects and issues promptly.
-- **Regulatory Compliance**: Ensures compliance with industry standards and regulatory requirements for documentation and issue management.
+  val reg = RegInit(0.U(8.W))
 
-## KEY ELEMENTS OF PROBLEM REPORTS
+  when(io.load) {
+    reg := io.in
+  }
 
-### Identification Information
+  io.out := reg
+}
+```
 
-**Description**: Basic information that uniquely identifies the problem report and provides context.
+## COUNTERS
 
-**Key Elements**:
+### Counting Up and Down
 
-- **Report ID**: A unique identifier for the problem report.
-- **Date Reported**: The date when the problem was reported.
-- **Reporter**: The individual or team who reported the problem.
-- **Affected Hardware**: Identification of the hardware component(s) affected by the problem.
+A counter example that counts up and down:
 
-### Problem Description
+```scala
+import chisel3._
 
-**Description**: A detailed account of the problem, including symptoms, conditions, and impact.
+class UpDownCounter extends Module {
+  val io = IO(new Bundle {
+    val up = Input(Bool())
+    val down = Input(Bool())
+    val out = Output(UInt(8.W))
+  })
 
-**Key Elements**:
+  val count = RegInit(0.U(8.W))
 
-- **Summary**: A brief summary of the problem.
-- **Detailed Description**: An in-depth description of the issue, including what was observed, under what conditions it occurred, and how it manifests.
-- **Severity and Impact**: Assessment of the problem's severity and its impact on the hardware's functionality, performance, or safety.
-- **Steps to Reproduce**: Detailed steps to replicate the problem, if applicable.
+  when(io.up) {
+    count := count + 1.U
+  }.elsewhen(io.down) {
+    count := count - 1.U
+  }
 
-### Root Cause Analysis
+  io.out := count
+}
+```
 
-**Description**: Investigation into the underlying cause(s) of the problem.
+### Generating Timing with Counters
 
-**Key Elements**:
+Example of generating timing with a counter:
 
-- **Investigation Findings**: Results of the investigation into the problem's cause.
-- **Root Cause**: Identification of the fundamental issue that led to the problem.
-- **Contributing Factors**: Any additional factors that contributed to the occurrence of the problem.
+```scala
+import chisel3._
 
-### Resolution Plan
+class Timer extends Module {
+  val io = IO(new Bundle {
+    val start = Input(Bool())
+    val done = Output(Bool())
+  })
 
-**Description**: The approach and actions planned to resolve the problem.
+  val counter = RegInit(0.U(8.W))
+  val maxCount = 100.U
 
-**Key Elements**:
+  when(io.start && !io.done) {
+    counter := counter + 1.U
+    when(counter === maxCount) {
+      io.done := true.B
+    }
+  }.otherwise {
+    counter := 0.U
+    io.done := false.B
+  }
+}
+```
 
-- **Proposed Solution**: Description of the proposed fix or corrective action.
-- **Implementation Steps**: Detailed steps required to implement the solution.
-- **Responsible Parties**: Identification of the individuals or teams responsible for implementing the solution.
-- **Timeline**: Estimated timeline for resolving the problem, including key milestones.
+### The Nerd Counter
 
-### Resolution and Verification
+A more complex counter example:
 
-**Description**: Documentation of the resolution process and verification that the problem has been effectively addressed.
+```scala
+import chisel3._
 
-**Key Elements**:
+class NerdCounter extends Module {
+  val io = IO(new Bundle {
+    val enable = Input(Bool())
+    val out = Output(UInt(8.W))
+  })
 
-- **Resolution Actions**: Detailed description of the actions taken to resolve the problem.
-- **Test and Verification**: Results of tests and verification activities conducted to confirm that the problem has been resolved.
-- **Status Update**: Current status of the problem (e.g., open, in progress, resolved, closed).
-- **Verification Sign-off**: Sign-off by relevant stakeholders confirming that the problem has been resolved satisfactorily.
+  val count = RegInit(0.U(8.W))
 
-### Documentation and Reporting
+  when(io.enable) {
+    count := count + 1.U
+  }
 
-**Description**: Records and reports related to the problem, resolution, and verification.
+  io.out := count
+}
+```
 
-**Key Elements**:
+### A Timer
 
-- **Problem Report Document**: The formal problem report document, including all relevant information.
-- **Supporting Documentation**: Any additional documents, such as test logs, design documents, and analysis reports.
-- **Historical Data**: Archive of the problem report for future reference and traceability.
+Implementing a timer in Chisel:
 
-## CONCLUSION
+```scala
+import chisel3._
 
-Problem reports are an essential part of the hardware development and maintenance process. They ensure that issues are systematically identified, tracked, resolved, and documented. By maintaining comprehensive and detailed problem reports, organizations can enhance the quality and reliability of their hardware products, facilitate continuous improvement, and ensure compliance with industry standards and regulatory requirements.
+class Timer extends Module {
+  val io = IO(new Bundle {
+    val start = Input(Bool())
+    val tick = Output(Bool())
+  })
+
+  val counter = RegInit(0.U(32.W))
+  val maxCount = (100000000 - 1).U
+
+  io.tick := false.B
+
+  when(io.start) {
+    counter := counter + 1.U
+    when(counter === maxCount) {
+      io.tick := true.B
+      counter := 0.U
+    }
+  }
+}
+```
+
+### Pulse-Width Modulation (PWM)
+
+An example of PWM using a counter:
+
+```scala
+import chisel3._
+
+class PWMGenerator extends Module {
+  val io = IO(new Bundle {
+    val period = Input(UInt(16.W))
+    val dutyCycle = Input(UInt(8.W))
+    val pwmOut = Output(Bool())
+  })
+
+  val counter = RegInit(0.U(16.W))
+  val pwmReg = RegInit(false.B)
+
+  when(counter < io.period) {
+    counter := counter + 1.U
+  }.otherwise {
+    counter := 0.U
+    pwmReg := !pwmReg
+  }
+
+  io.pwmOut := counter < (io.period * io.dutyCycle / 255.U)
+}
+```
+
+## SHIFT REGISTERS
+
+### Shift Register with Parallel Output
+
+Example of a shift register with parallel output:
+
+```scala
+import chisel3._
+
+class ShiftRegisterParallelOut extends Module {
+  val io = IO(new Bundle {
+    val in = Input(Bool())
+    val shift = Input(Bool())
+    val parallelOut = Output(UInt(4.W))
+  })
+
+  val shiftReg = RegInit(0.U(4.W))
+
+  when(io.shift) {
+    shiftReg := Cat(io.in, shiftReg(3, 1))
+  }
+
+  io.parallelOut := shiftReg
+}
+```
+
+### Shift Register with Parallel Load
+
+Example of a shift register with parallel load:
+
+```scala
+import chisel3._
+
+class ShiftRegisterParallelLoad extends Module {
+  val io = IO(new Bundle {
+    val parallelIn = Input(UInt(4.W))
+    val load = Input(Bool())
+    val shift = Input(Bool())
+    val parallelOut = Output(UInt(4.W))
+  })
+
+  val shiftReg = RegInit(0.U(4.W))
+
+  when(io.load) {
+    shiftReg := io.parallelIn
+  }.elsewhen(io.shift) {
+    shiftReg := Cat(io.shift, shiftReg(3, 1))
+  }
+
+  io.parallelOut := shiftReg
+}
+```
+
+## MEMORY
+
+Chisel supports memory constructs like `Mem` and `Vec` for implementing memory elements. Example usage involves defining and initializing memories in Chisel code.
+
+## EXERCISES
+
+1. Implement a 4-bit synchronous up-counter in Chisel.
+2. Create a module that generates a PWM signal based on input period and duty cycle parameters.
+3. Develop a shift register that supports both parallel load and serial shift operations.
+
+This manual provides comprehensive examples and explanations of sequential building blocks in Chisel, including registers, counters (up, down, and timed), shift registers (parallel output and parallel load), and a brief mention of memory constructs. Exercises are included to reinforce understanding and encourage practical application of Chisel concepts. Adjust examples based on specific design requirements and expand functionality as needed.
