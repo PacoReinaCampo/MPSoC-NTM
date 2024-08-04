@@ -89,12 +89,11 @@ Arithmetic Operations Involving the Sign Bit:
    - The sign of the result depends on the magnitudes and signs of the operands.
    - Combining positive and negative values appropriately adjusts the sign of the result.
 
-2. **Multiplication and Division**:
-   - The sign of the result is determined by the XOR of the sign bits of the operands.
-      - Positive × Positive = Positive
-      - Negative × Negative = Positive
-      - Positive × Negative = Negative
-      - Negative × Positive = Negative
+2. **Multiplication and Division**: The sign of the result is determined by the XOR of the sign bits of the operands.
+   - Positive × Positive = Positive
+   - Negative × Negative = Positive
+   - Positive × Negative = Negative
+   - Negative × Positive = Negative
 
 3. **Special Cases**:
    - $ +0 \times x = +0 $ for any finite $ x $
