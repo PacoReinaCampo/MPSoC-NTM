@@ -1,5 +1,5 @@
 ---
-title: 'RISC-V ISA with Neural Turing Machine Functionalities'
+title: '**RISC-V ISA with Neural Turing Machine Functionalities**'
 subtitle: '![](riscv.png){width=5cm}'
 
 author: Paco Reina Campo

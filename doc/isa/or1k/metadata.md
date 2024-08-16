@@ -1,5 +1,5 @@
 ---
-title: 'OpenRISC ISA with Neural Turing Machine Functionalities'
+title: '**OpenRISC ISA with Neural Turing Machine Functionalities**'
 subtitle: '![](openrisc.png){width=5cm}'
 
 author: Paco Reina Campo

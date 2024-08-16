@@ -1,5 +1,5 @@
 ---
-title: 'MSP430 ISA with Neural Turing Machine Functionalities'
+title: '**MSP430 ISA with Neural Turing Machine Functionalities**'
 subtitle: '![](msp430.png){width=5cm}'
 
 author: Paco Reina Campo
