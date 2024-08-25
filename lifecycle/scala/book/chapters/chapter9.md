@@ -60,7 +60,7 @@ Package objects allow you to define methods, variables, and type aliases that ar
   }
   ```
 
-  - Usage in another file:
+   - Usage in another file:
   ```scala
   // File: com/example/HelloWorld.scala
   package com.example

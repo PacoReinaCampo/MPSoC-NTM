@@ -124,9 +124,9 @@ Scala provides several modifiers to control the visibility and behavior of class
   ```
 
 - **Other Modifiers**:
-  - `override`: Indicates that a member overrides a member in a superclass.
-  - `final`: Prevents a class from being extended or a member from being overridden.
-  - `sealed`: Restricts subclassing to within the same file.
+   - `override`: Indicates that a member overrides a member in a superclass.
+   - `final`: Prevents a class from being extended or a member from being overridden.
+   - `sealed`: Restricts subclassing to within the same file.
 
 ## CLASS DEFINITIONS
 

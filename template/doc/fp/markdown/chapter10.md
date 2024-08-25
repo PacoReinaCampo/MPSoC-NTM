@@ -74,8 +74,8 @@ Value-Changing Optimizations:
 
 - **Safety of Optimizations**: Optimizations that change the value of expressions should be carefully considered to avoid introducing significant errors.
 - **Examples of Optimizations**:
-  - **Constant Folding**: Simplifying expressions involving constants at compile time.
-  - **Strength Reduction**: Replacing expensive operations with cheaper ones, e.g., replacing `x * 2.0` with `x + x`.
+   - **Constant Folding**: Simplifying expressions involving constants at compile time.
+   - **Strength Reduction**: Replacing expensive operations with cheaper ones, e.g., replacing `x * 2.0` with `x + x`.
 
 Guidelines:
 
