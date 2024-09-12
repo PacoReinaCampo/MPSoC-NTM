@@ -5,16 +5,16 @@
 Identifiers in Scala are used to name various programming elements such as variables, functions, classes, and objects. An identifier can be a sequence of letters, digits, underscores (`_`), and dollar signs (`$`), but it must not start with a digit. There are different categories of identifiers in Scala:
 
 1. **Alphanumeric Identifiers**: These consist of letters and digits, where the first character must be a letter. 
-   - Example: `myVar`, `MAX_SIZE`
+   * Example: `myVar`, `MAX_SIZE`
 
 2. **Operator Identifiers**: These consist of one or more operator characters, which include `+`, `-`, `*`, `/`, `:`, `=`, `<`, `>`, `!`, `%`, `^`, `&`, `|`, `~`, `?`, and `\`.
-   - Example: `+`, `++`, `:=`
+   * Example: `+`, `++`, `:=`
 
 3. **Mixed Identifiers**: These start with an alphanumeric identifier followed by an underscore and an operator identifier.
-   - Example: `unary_+`, `myVar_=` 
+   * Example: `unary_+`, `myVar_=` 
 
 4. **Backtick Identifiers**: Any string enclosed in backticks can be used as an identifier, allowing the use of reserved words.
-   - Example: `` `type` ``, `` `val` ``
+   * Example: `` `type` ``, `` `val` ``
 
 ## NEWLINE CHARACTERS
 
@@ -35,22 +35,22 @@ Literals represent fixed values in the code. Scala supports several types of lit
 Integer literals represent whole numbers and can be expressed in different bases:
 
 - **Decimal**: Base 10 (default)
-   - Example: `42`, `0`, `-7`
+   * Example: `42`, `0`, `-7`
 - **Hexadecimal**: Base 16, prefixed with `0x` or `0X`
-   - Example: `0x2A`, `0X0`, `0x7F`
+   * Example: `0x2A`, `0X0`, `0x7F`
 - **Octal**: Scala 2.11 and onwards, prefixed with `0`
-   - Example: `017`, `020`
+   * Example: `017`, `020`
 - **Binary**: Prefixed with `0b` or `0B`
-   - Example: `0b1010`, `0B0101`
+   * Example: `0b1010`, `0B0101`
 
 ### Floating Point Literals
 
 Floating-point literals represent numbers with a fractional part and can be expressed in standard or exponential notation:
 
 - **Standard Notation**: 
-   - Example: `3.14`, `0.0`, `-1.5`
+   * Example: `3.14`, `0.0`, `-1.5`
 - **Exponential Notation**: 
-   - Example: `1e10`, `2.5e-3`, `3.14E5`
+   * Example: `1e10`, `2.5e-3`, `3.14E5`
 
 ### Boolean Literals
 
@@ -95,9 +95,9 @@ Symbol literals are used to create interned strings and are prefixed with a sing
 Whitespace characters (space, tab, newline) are used to separate tokens but are otherwise ignored. Scala supports both single-line and multi-line comments:
 
 - **Single-line Comments**: Begin with `//` and continue to the end of the line.
-   - Example: `// This is a comment`
+   * Example: `// This is a comment`
 - **Multi-line Comments**: Enclosed between `/*` and `*/`, can span multiple lines.
-   - Example: 
+   * Example: 
     ```scala
     /* This is a 
        multi-line comment */

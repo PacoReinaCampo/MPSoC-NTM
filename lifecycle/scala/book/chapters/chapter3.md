@@ -7,13 +7,13 @@ Scala is a statically typed language, meaning the type of each expression is kno
 Paths are expressions used to refer to types and values. Paths can be classified into:
 
 1. **Stable Identifiers**: These are names that refer to values that cannot be changed (e.g., `val`, `object`).
-   - Example: `scala.Predef`
+   * Example: `scala.Predef`
 2. **Selections**: These are references to members of objects or packages.
-   - Example: `scala.collection.mutable`
+   * Example: `scala.collection.mutable`
 3. **This Type**: A reference to the current instance of a class or object.
-   - Example: `this`, `MyClass.this`
+   * Example: `this`, `MyClass.this`
 4. **Super Type**: A reference to the superclass of the current instance.
-   - Example: `super`, `MyClass.super`
+   * Example: `super`, `MyClass.super`
 
 ## VALUE TYPES
 

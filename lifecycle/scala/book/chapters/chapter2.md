@@ -5,33 +5,33 @@
 Identifiers in Scala are used to name entities such as variables, methods, classes, objects, and packages. An identifier can be a sequence of letters, digits, underscores (`_`), and dollar signs (`$`), but it must not start with a digit. There are several categories of identifiers in Scala:
 
 1. **Alphanumeric Identifiers**: These consist of letters and digits, where the first character must be a letter. 
-   - Example: `myVar`, `MAX_SIZE`
+   * Example: `myVar`, `MAX_SIZE`
 
 2. **Operator Identifiers**: These consist of one or more operator characters, which include `+`, `-`, `*`, `/`, `:`, `=`, `<`, `>`, `!`, `%`, `^`, `&`, `|`, `~`, `?`, and `\`.
-   - Example: `+`, `++`, `:=`
+   * Example: `+`, `++`, `:=`
 
 3. **Mixed Identifiers**: These start with an alphanumeric identifier followed by an underscore and an operator identifier.
-   - Example: `unary_+`, `myVar_=` 
+   * Example: `unary_+`, `myVar_=` 
 
 4. **Backtick Identifiers**: Any string enclosed in backticks can be used as an identifier, allowing the use of reserved words.
-   - Example: `` `type` ``, `` `val` ``
+   * Example: `` `type` ``, `` `val` ``
 
 ## NAMES
 
 Names in Scala refer to the symbolic representation of variables, methods, classes, objects, and other entities. Names must be valid identifiers and follow the rules for identifiers mentioned above. Names can be simple or qualified.
 
 1. **Simple Names**: These are just plain identifiers.
-   - Example: `myVar`, `calculateSum`
+   * Example: `myVar`, `calculateSum`
 
 2. **Qualified Names**: These names are prefixed by a package name or an object name, separated by a dot (`.`).
-   - Example: `scala.collection.mutable`, `myObject.myMethod`
+   * Example: `scala.collection.mutable`, `myObject.myMethod`
 
 ## SCOPES
 
 Scopes in Scala determine the visibility and lifetime of names and identifiers. Scopes are typically nested, and a name defined in an inner scope can shadow a name defined in an outer scope. There are several types of scopes in Scala:
 
 1. **Local Scope**: The scope within a block of code, such as within a method or a loop.
-   - Example:
+   * Example:
      ```scala
      def example(): Unit = {
        val localVariable = 10
@@ -40,7 +40,7 @@ Scopes in Scala determine the visibility and lifetime of names and identifiers. 
      ```
 
 2. **Class Scope**: The scope within a class, including its methods and properties.
-   - Example:
+   * Example:
      ```scala
      class MyClass {
        val classVariable = 20
@@ -51,7 +51,7 @@ Scopes in Scala determine the visibility and lifetime of names and identifiers. 
      ```
 
 3. **Object Scope**: The scope within an object, similar to a class scope but for singleton objects.
-   - Example:
+   * Example:
      ```scala
      object MyObject {
        val objectVariable = 30
@@ -62,7 +62,7 @@ Scopes in Scala determine the visibility and lifetime of names and identifiers. 
      ```
 
 4. **Package Scope**: The scope within a package, allowing access to members of the same package.
-   - Example:
+   * Example:
      ```scala
      package mypackage {
        class MyClass {
@@ -78,14 +78,14 @@ Scopes in Scala determine the visibility and lifetime of names and identifiers. 
      ```
 
 5. **Import Scope**: The scope created by import statements, which allows selective visibility of members from other packages.
-   - Example:
+   * Example:
      ```scala
      import scala.collection.mutable
      val buffer = new mutable.ArrayBuffer[Int]()
      ```
 
 6. **Block Scope**: Any code enclosed within braces `{}` creates a block scope.
-   - Example:
+   * Example:
      ```scala
      {
        val blockVariable = 50
@@ -111,7 +111,7 @@ Shadowing occurs when a name defined in an inner scope has the same name as one 
 Scala provides several visibility modifiers to control the accessibility of members:
 
 1. **Public**: Members are accessible from anywhere. This is the default visibility.
-   - Example:
+   * Example:
      ```scala
      class MyClass {
        val publicVar = 10
@@ -119,7 +119,7 @@ Scala provides several visibility modifiers to control the accessibility of memb
      ```
 
 2. **Private**: Members are accessible only within the same class or object.
-   - Example:
+   * Example:
      ```scala
      class MyClass {
        private val privateVar = 20
@@ -127,7 +127,7 @@ Scala provides several visibility modifiers to control the accessibility of memb
      ```
 
 3. **Protected**: Members are accessible within the same class and subclasses.
-   - Example:
+   * Example:
      ```scala
      class MyClass {
        protected val protectedVar = 30
@@ -135,7 +135,7 @@ Scala provides several visibility modifiers to control the accessibility of memb
      ```
 
 4. **Package Private**: Members are accessible within the same package using the `private[packageName]` syntax.
-   - Example:
+   * Example:
      ```scala
      package mypackage {
        class MyClass {

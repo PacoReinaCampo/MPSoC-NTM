@@ -64,7 +64,7 @@ Type parameters allow the definition of generic classes, traits, and methods tha
 Variance annotations control how type parameters behave in relation to subtyping. There are three types of variance:
 
 - **Covariant**: `+T` means that for a type `A` and `B`, if `A` is a subtype of `B`, then `Box[A]` is a subtype of `Box[B]`.
-   - Example:
+   * Example:
     ```scala
     class Box[+T](value: T) {
       def get: T = value
@@ -72,7 +72,7 @@ Variance annotations control how type parameters behave in relation to subtyping
     ```
 
 - **Contravariant**: `-T` means that for a type `A` and `B`, if `A` is a subtype of `B`, then `Box[B]` is a subtype of `Box[A]`.
-   - Example:
+   * Example:
     ```scala
     trait Printer[-T] {
       def print(value: T): Unit
