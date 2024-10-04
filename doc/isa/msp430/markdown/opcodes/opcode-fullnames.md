@@ -280,9 +280,9 @@ Format of a line in the table:
 | `nop`        | `No operation`                                                      |
 | `#li`        | `Load immediate`                                                    |
 | `mv`         | `Copy register`                                                     |
-| `not`        | `One’s complement`                                                  |
-| `neg`        | `Two’s complement`                                                  |
-| `negw`       | `Two’s complement Word`                                             |
+| `not`        | `One's complement`                                                  |
+| `neg`        | `Two's complement`                                                  |
+| `negw`       | `Two's complement Word`                                             |
 | `sext.w`     | `Sign extend Word`                                                  |
 | `seqz`       | `Set if = zero`                                                     |
 | `snez`       | `Set if != zero`                                                    |
