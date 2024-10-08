@@ -114,7 +114,7 @@ However, view bounds are deprecated and it is recommended to use implicit parame
 
 ## MANIFESTS
 
-Manifests provide runtime type information, which is otherwise erased by Scala’s type erasure. Manifests are often used in conjunction with implicit parameters to preserve type information at runtime.
+Manifests provide runtime type information, which is otherwise erased by Scala's type erasure. Manifests are often used in conjunction with implicit parameters to preserve type information at runtime.
 
 - **Example**:
   ```scala
