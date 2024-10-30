@@ -7,4 +7,5 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 | `enums`                        | `Enumerated Types`                      |
 | `constraints`                  | `Constraint Definitions`                |
 | `operands`                     | `Operand Bit Encodings`                 |
+
 : Definition Directory

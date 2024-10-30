@@ -61,4 +61,5 @@ Format of a line in the table:
 | `SXT      dst`      | `Bit7 -> Bit8 ... Bit15`                                                   | `0 x x x` |
 | `TST(.B)  dst`      | `Test destination`                                                         | `x x x x` |
 | `XOR(.B)  src,dst`  | `src .xor. dst -> dst`                                                     | `x x x x` |
+
 : MSP430 - "MSP430 Base Integer Instruction Set"

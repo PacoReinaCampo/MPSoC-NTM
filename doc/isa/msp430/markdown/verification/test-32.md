@@ -96,6 +96,7 @@ Format of a line in the table:
 | `rv32ui-v-sw`            | `no passed` |
 | `rv32ui-v-xor`           | `no passed` |
 | `rv32ui-v-xori`          | `no passed` |
+
 : RV32I - "RV32I Base Integer Instruction Set"
 
 | test rv32                | status      |
@@ -116,6 +117,7 @@ Format of a line in the table:
 | `rv32um-v-mulhu`         | `no passed` |
 | `rv32um-v-rem`           | `no passed` |
 | `rv32um-v-remu`          | `no passed` |
+
 : RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
 
 | test rv32                | status      |
@@ -140,6 +142,7 @@ Format of a line in the table:
 | `rv32ua-v-amoswap_w`     | `no passed` |
 | `rv32ua-v-amoxor_w`      | `no passed` |
 | `rv32ua-v-lrsc`          | `no passed` |
+
 : RV32A - "RV32A Standard Extension for Atomic Instructions"
 
 | test rv32                | status      |
@@ -166,6 +169,7 @@ Format of a line in the table:
 | `rv32uf-v-ldst`          | `no passed` |
 | `rv32uf-v-move`          | `no passed` |
 | `rv32uf-v-recoding`      | `no passed` |
+
 : RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
 | test rv32                | status      |
@@ -190,12 +194,14 @@ Format of a line in the table:
 | `rv32ud-v-fmin`          | `no passed` |
 | `rv32ud-v-ldst`          | `no passed` |
 | `rv32ud-v-recoding`      | `no passed` |
+
 : RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32uc-p-rvc`           | `no passed` |
 | `rv32uc-v-rvc`           | `no passed` |
+
 : RV32C - "RV32C Standard Extension for Compressed Instructions"
 
 | test rv32                | status      |
@@ -206,6 +212,7 @@ Format of a line in the table:
 | `rv32uzba-v-sh1add`      | `no passed` |
 | `rv32uzba-v-sh2add`      | `no passed` |
 | `rv32uzba-v-sh3add`      | `no passed` |
+
 : RV32ZBA - "RV32ZBA Standard Extension)"
 
 | test rv32                | status      |
@@ -246,6 +253,7 @@ Format of a line in the table:
 | `rv32uzbb-v-sext_h`      | `no passed` |
 | `rv32uzbb-v-xnor`        | `no passed` |
 | `rv32uzbb-v-zext_h`      | `no passed` |
+
 : RV32ZBB - "RV32ZBB Standard Extension)"
 
 | test rv32                | status      |
@@ -256,6 +264,7 @@ Format of a line in the table:
 | `rv32uzbc-v-clmul`       | `no passed` |
 | `rv32uzbc-v-clmulh`      | `no passed` |
 | `rv32uzbc-v-clmulr`      | `no passed` |
+
 : RV32ZBC - "RV32ZBC Standard Extension)"
 
 | test rv32                | status      |
@@ -276,6 +285,7 @@ Format of a line in the table:
 | `rv32uzbs-v-binvi`       | `no passed` |
 | `rv32uzbs-v-bset`        | `no passed` |
 | `rv32uzbs-v-bseti`       | `no passed` |
+
 : RV32ZBS - "RV32ZBS Standard Extension)"
 
 | test rv32                | status      |
@@ -302,6 +312,7 @@ Format of a line in the table:
 | `rv32uzfh-v-ldst`        | `no passed` |
 | `rv32uzfh-v-move`        | `no passed` |
 | `rv32uzfh-v-recoding`    | `no passed` |
+
 : RV32ZFH - "RV32ZFH Standard Extension"
 
 | test rv32                | status      |
@@ -312,6 +323,7 @@ Format of a line in the table:
 | `rv32si-p-sbreak`        | `no passed` |
 | `rv32si-p-scall`         | `no passed` |
 | `rv32si-p-wfi`           | `no passed` |
+
 : RV32I - "RV32I Standard Extension for Integer Instructions for Supervisor-level Instructions"
 
 | test rv32                | status      |
@@ -330,4 +342,5 @@ Format of a line in the table:
 | `rv32mi-p-sh-misaligned` | `no passed` |
 | `rv32mi-p-sw-misaligned` | `no passed` |
 | `rv32mi-p-zicntr`        | `no passed` |
+
 : RV32I - "RV32I Standard Extension for Integer Instructions for Machine-level Instructions"

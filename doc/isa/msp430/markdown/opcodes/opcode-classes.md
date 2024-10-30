@@ -46,6 +46,7 @@ Format of a line in the table:
 | `and`        | `alu`           |
 | `fence`      | `fence`         |
 | `fence.i`    | `fence`         |
+
 : RV32I - "RV32I Base Integer Instruction Set"
 
 | instruction  | class           |
@@ -61,6 +62,7 @@ Format of a line in the table:
 | `sllw`       | `alu`           |
 | `srlw`       | `alu`           |
 | `sraw`       | `alu`           |
+
 : RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
 
 | instruction  | class           |
@@ -73,6 +75,7 @@ Format of a line in the table:
 | `divu`       | `alu,divide`    |
 | `rem`        | `alu,divide`    |
 | `remu`       | `alu,divide`    |
+
 : RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
 
 | instruction  | class           |
@@ -82,6 +85,7 @@ Format of a line in the table:
 | `divuw`      | `alu,multiply`  |
 | `remw`       | `alu,divide`    |
 | `remuw`      | `alu,divide`    |
+
 : RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
 
 | instruction  | class           |
@@ -97,6 +101,7 @@ Format of a line in the table:
 | `amomax.w`   | `atomic`        |
 | `amominu.w`  | `atomic`        |
 | `amomaxu.w`  | `atomic`        |
+
 : RV32A - "RV32A Standard Extension for Atomic Instructions"
 
 | instruction  | class           |
@@ -112,6 +117,7 @@ Format of a line in the table:
 | `amomax.d`   | `atomic`        |
 | `amominu.d`  | `atomic`        |
 | `amomaxu.d`  | `atomic`        |
+
 : RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
 
 | instruction  | class           |
@@ -137,6 +143,7 @@ Format of a line in the table:
 | `csrrwi`     | `csr`           |
 | `csrrsi`     | `csr`           |
 | `csrrci`     | `csr`           |
+
 : RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
 
 | instruction  | class           |
@@ -167,6 +174,7 @@ Format of a line in the table:
 | `fmv.x.s`    | `fpu,fmove`     |
 | `fclass.s`   | `fpu`           |
 | `fmv.s.x`    | `fpu,fmove`     |
+
 : RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
 | instruction  | class           |
@@ -175,6 +183,7 @@ Format of a line in the table:
 | `fcvt.lu.s`  | `fpu,fcvt`      |
 | `fcvt.s.l`   | `fpu,fcvt`      |
 | `fcvt.s.lu`  | `fpu,fcvt`      |
+
 : RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
 
 | instruction  | class           |
@@ -205,6 +214,7 @@ Format of a line in the table:
 | `fcvt.d.w`   | `fpu,fcvt`      |
 | `fcvt.d.wu`  | `fpu,fcvt`      |
 | `fclass.d`   | `fpu`           |
+
 : RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
 | instruction  | class           |
@@ -215,6 +225,7 @@ Format of a line in the table:
 | `fcvt.d.l`   | `fpu,fcvt`      |
 | `fcvt.d.lu`  | `fpu,fcvt`      |
 | `fmv.d.x`    | `fpu,fmove`     |
+
 : RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
 
 | instruction  | class           |
@@ -227,4 +238,5 @@ Format of a line in the table:
 | `fsflags`    | `csr`           |
 | `fsrmi`      | `csr`           |
 | `fsflagsi`   | `csr`           |
+
 : RV32FD - "RV32F and RV32D Common Floating-Point Instructions"

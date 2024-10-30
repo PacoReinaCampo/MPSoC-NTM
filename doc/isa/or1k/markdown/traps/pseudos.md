@@ -62,4 +62,5 @@ Format of a line in the table:
 | `fsflags`     | `csrrw`                  | `rd,rs1`         | `csr_eq_0x001`                   |
 | `fsrmi`       | `csrrwi`                 | `rd,zimm`        | `csr_eq_0x002`                   |
 | `fsflagsi`    | `csrrwi`                 | `rd,zimm`        | `csr_eq_0x001`                   |
+
 :Pseudo Instructions

@@ -57,6 +57,7 @@ Format of a line in the table:
 | `csr_eq_0xc80`  | `imm == 0xc80`                            |             |
 | `csr_eq_0xc81`  | `imm == 0xc81`                            |             |
 | `csr_eq_0xc82`  | `imm == 0xc82`                            |             |
+
 : Constraint Definitions
 
 These constraints ensure compatibility and reliable operation across various implementations of RISC-V processors.

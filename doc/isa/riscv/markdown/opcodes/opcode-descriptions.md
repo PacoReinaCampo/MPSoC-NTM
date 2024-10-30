@@ -48,6 +48,7 @@ Format of a line in the table:
 | `and`              | `Set rd to the bitwise and of rs1 and rs2`                                                                                       |
 | `fence`            | `Order device I/O and memory accesses viewed by other threads and devices`                                                       |
 | `fence.i`          | `Synchronize the instruction and data streams`                                                                                   |
+
 : RV32I - "RV32I Base Integer Instruction Set"
 
 | instruction name   | instruction description                                                                                                          |
@@ -63,6 +64,7 @@ Format of a line in the table:
 | `sllw`             | `Shift 32-bit value in rs1 left by the by the lower 5 bits in rs2 and place the 32-bit result into rd`                           |
 | `srlw`             | `Shift 32-bit value in rs1 right by the by the lower 5 bits in rs2 and place the 32-bit result into rd`                          |
 | `sraw`             | `Shift 32-bit value in rs1 right by the by the lower 5 bits in rs2 and place the 32-bit result into rd while retaining the sign` |
+
 : RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -75,6 +77,7 @@ Format of a line in the table:
 | `divu`             | `Divide rs1 (dividend) by rs2 (divisor) and place the quotient in rd (unsigned)`                                                 |
 | `rem`              | `Divide rs1 (dividend) by rs2 (divisor) and place the remainder in rd (signed)`                                                  |
 | `remu`             | `Divide rs1 (dividend) by rs2 (divisor) and place the remainder in rd (unsigned)`                                                |
+
 : RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
 
 | instruction name   | instruction description                                                                                                          |
@@ -84,6 +87,7 @@ Format of a line in the table:
 | `divuw`            | `Divide lower 32-bits of rs1 (dividend) by lower 32-bits of rs2 (divisor) and place the quotient in rd (unsigned)`               |
 | `remw`             | `Divide lower 32-bits of rs1 (dividend) by lower 32-bits of rs2 (divisor) and place the remainder in rd (signed)`                |
 | `remuw`            | `Divide lower 32-bits of rs1 (dividend) by lower 32-bits of rs2 (divisor) and place the remainder in rd (unsigned)`              |
+
 : RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -99,6 +103,7 @@ Format of a line in the table:
 | `amomax.w`         | `Load word from address in rs1 into rd, find maximum of rd and rs2, write the result to the address in rs1 (signed)`             |
 | `amominu.w`        | `Load word from address in rs1 into rd, find minimum of rd and rs2, write the result to the address in rs1 (unsigned)`           |
 | `amomaxu.w`        | `Load word from address in rs1 into rd, find maximum of rd and rs2, write the result to the address in rs1 (unsigned)`           |
+
 : RV32A - "RV32A Standard Extension for Atomic Instructions"
 
 | instruction name   | instruction description                                                                                                          |
@@ -114,6 +119,7 @@ Format of a line in the table:
 | `amomax.d`         | `Load double word from address in rs1 into rd, find maximum of rd and rs2, write the result to the address in rs1 (signed)`      |
 | `amominu.d`        | `Load double word from address in rs1 into rd, find minimum of rd and rs2, write the result to the address in rs1 (unsigned)`    |
 | `amomaxu.d`        | `Load double word from address in rs1 into rd, find maximum of rd and rs2, write the result to the address in rs1 (unsigned)`    |
+
 : RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -135,6 +141,7 @@ Format of a line in the table:
 | `csrrwi`           | `CSR Atomic Read Write Immediate writes the immediate value to the CSR, and writes previous value to rd`                         |
 | `csrrsi`           | `CSR Atomic Set Bit Immediate reads the CSR, sets CSR bits set in the immediate, and writes previous value to rd`                |
 | `csrrci`           | `CSR Atomic Clear Bit Immediate reads the CSR, clears CSR bits set in the immediate, and writes previous value to rd`            |
+
 : RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
 
 | instruction name   | instruction description                                                                                                          |
@@ -163,6 +170,7 @@ Format of a line in the table:
 | `fcvt.s.w`         | `Convert the 32-bit signed integer in rs1 to a single-precision value, then write the result to frd`                             |
 | `fcvt.s.wu`        | `Convert the 32-bit unsigned integer in rs1 to a single-precision value, then write the result to frd`                           |
 | `fclass.s`         | `Set rd to a 10-bit mask indicating the class of the single-precision value in frs1`                                             |
+
 : RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
 | instruction name   | instruction description                                                                                                          |
@@ -173,6 +181,7 @@ Format of a line in the table:
 | `fcvt.s.l`         | `Convert the 64-bit signed integer in rs1 to a single-precision value, then write the result to frd`                             |
 | `fcvt.s.lu`        | `Convert the 64-bit unsigned integer in rs1 to a single-precision value, then write the result to frd`                           |
 | `fmv.s.x`          | `Write the lower 32-bits of the integer register rs1 into the single-precision register frd`                                     |
+
 : RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -205,6 +214,7 @@ Format of a line in the table:
 | `fmv.x.d`          | `Write the sign extended double-precision value in frs1 into integer register rd`                                                |
 | `fclass.d`         | `Set rd to a 10-bit mask indicating the class of the double-precision value in frs1`                                             |
 | `fmv.d.x`          | `Write the 64-bit integer register rs1 into the double-precision register frd`                                                   |
+
 : RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
 | instruction name   | instruction description                                                                                                          |
@@ -213,6 +223,7 @@ Format of a line in the table:
 | `fcvt.lu.d`        | `Convert the double-precision value in frs1 to a 64-bit unsigned integer, then write the result to rd`                           |
 | `fcvt.d.l`         | `Convert the 64-bit signed integer in rs1 to a double-precision value, then write the result to frd`                             |
 | `fcvt.d.lu`        | `Convert the 64-bit unsigned integer in rs1 to a double-precision value, then write the result to frd`                           |
+
 : RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -225,6 +236,7 @@ Format of a line in the table:
 | `fsflags`          | `Set FP Accrued Exception Flags (Bits 4:0 of fcsr Control and Status Register)`                                                  |
 | `fsrmi`            | `Set FP Rounding Mode Immediate (Bits 7:5 of fcsr Control and Status Register)`                                                  |
 | `fsflagsi`         | `Set FP Accrued Exception Flags Immediate (Bits 4:0 of fcsr Control and Status Register)`                                        |
+
 : RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
 
 | instruction name   | instruction description                                                                                                          |
@@ -257,6 +269,7 @@ Format of a line in the table:
 | `fcvt.q.w`         | `Convert the 64-bit signed integer in rs1 to a quadruple-precision value, then write the result to frd`                          |
 | `fcvt.q.wu`        | `Convert the 64-bit unsigned integer in rs1 to a quadruple-precision value, then write the result to frd`                        |
 | `fclass.q`         | `Set rd to a 10-bit mask indicating the class of the quadruple-precision value in frs1`                                          |
+
 : RV32Q - "RV32Q Standard Extension for Quadruple-Precision Floating-Point"
 
 | instruction name   | instruction description                                                                                                          |
@@ -265,12 +278,14 @@ Format of a line in the table:
 | `fcvt.lu.q`        | `Convert the quadruple-precision value in frs1 to a 64-bit unsigned integer, then write the result to rd`                        |
 | `fcvt.q.l`         | `Convert the 64-bit signed integer in rs1 to a quadruple-precision value, then write the result to frd`                          |
 | `fcvt.q.lu`        | `Convert the 64-bit unsigned integer in rs1 to a quadruple-precision value, then write the result to frd`                        |
+
 : RV64Q - "RV64Q Standard Extension for Quadruple-Precision Floating-Point (+ RV32Q)"
 
 | instruction name   | instruction description                                                                                                          |
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 | `fmv.x.q`          | `Write the sign extended quadruple-precision value in frs1 into integer register rd`                                             |
 | `fmv.q.x`          | `Write the 64-bit integer register rs1 into the quadruple-precision register frd`                                                |
+
 : RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -291,6 +306,7 @@ Format of a line in the table:
 | `rsub.tensor.w`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.w`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.w`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
+
 : RV32RARITH - "RV32RARITH Expanded Extension for Real Arithmetic"
 
 | instruction name   | instruction description                                                                                                          |
@@ -311,6 +327,7 @@ Format of a line in the table:
 | `rsub.tensor.d`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.d`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.d`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
+
 : RV64RARITH - "RV64RARITH Expanded Extension for Real Arithmetic (+ RV32RARITH)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -331,6 +348,7 @@ Format of a line in the table:
 | `rsub.tensor.q`    | `Subtract the double-precision tensor values in frs1 from frs2, then write the result to frd`                                    |
 | `rmul.tensor.q`    | `Multiply the double-precision tensor values in frs1 and frs2, then write the result to frd`                                     |
 | `rdiv.tensor.q`    | `Divide the double-precision tensor value in frs1 into frs2, then write the result to frd`                                       |
+
 : RV128RARITH - "RV128RARITH Expanded Extension for Real Arithmetic (+ RV64RARITH)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -415,6 +433,7 @@ Format of a line in the table:
 | `farcsinh.tensor.s`| `Calculate the inverse hyperbolic sine of the single-precision tensor value in frs1, then write the result to frd`               |
 | `farccosh.tensor.s`| `Calculate the inverse hyperbolic cosine of the single-precision tensor value in frs1, then write the result to frd`             |
 | `farctanh.tensor.s`| `Calculate the inverse hyperbolic tangent of the single-precision tensor value in frs1, then write the result to frd`            |
+
 : RV32RMATH - "RV32RMATH Expanded Extension for Real Math"
 
 | instruction name   | instruction description                                                                                                          |
@@ -499,6 +518,7 @@ Format of a line in the table:
 | `farcsinh.tensor.d`| `Calculate the inverse hyperbolic sine of the double-precision tensor value in frs1, then write the result to frd`               |
 | `farccosh.tensor.d`| `Calculate the inverse hyperbolic cosine of the double-precision tensor value in frs1, then write the result to frd`             |
 | `farctanh.tensor.d`| `Calculate the inverse hyperbolic tangent of the double-precision tensor value in frs1, then write the result to frd`            |
+
 : RV64RMATH - "RV64RMATH Expanded Extension for Real Math (+ RV32RMATH)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -583,6 +603,7 @@ Format of a line in the table:
 | `farcsinh.tensor.q`| `Calculate the inverse hyperbolic sine of the quadruple-precision tensor value in frs1, then write the result to frd`            |
 | `farccosh.tensor.q`| `Calculate the inverse hyperbolic cosine of the quadruple-precision tensor value in frs1, then write the result to frd`          |
 | `farctanh.tensor.q`| `Calculate the inverse hyperbolic tangent of the quadruple-precision tensor value in frs1, then write the result to frd`         |
+
 : RV128RMATH - "RV128RMATH Expanded Extension for Real Math (+ RV64RMATH)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -611,6 +632,7 @@ Format of a line in the table:
 | `rtrans.tensor.w`  | `Calculate the transpose of the single-precision tensor value in frs1, then write the result to frd`                             |
 | `rdiff.tensor.w`   | `Calculate the differentiation of the single-precision tensor value in frs1, then write the result to frd`                       |
 | `rint.tensor.w`    | `Calculate the integration of the single-precision tensor value in frs1, then write the result to frd`                           |
+
 : RV32RALG - "RV32RALG Expanded Extension for Real Linear Algebra"
 
 | instruction name   | instruction description                                                                                                          |
@@ -639,6 +661,7 @@ Format of a line in the table:
 | `rtrans.tensor.d`  | `Calculate the transpose of the double-precision tensor value in frs1, then write the result to frd`                             |
 | `rdiff.tensor.d`   | `Calculate the differentiation of the double-precision tensor value in frs1, then write the result to frd`                       |
 | `rint.tensor.d`    | `Calculate the integration of the double-precision tensor value in frs1, then write the result to frd`                           |
+
 : RV64RALG - "RV64RALG Expanded Extension for Real Linear Algebra (+ RV32RALG)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -667,6 +690,7 @@ Format of a line in the table:
 | `rtrans.tensor.q`  | `Calculate the transpose of the quadruple-precision tensor value in frs1, then write the result to frd`                          |
 | `rdiff.tensor.q`   | `Calculate the differentiation of the quadruple-precision tensor value in frs1, then write the result to frd`                    |
 | `rint.tensor.q`    | `Calculate the integration of the quadruple-precision tensor value in frs1, then write the result to frd`                        |
+
 : RV128RALG - "RV128RALG Expanded Extension for Real Linear Algebra (+ RV64RALG)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -677,6 +701,7 @@ Format of a line in the table:
 | `lstm.w`           | `Real Long-Short Term Memory Neural Network`                                                                                     |
 | `ann.w`            | `Real Attention Neural Network`                                                                                                  |
 | `dnc.w`            | `Real Differentiable Neural Computer`                                                                                            |
+
 : RV32RNN - "RV32RNN Expanded Extension for Real Neural Network"
 
 | instruction name   | instruction description                                                                                                          |
@@ -687,6 +712,7 @@ Format of a line in the table:
 | `lstm.d`           | `Real Long-Short Term Memory Neural Network`                                                                                     |
 | `ann.d`            | `Real Attention Neural Network`                                                                                                  |
 | `dnc.d`            | `Real Differentiable Neural Computer`                                                                                            |
+
 : RV64RNN - "RV64RNN Expanded Extension for Real Neural Network (+ RV32RNN)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -697,6 +723,7 @@ Format of a line in the table:
 | `lstm.q`           | `Real Long-Short Term Memory Neural Network`                                                                                     |
 | `ann.q`            | `Real Attention Neural Network`                                                                                                  |
 | `dnc.q`            | `Real Differentiable Neural Computer`                                                                                            |
+
 : RV128RNN - "RV128RNN Expanded Extension for Real Neural Network (+ RV64RNN)"
 
 | instruction name   | instruction description                                                                                                          |
@@ -730,4 +757,5 @@ Format of a line in the table:
 | `j`                | `Jump`                                                                                                                           |
 | `jr`               | `Jump register`                                                                                                                  |
 | `ret`              | `Return from subroutine`                                                                                                         |
+
 : Pseudo Instructions

@@ -31,4 +31,5 @@ Format of a line in the table:
 | `T(x)`        | `T(x)`        | `1`     | `Type Cast`             | `T(x)`       |
 | `f(x...)`     | `f(x...)`     | `n`     | `Function Call`         | `f(x...)`    |
 | `inf`         | `inf`         | `0`     | `Infinity`              | `\infty`     |
+
 : Notation

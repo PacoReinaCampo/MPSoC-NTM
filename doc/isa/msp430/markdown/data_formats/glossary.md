@@ -6,4 +6,5 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 |--------------------------------|:----------------------------------------|
 | `descriptions`                 | `Descriptions`                          |
 | `notation`                     | `Notation    `                          |
+
 : Glossary Directory

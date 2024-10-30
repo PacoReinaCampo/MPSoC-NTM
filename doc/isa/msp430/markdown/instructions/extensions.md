@@ -67,6 +67,7 @@ Format of a line in the table:
 | `rv`   | `32`      | `cnn`      | `32`              | `RV32CNN Expanded Extension for Complex Neural Network`                      |
 | `rv`   | `64`      | `cnn`      | `32`              | `RV64CNN Expanded Extension for Complex Neural Network (+ RV32CNN)`          |
 | `rv`   | `128`     | `cnn`      | `32`              | `RV128CNN Expanded Extension for Complex Neural Network (+ RV64CNN)`         |
+
 : Instruction Set Extensions
 
 This table outlines the various instruction set extensions available in the RISC-V architecture, each introducing additional functionality beyond the base ISA to cater to specific application domains or performance optimizations.

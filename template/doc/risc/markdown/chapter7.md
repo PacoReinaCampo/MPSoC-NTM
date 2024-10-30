@@ -88,6 +88,7 @@ Summary Table for Quick Reference:
 | Precise Trap          | Synchronously occurs with instruction execution, preserving the exact state.                     |
 | Deferred Trap         | Occurs after a few instructions have been executed for performance reasons.                      |
 | Disrupting Trap       | Causes an immediate halt to execution, typically due to severe errors or critical interrupts.    |
+
 :Trap Category
 
 | Trap Control          | Description                                                                                      |
@@ -98,6 +99,7 @@ Summary Table for Quick Reference:
 | Trap Identification   | Process of determining the type and source of the trap.                                          |
 | Trap Type (tt)        | Identifier specifying the cause of the trap.                                                     |
 | Trap Priorities       | Determines the order of trap handling based on their criticality.                                |
+
 :Trap Control
 
 | Trap Definition       | Description                                                                                      |
@@ -107,6 +109,7 @@ Summary Table for Quick Reference:
 | Error_State           | Represents an unrecoverable error condition, triggering a disrupting trap.                       |
 | Processor Execution   | State changes upon traps, including saving the current state and updating control registers.     |
 | Exception/Interrupt   | Describes synchronous exceptions and asynchronous interrupts with their specific handlers.       |
+
 :Trap Definition
 
 | Trap Actions          | Description                                                                                      |
@@ -116,6 +119,7 @@ Summary Table for Quick Reference:
 | Invoke Handler        | Invokes the appropriate handler based on the trap type and priority.                             |
 | Execute Handler       | Performs necessary actions to address the trap condition.                                        |
 | Restore State         | Restores the saved state and resumes normal execution after handling the trap.                   |
+
 :Trap Actions
 
 Understanding these trap mechanisms and their handling processes is crucial for developing robust and reliable systems based on the IEEE 1754-1994 standard. Traps ensure that the processor can effectively manage exceptional conditions, interrupts, and errors, maintaining system stability and performance.

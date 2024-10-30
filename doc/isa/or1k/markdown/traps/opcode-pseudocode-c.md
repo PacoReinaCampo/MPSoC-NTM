@@ -281,6 +281,7 @@ Format of a line in the table:
 | `lv.unpack.b rD,rA,rB` | `N/A`                                                                                   |
 | `lv.unpack.h rD,rA,rB` | `N/A`                                                                                   |
 | `lv.xor rD,rA,rB`      | `N/A`                                                                                   |
+
 : OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
 
 | instruction name       | instruction pseudo code                                                                 |
@@ -1042,4 +1043,5 @@ Format of a line in the table:
 |                        | `rD[47:32] <- exts(rA[23:16])`                                                          |
 |                        | `rD[63:48] <- exts(rA[31:24])`                                                          |
 | `lv.xor rD,rA,rB`      | `rD[63:0] <- rA[63:0] XOR rB[63:0]`                                                     |
+
 : OpenRISC 64-Bit - "OpenRISC 64-Bit Base Integer Instruction Set"

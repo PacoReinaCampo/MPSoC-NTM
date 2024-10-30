@@ -54,4 +54,5 @@ Format of a line in the table:
 | `c.sdsp`     | `sd     imm_9  imm_x8`         | `rs1_eq_sp`                     |
 | `c.lqsp`     | `lq     imm_10 imm_x16`        | `rs1_eq_sp`                     |
 | `c.sqsp`     | `sq     imm_10 imm_x16`        | `rs1_eq_sp`                     |
+
 : Compressed Instruction

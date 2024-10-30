@@ -34,447 +34,447 @@
 <polygon fill="none" stroke="black" points="705,-8 705,-543 888,-543 888,-8 705,-8"/>
 <text text-anchor="middle" x="796.5" y="-527.8" font-family="Times,serif" font-size="14.00">Target Blocks</text>
 </g>
-<!-- MPSoC_DBG -->
+<!-- MPSoC-DBG -->
 <g id="node1" class="node">
-<title>MPSoC_DBG</title>
+<title>MPSoC-DBG</title>
 <polygon fill="none" stroke="black" points="28.5,-131 28.5,-169 137.5,-169 137.5,-131 28.5,-131"/>
-<text text-anchor="middle" x="83" y="-153.8" font-family="Times,serif" font-size="14.00">MPSoC_DBG</text>
+<text text-anchor="middle" x="83" y="-153.8" font-family="Times,serif" font-size="14.00">MPSoC-DBG</text>
 <text text-anchor="middle" x="83" y="-138.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_OR1K -->
+<!-- MPSoC-OR1K -->
 <g id="node10" class="node">
-<title>MPSoC_OR1K</title>
+<title>MPSoC-OR1K</title>
 <polygon fill="none" stroke="black" points="198,-165.5 198,-218.5 315,-218.5 315,-165.5 198,-165.5"/>
-<text text-anchor="middle" x="256.5" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC_OR1K</text>
+<text text-anchor="middle" x="256.5" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC-OR1K</text>
 <text text-anchor="middle" x="256.5" y="-188.3" font-family="Times,serif" font-size="14.00">Architecture</text>
 <text text-anchor="middle" x="256.5" y="-173.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pvt</text>
 </g>
-<!-- MPSoC_DBG&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-DBG&#45;&gt;MPSoC-OR1K -->
 <g id="edge1" class="edge">
-<title>MPSoC_DBG&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-DBG&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M137.79,-163.17C153.57,-167.04 171.04,-171.32 187.58,-175.37"/>
 <polygon fill="black" stroke="black" points="187.19,-178.88 197.74,-177.85 188.86,-172.08 187.19,-178.88"/>
 </g>
-<!-- SoC_OR1K -->
+<!-- SoC-OR1K -->
 <g id="node11" class="node">
-<title>SoC_OR1K</title>
+<title>SoC-OR1K</title>
 <polygon fill="none" stroke="black" points="203.5,-237.5 203.5,-290.5 309.5,-290.5 309.5,-237.5 203.5,-237.5"/>
-<text text-anchor="middle" x="256.5" y="-275.3" font-family="Times,serif" font-size="14.00">SoC_OR1K</text>
+<text text-anchor="middle" x="256.5" y="-275.3" font-family="Times,serif" font-size="14.00">SoC-OR1K</text>
 <text text-anchor="middle" x="256.5" y="-260.3" font-family="Times,serif" font-size="14.00">Architecture</text>
 <text text-anchor="middle" x="256.5" y="-245.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pv</text>
 </g>
-<!-- MPSoC_DBG&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-DBG&#45;&gt;SoC-OR1K -->
 <g id="edge10" class="edge">
-<title>MPSoC_DBG&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-DBG&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M137.72,-164.93C145.15,-168.66 152.2,-173.28 158,-179 174.75,-195.52 161.77,-210.98 178,-228 182.75,-232.98 188.32,-237.33 194.25,-241.13"/>
 <polygon fill="black" stroke="black" points="192.76,-244.31 203.16,-246.29 196.27,-238.25 192.76,-244.31"/>
 </g>
-<!-- PU_OR1K -->
+<!-- PU-OR1K -->
 <g id="node12" class="node">
-<title>PU_OR1K</title>
+<title>PU-OR1K</title>
 <polygon fill="none" stroke="black" points="203.5,-309.5 203.5,-362.5 309.5,-362.5 309.5,-309.5 203.5,-309.5"/>
-<text text-anchor="middle" x="256.5" y="-347.3" font-family="Times,serif" font-size="14.00">PU_OR1K</text>
+<text text-anchor="middle" x="256.5" y="-347.3" font-family="Times,serif" font-size="14.00">PU-OR1K</text>
 <text text-anchor="middle" x="256.5" y="-332.3" font-family="Times,serif" font-size="14.00">Architecture</text>
 <text text-anchor="middle" x="256.5" y="-317.3" font-family="Times,serif" font-size="14.00">or1k64&#45;p</text>
 </g>
-<!-- MPSoC_DBG&#45;&gt;PU_OR1K -->
+<!-- MPSoC-DBG&#45;&gt;PU-OR1K -->
 <g id="edge19" class="edge">
-<title>MPSoC_DBG&#45;&gt;PU_OR1K</title>
+<title>MPSoC-DBG&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M137.81,-163.27C145.5,-167.22 152.62,-172.35 158,-179 192.3,-221.36 145.02,-256.6 178,-300 182.51,-305.93 188.22,-310.92 194.5,-315.1"/>
 <polygon fill="black" stroke="black" points="192.97,-318.26 203.36,-320.33 196.53,-312.23 192.97,-318.26"/>
 </g>
-<!-- MPSoC_DMA -->
+<!-- MPSoC-DMA -->
 <g id="node2" class="node">
-<title>MPSoC_DMA</title>
+<title>MPSoC-DMA</title>
 <polygon fill="none" stroke="black" points="27.5,-74 27.5,-112 138.5,-112 138.5,-74 27.5,-74"/>
-<text text-anchor="middle" x="83" y="-96.8" font-family="Times,serif" font-size="14.00">MPSoC_DMA</text>
+<text text-anchor="middle" x="83" y="-96.8" font-family="Times,serif" font-size="14.00">MPSoC-DMA</text>
 <text text-anchor="middle" x="83" y="-81.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_DMA&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-DMA&#45;&gt;MPSoC-OR1K -->
 <g id="edge2" class="edge">
-<title>MPSoC_DMA&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-DMA&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M137.28,-112.02C144.38,-115.09 151.45,-118.44 158,-122 177.51,-132.61 197.67,-146.51 214.56,-159.13"/>
 <polygon fill="black" stroke="black" points="212.49,-161.96 222.57,-165.21 216.72,-156.38 212.49,-161.96"/>
 </g>
-<!-- MPSoC_DMA&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-DMA&#45;&gt;SoC-OR1K -->
 <g id="edge11" class="edge">
-<title>MPSoC_DMA&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-DMA&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M138.79,-106.95C146.08,-110.81 152.81,-115.73 158,-122 188.59,-158.92 148.56,-190.16 178,-228 182.51,-233.8 188.17,-238.7 194.37,-242.83"/>
 <polygon fill="black" stroke="black" points="192.72,-245.92 203.11,-248.01 196.29,-239.9 192.72,-245.92"/>
 </g>
-<!-- MPSoC_DMA&#45;&gt;PU_OR1K -->
+<!-- MPSoC-DMA&#45;&gt;PU-OR1K -->
 <g id="edge20" class="edge">
-<title>MPSoC_DMA&#45;&gt;PU_OR1K</title>
+<title>MPSoC-DMA&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M138.85,-106.42C146.22,-110.35 152.96,-115.43 158,-122 206.47,-185.15 131.49,-235.39 178,-300 182.41,-306.13 188.13,-311.24 194.46,-315.5"/>
 <polygon fill="black" stroke="black" points="193.02,-318.71 203.41,-320.8 196.59,-312.69 193.02,-318.71"/>
 </g>
-<!-- MPSoC_GPIO -->
+<!-- MPSoC-GPIO -->
 <g id="node3" class="node">
-<title>MPSoC_GPIO</title>
+<title>MPSoC-GPIO</title>
 <polygon fill="none" stroke="black" points="26.5,-473 26.5,-511 139.5,-511 139.5,-473 26.5,-473"/>
-<text text-anchor="middle" x="83" y="-495.8" font-family="Times,serif" font-size="14.00">MPSoC_GPIO</text>
+<text text-anchor="middle" x="83" y="-495.8" font-family="Times,serif" font-size="14.00">MPSoC-GPIO</text>
 <text text-anchor="middle" x="83" y="-480.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_GPIO&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-GPIO&#45;&gt;MPSoC-OR1K -->
 <g id="edge3" class="edge">
-<title>MPSoC_GPIO&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-GPIO&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M139.71,-479.07C146.77,-475.27 153.2,-470.36 158,-464 189.72,-422 147.84,-271.13 178,-228 181.19,-223.44 185.11,-219.44 189.47,-215.94"/>
 <polygon fill="black" stroke="black" points="191.55,-218.76 197.75,-210.17 187.54,-213.02 191.55,-218.76"/>
 </g>
-<!-- MPSoC_GPIO&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-GPIO&#45;&gt;SoC-OR1K -->
 <g id="edge12" class="edge">
-<title>MPSoC_GPIO&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-GPIO&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M139.5,-478.91C146.59,-475.13 153.08,-470.27 158,-464 203.32,-406.23 134.82,-359.39 178,-300 182.44,-293.9 188.17,-288.8 194.51,-284.54"/>
 <polygon fill="black" stroke="black" points="196.64,-287.35 203.47,-279.25 193.08,-281.32 196.64,-287.35"/>
 </g>
-<!-- MPSoC_GPIO&#45;&gt;PU_OR1K -->
+<!-- MPSoC-GPIO&#45;&gt;PU-OR1K -->
 <g id="edge21" class="edge">
-<title>MPSoC_GPIO&#45;&gt;PU_OR1K</title>
+<title>MPSoC-GPIO&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M139.56,-474.95C146.07,-471.82 152.38,-468.19 158,-464 191.34,-439.14 218.88,-399.9 236.09,-371.42"/>
 <polygon fill="black" stroke="black" points="239.23,-372.97 241.31,-362.58 233.21,-369.41 239.23,-372.97"/>
 </g>
-<!-- MPSoC_MPI -->
+<!-- MPSoC-MPI -->
 <g id="node4" class="node">
-<title>MPSoC_MPI</title>
+<title>MPSoC-MPI</title>
 <polygon fill="none" stroke="black" points="30.5,-416 30.5,-454 135.5,-454 135.5,-416 30.5,-416"/>
-<text text-anchor="middle" x="83" y="-438.8" font-family="Times,serif" font-size="14.00">MPSoC_MPI</text>
+<text text-anchor="middle" x="83" y="-438.8" font-family="Times,serif" font-size="14.00">MPSoC-MPI</text>
 <text text-anchor="middle" x="83" y="-423.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_MPI&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-MPI&#45;&gt;MPSoC-OR1K -->
 <g id="edge4" class="edge">
-<title>MPSoC_MPI&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-MPI&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M135.84,-423.81C144.37,-419.81 152.27,-414.38 158,-407 207.09,-343.77 131.25,-292.98 178,-228 181.25,-223.48 185.21,-219.52 189.6,-216.04"/>
 <polygon fill="black" stroke="black" points="191.68,-218.85 197.92,-210.29 187.7,-213.1 191.68,-218.85"/>
 </g>
-<!-- MPSoC_MPI&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-MPI&#45;&gt;SoC-OR1K -->
 <g id="edge13" class="edge">
-<title>MPSoC_MPI&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-MPI&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M135.79,-423.29C144.21,-419.34 152.09,-414.06 158,-407 189.05,-369.9 148.32,-338.21 178,-300 182.57,-294.12 188.32,-289.16 194.62,-284.99"/>
 <polygon fill="black" stroke="black" points="196.65,-287.86 203.5,-279.78 193.1,-281.82 196.65,-287.86"/>
 </g>
-<!-- MPSoC_MPI&#45;&gt;PU_OR1K -->
+<!-- MPSoC-MPI&#45;&gt;PU-OR1K -->
 <g id="edge22" class="edge">
-<title>MPSoC_MPI&#45;&gt;PU_OR1K</title>
+<title>MPSoC-MPI&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M135.75,-417.46C143.36,-414.3 150.99,-410.79 158,-407 177.95,-396.22 198.46,-381.85 215.5,-368.87"/>
 <polygon fill="black" stroke="black" points="217.8,-371.51 223.56,-362.63 213.51,-365.98 217.8,-371.51"/>
 </g>
-<!-- MPSoC_MPRAM -->
+<!-- MPSoC-MPRAM -->
 <g id="node5" class="node">
-<title>MPSoC_MPRAM</title>
+<title>MPSoC-MPRAM</title>
 <polygon fill="none" stroke="black" points="16,-359 16,-397 150,-397 150,-359 16,-359"/>
-<text text-anchor="middle" x="83" y="-381.8" font-family="Times,serif" font-size="14.00">MPSoC_MPRAM</text>
+<text text-anchor="middle" x="83" y="-381.8" font-family="Times,serif" font-size="14.00">MPSoC-MPRAM</text>
 <text text-anchor="middle" x="83" y="-366.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_MPRAM&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-MPRAM&#45;&gt;MPSoC-OR1K -->
 <g id="edge5" class="edge">
-<title>MPSoC_MPRAM&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-MPRAM&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M148.76,-358.77C152.17,-356.2 155.3,-353.3 158,-350 192.8,-307.48 144.78,-271.77 178,-228 181.22,-223.75 185.07,-219.99 189.3,-216.65"/>
 <polygon fill="black" stroke="black" points="191.61,-219.32 197.85,-210.76 187.63,-213.55 191.61,-219.32"/>
 </g>
-<!-- MPSoC_MPRAM&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-MPRAM&#45;&gt;SoC-OR1K -->
 <g id="edge14" class="edge">
-<title>MPSoC_MPRAM&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-MPRAM&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M146.56,-358.96C150.69,-356.34 154.57,-353.37 158,-350 175.08,-333.24 161.54,-317.38 178,-300 182.73,-295.01 188.29,-290.64 194.22,-286.84"/>
 <polygon fill="black" stroke="black" points="196.23,-289.72 203.12,-281.67 192.72,-283.66 196.23,-289.72"/>
 </g>
-<!-- MPSoC_MPRAM&#45;&gt;PU_OR1K -->
+<!-- MPSoC-MPRAM&#45;&gt;PU-OR1K -->
 <g id="edge23" class="edge">
-<title>MPSoC_MPRAM&#45;&gt;PU_OR1K</title>
+<title>MPSoC-MPRAM&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M150.31,-361.76C164.49,-358.29 179.42,-354.63 193.44,-351.2"/>
 <polygon fill="black" stroke="black" points="194.58,-354.52 203.46,-348.74 192.91,-347.72 194.58,-354.52"/>
 </g>
-<!-- MPSoC_MSI -->
+<!-- MPSoC-MSI -->
 <g id="node6" class="node">
-<title>MPSoC_MSI</title>
+<title>MPSoC-MSI</title>
 <polygon fill="none" stroke="black" points="30.5,-302 30.5,-340 135.5,-340 135.5,-302 30.5,-302"/>
-<text text-anchor="middle" x="83" y="-324.8" font-family="Times,serif" font-size="14.00">MPSoC_MSI</text>
+<text text-anchor="middle" x="83" y="-324.8" font-family="Times,serif" font-size="14.00">MPSoC-MSI</text>
 <text text-anchor="middle" x="83" y="-309.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_MSI&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-MSI&#45;&gt;MPSoC-OR1K -->
 <g id="edge6" class="edge">
-<title>MPSoC_MSI&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-MSI&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M135.53,-308.55C143.87,-304.67 151.8,-299.61 158,-293 178.69,-270.96 158.13,-250.78 178,-228 181.39,-224.12 185.28,-220.62 189.48,-217.49"/>
 <polygon fill="black" stroke="black" points="191.51,-220.34 197.89,-211.89 187.63,-214.52 191.51,-220.34"/>
 </g>
-<!-- MPSoC_MSI&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-MSI&#45;&gt;SoC-OR1K -->
 <g id="edge15" class="edge">
-<title>MPSoC_MSI&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-MSI&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M135.92,-303.74C154.14,-297.69 174.78,-290.83 193.73,-284.53"/>
 <polygon fill="black" stroke="black" points="195.07,-287.77 203.46,-281.3 192.87,-281.13 195.07,-287.77"/>
 </g>
-<!-- MPSoC_MSI&#45;&gt;PU_OR1K -->
+<!-- MPSoC-MSI&#45;&gt;PU-OR1K -->
 <g id="edge24" class="edge">
-<title>MPSoC_MSI&#45;&gt;PU_OR1K</title>
+<title>MPSoC-MSI&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M135.92,-325.54C154.06,-327.13 174.59,-328.92 193.47,-330.57"/>
 <polygon fill="black" stroke="black" points="193.19,-334.06 203.46,-331.45 193.8,-327.09 193.19,-334.06"/>
 </g>
-<!-- MPSoC_NoC -->
+<!-- MPSoC-NoC -->
 <g id="node7" class="node">
-<title>MPSoC_NoC</title>
+<title>MPSoC-NoC</title>
 <polygon fill="none" stroke="black" points="29.5,-17 29.5,-55 136.5,-55 136.5,-17 29.5,-17"/>
-<text text-anchor="middle" x="83" y="-39.8" font-family="Times,serif" font-size="14.00">MPSoC_NoC</text>
+<text text-anchor="middle" x="83" y="-39.8" font-family="Times,serif" font-size="14.00">MPSoC-NoC</text>
 <text text-anchor="middle" x="83" y="-24.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_NoC&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-NoC&#45;&gt;MPSoC-OR1K -->
 <g id="edge7" class="edge">
-<title>MPSoC_NoC&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-NoC&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M136.86,-51.79C144.32,-55.2 151.61,-59.24 158,-64 191.34,-88.86 218.88,-128.1 236.09,-156.58"/>
 <polygon fill="black" stroke="black" points="233.21,-158.59 241.31,-165.42 239.23,-155.03 233.21,-158.59"/>
 </g>
-<!-- MPSoC_NoC&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-NoC&#45;&gt;SoC-OR1K -->
 <g id="edge16" class="edge">
-<title>MPSoC_NoC&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-NoC&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M136.53,-47.59C144.78,-51.55 152.4,-56.87 158,-64 203.32,-121.77 134.82,-168.61 178,-228 182.44,-234.1 188.17,-239.2 194.51,-243.46"/>
 <polygon fill="black" stroke="black" points="193.08,-246.68 203.47,-248.75 196.64,-240.65 193.08,-246.68"/>
 </g>
-<!-- MPSoC_SPRAM -->
+<!-- MPSoC-SPRAM -->
 <g id="node8" class="node">
-<title>MPSoC_SPRAM</title>
+<title>MPSoC-SPRAM</title>
 <polygon fill="none" stroke="black" points="18,-245 18,-283 148,-283 148,-245 18,-245"/>
-<text text-anchor="middle" x="83" y="-267.8" font-family="Times,serif" font-size="14.00">MPSoC_SPRAM</text>
+<text text-anchor="middle" x="83" y="-267.8" font-family="Times,serif" font-size="14.00">MPSoC-SPRAM</text>
 <text text-anchor="middle" x="83" y="-252.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_SPRAM&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-SPRAM&#45;&gt;MPSoC-OR1K -->
 <g id="edge8" class="edge">
-<title>MPSoC_SPRAM&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-SPRAM&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M135.52,-244.98C143.09,-242.05 150.77,-239 158,-236 168.05,-231.84 178.6,-227.27 188.91,-222.72"/>
 <polygon fill="black" stroke="black" points="190.56,-225.81 198.27,-218.54 187.72,-219.41 190.56,-225.81"/>
 </g>
-<!-- MPSoC_SPRAM&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-SPRAM&#45;&gt;SoC-OR1K -->
 <g id="edge17" class="edge">
-<title>MPSoC_SPRAM&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-SPRAM&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M148.35,-264C162.96,-264 178.45,-264 192.98,-264"/>
 <polygon fill="black" stroke="black" points="193.36,-267.5 203.36,-264 193.36,-260.5 193.36,-267.5"/>
 </g>
-<!-- MPSoC_SPRAM&#45;&gt;PU_OR1K -->
+<!-- MPSoC-SPRAM&#45;&gt;PU-OR1K -->
 <g id="edge25" class="edge">
-<title>MPSoC_SPRAM&#45;&gt;PU_OR1K</title>
+<title>MPSoC-SPRAM&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M133.47,-283.06C141.69,-286.32 150.1,-289.71 158,-293 169.66,-297.85 182.03,-303.17 193.91,-308.37"/>
 <polygon fill="black" stroke="black" points="192.74,-311.68 203.3,-312.5 195.56,-305.27 192.74,-311.68"/>
 </g>
-<!-- MPSoC_UART -->
+<!-- MPSoC-UART -->
 <g id="node9" class="node">
-<title>MPSoC_UART</title>
+<title>MPSoC-UART</title>
 <polygon fill="none" stroke="black" points="25,-188 25,-226 141,-226 141,-188 25,-188"/>
-<text text-anchor="middle" x="83" y="-210.8" font-family="Times,serif" font-size="14.00">MPSoC_UART</text>
+<text text-anchor="middle" x="83" y="-210.8" font-family="Times,serif" font-size="14.00">MPSoC-UART</text>
 <text text-anchor="middle" x="83" y="-195.8" font-family="Times,serif" font-size="14.00">Peripheral</text>
 </g>
-<!-- MPSoC_UART&#45;&gt;MPSoC_OR1K -->
+<!-- MPSoC-UART&#45;&gt;MPSoC-OR1K -->
 <g id="edge9" class="edge">
-<title>MPSoC_UART&#45;&gt;MPSoC_OR1K</title>
+<title>MPSoC-UART&#45;&gt;MPSoC-OR1K</title>
 <path fill="none" stroke="black" d="M141.11,-202.01C156.05,-200.7 172.31,-199.28 187.76,-197.93"/>
 <polygon fill="black" stroke="black" points="188.11,-201.41 197.76,-197.05 187.5,-194.43 188.11,-201.41"/>
 </g>
-<!-- MPSoC_UART&#45;&gt;SoC_OR1K -->
+<!-- MPSoC-UART&#45;&gt;SoC-OR1K -->
 <g id="edge18" class="edge">
-<title>MPSoC_UART&#45;&gt;SoC_OR1K</title>
+<title>MPSoC-UART&#45;&gt;SoC-OR1K</title>
 <path fill="none" stroke="black" d="M141.11,-225.98C157.89,-231.56 176.32,-237.68 193.39,-243.36"/>
 <polygon fill="black" stroke="black" points="192.68,-246.81 203.27,-246.64 194.88,-240.17 192.68,-246.81"/>
 </g>
-<!-- MPSoC_UART&#45;&gt;PU_OR1K -->
+<!-- MPSoC-UART&#45;&gt;PU-OR1K -->
 <g id="edge26" class="edge">
-<title>MPSoC_UART&#45;&gt;PU_OR1K</title>
+<title>MPSoC-UART&#45;&gt;PU-OR1K</title>
 <path fill="none" stroke="black" d="M141.13,-223.1C147.38,-226.6 153.2,-230.85 158,-236 178.32,-257.8 158.36,-277.58 178,-300 182.77,-305.45 188.54,-310.13 194.76,-314.13"/>
 <polygon fill="black" stroke="black" points="193.05,-317.19 203.45,-319.18 196.56,-311.13 193.05,-317.19"/>
 </g>
-<!-- MPSoC_DV -->
+<!-- MPSoC-DV -->
 <g id="node13" class="node">
-<title>MPSoC_DV</title>
+<title>MPSoC-DV</title>
 <polygon fill="none" stroke="black" points="380,-165.5 380,-218.5 490,-218.5 490,-165.5 380,-165.5"/>
-<text text-anchor="middle" x="435" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC_DV</text>
+<text text-anchor="middle" x="435" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC-DV</text>
 <text text-anchor="middle" x="435" y="-188.3" font-family="Times,serif" font-size="14.00">Environment</text>
 <text text-anchor="middle" x="435" y="-173.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pvt</text>
 </g>
-<!-- MPSoC_OR1K&#45;&gt;MPSoC_DV -->
+<!-- MPSoC-OR1K&#45;&gt;MPSoC-DV -->
 <g id="edge29" class="edge">
-<title>MPSoC_OR1K&#45;&gt;MPSoC_DV</title>
+<title>MPSoC-OR1K&#45;&gt;MPSoC-DV</title>
 <path fill="none" stroke="black" d="M315.29,-192C332.69,-192 351.89,-192 369.68,-192"/>
 <polygon fill="black" stroke="black" points="369.97,-195.5 379.97,-192 369.97,-188.5 369.97,-195.5"/>
 </g>
-<!-- SoC_DV -->
+<!-- SoC-DV -->
 <g id="node14" class="node">
-<title>SoC_DV</title>
+<title>SoC-DV</title>
 <polygon fill="none" stroke="black" points="380,-237.5 380,-290.5 490,-290.5 490,-237.5 380,-237.5"/>
-<text text-anchor="middle" x="435" y="-275.3" font-family="Times,serif" font-size="14.00">SoC_DV</text>
+<text text-anchor="middle" x="435" y="-275.3" font-family="Times,serif" font-size="14.00">SoC-DV</text>
 <text text-anchor="middle" x="435" y="-260.3" font-family="Times,serif" font-size="14.00">Environment</text>
 <text text-anchor="middle" x="435" y="-245.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pv</text>
 </g>
-<!-- SoC_OR1K&#45;&gt;SoC_DV -->
+<!-- SoC-OR1K&#45;&gt;SoC-DV -->
 <g id="edge28" class="edge">
-<title>SoC_OR1K&#45;&gt;SoC_DV</title>
+<title>SoC-OR1K&#45;&gt;SoC-DV</title>
 <path fill="none" stroke="black" d="M309.5,-264C328.38,-264 349.93,-264 369.74,-264"/>
 <polygon fill="black" stroke="black" points="369.92,-267.5 379.92,-264 369.92,-260.5 369.92,-267.5"/>
 </g>
-<!-- PU_DV -->
+<!-- PU-DV -->
 <g id="node15" class="node">
-<title>PU_DV</title>
+<title>PU-DV</title>
 <polygon fill="none" stroke="black" points="380,-309.5 380,-362.5 490,-362.5 490,-309.5 380,-309.5"/>
-<text text-anchor="middle" x="435" y="-347.3" font-family="Times,serif" font-size="14.00">PU_DV</text>
+<text text-anchor="middle" x="435" y="-347.3" font-family="Times,serif" font-size="14.00">PU-DV</text>
 <text text-anchor="middle" x="435" y="-332.3" font-family="Times,serif" font-size="14.00">Environment</text>
 <text text-anchor="middle" x="435" y="-317.3" font-family="Times,serif" font-size="14.00">or1k64&#45;p</text>
 </g>
-<!-- PU_OR1K&#45;&gt;PU_DV -->
+<!-- PU-OR1K&#45;&gt;PU-DV -->
 <g id="edge27" class="edge">
-<title>PU_OR1K&#45;&gt;PU_DV</title>
+<title>PU-OR1K&#45;&gt;PU-DV</title>
 <path fill="none" stroke="black" d="M309.5,-336C328.38,-336 349.93,-336 369.74,-336"/>
 <polygon fill="black" stroke="black" points="369.92,-339.5 379.92,-336 369.92,-332.5 369.92,-339.5"/>
 </g>
-<!-- MPSoC_NTM -->
+<!-- MPSoC-NTM -->
 <g id="node16" class="node">
-<title>MPSoC_NTM</title>
+<title>MPSoC-NTM</title>
 <polygon fill="none" stroke="black" points="548,-165.5 548,-218.5 672,-218.5 672,-165.5 548,-165.5"/>
-<text text-anchor="middle" x="610" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC_NTM</text>
+<text text-anchor="middle" x="610" y="-203.3" font-family="Times,serif" font-size="14.00">MPSoC-NTM</text>
 <text text-anchor="middle" x="610" y="-188.3" font-family="Times,serif" font-size="14.00">Accelerator</text>
 <text text-anchor="middle" x="610" y="-173.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pvt&#45;rnn</text>
 </g>
-<!-- MPSoC_DV&#45;&gt;MPSoC_NTM -->
+<!-- MPSoC-DV&#45;&gt;MPSoC-NTM -->
 <g id="edge32" class="edge">
-<title>MPSoC_DV&#45;&gt;MPSoC_NTM</title>
+<title>MPSoC-DV&#45;&gt;MPSoC-NTM</title>
 <path fill="none" stroke="black" d="M490.26,-192C505.22,-192 521.68,-192 537.45,-192"/>
 <polygon fill="black" stroke="black" points="537.69,-195.5 547.69,-192 537.69,-188.5 537.69,-195.5"/>
 </g>
-<!-- SoC_NTM -->
+<!-- SoC-NTM -->
 <g id="node17" class="node">
-<title>SoC_NTM</title>
+<title>SoC-NTM</title>
 <polygon fill="none" stroke="black" points="551,-237.5 551,-290.5 669,-290.5 669,-237.5 551,-237.5"/>
-<text text-anchor="middle" x="610" y="-275.3" font-family="Times,serif" font-size="14.00">SoC_NTM</text>
+<text text-anchor="middle" x="610" y="-275.3" font-family="Times,serif" font-size="14.00">SoC-NTM</text>
 <text text-anchor="middle" x="610" y="-260.3" font-family="Times,serif" font-size="14.00">Accelerator</text>
 <text text-anchor="middle" x="610" y="-245.3" font-family="Times,serif" font-size="14.00">or1k64&#45;pv&#45;rnn</text>
 </g>
-<!-- SoC_DV&#45;&gt;SoC_NTM -->
+<!-- SoC-DV&#45;&gt;SoC-NTM -->
 <g id="edge31" class="edge">
-<title>SoC_DV&#45;&gt;SoC_NTM</title>
+<title>SoC-DV&#45;&gt;SoC-NTM</title>
 <path fill="none" stroke="black" d="M490.26,-264C506.18,-264 523.8,-264 540.49,-264"/>
 <polygon fill="black" stroke="black" points="540.73,-267.5 550.73,-264 540.73,-260.5 540.73,-267.5"/>
 </g>
-<!-- PU_NTM -->
+<!-- PU-NTM -->
 <g id="node18" class="node">
-<title>PU_NTM</title>
+<title>PU-NTM</title>
 <polygon fill="none" stroke="black" points="555,-309.5 555,-362.5 665,-362.5 665,-309.5 555,-309.5"/>
-<text text-anchor="middle" x="610" y="-347.3" font-family="Times,serif" font-size="14.00">PU_NTM</text>
+<text text-anchor="middle" x="610" y="-347.3" font-family="Times,serif" font-size="14.00">PU-NTM</text>
 <text text-anchor="middle" x="610" y="-332.3" font-family="Times,serif" font-size="14.00">Accelerator</text>
 <text text-anchor="middle" x="610" y="-317.3" font-family="Times,serif" font-size="14.00">or1k64&#45;p&#45;rnn</text>
 </g>
-<!-- PU_DV&#45;&gt;PU_NTM -->
+<!-- PU-DV&#45;&gt;PU-NTM -->
 <g id="edge30" class="edge">
-<title>PU_DV&#45;&gt;PU_NTM</title>
+<title>PU-DV&#45;&gt;PU-NTM</title>
 <path fill="none" stroke="black" d="M490.26,-336C507.57,-336 526.89,-336 544.84,-336"/>
 <polygon fill="black" stroke="black" points="544.93,-339.5 554.93,-336 544.93,-332.5 544.93,-339.5"/>
 </g>
-<!-- MPSoC_EnergyTech -->
+<!-- MPSoC-EnergyTech -->
 <g id="node19" class="node">
-<title>MPSoC_EnergyTech</title>
+<title>MPSoC-EnergyTech</title>
 <polygon fill="none" stroke="black" points="716,-131 716,-169 877,-169 877,-131 716,-131"/>
-<text text-anchor="middle" x="796.5" y="-153.8" font-family="Times,serif" font-size="14.00">MPSoC_EnergyTech</text>
+<text text-anchor="middle" x="796.5" y="-153.8" font-family="Times,serif" font-size="14.00">MPSoC-EnergyTech</text>
 <text text-anchor="middle" x="796.5" y="-138.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- MPSoC_NTM&#45;&gt;MPSoC_EnergyTech -->
+<!-- MPSoC-NTM&#45;&gt;MPSoC-EnergyTech -->
 <g id="edge35" class="edge">
-<title>MPSoC_NTM&#45;&gt;MPSoC_EnergyTech</title>
+<title>MPSoC-NTM&#45;&gt;MPSoC-EnergyTech</title>
 <path fill="none" stroke="black" d="M672.18,-178.07C682.97,-175.62 694.4,-173.01 705.78,-170.42"/>
 <polygon fill="black" stroke="black" points="706.78,-173.79 715.75,-168.15 705.23,-166.96 706.78,-173.79"/>
 </g>
-<!-- MPSoC_FinTech -->
+<!-- MPSoC-FinTech -->
 <g id="node22" class="node">
-<title>MPSoC_FinTech</title>
+<title>MPSoC-FinTech</title>
 <polygon fill="none" stroke="black" points="730.5,-17 730.5,-55 862.5,-55 862.5,-17 730.5,-17"/>
-<text text-anchor="middle" x="796.5" y="-39.8" font-family="Times,serif" font-size="14.00">MPSoC_FinTech</text>
+<text text-anchor="middle" x="796.5" y="-39.8" font-family="Times,serif" font-size="14.00">MPSoC-FinTech</text>
 <text text-anchor="middle" x="796.5" y="-24.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- MPSoC_NTM&#45;&gt;MPSoC_FinTech -->
+<!-- MPSoC-NTM&#45;&gt;MPSoC-FinTech -->
 <g id="edge38" class="edge">
-<title>MPSoC_NTM&#45;&gt;MPSoC_FinTech</title>
+<title>MPSoC-NTM&#45;&gt;MPSoC-FinTech</title>
 <path fill="none" stroke="black" d="M624,-165.24C639.43,-136.21 667.83,-90.46 705,-64 709.89,-60.52 715.23,-57.46 720.79,-54.77"/>
 <polygon fill="black" stroke="black" points="722.55,-57.82 730.31,-50.6 719.74,-51.41 722.55,-57.82"/>
 </g>
-<!-- MPSoC_DefenseTech -->
+<!-- MPSoC-DefenseTech -->
 <g id="node25" class="node">
-<title>MPSoC_DefenseTech</title>
+<title>MPSoC-DefenseTech</title>
 <polygon fill="none" stroke="black" points="713,-74 713,-112 880,-112 880,-74 713,-74"/>
-<text text-anchor="middle" x="796.5" y="-96.8" font-family="Times,serif" font-size="14.00">MPSoC_DefenseTech</text>
+<text text-anchor="middle" x="796.5" y="-96.8" font-family="Times,serif" font-size="14.00">MPSoC-DefenseTech</text>
 <text text-anchor="middle" x="796.5" y="-81.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- MPSoC_NTM&#45;&gt;MPSoC_DefenseTech -->
+<!-- MPSoC-NTM&#45;&gt;MPSoC-DefenseTech -->
 <g id="edge41" class="edge">
-<title>MPSoC_NTM&#45;&gt;MPSoC_DefenseTech</title>
+<title>MPSoC-NTM&#45;&gt;MPSoC-DefenseTech</title>
 <path fill="none" stroke="black" d="M641.46,-165.25C659.07,-150.87 682.2,-133.73 705,-122 709.18,-119.85 713.55,-117.82 718.02,-115.91"/>
 <polygon fill="black" stroke="black" points="719.34,-119.15 727.3,-112.15 716.72,-112.66 719.34,-119.15"/>
 </g>
-<!-- SoC_EnergyTech -->
+<!-- SoC-EnergyTech -->
 <g id="node20" class="node">
-<title>SoC_EnergyTech</title>
+<title>SoC-EnergyTech</title>
 <polygon fill="none" stroke="black" points="728,-245 728,-283 865,-283 865,-245 728,-245"/>
-<text text-anchor="middle" x="796.5" y="-267.8" font-family="Times,serif" font-size="14.00">SoC_EnergyTech</text>
+<text text-anchor="middle" x="796.5" y="-267.8" font-family="Times,serif" font-size="14.00">SoC-EnergyTech</text>
 <text text-anchor="middle" x="796.5" y="-252.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- SoC_NTM&#45;&gt;SoC_EnergyTech -->
+<!-- SoC-NTM&#45;&gt;SoC-EnergyTech -->
 <g id="edge34" class="edge">
-<title>SoC_NTM&#45;&gt;SoC_EnergyTech</title>
+<title>SoC-NTM&#45;&gt;SoC-EnergyTech</title>
 <path fill="none" stroke="black" d="M669.12,-264C684.52,-264 701.39,-264 717.65,-264"/>
 <polygon fill="black" stroke="black" points="717.68,-267.5 727.67,-264 717.67,-260.5 717.68,-267.5"/>
 </g>
-<!-- SoC_FinTech -->
+<!-- SoC-FinTech -->
 <g id="node23" class="node">
-<title>SoC_FinTech</title>
+<title>SoC-FinTech</title>
 <polygon fill="none" stroke="black" points="742.5,-188 742.5,-226 850.5,-226 850.5,-188 742.5,-188"/>
-<text text-anchor="middle" x="796.5" y="-210.8" font-family="Times,serif" font-size="14.00">SoC_FinTech</text>
+<text text-anchor="middle" x="796.5" y="-210.8" font-family="Times,serif" font-size="14.00">SoC-FinTech</text>
 <text text-anchor="middle" x="796.5" y="-195.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- SoC_NTM&#45;&gt;SoC_FinTech -->
+<!-- SoC-NTM&#45;&gt;SoC-FinTech -->
 <g id="edge37" class="edge">
-<title>SoC_NTM&#45;&gt;SoC_FinTech</title>
+<title>SoC-NTM&#45;&gt;SoC-FinTech</title>
 <path fill="none" stroke="black" d="M669.12,-246.04C689.37,-239.79 712.16,-232.75 732.76,-226.38"/>
 <polygon fill="black" stroke="black" points="733.84,-229.71 742.37,-223.42 731.78,-223.02 733.84,-229.71"/>
 </g>
-<!-- SoC_DefenseTech -->
+<!-- SoC-DefenseTech -->
 <g id="node26" class="node">
-<title>SoC_DefenseTech</title>
+<title>SoC-DefenseTech</title>
 <polygon fill="none" stroke="black" points="725,-302 725,-340 868,-340 868,-302 725,-302"/>
-<text text-anchor="middle" x="796.5" y="-324.8" font-family="Times,serif" font-size="14.00">SoC_DefenseTech</text>
+<text text-anchor="middle" x="796.5" y="-324.8" font-family="Times,serif" font-size="14.00">SoC-DefenseTech</text>
 <text text-anchor="middle" x="796.5" y="-309.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- SoC_NTM&#45;&gt;SoC_DefenseTech -->
+<!-- SoC-NTM&#45;&gt;SoC-DefenseTech -->
 <g id="edge40" class="edge">
-<title>SoC_NTM&#45;&gt;SoC_DefenseTech</title>
+<title>SoC-NTM&#45;&gt;SoC-DefenseTech</title>
 <path fill="none" stroke="black" d="M669.12,-281.96C686.58,-287.35 705.94,-293.33 724.15,-298.96"/>
 <polygon fill="black" stroke="black" points="723.25,-302.34 733.84,-301.95 725.32,-295.66 723.25,-302.34"/>
 </g>
-<!-- PU_EnergyTech -->
+<!-- PU-EnergyTech -->
 <g id="node21" class="node">
-<title>PU_EnergyTech</title>
+<title>PU-EnergyTech</title>
 <polygon fill="none" stroke="black" points="732,-473 732,-511 861,-511 861,-473 732,-473"/>
-<text text-anchor="middle" x="796.5" y="-495.8" font-family="Times,serif" font-size="14.00">PU_EnergyTech</text>
+<text text-anchor="middle" x="796.5" y="-495.8" font-family="Times,serif" font-size="14.00">PU-EnergyTech</text>
 <text text-anchor="middle" x="796.5" y="-480.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- PU_NTM&#45;&gt;PU_EnergyTech -->
+<!-- PU-NTM&#45;&gt;PU-EnergyTech -->
 <g id="edge33" class="edge">
-<title>PU_NTM&#45;&gt;PU_EnergyTech</title>
+<title>PU-NTM&#45;&gt;PU-EnergyTech</title>
 <path fill="none" stroke="black" d="M624,-362.76C639.43,-391.79 667.83,-437.54 705,-464 710.28,-467.76 716.07,-471.02 722.1,-473.85"/>
 <polygon fill="black" stroke="black" points="721.15,-477.25 731.72,-477.96 723.9,-470.81 721.15,-477.25"/>
 </g>
-<!-- PU_FinTech -->
+<!-- PU-FinTech -->
 <g id="node24" class="node">
-<title>PU_FinTech</title>
+<title>PU-FinTech</title>
 <polygon fill="none" stroke="black" points="746,-416 746,-454 847,-454 847,-416 746,-416"/>
-<text text-anchor="middle" x="796.5" y="-438.8" font-family="Times,serif" font-size="14.00">PU_FinTech</text>
+<text text-anchor="middle" x="796.5" y="-438.8" font-family="Times,serif" font-size="14.00">PU-FinTech</text>
 <text text-anchor="middle" x="796.5" y="-423.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- PU_NTM&#45;&gt;PU_FinTech -->
+<!-- PU-NTM&#45;&gt;PU-FinTech -->
 <g id="edge36" class="edge">
-<title>PU_NTM&#45;&gt;PU_FinTech</title>
+<title>PU-NTM&#45;&gt;PU-FinTech</title>
 <path fill="none" stroke="black" d="M640.53,-362.55C658.2,-377.31 681.7,-395.06 705,-407 714.75,-412 725.55,-416.29 736.2,-419.9"/>
 <polygon fill="black" stroke="black" points="735.31,-423.29 745.9,-423.03 737.46,-416.63 735.31,-423.29"/>
 </g>
-<!-- PU_DefenseTech -->
+<!-- PU-DefenseTech -->
 <g id="node27" class="node">
-<title>PU_DefenseTech</title>
+<title>PU-DefenseTech</title>
 <polygon fill="none" stroke="black" points="729,-359 729,-397 864,-397 864,-359 729,-359"/>
-<text text-anchor="middle" x="796.5" y="-381.8" font-family="Times,serif" font-size="14.00">PU_DefenseTech</text>
+<text text-anchor="middle" x="796.5" y="-381.8" font-family="Times,serif" font-size="14.00">PU-DefenseTech</text>
 <text text-anchor="middle" x="796.5" y="-366.8" font-family="Times,serif" font-size="14.00">Target</text>
 </g>
-<!-- PU_NTM&#45;&gt;PU_DefenseTech -->
+<!-- PU-NTM&#45;&gt;PU-DefenseTech -->
 <g id="edge39" class="edge">
-<title>PU_NTM&#45;&gt;PU_DefenseTech</title>
+<title>PU-NTM&#45;&gt;PU-DefenseTech</title>
 <path fill="none" stroke="black" d="M665.36,-348.37C682.13,-352.19 700.92,-356.47 718.9,-360.56"/>
 <polygon fill="black" stroke="black" points="718.26,-364.01 728.79,-362.81 719.81,-357.18 718.26,-364.01"/>
 </g>

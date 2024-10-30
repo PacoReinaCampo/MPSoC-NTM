@@ -85,4 +85,5 @@ Format of a line in the table:
 | `css·sqsp`   | `rs2,offset(rs1)`        | `crs2 cimmsqsp`         |
 | `css·swsp+f` | `frs2,offset(rs1)`       | `cfrs2 cimmswsp`        |
 | `css·sdsp+f` | `frs2,offset(rs1)`       | `cfrs2 cimmsdsp`        |
+
 : Instruction Encodings

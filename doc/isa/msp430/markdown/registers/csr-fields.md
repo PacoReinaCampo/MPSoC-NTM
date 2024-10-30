@@ -39,6 +39,7 @@ Format of a line in the table:
 | `status`    | `tw`      | `21`      | `mhs`     | `Timeout Wait`                            | `1.10-`          |
 | `status`    | `tsr`     | `22`      | `mhs`     | `Trap SRET`                               | `1.10-`          |
 | `status`    | `vm`      | `28:24`   | `m`       | `Virtual Memory Mode`                     | `1.9-1.9.1`      |
+
 : Machine Status
 
 | csr         | field     | bitspec   | modes     | field description                         | version          |
@@ -55,6 +56,7 @@ Format of a line in the table:
 | `atp`       | `ppn`     | `43:0`    | `s`       | `Address Translation Register (PPN)`      | `1.10,rv64`      |
 | `atp`       | `asid`    | `59:44`   | `s`       | `Address Translation Register (ASID)`     | `1.10,rv64`      |
 | `atp`       | `mode`    | `63:60`   | `s`       | `Address Translation Register (Mode)`     | `1.10,rv64`      |
+
 : Address Translation
 
 | csr         | field     | bitspec   | modes     | field description                         | version          |
@@ -71,6 +73,7 @@ Format of a line in the table:
 | `ip`        | `seip`    | `9`       | `mhs`     | `Supervisor External Interrupt Pending`   | `1.9-`           |
 | `ip`        | `heip`    | `10`      | `mh`      | `Hypervisor External Interrupt Pending`   | `1.9-`           |
 | `ip`        | `meip`    | `11`      | `m`       | `Machine External Interrupt Pending`      | `1.9-`           |
+
 : Machine Interrupt Pending
 
 | csr         | field     | bitspec   | modes     | field description                         | version          |
@@ -87,4 +90,5 @@ Format of a line in the table:
 | `ie`        | `seie`    | `9`       | `mhs`     | `Supervisor External Interrupt Enable`    | `1.9-`           |
 | `ie`        | `heie`    | `10`      | `mh`      | `Hypervisor External Interrupt Enable`    | `1.9-`           |
 | `ie`        | `meie`    | `11`      | `m`       | `Machine External Interrupt Enable`       | `1.9-`           |
+
 : Machine Interrupt Enable

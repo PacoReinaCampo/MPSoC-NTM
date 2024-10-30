@@ -14,6 +14,7 @@ Format of a line in the table:
 | `type`    | `offset`               | `5`       | `Signed Offset`                                      | `1.7-`        |
 | `type`    | `simm`                 | `6`       | `Sign Extended Immediate`                            | `1.7-`        |
 | `type`    | `uimm`                 | `7`       | `Zero Extended Immediate`                            | `1.7-`        |
+
 : Types
 
 | group     | name                   | value     | description                                          | version       |
@@ -24,6 +25,7 @@ Format of a line in the table:
 | `rm`      | `rup`                  | `0b011`   | `Round Up (towards +inf)`                            | `1.7-`        |
 | `rm`      | `rmm`                  | `0b100`   | `Round to Nearest, ties to Max Magnitude`            | `1.7-`        |
 | `rm`      | `dyn`                  | `0b111`   | `Dynamic Rounding Mode`                              | `1.7-`        |
+
 : Round Mode
 
 | group     | name                   | value     | description                                          | version       |
@@ -32,6 +34,7 @@ Format of a line in the table:
 | `aqrl`    | `acquire`              | `2`       | `Acquire - prior writes from other harts visible`    | `1.7-`        |
 | `aqrl`    | `release`              | `1`       | `Release - subsequent reads visible to other harts`  | `1.7-`        |
 | `aqrl`    | `acq_rel`              | `3`       | `Acquire-Release - global order of reads and writes` | `1.7-`        |
+
 : Memory Order (AMO aqrl Argument)
 
 | group     | name                   | value     | description                                          | version       |
@@ -40,6 +43,7 @@ Format of a line in the table:
 | `fence`   | `o`                    | `4`       | `Output`                                             | `1.7-`        |
 | `fence`   | `r`                    | `2`       | `Read`                                               | `1.7-`        |
 | `fence`   | `w`                    | `1`       | `Write`                                              | `1.7-`        |
+
 : Fence (pred and succ Values)
 
 | group     | name                   | value     | description                                          | version       |
@@ -49,6 +53,7 @@ Format of a line in the table:
 | `fcsr`    | `OF`                   | `4`       | `Overflow`                                           | `1.7-`        |
 | `fcsr`    | `DZ`                   | `8`       | `Divide by Zero`                                     | `1.7-`        |
 | `fcsr`    | `NV`                   | `16`      | `Invalid Operation`                                  | `1.7-`        |
+
 : Floating Point Exception Register (fcsr)
 
 | group     | name                   | value     | description                                          | version       |
@@ -63,6 +68,7 @@ Format of a line in the table:
 | `fclass`  | `pos_inf`              | `128`     | `positive infinity`                                  | `1.7-`        |
 | `fclass`  | `signaling_nan`        | `256`     | `signaling NaN`                                      | `1.7-`        |
 | `fclass`  | `quiet_nan`            | `512`     | `quiet NaN`                                          | `1.7-`        |
+
 : Floating Point Types Returned by fclass
 
 | group     | name                   | value     | description                                          | version       |
@@ -71,6 +77,7 @@ Format of a line in the table:
 | `fs`      | `initial`              | `1`       | `Initial`                                            | `1.7-`        |
 | `fs`      | `clean`                | `2`       | `Clean`                                              | `1.7-`        |
 | `fs`      | `dirty`                | `3`       | `Dirty`                                              | `1.7-`        |
+
 : FPU Status (mstatus.fs)
 
 | group     | name                   | value     | description                                          | version       |
@@ -79,6 +86,7 @@ Format of a line in the table:
 | `xs`      | `initial`              | `1`       | `None dirty or clean, some on`                       | `1.7-`        |
 | `xs`      | `clean`                | `2`       | `None dirty, some clean`                             | `1.7-`        |
 | `xs`      | `dirty`                | `3`       | `Some dirty`                                         | `1.7-`        |
+
 : Extension Status (mstatus.xs)
 
 | group     | name                   | value     | description                                          | version       |
@@ -86,6 +94,7 @@ Format of a line in the table:
 | `isa`     | `rv32`                 | `1`       | `RV32`                                               | `1.7-`        |
 | `isa`     | `rv64`                 | `2`       | `RV64`                                               | `1.7-`        |
 | `isa`     | `rv128`                | `3`       | `RV128`                                              | `1.7-`        |
+
 : Base ISA Field (misa)
 
 | group     | name                   | value     | description                                          | version       |
@@ -97,6 +106,7 @@ Format of a line in the table:
 | `ext`     | `D`                    | `8`       | `Double-precision foating-point extension`           | `1.7-`        |
 | `ext`     | `Q`                    | `2`       | `Quadruple-precision foating-point extension`        | `1.7-`        |
 | `ext`     | `C`                    | `4`       | `Compressed extension`                               | `1.7-`        |
+
 : ISA Extensions (misa)
 
 | group     | name                   | value     | description                                          | version       |
@@ -105,6 +115,7 @@ Format of a line in the table:
 | `mode`    | `S`                    | `1`       | `Supervisor mode`                                    | `1.7-`        |
 | `mode`    | `H`                    | `2`       | `Hypervisor mode`                                    | `1.7-`        |
 | `mode`    | `M`                    | `3`       | `Machine mode`                                       | `1.7-`        |
+
 : Privilege Mode
 
 | group     | name                   | value     | description                                          | version       |
@@ -117,6 +128,7 @@ Format of a line in the table:
 | `vm`      | `sv48`                 | `10`      | `Page-based 48-bit virtual addressing`               | `1.7-1.9.1`   |
 | `vm`      | `sv57`                 | `11`      | `Reserved for page-based 48-bit virtual addressing`  | `1.7-1.9.1`   |
 | `vm`      | `sv64`                 | `12`      | `Reserved for page-based 48-bit virtual addressing`  | `1.7-1.9.1`   |
+
 : Virtualization Management Field (mstatus.vm)
 
 | group     | name                   | value     | description                                          | version       |
@@ -127,6 +139,7 @@ Format of a line in the table:
 | `svm`     | `sv48`                 | `9`       | `Page-based 48-bit virtual addressing`               | `1.10,rv64`   |
 | `svm`     | `sv57`                 | `10`      | `Reserved for page-based 48-bit virtual addressing`  | `1.10,rv64`   |
 | `svm`     | `sv64`                 | `11`      | `Reserved for page-based 48-bit virtual addressing`  | `1.10,rv64`   |
+
 : Virtualization Management Field (satp.vm)
 
 | group     | name                   | value     | description                                          | version       |
@@ -146,6 +159,7 @@ Format of a line in the table:
 | `cause`   | `exec_page_fault`      | `12`      | `Instruction page fault`                             | `1.10-`       |
 | `cause`   | `load_page_fault`      | `13`      | `Load page fault`                                    | `1.10-`       |
 | `cause`   | `store_page_fault`     | `15`      | `Store/AMO page fault`                               | `1.10-`       |
+
 : Machine Cause Register Faults (mcause), Interrupt Bit Clear
 
 | group     | name                   | value     | description                                          | version       |
@@ -162,4 +176,5 @@ Format of a line in the table:
 | `intr`    | `s_external`           | `9`       | `Supervisor external interrupt`                      | `1.7-`        |
 | `intr`    | `h_external`           | `10`      | `Hypervisor external interrupt`                      | `1.7-1.9.1`   |
 | `intr`    | `m_external`           | `11`      | `Machine external interrupt`                         | `1.7-1.9.1`   |
+
 : Machine Cause Register Interrupts (mcause) Interrupt Bit Set
