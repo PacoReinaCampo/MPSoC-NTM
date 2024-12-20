@@ -1,3 +1,3 @@
 set design_path        "../../../../../../../rtl/vhdl/code"
-set verification_path  "../../../../../../../validation/tasks/vhdl/library"
-set simulation_path    "../../../../../../../sim/vhdl/verification/tasks"
+set verification_path  "../../../../../../../validation/procedures/vhdl/library"
+set simulation_path    "../../../../../../../sim/vhdl/validation/tasks"
