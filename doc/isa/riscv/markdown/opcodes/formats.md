@@ -38,7 +38,7 @@ Format of a line in the table:
 | `aqrl,rd,rs2,(rs1)`     |
 | `aqrl,rd,(rs1)`         |
 
-: Base Opcode Formats
+:Base Opcode Formats
 
 | format                  |
 |:------------------------|
@@ -49,4 +49,4 @@ Format of a line in the table:
 | `rs1,offset`            |
 | `rs2,offset`            |
 
-: Pseudo Opcode Formats
+:Pseudo Opcode Formats

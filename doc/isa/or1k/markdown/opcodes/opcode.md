@@ -14,4 +14,4 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 | `formats`                      | `Disassembly Formats`                    |
 | `opcode-majors`                | `Major Opcodes`                          |
 
-: Opcode Directory
+:Opcode Directory

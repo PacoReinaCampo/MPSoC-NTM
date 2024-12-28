@@ -19,7 +19,7 @@ Format of a line in the table:
 | `sx`          | `Signed Full Width Word (32, 64 or 128-bit)`            |
 | `ux`          | `Unsigned Full width Word (32, 64 or 128-bit)`          |
 
-: Word Type
+:Word Type
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -27,28 +27,28 @@ Format of a line in the table:
 | `f64,d`       | `Double Precision Floating-point`                       |
 | `f128,q`      | `Quadruple Precision Floating-point`                    |
 
-: Precision Floating-point
+:Precision Floating-point
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
 | `XLEN`        | `Integer Register Width in Bits (32, 64 or 128)`        |
 | `FLEN`        | `Floating-point Register Width in Bits (32, 64 or 128)` |
 
-: Register Width in Bits
+:Register Width in Bits
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
 | `rd`          | `Integer Register Destination`                          |
 | `rs[n]`       | `Integer Register Source [n]`                           |
 
-: Integer Register
+:Integer Register
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
 | `frd`         | `Floating-Point Register Destination`                   |
 | `frs[n]`      | `Floating-Point Register Source [n]`                    |
 
-: Floating-Point Register
+:Floating-Point Register
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -58,7 +58,7 @@ Format of a line in the table:
 | `offset`      | `Immediate Value decoded as a relative offset`          |
 | `shamt`       | `Immediate Value decoded as a shift amount`             |
 
-: Values
+:Values
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -66,7 +66,7 @@ Format of a line in the table:
 | `DP`          | `Double Precision`                                      |
 | `QP`          | `Quadruple Precision`                                   |
 
-: Precision
+:Precision
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -75,7 +75,7 @@ Format of a line in the table:
 | `S`           | `Supervisor`                                            |
 | `H`           | `Hypervisor`                                            |
 
-: Privilege Modes I
+:Privilege Modes I
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -86,13 +86,13 @@ Format of a line in the table:
 | `HBI`         | `Hypervisor Binary Interface`                           |
 | `HEE`         | `Hypervisor Execution Environment`                      |
 
-: Privilege Modes II
+:Privilege Modes II
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
 | `CSR`         | `Control and Status Register`                           |
 
-: Control and Status Register
+:Control and Status Register
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -100,7 +100,7 @@ Format of a line in the table:
 | `VA`          | `Virtual Address`                                       |
 | `PPN`         | `Physical Page Number`                                  |
 
-: Address & Page Number
+:Address & Page Number
 
 | symbol        | description                                             |
 |---------------|:--------------------------------------------------------|
@@ -112,4 +112,4 @@ Format of a line in the table:
 | `VPN`         | `Virtual Page Number`                                   |
 | `VCLN`        | `Virtual Cache Line Number`                             |
 
-: Physical & Virtual
+:Physical & Virtual

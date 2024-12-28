@@ -49,7 +49,7 @@ Format of a line in the table:
 | `fence`      |                                                                                                             |                                     |
 | `fence.i`    |                                                                                                             |                                     |
 
-: RV32I - "RV32I Base Integer Instruction Set"
+:RV32I - "RV32I Base Integer Instruction Set"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -65,7 +65,7 @@ Format of a line in the table:
 | `srlw`       | `rd = s32(u32(rs1) >> (rs2 & 0b11111))`                                                                     |                                     |
 | `sraw`       | `rd = s32(s32(rs1) >> (rs2 & 0b11111))`                                                                     |                                     |
 
-: RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
+:RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -78,7 +78,7 @@ Format of a line in the table:
 | `rem`        | `rd = sx(rs1) == sx(INT_MIN) && sx(rs2) == -1 ? 0 : sx(rs2) == 0 ? sx(rs1) : sx(rs1) % sx(rs2)`             |                                     |
 | `remu`       | `rd = sx(rs2) == 0 ? sx(rs1) : sx(ux(rs1) % ux(rs2))`                                                       |                                     |
 
-: RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
+:RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -88,7 +88,7 @@ Format of a line in the table:
 | `remw`       | `rd = s32(rs1) == s32(INT_MIN) && s32(rs2) == -1 ? 0 : s32(rs2) == 0 ? s32(rs1) : s32(rs1) % s32(rs2)`      |                                     |
 | `remuw`      | `rd = s32(rs2) == 0 ? s32(rs1) : s32(u32(rs1) % u32(rs2))`                                                  |                                     |
 
-: RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
+:RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -104,7 +104,7 @@ Format of a line in the table:
 | `amominu.w`  | `s32 t1, t2 = s32(rs2); mmu.amo<s32>(amominu, rs1, t1, t2); rd = t1`                                        |                                     |
 | `amomaxu.w`  | `s32 t1, t2 = s32(rs2); mmu.amo<s32>(amomaxu, rs1, t1, t2); rd = t1`                                        |                                     |
 
-: RV32A - "RV32A Standard Extension for Atomic Instructions"
+:RV32A - "RV32A Standard Extension for Atomic Instructions"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -120,7 +120,7 @@ Format of a line in the table:
 | `amominu.d`  | `s64 t1, t2 = s64(rs2); mmu.amo<s64>(amominu, rs1, t1, t2); rd = t1`                                        |                                     |
 | `amomaxu.d`  | `s64 t1, t2 = s64(rs2); mmu.amo<s64>(amomaxu, rs1, t1, t2); rd = t1`                                        |                                     |
 
-: RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
+:RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -146,7 +146,7 @@ Format of a line in the table:
 | `csrrsi`     |                                                                                                             |                                     |
 | `csrrci`     |                                                                                                             |                                     |
 
-: RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
+:RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -177,7 +177,7 @@ Format of a line in the table:
 | `fclass.s`   | `rd = f32_classify(f32(frs1))`                                                                              |                                     |
 | `fmv.s.x`    | `u32(frd) = u32(rs1)`                                                                                       |                                     |
 
-: RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
+:RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -186,7 +186,7 @@ Format of a line in the table:
 | `fcvt.s.l`   | `fenv_setrm(rm); f32(frd) = f32(s64(rs1))`                                                                  |                                     |
 | `fcvt.s.lu`  | `fenv_setrm(rm); f32(frd) = f32(u64(rs1))`                                                                  |                                     |
 
-: RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
+:RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -217,7 +217,7 @@ Format of a line in the table:
 | `fcvt.d.wu`  | `fenv_setrm(rm); f64(frd) = f64(u32(rs1))`                                                                  |                                     |
 | `fclass.d`   | `rd = f64_classify(f64(frs1))`                                                                              |                                     |
 
-: RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
+:RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -228,7 +228,7 @@ Format of a line in the table:
 | `fcvt.d.lu`  | `fenv_setrm(rm); f64(frd) = f64(u64(rs1))`                                                                  |                                     |
 | `fmv.d.x`    | `u64(frd) = u64(rs1)`                                                                                       |                                     |
 
-: RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32F)"
+:RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32F)"
 
 | instruction  | instruction pseudo code                                                                                     |                                     |
 |--------------|:------------------------------------------------------------------------------------------------------------|:------------------------------------|
@@ -241,4 +241,4 @@ Format of a line in the table:
 | `fsrmi`      |                                                                                                             |                                     |
 | `fsflagsi`   |                                                                                                             |                                     |
 
-: RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
+:RV32FD - "RV32F and RV32D Common Floating-Point Instructions"

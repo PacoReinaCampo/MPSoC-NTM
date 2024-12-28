@@ -35,4 +35,4 @@
 | `6..5=3` | `4..2=6` | `custom-3,rv128` |
 | `6..5=3` | `4..2=7` | `>80-bit`        |
 
-: Major Opcodes
+:Major Opcodes

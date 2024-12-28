@@ -62,4 +62,4 @@ Format of a line in the table:
 | `TST(.B)  dst`      | `Test destination`                                                         | `x x x x` |
 | `XOR(.B)  src,dst`  | `src .xor. dst -> dst`                                                     | `x x x x` |
 
-: MSP430 - "MSP430 Base Integer Instruction Set"
+:MSP430 - "MSP430 Base Integer Instruction Set"

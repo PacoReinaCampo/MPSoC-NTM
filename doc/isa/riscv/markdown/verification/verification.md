@@ -6,7 +6,7 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 |--------------------------------|:----------------------------------------|
 | `test`                         | `Test for Verification`                 |
 
-: Verification Directory
+:Verification Directory
 
 | `Architecture 32 bit`    | `PU`            | `SoC`            | `MPSoC`           |
 |--------------------------|:----------------|:-----------------|:------------------|
@@ -19,7 +19,7 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 | `Real Neural Network`    | `rv32-p-rnn`    | `rv32-pv-rnn`    | `rv32-pvt-rnn`    |
 | `Complex Neural Network` | `rv32-p-cnn`    | `rv32-pv-cnn`    | `rv32-pvt-cnn`    |
 
-: Architecture 32 bit
+:Architecture 32 bit
 
 | `Architecture 64 bit`    | `PU`            | `SoC`            | `MPSoC`           |
 |--------------------------|:----------------|:-----------------|:------------------|
@@ -32,7 +32,7 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 | `Real Neural Network`    | `rv64-p-rnn`    | `rv64-pv-rnn`    | `rv64-pvt-rnn`    |
 | `Complex Neural Network` | `rv64-p-cnn`    | `rv64-pv-cnn`    | `rv64-pvt-cnn`    |
 
-: Architecture 64 bit
+:Architecture 64 bit
 
 | `Architecture 128 bit`   | `PU`            | `SoC`            | `MPSoC`           |
 |--------------------------|:----------------|:-----------------|:------------------|
@@ -45,4 +45,4 @@ This directory contains MetaData for the RISC-V Instruction Set Architecture
 | `Real Neural Network`    | `rv128-p-rnn`   | `rv128-pv-rnn`   | `rv128-pvt-rnn`   |
 | `Complex Neural Network` | `rv128-p-cnn`   | `rv128-pv-cnn`   | `rv128-pvt-cnn`   |
 
-: Architecture 128 bit
+:Architecture 128 bit

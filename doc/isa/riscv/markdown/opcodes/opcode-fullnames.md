@@ -49,7 +49,7 @@ Format of a line in the table:
 | `fence`      | `Fence`                                                             |
 | `fence.i`    | `Fence Instruction`                                                 |
 
-: RV32I - "RV32I Base Integer Instruction Set"
+:RV32I - "RV32I Base Integer Instruction Set"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -65,7 +65,7 @@ Format of a line in the table:
 | `srlw`       | `Shift Right Logical Word`                                          |
 | `sraw`       | `Shift Right Arithmetic Word`                                       |
 
-: RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
+:RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -78,7 +78,7 @@ Format of a line in the table:
 | `rem`        | `Remainder Signed`                                                  |
 | `remu`       | `Remainder Unsigned`                                                |
 
-: RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
+:RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -88,7 +88,7 @@ Format of a line in the table:
 | `remw`       | `Remainder Signed Word`                                             |
 | `remuw`      | `Remainder Unsigned Word`                                           |
 
-: RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
+:RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -104,7 +104,7 @@ Format of a line in the table:
 | `amominu.w`  | `Atomic Minimum Unsigned Word`                                      |
 | `amomaxu.w`  | `Atomic Maximum Unsigned Word`                                      |
 
-: RV32A - "RV32A Standard Extension for Atomic Instructions"
+:RV32A - "RV32A Standard Extension for Atomic Instructions"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -120,7 +120,7 @@ Format of a line in the table:
 | `amominu.d`  | `Atomic Minimum Unsigned Double Word`                               |
 | `amomaxu.d`  | `Atomic Maximum Unsigned Double Word`                               |
 
-: RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
+:RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -146,7 +146,7 @@ Format of a line in the table:
 | `csrrsi`     | `CSR Atomic Set Bit Immediate`                                      |
 | `csrrci`     | `CSR Atomic Clear Bit Immediate`                                    |
 
-: RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
+:RV32S - "RV32S Standard Extension for Supervisor-level Instructions"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -177,7 +177,7 @@ Format of a line in the table:
 | `fclass.s`   | `FP Classify (SP)`                                                  |
 | `fmv.s.x`    | `FP Move from Integer Register (SP)`                                |
 
-: RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
+:RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -186,7 +186,7 @@ Format of a line in the table:
 | `fcvt.s.l`   | `FP Convert Double Word to Float (SP)`                              |
 | `fcvt.s.lu`  | `FP Convert Double Word Unsigned to Float (SP)`                     |
 
-: RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
+:RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -217,7 +217,7 @@ Format of a line in the table:
 | `fcvt.d.wu`  | `FP Convert Word Unsigned to Float (DP)`                            |
 | `fclass.d`   | `FP Classify (DP)`                                                  |
 
-: RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
+:RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -228,7 +228,7 @@ Format of a line in the table:
 | `fcvt.d.lu`  | `FP Convert Double Word Unsigned Float (DP)`                        |
 | `fmv.d.x`    | `FP Move from Integer Register (DP)`                                |
 
-: RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
+:RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -241,7 +241,7 @@ Format of a line in the table:
 | `fsrmi`      | `Set FP Rounding Mode Immediate`                                    |
 | `fsflagsi`   | `Set FP Accrued Exception Flags Immediate`                          |
 
-: RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
+:RV32FD - "RV32F and RV32D Common Floating-Point Instructions"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -274,7 +274,7 @@ Format of a line in the table:
 | `fcvt.q.wu`  | `FP Convert Word Unsigned to Float (QP)`                            |
 | `fclass.q`   | `FP Classify (QP)`                                                  |
 
-: RV32Q - "RV32Q Standard Extension for Quadruple-Precision Floating-Point"
+:RV32Q - "RV32Q Standard Extension for Quadruple-Precision Floating-Point"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -283,14 +283,14 @@ Format of a line in the table:
 | `fcvt.q.l`   | `FP Convert Double Word to Float (QP)`                              |
 | `fcvt.q.lu`  | `FP Convert Double Word Unsigned Float (QP)`                        |
 
-: RV64Q - "RV64Q Standard Extension for Quadruple-Precision Floating-Point (+ RV32Q)"
+:RV64Q - "RV64Q Standard Extension for Quadruple-Precision Floating-Point (+ RV32Q)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
 | `fmv.x.q`    | `FP Move to Integer Register (QP)`                                  |
 | `fmv.q.x`    | `FP Move from Integer Register (QP)`                                |
 
-: RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
+:RV128Q - "RV128Q Standard Extension for Quadruple-Precision Floating-Point (+ RV64Q)"
 
 | instruction  | instruction full name                                               |
 |--------------|:--------------------------------------------------------------------|
@@ -324,4 +324,4 @@ Format of a line in the table:
 | `jr`         | `Jump register`                                                     |
 | `ret`        | `Return from subroutine`                                            |
 
-: Pseudo Instructions
+:Pseudo Instructions

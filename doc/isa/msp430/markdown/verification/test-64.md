@@ -121,7 +121,7 @@ Format of a line in the table:
 | `rv64ui-v-xor`           | `no passed` |
 | `rv64ui-v-xori`          | `no passed` |
 
-: RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
+:RV64I - "RV64I Base Integer Instruction Set (+ RV32I)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -152,7 +152,7 @@ Format of a line in the table:
 | `rv64um-v-remuw`         | `no passed` |
 | `rv64um-v-remw`          | `no passed` |
 
-: RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
+:RV64M - "RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -195,7 +195,7 @@ Format of a line in the table:
 | `rv64ua-v-amoxor_w`      | `no passed` |
 | `rv64ua-v-lrsc`          | `no passed` |
 
-: RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
+:RV64A - "RV64A Standard Extension for Atomic Instructions (+ RV32A)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -222,7 +222,7 @@ Format of a line in the table:
 | `rv64uf-v-move`          | `no passed` |
 | `rv64uf-v-recoding`      | `no passed` |
 
-: RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
+:RV64F - "RV64F Standard Extension for Single-Precision Floating-Point (+ RV32F)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -251,14 +251,14 @@ Format of a line in the table:
 | `rv64ud-v-recoding`      | `passed`    |
 | `rv64ud-v-structural`    | `no passed` |
 
-: RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
+:RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (+ RV32D)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
 | `rv64uc-p-rvc`           | `no passed` |
 | `rv64uc-v-rvc`           | `no passed` |
 
-: RV64C - "RV64C Standard Extension for Compressed Instructions (+ RV32C)"
+:RV64C - "RV64C Standard Extension for Compressed Instructions (+ RV32C)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -279,7 +279,7 @@ Format of a line in the table:
 | `rv64uzba-v-sh3add_uw`   | `no passed` |
 | `rv64uzba-v-slli_uw`     | `no passed` |
 
-: RV64ZBA - "RV64ZBA Standard Extension (+ RV32ZBA)"
+:RV64ZBA - "RV64ZBA Standard Extension (+ RV32ZBA)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -332,7 +332,7 @@ Format of a line in the table:
 | `rv64uzbb-v-xnor`        | `no passed` |
 | `rv64uzbb-v-zext_h`      | `no passed` |
 
-: RV64ZBB - "RV64ZBB Standard Extension (+ RV32ZBB)"
+:RV64ZBB - "RV64ZBB Standard Extension (+ RV32ZBB)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -343,7 +343,7 @@ Format of a line in the table:
 | `rv64uzbc-v-clmulh`      | `no passed` |
 | `rv64uzbc-v-clmulr`      | `no passed` |
 
-: RV64ZBC - "RV64ZBC Standard Extension (+ RV32ZBC)"
+:RV64ZBC - "RV64ZBC Standard Extension (+ RV32ZBC)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -364,7 +364,7 @@ Format of a line in the table:
 | `rv64uzbs-v-bset`        | `no passed` |
 | `rv64uzbs-v-bseti`       | `no passed` |
 
-: RV64ZBS - "RV64ZBS Standard Extension (+ RV32ZBS)"
+:RV64ZBS - "RV64ZBS Standard Extension (+ RV32ZBS)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -391,7 +391,7 @@ Format of a line in the table:
 | `rv64uzfh-v-move`        | `no passed` |
 | `rv64uzfh-v-recoding`    | `no passed` |
 
-: RV64ZFH - "RV64ZFH Standard Extension (+ RV32ZFH)"
+:RV64ZFH - "RV64ZFH Standard Extension (+ RV32ZFH)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -403,13 +403,13 @@ Format of a line in the table:
 | `rv64si-p-scall`         | `no passed` |
 | `rv64si-p-wfi`           | `no passed` |
 
-: RV64I - "RV64I Standard Extension for Integer Instructions for Supervisor-level Instructions (+ RV32I)"
+:RV64I - "RV64I Standard Extension for Integer Instructions for Supervisor-level Instructions (+ RV32I)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
 | `rv64ssvnapot-p-napot`   | `no passed` |
 
-: RV64SVNAPOT - "RV64SVNAPOT Standard Extension for Supervisor-level Instructions"
+:RV64SVNAPOT - "RV64SVNAPOT Standard Extension for Supervisor-level Instructions"
 
 | test rv64                | status      |
 |--------------------------|:------------|
@@ -430,10 +430,10 @@ Format of a line in the table:
 | `rv64mi-p-sw-misaligned` | `no passed` |
 | `rv64mi-p-zicntr`        | `no passed` |
 
-: RV64I - "RV64I Standard Extension for Integer Instructions for Machine-level Instructions (+ RV32I)"
+:RV64I - "RV64I Standard Extension for Integer Instructions for Machine-level Instructions (+ RV32I)"
 
 | test rv64                | status      |
 |--------------------------|:------------|
 | `rv64mzicbo-p-zero`      | `no passed` |
 
-: RV64ZICBO - "RV64ZICBO Standard Extension for Machine-level Instructions"
+:RV64ZICBO - "RV64ZICBO Standard Extension for Machine-level Instructions"

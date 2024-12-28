@@ -18,9 +18,9 @@
 #### fn: convolution, inverse, multiplication, product, summation, transpose
 
 # LIB: MATH
-## MOD:
-### impl:
-#### fn:
+## MOD
+### impl
+#### fn
 
 # LIB: NN
 ## MOD: PNN, FNN, LSTM, NTM, DNC, ANN
@@ -30,11 +30,11 @@
 #### fn: activation_gate_vector, controller, forget_gate_vector, hidden_gate_vector, input_gate_vector, output_gate_vector, state_gate_vector
 
 # LIB: STATE
-## MOD:
-### impl:
-#### fn:
+## MOD
+### impl
+#### fn
 
 # LIB: TRAINER
-## MOD:
-### impl:
-#### fn:
+## MOD
+### impl
+#### fn

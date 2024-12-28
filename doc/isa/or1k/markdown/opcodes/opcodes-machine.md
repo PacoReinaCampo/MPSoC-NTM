@@ -46,7 +46,7 @@ Format of a line in the table:
 | `ECALL`             | `0000000`  | `00000`  | `00000`  | `000`   | `00000`  | `1110011` |
 | `EBREAK`            | `0000000`  | `00001`  | `00000`  | `000`   | `00000`  | `1110011` |
 
-: RV32I - Base Integer Instruction Set (32 bit)
+:RV32I - Base Integer Instruction Set (32 bit)
 
 | `RV64I`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  -------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -66,7 +66,7 @@ Format of a line in the table:
 | `SRLW  RD, RS1,RS2` | `0000000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0111011` |
 | `SRAW  RD, RS1,RS2` | `0100000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0111011` |
 
-: RV64I - Base Integer Instruction Set (64 bit)
+:RV64I - Base Integer Instruction Set (64 bit)
 
 | `RV32M`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  -------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -79,7 +79,7 @@ Format of a line in the table:
 | `REM    RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `110`   | `RD4:0`  | `0110011` |
 | `REMU   RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `111`   | `RD4:0`  | `0110011` |
 
-: RV32M - Standard Extension for Integer Multiply and Divide (32 bit)
+:RV32M - Standard Extension for Integer Multiply and Divide (32 bit)
 
 | `RV64M`              | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  --------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -89,7 +89,7 @@ Format of a line in the table:
 | `REMW  RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `110`   | `RD4:0`  | `0111011` |
 | `REMUW RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `111`   | `RD4:0`  | `0111011` |
 
-: RV64M - Standard Extension for Integer Multiply and Divide (64 bit)
+:RV64M - Standard Extension for Integer Multiply and Divide (64 bit)
 
 | `RV32A`                     | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  ---------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -105,7 +105,7 @@ Format of a line in the table:
 | `AMOMINU.W AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
 | `AMOMAXU.W AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
 
-: RV32A - Standard Extension for Atomic Instructions (32 bit)
+:RV32A - Standard Extension for Atomic Instructions (32 bit)
 
 | `RV64A`                     | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  ---------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -121,7 +121,7 @@ Format of a line in the table:
 | `AMOMINU.D AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
 | `AMOMAXU.D AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
 
-: RV64A - Standard Extension for Atomic Instructions (64 bit)
+:RV64A - Standard Extension for Atomic Instructions (64 bit)
 
 | `RV32F`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -160,7 +160,7 @@ Format of a line in the table:
 | `FSRMI`                          | `0000000`   | `00010`  | `00000`  | `101`   | `RD`     | `1110011` |
 | `FSFLAGSI`                       | `0000000`   | `00001`  | `00000`  | `101`   | `RD`     | `1110011` |
 
-: RV32F - Standard Extension for Single-Precision Floating-Point (32 bit)
+:RV32F - Standard Extension for Single-Precision Floating-Point (32 bit)
 
 | `RV64F`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -169,7 +169,7 @@ Format of a line in the table:
 | `FCVT.S.L RM,RD,FRS1`            | `1101000`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
 | `FCVT.S.LU RM,RD,FRS1`           | `1101000`   | `00011`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
 
-: RV64F - Standard Extension for Single-Precision Floating-Point (64 bit)
+:RV64F - Standard Extension for Single-Precision Floating-Point (64 bit)
 
 | `RV32D`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -202,7 +202,7 @@ Format of a line in the table:
 | `FCVT.D.W`                       | `1101001`   | `00000`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
 | `FCVT.D.WU`                      | `1101001`   | `00001`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
 
-: RV32D - Standard Extension for Double-Precision Floating-Point (32 bit)
+:RV32D - Standard Extension for Double-Precision Floating-Point (32 bit)
 
 | `RV64D`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
 |  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
@@ -213,4 +213,4 @@ Format of a line in the table:
 | `FMV.X.D RD,FRS1`                | `1110001`   | `00000`  | `FRS1`   | `000`   | `RD`     | `1010011` |
 | `FMV.D.X RD,FRS1`                | `1111001`   | `00000`  | `RS1`    | `000`   | `FRD`    | `1010011` |
 
-: RV64D - Standard Extension for Double-Precision Floating-Point (64 bit)
+:RV64D - Standard Extension for Double-Precision Floating-Point (64 bit)

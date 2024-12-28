@@ -55,4 +55,4 @@ Format of a line in the table:
 | `c.lqsp`     | `lq     imm_10 imm_x16`        | `rs1_eq_sp`                     |
 | `c.sqsp`     | `sq     imm_10 imm_x16`        | `rs1_eq_sp`                     |
 
-: Compressed Instruction
+:Compressed Instruction
