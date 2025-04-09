@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/statitics/matrix/ntm_matrix_deviation/ntm_design.sv
+../../../../../../../../verification/uvm/application/math/matrix/ntm_matrix_deviation/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/statitics/matrix/ntm_matrix_deviation/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/math/matrix/ntm_matrix_deviation/ntm_uvm_testbench.sv

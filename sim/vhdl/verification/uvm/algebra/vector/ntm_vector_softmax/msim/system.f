@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/calculus/vector/ntm_vector_softmax/ntm_design.sv
+../../../../../../../../verification/uvm/application/math/vector/ntm_vector_softmax/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/calculus/vector/ntm_vector_softmax/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/math/vector/ntm_vector_softmax/ntm_uvm_testbench.sv

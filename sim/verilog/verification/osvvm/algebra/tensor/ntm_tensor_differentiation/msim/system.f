@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/calculus/tensor/ntm_tensor_differentiation/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/calculus/tensor/ntm_tensor_differentiation/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/math/tensor/ntm_tensor_differentiation/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/math/tensor/ntm_tensor_differentiation/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/tensor/ntm_tensor_differentiation/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/calculus/tensor/ntm_tensor_differentiation/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/math/tensor/ntm_tensor_differentiation/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/math/tensor/ntm_tensor_differentiation/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/tensor/ntm_tensor_differentiation/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/math/tensor/ntm_tensor_differentiation/ntm_testbench.vhd

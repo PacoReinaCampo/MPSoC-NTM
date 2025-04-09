@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/algebra/scalar/ntm_scalar_summation/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/algebra/scalar/ntm_scalar_summation/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/algebra/scalar/ntm_scalar_summation/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/algebra/scalar/ntm_scalar_summation/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/scalar/ntm_scalar_summation/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/algebra/scalar/ntm_scalar_summation/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/algebra/scalar/ntm_scalar_summation/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/algebra/scalar/ntm_scalar_summation/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/scalar/ntm_scalar_summation/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/algebra/scalar/ntm_scalar_summation/ntm_testbench.vhd

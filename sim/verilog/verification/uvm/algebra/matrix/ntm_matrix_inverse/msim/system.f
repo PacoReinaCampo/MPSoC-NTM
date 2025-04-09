@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/algebra/matrix/ntm_matrix_inverse/ntm_design.sv
+../../../../../../../../verification/uvm/application/algebra/matrix/ntm_matrix_inverse/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/algebra/matrix/ntm_matrix_inverse/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/algebra/matrix/ntm_matrix_inverse/ntm_uvm_testbench.sv

@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/function/matrix/ntm_matrix_logistic_function/ntm_design.sv
+../../../../../../../../verification/uvm/application/math/matrix/ntm_matrix_logistic_function/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/function/matrix/ntm_matrix_logistic_function/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/math/matrix/ntm_matrix_logistic_function/ntm_uvm_testbench.sv

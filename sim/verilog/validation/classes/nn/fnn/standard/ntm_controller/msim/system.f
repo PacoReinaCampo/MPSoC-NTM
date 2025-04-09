@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../validation/classes/application/nn/FNN/standard/ntm_controller/ntm_design.sv
+../../../../../../../../../../validation/classes/application/nn/fnn/standard/ntm_controller/ntm_design.sv
 
-../../../../../../../../../../validation/classes/library/nn/FNN/standard/ntm_controller/ntm_testbench.sv
+../../../../../../../../../../validation/classes/library/nn/fnn/standard/ntm_controller/ntm_testbench.sv

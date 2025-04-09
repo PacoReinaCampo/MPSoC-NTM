@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/trainer/FNN/ntm_fnn_b_trainer/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/trainer/FNN/ntm_fnn_b_trainer/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/trainer/fnn/ntm_fnn_b_trainer/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/trainer/fnn/ntm_fnn_b_trainer/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/FNN/ntm_fnn_b_trainer/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/trainer/FNN/ntm_fnn_b_trainer/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/trainer/fnn/ntm_fnn_b_trainer/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/trainer/fnn/ntm_fnn_b_trainer/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/FNN/ntm_fnn_b_trainer/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/trainer/fnn/ntm_fnn_b_trainer/ntm_testbench.vhd

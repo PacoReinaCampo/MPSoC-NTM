@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/function/scalar/ntm_scalar_oneplus_function/ntm_design.sv
+../../../../../../../../verification/uvm/application/math/scalar/ntm_scalar_oneplus_function/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/function/scalar/ntm_scalar_oneplus_function/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/math/scalar/ntm_scalar_oneplus_function/ntm_uvm_testbench.sv

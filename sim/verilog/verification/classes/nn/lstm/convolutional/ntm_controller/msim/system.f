@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../verification/classes/application/nn/LSTM/convolutional/ntm_controller/ntm_design.sv
+../../../../../../../../../../verification/classes/application/nn/lstm/convolutional/ntm_controller/ntm_design.sv
 
-../../../../../../../../../../verification/classes/library/nn/LSTM/convolutional/ntm_controller/ntm_testbench.sv
+../../../../../../../../../../verification/classes/library/nn/lstm/convolutional/ntm_controller/ntm_testbench.sv

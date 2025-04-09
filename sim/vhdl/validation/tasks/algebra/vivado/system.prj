@@ -25,18 +25,18 @@ vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_multiplier.vhd
 vhdl2008 work ../../../../../../../model/vhdl/code/arithmetic/float/matrix/model_matrix_float_divider.vhd
 
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/vector/model_vector_differentiation.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/vector/model_vector_integration.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/vector/model_vector_softmax.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/vector/model_vector_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/vector/model_vector_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/vector/model_vector_softmax.vhd
 
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/matrix/model_matrix_differentiation.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/matrix/model_matrix_integration.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/matrix/model_matrix_softmax.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/matrix/model_matrix_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/matrix/model_matrix_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/matrix/model_matrix_softmax.vhd
 
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_differentiation.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_integration.vhd
-vhdl2008 work ../../../../../../../model/vhdl/code/math/calculus/tensor/model_tensor_softmax.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/tensor/model_tensor_differentiation.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/tensor/model_tensor_integration.vhd
+vhdl2008 work ../../../../../../../model/vhdl/code/math/tensor/model_tensor_softmax.vhd
 
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/calculus/model_calculus_pkg.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/calculus/model_calculus_stimulus.vhd
-vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/calculus/model_calculus_testbench.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/model_calculus_pkg.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/model_calculus_stimulus.vhd
+vhdl2008 work ../../../../../../../validation/tasks/vhdl/library/math/model_calculus_testbench.vhd

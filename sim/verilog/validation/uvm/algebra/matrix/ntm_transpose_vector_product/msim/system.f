@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/math/algebra/matrix/ntm_transpose_vector_product/ntm_design.sv
+../../../../../../../../validation/uvm/application/algebra/matrix/ntm_transpose_vector_product/ntm_design.sv
 
-../../../../../../../../../validation/uvm/library/math/algebra/matrix/ntm_transpose_vector_product/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/algebra/matrix/ntm_transpose_vector_product/ntm_uvm_testbench.sv

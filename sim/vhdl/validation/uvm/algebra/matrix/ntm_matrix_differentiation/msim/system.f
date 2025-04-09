@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/math/calculus/matrix/ntm_matrix_differentiation/ntm_design.sv
+../../../../../../../../validation/uvm/application/math/matrix/ntm_matrix_differentiation/ntm_design.sv
 
-../../../../../../../../../validation/uvm/library/math/calculus/matrix/ntm_matrix_differentiation/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/math/matrix/ntm_matrix_differentiation/ntm_uvm_testbench.sv

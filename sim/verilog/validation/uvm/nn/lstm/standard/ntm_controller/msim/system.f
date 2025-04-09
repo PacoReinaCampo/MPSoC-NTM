@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../validation/uvm/application/nn/LSTM/standard/ntm_controller/ntm_design.sv
+../../../../../../../../../../validation/uvm/application/nn/lstm/standard/ntm_controller/ntm_design.sv
 
-../../../../../../../../../../validation/uvm/library/nn/LSTM/standard/ntm_controller/ntm_uvm_testbench.sv
+../../../../../../../../../../validation/uvm/library/nn/lstm/standard/ntm_controller/ntm_uvm_testbench.sv

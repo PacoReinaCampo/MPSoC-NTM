@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../verification/uvm/application/nn/LSTM/convolutional/ntm_hidden_gate_vector/ntm_design.sv
+../../../../../../../../../../verification/uvm/application/nn/lstm/convolutional/ntm_hidden_gate_vector/ntm_design.sv
 
-../../../../../../../../../../verification/uvm/library/nn/LSTM/convolutional/ntm_hidden_gate_vector/ntm_uvm_testbench.sv
+../../../../../../../../../../verification/uvm/library/nn/lstm/convolutional/ntm_hidden_gate_vector/ntm_uvm_testbench.sv

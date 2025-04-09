@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../verification/osvvm/application/nn/FNN/standard/ntm_controller/ntm_design.vhd
-../../../../../../../../../../verification/osvvm/application/nn/FNN/standard/ntm_controller/ntm_design_pkg.vhd
+../../../../../../../../../../verification/osvvm/application/nn/fnn/standard/ntm_controller/ntm_design.vhd
+../../../../../../../../../../verification/osvvm/application/nn/fnn/standard/ntm_controller/ntm_design_pkg.vhd
 
-../../../../../../../../../../verification/osvvm/library/nn/FNN/standard/ntm_controller/ntm_model.vhd
-../../../../../../../../../../verification/osvvm/library/nn/FNN/standard/ntm_controller/ntm_model_pkg.vhd
+../../../../../../../../../../verification/osvvm/library/nn/fnn/standard/ntm_controller/ntm_model.vhd
+../../../../../../../../../../verification/osvvm/library/nn/fnn/standard/ntm_controller/ntm_model_pkg.vhd
 
-../../../../../../../../../../verification/osvvm/library/nn/FNN/standard/ntm_controller/ntm_testbench.vhd
+../../../../../../../../../../verification/osvvm/library/nn/fnn/standard/ntm_controller/ntm_testbench.vhd

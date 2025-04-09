@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/math/algebra/tensor/ntm_tensor_inverse/ntm_design.sv
+../../../../../../../../verification/uvm/application/algebra/tensor/ntm_tensor_inverse/ntm_design.sv
 
-../../../../../../../../../verification/uvm/library/math/algebra/tensor/ntm_tensor_inverse/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/algebra/tensor/ntm_tensor_inverse/ntm_uvm_testbench.sv

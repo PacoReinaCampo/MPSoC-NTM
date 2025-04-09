@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/algebra/matrix/ntm_matrix_multiplication/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/algebra/matrix/ntm_matrix_multiplication/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/algebra/matrix/ntm_matrix_multiplication/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/algebra/matrix/ntm_matrix_multiplication/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_multiplication/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_multiplication/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_multiplication/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_multiplication/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_multiplication/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_multiplication/ntm_testbench.vhd

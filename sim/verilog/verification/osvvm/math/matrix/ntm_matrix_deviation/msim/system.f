@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/statitics/matrix/ntm_matrix_deviation/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/statitics/matrix/ntm_matrix_deviation/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/math/matrix/ntm_matrix_deviation/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/math/matrix/ntm_matrix_deviation/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/statitics/matrix/ntm_matrix_deviation/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/statitics/matrix/ntm_matrix_deviation/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_deviation/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_deviation/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/statitics/matrix/ntm_matrix_deviation/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_deviation/ntm_testbench.vhd

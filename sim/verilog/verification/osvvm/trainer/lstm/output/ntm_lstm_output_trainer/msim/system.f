@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/trainer/LSTM/output/ntm_lstm_output_trainer/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/trainer/LSTM/output/ntm_lstm_output_trainer/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/trainer/lstm/output/ntm_lstm_output_trainer/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/trainer/lstm/output/ntm_lstm_output_trainer/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/LSTM/output/ntm_lstm_output_trainer/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/trainer/LSTM/output/ntm_lstm_output_trainer/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/trainer/lstm/output/ntm_lstm_output_trainer/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/trainer/lstm/output/ntm_lstm_output_trainer/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/LSTM/output/ntm_lstm_output_trainer/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/trainer/lstm/output/ntm_lstm_output_trainer/ntm_testbench.vhd

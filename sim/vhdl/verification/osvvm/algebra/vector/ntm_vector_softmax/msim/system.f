@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/calculus/vector/ntm_vector_softmax/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/calculus/vector/ntm_vector_softmax/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/math/vector/ntm_vector_softmax/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/math/vector/ntm_vector_softmax/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/vector/ntm_vector_softmax/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/calculus/vector/ntm_vector_softmax/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/math/vector/ntm_vector_softmax/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/math/vector/ntm_vector_softmax/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/vector/ntm_vector_softmax/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/math/vector/ntm_vector_softmax/ntm_testbench.vhd

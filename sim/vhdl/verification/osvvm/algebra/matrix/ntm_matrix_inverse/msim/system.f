@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/algebra/matrix/ntm_matrix_inverse/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/algebra/matrix/ntm_matrix_inverse/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/algebra/matrix/ntm_matrix_inverse/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/algebra/matrix/ntm_matrix_inverse/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_inverse/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_inverse/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_inverse/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_inverse/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/matrix/ntm_matrix_inverse/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/algebra/matrix/ntm_matrix_inverse/ntm_testbench.vhd

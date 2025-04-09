@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/algebra/vector/ntm_vector_convolution/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/algebra/vector/ntm_vector_convolution/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/algebra/vector/ntm_vector_convolution/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/algebra/vector/ntm_vector_convolution/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_convolution/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_convolution/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/algebra/vector/ntm_vector_convolution/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/algebra/vector/ntm_vector_convolution/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/algebra/vector/ntm_vector_convolution/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/algebra/vector/ntm_vector_convolution/ntm_testbench.vhd

@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../verification/uvm/src
 
-../../../../../../../../verification/uvm/application/trainer/LSTM/forget/ntm_lstm_forget_trainer/ntm_design.sv
+../../../../../../../../verification/uvm/application/trainer/lstm/forget/ntm_lstm_forget_trainer/ntm_design.sv
 
-../../../../../../../../verification/uvm/library/trainer/LSTM/forget/ntm_lstm_forget_trainer/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/trainer/lstm/forget/ntm_lstm_forget_trainer/ntm_uvm_testbench.sv

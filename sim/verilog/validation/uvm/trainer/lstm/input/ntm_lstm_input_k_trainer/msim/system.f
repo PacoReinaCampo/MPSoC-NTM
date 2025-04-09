@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/trainer/LSTM/input/ntm_lstm_input_k_trainer/ntm_design.sv
+../../../../../../../../validation/uvm/application/trainer/lstm/input/ntm_lstm_input_k_trainer/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/trainer/LSTM/input/ntm_lstm_input_k_trainer/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/trainer/lstm/input/ntm_lstm_input_k_trainer/ntm_uvm_testbench.sv

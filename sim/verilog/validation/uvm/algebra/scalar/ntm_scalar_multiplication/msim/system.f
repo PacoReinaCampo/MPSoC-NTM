@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/math/algebra/scalar/ntm_scalar_multiplication/ntm_design.sv
+../../../../../../../../validation/uvm/application/algebra/scalar/ntm_scalar_multiplication/ntm_design.sv
 
-../../../../../../../../../validation/uvm/library/math/algebra/scalar/ntm_scalar_multiplication/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/algebra/scalar/ntm_scalar_multiplication/ntm_uvm_testbench.sv

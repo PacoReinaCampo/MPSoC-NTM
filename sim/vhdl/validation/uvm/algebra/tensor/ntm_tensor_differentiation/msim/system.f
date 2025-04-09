@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/math/calculus/tensor/ntm_tensor_differentiation/ntm_design.sv
+../../../../../../../../validation/uvm/application/math/tensor/ntm_tensor_differentiation/ntm_design.sv
 
-../../../../../../../../../validation/uvm/library/math/calculus/tensor/ntm_tensor_differentiation/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/math/tensor/ntm_tensor_differentiation/ntm_uvm_testbench.sv

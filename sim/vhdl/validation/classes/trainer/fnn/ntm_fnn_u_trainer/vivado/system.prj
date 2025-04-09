@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../validation/classes/application/trainer/FNN/ntm_fnn_u_trainer/ntm_design.sv
+sv work ../../../../../../../../validation/classes/application/trainer/fnn/ntm_fnn_u_trainer/ntm_design.sv
 
-sv work ../../../../../../../../validation/classes/library/trainer/FNN/ntm_fnn_u_trainer/ntm_testbench.sv
+sv work ../../../../../../../../validation/classes/library/trainer/fnn/ntm_fnn_u_trainer/ntm_testbench.sv

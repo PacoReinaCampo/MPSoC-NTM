@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/math/calculus/matrix/ntm_matrix_differentiation/ntm_design.vhd
-../../../../../../../../../verification/osvvm/application/math/calculus/matrix/ntm_matrix_differentiation/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/math/matrix/ntm_matrix_differentiation/ntm_design.vhd
+../../../../../../../../verification/osvvm/application/math/matrix/ntm_matrix_differentiation/ntm_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/matrix/ntm_matrix_differentiation/ntm_model.vhd
-../../../../../../../../../verification/osvvm/library/math/calculus/matrix/ntm_matrix_differentiation/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_differentiation/ntm_model.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_differentiation/ntm_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/math/calculus/matrix/ntm_matrix_differentiation/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/math/matrix/ntm_matrix_differentiation/ntm_testbench.vhd

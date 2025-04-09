@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../verification/classes/application/nn/LSTM/standard/ntm_input_gate_vector/ntm_design.sv
+../../../../../../../../../../verification/classes/application/nn/lstm/standard/ntm_input_gate_vector/ntm_design.sv
 
-../../../../../../../../../../verification/classes/library/nn/LSTM/standard/ntm_input_gate_vector/ntm_testbench.sv
+../../../../../../../../../../verification/classes/library/nn/lstm/standard/ntm_input_gate_vector/ntm_testbench.sv

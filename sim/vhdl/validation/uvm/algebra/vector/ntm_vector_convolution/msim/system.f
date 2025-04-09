@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/math/algebra/vector/ntm_vector_convolution/ntm_design.sv
+../../../../../../../../validation/uvm/application/algebra/vector/ntm_vector_convolution/ntm_design.sv
 
-../../../../../../../../../validation/uvm/library/math/algebra/vector/ntm_vector_convolution/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/algebra/vector/ntm_vector_convolution/ntm_uvm_testbench.sv

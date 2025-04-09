@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../validation/classes/application/nn/LSTM/convolutional/ntm_output_gate_vector/ntm_design.sv
+../../../../../../../../../../validation/classes/application/nn/lstm/convolutional/ntm_output_gate_vector/ntm_design.sv
 
-../../../../../../../../../../validation/classes/library/nn/LSTM/convolutional/ntm_output_gate_vector/ntm_testbench.sv
+../../../../../../../../../../validation/classes/library/nn/lstm/convolutional/ntm_output_gate_vector/ntm_testbench.sv
