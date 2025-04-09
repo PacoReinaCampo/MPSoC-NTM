@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/finite_state_machine/finite_state_machine/application/switch.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/classes/computing/information/finite_state_machine/finite_state_machine/application/switch.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/finite_state_machine/finite_state_machine/library/testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/classes/computing/information/finite_state_machine/finite_state_machine/library/testbench.sv

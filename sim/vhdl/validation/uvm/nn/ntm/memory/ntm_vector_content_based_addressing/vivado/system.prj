@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../validation/uvm/application/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_design.sv
+sv work ../../../../../../../../../validation/uvm/application/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_design.sv
 
-sv work ../../../../../../../../validation/uvm/library/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_uvm_testbench.sv
+sv work ../../../../../../../../../validation/uvm/library/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_uvm_testbench.sv

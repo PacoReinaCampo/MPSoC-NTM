@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../verification/uvm/src
 
 ../../../../../../../../verification/uvm/application/algebra/tensor/ntm_tensor_transpose/ntm_design.sv
 

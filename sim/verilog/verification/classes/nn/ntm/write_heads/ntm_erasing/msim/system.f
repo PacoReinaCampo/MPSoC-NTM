@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/classes/application/nn/NTM/write_heads/ntm_erasing/ntm_design.sv
+../../../../../../../../../verification/classes/application/nn/ntm/write_heads/ntm_erasing/ntm_design.sv
 
-../../../../../../../../verification/classes/library/nn/NTM/write_heads/ntm_erasing/ntm_testbench.sv
+../../../../../../../../../verification/classes/library/nn/ntm/write_heads/ntm_erasing/ntm_testbench.sv

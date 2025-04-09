@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/nn/NTM/top/ntm_interface_matrix/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/nn/NTM/top/ntm_interface_matrix/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/top/ntm_interface_matrix/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/top/ntm_interface_matrix/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/top/ntm_interface_matrix/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/nn/NTM/top/ntm_interface_matrix/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/top/ntm_interface_matrix/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/top/ntm_interface_matrix/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/top/ntm_interface_matrix/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/top/ntm_interface_matrix/ntm_testbench.vhd

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/classes/application/nn/ANN/top/ntm_encoder/ntm_design.sv
+../../../../../../../../../verification/classes/application/nn/ann/top/ntm_encoder/ntm_design.sv
 
-../../../../../../../verification/classes/library/nn/ANN/top/ntm_encoder/ntm_testbench.sv
+../../../../../../../../../verification/classes/library/nn/ann/top/ntm_encoder/ntm_testbench.sv

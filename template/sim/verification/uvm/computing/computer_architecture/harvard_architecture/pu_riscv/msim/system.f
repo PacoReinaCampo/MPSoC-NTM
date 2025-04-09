@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/computer_architecture/harvard_architecture/pu_riscv/application/fsm.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/computer_architecture/harvard_architecture/pu_riscv/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/computer_architecture/harvard_architecture/pu_riscv/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/computer_architecture/harvard_architecture/pu_riscv/library/peripheral_testbench.sv

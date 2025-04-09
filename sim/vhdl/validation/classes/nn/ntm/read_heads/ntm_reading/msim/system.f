@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/nn/NTM/read_heads/ntm_reading/ntm_design.sv
+../../../../../../../../../validation/classes/application/nn/ntm/read_heads/ntm_reading/ntm_design.sv
 
-../../../../../../../../validation/classes/library/nn/NTM/read_heads/ntm_reading/ntm_testbench.sv
+../../../../../../../../../validation/classes/library/nn/ntm/read_heads/ntm_reading/ntm_testbench.sv

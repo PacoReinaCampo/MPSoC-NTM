@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_design.sv
+../../../../../../../../../validation/classes/application/nn/ntm/memory/ntm_matrix_content_based_addressing/ntm_design.sv
 
-../../../../../../../../validation/classes/library/nn/NTM/memory/ntm_matrix_content_based_addressing/ntm_testbench.sv
+../../../../../../../../../validation/classes/library/nn/ntm/memory/ntm_matrix_content_based_addressing/ntm_testbench.sv

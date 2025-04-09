@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
 ../../../../../../../../validation/uvm/application/algebra/tensor/ntm_tensor_product/ntm_design.sv
 

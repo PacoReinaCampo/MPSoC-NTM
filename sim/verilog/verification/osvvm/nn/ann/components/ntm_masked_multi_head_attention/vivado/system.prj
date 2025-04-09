@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_masked_multi_head_attention/ntm_design.vhd
-vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_masked_multi_head_attention/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ann/components/ntm_masked_multi_head_attention/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ann/components/ntm_masked_multi_head_attention/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_multi_head_attention/ntm_model.vhd
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_multi_head_attention/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_multi_head_attention/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_multi_head_attention/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_multi_head_attention/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_multi_head_attention/ntm_testbench.vhd

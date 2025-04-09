@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/mimd/application/fsm.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/mimd/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/mimd/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/mimd/library/peripheral_testbench.sv

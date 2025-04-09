@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/testbench.sv

@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../verification/uvm/src
 
 ../../../../../../../../verification/uvm/application/math/scalar/ntm_scalar_oneplus_function/ntm_design.sv
 

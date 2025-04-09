@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
 ../../../../../../../../validation/uvm/application/algebra/scalar/ntm_scalar_multiplication/ntm_design.sv
 

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/logic_circuits/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/logic_circuits/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/logic_circuits/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/logic_circuits/library/testbench.sv

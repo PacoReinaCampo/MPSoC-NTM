@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
-../../../../../../../verification/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
-../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd

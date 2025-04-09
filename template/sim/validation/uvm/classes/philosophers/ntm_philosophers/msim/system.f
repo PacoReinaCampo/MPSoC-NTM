@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/classes/philosophers/ntm_philosophers/application/fsm.sv
+../../../../../../../../template/traditional/sim/validation/uvm/classes/philosophers/ntm_philosophers/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/classes/philosophers/ntm_philosophers/library/peripheral_testbench.sv
+../../../../../../../../template/traditional/sim/validation/uvm/classes/philosophers/ntm_philosophers/library/peripheral_testbench.sv

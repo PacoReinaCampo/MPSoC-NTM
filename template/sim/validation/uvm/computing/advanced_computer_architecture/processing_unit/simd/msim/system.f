@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/processing_unit/simd/application/fsm.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/processing_unit/simd/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/processing_unit/simd/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/advanced_computer_architecture/processing_unit/simd/library/peripheral_testbench.sv

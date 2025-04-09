@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/arithmetic_circuits/application/switch.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/arithmetic_circuits/application/switch.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/arithmetic_circuits/library/testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/information/combinational_logic/arithmetic_circuits/library/testbench.sv

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/classes/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design.sv
+../../../../../../../../../validation/classes/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design.sv
 
-../../../../../../../validation/classes/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.sv
+../../../../../../../../../validation/classes/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.sv

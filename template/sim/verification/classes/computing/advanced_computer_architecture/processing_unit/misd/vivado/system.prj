@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/misd/application/switch.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/misd/application/switch.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/misd/library/testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/misd/library/testbench.sv

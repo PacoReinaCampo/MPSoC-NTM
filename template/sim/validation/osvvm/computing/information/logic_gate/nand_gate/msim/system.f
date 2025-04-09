@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/logic_gate/nand_gate/library/ntm_testbench.vhd

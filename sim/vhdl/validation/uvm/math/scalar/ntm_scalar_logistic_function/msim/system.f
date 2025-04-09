@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
 ../../../../../../../../validation/uvm/application/math/scalar/ntm_scalar_logistic_function/ntm_design.sv
 

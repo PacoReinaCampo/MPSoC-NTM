@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/osvvm/application/nn/ANN/top/ntm_decoder/ntm_design.vhd
-../../../../../../../verification/osvvm/application/nn/ANN/top/ntm_decoder/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/top/ntm_decoder/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/top/ntm_decoder/ntm_design_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/top/ntm_decoder/ntm_model.vhd
-../../../../../../../verification/osvvm/library/nn/ANN/top/ntm_decoder/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/top/ntm_decoder/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/top/ntm_decoder/ntm_model_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/top/ntm_decoder/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/top/ntm_decoder/ntm_testbench.vhd

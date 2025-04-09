@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../verification/osvvm/application/nn/lstm/standard/ntm_input_gate_vector/ntm_design.vhd
-../../../../../../../../../../verification/osvvm/application/nn/lstm/standard/ntm_input_gate_vector/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/lstm/standard/ntm_input_gate_vector/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/lstm/standard/ntm_input_gate_vector/ntm_design_pkg.vhd
 
-../../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_model.vhd
-../../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_model_pkg.vhd
 
-../../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/lstm/standard/ntm_input_gate_vector/ntm_testbench.vhd

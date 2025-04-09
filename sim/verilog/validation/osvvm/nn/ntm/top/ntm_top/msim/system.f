@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/nn/NTM/top/ntm_top/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/nn/NTM/top/ntm_top/ntm_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/nn/ntm/top/ntm_top/ntm_design.vhd
+../../../../../../../../../validation/osvvm/application/nn/ntm/top/ntm_top/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/top/ntm_top/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/nn/NTM/top/ntm_top/ntm_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/top/ntm_top/ntm_model.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/top/ntm_top/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/top/ntm_top/ntm_testbench.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/top/ntm_top/ntm_testbench.vhd

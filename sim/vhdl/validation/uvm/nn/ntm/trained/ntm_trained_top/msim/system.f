@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/nn/NTM/trained/ntm_trained_top/ntm_design.sv
+../../../../../../../../../validation/uvm/application/nn/ntm/trained/ntm_trained_top/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/nn/NTM/trained/ntm_trained_top/ntm_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/nn/ntm/trained/ntm_trained_top/ntm_uvm_testbench.sv

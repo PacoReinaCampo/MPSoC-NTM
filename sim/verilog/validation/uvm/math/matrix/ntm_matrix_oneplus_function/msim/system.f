@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
 ../../../../../../../../validation/uvm/application/math/matrix/ntm_matrix_oneplus_function/ntm_design.sv
 

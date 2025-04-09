@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/classes/workers/ntm_workers/application/switch.sv
+../../../../../../../../template/traditional/sim/verification/classes/classes/workers/ntm_workers/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/classes/workers/ntm_workers/library/testbench.sv
+../../../../../../../../template/traditional/sim/verification/classes/classes/workers/ntm_workers/library/testbench.sv

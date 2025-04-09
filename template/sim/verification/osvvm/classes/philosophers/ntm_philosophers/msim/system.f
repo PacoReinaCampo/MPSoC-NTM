@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/application/ntm_design_pkg.vhd
+../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/application/ntm_design.vhd
+../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_model_pkg.vhd
+../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_model.vhd
+../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_testbench.vhd
+../../../../../../../../template/traditional/sim/verification/osvvm/classes/philosophers/ntm_philosophers/library/ntm_testbench.vhd

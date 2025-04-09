@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/combinational_logic/logic_circuits/library/ntm_testbench.vhd

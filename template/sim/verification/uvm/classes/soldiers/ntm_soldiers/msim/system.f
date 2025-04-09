@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/classes/soldiers/ntm_soldiers/application/fsm.sv
+../../../../../../../../template/traditional/sim/verification/uvm/classes/soldiers/ntm_soldiers/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/classes/soldiers/ntm_soldiers/library/peripheral_testbench.sv
+../../../../../../../../template/traditional/sim/verification/uvm/classes/soldiers/ntm_soldiers/library/peripheral_testbench.sv

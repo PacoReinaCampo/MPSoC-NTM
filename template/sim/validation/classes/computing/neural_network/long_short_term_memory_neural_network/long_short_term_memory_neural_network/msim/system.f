@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/application/switch.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/testbench.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network/library/testbench.sv

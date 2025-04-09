@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design.vhd
-vhdl2008 work ../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/application/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_model.vhd
-vhdl2008 work ../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../template/traditional/sim/verification/osvvm/computing/neural_network/attention_neural_network/attention_neural_network/library/ntm_testbench.vhd

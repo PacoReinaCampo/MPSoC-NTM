@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/advanced_computer_architecture/processing_unit/simd/library/ntm_testbench.vhd

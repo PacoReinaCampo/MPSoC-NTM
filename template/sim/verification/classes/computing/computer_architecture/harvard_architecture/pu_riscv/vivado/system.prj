@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_riscv/application/switch.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_riscv/application/switch.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_riscv/library/testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_riscv/library/testbench.sv

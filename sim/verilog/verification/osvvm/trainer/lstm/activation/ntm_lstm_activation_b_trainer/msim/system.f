@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/trainer/lstm/activation/ntm_lstm_activation_b_trainer/ntm_testbench.vhd

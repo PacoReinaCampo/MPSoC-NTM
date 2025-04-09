@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_testbench.vhd

@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/nn/NTM/write_heads/ntm_writing/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/nn/NTM/write_heads/ntm_writing/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/write_heads/ntm_writing/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/write_heads/ntm_writing/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_testbench.vhd

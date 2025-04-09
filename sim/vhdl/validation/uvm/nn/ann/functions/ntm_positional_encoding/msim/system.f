@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../validation/uvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design.sv
+../../../../../../../../../validation/uvm/application/nn/ann/functions/ntm_positional_encoding/ntm_design.sv
 
-../../../../../../../validation/uvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/nn/ann/functions/ntm_positional_encoding/ntm_uvm_testbench.sv

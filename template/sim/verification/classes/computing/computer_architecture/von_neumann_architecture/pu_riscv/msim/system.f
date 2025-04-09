@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/testbench.sv

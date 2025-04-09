@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../verification/uvm/src
 
 ../../../../../../../../verification/uvm/application/algebra/matrix/ntm_transpose_vector_product/ntm_design.sv
 

@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../verification/uvm/src
 
 ../../../../../../../../verification/uvm/application/math/matrix/ntm_matrix_logistic_function/ntm_design.sv
 

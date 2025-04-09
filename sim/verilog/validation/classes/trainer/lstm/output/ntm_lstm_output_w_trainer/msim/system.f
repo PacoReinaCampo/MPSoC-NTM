@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/trainer/lstm/output/ntm_lstm_output_w_trainer/ntm_design.sv
+../../../../../../../../../validation/classes/application/trainer/lstm/output/ntm_lstm_output_w_trainer/ntm_design.sv
 
-../../../../../../../../validation/classes/library/trainer/lstm/output/ntm_lstm_output_w_trainer/ntm_testbench.sv
+../../../../../../../../../validation/classes/library/trainer/lstm/output/ntm_lstm_output_w_trainer/ntm_testbench.sv

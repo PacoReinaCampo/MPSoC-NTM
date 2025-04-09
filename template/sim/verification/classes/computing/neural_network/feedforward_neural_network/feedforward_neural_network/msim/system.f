@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/testbench.sv

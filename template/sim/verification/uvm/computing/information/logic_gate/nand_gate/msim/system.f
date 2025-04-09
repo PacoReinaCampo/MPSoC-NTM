@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/nand_gate/application/fsm.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/nand_gate/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/nand_gate/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/logic_gate/nand_gate/library/peripheral_testbench.sv

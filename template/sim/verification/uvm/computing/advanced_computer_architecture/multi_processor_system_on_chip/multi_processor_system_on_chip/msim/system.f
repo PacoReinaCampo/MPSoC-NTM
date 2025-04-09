@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/fsm.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/peripheral_testbench.sv

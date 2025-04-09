@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design.vhd
-../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_positional_encoding/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_positional_encoding/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_positional_encoding/ntm_design_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model.vhd
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_positional_encoding/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_positional_encoding/ntm_model_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_positional_encoding/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_positional_encoding/ntm_testbench.vhd

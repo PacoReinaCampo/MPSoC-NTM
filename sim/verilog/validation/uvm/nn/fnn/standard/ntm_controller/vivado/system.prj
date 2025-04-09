@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../validation/uvm/application/nn/fnn/standard/ntm_controller/ntm_design.sv
+sv work ../../../../../../../../../validation/uvm/application/nn/fnn/standard/ntm_controller/ntm_design.sv
 
-sv work ../../../../../../../../../../validation/uvm/library/nn/fnn/standard/ntm_controller/ntm_uvm_testbench.sv
+sv work ../../../../../../../../../validation/uvm/library/nn/fnn/standard/ntm_controller/ntm_uvm_testbench.sv

@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/uvm/classes/philosophers/ntm_philosophers/application/fsm.sv
+sv work ../../../../../../../../template/traditional/sim/verification/uvm/classes/philosophers/ntm_philosophers/application/fsm.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/uvm/classes/philosophers/ntm_philosophers/library/peripheral_testbench.sv
+sv work ../../../../../../../../template/traditional/sim/verification/uvm/classes/philosophers/ntm_philosophers/library/peripheral_testbench.sv

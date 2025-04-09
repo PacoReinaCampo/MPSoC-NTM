@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../validation/osvvm/application/nn/lstm/standard/ntm_hidden_gate_vector/ntm_design.vhd
-../../../../../../../../../../validation/osvvm/application/nn/lstm/standard/ntm_hidden_gate_vector/ntm_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/nn/lstm/standard/ntm_hidden_gate_vector/ntm_design.vhd
+../../../../../../../../../validation/osvvm/application/nn/lstm/standard/ntm_hidden_gate_vector/ntm_design_pkg.vhd
 
-../../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_model.vhd
-../../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_model.vhd
+../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_model_pkg.vhd
 
-../../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_testbench.vhd
+../../../../../../../../../validation/osvvm/library/nn/lstm/standard/ntm_hidden_gate_vector/ntm_testbench.vhd

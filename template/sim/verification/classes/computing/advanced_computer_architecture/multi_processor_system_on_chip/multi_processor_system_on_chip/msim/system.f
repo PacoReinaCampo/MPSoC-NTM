@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip/library/testbench.sv

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/logic_gate/not_gate/application/switch.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/information/logic_gate/not_gate/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/information/logic_gate/not_gate/library/testbench.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/information/logic_gate/not_gate/library/testbench.sv

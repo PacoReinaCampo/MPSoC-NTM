@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/classes/application/nn/ANN/inputs/ntm_values_vector/ntm_design.sv
+../../../../../../../../../validation/classes/application/nn/ann/inputs/ntm_values_vector/ntm_design.sv
 
-../../../../../../../validation/classes/library/nn/ANN/inputs/ntm_values_vector/ntm_testbench.sv
+../../../../../../../../../validation/classes/library/nn/ann/inputs/ntm_values_vector/ntm_testbench.sv

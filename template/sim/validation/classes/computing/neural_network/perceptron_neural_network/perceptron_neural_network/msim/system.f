@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/transformer_neural_network/transformer_neural_network/application/switch.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/transformer_neural_network/transformer_neural_network/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/transformer_neural_network/transformer_neural_network/library/testbench.sv
+../../../../../../../../../template/traditional/sim/validation/classes/computing/neural_network/transformer_neural_network/transformer_neural_network/library/testbench.sv

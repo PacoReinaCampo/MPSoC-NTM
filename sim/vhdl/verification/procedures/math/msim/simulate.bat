@@ -1,5 +1,5 @@
 @echo off
-call ../../../../../../../settings64_msim.bat
+call ../../../../../../settings64_msim.bat
 
 vsim -c -do macros/run.do
 

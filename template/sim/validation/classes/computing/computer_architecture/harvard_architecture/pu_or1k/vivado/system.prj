@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/classes/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/classes/computing/computer_architecture/harvard_architecture/pu_or1k/library/testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/classes/computing/computer_architecture/harvard_architecture/pu_or1k/library/testbench.sv

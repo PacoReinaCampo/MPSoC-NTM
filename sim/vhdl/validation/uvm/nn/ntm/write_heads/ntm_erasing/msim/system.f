@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/nn/NTM/write_heads/ntm_erasing/ntm_design.sv
+../../../../../../../../../validation/uvm/application/nn/ntm/write_heads/ntm_erasing/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/nn/NTM/write_heads/ntm_erasing/ntm_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/nn/ntm/write_heads/ntm_erasing/ntm_uvm_testbench.sv

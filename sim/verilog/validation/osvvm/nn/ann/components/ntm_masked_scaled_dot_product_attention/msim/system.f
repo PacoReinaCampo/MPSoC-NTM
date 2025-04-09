@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
-../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
+../../../../../../../../../validation/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
+../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
 
-../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd
+../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd

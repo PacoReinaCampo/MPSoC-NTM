@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/bit/bit/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/bit/bit/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/bit/bit/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/bit/bit/library/testbench.sv

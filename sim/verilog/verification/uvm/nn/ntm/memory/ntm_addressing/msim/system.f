@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../verification/uvm/application/nn/NTM/memory/ntm_addressing/ntm_design.sv
+../../../../../../../../../verification/uvm/application/nn/ntm/memory/ntm_addressing/ntm_design.sv
 
-../../../../../../../../verification/uvm/library/nn/NTM/memory/ntm_addressing/ntm_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/nn/ntm/memory/ntm_addressing/ntm_uvm_testbench.sv

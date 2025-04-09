@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/finite_state_machine/finite_state_machine/application/fsm.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/finite_state_machine/finite_state_machine/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/finite_state_machine/finite_state_machine/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/finite_state_machine/finite_state_machine/library/peripheral_testbench.sv

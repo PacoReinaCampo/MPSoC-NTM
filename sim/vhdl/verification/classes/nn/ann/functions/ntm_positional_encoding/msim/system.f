@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/classes/application/nn/ANN/functions/ntm_positional_encoding/ntm_design.sv
+../../../../../../../../../verification/classes/application/nn/ann/functions/ntm_positional_encoding/ntm_design.sv
 
-../../../../../../../verification/classes/library/nn/ANN/functions/ntm_positional_encoding/ntm_testbench.sv
+../../../../../../../../../verification/classes/library/nn/ann/functions/ntm_positional_encoding/ntm_testbench.sv

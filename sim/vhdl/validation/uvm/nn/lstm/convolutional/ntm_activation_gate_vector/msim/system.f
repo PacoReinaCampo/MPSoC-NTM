@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../validation/uvm/application/nn/lstm/convolutional/ntm_activation_gate_vector/ntm_design.sv
+../../../../../../../../../validation/uvm/application/nn/lstm/convolutional/ntm_activation_gate_vector/ntm_design.sv
 
-../../../../../../../../../../validation/uvm/library/nn/lstm/convolutional/ntm_activation_gate_vector/ntm_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/nn/lstm/convolutional/ntm_activation_gate_vector/ntm_uvm_testbench.sv

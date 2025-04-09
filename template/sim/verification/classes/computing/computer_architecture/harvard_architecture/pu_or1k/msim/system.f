@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_or1k/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_or1k/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/computer_architecture/harvard_architecture/pu_or1k/library/testbench.sv

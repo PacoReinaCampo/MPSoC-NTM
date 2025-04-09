@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../validation/uvm/application/nn/NTM/write_heads/ntm_writing/ntm_design.sv
+sv work ../../../../../../../../../validation/uvm/application/nn/ntm/write_heads/ntm_writing/ntm_design.sv
 
-sv work ../../../../../../../../validation/uvm/library/nn/NTM/write_heads/ntm_writing/ntm_uvm_testbench.sv
+sv work ../../../../../../../../../validation/uvm/library/nn/ntm/write_heads/ntm_writing/ntm_uvm_testbench.sv

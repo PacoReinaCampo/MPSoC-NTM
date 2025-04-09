@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_layer_norm/ntm_design.vhd
-vhdl2008 work ../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_layer_norm/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_layer_norm/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_layer_norm/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_model.vhd
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_testbench.vhd

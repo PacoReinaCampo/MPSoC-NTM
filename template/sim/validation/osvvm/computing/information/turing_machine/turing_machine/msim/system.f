@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/validation/osvvm/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_testbench.vhd

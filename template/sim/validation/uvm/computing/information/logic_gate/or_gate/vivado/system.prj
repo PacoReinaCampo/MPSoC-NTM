@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/or_gate/application/fsm.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/or_gate/application/fsm.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/or_gate/library/peripheral_testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/validation/uvm/computing/information/logic_gate/or_gate/library/peripheral_testbench.sv

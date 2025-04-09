@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/nn/NTM/trained/ntm_trained_top/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/nn/NTM/trained/ntm_trained_top/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/trained/ntm_trained_top/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ntm/trained/ntm_trained_top/ntm_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/trained/ntm_trained_top/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/nn/NTM/trained/ntm_trained_top/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/trained/ntm_trained_top/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/trained/ntm_trained_top/ntm_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/nn/NTM/trained/ntm_trained_top/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ntm/trained/ntm_trained_top/ntm_testbench.vhd

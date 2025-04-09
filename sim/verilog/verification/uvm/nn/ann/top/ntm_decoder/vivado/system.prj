@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../verification/uvm/application/nn/ANN/top/ntm_decoder/ntm_design.sv
+sv work ../../../../../../../../../verification/uvm/application/nn/ann/top/ntm_decoder/ntm_design.sv
 
-sv work ../../../../../../../verification/uvm/library/nn/ANN/top/ntm_decoder/ntm_uvm_testbench.sv
+sv work ../../../../../../../../../verification/uvm/library/nn/ann/top/ntm_decoder/ntm_uvm_testbench.sv

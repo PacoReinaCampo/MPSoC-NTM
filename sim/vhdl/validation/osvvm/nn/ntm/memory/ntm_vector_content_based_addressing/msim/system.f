@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_design.vhd
+../../../../../../../../../validation/osvvm/application/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_model.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/nn/NTM/memory/ntm_vector_content_based_addressing/ntm_testbench.vhd
+../../../../../../../../../validation/osvvm/library/nn/ntm/memory/ntm_vector_content_based_addressing/ntm_testbench.vhd

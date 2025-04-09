@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/fsm.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/validation/uvm/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/peripheral_testbench.sv

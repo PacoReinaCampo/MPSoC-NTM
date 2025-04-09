@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/osvvm/application/nn/ANN/inputs/ntm_inputs_vector/ntm_design.vhd
-../../../../../../../verification/osvvm/application/nn/ANN/inputs/ntm_inputs_vector/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/inputs/ntm_inputs_vector/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/inputs/ntm_inputs_vector/ntm_design_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/inputs/ntm_inputs_vector/ntm_model.vhd
-../../../../../../../verification/osvvm/library/nn/ANN/inputs/ntm_inputs_vector/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/inputs/ntm_inputs_vector/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/inputs/ntm_inputs_vector/ntm_model_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/inputs/ntm_inputs_vector/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/inputs/ntm_inputs_vector/ntm_testbench.vhd

@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/nn/NTM/read_heads/ntm_reading/ntm_design.sv
+../../../../../../../../../validation/uvm/application/nn/ntm/read_heads/ntm_reading/ntm_design.sv
 
-../../../../../../../../validation/uvm/library/nn/NTM/read_heads/ntm_reading/ntm_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/nn/ntm/read_heads/ntm_reading/ntm_uvm_testbench.sv

@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../verification/uvm/src
++incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/combinational_logic/arithmetic_circuits/application/fsm.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/combinational_logic/arithmetic_circuits/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/combinational_logic/arithmetic_circuits/library/peripheral_testbench.sv
+../../../../../../../../../template/traditional/sim/verification/uvm/computing/information/combinational_logic/arithmetic_circuits/library/peripheral_testbench.sv

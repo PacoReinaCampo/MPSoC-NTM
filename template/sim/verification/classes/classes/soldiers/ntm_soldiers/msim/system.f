@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/classes/soldiers/ntm_soldiers/application/switch.sv
+../../../../../../../../template/traditional/sim/verification/classes/classes/soldiers/ntm_soldiers/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/classes/soldiers/ntm_soldiers/library/testbench.sv
+../../../../../../../../template/traditional/sim/verification/classes/classes/soldiers/ntm_soldiers/library/testbench.sv

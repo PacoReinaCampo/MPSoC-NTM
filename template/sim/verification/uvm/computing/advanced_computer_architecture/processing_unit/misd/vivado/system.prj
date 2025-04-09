@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/misd/application/fsm.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/misd/application/fsm.sv
 
-sv work ../../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/misd/library/peripheral_testbench.sv
+sv work ../../../../../../../../../template/traditional/sim/verification/uvm/computing/advanced_computer_architecture/processing_unit/misd/library/peripheral_testbench.sv

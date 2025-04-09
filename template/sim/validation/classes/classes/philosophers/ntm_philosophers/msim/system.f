@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/validation/classes/classes/philosophers/ntm_philosophers/application/switch.sv
+../../../../../../../../template/traditional/sim/validation/classes/classes/philosophers/ntm_philosophers/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/validation/classes/classes/philosophers/ntm_philosophers/library/testbench.sv
+../../../../../../../../template/traditional/sim/validation/classes/classes/philosophers/ntm_philosophers/library/testbench.sv

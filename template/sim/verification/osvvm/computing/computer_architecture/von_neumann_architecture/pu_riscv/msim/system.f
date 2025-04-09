@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/ntm_design.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/ntm_design_pkg.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/ntm_design.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/application/ntm_design_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_model.vhd
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_model_pkg.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_model.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_model_pkg.vhd
 
-../../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_testbench.vhd
+../../../../../../../../../template/traditional/sim/verification/osvvm/computing/computer_architecture/von_neumann_architecture/pu_riscv/library/ntm_testbench.vhd

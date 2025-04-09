@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../validation/osvvm/application/nn/NTM/write_heads/ntm_writing/ntm_design.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/application/nn/NTM/write_heads/ntm_writing/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/ntm/write_heads/ntm_writing/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/ntm/write_heads/ntm_writing/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_model.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/nn/NTM/write_heads/ntm_writing/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ntm/write_heads/ntm_writing/ntm_testbench.vhd

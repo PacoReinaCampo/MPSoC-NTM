@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-+incdir+../../../../../../../../../../validation/uvm/src
++incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/application/fsm.sv
+../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/application/fsm.sv
 
-../../../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/library/peripheral_testbench.sv
+../../../../../../../../template/traditional/sim/validation/uvm/classes/workers/ntm_workers/library/peripheral_testbench.sv

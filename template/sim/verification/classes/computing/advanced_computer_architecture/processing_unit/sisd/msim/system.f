@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/advanced_computer_architecture/processing_unit/sisd/library/testbench.sv

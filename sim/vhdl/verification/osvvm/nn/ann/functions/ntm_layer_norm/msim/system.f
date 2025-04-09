@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_layer_norm/ntm_design.vhd
-../../../../../../../verification/osvvm/application/nn/ANN/functions/ntm_layer_norm/ntm_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_layer_norm/ntm_design.vhd
+../../../../../../../../../verification/osvvm/application/nn/ann/functions/ntm_layer_norm/ntm_design_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_model.vhd
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_model.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_model_pkg.vhd
 
-../../../../../../../verification/osvvm/library/nn/ANN/functions/ntm_layer_norm/ntm_testbench.vhd
+../../../../../../../../../verification/osvvm/library/nn/ann/functions/ntm_layer_norm/ntm_testbench.vhd

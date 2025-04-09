@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
-vhdl2008 work ../../../../../../../validation/osvvm/application/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../validation/osvvm/library/nn/ANN/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/ann/components/ntm_masked_scaled_dot_product_attention/ntm_testbench.vhd

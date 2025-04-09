@@ -1,5 +1,5 @@
 @echo off
-call ../../../../../../../settings64_ghdl.bat
+call ../../../../../../../../settings64_ghdl.bat
 sh system.g
 
 ghdl -e --std=08 model_read_heads_testbench

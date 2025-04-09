@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/pushdown_automaton/pushdown_automaton/application/switch.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/pushdown_automaton/pushdown_automaton/application/switch.sv
 
-../../../../../../../../../../template/traditional/sim/verification/classes/computing/information/pushdown_automaton/pushdown_automaton/library/testbench.sv
+../../../../../../../../../template/traditional/sim/verification/classes/computing/information/pushdown_automaton/pushdown_automaton/library/testbench.sv
