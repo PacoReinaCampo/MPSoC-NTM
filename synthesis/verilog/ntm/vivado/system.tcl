@@ -42,29 +42,29 @@
 ##                                                                               ##
 ###################################################################################
 
-read_verilog -sv ../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_divider.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_divider.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_divider.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_divider.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_divider.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_divider.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_adder.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
 read_verilog -sv ../../../../rtl/verilog/algebra/ntm_matrix_product.sv
 read_verilog -sv ../../../../rtl/verilog/algebra/ntm_tensor_transpose.sv
