@@ -184,35 +184,6 @@ code
 │       ├── accelerator_vector_sinh_function.sv
 │       └── accelerator_vector_tanh_function.sv
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── accelerator_masked_multi_head_attention.sv
-│   │   │   ├── accelerator_masked_scaled_dot_product_attention.sv
-│   │   │   ├── accelerator_multi_head_attention.sv
-│   │   │   └── accelerator_scaled_dot_product_attention.sv
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   ├── convolutional
-│   │   │   │   │   └── accelerator_fnn.sv
-│   │   │   │   └── standard
-│   │   │   │       └── accelerator_fnn.sv
-│   │   │   └── lstm
-│   │   │       ├── convolutional
-│   │   │       │   └── accelerator_lstm.sv
-│   │   │       └── standard
-│   │   │           └── accelerator_lstm.sv
-│   │   ├── functions
-│   │   │   ├── accelerator_layer_norm.sv
-│   │   │   └── accelerator_positional_encoding.sv
-│   │   ├── inputs
-│   │   │   ├── accelerator_inputs_vector.sv
-│   │   │   ├── accelerator_keys_vector.sv
-│   │   │   ├── accelerator_queries_vector.sv
-│   │   │   └── accelerator_values_vector.sv
-│   │   └── top
-│   │       ├── accelerator_controller.sv
-│   │       ├── accelerator_decoder.sv
-│   │       └── accelerator_encoder.sv
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.sv
@@ -287,4 +258,4 @@ code
     └── pnn
         └── accelerator_trainer.sv
 
-88 directories, 199 files
+76 directories, 182 files

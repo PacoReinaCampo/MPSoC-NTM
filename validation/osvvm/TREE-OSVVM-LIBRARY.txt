@@ -262,74 +262,6 @@ library
 │           ├── ntm_model.vhd
 │           └── ntm_testbench.vhd
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   ├── ntm_masked_scaled_dot_product_attention
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   ├── ntm_multi_head_attention
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   └── ntm_scaled_dot_product_attention
-│   │   │       ├── ntm_model_pkg.vhd
-│   │   │       ├── ntm_model.vhd
-│   │   │       └── ntm_testbench.vhd
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn
-│   │   │   │       ├── ntm_model_pkg.vhd
-│   │   │   │       ├── ntm_model.vhd
-│   │   │   │       └── ntm_testbench.vhd
-│   │   │   └── lstm
-│   │   │       └── ntm_lstm
-│   │   │           ├── ntm_model_pkg.vhd
-│   │   │           ├── ntm_model.vhd
-│   │   │           └── ntm_testbench.vhd
-│   │   ├── functions
-│   │   │   ├── ntm_layer_norm
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   └── ntm_positional_encoding
-│   │   │       ├── ntm_model_pkg.vhd
-│   │   │       ├── ntm_model.vhd
-│   │   │       └── ntm_testbench.vhd
-│   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   ├── ntm_keys_vector
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   ├── ntm_queries_vector
-│   │   │   │   ├── ntm_model_pkg.vhd
-│   │   │   │   ├── ntm_model.vhd
-│   │   │   │   └── ntm_testbench.vhd
-│   │   │   └── ntm_values_vector
-│   │   │       ├── ntm_model_pkg.vhd
-│   │   │       ├── ntm_model.vhd
-│   │   │       └── ntm_testbench.vhd
-│   │   └── top
-│   │       ├── ntm_controller
-│   │       │   ├── ntm_model_pkg.vhd
-│   │       │   ├── ntm_model.vhd
-│   │       │   └── ntm_testbench.vhd
-│   │       ├── ntm_decoder
-│   │       │   ├── ntm_model_pkg.vhd
-│   │       │   ├── ntm_model.vhd
-│   │       │   └── ntm_testbench.vhd
-│   │       └── ntm_encoder
-│   │           ├── ntm_model_pkg.vhd
-│   │           ├── ntm_model.vhd
-│   │           └── ntm_testbench.vhd
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
@@ -643,4 +575,4 @@ library
                 ├── ntm_model.vhd
                 └── ntm_testbench.vhd
 
-196 directories, 447 files
+173 directories, 402 files

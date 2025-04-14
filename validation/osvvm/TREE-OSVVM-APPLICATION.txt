@@ -200,59 +200,6 @@ application
 │           ├── ntm_design_pkg.vhd
 │           └── ntm_design.vhd
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   ├── ntm_masked_scaled_dot_product_attention
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   ├── ntm_multi_head_attention
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   └── ntm_scaled_dot_product_attention
-│   │   │       ├── ntm_design_pkg.vhd
-│   │   │       └── ntm_design.vhd
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn
-│   │   │   │       ├── ntm_design_pkg.vhd
-│   │   │   │       └── ntm_design.vhd
-│   │   │   └── lstm
-│   │   │       └── ntm_lstm
-│   │   │           ├── ntm_design_pkg.vhd
-│   │   │           └── ntm_design.vhd
-│   │   ├── functions
-│   │   │   ├── ntm_layer_norm
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   └── ntm_positional_encoding
-│   │   │       ├── ntm_design_pkg.vhd
-│   │   │       └── ntm_design.vhd
-│   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   ├── ntm_keys_vector
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   ├── ntm_queries_vector
-│   │   │   │   ├── ntm_design_pkg.vhd
-│   │   │   │   └── ntm_design.vhd
-│   │   │   └── ntm_values_vector
-│   │   │       ├── ntm_design_pkg.vhd
-│   │   │       └── ntm_design.vhd
-│   │   └── top
-│   │       ├── ntm_controller
-│   │       │   ├── ntm_design_pkg.vhd
-│   │       │   └── ntm_design.vhd
-│   │       ├── ntm_decoder
-│   │       │   ├── ntm_design_pkg.vhd
-│   │       │   └── ntm_design.vhd
-│   │       └── ntm_encoder
-│   │           ├── ntm_design_pkg.vhd
-│   │           └── ntm_design.vhd
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller
@@ -494,4 +441,4 @@ application
                 ├── ntm_design_pkg.vhd
                 └── ntm_design.vhd
 
-196 directories, 298 files
+173 directories, 268 files
