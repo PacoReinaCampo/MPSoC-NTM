@@ -163,35 +163,6 @@ code
 │       ├── model_vector_sinh_function.vhd
 │       └── model_vector_tanh_function.vhd
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── model_masked_multi_head_attention.vhd
-│   │   │   ├── model_masked_scaled_dot_product_attention.vhd
-│   │   │   ├── model_multi_head_attention.vhd
-│   │   │   └── model_scaled_dot_product_attention.vhd
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   ├── convolutional
-│   │   │   │   │   └── model_fnn.vhd
-│   │   │   │   └── standard
-│   │   │   │       └── model_fnn.vhd
-│   │   │   └── lstm
-│   │   │       ├── convolutional
-│   │   │       │   └── model_lstm.vhd
-│   │   │       └── standard
-│   │   │           └── model_lstm.vhd
-│   │   ├── functions
-│   │   │   ├── model_layer_norm.vhd
-│   │   │   └── model_positional_encoding.vhd
-│   │   ├── inputs
-│   │   │   ├── model_inputs_vector.vhd
-│   │   │   ├── model_keys_vector.vhd
-│   │   │   ├── model_queries_vector.vhd
-│   │   │   └── model_values_vector.vhd
-│   │   └── top
-│   │       ├── model_controller.vhd
-│   │       ├── model_decoder.vhd
-│   │       └── model_encoder.vhd
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── model_controller.vhd
@@ -267,4 +238,4 @@ code
     └── pnn
         └── model_trainer.vhd
 
-83 directories, 184 files
+71 directories, 167 files
