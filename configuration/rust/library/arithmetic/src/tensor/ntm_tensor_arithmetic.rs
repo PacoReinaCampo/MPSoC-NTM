@@ -82,6 +82,38 @@ impl TensorArithmetic {
         data_out
     }
 
+    pub fn ntm_tensor_subtractor(&self) -> Vec<Vec<Vec<f64>>> {
+        // Add two matching tensors.
+        let mut data_out: Vec<Vec<Vec<f64>>> = vec![];
+
+        if self.data_a_in.len() != self.data_b_in.len() {
+            panic!("Matrix dimensions do not match");
+        }
+
+        for i in 0..self.data_a_in.len() {
+            let mut matrix: Vec<Vec<f64>> = vec![];
+
+            if self.data_a_in[i].len() != self.data_b_in[i].len() {
+                panic!("Matrix dimensions do not match");
+            }
+            for j in 0..self.data_a_in[0].len() {
+                let mut vector: Vec<f64> = vec![];
+
+                if self.data_a_in[i][j].len() != self.data_b_in[i][j].len() {
+                    panic!("Matrix dimensions do not match");
+                }
+                for k in 0..self.data_a_in[0][0].len() {
+                    let temporal = self.data_a_in[i][j][k] - self.data_b_in[i][j][k];
+
+                    vector.push(temporal);
+                }
+                matrix.push(vector);
+            }
+            data_out.push(matrix);
+        }
+        data_out
+    }
+
     pub fn ntm_tensor_multiplier(&self) -> Vec<Vec<Vec<f64>>> {
         // Multiply two matching tensors.
         let mut data_out: Vec<Vec<Vec<f64>>> = vec![];

@@ -164,15 +164,6 @@ touch code/pkg/accelerator_lstm_controller_vhdl_pkg.vhd
 touch code/pkg/accelerator_math_vhdl_pkg.vhd
 touch code/pkg/accelerator_pnn_controller_vhdl_pkg.vhd
 touch code/pkg/accelerator_state_vhdl_pkg.vhd
-touch code/state/feedback/accelerator_state_matrix_feedforward.vhd
-touch code/state/feedback/accelerator_state_matrix_input.vhd
-touch code/state/feedback/accelerator_state_matrix_output.vhd
-touch code/state/feedback/accelerator_state_matrix_state.vhd
-touch code/state/outputs/accelerator_state_vector_output.vhd
-touch code/state/outputs/accelerator_state_vector_state.vhd
-touch code/state/pnn/convolutional/accelerator_controller.vhd
-touch code/state/pnn/standard/accelerator_controller.vhd
-touch code/state/top/accelerator_state_top.vhd
 touch code/trainer/differentiation/accelerator_trainer_matrix_differentiation.vhd
 touch code/trainer/differentiation/accelerator_trainer_vector_differentiation.vhd
 touch code/trainer/fnn/accelerator_trainer.vhd

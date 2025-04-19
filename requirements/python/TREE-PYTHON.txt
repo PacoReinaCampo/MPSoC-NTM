@@ -92,58 +92,6 @@ library
 │       ├── ntm_vector_mean_function.py
 │       └── ntm_vector_oneplus_function.py
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.py
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.py
-│   │   │   ├── ntm_multi_head_attention.py
-│   │   │   └── ntm_scaled_dot_product_attention.py
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.py
-│   │   │   └── lstm
-│   │   │       └── ntm_lstm.py
-│   │   ├── functions
-│   │   │   ├── ntm_layer_norm.py
-│   │   │   └── ntm_positional_encoding.py
-│   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.py
-│   │   │   ├── ntm_keys_vector.py
-│   │   │   ├── ntm_queries_vector.py
-│   │   │   └── ntm_values_vector.py
-│   │   └── top
-│   │       ├── ntm_controller.py
-│   │       ├── ntm_decoder.py
-│   │       └── ntm_encoder.py
-│   ├── dnc
-│   │   ├── memory
-│   │   │   ├── dnc_addressing.py
-│   │   │   ├── dnc_allocation_weighting.py
-│   │   │   ├── dnc_backward_weighting.py
-│   │   │   ├── dnc_forward_weighting.py
-│   │   │   ├── dnc_matrix_content_based_addressing.py
-│   │   │   ├── dnc_memory_matrix.py
-│   │   │   ├── dnc_memory_retention_vector.py
-│   │   │   ├── dnc_precedence_weighting.py
-│   │   │   ├── dnc_sort_vector.py
-│   │   │   ├── dnc_temporal_link_matrix.py
-│   │   │   ├── dnc_usage_vector.py
-│   │   │   └── dnc_vector_content_based_addressing.py
-│   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.py
-│   │   │   ├── dnc_read_vectors.py
-│   │   │   └── dnc_read_weighting.py
-│   │   ├── top
-│   │   │   ├── dnc_interface_matrix.py
-│   │   │   ├── dnc_interface_top.py
-│   │   │   ├── dnc_interface_vector.py
-│   │   │   ├── dnc_output_vector.py
-│   │   │   └── dnc_top.py
-│   │   ├── trained
-│   │   │   └── dnc_trained_top.py
-│   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.py
-│   │       └── dnc_write_weighting.py
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.py
@@ -184,17 +132,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.py
 │           └── ntm_writing.py
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.py
-│   │   ├── ntm_state_matrix_input.py
-│   │   ├── ntm_state_matrix_output.py
-│   │   └── ntm_state_matrix_state.py
-│   ├── outputs
-│   │   ├── ntm_state_vector_output.py
-│   │   └── ntm_state_vector_state.py
-│   └── top
-│       └── ntm_state_top.py
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.py
@@ -241,4 +178,4 @@ library
             ├── ntm_lstm_output_v_trainer.py
             └── ntm_lstm_output_w_trainer.py
 
-69 directories, 172 files
+51 directories, 127 files

@@ -44,6 +44,14 @@
 
 extern crate algebra;
 
+use algebra::tensor::ntm_tensor_convolution::*;
+use algebra::tensor::ntm_tensor_inverse::*;
+use algebra::tensor::ntm_tensor_matrix_convolution::*;
+use algebra::tensor::ntm_tensor_matrix_product::*;
+use algebra::tensor::ntm_tensor_multiplication::*;
+use algebra::tensor::ntm_tensor_product::*;
+use algebra::tensor::ntm_tensor_summation::*;
+use algebra::tensor::ntm_tensor_transpose::*;
 use algebra::tensor::ntm_tensor_differentiation::*;
 use algebra::tensor::ntm_tensor_integration::*;
 use algebra::tensor::ntm_tensor_softmax::*;

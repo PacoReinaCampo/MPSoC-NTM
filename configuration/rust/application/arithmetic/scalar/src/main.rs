@@ -45,6 +45,7 @@
 extern crate arithmetic;
 
 use arithmetic::scalar::ntm_scalar_adder::*;
+use arithmetic::scalar::ntm_scalar_subtractor::*;
 use arithmetic::scalar::ntm_scalar_multiplier::*;
 use arithmetic::scalar::ntm_scalar_divider::*;
 
@@ -62,6 +63,13 @@ fn main() {
     data_out = 64.0;
 
     assert_eq!(ntm_scalar_adder(data_a_in, data_b_in), data_out);
+
+    data_a_in = 48.0;
+    data_b_in = 16.0;
+
+    data_out = 32.0;
+
+    assert_eq!(ntm_scalar_subtractor(data_a_in, data_b_in), data_out);
 
     data_a_in = 48.0;
     data_b_in = 16.0;

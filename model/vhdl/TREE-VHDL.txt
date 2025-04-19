@@ -208,22 +208,6 @@ code
 │   ├── model_ntm_core_vhdl_pkg.vhd
 │   ├── model_pnn_controller_vhdl_pkg.vhd
 │   └── model_state_vhdl_pkg.vhd
-├── state
-│   ├── feedback
-│   │   ├── model_state_matrix_feedforward.vhd
-│   │   ├── model_state_matrix_input.vhd
-│   │   ├── model_state_matrix_output.vhd
-│   │   └── model_state_matrix_state.vhd
-│   ├── outputs
-│   │   ├── model_state_vector_output.vhd
-│   │   └── model_state_vector_state.vhd
-│   ├── pnn
-│   │   ├── convolutional
-│   │   │   └── model_controller.vhd
-│   │   └── standard
-│   │       └── model_controller.vhd
-│   └── top
-│       └── model_state_top.vhd
 └── trainer
     ├── differentiation
     │   ├── model_trainer_matrix_differentiation.vhd
@@ -238,4 +222,4 @@ code
     └── pnn
         └── model_trainer.vhd
 
-71 directories, 167 files
+64 directories, 158 files

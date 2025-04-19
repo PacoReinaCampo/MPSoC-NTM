@@ -40,7 +40,7 @@
 `include "ntm_package.sv"
 
 program ntm_test (
-  add_if vif
+  peripheral_design_if vif
 );
   ntm_environment environment;
 

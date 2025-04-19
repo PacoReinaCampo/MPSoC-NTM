@@ -66,6 +66,22 @@ impl VectorArithmetic {
         data_out
     }
 
+    pub fn ntm_vector_subtractor(&self) -> Vec<f64> {
+        // Add two vectors of identical dimensions
+        let mut data_out: Vec<f64> = vec![];
+
+        if self.data_a_in.len() != self.data_b_in.len() {
+            panic!("Vector dimensions do not match");
+        }
+
+        for i in 0..self.data_a_in.len() {
+            let temporal = self.data_a_in[i] - self.data_b_in[i];
+
+            data_out.push(temporal);
+        }
+        data_out
+    }
+
     pub fn ntm_vector_multiplier(&self) -> Vec<f64> {
         // Multiply two vectors of identical dimensions
         let mut data_out: Vec<f64> = vec![];

@@ -31,9 +31,9 @@ class peripheral_uvm_slave_driver extends uvm_driver #(peripheral_uvm_transfer);
 
   // get_and_drive
   virtual protected task get_and_drive();
-    @(negedge vif.sig_reset);
+    @(negedge vif.hresetn);
     forever begin
-      @(posedge vif.sig_clock);
+      @(posedge vif.hclk);
       seq_item_port.get_next_item(req);
       respond_to_transfer(req);
       seq_item_port.item_done();
@@ -43,9 +43,9 @@ class peripheral_uvm_slave_driver extends uvm_driver #(peripheral_uvm_transfer);
   // reset_signals
   virtual protected task reset_signals();
     forever begin
-      @(posedge vif.sig_reset);
-      vif.sig_error <= 1'bz;
-      vif.sig_wait  <= 1'bz;
+      @(posedge vif.hresetn);
+      vif.hmastlock <= 1'bz;
+      vif.hready    <= 1'bz;
       vif.rw        <= 1'b0;
     end
   endtask : reset_signals
@@ -53,27 +53,27 @@ class peripheral_uvm_slave_driver extends uvm_driver #(peripheral_uvm_transfer);
   // respond_to_transfer
   virtual protected task respond_to_transfer(peripheral_uvm_transfer resp);
     if (resp.read_write != NOP) begin
-      vif.sig_error <= 1'b0;
+      vif.hmastlock <= 1'b0;
       for (int i = 0; i < resp.size; i++) begin
         case (resp.read_write)
           READ: begin
-            vif.rw           <= 1'b1;
-            vif.sig_data_out <= resp.data[i];
+            vif.rw     <= 1'b1;
+            vif.hrdata <= resp.data[i];
           end
           WRITE: begin
           end
         endcase
         if (resp.wait_state[i] > 0) begin
-          vif.sig_wait <= 1'b1;
-          repeat (resp.wait_state[i]) @(posedge vif.sig_clock);
+          vif.hready <= 1'b1;
+          repeat (resp.wait_state[i]) @(posedge vif.hclk);
         end
-        vif.sig_wait <= 1'b0;
-        @(posedge vif.sig_clock);
-        resp.data[i] = vif.sig_data;
+        vif.hready <= 1'b0;
+        @(posedge vif.hclk);
+        resp.data[i] = vif.hwdata;
       end
       vif.rw        <= 1'b0;
-      vif.sig_wait  <= 1'bz;
-      vif.sig_error <= 1'bz;
+      vif.hready    <= 1'bz;
+      vif.hmastlock <= 1'bz;
     end
   endtask : respond_to_transfer
 

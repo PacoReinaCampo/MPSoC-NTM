@@ -45,6 +45,7 @@
 extern crate arithmetic;
 
 use arithmetic::vector::ntm_vector_adder::*;
+use arithmetic::vector::ntm_vector_subtractor::*;
 use arithmetic::vector::ntm_vector_multiplier::*;
 use arithmetic::vector::ntm_vector_divider::*;
 
@@ -62,6 +63,13 @@ fn main() {
     data_out = vec![3.0, 1.0, 6.0];
 
     assert_eq!(ntm_vector_adder(data_a_in, data_b_in), data_out);
+
+    data_a_in = vec![2.0, 0.0, 4.0];
+    data_b_in = vec![1.0, 1.0, 2.0];
+
+    data_out = vec![1.0, -1.0, 2.0];
+
+    assert_eq!(ntm_vector_subtractor(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![2.0, 0.0, 4.0];
     data_b_in = vec![1.0, 1.0, 2.0];
@@ -86,6 +94,15 @@ fn main() {
     };
 
     assert_eq!(addition.ntm_vector_adder(), addition.data_out);
+
+    let subtraction = VectorArithmetic {
+        data_a_in: vec![2.0, 0.0, 4.0],
+        data_b_in: vec![1.0, 1.0, 2.0],
+
+        data_out: vec![1.0, -1.0, 2.0]
+    };
+
+    assert_eq!(subtraction.ntm_vector_subtractor(), subtraction.data_out);
 
     let multiplication = VectorArithmetic {
         data_a_in: vec![2.0, 0.0, 4.0],

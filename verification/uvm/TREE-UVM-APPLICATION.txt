@@ -296,31 +296,6 @@ application
 │           └── ntm_writing
 │               ├── ntm_design.sv
 │               └── ntm_testbench.sv
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── ntm_state_matrix_input
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   ├── ntm_state_matrix_output
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   └── ntm_state_matrix_state
-│   │       ├── ntm_design.sv
-│   │       └── ntm_testbench.sv
-│   ├── outputs
-│   │   ├── ntm_state_vector_output
-│   │   │   ├── ntm_design.sv
-│   │   │   └── ntm_testbench.sv
-│   │   └── ntm_state_vector_state
-│   │       ├── ntm_design.sv
-│   │       └── ntm_testbench.sv
-│   └── top
-│       └── ntm_state_top
-│           ├── ntm_design.sv
-│           └── ntm_testbench.sv
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation
@@ -441,4 +416,4 @@ application
                 ├── ntm_design.sv
                 └── ntm_testbench.sv
 
-173 directories, 268 files
+162 directories, 254 files

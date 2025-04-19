@@ -163,15 +163,6 @@ touch code/pkg/accelerator_lstm_controller_verilog_pkg.sv
 touch code/pkg/accelerator_math_verilog_pkg.sv
 touch code/pkg/accelerator_pnn_controller_verilog_pkg.sv
 touch code/pkg/accelerator_state_verilog_pkg.sv
-touch code/state/feedback/accelerator_state_matrix_feedforward.sv
-touch code/state/feedback/accelerator_state_matrix_input.sv
-touch code/state/feedback/accelerator_state_matrix_output.sv
-touch code/state/feedback/accelerator_state_matrix_state.sv
-touch code/state/outputs/accelerator_state_vector_output.sv
-touch code/state/outputs/accelerator_state_vector_state.sv
-touch code/state/pnn/convolutional/accelerator_controller.sv
-touch code/state/pnn/standard/accelerator_controller.sv
-touch code/state/top/accelerator_state_top.sv
 touch code/trainer/differentiation/accelerator_trainer_matrix_differentiation.sv
 touch code/trainer/differentiation/accelerator_trainer_vector_differentiation.sv
 touch code/trainer/fnn/accelerator_trainer.sv

@@ -44,6 +44,12 @@
 
 extern crate algebra;
 
+use algebra::vector::ntm_dot_product::*;
+use algebra::vector::ntm_vector_convolution::*;
+use algebra::vector::ntm_vector_cosine_similarity::*;
+use algebra::vector::ntm_vector_module::*;
+use algebra::vector::ntm_vector_multiplication::*;
+use algebra::vector::ntm_vector_summation::*;
 use algebra::vector::ntm_vector_differentiation::*;
 use algebra::vector::ntm_vector_integration::*;
 use algebra::vector::ntm_vector_softmax::*;

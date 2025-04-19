@@ -45,6 +45,7 @@
 extern crate arithmetic;
 
 use arithmetic::matrix::ntm_matrix_adder::*;
+use arithmetic::matrix::ntm_matrix_subtractor::*;
 use arithmetic::matrix::ntm_matrix_multiplier::*;
 use arithmetic::matrix::ntm_matrix_divider::*;
 
@@ -74,6 +75,25 @@ fn main() {
     ];
 
     assert_eq!(ntm_matrix_adder(data_a_in, data_b_in), data_out);
+
+    data_a_in = vec![
+        vec![2.0, 2.0, 2.0],
+        vec![0.0, 0.0, 0.0],
+        vec![4.0, 4.0, 4.0]
+    ];
+    data_b_in = vec![
+        vec![1.0, 1.0, 1.0],
+        vec![1.0, 1.0, 1.0],
+        vec![2.0, 2.0, 2.0]
+    ];
+
+    data_out = vec![
+        vec![ 1.0,  1.0,  1.0],
+        vec![-1.0, -1.0, -1.0],
+        vec![ 2.0,  2.0,  2.0]
+    ];
+
+    assert_eq!(ntm_matrix_subtractor(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![2.0, 2.0, 2.0],
@@ -133,7 +153,28 @@ fn main() {
         ]
     };
 
-    assert_eq!(addition.ntm_matrix_adder(), addition.data_out);
+    assert_eq!(addition.ntm_matrix_subtractor(), addition.data_out);
+
+    let subtraction = MatrixArithmetic {
+        data_a_in: vec![
+            vec![2.0, 2.0, 2.0],
+            vec![0.0, 0.0, 0.0],
+            vec![4.0, 4.0, 4.0]
+        ],
+        data_b_in: vec![
+            vec![1.0, 1.0, 1.0],
+            vec![1.0, 1.0, 1.0],
+            vec![2.0, 2.0, 2.0]
+        ],
+
+        data_out: vec![
+            vec![ 1.0,  1.0,  1.0],
+            vec![-1.0, -1.0, -1.0],
+            vec![ 2.0,  2.0,  2.0]
+        ]
+    };
+
+    assert_eq!(subtraction.ntm_matrix_subtractor(), subtraction.data_out);
 
     let multiplication = MatrixArithmetic {
         data_a_in: vec![

@@ -1106,94 +1106,6 @@ library
 │               ├── ntm_uvm_sequence.sv
 │               ├── ntm_uvm_testbench.sv
 │               └── ntm_uvm_test.sv
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward
-│   │   │   ├── ntm_uvm_agent.sv
-│   │   │   ├── ntm_uvm_driver.sv
-│   │   │   ├── ntm_uvm_environment.sv
-│   │   │   ├── ntm_uvm_interface.sv
-│   │   │   ├── ntm_uvm_monitor.sv
-│   │   │   ├── ntm_uvm_scoreboard.sv
-│   │   │   ├── ntm_uvm_sequence_item.sv
-│   │   │   ├── ntm_uvm_sequencer.sv
-│   │   │   ├── ntm_uvm_sequence.sv
-│   │   │   ├── ntm_uvm_testbench.sv
-│   │   │   └── ntm_uvm_test.sv
-│   │   ├── ntm_state_matrix_input
-│   │   │   ├── ntm_uvm_agent.sv
-│   │   │   ├── ntm_uvm_driver.sv
-│   │   │   ├── ntm_uvm_environment.sv
-│   │   │   ├── ntm_uvm_interface.sv
-│   │   │   ├── ntm_uvm_monitor.sv
-│   │   │   ├── ntm_uvm_scoreboard.sv
-│   │   │   ├── ntm_uvm_sequence_item.sv
-│   │   │   ├── ntm_uvm_sequencer.sv
-│   │   │   ├── ntm_uvm_sequence.sv
-│   │   │   ├── ntm_uvm_testbench.sv
-│   │   │   └── ntm_uvm_test.sv
-│   │   ├── ntm_state_matrix_output
-│   │   │   ├── ntm_uvm_agent.sv
-│   │   │   ├── ntm_uvm_driver.sv
-│   │   │   ├── ntm_uvm_environment.sv
-│   │   │   ├── ntm_uvm_interface.sv
-│   │   │   ├── ntm_uvm_monitor.sv
-│   │   │   ├── ntm_uvm_scoreboard.sv
-│   │   │   ├── ntm_uvm_sequence_item.sv
-│   │   │   ├── ntm_uvm_sequencer.sv
-│   │   │   ├── ntm_uvm_sequence.sv
-│   │   │   ├── ntm_uvm_testbench.sv
-│   │   │   └── ntm_uvm_test.sv
-│   │   └── ntm_state_matrix_state
-│   │       ├── ntm_uvm_agent.sv
-│   │       ├── ntm_uvm_driver.sv
-│   │       ├── ntm_uvm_environment.sv
-│   │       ├── ntm_uvm_interface.sv
-│   │       ├── ntm_uvm_monitor.sv
-│   │       ├── ntm_uvm_scoreboard.sv
-│   │       ├── ntm_uvm_sequence_item.sv
-│   │       ├── ntm_uvm_sequencer.sv
-│   │       ├── ntm_uvm_sequence.sv
-│   │       ├── ntm_uvm_testbench.sv
-│   │       └── ntm_uvm_test.sv
-│   ├── outputs
-│   │   ├── ntm_state_vector_output
-│   │   │   ├── ntm_uvm_agent.sv
-│   │   │   ├── ntm_uvm_driver.sv
-│   │   │   ├── ntm_uvm_environment.sv
-│   │   │   ├── ntm_uvm_interface.sv
-│   │   │   ├── ntm_uvm_monitor.sv
-│   │   │   ├── ntm_uvm_scoreboard.sv
-│   │   │   ├── ntm_uvm_sequence_item.sv
-│   │   │   ├── ntm_uvm_sequencer.sv
-│   │   │   ├── ntm_uvm_sequence.sv
-│   │   │   ├── ntm_uvm_testbench.sv
-│   │   │   └── ntm_uvm_test.sv
-│   │   └── ntm_state_vector_state
-│   │       ├── ntm_uvm_agent.sv
-│   │       ├── ntm_uvm_driver.sv
-│   │       ├── ntm_uvm_environment.sv
-│   │       ├── ntm_uvm_interface.sv
-│   │       ├── ntm_uvm_monitor.sv
-│   │       ├── ntm_uvm_scoreboard.sv
-│   │       ├── ntm_uvm_sequence_item.sv
-│   │       ├── ntm_uvm_sequencer.sv
-│   │       ├── ntm_uvm_sequence.sv
-│   │       ├── ntm_uvm_testbench.sv
-│   │       └── ntm_uvm_test.sv
-│   └── top
-│       └── ntm_state_top
-│           ├── ntm_uvm_agent.sv
-│           ├── ntm_uvm_driver.sv
-│           ├── ntm_uvm_environment.sv
-│           ├── ntm_uvm_interface.sv
-│           ├── ntm_uvm_monitor.sv
-│           ├── ntm_uvm_scoreboard.sv
-│           ├── ntm_uvm_sequence_item.sv
-│           ├── ntm_uvm_sequencer.sv
-│           ├── ntm_uvm_sequence.sv
-│           ├── ntm_uvm_testbench.sv
-│           └── ntm_uvm_test.sv
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation
@@ -1647,4 +1559,4 @@ library
                 ├── ntm_uvm_testbench.sv
                 └── ntm_uvm_test.sv
 
-173 directories, 1474 files
+162 directories, 1397 files

@@ -228,22 +228,6 @@ code
 │   ├── accelerator_math_verilog_pkg.sv
 │   ├── accelerator_pnn_controller_verilog_pkg.sv
 │   └── accelerator_state_verilog_pkg.sv
-├── state
-│   ├── feedback
-│   │   ├── accelerator_state_matrix_feedforward.sv
-│   │   ├── accelerator_state_matrix_input.sv
-│   │   ├── accelerator_state_matrix_output.sv
-│   │   └── accelerator_state_matrix_state.sv
-│   ├── outputs
-│   │   ├── accelerator_state_vector_output.sv
-│   │   └── accelerator_state_vector_state.sv
-│   ├── pnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.sv
-│   │   └── standard
-│   │       └── accelerator_controller.sv
-│   └── top
-│       └── accelerator_state_top.sv
 └── trainer
     ├── differentiation
     │   ├── accelerator_trainer_matrix_differentiation.sv
@@ -258,4 +242,4 @@ code
     └── pnn
         └── accelerator_trainer.sv
 
-76 directories, 182 files
+69 directories, 173 files

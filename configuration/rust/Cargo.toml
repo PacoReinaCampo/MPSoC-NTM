@@ -2,21 +2,26 @@
 members = [
 "library/arithmetic",
 
-"library/algebra",
 "library/math",
+
+"library/algebra",
 
 #"library/state",
 
-"application/arithmetic/scalar",
+#"library/nn,
+
+#"library/trainer,
+
 "application/arithmetic/vector",
 "application/arithmetic/matrix",
 "application/arithmetic/tensor",
 
+"application/math/scalar",
+"application/math/vector",
+"application/math/matrix",
+
 "application/algebra/scalar",
 "application/algebra/vector",
 "application/algebra/matrix",
-"application/algebra/tensor",
-"application/math/scalar",
-"application/math/vector",
-"application/math/matrix"
+"application/algebra/tensor"
 ]

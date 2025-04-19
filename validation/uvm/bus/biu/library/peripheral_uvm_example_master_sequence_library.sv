@@ -14,7 +14,7 @@ class incr_read_byte_seq extends ubus_base_sequence;
 
   rand int unsigned count;
   constraint count_ct {(count < 20);}
-  rand bit          [15:0] start_address;
+  rand bit          [31:0] start_address;
   rand int unsigned        incr_transmit_del = 0;
   constraint transmit_del_ct {(incr_transmit_del <= 10);}
 
@@ -44,7 +44,7 @@ class incr_write_byte_seq extends ubus_base_sequence;
 
   rand int unsigned count;
   constraint count_ct {(count < 20);}
-  rand bit          [15:0] start_address;
+  rand bit          [31:0] start_address;
   rand int unsigned        incr_transmit_del = 0;
   constraint transmit_del_ct {(incr_transmit_del <= 10);}
 
@@ -99,9 +99,9 @@ class r8_w8_r4_w4_seq extends ubus_base_sequence;
   write_word_seq               write_word_seq0;
   write_double_word_seq        write_double_word_seq0;
 
-  rand bit              [15:0] start_address;
+  rand bit              [31:0] start_address;
 
-  constraint start_address_ct {(start_address == 16'h4000);}
+  constraint start_address_ct {(start_address == 32'h00004000);}
 
   virtual task body();
     `uvm_info(get_type_name(), $sformatf("%s starting...", get_sequence_path()), UVM_MEDIUM);
@@ -129,8 +129,8 @@ class read_modify_write_seq extends ubus_base_sequence;
   read_byte_seq         read_byte_seq0;
   write_byte_seq        write_byte_seq0;
 
-  rand bit       [15:0] addr_check;
-  bit            [ 7:0] m_data0_check;
+  rand bit       [31:0] addr_check;
+  bit            [31:0] m_data0_check;
 
   virtual task body();
     `uvm_info(get_type_name(), $sformatf("%s starting...", get_sequence_path()), UVM_MEDIUM);

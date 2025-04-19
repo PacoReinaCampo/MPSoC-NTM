@@ -208,22 +208,6 @@ code
 │   ├── model_ntm_core_verilog_pkg.sv
 │   ├── model_pnn_controller_verilog_pkg.sv
 │   └── model_state_verilog_pkg.sv
-├── state
-│   ├── feedback
-│   │   ├── model_state_matrix_feedforward.sv
-│   │   ├── model_state_matrix_input.sv
-│   │   ├── model_state_matrix_output.sv
-│   │   └── model_state_matrix_state.sv
-│   ├── outputs
-│   │   ├── model_state_vector_output.sv
-│   │   └── model_state_vector_state.sv
-│   ├── pnn
-│   │   ├── convolutional
-│   │   │   └── model_controller.sv
-│   │   └── standard
-│   │       └── model_controller.sv
-│   └── top
-│       └── model_state_top.sv
 └── trainer
     ├── differentiation
     │   ├── model_trainer_matrix_differentiation.sv
@@ -238,4 +222,4 @@ code
     └── pnn
         └── model_trainer.sv
 
-71 directories, 167 files
+64 directories, 158 files

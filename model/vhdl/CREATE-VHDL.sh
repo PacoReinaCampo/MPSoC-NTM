@@ -148,15 +148,6 @@ touch code/pkg/model_math_vhdl_pkg.vhd
 touch code/pkg/model_ntm_core_vhdl_pkg.vhd
 touch code/pkg/model_pnn_controller_vhdl_pkg.vhd
 touch code/pkg/model_state_vhdl_pkg.vhd
-touch code/state/feedback/model_state_matrix_feedforward.vhd
-touch code/state/feedback/model_state_matrix_input.vhd
-touch code/state/feedback/model_state_matrix_output.vhd
-touch code/state/feedback/model_state_matrix_state.vhd
-touch code/state/outputs/model_state_vector_output.vhd
-touch code/state/outputs/model_state_vector_state.vhd
-touch code/state/pnn/convolutional/model_controller.vhd
-touch code/state/pnn/standard/model_controller.vhd
-touch code/state/top/model_state_top.vhd
 touch code/trainer/differentiation/model_trainer_matrix_differentiation.vhd
 touch code/trainer/differentiation/model_trainer_vector_differentiation.vhd
 touch code/trainer/fnn/model_trainer.vhd

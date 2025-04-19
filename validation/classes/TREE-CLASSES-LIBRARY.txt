@@ -1106,94 +1106,6 @@ library
 │               ├── ntm_testbench.sv
 │               ├── ntm_test.sv
 │               └── ntm_transaction.sv
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward
-│   │   │   ├── ntm_agent.sv
-│   │   │   ├── ntm_driver.sv
-│   │   │   ├── ntm_environment.sv
-│   │   │   ├── ntm_generator.sv
-│   │   │   ├── ntm_interface.sv
-│   │   │   ├── ntm_monitor.sv
-│   │   │   ├── ntm_package.sv
-│   │   │   ├── ntm_scoreboard.sv
-│   │   │   ├── ntm_testbench.sv
-│   │   │   ├── ntm_test.sv
-│   │   │   └── ntm_transaction.sv
-│   │   ├── ntm_state_matrix_input
-│   │   │   ├── ntm_agent.sv
-│   │   │   ├── ntm_driver.sv
-│   │   │   ├── ntm_environment.sv
-│   │   │   ├── ntm_generator.sv
-│   │   │   ├── ntm_interface.sv
-│   │   │   ├── ntm_monitor.sv
-│   │   │   ├── ntm_package.sv
-│   │   │   ├── ntm_scoreboard.sv
-│   │   │   ├── ntm_testbench.sv
-│   │   │   ├── ntm_test.sv
-│   │   │   └── ntm_transaction.sv
-│   │   ├── ntm_state_matrix_output
-│   │   │   ├── ntm_agent.sv
-│   │   │   ├── ntm_driver.sv
-│   │   │   ├── ntm_environment.sv
-│   │   │   ├── ntm_generator.sv
-│   │   │   ├── ntm_interface.sv
-│   │   │   ├── ntm_monitor.sv
-│   │   │   ├── ntm_package.sv
-│   │   │   ├── ntm_scoreboard.sv
-│   │   │   ├── ntm_testbench.sv
-│   │   │   ├── ntm_test.sv
-│   │   │   └── ntm_transaction.sv
-│   │   └── ntm_state_matrix_state
-│   │       ├── ntm_agent.sv
-│   │       ├── ntm_driver.sv
-│   │       ├── ntm_environment.sv
-│   │       ├── ntm_generator.sv
-│   │       ├── ntm_interface.sv
-│   │       ├── ntm_monitor.sv
-│   │       ├── ntm_package.sv
-│   │       ├── ntm_scoreboard.sv
-│   │       ├── ntm_testbench.sv
-│   │       ├── ntm_test.sv
-│   │       └── ntm_transaction.sv
-│   ├── outputs
-│   │   ├── ntm_state_vector_output
-│   │   │   ├── ntm_agent.sv
-│   │   │   ├── ntm_driver.sv
-│   │   │   ├── ntm_environment.sv
-│   │   │   ├── ntm_generator.sv
-│   │   │   ├── ntm_interface.sv
-│   │   │   ├── ntm_monitor.sv
-│   │   │   ├── ntm_package.sv
-│   │   │   ├── ntm_scoreboard.sv
-│   │   │   ├── ntm_testbench.sv
-│   │   │   ├── ntm_test.sv
-│   │   │   └── ntm_transaction.sv
-│   │   └── ntm_state_vector_state
-│   │       ├── ntm_agent.sv
-│   │       ├── ntm_driver.sv
-│   │       ├── ntm_environment.sv
-│   │       ├── ntm_generator.sv
-│   │       ├── ntm_interface.sv
-│   │       ├── ntm_monitor.sv
-│   │       ├── ntm_package.sv
-│   │       ├── ntm_scoreboard.sv
-│   │       ├── ntm_testbench.sv
-│   │       ├── ntm_test.sv
-│   │       └── ntm_transaction.sv
-│   └── top
-│       └── ntm_state_top
-│           ├── ntm_agent.sv
-│           ├── ntm_driver.sv
-│           ├── ntm_environment.sv
-│           ├── ntm_generator.sv
-│           ├── ntm_interface.sv
-│           ├── ntm_monitor.sv
-│           ├── ntm_package.sv
-│           ├── ntm_scoreboard.sv
-│           ├── ntm_testbench.sv
-│           ├── ntm_test.sv
-│           └── ntm_transaction.sv
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation
@@ -1647,4 +1559,4 @@ library
                 ├── ntm_test.sv
                 └── ntm_transaction.sv
 
-173 directories, 1474 files
+162 directories, 1397 files

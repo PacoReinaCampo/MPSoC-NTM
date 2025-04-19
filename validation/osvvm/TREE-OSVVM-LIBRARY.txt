@@ -386,38 +386,6 @@ library
 │               ├── ntm_model_pkg.vhd
 │               ├── ntm_model.vhd
 │               └── ntm_testbench.vhd
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── ntm_state_matrix_input
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   ├── ntm_state_matrix_output
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   └── ntm_state_matrix_state
-│   │       ├── ntm_model_pkg.vhd
-│   │       ├── ntm_model.vhd
-│   │       └── ntm_testbench.vhd
-│   ├── outputs
-│   │   ├── ntm_state_vector_output
-│   │   │   ├── ntm_model_pkg.vhd
-│   │   │   ├── ntm_model.vhd
-│   │   │   └── ntm_testbench.vhd
-│   │   └── ntm_state_vector_state
-│   │       ├── ntm_model_pkg.vhd
-│   │       ├── ntm_model.vhd
-│   │       └── ntm_testbench.vhd
-│   └── top
-│       └── ntm_state_top
-│           ├── ntm_model_pkg.vhd
-│           ├── ntm_model.vhd
-│           └── ntm_testbench.vhd
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation
@@ -575,4 +543,4 @@ library
                 ├── ntm_model.vhd
                 └── ntm_testbench.vhd
 
-173 directories, 402 files
+162 directories, 381 files

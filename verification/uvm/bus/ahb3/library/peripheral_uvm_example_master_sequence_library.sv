@@ -2,6 +2,8 @@
 // SEQUENCE: incr_read_byte_seq
 ////////////////////////////////////////////////////////////////////////////////
 
+import peripheral_ahb3_pkg::*;
+
 class incr_read_byte_seq extends ubus_base_sequence;
 
   function new(string name = "incr_read_byte_seq");
@@ -14,8 +16,8 @@ class incr_read_byte_seq extends ubus_base_sequence;
 
   rand int unsigned count;
   constraint count_ct {(count < 20);}
-  rand bit          [15:0] start_address;
-  rand int unsigned        incr_transmit_del = 0;
+  rand bit          [HADDR_SIZE-1:0] start_address;
+  rand int unsigned                  incr_transmit_del = 0;
   constraint transmit_del_ct {(incr_transmit_del <= 10);}
 
   virtual task body();
@@ -44,8 +46,8 @@ class incr_write_byte_seq extends ubus_base_sequence;
 
   rand int unsigned count;
   constraint count_ct {(count < 20);}
-  rand bit          [15:0] start_address;
-  rand int unsigned        incr_transmit_del = 0;
+  rand bit          [HADDR_SIZE-1:0] start_address;
+  rand int unsigned                  incr_transmit_del = 0;
   constraint transmit_del_ct {(incr_transmit_del <= 10);}
 
   virtual task body();
@@ -129,8 +131,8 @@ class read_modify_write_seq extends ubus_base_sequence;
   read_byte_seq         read_byte_seq0;
   write_byte_seq        write_byte_seq0;
 
-  rand bit       [15:0] addr_check;
-  bit            [ 7:0] m_data0_check;
+  rand bit   [HADDR_SIZE-1:0] addr_check;
+  bit        [HDATA_SIZE-1:0] m_data0_check;
 
   virtual task body();
     `uvm_info(get_type_name(), $sformatf("%s starting...", get_sequence_path()), UVM_MEDIUM);

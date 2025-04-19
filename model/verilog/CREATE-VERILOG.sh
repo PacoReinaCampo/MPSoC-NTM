@@ -148,15 +148,6 @@ touch code/pkg/model_math_verilog_pkg.sv
 touch code/pkg/model_ntm_core_verilog_pkg.sv
 touch code/pkg/model_pnn_controller_verilog_pkg.sv
 touch code/pkg/model_state_verilog_pkg.sv
-touch code/state/feedback/model_state_matrix_feedforward.sv
-touch code/state/feedback/model_state_matrix_input.sv
-touch code/state/feedback/model_state_matrix_output.sv
-touch code/state/feedback/model_state_matrix_state.sv
-touch code/state/outputs/model_state_vector_output.sv
-touch code/state/outputs/model_state_vector_state.sv
-touch code/state/pnn/convolutional/model_controller.sv
-touch code/state/pnn/standard/model_controller.sv
-touch code/state/top/model_state_top.sv
 touch code/trainer/differentiation/model_trainer_matrix_differentiation.sv
 touch code/trainer/differentiation/model_trainer_vector_differentiation.sv
 touch code/trainer/fnn/model_trainer.sv
