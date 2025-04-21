@@ -51,7 +51,7 @@ module ntm_testbench;
     rst
   );
 
-  ntm_design DUT (
+  ntm_design dut (
     .clk(vif.clk),
     .rst(vif.rst),
 
