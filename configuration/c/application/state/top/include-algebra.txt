@@ -1,0 +1,83 @@
+###################################################################################
+##                                            __ _      _     _                  ##
+##                                           / _(_)    | |   | |                 ##
+##                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |                 ##
+##               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |                 ##
+##              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |                 ##
+##               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|                 ##
+##                  | |                                                          ##
+##                  |_|                                                          ##
+##                                                                               ##
+##                                                                               ##
+##              Peripheral-NTM for MPSoC                                         ##
+##              Neural Turing Machine for MPSoC                                  ##
+##                                                                               ##
+###################################################################################
+
+###################################################################################
+##                                                                               ##
+## Copyright (c) 2020-2024 by the author(s)                                      ##
+##                                                                               ##
+## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
+## of this software and associated documentation files (the "Software"), to deal ##
+## in the Software without restriction, including without limitation the rights  ##
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     ##
+## copies of the Software, and to permit persons to whom the Software is         ##
+## furnished to do so, subject to the following conditions:                      ##
+##                                                                               ##
+## The above copyright notice and this permission notice shall be included in    ##
+## all copies or substantial portions of the Software.                           ##
+##                                                                               ##
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    ##
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      ##
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   ##
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        ##
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, ##
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     ##
+## THE SOFTWARE.                                                                 ##
+##                                                                               ##
+## ============================================================================= ##
+## Author(s):                                                                    ##
+##   Paco Reina Campo <pacoreinacampo@queenfield.tech>                           ##
+##                                                                               ##
+###################################################################################
+
+#####################################################################
+# State-Feedback Sources
+#####################################################################
+
+SOURCES_ALGEBRA =	../../../library/algebra/ntm_algebra.h \
+			../../../library/algebra/matrix/ntm_matrix_convolution.c \
+			../../../library/algebra/matrix/ntm_matrix_differentiation.c \
+			../../../library/algebra/matrix/ntm_matrix_integration.c \
+			../../../library/algebra/matrix/ntm_matrix_inverse.c \
+			../../../library/algebra/matrix/ntm_matrix_multiplication.c \
+			../../../library/algebra/matrix/ntm_matrix_product.c \
+			../../../library/algebra/matrix/ntm_matrix_softmax.c \
+			../../../library/algebra/matrix/ntm_matrix_summation.c \
+			../../../library/algebra/matrix/ntm_matrix_transpose.c \
+			../../../library/algebra/matrix/ntm_matrix_vector_convolution.c \
+			../../../library/algebra/matrix/ntm_matrix_vector_product.c \
+			../../../library/algebra/matrix/ntm_transpose_vector_product.c \
+			../../../library/algebra/scalar/ntm_scalar_multiplication.c \
+			../../../library/algebra/scalar/ntm_scalar_summation.c \
+			../../../library/algebra/tensor/ntm_tensor_convolution.c \
+			../../../library/algebra/tensor/ntm_tensor_differentiation.c \
+			../../../library/algebra/tensor/ntm_tensor_integration.c \
+			../../../library/algebra/tensor/ntm_tensor_inverse.c \
+			../../../library/algebra/tensor/ntm_tensor_matrix_convolution.c \
+			../../../library/algebra/tensor/ntm_tensor_matrix_product.c \
+			../../../library/algebra/tensor/ntm_tensor_multiplication.c \
+			../../../library/algebra/tensor/ntm_tensor_product.c \
+			../../../library/algebra/tensor/ntm_tensor_softmax.c \
+			../../../library/algebra/tensor/ntm_tensor_summation.c \
+			../../../library/algebra/tensor/ntm_tensor_transpose.c \
+			../../../library/algebra/vector/ntm_dot_product.c \
+			../../../library/algebra/vector/ntm_vector_convolution.c \
+			../../../library/algebra/vector/ntm_vector_cosine_similarity.c \
+			../../../library/algebra/vector/ntm_vector_differentiation.c \
+			../../../library/algebra/vector/ntm_vector_integration.c \
+			../../../library/algebra/vector/ntm_vector_module.c \
+			../../../library/algebra/vector/ntm_vector_multiplication.c \
+			../../../library/algebra/vector/ntm_vector_softmax.c \
+			../../../library/algebra/vector/ntm_vector_summation.c

@@ -35,8 +35,8 @@ code
 │       └── accelerator_vector_transpose.sv
 ├── architecture
 │   ├── mpsoc
-│   │   ├── ahb3
-│   │   │   └── model_mpsoc_ahb3.sv
+│   │   ├── ahb4
+│   │   │   └── model_mpsoc_ahb4.sv
 │   │   ├── apb4
 │   │   │   └── model_mpsoc_apb4.sv
 │   │   ├── axi4
@@ -48,8 +48,8 @@ code
 │   │   └── wb
 │   │       └── model_mpsoc_wb.sv
 │   ├── pu
-│   │   ├── ahb3
-│   │   │   └── model_pu_ahb3.sv
+│   │   ├── ahb4
+│   │   │   └── model_pu_ahb4.sv
 │   │   ├── apb4
 │   │   │   └── model_pu_apb4.sv
 │   │   ├── axi4
@@ -61,8 +61,8 @@ code
 │   │   └── wb
 │   │       └── model_pu_wb.sv
 │   └── soc
-│       ├── ahb3
-│       │   └── model_soc_ahb3.sv
+│       ├── ahb4
+│       │   └── model_soc_ahb4.sv
 │       ├── apb4
 │       │   └── model_soc_apb4.sv
 │       ├── axi4

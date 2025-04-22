@@ -76,6 +76,58 @@ library
 │       ├── ntm_vector_mean_function.c
 │       └── ntm_vector_oneplus_function.c
 ├── nn
+│   ├── ann
+│   │   ├── components
+│   │   │   ├── ntm_masked_multi_head_attention.c
+│   │   │   ├── ntm_masked_scaled_dot_product_attention.c
+│   │   │   ├── ntm_multi_head_attention.c
+│   │   │   └── ntm_scaled_dot_product_attention.c
+│   │   ├── controller
+│   │   │   ├── fnn
+│   │   │   │   └── ntm_fnn.c
+│   │   │   └── lstm
+│   │   │       └── ntm_lstm.c
+│   │   ├── functions
+│   │   │   ├── ntm_layer_norm.c
+│   │   │   └── ntm_positional_encoding.c
+│   │   ├── inputs
+│   │   │   ├── ntm_inputs_vector.c
+│   │   │   ├── ntm_keys_vector.c
+│   │   │   ├── ntm_queries_vector.c
+│   │   │   └── ntm_values_vector.c
+│   │   └── top
+│   │       ├── ntm_controller.c
+│   │       ├── ntm_decoder.c
+│   │       └── ntm_encoder.c
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_addressing.c
+│   │   │   ├── dnc_allocation_weighting.c
+│   │   │   ├── dnc_backward_weighting.c
+│   │   │   ├── dnc_forward_weighting.c
+│   │   │   ├── dnc_matrix_content_based_addressing.c
+│   │   │   ├── dnc_memory_matrix.c
+│   │   │   ├── dnc_memory_retention_vector.c
+│   │   │   ├── dnc_precedence_weighting.c
+│   │   │   ├── dnc_sort_vector.c
+│   │   │   ├── dnc_temporal_link_matrix.c
+│   │   │   ├── dnc_usage_vector.c
+│   │   │   └── dnc_vector_content_based_addressing.c
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting.c
+│   │   │   ├── dnc_read_vectors.c
+│   │   │   └── dnc_read_weighting.c
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix.c
+│   │   │   ├── dnc_interface_top.c
+│   │   │   ├── dnc_interface_vector.c
+│   │   │   ├── dnc_output_vector.c
+│   │   │   └── dnc_top.c
+│   │   ├── trained
+│   │   │   └── dnc_trained_top.c
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting.c
+│   │       └── dnc_write_weighting.c
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.c
@@ -116,6 +168,17 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.c
 │           └── ntm_writing.c
+├── state
+│   ├── feedback
+│   │   ├── ntm_state_matrix_feedforward.c
+│   │   ├── ntm_state_matrix_input.c
+│   │   ├── ntm_state_matrix_output.c
+│   │   └── ntm_state_matrix_state.c
+│   ├── outputs
+│   │   ├── ntm_state_vector_output.c
+│   │   └── ntm_state_vector_state.c
+│   └── top
+│       └── ntm_state_top.c
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.c
@@ -162,4 +225,4 @@ library
             ├── ntm_lstm_output_v_trainer.c
             └── ntm_lstm_output_w_trainer.c
 
-35 directories, 127 files
+53 directories, 172 files

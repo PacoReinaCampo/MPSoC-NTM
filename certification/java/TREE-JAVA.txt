@@ -36,6 +36,58 @@ library
 │   └── vector
 │       └── ntm_vector_math.java
 ├── nn
+│   ├── ann
+│   │   ├── components
+│   │   │   ├── ntm_masked_multi_head_attention.java
+│   │   │   ├── ntm_masked_scaled_dot_product_attention.java
+│   │   │   ├── ntm_multi_head_attention.java
+│   │   │   └── ntm_scaled_dot_product_attention.java
+│   │   ├── controller
+│   │   │   ├── fnn
+│   │   │   │   └── ntm_fnn.java
+│   │   │   └── lstm
+│   │   │       └── ntm_lstm.java
+│   │   ├── functions
+│   │   │   ├── ntm_layer_norm.java
+│   │   │   └── ntm_positional_encoding.java
+│   │   ├── inputs
+│   │   │   ├── ntm_inputs_vector.java
+│   │   │   ├── ntm_keys_vector.java
+│   │   │   ├── ntm_queries_vector.java
+│   │   │   └── ntm_values_vector.java
+│   │   └── top
+│   │       ├── ntm_controller.java
+│   │       ├── ntm_decoder.java
+│   │       └── ntm_encoder.java
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_addressing.java
+│   │   │   ├── dnc_allocation_weighting.java
+│   │   │   ├── dnc_backward_weighting.java
+│   │   │   ├── dnc_forward_weighting.java
+│   │   │   ├── dnc_matrix_content_based_addressing.java
+│   │   │   ├── dnc_memory_matrix.java
+│   │   │   ├── dnc_memory_retention_vector.java
+│   │   │   ├── dnc_precedence_weighting.java
+│   │   │   ├── dnc_sort_vector.java
+│   │   │   ├── dnc_temporal_link_matrix.java
+│   │   │   ├── dnc_usage_vector.java
+│   │   │   └── dnc_vector_content_based_addressing.java
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_content_weighting.java
+│   │   │   ├── dnc_read_vectors.java
+│   │   │   └── dnc_read_weighting.java
+│   │   ├── top
+│   │   │   ├── dnc_interface_matrix.java
+│   │   │   ├── dnc_interface_top.java
+│   │   │   ├── dnc_interface_vector.java
+│   │   │   ├── dnc_output_vector.java
+│   │   │   └── dnc_top.java
+│   │   ├── trained
+│   │   │   └── dnc_trained_top.java
+│   │   └── write_heads
+│   │       ├── dnc_write_content_weighting.java
+│   │       └── dnc_write_weighting.java
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── ntm_controller.java
@@ -76,6 +128,13 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.java
 │           └── ntm_writing.java
+├── state
+│   ├── feedback
+│   │   └── ntm_state_feedback.java
+│   ├── outputs
+│   │   └── ntm_state_outputs.java
+│   └── top
+│       └── ntm_state_top.java
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.java
@@ -122,4 +181,4 @@ library
             ├── ntm_lstm_output_v_trainer.java
             └── ntm_lstm_output_w_trainer.java
 
-35 directories, 87 files
+53 directories, 128 files
