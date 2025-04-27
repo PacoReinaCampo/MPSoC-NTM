@@ -43,8 +43,8 @@ code
 │   │   │   └── model_mpsoc_axi4.sv
 │   │   ├── bb
 │   │   │   └── model_mpsoc_bb.sv
-│   │   ├── biu
-│   │   │   └── model_mpsoc_biu.sv
+│   │   ├── tl
+│   │   │   └── model_mpsoc_tl.sv
 │   │   └── wb
 │   │       └── model_mpsoc_wb.sv
 │   ├── pu
@@ -56,8 +56,8 @@ code
 │   │   │   └── model_pu_axi4.sv
 │   │   ├── bb
 │   │   │   └── model_pu_bb.sv
-│   │   ├── biu
-│   │   │   └── model_pu_biu.sv
+│   │   ├── tl
+│   │   │   └── model_pu_tl.sv
 │   │   └── wb
 │   │       └── model_pu_wb.sv
 │   └── soc
@@ -69,8 +69,8 @@ code
 │       │   └── model_soc_axi4.sv
 │       ├── bb
 │       │   └── model_soc_bb.sv
-│       ├── biu
-│       │   └── model_soc_biu.sv
+│       ├── tl
+│       │   └── model_soc_tl.sv
 │       └── wb
 │           └── model_soc_wb.sv
 ├── arithmetic

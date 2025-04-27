@@ -43,8 +43,8 @@ code
 │   │   │   └── accelerator_mpsoc_axi4.vhd
 │   │   ├── bb
 │   │   │   └── accelerator_mpsoc_bb.vhd
-│   │   ├── biu
-│   │   │   └── accelerator_mpsoc_biu.vhd
+│   │   ├── tl
+│   │   │   └── accelerator_mpsoc_tl.vhd
 │   │   └── wb
 │   │       └── accelerator_mpsoc_wb.vhd
 │   ├── pu
@@ -56,8 +56,8 @@ code
 │   │   │   └── accelerator_pu_axi4.vhd
 │   │   ├── bb
 │   │   │   └── accelerator_pu_bb.vhd
-│   │   ├── biu
-│   │   │   └── accelerator_pu_biu.vhd
+│   │   ├── tl
+│   │   │   └── accelerator_pu_tl.vhd
 │   │   └── wb
 │   │       └── accelerator_pu_wb.vhd
 │   └── soc
@@ -69,8 +69,8 @@ code
 │       │   └── accelerator_soc_axi4.vhd
 │       ├── bb
 │       │   └── accelerator_soc_bb.vhd
-│       ├── biu
-│       │   └── accelerator_soc_biu.vhd
+│       ├── tl
+│       │   └── accelerator_soc_tl.vhd
 │       └── wb
 │           └── accelerator_soc_wb.vhd
 ├── arithmetic
