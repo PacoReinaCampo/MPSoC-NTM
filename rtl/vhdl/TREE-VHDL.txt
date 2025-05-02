@@ -35,8 +35,8 @@ code
 │       └── accelerator_vector_summation.vhd
 ├── architecture
 │   ├── mpsoc
-│   │   ├── ahb4
-│   │   │   └── accelerator_mpsoc_ahb4.vhd
+│   │   ├── ahb3
+│   │   │   └── accelerator_mpsoc_ahb3.vhd
 │   │   ├── apb4
 │   │   │   └── accelerator_mpsoc_apb4.vhd
 │   │   ├── axi4
@@ -48,8 +48,8 @@ code
 │   │   └── wb
 │   │       └── accelerator_mpsoc_wb.vhd
 │   ├── pu
-│   │   ├── ahb4
-│   │   │   └── accelerator_pu_ahb4.vhd
+│   │   ├── ahb3
+│   │   │   └── accelerator_pu_ahb3.vhd
 │   │   ├── apb4
 │   │   │   └── accelerator_pu_apb4.vhd
 │   │   ├── axi4
@@ -61,8 +61,8 @@ code
 │   │   └── wb
 │   │       └── accelerator_pu_wb.vhd
 │   └── soc
-│       ├── ahb4
-│       │   └── accelerator_soc_ahb4.vhd
+│       ├── ahb3
+│       │   └── accelerator_soc_ahb3.vhd
 │       ├── apb4
 │       │   └── accelerator_soc_apb4.vhd
 │       ├── axi4
