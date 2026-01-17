@@ -64,11 +64,6 @@ library
 │       ├── top
 │       ├── trained
 │       └── write_heads
-├── state
-│   ├── ntm_state.hpp
-│   ├── feedback
-│   ├── outputs
-│   └── top
 └── trainer
     ├── ntm_differentiation.hpp
     ├── ntm_fnn.hpp
@@ -81,4 +76,4 @@ library
         ├── input
         └── output
 
-69 directories, 12 files
+65 directories, 11 files

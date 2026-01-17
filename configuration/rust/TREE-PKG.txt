@@ -54,14 +54,6 @@ library
 │       ├── top
 │       ├── trained
 │       └── write_heads
-├── state
-│   └── src
-│       ├── feedback
-│       │   └── mod.rs
-│       ├── outputs
-│       │   └── mod.rs
-│       └── top
-│           └── mod.rs
 └── trainer
     ├── differentiation
     ├── fnn
@@ -71,4 +63,4 @@ library
         ├── input
         └── output
 
-57 directories, 14 files
+52 directories, 11 files

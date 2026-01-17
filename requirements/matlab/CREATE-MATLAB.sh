@@ -130,13 +130,6 @@ touch library/nn/ntm/top/ntm_top.m
 touch library/nn/ntm/trained/ntm_trained_top.m
 touch library/nn/ntm/write_heads/ntm_erasing.m
 touch library/nn/ntm/write_heads/ntm_writing.m
-touch library/state/feedback/ntm_state_matrix_feedforward.m
-touch library/state/feedback/ntm_state_matrix_input.m
-touch library/state/feedback/ntm_state_matrix_output.m
-touch library/state/feedback/ntm_state_matrix_state.m
-touch library/state/outputs/ntm_state_vector_output.m
-touch library/state/outputs/ntm_state_vector_state.m
-touch library/state/top/ntm_state_top.m
 touch library/trainer/differentiation/ntm_matrix_controller_differentiation.m
 touch library/trainer/differentiation/ntm_vector_controller_differentiation.m
 touch library/trainer/fnn/ntm_fnn_b_trainer.m

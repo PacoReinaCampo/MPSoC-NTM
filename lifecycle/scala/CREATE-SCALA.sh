@@ -75,9 +75,6 @@ touch library/nn/ntm/top/ntm_top.scala
 touch library/nn/ntm/trained/ntm_trained_top.scala
 touch library/nn/ntm/write_heads/ntm_erasing.scala
 touch library/nn/ntm/write_heads/ntm_writing.scala
-touch library/state/feedback/ntm_state_feedback.scala
-touch library/state/outputs/ntm_state_outputs.scala
-touch library/state/top/ntm_state_top.scala
 touch library/trainer/differentiation/ntm_matrix_controller_differentiation.scala
 touch library/trainer/differentiation/ntm_vector_controller_differentiation.scala
 touch library/trainer/fnn/ntm_fnn_b_trainer.scala

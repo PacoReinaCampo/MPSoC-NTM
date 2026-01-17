@@ -118,17 +118,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.go
 │           └── ntm_writing.go
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.go
-│   │   ├── ntm_state_matrix_input.go
-│   │   ├── ntm_state_matrix_output.go
-│   │   └── ntm_state_matrix_state.go
-│   ├── outputs
-│   │   ├── ntm_state_vector_output.go
-│   │   └── ntm_state_vector_state.go
-│   └── top
-│       └── ntm_state_top.go
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.go
@@ -175,4 +164,4 @@ library
             ├── ntm_lstm_output_v_trainer.go
             └── ntm_lstm_output_w_trainer.go
 
-53 directories, 122 files
+49 directories, 115 files

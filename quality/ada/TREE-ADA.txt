@@ -117,13 +117,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.adb
 │           └── ntm_writing.adb
-├── state
-│   ├── feedback
-│   │   └── ntm_state_feedback.adb
-│   ├── outputs
-│   │   └── ntm_state_outputs.adb
-│   └── top
-│       └── ntm_state_top.adb
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.adb
@@ -170,4 +163,4 @@ library
             ├── ntm_lstm_output_v_trainer.adb
             └── ntm_lstm_output_w_trainer.adb
 
-53 directories, 117 files
+49 directories, 114 files

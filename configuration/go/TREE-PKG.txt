@@ -40,10 +40,6 @@ library
 │       ├── top
 │       ├── trained
 │       └── write_heads
-├── state
-│   ├── feedback
-│   ├── outputs
-│   └── top
 └── trainer
     ├── differentiation
     ├── fnn
@@ -53,4 +49,4 @@ library
         ├── input
         └── output
 
-53 directories, 0 files
+49 directories, 0 files

@@ -200,18 +200,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.cpp
 │           └── ntm_writing.cpp
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.cpp
-│   │   ├── ntm_state_matrix_input.cpp
-│   │   ├── ntm_state_matrix_output.cpp
-│   │   └── ntm_state_matrix_state.cpp
-│   ├── ntm_state.cpp
-│   ├── outputs
-│   │   ├── ntm_state_vector_output.cpp
-│   │   └── ntm_state_vector_state.cpp
-│   └── top
-│       └── ntm_state_top.cpp
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.cpp
@@ -261,4 +249,4 @@ library
     ├── ntm_fnn.cpp
     └── ntm_lstm.cpp
 
-69 directories, 192 files
+65 directories, 184 files

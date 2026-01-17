@@ -168,17 +168,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.psl
 │           └── ntm_writing.psl
-├── state
-│   ├── feedback
-│   │   ├── ntm_state_matrix_feedforward.psl
-│   │   ├── ntm_state_matrix_input.psl
-│   │   ├── ntm_state_matrix_output.psl
-│   │   └── ntm_state_matrix_state.psl
-│   ├── outputs
-│   │   ├── ntm_state_vector_output.psl
-│   │   └── ntm_state_vector_state.psl
-│   └── top
-│       └── ntm_state_top.psl
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.psl
@@ -225,4 +214,4 @@ library
             ├── ntm_lstm_output_v_trainer.psl
             └── ntm_lstm_output_w_trainer.psl
 
-53 directories, 172 files
+49 directories, 165 files

@@ -75,9 +75,6 @@ touch library/nn/ntm/top/ntm_top.java
 touch library/nn/ntm/trained/ntm_trained_top.java
 touch library/nn/ntm/write_heads/ntm_erasing.java
 touch library/nn/ntm/write_heads/ntm_writing.java
-touch library/state/feedback/ntm_state_feedback.java
-touch library/state/outputs/ntm_state_outputs.java
-touch library/state/top/ntm_state_top.java
 touch library/trainer/differentiation/ntm_matrix_controller_differentiation.java
 touch library/trainer/differentiation/ntm_vector_controller_differentiation.java
 touch library/trainer/fnn/ntm_fnn_b_trainer.java

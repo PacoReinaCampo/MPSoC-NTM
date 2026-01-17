@@ -1,9 +1,0 @@
-[package]
-name = "state"
-version = "0.0.0"
-authors = []
-edition = "2021"
-
-[dependencies]
-arithmetic = { path = "../../library/arithmetic" }
-algebra = { path = "../../library/algebra" }

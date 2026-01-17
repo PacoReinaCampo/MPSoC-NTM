@@ -112,11 +112,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.h
 │           └── ntm_writing.h
-├── state
-│   ├── ntm_state.h
-│   ├── feedback
-│   ├── outputs
-│   └── top
 └── trainer
     ├── ntm_trainer.h
     ├── differentiation
@@ -164,4 +159,4 @@ library
             ├── ntm_lstm_output_v_trainer.h
             └── ntm_lstm_output_w_trainer.h
 
-53 directories, 111 files
+49 directories, 110 files

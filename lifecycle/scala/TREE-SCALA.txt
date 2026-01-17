@@ -128,13 +128,6 @@ library
 │       └── write_heads
 │           ├── ntm_erasing.scala
 │           └── ntm_writing.scala
-├── state
-│   ├── feedback
-│   │   └── ntm_state_feedback.scala
-│   ├── outputs
-│   │   └── ntm_state_outputs.scala
-│   └── top
-│       └── ntm_state_top.scala
 └── trainer
     ├── differentiation
     │   ├── ntm_matrix_controller_differentiation.scala
@@ -181,4 +174,4 @@ library
             ├── ntm_lstm_output_v_trainer.scala
             └── ntm_lstm_output_w_trainer.scala
 
-53 directories, 128 files
+49 directories, 125 files

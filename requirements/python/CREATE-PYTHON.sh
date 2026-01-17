@@ -156,16 +156,6 @@ touch library/nn/ntm/top/ntm_top.py
 touch library/nn/ntm/trained/ntm_trained_top.py
 touch library/nn/ntm/write_heads/ntm_erasing.py
 touch library/nn/ntm/write_heads/ntm_writing.py
-touch library/state/feedback/ntm_state_matrix_feedforward.py
-touch library/state/feedback/ntm_state_matrix_input.py
-touch library/state/feedback/ntm_state_matrix_output.py
-touch library/state/feedback/ntm_state_matrix_state.py
-touch library/state/outputs/ntm_state_vector_output.py
-touch library/state/outputs/ntm_state_vector_state.py
-touch library/state/test_state_feedback.py
-touch library/state/test_state_outputs.py
-touch library/state/test_state_top.py
-touch library/state/top/ntm_state_top.py
 touch library/trainer/differentiation/ntm_matrix_controller_differentiation.py
 touch library/trainer/differentiation/ntm_vector_controller_differentiation.py
 touch library/trainer/fnn/ntm_fnn_b_trainer.py

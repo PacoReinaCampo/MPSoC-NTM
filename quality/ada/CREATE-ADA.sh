@@ -75,9 +75,6 @@ touch library/nn/ntm/top/ntm_top.adb
 touch library/nn/ntm/trained/ntm_trained_top.adb
 touch library/nn/ntm/write_heads/ntm_erasing.adb
 touch library/nn/ntm/write_heads/ntm_writing.adb
-touch library/state/feedback/ntm_state_feedback.adb
-touch library/state/outputs/ntm_state_outputs.adb
-touch library/state/top/ntm_state_top.adb
 touch library/trainer/differentiation/ntm_matrix_controller_differentiation.adb
 touch library/trainer/differentiation/ntm_vector_controller_differentiation.adb
 touch library/trainer/fnn/ntm_fnn_b_trainer.adb
