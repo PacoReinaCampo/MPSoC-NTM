@@ -61,23 +61,23 @@ int main() {
 
   double data_out;
 
-  ntm_fnn fnn;
+  accelerator_fnn fnn;
 
   data_out = data_a_in + data_b_in;
 
-  assert(fnn.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(fnn.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(fnn.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(fnn.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(fnn.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(fnn.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(fnn.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(fnn.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

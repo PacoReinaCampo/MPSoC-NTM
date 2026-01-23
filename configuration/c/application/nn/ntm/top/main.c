@@ -47,11 +47,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/ntm/top/ntm_top.h"
-#include "../../../../library/nn/ntm/top/ntm_interface_top.h"
-#include "../../../../library/nn/ntm/top/ntm_output_vector.h"
-#include "../../../../library/nn/ntm/top/ntm_interface_matrix.h"
-#include "../../../../library/nn/ntm/top/ntm_interface_vector.h"
+#include "../../../../library/nn/ntm/top/accelerator_top.h"
+#include "../../../../library/nn/ntm/top/accelerator_interface_top.h"
+#include "../../../../library/nn/ntm/top/accelerator_output_vector.h"
+#include "../../../../library/nn/ntm/top/accelerator_interface_matrix.h"
+#include "../../../../library/nn/ntm/top/accelerator_interface_vector.h"
 
 int main() {
   srand(time(NULL));
@@ -65,19 +65,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_top_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_top_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_top_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_top_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_top_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_top_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_top_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_top_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

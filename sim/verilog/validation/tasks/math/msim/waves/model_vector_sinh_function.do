@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR SINH TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR SINH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_series_testbench/model_vector_sinh_function_test/vector_sinh_function/CLK

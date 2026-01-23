@@ -46,17 +46,17 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_FNN =	../../../library/trainer/fnn/ntm_fnn_b_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_b_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_d_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_d_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_k_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_k_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_u_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_u_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_v_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_v_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_w_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_w_trainer.c \
-		../../../library/trainer/fnn/ntm_fnn_trainer.h \
-		../../../library/trainer/fnn/ntm_fnn_trainer.c
+SOURCES_FNN =	../../../library/trainer/fnn/accelerator_fnn_b_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_b_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_d_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_d_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_k_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_k_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_u_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_u_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_v_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_v_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_w_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_w_trainer.c \
+		../../../library/trainer/fnn/accelerator_fnn_trainer.h \
+		../../../library/trainer/fnn/accelerator_fnn_trainer.c

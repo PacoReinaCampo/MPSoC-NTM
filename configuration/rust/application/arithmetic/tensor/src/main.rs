@@ -44,12 +44,12 @@
 
 extern crate arithmetic;
 
-use arithmetic::tensor::ntm_tensor_adder::*;
-use arithmetic::tensor::ntm_tensor_subtractor::*;
-use arithmetic::tensor::ntm_tensor_multiplier::*;
-use arithmetic::tensor::ntm_tensor_divider::*;
+use arithmetic::tensor::accelerator_tensor_adder::*;
+use arithmetic::tensor::accelerator_tensor_subtractor::*;
+use arithmetic::tensor::accelerator_tensor_multiplier::*;
+use arithmetic::tensor::accelerator_tensor_divider::*;
 
-use arithmetic::tensor::ntm_tensor_arithmetic::*;
+use arithmetic::tensor::accelerator_tensor_arithmetic::*;
 
 fn main() {
     let mut data_a_in: Vec<Vec<Vec<f64>>>;
@@ -110,7 +110,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_adder(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_adder(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![
@@ -165,7 +165,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_subtractor(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_subtractor(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![
@@ -220,7 +220,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_multiplier(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_multiplier(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![
@@ -275,7 +275,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_divider(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_divider(data_a_in, data_b_in), data_out);
 
 
     let addition = TensorArithmetic {
@@ -333,7 +333,7 @@ fn main() {
         ]
     };
 
-    assert_eq!(addition.ntm_tensor_adder(), addition.data_out);
+    assert_eq!(addition.accelerator_tensor_adder(), addition.data_out);
 
     let subtraction = TensorArithmetic {
         data_a_in: vec![
@@ -390,7 +390,7 @@ fn main() {
         ]
     };
 
-    assert_eq!(subtraction.ntm_tensor_subtractor(), subtraction.data_out);
+    assert_eq!(subtraction.accelerator_tensor_subtractor(), subtraction.data_out);
 
     let multiplication = TensorArithmetic {
         data_a_in: vec![
@@ -447,7 +447,7 @@ fn main() {
         ]
     };
 
-    assert_eq!(multiplication.ntm_tensor_multiplier(), multiplication.data_out);
+    assert_eq!(multiplication.accelerator_tensor_multiplier(), multiplication.data_out);
 
     let division = TensorArithmetic {
         data_a_in: vec![
@@ -504,5 +504,5 @@ fn main() {
         ]
     };
 
-    assert_eq!(division.ntm_tensor_divider(), division.data_out);
+    assert_eq!(division.accelerator_tensor_divider(), division.data_out);
 }

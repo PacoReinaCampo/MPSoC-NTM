@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR MULTIPLICATION TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR MULTIPLICATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_multiplication_test/vector_multiplication/CLK

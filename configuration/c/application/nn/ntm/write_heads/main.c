@@ -47,8 +47,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/ntm/write_heads/ntm_erasing.h"
-#include "../../../../library/nn/ntm/write_heads/ntm_writing.h"
+#include "../../../../library/nn/ntm/write_heads/accelerator_erasing.h"
+#include "../../../../library/nn/ntm/write_heads/accelerator_writing.h"
 
 int main() {
   srand(time(NULL));
@@ -62,19 +62,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_writing_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_writing_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_writing_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_writing_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_writing_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_writing_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_writing_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_writing_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

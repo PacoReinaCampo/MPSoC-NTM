@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../verification/uvm/src
 
-../../../../../../../../verification/uvm/application/arithmetic/vector/adder/ntm_design.sv
+../../../../../../../../verification/uvm/application/arithmetic/vector/adder/accelerator_design.sv
 
-../../../../../../../../verification/uvm/library/arithmetic/vector/adder/ntm_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/arithmetic/vector/adder/accelerator_uvm_testbench.sv

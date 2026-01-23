@@ -42,33 +42,33 @@
 ##                                                                               ##
 ###################################################################################
 
-from lstm.activation import ntm_lstm_activation_b_trainer as lstm_activation_b_trainer
-from lstm.activation import ntm_lstm_activation_d_trainer as lstm_activation_d_trainer
-from lstm.activation import ntm_lstm_activation_k_trainer as lstm_activation_k_trainer
-from lstm.activation import ntm_lstm_activation_u_trainer as lstm_activation_u_trainer
-from lstm.activation import ntm_lstm_activation_v_trainer as lstm_activation_v_trainer
-from lstm.activation import ntm_lstm_activation_w_trainer as lstm_activation_w_trainer
-from lstm.activation import ntm_lstm_activation_trainer as lstm_activation_trainer
-from lstm.forget import ntm_lstm_forget_b_trainer as lstm_forget_b_trainer
-from lstm.forget import ntm_lstm_forget_d_trainer as lstm_forget_d_trainer
-from lstm.forget import ntm_lstm_forget_k_trainer as lstm_forget_k_trainer
-from lstm.forget import ntm_lstm_forget_u_trainer as lstm_forget_u_trainer
-from lstm.forget import ntm_lstm_forget_v_trainer as lstm_forget_v_trainer
-from lstm.forget import ntm_lstm_forget_w_trainer as lstm_forget_w_trainer
-from lstm.forget import ntm_lstm_forget_trainer as lstm_forget_trainer
-from lstm.input import ntm_lstm_input_b_trainer as lstm_input_b_trainer
-from lstm.input import ntm_lstm_input_d_trainer as lstm_input_d_trainer
-from lstm.input import ntm_lstm_input_k_trainer as lstm_input_k_trainer
-from lstm.input import ntm_lstm_input_u_trainer as lstm_input_u_trainer
-from lstm.input import ntm_lstm_input_v_trainer as lstm_input_v_trainer
-from lstm.input import ntm_lstm_input_w_trainer as lstm_input_w_trainer
-from lstm.input import ntm_lstm_input_trainer as lstm_input_trainer
-from lstm.output import ntm_lstm_output_b_trainer as lstm_output_b_trainer
-from lstm.output import ntm_lstm_output_d_trainer as lstm_output_d_trainer
-from lstm.output import ntm_lstm_output_k_trainer as lstm_output_k_trainer
-from lstm.output import ntm_lstm_output_u_trainer as lstm_output_u_trainer
-from lstm.output import ntm_lstm_output_v_trainer as lstm_output_v_trainer
-from lstm.output import ntm_lstm_output_w_trainer as lstm_output_w_trainer
-from lstm.output import ntm_lstm_output_trainer as lstm_output_trainer
+from lstm.activation import accelerator_lstm_activation_b_trainer as lstm_activation_b_trainer
+from lstm.activation import accelerator_lstm_activation_d_trainer as lstm_activation_d_trainer
+from lstm.activation import accelerator_lstm_activation_k_trainer as lstm_activation_k_trainer
+from lstm.activation import accelerator_lstm_activation_u_trainer as lstm_activation_u_trainer
+from lstm.activation import accelerator_lstm_activation_v_trainer as lstm_activation_v_trainer
+from lstm.activation import accelerator_lstm_activation_w_trainer as lstm_activation_w_trainer
+from lstm.activation import accelerator_lstm_activation_trainer as lstm_activation_trainer
+from lstm.forget import accelerator_lstm_forget_b_trainer as lstm_forget_b_trainer
+from lstm.forget import accelerator_lstm_forget_d_trainer as lstm_forget_d_trainer
+from lstm.forget import accelerator_lstm_forget_k_trainer as lstm_forget_k_trainer
+from lstm.forget import accelerator_lstm_forget_u_trainer as lstm_forget_u_trainer
+from lstm.forget import accelerator_lstm_forget_v_trainer as lstm_forget_v_trainer
+from lstm.forget import accelerator_lstm_forget_w_trainer as lstm_forget_w_trainer
+from lstm.forget import accelerator_lstm_forget_trainer as lstm_forget_trainer
+from lstm.input import accelerator_lstm_input_b_trainer as lstm_input_b_trainer
+from lstm.input import accelerator_lstm_input_d_trainer as lstm_input_d_trainer
+from lstm.input import accelerator_lstm_input_k_trainer as lstm_input_k_trainer
+from lstm.input import accelerator_lstm_input_u_trainer as lstm_input_u_trainer
+from lstm.input import accelerator_lstm_input_v_trainer as lstm_input_v_trainer
+from lstm.input import accelerator_lstm_input_w_trainer as lstm_input_w_trainer
+from lstm.input import accelerator_lstm_input_trainer as lstm_input_trainer
+from lstm.output import accelerator_lstm_output_b_trainer as lstm_output_b_trainer
+from lstm.output import accelerator_lstm_output_d_trainer as lstm_output_d_trainer
+from lstm.output import accelerator_lstm_output_k_trainer as lstm_output_k_trainer
+from lstm.output import accelerator_lstm_output_u_trainer as lstm_output_u_trainer
+from lstm.output import accelerator_lstm_output_v_trainer as lstm_output_v_trainer
+from lstm.output import accelerator_lstm_output_w_trainer as lstm_output_w_trainer
+from lstm.output import accelerator_lstm_output_trainer as lstm_output_trainer
 
 print('Hello, world!')

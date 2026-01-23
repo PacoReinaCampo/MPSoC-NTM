@@ -58,61 +58,61 @@ entity model_series_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_COSH_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_COSH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_SINH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_SCALAR_COSH_CASE_0          : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_CASE_0          : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_COSH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_SINH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_SCALAR_COSH_CASE_1          : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_CASE_1          : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_COSH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_SINH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_TANH_CASE_1          : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_COSH_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SINH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_VECTOR_COSH_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SINH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_VECTOR_COSH_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SINH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_TANH_CASE_1          : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_COSH_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_COSH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_LOGARITHM_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SINH_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_MATRIX_COSH_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_COSH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SINH_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_MATRIX_COSH_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_CASE_1          : boolean := false
+    ENABLE_ACCELERATOR_MATRIX_COSH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SINH_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TANH_CASE_1          : boolean := false
     );
 end model_series_testbench;
 
@@ -580,7 +580,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- SCALAR COSH
-  model_scalar_cosh_function_test : if (ENABLE_NTM_SCALAR_COSH_TEST) generate
+  model_scalar_cosh_function_test : if (ENABLE_ACCELERATOR_SCALAR_COSH_TEST) generate
     scalar_cosh_function : model_scalar_cosh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -602,7 +602,7 @@ begin
   end generate model_scalar_cosh_function_test;
 
   -- SCALAR EXPONENTIATOR
-  model_scalar_exponentiator_function_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
+  model_scalar_exponentiator_function_test : if (ENABLE_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST) generate
     scalar_exponentiator_function : model_scalar_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -624,7 +624,7 @@ begin
   end generate model_scalar_exponentiator_function_test;
 
   -- SCALAR LOGARITHM
-  model_scalar_logarithm_function_test : if (ENABLE_NTM_SCALAR_LOGARITHM_TEST) generate
+  model_scalar_logarithm_function_test : if (ENABLE_ACCELERATOR_SCALAR_LOGARITHM_TEST) generate
     scalar_logarithm_function : model_scalar_logarithm_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -646,7 +646,7 @@ begin
   end generate model_scalar_logarithm_function_test;
 
   -- SCALAR SINH
-  model_scalar_sinh_function_test : if (ENABLE_NTM_SCALAR_SINH_TEST) generate
+  model_scalar_sinh_function_test : if (ENABLE_ACCELERATOR_SCALAR_SINH_TEST) generate
     scalar_sinh_function : model_scalar_sinh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -668,7 +668,7 @@ begin
   end generate model_scalar_sinh_function_test;
 
   -- SCALAR TANH
-  model_scalar_tanh_function_test : if (ENABLE_NTM_SCALAR_TANH_TEST) generate
+  model_scalar_tanh_function_test : if (ENABLE_ACCELERATOR_SCALAR_TANH_TEST) generate
     scalar_tanh_function : model_scalar_tanh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -729,7 +729,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- VECTOR COSH
-  model_vector_cosh_function_test : if (ENABLE_NTM_VECTOR_COSH_TEST) generate
+  model_vector_cosh_function_test : if (ENABLE_ACCELERATOR_VECTOR_COSH_TEST) generate
     vector_cosh_function : model_vector_cosh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -756,7 +756,7 @@ begin
   end generate model_vector_cosh_function_test;
 
   -- VECTOR EXPONENTIATOR
-  model_vector_exponentiator_function_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
+  model_vector_exponentiator_function_test : if (ENABLE_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST) generate
     vector_exponentiator_function : model_vector_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -783,7 +783,7 @@ begin
   end generate model_vector_exponentiator_function_test;
 
   -- VECTOR LOGARITHM
-  model_vector_logarithm_function_test : if (ENABLE_NTM_VECTOR_LOGARITHM_TEST) generate
+  model_vector_logarithm_function_test : if (ENABLE_ACCELERATOR_VECTOR_LOGARITHM_TEST) generate
     vector_logarithm_function : model_vector_logarithm_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -810,7 +810,7 @@ begin
   end generate model_vector_logarithm_function_test;
 
   -- VECTOR SINH
-  model_vector_sinh_function_test : if (ENABLE_NTM_VECTOR_SINH_TEST) generate
+  model_vector_sinh_function_test : if (ENABLE_ACCELERATOR_VECTOR_SINH_TEST) generate
     vector_sinh_function : model_vector_sinh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -837,7 +837,7 @@ begin
   end generate model_vector_sinh_function_test;
 
   -- VECTOR TANH
-  model_vector_tanh_function_test : if (ENABLE_NTM_VECTOR_TANH_TEST) generate
+  model_vector_tanh_function_test : if (ENABLE_ACCELERATOR_VECTOR_TANH_TEST) generate
     vector_tanh_function : model_vector_tanh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -943,7 +943,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- MATRIX COSH
-  model_matrix_cosh_function_test : if (ENABLE_NTM_MATRIX_COSH_TEST) generate
+  model_matrix_cosh_function_test : if (ENABLE_ACCELERATOR_MATRIX_COSH_TEST) generate
     matrix_cosh_function : model_matrix_cosh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -973,7 +973,7 @@ begin
   end generate model_matrix_cosh_function_test;
 
   -- MATRIX EXPONENTIATOR
-  model_matrix_exponentiator_function_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
+  model_matrix_exponentiator_function_test : if (ENABLE_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST) generate
     matrix_exponentiator_function : model_matrix_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1003,7 +1003,7 @@ begin
   end generate model_matrix_exponentiator_function_test;
 
   -- MATRIX LOGARITHM
-  model_matrix_logarithm_function_test : if (ENABLE_NTM_MATRIX_LOGARITHM_TEST) generate
+  model_matrix_logarithm_function_test : if (ENABLE_ACCELERATOR_MATRIX_LOGARITHM_TEST) generate
     matrix_logarithm_function : model_matrix_logarithm_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1033,7 +1033,7 @@ begin
   end generate model_matrix_logarithm_function_test;
 
   -- MATRIX SINH
-  model_matrix_sinh_function_test : if (ENABLE_NTM_MATRIX_SINH_TEST) generate
+  model_matrix_sinh_function_test : if (ENABLE_ACCELERATOR_MATRIX_SINH_TEST) generate
     matrix_sinh_function : model_matrix_sinh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1063,7 +1063,7 @@ begin
   end generate model_matrix_sinh_function_test;
 
   -- MATRIX TANH
-  model_matrix_tanh_function_test : if (ENABLE_NTM_MATRIX_TANH_TEST) generate
+  model_matrix_tanh_function_test : if (ENABLE_ACCELERATOR_MATRIX_TANH_TEST) generate
     matrix_tanh_function : model_matrix_tanh_function
       generic map (
         DATA_SIZE    => DATA_SIZE,

@@ -44,20 +44,20 @@
 
 import numpy as np
 
-from scalar import ntm_scalar_multiplication as scalar_multiplication
-from scalar import ntm_scalar_summation as scalar_summation
+from scalar import accelerator_scalar_multiplication as scalar_multiplication
+from scalar import accelerator_scalar_summation as scalar_summation
 
 def test_scalar_multiplication():
 
   data_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(scalar_multiplication.ntm_scalar_multiplication(data_in), scalar_multiplication.ntm_scalar_multiplication(data_in))
+  np.testing.assert_array_equal(scalar_multiplication.accelerator_scalar_multiplication(data_in), scalar_multiplication.accelerator_scalar_multiplication(data_in))
 
 def test_scalar_summation():
 
   data_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(scalar_summation.ntm_scalar_summation(data_in), scalar_summation.ntm_scalar_summation(data_in))
+  np.testing.assert_array_equal(scalar_summation.accelerator_scalar_summation(data_in), scalar_summation.accelerator_scalar_summation(data_in))
 
 
 test_scalar_multiplication()

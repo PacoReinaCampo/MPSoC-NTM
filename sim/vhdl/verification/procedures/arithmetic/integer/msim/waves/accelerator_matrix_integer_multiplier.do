@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX INTEGER MULTIPLIER TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX INTEGER MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_integer_testbench/accelerator_matrix_integer_multiplier_test/matrix_integer_multiplier/CLK

@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-touch code/classes/philosophers/ntm_philosophers.scala
-touch code/classes/soldiers/ntm_soldiers.scala
-touch code/classes/workers/ntm_workers.scala
+touch code/classes/philosophers/accelerator_philosophers.scala
+touch code/classes/soldiers/accelerator_soldiers.scala
+touch code/classes/workers/accelerator_workers.scala
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.scala
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.scala
 touch code/computing/advanced_computer_architecture/processing_unit/misd.scala

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR LOGARITHM TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR LOGARITHM TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_series_testbench/model_scalar_logarithm_function_test/scalar_logarithm_function/CLK

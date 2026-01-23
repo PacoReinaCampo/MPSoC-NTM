@@ -46,11 +46,11 @@
 # ANN-Components Sources
 #####################################################################
 
-SOURCES_COMPONENTS =	../../../../library/nn/ann/components/ntm_masked_multi_head_attention.h \
-			../../../../library/nn/ann/components/ntm_masked_multi_head_attention.c \
-			../../../../library/nn/ann/components/ntm_masked_scaled_dot_product_attention.h \
-			../../../../library/nn/ann/components/ntm_masked_scaled_dot_product_attention.c \
-			../../../../library/nn/ann/components/ntm_multi_head_attention.h \
-			../../../../library/nn/ann/components/ntm_multi_head_attention.c \
-			../../../../library/nn/ann/components/ntm_scaled_dot_product_attention.h \
-			../../../../library/nn/ann/components/ntm_scaled_dot_product_attention.c
+SOURCES_COMPONENTS =	../../../../library/nn/ann/components/accelerator_masked_multi_head_attention.h \
+			../../../../library/nn/ann/components/accelerator_masked_multi_head_attention.c \
+			../../../../library/nn/ann/components/accelerator_masked_scaled_dot_product_attention.h \
+			../../../../library/nn/ann/components/accelerator_masked_scaled_dot_product_attention.c \
+			../../../../library/nn/ann/components/accelerator_multi_head_attention.h \
+			../../../../library/nn/ann/components/accelerator_multi_head_attention.c \
+			../../../../library/nn/ann/components/accelerator_scaled_dot_product_attention.h \
+			../../../../library/nn/ann/components/accelerator_scaled_dot_product_attention.c

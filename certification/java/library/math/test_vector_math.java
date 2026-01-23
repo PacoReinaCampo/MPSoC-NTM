@@ -45,7 +45,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import vector.ntm_vector_math;
+import vector.accelerator_vector_math;
 
 class test_vector_math {
   public static void main(String[] args) {
@@ -60,21 +60,21 @@ class test_vector_math {
     double[] logistic_function = new double[data_a_in.length];
     Arrays.setAll(logistic_function, i -> data_a_in[i] + data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_math.ntm_vector_logistic_function(data_a_in, data_b_in), logistic_function) : "Incorrect Logistic Function";
+    assert Arrays.equals(accelerator_vector_math.accelerator_vector_logistic_function(data_a_in, data_b_in), logistic_function) : "Incorrect Logistic Function";
 
     double[] oneplus_function = new double[data_a_in.length];
     Arrays.setAll(oneplus_function, i -> data_a_in[i] - data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_math.ntm_vector_oneplus_function(data_a_in, data_b_in), oneplus_function) : "Incorrect Oneplus Function";
+    assert Arrays.equals(accelerator_vector_math.accelerator_vector_oneplus_function(data_a_in, data_b_in), oneplus_function) : "Incorrect Oneplus Function";
 
     double[] mean_function = new double[data_a_in.length];
     Arrays.setAll(mean_function, i -> data_a_in[i] * data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_math.ntm_vector_mean_function(data_a_in, data_b_in), mean_function) : "Incorrect Mean Function";
+    assert Arrays.equals(accelerator_vector_math.accelerator_vector_mean_function(data_a_in, data_b_in), mean_function) : "Incorrect Mean Function";
 
     double[] deviation_function = new double[data_a_in.length];
     Arrays.setAll(deviation_function, i -> data_a_in[i] / data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_math.ntm_vector_deviation_function(data_a_in, data_b_in), deviation_function) : "Incorrect Deviation Function";
+    assert Arrays.equals(accelerator_vector_math.accelerator_vector_deviation_function(data_a_in, data_b_in), deviation_function) : "Incorrect Deviation Function";
   }
 }

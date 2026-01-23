@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-from top import ntm_controller as controller
-from top import ntm_decoder as decoder
-from top import ntm_encoder as encoder
+from top import accelerator_controller as controller
+from top import accelerator_decoder as decoder
+from top import accelerator_encoder as encoder
 
 print('Hello, world!')

@@ -48,7 +48,7 @@
 
 -include include-top.txt
 
-TARGET=ntm_top
+TARGET=accelerator_top
 
 #########################################################################
 # Targets

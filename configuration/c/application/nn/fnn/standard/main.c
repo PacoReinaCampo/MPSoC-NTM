@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/fnn/standard/ntm_controller.h"
+#include "../../../../library/nn/fnn/standard/accelerator_controller.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_controller_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_controller_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_controller_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_controller_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

@@ -109,61 +109,61 @@ package model_series_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_COSH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_SINH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_COSH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_SINH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_COSH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_SINH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_TANH_CASE_1          : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SINH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SINH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_TANH_CASE_1          : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_COSH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SINH_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_COSH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SINH_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_COSH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGARITHM_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SINH_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TANH_CASE_1          : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

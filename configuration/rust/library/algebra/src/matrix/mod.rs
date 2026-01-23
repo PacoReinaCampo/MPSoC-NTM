@@ -42,15 +42,15 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_matrix_convolution;
-pub mod ntm_matrix_inverse;
-pub mod ntm_matrix_multiplication;
-pub mod ntm_matrix_product;
-pub mod ntm_matrix_summation;
-pub mod ntm_matrix_transpose;
-pub mod ntm_matrix_vector_convolution;
-pub mod ntm_matrix_vector_product;
-pub mod ntm_transpose_vector_product;
-pub mod ntm_matrix_differentiation;
-pub mod ntm_matrix_integration;
-pub mod ntm_matrix_softmax;
+pub mod accelerator_matrix_convolution;
+pub mod accelerator_matrix_inverse;
+pub mod accelerator_matrix_multiplication;
+pub mod accelerator_matrix_product;
+pub mod accelerator_matrix_summation;
+pub mod accelerator_matrix_transpose;
+pub mod accelerator_matrix_vector_convolution;
+pub mod accelerator_matrix_vector_product;
+pub mod accelerator_transpose_vector_product;
+pub mod accelerator_matrix_differentiation;
+pub mod accelerator_matrix_integration;
+pub mod accelerator_matrix_softmax;

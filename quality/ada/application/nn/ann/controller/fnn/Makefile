@@ -48,7 +48,7 @@
 
 -include include-fnn.txt
 
-TARGET=ntm_fnn
+TARGET=accelerator_fnn
 
 #########################################################################
 # Targets

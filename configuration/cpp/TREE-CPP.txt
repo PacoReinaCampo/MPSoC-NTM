@@ -1,252 +1,252 @@
 library
 ├── algebra
 │   ├── matrix
-│   │   ├── ntm_matrix_convolution.cpp
-│   │   ├── ntm_matrix_differentiation.cpp
-│   │   ├── ntm_matrix_integration.cpp
-│   │   ├── ntm_matrix_inverse.cpp
-│   │   ├── ntm_matrix_multiplication.cpp
-│   │   ├── ntm_matrix_product.cpp
-│   │   ├── ntm_matrix_softmax.cpp
-│   │   ├── ntm_matrix_summation.cpp
-│   │   ├── ntm_matrix_transpose.cpp
-│   │   ├── ntm_matrix_vector_convolution.cpp
-│   │   ├── ntm_matrix_vector_product.cpp
-│   │   └── ntm_transpose_vector_product.cpp
-│   ├── ntm_matrix_algebra.cpp
-│   ├── ntm_scalar_algebra.cpp
-│   ├── ntm_tensor_algebra.cpp
-│   ├── ntm_vector_algebra.cpp
+│   │   ├── accelerator_matrix_convolution.cpp
+│   │   ├── accelerator_matrix_differentiation.cpp
+│   │   ├── accelerator_matrix_integration.cpp
+│   │   ├── accelerator_matrix_inverse.cpp
+│   │   ├── accelerator_matrix_multiplication.cpp
+│   │   ├── accelerator_matrix_product.cpp
+│   │   ├── accelerator_matrix_softmax.cpp
+│   │   ├── accelerator_matrix_summation.cpp
+│   │   ├── accelerator_matrix_transpose.cpp
+│   │   ├── accelerator_matrix_vector_convolution.cpp
+│   │   ├── accelerator_matrix_vector_product.cpp
+│   │   └── accelerator_transpose_vector_product.cpp
+│   ├── accelerator_matrix_algebra.cpp
+│   ├── accelerator_scalar_algebra.cpp
+│   ├── accelerator_tensor_algebra.cpp
+│   ├── accelerator_vector_algebra.cpp
 │   ├── scalar
-│   │   ├── ntm_scalar_multiplication.cpp
-│   │   └── ntm_scalar_summation.cpp
+│   │   ├── accelerator_scalar_multiplication.cpp
+│   │   └── accelerator_scalar_summation.cpp
 │   ├── tensor
-│   │   ├── ntm_tensor_convolution.cpp
-│   │   ├── ntm_tensor_differentiation.cpp
-│   │   ├── ntm_tensor_integration.cpp
-│   │   ├── ntm_tensor_inverse.cpp
-│   │   ├── ntm_tensor_matrix_convolution.cpp
-│   │   ├── ntm_tensor_matrix_product.cpp
-│   │   ├── ntm_tensor_multiplication.cpp
-│   │   ├── ntm_tensor_product.cpp
-│   │   ├── ntm_tensor_softmax.cpp
-│   │   ├── ntm_tensor_summation.cpp
-│   │   └── ntm_tensor_transpose.cpp
+│   │   ├── accelerator_tensor_convolution.cpp
+│   │   ├── accelerator_tensor_differentiation.cpp
+│   │   ├── accelerator_tensor_integration.cpp
+│   │   ├── accelerator_tensor_inverse.cpp
+│   │   ├── accelerator_tensor_matrix_convolution.cpp
+│   │   ├── accelerator_tensor_matrix_product.cpp
+│   │   ├── accelerator_tensor_multiplication.cpp
+│   │   ├── accelerator_tensor_product.cpp
+│   │   ├── accelerator_tensor_softmax.cpp
+│   │   ├── accelerator_tensor_summation.cpp
+│   │   └── accelerator_tensor_transpose.cpp
 │   └── vector
-│       ├── ntm_dot_product.cpp
-│       ├── ntm_vector_convolution.cpp
-│       ├── ntm_vector_cosine_similarity.cpp
-│       ├── ntm_vector_differentiation.cpp
-│       ├── ntm_vector_integration.cpp
-│       ├── ntm_vector_module.cpp
-│       ├── ntm_vector_multiplication.cpp
-│       ├── ntm_vector_softmax.cpp
-│       └── ntm_vector_summation.cpp
+│       ├── accelerator_dot_product.cpp
+│       ├── accelerator_vector_convolution.cpp
+│       ├── accelerator_vector_cosine_similarity.cpp
+│       ├── accelerator_vector_differentiation.cpp
+│       ├── accelerator_vector_integration.cpp
+│       ├── accelerator_vector_module.cpp
+│       ├── accelerator_vector_multiplication.cpp
+│       ├── accelerator_vector_softmax.cpp
+│       └── accelerator_vector_summation.cpp
 ├── arithmetic
 │   ├── matrix
 │   │   ├── adder
-│   │   │   └── ntm_matrix_adder.cpp
+│   │   │   └── accelerator_matrix_adder.cpp
 │   │   ├── divider
-│   │   │   └── ntm_matrix_divider.cpp
+│   │   │   └── accelerator_matrix_divider.cpp
 │   │   ├── multiplier
-│   │   │   └── ntm_matrix_multiplier.cpp
+│   │   │   └── accelerator_matrix_multiplier.cpp
 │   │   └── subtractor
-│   │       └── ntm_matrix_subtractor.cpp
-│   ├── ntm_matrix_arithmetic.cpp
-│   ├── ntm_scalar_arithmetic.cpp
-│   ├── ntm_tensor_arithmetic.cpp
-│   ├── ntm_vector_arithmetic.cpp
+│   │       └── accelerator_matrix_subtractor.cpp
+│   ├── accelerator_matrix_arithmetic.cpp
+│   ├── accelerator_scalar_arithmetic.cpp
+│   ├── accelerator_tensor_arithmetic.cpp
+│   ├── accelerator_vector_arithmetic.cpp
 │   ├── scalar
 │   │   ├── adder
-│   │   │   └── ntm_scalar_adder.cpp
+│   │   │   └── accelerator_scalar_adder.cpp
 │   │   ├── divider
-│   │   │   └── ntm_scalar_divider.cpp
+│   │   │   └── accelerator_scalar_divider.cpp
 │   │   ├── multiplier
-│   │   │   └── ntm_scalar_multiplier.cpp
+│   │   │   └── accelerator_scalar_multiplier.cpp
 │   │   └── subtractor
-│   │       └── ntm_scalar_subtractor.cpp
+│   │       └── accelerator_scalar_subtractor.cpp
 │   ├── tensor
 │   │   ├── adder
-│   │   │   └── ntm_tensor_adder.cpp
+│   │   │   └── accelerator_tensor_adder.cpp
 │   │   ├── divider
-│   │   │   └── ntm_tensor_divider.cpp
+│   │   │   └── accelerator_tensor_divider.cpp
 │   │   ├── multiplier
-│   │   │   └── ntm_tensor_multiplier.cpp
+│   │   │   └── accelerator_tensor_multiplier.cpp
 │   │   └── subtractor
-│   │       └── ntm_tensor_subtractor.cpp
+│   │       └── accelerator_tensor_subtractor.cpp
 │   └── vector
 │       ├── adder
-│       │   └── ntm_vector_adder.cpp
+│       │   └── accelerator_vector_adder.cpp
 │       ├── divider
-│       │   └── ntm_vector_divider.cpp
+│       │   └── accelerator_vector_divider.cpp
 │       ├── multiplier
-│       │   └── ntm_vector_multiplier.cpp
+│       │   └── accelerator_vector_multiplier.cpp
 │       └── subtractor
-│           └── ntm_vector_subtractor.cpp
+│           └── accelerator_vector_subtractor.cpp
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation_function.cpp
-│   │   ├── ntm_matrix_logistic_function.cpp
-│   │   ├── ntm_matrix_mean_function.cpp
-│   │   └── ntm_matrix_oneplus_function.cpp
-│   ├── ntm_matrix_math.cpp
-│   ├── ntm_scalar_math.cpp
-│   ├── ntm_vector_math.cpp
+│   │   ├── accelerator_matrix_deviation_function.cpp
+│   │   ├── accelerator_matrix_logistic_function.cpp
+│   │   ├── accelerator_matrix_mean_function.cpp
+│   │   └── accelerator_matrix_oneplus_function.cpp
+│   ├── accelerator_matrix_math.cpp
+│   ├── accelerator_scalar_math.cpp
+│   ├── accelerator_vector_math.cpp
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation_function.cpp
-│   │   ├── ntm_scalar_logistic_function.cpp
-│   │   ├── ntm_scalar_mean_function.cpp
-│   │   └── ntm_scalar_oneplus_function.cpp
+│   │   ├── accelerator_scalar_deviation_function.cpp
+│   │   ├── accelerator_scalar_logistic_function.cpp
+│   │   ├── accelerator_scalar_mean_function.cpp
+│   │   └── accelerator_scalar_oneplus_function.cpp
 │   └── vector
-│       ├── ntm_vector_deviation_function.cpp
-│       ├── ntm_vector_logistic_function.cpp
-│       ├── ntm_vector_mean_function.cpp
-│       └── ntm_vector_oneplus_function.cpp
+│       ├── accelerator_vector_deviation_function.cpp
+│       ├── accelerator_vector_logistic_function.cpp
+│       ├── accelerator_vector_mean_function.cpp
+│       └── accelerator_vector_oneplus_function.cpp
 ├── nn
 │   ├── ann
 │   │   ├── ann_controller.cpp
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.cpp
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.cpp
-│   │   │   ├── ntm_multi_head_attention.cpp
-│   │   │   └── ntm_scaled_dot_product_attention.cpp
+│   │   │   ├── accelerator_masked_multi_head_attention.cpp
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.cpp
+│   │   │   ├── accelerator_multi_head_attention.cpp
+│   │   │   └── accelerator_scaled_dot_product_attention.cpp
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.cpp
+│   │   │   │   └── accelerator_fnn.cpp
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.cpp
+│   │   │       └── accelerator_lstm.cpp
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.cpp
-│   │   │   └── ntm_positional_encoding.cpp
+│   │   │   ├── accelerator_layer_norm.cpp
+│   │   │   └── accelerator_positional_encoding.cpp
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.cpp
-│   │   │   ├── ntm_keys_vector.cpp
-│   │   │   ├── ntm_queries_vector.cpp
-│   │   │   └── ntm_values_vector.cpp
+│   │   │   ├── accelerator_inputs_vector.cpp
+│   │   │   ├── accelerator_keys_vector.cpp
+│   │   │   ├── accelerator_queries_vector.cpp
+│   │   │   └── accelerator_values_vector.cpp
 │   │   └── top
-│   │       ├── ntm_controller.cpp
-│   │       ├── ntm_decoder.cpp
-│   │       └── ntm_encoder.cpp
+│   │       ├── accelerator_controller.cpp
+│   │       ├── accelerator_decoder.cpp
+│   │       └── accelerator_encoder.cpp
 │   ├── dnc
-│   │   ├── dnc_controller.cpp
+│   │   ├── accelerator_controller.cpp
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.cpp
-│   │   │   ├── dnc_allocation_weighting.cpp
-│   │   │   ├── dnc_backward_weighting.cpp
-│   │   │   ├── dnc_forward_weighting.cpp
-│   │   │   ├── dnc_matrix_content_based_addressing.cpp
-│   │   │   ├── dnc_memory_matrix.cpp
-│   │   │   ├── dnc_memory_retention_vector.cpp
-│   │   │   ├── dnc_precedence_weighting.cpp
-│   │   │   ├── dnc_sort_vector.cpp
-│   │   │   ├── dnc_temporal_link_matrix.cpp
-│   │   │   ├── dnc_usage_vector.cpp
-│   │   │   └── dnc_vector_content_based_addressing.cpp
+│   │   │   ├── accelerator_addressing.cpp
+│   │   │   ├── accelerator_allocation_weighting.cpp
+│   │   │   ├── accelerator_backward_weighting.cpp
+│   │   │   ├── accelerator_forward_weighting.cpp
+│   │   │   ├── accelerator_matrix_content_based_addressing.cpp
+│   │   │   ├── accelerator_memory_matrix.cpp
+│   │   │   ├── accelerator_memory_retention_vector.cpp
+│   │   │   ├── accelerator_precedence_weighting.cpp
+│   │   │   ├── accelerator_sort_vector.cpp
+│   │   │   ├── accelerator_temporal_link_matrix.cpp
+│   │   │   ├── accelerator_usage_vector.cpp
+│   │   │   └── accelerator_vector_content_based_addressing.cpp
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.cpp
-│   │   │   ├── dnc_read_vectors.cpp
-│   │   │   └── dnc_read_weighting.cpp
+│   │   │   ├── accelerator_read_content_weighting.cpp
+│   │   │   ├── accelerator_read_vectors.cpp
+│   │   │   └── accelerator_read_weighting.cpp
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.cpp
-│   │   │   ├── dnc_interface_top.cpp
-│   │   │   ├── dnc_interface_vector.cpp
-│   │   │   ├── dnc_output_vector.cpp
-│   │   │   └── dnc_top.cpp
+│   │   │   ├── accelerator_interface_matrix.cpp
+│   │   │   ├── accelerator_interface_top.cpp
+│   │   │   ├── accelerator_interface_vector.cpp
+│   │   │   ├── accelerator_output_vector.cpp
+│   │   │   └── accelerator_top.cpp
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.cpp
+│   │   │   └── accelerator_trained_top.cpp
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.cpp
-│   │       └── dnc_write_weighting.cpp
+│   │       ├── accelerator_write_content_weighting.cpp
+│   │       └── accelerator_write_weighting.cpp
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.cpp
-│   │   ├── ntm_fnn_controller.cpp
+│   │   │   └── accelerator_controller.cpp
+│   │   ├── accelerator_fnn_controller.cpp
 │   │   └── standard
-│   │       └── ntm_controller.cpp
+│   │       └── accelerator_controller.cpp
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.cpp
-│   │   │   ├── ntm_controller.cpp
-│   │   │   ├── ntm_forget_gate_vector.cpp
-│   │   │   ├── ntm_hidden_gate_vector.cpp
-│   │   │   ├── ntm_input_gate_vector.cpp
-│   │   │   ├── ntm_output_gate_vector.cpp
-│   │   │   └── ntm_state_gate_vector.cpp
-│   │   ├── ntm_lstm_controller.cpp
+│   │   │   ├── accelerator_activation_gate_vector.cpp
+│   │   │   ├── accelerator_controller.cpp
+│   │   │   ├── accelerator_forget_gate_vector.cpp
+│   │   │   ├── accelerator_hidden_gate_vector.cpp
+│   │   │   ├── accelerator_input_gate_vector.cpp
+│   │   │   ├── accelerator_output_gate_vector.cpp
+│   │   │   └── accelerator_state_gate_vector.cpp
+│   │   ├── accelerator_lstm_controller.cpp
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.cpp
-│   │       ├── ntm_controller.cpp
-│   │       ├── ntm_forget_gate_vector.cpp
-│   │       ├── ntm_hidden_gate_vector.cpp
-│   │       ├── ntm_input_gate_vector.cpp
-│   │       ├── ntm_output_gate_vector.cpp
-│   │       └── ntm_state_gate_vector.cpp
+│   │       ├── accelerator_activation_gate_vector.cpp
+│   │       ├── accelerator_controller.cpp
+│   │       ├── accelerator_forget_gate_vector.cpp
+│   │       ├── accelerator_hidden_gate_vector.cpp
+│   │       ├── accelerator_input_gate_vector.cpp
+│   │       ├── accelerator_output_gate_vector.cpp
+│   │       └── accelerator_state_gate_vector.cpp
 │   └── ntm
 │       ├── memory
-│       │   ├── ntm_addressing.cpp
-│       │   ├── ntm_matrix_content_based_addressing.cpp
-│       │   └── ntm_vector_content_based_addressing.cpp
-│       ├── ntm_controller.cpp
+│       │   ├── accelerator_addressing.cpp
+│       │   ├── accelerator_matrix_content_based_addressing.cpp
+│       │   └── accelerator_vector_content_based_addressing.cpp
+│       ├── accelerator_controller.cpp
 │       ├── read_heads
-│       │   └── ntm_reading.cpp
+│       │   └── accelerator_reading.cpp
 │       ├── top
-│       │   ├── ntm_interface_matrix.cpp
-│       │   ├── ntm_interface_top.cpp
-│       │   ├── ntm_interface_vector.cpp
-│       │   ├── ntm_output_vector.cpp
-│       │   └── ntm_top.cpp
+│       │   ├── accelerator_interface_matrix.cpp
+│       │   ├── accelerator_interface_top.cpp
+│       │   ├── accelerator_interface_vector.cpp
+│       │   ├── accelerator_output_vector.cpp
+│       │   └── accelerator_top.cpp
 │       ├── trained
-│       │   └── ntm_trained_top.cpp
+│       │   └── accelerator_trained_top.cpp
 │       └── write_heads
-│           ├── ntm_erasing.cpp
-│           └── ntm_writing.cpp
+│           ├── accelerator_erasing.cpp
+│           └── accelerator_writing.cpp
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.cpp
-    │   └── ntm_vector_controller_differentiation.cpp
+    │   ├── accelerator_matrix_controller_differentiation.cpp
+    │   └── accelerator_vector_controller_differentiation.cpp
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.cpp
-    │   ├── ntm_fnn_d_trainer.cpp
-    │   ├── ntm_fnn_k_trainer.cpp
-    │   ├── ntm_fnn_trainer.cpp
-    │   ├── ntm_fnn_u_trainer.cpp
-    │   ├── ntm_fnn_v_trainer.cpp
-    │   └── ntm_fnn_w_trainer.cpp
+    │   ├── accelerator_fnn_b_trainer.cpp
+    │   ├── accelerator_fnn_d_trainer.cpp
+    │   ├── accelerator_fnn_k_trainer.cpp
+    │   ├── accelerator_fnn_trainer.cpp
+    │   ├── accelerator_fnn_u_trainer.cpp
+    │   ├── accelerator_fnn_v_trainer.cpp
+    │   └── accelerator_fnn_w_trainer.cpp
     ├── lstm
     │   ├── activation
-    │   │   ├── ntm_lstm_activation_b_trainer.cpp
-    │   │   ├── ntm_lstm_activation_d_trainer.cpp
-    │   │   ├── ntm_lstm_activation_k_trainer.cpp
-    │   │   ├── ntm_lstm_activation_trainer.cpp
-    │   │   ├── ntm_lstm_activation_u_trainer.cpp
-    │   │   ├── ntm_lstm_activation_v_trainer.cpp
-    │   │   └── ntm_lstm_activation_w_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_b_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_d_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_k_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_u_trainer.cpp
+    │   │   ├── accelerator_lstm_activation_v_trainer.cpp
+    │   │   └── accelerator_lstm_activation_w_trainer.cpp
     │   ├── forget
-    │   │   ├── ntm_lstm_forget_b_trainer.cpp
-    │   │   ├── ntm_lstm_forget_d_trainer.cpp
-    │   │   ├── ntm_lstm_forget_k_trainer.cpp
-    │   │   ├── ntm_lstm_forget_trainer.cpp
-    │   │   ├── ntm_lstm_forget_u_trainer.cpp
-    │   │   ├── ntm_lstm_forget_v_trainer.cpp
-    │   │   └── ntm_lstm_forget_w_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_b_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_d_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_k_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_u_trainer.cpp
+    │   │   ├── accelerator_lstm_forget_v_trainer.cpp
+    │   │   └── accelerator_lstm_forget_w_trainer.cpp
     │   ├── input
-    │   │   ├── ntm_lstm_input_b_trainer.cpp
-    │   │   ├── ntm_lstm_input_d_trainer.cpp
-    │   │   ├── ntm_lstm_input_k_trainer.cpp
-    │   │   ├── ntm_lstm_input_trainer.cpp
-    │   │   ├── ntm_lstm_input_u_trainer.cpp
-    │   │   ├── ntm_lstm_input_v_trainer.cpp
-    │   │   └── ntm_lstm_input_w_trainer.cpp
+    │   │   ├── accelerator_lstm_input_b_trainer.cpp
+    │   │   ├── accelerator_lstm_input_d_trainer.cpp
+    │   │   ├── accelerator_lstm_input_k_trainer.cpp
+    │   │   ├── accelerator_lstm_input_trainer.cpp
+    │   │   ├── accelerator_lstm_input_u_trainer.cpp
+    │   │   ├── accelerator_lstm_input_v_trainer.cpp
+    │   │   └── accelerator_lstm_input_w_trainer.cpp
     │   └── output
-    │       ├── ntm_lstm_output_b_trainer.cpp
-    │       ├── ntm_lstm_output_d_trainer.cpp
-    │       ├── ntm_lstm_output_k_trainer.cpp
-    │       ├── ntm_lstm_output_trainer.cpp
-    │       ├── ntm_lstm_output_u_trainer.cpp
-    │       ├── ntm_lstm_output_v_trainer.cpp
-    │       └── ntm_lstm_output_w_trainer.cpp
-    ├── ntm_differentiation.cpp
-    ├── ntm_fnn.cpp
-    └── ntm_lstm.cpp
+    │       ├── accelerator_lstm_output_b_trainer.cpp
+    │       ├── accelerator_lstm_output_d_trainer.cpp
+    │       ├── accelerator_lstm_output_k_trainer.cpp
+    │       ├── accelerator_lstm_output_trainer.cpp
+    │       ├── accelerator_lstm_output_u_trainer.cpp
+    │       ├── accelerator_lstm_output_v_trainer.cpp
+    │       └── accelerator_lstm_output_w_trainer.cpp
+    ├── accelerator_differentiation.cpp
+    ├── accelerator_fnn.cpp
+    └── accelerator_lstm.cpp
 
 65 directories, 184 files

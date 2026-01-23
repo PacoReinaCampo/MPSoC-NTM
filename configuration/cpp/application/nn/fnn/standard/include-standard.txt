@@ -46,5 +46,5 @@
 # FNN-Standard Sources
 #####################################################################
 
-SOURCES_STANDARD =	../../../../library/nn/fnn/ntm_fnn_controller.hpp \
-			../../../../library/nn/fnn/standard/ntm_controller.cpp
+SOURCES_STANDARD =	../../../../library/nn/fnn/accelerator_fnn_controller.hpp \
+			../../../../library/nn/fnn/standard/accelerator_controller.cpp

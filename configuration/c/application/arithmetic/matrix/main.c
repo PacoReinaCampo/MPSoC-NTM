@@ -46,7 +46,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../../library/arithmetic/ntm_arithmetic.h"
+#include "../../../library/arithmetic/accelerator_arithmetic.h"
 
 int main() {
   double **data_a_in;
@@ -98,7 +98,7 @@ int main() {
   data_out[1][2] = 6.0;
   data_out[2][2] = 6.0;
 
-  assert(ntm_matrix_adder(data_a_in, data_b_in) == **data_out);
+  assert(accelerator_matrix_adder(data_a_in, data_b_in) == **data_out);
 
   data_out[0][0] = 1.0;
   data_out[1][0] = 1.0;
@@ -110,7 +110,7 @@ int main() {
   data_out[1][2] = 2.0;
   data_out[2][2] = 2.0;
 
-  assert(ntm_matrix_subtractor(data_a_in, data_b_in) == **data_out);
+  assert(accelerator_matrix_subtractor(data_a_in, data_b_in) == **data_out);
 
   data_out[0][0] = 2.0;
   data_out[1][0] = 2.0;
@@ -122,7 +122,7 @@ int main() {
   data_out[1][2] = 8.0;
   data_out[2][2] = 8.0;
 
-  assert(ntm_matrix_multiplier(data_a_in, data_b_in) == **data_out);
+  assert(accelerator_matrix_multiplier(data_a_in, data_b_in) == **data_out);
 
   data_out[0][0] = 2.0;
   data_out[1][0] = 2.0;
@@ -134,7 +134,7 @@ int main() {
   data_out[1][2] = 2.0;
   data_out[2][2] = 2.0;
 
-  assert(ntm_matrix_divider(data_a_in, data_b_in) == **data_out);
+  assert(accelerator_matrix_divider(data_a_in, data_b_in) == **data_out);
 
   free(data_a_in);
   free(data_b_in);

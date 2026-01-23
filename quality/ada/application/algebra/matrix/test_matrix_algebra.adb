@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_matrix_algebra;
-use ntm_matrix_algebra;
+with accelerator_matrix_algebra;
+use accelerator_matrix_algebra;
 
 procedure test_matrix_algebra is
 
@@ -92,7 +92,7 @@ begin
   matrix_data_a_in := ((1.0, 2.0, 3.0), (4.0, 2.0, 6.0), (3.0, 4.0, 1.0), (2.0, 4.0, 8.0));
   matrix_data_b_in := ((1.0, 3.0, 3.0, 2.0), (7.0, 6.0, 2.0, 1.0), (3.0, 4.0, 2.0, 1.0));
 
-  ntm_matrix_algebra.ntm_matrix_convolution (
+  accelerator_matrix_algebra.accelerator_matrix_convolution (
     data_a_in => matrix_data_a_in,
     data_b_in => matrix_data_b_in,
 
@@ -111,7 +111,7 @@ begin
 
   matrix_data_in := ((1.0, 1.0, 2.0), (1.0, 3.0, -4.0), (-2.0, -4.0, -4.0));
 
-  ntm_matrix_algebra.ntm_matrix_inverse (
+  accelerator_matrix_algebra.accelerator_matrix_inverse (
     data_in => matrix_data_in,
 
     data_out => matrix_data_out
@@ -131,7 +131,7 @@ begin
                       ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
                       ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)) );
 
-  ntm_matrix_algebra.ntm_matrix_multiplication (
+  accelerator_matrix_algebra.accelerator_matrix_multiplication (
     data_in => tensor_data_in,
 
     data_out => matrix_data_out
@@ -150,7 +150,7 @@ begin
   matrix_data_a_in := ((1.0, 2.0, 3.0), (4.0, 2.0, 6.0), (3.0, 4.0, 1.0), (2.0, 4.0, 8.0));
   matrix_data_b_in := ((1.0, 3.0, 3.0, 2.0), (7.0, 6.0, 2.0, 1.0), (3.0, 4.0, 2.0, 1.0));
 
-  ntm_matrix_algebra.ntm_matrix_product (
+  accelerator_matrix_algebra.accelerator_matrix_product (
     data_a_in => matrix_data_a_in,
     data_b_in => matrix_data_b_in,
 
@@ -171,7 +171,7 @@ begin
                       ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)),
                       ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0)) );
 
-  ntm_matrix_algebra.ntm_matrix_summation (
+  accelerator_matrix_algebra.accelerator_matrix_summation (
     data_in => tensor_data_in,
 
     data_out => matrix_data_out
@@ -189,7 +189,7 @@ begin
 
   matrix_data_in := ((1.0, 1.0, 2.0), (1.0, 3.0, -4.0), (-2.0, -4.0, -4.0));
 
-  ntm_matrix_algebra.ntm_matrix_transpose (
+  accelerator_matrix_algebra.accelerator_matrix_transpose (
     data_in => matrix_data_in,
 
     data_out => matrix_data_out
@@ -208,7 +208,7 @@ begin
   matrix_data_a_in := ((1.0, 2.0, 3.0), (4.0, 2.0, 6.0), (3.0, 4.0, 1.0), (2.0, 4.0, 8.0));
   vector_data_b_in := (1.0, 3.0, 3.0, 4.0);
 
-  ntm_matrix_algebra.ntm_matrix_vector_convolution (
+  accelerator_matrix_algebra.accelerator_matrix_vector_convolution (
     data_a_in => matrix_data_a_in,
     data_b_in => vector_data_b_in,
 
@@ -225,7 +225,7 @@ begin
 
   vector_data_bm_in := (1.0, 3.0, 3.0);
 
-  ntm_matrix_algebra.ntm_matrix_vector_product (
+  accelerator_matrix_algebra.accelerator_matrix_vector_product (
     data_a_in => matrix_data_a_in,
     data_b_in => vector_data_bm_in,
 
@@ -243,7 +243,7 @@ begin
   vector_data_a_in := (1.0, 2.0, 3.0, 4.0);
   vector_data_b_in := (1.0, 3.0, 3.0, 4.0);
 
-  ntm_matrix_algebra.ntm_transpose_vector_product (
+  accelerator_matrix_algebra.accelerator_transpose_vector_product (
     data_a_in => vector_data_a_in,
     data_b_in => vector_data_b_in,
 
@@ -260,7 +260,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_algebra.ntm_matrix_differentiation (
+  accelerator_matrix_algebra.accelerator_matrix_differentiation (
     data_in => data_in,
 
     length_i_in => length_i_in,
@@ -281,7 +281,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_algebra.ntm_matrix_integration (
+  accelerator_matrix_algebra.accelerator_matrix_integration (
     data_in => data_in,
 
     length_in => length_in,
@@ -299,7 +299,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_algebra.ntm_matrix_softmax (
+  accelerator_matrix_algebra.accelerator_matrix_softmax (
     data_in => data_in,
 
     data_out => data_out

@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from scalar import ntm_scalar_algebra as scalar_algebra
+from scalar import accelerator_scalar_algebra as scalar_algebra
 
 def test_scalar_algebra():
 
@@ -53,9 +53,9 @@ def test_scalar_algebra():
   math_algebra = scalar_algebra.ScalarAlgebra(data_in)
   test_algebra = scalar_algebra.ScalarAlgebra(data_in)
 
-  np.testing.assert_array_equal(math_algebra.ntm_scalar_multiplication(), test_algebra.ntm_scalar_multiplication())
+  np.testing.assert_array_equal(math_algebra.accelerator_scalar_multiplication(), test_algebra.accelerator_scalar_multiplication())
 
-  np.testing.assert_array_equal(math_algebra.ntm_scalar_summation(), test_algebra.ntm_scalar_summation())
+  np.testing.assert_array_equal(math_algebra.accelerator_scalar_summation(), test_algebra.accelerator_scalar_summation())
 
 
 test_scalar_algebra()

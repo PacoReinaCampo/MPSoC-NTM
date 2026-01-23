@@ -45,7 +45,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import matrix.ntm_matrix_arithmetic;
+import matrix.accelerator_matrix_arithmetic;
 
 class test_matrix_arithmetic {
   public static void main(String[] args) {
@@ -69,7 +69,7 @@ class test_matrix_arithmetic {
       Arrays.setAll(addition[row], j -> data_a_in[row][j] + data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_arithmetic.ntm_matrix_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
+    assert Arrays.deepEquals(accelerator_matrix_arithmetic.accelerator_matrix_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
 
     double[][] subtraction = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -77,7 +77,7 @@ class test_matrix_arithmetic {
       Arrays.setAll(subtraction[row], j -> data_a_in[row][j] - data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_arithmetic.ntm_matrix_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
+    assert Arrays.deepEquals(accelerator_matrix_arithmetic.accelerator_matrix_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
 
     double[][] multiplication = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -85,7 +85,7 @@ class test_matrix_arithmetic {
       Arrays.setAll(multiplication[row], j -> data_a_in[row][j] * data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_arithmetic.ntm_matrix_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
+    assert Arrays.deepEquals(accelerator_matrix_arithmetic.accelerator_matrix_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
 
     double[][] division = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -93,6 +93,6 @@ class test_matrix_arithmetic {
       Arrays.setAll(division[row], j -> data_a_in[row][j] / data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_arithmetic.ntm_matrix_divider(data_a_in, data_b_in), division) : "Incorrect Division";
+    assert Arrays.deepEquals(accelerator_matrix_arithmetic.accelerator_matrix_divider(data_a_in, data_b_in), division) : "Incorrect Division";
   }
 }

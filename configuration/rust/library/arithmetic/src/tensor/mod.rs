@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_tensor_adder;
-pub mod ntm_tensor_subtractor;
-pub mod ntm_tensor_multiplier;
-pub mod ntm_tensor_divider;
+pub mod accelerator_tensor_adder;
+pub mod accelerator_tensor_subtractor;
+pub mod accelerator_tensor_multiplier;
+pub mod accelerator_tensor_divider;
 
-pub mod ntm_tensor_arithmetic;
+pub mod accelerator_tensor_arithmetic;

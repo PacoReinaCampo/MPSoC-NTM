@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR ONEPLUS TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR ONEPLUS TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_function_testbench/accelerator_vector_oneplus_function_test/vector_oneplus_function/CLK

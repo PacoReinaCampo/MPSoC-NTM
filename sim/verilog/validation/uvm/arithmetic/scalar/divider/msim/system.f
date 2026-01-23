@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/arithmetic/scalar/divider/ntm_design.sv
+../../../../../../../../validation/uvm/application/arithmetic/scalar/divider/accelerator_design.sv
 
-../../../../../../../../validation/uvm/library/arithmetic/scalar/divider/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/arithmetic/scalar/divider/accelerator_uvm_testbench.sv

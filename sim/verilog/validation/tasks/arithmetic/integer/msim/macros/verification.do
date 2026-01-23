@@ -11,24 +11,24 @@ mkdir wlf
 ##################################################################################################
 
 ##################################################################################################
-# NTM_SCALAR_INTEGER_ADDER_TEST 
+# ACCELERATOR_SCALAR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
 alias model_scalar_integer_adder_verification_compilation {
-  echo "TEST: NTM_SCALAR_INTEGER_ADDER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_INTEGER_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -37,24 +37,24 @@ alias model_scalar_integer_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_INTEGER_MULTIPLIER_TEST 
+# ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_scalar_integer_multiplier_verification_compilation {
-  echo "TEST: NTM_SCALAR_INTEGER_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -63,24 +63,24 @@ alias model_scalar_integer_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_INTEGER_DIVIDER_TEST 
+# ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_scalar_integer_divider_verification_compilation {
-  echo "TEST: NTM_SCALAR_INTEGER_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -89,24 +89,24 @@ alias model_scalar_integer_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_INTEGER_ADDER_TEST 
+# ACCELERATOR_VECTOR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
 alias model_vector_integer_adder_verification_compilation {
-  echo "TEST: NTM_VECTOR_INTEGER_ADDER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_INTEGER_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -115,24 +115,24 @@ alias model_vector_integer_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_INTEGER_MULTIPLIER_TEST 
+# ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_vector_integer_multiplier_verification_compilation {
-  echo "TEST: NTM_VECTOR_INTEGER_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -141,24 +141,24 @@ alias model_vector_integer_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_INTEGER_DIVIDER_TEST 
+# ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_vector_integer_divider_verification_compilation {
-  echo "TEST: NTM_VECTOR_INTEGER_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -167,24 +167,24 @@ alias model_vector_integer_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_INTEGER_ADDER_TEST 
+# ACCELERATOR_MATRIX_INTEGER_ADDER_TEST 
 ##################################################################################################
 
 alias model_matrix_integer_adder_verification_compilation {
-  echo "TEST: NTM_MATRIX_INTEGER_ADDER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_INTEGER_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -193,24 +193,24 @@ alias model_matrix_integer_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_INTEGER_MULTIPLIER_TEST 
+# ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_matrix_integer_multiplier_verification_compilation {
-  echo "TEST: NTM_MATRIX_INTEGER_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -219,24 +219,24 @@ alias model_matrix_integer_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_INTEGER_DIVIDER_TEST 
+# ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_matrix_integer_divider_verification_compilation {
-  echo "TEST: NTM_MATRIX_INTEGER_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -245,24 +245,24 @@ alias model_matrix_integer_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_INTEGER_ADDER_TEST 
+# ACCELERATOR_TENSOR_INTEGER_ADDER_TEST 
 ##################################################################################################
 
 alias model_tensor_integer_adder_verification_compilation {
-  echo "TEST: NTM_TENSOR_INTEGER_ADDER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_INTEGER_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -271,24 +271,24 @@ alias model_tensor_integer_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_INTEGER_MULTIPLIER_TEST 
+# ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_tensor_integer_multiplier_verification_compilation {
-  echo "TEST: NTM_TENSOR_INTEGER_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -297,24 +297,24 @@ alias model_tensor_integer_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_INTEGER_DIVIDER_TEST 
+# ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_tensor_integer_divider_verification_compilation {
-  echo "TEST: NTM_TENSOR_INTEGER_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $design_pkg_path/model_arithmetic_vhdl_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/model_integer_testbench.vhd
 
-  vsim -g /model_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
+  vsim -g /model_integer_testbench/ENABLE_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_integer_testbench
 
   #MACROS
   add log -r sim:/model_integer_testbench/*
 
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST true 0
-  force -freeze sim:/model_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST true 0
+  force -freeze sim:/model_integer_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all

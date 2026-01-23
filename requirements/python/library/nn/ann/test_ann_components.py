@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-from components import ntm_masked_multi_head_attention as masked_multi_head_attention
-from components import ntm_masked_scaled_dot_product_attention as masked_scaled_dot_product_attention
-from components import ntm_multi_head_attention as multi_head_attention
-from components import ntm_scaled_dot_product_attention as scaled_dot_product_attention
+from components import accelerator_masked_multi_head_attention as masked_multi_head_attention
+from components import accelerator_masked_scaled_dot_product_attention as masked_scaled_dot_product_attention
+from components import accelerator_multi_head_attention as multi_head_attention
+from components import accelerator_scaled_dot_product_attention as scaled_dot_product_attention
 
 print('Hello, world!')

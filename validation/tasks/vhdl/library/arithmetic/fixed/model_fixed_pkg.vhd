@@ -108,116 +108,116 @@ package model_fixed_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FIXED_N_FOUR;
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_1    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_2      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_2 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_2    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_2      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_2 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_2    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_3      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_3 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_3    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_3      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_3 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_3    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_4      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_4 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_4    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_4      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_4 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_4    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_5      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_5 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_5    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_5      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_5 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_5    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_6      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_6 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_6    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_6      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_6 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_6    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_7      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_7 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_7    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_7      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_7 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_7    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_8      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_8 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_8    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_8      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_8 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_8    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_9      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_9 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_9    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_9      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_9 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_9    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_10      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_10 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_10    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_10      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_10 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_10    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_11      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_11 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_11    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_11      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_11 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_11    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_12      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_12 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_12    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_12      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_12 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_12    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_13      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_13 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_13    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_13      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_13 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_13    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_14      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_14 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_14    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_14      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_14 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_14    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_15      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_15 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_15    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_15      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_15 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_15    : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_FIXED_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_CASE_1    : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_FIXED_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_CASE_1    : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_FIXED_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_CASE_1    : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_scalar_adder;
-pub mod ntm_scalar_subtractor;
-pub mod ntm_scalar_multiplier;
-pub mod ntm_scalar_divider;
+pub mod accelerator_scalar_adder;
+pub mod accelerator_scalar_subtractor;
+pub mod accelerator_scalar_multiplier;
+pub mod accelerator_scalar_divider;
 
-pub mod ntm_scalar_arithmetic;
+pub mod accelerator_scalar_arithmetic;

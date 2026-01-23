@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_tensor_algebra;
-use ntm_tensor_algebra;
+with accelerator_tensor_algebra;
+use accelerator_tensor_algebra;
 
 procedure test_tensor_algebra is
 
@@ -105,7 +105,7 @@ procedure test_tensor_algebra is
 
 begin
 
-  ntm_tensor_algebra.ntm_tensor_convolution (
+  accelerator_tensor_algebra.accelerator_tensor_convolution (
     data_a_in => tensor_data_a_in,
     data_b_in => tensor_data_b_in,
 
@@ -126,7 +126,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_inverse (
+  accelerator_tensor_algebra.accelerator_tensor_inverse (
     data_in => tensor_data_in,
 
     data_out => tensor_data_out
@@ -146,7 +146,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_matrix_convolution (
+  accelerator_tensor_algebra.accelerator_tensor_matrix_convolution (
     data_a_in => tensor_data_a_in,
     data_b_in => matrix_data_b_in,
 
@@ -163,7 +163,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_matrix_product (
+  accelerator_tensor_algebra.accelerator_tensor_matrix_product (
     data_a_in => tensor_data_a_in,
     data_b_in => matrix_data_b_in,
 
@@ -180,7 +180,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_multiplication (
+  accelerator_tensor_algebra.accelerator_tensor_multiplication (
     data_in => array4_data_in,
 
     data_out => tensor_data_out
@@ -200,7 +200,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_summation (
+  accelerator_tensor_algebra.accelerator_tensor_summation (
     data_in => array4_data_in,
 
     data_out => tensor_data_out
@@ -220,7 +220,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_product (
+  accelerator_tensor_algebra.accelerator_tensor_product (
     data_a_in => tensor_data_a_in,
     data_b_in => tensor_data_b_in,
 
@@ -241,7 +241,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_transpose (
+  accelerator_tensor_algebra.accelerator_tensor_transpose (
     data_in => tensor_data_in,
 
     data_out => tensor_data_out
@@ -261,7 +261,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_differentiation (
+  accelerator_tensor_algebra.accelerator_tensor_differentiation (
     data_in => data_in,
 
     length_i_in => length_i_in,
@@ -287,7 +287,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_integration (
+  accelerator_tensor_algebra.accelerator_tensor_integration (
     data_in => data_in,
 
     length_in => length_in,
@@ -309,7 +309,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_algebra.ntm_tensor_softmax (
+  accelerator_tensor_algebra.accelerator_tensor_softmax (
     data_in => data_in,
 
     data_out  => data_out

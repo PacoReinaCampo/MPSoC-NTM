@@ -44,19 +44,19 @@
 
 import scala.util.Random
 
-import vector.ntm_vector_arithmetic
+import vector.accelerator_vector_arithmetic
 
 object test_vector_arithmetic {
   def main(args: Array[String]): Unit = {
     val data_a_in: Double = Random.nextDouble()
     val data_b_in: Double = Random.nextDouble()
 
-    assert(ntm_vector_arithmetic.ntm_vector_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
+    assert(accelerator_vector_arithmetic.accelerator_vector_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
 
-    assert(ntm_vector_arithmetic.ntm_vector_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
+    assert(accelerator_vector_arithmetic.accelerator_vector_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
 
-    assert(ntm_vector_arithmetic.ntm_vector_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
+    assert(accelerator_vector_arithmetic.accelerator_vector_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
 
-    assert(ntm_vector_arithmetic.ntm_vector_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
+    assert(accelerator_vector_arithmetic.accelerator_vector_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
   }
 }

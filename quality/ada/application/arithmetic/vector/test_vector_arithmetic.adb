@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_vector_arithmetic;
-use ntm_vector_arithmetic;
+with accelerator_vector_arithmetic;
+use accelerator_vector_arithmetic;
 
 procedure test_vector_arithmetic is
 
@@ -62,7 +62,7 @@ procedure test_vector_arithmetic is
 
 begin
 
-  ntm_vector_arithmetic.ntm_vector_adder(
+  accelerator_vector_arithmetic.accelerator_vector_adder(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -76,7 +76,7 @@ begin
 
   New_Line;
 
-  ntm_vector_arithmetic.ntm_vector_substractor(
+  accelerator_vector_arithmetic.accelerator_vector_substractor(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -90,7 +90,7 @@ begin
 
   New_Line;
 
-  ntm_vector_arithmetic.ntm_vector_multiplier(
+  accelerator_vector_arithmetic.accelerator_vector_multiplier(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -104,7 +104,7 @@ begin
 
   New_Line;
 
-  ntm_vector_arithmetic.ntm_vector_divider(
+  accelerator_vector_arithmetic.accelerator_vector_divider(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out

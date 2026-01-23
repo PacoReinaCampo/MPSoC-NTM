@@ -42,5 +42,5 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_scalar_multiplication;
-pub mod ntm_scalar_summation;
+pub mod accelerator_scalar_multiplication;
+pub mod accelerator_scalar_summation;

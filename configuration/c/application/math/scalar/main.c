@@ -46,7 +46,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../../library/math/ntm_math.h"
+#include "../../../library/math/accelerator_math.h"
 
 int main() {
   double data_a_in = 48.0;
@@ -56,19 +56,19 @@ int main() {
 
   data_out = 64.0;
 
-  assert(ntm_scalar_logistic_function(data_a_in, data_b_in) == data_out);
+  assert(accelerator_scalar_logistic_function(data_a_in, data_b_in) == data_out);
 
   data_out = 32.0;
 
-  assert(ntm_scalar_oneplus_function(data_a_in, data_b_in) == data_out);
+  assert(accelerator_scalar_oneplus_function(data_a_in, data_b_in) == data_out);
 
   data_out = 768.0;
 
-  assert(ntm_scalar_mean_function(data_a_in, data_b_in) == data_out);
+  assert(accelerator_scalar_mean_function(data_a_in, data_b_in) == data_out);
 
   data_out = 3.0;
 
-  assert(ntm_scalar_deviation_function(data_a_in, data_b_in) == data_out);
+  assert(accelerator_scalar_deviation_function(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

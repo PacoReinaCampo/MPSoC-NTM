@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_vector_logistic_function;
-pub mod ntm_vector_oneplus_function;
-pub mod ntm_vector_mean_function;
-pub mod ntm_vector_deviation_function;
+pub mod accelerator_vector_logistic_function;
+pub mod accelerator_vector_oneplus_function;
+pub mod accelerator_vector_mean_function;
+pub mod accelerator_vector_deviation_function;

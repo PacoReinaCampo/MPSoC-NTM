@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-scalac scalar/ntm_scalar_math.scala; scalac test_scalar_math.scala; scala test_scalar_math
-scalac vector/ntm_vector_math.scala; scalac test_vector_math.scala; scala test_vector_math
-scalac matrix/ntm_matrix_math.scala; scalac test_matrix_math.scala; scala test_matrix_math
+scalac scalar/accelerator_scalar_math.scala; scalac test_scalar_math.scala; scala test_scalar_math
+scalac vector/accelerator_vector_math.scala; scalac test_vector_math.scala; scala test_vector_math
+scalac matrix/accelerator_matrix_math.scala; scalac test_matrix_math.scala; scala test_matrix_math

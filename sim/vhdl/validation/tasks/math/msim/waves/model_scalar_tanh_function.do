@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR TANH TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR TANH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_series_testbench/model_scalar_tanh_function_test/scalar_tanh_function/CLK

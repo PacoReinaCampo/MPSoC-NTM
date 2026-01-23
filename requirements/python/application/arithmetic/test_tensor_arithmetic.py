@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from tensor import ntm_tensor_arithmetic as tensor_arithmetic
+from tensor import accelerator_tensor_arithmetic as tensor_arithmetic
 
 def test_tensor_arithmetic():
 
@@ -53,13 +53,13 @@ def test_tensor_arithmetic():
 
   arithmetic = tensor_arithmetic.TensorArithmetic(data_a_in, data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_adder(), data_a_in + data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_tensor_adder(), data_a_in + data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_subtractor(), data_a_in - data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_tensor_subtractor(), data_a_in - data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_multiplier(), data_a_in * data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_tensor_multiplier(), data_a_in * data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_tensor_divider(), data_a_in / data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_tensor_divider(), data_a_in / data_b_in)
 
 
 test_tensor_arithmetic()

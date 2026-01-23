@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-touch src/test/scala/classes/philosophers/ntm_philosophers_test.scala
-touch src/test/scala/classes/soldiers/ntm_soldiers_test.scala
-touch src/test/scala/classes/workers/ntm_workers_test.scala
+touch src/test/scala/classes/philosophers/accelerator_philosophers_test.scala
+touch src/test/scala/classes/soldiers/accelerator_soldiers_test.scala
+touch src/test/scala/classes/workers/accelerator_workers_test.scala
 touch src/test/scala/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip_test.scala
 touch src/test/scala/computing/advanced_computer_architecture/processing_unit/mimd_test.scala
 touch src/test/scala/computing/advanced_computer_architecture/processing_unit/misd_test.scala

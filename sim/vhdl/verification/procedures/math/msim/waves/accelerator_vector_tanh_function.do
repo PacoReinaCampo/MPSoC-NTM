@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR TANH TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR TANH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_series_testbench/accelerator_vector_tanh_function_test/vector_tanh_function/CLK

@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/arithmetic/scalar/multiplier/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/arithmetic/scalar/multiplier/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/scalar/multiplier/accelerator_design.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/scalar/multiplier/accelerator_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/accelerator_model.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/accelerator_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/scalar/multiplier/accelerator_testbench.vhd

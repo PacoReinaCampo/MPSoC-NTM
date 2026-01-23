@@ -46,16 +46,16 @@
 # DNC-Memory Sources
 #####################################################################
 
-SOURCES_MEMORY =	../../../../library/nn/dnc/dnc_controller.hpp \
-			../../../../library/nn/dnc/memory/dnc_addressing.cpp \
-			../../../../library/nn/dnc/memory/dnc_allocation_weighting.cpp \
-			../../../../library/nn/dnc/memory/dnc_backward_weighting.cpp \
-			../../../../library/nn/dnc/memory/dnc_forward_weighting.cpp \
-			../../../../library/nn/dnc/memory/dnc_matrix_content_based_addressing.cpp \
-			../../../../library/nn/dnc/memory/dnc_memory_matrix.cpp \
-			../../../../library/nn/dnc/memory/dnc_memory_retention_vector.cpp \
-			../../../../library/nn/dnc/memory/dnc_precedence_weighting.cpp \
-			../../../../library/nn/dnc/memory/dnc_sort_vector.cpp \
-			../../../../library/nn/dnc/memory/dnc_temporal_link_matrix.cpp \
-			../../../../library/nn/dnc/memory/dnc_usage_vector.cpp \
-			../../../../library/nn/dnc/memory/dnc_vector_content_based_addressing.cpp
+SOURCES_MEMORY =	../../../../library/nn/dnc/accelerator_controller.hpp \
+			../../../../library/nn/dnc/memory/accelerator_addressing.cpp \
+			../../../../library/nn/dnc/memory/accelerator_allocation_weighting.cpp \
+			../../../../library/nn/dnc/memory/accelerator_backward_weighting.cpp \
+			../../../../library/nn/dnc/memory/accelerator_forward_weighting.cpp \
+			../../../../library/nn/dnc/memory/accelerator_matrix_content_based_addressing.cpp \
+			../../../../library/nn/dnc/memory/accelerator_memory_matrix.cpp \
+			../../../../library/nn/dnc/memory/accelerator_memory_retention_vector.cpp \
+			../../../../library/nn/dnc/memory/accelerator_precedence_weighting.cpp \
+			../../../../library/nn/dnc/memory/accelerator_sort_vector.cpp \
+			../../../../library/nn/dnc/memory/accelerator_temporal_link_matrix.cpp \
+			../../../../library/nn/dnc/memory/accelerator_usage_vector.cpp \
+			../../../../library/nn/dnc/memory/accelerator_vector_content_based_addressing.cpp

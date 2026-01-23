@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-from inputs import ntm_inputs_vector as inputs_vector
-from inputs import ntm_keys_vector as keys_vector
-from inputs import ntm_queries_vector as queries_vector
-from inputs import ntm_values_vector as values_vector
+from inputs import accelerator_inputs_vector as inputs_vector
+from inputs import accelerator_keys_vector as keys_vector
+from inputs import accelerator_queries_vector as queries_vector
+from inputs import accelerator_values_vector as values_vector
 
 print('Hello, world!')

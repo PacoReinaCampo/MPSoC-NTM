@@ -109,42 +109,42 @@ package model_calculus_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SOFTMAX_TEST         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SOFTMAX_TEST         : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0         : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1         : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_CASE_1         : boolean := false;
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGRATION_TEST       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SOFTMAX_TEST           : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_TEST       : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_TEST           : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0         : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SOFTMAX_CASE_1         : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_CASE_1         : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

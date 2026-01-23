@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/trainer/lstm/forget/ntm_lstm_forget_trainer.h"
+#include "../../../../library/trainer/lstm/forget/accelerator_lstm_forget_trainer.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_lstm_forget_trainer_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_forget_trainer_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_lstm_forget_trainer_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_forget_trainer_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_lstm_forget_trainer_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_forget_trainer_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_lstm_forget_trainer_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_forget_trainer_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

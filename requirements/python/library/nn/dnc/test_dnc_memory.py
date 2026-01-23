@@ -42,17 +42,17 @@
 ##                                                                               ##
 ###################################################################################
 
-from memory import dnc_addressing as addressing
-from memory import dnc_allocation_weighting as allocation_weighting
-from memory import dnc_backward_weighting as backward_weighting
-from memory import dnc_forward_weighting as forward_weighting
-from memory import dnc_matrix_content_based_addressing as matrix_content_based_addressing
-from memory import dnc_memory_matrix as memory_matrix
-from memory import dnc_memory_retention_vector as memory_retention_vector
-from memory import dnc_precedence_weighting as precedence_weighting
-from memory import dnc_sort_vector as sort_vector
-from memory import dnc_temporal_link_matrix as temporal_link_matrix
-from memory import dnc_usage_vector as usage_vector
-from memory import dnc_vector_content_based_addressing as vector_content_based_addressing
+from memory import accelerator_addressing as addressing
+from memory import accelerator_allocation_weighting as allocation_weighting
+from memory import accelerator_backward_weighting as backward_weighting
+from memory import accelerator_forward_weighting as forward_weighting
+from memory import accelerator_matrix_content_based_addressing as matrix_content_based_addressing
+from memory import accelerator_memory_matrix as memory_matrix
+from memory import accelerator_memory_retention_vector as memory_retention_vector
+from memory import accelerator_precedence_weighting as precedence_weighting
+from memory import accelerator_sort_vector as sort_vector
+from memory import accelerator_temporal_link_matrix as temporal_link_matrix
+from memory import accelerator_usage_vector as usage_vector
+from memory import accelerator_vector_content_based_addressing as vector_content_based_addressing
 
 print('Hello, world!')

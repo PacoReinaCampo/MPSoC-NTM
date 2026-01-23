@@ -47,10 +47,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/ann/components/ntm_masked_multi_head_attention.h"
-#include "../../../../library/nn/ann/components/ntm_masked_scaled_dot_product_attention.h"
-#include "../../../../library/nn/ann/components/ntm_multi_head_attention.h"
-#include "../../../../library/nn/ann/components/ntm_scaled_dot_product_attention.h"
+#include "../../../../library/nn/ann/components/accelerator_masked_multi_head_attention.h"
+#include "../../../../library/nn/ann/components/accelerator_masked_scaled_dot_product_attention.h"
+#include "../../../../library/nn/ann/components/accelerator_multi_head_attention.h"
+#include "../../../../library/nn/ann/components/accelerator_scaled_dot_product_attention.h"
 
 int main() {
   srand(time(NULL));
@@ -64,19 +64,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_multi_head_attention_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_multi_head_attention_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_multi_head_attention_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_multi_head_attention_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_multi_head_attention_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_multi_head_attention_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_multi_head_attention_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_multi_head_attention_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

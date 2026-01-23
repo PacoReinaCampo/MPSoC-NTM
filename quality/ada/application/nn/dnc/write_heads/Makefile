@@ -48,7 +48,7 @@
 
 -include include-write_heads.txt
 
-TARGET=dnc_write_heads
+TARGET=accelerator_write_heads
 
 #########################################################################
 # Targets

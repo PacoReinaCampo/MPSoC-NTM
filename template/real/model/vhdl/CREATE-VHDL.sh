@@ -1,6 +1,6 @@
-touch code/classes/philosophers/ntm_philosophers.vhd
-touch code/classes/soldiers/ntm_soldiers.vhd
-touch code/classes/workers/ntm_workers.vhd
+touch code/classes/philosophers/accelerator_philosophers.vhd
+touch code/classes/soldiers/accelerator_soldiers.vhd
+touch code/classes/workers/accelerator_workers.vhd
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.vhd
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.vhd
 touch code/computing/advanced_computer_architecture/processing_unit/misd.vhd
@@ -40,9 +40,9 @@ touch code/computing/neural_network/feedforward_neural_network/feedforward_neura
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network.vhd
 touch code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network.vhd
 touch code/computing/neural_network/perceptron_neural_network/perceptron_neural_network.vhd
-touch code/pkg/classes/ntm_philosophers_pkg.vhd
-touch code/pkg/classes/ntm_soldiers_pkg.vhd
-touch code/pkg/classes/ntm_workers_pkg.vhd
+touch code/pkg/classes/accelerator_philosophers_pkg.vhd
+touch code/pkg/classes/accelerator_soldiers_pkg.vhd
+touch code/pkg/classes/accelerator_workers_pkg.vhd
 touch code/pkg/computing/state_pkg.vhd
 touch code/pkg/ieee/math_complex-body.vhd
 touch code/pkg/ieee/math_complex.vhd

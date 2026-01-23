@@ -46,9 +46,9 @@
 # NTM-Top Sources
 #####################################################################
 
-SOURCES_TOP =	../../../../library/nn/ntm/ntm_controller.hpp \
-		../../../../library/nn/ntm/top/ntm_interface_matrix.cpp \
-		../../../../library/nn/ntm/top/ntm_interface_top.cpp \
-		../../../../library/nn/ntm/top/ntm_interface_vector.cpp \
-		../../../../library/nn/ntm/top/ntm_output_vector.cpp \
-		../../../../library/nn/ntm/top/ntm_top.cpp
+SOURCES_TOP =	../../../../library/nn/ntm/accelerator_controller.hpp \
+		../../../../library/nn/ntm/top/accelerator_interface_matrix.cpp \
+		../../../../library/nn/ntm/top/accelerator_interface_top.cpp \
+		../../../../library/nn/ntm/top/accelerator_interface_vector.cpp \
+		../../../../library/nn/ntm/top/accelerator_output_vector.cpp \
+		../../../../library/nn/ntm/top/accelerator_top.cpp

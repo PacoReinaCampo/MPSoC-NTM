@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_scalar_math;
-use ntm_scalar_math;
+with accelerator_scalar_math;
+use accelerator_scalar_math;
 
 procedure test_scalar_math is
 
@@ -65,7 +65,7 @@ procedure test_scalar_math is
 
 begin
 
-  ntm_scalar_math.ntm_scalar_logistic_function (
+  accelerator_scalar_math.accelerator_scalar_logistic_function (
     data_in => data_scalar_in,
 
     data_out  => data_out
@@ -77,7 +77,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_math.ntm_scalar_oneplus_function (
+  accelerator_scalar_math.accelerator_scalar_oneplus_function (
     data_in => data_scalar_in,
 
     data_out  => data_out
@@ -89,7 +89,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_math.ntm_scalar_mean_function (
+  accelerator_scalar_math.accelerator_scalar_mean_function (
     data_in => data_vector_in,
 
     data_out => data_out
@@ -101,7 +101,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_math.ntm_scalar_deviation_function (
+  accelerator_scalar_math.accelerator_scalar_deviation_function (
     data_in => data_vector_in,
     mean_in => mean_in,
 

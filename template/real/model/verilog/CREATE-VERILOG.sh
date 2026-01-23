@@ -1,6 +1,6 @@
-touch code/classes/philosophers/ntm_philosophers.sv
-touch code/classes/soldiers/ntm_soldiers.sv
-touch code/classes/workers/ntm_workers.sv
+touch code/classes/philosophers/accelerator_philosophers.sv
+touch code/classes/soldiers/accelerator_soldiers.sv
+touch code/classes/workers/accelerator_workers.sv
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.sv
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.sv
 touch code/computing/advanced_computer_architecture/processing_unit/misd.sv
@@ -40,7 +40,7 @@ touch code/computing/neural_network/feedforward_neural_network/feedforward_neura
 touch code/computing/neural_network/long_short_term_memory_neural_network/long_short_term_memory_neural_network.sv
 touch code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network.sv
 touch code/computing/neural_network/perceptron_neural_network/perceptron_neural_network.sv
-touch code/pkg/classes/ntm_philosophers_pkg.sv
-touch code/pkg/classes/ntm_soldiers_pkg.sv
-touch code/pkg/classes/ntm_workers_pkg.sv
+touch code/pkg/classes/accelerator_philosophers_pkg.sv
+touch code/pkg/classes/accelerator_soldiers_pkg.sv
+touch code/pkg/classes/accelerator_workers_pkg.sv
 touch code/pkg/computing/state_pkg.sv

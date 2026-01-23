@@ -46,10 +46,10 @@
 # Trainer-FNN Sources
 #####################################################################
 
-SOURCES_FNN =	../../../library/trainer/fnn/ntm_fnn_b_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_d_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_k_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_u_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_v_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_w_trainer.cpp \
-		../../../library/trainer/fnn/ntm_fnn_trainer.cpp
+SOURCES_FNN =	../../../library/trainer/fnn/accelerator_fnn_b_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_d_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_k_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_u_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_v_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_w_trainer.cpp \
+		../../../library/trainer/fnn/accelerator_fnn_trainer.cpp

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR FLOAT DIVIDER TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR FLOAT DIVIDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_float_testbench/model_vector_float_divider_test/vector_float_divider/CLK

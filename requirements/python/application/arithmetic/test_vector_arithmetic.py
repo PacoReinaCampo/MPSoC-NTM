@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from vector import ntm_vector_arithmetic as vector_arithmetic
+from vector import accelerator_vector_arithmetic as vector_arithmetic
 
 def test_vector_arithmetic():
 
@@ -53,13 +53,13 @@ def test_vector_arithmetic():
 
   arithmetic = vector_arithmetic.VectorArithmetic(data_a_in, data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_vector_adder(), data_a_in + data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_vector_adder(), data_a_in + data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_vector_subtractor(), data_a_in - data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_vector_subtractor(), data_a_in - data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_vector_multiplier(), data_a_in * data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_vector_multiplier(), data_a_in * data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_vector_divider(), data_a_in / data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_vector_divider(), data_a_in / data_b_in)
 
 
 test_vector_arithmetic()

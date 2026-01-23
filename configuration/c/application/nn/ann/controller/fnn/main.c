@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../../library/nn/ann/controller/fnn/ntm_fnn.h"
+#include "../../../../../library/nn/ann/controller/fnn/accelerator_fnn.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_fnn_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_fnn_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_fnn_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_fnn_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_fnn_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_fnn_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_fnn_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_fnn_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

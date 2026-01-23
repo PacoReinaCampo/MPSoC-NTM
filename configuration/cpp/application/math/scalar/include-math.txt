@@ -46,16 +46,16 @@
 # Math-Scalar Sources
 #####################################################################
 
-SOURCES_MATH =	../../../library/math/ntm_math.hpp \
-		../../../library/math/matrix/ntm_matrix_logistic_function.cpp \
-		../../../library/math/matrix/ntm_matrix_oneplus_function.cpp \
-		../../../library/math/scalar/ntm_scalar_logistic_function.cpp \
-		../../../library/math/scalar/ntm_scalar_oneplus_function.cpp \
-		../../../library/math/vector/ntm_vector_logistic_function.cpp \
-		../../../library/math/vector/ntm_vector_oneplus_function.cpp \
-		../../../library/math/matrix/ntm_matrix_deviation_function.cpp \
-		../../../library/math/matrix/ntm_matrix_mean_function.cpp \
-		../../../library/math/scalar/ntm_scalar_deviation_function.cpp \
-		../../../library/math/scalar/ntm_scalar_mean_function.cpp \
-		../../../library/math/vector/ntm_vector_deviation_function.cpp \
-		../../../library/math/vector/ntm_vector_mean_function.cpp
+SOURCES_MATH =	../../../library/math/accelerator_math.hpp \
+		../../../library/math/matrix/accelerator_matrix_logistic_function.cpp \
+		../../../library/math/matrix/accelerator_matrix_oneplus_function.cpp \
+		../../../library/math/scalar/accelerator_scalar_logistic_function.cpp \
+		../../../library/math/scalar/accelerator_scalar_oneplus_function.cpp \
+		../../../library/math/vector/accelerator_vector_logistic_function.cpp \
+		../../../library/math/vector/accelerator_vector_oneplus_function.cpp \
+		../../../library/math/matrix/accelerator_matrix_deviation_function.cpp \
+		../../../library/math/matrix/accelerator_matrix_mean_function.cpp \
+		../../../library/math/scalar/accelerator_scalar_deviation_function.cpp \
+		../../../library/math/scalar/accelerator_scalar_mean_function.cpp \
+		../../../library/math/vector/accelerator_vector_deviation_function.cpp \
+		../../../library/math/vector/accelerator_vector_mean_function.cpp

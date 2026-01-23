@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/tensor/adder/ntm_design.vhd
-vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/tensor/adder/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/tensor/adder/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/tensor/adder/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/ntm_model.vhd
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/tensor/adder/accelerator_testbench.vhd

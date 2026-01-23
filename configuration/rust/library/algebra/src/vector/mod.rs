@@ -42,12 +42,12 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_dot_product;
-pub mod ntm_vector_convolution;
-pub mod ntm_vector_cosine_similarity;
-pub mod ntm_vector_module;
-pub mod ntm_vector_multiplication;
-pub mod ntm_vector_summation;
-pub mod ntm_vector_differentiation;
-pub mod ntm_vector_integration;
-pub mod ntm_vector_softmax;
+pub mod accelerator_dot_product;
+pub mod accelerator_vector_convolution;
+pub mod accelerator_vector_cosine_similarity;
+pub mod accelerator_vector_module;
+pub mod accelerator_vector_multiplication;
+pub mod accelerator_vector_summation;
+pub mod accelerator_vector_differentiation;
+pub mod accelerator_vector_integration;
+pub mod accelerator_vector_softmax;

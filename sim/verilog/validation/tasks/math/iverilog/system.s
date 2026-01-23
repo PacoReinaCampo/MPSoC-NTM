@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_design.sv
+../../../../../../validation/uvm/application/arithmetic/scalar/adder/accelerator_design.sv
 
-../../../../../../validation/uvm/application/arithmetic/scalar/adder/ntm_testbench.sv
+../../../../../../validation/uvm/application/arithmetic/scalar/adder/accelerator_testbench.sv

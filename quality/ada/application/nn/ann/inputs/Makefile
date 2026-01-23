@@ -48,7 +48,7 @@
 
 -include include-inputs.txt
 
-TARGET=ntm_inputs
+TARGET=accelerator_inputs
 
 #########################################################################
 # Targets

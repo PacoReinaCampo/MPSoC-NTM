@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/matrix/divider/ntm_design.sv
+../../../../../../../../validation/classes/application/arithmetic/matrix/divider/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/matrix/divider/ntm_testbench.sv
+../../../../../../../../validation/classes/library/arithmetic/matrix/divider/accelerator_testbench.sv

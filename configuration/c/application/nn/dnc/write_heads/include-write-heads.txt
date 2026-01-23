@@ -46,7 +46,7 @@
 # DNC-Write-Heads Sources
 #####################################################################
 
-SOURCES_WRITE_HEADS =	../../../../library/nn/dnc/write_heads/dnc_write_content_weighting.h \
-			../../../../library/nn/dnc/write_heads/dnc_write_content_weighting.c \
-			../../../../library/nn/dnc/write_heads/dnc_write_weighting.h \
-			../../../../library/nn/dnc/write_heads/dnc_write_weighting.c
+SOURCES_WRITE_HEADS =	../../../../library/nn/dnc/write_heads/accelerator_write_content_weighting.h \
+			../../../../library/nn/dnc/write_heads/accelerator_write_content_weighting.c \
+			../../../../library/nn/dnc/write_heads/accelerator_write_weighting.h \
+			../../../../library/nn/dnc/write_heads/accelerator_write_weighting.c

@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_vector_math;
-use ntm_vector_math;
+with accelerator_vector_math;
+use accelerator_vector_math;
 
 procedure test_vector_math is
 
@@ -65,7 +65,7 @@ procedure test_vector_math is
 
 begin
 
-  ntm_vector_math.ntm_vector_logistic_function (
+  accelerator_vector_math.accelerator_vector_logistic_function (
     data_in => data_vector_in,
 
     data_out  => data_out
@@ -79,7 +79,7 @@ begin
 
   New_Line;
 
-  ntm_vector_math.ntm_vector_oneplus_function (
+  accelerator_vector_math.accelerator_vector_oneplus_function (
     data_in => data_vector_in,
 
     data_out  => data_out
@@ -93,7 +93,7 @@ begin
 
   New_Line;
 
-  ntm_vector_math.ntm_vector_mean_function (
+  accelerator_vector_math.accelerator_vector_mean_function (
     data_in => data_matrix_in,
 
     data_out => data_out
@@ -107,7 +107,7 @@ begin
 
   New_Line;
 
-  ntm_vector_math.ntm_vector_deviation_function (
+  accelerator_vector_math.accelerator_vector_deviation_function (
     data_in => data_matrix_in,
 
     mean_in => mean_in,

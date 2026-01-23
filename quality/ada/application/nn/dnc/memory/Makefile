@@ -48,7 +48,7 @@
 
 -include include-memory.txt
 
-TARGET=dnc_memory
+TARGET=accelerator_memory
 
 #########################################################################
 # Targets

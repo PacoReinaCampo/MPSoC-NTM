@@ -45,7 +45,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import tensor.ntm_tensor_algebra;
+import tensor.accelerator_tensor_algebra;
 
 class test_tensor_algebra {
   public static void main(String[] args) {
@@ -78,7 +78,7 @@ class test_tensor_algebra {
       }
     }
 
-    assert Arrays.deepEquals(ntm_tensor_algebra.ntm_tensor_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
+    assert Arrays.deepEquals(accelerator_tensor_algebra.accelerator_tensor_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
 
     double[][][] subtraction = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -88,7 +88,7 @@ class test_tensor_algebra {
         Arrays.setAll(subtraction[row][column], k -> data_a_in[row][column][k] - data_b_in[row][column][k]);
       }
     }
-    assert Arrays.deepEquals(ntm_tensor_algebra.ntm_tensor_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
+    assert Arrays.deepEquals(accelerator_tensor_algebra.accelerator_tensor_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
 
     double[][][] multiplication = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -99,7 +99,7 @@ class test_tensor_algebra {
       }
     }
 
-    assert Arrays.deepEquals(ntm_tensor_algebra.ntm_tensor_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
+    assert Arrays.deepEquals(accelerator_tensor_algebra.accelerator_tensor_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
 
     double[][][] division = new double[data_a_in.length][data_a_in[0].length][data_a_in[0][0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -110,6 +110,6 @@ class test_tensor_algebra {
       }
     }
 
-    assert Arrays.deepEquals(ntm_tensor_algebra.ntm_tensor_divider(data_a_in, data_b_in), division) : "Incorrect Division";
+    assert Arrays.deepEquals(accelerator_tensor_algebra.accelerator_tensor_divider(data_a_in, data_b_in), division) : "Incorrect Division";
   }
 }

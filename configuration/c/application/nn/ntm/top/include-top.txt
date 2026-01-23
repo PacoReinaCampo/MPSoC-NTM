@@ -46,13 +46,13 @@
 # NTM-Top
 #####################################################################
 
-SOURCES_TOP =	../../../../library/nn/ntm/top/ntm_interface_matrix.h \
-		../../../../library/nn/ntm/top/ntm_interface_matrix.c \
-		../../../../library/nn/ntm/top/ntm_interface_top.h \
-		../../../../library/nn/ntm/top/ntm_interface_top.c \
-		../../../../library/nn/ntm/top/ntm_interface_vector.h \
-		../../../../library/nn/ntm/top/ntm_interface_vector.c \
-		../../../../library/nn/ntm/top/ntm_output_vector.h \
-		../../../../library/nn/ntm/top/ntm_output_vector.c \
-		../../../../library/nn/ntm/top/ntm_top.h \
-		../../../../library/nn/ntm/top/ntm_top.c
+SOURCES_TOP =	../../../../library/nn/ntm/top/accelerator_interface_matrix.h \
+		../../../../library/nn/ntm/top/accelerator_interface_matrix.c \
+		../../../../library/nn/ntm/top/accelerator_interface_top.h \
+		../../../../library/nn/ntm/top/accelerator_interface_top.c \
+		../../../../library/nn/ntm/top/accelerator_interface_vector.h \
+		../../../../library/nn/ntm/top/accelerator_interface_vector.c \
+		../../../../library/nn/ntm/top/accelerator_output_vector.h \
+		../../../../library/nn/ntm/top/accelerator_output_vector.c \
+		../../../../library/nn/ntm/top/accelerator_top.h \
+		../../../../library/nn/ntm/top/accelerator_top.c

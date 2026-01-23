@@ -59,9 +59,9 @@ entity model_top_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_TOP_TEST   : boolean := false;
-    ENABLE_NTM_TOP_CASE_0 : boolean := false;
-    ENABLE_NTM_TOP_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_TOP_TEST   : boolean := false;
+    ENABLE_ACCELERATOR_TOP_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TOP_CASE_1 : boolean := false
     );
 end model_top_testbench;
 
@@ -185,92 +185,92 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_TOP_START => start_top,
-      NTM_TOP_READY => ready_top,
+      ACCELERATOR_TOP_START => start_top,
+      ACCELERATOR_TOP_READY => ready_top,
 
-      NTM_TOP_W_IN_L_ENABLE => w_in_l_enable_top,
-      NTM_TOP_W_IN_X_ENABLE => w_in_x_enable_top,
+      ACCELERATOR_TOP_W_IN_L_ENABLE => w_in_l_enable_top,
+      ACCELERATOR_TOP_W_IN_X_ENABLE => w_in_x_enable_top,
 
-      NTM_TOP_W_OUT_L_ENABLE => w_out_l_enable_top,
-      NTM_TOP_W_OUT_X_ENABLE => w_out_x_enable_top,
+      ACCELERATOR_TOP_W_OUT_L_ENABLE => w_out_l_enable_top,
+      ACCELERATOR_TOP_W_OUT_X_ENABLE => w_out_x_enable_top,
 
-      NTM_TOP_K_IN_I_ENABLE => k_in_i_enable_top,
-      NTM_TOP_K_IN_L_ENABLE => k_in_l_enable_top,
-      NTM_TOP_K_IN_K_ENABLE => k_in_k_enable_top,
+      ACCELERATOR_TOP_K_IN_I_ENABLE => k_in_i_enable_top,
+      ACCELERATOR_TOP_K_IN_L_ENABLE => k_in_l_enable_top,
+      ACCELERATOR_TOP_K_IN_K_ENABLE => k_in_k_enable_top,
 
-      NTM_TOP_K_OUT_I_ENABLE => k_out_i_enable_top,
-      NTM_TOP_K_OUT_L_ENABLE => k_out_l_enable_top,
-      NTM_TOP_K_OUT_K_ENABLE => k_out_k_enable_top,
+      ACCELERATOR_TOP_K_OUT_I_ENABLE => k_out_i_enable_top,
+      ACCELERATOR_TOP_K_OUT_L_ENABLE => k_out_l_enable_top,
+      ACCELERATOR_TOP_K_OUT_K_ENABLE => k_out_k_enable_top,
 
-      NTM_TOP_U_IN_L_ENABLE => u_in_l_enable_top,
-      NTM_TOP_U_IN_P_ENABLE => u_in_p_enable_top,
+      ACCELERATOR_TOP_U_IN_L_ENABLE => u_in_l_enable_top,
+      ACCELERATOR_TOP_U_IN_P_ENABLE => u_in_p_enable_top,
 
-      NTM_TOP_U_OUT_L_ENABLE => u_out_l_enable_top,
-      NTM_TOP_U_OUT_P_ENABLE => u_out_p_enable_top,
+      ACCELERATOR_TOP_U_OUT_L_ENABLE => u_out_l_enable_top,
+      ACCELERATOR_TOP_U_OUT_P_ENABLE => u_out_p_enable_top,
 
-      NTM_TOP_V_IN_L_ENABLE => v_in_l_enable_top,
-      NTM_TOP_V_IN_S_ENABLE => v_in_s_enable_top,
+      ACCELERATOR_TOP_V_IN_L_ENABLE => v_in_l_enable_top,
+      ACCELERATOR_TOP_V_IN_S_ENABLE => v_in_s_enable_top,
 
-      NTM_TOP_V_OUT_L_ENABLE => v_out_l_enable_top,
-      NTM_TOP_V_OUT_S_ENABLE => v_out_s_enable_top,
+      ACCELERATOR_TOP_V_OUT_L_ENABLE => v_out_l_enable_top,
+      ACCELERATOR_TOP_V_OUT_S_ENABLE => v_out_s_enable_top,
 
-      NTM_TOP_D_IN_I_ENABLE => d_in_i_enable_top,
-      NTM_TOP_D_IN_L_ENABLE => d_in_l_enable_top,
-      NTM_TOP_D_IN_M_ENABLE => d_in_m_enable_top,
+      ACCELERATOR_TOP_D_IN_I_ENABLE => d_in_i_enable_top,
+      ACCELERATOR_TOP_D_IN_L_ENABLE => d_in_l_enable_top,
+      ACCELERATOR_TOP_D_IN_M_ENABLE => d_in_m_enable_top,
 
-      NTM_TOP_D_OUT_I_ENABLE => d_out_i_enable_top,
-      NTM_TOP_D_OUT_L_ENABLE => d_out_l_enable_top,
-      NTM_TOP_D_OUT_M_ENABLE => d_out_m_enable_top,
+      ACCELERATOR_TOP_D_OUT_I_ENABLE => d_out_i_enable_top,
+      ACCELERATOR_TOP_D_OUT_L_ENABLE => d_out_l_enable_top,
+      ACCELERATOR_TOP_D_OUT_M_ENABLE => d_out_m_enable_top,
 
-      NTM_TOP_B_IN_ENABLE => b_in_enable_top,
+      ACCELERATOR_TOP_B_IN_ENABLE => b_in_enable_top,
 
-      NTM_TOP_B_OUT_ENABLE => b_out_enable_top,
+      ACCELERATOR_TOP_B_OUT_ENABLE => b_out_enable_top,
 
-      NTM_TOP_X_IN_ENABLE => x_in_enable_top,
+      ACCELERATOR_TOP_X_IN_ENABLE => x_in_enable_top,
 
-      NTM_TOP_X_OUT_ENABLE => x_out_enable_top,
+      ACCELERATOR_TOP_X_OUT_ENABLE => x_out_enable_top,
 
-      NTM_TOP_P_IN_I_ENABLE => p_in_i_enable_top,
-      NTM_TOP_P_IN_Y_ENABLE => p_in_y_enable_top,
-      NTM_TOP_P_IN_K_ENABLE => p_in_l_enable_top,
+      ACCELERATOR_TOP_P_IN_I_ENABLE => p_in_i_enable_top,
+      ACCELERATOR_TOP_P_IN_Y_ENABLE => p_in_y_enable_top,
+      ACCELERATOR_TOP_P_IN_K_ENABLE => p_in_l_enable_top,
 
-      NTM_TOP_P_OUT_I_ENABLE => p_out_i_enable_top,
-      NTM_TOP_P_OUT_Y_ENABLE => p_out_y_enable_top,
-      NTM_TOP_P_OUT_K_ENABLE => p_out_k_enable_top,
+      ACCELERATOR_TOP_P_OUT_I_ENABLE => p_out_i_enable_top,
+      ACCELERATOR_TOP_P_OUT_Y_ENABLE => p_out_y_enable_top,
+      ACCELERATOR_TOP_P_OUT_K_ENABLE => p_out_k_enable_top,
 
-      NTM_TOP_Q_IN_Y_ENABLE => q_in_y_enable_top,
-      NTM_TOP_Q_IN_L_ENABLE => q_in_l_enable_top,
+      ACCELERATOR_TOP_Q_IN_Y_ENABLE => q_in_y_enable_top,
+      ACCELERATOR_TOP_Q_IN_L_ENABLE => q_in_l_enable_top,
 
-      NTM_TOP_Q_OUT_Y_ENABLE => q_out_y_enable_top,
-      NTM_TOP_Q_OUT_L_ENABLE => q_out_l_enable_top,
+      ACCELERATOR_TOP_Q_OUT_Y_ENABLE => q_out_y_enable_top,
+      ACCELERATOR_TOP_Q_OUT_L_ENABLE => q_out_l_enable_top,
 
-      NTM_TOP_Y_OUT_ENABLE => y_out_enable_top,
+      ACCELERATOR_TOP_Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
-      NTM_TOP_SIZE_X_IN => size_x_in_top,
-      NTM_TOP_SIZE_Y_IN => size_y_in_top,
-      NTM_TOP_SIZE_N_IN => size_n_in_top,
-      NTM_TOP_SIZE_W_IN => size_w_in_top,
-      NTM_TOP_SIZE_L_IN => size_l_in_top,
-      NTM_TOP_SIZE_R_IN => size_r_in_top,
+      ACCELERATOR_TOP_SIZE_X_IN => size_x_in_top,
+      ACCELERATOR_TOP_SIZE_Y_IN => size_y_in_top,
+      ACCELERATOR_TOP_SIZE_N_IN => size_n_in_top,
+      ACCELERATOR_TOP_SIZE_W_IN => size_w_in_top,
+      ACCELERATOR_TOP_SIZE_L_IN => size_l_in_top,
+      ACCELERATOR_TOP_SIZE_R_IN => size_r_in_top,
 
-      NTM_TOP_W_IN => w_in_top,
-      NTM_TOP_K_IN => k_in_top,
-      NTM_TOP_U_IN => u_in_top,
-      NTM_TOP_V_IN => v_in_top,
-      NTM_TOP_D_IN => d_in_top,
-      NTM_TOP_B_IN => b_in_top,
+      ACCELERATOR_TOP_W_IN => w_in_top,
+      ACCELERATOR_TOP_K_IN => k_in_top,
+      ACCELERATOR_TOP_U_IN => u_in_top,
+      ACCELERATOR_TOP_V_IN => v_in_top,
+      ACCELERATOR_TOP_D_IN => d_in_top,
+      ACCELERATOR_TOP_B_IN => b_in_top,
 
-      NTM_TOP_X_IN => x_in_top,
+      ACCELERATOR_TOP_X_IN => x_in_top,
 
-      NTM_TOP_P_IN => p_in_top,
-      NTM_TOP_Q_IN => q_in_top,
+      ACCELERATOR_TOP_P_IN => p_in_top,
+      ACCELERATOR_TOP_Q_IN => q_in_top,
 
-      NTM_TOP_Y_OUT => y_out_top
+      ACCELERATOR_TOP_Y_OUT => y_out_top
       );
 
   -- TOP
-  model_top_test : if (ENABLE_NTM_TOP_TEST) generate
+  model_top_test : if (ENABLE_ACCELERATOR_TOP_TEST) generate
     top : model_top
       generic map (
         DATA_SIZE    => DATA_SIZE,

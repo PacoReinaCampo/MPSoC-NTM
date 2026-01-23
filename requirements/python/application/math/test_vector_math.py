@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from vector import ntm_vector_math as vector_math
+from vector import accelerator_vector_math as vector_math
 
 def test_vector_math():
 
@@ -54,9 +54,9 @@ def test_vector_math():
   math_function = vector_math.VectorMath(data_in_function, mean_in_function)
   test_function = vector_math.VectorMath(data_in_function, mean_in_function)
 
-  np.testing.assert_array_equal(math_function.ntm_vector_logistic_function(), test_function.ntm_vector_logistic_function())
+  np.testing.assert_array_equal(math_function.accelerator_vector_logistic_function(), test_function.accelerator_vector_logistic_function())
 
-  np.testing.assert_array_equal(math_function.ntm_vector_oneplus_function(), test_function.ntm_vector_oneplus_function())
+  np.testing.assert_array_equal(math_function.accelerator_vector_oneplus_function(), test_function.accelerator_vector_oneplus_function())
 
   data_in_statitic = np.random.rand(3,3)
   mean_in_statitics = np.zeros(3)
@@ -64,9 +64,9 @@ def test_vector_math():
   math_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
   test_statitics = vector_math.VectorMath(data_in_statitic, mean_in_statitics)
 
-  np.testing.assert_array_equal(math_statitics.ntm_vector_mean_function(), test_statitics.ntm_vector_mean_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_vector_mean_function(), test_statitics.accelerator_vector_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_vector_deviation_function(), test_statitics.ntm_vector_deviation_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_vector_deviation_function(), test_statitics.accelerator_vector_deviation_function())
 
 
 test_vector_math()

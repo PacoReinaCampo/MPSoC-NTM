@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR LOGISTIC TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR LOGISTIC TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_function_testbench/model_vector_logistic_function_test/vector_logistic_function/CLK

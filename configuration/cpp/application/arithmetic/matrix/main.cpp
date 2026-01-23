@@ -46,7 +46,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/arithmetic/ntm_arithmetic.hpp"
+#include "../../../library/arithmetic/accelerator_arithmetic.hpp"
 
 using namespace std;
 
@@ -69,27 +69,27 @@ int main() {
       {1.0, 1.0, 1.0},
       {6.0, 6.0, 6.0}};
 
-  assert(ntm_matrix_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_adder(data_a_in, data_b_in) == data_out);
 
-  assert(Arithmetic.ntm_matrix_adder(data_a_in, data_b_in) == data_out);
+  assert(Arithmetic.accelerator_matrix_adder(data_a_in, data_b_in) == data_out);
 
   data_out = {
       {2.0, 2.0, 2.0},
       {0.0, 0.0, 0.0},
       {8.0, 8.0, 8.0}};
 
-  assert(ntm_matrix_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_multiplier(data_a_in, data_b_in) == data_out);
 
-  assert(Arithmetic.ntm_matrix_multiplier(data_a_in, data_b_in) == data_out);
+  assert(Arithmetic.accelerator_matrix_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = {
       {2.0, 2.0, 2.0},
       {0.0, 0.0, 0.0},
       {2.0, 2.0, 2.0}};
 
-  assert(ntm_matrix_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_divider(data_a_in, data_b_in) == data_out);
 
-  assert(Arithmetic.ntm_matrix_divider(data_a_in, data_b_in) == data_out);
+  assert(Arithmetic.accelerator_matrix_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

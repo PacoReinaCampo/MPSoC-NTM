@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX VECTOR PRODUCT TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX VECTOR PRODUCT TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_matrix_vector_product_test/matrix_vector_product/CLK

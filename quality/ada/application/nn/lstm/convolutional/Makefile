@@ -48,7 +48,7 @@
 
 -include include-controller.txt
 
-TARGET=ntm_controller
+TARGET=accelerator_controller
 
 #########################################################################
 # Targets

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX DIFFERENTIATION TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX DIFFERENTIATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_calculus_testbench/model_matrix_differentiation_test/matrix_differentiation/CLK

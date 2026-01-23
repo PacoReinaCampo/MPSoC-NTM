@@ -47,8 +47,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../library/trainer/differentiation/ntm_vector_controller_differentiation.h"
-#include "../../../library/trainer/differentiation/ntm_matrix_controller_differentiation.h"
+#include "../../../library/trainer/differentiation/accelerator_vector_controller_differentiation.h"
+#include "../../../library/trainer/differentiation/accelerator_matrix_controller_differentiation.h"
 
 int main() {
   srand(time(NULL));
@@ -62,35 +62,35 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_vector_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_vector_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_vector_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_vector_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_vector_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_vector_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_vector_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_vector_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_matrix_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_controller_differentiation_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_matrix_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_controller_differentiation_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_matrix_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_controller_differentiation_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_matrix_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_matrix_controller_differentiation_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

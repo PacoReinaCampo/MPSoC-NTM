@@ -46,11 +46,11 @@
 # Trainer-Output Sources
 #####################################################################
 
-SOURCES_OUTPUT =	../../../../library/trainer/ntm_lstm.hpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_b_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_d_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_k_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_u_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_v_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_w_trainer.cpp \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_trainer.cpp
+SOURCES_OUTPUT =	../../../../library/trainer/accelerator_lstm.hpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_b_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_d_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_k_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_u_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_v_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_w_trainer.cpp \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_trainer.cpp

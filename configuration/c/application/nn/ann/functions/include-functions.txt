@@ -46,7 +46,7 @@
 # ANN-Functions Sources
 #####################################################################
 
-SOURCES_FUNCTIONS =	../../../../library/nn/ann/functions/ntm_layer_norm.h \
-			../../../../library/nn/ann/functions/ntm_layer_norm.c \
-			../../../../library/nn/ann/functions/ntm_positional_encoding.h \
-			../../../../library/nn/ann/functions/ntm_positional_encoding.c
+SOURCES_FUNCTIONS =	../../../../library/nn/ann/functions/accelerator_layer_norm.h \
+			../../../../library/nn/ann/functions/accelerator_layer_norm.c \
+			../../../../library/nn/ann/functions/accelerator_positional_encoding.h \
+			../../../../library/nn/ann/functions/accelerator_positional_encoding.c

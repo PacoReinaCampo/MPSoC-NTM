@@ -47,4 +47,4 @@
 #####################################################################
 
 SOURCES_LSTM =	../../../../../library/nn/ann/ann_controller.hpp \
-		../../../../../library/nn/ann/controller/lstm/ntm_lstm.cpp
+		../../../../../library/nn/ann/controller/lstm/accelerator_lstm.cpp

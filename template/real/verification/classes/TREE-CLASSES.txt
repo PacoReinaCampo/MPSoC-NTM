@@ -1,7 +1,7 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers
+│   │   └── accelerator_philosophers
 │   │       ├── application
 │   │       │   └── switch.sv
 │   │       └── library
@@ -15,7 +15,7 @@ code
 │   │           ├── testbench.sv
 │   │           └── test.sv
 │   ├── soldiers
-│   │   └── ntm_soldiers
+│   │   └── accelerator_soldiers
 │   │       ├── application
 │   │       │   └── switch.sv
 │   │       └── library
@@ -29,7 +29,7 @@ code
 │   │           ├── testbench.sv
 │   │           └── test.sv
 │   └── workers
-│       └── ntm_workers
+│       └── accelerator_workers
 │           ├── application
 │           │   └── switch.sv
 │           └── library

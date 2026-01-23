@@ -46,5 +46,5 @@
 # FNN-Standard Sources
 #####################################################################
 
-SOURCES_STANDARD =	../../../../library/nn/fnn/standard/ntm_controller.h \
- 			../../../../library/nn/fnn/standard/ntm_controller.c
+SOURCES_STANDARD =	../../../../library/nn/fnn/standard/accelerator_controller.h \
+ 			../../../../library/nn/fnn/standard/accelerator_controller.c

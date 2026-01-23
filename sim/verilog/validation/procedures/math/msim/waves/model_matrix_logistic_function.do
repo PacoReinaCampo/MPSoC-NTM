@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX LOGISTIC TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX LOGISTIC TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_function_testbench/model_matrix_logistic_function_test/matrix_logistic_function/CLK

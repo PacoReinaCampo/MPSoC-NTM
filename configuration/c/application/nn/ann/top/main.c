@@ -47,9 +47,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/ann/top/ntm_controller.h"
-#include "../../../../library/nn/ann/top/ntm_decoder.h"
-#include "../../../../library/nn/ann/top/ntm_encoder.h"
+#include "../../../../library/nn/ann/top/accelerator_controller.h"
+#include "../../../../library/nn/ann/top/accelerator_decoder.h"
+#include "../../../../library/nn/ann/top/accelerator_encoder.h"
 
 int main() {
   srand(time(NULL));
@@ -63,19 +63,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_controller_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_controller_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_controller_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_controller_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

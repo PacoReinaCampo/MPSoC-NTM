@@ -48,7 +48,7 @@
 
 -include include-lstm_forget_trainer.txt
 
-TARGET=ntm_lstm_forget_trainer
+TARGET=accelerator_lstm_forget_trainer
 
 #########################################################################
 # Targets

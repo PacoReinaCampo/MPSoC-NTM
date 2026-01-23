@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/vector/subtractor/ntm_design.sv
+../../../../../../../../validation/classes/application/arithmetic/vector/subtractor/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/vector/subtractor/ntm_testbench.sv
+../../../../../../../../validation/classes/library/arithmetic/vector/subtractor/accelerator_testbench.sv

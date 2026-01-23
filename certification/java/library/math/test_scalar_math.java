@@ -44,7 +44,7 @@
 
 import java.util.Random;
 
-import scalar.ntm_scalar_math;
+import scalar.accelerator_scalar_math;
 
 class test_scalar_math {
   public static void main(String[] args) {
@@ -53,12 +53,12 @@ class test_scalar_math {
     double data_a_in = random.nextDouble();
     double data_b_in = random.nextDouble();
 
-    assert ntm_scalar_math.ntm_scalar_logistic_function(data_a_in, data_b_in) == data_a_in + data_b_in;
+    assert accelerator_scalar_math.accelerator_scalar_logistic_function(data_a_in, data_b_in) == data_a_in + data_b_in;
 
-    assert ntm_scalar_math.ntm_scalar_oneplus_function(data_a_in, data_b_in) == data_a_in - data_b_in;
+    assert accelerator_scalar_math.accelerator_scalar_oneplus_function(data_a_in, data_b_in) == data_a_in - data_b_in;
 
-    assert ntm_scalar_math.ntm_scalar_mean_function(data_a_in, data_b_in) == data_a_in * data_b_in;
+    assert accelerator_scalar_math.accelerator_scalar_mean_function(data_a_in, data_b_in) == data_a_in * data_b_in;
 
-    assert ntm_scalar_math.ntm_scalar_deviation_function(data_a_in, data_b_in) == data_a_in / data_b_in;
+    assert accelerator_scalar_math.accelerator_scalar_deviation_function(data_a_in, data_b_in) == data_a_in / data_b_in;
   }
 }

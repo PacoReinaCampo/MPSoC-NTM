@@ -1,11 +1,11 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.java
+│   │   └── accelerator_philosophers.java
 │   ├── soldiers
-│   │   └── ntm_soldiers.java
+│   │   └── accelerator_soldiers.java
 │   └── workers
-│       └── ntm_workers.java
+│       └── accelerator_workers.java
 └── computing
     ├── advanced_computer_architecture
     │   ├── multi_processor_system_on_chip

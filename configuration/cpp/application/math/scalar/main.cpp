@@ -46,7 +46,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/math/ntm_math.hpp"
+#include "../../../library/math/accelerator_math.hpp"
 
 using namespace std;
 
@@ -57,11 +57,11 @@ int main() {
 
   data_out = 0.7090765217957029;
 
-  assert(ntm_scalar_logistic_function(data_in) == data_out);
+  assert(accelerator_scalar_logistic_function(data_in) == data_out);
 
   data_out = 2.2346950078883427;
 
-  assert(ntm_scalar_oneplus_function(data_in) == data_out);
+  assert(accelerator_scalar_oneplus_function(data_in) == data_out);
 
   vector<double> data_in{3.0, 1.0, 2.0};
 
@@ -71,11 +71,11 @@ int main() {
 
   data_out = 2.0;
 
-  assert(ntm_scalar_mean_function(data_in) == data_out);
+  assert(accelerator_scalar_mean_function(data_in) == data_out);
 
   data_out = 7.681145747868608;
 
-  assert(ntm_scalar_deviation_function(data_in, mean) == data_out);
+  assert(accelerator_scalar_deviation_function(data_in, mean) == data_out);
 
   return 0;
 }

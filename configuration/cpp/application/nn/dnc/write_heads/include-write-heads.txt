@@ -46,6 +46,6 @@
 # NTM-Write-Heads Sources
 #####################################################################
 
-SOURCES_WRITE_HEADS =	../../../../library/nn/dnc/dnc_controller.hpp \
-			../../../../library/nn/dnc/write_heads/dnc_write_content_weighting.cpp \
-			../../../../library/nn/dnc/write_heads/dnc_write_weighting.cpp
+SOURCES_WRITE_HEADS =	../../../../library/nn/dnc/accelerator_controller.hpp \
+			../../../../library/nn/dnc/write_heads/accelerator_write_content_weighting.cpp \
+			../../../../library/nn/dnc/write_heads/accelerator_write_weighting.cpp

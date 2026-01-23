@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_scalar_logistic_function;
-pub mod ntm_scalar_oneplus_function;
-pub mod ntm_scalar_mean_function;
-pub mod ntm_scalar_deviation_function;
+pub mod accelerator_scalar_logistic_function;
+pub mod accelerator_scalar_oneplus_function;
+pub mod accelerator_scalar_mean_function;
+pub mod accelerator_scalar_deviation_function;

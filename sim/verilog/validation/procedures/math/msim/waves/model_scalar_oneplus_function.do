@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR ONEPLUS TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR ONEPLUS TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_function_testbench/model_scalar_oneplus_function_test/scalar_oneplus_function/CLK

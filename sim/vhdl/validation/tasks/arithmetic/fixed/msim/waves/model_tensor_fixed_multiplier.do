@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR FIXED MULTIPLIER TEST}
+add wave -noupdate -divider {ACCELERATOR TENSOR FIXED MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_fixed_testbench/model_tensor_fixed_multiplier_test/tensor_fixed_multiplier/CLK

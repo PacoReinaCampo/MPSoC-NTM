@@ -48,7 +48,7 @@
 
 -include include-lstm_activation_trainer.txt
 
-TARGET=ntm_lstm_activation_trainer
+TARGET=accelerator_lstm_activation_trainer
 
 #########################################################################
 # Targets

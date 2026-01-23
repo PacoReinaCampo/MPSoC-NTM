@@ -46,8 +46,8 @@
 # State-Feedback Sources
 #####################################################################
 
-SOURCES_DIFFERENTIATION =	../../../library/trainer/ntm_trainer.h \
-				../../../library/trainer/differentiation/ntm_vector_controller_differentiation.h \
-				../../../library/trainer/differentiation/ntm_vector_controller_differentiation.c \
-				../../../library/trainer/differentiation/ntm_matrix_controller_differentiation.h \
-				../../../library/trainer/differentiation/ntm_matrix_controller_differentiation.c
+SOURCES_DIFFERENTIATION =	../../../library/trainer/accelerator_trainer.h \
+				../../../library/trainer/differentiation/accelerator_vector_controller_differentiation.h \
+				../../../library/trainer/differentiation/accelerator_vector_controller_differentiation.c \
+				../../../library/trainer/differentiation/accelerator_matrix_controller_differentiation.h \
+				../../../library/trainer/differentiation/accelerator_matrix_controller_differentiation.c

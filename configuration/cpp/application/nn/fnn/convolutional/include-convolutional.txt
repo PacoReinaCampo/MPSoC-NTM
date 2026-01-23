@@ -46,5 +46,5 @@
 # FNN-Convolutional Sources
 #####################################################################
 
-SOURCES_CONVOLUTIONAL =	../../../../library/nn/fnn/ntm_fnn_controller.hpp \
-			../../../../library/nn/fnn/convolutional/ntm_controller.cpp
+SOURCES_CONVOLUTIONAL =	../../../../library/nn/fnn/accelerator_fnn_controller.hpp \
+			../../../../library/nn/fnn/convolutional/accelerator_controller.cpp

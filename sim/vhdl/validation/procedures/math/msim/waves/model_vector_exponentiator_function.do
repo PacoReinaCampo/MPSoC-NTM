@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR EXPONENTIATOR TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR EXPONENTIATOR TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_series_testbench/model_vector_exponentiator_function_test/vector_exponentiator_function/CLK

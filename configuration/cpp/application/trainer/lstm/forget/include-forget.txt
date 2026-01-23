@@ -46,11 +46,11 @@
 # Trainer-Forget Sources
 #####################################################################
 
-SOURCES_FORGET =	../../../../library/trainer/ntm_lstm.hpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_b_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_d_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_k_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_u_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_v_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_w_trainer.cpp \
-			../../../../library/trainer/lstm/forget/ntm_lstm_forget_trainer.cpp
+SOURCES_FORGET =	../../../../library/trainer/accelerator_lstm.hpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_b_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_d_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_k_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_u_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_v_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_w_trainer.cpp \
+			../../../../library/trainer/lstm/forget/accelerator_lstm_forget_trainer.cpp

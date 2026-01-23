@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR INVERSE TEST}
+add wave -noupdate -divider {ACCELERATOR TENSOR INVERSE TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_tensor_inverse_test/tensor_inverse/CLK

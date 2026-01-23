@@ -46,6 +46,6 @@
 call ../../../../../../../../settings64_vivado.bat
 
 xvlog -prj system.prj
-xelab ntm_testbench
-xsim -R ntm_testbench
+xelab accelerator_testbench
+xsim -R accelerator_testbench
 pause

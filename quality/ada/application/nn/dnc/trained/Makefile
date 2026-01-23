@@ -48,7 +48,7 @@
 
 -include include-trained_top.txt
 
-TARGET=dnc_trained_top
+TARGET=accelerator_trained_top
 
 #########################################################################
 # Targets

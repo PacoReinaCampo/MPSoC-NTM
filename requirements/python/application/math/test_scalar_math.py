@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from scalar import ntm_scalar_math as scalar_math
+from scalar import accelerator_scalar_math as scalar_math
 
 def test_scalar_math():
 
@@ -53,18 +53,18 @@ def test_scalar_math():
   math_function = scalar_math.ScalarMath(data_in_function, 0)
   test_function = scalar_math.ScalarMath(data_in_function, 0)
 
-  np.testing.assert_array_equal(math_function.ntm_scalar_logistic_function(), test_function.ntm_scalar_logistic_function())
+  np.testing.assert_array_equal(math_function.accelerator_scalar_logistic_function(), test_function.accelerator_scalar_logistic_function())
 
-  np.testing.assert_array_equal(math_function.ntm_scalar_oneplus_function(), test_function.ntm_scalar_oneplus_function())
+  np.testing.assert_array_equal(math_function.accelerator_scalar_oneplus_function(), test_function.accelerator_scalar_oneplus_function())
 
   data_in_statitic = np.random.rand(3,1)
 
   math_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
   test_statitics = scalar_math.ScalarMath(data_in_statitic, 0)
 
-  np.testing.assert_array_equal(math_statitics.ntm_scalar_mean_function(), test_statitics.ntm_scalar_mean_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_scalar_mean_function(), test_statitics.accelerator_scalar_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_scalar_deviation_function(), test_statitics.ntm_scalar_deviation_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_scalar_deviation_function(), test_statitics.accelerator_scalar_deviation_function())
 
 
 test_scalar_math()

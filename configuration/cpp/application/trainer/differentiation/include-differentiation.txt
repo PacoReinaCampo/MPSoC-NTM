@@ -46,6 +46,6 @@
 # Trainer-Differentiation Sources
 #####################################################################
 
-SOURCES_DIFFERENTIATION =	../../../library/trainer/ntm_differentiation.hpp \
-				../../../library/trainer/differentiation/ntm_vector_controller_differentiation.cpp \
-				../../../library/trainer/differentiation/ntm_matrix_controller_differentiation.cpp
+SOURCES_DIFFERENTIATION =	../../../library/trainer/accelerator_differentiation.hpp \
+				../../../library/trainer/differentiation/accelerator_vector_controller_differentiation.cpp \
+				../../../library/trainer/differentiation/accelerator_matrix_controller_differentiation.cpp

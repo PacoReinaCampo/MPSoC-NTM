@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_matrix_arithmetic;
-use ntm_matrix_arithmetic;
+with accelerator_matrix_arithmetic;
+use accelerator_matrix_arithmetic;
 
 procedure test_matrix_arithmetic is
 
@@ -62,7 +62,7 @@ procedure test_matrix_arithmetic is
 
 begin
 
-  ntm_matrix_arithmetic.ntm_matrix_adder(
+  accelerator_matrix_arithmetic.accelerator_matrix_adder(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -78,7 +78,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_arithmetic.ntm_matrix_substractor(
+  accelerator_matrix_arithmetic.accelerator_matrix_substractor(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -94,7 +94,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_arithmetic.ntm_matrix_multiplier(
+  accelerator_matrix_arithmetic.accelerator_matrix_multiplier(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -110,7 +110,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_matrix_arithmetic.ntm_matrix_divider(
+  accelerator_matrix_arithmetic.accelerator_matrix_divider(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out

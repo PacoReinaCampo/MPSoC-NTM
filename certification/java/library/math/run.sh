@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-javac scalar/ntm_scalar_math.java; javac test_scalar_math.java; java test_scalar_math
-javac vector/ntm_vector_math.java; javac test_vector_math.java; java test_vector_math
-javac matrix/ntm_matrix_math.java; javac test_matrix_math.java; java test_matrix_math
+javac scalar/accelerator_scalar_math.java; javac test_scalar_math.java; java test_scalar_math
+javac vector/accelerator_vector_math.java; javac test_vector_math.java; java test_vector_math
+javac matrix/accelerator_matrix_math.java; javac test_matrix_math.java; java test_matrix_math

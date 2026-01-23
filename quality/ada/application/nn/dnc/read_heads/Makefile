@@ -48,7 +48,7 @@
 
 -include include-read_heads.txt
 
-TARGET=dnc_read_heads
+TARGET=accelerator_read_heads
 
 #########################################################################
 # Targets

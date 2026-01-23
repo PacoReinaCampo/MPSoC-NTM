@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from matrix import ntm_matrix_math as matrix_math
+from matrix import accelerator_matrix_math as matrix_math
 
 def test_matrix_math():
 
@@ -54,9 +54,9 @@ def test_matrix_math():
   math_function = matrix_math.MatrixMath(data_in_function, mean_in_function);
   test_function = matrix_math.MatrixMath(data_in_function, mean_in_function);
 
-  np.testing.assert_array_equal(math_function.ntm_matrix_logistic_function(), test_function.ntm_matrix_logistic_function())
+  np.testing.assert_array_equal(math_function.accelerator_matrix_logistic_function(), test_function.accelerator_matrix_logistic_function())
 
-  np.testing.assert_array_equal(math_function.ntm_matrix_oneplus_function(), test_function.ntm_matrix_oneplus_function())
+  np.testing.assert_array_equal(math_function.accelerator_matrix_oneplus_function(), test_function.accelerator_matrix_oneplus_function())
 
   data_in_statitics = np.random.rand(3,3,3)
   mean_in_statitics = np.zeros((3,3))
@@ -64,9 +64,9 @@ def test_matrix_math():
   math_statitics = matrix_math.MatrixMath(data_in_statitics, mean_in_statitics)
   test_statitics = matrix_math.MatrixMath(data_in_statitics, mean_in_statitics)
 
-  np.testing.assert_array_equal(math_statitics.ntm_matrix_mean_function(), test_statitics.ntm_matrix_mean_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_matrix_mean_function(), test_statitics.accelerator_matrix_mean_function())
 
-  np.testing.assert_array_equal(math_statitics.ntm_matrix_deviation_function(), test_statitics.ntm_matrix_deviation_function())
+  np.testing.assert_array_equal(math_statitics.accelerator_matrix_deviation_function(), test_statitics.accelerator_matrix_deviation_function())
 
 
 test_matrix_math()

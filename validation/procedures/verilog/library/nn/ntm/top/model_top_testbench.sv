@@ -59,9 +59,9 @@ module model_top_testbench;
   parameter R = 64;
 
   // FUNCTIONALITY
-  parameter STIMULUS_NTM_TOP_TEST = 0;
-  parameter STIMULUS_NTM_TOP_CASE_0 = 0;
-  parameter STIMULUS_NTM_TOP_CASE_1 = 0;
+  parameter STIMULUS_ACCELERATOR_TOP_TEST = 0;
+  parameter STIMULUS_ACCELERATOR_TOP_CASE_0 = 0;
+  parameter STIMULUS_ACCELERATOR_TOP_CASE_1 = 0;
 
   //////////////////////////////////////////////////////////////////////////////
   // Signals
@@ -139,63 +139,63 @@ module model_top_testbench;
     .R(R),
 
     // FUNCTIONALITY
-    .STIMULUS_NTM_TOP_TEST  (STIMULUS_NTM_TOP_TEST),
-    .STIMULUS_NTM_TOP_CASE_0(STIMULUS_NTM_TOP_CASE_0),
-    .STIMULUS_NTM_TOP_CASE_1(STIMULUS_NTM_TOP_CASE_1)
+    .STIMULUS_ACCELERATOR_TOP_TEST  (STIMULUS_ACCELERATOR_TOP_TEST),
+    .STIMULUS_ACCELERATOR_TOP_CASE_0(STIMULUS_ACCELERATOR_TOP_CASE_0),
+    .STIMULUS_ACCELERATOR_TOP_CASE_1(STIMULUS_ACCELERATOR_TOP_CASE_1)
   ) top_stimulus (
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .NTM_TOP_START(start_top),
-    .NTM_TOP_READY(ready_top),
+    .ACCELERATOR_TOP_START(start_top),
+    .ACCELERATOR_TOP_READY(ready_top),
 
-    .NTM_TOP_W_IN_L_ENABLE(w_in_l_enable_top),
-    .NTM_TOP_W_IN_X_ENABLE(w_in_x_enable_top),
+    .ACCELERATOR_TOP_W_IN_L_ENABLE(w_in_l_enable_top),
+    .ACCELERATOR_TOP_W_IN_X_ENABLE(w_in_x_enable_top),
 
-    .NTM_TOP_W_OUT_L_ENABLE(w_out_l_enable_top),
-    .NTM_TOP_W_OUT_X_ENABLE(w_out_x_enable_top),
+    .ACCELERATOR_TOP_W_OUT_L_ENABLE(w_out_l_enable_top),
+    .ACCELERATOR_TOP_W_OUT_X_ENABLE(w_out_x_enable_top),
 
-    .NTM_TOP_K_IN_I_ENABLE(k_in_i_enable_top),
-    .NTM_TOP_K_IN_L_ENABLE(k_in_l_enable_top),
-    .NTM_TOP_K_IN_K_ENABLE(k_in_k_enable_top),
+    .ACCELERATOR_TOP_K_IN_I_ENABLE(k_in_i_enable_top),
+    .ACCELERATOR_TOP_K_IN_L_ENABLE(k_in_l_enable_top),
+    .ACCELERATOR_TOP_K_IN_K_ENABLE(k_in_k_enable_top),
 
-    .NTM_TOP_K_OUT_I_ENABLE(k_out_i_enable_top),
-    .NTM_TOP_K_OUT_L_ENABLE(k_out_l_enable_top),
-    .NTM_TOP_K_OUT_K_ENABLE(k_out_k_enable_top),
+    .ACCELERATOR_TOP_K_OUT_I_ENABLE(k_out_i_enable_top),
+    .ACCELERATOR_TOP_K_OUT_L_ENABLE(k_out_l_enable_top),
+    .ACCELERATOR_TOP_K_OUT_K_ENABLE(k_out_k_enable_top),
 
-    .NTM_TOP_U_IN_L_ENABLE(u_in_l_enable_top),
-    .NTM_TOP_U_IN_P_ENABLE(u_in_p_enable_top),
+    .ACCELERATOR_TOP_U_IN_L_ENABLE(u_in_l_enable_top),
+    .ACCELERATOR_TOP_U_IN_P_ENABLE(u_in_p_enable_top),
 
-    .NTM_TOP_U_OUT_L_ENABLE(u_out_l_enable_top),
-    .NTM_TOP_U_OUT_P_ENABLE(u_out_p_enable_top),
+    .ACCELERATOR_TOP_U_OUT_L_ENABLE(u_out_l_enable_top),
+    .ACCELERATOR_TOP_U_OUT_P_ENABLE(u_out_p_enable_top),
 
-    .NTM_TOP_B_IN_ENABLE(b_in_enable_top),
+    .ACCELERATOR_TOP_B_IN_ENABLE(b_in_enable_top),
 
-    .NTM_TOP_B_OUT_ENABLE(b_out_enable_top),
+    .ACCELERATOR_TOP_B_OUT_ENABLE(b_out_enable_top),
 
-    .NTM_TOP_X_IN_ENABLE(x_in_enable_top),
+    .ACCELERATOR_TOP_X_IN_ENABLE(x_in_enable_top),
 
-    .NTM_TOP_X_OUT_ENABLE(x_out_enable_top),
+    .ACCELERATOR_TOP_X_OUT_ENABLE(x_out_enable_top),
 
-    .NTM_TOP_Y_OUT_ENABLE(y_out_enable_top),
+    .ACCELERATOR_TOP_Y_OUT_ENABLE(y_out_enable_top),
 
     // DATA
-    .NTM_TOP_SIZE_X_IN(size_x_in_top),
-    .NTM_TOP_SIZE_Y_IN(size_y_in_top),
-    .NTM_TOP_SIZE_N_IN(size_n_in_top),
-    .NTM_TOP_SIZE_W_IN(size_w_in_top),
-    .NTM_TOP_SIZE_L_IN(size_l_in_top),
-    .NTM_TOP_SIZE_R_IN(size_r_in_top),
+    .ACCELERATOR_TOP_SIZE_X_IN(size_x_in_top),
+    .ACCELERATOR_TOP_SIZE_Y_IN(size_y_in_top),
+    .ACCELERATOR_TOP_SIZE_N_IN(size_n_in_top),
+    .ACCELERATOR_TOP_SIZE_W_IN(size_w_in_top),
+    .ACCELERATOR_TOP_SIZE_L_IN(size_l_in_top),
+    .ACCELERATOR_TOP_SIZE_R_IN(size_r_in_top),
 
-    .NTM_TOP_W_IN(w_in_top),
-    .NTM_TOP_K_IN(k_in_top),
-    .NTM_TOP_U_IN(u_in_top),
-    .NTM_TOP_B_IN(b_in_top),
+    .ACCELERATOR_TOP_W_IN(w_in_top),
+    .ACCELERATOR_TOP_K_IN(k_in_top),
+    .ACCELERATOR_TOP_U_IN(u_in_top),
+    .ACCELERATOR_TOP_B_IN(b_in_top),
 
-    .NTM_TOP_X_IN (x_in_top),
-    .NTM_TOP_Y_OUT(y_out_top)
+    .ACCELERATOR_TOP_X_IN (x_in_top),
+    .ACCELERATOR_TOP_Y_OUT(y_out_top)
   );
 
   // TOP

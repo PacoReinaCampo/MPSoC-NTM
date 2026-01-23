@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR COSH TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR COSH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_series_testbench/accelerator_scalar_cosh_function_test/scalar_cosh_function/CLK

@@ -46,38 +46,38 @@
 # Algebra-Matrix Sources
 #####################################################################
 
-SOURCES_ALGEBRA =	../../../library/algebra/ntm_algebra.hpp \
-			../../../library/algebra/matrix/ntm_matrix_convolution.cpp \
-			../../../library/algebra/matrix/ntm_matrix_inverse.cpp \
-			../../../library/algebra/matrix/ntm_matrix_multiplication.cpp \
-			../../../library/algebra/matrix/ntm_matrix_product.cpp \
-			../../../library/algebra/matrix/ntm_matrix_summation.cpp \
-			../../../library/algebra/matrix/ntm_matrix_transpose.cpp \
-			../../../library/algebra/matrix/ntm_matrix_vector_convolution.cpp \
-			../../../library/algebra/matrix/ntm_matrix_vector_product.cpp \
-			../../../library/algebra/matrix/ntm_transpose_vector_product.cpp \
-			../../../library/algebra/scalar/ntm_scalar_multiplication.cpp \
-			../../../library/algebra/scalar/ntm_scalar_summation.cpp \
-			../../../library/algebra/tensor/ntm_tensor_convolution.cpp \
-			../../../library/algebra/tensor/ntm_tensor_inverse.cpp \
-			../../../library/algebra/tensor/ntm_tensor_matrix_convolution.cpp \
-			../../../library/algebra/tensor/ntm_tensor_matrix_product.cpp \
-			../../../library/algebra/tensor/ntm_tensor_multiplication.cpp \
-			../../../library/algebra/tensor/ntm_tensor_product.cpp \
-			../../../library/algebra/tensor/ntm_tensor_summation.cpp \
-			../../../library/algebra/tensor/ntm_tensor_transpose.cpp \
-			../../../library/algebra/vector/ntm_dot_product.cpp \
-			../../../library/algebra/vector/ntm_vector_convolution.cpp \
-			../../../library/algebra/vector/ntm_vector_cosine_similarity.cpp \
-			../../../library/algebra/vector/ntm_vector_module.cpp \
-			../../../library/algebra/vector/ntm_vector_multiplication.cpp \
-			../../../library/algebra/vector/ntm_vector_summation.cpp \
-			../../../library/algebra/matrix/ntm_matrix_differentiation.cpp \
-			../../../library/algebra/matrix/ntm_matrix_integration.cpp \
-			../../../library/algebra/matrix/ntm_matrix_softmax.cpp \
-			../../../library/algebra/tensor/ntm_tensor_differentiation.cpp \
-			../../../library/algebra/tensor/ntm_tensor_integration.cpp \
-			../../../library/algebra/tensor/ntm_tensor_softmax.cpp \
-			../../../library/algebra/vector/ntm_vector_differentiation.cpp \
-			../../../library/algebra/vector/ntm_vector_integration.cpp \
-			../../../library/algebra/vector/ntm_vector_softmax.cpp
+SOURCES_ALGEBRA =	../../../library/algebra/accelerator_algebra.hpp \
+			../../../library/algebra/matrix/accelerator_matrix_convolution.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_inverse.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_multiplication.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_product.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_summation.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_transpose.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_vector_convolution.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_vector_product.cpp \
+			../../../library/algebra/matrix/accelerator_transpose_vector_product.cpp \
+			../../../library/algebra/scalar/accelerator_scalar_multiplication.cpp \
+			../../../library/algebra/scalar/accelerator_scalar_summation.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_convolution.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_inverse.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_matrix_convolution.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_matrix_product.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_multiplication.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_product.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_summation.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_transpose.cpp \
+			../../../library/algebra/vector/accelerator_dot_product.cpp \
+			../../../library/algebra/vector/accelerator_vector_convolution.cpp \
+			../../../library/algebra/vector/accelerator_vector_cosine_similarity.cpp \
+			../../../library/algebra/vector/accelerator_vector_module.cpp \
+			../../../library/algebra/vector/accelerator_vector_multiplication.cpp \
+			../../../library/algebra/vector/accelerator_vector_summation.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_differentiation.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_integration.cpp \
+			../../../library/algebra/matrix/accelerator_matrix_softmax.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_differentiation.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_integration.cpp \
+			../../../library/algebra/tensor/accelerator_tensor_softmax.cpp \
+			../../../library/algebra/vector/accelerator_vector_differentiation.cpp \
+			../../../library/algebra/vector/accelerator_vector_integration.cpp \
+			../../../library/algebra/vector/accelerator_vector_softmax.cpp

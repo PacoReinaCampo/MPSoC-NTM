@@ -46,9 +46,9 @@
 # NTM-Menory Sources
 #####################################################################
 
-SOURCES_MEMORY =	../../../../library/nn/ntm/memory/ntm_addressing.h \
-			../../../../library/nn/ntm/memory/ntm_addressing.c \
-			../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.h \
-			../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.c \
-			../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.h \
-			../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.c
+SOURCES_MEMORY =	../../../../library/nn/ntm/memory/accelerator_addressing.h \
+			../../../../library/nn/ntm/memory/accelerator_addressing.c \
+			../../../../library/nn/ntm/memory/accelerator_matrix_content_based_addressing.h \
+			../../../../library/nn/ntm/memory/accelerator_matrix_content_based_addressing.c \
+			../../../../library/nn/ntm/memory/accelerator_vector_content_based_addressing.h \
+			../../../../library/nn/ntm/memory/accelerator_vector_content_based_addressing.c

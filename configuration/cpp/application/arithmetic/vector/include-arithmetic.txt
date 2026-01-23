@@ -46,8 +46,8 @@
 # Arithmetic-Vector Sources
 #####################################################################
 
-SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_vector_arithmetic.cpp \
-			../../../library/arithmetic/vector/adder/ntm_vector_adder.cpp \
-			../../../library/arithmetic/vector/subtractor/ntm_vector_subtractor.cpp \
-			../../../library/arithmetic/vector/multiplier/ntm_vector_multiplier.cpp \
-			../../../library/arithmetic/vector/divider/ntm_vector_divider.cpp
+SOURCES_ARITHMETIC =	../../../library/arithmetic/accelerator_vector_arithmetic.cpp \
+			../../../library/arithmetic/vector/adder/accelerator_vector_adder.cpp \
+			../../../library/arithmetic/vector/subtractor/accelerator_vector_subtractor.cpp \
+			../../../library/arithmetic/vector/multiplier/accelerator_vector_multiplier.cpp \
+			../../../library/arithmetic/vector/divider/accelerator_vector_divider.cpp

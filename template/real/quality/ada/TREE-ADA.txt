@@ -1,11 +1,11 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.adb
+│   │   └── accelerator_philosophers.adb
 │   ├── soldiers
-│   │   └── ntm_soldiers.adb
+│   │   └── accelerator_soldiers.adb
 │   └── workers
-│       └── ntm_workers.adb
+│       └── accelerator_workers.adb
 └── computing
     ├── advanced_computer_architecture
     │   ├── multi_processor_system_on_chip

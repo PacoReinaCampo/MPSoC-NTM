@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR COSINE_SIMILARITY TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR COSINE_SIMILARITY TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_algebra_testbench/accelerator_vector_cosine_similarity_test/vector_cosine_similarity/CLK

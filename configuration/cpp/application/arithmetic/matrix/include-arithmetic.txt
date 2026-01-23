@@ -46,8 +46,8 @@
 # Arithmetic-Matrix Sources
 #####################################################################
 
-SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_matrix_arithmetic.cpp \
-			../../../library/arithmetic/matrix/adder/ntm_matrix_adder.cpp \
-			../../../library/arithmetic/matrix/subtractor/ntm_matrix_subtractor.cpp \
-			../../../library/arithmetic/matrix/multiplier/ntm_matrix_multiplier.cpp \
-			../../../library/arithmetic/matrix/divider/ntm_matrix_divider.cpp
+SOURCES_ARITHMETIC =	../../../library/arithmetic/accelerator_matrix_arithmetic.cpp \
+			../../../library/arithmetic/matrix/adder/accelerator_matrix_adder.cpp \
+			../../../library/arithmetic/matrix/subtractor/accelerator_matrix_subtractor.cpp \
+			../../../library/arithmetic/matrix/multiplier/accelerator_matrix_multiplier.cpp \
+			../../../library/arithmetic/matrix/divider/accelerator_matrix_divider.cpp

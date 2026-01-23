@@ -46,6 +46,6 @@
 call ../../../../../../../../settings64_vivado.bat
 
 xvlog -sv -prj system.prj -L uvm
-xelab ntm_uvm_testbench -relax -s top -timescale 1ns/1ps
-xsim top -testplusarg UVM_TESTNAME=ntm_uvm_test -testplusarg UVM_VERBOSITY=UVM_LOW -runall
+xelab accelerator_uvm_testbench -relax -s top -timescale 1ns/1ps
+xsim top -testplusarg UVM_TESTNAME=accelerator_uvm_test -testplusarg UVM_VERBOSITY=UVM_LOW -runall
 pause

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR SUMMATION TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR SUMMATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_vector_summation_test/vector_summation/CLK

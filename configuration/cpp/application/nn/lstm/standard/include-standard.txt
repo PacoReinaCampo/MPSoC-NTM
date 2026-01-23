@@ -46,11 +46,11 @@
 # LSTM-Standard Sources
 #####################################################################
 
-SOURCES_STANDARD =	../../../../library/nn/lstm/ntm_lstm_controller.hpp \
-			../../../../library/nn/lstm/standard/ntm_activation_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_forget_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_hidden_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_input_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_output_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_state_gate_vector.cpp \
-			../../../../library/nn/lstm/standard/ntm_controller.cpp
+SOURCES_STANDARD =	../../../../library/nn/lstm/accelerator_lstm_controller.hpp \
+			../../../../library/nn/lstm/standard/accelerator_activation_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_forget_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_hidden_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_input_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_output_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_state_gate_vector.cpp \
+			../../../../library/nn/lstm/standard/accelerator_controller.cpp

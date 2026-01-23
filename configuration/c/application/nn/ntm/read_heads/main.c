@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/ntm/read_heads/ntm_reading.h"
+#include "../../../../library/nn/ntm/read_heads/accelerator_reading.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_reading_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_reading_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_reading_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_reading_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_reading_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_reading_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_reading_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_reading_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

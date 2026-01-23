@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from vector import ntm_vector_algebra as vector_algebra
+from vector import accelerator_vector_algebra as vector_algebra
 
 def test_vector_algebra():
 
@@ -58,26 +58,26 @@ def test_vector_algebra():
   math_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
   test_algebra = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
 
-  np.testing.assert_array_equal(math_algebra.ntm_dot_product(), test_algebra.ntm_dot_product())
+  np.testing.assert_array_equal(math_algebra.accelerator_dot_product(), test_algebra.accelerator_dot_product())
 
-  np.testing.assert_array_equal(math_algebra.ntm_vector_convolution(), test_algebra.ntm_vector_convolution())
+  np.testing.assert_array_equal(math_algebra.accelerator_vector_convolution(), test_algebra.accelerator_vector_convolution())
 
-  np.testing.assert_array_equal(math_algebra.ntm_vector_cosine_similarity(), test_algebra.ntm_vector_cosine_similarity())
+  np.testing.assert_array_equal(math_algebra.accelerator_vector_cosine_similarity(), test_algebra.accelerator_vector_cosine_similarity())
 
-  np.testing.assert_array_equal(math_algebra.ntm_vector_module(), test_algebra.ntm_vector_module())
+  np.testing.assert_array_equal(math_algebra.accelerator_vector_module(), test_algebra.accelerator_vector_module())
 
-  np.testing.assert_array_equal(math_algebra.ntm_vector_multiplication(), test_algebra.ntm_vector_multiplication())
+  np.testing.assert_array_equal(math_algebra.accelerator_vector_multiplication(), test_algebra.accelerator_vector_multiplication())
 
-  np.testing.assert_array_equal(math_algebra.ntm_vector_summation(), test_algebra.ntm_vector_summation())
+  np.testing.assert_array_equal(math_algebra.accelerator_vector_summation(), test_algebra.accelerator_vector_summation())
 
   math_calculus = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
   test_calculus = vector_algebra.VectorAlgebra(data_a_in, data_b_in, data_in, length_in)
 
-  np.testing.assert_array_equal(math_calculus.ntm_vector_differentiation(), test_calculus.ntm_vector_differentiation())
+  np.testing.assert_array_equal(math_calculus.accelerator_vector_differentiation(), test_calculus.accelerator_vector_differentiation())
 
-  np.testing.assert_array_equal(math_calculus.ntm_vector_integration(), test_calculus.ntm_vector_integration())
+  np.testing.assert_array_equal(math_calculus.accelerator_vector_integration(), test_calculus.accelerator_vector_integration())
 
-  np.testing.assert_array_equal(math_calculus.ntm_vector_softmax(), test_calculus.ntm_vector_softmax())
+  np.testing.assert_array_equal(math_calculus.accelerator_vector_softmax(), test_calculus.accelerator_vector_softmax())
 
 
 test_vector_algebra()

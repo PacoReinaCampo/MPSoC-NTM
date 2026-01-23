@@ -46,17 +46,17 @@
 # LSTM-Output Sources
 #####################################################################
 
-SOURCES_OUTPUT =	../../../../library/trainer/lstm/output/ntm_lstm_output_b_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_b_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_d_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_d_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_k_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_k_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_u_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_u_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_v_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_v_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_w_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_w_trainer.c \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_trainer.h \
-			../../../../library/trainer/lstm/output/ntm_lstm_output_trainer.c
+SOURCES_OUTPUT =	../../../../library/trainer/lstm/output/accelerator_lstm_output_b_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_b_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_d_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_d_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_k_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_k_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_u_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_u_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_v_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_v_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_w_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_w_trainer.c \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_trainer.h \
+			../../../../library/trainer/lstm/output/accelerator_lstm_output_trainer.c

@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/computer_architecture/harvard_architecture/pu_or1k/library/accelerator_testbench.vhd

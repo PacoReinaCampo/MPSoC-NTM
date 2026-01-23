@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX TRANSPOSE TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX TRANSPOSE TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_algebra_testbench/accelerator_matrix_transpose_test/matrix_transpose/CLK

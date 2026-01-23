@@ -419,7 +419,7 @@ begin
     -- SCALAR-FLOAT
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FLOAT_ADDER_TEST                                ";
@@ -428,7 +428,7 @@ begin
       -- CONTROL
       SCALAR_FLOAT_ADDER_OPERATION <= '0';
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_ADDER_CASE 0                              ";
@@ -438,7 +438,7 @@ begin
         SCALAR_FLOAT_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_ADDER_CASE 1                              ";
@@ -452,13 +452,13 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FLOAT_MULTIPLIER_TEST                           ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_MULTIPLIER_CASE 0                         ";
@@ -468,7 +468,7 @@ begin
         SCALAR_FLOAT_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_MULTIPLIER_CASE 1                         ";
@@ -482,13 +482,13 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FLOAT_DIVIDER_TEST                              ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_DIVIDER_CASE 0                            ";
@@ -498,7 +498,7 @@ begin
         SCALAR_FLOAT_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FLOAT_DIVIDER_CASE 1                            ";
@@ -516,7 +516,7 @@ begin
     -- VECTOR-FLOAT
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_VECTOR_FLOAT_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FLOAT_ADDER_TEST                                ";
@@ -528,7 +528,7 @@ begin
       -- DATA
       VECTOR_FLOAT_ADDER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_ADDER_CASE 0                              ";
@@ -579,7 +579,7 @@ begin
         end loop VECTOR_FLOAT_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_ADDER_CASE 1                              ";
@@ -634,7 +634,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FLOAT_MULTIPLIER_TEST                           ";
@@ -643,7 +643,7 @@ begin
       -- DATA
       VECTOR_FLOAT_MULTIPLIER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_MULTIPLIER_CASE 0                         ";
@@ -694,7 +694,7 @@ begin
         end loop VECTOR_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_MULTIPLIER_CASE 1                         ";
@@ -749,7 +749,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FLOAT_DIVIDER_TEST                              ";
@@ -758,7 +758,7 @@ begin
       -- DATA
       VECTOR_FLOAT_DIVIDER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_DIVIDER_CASE 0                            ";
@@ -809,7 +809,7 @@ begin
         end loop VECTOR_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FLOAT_DIVIDER_CASE 1                            ";
@@ -868,7 +868,7 @@ begin
     -- MATRIX-FLOAT
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_MATRIX_FLOAT_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_FLOAT_ADDER_TEST                                ";
@@ -881,7 +881,7 @@ begin
       MATRIX_FLOAT_ADDER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FLOAT_ADDER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FLOAT_ADDER_CASE 0                              ";
@@ -952,7 +952,7 @@ begin
         end loop MATRIX_FLOAT_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FLOAT_ADDER_CASE 1                              ";
@@ -1027,20 +1027,20 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST                             ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST                             ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE 0                           ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE 0                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1108,10 +1108,10 @@ begin
         end loop MATRIX_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE 1                           ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE 1                           ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1183,20 +1183,20 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST                                ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST                                ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_FLOAT_DIVIDER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FLOAT_DIVIDER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE 0                              ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE 0                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1264,10 +1264,10 @@ begin
         end loop MATRIX_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE 1                              ";
+        MONITOR_CASE <= "STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE 1                              ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
@@ -1343,7 +1343,7 @@ begin
     -- TENSOR-FLOAT
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FLOAT_ADDER_TEST                                ";
@@ -1357,7 +1357,7 @@ begin
       TENSOR_FLOAT_ADDER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FLOAT_ADDER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_ADDER_CASE 0                              ";
@@ -1450,7 +1450,7 @@ begin
         end loop TENSOR_FLOAT_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_ADDER_CASE 1                              ";
@@ -1547,7 +1547,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FLOAT_MULTIPLIER_TEST                           ";
@@ -1558,7 +1558,7 @@ begin
       TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_MULTIPLIER_CASE 0                         ";
@@ -1651,7 +1651,7 @@ begin
         end loop TENSOR_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_MULTIPLIER_CASE 1                         ";
@@ -1748,7 +1748,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FLOAT_DIVIDER_TEST                              ";
@@ -1759,7 +1759,7 @@ begin
       TENSOR_FLOAT_DIVIDER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FLOAT_DIVIDER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_DIVIDER_CASE 0                            ";
@@ -1852,7 +1852,7 @@ begin
         end loop TENSOR_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FLOAT_DIVIDER_CASE 1                            ";

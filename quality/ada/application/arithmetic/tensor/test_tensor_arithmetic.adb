@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_tensor_arithmetic;
-use ntm_tensor_arithmetic;
+with accelerator_tensor_arithmetic;
+use accelerator_tensor_arithmetic;
 
 procedure test_tensor_arithmetic is
 
@@ -68,7 +68,7 @@ procedure test_tensor_arithmetic is
 
 begin
 
-  ntm_tensor_arithmetic.ntm_tensor_adder(
+  accelerator_tensor_arithmetic.accelerator_tensor_adder(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -88,7 +88,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_arithmetic.ntm_tensor_substractor(
+  accelerator_tensor_arithmetic.accelerator_tensor_substractor(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -108,7 +108,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_arithmetic.ntm_tensor_multiplier(
+  accelerator_tensor_arithmetic.accelerator_tensor_multiplier(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out
@@ -128,7 +128,7 @@ begin
     New_Line;
   end loop;
 
-  ntm_tensor_arithmetic.ntm_tensor_divider(
+  accelerator_tensor_arithmetic.accelerator_tensor_divider(
     data_a_in => data_a_in,
     data_b_in => data_b_in,
     data_out  => data_out

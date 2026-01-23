@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/arithmetic/matrix/divider/ntm_design.vhd
-../../../../../../../../verification/osvvm/application/arithmetic/matrix/divider/ntm_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/matrix/divider/accelerator_design.vhd
+../../../../../../../../verification/osvvm/application/arithmetic/matrix/divider/accelerator_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/ntm_model.vhd
-../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/ntm_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/accelerator_model.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/accelerator_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/ntm_testbench.vhd
+../../../../../../../../verification/osvvm/library/arithmetic/matrix/divider/accelerator_testbench.vhd

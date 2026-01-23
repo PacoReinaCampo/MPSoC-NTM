@@ -49,21 +49,21 @@ class MatrixArithmetic:
     self.data_a_in = data_a_in
     self.data_b_in = data_b_in
 
-  def ntm_matrix_adder(self):
+  def accelerator_matrix_adder(self):
     a_in = np.array(self.data_a_in)
     b_in = np.array(self.data_b_in)
 
     # calculating addition
     return (a_in + b_in)
 
-  def ntm_matrix_multiplier(self):
+  def accelerator_matrix_multiplier(self):
     a_in = np.array(self.data_a_in)
     b_in = np.array(self.data_b_in)
 
     # calculating multiplication
     return (a_in * b_in)
 
-  def ntm_matrix_divider(self):
+  def accelerator_matrix_divider(self):
     a_in = np.array(self.data_a_in)
     b_in = np.array(self.data_b_in)
 
@@ -85,8 +85,8 @@ multiplication_data_out = [[2.0, 0.0, 8.0], [2.0, 0.0, 8.0], [2.0, 0.0, 8.0]]
 division_data_out = [[2.0, 0.0, 2.0], [2.0, 0.0, 2.0], [2.0, 0.0, 2.0]]
 
 
-np.testing.assert_array_equal(arithmetic.ntm_matrix_adder(), addition_data_out)
+np.testing.assert_array_equal(arithmetic.accelerator_matrix_adder(), addition_data_out)
 
-np.testing.assert_array_equal(arithmetic.ntm_matrix_multiplier(), multiplication_data_out)
+np.testing.assert_array_equal(arithmetic.accelerator_matrix_multiplier(), multiplication_data_out)
 
-np.testing.assert_array_equal(arithmetic.ntm_matrix_divider(), division_data_out)
+np.testing.assert_array_equal(arithmetic.accelerator_matrix_divider(), division_data_out)

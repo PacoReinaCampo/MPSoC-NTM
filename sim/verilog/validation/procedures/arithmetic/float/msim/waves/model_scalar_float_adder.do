@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR FLOAT ADDER TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR FLOAT ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_float_testbench/model_scalar_float_adder_test/scalar_float_adder/CLK

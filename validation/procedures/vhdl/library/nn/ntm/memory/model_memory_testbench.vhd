@@ -58,9 +58,9 @@ entity model_memory_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_MEMORY_TEST   : boolean := false;
-    ENABLE_NTM_MEMORY_CASE_0 : boolean := false;
-    ENABLE_NTM_MEMORY_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_MEMORY_TEST   : boolean := false;
+    ENABLE_ACCELERATOR_MEMORY_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MEMORY_CASE_1 : boolean := false
     );
 end model_memory_testbench;
 
@@ -157,60 +157,60 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_MEMORY_START => start_addressing,
-      NTM_MEMORY_READY => ready_addressing,
+      ACCELERATOR_MEMORY_START => start_addressing,
+      ACCELERATOR_MEMORY_READY => ready_addressing,
 
-      NTM_MEMORY_K_IN_I_ENABLE => k_in_i_enable_addressing,
-      NTM_MEMORY_K_IN_K_ENABLE => k_in_k_enable_addressing,
+      ACCELERATOR_MEMORY_K_IN_I_ENABLE => k_in_i_enable_addressing,
+      ACCELERATOR_MEMORY_K_IN_K_ENABLE => k_in_k_enable_addressing,
 
-      NTM_MEMORY_BETA_IN_ENABLE => beta_in_enable_addressing,
+      ACCELERATOR_MEMORY_BETA_IN_ENABLE => beta_in_enable_addressing,
 
-      NTM_MEMORY_G_IN_ENABLE => g_in_enable_addressing,
+      ACCELERATOR_MEMORY_G_IN_ENABLE => g_in_enable_addressing,
 
-      NTM_MEMORY_S_IN_I_ENABLE => s_in_i_enable_addressing,
-      NTM_MEMORY_S_IN_J_ENABLE => s_in_j_enable_addressing,
+      ACCELERATOR_MEMORY_S_IN_I_ENABLE => s_in_i_enable_addressing,
+      ACCELERATOR_MEMORY_S_IN_J_ENABLE => s_in_j_enable_addressing,
 
-      NTM_MEMORY_GAMMA_IN_ENABLE => gamma_in_enable_addressing,
+      ACCELERATOR_MEMORY_GAMMA_IN_ENABLE => gamma_in_enable_addressing,
 
-      NTM_MEMORY_K_OUT_I_ENABLE => k_out_i_enable_addressing,
-      NTM_MEMORY_K_OUT_K_ENABLE => k_out_k_enable_addressing,
+      ACCELERATOR_MEMORY_K_OUT_I_ENABLE => k_out_i_enable_addressing,
+      ACCELERATOR_MEMORY_K_OUT_K_ENABLE => k_out_k_enable_addressing,
 
-      NTM_MEMORY_BETA_OUT_ENABLE => beta_out_enable_addressing,
+      ACCELERATOR_MEMORY_BETA_OUT_ENABLE => beta_out_enable_addressing,
 
-      NTM_MEMORY_G_OUT_ENABLE => g_out_enable_addressing,
+      ACCELERATOR_MEMORY_G_OUT_ENABLE => g_out_enable_addressing,
 
-      NTM_MEMORY_S_OUT_I_ENABLE => s_out_i_enable_addressing,
-      NTM_MEMORY_S_OUT_J_ENABLE => s_out_j_enable_addressing,
+      ACCELERATOR_MEMORY_S_OUT_I_ENABLE => s_out_i_enable_addressing,
+      ACCELERATOR_MEMORY_S_OUT_J_ENABLE => s_out_j_enable_addressing,
 
-      NTM_MEMORY_GAMMA_OUT_ENABLE => gamma_out_enable_addressing,
+      ACCELERATOR_MEMORY_GAMMA_OUT_ENABLE => gamma_out_enable_addressing,
 
-      NTM_MEMORY_M_IN_J_ENABLE => m_in_j_enable_addressing,
-      NTM_MEMORY_M_IN_K_ENABLE => m_in_k_enable_addressing,
+      ACCELERATOR_MEMORY_M_IN_J_ENABLE => m_in_j_enable_addressing,
+      ACCELERATOR_MEMORY_M_IN_K_ENABLE => m_in_k_enable_addressing,
 
-      NTM_MEMORY_M_OUT_J_ENABLE => m_out_j_enable_addressing,
-      NTM_MEMORY_M_OUT_K_ENABLE => m_out_k_enable_addressing,
+      ACCELERATOR_MEMORY_M_OUT_J_ENABLE => m_out_j_enable_addressing,
+      ACCELERATOR_MEMORY_M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
-      NTM_MEMORY_W_IN_I_ENABLE => w_in_i_enable_addressing,
-      NTM_MEMORY_W_IN_J_ENABLE => w_in_j_enable_addressing,
+      ACCELERATOR_MEMORY_W_IN_I_ENABLE => w_in_i_enable_addressing,
+      ACCELERATOR_MEMORY_W_IN_J_ENABLE => w_in_j_enable_addressing,
 
-      NTM_MEMORY_W_OUT_I_ENABLE => w_out_i_enable_addressing,
-      NTM_MEMORY_W_OUT_J_ENABLE => w_out_j_enable_addressing,
+      ACCELERATOR_MEMORY_W_OUT_I_ENABLE => w_out_i_enable_addressing,
+      ACCELERATOR_MEMORY_W_OUT_J_ENABLE => w_out_j_enable_addressing,
 
       -- DATA
-      NTM_MEMORY_SIZE_R_IN => size_r_in_addressing,
-      NTM_MEMORY_SIZE_N_IN => size_n_in_addressing,
-      NTM_MEMORY_SIZE_W_IN => size_w_in_addressing,
+      ACCELERATOR_MEMORY_SIZE_R_IN => size_r_in_addressing,
+      ACCELERATOR_MEMORY_SIZE_N_IN => size_n_in_addressing,
+      ACCELERATOR_MEMORY_SIZE_W_IN => size_w_in_addressing,
 
-      NTM_MEMORY_K_IN     => k_in_addressing,
-      NTM_MEMORY_BETA_IN  => beta_in_addressing,
-      NTM_MEMORY_G_IN     => g_in_addressing,
-      NTM_MEMORY_S_IN     => s_in_addressing,
-      NTM_MEMORY_GAMMA_IN => gamma_in_addressing,
+      ACCELERATOR_MEMORY_K_IN     => k_in_addressing,
+      ACCELERATOR_MEMORY_BETA_IN  => beta_in_addressing,
+      ACCELERATOR_MEMORY_G_IN     => g_in_addressing,
+      ACCELERATOR_MEMORY_S_IN     => s_in_addressing,
+      ACCELERATOR_MEMORY_GAMMA_IN => gamma_in_addressing,
 
-      NTM_MEMORY_M_IN => m_in_addressing,
+      ACCELERATOR_MEMORY_M_IN => m_in_addressing,
 
-      NTM_MEMORY_W_IN  => w_in_addressing,
-      NTM_MEMORY_W_OUT => w_out_addressing
+      ACCELERATOR_MEMORY_W_IN  => w_in_addressing,
+      ACCELERATOR_MEMORY_W_OUT => w_out_addressing
       );
 
   -- ADDRESSING

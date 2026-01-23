@@ -47,7 +47,7 @@
 #####################################################################
 
 SOURCES_INPUTS =	../../../../library/nn/ann/ann_controller.hpp \
-			../../../../library/nn/ann/inputs/ntm_keys_vector.cpp \
-			../../../../library/nn/ann/inputs/ntm_inputs_vector.cpp \
-			../../../../library/nn/ann/inputs/ntm_values_vector.cpp \
-			../../../../library/nn/ann/inputs/ntm_queries_vector.cpp
+			../../../../library/nn/ann/inputs/accelerator_keys_vector.cpp \
+			../../../../library/nn/ann/inputs/accelerator_inputs_vector.cpp \
+			../../../../library/nn/ann/inputs/accelerator_values_vector.cpp \
+			../../../../library/nn/ann/inputs/accelerator_queries_vector.cpp

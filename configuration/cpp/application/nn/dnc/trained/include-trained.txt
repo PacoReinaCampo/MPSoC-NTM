@@ -46,5 +46,5 @@
 # DNC-Trained Sources
 #####################################################################
 
-SOURCES_TRAINED =	../../../../library/nn/dnc/dnc_controller.hpp \
-			../../../../library/nn/dnc/trained/dnc_trained_top.cpp
+SOURCES_TRAINED =	../../../../library/nn/dnc/accelerator_controller.hpp \
+			../../../../library/nn/dnc/trained/accelerator_trained_top.cpp

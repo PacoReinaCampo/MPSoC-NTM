@@ -44,18 +44,18 @@
 
 extern crate algebra;
 
-use algebra::matrix::ntm_matrix_convolution::*;
-use algebra::matrix::ntm_matrix_inverse::*;
-use algebra::matrix::ntm_matrix_multiplication::*;
-use algebra::matrix::ntm_matrix_product::*;
-use algebra::matrix::ntm_matrix_summation::*;
-use algebra::matrix::ntm_matrix_transpose::*;
-use algebra::matrix::ntm_matrix_vector_convolution::*;
-use algebra::matrix::ntm_matrix_vector_product::*;
-use algebra::matrix::ntm_transpose_vector_product::*;
-use algebra::matrix::ntm_matrix_differentiation::*;
-use algebra::matrix::ntm_matrix_integration::*;
-use algebra::matrix::ntm_matrix_softmax::*;
+use algebra::matrix::accelerator_matrix_convolution::*;
+use algebra::matrix::accelerator_matrix_inverse::*;
+use algebra::matrix::accelerator_matrix_multiplication::*;
+use algebra::matrix::accelerator_matrix_product::*;
+use algebra::matrix::accelerator_matrix_summation::*;
+use algebra::matrix::accelerator_matrix_transpose::*;
+use algebra::matrix::accelerator_matrix_vector_convolution::*;
+use algebra::matrix::accelerator_matrix_vector_product::*;
+use algebra::matrix::accelerator_transpose_vector_product::*;
+use algebra::matrix::accelerator_matrix_differentiation::*;
+use algebra::matrix::accelerator_matrix_integration::*;
+use algebra::matrix::accelerator_matrix_softmax::*;
 
 fn main() {
     let mut data_a_in: Vec<Vec<f64>>;
@@ -82,7 +82,7 @@ fn main() {
         vec![54.0]
     ];
 
-    assert_eq!(ntm_matrix_vector_product(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_matrix_vector_product(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![1.0, 2.0, 3.0],
@@ -101,7 +101,7 @@ fn main() {
         vec![34.0]
     ];
 
-    assert_eq!(ntm_matrix_vector_convolution(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_matrix_vector_convolution(data_a_in, data_b_in), data_out);
 
     let mut data_b_in: Vec<Vec<f64>>;
 
@@ -126,7 +126,7 @@ fn main() {
         vec![54.0, 62.0, 30.0, 16.0]
     ];
 
-    assert_eq!(ntm_matrix_product(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_matrix_product(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![1.0, 2.0, 3.0],
@@ -145,7 +145,7 @@ fn main() {
         vec![34.0, 61.0, 103.0]
     ];
 
-    assert_eq!(ntm_matrix_convolution(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_matrix_convolution(data_a_in, data_b_in), data_out);
 
     let mut data_in: Vec<Vec<f64>>;
 
@@ -162,7 +162,7 @@ fn main() {
         vec![2.0, 3.0, 1.0]
     ];
 
-    assert_eq!(ntm_matrix_transpose(data_in), data_out);
+    assert_eq!(accelerator_matrix_transpose(data_in), data_out);
 
     data_in = vec![
         vec![ 0.0, -1.0,  0.0],
@@ -180,7 +180,7 @@ fn main() {
         vec![-0.5,  0.0,  0.5]
     ];
 
-    assert_eq!(ntm_matrix_inverse(double_reference), data_out);
+    assert_eq!(accelerator_matrix_inverse(double_reference), data_out);
 
     let mut data_in: Vec<Vec<Vec<f64>>>;
 
@@ -210,7 +210,7 @@ fn main() {
         vec![12.0, 0.0, 20.0]
     ];
 
-    assert_eq!(ntm_matrix_multiplication(data_in), data_out);
+    assert_eq!(accelerator_matrix_multiplication(data_in), data_out);
 
     data_in = vec![
         vec![
@@ -236,7 +236,7 @@ fn main() {
         vec![7.0, 2.0, 10.0]
     ];
 
-    assert_eq!(ntm_matrix_summation(data_in), data_out);
+    assert_eq!(accelerator_matrix_summation(data_in), data_out);
 
     let data_a_in: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
     let data_b_in: Vec<f64> = vec![1.0, 3.0, 2.0];
@@ -248,7 +248,7 @@ fn main() {
         vec![4.0, 12.0, 8.0]
     ];
 
-    assert_eq!(ntm_transpose_vector_product(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_transpose_vector_product(data_a_in, data_b_in), data_out);
 
     let mut data_in: Vec<Vec<f64>>;
 
@@ -266,7 +266,7 @@ fn main() {
         vec![0.0, -2.0400391227689383, -4.9584048861339040]
     ];
 
-    assert_eq!(ntm_matrix_differentiation(data_in, 1.0, 1.0, 1), data_out);
+    assert_eq!(accelerator_matrix_differentiation(data_in, 1.0, 1.0, 1), data_out);
 
     data_in = vec![
         vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
@@ -280,7 +280,7 @@ fn main() {
         vec![9.998207967858303, 17.956376812947667, 20.956140771903126]
     ];
 
-    assert_eq!(ntm_matrix_integration(data_in, 1.0), data_out);
+    assert_eq!(accelerator_matrix_integration(data_in, 1.0), data_out);
 
     data_in = vec![
         vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
@@ -294,5 +294,5 @@ fn main() {
         vec![0.714653980863293200, 0.092921900422636110, 0.0006526948744619639]
     ];
 
-    assert_eq!(ntm_matrix_softmax(data_in), data_out);
+    assert_eq!(accelerator_matrix_softmax(data_in), data_out);
 }

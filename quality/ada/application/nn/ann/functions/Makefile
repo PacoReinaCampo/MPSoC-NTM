@@ -48,7 +48,7 @@
 
 -include include-functions.txt
 
-TARGET=ntm_functions
+TARGET=accelerator_functions
 
 #########################################################################
 # Targets

@@ -49,7 +49,7 @@ build:
 	vlog -sv -stats=none -f system.f
 
 simulate:
-	vsim -c -do run.do work.ntm_uvm_testbench
+	vsim -c -do run.do work.accelerator_uvm_testbench
 
 clean:
 	rm -rf work transcript

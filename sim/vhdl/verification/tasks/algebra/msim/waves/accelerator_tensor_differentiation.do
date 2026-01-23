@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR DIFFERENTIATION TEST}
+add wave -noupdate -divider {ACCELERATOR TENSOR DIFFERENTIATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_calculus_testbench/accelerator_tensor_differentiation_test/tensor_differentiation/CLK

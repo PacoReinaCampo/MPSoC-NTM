@@ -45,28 +45,28 @@
 package pkg;
 
 class peripheral_design {
-  def ntm_scalar_adder(data_a_in: Double, data_b_in: Double) {
+  def accelerator_scalar_adder(data_a_in: Double, data_b_in: Double) {
  
     val data_out = data_a_in + data_b_in
  
     data_out
   }
 
-  def ntm_scalar_subtractor(data_a_in: Double, data_b_in: Double) {
+  def accelerator_scalar_subtractor(data_a_in: Double, data_b_in: Double) {
  
     val data_out = data_a_in - data_b_in;
  
     data_out
   }
 
-  def ntm_scalar_multiplier(data_a_in: Double, data_b_in: Double) {
+  def accelerator_scalar_multiplier(data_a_in: Double, data_b_in: Double) {
  
     val data_out = data_a_in * data_b_in;
  
     data_out
   }
 
-  def ntm_scalar_divider(data_a_in: Double, data_b_in: Double) {
+  def accelerator_scalar_divider(data_a_in: Double, data_b_in: Double) {
  
     val data_out = data_a_in / data_b_in;
  

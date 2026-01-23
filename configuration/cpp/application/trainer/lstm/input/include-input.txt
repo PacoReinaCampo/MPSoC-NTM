@@ -46,11 +46,11 @@
 # Trainer-Input Sources
 #####################################################################
 
-SOURCES_INPUT =	../../../../library/trainer/ntm_lstm.hpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_b_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_d_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_k_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_u_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_v_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_w_trainer.cpp \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_trainer.cpp
+SOURCES_INPUT =	../../../../library/trainer/accelerator_lstm.hpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_b_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_d_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_k_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_u_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_v_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_w_trainer.cpp \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_trainer.cpp

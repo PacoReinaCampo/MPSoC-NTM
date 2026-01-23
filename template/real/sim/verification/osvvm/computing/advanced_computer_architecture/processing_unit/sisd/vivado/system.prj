@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/application/ntm_design.vhd
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/application/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/application/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/application/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/ntm_model.vhd
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/sisd/library/accelerator_testbench.vhd

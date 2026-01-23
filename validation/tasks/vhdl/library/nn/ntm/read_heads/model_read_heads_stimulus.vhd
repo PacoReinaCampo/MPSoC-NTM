@@ -64,33 +64,33 @@ entity model_read_heads_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    NTM_READ_HEADS_START : out std_logic;
-    NTM_READ_HEADS_READY : in  std_logic;
+    ACCELERATOR_READ_HEADS_START : out std_logic;
+    ACCELERATOR_READ_HEADS_READY : in  std_logic;
 
-    NTM_READ_HEADS_M_IN_J_ENABLE : out std_logic;
-    NTM_READ_HEADS_M_IN_K_ENABLE : out std_logic;
+    ACCELERATOR_READ_HEADS_M_IN_J_ENABLE : out std_logic;
+    ACCELERATOR_READ_HEADS_M_IN_K_ENABLE : out std_logic;
 
-    NTM_READ_HEADS_W_IN_I_ENABLE : out std_logic;
-    NTM_READ_HEADS_W_IN_J_ENABLE : out std_logic;
+    ACCELERATOR_READ_HEADS_W_IN_I_ENABLE : out std_logic;
+    ACCELERATOR_READ_HEADS_W_IN_J_ENABLE : out std_logic;
 
-    NTM_READ_HEADS_M_OUT_J_ENABLE : in std_logic;
-    NTM_READ_HEADS_M_OUT_K_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_M_OUT_J_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_M_OUT_K_ENABLE : in std_logic;
 
-    NTM_READ_HEADS_W_OUT_I_ENABLE : in std_logic;
-    NTM_READ_HEADS_W_OUT_J_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_W_OUT_I_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_W_OUT_J_ENABLE : in std_logic;
 
-    NTM_READ_HEADS_R_OUT_I_ENABLE : in std_logic;
-    NTM_READ_HEADS_R_OUT_K_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_R_OUT_I_ENABLE : in std_logic;
+    ACCELERATOR_READ_HEADS_R_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    NTM_READ_HEADS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_READ_HEADS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_READ_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_READ_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_READ_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_READ_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_READ_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_READ_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_READ_HEADS_R_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    ACCELERATOR_READ_HEADS_R_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -166,18 +166,18 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_NTM_READ_HEADS_TEST) then
+    if (STIMULUS_ACCELERATOR_READ_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_READ_HEADS_TEST                     ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_READ_HEADS_CASE_0                   ";
+      MONITOR_TEST <= "ACCELERATOR_READ_HEADS_TEST                     ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_READ_HEADS_CASE_1                   ";
+      MONITOR_CASE <= "ACCELERATOR_READ_HEADS_CASE_0                   ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "ACCELERATOR_READ_HEADS_CASE_1                   ";
       -------------------------------------------------------------------
 
     end if;

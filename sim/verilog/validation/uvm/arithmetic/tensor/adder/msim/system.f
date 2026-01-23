@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../validation/uvm/src
 
-../../../../../../../../validation/uvm/application/arithmetic/tensor/adder/ntm_design.sv
+../../../../../../../../validation/uvm/application/arithmetic/tensor/adder/accelerator_design.sv
 
-../../../../../../../../validation/uvm/library/arithmetic/tensor/adder/ntm_uvm_testbench.sv
+../../../../../../../../validation/uvm/library/arithmetic/tensor/adder/accelerator_uvm_testbench.sv

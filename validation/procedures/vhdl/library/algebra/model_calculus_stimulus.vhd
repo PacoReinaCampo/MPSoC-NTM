@@ -355,7 +355,7 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_TEST                            ";
@@ -365,7 +365,7 @@ begin
       VECTOR_DIFFERENTIATION_SIZE_IN   <= THREE_CONTROL;
       VECTOR_DIFFERENTIATION_LENGTH_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_CASE 0                          ";
@@ -410,7 +410,7 @@ begin
         end loop VECTOR_DIFFERENTIATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_DIFFERENTIATION_CASE 1                          ";
@@ -459,7 +459,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_INTEGRATION_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_INTEGRATION_TEST                                ";
@@ -469,7 +469,7 @@ begin
       VECTOR_INTEGRATION_SIZE_IN   <= THREE_CONTROL;
       VECTOR_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_INTEGRATION_CASE 0                              ";
@@ -514,7 +514,7 @@ begin
         end loop VECTOR_INTEGRATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_INTEGRATION_CASE 1                              ";
@@ -563,7 +563,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_SOFTMAX_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_SOFTMAX_TEST                                    ";
@@ -572,7 +572,7 @@ begin
       -- DATA
       VECTOR_SOFTMAX_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SOFTMAX_CASE 0                                  ";
@@ -617,7 +617,7 @@ begin
         end loop VECTOR_SOFTMAX_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SOFTMAX_CASE 1                                  ";
@@ -666,7 +666,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_TEST                            ";
@@ -679,7 +679,7 @@ begin
       MATRIX_DIFFERENTIATION_LENGTH_I_IN <= TWO_DATA;
       MATRIX_DIFFERENTIATION_LENGTH_J_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_CASE 0                          ";
@@ -742,7 +742,7 @@ begin
         end loop MATRIX_DIFFERENTIATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_DIFFERENTIATION_CASE 1                          ";
@@ -806,7 +806,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_INTEGRATION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_INTEGRATION_TEST                                ";
@@ -818,7 +818,7 @@ begin
 
       MATRIX_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INTEGRATION_CASE 0                              ";
@@ -878,7 +878,7 @@ begin
         end loop MATRIX_INTEGRATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INTEGRATION_CASE 1                              ";
@@ -942,7 +942,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_SOFTMAX_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_SOFTMAX_TEST                                    ";
@@ -952,7 +952,7 @@ begin
       MATRIX_SOFTMAX_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_SOFTMAX_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SOFTMAX_CASE 0                                  ";
@@ -1012,7 +1012,7 @@ begin
         end loop MATRIX_SOFTMAX_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SOFTMAX_CASE 1                                  ";
@@ -1076,7 +1076,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_TEST                            ";
@@ -1091,7 +1091,7 @@ begin
       TENSOR_DIFFERENTIATION_LENGTH_J_IN <= TWO_DATA;
       TENSOR_DIFFERENTIATION_LENGTH_K_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_CASE 0                          ";
@@ -1170,7 +1170,7 @@ begin
         end loop TENSOR_DIFFERENTIATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_DIFFERENTIATION_CASE 1                          ";
@@ -1250,7 +1250,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_INTEGRATION_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_INTEGRATION_TEST                                ";
@@ -1263,7 +1263,7 @@ begin
 
       TENSOR_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
-      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INTEGRATION_CASE 0                              ";
@@ -1339,7 +1339,7 @@ begin
         end loop TENSOR_INTEGRATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INTEGRATION_CASE 1                              ";
@@ -1419,7 +1419,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_SOFTMAX_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_SOFTMAX_TEST                                    ";
@@ -1430,7 +1430,7 @@ begin
       TENSOR_SOFTMAX_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_SOFTMAX_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_SOFTMAX_CASE 0                                  ";
@@ -1506,7 +1506,7 @@ begin
         end loop TENSOR_SOFTMAX_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_SOFTMAX_CASE 1                                  ";

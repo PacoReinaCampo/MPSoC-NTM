@@ -44,19 +44,19 @@
 
 import scala.util.Random
 
-import scalar.ntm_scalar_math
+import scalar.accelerator_scalar_math
 
 object test_scalar_math {
   def main(args: Array[String]): Unit = {
     val data_a_in: Double = Random.nextDouble()
     val data_b_in: Double = Random.nextDouble()
 
-    assert(ntm_scalar_math.ntm_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
+    assert(accelerator_scalar_math.accelerator_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
 
-    assert(ntm_scalar_math.ntm_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
+    assert(accelerator_scalar_math.accelerator_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
 
-    assert(ntm_scalar_math.ntm_scalar_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
+    assert(accelerator_scalar_math.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
 
-    assert(ntm_scalar_math.ntm_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
+    assert(accelerator_scalar_math.accelerator_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
   }
 }

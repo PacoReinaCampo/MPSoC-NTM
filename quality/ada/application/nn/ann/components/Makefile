@@ -48,7 +48,7 @@
 
 -include include-components.txt
 
-TARGET=ntm_components
+TARGET=accelerator_components
 
 #########################################################################
 # Targets

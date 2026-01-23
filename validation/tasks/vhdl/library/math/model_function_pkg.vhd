@@ -109,34 +109,34 @@ package model_function_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_LOGISTIC_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_ONEPLUS_TEST  : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_TEST  : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0  : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_0  : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1  : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_1  : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_LOGISTIC_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_ONEPLUS_TEST  : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_TEST  : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0  : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_0  : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1  : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_1  : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_LOGISTIC_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_ONEPLUS_TEST  : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_TEST  : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0  : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_0  : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1  : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_1  : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

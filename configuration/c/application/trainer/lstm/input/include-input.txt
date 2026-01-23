@@ -46,17 +46,17 @@
 # LSTM-Input Sources
 #####################################################################
 
-SOURCES_INPUT =	../../../../library/trainer/lstm/input/ntm_lstm_input_b_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_b_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_d_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_d_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_k_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_k_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_u_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_u_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_v_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_v_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_w_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_w_trainer.c \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_trainer.h \
-		../../../../library/trainer/lstm/input/ntm_lstm_input_trainer.c
+SOURCES_INPUT =	../../../../library/trainer/lstm/input/accelerator_lstm_input_b_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_b_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_d_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_d_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_k_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_k_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_u_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_u_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_v_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_v_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_w_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_w_trainer.c \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_trainer.h \
+		../../../../library/trainer/lstm/input/accelerator_lstm_input_trainer.c

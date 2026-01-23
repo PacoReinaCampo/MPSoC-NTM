@@ -46,7 +46,7 @@
 #include <iostream>
 #include <random>
 
-#include "../../../../library/trainer/ntm_lstm.hpp"
+#include "../../../../library/trainer/accelerator_lstm.hpp"
 
 using namespace std;
 
@@ -61,23 +61,23 @@ int main() {
 
   double data_out;
 
-  ntm_lstm_output_trainer lstm_output_trainer;
+  accelerator_lstm_output_trainer lstm_output_trainer;
 
   data_out = data_a_in + data_b_in;
 
-  assert(lstm_output_trainer.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(lstm_output_trainer.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(lstm_output_trainer.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(lstm_output_trainer.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(lstm_output_trainer.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(lstm_output_trainer.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(lstm_output_trainer.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(lstm_output_trainer.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

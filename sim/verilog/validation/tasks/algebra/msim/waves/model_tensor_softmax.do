@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR SOFTMAX TEST}
+add wave -noupdate -divider {ACCELERATOR TENSOR SOFTMAX TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_calculus_testbench/model_tensor_softmax_test/tensor_softmax/CLK

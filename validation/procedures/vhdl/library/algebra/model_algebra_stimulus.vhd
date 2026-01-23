@@ -625,7 +625,7 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_NTM_DOT_PRODUCT_TEST) then
+    if (STIMULUS_ACCELERATOR_DOT_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_DOT_PRODUCT_TEST                                       ";
@@ -634,7 +634,7 @@ begin
       -- DATA
       DOT_PRODUCT_LENGTH_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_DOT_PRODUCT_CASE_0) then
+      if (STIMULUS_ACCELERATOR_DOT_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_DOT_PRODUCT_CASE 0                                     ";
@@ -685,7 +685,7 @@ begin
         end loop DOT_PRODUCT_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_DOT_PRODUCT_CASE_1) then
+      if (STIMULUS_ACCELERATOR_DOT_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_DOT_PRODUCT_CASE 1                                     ";
@@ -740,7 +740,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_CONVOLUTION_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_CONVOLUTION_TEST                                ";
@@ -749,7 +749,7 @@ begin
       -- DATA
       VECTOR_CONVOLUTION_LENGTH_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_CONVOLUTION_CASE 0                              ";
@@ -800,7 +800,7 @@ begin
         end loop VECTOR_CONVOLUTION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_CONVOLUTION_CASE 1                              ";
@@ -855,7 +855,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_COSINE_TEST                                     ";
@@ -864,7 +864,7 @@ begin
       -- DATA
       VECTOR_COSINE_SIMILARITY_LENGTH_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_COSINE_CASE 0                                   ";
@@ -915,7 +915,7 @@ begin
         end loop VECTOR_COSINE_SIMILARITY_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_COSINE_CASE 1                                   ";
@@ -970,7 +970,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_MULTIPLICATION_TEST                             ";
@@ -981,7 +981,7 @@ begin
 
       VECTOR_MULTIPLICATION_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATION_CASE 0                           ";
@@ -1041,7 +1041,7 @@ begin
         end loop VECTOR_MULTIPLICATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MULTIPLICATION_CASE 1                           ";
@@ -1105,7 +1105,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_SUMMATION_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_SUMMATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_SUMMATION_TEST                                  ";
@@ -1116,7 +1116,7 @@ begin
 
       VECTOR_SUMMATION_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_SUMMATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SUMMATION_CASE 0                                ";
@@ -1176,7 +1176,7 @@ begin
         end loop VECTOR_SUMMATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_SUMMATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_SUMMATION_CASE 1                                ";
@@ -1240,7 +1240,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_MODULE_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_MODULE_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_MODULE_TEST                                     ";
@@ -1249,7 +1249,7 @@ begin
       -- DATA
       VECTOR_MODULE_LENGTH_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_MODULE_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_MODULE_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MODULE_CASE 0                                   ";
@@ -1294,7 +1294,7 @@ begin
         end loop VECTOR_MODULE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_MODULE_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_MODULE_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_MODULE_CASE 1                                   ";
@@ -1343,7 +1343,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_CONVOLUTION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_CONVOLUTION_TEST                                ";
@@ -1355,7 +1355,7 @@ begin
       MATRIX_CONVOLUTION_SIZE_B_I_IN <= FOUR_CONTROL;
       MATRIX_CONVOLUTION_SIZE_B_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_CONVOLUTION_CASE 0                              ";
@@ -1426,7 +1426,7 @@ begin
         end loop MATRIX_CONVOLUTION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_CONVOLUTION_CASE 1                              ";
@@ -1501,7 +1501,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOLUT_TEST                            ";
@@ -1512,7 +1512,7 @@ begin
       MATRIX_VECTOR_CONVOLUTION_SIZE_A_J_IN <= FOUR_CONTROL;
       MATRIX_VECTOR_CONVOLUTION_SIZE_B_IN   <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOLUTION_CASE 0                       ";
@@ -1579,7 +1579,7 @@ begin
         end loop MATRIX_VECTOR_CONVOLUTION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_CONVOL_CASE 1                            ";
@@ -1650,7 +1650,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_INVERSE_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_INVERSE_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_INVERSE_TEST                                    ";
@@ -1660,7 +1660,7 @@ begin
       MATRIX_INVERSE_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_INVERSE_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_INVERSE_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INVERSE_CASE 0                                  ";
@@ -1720,7 +1720,7 @@ begin
         end loop MATRIX_INVERSE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_INVERSE_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_INVERSE_CASE 1                                  ";
@@ -1784,7 +1784,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_MULTIPLICATION_TEST                             ";
@@ -1796,7 +1796,7 @@ begin
       MATRIX_MULTIPLICATION_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_MULTIPLICATION_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATION_CASE 0                           ";
@@ -1872,7 +1872,7 @@ begin
         end loop MATRIX_MULTIPLICATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_MULTIPLICATION_CASE 1                           ";
@@ -1952,7 +1952,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_PRODUCT_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_PRODUCT_TEST                                    ";
@@ -1964,7 +1964,7 @@ begin
       MATRIX_PRODUCT_SIZE_B_I_IN <= FOUR_CONTROL;
       MATRIX_PRODUCT_SIZE_B_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_PRODUCT_CASE 0                                  ";
@@ -2035,7 +2035,7 @@ begin
         end loop MATRIX_PRODUCT_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_PRODUCT_CASE 1                                  ";
@@ -2110,7 +2110,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUCT_TEST                             ";
@@ -2121,7 +2121,7 @@ begin
       MATRIX_VECTOR_PRODUCT_SIZE_A_J_IN <= FOUR_CONTROL;
       MATRIX_VECTOR_PRODUCT_SIZE_B_IN   <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUCT_CASE 0                           ";
@@ -2188,7 +2188,7 @@ begin
         end loop MATRIX_VECTOR_PRODUCT_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_VECTOR_PRODUCT_CASE 1                           ";
@@ -2259,7 +2259,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_SUMMATION_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_SUMMATION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_SUMMATION_TEST                                  ";
@@ -2271,7 +2271,7 @@ begin
       MATRIX_SUMMATION_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_SUMMATION_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_SUMMATION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SUMMATION_CASE 0                                ";
@@ -2347,7 +2347,7 @@ begin
         end loop MATRIX_SUMMATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_SUMMATION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_SUMMATION_CASE 1                                ";
@@ -2427,7 +2427,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_TRANSPOSE_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_TRANSPOSE_TEST                                  ";
@@ -2437,7 +2437,7 @@ begin
       MATRIX_TRANSPOSE_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_TRANSPOSE_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_TRANSPOSE_CASE 0                                ";
@@ -2497,7 +2497,7 @@ begin
         end loop MATRIX_TRANSPOSE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_TRANSPOSE_CASE 1                                ";
@@ -2561,7 +2561,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_CONVOLUTION_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_CONVOLUTION_TEST                                ";
@@ -2575,7 +2575,7 @@ begin
       TENSOR_CONVOLUTION_SIZE_B_J_IN <= FOUR_CONTROL;
       TENSOR_CONVOLUTION_SIZE_B_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_CONVOLUTION_CASE 0                              ";
@@ -2668,7 +2668,7 @@ begin
         end loop TENSOR_CONVOLUTION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_CONVOLUTION_CASE 1                              ";
@@ -2765,7 +2765,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOLUT_TEST                            ";
@@ -2778,7 +2778,7 @@ begin
       TENSOR_MATRIX_CONVOLUTION_SIZE_B_I_IN <= FOUR_CONTROL;
       TENSOR_MATRIX_CONVOLUTION_SIZE_B_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOLUTION_CASE 0                       ";
@@ -2866,7 +2866,7 @@ begin
         end loop TENSOR_MATRIX_CONVOLUTION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_CONVOL_CASE 1                            ";
@@ -2958,7 +2958,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_INVERSE_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_INVERSE_TEST                                    ";
@@ -2969,7 +2969,7 @@ begin
       TENSOR_INVERSE_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_INVERSE_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_INVERSE_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INVERSE_CASE 0                                  ";
@@ -3045,7 +3045,7 @@ begin
         end loop TENSOR_INVERSE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_INVERSE_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_INVERSE_CASE 1                                  ";
@@ -3125,7 +3125,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_PRODUCT_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_PRODUCT_TEST                                    ";
@@ -3139,7 +3139,7 @@ begin
       TENSOR_PRODUCT_SIZE_B_J_IN <= FOUR_CONTROL;
       TENSOR_PRODUCT_SIZE_B_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_PRODUCT_CASE 0                                  ";
@@ -3232,7 +3232,7 @@ begin
         end loop TENSOR_PRODUCT_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_PRODUCT_CASE 1                                  ";
@@ -3329,7 +3329,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUCT_TEST                             ";
@@ -3342,7 +3342,7 @@ begin
       TENSOR_MATRIX_PRODUCT_SIZE_B_I_IN <= FOUR_CONTROL;
       TENSOR_MATRIX_PRODUCT_SIZE_B_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUCT_CASE 0                           ";
@@ -3430,7 +3430,7 @@ begin
         end loop TENSOR_MATRIX_PRODUCT_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_MATRIX_PRODUCT_CASE 1                           ";
@@ -3522,7 +3522,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_TRANSPOSE_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_TRANSPOSE_TEST                                  ";
@@ -3533,7 +3533,7 @@ begin
       TENSOR_TRANSPOSE_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_TRANSPOSE_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_TRANSPOSE_CASE 0                                ";
@@ -3609,7 +3609,7 @@ begin
         end loop TENSOR_TRANSPOSE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_TRANSPOSE_CASE 1                                ";

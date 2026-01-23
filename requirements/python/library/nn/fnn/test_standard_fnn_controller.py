@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-from standard import ntm_controller as controller
+from standard import accelerator_controller as controller
 
 print('Hello, world!')

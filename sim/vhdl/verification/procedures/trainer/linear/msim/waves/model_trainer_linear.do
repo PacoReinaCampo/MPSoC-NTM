@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TRAINER LINEAR TEST}
+add wave -noupdate -divider {ACCELERATOR TRAINER LINEAR TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_trainer_linear_testbench/accelerator_trainer_linear_test/trainer/CLK

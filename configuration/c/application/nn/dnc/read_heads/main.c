@@ -47,9 +47,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/dnc/read_heads/dnc_read_content_weighting.h"
-#include "../../../../library/nn/dnc/read_heads/dnc_read_vectors.h"
-#include "../../../../library/nn/dnc/read_heads/dnc_read_weighting.h"
+#include "../../../../library/nn/dnc/read_heads/accelerator_read_content_weighting.h"
+#include "../../../../library/nn/dnc/read_heads/accelerator_read_vectors.h"
+#include "../../../../library/nn/dnc/read_heads/accelerator_read_weighting.h"
 
 int main() {
   srand(time(NULL));
@@ -63,19 +63,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(dnc_read_content_weighting_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_read_content_weighting_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(dnc_read_content_weighting_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_read_content_weighting_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(dnc_read_content_weighting_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_read_content_weighting_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(dnc_read_content_weighting_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_read_content_weighting_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

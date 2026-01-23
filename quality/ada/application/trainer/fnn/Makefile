@@ -48,7 +48,7 @@
 
 -include include-fnn_trainer.txt
 
-TARGET=ntm_fnn_trainer
+TARGET=accelerator_fnn_trainer
 
 #########################################################################
 # Targets

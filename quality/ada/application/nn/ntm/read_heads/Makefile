@@ -48,7 +48,7 @@
 
 -include include-reading.txt
 
-TARGET=ntm_reading
+TARGET=accelerator_reading
 
 #########################################################################
 # Targets

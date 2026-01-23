@@ -42,7 +42,7 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_matrix_logistic_function;
-pub mod ntm_matrix_oneplus_function;
-pub mod ntm_matrix_mean_function;
-pub mod ntm_matrix_deviation_function;
+pub mod accelerator_matrix_logistic_function;
+pub mod accelerator_matrix_oneplus_function;
+pub mod accelerator_matrix_mean_function;
+pub mod accelerator_matrix_deviation_function;

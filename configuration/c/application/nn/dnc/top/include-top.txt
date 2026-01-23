@@ -46,13 +46,13 @@
 # DNC-Top Sources
 #####################################################################
 
-SOURCES_TOP =	../../../../library/nn/dnc/top/dnc_interface_matrix.h \
-		../../../../library/nn/dnc/top/dnc_interface_matrix.c \
-		../../../../library/nn/dnc/top/dnc_interface_top.h \
-		../../../../library/nn/dnc/top/dnc_interface_top.c \
-		../../../../library/nn/dnc/top/dnc_interface_vector.h \
-		../../../../library/nn/dnc/top/dnc_interface_vector.c \
-		../../../../library/nn/dnc/top/dnc_output_vector.h \
-		../../../../library/nn/dnc/top/dnc_output_vector.c \
-		../../../../library/nn/dnc/top/dnc_top.h \
-		../../../../library/nn/dnc/top/dnc_top.c
+SOURCES_TOP =	../../../../library/nn/dnc/top/accelerator_interface_matrix.h \
+		../../../../library/nn/dnc/top/accelerator_interface_matrix.c \
+		../../../../library/nn/dnc/top/accelerator_interface_top.h \
+		../../../../library/nn/dnc/top/accelerator_interface_top.c \
+		../../../../library/nn/dnc/top/accelerator_interface_vector.h \
+		../../../../library/nn/dnc/top/accelerator_interface_vector.c \
+		../../../../library/nn/dnc/top/accelerator_output_vector.h \
+		../../../../library/nn/dnc/top/accelerator_output_vector.c \
+		../../../../library/nn/dnc/top/accelerator_top.h \
+		../../../../library/nn/dnc/top/accelerator_top.c

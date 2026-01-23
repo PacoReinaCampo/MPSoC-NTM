@@ -61,41 +61,41 @@ int main() {
 
   double data_out;
 
-  ntm_layer_norm layer_norm;
+  accelerator_layer_norm layer_norm;
 
   data_out = data_a_in + data_b_in;
 
-  assert(layer_norm.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(layer_norm.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(layer_norm.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(layer_norm.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(layer_norm.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(layer_norm.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(layer_norm.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(layer_norm.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
-  ntm_positional_encoding positional_encoding;
+  accelerator_positional_encoding positional_encoding;
 
   data_out = data_a_in + data_b_in;
 
-  assert(positional_encoding.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(positional_encoding.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(positional_encoding.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(positional_encoding.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(positional_encoding.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(positional_encoding.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(positional_encoding.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(positional_encoding.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

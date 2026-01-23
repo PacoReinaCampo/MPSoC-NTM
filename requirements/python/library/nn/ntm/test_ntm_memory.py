@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-from memory import ntm_addressing as addressing
-from memory import ntm_matrix_content_based_addressing as matrix_content_based_addressing
-from memory import ntm_vector_content_based_addressing as vector_content_based_addressing
+from memory import accelerator_addressing as addressing
+from memory import accelerator_matrix_content_based_addressing as matrix_content_based_addressing
+from memory import accelerator_vector_content_based_addressing as vector_content_based_addressing
 
 print('Hello, world!')

@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/ntm_design.vhd
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/application/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/ntm_model.vhd
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/neural_turing_machine_neural_network/neural_turing_machine_neural_network/library/accelerator_testbench.vhd

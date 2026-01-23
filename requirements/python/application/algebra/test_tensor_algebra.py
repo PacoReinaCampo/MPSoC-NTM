@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from tensor import ntm_tensor_algebra as tensor_algebra
+from tensor import accelerator_tensor_algebra as tensor_algebra
 
 def test_tensor_algebra():
 
@@ -70,30 +70,30 @@ def test_tensor_algebra():
   math_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
   test_algebra = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_convolution(), test_algebra.ntm_tensor_convolution())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_convolution(), test_algebra.accelerator_tensor_convolution())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_inverse(), test_algebra.ntm_tensor_inverse())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_inverse(), test_algebra.accelerator_tensor_inverse())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_matrix_convolution(), test_algebra.ntm_tensor_matrix_convolution())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_matrix_convolution(), test_algebra.accelerator_tensor_matrix_convolution())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_matrix_product(), test_algebra.ntm_tensor_matrix_product())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_matrix_product(), test_algebra.accelerator_tensor_matrix_product())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_multiplication(), test_algebra.ntm_tensor_multiplication())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_multiplication(), test_algebra.accelerator_tensor_multiplication())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_product(), test_algebra.ntm_tensor_product())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_product(), test_algebra.accelerator_tensor_product())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_summation(), test_algebra.ntm_tensor_summation())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_summation(), test_algebra.accelerator_tensor_summation())
 
-  np.testing.assert_array_equal(math_algebra.ntm_tensor_transpose(), test_algebra.ntm_tensor_transpose())
+  np.testing.assert_array_equal(math_algebra.accelerator_tensor_transpose(), test_algebra.accelerator_tensor_transpose())
 
   math_calculus = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
   test_calculus = tensor_algebra.TensorAlgebra(tensor_data_a_in, tensor_data_b_in, matrix_data_a_in, matrix_data_b_in, tensor_data_in, array4_data_in, data_in, length_in, length_i_in, length_j_in, length_k_in, control)
 
-  np.testing.assert_array_equal(math_calculus.ntm_tensor_differentiation(), test_calculus.ntm_tensor_differentiation())
+  np.testing.assert_array_equal(math_calculus.accelerator_tensor_differentiation(), test_calculus.accelerator_tensor_differentiation())
 
-  np.testing.assert_array_equal(math_calculus.ntm_tensor_integration(), test_calculus.ntm_tensor_integration())
+  np.testing.assert_array_equal(math_calculus.accelerator_tensor_integration(), test_calculus.accelerator_tensor_integration())
 
-  np.testing.assert_array_equal(math_calculus.ntm_tensor_softmax(), test_calculus.ntm_tensor_softmax())
+  np.testing.assert_array_equal(math_calculus.accelerator_tensor_softmax(), test_calculus.accelerator_tensor_softmax())
 
 
 test_tensor_algebra()

@@ -1,6 +1,6 @@
-touch code/classes/philosophers/ntm_philosophers.m
-touch code/classes/soldiers/ntm_soldiers.m
-touch code/classes/workers/ntm_workers.m
+touch code/classes/philosophers/accelerator_philosophers.m
+touch code/classes/soldiers/accelerator_soldiers.m
+touch code/classes/workers/accelerator_workers.m
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.m
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.m
 touch code/computing/advanced_computer_architecture/processing_unit/misd.m

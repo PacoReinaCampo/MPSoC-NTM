@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM DOT PRODUCT TEST}
+add wave -noupdate -divider {ACCELERATOR DOT PRODUCT TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_algebra_testbench/model_dot_product_test/dot_product/CLK

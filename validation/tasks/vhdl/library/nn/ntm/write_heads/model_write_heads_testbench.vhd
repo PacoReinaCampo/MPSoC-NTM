@@ -58,9 +58,9 @@ entity model_write_heads_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_WRITE_HEADS_TEST   : boolean := false;
-    ENABLE_NTM_WRITE_HEADS_CASE_0 : boolean := false;
-    ENABLE_NTM_WRITE_HEADS_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_WRITE_HEADS_TEST   : boolean := false;
+    ENABLE_ACCELERATOR_WRITE_HEADS_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_WRITE_HEADS_CASE_1 : boolean := false
     );
 end model_write_heads_testbench;
 
@@ -164,35 +164,35 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_WRITE_HEADS_START => start_writing,
-      NTM_WRITE_HEADS_READY => ready_writing,
+      ACCELERATOR_WRITE_HEADS_START => start_writing,
+      ACCELERATOR_WRITE_HEADS_READY => ready_writing,
 
-      NTM_WRITE_HEADS_M_IN_J_ENABLE => m_in_j_enable_writing,
-      NTM_WRITE_HEADS_M_IN_K_ENABLE => m_in_k_enable_writing,
+      ACCELERATOR_WRITE_HEADS_M_IN_J_ENABLE => m_in_j_enable_writing,
+      ACCELERATOR_WRITE_HEADS_M_IN_K_ENABLE => m_in_k_enable_writing,
 
-      NTM_WRITE_HEADS_W_IN_I_ENABLE => w_in_i_enable_writing,
-      NTM_WRITE_HEADS_W_IN_J_ENABLE => w_in_j_enable_writing,
+      ACCELERATOR_WRITE_HEADS_W_IN_I_ENABLE => w_in_i_enable_writing,
+      ACCELERATOR_WRITE_HEADS_W_IN_J_ENABLE => w_in_j_enable_writing,
 
-      NTM_WRITE_HEADS_A_IN_ENABLE => a_in_enable_writing,
+      ACCELERATOR_WRITE_HEADS_A_IN_ENABLE => a_in_enable_writing,
 
-      NTM_WRITE_HEADS_W_OUT_I_ENABLE => w_out_i_enable_writing,
-      NTM_WRITE_HEADS_W_OUT_J_ENABLE => w_out_j_enable_writing,
+      ACCELERATOR_WRITE_HEADS_W_OUT_I_ENABLE => w_out_i_enable_writing,
+      ACCELERATOR_WRITE_HEADS_W_OUT_J_ENABLE => w_out_j_enable_writing,
 
-      NTM_WRITE_HEADS_A_OUT_ENABLE => a_out_enable_writing,
+      ACCELERATOR_WRITE_HEADS_A_OUT_ENABLE => a_out_enable_writing,
 
-      NTM_WRITE_HEADS_M_OUT_J_ENABLE => m_out_j_enable_writing,
-      NTM_WRITE_HEADS_M_OUT_K_ENABLE => m_out_k_enable_writing,
+      ACCELERATOR_WRITE_HEADS_M_OUT_J_ENABLE => m_out_j_enable_writing,
+      ACCELERATOR_WRITE_HEADS_M_OUT_K_ENABLE => m_out_k_enable_writing,
 
       -- DATA
-      NTM_WRITE_HEADS_SIZE_R_IN => size_r_in_writing,
-      NTM_WRITE_HEADS_SIZE_N_IN => size_n_in_writing,
-      NTM_WRITE_HEADS_SIZE_W_IN => size_w_in_writing,
+      ACCELERATOR_WRITE_HEADS_SIZE_R_IN => size_r_in_writing,
+      ACCELERATOR_WRITE_HEADS_SIZE_N_IN => size_n_in_writing,
+      ACCELERATOR_WRITE_HEADS_SIZE_W_IN => size_w_in_writing,
 
-      NTM_WRITE_HEADS_W_IN => w_in_writing,
-      NTM_WRITE_HEADS_M_IN => m_in_writing,
-      NTM_WRITE_HEADS_A_IN => a_in_writing,
+      ACCELERATOR_WRITE_HEADS_W_IN => w_in_writing,
+      ACCELERATOR_WRITE_HEADS_M_IN => m_in_writing,
+      ACCELERATOR_WRITE_HEADS_A_IN => a_in_writing,
 
-      NTM_WRITE_HEADS_M_OUT => m_out_writing
+      ACCELERATOR_WRITE_HEADS_M_OUT => m_out_writing
       );
 
   -- WRITING

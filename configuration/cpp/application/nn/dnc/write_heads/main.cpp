@@ -46,7 +46,7 @@
 #include <iostream>
 #include <random>
 
-#include "../../../../library/nn/dnc/dnc_controller.hpp"
+#include "../../../../library/nn/dnc/accelerator_controller.hpp"
 
 using namespace std;
 
@@ -61,41 +61,41 @@ int main() {
 
   double data_out;
 
-  dnc_write_content_weighting write_content_weighting;
+  accelerator_write_content_weighting write_content_weighting;
 
   data_out = data_a_in + data_b_in;
 
-  assert(write_content_weighting.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(write_content_weighting.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(write_content_weighting.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(write_content_weighting.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(write_content_weighting.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(write_content_weighting.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(write_content_weighting.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(write_content_weighting.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
-  dnc_write_weighting dnc_write_weighting;
+  accelerator_write_weighting accelerator_write_weighting;
 
   data_out = data_a_in + data_b_in;
 
-  assert(dnc_write_weighting.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_weighting.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(dnc_write_weighting.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_weighting.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(dnc_write_weighting.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_weighting.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(dnc_write_weighting.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_weighting.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

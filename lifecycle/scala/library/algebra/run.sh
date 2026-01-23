@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-scalac scalar/ntm_scalar_algebra.scala; scalac test_scalar_algebra.scala; scala test_scalar_algebra
-scalac vector/ntm_vector_algebra.scala; scalac test_vector_algebra.scala; scala test_vector_algebra
-scalac matrix/ntm_matrix_algebra.scala; scalac test_matrix_algebra.scala; scala test_matrix_algebra
-scalac tensor/ntm_tensor_algebra.scala; scalac test_tensor_algebra.scala; scala test_tensor_algebra
+scalac scalar/accelerator_scalar_algebra.scala; scalac test_scalar_algebra.scala; scala test_scalar_algebra
+scalac vector/accelerator_vector_algebra.scala; scalac test_vector_algebra.scala; scala test_vector_algebra
+scalac matrix/accelerator_matrix_algebra.scala; scalac test_matrix_algebra.scala; scala test_matrix_algebra
+scalac tensor/accelerator_tensor_algebra.scala; scalac test_tensor_algebra.scala; scala test_tensor_algebra

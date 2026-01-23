@@ -47,122 +47,122 @@
 
 using namespace std;
 
-class ntm_masked_multi_head_attention {
+class accelerator_masked_multi_head_attention {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_masked_scaled_dot_product_attention {
+class accelerator_masked_scaled_dot_product_attention {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_multi_head_attention {
+class accelerator_multi_head_attention {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_scaled_dot_product_attention {
+class accelerator_scaled_dot_product_attention {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_fnn {
+class accelerator_fnn {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_lstm {
+class accelerator_lstm {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_layer_norm {
+class accelerator_layer_norm {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_positional_encoding {
+class accelerator_positional_encoding {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_inputs_vector {
+class accelerator_inputs_vector {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_keys_vector {
+class accelerator_keys_vector {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_queries_vector {
+class accelerator_queries_vector {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_values_vector {
+class accelerator_values_vector {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_controller {
+class accelerator_controller {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_decoder {
+class accelerator_decoder {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };
 
-class ntm_encoder {
+class accelerator_encoder {
  public:
-  double ntm_scalar_adder(double data_a_in, double data_b_in);
-  double ntm_scalar_subtract(double data_a_in, double data_b_in);
-  double ntm_scalar_multiplier(double data_a_in, double data_b_in);
-  double ntm_scalar_divider(double data_a_in, double data_b_in);
+  double accelerator_scalar_adder(double data_a_in, double data_b_in);
+  double accelerator_scalar_subtract(double data_a_in, double data_b_in);
+  double accelerator_scalar_multiplier(double data_a_in, double data_b_in);
+  double accelerator_scalar_divider(double data_a_in, double data_b_in);
 };

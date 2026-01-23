@@ -42,12 +42,12 @@
 ##                                                                               ##
 ###################################################################################
 
-from fnn import ntm_fnn_b_trainer as fnn_b_trainer
-from fnn import ntm_fnn_d_trainer as fnn_d_trainer
-from fnn import ntm_fnn_k_trainer as fnn_k_trainer
-from fnn import ntm_fnn_u_trainer as fnn_u_trainer
-from fnn import ntm_fnn_v_trainer as fnn_v_trainer
-from fnn import ntm_fnn_w_trainer as fnn_w_trainer
-from fnn import ntm_fnn_trainer as fnn_trainer
+from fnn import accelerator_fnn_b_trainer as fnn_b_trainer
+from fnn import accelerator_fnn_d_trainer as fnn_d_trainer
+from fnn import accelerator_fnn_k_trainer as fnn_k_trainer
+from fnn import accelerator_fnn_u_trainer as fnn_u_trainer
+from fnn import accelerator_fnn_v_trainer as fnn_v_trainer
+from fnn import accelerator_fnn_w_trainer as fnn_w_trainer
+from fnn import accelerator_fnn_trainer as fnn_trainer
 
 print('Hello, world!')

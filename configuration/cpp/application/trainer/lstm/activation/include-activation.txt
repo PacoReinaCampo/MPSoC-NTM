@@ -46,11 +46,11 @@
 # Trainer-Activation Sources
 #####################################################################
 
-SOURCES_ACTIVATION =	../../../../library/trainer/ntm_lstm.hpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_b_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_d_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_k_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_u_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_v_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_w_trainer.cpp \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_trainer.cpp
+SOURCES_ACTIVATION =	../../../../library/trainer/accelerator_lstm.hpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_d_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_k_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_u_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_v_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_w_trainer.cpp \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_trainer.cpp

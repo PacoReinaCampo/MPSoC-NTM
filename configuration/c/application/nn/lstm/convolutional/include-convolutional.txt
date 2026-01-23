@@ -46,17 +46,17 @@
 # LSTM-Convolutional Sources
 #####################################################################
 
-SOURCES_CONVOLUTIONAL =	../../../../library/nn/lstm/convolutional/ntm_activation_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_activation_gate_vector.c \
-			../../../../library/nn/lstm/convolutional/ntm_controller.h \
-			../../../../library/nn/lstm/convolutional/ntm_controller.c \
-			../../../../library/nn/lstm/convolutional/ntm_forget_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_forget_gate_vector.c \
-			../../../../library/nn/lstm/convolutional/ntm_hidden_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_hidden_gate_vector.c \
-			../../../../library/nn/lstm/convolutional/ntm_input_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_input_gate_vector.c \
-			../../../../library/nn/lstm/convolutional/ntm_output_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_output_gate_vector.c \
-			../../../../library/nn/lstm/convolutional/ntm_state_gate_vector.h \
-			../../../../library/nn/lstm/convolutional/ntm_state_gate_vector.c
+SOURCES_CONVOLUTIONAL =	../../../../library/nn/lstm/convolutional/accelerator_activation_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_activation_gate_vector.c \
+			../../../../library/nn/lstm/convolutional/accelerator_controller.h \
+			../../../../library/nn/lstm/convolutional/accelerator_controller.c \
+			../../../../library/nn/lstm/convolutional/accelerator_forget_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_forget_gate_vector.c \
+			../../../../library/nn/lstm/convolutional/accelerator_hidden_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_hidden_gate_vector.c \
+			../../../../library/nn/lstm/convolutional/accelerator_input_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_input_gate_vector.c \
+			../../../../library/nn/lstm/convolutional/accelerator_output_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_output_gate_vector.c \
+			../../../../library/nn/lstm/convolutional/accelerator_state_gate_vector.h \
+			../../../../library/nn/lstm/convolutional/accelerator_state_gate_vector.c

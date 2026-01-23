@@ -142,30 +142,30 @@ module model_write_heads_testbench;
     .RST(RST),
 
     // CONTROL
-    .NTM_WRITE_HEADS_START(start_writing),
-    .NTM_WRITE_HEADS_READY(ready_writing),
+    .ACCELERATOR_WRITE_HEADS_START(start_writing),
+    .ACCELERATOR_WRITE_HEADS_READY(ready_writing),
 
-    .NTM_WRITE_HEADS_M_IN_J_ENABLE(m_in_j_enable_writing),
-    .NTM_WRITE_HEADS_M_IN_K_ENABLE(m_in_k_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_M_IN_J_ENABLE(m_in_j_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_M_IN_K_ENABLE(m_in_k_enable_writing),
 
-    .NTM_WRITE_HEADS_W_IN_ENABLE(w_in_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_W_IN_ENABLE(w_in_enable_writing),
 
-    .NTM_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
 
-    .NTM_WRITE_HEADS_W_OUT_ENABLE(w_out_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_W_OUT_ENABLE(w_out_enable_writing),
 
-    .NTM_WRITE_HEADS_A_OUT_ENABLE(a_out_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_A_OUT_ENABLE(a_out_enable_writing),
 
-    .NTM_WRITE_HEADS_M_OUT_J_ENABLE(m_out_j_enable_writing),
-    .NTM_WRITE_HEADS_M_OUT_K_ENABLE(m_out_k_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_M_OUT_J_ENABLE(m_out_j_enable_writing),
+    .ACCELERATOR_WRITE_HEADS_M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
-    .NTM_WRITE_HEADS_SIZE_N_IN(size_n_in_writing),
-    .NTM_WRITE_HEADS_SIZE_W_IN(size_w_in_writing),
-    .NTM_WRITE_HEADS_M_IN     (m_in_writing),
-    .NTM_WRITE_HEADS_A_IN     (a_in_writing),
-    .NTM_WRITE_HEADS_W_IN     (w_in_writing),
-    .NTM_WRITE_HEADS_M_OUT    (m_out_writing)
+    .ACCELERATOR_WRITE_HEADS_SIZE_N_IN(size_n_in_writing),
+    .ACCELERATOR_WRITE_HEADS_SIZE_W_IN(size_w_in_writing),
+    .ACCELERATOR_WRITE_HEADS_M_IN     (m_in_writing),
+    .ACCELERATOR_WRITE_HEADS_A_IN     (a_in_writing),
+    .ACCELERATOR_WRITE_HEADS_W_IN     (w_in_writing),
+    .ACCELERATOR_WRITE_HEADS_M_OUT    (m_out_writing)
   );
 
   // WRITING

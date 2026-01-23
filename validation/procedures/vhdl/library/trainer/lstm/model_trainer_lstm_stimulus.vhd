@@ -63,93 +63,93 @@ entity model_trainer_lstm_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    NTM_TRAINER_LSTM_START : out std_logic;
-    NTM_TRAINER_LSTM_READY : in  std_logic;
+    ACCELERATOR_TRAINER_LSTM_START : out std_logic;
+    ACCELERATOR_TRAINER_LSTM_READY : in  std_logic;
 
-    NTM_TRAINER_LSTM_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
+    ACCELERATOR_TRAINER_LSTM_W_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_W_IN_X_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-    NTM_TRAINER_LSTM_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
+    ACCELERATOR_TRAINER_LSTM_W_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_W_OUT_X_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-    NTM_TRAINER_LSTM_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    ACCELERATOR_TRAINER_LSTM_K_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_K_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_K_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-    NTM_TRAINER_LSTM_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+    ACCELERATOR_TRAINER_LSTM_K_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_K_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_K_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-    NTM_TRAINER_LSTM_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+    ACCELERATOR_TRAINER_LSTM_D_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_D_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_D_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-    NTM_TRAINER_LSTM_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+    ACCELERATOR_TRAINER_LSTM_D_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_D_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_D_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-    NTM_TRAINER_LSTM_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_U_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_U_IN_P_ENABLE : out std_logic;  -- for p out 0 to L-1
 
-    NTM_TRAINER_LSTM_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_U_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_U_OUT_P_ENABLE : in std_logic;  -- for p out 0 to L-1
 
-    NTM_TRAINER_LSTM_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
+    ACCELERATOR_TRAINER_LSTM_V_IN_L_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_V_IN_S_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-    NTM_TRAINER_LSTM_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
-    NTM_TRAINER_LSTM_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
+    ACCELERATOR_TRAINER_LSTM_V_OUT_L_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_V_OUT_S_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-    NTM_TRAINER_LSTM_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_B_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-    NTM_TRAINER_LSTM_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_B_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
-    NTM_TRAINER_LSTM_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
+    ACCELERATOR_TRAINER_LSTM_X_IN_ENABLE : out std_logic;  -- for x out 0 to X-1
 
-    NTM_TRAINER_LSTM_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
+    ACCELERATOR_TRAINER_LSTM_X_OUT_ENABLE : in std_logic;  -- for x out 0 to X-1
 
-    NTM_TRAINER_LSTM_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    ACCELERATOR_TRAINER_LSTM_R_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_R_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
 
-    NTM_TRAINER_LSTM_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
+    ACCELERATOR_TRAINER_LSTM_R_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
-    NTM_TRAINER_LSTM_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
+    ACCELERATOR_TRAINER_LSTM_RHO_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_RHO_IN_M_ENABLE : out std_logic;  -- for m out 0 to M-1
 
-    NTM_TRAINER_LSTM_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
-    NTM_TRAINER_LSTM_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
+    ACCELERATOR_TRAINER_LSTM_RHO_OUT_I_ENABLE : in std_logic;  -- for i out 0 to R-1 (read heads flow)
+    ACCELERATOR_TRAINER_LSTM_RHO_OUT_M_ENABLE : in std_logic;  -- for m out 0 to M-1
 
-    NTM_TRAINER_LSTM_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
+    ACCELERATOR_TRAINER_LSTM_XI_IN_ENABLE : out std_logic;  -- for s out 0 to S-1
 
-    NTM_TRAINER_LSTM_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
+    ACCELERATOR_TRAINER_LSTM_XI_OUT_ENABLE : in std_logic;  -- for s out 0 to S-1
 
-    NTM_TRAINER_LSTM_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_H_IN_ENABLE : out std_logic;  -- for l out 0 to L-1
 
-    NTM_TRAINER_LSTM_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
+    ACCELERATOR_TRAINER_LSTM_H_OUT_ENABLE : in std_logic;  -- for l out 0 to L-1
 
     -- DATA
-    NTM_TRAINER_LSTM_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_S_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_SIZE_M_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_TRAINER_LSTM_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_TRAINER_LSTM_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TRAINER_LSTM_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_RHO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_XI_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_TRAINER_LSTM_H_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_TRAINER_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    ACCELERATOR_TRAINER_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

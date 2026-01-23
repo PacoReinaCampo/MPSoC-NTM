@@ -110,25 +110,25 @@ module model_read_heads_testbench;
     .RST(RST),
 
     // CONTROL
-    .NTM_READ_HEADS_START(start_reading),
-    .NTM_READ_HEADS_READY(ready_reading),
+    .ACCELERATOR_READ_HEADS_START(start_reading),
+    .ACCELERATOR_READ_HEADS_READY(ready_reading),
 
-    .NTM_READ_HEADS_M_IN_J_ENABLE(m_in_j_enable_reading),
-    .NTM_READ_HEADS_M_IN_K_ENABLE(m_in_k_enable_reading),
+    .ACCELERATOR_READ_HEADS_M_IN_J_ENABLE(m_in_j_enable_reading),
+    .ACCELERATOR_READ_HEADS_M_IN_K_ENABLE(m_in_k_enable_reading),
 
-    .NTM_READ_HEADS_M_OUT_J_ENABLE(m_out_j_enable_reading),
-    .NTM_READ_HEADS_M_OUT_K_ENABLE(m_out_k_enable_reading),
+    .ACCELERATOR_READ_HEADS_M_OUT_J_ENABLE(m_out_j_enable_reading),
+    .ACCELERATOR_READ_HEADS_M_OUT_K_ENABLE(m_out_k_enable_reading),
 
-    .NTM_READ_HEADS_R_OUT_ENABLE(r_out_enable_reading),
+    .ACCELERATOR_READ_HEADS_R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
-    .NTM_READ_HEADS_SIZE_N_IN(size_n_in_reading),
-    .NTM_READ_HEADS_SIZE_W_IN(size_w_in_reading),
+    .ACCELERATOR_READ_HEADS_SIZE_N_IN(size_n_in_reading),
+    .ACCELERATOR_READ_HEADS_SIZE_W_IN(size_w_in_reading),
 
-    .NTM_READ_HEADS_W_IN(w_in_reading),
-    .NTM_READ_HEADS_M_IN(m_in_reading),
+    .ACCELERATOR_READ_HEADS_W_IN(w_in_reading),
+    .ACCELERATOR_READ_HEADS_M_IN(m_in_reading),
 
-    .NTM_READ_HEADS_R_OUT(r_out_reading)
+    .ACCELERATOR_READ_HEADS_R_OUT(r_out_reading)
   );
 
   // READING

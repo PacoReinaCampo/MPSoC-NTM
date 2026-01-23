@@ -46,7 +46,7 @@
 #include <iostream>
 #include <random>
 
-#include "../../../library/trainer/ntm_fnn.hpp"
+#include "../../../library/trainer/accelerator_fnn.hpp"
 
 using namespace std;
 
@@ -61,23 +61,23 @@ int main() {
 
   double data_out;
 
-  ntm_fnn_trainer fnn_trainer;
+  accelerator_fnn_trainer fnn_trainer;
 
   data_out = data_a_in + data_b_in;
 
-  assert(fnn_trainer.ntm_scalar_adder(data_a_in, data_b_in) == data_out);
+  assert(fnn_trainer.accelerator_scalar_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(fnn_trainer.ntm_scalar_subtract(data_a_in, data_b_in) == data_out);
+  assert(fnn_trainer.accelerator_scalar_subtract(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(fnn_trainer.ntm_scalar_multiplier(data_a_in, data_b_in) == data_out);
+  assert(fnn_trainer.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(fnn_trainer.ntm_scalar_divider(data_a_in, data_b_in) == data_out);
+  assert(fnn_trainer.accelerator_scalar_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

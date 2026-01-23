@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from scalar import ntm_scalar_arithmetic as scalar_arithmetic
+from scalar import accelerator_scalar_arithmetic as scalar_arithmetic
 
 def test_scalar_arithmetic():
 
@@ -53,13 +53,13 @@ def test_scalar_arithmetic():
 
   arithmetic = scalar_arithmetic.ScalarArithmetic(data_a_in, data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_scalar_adder(), data_a_in + data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_scalar_adder(), data_a_in + data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_scalar_subtractor(), data_a_in - data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_scalar_subtractor(), data_a_in - data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_scalar_multiplier(), data_a_in * data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_scalar_multiplier(), data_a_in * data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_scalar_divider(), data_a_in / data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_scalar_divider(), data_a_in / data_b_in)
 
 
 test_scalar_arithmetic()

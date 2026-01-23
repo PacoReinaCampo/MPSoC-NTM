@@ -74,55 +74,55 @@
 ./application/state/feedback/state_feedback-x86.run
 
 
-./application/nn/dnc/top/dnc_top-x86.run
+./application/nn/dnc/top/accelerator_top-x86.run
 
-./application/nn/ntm/top/ntm_top-x86.run
+./application/nn/ntm/top/accelerator_top-x86.run
 
-./application/nn/ann/inputs/ntm_inputs-x86.run
+./application/nn/ann/inputs/accelerator_inputs-x86.run
 
-./application/nn/dnc/memory/dnc_memory-x86.run
+./application/nn/dnc/memory/accelerator_memory-x86.run
 
-./application/nn/ntm/read_heads/ntm_reading-x86.run
+./application/nn/ntm/read_heads/accelerator_reading-x86.run
 
-./application/nn/ann/functions/ntm_functions-x86.run
+./application/nn/ann/functions/accelerator_functions-x86.run
 
-./application/nn/ann/components/ntm_components-x86.run
+./application/nn/ann/components/accelerator_components-x86.run
 
-./application/nn/ann/top/ntm_controller-x86.run
+./application/nn/ann/top/accelerator_controller-x86.run
 
-./application/nn/dnc/read_heads/dnc_read_heads-x86.run
+./application/nn/dnc/read_heads/accelerator_read_heads-x86.run
 
-./application/nn/fnn/convolutional/ntm_controller-x86.run
+./application/nn/fnn/convolutional/accelerator_controller-x86.run
 
-./application/nn/fnn/standard/ntm_controller-x86.run
+./application/nn/fnn/standard/accelerator_controller-x86.run
 
-./application/nn/lstm/convolutional/ntm_controller-x86.run
+./application/nn/lstm/convolutional/accelerator_controller-x86.run
 
-./application/nn/lstm/standard/ntm_controller-x86.run
+./application/nn/lstm/standard/accelerator_controller-x86.run
 
-./application/nn/ntm/memory/ntm_addressing-x86.run
+./application/nn/ntm/memory/accelerator_addressing-x86.run
 
-./application/nn/dnc/trained/dnc_trained_top-x86.run
+./application/nn/dnc/trained/accelerator_trained_top-x86.run
 
-./application/nn/dnc/write_heads/dnc_write_heads-x86.run
+./application/nn/dnc/write_heads/accelerator_write_heads-x86.run
 
-./application/nn/ntm/trained/ntm_trained_top-x86.run
+./application/nn/ntm/trained/accelerator_trained_top-x86.run
 
-./application/nn/ntm/write_heads/ntm_write_heads-x86.run
+./application/nn/ntm/write_heads/accelerator_write_heads-x86.run
 
-./application/nn/ann/controller/fnn/ntm_fnn-x86.run
+./application/nn/ann/controller/fnn/accelerator_fnn-x86.run
 
-./application/nn/ann/controller/lstm/ntm_lstm-x86.run
+./application/nn/ann/controller/lstm/accelerator_lstm-x86.run
 
 
-./application/trainer/fnn/ntm_fnn_trainer-x86.run
+./application/trainer/fnn/accelerator_fnn_trainer-x86.run
 
-./application/trainer/differentiation/ntm_controller_differentiation-x86.run
+./application/trainer/differentiation/accelerator_controller_differentiation-x86.run
 
-./application/trainer/lstm/input/ntm_lstm_input_trainer-x86.run
+./application/trainer/lstm/input/accelerator_lstm_input_trainer-x86.run
 
-./application/trainer/lstm/forget/ntm_lstm_forget_trainer-x86.run
+./application/trainer/lstm/forget/accelerator_lstm_forget_trainer-x86.run
 
-./application/trainer/lstm/output/ntm_lstm_output_trainer-x86.run
+./application/trainer/lstm/output/accelerator_lstm_output_trainer-x86.run
 
-./application/trainer/lstm/activation/ntm_lstm_activation_trainer-x86.run
+./application/trainer/lstm/activation/accelerator_lstm_activation_trainer-x86.run

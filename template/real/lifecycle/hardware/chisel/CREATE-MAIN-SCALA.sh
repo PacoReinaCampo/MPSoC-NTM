@@ -42,9 +42,9 @@
 ##                                                                               ##
 ###################################################################################
 
-touch src/main/scala/classes/philosophers/ntm_philosophers.scala
-touch src/main/scala/classes/soldiers/ntm_soldiers.scala
-touch src/main/scala/classes/workers/ntm_workers.scala
+touch src/main/scala/classes/philosophers/accelerator_philosophers.scala
+touch src/main/scala/classes/soldiers/accelerator_soldiers.scala
+touch src/main/scala/classes/workers/accelerator_workers.scala
 touch src/main/scala/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.scala
 touch src/main/scala/computing/advanced_computer_architecture/processing_unit/mimd.scala
 touch src/main/scala/computing/advanced_computer_architecture/processing_unit/misd.scala

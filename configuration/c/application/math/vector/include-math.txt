@@ -46,16 +46,16 @@
 # Math-Vector Sources
 #####################################################################
 
-SOURCES_MATH =	../../../library/math/ntm_math.h \
-		../../../library/math/matrix/ntm_matrix_logistic_function.c \
-		../../../library/math/matrix/ntm_matrix_oneplus_function.c \
-		../../../library/math/matrix/ntm_matrix_deviation_function.c \
-		../../../library/math/matrix/ntm_matrix_mean_function.c \
-		../../../library/math/scalar/ntm_scalar_logistic_function.c \
-		../../../library/math/scalar/ntm_scalar_oneplus_function.c \
-		../../../library/math/scalar/ntm_scalar_deviation_function.c \
-		../../../library/math/scalar/ntm_scalar_mean_function.c \
-		../../../library/math/vector/ntm_vector_logistic_function.c \
-		../../../library/math/vector/ntm_vector_oneplus_function.c \
-		../../../library/math/vector/ntm_vector_deviation_function.c \
-		../../../library/math/vector/ntm_vector_mean_function.c
+SOURCES_MATH =	../../../library/math/accelerator_math.h \
+		../../../library/math/matrix/accelerator_matrix_logistic_function.c \
+		../../../library/math/matrix/accelerator_matrix_oneplus_function.c \
+		../../../library/math/matrix/accelerator_matrix_deviation_function.c \
+		../../../library/math/matrix/accelerator_matrix_mean_function.c \
+		../../../library/math/scalar/accelerator_scalar_logistic_function.c \
+		../../../library/math/scalar/accelerator_scalar_oneplus_function.c \
+		../../../library/math/scalar/accelerator_scalar_deviation_function.c \
+		../../../library/math/scalar/accelerator_scalar_mean_function.c \
+		../../../library/math/vector/accelerator_vector_logistic_function.c \
+		../../../library/math/vector/accelerator_vector_oneplus_function.c \
+		../../../library/math/vector/accelerator_vector_deviation_function.c \
+		../../../library/math/vector/accelerator_vector_mean_function.c

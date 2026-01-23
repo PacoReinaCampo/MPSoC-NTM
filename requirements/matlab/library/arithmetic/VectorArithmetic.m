@@ -44,7 +44,7 @@
 
 classdef VectorArithmetic
   methods
-    function DATA_OUT = ntm_vector_adder(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_vector_adder(DATA_A_IN, DATA_B_IN)
       # Constants
       SIZE_A_IN = length(DATA_A_IN);
       SIZE_B_IN = length(DATA_B_IN);
@@ -58,7 +58,7 @@ classdef VectorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_vector_subtractor(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_vector_subtractor(DATA_A_IN, DATA_B_IN)
       # Constants
       SIZE_A_IN = length(DATA_A_IN);
       SIZE_B_IN = length(DATA_B_IN);
@@ -72,7 +72,7 @@ classdef VectorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_vector_multiplier(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_vector_multiplier(DATA_A_IN, DATA_B_IN)
       # Constants
       SIZE_A_IN = length(DATA_A_IN);
       SIZE_B_IN = length(DATA_B_IN);
@@ -86,7 +86,7 @@ classdef VectorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_vector_divider(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_vector_divider(DATA_A_IN, DATA_B_IN)
       # Constants
       SIZE_A_IN = length(DATA_A_IN);
       SIZE_B_IN = length(DATA_B_IN);

@@ -48,7 +48,7 @@
 
 -include include-lstm_output_trainer.txt
 
-TARGET=ntm_lstm_output_trainer
+TARGET=accelerator_lstm_output_trainer
 
 #########################################################################
 # Targets

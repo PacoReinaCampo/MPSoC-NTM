@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/advanced_computer_architecture/processing_unit/mimd/library/accelerator_testbench.vhd

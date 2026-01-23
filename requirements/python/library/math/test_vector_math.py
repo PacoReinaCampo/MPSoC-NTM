@@ -44,10 +44,10 @@
 
 import numpy as np
 
-from vector import ntm_vector_logistic_function as vector_logistic_function
-from vector import ntm_vector_oneplus_function as vector_oneplus_function
-from vector import ntm_vector_mean_function as vector_mean
-from vector import ntm_vector_deviation_function as vector_deviation
+from vector import accelerator_vector_logistic_function as vector_logistic_function
+from vector import accelerator_vector_oneplus_function as vector_oneplus_function
+from vector import accelerator_vector_mean_function as vector_mean
+from vector import accelerator_vector_deviation_function as vector_deviation
 
 def test_vector_logistic_function():
 
@@ -55,7 +55,7 @@ def test_vector_logistic_function():
 
   ones = np.ones(data_in.shape)
 
-  np.testing.assert_array_equal(vector_logistic_function.ntm_vector_logistic_function(data_in), ones/(ones + ones/np.exp(data_in)))
+  np.testing.assert_array_equal(vector_logistic_function.accelerator_vector_logistic_function(data_in), ones/(ones + ones/np.exp(data_in)))
 
 def test_vector_oneplus_function():
 
@@ -63,20 +63,20 @@ def test_vector_oneplus_function():
 
   ones = np.ones(data_in.shape)
 
-  np.testing.assert_array_equal(vector_oneplus_function.ntm_vector_oneplus_function(data_in), ones + np.log(ones + np.exp(data_in)))
+  np.testing.assert_array_equal(vector_oneplus_function.accelerator_vector_oneplus_function(data_in), ones + np.log(ones + np.exp(data_in)))
 
 def test_vector_mean():
 
   data_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(vector_mean.ntm_vector_mean_function(data_in), vector_mean.ntm_vector_mean_function(data_in))
+  np.testing.assert_array_equal(vector_mean.accelerator_vector_mean_function(data_in), vector_mean.accelerator_vector_mean_function(data_in))
 
 def test_vector_deviation():
 
   data_in = np.random.rand(3,3)
   mean_in = np.zeros(3)
 
-  np.testing.assert_array_equal(vector_deviation.ntm_vector_deviation_function(data_in, mean_in), vector_deviation.ntm_vector_deviation_function(data_in, mean_in))
+  np.testing.assert_array_equal(vector_deviation.accelerator_vector_deviation_function(data_in, mean_in), vector_deviation.accelerator_vector_deviation_function(data_in, mean_in))
 
 
 test_vector_logistic_function()

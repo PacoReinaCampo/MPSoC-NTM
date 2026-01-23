@@ -5,173 +5,173 @@ library
 │   ├── test_tensor_algebra.java
 │   ├── test_vector_algebra.java
 │   ├── matrix
-│   │   └── ntm_matrix_algebra.java
+│   │   └── accelerator_matrix_algebra.java
 │   ├── scalar
-│   │   └── ntm_scalar_algebra.java
+│   │   └── accelerator_scalar_algebra.java
 │   ├── tensor
-│   │   └── ntm_tensor_algebra.java
+│   │   └── accelerator_tensor_algebra.java
 │   └── vector
-│       └── ntm_vector_algebra.java
+│       └── accelerator_vector_algebra.java
 ├── arithmetic
 │   ├── test_matrix_arithmetic.java
 │   ├── test_scalar_arithmetic.java
 │   ├── test_tensor_arithmetic.java
 │   ├── test_vector_arithmetic.java
 │   ├── matrix
-│   │   └── ntm_matrix_arithmetic.java
+│   │   └── accelerator_matrix_arithmetic.java
 │   ├── scalar
-│   │   └── ntm_scalar_arithmetic.java
+│   │   └── accelerator_scalar_arithmetic.java
 │   ├── tensor
-│   │   └── ntm_tensor_arithmetic.java
+│   │   └── accelerator_tensor_arithmetic.java
 │   └── vector
-│       └── ntm_vector_arithmetic.java
+│       └── accelerator_vector_arithmetic.java
 ├── math
 │   ├── test_matrix_math.java
 │   ├── test_scalar_math.java
 │   ├── test_vector_math.java
 │   ├── matrix
-│   │   └── ntm_matrix_math.java
+│   │   └── accelerator_matrix_math.java
 │   ├── scalar
-│   │   └── ntm_scalar_math.java
+│   │   └── accelerator_scalar_math.java
 │   └── vector
-│       └── ntm_vector_math.java
+│       └── accelerator_vector_math.java
 ├── nn
 │   ├── ann
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.java
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.java
-│   │   │   ├── ntm_multi_head_attention.java
-│   │   │   └── ntm_scaled_dot_product_attention.java
+│   │   │   ├── accelerator_masked_multi_head_attention.java
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.java
+│   │   │   ├── accelerator_multi_head_attention.java
+│   │   │   └── accelerator_scaled_dot_product_attention.java
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.java
+│   │   │   │   └── accelerator_fnn.java
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.java
+│   │   │       └── accelerator_lstm.java
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.java
-│   │   │   └── ntm_positional_encoding.java
+│   │   │   ├── accelerator_layer_norm.java
+│   │   │   └── accelerator_positional_encoding.java
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.java
-│   │   │   ├── ntm_keys_vector.java
-│   │   │   ├── ntm_queries_vector.java
-│   │   │   └── ntm_values_vector.java
+│   │   │   ├── accelerator_inputs_vector.java
+│   │   │   ├── accelerator_keys_vector.java
+│   │   │   ├── accelerator_queries_vector.java
+│   │   │   └── accelerator_values_vector.java
 │   │   └── top
-│   │       ├── ntm_controller.java
-│   │       ├── ntm_decoder.java
-│   │       └── ntm_encoder.java
+│   │       ├── accelerator_controller.java
+│   │       ├── accelerator_decoder.java
+│   │       └── accelerator_encoder.java
 │   ├── dnc
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.java
-│   │   │   ├── dnc_allocation_weighting.java
-│   │   │   ├── dnc_backward_weighting.java
-│   │   │   ├── dnc_forward_weighting.java
-│   │   │   ├── dnc_matrix_content_based_addressing.java
-│   │   │   ├── dnc_memory_matrix.java
-│   │   │   ├── dnc_memory_retention_vector.java
-│   │   │   ├── dnc_precedence_weighting.java
-│   │   │   ├── dnc_sort_vector.java
-│   │   │   ├── dnc_temporal_link_matrix.java
-│   │   │   ├── dnc_usage_vector.java
-│   │   │   └── dnc_vector_content_based_addressing.java
+│   │   │   ├── accelerator_addressing.java
+│   │   │   ├── accelerator_allocation_weighting.java
+│   │   │   ├── accelerator_backward_weighting.java
+│   │   │   ├── accelerator_forward_weighting.java
+│   │   │   ├── accelerator_matrix_content_based_addressing.java
+│   │   │   ├── accelerator_memory_matrix.java
+│   │   │   ├── accelerator_memory_retention_vector.java
+│   │   │   ├── accelerator_precedence_weighting.java
+│   │   │   ├── accelerator_sort_vector.java
+│   │   │   ├── accelerator_temporal_link_matrix.java
+│   │   │   ├── accelerator_usage_vector.java
+│   │   │   └── accelerator_vector_content_based_addressing.java
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.java
-│   │   │   ├── dnc_read_vectors.java
-│   │   │   └── dnc_read_weighting.java
+│   │   │   ├── accelerator_read_content_weighting.java
+│   │   │   ├── accelerator_read_vectors.java
+│   │   │   └── accelerator_read_weighting.java
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.java
-│   │   │   ├── dnc_interface_top.java
-│   │   │   ├── dnc_interface_vector.java
-│   │   │   ├── dnc_output_vector.java
-│   │   │   └── dnc_top.java
+│   │   │   ├── accelerator_interface_matrix.java
+│   │   │   ├── accelerator_interface_top.java
+│   │   │   ├── accelerator_interface_vector.java
+│   │   │   ├── accelerator_output_vector.java
+│   │   │   └── accelerator_top.java
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.java
+│   │   │   └── accelerator_trained_top.java
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.java
-│   │       └── dnc_write_weighting.java
+│   │       ├── accelerator_write_content_weighting.java
+│   │       └── accelerator_write_weighting.java
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.java
+│   │   │   └── accelerator_controller.java
 │   │   └── standard
-│   │       └── ntm_controller.java
+│   │       └── accelerator_controller.java
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.java
-│   │   │   ├── ntm_controller.java
-│   │   │   ├── ntm_forget_gate_vector.java
-│   │   │   ├── ntm_hidden_gate_vector.java
-│   │   │   ├── ntm_input_gate_vector.java
-│   │   │   ├── ntm_output_gate_vector.java
-│   │   │   └── ntm_state_gate_vector.java
+│   │   │   ├── accelerator_activation_gate_vector.java
+│   │   │   ├── accelerator_controller.java
+│   │   │   ├── accelerator_forget_gate_vector.java
+│   │   │   ├── accelerator_hidden_gate_vector.java
+│   │   │   ├── accelerator_input_gate_vector.java
+│   │   │   ├── accelerator_output_gate_vector.java
+│   │   │   └── accelerator_state_gate_vector.java
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.java
-│   │       ├── ntm_controller.java
-│   │       ├── ntm_forget_gate_vector.java
-│   │       ├── ntm_hidden_gate_vector.java
-│   │       ├── ntm_input_gate_vector.java
-│   │       ├── ntm_output_gate_vector.java
-│   │       └── ntm_state_gate_vector.java
+│   │       ├── accelerator_activation_gate_vector.java
+│   │       ├── accelerator_controller.java
+│   │       ├── accelerator_forget_gate_vector.java
+│   │       ├── accelerator_hidden_gate_vector.java
+│   │       ├── accelerator_input_gate_vector.java
+│   │       ├── accelerator_output_gate_vector.java
+│   │       └── accelerator_state_gate_vector.java
 │   └── ntm
 │       ├── memory
-│       │   ├── ntm_addressing.java
-│       │   ├── ntm_matrix_content_based_addressing.java
-│       │   └── ntm_vector_content_based_addressing.java
+│       │   ├── accelerator_addressing.java
+│       │   ├── accelerator_matrix_content_based_addressing.java
+│       │   └── accelerator_vector_content_based_addressing.java
 │       ├── read_heads
-│       │   └── ntm_reading.java
+│       │   └── accelerator_reading.java
 │       ├── top
-│       │   ├── ntm_interface_matrix.java
-│       │   ├── ntm_interface_top.java
-│       │   ├── ntm_interface_vector.java
-│       │   ├── ntm_output_vector.java
-│       │   └── ntm_top.java
+│       │   ├── accelerator_interface_matrix.java
+│       │   ├── accelerator_interface_top.java
+│       │   ├── accelerator_interface_vector.java
+│       │   ├── accelerator_output_vector.java
+│       │   └── accelerator_top.java
 │       ├── trained
-│       │   └── ntm_trained_top.java
+│       │   └── accelerator_trained_top.java
 │       └── write_heads
-│           ├── ntm_erasing.java
-│           └── ntm_writing.java
+│           ├── accelerator_erasing.java
+│           └── accelerator_writing.java
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.java
-    │   └── ntm_vector_controller_differentiation.java
+    │   ├── accelerator_matrix_controller_differentiation.java
+    │   └── accelerator_vector_controller_differentiation.java
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.java
-    │   ├── ntm_fnn_d_trainer.java
-    │   ├── ntm_fnn_k_trainer.java
-    │   ├── ntm_fnn_trainer.java
-    │   ├── ntm_fnn_u_trainer.java
-    │   ├── ntm_fnn_v_trainer.java
-    │   └── ntm_fnn_w_trainer.java
+    │   ├── accelerator_fnn_b_trainer.java
+    │   ├── accelerator_fnn_d_trainer.java
+    │   ├── accelerator_fnn_k_trainer.java
+    │   ├── accelerator_fnn_trainer.java
+    │   ├── accelerator_fnn_u_trainer.java
+    │   ├── accelerator_fnn_v_trainer.java
+    │   └── accelerator_fnn_w_trainer.java
     └── lstm
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.java
-        │   ├── ntm_lstm_activation_d_trainer.java
-        │   ├── ntm_lstm_activation_k_trainer.java
-        │   ├── ntm_lstm_activation_trainer.java
-        │   ├── ntm_lstm_activation_u_trainer.java
-        │   ├── ntm_lstm_activation_v_trainer.java
-        │   └── ntm_lstm_activation_w_trainer.java
+        │   ├── accelerator_lstm_activation_b_trainer.java
+        │   ├── accelerator_lstm_activation_d_trainer.java
+        │   ├── accelerator_lstm_activation_k_trainer.java
+        │   ├── accelerator_lstm_activation_trainer.java
+        │   ├── accelerator_lstm_activation_u_trainer.java
+        │   ├── accelerator_lstm_activation_v_trainer.java
+        │   └── accelerator_lstm_activation_w_trainer.java
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.java
-        │   ├── ntm_lstm_forget_d_trainer.java
-        │   ├── ntm_lstm_forget_k_trainer.java
-        │   ├── ntm_lstm_forget_trainer.java
-        │   ├── ntm_lstm_forget_u_trainer.java
-        │   ├── ntm_lstm_forget_v_trainer.java
-        │   └── ntm_lstm_forget_w_trainer.java
+        │   ├── accelerator_lstm_forget_b_trainer.java
+        │   ├── accelerator_lstm_forget_d_trainer.java
+        │   ├── accelerator_lstm_forget_k_trainer.java
+        │   ├── accelerator_lstm_forget_trainer.java
+        │   ├── accelerator_lstm_forget_u_trainer.java
+        │   ├── accelerator_lstm_forget_v_trainer.java
+        │   └── accelerator_lstm_forget_w_trainer.java
         ├── input
-        │   ├── ntm_lstm_input_b_trainer.java
-        │   ├── ntm_lstm_input_d_trainer.java
-        │   ├── ntm_lstm_input_k_trainer.java
-        │   ├── ntm_lstm_input_trainer.java
-        │   ├── ntm_lstm_input_u_trainer.java
-        │   ├── ntm_lstm_input_v_trainer.java
-        │   └── ntm_lstm_input_w_trainer.java
+        │   ├── accelerator_lstm_input_b_trainer.java
+        │   ├── accelerator_lstm_input_d_trainer.java
+        │   ├── accelerator_lstm_input_k_trainer.java
+        │   ├── accelerator_lstm_input_trainer.java
+        │   ├── accelerator_lstm_input_u_trainer.java
+        │   ├── accelerator_lstm_input_v_trainer.java
+        │   └── accelerator_lstm_input_w_trainer.java
         └── output
-            ├── ntm_lstm_output_b_trainer.java
-            ├── ntm_lstm_output_d_trainer.java
-            ├── ntm_lstm_output_k_trainer.java
-            ├── ntm_lstm_output_trainer.java
-            ├── ntm_lstm_output_u_trainer.java
-            ├── ntm_lstm_output_v_trainer.java
-            └── ntm_lstm_output_w_trainer.java
+            ├── accelerator_lstm_output_b_trainer.java
+            ├── accelerator_lstm_output_d_trainer.java
+            ├── accelerator_lstm_output_k_trainer.java
+            ├── accelerator_lstm_output_trainer.java
+            ├── accelerator_lstm_output_u_trainer.java
+            ├── accelerator_lstm_output_v_trainer.java
+            └── accelerator_lstm_output_w_trainer.java
 
 49 directories, 125 files

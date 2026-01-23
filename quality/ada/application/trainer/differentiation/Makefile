@@ -48,7 +48,7 @@
 
 -include include-controller_differentiation.txt
 
-TARGET=ntm_controller_differentiation
+TARGET=accelerator_controller_differentiation
 
 #########################################################################
 # Targets

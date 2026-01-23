@@ -4,249 +4,249 @@ library
 │       ├── lib.rs
 │       ├── matrix
 │       │   ├── mod.rs
-│       │   ├── ntm_matrix_algebra.rs
-│       │   ├── ntm_matrix_convolution.rs
-│       │   ├── ntm_matrix_differentiation.rs
-│       │   ├── ntm_matrix_integration.rs
-│       │   ├── ntm_matrix_inverse.rs
-│       │   ├── ntm_matrix_multiplication.rs
-│       │   ├── ntm_matrix_product.rs
-│       │   ├── ntm_matrix_softmax.rs
-│       │   ├── ntm_matrix_summation.rs
-│       │   ├── ntm_matrix_transpose.rs
-│       │   ├── ntm_matrix_vector_convolution.rs
-│       │   ├── ntm_matrix_vector_product.rs
-│       │   └── ntm_transpose_vector_product.rs
+│       │   ├── accelerator_matrix_algebra.rs
+│       │   ├── accelerator_matrix_convolution.rs
+│       │   ├── accelerator_matrix_differentiation.rs
+│       │   ├── accelerator_matrix_integration.rs
+│       │   ├── accelerator_matrix_inverse.rs
+│       │   ├── accelerator_matrix_multiplication.rs
+│       │   ├── accelerator_matrix_product.rs
+│       │   ├── accelerator_matrix_softmax.rs
+│       │   ├── accelerator_matrix_summation.rs
+│       │   ├── accelerator_matrix_transpose.rs
+│       │   ├── accelerator_matrix_vector_convolution.rs
+│       │   ├── accelerator_matrix_vector_product.rs
+│       │   └── accelerator_transpose_vector_product.rs
 │       ├── scalar
 │       │   ├── mod.rs
-│       │   ├── ntm_scalar_algebra.rs
-│       │   ├── ntm_scalar_multiplication.rs
-│       │   └── ntm_scalar_summation.rs
+│       │   ├── accelerator_scalar_algebra.rs
+│       │   ├── accelerator_scalar_multiplication.rs
+│       │   └── accelerator_scalar_summation.rs
 │       ├── tensor
 │       │   ├── mod.rs
-│       │   ├── ntm_tensor_algebra.rs
-│       │   ├── ntm_tensor_convolution.rs
-│       │   ├── ntm_tensor_differentiation.rs
-│       │   ├── ntm_tensor_integration.rs
-│       │   ├── ntm_tensor_inverse.rs
-│       │   ├── ntm_tensor_matrix_convolution.rs
-│       │   ├── ntm_tensor_matrix_product.rs
-│       │   ├── ntm_tensor_multiplication.rs
-│       │   ├── ntm_tensor_product.rs
-│       │   ├── ntm_tensor_softmax.rs
-│       │   ├── ntm_tensor_summation.rs
-│       │   └── ntm_tensor_transpose.rs
+│       │   ├── accelerator_tensor_algebra.rs
+│       │   ├── accelerator_tensor_convolution.rs
+│       │   ├── accelerator_tensor_differentiation.rs
+│       │   ├── accelerator_tensor_integration.rs
+│       │   ├── accelerator_tensor_inverse.rs
+│       │   ├── accelerator_tensor_matrix_convolution.rs
+│       │   ├── accelerator_tensor_matrix_product.rs
+│       │   ├── accelerator_tensor_multiplication.rs
+│       │   ├── accelerator_tensor_product.rs
+│       │   ├── accelerator_tensor_softmax.rs
+│       │   ├── accelerator_tensor_summation.rs
+│       │   └── accelerator_tensor_transpose.rs
 │       └── vector
 │           ├── mod.rs
-│           ├── ntm_dot_product.rs
-│           ├── ntm_vector_algebra.rs
-│           ├── ntm_vector_convolution.rs
-│           ├── ntm_vector_cosine_similarity.rs
-│           ├── ntm_vector_differentiation.rs
-│           ├── ntm_vector_integration.rs
-│           ├── ntm_vector_module.rs
-│           ├── ntm_vector_multiplication.rs
-│           ├── ntm_vector_softmax.rs
-│           └── ntm_vector_summation.rs
+│           ├── accelerator_dot_product.rs
+│           ├── accelerator_vector_algebra.rs
+│           ├── accelerator_vector_convolution.rs
+│           ├── accelerator_vector_cosine_similarity.rs
+│           ├── accelerator_vector_differentiation.rs
+│           ├── accelerator_vector_integration.rs
+│           ├── accelerator_vector_module.rs
+│           ├── accelerator_vector_multiplication.rs
+│           ├── accelerator_vector_softmax.rs
+│           └── accelerator_vector_summation.rs
 ├── arithmetic
 │   └── src
 │       ├── lib.rs
 │       ├── matrix
 │       │   ├── mod.rs
-│       │   ├── ntm_matrix_adder.rs
-│       │   ├── ntm_matrix_arithmetic.rs
-│       │   ├── ntm_matrix_divider.rs
-│       │   ├── ntm_matrix_multiplier.rs
-│       │   └── ntm_matrix_subtractor.rs
+│       │   ├── accelerator_matrix_adder.rs
+│       │   ├── accelerator_matrix_arithmetic.rs
+│       │   ├── accelerator_matrix_divider.rs
+│       │   ├── accelerator_matrix_multiplier.rs
+│       │   └── accelerator_matrix_subtractor.rs
 │       ├── scalar
 │       │   ├── mod.rs
-│       │   ├── ntm_scalar_adder.rs
-│       │   ├── ntm_scalar_arithmetic.rs
-│       │   ├── ntm_scalar_divider.rs
-│       │   ├── ntm_scalar_multiplier.rs
-│       │   └── ntm_scalar_subtractor.rs
+│       │   ├── accelerator_scalar_adder.rs
+│       │   ├── accelerator_scalar_arithmetic.rs
+│       │   ├── accelerator_scalar_divider.rs
+│       │   ├── accelerator_scalar_multiplier.rs
+│       │   └── accelerator_scalar_subtractor.rs
 │       ├── tensor
 │       │   ├── mod.rs
-│       │   ├── ntm_tensor_adder.rs
-│       │   ├── ntm_tensor_arithmetic.rs
-│       │   ├── ntm_tensor_divider.rs
-│       │   ├── ntm_tensor_multiplier.rs
-│       │   └── ntm_tensor_subtractor.rs
+│       │   ├── accelerator_tensor_adder.rs
+│       │   ├── accelerator_tensor_arithmetic.rs
+│       │   ├── accelerator_tensor_divider.rs
+│       │   ├── accelerator_tensor_multiplier.rs
+│       │   └── accelerator_tensor_subtractor.rs
 │       └── vector
 │           ├── mod.rs
-│           ├── ntm_vector_adder.rs
-│           ├── ntm_vector_arithmetic.rs
-│           ├── ntm_vector_divider.rs
-│           ├── ntm_vector_multiplier.rs
-│           └── ntm_vector_subtractor.rs
+│           ├── accelerator_vector_adder.rs
+│           ├── accelerator_vector_arithmetic.rs
+│           ├── accelerator_vector_divider.rs
+│           ├── accelerator_vector_multiplier.rs
+│           └── accelerator_vector_subtractor.rs
 ├── math
 │   └── src
 │       ├── lib.rs
 │       ├── matrix
 │       │   ├── mod.rs
-│       │   ├── ntm_matrix_deviation_function.rs
-│       │   ├── ntm_matrix_logistic_function.rs
-│       │   ├── ntm_matrix_math.rs
-│       │   ├── ntm_matrix_mean_function.rs
-│       │   └── ntm_matrix_oneplus_function.rs
+│       │   ├── accelerator_matrix_deviation_function.rs
+│       │   ├── accelerator_matrix_logistic_function.rs
+│       │   ├── accelerator_matrix_math.rs
+│       │   ├── accelerator_matrix_mean_function.rs
+│       │   └── accelerator_matrix_oneplus_function.rs
 │       ├── scalar
 │       │   ├── mod.rs
-│       │   ├── ntm_scalar_deviation_function.rs
-│       │   ├── ntm_scalar_logistic_function.rs
-│       │   ├── ntm_scalar_math.rs
-│       │   ├── ntm_scalar_mean_function.rs
-│       │   └── ntm_scalar_oneplus_function.rs
+│       │   ├── accelerator_scalar_deviation_function.rs
+│       │   ├── accelerator_scalar_logistic_function.rs
+│       │   ├── accelerator_scalar_math.rs
+│       │   ├── accelerator_scalar_mean_function.rs
+│       │   └── accelerator_scalar_oneplus_function.rs
 │       └── vector
 │           ├── mod.rs
-│           ├── ntm_vector_deviation_function.rs
-│           ├── ntm_vector_logistic_function.rs
-│           ├── ntm_vector_math.rs
-│           ├── ntm_vector_mean_function.rs
-│           └── ntm_vector_oneplus_function.rs
+│           ├── accelerator_vector_deviation_function.rs
+│           ├── accelerator_vector_logistic_function.rs
+│           ├── accelerator_vector_math.rs
+│           ├── accelerator_vector_mean_function.rs
+│           └── accelerator_vector_oneplus_function.rs
 ├── nn
 │   ├── ann
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.rs
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.rs
-│   │   │   ├── ntm_multi_head_attention.rs
-│   │   │   └── ntm_scaled_dot_product_attention.rs
+│   │   │   ├── accelerator_masked_multi_head_attention.rs
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.rs
+│   │   │   ├── accelerator_multi_head_attention.rs
+│   │   │   └── accelerator_scaled_dot_product_attention.rs
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.rs
+│   │   │   │   └── accelerator_fnn.rs
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.rs
+│   │   │       └── accelerator_lstm.rs
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.rs
-│   │   │   └── ntm_positional_encoding.rs
+│   │   │   ├── accelerator_layer_norm.rs
+│   │   │   └── accelerator_positional_encoding.rs
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.rs
-│   │   │   ├── ntm_keys_vector.rs
-│   │   │   ├── ntm_queries_vector.rs
-│   │   │   └── ntm_values_vector.rs
-│   │   ├── ntm_ann_controller.rs
+│   │   │   ├── accelerator_inputs_vector.rs
+│   │   │   ├── accelerator_keys_vector.rs
+│   │   │   ├── accelerator_queries_vector.rs
+│   │   │   └── accelerator_values_vector.rs
+│   │   ├── accelerator_ann_controller.rs
 │   │   └── top
-│   │       ├── ntm_controller.rs
-│   │       ├── ntm_decoder.rs
-│   │       └── ntm_encoder.rs
+│   │       ├── accelerator_controller.rs
+│   │       ├── accelerator_decoder.rs
+│   │       └── accelerator_encoder.rs
 │   ├── dnc
 │   │   ├── dnc.rs
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.rs
-│   │   │   ├── dnc_allocation_weighting.rs
-│   │   │   ├── dnc_backward_weighting.rs
-│   │   │   ├── dnc_forward_weighting.rs
-│   │   │   ├── dnc_matrix_content_based_addressing.rs
-│   │   │   ├── dnc_memory_matrix.rs
-│   │   │   ├── dnc_memory_retention_vector.rs
-│   │   │   ├── dnc_precedence_weighting.rs
-│   │   │   ├── dnc_sort_vector.rs
-│   │   │   ├── dnc_temporal_link_matrix.rs
-│   │   │   ├── dnc_usage_vector.rs
-│   │   │   └── dnc_vector_content_based_addressing.rs
+│   │   │   ├── accelerator_addressing.rs
+│   │   │   ├── accelerator_allocation_weighting.rs
+│   │   │   ├── accelerator_backward_weighting.rs
+│   │   │   ├── accelerator_forward_weighting.rs
+│   │   │   ├── accelerator_matrix_content_based_addressing.rs
+│   │   │   ├── accelerator_memory_matrix.rs
+│   │   │   ├── accelerator_memory_retention_vector.rs
+│   │   │   ├── accelerator_precedence_weighting.rs
+│   │   │   ├── accelerator_sort_vector.rs
+│   │   │   ├── accelerator_temporal_link_matrix.rs
+│   │   │   ├── accelerator_usage_vector.rs
+│   │   │   └── accelerator_vector_content_based_addressing.rs
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.rs
-│   │   │   ├── dnc_read_vectors.rs
-│   │   │   └── dnc_read_weighting.rs
+│   │   │   ├── accelerator_read_content_weighting.rs
+│   │   │   ├── accelerator_read_vectors.rs
+│   │   │   └── accelerator_read_weighting.rs
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.rs
-│   │   │   ├── dnc_interface_top.rs
-│   │   │   ├── dnc_interface_vector.rs
-│   │   │   ├── dnc_output_vector.rs
-│   │   │   └── dnc_top.rs
+│   │   │   ├── accelerator_interface_matrix.rs
+│   │   │   ├── accelerator_interface_top.rs
+│   │   │   ├── accelerator_interface_vector.rs
+│   │   │   ├── accelerator_output_vector.rs
+│   │   │   └── accelerator_top.rs
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.rs
+│   │   │   └── accelerator_trained_top.rs
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.rs
-│   │       └── dnc_write_weighting.rs
+│   │       ├── accelerator_write_content_weighting.rs
+│   │       └── accelerator_write_weighting.rs
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.rs
+│   │   │   └── accelerator_controller.rs
 │   │   └── standard
-│   │       └── ntm_controller.rs
+│   │       └── accelerator_controller.rs
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.rs
-│   │   │   ├── ntm_controller.rs
-│   │   │   ├── ntm_forget_gate_vector.rs
-│   │   │   ├── ntm_hidden_gate_vector.rs
-│   │   │   ├── ntm_input_gate_vector.rs
-│   │   │   ├── ntm_output_gate_vector.rs
-│   │   │   └── ntm_state_gate_vector.rs
+│   │   │   ├── accelerator_activation_gate_vector.rs
+│   │   │   ├── accelerator_controller.rs
+│   │   │   ├── accelerator_forget_gate_vector.rs
+│   │   │   ├── accelerator_hidden_gate_vector.rs
+│   │   │   ├── accelerator_input_gate_vector.rs
+│   │   │   ├── accelerator_output_gate_vector.rs
+│   │   │   └── accelerator_state_gate_vector.rs
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.rs
-│   │       ├── ntm_controller.rs
-│   │       ├── ntm_forget_gate_vector.rs
-│   │       ├── ntm_hidden_gate_vector.rs
-│   │       ├── ntm_input_gate_vector.rs
-│   │       ├── ntm_output_gate_vector.rs
-│   │       └── ntm_state_gate_vector.rs
+│   │       ├── accelerator_activation_gate_vector.rs
+│   │       ├── accelerator_controller.rs
+│   │       ├── accelerator_forget_gate_vector.rs
+│   │       ├── accelerator_hidden_gate_vector.rs
+│   │       ├── accelerator_input_gate_vector.rs
+│   │       ├── accelerator_output_gate_vector.rs
+│   │       └── accelerator_state_gate_vector.rs
 │   ├── ntm
 │   │   ├── memory
-│   │   │   ├── ntm_addressing.rs
-│   │   │   ├── ntm_matrix_content_based_addressing.rs
-│   │   │   └── ntm_vector_content_based_addressing.rs
+│   │   │   ├── accelerator_addressing.rs
+│   │   │   ├── accelerator_matrix_content_based_addressing.rs
+│   │   │   └── accelerator_vector_content_based_addressing.rs
 │   │   ├── ntm.rs
 │   │   ├── read_heads
-│   │   │   └── ntm_reading.rs
+│   │   │   └── accelerator_reading.rs
 │   │   ├── top
-│   │   │   ├── ntm_interface_matrix.rs
-│   │   │   ├── ntm_interface_top.rs
-│   │   │   ├── ntm_interface_vector.rs
-│   │   │   ├── ntm_output_vector.rs
-│   │   │   └── ntm_top.rs
+│   │   │   ├── accelerator_interface_matrix.rs
+│   │   │   ├── accelerator_interface_top.rs
+│   │   │   ├── accelerator_interface_vector.rs
+│   │   │   ├── accelerator_output_vector.rs
+│   │   │   └── accelerator_top.rs
 │   │   ├── trained
-│   │   │   └── ntm_trained_top.rs
+│   │   │   └── accelerator_trained_top.rs
 │   │   └── write_heads
-│   │       ├── ntm_erasing.rs
-│   │       └── ntm_writing.rs
-│   ├── ntm_fnn_controller.rs
-│   └── ntm_lstm_controller.rs
+│   │       ├── accelerator_erasing.rs
+│   │       └── accelerator_writing.rs
+│   ├── accelerator_fnn_controller.rs
+│   └── accelerator_lstm_controller.rs
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.rs
-    │   └── ntm_vector_controller_differentiation.rs
+    │   ├── accelerator_matrix_controller_differentiation.rs
+    │   └── accelerator_vector_controller_differentiation.rs
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.rs
-    │   ├── ntm_fnn_d_trainer.rs
-    │   ├── ntm_fnn_k_trainer.rs
-    │   ├── ntm_fnn_trainer.rs
-    │   ├── ntm_fnn_u_trainer.rs
-    │   ├── ntm_fnn_v_trainer.rs
-    │   └── ntm_fnn_w_trainer.rs
+    │   ├── accelerator_fnn_b_trainer.rs
+    │   ├── accelerator_fnn_d_trainer.rs
+    │   ├── accelerator_fnn_k_trainer.rs
+    │   ├── accelerator_fnn_trainer.rs
+    │   ├── accelerator_fnn_u_trainer.rs
+    │   ├── accelerator_fnn_v_trainer.rs
+    │   └── accelerator_fnn_w_trainer.rs
     ├── lstm
     │   ├── activation
-    │   │   ├── ntm_lstm_activation_b_trainer.rs
-    │   │   ├── ntm_lstm_activation_d_trainer.rs
-    │   │   ├── ntm_lstm_activation_k_trainer.rs
-    │   │   ├── ntm_lstm_activation_trainer.rs
-    │   │   ├── ntm_lstm_activation_u_trainer.rs
-    │   │   ├── ntm_lstm_activation_v_trainer.rs
-    │   │   └── ntm_lstm_activation_w_trainer.rs
+    │   │   ├── accelerator_lstm_activation_b_trainer.rs
+    │   │   ├── accelerator_lstm_activation_d_trainer.rs
+    │   │   ├── accelerator_lstm_activation_k_trainer.rs
+    │   │   ├── accelerator_lstm_activation_trainer.rs
+    │   │   ├── accelerator_lstm_activation_u_trainer.rs
+    │   │   ├── accelerator_lstm_activation_v_trainer.rs
+    │   │   └── accelerator_lstm_activation_w_trainer.rs
     │   ├── forget
-    │   │   ├── ntm_lstm_forget_b_trainer.rs
-    │   │   ├── ntm_lstm_forget_d_trainer.rs
-    │   │   ├── ntm_lstm_forget_k_trainer.rs
-    │   │   ├── ntm_lstm_forget_trainer.rs
-    │   │   ├── ntm_lstm_forget_u_trainer.rs
-    │   │   ├── ntm_lstm_forget_v_trainer.rs
-    │   │   └── ntm_lstm_forget_w_trainer.rs
+    │   │   ├── accelerator_lstm_forget_b_trainer.rs
+    │   │   ├── accelerator_lstm_forget_d_trainer.rs
+    │   │   ├── accelerator_lstm_forget_k_trainer.rs
+    │   │   ├── accelerator_lstm_forget_trainer.rs
+    │   │   ├── accelerator_lstm_forget_u_trainer.rs
+    │   │   ├── accelerator_lstm_forget_v_trainer.rs
+    │   │   └── accelerator_lstm_forget_w_trainer.rs
     │   ├── input
-    │   │   ├── ntm_lstm_input_b_trainer.rs
-    │   │   ├── ntm_lstm_input_d_trainer.rs
-    │   │   ├── ntm_lstm_input_k_trainer.rs
-    │   │   ├── ntm_lstm_input_trainer.rs
-    │   │   ├── ntm_lstm_input_u_trainer.rs
-    │   │   ├── ntm_lstm_input_v_trainer.rs
-    │   │   └── ntm_lstm_input_w_trainer.rs
+    │   │   ├── accelerator_lstm_input_b_trainer.rs
+    │   │   ├── accelerator_lstm_input_d_trainer.rs
+    │   │   ├── accelerator_lstm_input_k_trainer.rs
+    │   │   ├── accelerator_lstm_input_trainer.rs
+    │   │   ├── accelerator_lstm_input_u_trainer.rs
+    │   │   ├── accelerator_lstm_input_v_trainer.rs
+    │   │   └── accelerator_lstm_input_w_trainer.rs
     │   └── output
-    │       ├── ntm_lstm_output_b_trainer.rs
-    │       ├── ntm_lstm_output_d_trainer.rs
-    │       ├── ntm_lstm_output_k_trainer.rs
-    │       ├── ntm_lstm_output_trainer.rs
-    │       ├── ntm_lstm_output_u_trainer.rs
-    │       ├── ntm_lstm_output_v_trainer.rs
-    │       └── ntm_lstm_output_w_trainer.rs
-    ├── ntm_fnn.rs
-    └── ntm_lstm.rs
+    │       ├── accelerator_lstm_output_b_trainer.rs
+    │       ├── accelerator_lstm_output_d_trainer.rs
+    │       ├── accelerator_lstm_output_k_trainer.rs
+    │       ├── accelerator_lstm_output_trainer.rs
+    │       ├── accelerator_lstm_output_u_trainer.rs
+    │       ├── accelerator_lstm_output_v_trainer.rs
+    │       └── accelerator_lstm_output_w_trainer.rs
+    ├── accelerator_fnn.rs
+    └── accelerator_lstm.rs
 
 52 directories, 197 files

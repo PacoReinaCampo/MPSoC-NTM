@@ -1,12 +1,12 @@
 library
 ├── algebra
-│   ├── ntm_algebra.hpp
+│   ├── accelerator_algebra.hpp
 │   ├── matrix
 │   ├── scalar
 │   ├── tensor
 │   └── vector
 ├── arithmetic
-│   ├── ntm_arithmetic.hpp
+│   ├── accelerator_arithmetic.hpp
 │   ├── matrix
 │   │   ├── adder
 │   │   ├── divider
@@ -28,7 +28,7 @@ library
 │       ├── multiplier
 │       └── subtractor
 ├── math
-│   ├── ntm_math.hpp
+│   ├── accelerator_math.hpp
 │   ├── matrix
 │   ├── scalar
 │   └── vector
@@ -43,31 +43,31 @@ library
 │   │   ├── inputs
 │   │   └── top
 │   ├── dnc
-│   │   ├── dnc_controller.hpp
+│   │   ├── accelerator_controller.hpp
 │   │   ├── memory
 │   │   ├── read_heads
 │   │   ├── top
 │   │   ├── trained
 │   │   └── write_heads
 │   ├── fnn
-│   │   ├── ntm_fnn_controller.hpp
+│   │   ├── accelerator_fnn_controller.hpp
 │   │   ├── convolutional
 │   │   └── standard
 │   ├── lstm
-│   │   ├── ntm_lstm_controller.hpp
+│   │   ├── accelerator_lstm_controller.hpp
 │   │   ├── convolutional
 │   │   └── standard
 │   └── ntm
-│       ├── ntm_controller.hpp
+│       ├── accelerator_controller.hpp
 │       ├── memory
 │       ├── read_heads
 │       ├── top
 │       ├── trained
 │       └── write_heads
 └── trainer
-    ├── ntm_differentiation.hpp
-    ├── ntm_fnn.hpp
-    ├── ntm_lstm.hpp
+    ├── accelerator_differentiation.hpp
+    ├── accelerator_fnn.hpp
+    ├── accelerator_lstm.hpp
     ├── differentiation
     ├── fnn
     └── lstm

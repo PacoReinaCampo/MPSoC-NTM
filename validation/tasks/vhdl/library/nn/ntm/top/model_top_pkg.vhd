@@ -109,9 +109,9 @@ package model_top_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_NTM_TOP_TEST   : boolean := false;
-  signal STIMULUS_NTM_TOP_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TOP_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TOP_TEST   : boolean := false;
+  signal STIMULUS_ACCELERATOR_TOP_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TOP_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -136,88 +136,88 @@ package model_top_pkg is
       RST : out std_logic;
 
       -- CONTROL
-      NTM_TOP_START : out std_logic;
-      NTM_TOP_READY : in  std_logic;
+      ACCELERATOR_TOP_START : out std_logic;
+      ACCELERATOR_TOP_READY : in  std_logic;
 
-      NTM_TOP_W_IN_L_ENABLE : out std_logic;
-      NTM_TOP_W_IN_X_ENABLE : out std_logic;
+      ACCELERATOR_TOP_W_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_W_IN_X_ENABLE : out std_logic;
 
-      NTM_TOP_W_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_W_OUT_X_ENABLE : in std_logic;
+      ACCELERATOR_TOP_W_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_W_OUT_X_ENABLE : in std_logic;
 
-      NTM_TOP_K_IN_I_ENABLE : out std_logic;
-      NTM_TOP_K_IN_L_ENABLE : out std_logic;
-      NTM_TOP_K_IN_K_ENABLE : out std_logic;
+      ACCELERATOR_TOP_K_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_TOP_K_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_K_IN_K_ENABLE : out std_logic;
 
-      NTM_TOP_K_OUT_I_ENABLE : in std_logic;
-      NTM_TOP_K_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_K_OUT_K_ENABLE : in std_logic;
+      ACCELERATOR_TOP_K_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_TOP_K_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_K_OUT_K_ENABLE : in std_logic;
 
-      NTM_TOP_U_IN_L_ENABLE : out std_logic;
-      NTM_TOP_U_IN_P_ENABLE : out std_logic;
+      ACCELERATOR_TOP_U_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_U_IN_P_ENABLE : out std_logic;
 
-      NTM_TOP_U_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_U_OUT_P_ENABLE : in std_logic;
+      ACCELERATOR_TOP_U_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_U_OUT_P_ENABLE : in std_logic;
 
-      NTM_TOP_V_IN_L_ENABLE : out std_logic;
-      NTM_TOP_V_IN_S_ENABLE : out std_logic;
+      ACCELERATOR_TOP_V_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_V_IN_S_ENABLE : out std_logic;
 
-      NTM_TOP_V_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_V_OUT_S_ENABLE : in std_logic;
+      ACCELERATOR_TOP_V_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_V_OUT_S_ENABLE : in std_logic;
 
-      NTM_TOP_D_IN_I_ENABLE : out std_logic;
-      NTM_TOP_D_IN_L_ENABLE : out std_logic;
-      NTM_TOP_D_IN_M_ENABLE : out std_logic;
+      ACCELERATOR_TOP_D_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_TOP_D_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_D_IN_M_ENABLE : out std_logic;
 
-      NTM_TOP_D_OUT_I_ENABLE : in std_logic;
-      NTM_TOP_D_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_D_OUT_M_ENABLE : in std_logic;
+      ACCELERATOR_TOP_D_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_TOP_D_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_D_OUT_M_ENABLE : in std_logic;
 
-      NTM_TOP_B_IN_ENABLE : out std_logic;
+      ACCELERATOR_TOP_B_IN_ENABLE : out std_logic;
 
-      NTM_TOP_B_OUT_ENABLE : in std_logic;
+      ACCELERATOR_TOP_B_OUT_ENABLE : in std_logic;
 
-      NTM_TOP_X_IN_ENABLE : out std_logic;
+      ACCELERATOR_TOP_X_IN_ENABLE : out std_logic;
 
-      NTM_TOP_X_OUT_ENABLE : in std_logic;
+      ACCELERATOR_TOP_X_OUT_ENABLE : in std_logic;
 
-      NTM_TOP_P_IN_I_ENABLE : out std_logic;
-      NTM_TOP_P_IN_Y_ENABLE : out std_logic;
-      NTM_TOP_P_IN_K_ENABLE : out std_logic;
+      ACCELERATOR_TOP_P_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_TOP_P_IN_Y_ENABLE : out std_logic;
+      ACCELERATOR_TOP_P_IN_K_ENABLE : out std_logic;
 
-      NTM_TOP_P_OUT_I_ENABLE : in std_logic;
-      NTM_TOP_P_OUT_Y_ENABLE : in std_logic;
-      NTM_TOP_P_OUT_K_ENABLE : in std_logic;
+      ACCELERATOR_TOP_P_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_TOP_P_OUT_Y_ENABLE : in std_logic;
+      ACCELERATOR_TOP_P_OUT_K_ENABLE : in std_logic;
 
-      NTM_TOP_Q_IN_Y_ENABLE : out std_logic;
-      NTM_TOP_Q_IN_L_ENABLE : out std_logic;
+      ACCELERATOR_TOP_Q_IN_Y_ENABLE : out std_logic;
+      ACCELERATOR_TOP_Q_IN_L_ENABLE : out std_logic;
 
-      NTM_TOP_Q_OUT_Y_ENABLE : in std_logic;
-      NTM_TOP_Q_OUT_L_ENABLE : in std_logic;
+      ACCELERATOR_TOP_Q_OUT_Y_ENABLE : in std_logic;
+      ACCELERATOR_TOP_Q_OUT_L_ENABLE : in std_logic;
 
-      NTM_TOP_Y_OUT_ENABLE : in std_logic;
+      ACCELERATOR_TOP_Y_OUT_ENABLE : in std_logic;
 
       -- DATA
-      NTM_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_Y_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_Y_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_TOP_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_TOP_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_TOP_P_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_Q_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_P_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_TOP_Q_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_TOP_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      ACCELERATOR_TOP_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

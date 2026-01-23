@@ -47,12 +47,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/lstm/convolutional/ntm_controller.h"
-#include "../../../../library/nn/lstm/convolutional/ntm_forget_gate_vector.h"
-#include "../../../../library/nn/lstm/convolutional/ntm_hidden_gate_vector.h"
-#include "../../../../library/nn/lstm/convolutional/ntm_input_gate_vector.h"
-#include "../../../../library/nn/lstm/convolutional/ntm_output_gate_vector.h"
-#include "../../../../library/nn/lstm/convolutional/ntm_state_gate_vector.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_controller.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_forget_gate_vector.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_hidden_gate_vector.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_input_gate_vector.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_output_gate_vector.h"
+#include "../../../../library/nn/lstm/convolutional/accelerator_state_gate_vector.h"
 
 int main() {
   srand(time(NULL));
@@ -66,19 +66,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_controller_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_controller_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_controller_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_controller_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_controller_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

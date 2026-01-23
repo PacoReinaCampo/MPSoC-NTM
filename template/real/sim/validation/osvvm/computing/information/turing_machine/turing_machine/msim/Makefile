@@ -49,7 +49,7 @@ build:
 	vcom -2008 -f system.f
 
 simulate:
-	vsim -c -do run.do work.ntm_testbench
+	vsim -c -do run.do work.accelerator_testbench
 
 clean:
 	rm -rf work transcript

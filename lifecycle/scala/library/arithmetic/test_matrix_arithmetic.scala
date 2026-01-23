@@ -44,19 +44,19 @@
 
 import scala.util.Random
 
-import matrix.ntm_matrix_arithmetic
+import matrix.accelerator_matrix_arithmetic
 
 object test_matrix_arithmetic {
   def main(args: Array[String]): Unit = {
     val data_a_in: Double = Random.nextDouble()
     val data_b_in: Double = Random.nextDouble()
 
-    assert(ntm_matrix_arithmetic.ntm_matrix_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
+    assert(accelerator_matrix_arithmetic.accelerator_matrix_adder(data_a_in, data_b_in) == data_a_in + data_b_in)
 
-    assert(ntm_matrix_arithmetic.ntm_matrix_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
+    assert(accelerator_matrix_arithmetic.accelerator_matrix_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in)
 
-    assert(ntm_matrix_arithmetic.ntm_matrix_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
+    assert(accelerator_matrix_arithmetic.accelerator_matrix_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in)
 
-    assert(ntm_matrix_arithmetic.ntm_matrix_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
+    assert(accelerator_matrix_arithmetic.accelerator_matrix_divider(data_a_in, data_b_in) == data_a_in / data_b_in)
   }
 }

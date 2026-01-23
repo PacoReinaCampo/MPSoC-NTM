@@ -1,166 +1,166 @@
 library
 ├── algebra
 │   ├── matrix
-│   │   └── ntm_matrix_algebra.adb
+│   │   └── accelerator_matrix_algebra.adb
 │   ├── scalar
-│   │   └── ntm_scalar_algebra.adb
+│   │   └── accelerator_scalar_algebra.adb
 │   ├── tensor
-│   │   └── ntm_tensor_algebra.adb
+│   │   └── accelerator_tensor_algebra.adb
 │   └── vector
-│       └── ntm_vector_algebra.adb
+│       └── accelerator_vector_algebra.adb
 ├── arithmetic
 │   ├── matrix
-│   │   └── ntm_matrix_arithmetic.adb
+│   │   └── accelerator_matrix_arithmetic.adb
 │   ├── scalar
-│   │   └── ntm_scalar_arithmetic.adb
+│   │   └── accelerator_scalar_arithmetic.adb
 │   ├── tensor
-│   │   └── ntm_tensor_arithmetic.adb
+│   │   └── accelerator_tensor_arithmetic.adb
 │   └── vector
-│       └── ntm_vector_arithmetic.adb
+│       └── accelerator_vector_arithmetic.adb
 ├── math
 │   ├── matrix
-│   │   └── ntm_matrix_math.adb
+│   │   └── accelerator_matrix_math.adb
 │   ├── scalar
-│   │   └── ntm_scalar_math.adb
+│   │   └── accelerator_scalar_math.adb
 │   └── vector
-│       └── ntm_vector_math.adb
+│       └── accelerator_vector_math.adb
 ├── nn
 │   ├── ann
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.adb
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.adb
-│   │   │   ├── ntm_multi_head_attention.adb
-│   │   │   └── ntm_scaled_dot_product_attention.adb
+│   │   │   ├── accelerator_masked_multi_head_attention.adb
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.adb
+│   │   │   ├── accelerator_multi_head_attention.adb
+│   │   │   └── accelerator_scaled_dot_product_attention.adb
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.adb
+│   │   │   │   └── accelerator_fnn.adb
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.adb
+│   │   │       └── accelerator_lstm.adb
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.adb
-│   │   │   └── ntm_positional_encoding.adb
+│   │   │   ├── accelerator_layer_norm.adb
+│   │   │   └── accelerator_positional_encoding.adb
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.adb
-│   │   │   ├── ntm_keys_vector.adb
-│   │   │   ├── ntm_queries_vector.adb
-│   │   │   └── ntm_values_vector.adb
+│   │   │   ├── accelerator_inputs_vector.adb
+│   │   │   ├── accelerator_keys_vector.adb
+│   │   │   ├── accelerator_queries_vector.adb
+│   │   │   └── accelerator_values_vector.adb
 │   │   └── top
-│   │       ├── ntm_controller.adb
-│   │       ├── ntm_decoder.adb
-│   │       └── ntm_encoder.adb
+│   │       ├── accelerator_controller.adb
+│   │       ├── accelerator_decoder.adb
+│   │       └── accelerator_encoder.adb
 │   ├── dnc
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.adb
-│   │   │   ├── dnc_allocation_weighting.adb
-│   │   │   ├── dnc_backward_weighting.adb
-│   │   │   ├── dnc_forward_weighting.adb
-│   │   │   ├── dnc_matrix_content_based_addressing.adb
-│   │   │   ├── dnc_memory_matrix.adb
-│   │   │   ├── dnc_memory_retention_vector.adb
-│   │   │   ├── dnc_precedence_weighting.adb
-│   │   │   ├── dnc_sort_vector.adb
-│   │   │   ├── dnc_temporal_link_matrix.adb
-│   │   │   ├── dnc_usage_vector.adb
-│   │   │   └── dnc_vector_content_based_addressing.adb
+│   │   │   ├── accelerator_addressing.adb
+│   │   │   ├── accelerator_allocation_weighting.adb
+│   │   │   ├── accelerator_backward_weighting.adb
+│   │   │   ├── accelerator_forward_weighting.adb
+│   │   │   ├── accelerator_matrix_content_based_addressing.adb
+│   │   │   ├── accelerator_memory_matrix.adb
+│   │   │   ├── accelerator_memory_retention_vector.adb
+│   │   │   ├── accelerator_precedence_weighting.adb
+│   │   │   ├── accelerator_sort_vector.adb
+│   │   │   ├── accelerator_temporal_link_matrix.adb
+│   │   │   ├── accelerator_usage_vector.adb
+│   │   │   └── accelerator_vector_content_based_addressing.adb
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.adb
-│   │   │   ├── dnc_read_vectors.adb
-│   │   │   └── dnc_read_weighting.adb
+│   │   │   ├── accelerator_read_content_weighting.adb
+│   │   │   ├── accelerator_read_vectors.adb
+│   │   │   └── accelerator_read_weighting.adb
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.adb
-│   │   │   ├── dnc_interface_top.adb
-│   │   │   ├── dnc_interface_vector.adb
-│   │   │   ├── dnc_output_vector.adb
-│   │   │   └── dnc_top.adb
+│   │   │   ├── accelerator_interface_matrix.adb
+│   │   │   ├── accelerator_interface_top.adb
+│   │   │   ├── accelerator_interface_vector.adb
+│   │   │   ├── accelerator_output_vector.adb
+│   │   │   └── accelerator_top.adb
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.adb
+│   │   │   └── accelerator_trained_top.adb
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.adb
-│   │       └── dnc_write_weighting.adb
+│   │       ├── accelerator_write_content_weighting.adb
+│   │       └── accelerator_write_weighting.adb
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.adb
+│   │   │   └── accelerator_controller.adb
 │   │   └── standard
-│   │       └── ntm_controller.adb
+│   │       └── accelerator_controller.adb
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.adb
-│   │   │   ├── ntm_controller.adb
-│   │   │   ├── ntm_forget_gate_vector.adb
-│   │   │   ├── ntm_hidden_gate_vector.adb
-│   │   │   ├── ntm_input_gate_vector.adb
-│   │   │   ├── ntm_output_gate_vector.adb
-│   │   │   └── ntm_state_gate_vector.adb
+│   │   │   ├── accelerator_activation_gate_vector.adb
+│   │   │   ├── accelerator_controller.adb
+│   │   │   ├── accelerator_forget_gate_vector.adb
+│   │   │   ├── accelerator_hidden_gate_vector.adb
+│   │   │   ├── accelerator_input_gate_vector.adb
+│   │   │   ├── accelerator_output_gate_vector.adb
+│   │   │   └── accelerator_state_gate_vector.adb
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.adb
-│   │       ├── ntm_controller.adb
-│   │       ├── ntm_forget_gate_vector.adb
-│   │       ├── ntm_hidden_gate_vector.adb
-│   │       ├── ntm_input_gate_vector.adb
-│   │       ├── ntm_output_gate_vector.adb
-│   │       └── ntm_state_gate_vector.adb
+│   │       ├── accelerator_activation_gate_vector.adb
+│   │       ├── accelerator_controller.adb
+│   │       ├── accelerator_forget_gate_vector.adb
+│   │       ├── accelerator_hidden_gate_vector.adb
+│   │       ├── accelerator_input_gate_vector.adb
+│   │       ├── accelerator_output_gate_vector.adb
+│   │       └── accelerator_state_gate_vector.adb
 │   └── ntm
 │       ├── memory
-│       │   ├── ntm_addressing.adb
-│       │   ├── ntm_matrix_content_based_addressing.adb
-│       │   └── ntm_vector_content_based_addressing.adb
+│       │   ├── accelerator_addressing.adb
+│       │   ├── accelerator_matrix_content_based_addressing.adb
+│       │   └── accelerator_vector_content_based_addressing.adb
 │       ├── read_heads
-│       │   └── ntm_reading.adb
+│       │   └── accelerator_reading.adb
 │       ├── top
-│       │   ├── ntm_interface_matrix.adb
-│       │   ├── ntm_interface_top.adb
-│       │   ├── ntm_interface_vector.adb
-│       │   ├── ntm_output_vector.adb
-│       │   └── ntm_top.adb
+│       │   ├── accelerator_interface_matrix.adb
+│       │   ├── accelerator_interface_top.adb
+│       │   ├── accelerator_interface_vector.adb
+│       │   ├── accelerator_output_vector.adb
+│       │   └── accelerator_top.adb
 │       ├── trained
-│       │   └── ntm_trained_top.adb
+│       │   └── accelerator_trained_top.adb
 │       └── write_heads
-│           ├── ntm_erasing.adb
-│           └── ntm_writing.adb
+│           ├── accelerator_erasing.adb
+│           └── accelerator_writing.adb
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.adb
-    │   └── ntm_vector_controller_differentiation.adb
+    │   ├── accelerator_matrix_controller_differentiation.adb
+    │   └── accelerator_vector_controller_differentiation.adb
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.adb
-    │   ├── ntm_fnn_d_trainer.adb
-    │   ├── ntm_fnn_k_trainer.adb
-    │   ├── ntm_fnn_trainer.adb
-    │   ├── ntm_fnn_u_trainer.adb
-    │   ├── ntm_fnn_v_trainer.adb
-    │   └── ntm_fnn_w_trainer.adb
+    │   ├── accelerator_fnn_b_trainer.adb
+    │   ├── accelerator_fnn_d_trainer.adb
+    │   ├── accelerator_fnn_k_trainer.adb
+    │   ├── accelerator_fnn_trainer.adb
+    │   ├── accelerator_fnn_u_trainer.adb
+    │   ├── accelerator_fnn_v_trainer.adb
+    │   └── accelerator_fnn_w_trainer.adb
     └── lstm
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.adb
-        │   ├── ntm_lstm_activation_d_trainer.adb
-        │   ├── ntm_lstm_activation_k_trainer.adb
-        │   ├── ntm_lstm_activation_trainer.adb
-        │   ├── ntm_lstm_activation_u_trainer.adb
-        │   ├── ntm_lstm_activation_v_trainer.adb
-        │   └── ntm_lstm_activation_w_trainer.adb
+        │   ├── accelerator_lstm_activation_b_trainer.adb
+        │   ├── accelerator_lstm_activation_d_trainer.adb
+        │   ├── accelerator_lstm_activation_k_trainer.adb
+        │   ├── accelerator_lstm_activation_trainer.adb
+        │   ├── accelerator_lstm_activation_u_trainer.adb
+        │   ├── accelerator_lstm_activation_v_trainer.adb
+        │   └── accelerator_lstm_activation_w_trainer.adb
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.adb
-        │   ├── ntm_lstm_forget_d_trainer.adb
-        │   ├── ntm_lstm_forget_k_trainer.adb
-        │   ├── ntm_lstm_forget_trainer.adb
-        │   ├── ntm_lstm_forget_u_trainer.adb
-        │   ├── ntm_lstm_forget_v_trainer.adb
-        │   └── ntm_lstm_forget_w_trainer.adb
+        │   ├── accelerator_lstm_forget_b_trainer.adb
+        │   ├── accelerator_lstm_forget_d_trainer.adb
+        │   ├── accelerator_lstm_forget_k_trainer.adb
+        │   ├── accelerator_lstm_forget_trainer.adb
+        │   ├── accelerator_lstm_forget_u_trainer.adb
+        │   ├── accelerator_lstm_forget_v_trainer.adb
+        │   └── accelerator_lstm_forget_w_trainer.adb
         ├── input
-        │   ├── ntm_lstm_input_b_trainer.adb
-        │   ├── ntm_lstm_input_d_trainer.adb
-        │   ├── ntm_lstm_input_k_trainer.adb
-        │   ├── ntm_lstm_input_trainer.adb
-        │   ├── ntm_lstm_input_u_trainer.adb
-        │   ├── ntm_lstm_input_v_trainer.adb
-        │   └── ntm_lstm_input_w_trainer.adb
+        │   ├── accelerator_lstm_input_b_trainer.adb
+        │   ├── accelerator_lstm_input_d_trainer.adb
+        │   ├── accelerator_lstm_input_k_trainer.adb
+        │   ├── accelerator_lstm_input_trainer.adb
+        │   ├── accelerator_lstm_input_u_trainer.adb
+        │   ├── accelerator_lstm_input_v_trainer.adb
+        │   └── accelerator_lstm_input_w_trainer.adb
         └── output
-            ├── ntm_lstm_output_b_trainer.adb
-            ├── ntm_lstm_output_d_trainer.adb
-            ├── ntm_lstm_output_k_trainer.adb
-            ├── ntm_lstm_output_trainer.adb
-            ├── ntm_lstm_output_u_trainer.adb
-            ├── ntm_lstm_output_v_trainer.adb
-            └── ntm_lstm_output_w_trainer.adb
+            ├── accelerator_lstm_output_b_trainer.adb
+            ├── accelerator_lstm_output_d_trainer.adb
+            ├── accelerator_lstm_output_k_trainer.adb
+            ├── accelerator_lstm_output_trainer.adb
+            ├── accelerator_lstm_output_u_trainer.adb
+            ├── accelerator_lstm_output_v_trainer.adb
+            └── accelerator_lstm_output_w_trainer.adb
 
 49 directories, 114 files

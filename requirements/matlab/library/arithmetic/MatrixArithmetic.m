@@ -44,7 +44,7 @@
 
 classdef MatrixArithmetic
   methods
-    function DATA_OUT = ntm_matrix_adder(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_matrix_adder(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
@@ -60,7 +60,7 @@ classdef MatrixArithmetic
       end
     end
 
-    function DATA_OUT = ntm_matrix_subtractor(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_matrix_subtractor(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
@@ -76,7 +76,7 @@ classdef MatrixArithmetic
       end
     end
 
-    function DATA_OUT = ntm_matrix_multiplier(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_matrix_multiplier(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);
@@ -92,7 +92,7 @@ classdef MatrixArithmetic
       end
     end
 
-    function DATA_OUT = ntm_matrix_divider(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_matrix_divider(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN] = size(DATA_B_IN);

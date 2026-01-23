@@ -46,7 +46,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/math/ntm_math.hpp"
+#include "../../../library/math/accelerator_math.hpp"
 
 int main() {
   vector<double> data_in{6.3226113886226751, 3.1313826152262876, 8.3512687816132226};
@@ -55,11 +55,11 @@ int main() {
 
   data_out = {0.9982079678583020, 0.9581688450893644, 0.9997639589554603};
 
-  assert(ntm_vector_logistic_function(data_in) == data_out);
+  assert(accelerator_vector_logistic_function(data_in) == data_out);
 
   data_out = {7.324405028374851, 4.174113884283648, 9.351504850519834};
 
-  assert(ntm_vector_oneplus_function(data_in) == data_out);
+  assert(accelerator_vector_oneplus_function(data_in) == data_out);
 
   vector<vector<double>> data_in{
       {3.0, 1.0, 2.0},
@@ -72,11 +72,11 @@ int main() {
 
   data_out = {2.0, 1.0, 4.0};
 
-  assert(ntm_vector_mean_function(data_in) == data_out);
+  assert(accelerator_vector_mean_function(data_in) == data_out);
 
   data_out = {8.679477710861024, 11.372481406154654, 6.879922480183431};
 
-  assert(ntm_vector_deviation_function(data_in, mean) == data_out);
+  assert(accelerator_vector_deviation_function(data_in, mean) == data_out);
 
   return 0;
 }

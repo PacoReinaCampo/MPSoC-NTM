@@ -46,7 +46,7 @@
 # DNC-Read-Heads Sources
 #####################################################################
 
-SOURCES_READ_HEADS =	../../../../library/nn/dnc/dnc_controller.hpp \
-			../../../../library/nn/dnc/read_heads/dnc_read_content_weighting.cpp \
-			../../../../library/nn/dnc/read_heads/dnc_read_vectors.cpp \
-			../../../../library/nn/dnc/read_heads/dnc_read_weighting.cpp
+SOURCES_READ_HEADS =	../../../../library/nn/dnc/accelerator_controller.hpp \
+			../../../../library/nn/dnc/read_heads/accelerator_read_content_weighting.cpp \
+			../../../../library/nn/dnc/read_heads/accelerator_read_vectors.cpp \
+			../../../../library/nn/dnc/read_heads/accelerator_read_weighting.cpp

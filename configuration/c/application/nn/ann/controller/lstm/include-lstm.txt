@@ -46,5 +46,5 @@
 # ANN-LSTM Sources
 #####################################################################
 
-SOURCES_LSTM =	../../../../../library/nn/ann/controller/lstm/ntm_lstm.h \
-		../../../../../library/nn/ann/controller/lstm/ntm_lstm.c
+SOURCES_LSTM =	../../../../../library/nn/ann/controller/lstm/accelerator_lstm.h \
+		../../../../../library/nn/ann/controller/lstm/accelerator_lstm.c

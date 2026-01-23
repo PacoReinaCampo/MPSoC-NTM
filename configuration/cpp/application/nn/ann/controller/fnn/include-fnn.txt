@@ -47,4 +47,4 @@
 #####################################################################
 
 SOURCES_FNN =	../../../../../library/nn/ann/ann_controller.hpp \
-		../../../../../library/nn/ann/controller/fnn/ntm_fnn.cpp
+		../../../../../library/nn/ann/controller/fnn/accelerator_fnn.cpp

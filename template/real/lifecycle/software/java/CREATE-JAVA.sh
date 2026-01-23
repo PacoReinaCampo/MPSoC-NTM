@@ -1,6 +1,6 @@
-touch code/classes/philosophers/ntm_philosophers.java
-touch code/classes/soldiers/ntm_soldiers.java
-touch code/classes/workers/ntm_workers.java
+touch code/classes/philosophers/accelerator_philosophers.java
+touch code/classes/soldiers/accelerator_soldiers.java
+touch code/classes/workers/accelerator_workers.java
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.java
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.java
 touch code/computing/advanced_computer_architecture/processing_unit/misd.java

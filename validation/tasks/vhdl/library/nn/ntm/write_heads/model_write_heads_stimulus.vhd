@@ -64,35 +64,35 @@ entity model_write_heads_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    NTM_WRITE_HEADS_START : out std_logic;
-    NTM_WRITE_HEADS_READY : in  std_logic;
+    ACCELERATOR_WRITE_HEADS_START : out std_logic;
+    ACCELERATOR_WRITE_HEADS_READY : in  std_logic;
 
-    NTM_WRITE_HEADS_M_IN_J_ENABLE : out std_logic;
-    NTM_WRITE_HEADS_M_IN_K_ENABLE : out std_logic;
+    ACCELERATOR_WRITE_HEADS_M_IN_J_ENABLE : out std_logic;
+    ACCELERATOR_WRITE_HEADS_M_IN_K_ENABLE : out std_logic;
 
-    NTM_WRITE_HEADS_W_IN_I_ENABLE : out std_logic;
-    NTM_WRITE_HEADS_W_IN_J_ENABLE : out std_logic;
+    ACCELERATOR_WRITE_HEADS_W_IN_I_ENABLE : out std_logic;
+    ACCELERATOR_WRITE_HEADS_W_IN_J_ENABLE : out std_logic;
 
-    NTM_WRITE_HEADS_A_IN_ENABLE : out std_logic;
+    ACCELERATOR_WRITE_HEADS_A_IN_ENABLE : out std_logic;
 
-    NTM_WRITE_HEADS_W_OUT_I_ENABLE : in std_logic;
-    NTM_WRITE_HEADS_W_OUT_J_ENABLE : in std_logic;
+    ACCELERATOR_WRITE_HEADS_W_OUT_I_ENABLE : in std_logic;
+    ACCELERATOR_WRITE_HEADS_W_OUT_J_ENABLE : in std_logic;
 
-    NTM_WRITE_HEADS_A_OUT_ENABLE : in std_logic;
+    ACCELERATOR_WRITE_HEADS_A_OUT_ENABLE : in std_logic;
 
-    NTM_WRITE_HEADS_M_OUT_J_ENABLE : in std_logic;
-    NTM_WRITE_HEADS_M_OUT_K_ENABLE : in std_logic;
+    ACCELERATOR_WRITE_HEADS_M_OUT_J_ENABLE : in std_logic;
+    ACCELERATOR_WRITE_HEADS_M_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    NTM_WRITE_HEADS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_WRITE_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_WRITE_HEADS_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_WRITE_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    ACCELERATOR_WRITE_HEADS_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_WRITE_HEADS_M_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    ACCELERATOR_WRITE_HEADS_M_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -168,18 +168,18 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_NTM_WRITE_HEADS_TEST) then
+    if (STIMULUS_ACCELERATOR_WRITE_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_WRITE_HEADS_TEST                    ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_0                  ";
+      MONITOR_TEST <= "ACCELERATOR_WRITE_HEADS_TEST                    ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_1                  ";
+      MONITOR_CASE <= "ACCELERATOR_WRITE_HEADS_CASE_0                  ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "ACCELERATOR_WRITE_HEADS_CASE_1                  ";
       -------------------------------------------------------------------
 
     end if;

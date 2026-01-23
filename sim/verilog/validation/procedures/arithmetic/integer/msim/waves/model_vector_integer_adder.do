@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR INTEGER ADDER TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_integer_testbench/model_vector_integer_adder_test/vector_integer_adder/CLK

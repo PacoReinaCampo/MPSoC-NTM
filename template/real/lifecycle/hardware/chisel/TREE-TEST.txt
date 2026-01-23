@@ -2,11 +2,11 @@ src/test
 └── scala
     ├── classes
     │   ├── philosophers
-    │   │   └── ntm_philosophers_test.scala
+    │   │   └── accelerator_philosophers_test.scala
     │   ├── soldiers
-    │   │   └── ntm_soldiers_test.scala
+    │   │   └── accelerator_soldiers_test.scala
     │   └── workers
-    │       └── ntm_workers_test.scala
+    │       └── accelerator_workers_test.scala
     └── computing
         ├── advanced_computer_architecture
         │   ├── multi_processor_system_on_chip

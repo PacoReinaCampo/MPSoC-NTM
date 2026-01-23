@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/vector/subtractor/ntm_design.vhd
-vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/vector/subtractor/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/vector/subtractor/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/application/arithmetic/vector/subtractor/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/ntm_model.vhd
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/osvvm/library/arithmetic/vector/subtractor/accelerator_testbench.vhd

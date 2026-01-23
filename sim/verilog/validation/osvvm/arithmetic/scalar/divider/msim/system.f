@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/arithmetic/scalar/divider/ntm_design.vhd
-../../../../../../../../validation/osvvm/application/arithmetic/scalar/divider/ntm_design_pkg.vhd
+../../../../../../../../validation/osvvm/application/arithmetic/scalar/divider/accelerator_design.vhd
+../../../../../../../../validation/osvvm/application/arithmetic/scalar/divider/accelerator_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/ntm_model.vhd
-../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/ntm_model_pkg.vhd
+../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/accelerator_model.vhd
+../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/accelerator_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/ntm_testbench.vhd
+../../../../../../../../validation/osvvm/library/arithmetic/scalar/divider/accelerator_testbench.vhd

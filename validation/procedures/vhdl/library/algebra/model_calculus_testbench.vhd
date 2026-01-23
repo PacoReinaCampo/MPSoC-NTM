@@ -58,43 +58,43 @@ entity model_calculus_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_TEST         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGRATION_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SOFTMAX_TEST         : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_CASE_0         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SOFTMAX_CASE_0         : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_CASE_1         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SOFTMAX_CASE_1         : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_TEST         : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGRATION_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SOFTMAX_TEST         : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_CASE_0         : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SOFTMAX_CASE_0         : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_CASE_1         : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SOFTMAX_CASE_1         : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_DIFFERENTIATION_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGRATION_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_SOFTMAX_TEST         : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGRATION_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_SOFTMAX_TEST         : boolean := false;
 
-    ENABLE_NTM_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGRATION_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_SOFTMAX_CASE_0         : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_SOFTMAX_CASE_0         : boolean := false;
 
-    ENABLE_NTM_TENSOR_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGRATION_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_SOFTMAX_CASE_1         : boolean := false
+    ENABLE_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_SOFTMAX_CASE_1         : boolean := false
     );
 end model_calculus_testbench;
 
@@ -562,7 +562,7 @@ begin
       );
 
   -- VECTOR DIFFERENTIATION
-  model_vector_differentiation_test : if (ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST) generate
+  model_vector_differentiation_test : if (ENABLE_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST) generate
     vector_differentiation : model_vector_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -592,7 +592,7 @@ begin
   end generate model_vector_differentiation_test;
 
   -- VECTOR INTEGRATION
-  model_vector_integration_test : if (ENABLE_NTM_VECTOR_INTEGRATION_TEST) generate
+  model_vector_integration_test : if (ENABLE_ACCELERATOR_VECTOR_INTEGRATION_TEST) generate
     VECTOR_INTEGRATION : model_vector_integration
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -622,7 +622,7 @@ begin
   end generate model_vector_integration_test;
 
   -- VECTOR SOFTMAX
-  model_vector_softmax_test : if (ENABLE_NTM_VECTOR_SOFTMAX_TEST) generate
+  model_vector_softmax_test : if (ENABLE_ACCELERATOR_VECTOR_SOFTMAX_TEST) generate
     VECTOR_SOFTMAX : model_vector_softmax
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -699,7 +699,7 @@ begin
   end process vector_assertion;
 
   -- MATRIX DIFFERENTIATION
-  model_matrix_differentiation_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
+  model_matrix_differentiation_test : if (ENABLE_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST) generate
     matrix_differentiation : model_matrix_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -736,7 +736,7 @@ begin
   end generate model_matrix_differentiation_test;
 
   -- MATRIX INTEGRATION
-  model_matrix_integration_test : if (ENABLE_NTM_MATRIX_INTEGRATION_TEST) generate
+  model_matrix_integration_test : if (ENABLE_ACCELERATOR_MATRIX_INTEGRATION_TEST) generate
     matrix_integration : model_matrix_integration
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -843,7 +843,7 @@ begin
   end process matrix_assertion;
 
   -- MATRIX SOFTMAX
-  model_matrix_softmax_test : if (ENABLE_NTM_MATRIX_SOFTMAX_TEST) generate
+  model_matrix_softmax_test : if (ENABLE_ACCELERATOR_MATRIX_SOFTMAX_TEST) generate
     matrix_softmax : model_matrix_softmax
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -876,7 +876,7 @@ begin
   end generate model_matrix_softmax_test;
 
   -- TENSOR DIFFERENTIATION
-  model_tensor_differentiation_test : if (ENABLE_NTM_TENSOR_DIFFERENTIATION_TEST) generate
+  model_tensor_differentiation_test : if (ENABLE_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST) generate
     tensor_differentiation : model_tensor_differentiation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -918,7 +918,7 @@ begin
   end generate model_tensor_differentiation_test;
 
   -- TENSOR INTEGRATION
-  model_tensor_integration_test : if (ENABLE_NTM_TENSOR_INTEGRATION_TEST) generate
+  model_tensor_integration_test : if (ENABLE_ACCELERATOR_TENSOR_INTEGRATION_TEST) generate
     tensor_integration : model_tensor_integration
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -956,7 +956,7 @@ begin
   end generate model_tensor_integration_test;
 
   -- TENSOR SOFTMAX
-  model_tensor_softmax_test : if (ENABLE_NTM_TENSOR_SOFTMAX_TEST) generate
+  model_tensor_softmax_test : if (ENABLE_ACCELERATOR_TENSOR_SOFTMAX_TEST) generate
     tensor_softmax : model_tensor_softmax
       generic map (
         DATA_SIZE    => DATA_SIZE,

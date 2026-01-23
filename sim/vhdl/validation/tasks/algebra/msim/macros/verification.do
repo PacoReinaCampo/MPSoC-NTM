@@ -11,23 +11,23 @@ mkdir wlf
 ##################################################################################################
 
 ##################################################################################################
-# NTM_VECTOR_DIFFERENTIATION_TEST 
+# ACCELERATOR_VECTOR_DIFFERENTIATION_TEST 
 ##################################################################################################
 
 alias model_vector_differentiation_verification_compilation {
-  echo "TEST: NTM_VECTOR_DIFFERENTIATION_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_DIFFERENTIATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -36,23 +36,23 @@ alias model_vector_differentiation_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_INTEGRATION_TEST 
+# ACCELERATOR_VECTOR_INTEGRATION_TEST 
 ##################################################################################################
 
 alias model_vector_integration_verification_compilation {
-  echo "TEST: NTM_VECTOR_INTEGRATION_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_INTEGRATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_VECTOR_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_VECTOR_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_INTEGRATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -61,23 +61,23 @@ alias model_vector_integration_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_SOFTMAX_TEST 
+# ACCELERATOR_VECTOR_SOFTMAX_TEST 
 ##################################################################################################
 
 alias model_vector_softmax_verification_compilation {
-  echo "TEST: NTM_VECTOR_SOFTMAX_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_SOFTMAX_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_VECTOR_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_VECTOR_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_SOFTMAX_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_VECTOR_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -86,23 +86,23 @@ alias model_vector_softmax_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_DIFFERENTIATION_TEST 
+# ACCELERATOR_MATRIX_DIFFERENTIATION_TEST 
 ##################################################################################################
 
 alias model_matrix_differentiation_verification_compilation {
-  echo "TEST: NTM_MATRIX_DIFFERENTIATION_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_DIFFERENTIATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -111,23 +111,23 @@ alias model_matrix_differentiation_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_INTEGRATION_TEST 
+# ACCELERATOR_MATRIX_INTEGRATION_TEST 
 ##################################################################################################
 
 alias model_matrix_integration_verification_compilation {
-  echo "TEST: NTM_MATRIX_INTEGRATION_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_INTEGRATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_MATRIX_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_MATRIX_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_INTEGRATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -136,23 +136,23 @@ alias model_matrix_integration_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_SOFTMAX_TEST 
+# ACCELERATOR_MATRIX_SOFTMAX_TEST 
 ##################################################################################################
 
 alias model_matrix_softmax_verification_compilation {
-  echo "TEST: NTM_MATRIX_SOFTMAX_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_SOFTMAX_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_MATRIX_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_MATRIX_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_SOFTMAX_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_MATRIX_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -161,23 +161,23 @@ alias model_matrix_softmax_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_DIFFERENTIATION_TEST 
+# ACCELERATOR_TENSOR_DIFFERENTIATION_TEST 
 ##################################################################################################
 
 alias model_tensor_differentiation_verification_compilation {
-  echo "TEST: NTM_TENSOR_DIFFERENTIATION_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_DIFFERENTIATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_TENSOR_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_DIFFERENTIATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -186,23 +186,23 @@ alias model_tensor_differentiation_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_INTEGRATION_TEST 
+# ACCELERATOR_TENSOR_INTEGRATION_TEST 
 ##################################################################################################
 
 alias model_tensor_integration_verification_compilation {
-  echo "TEST: NTM_TENSOR_INTEGRATION_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_INTEGRATION_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_TENSOR_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_TENSOR_INTEGRATION_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_INTEGRATION_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_INTEGRATION_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -211,23 +211,23 @@ alias model_tensor_integration_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_SOFTMAX_TEST 
+# ACCELERATOR_TENSOR_SOFTMAX_TEST 
 ##################################################################################################
 
 alias model_tensor_softmax_verification_compilation {
-  echo "TEST: NTM_TENSOR_SOFTMAX_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_SOFTMAX_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/calculus/model_calculus_testbench.vhd
 
-  vsim -g /model_calculus_testbench/ENABLE_NTM_TENSOR_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
+  vsim -g /model_calculus_testbench/ENABLE_ACCELERATOR_TENSOR_SOFTMAX_TEST=true -t ps +notimingchecks -L unisim work.model_calculus_testbench
 
   #MACROS
   add log -r sim:/model_calculus_testbench/*
 
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_SOFTMAX_TEST true 0
-  force -freeze sim:/model_calculus_pkg/STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0 true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_TEST true 0
+  force -freeze sim:/model_calculus_pkg/STIMULUS_ACCELERATOR_TENSOR_SOFTMAX_CASE_0 true 0
 
   onbreak {resume}
   run -all

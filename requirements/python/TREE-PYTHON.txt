@@ -1,233 +1,233 @@
 library
 ├── algebra
 │   ├── matrix
-│   │   ├── ntm_matrix_convolution.py
-│   │   ├── ntm_matrix_differentiation.py
-│   │   ├── ntm_matrix_integration.py
-│   │   ├── ntm_matrix_inverse.py
-│   │   ├── ntm_matrix_multiplication.py
-│   │   ├── ntm_matrix_product.py
-│   │   ├── ntm_matrix_softmax.py
-│   │   ├── ntm_matrix_summation.py
-│   │   ├── ntm_matrix_transpose.py
-│   │   ├── ntm_matrix_vector_convolution.py
-│   │   ├── ntm_matrix_vector_product.py
-│   │   └── ntm_transpose_vector_product.py
+│   │   ├── accelerator_matrix_convolution.py
+│   │   ├── accelerator_matrix_differentiation.py
+│   │   ├── accelerator_matrix_integration.py
+│   │   ├── accelerator_matrix_inverse.py
+│   │   ├── accelerator_matrix_multiplication.py
+│   │   ├── accelerator_matrix_product.py
+│   │   ├── accelerator_matrix_softmax.py
+│   │   ├── accelerator_matrix_summation.py
+│   │   ├── accelerator_matrix_transpose.py
+│   │   ├── accelerator_matrix_vector_convolution.py
+│   │   ├── accelerator_matrix_vector_product.py
+│   │   └── accelerator_transpose_vector_product.py
 │   ├── scalar
-│   │   ├── ntm_scalar_multiplication.py
-│   │   └── ntm_scalar_summation.py
+│   │   ├── accelerator_scalar_multiplication.py
+│   │   └── accelerator_scalar_summation.py
 │   ├── tensor
-│   │   ├── ntm_tensor_convolution.py
-│   │   ├── ntm_tensor_differentiation.py
-│   │   ├── ntm_tensor_integration.py
-│   │   ├── ntm_tensor_inverse.py
-│   │   ├── ntm_tensor_matrix_convolution.py
-│   │   ├── ntm_tensor_matrix_product.py
-│   │   ├── ntm_tensor_multiplication.py
-│   │   ├── ntm_tensor_product.py
-│   │   ├── ntm_tensor_softmax.py
-│   │   ├── ntm_tensor_summation.py
-│   │   └── ntm_tensor_transpose.py
+│   │   ├── accelerator_tensor_convolution.py
+│   │   ├── accelerator_tensor_differentiation.py
+│   │   ├── accelerator_tensor_integration.py
+│   │   ├── accelerator_tensor_inverse.py
+│   │   ├── accelerator_tensor_matrix_convolution.py
+│   │   ├── accelerator_tensor_matrix_product.py
+│   │   ├── accelerator_tensor_multiplication.py
+│   │   ├── accelerator_tensor_product.py
+│   │   ├── accelerator_tensor_softmax.py
+│   │   ├── accelerator_tensor_summation.py
+│   │   └── accelerator_tensor_transpose.py
 │   └── vector
-│       ├── ntm_dot_product.py
-│       ├── ntm_vector_convolution.py
-│       ├── ntm_vector_cosine_similarity.py
-│       ├── ntm_vector_differentiation.py
-│       ├── ntm_vector_integration.py
-│       ├── ntm_vector_module.py
-│       ├── ntm_vector_multiplication.py
-│       ├── ntm_vector_softmax.py
-│       └── ntm_vector_summation.py
+│       ├── accelerator_dot_product.py
+│       ├── accelerator_vector_convolution.py
+│       ├── accelerator_vector_cosine_similarity.py
+│       ├── accelerator_vector_differentiation.py
+│       ├── accelerator_vector_integration.py
+│       ├── accelerator_vector_module.py
+│       ├── accelerator_vector_multiplication.py
+│       ├── accelerator_vector_softmax.py
+│       └── accelerator_vector_summation.py
 ├── arithmetic
 │   ├── matrix
 │   │   ├── adder
-│   │   │   └── ntm_matrix_adder.py
+│   │   │   └── accelerator_matrix_adder.py
 │   │   ├── divider
-│   │   │   └── ntm_matrix_divider.py
+│   │   │   └── accelerator_matrix_divider.py
 │   │   ├── multiplier
-│   │   │   └── ntm_matrix_multiplier.py
+│   │   │   └── accelerator_matrix_multiplier.py
 │   │   └── subtractor
-│   │       └── ntm_matrix_subtractor.py
+│   │       └── accelerator_matrix_subtractor.py
 │   ├── scalar
 │   │   ├── adder
-│   │   │   └── ntm_scalar_adder.py
+│   │   │   └── accelerator_scalar_adder.py
 │   │   ├── divider
-│   │   │   └── ntm_scalar_divider.py
+│   │   │   └── accelerator_scalar_divider.py
 │   │   ├── multiplier
-│   │   │   └── ntm_scalar_multiplier.py
+│   │   │   └── accelerator_scalar_multiplier.py
 │   │   └── subtractor
-│   │       └── ntm_scalar_subtractor.py
+│   │       └── accelerator_scalar_subtractor.py
 │   ├── tensor
 │   │   ├── adder
-│   │   │   └── ntm_tensor_adder.py
+│   │   │   └── accelerator_tensor_adder.py
 │   │   ├── divider
-│   │   │   └── ntm_tensor_divider.py
+│   │   │   └── accelerator_tensor_divider.py
 │   │   ├── multiplier
-│   │   │   └── ntm_tensor_multiplier.py
+│   │   │   └── accelerator_tensor_multiplier.py
 │   │   └── subtractor
-│   │       └── ntm_tensor_subtractor.py
+│   │       └── accelerator_tensor_subtractor.py
 │   └── vector
 │       ├── adder
-│       │   └── ntm_vector_adder.py
+│       │   └── accelerator_vector_adder.py
 │       ├── divider
-│       │   └── ntm_vector_divider.py
+│       │   └── accelerator_vector_divider.py
 │       ├── multiplier
-│       │   └── ntm_vector_multiplier.py
+│       │   └── accelerator_vector_multiplier.py
 │       └── subtractor
-│           └── ntm_vector_subtractor.py
+│           └── accelerator_vector_subtractor.py
 ├── math
 │   ├── matrix
-│   │   ├── ntm_matrix_deviation_function.py
-│   │   ├── ntm_matrix_logistic_function.py
-│   │   ├── ntm_matrix_mean_function.py
-│   │   └── ntm_matrix_oneplus_function.py
+│   │   ├── accelerator_matrix_deviation_function.py
+│   │   ├── accelerator_matrix_logistic_function.py
+│   │   ├── accelerator_matrix_mean_function.py
+│   │   └── accelerator_matrix_oneplus_function.py
 │   ├── scalar
-│   │   ├── ntm_scalar_deviation_function.py
-│   │   ├── ntm_scalar_logistic_function.py
-│   │   ├── ntm_scalar_mean_function.py
-│   │   └── ntm_scalar_oneplus_function.py
+│   │   ├── accelerator_scalar_deviation_function.py
+│   │   ├── accelerator_scalar_logistic_function.py
+│   │   ├── accelerator_scalar_mean_function.py
+│   │   └── accelerator_scalar_oneplus_function.py
 │   └── vector
-│       ├── ntm_vector_deviation_function.py
-│       ├── ntm_vector_logistic_function.py
-│       ├── ntm_vector_mean_function.py
-│       └── ntm_vector_oneplus_function.py
+│       ├── accelerator_vector_deviation_function.py
+│       ├── accelerator_vector_logistic_function.py
+│       ├── accelerator_vector_mean_function.py
+│       └── accelerator_vector_oneplus_function.py
 ├── nn
 │   ├── ann
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.py
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.py
-│   │   │   ├── ntm_multi_head_attention.py
-│   │   │   └── ntm_scaled_dot_product_attention.py
+│   │   │   ├── accelerator_masked_multi_head_attention.py
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.py
+│   │   │   ├── accelerator_multi_head_attention.py
+│   │   │   └── accelerator_scaled_dot_product_attention.py
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.py
+│   │   │   │   └── accelerator_fnn.py
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.py
+│   │   │       └── accelerator_lstm.py
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.py
-│   │   │   └── ntm_positional_encoding.py
+│   │   │   ├── accelerator_layer_norm.py
+│   │   │   └── accelerator_positional_encoding.py
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.py
-│   │   │   ├── ntm_keys_vector.py
-│   │   │   ├── ntm_queries_vector.py
-│   │   │   └── ntm_values_vector.py
+│   │   │   ├── accelerator_inputs_vector.py
+│   │   │   ├── accelerator_keys_vector.py
+│   │   │   ├── accelerator_queries_vector.py
+│   │   │   └── accelerator_values_vector.py
 │   │   └── top
-│   │       ├── ntm_controller.py
-│   │       ├── ntm_decoder.py
-│   │       └── ntm_encoder.py
+│   │       ├── accelerator_controller.py
+│   │       ├── accelerator_decoder.py
+│   │       └── accelerator_encoder.py
 │   ├── dnc
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.py
-│   │   │   ├── dnc_allocation_weighting.py
-│   │   │   ├── dnc_backward_weighting.py
-│   │   │   ├── dnc_forward_weighting.py
-│   │   │   ├── dnc_matrix_content_based_addressing.py
-│   │   │   ├── dnc_memory_matrix.py
-│   │   │   ├── dnc_memory_retention_vector.py
-│   │   │   ├── dnc_precedence_weighting.py
-│   │   │   ├── dnc_sort_vector.py
-│   │   │   ├── dnc_temporal_link_matrix.py
-│   │   │   ├── dnc_usage_vector.py
-│   │   │   └── dnc_vector_content_based_addressing.py
+│   │   │   ├── accelerator_addressing.py
+│   │   │   ├── accelerator_allocation_weighting.py
+│   │   │   ├── accelerator_backward_weighting.py
+│   │   │   ├── accelerator_forward_weighting.py
+│   │   │   ├── accelerator_matrix_content_based_addressing.py
+│   │   │   ├── accelerator_memory_matrix.py
+│   │   │   ├── accelerator_memory_retention_vector.py
+│   │   │   ├── accelerator_precedence_weighting.py
+│   │   │   ├── accelerator_sort_vector.py
+│   │   │   ├── accelerator_temporal_link_matrix.py
+│   │   │   ├── accelerator_usage_vector.py
+│   │   │   └── accelerator_vector_content_based_addressing.py
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.py
-│   │   │   ├── dnc_read_vectors.py
-│   │   │   └── dnc_read_weighting.py
+│   │   │   ├── accelerator_read_content_weighting.py
+│   │   │   ├── accelerator_read_vectors.py
+│   │   │   └── accelerator_read_weighting.py
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.py
-│   │   │   ├── dnc_interface_top.py
-│   │   │   ├── dnc_interface_vector.py
-│   │   │   ├── dnc_output_vector.py
-│   │   │   └── dnc_top.py
+│   │   │   ├── accelerator_interface_matrix.py
+│   │   │   ├── accelerator_interface_top.py
+│   │   │   ├── accelerator_interface_vector.py
+│   │   │   ├── accelerator_output_vector.py
+│   │   │   └── accelerator_top.py
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.py
+│   │   │   └── accelerator_trained_top.py
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.py
-│   │       └── dnc_write_weighting.py
+│   │       ├── accelerator_write_content_weighting.py
+│   │       └── accelerator_write_weighting.py
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.py
+│   │   │   └── accelerator_controller.py
 │   │   └── standard
-│   │       └── ntm_controller.py
+│   │       └── accelerator_controller.py
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.py
-│   │   │   ├── ntm_controller.py
-│   │   │   ├── ntm_forget_gate_vector.py
-│   │   │   ├── ntm_hidden_gate_vector.py
-│   │   │   ├── ntm_input_gate_vector.py
-│   │   │   ├── ntm_output_gate_vector.py
-│   │   │   └── ntm_state_gate_vector.py
+│   │   │   ├── accelerator_activation_gate_vector.py
+│   │   │   ├── accelerator_controller.py
+│   │   │   ├── accelerator_forget_gate_vector.py
+│   │   │   ├── accelerator_hidden_gate_vector.py
+│   │   │   ├── accelerator_input_gate_vector.py
+│   │   │   ├── accelerator_output_gate_vector.py
+│   │   │   └── accelerator_state_gate_vector.py
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.py
-│   │       ├── ntm_controller.py
-│   │       ├── ntm_forget_gate_vector.py
-│   │       ├── ntm_hidden_gate_vector.py
-│   │       ├── ntm_input_gate_vector.py
-│   │       ├── ntm_output_gate_vector.py
-│   │       └── ntm_state_gate_vector.py
+│   │       ├── accelerator_activation_gate_vector.py
+│   │       ├── accelerator_controller.py
+│   │       ├── accelerator_forget_gate_vector.py
+│   │       ├── accelerator_hidden_gate_vector.py
+│   │       ├── accelerator_input_gate_vector.py
+│   │       ├── accelerator_output_gate_vector.py
+│   │       └── accelerator_state_gate_vector.py
 │   └── ntm
 │       ├── memory
-│       │   ├── ntm_addressing.py
-│       │   ├── ntm_matrix_content_based_addressing.py
-│       │   └── ntm_vector_content_based_addressing.py
+│       │   ├── accelerator_addressing.py
+│       │   ├── accelerator_matrix_content_based_addressing.py
+│       │   └── accelerator_vector_content_based_addressing.py
 │       ├── read_heads
-│       │   └── ntm_reading.py
+│       │   └── accelerator_reading.py
 │       ├── top
-│       │   ├── ntm_interface_matrix.py
-│       │   ├── ntm_interface_top.py
-│       │   ├── ntm_interface_vector.py
-│       │   ├── ntm_output_vector.py
-│       │   └── ntm_top.py
+│       │   ├── accelerator_interface_matrix.py
+│       │   ├── accelerator_interface_top.py
+│       │   ├── accelerator_interface_vector.py
+│       │   ├── accelerator_output_vector.py
+│       │   └── accelerator_top.py
 │       ├── trained
-│       │   └── ntm_trained_top.py
+│       │   └── accelerator_trained_top.py
 │       └── write_heads
-│           ├── ntm_erasing.py
-│           └── ntm_writing.py
+│           ├── accelerator_erasing.py
+│           └── accelerator_writing.py
 └── trainer
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.py
-    │   └── ntm_vector_controller_differentiation.py
+    │   ├── accelerator_matrix_controller_differentiation.py
+    │   └── accelerator_vector_controller_differentiation.py
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.py
-    │   ├── ntm_fnn_d_trainer.py
-    │   ├── ntm_fnn_k_trainer.py
-    │   ├── ntm_fnn_trainer.py
-    │   ├── ntm_fnn_u_trainer.py
-    │   ├── ntm_fnn_v_trainer.py
-    │   └── ntm_fnn_w_trainer.py
+    │   ├── accelerator_fnn_b_trainer.py
+    │   ├── accelerator_fnn_d_trainer.py
+    │   ├── accelerator_fnn_k_trainer.py
+    │   ├── accelerator_fnn_trainer.py
+    │   ├── accelerator_fnn_u_trainer.py
+    │   ├── accelerator_fnn_v_trainer.py
+    │   └── accelerator_fnn_w_trainer.py
     └── lstm
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.py
-        │   ├── ntm_lstm_activation_d_trainer.py
-        │   ├── ntm_lstm_activation_k_trainer.py
-        │   ├── ntm_lstm_activation_trainer.py
-        │   ├── ntm_lstm_activation_u_trainer.py
-        │   ├── ntm_lstm_activation_v_trainer.py
-        │   └── ntm_lstm_activation_w_trainer.py
+        │   ├── accelerator_lstm_activation_b_trainer.py
+        │   ├── accelerator_lstm_activation_d_trainer.py
+        │   ├── accelerator_lstm_activation_k_trainer.py
+        │   ├── accelerator_lstm_activation_trainer.py
+        │   ├── accelerator_lstm_activation_u_trainer.py
+        │   ├── accelerator_lstm_activation_v_trainer.py
+        │   └── accelerator_lstm_activation_w_trainer.py
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.py
-        │   ├── ntm_lstm_forget_d_trainer.py
-        │   ├── ntm_lstm_forget_k_trainer.py
-        │   ├── ntm_lstm_forget_trainer.py
-        │   ├── ntm_lstm_forget_u_trainer.py
-        │   ├── ntm_lstm_forget_v_trainer.py
-        │   └── ntm_lstm_forget_w_trainer.py
+        │   ├── accelerator_lstm_forget_b_trainer.py
+        │   ├── accelerator_lstm_forget_d_trainer.py
+        │   ├── accelerator_lstm_forget_k_trainer.py
+        │   ├── accelerator_lstm_forget_trainer.py
+        │   ├── accelerator_lstm_forget_u_trainer.py
+        │   ├── accelerator_lstm_forget_v_trainer.py
+        │   └── accelerator_lstm_forget_w_trainer.py
         ├── input
-        │   ├── ntm_lstm_input_b_trainer.py
-        │   ├── ntm_lstm_input_d_trainer.py
-        │   ├── ntm_lstm_input_k_trainer.py
-        │   ├── ntm_lstm_input_trainer.py
-        │   ├── ntm_lstm_input_u_trainer.py
-        │   ├── ntm_lstm_input_v_trainer.py
-        │   └── ntm_lstm_input_w_trainer.py
+        │   ├── accelerator_lstm_input_b_trainer.py
+        │   ├── accelerator_lstm_input_d_trainer.py
+        │   ├── accelerator_lstm_input_k_trainer.py
+        │   ├── accelerator_lstm_input_trainer.py
+        │   ├── accelerator_lstm_input_u_trainer.py
+        │   ├── accelerator_lstm_input_v_trainer.py
+        │   └── accelerator_lstm_input_w_trainer.py
         └── output
-            ├── ntm_lstm_output_b_trainer.py
-            ├── ntm_lstm_output_d_trainer.py
-            ├── ntm_lstm_output_k_trainer.py
-            ├── ntm_lstm_output_trainer.py
-            ├── ntm_lstm_output_u_trainer.py
-            ├── ntm_lstm_output_v_trainer.py
-            └── ntm_lstm_output_w_trainer.py
+            ├── accelerator_lstm_output_b_trainer.py
+            ├── accelerator_lstm_output_d_trainer.py
+            ├── accelerator_lstm_output_k_trainer.py
+            ├── accelerator_lstm_output_trainer.py
+            ├── accelerator_lstm_output_u_trainer.py
+            ├── accelerator_lstm_output_v_trainer.py
+            └── accelerator_lstm_output_w_trainer.py
 
 65 directories, 165 files

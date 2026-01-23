@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX LOGARITHM TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX LOGARITHM TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_series_testbench/accelerator_matrix_logarithm_function_test/matrix_logarithm_function/CLK

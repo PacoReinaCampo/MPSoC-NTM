@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-from controller.fnn import ntm_fnn as fnn
-from controller.lstm import ntm_lstm as lstm
+from controller.fnn import accelerator_fnn as fnn
+from controller.lstm import accelerator_lstm as lstm
 
 print('Hello, world!')

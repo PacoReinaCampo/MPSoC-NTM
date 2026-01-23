@@ -47,5 +47,5 @@
 #####################################################################
 
 SOURCES_FUNCTIONS =	../../../../library/nn/ann/ann_controller.hpp \
-			../../../../library/nn/ann/functions/ntm_layer_norm.cpp \
-			../../../../library/nn/ann/functions/ntm_positional_encoding.cpp
+			../../../../library/nn/ann/functions/accelerator_layer_norm.cpp \
+			../../../../library/nn/ann/functions/accelerator_positional_encoding.cpp

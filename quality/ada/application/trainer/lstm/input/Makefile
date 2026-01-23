@@ -48,7 +48,7 @@
 
 -include include-lstm_input_trainer.txt
 
-TARGET=ntm_lstm_input_trainer
+TARGET=accelerator_lstm_input_trainer
 
 #########################################################################
 # Targets

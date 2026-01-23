@@ -1,11 +1,11 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.sv
+│   │   └── accelerator_philosophers.sv
 │   ├── soldiers
-│   │   └── ntm_soldiers.sv
+│   │   └── accelerator_soldiers.sv
 │   └── workers
-│       └── ntm_workers.sv
+│       └── accelerator_workers.sv
 ├── computing
 │   ├── advanced_computer_architecture
 │   │   ├── multi_processor_system_on_chip
@@ -69,9 +69,9 @@ code
 │           └── perceptron_neural_network.sv
 └── pkg
     ├── classes
-    │   ├── ntm_philosophers_pkg.sv
-    │   ├── ntm_soldiers_pkg.sv
-    │   └── ntm_workers_pkg.sv
+    │   ├── accelerator_philosophers_pkg.sv
+    │   ├── accelerator_soldiers_pkg.sv
+    │   └── accelerator_workers_pkg.sv
     └── computing
         └── state_pkg.sv
 

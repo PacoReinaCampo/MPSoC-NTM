@@ -46,17 +46,17 @@
 # LSTM-Activation Sources
 #####################################################################
 
-SOURCES_ACTIVATION =	../../../../library/trainer/lstm/activation/ntm_lstm_activation_b_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_b_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_d_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_d_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_k_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_k_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_u_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_u_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_v_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_v_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_w_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_w_trainer.c \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_trainer.h \
-			../../../../library/trainer/lstm/activation/ntm_lstm_activation_trainer.c
+SOURCES_ACTIVATION =	../../../../library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_d_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_d_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_k_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_k_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_u_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_u_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_v_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_v_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_w_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_w_trainer.c \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_trainer.h \
+			../../../../library/trainer/lstm/activation/accelerator_lstm_activation_trainer.c

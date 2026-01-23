@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/finite_state_machine/finite_state_machine/library/accelerator_testbench.vhd

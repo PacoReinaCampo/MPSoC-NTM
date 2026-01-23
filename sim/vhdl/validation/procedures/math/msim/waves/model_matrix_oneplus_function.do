@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX ONEPLUS TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX ONEPLUS TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_function_testbench/model_matrix_oneplus_function_test/matrix_oneplus_function/CLK

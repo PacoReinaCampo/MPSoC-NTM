@@ -44,17 +44,17 @@
 
 extern crate algebra;
 
-use algebra::tensor::ntm_tensor_convolution::*;
-use algebra::tensor::ntm_tensor_inverse::*;
-use algebra::tensor::ntm_tensor_matrix_convolution::*;
-use algebra::tensor::ntm_tensor_matrix_product::*;
-use algebra::tensor::ntm_tensor_multiplication::*;
-use algebra::tensor::ntm_tensor_product::*;
-use algebra::tensor::ntm_tensor_summation::*;
-use algebra::tensor::ntm_tensor_transpose::*;
-use algebra::tensor::ntm_tensor_differentiation::*;
-use algebra::tensor::ntm_tensor_integration::*;
-use algebra::tensor::ntm_tensor_softmax::*;
+use algebra::tensor::accelerator_tensor_convolution::*;
+use algebra::tensor::accelerator_tensor_inverse::*;
+use algebra::tensor::accelerator_tensor_matrix_convolution::*;
+use algebra::tensor::accelerator_tensor_matrix_product::*;
+use algebra::tensor::accelerator_tensor_multiplication::*;
+use algebra::tensor::accelerator_tensor_product::*;
+use algebra::tensor::accelerator_tensor_summation::*;
+use algebra::tensor::accelerator_tensor_transpose::*;
+use algebra::tensor::accelerator_tensor_differentiation::*;
+use algebra::tensor::accelerator_tensor_integration::*;
+use algebra::tensor::accelerator_tensor_softmax::*;
 
 fn main() {
     let mut data_a_in: Vec<Vec<Vec<f64>>>;
@@ -121,7 +121,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_matrix_product(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_matrix_product(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![
@@ -176,7 +176,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_matrix_convolution(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_matrix_convolution(data_a_in, data_b_in), data_out);
 
     let mut data_a_in:Vec<Vec<Vec<f64>>>;
     let mut data_b_in:Vec<Vec<Vec<f64>>>;
@@ -242,7 +242,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_product(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_product(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![
         vec![
@@ -297,7 +297,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_convolution(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_tensor_convolution(data_a_in, data_b_in), data_out);
 
     let mut data_in: Vec<Vec<Vec<f64>>>;
 
@@ -339,7 +339,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_transpose(data_in), data_out);
+    assert_eq!(accelerator_tensor_transpose(data_in), data_out);
 
     data_in = vec![
         vec![
@@ -381,7 +381,7 @@ fn main() {
 
     let double_reference = &mut reference;
 
-    assert_eq!(ntm_tensor_inverse(double_reference), data_out);
+    assert_eq!(accelerator_tensor_inverse(double_reference), data_out);
 
     let mut data_in: Vec<Vec<Vec<Vec<f64>>>>;
 
@@ -459,7 +459,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_multiplication(data_in), data_out);
+    assert_eq!(accelerator_tensor_multiplication(data_in), data_out);
 
     data_in = vec![
         vec![
@@ -533,7 +533,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_summation(data_in), data_out);
+    assert_eq!(accelerator_tensor_summation(data_in), data_out);
 
     let mut data_in: Vec<Vec<Vec<f64>>>;
 
@@ -575,7 +575,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_differentiation(data_in, 1.0, 1.0, 1.0, 1), data_out);
+    assert_eq!(accelerator_tensor_differentiation(data_in, 1.0, 1.0, 1.0, 1), data_out);
 
     data_in = vec![
         vec![
@@ -613,7 +613,7 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_integration(data_in, 1.0), data_out);
+    assert_eq!(accelerator_tensor_integration(data_in, 1.0), data_out);
 
     data_in = vec![
         vec![
@@ -651,5 +651,5 @@ fn main() {
         ]
     ];
 
-    assert_eq!(ntm_tensor_softmax(data_in), data_out);
+    assert_eq!(accelerator_tensor_softmax(data_in), data_out);
 }

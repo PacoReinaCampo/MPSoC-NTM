@@ -58,34 +58,34 @@ entity model_function_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_LOGISTIC_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_TEST  : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGISTIC_TEST : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0  : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1  : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_ONEPLUS_CASE_1  : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_LOGISTIC_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_TEST  : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGISTIC_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0  : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1  : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_ONEPLUS_CASE_1  : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_LOGISTIC_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_TEST  : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_LOGISTIC_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0  : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1  : boolean := false
+    ENABLE_ACCELERATOR_MATRIX_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_ONEPLUS_CASE_1  : boolean := false
     );
 end model_function_testbench;
 
@@ -313,7 +313,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- SCALAR LOGISTIC
-  model_scalar_logistic_function_test : if (ENABLE_NTM_SCALAR_LOGISTIC_TEST) generate
+  model_scalar_logistic_function_test : if (ENABLE_ACCELERATOR_SCALAR_LOGISTIC_TEST) generate
     scalar_logistic_function : model_scalar_logistic_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -335,7 +335,7 @@ begin
   end generate model_scalar_logistic_function_test;
 
   -- SCALAR ONEPLUS
-  model_scalar_oneplus_function_test : if (ENABLE_NTM_SCALAR_ONEPLUS_TEST) generate
+  model_scalar_oneplus_function_test : if (ENABLE_ACCELERATOR_SCALAR_ONEPLUS_TEST) generate
     scalar_oneplus_function : model_scalar_oneplus_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -378,7 +378,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- VECTOR LOGISTIC
-  model_vector_logistic_function_test : if (ENABLE_NTM_VECTOR_LOGISTIC_TEST) generate
+  model_vector_logistic_function_test : if (ENABLE_ACCELERATOR_VECTOR_LOGISTIC_TEST) generate
     vector_logistic_function : model_vector_logistic_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -405,7 +405,7 @@ begin
   end generate model_vector_logistic_function_test;
 
   -- VECTOR ONEPLUS
-  model_vector_oneplus_function_test : if (ENABLE_NTM_VECTOR_ONEPLUS_TEST) generate
+  model_vector_oneplus_function_test : if (ENABLE_ACCELERATOR_VECTOR_ONEPLUS_TEST) generate
     vector_oneplus_function : model_vector_oneplus_function
       generic map (
 
@@ -471,7 +471,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- MATRIX LOGISTIC
-  model_matrix_logistic_function_test : if (ENABLE_NTM_MATRIX_LOGISTIC_TEST) generate
+  model_matrix_logistic_function_test : if (ENABLE_ACCELERATOR_MATRIX_LOGISTIC_TEST) generate
     matrix_logistic_function : model_matrix_logistic_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -501,7 +501,7 @@ begin
   end generate model_matrix_logistic_function_test;
 
   -- MATRIX ONEPLUS
-  model_matrix_oneplus_function_test : if (ENABLE_NTM_MATRIX_ONEPLUS_TEST) generate
+  model_matrix_oneplus_function_test : if (ENABLE_ACCELERATOR_MATRIX_ONEPLUS_TEST) generate
     matrix_oneplus_function : model_matrix_oneplus_function
       generic map (
         DATA_SIZE    => DATA_SIZE,

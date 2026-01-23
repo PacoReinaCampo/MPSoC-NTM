@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM CONVOLUTIONAL FNN TEST}
+add wave -noupdate -divider {ACCELERATOR CONVOLUTIONAL FNN TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_convolutional_fnn_testbench/accelerator_convolutional_fnn_test/controller/CLK

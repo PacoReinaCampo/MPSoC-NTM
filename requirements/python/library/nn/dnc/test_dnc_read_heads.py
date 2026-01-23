@@ -42,8 +42,8 @@
 ##                                                                               ##
 ###################################################################################
 
-from read_heads import dnc_read_content_weighting as read_content_weighting
-from read_heads import dnc_read_vectors as read_vectors
-from read_heads import dnc_read_weighting as read_weighting
+from read_heads import accelerator_read_content_weighting as read_content_weighting
+from read_heads import accelerator_read_vectors as read_vectors
+from read_heads import accelerator_read_weighting as read_weighting
 
 print('Hello, world!')

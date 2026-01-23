@@ -11,23 +11,23 @@ mkdir wlf
 ##################################################################################################
 
 ##################################################################################################
-# NTM_SCALAR_FIXED_ADDER_TEST 
+# ACCELERATOR_SCALAR_FIXED_ADDER_TEST 
 ##################################################################################################
 
 alias model_scalar_fixed_adder_verification_compilation {
-  echo "TEST: NTM_SCALAR_FIXED_ADDER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_FIXED_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_SCALAR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_SCALAR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_ADDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -36,23 +36,23 @@ alias model_scalar_fixed_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_FIXED_MULTIPLIER_TEST 
+# ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_scalar_fixed_multiplier_verification_compilation {
-  echo "TEST: NTM_SCALAR_FIXED_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_SCALAR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -61,23 +61,23 @@ alias model_scalar_fixed_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_FIXED_DIVIDER_TEST 
+# ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_scalar_fixed_divider_verification_compilation {
-  echo "TEST: NTM_SCALAR_FIXED_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_SCALAR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_DIVIDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -86,23 +86,23 @@ alias model_scalar_fixed_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_FIXED_ADDER_TEST 
+# ACCELERATOR_VECTOR_FIXED_ADDER_TEST 
 ##################################################################################################
 
 alias model_vector_fixed_adder_verification_compilation {
-  echo "TEST: NTM_VECTOR_FIXED_ADDER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_FIXED_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_VECTOR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_VECTOR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_ADDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -111,23 +111,23 @@ alias model_vector_fixed_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_FIXED_MULTIPLIER_TEST 
+# ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_vector_fixed_multiplier_verification_compilation {
-  echo "TEST: NTM_VECTOR_FIXED_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_VECTOR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -136,23 +136,23 @@ alias model_vector_fixed_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_FIXED_DIVIDER_TEST 
+# ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_vector_fixed_divider_verification_compilation {
-  echo "TEST: NTM_VECTOR_FIXED_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_VECTOR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_DIVIDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -161,23 +161,23 @@ alias model_vector_fixed_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_FIXED_ADDER_TEST 
+# ACCELERATOR_MATRIX_FIXED_ADDER_TEST 
 ##################################################################################################
 
 alias model_matrix_fixed_adder_verification_compilation {
-  echo "TEST: NTM_MATRIX_FIXED_ADDER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_FIXED_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_MATRIX_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_MATRIX_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_ADDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -186,23 +186,23 @@ alias model_matrix_fixed_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_FIXED_MULTIPLIER_TEST 
+# ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_matrix_fixed_multiplier_verification_compilation {
-  echo "TEST: NTM_MATRIX_FIXED_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_MATRIX_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -211,23 +211,23 @@ alias model_matrix_fixed_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_FIXED_DIVIDER_TEST 
+# ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_matrix_fixed_divider_verification_compilation {
-  echo "TEST: NTM_MATRIX_FIXED_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_MATRIX_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_DIVIDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -236,23 +236,23 @@ alias model_matrix_fixed_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_FIXED_ADDER_TEST 
+# ACCELERATOR_TENSOR_FIXED_ADDER_TEST 
 ##################################################################################################
 
 alias model_tensor_fixed_adder_verification_compilation {
-  echo "TEST: NTM_TENSOR_FIXED_ADDER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_FIXED_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_TENSOR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_TENSOR_FIXED_ADDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_ADDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -261,23 +261,23 @@ alias model_tensor_fixed_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_FIXED_MULTIPLIER_TEST 
+# ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias model_tensor_fixed_multiplier_verification_compilation {
-  echo "TEST: NTM_TENSOR_FIXED_MULTIPLIER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_TENSOR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -286,23 +286,23 @@ alias model_tensor_fixed_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_FIXED_DIVIDER_TEST 
+# ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST 
 ##################################################################################################
 
 alias model_tensor_fixed_divider_verification_compilation {
-  echo "TEST: NTM_TENSOR_FIXED_DIVIDER_TEST"
+  echo "TEST: ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/fixed/model_fixed_testbench.vhd
 
-  vsim -g /model_fixed_testbench/ENABLE_NTM_TENSOR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
+  vsim -g /model_fixed_testbench/ENABLE_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.model_fixed_testbench
 
   #MACROS
   add log -r sim:/model_fixed_testbench/*
 
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_DIVIDER_TEST true 0
-  force -freeze sim:/model_fixed_pkg/STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_0 true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST true 0
+  force -freeze sim:/model_fixed_pkg/STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all

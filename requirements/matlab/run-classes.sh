@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-cd application/arithmetic; octave ntm_scalar_arithmetic_test.m; cd ../..
-cd application/arithmetic; octave ntm_vector_arithmetic_test.m; cd ../..
-cd application/arithmetic; octave ntm_matrix_arithmetic_test.m; cd ../..
-cd application/arithmetic; octave ntm_tensor_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave accelerator_scalar_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave accelerator_vector_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave accelerator_matrix_arithmetic_test.m; cd ../..
+cd application/arithmetic; octave accelerator_tensor_arithmetic_test.m; cd ../..

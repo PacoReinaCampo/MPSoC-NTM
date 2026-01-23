@@ -46,7 +46,7 @@
 # NTM-Memory Sources
 #####################################################################
 
-SOURCES_MEMORY =	../../../../library/nn/ntm/ntm_controller.hpp \
-			../../../../library/nn/ntm/memory/ntm_addressing.cpp \
-			../../../../library/nn/ntm/memory/ntm_matrix_content_based_addressing.cpp \
-			../../../../library/nn/ntm/memory/ntm_vector_content_based_addressing.cpp
+SOURCES_MEMORY =	../../../../library/nn/ntm/accelerator_controller.hpp \
+			../../../../library/nn/ntm/memory/accelerator_addressing.cpp \
+			../../../../library/nn/ntm/memory/accelerator_matrix_content_based_addressing.cpp \
+			../../../../library/nn/ntm/memory/accelerator_vector_content_based_addressing.cpp

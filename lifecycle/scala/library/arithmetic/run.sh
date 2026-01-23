@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-scalac scalar/ntm_scalar_arithmetic.scala; scalac test_scalar_arithmetic.scala; scala test_scalar_arithmetic
-scalac vector/ntm_vector_arithmetic.scala; scalac test_vector_arithmetic.scala; scala test_vector_arithmetic
-scalac matrix/ntm_matrix_arithmetic.scala; scalac test_matrix_arithmetic.scala; scala test_matrix_arithmetic
-scalac tensor/ntm_tensor_arithmetic.scala; scalac test_tensor_arithmetic.scala; scala test_tensor_arithmetic
+scalac scalar/accelerator_scalar_arithmetic.scala; scalac test_scalar_arithmetic.scala; scala test_scalar_arithmetic
+scalac vector/accelerator_vector_arithmetic.scala; scalac test_vector_arithmetic.scala; scala test_vector_arithmetic
+scalac matrix/accelerator_matrix_arithmetic.scala; scalac test_matrix_arithmetic.scala; scala test_matrix_arithmetic
+scalac tensor/accelerator_tensor_arithmetic.scala; scalac test_tensor_arithmetic.scala; scala test_tensor_arithmetic

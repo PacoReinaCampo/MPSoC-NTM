@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR INTEGER DIVIDER TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR INTEGER DIVIDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_integer_testbench/accelerator_vector_integer_divider_test/vector_integer_divider/CLK

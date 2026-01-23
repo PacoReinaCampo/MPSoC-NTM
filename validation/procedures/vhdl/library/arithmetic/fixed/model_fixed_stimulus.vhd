@@ -419,7 +419,7 @@ begin
     -- SCALAR- FIXED
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_SCALAR_FIXED_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FIXED_ADDER_TEST                                ";
@@ -428,7 +428,7 @@ begin
       -- CONTROL
       SCALAR_FIXED_ADDER_OPERATION <= '0';
 
-      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_ADDER_CASE 0                              ";
@@ -438,7 +438,7 @@ begin
         SCALAR_FIXED_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FIXED_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_ADDER_CASE 1                              ";
@@ -452,13 +452,13 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FIXED_MULTIPLIER_TEST                           ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_MULTIPLIER_CASE 0                         ";
@@ -468,7 +468,7 @@ begin
         SCALAR_FIXED_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FIXED_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_MULTIPLIER_CASE 1                         ";
@@ -482,13 +482,13 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_FIXED_DIVIDER_TEST                              ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_DIVIDER_CASE 0                            ";
@@ -498,7 +498,7 @@ begin
         SCALAR_FIXED_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_FIXED_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_FIXED_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_FIXED_DIVIDER_CASE 1                            ";
@@ -516,7 +516,7 @@ begin
     -- VECTOR- FIXED
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_VECTOR_FIXED_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FIXED_ADDER_TEST                                ";
@@ -528,7 +528,7 @@ begin
       -- DATA
       VECTOR_FIXED_ADDER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_ADDER_CASE 0                              ";
@@ -579,7 +579,7 @@ begin
         end loop VECTOR_FIXED_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_ADDER_CASE 1                              ";
@@ -634,7 +634,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FIXED_MULTIPLIER_TEST                           ";
@@ -643,7 +643,7 @@ begin
       -- DATA
       VECTOR_FIXED_MULTIPLIER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_MULTIPLIER_CASE 0                         ";
@@ -694,7 +694,7 @@ begin
         end loop VECTOR_FIXED_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_MULTIPLIER_CASE 1                         ";
@@ -749,7 +749,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_FIXED_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_FIXED_DIVIDER_TEST                              ";
@@ -758,7 +758,7 @@ begin
       -- DATA
       VECTOR_FIXED_DIVIDER_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_DIVIDER_CASE 0                            ";
@@ -809,7 +809,7 @@ begin
         end loop VECTOR_FIXED_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_FIXED_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_FIXED_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_FIXED_DIVIDER_CASE 1                            ";
@@ -868,7 +868,7 @@ begin
     -- MATRIX- FIXED
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_MATRIX_FIXED_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_FIXED_ADDER_TEST                                ";
@@ -881,7 +881,7 @@ begin
       MATRIX_FIXED_ADDER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FIXED_ADDER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_ADDER_CASE 0                              ";
@@ -952,7 +952,7 @@ begin
         end loop MATRIX_FIXED_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_ADDER_CASE 1                              ";
@@ -1027,7 +1027,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_FIXED_MULTIPLIER_TEST                           ";
@@ -1037,7 +1037,7 @@ begin
       MATRIX_FIXED_MULTIPLIER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FIXED_MULTIPLIER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_MULTIPLIER_CASE 0                         ";
@@ -1108,7 +1108,7 @@ begin
         end loop MATRIX_FIXED_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_MULTIPLIER_CASE 1                         ";
@@ -1183,7 +1183,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_FIXED_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_FIXED_DIVIDER_TEST                              ";
@@ -1193,7 +1193,7 @@ begin
       MATRIX_FIXED_DIVIDER_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_FIXED_DIVIDER_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_DIVIDER_CASE 0                            ";
@@ -1264,7 +1264,7 @@ begin
         end loop MATRIX_FIXED_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_FIXED_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_FIXED_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_FIXED_DIVIDER_CASE 1                            ";
@@ -1343,7 +1343,7 @@ begin
     -- TENSOR- FIXED
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_TENSOR_FIXED_ADDER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FIXED_ADDER_TEST                                ";
@@ -1357,7 +1357,7 @@ begin
       TENSOR_FIXED_ADDER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FIXED_ADDER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_ADDER_CASE 0                              ";
@@ -1450,7 +1450,7 @@ begin
         end loop TENSOR_FIXED_ADDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_ADDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_ADDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_ADDER_CASE 1                              ";
@@ -1547,7 +1547,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FIXED_MULTIPLIER_TEST                           ";
@@ -1558,7 +1558,7 @@ begin
       TENSOR_FIXED_MULTIPLIER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FIXED_MULTIPLIER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_MULTIPLIER_CASE 0                         ";
@@ -1651,7 +1651,7 @@ begin
         end loop TENSOR_FIXED_MULTIPLIER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_MULTIPLIER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_MULTIPLIER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_MULTIPLIER_CASE 1                         ";
@@ -1748,7 +1748,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_FIXED_DIVIDER_TEST) then
+    if (STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_TENSOR_FIXED_DIVIDER_TEST                              ";
@@ -1759,7 +1759,7 @@ begin
       TENSOR_FIXED_DIVIDER_SIZE_J_IN <= FOUR_CONTROL;
       TENSOR_FIXED_DIVIDER_SIZE_K_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_0) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_DIVIDER_CASE 0                            ";
@@ -1852,7 +1852,7 @@ begin
         end loop TENSOR_FIXED_DIVIDER_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_FIXED_DIVIDER_CASE_1) then
+      if (STIMULUS_ACCELERATOR_TENSOR_FIXED_DIVIDER_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_TENSOR_FIXED_DIVIDER_CASE 1                            ";

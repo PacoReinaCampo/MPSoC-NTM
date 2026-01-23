@@ -46,9 +46,9 @@
 # DNC-Top Sources
 #####################################################################
 
-SOURCES_TOP =	../../../../library/nn/dnc/dnc_controller.hpp \
-		../../../../library/nn/dnc/top/dnc_interface_matrix.cpp \
-		../../../../library/nn/dnc/top/dnc_interface_top.cpp \
-		../../../../library/nn/dnc/top/dnc_interface_vector.cpp \
-		../../../../library/nn/dnc/top/dnc_output_vector.cpp \
-		../../../../library/nn/dnc/top/dnc_top.cpp
+SOURCES_TOP =	../../../../library/nn/dnc/accelerator_controller.hpp \
+		../../../../library/nn/dnc/top/accelerator_interface_matrix.cpp \
+		../../../../library/nn/dnc/top/accelerator_interface_top.cpp \
+		../../../../library/nn/dnc/top/accelerator_interface_vector.cpp \
+		../../../../library/nn/dnc/top/accelerator_output_vector.cpp \
+		../../../../library/nn/dnc/top/accelerator_top.cpp

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/tensor/adder/ntm_design.sv
+../../../../../../../../validation/classes/application/arithmetic/tensor/adder/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/tensor/adder/ntm_testbench.sv
+../../../../../../../../validation/classes/library/arithmetic/tensor/adder/accelerator_testbench.sv

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX COSH TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX COSH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_series_testbench/accelerator_matrix_cosh_function_test/matrix_cosh_function/CLK

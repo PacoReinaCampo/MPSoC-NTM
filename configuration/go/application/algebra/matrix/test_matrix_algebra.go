@@ -66,7 +66,7 @@ func main() {
   fmt.Println("data_a_in:", data_a_in)
   fmt.Println("data_b_in:", data_b_in)
 
-  fmt.Println("product: data_a_in * data_b_in: ", ntm_matrix_product(data_a_in, data_b_in))
+  fmt.Println("product: data_a_in * data_b_in: ", accelerator_matrix_product(data_a_in, data_b_in))
 
   var data_in = [][]float64 {
     { 1.0, 0.0, 1.0 },
@@ -76,7 +76,7 @@ func main() {
 
   fmt.Println("data_in:", data_in)
 
-  fmt.Println("transpose: data_in: ", ntm_matrix_transpose(data_in))
+  fmt.Println("transpose: data_in: ", accelerator_matrix_transpose(data_in))
 
   var data_in = [][]float64 {
     { 2.0, 2.0, 2.0 },

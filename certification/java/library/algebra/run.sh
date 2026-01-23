@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-javac scalar/ntm_scalar_algebra.java; javac test_scalar_algebra.java; java test_scalar_algebra
-javac vector/ntm_vector_algebra.java; javac test_vector_algebra.java; java test_vector_algebra
-javac matrix/ntm_matrix_algebra.java; javac test_matrix_algebra.java; java test_matrix_algebra
-javac tensor/ntm_tensor_algebra.java; javac test_tensor_algebra.java; java test_tensor_algebra
+javac scalar/accelerator_scalar_algebra.java; javac test_scalar_algebra.java; java test_scalar_algebra
+javac vector/accelerator_vector_algebra.java; javac test_vector_algebra.java; java test_vector_algebra
+javac matrix/accelerator_matrix_algebra.java; javac test_matrix_algebra.java; java test_matrix_algebra
+javac tensor/accelerator_tensor_algebra.java; javac test_tensor_algebra.java; java test_tensor_algebra

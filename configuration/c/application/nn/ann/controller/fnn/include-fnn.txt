@@ -46,5 +46,5 @@
 # ANN-FNN Sources
 #####################################################################
 
-SOURCES_FNN =	../../../../../library/nn/ann/controller/fnn/ntm_fnn.h \
-		../../../../../library/nn/ann/controller/fnn/ntm_fnn.c
+SOURCES_FNN =	../../../../../library/nn/ann/controller/fnn/accelerator_fnn.h \
+		../../../../../library/nn/ann/controller/fnn/accelerator_fnn.c

@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../validation/osvvm/application/arithmetic/vector/multiplier/ntm_design.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/application/arithmetic/vector/multiplier/ntm_design_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/osvvm/application/arithmetic/vector/multiplier/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../validation/osvvm/application/arithmetic/vector/multiplier/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/ntm_model.vhd
-vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/ntm_model_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/ntm_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/osvvm/library/arithmetic/vector/multiplier/accelerator_testbench.vhd

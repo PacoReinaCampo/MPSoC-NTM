@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR INTEGER ADDER TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_integer_testbench/accelerator_scalar_integer_adder_test/scalar_integer_adder/CLK

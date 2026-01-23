@@ -44,8 +44,8 @@
 
 extern crate algebra;
 
-use algebra::scalar::ntm_scalar_multiplication::*;
-use algebra::scalar::ntm_scalar_summation::*;
+use algebra::scalar::accelerator_scalar_multiplication::*;
+use algebra::scalar::accelerator_scalar_summation::*;
 
 fn main() {
     let mut data_in_0: Vec<f64>;
@@ -60,8 +60,8 @@ fn main() {
     data_out_0 = 12.0;
     data_out_1 = 0.0;
 
-    assert_eq!(ntm_scalar_multiplication(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_multiplication(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_multiplication(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_multiplication(data_in_1), data_out_1);
 
     data_in_0 = vec![3.0, 2.0, 2.0];
     data_in_1 = vec![1.0, 0.0, 0.0];
@@ -69,8 +69,8 @@ fn main() {
     data_out_0 = 7.0;
     data_out_1 = 1.0;
 
-    assert_eq!(ntm_scalar_summation(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_summation(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_summation(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_summation(data_in_1), data_out_1);
 
     let mut data_in_0: Vec<f64>;
     let mut data_in_1: Vec<f64>;
@@ -84,8 +84,8 @@ fn main() {
     data_out_0 = 12.0;
     data_out_1 = 0.0;
 
-    assert_eq!(ntm_scalar_multiplication(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_multiplication(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_multiplication(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_multiplication(data_in_1), data_out_1);
 
     data_in_0 = vec![3.0, 2.0, 2.0];
     data_in_1 = vec![1.0, 0.0, 0.0];
@@ -93,6 +93,6 @@ fn main() {
     data_out_0 = 7.0;
     data_out_1 = 1.0;
 
-    assert_eq!(ntm_scalar_summation(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_summation(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_summation(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_summation(data_in_1), data_out_1);
 }

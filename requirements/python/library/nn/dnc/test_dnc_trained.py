@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-from trained import dnc_trained_top as trained_top
+from trained import accelerator_trained_top as trained_top
 
 print('Hello, world!')

@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/pushdown_automaton/pushdown_automaton/library/accelerator_testbench.vhd

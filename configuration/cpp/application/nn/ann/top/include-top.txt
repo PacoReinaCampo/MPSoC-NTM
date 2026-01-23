@@ -47,6 +47,6 @@
 #####################################################################
 
 SOURCES_TOP =	../../../../library/nn/ann/ann_controller.hpp \
-		../../../../library/nn/ann/top/ntm_decoder.cpp \
-		../../../../library/nn/ann/top/ntm_encoder.cpp \
-		../../../../library/nn/ann/top/ntm_controller.cpp
+		../../../../library/nn/ann/top/accelerator_decoder.cpp \
+		../../../../library/nn/ann/top/accelerator_encoder.cpp \
+		../../../../library/nn/ann/top/accelerator_controller.cpp

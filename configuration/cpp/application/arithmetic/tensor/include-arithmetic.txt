@@ -46,8 +46,8 @@
 # Arithmetic-Tensor Sources
 #####################################################################
 
-SOURCES_ARITHMETIC =	../../../library/arithmetic/ntm_tensor_arithmetic.cpp \
-			../../../library/arithmetic/tensor/adder/ntm_tensor_adder.cpp \
-			../../../library/arithmetic/tensor/subtractor/ntm_tensor_subtractor.cpp \
-			../../../library/arithmetic/tensor/multiplier/ntm_tensor_multiplier.cpp \
-			../../../library/arithmetic/tensor/divider/ntm_tensor_divider.cpp
+SOURCES_ARITHMETIC =	../../../library/arithmetic/accelerator_tensor_arithmetic.cpp \
+			../../../library/arithmetic/tensor/adder/accelerator_tensor_adder.cpp \
+			../../../library/arithmetic/tensor/subtractor/accelerator_tensor_subtractor.cpp \
+			../../../library/arithmetic/tensor/multiplier/accelerator_tensor_multiplier.cpp \
+			../../../library/arithmetic/tensor/divider/accelerator_tensor_divider.cpp

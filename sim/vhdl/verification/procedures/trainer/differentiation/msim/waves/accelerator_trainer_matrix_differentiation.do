@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX TRAINER DIFFERENTIATION TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX TRAINER DIFFERENTIATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_trainer_differentiation_testbench/accelerator_trainer_matrix_differentiation_test/trainer_matrix_differentiation/CLK

@@ -46,5 +46,5 @@
 # NTM-Read-Heads Sources
 #####################################################################
 
-SOURCES_READ_HEADS =	../../../../library/nn/ntm/ntm_controller.hpp \
-			../../../../library/nn/ntm/read_heads/ntm_reading.cpp
+SOURCES_READ_HEADS =	../../../../library/nn/ntm/accelerator_controller.hpp \
+			../../../../library/nn/ntm/read_heads/accelerator_reading.cpp

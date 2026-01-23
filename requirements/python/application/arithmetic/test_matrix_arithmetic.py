@@ -44,7 +44,7 @@
 
 import numpy as np
 
-from matrix import ntm_matrix_arithmetic as matrix_arithmetic
+from matrix import accelerator_matrix_arithmetic as matrix_arithmetic
 
 def test_matrix_arithmetic():
 
@@ -53,13 +53,13 @@ def test_matrix_arithmetic():
 
   arithmetic = matrix_arithmetic.MatrixArithmetic(data_a_in, data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_adder(), data_a_in + data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_matrix_adder(), data_a_in + data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_subtractor(), data_a_in - data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_matrix_subtractor(), data_a_in - data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_multiplier(), data_a_in * data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_matrix_multiplier(), data_a_in * data_b_in)
 
-  np.testing.assert_array_equal(arithmetic.ntm_matrix_divider(), data_a_in / data_b_in)
+  np.testing.assert_array_equal(arithmetic.accelerator_matrix_divider(), data_a_in / data_b_in)
 
 
 test_matrix_arithmetic()

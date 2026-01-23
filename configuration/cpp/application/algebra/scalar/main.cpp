@@ -46,7 +46,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/algebra/ntm_algebra.hpp"
+#include "../../../library/algebra/accelerator_algebra.hpp"
 
 using namespace std;
 
@@ -57,11 +57,11 @@ int main() {
 
   data_out = 7.0;
 
-  assert(ntm_scalar_summation(data_in) == data_out);
+  assert(accelerator_scalar_summation(data_in) == data_out);
 
   data_out = 12.0;
 
-  assert(ntm_scalar_multiplication(data_in) == data_out);
+  assert(accelerator_scalar_multiplication(data_in) == data_out);
 
   return 0;
 }

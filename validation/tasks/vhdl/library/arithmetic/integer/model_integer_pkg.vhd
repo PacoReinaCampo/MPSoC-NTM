@@ -107,80 +107,80 @@ package model_integer_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_2      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_2 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_2    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_2      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_2 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_2    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_3      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_3 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_3    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_3      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_3 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_3    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_4      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_4 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_4    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_4      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_4 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_4    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_5      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_5 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_5    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_5      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_5 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_5    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_6      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_6 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_6    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_6      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_6 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_6    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_7      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_7 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_7    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_7      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_7 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_7    : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

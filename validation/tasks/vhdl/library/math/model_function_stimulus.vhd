@@ -255,13 +255,13 @@ begin
     -- SCALAR-FUNCTION
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_SCALAR_LOGISTIC_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_LOGISTIC_TEST                                   ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_LOGISTIC_CASE 0                                 ";
@@ -270,7 +270,7 @@ begin
         SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_LOGISTIC_CASE 1                                 ";
@@ -283,13 +283,13 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
+    if (STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_SCALAR_ONEPLUS_TEST                                    ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0) then
+      if (STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_ONEPLUS_CASE 0                                  ";
@@ -298,7 +298,7 @@ begin
         SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
-      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1) then
+      if (STIMULUS_ACCELERATOR_SCALAR_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_SCALAR_ONEPLUS_CASE 1                                  ";
@@ -315,7 +315,7 @@ begin
     -- VECTOR-FUNCTION
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_VECTOR_LOGISTIC_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_LOGISTIC_TEST                                   ";
@@ -324,7 +324,7 @@ begin
       -- DATA
       VECTOR_LOGISTIC_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_LOGISTIC_CASE 0                                 ";
@@ -369,7 +369,7 @@ begin
         end loop VECTOR_LOGISTIC_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_LOGISTIC_CASE 1                                 ";
@@ -418,7 +418,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_ONEPLUS_TEST) then
+    if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_VECTOR_ONEPLUS_TEST                                    ";
@@ -427,7 +427,7 @@ begin
       -- DATA
       VECTOR_ONEPLUS_SIZE_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0) then
+      if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_ONEPLUS_CASE 0                                  ";
@@ -472,7 +472,7 @@ begin
         end loop VECTOR_ONEPLUS_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1) then
+      if (STIMULUS_ACCELERATOR_VECTOR_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_VECTOR_ONEPLUS_CASE 1                                  ";
@@ -525,7 +525,7 @@ begin
     -- MATRIX-FUNCTION
     -------------------------------------------------------------------
 
-    if (STIMULUS_NTM_MATRIX_LOGISTIC_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_LOGISTIC_TEST                                   ";
@@ -535,7 +535,7 @@ begin
       MATRIX_LOGISTIC_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_LOGISTIC_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_LOGISTIC_CASE 0                                 ";
@@ -595,7 +595,7 @@ begin
         end loop MATRIX_LOGISTIC_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_LOGISTIC_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_LOGISTIC_CASE 1                                 ";
@@ -659,7 +659,7 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_ONEPLUS_TEST) then
+    if (STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_MODEL_MATRIX_ONEPLUS_TEST                                    ";
@@ -669,7 +669,7 @@ begin
       MATRIX_ONEPLUS_SIZE_I_IN <= FOUR_CONTROL;
       MATRIX_ONEPLUS_SIZE_J_IN <= FOUR_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0) then
+      if (STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_0) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_ONEPLUS_CASE 0                                  ";
@@ -729,7 +729,7 @@ begin
         end loop MATRIX_ONEPLUS_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1) then
+      if (STIMULUS_ACCELERATOR_MATRIX_ONEPLUS_CASE_1) then
 
         -------------------------------------------------------------------
         MONITOR_CASE <= "STIMULUS_MODEL_MATRIX_ONEPLUS_CASE 1                                  ";

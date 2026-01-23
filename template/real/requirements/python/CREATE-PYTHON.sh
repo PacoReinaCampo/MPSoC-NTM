@@ -1,6 +1,6 @@
-touch code/classes/philosophers/ntm_philosophers.py
-touch code/classes/soldiers/ntm_soldiers.py
-touch code/classes/workers/ntm_workers.py
+touch code/classes/philosophers/accelerator_philosophers.py
+touch code/classes/soldiers/accelerator_soldiers.py
+touch code/classes/workers/accelerator_workers.py
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip/multi_processor_system_on_chip.py
 touch code/computing/advanced_computer_architecture/processing_unit/mimd.py
 touch code/computing/advanced_computer_architecture/processing_unit/misd.py

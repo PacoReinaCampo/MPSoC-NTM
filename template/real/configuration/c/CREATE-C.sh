@@ -1,10 +1,10 @@
 touch code/classes
 touch code/classes/philosophers
-touch code/classes/philosophers/ntm_philosophers.c
+touch code/classes/philosophers/accelerator_philosophers.c
 touch code/classes/soldiers
-touch code/classes/soldiers/ntm_soldiers.c
+touch code/classes/soldiers/accelerator_soldiers.c
 touch code/classes/workers
-touch code/classes/workers/ntm_workers.c
+touch code/classes/workers/accelerator_workers.c
 touch code/computing
 touch code/computing/advanced_computer_architecture
 touch code/computing/advanced_computer_architecture/multi_processor_system_on_chip

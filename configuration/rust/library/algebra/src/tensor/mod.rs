@@ -42,14 +42,14 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_tensor_convolution;
-pub mod ntm_tensor_inverse;
-pub mod ntm_tensor_matrix_convolution;
-pub mod ntm_tensor_matrix_product;
-pub mod ntm_tensor_multiplication;
-pub mod ntm_tensor_product;
-pub mod ntm_tensor_summation;
-pub mod ntm_tensor_transpose;
-pub mod ntm_tensor_differentiation;
-pub mod ntm_tensor_integration;
-pub mod ntm_tensor_softmax;
+pub mod accelerator_tensor_convolution;
+pub mod accelerator_tensor_inverse;
+pub mod accelerator_tensor_matrix_convolution;
+pub mod accelerator_tensor_matrix_product;
+pub mod accelerator_tensor_multiplication;
+pub mod accelerator_tensor_product;
+pub mod accelerator_tensor_summation;
+pub mod accelerator_tensor_transpose;
+pub mod accelerator_tensor_differentiation;
+pub mod accelerator_tensor_integration;
+pub mod accelerator_tensor_softmax;

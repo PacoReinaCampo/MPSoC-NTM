@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/bit/bit/library/accelerator_testbench.vhd

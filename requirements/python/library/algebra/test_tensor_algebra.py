@@ -44,69 +44,69 @@
 
 import numpy as np
 
-from tensor import ntm_tensor_convolution as tensor_convolution
-from tensor import ntm_tensor_inverse as tensor_inverse
-from tensor import ntm_tensor_matrix_convolution as tensor_matrix_convolution
-from tensor import ntm_tensor_matrix_product as tensor_matrix_product
-from tensor import ntm_tensor_multiplication as tensor_multiplication
-from tensor import ntm_tensor_product as tensor_product
-from tensor import ntm_tensor_summation as tensor_summation
-from tensor import ntm_tensor_transpose as tensor_transpose
-from tensor import ntm_tensor_differentiation as tensor_differentiation
-from tensor import ntm_tensor_integration as tensor_integration
-from tensor import ntm_tensor_softmax as tensor_softmax
+from tensor import accelerator_tensor_convolution as tensor_convolution
+from tensor import accelerator_tensor_inverse as tensor_inverse
+from tensor import accelerator_tensor_matrix_convolution as tensor_matrix_convolution
+from tensor import accelerator_tensor_matrix_product as tensor_matrix_product
+from tensor import accelerator_tensor_multiplication as tensor_multiplication
+from tensor import accelerator_tensor_product as tensor_product
+from tensor import accelerator_tensor_summation as tensor_summation
+from tensor import accelerator_tensor_transpose as tensor_transpose
+from tensor import accelerator_tensor_differentiation as tensor_differentiation
+from tensor import accelerator_tensor_integration as tensor_integration
+from tensor import accelerator_tensor_softmax as tensor_softmax
 
 def test_tensor_convolution():
 
   data_a_in = np.random.rand(3,3,3)
   data_b_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_convolution.ntm_tensor_convolution(data_a_in, data_b_in), tensor_convolution.ntm_tensor_convolution(data_a_in, data_b_in))
+  np.testing.assert_array_equal(tensor_convolution.accelerator_tensor_convolution(data_a_in, data_b_in), tensor_convolution.accelerator_tensor_convolution(data_a_in, data_b_in))
 
 def test_tensor_inverse():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_inverse.ntm_tensor_inverse(data_in), tensor_inverse.ntm_tensor_inverse(data_in))
+  np.testing.assert_array_equal(tensor_inverse.accelerator_tensor_inverse(data_in), tensor_inverse.accelerator_tensor_inverse(data_in))
 
 def test_tensor_matrix_convolution():
 
   data_a_in = np.random.rand(3,3,3)
   data_b_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(tensor_matrix_convolution.ntm_tensor_matrix_convolution(data_a_in, data_b_in), tensor_matrix_convolution.ntm_tensor_matrix_convolution(data_a_in, data_b_in))
+  np.testing.assert_array_equal(tensor_matrix_convolution.accelerator_tensor_matrix_convolution(data_a_in, data_b_in), tensor_matrix_convolution.accelerator_tensor_matrix_convolution(data_a_in, data_b_in))
 
 def test_tensor_matrix_product():
 
   data_a_in = np.random.rand(3,3,3)
   data_b_in = np.random.rand(3,3)
 
-  np.testing.assert_array_equal(tensor_matrix_product.ntm_tensor_matrix_product(data_a_in, data_b_in), tensor_matrix_product.ntm_tensor_matrix_product(data_a_in, data_b_in))
+  np.testing.assert_array_equal(tensor_matrix_product.accelerator_tensor_matrix_product(data_a_in, data_b_in), tensor_matrix_product.accelerator_tensor_matrix_product(data_a_in, data_b_in))
 
 def test_tensor_multiplication():
 
   data_in = np.random.rand(3,3,3,3)
 
-  np.testing.assert_array_equal(tensor_multiplication.ntm_tensor_multiplication(data_in), tensor_multiplication.ntm_tensor_multiplication(data_in))
+  np.testing.assert_array_equal(tensor_multiplication.accelerator_tensor_multiplication(data_in), tensor_multiplication.accelerator_tensor_multiplication(data_in))
 
 def test_tensor_product():
 
   data_a_in = np.random.rand(3,3,3)
   data_b_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_product.ntm_tensor_product(data_a_in, data_b_in), tensor_product.ntm_tensor_product(data_a_in, data_b_in))
+  np.testing.assert_array_equal(tensor_product.accelerator_tensor_product(data_a_in, data_b_in), tensor_product.accelerator_tensor_product(data_a_in, data_b_in))
 
 def test_tensor_summation():
 
   data_in = np.random.rand(3,3,3,3)
 
-  np.testing.assert_array_equal(tensor_summation.ntm_tensor_summation(data_in), tensor_summation.ntm_tensor_summation(data_in))
+  np.testing.assert_array_equal(tensor_summation.accelerator_tensor_summation(data_in), tensor_summation.accelerator_tensor_summation(data_in))
 
 def test_tensor_transpose():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_transpose.ntm_tensor_transpose(data_in), tensor_transpose.ntm_tensor_transpose(data_in))
+  np.testing.assert_array_equal(tensor_transpose.accelerator_tensor_transpose(data_in), tensor_transpose.accelerator_tensor_transpose(data_in))
 
 def test_tensor_differentiation():
 
@@ -118,7 +118,7 @@ def test_tensor_differentiation():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_differentiation.ntm_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control), tensor_differentiation.ntm_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control))
+  np.testing.assert_array_equal(tensor_differentiation.accelerator_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control), tensor_differentiation.accelerator_tensor_differentiation(data_in, length_i_in, length_j_in, length_k_in, control))
 
 def test_tensor_integration():
 
@@ -126,13 +126,13 @@ def test_tensor_integration():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_integration.ntm_tensor_integration(data_in, length_in), tensor_integration.ntm_tensor_integration(data_in, length_in))
+  np.testing.assert_array_equal(tensor_integration.accelerator_tensor_integration(data_in, length_in), tensor_integration.accelerator_tensor_integration(data_in, length_in))
 
 def test_tensor_softmax():
 
   data_in = np.random.rand(3,3,3)
 
-  np.testing.assert_array_equal(tensor_softmax.ntm_tensor_softmax(data_in), tensor_softmax.ntm_tensor_softmax(data_in))
+  np.testing.assert_array_equal(tensor_softmax.accelerator_tensor_softmax(data_in), tensor_softmax.accelerator_tensor_softmax(data_in))
 
 
 test_tensor_convolution()

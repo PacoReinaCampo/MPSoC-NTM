@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_vector_algebra;
-use ntm_vector_algebra;
+with accelerator_vector_algebra;
+use accelerator_vector_algebra;
 
 procedure test_vector_algebra is
 
@@ -77,7 +77,7 @@ begin
   vector_data_a_in := (1.0, 2.0, 3.0);
   vector_data_b_in := (1.0, 3.0, 3.0);
 
-  ntm_vector_algebra.ntm_dot_product (
+  accelerator_vector_algebra.accelerator_dot_product (
     data_a_in => vector_data_a_in,
     data_b_in => vector_data_b_in,
 
@@ -93,7 +93,7 @@ begin
   vector_data_a_in := (1.0, 2.0, 3.0);
   vector_data_b_in := (1.0, 3.0, 3.0);
 
-  ntm_vector_algebra.ntm_vector_convolution (
+  accelerator_vector_algebra.accelerator_vector_convolution (
     data_a_in => vector_data_a_in,
     data_b_in => vector_data_b_in,
 
@@ -111,7 +111,7 @@ begin
   vector_data_a_in := (4.0, 0.0, 3.0);
   vector_data_b_in := (4.0, 0.0, 3.0);
 
-  ntm_vector_algebra.ntm_vector_cosine_similarity (
+  accelerator_vector_algebra.accelerator_vector_cosine_similarity (
     data_a_in => vector_data_a_in,
     data_b_in => vector_data_b_in,
 
@@ -126,7 +126,7 @@ begin
 
   vector_data_in := (4.0, 0.0, 3.0);
 
-  ntm_vector_algebra.ntm_vector_module (
+  accelerator_vector_algebra.accelerator_vector_module (
     data_in => vector_data_in,
 
     data_out => scalar_data_out
@@ -140,7 +140,7 @@ begin
 
   matrix_data_in := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
-  ntm_vector_algebra.ntm_vector_multiplication (
+  accelerator_vector_algebra.accelerator_vector_multiplication (
     data_in => matrix_data_in,
 
     data_out => vector_data_out
@@ -154,7 +154,7 @@ begin
 
   matrix_data_in := ((2.0, 0.0, 4.0), (2.0, 0.0, 4.0), (2.0, 0.0, 4.0));
 
-  ntm_vector_algebra.ntm_vector_summation (
+  accelerator_vector_algebra.accelerator_vector_summation (
     data_in => matrix_data_in,
 
     data_out => vector_data_out
@@ -166,7 +166,7 @@ begin
     Put(float'Image(vector_data_out(i)));
   end loop;
 
-  ntm_vector_algebra.ntm_vector_differentiation (
+  accelerator_vector_algebra.accelerator_vector_differentiation (
     data_in => data_in,
 
     length_in => length_in,
@@ -182,7 +182,7 @@ begin
 
   New_Line;
 
-  ntm_vector_algebra.ntm_vector_integration (
+  accelerator_vector_algebra.accelerator_vector_integration (
     data_in => data_in,
 
     length_in => length_in,
@@ -198,7 +198,7 @@ begin
 
   New_Line;
 
-  ntm_vector_algebra.ntm_vector_softmax (
+  accelerator_vector_algebra.accelerator_vector_softmax (
     data_in => data_in,
 
     data_out  => data_out

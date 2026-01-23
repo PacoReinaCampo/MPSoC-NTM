@@ -1,162 +1,162 @@
 library
 ├── algebra
-│   ├── ntm_algebra.h
+│   ├── accelerator_algebra.h
 │   ├── matrix
 │   ├── scalar
 │   ├── tensor
 │   └── vector
 ├── arithmetic
-│   ├── ntm_arithmetic.h
+│   ├── accelerator_arithmetic.h
 │   ├── matrix
 │   ├── scalar
 │   ├── tensor
 │   └── vector
 ├── math
-│   ├── ntm_math.h
+│   ├── accelerator_math.h
 │   ├── matrix
 │   ├── scalar
 │   └── vector
 ├── nn
-│   ├── ntm_controller.h
+│   ├── accelerator_controller.h
 │   ├── ann
 │   │   ├── components
-│   │   │   ├── ntm_masked_multi_head_attention.h
-│   │   │   ├── ntm_masked_scaled_dot_product_attention.h
-│   │   │   ├── ntm_multi_head_attention.h
-│   │   │   └── ntm_scaled_dot_product_attention.h
+│   │   │   ├── accelerator_masked_multi_head_attention.h
+│   │   │   ├── accelerator_masked_scaled_dot_product_attention.h
+│   │   │   ├── accelerator_multi_head_attention.h
+│   │   │   └── accelerator_scaled_dot_product_attention.h
 │   │   ├── controller
 │   │   │   ├── fnn
-│   │   │   │   └── ntm_fnn.h
+│   │   │   │   └── accelerator_fnn.h
 │   │   │   └── lstm
-│   │   │       └── ntm_lstm.h
+│   │   │       └── accelerator_lstm.h
 │   │   ├── functions
-│   │   │   ├── ntm_layer_norm.h
-│   │   │   └── ntm_positional_encoding.h
+│   │   │   ├── accelerator_layer_norm.h
+│   │   │   └── accelerator_positional_encoding.h
 │   │   ├── inputs
-│   │   │   ├── ntm_inputs_vector.h
-│   │   │   ├── ntm_keys_vector.h
-│   │   │   ├── ntm_queries_vector.h
-│   │   │   └── ntm_values_vector.h
+│   │   │   ├── accelerator_inputs_vector.h
+│   │   │   ├── accelerator_keys_vector.h
+│   │   │   ├── accelerator_queries_vector.h
+│   │   │   └── accelerator_values_vector.h
 │   │   └── top
-│   │       ├── ntm_controller.h
-│   │       ├── ntm_decoder.h
-│   │       └── ntm_encoder.h
+│   │       ├── accelerator_controller.h
+│   │       ├── accelerator_decoder.h
+│   │       └── accelerator_encoder.h
 │   ├── dnc
 │   │   ├── dnc.h
 │   │   ├── memory
-│   │   │   ├── dnc_addressing.h
-│   │   │   ├── dnc_allocation_weighting.h
-│   │   │   ├── dnc_backward_weighting.h
-│   │   │   ├── dnc_forward_weighting.h
-│   │   │   ├── dnc_matrix_content_based_addressing.h
-│   │   │   ├── dnc_memory_matrix.h
-│   │   │   ├── dnc_memory_retention_vector.h
-│   │   │   ├── dnc_precedence_weighting.h
-│   │   │   ├── dnc_sort_vector.h
-│   │   │   ├── dnc_temporal_link_matrix.h
-│   │   │   ├── dnc_usage_vector.h
-│   │   │   └── dnc_vector_content_based_addressing.h
+│   │   │   ├── accelerator_addressing.h
+│   │   │   ├── accelerator_allocation_weighting.h
+│   │   │   ├── accelerator_backward_weighting.h
+│   │   │   ├── accelerator_forward_weighting.h
+│   │   │   ├── accelerator_matrix_content_based_addressing.h
+│   │   │   ├── accelerator_memory_matrix.h
+│   │   │   ├── accelerator_memory_retention_vector.h
+│   │   │   ├── accelerator_precedence_weighting.h
+│   │   │   ├── accelerator_sort_vector.h
+│   │   │   ├── accelerator_temporal_link_matrix.h
+│   │   │   ├── accelerator_usage_vector.h
+│   │   │   └── accelerator_vector_content_based_addressing.h
 │   │   ├── read_heads
-│   │   │   ├── dnc_read_content_weighting.h
-│   │   │   ├── dnc_read_vectors.h
-│   │   │   └── dnc_read_weighting.h
+│   │   │   ├── accelerator_read_content_weighting.h
+│   │   │   ├── accelerator_read_vectors.h
+│   │   │   └── accelerator_read_weighting.h
 │   │   ├── top
-│   │   │   ├── dnc_interface_matrix.h
-│   │   │   ├── dnc_interface_top.h
-│   │   │   ├── dnc_interface_vector.h
-│   │   │   ├── dnc_output_vector.h
-│   │   │   └── dnc_top.h
+│   │   │   ├── accelerator_interface_matrix.h
+│   │   │   ├── accelerator_interface_top.h
+│   │   │   ├── accelerator_interface_vector.h
+│   │   │   ├── accelerator_output_vector.h
+│   │   │   └── accelerator_top.h
 │   │   ├── trained
-│   │   │   └── dnc_trained_top.h
+│   │   │   └── accelerator_trained_top.h
 │   │   └── write_heads
-│   │       ├── dnc_write_content_weighting.h
-│   │       └── dnc_write_weighting.h
+│   │       ├── accelerator_write_content_weighting.h
+│   │       └── accelerator_write_weighting.h
 │   ├── fnn
 │   │   ├── convolutional
-│   │   │   └── ntm_controller.h
+│   │   │   └── accelerator_controller.h
 │   │   └── standard
-│   │       └── ntm_controller.h
+│   │       └── accelerator_controller.h
 │   ├── lstm
 │   │   ├── convolutional
-│   │   │   ├── ntm_activation_gate_vector.h
-│   │   │   ├── ntm_controller.h
-│   │   │   ├── ntm_forget_gate_vector.h
-│   │   │   ├── ntm_hidden_gate_vector.h
-│   │   │   ├── ntm_input_gate_vector.h
-│   │   │   ├── ntm_output_gate_vector.h
-│   │   │   └── ntm_state_gate_vector.h
+│   │   │   ├── accelerator_activation_gate_vector.h
+│   │   │   ├── accelerator_controller.h
+│   │   │   ├── accelerator_forget_gate_vector.h
+│   │   │   ├── accelerator_hidden_gate_vector.h
+│   │   │   ├── accelerator_input_gate_vector.h
+│   │   │   ├── accelerator_output_gate_vector.h
+│   │   │   └── accelerator_state_gate_vector.h
 │   │   └── standard
-│   │       ├── ntm_activation_gate_vector.h
-│   │       ├── ntm_controller.h
-│   │       ├── ntm_forget_gate_vector.h
-│   │       ├── ntm_hidden_gate_vector.h
-│   │       ├── ntm_input_gate_vector.h
-│   │       ├── ntm_output_gate_vector.h
-│   │       └── ntm_state_gate_vector.h
+│   │       ├── accelerator_activation_gate_vector.h
+│   │       ├── accelerator_controller.h
+│   │       ├── accelerator_forget_gate_vector.h
+│   │       ├── accelerator_hidden_gate_vector.h
+│   │       ├── accelerator_input_gate_vector.h
+│   │       ├── accelerator_output_gate_vector.h
+│   │       └── accelerator_state_gate_vector.h
 │   └── ntm
 │       ├── ntm.h
 │       ├── memory
-│       │   ├── ntm_addressing.h
-│       │   ├── ntm_matrix_content_based_addressing.h
-│       │   └── ntm_vector_content_based_addressing.h
+│       │   ├── accelerator_addressing.h
+│       │   ├── accelerator_matrix_content_based_addressing.h
+│       │   └── accelerator_vector_content_based_addressing.h
 │       ├── read_heads
-│       │   └── ntm_reading.h
+│       │   └── accelerator_reading.h
 │       ├── top
-│       │   ├── ntm_interface_matrix.h
-│       │   ├── ntm_interface_top.h
-│       │   ├── ntm_interface_vector.h
-│       │   ├── ntm_output_vector.h
-│       │   └── ntm_top.h
+│       │   ├── accelerator_interface_matrix.h
+│       │   ├── accelerator_interface_top.h
+│       │   ├── accelerator_interface_vector.h
+│       │   ├── accelerator_output_vector.h
+│       │   └── accelerator_top.h
 │       ├── trained
-│       │   └── ntm_trained_top.h
+│       │   └── accelerator_trained_top.h
 │       └── write_heads
-│           ├── ntm_erasing.h
-│           └── ntm_writing.h
+│           ├── accelerator_erasing.h
+│           └── accelerator_writing.h
 └── trainer
-    ├── ntm_trainer.h
+    ├── accelerator_trainer.h
     ├── differentiation
-    │   ├── ntm_matrix_controller_differentiation.h
-    │   └── ntm_vector_controller_differentiation.h
+    │   ├── accelerator_matrix_controller_differentiation.h
+    │   └── accelerator_vector_controller_differentiation.h
     ├── fnn
-    │   ├── ntm_fnn_b_trainer.h
-    │   ├── ntm_fnn_d_trainer.h
-    │   ├── ntm_fnn_k_trainer.h
-    │   ├── ntm_fnn_trainer.h
-    │   ├── ntm_fnn_u_trainer.h
-    │   ├── ntm_fnn_v_trainer.h
-    │   └── ntm_fnn_w_trainer.h
+    │   ├── accelerator_fnn_b_trainer.h
+    │   ├── accelerator_fnn_d_trainer.h
+    │   ├── accelerator_fnn_k_trainer.h
+    │   ├── accelerator_fnn_trainer.h
+    │   ├── accelerator_fnn_u_trainer.h
+    │   ├── accelerator_fnn_v_trainer.h
+    │   └── accelerator_fnn_w_trainer.h
     └── lstm
         ├── activation
-        │   ├── ntm_lstm_activation_b_trainer.h
-        │   ├── ntm_lstm_activation_d_trainer.h
-        │   ├── ntm_lstm_activation_k_trainer.h
-        │   ├── ntm_lstm_activation_trainer.h
-        │   ├── ntm_lstm_activation_u_trainer.h
-        │   ├── ntm_lstm_activation_v_trainer.h
-        │   └── ntm_lstm_activation_w_trainer.h
+        │   ├── accelerator_lstm_activation_b_trainer.h
+        │   ├── accelerator_lstm_activation_d_trainer.h
+        │   ├── accelerator_lstm_activation_k_trainer.h
+        │   ├── accelerator_lstm_activation_trainer.h
+        │   ├── accelerator_lstm_activation_u_trainer.h
+        │   ├── accelerator_lstm_activation_v_trainer.h
+        │   └── accelerator_lstm_activation_w_trainer.h
         ├── forget
-        │   ├── ntm_lstm_forget_b_trainer.h
-        │   ├── ntm_lstm_forget_d_trainer.h
-        │   ├── ntm_lstm_forget_k_trainer.h
-        │   ├── ntm_lstm_forget_trainer.h
-        │   ├── ntm_lstm_forget_u_trainer.h
-        │   ├── ntm_lstm_forget_v_trainer.h
-        │   └── ntm_lstm_forget_w_trainer.h
+        │   ├── accelerator_lstm_forget_b_trainer.h
+        │   ├── accelerator_lstm_forget_d_trainer.h
+        │   ├── accelerator_lstm_forget_k_trainer.h
+        │   ├── accelerator_lstm_forget_trainer.h
+        │   ├── accelerator_lstm_forget_u_trainer.h
+        │   ├── accelerator_lstm_forget_v_trainer.h
+        │   └── accelerator_lstm_forget_w_trainer.h
         ├── input
-        │   ├── ntm_lstm_input_b_trainer.h
-        │   ├── ntm_lstm_input_d_trainer.h
-        │   ├── ntm_lstm_input_k_trainer.h
-        │   ├── ntm_lstm_input_trainer.h
-        │   ├── ntm_lstm_input_u_trainer.h
-        │   ├── ntm_lstm_input_v_trainer.h
-        │   └── ntm_lstm_input_w_trainer.h
+        │   ├── accelerator_lstm_input_b_trainer.h
+        │   ├── accelerator_lstm_input_d_trainer.h
+        │   ├── accelerator_lstm_input_k_trainer.h
+        │   ├── accelerator_lstm_input_trainer.h
+        │   ├── accelerator_lstm_input_u_trainer.h
+        │   ├── accelerator_lstm_input_v_trainer.h
+        │   └── accelerator_lstm_input_w_trainer.h
         └── output
-            ├── ntm_lstm_output_b_trainer.h
-            ├── ntm_lstm_output_d_trainer.h
-            ├── ntm_lstm_output_k_trainer.h
-            ├── ntm_lstm_output_trainer.h
-            ├── ntm_lstm_output_u_trainer.h
-            ├── ntm_lstm_output_v_trainer.h
-            └── ntm_lstm_output_w_trainer.h
+            ├── accelerator_lstm_output_b_trainer.h
+            ├── accelerator_lstm_output_d_trainer.h
+            ├── accelerator_lstm_output_k_trainer.h
+            ├── accelerator_lstm_output_trainer.h
+            ├── accelerator_lstm_output_u_trainer.h
+            ├── accelerator_lstm_output_v_trainer.h
+            └── accelerator_lstm_output_w_trainer.h
 
 49 directories, 110 files

@@ -45,7 +45,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import vector.ntm_vector_algebra;
+import vector.accelerator_vector_algebra;
 
 class test_vector_algebra {
   public static void main(String[] args) {
@@ -60,21 +60,21 @@ class test_vector_algebra {
     double[] addition = new double[data_a_in.length];
     Arrays.setAll(addition, i -> data_a_in[i] + data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_algebra.ntm_vector_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
+    assert Arrays.equals(accelerator_vector_algebra.accelerator_vector_adder(data_a_in, data_b_in), addition) : "Incorrect Addition";
 
     double[] subtraction = new double[data_a_in.length];
     Arrays.setAll(subtraction, i -> data_a_in[i] - data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_algebra.ntm_vector_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
+    assert Arrays.equals(accelerator_vector_algebra.accelerator_vector_subtractor(data_a_in, data_b_in), subtraction) : "Incorrect Subtraction";
 
     double[] multiplication = new double[data_a_in.length];
     Arrays.setAll(multiplication, i -> data_a_in[i] * data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_algebra.ntm_vector_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
+    assert Arrays.equals(accelerator_vector_algebra.accelerator_vector_multiplier(data_a_in, data_b_in), multiplication) : "Incorrect Multiplication";
 
     double[] division = new double[data_a_in.length];
     Arrays.setAll(division, i -> data_a_in[i] / data_b_in[i]);
 
-    assert Arrays.equals(ntm_vector_algebra.ntm_vector_divider(data_a_in, data_b_in), division) : "Incorrect Division";
+    assert Arrays.equals(accelerator_vector_algebra.accelerator_vector_divider(data_a_in, data_b_in), division) : "Incorrect Division";
   }
 }

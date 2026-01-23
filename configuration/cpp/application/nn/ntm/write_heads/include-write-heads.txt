@@ -46,6 +46,6 @@
 # NTM-Write-Heads Sources
 #####################################################################
 
-SOURCES_WRITE_HEADS =	../../../../library/nn/ntm/ntm_controller.hpp \
-			../../../../library/nn/ntm/write_heads/ntm_erasing.cpp \
-			../../../../library/nn/ntm/write_heads/ntm_writing.cpp
+SOURCES_WRITE_HEADS =	../../../../library/nn/ntm/accelerator_controller.hpp \
+			../../../../library/nn/ntm/write_heads/accelerator_erasing.cpp \
+			../../../../library/nn/ntm/write_heads/accelerator_writing.cpp

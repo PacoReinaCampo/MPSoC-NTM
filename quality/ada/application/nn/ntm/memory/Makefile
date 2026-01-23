@@ -48,7 +48,7 @@
 
 -include include-addressing.txt
 
-TARGET=ntm_addressing
+TARGET=accelerator_addressing
 
 #########################################################################
 # Targets

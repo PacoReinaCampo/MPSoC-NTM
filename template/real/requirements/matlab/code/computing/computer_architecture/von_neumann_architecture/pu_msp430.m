@@ -44,22 +44,22 @@
 ###################################################################################
 %}
 
-function DATA_OUT = ntm_scalar_adder(DATA_A_IN, DATA_B_IN)
+function DATA_OUT = accelerator_scalar_adder(DATA_A_IN, DATA_B_IN)
   % Body
   DATA_OUT = DATA_A_IN + DATA_B_IN;
 end
 
-function DATA_OUT = ntm_scalar_subtractor(DATA_A_IN, DATA_B_IN)
+function DATA_OUT = accelerator_scalar_subtractor(DATA_A_IN, DATA_B_IN)
   % Body
   DATA_OUT = DATA_A_IN - DATA_B_IN;
 end
 
-function DATA_OUT = ntm_scalar_multiplier(DATA_A_IN, DATA_B_IN)
+function DATA_OUT = accelerator_scalar_multiplier(DATA_A_IN, DATA_B_IN)
   % Body
   DATA_OUT = DATA_A_IN * DATA_B_IN;
 end
 
-function DATA_OUT = ntm_scalar_divider(DATA_A_IN, DATA_B_IN)
+function DATA_OUT = accelerator_scalar_divider(DATA_A_IN, DATA_B_IN)
   % Body
   DATA_OUT = DATA_A_IN / DATA_B_IN;
 end

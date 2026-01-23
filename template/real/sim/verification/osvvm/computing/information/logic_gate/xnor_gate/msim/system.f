@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/information/logic_gate/xnor_gate/library/accelerator_testbench.vhd

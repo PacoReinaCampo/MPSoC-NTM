@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM STANDARD FNN TEST}
+add wave -noupdate -divider {ACCELERATOR STANDARD FNN TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_standard_fnn_testbench/accelerator_standard_fnn_test/controller/CLK

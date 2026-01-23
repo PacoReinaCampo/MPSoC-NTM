@@ -47,7 +47,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/trainer/lstm/activation/ntm_lstm_activation_trainer.h"
+#include "../../../../library/trainer/lstm/activation/accelerator_lstm_activation_trainer.h"
 
 int main() {
   srand(time(NULL));
@@ -61,19 +61,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(ntm_lstm_activation_trainer_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_activation_trainer_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(ntm_lstm_activation_trainer_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_activation_trainer_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(ntm_lstm_activation_trainer_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_activation_trainer_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(ntm_lstm_activation_trainer_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_lstm_activation_trainer_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

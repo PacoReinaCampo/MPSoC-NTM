@@ -42,57 +42,57 @@
 ##                                                                               ##
 ###################################################################################
 
-rm -rf arithmetic/ntm_matrix_arithmetic.run
-rm -rf arithmetic/ntm_scalar_arithmetic.run
-rm -rf arithmetic/ntm_tensor_arithmetic.run
-rm -rf arithmetic/ntm_vector_arithmetic.run
+rm -rf arithmetic/accelerator_matrix_arithmetic.run
+rm -rf arithmetic/accelerator_scalar_arithmetic.run
+rm -rf arithmetic/accelerator_tensor_arithmetic.run
+rm -rf arithmetic/accelerator_vector_arithmetic.run
 
-rm -rf algebra/ntm_matrix_algebra.run
-rm -rf algebra/ntm_scalar_algebra.run
-rm -rf algebra/ntm_tensor_algebra.run
-rm -rf algebra/ntm_vector_algebra.run
+rm -rf algebra/accelerator_matrix_algebra.run
+rm -rf algebra/accelerator_scalar_algebra.run
+rm -rf algebra/accelerator_tensor_algebra.run
+rm -rf algebra/accelerator_vector_algebra.run
 
-rm -rf math/ntm_matrix_math.run
-rm -rf math/ntm_scalar_math.run
-rm -rf math/ntm_vector_math.run
+rm -rf math/accelerator_matrix_math.run
+rm -rf math/accelerator_scalar_math.run
+rm -rf math/accelerator_vector_math.run
 
-rm -rf nn/ntm_fnn_controller.run
-rm -rf nn/ntm_lstm_controller.run
-rm -rf nn/ntm_ann_controller.run
+rm -rf nn/accelerator_fnn_controller.run
+rm -rf nn/accelerator_lstm_controller.run
+rm -rf nn/accelerator_ann_controller.run
 
 rm -rf ntm/ntm.run
 rm -rf dnc/dnc.run
 rm -rf ann/ann.run
 
-rm -rf state/ntm_state.run
+rm -rf state/accelerator_state.run
 
-rm -rf trainer/ntm_fnn.run
-rm -rf trainer/ntm_lstm.run
+rm -rf trainer/accelerator_fnn.run
+rm -rf trainer/accelerator_lstm.run
 
 # x86-64 ISA
-g++ arithmetic/ntm_matrix_arithmetic.cpp -o arithmetic/ntm_matrix_arithmetic.run
-g++ arithmetic/ntm_scalar_arithmetic.cpp -o arithmetic/ntm_scalar_arithmetic.run
-g++ arithmetic/ntm_tensor_arithmetic.cpp -o arithmetic/ntm_tensor_arithmetic.run
-g++ arithmetic/ntm_vector_arithmetic.cpp -o arithmetic/ntm_vector_arithmetic.run
+g++ arithmetic/accelerator_matrix_arithmetic.cpp -o arithmetic/accelerator_matrix_arithmetic.run
+g++ arithmetic/accelerator_scalar_arithmetic.cpp -o arithmetic/accelerator_scalar_arithmetic.run
+g++ arithmetic/accelerator_tensor_arithmetic.cpp -o arithmetic/accelerator_tensor_arithmetic.run
+g++ arithmetic/accelerator_vector_arithmetic.cpp -o arithmetic/accelerator_vector_arithmetic.run
 
-g++ algebra/ntm_matrix_algebra.cpp -o algebra/ntm_matrix_algebra.run
-g++ algebra/ntm_scalar_algebra.cpp -o algebra/ntm_scalar_algebra.run
-g++ algebra/ntm_tensor_algebra.cpp -o algebra/ntm_tensor_algebra.run
-g++ algebra/ntm_vector_algebra.cpp -o algebra/ntm_vector_algebra.run
+g++ algebra/accelerator_matrix_algebra.cpp -o algebra/accelerator_matrix_algebra.run
+g++ algebra/accelerator_scalar_algebra.cpp -o algebra/accelerator_scalar_algebra.run
+g++ algebra/accelerator_tensor_algebra.cpp -o algebra/accelerator_tensor_algebra.run
+g++ algebra/accelerator_vector_algebra.cpp -o algebra/accelerator_vector_algebra.run
 
-g++ math/ntm_matrix_math.cpp -o math/ntm_matrix_math.run
-g++ math/ntm_scalar_math.cpp -o math/ntm_scalar_math.run
-g++ math/ntm_vector_math.cpp -o math/ntm_vector_math.run
+g++ math/accelerator_matrix_math.cpp -o math/accelerator_matrix_math.run
+g++ math/accelerator_scalar_math.cpp -o math/accelerator_scalar_math.run
+g++ math/accelerator_vector_math.cpp -o math/accelerator_vector_math.run
 
-g++ nn/ntm_fnn_controller.cpp -o nn/ntm_fnn_controller.run
-g++ nn/ntm_lstm_controller.cpp -o nn/ntm_lstm_controller.run
-g++ nn/ntm_ann_controller.cpp -o nn/ntm_ann_controller.run
+g++ nn/accelerator_fnn_controller.cpp -o nn/accelerator_fnn_controller.run
+g++ nn/accelerator_lstm_controller.cpp -o nn/accelerator_lstm_controller.run
+g++ nn/accelerator_ann_controller.cpp -o nn/accelerator_ann_controller.run
 
 g++ ntm/ntm.cpp -o ntm/ntm.run
 g++ dnc/dnc.cpp -o dnc/dnc.run
 g++ ann/ann.cpp -o ann/ann.run
 
-#g++ state/ntm_state.cpp -o state/ntm_state.run
+#g++ state/accelerator_state.cpp -o state/accelerator_state.run
 
-g++ trainer/ntm_fnn.cpp -o trainer/ntm_fnn.run
-g++ trainer/ntm_lstm.cpp -o trainer/ntm_lstm.run
+g++ trainer/accelerator_fnn.cpp -o trainer/accelerator_fnn.run
+g++ trainer/accelerator_lstm.cpp -o trainer/accelerator_lstm.run

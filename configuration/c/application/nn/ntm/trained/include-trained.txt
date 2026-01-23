@@ -46,5 +46,5 @@
 # NTM-Trained
 #####################################################################
 
-SOURCES_TRAINED =	../../../../library/nn/ntm/trained/ntm_trained_top.h \
-			../../../../library/nn/ntm/trained/ntm_trained_top.c
+SOURCES_TRAINED =	../../../../library/nn/ntm/trained/accelerator_trained_top.h \
+			../../../../library/nn/ntm/trained/accelerator_trained_top.c

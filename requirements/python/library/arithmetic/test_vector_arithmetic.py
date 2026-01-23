@@ -44,38 +44,38 @@
 
 import numpy as np
 
-from vector.adder import ntm_vector_adder as vector_adder
-from vector.subtractor import ntm_vector_subtractor as vector_subtractor
-from vector.multiplier import ntm_vector_multiplier as vector_multiplier
-from vector.divider import ntm_vector_divider as vector_divider
+from vector.adder import accelerator_vector_adder as vector_adder
+from vector.subtractor import accelerator_vector_subtractor as vector_subtractor
+from vector.multiplier import accelerator_vector_multiplier as vector_multiplier
+from vector.divider import accelerator_vector_divider as vector_divider
 
 def test_vector_adder():
   
   data_a_in = np.random.rand(3,1)
   data_b_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(vector_adder.ntm_vector_adder(data_a_in, data_b_in), data_a_in + data_b_in)
+  np.testing.assert_array_equal(vector_adder.accelerator_vector_adder(data_a_in, data_b_in), data_a_in + data_b_in)
 
 def test_vector_subtractor():
   
   data_a_in = np.random.rand(3,1)
   data_b_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(vector_subtractor.ntm_vector_subtractor(data_a_in, data_b_in), data_a_in - data_b_in)
+  np.testing.assert_array_equal(vector_subtractor.accelerator_vector_subtractor(data_a_in, data_b_in), data_a_in - data_b_in)
 
 def test_vector_multiplier():
   
   data_a_in = np.random.rand(3,1)
   data_b_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(vector_multiplier.ntm_vector_multiplier(data_a_in, data_b_in), data_a_in * data_b_in)
+  np.testing.assert_array_equal(vector_multiplier.accelerator_vector_multiplier(data_a_in, data_b_in), data_a_in * data_b_in)
 
 def test_vector_divider():
   
   data_a_in = np.random.rand(3,1)
   data_b_in = np.random.rand(3,1)
 
-  np.testing.assert_array_equal(vector_divider.ntm_vector_divider(data_a_in, data_b_in), data_a_in / data_b_in)
+  np.testing.assert_array_equal(vector_divider.accelerator_vector_divider(data_a_in, data_b_in), data_a_in / data_b_in)
 
 
 test_vector_adder()

@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR INTEGRATION TEST}
+add wave -noupdate -divider {ACCELERATOR VECTOR INTEGRATION TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_calculus_testbench/model_vector_integration_test/vector_integration/CLK

@@ -46,11 +46,11 @@
 # ANN-Inputs Sources
 #####################################################################
 
-SOURCES_INPUTS =	../../../../library/nn/ann/inputs/ntm_inputs_vector.h \
-			../../../../library/nn/ann/inputs/ntm_inputs_vector.c \
-			../../../../library/nn/ann/inputs/ntm_keys_vector.h \
-			../../../../library/nn/ann/inputs/ntm_keys_vector.c \
-			../../../../library/nn/ann/inputs/ntm_queries_vector.h \
-			../../../../library/nn/ann/inputs/ntm_queries_vector.c \
-			../../../../library/nn/ann/inputs/ntm_values_vector.h \
-			../../../../library/nn/ann/inputs/ntm_values_vector.c
+SOURCES_INPUTS =	../../../../library/nn/ann/inputs/accelerator_inputs_vector.h \
+			../../../../library/nn/ann/inputs/accelerator_inputs_vector.c \
+			../../../../library/nn/ann/inputs/accelerator_keys_vector.h \
+			../../../../library/nn/ann/inputs/accelerator_keys_vector.c \
+			../../../../library/nn/ann/inputs/accelerator_queries_vector.h \
+			../../../../library/nn/ann/inputs/accelerator_queries_vector.c \
+			../../../../library/nn/ann/inputs/accelerator_values_vector.h \
+			../../../../library/nn/ann/inputs/accelerator_values_vector.c

@@ -58,9 +58,9 @@ entity model_read_heads_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_READ_HEADS_TEST   : boolean := false;
-    ENABLE_NTM_READ_HEADS_CASE_0 : boolean := false;
-    ENABLE_NTM_READ_HEADS_CASE_1 : boolean := false
+    ENABLE_ACCELERATOR_READ_HEADS_TEST   : boolean := false;
+    ENABLE_ACCELERATOR_READ_HEADS_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_READ_HEADS_CASE_1 : boolean := false
     );
 end model_read_heads_testbench;
 
@@ -130,33 +130,33 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_READ_HEADS_START => start_reading,
-      NTM_READ_HEADS_READY => ready_reading,
+      ACCELERATOR_READ_HEADS_START => start_reading,
+      ACCELERATOR_READ_HEADS_READY => ready_reading,
 
-      NTM_READ_HEADS_M_IN_J_ENABLE => m_in_j_enable_reading,
-      NTM_READ_HEADS_M_IN_K_ENABLE => m_in_k_enable_reading,
+      ACCELERATOR_READ_HEADS_M_IN_J_ENABLE => m_in_j_enable_reading,
+      ACCELERATOR_READ_HEADS_M_IN_K_ENABLE => m_in_k_enable_reading,
 
-      NTM_READ_HEADS_W_IN_I_ENABLE => w_in_i_enable_reading,
-      NTM_READ_HEADS_W_IN_J_ENABLE => w_in_j_enable_reading,
+      ACCELERATOR_READ_HEADS_W_IN_I_ENABLE => w_in_i_enable_reading,
+      ACCELERATOR_READ_HEADS_W_IN_J_ENABLE => w_in_j_enable_reading,
 
-      NTM_READ_HEADS_M_OUT_J_ENABLE => m_out_j_enable_reading,
-      NTM_READ_HEADS_M_OUT_K_ENABLE => m_out_k_enable_reading,
+      ACCELERATOR_READ_HEADS_M_OUT_J_ENABLE => m_out_j_enable_reading,
+      ACCELERATOR_READ_HEADS_M_OUT_K_ENABLE => m_out_k_enable_reading,
 
-      NTM_READ_HEADS_W_OUT_I_ENABLE => w_out_i_enable_reading,
-      NTM_READ_HEADS_W_OUT_J_ENABLE => w_out_j_enable_reading,
+      ACCELERATOR_READ_HEADS_W_OUT_I_ENABLE => w_out_i_enable_reading,
+      ACCELERATOR_READ_HEADS_W_OUT_J_ENABLE => w_out_j_enable_reading,
 
-      NTM_READ_HEADS_R_OUT_I_ENABLE => r_out_i_enable_reading,
-      NTM_READ_HEADS_R_OUT_K_ENABLE => r_out_k_enable_reading,
+      ACCELERATOR_READ_HEADS_R_OUT_I_ENABLE => r_out_i_enable_reading,
+      ACCELERATOR_READ_HEADS_R_OUT_K_ENABLE => r_out_k_enable_reading,
 
       -- DATA
-      NTM_READ_HEADS_SIZE_R_IN => size_r_in_reading,
-      NTM_READ_HEADS_SIZE_N_IN => size_n_in_reading,
-      NTM_READ_HEADS_SIZE_W_IN => size_w_in_reading,
+      ACCELERATOR_READ_HEADS_SIZE_R_IN => size_r_in_reading,
+      ACCELERATOR_READ_HEADS_SIZE_N_IN => size_n_in_reading,
+      ACCELERATOR_READ_HEADS_SIZE_W_IN => size_w_in_reading,
 
-      NTM_READ_HEADS_W_IN => w_in_reading,
-      NTM_READ_HEADS_M_IN => m_in_reading,
+      ACCELERATOR_READ_HEADS_W_IN => w_in_reading,
+      ACCELERATOR_READ_HEADS_M_IN => m_in_reading,
 
-      NTM_READ_HEADS_R_OUT => r_out_reading
+      ACCELERATOR_READ_HEADS_R_OUT => r_out_reading
       );
 
   -- READING

@@ -58,7 +58,7 @@ func main() {
   fmt.Println("data_a_in:", data_a_in)
   fmt.Println("data_b_in:", data_b_in)
 
-  fmt.Println("dot_product: data_a_in * data_b_in: ", ntm_dot_product(data_a_in, data_b_in))
+  fmt.Println("dot_product: data_a_in * data_b_in: ", accelerator_dot_product(data_a_in, data_b_in))
 
   var data_a_in = []float64 { 4.0, 0.0, 3.0 }
   var data_b_in = []float64 { 4.0, 0.0, 3.0 }
@@ -66,13 +66,13 @@ func main() {
   fmt.Println("data_a_in:", data_a_in)
   fmt.Println("data_b_in:", data_b_in)
 
-  fmt.Println("vector_cosine_similarity: data_a_in * data_b_in: ", ntm_vector_cosine_similarity(data_a_in, data_b_in))
+  fmt.Println("vector_cosine_similarity: data_a_in * data_b_in: ", accelerator_vector_cosine_similarity(data_a_in, data_b_in))
 
   var data_in = []float64 { 4.0, 0.0, 3.0 }
 
   fmt.Println("data_in:", data_in)
 
-  fmt.Println("vector_module: data_in * data_b_in: ", ntm_vector_module(data_in))
+  fmt.Println("vector_module: data_in * data_b_in: ", accelerator_vector_module(data_in))
 
   var data_in = []float64 { 2.0, 0.0, 4.0 }
 

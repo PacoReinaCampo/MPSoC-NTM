@@ -46,7 +46,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/math/ntm_math.hpp"
+#include "../../../library/math/accelerator_math.hpp"
 
 using namespace std;
 
@@ -75,7 +75,7 @@ int main() {
        {-2.009346206396506, 2.181879072291935, -1.65812160105327780},
        {5.684942785632134, 2.644907157571142, -3.6933832216044853}}};
 
-  assert(ntm_tensor_differentiation(data_in, 1.0, 1.0, 1.0, 1) == data_out);
+  assert(accelerator_tensor_differentiation(data_in, 1.0, 1.0, 1.0, 1) == data_out);
 
   data_out = {
       {{6.322611388622675, 9.453994003848962, 17.805262785462183},
@@ -88,7 +88,7 @@ int main() {
        {4.313265182226169, 9.626526869744392, 16.319674050304336},
        {9.998207967858303, 17.956376812947667, 20.956140771903126}}};
 
-  assert(ntm_tensor_integration(data_in, 1.0) == data_out);
+  assert(accelerator_tensor_integration(data_in, 1.0) == data_out);
 
   data_out = {
       {{0.0181052491311145360, 0.0007445115822270013, 0.1376699696282669000},
@@ -101,7 +101,7 @@ int main() {
        {0.0008091616303415002, 0.0021995216693443080, 0.00874188119964758800},
        {0.2382179936210978000, 0.0309739668075453730, 0.00021756495815398801}}};
 
-  assert(ntm_tensor_softmax(data_in) == data_out);
+  assert(accelerator_tensor_softmax(data_in) == data_out);
 
   return 0;
 }

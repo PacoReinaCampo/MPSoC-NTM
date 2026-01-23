@@ -46,7 +46,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../../library/algebra/ntm_algebra.h"
+#include "../../../library/algebra/accelerator_algebra.h"
 
 int main() {
   double **data_a_in;
@@ -121,7 +121,7 @@ int main() {
   data_out[3][2] = 30.0;
   data_out[3][3] = 16.0;
 
-  assert(ntm_matrix_product(data_a_in, data_b_in) == **data_out);
+  assert(accelerator_matrix_product(data_a_in, data_b_in) == **data_out);
 
   data_in[0][0] = 1.0;
   data_in[0][1] = 1.0;
@@ -143,7 +143,7 @@ int main() {
   data_out[2][1] = -0.25;
   data_out[2][2] = -0.25;
 
-  assert(ntm_matrix_inverse(data_in) == **data_out);
+  assert(accelerator_matrix_inverse(data_in) == **data_out);
 
   data_in[0][0] = 1.0;
   data_in[0][1] = 1.0;
@@ -165,7 +165,7 @@ int main() {
   data_out[2][1] = -4.0;
   data_out[2][2] = -4.0;
 
-  assert(ntm_matrix_transpose(data_in) == **data_out);
+  assert(accelerator_matrix_transpose(data_in) == **data_out);
 
   free(data_a_in);
   free(data_b_in);

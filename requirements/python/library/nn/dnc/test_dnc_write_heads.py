@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-from write_heads import dnc_write_content_weighting as write_content_weighting
-from write_heads import dnc_write_weighting as write_weighting
+from write_heads import accelerator_write_content_weighting as write_content_weighting
+from write_heads import accelerator_write_weighting as write_weighting
 
 print('Hello, world!')

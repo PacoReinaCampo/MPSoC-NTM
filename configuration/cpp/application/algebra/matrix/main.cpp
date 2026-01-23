@@ -48,7 +48,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../../library/math/ntm_math.hpp"
+#include "../../../library/math/accelerator_math.hpp"
 
 using namespace std;
 
@@ -66,21 +66,21 @@ int main() {
       {0.0, 0.9999965052920539, 1.3798854930417228},
       {0.0, -2.0400391227689383, -4.9584048861339040}};
 
-  assert(ntm_matrix_differentiation(data_in, 1.0, 1.0, 1) == data_out);
+  assert(accelerator_matrix_differentiation(data_in, 1.0, 1.0, 1) == data_out);
 
   data_out = {
       {6.322611388622675, 9.453994003848962, 17.805262785462183},
       {4.313265182226169, 9.626526869744392, 16.319674050304336},
       {9.998207967858303, 17.956376812947667, 20.956140771903126}};
 
-  assert(ntm_matrix_integration(data_in, 1.0) == data_out);
+  assert(accelerator_matrix_integration(data_in, 1.0) == data_out);
 
   data_out = {
       {0.115673909555040450, 0.004756662822010267, 0.8795694276229492000},
       {0.012658220095684168, 0.034408489418901890, 0.1367547003294767900},
       {0.714653980863293200, 0.092921900422636110, 0.0006526948744619639}};
 
-  assert(ntm_matrix_softmax(data_in) == data_out);
+  assert(accelerator_matrix_softmax(data_in) == data_out);
 
   return 0;
 }

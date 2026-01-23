@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR SINH TEST}
+add wave -noupdate -divider {ACCELERATOR SCALAR SINH TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /model_series_testbench/model_scalar_sinh_function_test/scalar_sinh_function/CLK

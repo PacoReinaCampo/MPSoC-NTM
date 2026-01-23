@@ -42,7 +42,7 @@
 ##                                                                               ##
 ###################################################################################
 
-from differentiation import ntm_matrix_controller_differentiation as matrix_controller_differentiation
-from differentiation import ntm_vector_controller_differentiation as vector_controller_differentiation
+from differentiation import accelerator_matrix_controller_differentiation as matrix_controller_differentiation
+from differentiation import accelerator_vector_controller_differentiation as vector_controller_differentiation
 
 print('Hello, world!')

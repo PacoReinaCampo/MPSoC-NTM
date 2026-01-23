@@ -44,10 +44,10 @@
 
 extern crate math;
 
-use math::vector::ntm_vector_logistic_function::*;
-use math::vector::ntm_vector_oneplus_function::*;
-use math::vector::ntm_vector_mean_function::*;
-use math::vector::ntm_vector_deviation_function::*;
+use math::vector::accelerator_vector_logistic_function::*;
+use math::vector::accelerator_vector_oneplus_function::*;
+use math::vector::accelerator_vector_mean_function::*;
+use math::vector::accelerator_vector_deviation_function::*;
 
 fn main() {
     let mut data_in_0: Vec<f64>;
@@ -62,8 +62,8 @@ fn main() {
     data_out_0 = vec![0.9982079678583020, 0.9581688450893644, 0.9997639589554603];
     data_out_1 = vec![0.9867871586112067, 0.9950983109503272, 0.9987621580633643];
 
-    assert_eq!(ntm_vector_logistic_function(data_in_0), data_out_0);
-    assert_eq!(ntm_vector_logistic_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_vector_logistic_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_vector_logistic_function(data_in_1), data_out_1);
 
     data_in_0 = vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226];
     data_in_1 = vec![4.3132651822261687, 5.3132616875182226, 6.6931471805599454];
@@ -71,8 +71,8 @@ fn main() {
     data_out_0 = vec![7.324405028374851, 4.174113884283648, 9.351504850519834];
     data_out_1 = vec![5.326566089800315, 6.318175429247454, 7.694385789255728];
 
-    assert_eq!(ntm_vector_oneplus_function(data_in_0), data_out_0);
-    assert_eq!(ntm_vector_oneplus_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_vector_oneplus_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_vector_oneplus_function(data_in_1), data_out_1);
 
     let mut data_in_0: Vec<Vec<f64>>;
     let mut data_in_1: Vec<Vec<f64>>;
@@ -94,8 +94,8 @@ fn main() {
     data_out_0 = vec![2.0, 1.0, 4.0];
     data_out_1 = vec![1.0, 1.0, 1.0];
 
-    assert_eq!(ntm_vector_mean_function(data_in_0), data_out_0);
-    assert_eq!(ntm_vector_mean_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_vector_mean_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_vector_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![
         vec![3.0, 2.0, 2.0],
@@ -114,6 +114,6 @@ fn main() {
     data_out_0 = vec![8.679477710861024, 11.372481406154654, 6.879922480183431];
     data_out_1 = vec![9.678154093971983, 10.677078252031311, 11.67618659209133];
 
-    assert_eq!(ntm_vector_deviation_function(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_vector_deviation_function(data_in_1, mean_1), data_out_1);
+    assert_eq!(accelerator_vector_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(accelerator_vector_deviation_function(data_in_1, mean_1), data_out_1);
 }

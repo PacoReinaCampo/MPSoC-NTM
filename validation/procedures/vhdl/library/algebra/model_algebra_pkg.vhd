@@ -109,76 +109,76 @@ package model_algebra_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := scalar_randomness_generation(SCALAR_SAMPLE_B_SEED1, SCALAR_SAMPLE_B_SEED2);
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_DOT_PRODUCT_TEST              : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_DOT_PRODUCT_TEST              : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_TEST       : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SUMMATION_TEST         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MODULE_TEST            : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_DOT_PRODUCT_CASE_0              : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SUMMATION_CASE_0         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MODULE_CASE_0            : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_DOT_PRODUCT_CASE_1              : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_SUMMATION_CASE_1         : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_MODULE_CASE_1            : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST        : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_TEST            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_TEST        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_0            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_1            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1            : boolean := false;
-  signal STIMULUS_NTM_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_INVERSE_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_PRODUCT_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_SUMMATION_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST        : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_TEST            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST          : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_TEST        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_TEST            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_0            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_0            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_1            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1            : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1          : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_INVERSE_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_PRODUCT_CASE_1            : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1          : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components

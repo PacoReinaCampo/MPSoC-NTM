@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/ntm_design.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/accelerator_design.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/ntm_model.vhd
-../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/accelerator_model.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/verification/osvvm/code/computing/neural_network/feedforward_neural_network/feedforward_neural_network/library/accelerator_testbench.vhd

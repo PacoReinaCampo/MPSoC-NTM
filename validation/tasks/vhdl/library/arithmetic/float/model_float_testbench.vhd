@@ -57,112 +57,112 @@ entity model_float_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_2      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_2 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_2    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_2      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_2 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_2    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_3      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_3 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_3    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_3      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_3 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_3    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_4      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_4 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_4    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_4      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_4 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_4    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_5      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_5 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_5    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_5      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_5 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_5    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_6      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_6 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_6    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_6      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_6 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_6    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_7      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_7 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_7    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_7      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_7 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_7    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_8      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_8 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_8    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_8      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_8 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_8    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_9      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_9 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_9    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_9      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_9 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_9    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_10      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_10 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_10    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_10      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_10 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_10    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_11      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_11 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_11    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_11      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_11 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_11    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_12      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_12 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_12    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_12      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_12 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_12    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_13      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_13 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_13    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_13      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_13 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_13    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_14      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_14 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_14    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_14      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_14 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_14    : boolean := false;
 
-    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_15      : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_15 : boolean := false;
-    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_15    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_15      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_15 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_15    : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_FLOAT_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_VECTOR_FLOAT_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_VECTOR_FLOAT_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_FLOAT_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_MATRIX_FLOAT_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false
     );
 end model_float_testbench;
 
@@ -713,7 +713,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- SCALAR FLOAT ADDER
-  model_scalar_float_adder_test : if (ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST) generate
+  model_scalar_float_adder_test : if (ENABLE_ACCELERATOR_SCALAR_FLOAT_ADDER_TEST) generate
     scalar_float_adder : model_scalar_float_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -739,7 +739,7 @@ begin
   end generate model_scalar_float_adder_test;
 
   -- SCALAR FLOAT MULTIPLIER
-  model_scalar_float_multiplier_test : if (ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_TEST) generate
+  model_scalar_float_multiplier_test : if (ENABLE_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_TEST) generate
     scalar_float_multiplier : model_scalar_float_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -764,7 +764,7 @@ begin
   end generate model_scalar_float_multiplier_test;
 
   -- SCALAR FLOAT DIVIDER
-  model_scalar_float_divider_test : if (ENABLE_NTM_SCALAR_FLOAT_DIVIDER_TEST) generate
+  model_scalar_float_divider_test : if (ENABLE_ACCELERATOR_SCALAR_FLOAT_DIVIDER_TEST) generate
     scalar_float_divider : model_scalar_float_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -793,7 +793,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- VECTOR FLOAT ADDER
-  model_vector_float_adder_test : if (ENABLE_NTM_VECTOR_FLOAT_ADDER_TEST) generate
+  model_vector_float_adder_test : if (ENABLE_ACCELERATOR_VECTOR_FLOAT_ADDER_TEST) generate
     vector_float_adder : model_vector_float_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -826,7 +826,7 @@ begin
   end generate model_vector_float_adder_test;
 
   -- VECTOR FLOAT MULTIPLIER
-  model_vector_float_multiplier_test : if (ENABLE_NTM_VECTOR_FLOAT_MULTIPLIER_TEST) generate
+  model_vector_float_multiplier_test : if (ENABLE_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_TEST) generate
     vector_float_multiplier : model_vector_float_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -857,7 +857,7 @@ begin
   end generate model_vector_float_multiplier_test;
 
   -- VECTOR FLOAT DIVIDER
-  model_vector_float_divider_test : if (ENABLE_NTM_VECTOR_FLOAT_DIVIDER_TEST) generate
+  model_vector_float_divider_test : if (ENABLE_ACCELERATOR_VECTOR_FLOAT_DIVIDER_TEST) generate
     vector_float_divider : model_vector_float_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -892,7 +892,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- MATRIX FLOAT ADDER
-  model_matrix_float_adder_test : if (ENABLE_NTM_MATRIX_FLOAT_ADDER_TEST) generate
+  model_matrix_float_adder_test : if (ENABLE_ACCELERATOR_MATRIX_FLOAT_ADDER_TEST) generate
     matrix_float_adder : model_matrix_float_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -929,7 +929,7 @@ begin
   end generate model_matrix_float_adder_test;
 
   -- MATRIX FLOAT MULTIPLIER
-  model_matrix_float_multiplier_test : if (ENABLE_NTM_MATRIX_FLOAT_MULTIPLIER_TEST) generate
+  model_matrix_float_multiplier_test : if (ENABLE_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST) generate
     matrix_float_multiplier : model_matrix_float_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -964,7 +964,7 @@ begin
   end generate model_matrix_float_multiplier_test;
 
   -- MATRIX FLOAT DIVIDER
-  model_matrix_float_divider_test : if (ENABLE_NTM_MATRIX_FLOAT_DIVIDER_TEST) generate
+  model_matrix_float_divider_test : if (ENABLE_ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST) generate
     matrix_float_divider : model_matrix_float_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1003,7 +1003,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- TENSOR FLOAT ADDER
-  model_tensor_float_adder_test : if (ENABLE_NTM_TENSOR_FLOAT_ADDER_TEST) generate
+  model_tensor_float_adder_test : if (ENABLE_ACCELERATOR_TENSOR_FLOAT_ADDER_TEST) generate
     tensor_float_adder : model_tensor_float_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1044,7 +1044,7 @@ begin
   end generate model_tensor_float_adder_test;
 
   -- TENSOR FLOAT MULTIPLIER
-  model_tensor_float_multiplier_test : if (ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_TEST) generate
+  model_tensor_float_multiplier_test : if (ENABLE_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_TEST) generate
     tensor_float_multiplier : model_tensor_float_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1083,7 +1083,7 @@ begin
   end generate model_tensor_float_multiplier_test;
 
   -- TENSOR FLOAT DIVIDER
-  model_tensor_float_divider_test : if (ENABLE_NTM_TENSOR_FLOAT_DIVIDER_TEST) generate
+  model_tensor_float_divider_test : if (ENABLE_ACCELERATOR_TENSOR_FLOAT_DIVIDER_TEST) generate
     tensor_float_divider : model_tensor_float_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,

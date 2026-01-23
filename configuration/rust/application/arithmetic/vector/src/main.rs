@@ -44,12 +44,12 @@
 
 extern crate arithmetic;
 
-use arithmetic::vector::ntm_vector_adder::*;
-use arithmetic::vector::ntm_vector_subtractor::*;
-use arithmetic::vector::ntm_vector_multiplier::*;
-use arithmetic::vector::ntm_vector_divider::*;
+use arithmetic::vector::accelerator_vector_adder::*;
+use arithmetic::vector::accelerator_vector_subtractor::*;
+use arithmetic::vector::accelerator_vector_multiplier::*;
+use arithmetic::vector::accelerator_vector_divider::*;
 
-use arithmetic::vector::ntm_vector_arithmetic::*;
+use arithmetic::vector::accelerator_vector_arithmetic::*;
 
 fn main() {
     let mut data_a_in: Vec<f64>;
@@ -62,28 +62,28 @@ fn main() {
 
     data_out = vec![3.0, 1.0, 6.0];
 
-    assert_eq!(ntm_vector_adder(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_vector_adder(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![2.0, 0.0, 4.0];
     data_b_in = vec![1.0, 1.0, 2.0];
 
     data_out = vec![1.0, -1.0, 2.0];
 
-    assert_eq!(ntm_vector_subtractor(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_vector_subtractor(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![2.0, 0.0, 4.0];
     data_b_in = vec![1.0, 1.0, 2.0];
 
     data_out = vec![2.0, 0.0, 8.0];
 
-    assert_eq!(ntm_vector_multiplier(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_vector_multiplier(data_a_in, data_b_in), data_out);
 
     data_a_in = vec![2.0, 0.0, 4.0];
     data_b_in = vec![1.0, 1.0, 2.0];
 
     data_out = vec![2.0, 0.0, 2.0];
 
-    assert_eq!(ntm_vector_divider(data_a_in, data_b_in), data_out);
+    assert_eq!(accelerator_vector_divider(data_a_in, data_b_in), data_out);
 
 
     let addition = VectorArithmetic {
@@ -93,7 +93,7 @@ fn main() {
         data_out: vec![3.0, 1.0, 6.0]
     };
 
-    assert_eq!(addition.ntm_vector_adder(), addition.data_out);
+    assert_eq!(addition.accelerator_vector_adder(), addition.data_out);
 
     let subtraction = VectorArithmetic {
         data_a_in: vec![2.0, 0.0, 4.0],
@@ -102,7 +102,7 @@ fn main() {
         data_out: vec![1.0, -1.0, 2.0]
     };
 
-    assert_eq!(subtraction.ntm_vector_subtractor(), subtraction.data_out);
+    assert_eq!(subtraction.accelerator_vector_subtractor(), subtraction.data_out);
 
     let multiplication = VectorArithmetic {
         data_a_in: vec![2.0, 0.0, 4.0],
@@ -111,7 +111,7 @@ fn main() {
         data_out: vec![2.0, 0.0, 8.0]
     };
 
-    assert_eq!(multiplication.ntm_vector_multiplier(), multiplication.data_out);
+    assert_eq!(multiplication.accelerator_vector_multiplier(), multiplication.data_out);
 
     let division = VectorArithmetic {
         data_a_in: vec![2.0, 0.0, 4.0],
@@ -120,5 +120,5 @@ fn main() {
         data_out: vec![2.0, 0.0, 2.0]
     };
 
-    assert_eq!(division.ntm_vector_divider(), division.data_out);
+    assert_eq!(division.accelerator_vector_divider(), division.data_out);
 }

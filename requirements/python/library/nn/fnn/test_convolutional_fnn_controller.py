@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-from convolutional import ntm_controller as controller
+from convolutional import accelerator_controller as controller
 
 print('Hello, world!')

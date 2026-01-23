@@ -47,8 +47,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/dnc/write_heads/dnc_write_content_weighting.h"
-#include "../../../../library/nn/dnc/write_heads/dnc_write_weighting.h"
+#include "../../../../library/nn/dnc/write_heads/accelerator_write_content_weighting.h"
+#include "../../../../library/nn/dnc/write_heads/accelerator_write_weighting.h"
 
 
 int main() {
@@ -63,19 +63,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(dnc_write_content_weighting_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_content_weighting_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(dnc_write_content_weighting_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_content_weighting_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(dnc_write_content_weighting_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_content_weighting_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(dnc_write_content_weighting_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_write_content_weighting_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

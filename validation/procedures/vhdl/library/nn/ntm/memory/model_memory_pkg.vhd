@@ -109,9 +109,9 @@ package model_memory_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := FLOAT_N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_NTM_MEMORY_TEST   : boolean := false;
-  signal STIMULUS_NTM_MEMORY_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MEMORY_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MEMORY_TEST   : boolean := false;
+  signal STIMULUS_ACCELERATOR_MEMORY_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MEMORY_CASE_1 : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
@@ -136,60 +136,60 @@ package model_memory_pkg is
       RST : out std_logic;
 
       -- CONTROL
-      NTM_MEMORY_START : out std_logic;
-      NTM_MEMORY_READY : in  std_logic;
+      ACCELERATOR_MEMORY_START : out std_logic;
+      ACCELERATOR_MEMORY_READY : in  std_logic;
 
-      NTM_MEMORY_K_IN_I_ENABLE : out std_logic;
-      NTM_MEMORY_K_IN_K_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_K_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_K_IN_K_ENABLE : out std_logic;
 
-      NTM_MEMORY_BETA_IN_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_BETA_IN_ENABLE : out std_logic;
 
-      NTM_MEMORY_G_IN_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_G_IN_ENABLE : out std_logic;
 
-      NTM_MEMORY_S_IN_I_ENABLE : out std_logic;
-      NTM_MEMORY_S_IN_J_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_S_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_S_IN_J_ENABLE : out std_logic;
 
-      NTM_MEMORY_GAMMA_IN_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_GAMMA_IN_ENABLE : out std_logic;
 
-      NTM_MEMORY_K_OUT_I_ENABLE : in std_logic;
-      NTM_MEMORY_K_OUT_K_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_K_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_K_OUT_K_ENABLE : in std_logic;
 
-      NTM_MEMORY_BETA_OUT_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_BETA_OUT_ENABLE : in std_logic;
 
-      NTM_MEMORY_G_OUT_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_G_OUT_ENABLE : in std_logic;
 
-      NTM_MEMORY_S_OUT_I_ENABLE : in std_logic;
-      NTM_MEMORY_S_OUT_J_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_S_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_S_OUT_J_ENABLE : in std_logic;
 
-      NTM_MEMORY_GAMMA_OUT_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_GAMMA_OUT_ENABLE : in std_logic;
 
-      NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
-      NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_M_IN_J_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_M_IN_K_ENABLE : out std_logic;
 
-      NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
-      NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_M_OUT_J_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_M_OUT_K_ENABLE : in std_logic;
 
-      NTM_MEMORY_W_IN_I_ENABLE : out std_logic;
-      NTM_MEMORY_W_IN_J_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_W_IN_I_ENABLE : out std_logic;
+      ACCELERATOR_MEMORY_W_IN_J_ENABLE : out std_logic;
 
-      NTM_MEMORY_W_OUT_I_ENABLE : in std_logic;
-      NTM_MEMORY_W_OUT_J_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_W_OUT_I_ENABLE : in std_logic;
+      ACCELERATOR_MEMORY_W_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      NTM_MEMORY_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      ACCELERATOR_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      ACCELERATOR_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

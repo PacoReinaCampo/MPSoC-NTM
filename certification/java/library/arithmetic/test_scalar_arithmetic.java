@@ -44,7 +44,7 @@
 
 import java.util.Random;
 
-import scalar.ntm_scalar_arithmetic;
+import scalar.accelerator_scalar_arithmetic;
 
 class test_scalar_arithmetic {
   public static void main(String[] args) {
@@ -53,12 +53,12 @@ class test_scalar_arithmetic {
     double data_a_in = random.nextDouble();
     double data_b_in = random.nextDouble();
 
-    assert ntm_scalar_arithmetic.ntm_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in;
+    assert accelerator_scalar_arithmetic.accelerator_scalar_adder(data_a_in, data_b_in) == data_a_in + data_b_in;
 
-    assert ntm_scalar_arithmetic.ntm_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in;
+    assert accelerator_scalar_arithmetic.accelerator_scalar_subtractor(data_a_in, data_b_in) == data_a_in - data_b_in;
 
-    assert ntm_scalar_arithmetic.ntm_scalar_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in;
+    assert accelerator_scalar_arithmetic.accelerator_scalar_multiplier(data_a_in, data_b_in) == data_a_in * data_b_in;
 
-    assert ntm_scalar_arithmetic.ntm_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in;
+    assert accelerator_scalar_arithmetic.accelerator_scalar_divider(data_a_in, data_b_in) == data_a_in / data_b_in;
   }
 }

@@ -42,18 +42,18 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-double ntm_adder(double, double);
-double ntm_multiplier(double, double);
-double ntm_divider(double, double);
+double accelerator_adder(double, double);
+double accelerator_multiplier(double, double);
+double accelerator_divider(double, double);
 
-double *ntm_vector_adder(double *, double *);
-double *ntm_vector_multiplier(double *, double *);
-double *ntm_vector_divider(double *, double *);
+double *accelerator_vector_adder(double *, double *);
+double *accelerator_vector_multiplier(double *, double *);
+double *accelerator_vector_divider(double *, double *);
 
-double **ntm_matrix_adder(double **, double **);
-double **ntm_matrix_multiplier(double **, double **);
-double **ntm_matrix_divider(double **, double **);
+double **accelerator_matrix_adder(double **, double **);
+double **accelerator_matrix_multiplier(double **, double **);
+double **accelerator_matrix_divider(double **, double **);
 
-double ***ntm_tensor_adder(double ***, double ***);
-double ***ntm_tensor_multiplier(double ***, double ***);
-double ***ntm_tensor_divider(double ***, double ***);
+double ***accelerator_tensor_adder(double ***, double ***);
+double ***accelerator_tensor_multiplier(double ***, double ***);
+double ***accelerator_tensor_divider(double ***, double ***);

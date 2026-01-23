@@ -57,76 +57,76 @@ entity model_algebra_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_DOT_PRODUCT_TEST              : boolean := false;
-    ENABLE_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULE_TEST            : boolean := false;
+    ENABLE_ACCELERATOR_DOT_PRODUCT_TEST              : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_CONVOLUTION_TEST       : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MULTIPLICATION_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SUMMATION_TEST         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MODULE_TEST            : boolean := false;
 
-    ENABLE_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
-    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULE_CASE_0            : boolean := false;
+    ENABLE_ACCELERATOR_DOT_PRODUCT_CASE_0              : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SUMMATION_CASE_0         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MODULE_CASE_0            : boolean := false;
 
-    ENABLE_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
-    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULE_CASE_1            : boolean := false;
+    ENABLE_ACCELERATOR_DOT_PRODUCT_CASE_1              : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_SUMMATION_CASE_1         : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_MODULE_CASE_1            : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_CONVOLUTION_TEST        : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_TEST            : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_TEST            : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_CONVOLUTION_TEST        : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INVERSE_TEST            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_MULTIPLICATION_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_PRODUCT_TEST            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SUMMATION_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TRANSPOSE_TEST          : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_CASE_0            : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_0            : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_CONVOLUTION_CASE_0        : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INVERSE_CASE_0            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_PRODUCT_CASE_0            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SUMMATION_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TRANSPOSE_CASE_0          : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSE_CASE_1            : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_1            : boolean := false;
-    ENABLE_NTM_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_CONVOLUTION_CASE_1        : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INVERSE_CASE_1            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_MULTIPLICATION_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_PRODUCT_CASE_1            : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_VECTOR_PRODUCT_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_SUMMATION_CASE_1          : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_TRANSPOSE_CASE_1          : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_CONVOLUTION_TEST        : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_TEST            : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_TEST            : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST          : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_TEST        : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_TEST            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_TEST            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_TEST          : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_CASE_0            : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_0            : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_0        : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_0            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_0            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_0          : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_INVERSE_CASE_1            : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_1            : boolean := false;
-    ENABLE_NTM_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1          : boolean := false
+    ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_CASE_1        : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INVERSE_CASE_1            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_PRODUCT_CASE_1            : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_MATRIX_PRODUCT_CASE_1     : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_CASE_1          : boolean := false
     );
 end model_algebra_testbench;
 
@@ -1068,7 +1068,7 @@ begin
       );
 
   -- DOT PRODUCT
-  model_dot_product_test : if (ENABLE_NTM_DOT_PRODUCT_TEST) generate
+  model_dot_product_test : if (ENABLE_ACCELERATOR_DOT_PRODUCT_TEST) generate
     dot_product : model_dot_product
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1097,7 +1097,7 @@ begin
   end generate model_dot_product_test;
 
   -- VECTOR CONVOLUTION
-  model_vector_convolution_test : if (ENABLE_NTM_VECTOR_CONVOLUTION_TEST) generate
+  model_vector_convolution_test : if (ENABLE_ACCELERATOR_VECTOR_CONVOLUTION_TEST) generate
     vector_convolution : model_vector_convolution
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1128,7 +1128,7 @@ begin
   end generate model_vector_convolution_test;
 
   -- VECTOR COSINE_SIMILARITY
-  model_vector_cosine_similarity_test : if (ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST) generate
+  model_vector_cosine_similarity_test : if (ENABLE_ACCELERATOR_VECTOR_COSINE_SIMILARITY_TEST) generate
     vector_cosine_similarity : model_vector_cosine_similarity
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1157,7 +1157,7 @@ begin
   end generate model_vector_cosine_similarity_test;
 
   -- VECTOR MULTIPLICATION
-  model_vector_multiplication_test : if (ENABLE_NTM_VECTOR_MULTIPLICATION_TEST) generate
+  model_vector_multiplication_test : if (ENABLE_ACCELERATOR_VECTOR_MULTIPLICATION_TEST) generate
     vector_multiplication : model_vector_multiplication
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1189,7 +1189,7 @@ begin
   end generate model_vector_multiplication_test;
 
   -- VECTOR SUMMATION
-  model_vector_summation_test : if (ENABLE_NTM_VECTOR_SUMMATION_TEST) generate
+  model_vector_summation_test : if (ENABLE_ACCELERATOR_VECTOR_SUMMATION_TEST) generate
     vector_summation : model_vector_summation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1221,7 +1221,7 @@ begin
   end generate model_vector_summation_test;
 
   -- VECTOR MODULE
-  model_vector_module_test : if (ENABLE_NTM_VECTOR_MODULE_TEST) generate
+  model_vector_module_test : if (ENABLE_ACCELERATOR_VECTOR_MODULE_TEST) generate
     vector_module : model_vector_module
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1250,7 +1250,7 @@ begin
   end generate model_vector_module_test;
 
   -- MATRIX CONVOLUTION
-  model_matrix_convolution_test : if (ENABLE_NTM_MATRIX_CONVOLUTION_TEST) generate
+  model_matrix_convolution_test : if (ENABLE_ACCELERATOR_MATRIX_CONVOLUTION_TEST) generate
     matrix_convolution : model_matrix_convolution
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1288,7 +1288,7 @@ begin
   end generate model_matrix_convolution_test;
 
   -- MATRIX VECTOR CONVOLUTION
-  model_matrix_vector_convolution_test : if (ENABLE_NTM_MATRIX_VECTOR_CONVOLUTION_TEST) generate
+  model_matrix_vector_convolution_test : if (ENABLE_ACCELERATOR_MATRIX_VECTOR_CONVOLUTION_TEST) generate
     matrix_vector_convolution : model_matrix_vector_convolution
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1323,7 +1323,7 @@ begin
   end generate model_matrix_vector_convolution_test;
 
   -- MATRIX INVERSE
-  model_matrix_inverse_test : if (ENABLE_NTM_MATRIX_INVERSE_TEST) generate
+  model_matrix_inverse_test : if (ENABLE_ACCELERATOR_MATRIX_INVERSE_TEST) generate
     matrix_inverse : model_matrix_inverse
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1356,7 +1356,7 @@ begin
   end generate model_matrix_inverse_test;
 
   -- MATRIX MULTIPLICATION
-  model_matrix_multiplication_test : if (ENABLE_NTM_MATRIX_MULTIPLICATION_TEST) generate
+  model_matrix_multiplication_test : if (ENABLE_ACCELERATOR_MATRIX_MULTIPLICATION_TEST) generate
     matrix_multiplication : model_matrix_multiplication
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1392,7 +1392,7 @@ begin
   end generate model_matrix_multiplication_test;
 
   -- MATRIX PRODUCT
-  model_matrix_product_test : if (ENABLE_NTM_MATRIX_PRODUCT_TEST) generate
+  model_matrix_product_test : if (ENABLE_ACCELERATOR_MATRIX_PRODUCT_TEST) generate
     matrix_product : model_matrix_product
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1430,7 +1430,7 @@ begin
   end generate model_matrix_product_test;
 
   -- MATRIX VECTOR PRODUCT
-  model_matrix_vector_product_test : if (ENABLE_NTM_MATRIX_VECTOR_PRODUCT_TEST) generate
+  model_matrix_vector_product_test : if (ENABLE_ACCELERATOR_MATRIX_VECTOR_PRODUCT_TEST) generate
     matrix_vector_product : model_matrix_vector_product
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1465,7 +1465,7 @@ begin
   end generate model_matrix_vector_product_test;
 
   -- MATRIX SUMMATION
-  model_matrix_summation_test : if (ENABLE_NTM_MATRIX_SUMMATION_TEST) generate
+  model_matrix_summation_test : if (ENABLE_ACCELERATOR_MATRIX_SUMMATION_TEST) generate
     matrix_summation : model_matrix_summation
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1501,7 +1501,7 @@ begin
   end generate model_matrix_summation_test;
 
   -- MATRIX TRANSPOSE
-  model_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
+  model_matrix_transpose_test : if (ENABLE_ACCELERATOR_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : model_matrix_transpose
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1534,7 +1534,7 @@ begin
   end generate model_matrix_transpose_test;
 
   -- TENSOR CONVOLUTION
-  model_tensor_convolution_test : if (ENABLE_NTM_TENSOR_CONVOLUTION_TEST) generate
+  model_tensor_convolution_test : if (ENABLE_ACCELERATOR_TENSOR_CONVOLUTION_TEST) generate
     tensor_convolution : model_tensor_convolution
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1578,7 +1578,7 @@ begin
   end generate model_tensor_convolution_test;
 
   -- TENSOR MATRIX CONVOLUTION
-  model_tensor_matrix_convolution_test : if (ENABLE_NTM_TENSOR_MATRIX_CONVOLUTION_TEST) generate
+  model_tensor_matrix_convolution_test : if (ENABLE_ACCELERATOR_TENSOR_MATRIX_CONVOLUTION_TEST) generate
     tensor_matrix_convolution : model_tensor_matrix_convolution
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1619,7 +1619,7 @@ begin
   end generate model_tensor_matrix_convolution_test;
 
   -- TENSOR INVERSE
-  model_tensor_inverse_test : if (ENABLE_NTM_TENSOR_INVERSE_TEST) generate
+  model_tensor_inverse_test : if (ENABLE_ACCELERATOR_TENSOR_INVERSE_TEST) generate
     tensor_inverse : model_tensor_inverse
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1656,7 +1656,7 @@ begin
   end generate model_tensor_inverse_test;
 
   -- TENSOR PRODUCT
-  model_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
+  model_tensor_product_test : if (ENABLE_ACCELERATOR_TENSOR_PRODUCT_TEST) generate
     tensor_product : model_tensor_product
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1700,7 +1700,7 @@ begin
   end generate model_tensor_product_test;
 
   -- TENSOR MATRIX PRODUCT
-  model_tensor_matrix_product_test : if (ENABLE_NTM_TENSOR_MATRIX_PRODUCT_TEST) generate
+  model_tensor_matrix_product_test : if (ENABLE_ACCELERATOR_TENSOR_MATRIX_PRODUCT_TEST) generate
     tensor_matrix_product : model_tensor_matrix_product
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1741,7 +1741,7 @@ begin
   end generate model_tensor_matrix_product_test;
 
   -- TENSOR TRANSPOSE
-  model_tensor_transpose_test : if (ENABLE_NTM_TENSOR_TRANSPOSE_TEST) generate
+  model_tensor_transpose_test : if (ENABLE_ACCELERATOR_TENSOR_TRANSPOSE_TEST) generate
     tensor_transpose : model_tensor_transpose
       generic map (
         DATA_SIZE    => DATA_SIZE,

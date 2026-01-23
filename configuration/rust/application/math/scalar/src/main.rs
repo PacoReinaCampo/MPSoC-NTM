@@ -44,10 +44,10 @@
 
 extern crate math;
 
-use math::scalar::ntm_scalar_logistic_function::*;
-use math::scalar::ntm_scalar_oneplus_function::*;
-use math::scalar::ntm_scalar_mean_function::*;
-use math::scalar::ntm_scalar_deviation_function::*;
+use math::scalar::accelerator_scalar_logistic_function::*;
+use math::scalar::accelerator_scalar_oneplus_function::*;
+use math::scalar::accelerator_scalar_mean_function::*;
+use math::scalar::accelerator_scalar_deviation_function::*;
 
 fn main() {
     let mut data_in_0: f64;
@@ -62,8 +62,8 @@ fn main() {
     data_out_0 = 0.7090765217957029;
     data_out_1 = 0.9614141454987156;
 
-    assert_eq!(ntm_scalar_logistic_function(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_logistic_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_logistic_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_logistic_function(data_in_1), data_out_1);
 
     data_in_0 = 0.8909031788043871;
     data_in_1 = 3.2155195231797550;
@@ -71,8 +71,8 @@ fn main() {
     data_out_0 = 2.2346950078883427;
     data_out_1 = 4.2548695333728740;
 
-    assert_eq!(ntm_scalar_oneplus_function(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_oneplus_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_oneplus_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_oneplus_function(data_in_1), data_out_1);
 
     let mut data_in_0: Vec<f64>;
     let mut data_in_1: Vec<f64>;
@@ -86,8 +86,8 @@ fn main() {
     data_out_0 = 2.0;
     data_out_1 = 2.0;
 
-    assert_eq!(ntm_scalar_mean_function(data_in_0), data_out_0);
-    assert_eq!(ntm_scalar_mean_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_scalar_mean_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_scalar_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![3.0, 2.0, 2.0];
     data_in_1 = vec![1.0, 2.0, 1.0];
@@ -98,6 +98,6 @@ fn main() {
     data_out_0 = 7.681145747868608;
     data_out_1 = 8.679477710861024;
 
-    assert_eq!(ntm_scalar_deviation_function(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_scalar_deviation_function(data_in_1, mean_1), data_out_1);
+    assert_eq!(accelerator_scalar_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(accelerator_scalar_deviation_function(data_in_1, mean_1), data_out_1);
 }

@@ -44,7 +44,7 @@
 
 classdef TensorArithmetic
   methods
-    function DATA_OUT = ntm_tensor_adder(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_tensor_adder(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
@@ -62,7 +62,7 @@ classdef TensorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_tensor_subtractor(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_tensor_subtractor(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
@@ -80,7 +80,7 @@ classdef TensorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_tensor_multiplier(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_tensor_multiplier(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);
@@ -98,7 +98,7 @@ classdef TensorArithmetic
       end
     end
 
-    function DATA_OUT = ntm_tensor_divider(DATA_A_IN, DATA_B_IN)
+    function DATA_OUT = accelerator_tensor_divider(DATA_A_IN, DATA_B_IN)
       # Constants
       [SIZE_A_I_IN, SIZE_A_J_IN, SIZE_A_K_IN] = size(DATA_A_IN);
       [SIZE_B_I_IN, SIZE_B_J_IN, SIZE_B_K_IN] = size(DATA_B_IN);

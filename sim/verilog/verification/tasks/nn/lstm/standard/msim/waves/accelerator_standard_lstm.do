@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM STANDARD LSTM TEST}
+add wave -noupdate -divider {ACCELERATOR STANDARD LSTM TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_standard_lstm_testbench/accelerator_standard_lstm_test/controller/CLK

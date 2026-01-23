@@ -45,7 +45,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import matrix.ntm_matrix_math;
+import matrix.accelerator_matrix_math;
 
 class test_matrix_math {
   public static void main(String[] args) {
@@ -69,7 +69,7 @@ class test_matrix_math {
       Arrays.setAll(logistic_function[row], j -> data_a_in[row][j] + data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_math.ntm_matrix_logistic_function(data_a_in, data_b_in), logistic_function) : "Incorrect Logistic Function";
+    assert Arrays.deepEquals(accelerator_matrix_math.accelerator_matrix_logistic_function(data_a_in, data_b_in), logistic_function) : "Incorrect Logistic Function";
 
     double[][] oneplus_function = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -77,7 +77,7 @@ class test_matrix_math {
       Arrays.setAll(oneplus_function[row], j -> data_a_in[row][j] - data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_math.ntm_matrix_oneplus_function(data_a_in, data_b_in), oneplus_function) : "Incorrect Oneplus Function";
+    assert Arrays.deepEquals(accelerator_matrix_math.accelerator_matrix_oneplus_function(data_a_in, data_b_in), oneplus_function) : "Incorrect Oneplus Function";
 
     double[][] mean_function = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -85,7 +85,7 @@ class test_matrix_math {
       Arrays.setAll(mean_function[row], j -> data_a_in[row][j] * data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_math.ntm_matrix_mean_function(data_a_in, data_b_in), mean_function) : "Incorrect Mean Function";
+    assert Arrays.deepEquals(accelerator_matrix_math.accelerator_matrix_mean_function(data_a_in, data_b_in), mean_function) : "Incorrect Mean Function";
 
     double[][] deviation_function = new double[data_a_in.length][data_a_in[0].length];
     for (int i = 0; i < data_a_in.length; i++) {
@@ -93,6 +93,6 @@ class test_matrix_math {
       Arrays.setAll(deviation_function[row], j -> data_a_in[row][j] / data_b_in[row][j]);
     }
 
-    assert Arrays.deepEquals(ntm_matrix_math.ntm_matrix_deviation_function(data_a_in, data_b_in), deviation_function) : "Incorrect Deviation Function";
+    assert Arrays.deepEquals(accelerator_matrix_math.accelerator_matrix_deviation_function(data_a_in, data_b_in), deviation_function) : "Incorrect Deviation Function";
   }
 }

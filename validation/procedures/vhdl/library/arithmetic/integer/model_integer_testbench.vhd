@@ -59,56 +59,56 @@ entity model_integer_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_ACCELERATOR_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false
     );
 end model_integer_testbench;
 
@@ -719,7 +719,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- SCALAR ADDER
-  model_scalar_integer_adder_test : if (ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST) generate
+  model_scalar_integer_adder_test : if (ENABLE_ACCELERATOR_SCALAR_INTEGER_ADDER_TEST) generate
     scalar_integer_adder : model_scalar_integer_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -746,7 +746,7 @@ begin
   end generate model_scalar_integer_adder_test;
 
   -- SCALAR MULTIPLIER
-  model_scalar_integer_multiplier_test : if (ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST) generate
+  model_scalar_integer_multiplier_test : if (ENABLE_ACCELERATOR_SCALAR_INTEGER_MULTIPLIER_TEST) generate
     scalar_integer_multiplier : model_scalar_integer_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -771,7 +771,7 @@ begin
   end generate model_scalar_integer_multiplier_test;
 
   -- SCALAR DIVIDER
-  model_scalar_integer_divider_test : if (ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST) generate
+  model_scalar_integer_divider_test : if (ENABLE_ACCELERATOR_SCALAR_INTEGER_DIVIDER_TEST) generate
     scalar_integer_divider : model_scalar_integer_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -823,7 +823,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- VECTOR ADDER
-  model_vector_integer_adder_test : if (ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST) generate
+  model_vector_integer_adder_test : if (ENABLE_ACCELERATOR_VECTOR_INTEGER_ADDER_TEST) generate
     vector_integer_adder : model_vector_integer_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -856,7 +856,7 @@ begin
   end generate model_vector_integer_adder_test;
 
   -- VECTOR MULTIPLIER
-  model_vector_integer_multiplier_test : if (ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST) generate
+  model_vector_integer_multiplier_test : if (ENABLE_ACCELERATOR_VECTOR_INTEGER_MULTIPLIER_TEST) generate
     vector_integer_multiplier : model_vector_integer_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -887,7 +887,7 @@ begin
   end generate model_vector_integer_multiplier_test;
 
   -- VECTOR DIVIDER
-  model_vector_integer_divider_test : if (ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST) generate
+  model_vector_integer_divider_test : if (ENABLE_ACCELERATOR_VECTOR_INTEGER_DIVIDER_TEST) generate
     vector_integer_divider : model_vector_integer_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -970,7 +970,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- MATRIX ADDER
-  model_matrix_integer_adder_test : if (ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST) generate
+  model_matrix_integer_adder_test : if (ENABLE_ACCELERATOR_MATRIX_INTEGER_ADDER_TEST) generate
     matrix_integer_adder : model_matrix_integer_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1007,7 +1007,7 @@ begin
   end generate model_matrix_integer_adder_test;
 
   -- MATRIX MULTIPLIER
-  model_matrix_integer_multiplier_test : if (ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST) generate
+  model_matrix_integer_multiplier_test : if (ENABLE_ACCELERATOR_MATRIX_INTEGER_MULTIPLIER_TEST) generate
     matrix_integer_multiplier : model_matrix_integer_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1042,7 +1042,7 @@ begin
   end generate model_matrix_integer_multiplier_test;
 
   -- MATRIX DIVIDER
-  model_matrix_integer_divider_test : if (ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST) generate
+  model_matrix_integer_divider_test : if (ENABLE_ACCELERATOR_MATRIX_INTEGER_DIVIDER_TEST) generate
     matrix_integer_divider : model_matrix_integer_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1154,7 +1154,7 @@ begin
   ------------------------------------------------------------------------------
 
   -- TENSOR ADDER
-  model_tensor_integer_adder_test : if (ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST) generate
+  model_tensor_integer_adder_test : if (ENABLE_ACCELERATOR_TENSOR_INTEGER_ADDER_TEST) generate
     tensor_integer_adder : model_tensor_integer_adder
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1195,7 +1195,7 @@ begin
   end generate model_tensor_integer_adder_test;
 
   -- TENSOR MULTIPLIER
-  model_tensor_integer_multiplier_test : if (ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST) generate
+  model_tensor_integer_multiplier_test : if (ENABLE_ACCELERATOR_TENSOR_INTEGER_MULTIPLIER_TEST) generate
     tensor_integer_multiplier : model_tensor_integer_multiplier
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -1234,7 +1234,7 @@ begin
   end generate model_tensor_integer_multiplier_test;
 
   -- TENSOR DIVIDER
-  model_tensor_integer_divider_test : if (ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST) generate
+  model_tensor_integer_divider_test : if (ENABLE_ACCELERATOR_TENSOR_INTEGER_DIVIDER_TEST) generate
     tensor_integer_divider : model_tensor_integer_divider
       generic map (
         DATA_SIZE    => DATA_SIZE,

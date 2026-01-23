@@ -42,9 +42,9 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-pub mod ntm_vector_adder;
-pub mod ntm_vector_subtractor;
-pub mod ntm_vector_multiplier;
-pub mod ntm_vector_divider;
+pub mod accelerator_vector_adder;
+pub mod accelerator_vector_subtractor;
+pub mod accelerator_vector_multiplier;
+pub mod accelerator_vector_divider;
 
-pub mod ntm_vector_arithmetic;
+pub mod accelerator_vector_arithmetic;

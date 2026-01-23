@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX FIXED DIVIDER TEST}
+add wave -noupdate -divider {ACCELERATOR MATRIX FIXED DIVIDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_fixed_testbench/accelerator_matrix_fixed_divider_test/matrix_fixed_divider/CLK

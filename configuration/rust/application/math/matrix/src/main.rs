@@ -44,10 +44,10 @@
 
 extern crate math;
 
-use math::matrix::ntm_matrix_logistic_function::*;
-use math::matrix::ntm_matrix_oneplus_function::*;
-use math::matrix::ntm_matrix_mean_function::*;
-use math::matrix::ntm_matrix_deviation_function::*;
+use math::matrix::accelerator_matrix_logistic_function::*;
+use math::matrix::accelerator_matrix_oneplus_function::*;
+use math::matrix::accelerator_matrix_mean_function::*;
+use math::matrix::accelerator_matrix_deviation_function::*;
 
 fn main() {
     let mut data_in: Vec<Vec<f64>>;
@@ -66,7 +66,7 @@ fn main() {
         vec![0.9999545207076224, 0.9996503292557579, 0.9525634621372647]
     ];
 
-    assert_eq!(ntm_matrix_logistic_function(data_in), data_out);
+    assert_eq!(accelerator_matrix_logistic_function(data_in), data_out);
 
     data_in = vec![
         vec![6.3226113886226751, 3.1313826152262876, 8.3512687816132226],
@@ -80,7 +80,7 @@ fn main() {
         vec![10.998253448184894, 8.958518576982677, 4.048362506240452]
     ];
 
-    assert_eq!(ntm_matrix_oneplus_function(data_in), data_out);
+    assert_eq!(accelerator_matrix_oneplus_function(data_in), data_out);
 
     let mut data_in_0: Vec<Vec<Vec<f64>>>;
     let mut data_in_1: Vec<Vec<Vec<f64>>>;
@@ -134,8 +134,8 @@ fn main() {
         vec![0.6666666666666666, 2.333333333333333, 3.3333333333333335]
     ];
 
-    assert_eq!(ntm_matrix_mean_function(data_in_0), data_out_0);
-    assert_eq!(ntm_matrix_mean_function(data_in_1), data_out_1);
+    assert_eq!(accelerator_matrix_mean_function(data_in_0), data_out_0);
+    assert_eq!(accelerator_matrix_mean_function(data_in_1), data_out_1);
 
     data_in_0 = vec![
         vec![
@@ -194,6 +194,6 @@ fn main() {
         vec![11.67618659209133, 9.678154093971983, 10.677078252031311]
     ];
 
-    assert_eq!(ntm_matrix_deviation_function(data_in_0, mean_0), data_out_0);
-    assert_eq!(ntm_matrix_deviation_function(data_in_1, mean_1), data_out_1);
+    assert_eq!(accelerator_matrix_deviation_function(data_in_0, mean_0), data_out_0);
+    assert_eq!(accelerator_matrix_deviation_function(data_in_1, mean_1), data_out_1);
 }

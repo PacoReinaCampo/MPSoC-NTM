@@ -46,27 +46,27 @@
 # DNC-Memory Sources
 #####################################################################
 
-SOURCES_MEMORY =	../../../../library/nn/dnc/memory/dnc_addressing.h \
-			../../../../library/nn/dnc/memory/dnc_addressing.c \
-			../../../../library/nn/dnc/memory/dnc_allocation_weighting.h \
-			../../../../library/nn/dnc/memory/dnc_allocation_weighting.c \
-			../../../../library/nn/dnc/memory/dnc_backward_weighting.h \
-			../../../../library/nn/dnc/memory/dnc_backward_weighting.c \
-			../../../../library/nn/dnc/memory/dnc_forward_weighting.h \
-			../../../../library/nn/dnc/memory/dnc_forward_weighting.c \
-			../../../../library/nn/dnc/memory/dnc_matrix_content_based_addressing.h \
-			../../../../library/nn/dnc/memory/dnc_matrix_content_based_addressing.c \
-			../../../../library/nn/dnc/memory/dnc_memory_matrix.h \
-			../../../../library/nn/dnc/memory/dnc_memory_matrix.c \
-			../../../../library/nn/dnc/memory/dnc_memory_retention_vector.h \
-			../../../../library/nn/dnc/memory/dnc_memory_retention_vector.c \
-			../../../../library/nn/dnc/memory/dnc_precedence_weighting.h \
-			../../../../library/nn/dnc/memory/dnc_precedence_weighting.c \
-			../../../../library/nn/dnc/memory/dnc_sort_vector.h \
-			../../../../library/nn/dnc/memory/dnc_sort_vector.c \
-			../../../../library/nn/dnc/memory/dnc_temporal_link_matrix.h \
-			../../../../library/nn/dnc/memory/dnc_temporal_link_matrix.c \
-			../../../../library/nn/dnc/memory/dnc_usage_vector.h \
-			../../../../library/nn/dnc/memory/dnc_usage_vector.c \
-			../../../../library/nn/dnc/memory/dnc_vector_content_based_addressing.h \
-			../../../../library/nn/dnc/memory/dnc_vector_content_based_addressing.c
+SOURCES_MEMORY =	../../../../library/nn/dnc/memory/accelerator_addressing.h \
+			../../../../library/nn/dnc/memory/accelerator_addressing.c \
+			../../../../library/nn/dnc/memory/accelerator_allocation_weighting.h \
+			../../../../library/nn/dnc/memory/accelerator_allocation_weighting.c \
+			../../../../library/nn/dnc/memory/accelerator_backward_weighting.h \
+			../../../../library/nn/dnc/memory/accelerator_backward_weighting.c \
+			../../../../library/nn/dnc/memory/accelerator_forward_weighting.h \
+			../../../../library/nn/dnc/memory/accelerator_forward_weighting.c \
+			../../../../library/nn/dnc/memory/accelerator_matrix_content_based_addressing.h \
+			../../../../library/nn/dnc/memory/accelerator_matrix_content_based_addressing.c \
+			../../../../library/nn/dnc/memory/accelerator_memory_matrix.h \
+			../../../../library/nn/dnc/memory/accelerator_memory_matrix.c \
+			../../../../library/nn/dnc/memory/accelerator_memory_retention_vector.h \
+			../../../../library/nn/dnc/memory/accelerator_memory_retention_vector.c \
+			../../../../library/nn/dnc/memory/accelerator_precedence_weighting.h \
+			../../../../library/nn/dnc/memory/accelerator_precedence_weighting.c \
+			../../../../library/nn/dnc/memory/accelerator_sort_vector.h \
+			../../../../library/nn/dnc/memory/accelerator_sort_vector.c \
+			../../../../library/nn/dnc/memory/accelerator_temporal_link_matrix.h \
+			../../../../library/nn/dnc/memory/accelerator_temporal_link_matrix.c \
+			../../../../library/nn/dnc/memory/accelerator_usage_vector.h \
+			../../../../library/nn/dnc/memory/accelerator_usage_vector.c \
+			../../../../library/nn/dnc/memory/accelerator_vector_content_based_addressing.h \
+			../../../../library/nn/dnc/memory/accelerator_vector_content_based_addressing.c

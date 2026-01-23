@@ -47,15 +47,15 @@ class ScalarArithmetic:
     self.data_a_in = data_a_in
     self.data_b_in = data_b_in
 
-  def ntm_scalar_adder(self):
+  def accelerator_scalar_adder(self):
     # calculating addition
     return (self.data_a_in + self.data_b_in)
 
-  def ntm_scalar_multiplier(self):
+  def accelerator_scalar_multiplier(self):
     # calculating multiplication
     return (self.data_a_in * self.data_b_in)
 
-  def ntm_scalar_divider(self):
+  def accelerator_scalar_divider(self):
     # calculating division
     return (self.data_a_in / self.data_b_in)
 
@@ -74,8 +74,8 @@ multiplication_data_out = 768.0
 division_data_out = 3.0
 
 
-assert arithmetic.ntm_scalar_adder() == addition_data_out
+assert arithmetic.accelerator_scalar_adder() == addition_data_out
 
-assert arithmetic.ntm_scalar_multiplier() == multiplication_data_out
+assert arithmetic.accelerator_scalar_multiplier() == multiplication_data_out
 
-assert arithmetic.ntm_scalar_divider() == division_data_out
+assert arithmetic.accelerator_scalar_divider() == division_data_out

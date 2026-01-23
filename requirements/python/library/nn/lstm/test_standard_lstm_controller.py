@@ -42,12 +42,12 @@
 ##                                                                               ##
 ###################################################################################
 
-from standard import ntm_activation_gate_vector as activation_gate_vector
-from standard import ntm_forget_gate_vector as forget_gate_vector
-from standard import ntm_hidden_gate_vector as hidden_gate_vector
-from standard import ntm_input_gate_vector as input_gate_vector
-from standard import ntm_output_gate_vector as output_gate_vector
-from standard import ntm_state_gate_vector as state_gate_vector
-from standard import ntm_controller as controller
+from standard import accelerator_activation_gate_vector as activation_gate_vector
+from standard import accelerator_forget_gate_vector as forget_gate_vector
+from standard import accelerator_hidden_gate_vector as hidden_gate_vector
+from standard import accelerator_input_gate_vector as input_gate_vector
+from standard import accelerator_output_gate_vector as output_gate_vector
+from standard import accelerator_state_gate_vector as state_gate_vector
+from standard import accelerator_controller as controller
 
 print('Hello, world!')

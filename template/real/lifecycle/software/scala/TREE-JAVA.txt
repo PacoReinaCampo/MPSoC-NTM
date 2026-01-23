@@ -1,11 +1,11 @@
 code
 ├── classes
 │   ├── philosophers
-│   │   └── ntm_philosophers.scala
+│   │   └── accelerator_philosophers.scala
 │   ├── soldiers
-│   │   └── ntm_soldiers.scala
+│   │   └── accelerator_soldiers.scala
 │   └── workers
-│       └── ntm_workers.scala
+│       └── accelerator_workers.scala
 └── computing
     ├── advanced_computer_architecture
     │   ├── multi_processor_system_on_chip

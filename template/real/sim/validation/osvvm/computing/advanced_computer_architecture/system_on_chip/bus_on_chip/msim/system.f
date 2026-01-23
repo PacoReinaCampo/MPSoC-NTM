@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design.vhd
-../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/ntm_design_pkg.vhd
+../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/accelerator_design.vhd
+../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/application/accelerator_design_pkg.vhd
 
-../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model.vhd
-../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_model_pkg.vhd
+../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/accelerator_model.vhd
+../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/accelerator_model_pkg.vhd
 
-../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/ntm_testbench.vhd
+../../../../../../../../../../template/real/validation/osvvm/code/computing/advanced_computer_architecture/system_on_chip/bus_on_chip/library/accelerator_testbench.vhd

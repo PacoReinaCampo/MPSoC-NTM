@@ -228,11 +228,11 @@ begin
     if (STIMULUS_ACCELERATOR_TOP_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TOP_TEST                   ";
+      MONITOR_TEST <= "STIMULUS_ACCELERATOR_TOP_TEST                   ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TOP_CASE_0                 ";
+      MONITOR_CASE <= "STIMULUS_ACCELERATOR_TOP_CASE_0                 ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_TOP_CASE_0) then
@@ -254,7 +254,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TOP_CASE_1                 ";
+      MONITOR_CASE <= "STIMULUS_ACCELERATOR_TOP_CASE_1                 ";
       -------------------------------------------------------------------
 
       if (STIMULUS_ACCELERATOR_TOP_CASE_1) then

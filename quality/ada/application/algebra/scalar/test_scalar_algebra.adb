@@ -47,11 +47,11 @@ use Ada.Text_IO;
 
 with System.Assertions;
 
-with ntm_size;
-use ntm_size;
+with accelerator_size;
+use accelerator_size;
 
-with ntm_scalar_algebra;
-use ntm_scalar_algebra;
+with accelerator_scalar_algebra;
+use accelerator_scalar_algebra;
 
 procedure test_scalar_algebra is
 
@@ -61,7 +61,7 @@ procedure test_scalar_algebra is
 
 begin
 
-  ntm_scalar_algebra.ntm_scalar_multiplication (
+  accelerator_scalar_algebra.accelerator_scalar_multiplication (
     data_in => data_in,
 
     data_out => data_out
@@ -73,7 +73,7 @@ begin
 
   New_Line;
 
-  ntm_scalar_algebra.ntm_scalar_summation (
+  accelerator_scalar_algebra.accelerator_scalar_summation (
     data_in => data_in,
 
     data_out => data_out

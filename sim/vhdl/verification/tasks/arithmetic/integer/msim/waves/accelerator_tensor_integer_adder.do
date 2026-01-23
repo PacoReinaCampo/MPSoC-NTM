@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR INTEGER ADDER TEST}
+add wave -noupdate -divider {ACCELERATOR TENSOR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_integer_testbench/accelerator_tensor_integer_adder_test/tensor_integer_adder/CLK

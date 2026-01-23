@@ -3,7 +3,7 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM CONVOLUTIONAL LINEAR TEST}
+add wave -noupdate -divider {ACCELERATOR CONVOLUTIONAL LINEAR TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /accelerator_convolutional_linear_testbench/accelerator_convolutional_linear_test/controller/CLK

@@ -47,18 +47,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../../../library/nn/dnc/memory/dnc_addressing.h"
-#include "../../../../library/nn/dnc/memory/dnc_allocation_weighting.h"
-#include "../../../../library/nn/dnc/memory/dnc_backward_weighting.h"
-#include "../../../../library/nn/dnc/memory/dnc_forward_weighting.h"
-#include "../../../../library/nn/dnc/memory/dnc_matrix_content_based_addressing.h"
-#include "../../../../library/nn/dnc/memory/dnc_memory_matrix.h"
-#include "../../../../library/nn/dnc/memory/dnc_memory_retention_vector.h"
-#include "../../../../library/nn/dnc/memory/dnc_precedence_weighting.h"
-#include "../../../../library/nn/dnc/memory/dnc_sort_vector.h"
-#include "../../../../library/nn/dnc/memory/dnc_temporal_link_matrix.h"
-#include "../../../../library/nn/dnc/memory/dnc_usage_vector.h"
-#include "../../../../library/nn/dnc/memory/dnc_vector_content_based_addressing.h"
+#include "../../../../library/nn/dnc/memory/accelerator_addressing.h"
+#include "../../../../library/nn/dnc/memory/accelerator_allocation_weighting.h"
+#include "../../../../library/nn/dnc/memory/accelerator_backward_weighting.h"
+#include "../../../../library/nn/dnc/memory/accelerator_forward_weighting.h"
+#include "../../../../library/nn/dnc/memory/accelerator_matrix_content_based_addressing.h"
+#include "../../../../library/nn/dnc/memory/accelerator_memory_matrix.h"
+#include "../../../../library/nn/dnc/memory/accelerator_memory_retention_vector.h"
+#include "../../../../library/nn/dnc/memory/accelerator_precedence_weighting.h"
+#include "../../../../library/nn/dnc/memory/accelerator_sort_vector.h"
+#include "../../../../library/nn/dnc/memory/accelerator_temporal_link_matrix.h"
+#include "../../../../library/nn/dnc/memory/accelerator_usage_vector.h"
+#include "../../../../library/nn/dnc/memory/accelerator_vector_content_based_addressing.h"
 
 int main() {
   srand(time(NULL));
@@ -72,19 +72,19 @@ int main() {
 
   data_out = data_a_in + data_b_in;
 
-  assert(dnc_addressing_adder(data_a_in, data_b_in) == data_out);
+  assert(accelerator_addressing_adder(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in - data_b_in;
 
-  assert(dnc_addressing_subtractor(data_a_in, data_b_in) == data_out);
+  assert(accelerator_addressing_subtractor(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in * data_b_in;
 
-  assert(dnc_addressing_multiplier(data_a_in, data_b_in) == data_out);
+  assert(accelerator_addressing_multiplier(data_a_in, data_b_in) == data_out);
 
   data_out = data_a_in / data_b_in;
 
-  assert(dnc_addressing_divider(data_a_in, data_b_in) == data_out);
+  assert(accelerator_addressing_divider(data_a_in, data_b_in) == data_out);
 
   return 0;
 }

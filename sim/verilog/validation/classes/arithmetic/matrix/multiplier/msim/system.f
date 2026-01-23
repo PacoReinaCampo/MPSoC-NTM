@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/arithmetic/matrix/multiplier/ntm_design.sv
+../../../../../../../../validation/classes/application/arithmetic/matrix/multiplier/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/arithmetic/matrix/multiplier/ntm_testbench.sv
+../../../../../../../../validation/classes/library/arithmetic/matrix/multiplier/accelerator_testbench.sv

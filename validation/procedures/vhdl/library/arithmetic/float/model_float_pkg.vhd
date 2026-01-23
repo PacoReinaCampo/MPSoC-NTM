@@ -108,60 +108,60 @@ package model_float_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := scalar_randomness_generation(SCALAR_SAMPLE_B_SEED1, SCALAR_SAMPLE_B_SEED2);
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_VECTOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_ACCELERATOR_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   ------------------------------------------------------------------------------
   -- Components
