@@ -52,4 +52,4 @@ simulate:
 	xsim top -testplusarg UVM_TESTNAME=peripheral_test -testplusarg UVM_VERBOSITY=UVM_LOW -runall
 
 clean:
-	rm -rf *.dir *.jou *.log *.pb *.vcd .Xil
+	rm -rf *.dir *.jou *.log *.pb *.vcd *.wdb .Xil

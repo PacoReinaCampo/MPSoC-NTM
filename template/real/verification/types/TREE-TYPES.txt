@@ -1,0 +1,301 @@
+code
+├── classes
+│   ├── philosophers
+│   │   └── accelerator_philosophers
+│   │       ├── application
+│   │       │   ├── accelerator_design_pkg.vhd
+│   │       │   └── accelerator_design.vhd
+│   │       └── library
+│   │           ├── accelerator_model_pkg.vhd
+│   │           ├── accelerator_model.vhd
+│   │           └── accelerator_testbench.vhd
+│   ├── soldiers
+│   │   └── accelerator_soldiers
+│   │       ├── application
+│   │       │   ├── accelerator_design_pkg.vhd
+│   │       │   └── accelerator_design.vhd
+│   │       └── library
+│   │           ├── accelerator_model_pkg.vhd
+│   │           ├── accelerator_model.vhd
+│   │           └── accelerator_testbench.vhd
+│   └── workers
+│       └── accelerator_workers
+│           ├── application
+│           │   ├── accelerator_design_pkg.vhd
+│           │   └── accelerator_design.vhd
+│           └── library
+│               ├── accelerator_model_pkg.vhd
+│               ├── accelerator_model.vhd
+│               └── accelerator_testbench.vhd
+└── computing
+    ├── advanced_computer_architecture
+    │   ├── multi_processor_system_on_chip
+    │   │   └── multi_processor_system_on_chip
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   ├── processing_unit
+    │   │   ├── mimd
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── misd
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── simd
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   └── sisd
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   └── system_on_chip
+    │       ├── bus_on_chip
+    │       │   ├── application
+    │       │   │   ├── accelerator_design_pkg.vhd
+    │       │   │   └── accelerator_design.vhd
+    │       │   └── library
+    │       │       ├── accelerator_model_pkg.vhd
+    │       │       ├── accelerator_model.vhd
+    │       │       └── accelerator_testbench.vhd
+    │       └── network_on_chip
+    │           ├── application
+    │           │   ├── accelerator_design_pkg.vhd
+    │           │   └── accelerator_design.vhd
+    │           └── library
+    │               ├── accelerator_model_pkg.vhd
+    │               ├── accelerator_model.vhd
+    │               └── accelerator_testbench.vhd
+    ├── computer_architecture
+    │   ├── harvard_architecture
+    │   │   ├── pu_or1k
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   └── pu_riscv
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   └── von_neumann_architecture
+    │       ├── pu_or1k
+    │       │   ├── application
+    │       │   │   ├── accelerator_design_pkg.vhd
+    │       │   │   └── accelerator_design.vhd
+    │       │   └── library
+    │       │       ├── accelerator_model_pkg.vhd
+    │       │       ├── accelerator_model.vhd
+    │       │       └── accelerator_testbench.vhd
+    │       └── pu_riscv
+    │           ├── application
+    │           │   ├── accelerator_design_pkg.vhd
+    │           │   └── accelerator_design.vhd
+    │           └── library
+    │               ├── accelerator_model_pkg.vhd
+    │               ├── accelerator_model.vhd
+    │               └── accelerator_testbench.vhd
+    ├── information
+    │   ├── bit
+    │   │   └── bit
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   ├── combinational_logic
+    │   │   ├── arithmetic_circuits
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   └── logic_circuits
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   ├── finite_state_machine
+    │   │   └── finite_state_machine
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   ├── logic_gate
+    │   │   ├── and_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── nand_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── nor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── not_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── or_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── xnor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   ├── xor_gate
+    │   │   │   ├── application
+    │   │   │   │   ├── accelerator_design_pkg.vhd
+    │   │   │   │   └── accelerator_design.vhd
+    │   │   │   └── library
+    │   │   │       ├── accelerator_model_pkg.vhd
+    │   │   │       ├── accelerator_model.vhd
+    │   │   │       └── accelerator_testbench.vhd
+    │   │   └── yes_gate
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   ├── pushdown_automaton
+    │   │   └── pushdown_automaton
+    │   │       ├── application
+    │   │       │   ├── accelerator_design_pkg.vhd
+    │   │       │   └── accelerator_design.vhd
+    │   │       └── library
+    │   │           ├── accelerator_model_pkg.vhd
+    │   │           ├── accelerator_model.vhd
+    │   │           └── accelerator_testbench.vhd
+    │   └── turing_machine
+    │       └── turing_machine
+    │           ├── application
+    │           │   ├── accelerator_design_pkg.vhd
+    │           │   └── accelerator_design.vhd
+    │           └── library
+    │               ├── accelerator_model_pkg.vhd
+    │               ├── accelerator_model.vhd
+    │               └── accelerator_testbench.vhd
+    └── neural_network
+        ├── attention_neural_network
+        │   └── attention_neural_network
+        │       ├── application
+        │       │   ├── accelerator_design_pkg.vhd
+        │       │   └── accelerator_design.vhd
+        │       └── library
+        │           ├── accelerator_model_pkg.vhd
+        │           ├── accelerator_model.vhd
+        │           └── accelerator_testbench.vhd
+        ├── differentiable_neural_computer_neural_network
+        │   └── differentiable_neural_computer_neural_network
+        │       ├── application
+        │       │   ├── accelerator_design_pkg.vhd
+        │       │   └── accelerator_design.vhd
+        │       └── library
+        │           ├── accelerator_model_pkg.vhd
+        │           ├── accelerator_model.vhd
+        │           └── accelerator_testbench.vhd
+        ├── feedforward_neural_network
+        │   └── feedforward_neural_network
+        │       ├── application
+        │       │   ├── accelerator_design_pkg.vhd
+        │       │   └── accelerator_design.vhd
+        │       └── library
+        │           ├── accelerator_model_pkg.vhd
+        │           ├── accelerator_model.vhd
+        │           └── accelerator_testbench.vhd
+        ├── long_short_term_memory_neural_network
+        │   └── long_short_term_memory_neural_network
+        │       ├── application
+        │       │   ├── accelerator_design_pkg.vhd
+        │       │   └── accelerator_design.vhd
+        │       └── library
+        │           ├── accelerator_model_pkg.vhd
+        │           ├── accelerator_model.vhd
+        │           └── accelerator_testbench.vhd
+        ├── neural_turing_machine_neural_network
+        │   └── neural_turing_machine_neural_network
+        │       ├── application
+        │       │   ├── accelerator_design_pkg.vhd
+        │       │   └── accelerator_design.vhd
+        │       └── library
+        │           ├── accelerator_model_pkg.vhd
+        │           ├── accelerator_model.vhd
+        │           └── accelerator_testbench.vhd
+        └── perceptron_neural_network
+            └── perceptron_neural_network
+                ├── application
+                │   ├── accelerator_design_pkg.vhd
+                │   └── accelerator_design.vhd
+                └── library
+                    ├── accelerator_model_pkg.vhd
+                    ├── accelerator_model.vhd
+                    └── accelerator_testbench.vhd
+
+128 directories, 170 files
