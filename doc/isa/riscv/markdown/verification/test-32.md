@@ -99,6 +99,8 @@ Format of a line in the table:
 
 :RV32I - "RV32I Base Integer Instruction Set"
 
+The RV32I table details the base integer instruction set of the RISC-V ISA for 32-bit implementations, encompassing fundamental arithmetic, logical, and control instructions essential for basic computation.
+
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32um-p-div`           | `passed`    |
@@ -119,6 +121,8 @@ Format of a line in the table:
 | `rv32um-v-remu`          | `no passed` |
 
 :RV32M - "RV32M Standard Extension for Integer Multiply and Divide"
+
+This table specifies the RV32M extension, which adds support for integer multiplication and division instructions to the base RV32I instruction set, enhancing computational capabilities.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -144,6 +148,8 @@ Format of a line in the table:
 | `rv32ua-v-lrsc`          | `no passed` |
 
 :RV32A - "RV32A Standard Extension for Atomic Instructions"
+
+The RV32A table outlines the RV32A extension, which introduces atomic memory operations to ensure thread-safe execution in multi-threaded environments, enhancing concurrency control.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -172,6 +178,8 @@ Format of a line in the table:
 
 :RV32F - "RV32F Standard Extension for Single-Precision Floating-Point"
 
+This table describes the RV32F extension, which adds support for single-precision floating-point arithmetic and operations to the RISC-V ISA, enabling computation with floating-point numbers.
+
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32ud-p-fadd`          | `passed`    |
@@ -197,12 +205,16 @@ Format of a line in the table:
 
 :RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"
 
+The RV32D table details the RV32D extension, which extends the RISC-V ISA to support double-precision floating-point arithmetic and operations, facilitating higher precision calculations.
+
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32uc-p-rvc`           | `no passed` |
 | `rv32uc-v-rvc`           | `no passed` |
 
 :RV32C - "RV32C Standard Extension for Compressed Instructions"
+
+This table outlines the RV32C extension, which introduces compressed instruction formats to reduce code size while maintaining compatibility with the base RV32I instruction set, optimizing program memory usage.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -214,6 +226,8 @@ Format of a line in the table:
 | `rv32uzba-v-sh3add`      | `no passed` |
 
 :RV32ZBA - "RV32ZBA Standard Extension)"
+
+The RV32ZBA table specifies the RV32ZBA extension, which adds bit manipulation and bit field instructions to the RISC-V ISA, enhancing support for bitwise operations and compact data structures.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -256,6 +270,8 @@ Format of a line in the table:
 
 :RV32ZBB - "RV32ZBB Standard Extension)"
 
+This table details the RV32ZBB extension, which introduces byte and half-word instructions to efficiently manipulate data at finer granularity, optimizing memory and computational resources.
+
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32uzbc-p-clmul`       | `no passed` |
@@ -266,6 +282,8 @@ Format of a line in the table:
 | `rv32uzbc-v-clmulr`      | `no passed` |
 
 :RV32ZBC - "RV32ZBC Standard Extension)"
+
+The RV32ZBC table describes the RV32ZBC extension, which enhances support for population count and bit count operations within the RISC-V ISA, aiding in various algorithmic optimizations.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -287,6 +305,8 @@ Format of a line in the table:
 | `rv32uzbs-v-bseti`       | `no passed` |
 
 :RV32ZBS - "RV32ZBS Standard Extension)"
+
+The RV32ZBS table outlines the RV32ZBS extension, which introduces support for specialized instructions related to byte swap operations, optimizing data processing in specific use cases.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -315,6 +335,8 @@ Format of a line in the table:
 
 :RV32ZFH - "RV32ZFH Standard Extension"
 
+This table details the RV32ZFH extension, which enhances support for hardware floating-point features in the RISC-V ISA, improving performance and precision in floating-point arithmetic.
+
 | test rv32                | status      |
 |--------------------------|:------------|
 | `rv32si-p-csr`           | `no passed` |
@@ -325,6 +347,8 @@ Format of a line in the table:
 | `rv32si-p-wfi`           | `no passed` |
 
 :RV32I - "RV32I Standard Extension for Integer Instructions for Supervisor-level Instructions"
+
+The RV32I table specifies the RV32I extension tailored for supervisor-level instructions, adding specific integer operations and capabilities for privileged execution modes.
 
 | test rv32                | status      |
 |--------------------------|:------------|
@@ -344,3 +368,5 @@ Format of a line in the table:
 | `rv32mi-p-zicntr`        | `no passed` |
 
 :RV32I - "RV32I Standard Extension for Integer Instructions for Machine-level Instructions"
+
+This table describes the RV32I extension for machine-level instructions, introducing integer operations and functionalities tailored for the highest privilege execution mode in the RISC-V ISA.
