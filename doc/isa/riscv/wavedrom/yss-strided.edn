@@ -1,0 +1,11 @@
+{reg: [
+  {bits: 7, name: 0x27, attr: 'VSS* strided'},
+  {bits: 5, name: 'ys3', attr: 'store data'},
+  {bits: 3, name: 'width'},
+  {bits: 5, name: 'rs1', attr: 'base address'},
+  {bits: 5, name: 'rs2', attr: 'stride'},
+  {bits: 1, name: 'ym'},
+  {bits: 2, name: 'mop'},
+  {bits: 1, name: 'mew'},
+  {bits: 3, name: 'nf'},
+]}

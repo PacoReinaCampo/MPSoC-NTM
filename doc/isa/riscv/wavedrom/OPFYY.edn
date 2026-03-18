@@ -1,0 +1,9 @@
+{reg: [
+  {bits: 7, name: 0x57, attr: 'OPFYY'},
+  {bits: 5, name: 'yd / rd'},
+  {bits: 3, name: 1},
+  {bits: 5, name: 'ys1'},
+  {bits: 5, name: 'ys2'},
+  {bits: 1, name: 'ym'},
+  {bits: 6, name: 'funct6'},
+]}

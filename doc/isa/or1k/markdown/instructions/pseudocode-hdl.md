@@ -1,10 +1,10 @@
-## INSTRUCTION PSEUDO CODE (ALTERNATIVE)
+## INSTRUCTION PSEUDO-CODE (HDL)
 
 Format of a line in the table:
 
-`<instruction name> "<instruction pseudo code>"`
+`<instruction name> "<instruction pseudo-code>"`
 
-| instruction name       | instruction pseudo code                                                                 |
+| instruction name       | instruction pseudo-code                                                                 |
 |------------------------|:----------------------------------------------------------------------------------------|
 | `l.add rD,rA,rB`       | `rD[31:0] <- rA[31:0] + rB[31:0]`                                                       |
 |                        | `SR[CY] <- carry (unsigned overflow)`                                                   |
@@ -285,7 +285,7 @@ Format of a line in the table:
 :OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
 
 
-| instruction name       | instruction pseudo code                                                                 |
+| instruction name       | instruction pseudo-code                                                                 |
 |------------------------|:----------------------------------------------------------------------------------------|
 | `l.add rD,rA,rB`       | `rD[63:0] <- rA[63:0] + rB[63:0]`                                                       |
 |                        | `SR[CY] <- carry (unsigned overflow)`                                                   |

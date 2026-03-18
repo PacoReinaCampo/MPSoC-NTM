@@ -1,10 +1,10 @@
-## INSTRUCTION PSEUDO CODE (C)
+## INSTRUCTION PSEUDO-CODE (PL)
 
 Format of a line in the table:
 
-`<instruction name> "<instruction pseudo code>"`
+`<instruction name> "<instruction pseudo-code>"`
 
-| instruction name    | instruction pseudo code                                                    | status    |
+| instruction name    | instruction pseudo-code                                                    | status    |
 |---------------------|:---------------------------------------------------------------------------|:----------|
 | `ADC(.B)  dst`      | `dst + C -> dst`                                                           | `x x x x` |
 | `ADD(.B)  src,dst`  | `src + dst -> dst`                                                         | `x x x x` |
