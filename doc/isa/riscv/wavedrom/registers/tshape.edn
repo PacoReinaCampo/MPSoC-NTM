@@ -1,0 +1,6 @@
+{reg: [
+  {bits: 8, name: 'TX[7:0]'},
+  {bits: 8, name: 'TY[7:0]'},
+  {bits: 8, name: 'TZ[7:0]'},
+  {bits: 8, name: 'reserved'},
+]}

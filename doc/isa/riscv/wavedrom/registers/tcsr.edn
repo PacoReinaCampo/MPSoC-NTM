@@ -1,0 +1,7 @@
+{reg: [
+  {bits: 2, name: 'trnd', attr: '[1:0]'},
+  {bits: 1, name: 'tsat'},
+  {bits: 5, name: 'tflags', attr: '[4:0]'},
+  {bits: 1, name: 'texc'},
+  {bits: 23, name: 'reserved'},
+]}

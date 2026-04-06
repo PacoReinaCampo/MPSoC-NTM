@@ -1,0 +1,11 @@
+{reg: [
+  {bits: 3, name: 'tlmul', attr: '[2:0]'},
+  {bits: 3, name: 'tsew', attr: '[2:0]'},
+  {bits: 1, name: 'tta'},
+  {bits: 1, name: 'tma'},
+  {bits: 2, name: 'tdim', attr: '[1:0]'},
+  {bits: 3, name: 'tlayout', attr: '[2:0]'},
+  {bits: 3, name: 'tformat', attr: '[2:0]'},
+  {bits: 15, name: 'reserved'},
+  {bits: 1, name: 'till'},
+]}

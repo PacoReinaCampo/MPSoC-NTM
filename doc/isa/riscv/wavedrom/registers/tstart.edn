@@ -1,0 +1,6 @@
+{reg: [
+  {bits: 8, name: 'startX[7:0]'},
+  {bits: 8, name: 'startY[7:0]'},
+  {bits: 8, name: 'startZ[7:0]'},
+  {bits: 8, name: 'reserved'},
+]}

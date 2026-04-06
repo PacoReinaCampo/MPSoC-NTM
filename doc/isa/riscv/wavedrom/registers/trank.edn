@@ -1,0 +1,5 @@
+{reg: [
+  {bits: 2, name: 'rank', attr: '[1:0]'},
+  {bits: 29, name: 'reserved'},
+  {bits: 1, name: 'rill'},
+]}

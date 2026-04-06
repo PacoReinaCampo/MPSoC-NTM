@@ -1,0 +1,3 @@
+{reg: [
+  {bits: 32, name: 'tensor_data', attr: 'TILEMAX'},
+]}
