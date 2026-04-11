@@ -62,7 +62,7 @@ These instructions provide access to special-purpose registers that control the 
 
 ### Floating-Point Operate (FPop) Instructions
 
-Floating-point operate instructions perform arithmetic operations on floating-point numbers. Key instructions include:
+Floating-Point operate instructions perform arithmetic operations on floating-point numbers. Key instructions include:
 
 - **FADD**: Adds two floating-point numbers.
 - **FSUB**: Subtracts one floating-point number from another.

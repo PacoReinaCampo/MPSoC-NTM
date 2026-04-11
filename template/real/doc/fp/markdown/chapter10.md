@@ -8,7 +8,7 @@ Key Points:
 
 - **Intermediate Precision**: Intermediate results should be computed with sufficient precision to minimize rounding errors.
 - **Order of Operations**: The order in which operations are performed should adhere to standard mathematical rules, with consideration for rounding and precision.
-- **Associativity and Commutativity**: Floating-point arithmetic is not always associative or commutative due to rounding errors. The evaluation order can affect the final result.
+- **Associativity and Commutativity**: Floating-Point arithmetic is not always associative or commutative due to rounding errors. The evaluation order can affect the final result.
 - **Explicit Parentheses**: Use of parentheses to enforce specific evaluation order is encouraged to ensure clarity and correctness.
 - **Rounding**: Each operation should be rounded according to the current rounding mode.
 

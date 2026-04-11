@@ -67,7 +67,7 @@ These instructions provide access to special-purpose registers that control the 
 
 ### Floating-Point Operate (FPop)
 
-Floating-point operate instructions are used to perform arithmetic operations on floating-point numbers. Key instructions include:
+Floating-Point operate instructions are used to perform arithmetic operations on floating-point numbers. Key instructions include:
 
 - **Floating-Point Add (FADD), Subtract (FSUB), Multiply (FMUL), Divide (FDIV)**: Basic floating-point arithmetic operations.
 - **Square Root (FSQRT)**: Compute the square root of a floating-point number.
