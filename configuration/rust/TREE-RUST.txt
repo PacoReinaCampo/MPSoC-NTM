@@ -106,60 +106,6 @@ library
 ├── nn
 │   ├── accelerator_fnn_controller.rs
 │   ├── accelerator_lstm_controller.rs
-│   ├── ann
-│   │   ├── accelerator_ann_controller.rs
-│   │   ├── components
-│   │   │   ├── accelerator_masked_multi_head_attention.rs
-│   │   │   ├── accelerator_masked_scaled_dot_product_attention.rs
-│   │   │   ├── accelerator_multi_head_attention.rs
-│   │   │   └── accelerator_scaled_dot_product_attention.rs
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── accelerator_fnn.rs
-│   │   │   └── lstm
-│   │   │       └── accelerator_lstm.rs
-│   │   ├── functions
-│   │   │   ├── accelerator_layer_norm.rs
-│   │   │   └── accelerator_positional_encoding.rs
-│   │   ├── inputs
-│   │   │   ├── accelerator_inputs_vector.rs
-│   │   │   ├── accelerator_keys_vector.rs
-│   │   │   ├── accelerator_queries_vector.rs
-│   │   │   └── accelerator_values_vector.rs
-│   │   └── top
-│   │       ├── accelerator_controller.rs
-│   │       ├── accelerator_decoder.rs
-│   │       └── accelerator_encoder.rs
-│   ├── dnc
-│   │   ├── dnc.rs
-│   │   ├── memory
-│   │   │   ├── accelerator_addressing.rs
-│   │   │   ├── accelerator_allocation_weighting.rs
-│   │   │   ├── accelerator_backward_weighting.rs
-│   │   │   ├── accelerator_forward_weighting.rs
-│   │   │   ├── accelerator_matrix_content_based_addressing.rs
-│   │   │   ├── accelerator_memory_matrix.rs
-│   │   │   ├── accelerator_memory_retention_vector.rs
-│   │   │   ├── accelerator_precedence_weighting.rs
-│   │   │   ├── accelerator_sort_vector.rs
-│   │   │   ├── accelerator_temporal_link_matrix.rs
-│   │   │   ├── accelerator_usage_vector.rs
-│   │   │   └── accelerator_vector_content_based_addressing.rs
-│   │   ├── read_heads
-│   │   │   ├── accelerator_read_content_weighting.rs
-│   │   │   ├── accelerator_read_vectors.rs
-│   │   │   └── accelerator_read_weighting.rs
-│   │   ├── top
-│   │   │   ├── accelerator_interface_matrix.rs
-│   │   │   ├── accelerator_interface_top.rs
-│   │   │   ├── accelerator_interface_vector.rs
-│   │   │   ├── accelerator_output_vector.rs
-│   │   │   └── accelerator_top.rs
-│   │   ├── trained
-│   │   │   └── accelerator_trained_top.rs
-│   │   └── write_heads
-│   │       ├── accelerator_write_content_weighting.rs
-│   │       └── accelerator_write_weighting.rs
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.rs
@@ -249,4 +195,4 @@ library
             ├── accelerator_lstm_output_v_trainer.rs
             └── accelerator_lstm_output_w_trainer.rs
 
-52 directories, 197 files
+38 directories, 157 files

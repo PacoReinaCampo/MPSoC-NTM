@@ -103,60 +103,6 @@ library
 │       ├── accelerator_vector_mean_function.cpp
 │       └── accelerator_vector_oneplus_function.cpp
 ├── nn
-│   ├── ann
-│   │   ├── ann_controller.cpp
-│   │   ├── components
-│   │   │   ├── accelerator_masked_multi_head_attention.cpp
-│   │   │   ├── accelerator_masked_scaled_dot_product_attention.cpp
-│   │   │   ├── accelerator_multi_head_attention.cpp
-│   │   │   └── accelerator_scaled_dot_product_attention.cpp
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── accelerator_fnn.cpp
-│   │   │   └── lstm
-│   │   │       └── accelerator_lstm.cpp
-│   │   ├── functions
-│   │   │   ├── accelerator_layer_norm.cpp
-│   │   │   └── accelerator_positional_encoding.cpp
-│   │   ├── inputs
-│   │   │   ├── accelerator_inputs_vector.cpp
-│   │   │   ├── accelerator_keys_vector.cpp
-│   │   │   ├── accelerator_queries_vector.cpp
-│   │   │   └── accelerator_values_vector.cpp
-│   │   └── top
-│   │       ├── accelerator_controller.cpp
-│   │       ├── accelerator_decoder.cpp
-│   │       └── accelerator_encoder.cpp
-│   ├── dnc
-│   │   ├── accelerator_controller.cpp
-│   │   ├── memory
-│   │   │   ├── accelerator_addressing.cpp
-│   │   │   ├── accelerator_allocation_weighting.cpp
-│   │   │   ├── accelerator_backward_weighting.cpp
-│   │   │   ├── accelerator_forward_weighting.cpp
-│   │   │   ├── accelerator_matrix_content_based_addressing.cpp
-│   │   │   ├── accelerator_memory_matrix.cpp
-│   │   │   ├── accelerator_memory_retention_vector.cpp
-│   │   │   ├── accelerator_precedence_weighting.cpp
-│   │   │   ├── accelerator_sort_vector.cpp
-│   │   │   ├── accelerator_temporal_link_matrix.cpp
-│   │   │   ├── accelerator_usage_vector.cpp
-│   │   │   └── accelerator_vector_content_based_addressing.cpp
-│   │   ├── read_heads
-│   │   │   ├── accelerator_read_content_weighting.cpp
-│   │   │   ├── accelerator_read_vectors.cpp
-│   │   │   └── accelerator_read_weighting.cpp
-│   │   ├── top
-│   │   │   ├── accelerator_interface_matrix.cpp
-│   │   │   ├── accelerator_interface_top.cpp
-│   │   │   ├── accelerator_interface_vector.cpp
-│   │   │   ├── accelerator_output_vector.cpp
-│   │   │   └── accelerator_top.cpp
-│   │   ├── trained
-│   │   │   └── accelerator_trained_top.cpp
-│   │   └── write_heads
-│   │       ├── accelerator_write_content_weighting.cpp
-│   │       └── accelerator_write_weighting.cpp
 │   ├── fnn
 │   │   ├── accelerator_fnn_controller.cpp
 │   │   ├── convolutional
@@ -249,4 +195,4 @@ library
             ├── accelerator_lstm_output_v_trainer.cpp
             └── accelerator_lstm_output_w_trainer.cpp
 
-65 directories, 184 files
+51 directories, 144 files

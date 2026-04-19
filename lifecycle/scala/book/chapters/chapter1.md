@@ -45,7 +45,7 @@ Integer literals represent whole numbers and can be expressed in different bases
 
 ### Floating Point Literals
 
-Floating-point literals represent numbers with a fractional part and can be expressed in standard or exponential notation:
+Floating-Point literals represent numbers with a fractional part and can be expressed in standard or exponential notation:
 
 - **Standard Notation**: 
    * Example: `3.14`, `0.0`, `-1.5`

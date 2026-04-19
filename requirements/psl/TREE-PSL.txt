@@ -76,58 +76,6 @@ library
 │       ├── accelerator_vector_mean_function.psl
 │       └── accelerator_vector_oneplus_function.psl
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── accelerator_masked_multi_head_attention.psl
-│   │   │   ├── accelerator_masked_scaled_dot_product_attention.psl
-│   │   │   ├── accelerator_multi_head_attention.psl
-│   │   │   └── accelerator_scaled_dot_product_attention.psl
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── accelerator_fnn.psl
-│   │   │   └── lstm
-│   │   │       └── accelerator_lstm.psl
-│   │   ├── functions
-│   │   │   ├── accelerator_layer_norm.psl
-│   │   │   └── accelerator_positional_encoding.psl
-│   │   ├── inputs
-│   │   │   ├── accelerator_inputs_vector.psl
-│   │   │   ├── accelerator_keys_vector.psl
-│   │   │   ├── accelerator_queries_vector.psl
-│   │   │   └── accelerator_values_vector.psl
-│   │   └── top
-│   │       ├── accelerator_controller.psl
-│   │       ├── accelerator_decoder.psl
-│   │       └── accelerator_encoder.psl
-│   ├── dnc
-│   │   ├── memory
-│   │   │   ├── accelerator_addressing.psl
-│   │   │   ├── accelerator_allocation_weighting.psl
-│   │   │   ├── accelerator_backward_weighting.psl
-│   │   │   ├── accelerator_forward_weighting.psl
-│   │   │   ├── accelerator_matrix_content_based_addressing.psl
-│   │   │   ├── accelerator_memory_matrix.psl
-│   │   │   ├── accelerator_memory_retention_vector.psl
-│   │   │   ├── accelerator_precedence_weighting.psl
-│   │   │   ├── accelerator_sort_vector.psl
-│   │   │   ├── accelerator_temporal_link_matrix.psl
-│   │   │   ├── accelerator_usage_vector.psl
-│   │   │   └── accelerator_vector_content_based_addressing.psl
-│   │   ├── read_heads
-│   │   │   ├── accelerator_read_content_weighting.psl
-│   │   │   ├── accelerator_read_vectors.psl
-│   │   │   └── accelerator_read_weighting.psl
-│   │   ├── top
-│   │   │   ├── accelerator_interface_matrix.psl
-│   │   │   ├── accelerator_interface_top.psl
-│   │   │   ├── accelerator_interface_vector.psl
-│   │   │   ├── accelerator_output_vector.psl
-│   │   │   └── accelerator_top.psl
-│   │   ├── trained
-│   │   │   └── accelerator_trained_top.psl
-│   │   └── write_heads
-│   │       ├── accelerator_write_content_weighting.psl
-│   │       └── accelerator_write_weighting.psl
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.psl
@@ -214,4 +162,4 @@ library
             ├── accelerator_lstm_output_v_trainer.psl
             └── accelerator_lstm_output_w_trainer.psl
 
-49 directories, 165 files
+35 directories, 127 files

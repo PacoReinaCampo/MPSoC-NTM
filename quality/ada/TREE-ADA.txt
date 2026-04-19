@@ -25,58 +25,6 @@ library
 │   └── vector
 │       └── accelerator_vector_math.adb
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   │   ├── accelerator_masked_multi_head_attention.adb
-│   │   │   ├── accelerator_masked_scaled_dot_product_attention.adb
-│   │   │   ├── accelerator_multi_head_attention.adb
-│   │   │   └── accelerator_scaled_dot_product_attention.adb
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   │   └── accelerator_fnn.adb
-│   │   │   └── lstm
-│   │   │       └── accelerator_lstm.adb
-│   │   ├── functions
-│   │   │   ├── accelerator_layer_norm.adb
-│   │   │   └── accelerator_positional_encoding.adb
-│   │   ├── inputs
-│   │   │   ├── accelerator_inputs_vector.adb
-│   │   │   ├── accelerator_keys_vector.adb
-│   │   │   ├── accelerator_queries_vector.adb
-│   │   │   └── accelerator_values_vector.adb
-│   │   └── top
-│   │       ├── accelerator_controller.adb
-│   │       ├── accelerator_decoder.adb
-│   │       └── accelerator_encoder.adb
-│   ├── dnc
-│   │   ├── memory
-│   │   │   ├── accelerator_addressing.adb
-│   │   │   ├── accelerator_allocation_weighting.adb
-│   │   │   ├── accelerator_backward_weighting.adb
-│   │   │   ├── accelerator_forward_weighting.adb
-│   │   │   ├── accelerator_matrix_content_based_addressing.adb
-│   │   │   ├── accelerator_memory_matrix.adb
-│   │   │   ├── accelerator_memory_retention_vector.adb
-│   │   │   ├── accelerator_precedence_weighting.adb
-│   │   │   ├── accelerator_sort_vector.adb
-│   │   │   ├── accelerator_temporal_link_matrix.adb
-│   │   │   ├── accelerator_usage_vector.adb
-│   │   │   └── accelerator_vector_content_based_addressing.adb
-│   │   ├── read_heads
-│   │   │   ├── accelerator_read_content_weighting.adb
-│   │   │   ├── accelerator_read_vectors.adb
-│   │   │   └── accelerator_read_weighting.adb
-│   │   ├── top
-│   │   │   ├── accelerator_interface_matrix.adb
-│   │   │   ├── accelerator_interface_top.adb
-│   │   │   ├── accelerator_interface_vector.adb
-│   │   │   ├── accelerator_output_vector.adb
-│   │   │   └── accelerator_top.adb
-│   │   ├── trained
-│   │   │   └── accelerator_trained_top.adb
-│   │   └── write_heads
-│   │       ├── accelerator_write_content_weighting.adb
-│   │       └── accelerator_write_weighting.adb
 │   ├── fnn
 │   │   ├── convolutional
 │   │   │   └── accelerator_controller.adb
@@ -163,4 +111,4 @@ library
             ├── accelerator_lstm_output_v_trainer.adb
             └── accelerator_lstm_output_w_trainer.adb
 
-49 directories, 114 files
+35 directories, 76 files

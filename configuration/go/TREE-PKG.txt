@@ -14,20 +14,6 @@ library
 │   ├── ScalarMath
 │   └── VectorMath
 ├── nn
-│   ├── ann
-│   │   ├── components
-│   │   ├── controller
-│   │   │   ├── fnn
-│   │   │   └── lstm
-│   │   ├── functions
-│   │   ├── inputs
-│   │   └── top
-│   ├── dnc
-│   │   ├── memory
-│   │   ├── read_heads
-│   │   ├── top
-│   │   ├── trained
-│   │   └── write_heads
 │   ├── fnn
 │   │   ├── convolutional
 │   │   └── standard
@@ -49,4 +35,4 @@ library
         ├── input
         └── output
 
-49 directories, 0 files
+35 directories, 0 files
