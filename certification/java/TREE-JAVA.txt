@@ -25,101 +25,102 @@ library
 │   │   └── accelerator_tensor_arithmetic.java
 │   └── vector
 │       └── accelerator_vector_arithmetic.java
-├── math
-│   ├── test_matrix_math.java
-│   ├── test_scalar_math.java
-│   ├── test_vector_math.java
-│   ├── matrix
-│   │   └── accelerator_matrix_math.java
-│   ├── scalar
-│   │   └── accelerator_scalar_math.java
-│   └── vector
-│       └── accelerator_vector_math.java
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.java
-│   │   └── standard
-│   │       └── accelerator_controller.java
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector.java
-│   │   │   ├── accelerator_controller.java
-│   │   │   ├── accelerator_forget_gate_vector.java
-│   │   │   ├── accelerator_hidden_gate_vector.java
-│   │   │   ├── accelerator_input_gate_vector.java
-│   │   │   ├── accelerator_output_gate_vector.java
-│   │   │   └── accelerator_state_gate_vector.java
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector.java
-│   │       ├── accelerator_controller.java
-│   │       ├── accelerator_forget_gate_vector.java
-│   │       ├── accelerator_hidden_gate_vector.java
-│   │       ├── accelerator_input_gate_vector.java
-│   │       ├── accelerator_output_gate_vector.java
-│   │       └── accelerator_state_gate_vector.java
-│   └── ntm
-│       ├── memory
-│       │   ├── accelerator_addressing.java
-│       │   ├── accelerator_matrix_content_based_addressing.java
-│       │   └── accelerator_vector_content_based_addressing.java
-│       ├── read_heads
-│       │   └── accelerator_reading.java
-│       ├── top
-│       │   ├── accelerator_interface_matrix.java
-│       │   ├── accelerator_interface_top.java
-│       │   ├── accelerator_interface_vector.java
-│       │   ├── accelerator_output_vector.java
-│       │   └── accelerator_top.java
-│       ├── trained
-│       │   └── accelerator_trained_top.java
-│       └── write_heads
-│           ├── accelerator_erasing.java
-│           └── accelerator_writing.java
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_matrix_controller_differentiation.java
-    │   └── accelerator_vector_controller_differentiation.java
-    ├── fnn
-    │   ├── accelerator_fnn_b_trainer.java
-    │   ├── accelerator_fnn_d_trainer.java
-    │   ├── accelerator_fnn_k_trainer.java
-    │   ├── accelerator_fnn_trainer.java
-    │   ├── accelerator_fnn_u_trainer.java
-    │   ├── accelerator_fnn_v_trainer.java
-    │   └── accelerator_fnn_w_trainer.java
-    └── lstm
-        ├── activation
-        │   ├── accelerator_lstm_activation_b_trainer.java
-        │   ├── accelerator_lstm_activation_d_trainer.java
-        │   ├── accelerator_lstm_activation_k_trainer.java
-        │   ├── accelerator_lstm_activation_trainer.java
-        │   ├── accelerator_lstm_activation_u_trainer.java
-        │   ├── accelerator_lstm_activation_v_trainer.java
-        │   └── accelerator_lstm_activation_w_trainer.java
-        ├── forget
-        │   ├── accelerator_lstm_forget_b_trainer.java
-        │   ├── accelerator_lstm_forget_d_trainer.java
-        │   ├── accelerator_lstm_forget_k_trainer.java
-        │   ├── accelerator_lstm_forget_trainer.java
-        │   ├── accelerator_lstm_forget_u_trainer.java
-        │   ├── accelerator_lstm_forget_v_trainer.java
-        │   └── accelerator_lstm_forget_w_trainer.java
-        ├── input
-        │   ├── accelerator_lstm_input_b_trainer.java
-        │   ├── accelerator_lstm_input_d_trainer.java
-        │   ├── accelerator_lstm_input_k_trainer.java
-        │   ├── accelerator_lstm_input_trainer.java
-        │   ├── accelerator_lstm_input_u_trainer.java
-        │   ├── accelerator_lstm_input_v_trainer.java
-        │   └── accelerator_lstm_input_w_trainer.java
-        └── output
-            ├── accelerator_lstm_output_b_trainer.java
-            ├── accelerator_lstm_output_d_trainer.java
-            ├── accelerator_lstm_output_k_trainer.java
-            ├── accelerator_lstm_output_trainer.java
-            ├── accelerator_lstm_output_u_trainer.java
-            ├── accelerator_lstm_output_v_trainer.java
-            └── accelerator_lstm_output_w_trainer.java
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── accelerator_controller.java
+│   │   │   └── standard
+│   │   │       └── accelerator_controller.java
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── accelerator_activation_gate_vector.java
+│   │   │   │   ├── accelerator_controller.java
+│   │   │   │   ├── accelerator_forget_gate_vector.java
+│   │   │   │   ├── accelerator_hidden_gate_vector.java
+│   │   │   │   ├── accelerator_input_gate_vector.java
+│   │   │   │   ├── accelerator_output_gate_vector.java
+│   │   │   │   └── accelerator_state_gate_vector.java
+│   │   │   └── standard
+│   │   │       ├── accelerator_activation_gate_vector.java
+│   │   │       ├── accelerator_controller.java
+│   │   │       ├── accelerator_forget_gate_vector.java
+│   │   │       ├── accelerator_hidden_gate_vector.java
+│   │   │       ├── accelerator_input_gate_vector.java
+│   │   │       ├── accelerator_output_gate_vector.java
+│   │   │       └── accelerator_state_gate_vector.java
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── accelerator_addressing.java
+│   │       │   ├── accelerator_matrix_content_based_addressing.java
+│   │       │   └── accelerator_vector_content_based_addressing.java
+│   │       ├── read_heads
+│   │       │   └── accelerator_reading.java
+│   │       ├── top
+│   │       │   ├── accelerator_interface_matrix.java
+│   │       │   ├── accelerator_interface_top.java
+│   │       │   ├── accelerator_interface_vector.java
+│   │       │   ├── accelerator_output_vector.java
+│   │       │   └── accelerator_top.java
+│   │       ├── trained
+│   │       │   └── accelerator_trained_top.java
+│   │       └── write_heads
+│   │           ├── accelerator_erasing.java
+│   │           └── accelerator_writing.java
+│   └── trainer
+│       ├── differentiation
+│       │   ├── accelerator_matrix_controller_differentiation.java
+│       │   └── accelerator_vector_controller_differentiation.java
+│       ├── fnn
+│       │   ├── accelerator_fnn_b_trainer.java
+│       │   ├── accelerator_fnn_d_trainer.java
+│       │   ├── accelerator_fnn_k_trainer.java
+│       │   ├── accelerator_fnn_trainer.java
+│       │   ├── accelerator_fnn_u_trainer.java
+│       │   ├── accelerator_fnn_v_trainer.java
+│       │   └── accelerator_fnn_w_trainer.java
+│       └── lstm
+│           ├── activation
+│           │   ├── accelerator_lstm_activation_b_trainer.java
+│           │   ├── accelerator_lstm_activation_d_trainer.java
+│           │   ├── accelerator_lstm_activation_k_trainer.java
+│           │   ├── accelerator_lstm_activation_trainer.java
+│           │   ├── accelerator_lstm_activation_u_trainer.java
+│           │   ├── accelerator_lstm_activation_v_trainer.java
+│           │   └── accelerator_lstm_activation_w_trainer.java
+│           ├── forget
+│           │   ├── accelerator_lstm_forget_b_trainer.java
+│           │   ├── accelerator_lstm_forget_d_trainer.java
+│           │   ├── accelerator_lstm_forget_k_trainer.java
+│           │   ├── accelerator_lstm_forget_trainer.java
+│           │   ├── accelerator_lstm_forget_u_trainer.java
+│           │   ├── accelerator_lstm_forget_v_trainer.java
+│           │   └── accelerator_lstm_forget_w_trainer.java
+│           ├── input
+│           │   ├── accelerator_lstm_input_b_trainer.java
+│           │   ├── accelerator_lstm_input_d_trainer.java
+│           │   ├── accelerator_lstm_input_k_trainer.java
+│           │   ├── accelerator_lstm_input_trainer.java
+│           │   ├── accelerator_lstm_input_u_trainer.java
+│           │   ├── accelerator_lstm_input_v_trainer.java
+│           │   └── accelerator_lstm_input_w_trainer.java
+│           └── output
+│               ├── accelerator_lstm_output_b_trainer.java
+│               ├── accelerator_lstm_output_d_trainer.java
+│               ├── accelerator_lstm_output_k_trainer.java
+│               ├── accelerator_lstm_output_trainer.java
+│               ├── accelerator_lstm_output_u_trainer.java
+│               ├── accelerator_lstm_output_v_trainer.java
+│               └── accelerator_lstm_output_w_trainer.java
+└── math
+    ├── test_matrix_math.java
+    ├── test_scalar_math.java
+    ├── test_vector_math.java
+    ├── matrix
+    │   └── accelerator_matrix_math.java
+    ├── scalar
+    │   └── accelerator_scalar_math.java
+    └── vector
+        └── accelerator_vector_math.java
 
-35 directories, 87 files
+36 directories, 87 files

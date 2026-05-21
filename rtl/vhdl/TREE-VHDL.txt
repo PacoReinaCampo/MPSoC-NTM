@@ -158,6 +158,57 @@ code
 │           ├── accelerator_vector_integer_divider.vhd
 │           ├── accelerator_vector_integer_multiplier.vhd
 │           └── accelerator_vector_integer_subtractor.vhd
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── accelerator_controller.vhd
+│   │   │   └── standard
+│   │   │       └── accelerator_controller.vhd
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── accelerator_activation_gate_vector.vhd
+│   │   │   │   ├── accelerator_controller.vhd
+│   │   │   │   ├── accelerator_forget_gate_vector.vhd
+│   │   │   │   ├── accelerator_hidden_gate_vector.vhd
+│   │   │   │   ├── accelerator_input_gate_vector.vhd
+│   │   │   │   ├── accelerator_output_gate_vector.vhd
+│   │   │   │   └── accelerator_state_gate_vector.vhd
+│   │   │   └── standard
+│   │   │       ├── accelerator_activation_gate_vector.vhd
+│   │   │       ├── accelerator_controller.vhd
+│   │   │       ├── accelerator_forget_gate_vector.vhd
+│   │   │       ├── accelerator_hidden_gate_vector.vhd
+│   │   │       ├── accelerator_input_gate_vector.vhd
+│   │   │       ├── accelerator_output_gate_vector.vhd
+│   │   │       └── accelerator_state_gate_vector.vhd
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── accelerator_addressing.vhd
+│   │       │   └── accelerator_content_based_addressing.vhd
+│   │       ├── read_heads
+│   │       │   └── accelerator_reading.vhd
+│   │       ├── top
+│   │       │   ├── accelerator_interface_matrix.vhd
+│   │       │   ├── accelerator_interface_vector.vhd
+│   │       │   ├── accelerator_output_vector.vhd
+│   │       │   └── accelerator_top.vhd
+│   │       └── write_heads
+│   │           ├── accelerator_erasing.vhd
+│   │           └── accelerator_writing.vhd
+│   └── trainer
+│       ├── differentiation
+│       │   ├── accelerator_trainer_matrix_differentiation.vhd
+│       │   └── accelerator_trainer_vector_differentiation.vhd
+│       ├── fnn
+│       │   └── accelerator_trainer.vhd
+│       ├── lstm
+│       │   ├── accelerator_activation_trainer.vhd
+│       │   ├── accelerator_forget_trainer.vhd
+│       │   ├── accelerator_input_trainer.vhd
+│       │   └── accelerator_output_trainer.vhd
+│       └── pnn
+│           └── accelerator_trainer.vhd
 ├── math
 │   ├── matrix
 │   │   ├── accelerator_matrix_cosh_function.vhd
@@ -183,64 +234,14 @@ code
 │       ├── accelerator_vector_oneplus_function.vhd
 │       ├── accelerator_vector_sinh_function.vhd
 │       └── accelerator_vector_tanh_function.vhd
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.vhd
-│   │   └── standard
-│   │       └── accelerator_controller.vhd
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector.vhd
-│   │   │   ├── accelerator_controller.vhd
-│   │   │   ├── accelerator_forget_gate_vector.vhd
-│   │   │   ├── accelerator_hidden_gate_vector.vhd
-│   │   │   ├── accelerator_input_gate_vector.vhd
-│   │   │   ├── accelerator_output_gate_vector.vhd
-│   │   │   └── accelerator_state_gate_vector.vhd
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector.vhd
-│   │       ├── accelerator_controller.vhd
-│   │       ├── accelerator_forget_gate_vector.vhd
-│   │       ├── accelerator_hidden_gate_vector.vhd
-│   │       ├── accelerator_input_gate_vector.vhd
-│   │       ├── accelerator_output_gate_vector.vhd
-│   │       └── accelerator_state_gate_vector.vhd
-│   └── ntm
-│       ├── memory
-│       │   ├── accelerator_addressing.vhd
-│       │   └── accelerator_content_based_addressing.vhd
-│       ├── read_heads
-│       │   └── accelerator_reading.vhd
-│       ├── top
-│       │   ├── accelerator_interface_matrix.vhd
-│       │   ├── accelerator_interface_vector.vhd
-│       │   ├── accelerator_output_vector.vhd
-│       │   └── accelerator_top.vhd
-│       └── write_heads
-│           ├── accelerator_erasing.vhd
-│           └── accelerator_writing.vhd
-├── pkg
-│   ├── accelerator_ann_controller_vhdl_pkg.vhd
-│   ├── accelerator_arithmetic_vhdl_pkg.vhd
-│   ├── accelerator_core_vhdl_pkg.vhd
-│   ├── accelerator_fnn_controller_vhdl_pkg.vhd
-│   ├── accelerator_lstm_controller_vhdl_pkg.vhd
-│   ├── accelerator_math_vhdl_pkg.vhd
-│   ├── accelerator_pnn_controller_vhdl_pkg.vhd
-│   └── accelerator_state_vhdl_pkg.vhd
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_trainer_matrix_differentiation.vhd
-    │   └── accelerator_trainer_vector_differentiation.vhd
-    ├── fnn
-    │   └── accelerator_trainer.vhd
-    ├── lstm
-    │   ├── accelerator_activation_trainer.vhd
-    │   ├── accelerator_forget_trainer.vhd
-    │   ├── accelerator_input_trainer.vhd
-    │   └── accelerator_output_trainer.vhd
-    └── pnn
-        └── accelerator_trainer.vhd
+└── pkg
+    ├── accelerator_ann_controller_vhdl_pkg.vhd
+    ├── accelerator_arithmetic_vhdl_pkg.vhd
+    ├── accelerator_core_vhdl_pkg.vhd
+    ├── accelerator_fnn_controller_vhdl_pkg.vhd
+    ├── accelerator_lstm_controller_vhdl_pkg.vhd
+    ├── accelerator_math_vhdl_pkg.vhd
+    ├── accelerator_pnn_controller_vhdl_pkg.vhd
+    └── accelerator_state_vhdl_pkg.vhd
 
-69 directories, 174 files
+70 directories, 174 files

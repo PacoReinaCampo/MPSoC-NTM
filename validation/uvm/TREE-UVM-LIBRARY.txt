@@ -609,356 +609,359 @@ library
 │           ├── accelerator_uvm_sequence.sv
 │           ├── accelerator_uvm_testbench.sv
 │           └── accelerator_uvm_test.sv
-├── math
-│   ├── matrix
-│   │   ├── accelerator_matrix_deviation_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   ├── accelerator_matrix_logistic_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   ├── accelerator_matrix_mean_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   └── accelerator_matrix_oneplus_function
-│   │       ├── accelerator_uvm_agent.sv
-│   │       ├── accelerator_uvm_driver.sv
-│   │       ├── accelerator_uvm_environment.sv
-│   │       ├── accelerator_uvm_interface.sv
-│   │       ├── accelerator_uvm_monitor.sv
-│   │       ├── accelerator_uvm_scoreboard.sv
-│   │       ├── accelerator_uvm_sequence_item.sv
-│   │       ├── accelerator_uvm_sequencer.sv
-│   │       ├── accelerator_uvm_sequence.sv
-│   │       ├── accelerator_uvm_testbench.sv
-│   │       └── accelerator_uvm_test.sv
-│   ├── scalar
-│   │   ├── accelerator_scalar_deviation_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   ├── accelerator_scalar_logistic_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   ├── accelerator_scalar_mean_function
-│   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   └── accelerator_uvm_test.sv
-│   │   └── accelerator_scalar_oneplus_function
-│   │       ├── accelerator_uvm_agent.sv
-│   │       ├── accelerator_uvm_driver.sv
-│   │       ├── accelerator_uvm_environment.sv
-│   │       ├── accelerator_uvm_interface.sv
-│   │       ├── accelerator_uvm_monitor.sv
-│   │       ├── accelerator_uvm_scoreboard.sv
-│   │       ├── accelerator_uvm_sequence_item.sv
-│   │       ├── accelerator_uvm_sequencer.sv
-│   │       ├── accelerator_uvm_sequence.sv
-│   │       ├── accelerator_uvm_testbench.sv
-│   │       └── accelerator_uvm_test.sv
-│   └── vector
-│       ├── accelerator_vector_deviation_function
-│       │   ├── accelerator_uvm_agent.sv
-│       │   ├── accelerator_uvm_driver.sv
-│       │   ├── accelerator_uvm_environment.sv
-│       │   ├── accelerator_uvm_interface.sv
-│       │   ├── accelerator_uvm_monitor.sv
-│       │   ├── accelerator_uvm_scoreboard.sv
-│       │   ├── accelerator_uvm_sequence_item.sv
-│       │   ├── accelerator_uvm_sequencer.sv
-│       │   ├── accelerator_uvm_sequence.sv
-│       │   ├── accelerator_uvm_testbench.sv
-│       │   └── accelerator_uvm_test.sv
-│       ├── accelerator_vector_logistic_function
-│       │   ├── accelerator_uvm_agent.sv
-│       │   ├── accelerator_uvm_driver.sv
-│       │   ├── accelerator_uvm_environment.sv
-│       │   ├── accelerator_uvm_interface.sv
-│       │   ├── accelerator_uvm_monitor.sv
-│       │   ├── accelerator_uvm_scoreboard.sv
-│       │   ├── accelerator_uvm_sequence_item.sv
-│       │   ├── accelerator_uvm_sequencer.sv
-│       │   ├── accelerator_uvm_sequence.sv
-│       │   ├── accelerator_uvm_testbench.sv
-│       │   └── accelerator_uvm_test.sv
-│       ├── accelerator_vector_mean_function
-│       │   ├── accelerator_uvm_agent.sv
-│       │   ├── accelerator_uvm_driver.sv
-│       │   ├── accelerator_uvm_environment.sv
-│       │   ├── accelerator_uvm_interface.sv
-│       │   ├── accelerator_uvm_monitor.sv
-│       │   ├── accelerator_uvm_scoreboard.sv
-│       │   ├── accelerator_uvm_sequence_item.sv
-│       │   ├── accelerator_uvm_sequencer.sv
-│       │   ├── accelerator_uvm_sequence.sv
-│       │   ├── accelerator_uvm_testbench.sv
-│       │   └── accelerator_uvm_test.sv
-│       └── accelerator_vector_oneplus_function
-│           ├── accelerator_uvm_agent.sv
-│           ├── accelerator_uvm_driver.sv
-│           ├── accelerator_uvm_environment.sv
-│           ├── accelerator_uvm_interface.sv
-│           ├── accelerator_uvm_monitor.sv
-│           ├── accelerator_uvm_scoreboard.sv
-│           ├── accelerator_uvm_sequence_item.sv
-│           ├── accelerator_uvm_sequencer.sv
-│           ├── accelerator_uvm_sequence.sv
-│           ├── accelerator_uvm_testbench.sv
-│           └── accelerator_uvm_test.sv
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller
-│   │   │       ├── accelerator_uvm_agent.sv
-│   │   │       ├── accelerator_uvm_driver.sv
-│   │   │       ├── accelerator_uvm_environment.sv
-│   │   │       ├── accelerator_uvm_interface.sv
-│   │   │       ├── accelerator_uvm_monitor.sv
-│   │   │       ├── accelerator_uvm_scoreboard.sv
-│   │   │       ├── accelerator_uvm_sequence_item.sv
-│   │   │       ├── accelerator_uvm_sequencer.sv
-│   │   │       ├── accelerator_uvm_sequence.sv
-│   │   │       ├── accelerator_uvm_testbench.sv
-│   │   │       └── accelerator_uvm_test.sv
-│   │   └── standard
-│   │       └── accelerator_controller
-│   │           ├── accelerator_uvm_agent.sv
-│   │           ├── accelerator_uvm_driver.sv
-│   │           ├── accelerator_uvm_environment.sv
-│   │           ├── accelerator_uvm_interface.sv
-│   │           ├── accelerator_uvm_monitor.sv
-│   │           ├── accelerator_uvm_scoreboard.sv
-│   │           ├── accelerator_uvm_sequence_item.sv
-│   │           ├── accelerator_uvm_sequencer.sv
-│   │           ├── accelerator_uvm_sequence.sv
-│   │           ├── accelerator_uvm_testbench.sv
-│   │           └── accelerator_uvm_test.sv
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   ├── accelerator_controller
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   ├── accelerator_forget_gate_vector
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   ├── accelerator_hidden_gate_vector
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   ├── accelerator_input_gate_vector
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   ├── accelerator_output_gate_vector
-│   │   │   │   ├── accelerator_uvm_agent.sv
-│   │   │   │   ├── accelerator_uvm_driver.sv
-│   │   │   │   ├── accelerator_uvm_environment.sv
-│   │   │   │   ├── accelerator_uvm_interface.sv
-│   │   │   │   ├── accelerator_uvm_monitor.sv
-│   │   │   │   ├── accelerator_uvm_scoreboard.sv
-│   │   │   │   ├── accelerator_uvm_sequence_item.sv
-│   │   │   │   ├── accelerator_uvm_sequencer.sv
-│   │   │   │   ├── accelerator_uvm_sequence.sv
-│   │   │   │   ├── accelerator_uvm_testbench.sv
-│   │   │   │   └── accelerator_uvm_test.sv
-│   │   │   └── accelerator_state_gate_vector
-│   │   │       ├── accelerator_uvm_agent.sv
-│   │   │       ├── accelerator_uvm_driver.sv
-│   │   │       ├── accelerator_uvm_environment.sv
-│   │   │       ├── accelerator_uvm_interface.sv
-│   │   │       ├── accelerator_uvm_monitor.sv
-│   │   │       ├── accelerator_uvm_scoreboard.sv
-│   │   │       ├── accelerator_uvm_sequence_item.sv
-│   │   │       ├── accelerator_uvm_sequencer.sv
-│   │   │       ├── accelerator_uvm_sequence.sv
-│   │   │       ├── accelerator_uvm_testbench.sv
-│   │   │       └── accelerator_uvm_test.sv
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       ├── accelerator_controller
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       ├── accelerator_forget_gate_vector
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       ├── accelerator_hidden_gate_vector
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       ├── accelerator_input_gate_vector
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       ├── accelerator_output_gate_vector
-│   │       │   ├── accelerator_uvm_agent.sv
-│   │       │   ├── accelerator_uvm_driver.sv
-│   │       │   ├── accelerator_uvm_environment.sv
-│   │       │   ├── accelerator_uvm_interface.sv
-│   │       │   ├── accelerator_uvm_monitor.sv
-│   │       │   ├── accelerator_uvm_scoreboard.sv
-│   │       │   ├── accelerator_uvm_sequence_item.sv
-│   │       │   ├── accelerator_uvm_sequencer.sv
-│   │       │   ├── accelerator_uvm_sequence.sv
-│   │       │   ├── accelerator_uvm_testbench.sv
-│   │       │   └── accelerator_uvm_test.sv
-│   │       └── accelerator_state_gate_vector
-│   │           ├── accelerator_uvm_agent.sv
-│   │           ├── accelerator_uvm_driver.sv
-│   │           ├── accelerator_uvm_environment.sv
-│   │           ├── accelerator_uvm_interface.sv
-│   │           ├── accelerator_uvm_monitor.sv
-│   │           ├── accelerator_uvm_scoreboard.sv
-│   │           ├── accelerator_uvm_sequence_item.sv
-│   │           ├── accelerator_uvm_sequencer.sv
-│   │           ├── accelerator_uvm_sequence.sv
-│   │           ├── accelerator_uvm_testbench.sv
-│   │           └── accelerator_uvm_test.sv
-│   └── ntm
-│       ├── memory
-│       │   ├── accelerator_addressing
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── accelerator_controller
+│   │   │   │       ├── accelerator_uvm_agent.sv
+│   │   │   │       ├── accelerator_uvm_driver.sv
+│   │   │   │       ├── accelerator_uvm_environment.sv
+│   │   │   │       ├── accelerator_uvm_interface.sv
+│   │   │   │       ├── accelerator_uvm_monitor.sv
+│   │   │   │       ├── accelerator_uvm_scoreboard.sv
+│   │   │   │       ├── accelerator_uvm_sequence_item.sv
+│   │   │   │       ├── accelerator_uvm_sequencer.sv
+│   │   │   │       ├── accelerator_uvm_sequence.sv
+│   │   │   │       ├── accelerator_uvm_testbench.sv
+│   │   │   │       └── accelerator_uvm_test.sv
+│   │   │   └── standard
+│   │   │       └── accelerator_controller
+│   │   │           ├── accelerator_uvm_agent.sv
+│   │   │           ├── accelerator_uvm_driver.sv
+│   │   │           ├── accelerator_uvm_environment.sv
+│   │   │           ├── accelerator_uvm_interface.sv
+│   │   │           ├── accelerator_uvm_monitor.sv
+│   │   │           ├── accelerator_uvm_scoreboard.sv
+│   │   │           ├── accelerator_uvm_sequence_item.sv
+│   │   │           ├── accelerator_uvm_sequencer.sv
+│   │   │           ├── accelerator_uvm_sequence.sv
+│   │   │           ├── accelerator_uvm_testbench.sv
+│   │   │           └── accelerator_uvm_test.sv
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── accelerator_activation_gate_vector
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   ├── accelerator_controller
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   ├── accelerator_forget_gate_vector
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   ├── accelerator_hidden_gate_vector
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   ├── accelerator_input_gate_vector
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   ├── accelerator_output_gate_vector
+│   │   │   │   │   ├── accelerator_uvm_agent.sv
+│   │   │   │   │   ├── accelerator_uvm_driver.sv
+│   │   │   │   │   ├── accelerator_uvm_environment.sv
+│   │   │   │   │   ├── accelerator_uvm_interface.sv
+│   │   │   │   │   ├── accelerator_uvm_monitor.sv
+│   │   │   │   │   ├── accelerator_uvm_scoreboard.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence_item.sv
+│   │   │   │   │   ├── accelerator_uvm_sequencer.sv
+│   │   │   │   │   ├── accelerator_uvm_sequence.sv
+│   │   │   │   │   ├── accelerator_uvm_testbench.sv
+│   │   │   │   │   └── accelerator_uvm_test.sv
+│   │   │   │   └── accelerator_state_gate_vector
+│   │   │   │       ├── accelerator_uvm_agent.sv
+│   │   │   │       ├── accelerator_uvm_driver.sv
+│   │   │   │       ├── accelerator_uvm_environment.sv
+│   │   │   │       ├── accelerator_uvm_interface.sv
+│   │   │   │       ├── accelerator_uvm_monitor.sv
+│   │   │   │       ├── accelerator_uvm_scoreboard.sv
+│   │   │   │       ├── accelerator_uvm_sequence_item.sv
+│   │   │   │       ├── accelerator_uvm_sequencer.sv
+│   │   │   │       ├── accelerator_uvm_sequence.sv
+│   │   │   │       ├── accelerator_uvm_testbench.sv
+│   │   │   │       └── accelerator_uvm_test.sv
+│   │   │   └── standard
+│   │   │       ├── accelerator_activation_gate_vector
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       ├── accelerator_controller
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       ├── accelerator_forget_gate_vector
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       ├── accelerator_hidden_gate_vector
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       ├── accelerator_input_gate_vector
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       ├── accelerator_output_gate_vector
+│   │   │       │   ├── accelerator_uvm_agent.sv
+│   │   │       │   ├── accelerator_uvm_driver.sv
+│   │   │       │   ├── accelerator_uvm_environment.sv
+│   │   │       │   ├── accelerator_uvm_interface.sv
+│   │   │       │   ├── accelerator_uvm_monitor.sv
+│   │   │       │   ├── accelerator_uvm_scoreboard.sv
+│   │   │       │   ├── accelerator_uvm_sequence_item.sv
+│   │   │       │   ├── accelerator_uvm_sequencer.sv
+│   │   │       │   ├── accelerator_uvm_sequence.sv
+│   │   │       │   ├── accelerator_uvm_testbench.sv
+│   │   │       │   └── accelerator_uvm_test.sv
+│   │   │       └── accelerator_state_gate_vector
+│   │   │           ├── accelerator_uvm_agent.sv
+│   │   │           ├── accelerator_uvm_driver.sv
+│   │   │           ├── accelerator_uvm_environment.sv
+│   │   │           ├── accelerator_uvm_interface.sv
+│   │   │           ├── accelerator_uvm_monitor.sv
+│   │   │           ├── accelerator_uvm_scoreboard.sv
+│   │   │           ├── accelerator_uvm_sequence_item.sv
+│   │   │           ├── accelerator_uvm_sequencer.sv
+│   │   │           ├── accelerator_uvm_sequence.sv
+│   │   │           ├── accelerator_uvm_testbench.sv
+│   │   │           └── accelerator_uvm_test.sv
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── accelerator_addressing
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   ├── accelerator_matrix_content_based_addressing
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   └── accelerator_vector_content_based_addressing
+│   │       │       ├── accelerator_uvm_agent.sv
+│   │       │       ├── accelerator_uvm_driver.sv
+│   │       │       ├── accelerator_uvm_environment.sv
+│   │       │       ├── accelerator_uvm_interface.sv
+│   │       │       ├── accelerator_uvm_monitor.sv
+│   │       │       ├── accelerator_uvm_scoreboard.sv
+│   │       │       ├── accelerator_uvm_sequence_item.sv
+│   │       │       ├── accelerator_uvm_sequencer.sv
+│   │       │       ├── accelerator_uvm_sequence.sv
+│   │       │       ├── accelerator_uvm_testbench.sv
+│   │       │       └── accelerator_uvm_test.sv
+│   │       ├── read_heads
+│   │       │   └── accelerator_reading
+│   │       │       ├── accelerator_uvm_agent.sv
+│   │       │       ├── accelerator_uvm_driver.sv
+│   │       │       ├── accelerator_uvm_environment.sv
+│   │       │       ├── accelerator_uvm_interface.sv
+│   │       │       ├── accelerator_uvm_monitor.sv
+│   │       │       ├── accelerator_uvm_scoreboard.sv
+│   │       │       ├── accelerator_uvm_sequence_item.sv
+│   │       │       ├── accelerator_uvm_sequencer.sv
+│   │       │       ├── accelerator_uvm_sequence.sv
+│   │       │       ├── accelerator_uvm_testbench.sv
+│   │       │       └── accelerator_uvm_test.sv
+│   │       ├── top
+│   │       │   ├── accelerator_interface_matrix
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   ├── accelerator_interface_top
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   ├── accelerator_interface_vector
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   ├── accelerator_output_vector
+│   │       │   │   ├── accelerator_uvm_agent.sv
+│   │       │   │   ├── accelerator_uvm_driver.sv
+│   │       │   │   ├── accelerator_uvm_environment.sv
+│   │       │   │   ├── accelerator_uvm_interface.sv
+│   │       │   │   ├── accelerator_uvm_monitor.sv
+│   │       │   │   ├── accelerator_uvm_scoreboard.sv
+│   │       │   │   ├── accelerator_uvm_sequence_item.sv
+│   │       │   │   ├── accelerator_uvm_sequencer.sv
+│   │       │   │   ├── accelerator_uvm_sequence.sv
+│   │       │   │   ├── accelerator_uvm_testbench.sv
+│   │       │   │   └── accelerator_uvm_test.sv
+│   │       │   └── accelerator_top
+│   │       │       ├── accelerator_uvm_agent.sv
+│   │       │       ├── accelerator_uvm_driver.sv
+│   │       │       ├── accelerator_uvm_environment.sv
+│   │       │       ├── accelerator_uvm_interface.sv
+│   │       │       ├── accelerator_uvm_monitor.sv
+│   │       │       ├── accelerator_uvm_scoreboard.sv
+│   │       │       ├── accelerator_uvm_sequence_item.sv
+│   │       │       ├── accelerator_uvm_sequencer.sv
+│   │       │       ├── accelerator_uvm_sequence.sv
+│   │       │       ├── accelerator_uvm_testbench.sv
+│   │       │       └── accelerator_uvm_test.sv
+│   │       ├── trained
+│   │       │   └── accelerator_trained_top
+│   │       │       ├── accelerator_uvm_agent.sv
+│   │       │       ├── accelerator_uvm_driver.sv
+│   │       │       ├── accelerator_uvm_environment.sv
+│   │       │       ├── accelerator_uvm_interface.sv
+│   │       │       ├── accelerator_uvm_monitor.sv
+│   │       │       ├── accelerator_uvm_scoreboard.sv
+│   │       │       ├── accelerator_uvm_sequence_item.sv
+│   │       │       ├── accelerator_uvm_sequencer.sv
+│   │       │       ├── accelerator_uvm_sequence.sv
+│   │       │       ├── accelerator_uvm_testbench.sv
+│   │       │       └── accelerator_uvm_test.sv
+│   │       └── write_heads
+│   │           ├── accelerator_erasing
+│   │           │   ├── accelerator_uvm_agent.sv
+│   │           │   ├── accelerator_uvm_driver.sv
+│   │           │   ├── accelerator_uvm_environment.sv
+│   │           │   ├── accelerator_uvm_interface.sv
+│   │           │   ├── accelerator_uvm_monitor.sv
+│   │           │   ├── accelerator_uvm_scoreboard.sv
+│   │           │   ├── accelerator_uvm_sequence_item.sv
+│   │           │   ├── accelerator_uvm_sequencer.sv
+│   │           │   ├── accelerator_uvm_sequence.sv
+│   │           │   ├── accelerator_uvm_testbench.sv
+│   │           │   └── accelerator_uvm_test.sv
+│   │           └── accelerator_writing
+│   │               ├── accelerator_uvm_agent.sv
+│   │               ├── accelerator_uvm_driver.sv
+│   │               ├── accelerator_uvm_environment.sv
+│   │               ├── accelerator_uvm_interface.sv
+│   │               ├── accelerator_uvm_monitor.sv
+│   │               ├── accelerator_uvm_scoreboard.sv
+│   │               ├── accelerator_uvm_sequence_item.sv
+│   │               ├── accelerator_uvm_sequencer.sv
+│   │               ├── accelerator_uvm_sequence.sv
+│   │               ├── accelerator_uvm_testbench.sv
+│   │               └── accelerator_uvm_test.sv
+│   └── trainer
+│       ├── differentiation
+│       │   ├── accelerator_matrix_controller_differentiation
 │       │   │   ├── accelerator_uvm_agent.sv
 │       │   │   ├── accelerator_uvm_driver.sv
 │       │   │   ├── accelerator_uvm_environment.sv
@@ -970,19 +973,7 @@ library
 │       │   │   ├── accelerator_uvm_sequence.sv
 │       │   │   ├── accelerator_uvm_testbench.sv
 │       │   │   └── accelerator_uvm_test.sv
-│       │   ├── accelerator_matrix_content_based_addressing
-│       │   │   ├── accelerator_uvm_agent.sv
-│       │   │   ├── accelerator_uvm_driver.sv
-│       │   │   ├── accelerator_uvm_environment.sv
-│       │   │   ├── accelerator_uvm_interface.sv
-│       │   │   ├── accelerator_uvm_monitor.sv
-│       │   │   ├── accelerator_uvm_scoreboard.sv
-│       │   │   ├── accelerator_uvm_sequence_item.sv
-│       │   │   ├── accelerator_uvm_sequencer.sv
-│       │   │   ├── accelerator_uvm_sequence.sv
-│       │   │   ├── accelerator_uvm_testbench.sv
-│       │   │   └── accelerator_uvm_test.sv
-│       │   └── accelerator_vector_content_based_addressing
+│       │   └── accelerator_vector_controller_differentiation
 │       │       ├── accelerator_uvm_agent.sv
 │       │       ├── accelerator_uvm_driver.sv
 │       │       ├── accelerator_uvm_environment.sv
@@ -994,8 +985,80 @@ library
 │       │       ├── accelerator_uvm_sequence.sv
 │       │       ├── accelerator_uvm_testbench.sv
 │       │       └── accelerator_uvm_test.sv
-│       ├── read_heads
-│       │   └── accelerator_reading
+│       ├── fnn
+│       │   ├── accelerator_fnn_b_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   ├── accelerator_fnn_d_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   ├── accelerator_fnn_k_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   ├── accelerator_fnn_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   ├── accelerator_fnn_u_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   ├── accelerator_fnn_v_trainer
+│       │   │   ├── accelerator_uvm_agent.sv
+│       │   │   ├── accelerator_uvm_driver.sv
+│       │   │   ├── accelerator_uvm_environment.sv
+│       │   │   ├── accelerator_uvm_interface.sv
+│       │   │   ├── accelerator_uvm_monitor.sv
+│       │   │   ├── accelerator_uvm_scoreboard.sv
+│       │   │   ├── accelerator_uvm_sequence_item.sv
+│       │   │   ├── accelerator_uvm_sequencer.sv
+│       │   │   ├── accelerator_uvm_sequence.sv
+│       │   │   ├── accelerator_uvm_testbench.sv
+│       │   │   └── accelerator_uvm_test.sv
+│       │   └── accelerator_fnn_w_trainer
 │       │       ├── accelerator_uvm_agent.sv
 │       │       ├── accelerator_uvm_driver.sv
 │       │       ├── accelerator_uvm_environment.sv
@@ -1007,108 +1070,350 @@ library
 │       │       ├── accelerator_uvm_sequence.sv
 │       │       ├── accelerator_uvm_testbench.sv
 │       │       └── accelerator_uvm_test.sv
-│       ├── top
-│       │   ├── accelerator_interface_matrix
-│       │   │   ├── accelerator_uvm_agent.sv
-│       │   │   ├── accelerator_uvm_driver.sv
-│       │   │   ├── accelerator_uvm_environment.sv
-│       │   │   ├── accelerator_uvm_interface.sv
-│       │   │   ├── accelerator_uvm_monitor.sv
-│       │   │   ├── accelerator_uvm_scoreboard.sv
-│       │   │   ├── accelerator_uvm_sequence_item.sv
-│       │   │   ├── accelerator_uvm_sequencer.sv
-│       │   │   ├── accelerator_uvm_sequence.sv
-│       │   │   ├── accelerator_uvm_testbench.sv
-│       │   │   └── accelerator_uvm_test.sv
-│       │   ├── accelerator_interface_top
-│       │   │   ├── accelerator_uvm_agent.sv
-│       │   │   ├── accelerator_uvm_driver.sv
-│       │   │   ├── accelerator_uvm_environment.sv
-│       │   │   ├── accelerator_uvm_interface.sv
-│       │   │   ├── accelerator_uvm_monitor.sv
-│       │   │   ├── accelerator_uvm_scoreboard.sv
-│       │   │   ├── accelerator_uvm_sequence_item.sv
-│       │   │   ├── accelerator_uvm_sequencer.sv
-│       │   │   ├── accelerator_uvm_sequence.sv
-│       │   │   ├── accelerator_uvm_testbench.sv
-│       │   │   └── accelerator_uvm_test.sv
-│       │   ├── accelerator_interface_vector
-│       │   │   ├── accelerator_uvm_agent.sv
-│       │   │   ├── accelerator_uvm_driver.sv
-│       │   │   ├── accelerator_uvm_environment.sv
-│       │   │   ├── accelerator_uvm_interface.sv
-│       │   │   ├── accelerator_uvm_monitor.sv
-│       │   │   ├── accelerator_uvm_scoreboard.sv
-│       │   │   ├── accelerator_uvm_sequence_item.sv
-│       │   │   ├── accelerator_uvm_sequencer.sv
-│       │   │   ├── accelerator_uvm_sequence.sv
-│       │   │   ├── accelerator_uvm_testbench.sv
-│       │   │   └── accelerator_uvm_test.sv
-│       │   ├── accelerator_output_vector
-│       │   │   ├── accelerator_uvm_agent.sv
-│       │   │   ├── accelerator_uvm_driver.sv
-│       │   │   ├── accelerator_uvm_environment.sv
-│       │   │   ├── accelerator_uvm_interface.sv
-│       │   │   ├── accelerator_uvm_monitor.sv
-│       │   │   ├── accelerator_uvm_scoreboard.sv
-│       │   │   ├── accelerator_uvm_sequence_item.sv
-│       │   │   ├── accelerator_uvm_sequencer.sv
-│       │   │   ├── accelerator_uvm_sequence.sv
-│       │   │   ├── accelerator_uvm_testbench.sv
-│       │   │   └── accelerator_uvm_test.sv
-│       │   └── accelerator_top
-│       │       ├── accelerator_uvm_agent.sv
-│       │       ├── accelerator_uvm_driver.sv
-│       │       ├── accelerator_uvm_environment.sv
-│       │       ├── accelerator_uvm_interface.sv
-│       │       ├── accelerator_uvm_monitor.sv
-│       │       ├── accelerator_uvm_scoreboard.sv
-│       │       ├── accelerator_uvm_sequence_item.sv
-│       │       ├── accelerator_uvm_sequencer.sv
-│       │       ├── accelerator_uvm_sequence.sv
-│       │       ├── accelerator_uvm_testbench.sv
-│       │       └── accelerator_uvm_test.sv
-│       ├── trained
-│       │   └── accelerator_trained_top
-│       │       ├── accelerator_uvm_agent.sv
-│       │       ├── accelerator_uvm_driver.sv
-│       │       ├── accelerator_uvm_environment.sv
-│       │       ├── accelerator_uvm_interface.sv
-│       │       ├── accelerator_uvm_monitor.sv
-│       │       ├── accelerator_uvm_scoreboard.sv
-│       │       ├── accelerator_uvm_sequence_item.sv
-│       │       ├── accelerator_uvm_sequencer.sv
-│       │       ├── accelerator_uvm_sequence.sv
-│       │       ├── accelerator_uvm_testbench.sv
-│       │       └── accelerator_uvm_test.sv
-│       └── write_heads
-│           ├── accelerator_erasing
-│           │   ├── accelerator_uvm_agent.sv
-│           │   ├── accelerator_uvm_driver.sv
-│           │   ├── accelerator_uvm_environment.sv
-│           │   ├── accelerator_uvm_interface.sv
-│           │   ├── accelerator_uvm_monitor.sv
-│           │   ├── accelerator_uvm_scoreboard.sv
-│           │   ├── accelerator_uvm_sequence_item.sv
-│           │   ├── accelerator_uvm_sequencer.sv
-│           │   ├── accelerator_uvm_sequence.sv
-│           │   ├── accelerator_uvm_testbench.sv
-│           │   └── accelerator_uvm_test.sv
-│           └── accelerator_writing
-│               ├── accelerator_uvm_agent.sv
-│               ├── accelerator_uvm_driver.sv
-│               ├── accelerator_uvm_environment.sv
-│               ├── accelerator_uvm_interface.sv
-│               ├── accelerator_uvm_monitor.sv
-│               ├── accelerator_uvm_scoreboard.sv
-│               ├── accelerator_uvm_sequence_item.sv
-│               ├── accelerator_uvm_sequencer.sv
-│               ├── accelerator_uvm_sequence.sv
-│               ├── accelerator_uvm_testbench.sv
-│               └── accelerator_uvm_test.sv
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_matrix_controller_differentiation
+│       └── lstm
+│           ├── activation
+│           │   ├── accelerator_lstm_activation_b_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_activation_d_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_activation_k_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_activation_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_activation_u_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_activation_v_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   └── accelerator_lstm_activation_w_trainer
+│           │       ├── accelerator_uvm_agent.sv
+│           │       ├── accelerator_uvm_driver.sv
+│           │       ├── accelerator_uvm_environment.sv
+│           │       ├── accelerator_uvm_interface.sv
+│           │       ├── accelerator_uvm_monitor.sv
+│           │       ├── accelerator_uvm_scoreboard.sv
+│           │       ├── accelerator_uvm_sequence_item.sv
+│           │       ├── accelerator_uvm_sequencer.sv
+│           │       ├── accelerator_uvm_sequence.sv
+│           │       ├── accelerator_uvm_testbench.sv
+│           │       └── accelerator_uvm_test.sv
+│           ├── forget
+│           │   ├── accelerator_lstm_forget_b_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_forget_d_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_forget_k_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_forget_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_forget_u_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_forget_v_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   └── accelerator_lstm_forget_w_trainer
+│           │       ├── accelerator_uvm_agent.sv
+│           │       ├── accelerator_uvm_driver.sv
+│           │       ├── accelerator_uvm_environment.sv
+│           │       ├── accelerator_uvm_interface.sv
+│           │       ├── accelerator_uvm_monitor.sv
+│           │       ├── accelerator_uvm_scoreboard.sv
+│           │       ├── accelerator_uvm_sequence_item.sv
+│           │       ├── accelerator_uvm_sequencer.sv
+│           │       ├── accelerator_uvm_sequence.sv
+│           │       ├── accelerator_uvm_testbench.sv
+│           │       └── accelerator_uvm_test.sv
+│           ├── input
+│           │   ├── accelerator_lstm_input_b_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_input_d_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_input_k_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_input_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_input_u_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   ├── accelerator_lstm_input_v_trainer
+│           │   │   ├── accelerator_uvm_agent.sv
+│           │   │   ├── accelerator_uvm_driver.sv
+│           │   │   ├── accelerator_uvm_environment.sv
+│           │   │   ├── accelerator_uvm_interface.sv
+│           │   │   ├── accelerator_uvm_monitor.sv
+│           │   │   ├── accelerator_uvm_scoreboard.sv
+│           │   │   ├── accelerator_uvm_sequence_item.sv
+│           │   │   ├── accelerator_uvm_sequencer.sv
+│           │   │   ├── accelerator_uvm_sequence.sv
+│           │   │   ├── accelerator_uvm_testbench.sv
+│           │   │   └── accelerator_uvm_test.sv
+│           │   └── accelerator_lstm_input_w_trainer
+│           │       ├── accelerator_uvm_agent.sv
+│           │       ├── accelerator_uvm_driver.sv
+│           │       ├── accelerator_uvm_environment.sv
+│           │       ├── accelerator_uvm_interface.sv
+│           │       ├── accelerator_uvm_monitor.sv
+│           │       ├── accelerator_uvm_scoreboard.sv
+│           │       ├── accelerator_uvm_sequence_item.sv
+│           │       ├── accelerator_uvm_sequencer.sv
+│           │       ├── accelerator_uvm_sequence.sv
+│           │       ├── accelerator_uvm_testbench.sv
+│           │       └── accelerator_uvm_test.sv
+│           └── output
+│               ├── accelerator_lstm_output_b_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               ├── accelerator_lstm_output_d_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               ├── accelerator_lstm_output_k_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               ├── accelerator_lstm_output_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               ├── accelerator_lstm_output_u_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               ├── accelerator_lstm_output_v_trainer
+│               │   ├── accelerator_uvm_agent.sv
+│               │   ├── accelerator_uvm_driver.sv
+│               │   ├── accelerator_uvm_environment.sv
+│               │   ├── accelerator_uvm_interface.sv
+│               │   ├── accelerator_uvm_monitor.sv
+│               │   ├── accelerator_uvm_scoreboard.sv
+│               │   ├── accelerator_uvm_sequence_item.sv
+│               │   ├── accelerator_uvm_sequencer.sv
+│               │   ├── accelerator_uvm_sequence.sv
+│               │   ├── accelerator_uvm_testbench.sv
+│               │   └── accelerator_uvm_test.sv
+│               └── accelerator_lstm_output_w_trainer
+│                   ├── accelerator_uvm_agent.sv
+│                   ├── accelerator_uvm_driver.sv
+│                   ├── accelerator_uvm_environment.sv
+│                   ├── accelerator_uvm_interface.sv
+│                   ├── accelerator_uvm_monitor.sv
+│                   ├── accelerator_uvm_scoreboard.sv
+│                   ├── accelerator_uvm_sequence_item.sv
+│                   ├── accelerator_uvm_sequencer.sv
+│                   ├── accelerator_uvm_sequence.sv
+│                   ├── accelerator_uvm_testbench.sv
+│                   └── accelerator_uvm_test.sv
+└── math
+    ├── matrix
+    │   ├── accelerator_matrix_deviation_function
     │   │   ├── accelerator_uvm_agent.sv
     │   │   ├── accelerator_uvm_driver.sv
     │   │   ├── accelerator_uvm_environment.sv
@@ -1120,7 +1425,31 @@ library
     │   │   ├── accelerator_uvm_sequence.sv
     │   │   ├── accelerator_uvm_testbench.sv
     │   │   └── accelerator_uvm_test.sv
-    │   └── accelerator_vector_controller_differentiation
+    │   ├── accelerator_matrix_logistic_function
+    │   │   ├── accelerator_uvm_agent.sv
+    │   │   ├── accelerator_uvm_driver.sv
+    │   │   ├── accelerator_uvm_environment.sv
+    │   │   ├── accelerator_uvm_interface.sv
+    │   │   ├── accelerator_uvm_monitor.sv
+    │   │   ├── accelerator_uvm_scoreboard.sv
+    │   │   ├── accelerator_uvm_sequence_item.sv
+    │   │   ├── accelerator_uvm_sequencer.sv
+    │   │   ├── accelerator_uvm_sequence.sv
+    │   │   ├── accelerator_uvm_testbench.sv
+    │   │   └── accelerator_uvm_test.sv
+    │   ├── accelerator_matrix_mean_function
+    │   │   ├── accelerator_uvm_agent.sv
+    │   │   ├── accelerator_uvm_driver.sv
+    │   │   ├── accelerator_uvm_environment.sv
+    │   │   ├── accelerator_uvm_interface.sv
+    │   │   ├── accelerator_uvm_monitor.sv
+    │   │   ├── accelerator_uvm_scoreboard.sv
+    │   │   ├── accelerator_uvm_sequence_item.sv
+    │   │   ├── accelerator_uvm_sequencer.sv
+    │   │   ├── accelerator_uvm_sequence.sv
+    │   │   ├── accelerator_uvm_testbench.sv
+    │   │   └── accelerator_uvm_test.sv
+    │   └── accelerator_matrix_oneplus_function
     │       ├── accelerator_uvm_agent.sv
     │       ├── accelerator_uvm_driver.sv
     │       ├── accelerator_uvm_environment.sv
@@ -1132,8 +1461,8 @@ library
     │       ├── accelerator_uvm_sequence.sv
     │       ├── accelerator_uvm_testbench.sv
     │       └── accelerator_uvm_test.sv
-    ├── fnn
-    │   ├── accelerator_fnn_b_trainer
+    ├── scalar
+    │   ├── accelerator_scalar_deviation_function
     │   │   ├── accelerator_uvm_agent.sv
     │   │   ├── accelerator_uvm_driver.sv
     │   │   ├── accelerator_uvm_environment.sv
@@ -1145,7 +1474,7 @@ library
     │   │   ├── accelerator_uvm_sequence.sv
     │   │   ├── accelerator_uvm_testbench.sv
     │   │   └── accelerator_uvm_test.sv
-    │   ├── accelerator_fnn_d_trainer
+    │   ├── accelerator_scalar_logistic_function
     │   │   ├── accelerator_uvm_agent.sv
     │   │   ├── accelerator_uvm_driver.sv
     │   │   ├── accelerator_uvm_environment.sv
@@ -1157,7 +1486,7 @@ library
     │   │   ├── accelerator_uvm_sequence.sv
     │   │   ├── accelerator_uvm_testbench.sv
     │   │   └── accelerator_uvm_test.sv
-    │   ├── accelerator_fnn_k_trainer
+    │   ├── accelerator_scalar_mean_function
     │   │   ├── accelerator_uvm_agent.sv
     │   │   ├── accelerator_uvm_driver.sv
     │   │   ├── accelerator_uvm_environment.sv
@@ -1169,43 +1498,7 @@ library
     │   │   ├── accelerator_uvm_sequence.sv
     │   │   ├── accelerator_uvm_testbench.sv
     │   │   └── accelerator_uvm_test.sv
-    │   ├── accelerator_fnn_trainer
-    │   │   ├── accelerator_uvm_agent.sv
-    │   │   ├── accelerator_uvm_driver.sv
-    │   │   ├── accelerator_uvm_environment.sv
-    │   │   ├── accelerator_uvm_interface.sv
-    │   │   ├── accelerator_uvm_monitor.sv
-    │   │   ├── accelerator_uvm_scoreboard.sv
-    │   │   ├── accelerator_uvm_sequence_item.sv
-    │   │   ├── accelerator_uvm_sequencer.sv
-    │   │   ├── accelerator_uvm_sequence.sv
-    │   │   ├── accelerator_uvm_testbench.sv
-    │   │   └── accelerator_uvm_test.sv
-    │   ├── accelerator_fnn_u_trainer
-    │   │   ├── accelerator_uvm_agent.sv
-    │   │   ├── accelerator_uvm_driver.sv
-    │   │   ├── accelerator_uvm_environment.sv
-    │   │   ├── accelerator_uvm_interface.sv
-    │   │   ├── accelerator_uvm_monitor.sv
-    │   │   ├── accelerator_uvm_scoreboard.sv
-    │   │   ├── accelerator_uvm_sequence_item.sv
-    │   │   ├── accelerator_uvm_sequencer.sv
-    │   │   ├── accelerator_uvm_sequence.sv
-    │   │   ├── accelerator_uvm_testbench.sv
-    │   │   └── accelerator_uvm_test.sv
-    │   ├── accelerator_fnn_v_trainer
-    │   │   ├── accelerator_uvm_agent.sv
-    │   │   ├── accelerator_uvm_driver.sv
-    │   │   ├── accelerator_uvm_environment.sv
-    │   │   ├── accelerator_uvm_interface.sv
-    │   │   ├── accelerator_uvm_monitor.sv
-    │   │   ├── accelerator_uvm_scoreboard.sv
-    │   │   ├── accelerator_uvm_sequence_item.sv
-    │   │   ├── accelerator_uvm_sequencer.sv
-    │   │   ├── accelerator_uvm_sequence.sv
-    │   │   ├── accelerator_uvm_testbench.sv
-    │   │   └── accelerator_uvm_test.sv
-    │   └── accelerator_fnn_w_trainer
+    │   └── accelerator_scalar_oneplus_function
     │       ├── accelerator_uvm_agent.sv
     │       ├── accelerator_uvm_driver.sv
     │       ├── accelerator_uvm_environment.sv
@@ -1217,346 +1510,54 @@ library
     │       ├── accelerator_uvm_sequence.sv
     │       ├── accelerator_uvm_testbench.sv
     │       └── accelerator_uvm_test.sv
-    └── lstm
-        ├── activation
-        │   ├── accelerator_lstm_activation_b_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_activation_d_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_activation_k_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_activation_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_activation_u_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_activation_v_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   └── accelerator_lstm_activation_w_trainer
-        │       ├── accelerator_uvm_agent.sv
-        │       ├── accelerator_uvm_driver.sv
-        │       ├── accelerator_uvm_environment.sv
-        │       ├── accelerator_uvm_interface.sv
-        │       ├── accelerator_uvm_monitor.sv
-        │       ├── accelerator_uvm_scoreboard.sv
-        │       ├── accelerator_uvm_sequence_item.sv
-        │       ├── accelerator_uvm_sequencer.sv
-        │       ├── accelerator_uvm_sequence.sv
-        │       ├── accelerator_uvm_testbench.sv
-        │       └── accelerator_uvm_test.sv
-        ├── forget
-        │   ├── accelerator_lstm_forget_b_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_forget_d_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_forget_k_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_forget_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_forget_u_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_forget_v_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   └── accelerator_lstm_forget_w_trainer
-        │       ├── accelerator_uvm_agent.sv
-        │       ├── accelerator_uvm_driver.sv
-        │       ├── accelerator_uvm_environment.sv
-        │       ├── accelerator_uvm_interface.sv
-        │       ├── accelerator_uvm_monitor.sv
-        │       ├── accelerator_uvm_scoreboard.sv
-        │       ├── accelerator_uvm_sequence_item.sv
-        │       ├── accelerator_uvm_sequencer.sv
-        │       ├── accelerator_uvm_sequence.sv
-        │       ├── accelerator_uvm_testbench.sv
-        │       └── accelerator_uvm_test.sv
-        ├── input
-        │   ├── accelerator_lstm_input_b_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_input_d_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_input_k_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_input_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_input_u_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   ├── accelerator_lstm_input_v_trainer
-        │   │   ├── accelerator_uvm_agent.sv
-        │   │   ├── accelerator_uvm_driver.sv
-        │   │   ├── accelerator_uvm_environment.sv
-        │   │   ├── accelerator_uvm_interface.sv
-        │   │   ├── accelerator_uvm_monitor.sv
-        │   │   ├── accelerator_uvm_scoreboard.sv
-        │   │   ├── accelerator_uvm_sequence_item.sv
-        │   │   ├── accelerator_uvm_sequencer.sv
-        │   │   ├── accelerator_uvm_sequence.sv
-        │   │   ├── accelerator_uvm_testbench.sv
-        │   │   └── accelerator_uvm_test.sv
-        │   └── accelerator_lstm_input_w_trainer
-        │       ├── accelerator_uvm_agent.sv
-        │       ├── accelerator_uvm_driver.sv
-        │       ├── accelerator_uvm_environment.sv
-        │       ├── accelerator_uvm_interface.sv
-        │       ├── accelerator_uvm_monitor.sv
-        │       ├── accelerator_uvm_scoreboard.sv
-        │       ├── accelerator_uvm_sequence_item.sv
-        │       ├── accelerator_uvm_sequencer.sv
-        │       ├── accelerator_uvm_sequence.sv
-        │       ├── accelerator_uvm_testbench.sv
-        │       └── accelerator_uvm_test.sv
-        └── output
-            ├── accelerator_lstm_output_b_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            ├── accelerator_lstm_output_d_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            ├── accelerator_lstm_output_k_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            ├── accelerator_lstm_output_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            ├── accelerator_lstm_output_u_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            ├── accelerator_lstm_output_v_trainer
-            │   ├── accelerator_uvm_agent.sv
-            │   ├── accelerator_uvm_driver.sv
-            │   ├── accelerator_uvm_environment.sv
-            │   ├── accelerator_uvm_interface.sv
-            │   ├── accelerator_uvm_monitor.sv
-            │   ├── accelerator_uvm_scoreboard.sv
-            │   ├── accelerator_uvm_sequence_item.sv
-            │   ├── accelerator_uvm_sequencer.sv
-            │   ├── accelerator_uvm_sequence.sv
-            │   ├── accelerator_uvm_testbench.sv
-            │   └── accelerator_uvm_test.sv
-            └── accelerator_lstm_output_w_trainer
-                ├── accelerator_uvm_agent.sv
-                ├── accelerator_uvm_driver.sv
-                ├── accelerator_uvm_environment.sv
-                ├── accelerator_uvm_interface.sv
-                ├── accelerator_uvm_monitor.sv
-                ├── accelerator_uvm_scoreboard.sv
-                ├── accelerator_uvm_sequence_item.sv
-                ├── accelerator_uvm_sequencer.sv
-                ├── accelerator_uvm_sequence.sv
-                ├── accelerator_uvm_testbench.sv
-                └── accelerator_uvm_test.sv
+    └── vector
+        ├── accelerator_vector_deviation_function
+        │   ├── accelerator_uvm_agent.sv
+        │   ├── accelerator_uvm_driver.sv
+        │   ├── accelerator_uvm_environment.sv
+        │   ├── accelerator_uvm_interface.sv
+        │   ├── accelerator_uvm_monitor.sv
+        │   ├── accelerator_uvm_scoreboard.sv
+        │   ├── accelerator_uvm_sequence_item.sv
+        │   ├── accelerator_uvm_sequencer.sv
+        │   ├── accelerator_uvm_sequence.sv
+        │   ├── accelerator_uvm_testbench.sv
+        │   └── accelerator_uvm_test.sv
+        ├── accelerator_vector_logistic_function
+        │   ├── accelerator_uvm_agent.sv
+        │   ├── accelerator_uvm_driver.sv
+        │   ├── accelerator_uvm_environment.sv
+        │   ├── accelerator_uvm_interface.sv
+        │   ├── accelerator_uvm_monitor.sv
+        │   ├── accelerator_uvm_scoreboard.sv
+        │   ├── accelerator_uvm_sequence_item.sv
+        │   ├── accelerator_uvm_sequencer.sv
+        │   ├── accelerator_uvm_sequence.sv
+        │   ├── accelerator_uvm_testbench.sv
+        │   └── accelerator_uvm_test.sv
+        ├── accelerator_vector_mean_function
+        │   ├── accelerator_uvm_agent.sv
+        │   ├── accelerator_uvm_driver.sv
+        │   ├── accelerator_uvm_environment.sv
+        │   ├── accelerator_uvm_interface.sv
+        │   ├── accelerator_uvm_monitor.sv
+        │   ├── accelerator_uvm_scoreboard.sv
+        │   ├── accelerator_uvm_sequence_item.sv
+        │   ├── accelerator_uvm_sequencer.sv
+        │   ├── accelerator_uvm_sequence.sv
+        │   ├── accelerator_uvm_testbench.sv
+        │   └── accelerator_uvm_test.sv
+        └── accelerator_vector_oneplus_function
+            ├── accelerator_uvm_agent.sv
+            ├── accelerator_uvm_driver.sv
+            ├── accelerator_uvm_environment.sv
+            ├── accelerator_uvm_interface.sv
+            ├── accelerator_uvm_monitor.sv
+            ├── accelerator_uvm_scoreboard.sv
+            ├── accelerator_uvm_sequence_item.sv
+            ├── accelerator_uvm_sequencer.sv
+            ├── accelerator_uvm_sequence.sv
+            ├── accelerator_uvm_testbench.sv
+            └── accelerator_uvm_test.sv
 
-162 directories, 1397 files
+163 directories, 1397 files

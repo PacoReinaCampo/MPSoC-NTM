@@ -75,107 +75,108 @@ library
 │       │   └── accelerator_vector_multiplier.py
 │       └── subtractor
 │           └── accelerator_vector_subtractor.py
-├── math
-│   ├── matrix
-│   │   ├── accelerator_matrix_deviation_function.py
-│   │   ├── accelerator_matrix_logistic_function.py
-│   │   ├── accelerator_matrix_mean_function.py
-│   │   └── accelerator_matrix_oneplus_function.py
-│   ├── scalar
-│   │   ├── accelerator_scalar_deviation_function.py
-│   │   ├── accelerator_scalar_logistic_function.py
-│   │   ├── accelerator_scalar_mean_function.py
-│   │   └── accelerator_scalar_oneplus_function.py
-│   └── vector
-│       ├── accelerator_vector_deviation_function.py
-│       ├── accelerator_vector_logistic_function.py
-│       ├── accelerator_vector_mean_function.py
-│       └── accelerator_vector_oneplus_function.py
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.py
-│   │   └── standard
-│   │       └── accelerator_controller.py
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector.py
-│   │   │   ├── accelerator_controller.py
-│   │   │   ├── accelerator_forget_gate_vector.py
-│   │   │   ├── accelerator_hidden_gate_vector.py
-│   │   │   ├── accelerator_input_gate_vector.py
-│   │   │   ├── accelerator_output_gate_vector.py
-│   │   │   └── accelerator_state_gate_vector.py
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector.py
-│   │       ├── accelerator_controller.py
-│   │       ├── accelerator_forget_gate_vector.py
-│   │       ├── accelerator_hidden_gate_vector.py
-│   │       ├── accelerator_input_gate_vector.py
-│   │       ├── accelerator_output_gate_vector.py
-│   │       └── accelerator_state_gate_vector.py
-│   └── ntm
-│       ├── memory
-│       │   ├── accelerator_addressing.py
-│       │   ├── accelerator_matrix_content_based_addressing.py
-│       │   └── accelerator_vector_content_based_addressing.py
-│       ├── read_heads
-│       │   └── accelerator_reading.py
-│       ├── top
-│       │   ├── accelerator_interface_matrix.py
-│       │   ├── accelerator_interface_top.py
-│       │   ├── accelerator_interface_vector.py
-│       │   ├── accelerator_output_vector.py
-│       │   └── accelerator_top.py
-│       ├── trained
-│       │   └── accelerator_trained_top.py
-│       └── write_heads
-│           ├── accelerator_erasing.py
-│           └── accelerator_writing.py
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_matrix_controller_differentiation.py
-    │   └── accelerator_vector_controller_differentiation.py
-    ├── fnn
-    │   ├── accelerator_fnn_b_trainer.py
-    │   ├── accelerator_fnn_d_trainer.py
-    │   ├── accelerator_fnn_k_trainer.py
-    │   ├── accelerator_fnn_trainer.py
-    │   ├── accelerator_fnn_u_trainer.py
-    │   ├── accelerator_fnn_v_trainer.py
-    │   └── accelerator_fnn_w_trainer.py
-    └── lstm
-        ├── activation
-        │   ├── accelerator_lstm_activation_b_trainer.py
-        │   ├── accelerator_lstm_activation_d_trainer.py
-        │   ├── accelerator_lstm_activation_k_trainer.py
-        │   ├── accelerator_lstm_activation_trainer.py
-        │   ├── accelerator_lstm_activation_u_trainer.py
-        │   ├── accelerator_lstm_activation_v_trainer.py
-        │   └── accelerator_lstm_activation_w_trainer.py
-        ├── forget
-        │   ├── accelerator_lstm_forget_b_trainer.py
-        │   ├── accelerator_lstm_forget_d_trainer.py
-        │   ├── accelerator_lstm_forget_k_trainer.py
-        │   ├── accelerator_lstm_forget_trainer.py
-        │   ├── accelerator_lstm_forget_u_trainer.py
-        │   ├── accelerator_lstm_forget_v_trainer.py
-        │   └── accelerator_lstm_forget_w_trainer.py
-        ├── input
-        │   ├── accelerator_lstm_input_b_trainer.py
-        │   ├── accelerator_lstm_input_d_trainer.py
-        │   ├── accelerator_lstm_input_k_trainer.py
-        │   ├── accelerator_lstm_input_trainer.py
-        │   ├── accelerator_lstm_input_u_trainer.py
-        │   ├── accelerator_lstm_input_v_trainer.py
-        │   └── accelerator_lstm_input_w_trainer.py
-        └── output
-            ├── accelerator_lstm_output_b_trainer.py
-            ├── accelerator_lstm_output_d_trainer.py
-            ├── accelerator_lstm_output_k_trainer.py
-            ├── accelerator_lstm_output_trainer.py
-            ├── accelerator_lstm_output_u_trainer.py
-            ├── accelerator_lstm_output_v_trainer.py
-            └── accelerator_lstm_output_w_trainer.py
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── accelerator_controller.py
+│   │   │   └── standard
+│   │   │       └── accelerator_controller.py
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── accelerator_activation_gate_vector.py
+│   │   │   │   ├── accelerator_controller.py
+│   │   │   │   ├── accelerator_forget_gate_vector.py
+│   │   │   │   ├── accelerator_hidden_gate_vector.py
+│   │   │   │   ├── accelerator_input_gate_vector.py
+│   │   │   │   ├── accelerator_output_gate_vector.py
+│   │   │   │   └── accelerator_state_gate_vector.py
+│   │   │   └── standard
+│   │   │       ├── accelerator_activation_gate_vector.py
+│   │   │       ├── accelerator_controller.py
+│   │   │       ├── accelerator_forget_gate_vector.py
+│   │   │       ├── accelerator_hidden_gate_vector.py
+│   │   │       ├── accelerator_input_gate_vector.py
+│   │   │       ├── accelerator_output_gate_vector.py
+│   │   │       └── accelerator_state_gate_vector.py
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── accelerator_addressing.py
+│   │       │   ├── accelerator_matrix_content_based_addressing.py
+│   │       │   └── accelerator_vector_content_based_addressing.py
+│   │       ├── read_heads
+│   │       │   └── accelerator_reading.py
+│   │       ├── top
+│   │       │   ├── accelerator_interface_matrix.py
+│   │       │   ├── accelerator_interface_top.py
+│   │       │   ├── accelerator_interface_vector.py
+│   │       │   ├── accelerator_output_vector.py
+│   │       │   └── accelerator_top.py
+│   │       ├── trained
+│   │       │   └── accelerator_trained_top.py
+│   │       └── write_heads
+│   │           ├── accelerator_erasing.py
+│   │           └── accelerator_writing.py
+│   └── trainer
+│       ├── differentiation
+│       │   ├── accelerator_matrix_controller_differentiation.py
+│       │   └── accelerator_vector_controller_differentiation.py
+│       ├── fnn
+│       │   ├── accelerator_fnn_b_trainer.py
+│       │   ├── accelerator_fnn_d_trainer.py
+│       │   ├── accelerator_fnn_k_trainer.py
+│       │   ├── accelerator_fnn_trainer.py
+│       │   ├── accelerator_fnn_u_trainer.py
+│       │   ├── accelerator_fnn_v_trainer.py
+│       │   └── accelerator_fnn_w_trainer.py
+│       └── lstm
+│           ├── activation
+│           │   ├── accelerator_lstm_activation_b_trainer.py
+│           │   ├── accelerator_lstm_activation_d_trainer.py
+│           │   ├── accelerator_lstm_activation_k_trainer.py
+│           │   ├── accelerator_lstm_activation_trainer.py
+│           │   ├── accelerator_lstm_activation_u_trainer.py
+│           │   ├── accelerator_lstm_activation_v_trainer.py
+│           │   └── accelerator_lstm_activation_w_trainer.py
+│           ├── forget
+│           │   ├── accelerator_lstm_forget_b_trainer.py
+│           │   ├── accelerator_lstm_forget_d_trainer.py
+│           │   ├── accelerator_lstm_forget_k_trainer.py
+│           │   ├── accelerator_lstm_forget_trainer.py
+│           │   ├── accelerator_lstm_forget_u_trainer.py
+│           │   ├── accelerator_lstm_forget_v_trainer.py
+│           │   └── accelerator_lstm_forget_w_trainer.py
+│           ├── input
+│           │   ├── accelerator_lstm_input_b_trainer.py
+│           │   ├── accelerator_lstm_input_d_trainer.py
+│           │   ├── accelerator_lstm_input_k_trainer.py
+│           │   ├── accelerator_lstm_input_trainer.py
+│           │   ├── accelerator_lstm_input_u_trainer.py
+│           │   ├── accelerator_lstm_input_v_trainer.py
+│           │   └── accelerator_lstm_input_w_trainer.py
+│           └── output
+│               ├── accelerator_lstm_output_b_trainer.py
+│               ├── accelerator_lstm_output_d_trainer.py
+│               ├── accelerator_lstm_output_k_trainer.py
+│               ├── accelerator_lstm_output_trainer.py
+│               ├── accelerator_lstm_output_u_trainer.py
+│               ├── accelerator_lstm_output_v_trainer.py
+│               └── accelerator_lstm_output_w_trainer.py
+└── math
+    ├── matrix
+    │   ├── accelerator_matrix_deviation_function.py
+    │   ├── accelerator_matrix_logistic_function.py
+    │   ├── accelerator_matrix_mean_function.py
+    │   └── accelerator_matrix_oneplus_function.py
+    ├── scalar
+    │   ├── accelerator_scalar_deviation_function.py
+    │   ├── accelerator_scalar_logistic_function.py
+    │   ├── accelerator_scalar_mean_function.py
+    │   └── accelerator_scalar_oneplus_function.py
+    └── vector
+        ├── accelerator_vector_deviation_function.py
+        ├── accelerator_vector_logistic_function.py
+        ├── accelerator_vector_mean_function.py
+        └── accelerator_vector_oneplus_function.py
 
-51 directories, 127 files
+52 directories, 127 files

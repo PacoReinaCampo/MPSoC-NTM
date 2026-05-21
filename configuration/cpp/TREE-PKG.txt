@@ -27,37 +27,38 @@ library
 │       ├── divider
 │       ├── multiplier
 │       └── subtractor
-├── math
-│   ├── accelerator_math.hpp
-│   ├── matrix
-│   ├── scalar
-│   └── vector
-├── nn
-│   ├── fnn
-│   │   ├── accelerator_fnn_controller.hpp
-│   │   ├── convolutional
-│   │   └── standard
-│   ├── lstm
-│   │   ├── accelerator_lstm_controller.hpp
-│   │   ├── convolutional
-│   │   └── standard
-│   └── ntm
-│       ├── accelerator_controller.hpp
-│       ├── memory
-│       ├── read_heads
-│       ├── top
-│       ├── trained
-│       └── write_heads
-└── trainer
-    ├── accelerator_differentiation.hpp
-    ├── accelerator_fnn.hpp
-    ├── accelerator_lstm.hpp
-    ├── differentiation
-    ├── fnn
-    └── lstm
-        ├── activation
-        ├── forget
-        ├── input
-        └── output
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── accelerator_fnn_controller.hpp
+│   │   │   ├── convolutional
+│   │   │   └── standard
+│   │   ├── lstm
+│   │   │   ├── accelerator_lstm_controller.hpp
+│   │   │   ├── convolutional
+│   │   │   └── standard
+│   │   └── ntm
+│   │       ├── accelerator_controller.hpp
+│   │       ├── memory
+│   │       ├── read_heads
+│   │       ├── top
+│   │       ├── trained
+│   │       └── write_heads
+│   └── trainer
+│       ├── accelerator_differentiation.hpp
+│       ├── accelerator_fnn.hpp
+│       ├── accelerator_lstm.hpp
+│       ├── differentiation
+│       ├── fnn
+│       └── lstm
+│           ├── activation
+│           ├── forget
+│           ├── input
+│           └── output
+└── math
+    ├── accelerator_math.hpp
+    ├── matrix
+    ├── scalar
+    └── vector
 
-51 directories, 9 files
+52 directories, 9 files

@@ -17,99 +17,100 @@ library
 │   │   └── TensorArithmetic.go
 │   └── VectorArithmetic
 │       └── VectorArithmetic.go
-├── math
-│   ├── MatrixMath
-│   │   └── MatrixMath.go
-│   ├── ScalarMath
-│   │   └── ScalarMath.go
-│   └── VectorMath
-│       └── VectorMath.go
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── accelerator_controller.go
-│   │   └── standard
-│   │       └── accelerator_controller.go
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── accelerator_activation_gate_vector.go
-│   │   │   ├── accelerator_controller.go
-│   │   │   ├── accelerator_forget_gate_vector.go
-│   │   │   ├── accelerator_hidden_gate_vector.go
-│   │   │   ├── accelerator_input_gate_vector.go
-│   │   │   ├── accelerator_output_gate_vector.go
-│   │   │   └── accelerator_state_gate_vector.go
-│   │   └── standard
-│   │       ├── accelerator_activation_gate_vector.go
-│   │       ├── accelerator_controller.go
-│   │       ├── accelerator_forget_gate_vector.go
-│   │       ├── accelerator_hidden_gate_vector.go
-│   │       ├── accelerator_input_gate_vector.go
-│   │       ├── accelerator_output_gate_vector.go
-│   │       └── accelerator_state_gate_vector.go
-│   └── ntm
-│       ├── memory
-│       │   ├── accelerator_addressing.go
-│       │   ├── accelerator_matrix_content_based_addressing.go
-│       │   └── accelerator_vector_content_based_addressing.go
-│       ├── ntm.go
-│       ├── read_heads
-│       │   └── accelerator_reading.go
-│       ├── top
-│       │   ├── accelerator_interface_matrix.go
-│       │   ├── accelerator_interface_top.go
-│       │   ├── accelerator_interface_vector.go
-│       │   ├── accelerator_output_vector.go
-│       │   └── accelerator_top.go
-│       ├── trained
-│       │   └── accelerator_trained_top.go
-│       └── write_heads
-│           ├── accelerator_erasing.go
-│           └── accelerator_writing.go
-└── trainer
-    ├── differentiation
-    │   ├── accelerator_matrix_controller_differentiation.go
-    │   └── accelerator_vector_controller_differentiation.go
-    ├── fnn
-    │   ├── accelerator_fnn_b_trainer.go
-    │   ├── accelerator_fnn_d_trainer.go
-    │   ├── accelerator_fnn_k_trainer.go
-    │   ├── accelerator_fnn_trainer.go
-    │   ├── accelerator_fnn_u_trainer.go
-    │   ├── accelerator_fnn_v_trainer.go
-    │   └── accelerator_fnn_w_trainer.go
-    └── lstm
-        ├── activation
-        │   ├── accelerator_lstm_activation_b_trainer.go
-        │   ├── accelerator_lstm_activation_d_trainer.go
-        │   ├── accelerator_lstm_activation_k_trainer.go
-        │   ├── accelerator_lstm_activation_trainer.go
-        │   ├── accelerator_lstm_activation_u_trainer.go
-        │   ├── accelerator_lstm_activation_v_trainer.go
-        │   └── accelerator_lstm_activation_w_trainer.go
-        ├── forget
-        │   ├── accelerator_lstm_forget_b_trainer.go
-        │   ├── accelerator_lstm_forget_d_trainer.go
-        │   ├── accelerator_lstm_forget_k_trainer.go
-        │   ├── accelerator_lstm_forget_trainer.go
-        │   ├── accelerator_lstm_forget_u_trainer.go
-        │   ├── accelerator_lstm_forget_v_trainer.go
-        │   └── accelerator_lstm_forget_w_trainer.go
-        ├── input
-        │   ├── accelerator_lstm_input_b_trainer.go
-        │   ├── accelerator_lstm_input_d_trainer.go
-        │   ├── accelerator_lstm_input_k_trainer.go
-        │   ├── accelerator_lstm_input_trainer.go
-        │   ├── accelerator_lstm_input_u_trainer.go
-        │   ├── accelerator_lstm_input_v_trainer.go
-        │   └── accelerator_lstm_input_w_trainer.go
-        └── output
-            ├── accelerator_lstm_output_b_trainer.go
-            ├── accelerator_lstm_output_d_trainer.go
-            ├── accelerator_lstm_output_k_trainer.go
-            ├── accelerator_lstm_output_trainer.go
-            ├── accelerator_lstm_output_u_trainer.go
-            ├── accelerator_lstm_output_v_trainer.go
-            └── accelerator_lstm_output_w_trainer.go
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── accelerator_controller.go
+│   │   │   └── standard
+│   │   │       └── accelerator_controller.go
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── accelerator_activation_gate_vector.go
+│   │   │   │   ├── accelerator_controller.go
+│   │   │   │   ├── accelerator_forget_gate_vector.go
+│   │   │   │   ├── accelerator_hidden_gate_vector.go
+│   │   │   │   ├── accelerator_input_gate_vector.go
+│   │   │   │   ├── accelerator_output_gate_vector.go
+│   │   │   │   └── accelerator_state_gate_vector.go
+│   │   │   └── standard
+│   │   │       ├── accelerator_activation_gate_vector.go
+│   │   │       ├── accelerator_controller.go
+│   │   │       ├── accelerator_forget_gate_vector.go
+│   │   │       ├── accelerator_hidden_gate_vector.go
+│   │   │       ├── accelerator_input_gate_vector.go
+│   │   │       ├── accelerator_output_gate_vector.go
+│   │   │       └── accelerator_state_gate_vector.go
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── accelerator_addressing.go
+│   │       │   ├── accelerator_matrix_content_based_addressing.go
+│   │       │   └── accelerator_vector_content_based_addressing.go
+│   │       ├── ntm.go
+│   │       ├── read_heads
+│   │       │   └── accelerator_reading.go
+│   │       ├── top
+│   │       │   ├── accelerator_interface_matrix.go
+│   │       │   ├── accelerator_interface_top.go
+│   │       │   ├── accelerator_interface_vector.go
+│   │       │   ├── accelerator_output_vector.go
+│   │       │   └── accelerator_top.go
+│   │       ├── trained
+│   │       │   └── accelerator_trained_top.go
+│   │       └── write_heads
+│   │           ├── accelerator_erasing.go
+│   │           └── accelerator_writing.go
+│   └── trainer
+│       ├── differentiation
+│       │   ├── accelerator_matrix_controller_differentiation.go
+│       │   └── accelerator_vector_controller_differentiation.go
+│       ├── fnn
+│       │   ├── accelerator_fnn_b_trainer.go
+│       │   ├── accelerator_fnn_d_trainer.go
+│       │   ├── accelerator_fnn_k_trainer.go
+│       │   ├── accelerator_fnn_trainer.go
+│       │   ├── accelerator_fnn_u_trainer.go
+│       │   ├── accelerator_fnn_v_trainer.go
+│       │   └── accelerator_fnn_w_trainer.go
+│       └── lstm
+│           ├── activation
+│           │   ├── accelerator_lstm_activation_b_trainer.go
+│           │   ├── accelerator_lstm_activation_d_trainer.go
+│           │   ├── accelerator_lstm_activation_k_trainer.go
+│           │   ├── accelerator_lstm_activation_trainer.go
+│           │   ├── accelerator_lstm_activation_u_trainer.go
+│           │   ├── accelerator_lstm_activation_v_trainer.go
+│           │   └── accelerator_lstm_activation_w_trainer.go
+│           ├── forget
+│           │   ├── accelerator_lstm_forget_b_trainer.go
+│           │   ├── accelerator_lstm_forget_d_trainer.go
+│           │   ├── accelerator_lstm_forget_k_trainer.go
+│           │   ├── accelerator_lstm_forget_trainer.go
+│           │   ├── accelerator_lstm_forget_u_trainer.go
+│           │   ├── accelerator_lstm_forget_v_trainer.go
+│           │   └── accelerator_lstm_forget_w_trainer.go
+│           ├── input
+│           │   ├── accelerator_lstm_input_b_trainer.go
+│           │   ├── accelerator_lstm_input_d_trainer.go
+│           │   ├── accelerator_lstm_input_k_trainer.go
+│           │   ├── accelerator_lstm_input_trainer.go
+│           │   ├── accelerator_lstm_input_u_trainer.go
+│           │   ├── accelerator_lstm_input_v_trainer.go
+│           │   └── accelerator_lstm_input_w_trainer.go
+│           └── output
+│               ├── accelerator_lstm_output_b_trainer.go
+│               ├── accelerator_lstm_output_d_trainer.go
+│               ├── accelerator_lstm_output_k_trainer.go
+│               ├── accelerator_lstm_output_trainer.go
+│               ├── accelerator_lstm_output_u_trainer.go
+│               ├── accelerator_lstm_output_v_trainer.go
+│               └── accelerator_lstm_output_w_trainer.go
+└── math
+    ├── MatrixMath
+    │   └── MatrixMath.go
+    ├── ScalarMath
+    │   └── ScalarMath.go
+    └── VectorMath
+        └── VectorMath.go
 
-35 directories, 77 files
+36 directories, 77 files

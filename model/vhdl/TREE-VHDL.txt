@@ -137,6 +137,57 @@ code
 │           ├── model_vector_integer_divider.vhd
 │           ├── model_vector_integer_multiplier.vhd
 │           └── model_vector_integer_subtractor.vhd
+├── intelligence
+│   ├── nn
+│   │   ├── fnn
+│   │   │   ├── convolutional
+│   │   │   │   └── model_controller.vhd
+│   │   │   └── standard
+│   │   │       └── model_controller.vhd
+│   │   ├── lstm
+│   │   │   ├── convolutional
+│   │   │   │   ├── model_activation_gate_vector.vhd
+│   │   │   │   ├── model_controller.vhd
+│   │   │   │   ├── model_forget_gate_vector.vhd
+│   │   │   │   ├── model_hidden_gate_vector.vhd
+│   │   │   │   ├── model_input_gate_vector.vhd
+│   │   │   │   ├── model_output_gate_vector.vhd
+│   │   │   │   └── model_state_gate_vector.vhd
+│   │   │   └── standard
+│   │   │       ├── model_activation_gate_vector.vhd
+│   │   │       ├── model_controller.vhd
+│   │   │       ├── model_forget_gate_vector.vhd
+│   │   │       ├── model_hidden_gate_vector.vhd
+│   │   │       ├── model_input_gate_vector.vhd
+│   │   │       ├── model_output_gate_vector.vhd
+│   │   │       └── model_state_gate_vector.vhd
+│   │   └── ntm
+│   │       ├── memory
+│   │       │   ├── model_addressing.vhd
+│   │       │   └── model_content_based_addressing.vhd
+│   │       ├── read_heads
+│   │       │   └── model_reading.vhd
+│   │       ├── top
+│   │       │   ├── model_interface_matrix.vhd
+│   │       │   ├── model_interface_vector.vhd
+│   │       │   ├── model_output_vector.vhd
+│   │       │   └── model_top.vhd
+│   │       └── write_heads
+│   │           ├── model_erasing.vhd
+│   │           └── model_writing.vhd
+│   └── trainer
+│       ├── differentiation
+│       │   ├── model_trainer_matrix_differentiation.vhd
+│       │   └── model_trainer_vector_differentiation.vhd
+│       ├── fnn
+│       │   └── model_trainer.vhd
+│       ├── lstm
+│       │   ├── model_activation_trainer.vhd
+│       │   ├── model_forget_trainer.vhd
+│       │   ├── model_input_trainer.vhd
+│       │   └── model_output_trainer.vhd
+│       └── pnn
+│           └── model_trainer.vhd
 ├── math
 │   ├── matrix
 │   │   ├── model_matrix_cosh_function.vhd
@@ -162,64 +213,14 @@ code
 │       ├── model_vector_oneplus_function.vhd
 │       ├── model_vector_sinh_function.vhd
 │       └── model_vector_tanh_function.vhd
-├── nn
-│   ├── fnn
-│   │   ├── convolutional
-│   │   │   └── model_controller.vhd
-│   │   └── standard
-│   │       └── model_controller.vhd
-│   ├── lstm
-│   │   ├── convolutional
-│   │   │   ├── model_activation_gate_vector.vhd
-│   │   │   ├── model_controller.vhd
-│   │   │   ├── model_forget_gate_vector.vhd
-│   │   │   ├── model_hidden_gate_vector.vhd
-│   │   │   ├── model_input_gate_vector.vhd
-│   │   │   ├── model_output_gate_vector.vhd
-│   │   │   └── model_state_gate_vector.vhd
-│   │   └── standard
-│   │       ├── model_activation_gate_vector.vhd
-│   │       ├── model_controller.vhd
-│   │       ├── model_forget_gate_vector.vhd
-│   │       ├── model_hidden_gate_vector.vhd
-│   │       ├── model_input_gate_vector.vhd
-│   │       ├── model_output_gate_vector.vhd
-│   │       └── model_state_gate_vector.vhd
-│   └── ntm
-│       ├── memory
-│       │   ├── model_addressing.vhd
-│       │   └── model_content_based_addressing.vhd
-│       ├── read_heads
-│       │   └── model_reading.vhd
-│       ├── top
-│       │   ├── model_interface_matrix.vhd
-│       │   ├── model_interface_vector.vhd
-│       │   ├── model_output_vector.vhd
-│       │   └── model_top.vhd
-│       └── write_heads
-│           ├── model_erasing.vhd
-│           └── model_writing.vhd
-├── pkg
-│   ├── model_ann_controller_vhdl_pkg.vhd
-│   ├── model_arithmetic_vhdl_pkg.vhd
-│   ├── model_fnn_controller_vhdl_pkg.vhd
-│   ├── model_lstm_controller_vhdl_pkg.vhd
-│   ├── model_math_vhdl_pkg.vhd
-│   ├── model_ntm_core_vhdl_pkg.vhd
-│   ├── model_pnn_controller_vhdl_pkg.vhd
-│   └── model_state_vhdl_pkg.vhd
-└── trainer
-    ├── differentiation
-    │   ├── model_trainer_matrix_differentiation.vhd
-    │   └── model_trainer_vector_differentiation.vhd
-    ├── fnn
-    │   └── model_trainer.vhd
-    ├── lstm
-    │   ├── model_activation_trainer.vhd
-    │   ├── model_forget_trainer.vhd
-    │   ├── model_input_trainer.vhd
-    │   └── model_output_trainer.vhd
-    └── pnn
-        └── model_trainer.vhd
+└── pkg
+    ├── model_ann_controller_vhdl_pkg.vhd
+    ├── model_arithmetic_vhdl_pkg.vhd
+    ├── model_fnn_controller_vhdl_pkg.vhd
+    ├── model_lstm_controller_vhdl_pkg.vhd
+    ├── model_math_vhdl_pkg.vhd
+    ├── model_ntm_core_vhdl_pkg.vhd
+    ├── model_pnn_controller_vhdl_pkg.vhd
+    └── model_state_vhdl_pkg.vhd
 
-64 directories, 158 files
+65 directories, 158 files
