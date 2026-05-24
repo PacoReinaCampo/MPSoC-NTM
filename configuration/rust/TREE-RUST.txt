@@ -80,7 +80,7 @@ library
 │           ├── accelerator_vector_subtractor.rs
 │           └── mod.rs
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── accelerator_fnn_controller.rs
 │   │   ├── accelerator_lstm_controller.rs
 │   │   ├── fnn

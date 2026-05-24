@@ -159,7 +159,7 @@ code
 │           ├── accelerator_vector_integer_multiplier.sv
 │           └── accelerator_vector_integer_subtractor.sv
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.sv

@@ -160,7 +160,7 @@ application
 │           ├── accelerator_design_pkg.vhd
 │           └── accelerator_design.vhd
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller

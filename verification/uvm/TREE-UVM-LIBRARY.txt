@@ -610,7 +610,7 @@ library
 │           ├── accelerator_uvm_testbench.sv
 │           └── accelerator_uvm_test.sv
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller

@@ -10,7 +10,7 @@ library
 │   ├── TensorArithmetic
 │   └── VectorArithmetic
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   └── standard

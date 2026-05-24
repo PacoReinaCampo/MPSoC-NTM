@@ -12,7 +12,7 @@ library
 │   ├── tensor
 │   └── vector
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── accelerator_controller.h
 │   │   ├── fnn
 │   │   │   ├── convolutional

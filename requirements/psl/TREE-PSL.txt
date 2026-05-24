@@ -60,7 +60,7 @@ library
 │       ├── accelerator_vector_multiplier.psl
 │       └── accelerator_vector_subtract.psl
 ├── intelligence
-│   ├── nn
+│   ├── model
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.psl
