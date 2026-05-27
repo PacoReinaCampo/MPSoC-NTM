@@ -18,7 +18,7 @@ library
 │   └── vector
 │       └── accelerator_vector_arithmetic.adb
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.adb
@@ -59,7 +59,7 @@ library
 │   │       └── write_heads
 │   │           ├── accelerator_erasing.adb
 │   │           └── accelerator_writing.adb
-│   └── trainer
+│   └── training
 │       ├── differentiation
 │       │   ├── accelerator_matrix_controller_differentiation.adb
 │       │   └── accelerator_vector_controller_differentiation.adb

@@ -28,7 +28,7 @@ library
 │       ├── multiplier
 │       └── subtractor
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── accelerator_fnn_controller.hpp
 │   │   │   ├── convolutional
@@ -44,7 +44,7 @@ library
 │   │       ├── top
 │   │       ├── trained
 │   │       └── write_heads
-│   └── trainer
+│   └── training
 │       ├── accelerator_differentiation.hpp
 │       ├── accelerator_fnn.hpp
 │       ├── accelerator_lstm.hpp

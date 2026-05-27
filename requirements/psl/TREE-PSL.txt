@@ -60,7 +60,7 @@ library
 │       ├── accelerator_vector_multiplier.psl
 │       └── accelerator_vector_subtract.psl
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.psl
@@ -101,7 +101,7 @@ library
 │   │       └── write_heads
 │   │           ├── accelerator_erasing.psl
 │   │           └── accelerator_writing.psl
-│   └── trainer
+│   └── training
 │       ├── differentiation
 │       │   ├── accelerator_matrix_controller_differentiation.psl
 │       │   └── accelerator_vector_controller_differentiation.psl

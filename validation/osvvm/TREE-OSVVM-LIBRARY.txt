@@ -210,7 +210,7 @@ library
 │           ├── accelerator_model.vhd
 │           └── accelerator_testbench.vhd
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller
@@ -335,7 +335,7 @@ library
 │   │               ├── accelerator_model_pkg.vhd
 │   │               ├── accelerator_model.vhd
 │   │               └── accelerator_testbench.vhd
-│   └── trainer
+│   └── training
 │       ├── differentiation
 │       │   ├── accelerator_matrix_controller_differentiation
 │       │   │   ├── accelerator_model_pkg.vhd

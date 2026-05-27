@@ -84,7 +84,7 @@ library
 │       └── subtractor
 │           └── accelerator_vector_subtractor.cpp
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── accelerator_fnn_controller.cpp
 │   │   │   ├── convolutional
@@ -128,7 +128,7 @@ library
 │   │       └── write_heads
 │   │           ├── accelerator_erasing.cpp
 │   │           └── accelerator_writing.cpp
-│   └── trainer
+│   └── training
 │       ├── accelerator_differentiation.cpp
 │       ├── accelerator_fnn.cpp
 │       ├── accelerator_lstm.cpp

@@ -64,7 +64,7 @@ library
 │   │   └── accelerator_vector_subtractor.m
 │   └── VectorArithmetic.m
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.m
@@ -105,7 +105,7 @@ library
 │   │       └── write_heads
 │   │           ├── accelerator_erasing.m
 │   │           └── accelerator_writing.m
-│   └── trainer
+│   └── training
 │       ├── differentiation
 │       │   ├── accelerator_matrix_controller_differentiation.m
 │       │   └── accelerator_vector_controller_differentiation.m

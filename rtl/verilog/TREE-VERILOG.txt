@@ -159,7 +159,7 @@ code
 │           ├── accelerator_vector_integer_multiplier.sv
 │           └── accelerator_vector_integer_subtractor.sv
 ├── intelligence
-│   ├── model
+│   ├── modeling
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.sv
@@ -195,7 +195,7 @@ code
 │   │       └── write_heads
 │   │           ├── accelerator_erasing.sv
 │   │           └── accelerator_writing.sv
-│   └── trainer
+│   └── training
 │       ├── differentiation
 │       │   ├── accelerator_trainer_matrix_differentiation.sv
 │       │   └── accelerator_trainer_vector_differentiation.sv
