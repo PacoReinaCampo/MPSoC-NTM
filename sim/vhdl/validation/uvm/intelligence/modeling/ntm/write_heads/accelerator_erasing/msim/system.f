@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/nn/ntm/write_heads/accelerator_erasing/accelerator_design.sv
+../../../../../../../../../validation/uvm/application/intelligence/modeling/ntm/write_heads/accelerator_erasing/accelerator_design.sv
 
-../../../../../../../../../validation/uvm/library/nn/ntm/write_heads/accelerator_erasing/accelerator_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/intelligence/modeling/ntm/write_heads/accelerator_erasing/accelerator_uvm_testbench.sv

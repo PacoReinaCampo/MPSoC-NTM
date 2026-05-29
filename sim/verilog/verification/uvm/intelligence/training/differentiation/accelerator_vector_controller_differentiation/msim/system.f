@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../verification/uvm/src
 
-../../../../../../../../verification/uvm/application/trainer/differentiation/accelerator_vector_controller_differentiation/accelerator_design.sv
+../../../../../../../../verification/uvm/application/intelligence/training/differentiation/accelerator_vector_controller_differentiation/accelerator_design.sv
 
-../../../../../../../../verification/uvm/library/trainer/differentiation/accelerator_vector_controller_differentiation/accelerator_uvm_testbench.sv
+../../../../../../../../verification/uvm/library/intelligence/training/differentiation/accelerator_vector_controller_differentiation/accelerator_uvm_testbench.sv

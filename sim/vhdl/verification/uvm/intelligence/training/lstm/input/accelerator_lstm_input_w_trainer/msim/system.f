@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/trainer/lstm/input/accelerator_lstm_input_w_trainer/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/training/lstm/input/accelerator_lstm_input_w_trainer/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/trainer/lstm/input/accelerator_lstm_input_w_trainer/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/training/lstm/input/accelerator_lstm_input_w_trainer/accelerator_uvm_testbench.sv

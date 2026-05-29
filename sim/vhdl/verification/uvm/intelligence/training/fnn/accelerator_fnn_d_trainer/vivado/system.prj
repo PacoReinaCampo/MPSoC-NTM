@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../verification/uvm/application/trainer/fnn/accelerator_fnn_d_trainer/accelerator_design.sv
+sv work ../../../../../../../../verification/uvm/application/intelligence/training/fnn/accelerator_fnn_d_trainer/accelerator_design.sv
 
-sv work ../../../../../../../../verification/uvm/library/trainer/fnn/accelerator_fnn_d_trainer/accelerator_uvm_testbench.sv
+sv work ../../../../../../../../verification/uvm/library/intelligence/training/fnn/accelerator_fnn_d_trainer/accelerator_uvm_testbench.sv

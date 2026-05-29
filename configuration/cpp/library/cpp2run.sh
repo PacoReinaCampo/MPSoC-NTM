@@ -172,13 +172,13 @@ rm -rf nn/ntm/top/accelerator_top.run
 rm -rf nn/ntm/trained/accelerator_trained_top.run
 rm -rf nn/ntm/write_heads/accelerator_erasing.run
 rm -rf nn/ntm/write_heads/accelerator_writing.run
-rm -rf state/feedback/accelerator_state_matrix_feedforward.run
-rm -rf state/feedback/accelerator_state_matrix_input.run
-rm -rf state/feedback/accelerator_state_matrix_output.run
-rm -rf state/feedback/accelerator_state_matrix_state.run
-rm -rf state/outputs/accelerator_state_vector_output.run
-rm -rf state/outputs/accelerator_state_vector_state.run
-rm -rf state/top/accelerator_state_top.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_input.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_output.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_state.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_output.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_state.run
+rm -rf intelligence/training/state/top/accelerator_state_top.run
 rm -rf trainer/differentiation/accelerator_matrix_controller_differentiation.run
 rm -rf trainer/differentiation/accelerator_vector_controller_differentiation.run
 rm -rf trainer/fnn/accelerator_fnn_b_trainer.run
@@ -348,13 +348,13 @@ g++ nn/ntm/top/accelerator_top.cpp -o nn/ntm/top/accelerator_top.run
 g++ nn/ntm/trained/accelerator_trained_top.cpp -o nn/ntm/trained/accelerator_trained_top.run
 g++ nn/ntm/write_heads/accelerator_erasing.cpp -o nn/ntm/write_heads/accelerator_erasing.run
 g++ nn/ntm/write_heads/accelerator_writing.cpp -o nn/ntm/write_heads/accelerator_writing.run
-g++ state/feedback/accelerator_state_matrix_feedforward.cpp -o state/feedback/accelerator_state_matrix_feedforward.run
-g++ state/feedback/accelerator_state_matrix_input.cpp -o state/feedback/accelerator_state_matrix_input.run
-g++ state/feedback/accelerator_state_matrix_output.cpp -o state/feedback/accelerator_state_matrix_output.run
-g++ state/feedback/accelerator_state_matrix_state.cpp -o state/feedback/accelerator_state_matrix_state.run
-g++ state/outputs/accelerator_state_vector_output.cpp -o state/outputs/accelerator_state_vector_output.run
-g++ state/outputs/accelerator_state_vector_state.cpp -o state/outputs/accelerator_state_vector_state.run
-g++ state/top/accelerator_state_top.cpp -o state/top/accelerator_state_top.run
+g++ intelligence/training/state/feedback/accelerator_state_matrix_feedforward.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+g++ intelligence/training/state/feedback/accelerator_state_matrix_input.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_input.run
+g++ intelligence/training/state/feedback/accelerator_state_matrix_output.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_output.run
+g++ intelligence/training/state/feedback/accelerator_state_matrix_state.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_state.run
+g++ intelligence/training/state/outputs/accelerator_state_vector_output.cpp -o intelligence/training/state/outputs/accelerator_state_vector_output.run
+g++ intelligence/training/state/outputs/accelerator_state_vector_state.cpp -o intelligence/training/state/outputs/accelerator_state_vector_state.run
+g++ intelligence/training/state/top/accelerator_state_top.cpp -o intelligence/training/state/top/accelerator_state_top.run
 g++ trainer/differentiation/accelerator_matrix_controller_differentiation.cpp -o trainer/differentiation/accelerator_matrix_controller_differentiation.run
 g++ trainer/differentiation/accelerator_vector_controller_differentiation.cpp -o trainer/differentiation/accelerator_vector_controller_differentiation.run
 g++ trainer/fnn/accelerator_fnn_b_trainer.cpp -o trainer/fnn/accelerator_fnn_b_trainer.run

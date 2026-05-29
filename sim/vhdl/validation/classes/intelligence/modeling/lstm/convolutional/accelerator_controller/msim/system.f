@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/nn/lstm/convolutional/accelerator_controller/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/modeling/lstm/convolutional/accelerator_controller/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/nn/lstm/convolutional/accelerator_controller/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/modeling/lstm/convolutional/accelerator_controller/accelerator_testbench.sv

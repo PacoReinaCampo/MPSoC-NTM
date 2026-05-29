@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/nn/ntm/write_heads/accelerator_erasing/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/modeling/ntm/write_heads/accelerator_erasing/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/nn/ntm/write_heads/accelerator_erasing/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/modeling/ntm/write_heads/accelerator_erasing/accelerator_testbench.sv

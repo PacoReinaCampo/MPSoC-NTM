@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/osvvm/application/trainer/fnn/accelerator_fnn_w_trainer/accelerator_design.vhd
-../../../../../../../../validation/osvvm/application/trainer/fnn/accelerator_fnn_w_trainer/accelerator_design_pkg.vhd
+../../../../../../../../validation/osvvm/application/intelligence/training/fnn/accelerator_fnn_w_trainer/accelerator_design.vhd
+../../../../../../../../validation/osvvm/application/intelligence/training/fnn/accelerator_fnn_w_trainer/accelerator_design_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/trainer/fnn/accelerator_fnn_w_trainer/accelerator_model.vhd
-../../../../../../../../validation/osvvm/library/trainer/fnn/accelerator_fnn_w_trainer/accelerator_model_pkg.vhd
+../../../../../../../../validation/osvvm/library/intelligence/training/fnn/accelerator_fnn_w_trainer/accelerator_model.vhd
+../../../../../../../../validation/osvvm/library/intelligence/training/fnn/accelerator_fnn_w_trainer/accelerator_model_pkg.vhd
 
-../../../../../../../../validation/osvvm/library/trainer/fnn/accelerator_fnn_w_trainer/accelerator_testbench.vhd
+../../../../../../../../validation/osvvm/library/intelligence/training/fnn/accelerator_fnn_w_trainer/accelerator_testbench.vhd

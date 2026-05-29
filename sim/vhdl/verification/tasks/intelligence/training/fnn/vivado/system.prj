@@ -76,10 +76,10 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/fnn/accelerator_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/fnn/accelerator_trainer.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/fnn/convolutional/accelerator_controller.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/fnn/convolutional/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/fnn/accelerator_trainer_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/fnn/accelerator_trainer_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/trainer/fnn/accelerator_trainer_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/intelligence/training/fnn/accelerator_trainer_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/intelligence/training/fnn/accelerator_trainer_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/tasks/vhdl/library/intelligence/training/fnn/accelerator_trainer_fnn_testbench.vhd

@@ -33,9 +33,9 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/algebra/tensor/accelerator_t
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/algebra/tensor/accelerator_tensor_product.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/algebra/tensor/accelerator_tensor_transpose.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/ntm/write_heads/accelerator_writing.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/ntm/write_heads/accelerator_erasing.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/modeling/ntm/write_heads/accelerator_writing.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/modeling/ntm/write_heads/accelerator_erasing.vhd
 
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/write_heads/accelerator_write_heads_pkg.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/write_heads/accelerator_write_heads_stimulus.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/write_heads/accelerator_write_heads_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/write_heads/accelerator_write_heads_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/write_heads/accelerator_write_heads_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/write_heads/accelerator_write_heads_testbench.vhd

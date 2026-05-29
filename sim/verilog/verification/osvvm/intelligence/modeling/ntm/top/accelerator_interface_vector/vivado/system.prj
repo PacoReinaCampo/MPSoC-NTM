@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ntm/top/accelerator_interface_vector/accelerator_design.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/ntm/top/accelerator_interface_vector/accelerator_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_model.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_testbench.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_testbench.vhd

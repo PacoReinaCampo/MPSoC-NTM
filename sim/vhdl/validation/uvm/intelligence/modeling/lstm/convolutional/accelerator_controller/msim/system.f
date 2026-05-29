@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/nn/lstm/convolutional/accelerator_controller/accelerator_design.sv
+../../../../../../../../../validation/uvm/application/intelligence/modeling/lstm/convolutional/accelerator_controller/accelerator_design.sv
 
-../../../../../../../../../validation/uvm/library/nn/lstm/convolutional/accelerator_controller/accelerator_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/intelligence/modeling/lstm/convolutional/accelerator_controller/accelerator_uvm_testbench.sv

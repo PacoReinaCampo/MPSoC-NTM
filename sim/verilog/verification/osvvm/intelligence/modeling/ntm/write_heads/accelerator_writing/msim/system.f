@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/nn/ntm/write_heads/accelerator_writing/accelerator_design.vhd
-../../../../../../../../../verification/osvvm/application/nn/ntm/write_heads/accelerator_writing/accelerator_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_design.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/accelerator_writing/accelerator_model.vhd
-../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/accelerator_writing/accelerator_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_model.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/write_heads/accelerator_writing/accelerator_testbench.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_testbench.vhd

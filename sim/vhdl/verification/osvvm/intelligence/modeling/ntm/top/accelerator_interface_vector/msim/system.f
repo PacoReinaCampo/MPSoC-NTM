@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/nn/ntm/top/accelerator_interface_vector/accelerator_design.vhd
-../../../../../../../../../verification/osvvm/application/nn/ntm/top/accelerator_interface_vector/accelerator_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_design.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_model.vhd
-../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_model.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/top/accelerator_interface_vector/accelerator_testbench.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_testbench.vhd

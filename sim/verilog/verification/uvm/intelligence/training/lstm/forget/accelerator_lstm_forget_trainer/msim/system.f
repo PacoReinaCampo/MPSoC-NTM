@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/trainer/lstm/forget/accelerator_lstm_forget_trainer/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/training/lstm/forget/accelerator_lstm_forget_trainer/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/trainer/lstm/forget/accelerator_lstm_forget_trainer/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/training/lstm/forget/accelerator_lstm_forget_trainer/accelerator_uvm_testbench.sv

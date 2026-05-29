@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/uvm/application/nn/ntm/write_heads/accelerator_writing/accelerator_design.sv
+sv work ../../../../../../../../../verification/uvm/application/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/uvm/library/nn/ntm/write_heads/accelerator_writing/accelerator_uvm_testbench.sv
+sv work ../../../../../../../../../verification/uvm/library/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_uvm_testbench.sv

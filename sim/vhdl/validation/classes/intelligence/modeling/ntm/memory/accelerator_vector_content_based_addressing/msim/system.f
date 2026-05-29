@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/nn/ntm/memory/accelerator_vector_content_based_addressing/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/nn/ntm/memory/accelerator_vector_content_based_addressing/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing/accelerator_testbench.sv

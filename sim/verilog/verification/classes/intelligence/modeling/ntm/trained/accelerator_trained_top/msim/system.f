@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/classes/application/nn/ntm/trained/accelerator_trained_top/accelerator_design.sv
+../../../../../../../../../verification/classes/application/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_design.sv
 
-../../../../../../../../../verification/classes/library/nn/ntm/trained/accelerator_trained_top/accelerator_testbench.sv
+../../../../../../../../../verification/classes/library/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_testbench.sv

@@ -73,31 +73,31 @@ ghdl -a --std=08 ../../../../../../../../model/vhdl/code/math/matrix/model_matri
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/math/matrix/model_matrix_sinh_function.vhd
 ghdl -a --std=08 ../../../../../../../../model/vhdl/code/math/matrix/model_matrix_tanh_function.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/trainer/lstm/model_activation_trainer.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/trainer/lstm/model_forget_trainer.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/trainer/lstm/model_input_trainer.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/trainer/lstm/model_output_trainer.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_activation_trainer.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_forget_trainer.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_input_trainer.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_output_trainer.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_controller.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_activation_gate_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_forget_gate_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_hidden_gate_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_input_gate_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_output_gate_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/lstm/convolutional/model_state_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_controller.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_activation_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_forget_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_hidden_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_input_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_output_gate_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/convolutional/model_state_gate_vector.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/read_heads/model_reading.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/read_heads/model_reading.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/write_heads/model_writing.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/write_heads/model_erasing.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/write_heads/model_writing.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/write_heads/model_erasing.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/memory/model_addressing.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/memory/model_content_based_addressing.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/memory/model_addressing.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/memory/model_content_based_addressing.vhd
 
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/top/model_interface_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/top/model_output_vector.vhd
-ghdl -a --std=08 ../../../../../../../../model/vhdl/code/nn/ntm/top/model_top.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/top/model_interface_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/top/model_output_vector.vhd
+ghdl -a --std=08 ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/top/model_top.vhd
 
-ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/top/model_top_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/top/model_top_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/top/model_top_testbench.vhd
+ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/top/model_top_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/top/model_top_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/top/model_top_testbench.vhd

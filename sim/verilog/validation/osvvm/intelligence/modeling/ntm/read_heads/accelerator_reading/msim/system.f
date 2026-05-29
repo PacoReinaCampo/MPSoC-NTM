@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/nn/ntm/read_heads/accelerator_reading/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/nn/ntm/read_heads/accelerator_reading/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/ntm/read_heads/accelerator_reading/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/nn/ntm/read_heads/accelerator_reading/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/ntm/read_heads/accelerator_reading/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_testbench.vhd

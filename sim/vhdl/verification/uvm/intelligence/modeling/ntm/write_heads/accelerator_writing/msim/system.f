@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/nn/ntm/write_heads/accelerator_writing/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/nn/ntm/write_heads/accelerator_writing/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/modeling/ntm/write_heads/accelerator_writing/accelerator_uvm_testbench.sv

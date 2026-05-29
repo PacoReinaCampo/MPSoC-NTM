@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/trainer/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/trainer/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/trainer/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer/accelerator_testbench.vhd

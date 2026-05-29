@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../validation/classes/application/nn/ntm/top/accelerator_interface_vector/accelerator_design.sv
+sv work ../../../../../../../../../validation/classes/application/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_design.sv
 
-sv work ../../../../../../../../../validation/classes/library/nn/ntm/top/accelerator_interface_vector/accelerator_testbench.sv
+sv work ../../../../../../../../../validation/classes/library/intelligence/modeling/ntm/top/accelerator_interface_vector/accelerator_testbench.sv

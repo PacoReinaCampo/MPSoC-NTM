@@ -176,13 +176,13 @@ rm -rf nn/ntm/top/accelerator_top.run
 rm -rf nn/ntm/trained/accelerator_trained_top.run
 rm -rf nn/ntm/write_heads/accelerator_erasing.run
 rm -rf nn/ntm/write_heads/accelerator_writing.run
-rm -rf state/feedback/accelerator_state_matrix_feedforward.run
-rm -rf state/feedback/accelerator_state_matrix_input.run
-rm -rf state/feedback/accelerator_state_matrix_output.run
-rm -rf state/feedback/accelerator_state_matrix_state.run
-rm -rf state/outputs/accelerator_state_vector_output.run
-rm -rf state/outputs/accelerator_state_vector_state.run
-rm -rf state/top/accelerator_state_top.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_input.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_output.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_state.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_output.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_state.run
+rm -rf intelligence/training/state/top/accelerator_state_top.run
 rm -rf trainer/differentiation/accelerator_matrix_controller_differentiation.run
 rm -rf trainer/differentiation/accelerator_vector_controller_differentiation.run
 rm -rf trainer/fnn/accelerator_fnn_b_trainer.run
@@ -356,13 +356,13 @@ gcc nn/ntm/top/accelerator_top.c -o nn/ntm/top/accelerator_top.run
 gcc nn/ntm/trained/accelerator_trained_top.c -o nn/ntm/trained/accelerator_trained_top.run
 gcc nn/ntm/write_heads/accelerator_erasing.c -o nn/ntm/write_heads/accelerator_erasing.run
 gcc nn/ntm/write_heads/accelerator_writing.c -o nn/ntm/write_heads/accelerator_writing.run
-#gcc state/feedback/accelerator_state_matrix_feedforward.c -o state/feedback/accelerator_state_matrix_feedforward.run
-#gcc state/feedback/accelerator_state_matrix_input.c -o state/feedback/accelerator_state_matrix_input.run
-#gcc state/feedback/accelerator_state_matrix_output.c -o state/feedback/accelerator_state_matrix_output.run
-#gcc state/feedback/accelerator_state_matrix_state.c -o state/feedback/accelerator_state_matrix_state.run
-#gcc state/outputs/accelerator_state_vector_output.c -o state/outputs/accelerator_state_vector_output.run
-#gcc state/outputs/accelerator_state_vector_state.c -o state/outputs/accelerator_state_vector_state.run
-#gcc state/top/accelerator_state_top.c -o state/top/accelerator_state_top.run
+#gcc intelligence/training/state/feedback/accelerator_state_matrix_feedforward.c -o intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+#gcc intelligence/training/state/feedback/accelerator_state_matrix_input.c -o intelligence/training/state/feedback/accelerator_state_matrix_input.run
+#gcc intelligence/training/state/feedback/accelerator_state_matrix_output.c -o intelligence/training/state/feedback/accelerator_state_matrix_output.run
+#gcc intelligence/training/state/feedback/accelerator_state_matrix_state.c -o intelligence/training/state/feedback/accelerator_state_matrix_state.run
+#gcc intelligence/training/state/outputs/accelerator_state_vector_output.c -o intelligence/training/state/outputs/accelerator_state_vector_output.run
+#gcc intelligence/training/state/outputs/accelerator_state_vector_state.c -o intelligence/training/state/outputs/accelerator_state_vector_state.run
+#gcc intelligence/training/state/top/accelerator_state_top.c -o intelligence/training/state/top/accelerator_state_top.run
 gcc trainer/differentiation/accelerator_matrix_controller_differentiation.c -o trainer/differentiation/accelerator_matrix_controller_differentiation.run
 gcc trainer/differentiation/accelerator_vector_controller_differentiation.c -o trainer/differentiation/accelerator_vector_controller_differentiation.run
 gcc trainer/fnn/accelerator_fnn_b_trainer.c -o trainer/fnn/accelerator_fnn_b_trainer.run

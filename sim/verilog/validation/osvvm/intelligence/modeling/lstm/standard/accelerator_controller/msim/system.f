@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/nn/lstm/standard/accelerator_controller/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/nn/lstm/standard/accelerator_controller/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/lstm/standard/accelerator_controller/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/nn/lstm/standard/accelerator_controller/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/lstm/standard/accelerator_controller/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_testbench.vhd

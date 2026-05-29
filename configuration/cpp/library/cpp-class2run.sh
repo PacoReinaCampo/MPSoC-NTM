@@ -64,7 +64,7 @@ rm -rf ntm/ntm.run
 rm -rf dnc/dnc.run
 rm -rf ann/ann.run
 
-rm -rf state/accelerator_state.run
+rm -rf intelligence/training/state/accelerator_state.run
 
 rm -rf trainer/accelerator_fnn.run
 rm -rf trainer/accelerator_lstm.run
@@ -92,7 +92,7 @@ g++ ntm/ntm.cpp -o ntm/ntm.run
 g++ dnc/dnc.cpp -o dnc/dnc.run
 g++ ann/ann.cpp -o ann/ann.run
 
-#g++ state/accelerator_state.cpp -o state/accelerator_state.run
+#g++ intelligence/training/state/accelerator_state.cpp -o intelligence/training/state/accelerator_state.run
 
 g++ trainer/accelerator_fnn.cpp -o trainer/accelerator_fnn.run
 g++ trainer/accelerator_lstm.cpp -o trainer/accelerator_lstm.run

@@ -170,13 +170,13 @@ rm -rf nn/ntm/top/accelerator_top.run
 rm -rf nn/ntm/trained/accelerator_trained_top.run
 rm -rf nn/ntm/write_heads/accelerator_erasing.run
 rm -rf nn/ntm/write_heads/accelerator_writing.run
-rm -rf state/feedback/accelerator_state_matrix_feedforward.run
-rm -rf state/feedback/accelerator_state_matrix_input.run
-rm -rf state/feedback/accelerator_state_matrix_output.run
-rm -rf state/feedback/accelerator_state_matrix_state.run
-rm -rf state/outputs/accelerator_state_vector_output.run
-rm -rf state/outputs/accelerator_state_vector_state.run
-rm -rf state/top/accelerator_state_top.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_input.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_output.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_state.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_output.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_state.run
+rm -rf intelligence/training/state/top/accelerator_state_top.run
 rm -rf trainer/differentiation/accelerator_matrix_controller_differentiation.run
 rm -rf trainer/differentiation/accelerator_vector_controller_differentiation.run
 rm -rf trainer/fnn/accelerator_fnn_b_trainer.run
@@ -344,13 +344,13 @@ g++ nn/ntm/top/accelerator_top_testbench.cpp nn/ntm/top/accelerator_top_design.c
 g++ nn/ntm/trained/accelerator_trained_top_testbench.cpp nn/ntm/trained/accelerator_trained_top_design.cpp -o nn/ntm/trained/accelerator_trained_top.run -lsystemc
 g++ nn/ntm/write_heads/accelerator_erasing_testbench.cpp nn/ntm/write_heads/accelerator_erasing_design.cpp -o nn/ntm/write_heads/accelerator_erasing.run -lsystemc
 g++ nn/ntm/write_heads/accelerator_writing_testbench.cpp nn/ntm/write_heads/accelerator_writing_design.cpp -o nn/ntm/write_heads/accelerator_writing.run -lsystemc
-g++ state/feedback/accelerator_state_matrix_feedforward_testbench.cpp state/feedback/accelerator_state_matrix_feedforward_design.cpp -o state/feedback/accelerator_state_matrix_feedforward.run -lsystemc
-g++ state/feedback/accelerator_state_matrix_input_testbench.cpp state/feedback/accelerator_state_matrix_input_design.cpp -o state/feedback/accelerator_state_matrix_input.run -lsystemc
-g++ state/feedback/accelerator_state_matrix_output_testbench.cpp state/feedback/accelerator_state_matrix_output_design.cpp -o state/feedback/accelerator_state_matrix_output.run -lsystemc
-g++ state/feedback/accelerator_state_matrix_state_testbench.cpp state/feedback/accelerator_state_matrix_state_design.cpp -o state/feedback/accelerator_state_matrix_state.run -lsystemc
-g++ state/outputs/accelerator_state_vector_output_testbench.cpp state/outputs/accelerator_state_vector_output_design.cpp -o state/outputs/accelerator_state_vector_output.run -lsystemc
-g++ state/outputs/accelerator_state_vector_state_testbench.cpp state/outputs/accelerator_state_vector_state_design.cpp -o state/outputs/accelerator_state_vector_state.run -lsystemc
-g++ state/top/accelerator_state_top_testbench.cpp state/top/accelerator_state_top_design.cpp -o state/top/accelerator_state_top.run -lsystemc
+g++ intelligence/training/state/feedback/accelerator_state_matrix_feedforward_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_feedforward_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run -lsystemc
+g++ intelligence/training/state/feedback/accelerator_state_matrix_input_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_input_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_input.run -lsystemc
+g++ intelligence/training/state/feedback/accelerator_state_matrix_output_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_output_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_output.run -lsystemc
+g++ intelligence/training/state/feedback/accelerator_state_matrix_state_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_state_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_state.run -lsystemc
+g++ intelligence/training/state/outputs/accelerator_state_vector_output_testbench.cpp intelligence/training/state/outputs/accelerator_state_vector_output_design.cpp -o intelligence/training/state/outputs/accelerator_state_vector_output.run -lsystemc
+g++ intelligence/training/state/outputs/accelerator_state_vector_state_testbench.cpp intelligence/training/state/outputs/accelerator_state_vector_state_design.cpp -o intelligence/training/state/outputs/accelerator_state_vector_state.run -lsystemc
+g++ intelligence/training/state/top/accelerator_state_top_testbench.cpp intelligence/training/state/top/accelerator_state_top_design.cpp -o intelligence/training/state/top/accelerator_state_top.run -lsystemc
 g++ trainer/differentiation/accelerator_matrix_controller_differentiation_testbench.cpp trainer/differentiation/accelerator_matrix_controller_differentiation_design.cpp -o trainer/differentiation/accelerator_matrix_controller_differentiation.run -lsystemc
 g++ trainer/differentiation/accelerator_vector_controller_differentiation_testbench.cpp trainer/differentiation/accelerator_vector_controller_differentiation_design.cpp -o trainer/differentiation/accelerator_vector_controller_differentiation.run -lsystemc
 g++ trainer/fnn/accelerator_fnn_b_trainer_testbench.cpp trainer/fnn/accelerator_fnn_b_trainer_design.cpp -o trainer/fnn/accelerator_fnn_b_trainer.run -lsystemc

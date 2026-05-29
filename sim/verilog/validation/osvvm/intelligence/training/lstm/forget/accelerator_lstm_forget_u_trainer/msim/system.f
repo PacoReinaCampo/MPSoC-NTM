@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/trainer/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/trainer/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/trainer/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/trainer/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/trainer/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer/accelerator_testbench.vhd

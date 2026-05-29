@@ -111,29 +111,29 @@ read_verilog -sv ../../../../rtl/verilog/math/matrix/accelerator_matrix_softmax_
 read_verilog -sv ../../../../rtl/verilog/math/matrix/accelerator_matrix_summation_function.sv
 read_verilog -sv ../../../../rtl/verilog/math/matrix/accelerator_matrix_tanh_function.sv
 
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_controller.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_activation_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_activation_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_forget_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_forget_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_hidden_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_input_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_input_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_output_gate_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_output_trainer.sv
-read_verilog -sv ../../../../rtl/verilog/nn/lstm/convolutional/accelerator_state_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_controller.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_activation_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_forget_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_input_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_output_trainer.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector.sv
 
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/read_heads/accelerator_reading.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/read_heads/accelerator_reading.sv
 
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/write_heads/accelerator_writing.sv
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/write_heads/accelerator_erasing.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/write_heads/accelerator_writing.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/write_heads/accelerator_erasing.sv
 
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/memory/accelerator_addressing.sv
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/memory/accelerator_content_based_addressing.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/memory/accelerator_addressing.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/memory/accelerator_content_based_addressing.sv
 
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/top/accelerator_interface_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/top/accelerator_output_vector.sv
-read_verilog -sv ../../../../rtl/verilog/nn/ntm/top/accelerator_top.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/top/accelerator_interface_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/top/accelerator_output_vector.sv
+read_verilog -sv ../../../../rtl/verilog/intelligence/modeling/ntm/top/accelerator_top.sv
 
 read_verilog -sv accelerator_top_synthesis.sv
 

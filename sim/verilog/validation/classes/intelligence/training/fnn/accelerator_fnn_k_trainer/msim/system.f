@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/trainer/fnn/accelerator_fnn_k_trainer/accelerator_design.sv
+../../../../../../../../validation/classes/application/intelligence/training/fnn/accelerator_fnn_k_trainer/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/trainer/fnn/accelerator_fnn_k_trainer/accelerator_testbench.sv
+../../../../../../../../validation/classes/library/intelligence/training/fnn/accelerator_fnn_k_trainer/accelerator_testbench.sv

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../validation/classes/application/trainer/differentiation/accelerator_vector_controller_differentiation/accelerator_design.sv
+../../../../../../../../validation/classes/application/intelligence/training/differentiation/accelerator_vector_controller_differentiation/accelerator_design.sv
 
-../../../../../../../../validation/classes/library/trainer/differentiation/accelerator_vector_controller_differentiation/accelerator_testbench.sv
+../../../../../../../../validation/classes/library/intelligence/training/differentiation/accelerator_vector_controller_differentiation/accelerator_testbench.sv

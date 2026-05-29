@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/lstm/standard/accelerator_hidden_gate_vector/accelerator_design.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/nn/lstm/standard/accelerator_hidden_gate_vector/accelerator_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/lstm/standard/accelerator_hidden_gate_vector/accelerator_model.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/lstm/standard/accelerator_hidden_gate_vector/accelerator_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/nn/lstm/standard/accelerator_hidden_gate_vector/accelerator_testbench.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector/accelerator_testbench.vhd

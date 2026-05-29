@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/nn/fnn/standard/accelerator_controller/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/nn/fnn/standard/accelerator_controller/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/fnn/standard/accelerator_controller/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/nn/fnn/standard/accelerator_controller/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/fnn/standard/accelerator_controller/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_testbench.vhd

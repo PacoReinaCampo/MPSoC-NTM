@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/nn/ntm/memory/accelerator_vector_content_based_addressing/accelerator_design.sv
+../../../../../../../../../validation/uvm/application/intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing/accelerator_design.sv
 
-../../../../../../../../../validation/uvm/library/nn/ntm/memory/accelerator_vector_content_based_addressing/accelerator_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing/accelerator_uvm_testbench.sv

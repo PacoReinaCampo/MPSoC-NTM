@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/nn/ntm/top/accelerator_interface_matrix/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/modeling/ntm/top/accelerator_interface_matrix/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/nn/ntm/top/accelerator_interface_matrix/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/modeling/ntm/top/accelerator_interface_matrix/accelerator_uvm_testbench.sv

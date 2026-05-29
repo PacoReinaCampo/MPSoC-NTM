@@ -56,9 +56,9 @@ python3 -B math/test_scalar_math.py
 python3 -B math/test_vector_math.py
 python3 -B math/test_matrix_math.py
 
-python3 -B state/test_state_feedback.py
-python3 -B state/test_state_outputs.py
-python3 -B state/test_state_top.py
+python3 -B intelligence/training/state/test_state_feedback.py
+python3 -B intelligence/training/state/test_state_outputs.py
+python3 -B intelligence/training/state/test_state_top.py
 
 python3 -B nn/fnn/test_convolutional_fnn_controller.py
 python3 -B nn/fnn/test_standard_fnn_controller.py

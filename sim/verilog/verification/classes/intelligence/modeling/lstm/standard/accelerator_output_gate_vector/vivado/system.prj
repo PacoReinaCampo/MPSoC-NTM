@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/classes/application/nn/lstm/standard/accelerator_output_gate_vector/accelerator_design.sv
+sv work ../../../../../../../../../verification/classes/application/intelligence/modeling/lstm/standard/accelerator_output_gate_vector/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/classes/library/nn/lstm/standard/accelerator_output_gate_vector/accelerator_testbench.sv
+sv work ../../../../../../../../../verification/classes/library/intelligence/modeling/lstm/standard/accelerator_output_gate_vector/accelerator_testbench.sv

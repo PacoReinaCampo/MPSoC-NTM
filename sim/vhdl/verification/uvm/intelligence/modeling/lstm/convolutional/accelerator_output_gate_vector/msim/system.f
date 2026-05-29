@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/nn/lstm/convolutional/accelerator_output_gate_vector/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/nn/lstm/convolutional/accelerator_output_gate_vector/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector/accelerator_uvm_testbench.sv

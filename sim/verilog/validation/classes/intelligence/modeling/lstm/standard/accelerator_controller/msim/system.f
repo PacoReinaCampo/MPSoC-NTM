@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/nn/lstm/standard/accelerator_controller/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/nn/lstm/standard/accelerator_controller/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_testbench.sv

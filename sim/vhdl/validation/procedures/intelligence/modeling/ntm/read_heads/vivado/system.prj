@@ -33,8 +33,8 @@ vhdl2008 work ../../../../../../../../model/vhdl/code/algebra/tensor/model_tenso
 vhdl2008 work ../../../../../../../../model/vhdl/code/algebra/tensor/model_tensor_product.vhd
 vhdl2008 work ../../../../../../../../model/vhdl/code/algebra/tensor/model_tensor_transpose.vhd
 
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/ntm/read_heads/model_reading.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/ntm/read_heads/model_reading.vhd
 
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/read_heads/model_read_heads_pkg.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/read_heads/model_read_heads_stimulus.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/ntm/read_heads/model_read_heads_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/read_heads/model_read_heads_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/read_heads/model_read_heads_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/ntm/read_heads/model_read_heads_testbench.vhd

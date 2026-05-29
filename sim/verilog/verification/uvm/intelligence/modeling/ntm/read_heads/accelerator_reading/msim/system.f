@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../verification/uvm/src
 
-../../../../../../../../../verification/uvm/application/nn/ntm/read_heads/accelerator_reading/accelerator_design.sv
+../../../../../../../../../verification/uvm/application/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_design.sv
 
-../../../../../../../../../verification/uvm/library/nn/ntm/read_heads/accelerator_reading/accelerator_uvm_testbench.sv
+../../../../../../../../../verification/uvm/library/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_uvm_testbench.sv

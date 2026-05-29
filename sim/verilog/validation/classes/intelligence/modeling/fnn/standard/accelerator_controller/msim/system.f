@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/nn/fnn/standard/accelerator_controller/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/nn/fnn/standard/accelerator_controller/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/modeling/fnn/standard/accelerator_controller/accelerator_testbench.sv

@@ -72,10 +72,10 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matr
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/trainer/linear/accelerator_trainer.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/training/linear/accelerator_trainer.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/linear/convolutional/accelerator_controller.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/modeling/linear/convolutional/accelerator_controller.vhd
 
-vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_pkg.vhd
-vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_stimulus.vhd
-vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/nn/linear/convolutional/accelerator_convolutional_linear_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/intelligence/modeling/linear/convolutional/accelerator_convolutional_linear_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/intelligence/modeling/linear/convolutional/accelerator_convolutional_linear_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/procedures/vhdl/library/intelligence/modeling/linear/convolutional/accelerator_convolutional_linear_testbench.vhd

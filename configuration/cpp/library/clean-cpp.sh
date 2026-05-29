@@ -173,13 +173,13 @@ rm -rf nn/ntm/top/accelerator_top.run
 rm -rf nn/ntm/trained/accelerator_trained_top.run
 rm -rf nn/ntm/write_heads/accelerator_erasing.run
 rm -rf nn/ntm/write_heads/accelerator_writing.run
-rm -rf state/feedback/accelerator_state_matrix_feedforward.run
-rm -rf state/feedback/accelerator_state_matrix_input.run
-rm -rf state/feedback/accelerator_state_matrix_output.run
-rm -rf state/feedback/accelerator_state_matrix_state.run
-rm -rf state/outputs/accelerator_state_vector_output.run
-rm -rf state/outputs/accelerator_state_vector_state.run
-rm -rf state/top/accelerator_state_top.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_input.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_output.run
+rm -rf intelligence/training/state/feedback/accelerator_state_matrix_state.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_output.run
+rm -rf intelligence/training/state/outputs/accelerator_state_vector_state.run
+rm -rf intelligence/training/state/top/accelerator_state_top.run
 rm -rf trainer/differentiation/accelerator_matrix_controller_differentiation.run
 rm -rf trainer/differentiation/accelerator_vector_controller_differentiation.run
 rm -rf trainer/fnn/accelerator_fnn_b_trainer.run
@@ -241,7 +241,7 @@ rm -rf nn/ntm/ntm.run
 rm -rf nn/dnc/dnc.run
 rm -rf nn/ann/ann.run
 
-rm -rf state/accelerator_state.run
+rm -rf intelligence/training/state/accelerator_state.run
 
 rm -rf trainer/accelerator_fnn.run
 rm -rf trainer/accelerator_lstm.run

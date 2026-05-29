@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/classes/application/nn/ntm/read_heads/accelerator_reading/accelerator_design.sv
+sv work ../../../../../../../../../verification/classes/application/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/classes/library/nn/ntm/read_heads/accelerator_reading/accelerator_testbench.sv
+sv work ../../../../../../../../../verification/classes/library/intelligence/modeling/ntm/read_heads/accelerator_reading/accelerator_testbench.sv

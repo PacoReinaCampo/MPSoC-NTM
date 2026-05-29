@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/classes/application/nn/lstm/convolutional/accelerator_hidden_gate_vector/accelerator_design.sv
+../../../../../../../../../verification/classes/application/intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector/accelerator_design.sv
 
-../../../../../../../../../verification/classes/library/nn/lstm/convolutional/accelerator_hidden_gate_vector/accelerator_testbench.sv
+../../../../../../../../../verification/classes/library/intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector/accelerator_testbench.sv

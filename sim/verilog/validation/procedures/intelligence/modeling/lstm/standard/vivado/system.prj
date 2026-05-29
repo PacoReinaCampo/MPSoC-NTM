@@ -72,19 +72,19 @@ vhdl2008 work ../../../../../../../../model/vhdl/code/math/matrix/model_matrix_l
 vhdl2008 work ../../../../../../../../model/vhdl/code/math/matrix/model_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../../model/vhdl/code/math/matrix/model_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../../model/vhdl/code/trainer/lstm/model_activation_trainer.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/trainer/lstm/model_forget_trainer.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/trainer/lstm/model_input_trainer.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/trainer/lstm/model_output_trainer.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_activation_trainer.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_forget_trainer.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_input_trainer.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/training/lstm/model_output_trainer.vhd
 
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_controller.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_activation_gate_vector.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_forget_gate_vector.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_hidden_gate_vector.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_input_gate_vector.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_output_gate_vector.vhd
-vhdl2008 work ../../../../../../../../model/vhdl/code/nn/lstm/standard/model_state_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_controller.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_activation_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_forget_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_hidden_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_input_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_output_gate_vector.vhd
+vhdl2008 work ../../../../../../../../model/vhdl/code/intelligence/modeling/lstm/standard/model_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/lstm/standard/model_standard_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/lstm/standard/model_standard_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/nn/lstm/standard/model_standard_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/lstm/standard/model_standard_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/lstm/standard/model_standard_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../../validation/tasks/vhdl/library/intelligence/modeling/lstm/standard/model_standard_lstm_testbench.vhd

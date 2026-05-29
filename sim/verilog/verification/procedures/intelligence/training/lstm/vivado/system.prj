@@ -72,19 +72,19 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/lstm/accelerator_activation_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/lstm/accelerator_forget_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/lstm/accelerator_input_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/lstm/accelerator_output_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/lstm/accelerator_activation_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/lstm/accelerator_forget_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/lstm/accelerator_input_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/lstm/accelerator_output_trainer.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_controller.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_activation_gate_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_forget_gate_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_hidden_gate_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_input_gate_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_output_gate_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/nn/lstm/convolutional/accelerator_state_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_controller.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/lstm/accelerator_trainer_lstm_pkg.vhd
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/lstm/accelerator_trainer_lstm_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/lstm/accelerator_trainer_lstm_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/lstm/accelerator_trainer_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/lstm/accelerator_trainer_lstm_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/lstm/accelerator_trainer_lstm_testbench.vhd

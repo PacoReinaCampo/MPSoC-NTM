@@ -67,62 +67,62 @@
 ./application/algebra/tensor/tensor_algebra-x86.run
 
 
-./application/state/top/state_top-x86.run
+./application/intelligence/training/state/top/state_top-x86.run
 
-./application/state/outputs/state_outputs-x86.run
+./application/intelligence/training/state/outputs/state_outputs-x86.run
 
-./application/state/feedback/state_feedback-x86.run
-
-
-./application/nn/dnc/top/accelerator_top-x86.run
-
-./application/nn/ntm/top/accelerator_top-x86.run
-
-./application/nn/ann/inputs/accelerator_inputs-x86.run
-
-./application/nn/dnc/memory/accelerator_memory-x86.run
-
-./application/nn/ntm/read_heads/accelerator_reading-x86.run
-
-./application/nn/ann/functions/accelerator_functions-x86.run
-
-./application/nn/ann/components/accelerator_components-x86.run
-
-./application/nn/ann/top/accelerator_controller-x86.run
-
-./application/nn/dnc/read_heads/accelerator_read_heads-x86.run
-
-./application/nn/fnn/convolutional/accelerator_controller-x86.run
-
-./application/nn/fnn/standard/accelerator_controller-x86.run
-
-./application/nn/lstm/convolutional/accelerator_controller-x86.run
-
-./application/nn/lstm/standard/accelerator_controller-x86.run
-
-./application/nn/ntm/memory/accelerator_addressing-x86.run
-
-./application/nn/dnc/trained/accelerator_trained_top-x86.run
-
-./application/nn/dnc/write_heads/accelerator_write_heads-x86.run
-
-./application/nn/ntm/trained/accelerator_trained_top-x86.run
-
-./application/nn/ntm/write_heads/accelerator_write_heads-x86.run
-
-./application/nn/ann/controller/fnn/accelerator_fnn-x86.run
-
-./application/nn/ann/controller/lstm/accelerator_lstm-x86.run
+./application/intelligence/training/state/feedback/state_feedback-x86.run
 
 
-./application/trainer/fnn/accelerator_fnn_trainer-x86.run
+./application/intelligence/modeling/dnc/top/accelerator_top-x86.run
 
-./application/trainer/differentiation/accelerator_controller_differentiation-x86.run
+./application/intelligence/modeling/ntm/top/accelerator_top-x86.run
 
-./application/trainer/lstm/input/accelerator_lstm_input_trainer-x86.run
+./application/intelligence/modeling/ann/inputs/accelerator_inputs-x86.run
 
-./application/trainer/lstm/forget/accelerator_lstm_forget_trainer-x86.run
+./application/intelligence/modeling/dnc/memory/accelerator_memory-x86.run
 
-./application/trainer/lstm/output/accelerator_lstm_output_trainer-x86.run
+./application/intelligence/modeling/ntm/read_heads/accelerator_reading-x86.run
 
-./application/trainer/lstm/activation/accelerator_lstm_activation_trainer-x86.run
+./application/intelligence/modeling/ann/functions/accelerator_functions-x86.run
+
+./application/intelligence/modeling/ann/components/accelerator_components-x86.run
+
+./application/intelligence/modeling/ann/top/accelerator_controller-x86.run
+
+./application/intelligence/modeling/dnc/read_heads/accelerator_read_heads-x86.run
+
+./application/intelligence/modeling/fnn/convolutional/accelerator_controller-x86.run
+
+./application/intelligence/modeling/fnn/standard/accelerator_controller-x86.run
+
+./application/intelligence/modeling/lstm/convolutional/accelerator_controller-x86.run
+
+./application/intelligence/modeling/lstm/standard/accelerator_controller-x86.run
+
+./application/intelligence/modeling/ntm/memory/accelerator_addressing-x86.run
+
+./application/intelligence/modeling/dnc/trained/accelerator_trained_top-x86.run
+
+./application/intelligence/modeling/dnc/write_heads/accelerator_write_heads-x86.run
+
+./application/intelligence/modeling/ntm/trained/accelerator_trained_top-x86.run
+
+./application/intelligence/modeling/ntm/write_heads/accelerator_write_heads-x86.run
+
+./application/intelligence/modeling/ann/controller/fnn/accelerator_fnn-x86.run
+
+./application/intelligence/modeling/ann/controller/lstm/accelerator_lstm-x86.run
+
+
+./application/intelligence/training/fnn/accelerator_fnn_trainer-x86.run
+
+./application/intelligence/training/differentiation/accelerator_controller_differentiation-x86.run
+
+./application/intelligence/training/lstm/input/accelerator_lstm_input_trainer-x86.run
+
+./application/intelligence/training/lstm/forget/accelerator_lstm_forget_trainer-x86.run
+
+./application/intelligence/training/lstm/output/accelerator_lstm_output_trainer-x86.run
+
+./application/intelligence/training/lstm/activation/accelerator_lstm_activation_trainer-x86.run

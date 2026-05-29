@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/uvm/application/trainer/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_design.sv
+sv work ../../../../../../../../../verification/uvm/application/intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/uvm/library/trainer/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_uvm_testbench.sv
+sv work ../../../../../../../../../verification/uvm/library/intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_uvm_testbench.sv

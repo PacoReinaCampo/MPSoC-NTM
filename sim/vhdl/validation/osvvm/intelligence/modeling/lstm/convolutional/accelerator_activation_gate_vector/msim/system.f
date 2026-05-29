@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/osvvm/application/nn/lstm/convolutional/accelerator_activation_gate_vector/accelerator_design.vhd
-../../../../../../../../../validation/osvvm/application/nn/lstm/convolutional/accelerator_activation_gate_vector/accelerator_design_pkg.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector/accelerator_design.vhd
+../../../../../../../../../validation/osvvm/application/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector/accelerator_design_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/lstm/convolutional/accelerator_activation_gate_vector/accelerator_model.vhd
-../../../../../../../../../validation/osvvm/library/nn/lstm/convolutional/accelerator_activation_gate_vector/accelerator_model_pkg.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector/accelerator_model.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector/accelerator_model_pkg.vhd
 
-../../../../../../../../../validation/osvvm/library/nn/lstm/convolutional/accelerator_activation_gate_vector/accelerator_testbench.vhd
+../../../../../../../../../validation/osvvm/library/intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector/accelerator_testbench.vhd

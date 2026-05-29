@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/uvm/application/nn/lstm/standard/accelerator_controller/accelerator_design.sv
+sv work ../../../../../../../../../verification/uvm/application/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/uvm/library/nn/lstm/standard/accelerator_controller/accelerator_uvm_testbench.sv
+sv work ../../../../../../../../../verification/uvm/library/intelligence/modeling/lstm/standard/accelerator_controller/accelerator_uvm_testbench.sv

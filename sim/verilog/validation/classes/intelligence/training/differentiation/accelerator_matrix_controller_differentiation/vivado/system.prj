@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../validation/classes/application/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_design.sv
+sv work ../../../../../../../../validation/classes/application/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_design.sv
 
-sv work ../../../../../../../../validation/classes/library/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_testbench.sv
+sv work ../../../../../../../../validation/classes/library/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_testbench.sv

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/classes/application/nn/lstm/standard/accelerator_input_gate_vector/accelerator_design.sv
+../../../../../../../../../verification/classes/application/intelligence/modeling/lstm/standard/accelerator_input_gate_vector/accelerator_design.sv
 
-../../../../../../../../../verification/classes/library/nn/lstm/standard/accelerator_input_gate_vector/accelerator_testbench.sv
+../../../../../../../../../verification/classes/library/intelligence/modeling/lstm/standard/accelerator_input_gate_vector/accelerator_testbench.sv

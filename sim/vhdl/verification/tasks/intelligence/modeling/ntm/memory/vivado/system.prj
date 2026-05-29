@@ -72,9 +72,9 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/tensor/accelerator_tens
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/tensor/accelerator_tensor_integration.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/code/math/tensor/accelerator_tensor_softmax.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/ntm/memory/accelerator_addressing.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/code/nn/ntm/memory/accelerator_content_based_addressing.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/modeling/ntm/memory/accelerator_addressing.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/code/intelligence/modeling/ntm/memory/accelerator_content_based_addressing.vhd
 
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/memory/accelerator_memory_pkg.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/memory/accelerator_memory_stimulus.vhd
-vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/nn/ntm/memory/accelerator_memory_testbench.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/memory/accelerator_memory_pkg.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/memory/accelerator_memory_stimulus.vhd
+vhdl2008 work ../../../../../../../../verification/tasks/vhdl/library/intelligence/modeling/ntm/memory/accelerator_memory_testbench.vhd

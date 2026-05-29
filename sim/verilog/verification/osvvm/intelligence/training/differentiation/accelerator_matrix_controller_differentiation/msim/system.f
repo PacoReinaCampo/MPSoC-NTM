@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../verification/osvvm/application/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_design.vhd
-../../../../../../../../verification/osvvm/application/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_design_pkg.vhd
+../../../../../../../../verification/osvvm/application/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_design.vhd
+../../../../../../../../verification/osvvm/application/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_design_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_model.vhd
-../../../../../../../../verification/osvvm/library/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_model_pkg.vhd
+../../../../../../../../verification/osvvm/library/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_model.vhd
+../../../../../../../../verification/osvvm/library/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_model_pkg.vhd
 
-../../../../../../../../verification/osvvm/library/trainer/differentiation/accelerator_matrix_controller_differentiation/accelerator_testbench.vhd
+../../../../../../../../verification/osvvm/library/intelligence/training/differentiation/accelerator_matrix_controller_differentiation/accelerator_testbench.vhd

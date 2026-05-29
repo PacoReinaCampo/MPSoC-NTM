@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/fnn/convolutional/accelerator_controller/accelerator_design.vhd
-vhdl2008 work ../../../../../../../../../validation/osvvm/application/nn/fnn/convolutional/accelerator_controller/accelerator_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/intelligence/modeling/fnn/convolutional/accelerator_controller/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/application/intelligence/modeling/fnn/convolutional/accelerator_controller/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/fnn/convolutional/accelerator_controller/accelerator_model.vhd
-vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/fnn/convolutional/accelerator_controller/accelerator_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/convolutional/accelerator_controller/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/convolutional/accelerator_controller/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../validation/osvvm/library/nn/fnn/convolutional/accelerator_controller/accelerator_testbench.vhd
+vhdl2008 work ../../../../../../../../../validation/osvvm/library/intelligence/modeling/fnn/convolutional/accelerator_controller/accelerator_testbench.vhd

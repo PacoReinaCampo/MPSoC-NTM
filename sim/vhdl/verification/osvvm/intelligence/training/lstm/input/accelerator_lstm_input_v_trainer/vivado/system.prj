@@ -42,10 +42,10 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/trainer/lstm/input/accelerator_lstm_input_v_trainer/accelerator_design.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/application/trainer/lstm/input/accelerator_lstm_input_v_trainer/accelerator_design_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/training/lstm/input/accelerator_lstm_input_v_trainer/accelerator_design.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/application/intelligence/training/lstm/input/accelerator_lstm_input_v_trainer/accelerator_design_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/trainer/lstm/input/accelerator_lstm_input_v_trainer/accelerator_model.vhd
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/trainer/lstm/input/accelerator_lstm_input_v_trainer/accelerator_model_pkg.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/training/lstm/input/accelerator_lstm_input_v_trainer/accelerator_model.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/training/lstm/input/accelerator_lstm_input_v_trainer/accelerator_model_pkg.vhd
 
-vhdl2008 work ../../../../../../../../../verification/osvvm/library/trainer/lstm/input/accelerator_lstm_input_v_trainer/accelerator_testbench.vhd
+vhdl2008 work ../../../../../../../../../verification/osvvm/library/intelligence/training/lstm/input/accelerator_lstm_input_v_trainer/accelerator_testbench.vhd

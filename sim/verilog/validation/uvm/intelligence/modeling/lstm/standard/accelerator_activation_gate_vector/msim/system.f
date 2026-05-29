@@ -44,6 +44,6 @@
 
 +incdir+../../../../../../../../../validation/uvm/src
 
-../../../../../../../../../validation/uvm/application/nn/lstm/standard/accelerator_activation_gate_vector/accelerator_design.sv
+../../../../../../../../../validation/uvm/application/intelligence/modeling/lstm/standard/accelerator_activation_gate_vector/accelerator_design.sv
 
-../../../../../../../../../validation/uvm/library/nn/lstm/standard/accelerator_activation_gate_vector/accelerator_uvm_testbench.sv
+../../../../../../../../../validation/uvm/library/intelligence/modeling/lstm/standard/accelerator_activation_gate_vector/accelerator_uvm_testbench.sv

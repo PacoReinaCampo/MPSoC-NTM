@@ -42,6 +42,6 @@
 //                                                                               //
 ///////////////////////////////////////////////////////////////////////////////////
 
-sv work ../../../../../../../../../verification/classes/application/trainer/lstm/forget/accelerator_lstm_forget_w_trainer/accelerator_design.sv
+sv work ../../../../../../../../../verification/classes/application/intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer/accelerator_design.sv
 
-sv work ../../../../../../../../../verification/classes/library/trainer/lstm/forget/accelerator_lstm_forget_w_trainer/accelerator_testbench.sv
+sv work ../../../../../../../../../verification/classes/library/intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer/accelerator_testbench.sv

@@ -42,6 +42,6 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../validation/classes/application/trainer/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_design.sv
+../../../../../../../../../validation/classes/application/intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_design.sv
 
-../../../../../../../../../validation/classes/library/trainer/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_testbench.sv
+../../../../../../../../../validation/classes/library/intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer/accelerator_testbench.sv

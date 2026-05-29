@@ -42,10 +42,10 @@
 ##                                                                               ##
 ###################################################################################
 
-../../../../../../../../../verification/osvvm/application/nn/ntm/trained/accelerator_trained_top/accelerator_design.vhd
-../../../../../../../../../verification/osvvm/application/nn/ntm/trained/accelerator_trained_top/accelerator_design_pkg.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_design.vhd
+../../../../../../../../../verification/osvvm/application/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_design_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/trained/accelerator_trained_top/accelerator_model.vhd
-../../../../../../../../../verification/osvvm/library/nn/ntm/trained/accelerator_trained_top/accelerator_model_pkg.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_model.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_model_pkg.vhd
 
-../../../../../../../../../verification/osvvm/library/nn/ntm/trained/accelerator_trained_top/accelerator_testbench.vhd
+../../../../../../../../../verification/osvvm/library/intelligence/modeling/ntm/trained/accelerator_trained_top/accelerator_testbench.vhd

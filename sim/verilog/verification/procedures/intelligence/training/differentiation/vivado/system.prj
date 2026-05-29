@@ -72,10 +72,10 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_sinh_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/math/matrix/accelerator_matrix_tanh_function.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_activation_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_forget_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_input_trainer.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/code/trainer/transformer/accelerator_output_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/transformer/accelerator_activation_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/transformer/accelerator_forget_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/transformer/accelerator_input_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/code/intelligence/training/transformer/accelerator_output_trainer.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_controller.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_activation_gate_vector.vhd
@@ -85,6 +85,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/code/transformer/convolutional/accel
 vhdl2008 work ../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_output_gate_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/code/transformer/convolutional/accelerator_state_gate_vector.vhd
 
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/transformer/accelerator_trainer_transformer_pkg.vhd
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/transformer/accelerator_trainer_transformer_stimulus.vhd
-vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/trainer/transformer/accelerator_trainer_transformer_testbench.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/transformer/accelerator_trainer_transformer_pkg.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/transformer/accelerator_trainer_transformer_stimulus.vhd
+vhdl2008 work ../../../../../../../verification/procedures/vhdl/library/intelligence/training/transformer/accelerator_trainer_transformer_testbench.vhd
