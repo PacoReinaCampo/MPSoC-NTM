@@ -103,13 +103,13 @@ cd application/math/scalar; octave accelerator_scalar_mean_function_test.m; cd .
 cd application/math/vector; octave accelerator_vector_deviation_function_test.m; cd ../../..
 cd application/math/vector; octave accelerator_vector_mean_function_test.m; cd ../../..
 
-cd application/intelligence/training/state/feedback; octave accelerator_state_matrix_feedforward_test.m; cd ../../..
-cd application/intelligence/training/state/feedback; octave accelerator_state_matrix_input_test.m; cd ../../..
-cd application/intelligence/training/state/feedback; octave accelerator_state_matrix_output_test.m; cd ../../..
-cd application/intelligence/training/state/feedback; octave accelerator_state_matrix_state_test.m; cd ../../..
-cd application/intelligence/training/state/outputs; octave accelerator_state_vector_output_test.m; cd ../../..
-cd application/intelligence/training/state/outputs; octave accelerator_state_vector_state_test.m; cd ../../..
-cd application/intelligence/training/state/top; octave accelerator_state_top_test.m; cd ../../..
+cd application/intelligence/training/feedback; octave accelerator_state_matrix_feedforward_test.m; cd ../../..
+cd application/intelligence/training/feedback; octave accelerator_state_matrix_input_test.m; cd ../../..
+cd application/intelligence/training/feedback; octave accelerator_state_matrix_output_test.m; cd ../../..
+cd application/intelligence/training/feedback; octave accelerator_state_matrix_state_test.m; cd ../../..
+cd application/intelligence/training/outputs; octave accelerator_state_vector_output_test.m; cd ../../..
+cd application/intelligence/training/outputs; octave accelerator_state_vector_state_test.m; cd ../../..
+cd application/intelligence/training/top; octave accelerator_state_top_test.m; cd ../../..
 
 cd application/intelligence/modeling/fnn/convolutional; octave accelerator_controller_test.m; cd ../../../..
 cd application/intelligence/modeling/fnn/standard; octave accelerator_controller_test.m; cd ../../../..

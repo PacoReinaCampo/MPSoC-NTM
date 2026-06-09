@@ -89,15 +89,15 @@ make clean
 make
 
 
-cd ../../../application/intelligence/training/state/feedback
+cd ../../../application/intelligence/training/feedback
 make clean
 make
 
-cd ../../../application/intelligence/training/state/outputs
+cd ../../../application/intelligence/training/outputs
 make clean
 make
 
-cd ../../../application/intelligence/training/state/top
+cd ../../../application/intelligence/training/top
 make clean
 make
 

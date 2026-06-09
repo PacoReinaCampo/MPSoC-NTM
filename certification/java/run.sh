@@ -71,9 +71,9 @@ java application/intelligence/modeling/ntm/read_heads/accelerator_reading.java
 java application/intelligence/modeling/ntm/top/accelerator_top.java
 java application/intelligence/modeling/ntm/trained/accelerator_trained_top.java
 java application/intelligence/modeling/ntm/write_heads/accelerator_write_heads.java
-java application/intelligence/training/state/feedback/test_state_feedback.java
-java application/intelligence/training/state/outputs/test_state_outputs.java
-java application/intelligence/training/state/top/test_state_top.java
+java application/intelligence/training/feedback/test_state_feedback.java
+java application/intelligence/training/outputs/test_state_outputs.java
+java application/intelligence/training/top/test_state_top.java
 java application/intelligence/training/differentiation/accelerator_controller_differentiation.java
 java application/intelligence/training/fnn/accelerator_fnn_trainer.java
 java application/intelligence/training/lstm/activation/accelerator_lstm_activation_trainer.java

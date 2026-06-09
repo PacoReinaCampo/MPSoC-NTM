@@ -67,11 +67,11 @@
 ./application/algebra/tensor/tensor_algebra-x86.run
 
 
-./application/intelligence/training/state/top/state_top-x86.run
+./application/intelligence/training/top/state_top-x86.run
 
-./application/intelligence/training/state/outputs/state_outputs-x86.run
+./application/intelligence/training/outputs/state_outputs-x86.run
 
-./application/intelligence/training/state/feedback/state_feedback-x86.run
+./application/intelligence/training/feedback/state_feedback-x86.run
 
 
 ./application/intelligence/modeling/dnc/top/accelerator_top-x86.run

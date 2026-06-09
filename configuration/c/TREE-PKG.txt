@@ -14,6 +14,59 @@ library
 ├── intelligence
 │   ├── modeling
 │   │   ├── accelerator_controller.h
+│   │   ├── ann
+│   │   │   ├── components
+│   │   │   │   ├── accelerator_masked_multi_head_attention.h
+│   │   │   │   ├── accelerator_masked_scaled_dot_product_attention.h
+│   │   │   │   ├── accelerator_multi_head_attention.h
+│   │   │   │   └── accelerator_scaled_dot_product_attention.h
+│   │   │   ├── controller
+│   │   │   │   ├── fnn
+│   │   │   │   │   └── accelerator_fnn.h
+│   │   │   │   └── lstm
+│   │   │   │       └── accelerator_lstm.h
+│   │   │   ├── functions
+│   │   │   │   ├── accelerator_layer_norm.h
+│   │   │   │   └── accelerator_positional_encoding.h
+│   │   │   ├── inputs
+│   │   │   │   ├── accelerator_inputs_vector.h
+│   │   │   │   ├── accelerator_keys_vector.h
+│   │   │   │   ├── accelerator_queries_vector.h
+│   │   │   │   └── accelerator_values_vector.h
+│   │   │   └── top
+│   │   │       ├── accelerator_controller.h
+│   │   │       ├── accelerator_decoder.h
+│   │   │       └── accelerator_encoder.h
+│   │   ├── dnc
+│   │   │   ├── dnc.h
+│   │   │   ├── memory
+│   │   │   │   ├── accelerator_addressing.h
+│   │   │   │   ├── accelerator_allocation_weighting.h
+│   │   │   │   ├── accelerator_backward_weighting.h
+│   │   │   │   ├── accelerator_forward_weighting.h
+│   │   │   │   ├── accelerator_matrix_content_based_addressing.h
+│   │   │   │   ├── accelerator_memory_matrix.h
+│   │   │   │   ├── accelerator_memory_retention_vector.h
+│   │   │   │   ├── accelerator_precedence_weighting.h
+│   │   │   │   ├── accelerator_sort_vector.h
+│   │   │   │   ├── accelerator_temporal_link_matrix.h
+│   │   │   │   ├── accelerator_usage_vector.h
+│   │   │   │   └── accelerator_vector_content_based_addressing.h
+│   │   │   ├── read_heads
+│   │   │   │   ├── accelerator_read_content_weighting.h
+│   │   │   │   ├── accelerator_read_vectors.h
+│   │   │   │   └── accelerator_read_weighting.h
+│   │   │   ├── top
+│   │   │   │   ├── accelerator_interface_matrix.h
+│   │   │   │   ├── accelerator_interface_top.h
+│   │   │   │   ├── accelerator_interface_vector.h
+│   │   │   │   ├── accelerator_output_vector.h
+│   │   │   │   └── accelerator_top.h
+│   │   │   ├── trained
+│   │   │   │   └── accelerator_trained_top.h
+│   │   │   └── write_heads
+│   │   │       ├── accelerator_write_content_weighting.h
+│   │   │       └── accelerator_write_weighting.h
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.h
@@ -68,43 +121,48 @@ library
 │       │   ├── accelerator_fnn_u_trainer.h
 │       │   ├── accelerator_fnn_v_trainer.h
 │       │   └── accelerator_fnn_w_trainer.h
-│       └── lstm
-│           ├── activation
-│           │   ├── accelerator_lstm_activation_b_trainer.h
-│           │   ├── accelerator_lstm_activation_d_trainer.h
-│           │   ├── accelerator_lstm_activation_k_trainer.h
-│           │   ├── accelerator_lstm_activation_trainer.h
-│           │   ├── accelerator_lstm_activation_u_trainer.h
-│           │   ├── accelerator_lstm_activation_v_trainer.h
-│           │   └── accelerator_lstm_activation_w_trainer.h
-│           ├── forget
-│           │   ├── accelerator_lstm_forget_b_trainer.h
-│           │   ├── accelerator_lstm_forget_d_trainer.h
-│           │   ├── accelerator_lstm_forget_k_trainer.h
-│           │   ├── accelerator_lstm_forget_trainer.h
-│           │   ├── accelerator_lstm_forget_u_trainer.h
-│           │   ├── accelerator_lstm_forget_v_trainer.h
-│           │   └── accelerator_lstm_forget_w_trainer.h
-│           ├── input
-│           │   ├── accelerator_lstm_input_b_trainer.h
-│           │   ├── accelerator_lstm_input_d_trainer.h
-│           │   ├── accelerator_lstm_input_k_trainer.h
-│           │   ├── accelerator_lstm_input_trainer.h
-│           │   ├── accelerator_lstm_input_u_trainer.h
-│           │   ├── accelerator_lstm_input_v_trainer.h
-│           │   └── accelerator_lstm_input_w_trainer.h
-│           └── output
-│               ├── accelerator_lstm_output_b_trainer.h
-│               ├── accelerator_lstm_output_d_trainer.h
-│               ├── accelerator_lstm_output_k_trainer.h
-│               ├── accelerator_lstm_output_trainer.h
-│               ├── accelerator_lstm_output_u_trainer.h
-│               ├── accelerator_lstm_output_v_trainer.h
-│               └── accelerator_lstm_output_w_trainer.h
+│       ├── lstm
+│       │   ├── activation
+│       │   │   ├── accelerator_lstm_activation_b_trainer.h
+│       │   │   ├── accelerator_lstm_activation_d_trainer.h
+│       │   │   ├── accelerator_lstm_activation_k_trainer.h
+│       │   │   ├── accelerator_lstm_activation_trainer.h
+│       │   │   ├── accelerator_lstm_activation_u_trainer.h
+│       │   │   ├── accelerator_lstm_activation_v_trainer.h
+│       │   │   └── accelerator_lstm_activation_w_trainer.h
+│       │   ├── forget
+│       │   │   ├── accelerator_lstm_forget_b_trainer.h
+│       │   │   ├── accelerator_lstm_forget_d_trainer.h
+│       │   │   ├── accelerator_lstm_forget_k_trainer.h
+│       │   │   ├── accelerator_lstm_forget_trainer.h
+│       │   │   ├── accelerator_lstm_forget_u_trainer.h
+│       │   │   ├── accelerator_lstm_forget_v_trainer.h
+│       │   │   └── accelerator_lstm_forget_w_trainer.h
+│       │   ├── input
+│       │   │   ├── accelerator_lstm_input_b_trainer.h
+│       │   │   ├── accelerator_lstm_input_d_trainer.h
+│       │   │   ├── accelerator_lstm_input_k_trainer.h
+│       │   │   ├── accelerator_lstm_input_trainer.h
+│       │   │   ├── accelerator_lstm_input_u_trainer.h
+│       │   │   ├── accelerator_lstm_input_v_trainer.h
+│       │   │   └── accelerator_lstm_input_w_trainer.h
+│       │   └── output
+│       │       ├── accelerator_lstm_output_b_trainer.h
+│       │       ├── accelerator_lstm_output_d_trainer.h
+│       │       ├── accelerator_lstm_output_k_trainer.h
+│       │       ├── accelerator_lstm_output_trainer.h
+│       │       ├── accelerator_lstm_output_u_trainer.h
+│       │       ├── accelerator_lstm_output_v_trainer.h
+│       │       └── accelerator_lstm_output_w_trainer.h
+│       └── state
+│           ├── accelerator_state.h
+│           ├── feedback
+│           ├── outputs
+│           └── top
 └── math
     ├── accelerator_math.h
     ├── matrix
     ├── scalar
     └── vector
 
-36 directories, 71 files
+54 directories, 111 files

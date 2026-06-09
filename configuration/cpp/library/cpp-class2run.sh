@@ -56,18 +56,18 @@ rm -rf math/accelerator_matrix_math.run
 rm -rf math/accelerator_scalar_math.run
 rm -rf math/accelerator_vector_math.run
 
-rm -rf nn/accelerator_fnn_controller.run
-rm -rf nn/accelerator_lstm_controller.run
-rm -rf nn/accelerator_ann_controller.run
+rm -rf intelligence/modeling/accelerator_fnn_controller.run
+rm -rf intelligence/modeling/accelerator_lstm_controller.run
+rm -rf intelligence/modeling/accelerator_ann_controller.run
 
 rm -rf ntm/ntm.run
 rm -rf dnc/dnc.run
 rm -rf ann/ann.run
 
-rm -rf intelligence/training/state/accelerator_state.run
+rm -rf intelligence/training/accelerator_state.run
 
-rm -rf trainer/accelerator_fnn.run
-rm -rf trainer/accelerator_lstm.run
+rm -rf intelligence/training/accelerator_fnn.run
+rm -rf intelligence/training/accelerator_lstm.run
 
 # x86-64 ISA
 g++ arithmetic/accelerator_matrix_arithmetic.cpp -o arithmetic/accelerator_matrix_arithmetic.run
@@ -84,15 +84,15 @@ g++ math/accelerator_matrix_math.cpp -o math/accelerator_matrix_math.run
 g++ math/accelerator_scalar_math.cpp -o math/accelerator_scalar_math.run
 g++ math/accelerator_vector_math.cpp -o math/accelerator_vector_math.run
 
-g++ nn/accelerator_fnn_controller.cpp -o nn/accelerator_fnn_controller.run
-g++ nn/accelerator_lstm_controller.cpp -o nn/accelerator_lstm_controller.run
-g++ nn/accelerator_ann_controller.cpp -o nn/accelerator_ann_controller.run
+g++ intelligence/modeling/accelerator_fnn_controller.cpp -o intelligence/modeling/accelerator_fnn_controller.run
+g++ intelligence/modeling/accelerator_lstm_controller.cpp -o intelligence/modeling/accelerator_lstm_controller.run
+g++ intelligence/modeling/accelerator_ann_controller.cpp -o intelligence/modeling/accelerator_ann_controller.run
 
 g++ ntm/ntm.cpp -o ntm/ntm.run
 g++ dnc/dnc.cpp -o dnc/dnc.run
 g++ ann/ann.cpp -o ann/ann.run
 
-#g++ intelligence/training/state/accelerator_state.cpp -o intelligence/training/state/accelerator_state.run
+#g++ intelligence/training/accelerator_state.cpp -o intelligence/training/accelerator_state.run
 
-g++ trainer/accelerator_fnn.cpp -o trainer/accelerator_fnn.run
-g++ trainer/accelerator_lstm.cpp -o trainer/accelerator_lstm.run
+g++ intelligence/training/accelerator_fnn.cpp -o intelligence/training/accelerator_fnn.run
+g++ intelligence/training/accelerator_lstm.cpp -o intelligence/training/accelerator_lstm.run

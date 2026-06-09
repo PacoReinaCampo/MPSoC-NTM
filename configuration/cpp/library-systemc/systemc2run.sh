@@ -104,116 +104,116 @@ rm -rf math/vector/accelerator_vector_deviation_function.run
 rm -rf math/vector/accelerator_vector_logistic_function.run
 rm -rf math/vector/accelerator_vector_mean_function.run
 rm -rf math/vector/accelerator_vector_oneplus_function.run
-rm -rf nn/ann/components/accelerator_masked_multi_head_attention.run
-rm -rf nn/ann/components/accelerator_masked_scaled_dot_product_attention.run
-rm -rf nn/ann/components/accelerator_multi_head_attention.run
-rm -rf nn/ann/components/accelerator_scaled_dot_product_attention.run
-rm -rf nn/ann/controller/fnn/accelerator_fnn.run
-rm -rf nn/ann/controller/lstm/accelerator_lstm.run
-rm -rf nn/ann/functions/accelerator_layer_norm.run
-rm -rf nn/ann/functions/accelerator_positional_encoding.run
-rm -rf nn/ann/inputs/accelerator_inputs_vector.run
-rm -rf nn/ann/inputs/accelerator_keys_vector.run
-rm -rf nn/ann/inputs/accelerator_queries_vector.run
-rm -rf nn/ann/inputs/accelerator_values_vector.run
-rm -rf nn/ann/top/accelerator_controller.run
-rm -rf nn/ann/top/accelerator_decoder.run
-rm -rf nn/ann/top/accelerator_encoder.run
-rm -rf nn/dnc/memory/accelerator_addressing.run
-rm -rf nn/dnc/memory/accelerator_allocation_weighting.run
-rm -rf nn/dnc/memory/accelerator_backward_weighting.run
-rm -rf nn/dnc/memory/accelerator_forward_weighting.run
-rm -rf nn/dnc/memory/accelerator_matrix_content_based_addressing.run
-rm -rf nn/dnc/memory/accelerator_memory_matrix.run
-rm -rf nn/dnc/memory/accelerator_memory_retention_vector.run
-rm -rf nn/dnc/memory/accelerator_precedence_weighting.run
-rm -rf nn/dnc/memory/accelerator_read_content_weighting.run
-rm -rf nn/dnc/memory/accelerator_read_vectors.run
-rm -rf nn/dnc/memory/accelerator_read_weighting.run
-rm -rf nn/dnc/memory/accelerator_sort_vector.run
-rm -rf nn/dnc/memory/accelerator_temporal_link_matrix.run
-rm -rf nn/dnc/memory/accelerator_usage_vector.run
-rm -rf nn/dnc/memory/accelerator_vector_content_based_addressing.run
-rm -rf nn/dnc/memory/accelerator_write_content_weighting.run
-rm -rf nn/dnc/memory/accelerator_write_weighting.run
-rm -rf nn/dnc/top/accelerator_interface_matrix.run
-rm -rf nn/dnc/top/accelerator_interface_top.run
-rm -rf nn/dnc/top/accelerator_interface_vector.run
-rm -rf nn/dnc/top/accelerator_output_vector.run
-rm -rf nn/dnc/top/accelerator_top.run
-rm -rf nn/dnc/trained/accelerator_trained_top.run
-rm -rf nn/fnn/convolutional/accelerator_controller.run
-rm -rf nn/fnn/standard/accelerator_controller.run
-rm -rf nn/lstm/convolutional/accelerator_activation_gate_vector.run
-rm -rf nn/lstm/convolutional/accelerator_controller.run
-rm -rf nn/lstm/convolutional/accelerator_forget_gate_vector.run
-rm -rf nn/lstm/convolutional/accelerator_hidden_gate_vector.run
-rm -rf nn/lstm/convolutional/accelerator_input_gate_vector.run
-rm -rf nn/lstm/convolutional/accelerator_output_gate_vector.run
-rm -rf nn/lstm/convolutional/accelerator_state_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_activation_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_controller.run
-rm -rf nn/lstm/standard/accelerator_forget_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_hidden_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_input_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_output_gate_vector.run
-rm -rf nn/lstm/standard/accelerator_state_gate_vector.run
-rm -rf nn/ntm/memory/accelerator_addressing.run
-rm -rf nn/ntm/memory/accelerator_matrix_content_based_addressing.run
-rm -rf nn/ntm/memory/accelerator_vector_content_based_addressing.run
-rm -rf nn/ntm/read_heads/accelerator_reading.run
-rm -rf nn/ntm/top/accelerator_interface_matrix.run
-rm -rf nn/ntm/top/accelerator_interface_top.run
-rm -rf nn/ntm/top/accelerator_interface_vector.run
-rm -rf nn/ntm/top/accelerator_output_vector.run
-rm -rf nn/ntm/top/accelerator_top.run
-rm -rf nn/ntm/trained/accelerator_trained_top.run
-rm -rf nn/ntm/write_heads/accelerator_erasing.run
-rm -rf nn/ntm/write_heads/accelerator_writing.run
-rm -rf intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run
-rm -rf intelligence/training/state/feedback/accelerator_state_matrix_input.run
-rm -rf intelligence/training/state/feedback/accelerator_state_matrix_output.run
-rm -rf intelligence/training/state/feedback/accelerator_state_matrix_state.run
-rm -rf intelligence/training/state/outputs/accelerator_state_vector_output.run
-rm -rf intelligence/training/state/outputs/accelerator_state_vector_state.run
-rm -rf intelligence/training/state/top/accelerator_state_top.run
-rm -rf trainer/differentiation/accelerator_matrix_controller_differentiation.run
-rm -rf trainer/differentiation/accelerator_vector_controller_differentiation.run
-rm -rf trainer/fnn/accelerator_fnn_b_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_d_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_k_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_u_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_v_trainer.run
-rm -rf trainer/fnn/accelerator_fnn_w_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_b_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_d_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_k_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_u_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_v_trainer.run
-rm -rf trainer/lstm/activation/accelerator_lstm_activation_w_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_b_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_d_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_k_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_u_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_v_trainer.run
-rm -rf trainer/lstm/forget/accelerator_lstm_forget_w_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_b_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_d_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_k_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_u_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_v_trainer.run
-rm -rf trainer/lstm/input/accelerator_lstm_input_w_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_b_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_d_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_k_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_u_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_v_trainer.run
-rm -rf trainer/lstm/output/accelerator_lstm_output_w_trainer.run
+rm -rf intelligence/modeling/ann/components/accelerator_masked_multi_head_attention.run
+rm -rf intelligence/modeling/ann/components/accelerator_masked_scaled_dot_product_attention.run
+rm -rf intelligence/modeling/ann/components/accelerator_multi_head_attention.run
+rm -rf intelligence/modeling/ann/components/accelerator_scaled_dot_product_attention.run
+rm -rf intelligence/modeling/ann/controller/fnn/accelerator_fnn.run
+rm -rf intelligence/modeling/ann/controller/lstm/accelerator_lstm.run
+rm -rf intelligence/modeling/ann/functions/accelerator_layer_norm.run
+rm -rf intelligence/modeling/ann/functions/accelerator_positional_encoding.run
+rm -rf intelligence/modeling/ann/inputs/accelerator_inputs_vector.run
+rm -rf intelligence/modeling/ann/inputs/accelerator_keys_vector.run
+rm -rf intelligence/modeling/ann/inputs/accelerator_queries_vector.run
+rm -rf intelligence/modeling/ann/inputs/accelerator_values_vector.run
+rm -rf intelligence/modeling/ann/top/accelerator_controller.run
+rm -rf intelligence/modeling/ann/top/accelerator_decoder.run
+rm -rf intelligence/modeling/ann/top/accelerator_encoder.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_addressing.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_allocation_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_backward_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_forward_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_matrix_content_based_addressing.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_memory_matrix.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_memory_retention_vector.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_precedence_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_read_content_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_read_vectors.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_read_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_sort_vector.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_temporal_link_matrix.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_usage_vector.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_vector_content_based_addressing.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_write_content_weighting.run
+rm -rf intelligence/modeling/dnc/memory/accelerator_write_weighting.run
+rm -rf intelligence/modeling/dnc/top/accelerator_interface_matrix.run
+rm -rf intelligence/modeling/dnc/top/accelerator_interface_top.run
+rm -rf intelligence/modeling/dnc/top/accelerator_interface_vector.run
+rm -rf intelligence/modeling/dnc/top/accelerator_output_vector.run
+rm -rf intelligence/modeling/dnc/top/accelerator_top.run
+rm -rf intelligence/modeling/dnc/trained/accelerator_trained_top.run
+rm -rf intelligence/modeling/fnn/convolutional/accelerator_controller.run
+rm -rf intelligence/modeling/fnn/standard/accelerator_controller.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_controller.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector.run
+rm -rf intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_activation_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_controller.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_forget_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_input_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_output_gate_vector.run
+rm -rf intelligence/modeling/lstm/standard/accelerator_state_gate_vector.run
+rm -rf intelligence/modeling/ntm/memory/accelerator_addressing.run
+rm -rf intelligence/modeling/ntm/memory/accelerator_matrix_content_based_addressing.run
+rm -rf intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing.run
+rm -rf intelligence/modeling/ntm/read_heads/accelerator_reading.run
+rm -rf intelligence/modeling/ntm/top/accelerator_interface_matrix.run
+rm -rf intelligence/modeling/ntm/top/accelerator_interface_top.run
+rm -rf intelligence/modeling/ntm/top/accelerator_interface_vector.run
+rm -rf intelligence/modeling/ntm/top/accelerator_output_vector.run
+rm -rf intelligence/modeling/ntm/top/accelerator_top.run
+rm -rf intelligence/modeling/ntm/trained/accelerator_trained_top.run
+rm -rf intelligence/modeling/ntm/write_heads/accelerator_erasing.run
+rm -rf intelligence/modeling/ntm/write_heads/accelerator_writing.run
+rm -rf intelligence/training/feedback/accelerator_state_matrix_feedforward.run
+rm -rf intelligence/training/feedback/accelerator_state_matrix_input.run
+rm -rf intelligence/training/feedback/accelerator_state_matrix_output.run
+rm -rf intelligence/training/feedback/accelerator_state_matrix_state.run
+rm -rf intelligence/training/outputs/accelerator_state_vector_output.run
+rm -rf intelligence/training/outputs/accelerator_state_vector_state.run
+rm -rf intelligence/training/top/accelerator_state_top.run
+rm -rf intelligence/training/differentiation/accelerator_matrix_controller_differentiation.run
+rm -rf intelligence/training/differentiation/accelerator_vector_controller_differentiation.run
+rm -rf intelligence/training/fnn/accelerator_fnn_b_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_d_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_k_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_u_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_v_trainer.run
+rm -rf intelligence/training/fnn/accelerator_fnn_w_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_d_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_k_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_u_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer.run
+rm -rf intelligence/training/lstm/activation/accelerator_lstm_activation_w_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_b_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_d_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_k_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_v_trainer.run
+rm -rf intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_b_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_d_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_k_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_u_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_v_trainer.run
+rm -rf intelligence/training/lstm/input/accelerator_lstm_input_w_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_b_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_d_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_k_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_u_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_v_trainer.run
+rm -rf intelligence/training/lstm/output/accelerator_lstm_output_w_trainer.run
 
 # x86-64 ISA
 g++ algebra/matrix/accelerator_matrix_convolution_testbench.cpp algebra/matrix/accelerator_matrix_convolution_design.cpp -o algebra/matrix/accelerator_matrix_convolution.run -lsystemc
@@ -278,113 +278,113 @@ g++ math/vector/accelerator_vector_deviation_function_testbench.cpp math/vector/
 g++ math/vector/accelerator_vector_logistic_function_testbench.cpp math/vector/accelerator_vector_logistic_function_design.cpp -o math/vector/accelerator_vector_logistic_function.run -lsystemc
 g++ math/vector/accelerator_vector_mean_function_testbench.cpp math/vector/accelerator_vector_mean_function_design.cpp -o math/vector/accelerator_vector_mean_function.run -lsystemc
 g++ math/vector/accelerator_vector_oneplus_function_testbench.cpp math/vector/accelerator_vector_oneplus_function_design.cpp -o math/vector/accelerator_vector_oneplus_function.run -lsystemc
-g++ nn/ann/components/accelerator_masked_multi_head_attention_testbench.cpp nn/ann/components/accelerator_masked_multi_head_attention_design.cpp -o nn/ann/components/accelerator_masked_multi_head_attention.run -lsystemc
-g++ nn/ann/components/accelerator_masked_scaled_dot_product_attention_testbench.cpp nn/ann/components/accelerator_masked_scaled_dot_product_attention_design.cpp -o nn/ann/components/accelerator_masked_scaled_dot_product_attention.run -lsystemc
-g++ nn/ann/components/accelerator_multi_head_attention_testbench.cpp nn/ann/components/accelerator_multi_head_attention_design.cpp -o nn/ann/components/accelerator_multi_head_attention.run -lsystemc
-g++ nn/ann/components/accelerator_scaled_dot_product_attention_testbench.cpp nn/ann/components/accelerator_scaled_dot_product_attention_design.cpp -o nn/ann/components/accelerator_scaled_dot_product_attention.run -lsystemc
-g++ nn/ann/controller/fnn/accelerator_fnn_testbench.cpp nn/ann/controller/fnn/accelerator_fnn_design.cpp -o nn/ann/controller/fnn/accelerator_fnn.run -lsystemc
-g++ nn/ann/controller/lstm/accelerator_lstm_testbench.cpp nn/ann/controller/lstm/accelerator_lstm_design.cpp -o nn/ann/controller/lstm/accelerator_lstm.run -lsystemc
-g++ nn/ann/functions/accelerator_layer_norm_testbench.cpp nn/ann/functions/accelerator_layer_norm_design.cpp -o nn/ann/functions/accelerator_layer_norm.run -lsystemc
-g++ nn/ann/functions/accelerator_positional_encoding_testbench.cpp nn/ann/functions/accelerator_positional_encoding_design.cpp -o nn/ann/functions/accelerator_positional_encoding.run -lsystemc
-g++ nn/ann/inputs/accelerator_inputs_vector_testbench.cpp nn/ann/inputs/accelerator_inputs_vector_design.cpp -o nn/ann/inputs/accelerator_inputs_vector.run -lsystemc
-g++ nn/ann/inputs/accelerator_keys_vector_testbench.cpp nn/ann/inputs/accelerator_keys_vector_design.cpp -o nn/ann/inputs/accelerator_keys_vector.run -lsystemc
-g++ nn/ann/inputs/accelerator_queries_vector_testbench.cpp nn/ann/inputs/accelerator_queries_vector_design.cpp -o nn/ann/inputs/accelerator_queries_vector.run -lsystemc
-g++ nn/ann/inputs/accelerator_values_vector_testbench.cpp nn/ann/inputs/accelerator_values_vector_design.cpp -o nn/ann/inputs/accelerator_values_vector.run -lsystemc
-g++ nn/ann/top/accelerator_controller_testbench.cpp nn/ann/top/accelerator_controller_design.cpp -o nn/ann/top/accelerator_controller.run -lsystemc
-g++ nn/ann/top/accelerator_decoder_testbench.cpp nn/ann/top/accelerator_decoder_design.cpp -o nn/ann/top/accelerator_decoder.run -lsystemc
-g++ nn/ann/top/accelerator_encoder_testbench.cpp nn/ann/top/accelerator_encoder_design.cpp -o nn/ann/top/accelerator_encoder.run -lsystemc
-g++ nn/dnc/memory/accelerator_addressing_testbench.cpp nn/dnc/memory/accelerator_addressing_design.cpp -o nn/dnc/memory/accelerator_addressing.run -lsystemc
-g++ nn/dnc/memory/accelerator_allocation_weighting_testbench.cpp nn/dnc/memory/accelerator_allocation_weighting_design.cpp -o nn/dnc/memory/accelerator_allocation_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_backward_weighting_testbench.cpp nn/dnc/memory/accelerator_backward_weighting_design.cpp -o nn/dnc/memory/accelerator_backward_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_forward_weighting_testbench.cpp nn/dnc/memory/accelerator_forward_weighting_design.cpp -o nn/dnc/memory/accelerator_forward_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_matrix_content_based_addressing_testbench.cpp nn/dnc/memory/accelerator_matrix_content_based_addressing_design.cpp -o nn/dnc/memory/accelerator_matrix_content_based_addressing.run -lsystemc
-g++ nn/dnc/memory/accelerator_memory_matrix_testbench.cpp nn/dnc/memory/accelerator_memory_matrix_design.cpp -o nn/dnc/memory/accelerator_memory_matrix.run -lsystemc
-g++ nn/dnc/memory/accelerator_memory_retention_vector_testbench.cpp nn/dnc/memory/accelerator_memory_retention_vector_design.cpp -o nn/dnc/memory/accelerator_memory_retention_vector.run -lsystemc
-g++ nn/dnc/memory/accelerator_precedence_weighting_testbench.cpp nn/dnc/memory/accelerator_precedence_weighting_design.cpp -o nn/dnc/memory/accelerator_precedence_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_read_content_weighting_testbench.cpp nn/dnc/memory/accelerator_read_content_weighting_design.cpp -o nn/dnc/memory/accelerator_read_content_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_read_vectors_testbench.cpp nn/dnc/memory/accelerator_read_vectors_design.cpp -o nn/dnc/memory/accelerator_read_vectors.run -lsystemc
-g++ nn/dnc/memory/accelerator_read_weighting_testbench.cpp nn/dnc/memory/accelerator_read_weighting_design.cpp -o nn/dnc/memory/accelerator_read_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_sort_vector_testbench.cpp nn/dnc/memory/accelerator_sort_vector_design.cpp -o nn/dnc/memory/accelerator_sort_vector.run -lsystemc
-g++ nn/dnc/memory/accelerator_temporal_link_matrix_testbench.cpp nn/dnc/memory/accelerator_temporal_link_matrix_design.cpp -o nn/dnc/memory/accelerator_temporal_link_matrix.run -lsystemc
-g++ nn/dnc/memory/accelerator_usage_vector_testbench.cpp nn/dnc/memory/accelerator_usage_vector_design.cpp -o nn/dnc/memory/accelerator_usage_vector.run -lsystemc
-g++ nn/dnc/memory/accelerator_vector_content_based_addressing_testbench.cpp nn/dnc/memory/accelerator_vector_content_based_addressing_design.cpp -o nn/dnc/memory/accelerator_vector_content_based_addressing.run -lsystemc
-g++ nn/dnc/memory/accelerator_write_content_weighting_testbench.cpp nn/dnc/memory/accelerator_write_content_weighting_design.cpp -o nn/dnc/memory/accelerator_write_content_weighting.run -lsystemc
-g++ nn/dnc/memory/accelerator_write_weighting_testbench.cpp nn/dnc/memory/accelerator_write_weighting_design.cpp -o nn/dnc/memory/accelerator_write_weighting.run -lsystemc
-g++ nn/dnc/top/accelerator_interface_matrix_testbench.cpp nn/dnc/top/accelerator_interface_matrix_design.cpp -o nn/dnc/top/accelerator_interface_matrix.run -lsystemc
-g++ nn/dnc/top/accelerator_interface_top_testbench.cpp nn/dnc/top/accelerator_interface_top_design.cpp -o nn/dnc/top/accelerator_interface_top.run -lsystemc
-g++ nn/dnc/top/accelerator_interface_vector_testbench.cpp nn/dnc/top/accelerator_interface_vector_design.cpp -o nn/dnc/top/accelerator_interface_vector.run -lsystemc
-g++ nn/dnc/top/accelerator_output_vector_testbench.cpp nn/dnc/top/accelerator_output_vector_design.cpp -o nn/dnc/top/accelerator_output_vector.run -lsystemc
-g++ nn/dnc/top/accelerator_top_testbench.cpp nn/dnc/top/accelerator_top_design.cpp -o nn/dnc/top/accelerator_top.run -lsystemc
-g++ nn/dnc/trained/accelerator_trained_top_testbench.cpp nn/dnc/trained/accelerator_trained_top_design.cpp -o nn/dnc/trained/accelerator_trained_top.run -lsystemc
-g++ nn/fnn/convolutional/accelerator_controller_testbench.cpp nn/fnn/convolutional/accelerator_controller_design.cpp -o nn/fnn/convolutional/accelerator_controller.run -lsystemc
-g++ nn/fnn/standard/accelerator_controller_testbench.cpp nn/fnn/standard/accelerator_controller_design.cpp -o nn/fnn/standard/accelerator_controller.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_activation_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_activation_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_activation_gate_vector.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_controller_testbench.cpp nn/lstm/convolutional/accelerator_controller_design.cpp -o nn/lstm/convolutional/accelerator_controller.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_forget_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_forget_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_forget_gate_vector.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_hidden_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_hidden_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_hidden_gate_vector.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_input_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_input_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_input_gate_vector.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_output_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_output_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_output_gate_vector.run -lsystemc
-g++ nn/lstm/convolutional/accelerator_state_gate_vector_testbench.cpp nn/lstm/convolutional/accelerator_state_gate_vector_design.cpp -o nn/lstm/convolutional/accelerator_state_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_activation_gate_vector_testbench.cpp nn/lstm/standard/accelerator_activation_gate_vector_design.cpp -o nn/lstm/standard/accelerator_activation_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_controller_testbench.cpp nn/lstm/standard/accelerator_controller_design.cpp -o nn/lstm/standard/accelerator_controller.run -lsystemc
-g++ nn/lstm/standard/accelerator_forget_gate_vector_testbench.cpp nn/lstm/standard/accelerator_forget_gate_vector_design.cpp -o nn/lstm/standard/accelerator_forget_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_hidden_gate_vector_testbench.cpp nn/lstm/standard/accelerator_hidden_gate_vector_design.cpp -o nn/lstm/standard/accelerator_hidden_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_input_gate_vector_testbench.cpp nn/lstm/standard/accelerator_input_gate_vector_design.cpp -o nn/lstm/standard/accelerator_input_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_output_gate_vector_testbench.cpp nn/lstm/standard/accelerator_output_gate_vector_design.cpp -o nn/lstm/standard/accelerator_output_gate_vector.run -lsystemc
-g++ nn/lstm/standard/accelerator_state_gate_vector_testbench.cpp nn/lstm/standard/accelerator_state_gate_vector_design.cpp -o nn/lstm/standard/accelerator_state_gate_vector.run -lsystemc
-g++ nn/ntm/memory/accelerator_addressing_testbench.cpp nn/ntm/memory/accelerator_addressing_design.cpp -o nn/ntm/memory/accelerator_addressing.run -lsystemc
-g++ nn/ntm/memory/accelerator_matrix_content_based_addressing_testbench.cpp nn/ntm/memory/accelerator_matrix_content_based_addressing_design.cpp -o nn/ntm/memory/accelerator_matrix_content_based_addressing.run -lsystemc
-g++ nn/ntm/memory/accelerator_vector_content_based_addressing_testbench.cpp nn/ntm/memory/accelerator_vector_content_based_addressing_design.cpp -o nn/ntm/memory/accelerator_vector_content_based_addressing.run -lsystemc
-g++ nn/ntm/read_heads/accelerator_reading_testbench.cpp nn/ntm/read_heads/accelerator_reading_design.cpp -o nn/ntm/read_heads/accelerator_reading.run -lsystemc
-g++ nn/ntm/top/accelerator_interface_matrix_testbench.cpp nn/ntm/top/accelerator_interface_matrix_design.cpp -o nn/ntm/top/accelerator_interface_matrix.run -lsystemc
-g++ nn/ntm/top/accelerator_interface_top_testbench.cpp nn/ntm/top/accelerator_interface_top_design.cpp -o nn/ntm/top/accelerator_interface_top.run -lsystemc
-g++ nn/ntm/top/accelerator_interface_vector_testbench.cpp nn/ntm/top/accelerator_interface_vector_design.cpp -o nn/ntm/top/accelerator_interface_vector.run -lsystemc
-g++ nn/ntm/top/accelerator_output_vector_testbench.cpp nn/ntm/top/accelerator_output_vector_design.cpp -o nn/ntm/top/accelerator_output_vector.run -lsystemc
-g++ nn/ntm/top/accelerator_top_testbench.cpp nn/ntm/top/accelerator_top_design.cpp -o nn/ntm/top/accelerator_top.run -lsystemc
-g++ nn/ntm/trained/accelerator_trained_top_testbench.cpp nn/ntm/trained/accelerator_trained_top_design.cpp -o nn/ntm/trained/accelerator_trained_top.run -lsystemc
-g++ nn/ntm/write_heads/accelerator_erasing_testbench.cpp nn/ntm/write_heads/accelerator_erasing_design.cpp -o nn/ntm/write_heads/accelerator_erasing.run -lsystemc
-g++ nn/ntm/write_heads/accelerator_writing_testbench.cpp nn/ntm/write_heads/accelerator_writing_design.cpp -o nn/ntm/write_heads/accelerator_writing.run -lsystemc
-g++ intelligence/training/state/feedback/accelerator_state_matrix_feedforward_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_feedforward_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_feedforward.run -lsystemc
-g++ intelligence/training/state/feedback/accelerator_state_matrix_input_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_input_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_input.run -lsystemc
-g++ intelligence/training/state/feedback/accelerator_state_matrix_output_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_output_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_output.run -lsystemc
-g++ intelligence/training/state/feedback/accelerator_state_matrix_state_testbench.cpp intelligence/training/state/feedback/accelerator_state_matrix_state_design.cpp -o intelligence/training/state/feedback/accelerator_state_matrix_state.run -lsystemc
-g++ intelligence/training/state/outputs/accelerator_state_vector_output_testbench.cpp intelligence/training/state/outputs/accelerator_state_vector_output_design.cpp -o intelligence/training/state/outputs/accelerator_state_vector_output.run -lsystemc
-g++ intelligence/training/state/outputs/accelerator_state_vector_state_testbench.cpp intelligence/training/state/outputs/accelerator_state_vector_state_design.cpp -o intelligence/training/state/outputs/accelerator_state_vector_state.run -lsystemc
-g++ intelligence/training/state/top/accelerator_state_top_testbench.cpp intelligence/training/state/top/accelerator_state_top_design.cpp -o intelligence/training/state/top/accelerator_state_top.run -lsystemc
-g++ trainer/differentiation/accelerator_matrix_controller_differentiation_testbench.cpp trainer/differentiation/accelerator_matrix_controller_differentiation_design.cpp -o trainer/differentiation/accelerator_matrix_controller_differentiation.run -lsystemc
-g++ trainer/differentiation/accelerator_vector_controller_differentiation_testbench.cpp trainer/differentiation/accelerator_vector_controller_differentiation_design.cpp -o trainer/differentiation/accelerator_vector_controller_differentiation.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_b_trainer_testbench.cpp trainer/fnn/accelerator_fnn_b_trainer_design.cpp -o trainer/fnn/accelerator_fnn_b_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_d_trainer_testbench.cpp trainer/fnn/accelerator_fnn_d_trainer_design.cpp -o trainer/fnn/accelerator_fnn_d_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_k_trainer_testbench.cpp trainer/fnn/accelerator_fnn_k_trainer_design.cpp -o trainer/fnn/accelerator_fnn_k_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_trainer_testbench.cpp trainer/fnn/accelerator_fnn_trainer_design.cpp -o trainer/fnn/accelerator_fnn_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_u_trainer_testbench.cpp trainer/fnn/accelerator_fnn_u_trainer_design.cpp -o trainer/fnn/accelerator_fnn_u_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_v_trainer_testbench.cpp trainer/fnn/accelerator_fnn_v_trainer_design.cpp -o trainer/fnn/accelerator_fnn_v_trainer.run -lsystemc
-g++ trainer/fnn/accelerator_fnn_w_trainer_testbench.cpp trainer/fnn/accelerator_fnn_w_trainer_design.cpp -o trainer/fnn/accelerator_fnn_w_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_b_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_b_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_b_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_d_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_d_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_d_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_k_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_k_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_k_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_u_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_u_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_u_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_v_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_v_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_v_trainer.run -lsystemc
-g++ trainer/lstm/activation/accelerator_lstm_activation_w_trainer_testbench.cpp trainer/lstm/activation/accelerator_lstm_activation_w_trainer_design.cpp -o trainer/lstm/activation/accelerator_lstm_activation_w_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_b_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_b_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_b_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_d_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_d_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_d_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_k_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_k_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_k_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_u_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_u_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_u_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_v_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_v_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_v_trainer.run -lsystemc
-g++ trainer/lstm/forget/accelerator_lstm_forget_w_trainer_testbench.cpp trainer/lstm/forget/accelerator_lstm_forget_w_trainer_design.cpp -o trainer/lstm/forget/accelerator_lstm_forget_w_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_b_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_b_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_b_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_d_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_d_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_d_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_k_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_k_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_k_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_u_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_u_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_u_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_v_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_v_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_v_trainer.run -lsystemc
-g++ trainer/lstm/input/accelerator_lstm_input_w_trainer_testbench.cpp trainer/lstm/input/accelerator_lstm_input_w_trainer_design.cpp -o trainer/lstm/input/accelerator_lstm_input_w_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_b_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_b_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_b_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_d_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_d_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_d_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_k_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_k_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_k_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_u_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_u_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_u_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_v_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_v_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_v_trainer.run -lsystemc
-g++ trainer/lstm/output/accelerator_lstm_output_w_trainer_testbench.cpp trainer/lstm/output/accelerator_lstm_output_w_trainer_design.cpp -o trainer/lstm/output/accelerator_lstm_output_w_trainer.run -lsystemc
+g++ intelligence/modeling/ann/components/accelerator_masked_multi_head_attention_testbench.cpp intelligence/modeling/ann/components/accelerator_masked_multi_head_attention_design.cpp -o intelligence/modeling/ann/components/accelerator_masked_multi_head_attention.run -lsystemc
+g++ intelligence/modeling/ann/components/accelerator_masked_scaled_dot_product_attention_testbench.cpp intelligence/modeling/ann/components/accelerator_masked_scaled_dot_product_attention_design.cpp -o intelligence/modeling/ann/components/accelerator_masked_scaled_dot_product_attention.run -lsystemc
+g++ intelligence/modeling/ann/components/accelerator_multi_head_attention_testbench.cpp intelligence/modeling/ann/components/accelerator_multi_head_attention_design.cpp -o intelligence/modeling/ann/components/accelerator_multi_head_attention.run -lsystemc
+g++ intelligence/modeling/ann/components/accelerator_scaled_dot_product_attention_testbench.cpp intelligence/modeling/ann/components/accelerator_scaled_dot_product_attention_design.cpp -o intelligence/modeling/ann/components/accelerator_scaled_dot_product_attention.run -lsystemc
+g++ intelligence/modeling/ann/controller/fnn/accelerator_fnn_testbench.cpp intelligence/modeling/ann/controller/fnn/accelerator_fnn_design.cpp -o intelligence/modeling/ann/controller/fnn/accelerator_fnn.run -lsystemc
+g++ intelligence/modeling/ann/controller/lstm/accelerator_lstm_testbench.cpp intelligence/modeling/ann/controller/lstm/accelerator_lstm_design.cpp -o intelligence/modeling/ann/controller/lstm/accelerator_lstm.run -lsystemc
+g++ intelligence/modeling/ann/functions/accelerator_layer_norm_testbench.cpp intelligence/modeling/ann/functions/accelerator_layer_norm_design.cpp -o intelligence/modeling/ann/functions/accelerator_layer_norm.run -lsystemc
+g++ intelligence/modeling/ann/functions/accelerator_positional_encoding_testbench.cpp intelligence/modeling/ann/functions/accelerator_positional_encoding_design.cpp -o intelligence/modeling/ann/functions/accelerator_positional_encoding.run -lsystemc
+g++ intelligence/modeling/ann/inputs/accelerator_inputs_vector_testbench.cpp intelligence/modeling/ann/inputs/accelerator_inputs_vector_design.cpp -o intelligence/modeling/ann/inputs/accelerator_inputs_vector.run -lsystemc
+g++ intelligence/modeling/ann/inputs/accelerator_keys_vector_testbench.cpp intelligence/modeling/ann/inputs/accelerator_keys_vector_design.cpp -o intelligence/modeling/ann/inputs/accelerator_keys_vector.run -lsystemc
+g++ intelligence/modeling/ann/inputs/accelerator_queries_vector_testbench.cpp intelligence/modeling/ann/inputs/accelerator_queries_vector_design.cpp -o intelligence/modeling/ann/inputs/accelerator_queries_vector.run -lsystemc
+g++ intelligence/modeling/ann/inputs/accelerator_values_vector_testbench.cpp intelligence/modeling/ann/inputs/accelerator_values_vector_design.cpp -o intelligence/modeling/ann/inputs/accelerator_values_vector.run -lsystemc
+g++ intelligence/modeling/ann/top/accelerator_controller_testbench.cpp intelligence/modeling/ann/top/accelerator_controller_design.cpp -o intelligence/modeling/ann/top/accelerator_controller.run -lsystemc
+g++ intelligence/modeling/ann/top/accelerator_decoder_testbench.cpp intelligence/modeling/ann/top/accelerator_decoder_design.cpp -o intelligence/modeling/ann/top/accelerator_decoder.run -lsystemc
+g++ intelligence/modeling/ann/top/accelerator_encoder_testbench.cpp intelligence/modeling/ann/top/accelerator_encoder_design.cpp -o intelligence/modeling/ann/top/accelerator_encoder.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_addressing_testbench.cpp intelligence/modeling/dnc/memory/accelerator_addressing_design.cpp -o intelligence/modeling/dnc/memory/accelerator_addressing.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_allocation_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_allocation_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_allocation_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_backward_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_backward_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_backward_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_forward_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_forward_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_forward_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_matrix_content_based_addressing_testbench.cpp intelligence/modeling/dnc/memory/accelerator_matrix_content_based_addressing_design.cpp -o intelligence/modeling/dnc/memory/accelerator_matrix_content_based_addressing.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_memory_matrix_testbench.cpp intelligence/modeling/dnc/memory/accelerator_memory_matrix_design.cpp -o intelligence/modeling/dnc/memory/accelerator_memory_matrix.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_memory_retention_vector_testbench.cpp intelligence/modeling/dnc/memory/accelerator_memory_retention_vector_design.cpp -o intelligence/modeling/dnc/memory/accelerator_memory_retention_vector.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_precedence_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_precedence_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_precedence_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_read_content_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_read_content_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_read_content_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_read_vectors_testbench.cpp intelligence/modeling/dnc/memory/accelerator_read_vectors_design.cpp -o intelligence/modeling/dnc/memory/accelerator_read_vectors.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_read_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_read_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_read_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_sort_vector_testbench.cpp intelligence/modeling/dnc/memory/accelerator_sort_vector_design.cpp -o intelligence/modeling/dnc/memory/accelerator_sort_vector.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_temporal_link_matrix_testbench.cpp intelligence/modeling/dnc/memory/accelerator_temporal_link_matrix_design.cpp -o intelligence/modeling/dnc/memory/accelerator_temporal_link_matrix.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_usage_vector_testbench.cpp intelligence/modeling/dnc/memory/accelerator_usage_vector_design.cpp -o intelligence/modeling/dnc/memory/accelerator_usage_vector.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_vector_content_based_addressing_testbench.cpp intelligence/modeling/dnc/memory/accelerator_vector_content_based_addressing_design.cpp -o intelligence/modeling/dnc/memory/accelerator_vector_content_based_addressing.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_write_content_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_write_content_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_write_content_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/memory/accelerator_write_weighting_testbench.cpp intelligence/modeling/dnc/memory/accelerator_write_weighting_design.cpp -o intelligence/modeling/dnc/memory/accelerator_write_weighting.run -lsystemc
+g++ intelligence/modeling/dnc/top/accelerator_interface_matrix_testbench.cpp intelligence/modeling/dnc/top/accelerator_interface_matrix_design.cpp -o intelligence/modeling/dnc/top/accelerator_interface_matrix.run -lsystemc
+g++ intelligence/modeling/dnc/top/accelerator_interface_top_testbench.cpp intelligence/modeling/dnc/top/accelerator_interface_top_design.cpp -o intelligence/modeling/dnc/top/accelerator_interface_top.run -lsystemc
+g++ intelligence/modeling/dnc/top/accelerator_interface_vector_testbench.cpp intelligence/modeling/dnc/top/accelerator_interface_vector_design.cpp -o intelligence/modeling/dnc/top/accelerator_interface_vector.run -lsystemc
+g++ intelligence/modeling/dnc/top/accelerator_output_vector_testbench.cpp intelligence/modeling/dnc/top/accelerator_output_vector_design.cpp -o intelligence/modeling/dnc/top/accelerator_output_vector.run -lsystemc
+g++ intelligence/modeling/dnc/top/accelerator_top_testbench.cpp intelligence/modeling/dnc/top/accelerator_top_design.cpp -o intelligence/modeling/dnc/top/accelerator_top.run -lsystemc
+g++ intelligence/modeling/dnc/trained/accelerator_trained_top_testbench.cpp intelligence/modeling/dnc/trained/accelerator_trained_top_design.cpp -o intelligence/modeling/dnc/trained/accelerator_trained_top.run -lsystemc
+g++ intelligence/modeling/fnn/convolutional/accelerator_controller_testbench.cpp intelligence/modeling/fnn/convolutional/accelerator_controller_design.cpp -o intelligence/modeling/fnn/convolutional/accelerator_controller.run -lsystemc
+g++ intelligence/modeling/fnn/standard/accelerator_controller_testbench.cpp intelligence/modeling/fnn/standard/accelerator_controller_design.cpp -o intelligence/modeling/fnn/standard/accelerator_controller.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_activation_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_controller_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_controller_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_controller.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_forget_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_hidden_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_input_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_output_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector_testbench.cpp intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector_design.cpp -o intelligence/modeling/lstm/convolutional/accelerator_state_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_activation_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_activation_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_activation_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_controller_testbench.cpp intelligence/modeling/lstm/standard/accelerator_controller_design.cpp -o intelligence/modeling/lstm/standard/accelerator_controller.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_forget_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_forget_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_forget_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_hidden_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_input_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_input_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_input_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_output_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_output_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_output_gate_vector.run -lsystemc
+g++ intelligence/modeling/lstm/standard/accelerator_state_gate_vector_testbench.cpp intelligence/modeling/lstm/standard/accelerator_state_gate_vector_design.cpp -o intelligence/modeling/lstm/standard/accelerator_state_gate_vector.run -lsystemc
+g++ intelligence/modeling/ntm/memory/accelerator_addressing_testbench.cpp intelligence/modeling/ntm/memory/accelerator_addressing_design.cpp -o intelligence/modeling/ntm/memory/accelerator_addressing.run -lsystemc
+g++ intelligence/modeling/ntm/memory/accelerator_matrix_content_based_addressing_testbench.cpp intelligence/modeling/ntm/memory/accelerator_matrix_content_based_addressing_design.cpp -o intelligence/modeling/ntm/memory/accelerator_matrix_content_based_addressing.run -lsystemc
+g++ intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing_testbench.cpp intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing_design.cpp -o intelligence/modeling/ntm/memory/accelerator_vector_content_based_addressing.run -lsystemc
+g++ intelligence/modeling/ntm/read_heads/accelerator_reading_testbench.cpp intelligence/modeling/ntm/read_heads/accelerator_reading_design.cpp -o intelligence/modeling/ntm/read_heads/accelerator_reading.run -lsystemc
+g++ intelligence/modeling/ntm/top/accelerator_interface_matrix_testbench.cpp intelligence/modeling/ntm/top/accelerator_interface_matrix_design.cpp -o intelligence/modeling/ntm/top/accelerator_interface_matrix.run -lsystemc
+g++ intelligence/modeling/ntm/top/accelerator_interface_top_testbench.cpp intelligence/modeling/ntm/top/accelerator_interface_top_design.cpp -o intelligence/modeling/ntm/top/accelerator_interface_top.run -lsystemc
+g++ intelligence/modeling/ntm/top/accelerator_interface_vector_testbench.cpp intelligence/modeling/ntm/top/accelerator_interface_vector_design.cpp -o intelligence/modeling/ntm/top/accelerator_interface_vector.run -lsystemc
+g++ intelligence/modeling/ntm/top/accelerator_output_vector_testbench.cpp intelligence/modeling/ntm/top/accelerator_output_vector_design.cpp -o intelligence/modeling/ntm/top/accelerator_output_vector.run -lsystemc
+g++ intelligence/modeling/ntm/top/accelerator_top_testbench.cpp intelligence/modeling/ntm/top/accelerator_top_design.cpp -o intelligence/modeling/ntm/top/accelerator_top.run -lsystemc
+g++ intelligence/modeling/ntm/trained/accelerator_trained_top_testbench.cpp intelligence/modeling/ntm/trained/accelerator_trained_top_design.cpp -o intelligence/modeling/ntm/trained/accelerator_trained_top.run -lsystemc
+g++ intelligence/modeling/ntm/write_heads/accelerator_erasing_testbench.cpp intelligence/modeling/ntm/write_heads/accelerator_erasing_design.cpp -o intelligence/modeling/ntm/write_heads/accelerator_erasing.run -lsystemc
+g++ intelligence/modeling/ntm/write_heads/accelerator_writing_testbench.cpp intelligence/modeling/ntm/write_heads/accelerator_writing_design.cpp -o intelligence/modeling/ntm/write_heads/accelerator_writing.run -lsystemc
+g++ intelligence/training/feedback/accelerator_state_matrix_feedforward_testbench.cpp intelligence/training/feedback/accelerator_state_matrix_feedforward_design.cpp -o intelligence/training/feedback/accelerator_state_matrix_feedforward.run -lsystemc
+g++ intelligence/training/feedback/accelerator_state_matrix_input_testbench.cpp intelligence/training/feedback/accelerator_state_matrix_input_design.cpp -o intelligence/training/feedback/accelerator_state_matrix_input.run -lsystemc
+g++ intelligence/training/feedback/accelerator_state_matrix_output_testbench.cpp intelligence/training/feedback/accelerator_state_matrix_output_design.cpp -o intelligence/training/feedback/accelerator_state_matrix_output.run -lsystemc
+g++ intelligence/training/feedback/accelerator_state_matrix_state_testbench.cpp intelligence/training/feedback/accelerator_state_matrix_state_design.cpp -o intelligence/training/feedback/accelerator_state_matrix_state.run -lsystemc
+g++ intelligence/training/outputs/accelerator_state_vector_output_testbench.cpp intelligence/training/outputs/accelerator_state_vector_output_design.cpp -o intelligence/training/outputs/accelerator_state_vector_output.run -lsystemc
+g++ intelligence/training/outputs/accelerator_state_vector_state_testbench.cpp intelligence/training/outputs/accelerator_state_vector_state_design.cpp -o intelligence/training/outputs/accelerator_state_vector_state.run -lsystemc
+g++ intelligence/training/top/accelerator_state_top_testbench.cpp intelligence/training/top/accelerator_state_top_design.cpp -o intelligence/training/top/accelerator_state_top.run -lsystemc
+g++ intelligence/training/differentiation/accelerator_matrix_controller_differentiation_testbench.cpp intelligence/training/differentiation/accelerator_matrix_controller_differentiation_design.cpp -o intelligence/training/differentiation/accelerator_matrix_controller_differentiation.run -lsystemc
+g++ intelligence/training/differentiation/accelerator_vector_controller_differentiation_testbench.cpp intelligence/training/differentiation/accelerator_vector_controller_differentiation_design.cpp -o intelligence/training/differentiation/accelerator_vector_controller_differentiation.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_b_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_b_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_b_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_d_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_d_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_d_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_k_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_k_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_k_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_u_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_u_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_u_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_v_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_v_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_v_trainer.run -lsystemc
+g++ intelligence/training/fnn/accelerator_fnn_w_trainer_testbench.cpp intelligence/training/fnn/accelerator_fnn_w_trainer_design.cpp -o intelligence/training/fnn/accelerator_fnn_w_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_b_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_d_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_d_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_d_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_k_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_k_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_k_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_u_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_u_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_u_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_v_trainer.run -lsystemc
+g++ intelligence/training/lstm/activation/accelerator_lstm_activation_w_trainer_testbench.cpp intelligence/training/lstm/activation/accelerator_lstm_activation_w_trainer_design.cpp -o intelligence/training/lstm/activation/accelerator_lstm_activation_w_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_b_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_b_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_b_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_d_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_d_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_d_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_k_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_k_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_k_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_u_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_v_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_v_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_v_trainer.run -lsystemc
+g++ intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer_testbench.cpp intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer_design.cpp -o intelligence/training/lstm/forget/accelerator_lstm_forget_w_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_b_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_b_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_b_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_d_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_d_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_d_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_k_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_k_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_k_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_u_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_u_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_u_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_v_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_v_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_v_trainer.run -lsystemc
+g++ intelligence/training/lstm/input/accelerator_lstm_input_w_trainer_testbench.cpp intelligence/training/lstm/input/accelerator_lstm_input_w_trainer_design.cpp -o intelligence/training/lstm/input/accelerator_lstm_input_w_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_b_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_b_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_b_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_d_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_d_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_d_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_k_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_k_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_k_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_u_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_u_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_u_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_v_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_v_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_v_trainer.run -lsystemc
+g++ intelligence/training/lstm/output/accelerator_lstm_output_w_trainer_testbench.cpp intelligence/training/lstm/output/accelerator_lstm_output_w_trainer_design.cpp -o intelligence/training/lstm/output/accelerator_lstm_output_w_trainer.run -lsystemc

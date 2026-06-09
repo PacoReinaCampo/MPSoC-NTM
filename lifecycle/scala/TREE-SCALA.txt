@@ -27,6 +27,58 @@ library
 │       └── accelerator_vector_arithmetic.scala
 ├── intelligence
 │   ├── modeling
+│   │   ├── ann
+│   │   │   ├── components
+│   │   │   │   ├── accelerator_masked_multi_head_attention.scala
+│   │   │   │   ├── accelerator_masked_scaled_dot_product_attention.scala
+│   │   │   │   ├── accelerator_multi_head_attention.scala
+│   │   │   │   └── accelerator_scaled_dot_product_attention.scala
+│   │   │   ├── controller
+│   │   │   │   ├── fnn
+│   │   │   │   │   └── accelerator_fnn.scala
+│   │   │   │   └── lstm
+│   │   │   │       └── accelerator_lstm.scala
+│   │   │   ├── functions
+│   │   │   │   ├── accelerator_layer_norm.scala
+│   │   │   │   └── accelerator_positional_encoding.scala
+│   │   │   ├── inputs
+│   │   │   │   ├── accelerator_inputs_vector.scala
+│   │   │   │   ├── accelerator_keys_vector.scala
+│   │   │   │   ├── accelerator_queries_vector.scala
+│   │   │   │   └── accelerator_values_vector.scala
+│   │   │   └── top
+│   │   │       ├── accelerator_controller.scala
+│   │   │       ├── accelerator_decoder.scala
+│   │   │       └── accelerator_encoder.scala
+│   │   ├── dnc
+│   │   │   ├── memory
+│   │   │   │   ├── accelerator_addressing.scala
+│   │   │   │   ├── accelerator_allocation_weighting.scala
+│   │   │   │   ├── accelerator_backward_weighting.scala
+│   │   │   │   ├── accelerator_forward_weighting.scala
+│   │   │   │   ├── accelerator_matrix_content_based_addressing.scala
+│   │   │   │   ├── accelerator_memory_matrix.scala
+│   │   │   │   ├── accelerator_memory_retention_vector.scala
+│   │   │   │   ├── accelerator_precedence_weighting.scala
+│   │   │   │   ├── accelerator_sort_vector.scala
+│   │   │   │   ├── accelerator_temporal_link_matrix.scala
+│   │   │   │   ├── accelerator_usage_vector.scala
+│   │   │   │   └── accelerator_vector_content_based_addressing.scala
+│   │   │   ├── read_heads
+│   │   │   │   ├── accelerator_read_content_weighting.scala
+│   │   │   │   ├── accelerator_read_vectors.scala
+│   │   │   │   └── accelerator_read_weighting.scala
+│   │   │   ├── top
+│   │   │   │   ├── accelerator_interface_matrix.scala
+│   │   │   │   ├── accelerator_interface_top.scala
+│   │   │   │   ├── accelerator_interface_vector.scala
+│   │   │   │   ├── accelerator_output_vector.scala
+│   │   │   │   └── accelerator_top.scala
+│   │   │   ├── trained
+│   │   │   │   └── accelerator_trained_top.scala
+│   │   │   └── write_heads
+│   │   │       ├── accelerator_write_content_weighting.scala
+│   │   │       └── accelerator_write_weighting.scala
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.scala
@@ -79,39 +131,46 @@ library
 │       │   ├── accelerator_fnn_u_trainer.scala
 │       │   ├── accelerator_fnn_v_trainer.scala
 │       │   └── accelerator_fnn_w_trainer.scala
-│       └── lstm
-│           ├── activation
-│           │   ├── accelerator_lstm_activation_b_trainer.scala
-│           │   ├── accelerator_lstm_activation_d_trainer.scala
-│           │   ├── accelerator_lstm_activation_k_trainer.scala
-│           │   ├── accelerator_lstm_activation_trainer.scala
-│           │   ├── accelerator_lstm_activation_u_trainer.scala
-│           │   ├── accelerator_lstm_activation_v_trainer.scala
-│           │   └── accelerator_lstm_activation_w_trainer.scala
-│           ├── forget
-│           │   ├── accelerator_lstm_forget_b_trainer.scala
-│           │   ├── accelerator_lstm_forget_d_trainer.scala
-│           │   ├── accelerator_lstm_forget_k_trainer.scala
-│           │   ├── accelerator_lstm_forget_trainer.scala
-│           │   ├── accelerator_lstm_forget_u_trainer.scala
-│           │   ├── accelerator_lstm_forget_v_trainer.scala
-│           │   └── accelerator_lstm_forget_w_trainer.scala
-│           ├── input
-│           │   ├── accelerator_lstm_input_b_trainer.scala
-│           │   ├── accelerator_lstm_input_d_trainer.scala
-│           │   ├── accelerator_lstm_input_k_trainer.scala
-│           │   ├── accelerator_lstm_input_trainer.scala
-│           │   ├── accelerator_lstm_input_u_trainer.scala
-│           │   ├── accelerator_lstm_input_v_trainer.scala
-│           │   └── accelerator_lstm_input_w_trainer.scala
-│           └── output
-│               ├── accelerator_lstm_output_b_trainer.scala
-│               ├── accelerator_lstm_output_d_trainer.scala
-│               ├── accelerator_lstm_output_k_trainer.scala
-│               ├── accelerator_lstm_output_trainer.scala
-│               ├── accelerator_lstm_output_u_trainer.scala
-│               ├── accelerator_lstm_output_v_trainer.scala
-│               └── accelerator_lstm_output_w_trainer.scala
+│       ├── lstm
+│       │   ├── activation
+│       │   │   ├── accelerator_lstm_activation_b_trainer.scala
+│       │   │   ├── accelerator_lstm_activation_d_trainer.scala
+│       │   │   ├── accelerator_lstm_activation_k_trainer.scala
+│       │   │   ├── accelerator_lstm_activation_trainer.scala
+│       │   │   ├── accelerator_lstm_activation_u_trainer.scala
+│       │   │   ├── accelerator_lstm_activation_v_trainer.scala
+│       │   │   └── accelerator_lstm_activation_w_trainer.scala
+│       │   ├── forget
+│       │   │   ├── accelerator_lstm_forget_b_trainer.scala
+│       │   │   ├── accelerator_lstm_forget_d_trainer.scala
+│       │   │   ├── accelerator_lstm_forget_k_trainer.scala
+│       │   │   ├── accelerator_lstm_forget_trainer.scala
+│       │   │   ├── accelerator_lstm_forget_u_trainer.scala
+│       │   │   ├── accelerator_lstm_forget_v_trainer.scala
+│       │   │   └── accelerator_lstm_forget_w_trainer.scala
+│       │   ├── input
+│       │   │   ├── accelerator_lstm_input_b_trainer.scala
+│       │   │   ├── accelerator_lstm_input_d_trainer.scala
+│       │   │   ├── accelerator_lstm_input_k_trainer.scala
+│       │   │   ├── accelerator_lstm_input_trainer.scala
+│       │   │   ├── accelerator_lstm_input_u_trainer.scala
+│       │   │   ├── accelerator_lstm_input_v_trainer.scala
+│       │   │   └── accelerator_lstm_input_w_trainer.scala
+│       │   └── output
+│       │       ├── accelerator_lstm_output_b_trainer.scala
+│       │       ├── accelerator_lstm_output_d_trainer.scala
+│       │       ├── accelerator_lstm_output_k_trainer.scala
+│       │       ├── accelerator_lstm_output_trainer.scala
+│       │       ├── accelerator_lstm_output_u_trainer.scala
+│       │       ├── accelerator_lstm_output_v_trainer.scala
+│       │       └── accelerator_lstm_output_w_trainer.scala
+│       └── state
+│           ├── feedback
+│           │   └── accelerator_state_feedback.scala
+│           ├── outputs
+│           │   └── accelerator_state_outputs.scala
+│           └── top
+│               └── accelerator_state_top.scala
 └── math
     ├── test_matrix_math.scala
     ├── test_scalar_math.scala
@@ -123,4 +182,4 @@ library
     └── vector
         └── accelerator_vector_math.scala
 
-36 directories, 87 files
+54 directories, 128 files

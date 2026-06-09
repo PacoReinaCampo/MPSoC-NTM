@@ -577,6 +577,590 @@ library
 │       └── accelerator_vector_arithmetic_structural_profile.dot
 ├── intelligence
 │   ├── modeling
+│   │   ├── ann
+│   │   │   ├── components
+│   │   │   │   ├── accelerator_masked_multi_head_attention
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_class.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_component.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_composite.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_object.dot
+│   │   │   │   │   ├── accelerator_masked_multi_head_attention_structural_package.dot
+│   │   │   │   │   └── accelerator_masked_multi_head_attention_structural_profile.dot
+│   │   │   │   ├── accelerator_masked_scaled_dot_product_attention
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_class.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_component.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_composite.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_object.dot
+│   │   │   │   │   ├── accelerator_masked_scaled_dot_product_attention_structural_package.dot
+│   │   │   │   │   └── accelerator_masked_scaled_dot_product_attention_structural_profile.dot
+│   │   │   │   ├── accelerator_multi_head_attention
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_class.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_component.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_composite.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_object.dot
+│   │   │   │   │   ├── accelerator_multi_head_attention_structural_package.dot
+│   │   │   │   │   └── accelerator_multi_head_attention_structural_profile.dot
+│   │   │   │   └── accelerator_scaled_dot_product_attention
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_activity.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_communication.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_interaction.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_sequence.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_state.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_timing.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_behavioral_use.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_class.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_component.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_composite.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_deployment.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_object.dot
+│   │   │   │       ├── accelerator_scaled_dot_product_attention_structural_package.dot
+│   │   │   │       └── accelerator_scaled_dot_product_attention_structural_profile.dot
+│   │   │   ├── controller
+│   │   │   │   ├── fnn
+│   │   │   │   │   └── accelerator_fnn
+│   │   │   │   │       ├── accelerator_fnn_behavioral_activity.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_communication.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_interaction.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_sequence.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_state.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_timing.dot
+│   │   │   │   │       ├── accelerator_fnn_behavioral_use.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_class.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_component.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_composite.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_deployment.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_object.dot
+│   │   │   │   │       ├── accelerator_fnn_structural_package.dot
+│   │   │   │   │       └── accelerator_fnn_structural_profile.dot
+│   │   │   │   └── lstm
+│   │   │   │       └── accelerator_lstm
+│   │   │   │           ├── accelerator_lstm_behavioral_activity.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_communication.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_interaction.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_sequence.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_state.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_timing.dot
+│   │   │   │           ├── accelerator_lstm_behavioral_use.dot
+│   │   │   │           ├── accelerator_lstm_structural_class.dot
+│   │   │   │           ├── accelerator_lstm_structural_component.dot
+│   │   │   │           ├── accelerator_lstm_structural_composite.dot
+│   │   │   │           ├── accelerator_lstm_structural_deployment.dot
+│   │   │   │           ├── accelerator_lstm_structural_object.dot
+│   │   │   │           ├── accelerator_lstm_structural_package.dot
+│   │   │   │           └── accelerator_lstm_structural_profile.dot
+│   │   │   ├── functions
+│   │   │   │   ├── accelerator_layer_norm
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_layer_norm_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_class.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_component.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_composite.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_object.dot
+│   │   │   │   │   ├── accelerator_layer_norm_structural_package.dot
+│   │   │   │   │   └── accelerator_layer_norm_structural_profile.dot
+│   │   │   │   └── accelerator_positional_encoding
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_activity.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_communication.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_interaction.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_sequence.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_state.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_timing.dot
+│   │   │   │       ├── accelerator_positional_encoding_behavioral_use.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_class.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_component.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_composite.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_deployment.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_object.dot
+│   │   │   │       ├── accelerator_positional_encoding_structural_package.dot
+│   │   │   │       └── accelerator_positional_encoding_structural_profile.dot
+│   │   │   ├── inputs
+│   │   │   │   ├── accelerator_inputs_vector
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_class.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_component.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_composite.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_object.dot
+│   │   │   │   │   ├── accelerator_inputs_vector_structural_package.dot
+│   │   │   │   │   └── accelerator_inputs_vector_structural_profile.dot
+│   │   │   │   ├── accelerator_keys_vector
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_keys_vector_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_class.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_component.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_composite.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_object.dot
+│   │   │   │   │   ├── accelerator_keys_vector_structural_package.dot
+│   │   │   │   │   └── accelerator_keys_vector_structural_profile.dot
+│   │   │   │   ├── accelerator_queries_vector
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_activity.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_communication.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_state.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_timing.dot
+│   │   │   │   │   ├── accelerator_queries_vector_behavioral_use.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_class.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_component.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_composite.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_deployment.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_object.dot
+│   │   │   │   │   ├── accelerator_queries_vector_structural_package.dot
+│   │   │   │   │   └── accelerator_queries_vector_structural_profile.dot
+│   │   │   │   └── accelerator_values_vector
+│   │   │   │       ├── accelerator_values_vector_behavioral_activity.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_communication.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_interaction.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_sequence.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_state.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_timing.dot
+│   │   │   │       ├── accelerator_values_vector_behavioral_use.dot
+│   │   │   │       ├── accelerator_values_vector_structural_class.dot
+│   │   │   │       ├── accelerator_values_vector_structural_component.dot
+│   │   │   │       ├── accelerator_values_vector_structural_composite.dot
+│   │   │   │       ├── accelerator_values_vector_structural_deployment.dot
+│   │   │   │       ├── accelerator_values_vector_structural_object.dot
+│   │   │   │       ├── accelerator_values_vector_structural_package.dot
+│   │   │   │       └── accelerator_values_vector_structural_profile.dot
+│   │   │   └── top
+│   │   │       ├── accelerator_controller
+│   │   │       │   ├── accelerator_controller_behavioral_activity.dot
+│   │   │       │   ├── accelerator_controller_behavioral_communication.dot
+│   │   │       │   ├── accelerator_controller_behavioral_interaction.dot
+│   │   │       │   ├── accelerator_controller_behavioral_sequence.dot
+│   │   │       │   ├── accelerator_controller_behavioral_state.dot
+│   │   │       │   ├── accelerator_controller_behavioral_timing.dot
+│   │   │       │   ├── accelerator_controller_behavioral_use.dot
+│   │   │       │   ├── accelerator_controller_structural_class.dot
+│   │   │       │   ├── accelerator_controller_structural_component.dot
+│   │   │       │   ├── accelerator_controller_structural_composite.dot
+│   │   │       │   ├── accelerator_controller_structural_deployment.dot
+│   │   │       │   ├── accelerator_controller_structural_object.dot
+│   │   │       │   ├── accelerator_controller_structural_package.dot
+│   │   │       │   └── accelerator_controller_structural_profile.dot
+│   │   │       ├── accelerator_decoder
+│   │   │       │   ├── accelerator_decoder_behavioral_activity.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_communication.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_interaction.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_sequence.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_state.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_timing.dot
+│   │   │       │   ├── accelerator_decoder_behavioral_use.dot
+│   │   │       │   ├── accelerator_decoder_structural_class.dot
+│   │   │       │   ├── accelerator_decoder_structural_component.dot
+│   │   │       │   ├── accelerator_decoder_structural_composite.dot
+│   │   │       │   ├── accelerator_decoder_structural_deployment.dot
+│   │   │       │   ├── accelerator_decoder_structural_object.dot
+│   │   │       │   ├── accelerator_decoder_structural_package.dot
+│   │   │       │   └── accelerator_decoder_structural_profile.dot
+│   │   │       └── accelerator_encoder
+│   │   │           ├── accelerator_encoder_behavioral_activity.dot
+│   │   │           ├── accelerator_encoder_behavioral_communication.dot
+│   │   │           ├── accelerator_encoder_behavioral_interaction.dot
+│   │   │           ├── accelerator_encoder_behavioral_sequence.dot
+│   │   │           ├── accelerator_encoder_behavioral_state.dot
+│   │   │           ├── accelerator_encoder_behavioral_timing.dot
+│   │   │           ├── accelerator_encoder_behavioral_use.dot
+│   │   │           ├── accelerator_encoder_structural_class.dot
+│   │   │           ├── accelerator_encoder_structural_component.dot
+│   │   │           ├── accelerator_encoder_structural_composite.dot
+│   │   │           ├── accelerator_encoder_structural_deployment.dot
+│   │   │           ├── accelerator_encoder_structural_object.dot
+│   │   │           ├── accelerator_encoder_structural_package.dot
+│   │   │           └── accelerator_encoder_structural_profile.dot
+│   │   ├── dnc
+│   │   │   ├── memory
+│   │   │   │   ├── accelerator_addressing
+│   │   │   │   │   ├── dnc_addressing_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_state.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_addressing_behavioral_use.dot
+│   │   │   │   │   ├── dnc_addressing_structural_class.dot
+│   │   │   │   │   ├── dnc_addressing_structural_component.dot
+│   │   │   │   │   ├── dnc_addressing_structural_composite.dot
+│   │   │   │   │   ├── dnc_addressing_structural_deployment.dot
+│   │   │   │   │   ├── dnc_addressing_structural_object.dot
+│   │   │   │   │   ├── dnc_addressing_structural_package.dot
+│   │   │   │   │   └── dnc_addressing_structural_profile.dot
+│   │   │   │   ├── accelerator_allocation_weighting
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_state.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_behavioral_use.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_class.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_component.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_composite.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_deployment.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_object.dot
+│   │   │   │   │   ├── dnc_allocation_weighting_structural_package.dot
+│   │   │   │   │   └── dnc_allocation_weighting_structural_profile.dot
+│   │   │   │   ├── accelerator_backward_weighting
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_state.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_backward_weighting_behavioral_use.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_class.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_component.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_composite.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_deployment.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_object.dot
+│   │   │   │   │   ├── dnc_backward_weighting_structural_package.dot
+│   │   │   │   │   └── dnc_backward_weighting_structural_profile.dot
+│   │   │   │   ├── accelerator_forward_weighting
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_state.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_forward_weighting_behavioral_use.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_class.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_component.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_composite.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_deployment.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_object.dot
+│   │   │   │   │   ├── dnc_forward_weighting_structural_package.dot
+│   │   │   │   │   └── dnc_forward_weighting_structural_profile.dot
+│   │   │   │   ├── accelerator_matrix_content_based_addressing
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_state.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_behavioral_use.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_class.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_component.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_composite.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_deployment.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_object.dot
+│   │   │   │   │   ├── dnc_matrix_content_based_addressing_structural_package.dot
+│   │   │   │   │   └── dnc_matrix_content_based_addressing_structural_profile.dot
+│   │   │   │   ├── accelerator_memory_matrix
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_state.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_memory_matrix_behavioral_use.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_class.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_component.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_composite.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_deployment.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_object.dot
+│   │   │   │   │   ├── dnc_memory_matrix_structural_package.dot
+│   │   │   │   │   └── dnc_memory_matrix_structural_profile.dot
+│   │   │   │   ├── accelerator_memory_retention_vector
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_state.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_behavioral_use.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_class.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_component.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_composite.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_deployment.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_object.dot
+│   │   │   │   │   ├── dnc_memory_retention_vector_structural_package.dot
+│   │   │   │   │   └── dnc_memory_retention_vector_structural_profile.dot
+│   │   │   │   ├── accelerator_precedence_weighting
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_state.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_behavioral_use.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_class.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_component.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_composite.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_deployment.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_object.dot
+│   │   │   │   │   ├── dnc_precedence_weighting_structural_package.dot
+│   │   │   │   │   └── dnc_precedence_weighting_structural_profile.dot
+│   │   │   │   ├── accelerator_sort_vector
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_state.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_sort_vector_behavioral_use.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_class.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_component.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_composite.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_deployment.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_object.dot
+│   │   │   │   │   ├── dnc_sort_vector_structural_package.dot
+│   │   │   │   │   └── dnc_sort_vector_structural_profile.dot
+│   │   │   │   ├── accelerator_temporal_link_matrix
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_state.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_behavioral_use.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_class.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_component.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_composite.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_deployment.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_object.dot
+│   │   │   │   │   ├── dnc_temporal_link_matrix_structural_package.dot
+│   │   │   │   │   └── dnc_temporal_link_matrix_structural_profile.dot
+│   │   │   │   ├── accelerator_usage_vector
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_state.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_usage_vector_behavioral_use.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_class.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_component.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_composite.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_deployment.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_object.dot
+│   │   │   │   │   ├── dnc_usage_vector_structural_package.dot
+│   │   │   │   │   └── dnc_usage_vector_structural_profile.dot
+│   │   │   │   └── accelerator_vector_content_based_addressing
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_activity.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_communication.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_interaction.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_sequence.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_state.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_timing.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_behavioral_use.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_class.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_component.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_composite.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_deployment.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_object.dot
+│   │   │   │       ├── dnc_vector_content_based_addressing_structural_package.dot
+│   │   │   │       └── dnc_vector_content_based_addressing_structural_profile.dot
+│   │   │   ├── read_heads
+│   │   │   │   ├── accelerator_read_content_weighting
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_state.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_behavioral_use.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_class.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_component.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_composite.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_deployment.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_object.dot
+│   │   │   │   │   ├── dnc_read_content_weighting_structural_package.dot
+│   │   │   │   │   └── dnc_read_content_weighting_structural_profile.dot
+│   │   │   │   ├── accelerator_read_vectors
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_state.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_read_vectors_behavioral_use.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_class.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_component.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_composite.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_deployment.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_object.dot
+│   │   │   │   │   ├── dnc_read_vectors_structural_package.dot
+│   │   │   │   │   └── dnc_read_vectors_structural_profile.dot
+│   │   │   │   └── accelerator_read_weighting
+│   │   │   │       ├── dnc_read_weighting_behavioral_activity.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_communication.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_interaction.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_sequence.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_state.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_timing.dot
+│   │   │   │       ├── dnc_read_weighting_behavioral_use.dot
+│   │   │   │       ├── dnc_read_weighting_structural_class.dot
+│   │   │   │       ├── dnc_read_weighting_structural_component.dot
+│   │   │   │       ├── dnc_read_weighting_structural_composite.dot
+│   │   │   │       ├── dnc_read_weighting_structural_deployment.dot
+│   │   │   │       ├── dnc_read_weighting_structural_object.dot
+│   │   │   │       ├── dnc_read_weighting_structural_package.dot
+│   │   │   │       └── dnc_read_weighting_structural_profile.dot
+│   │   │   ├── top
+│   │   │   │   ├── accelerator_interface_matrix
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_state.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_interface_matrix_behavioral_use.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_class.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_component.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_composite.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_deployment.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_object.dot
+│   │   │   │   │   ├── dnc_interface_matrix_structural_package.dot
+│   │   │   │   │   └── dnc_interface_matrix_structural_profile.dot
+│   │   │   │   ├── accelerator_interface_top
+│   │   │   │   │   ├── dnc_interface_top_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_state.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_interface_top_behavioral_use.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_class.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_component.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_composite.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_deployment.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_object.dot
+│   │   │   │   │   ├── dnc_interface_top_structural_package.dot
+│   │   │   │   │   └── dnc_interface_top_structural_profile.dot
+│   │   │   │   ├── accelerator_interface_vector
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_state.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_interface_vector_behavioral_use.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_class.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_component.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_composite.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_deployment.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_object.dot
+│   │   │   │   │   ├── dnc_interface_vector_structural_package.dot
+│   │   │   │   │   └── dnc_interface_vector_structural_profile.dot
+│   │   │   │   ├── accelerator_output_vector
+│   │   │   │   │   ├── dnc_output_vector_behavioral_activity.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_communication.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_interaction.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_sequence.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_state.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_timing.dot
+│   │   │   │   │   ├── dnc_output_vector_behavioral_use.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_class.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_component.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_composite.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_deployment.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_object.dot
+│   │   │   │   │   ├── dnc_output_vector_structural_package.dot
+│   │   │   │   │   └── dnc_output_vector_structural_profile.dot
+│   │   │   │   └── accelerator_top
+│   │   │   │       ├── dnc_top_behavioral_activity.dot
+│   │   │   │       ├── dnc_top_behavioral_communication.dot
+│   │   │   │       ├── dnc_top_behavioral_interaction.dot
+│   │   │   │       ├── dnc_top_behavioral_sequence.dot
+│   │   │   │       ├── dnc_top_behavioral_state.dot
+│   │   │   │       ├── dnc_top_behavioral_timing.dot
+│   │   │   │       ├── dnc_top_behavioral_use.dot
+│   │   │   │       ├── dnc_top_structural_class.dot
+│   │   │   │       ├── dnc_top_structural_component.dot
+│   │   │   │       ├── dnc_top_structural_composite.dot
+│   │   │   │       ├── dnc_top_structural_deployment.dot
+│   │   │   │       ├── dnc_top_structural_object.dot
+│   │   │   │       ├── dnc_top_structural_package.dot
+│   │   │   │       └── dnc_top_structural_profile.dot
+│   │   │   ├── trained
+│   │   │   │   └── accelerator_trained_top
+│   │   │   │       ├── dnc_trained_top_behavioral_activity.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_communication.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_interaction.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_sequence.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_state.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_timing.dot
+│   │   │   │       ├── dnc_trained_top_behavioral_use.dot
+│   │   │   │       ├── dnc_trained_top_structural_class.dot
+│   │   │   │       ├── dnc_trained_top_structural_component.dot
+│   │   │   │       ├── dnc_trained_top_structural_composite.dot
+│   │   │   │       ├── dnc_trained_top_structural_deployment.dot
+│   │   │   │       ├── dnc_trained_top_structural_object.dot
+│   │   │   │       ├── dnc_trained_top_structural_package.dot
+│   │   │   │       └── dnc_trained_top_structural_profile.dot
+│   │   │   └── write_heads
+│   │   │       ├── accelerator_write_content_weighting
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_activity.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_communication.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_interaction.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_sequence.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_state.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_timing.dot
+│   │   │       │   ├── dnc_write_content_weighting_behavioral_use.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_class.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_component.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_composite.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_deployment.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_object.dot
+│   │   │       │   ├── dnc_write_content_weighting_structural_package.dot
+│   │   │       │   └── dnc_write_content_weighting_structural_profile.dot
+│   │   │       └── accelerator_write_weighting
+│   │   │           ├── dnc_write_weighting_behavioral_activity.dot
+│   │   │           ├── dnc_write_weighting_behavioral_communication.dot
+│   │   │           ├── dnc_write_weighting_behavioral_interaction.dot
+│   │   │           ├── dnc_write_weighting_behavioral_sequence.dot
+│   │   │           ├── dnc_write_weighting_behavioral_state.dot
+│   │   │           ├── dnc_write_weighting_behavioral_timing.dot
+│   │   │           ├── dnc_write_weighting_behavioral_use.dot
+│   │   │           ├── dnc_write_weighting_structural_class.dot
+│   │   │           ├── dnc_write_weighting_structural_component.dot
+│   │   │           ├── dnc_write_weighting_structural_composite.dot
+│   │   │           ├── dnc_write_weighting_structural_deployment.dot
+│   │   │           ├── dnc_write_weighting_structural_object.dot
+│   │   │           ├── dnc_write_weighting_structural_package.dot
+│   │   │           └── dnc_write_weighting_structural_profile.dot
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller
@@ -1147,431 +1731,540 @@ library
 │       │       ├── accelerator_fnn_w_trainer_structural_object.dot
 │       │       ├── accelerator_fnn_w_trainer_structural_package.dot
 │       │       └── accelerator_fnn_w_trainer_structural_profile.dot
-│       └── lstm
-│           ├── activation
-│           │   ├── accelerator_lstm_activation_b_trainer
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_b_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_b_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_activation_d_trainer
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_d_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_d_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_activation_k_trainer
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_k_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_k_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_activation_trainer
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_activation_u_trainer
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_u_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_u_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_activation_v_trainer
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_activation_v_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_activation_v_trainer_structural_profile.dot
-│           │   └── accelerator_lstm_activation_w_trainer
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_activity.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_communication.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_interaction.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_sequence.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_state.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_timing.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_behavioral_use.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_class.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_component.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_composite.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_deployment.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_object.dot
-│           │       ├── accelerator_lstm_activation_w_trainer_structural_package.dot
-│           │       └── accelerator_lstm_activation_w_trainer_structural_profile.dot
-│           ├── forget
-│           │   ├── accelerator_lstm_forget_b_trainer
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_b_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_b_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_forget_d_trainer
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_d_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_d_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_forget_k_trainer
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_k_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_k_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_forget_trainer
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_forget_u_trainer
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_u_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_u_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_forget_v_trainer
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_forget_v_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_forget_v_trainer_structural_profile.dot
-│           │   └── accelerator_lstm_forget_w_trainer
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_activity.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_communication.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_interaction.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_sequence.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_state.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_timing.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_behavioral_use.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_class.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_component.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_composite.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_deployment.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_object.dot
-│           │       ├── accelerator_lstm_forget_w_trainer_structural_package.dot
-│           │       └── accelerator_lstm_forget_w_trainer_structural_profile.dot
-│           ├── input
-│           │   ├── accelerator_lstm_input_b_trainer
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_b_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_b_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_input_d_trainer
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_d_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_d_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_input_k_trainer
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_k_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_k_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_input_trainer
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_input_u_trainer
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_u_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_u_trainer_structural_profile.dot
-│           │   ├── accelerator_lstm_input_v_trainer
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_activity.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_communication.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_interaction.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_sequence.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_state.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_timing.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_behavioral_use.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_class.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_component.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_composite.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_deployment.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_object.dot
-│           │   │   ├── accelerator_lstm_input_v_trainer_structural_package.dot
-│           │   │   └── accelerator_lstm_input_v_trainer_structural_profile.dot
-│           │   └── accelerator_lstm_input_w_trainer
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_activity.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_communication.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_interaction.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_sequence.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_state.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_timing.dot
-│           │       ├── accelerator_lstm_input_w_trainer_behavioral_use.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_class.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_component.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_composite.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_deployment.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_object.dot
-│           │       ├── accelerator_lstm_input_w_trainer_structural_package.dot
-│           │       └── accelerator_lstm_input_w_trainer_structural_profile.dot
-│           └── output
-│               ├── accelerator_lstm_output_b_trainer
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_b_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_b_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_b_trainer_structural_profile.dot
-│               ├── accelerator_lstm_output_d_trainer
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_d_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_d_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_d_trainer_structural_profile.dot
-│               ├── accelerator_lstm_output_k_trainer
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_k_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_k_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_k_trainer_structural_profile.dot
-│               ├── accelerator_lstm_output_trainer
-│               │   ├── accelerator_lstm_output_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_trainer_structural_profile.dot
-│               ├── accelerator_lstm_output_u_trainer
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_u_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_u_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_u_trainer_structural_profile.dot
-│               ├── accelerator_lstm_output_v_trainer
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_activity.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_communication.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_interaction.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_sequence.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_state.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_timing.dot
-│               │   ├── accelerator_lstm_output_v_trainer_behavioral_use.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_class.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_component.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_composite.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_deployment.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_object.dot
-│               │   ├── accelerator_lstm_output_v_trainer_structural_package.dot
-│               │   └── accelerator_lstm_output_v_trainer_structural_profile.dot
-│               └── accelerator_lstm_output_w_trainer
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_activity.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_communication.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_interaction.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_sequence.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_state.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_timing.dot
-│                   ├── accelerator_lstm_output_w_trainer_behavioral_use.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_class.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_component.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_composite.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_deployment.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_object.dot
-│                   ├── accelerator_lstm_output_w_trainer_structural_package.dot
-│                   └── accelerator_lstm_output_w_trainer_structural_profile.dot
+│       ├── lstm
+│       │   ├── activation
+│       │   │   ├── accelerator_lstm_activation_b_trainer
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_b_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_b_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_activation_d_trainer
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_d_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_d_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_activation_k_trainer
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_k_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_k_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_activation_trainer
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_activation_u_trainer
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_u_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_u_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_activation_v_trainer
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_activation_v_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_activation_v_trainer_structural_profile.dot
+│       │   │   └── accelerator_lstm_activation_w_trainer
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_activity.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_communication.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_interaction.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_sequence.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_state.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_timing.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_behavioral_use.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_class.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_component.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_composite.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_deployment.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_object.dot
+│       │   │       ├── accelerator_lstm_activation_w_trainer_structural_package.dot
+│       │   │       └── accelerator_lstm_activation_w_trainer_structural_profile.dot
+│       │   ├── forget
+│       │   │   ├── accelerator_lstm_forget_b_trainer
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_b_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_b_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_forget_d_trainer
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_d_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_d_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_forget_k_trainer
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_k_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_k_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_forget_trainer
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_forget_u_trainer
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_u_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_u_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_forget_v_trainer
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_forget_v_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_forget_v_trainer_structural_profile.dot
+│       │   │   └── accelerator_lstm_forget_w_trainer
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_activity.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_communication.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_interaction.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_sequence.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_state.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_timing.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_behavioral_use.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_class.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_component.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_composite.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_deployment.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_object.dot
+│       │   │       ├── accelerator_lstm_forget_w_trainer_structural_package.dot
+│       │   │       └── accelerator_lstm_forget_w_trainer_structural_profile.dot
+│       │   ├── input
+│       │   │   ├── accelerator_lstm_input_b_trainer
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_b_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_b_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_input_d_trainer
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_d_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_d_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_input_k_trainer
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_k_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_k_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_input_trainer
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_input_u_trainer
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_u_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_u_trainer_structural_profile.dot
+│       │   │   ├── accelerator_lstm_input_v_trainer
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_activity.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_communication.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_interaction.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_sequence.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_state.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_timing.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_behavioral_use.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_class.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_component.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_composite.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_deployment.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_object.dot
+│       │   │   │   ├── accelerator_lstm_input_v_trainer_structural_package.dot
+│       │   │   │   └── accelerator_lstm_input_v_trainer_structural_profile.dot
+│       │   │   └── accelerator_lstm_input_w_trainer
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_activity.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_communication.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_interaction.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_sequence.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_state.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_timing.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_behavioral_use.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_class.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_component.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_composite.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_deployment.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_object.dot
+│       │   │       ├── accelerator_lstm_input_w_trainer_structural_package.dot
+│       │   │       └── accelerator_lstm_input_w_trainer_structural_profile.dot
+│       │   └── output
+│       │       ├── accelerator_lstm_output_b_trainer
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_b_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_b_trainer_structural_profile.dot
+│       │       ├── accelerator_lstm_output_d_trainer
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_d_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_d_trainer_structural_profile.dot
+│       │       ├── accelerator_lstm_output_k_trainer
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_k_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_k_trainer_structural_profile.dot
+│       │       ├── accelerator_lstm_output_trainer
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_trainer_structural_profile.dot
+│       │       ├── accelerator_lstm_output_u_trainer
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_u_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_u_trainer_structural_profile.dot
+│       │       ├── accelerator_lstm_output_v_trainer
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_activity.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_communication.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_interaction.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_sequence.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_state.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_timing.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_behavioral_use.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_class.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_component.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_composite.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_deployment.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_object.dot
+│       │       │   ├── accelerator_lstm_output_v_trainer_structural_package.dot
+│       │       │   └── accelerator_lstm_output_v_trainer_structural_profile.dot
+│       │       └── accelerator_lstm_output_w_trainer
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_activity.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_communication.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_interaction.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_sequence.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_state.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_timing.dot
+│       │           ├── accelerator_lstm_output_w_trainer_behavioral_use.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_class.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_component.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_composite.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_deployment.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_object.dot
+│       │           ├── accelerator_lstm_output_w_trainer_structural_package.dot
+│       │           └── accelerator_lstm_output_w_trainer_structural_profile.dot
+│       └── state
+│           ├── feedback
+│           │   ├── accelerator_state_matrix_feedforward
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_activity.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_communication.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_interaction.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_sequence.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_state.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_timing.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_behavioral_use.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_class.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_component.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_composite.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_deployment.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_object.dot
+│           │   │   ├── accelerator_state_matrix_feedforward_structural_package.dot
+│           │   │   └── accelerator_state_matrix_feedforward_structural_profile.dot
+│           │   ├── accelerator_state_matrix_input
+│           │   │   ├── accelerator_state_matrix_input_behavioral_activity.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_communication.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_interaction.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_sequence.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_state.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_timing.dot
+│           │   │   ├── accelerator_state_matrix_input_behavioral_use.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_class.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_component.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_composite.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_deployment.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_object.dot
+│           │   │   ├── accelerator_state_matrix_input_structural_package.dot
+│           │   │   └── accelerator_state_matrix_input_structural_profile.dot
+│           │   ├── accelerator_state_matrix_output
+│           │   │   ├── accelerator_state_matrix_output_behavioral_activity.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_communication.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_interaction.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_sequence.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_state.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_timing.dot
+│           │   │   ├── accelerator_state_matrix_output_behavioral_use.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_class.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_component.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_composite.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_deployment.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_object.dot
+│           │   │   ├── accelerator_state_matrix_output_structural_package.dot
+│           │   │   └── accelerator_state_matrix_output_structural_profile.dot
+│           │   └── accelerator_state_matrix_state
+│           │       ├── accelerator_state_matrix_state_behavioral_activity.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_communication.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_interaction.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_sequence.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_state.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_timing.dot
+│           │       ├── accelerator_state_matrix_state_behavioral_use.dot
+│           │       ├── accelerator_state_matrix_state_structural_class.dot
+│           │       ├── accelerator_state_matrix_state_structural_component.dot
+│           │       ├── accelerator_state_matrix_state_structural_composite.dot
+│           │       ├── accelerator_state_matrix_state_structural_deployment.dot
+│           │       ├── accelerator_state_matrix_state_structural_object.dot
+│           │       ├── accelerator_state_matrix_state_structural_package.dot
+│           │       └── accelerator_state_matrix_state_structural_profile.dot
+│           ├── outputs
+│           │   ├── accelerator_state_vector_output
+│           │   │   ├── accelerator_state_vector_output_behavioral_activity.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_communication.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_interaction.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_sequence.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_state.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_timing.dot
+│           │   │   ├── accelerator_state_vector_output_behavioral_use.dot
+│           │   │   ├── accelerator_state_vector_output_structural_class.dot
+│           │   │   ├── accelerator_state_vector_output_structural_component.dot
+│           │   │   ├── accelerator_state_vector_output_structural_composite.dot
+│           │   │   ├── accelerator_state_vector_output_structural_deployment.dot
+│           │   │   ├── accelerator_state_vector_output_structural_object.dot
+│           │   │   ├── accelerator_state_vector_output_structural_package.dot
+│           │   │   └── accelerator_state_vector_output_structural_profile.dot
+│           │   └── accelerator_state_vector_state
+│           │       ├── accelerator_state_vector_state_behavioral_activity.dot
+│           │       ├── accelerator_state_vector_state_behavioral_communication.dot
+│           │       ├── accelerator_state_vector_state_behavioral_interaction.dot
+│           │       ├── accelerator_state_vector_state_behavioral_sequence.dot
+│           │       ├── accelerator_state_vector_state_behavioral_state.dot
+│           │       ├── accelerator_state_vector_state_behavioral_timing.dot
+│           │       ├── accelerator_state_vector_state_behavioral_use.dot
+│           │       ├── accelerator_state_vector_state_structural_class.dot
+│           │       ├── accelerator_state_vector_state_structural_component.dot
+│           │       ├── accelerator_state_vector_state_structural_composite.dot
+│           │       ├── accelerator_state_vector_state_structural_deployment.dot
+│           │       ├── accelerator_state_vector_state_structural_object.dot
+│           │       ├── accelerator_state_vector_state_structural_package.dot
+│           │       └── accelerator_state_vector_state_structural_profile.dot
+│           └── top
+│               └── accelerator_state_top
+│                   ├── accelerator_state_top_behavioral_activity.dot
+│                   ├── accelerator_state_top_behavioral_communication.dot
+│                   ├── accelerator_state_top_behavioral_interaction.dot
+│                   ├── accelerator_state_top_behavioral_sequence.dot
+│                   ├── accelerator_state_top_behavioral_state.dot
+│                   ├── accelerator_state_top_behavioral_timing.dot
+│                   ├── accelerator_state_top_behavioral_use.dot
+│                   ├── accelerator_state_top_structural_class.dot
+│                   ├── accelerator_state_top_structural_component.dot
+│                   ├── accelerator_state_top_structural_composite.dot
+│                   ├── accelerator_state_top_structural_deployment.dot
+│                   ├── accelerator_state_top_structural_object.dot
+│                   ├── accelerator_state_top_structural_package.dot
+│                   └── accelerator_state_top_structural_profile.dot
 └── math
     ├── matrix
     │   ├── accelerator_matrix_deviation_function
@@ -1757,4 +2450,4 @@ library
             ├── accelerator_vector_oneplus_function_structural_package.dot
             └── accelerator_vector_oneplus_function_structural_profile.dot
 
-147 directories, 1610 files
+210 directories, 2240 files

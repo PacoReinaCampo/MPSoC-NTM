@@ -61,6 +61,58 @@ library
 │       └── accelerator_vector_subtractor.c
 ├── intelligence
 │   ├── modeling
+│   │   ├── ann
+│   │   │   ├── components
+│   │   │   │   ├── accelerator_masked_multi_head_attention.c
+│   │   │   │   ├── accelerator_masked_scaled_dot_product_attention.c
+│   │   │   │   ├── accelerator_multi_head_attention.c
+│   │   │   │   └── accelerator_scaled_dot_product_attention.c
+│   │   │   ├── controller
+│   │   │   │   ├── fnn
+│   │   │   │   │   └── accelerator_fnn.c
+│   │   │   │   └── lstm
+│   │   │   │       └── accelerator_lstm.c
+│   │   │   ├── functions
+│   │   │   │   ├── accelerator_layer_norm.c
+│   │   │   │   └── accelerator_positional_encoding.c
+│   │   │   ├── inputs
+│   │   │   │   ├── accelerator_inputs_vector.c
+│   │   │   │   ├── accelerator_keys_vector.c
+│   │   │   │   ├── accelerator_queries_vector.c
+│   │   │   │   └── accelerator_values_vector.c
+│   │   │   └── top
+│   │   │       ├── accelerator_controller.c
+│   │   │       ├── accelerator_decoder.c
+│   │   │       └── accelerator_encoder.c
+│   │   ├── dnc
+│   │   │   ├── memory
+│   │   │   │   ├── accelerator_addressing.c
+│   │   │   │   ├── accelerator_allocation_weighting.c
+│   │   │   │   ├── accelerator_backward_weighting.c
+│   │   │   │   ├── accelerator_forward_weighting.c
+│   │   │   │   ├── accelerator_matrix_content_based_addressing.c
+│   │   │   │   ├── accelerator_memory_matrix.c
+│   │   │   │   ├── accelerator_memory_retention_vector.c
+│   │   │   │   ├── accelerator_precedence_weighting.c
+│   │   │   │   ├── accelerator_sort_vector.c
+│   │   │   │   ├── accelerator_temporal_link_matrix.c
+│   │   │   │   ├── accelerator_usage_vector.c
+│   │   │   │   └── accelerator_vector_content_based_addressing.c
+│   │   │   ├── read_heads
+│   │   │   │   ├── accelerator_read_content_weighting.c
+│   │   │   │   ├── accelerator_read_vectors.c
+│   │   │   │   └── accelerator_read_weighting.c
+│   │   │   ├── top
+│   │   │   │   ├── accelerator_interface_matrix.c
+│   │   │   │   ├── accelerator_interface_top.c
+│   │   │   │   ├── accelerator_interface_vector.c
+│   │   │   │   ├── accelerator_output_vector.c
+│   │   │   │   └── accelerator_top.c
+│   │   │   ├── trained
+│   │   │   │   └── accelerator_trained_top.c
+│   │   │   └── write_heads
+│   │   │       ├── accelerator_write_content_weighting.c
+│   │   │       └── accelerator_write_weighting.c
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.c
@@ -113,39 +165,50 @@ library
 │       │   ├── accelerator_fnn_u_trainer.c
 │       │   ├── accelerator_fnn_v_trainer.c
 │       │   └── accelerator_fnn_w_trainer.c
-│       └── lstm
-│           ├── activation
-│           │   ├── accelerator_lstm_activation_b_trainer.c
-│           │   ├── accelerator_lstm_activation_d_trainer.c
-│           │   ├── accelerator_lstm_activation_k_trainer.c
-│           │   ├── accelerator_lstm_activation_trainer.c
-│           │   ├── accelerator_lstm_activation_u_trainer.c
-│           │   ├── accelerator_lstm_activation_v_trainer.c
-│           │   └── accelerator_lstm_activation_w_trainer.c
-│           ├── forget
-│           │   ├── accelerator_lstm_forget_b_trainer.c
-│           │   ├── accelerator_lstm_forget_d_trainer.c
-│           │   ├── accelerator_lstm_forget_k_trainer.c
-│           │   ├── accelerator_lstm_forget_trainer.c
-│           │   ├── accelerator_lstm_forget_u_trainer.c
-│           │   ├── accelerator_lstm_forget_v_trainer.c
-│           │   └── accelerator_lstm_forget_w_trainer.c
-│           ├── input
-│           │   ├── accelerator_lstm_input_b_trainer.c
-│           │   ├── accelerator_lstm_input_d_trainer.c
-│           │   ├── accelerator_lstm_input_k_trainer.c
-│           │   ├── accelerator_lstm_input_trainer.c
-│           │   ├── accelerator_lstm_input_u_trainer.c
-│           │   ├── accelerator_lstm_input_v_trainer.c
-│           │   └── accelerator_lstm_input_w_trainer.c
-│           └── output
-│               ├── accelerator_lstm_output_b_trainer.c
-│               ├── accelerator_lstm_output_d_trainer.c
-│               ├── accelerator_lstm_output_k_trainer.c
-│               ├── accelerator_lstm_output_trainer.c
-│               ├── accelerator_lstm_output_u_trainer.c
-│               ├── accelerator_lstm_output_v_trainer.c
-│               └── accelerator_lstm_output_w_trainer.c
+│       ├── lstm
+│       │   ├── activation
+│       │   │   ├── accelerator_lstm_activation_b_trainer.c
+│       │   │   ├── accelerator_lstm_activation_d_trainer.c
+│       │   │   ├── accelerator_lstm_activation_k_trainer.c
+│       │   │   ├── accelerator_lstm_activation_trainer.c
+│       │   │   ├── accelerator_lstm_activation_u_trainer.c
+│       │   │   ├── accelerator_lstm_activation_v_trainer.c
+│       │   │   └── accelerator_lstm_activation_w_trainer.c
+│       │   ├── forget
+│       │   │   ├── accelerator_lstm_forget_b_trainer.c
+│       │   │   ├── accelerator_lstm_forget_d_trainer.c
+│       │   │   ├── accelerator_lstm_forget_k_trainer.c
+│       │   │   ├── accelerator_lstm_forget_trainer.c
+│       │   │   ├── accelerator_lstm_forget_u_trainer.c
+│       │   │   ├── accelerator_lstm_forget_v_trainer.c
+│       │   │   └── accelerator_lstm_forget_w_trainer.c
+│       │   ├── input
+│       │   │   ├── accelerator_lstm_input_b_trainer.c
+│       │   │   ├── accelerator_lstm_input_d_trainer.c
+│       │   │   ├── accelerator_lstm_input_k_trainer.c
+│       │   │   ├── accelerator_lstm_input_trainer.c
+│       │   │   ├── accelerator_lstm_input_u_trainer.c
+│       │   │   ├── accelerator_lstm_input_v_trainer.c
+│       │   │   └── accelerator_lstm_input_w_trainer.c
+│       │   └── output
+│       │       ├── accelerator_lstm_output_b_trainer.c
+│       │       ├── accelerator_lstm_output_d_trainer.c
+│       │       ├── accelerator_lstm_output_k_trainer.c
+│       │       ├── accelerator_lstm_output_trainer.c
+│       │       ├── accelerator_lstm_output_u_trainer.c
+│       │       ├── accelerator_lstm_output_v_trainer.c
+│       │       └── accelerator_lstm_output_w_trainer.c
+│       └── state
+│           ├── feedback
+│           │   ├── accelerator_state_matrix_feedforward.c
+│           │   ├── accelerator_state_matrix_input.c
+│           │   ├── accelerator_state_matrix_output.c
+│           │   └── accelerator_state_matrix_state.c
+│           ├── outputs
+│           │   ├── accelerator_state_vector_output.c
+│           │   └── accelerator_state_vector_state.c
+│           └── top
+│               └── accelerator_state_top.c
 └── math
     ├── matrix
     │   ├── accelerator_matrix_deviation_function.c
@@ -163,4 +226,4 @@ library
         ├── accelerator_vector_mean_function.c
         └── accelerator_vector_oneplus_function.c
 
-36 directories, 127 files
+54 directories, 172 files

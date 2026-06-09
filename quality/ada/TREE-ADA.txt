@@ -19,6 +19,58 @@ library
 │       └── accelerator_vector_arithmetic.adb
 ├── intelligence
 │   ├── modeling
+│   │   ├── ann
+│   │   │   ├── components
+│   │   │   │   ├── accelerator_masked_multi_head_attention.adb
+│   │   │   │   ├── accelerator_masked_scaled_dot_product_attention.adb
+│   │   │   │   ├── accelerator_multi_head_attention.adb
+│   │   │   │   └── accelerator_scaled_dot_product_attention.adb
+│   │   │   ├── controller
+│   │   │   │   ├── fnn
+│   │   │   │   │   └── accelerator_fnn.adb
+│   │   │   │   └── lstm
+│   │   │   │       └── accelerator_lstm.adb
+│   │   │   ├── functions
+│   │   │   │   ├── accelerator_layer_norm.adb
+│   │   │   │   └── accelerator_positional_encoding.adb
+│   │   │   ├── inputs
+│   │   │   │   ├── accelerator_inputs_vector.adb
+│   │   │   │   ├── accelerator_keys_vector.adb
+│   │   │   │   ├── accelerator_queries_vector.adb
+│   │   │   │   └── accelerator_values_vector.adb
+│   │   │   └── top
+│   │   │       ├── accelerator_controller.adb
+│   │   │       ├── accelerator_decoder.adb
+│   │   │       └── accelerator_encoder.adb
+│   │   ├── dnc
+│   │   │   ├── memory
+│   │   │   │   ├── accelerator_addressing.adb
+│   │   │   │   ├── accelerator_allocation_weighting.adb
+│   │   │   │   ├── accelerator_backward_weighting.adb
+│   │   │   │   ├── accelerator_forward_weighting.adb
+│   │   │   │   ├── accelerator_matrix_content_based_addressing.adb
+│   │   │   │   ├── accelerator_memory_matrix.adb
+│   │   │   │   ├── accelerator_memory_retention_vector.adb
+│   │   │   │   ├── accelerator_precedence_weighting.adb
+│   │   │   │   ├── accelerator_sort_vector.adb
+│   │   │   │   ├── accelerator_temporal_link_matrix.adb
+│   │   │   │   ├── accelerator_usage_vector.adb
+│   │   │   │   └── accelerator_vector_content_based_addressing.adb
+│   │   │   ├── read_heads
+│   │   │   │   ├── accelerator_read_content_weighting.adb
+│   │   │   │   ├── accelerator_read_vectors.adb
+│   │   │   │   └── accelerator_read_weighting.adb
+│   │   │   ├── top
+│   │   │   │   ├── accelerator_interface_matrix.adb
+│   │   │   │   ├── accelerator_interface_top.adb
+│   │   │   │   ├── accelerator_interface_vector.adb
+│   │   │   │   ├── accelerator_output_vector.adb
+│   │   │   │   └── accelerator_top.adb
+│   │   │   ├── trained
+│   │   │   │   └── accelerator_trained_top.adb
+│   │   │   └── write_heads
+│   │   │       ├── accelerator_write_content_weighting.adb
+│   │   │       └── accelerator_write_weighting.adb
 │   │   ├── fnn
 │   │   │   ├── convolutional
 │   │   │   │   └── accelerator_controller.adb
@@ -71,39 +123,46 @@ library
 │       │   ├── accelerator_fnn_u_trainer.adb
 │       │   ├── accelerator_fnn_v_trainer.adb
 │       │   └── accelerator_fnn_w_trainer.adb
-│       └── lstm
-│           ├── activation
-│           │   ├── accelerator_lstm_activation_b_trainer.adb
-│           │   ├── accelerator_lstm_activation_d_trainer.adb
-│           │   ├── accelerator_lstm_activation_k_trainer.adb
-│           │   ├── accelerator_lstm_activation_trainer.adb
-│           │   ├── accelerator_lstm_activation_u_trainer.adb
-│           │   ├── accelerator_lstm_activation_v_trainer.adb
-│           │   └── accelerator_lstm_activation_w_trainer.adb
-│           ├── forget
-│           │   ├── accelerator_lstm_forget_b_trainer.adb
-│           │   ├── accelerator_lstm_forget_d_trainer.adb
-│           │   ├── accelerator_lstm_forget_k_trainer.adb
-│           │   ├── accelerator_lstm_forget_trainer.adb
-│           │   ├── accelerator_lstm_forget_u_trainer.adb
-│           │   ├── accelerator_lstm_forget_v_trainer.adb
-│           │   └── accelerator_lstm_forget_w_trainer.adb
-│           ├── input
-│           │   ├── accelerator_lstm_input_b_trainer.adb
-│           │   ├── accelerator_lstm_input_d_trainer.adb
-│           │   ├── accelerator_lstm_input_k_trainer.adb
-│           │   ├── accelerator_lstm_input_trainer.adb
-│           │   ├── accelerator_lstm_input_u_trainer.adb
-│           │   ├── accelerator_lstm_input_v_trainer.adb
-│           │   └── accelerator_lstm_input_w_trainer.adb
-│           └── output
-│               ├── accelerator_lstm_output_b_trainer.adb
-│               ├── accelerator_lstm_output_d_trainer.adb
-│               ├── accelerator_lstm_output_k_trainer.adb
-│               ├── accelerator_lstm_output_trainer.adb
-│               ├── accelerator_lstm_output_u_trainer.adb
-│               ├── accelerator_lstm_output_v_trainer.adb
-│               └── accelerator_lstm_output_w_trainer.adb
+│       ├── lstm
+│       │   ├── activation
+│       │   │   ├── accelerator_lstm_activation_b_trainer.adb
+│       │   │   ├── accelerator_lstm_activation_d_trainer.adb
+│       │   │   ├── accelerator_lstm_activation_k_trainer.adb
+│       │   │   ├── accelerator_lstm_activation_trainer.adb
+│       │   │   ├── accelerator_lstm_activation_u_trainer.adb
+│       │   │   ├── accelerator_lstm_activation_v_trainer.adb
+│       │   │   └── accelerator_lstm_activation_w_trainer.adb
+│       │   ├── forget
+│       │   │   ├── accelerator_lstm_forget_b_trainer.adb
+│       │   │   ├── accelerator_lstm_forget_d_trainer.adb
+│       │   │   ├── accelerator_lstm_forget_k_trainer.adb
+│       │   │   ├── accelerator_lstm_forget_trainer.adb
+│       │   │   ├── accelerator_lstm_forget_u_trainer.adb
+│       │   │   ├── accelerator_lstm_forget_v_trainer.adb
+│       │   │   └── accelerator_lstm_forget_w_trainer.adb
+│       │   ├── input
+│       │   │   ├── accelerator_lstm_input_b_trainer.adb
+│       │   │   ├── accelerator_lstm_input_d_trainer.adb
+│       │   │   ├── accelerator_lstm_input_k_trainer.adb
+│       │   │   ├── accelerator_lstm_input_trainer.adb
+│       │   │   ├── accelerator_lstm_input_u_trainer.adb
+│       │   │   ├── accelerator_lstm_input_v_trainer.adb
+│       │   │   └── accelerator_lstm_input_w_trainer.adb
+│       │   └── output
+│       │       ├── accelerator_lstm_output_b_trainer.adb
+│       │       ├── accelerator_lstm_output_d_trainer.adb
+│       │       ├── accelerator_lstm_output_k_trainer.adb
+│       │       ├── accelerator_lstm_output_trainer.adb
+│       │       ├── accelerator_lstm_output_u_trainer.adb
+│       │       ├── accelerator_lstm_output_v_trainer.adb
+│       │       └── accelerator_lstm_output_w_trainer.adb
+│       └── state
+│           ├── feedback
+│           │   └── accelerator_state_feedback.adb
+│           ├── outputs
+│           │   └── accelerator_state_outputs.adb
+│           └── top
+│               └── accelerator_state_top.adb
 └── math
     ├── matrix
     │   └── accelerator_matrix_math.adb
@@ -112,4 +171,4 @@ library
     └── vector
         └── accelerator_vector_math.adb
 
-36 directories, 76 files
+54 directories, 117 files
