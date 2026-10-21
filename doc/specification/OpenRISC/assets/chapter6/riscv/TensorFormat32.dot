@@ -1,0 +1,112 @@
+digraph ScalarFormat32 {
+    node [shape=plaintext fontname="Courier"];
+
+    InstructionTable [
+        label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+
+        <!-- HEADER -->
+        <TR>
+            <TD COLSPAN="33" BGCOLOR="#dddddd"><B>Instruction Formats (32 bits)</B></TD>
+        </TR>
+
+        <!-- BIT NUMBERS -->
+        <TR>
+            <TD BGCOLOR="#eeeeee">Type</TD>
+            <TD BGCOLOR="#eeeeee">31</TD>
+            <TD BGCOLOR="#eeeeee">30</TD>
+            <TD BGCOLOR="#eeeeee">29</TD>
+            <TD BGCOLOR="#eeeeee">28</TD>
+            <TD BGCOLOR="#eeeeee">27</TD>
+            <TD BGCOLOR="#eeeeee">26</TD>
+            <TD BGCOLOR="#eeeeee">25</TD>
+            <TD BGCOLOR="#eeeeee">24</TD>
+            <TD BGCOLOR="#eeeeee">23</TD>
+            <TD BGCOLOR="#eeeeee">22</TD>
+            <TD BGCOLOR="#eeeeee">21</TD>
+            <TD BGCOLOR="#eeeeee">20</TD>
+            <TD BGCOLOR="#eeeeee">19</TD>
+            <TD BGCOLOR="#eeeeee">18</TD>
+            <TD BGCOLOR="#eeeeee">17</TD>
+            <TD BGCOLOR="#eeeeee">16</TD>
+            <TD BGCOLOR="#eeeeee">15</TD>
+            <TD BGCOLOR="#eeeeee">14</TD>
+            <TD BGCOLOR="#eeeeee">13</TD>
+            <TD BGCOLOR="#eeeeee">12</TD>
+            <TD BGCOLOR="#eeeeee">11</TD>
+            <TD BGCOLOR="#eeeeee">10</TD>
+            <TD BGCOLOR="#eeeeee">09</TD>
+            <TD BGCOLOR="#eeeeee">08</TD>
+            <TD BGCOLOR="#eeeeee">07</TD>
+            <TD BGCOLOR="#eeeeee">06</TD>
+            <TD BGCOLOR="#eeeeee">05</TD>
+            <TD BGCOLOR="#eeeeee">04</TD>
+            <TD BGCOLOR="#eeeeee">03</TD>
+            <TD BGCOLOR="#eeeeee">02</TD>
+            <TD BGCOLOR="#eeeeee">01</TD>
+            <TD BGCOLOR="#eeeeee">00</TD>
+        </TR>
+
+        <!-- R TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">R</TD>
+            <TD COLSPAN="7"  BGCOLOR="#b3cde3">funct7</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs2</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rd</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        <!-- I TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">I</TD>
+            <TD COLSPAN="12" BGCOLOR="#fed9a6">imm[11:0]</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rd</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        <!-- S TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">S</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fed9a6">imm[11:5]</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs2</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#fed9a6">imm[4:0]</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        <!-- B TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">S</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fed9a6">imm[12|10:5]</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs2</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#fed9a6">imm[4:1|11]</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        <!-- U TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">U</TD>
+            <TD COLSPAN="20" BGCOLOR="#fed9a6">imm[31:12]</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rd</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        <!-- J TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">J</TD>
+            <TD COLSPAN="20" BGCOLOR="#fed9a6">imm[20|10:1|11|19:12]</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rd</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">opcode</TD>
+        </TR>
+
+        </TABLE>
+        >
+    ];
+}

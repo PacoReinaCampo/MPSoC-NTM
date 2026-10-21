@@ -1,0 +1,61 @@
+digraph Project {
+  // Introduction
+  graph [splines=ortho];
+  node[shape=record];
+
+  // Blocks
+  subgraph "cluster Accelerator" { label = "Accelerator";
+    subgraph "cluster Technology" { label = "ASIC/FPGA";
+      subgraph "cluster MPSoC" { label = "MPSoC";
+        subgraph "cluster Accelerator3" { label = "Accelerator-3";
+          subgraph "cluster Router3" {label = "Router-3";
+            Router3[shape=box, label="Router-3"];
+          }
+          subgraph "cluster TPU3" { label = "TPU-3";
+            TPU33[shape=box, label="TPU-3-3"];
+            TPU32[shape=box, label="TPU-3-2"];
+            TPU31[shape=box, label="TPU-3-1"];
+            TPU30[shape=box, label="TPU-3-0"];
+          }
+        }
+        subgraph "cluster Accelerator2" { label = "Accelerator-2";
+          subgraph "cluster Router2" {label = "Router-2";
+            Router2[shape=box, label="Router-2"];
+          }
+          subgraph "cluster TPU2" { label = "TPU-2";
+            TPU23[shape=box, label="TPU-2-3"];
+            TPU22[shape=box, label="TPU-2-2"];
+            TPU21[shape=box, label="TPU-2-1"];
+            TPU20[shape=box, label="TPU-2-0"];
+          }
+        }
+        subgraph "cluster Accelerator1" { label = "Accelerator-1";
+          subgraph "cluster Router1" {label = "Router-1";
+            Router1[shape=box, label="Router-1"];
+          }
+          subgraph "cluster TPU1" { label = "TPU-1";
+            TPU13[shape=box, label="TPU-1-3"];
+            TPU12[shape=box, label="TPU-1-2"];
+            TPU11[shape=box, label="TPU-1-1"];
+            TPU10[shape=box, label="TPU-1-0"];
+          }
+        }
+        subgraph "cluster Accelerator0" { label = "Accelerator-0";
+          subgraph "cluster Router0" { label = "Router-0";
+            Router0[shape=box, label="Router-0"];
+          }
+          subgraph "cluster TPU0" { label = "TPU-0";
+            TPU03[shape=box, label="TPU-0-3"];
+            TPU02[shape=box, label="TPU-0-2"];
+            TPU01[shape=box, label="TPU-0-1"];
+            TPU00[shape=box, label="TPU-0-0"];
+          }
+        }
+      }
+    }
+  }
+
+  // Sequence
+  Router0 -> Router2 [style="invis"]
+  Router1 -> Router3 [style="invis"]
+}

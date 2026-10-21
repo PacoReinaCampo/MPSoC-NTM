@@ -1,6 +1,0 @@
-{reg: [
-  {bits: 8, name: 'strideX[7:0]'},
-  {bits: 8, name: 'strideY[7:0]'},
-  {bits: 8, name: 'strideZ[7:0]'},
-  {bits: 8, name: 'reserved'},
-]}

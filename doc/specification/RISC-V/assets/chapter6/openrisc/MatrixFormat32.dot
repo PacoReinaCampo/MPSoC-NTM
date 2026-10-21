@@ -1,0 +1,107 @@
+digraph MatrixFormat32 {
+    node [shape=plaintext fontname="Courier"];
+
+    InstructionTable [
+        label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+
+        <!-- HEADER -->
+        <TR>
+            <TD COLSPAN="33" BGCOLOR="#dddddd"><B>Instruction Formats (32 bits)</B></TD>
+        </TR>
+
+        <!-- BIT NUMBERS -->
+        <TR>
+            <TD BGCOLOR="#eeeeee">Type</TD>
+            <TD BGCOLOR="#eeeeee">31</TD>
+            <TD BGCOLOR="#eeeeee">30</TD>
+            <TD BGCOLOR="#eeeeee">29</TD>
+            <TD BGCOLOR="#eeeeee">28</TD>
+            <TD BGCOLOR="#eeeeee">27</TD>
+            <TD BGCOLOR="#eeeeee">26</TD>
+            <TD BGCOLOR="#eeeeee">25</TD>
+            <TD BGCOLOR="#eeeeee">24</TD>
+            <TD BGCOLOR="#eeeeee">23</TD>
+            <TD BGCOLOR="#eeeeee">22</TD>
+            <TD BGCOLOR="#eeeeee">21</TD>
+            <TD BGCOLOR="#eeeeee">20</TD>
+            <TD BGCOLOR="#eeeeee">19</TD>
+            <TD BGCOLOR="#eeeeee">18</TD>
+            <TD BGCOLOR="#eeeeee">17</TD>
+            <TD BGCOLOR="#eeeeee">16</TD>
+            <TD BGCOLOR="#eeeeee">15</TD>
+            <TD BGCOLOR="#eeeeee">14</TD>
+            <TD BGCOLOR="#eeeeee">13</TD>
+            <TD BGCOLOR="#eeeeee">12</TD>
+            <TD BGCOLOR="#eeeeee">11</TD>
+            <TD BGCOLOR="#eeeeee">10</TD>
+            <TD BGCOLOR="#eeeeee">09</TD>
+            <TD BGCOLOR="#eeeeee">08</TD>
+            <TD BGCOLOR="#eeeeee">07</TD>
+            <TD BGCOLOR="#eeeeee">06</TD>
+            <TD BGCOLOR="#eeeeee">05</TD>
+            <TD BGCOLOR="#eeeeee">04</TD>
+            <TD BGCOLOR="#eeeeee">03</TD>
+            <TD BGCOLOR="#eeeeee">02</TD>
+            <TD BGCOLOR="#eeeeee">01</TD>
+            <TD BGCOLOR="#eeeeee">00</TD>
+        </TR>
+
+        <!-- R TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">R</TD>
+            <TD COLSPAN="4"  BGCOLOR="#b3cde3">funct4</TD>
+            <TD COLSPAN="2"  BGCOLOR="#fed9a6">uop</TD>
+            <TD COLSPAN="3"  BGCOLOR="#fed9a6">imm3/ctrl</TD>
+            <TD COLSPAN="3"  BGCOLOR="#ccebc5">ms2</TD>
+            <TD COLSPAN="2"  BGCOLOR="#ccebc5">s_size</TD>
+            <TD COLSPAN="3"  BGCOLOR="#ccebc5">ms1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="2"  BGCOLOR="#ccebc5">d_size</TD>
+            <TD COLSPAN="3"  BGCOLOR="#ccebc5">md</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">major opcode</TD>
+        </TR>
+
+        <!-- I TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">R</TD>
+            <TD COLSPAN="4"  BGCOLOR="#b3cde3">funct4</TD>
+            <TD COLSPAN="2"  BGCOLOR="#fed9a6">uop</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">ctrl</TD>
+            <TD COLSPAN="3"  BGCOLOR="#ccebc5">ms2</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rd</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">major opcode</TD>
+        </TR>
+
+        <!-- S TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">R</TD>
+            <TD COLSPAN="4"  BGCOLOR="#b3cde3">funct4</TD>
+            <TD COLSPAN="2"  BGCOLOR="#fed9a6">uop</TD>
+            <TD COLSPAN="1"  BGCOLOR="#b3cde3">ctrl</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">rs1</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="2"  BGCOLOR="#ccebc5">d_size</TD>
+            <TD COLSPAN="3"  BGCOLOR="#ccebc5">md</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">major opcode</TD>
+        </TR>
+
+        <!-- B TYPE -->
+        <TR>
+            <TD COLSPAN="1"  BGCOLOR="#eeeeee">R</TD>
+            <TD COLSPAN="4"  BGCOLOR="#b3cde3">funct4</TD>
+            <TD COLSPAN="2"  BGCOLOR="#fed9a6">uop</TD>
+            <TD COLSPAN="1"  BGCOLOR="#b3cde3">ctrl</TD>
+            <TD COLSPAN="10" BGCOLOR="#fed9a6">imm10[9:0]</TD>
+            <TD COLSPAN="3"  BGCOLOR="#b3cde3">funct3</TD>
+            <TD COLSPAN="5"  BGCOLOR="#ccebc5">0</TD>
+            <TD COLSPAN="7"  BGCOLOR="#fbb4ae">major opcode</TD>
+        </TR>
+
+        </TABLE>
+        >
+    ];
+}

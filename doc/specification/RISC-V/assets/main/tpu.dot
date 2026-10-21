@@ -1,0 +1,61 @@
+digraph Project {
+  // Introduction
+  graph [splines=ortho];
+  node[shape=record];
+
+  // Blocks
+  subgraph "cluster TPU" { label = "TPU";
+    subgraph "cluster Technology" { label = "ASIC/FPGA";
+      subgraph "cluster MPSoC" { label = "MPSoC";
+        subgraph "cluster Unit3" { label = "Unit-3";
+          subgraph "cluster Control3" {label = "Control-3";
+            Control3[shape=box, label="Control-3"];
+          }
+          subgraph "cluster Arithmetic3" { label = "Arithmetic-3";
+            Division30[shape=box, label="Division-3-0"];
+            Multiplication31[shape=box, label="Multiplication-3-1"];
+            Subtraction32[shape=box, label="Subtraction-3-2"];
+            Addtion33[shape=box, label="Addtion-3-3"];
+          }
+        }
+        subgraph "cluster Unit2" { label = "Unit-2";
+          subgraph "cluster Control2" {label = "Control-2";
+            Control2[shape=box, label="Control-2"];
+          }
+          subgraph "cluster Arithmetic2" { label = "Arithmetic-2";
+            Division20[shape=box, label="Division-2-0"];
+            Multiplication21[shape=box, label="Multiplication-2-1"];
+            Subtraction22[shape=box, label="Subtraction-2-2"];
+            Addtion23[shape=box, label="Addtion-2-3"];
+          }
+        }
+        subgraph "cluster Unit1" { label = "Unit-1";
+          subgraph "cluster Control1" {label = "Control-1";
+            Control1[shape=box, label="Control-1"];
+          }
+          subgraph "cluster Arithmetic1" { label = "Arithmetic-1";
+            Division10[shape=box, label="Division-1-0"];
+            Multiplication11[shape=box, label="Multiplication-1-1"];
+            Subtraction12[shape=box, label="Subtraction-1-2"];
+            Addtion13[shape=box, label="Addtion-1-3"];
+          }
+        }
+        subgraph "cluster Unit0" { label = "Unit-0";
+          subgraph "cluster Control0" { label = "Control-0";
+            Control0[shape=box, label="Control-0"];
+          }
+          subgraph "cluster Arithmetic0" { label = "Arithmetic-0";
+            Division00[shape=box, label="Division-0-0"];
+            Multiplication01[shape=box, label="Multiplication-0-1"];
+            Subtraction02[shape=box, label="Subtraction-0-2"];
+            Addtion03[shape=box, label="Addtion-0-3"];
+          }
+        }
+      }
+    }
+  }
+
+  // Sequence
+  Control0 -> Control2 [style="invis"]
+  Control1 -> Control3 [style="invis"]
+}
