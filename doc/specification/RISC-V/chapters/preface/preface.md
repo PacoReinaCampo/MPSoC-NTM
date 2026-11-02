@@ -2,10 +2,10 @@
 
 The philosophy of open source, encompassing both software and hardware, stands as a beacon of collaborative innovation and transparency in the digital age. At its core, open source advocates for unrestricted access to source code and design schematics, empowering developers, engineers, and enthusiasts worldwide to study, modify, and distribute improvements freely. This ethos not only fosters a culture of shared knowledge and community-driven development but also democratizes technology by dismantling barriers to entry and promoting inclusivity. By embracing open source principles, individuals and organizations contribute to a dynamic ecosystem where creativity flourishes, standards evolve, and solutions emerge through collective ingenuity rather than proprietary constraints. This introduction sets the stage for exploring how open source philosophy transforms industries, empowers individuals, and shapes the future of technology.
 
-| `Philosophy Architecture` | `Harvard` | `von-Neumann`  |
-| ------------------------- | :-------- | :------------- |
-| `Open`                    | `RISC-V ` | `OpenRISC`     |
-| `Close`                   | `i4004`   | `MSP430`       |
+| **Philosophy Architecture** | **Harvard** | **Von-Neumann** |
+|:----------------------------|:------------|:----------------|
+| `Open`                      | `RISC-V`    | `OpenRISC`      |
+| `Close`                     | `i4004`     | `MSP430`        |
 
 :Philosophy Architecture
 
@@ -287,49 +287,49 @@ RISC-V 32 refers to the 32-bit base integer instruction set architecture (ISA) f
 
 `INSERT HERE`
 
-| `RV32I`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  -------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `LUI   RD, IMM`     | `IIIIIII`  | `IIIII`  | `IIIII`  | `III`   | `RD4:0`  | `0110111` |
-| `AUPIC RD, IMM`     | `IIIIIII`  | `IIIII`  | `IIIII`  | `III`   | `RD4:0`  | `0010111` |
-| `JAL   RD, IMM`     | `IIIIIII`  | `IIIII`  | `IIIII`  | `III`   | `RD4:0`  | `1101111` |
-| `JALR  RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `000`   | `RD4:0`  | `1101111` |
-| `BEQ   RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `000`   | `IIIII`  | `1100011` |
-| `BNE   RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `001`   | `IIIII`  | `1100011` |
-| `BLT   RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `100`   | `IIIII`  | `1100011` |
-| `BGE   RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `101`   | `IIIII`  | `1100011` |
-| `BLTU  RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `110`   | `IIIII`  | `1100011` |
-| `BGEU  RS1,RS2,IMM` | `IIIIIII`  | `RS24:0` | `RS14:0` | `111`   | `IIIII`  | `1100011` |
-| `LB    RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `000`   | `RD4:0`  | `0000011` |
-| `LH    RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `001`   | `RD4:0`  | `0000011` |
-| `LW    RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `010`   | `RD4:0`  | `0000011` |
-| `LBU   RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `100`   | `RD4:0`  | `0000011` |
-| `LHU   RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `101`   | `RD4:0`  | `0000011` |
-| `SB    RS2,RS1`     | `IIIIIII`  | `RS24:0` | `RS14:0` | `000`   | `IIIII`  | `0100011` |
-| `SH    RS2,RS1`     | `IIIIIII`  | `RS24:0` | `RS14:0` | `001`   | `IIIII`  | `0100011` |
-| `SW    RS2,RS1`     | `IIIIIII`  | `RS24:0` | `RS14:0` | `010`   | `IIIII`  | `0100011` |
-| `ADDI  RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `000`   | `RD4:0`  | `0010011` |
-| `SLTI  RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `010`   | `RD4:0`  | `0010011` |
-| `SLTIU RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `011`   | `RD4:0`  | `0010011` |
-| `XORI  RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `100`   | `RD4:0`  | `0010011` |
-| `ORI   RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `110`   | `RD4:0`  | `0010011` |
-| `ANDI  RD,RS1,IMM`  | `IIIIIII`  | `IIIII`  | `RS14:0` | `111`   | `RD4:0`  | `0010011` |
-| `SLLI  RD,RS1,IMM`  | `0000000`  | `IIII`   | `RS14:0` | `001`   | `RD4:0`  | `0010011` |
-| `SRLI  RD,RS1,IMM`  | `0000000`  | `IIII`   | `RS14:0` | `101`   | `RD4:0`  | `0010011` |
-| `SRAI  RD,RS1,IMM`  | `0100000`  | `IIII`   | `RS14:0` | `101`   | `RD4:0`  | `0010011` |
-| `ADD   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0110011` |
-| `SUB   RD,RS1,RS2`  | `0100000`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0110011` |
-| `SLL   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `001`   | `RD4:0`  | `0110011` |
-| `SLT   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0110011` |
-| `SLTU  RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0110011` |
-| `XOR   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `100`   | `RD4:0`  | `0110011` |
-| `SRL   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0110011` |
-| `SRA   RD,RS1,RS2`  | `0100000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0110011` |
-| `OR    RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `110`   | `RD4:0`  | `0110011` |
-| `AND   RD,RS1,RS2`  | `0000000`  | `RS24:0` | `RS14:0` | `111`   | `RD4:0`  | `0110011` |
-| `FENCE PRED,SUCC`   | `0000PPP`  | `PSSSS`  | `00000`  | `000`   | `00000`  | `0001111` |
-| `FENCE.I`           | `0000P00`  | `00000`  | `00000`  | `001`   | `00000`  | `0001111` |
-| `ECALL`             | `0000000`  | `00000`  | `00000`  | `000`   | `00000`  | `1110011` |
-| `EBREAK`            | `0000000`  | `00001`  | `00000`  | `000`   | `00000`  | `1110011` |
+| **Rv32I**           | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:--------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `LUI   RD, IMM`     | `IIIIIII` | `IIIII`   | `IIIII`   | `III`     | `RD4:0`  | `0110111` |
+| `AUPIC RD, IMM`     | `IIIIIII` | `IIIII`   | `IIIII`   | `III`     | `RD4:0`  | `0010111` |
+| `JAL   RD, IMM`     | `IIIIIII` | `IIIII`   | `IIIII`   | `III`     | `RD4:0`  | `1101111` |
+| `JALR  RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `000`     | `RD4:0`  | `1101111` |
+| `BEQ   RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `000`     | `IIIII`  | `1100011` |
+| `BNE   RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `001`     | `IIIII`  | `1100011` |
+| `BLT   RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `100`     | `IIIII`  | `1100011` |
+| `BGE   RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `101`     | `IIIII`  | `1100011` |
+| `BLTU  RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `110`     | `IIIII`  | `1100011` |
+| `BGEU  RS1,RS2,IMM` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `111`     | `IIIII`  | `1100011` |
+| `LB    RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `000`     | `RD4:0`  | `0000011` |
+| `LH    RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `001`     | `RD4:0`  | `0000011` |
+| `LW    RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `010`     | `RD4:0`  | `0000011` |
+| `LBU   RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `100`     | `RD4:0`  | `0000011` |
+| `LHU   RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `101`     | `RD4:0`  | `0000011` |
+| `SB    RS2,RS1`     | `IIIIIII` | `RS24:0`  | `RS14:0`  | `000`     | `IIIII`  | `0100011` |
+| `SH    RS2,RS1`     | `IIIIIII` | `RS24:0`  | `RS14:0`  | `001`     | `IIIII`  | `0100011` |
+| `SW    RS2,RS1`     | `IIIIIII` | `RS24:0`  | `RS14:0`  | `010`     | `IIIII`  | `0100011` |
+| `ADDI  RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `000`     | `RD4:0`  | `0010011` |
+| `SLTI  RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `010`     | `RD4:0`  | `0010011` |
+| `SLTIU RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `011`     | `RD4:0`  | `0010011` |
+| `XORI  RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `100`     | `RD4:0`  | `0010011` |
+| `ORI   RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `110`     | `RD4:0`  | `0010011` |
+| `ANDI  RD,RS1,IMM`  | `IIIIIII` | `IIIII`   | `RS14:0`  | `111`     | `RD4:0`  | `0010011` |
+| `SLLI  RD,RS1,IMM`  | `0000000` | `IIII`    | `RS14:0`  | `001`     | `RD4:0`  | `0010011` |
+| `SRLI  RD,RS1,IMM`  | `0000000` | `IIII`    | `RS14:0`  | `101`     | `RD4:0`  | `0010011` |
+| `SRAI  RD,RS1,IMM`  | `0100000` | `IIII`    | `RS14:0`  | `101`     | `RD4:0`  | `0010011` |
+| `ADD   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0110011` |
+| `SUB   RD,RS1,RS2`  | `0100000` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0110011` |
+| `SLL   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `001`     | `RD4:0`  | `0110011` |
+| `SLT   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0110011` |
+| `SLTU  RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0110011` |
+| `XOR   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `100`     | `RD4:0`  | `0110011` |
+| `SRL   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0110011` |
+| `SRA   RD,RS1,RS2`  | `0100000` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0110011` |
+| `OR    RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `110`     | `RD4:0`  | `0110011` |
+| `AND   RD,RS1,RS2`  | `0000000` | `RS24:0`  | `RS14:0`  | `111`     | `RD4:0`  | `0110011` |
+| `FENCE PRED,SUCC`   | `0000PPP` | `PSSSS`   | `00000`   | `000`     | `00000`  | `0001111` |
+| `FENCE.I`           | `0000P00` | `00000`   | `00000`   | `001`     | `00000`  | `0001111` |
+| `ECALL`             | `0000000` | `00000`   | `00000`   | `000`     | `00000`  | `1110011` |
+| `EBREAK`            | `0000000` | `00001`   | `00000`   | `000`     | `00000`  | `1110011` |
 
 :RV32I - Base Integer Instruction Set (32 bit)
 
@@ -345,23 +345,23 @@ RISC-V 64 is the 64-bit base integer instruction set architecture for RISC-V pro
 
 `INSERT HERE`
 
-| `RV64I`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  -------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `LWU   RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `110`   | `RD4:0`  | `0000011` |
-| `LD    RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `011`   | `RD4:0`  | `0000011` |
-| `SD    RD, RS1,RS2` | `IIIIIII`  | `RS24:0` | `RS14:0` | `011`   | `IIIII`  | `0000011` |
-| `SLLI  RD, RS1,IMM` | `0000000`  | `IIIII`  | `RS14:0` | `001`   | `RD4:0`  | `0010011` |
-| `SRLI  RD, RS1,IMM` | `0000000`  | `IIIII`  | `RS14:0` | `001`   | `RD4:0`  | `0010011` |
-| `SRAI  RD, RS1,IMM` | `0100000`  | `IIIII`  | `RS14:0` | `001`   | `RD4:0`  | `0010011` |
-| `ADDIW RD, RS1`     | `IIIIIII`  | `IIIII`  | `RS14:0` | `000`   | `RD4:0`  | `0011011` |
-| `SLLIW RD, RS1`     | `0000000`  | `IIIII`  | `RS14:0` | `001`   | `RD4:0`  | `0011011` |
-| `SRLIW RD, RS1`     | `0000000`  | `IIIII`  | `RS14:0` | `101`   | `RD4:0`  | `0011011` |
-| `SRAIW RD, RS1`     | `0100000`  | `IIIII`  | `RS14:0` | `101`   | `RD4:0`  | `0011011` |
-| `ADDW  RD, RS1,RS2` | `0000000`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0111011` |
-| `SUBW  RD, RS1,RS2` | `0100000`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0111011` |
-| `SLIW  RD, RS1,RS2` | `0000000`  | `RS24:0` | `RS14:0` | `001`   | `RD4:0`  | `0111011` |
-| `SRLW  RD, RS1,RS2` | `0000000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0111011` |
-| `SRAW  RD, RS1,RS2` | `0100000`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0111011` |
+| **Rv64I**           | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:--------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `LWU   RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `110`     | `RD4:0`  | `0000011` |
+| `LD    RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `011`     | `RD4:0`  | `0000011` |
+| `SD    RD, RS1,RS2` | `IIIIIII` | `RS24:0`  | `RS14:0`  | `011`     | `IIIII`  | `0000011` |
+| `SLLI  RD, RS1,IMM` | `0000000` | `IIIII`   | `RS14:0`  | `001`     | `RD4:0`  | `0010011` |
+| `SRLI  RD, RS1,IMM` | `0000000` | `IIIII`   | `RS14:0`  | `001`     | `RD4:0`  | `0010011` |
+| `SRAI  RD, RS1,IMM` | `0100000` | `IIIII`   | `RS14:0`  | `001`     | `RD4:0`  | `0010011` |
+| `ADDIW RD, RS1`     | `IIIIIII` | `IIIII`   | `RS14:0`  | `000`     | `RD4:0`  | `0011011` |
+| `SLLIW RD, RS1`     | `0000000` | `IIIII`   | `RS14:0`  | `001`     | `RD4:0`  | `0011011` |
+| `SRLIW RD, RS1`     | `0000000` | `IIIII`   | `RS14:0`  | `101`     | `RD4:0`  | `0011011` |
+| `SRAIW RD, RS1`     | `0100000` | `IIIII`   | `RS14:0`  | `101`     | `RD4:0`  | `0011011` |
+| `ADDW  RD, RS1,RS2` | `0000000` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0111011` |
+| `SUBW  RD, RS1,RS2` | `0100000` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0111011` |
+| `SLIW  RD, RS1,RS2` | `0000000` | `RS24:0`  | `RS14:0`  | `001`     | `RD4:0`  | `0111011` |
+| `SRLW  RD, RS1,RS2` | `0000000` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0111011` |
+| `SRAW  RD, RS1,RS2` | `0100000` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0111011` |
 
 :RV64I - Base Integer Instruction Set (64 bit)
 
@@ -387,16 +387,16 @@ The Standard Extension for Integer Multiply and Divide (M) adds support for inte
 
 `INSERT HERE`
 
-| `RV32M`             | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  -------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `MUL    RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0110011` |
-| `MULH   RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `001`   | `RD4:0`  | `0110011` |
-| `MULHSU RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0110011` |
-| `MULHU  RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0110011` |
-| `DIV    RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `100`   | `RD4:0`  | `0110011` |
-| `DIVU   RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0110011` |
-| `REM    RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `110`   | `RD4:0`  | `0110011` |
-| `REMU   RD,RS1,RS2` | `0000001`  | `RS24:0` | `RS14:0` | `111`   | `RD4:0`  | `0110011` |
+| **Rv32M**           | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:--------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `MUL    RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0110011` |
+| `MULH   RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `001`     | `RD4:0`  | `0110011` |
+| `MULHSU RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0110011` |
+| `MULHU  RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0110011` |
+| `DIV    RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `100`     | `RD4:0`  | `0110011` |
+| `DIVU   RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0110011` |
+| `REM    RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `110`     | `RD4:0`  | `0110011` |
+| `REMU   RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `111`     | `RD4:0`  | `0110011` |
 
 :RV32M - Standard Extension for Integer Multiply and Divide (32 bit)
 
@@ -404,13 +404,13 @@ The Standard Extension for Integer Multiply and Divide (M) adds support for inte
 
 **RV64M : Standard Extension for Integer Multiply and Divide (64 bit)**
 
-| `RV64M`              | `31:25`    | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  --------------------|  :------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `MULW  RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `000`   | `RD4:0`  | `0111011` |
-| `DIVW  RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `100`   | `RD4:0`  | `0111011` |
-| `DIVUW RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `101`   | `RD4:0`  | `0111011` |
-| `REMW  RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `110`   | `RD4:0`  | `0111011` |
-| `REMUW RD,RS1,RS2`   | `0000001`  | `RS24:0` | `RS14:0` | `111`   | `RD4:0`  | `0111011` |
+| **Rv64M**          | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:-------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `MULW  RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `000`     | `RD4:0`  | `0111011` |
+| `DIVW  RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `100`     | `RD4:0`  | `0111011` |
+| `DIVUW RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `101`     | `RD4:0`  | `0111011` |
+| `REMW  RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `110`     | `RD4:0`  | `0111011` |
+| `REMUW RD,RS1,RS2` | `0000001` | `RS24:0`  | `RS14:0`  | `111`     | `RD4:0`  | `0111011` |
 
 :RV64M - Standard Extension for Integer Multiply and Divide (64 bit)
 
@@ -426,19 +426,19 @@ The Standard Extension for Atomic Instructions (A) introduces atomic memory oper
 
 `INSERT HERE`
 
-| `RV32A`                     | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  ---------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `LR.W      AQRL,RD,RS1`     | `00010AQRL` | `00000`  | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `SC.W      AQRL,RD,RS2,RS1` | `00011AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOSWAP.W AQRL,RD,RS2,RS1` | `00001AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOSADD.W AQRL,RD,RS2,RS1` | `00000AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOSXOR.W AQRL,RD,RS2,RS1` | `00100AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOOR.W   AQRL,RD,RS2,RS1` | `01000AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOAMD.W  AQRL,RD,RS2,RS1` | `01100AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOMIN.W  AQRL,RD,RS2,RS1` | `10000AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOMAX.W  AQRL,RD,RS2,RS1` | `10100AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOMINU.W AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
-| `AMOMAXU.W AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0` | `RS14:0` | `010`   | `RD4:0`  | `0101111` |
+| **Rv32A**                   | **31:25**   | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:----------------------------|:------------|:----------|:----------|:----------|:---------|:----------|
+| `LR.W      AQRL,RD,RS1`     | `00010AQRL` | `00000`   | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `SC.W      AQRL,RD,RS2,RS1` | `00011AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOSWAP.W AQRL,RD,RS2,RS1` | `00001AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOSADD.W AQRL,RD,RS2,RS1` | `00000AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOSXOR.W AQRL,RD,RS2,RS1` | `00100AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOOR.W   AQRL,RD,RS2,RS1` | `01000AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOAMD.W  AQRL,RD,RS2,RS1` | `01100AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOMIN.W  AQRL,RD,RS2,RS1` | `10000AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOMAX.W  AQRL,RD,RS2,RS1` | `10100AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOMINU.W AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
+| `AMOMAXU.W AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0`  | `RS14:0`  | `010`     | `RD4:0`  | `0101111` |
 
 :RV32A - Standard Extension for Atomic Instructions (32 bit)
 
@@ -448,19 +448,19 @@ The Standard Extension for Atomic Instructions (A) introduces atomic memory oper
 
 `INSERT HERE`
 
-| `RV64A`                     | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  ---------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `LR.D AQRL,RD,RS1`          | `00010AQRL` | `00000`  | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `SC.D AQRL,RD,RS2,RS1`      | `00011AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOSWAP.D AQRL,RD,RS2,RS1` | `00001AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOSADD.D AQRL,RD,RS2,RS1` | `00000AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOSXOR.D AQRL,RD,RS2,RS1` | `00100AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOOR.D AQRL,RD,RS2,RS1`   | `01000AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOAMD.D AQRL,RD,RS2,RS1`  | `01100AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOMIN.D AQRL,RD,RS2,RS1`  | `10000AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOMAX.D AQRL,RD,RS2,RS1`  | `10100AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOMINU.D AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
-| `AMOMAXU.D AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0` | `RS14:0` | `011`   | `RD4:0`  | `0101111` |
+| **Rv64A**                   | **31:25**   | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:----------------------------|:------------|:----------|:----------|:----------|:---------|:----------|
+| `LR.D AQRL,RD,RS1`          | `00010AQRL` | `00000`   | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `SC.D AQRL,RD,RS2,RS1`      | `00011AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOSWAP.D AQRL,RD,RS2,RS1` | `00001AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOSADD.D AQRL,RD,RS2,RS1` | `00000AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOSXOR.D AQRL,RD,RS2,RS1` | `00100AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOOR.D AQRL,RD,RS2,RS1`   | `01000AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOAMD.D AQRL,RD,RS2,RS1`  | `01100AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOMIN.D AQRL,RD,RS2,RS1`  | `10000AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOMAX.D AQRL,RD,RS2,RS1`  | `10100AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOMINU.D AQRL,RD,RS2,RS1` | `11000AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
+| `AMOMAXU.D AQRL,RD,RS2,RS1` | `11100AQRL` | `RS24:0`  | `RS14:0`  | `011`     | `RD4:0`  | `0101111` |
 
 :RV64A - Standard Extension for Atomic Instructions (64 bit)
 
@@ -476,42 +476,42 @@ The Standard Extension for Single-Precision Floating-Point (F) adds support for 
 
 `INSERT HERE`
 
-| `RV32F`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `FLW FRD,RS1`                    | `IIIIIII`   | `IIIII`  | `FRS1`   | `010`   | `FRD`    | `0000111` |
-| `FSW FRS2,RS1`                   | `IIIIIII`   | `FRS2`   | `FRS1`   | `010`   | `IIIII`  | `0100111` |
-| `FMADD.S RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_00`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1000011` |
-| `FMSUB.S RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_00`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1000111` |
-| `FNMSUB.S RM,FRD,FRS1,FRS2,FRS3` | `FRS3_00`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1001011` |
-| `FNMADD.S RM,FRD,FRS1,FRS2,FRS3` | `FRS3_00`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1001111` |
-| `FADD.S RM,FRD,FRS1,FRS2,FRS3`   | `0000000`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FSUB.S RM,FRD,FRS1,FRS2,FRS3`   | `0000100`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FMUL.S RM,FRD,FRS1,FRS2,FRS3`   | `0001000`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FDIV.S RM,FRD,FRS1,FRS2,FRS3`   | `0001100`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FSGNJ.S FRD,FRS1,FRS2`          | `0010000`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FSGNJN.S FRD,FRS1,FRS2`         | `0010000`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FSGNJX.S FRD,FRS1,FRS2`         | `0010000`   | `FRS2`   | `FRS1`   | `010`   | `FRD`    | `1010011` |
-| `FMIN.S FRD,FRS1,FRS2`           | `0010100`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FMAX.S FRD,FRS1,FRS2`           | `0010100`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FSQRT.S FRD,FRS1,FRS2`          | `0101100`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FLE.S FRD,FRS1,FRS2`            | `1010000`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FLT.S FRD,FRS1,FRS2`            | `1010000`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FEQ.S FRD,FRS1,FRS2`            | `1010000`   | `FRS2`   | `FRS1`   | `010`   | `FRD`    | `1010011` |
-| `FCVT.W.S RM,RD,FRS1`            | `1100000`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.WU.S RM,RD,FRS1`           | `1100000`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.S.W RM,RD,FRS1`            | `1101000`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.S.WU RM,RD,FRS1`           | `1101000`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FMV.X.S RD,FRS1`                | `1110000`   | `00000`  | `FRS1`   | `000`   | `RD`     | `1010011` |
-| `FCLASS.S RD,FRS1`               | `1110000`   | `00000`  | `FRS1`   | `001`   | `RD`     | `1010011` |
-| `FMV.S.X RD,FRS1`                | `1111000`   | `00000`  | `RS1`    | `000`   | `FRD`    | `1010011` |
-| `FRCSR`                          | `0000000`   | `00011`  | `00000`  | `010`   | `RD`     | `1110011` |
-| `FRRM`                           | `0000000`   | `00010`  | `00000`  | `010`   | `RD`     | `1110011` |
-| `FRFLAGS`                        | `0000000`   | `00001`  | `00000`  | `010`   | `RD`     | `1110011` |
-| `FSCSR`                          | `0000000`   | `00011`  | `RS1`    | `001`   | `RD`     | `1110011` |
-| `FSRM`                           | `0000000`   | `00010`  | `RS1`    | `001`   | `RD`     | `1110011` |
-| `FSFLAGS`                        | `0000000`   | `00001`  | `RS1`    | `001`   | `RD`     | `1110011` |
-| `FSRMI`                          | `0000000`   | `00010`  | `00000`  | `101`   | `RD`     | `1110011` |
-| `FSFLAGSI`                       | `0000000`   | `00001`  | `00000`  | `101`   | `RD`     | `1110011` |
+| **Rv32F**                        | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:---------------------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `FLW FRD,RS1`                    | `IIIIIII` | `IIIII`   | `FRS1`    | `010`     | `FRD`    | `0000111` |
+| `FSW FRS2,RS1`                   | `IIIIIII` | `FRS2`    | `FRS1`    | `010`     | `IIIII`  | `0100111` |
+| `FMADD.S RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_00` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1000011` |
+| `FMSUB.S RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_00` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1000111` |
+| `FNMSUB.S RM,FRD,FRS1,FRS2,FRS3` | `FRS3_00` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1001011` |
+| `FNMADD.S RM,FRD,FRS1,FRS2,FRS3` | `FRS3_00` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1001111` |
+| `FADD.S RM,FRD,FRS1,FRS2,FRS3`   | `0000000` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FSUB.S RM,FRD,FRS1,FRS2,FRS3`   | `0000100` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FMUL.S RM,FRD,FRS1,FRS2,FRS3`   | `0001000` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FDIV.S RM,FRD,FRS1,FRS2,FRS3`   | `0001100` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FSGNJ.S FRD,FRS1,FRS2`          | `0010000` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FSGNJN.S FRD,FRS1,FRS2`         | `0010000` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FSGNJX.S FRD,FRS1,FRS2`         | `0010000` | `FRS2`    | `FRS1`    | `010`     | `FRD`    | `1010011` |
+| `FMIN.S FRD,FRS1,FRS2`           | `0010100` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FMAX.S FRD,FRS1,FRS2`           | `0010100` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FSQRT.S FRD,FRS1,FRS2`          | `0101100` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FLE.S FRD,FRS1,FRS2`            | `1010000` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FLT.S FRD,FRS1,FRS2`            | `1010000` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FEQ.S FRD,FRS1,FRS2`            | `1010000` | `FRS2`    | `FRS1`    | `010`     | `FRD`    | `1010011` |
+| `FCVT.W.S RM,RD,FRS1`            | `1100000` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.WU.S RM,RD,FRS1`           | `1100000` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.S.W RM,RD,FRS1`            | `1101000` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.S.WU RM,RD,FRS1`           | `1101000` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FMV.X.S RD,FRS1`                | `1110000` | `00000`   | `FRS1`    | `000`     | `RD`     | `1010011` |
+| `FCLASS.S RD,FRS1`               | `1110000` | `00000`   | `FRS1`    | `001`     | `RD`     | `1010011` |
+| `FMV.S.X RD,FRS1`                | `1111000` | `00000`   | `RS1`     | `000`     | `FRD`    | `1010011` |
+| `FRCSR`                          | `0000000` | `00011`   | `00000`   | `010`     | `RD`     | `1110011` |
+| `FRRM`                           | `0000000` | `00010`   | `00000`   | `010`     | `RD`     | `1110011` |
+| `FRFLAGS`                        | `0000000` | `00001`   | `00000`   | `010`     | `RD`     | `1110011` |
+| `FSCSR`                          | `0000000` | `00011`   | `RS1`     | `001`     | `RD`     | `1110011` |
+| `FSRM`                           | `0000000` | `00010`   | `RS1`     | `001`     | `RD`     | `1110011` |
+| `FSFLAGS`                        | `0000000` | `00001`   | `RS1`     | `001`     | `RD`     | `1110011` |
+| `FSRMI`                          | `0000000` | `00010`   | `00000`   | `101`     | `RD`     | `1110011` |
+| `FSFLAGSI`                       | `0000000` | `00001`   | `00000`   | `101`     | `RD`     | `1110011` |
 
 :RV32F - Standard Extension for Single-Precision Floating-Point (32 bit)
 
@@ -521,12 +521,12 @@ The Standard Extension for Single-Precision Floating-Point (F) adds support for 
 
 `INSERT HERE`
 
-| `RV64F`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `FCVT.L.S RM,RD,FRS1`            | `1100000`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.LU.S RM,RD,FRS1`           | `1100000`   | `00011`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.S.L RM,RD,FRS1`            | `1101000`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.S.LU RM,RD,FRS1`           | `1101000`   | `00011`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
+| **Rv64F**              | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:-----------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `FCVT.L.S RM,RD,FRS1`  | `1100000` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.LU.S RM,RD,FRS1` | `1100000` | `00011`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.S.L RM,RD,FRS1`  | `1101000` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.S.LU RM,RD,FRS1` | `1101000` | `00011`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
 
 :RV64F - Standard Extension for Single-Precision Floating-Point (64 bit)
 
@@ -542,36 +542,36 @@ The Standard Extension for Double-Precision Floating-Point (D) extends the RISC-
 
 `INSERT HERE`
 
-| `RV32D`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `FLW FRD,RS1`                    | `IIIIIII`   | `IIIII`  | `FRS1`   | `011`   | `FRD`    | `0000111` |
-| `FSW FRS2,RS1`                   | `IIIIIII`   | `FRS2`   | `FRS1`   | `011`   | `IIIII`  | `0100111` |
-| `FMADD.D RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_01`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1000011` |
-| `FMSUB.D RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_01`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1000111` |
-| `FNMSUB.D RM,FRD,FRS1,FRS2,FRS3` | `FRS3_01`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1001011` |
-| `FNMADD.D RM,FRD,FRS1,FRS2,FRS3` | `FRS3_01`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1001111` |
-| `FADD.D RM,FRD,FRS1,FRS2,FRS3`   | `0000001`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FSUB.D RM,FRD,FRS1,FRS2,FRS3`   | `0000101`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FMUL.D RM,FRD,FRS1,FRS2,FRS3`   | `0001001`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FDIV.D RM,FRD,FRS1,FRS2,FRS3`   | `0001101`   | `FRS2`   | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FSGNJ.D FRD,FRS1,FRS2`          | `0010001`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FSGNJN.D FRD,FRS1,FRS2`         | `0010001`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FSGNJX.D FRD,FRS1,FRS2`         | `0010001`   | `FRS2`   | `FRS1`   | `010`   | `FRD`    | `1010011` |
-| `FMIN.D FRD,FRS1,FRS2`           | `0010101`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FMAX.D FRD,FRS1,FRS2`           | `0010101`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FSQRT.D FRD,FRS1,FRS2`          | `0101101`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FLE.D FRD,FRS1,FRS2`            | `1010001`   | `FRS2`   | `FRS1`   | `000`   | `FRD`    | `1010011` |
-| `FLT.D FRD,FRS1,FRS2`            | `1010001`   | `FRS2`   | `FRS1`   | `001`   | `FRD`    | `1010011` |
-| `FEQ.D FRD,FRS1,FRS2`            | `1010001`   | `FRS2`   | `FRS1`   | `010`   | `FRD`    | `1010011` |
-| `FCVT.W.D RM,RD,FRS1`            | `1100001`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.WU.D RM,RD,FRS1`           | `1100001`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.D.W RM,RD,FRS1`            | `1101001`   | `00000`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.D.WU RM,RD,FRS1`           | `1101001`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCLASS.D RD,FRS1`               | `1110001`   | `00000`  | `FRS1`   | `001`   | `RD`     | `1010011` |
-| `FCVT.W.D`                       | `1100001`   | `00000`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
-| `FCVT.WU.D`                      | `1100001`   | `00001`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
-| `FCVT.D.W`                       | `1101001`   | `00000`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
-| `FCVT.D.WU`                      | `1101001`   | `00001`  | `FRS1`   | `RM`    | `RD`     | `1010011` |
+| **Rv32D**                        | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:---------------------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `FLW FRD,RS1`                    | `IIIIIII` | `IIIII`   | `FRS1`    | `011`     | `FRD`    | `0000111` |
+| `FSW FRS2,RS1`                   | `IIIIIII` | `FRS2`    | `FRS1`    | `011`     | `IIIII`  | `0100111` |
+| `FMADD.D RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_01` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1000011` |
+| `FMSUB.D RM,FRD,FRS1,FRS2,FRS3`  | `FRS3_01` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1000111` |
+| `FNMSUB.D RM,FRD,FRS1,FRS2,FRS3` | `FRS3_01` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1001011` |
+| `FNMADD.D RM,FRD,FRS1,FRS2,FRS3` | `FRS3_01` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1001111` |
+| `FADD.D RM,FRD,FRS1,FRS2,FRS3`   | `0000001` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FSUB.D RM,FRD,FRS1,FRS2,FRS3`   | `0000101` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FMUL.D RM,FRD,FRS1,FRS2,FRS3`   | `0001001` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FDIV.D RM,FRD,FRS1,FRS2,FRS3`   | `0001101` | `FRS2`    | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FSGNJ.D FRD,FRS1,FRS2`          | `0010001` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FSGNJN.D FRD,FRS1,FRS2`         | `0010001` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FSGNJX.D FRD,FRS1,FRS2`         | `0010001` | `FRS2`    | `FRS1`    | `010`     | `FRD`    | `1010011` |
+| `FMIN.D FRD,FRS1,FRS2`           | `0010101` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FMAX.D FRD,FRS1,FRS2`           | `0010101` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FSQRT.D FRD,FRS1,FRS2`          | `0101101` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FLE.D FRD,FRS1,FRS2`            | `1010001` | `FRS2`    | `FRS1`    | `000`     | `FRD`    | `1010011` |
+| `FLT.D FRD,FRS1,FRS2`            | `1010001` | `FRS2`    | `FRS1`    | `001`     | `FRD`    | `1010011` |
+| `FEQ.D FRD,FRS1,FRS2`            | `1010001` | `FRS2`    | `FRS1`    | `010`     | `FRD`    | `1010011` |
+| `FCVT.W.D RM,RD,FRS1`            | `1100001` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.WU.D RM,RD,FRS1`           | `1100001` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.D.W RM,RD,FRS1`            | `1101001` | `00000`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.D.WU RM,RD,FRS1`           | `1101001` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCLASS.D RD,FRS1`               | `1110001` | `00000`   | `FRS1`    | `001`     | `RD`     | `1010011` |
+| `FCVT.W.D`                       | `1100001` | `00000`   | `FRS1`    | `RM`      | `RD`     | `1010011` |
+| `FCVT.WU.D`                      | `1100001` | `00001`   | `FRS1`    | `RM`      | `RD`     | `1010011` |
+| `FCVT.D.W`                       | `1101001` | `00000`   | `FRS1`    | `RM`      | `RD`     | `1010011` |
+| `FCVT.D.WU`                      | `1101001` | `00001`   | `FRS1`    | `RM`      | `RD`     | `1010011` |
 
 :RV32D - Standard Extension for Double-Precision Floating-Point (32 bit)
 
@@ -581,14 +581,14 @@ The Standard Extension for Double-Precision Floating-Point (D) extends the RISC-
 
 `INSERT HERE`
 
-| `RV64D`                          | `31:25`     | `24:20`  | `19:15`  | `14:12` | `11:7`   | `6:0`     |
-|  --------------------------------|  :-------:  |  :----:  |  :----:  |  :---:  |  :----:  |  :------: |
-| `FCVT.L.D RM,RD,FRS1`            | `1100001`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.LU.D RM,RD,FRS1`           | `1100001`   | `00011`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.D.L RM,RD,FRS1`            | `1101001`   | `00010`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FCVT.D.LU RM,RD,FRS1`           | `1101001`   | `00011`  | `FRS1`   | `RM`    | `FRD`    | `1010011` |
-| `FMV.X.D RD,FRS1`                | `1110001`   | `00000`  | `FRS1`   | `000`   | `RD`     | `1010011` |
-| `FMV.D.X RD,FRS1`                | `1111001`   | `00000`  | `RS1`    | `000`   | `FRD`    | `1010011` |
+| **Rv64D**              | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** | **6:0**   |
+|:-----------------------|:----------|:----------|:----------|:----------|:---------|:----------|
+| `FCVT.L.D RM,RD,FRS1`  | `1100001` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.LU.D RM,RD,FRS1` | `1100001` | `00011`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.D.L RM,RD,FRS1`  | `1101001` | `00010`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FCVT.D.LU RM,RD,FRS1` | `1101001` | `00011`   | `FRS1`    | `RM`      | `FRD`    | `1010011` |
+| `FMV.X.D RD,FRS1`      | `1110001` | `00000`   | `FRS1`    | `000`     | `RD`     | `1010011` |
+| `FMV.D.X RD,FRS1`      | `1111001` | `00000`   | `RS1`     | `000`     | `FRD`    | `1010011` |
 
 :RV64D - Standard Extension for Double-Precision Floating-Point (64 bit)
 

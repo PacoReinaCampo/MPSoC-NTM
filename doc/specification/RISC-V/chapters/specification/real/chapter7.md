@@ -38,23 +38,23 @@
 
 * **New Specific Registers**
 
-  | **Register**       | **Type** | **Name**      | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                        |
-  |:-------------------|:---------|:--------------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | Vector Registers   | `Vector` | `v0` to `v31` | 32           | Architectural registers used to hold vector elements. Each vector register has a fixed size of `VLEN` bits of state. They can be grouped together using the `LMUL` (Vector Register Group Multiplier) setting to operate on wider data types or longer vectors. Vector mask registers are also held in a single vector register, typically using `v0`. |
-  | Vector Length      | `CSR`    | `vl`          | 1            | Holds an unsigned integer specifying the number of elements to be updated with results from a vector instruction. It is updated via the `vset{i}vl{i}` configuration instructions.                                                                                                                                                                     |
-  | Vector Data Type   | `CSR`    | `vtype`       | 1            | A read-only register that provides the default data type used to interpret the contents of the vector registers. It includes settings for the selected element width (`vsew`), register group multiplier (`vlmul`), tail agnostic policy (`vta`), and mask agnostic policy (`vma`).                                                                    |
-  | Vector Byte Length | `CSR`    | `vlenb`       | 1            | Exposes the hardware constant value `VLEN / 8` (the vector register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.                                                                                                                                                           |
-  | Vector Start Index | `CSR`    | `vstart`      | 1            | Specifies the index of the first element to be executed by a vector instruction. It is primarily written by the hardware when taking a trap on a vector instruction to allow resumption after the trap is handled.                                                                                                                                     |
-  | Control and Status | `CSR`    | `vcsr`        | 1            | The vector control and status register, which groups the fixed-point rounding mode (`vxrm`) and saturation flag (`vxsat`) fields.                                                                                                                                                                                                                      |
-  | Rounding Mode      | `CSR`    | `vxrm`        | 1            | Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).                                                                                                                                                                           |
-  | Saturation Flag    | `CSR`    | `vxsat`       | 1            | A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.                                                                                                                                                                                      |
+  | **Register**         | **Type** | **Name**        | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                            |
+  |:---------------------|:---------|:----------------|:-------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `Vector Registers`   | `Vector` | ``v0` to `v31`` | `32`         | ``Architectural registers used to hold vector elements. Each vector register has a fixed size of `VLEN` bits of state. They can be grouped together using the `LMUL` (Vector Register Group Multiplier) setting to operate on wider data types or longer vectors. Vector mask registers are also held in a single vector register, typically using `v0`.`` |
+  | `Vector Length`      | `CSR`    | `vl`            | `1`          | ``Holds an unsigned integer specifying the number of elements to be updated with results from a vector instruction. It is updated via the `vset{i}vl{i}` configuration instructions.``                                                                                                                                                                     |
+  | `Vector Data Type`   | `CSR`    | `vtype`         | `1`          | ``A read-only register that provides the default data type used to interpret the contents of the vector registers. It includes settings for the selected element width (`vsew`), register group multiplier (`vlmul`), tail agnostic policy (`vta`), and mask agnostic policy (`vma`).``                                                                    |
+  | `Vector Byte Length` | `CSR`    | `vlenb`         | `1`          | ``Exposes the hardware constant value `VLEN / 8` (the vector register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.``                                                                                                                                                           |
+  | `Vector Start Index` | `CSR`    | `vstart`        | `1`          | `Specifies the index of the first element to be executed by a vector instruction. It is primarily written by the hardware when taking a trap on a vector instruction to allow resumption after the trap is handled.`                                                                                                                                       |
+  | `Control and Status` | `CSR`    | `vcsr`          | `1`          | ``The vector control and status register, which groups the fixed-point rounding mode (`vxrm`) and saturation flag (`vxsat`) fields.``                                                                                                                                                                                                                      |
+  | `Rounding Mode`      | `CSR`    | `vxrm`          | `1`          | `Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).`                                                                                                                                                                             |
+  | `Saturation Flag`    | `CSR`    | `vxsat`         | `1`          | `A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.`                                                                                                                                                                                        |
 
   : Vector Register Type
 
 * **Vector GPR Registers**
 
   | **Name** | **Alias** | **Type** | **Save** | **Description**                 |
-  |----------|:----------|:---------|:---------|:--------------------------------|
+  |:---------|:----------|:---------|:---------|:--------------------------------|
   | `v0`     | `vt0`     | `vreg`   | `caller` | `Vector temporaries Caller`     |
   | `v1`     | `vt1`     | `vreg`   | `caller` | `Vector temporaries Caller`     |
   | `v2`     | `vt2`     | `vreg`   | `caller` | `Vector temporaries Caller`     |
@@ -92,65 +92,65 @@
 
 * **Vector CSR Registers**
 
-  | **Address** | **Privilege** | **Name** | **Description**                          |
-  |-------------|---------------|----------|------------------------------------------|
-  | `0x008`     | `URW`         | `vstart` | Vector start position                    |
-  | `0x009`     | `URW`         | `vxsat`  | Fixed-Point Saturate Flag                |
-  | `0x00A`     | `URW`         | `vxrm`   | Fixed-Point Rounding Mode                |
-  | `0x00F`     | `URW`         | `vcsr`   | Vector control and status register       |
-  | `0xC20`     | `URO`         | `vl`     | Vector length                            |
-  | `0xC21`     | `URO`         | `vtype`  | Vector data type register                |
-  | `0xC22`     | `URO`         | `vlenb`  | VLEN/8 (vector register length in bytes) |
+  | **Address** | **Privilege** | **Name** | **Description**                            |
+  |:------------|:--------------|:---------|:-------------------------------------------|
+  | `0x008`     | `URW`         | `vstart` | `Vector start position`                    |
+  | `0x009`     | `URW`         | `vxsat`  | `Fixed-Point Saturate Flag`                |
+  | `0x00A`     | `URW`         | `vxrm`   | `Fixed-Point Rounding Mode`                |
+  | `0x00F`     | `URW`         | `vcsr`   | `Vector control and status register`       |
+  | `0xC20`     | `URO`         | `vl`     | `Vector length`                            |
+  | `0xC21`     | `URO`         | `vtype`  | `Vector data type register`                |
+  | `0xC22`     | `URO`         | `vlenb`  | `VLEN/8 (vector register length in bytes)` |
 
   : New Vector CSRs
 
 * **Configuration-Setting**
 
-  | **Bits**   | **Name**     | **Description**                                 |
-  |------------|--------------|-------------------------------------------------|
-  | `XLEN-1`   | `vill`       | Illegal value if set                            |
-  | `XLEN-2:8` | `0`          | Reserved if non-zero                            |
-  | `7`        | `vma`        | Vector mask agnostic                            |
-  | `6`        | `vta`        | Vector tail agnostic                            |
-  | `5:3`      | `vsew[2:0]`  | Selected element width (SEW) setting            |
-  | `2:0`      | `vlmul[2:0]` | Vector register group multiplier (LMUL) setting |
+  | **Bits**   | **Name**     | **Description**                                   |
+  |:-----------|:-------------|:--------------------------------------------------|
+  | `XLEN-1`   | `vill`       | `Illegal value if set`                            |
+  | `XLEN-2:8` | `0`          | `Reserved if non-zero`                            |
+  | `7`        | `vma`        | `Vector mask agnostic`                            |
+  | `6`        | `vta`        | `Vector tail agnostic`                            |
+  | `5:3`      | `vsew[2:0]`  | `Selected element width (SEW) setting`            |
+  | `2:0`      | `vlmul[2:0]` | `Vector register group multiplier (LMUL) setting` |
 
   : `vtype` Register Layout
 
 * **Vector Loads and Stores**
 
-  | **Field**    | **Description**                                                                   |
-  |--------------|-----------------------------------------------------------------------------------|
-  | `rs1[4:0]`   | specifies `x` register holding base address                                       |
-  | `rs2[4:0]`   | specifies `x` register holding stride                                             |
-  | `vs2[4:0]`   | specifies `v` register holding address offsets                                    |
-  | `vs3[4:0]`   | specifies `v` register holding store data                                         |
-  | `vd[4:0]`    | specifies `v` register destination of load                                        |
-  | `vm`         | specifies whether vector masking is enabled (0 = mask enabled, 1 = mask disabled) |
-  | `width[2:0]` | specifies size of memory elements, and distinguishes from FP scalar               |
-  | `mew`        | extended memory element width. See Vector Load/Store Width Encoding               |
-  | `mop[1:0]`   | specifies memory addressing mode                                                  |
-  | `nf[2:0]`    | specifies the number of fields in each segment, for segment load/stores           |
-  | `lumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
-  | `sumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
+  | **Field**    | **Description**                                                                     |
+  |:-------------|:------------------------------------------------------------------------------------|
+  | `rs1[4:0]`   | ``specifies `x` register holding base address``                                     |
+  | `rs2[4:0]`   | ``specifies `x` register holding stride``                                           |
+  | `vs2[4:0]`   | ``specifies `v` register holding address offsets``                                  |
+  | `vs3[4:0]`   | ``specifies `v` register holding store data``                                       |
+  | `vd[4:0]`    | ``specifies `v` register destination of load``                                      |
+  | `vm`         | `specifies whether vector masking is enabled (0 = mask enabled, 1 = mask disabled)` |
+  | `width[2:0]` | `specifies size of memory elements, and distinguishes from FP scalar`               |
+  | `mew`        | `extended memory element width. See Vector Load/Store Width Encoding`               |
+  | `mop[1:0]`   | `specifies memory addressing mode`                                                  |
+  | `nf[2:0]`    | `specifies the number of fields in each segment, for segment load/stores`           |
+  | `lumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
+  | `sumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
 
   : Vector Field Descriptions
 
-  | **Type**           | **mew** | **width `[2:0]`** | **Memory Bits** | **Data Register Bits** | **Index Bits** | **Opcodes**       |
-  |--------------------|---------|-------------------|-----------------|------------------------|----------------|-------------------|
-  | Standard scalar FP | `x`     | `001`             | `16`            | `FLEN`                 | `-`            | `FLH/FSH`         |
-  | Standard scalar FP | `x`     | `010`             | `32`            | `FLEN`                 | `-`            | `FLW/FSW`         |
-  | Standard scalar FP | `x`     | `011`             | `64`            | `FLEN`                 | `-`            | `FLD/FSD`         |
-  | Standard scalar FP | `x`     | `100`             | `128`           | `FLEN`                 | `-`            | `FLQ/FSQ`         |
-  | Vector 08b element | `0`     | `000`             | `8`             | `8`                    | `-`            | `VLxE8/VSxE8`     |
-  | Vector 16b element | `0`     | `101`             | `16`            | `16`                   | `-`            | `VLxE16/VSxE16`   |
-  | Vector 32b element | `0`     | `110`             | `32`            | `32`                   | `-`            | `VLxE32/VSxE32`   |
-  | Vector 64b element | `0`     | `111`             | `64`            | `64`                   | `-`            | `VLxE64/VSxE64`   |
-  | Vector 08b index   | `0`     | `000`             | `SEW`           | `SEW`                  | `8`            | `VLxEI8/VSxEI8`   |
-  | Vector 16b index   | `0`     | `101`             | `SEW`           | `SEW`                  | `16`           | `VLxEI16/VSxEI16` |
-  | Vector 32b index   | `0`     | `110`             | `SEW`           | `SEW`                  | `32`           | `VLxEI32/VSxEI32` |
-  | Vector 64b index   | `0`     | `111`             | `SEW`           | `SEW`                  | `64`           | `VLxEI64/VSxEI64` |
-  | Reserved           | `1`     | `XXX`             | `-`             | `-`                    | `-`            | `-`               |
+  | **Type**             | **Mew** | **Width `[2:0]`** | **Memory Bits** | **Data Register Bits** | **Index Bits** | **Opcodes**       |
+  |:---------------------|:--------|:------------------|:----------------|:-----------------------|:---------------|:------------------|
+  | `Standard scalar FP` | `x`     | `001`             | `16`            | `FLEN`                 | `-`            | `FLH/FSH`         |
+  | `Standard scalar FP` | `x`     | `010`             | `32`            | `FLEN`                 | `-`            | `FLW/FSW`         |
+  | `Standard scalar FP` | `x`     | `011`             | `64`            | `FLEN`                 | `-`            | `FLD/FSD`         |
+  | `Standard scalar FP` | `x`     | `100`             | `128`           | `FLEN`                 | `-`            | `FLQ/FSQ`         |
+  | `Vector 08b element` | `0`     | `000`             | `8`             | `8`                    | `-`            | `VLxE8/VSxE8`     |
+  | `Vector 16b element` | `0`     | `101`             | `16`            | `16`                   | `-`            | `VLxE16/VSxE16`   |
+  | `Vector 32b element` | `0`     | `110`             | `32`            | `32`                   | `-`            | `VLxE32/VSxE32`   |
+  | `Vector 64b element` | `0`     | `111`             | `64`            | `64`                   | `-`            | `VLxE64/VSxE64`   |
+  | `Vector 08b index`   | `0`     | `000`             | `SEW`           | `SEW`                  | `8`            | `VLxEI8/VSxEI8`   |
+  | `Vector 16b index`   | `0`     | `101`             | `SEW`           | `SEW`                  | `16`           | `VLxEI16/VSxEI16` |
+  | `Vector 32b index`   | `0`     | `110`             | `SEW`           | `SEW`                  | `32`           | `VLxEI32/VSxEI32` |
+  | `Vector 64b index`   | `0`     | `111`             | `SEW`           | `SEW`                  | `64`           | `VLxEI64/VSxEI64` |
+  | `Reserved`           | `1`     | `XXX`             | `-`             | `-`                    | `-`            | `-`               |
 
   : Width Encoding for Vector Loads and Stores
 
@@ -158,23 +158,23 @@
 
 * **New Specific Registers**
 
-  | **Register**       | **Type** | **Name**      | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                        |
-  |:-------------------|:---------|:--------------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | Matrix Registers   | `Matrix` | `w0` to `w31` | 32           | Architectural registers used to hold matrix elements. Each matrix register has a fixed size of `WLEN` bits of state. They can be grouped together using the `LMUL` (Matrix Register Group Multiplier) setting to operate on wider data types or longer matrixs. Matrix mask registers are also held in a single matrix register, typically using `w0`. |
-  | Matrix Length      | `CSR`    | `wl`          | 1            | Holds an unsigned integer specifying the number of elements to be updated with results from a matrix instruction. It is updated via the `wset{i}vl{i}` configuration instructions.                                                                                                                                                                     |
-  | Matrix Data Type   | `CSR`    | `wtype`       | 1            | A read-only register that provides the default data type used to interpret the contents of the matrix registers. It includes settings for the selected element width (`wsew`), register group multiplier (`wlmul`), tail agnostic policy (`wta`), and mask agnostic policy (`wma`).                                                                    |
-  | Matrix Byte Length | `CSR`    | `wlenb`       | 1            | Exposes the hardware constant value `WLEN / 8` (the matrix register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.                                                                                                                                                           |
-  | Matrix Start Index | `CSR`    | `wstart`      | 1            | Specifies the index of the first element to be executed by a matrix instruction. It is primarily written by the hardware when taking a trap on a matrix instruction to allow resumption after the trap is handled.                                                                                                                                     |
-  | Control and Status | `CSR`    | `wcsr`        | 1            | The matrix control and status register, which groups the fixed-point rounding mode (`wxrm`) and saturation flag (`wxsat`) fields.                                                                                                                                                                                                                      |
-  | Rounding Mode      | `CSR`    | `wxrm`        | 1            | Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).                                                                                                                                                                           |
-  | Saturation Flag    | `CSR`    | `wxsat`       | 1            | A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.                                                                                                                                                                                      |
+  | **Register**         | **Type** | **Name**        | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                            |
+  |:---------------------|:---------|:----------------|:-------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `Matrix Registers`   | `Matrix` | ``w0` to `w31`` | `32`         | ``Architectural registers used to hold matrix elements. Each matrix register has a fixed size of `WLEN` bits of state. They can be grouped together using the `LMUL` (Matrix Register Group Multiplier) setting to operate on wider data types or longer matrixs. Matrix mask registers are also held in a single matrix register, typically using `w0`.`` |
+  | `Matrix Length`      | `CSR`    | `wl`            | `1`          | ``Holds an unsigned integer specifying the number of elements to be updated with results from a matrix instruction. It is updated via the `wset{i}vl{i}` configuration instructions.``                                                                                                                                                                     |
+  | `Matrix Data Type`   | `CSR`    | `wtype`         | `1`          | ``A read-only register that provides the default data type used to interpret the contents of the matrix registers. It includes settings for the selected element width (`wsew`), register group multiplier (`wlmul`), tail agnostic policy (`wta`), and mask agnostic policy (`wma`).``                                                                    |
+  | `Matrix Byte Length` | `CSR`    | `wlenb`         | `1`          | ``Exposes the hardware constant value `WLEN / 8` (the matrix register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.``                                                                                                                                                           |
+  | `Matrix Start Index` | `CSR`    | `wstart`        | `1`          | `Specifies the index of the first element to be executed by a matrix instruction. It is primarily written by the hardware when taking a trap on a matrix instruction to allow resumption after the trap is handled.`                                                                                                                                       |
+  | `Control and Status` | `CSR`    | `wcsr`          | `1`          | ``The matrix control and status register, which groups the fixed-point rounding mode (`wxrm`) and saturation flag (`wxsat`) fields.``                                                                                                                                                                                                                      |
+  | `Rounding Mode`      | `CSR`    | `wxrm`          | `1`          | `Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).`                                                                                                                                                                             |
+  | `Saturation Flag`    | `CSR`    | `wxsat`         | `1`          | `A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.`                                                                                                                                                                                        |
 
   : Matrix Register Type
 
 * **Matrix GPR Registers**
 
   | **Name** | **Alias** | **Type** | **Save** | **Description**                 |
-  |----------|:----------|:---------|:---------|:--------------------------------|
+  |:---------|:----------|:---------|:---------|:--------------------------------|
   | `w0`     | `wt0`     | `wreg`   | `caller` | `Matrix temporaries Caller`     |
   | `w1`     | `wt1`     | `wreg`   | `caller` | `Matrix temporaries Caller`     |
   | `w2`     | `wt2`     | `wreg`   | `caller` | `Matrix temporaries Caller`     |
@@ -212,65 +212,65 @@
 
 * **Matrix CSR Registers**
 
-  | **Address** | **Privilege** | **Name** | **Description**                          |
-  |-------------|---------------|----------|------------------------------------------|
-  | `0x008`     | `URW`         | `wstart` | Matrix start position                    |
-  | `0x009`     | `URW`         | `wxsat`  | Fixed-Point Saturate Flag                |
-  | `0x00A`     | `URW`         | `wxrm`   | Fixed-Point Rounding Mode                |
-  | `0x00F`     | `URW`         | `wcsr`   | Matrix control and status register       |
-  | `0xC20`     | `URO`         | `wl`     | Matrix length                            |
-  | `0xC21`     | `URO`         | `wtype`  | Matrix data type register                |
-  | `0xC22`     | `URO`         | `wlenb`  | WLEN/8 (matrix register length in bytes) |
+  | **Address** | **Privilege** | **Name** | **Description**                            |
+  |:------------|:--------------|:---------|:-------------------------------------------|
+  | `0x008`     | `URW`         | `wstart` | `Matrix start position`                    |
+  | `0x009`     | `URW`         | `wxsat`  | `Fixed-Point Saturate Flag`                |
+  | `0x00A`     | `URW`         | `wxrm`   | `Fixed-Point Rounding Mode`                |
+  | `0x00F`     | `URW`         | `wcsr`   | `Matrix control and status register`       |
+  | `0xC20`     | `URO`         | `wl`     | `Matrix length`                            |
+  | `0xC21`     | `URO`         | `wtype`  | `Matrix data type register`                |
+  | `0xC22`     | `URO`         | `wlenb`  | `WLEN/8 (matrix register length in bytes)` |
 
   : New Matrix CSRs
 
 * **Configuration-Setting**
 
-  | **Bits**   | **Name**     | **Description**                                 |
-  |------------|--------------|-------------------------------------------------|
-  | `XLEN-1`   | `will`       | Illegal value if set                            |
-  | `XLEN-2:8` | `0`          | Reserved if non-zero                            |
-  | `7`        | `wma`        | Matrix mask agnostic                            |
-  | `6`        | `wta`        | Matrix tail agnostic                            |
-  | `5:3`      | `wsew[2:0]`  | Selected element width (SEW) setting            |
-  | `2:0`      | `wlmul[2:0]` | Matrix register group multiplier (LMUL) setting |
+  | **Bits**   | **Name**     | **Description**                                   |
+  |:-----------|:-------------|:--------------------------------------------------|
+  | `XLEN-1`   | `will`       | `Illegal value if set`                            |
+  | `XLEN-2:8` | `0`          | `Reserved if non-zero`                            |
+  | `7`        | `wma`        | `Matrix mask agnostic`                            |
+  | `6`        | `wta`        | `Matrix tail agnostic`                            |
+  | `5:3`      | `wsew[2:0]`  | `Selected element width (SEW) setting`            |
+  | `2:0`      | `wlmul[2:0]` | `Matrix register group multiplier (LMUL) setting` |
 
   : `wtype` Register Layout
 
 * **Matrix Loads and Stores**
 
-  | **Field**    | **Description**                                                                   |
-  |--------------|-----------------------------------------------------------------------------------|
-  | `rs1[4:0]`   | specifies `x` register holding base address                                       |
-  | `rs2[4:0]`   | specifies `x` register holding stride                                             |
-  | `ws2[4:0]`   | specifies `w` register holding address offsets                                    |
-  | `ws3[4:0]`   | specifies `w` register holding store data                                         |
-  | `wd[4:0]`    | specifies `w` register destination of load                                        |
-  | `wm`         | specifies whether matrix masking is enabled (0 = mask enabled, 1 = mask disabled) |
-  | `width[2:0]` | specifies size of memory elements, and distinguishes from FP scalar               |
-  | `mew`        | extended memory element width. See Matrix Load/Store Width Encoding               |
-  | `mop[1:0]`   | specifies memory addressing mode                                                  |
-  | `nf[2:0]`    | specifies the number of fields in each segment, for segment load/stores           |
-  | `lumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
-  | `sumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
+  | **Field**    | **Description**                                                                     |
+  |:-------------|:------------------------------------------------------------------------------------|
+  | `rs1[4:0]`   | ``specifies `x` register holding base address``                                     |
+  | `rs2[4:0]`   | ``specifies `x` register holding stride``                                           |
+  | `ws2[4:0]`   | ``specifies `w` register holding address offsets``                                  |
+  | `ws3[4:0]`   | ``specifies `w` register holding store data``                                       |
+  | `wd[4:0]`    | ``specifies `w` register destination of load``                                      |
+  | `wm`         | `specifies whether matrix masking is enabled (0 = mask enabled, 1 = mask disabled)` |
+  | `width[2:0]` | `specifies size of memory elements, and distinguishes from FP scalar`               |
+  | `mew`        | `extended memory element width. See Matrix Load/Store Width Encoding`               |
+  | `mop[1:0]`   | `specifies memory addressing mode`                                                  |
+  | `nf[2:0]`    | `specifies the number of fields in each segment, for segment load/stores`           |
+  | `lumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
+  | `sumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
 
   : Matrix Field Descriptions
 
-  | **Type**           | **mew** | **width `[2:0]`** | **Memory Bits** | **Data Register Bits** | **Index Bits** | **Opcodes**       |
-  |--------------------|---------|-------------------|-----------------|------------------------|----------------|-------------------|
-  | Standard scalar FP | `x`     | `001`             | `16`            | `FLEN`                 | `-`            | `FLH/FSH`         |
-  | Standard scalar FP | `x`     | `010`             | `32`            | `FLEN`                 | `-`            | `FLW/FSW`         |
-  | Standard scalar FP | `x`     | `011`             | `64`            | `FLEN`                 | `-`            | `FLD/FSD`         |
-  | Standard scalar FP | `x`     | `100`             | `128`           | `FLEN`                 | `-`            | `FLQ/FSQ`         |
-  | Matrix 08b element | `0`     | `000`             | `8`             | `8`                    | `-`            | `WLxE8/WSxE8`     |
-  | Matrix 16b element | `0`     | `101`             | `16`            | `16`                   | `-`            | `WLxE16/WSxE16`   |
-  | Matrix 32b element | `0`     | `110`             | `32`            | `32`                   | `-`            | `WLxE32/WSxE32`   |
-  | Matrix 64b element | `0`     | `111`             | `64`            | `64`                   | `-`            | `WLxE64/WSxE64`   |
-  | Matrix 08b index   | `0`     | `000`             | `SEW`           | `SEW`                  | `8`            | `WLxEI8/WSxEI8`   |
-  | Matrix 16b index   | `0`     | `101`             | `SEW`           | `SEW`                  | `16`           | `WLxEI16/WSxEI16` |
-  | Matrix 32b index   | `0`     | `110`             | `SEW`           | `SEW`                  | `32`           | `WLxEI32/WSxEI32` |
-  | Matrix 64b index   | `0`     | `111`             | `SEW`           | `SEW`                  | `64`           | `WLxEI64/WSxEI64` |
-  | Reserved           | `1`     | `XXX`             | `-`             | `-`                    | `-`            | `-`               |
+  | **Type**             | **Mew** | **Width `[2:0]`** | **Memory Bits** | **Data Register Bits** | **Index Bits** | **Opcodes**       |
+  |:---------------------|:--------|:------------------|:----------------|:-----------------------|:---------------|:------------------|
+  | `Standard scalar FP` | `x`     | `001`             | `16`            | `FLEN`                 | `-`            | `FLH/FSH`         |
+  | `Standard scalar FP` | `x`     | `010`             | `32`            | `FLEN`                 | `-`            | `FLW/FSW`         |
+  | `Standard scalar FP` | `x`     | `011`             | `64`            | `FLEN`                 | `-`            | `FLD/FSD`         |
+  | `Standard scalar FP` | `x`     | `100`             | `128`           | `FLEN`                 | `-`            | `FLQ/FSQ`         |
+  | `Matrix 08b element` | `0`     | `000`             | `8`             | `8`                    | `-`            | `WLxE8/WSxE8`     |
+  | `Matrix 16b element` | `0`     | `101`             | `16`            | `16`                   | `-`            | `WLxE16/WSxE16`   |
+  | `Matrix 32b element` | `0`     | `110`             | `32`            | `32`                   | `-`            | `WLxE32/WSxE32`   |
+  | `Matrix 64b element` | `0`     | `111`             | `64`            | `64`                   | `-`            | `WLxE64/WSxE64`   |
+  | `Matrix 08b index`   | `0`     | `000`             | `SEW`           | `SEW`                  | `8`            | `WLxEI8/WSxEI8`   |
+  | `Matrix 16b index`   | `0`     | `101`             | `SEW`           | `SEW`                  | `16`           | `WLxEI16/WSxEI16` |
+  | `Matrix 32b index`   | `0`     | `110`             | `SEW`           | `SEW`                  | `32`           | `WLxEI32/WSxEI32` |
+  | `Matrix 64b index`   | `0`     | `111`             | `SEW`           | `SEW`                  | `64`           | `WLxEI64/WSxEI64` |
+  | `Reserved`           | `1`     | `XXX`             | `-`             | `-`                    | `-`            | `-`               |
 
   : Width Encoding for Matrix Loads and Stores
 
@@ -278,23 +278,23 @@
 
 * **New Specific Registers**
 
-  | **Register**       | **Type** | **Name**      | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                        |
-  |:-------------------|:---------|:--------------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | Tensor Registers   | `Tensor` | `y0` to `y31` | 32           | Architectural registers used to hold tensor elements. Each tensor register has a fixed size of `YLEN` bits of state. They can be grouped together using the `LMUL` (Tensor Register Group Multiplier) setting to operate on wider data types or longer tensors. Tensor mask registers are also held in a single tensor register, typically using `y0`. |
-  | Tensor Length      | `CSR`    | `yl`          | 1            | Holds an unsigned integer specifying the number of elements to be updated with results from a tensor instruction. It is updated via the `yset{i}vl{i}` configuration instructions.                                                                                                                                                                     |
-  | Tensor Data Type   | `CSR`    | `ytype`       | 1            | A read-only register that provides the default data type used to interpret the contents of the tensor registers. It includes settings for the selected element width (`ysew`), register group multiplier (`ylmul`), tail agnostic policy (`yta`), and mask agnostic policy (`yma`).                                                                    |
-  | Tensor Byte Length | `CSR`    | `ylenb`       | 1            | Exposes the hardware constant value `YLEN / 8` (the tensor register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.                                                                                                                                                           |
-  | Tensor Start Index | `CSR`    | `ystart`      | 1            | Specifies the index of the first element to be executed by a tensor instruction. It is primarily written by the hardware when taking a trap on a tensor instruction to allow resumption after the trap is handled.                                                                                                                                     |
-  | Control and Status | `CSR`    | `ycsr`        | 1            | The tensor control and status register, which groups the fixed-point rounding mode (`yxrm`) and saturation flag (`yxsat`) fields.                                                                                                                                                                                                                      |
-  | Rounding Mode      | `CSR`    | `yxrm`        | 1            | Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).                                                                                                                                                                           |
-  | Saturation Flag    | `CSR`    | `yxsat`       | 1            | A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.                                                                                                                                                                                      |
+  | **Register**         | **Type** | **Name**        | **Quantity** | **Description**                                                                                                                                                                                                                                                                                                                                            |
+  |:---------------------|:---------|:----------------|:-------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `Tensor Registers`   | `Tensor` | ``y0` to `y31`` | `32`         | ``Architectural registers used to hold tensor elements. Each tensor register has a fixed size of `YLEN` bits of state. They can be grouped together using the `LMUL` (Tensor Register Group Multiplier) setting to operate on wider data types or longer tensors. Tensor mask registers are also held in a single tensor register, typically using `y0`.`` |
+  | `Tensor Length`      | `CSR`    | `yl`            | `1`          | ``Holds an unsigned integer specifying the number of elements to be updated with results from a tensor instruction. It is updated via the `yset{i}vl{i}` configuration instructions.``                                                                                                                                                                     |
+  | `Tensor Data Type`   | `CSR`    | `ytype`         | `1`          | ``A read-only register that provides the default data type used to interpret the contents of the tensor registers. It includes settings for the selected element width (`ysew`), register group multiplier (`ylmul`), tail agnostic policy (`yta`), and mask agnostic policy (`yma`).``                                                                    |
+  | `Tensor Byte Length` | `CSR`    | `ylenb`         | `1`          | ``Exposes the hardware constant value `YLEN / 8` (the tensor register length in bytes). This allows software to calculate memory offsets without hardcoding implementation-specific constants.``                                                                                                                                                           |
+  | `Tensor Start Index` | `CSR`    | `ystart`        | `1`          | `Specifies the index of the first element to be executed by a tensor instruction. It is primarily written by the hardware when taking a trap on a tensor instruction to allow resumption after the trap is handled.`                                                                                                                                       |
+  | `Control and Status` | `CSR`    | `ycsr`          | `1`          | ``The tensor control and status register, which groups the fixed-point rounding mode (`yxrm`) and saturation flag (`yxsat`) fields.``                                                                                                                                                                                                                      |
+  | `Rounding Mode`      | `CSR`    | `yxrm`          | `1`          | `Holds a two-bit field that specifies the rounding mode for fixed-point arithmetic instructions (e.g., round-to-nearest-up, round-to-nearest-even, round-down, round-to-odd).`                                                                                                                                                                             |
+  | `Saturation Flag`    | `CSR`    | `yxsat`         | `1`          | `A fixed-point accrued saturation flag that is set to 1 if any destination element is saturated during a saturating add/subtract or fractional multiply operation.`                                                                                                                                                                                        |
 
   : Tensor Register Type
 
 * **Tensor GPR Registers**
 
   | **Name** | **Alias** | **Type** | **Save** | **Description**                 |
-  |----------|:----------|:---------|:---------|:--------------------------------|
+  |:---------|:----------|:---------|:---------|:--------------------------------|
   | `y0`     | `yt0`     | `yreg`   | `caller` | `Tensor temporaries Caller`     |
   | `y1`     | `yt1`     | `yreg`   | `caller` | `Tensor temporaries Caller`     |
   | `y2`     | `yt2`     | `yreg`   | `caller` | `Tensor temporaries Caller`     |
@@ -332,65 +332,65 @@
 
 * **Tensor CSR Registers**
 
-  | **Address** | **Privilege** | **Name** | **Description**                          |
-  |-------------|---------------|----------|------------------------------------------|
-  | `0x008`     | `URW`         | `ystart` | Tensor start position                    |
-  | `0x009`     | `URW`         | `yxsat`  | Fixed-Point Saturate Flag                |
-  | `0x00A`     | `URW`         | `yxrm`   | Fixed-Point Rounding Mode                |
-  | `0x00F`     | `URW`         | `ycsr`   | Tensor control and status register       |
-  | `0xC20`     | `URO`         | `yl`     | Tensor length                            |
-  | `0xC21`     | `URO`         | `ytype`  | Tensor data type register                |
-  | `0xC22`     | `URO`         | `ylenb`  | YLEN/8 (tensor register length in bytes) |
+  | **Address** | **Privilege** | **Name** | **Description**                            |
+  |:------------|:--------------|:---------|:-------------------------------------------|
+  | `0x008`     | `URW`         | `ystart` | `Tensor start position`                    |
+  | `0x009`     | `URW`         | `yxsat`  | `Fixed-Point Saturate Flag`                |
+  | `0x00A`     | `URW`         | `yxrm`   | `Fixed-Point Rounding Mode`                |
+  | `0x00F`     | `URW`         | `ycsr`   | `Tensor control and status register`       |
+  | `0xC20`     | `URO`         | `yl`     | `Tensor length`                            |
+  | `0xC21`     | `URO`         | `ytype`  | `Tensor data type register`                |
+  | `0xC22`     | `URO`         | `ylenb`  | `YLEN/8 (tensor register length in bytes)` |
 
   : New Tensor CSRs
 
 * **Configuration-Setting**
 
-  | **Bits**   | **Name**     | **Description**                                 |
-  |------------|--------------|-------------------------------------------------|
-  | `XLEN-1`   | `yill`       | Illegal value if set                            |
-  | `XLEN-2:8` | `0`          | Reserved if non-zero                            |
-  | `7`        | `yma`        | Tensor mask agnostic                            |
-  | `6`        | `yta`        | Tensor tail agnostic                            |
-  | `5:3`      | `ysew[2:0]`  | Selected element width (SEW) setting            |
-  | `2:0`      | `ylmul[2:0]` | Tensor register group multiplier (LMUL) setting |
+  | **Bits**   | **Name**     | **Description**                                   |
+  |:-----------|:-------------|:--------------------------------------------------|
+  | `XLEN-1`   | `yill`       | `Illegal value if set`                            |
+  | `XLEN-2:8` | `0`          | `Reserved if non-zero`                            |
+  | `7`        | `yma`        | `Tensor mask agnostic`                            |
+  | `6`        | `yta`        | `Tensor tail agnostic`                            |
+  | `5:3`      | `ysew[2:0]`  | `Selected element width (SEW) setting`            |
+  | `2:0`      | `ylmul[2:0]` | `Tensor register group multiplier (LMUL) setting` |
 
   : `wtype` Register Layout
 
 * **Tensor Loads and Stores**
 
-  | **Field**    | **Description**                                                                   |
-  |--------------|-----------------------------------------------------------------------------------|
-  | `rs1[4:0]`   | specifies `x` register holding base address                                       |
-  | `rs2[4:0]`   | specifies `x` register holding stride                                             |
-  | `ys2[4:0]`   | specifies `y` register holding address offsets                                    |
-  | `ys3[4:0]`   | specifies `y` register holding store data                                         |
-  | `yd[4:0]`    | specifies `y` register destination of load                                        |
-  | `ym`         | specifies whether tensor masking is enabled (0 = mask enabled, 1 = mask disabled) |
-  | `width[2:0]` | specifies size of memory elements, and distinguishes from FP scalar               |
-  | `mew`        | extended memory element width. See Tensor Load/Store Width Encoding               |
-  | `mop[1:0]`   | specifies memory addressing mode                                                  |
-  | `nf[2:0]`    | specifies the number of fields in each segment, for segment load/stores           |
-  | `lumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
-  | `sumop[4:0]` | additional fields encoding variants of unit-stride instructions                   |
+  | **Field**    | **Description**                                                                     |
+  |:-------------|:------------------------------------------------------------------------------------|
+  | `rs1[4:0]`   | ``specifies `x` register holding base address``                                     |
+  | `rs2[4:0]`   | ``specifies `x` register holding stride``                                           |
+  | `ys2[4:0]`   | ``specifies `y` register holding address offsets``                                  |
+  | `ys3[4:0]`   | ``specifies `y` register holding store data``                                       |
+  | `yd[4:0]`    | ``specifies `y` register destination of load``                                      |
+  | `ym`         | `specifies whether tensor masking is enabled (0 = mask enabled, 1 = mask disabled)` |
+  | `width[2:0]` | `specifies size of memory elements, and distinguishes from FP scalar`               |
+  | `mew`        | `extended memory element width. See Tensor Load/Store Width Encoding`               |
+  | `mop[1:0]`   | `specifies memory addressing mode`                                                  |
+  | `nf[2:0]`    | `specifies the number of fields in each segment, for segment load/stores`           |
+  | `lumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
+  | `sumop[4:0]` | `additional fields encoding variants of unit-stride instructions`                   |
 
   : Tensor Field Descriptions
 
-  | **Type**           | **mew** | **width `[2:0]`** | **Memory Bits** | **Data Register Bit**s | **Index Bits** | **Opcodes**       |
-  |--------------------|---------|-------------------|-----------------|------------------------|----------------|-------------------|
-  | Standard scalar FP | `x`     | `001`             | `16`            | `FLEN`                 | `-`            | `FLH/FSH`         |
-  | Standard scalar FP | `x`     | `010`             | `32`            | `FLEN`                 | `-`            | `FLW/FSW`         |
-  | Standard scalar FP | `x`     | `011`             | `64`            | `FLEN`                 | `-`            | `FLD/FSD`         |
-  | Standard scalar FP | `x`     | `100`             | `128`           | `FLEN`                 | `-`            | `FLQ/FSQ`         |
-  | Tensor 08b element | `0`     | `000`             | `8`             | `8`                    | `-`            | `VLxE8/YSxE8`     |
-  | Tensor 16b element | `0`     | `101`             | `16`            | `16`                   | `-`            | `VLxE16/YSxE16`   |
-  | Tensor 32b element | `0`     | `110`             | `32`            | `32`                   | `-`            | `VLxE32/YSxE32`   |
-  | Tensor 64b element | `0`     | `111`             | `64`            | `64`                   | `-`            | `VLxE64/YSxE64`   |
-  | Tensor 08b index   | `0`     | `000`             | `SEW`           | `SEW`                  | `8`            | `VLxEI8/YSxEI8`   |
-  | Tensor 16b index   | `0`     | `101`             | `SEW`           | `SEW`                  | `16`           | `VLxEI16/YSxEI16` |
-  | Tensor 32b index   | `0`     | `110`             | `SEW`           | `SEW`                  | `32`           | `VLxEI32/YSxEI32` |
-  | Tensor 64b index   | `0`     | `111`             | `SEW`           | `SEW`                  | `64`           | `VLxEI64/YSxEI64` |
-  | Reserved           | `1`     | `XXX`             | `-`             | `-`                    | `-`            | `-`               |
+  | **Type**             | **Mew** | **Width `[2:0]`** | **Memory Bits** | ****Data Register Bit**S** | **Index Bits** | **Opcodes**       |
+  |:---------------------|:--------|:------------------|:----------------|:---------------------------|:---------------|:------------------|
+  | `Standard scalar FP` | `x`     | `001`             | `16`            | `FLEN`                     | `-`            | `FLH/FSH`         |
+  | `Standard scalar FP` | `x`     | `010`             | `32`            | `FLEN`                     | `-`            | `FLW/FSW`         |
+  | `Standard scalar FP` | `x`     | `011`             | `64`            | `FLEN`                     | `-`            | `FLD/FSD`         |
+  | `Standard scalar FP` | `x`     | `100`             | `128`           | `FLEN`                     | `-`            | `FLQ/FSQ`         |
+  | `Tensor 08b element` | `0`     | `000`             | `8`             | `8`                        | `-`            | `VLxE8/YSxE8`     |
+  | `Tensor 16b element` | `0`     | `101`             | `16`            | `16`                       | `-`            | `VLxE16/YSxE16`   |
+  | `Tensor 32b element` | `0`     | `110`             | `32`            | `32`                       | `-`            | `VLxE32/YSxE32`   |
+  | `Tensor 64b element` | `0`     | `111`             | `64`            | `64`                       | `-`            | `VLxE64/YSxE64`   |
+  | `Tensor 08b index`   | `0`     | `000`             | `SEW`           | `SEW`                      | `8`            | `VLxEI8/YSxEI8`   |
+  | `Tensor 16b index`   | `0`     | `101`             | `SEW`           | `SEW`                      | `16`           | `VLxEI16/YSxEI16` |
+  | `Tensor 32b index`   | `0`     | `110`             | `SEW`           | `SEW`                      | `32`           | `VLxEI32/YSxEI32` |
+  | `Tensor 64b index`   | `0`     | `111`             | `SEW`           | `SEW`                      | `64`           | `VLxEI64/YSxEI64` |
+  | `Reserved`           | `1`     | `XXX`             | `-`             | `-`                        | `-`            | `-`               |
 
   : Width Encoding for Tensor Loads and Stores
 
@@ -854,9 +854,9 @@
 
 * **Debug Mode Registers**
 
-  | **Register** | **Address** | **Description**                            |
-  |:-------------|:------------|:-------------------------------------------|
-  | `DCSR`       | `'h7B0`     | `Debug control and status register`        |
-  | `DPC`        | `'h7B1`     | `Debug PC`                                 |
-  | `DSCRATCH0`  | `'h7B2`     | `Debug scratch register`                   |
-  | `DSCRATCH1`  | `'h7B3`     | `Debug scratch register (last one)`        |
+  | **Register** | **Address** | **Description**                     |
+  |:-------------|:------------|:------------------------------------|
+  | `DCSR`       | `'h7B0`     | `Debug control and status register` |
+  | `DPC`        | `'h7B1`     | `Debug PC`                          |
+  | `DSCRATCH0`  | `'h7B2`     | `Debug scratch register`            |
+  | `DSCRATCH1`  | `'h7B3`     | `Debug scratch register (last one)` |

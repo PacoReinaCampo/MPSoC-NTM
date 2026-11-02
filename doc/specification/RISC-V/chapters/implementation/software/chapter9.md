@@ -52,13 +52,13 @@ The Software Project WorkFlow outlines the sequence of phases involved in creati
 
 DevOps, often represented in a similar structure to the Hardware DevOps table shown, integrates software development (Dev) and IT operations (Ops) to shorten the systems development life cycle and provide continuous delivery with high software quality. It emphasizes automation, collaboration, and monitoring throughout all software lifecycle phases, from initial coding and testing through deployment and infrastructure management, aiming for faster, more reliable software releases.
 
-| CONTROL       | DEVELOP       | OPERATION   |
-|:--------------|:--------------|:------------|
-| certification | model         | sim         |
-| doc           | rtl/src       | compilation |
-| quality       | configuration | synthesis   |
-| requirements  | validation    |             |
-|               | verification  |             |
+| **Control**     | **Develop**     | **Operation** |
+|:----------------|:----------------|:--------------|
+| `certification` | `model`         | `sim`         |
+| `doc`           | `rtl/src`       | `compilation` |
+| `quality`       | `configuration` | `synthesis`   |
+| `requirements`  | `validation`    |               |
+|                 | `verification`  |               |
 
 :Hardware DevOps
 

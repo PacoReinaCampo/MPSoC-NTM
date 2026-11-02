@@ -73,7 +73,7 @@
 ### Complex Privilege
 
   | **Interrupt** | **Exception Code** | **Description**                           |
-  |---------------|:-------------------|:------------------------------------------|
+  |:--------------|:-------------------|:------------------------------------------|
   | `1`           | `0`                | `Reserved`                                |
   | `1`           | `1`                | `Supervisor software interrupt`           |
   | `1`           | `2`                | `Virtual supervisor software interrupt`   |
@@ -124,7 +124,7 @@
 #### User
 
   | **Number** | **Access** | **Name**  | **Description**                  | **Version** |
-  |------------|:-----------|:----------|:---------------------------------|:------------|
+  |:-----------|:-----------|:----------|:---------------------------------|:------------|
   | `0x000`    | `urw`      | `ustatus` | `User status register`           | `1.9-`      |
   | `0x004`    | `urw`      | `uie`     | `User interrupt-enable register` | `1.9-`      |
   | `0x005`    | `urw`      | `utvec`   | `User trap handler base address` | `1.9-`      |
@@ -132,7 +132,7 @@
   : User Trap Setup
 
   | **Number** | **Access** | **Name**   | **Description**                          | **Version** |
-  |------------|:-----------|:-----------|:-----------------------------------------|:------------|
+  |:-----------|:-----------|:-----------|:-----------------------------------------|:------------|
   | `0x040`    | `urw`      | `uscratch` | `Scratch handler for user trap handlers` | `1.9-`      |
   | `0x041`    | `urw`      | `uepc`     | `User exception program counter`         | `1.9-`      |
   | `0x042`    | `urw`      | `ucause`   | `User trap cause`                        | `1.9-`      |
@@ -145,7 +145,7 @@
 #### Supervisor
 
   | **Number** | **Access** | **Name**     | **Description**                            | **Version** |
-  |------------|:-----------|:-------------|:-------------------------------------------|:------------|
+  |:-----------|:-----------|:-------------|:-------------------------------------------|:------------|
   | `0x100`    | `srw`      | `sstatus`    | `Supervisor status register`               | `1.7-`      |
   | `0x102`    | `srw`      | `sedeleg`    | `Supervisor exception delegation register` | `1.9-`      |
   | `0x103`    | `srw`      | `sideleg`    | `Supervisor interrupt delegation register` | `1.9-`      |
@@ -156,7 +156,7 @@
   : Supervisor Trap Setup
 
   | **Number** | **Access** | **Name**   | **Description**                                 | **Version** |
-  |------------|:-----------|:-----------|:------------------------------------------------|:------------|
+  |:-----------|:-----------|:-----------|:------------------------------------------------|:------------|
   | `0x140`    | `srw`      | `sscratch` | `Scratch register for supervisor trap handlers` | `1.7-`      |
   | `0x141`    | `srw`      | `sepc`     | `Supervisor exception program counter`          | `1.7-`      |
   | `0x142`    | `srw`      | `scause`   | `Supervisor trap cause`                         | `1.7-`      |
@@ -169,7 +169,7 @@
 #### Hypervisor
 
   | **Number** | **Access** | **Name**  | **Description**                            | **Version** |
-  |------------|:-----------|:----------|:-------------------------------------------|:------------|
+  |:-----------|:-----------|:----------|:-------------------------------------------|:------------|
   | `0x200`    | `hrw`      | `hstatus` | `Hypervisor status register`               | `1.7-1.9.1` |
   | `0x202`    | `mrw`      | `hedeleg` | `Hypervisor exception delegation register` | `1.9-1.9.1` |
   | `0x203`    | `mrw`      | `hideleg` | `Hypervisor interrupt delegation register` | `1.9-1.9.1` |
@@ -179,7 +179,7 @@
   : Hypervisor Trap Setup
 
   | **Number** | **Access** | **Name**   | **Description**                                 | **Version** |
-  |------------|:-----------|:-----------|:------------------------------------------------|:------------|
+  |:-----------|:-----------|:-----------|:------------------------------------------------|:------------|
   | `0x240`    | `hrw`      | `hscratch` | `Scratch register for hypervisor trap handlers` | `1.7-1.9.1` |
   | `0x241`    | `hrw`      | `hepc`     | `Hypervisor exception program counter`          | `1.7-1.9.1` |
   | `0x242`    | `hrw`      | `hcause`   | `Hypervisor trap cause`                         | `1.7-1.9.1` |
@@ -191,7 +191,7 @@
 #### Machine
 
   | **Number** | **Access** | **Name**     | **Description**                         | **Version** |
-  |------------|:-----------|:-------------|:----------------------------------------|:------------|
+  |:-----------|:-----------|:-------------|:----------------------------------------|:------------|
   | `0x300`    | `mrw`      | `mstatus`    | `Machine status register`               | `1.7-`      |
   | `0x301`    | `mrw`      | `misa`       | `ISA and extensions supported`          | `1.7-`      |
   | `0x302`    | `mrw`      | `medeleg`    | `Machine exception delegation register` | `1.9-`      |
@@ -203,7 +203,7 @@
   : Machine Trap Setup
 
   | **Number** | **Access** | **Name**    | **Description**                                   | **Version** |
-  |------------|:-----------|:------------|:--------------------------------------------------|:------------|
+  |:-----------|:-----------|:------------|:--------------------------------------------------|:------------|
   | `0x340`    | `mrw`      | `mscratch`  | `Scratch register for machine trap handlers`      | `1.7-`      |
   | `0x341`    | `mrw`      | `mepc`      | `Machine exception program counter`               | `1.7-`      |
   | `0x342`    | `mrw`      | `mcause`    | `Machine trap cause`                              | `1.7-`      |

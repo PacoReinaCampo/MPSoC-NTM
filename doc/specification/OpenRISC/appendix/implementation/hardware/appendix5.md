@@ -774,33 +774,33 @@ In the context of airborne electronic hardware development governed by DO-254, v
 
 #### Data Required for the Hardware Planning
 
-| Data Required for the Hardware Planning Review                                            |
-|:------------------------------------------------------------------------------------------|
-| Plan for Hardware Aspects of Certification                                                |
-| Hardware Design Plan                                                                      |
-| Hardware Validation Plan                                                                  |
-| Hardware Verification Plan                                                                |
-| Hardware Configuration Management Plan                                                    |
-| Hardware Process Assurance Plan                                                           |
-| Hardware Process Assurance Records                                                        |
-| Hardware Requirements, Design, HDL Code, Validation & Verification, and Archive Standards |
-| Tool Qualification Plans                                                                  |
-| Supplier Management Plan                                                                  |
+| **Data Required For The Hardware Planning Review**                                          |
+|:--------------------------------------------------------------------------------------------|
+| `Plan for Hardware Aspects of Certification`                                                |
+| `Hardware Design Plan`                                                                      |
+| `Hardware Validation Plan`                                                                  |
+| `Hardware Verification Plan`                                                                |
+| `Hardware Configuration Management Plan`                                                    |
+| `Hardware Process Assurance Plan`                                                           |
+| `Hardware Process Assurance Records`                                                        |
+| `Hardware Requirements, Design, HDL Code, Validation & Verification, and Archive Standards` |
+| `Tool Qualification Plans`                                                                  |
+| `Supplier Management Plan`                                                                  |
 
 :Data Required for the Hardware Planning Review
 
-| Data Required for the Hardware Planning Object                                            |
-|:------------------------------------------------------------------------------------------|
-| Plan for Hardware Aspects of Certification                                                |
-| Hardware Design Plan                                                                      |
-| Hardware Validation Plan                                                                  |
-| Hardware Verification Plan                                                                |
-| Hardware Configuration Management Plan                                                    |
-| Hardware Process Assurance Plan                                                           |
-| Hardware Process Assurance Records                                                        |
-| Hardware Requirements, Design, HDL Code, Validation & Verification, and Archive Standards |
-| Tool Qualification Plans                                                                  |
-| Supplier Management Plan                                                                  |
+| **Data Required For The Hardware Planning Object**                                          |
+|:--------------------------------------------------------------------------------------------|
+| `Plan for Hardware Aspects of Certification`                                                |
+| `Hardware Design Plan`                                                                      |
+| `Hardware Validation Plan`                                                                  |
+| `Hardware Verification Plan`                                                                |
+| `Hardware Configuration Management Plan`                                                    |
+| `Hardware Process Assurance Plan`                                                           |
+| `Hardware Process Assurance Records`                                                        |
+| `Hardware Requirements, Design, HDL Code, Validation & Verification, and Archive Standards` |
+| `Tool Qualification Plans`                                                                  |
+| `Supplier Management Plan`                                                                  |
 
 :Data Required for the Hardware Planning Object
 
@@ -1150,39 +1150,39 @@ In the context of airborne electronic hardware development governed by DO-254, v
 
 #### Data Required for the Hardware Development
 
-| Data Required for the Hardware Development Review    |
-|:-----------------------------------------------------|
-| Hardware Requirements, Design and HDL Code Standards |
-| Hardware Requirements                                |
-| Hardware Design Data                                 |
-| Hardware Description Language                        |
-| Hardware Design Schematics                           |
-| Hardware Traceability Data                           |
-| Hardware Review and Analysis Procedures              |
-| Hardware Review and Analysis Results                 |
-| Hardware Life Cycle Environment Configuration Index  |
-| Problem Reports                                      |
-| Hardware Configuration Management Records            |
-| Hardware Process Assurance Records                   |
-| Hardware Tool Qualification Data                     |
+| **Data Required For The Hardware Development Review**  |
+|:-------------------------------------------------------|
+| `Hardware Requirements, Design and HDL Code Standards` |
+| `Hardware Requirements`                                |
+| `Hardware Design Data`                                 |
+| `Hardware Description Language`                        |
+| `Hardware Design Schematics`                           |
+| `Hardware Traceability Data`                           |
+| `Hardware Review and Analysis Procedures`              |
+| `Hardware Review and Analysis Results`                 |
+| `Hardware Life Cycle Environment Configuration Index`  |
+| `Problem Reports`                                      |
+| `Hardware Configuration Management Records`            |
+| `Hardware Process Assurance Records`                   |
+| `Hardware Tool Qualification Data`                     |
 
 :Data Required for the Hardware Development Review
 
-| Data Required for the Hardware Development Object    |
-|:-----------------------------------------------------|
-| Hardware Requirements, Design and HDL Code Standards |
-| Hardware Requirements                                |
-| Hardware Design Data                                 |
-| Hardware Description Language                        |
-| Hardware Design Schematics                           |
-| Hardware Traceability Data                           |
-| Hardware Object and Analysis Procedures              |
-| Hardware Object and Analysis Results                 |
-| Hardware Life Cycle Environment Configuration Index  |
-| Problem Reports                                      |
-| Hardware Configuration Management Records            |
-| Hardware Process Assurance Records                   |
-| Hardware Tool Qualification Data                     |
+| **Data Required For The Hardware Development Object**  |
+|:-------------------------------------------------------|
+| `Hardware Requirements, Design and HDL Code Standards` |
+| `Hardware Requirements`                                |
+| `Hardware Design Data`                                 |
+| `Hardware Description Language`                        |
+| `Hardware Design Schematics`                           |
+| `Hardware Traceability Data`                           |
+| `Hardware Object and Analysis Procedures`              |
+| `Hardware Object and Analysis Results`                 |
+| `Hardware Life Cycle Environment Configuration Index`  |
+| `Problem Reports`                                      |
+| `Hardware Configuration Management Records`            |
+| `Hardware Process Assurance Records`                   |
+| `Hardware Tool Qualification Data`                     |
 
 :Data Required for the Hardware Development Object
 
@@ -1600,35 +1600,35 @@ In the context of airborne electronic hardware development governed by DO-254, v
 
 #### Data Required for the Hardware Verification
 
-| Data Required for the Hardware Verification Review  |
-|:----------------------------------------------------|
-| Hardware Requirements Data                          |
-| Hardware Design Representation Data                 |
-| Hardware Description Language                       |
-| Hardware Design Schematics                          |
-| Hardware Verification Procedures                    |
-| Hardware Verification Results                       |
-| Hardware Life Cycle Environment Configuration Index |
-| Problem Reports                                     |
-| Hardware Configuration Management Records           |
-| Hardware Process Assurance Records                  |
-| Hardware Tool Qualification Data                    |
+| **Data Required For The Hardware Verification Review** |
+|:-------------------------------------------------------|
+| `Hardware Requirements Data`                           |
+| `Hardware Design Representation Data`                  |
+| `Hardware Description Language`                        |
+| `Hardware Design Schematics`                           |
+| `Hardware Verification Procedures`                     |
+| `Hardware Verification Results`                        |
+| `Hardware Life Cycle Environment Configuration Index`  |
+| `Problem Reports`                                      |
+| `Hardware Configuration Management Records`            |
+| `Hardware Process Assurance Records`                   |
+| `Hardware Tool Qualification Data`                     |
 
 :Data Required for the Hardware Verification Review
 
-| Data Required for the Hardware Verification Object  |
-|:----------------------------------------------------|
-| Hardware Requirements Data                          |
-| Hardware Design Representation Data                 |
-| Hardware Description Language                       |
-| Hardware Design Schematics                          |
-| Hardware Verification Procedures                    |
-| Hardware Verification Results                       |
-| Hardware Life Cycle Environment Configuration Index |
-| Problem Reports                                     |
-| Hardware Configuration Management Records           |
-| Hardware Process Assurance Records                  |
-| Hardware Tool Qualification Data                    |
+| **Data Required For The Hardware Verification Object** |
+|:-------------------------------------------------------|
+| `Hardware Requirements Data`                           |
+| `Hardware Design Representation Data`                  |
+| `Hardware Description Language`                        |
+| `Hardware Design Schematics`                           |
+| `Hardware Verification Procedures`                     |
+| `Hardware Verification Results`                        |
+| `Hardware Life Cycle Environment Configuration Index`  |
+| `Problem Reports`                                      |
+| `Hardware Configuration Management Records`            |
+| `Hardware Process Assurance Records`                   |
+| `Hardware Tool Qualification Data`                     |
 
 :Data Required for the Hardware Verification Object
 
@@ -1986,27 +1986,27 @@ In the context of airborne electronic hardware development governed by DO-254, v
 
 #### Data Required for the Final Certification Hardware
 
-| Data Required for the Final Certification Hardware Review |
-|:----------------------------------------------------------|
-| Hardware Verification Results                             |
-| Hardware Life Cycle Environment Configuration Index       |
-| Hardware Configuration Index                              |
-| Problem Reports                                           |
-| Hardware Configuration Management Records                 |
-| Hardware Process Assurance Records                        |
-| Hardware Accomplishment Summary                           |
+| **Data Required For The Final Certification Hardware Review** |
+|:--------------------------------------------------------------|
+| `Hardware Verification Results`                               |
+| `Hardware Life Cycle Environment Configuration Index`         |
+| `Hardware Configuration Index`                                |
+| `Problem Reports`                                             |
+| `Hardware Configuration Management Records`                   |
+| `Hardware Process Assurance Records`                          |
+| `Hardware Accomplishment Summary`                             |
 
 :Data Required for the Final Certification Hardware Review
 
-| Data Required for the Final Certification Hardware Object |
-|:----------------------------------------------------------|
-| Hardware Verification Results                             |
-| Hardware Life Cycle Environment Configuration Index       |
-| Hardware Configuration Index                              |
-| Problem Reports                                           |
-| Hardware Configuration Management Records                 |
-| Hardware Process Assurance Records                        |
-| Hardware Accomplishment Summary                           |
+| **Data Required For The Final Certification Hardware Object** |
+|:--------------------------------------------------------------|
+| `Hardware Verification Results`                               |
+| `Hardware Life Cycle Environment Configuration Index`         |
+| `Hardware Configuration Index`                                |
+| `Problem Reports`                                             |
+| `Hardware Configuration Management Records`                   |
+| `Hardware Process Assurance Records`                          |
+| `Hardware Accomplishment Summary`                             |
 
 :Data Required for the Final Certification Hardware Object
 

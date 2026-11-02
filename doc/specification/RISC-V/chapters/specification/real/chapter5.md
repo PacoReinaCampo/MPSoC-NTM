@@ -8,7 +8,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                       |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                       |
 |:-----------|:--------------|:---------------|:----------------------|:------------------------------------------------|
 | `rv`       | `32`          | `i`            | `32`                  | `RV32I Base Integer Instruction Set`            |
 | `rv`       | `64`          | `i`            | `32`                  | `RV64I Base Integer Instruction Set (+ RV32I)`  |
@@ -20,7 +20,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                             |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                             |
 |:-----------|:--------------|:---------------|:----------------------|:----------------------------------------------------------------------|
 | `rv`       | `32`          | `m`            | `32`                  | `RV32M Standard Extension for Integer Multiply and Divide`            |
 | `rv`       | `64`          | `m`            | `32`                  | `RV64M Standard Extension for Integer Multiply and Divide (+ RV32M)`  |
@@ -42,7 +42,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                                    |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                                    |
 |:-----------|:--------------|:---------------|:----------------------|:-----------------------------------------------------------------------------|
 | `rv`       | `32`          | `f`            | `32`                  | `RV32F Specific Extension for Single-Precision Floating-Point`               |
 | `rv`       | `64`          | `f`            | `32`                  | `RV64F Specific Extension for Single-Precision Floating-Point (+ RV32F)`     |
@@ -72,7 +72,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                   |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                   |
 |:-----------|:--------------|:---------------|:----------------------|:------------------------------------------------------------|
 | `rv`       | `32`          | `v`            | `32`                  | `RV32V Specific Extension for Vector Operations`            |
 | `rv`       | `64`          | `v`            | `32`                  | `RV64V Specific Extension for Vector Operations (+ RV32V)`  |
@@ -122,7 +122,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                          |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                          |
 |:-----------|:--------------|:---------------|:----------------------|:-------------------------------------------------------------------|
 | `rv`       | `32`          | `p`            | `32`                  | `RV32P Specific Extension for Packed SIMD Instructions`            |
 | `rv`       | `64`          | `p`            | `32`                  | `RV64P Specific Extension for Packed SIMD Instructions (+ RV32P)`  |
@@ -137,7 +137,7 @@
 
 `INSERT HERE`
 
-| **Prefix** | **ISA Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                               |
+| **Prefix** | **Isa Width** | **Alpha Code** | **Instruction Width** | **Extension Description**                                               |
 |:-----------|:--------------|:---------------|:----------------------|:------------------------------------------------------------------------|
 | `rv`       | `32`          | `s`            | `32`                  | `RV32S Specific Extension for Supervisor-level Instructions`            |
 | `rv`       | `64`          | `s`            | `32`                  | `RV64S Specific Extension for Supervisor-level Instructions (+ RV32S)`  |

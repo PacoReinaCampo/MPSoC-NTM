@@ -80,13 +80,13 @@ The Hardware Project WorkFlow illustrates the interconnected phases involved in 
 
 Hardware DevOps represents the application of DevOps principles and practices to the hardware development lifecycle. It aims to break down silos between design, verification, manufacturing, and operations teams by fostering collaboration, automating workflows (like continuous integration and testing), and implementing robust configuration management. This approach accelerates development cycles, improves product quality, enhances traceability, and allows for more efficient management of complex hardware projects, adapting software development agility to the hardware domain.
 
-| **Control**   | **Develop**   | **Operation** |
-|:--------------|:--------------|:--------------|
-| certification | model         | sim           |
-| doc           | rtl/src       | compilation   |
-| quality       | configuration | synthesis     |
-| requirements  | validation    |               |
-|               | verification  |               |
+| **Control**     | **Develop**     | **Operation** |
+|:----------------|:----------------|:--------------|
+| `certification` | `model`         | `sim`         |
+| `doc`           | `rtl/src`       | `compilation` |
+| `quality`       | `configuration` | `synthesis`   |
+| `requirements`  | `validation`    |               |
+|                 | `verification`  |               |
 
 :Hardware DevOps
 
